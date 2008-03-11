@@ -24,11 +24,10 @@ config.after_initialize do
     LoggedExceptionsController.class_eval do
       # set the same session key as the app
       session :session_key => 'alonetone_com'
-      session :secret => 'a4d29e5816af66e4d87de0caa774c14e21a851a223496eaa03b7960529f73dfb69374da11984a09e6abc4765bfa944b7e5d77320507af13e77f6ec58f3c4f1f6'
 
       # include any custom auth modules you need
       include AuthenticatedSystem
-      protect_from_forgery  :secret => 'f90bac24ac12962052d00bfc2bd34ef2'
+      protect_from_forgery  :secret => APP_SECRET
 
       before_filter :login_required
       
