@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base  
   helper :all # include all helpers, all the time
 
-  protect_from_forgery  :secret => APP_SECRET
+  protect_from_forgery  :secret => YAML.load_file(File.join(RAILS_ROOT,'config','alonetone.yml'))['alonetone']['secret']
   
   include AuthenticatedSystem
   include ExceptionLoggable
