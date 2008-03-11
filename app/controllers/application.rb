@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base  
   helper :all # include all helpers, all the time
 
-  protect_from_forgery  :secret => 'f90bac24ac12962052d00bfc2bd34ef2'
+  protect_from_forgery  :secret => APP_SECRET
   
   include AuthenticatedSystem
   include ExceptionLoggable

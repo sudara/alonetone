@@ -3,6 +3,7 @@ db/schema.rb
 db/schema.sql
 config/accelerator_tasks.rb
 config/deploy.rb
+config/alonetone.yml
 config/database.yml
 config/amazon_s3.yml
 config/defensio.yml

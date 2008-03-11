@@ -32,8 +32,8 @@ Rails::Initializer.run do |config|
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
   config.action_controller.session = {
-    :session_key => 'alonetone_com',
-    :secret      => 'a4d29e5816af66e4d87de0caa774c14e21a851a223496eaa03b7960529f73dfb69374da11984a09e6abc4765bfa944b7e5d77320507af13e77f6ec58f3c4f1f6'
+    :session_key => 'your_website_com',
+    :secret      => 'your_secret_key'
   }
 
   # Use the database for sessions instead of the cookie-based default,
