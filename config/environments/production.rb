@@ -27,7 +27,6 @@ config.after_initialize do
 
       # include any custom auth modules you need
       include AuthenticatedSystem
-      protect_from_forgery  :secret => APP_SECRET
 
       before_filter :login_required
       
