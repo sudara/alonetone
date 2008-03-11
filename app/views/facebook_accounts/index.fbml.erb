@@ -1,0 +1,6 @@
+<%= render :partial => 'alonetoner' if @user %>
+
+<%= render :partial => 'search' %>
+<h2>Browse the latest alonetone tracks</h2>
+<%= render :partial => 'asset', :collection => @assets %>
+<%= will_paginate @assets %>

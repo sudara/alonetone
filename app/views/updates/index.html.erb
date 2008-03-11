@@ -1,0 +1,9 @@
+<%= pretty_text 'what have we been up to then?', :h1%>
+<h2 class="spacey">The latest grunts and gribbles from the offices of alonetone</h2>
+
+<div id="todos" class="help">
+  <h2>Interested in the nitty gritty?</h2>
+  <%= link_to 'Check out the live todo list for alonetone', about_path(:todo) %>
+</div>
+<%= render :partial => @updates %>
+<%= link_to 'New update', new_update_path if admin? %>

@@ -1,0 +1,51 @@
+= Kropper
+
+Gives you an Apple iChat style image-cropping UI in Apple's iChat best suited
+for cropping of user profile images or other instances where you want cropped
+images to have a specific aspect ratios
+
+http://kropper.captchr.com/
+
+== What Kropper Provides
+
+* Methods for fixed aspect ratio cropping of attachment_fu models
+* Example javascript, images and a stylesheet for implementing the cropper UI
+* Example controller method and view to handle the cropping
+
+== What Kropper Does Not Provide
+
+* Handling of image uploads. You have to get this working yourself before
+  thinking about integrating kropper. Luckily, this whole thing assumes you're
+  using attachment_fu which is really easy to get up and running.
+
+== Requirements
+
+* Attachment_fu plugin
+* Imagemagick or ImageScience
+
+== Example of using kropper
+
+# install attachment_fu plugin
+# install kropper plugin
+# ensure application layout contains @onload and <%= yield :head %>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Title</title>
+    <%= yield :head %>
+  </head>
+  <body<%= @onload && %{ onload="#{@onload}"} %>>
+    <%= yield :layout %>
+  </body>
+  </html>
+# rake kropper:install
+# ./script/generate kropper mugshot
+# add map.resources :mugshots, :member => {:crop => :any}
+# browse to /mugshots
+
+== Credits
+
+Original app and code by Jonathon Wolfe (http://kolossus.com/), then
+pluginised with the help of Tim Lucas (http://toolmantim.com)

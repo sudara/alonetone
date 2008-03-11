@@ -1,0 +1,20 @@
+<% if logged_in? %>
+<div class='help'>
+  <%= link_to 'Refresh this page', 'todo?expire=true' %><br/> (takes a good 20 seconds to grab the lists!)
+  <% end %>
+</div>
+<% cache("todos") do %>
+  <% 
+  # FIXME
+  # this ghettoness exists in the view because we need to cache these calls. Better done in model, mewouldthinks
+    basecamp_session
+  %>
+  <%= pretty_text 'see what is to-do', :h1 %>
+
+  <%= render :partial => 'todo_list', :collection => @uncompleted %>
+  
+  <%= pretty_text 'breathe, it is to-done!', :h1 %>
+
+  <%= render :partial => 'todo_list', :collection => @completed %>
+  
+<% end %>

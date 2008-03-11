@@ -1,0 +1,30 @@
+<% render(:layout => 'user') do %>
+
+	<div id="user_home">
+	  	  
+		<%= link_to "new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
+		
+		<% if @user.has_public_playlists? %>
+			<h2>Latest Playlists by <%=@user.name%></h2>
+			<div id="small_playlists">
+				<%= render :partial => 'playlist', :collection => @playlists %>
+			</div>
+			<div class="clear"> </div>
+		<% end %>
+	
+	  <%= link_to "upload new track", new_user_track_path(@user), :id => 'upload_button', :class => 'add button' if authorized? %>
+	
+	  <%= render :partial => 'latest' if @user.assets_count > 0 %>	
+	  
+	  <%= render :partial => 'shared/comments' if @user.comments.size > 0 %>
+	  
+	  <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+	
+	  <%= image_tag @user.track_plays_graph if authorized? %>
+	
+		<%= render :partial => 'listens' if @listens.size > 0 %>	
+		
+		
+	</div>
+	
+<% end %>

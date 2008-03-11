@@ -1,0 +1,31 @@
+<% render(:layout => 'users/user') do %>
+  
+  <div id="single_track">
+    <%= render :partial => 'assets/assets'%>
+  </div>
+  
+  <div id="track details">
+    <% if @asset.description && !@asset.description.empty? %>
+      <h3>About this track</h3>
+      <p><%= @asset.description %></p>
+    <% end %>
+    <% if @asset.youtube_embed && !@asset.youtube_embed.empty? %>
+      <object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
+    <% end %>
+  </div>
+  
+   <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
+  
+   
+   <%= @asset.name %> was uploaded by <%=@user.name %> on <%= @asset.created_at.to_date.to_s(:long) %>
+
+  
+<% end %>
+
+<% content_for :share do %>
+	<%= render :partial => 'assets/share', :object => @asset %>
+<% end %>
+
+<% content_for :comment do %>
+  	<%= render :partial => 'assets/comment', :object => @asset %>
+<% end %>

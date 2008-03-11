@@ -1,0 +1,9 @@
+
+<% remote_form_for @user_report, :url => user_reports_path, :success => 'Flash.show("ok","great! thanks for taking the time to help us all out");$("bug-form").fade();$("footer").morph({height:"40px"})', :failure =>  "Flash.show('error','hmm, ironic, but there was a problem filing the report! Make sure you actually entered some text!')"  do |f| %>
+	
+	<%= f.select 'category',{"something isn't working..." => :broken, "i have an idea..." => :creative, "i really really like..." => :praise}%>
+	<%= f.text_area 'description', :rows => 10 %>
+	<%= f.hidden_field 'params', params %>
+	<%= f.hidden_field 'user_id' %>
+	<%= submit_tag 'send it off!' %> or <%= link_to 'close', '#', :id=> 'nevermind' %>
+<% end %>

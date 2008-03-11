@@ -1,0 +1,14 @@
+
+<div class="bugaboo">
+	<%= link_to_function 'Bug Fix and Feature Request', "Effect.toggle('bugaboo_form', 'slide')" %></a>
+</div>
+
+<div id="bugaboo_form" class="bugaboo_box dark_green_box" style="display:none;">
+	<% form_remote_tag :url => '/bugaboo' do %>
+		<%= text_area_tag 'bugaboo', 'comments', :cols=>45, :rows =>5 %>
+		<br />
+		<%= select_tag 'feedback_type', options_for_select({'Something is not working as expected'=>1, 'I got an error'=>2, 'I have a suggestion'=>3}) %>
+		<br />
+		<%= image_submit_tag 'submit_buttons/submit_request.jpg'%>	
+	<% end %>
+</div>

@@ -1,0 +1,37 @@
+PrettyText
+==========
+
+
+Yo, this plugin will take text and on-the-fly create images using rmagick and supplied fonts.
+
+This plugin depends on rmagick, so make sure you're all gemmed up!
+
+Then, throw any fonts you like into /path/to/your/app/fonts and bada bing.
+
+In your views call something like this:
+
+<%= pretty_text 'text you want rendered into an image', :font => 'Vera.ttf', :pointsize => '35px', :fill => '#CCCCCC' %>
+
+you can also setup some psuedo constants to reuse styles sitewide.
+
+In config/initializers/pretty_text.rb, you could have this, for example:
+
+Sudara::PrettyText.presets[:h1] = {
+  :pointsize => 36,
+  :background_color => 'transparent',
+  :fill => 'black',
+  :format => 'PNG',
+  :font => 'SebastianMediumPro.otf'
+}
+
+Allowing you to call:
+
+<%= pretty_text 'fancy anti-aliased rendered text', :h1 %>
+
+Generated Images are cached, so the hard work is done once.
+
+A rake task is included to clear out the junk inside your trunk.
+
+rake pretty_text:clear
+
+Copyright (c) 2007 Sudara, released under the MIT license

@@ -1,0 +1,40 @@
+<% if logged_in? %>
+	
+		<%= pretty_text "give us your best!", :h1 %>
+		<h2 class="spacey">upload mp3s (or zip files containing mp3s) up to 40 megabytes each</h2>
+		<%= render :partial => 'form' %>
+		
+		
+		<% 75.percent_of_the_time do %>
+		  <div id="playlist_hint" class="help">
+		    <h2>Want to take it up a notch?</h2>
+		    <p>
+		      <%= link_to 'Create your first playlist', new_user_playlist_path(@user) %>
+		      to better organize your tracks
+		    </p>
+		  </div>
+		<% end unless @user.playlists_count > 0%>
+		
+		<div id="relax" style="display:none" class="help">
+		  <div>
+		      <h2>Put the coffee on!</h2>
+		      <p>This is going to take a bit, depending on your connection and how large your files are. No worries,
+		        grab a cup of coffee, have a cigarette, or bust open another browser window.</p>
+		  </div>
+		</div>
+<% else %>
+	<div id="left-col">
+		<h1>Login</h1>
+			<%= render :partial => 'sessions/login'%>
+
+		<h1>Create an account</h1>
+			<% form_for :user, :url => users_path do |form| -%>
+				<%= render :partial => 'users/form', :object => form %>
+				<p><%= submit_tag 'Sign up!' %></p>
+	  
+			<% end %>
+	</div>
+
+	
+<% end %>
+

@@ -1,0 +1,296 @@
+// import variables
+@import variables
+
+// ie6, javascript
+.static_warning
+  :background #FFF url(../images/flash/flash-error.png) no-repeat left center
+  :padding-left 100px
+  :padding-top 10px
+  :padding-bottom 10px
+  :border = 1px dashed !orange
+  :width 600px
+  :margin-bottom 20px
+  h2
+    :color = !red
+    :font-weight bold
+    :font-size 16px
+
+// logo link
+#logo
+  a
+    :display block
+    :width 100%
+    :height 100%
+    :background-color transparent
+
+// add field button for uploading
+#asset-add-file
+  :margin-left 35px
+
+// buttons!
+a.button
+  :margin-left -22px
+  :font-size 20px
+  :color = !grey
+  :background transparent none no-repeat left top
+  :width 184px
+  :height 50px
+  :display block
+  :text-decoration none
+  :padding-left 57px
+  :line-height 50px
+  &:hover 
+    :color = !orange
+a.add
+  :background-image url(../images/buttons/add.png)
+a.delete
+  :background-image url(../images/buttons/remove.png)
+
+#user_home #upload_button
+  :margin-bottom 24px
+#user_home #add_playlist_button
+  :margin-bottom 24px
+
+// signup
+
+#signup
+  :position absolute
+  :width 350px
+  img.h1
+    :margin-bottom 18px
+  input
+    :margin-left 1px
+    :margin-top 5px
+    :width 200px
+    :padding 3px
+    :font-weight bold
+    :font-size 14px
+  div#signup-questions
+    :padding-top 20px
+    
+  
+#what-you-get
+  :position absolute
+  :left 550px
+  :top 10px
+  :width 400px
+  :padding-bottom 80px
+  h1
+    :margin-top -3px
+    :margin-left 13px
+    :margin-bottom 25px
+  h2
+    :color = !dark_grey
+    :font-weight bold
+    :font-size 12px
+    :margin-left 20px
+    :margin-top 2px
+    :margin-bottom 30px
+  img
+    :margin-left 10px
+
+
+// pagination
+.pagination 
+  padding: 3px
+  margin:10px 3px
+  text-align:center
+  a 
+    padding: 3px 5px 2px 5px
+    margin: 2px
+    text-decoration: none
+    color: #373738
+    background-position: top
+    background-repeat: repeat-x
+    background-color:#c5c5c5
+
+    &:hover, &:active 
+      :background-color = !orange
+      :color #000
+      background-image: none
+  
+  span.current 
+    padding: 3px 5px 2px 5px
+    margin: 2px
+    font-weight: bold
+    :background-color = !grey
+    color: #FFF
+  
+  span.disabled 
+    padding: 2px 5px 2px 5px
+    margin: 2px
+    color: #ccc
+    
+    
+// browse all users    
+#user-index
+  :position relative
+  :margin-right 150px
+  
+  #switcher
+    :margin-left 20px
+    :margin-bottom 40px
+    :height 30px
+    :width 500px
+    :position relative
+    a
+      :display block
+      :float left
+      :background-color = !grey
+      :color = !light_grey
+      :height 20px
+      :text-align center
+      :width 130px
+      :padding 10px
+      :font-weight normal
+      :font-size 16px
+      :border = 1px solid !light_grey
+      &.active
+        :color = !dark_grey
+        :text-decoration none
+        :font-weight bold
+        :background-color #fff
+  .pagination 
+    :text-align center
+    :width 100%
+    :margin-top 15px
+    :margin-bottom 25px
+    :margin-left -20px
+  a img 
+    width: 125px
+    height: 125px
+
+  .user
+    float: left
+    clear: none
+    margin: 0px 20px 20px 0px
+  
+  .details
+    :text-align right
+    :background-color = !dark_grey
+    :color #fff
+    :display block
+    :padding 5px
+    a
+      :color #fff
+      :text-decoration none
+      :font-weight normal
+      :background-color transparent
+      &:hover
+        :color = !orange
+
+  .delete-user 
+    :color = !red
+    background-color: transparent
+    font-size: 10px
+    margin-bottom: -1.7em
+    display: none
+  
+
+  .name
+    :color #fff
+    :position absolute
+    :background-color transparent
+    :font-size 14px
+    :font-weight normal
+    :text-decoration none
+    :padding-left 5px
+    :margin-top -20px
+    :margin-left 0px
+    :height 20px
+    :width 120px
+    :display block
+    :background-color = !dark_grey
+    :z-index 5
+    :overflow none
+    :opacity 0.8
+    &:hover
+      :opacity .99
+      :color = !orange
+      :background-color = !dark_grey
+      
+      
+// user reports
+#user_reports
+  float: left
+  width: 500px
+  padding-right: 50px
+  overflow: hidden
+
+.user_report, .comments .comment
+  margin-bottom: 25px
+  float: none
+  :clear both
+  .reporting_user, .comment_user
+    :float left
+    :margin 0px 10px 10px 0px
+    :color = !orange
+    a
+      :color = !orange
+      :font-size 12px
+
+  .report_date, .comment_date
+    padding: 0px
+    margin: 0px 0 0 0px
+    font-size: 10px
+    line-height: 12px
+
+.user_report 
+  :padding-top 5px
+  :padding-left 10px
+  :min-height 100px
+  .category   
+    :float left
+    :opacity 0.2
+    :height 100px
+    :width 80px
+    :background transparent none no-repeat top left
+  &.creative .category
+    background-image: url(../images/flash/flash-info.png)
+  &.broken .category
+    background-image: url(../images/flash/flash-error.png)
+  &.praise .category
+    background-image: url(../images/flash/flash-ok.png)
+
+// comments
+
+.comments
+  :width 500px
+  .comment
+    :padding-left 40px
+    .comment_about
+      color = !red
+      :font-size 12px
+      :line-height 16px
+    .comment_body
+      color = !dark_grey
+
+// user wrapper
+
+#alonetoner
+  :float left
+.user_links
+  :float left
+  :margin-left 20px
+  a
+    :display block
+.clear 
+  :clear both
+
+#alonetoner_big
+  :float left
+#bio
+  :width 600px
+  #offer
+  .bio
+    :width 300px
+    :float left
+    :margin-left 20px
+  
+
+// footer
+#footer
+  #revision
+    :position absolute
+    :left 30px
+    :bottom 10px

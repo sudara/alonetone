@@ -1,0 +1,17 @@
+development:
+  bucket_name: mp3.yoursite.com
+  access_key_id: 1TEG48EH39450TEHE
+  secret_access_key: ethunohteunthoeu
+  virtual_host: true
+
+production:
+  bucket_name: mp3.yoursite.com
+  access_key_id: 2983HU83U0OTEH 
+  secret_access_key: oeunthontethun
+  virtual_host: true
+
+test:
+  bucket_name: mp3.yoursite.com
+  access_key_id: ONETHU023984 
+  secret_access_key: oetnuhonteu
+  virtual_host: true

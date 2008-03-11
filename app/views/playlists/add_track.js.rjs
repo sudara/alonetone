@@ -1,0 +1,4 @@
+page.insert_html :bottom, 'tracks', :partial => 'track'
+page.replace 'play_time', :partial => 'play_time'
+page.visual_effect :highlight, 'play_time'
+page.sortable 'tracks', :url => sort_tracks_user_playlist_path(@user, @playlist.permalink), :containment => :tracks, :handle => 'move'

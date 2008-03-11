@@ -1,0 +1,30 @@
+<% div_for user_report, :class => user_report.category do %>
+	  <div class="category">
+  </div>
+	<div class='reporting_user'>
+		<% if user_report.user %>
+			<%= image_tag user_report.user.avatar(:small) %><br/>
+			<%=link_to (h user_report.user.name), user_home_path(user_report.user) %> 
+		<% else %>
+			<%= image_tag User.dummy_pic(:small)%><br/>
+			Guest
+		<% end %>
+	</div>
+	
+	<p class="report_date">
+		<%= time_ago_in_words(user_report.created_at)%> ago<br/>
+		<%= user_report.user.email if user_report.user && admin?%>
+	</p>
+
+	<p class="report_description">
+		<%=h user_report.description %>
+	</p>
+	
+	<% if admin? %>
+		PARAMS: <%=h user_report.params %><br/>
+		PATH: <%=h user_report.path %><br/>
+		<%= link_to 'Destroy', user_report, :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
+	
+	
+<% end %>

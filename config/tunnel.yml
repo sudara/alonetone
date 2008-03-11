@@ -1,0 +1,7 @@
+# Your callback url should be set to
+#  http://public_host:public_port
+development: 
+  public_host_username: alonetone.com
+  public_host: alonetone.com
+  public_port: 8888 
+  local_port: 3000

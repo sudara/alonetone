@@ -1,0 +1,68 @@
+# == Schema Information
+# Schema version: 16
+#
+# Table name: users
+#
+#  id               :integer(11)   not null, primary key
+#  login            :string(40)    
+#  email            :string(100)   
+#  salt             :string(40)    
+#  activation_code  :string(40)    
+#  activated_at     :datetime      
+#  created_at       :datetime      
+#  updated_at       :datetime      
+#  deleted_at       :datetime      
+#  token            :string(255)   
+#  token_expires_at :datetime      
+#  admin            :boolean(1)    
+#  last_seen_at     :datetime      
+#  crypted_password :string(40)    
+#  assets_count     :integer(11)   
+#  display_name     :string(255)   
+#  identity_url     :string(255)   
+#  pic_id           :integer(11)   
+#
+
+quentin:
+  id: 1
+  login: quentin
+  email: quentin@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+  updated_at: <%= 5.days.ago.to_s :db %>
+  filter: textile_filter
+  token: quentintoken
+  token_expires_at: <%= 5.days.from_now.to_s :db %>
+  admin: true
+arthur:
+  id: 2
+  login: arthur
+  email: arthur@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+  token: arthurtoken
+  token_expires_at: <%= 5.days.ago.to_s :db %>
+  filter: markdown_filter
+aaron:
+  id: 3
+  login: aaron
+  email: aaron@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+  deleted_at: <%= 5.hours.ago.to_s :db %>
+  filter: markdown_filter
+ben:
+  id: 4
+  login: ben
+  email: ben@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+  filter: markdown_filter
+

@@ -1,0 +1,31 @@
+owp1:
+  id: 1
+  playlist: owp
+  asset: valid_mp3
+  position: 1
+owp2:
+  id: 2
+  playlist: owp
+  asset: valid_mp3
+  position: 2
+owp3:
+  id: 3
+  playlist: owp
+  asset: valid_mp3
+  position: 3
+
+mix1:
+  id: 4
+  playlist: mix
+  asset: valid_mp3
+  position: 1
+mix2:
+  id: 5
+  playlist: mix
+  asset: valid_mp3
+  position: 2
+mix3: 
+  id: 6
+  playlist: mix
+  asset: valid_mp3
+  position: 3

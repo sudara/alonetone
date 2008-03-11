@@ -1,0 +1,7 @@
+<% content_tag :li, todo_item do %>
+  <%= check_box_tag todo_item.id,1, (todo_item.completed ? true : false), :disabled => true %>
+  <% if todo_item.completed %>
+    <span class="todo_item_date"><%= todo_item.completed_on.to_date.to_s(:short) %></span>
+  <% end %>  
+  <%= todo_item.content %>
+<% end %>

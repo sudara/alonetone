@@ -1,0 +1,30 @@
+
+<h3><%= _('Basics') %></h3>
+
+
+<% if not @user.valid? and @user.errors.on(:login) %>
+
+<p>
+  <label for="login"><%= _('Login') %></label></p>
+  <p class="help">
+    <strong><%= _('Please change your login.') %></strong>
+    <%= _('Logins should start with least 2 characters and may consist of letters, numbers, or the underscore.') %>
+  </p>
+<p>
+  <%= settings.text_field :login %>
+</p>
+<% end %>
+
+<p>
+  <label for="user_email"><%= _('Email') %></label><br />
+  <%= settings.text_field :email %>
+</p>
+
+<div>
+  <label for="user_password"><%= _('Password') %></label><br />
+  <p class="entryhelp" style="margin-top:0.5em;"><%= _('Enter a new password twice to change your password. (must be longer than 5 characters)') %></p>
+  <%= settings.password_field :password, :size => 16 %>
+  <span class="entryhelp">(<%= _('once') %>)</span><br />
+  <%= settings.password_field :password_confirmation, :size => 16 %>
+  <span class="entryhelp">(<%= _('and again') %>)</span>
+</div>

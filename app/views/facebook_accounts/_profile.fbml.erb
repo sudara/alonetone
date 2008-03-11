@@ -1,0 +1,16 @@
+<fb:fbml version="1.1">
+<fb:subtitle seeallurl="<%=facebook_home_url%>">
+<%= fb_action 'add a track to your profile', facebook_home_url %>
+</fb:subtitle>
+    
+  <% @facebook_account.assets.each do |asset| %>
+  <fb:mp3 src="<%= formatted_user_track_url(asset.user, asset, :mp3, :referer=>'facebook', :canvas => false)%>" title="<%= asset.name %>" artist="<%= asset.user.name %>" width="200px"/>
+  <fb:visible-to-owner>
+    <%= link_to 'delete', remove_from_profile_facebook_url(@facebook_account.id, :addable_type => 'Asset', :addable_id => asset)%><br/>
+  </fb:visible-to-owner>
+  <br/>
+  <% end %>
+</fb:fbml>
+<table class="profileTable">
+<br>Need a spot to upload your tracks? <%= link_to 'Visit alonetone', 'http://alonetone.com'%> to get started!
+</div>

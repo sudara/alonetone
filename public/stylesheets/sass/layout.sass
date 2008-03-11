@@ -1,0 +1,88 @@
+// import variables
+@import variables
+html,body
+  :background-color = !background
+#header
+  :position fixed
+  :top 0
+  :left 0
+  :width 100%
+  :height 85px
+  :background #3f3f3f url(../images/header-background.jpg) repeat-x top left
+  :z-index 1000
+
+#logo  
+  :position absolute
+  :right 0px
+  :top 10px
+  :padding-right 30px
+  :width 96px
+  :height 64px
+  :z-index 5
+  :background transparent url(../images/alonetone.png) no-repeat left center
+  
+#player
+  :position relative
+  :float left
+  :width 327px
+  :margin 25px 30px
+  :height 35px
+  
+#nav
+  :position absolute
+  :top 25px
+  :left 390px
+  :height 34px
+  :width 391px
+  
+#user-bar
+  :position fixed
+  :top 95px
+  :right 30px
+  :text-align right
+  :z-index 100
+        
+#content
+  :position relative
+  :margin-top 121px
+  :padding-left 60px
+  :background-color = !background
+  :margin-bottom 150px
+#main
+  :margin-left 55px
+  #user_header
+    :margin-bottom 20px
+  div.help 
+    :position absolute
+    :left 600px
+    :top  30px
+    :border = 1px dashed !orange
+    :background-color #FFF
+    :padding 10px
+    :width 200px
+#footer
+  :position fixed
+  :bottom 0
+  :left 0
+  :height 40px
+  :width 100%
+  :z-index 1000
+  :background-color #161616
+  :border-top 3px solid #000
+  :opacity .98
+  &.reporting
+    :height 300px
+  form
+    :height 250px
+    :text-align right
+    :position absolute
+    :right 30px
+    :top 50px
+    :margin-bottom 10px
+    select, input, textarea
+      :display block
+      :margin-bottom 5px
+    #user_report_submit
+      :display inline
+    a
+      :font-size 12px

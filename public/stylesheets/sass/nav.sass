@@ -1,0 +1,43 @@
+ul#nav
+  :background none
+  li
+    :float left
+    :height 34px
+    :line-height 0
+    :padding 0
+    :margin 0
+    :background none
+    a
+      :height 34px
+      :float left
+      :display block
+      :margin 0 
+      :padding 0
+      :background transparent none no-repeat top left
+      // make sure the text doesn't show up
+      i 
+        :display none
+  li#browse 
+    a
+      :background-image url(../images/nav/browse-buttons.png) 
+      :width 173px
+      &:hover
+        :background-position -173px
+    a.active
+      :background-position -346px
+  li#upload
+    a
+      :background-image url(../images/nav/upload-buttons.png) 
+      :width 98px        
+      &:hover 
+        :background-position -98px
+    a.active
+      :background-position -196px
+  li#your_stuff
+    a
+      :background-image url(../images/nav/your-stuff-buttons.png)
+      :width 120px
+      &:hover 
+        :background-position -120px
+    a.active
+      :background-position -240px         

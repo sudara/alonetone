@@ -1,0 +1,12 @@
+Bugaboo
+=======
+
+The point? To add a little interface to your app that allows the users to give feedback without navigating to a different page.
+
+Sounds stupid simple and it is - but it will make a big difference in the quality of feedback you receive.
+
+On top of the user feedback, the user's session and relevant rails debugging info is included.
+
+How to use:
+
+somewhere in your views, perhaps in your application controller:

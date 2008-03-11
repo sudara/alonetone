@@ -1,0 +1,44 @@
+@import variables
+
+#share
+  :margin-left 110px
+  :margin-top 20px
+  h2
+    :margin-bottom 1em
+    :font-size 17px
+    :color = !red
+  h3
+    :margin-bottom 0.5em
+    :color = !orange
+    :font-size 12px
+    :color = !grey
+  input, textarea
+    :margin-left 20px
+    :margin-bottom 1em
+  .track-name
+    :color = !orange
+  a.done
+    :background-color transparent
+    :font-weight bold
+    :font-size 16px
+  div.download-button
+    :display inline
+    :position relative
+    :float left
+    :margin-left 20px
+    a 
+      :background-color transparent
+      :background-image url(../images/playlists/download-buttons.png) 
+      :height 22px
+      :width 22px
+      :display block
+      :padding 0
+      i
+        :display none
+      &:hover
+        :background-position -44px
+  div.comment_asset form
+    :left 130px
+    :text-align left
+  div.comment_asset form input
+    :display inline

@@ -1,0 +1,9 @@
+	<div id="user_listens">
+		<% render :layout => 'assets/asset_wrapper' do%>
+		<div id="stash" class="stash">
+			<h2><%= @user.name %> has been listening to</h2>
+		  <%= render :partial => 'users/listen', :collection => @listens %>
+		</div>
+		<% end %>
+
+	</div>

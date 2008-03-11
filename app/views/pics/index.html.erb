@@ -1,0 +1,32 @@
+<h1>Listing pics</h1>
+
+<table>
+  <tr>
+    <th>Size</th>
+    <th>Content type</th>
+    <th>Filename</th>
+    <th>Height</th>
+    <th>Width</th>
+    <th>Parent</th>
+    <th>Thumbnail</th>
+  </tr>
+
+<% for pic in @pics %>
+  <tr>
+    <td><%=h pic.size %></td>
+    <td><%=h pic.content_type %></td>
+    <td><%=h pic.filename %></td>
+    <td><%=h pic.height %></td>
+    <td><%=h pic.width %></td>
+    <td><%=h pic.parent_id %></td>
+    <td><%=h pic.thumbnail %></td>
+    <td><%= link_to 'Show', pic %></td>
+    <td><%= link_to 'Edit', edit_pic_path(pic) %></td>
+    <td><%= link_to 'Destroy', pic, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New pic', new_pic_path %>

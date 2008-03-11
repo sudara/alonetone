@@ -1,0 +1,16 @@
+<fb:dashboard>
+<%= fb_create_button 'upload your music on alonetone', 'http://alonetone.com'%>
+</fb:dashboard>
+<fb:tabs>
+  <fb:tab-item href='<%= facebook_home_path %>' title='Latest tracks on alonetone' selected='true'/>
+ </fb:tabs>
+<%= facebook_messages %>
+<%= fb_explanation 'Welcome to alonetone on facebook!', "
+  Yeah, it is a bit getto here still. But we're having fun.<br/>
+  Right now, you can browse the latest alonetone music <br/>
+  and add single tracks from alonetone (one at a time) to your facebook profile.<br/>
+  " %>
+<div style="padding:20px;">
+<%= yield %>
+</div>
+<fb:google-analytics uacct="UA-241978-4" />

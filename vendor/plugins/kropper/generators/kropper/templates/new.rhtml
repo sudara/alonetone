@@ -1,0 +1,6 @@
+<h1>New <%= class_name %></h1>
+
+<%% form_for :<%= file_name %>, @<%= file_name %>, :url => <%= file_name.pluralize %>_path, :html => { :multipart => true } do |form| %>
+  <p><%%= form.file_field :uploaded_data %></p>
+  <p><%%= submit_tag "Upload <%= file_name %>" %></p>
+<%% end -%>

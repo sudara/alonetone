@@ -1,0 +1,6 @@
+<h1><%= class_name %> <%%= @<%= file_name %>.id %></h1>
+
+<p><%%= image_tag @<%= file_name %>.public_filename(:thumb) %></p>
+<p><%%= image_tag @<%= file_name %>.public_filename %></p>
+
+<p><%%= button_to "Delete", <%= file_name %>_path, :method => :delete, :confirm => "Delete <%= file_name %>?" %></p>

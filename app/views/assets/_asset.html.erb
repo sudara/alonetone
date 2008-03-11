@@ -1,0 +1,35 @@
+<% content_tag_for :div, asset do %>
+  <% if authorized_for(asset) %>
+  	<div class="edit" style='display:none;'><%= link_to "edit", edit_user_track_path(asset.user, asset) %></div>
+  <% else %>
+	<% end %>
+	  <div class="share" style='display:none;'><%= link_to "share!", "#" %></div>
+
+	<div class="play-button button"> </div>
+	<div class="title"><%= link_to_play asset, @referer %></div>
+	<div class="artist">by <%= link_to h(asset.user.name), user_home_path(asset.user) %></div>
+	<div class="time"><%= asset.length %> </div>
+	<div class="listens"><%= asset.listens_count %></div>
+	<div class="when"><%= time_ago_in_words asset.created_at %> ago</div>
+	<div class="download-button button"><%= link_to '<i>download</i>', formatted_user_track_path(asset.user, asset.permalink, :mp3, :referer => 'download') %></div>
+	<div class="track-right">
+		<% if authorized_for(asset) %>
+			<div class="delete-button button <%= 'admin' if admin? %>" style="display:none;">
+				<%= link_to '<i>delete</i>', user_track_path(asset.user, asset.permalink), {:method=>:delete, 
+				:confirm => "Are you sure you want to totally remove this track? You will delete it from the system, your playlists and the playlists of others."}%>
+			</div>
+		<% end %>
+		  <div class="comment-button button comment <%= 'admin' if admin? %>" style="display:none;">
+		    <%= link_to "<i>comment on #{asset.name}</i>", '#' %>
+		  </div>
+	</div>
+	
+<% end %>
+
+<% content_for :comment do %>
+  	<%= render :partial => 'assets/comment', :object => asset %>
+<% end %>
+
+<% content_for :share do %>
+	<%= render :partial => 'assets/share', :object => asset %>
+<% end %>

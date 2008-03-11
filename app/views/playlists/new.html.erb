@@ -1,0 +1,24 @@
+<% render(:layout => 'users/user') do %>
+
+<h1>Create a new album or mix</h1>
+<h2 class="spacey">Your playlist will become public as soon as it has some tracks in it</h2>
+
+<%= error_messages_for :playlist %>
+
+<% form_for [@user, @playlist] do |f| %>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Description</b><br />
+    <%= f.text_area :description, :rows => 4 %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<% end %>

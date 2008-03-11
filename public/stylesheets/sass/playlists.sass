@@ -1,0 +1,525 @@
+// import variables
+@import variables
+
+// used for sliding door effect on icons
+!first = 0px
+!second = -22px
+!third = -44px
+!fourth = -66px
+
+// width of playlists is set based on context
+
+
+// Playlist visual wrapping
+.playlist-wrapper
+  :position relative
+  :margin-right 30px
+  :margin-left -22px
+  :width 100%
+  :margin-bottom 20px
+.playlist-top
+  :height 11px
+  :background transparent url(../images/playlists/playlist-top.png) no-repeat left center
+  .playlist-top-right
+    :height 11px
+    :background transparent url(../images/playlists/playlist-top-right.png) no-repeat right center
+    :width 12px
+    :margin-right -12px
+    :float right
+.playlist-bottom
+  :height 11px
+  :background transparent url(../images/playlists/playlist-bottom.png) no-repeat left center
+  .playlist-bottom-right
+    :height 11px
+    :background transparent url(../images/playlists/playlist-bottom-right.png) no-repeat right center    
+    :width 12px
+    :margin-right -12px
+    :float right
+    
+// PLAYLISTS
+// tracks can appear as 'assets' in a group or as 'tracks' in a playlist
+
+
+// make sure list styles don't inherit to here
+.playlist ul li
+  :background none
+
+.playlist, .stash, .draggable_tracks
+  :padding-top 15px
+  :background-color #fff
+  :margin-right -12px
+  h2
+    :padding-left 20px
+    :font-size 20px
+    :font-weight bold
+    :color = !dark_grey
+    :margin-bottom 1em
+    :text-shadow none
+  h3
+    :padding-left 20px
+  a.view_all
+    :position absolute
+    :right 10px
+    :top 25px
+    :font-weight bold
+    :font-size 11px
+    :line-height 20px
+    :padding-left 10px
+    :padding-bottom 1em
+    :color = !orange
+    
+    &:hover 
+      :color = !orange
+      :background none
+  .subtitle
+    :font-size 12px
+    :color = !grey
+  div.edit_playlist
+    display: block
+    margin-left: -100px
+    margin-top: -10px
+    :height 30px
+    :width 40px
+    :padding 50px 20px
+    background-color: #7c7c7c
+    div.info 
+      a
+        font-size: 14px
+        line-height: 30px
+        color: #fff
+        background-color: transparent
+  div.drop_tracks
+    :height 20px
+    :font-weight bold
+    :font-size 18px
+    :color = #fff
+    :display block
+    :padding 10px 50px
+    :background-color = !light_grey
+    &.active
+      :color = #FFF
+      :background-color = !orange
+  div.share_box, div.info, div.pagination_box
+    :background-color #d7d7d7
+    :color = !grey
+    :font-size 12px
+    :position relative
+    :padding 0px 10px 10px 20px
+    img
+      :float left
+    a
+      :color = !dark_grey
+      :background-color #fff
+      &:hover 
+        :color = !orange
+    p 
+      :float left
+      :padding 20px
+      :clear none
+      :display block
+    .description
+      :margin-left 20px
+      :width 210px
+      :overflow hidden
+  .tracks
+    :clear both
+  &.active 
+    #tracks
+      :background-color = !orange
+    #drop_tracks
+      :background-color = !orange      
+  div.pagination_box
+    :text-align center
+    :padding 10px 10px
+  div.share_playlist_link, div.edit_playlist_link
+    :position absolute
+    :top 23px
+    :right 10px
+    :width 60px
+    :height 40px
+    a
+      :color = !orange
+  div.edit_playlist_link
+    :right 50px
+  div.info 
+    :display block
+    :padding-top 10px
+    :height 110px
+    a
+      :font-size 12px
+      :padding-right 5px
+      :color = !grey
+      :background none
+      :text-decoration underline
+      &:hover 
+        :color = !orange
+      &.active 
+        :color = !orange
+        :text-decoration none
+    a.image 
+      :float left
+      :width 100px
+      :height 100px
+    p
+      :display block
+      :float left
+      :clear none
+      :text-align left
+      :padding 0px 10px 10px 10px
+  div.empty
+    :font-weight bold
+    :background-color = !red
+    :color #fff
+    :padding 10px
+    a
+      :color !black
+      :background-color transparent
+      :padding 0
+      &:hover 
+        :color #fff
+  a
+    :color #fff
+    :font-size 15px
+  .asset, li.track
+    :padding-left 110px
+    :position relative
+    :float none
+    :height 40px
+    :background-repeat no-repeat
+    
+    // allows for the hover options on the left
+    :margin-left -90px 
+    
+    // allows for the hover options on the right
+    :margin-right 20px
+    div 
+      :float left
+      :margin-top 9px
+      :overflow hidden
+      :height 18px
+    a
+      :color = !grey
+      :font-size 15px
+      :padding-left 10px
+      :text-decoration none
+      :background-color transparent
+      &:hover
+        :color = !grey
+        :text-decoration none
+    div.button
+      :width 22px
+      :height 22px
+      :background-repeat none
+    div.move
+      :margin-left -100px
+      :width 22px
+      :height 22px
+      :background-image url(../images/playlists/move-buttons.png) 
+      &.over
+        :background-position -22px
+    div.share, div.edit, div.drag
+      :margin-left -80px
+      :width 50px
+      :color = !light_grey
+      :font-size = 14px
+      a
+        :color #fff
+        &:hover
+          :color = !orange
+    div.drag
+      :margin-left -100px
+      :width 70px
+    div.edit
+      :margin-left -115px
+    div.play-button
+      :background-image url(../images/playlists/play-buttons.png) 
+      &.button.over
+        :background-position -44px
+    div.title
+      :width 220px
+      :overflow hidden
+      :height 25px
+      a:hover
+        :color = !orange
+    div.time, div.listens
+      :width 40px
+      :font-weight bold
+      :font-size 11px
+      :line-height 2.2em
+    div.source, div.when
+      :width 150px
+      :font-weight bold
+      :font-size 11px
+      :line-height 2.2em
+    div.source
+      :overflow hidden
+      :height 22px
+      :width 190px
+    div.artist, div.listener
+      :margin-top 12px
+      :font-size 11px
+      :padding-right 10px
+      :overflow hidden
+      :width 120px
+      a
+        :color = !orange
+        :font-size 11px
+        :padding-left 0px
+
+    div.listens
+      :color = !orange
+      :text-align center
+  
+    div.download-button
+      a 
+        :background-image url(../images/playlists/download-buttons.png) 
+        :height 22px
+        :width 22px
+        :display block
+        :padding 0
+        i
+          :display none
+        &:hover
+          :background-position -44px
+    .track-right
+      :float right
+      :margin-top 0
+      :margin-right -57px
+      :height 40px
+      :width 57px
+      .delete-button, .comment-button
+        :float right
+        :margin-right 12px
+        a 
+          :padding 0
+          :background transparent url(../images/playlists/delete-buttons.png) left center
+          :display block
+          :width 22px
+          :height 22px
+          &:hover 
+            :background-position -22px
+        &.admin
+          :margin-right 2px
+      .comment-button
+        a
+          :background-image url(../images/playlists/button-comment.png)
+          &:hover
+            :background-position left center
+        &.admin
+          :margin-right 2px
+    &.over 
+      :background-image url(../images/playlists/track-over.png)
+      div.button 
+        :background-position -22px
+      .download-button
+        a 
+          :background-position -22px
+      .track-right
+        :background transparent url(../images/playlists/track-over-right.png) no-repeat left center
+
+    &.playing
+      div.play-button
+        :background-position -66px
+      :background-image url(../images/playlists/track-playing.png)
+      div.track-right
+        :background transparent url(../images/playlists/track-playing-right.png) no-repeat left center
+      div
+        a
+          :color #fff
+          &:hover
+            :color = !grey
+      div.time
+        :color #fff
+      div.listens
+        :color = !grey
+        
+    // the owner of tracks get special options
+    .owner &
+
+.playlist
+  :min-height 200px
+  // playlists have special options (move & delete)  
+  .track
+  &.album
+    div.artist
+      :display none
+
+// all playlists
+.playlist-wrapper
+  div.when
+    :display none
+    
+// Now, lets get specific about size and what is included
+
+// public small display w/o tracks
+.playlist_cover_and_title
+  :width 250px
+  :text-align left
+  :float left
+  :position relative
+
+// jewel cases and sizes of playlist covers
+a.jewel_case_125
+  :position absolute
+  :left 0 
+  :top 0
+  :background-color transparent
+  
+img.cover_125
+  margin-left: 17px
+  margin-top: 4px
+
+#user_latest, #user_tracks, #user_playlists, #edit_playlist, #latest, #popular, #single_track
+  :margin-top 30px
+  :margin-right 90px
+  :width 450px
+  .playlist-wrapper
+    .stash, .playlist
+      div.artist
+        :display none
+#edit_playlist
+  :width 400px
+#user_listens
+  :width 550px
+#user_track_plays
+  :width 750px
+  .playlist-wrapper
+    #track_plays
+      div.asset 
+        div.when 
+          :display block
+  
+  
+#single_playlist, #user_playlists
+  :width 550px
+  div.move,div.delete-button
+    :display none
+  div.info 
+    :height 215px
+  .playlist_wrapper
+  // jewel cases and sizes of playlist covers
+    a.jewel_case_200
+      :position absolute
+      :width 200
+      :height 200
+      :left 15px
+      :top 10px
+      :display block
+    img.cover_200
+      margin-left: 23px
+      margin-top: 7px
+      
+#edit_playlist
+  div.info
+    :height 135px
+    p.description
+      :margin-left 10px
+  .playlist-wrapper
+    a.jewel_case_125
+      :top 10px
+      :left 10px
+    img.cover_125
+      :margin-left 9px
+    li.track div.edit
+      :margin-left -80px
+    div.share
+      :display none
+
+// display date uploaded instead of # listens on the home page
+div#latest
+  :width 650px
+  .playlist-wrapper .stash
+    div.when, div.artist
+      :display block
+    div.listens
+      :display none
+div#popular
+  :width 550px
+  .playlist-wrapper .stash
+    div.artist 
+      :display block
+  
+  
+// edit playlists
+#edit_playlist #pic_upload
+  :height 60px
+  :background-color #7c7c7c
+  :padding 5px 20px
+.playlist_help
+  :border = 1px dashed !orange
+  :padding 10px
+  :width 400px
+
+
+// When editing a playlist, here is the track pool on the right
+#playlist_sources
+  :position absolute
+  :left 650px
+  :width 400px
+  :top 50px
+  .draggable_tracks
+    .info
+      :padding-top 0px
+      #playlist_source_options
+        :margin-left -20px
+        a
+          :margin 0
+          :padding 0
+          :display block
+          :height 30px
+          :float left
+          :font-size 16px
+          :padding-left 20px
+          :padding-right 20px
+          :padding-top 10px
+          &.active, &:hover
+            :background-color #fff
+    .pagination
+      :padding 5px
+      :text-align center
+// search 
+#asset_search
+  :float left
+.info #spinner
+  :padding-left 5px
+  :width 16px
+  :height 16px
+  :float left
+
+#user_home
+  h2
+    :font-size 20px
+    :font-weight bold
+    :color = !dark_grey
+    :margin-bottom 1em
+    :text-shadow none
+#small_playlists
+  :position relative
+  :clear both
+  :margin-left 25px
+  :margin-right 100px
+  h3
+    a
+      :text-decoration none
+      :color = !grey
+      :font-weight normal
+      :font-size 14px
+      :margin-top 10px
+      :margin-left 3px
+      :display block
+#latest_playlists
+  :margin-right 200px
+  h2
+    :font-size 20px
+    :font-weight bold
+    :color = !dark_grey
+    :margin-bottom 1em
+    :text-shadow none
+  .playlist_cover_and_title
+    :margin-left 25px
+    :width 170px
+    :height 150px
+    h3
+      :display none
+
+  

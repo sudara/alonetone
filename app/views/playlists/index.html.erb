@@ -1,0 +1,7 @@
+<% render(:layout => 'users/user') do %>
+  		<%= link_to "new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
+
+	<div id="user_playlists">
+		<%= render :partial => @playlists%>
+	</div>
+<% end %>

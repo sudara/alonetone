@@ -1,0 +1,53 @@
+<h1>Editing Your Profile</h1>
+<% render(:layout => 'user') do %>
+
+
+		<p>
+			<%= link_to_function 'Change your picture',nil, :id => 'pic_upload_link' do |page|
+				page[:pic_upload].toggle
+			end %>
+		</p>
+		<div id="pic_upload" style="display:none">
+			Upload a square photo, 400px by 400px for best results.<br/>
+			<% form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
+				<%= f.file_field :uploaded_data  %>
+				<%= submit_tag "Upload new Pic" %>
+			<% end %><br/>
+		</div>
+			<%= error_messages_for :user %>
+
+
+			<% form_for @user, :html => { :method => :put } do |f| -%>
+		
+		<p>
+			<label for="display_name">The name you want displayed on alonetone</label><br />
+			<%= f.text_field :display_name %>
+		</p>
+		
+		<p>
+			<label for="user_bio">A short little biography</label><br />
+			<%= f.text_area :bio, :cols => 50, :rows => 5%>
+		</p>
+		
+		<p>
+			<label for="user_website">Have a website?</label><br />
+			http://<%= f.text_field :website %>
+		</p>
+		<p>
+			<label for="user_website">Have a podcast on iTunes?</label><br />
+			http://<%= f.text_field :itunes %>
+		</p>
+		
+		  <%= link_to_function("Change your password", nil, :id => "more_link") do |page|
+		    page[:edit_password].toggle
+		end %>
+	  <div id="edit_password" style="display:none">
+		Enter your desired new password twice, please:<br/>
+		<%= f.password_field :password %><br/>
+		<%= f.password_field :password_confirmation %>
+	  </div><br/><br/>
+	  <%= submit_tag "Update Your Profile" %> or <%= link_to "go see what you look like", profile_path(@user)%>
+	<% end -%>
+
+	<br />
+<% end %>

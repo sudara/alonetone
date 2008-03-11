@@ -1,0 +1,12 @@
+<% form_tag 'search', { :onSubmit => "Element.show('spinner');" } do -%>
+<%= text_field_tag :asset_search %>
+	<%= image_tag 'small-spinner.gif', :id=> 'spinner', :style => 'display:none;' %>
+<% end %>
+
+<%= observe_field(:asset_search,
+                 :frequency => 0.5,
+                 :update => :results,
+                 :loading => "Element.show('spinner')",
+                 :complete => "Element.hide('spinner');",
+                 :url => { :controller => 'assets', :action => 'search' },
+ 				 :with => 'search' )%>

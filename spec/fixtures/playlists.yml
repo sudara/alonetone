@@ -1,0 +1,30 @@
+# belongs to sudara
+owp:
+  id: 1
+  user_id: 1
+  permalink: owp
+  title: obsessed with progression
+  tracks_count: 3
+  description: sudara's album
+  
+arthurs-playlist:
+  id: 2
+  user_id: 2
+  permalink: arthurs-playlist
+  title: Arthur's Playlist
+  description: arthurs playlist
+  
+empty:
+  id: 3
+  user_id: 1
+  permalink: empty-playlist
+  title: Empty Playlist
+  description: something coming
+
+mix:
+  id: 4
+  user_id: 2
+  permalink: mix-tape
+  title: mix tape
+  tracks_count: 3
+  description: a mix tape, daring and wonderful

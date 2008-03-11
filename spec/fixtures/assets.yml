@@ -1,0 +1,32 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+valid_mp3:
+  id: 1
+  filename: Song1.mp3
+  permalink: song1
+  content_type: audio/mpeg
+  size: 3.megabytes
+  created_at: 2007-04-08 13:00:03
+  user_id: 1
+  length: 45
+valid_zip:
+  id: 2
+  filename: MySongs.zip
+  content_type: application/zip
+  size: 10.megabytes
+  created_at: 2007-04-08 13:00:03
+  user: sudara
+invalid_file:
+  id: 3
+  filename: Somefile.png
+  content_type: image/png
+  size: 1.megabyte
+  created_at: 1.day.ago
+  user: sudara
+valid_arthur_mp3:
+  id: 4
+  filename: Song5.mp3
+  content_type: audio/mpeg
+  size: 3.megabytes
+  created_at: 2007-04-08 13:00:03
+  user: arthur
+  length: 45

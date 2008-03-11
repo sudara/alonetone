@@ -1,0 +1,3 @@
+module AssetsHelper
+
+end

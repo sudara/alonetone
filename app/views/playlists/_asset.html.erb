@@ -1,0 +1,6 @@
+<% content_tag_for :div, asset do %>
+  <div class="drag" style="display:none;">drag me</div>
+  <div class="play-button button"> </div>
+  <div class="title"><%= link_to_play asset %></div>
+	<div class="time"><%= asset.length %> </div>
+<% end %>

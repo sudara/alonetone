@@ -1,0 +1,15 @@
+*.log
+db/schema.rb
+db/schema.sql
+config/deploy.rb
+config/database.yml
+config/amazon_s3.yml
+config/defensio.yml
+config/facebooker.yml
+config/basecamp.yml
+*.sql
+public/images/pretty_text/*.*
+log/*.log
+.DS_Store
+*.tmp
+public/stylesheets/*.css

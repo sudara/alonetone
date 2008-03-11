@@ -1,0 +1,10 @@
+<% content_tag_for :div, track_play.asset do %>
+  <div class="play-button button"> </div>
+  <div class="title"><%= link_to_play track_play.asset %></div>
+	<div class="listener">by <%= track_play.listener ? (link_to h(track_play.listener.name), user_home_path(track_play.listener)) : 'a guest' %></div>
+	<div class="source">via <%= track_play.source %></div>
+	<div class="when"><%= time_ago_in_words track_play.created_at%> ago</div>
+	<div class="track-right">
+	
+	</div>
+<% end %>

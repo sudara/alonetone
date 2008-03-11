@@ -1,0 +1,22 @@
+<h1>Editing update</h1>
+
+<%= error_messages_for :update %>
+
+<% form_for(@update) do |f| %>
+  <p>
+    <b>Title</b><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <b>Content</b><br />
+    <%= f.text_area :content, :rows => 50, :cols => 100 %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @update %> |
+<%= link_to 'Back', updates_path %>

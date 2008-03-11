@@ -1,0 +1,22 @@
+<h1>Listing listens</h1>
+
+<table>
+  <tr>
+    <th>Asset</th>
+    <th>User</th>
+  </tr>
+
+<% for listen in @listens %>
+  <tr>
+    <td><%=h listen.asset_id %></td>
+    <td><%=h listen.user_id %></td>
+    <td><%= link_to 'Show', listen %></td>
+    <td><%= link_to 'Edit', edit_listen_path(listen) %></td>
+    <td><%= link_to 'Destroy', listen, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New listen', new_listen_path %>

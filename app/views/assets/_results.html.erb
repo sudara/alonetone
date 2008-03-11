@@ -1,0 +1,7 @@
+<div id="result_list">
+	<% if @assets.size > 0 %>
+		<%= render :partial => 'playlists/asset', :collection => @assets %>
+	<% else %>
+		<div>try searching for something else</div>
+	<% end %>
+</div>

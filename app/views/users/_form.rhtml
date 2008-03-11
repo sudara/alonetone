@@ -1,0 +1,20 @@
+<p>
+  <label for="user_login">Login </label> (Letters and numbers only)<br />
+  <%= form.text_field :login, :onkeypress => 'LoginForm.checkLogin(this)' %>
+</p>
+
+<p>
+  <label for="user_email">Email </label>(we will send you an activation email)<br />
+  <%= form.text_field :email %>
+</p>
+
+<div id="password_fields">
+	<p>
+  <label for="user_email">Password </label>(enter it twice)<br />
+
+  <%= form.password_field :password %>
+<span class="entryhelp">(once)</span><br />
+  <%= form.password_field :password_confirmation %>
+<span class="entryhelp">(and then again)</span>
+</p>
+</div>

@@ -1,0 +1,28 @@
+<% div_for comment do %>
+  
+  <div class="comment_user">
+  	<% if comment.commenter %>
+  			<%= image_tag comment.commenter.avatar(:small) %><br/>
+  		<% else %>
+  			<%= image_tag User.dummy_pic(:small)%><br/>
+  	<% end %>
+  	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
+	</div>
+	
+	<p class="comment_date">
+	  
+		<%= time_ago_in_words(comment.created_at)%> ago<br/>
+		said about the track <span class="comment_about"><%=h comment.commentable.name %></span><br/>
+	</p>
+	
+	<p class="comment_body">
+		<%=h comment.body %>
+	</p>
+	
+	<% if admin? %>
+		<%= link_to 'Delete', comment_path(comment), :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
+	<div class="clear">
+	 
+	</div>
+<% end if comment %>

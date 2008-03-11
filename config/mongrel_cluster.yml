@@ -1,0 +1,7 @@
+--- 
+docroot: /home/alonetone.com/web/alonetone/current/
+log_file: /home/alonetone.com/web/alonetone/current/log/mongrel.log
+port: "8000"
+environment: production
+pid_file: /home/alonetone.com/web/alonetone/current/tmp/pids/mongrel.pid
+servers: 5

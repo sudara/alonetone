@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  profile_chunk_type: MyString
+  profile_chunk_id: 1
+  facebook_user_id: 1
+
+two:
+  profile_chunk_type: MyString
+  profile_chunk_id: 1
+  facebook_user_id: 1

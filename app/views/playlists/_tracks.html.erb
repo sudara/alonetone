@@ -1,0 +1,4 @@
+<% div_for @playlist do %>
+	<%= render :partial => 'track', :collection => @tracks %>	
+<% end %>
+<%= sortable_element "playlist_#{@playlist.id.to_s}", :url => {:action => 'sort_tracks'}, :handle => 'move', :only => 'track', :tag=>'div'%>

@@ -1,0 +1,21 @@
+<h1>New listen</h1>
+
+<%= error_messages_for :listen %>
+
+<% form_for(@listen) do |f| %>
+  <p>
+    <b>Asset</b><br />
+    <%= f.text_field :asset_id %>
+  </p>
+
+  <p>
+    <b>User</b><br />
+    <%= f.text_field :user_id %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', listens_path %>

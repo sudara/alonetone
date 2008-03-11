@@ -1,0 +1,1 @@
+ActiveRecord::Base.send(:extend, Kolossus::Kropper::ActMethods)

@@ -1,0 +1,10 @@
+	<div id="revision">Latest Update: 
+	  <%= link_to "#{truncate(@latest_update.title, 50)}", updates_path, :id=>'updates_link' %></div>
+
+	<div id="bug-report">Report sumptin <%= link_to "creative", "#", :id => 'creative', :class => 'feedback' %>, <%= link_to "nasty", "#", :id => 'nasty',:class => 'feedback'  %>, <%= link_to "nice", "#", :id=>'nice',:class => 'feedback'  %> or <%= link_to "see what is being said", user_reports_path%></div>
+
+	<div id="bug-form" style="display:none;">
+		<div id="form-wrapper">
+			<%= render :partial => 'user_reports/form' %>
+		</div>
+	</div>

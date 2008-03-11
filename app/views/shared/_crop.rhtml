@@ -1,0 +1,70 @@
+<% content_for :head do -%>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'dom-drag', 'kropper' %>
+  <%= stylesheet_link_tag 'kropper' %>
+
+  <!-- alternate css for IE6 to get around its goddamned lack of support for png transparency. -->
+  <!--[if IE 6]>
+  	<style type="text/css">
+  		#crop_canvas{
+  			background: url(/images/kropper/crop_stencil.png);
+  		}
+  		#crop_overlay{
+  			background: url(/images/kropper/crop_stencil.gif);
+  		}
+  		#zoom_slider_handle{
+  			background: url(/images/kropper/slider.gif);
+  		}
+  	</style>
+  <![endif]-->
+<% end -%>
+
+<!-- This sets up the cropping UI when the document loads (@onload is referenced in the layout file).
+The param passed is the max zoom level for the cropping UI. -->
+<% @onload = 'setup_image_cropper(6)' -%>
+
+<h1>Crop Mugshot</h1>
+
+<div>
+	<% form_tag :action => 'crop' do %>
+		<div id="crop_form_fields">
+			<%= hidden_field_tag "crop_left", "0" %></p>
+			<%= hidden_field_tag "crop_top", "0" %></p>
+			<%= hidden_field_tag "crop_width", "1" %></p>
+			<%= hidden_field_tag "crop_height", "1" %></p>
+			<%= hidden_field_tag "stencil_width", "1" %></p>
+			<%= hidden_field_tag "stencil_height", "1" %></p>
+			<%= hidden_field_tag "resize_to_stencil", "false" %></p>
+			<%= hidden_field_tag "crop_cancel", "false" %></p>
+		</div>
+
+		<!-- The dimensions and appearance of these elements are all defined in kropper.css -->
+		<div id="image_cropper">
+		    <div id="crop_header">Crop your image</div>
+		    <div id="crop_canvas">
+		        <div id="crop_loading_overlay">
+					<h2>loading...</h2>
+					<p>(If this message doesn't disappear automatically, please make sure your browser has Javascript turned on.)</p>
+				</div>
+		        <div id="crop_overlay"></div>
+		        <div id="crop_stencil"></div>
+		        <div id="image_dragger"></div>
+				<%= image_tag(@mugshot.public_filename, :id => "uncropped_image" ) %>
+		    </div>
+		    <div id="crop_footer">
+		    	<div id="zoom_slider">
+		        	<div id="zoom_slider_handle"></div>
+		    	</div>
+				<div id="crop_buttons">
+					<%= submit_tag "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crop Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", :id => "crop_submit_btn" %>
+					<input type="button" value="Cancel" id="crop_cancel_btn" onclick="this.form.crop_cancel.value='true';this.form.submit();" />
+					<input type="button" value="&nbsp;Reset&nbsp;" id="crop_reset_btn" />
+				</div>
+			</div>
+		    <div id="crop_subfooter">
+		        	<a href="http://kropper.captchr.com">kropper v1.0: an open-source image cropper for Rails apps</a>
+			</div>
+		</div>
+
+	<% end -%>
+</div>
