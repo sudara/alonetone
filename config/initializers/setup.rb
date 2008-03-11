@@ -1,7 +1,7 @@
 
 # you are working with git
 SVN_COMMAND = 'svn info'
-BRIGHTNESS = '1000'
+BRIGHTNESS = ''
 LASTCHANGED = Date.today
 
 # MAKE FACEBOOKER HAPPY

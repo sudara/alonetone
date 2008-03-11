@@ -1,5 +1,5 @@
 <% div_for update do %>
-  <h2>revision <%= update.revision %>: <%= update.title%></h2>
+  <h2><%= "revision #{update.revision}:" if update.revision %> <%= update.title%></h2>
   <h3><%= update.created_at.to_s(:long)%> <%= link_to 'edit', edit_update_path(update) if admin? %></h3>
   <div class="text"><%= update.print %></div>
 
