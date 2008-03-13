@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = @user.name + "'s music, albums, and playlists on alonetone"
+        @page_title = @user.name + " on alonetone - latest music & playlists"
         @tab = 'your_stuff' if current_user == @user
         @assets = @user.assets.paginate(:all, :per_page => 5, :page=>params[:page])
         @playlists = @user.playlists.find(:all,:conditions => [ "tracks_count > 0"])

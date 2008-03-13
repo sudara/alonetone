@@ -52,7 +52,7 @@ module ApplicationHelper
   end
 
   def link_to_play(asset, referer=nil)
-    link_to truncate(h(asset.name),25), formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :referer => referer
+    link_to truncate(h(asset.name),35), formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :referer => referer
   end
   
   def user_bar_for(user)

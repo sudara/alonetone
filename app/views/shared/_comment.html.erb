@@ -10,9 +10,8 @@
 	</div>
 	
 	<p class="comment_date">
-	  
 		<%= time_ago_in_words(comment.created_at)%> ago<br/>
-		said about the track <span class="comment_about"><%=h comment.commentable.name %></span><br/>
+		said about the track <span class="comment_about"><%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></span><br/>
 	</p>
 	
 	<p class="comment_body">

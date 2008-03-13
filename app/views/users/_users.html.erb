@@ -10,20 +10,7 @@
 
 <%= will_paginate @users %>
 
-	<% @users.each do |user|-%>  
-		<% div_for(user, :class => 'user-index') do %>
-			<%= link_to(image_tag(user.avatar(:large)), user_home_path(user)) %><br/>
-			
-			<%= link_to h(user.name), user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %>
-			<span class="details" style="display:none;">
-	   		<%= link_to(pluralize(user.assets_count, 'track'), user_tracks_path(user)) if user.assets_count > 0 %><br/>
-	   		<%= link_to(pluralize(user.playlists_count, 'playlist'), user_playlists_path(user)) if user.playlists_count > 0 %>
-					<% if admin? %>
-						<%= link_to 'delete', user_path(user), :method => :delete, :confirm => "This will delete this user entirely, including all #{user.assets_count} tracks and #{user.playlists_count} playlists" %>
-				<% end %>
-			</span>
+  <%= render :partial => 'shared/user', :collection => @users %>
 
-		<% end %>
-	<% end %>
 <div style="float:none;clear:both;"> </div>
 </div>

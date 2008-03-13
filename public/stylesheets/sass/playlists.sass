@@ -198,8 +198,9 @@
       :overflow hidden
       :height 18px
     a
-      :color = !grey
-      :font-size 15px
+      :color = !dark_grey
+      :font-weight bold
+      :font-size 12px
       :padding-left 10px
       :text-decoration none
       :background-color transparent
@@ -236,9 +237,11 @@
       &.button.over
         :background-position -44px
     div.title
-      :width 220px
+      :width 250px
       :overflow hidden
       :height 25px
+      :margin-top 12px
+      :line-height 2.2em
       a:hover
         :color = !orange
     div.time, div.listens
@@ -281,6 +284,13 @@
           :display none
         &:hover
           :background-position -44px
+    div.track-info
+      :width 50px
+      :margin-top 12px
+      a
+        :font-size 10px
+        :color = !grey
+        :text-decoration underline
     .track-right
       :float right
       :margin-top 0
@@ -369,10 +379,12 @@ img.cover_125
   margin-left: 17px
   margin-top: 4px
 
+
+// widths of all playlists and track collections
 #user_latest, #user_tracks, #user_playlists, #edit_playlist, #latest, #popular, #single_track
   :margin-top 30px
   :margin-right 90px
-  :width 450px
+  :width 600px
   .playlist-wrapper
     .stash, .playlist
       div.artist
@@ -380,9 +392,9 @@ img.cover_125
 #edit_playlist
   :width 400px
 #user_listens
-  :width 550px
+  :width 650px
 #user_track_plays
-  :width 750px
+  :width 800px
   .playlist-wrapper
     #track_plays
       div.asset 
@@ -427,14 +439,20 @@ img.cover_125
 
 // display date uploaded instead of # listens on the home page
 div#latest
-  :width 650px
+  :width 700px
   .playlist-wrapper .stash
     div.when, div.artist
       :display block
     div.listens
       :display none
+div#single_track
+  .playlist-wrapper .stash
+    div.track-info
+      :display none
+    div.title 
+      :width 250px
 div#popular
-  :width 550px
+  :width 600px
   .playlist-wrapper .stash
     div.artist 
       :display block
@@ -486,7 +504,7 @@ div#popular
   :height 16px
   :float left
 
-#user_home
+#user_home, #recent_listeners, #track_stats, #single_track
   h2
     :font-size 20px
     :font-weight bold

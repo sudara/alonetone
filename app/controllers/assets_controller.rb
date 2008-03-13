@@ -34,6 +34,7 @@ class AssetsController < ApplicationController
         @assets = [@asset]
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.find_all_by_spam(false)
+        @listeners = @asset.listeners.first(5)
       end
       format.mp3 do
         register_listen
@@ -44,21 +45,24 @@ class AssetsController < ApplicationController
 
   # aka home page
   def latest
-    limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
-    @page_title = "Latest #{limit} uploaded mp3s on alonetone" if params[:latest]
-    @assets = Asset.latest(limit)
-    @popular = Asset.most_popular(limit)
-    @playlists = Playlist.latest(6)
     respond_to do |wants|
-      wants.html
-      wants.rss
+      wants.html do
+        limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
+        @page_title = "Latest #{limit} uploaded mp3s on alonetone" if params[:latest]
+        @assets = Asset.latest(limit)
+        @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
+        @playlists = Playlist.latest(6)
+      end
+      wants.rss do 
+        @assets = Asset.latest(50)
+      end
     end
   end
   
   def top
     top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 20
     @page_title = "Top #{top} tracks on alonetone"
-    @popular = Asset.most_popular(top)
+    @popular = Asset.find(:all, :limit => top, :order => 'hotness DESC')
     respond_to do |wants|
       wants.html { render :action => 'latest'}
       wants.rss
@@ -126,7 +130,7 @@ class AssetsController < ApplicationController
     respond_to do |format|
       if @asset.update_attributes(params[:asset])
         flash[:ok] = 'Track updated!'
-        format.html { redirect_to edit_user_track_url(current_user, @asset) }
+        format.html { redirect_to user_track_url(current_user, @asset) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,12 +1,13 @@
 <% render(:layout => 'users/user') do %>
   
   <div id="single_track">
+    <h2><%= @asset.name %></h2>
     <%= render :partial => 'assets/assets'%>
   </div>
   
   <div id="track details">
     <% if @asset.description && !@asset.description.empty? %>
-      <h3>About this track</h3>
+      <h2 class="big">About this track</h2>
       <p><%= @asset.description %></p>
     <% end %>
     <% if @asset.youtube_embed && !@asset.youtube_embed.empty? %>
@@ -16,9 +17,10 @@
   
    <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
   
-   
-   <%= @asset.name %> was uploaded by <%=@user.name %> on <%= @asset.created_at.to_date.to_s(:long) %>
-
+   <%= render :partial => 'users'%>
+  
+   <div class="clear"> </div>
+   <%= render :partial => 'stats'%>
   
 <% end %>
 

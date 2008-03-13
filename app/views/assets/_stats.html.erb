@@ -1,0 +1,7 @@
+<div id="track_stats">
+
+  <h2>Stats</h2>
+  <h4><%= @asset.name%> by <%= @asset.user.name %> was...</h4>
+  ...uploaded <%= time_ago_in_words(@asset.created_at) %> ago on <%= @asset.created_at.to_date.to_s(:long) %><br/>
+  ...listened to <%= @asset.listens_count %> times
+</div>

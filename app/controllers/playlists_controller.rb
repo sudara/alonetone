@@ -44,7 +44,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1/edit
   def edit
     # allow them to add their own assets
-    @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at', :page => params[:page])
+    @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at DESC', :page => params[:page])
     @listens = @user.listens.find(:all, :limit => 10, :order => 'listens.created_at DESC')
     respond_to do |format|
       format.html

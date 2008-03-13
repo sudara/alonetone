@@ -34,10 +34,10 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
       xml.priority 0.6
     end if user.playlists_count > 0
     
-    if user.assets.size > 0 
+    if user.assets_count > 0 
       user.assets.each do |asset|
         xml.url do
-          xml.loc user_track_url(user, asset)
+          xml.loc user_track_url(user, asset.permalink)
           xml.lastmod w3c_date(asset.created_at)
           xml.changefreq 'weekly'
           xml.priority 0.5

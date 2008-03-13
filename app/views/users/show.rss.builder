@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"=>"2.0" do
   xml.channel do 
-    xml.title  "Latest music from #{@user.name} on alonetone.com"
+    xml.title  "#{@user.name} on alonetone.com"
     
     xml.link  user_home_url(@user)
     xml.description  h(@user.bio)
@@ -17,10 +17,9 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
     
     
     xml.itunes :author, 	@user.name
-		xml.itunes :subtitle, "Latest music from #{@user.name} on alonetone.com"
+		xml.itunes :subtitle, "#{@user.name} on alonetone.com"
 		xml.itunes :summary, 	@user.bio || "Latest music from #{@user.name} on alonetone.com"
 		xml.itunes :keywords, 'independant free alonetone musician artist latest upcoming'
-		xml.itunes :explicit, 'clean' 
 		xml.itunes :image, :href=>@user.avatar(:album)
 		
 		xml.itunes :owner do

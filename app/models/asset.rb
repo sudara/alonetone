@@ -37,7 +37,7 @@ class Asset < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   
   has_many :listens, :dependent => :destroy
-  has_many :listeners, :through => :listens
+  has_many :listeners, :through => :listens, :order => 'listens.created_at DESC', :uniq => true, :limit => 20
   
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at DESC'
   
@@ -165,6 +165,44 @@ class Asset < ActiveRecord::Base
       minutes + ':' + seconds
     else
       "?:??"
+    end
+  end
+  
+  def self.update_hotness
+    Asset.find(:all).each do |a|
+      a.update_attribute(:hotness, a.calculate_hotness)
+    end 
+  end
+  
+  def calculate_hotness
+    # hotness = listens not originating from own user within last 7 days * num of alonetoners who listened to it / age
+    ratio = (recent_listen_count.to_f * unique_listener_count.to_f) * age_ratio * listens_per_day * (comment.size + 1)
+  end
+  
+  def recent_listen_count(from = 7.days.ago, to = 1.days.ago)
+   listens.count(:all, :conditions => ['listens.created_at > ? AND listens.created_at < ? AND listens.listener_id != ?',from, to, self.user_id]) 
+  end
+  
+  def listens_per_day
+    listens.count(:all, :conditions => ['listens.listener_id != ?', self.user_id]).to_f / days_old
+  end
+  
+  def unique_listener_count
+    listens.count(:listener_id, :distinct => true)
+  end
+  
+  def days_old
+    ((Time.now - created_at) / 60 / 60 / 24 ).ceil
+  end
+  
+  def age_ratio
+    case days_old
+      when 0..3 then 6.0
+      when 4..7 then 4.0
+      when 8..15 then 2.0
+      when 16..30 then 1.0
+      when 31..90 then 0.8
+      else 0.3
     end
   end
   

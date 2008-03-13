@@ -12,6 +12,7 @@
 	<div class="listens"><%= asset.listens_count %></div>
 	<div class="when"><%= time_ago_in_words asset.created_at %> ago</div>
 	<div class="download-button button"><%= link_to '<i>download</i>', formatted_user_track_path(asset.user, asset.permalink, :mp3, :referer => 'download') %></div>
+	<div class="track-info"><%= link_to 'details', user_track_path(asset.user, asset.permalink) %></div>
 	<div class="track-right">
 		<% if authorized_for(asset) %>
 			<div class="delete-button button <%= 'admin' if admin? %>" style="display:none;">
