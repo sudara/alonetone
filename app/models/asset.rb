@@ -176,10 +176,10 @@ class Asset < ActiveRecord::Base
   
   def calculate_hotness
     # hotness = listens not originating from own user within last 7 days * num of alonetoners who listened to it / age
-    ratio = (recent_listen_count.to_f * unique_listener_count.to_f) * age_ratio * listens_per_day * (comment.size + 1)
+    ratio = ((recent_listen_count.to_f) * (unique_listener_count / 3) * age_ratio )
   end
   
-  def recent_listen_count(from = 7.days.ago, to = 1.days.ago)
+  def recent_listen_count(from = 7.days.ago, to = 1.hour.ago)
    listens.count(:all, :conditions => ['listens.created_at > ? AND listens.created_at < ? AND listens.listener_id != ?',from, to, self.user_id]) 
   end
   
@@ -197,12 +197,12 @@ class Asset < ActiveRecord::Base
   
   def age_ratio
     case days_old
-      when 0..3 then 6.0
-      when 4..7 then 4.0
-      when 8..15 then 2.0
-      when 16..30 then 1.0
-      when 31..90 then 0.8
-      else 0.3
+      when 0..3 then 12.0
+      when 4..7 then 8.0
+      when 8..15 then 4.0
+      when 16..30 then 2.5
+      when 31..90 then 1.0
+      else 0.5
     end
   end
   
