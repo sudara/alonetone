@@ -28,7 +28,6 @@ class AssetsController < ApplicationController
   # GET /assets/1.xml
   def show
     respond_to do |format|
-      format.rss 
       format.html do
         @page_title = "#{@asset.title} by #{@user.name} on alonetone"
         @assets = [@asset]

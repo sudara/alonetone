@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         @user_count = User.count
-        @active     = User.count(:all, :conditions => "assets_count > 0")
+        @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
       end
       format.xml do
         @users = User.search(params[:q], :limit => 25)

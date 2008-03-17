@@ -14,9 +14,9 @@ module AuthenticatedSystem
     # This is now also used to show which users are online... not at accurate as the
     # session based approach, but less code and less overhead.
     def update_last_seen_at
-      return unless logged_in? || session[:sudo]
-      User.update_all ['last_seen_at = ? AND ip = ?', Time.now.utc, request.env['REMOTE_HOST']], ['id = ?', current_user.id] 
-      current_user.last_seen_at = Time.now.utc
+      return unless logged_in? 
+      current_user.update_attribute(:last_seen_at,Time.now.utc)
+      current_user.update_attribute(:ip, request.remote_ip)
     end
     
     def login_required

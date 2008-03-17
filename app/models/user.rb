@@ -26,6 +26,9 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
+  # has a bunch of prefs
+  serialize :settings
+  
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
   has_many   :playlists,     :dependent => :destroy, :order => 'playlists.created_at DESC'
@@ -47,8 +50,9 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
-  # These attributes can be changed by a user
-  attr_accessible :login, :email, :password, :password_confirmation, :website, :bio, :display_name, :itunes
+  # These attributes can be changed via mass assignment 
+  attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
+                  :bio, :display_name, :itunes, :settings, :city, :state
   
   # Validations
   validates_presence_of     :email
@@ -140,11 +144,11 @@ class User < ActiveRecord::Base
   
   def self.paginate_by_params(params)
     if params[:all]
-      self.paginate_all_by_activation_code(nil, :per_page => 24, :order => "created_at DESC", :page => params[:page])
+      self.paginate_all_by_activation_code(nil, :per_page => 24, :include => :pic, :order => "users.created_at DESC", :page => params[:page])
     elsif params[:playlists]
-      self.paginate(:all, :conditions => 'users.playlists_count > 0', :per_page => 24, :order => "users.playlists_count DESC", :page => params[:page]) 
+      self.paginate(:all, :conditions => 'users.playlists_count > 0', :per_page => 24, :include => :pic, :order => "users.playlists_count DESC", :page => params[:page]) 
     else
-      self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 24, :order => "users.assets_count DESC", :page => params[:page])
+      self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 24, :include => :pic, :order => "users.assets_count DESC", :page => params[:page])
     end
   end
   
@@ -189,7 +193,7 @@ class User < ActiveRecord::Base
   
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] << :email << :token << :token_expires_at << :crypted_password << :identity_url << :fb_user_id << :activation_code << :admin
+    options[:except] << :email << :token << :token_expires_at << :crypted_password << :identity_url << :fb_user_id << :activation_code << :admin << :salt
     super
   end
   
