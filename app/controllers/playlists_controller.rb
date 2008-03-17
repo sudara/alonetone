@@ -150,12 +150,12 @@ class PlaylistsController < ApplicationController
   end
   
   def find_playlists
-    @playlist = @user.playlists.find_by_permalink(params[:permalink] || params[:id], :include =>[:tracks => :asset])
-    @playlist = @user.playlists.find(params[:id], :include =>[:tracks => :asset]) if !@playlist && params[:id] 
+    @playlist = @user.playlists.find_by_permalink(params[:permalink] || params[:id])
+    @playlist = @user.playlists.find(params[:id]) if !@playlist && params[:id] 
   end
   
   def find_tracks
-    @tracks = @playlist.tracks.find(:all, :order => :position, :include => :asset)
+    @tracks = @playlist.tracks.find(:all, :order => :position)
   end
   
 end

@@ -24,7 +24,7 @@ describe Playlist do
   end
   
   it "should update a-ok" do
-    @playlist = playlists(:mix)
+    @playlist = playlists(:mix) 
     @playlist.save.should == true
   end
   
@@ -32,6 +32,11 @@ describe Playlist do
     @playlist = playlists(:mix)
     @playlist.save
     @playlist.is_mix?.should == true
+  end
+
+  it "should deliver its tracks in order of the position" do 
+    playlists(:owp).tracks.first.position.should == 1
+    playlists(:owp).tracks[1].position.should == 2
   end
   
 end
