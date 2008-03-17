@@ -155,7 +155,7 @@ class PlaylistsController < ApplicationController
   end
   
   def find_tracks
-    @tracks = @playlist.tracks.find(:all, :order => :position)
+    @tracks = @playlist.tracks
   end
   
 end
