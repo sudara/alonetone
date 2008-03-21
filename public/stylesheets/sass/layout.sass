@@ -7,40 +7,30 @@ html,body
   :top 0
   :left 0
   :width 100%
-  :height 85px
-  :background #3f3f3f url(../images/header-background.jpg) repeat-x top left
+  :height 110px
   :z-index 1000
 
 #logo  
   :position absolute
-  :right 0px
-  :top 10px
-  :padding-right 30px
-  :width 96px
-  :height 64px
+  :right 25px
+  :top 15px
+  :width 120px
+  :height 81px
   :z-index 5
-  :background transparent url(../images/alonetone.png) no-repeat left center
-  
-#player
-  :position relative
-  :float left
-  :width 327px
-  :margin 25px 30px
-  :height 35px
-  
+  a
+    :display block
+    :width 100%
+    :height 100%
+    :background-color transparent
+    :background transparent url(../images/alonetone_big.png) no-repeat left center
+
 #nav
   :position absolute
-  :top 25px
+  :top 0px
   :left 390px
   :height 34px
   :width 391px
   
-#user-bar
-  :position fixed
-  :top 95px
-  :right 30px
-  :text-align right
-  :z-index 100
         
 #content
   :position relative
@@ -49,27 +39,30 @@ html,body
   :background-color = !background
   :margin-bottom 150px
 #main
-  :margin-left 55px
-  #user_header
-    :margin-bottom 20px
-  div.help 
+  :position relative
+  :width 100px
+  :margin-left 50px
+  :width 890px
+  #left
     :position absolute
-    :left 600px
-    :top  30px
-    :border = 1px dashed !orange
-    :background-color #FFF
-    :padding 10px
-    :width 200px
+    :left 0
+    :top 0
+    :width 420px
+    :margin-right 50px
+  #right
+    :position absolute
+    :left 520px
+    :top 0
+    :width 420px
+  
 #footer
   :position fixed
   :bottom 0
   :left 0
-  :height 40px
+  :height 50px
   :width 100%
   :z-index 1000
-  :background-color #161616
-  :border-top 3px solid #000
-  :opacity .98
+  :background-color #c8d0bb
   &.reporting
     :height 300px
   form

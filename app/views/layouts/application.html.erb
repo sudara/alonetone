@@ -4,65 +4,53 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title %> </title>
-    
     <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','share','alonetone', :cache => 'all'%>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
-
-    <%= javascript_include_tag 'prototype', 'effects', 'slider', 'dragdrop', 'controls','lowpro','soundmanager', 'application', :cache => true %>
-		<!-- <script type="text/javascript" src="http://static.robotreplay.com/nitobi.replay.js"></script> -->
+    <%= javascript_include_tag 'jquery','jquery-ui','jquery-fx','jrails', :cache => true %>
   </head>
   <body>
   
-      <!-- div.header -->
       <div id="header">
-        <div id="logo"><a href="/"><i>alonetone home</i></a></div>
-				<div id="tagline"></div>
-				<div id="player"><%= render :partial => 'shared/player', :current_user => current_user %></div>
+        <a href="/" alt="home"></a>
 				<%= render :partial=> 'shared/nav' %>
-      </div>
-      <!-- /div.header -->
+        <%= render :partial=> 'shared/search' %>
+      </div> <!-- end of header -->
 			<div id="user-bar"><%= render :partial => 'shared/user_bar', :current_user => current_user %></div>
     
-		<%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
+		  <%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
+		  <%= render :partial => 'shared/notice' if @notice %>
 		
     <div id="content">    
+      <div id="main">
+		      <%= yield %>
       
-
 				<div id="left">
 					<%= yield :left %>
 				</div>
-				
-		    <div id="main">
-		      <%= render :partial => 'shared/ie6_warning' if @ie6 %>
-		      <%= render :partial => 'shared/javascript_warning' if @ie6%>
-		      <%= yield %>
-		    </div>
 		
 				<div id="right">
 					<%= yield :right %>
-				</div>
+				</div>	
+			</div> <!-- end main -->
 
-	   </div><!-- div.content -->
+
+	   </div><!-- end content -->
       
 		<div id="footer">
-			<div id="share">
-				<%= yield :share %>
-				<%= yield :comment %>
-			</div>
 			<%= render :partial => 'shared/footer' %>
 		</div>
 	
-	<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-	var pageTracker = _gat._getTracker("UA-241978-4");
-	pageTracker._initData();
-	pageTracker._trackPageview();
-	</script>
+  	<script type="text/javascript">
+  	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  	</script>
+  	<script type="text/javascript">
+  	var pageTracker = _gat._getTracker("UA-241978-4");
+  	pageTracker._initData();
+  	pageTracker._trackPageview();
+  	</script>
   </body>
 </html>
