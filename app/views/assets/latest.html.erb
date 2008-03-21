@@ -1,32 +1,25 @@
-<%= render :partial => 'shared/self_confidence'%>
 
-<% unless params[:top] || params[:latest] %>
 	<div id="latest_playlists">
     <h2>Latest mixes and albums on alonetone</h2>
     <%= render :partial => 'assets/playlist', :collection => @playlists %>
     <div class="clear"></div>
   </div>
-<% end %>
 
-<% unless params[:top] %>
+<% content_for :left do%>
 <div id="latest">
-<% render :layout => 'assets/asset_wrapper' do%>
 	<div class="stash">
 		<h2>Latest uploaded mp3s on alonetone</h2><%= link_to 'show me more', latest_path(30), :class=> 'view_all' unless params[:latest] %>
 	  <%= render :partial => 'assets/asset', :collection => @assets %>
 	</div>
-<% end %>
 </div>
 <% end %>
 
-<% unless params[:latest] %>
+<% content_for :right do %>
 <div id="popular">
-<% render :layout => 'assets/asset_wrapper' do %>
 	<div class="stash">
 		<h2>Recent tracks kicking ass on alonetone</h2><%= link_to 'show me more', top_path(30), :class=> 'view_all' unless params[:top]  %>
 	  <% @referer = 'home' %>
 	  <%= render :partial => 'assets/asset', :collection => @popular %>
 	</div>
-<% end %>
 </div>
 <% end %>

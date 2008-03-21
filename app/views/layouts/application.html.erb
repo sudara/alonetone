@@ -14,10 +14,11 @@
   <body>
   
       <div id="header">
-        <a href="/" alt="home"></a>
+        <a href="/" alt="home" id="logo"></a>
 				<%= render :partial=> 'shared/nav' %>
         <%= render :partial=> 'shared/search' %>
       </div> <!-- end of header -->
+      
 			<div id="user-bar"><%= render :partial => 'shared/user_bar', :current_user => current_user %></div>
     
 		  <%= render :partial => 'shared/flash', :locals => {:flash => flash}%>

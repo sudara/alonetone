@@ -1,7 +1,7 @@
 // import variables
 @import variables
 html,body
-  :background-color = !background
+  :background-color = !body_background
 #header
   :position fixed
   :top 0
@@ -10,33 +10,25 @@ html,body
   :height 110px
   :z-index 1000
 
-#logo  
+a#logo  
   :position absolute
   :right 25px
   :top 15px
   :width 120px
   :height 81px
   :z-index 5
-  a
-    :display block
-    :width 100%
-    :height 100%
-    :background-color transparent
-    :background transparent url(../images/alonetone_big.png) no-repeat left center
+  :background transparent url(../images/alonetone_big.png) no-repeat left center
 
 #nav
   :position absolute
   :top 0px
-  :left 390px
-  :height 34px
-  :width 391px
-  
+  :left 50px
+  :height 80px  
         
 #content
   :position relative
   :margin-top 121px
   :padding-left 60px
-  :background-color = !background
   :margin-bottom 150px
 #main
   :position relative

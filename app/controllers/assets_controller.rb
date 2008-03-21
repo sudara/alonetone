@@ -51,6 +51,7 @@ class AssetsController < ApplicationController
         @assets = Asset.latest(limit)
         @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
         @playlists = Playlist.latest(6)
+        @tab = 'home'
       end
       wants.rss do 
         @assets = Asset.latest(50)

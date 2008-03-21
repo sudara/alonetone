@@ -56,7 +56,7 @@ module ApplicationHelper
   end
   
   def user_bar_for(user)
-    if user then return "#{link_to_unless_current "Your Profile", profile_path(user)} #{link_to_unless_current "Logout", logout_path}<br /> Hi, #{user.login}!<br/>" end
+    if user then return "#{link_to_unless_current "Logout", logout_path}<br /> Hi, #{user.login}!<br/>" end
     (link_to "Sign up for free account", signup_path) << " or " << (link_to "Login", login_path)
   end
   

@@ -1,22 +1,25 @@
 <ul id='nav'>
+  <li id='home'>
+		<%= link_to 'Latest', root_path, :class => "tab#{' active' if @tab == 'home' }" %>
+	</li>
 	<li id='browse'>
-		<%= link_to '<i>Browse All Artists</i>', users_path, :class => "tab#{' active' if @tab == 'browse' }" %>
+		<%= link_to 'Browse All Artists', users_path, :class => "tab#{' active' if @tab == 'browse' }" %>
 	</li>
 
 	<% if logged_in? %>
 	<li id='upload'>
-		<%= link_to '<i>Upload</i>', new_user_track_path(current_user), :class => "tab#{' active' if @tab == 'upload' }" %>
+		<%= link_to 'Upload', new_user_track_path(current_user), :class => "tab#{' active' if @tab == 'upload' }" %>
 	</li>
 	<li id='your_stuff'>
-		<%= link_to '<i>Your Stuff</i>', user_home_path(current_user), :class => "tab#{' active' if @tab == 'your_stuff' }" %>
+		<%= link_to 'Your Stuff', user_home_path(current_user), :class => "tab#{' active' if @tab == 'your_stuff' }" %>
 	</li>	
 	
 	<% else %>
 	<li id='upload'>
-		<%= link_to '<i>Upload</i>', signup_path, :class => "tab#{' active' if @tab == 'upload' }" %>
+		<%= link_to 'Upload', signup_path, :class => "tab#{' active' if @tab == 'upload' }" %>
 	</li>
 	<li id='your_stuff'>
-		<%= link_to '<i>Your Stuff</i>', signup_path, :class => "tab#{' active' if @tab == 'your_stuff' }" %>
+		<%= link_to 'Your Stuff', signup_path, :class => "tab#{' active' if @tab == 'your_stuff' }" %>
 	</li>	
 	
 	<% end %>

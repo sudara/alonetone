@@ -1,9 +1,12 @@
+@import variables
 // variables for nav
-
 !active_tab_background = #e1e2e1 
-!normal_tab_background = #313327
+!normal_tab_background = #45473c
 !hover_tab_background = #da6d25
+
 !active_tab_text = #37392b
+!normal_tab_text = #c1cab3
+!hover_tab_text = #f6fceb
 
 ul#nav
   :background none
@@ -12,16 +15,27 @@ ul#nav
     :height 75px
     :line-height 0
     :padding 0
-    :margin 0
+    :margin-right 20px
     :background none
     a
       :float left
       :display block
       :margin 0 
       :padding 60px 40px 10px 20px
-      :font
       :background transparent none no-repeat top left
-
+      :background-color = !normal_tab_background 
+      :color = !normal_tab_text
+      :font-size = !18px
+      &:hover 
+        :background-color = !hover_tab_background 
+        :color = !hover_tab_text
+        :text-decoration none
+      &.active
+        :background-color = !active_tab_background
+        :color = !active_tab_text
+      
+  li#home
+    :margin-right 80px
   li#browse 
     a
 
