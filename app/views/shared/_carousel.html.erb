@@ -1,0 +1,9 @@
+<div id="playlists_carousel">
+  <%= link_to image_tag('buttons/prev.png'), '#', :class => 'prev' %>
+  <div class="playlists_carousel">  
+    <ul>
+      <%= render :partial => 'shared/playlist', :collection => @playlists %>
+    <ul>
+  </div>
+  <%= link_to image_tag('buttons/next.png'), '#', :class => 'next' %>
+</div>

@@ -1,0 +1,74 @@
+@import variables
+// small playlists
+
+// carousel
+a.next, a.prev
+  :display block
+  :width 42px
+  :height 42px
+  :background-color transparent
+  &:hover img
+    :background-color = !body_link_hover
+
+#playlists_carousel
+  :position relative
+  .prev
+    :position absolute
+    :left 0
+    :top 45px
+  .next
+    :position absolute
+    :right 0
+    :top 45px
+.playlists_carousel
+  :height 175px
+  :overflow hidden
+  :margin 0 72px
+  
+  ul
+    li.small_playlists
+      :position relative
+      :float left
+      :width 146px
+      :height 150px
+      :margin-right 48px
+      a.small_playlist_title
+        :display block
+        :line-height 2em
+        :margin-left 1px
+       
+a.jewel_case_125
+  :position absolute
+  :left 0 
+  :top 0
+  :background-color transparent
+  
+img.cover_125
+  margin-left: 17px
+  margin-top: 4px
+  
+  
+a.jewel_case_200
+  :position absolute
+  :width 200
+  :height 200
+  :left 15px
+  :top 10px
+  :display block
+img.cover_200
+  margin-left: 23px
+  margin-top: 7px
+  
+  
+// assets & tracks (same diff ;)
+
+.asset, .track
+  :width 100%
+  :height 50px
+  :overflow hidden
+  :background-color = !box_background
+  :margin-bottom 1px
+  :color = !text_color
+  a
+    :color = !text_color
+    :background-color transparent

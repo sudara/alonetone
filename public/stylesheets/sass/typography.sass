@@ -3,8 +3,6 @@
 body
   :font-family Helvetica, Arial, Geneva
   :line-height = !16px
-  :font-size = !12px
-
 a
   :color = !text_color
   :line-height = !16px
@@ -13,5 +11,30 @@ a
   :text-decoration none
   &:hover 
     :text-decoration underline
+img a
+  :color transparent
+  &:hover
+    :color none
+    
+#content a
+  :color = !white
+  :font-weight normal
+  &:hover
+    :background-color transparent
+
 h1
-  
+
+h2
+  :color = !white
+  :font-size = !20px
+  :font-weight bold
+  :line-height 2em
+h2.box
+  :display block
+  :color = !text_color
+  :height 42px
+  :line-height 42px
+  :width 100%
+  :text-indent 25px
+  :margin-bottom 3px
+  :background-color = !box_background

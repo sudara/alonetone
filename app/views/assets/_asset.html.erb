@@ -27,10 +27,6 @@
 	
 <% end %>
 
-<% content_for :comment do %>
-  	<%= render :partial => 'assets/comment', :object => asset %>
-<% end %>
+	<%= render :partial => 'assets/comment', :object => asset %>
 
-<% content_for :share do %>
 	<%= render :partial => 'assets/share', :object => asset %>
-<% end %>

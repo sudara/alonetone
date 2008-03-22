@@ -50,7 +50,7 @@ class AssetsController < ApplicationController
         @page_title = "Latest #{limit} uploaded mp3s on alonetone" if params[:latest]
         @assets = Asset.latest(limit)
         @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
-        @playlists = Playlist.latest(6)
+        @playlists = Playlist.latest(12)
         @tab = 'home'
       end
       wants.rss do 
