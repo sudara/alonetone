@@ -1,9 +1,7 @@
 	<div id="user_latest">
-		<% render :layout => 'assets/asset_wrapper' do%>
 		<div id="stash" class="stash">
 			<h2>Latest Music by <%= @user.name %></h2><%= link_to 'view all tracks', user_tracks_path(@user), :class=> 'view_all' %>
 		  <%= render :partial => 'assets/asset', :collection => @assets %>
 		</div>
-		<% end %>
 
 	</div>

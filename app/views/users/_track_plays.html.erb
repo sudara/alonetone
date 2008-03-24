@@ -1,5 +1,4 @@
 	<div id="user_track_plays">
-		<% render :layout => 'assets/asset_wrapper' do%>
 		<div id="track_plays" class="stash">
 			<h2>Latest listens to your music</h2>
 			<h3>
@@ -7,6 +6,4 @@
 		  </h3>
 		  <%= render :partial => 'users/track_play', :collection => @track_plays %>
 		</div>
-		<% end %>
-
 	</div>

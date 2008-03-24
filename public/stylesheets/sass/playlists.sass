@@ -1,4 +1,8 @@
 @import variables
+
+// play buttons
+!play_button = "transparent url(../images/icons/download.png) no-repeat center center"
+
 // small playlists
 
 // carousel
@@ -22,8 +26,9 @@ a.next, a.prev
     :top 45px
 .playlists_carousel
   :height 175px
+  :width 800px
   :overflow hidden
-  :margin 0 72px
+  :margin 0 70px
   
   ul
     li.small_playlists
@@ -31,11 +36,13 @@ a.next, a.prev
       :float left
       :width 146px
       :height 150px
-      :margin-right 48px
+      :margin-right 50px
+      :margin-bottom 100px
       a.small_playlist_title
         :display block
-        :line-height 2em
+        :font-size = !12px
         :margin-left 1px
+        :margin-top 10px
        
 a.jewel_case_125
   :position absolute
@@ -63,12 +70,33 @@ img.cover_200
 // assets & tracks (same diff ;)
 
 .asset, .track
+  :position relative
   :width 100%
   :height 50px
+// overflow guarantees that the elements within this box will float and be cleared
   :overflow hidden
-  :background-color = !box_background
-  :margin-bottom 1px
+  :margin-bottom 3px
   :color = !text_color
   a
     :color = !text_color
     :background-color transparent
+  div
+    :float left
+  div.button
+    :background-color = !box_background
+    :width 50px
+    :height 50px
+    &.play-button 
+      :margin-right 1px
+      :background = !play_button
+    &.download-button
+      :margin-left 1px
+  div.title
+    :background-color = !box_background
+    :height 50px
+    :width 300px
+    :padding 12px 0px 0px 18px
+    :overflow hidden
+    :font-size = !18px
+  div.more
+    :float none

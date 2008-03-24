@@ -4,7 +4,6 @@
 	<%= error_messages_for :playlist %>
 	
 	 <div id="edit_playlist">
-		<% render :layout => 'assets/asset_wrapper' do%>
 			<% div_for @playlist do %>
 				<h2>	<%= in_place_editor_field :playlist, 'title' %></h2>
 				<div class="info">
@@ -33,7 +32,6 @@
 			</div>
 
 			<% end %>
-		<% end %>
 
 		
 		
@@ -51,7 +49,6 @@
 
 
 <div id="playlist_sources" class="draggable_wrapper">
-	<% render :layout => 'assets/asset_wrapper' do %>
 	
 	<div class="draggable_tracks">
 		<h2>Available tracks</h2>
@@ -82,7 +79,6 @@
 		
 	</div>
 
-	<% end %>
 </div>
 
 <div class="playlist_help">

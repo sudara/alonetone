@@ -7,7 +7,9 @@ $(function() {
     $(".playlists_carousel").jCarouselLite({
         btnNext: ".next",
         btnPrev: ".prev",
-        visible: 4
+        visible: 4,
+        scroll: 4,
+        circular: false
     });
 });
 

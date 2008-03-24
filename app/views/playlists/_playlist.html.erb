@@ -1,8 +1,6 @@
 <% if playlist.has_tracks? || authorized_for(playlist) %>
 
 
-		<% render :layout => 'assets/asset_wrapper' do%>
-
 		<% div_for playlist, :class => "#{(playlist.has_tracks? ? '' : 'empty')} #{playlist.is_mix? ? 'mix' : 'album'}" do %>
 		
 			<h2><%= playlist.title %></h2>
@@ -42,7 +40,6 @@ This playlist is currently empty and hidden from the public<br/>
 				<% @playlist = playlist %>
 				<%= render :partial => 'track', :collection => playlist.tracks %>
 			</div>
-		<% end %>
 	<% end %>
   <% content_for :share do %>
   	<%= render :partial => 'playlists/share', :object => playlist %>
