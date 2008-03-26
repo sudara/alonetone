@@ -1,8 +1,8 @@
 // png fix if ie
 $(function(){$(document).pngFix();});
 
-// front page carousel
 
+// front page carousel
 $(function() {
     $(".playlists_carousel").jCarouselLite({
         btnNext: ".next",
@@ -13,3 +13,8 @@ $(function() {
     });
 });
 
+
+// tabs
+$(document).ready(function(){
+  $('.tabs > ul').tabs({ fx: { height: 'toggle'} });
+});

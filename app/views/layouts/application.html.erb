@@ -4,12 +4,12 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title %> </title>
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','share','alonetone', :cache => 'all'%>
+    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','tabs','share','alonetone', :cache => 'all'%>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
-    <%= javascript_include_tag 'jquery','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jrails', 'jquery-png','application', :cache => true %>
+    <%= javascript_include_tag 'soundmanager','jquery','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-tabs', 'jquery-png','application', :cache => true %>
   </head>
   <body>
   
@@ -24,7 +24,7 @@
 		  <%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
 		  <%= render :partial => 'shared/notice' if @notice %>
 		
-    <div id="content">    
+    <div id="content" class="content">    
       <div id="main">
 		      <%= yield %>
       </div>
@@ -40,7 +40,7 @@
 
 
 	   </div><!-- end content -->
-      
+    <div id="footer_spacer"> </div>
 		<div id="footer">
 			<%= render :partial => 'shared/footer' %>
 		</div>

@@ -1,7 +1,5 @@
 @import variables
 
-// play buttons
-!play_button = "transparent url(../images/icons/download.png) no-repeat center center"
 
 // small playlists
 
@@ -51,8 +49,8 @@ a.jewel_case_125
   :background-color transparent
   
 img.cover_125
-  margin-left: 17px
-  margin-top: 4px
+  :margin-left 17px
+  :margin-top 4px
   
   
 a.jewel_case_200
@@ -63,8 +61,8 @@ a.jewel_case_200
   :top 10px
   :display block
 img.cover_200
-  margin-left: 23px
-  margin-top: 7px
+  :margin-left 23px
+  :margin-top 7px
   
   
 // assets & tracks (same diff ;)
@@ -75,7 +73,7 @@ img.cover_200
   :height 50px
 // overflow guarantees that the elements within this box will float and be cleared
   :overflow hidden
-  :margin-bottom 3px
+  :margin-top 3px
   :color = !text_color
   a
     :color = !text_color
@@ -86,17 +84,34 @@ img.cover_200
     :background-color = !box_background
     :width 50px
     :height 50px
+    a
+      :width 50px
+      :height 50px
+      :display block
+      &:hover
+        :background-position -51px 0px
+      &.playing
+        :background-position -100px 0px
     &.play-button 
       :margin-right 1px
-      :background = !play_button
+      a
+        :background-image url(../images/icons/play.png) 
     &.download-button
       :margin-left 1px
+      a
+        :background-image url(../images/icons/download.png)
   div.title
     :background-color = !box_background
     :height 50px
     :width 300px
     :padding 12px 0px 0px 18px
     :overflow hidden
-    :font-size = !18px
-  div.more
-    :float none
+    a
+      :font-size = !18px
+      :line-height = !18px
+    span.by
+      :font-size = !14px
+    a.artist
+      :font-size= !14px
+
+    

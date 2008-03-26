@@ -1,30 +1,43 @@
-<% content_tag_for :div, asset do %>
-	<div class="play-button button"> </div>
+<% content_tag_for :div, asset, :class => cycle('odd', 'even') do %>
+	<div class="play-button button"><%= link_to_play asset, @referer %></div>
 	<div class="title">
-	  <%= link_to_play asset, @referer %><br>
-	  by <%= link_to h(asset.user.name), user_home_path(asset.user) %>
+	  <%= link_to track_name_for(asset), user_track_path(asset.user, asset.permalink) %><br>
+	  <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %>
+	  <span class="when" style="display:none;"><%= time_ago_in_words asset.created_at %> ago</span>
 	</div>
-	<div class="download-button button"><%= link_to ' ', formatted_user_track_path(asset.user, asset.permalink, :mp3, :referer => 'download'), :class=> 'download button' %></div>
+	
+	<div class="download-button button">
+	  <%= link_to ' ', formatted_user_track_path(asset.user, asset.permalink, :mp3, :referer => 'download'), :class=> 'download button' %>
+	</div>
+	
+<% end %>
+
+<div class="more tabs" id="tabs_for_track_<%= asset.id %>">
+    
+    <ul>
+      <li><%= link_to 'comment', "#comment_track_#{asset.id}" %> </li>
+      <li><%= link_to 'about', "#details_track_#{asset.id}" %> </li>
+      <li><%= link_to 'share', "#share_track_#{asset.id}" %> </li>
+    </ul>
   
-  <div class="more" style="display:none">
-	  <div class="time"><%= asset.length %> </div>
-	  <div class="listens"><%= asset.listens_count %></div>
-	  <div class="when"><%= time_ago_in_words asset.created_at %> ago</div>
-	  <div class="track-info"><%= link_to 'details', user_track_path(asset.user, asset.permalink) %></div>
-	  <div class="comment-button button comment <%= 'admin' if admin? %>" style="display:none;">
-	    <%= link_to "<i>comment on #{asset.name}</i>", '#' %>
+  	<div id="details_track_<%= asset.id %>">
+	    <%= asset.description %>
+      <%= link_to 'info', user_track_path(asset.user, asset.permalink) %>
+	    <%= asset.length %> 
+	    <%= asset.listens_count %>
 	  </div>
+	    
+	  <div id="share_track_<%= asset.id %>">
+	    <%= render :partial => 'assets/share', :object => asset %>
+	  </div>
+
+    <div id="comment_track_<%= asset.id %>">
+      <%= render :partial => 'assets/comment', :object => asset %>
+    </div>
 	
   	<% if authorized_for(asset) %>
     	<div class="edit" style='display:none;'><%= link_to "edit", edit_user_track_path(asset.user, asset) %></div>
     <% else %>
   	<% end %>
 	
-  	<div class="share" style='display:none;'><%= link_to "share!", "#" %></div>
   </div>
-	
-<% end %>
-
-	<%= render :partial => 'assets/comment', :object => asset %>
-
-	<%= render :partial => 'assets/share', :object => asset %>

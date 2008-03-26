@@ -50,9 +50,13 @@ module ApplicationHelper
       when nil then image_tag(user.has_pic? ? user.pic.public_filename(:tiny) : 'no-pic.jpg' )
     end
   end
+  
+  def track_name_for(asset, length=40)
+    truncate(h(asset.name),length)
+  end
 
   def link_to_play(asset, referer=nil)
-    link_to truncate(h(asset.name),50), formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :referer => referer
+    link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :referer => referer
   end
   
   def user_bar_for(user)

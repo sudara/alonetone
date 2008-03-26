@@ -36,16 +36,20 @@ a#logo
 #columns
   :position relative
   :width 890px
+  :height 1%
   #left
-    :position absolute
-    :left 0
-    :top 0
+    :float left 
     :width 420px
   #right
-    :position absolute
-    :left 520px
-    :top 0
+    :float left
+    :margin-left 50px
     :width 420px
+
+// prevents content from being buried beneath footer without a scrollbar
+#footer_spacer
+  :clear both
+  :height 60px
+  :width 100%
   
 #footer
   :position fixed

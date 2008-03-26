@@ -1,11 +1,10 @@
 <% id = object.id.to_s %>
 <% object = object.asset if object.respond_to?(:asset) -%>
 
-<div id="share_<%=id%>" class="share_asset footer_content" style="display:none;">
+<div id="share_<%=id%>" class="share_asset footer_content">
 
 
-<h2>Sharing the track <span class="track-name"><%=h object.name %> </span>by <%=h object.user.name%></h2>
-<h3>The link to this file</h3>
+The link to this file
 
 <%= text_field_tag 'link', formatted_user_track_url(object.user, object.permalink, :mp3), :size => 70 %> 
 <!-->

@@ -1,17 +1,21 @@
 <div id="user_header">
 
+  <%= link_to(image_tag(@user.avatar(:small), :class => 'small_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
+  
   <div class="user_title">
-  <%= pretty_text "#{h @user.name}", :h1%>
+    <h1><%=h @user.name %></h1>
   </div>
-  <%= link_to(image_tag(@user.avatar(:large), :class => 'large_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
   <div class="user_links">
-    <%= link_to_unless_current "#{@user.name}'s latest stuff on alonetone", user_home_path(@user) %>
-    <%= link_to_unless_current "Listen to all of #{@user.name}'s tracks", user_tracks_path(@user) if @user.assets_count > 0%>
-    <%= link_to_unless_current "Browse #{@user.name}'s albums and mixes", user_playlists_path(@user) if @user.has_public_playlists? %>
-    <%= link_to_unless_current "View #{@user.name}'s detailed profile", profile_path(@user) if @user.bio %>
-    <%= link_to "Listen to #{@user.name} on iTunes", "http://#{@user.itunes}" if @user.itunes && !@user.itunes.empty? %>
-    <%= link_to "Sudo to #{@user.name}", sudo_user_path(@user) if (admin? || @sudo)%>
+    <%= link_to_unless_current "Latest Everything", user_home_path(@user) %>
+    <%= link_to_unless_current "Albums & Playlists", user_playlists_path(@user) if @user.has_public_playlists? %>
+    <%= link_to_unless_current "Tracks", user_tracks_path(@user) if @user.assets_count > 0%>
+    <%= link_to_unless_current "Profile", profile_path(@user) if @user.bio %>
+
   </div>
-  <div class="clear"></div>
+  <div class="user_contact_links">
+    <%= link_to "Email", "mailto://#{@user.email}" if admin? %>
+    <%= link_to "Listen to #{@user.name} on iTunes", "http://#{@user.itunes}" if @user.itunes && !@user.itunes.empty? %>
+    <%= link_to "Sudo to #{@user.name}", sudo_user_path(@user) if (admin? || @sudo)%>    
+  </div>
 </div>
   <%= yield %>
