@@ -2,7 +2,7 @@
 
 body
   :font-family Helvetica, Arial, Geneva
-a
+a, a:visited
   :font-family Helvetica, Arial, Geneva
   :color = !text_color
   :line-height = !16px
@@ -11,12 +11,14 @@ a
   :text-decoration none
   &:hover 
     :text-decoration underline
-img a
+    :background-color transparent 
+
+img a, img a:visited
   :color transparent
   &:hover
     :color none
     
-.content a
+.content a, .content a:visited
   :color = !white
   :font-weight normal
   &:hover
