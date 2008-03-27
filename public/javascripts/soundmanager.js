@@ -15,7 +15,7 @@ function SoundManager(smURL,smID) {
   this.version = 'V2.0b.20070415';
   this.url = (smURL||'/javascripts/soundmanager2.swf');
 
-  this.debugMode = true;           // enable debugging output (div#soundmanager-debug, OR console if available + configured)
+  this.debugMode = false;           // enable debugging output (div#soundmanager-debug, OR console if available + configured)
   this.useConsole = true;          // use firebug/safari console.log()-type debug console if available
   this.consoleOnly = true;        // if console is being used, do not create/write to #soundmanager-debug
   this.nullURL = 'data/null.mp3';  // path to "null" (empty) MP3 file, used to unload sounds

@@ -61,31 +61,91 @@ Track = $.klass({
   
   initialize: function() {
     this.playButton = $(".play-button",this.element);
-    this.trackLink = $(".title > a",this.element);
+    this.trackLink = $("a.track_link",this.element);
     this.deleteButton = $(".delete-button",this.element);
-    this.trackLink = this.trackName.href;
-    this.soundID = "play-"+this.trackLink.id;  
+    this.trackURL = this.trackLink.attr('href');
+    this.soundID = "play-"+this.trackLink.id; 
   },
   
   
   // Lets Delegate!
   // we want the track to do lots of things onclick, but not add 100s of event handlers
   onclick: $.delegate({
-    // so we're going to test the origin element of the click using selectors
-    '.' 
+    // test the origin element of the click using selectors
+    '.play-button a' : function(e){ return this.togglePlay(e);} 
   }),
   
-  // 
-  togglePlay: function(){
+  onmouseover: $.delegate({
+    '.asset' : function(e){ return this.element.addClass('hover');}
+  }),
+  
+  onmouseleave: $.delegate({
+    '.asset' : function(e){ return this.element.removeClass('hover');}
+  }),
+  
+  toggleOptions: function(){
     
+  },
+  
+  togglePlay: function(target){
+    target.log();
+    
+    if(this.isPlaying()) 
+      this.pause();
+    else
+      this.playOrResume();
+  },
+  
+  playOrResume : function(){
+    this.killOtherTracks();
+    this.element.addClass('playing');
+    // if the track has already been played
+    if (this.isPlaying()){
+      this.resume();
+    }else{
+      this.play();
+    }
   },
   
   play: function(){
-    
+    soundManager.play(this.soundID,{url:this.trackUrl,onfinish:this.startNextTrack().bind(this)});
+  }, 
+  
+  isPlaying: function(){
+    return this.element.hasClass('playing');
   },
   
+  pause: function(){
+    soundManager.pause(this.soundID);
+    this.element.removeClass('playing');
+  },
   
+  isPaused: function(){
+    return soundManager.soundIDs.include(this.soundID);
+  },
   
+  resume: function(){
+    soundManager.resume(this.soundID);
+  },
   
-})
+  startNextTrack: function(){
+    Track.instances[this.nextTrackIndex()].playOrResume();
+  },
+  
+  nextTrackIndex : function(){
+    // index of next Track in Track.instances
+    var next = Track.instances.indexOf(this) + 1;
+    // loop back to the first track
+    if(Track.instances[next] == undefined) next = 0;
+    return next;
+  },
+  
+  killOtherTracks : function(){
+    $.each(Track.instances, function(n,track){ track.pause();});    
+  }
+});
+
+jQuery(function($) {
+  $('.asset, .track').attach(Track);
+});
 
