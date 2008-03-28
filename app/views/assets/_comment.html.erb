@@ -2,7 +2,6 @@
 <% object = object.asset if object.respond_to?(:asset) -%>
 
 <div id="comment_<%=id%>" class="comment_asset footer_content">
-  Send <%=h object.user.name%> a little message about <span class="track-name"><%=h object.name %> </span>
   <% remote_form_for :comment, :url => user_track_comments_path(object.user, object), 
   :success => 'Flash.show("ok","sent!");$("comment_'+ id +'").fade();$("footer").morph({height:"40px"})', 
   :failure =>  'Flash.show("error","You have to be logged in and the comments have to be pretty short")',

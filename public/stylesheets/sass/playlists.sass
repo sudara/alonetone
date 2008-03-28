@@ -122,7 +122,7 @@ img.cover_200
   &.even
     div.button, div.title
       :background-color = !box_background_even
-  &.hover
+  &.hover, &.open
     div.button, div.title
       :background-image url(../images/backgrounds/tracks.png) 
       :background-position 0px 0px
@@ -130,5 +130,9 @@ img.cover_200
     div.button, div.title
       :background-image url(../images/backgrounds/tracks.png)
       :background-position 420px 0px
+    div.button
+      a
+        :background-position -100px 0px
+
 
     

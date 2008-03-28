@@ -9,6 +9,8 @@ $.fn.log = function() {
   console.log(text);
 }
 
+jQuery.easing.def = "jswing"
+
 // png fix if ie
 $(function(){$(document).pngFix();});
 
@@ -26,7 +28,7 @@ $(function() {
 
 // tabs
 $(document).ready(function(){
-  $('.tabs > ul').tabs({ fx: { height: 'toggle'} });
+//  $('.tabs > ul').tabs({ fx: { height: 'toggle'} });
 });
 
 
@@ -44,7 +46,7 @@ Both are baked into lowpro
 DateSelector = $.klass({
   onclick: $.delegate({
     '.close': function() { this.close() },
-   '.day': function(e) { this.selectDate(e.target) }
+   '.day': function(e) { this.selectDate(e) }
   }),
   selectDate: function(dayElement) {
     // code ...
@@ -65,35 +67,59 @@ Track = $.klass({
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = this.trackLink.attr('href');
     this.soundID = "play-"+this.trackLink.id; 
+    this.more = this.element.next();
+    this.tabbies =  $('ul',this.more);
+    this.tabbies.tabs({ fx: { height: 'toggle', selected: 0} });
   },
   
   
   // Lets Delegate!
   // we want the track to do lots of things onclick, but not add 100s of event handlers
+  // so test the origin element of the click using selectors
   onclick: $.delegate({
-    // test the origin element of the click using selectors
-    '.play-button a' : function(e){ return this.togglePlay(e);} 
+    '.play_link' : function(e){ return this.togglePlay()},      // open comments
+    '.track_link': function(e){ return this.toggleDetails(1)}, // open info
+    '.download_link':function(e){ return this.toggleDetails(2)}, // open sharing
+    '.title':function(e){ return this.toggleDetails(1)} // open 
   }),
   
-  onmouseover: $.delegate({
-    '.asset' : function(e){ return this.element.addClass('hover');}
+  onmouseenter: $.delegate({
+    '.asset' : function(e){  this.element.addClass('hover');}
   }),
   
   onmouseleave: $.delegate({
-    '.asset' : function(e){ return this.element.removeClass('hover');}
+    '.asset' : function(e){  this.element.removeClass('hover');}
   }),
   
-  toggleOptions: function(){
-    
+  toggleDetails: function(desiredTab){
+    if(this.more.is(':hidden')) this.openDetails(desiredTab);
+    else if (this.isPlaying()) this.openDetails(desiredTab); // never close the tabs when playing
+    else this.closeDetails();
+    return false;
   },
   
-  togglePlay: function(target){
-    target.log();
-    
+  openDetails: function(desiredTab){
+    if(desiredTab != undefined) this.tabbies.tabs('select', desiredTab);
+    // close all other detail panes except currently playing
+    $.each(Track.instances, function(n, track){
+        if(!track.isPlaying()) track.closeDetails();
+    });
+    this.more.slideDown({duration:300});
+    this.element.addClass('open');
+  },
+  
+  closeDetails:function(){
+    this.more.slideUp({duration:300});
+    this.element.removeClass('open');
+  },
+  togglePlay: function(target){  
     if(this.isPlaying()) 
       this.pause();
     else
       this.playOrResume();
+    this.openDetails(0);
+    // don't follow the link
+    return false;
   },
   
   playOrResume : function(){
@@ -118,6 +144,7 @@ Track = $.klass({
   pause: function(){
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
+    this.closeDetails();
   },
   
   isPaused: function(){
