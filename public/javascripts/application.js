@@ -9,6 +9,40 @@ $.fn.log = function() {
   console.log(text);
 }
 
+// hack up a periodical executor
+jQuery.timer = function (interval, callback)
+ {
+	var interval = interval || 100;
+
+	if (!callback)
+		return false;
+	
+	_timer = function (interval, callback) {
+		this.stop = function () {
+			clearInterval(self.id);
+		};
+		
+		this.internalCallback = function () {
+			callback(self);
+		};
+		
+		this.reset = function (val) {
+			if (self.id)
+				clearInterval(self.id);
+			
+			var val = val || 100;
+			this.id = setInterval(this.internalCallback, val);
+		};
+		
+		this.interval = interval;
+		this.id = setInterval(this.internalCallback, this.interval);
+		
+		var self = this;
+	};
+	
+	return new _timer(interval, callback);
+};
+
 jQuery.easing.def = "jswing"
 
 // png fix if ie
@@ -26,10 +60,7 @@ $(function() {
     });
 });
 
-// tabs
-$(document).ready(function(){
-//  $('.tabs > ul').tabs({ fx: { height: 'toggle'} });
-});
+
 
 
 // TRACKS
@@ -59,17 +90,31 @@ DateSelector = $.klass({
 */
 
 
-Track = $.klass({
-  
+// abstracts ui.tabs a bit further   
+Tabbies = $.klass({
+  initialize : function(desiredTab){
+    this.defaultTab = 0;
+    this.element.tabs({ fx: [null,{ height: 'toggle',duration: 300,easing:'easeOut'}, ], selected: (desiredTab || this.defaultTab) });
+    this.currentTab = 0;
+  },
+  openTab : function(desiredTab){
+    desiredTab = desiredTab || this.defaultTab;
+    this.element.tabs('select', desiredTab);
+    this.currentTab = desiredTab;
+  }
+});
+
+
+Track = $.klass({  
   initialize: function() {
     this.playButton = $(".play-button",this.element);
     this.trackLink = $("a.track_link",this.element);
+    this.time = $('span.time',this.element);
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = this.trackLink.attr('href');
     this.soundID = "play-"+this.trackLink.id; 
     this.more = this.element.next();
-    this.tabbies =  $('ul',this.more);
-    this.tabbies.tabs({ fx: { height: 'toggle', selected: 0} });
+    this.tabbies = false; // wait on initializing those tabs
   },
   
   
@@ -99,12 +144,20 @@ Track = $.klass({
   },
   
   openDetails: function(desiredTab){
-    if(desiredTab != undefined) this.tabbies.tabs('select', desiredTab);
+    // set up the tabs if this track hasn't been opened yet
+    if(!this.tabbies) this.createTabbies();
+    
+    // change the tab if the desired is not currently open
+    if(this.tabbies.currentTab != desiredTab) this.tabbies.openTab(desiredTab);
+    
+    // open the pane if it is not already open
+    if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
+    
     // close all other detail panes except currently playing
     $.each(Track.instances, function(n, track){
-        if(!track.isPlaying()) track.closeDetails();
+        if(!track.isPlaying() && this.element.id != track.element.id) track.closeDetails();
     });
-    this.more.slideDown({duration:300});
+    
     this.element.addClass('open');
   },
   
@@ -112,12 +165,16 @@ Track = $.klass({
     this.more.slideUp({duration:300});
     this.element.removeClass('open');
   },
+  
+  isOpen:function(){
+    this.more.is(':visible');
+  },
+  
   togglePlay: function(target){  
     if(this.isPlaying()) 
       this.pause();
     else
       this.playOrResume();
-    this.openDetails(0);
     // don't follow the link
     return false;
   },
@@ -125,6 +182,8 @@ Track = $.klass({
   playOrResume : function(){
     this.killOtherTracks();
     this.element.addClass('playing');
+    this.openDetails(0);
+    this.startTimer();
     // if the track has already been played
     if (this.isPlaying()){
       this.resume();
@@ -156,6 +215,7 @@ Track = $.klass({
   },
   
   startNextTrack: function(){
+    this.pause();
     Track.instances[this.nextTrackIndex()].playOrResume();
   },
   
@@ -168,8 +228,24 @@ Track = $.klass({
   },
   
   killOtherTracks : function(){
-    $.each(Track.instances, function(n,track){ track.pause();});    
-  }
+    $.each(Track.instances, function(n,track){ 
+      if(this.element.id != track.element.id) track.pause();
+    });    
+  },
+  
+  createTabbies : function(){
+    this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0];
+  },
+  startTimer : function(){
+    $.timer(1000,this.updateTime());
+  },
+  updateTime : function(){
+    this.sound = soundManager.getSoundById(this.soundID);
+    if(this.sound != undefined && this.time != undefined && this.timer != false){
+      this.elapsed_time = (this.sound.position / 1000).round();
+      this.time((this.elapsed_time/60).floor() + ':' + (this.elapsed_time % 60));
+    }
+  },
 });
 
 jQuery(function($) {

@@ -2,7 +2,7 @@
 	<div class="play-button button"><%= link_to_play asset, @referer %></div>
 	<div class="title">
 	  <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link' %><br>
-	  <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %>
+	  <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %> <span class='time'><%= asset.length%></span>
 	  <span class="when" style="display:none;"><%= time_ago_in_words asset.created_at %> ago</span>
 	</div>
 	

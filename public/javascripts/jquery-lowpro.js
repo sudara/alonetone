@@ -77,19 +77,15 @@
 
       return klass;
     },
-    delegate : function(rules) {
+   delegate : function(rules) {
       return function(e) {
-        console.log('e: '+e);
         var target = $(e.target);
         for(var selector in rules){
-          if (target.is(selector)){
-            console.log('selector: '+selector);
-            console.log('rules[selector]: '+rules[selector]);
+          if (target.is(selector))
             return rules[selector].apply(this, $.makeArray(arguments));
-          }
         }
         for(var selector in rules){
-          if (target.is(selector) || ((target = target.parents(selector)) && target.length > 0)) 
+          if ((target = target.parents(selector)) && target.length > 0)
            return rules[selector].apply(this, [target].concat($.makeArray(arguments)));
         }
       }
