@@ -1,3 +1,9 @@
+var soundIsReady = false;
+soundManager.onload = function() {
+  // soundManager should be ready to use/call at this point
+  soundIsReady = true;
+}
+
 // for debug purposes
 $.fn.log = function() {
   if (this.size()==0) return "<em>wrapped set is empty</em>"
@@ -111,8 +117,8 @@ Track = $.klass({
     this.trackLink = $("a.track_link",this.element);
     this.time = $('span.time',this.element);
     this.deleteButton = $(".delete-button",this.element);
-    this.trackURL = this.trackLink.attr('href');
-    this.soundID = "play-"+this.trackLink.id; 
+    this.trackURL = $('a.play_link',this.element).attr('href');
+    this.soundID = this.element[0].id; 
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing those tabs
   },
@@ -171,7 +177,8 @@ Track = $.klass({
     this.more.is(':visible');
   },
   
-  togglePlay: function(target){  
+  togglePlay: function(target){ 
+    console.log('toggling play...') 
     if(this.isPlaying()) 
       this.pause();
     else
@@ -181,20 +188,29 @@ Track = $.klass({
   },
   
   playOrResume : function(){
+    console.log('about to kill other tracks...');
     this.killOtherTracks();
+    console.log('killed other tracks...');
     this.element.addClass('playing');
     this.openDetails(0);
+    this.ensureSoundIsReadyThenPlay();
+  },
+  
+  tellSoundManagerToPlay: function(){
     this.startTimer();
-    // if the track has already been played
-    if (this.isPlaying()){
+    if (this.isPaused()){
+      console.log('coming out of pause...'+this.soundID);
       this.resume();
     }else{
+      console.log('playing track...'+this.soundID);
       this.play();
     }
   },
   
   play: function(){
-    soundManager.play(this.soundID,{url:this.trackUrl,onfinish:this.startNextTrack().bind(this)});
+    soundManager.play(this.soundID,this.trackURL,{onFinish:$.bind(this.startNextTrack,this)});
+    console.log('ok, should be playing url: '+this.trackURL);
+    console.log('loaded tracks include: '+ soundManager.soundIDs);
   }, 
   
   isPlaying: function(){
@@ -202,16 +218,25 @@ Track = $.klass({
   },
   
   pause: function(){
+    console.log('pausing '+this.soundID);
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
     this.closeDetails();
   },
   
   isPaused: function(){
-    return soundManager.soundIDs.include(this.soundID);
+    if(this.soundIsLoaded()) return true;
+    else return false;
+  },
+  
+  soundIsLoaded: function(){
+    console.log('checking to see if '+this.soundID+' is loaded...')
+    if (soundManager.soundIDs.length > 0 && ($.inArray(this.soundID,soundManager.soundIDs) != -1)) return true;
+    else return false;
   },
   
   resume: function(){
+    console.log('resuming track');
     soundManager.resume(this.soundID);
   },
   
@@ -230,7 +255,7 @@ Track = $.klass({
   
   killOtherTracks : function(){
     for(var track in Track.instances){ 
-      Track.instances[track].pause();
+      if(Track.instances[track].isPlaying()) Track.instances[track].pause();
     }
   },
   
@@ -238,15 +263,23 @@ Track = $.klass({
     this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0];
   },
   startTimer : function(){
-    $.timer(1000,this.updateTime());
+    $.timer(1000,$.bind(this.updateTime,this));
   },
   updateTime : function(){
     this.sound = soundManager.getSoundById(this.soundID);
-    if(this.sound != undefined && this.time != undefined && this.timer != false){
-      this.elapsed_time = (this.sound.position / 1000).round();
-      this.time((this.elapsed_time/60).floor() + ':' + (this.elapsed_time % 60));
+    if(this.sound != undefined){
+      this.elapsed_time = Math.round(this.sound.position / 1000);
+      seconds = this.elapsed_time % 60;
+      if(seconds < 10) seconds = '0'+seconds; // aww, i miss prototype
+      this.time.html(Math.floor(this.elapsed_time/60) + ':' + seconds);
     }
   },
+  ensureSoundIsReadyThenPlay : function(){
+    if(soundIsReady) return this.tellSoundManagerToPlay();
+    tryAgain = $.bind(this.ensureSoundIsReadyThenPlay, this); // use lowpro bind to create closure
+    setTimeout('tryAgain()','300');
+    console.log('WAITING FOR SOUNDMANAGER....');
+  }
 });
 
 jQuery(function($) {
