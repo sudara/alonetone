@@ -230,7 +230,7 @@ Track = $.klass({
   
   killOtherTracks : function(){
     for(var track in Track.instances){ 
-      if(Track.instances[track].element != Track.instances[track].element) track.pause();
+      Track.instances[track].pause();
     }
   },
   
