@@ -154,15 +154,16 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
     
     // close all other detail panes except currently playing
-    $.each(Track.instances, function(n, track){
-        if(!track.isPlaying() && this.element.id != track.element.id) track.closeDetails();
-    });
+    for(var track in Track.instances){
+        if(!Track.instances[track].isPlaying() && this.element != Track.instances[track].element) 
+          Track.instances[track].closeDetails();
+    }
     
     this.element.addClass('open');
   },
   
   closeDetails:function(){
-    this.more.slideUp({duration:300});
+    this.more.slideUp({duration:300,queue:false});
     this.element.removeClass('open');
   },
   
@@ -228,9 +229,9 @@ Track = $.klass({
   },
   
   killOtherTracks : function(){
-    $.each(Track.instances, function(n,track){ 
-      if(this.element.id != track.element.id) track.pause();
-    });    
+    for(var track in Track.instances){ 
+      if(Track.instances[track].element != Track.instances[track].element) track.pause();
+    }
   },
   
   createTabbies : function(){
