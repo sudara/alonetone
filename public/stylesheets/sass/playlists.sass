@@ -119,6 +119,14 @@ img.cover_200
       :font-size = 12px
     a.artist
       :font-size= 12px
+    span.time
+      :position absolute
+      :right 50px
+      :margin-right 10px
+      :top 10px
+      :font-size = 18px
+      :opacity 0.5
+
   &.even
     div.button, div.title
       :background-color = !box_background_even
@@ -133,6 +141,10 @@ img.cover_200
     div.button
       a
         :background-position -100px 0px
+    div.title
+      span.time
+        :opacity 0.99
+        :color = !white
 
 
     
