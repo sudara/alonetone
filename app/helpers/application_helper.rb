@@ -51,6 +51,10 @@ module ApplicationHelper
     end
   end
   
+  def user_location(user)
+      "from " + ((user.city) ? "#{user.city}, " : '') + user.country if user.city || user.country
+  end
+  
   def track_name_for(asset, length=40)
     truncate(h(asset.name),length)
   end
@@ -59,9 +63,8 @@ module ApplicationHelper
     link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :class => 'play_link', :referer => referer
   end
   
-  def user_bar_for(user)
-    if user then return "#{link_to_unless_current "Logout", logout_path}<br /> Hi, #{user.login}!<br/>" end
-    (link_to "Sign up for free account", signup_path) << " or " << (link_to "Login", login_path)
+  def user_nav_item(text, link, added_class='link')
+    content_tag(:li, link_to_unless_current(text, link),:class=> ("#{added_class} #{"current" if current_page?(link)}"))
   end
   
   def recently_online

@@ -1,7 +1,40 @@
 // import variables
 @import variables
 
-// tabs
+// login and logout
+
+#top_bar #login
+  :background url(../images/buttons/login.png) no-repeat 0px 0
+#top_bar #logout 
+  :background url(../images/buttons/logout.png) no-repeat 0px 0
+#top_bar
+  a#login, a#logout
+    :display block
+    :position absolute
+    :width 84px
+    :height 27px
+    &:hover
+      :background-position -84px 0
+  a#halp
+    :background url(../images/buttons/halp.png) no-repeat 0px 0
+    :display block
+    :position absolute
+    :width 91px
+    :height 31px
+    &:hover
+      :background-position -91px 0
+  div#search
+    :position absolute
+    :left -12px
+    :top 0px
+    a
+      :background url(../images/buttons/search.png) no-repeat 0px 0
+      :display block
+      :position absolute
+      :width 84px
+      :height 27px
+      &:hover
+        :background-position -84px 0
         
 
 // pagination
@@ -65,4 +98,68 @@
     &:hover
       :opacity .99
       
+// user layout
+
+#user_header
+  :position relative
+  :height 83px
+  :margin-bottom 68px
+  :width 100%
+  #alonetoner 
+    :position absolute
+    :display block
+    :float left
+    :height 83px
+    :width 83px
+    img
+      :height 83px
+      :width 83px
       
+  .user_title
+    :height 50px
+    :margin-left 84px
+    :margin-bottom 1px
+    :background-color #c1cab3
+    h1
+      :font-size 24px
+      :line-height 50px
+      :color !text_color
+      :margin-left 20px
+  #user_links
+    :height 32px
+    :background transparent url(../images/backgrounds/user_bar.png) repeat-x top left
+    :margin-left 84px
+  ul.user_links
+    :height 32px
+    :width 100px
+    :display inline
+    li
+      :color = !text_color
+      :float left
+      :height 32px
+      :border-right = 1px solid !text_color 
+      :font-size 14px
+      :font-weight bold
+      :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
+      &.contact
+        :float right
+        :border-right none
+        :border-left = 1px solid !text_color
+      &.current
+        :padding 10px 15px
+        :font-weight bold
+        :color = !white
+
+    a
+      :display block
+      :height 12px
+      :font-size 14px
+      :padding 10px 15px
+      :color = !text_color
+      :background transparent url(../images/backgrounds/user_bar.png) repeat-x top left
+      &:hover
+        :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
+        :color = !white
+        :text-decoration none
+
+

@@ -208,7 +208,8 @@ Track = $.klass({
   },
   
   play: function(){
-    soundManager.play(this.soundID,this.trackURL,{onfinish:$.bind(this.startNextTrack,this)});
+    onFinishCallback = $.bind(this.startNextTrack,this);
+    soundManager.play(this.soundID,this.trackURL,{onfinish:onFinishCallback});
     console.log('ok, should be playing url: '+this.trackURL);
     console.log('loaded tracks include: '+ soundManager.soundIDs);
   }, 

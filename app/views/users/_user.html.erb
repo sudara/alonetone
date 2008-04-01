@@ -1,21 +1,21 @@
 <div id="user_header">
 
-  <%= link_to(image_tag(@user.avatar(:small), :class => 'small_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
+  <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
   
   <div class="user_title">
-    <h1><%=h @user.name %></h1>
+    <h1><%=h @user.name %></h1><%= user_location(@user) %>
   </div>
-  <div class="user_links">
-    <%= link_to_unless_current "Latest Everything", user_home_path(@user) %>
-    <%= link_to_unless_current "Albums & Playlists", user_playlists_path(@user) if @user.has_public_playlists? %>
-    <%= link_to_unless_current "Tracks", user_tracks_path(@user) if @user.assets_count > 0%>
-    <%= link_to_unless_current "Profile", profile_path(@user) if @user.bio %>
-
-  </div>
-  <div class="user_contact_links">
-    <%= link_to "Email", "mailto://#{@user.email}" if admin? %>
-    <%= link_to "Listen to #{@user.name} on iTunes", "http://#{@user.itunes}" if @user.itunes && !@user.itunes.empty? %>
-    <%= link_to "Sudo to #{@user.name}", sudo_user_path(@user) if (admin? || @sudo)%>    
+  <div id="user_links">
+    <ul class="user_links">
+     <%= user_nav_item "Latest", user_home_path(@user) %>
+     <%= user_nav_item "Albums & Playlists", user_playlists_path(@user) if @user.has_public_playlists? %>
+     <%= user_nav_item "Tracks", user_tracks_path(@user) if @user.assets_count > 0 %>
+     <%= user_nav_item "Profile", profile_path(@user) if @user.bio %>
+  
+      <%= user_nav_item "Email", "mailto://#{@user.email}","contact" if admin? %>
+      <%= user_nav_item "iTunes", "http://#{@user.itunes}","contact" if @user.itunes && !@user.itunes.empty? %>
+      <%= user_nav_item "Sudo", sudo_user_path(@user),"contact" if (admin? || @sudo)%>   
+    </ul>
   </div>
 </div>
   <%= yield %>

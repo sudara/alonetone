@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title %> </title>
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','tabs','share','alonetone', :cache => 'all'%>
+    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'tracks','playlists','tabs','share','alonetone', :cache => 'all'%>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
@@ -18,13 +18,16 @@
 				<%= render :partial=> 'shared/nav' %>
         <%= render :partial=> 'shared/search' %>
       </div> <!-- end of header -->
-      
-			<div id="user-bar"><%= render :partial => 'shared/user_bar', :current_user => current_user %></div>
+		
+		<div id="wrapper">
+    <div id="content" class="content">    
+      <div id="top_bar">
+        <%= render :partial => 'shared/search'%>
+        <%= render :partial => 'shared/user_bar', :current_user => current_user %>
+      </div>
     
 		  <%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
 		  <%= render :partial => 'shared/notice' if @notice %>
-		
-    <div id="content" class="content">    
       <div id="main">
 		      <%= yield %>
       </div>
@@ -40,11 +43,12 @@
 
 
 	   </div><!-- end content -->
+	   </div><!-- end wrapper -->
     <div id="footer_spacer"> </div>
 		<div id="footer">
 			<%= render :partial => 'shared/footer' %>
 		</div>
-	
+	  
   	<script type="text/javascript">
   	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

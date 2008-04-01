@@ -1,5 +1,7 @@
 <% render(:layout => 'users/user') do %>
+  <% content_for :left do %>
 	<div id="single_playlist">
 		<%= render :partial => @playlist %>
 	</div>
+	<% end %>
 <% end %>

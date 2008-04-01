@@ -6,23 +6,23 @@
 		
 		<% if @user.has_public_playlists? %>
 			<h2>Latest Playlists by <%=@user.name%></h2>
-			<div id="small_playlists">
-				<%= render :partial => 'playlist', :collection => @playlists %>
-			</div>
+			
+		<%= render :partial => 'shared/carousel' %>
 			<div class="clear"> </div>
 		<% end %>
 	
-	  <%= link_to "upload new track", new_user_track_path(@user), :id => 'upload_button', :class => 'add button' if authorized? %>
+		<% content_for :left do %>
+	    <%= render :partial => 'latest' if @user.assets_count > 0 %>
+	    <%= render :partial => 'listens' if @listens.size > 0 %>	
 	
-	  <%= render :partial => 'latest' if @user.assets_count > 0 %>	
+	  <% end %>
 	  
-	  <%= render :partial => 'shared/comments' if @user.comments.size > 0 %>
-	  
-	  <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
-	
-	  <%= image_tag @user.track_plays_graph if authorized? %>
-	
-		<%= render :partial => 'listens' if @listens.size > 0 %>	
+	  <% content_for :right do %>
+	    <%= render :partial => 'shared/comments' if @user.comments.size > 0 %>
+	    <%= image_tag @user.track_plays_graph if authorized? %>
+	    <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+
+	  <% end %>	
 		
 		
 	</div>

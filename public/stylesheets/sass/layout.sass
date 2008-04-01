@@ -9,10 +9,11 @@ html,body
   :width 100%
   :height 110px
   :z-index 1000
+  :background url(../images/backgrounds/header.png) repeat-x top left
   :background-color = !body_background
 a#logo  
   :position absolute
-  :right 25px
+  :left 864px
   :top 15px
   :width 120px
   :height 81px
@@ -24,15 +25,37 @@ a#logo
   :top 0px
   :left 50px
   :height 80px  
-        
+
+#wrapper
+  :position relative
+  :margin 0
+  :padding 0
+  :background url(../images/backgrounds/body.png) repeat-x top left
+  :width 100%
+  :margin-top 110px
 #content
   :position relative
-  :margin-top 121px
   :margin-left 50px
   :margin-bottom 150px
+  :width 890px
+  #top_bar
+    :position relative
+    :width 890px
+    :height 27px
+    :width 100%
+    :margin-bottom 35px
+    #login, #logout
+      :right -15px
+      :top 0px
+    #logout
+      :right -11px
+    #halp
+      :right 86px
+  
 #main
   :position relative
   :width 890px
+  
 #columns
   :position relative
   :width 890px
@@ -55,10 +78,10 @@ a#logo
   :position fixed
   :bottom 0
   :left 0
-  :height 50px
+  :height 52px
   :width 100%
   :z-index 1000
-  :background-color #c8d0bb
+  :background url(../images/backgrounds/footer.png) repeat-x top left
   &.reporting
     :height 300px
   form

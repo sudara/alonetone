@@ -1,0 +1,78 @@
+@import variables
+
+// assets & tracks (same diff ;)
+.asset, .track
+  :position relative
+  :width 100%
+  :height 50px
+// overflow guarantees that the elements within this box will float and be cleared
+  :overflow hidden
+  :margin-top 3px
+  :color = !text_color
+  a, a:visited
+    :color = !text_color
+    :background-color transparent
+    &:hover
+      :color = !text_color
+      :text-decoration underline
+  div
+    :float left
+  div.button
+    :background-color = !box_background
+    :width 50px
+    :height 50px
+    a
+      :width 50px
+      :height 50px
+      :display block
+      &:hover
+        :background-position -51px 0px
+      &.playing
+        :background-position -100px 0px
+    &.play-button 
+      :margin-right 1px
+      a
+        :background-image url(../images/icons/play.png) 
+    &.download-button
+      :margin-left 1px
+      a
+        :background-image url(../images/icons/download.png)
+  div.title
+    :background-color = !box_background
+    :height 50px
+    :width 318px
+    :overflow hidden
+    :padding-top 10px
+    a
+      :font-size = 18px
+      :margin-left 20px
+    span.by
+      :font-size = 12px
+    a.artist
+      :font-size= 12px
+    span.time
+      :position absolute
+      :right 50px
+      :margin-right 10px
+      :top 10px
+      :font-size = 18px
+      :opacity 0.5
+
+  &.even
+    div.button, div.title
+      :background-color = !box_background_even
+  &.hover, &.open
+    div.button, div.title
+      :background-image url(../images/backgrounds/tracks.png) 
+      :background-position 0px 0px
+  &.playing
+    div.button, div.title
+      :background-image url(../images/backgrounds/tracks.png)
+      :background-position 420px 0px
+    div.button
+      a
+        :background-position -100px 0px
+    div.title
+      span.time
+        :opacity 0.99
+        :color = !white

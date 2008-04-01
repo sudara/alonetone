@@ -1,42 +1,40 @@
 <% if playlist.has_tracks? || authorized_for(playlist) %>
 
-
-		<% div_for playlist, :class => "#{(playlist.has_tracks? ? '' : 'empty')} #{playlist.is_mix? ? 'mix' : 'album'}" do %>
-		
-			<h2><%= playlist.title %></h2>
+		<% div_for playlist, :class => "#{(playlist.has_tracks? ? '' : 'empty')} #{playlist.type}" do %>
+		  <div class="playlist_title box">
+			  <h2><%= playlist.title %></h2>
+			  <h3><%= pluralize playlist.tracks_count, 'track'%> by <%= (playlist.is_mix? ? 'various alonetone artists' : playlist.user.name )%></h3>
+      </div>
 			<% if playlist.tracks.size < 1 %>
 			<div class="empty">
-This playlist is currently empty and hidden from the public<br/>
-<%= link_to "Click here", edit_user_playlist_path(@user,playlist)%> to add some tracks or <%= link_to 'click here',user_playlist_path(@user, playlist.permalink), :method => :delete%> to delete it 
+        This playlist is currently empty and hidden from the public<br/>
+        <%= link_to "Click here", edit_user_playlist_path(@user,playlist)%> to add some tracks or <%= link_to 'click here',user_playlist_path(@user, playlist.permalink), :method => :delete%> to delete it 
 			</div>
 		<% end %>
 
-      <% if authorized_for(playlist) %>
-      <div class="edit_playlist_link">
-        <%= link_to "edit", edit_user_playlist_path(@user, playlist)%>
-      </div>
-      <% end %>
 
-			<div class="share share_playlist_link">
-			  <%= link_to "share!", '#', :class => 'share'%>
-			</div>
 
 			<div class="info">
-		  <%= link_to(image_tag('jewel-case-200.png'), edit_or_show(@user.login, playlist), :class => 'jewel_case_200') %>
-      <%= image_tag(playlist.cover(:album), :class => 'cover_200') %>
-        	<p class="description">
-				  <%= pluralize playlist.tracks_count, 'track'%> by <%= (playlist.is_mix? ? 'various alonetone artists' : playlist.user.name )%><br/> 
-				  Play time: <span class="play_time"><%= playlist.play_time %></span><br/>
-				 
-          <br/><br/>
+		    <div class="cover">
+		      <%= link_to(image_tag('jewel-case-125.png'), edit_or_show(@user.login, playlist), :class => 'jewel_case_125') %>
+          <%= image_tag(playlist.cover(:large), :class => 'cover_125') %>
+        </div>
+        
+        <p class="description">
 				  <%= playlist.description %>
+				  <br/><br/>
+				  <span class="play_time"><%= playlist.play_time %></span>
 				</p>
-				<div class="edit_playlist" style="display:none;">
-					<%= link_to 'edit', edit_user_playlist_path(@user.login, playlist) if authorized? %>
-				</div>
+        <% if authorized_for(playlist) %>
+        <div class="edit_playlist_link">
+          <%= link_to "edit", edit_user_playlist_path(@user, playlist)%>
+        </div>
+        <% end %>
+				
+			  <div class="clear"> </div>
 			</div>
 		
-			<div class="tracks">
+			<div class="tracks clear">
 				<% @playlist = playlist %>
 				<%= render :partial => 'track', :collection => playlist.tracks %>
 			</div>
