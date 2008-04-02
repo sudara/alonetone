@@ -82,7 +82,18 @@ a#logo
   :width 100%
   :z-index 1000
   :background url(../images/backgrounds/footer.png) repeat-x top left
-  &.reporting
+  #update, #bug_report
+    :font-size 12px
+  #update
+    :position absolute
+    :left 50px
+    :top 25px    
+  #bug_report
+    :position absolute
+    :left 520px
+    :top 25px
+    
+  &.open
     :height 300px
   form
     :height 250px

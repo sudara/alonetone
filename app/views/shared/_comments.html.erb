@@ -1,10 +1,2 @@
-<div class="comments">
-  <div class='playlist-wrapper'>
-  	<div class='playlist-top'><div class='playlist-top-right'></div></div>
-  	  <div class="stash">
-  	    <h2>Latest Comments</h2>
-  	    <%= render :partial => 'shared/comment', :collection => comments %>
-  	  </div>
-  	<div class='playlist-bottom'><div class='playlist-bottom-right'></div></div>
-  </div>
-</div>
+<h2>Latest Comments</h2>
+<%= render :partial => 'shared/comment', :collection => comments %>

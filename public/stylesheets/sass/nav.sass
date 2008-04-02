@@ -1,5 +1,5 @@
 @import variables
-// variables for nav
+// variables for nav w/o images
 !active_tab_background = #e1e2e1 
 !normal_tab_background = #45473c
 !hover_tab_background = #da6d25
@@ -15,32 +15,45 @@ ul#nav
     :height 75px
     :line-height 0
     :padding 0
-    :margin-right 20px
+    :margin-right 12px
     :background none
     a
       :float left
       :display block
       :margin 0 
-      :padding 60px 40px 10px 20px
-      :background transparent none no-repeat top left
-      :background-color = !normal_tab_background 
-      :color = !normal_tab_text
-      :font-size = !18px
-      &:hover 
-        :background-color = !hover_tab_background 
-        :color = !hover_tab_text
-        :text-decoration none
-      &.active
-        :background-color = !active_tab_background
-        :color = !active_tab_text
-      
-  li#home
-    :margin-right 80px
-  li#browse 
-    a
-
-  li#upload
-    a
-  
-  li#your_stuff
-    a
+      :height 74px
+      :width 150px
+      :background url(../images/buttons/nav.png) no-repeat 0px 0px
+    &#home
+      :margin-right 71px
+      a
+        :width 150px
+        :background-position 0px 0px 
+        &.active
+          :background-position -150px 0px
+        &:hover
+          :background-position -300px 0px
+    &#browse
+      a
+        :width 204px
+        :background-position -450px 0px
+        &.active
+          :background-position -654px 0px
+        &:hover
+          :background-position -858px 0px
+    &#upload
+      a
+        :background-position -1062px 0px
+        :width 124px
+        &.active
+          :background-position -1186px 0px
+        &:hover
+          :background-position -1310px 0px
+    &#your_stuff
+      a
+        :width 145px
+        :background-position -1434px 0px
+        &.active
+          :background-position -1579px 0px
+        &:hover
+          :background-position -1724px 0px

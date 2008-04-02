@@ -1,4 +1,4 @@
-<% div_for comment do %>
+<% div_for comment, :class => (cycle('even', 'odd')) do %>
   
   <div class="comment_user">
   	<% if comment.commenter %>
@@ -7,13 +7,9 @@
   			<%= image_tag User.dummy_pic(:small)%><br/>
   	<% end %>
   	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
+	
+  	<span class="comment_date">said about<span class="comment_about"><%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></span><br/>
 	</div>
-	
-	<p class="comment_date">
-		<%= time_ago_in_words(comment.created_at)%> ago<br/>
-		said about the track <span class="comment_about"><%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></span><br/>
-	</p>
-	
 	<p class="comment_body">
 		<%=h comment.body %>
 	</p>

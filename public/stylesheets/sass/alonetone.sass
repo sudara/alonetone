@@ -98,6 +98,35 @@
     &:hover
       :opacity .99
       
+// comments
+
+.comment
+  :position relative
+  :color = !text_color
+  .comment_user
+    :background url(../images/backgrounds/comment_even.png) repeat-x top left
+    :background-color = !box_background
+  &.even
+    .comment_user
+      :background-image url(../images/backgrounds/comment.png)
+      :background-color = !box_background_even
+  .comment_user
+    :position relative
+    :height 50px
+    :margin-bottom 1px
+    img 
+      :float left
+  .comment_body
+    :background-color = !box_background
+    :padding 20px 20px 30px 20px
+    :clear both
+    :margin-bottom 3px
+  &.even 
+    .comment_body
+      :background-color = !box_background_even
+    
+    
+    
 // user layout
 
 #user_header
