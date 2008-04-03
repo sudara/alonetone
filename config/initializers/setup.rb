@@ -16,8 +16,7 @@ UserMailer.default_url_options[:host] = 'alonetone.com'
 UserMailer.mail_from = 'music@alonetone.com'
 
 # GENERATE THE NEEDED CSS STYLESHEETS
-
-Sass::Plugin.update_stylesheets
+Sass::Plugin.options[:always_check] = true 
 
 require 'randomness'
 PASSWORD_SALT = 'so_salty_its_unbearable'
