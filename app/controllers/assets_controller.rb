@@ -52,6 +52,7 @@ class AssetsController < ApplicationController
         @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
         @playlists = Playlist.latest(12)
         @tab = 'home'
+        @welcome = true unless logged_in?
       end
       wants.rss do 
         @assets = Asset.latest(50)

@@ -1,6 +1,6 @@
 var soundIsReady = false;
 soundManager.onload = function() {
-  // soundManager should be ready to use/call at this point
+  // soundManager is ready to use
   soundIsReady = true;
 }
 
@@ -118,7 +118,7 @@ Track = $.klass({
     this.time = $('span.time',this.element);
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = $('a.play_link',this.element).attr('href');
-    this.soundID = this.element[0].id; 
+    this.soundID = 'play-'+this.element[0].id; 
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing those tabs
   },

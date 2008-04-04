@@ -2,6 +2,7 @@
 
 body
   :font-family Helvetica, Arial, Geneva
+  :color = !text_color
 a, a:visited
   :font-family Helvetica, Arial, Geneva
   :color = !text_color
@@ -23,10 +24,12 @@ img a, img a:visited
   :font-weight normal
   &:hover
     :background-color transparent 
-
+.box a, .box a:visited
+  :color = !text_color
 
 h1
-
+  :color #f6f6f6
+  :font-size 32px
 h2
   :color = !white
   :font-size = !20px

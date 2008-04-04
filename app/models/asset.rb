@@ -138,6 +138,11 @@ class Asset < ActiveRecord::Base
     define_method("#{content}?") { self.class.send("#{content}?", content_type) }
   end
   
+  # needed in case we've got multiple assets on the same page
+  def unique_id
+    object_id
+  end
+  
   def name
     # make sure the title is there, and if not, the filename is used...
     title && !title.empty? ? title : clean_filename

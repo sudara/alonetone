@@ -4,25 +4,19 @@
 <div id="share_<%=id%>" class="share_asset footer_content">
 
 
-The link to this file
+<%= link_to "Home page", user_track_url(object.user, object.permalink) %> for this song:<br/>
+<%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), :size => 40,:class => 'tabbed_input' %> <br/>
+Mp3 download link:<br/>
+<%= text_field_tag "link_#{id}", formatted_user_track_url(object.user, object.permalink, :mp3), :size => 40, :class => 'tabbed_input' %> <br/>
 
-<%= text_field_tag 'link', formatted_user_track_url(object.user, object.permalink, :mp3), :size => 70 %> 
 <!-->
 <div class="download-button button">
 		<%= link_to "<i>download</i>",formatted_user_track_url(object.user, object.permalink, :mp3) %>
 	</div>
 -->
-<br/>
-Put the music on your website with the <%=link_to_function 'HTML code', nil do |page|
-      page["flash_code_#{id}".to_sym].hide
-      page["html_code_#{id}".to_sym].visual_effect :slide_down
-end %> 
+Put the music on your website:<br/>
+Get the <%= link_to 'HTML code', '#' %> or the <%= link_to_function 'embedded_flash_player', '#'%>
 
-
-or the <%= link_to_function 'embedded_flash_player',nil do |page|
-    page["html_code_#{id}".to_sym].hide
-    page["flash_code_#{id}".to_sym].visual_effect :slide_down
-end %>
 <div id="html_code_<%=id%>" style="display:none;">
   <div class="scriptaculous">
   <h3>HTML code</h3>
@@ -45,6 +39,4 @@ end %>
 <h3>Put '<%=h object.name %>' on your facebook Profile</h3>
 COMING SOON
 -->
-<br/>
-<%= link_to "Ok, all done, thanks!",'#', :class => 'done' %>
 </div>

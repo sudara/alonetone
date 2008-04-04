@@ -1,4 +1,4 @@
-<% content_tag_for :div, asset, :class => cycle('odd', 'even') do %>
+<% content_tag :div, :id => ('asset_asset.unique_id'), :class => 'asset ' + cycle('odd', 'even') do %>
 	<div class="play-button button"><%= link_to_play asset, @referer %></div>
 	<div class="title">
 	  <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link' %><br>
@@ -12,26 +12,27 @@
 	
 <% end %>
 
-<div class="more tabs" id="tabs_for_track_<%= asset.id %>" style="display:none;">
+<div class="more tabs" id="tabs_for_track_<%= asset.unique_id %>" style="display:none;">
     
     <ul>
-      <li><%= link_to 'comment', "#comment_track_#{asset.id}" %> </li>
-      <li><%= link_to 'about', "#details_track_#{asset.id}" %> </li>
-      <li><%= link_to 'share', "#share_track_#{asset.id}" %> </li>
+      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
+      <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
+      <li><%= link_to 'share', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
   
-  	<div id="details_track_<%= asset.id %>">
-	    <%= asset.description %>
+  	<div id="details_track_<%= asset.unique_id %>">
+	    <%= asset.description %><br/>
       <%= link_to 'info', user_track_path(asset.user, asset.permalink) %>
-	    <%= asset.length %> 
-	    <%= asset.listens_count %>
+      Bitrate: <%= asset.bitrate %><br/>
+	    Song Length: <%= asset.length %><br/>
+	    Listen count: <%= asset.listens_count %><br/>
 	  </div>
 	    
-	  <div id="share_track_<%= asset.id %>">
+	  <div id="share_track_<%= asset.unique_id %>">
 	    <%= render :partial => 'assets/share', :object => asset %>
 	  </div>
 
-    <div id="comment_track_<%= asset.id %>">
+    <div id="comment_track_<%= asset.unique_id %>">
       <%= render :partial => 'assets/comment', :object => asset %>
     </div>
 	
