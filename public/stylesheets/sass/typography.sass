@@ -18,24 +18,33 @@ img a, img a:visited
   :color transparent
   &:hover
     :color none
-    
-.content a, .content a:visited
-  :color = !white
-  :font-weight normal
-  &:hover
-    :background-color transparent 
+
+.content
+  :font-size 14px
+  a, a:visited
+    :font-size 14px
+    :color = !white
+    :font-weight normal
+    &:hover
+      :background-color transparent 
 .box a, .box a:visited
   :color = !text_color
 
 h1
   :color #f6f6f6
   :font-size 32px
+  :font-weight normal
+  :text-shadow rgba(3,0,0,0.42) 2px 2px 1px
+  &.user
+    :color = !text_color
+    :text-shadow rgba(0,3,2,0.23) 2px 2px 1px
 h2
   :color = !white
   :font-size = !20px
   :font-weight bold
   :line-height 2em
   :margin-bottom 1em
+  :text-shadow rgba(0,3,2,0.42) 2px 2px 1px
 h2.box
   :display block
   :color = !text_color
@@ -45,3 +54,8 @@ h2.box
   :text-indent 25px
   :margin-bottom 3px
   :background-color = !box_background
+  :text-shadow rgba(0,3,2,0.23) 2px 2px 1px
+
+a.arrows, a.view_more
+  :background url(../images/buttons/arrow.png) no-repeat right center
+  :padding-right 12px

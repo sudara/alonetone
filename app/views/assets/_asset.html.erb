@@ -1,4 +1,4 @@
-<% content_tag :div, :id => ('asset_asset.unique_id'), :class => 'asset ' + cycle('odd', 'even') do %>
+<% content_tag :div, :id => ("asset_#{asset.unique_id}"), :class => 'asset ' + cycle('odd', 'even') do %>
 	<div class="play-button button"><%= link_to_play asset, @referer %></div>
 	<div class="title">
 	  <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link' %><br>
@@ -21,11 +21,13 @@
     </ul>
   
   	<div id="details_track_<%= asset.unique_id %>">
-	    <%= asset.description %><br/>
-      <%= link_to 'info', user_track_path(asset.user, asset.permalink) %>
+	    <%= asset.description %><br/><br/>
       Bitrate: <%= asset.bitrate %><br/>
-	    Song Length: <%= asset.length %><br/>
+	    Length: <%= asset.length %><br/>
 	    Listen count: <%= asset.listens_count %><br/>
+	    <div class="home_page_link">
+	      <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more' %>
+      </div>
 	  </div>
 	    
 	  <div id="share_track_<%= asset.unique_id %>">

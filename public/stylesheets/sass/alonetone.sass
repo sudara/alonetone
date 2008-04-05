@@ -70,7 +70,6 @@
 // browse all users    
 #user-index
   :position relative
-  :margin-right 150px
   
   .pagination 
     :text-align center
@@ -78,25 +77,24 @@
     :margin-top 15px
     :margin-bottom 25px
     :margin-left -20px
-
-  .name
-    :color #fff
-    :position absolute
-    :background-color transparent
-    :font-size 14px
-    :font-weight normal
-    :text-decoration none
-    :padding-left 5px
-    :margin-top -20px
-    :margin-left 0px
-    :height 20px
-    :width 120px
-    :display block
-    :z-index 5
-    :overflow none
-    :opacity 0.8
-    &:hover
-      :opacity .99
+  div.user
+    :float left
+    :margin-right 70px
+    :margin-bottom 30px
+    .name
+      :color = !white
+      :text-align center
+      :background-color transparent
+      :font-size 14px
+      :font-weight normal
+      :text-decoration none
+      :margin-top 5px
+      :height 20px
+      :width 120px
+      :display block
+      :overflow none
+      &:hover
+        :opacity .99
       
 // comments
 
@@ -116,11 +114,24 @@
     :margin-bottom 1px
     img 
       :float left
+      :margin-right 10px
+    a
+      :font-weight bold
+    .delete
+      :position absolute
+      :top 15px
+      :right 10px
+      a
+        :font-size 12px
+        :text-decoration underline
   .comment_body
     :background-color = !box_background
     :padding 20px 20px 30px 20px
     :clear both
     :margin-bottom 3px
+    .comment_about
+      a
+        :font-weight bold
   &.even 
     .comment_body
       :background-color = !box_background_even
@@ -191,4 +202,8 @@
         :color = !white
         :text-decoration none
 
-
+// recent listeners
+#recent_listeners
+  div
+    :float left
+    :margin-left 27px

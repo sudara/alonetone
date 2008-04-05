@@ -1,5 +1,6 @@
 <% render(:layout => 'users/user') do %>
   
+  <% content_for :left do %>
   <div id="single_track">
     <h2><%= @asset.name %></h2>
     <%= render :partial => 'assets/assets'%>
@@ -14,20 +15,15 @@
       <object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
     <% end %>
   </div>
-  
-   <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
-  
-   <%= render :partial => 'users'%>
-  
-   <div class="clear"> </div>
+      
    <%= render :partial => 'stats'%>
+  <% end %>
   
-<% end %>
-
-<% content_for :share do %>
-	<%= render :partial => 'assets/share', :object => @asset %>
-<% end %>
-
-<% content_for :comment do %>
-  	<%= render :partial => 'assets/comment', :object => @asset %>
+  <% content_for :right do %>
+    <%= render :partial => 'users'%>
+    <div class="clear"> </div>
+    <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
+  <% end %>
+  
+  
 <% end %>
