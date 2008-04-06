@@ -27,20 +27,29 @@ img a, img a:visited
     :font-weight normal
     &:hover
       :background-color transparent 
-.box a, .box a:visited
-  :color = !text_color
+  p
+    :color = !white
+    :margin-bottom 20px
+    
+.content .box 
+  a, .box a:visited
+    :color = !text_color
+  p
+    :color = !text_color
 
 h1
   :color #f6f6f6
   :font-size 32px
   :font-weight normal
   :text-shadow rgba(3,0,0,0.42) 2px 2px 1px
-  &.user
+  :margin-bottom 25px
+  &.user, &.static
     :color = !text_color
     :text-shadow rgba(0,3,2,0.23) 2px 2px 1px
+    :margin 0
 h2
   :color = !white
-  :font-size = !20px
+  :font-size = 20px
   :font-weight bold
   :line-height 2em
   :margin-bottom 1em
@@ -56,6 +65,30 @@ h2.box
   :background-color = !box_background
   :text-shadow rgba(0,3,2,0.23) 2px 2px 1px
 
-a.arrows, a.view_more
+.errorExplanation h2
+  :display none
+.errorExplanation p, .notice h2
+  :color = !text_color
+  :font-size 20px
+  :font-weight bold
+  :text-shadow rgba(0,3,2,0.42) 2px 2px 1px
+  
+div.flash
+  :background url(../images/backgrounds/flash.png) repeat-x top left
+  :font-size 24px
+  :color = !white
+  :padding 20px 30px
+  :margin-bottom 20px
+
+a.arrows, a.view_more, a.view_all
   :background url(../images/buttons/arrow.png) no-repeat right center
   :padding-right 12px
+.content a.view_all
+  :color = !text_color
+  :position relative
+  :float right
+  :margin-top -31px
+  :margin-right 25px
+  
+div.fieldWithErrors input
+  :border = !orange 2px solid 

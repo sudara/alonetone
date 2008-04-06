@@ -1,6 +1,6 @@
 <% if playlist.has_tracks? || authorized_for(playlist) %>
 
-		<% div_for playlist, :class => "#{(playlist.has_tracks? ? '' : 'empty')} #{playlist.type}" do %>
+		<% div_for playlist, :class => "box #{(playlist.has_tracks? ? '' : 'empty')} #{playlist.type}" do %>
 		  <div class="playlist_title box">
 			  <h2><%= playlist.title %></h2>
 			  <h3><%= pluralize playlist.tracks_count, 'track'%> by <%= (playlist.is_mix? ? 'various alonetone artists' : playlist.user.name )%></h3>

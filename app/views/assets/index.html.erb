@@ -1,16 +1,13 @@
 <% render(:layout => 'users/user') do %>
-
+  <% content_for :left do %>
 	<div id="user_tracks">
 		<% if @user.assets_count > 0 %>
-
-			<div id="stash" class="stash">
-				<h2>All <%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
-					<%= render :partial => 'asset', :collection => @assets %>
-			</div>
+			<h2 class="box"><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+			<%= render :partial => 'asset', :collection => @assets %>
 		<% else %>
 		<h1>Looks like <%= @user.name %> hasn't uploaded anything yet!</h1>
 	 <% end %>
 	</div>
-	
+	<% end %>
 
 <% end %>

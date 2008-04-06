@@ -1,15 +1,3 @@
-<div id="flash" style="display:none;">
-		<div id="flash-top"><div id="flash-top-right"></div></div>
-    <div id="flash-container">	
-			<div id="flash-error" class="flash" style="display: none;">
-						<h2>Uhm...</h2><p><%= flash[:error] %></p>
-				</div>
-	    	<div id="flash-info" class="flash" style="display:none">
-						<h2>Check it</h2><p><%= flash[:info] %></p>
-				</div>
-	    	<div id="flash-ok" class="flash" style="display:none">
-						<h2>Alright</h2><p><%= flash[:ok] %></p>
-			</div>		
-		</div>
-		<div id="flash-bottom"><div id="flash-bottom-right"></div></div>
+<div class="flash">
+  <%= flash %>
 </div>

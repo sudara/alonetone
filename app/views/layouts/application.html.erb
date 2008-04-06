@@ -26,8 +26,8 @@
         <%= render :partial => 'shared/user_bar', :current_user => current_user %>
       </div>
     
-		  <%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
-		  <%= render :partial => 'shared/notice' if @notice %>
+		  <%= check_for_and_display_flashes %>
+		  <%= check_for_and_display_notices %>
       <div id="main">
 		      <%= yield %>
       </div>

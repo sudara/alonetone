@@ -8,7 +8,9 @@
   :class => 'comment_form' do |f| %>
    <%= f.text_area :body, :rows => 4, :cols => 40 %>
    <%= f.hidden_field :commentable_type, :value => 'asset'%>
+    <div class="submit_wrapper">
    <%= f.submit "send comment to #{h object.user.name}", :class => 'comment_submit'%> 
+    </div>
   <% end %>  
   
 </div>

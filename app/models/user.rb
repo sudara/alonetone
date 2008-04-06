@@ -143,12 +143,26 @@ class User < ActiveRecord::Base
   end
   
   def self.paginate_by_params(params)
-    if params[:all]
-      self.paginate_all_by_activation_code(nil, :per_page => 24, :include => :pic, :order => "users.created_at DESC", :page => params[:page])
-    elsif params[:playlists]
-      self.paginate(:all, :conditions => 'users.playlists_count > 0', :per_page => 24, :include => :pic, :order => "users.playlists_count DESC", :page => params[:page]) 
+    case params[:sort]
+    when 'recently_joined' 
+      self.paginate_all_by_activation_code(nil, :per_page => 15, :include => :pic, :order => "users.created_at DESC", :page => params[:page])
+    when 'monster_uploaders'
+      self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 15, :include => :pic, :order => "users.assets_count DESC", :page => params[:page])
+    when 'dedicated_listeners'
+      @entries = WillPaginate::Collection.create(1, 15) do |pager|
+        # returns an array, like so: [User, number_of_listens]
+        result = Listen.count(:all, :include => :listener, :order => 'count_all DESC', :conditions => 'listener_id != ""', :group => :listener, :limit => pager.per_page, :offset => pager.offset)
+
+        # inject the result array into the paginated collection:
+        pager.replace(result)
+        
+        unless pager.total_entries
+          # the pager didn't manage to guess the total count, do it manually
+          pager.total_entries = Listen.count
+        end
+      end
     else
-      self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 24, :include => :pic, :order => "users.assets_count DESC", :page => params[:page])
+      self.paginate(:all, :include => [:assets, :pic], :per_page => 15, :order => 'assets.created_at DESC',  :page => params[:page])
     end
   end
   

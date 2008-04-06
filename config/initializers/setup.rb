@@ -19,6 +19,7 @@ UserMailer.mail_from = 'music@alonetone.com'
 Sass::Plugin.options[:always_check] = true 
 
 require 'randomness'
+require 'goodies'
 PASSWORD_SALT = 'so_salty_its_unbearable'
 
 # DEPENDENCIES 

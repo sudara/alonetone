@@ -1,7 +1,14 @@
+<% if user.try(:first) %>
+  <% count = user[1] %>
+  <% user = user.first %>
+<% end %>
+
+
 <% div_for(user, :class => 'user-index') do %>
 	<%= user_image_link(user) %><br/>
 	
-	<%= link_to h(user.name), user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %>
+	<%= link_to h(user.name), user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %> 
+	<%= "(#{count})" if count %>
 	<span class="details" style="display:none;">
  		<%= link_to(pluralize(user.assets_count, 'track'), user_tracks_path(user)) if user.assets_count > 0 %><br/>
  		<%= link_to(pluralize(user.playlists_count, 'playlist'), user_playlists_path(user)) if user.playlists_count > 0 %>

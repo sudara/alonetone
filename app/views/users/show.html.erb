@@ -6,8 +6,7 @@
 		
 		<% if @user.has_public_playlists? %>
 			<h2>Latest Playlists by <%=@user.name%></h2>
-			
-		<%= render :partial => 'shared/carousel' %>
+		  <%= render :partial => 'shared/carousel' %>
 			<div class="clear"> </div>
 		<% end %>
 	

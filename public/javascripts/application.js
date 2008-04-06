@@ -285,5 +285,8 @@ Track = $.klass({
 
 jQuery(function($) {
   $('.asset, .track').attach(Track);
+  
+  // user index
+  $('.big_tabs > ul').tabs({ fx: [null,{ height: 'toggle',duration: 300,easing:'easeOut'}]});
 });
 

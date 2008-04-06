@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def index
     @page_title = 'the music makers and music lovers of alonetone'
     @tab = 'browse'
-    @users =  User.paginate_by_params(params)
+    @users = User.paginate_by_params(params)
     flash[:info] = "Want to see your pretty face show up here?<br/> Edit <a href='#{edit_user_path(current_user)}'>your profile</a>" unless current_user = :false || current_user.has_pic?
     respond_to do |format|
       format.html do
@@ -24,9 +24,8 @@ class UsersController < ApplicationController
         @users = User.search(params[:q], :limit => 25)
         render :xml => @users.to_xml
       end
-      format.js do render :update do |page|
-          page.replace 'user-index', :partial => 'users'
-        end
+      format.js do
+          render :partial => 'users.html.erb'
       end
      # format.fbml do
      #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])

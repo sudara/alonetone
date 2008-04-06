@@ -1,7 +1,15 @@
 <% render(:layout => 'users/user') do %>
-  		<%= link_to "new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
+  	
+  	<%= link_to "new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
 
-	<div id="user_playlists">
-		<%= render :partial => @playlists%>
-	</div>
+    <% split_playlists = @playlists.in_groups_of((@playlists.size.to_f/2).round)%>
+    
+    <% content_for :left do %>
+		  <%= render :partial => 'playlist', :collection => split_playlists[0] %>
+		<% end %>
+		
+		<% content_for :right do %>
+		  <%= render :partial => 'playlist', :collection => split_playlists[1] %>
+		<% end %>
+		
 <% end %>

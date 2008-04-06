@@ -35,51 +35,13 @@
       :height 27px
       &:hover
         :background-position -84px 0
-        
-
-// pagination
-.pagination 
-  padding: 3px
-  margin:10px 3px
-  text-align:center
-  a 
-    padding: 3px 5px 2px 5px
-    margin: 2px
-    text-decoration: none
-    color: #373738
-    background-position: top
-    background-repeat: repeat-x
-    background-color:#c5c5c5
-
-    &:hover, &:active 
-      :color #000
-      background-image: none
-  
-  span.current 
-    padding: 3px 5px 2px 5px
-    margin: 2px
-    font-weight: bold
-    color: #FFF
-  
-  span.disabled 
-    padding: 2px 5px 2px 5px
-    margin: 2px
-    color: #ccc
-    
-    
+       
 // browse all users    
 #user-index
   :position relative
-  
-  .pagination 
-    :text-align center
-    :width 100%
-    :margin-top 15px
-    :margin-bottom 25px
-    :margin-left -20px
   div.user
     :float left
-    :margin-right 70px
+    :margin-right 50px
     :margin-bottom 30px
     .name
       :color = !white
@@ -94,7 +56,8 @@
       :display block
       :overflow none
       &:hover
-        :opacity .99
+        :font-weight bold
+        :text-decoration underline
       
 // comments
 
@@ -115,6 +78,14 @@
     img 
       :float left
       :margin-right 10px
+    .comment_user_text
+      :line-height 10px
+      :font-size 11px
+      a
+        :font-size 11px
+    .comment_about
+      :line-height 18px
+      :padding-top 8px
     a
       :font-weight bold
     .delete
@@ -138,9 +109,9 @@
     
     
     
-// user layout
+// user layout & static header (with nav)
 
-#user_header
+#user_header, #static_header
   :position relative
   :height 83px
   :margin-bottom 68px
@@ -155,7 +126,7 @@
       :height 83px
       :width 83px
       
-  .user_title
+  .user_title, .title
     :height 50px
     :margin-left 84px
     :margin-bottom 1px
@@ -165,11 +136,11 @@
       :line-height 50px
       :color !text_color
       :margin-left 20px
-  #user_links
+  #user_links, #links
     :height 32px
     :background transparent url(../images/backgrounds/user_bar.png) repeat-x top left
     :margin-left 84px
-  ul.user_links
+  ul.user_links, ul.links
     :height 32px
     :width 100px
     :display inline
@@ -189,7 +160,6 @@
         :padding 10px 15px
         :font-weight bold
         :color = !white
-
     a
       :display block
       :height 12px
@@ -201,6 +171,34 @@
         :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
         :color = !white
         :text-decoration none
+    div.pagination
+      :height 32px
+
+// static headers don't have pics
+#static_header
+  .title, #links
+    :margin-left 0px
+  .links li, .links li a
+    :font-size 12px
+  .pagination
+    :float right
+    :height 32px
+    :position relative
+    :text-align right
+    a, span
+      :display block
+      :float left
+      :height 12px
+      :font-size 12px
+      :padding 10px 15px
+      :color = !text_color
+    span.current, a:hover
+      :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
+      :color = !white
+      :font-weight bold
+      :text-decoration none
+    span.disabled
+      :opacity 0.4
 
 // recent listeners
 #recent_listeners

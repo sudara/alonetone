@@ -71,6 +71,18 @@ module ApplicationHelper
     @online.each {|person| link_to person.login, user_home_path(person) }
   end
   
+  def check_for_and_display_flashes
+    flashes = []
+    [flash[:notice], flash[:error], flash[:info], :flash[:ok]].each do |flash|
+      flashes << (render :partial => 'shared/flash', :object => flash) if (flash && !flash.empty?)
+    end
+    flashes.join
+  end
+  
+  def check_for_and_display_notices
+    
+  end
+  
   def authorized?
     admin? || @user === current_user 
   end
