@@ -12,7 +12,6 @@ $.fn.log = function() {
     text += this.tagName;
     if (this.id) text += '#' + this.id;
   });
-  console.log(text);
 }
 
 // hack up a periodical executor
@@ -219,7 +218,6 @@ Track = $.klass({
   },
   
   togglePlay: function(target){ 
-    console.log('toggling play...') 
     if(this.isPlaying()) 
       this.pause();
     else
@@ -229,9 +227,7 @@ Track = $.klass({
   },
   
   playOrResume : function(){
-    console.log('about to kill other tracks...');
     this.killOtherTracks();
-    console.log('killed other tracks...');
     this.element.addClass('playing');
     this.openDetails(0);
     this.ensureSoundIsReadyThenPlay();
@@ -240,10 +236,8 @@ Track = $.klass({
   tellSoundManagerToPlay: function(){
     this.startTimer();
     if (this.isPaused()){
-      console.log('coming out of pause...'+this.soundID);
       this.resume();
     }else{
-      console.log('playing track...'+this.soundID);
       this.play();
     }
   },
@@ -251,8 +245,6 @@ Track = $.klass({
   play: function(){
     onFinishCallback = $.bind(this.startNextTrack,this);
     soundManager.play(this.soundID,this.trackURL,{onfinish:onFinishCallback});
-    console.log('ok, should be playing url: '+this.trackURL);
-    console.log('loaded tracks include: '+ soundManager.soundIDs);
   }, 
   
   isPlaying: function(){
@@ -260,7 +252,6 @@ Track = $.klass({
   },
   
   pause: function(){
-    console.log('pausing '+this.soundID);
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
     this.closeDetails();
@@ -272,13 +263,11 @@ Track = $.klass({
   },
   
   soundIsLoaded: function(){
-    console.log('checking to see if '+this.soundID+' is loaded...')
     if (soundManager.soundIDs.length > 0 && ($.inArray(this.soundID,soundManager.soundIDs) != -1)) return true;
     else return false;
   },
   
   resume: function(){
-    console.log('resuming track');
     soundManager.resume(this.soundID);
   },
   
@@ -321,7 +310,6 @@ Track = $.klass({
     if(soundIsReady) return this.tellSoundManagerToPlay();
     tryAgain = $.bind(this.ensureSoundIsReadyThenPlay, this); // use lowpro bind to create closure
     setTimeout('tryAgain()','300');
-    console.log('WAITING FOR SOUNDMANAGER....');
   }
 });
 
