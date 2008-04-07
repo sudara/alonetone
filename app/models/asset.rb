@@ -160,6 +160,14 @@ class Asset < ActiveRecord::Base
     self.permalink = nil
   end
   
+  def self.days
+    (Asset.sum(:length).to_f / 60 / 60 / 24).to_s[0..2]
+  end
+  
+  def self.gigs
+    (Asset.sum(:size).to_f / 1024 / 1024 / 1024).to_s[0..3]
+  end
+  
   # allows classes outside Asset to use the same format
   def self.formatted_time(time)
     if time
