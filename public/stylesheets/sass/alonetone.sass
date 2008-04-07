@@ -179,9 +179,10 @@
   .title, #links
     :margin-left 0px
   .links li, .links li a
-    :font-size 12px
+    :font-size 14px
   .pagination
     :float right
+    :display block
     :height 32px
     :position relative
     :text-align right
@@ -189,14 +190,17 @@
       :display block
       :float left
       :height 12px
+      :line-height 14px
       :font-size 12px
-      :padding 10px 15px
+      :padding 10px 10px
       :color = !text_color
     span.current, a:hover
       :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
       :color = !white
-      :font-weight bold
       :text-decoration none
+      :font-weight bold
+    span.gap
+      :padding 10px 0px
     span.disabled
       :opacity 0.4
 

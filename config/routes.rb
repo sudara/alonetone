@@ -35,7 +35,8 @@ ActionController::Routing::Routes.draw do |map|
   # top 40
   map.top '/top/:top', :controller => 'assets', :action => 'top'
 
-  map.sorted_users '/users/by/:sort', :controller => 'users', :action => 'index'
+  map.users_default '/users/by/activity/:page', :controller => 'users', :action => 'index', :sort => 'active', :page => 1
+  map.sorted_users '/users/by/:sort/:page', :controller => 'users', :action => 'index', :page => 1
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any} do |user|
     user.resources :tracks, :controller => :assets, :collection => {:latest => :get, :search => :any}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments

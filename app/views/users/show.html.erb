@@ -13,13 +13,12 @@
 		<% content_for :left do %>
 	    <%= render :partial => 'latest' if @user.assets_count > 0 %>
 	    <%= render :partial => 'listens' if @listens.size > 0 %>	
-	
+		  <%= image_tag @user.track_plays_graph if authorized? %>
+	    <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
 	  <% end %>
 	  
 	  <% content_for :right do %>
 	    <%= render :partial => 'shared/comments' if @user.comments.size > 0 %>
-	    <%= image_tag @user.track_plays_graph if authorized? %>
-	    <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
 
 	  <% end %>	
 		

@@ -31,6 +31,9 @@
       <div id="main">
 		      <%= yield %>
       </div>
+      <div id="static">
+          <%= yield :static %>
+      </div>
       <div id="columns">
 				<div id="left">
 					<%= yield :left %>
@@ -39,8 +42,10 @@
 				<div id="right">
 					<%= yield :right %>
 				</div>	
-			</div> <!-- end main -->
-
+				<div class="clear"> </div>
+				
+			</div> <!-- end columns -->
+      
 
 	   </div><!-- end content -->
 	   </div><!-- end wrapper -->

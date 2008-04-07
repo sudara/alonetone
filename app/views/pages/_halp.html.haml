@@ -1,0 +1,11 @@
+#static_header
+  .title
+    %h1.static
+      All about alonetone
+  #links
+    %ul.links
+      = user_nav_item "faq", {:action => 'index' } 
+      = user_nav_item "stats", {:action => 'stats'}, 'contact'
+- content_for :static do
+  = yield
+  

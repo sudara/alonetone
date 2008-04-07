@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
     when 'monster_uploaders'
       self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 15, :include => :pic, :order => "users.assets_count DESC", :page => params[:page])
     when 'dedicated_listeners'
-      @entries = WillPaginate::Collection.create(1, 15) do |pager|
+      @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
         # returns an array, like so: [User, number_of_listens]
         result = Listen.count(:all, :include => :listener, :order => 'count_all DESC', :conditions => 'listener_id != ""', :group => :listener, :limit => pager.per_page, :offset => pager.offset)
 
@@ -158,10 +158,11 @@ class User < ActiveRecord::Base
         
         unless pager.total_entries
           # the pager didn't manage to guess the total count, do it manually
-          pager.total_entries = Listen.count
+          pager.total_entries = Listen.count(:listener_id, :conditions => 'listens.listener_id != ""')
         end
       end
     else
+      
       self.paginate(:all, :include => [:assets, :pic], :per_page => 15, :order => 'assets.created_at DESC',  :page => params[:page])
     end
   end
