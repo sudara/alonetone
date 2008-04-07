@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def create
     respond_to do |wants|
       wants.js do
+        return head(:bad_request) unless params[:comment][:body] && !params[:comment][:body].empty?
         case params[:comment][:commentable_type] 
         when 'asset'
           find_asset

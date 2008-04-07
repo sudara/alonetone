@@ -110,6 +110,47 @@ Tabbies = $.klass({
   }
 });
 
+CommentForm = $.klass(Remote.Form, {
+    initialize : function(options) {
+      this.submitButton = $('.comment_submit', this.element);
+      this.submitText = this.submitButton.val();
+      this.spinner = $('.small_spinner',this.element);
+      this.resultBox = $('.comment_waiting', this.element);
+      this.textarea = $('textarea', this.element);
+      this.options = $.extend({
+        beforeSend: $.bind(this.send,this),
+        success: $.bind(this.success, this),
+        error: $.bind(this.error, this),
+        complete: $.bind(this.complete, this)
+      }, options || {});
+    },
+    send:function(){
+      this.spinner.show();
+      this.disable();
+    },
+    complete:function(){
+      this.spinner.hide();
+      this.enable();
+    },
+    disable:function(){
+      this.submitButton.attr('disabled','disabled');
+      this.submitButton.val('sending comment...');
+    },
+    enable:function(){
+      this.submitButton.removeAttr('disabled');
+      this.submitButton.val(this.submitText);
+    },
+    success:function(){
+      this.resultBox.text('Submitted, thanks!')
+      this.resultBox.fadeIn(100);
+      this.textarea.val('');
+      this.spinner.hide();
+    },
+    error: function(){
+      this.resultBox.text("Didn't work, try again?")
+      this.resultBox.fadeIn(100);
+    }
+});
 
 Track = $.klass({  
   initialize: function() {
@@ -261,7 +302,8 @@ Track = $.klass({
   },
   
   createTabbies : function(){
-    this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0];
+    this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array
+    this.commentForm = $('.comment_form form',this.more).attachAndReturn(CommentForm)[0];
   },
   startTimer : function(){
     $.timer(1000,$.bind(this.updateTime,this));
