@@ -290,7 +290,7 @@ Track = $.klass({
   
   play: function(){
     onFinishCallback = $.bind(this.startNextTrack,this);
-    soundManager.play(this.soundID,this.trackURL,{onfinish:onFinishCallback});
+    soundManager.play(this.soundID,{url: this.trackURL, onfinish:$.bind(this.startNextTrack,this)});
   }, 
   
   isPlaying: function(){
@@ -320,6 +320,7 @@ Track = $.klass({
   startNextTrack: function(){
     this.pause();
     Track.instances[this.nextTrackIndex()].playOrResume();
+    console.log('starting next track');
   },
   
   nextTrackIndex : function(){
