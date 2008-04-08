@@ -3,7 +3,7 @@
 <div id="comment_<%= object.unique_id%>" class="comment_asset footer_content">
   <div class="comment_form">
     <% form_for :comment, :url => user_track_comments_path(object.user, object) do |f| %>
-     <%= f.text_area :body, :rows => 4, :cols => 40 %>
+     <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble' %>
      <%= f.hidden_field :commentable_type, :value => 'asset'%>
       <div class="submit_wrapper">
         <div class="comment_waiting" >

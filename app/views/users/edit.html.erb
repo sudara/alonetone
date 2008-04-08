@@ -1,7 +1,4 @@
-<h1>Editing Your Profile</h1>
 <% render(:layout => 'user') do %>
-
-
 		<p>
 			<%= link_to_function 'Change your picture',nil, :id => 'pic_upload_link' do |page|
 				page[:pic_upload].toggle
@@ -25,8 +22,8 @@
 		</p>
 		
 		<p>
-			<label for="user_bio">A short little biography</label><br />
-			<%= f.text_area :bio, :cols => 50, :rows => 5%>
+			<label for="user_bio">Tell us about yourself</label><br />
+			<%= f.text_area :bio, :cols => 50, :rows => 4%>
 		</p>
 		
 		<p>
@@ -34,19 +31,21 @@
 			http://<%= f.text_field :website %>
 		</p>
 		<p>
-			<label for="user_website">Have a podcast on iTunes?</label><br />
+		  <label for "user_myspace">Sport a myspace account?</label><br/>
+		  http://myspace.com/<%= f.text_field :myspace%>
+		</p>
+		<p>
+			<label for="user_website">Did you set up your <%= link_to 'alonetone iTunes podcast?', halp_path(:itunes) %></label><br />
 			http://<%= f.text_field :itunes %>
 		</p>
 		
-		  <%= link_to_function("Change your password", nil, :id => "more_link") do |page|
-		    page[:edit_password].toggle
-		end %>
+		<%= link_to("Change your password",'#edit_password',:class=>'slide_open_next') %>
 	  <div id="edit_password" style="display:none">
-		Enter your desired new password twice, please:<br/>
-		<%= f.password_field :password %><br/>
-		<%= f.password_field :password_confirmation %>
+  		Enter your desired new password twice, please:<br/>
+  		<%= f.password_field :password %><br/>
+  		<%= f.password_field :password_confirmation %>
 	  </div><br/><br/>
-	  <%= submit_tag "Update Your Profile" %> or <%= link_to "go see what you look like", profile_path(@user)%>
+	  <%= submit_tag "Update Your Profile" %>
 	<% end -%>
 
 	<br />

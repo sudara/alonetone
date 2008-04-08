@@ -94,6 +94,52 @@ DateSelector = $.klass({
 
 */
 
+SlideOpenNext = $.klass({
+  initialize:function(){
+    this.next = this.element.next();
+  },
+  onclick:function(){
+    this.next.slideToggle();
+    return false;
+  }
+  
+});
+
+AdjustableTextarea = $.klass({
+  
+  initialize : function(line_height){
+    this.line_height = line_height;
+    this.character_width = this.element.attr('cols');
+  },
+  checkForSizeChange : function(){
+    if(this.collapsed_height_in_px == undefined) this.set_collapsed_height();
+    lines = this.element.val().split("\n");
+    actual_row_count = lines.length;
+    for(line in actual_row_count){
+      actual_row_count += parseInt(line.length / this.character_width);
+    }
+    if(this.starting_row_count < actual_row_count)
+      this.element.css({height:(this.collapsed_height_in_px*2)+'px'});
+    else
+      this.element.css({height:this.collapsed_height_in_px+'px'});
+    
+  },
+  onkeypress: function(){
+    this.checkForSizeChange();
+  },  
+  oninput: function(){
+    this.checkForSizeChange();
+  },  
+  onpaste: function(){
+    this.checkForSizeChange();
+  },
+  set_collapsed_height: function(){
+    // done here, because at first textarea may be hidden
+    this.collapsed_height_in_px = this.element.height();
+    this.starting_row_count = parseInt(this.collapsed_height_in_px / this.line_height);
+  }
+
+});
 
 // abstracts ui.tabs a bit further   
 Tabbies = $.klass({
@@ -314,9 +360,14 @@ Track = $.klass({
 });
 
 jQuery(function($) {
+  // Tracks 
   $('.asset, .track').attach(Track);
   
-  // user index
-  $('.big_tabs > ul').tabs({ fx: [null,{ height: 'toggle',duration: 300,easing:'easeOut'}]});
+  // Slide open the next element on click
+  $('.slide_open_next').attach(SlideOpenNext);
+  
+  // double the text area size when typing a lot
+  $('textarea.double_trouble').attach(AdjustableTextarea,16);
+  
 });
 

@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
   map.about 'about/:action', :controller => 'pages'
+  map.halp  'about/halp/:action', :controller => 'pages'
+  
   map.resources :updates
 
   map.logged_exceptions 'logged_exceptions/:action/:id',    :controller => 'logged_exceptions'

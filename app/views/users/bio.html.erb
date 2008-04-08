@@ -1,49 +1,55 @@
-  <%= pretty_text "#{h @user.name.capitalize}", :h1%><br/>
-  <%= link_to(image_tag(@user.avatar(:album), :class => 'large_avatar'), profile_path(@user),  :id=>'alonetoner_big') %>
+<% render(:layout => 'user') do %>
+
+  <% content_for :left do %>
+    <div id="bio" class="box">
+      <h2 class="box">All about <%=h @user.name %></h2>
+      <div class="bio">
+                	<%= offer(link_to 'Edit your Profile', edit_user_path(@user)) if authorized? %>
+
+      	<% if !@user.bio.blank?%>
+        	<p>
+        	  <h3>All about <%= @user.name%></h3>
+        	  <%= @user.printable_bio %>
+        	</p>
+        	<% end %>
+        </div>
+      	<div class="clear"></div>
+    	<% if !@user.website.blank? %>
+    	<p>
+    	  <h3><%= @user.name %>'s Website</h3>
+    	  <%= website_for(@user) %>
+    	</p>
+    	<% end %>
 	
-<div id="bio">
-  <div class="bio">
-    	<%= offer(link_to 'Click here to edit your Profile', edit_user_path(@user)) if authorized? %>
-	    <%= link_to "Email #{@user.name} at #{@user.email}", "mailto:#{@user.email}" if admin? %><br/>
-  	<% if !@user.bio.blank?%>
-  	<p>
-  	  <h3>All about <%= @user.name%></h3>
-  	  <%= @user.printable_bio %>
-  	</p>
-  	<% end %>
-  </div>
-	<div class="clear"></div>
-	<% if !@user.website.blank? %>
-	<p>
-	  <h3><%= @user.name %>'s Website</h3>
-	  <%= website_for(@user) %>
-	</p>
-	<% end %>
-	
-	<% if @user.itunes && !@user.itunes.blank? %>
-	  <p>
-	  <h3>Listen to <%= @user.name %> on iTunes</h3>
-      <%= itunes_link_for(@user) %><br/>
-	  </p>
-	<% end %>
-	<% if @user.has_tracks? && authorized? %>
-	<p>
-	  <h3>Your Podcast feed </h3>
-	  <%= user_feeds_url(@user, :rss) %>
-	  <br/>
-	  You can 
-	  <%= link_to 'open itunes and submit this link', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
-	  and get your music listed under Podcasts > Music. Make sure to update your profile after the podcast is approved!
-	</p>
-	<% end %>
+    	<% if @user.present?(:itunes) %>
+    	  <p>
+    	  <h3>Listen to <%= @user.name %> on iTunes</h3>
+          <%= itunes_link_for(@user) %><br/>
+    	  </p>
+    	<% end %>
+    	<% if @user.has_tracks? && authorized? %>
+    	<p>
+    	  <h3>Your Podcast feed </h3>
+    	  <%= user_feeds_url(@user, :rss) %>
+    	  <br/>
+    	  You can 
+    	  <%= link_to 'open itunes and submit this link', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
+    	  and get your music listed under Podcasts > Music. Make sure to update your profile after the podcast is approved!
+    	</p>
+    	<% end %>
 
 	
-	<p>		
-	  <h3>Stats</h3>
+
+    </div>	
+  <% end %>
+  
+  <% content_for :right do %>
+    <%= link_to(image_tag(@user.avatar(:album), :class => 'large_avatar'), profile_path(@user),  :id=>'alonetoner_big') %>
+    <h3><%= @user.name %>'s stats</h3>
 	  <% if @user.listens_count > 0 %>
 		People have listened to <%= @user.name %>'s <%= pluralize @user.assets_count, 'track' %> about <%= @user.listens_count %> times.<br/>
 		<% end %>
-	  <%=@user.name%> has been on alonetone since <%= @user.created_at.to_date.to_s :long %><br/>
-	</p>
-</div>	
-	
+	  <%=@user.name%> joined the alonetone crew on <%= @user.created_at.to_date.to_s :long %> and was last seen <%= time_ago_in_words(@user.last_seen_at)%> ago
+  <% end %>
+
+<% end %>

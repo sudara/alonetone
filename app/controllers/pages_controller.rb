@@ -26,6 +26,10 @@ class PagesController < ApplicationController
     render :layout => false
   end
   
+  def itunes
+    
+  end
+  
   def sitemap
     @users = User.find(:all)
     respond_to do |wants|
