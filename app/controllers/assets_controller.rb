@@ -12,7 +12,7 @@ class AssetsController < ApplicationController
   # GET /assets.xml
   def index
       @page_title = @user.name + "'s uploaded music on alonetone"
-      @assets = @user.assets.paginate(:all, :order => 'created_at DESC', :per_page => 60, :page => params[:page])
+      @assets = @user.assets.paginate(:all, :order => 'created_at DESC', :per_page => 200, :page => params[:page])
       respond_to do |format|
         format.html # index.rhtml
         format.xml  { render :xml => @assets.to_xml }
