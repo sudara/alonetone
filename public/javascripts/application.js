@@ -201,7 +201,7 @@ Track = $.klass({
   initialize: function() {
     this.playButton = $(".play-button",this.element);
     this.trackLink = $("a.track_link",this.element);
-    this.time = $('span.time',this.element);
+    this.time = $('span.counter',this.element);
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = $('a.play_link',this.element).attr('href');
     this.soundID = 'play-'+this.element[0].id; 

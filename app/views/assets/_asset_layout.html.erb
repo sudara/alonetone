@@ -4,7 +4,7 @@
 	 <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link' %><br>
 	 
 	 <%= yield %> 
-	 
+	 <span class='counter'> </span>
 	 <span class='time'><%= asset.length%></span>
 	  <span class="when" style="display:none;"><%= time_ago_in_words asset.created_at %> ago</span>
 	</div>
