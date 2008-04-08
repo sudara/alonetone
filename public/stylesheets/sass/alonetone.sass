@@ -30,11 +30,27 @@
     a
       :background url(../images/buttons/search.png) no-repeat 0px 0
       :display block
-      :position absolute
+      :float left
       :width 84px
       :height 27px
-      &:hover
+      &:hover, &.active
         :background-position -84px 0
+    form
+      :position absolute
+      :top 0px
+      :left 86px
+      :height 28px
+      :width 200px
+      input
+        :margin 0
+        :margin-left 15px
+        :height 22px
+        :font-size 14px
+        :color = !white
+        :padding 2px 3px
+        :width 200px
+        :background-color #5b5d4a
+        :border 1px solid #4b4e3f
        
 // browse all users    
 #user-index

@@ -13,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.about 'about/:action', :controller => 'pages'
   map.halp  'about/halp/:action', :controller => 'pages'
   
+  map.search 'search/:query', :controller => 'search', :action => 'index'
+  
   map.resources :updates
 
   map.logged_exceptions 'logged_exceptions/:action/:id',    :controller => 'logged_exceptions'

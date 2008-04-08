@@ -370,5 +370,15 @@ jQuery(function($) {
   // double the text area size when typing a lot
   $('textarea.double_trouble').attach(AdjustableTextarea,16);
   
+  // slide open the search
+  $('#search_button').click(function(){
+    $(this).addClass('active');
+    $(this).next().width('0px');
+    $(this).next().animate({
+      width: '200px'
+    });
+    $(this).next().focus();
+    return false;
+  });
 });
 
