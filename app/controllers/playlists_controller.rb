@@ -12,8 +12,10 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.xml
   def index
-    @playlists = @user.playlists.find(:all)
-
+    @all_playlists = @user.playlists.find(:all)
+    # TODO: fugly array work
+    split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
+    @playlists_left, @playlists_right = split[0].compact, split[1].compact
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @playlists }
