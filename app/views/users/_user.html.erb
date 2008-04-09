@@ -4,6 +4,9 @@
   
   <div class="user_title">
     <h1 class="user"><%=h @user.name %></h1><%= user_location(@user) %>
+    <% if authorized? %>
+      <%= link_to 'edit your profile', edit_user_path(@user), :class => 'edit' %>
+    <% end %>
   </div>
   <div id="user_links">
     <ul class="user_links">
@@ -13,7 +16,8 @@
      <%= user_nav_item "Profile", profile_path(@user) if @user.bio %>
   
       <%= user_nav_item "Email", "mailto://#{@user.email}","contact" if admin? %>
-      <%= user_nav_item "iTunes", "http://#{@user.itunes}","contact" if @user.itunes && !@user.itunes.empty? %>
+      <%= user_nav_item "Myspace", "http://myspace.com/#{@user.myspace}","contact" if @user.present?(:myspace)%>
+      <%= user_nav_item "iTunes", "http://#{@user.itunes}","contact" if @user.present?(:itunes) %>
       <%= user_nav_item "Sudo", sudo_user_path(@user),"contact" if (admin? || @sudo)%>   
     </ul>
   </div>

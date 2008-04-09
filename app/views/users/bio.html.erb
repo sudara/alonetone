@@ -2,31 +2,31 @@
 
   <% content_for :left do %>
     <div id="bio" class="box">
-      <h2 class="box">All about <%=h @user.name %></h2>
-      <div class="bio">
-                	<%= offer(link_to 'Edit your Profile', edit_user_path(@user)) if authorized? %>
+      <h2 class="box static">All about <%=h @user.name %></h2>
+      <%= link_to 'Edit', edit_user_path(@user),:class=>'edit' if authorized? %>
+     
+      <div class="bio static_content">
 
-      	<% if !@user.bio.blank?%>
+      	<% if @user.present?(:bio) %>
         	<p>
-        	  <h3>All about <%= @user.name%></h3>
         	  <%= @user.printable_bio %>
         	</p>
         	<% end %>
-        </div>
-      	<div class="clear"></div>
-    	<% if !@user.website.blank? %>
-    	<p>
-    	  <h3><%= @user.name %>'s Website</h3>
-    	  <%= website_for(@user) %>
-    	</p>
+      </div>
+      
+      <% if @user.present?(:website) %>
+        <p class="website static_content">
+      	  <%= website_for(@user) %>
+      	</p>
     	<% end %>
-	
+
+	  
     	<% if @user.present?(:itunes) %>
-    	  <p>
-    	  <h3>Listen to <%= @user.name %> on iTunes</h3>
-          <%= itunes_link_for(@user) %><br/>
+    	  <p class="itunes static_content">
+          <%= itunes_link_for(@user) %>
     	  </p>
     	<% end %>
+    	
     	<% if @user.has_tracks? && authorized? %>
     	<p>
     	  <h3>Your Podcast feed </h3>
@@ -37,15 +37,12 @@
     	  and get your music listed under Podcasts > Music. Make sure to update your profile after the podcast is approved!
     	</p>
     	<% end %>
-
-	
-
     </div>	
   <% end %>
   
   <% content_for :right do %>
     <%= link_to(image_tag(@user.avatar(:album), :class => 'large_avatar'), profile_path(@user),  :id=>'alonetoner_big') %>
-    <h3><%= @user.name %>'s stats</h3>
+    <h2 class="box static"><%= @user.name %>'s stats</h2>
 	  <% if @user.listens_count > 0 %>
 		People have listened to <%= @user.name %>'s <%= pluralize @user.assets_count, 'track' %> about <%= @user.listens_count %> times.<br/>
 		<% end %>

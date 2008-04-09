@@ -25,7 +25,7 @@ class Object
     attribute = attribute.to_sym
     if respond_to? attribute
       result = send attribute
-      result.empty? ? false : result
+      return result if (result && !result.empty?) 
     end
     false
   end
