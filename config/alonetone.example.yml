@@ -1,0 +1,3 @@
+# use rake secret to generate a hash for this
+alonetone:
+  secret: (big long secret string)
