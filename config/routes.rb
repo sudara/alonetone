@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.about 'about/:action', :controller => 'pages'
   map.halp  'about/halp/:action', :controller => 'pages'
   
-  map.search 'search/:query', :controller => 'search', :action => 'index'
+  map.search 'search', :controller => 'search', :action => 'index'
   
   map.resources :updates
 

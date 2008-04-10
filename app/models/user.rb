@@ -81,6 +81,16 @@ class User < ActiveRecord::Base
   def self.currently_online
      User.find(:all, :conditions => ["last_seen_at > ?", Time.now-5.hours])
   end
+  
+  # Generates magic %LIKE% sql statements for all columns
+  def self.conditions_by_like(value, *columns) 
+    columns = self.content_columns if columns.size==0 
+    columns = columns[0] if columns[0].kind_of?(Array) 
+    conditions = columns.map {|c| 
+    c = c.name if c.kind_of? ActiveRecord::ConnectionAdapters::Column 
+    "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
+    }.join(" OR ") 
+  end
  
   def to_param
     "#{self.login}"

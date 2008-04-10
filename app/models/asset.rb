@@ -63,6 +63,17 @@ class Asset < ActiveRecord::Base
   # end
   # the attachment_fu callback is actually named after_resize
 
+
+    # Generates magic %LIKE% sql statements for all columns
+  def self.conditions_by_like(value, *columns) 
+    columns = self.content_columns if columns.size==0 
+    columns = columns[0] if columns[0].kind_of?(Array) 
+    conditions = columns.map {|c| 
+    c = c.name if c.kind_of? ActiveRecord::ConnectionAdapters::Column 
+    "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
+    }.join(" OR ") 
+  end
+
   def self.extract_mp3s(zip_file, &block)
     # try to open the zip file
     Zip::ZipFile.open(zip_file.path) do |z|

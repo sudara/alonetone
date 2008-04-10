@@ -1,0 +1,14 @@
+<% if @users && !@users.empty? %>
+  <h2>Matching Users</h2>
+  <div id="user_search_results">
+    <%= render :partial => 'shared/user', :collection => @users %>
+  </div>
+<% end %>
+
+
+<% if @assets && !@assets.empty? %>
+  <% content_for :left do %>
+  <h2>Matching Tracks</h2>
+  <%= render :partial => 'assets/asset', :collection => @assets if @assets %>
+  <% end %>
+<% end %>
