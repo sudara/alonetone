@@ -77,55 +77,68 @@
       
 // comments
 
-.comment
+.comment, .user_report, .update
   :position relative
   :color = !text_color
-  .comment_user
+  .comment_user, .update_title_bar
     :background url(../images/backgrounds/comment_even.png) repeat-x top left
     :background-color = !box_background
   &.even
     .comment_user
       :background-image url(../images/backgrounds/comment.png)
       :background-color = !box_background_even
-  .comment_user
+  .comment_user, .update_title_bar
     :position relative
     :height 50px
     :margin-bottom 1px
     img 
       :float left
       :margin-right 10px
-    .comment_user_text
+    .comment_user_text, .about_details
       :line-height 10px
       :font-size 11px
       a
         :font-size 11px
-    .comment_about
+    .comment_about, .title
       :line-height 18px
-      :padding-top 8px
+      :padding-top 8px      
     a
       :font-weight bold
-    .delete
+    .delete, .edit
       :position absolute
       :top 15px
       :right 10px
       a
         :font-size 12px
         :text-decoration underline
-  .comment_body
+      .edit
+        :right 25px
+  .comment_body, .body
     :background-color = !box_background
-    :padding 20px 20px 30px 20px
+    :padding 10px 20px 30px 20px
     :clear both
     :margin-bottom 3px
     .comment_about
       a
         :font-weight bold
+    p
+      :color = !text_color
+      :margin 16px 0px 0px 0px
+      :line-height 18px
+    h1,h2,h3
+      :margin-top 32px
+      :margin-bottom 12px
+      :color = !text_color
+      :font-size 16px
+      :font-weight bold
   &.even 
-    .comment_body
+    .comment_body, .body
       :background-color = !box_background_even
-    
+// give the posts some breathing room
+.update .body
+  :margin-bottom 50px
     
 // user layout & static header (with nav)
-
 #user_header, #static_header
   :position relative
   :height 83px
@@ -172,7 +185,8 @@
         :border-right none
         :border-left = 1px solid !text_color
       &.current
-        :padding 10px 15px
+        :padding 8px 15px 12px 15px
+        :height 12px
         :font-weight bold
         :color = !white
     a

@@ -1,4 +1,4 @@
 <div id="user_latest" class="box">
-		<h2 class="box">Latest Music by <%= @user.name %></h2><%= link_to 'view all', user_tracks_path(@user), :class=> 'view_all' %>
+		<h2 class="box">Latest Music</h2><%= link_to 'view all', user_tracks_path(@user), :class=> 'view_all' %>
 	  <%= render :partial => 'assets/asset', :collection => @assets %>
 </div>

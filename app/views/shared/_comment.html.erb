@@ -19,10 +19,10 @@
 		<div class="delete"><%= link_to 'Delete', comment_path(comment), :confirm => 'Are you sure?', :method => :delete %></div>
 	<% end %>
 	</div>
-	<p class="comment_body">
+	<div class="comment_body">
 
-		<%=h comment.body %>
-	</p>
+		<%= comment.body %>
+	</div>
 	<div class="clear">
 	 
 	</div>

@@ -1,7 +1,13 @@
-<% div_for update do %>
-  <h2><%= "revision #{update.revision}:" if update.revision %> <%= update.title%></h2>
-  <h3><%= update.created_at.to_s(:long)%> <%= link_to 'edit', edit_update_path(update) if admin? %></h3>
-  <div class="text"><%= update.print %></div>
+<% div_for update, :class => cycle("odd", "even") do %>
+  <div class="update_title_bar">
+      <%= image_tag User.find(:first).avatar(:small) %>
+      <div class="title">
+        <h2 class="box_title"><%= "revision #{update.revision}:" if update.revision %> <%= update.title%></h2>
+      </div>
+      <div class="edit"><%= link_to 'edit', edit_update_path(update) if admin? %></div>
+      <span class="about_details"><%= update.created_at.to_date.to_s(:long)%></span>
+  </div>
 
+  <div class="body"><div class="text"><%= update.print %></div>
 <% end %>
 

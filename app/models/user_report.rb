@@ -8,5 +8,9 @@ class UserReport < ActiveRecord::Base
     UserReport.find(:first)
   end
   
+  def print
+    BlueCloth::new(self.description).to_html
+  end
+  
 end
 

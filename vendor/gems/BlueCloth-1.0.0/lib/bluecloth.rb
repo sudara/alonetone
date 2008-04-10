@@ -268,7 +268,7 @@ class BlueCloth < String
 		str = transform_italic_and_bold( str, rs )
 
 		# Hard breaks
-		str.gsub!( / {2,}\n/, "<br#{EmptyElementSuffix}\n" )
+		str.gsub!( /\n{2,}/, "<br#{EmptyElementSuffix}\n" )
 
 		@log.debug "Done with span transforms:\n  %p" % str
 		return str
