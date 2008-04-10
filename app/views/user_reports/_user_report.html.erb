@@ -7,10 +7,10 @@
     			<%= image_tag User.dummy_pic(:small)%>
     	<% end %>
 
-	  <span class="comment_user_text">
-    	<%= user_report.user ? (link_to (h user_report.user.name), user_home_path(user_report.user)) : 'Guest' %>
-    	said <%= time_ago_in_words(user_report.created_at) %> ago
-  	</span>
+	  <div class="title">
+    	<span class="box_title"><%= user_report.user ? (link_to (h user_report.user.name), user_home_path(user_report.user)) : 'Guest' %>
+    	said <%= time_ago_in_words(user_report.created_at) %> ago</span>
+  	</div>
 	 
 	<% if admin? %>
 		<div class="delete"><%= link_to 'Delete', user_report_path(user_report), :confirm => 'Are you sure?', :method => :delete %></div>
