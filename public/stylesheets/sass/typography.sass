@@ -31,9 +31,11 @@ img a, img a:visited
     :color = !white
     :margin-bottom 20px
 
-.content .box, .content .comment, .content .user_report .body, .content .update .body
+.content .box, .content .comment, .content .user_report .body, .content .update .body, .notice
   a, a:visited
     :color = !text_color
+    &:hover
+      :color #191a13
   p
     :color = !text_color
     img
@@ -44,17 +46,18 @@ img a, img a:visited
       :list-style square inside none
       :margin-left 20px
       :line-height 18px
-.content .user_report .body, .content .update .body
+.content .user_report .body, .content .update .body, .notice, .static_content
   a, a:visited
     :text-decoration underline
     :font-weight bold
+
 h1
   :color #f6f6f6
   :font-size 32px
   :font-weight normal
   :text-shadow rgba(3,0,0,0.42) 2px 2px 1px
   :margin-bottom 25px
-  &.user, &.static
+  &.user, &.static, &.notice
     :color = !text_color
     :text-shadow rgba(0,3,2,0.23) 2px 2px 1px
     :margin 0
