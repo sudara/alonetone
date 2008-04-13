@@ -5,7 +5,7 @@
 			<h2 class="box"><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
 			<%= render :partial => 'asset', :collection => @assets %>
 		<% else %>
-		<h1>Looks like <%= @user.name %> hasn't uploaded anything yet!</h1>
+		<h2>Looks like <%= @user.name %> hasn't uploaded anything yet!</h2>
 	 <% end %>
 	</div>
 	<% end %>

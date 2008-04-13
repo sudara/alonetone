@@ -50,9 +50,11 @@ class AssetsController < ApplicationController
         @page_title = "Latest #{limit} uploaded mp3s on alonetone" if params[:latest]
         @assets = Asset.latest(limit)
         @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
+        @comments = Comment.find_all_by_spam(false, :limit => 5, :order => 'created_at DESC')
         @playlists = Playlist.latest(12)
         @tab = 'home'
         @welcome = true unless logged_in?
+        
       end
       wants.rss do 
         @assets = Asset.latest(50)
@@ -61,11 +63,11 @@ class AssetsController < ApplicationController
   end
   
   def top
-    top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 20
+    top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 40
     @page_title = "Top #{top} tracks on alonetone"
-    @popular = Asset.find(:all, :limit => top, :order => 'hotness DESC')
+    @assets = Asset.find(:all, :limit => top, :order => 'hotness DESC')
     respond_to do |wants|
-      wants.html { render :action => 'latest'}
+      wants.html 
       wants.rss
     end
   end
@@ -157,7 +159,7 @@ class AssetsController < ApplicationController
       case params[:referer]
         when 'itunes' then @referer = 'itunes'
         when 'download' then @referer = 'download'
-        when 'home' then @referer = 'home'
+        when 'home' then @referer = 'home page'
         when 'facebook' then @referer = 'facebook'
         when nil 
           @referer = (request.env['HTTP_REFERER'] && !request.env['HTTP_REFERER'].empty?) ? request.env['HTTP_REFERER'] : 'alonetone'

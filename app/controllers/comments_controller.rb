@@ -27,9 +27,14 @@ class CommentsController < ApplicationController
   
   
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id], :include => [:commenter, :user])
+    if current_user.admin? || (@comment.user.id == @comment.commentable.user.id)
+      @comment.destroy 
+      flash[:ok] = 'We trashed that feedback, yo'
+    else
+      flash[:error] = "Um, sorry, you can't do that"
+    end
     redirect_to :back 
-    
   end
   
   

@@ -1,5 +1,5 @@
 <% content_tag :div, :id => ("asset_#{asset.unique_id}"), :class => 'asset ' + cycle('odd', 'even') do %>
-	<div class="play-button button"><%= link_to_play asset, @referer %></div>
+	<div class="play-button button"><%= link_to_play asset, referer %></div>
 	<div class="title">
 	 <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link' %><br>
 	 

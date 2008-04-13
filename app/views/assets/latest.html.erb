@@ -23,4 +23,9 @@
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
+  
+  <h2 class="box">Latest Comments</h2>
+  <div class="box">
+    <%= render :partial => 'shared/comment', :collection => @comments%>
+  </div>
 <% end %>
