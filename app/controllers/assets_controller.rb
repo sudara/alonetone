@@ -170,6 +170,6 @@ class AssetsController < ApplicationController
     end
     
     def register_listen
-      @asset.listens.create(:listener => (current_user || nil), :track_owner=> @asset.user, :source => @referer)
+      @asset.listens.create(:listener => (current_user || nil), :track_owner=> @asset.user, :source => @referer, :ip => request.remote_ip)
     end
 end

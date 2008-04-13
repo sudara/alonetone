@@ -10,6 +10,7 @@ config/amazon_s3.yml
 config/defensio.yml
 config/facebooker.yml
 config/basecamp.yml
+config/deploy/*
 *.sql
 public/images/pretty_text/*.*
 log/*.log
