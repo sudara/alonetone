@@ -105,7 +105,7 @@ class PlaylistsController < ApplicationController
 
     respond_to do |format|
       if @playlist.save
-        flash[:notice] = 'Playlist was successfully created.'
+        flash[:notice] = 'Great, go ahead and add some tracks'
         format.html { redirect_to edit_user_playlist_path(@user, @playlist) }
         format.xml  { render :xml => @playlist, :status => :created, :location => @playlist }
       else

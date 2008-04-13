@@ -2,8 +2,8 @@ class SessionsController < ApplicationController
 
   def new
     if logged_in?
-      flash[:error] = "Confused?<br/> Either you aren't allowed to do that, or uhm, you aren't allowed to do that"
-      redirect_to default_url
+      flash[:error] = "Either you aren't allowed to do that, or uhm, you aren't allowed to do that"
+      redirect_to_default
     end
   end
 

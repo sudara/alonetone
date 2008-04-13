@@ -39,6 +39,10 @@ module ApplicationHelper
     link_to "#{user.name}'s website", ('http://'+h(user.website))
   end
   
+  def myspace_for(user)
+    link_to "#{user.name} on Myspace.com",('http://'+h(user.myspace))
+  end
+  
   def itunes_link_for(user)
     link_to "Open #{user.name}'s music in iTunes", 'http://'+h(user.itunes)
   end
