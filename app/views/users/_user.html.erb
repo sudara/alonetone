@@ -4,10 +4,11 @@
   
   <div class="user_title">
     <h1 class="user"><%=h @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+
+  </div>
     <% if authorized? %>
       <%= link_to 'edit your profile', edit_user_path(@user), :class => 'edit' %>
     <% end %>
-  </div>
   <div id="user_links">
     <ul class="user_links">
      <%= user_nav_item "Latest", user_home_path(@user) %>

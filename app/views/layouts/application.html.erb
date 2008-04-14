@@ -4,12 +4,12 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title %> </title>
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','alonetone', :cache => 'all'%>
+    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','alonetone', :cache => 'alonetone-v2'%>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
-    <%= javascript_include_tag 'jquery','soundmanager','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-lowpro','jquery-tabs', 'jquery-png','application', :cache => true %>
+    <%= javascript_include_tag 'jquery','soundmanager','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-lowpro','jquery-tabs', 'jquery-png','application', :cache => 'alonetone-v2' %>
   </head>
   <body>
   
