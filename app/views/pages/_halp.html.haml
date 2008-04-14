@@ -7,6 +7,7 @@
     %ul.links
       = user_nav_item "What is alonetone?", {:controller => 'pages', :action => 'index' } 
       = user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, 'contact'
+      = user_nav_item "Latest News",{:controller => 'updates', :action => 'index' }, 'contact'
       = user_nav_item "User reports", {:controller => 'user_reports', :action => 'index'}, 'contact'
 
 - content_for :static do

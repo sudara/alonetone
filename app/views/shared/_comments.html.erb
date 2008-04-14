@@ -1,4 +1,5 @@
 <div class="box">
   <h2 class="box">Latest Comments</h2>
+  <%= link_to 'view all', comments_path(@user.login), :class => 'view_all' %>
   <%= render :partial => 'shared/comment', :collection => comments %>
 </div>

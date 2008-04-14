@@ -161,7 +161,7 @@ class AssetsController < ApplicationController
         when 'download' then @referer = 'download'
         when 'home' then @referer = 'home page'
         when 'facebook' then @referer = 'facebook'
-        when nil 
+        else
           @referer = (request.env['HTTP_REFERER'] && !request.env['HTTP_REFERER'].empty?) ? request.env['HTTP_REFERER'] : 'alonetone'
       end
     end

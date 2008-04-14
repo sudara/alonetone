@@ -1,14 +1,15 @@
 <% div_for track_play, :class => (cycle('even', 'odd')) do %>
    <div class="comment_user">
     	<% if track_play.listener %>
-    			<%= image_tag track_play.listener.avatar(:small) %>
+        <%= user_image_link(track_play.listener, :small)%>
     		<% else %>
     			<%= image_tag User.dummy_pic(:small)%>
     	<% end %>
    
 	  <div class="comment_about">
-	    <%= link_to h(track_play.asset.name), user_track_path(track_play.asset.user, track_play.asset) %>,   	<%= time_ago_in_words(track_play.created_at) %> ago
-  	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) : "Guest (#{track_play.ip})" %> via <%= track_play.source %>
+	    <%= link_to h(track_play.asset.name), user_track_path(track_play.asset.user, track_play.asset) %><br/><%= time_ago_in_words(track_play.created_at) %> ago 
+  	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) : "Guest #{track_play.ip && !track_play.ip.empty? ? '('+track_play.ip+')' : ''}" %> via 
+  	  <%= link_source(track_play.source) %>
 	  </div>
 	</div>
 <% end %>

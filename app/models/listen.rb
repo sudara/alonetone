@@ -26,9 +26,17 @@ class Listen < ActiveRecord::Base
     self[:source] || 'alonetone'
   end
   
+  def self.total
+    self.count(:all)
+  end
+  
+  def self.today
+    self.count(:all, :conditions => {:created_at => Time.now.at_beginning_of_day..Time.now})
+  end
+  
   def self.source_chart
-    data = Listen.count(:all, :group => :source, :order => 'count_all DESC', :limit => 8, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight])
-    various = Listen.count(:all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight]) - data.collect(&:last).sum
+    data = self.count(:all, :group => :source, :order => 'count_all DESC', :limit => 8, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight])
+    various = self.count(:all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight]) - data.collect(&:last).sum
     data << ['various other sources', various]
     Gchart.pie(:size => '500x125', :background => 'e1e2e1', :data => data.collect(&:last), :labels => data.collect{|d| CGI.escape(d.first.to_s)})
   end
@@ -42,7 +50,7 @@ class Listen < ActiveRecord::Base
   end
   
   def self.last_30_days_chart
-    data = Listen.count :all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight], :group => 'DATE(listens.created_at)' 
+    data = self.count :all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight], :group => 'DATE(listens.created_at)' 
     data = data.collect(&:last)
     chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","30 days ago|15 days ago|Today"], :line_colors =>'cc3300', :custom => 'chm=B,ff9933,0,0,0' )
   end

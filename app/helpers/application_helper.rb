@@ -1,6 +1,8 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
+  @@listen_sources = %w(itunes home download facebook)
+
   def authorized_for(user_related_record)
     logged_in? && (current_user.admin? || (user_related_record.user == current_user))
   end
@@ -56,7 +58,9 @@ module ApplicationHelper
   end
   
   def user_location(user)
-      "from " + ((user.city) ? "#{user.city}, " : '') + user.country if user.city || user.country
+    if (user.present?(:city) || user.present?(:country))
+      "from #{[user.city, user.country].compact.join(', ')}" 
+    end
   end
   
   def track_name_for(asset, length=40)
@@ -71,13 +75,18 @@ module ApplicationHelper
     content_tag(:li, link_to_unless_current(text, link),:class=> ("#{added_class} #{"current" if current_page?(link)}"))
   end
   
+  def link_source(source)
+    return source if @@listen_sources.include?(source) || source == 'alonetone' || source == 'unknown'
+    link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, ''), source
+  end
+  
   def recently_online
     @online.each {|person| link_to person.login, user_home_path(person) }
   end
   
   def check_for_and_display_flashes
     flashes = []
-    [flash[:notice], flash[:error], flash[:info], :flash[:ok]].each do |flash|
+    [flash[:notice], flash[:error], flash[:info], flash[:ok]].each do |flash|
       flashes << (render :partial => 'shared/flash', :object => flash) if (flash && !flash.empty?)
     end
     flashes.join
@@ -90,4 +99,6 @@ module ApplicationHelper
   def authorized?
     admin? || @user === current_user 
   end
+  
+  
 end

@@ -2,7 +2,7 @@
   
   <div class="comment_user">
     	<% if comment.commenter %>
-    			<%= image_tag comment.commenter.avatar(:small) %>
+          <%= user_image_link(comment.commenter, :small)%>
     		<% else %>
     			<%= image_tag User.dummy_pic(:small)%>
     	<% end %>

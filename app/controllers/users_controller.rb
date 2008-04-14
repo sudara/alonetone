@@ -124,9 +124,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do 
         if @user.save 
-          flash[:ok] = "Sweet, your profile is updated" 
+          flash[:ok] = "Sweet, updated" 
         end
-        render :action => 'edit'
+        redirect_to :action => 'edit'
       end
     end
   end

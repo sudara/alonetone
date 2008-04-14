@@ -38,6 +38,12 @@ class CommentsController < ApplicationController
   end
   
   
+  def index
+    @comments_made = Comment.paginate_by_spam(false, :per_page => 10, :page => params[:made_page], :order => 'created_at DESC', :conditions => {:commenter_id => @user.id})
+    @comments = @user.comments.paginate_by_spam(false, :per_page => 10, :page => params[:page])
+  end
+  
+  
   protected
   
   

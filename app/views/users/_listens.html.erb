@@ -1,4 +1,5 @@
 <div id="user_listens" class="box">
-		<h2 class="box"><%= @user.name %> has been listening to</h2>
+		<h2 class="box"><%= @user.name %> listened to</h2>
+		<%= link_to 'view all', listens_path(@user.login), :class => 'view_all' if @listens.size > 5%>
 	  <%= render :partial => 'users/listen', :collection => @listens %>
 </div>

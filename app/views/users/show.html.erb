@@ -18,7 +18,7 @@
 	  <% end %>
 	  
 	  <% content_for :right do %>
-	    <%= render :partial => 'shared/comments' if @user.comments.size > 0 %>
+	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
 
 	  <% end %>	
 		

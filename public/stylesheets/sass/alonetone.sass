@@ -1,6 +1,38 @@
 // import variables
 @import variables
+// pagination base
+.pagination
+  :float right
+  :display block
+  :height 32px
+  :position relative
+  :text-align right
+  a, span, a:visited
+    :display block
+    :float left
+    :height 12px
+    :line-height 14px
+    :font-size 12px
+    :padding 10px 10px
+    :color = !text_color
+  span.current, a:hover
+    :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
+    :color = !white
+    :text-decoration none
+  span.current
+    :font-weight bold
+  span.gap
+    :padding 10px 0px
+  span.disabled
+    :opacity 0.4
 
+.mini_paginator
+  :position relative
+  :clear both
+  :height 32px
+  :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
+  .pagination
+    :float none
 // login and logout
 
 #top_bar #login
@@ -77,7 +109,7 @@
       
 // comments
 
-.comment, .user_report, .update, .track_play
+.comment, .user_report, .update, .listen
   :position relative
   :color = !text_color
   .comment_user, .update_title_bar
@@ -91,7 +123,7 @@
     :position relative
     :height 50px
     :margin-bottom 1px
-    img 
+    a.alonetoner, img
       :float left
       :margin-right 10px
     .comment_user_text, .about_details
@@ -149,6 +181,13 @@
         :font-weight 16px
         :color = !text_color
     
+.listen 
+  .comment_user
+    .comment_about
+      :font-size 12px
+    a 
+      :font-size 12px
+
 // user layout & static header (with nav)
 #user_header, #static_header
   :position relative
@@ -175,6 +214,10 @@
       :line-height 50px
       :color !text_color
       :margin-left 20px
+      :display inline
+      :margin-right 5px
+    span.user_location
+      
   #user_links, #links
     :height 32px
     :background transparent url(../images/backgrounds/user_bar.png) repeat-x top left
@@ -196,7 +239,7 @@
         :border-right none
         :border-left = 1px solid !text_color
       &.current
-        :padding 8px 15px 12px 15px
+        :padding 10px 15px 12px 15px
         :height 12px
         :font-weight bold
         :color = !white
@@ -214,35 +257,24 @@
     div.pagination
       :height 32px
 
-// static headers don't have pics
+#recent_listeners
+  :margin-bottom 30px
+  :height 120px
+
+// static headers are like the user header, but without pics
 #static_header
   .title, #links
     :margin-left 0px
   .links li, .links li a
     :font-size 14px
   .pagination
-    :float right
-    :display block
+    :text-align center
+    :margin-top 1px
+    :width 100%
     :height 32px
-    :position relative
-    :text-align right
-    a, span
-      :display block
-      :float left
-      :height 12px
-      :line-height 14px
-      :font-size 12px
-      :padding 10px 10px
-      :color = !text_color
-    span.current, a:hover
-      :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
-      :color = !white
-      :text-decoration none
-      :font-weight bold
-    span.gap
-      :padding 10px 0px
-    span.disabled
-      :opacity 0.4
+    :float left
+    :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
+
       
 // static content
 

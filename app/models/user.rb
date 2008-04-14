@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 
   # These attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
-                  :bio, :display_name, :itunes, :settings, :city, :state
+                  :bio, :display_name, :itunes, :settings, :city, :country
   
   # Validations
   validates_presence_of     :email
@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
     find(:first).dummy_pic(size)
   end
   
+  def listens_average
+    (self.listens_count.to_f / ((((Time.now - self.assets.first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
+  end
+  
   def dummy_pic(size)
     case size
       when :album then 'no-pic-200.png'
@@ -171,9 +175,19 @@ class User < ActiveRecord::Base
           pager.total_entries = Listen.count(:listener_id, :conditions => 'listens.listener_id != ""')
         end
       end
-    else
-      
-      self.paginate(:all, :include => [:assets, :pic], :per_page => 15, :order => 'assets.created_at DESC',  :page => params[:page])
+    when 'last_uploaded'
+     @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
+        distinct_users = Asset.find(:all, :select => 'DISTINCT user_id', :order => 'assets.created_at DESC', :limit => pager.per_page, :offset => pager.offset)
+              
+        pager.replace(distinct_users.collect(&:user)) # only send back the users
+        
+        unless pager.total_entries
+          # the pager didn't manage to guess the total count, do it manually
+          pager.total_entries = User.count(:all, :conditions => 'assets_count > 0')
+        end  
+      end
+    else # last_seen
+      self.paginate(:all, :include =>:pic, :conditions => ['users.created_at < ?',1.day.ago],:order => 'last_seen_at', :page => params[:page], :per_page => 15)
     end
   end
   

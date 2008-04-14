@@ -3,10 +3,10 @@ class SearchController < ApplicationController
   
   def index
     respond_to do |wants| 
-      wants.js do
+      wants.html do
         
       end
-      wants.html do
+      wants.js do
         
       end
     end

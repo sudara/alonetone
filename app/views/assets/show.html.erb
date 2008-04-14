@@ -1,7 +1,7 @@
 <% render(:layout => 'users/user') do %>
   
   <% content_for :left do %>
-  <div id="single_track">
+  <div id="single_track" class="box">
     <h2><%= @asset.name %></h2>
     <%= render :partial => 'assets/assets'%>
   </div>

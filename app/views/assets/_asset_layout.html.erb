@@ -5,6 +5,11 @@
 	 
 	 <%= yield %> 
 	 <span class='counter'> </span>
+	 
+	 <% if setting(:display_listen_count) %>
+	  <span class="listen_count"><%= asset.listens_count %></span>
+	 <% end %>
+	   
 	 <span class='time'><%= asset.length%></span>
 	  <span class="when" style="display:none;"><%= time_ago_in_words asset.created_at %> ago</span>
 	</div>
