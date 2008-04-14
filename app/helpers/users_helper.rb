@@ -6,8 +6,9 @@ module UsersHelper
   
   def setting(symbol_or_string)
     if logged_in? && current_user.settings
-      current_user.settings[symbol_or_string.to_sym]
+      return current_user.settings[symbol_or_string.to_sym]
     end
+    false
   end
 
 end

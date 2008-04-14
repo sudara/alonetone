@@ -29,16 +29,4 @@ class Object
     false
   end
   
-  #
-  # @user.email = ""
-  # @user.email             => ""
-  # @user.try(:email)       => ""
-  # @user.present?(:email)  => ""
-  # @user.nonempty(:email)  => nil
-  
-  def nonempty(method_or_attribute)
-    result = return try(method_or_attribute.to_sym)
-    return ((result && !result.empty?) ? result : nil)
-  end
-  
 end
