@@ -217,7 +217,7 @@
   
   $.ajaxSetup({ 
     beforeSend: function(xhr) {
-      xhr.setRequestHeader("Accept", "text/javascript, text/html, application/xml, text/xml, */*");
+      xhr.setRequestHeader("Accept", "text/javascript");
     } 
   });
   

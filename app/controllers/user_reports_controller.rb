@@ -47,14 +47,13 @@ class UserReportsController < ApplicationController
     @user_report = UserReport.new(params[:user_report])
     @user_report.env = request.env
     respond_to do |format|
-      if @user_report.save
-        flash[:ok] = 'Got it, thanks for taking the time!'
-        format.html { redirect_to_default }
-        format.xml  { render :xml => @user_report, :status => :created, :location => @user_reports }
-        format.js { render :nothing => true}
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user_report.errors, :status => :unprocessable_entity }
+      format.js do
+         if params[:user_report] && params[:user_report][:description] && !params[:user_report][:description].empty? && @user_report.save
+           return head(:created)
+         else
+           return head(:bad_request)
+         end
+         render :nothing => true
       end
     end
   end

@@ -107,6 +107,7 @@ ResizeableFooter = $.klass({
   
   toggleFooter:function (){
     this.opened ? this.close() : this.open();
+    return false;
   },
   
   close: function(){
@@ -129,7 +130,10 @@ ResizeableFooter = $.klass({
       opacity: 0.999
     },1200,'jswing'); 
     $('.feedback',this.form).click($.bind(this.close,this))
+    
+    $('#new_user_report',this.form).attach(CommentForm);
     this.opened = true;
+    
   }
   
 });
@@ -424,4 +428,5 @@ jQuery(function($) {
   // setup the footer
   $('#footer').attach(ResizeableFooter);
 });
+
 
