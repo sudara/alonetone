@@ -1,13 +1,22 @@
-	<div id="update">Latest Update: 
-	  <%= link_to "#{truncate(@latest_update.title, 50)}", updates_path, :id=>'updates_link' %>
-	</div>
+<div id="footer">
 
-	<div id="bug_report">
-	  Report sumptin <%= link_to "creative", "#", :id => 'creative', :class => 'feedback' %>, <%= link_to "nasty", "#", :id => 'nasty',:class => 'feedback'  %>, <%= link_to "nice", "#", :id=>'nice',:class => 'feedback'  %> or <%= link_to "see what is being said", user_reports_path%>
-	</div>
+  <div id="update">Latest Update: 
+    <%= link_to "#{truncate(@latest_update.title, 50)}", updates_path, :id=>'updates_link' %>
+  </div>
 
-	<div id="bug_form" style="display:none;">
-		<div id="form_wrapper">
-			<%= render :partial => 'user_reports/form' %>
-		</div>
-	</div>
+  <div id="footer_right">
+    <div id="bug_report">
+    Report sumptin <%= link_to "creative", "#", :id => 'creative', :class => 'feedback' %>, <%= link_to "nasty", "#", :id => 'nasty',:class => 'feedback'  %>, <%= link_to "nice", "#", :id=>'nice',:class => 'feedback'  %> or <%= link_to "see what is being said", user_reports_path%>
+    </div>
+  </div>
+
+</div>
+<div id="footer_expandable">
+  <div id="open_footer_content">
+    <div id="bug_form" style="opacity:0;">
+    	<div id="form_wrapper">
+    		<%= render :partial => 'user_reports/form' %>
+    	</div>
+    </div>
+  </div>
+</div>

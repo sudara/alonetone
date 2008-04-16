@@ -94,6 +94,46 @@ DateSelector = $.klass({
 
 */
 
+ResizeableFooter = $.klass({
+  initialize:function(){
+    this.next = this.element.next();
+    this.originalHeight = 0;
+    this.opened = false;
+    this.form = $('#bug_form',this.next);
+  },
+  onclick: $.delegate({
+    '.feedback' : function(e){ return this.toggleFooter()}
+    }),
+  
+  toggleFooter:function (){
+    this.opened ? this.close() : this.open();
+  },
+  
+  close: function(){
+   // this.form.fadeOut(10);
+    this.next.animate({
+      opacity: 0.6,
+      height: this.originalHeight+'px'
+    },500,'jswing');   
+    this.opened = false;
+  },
+  
+  open: function(){
+    this.next.show();
+    this.next.css({opacity:0.999});
+    this.next.animate({
+      height: "300px"
+    },600,'easeOutQuad');
+    this.form.show();
+    this.form.animate({
+      opacity: 0.999
+    },1200,'jswing'); 
+    $('.feedback',this.form).click($.bind(this.close,this))
+    this.opened = true;
+  }
+  
+});
+
 SlideOpenNext = $.klass({
   initialize:function(){
     this.next = this.element.next();
@@ -380,5 +420,8 @@ jQuery(function($) {
     $(this).next().focus();
     return false;
   });
+  
+  // setup the footer
+  $('#footer').attach(ResizeableFooter);
 });
 

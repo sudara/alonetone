@@ -82,35 +82,45 @@ a#logo
   :left 0
   :height 52px
   :width 100%
-  :z-index 1000
-  :background url(../images/backgrounds/footer.png) repeat-x top left
+  :z-index 500
+  :background  url(../images/backgrounds/footer_closed.png) repeat-x bottom left
   #update, #bug_report
     :font-size 12px
   #update
     :position absolute
     :left 50px
     :top 25px    
-  #bug_report
+  #footer_right
     :position absolute
     :left 520px
     :top 25px
-    
+    :text-align right
+    :width 420px
   &.open
     :height 300px
-  form
-    :height 250px
-    :text-align right
-    :position absolute
-    :right 30px
-    :top 50px
-    :margin-bottom 10px
-    select, input, textarea
-      :display block
-      :margin-bottom 5px
-    #user_report_submit
-      :display inline
-    a
-      :font-size 12px
+#footer_expandable
+  :background url(../images/backgrounds/footer.png) repeat-x top left
+  :position fixed
+  :bottom 0
+  :left 0
+  :height 0px
+  :width 100%
+  :z-index 700
+  #open_footer_content
+    :background-color #c1cab3
+    :margin-top 52px
+    :width 100%
+    :height 100%
+    :position relative
+    #bug_form
+      :position absolute
+      :left 540px
+      form
+        #user_report_category
+          :display block
+          :margin-bottom 15px
+        a
+          :font-size 12px
       
 // general spacing stuff
 div.box
