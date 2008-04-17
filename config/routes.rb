@@ -46,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
   map.comments ':login/comments', :controller => 'comments'
    
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any} do |user|
-    user.resources :tracks, :controller => :assets, :collection => {:latest => :get}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
+    user.resources :tracks, :controller => :assets, :collection => {:latest => :get, :search => :post}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments
     end
    

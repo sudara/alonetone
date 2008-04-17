@@ -94,6 +94,36 @@ DateSelector = $.klass({
 
 */
 
+SortablePlaylist = $.klass({
+  initialize : function(){
+    this.tracks = $('.tracks', this.element);
+    this.sortable_tracks = this.tracks.sortable({
+      items: '.asset',
+      revert:true,
+      containment:'.tracks',
+      scroll: true,
+      cursor: 'move',
+      scrollSensitivity: 100,
+      update: $.bind(this.serialize_and_post, this)
+    });
+    this.element.droppable({
+      accept: ".ui-draggable",
+      drop: $.bind(this.add_track, this), // LOVE danwebb
+      hoverClass: 'adding',
+      tolerance: 'touch'
+    });
+  },
+  serialize_and_post : function(){
+    alert(this.sortable_tracks.sortable('serialize'));
+  },
+  add_track : function (e,ui){
+    this.tracks.append($(ui.element));
+    console.log('dropped');
+  }
+  
+});
+
+
 ResizeableFooter = $.klass({
   initialize:function(){
     this.next = this.element.next();
@@ -251,6 +281,9 @@ Track = $.klass({
     this.soundID = 'play-'+this.element[0].id; 
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing those tabs
+    
+    // dont allow tab details to be opened on editing playlists
+    this.allowDetailsOpen = (this.element.parents('#edit_playlist').size() > 0) ? false : true;
   },
   
   
@@ -280,6 +313,9 @@ Track = $.klass({
   },
   
   openDetails: function(desiredTab){
+    // don't allow this to happen when editing playlist
+    if(!this.allowDetailsOpen) return false;
+    
     // set up the tabs if this track hasn't been opened yet
     if(!this.tabbies) this.createTabbies();
     
@@ -427,6 +463,18 @@ jQuery(function($) {
   
   // setup the footer
   $('#footer').attach(ResizeableFooter);
+  
+  //$('#edit_playlist .draggable_tracks .track').attach(DraggableTracks);
+  $('#edit_playlist .playlist').attach(SortablePlaylist);
+  
+  $('#playlist_sources .draggable_tracks .asset').draggable({
+    revert:true,
+    helper:'clone',
+    cursor:'move',
+    snap: true,
+    zindex: 40
+  });
+
 });
 
 
