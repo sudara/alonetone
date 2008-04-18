@@ -92,7 +92,7 @@ class PlaylistsController < ApplicationController
   
   def sort_tracks
     # get the params for this playlist
-    params["tracks"].each_with_index do |id, position|
+    params["track"].each_with_index do |id, position|
       Track.update(id, :position => position)
     end
     render :nothing => true

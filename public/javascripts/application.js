@@ -109,13 +109,13 @@ SortablePlaylist = $.klass({
     });
     this.element.droppable({
       accept: ".ui-draggable",
-      drop: $.bind(this.add_track, this), // LOVE danwebb
+      drop: $.bind(this.add_track, this), // LOVE danwebb and $.bind
       hoverClass: 'adding',
       tolerance: 'touch'
     });
   },
   serialize_and_post : function(){
-    $.get(this.sortURL+'?'+this.sortable_tracks.sortable('serialize'));
+    $.post(this.sortURL,$.param({'authenticity_token':window.authenticityToken})+'&'+this.sortable_tracks.sortable('serialize') );
   },
   add_track : function (e,ui){
     this.tracks.append($(ui.element));
