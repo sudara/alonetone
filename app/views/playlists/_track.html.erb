@@ -1,1 +1,21 @@
-<%= render :partial => 'assets/asset', :locals => {:asset => track.asset} %>
+<% content_tag :div, :id => ("track_#{track.id}"), :class => 'asset ' + cycle('odd', 'even') do %>
+	<div class="play-button button"><%= link_to_play track.asset %></div>
+	<div class="title">
+	 <%= link_to track_name_for(track.asset,30), user_track_path(track.asset.user, track.asset.permalink), :class => 'track_link' %><br>
+	 
+   <%= link_to h(track.asset.user.name), user_home_path(track.asset.user), :class => 'artist' %>
+	 <span class='counter'> </span>
+	 
+	 <% if setting(:display_listen_count) == 'true' %>
+	    <span class="listen_count"><%= track.asset.listens_count %></span>
+	 <% end %>
+	   
+	 <span class='time'><%= track.asset.length%></span>
+	  <span class="when" style="display:none;"><%= time_ago_in_words track.asset.created_at %> ago</span>
+	</div>
+	
+	<div class="delete-button button">
+	  <%= link_to 'remove', remove_track_user_playlist_path(@user, @playlist, :track_id => track), :class=> 'delete button' %>
+	</div>
+	
+<% end %>

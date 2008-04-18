@@ -97,6 +97,7 @@ DateSelector = $.klass({
 SortablePlaylist = $.klass({
   initialize : function(){
     this.tracks = $('.tracks', this.element);
+    this.sortURL = $('#sort_tracks_url').attr('href');
     this.sortable_tracks = this.tracks.sortable({
       items: '.asset',
       revert:true,
@@ -114,7 +115,7 @@ SortablePlaylist = $.klass({
     });
   },
   serialize_and_post : function(){
-    alert(this.sortable_tracks.sortable('serialize'));
+    $.get(this.sortURL+'?'+this.sortable_tracks.sortable('serialize'));
   },
   add_track : function (e,ui){
     this.tracks.append($(ui.element));

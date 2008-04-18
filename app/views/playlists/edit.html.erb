@@ -1,4 +1,3 @@
-
 <h1>Editing '<%= @playlist.title %>'</h1>
 	
 	<%= error_messages_for :playlist %>
@@ -7,7 +6,9 @@
 	<% content_for :left do %>
 	  
 	  <div id="edit_playlist">
-	    <%= render :partial => @playlist%>
+	    <% render :layout => 'playlist_layout' do %>
+      <%= render :partial => 'track', :collection => @playlist.tracks %>
+      <% end %>
 	
       <div id="pic_upload" style="display:none;">
       	Upload a square photo, 400px by 400px for best results.<br/>
@@ -17,7 +18,8 @@
       		<% end %>
       </div>
     </div>
-  	<% end %>
+    
+  <% end %>
 	
 	<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink) %>
 
