@@ -7,8 +7,12 @@
 	  
 	  <div id="edit_playlist">
 	    <% render :layout => 'playlist_layout' do %>
-      <%= render :partial => 'track', :collection => @playlist.tracks %>
+        <%= render :partial => 'track', :collection => @playlist.tracks %>
+      <div id="drop_here">
+        Drop Track here
+      </div>
       <% end %>
+      
 	
       <div id="pic_upload" style="display:none;">
       	Upload a square photo, 400px by 400px for best results.<br/>
@@ -21,12 +25,12 @@
     
   <% end %>
 	
-	<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink) %>
+	<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), :id => 'add_track_url',:class=> 'hidden' %>
 
 	 	<!--  :with =>"'asset_id=' + encodeURIComponent(element.id)" -->
 	
 			
-	<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url' %>
+	<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
 
 
 <% content_for :right do %>

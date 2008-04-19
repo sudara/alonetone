@@ -123,6 +123,26 @@ img.cover_200
 
 #edit_playlist
   .playlist
+    #drop_here
+      :display none
     .playlist_title
       a.edit  
         :display none
+    &.adding
+      #drop_here
+        :position absolute
+        :top 0
+        :left 0
+        :display block
+        :width 100%
+        :height 100%
+        :background-color = !playlist_box_silver
+        :text-align center
+        :color = !orange
+        :padding-top 50px
+        :font-size 20px
+
+#playlist_sources
+  .playlist_source
+    .asset, .track
+      :width 420px

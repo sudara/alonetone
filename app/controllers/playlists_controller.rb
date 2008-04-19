@@ -60,11 +60,12 @@ class PlaylistsController < ApplicationController
 
   
   def add_track
-    @track = @playlist.tracks.create(:asset_id => params[:asset_id].split("_")[1]) if params[:asset_id]
+    @track = @playlist.tracks.create(:asset => Asset.find(params[:asset_id].split("_")[1])) 
     respond_to do |format|
-      format.html { render :layout => false }
       format.js 
     end
+  rescue ActiveRecord::RecordNotFound, NoMethodError
+    return head(:bad_request)  
   end
   
   def attach_pic
@@ -81,13 +82,15 @@ class PlaylistsController < ApplicationController
   
   def remove_track
     @track = @playlist.tracks.find(params[:track_id]) 
-    if @track.destroy 
+    if @track && @track.destroy 
       respond_to do |format|
-        format.js
+        format.js {return head(:ok); render :nothing => true}
       end
     else
       render :nothing => true
     end
+  rescue ActiveRecord::RecordNotFound 
+    head(:bad_request)
   end
   
   def sort_tracks

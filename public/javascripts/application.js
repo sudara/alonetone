@@ -12,6 +12,7 @@ $.fn.log = function() {
     text += this.tagName;
     if (this.id) text += '#' + this.id;
   });
+  return text;
 }
 
 // hack up a periodical executor
@@ -98,6 +99,7 @@ SortablePlaylist = $.klass({
   initialize : function(){
     this.tracks = $('.tracks', this.element);
     this.sortURL = $('#sort_tracks_url').attr('href');
+    this.addTrackURL = $('#add_track_url').attr('href');
     this.sortable_tracks = this.tracks.sortable({
       items: '.asset',
       revert:true,
@@ -108,18 +110,40 @@ SortablePlaylist = $.klass({
       update: $.bind(this.serialize_and_post, this)
     });
     this.element.droppable({
-      accept: ".ui-draggable",
+      accept: ".asset",
       drop: $.bind(this.add_track, this), // LOVE danwebb and $.bind
       hoverClass: 'adding',
-      tolerance: 'touch'
+      tolerance: 'touch',
+      // change the text to reflect which track
+      over: function(e, ui){ $('#drop_here').html('Drop to add "' +($('.track_link',ui.draggable).html()) + '"')}
     });
   },
   serialize_and_post : function(){
     $.post(this.sortURL,$.param({'authenticity_token':window.authenticityToken})+'&'+this.sortable_tracks.sortable('serialize') );
   },
   add_track : function (e,ui){
-    this.tracks.append($(ui.element));
-    console.log('dropped');
+    $.post(this.addTrackURL, $.param({'asset_id':ui.draggable.attr('id'), 'authenticity_token':window.authenticityToken}),$.bind(this.insert_track,this));
+    
+  },
+  // does the work of inserting the new track and recreating the sortable
+  insert_track: function(new_track_html){
+    this.tracks.append(new_track_html);
+    this.sortable_tracks.sortable('refresh');
+  },
+  // catch all delete/remove calls
+  onclick: $.delegate({
+    'a.delete' : function(e){ return this.remove_track(e.target)}
+  }),  
+  
+  // delete track and remove on success
+  remove_track: function(target){
+    $(target).html('wait...').parents('.asset').addClass('hover');
+    // delete track and remove on success
+    $.get($(target).attr('href'),$.bind(this.fade_out,target));
+    return false;
+  },
+  fade_out: function(){
+    $(this).parents('.asset').slideUp().remove();
   }
   
 });
@@ -231,20 +255,16 @@ Tabbies = $.klass({
 });
 
 CommentForm = $.klass(Remote.Form, {
-    initialize : function(options) {
+    initialize : function($super,options) {
       this.submitButton = $('.comment_submit', this.element);
       this.submitText = this.submitButton.val();
       this.spinner = $('.small_spinner',this.element);
       this.resultBox = $('.comment_waiting', this.element);
       this.textarea = $('textarea', this.element);
-      this.options = $.extend({
-        beforeSend: $.bind(this.send,this),
-        success: $.bind(this.success, this),
-        error: $.bind(this.error, this),
-        complete: $.bind(this.complete, this)
-      }, options || {});
+      console.log('init from comment form');
+      $super();
     },
-    send:function(){
+    beforeSend:function(){
       this.spinner.show();
       this.disable();
     },
@@ -370,7 +390,6 @@ Track = $.klass({
   },
   
   play: function(){
-    onFinishCallback = $.bind(this.startNextTrack,this);
     soundManager.play(this.soundID,{url: this.trackURL, onfinish:$.bind(this.startNextTrack,this)});
   }, 
   
