@@ -100,15 +100,8 @@ SortablePlaylist = $.klass({
     this.tracks = $('.tracks', this.element);
     this.sortURL = $('#sort_tracks_url').attr('href');
     this.addTrackURL = $('#add_track_url').attr('href');
-    this.sortable_tracks = this.tracks.sortable({
-      items: '.asset',
-      revert:true,
-      containment:'.tracks',
-      scroll: true,
-      cursor: 'move',
-      scrollSensitivity: 100,
-      update: $.bind(this.serialize_and_post, this)
-    });
+    this.emptyWarning = $('.empty',this.element);
+    this.create_sortable();   
     this.element.droppable({
       accept: ".asset",
       drop: $.bind(this.add_track, this), // LOVE danwebb and $.bind
@@ -127,13 +120,19 @@ SortablePlaylist = $.klass({
   },
   // does the work of inserting the new track and recreating the sortable
   insert_track: function(new_track_html){
-    this.tracks.append(new_track_html);
-    this.sortable_tracks.sortable('refresh');
+    $('#drop_here').before(new_track_html);
+    if(this.sortable_tracks != undefined) 
+      this.sortable_tracks.sortable('refresh');
+    else
+      this.create_sortable();
   },
   // catch all delete/remove calls
   onclick: $.delegate({
     'a.delete' : function(e){ return this.remove_track(e.target)}
   }),  
+  onmouseover:$.delegate({
+    '.asset':function(e){ $(e).css({cursor:'move'})}
+  }),
   
   // delete track and remove on success
   remove_track: function(target){
@@ -144,11 +143,33 @@ SortablePlaylist = $.klass({
   },
   fade_out: function(){
     $(this).parents('.asset').slideUp().remove();
+  },
+  create_sortable: function(){
+    if($('.asset',this.tracks).size() > 1){
+     this.sortable_tracks = this.tracks.sortable({
+      items: '.asset',
+      revert:true,
+      containment:'.tracks',
+      scroll: true,
+      cursor: 'move',
+      scrollSensitivity: 100,
+      update: $.bind(this.serialize_and_post, this)
+    });
+    if(this.emptyWarning) this.emptyWarning.slideUp();
+    }
   }
   
 });
 
-
+PlaylistSource = $.klass({
+  onclick: $.delegate({
+    '.pagination a' : function(e){
+        $(e.target).parents('.playlist_source').load(e.target.href);
+        return false;
+    }
+  })
+  
+});
 ResizeableFooter = $.klass({
   initialize:function(){
     this.next = this.element.next();
@@ -304,7 +325,7 @@ Track = $.klass({
     this.tabbies = false; // wait on initializing those tabs
     
     // dont allow tab details to be opened on editing playlists
-    this.allowDetailsOpen = (this.element.parents('#edit_playlist').size() > 0) ? false : true;
+    this.allowDetailsOpen = (this.element.hasClass('unopenable')) ? false : true;
   },
   
   
@@ -356,6 +377,7 @@ Track = $.klass({
   },
   
   closeDetails:function(){
+    if(!this.allowDetailsOpen) return false;
     this.more.slideUp({duration:300,queue:false});
     this.element.removeClass('open');
   },
@@ -487,13 +509,20 @@ jQuery(function($) {
   //$('#edit_playlist .draggable_tracks .track').attach(DraggableTracks);
   $('#edit_playlist .playlist').attach(SortablePlaylist);
   
-  $('#playlist_sources .draggable_tracks .asset').draggable({
+  // let folks drag tracks to their playlist
+  $('#playlist_sources .asset').draggable({
     revert:true,
-    helper:'clone',
+    //helper:'clone',
     cursor:'move',
     snap: true,
     zindex: 40
   });
+  
+  // ability to tab through various track sources
+  $('#playlist_sources ul#playlist_source_options').attach(Tabbies);
+  
+  $('#playlist_sources').attach(PlaylistSource);
+
 
 });
 

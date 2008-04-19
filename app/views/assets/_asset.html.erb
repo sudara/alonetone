@@ -2,5 +2,5 @@
   <% render :layout => 'assets/asset_layout', :locals => {:asset => asset, :referer => (@referer) } do %>
      <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %>
   <% end %>
-  <%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset} %>
 <% end %>
+<%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset} %>

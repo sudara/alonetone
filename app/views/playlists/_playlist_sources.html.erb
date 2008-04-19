@@ -1,0 +1,24 @@
+<div id="playlist_sources" class="draggable_wrapper">	
+	<div class="draggable_tracks">
+		<h2 class="box">Available tracks</h2>
+		
+      <ul id="playlist_source_options" class="tabs">
+        <li><%= link_to 'Your Uploads', '#your_uploads', :class => 'playlist_option', :id => 'open_your_stuff' if @user.has_tracks? %>      </li>
+        <li><%= link_to "Your Listens", "#your_listens", :class => 'playlist_option', :id => 'open_your_listens' %>                         </li>
+        <li><%= link_to "Search", '#your_search', :class => 'playlist_option',:id => 'open_search' %>                                            </li>
+      </ul>
+  
+    <%= render :partial => 'your_stuff' %>
+
+
+		<%= render :partial => 'your_listens' %>
+
+		<div id="your_search" class="playlist_source" style="display:none;">
+			<div class="scriptaculous">
+				<div id="results"> </div>
+			</div>
+		</div>
+		
+		
+	</div>
+</div>
