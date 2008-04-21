@@ -70,31 +70,7 @@ $(function() {
 
 
 
-// TRACKS
 
-/* Most of the code here is taking advantage of 2 main concepts by dan webb.
-
-Event Delegation, which exponentially reduces the amount of event listeners by relying on bubbling
-http://www.danwebb.net/2008/2/8/event-delegation-made-easy-in-jquery
-
-Inheritable Behaviours, which allows one to build componentized behaviours that are inheritable
-
-Both are baked into lowpro
-
-DateSelector = $.klass({
-  onclick: $.delegate({
-    '.close': function() { this.close() },
-   '.day': function(e) { this.selectDate(e) }
-  }),
-  selectDate: function(dayElement) {
-    // code ...
-  },
-  close: function() {
-    // code ...
-  }
-});
-
-*/
 
 SortablePlaylist = $.klass({
   initialize : function(){
@@ -226,6 +202,15 @@ SlideOpenNext = $.klass({
   
 });
 
+// rails friendly "delete" (does not degrade!)
+DeleteLink = $.klass({
+    onclick: function() {
+    var options = $.extend({ url: this.element.attr('href'), type: 'POST', data: }, this.options);
+    return this._makeRequest(options);
+  }
+});
+
+// text area that grows 2x in size upon need
 AdjustableTextarea = $.klass({
   
   initialize : function(line_height){
