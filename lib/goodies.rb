@@ -2,8 +2,9 @@
 
 
 class Object
-  #
+
   # The classic shortcut from  http://ozmm.org/
+  #
   #   @person ? @person.name : nil
   # vs
   #   @person.try(:name)
@@ -12,21 +13,34 @@ class Object
     send method if respond_to? method
   end
   
+  # With conditional and possibly empty love from Sudara
   #
-  # With conditional and empty love by Sudara
-  #   if params[:booo].present?(:blah)
+  #   if params.present? :search
   # vs  
-  #   if params[:bloo][:blah] && !params[:bloo][:blah].empty?
+  #   if params[:search] && !params[:search].empty?
   #
   #
-  #   <% if @person.name && !@person.name.empty? %>
+  #   if params.present? :search, :filter   
   # vs
-  #   <% if @person.present?(:name)
+  #   if (params[:search] && !params[:search].empty?) && (params[:filter] && !params[:filter].empty?)
   #
-  def present?(method_or_attribute)
-    result = try(method_or_attribute.to_sym)
-    return result if (result && !result.empty?) 
-    false
+  #
+  #   <% if @person.present? :name %>
+  # vs
+  #   <% if @person.name && !@person.name.empty? %>
+  #
+  #
+  # Bonus points for:
+  #   present? @query, @results
+  #
+  def present?(*methods_variables_or_attributes)
+    methods_variables_or_attributes.detect do |monkey|
+      if monkey.is_a? Symbol 
+        result = try(monkey.to_sym)
+        result && !result.empty?
+      else # allow plain jane variables to be tested 
+        monkey && !monkey.empty?
+      end
+    end
   end
-  
 end

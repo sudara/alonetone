@@ -1,4 +1,9 @@
-<% if @users && !@users.empty? %>
+<% if !present?(@users, @assets) %>
+  <h2>Hm, didn't find any users or tracks named "<% @query %>"</h2>
+
+<% end %>
+
+<% if present?(@users) %>
   <h2>Matching Users</h2>
   <div id="user_search_results">
     <%= render :partial => 'shared/user', :collection => @users %>
@@ -6,7 +11,7 @@
 <% end %>
 
 
-<% if @assets && !@assets.empty? %>
+<% if present?(@assets) %>
   <% content_for :left do %>
   <h2>Matching Tracks</h2>
   <%= render :partial => 'assets/asset', :collection => @assets if @assets %>

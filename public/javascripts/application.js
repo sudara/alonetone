@@ -1,4 +1,5 @@
 var soundIsReady = false;
+
 soundManager.onload = function() {
   // soundManager is ready to use
   soundIsReady = true;
@@ -282,7 +283,6 @@ CommentForm = $.klass(Remote.Form, {
       this.spinner = $('.small_spinner',this.element);
       this.resultBox = $('.comment_waiting', this.element);
       this.textarea = $('textarea', this.element);
-      console.log('init from comment form');
       $super();
     },
     beforeSend:function(){
@@ -308,7 +308,7 @@ CommentForm = $.klass(Remote.Form, {
       this.spinner.hide();
     },
     error: function(){
-      this.resultBox.text("Didn't work, try again?")
+      this.resultBox.text("Didn't work. Try again?")
       this.resultBox.fadeIn(100);
     }
 });
@@ -323,6 +323,7 @@ Track = $.klass({
     this.soundID = 'play-'+this.element[0].id; 
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing those tabs
+    this.originalDocumentTitle = document.title; // for prepending when playing tracks
     
     // dont allow tab details to be opened on editing playlists
     this.allowDetailsOpen = (this.element.hasClass('unopenable')) ? false : true;
@@ -442,7 +443,6 @@ Track = $.klass({
   startNextTrack: function(){
     this.pause();
     Track.instances[this.nextTrackIndex()].playOrResume();
-    console.log('starting next track');
   },
   
   nextTrackIndex : function(){
@@ -472,7 +472,9 @@ Track = $.klass({
       this.elapsed_time = Math.round(this.sound.position / 1000);
       seconds = this.elapsed_time % 60;
       if(seconds < 10) seconds = '0'+seconds; // aww, i miss prototype
-      this.time.html(Math.floor(this.elapsed_time/60) + ':' + seconds);
+      var time = Math.floor(this.elapsed_time/60) + ':' + seconds;
+      this.time.html(time); 
+      document.title = '('+time+') '+this.originalDocumentTitle;
     }
   },
   ensureSoundIsReadyThenPlay : function(){
@@ -488,6 +490,11 @@ jQuery(function($) {
   
   // Slide open the next element on click
   $('.slide_open_next').attach(SlideOpenNext);
+  
+  $('a.confirm_before_delete').click(function(){
+    result = confirm('Are you sure?');
+    return result;
+  });
   
   // double the text area size when typing a lot
   $('textarea.double_trouble').attach(AdjustableTextarea,16);
@@ -522,7 +529,6 @@ jQuery(function($) {
   $('#playlist_sources ul#playlist_source_options').attach(Tabbies);
   
   $('#playlist_sources').attach(PlaylistSource);
-
 
 });
 

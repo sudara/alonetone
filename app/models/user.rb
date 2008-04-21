@@ -187,7 +187,7 @@ class User < ActiveRecord::Base
         end  
       end
     else # last_seen
-      self.paginate(:all, :include =>:pic, :conditions => ['users.created_at < ?',1.day.ago],:order => 'last_seen_at', :page => params[:page], :per_page => 15)
+      self.paginate(:all, :include =>:pic, :conditions => ['users.created_at < ?',1.day.ago],:order => 'last_seen_at DESC', :page => params[:page], :per_page => 15)
     end
   end
   
