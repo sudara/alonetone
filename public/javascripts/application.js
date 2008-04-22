@@ -178,9 +178,19 @@ SortablePlaylist = $.klass({
 PlaylistSource = $.klass({
   onclick: $.delegate({
     '.pagination a' : function(e){
-        $(e.target).parents('.playlist_source').load(e.target.href);
+        $(e.target).parents('.playlist_source').load(e.target.href, function(){
+            $('.asset',this).draggable({
+              revert:true,
+              //helper:'clone',
+              cursor:'move',
+              snap: true,
+              zindex: 800
+              });
+        });
+        
+        // we're not using livequery or delegating the drag/drop..
         return false;
-    }
+  },
   })
   
 });
@@ -536,7 +546,7 @@ jQuery(function($) {
     //helper:'clone',
     cursor:'move',
     snap: true,
-    zindex: 40
+    zindex: 800
   });
   
   // ability to tab through various track sources
@@ -547,6 +557,7 @@ jQuery(function($) {
   
   $('#edit_playlist .playlist .cover a').attach(SlideOpenNext, '#pic_upload');
 
+  // all links that have the class 'href' will slide open the id that their class id specifies
   $('a.slide_open_href').attach(SlideOpenNext,'href');
 
   $('a.hide_notice').attach(DismissableNotice);
