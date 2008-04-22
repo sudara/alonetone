@@ -4,15 +4,17 @@
     <div id="bio" class="box">
       <h2 class="box static">All about <%=h @user.name %></h2>
       <%= link_to 'Edit', edit_user_path(@user),:class=>'edit' if authorized? %>
-     
-      <div class="bio static_content">
 
-      	<% if @user.present?(:bio) %>
+        <div class="bio static_content">
         	<p>
-        	  <%= @user.printable_bio %>
+        	    <% if @user.present?(:bio) %>
+        	        <%= @user.printable_bio %>
+        	    <% else %>
+        	        <%=h @user.name %> doesn't have anything to say, unfortunately...
+                <% end %>
+
         	</p>
-        	<% end %>
-      </div>
+        </div>
       
       <% if @user.present?(:website) %>
         <div class="bio static_content">
@@ -49,7 +51,7 @@
     <h2 class="box static"><%= @user.name %>'s stats</h2>
     
     <div class="bio static_content">
-      Last seen <%= time_ago_in_words(@user.last_seen_at)%> ago <br />
+        Last seen <%= time_ago_in_words(@user.last_seen_at || @user.created_at)%> ago <br />
 	    <% if @user.listens_count > 0 %>
   		People have listened to <%= @user.name %>'s <%= pluralize @user.assets_count, 'track' %> about <%= @user.listens_count %> times.<br/>
   		<% end %>
