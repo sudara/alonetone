@@ -35,8 +35,11 @@ class Object
   #
   def present?(*methods_variables_or_attributes)
     methods_variables_or_attributes.detect do |monkey|
-      if monkey.is_a? Symbol 
-        result = try(monkey.to_sym)
+      if (monkey.is_a? Symbol) 
+        result = try(monkey)
+        result && !result.empty?
+      elsif self.is_a? Hash  # hashes with string keys
+        result = self[monkey]   
         result && !result.empty?
       else # allow plain jane variables to be tested 
         monkey && !monkey.empty?

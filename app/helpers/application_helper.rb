@@ -37,31 +37,7 @@ module ApplicationHelper
     CGI.rfc1123_date(date)
   end
   
-  def website_for(user)
-    link_to "#{user.name}'s website", ('http://'+h(user.website))
-  end
-  
-  def myspace_for(user)
-    link_to "#{user.name} on Myspace.com",('http://'+h(user.myspace))
-  end
-  
-  def itunes_link_for(user)
-    link_to "Open #{user.name}'s music in iTunes", 'http://'+h(user.itunes)
-  end
-  
-  def avatar(user, size=nil)
-    case size
-      when 100 then image_tag(user.has_pic? ? user.pic.public_filename(:large) : 'no-pic-thumb100.jpg')
-      when 50 then image_tag(user.has_pic? ? user.pic.thumb.public_filename(:small) : 'no-pic-thumb50.jpg')
-      when nil then image_tag(user.has_pic? ? user.pic.public_filename(:tiny) : 'no-pic.jpg' )
-    end
-  end
-  
-  def user_location(user)
-    if (user.present?(:city) || user.present?(:country))
-      "from #{[user.city, user.country].compact.join(', ')}" 
-    end
-  end
+
   
   def track_name_for(asset, length=40)
     truncate(h(asset.name),length)
@@ -100,5 +76,18 @@ module ApplicationHelper
     admin? || @user === current_user 
   end
   
+  def notice_for(notice, h1_text, &block)
+    concat content_tag(:div, ((content_tag :h1, h1_text, :class => 'notice') + 
+      hide_notice_link(notice) + 
+      capture(&block)), :class => 'notice'),
+      block.binding unless notice_hidden?(notice)
+  end
   
+  def hide_notice_link(notice)
+    link_to ['Ok, hide this notice', 'Yup! all good, thanks'].rand, 
+      user_path(current_user, :user =>{:settings => {:hide_notice => {notice => true}}}, :method => :put),
+      :class => 'hide_notice' if logged_in?
+  end
+  
+  protected 
 end

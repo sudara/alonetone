@@ -127,7 +127,7 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       if @playlist.update_attributes(params[:playlist])
         flash[:notice] = 'Playlist was successfully updated.'
-        format.html { redirect_to(@playlist) }
+        format.html { redirect_to(@user,@playlist) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

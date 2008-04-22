@@ -126,7 +126,10 @@ class UsersController < ApplicationController
         if @user.save 
           flash[:ok] = "Sweet, updated" 
         end
-        redirect_to :action => 'edit'
+        redirect_to :back
+      end
+      format.js do
+        @user.save ? (return head(:ok)) : (return head(:bad_request))
       end
     end
   end

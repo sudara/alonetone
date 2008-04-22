@@ -5,6 +5,47 @@ soundManager.onload = function() {
   soundIsReady = true;
 }
 
+// we want regular access to the auth token
+Alonetone = {
+  authParams : $.param({'authenticity_token':window.authenticityToken})
+}
+
+// rails friendly "delete" (does not degrade!)
+Remote.DeleteLink = $.klass(Remote.Base,{
+  onclick: function(){
+    var options = $.extend({
+      url: this.element.attr('href'), 
+      type: 'POST', 
+      data: $.param({'authenticity_token':window.authenticityToken,'_method':'delete'})
+      },this.options);
+    return this._makeRequest(options);
+  }
+});
+
+// rails friendly 'put'
+Remote.PutLink = $.klass(Remote.Base,{
+  onclick: function(){
+    var options = $.extend({
+      url: this.element.attr('href'), 
+      type: 'POST', 
+      data: $.param({'authenticity_token':window.authenticityToken,'_method':'put'})
+      },this.options);
+    return this._makeRequest(options);
+  }
+});
+
+DismissableNotice = $.klass(Remote.PutLink,{
+  initialize: function($super){
+    this.notice = this.element.parents('div.notice');
+    $super(); // make sure to call init on parent
+  },
+  
+  success:function(e){
+    this.notice.fadeOut('slow');
+  }
+});
+
+
 // for debug purposes
 $.fn.log = function() {
   if (this.size()==0) return "<em>wrapped set is empty</em>"
@@ -66,10 +107,6 @@ $(function() {
         circular: false
     });
 });
-
-
-
-
 
 
 SortablePlaylist = $.klass({
@@ -192,8 +229,8 @@ ResizeableFooter = $.klass({
 });
 
 SlideOpenNext = $.klass({
-  initialize:function(){
-    this.next = this.element.next();
+  initialize:function(to_open){
+    this.next = (to_open == undefined ? this.element.next() : (to_open = 'href' ? $(this.element.attr('href')) : $(to_open)));
   },
   onclick:function(){
     this.next.slideToggle();
@@ -202,14 +239,6 @@ SlideOpenNext = $.klass({
   
 });
 
-/* rails friendly "delete" (does not degrade!)
-DeleteLink = $.klass({
-    onclick: function() {
-    var options = $.extend({ url: this.element.attr('href'), type: 'POST', data: }, this.options);
-    return this._makeRequest(options);
-  }
-});
-*/
 // text area that grows 2x in size upon need
 AdjustableTextarea = $.klass({
   
@@ -513,7 +542,15 @@ jQuery(function($) {
   // ability to tab through various track sources
   $('#playlist_sources ul#playlist_source_options').attach(Tabbies);
   
+  // the various groups of tracks you can add to a playlist
   $('#playlist_sources').attach(PlaylistSource);
+  
+  $('#edit_playlist .playlist .cover a').attach(SlideOpenNext, '#pic_upload');
+
+  $('a.slide_open_href').attach(SlideOpenNext,'href');
+
+  $('a.hide_notice').attach(DismissableNotice);
+
 
 });
 

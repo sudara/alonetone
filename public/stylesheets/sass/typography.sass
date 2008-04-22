@@ -40,6 +40,9 @@ img a, img a:visited
     :color = !text_color
     img
       :max-width 550px
+  ol li
+    :list-style-type decimal
+    :list-style-position inside
 .content .user_report .body, .content .update .body, .notice, .static_content, .content .comment_body
   a, a:visited
     :text-decoration underline
@@ -107,9 +110,11 @@ div.flash
   :padding 20px 30px
   :margin-bottom 20px
 
+// links that float right
 a.arrows, a.view_more, a.view_all,a.edit
   :background url(../images/buttons/arrow.png) no-repeat right center
   :padding-right 12px
+  
 .content 
   a.view_all, a.edit
     :color = !text_color
@@ -117,7 +122,16 @@ a.arrows, a.view_more, a.view_all,a.edit
     :float right
     :margin-top -31px
     :margin-right 25px
-
+div.notice a.hide_notice
+  :float right
+  :margin-top -31px
+  :margin-right 0px
+  :font-size 12px
+  :font-weight bold
+  :color = !orange
+  
+      
+    
 // for example the sort url and add url on edit playlists
 a.hidden
   :display none
