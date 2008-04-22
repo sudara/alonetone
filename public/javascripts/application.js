@@ -202,14 +202,14 @@ SlideOpenNext = $.klass({
   
 });
 
-// rails friendly "delete" (does not degrade!)
+/* rails friendly "delete" (does not degrade!)
 DeleteLink = $.klass({
     onclick: function() {
     var options = $.extend({ url: this.element.attr('href'), type: 'POST', data: }, this.options);
     return this._makeRequest(options);
   }
 });
-
+*/
 // text area that grows 2x in size upon need
 AdjustableTextarea = $.klass({
   

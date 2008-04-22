@@ -109,9 +109,14 @@ div.tabs,div.big_tabs
     :font-weight bold
     :font-size 14px
     :text-align center
-      
-
 
 .ui-tabs-loading em 
   :padding 0 0 0 20px
   :background url(loading.gif) no-repeat 0 50%
+
+//auto clear, @ IE 6 & IE 7 Quirks Mode 
+* html .ui-tabs-nav 
+  :display inline-block
+
+*:first-child+html .ui-tabs-nav  
+  :display inline-block
