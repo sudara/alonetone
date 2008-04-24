@@ -6,11 +6,16 @@ module PermalinkFu
     attr_accessor :translation_from
     
     def escape(str)
-      s = Iconv.iconv(translation_to, translation_from, str).to_s
+      begin # this can fail when its passed japanese characters
+        s = Iconv.iconv(translation_to, translation_from, str).to_s
+      rescue Iconv::InvalidCharacter
+        s = 'untitled'
+      end
       s.gsub!(/\W+/, ' ') # all non-word chars to spaces
       s.strip!            # ohh la la
       s.downcase!         #
       s.gsub!(/\ +/, '-') # spaces to dashes, preferred separator char everywhere
+      s = (s.blank? ? 'untitled' : s)
       s
     end
   end

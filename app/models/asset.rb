@@ -156,15 +156,17 @@ class Asset < ActiveRecord::Base
   
   def name
     # make sure the title is there, and if not, the filename is used...
-    title && !title.empty? ? title : clean_filename
+    (title && !title.strip.blank?) ? title.strip : clean_filename
   end
   
   def public_mp3
     self.s3_url
   end
   
+  # never allow this to be blank, as permalinks are generated from it
   def clean_filename
-    self.filename[0..-5].gsub(/-|_/,' ').titleize
+    clean = self.filename[0..-5].gsub(/-|_/,' ').strip.titleize
+    clean.blank? ? 'untitled' : clean
   end
   
   def clean_permalink
