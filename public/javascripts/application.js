@@ -317,23 +317,20 @@ CommentForm = $.klass(Remote.Form, {
       this.spinner.hide();
       this.enable();
     },
-    disable:function(){
-      this.submitButton.attr('disabled','disabled');
-      this.submitButton.val('sending comment...');
-    },
-    enable:function(){
-      this.submitButton.removeAttr('disabled');
-      this.submitButton.val(this.submitText);
-    },
     success:function(){
-      this.resultBox.text('Submitted, thanks!')
-      this.resultBox.fadeIn(100);
+      this.resultBox.text('Submitted, thanks!').fadeIn(100);
       this.textarea.val('');
-      this.spinner.hide();
     },
     error: function(){
-      this.resultBox.text("Didn't work. Try again?")
-      this.resultBox.fadeIn(100);
+      this.resultBox.text("Didn't work. Try again?").fadeIn(100);
+    },
+    disable:function(){
+      this.submitButton.attr('disabled','disabled').
+        val('sending comment...');
+    },
+    enable:function(){
+      this.submitButton.removeAttr('disabled').
+        val(this.submitText);
     }
 });
 
