@@ -54,10 +54,42 @@ describe Asset, 'on upload' do
     @asset.name.should == 'Old Muppet Men Booing'
   end
   
+  it 'should still work even when tags are empty and the name is weird' do 
+    @asset = new_track('_ .mp3')
+    @asset.save
+    @asset.permalink.should == 'untitled'
+    @asset.name.should == 'untitled'
+  end
+  
   it 'should handle strange charsets / characters in title tags' do
     @asset = new_track('japanese-characters.mp3')
+    @asset.title = ''
     @asset.save
-    @asset.name.should == 'Old Muppet Men Booing'
+    @asset.permalink.should == 'untitled' # name is still 01-\266Ե??\313"
+  end
+  
+  it 'should handle empty name' do 
+    @asset = new_track('japanese-characters.mp3')
+    @asset.save
+    @asset.permalink.should == "untitled" # name is 01-\266Ե??\313"
+    @asset.title = 'bee'
+    @asset.save
+    @asset.permalink.should == 'bee' 
+  end
+  
+  it 'should handle non-english filenames and default to untitled' do 
+    @asset = new_track('中文測試.mp3')
+    @asset.save.should == true
+    @asset.permalink.should == 'untitled'
+  end
+  
+  it 'should handle titles with only ???? and default to untitled' do 
+    @asset = new_track('中文測試.mp3')
+    @asset.save.should == true
+    @asset.permalink.should == 'untitled'
+    @asset.title = "中文測試"
+    @asset.save.should == true
+    @asset.permalink.should == 'untitled'
   end
   
   it 'should use the mp3 tag1 title as name if present' do 
