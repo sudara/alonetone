@@ -190,9 +190,7 @@ PlaylistSource = $.klass({
         
         // we're not using livequery or delegating the drag/drop..
         return false;
-  },
-  })
-  
+      }})
 });
 ResizeableFooter = $.klass({
   initialize:function(){
@@ -445,6 +443,7 @@ Track = $.klass({
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
     this.closeDetails();
+    this.timer.stop();
   },
   
   isPaused: function(){
@@ -485,7 +484,10 @@ Track = $.klass({
     this.commentForm = $('.comment_form form',this.more).attachAndReturn(CommentForm)[0];
   },
   startTimer : function(){
-    $.timer(1000,$.bind(this.updateTime,this));
+    if(this.timer != undefined)
+      this.timer.reset();
+    else
+      this.timer = $.timer(1000,$.bind(this.updateTime,this));
   },
   updateTime : function(){
     this.sound = soundManager.getSoundById(this.soundID);
