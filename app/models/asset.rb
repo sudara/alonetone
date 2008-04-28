@@ -103,8 +103,10 @@ class Asset < ActiveRecord::Base
     end    
   # pass back the file unprocessed if the file is not a zip 
   rescue Zip::ZipError => e
-    logger.warn("An error occured with attempted extraction from #{zip_file.path}:"+e)
+    logger.warn("User uploaded #{zip_file.path}:"+e)
     yield zip_file
+  rescue TypeError => e
+    logger.warn("User tried to upload too small file");
   end
   
   def self.latest(limit=10)

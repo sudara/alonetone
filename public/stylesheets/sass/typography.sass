@@ -105,6 +105,8 @@ h2.box_title
   
 div.flash
   :background url(../images/backgrounds/flash.png) repeat-x top left
+  :background-color = !orange_background
+  :border-bottom 1px solid #000
   :font-size 24px
   :color = !white
   :padding 20px 30px
@@ -116,7 +118,7 @@ a.arrows, a.view_more, a.view_all,a.edit
   :padding-right 12px
   
 .content 
-  a.view_all, a.edit
+  a.view_all, a.edit, a.view_more
     :color = !text_color
     :position relative
     :float right
@@ -130,7 +132,9 @@ div.notice a.hide_notice
   :font-weight bold
   :color = !orange
   
-      
+
+span.orange
+  :color = !orange
     
 // for example the sort url and add url on edit playlists
 a.hidden

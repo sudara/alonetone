@@ -175,6 +175,36 @@ SortablePlaylist = $.klass({
   
 });
 
+Uploader = $.klass({
+  initialize: function(){
+    this.form = $('form');
+    this.submit = $('#upload',this.form);
+    this.field = $('ul#filefields > li > input');
+    this.clone = $('ul#filefields > li:first')
+    this.field.change($.bind(this.addField, this));
+    this.count = 0;
+    this.uploading = $('#uploading');
+    this.form.submit($.bind(this.waiting, this));
+  },
+  addField: function(e){
+    console.log('add field');
+    $('ul#filefields').append(this.clone.clone());
+    $('ul#filefields li:last input').val('').change($.bind(this.addField, this));
+    this.count++;
+    this.submit.val('Upload '+this.count+' files');
+  },
+  waiting: function(){
+    this.submit.attr('disabled', 'disabled');
+    this.submit.val('uploading...');
+    this.form.hide();
+    this.uploading.show();
+    this.uploading.prepend('Uploading '+this.count+' files...<br/><br/>');
+  }
+  
+  
+});
+
+
 PlaylistSource = $.klass({
   onclick: $.delegate({
     '.pagination a' : function(e){
@@ -561,6 +591,8 @@ jQuery(function($) {
 
   $('a.hide_notice').attach(DismissableNotice);
 
+  // uploader
+  $('#uploader').attach(Uploader);
 
 });
 

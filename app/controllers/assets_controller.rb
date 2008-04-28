@@ -122,7 +122,8 @@ class AssetsController < ApplicationController
       flash[:ok] = flashes
       redirect_to user_tracks_path(current_user)
     else
-      flash[:error] = flashes
+      flash[:error] = flashes 
+      flash[:error] = "Please try again with a file that is not empty (or miniscule) and is an mp3. <br/>Click the HALP! button or email sudara@alonetone.com for more help" if @assets.size == 0 
       redirect_to new_user_track_path(current_user)
     end
   end

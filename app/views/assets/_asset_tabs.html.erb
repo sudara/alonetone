@@ -8,26 +8,48 @@
     </ul>
   
   	<div id="details_track_<%= asset.unique_id %>">
-	    <%= asset.description %><br/><br/>
-      Bitrate: <%= asset.bitrate %><br/>
-	    Length: <%= asset.length %><br/>
-	    Listen count: <%= asset.listens_count %><br/>
-	    <div class="home_page_link">
-	      <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more' %>
-      </div>
-	  </div>
+	    <% if asset.present?(:description) %>
+	        <div class="panel no_border">
+	            <%= asset.description %>
+	        </div>
+	    <% end %>
 	    
-	  <div id="share_track_<%= asset.unique_id %>">
-	    <%= render :partial => 'assets/share', :object => asset %>
-	  </div>
+	    <div class="panel no_border">
+	        Uploaded <strong><%= time_ago_in_words asset.created_at %></strong> ago<br/>
+	        Listened to <strong><%= asset.listens_count %></strong> times<br/>
+	        <% if asset.comments.size > 0 %>
+	            Commented on <strong><%= asset.comments.size %></strong> times
+	        <% end %>
+	    </div>
+	    
+	    <div class="panel">
+	        <div class="track_links">
+    	      <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more' %>
+            <% if authorized_for(asset) %>
+    	        <%= link_to "edit", edit_user_track_path(asset.user, asset), :class => 'edit' %>
+            <% end %>
+            </div>
+        </div>
+        
+        <% if admin? %>
+            <div class="panel">
+                <strong>MP3 Tags (admin)</strong><br/>
+                Name: <%= h asset.filename %> (<%=h asset.title%>)<br/>
+                Artist: <%=h asset.artist %><br/>
+                Album:  <%=h asset.album %><br/>
+            </div>
+        <% end %>
+    </div>
+
+	    
+    <div id="share_track_<%= asset.unique_id %>">
+        <%= render :partial => 'assets/share', :object => asset %>
+    </div>
 
     <div id="comment_track_<%= asset.unique_id %>">
-      <%= render :partial => 'assets/comment', :object => asset %>
+        <%= render :partial => 'assets/comment', :object => asset %>
     </div>
 	
-  	<% if authorized_for(asset) %>
-    	<div class="edit" style='display:none;'><%= link_to "edit", edit_user_track_path(asset.user, asset) %></div>
-    <% else %>
-  	<% end %>
+
 	
   </div>

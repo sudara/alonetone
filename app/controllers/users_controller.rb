@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       format.html do
         @page_title = @user.name + " on alonetone - latest music & playlists"
         @tab = 'your_stuff' if current_user == @user
-        @assets = @user.assets.paginate(:all, :per_page => 5, :page=>params[:page])
+        @assets = @user.assets.find(:all, :limit => 5)
         @playlists = @user.playlists.find(:all,:conditions => [ "tracks_count > 0"])
         @listens = @user.listens.find(:all, :limit =>5)
         @track_plays = @user.track_plays.find(:all, :limit =>10) 

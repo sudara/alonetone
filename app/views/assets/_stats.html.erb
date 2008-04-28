@@ -1,5 +1,5 @@
 <h2 class="box">Stats</h2>
 <div class="static_content">
-...uploaded <%= time_ago_in_words(@asset.created_at) %> ago on <%= @asset.created_at.to_date.to_s(:long) %><br/>
-...listened to <%= @asset.listens_count %> times
+Uploaded <strong><%= time_ago_in_words(@asset.created_at) %></strong> ago on <%= @asset.created_at.to_date.to_s(:long) %><br/>
+Listened to <strong><%= @asset.listens_count %></strong> times
 </div>

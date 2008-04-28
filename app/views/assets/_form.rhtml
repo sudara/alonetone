@@ -1,25 +1,23 @@
 <%= error_messages_for :asset %>
-
-<% form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
-	<div id="uploader">	
-	<dl class="group" id="fileform">
-    <dt id="filelbls">
-     </dt>
-    <dd class="asset-data">
-      <ul id="filefields">
-        <li>
-          <%= file_field_tag  'asset_data[]', :class=> 'asset_data' %>
-        </li>
-      </ul>
-    </dd>
-  </dl>
-
-  <p class="buttons">
-    <div id="uploading" style="display:none;">	<%= image_tag 'uploading.gif'%></div>
-	
- 		<%= submit_tag 'Upload!', :id => 'upload', :disable_with => 'Uploading, be patient now...' %>
-		
- </p>
-	
+<div id="uploader">	
+    <% form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
+    	<dl class="group" id="fileform">
+        <dt id="filelbls">
+         </dt>
+        <dd class="asset-data">
+          <ul id="filefields">
+            <li>
+              <%= file_field_tag  'asset_data[]', :class=> 'asset_data' %>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    <div class="submit_wrapper">
+        <%= submit_tag 'Upload!', :id => 'upload' %>
 	</div>
-	<% end -%>
+    <% end -%>
+    <div id="uploading" style='display:none'>	
+        <%= image_tag 'uploading.gif'%>
+    </div>
+
+</div>
