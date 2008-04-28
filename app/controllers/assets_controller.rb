@@ -84,6 +84,7 @@ class AssetsController < ApplicationController
 
   # GET /assets/1;edit
   def edit
+    @descriptionless = @user.assets.descriptionless
   end
 
   # POST /assets
