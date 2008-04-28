@@ -11,4 +11,3 @@ Dependencies.load_once_paths.delete(lib_path)
 # ActionController::Base.view_paths.unshift File.join(directory, 'views')
 
 # let the app find our partial
-BugabooController.view_paths.push [File.join(directory, 'views')]
