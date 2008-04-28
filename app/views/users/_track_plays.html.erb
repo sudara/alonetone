@@ -2,7 +2,7 @@
 		<h2 class="box">Latest listens to your music</h2>
 		<%= link_to 'view all', listens_path(@user.login), :class => 'view_all' if @track_plays.size > 0 %>
     <div class="static_content">
-      <strong><%= @user.listens.today %></strong> new plays &amp; downloads today <br/>
+      <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
 		  <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day) 
     </div>
 	  <%= render :partial => 'users/track_play', :collection => @track_plays %>

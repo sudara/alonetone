@@ -375,7 +375,7 @@ Track = $.klass({
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     
     // dont allow tab details to be opened on editing playlists
-    this.allowDetailsOpen = (this.element.hasClass('unopenable')) ? false : true;
+    this.allowDetailsOpen = (this.element.hasClass('unopenable') || (this.element.parent().parent('#single_track').size() > 0)) ? false : true;
   },
   
   
@@ -593,6 +593,9 @@ jQuery(function($) {
 
   // uploader
   $('#uploader').attach(Uploader);
+  
+  // comments on the single track page
+  $('#single_track .comment_form form').attach(CommentForm);
 
 });
 

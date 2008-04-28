@@ -4,10 +4,15 @@ class PagesController < ApplicationController
 
   class Fuck < StandardError; end
 
+  def index
+    @page_title = "About alonetone, the kickass home for musicians"
+  end
+
   def home
   end
 
   def about
+    @page_title = "About alonetone, the kickass home for musicians"
   end
   
   def actually_going_somewhere_with_facebooker_and_rails
@@ -27,7 +32,7 @@ class PagesController < ApplicationController
   end
   
   def itunes
-    
+    @page_title = "How to get your music on iTunes (as a music podcast) with alonetone"
   end
   
   def sitemap

@@ -4,7 +4,7 @@ class UpdatesController < ApplicationController
   # GET /updates.xml
   def index
     @updates = Update.find(:all, :order => 'created_at DESC')
-
+    @page_title = "Latest News about alonetone, the kick ass musician's home"
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @updates }

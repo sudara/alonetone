@@ -1,7 +1,7 @@
 <% form_tag sessions_path do -%>
 <p>
   <label for="login"><%= 'Login' %></label><br />
-  <%= text_field_tag :login, params[:login], :onkeypress => 'LoginForm.checkLogin(this)' %>
+  <%= text_field_tag :login, params[:login] %>
 </p>
 
 <div id="password_fields">

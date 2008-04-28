@@ -24,8 +24,6 @@ class AssetsController < ApplicationController
       end
   end
 
-  # GET /assets/1
-  # GET /assets/1.xml
   def show
     respond_to do |format|
       format.html do
@@ -34,6 +32,7 @@ class AssetsController < ApplicationController
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.find_all_by_spam(false)
         @listeners = @asset.listeners.first(5)
+        @single = true
       end
       format.mp3 do
         register_listen

@@ -16,10 +16,10 @@
 	
 	<% else %>
 	<li id='upload'>
-		<%= link_to ' ', signup_path, :title => "upload new mp3 on alonetone", :class => "tab#{' active' if @tab == 'upload' }" %>
+		<%= link_to ' ', signup_path(:new => true), :title => "upload new mp3 on alonetone", :class => "tab#{' active' if @tab == 'upload' }" %>
 	</li>
 	<li id='your_stuff'>
-		<%= link_to ' ', signup_path, :title => "your stuff on alonetone", :class => "tab#{' active' if @tab == 'your_stuff' }" %>
+		<%= link_to ' ', signup_path(:new => true), :title => "your stuff on alonetone", :class => "tab#{' active' if @tab == 'your_stuff' }" %>
 	</li>	
 	
 	<% end %>

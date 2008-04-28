@@ -17,7 +17,7 @@
 # end
 
 class Asset < ActiveRecord::Base
-  
+    
   # used for extra mime types that dont follow the convention
   @@extra_content_types = { :audio => ['application/ogg'], :movie => ['application/x-shockwave-flash'], :pdf => ['application/pdf'] }.freeze
   @@allowed_extensions = %w(.mp3)
@@ -34,6 +34,8 @@ class Asset < ActiveRecord::Base
   cattr_reader *%w(movie audio image other).collect! { |t| "#{t}_condition".to_sym }
   
   has_many :tracks, :dependent => :destroy
+  has_many :playlists, :through => :tracks
+  
   belongs_to :user, :counter_cache => true
   
   has_many :listens, :dependent => :destroy

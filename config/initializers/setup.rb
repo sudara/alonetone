@@ -23,7 +23,6 @@ require 'goodies'
 PASSWORD_SALT = 'so_salty_its_unbearable'
 
 # DEPENDENCIES 
-
 begin 
   require 'mp3info'
   require 'zip/zip'
@@ -34,3 +33,6 @@ end
 
 WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2
 WillPaginate::ViewHelpers.pagination_options[:outer_window] = 0
+
+# Take advantage of rails 2.1
+ActiveRecord::Base.partial_updates = true

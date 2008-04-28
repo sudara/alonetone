@@ -47,8 +47,9 @@ module ApplicationHelper
     link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :class => 'play_link', :referer => referer
   end
   
-  def user_nav_item(text, link, added_class='link')
-    content_tag(:li, link_to_unless_current(text, link),:class=> ("#{added_class} #{"current" if current_page?(link)}"))
+  def user_nav_item(text, link, options=nil)
+    added_class = options.delete(:added_class) if options.is_a? Hash
+    content_tag(:li, link_to_unless_current(text, link, options),:class=> ("#{added_class} #{"current" if current_page?(link)}"))
   end
   
   def link_source(source)

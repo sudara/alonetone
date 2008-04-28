@@ -6,7 +6,7 @@
     <% if @facebook_account %>
     <div style="margin-left:20px;width:200px">
    
-     <% facebook_form_for(:asset, asset, :url => (add_to_profile_facebook_path(@facebook_account, :addable_type => 'asset', :addable_id => asset.id))) do |f| %>
+     <% facebook_form_for(:asset,  asset, :url => (add_to_profile_facebook_path(:addable_type => 'asset', :addable_id => asset.id))) do |f| %>
         <%= f.buttons "Add track to your profile" %>
      <% end %>
     </div>

@@ -1,33 +1,12 @@
-# == Schema Information
-# Schema version: 16
-#
-# Table name: users
-#
-#  id               :integer(11)   not null, primary key
-#  login            :string(40)    
-#  email            :string(100)   
-#  salt             :string(40)    
-#  activation_code  :string(40)    
-#  activated_at     :datetime      
-#  created_at       :datetime      
-#  updated_at       :datetime      
-#  deleted_at       :datetime      
-#  token            :string(255)   
-#  token_expires_at :datetime      
-#  admin            :boolean(1)    
-#  last_seen_at     :datetime      
-#  crypted_password :string(40)    
-#  assets_count     :integer(11)   
-#  display_name     :string(255)   
-#  identity_url     :string(255)   
-#  pic_id           :integer(11)   
-#
-
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
   # has a bunch of prefs
   serialize :settings
+  
+  named_scope :musicians, {:conditions => ['assets_count > ?',0], :order => 'assets_count DESC', :include => :pic}
+  named_scope :activated, {:conditions => {:activation_code => nil}, :order => 'created_at DESC', :include => :pic}
+  named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
@@ -139,7 +118,7 @@ class User < ActiveRecord::Base
   end
   
   def listens_average
-    (self.listens_count.to_f / ((((Time.now - self.assets.first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
+    (self.listens_count.to_f / ((((Time.now - self.assets.find(:all, :limit => 1, :order => 'created_at').first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
   end
   
   def dummy_pic(size)
@@ -159,9 +138,9 @@ class User < ActiveRecord::Base
   def self.paginate_by_params(params)
     case params[:sort]
     when 'recently_joined' 
-      self.paginate_all_by_activation_code(nil, :per_page => 15, :include => :pic, :order => "users.created_at DESC", :page => params[:page])
+      self.activated.paginate(:all, :per_page => 15, :page => params[:page])
     when 'monster_uploaders'
-      self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 15, :include => :pic, :order => "users.assets_count DESC", :page => params[:page])
+      self.musicians.paginate(:all,:per_page => 15, :page => params[:page])
     when 'dedicated_listeners'
       @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
         # returns an array, like so: [User, number_of_listens]
@@ -187,7 +166,7 @@ class User < ActiveRecord::Base
         end  
       end
     else # last_seen
-      self.paginate(:all, :include =>:pic, :conditions => ['users.created_at < ?',1.day.ago],:order => 'last_seen_at DESC', :page => params[:page], :per_page => 15)
+      self.recently_seen.paginate(:all, :page => params[:page], :per_page => 15)
     end
   end
   

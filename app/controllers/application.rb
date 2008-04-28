@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter :ie6
   before_filter :login_by_token, :display_news
   before_filter :set_page_title
-  before_filter :currently_online, :prep_bugaboo
+  before_filter :prep_bugaboo
   before_filter :update_last_seen_at, :only => [:index]
   before_filter :set_latest_update_title
   

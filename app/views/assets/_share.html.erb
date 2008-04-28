@@ -1,42 +1,13 @@
 <% id = object.id.to_s %>
 <% object = object.asset if object.respond_to?(:asset) -%>
 
-<div id="share_<%=id%>" class="share_asset footer_content">
-
-
-<%= link_to "Home page", user_track_url(object.user, object.permalink) %> for this song:<br/>
-<%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), :size => 40,:class => 'tabbed_input' %> <br/>
-Mp3 download link:<br/>
-<%= text_field_tag "link_#{id}", formatted_user_track_url(object.user, object.permalink, :mp3), :size => 40, :class => 'tabbed_input' %> <br/>
-
-<!-->
-<div class="download-button button">
-		<%= link_to "<i>download</i>",formatted_user_track_url(object.user, object.permalink, :mp3) %>
-	</div>
--->
-Put the music on your website:<br/>
-Get the <%= link_to 'HTML code', '#' %> or the <%= link_to 'embedded_flash_player', '#'%>
-
-<div id="html_code_<%=id%>" style="display:none;">
-  <div class="scriptaculous">
-  <h3>HTML code</h3>
-  <%= text_area_tag 'code', "<a href='#{formatted_user_track_url(object.user, object, :mp3)}'>Download #{object.name}</a>", :rows => 2, :cols => 50 %>
-  </div>
+<div id="share_<%=id%>" class="panel no_border">
+    <%= link_to "Home page", user_track_url(object.user, object.permalink) %> for this song:<br/>
+    <%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), :size => 40,:class => 'tabbed_input' %> <br/>    
 </div>
-
-<div id="flash_code_<%=id%>" style="display:none;">
-  <div class="scriptaculous">
-    <h3>Embedd a Flash Player</h3>
-    <%= text_area_tag 'flash_player', "<embed src=\"#{FLASH_PLAYER}\" width=\"250\" height=\"20\" allowfullscreen=\"true\" allowscriptaccess=\"always\" flashvars=\"&file=#{formatted_user_track_url(object.user, object.permalink, :mp3)}&height=20&width=250&frontcolor=0x3C3C3C&backcolor=0xf3f3f3&lightcolor=0xFF944B&screencolor=0xFF944B&showdigits=false\" />", :rows => 3, :cols =>50 %>
-    <p class="tip">(customize how it looks by visiting <%= link_to 'the setup wizard', 'http://www.jeroenwijering.com/?page=wizard&example=2'%>)
-    </p>
-  </div>
+<div class="panel no_border">
+    <%= render :partial => 'assets/add_to_facebook', :object => object %>
 </div>
-<!--
-<h3>Email link to a friend</h3>
-<%= text_field_tag 'email', 'your_friend@someplace.com', :size=> 30%>
-<%= submit_tag 'send email now'%>
-<h3>Put '<%=h object.name %>' on your facebook Profile</h3>
-COMING SOON
--->
+<div class="panel no_border">
+    <%= link_to "more sharing options", user_track_path(object.user,object.permalink), :class => 'view_more' %>
 </div>

@@ -6,7 +6,10 @@ ActionController::Routing::Routes.draw do |map|
   
   # RESTFUL WORKAROUND FOR FACEBOOK
   map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
-  map.resources 'facebook', :controller => 'facebook_accounts', :member => {:add_to_profile => :post, :remove_from_profile => :get}, :conditions =>{:canvas => true}
+  map.resources 'facebook', :controller => 'facebook_accounts', 
+      :member => {:remove_from_profile => :get},
+      :collection => {:add_to_profile => :any}, # hack, because we're not actually using resources
+      :conditions =>{:canvas => true}
   #map.facebook_resources :facebook_accounts, 'facebook_accounts', :controller => 'facebook_accounts', :condition => {:canvas => true}
 
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
@@ -46,7 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   map.comments ':login/comments', :controller => 'comments'
    
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any} do |user|
-    user.resources :tracks, :controller => :assets, :collection => {:latest => :get, :search => :post}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
+    user.resources :tracks, :controller => :assets, :member => {:share => :get}, :collection => {:latest => :get, :search => :post}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments
     end
    

@@ -1,4 +1,7 @@
 class UserReport < ActiveRecord::Base
+  
+  named_scope :valid, :conditions => [:spam => false]
+
   validates_presence_of :description, :category
   belongs_to :user
   serialize :params

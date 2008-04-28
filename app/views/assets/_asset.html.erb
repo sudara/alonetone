@@ -3,4 +3,5 @@
      <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %>
   <% end %>
 <% end %>
-<%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset} %>
+
+<%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset} unless @single %>

@@ -1,4 +1,7 @@
 class Comment < ActiveRecord::Base
+  
+  named_scope :valid, :conditions => [:spam => false]
+  
   belongs_to :commentable, :polymorphic => true
 
   # optional user who made the comment

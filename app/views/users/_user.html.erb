@@ -11,15 +11,15 @@
     <% end %>
   <div id="user_links">
     <ul class="user_links">
-     <%= user_nav_item "Latest", user_home_path(@user) %>
-     <%= user_nav_item "Albums & Playlists", user_playlists_path(@user) if @user.has_public_playlists? %>
-     <%= user_nav_item "Tracks", user_tracks_path(@user) if @user.assets_count > 0 %>
-     <%= user_nav_item "Profile", profile_path(@user) if @user.bio %>
+     <%= user_nav_item "Latest", user_home_path(@user), :title => "#{h @user.name}'s latest stuff on alonetone" %>
+     <%= user_nav_item "Albums & Playlists", user_playlists_path(@user), :title => "#{h @user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? %>
+     <%= user_nav_item "Tracks", user_tracks_path(@user), :title => "#{h @user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
+     <%= user_nav_item "Profile", profile_path(@user), :title => "#{h @user.name}'s profile on alonetone" if @user.bio %>
   
-      <%= user_nav_item "Email", "mailto://#{@user.email}","contact" if admin? %>
-      <%= user_nav_item "Myspace", "http://myspace.com/#{@user.myspace}","contact" if @user.present?(:myspace)%>
-      <%= user_nav_item "iTunes", "http://#{@user.itunes}","contact" if @user.present?(:itunes) %>
-      <%= user_nav_item "Sudo", sudo_user_path(@user),"contact" if (admin? || @sudo)%>   
+      <%= user_nav_item "Email", "mailto://#{@user.email}",:added_class => "contact" if admin? %>
+      <%= user_nav_item "Myspace", "http://myspace.com/#{@user.myspace}",:added_class => "contact" if @user.present?(:myspace)%>
+      <%= user_nav_item "iTunes", "http://#{@user.itunes}",:added_class => "contact" if @user.present?(:itunes) %>
+      <%= user_nav_item "Sudo", sudo_user_path(@user),:added_class => "contact" if (admin? || @sudo)%>   
     </ul>
   </div>
 </div>

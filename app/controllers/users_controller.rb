@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
   
-
   skip_before_filter :update_last_seen_at, :only => [:create, :new, :activate, :sudo]
   before_filter :find_user,      :except => [:new, :create, :sudo]
   
   before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio]
   skip_before_filter :login_by_token, :only => :sudo
   
-  rescue_from NoMethodError, :with => :display_user_home_or_index
 
 
   def index
@@ -41,7 +39,7 @@ class UsersController < ApplicationController
         @assets = @user.assets.find(:all, :limit => 5)
         @playlists = @user.playlists.find(:all,:conditions => [ "tracks_count > 0"])
         @listens = @user.listens.find(:all, :limit =>5)
-        @track_plays = @user.track_plays.find(:all, :limit =>10) 
+        @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @comments = @user.comments.find_all_by_spam(false, :limit => 10)
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
@@ -55,7 +53,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @page_title = "Sign up with alonetone to upload your mp3s or discover new music"
+    @page_title = "Sign up to upload your mp3s on alonetone"
+    flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
   
@@ -77,11 +76,11 @@ class UsersController < ApplicationController
           flash[:error] = "The signup message cannot be sent to '#{CGI.escapeHTML @user.email}' at this moment. Please, try again later."
           redirect_to :action => "new"
         end
-        flash[:ok] = "An email was sent to '#{CGI.escapeHTML @user.email}'. <br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
-        redirect_to login_path
+        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
       end
     end
     rescue ActiveRecord::RecordInvalid
+      flash[:error] = "Whups, there was a small issue"
       render :action => 'new'
   end
   

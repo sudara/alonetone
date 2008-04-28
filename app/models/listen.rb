@@ -1,21 +1,11 @@
-# == Schema Information
-# Schema version: 16
-#
-# Table name: listens
-#
-#  id         :integer(11)   not null, primary key
-#  asset_id   :integer(11)   
-#  user_id    :integer(11)   
-#  created_at :datetime      
-#  updated_at :datetime      
-#
-
 class Listen < ActiveRecord::Base
   
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
   
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, :counter_cache => true
+
+  named_scope :from_user, {:conditions => ['listener_id != ""']}
   
   belongs_to :listener, :class_name => 'User', :foreign_key => 'listener_id'
   belongs_to :track_owner, :class_name => 'User', :counter_cache => true

@@ -1,24 +1,26 @@
 <%= error_messages_for :user %>
 
 <% content_for :left do %>
-  <h1>Join alonetone</h1>
-  <div id="signup">
+  <h2 class="box">Join alonetone</h2>
+  <%= link_to "or login here", login_path, :class=> 'view_more'%>
+  <div id="signup" class="static_content box">
 
   	<% form_for :user, :url => users_path do |f| -%>
   	  <%= render :partial => "form", :object => f %>
-  	  <div class="join_wrapper"><%= submit_tag 'Join alonetone' %></div>
+  	  <div class="submit_wrapper"><%= submit_tag 'Join alonetone' %></div>
   	<% end -%>
-	  
-    <div id="signup-questions">
-    <%= pretty_text "More questions?",:h3 %><br/>
-    get the answers you need by <%= link_to 'clicking here', about_path %>
-    </div>
+  </div>
+  <h2 class="playlist_title box">Want to know more?</h2>
+  <div id="signup-questions" class="static_content box">
+    alonetone is a non-commercial venture, giving musicians a free home for their music and the tools they need to promote it<br/><br/>
+    Read our FAQ by <%= link_to 'clicking here', about_path %>
   </div>
 <% end %>
 
 <% content_for :right do %>
-  <div id="what-you-get">
-  	<h1>Why alonetone?</h1>
+  	<h2 class="box">Why alonetone?</h2>
+  	<div id="what-you-get" class="box static_content">
+
   	<%= image_tag 'promo/unlimited-uploads.jpg'%>
   	<h2 class='hug'>Upload your music (mp3 format)</h2>
 	

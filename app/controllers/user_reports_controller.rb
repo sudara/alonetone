@@ -6,7 +6,7 @@ class UserReportsController < ApplicationController
   # GET /user_reports.xml
   def index
     @user_reports = UserReport.find_all_by_spam(false, :include => :user, :order => 'user_reports.created_at DESC')
-
+    @page_title = "Feedback about alonetone"
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @user_reports }

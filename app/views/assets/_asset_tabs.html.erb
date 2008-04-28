@@ -22,9 +22,9 @@
 	        <% end %>
 	    </div>
 	    
-	    <div class="panel">
+	    <div class="panel no_border">
 	        <div class="track_links">
-    	      <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more' %>
+    	      <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more' unless @single %>
             <% if authorized_for(asset) %>
     	        <%= link_to "edit", edit_user_track_path(asset.user, asset), :class => 'edit' %>
             <% end %>
