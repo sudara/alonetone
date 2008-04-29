@@ -9,6 +9,17 @@ class PagesController < ApplicationController
   end
 
   def home
+  
+  end
+  
+  def error
+    @page_title = "Whups, alonetone slipped and fell!"
+    flash[:error] = "We have a problem. But, it is not you...it's me."
+  end
+  
+  def four_oh_four
+    @page_title = "Not found"
+    flash[:error] = "Gone looking but did not find? Try searching, or let us know!"
   end
 
   def about

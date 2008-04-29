@@ -1,8 +1,160 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<body>
-  <h1>File not found</h1>
-  <p>Change this error message for pages not found in public/404.html</p>
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
+    <title>Not found </title>
+    <link href="/stylesheets/reset.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/typography.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/layout.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/nav.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/flash.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/tracks.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/playlists.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/tabs.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/alonetone.css" media="screen" rel="stylesheet" type="text/css" />
+		
+
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
+		
+		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
+    <script src="/javascripts/jquery.js" type="text/javascript"></script>
+<script src="/javascripts/soundmanager.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-fx.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-easing.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-carousel.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-lowpro.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-tabs.js" type="text/javascript"></script>
+<script src="/javascripts/jquery-png.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+    
+    <!-- ensure token is available to javascript for accessible link posts, etc -->
+    <script type="text/javascript">
+//<![CDATA[
+
+  window.authenticityToken = 'e3cc47c554d69aaa9b4365ae9db92b0c0b794415'; 
+
+//]]>
+</script>
+  
+  </head>
+  <body>
+  
+      <div id="header">
+        <a href="/" alt="home" id="logo"></a>
+				<ul id='nav'>
+  <li id='home'>
+		<a href="/" class="tab" title="home page of alonetone"> </a>
+	</li>
+	<li id='browse'>
+		<a href="/users" class="tab" title="browse all artists on alonetone"> </a>
+	</li>
+
+	
+	<li id='upload'>
+		<a href="/signup?new=true" class="tab" title="upload new mp3 on alonetone"> </a>
+	</li>
+	<li id='your_stuff'>
+		<a href="/signup?new=true" class="tab" title="your stuff on alonetone"> </a>
+	</li>	
+	
+	
+</ul>
+      </div> <!-- end of header -->
+		
+		<div id="wrapper">
+    <div id="content" class="content">    
+      <div id="top_bar">
+        <div id="search">  
+  <a href="#" id="search_button"></a>
+  <form action="search" method="post" style="display:none;" url="http://localhost:3000/search"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="e3cc47c554d69aaa9b4365ae9db92b0c0b794415" /></div>
+    <input id="search_query" name="search[query]" size="30" type="text" />
+  </form>
+</div>
+        <a href="/about" id="halp"> </a>
+
+  <a href="/login" id="login"> </a>
+
+
+      </div>
+    
+		  <div class="flash">
+  Gone looking but did not find? Try searching, or let us know!
+</div>
+		  
+      <div id="main">
+		      
+      </div>
+      <div id="static">
+          
+      </div>
+      <div id="columns">
+				<div id="left">
+					
+				</div>
+		
+				<div id="right">
+					
+				</div>	
+				<div class="clear"> </div>
+				
+			</div> <!-- end columns -->
+      
+
+	   </div><!-- end content -->
+	   </div><!-- end wrapper -->
+    <div id="footer_spacer"> </div>
+		<div id="footer">
+
+  <div id="update">Latest Update: 
+    <a href="/updates" id="updates_link">1000 tracks and counting</a>
+  </div>
+
+  <div id="footer_right">
+    <div id="bug_report">
+    Report sumptin <a href="#" class="feedback" id="creative">creative</a>, <a href="#" class="feedback" id="nasty">nasty</a>, <a href="#" class="feedback" id="nice">nice</a> or <a href="/user_reports">see what is being said</a>
+    </div>
+  </div>
+
+</div>
+<div id="footer_expandable">
+  <div id="open_footer_content">
+    <div id="bug_form" style="opacity:0;">
+    	<div id="form_wrapper">
+    		
+<form action="/user_reports" class="new_user_report" id="new_user_report" method="post"><div style="margin:0;padding:0"><input name="authenticity_token" type="hidden" value="e3cc47c554d69aaa9b4365ae9db92b0c0b794415" /></div>
+	
+	<select id="user_report_category" name="user_report[category]"><option value="praise">i really really like...</option>
+<option value="broken">something isn't working...</option>
+<option value="creative">i have an idea...</option></select>
+	<textarea cols="40" id="user_report_description" name="user_report[description]" rows="10"></textarea>
+	<input action="four_oh_four" controller="pages" id="user_report_params" name="user_report[params]" object="#&lt;UserReport:0x242c708&gt;" type="hidden" value="actionfour_oh_fourcontrollerpages" />
+	<input id="user_report_user_id" name="user_report[user_id]" type="hidden" />
+	<div class="submit_wrapper">
+	  <div class="comment_waiting" >
+          <div class="text"><!-- placeholder response text --></div>
+        </div>
+    <div class="small_spinner" style="display:none;"></div>
+	  <input name="commit" type="submit" value="send it off!" /> or <a href="#" class="feedback" id="nevermind">close</a>
+	</div>
+</form>
+    	</div>
+    </div>
+  </div>
+</div>
+
+	  
+  	<script type="text/javascript">
+  	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  	</script>
+  	<script type="text/javascript">
+  	var pageTracker = _gat._getTracker("UA-241978-4");
+  	pageTracker._initData();
+  	pageTracker._trackPageview();
+  	</script>
+  	<script type="text/javascript">soundManager.createMovie();</script>
+  </body>
 </html>
