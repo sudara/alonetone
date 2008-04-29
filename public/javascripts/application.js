@@ -268,10 +268,11 @@ ResizeableFooter = $.klass({
 
 SlideOpenNext = $.klass({
   initialize:function(to_open){
-    this.next = (to_open == undefined ? this.element.next() : (to_open = 'href' ? $(this.element.attr('href')) : $(to_open)));
+    this.next = (to_open == undefined ? this.element.next() : (to_open == 'href' ? $(this.element.attr('href')) : $(to_open)));
   },
   onclick:function(){
-    this.next.slideToggle();
+    console.log('opening '+this.next.attr('id'));
+    this.next.slideToggle('slow');
     return false;
   }
   
@@ -583,7 +584,7 @@ jQuery(function($) {
   // the various groups of tracks you can add to a playlist
   $('#playlist_sources').attach(PlaylistSource);
   
-  $('#edit_playlist .playlist .cover a').attach(SlideOpenNext, '#pic_upload');
+  $('#edit_playlist .cover a').attach(SlideOpenNext, '#pic_upload');
 
   // all links that have the class 'href' will slide open the id that their class id specifies
   $('a.slide_open_href').attach(SlideOpenNext,'href');

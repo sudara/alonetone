@@ -6,6 +6,7 @@
   <div id="edit_playlist">
     <% render :layout => 'playlist_layout' do %>
       <%= link_to 'edit title &amp; description','#edit_playlist_info',:class=>'slide_open_href edit right' %>
+      
       <div id="pic_upload" class="static_content" style="display:none;">
     	Upload a square photo, 400px by 400px for best results.<br/>
     		<% form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
