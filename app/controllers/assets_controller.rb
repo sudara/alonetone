@@ -6,7 +6,8 @@ class AssetsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :latest]
   before_filter :find_referer, :only => :show
   
-  rescue_from NoMethodError, :with => :latest
+  rescue_from NoMethodError, :with => :user_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
   # GET /assets
   # GET /assets.xml
@@ -155,6 +156,10 @@ class AssetsController < ApplicationController
   end
   
   protected
+    
+    def not_found
+      flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" and redirect_to user_tracks_path(@user) 
+    end
     
     def find_referer
       case params[:referer]

@@ -24,15 +24,15 @@ div.tabs,div.big_tabs
     :height 35px
     :padding 0 30px
     :background url(../images/backgrounds/tabs.png) no-repeat left top
-// position relative makes opacity fail for disabled tab in IE */
+// position relative makes opacity fail for disabled tab in IE 
     :color = !white
     :font-weight bold
     :line-height 35px
     :text-align center
     :text-decoration none
-// required in IE 6 */  
+// required in IE 6  
     :white-space nowrap
-// prevent dotted border in Firefox */ 
+// prevent dotted border in Firefox 
     :outline 0 
   .ui-tabs-selected a 
     :background-position -420px 0px
@@ -87,7 +87,7 @@ div.tabs,div.big_tabs
   :clear both
   :padding 15px 20px 10px 20px
   :background #e1e2e1 
-  :position relative
+// again, NO position:relative, it makes IE fail  
 // declare background color for container to avoid distorted fonts in IE while fading 
   a,a:visited
     :color = !text_color

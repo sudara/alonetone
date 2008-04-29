@@ -1,9 +1,11 @@
 <% if !present?(@users, @assets) %>
   <h2>Hm, didn't find any users or tracks named "<%=h @query %>"</h2>
+<% else %>
+  <h1>Results for "<%= h @query %>"</h1>
 <% end %>
 
 <% if present?(@users) %>
-  <% content_for :right do %>
+  <% content_for :left do %>
   <h2>Matching Users</h2>
   <div id="user_search_results">
     <%= render :partial => 'shared/user', :collection => @users %>

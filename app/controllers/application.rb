@@ -22,17 +22,14 @@ class ApplicationController < ActionController::Base
   
   # all errors end up here
   def show_error(exception)
-    if RAILS_ENV == 'production' && admin?
-      flash[:error] = "#{exception.message}"
-      redirect_to_default
-    elsif RAILS_ENV == 'production'
+    if RAILS_ENV == 'production'
       if facebook?
         flash[:error] = "Alonetone made a boo boo: <br/> #{exception.message}"
         render :partial => 'facebook_accounts/error', :layout => true
       else
         # show something decent for visitors
         flash[:error] = "Whups! That didn't work out. We've logged it, but feel free to let us know (bottom right) if something is giving you trouble"
-        redirect_to_default 
+        redirect_to :back
       end
     else
       # let me see what's wrong in dev mode.
@@ -46,7 +43,12 @@ class ApplicationController < ActionController::Base
   def facebook?
    !(params[:fb_sig] == nil)
   end
-
+  
+  def user_not_found
+    # take them to the search
+    flash[:error] = "Hmm, we didn't find that alonetoner, but we did a search for you..."
+    redirect_to search_url(:search =>{:query => params[:login]})
+  end
 
   def sudo_to(destination_user)
     return false unless session[:sudo] || current_user.admin?

@@ -187,7 +187,6 @@ Uploader = $.klass({
     this.form.submit($.bind(this.waiting, this));
   },
   addField: function(e){
-    console.log('add field');
     $('ul#filefields').append(this.clone.clone());
     $('ul#filefields li:last input').val('').change($.bind(this.addField, this));
     this.count++;
@@ -271,7 +270,6 @@ SlideOpenNext = $.klass({
     this.next = (to_open == undefined ? this.element.next() : (to_open == 'href' ? $(this.element.attr('href')) : $(to_open)));
   },
   onclick:function(){
-    console.log('opening '+this.next.attr('id'));
     this.next.slideToggle('slow');
     return false;
   }

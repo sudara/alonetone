@@ -8,6 +8,8 @@ class PlaylistsController < ApplicationController
   in_place_edit_for :playlist, :description
   in_place_edit_for :playlist, :title
   
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from NoMethodError, :with => :user_not_found
   
   # GET /playlists
   # GET /playlists.xml
@@ -149,7 +151,10 @@ class PlaylistsController < ApplicationController
   
   
   protected
-  
+  def not_found
+    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" and redirect_to user_playlists_path(@user) 
+  end
+    
   def authorized?
     (!%w(destroy admin edit update remove_track attach_pic sort_tracks add_track set_playlist_description set_playlist_title).include?(action_name)) || (@playlist.user_id.to_s == current_user.id.to_s) || admin?
   end
