@@ -473,7 +473,6 @@ Track = $.klass({
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
     this.closeDetails();
-    this.timer.stop();
   },
   
   isPaused: function(){
@@ -521,7 +520,7 @@ Track = $.klass({
   },
   updateTime : function(){
     this.sound = soundManager.getSoundById(this.soundID);
-    if(this.sound != undefined){
+    if(this.sound != undefined && this.isPlaying()){
       this.elapsed_time = Math.round(this.sound.position / 1000);
       seconds = this.elapsed_time % 60;
       if(seconds < 10) seconds = '0'+seconds; // aww, i miss prototype
