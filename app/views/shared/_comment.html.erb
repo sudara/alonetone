@@ -16,7 +16,7 @@
   	</span>
 	 
 	<% if admin? %>
-		<div class="delete"><%= link_to 'Delete', comment_path(comment), :confirm => 'Are you sure?', :method => :delete %></div>
+		<%= link_to 'Delete', comment_path(comment), :class=> 'delete button', :confirm => 'Are you sure?', :method => :delete %>
 	<% end %>
 	</div>
 	<div class="comment_body">

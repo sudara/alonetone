@@ -5,7 +5,7 @@
 			  <h2><%= @playlist.title %></h2>
 			  <h3><%= pluralize @playlist.tracks_count, 'track'%> by <%= (@playlist.is_mix? ? 'various alonetone artists' : @playlist.user.name )%></h3>
         <% if authorized_for(@playlist) %>
-          <%= link_to "edit", edit_user_playlist_path(@user, @playlist), :class => 'edit' %>
+          <%= link_to "edit", edit_user_playlist_path(@user, @playlist), :class => 'edit right' %>
         <% end %>
 				
       </div>

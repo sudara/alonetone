@@ -3,7 +3,7 @@
   <% content_for :left do %>
     <div id="bio" class="box">
       <h2 class="box static">All about <%=h @user.name %></h2>
-      <%= link_to 'Edit', edit_user_path(@user),:class=>'edit' if authorized? %>
+      <%= link_to 'Edit', edit_user_path(@user),:class=>'edit right' if authorized? %>
 
         <div class="bio static_content">
         	<p>

@@ -9,7 +9,7 @@
 </div>
 
 <% content_for :left do%>
-	<h2 class="box">Latest uploaded</h2>
+  <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>
@@ -18,7 +18,7 @@
 
 <% content_for :right do %>
 
-	<h2 class="box">Currently kicking ass</h2>
+	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
 	<%= link_to 'view all', top_path(40), :class => 'view_all' %>
 
   <% @referer = 'home' %>
@@ -26,7 +26,7 @@
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
   
-  <h2 class="box">Latest Comments</h2>
+  <h2 id="latest_comments" class="box">Latest Comments</h2>
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>

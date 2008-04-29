@@ -3,7 +3,7 @@
   <% content_for :left do %>
   <div class="edit_profile box">
     <h2 class="box">Edit your profile</h2>
-    	<%= link_to_function 'Change your pic',nil, :id => 'pic_upload_link',:class =>'edit' do |page|
+    	<%= link_to_function 'Change your pic',nil, :id => 'pic_upload_link',:class =>'edit right with_text' do |page|
 				page[:pic_upload].toggle
 			end %>
   		<div id="pic_upload" class="static_content" style="display:none">

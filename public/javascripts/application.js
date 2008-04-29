@@ -142,7 +142,7 @@ SortablePlaylist = $.klass({
   },
   // catch all delete/remove calls
   onclick: $.delegate({
-    'a.delete' : function(e){ return this.remove_track(e.target)}
+    'a.remove' : function(e){ return this.remove_track(e.target)}
   }),  
   onmouseover:$.delegate({
     '.asset':function(e){ $(e).css({cursor:'move'})}

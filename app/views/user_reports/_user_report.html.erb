@@ -13,7 +13,7 @@
   	</div>
 	 
 	<% if admin? %>
-		<div class="delete"><%= link_to 'Delete', user_report_path(user_report), :confirm => 'Are you sure?', :method => :delete %></div>
+		<%= link_to 'Delete', user_report_path(user_report), :class => 'delete button', :confirm => 'Are you sure?', :method => :delete %>
 	<% end %>
 	</div>
 	<div class="comment_body">
