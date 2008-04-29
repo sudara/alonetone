@@ -39,7 +39,7 @@ Please visit [the alonetone todo list](http://alonetone.com/about/todo) for more
 
 ### Current tech
 
-* Rails 2
+* Rails 2.1
 * Rspec
 * LowPro and Prototype (moving to jquery)
 * SoundManager 2 (for flash mp3 playback)
