@@ -1,0 +1,38 @@
+- render :layout => 'halp' do
+  - content_for :static_h1 do
+    Statistics: Watch alonetone grow
+  .box
+    %h2.box
+      Currently in stock
+    .static_content 
+      %strong
+        =Asset.count
+      original tracks
+      %br
+      %strong
+        =Asset.days
+      days of continuous free music 
+      %br
+      %strong 
+        =Asset.gigs
+      gigabytes of ones and zeros
+  .box 
+    %h2.box
+      Listens per day
+    .static_content
+      =image_tag Listen.last_30_days_chart
+  .box
+    %h2.box
+      Monthly Listens since launch
+    .static_content
+      =image_tag Listen.monthly_chart
+      %br
+      %strong
+        =Listen.monthly_listen_count_for[0]
+      listens so far for 
+      =Listen.monthly_listen_count_for[1]
+  .box
+    %h2.box
+      Where folks listen from
+    .static_content
+      =image_tag Listen.source_chart

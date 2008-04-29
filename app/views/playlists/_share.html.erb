@@ -1,11 +1,12 @@
-<div id="share_<%=object.id.to_s%>" class="share_asset footer_content" style="display:none;">
-
-
-<h2>Sharing the playlist <span class="track-name"><%=h object.title %> </span>by <%=h object.user.name%></h2>
-<h3>Embed a flash player</h3>
-<%= text_area_tag "flash_player_#{object.id.to_s}", "<embed src=\"#{FLASH_PLAYER}\" width=\"320\" height=\"140\" allowfullscreen=\"true\" allowscriptaccess=\"always\" flashvars=\"&file=#{formatted_user_playlist_url(object.user, object, :xml)}&height=140&width=320&frontcolor=0x3C3C3C&backcolor=0xf3f3f3&lightcolor=0xFF944B&screencolor=0xFF944B&displaywidth=120&showdigits=false&showdownload=true\" />", :rows => 3, :cols => 50 %>
-    <p class="tip">(customize how it looks by visiting <%= link_to 'the setup wizard', 'http://www.jeroenwijering.com/?page=wizard&example=2'%>)
-    </p>
-<%= link_to "Ok, all done, thanks!",'#', :class => 'done' %>
-
+<h2 class="box">Share this playlist</h2>
+<div class="box">
+    <div class="static_content panel no_border">
+        <h3>Link to this playlist</h3>
+        <%= text_field_tag "link_#{object.id.to_s}","#{user_playlist_url(object.user.login,object)}", :size => 50%>
+    </div>
+    <div class="static_content panel">
+        <h3>Embed a flash player</h3>
+        <%= text_area_tag "flash_player_#{object.id.to_s}", "<embed src=\"#{FLASH_PLAYER}\" width=\"320\" height=\"140\" allowfullscreen=\"true\" allowscriptaccess=\"always\" flashvars=\"&file=#{formatted_user_playlist_url(object.user, object, :xml)}&height=140&width=320&frontcolor=0x3C3C3C&backcolor=0xf3f3f3&lightcolor=0xFF944B&screencolor=0xFF944B&displaywidth=120&showdigits=false&showdownload=true\" />", :rows => 3, :cols => 50 %>
+        (customize how it looks by visiting <%= link_to 'the setup wizard', 'http://www.jeroenwijering.com/?page=wizard&example=2'%>)
+    </div>
 </div>

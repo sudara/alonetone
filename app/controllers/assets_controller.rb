@@ -6,13 +6,14 @@ class AssetsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :latest]
   before_filter :find_referer, :only => :show
   
-  rescue_from NoMethodError, :with => :latest
+  rescue_from NoMethodError, :with => :user_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
   # GET /assets
   # GET /assets.xml
   def index
       @page_title = @user.name + "'s uploaded music on alonetone"
-      @assets = @user.assets.paginate(:all, :order => 'created_at DESC', :per_page => 60, :page => params[:page])
+      @assets = @user.assets.paginate(:all, :order => 'created_at DESC', :per_page => 200, :page => params[:page])
       respond_to do |format|
         format.html # index.rhtml
         format.xml  { render :xml => @assets.to_xml }
@@ -24,8 +25,6 @@ class AssetsController < ApplicationController
       end
   end
 
-  # GET /assets/1
-  # GET /assets/1.xml
   def show
     respond_to do |format|
       format.html do
@@ -34,6 +33,7 @@ class AssetsController < ApplicationController
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.find_all_by_spam(false)
         @listeners = @asset.listeners.first(5)
+        @single = true
       end
       format.mp3 do
         register_listen
@@ -50,7 +50,11 @@ class AssetsController < ApplicationController
         @page_title = "Latest #{limit} uploaded mp3s on alonetone" if params[:latest]
         @assets = Asset.latest(limit)
         @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
-        @playlists = Playlist.latest(6)
+        @comments = Comment.find_all_by_spam(false, :limit => 5, :order => 'created_at DESC')
+        @playlists = Playlist.latest(12)
+        @tab = 'home'
+        @welcome = true unless logged_in?
+        
       end
       wants.rss do 
         @assets = Asset.latest(50)
@@ -59,11 +63,11 @@ class AssetsController < ApplicationController
   end
   
   def top
-    top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 20
+    top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 40
     @page_title = "Top #{top} tracks on alonetone"
-    @popular = Asset.find(:all, :limit => top, :order => 'hotness DESC')
+    @assets = Asset.find(:all, :limit => top, :order => 'hotness DESC')
     respond_to do |wants|
-      wants.html { render :action => 'latest'}
+      wants.html 
       wants.rss
     end
   end
@@ -81,6 +85,7 @@ class AssetsController < ApplicationController
 
   # GET /assets/1;edit
   def edit
+    @descriptionless = @user.assets.descriptionless
   end
 
   # POST /assets
@@ -118,7 +123,8 @@ class AssetsController < ApplicationController
       flash[:ok] = flashes
       redirect_to user_tracks_path(current_user)
     else
-      flash[:error] = flashes
+      flash[:error] = flashes 
+      flash[:error] = "Please try again with a file that is not empty (or miniscule) and is an mp3. <br/>Click the HALP! button or email sudara@alonetone.com for more help" if @assets.size == 0 
       redirect_to new_user_track_path(current_user)
     end
   end
@@ -151,13 +157,17 @@ class AssetsController < ApplicationController
   
   protected
     
+    def not_found
+      flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" and redirect_to user_tracks_path(@user) 
+    end
+    
     def find_referer
       case params[:referer]
         when 'itunes' then @referer = 'itunes'
         when 'download' then @referer = 'download'
-        when 'home' then @referer = 'home'
+        when 'home' then @referer = 'home page'
         when 'facebook' then @referer = 'facebook'
-        when nil 
+        else
           @referer = (request.env['HTTP_REFERER'] && !request.env['HTTP_REFERER'].empty?) ? request.env['HTTP_REFERER'] : 'alonetone'
       end
     end

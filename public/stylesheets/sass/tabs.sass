@@ -1,0 +1,138 @@
+@import variables
+
+div.tabs,div.big_tabs
+  :float none
+  :clear both
+  :width 100%
+  :margin-top 1px
+  
+.content ul.ui-tabs-nav 
+  :list-style none
+  :margin 0px
+  :padding 0px
+  :width 100%
+  :height 35px
+  :background url(../images/backgrounds/tabs.png) no-repeat top left
+  li 
+    :height 35px
+    :float left
+    :margin 0
+// be nice to Opera 
+    :min-width 100px 
+  a 
+    :display block
+    :height 35px
+    :padding 0 30px
+    :background url(../images/backgrounds/tabs.png) no-repeat left top
+// position relative makes opacity fail for disabled tab in IE 
+    :color = !white
+    :font-weight bold
+    :line-height 35px
+    :text-align center
+    :text-decoration none
+// required in IE 6  
+    :white-space nowrap
+// prevent dotted border in Firefox 
+    :outline 0 
+  .ui-tabs-selected a 
+    :background-position -420px 0px
+    :position relative
+    :top 0px
+    :z-index 2
+    :margin-top 0
+    :color = !text_color
+
+// clearing without presentational markup, IE gets extra treatment 
+.ui-tabs-navafter  
+  :display block
+  :clear both
+  :content " "
+
+.ui-tabs-hide 
+  :display none
+
+
+  
+// hide from IE 6 
+*>.ui-tabs-nav a span  
+  :width auto
+  :height auto
+
+.ui-tabs-nav .ui-tabs-selected a span 
+  :padding-bottom 1px
+
+.ui-tabs-nav .ui-tabs-selected a, .ui-tabs-nav ahover, .ui-tabs-nav afocus, .ui-tabs-nav aactive 
+  :background-position -420px 0px
+
+.ui-tabs-nav a, .ui-tabs-nav .ui-tabs-disabled ahover, .ui-tabs-nav .ui-tabs-disabled afocus, .ui-tabs-nav .ui-tabs-disabled aactive 
+  :background-position 0% -0px
+
+.ui-tabs-nav .ui-tabs-selected a span, .ui-tabs-nav ahover span, .ui-tabs-nav afocus span, .ui-tabs-nav aactive span 
+  :background-position 0 -50px
+
+.ui-tabs-nav a span, .ui-tabs-nav .ui-tabs-disabled ahover span, .ui-tabs-nav .ui-tabs-disabled afocus span, .ui-tabs-nav .ui-tabs-disabled aactive span 
+  :background-position 0 0
+
+.ui-tabs-nav .ui-tabs-selected alink, .ui-tabs-nav .ui-tabs-selected avisited, .ui-tabs-nav .ui-tabs-disabled alink, .ui-tabs-nav .ui-tabs-disabled avisited  :/* @ Opera, use pseudo classes otherwise it confuses cursor... */
+  :cursor text
+
+.ui-tabs-nav ahover, .ui-tabs-nav afocus, .ui-tabs-nav aactive,
+.ui-tabs-nav .ui-tabs-unselect ahover, .ui-tabs-nav .ui-tabs-unselect afocus, .ui-tabs-nav .ui-tabs-unselect aactive  :/* @ Opera, we need to be explicit again here now... */
+  :cursor pointer
+
+.ui-tabs-disabled 
+  :opacity 0.4
+
+.ui-tabs-panel 
+  :clear both
+  :padding 15px 20px 10px 20px
+  :background #e1e2e1 
+// again, NO position:relative, it makes IE fail  
+// declare background color for container to avoid distorted fonts in IE while fading 
+  a,a:visited
+    :color = !text_color
+    :text-decoration underline
+  textarea
+    :width 380px
+  .tabbed_input
+    :width 360px
+    :margin-left 10px
+    :height 20px
+  .home_page_link
+    :text-align right
+  .comment_waiting
+    :float left
+    :background-color = !tab_box_silver
+    :text-align center
+    :margin-top 9px
+    :color = !orange
+    :font-weight bold
+    :font-size 14px
+    :text-align center
+  .panel
+    :border-top 1px solid #000
+    :width 380px
+    :padding 10px 20px
+    :margin-left -20px
+    :border-top-color = !body_background
+    &.no_border
+      :border none
+    .track_links 
+      :height 22px
+      a
+        :margin-top 0
+        :display block
+        :font-weight bold
+      
+      
+
+.ui-tabs-loading em 
+  :padding 0 0 0 20px
+  :background url(loading.gif) no-repeat 0 50%
+
+//auto clear, @ IE 6 & IE 7 Quirks Mode 
+* html .ui-tabs-nav 
+  :display inline-block
+
+*:first-child+html .ui-tabs-nav  
+  :display inline-block

@@ -1,8 +1,5 @@
-<%= pretty_text ["a damn fine home for musicians",
-		"write, record, upload, share",
-		"make some noise with us"].rand, :h1 %>
-<% if logged_in? %>
-<h2 class="spacey">alonetone.com gives music makers free mp3 hosting, distribution, sharing tools &amp; warm fuzzies</h2>
-<% else %>
-<h2 class="spacey">alonetone.com gives music makers free mp3 hosting, distribution, sharing tools &amp; warm fuzzies</h2>
-<% end %>
+<div class="notice">
+  <h1 class="notice">alonetone, the kick ass home for musicians</h1>
+  alonetone.com gives music makers free mp3 hosting, shoring tools & warm fuzzies <br/>
+  <%=link_to 'read more', about_path %> or <%=link_to 'sign up', signup_path %> to upload your music
+</div>

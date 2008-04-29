@@ -1,9 +1,9 @@
+<%= link_to ' ', about_path, :id => 'halp'%>
 <% if logged_in? %>
-	<%= link_to_unless_current 'Your Tracks', user_tracks_path(current_user) if current_user.assets_count > 0 %>
-	<%= link_to_unless_current 'Your Playlists', user_playlists_path(current_user) if current_user.playlists_count > 0 %>
+  <%= link_to ' ',logout_path, :id => 'logout' %>
+<% else %>
+  <%= link_to ' ',login_path, :id => 'login' %>
 <% end %>
-
-<%= user_bar_for current_user %>
 <% if @sudo %>
   <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(User.find(:first)) %></span>
 <% end %>

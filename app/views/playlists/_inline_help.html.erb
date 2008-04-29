@@ -1,8 +1,8 @@
-<h2>Need some help?</h2>
-<ul>
-	<li>Drag tracks from 'available tracks' into the playlist to add them </li>
-	<li>Click on the description or title to edit</li>
-	<li>Click on the photo to upload new cover art for your playlist</li>
-	<li>Within the playlist drag tracks by the <%= image_tag 'playlists/button-move.png'%> to reorder them</li>
-	<li>To remove tracks from the playlist click <%= image_tag 'playlists/button-delete.png' %></li>
-</ul>
+<% notice_for('edit_playlist',"Editing '#{h @playlist.title}'") do %>
+    <ol>
+        <li>Find the track you want to add</li>
+        <li>Drag track to your playlist on the left</li>
+        <li>Repeat!</li>
+        <li>Order tracks in your playlist by dragging them up and down</li>
+    </ol>
+<% end %>

@@ -1,0 +1,19 @@
+<h2 class="box">Share this track</h2>
+<div class="share box">
+    <div class="static_content">
+        The link to this page (the song's "home"):<br/>
+        <%= text_field_tag "home_#{id}", user_track_url(@asset.user, @asset.permalink), :size => 40,:class => 'tabbed_input' %> <br/>
+        Direct download link:<br/>
+        <%= text_field_tag "link_#{id}", formatted_user_track_url(@asset.user, @asset.permalink, :mp3), :size => 40, :class => 'tabbed_input' %>
+    </div>
+
+    <div class="static_content ">
+        <h3>Embedded Flash Player (for myspace, blog, etc)</h3>
+        <%= text_area_tag 'flash_player', "<embed src=\"#{FLASH_PLAYER}\" width=\"250\" height=\"20\" allowfullscreen=\"true\" allowscriptaccess=\"always\" flashvars=\"&file=#{formatted_user_track_url(@asset.user, @asset.permalink, :mp3)}&height=20&width=250&frontcolor=0x3C3C3C&backcolor=0xf3f3f3&lightcolor=0xFF944B&screencolor=0xFF944B&showdigits=false\" />", :rows => 4, :cols =>40 %>
+        (customize how it looks by visiting <%= link_to 'the setup wizard', 'http://www.jeroenwijering.com/?page=wizard&example=2'%>)
+    </div>
+
+    <div class="static_content">
+       <%= render :partial => 'add_to_facebook', :object => @asset %>
+    </div>
+</div>

@@ -1,6 +1,5 @@
-<% content_tag_for :div, asset do %>
-  <div class="drag" style="display:none;">drag me</div>
-  <div class="play-button button"> </div>
-  <div class="title"><%= link_to_play asset %></div>
-	<div class="time"><%= asset.length %> </div>
+<% content_tag :div, :id => ("asset_#{asset.id}"), :class => 'asset unopenable ' + cycle('odd', 'even') do %>
+  <% render :layout => 'assets/asset_layout', :locals => {:asset => asset, :referer => (@referer) } do %>
+     <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %>
+  <% end %>
 <% end %>

@@ -1,7 +1,9 @@
-<div id="your_stuff_box" class="playlist_source">
+<div id="your_uploads" class="playlist_source">
+  <div class="mini_paginator">
+    <%= will_paginate @assets, {:param_name => :uploads_page, :ignore_get_params => true}%>
+  </div>
+	
 	<div class="scriptaculous">
-    <%= will_paginate @assets %>
-
-	<%= render :partial => 'asset', :collection => @assets %>
+	  <%= render :partial => 'asset', :collection => @assets %>
 	</div>
 </div>

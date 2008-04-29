@@ -1,3 +1,5 @@
+@import variables
+
 html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td
   :margin 0
   :padding 0
@@ -13,8 +15,28 @@ html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre
 
 table 
   :border-collapse collapse
-  :margin-bottom 1.5em
   :border-spacing 0
 
 ol,li
   :list-style none
+  
+.clear
+  :display block
+  :clear both
+  :content " "
+  
+input
+  :margin 5px 0px
+
+div.submit_wrapper
+  :text-align right
+
+div.join_wrapper input
+  :color = !text_color
+  :font-size 14px
+  :font-weight bold
+  :width 150px
+  :height 25px
+  
+strong
+  :font-weight bold

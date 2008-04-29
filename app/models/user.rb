@@ -1,33 +1,12 @@
-# == Schema Information
-# Schema version: 16
-#
-# Table name: users
-#
-#  id               :integer(11)   not null, primary key
-#  login            :string(40)    
-#  email            :string(100)   
-#  salt             :string(40)    
-#  activation_code  :string(40)    
-#  activated_at     :datetime      
-#  created_at       :datetime      
-#  updated_at       :datetime      
-#  deleted_at       :datetime      
-#  token            :string(255)   
-#  token_expires_at :datetime      
-#  admin            :boolean(1)    
-#  last_seen_at     :datetime      
-#  crypted_password :string(40)    
-#  assets_count     :integer(11)   
-#  display_name     :string(255)   
-#  identity_url     :string(255)   
-#  pic_id           :integer(11)   
-#
-
 require 'digest/sha1'
 class User < ActiveRecord::Base
   
   # has a bunch of prefs
   serialize :settings
+  
+  named_scope :musicians, {:conditions => ['assets_count > ?',0], :order => 'assets_count DESC', :include => :pic}
+  named_scope :activated, {:conditions => {:activation_code => nil}, :order => 'created_at DESC', :include => :pic}
+  named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
@@ -52,7 +31,7 @@ class User < ActiveRecord::Base
 
   # These attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
-                  :bio, :display_name, :itunes, :settings, :city, :state
+                  :bio, :display_name, :itunes, :settings, :city, :country
   
   # Validations
   validates_presence_of     :email
@@ -81,6 +60,16 @@ class User < ActiveRecord::Base
   def self.currently_online
      User.find(:all, :conditions => ["last_seen_at > ?", Time.now-5.hours])
   end
+  
+  # Generates magic %LIKE% sql statements for all columns
+  def self.conditions_by_like(value, *columns) 
+    columns = self.content_columns if columns.size==0 
+    columns = columns[0] if columns[0].kind_of?(Array) 
+    conditions = columns.map {|c| 
+    c = c.name if c.kind_of? ActiveRecord::ConnectionAdapters::Column 
+    "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
+    }.join(" OR ") 
+  end
  
   def to_param
     "#{self.login}"
@@ -101,7 +90,7 @@ class User < ActiveRecord::Base
   # graphing
 
   def track_plays_graph
-    Gchart.line(:size => '400x150',:title => 'listens', :data => track_play_history, :axis_with_labels => 'r,x', :axis_labels => ["0|#{(track_play_history.max.to_f/2).round}|#{track_play_history.max}","30 days ago|15 days ago|Today"], :line_colors =>'cc3300', :custom => 'chm=B,feefe3,0,0,0&chls=3,1,0&chg=25,50,1,0') 
+    Gchart.line(:size => '420x150',:title => 'listens', :data => track_play_history, :axis_with_labels => 'r,x', :axis_labels => ["0|#{(track_play_history.max.to_f/2).round}|#{track_play_history.max}","30 days ago|15 days ago|Today"], :line_colors =>'cc3300', :background => '313327', :custom => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0') 
   end
   
   def track_play_history
@@ -128,6 +117,10 @@ class User < ActiveRecord::Base
     find(:first).dummy_pic(size)
   end
   
+  def listens_average
+    (self.listens_count.to_f / ((((Time.now - self.assets.find(:all, :limit => 1, :order => 'created_at').first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
+  end
+  
   def dummy_pic(size)
     case size
       when :album then 'no-pic-200.png'
@@ -143,12 +136,37 @@ class User < ActiveRecord::Base
   end
   
   def self.paginate_by_params(params)
-    if params[:all]
-      self.paginate_all_by_activation_code(nil, :per_page => 24, :include => :pic, :order => "users.created_at DESC", :page => params[:page])
-    elsif params[:playlists]
-      self.paginate(:all, :conditions => 'users.playlists_count > 0', :per_page => 24, :include => :pic, :order => "users.playlists_count DESC", :page => params[:page]) 
-    else
-      self.paginate(:all, :conditions => 'users.assets_count > 0', :per_page => 24, :include => :pic, :order => "users.assets_count DESC", :page => params[:page])
+    case params[:sort]
+    when 'recently_joined' 
+      self.activated.paginate(:all, :per_page => 15, :page => params[:page])
+    when 'monster_uploaders'
+      self.musicians.paginate(:all,:per_page => 15, :page => params[:page])
+    when 'dedicated_listeners'
+      @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
+        # returns an array, like so: [User, number_of_listens]
+        result = Listen.count(:all, :include => :listener, :order => 'count_all DESC', :conditions => 'listener_id != ""', :group => :listener, :limit => pager.per_page, :offset => pager.offset)
+
+        # inject the result array into the paginated collection:
+        pager.replace(result)
+        
+        unless pager.total_entries
+          # the pager didn't manage to guess the total count, do it manually
+          pager.total_entries = Listen.count(:listener_id, :conditions => 'listens.listener_id != ""')
+        end
+      end
+    when 'last_uploaded'
+     @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
+        distinct_users = Asset.find(:all, :select => 'DISTINCT user_id', :order => 'assets.created_at DESC', :limit => pager.per_page, :offset => pager.offset)
+              
+        pager.replace(distinct_users.collect(&:user)) # only send back the users
+        
+        unless pager.total_entries
+          # the pager didn't manage to guess the total count, do it manually
+          pager.total_entries = User.count(:all, :conditions => 'assets_count > 0')
+        end  
+      end
+    else # last_seen
+      self.recently_seen.paginate(:all, :page => params[:page], :per_page => 15)
     end
   end
   

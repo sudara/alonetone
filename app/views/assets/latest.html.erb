@@ -1,32 +1,33 @@
-<%= render :partial => 'shared/self_confidence'%>
+<!-- alonetone home page -->
+<%= render :partial => 'shared/self_confidence' unless logged_in? %>
 
-<% unless params[:top] || params[:latest] %>
-	<div id="latest_playlists">
-    <h2>Latest mixes and albums on alonetone</h2>
-    <%= render :partial => 'assets/playlist', :collection => @playlists %>
-    <div class="clear"></div>
+<div id="latest_playlists">
+  
+  <h2>Latest albums &amp; playlists</h2>
+  <%= render :partial => 'shared/carousel' %>
+
+</div>
+
+<% content_for :left do%>
+  <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
+  <div class="box">
+    <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>
 <% end %>
 
-<% unless params[:top] %>
-<div id="latest">
-<% render :layout => 'assets/asset_wrapper' do%>
-	<div class="stash">
-		<h2>Latest uploaded mp3s on alonetone</h2><%= link_to 'show me more', latest_path(30), :class=> 'view_all' unless params[:latest] %>
-	  <%= render :partial => 'assets/asset', :collection => @assets %>
-	</div>
-<% end %>
-</div>
-<% end %>
 
-<% unless params[:latest] %>
-<div id="popular">
-<% render :layout => 'assets/asset_wrapper' do %>
-	<div class="stash">
-		<h2>Recent tracks kicking ass on alonetone</h2><%= link_to 'show me more', top_path(30), :class=> 'view_all' unless params[:top]  %>
-	  <% @referer = 'home' %>
-	  <%= render :partial => 'assets/asset', :collection => @popular %>
-	</div>
-<% end %>
-</div>
+<% content_for :right do %>
+
+	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
+	<%= link_to 'view all', top_path(40), :class => 'view_all' %>
+
+  <% @referer = 'home' %>
+  <div class="box">
+    <%= render :partial => 'assets/asset', :collection => @popular %>
+  </div>
+  
+  <h2 id="latest_comments" class="box">Latest Comments</h2>
+  <div class="box">
+    <%= render :partial => 'shared/comment', :collection => @comments%>
+  </div>
 <% end %>

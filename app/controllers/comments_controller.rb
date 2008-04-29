@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def create
     respond_to do |wants|
       wants.js do
+        return head(:bad_request) unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?
         case params[:comment][:commentable_type] 
         when 'asset'
           find_asset
@@ -26,9 +27,20 @@ class CommentsController < ApplicationController
   
   
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id], :include => [:commenter, :user])
+    if current_user.admin? || (@comment.user.id == @comment.commentable.user.id)
+      @comment.destroy 
+      flash[:ok] = 'We trashed that feedback, yo'
+    else
+      flash[:error] = "Um, sorry, you can't do that"
+    end
     redirect_to :back 
-    
+  end
+  
+  
+  def index
+    @comments_made = Comment.paginate_by_spam(false, :per_page => 10, :page => params[:made_page], :order => 'created_at DESC', :conditions => {:commenter_id => @user.id})
+    @comments = @user.comments.paginate_by_spam(false, :per_page => 10, :page => params[:page])
   end
   
   

@@ -115,44 +115,58 @@ module Technoweenie # :nodoc:
       def image?(content_type)
         content_types.include?(content_type)
       end
-
-      # Callback after an image has been resized.
-      #
-      #   class Foo < ActiveRecord::Base
-      #     acts_as_attachment
-      #     after_resize do |record, img| 
-      #       record.aspect_ratio = img.columns.to_f / img.rows.to_f
-      #     end
-      #   end
-      def after_resize(&block)
-        write_inheritable_array(:after_resize, [block])
+      
+      def self.extended(base)
+        base.class_inheritable_accessor :attachment_options
+        base.before_destroy :destroy_thumbnails
+        base.before_validation :set_size_from_temp_path
+        base.after_save :after_process_attachment
+        base.after_destroy :destroy_file
+        base.after_validation :process_attachment
+        if defined?(::ActiveSupport::Callbacks)
+          base.define_callbacks :after_resize, :after_attachment_saved, :before_thumbnail_saved
+        end
       end
-
-      # Callback after an attachment has been saved either to the file system or the DB.
-      # Only called if the file has been changed, not necessarily if the record is updated.
-      #
-      #   class Foo < ActiveRecord::Base
-      #     acts_as_attachment
-      #     after_attachment_saved do |record|
-      #       ...
-      #     end
-      #   end
-      def after_attachment_saved(&block)
-        write_inheritable_array(:after_attachment_saved, [block])
+ 
+      unless defined?(::ActiveSupport::Callbacks)
+        # Callback after an image has been resized.
+        #
+        #   class Foo < ActiveRecord::Base
+        #     acts_as_attachment
+        #     after_resize do |record, img|
+        #       record.aspect_ratio = img.columns.to_f / img.rows.to_f
+        #     end
+        #   end
+        def after_resize(&block)
+          write_inheritable_array(:after_resize, [block])
+        end
+ 
+        # Callback after an attachment has been saved either to the file system or the DB.
+        # Only called if the file has been changed, not necessarily if the record is updated.
+        #
+        #   class Foo < ActiveRecord::Base
+        #     acts_as_attachment
+        #     after_attachment_saved do |record|
+        #       ...
+        #     end
+        #   end
+        def after_attachment_saved(&block)
+          write_inheritable_array(:after_attachment_saved, [block])
+        end
+ 
+        # Callback before a thumbnail is saved.  Use this to pass any necessary extra attributes that may be required.
+        #
+        #   class Foo < ActiveRecord::Base
+        #     acts_as_attachment
+        #     before_thumbnail_saved do |thumbnail|
+        #       record = thumbnail.parent
+        #       ...
+        #     end
+        #   end
+        def before_thumbnail_saved(&block)
+          write_inheritable_array(:before_thumbnail_saved, [block])
+        end
       end
-
-      # Callback before a thumbnail is saved.  Use this to pass any necessary extra attributes that may be required.
-      #
-      #   class Foo < ActiveRecord::Base
-      #     acts_as_attachment
-      #     before_thumbnail_saved do |record, thumbnail|
-      #       ...
-      #     end
-      #   end
-      def before_thumbnail_saved(&block)
-        write_inheritable_array(:before_thumbnail_saved, [block])
-      end
-
       # Get the thumbnail class, which is the current attachment class by default.
       # Configure this with the :thumbnail_class option.
       def thumbnail_class
@@ -179,6 +193,10 @@ module Technoweenie # :nodoc:
     end
 
     module InstanceMethods
+      def self.included(base)
+        base.define_callbacks *[:after_resize, :after_attachment_saved, :before_thumbnail_saved] if base.respond_to?(:define_callbacks)
+      end
+      
       # Checks whether the attachment's content type is an image content type
       def image?
         self.class.image?(content_type)
@@ -323,6 +341,41 @@ module Technoweenie # :nodoc:
       end
 
       protected
+      
+       # Yanked from ActiveRecord::Callbacks, modified so I can pass args to the callbacks besides self.
+        # Only accept blocks, however
+        if ActiveSupport.const_defined?(:Callbacks)
+          # Rails 2.1 and beyond!
+          def callback_with_args(method, arg = self)
+            notify(method)
+ 
+            result = run_callbacks(method, { :object => arg }) { |result, object| result == false }
+ 
+            if result != false && respond_to_without_attributes?(method)
+              result = send(method)
+            end
+ 
+            result
+          end
+ 
+          def run_callbacks(kind, options = {}, &block)
+            options.reverse_merge!( :object => self )
+            self.class.send("#{kind}_callback_chain").run(options[:object], options, &block)
+          end
+        else
+          # Rails 2.0
+          def callback_with_args(method, arg = self)
+            notify(method)
+ 
+            result = nil
+            callbacks_for(method).each do |callback|
+              result = callback.call(self, arg)
+              return false if result == false
+            end
+            result
+          end
+        end
+ 
         # Generates a unique filename for a Tempfile. 
         def random_tempfile_filename
           "#{rand Time.now.to_i}#{filename || 'attachment'}"
@@ -387,19 +440,6 @@ module Technoweenie # :nodoc:
           end
         end
 
-        # Yanked from ActiveRecord::Callbacks, modified so I can pass args to the callbacks besides self.
-        # Only accept blocks, however
-        def callback_with_args(method, arg = self)
-          notify(method)
-
-          result = nil
-          callbacks_for(method).each do |callback|
-            result = callback.call(self, arg)
-            return false if result == false
-          end
-
-          return result
-        end
         
         # Removes the thumbnails for the attachment, if it has any
         def destroy_thumbnails

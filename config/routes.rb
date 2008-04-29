@@ -6,11 +6,18 @@ ActionController::Routing::Routes.draw do |map|
   
   # RESTFUL WORKAROUND FOR FACEBOOK
   map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
-  map.resources 'facebook', :controller => 'facebook_accounts', :member => {:add_to_profile => :post, :remove_from_profile => :get}, :conditions =>{:canvas => true}
+  map.resources 'facebook', :controller => 'facebook_accounts', 
+      :member => {:remove_from_profile => :get},
+      :collection => {:add_to_profile => :any}, # hack, because we're not actually using resources
+      :conditions =>{:canvas => true}
   #map.facebook_resources :facebook_accounts, 'facebook_accounts', :controller => 'facebook_accounts', :condition => {:canvas => true}
 
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
   map.about 'about/:action', :controller => 'pages'
+  map.halp  'about/halp/:action', :controller => 'pages'
+  
+  map.search 'search', :controller => 'search', :action => 'index'
+  
   map.resources :updates
 
   map.logged_exceptions 'logged_exceptions/:action/:id',    :controller => 'logged_exceptions'
@@ -35,9 +42,14 @@ ActionController::Routing::Routes.draw do |map|
   # top 40
   map.top '/top/:top', :controller => 'assets', :action => 'top'
 
+  map.users_default '/users/by/activity/:page', :controller => 'users', :action => 'index', :sort => 'active', :page => 1
+  map.sorted_users '/users/by/:sort/:page', :controller => 'users', :action => 'index', :page => 1
   
+  map.listens  ':login/history', :controller => 'listens'
+  map.comments ':login/comments', :controller => 'comments'
+   
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any} do |user|
-    user.resources :tracks, :controller => :assets, :collection => {:latest => :get, :search => :any}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
+    user.resources :tracks, :controller => :assets, :member => {:share => :get}, :collection => {:latest => :get, :search => :post}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments
     end
    

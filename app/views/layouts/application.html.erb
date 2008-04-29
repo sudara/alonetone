@@ -4,65 +4,68 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title %> </title>
-    
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','share','alonetone', :cache => 'all'%>
+    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','alonetone', :cache => 'alonetone-v2'%>
+		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
+
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
-
-    <%= javascript_include_tag 'prototype', 'effects', 'slider', 'dragdrop', 'controls','lowpro','soundmanager', 'application', :cache => true %>
-		<!-- <script type="text/javascript" src="http://static.robotreplay.com/nitobi.replay.js"></script> -->
+    <%= javascript_include_tag 'jquery','soundmanager','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-lowpro','jquery-tabs','jquery-png','application', :cache => 'alonetone-v2' %>
+    
+    <!-- ensure token is available to javascript for accessible link posts, etc -->
+    <%= render :partial => 'shared/javascript_auth_token' %>
+  
   </head>
   <body>
   
-      <!-- div.header -->
       <div id="header">
-        <div id="logo"><a href="/"><i>alonetone home</i></a></div>
-				<div id="tagline"></div>
-				<div id="player"><%= render :partial => 'shared/player', :current_user => current_user %></div>
+        <a href="/" alt="home" id="logo"></a>
 				<%= render :partial=> 'shared/nav' %>
-      </div>
-      <!-- /div.header -->
-			<div id="user-bar"><%= render :partial => 'shared/user_bar', :current_user => current_user %></div>
-    
-		<%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
+      </div> <!-- end of header -->
 		
-    <div id="content">    
-      
-
+		<div id="wrapper">
+    <div id="content" class="content">    
+      <div id="top_bar">
+        <%= render :partial => 'shared/search'%>
+        <%= render :partial => 'shared/user_bar', :current_user => current_user %>
+      </div>
+    
+		  <%= check_for_and_display_flashes %>
+		  <%= check_for_and_display_notices %>
+      <div id="main">
+		      <%= yield %>
+      </div>
+      <div id="static">
+          <%= yield :static %>
+      </div>
+      <div id="columns">
 				<div id="left">
 					<%= yield :left %>
 				</div>
-				
-		    <div id="main">
-		      <%= render :partial => 'shared/ie6_warning' if @ie6 %>
-		      <%= render :partial => 'shared/javascript_warning' if @ie6%>
-		      <%= yield %>
-		    </div>
 		
 				<div id="right">
 					<%= yield :right %>
-				</div>
-
-	   </div><!-- div.content -->
+				</div>	
+				<div class="clear"> </div>
+				
+			</div> <!-- end columns -->
       
-		<div id="footer">
-			<div id="share">
-				<%= yield :share %>
-				<%= yield :comment %>
-			</div>
-			<%= render :partial => 'shared/footer' %>
-		</div>
-	
-	<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-	var pageTracker = _gat._getTracker("UA-241978-4");
-	pageTracker._initData();
-	pageTracker._trackPageview();
-	</script>
+
+	   </div><!-- end content -->
+	   </div><!-- end wrapper -->
+    <div id="footer_spacer"> </div>
+		<%= render :partial => 'shared/footer' %>
+	  
+  	<script type="text/javascript">
+  	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  	</script>
+  	<script type="text/javascript">
+  	var pageTracker = _gat._getTracker("UA-241978-4");
+  	pageTracker._initData();
+  	pageTracker._trackPageview();
+  	</script>
+  	<script type="text/javascript">soundManager.createMovie();</script>
   </body>
 </html>

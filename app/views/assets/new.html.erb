@@ -1,40 +1,53 @@
-<% if logged_in? %>
-	
-		<%= pretty_text "give us your best!", :h1 %>
-		<h2 class="spacey">upload mp3s (or zip files containing mp3s) up to 40 megabytes each</h2>
-		<%= render :partial => 'form' %>
-		
-		
-		<% 75.percent_of_the_time do %>
-		  <div id="playlist_hint" class="help">
-		    <h2>Want to take it up a notch?</h2>
-		    <p>
-		      <%= link_to 'Create your first playlist', new_user_playlist_path(@user) %>
-		      to better organize your tracks
-		    </p>
-		  </div>
-		<% end unless @user.playlists_count > 0%>
-		
-		<div id="relax" style="display:none" class="help">
-		  <div>
-		      <h2>Put the coffee on!</h2>
-		      <p>This is going to take a bit, depending on your connection and how large your files are. No worries,
-		        grab a cup of coffee, have a cigarette, or bust open another browser window.</p>
-		  </div>
-		</div>
-<% else %>
-	<div id="left-col">
-		<h1>Login</h1>
-			<%= render :partial => 'sessions/login'%>
+<%= render :partial => 'notices/create_playlist'  unless (@user.playlists_count > 0) || @user.assets_count < 1 %>
 
-		<h1>Create an account</h1>
-			<% form_for :user, :url => users_path do |form| -%>
-				<%= render :partial => 'users/form', :object => form %>
-				<p><%= submit_tag 'Sign up!' %></p>
-	  
-			<% end %>
+<h1 class="spacey">upload mp3 or zip files, up to 40MB each</h1>
+
+<% content_for :left do %>	
+    <div class="upload box">
+      <h2 class="box">Upload, upload, upload</h2>
+      <div class="static_content">
+		      <%= render :partial => 'form' %>
+      </div>
+      <div class="static_content">
+      By clicking "Upload!" you confirm that <span class="important">you own the copyright to the files you upload</span>
+		and accept our totally reasonable terms and conditions.
+      </div>
+      <div class="static_content">
+        Por favor publique música de la que tenga derechos de autor (es decir, que usted escribió y grabo la canción). Su cuenta sera borrada y su IP restringido si usted publica música de terceros.
+      </div>
 	</div>
-
-	
 <% end %>
 
+<% content_for :right do%>
+  <div id="fineprint" class="box">
+	<h2 class="box">Terms And Conditions</h2>
+	<div class=" static_content">
+		<strong>This is a free, legal service for musicians to host and distribute music.</strong><br/>
+		You will only upload music that you own the rights to (i.e. you created it and did not sell exclusive rights).
+	</div>
+	<div class=" static_content">
+
+		<strong>If you upload copyrighted music we will ban your account, your IP address and report you to the gerbils in tuxedos</strong><br/>
+		We support filesharing but please don't abuse us, or else.</br>
+	</div>
+	<div class=" static_content">
+
+		<strong>Mp3s uploaded here will be public the minute you upload them.</strong>
+	</div>
+	<div class=" static_content">
+
+		By uploading a mp3 file to alonetone.com, <b>you grant alonetone.com the non-exclusive right to distribute<br/>
+		the music in any way we see fit without your further permission or notification. </b><br/>
+		<br/>
+		That means that you music will likely show up on alonetone.com, facebook, itunes, and other websites.<br/><br/>
+		
+		As the rights are non-exclusive, you keep your rights as a copyright holder.
+		You can of course sell it or distribute it elsewhere - you own it!<br/>
+	</div>
+	<div class=" static_content">
+
+		<strong>You may delete your music at any time</strong><br/>
+		All traces of your track will be removed from alonetone, ripping it out of any user's playlists, etc
+	</div>
+	</div>
+<% end %>

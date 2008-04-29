@@ -16,7 +16,7 @@ module Technoweenie # :nodoc:
             rescue
               # Log the failure to load the image.  This should match ::Magick::ImageMagickError
               # but that would cause acts_as_attachment to require rmagick.
-              logger.debug("Exception working with image: #{$!}")
+              logger.warn("Exception working with image: #{$!}")
               binary_data = nil
             end
             block.call binary_data if block && binary_data
@@ -45,7 +45,8 @@ module Technoweenie # :nodoc:
           else
             img.change_geometry(size.to_s) { |cols, rows, image| image.resize!(cols, rows) }
           end
-          self.temp_path = write_to_temp_file(img.to_blob)
+          img.strip!
+          self.temp_path = write_to_temp_file(img.to_blob{self.quality = 90})
         end
       end
     end

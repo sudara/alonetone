@@ -3,16 +3,16 @@
    --------------------------------------------
    http://www.schillmania.com/projects/soundmanager2/
 
-   Copyright (c) 2007, Scott Schiller. All rights reserved.
+   Copyright (c) 2008, Scott Schiller. All rights reserved.
    Code licensed under the BSD License:
    http://www.schillmania.com/projects/soundmanager2/license.txt
 
-   V2.0b.20070415
+   V2.1.20080331
 */
 
 function SoundManager(smURL,smID) {
   var self = this;
-  this.version = 'V2.0b.20070415';
+  this.version = 'V2.1.20080331';
   this.url = (smURL||'/javascripts/soundmanager2.swf');
 
   this.debugMode = false;           // enable debugging output (div#soundmanager-debug, OR console if available + configured)
@@ -36,7 +36,8 @@ function SoundManager(smURL,smID) {
     'onbeforefinishcomplete':null, // function to call when said sound finishes playing
     'onjustbeforefinish':null,     // callback for [n] msec before end of current sound
     'onjustbeforefinishtime':200,  // [n] - if not using, set to 0 (or null handler) and event will not fire.
-    'multiShot': false,             // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
+    'multiShot': true,             // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
+    'position': null,              // offset (milliseconds) to seek to within loaded sound data.
     'pan': 0,                      // "pan" settings, left-to-right, -100 to 100
     'volume': 100                  // self-explanatory. 0-100, the latter being the max.
   }
@@ -60,6 +61,10 @@ function SoundManager(smURL,smID) {
   this._debugLevels = !self.isSafari?['debug','info','warn','error']:['log','log','log','log'];
 
   // --- public methods ---
+  
+  this.supported = function() {
+    return (self._didInit && !self._disabled);
+  }
 
   this.getMovie = function(smID) {
     // return self.isIE?window[smID]:document[smID];
@@ -85,7 +90,7 @@ function SoundManager(smURL,smID) {
     self._writeDebug('soundManager.createSound(): "<a href="#" onclick="soundManager.play(\''+thisOptions.id+'\');return false" title="play this sound">'+thisOptions.id+'</a>" ('+thisOptions.url+')',1);
     if (self._idCheck(thisOptions.id,true)) {
       self._writeDebug('sound '+thisOptions.id+' already defined - exiting',2);
-      return false;
+      return self.sounds[thisOptions.id];
     }
     self.sounds[thisOptions.id] = new SMSound(self,thisOptions);
     self.soundIDs[self.soundIDs.length] = thisOptions.id;
@@ -97,14 +102,16 @@ function SoundManager(smURL,smID) {
     }
     if (thisOptions.autoLoad || thisOptions.autoPlay) self.sounds[thisOptions.id].load(thisOptions);
     if (thisOptions.autoPlay) self.sounds[thisOptions.id].playState = 1; // we can only assume this sound will be playing soon.
+    return self.sounds[thisOptions.id];
   }
 
   this.destroySound = function(sID) {
     // explicitly destroy a sound before normal page unload, etc.
     if (!self._idCheck(sID)) return false;
-    for (var i=self.soundIDs.length; i--;) {
+    for (var i=0; i<self.soundIDs.length; i++) {
       if (self.soundIDs[i] == sID) {
-        delete self.soundIDs[i];
+        // delete self.soundIDs[i]; // old method breaks array.length
+	self.soundIDs.splice(i,1);  // better-er
         continue;
       }
     }
@@ -123,9 +130,9 @@ function SoundManager(smURL,smID) {
   }
 
   this.play = function(sID,oOptions) {
+    // modded by sudara to never use the shortcut
     if (!self._idCheck(sID)) {
       if (oOptions && oOptions.url) {
-        // NOTE: MOD BY SUDARA, you must pass in actual options due to incompatibility w/Prototype
         // overloading use case, creation + playing of sound: .play('someID',{url:'/path/to.mp3'});
         self._writeDebug('soundController.play(): attempting to create "'+sID+'"',1);
         oOptions.id = sID;
@@ -323,8 +330,7 @@ function SoundManager(smURL,smID) {
 
   this._writeDebugAlert = function(sText) { alert(sText); }
 
-  if (window.location.href.indexOf('debug=alert')+1) {
-    self.debugMode = true;
+  if (window.location.href.indexOf('debug=alert')+1 && self.debugMode) {
     self._writeDebug = self._writeDebugAlert;
   }
 
@@ -450,10 +456,10 @@ function SoundManager(smURL,smID) {
     // self.o = null;
     // self.oMC = null;
   }
-
-}
-
-function SMSound(oSM,oOptions) {
+  
+  // SMSound (sound object)
+  
+  function SMSound(oSM,oOptions) {
   var self = this;
   var sm = oSM;
   this.sID = oOptions.id;
@@ -519,7 +525,9 @@ function SMSound(oSM,oOptions) {
     if (oOptions.onjustbeforefinish) self.options.onjustbeforefinish = oOptions.onjustbeforefinish;
     // ---
 
-    var thisOptions = sm._mergeObjects(oOptions);
+    var thisOptions = sm._mergeObjects(oOptions, self.options); // inherit default createSound()-level options
+    thisOptions = sm._mergeObjects(thisOptions); // merge with default SM2 options
+
     if (self.playState == 1) {
       // var allowMulti = typeof oOptions.multiShot!='undefined'?oOptions.multiShot:sm.defaultOptions.multiShot;
       var allowMulti = thisOptions.multiShot;
@@ -552,7 +560,7 @@ function SMSound(oSM,oOptions) {
       self.resume();
     } else {
       self.playState = 1;
-      self.position = (thisOptions.offset||0);
+      self.position = (typeof thisOptions.position != 'undefined' && !isNaN(thisOptions.position)?thisOptions.position/1000:0);
       if (thisOptions.onplay) thisOptions.onplay.apply(self);
       self.setVolume(thisOptions.volume);
       self.setPan(thisOptions.pan);
@@ -576,6 +584,7 @@ function SMSound(oSM,oOptions) {
 
   this.setPosition = function(nMsecOffset) {
     // sm._writeDebug('setPosition('+nMsecOffset+')');
+    self.options.position = nMsecOffset; // update local options
     sm.o._setPosition(self.sID,nMsecOffset/1000,self.paused||!self.playState); // if paused or not playing, will not resume (by playing)
   }
 
@@ -598,7 +607,7 @@ function SMSound(oSM,oOptions) {
     sm._writeDebug('SMSound.togglePause()');
     if (!self.playState) {
       // self.setPosition();
-      self.play({offset:self.position/1000});
+      self.play({position:self.position/1000});
       return false;
     }
     if (self.paused) {
@@ -620,8 +629,6 @@ function SMSound(oSM,oOptions) {
     if (typeof nVol == 'undefined') nVol = 100;
     sm.o._setVolume(self.sID,nVol);
     self.options.volume = nVol;
-		sm._writeDebug('Volume being set to:'+nVol,1);
-    
   }
 
   // --- "private" methods called by Flash ---
@@ -697,6 +704,9 @@ function SMSound(oSM,oOptions) {
     self.didBeforeFinish = false;
     self.didJustBeforeFinish = false;
   }
+
+}
+
 
 }
 

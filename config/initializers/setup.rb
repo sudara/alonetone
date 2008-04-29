@@ -16,14 +16,13 @@ UserMailer.default_url_options[:host] = 'alonetone.com'
 UserMailer.mail_from = 'music@alonetone.com'
 
 # GENERATE THE NEEDED CSS STYLESHEETS
-
-Sass::Plugin.update_stylesheets
+Sass::Plugin.options[:always_check] = true 
 
 require 'randomness'
+require 'goodies'
 PASSWORD_SALT = 'so_salty_its_unbearable'
 
 # DEPENDENCIES 
-
 begin 
   require 'mp3info'
   require 'zip/zip'
@@ -31,3 +30,9 @@ begin
 rescue
   raise GemInstallNeeded
 end
+
+WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2
+WillPaginate::ViewHelpers.pagination_options[:outer_window] = 0
+
+# Take advantage of rails 2.1
+ActiveRecord::Base.partial_updates = true

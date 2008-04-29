@@ -1,19 +1,17 @@
 class UsersController < ApplicationController
   
-
   skip_before_filter :update_last_seen_at, :only => [:create, :new, :activate, :sudo]
   before_filter :find_user,      :except => [:new, :create, :sudo]
   
   before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio]
   skip_before_filter :login_by_token, :only => :sudo
   
-  rescue_from NoMethodError, :with => :display_user_home_or_index
-
+ rescue_from NoMethodError, :with => :user_not_found
 
   def index
     @page_title = 'the music makers and music lovers of alonetone'
     @tab = 'browse'
-    @users =  User.paginate_by_params(params)
+    @users = User.paginate_by_params(params)
     flash[:info] = "Want to see your pretty face show up here?<br/> Edit <a href='#{edit_user_path(current_user)}'>your profile</a>" unless current_user = :false || current_user.has_pic?
     respond_to do |format|
       format.html do
@@ -24,9 +22,8 @@ class UsersController < ApplicationController
         @users = User.search(params[:q], :limit => 25)
         render :xml => @users.to_xml
       end
-      format.js do render :update do |page|
-          page.replace 'user-index', :partial => 'users'
-        end
+      format.js do
+          render :partial => 'users.html.erb'
       end
      # format.fbml do
      #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])
@@ -39,10 +36,10 @@ class UsersController < ApplicationController
       format.html do
         @page_title = @user.name + " on alonetone - latest music & playlists"
         @tab = 'your_stuff' if current_user == @user
-        @assets = @user.assets.paginate(:all, :per_page => 5, :page=>params[:page])
+        @assets = @user.assets.find(:all, :limit => 5)
         @playlists = @user.playlists.find(:all,:conditions => [ "tracks_count > 0"])
         @listens = @user.listens.find(:all, :limit =>5)
-        @track_plays = @user.track_plays.find(:all, :limit =>10) 
+        @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @comments = @user.comments.find_all_by_spam(false, :limit => 10)
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
@@ -56,7 +53,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @page_title = "Sign up with alonetone to upload your mp3s or discover new music"
+    @page_title = "Sign up to upload your mp3s on alonetone"
+    flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
   
@@ -78,11 +76,11 @@ class UsersController < ApplicationController
           flash[:error] = "The signup message cannot be sent to '#{CGI.escapeHTML @user.email}' at this moment. Please, try again later."
           redirect_to :action => "new"
         end
-        flash[:ok] = "An email was sent to '#{CGI.escapeHTML @user.email}'. <br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
-        redirect_to login_path
+        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
       end
     end
     rescue ActiveRecord::RecordInvalid
+      flash[:error] = "Whups, there was a small issue"
       render :action => 'new'
   end
   
@@ -125,9 +123,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do 
         if @user.save 
-          flash[:ok] = "Sweet, your profile is updated" 
+          flash[:ok] = "Sweet, updated" 
         end
-        render :action => 'edit'
+        redirect_to :back
+      end
+      format.js do
+        @user.save ? (return head(:ok)) : (return head(:bad_request))
       end
     end
   end

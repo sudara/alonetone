@@ -11,7 +11,7 @@
     <td style="width:40px;"><h4 style="margin-bottom:20px">Search:</h4></td>
     <td style="padding:20px"> 
 
-      <% facebook_form_for(:asset, nil, :url => (add_to_profile_facebook_path(@facebook_account, :addable_type => 'asset')), :width => 50, :style => "height:40px", :label_width => 0 ) do |f| %>
+      <% facebook_form_for(:asset, :url => (add_to_profile_facebook_path(:addable_type => 'asset')), :width => 50, :style => "height:40px", :label_width => 0 ) do |f| %>
       <fb:typeahead-input name="addable_id" style="display:inline;width:200px;">
         <% @search_assets.each do |asset| %>
           <fb:typeahead-option value="<%= asset.id %>"><%= asset.name %></fb:typeahead-option>

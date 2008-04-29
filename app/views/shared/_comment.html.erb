@@ -1,26 +1,28 @@
-<% div_for comment do %>
+<% div_for comment, :class => (cycle('even', 'odd')) do %>
   
   <div class="comment_user">
-  	<% if comment.commenter %>
-  			<%= image_tag comment.commenter.avatar(:small) %><br/>
-  		<% else %>
-  			<%= image_tag User.dummy_pic(:small)%><br/>
-  	<% end %>
-  	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
-	</div>
-	
-	<p class="comment_date">
-		<%= time_ago_in_words(comment.created_at)%> ago<br/>
-		said about the track <span class="comment_about"><%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></span><br/>
-	</p>
-	
-	<p class="comment_body">
-		<%=h comment.body %>
-	</p>
-	
+    	<% if comment.commenter %>
+          <%= user_image_link(comment.commenter, :small)%>
+    		<% else %>
+    			<%= image_tag User.dummy_pic(:small)%>
+    	<% end %>
+   
+	  <% if !@single_track %>
+	  <div class="comment_about">about <%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></div>
+	 <% end %>
+	     <span class="comment_user_text">
+    	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
+    	said <%= time_ago_in_words(comment.created_at) %> ago
+  	</span>
+	 
 	<% if admin? %>
-		<%= link_to 'Delete', comment_path(comment), :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Delete', comment_path(comment), :class=> 'delete button', :confirm => 'Are you sure?', :method => :delete %>
 	<% end %>
+	</div>
+	<div class="comment_body">
+
+		<%= comment.body %>
+	</div>
 	<div class="clear">
 	 
 	</div>

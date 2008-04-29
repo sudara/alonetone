@@ -1,55 +1,23 @@
 <%= error_messages_for :asset %>
-
-<% form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
-	<div id="uploader">	
-	<dl class="group" id="fileform">
-    <dt id="filelbls">
-     </dt>
-    <dd class="asset-data">
-      <ul id="filefields">
-        <li>
-          <%= file_field_tag  'asset_data[]', :class=> 'asset_data' %>
-        </li>
-      </ul>
-    </dd>
-  </dl>
-  <a href="#" id="asset-add-file" class="bottom-tab button add">add another field</a>
-
-  <p class="buttons">
-    <div id="uploading" style="display:none;">	<%= image_tag 'uploading.gif'%></div>
-	
- 		<%= submit_tag 'Upload!', :id => 'upload', :disable_with => 'Uploading, be patient now...' %>
-		
- </p>
-	
+<div id="uploader">	
+    <% form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
+    	<dl class="group" id="fileform">
+        <dt id="filelbls">
+         </dt>
+        <dd class="asset-data">
+          <ul id="filefields">
+            <li>
+              <%= file_field_tag  'asset_data[]', :class=> 'asset_data' %>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    <div class="submit_wrapper">
+        <%= submit_tag 'Upload!', :id => 'upload' %>
 	</div>
-	<% end -%>
-	<p class="agree">
-		By clicking "Upload!" you confirm that <span class="important">you own the copyright to the files you upload</span> <br/>
-		and accept
-		<%=link_to_function("our reasonable terms and conditions.", nil, :id => "terms_link") do |page|
-		    page[:fineprint].toggle
-		    page[:terms_link].replace_html "our totally reasonable terms and conditions."
-		  end %>
-	</p>
-	<div id="fineprint" style="display:none;">
-		<%= pretty_text "Ye Old Terms and Conditions", :h2%><br/>
-		<h2>This is a free service to host and distribute the music you own the rights to</h2>
-		You will only upload music that you own the rights to (i.e. you created it and did not sell exclusive rights).
-		<h2>Copyrighted files uploaded here are deleted along with the account that created them</h2>
-		If you upload copyrighted music we will ban your account and IP address.<br/>
-		We support filesharing - just don't do it here, it hurts us</br>
-	
-		<h2>Mp3s uploaded here will be public the minute you upload them.</h2>
-		
-		By uploading a mp3 file to alonetone.com, <b>you grant alonetone.com the non-exclusive right to distribute<br/>
-		the music in any way we see fit without your further permission or notification. </b><br/>
-		<br/>
-		That means that you music will likely show up on alonetone.com, facebook, itunes, and other websites.<br/><br/>
-			
-		As the rights are non-exclusive, you keep your rights as a copyright holder.<br/>
-		You can of course sell it or distribute it elsewhere - you own it!<br/>
-		
-		<h2>You may delete your music at any time</h2>
-		All traces of your track will be removed from alonetone, ripping it out of any user's playlists, etc
-	</div>
+    <% end -%>
+    <div id="uploading" style='display:none'>	
+        <%= image_tag 'uploading.gif'%>
+    </div>
+
+</div>

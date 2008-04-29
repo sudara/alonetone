@@ -1,15 +1,19 @@
-<% id = object.id.to_s %>
 <% object = object.asset if object.respond_to?(:asset) -%>
 
-<div id="comment_<%=id%>" class="comment_asset footer_content" style="display:none;">
-  <h2>Send <%=h object.user.name%> a little message about <span class="track-name"><%=h object.name %> </span></h2>
-  <% remote_form_for :comment, :url => user_track_comments_path(object.user, object), 
-  :success => 'Flash.show("ok","sent!");$("comment_'+ id +'").fade();$("footer").morph({height:"40px"})', 
-  :failure =>  'Flash.show("error","You have to be logged in and the comments have to be pretty short")',
-  :class => 'comment_form' do |f| %>
-   <%= f.text_area :body, :rows => 4, :cols => 50 %>
-   <%= f.hidden_field :commentable_type, :value => 'asset'%>
-   <%= f.submit "send comment to #{h object.user.name}", :class => 'comment_submit'%> or <%= link_to 'nevermind, close this window', '', :class => 'done'%>
-  <% end %>  
-  
+<div id="comment_<%= object.unique_id %>" class="comment_asset">
+  <div class="comment_form">
+    <% form_for :comment, :url => user_track_comments_path(object.user, object) do |f| %>
+     <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble' %>
+     <%= f.hidden_field :commentable_type, :value => 'asset'%>
+      <div class="submit_wrapper">
+        <div class="comment_waiting" >
+          <div class="text"><!-- placeholder response text --></div>
+        </div>
+        <div class="small_spinner" style="display:none;"></div>
+        <%= f.submit "send comment to #{h object.user.name}", :class => 'comment_submit',:id => "submit_#{object.unique_id}"%> 
+      </div>
+    <% end %>  
+  </div>
+
+
 </div>

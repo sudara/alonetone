@@ -1,16 +1,29 @@
 <div id="user-index">
 
+  <div id="static_header">
   
-<h4>Showing you alonetone musicians and listeners that have...</h4 >
-<div id="switcher">
-  <%= link_to 'uploaded mp3s',  {:action => 'index', :tracks => true }, :class=> (!params[:playlists] && !params[:all] ? 'active' : '')  %>
-  <%= link_to 'created playlists', {:action => 'index', :playlists => true}, :class => (params[:playlists] ? 'active' : '') %>
-  <%= link_to 'just signed up', {:action => 'index', :all => true}, :class => (params[:all] ? 'active' : '') %>
-</div>
+    <div class="title">
+      <h1 class="static">Browse all alonetone artists</h1>
+    </div>
+    
+    <div id="links">
+      <ul class="links">
+       <%= user_nav_item "last seen", {:action => 'index', :sort => nil} %>
+       <%= user_nav_item "last uploaded", {:action => 'index', :sort => 'last_uploaded'}%>
+       <%= user_nav_item "monster uploaders", {:action => 'index', :sort => 'monster_uploaders'} %>
+       <%= user_nav_item "dedicated listeners", {:action => 'index', :sort => 'dedicated_listeners'}%>
+       <%= user_nav_item "recently joined", {:action => 'index', :sort => 'recently_joined'} %>
+      </ul>
+          <%= will_paginate @users %>
+    </div>
+  </div>
+  
+  <div id="recently_uploaded">
 
-<%= will_paginate @users %>
+    <%= render :partial => 'shared/user', :collection => @users %>
+    <div class="clear"> </div>
+  </div>
 
-  <%= render :partial => 'shared/user', :collection => @users %>
 
-<div style="float:none;clear:both;"> </div>
+  <div style="float:none;clear:both;"> </div>
 </div>

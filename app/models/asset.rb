@@ -18,6 +18,8 @@
 
 class Asset < ActiveRecord::Base
   
+  named_scope :descriptionless, {:conditions => 'description = "" OR description IS NULL', :order => 'created_at DESC', :limit => 10}
+    
   # used for extra mime types that dont follow the convention
   @@extra_content_types = { :audio => ['application/ogg'], :movie => ['application/x-shockwave-flash'], :pdf => ['application/pdf'] }.freeze
   @@allowed_extensions = %w(.mp3)
@@ -34,6 +36,8 @@ class Asset < ActiveRecord::Base
   cattr_reader *%w(movie audio image other).collect! { |t| "#{t}_condition".to_sym }
   
   has_many :tracks, :dependent => :destroy
+  has_many :playlists, :through => :tracks
+  
   belongs_to :user, :counter_cache => true
   
   has_many :listens, :dependent => :destroy
@@ -62,6 +66,17 @@ class Asset < ActiveRecord::Base
   #   mp3.tag.author = "#{record.user.name} (#{record.user.site})" unless mp3.tag.author
   # end
   # the attachment_fu callback is actually named after_resize
+
+
+    # Generates magic %LIKE% sql statements for all columns
+  def self.conditions_by_like(value, *columns) 
+    columns = self.content_columns if columns.size==0 
+    columns = columns[0] if columns[0].kind_of?(Array) 
+    conditions = columns.map {|c| 
+    c = c.name if c.kind_of? ActiveRecord::ConnectionAdapters::Column 
+    "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
+    }.join(" OR ") 
+  end
 
   def self.extract_mp3s(zip_file, &block)
     # try to open the zip file
@@ -92,8 +107,10 @@ class Asset < ActiveRecord::Base
     end    
   # pass back the file unprocessed if the file is not a zip 
   rescue Zip::ZipError => e
-    logger.warn("An error occured with attempted extraction from #{zip_file.path}:"+e)
+    logger.warn("User uploaded #{zip_file.path}:"+e)
     yield zip_file
+  rescue TypeError => e
+    logger.warn("User tried to upload too small file");
   end
   
   def self.latest(limit=10)
@@ -138,6 +155,11 @@ class Asset < ActiveRecord::Base
     define_method("#{content}?") { self.class.send("#{content}?", content_type) }
   end
   
+  # needed in case we've got multiple assets on the same page
+  def unique_id
+    object_id
+  end
+  
   def name
     # make sure the title is there, and if not, the filename is used...
     (title && !title.strip.blank?) ? title.strip : clean_filename
@@ -155,6 +177,14 @@ class Asset < ActiveRecord::Base
   
   def clean_permalink
     self.permalink = nil
+  end
+  
+  def self.days
+    (Asset.sum(:length).to_f / 60 / 60 / 24).to_s[0..2]
+  end
+  
+  def self.gigs
+    (Asset.sum(:size).to_f / 1024 / 1024 / 1024).to_s[0..3]
   end
   
   # allows classes outside Asset to use the same format

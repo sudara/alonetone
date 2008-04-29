@@ -1,12 +1,9 @@
-	<div id="user_track_plays">
-		<% render :layout => 'assets/asset_wrapper' do%>
-		<div id="track_plays" class="stash">
-			<h2>Latest listens to your music</h2>
-			<h3>
-			<%= @user.listens_count %> total listens since you signed up
-		  </h3>
-		  <%= render :partial => 'users/track_play', :collection => @track_plays %>
-		</div>
-		<% end %>
-
-	</div>
+<div id="user_track_plays" class="box">
+		<h2 class="box">Latest listens to your music</h2>
+		<%= link_to 'view all', listens_path(@user.login), :class => 'view_all' if @track_plays.size > 0 %>
+    <div class="static_content">
+      <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
+		  <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day) 
+    </div>
+	  <%= render :partial => 'users/track_play', :collection => @track_plays %>
+</div>

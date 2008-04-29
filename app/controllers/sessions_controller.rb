@@ -2,8 +2,8 @@ class SessionsController < ApplicationController
 
   def new
     if logged_in?
-      flash[:error] = "Confused?<br/> Either you aren't allowed to do that, or uhm, you aren't allowed to do that"
-      redirect_to default_url
+      flash[:error] = "Either you aren't allowed to do that, or uhm, you aren't allowed to do that"
+      redirect_to_default
     end
   end
 
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
     reset_session
     cookies.delete :auth_token
     flash[:ok] = "Goodbye!"
-    redirect_to_default
+    redirect_to :back
   end
 
   protected
@@ -56,7 +56,7 @@ class SessionsController < ApplicationController
       if self.current_user = User.authenticate(name, password)
         successful_login
       else
-        failed_login "Invalid login or password, try again please."
+        failed_login "Yikes. That didn't work. Try again?"
       end
     end
 

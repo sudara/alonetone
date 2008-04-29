@@ -1,37 +1,44 @@
-<div id="signup">
-	<%= pretty_text 'Join alonetone', :h1 %>
-	<%= error_messages_for :user %>
+<%= error_messages_for :user %>
 
-	<% form_for :user, :url => users_path do |f| -%>
-	  <%= render :partial => "form", :object => f %>
-	  <p><%= submit_tag 'Join alonetone' %></p>
-	<% end -%>
-	  
-  <div id="signup-questions">
-  <%= pretty_text "More questions?",:h3 %><br/>
-  get the answers you need by <%= link_to 'clicking here', about_path %>
+<% content_for :left do %>
+  <h2 class="box">Join alonetone</h2>
+  <%= link_to "or login here", login_path, :class=> 'view_more'%>
+  <div id="signup" class="static_content box">
+
+  	<% form_for :user, :url => users_path do |f| -%>
+  	  <%= render :partial => "form", :object => f %>
+  	  <div class="submit_wrapper"><%= submit_tag 'Join alonetone' %></div>
+  	<% end -%>
   </div>
-</div>
+  <h2 class="playlist_title box">Want to know more?</h2>
+  <div id="signup-questions" class="static_content box">
+    alonetone is a non-commercial venture, giving musicians a free home for their music and the tools they need to promote it<br/><br/>
+    Read our FAQ by <%= link_to 'clicking here', about_path %>
+  </div>
+<% end %>
 
-<div id="what-you-get">
-	<h1>Why alonetone?</h1>
-	<%= image_tag 'promo/unlimited-uploads.jpg'%>
-	<h2 class='hug'>Upload your music (mp3 format)</h2>
+<% content_for :right do %>
+  	<h2 class="box">Why alonetone?</h2>
+  	<div id="what-you-get" class="box static_content">
+
+  	<%= image_tag 'promo/unlimited-uploads.jpg'%>
+  	<h2 class='hug'>Upload your music (mp3 format)</h2>
 	
-	<%= image_tag 'promo/people-you-like.jpg'%>
-	<h2 class='hug'>Join a musician community, not a company</h2>
+  	<%= image_tag 'promo/people-you-like.jpg'%>
+  	<h2 class='hug'>Join a musician community, not a company</h2>
 
-  <%= image_tag 'promo/track-listens.jpg'%>
-  <h2 class='hug'>Keep track of your musical creations</h2>
+    <%= image_tag 'promo/track-listens.jpg'%>
+    <h2 class='hug'>Keep track of your musical creations</h2>
   
-  <%= image_tag 'promo/itunes-podcast.jpg'%>
-  <h2 class='hug'>Get your music on itunes...</h2>
+    <%= image_tag 'promo/itunes-podcast.jpg'%>
+    <h2 class='hug'>Get your music on itunes...</h2>
 
-  <%= image_tag 'promo/add-to-facebook.jpg'%>
-  <h2 class='hug'>...facebook</h2>
+    <%= image_tag 'promo/add-to-facebook.jpg'%>
+    <h2 class='hug'>...facebook</h2>
   
-  <%= image_tag 'promo/embed-player.jpg'%>
-  <h2 class='hug'>...and any website, forum or blog</h2>
+    <%= image_tag 'promo/embed-player.jpg'%>
+    <h2 class='hug'>...and any website, forum or blog</h2>
+  </div>
 
+<% end %>
 
-</div>

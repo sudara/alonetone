@@ -1,8 +1,8 @@
-<%= pretty_text "Say What?!", :h1%>
-<h2 class='spacey'>What users have been saying about alonetone</h2>
+<% render :layout => 'pages/halp' do %>
+  <% content_for :static_h1 do %>
+  <% end %>
 
 <div id='user_reports'>
 	<%= render :partial => 'user_report', :collection => @user_reports %>
 </div>
-
-
+<% end %>

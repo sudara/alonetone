@@ -1,43 +1,59 @@
+@import variables
+// variables for nav w/o images
+!active_tab_background = #e1e2e1 
+!normal_tab_background = #45473c
+!hover_tab_background = #da6d25
+
+!active_tab_text = #37392b
+!normal_tab_text = #c1cab3
+!hover_tab_text = #f6fceb
+
 ul#nav
   :background none
   li
     :float left
-    :height 34px
+    :height 75px
     :line-height 0
     :padding 0
-    :margin 0
+    :margin-right 12px
     :background none
     a
-      :height 34px
       :float left
       :display block
       :margin 0 
-      :padding 0
-      :background transparent none no-repeat top left
-      // make sure the text doesn't show up
-      i 
-        :display none
-  li#browse 
-    a
-      :background-image url(../images/nav/browse-buttons.png) 
-      :width 173px
-      &:hover
-        :background-position -173px
-    a.active
-      :background-position -346px
-  li#upload
-    a
-      :background-image url(../images/nav/upload-buttons.png) 
-      :width 98px        
-      &:hover 
-        :background-position -98px
-    a.active
-      :background-position -196px
-  li#your_stuff
-    a
-      :background-image url(../images/nav/your-stuff-buttons.png)
-      :width 120px
-      &:hover 
-        :background-position -120px
-    a.active
-      :background-position -240px         
+      :height 74px
+      :width 150px
+      :background url(../images/buttons/nav.png) no-repeat 0px 0px
+    &#home
+      :margin-right 71px
+      a
+        :width 150px
+        :background-position 0px 0px 
+        &.active
+          :background-position -150px 0px
+        &:hover
+          :background-position -300px 0px
+    &#browse
+      a
+        :width 204px
+        :background-position -450px 0px
+        &.active
+          :background-position -654px 0px
+        &:hover
+          :background-position -858px 0px
+    &#upload
+      a
+        :background-position -1062px 0px
+        :width 124px
+        &.active
+          :background-position -1186px 0px
+        &:hover
+          :background-position -1310px 0px
+    &#your_stuff
+      a
+        :width 145px
+        :background-position -1434px 0px
+        &.active
+          :background-position -1579px 0px
+        &:hover
+          :background-position -1724px 0px

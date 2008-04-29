@@ -8,12 +8,16 @@ class PlaylistsController < ApplicationController
   in_place_edit_for :playlist, :description
   in_place_edit_for :playlist, :title
   
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from NoMethodError, :with => :user_not_found
   
   # GET /playlists
   # GET /playlists.xml
   def index
-    @playlists = @user.playlists.find(:all)
-
+    @all_playlists = @user.playlists.find(:all)
+    # TODO: fugly array work
+    split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
+    @playlists_left, @playlists_right = split[0].try(:compact), split[1].try(:compact)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @playlists }
@@ -44,25 +48,26 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1/edit
   def edit
     # allow them to add their own assets
-    @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at DESC', :page => params[:page])
-    @listens = @user.listens.find(:all, :limit => 10, :order => 'listens.created_at DESC')
+    # TODO: this is bad form, should be relocated to assets/index and listens/index
+    @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at DESC', :page => params[:uploads_page])
+    @listens = @user.listens.paginate(:all, :limit => 10, :order => 'listens.created_at DESC', :per_page => 10, :page => params[:listens_page])
     respond_to do |format|
       format.html
       format.js do
-        render :update do |page|
-            page.replace 'your_stuff_box', :partial => "your_stuff"
-        end
+        render :partial => 'your_stuff.html.erb' if params[:uploads_page]
+        render :partial => 'your_listens.html.erb' if params[:listens_page]
       end
     end
   end
 
   
   def add_track
-    @track = @playlist.tracks.create(:asset_id => params[:asset_id].split("_")[1]) if params[:asset_id]
+    @track = @playlist.tracks.create(:asset => Asset.find(params[:asset_id].split("_")[1])) 
     respond_to do |format|
-      format.html { render :layout => false }
       format.js 
     end
+  rescue ActiveRecord::RecordNotFound, NoMethodError
+    return head(:bad_request)  
   end
   
   def attach_pic
@@ -79,18 +84,20 @@ class PlaylistsController < ApplicationController
   
   def remove_track
     @track = @playlist.tracks.find(params[:track_id]) 
-    if @track.destroy 
+    if @track && @track.destroy 
       respond_to do |format|
-        format.js
+        format.js {return head(:ok); render :nothing => true}
       end
     else
       render :nothing => true
     end
+  rescue ActiveRecord::RecordNotFound 
+    head(:bad_request)
   end
   
   def sort_tracks
     # get the params for this playlist
-    params["tracks"].each_with_index do |id, position|
+    params["track"].each_with_index do |id, position|
       Track.update(id, :position => position)
     end
     render :nothing => true
@@ -103,7 +110,7 @@ class PlaylistsController < ApplicationController
 
     respond_to do |format|
       if @playlist.save
-        flash[:notice] = 'Playlist was successfully created.'
+        flash[:notice] = 'Great, go ahead and add some tracks'
         format.html { redirect_to edit_user_playlist_path(@user, @playlist) }
         format.xml  { render :xml => @playlist, :status => :created, :location => @playlist }
       else
@@ -122,7 +129,7 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       if @playlist.update_attributes(params[:playlist])
         flash[:notice] = 'Playlist was successfully updated.'
-        format.html { redirect_to(@playlist) }
+        format.html { redirect_to(@user,@playlist) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -144,7 +151,10 @@ class PlaylistsController < ApplicationController
   
   
   protected
-  
+  def not_found
+    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" and redirect_to user_playlists_path(@user) 
+  end
+    
   def authorized?
     (!%w(destroy admin edit update remove_track attach_pic sort_tracks add_track set_playlist_description set_playlist_title).include?(action_name)) || (@playlist.user_id.to_s == current_user.id.to_s) || admin?
   end

@@ -1,0 +1,27 @@
+
+<div id="html_code_<%=id%>" >
+  <div class="scriptaculous">
+  <h3>HTML code</h3>
+  <%= text_area_tag 'code', "<a href='#{formatted_user_track_url(@asset.user, @asset, :mp3)}'>Download #{@asset.name}</a>", :rows => 2, :cols => 50 %>
+  </div>
+</div>
+
+<div id="flash_code_<%=id%>">
+  <div class="scriptaculous">
+    <h3>Embedd a Flash Player</h3>
+    <%= text_area_tag 'flash_player', "<embed src=\"#{FLASH_PLAYER}\" width=\"250\" height=\"20\" allowfullscreen=\"true\" allowscriptaccess=\"always\" flashvars=\"&file=#{formatted_user_track_url(@asset.user, @asset.permalink, :mp3)}&height=20&width=250&frontcolor=0x3C3C3C&backcolor=0xf3f3f3&lightcolor=0xFF944B&screencolor=0xFF944B&showdigits=false\" />", :rows => 3, :cols =>50 %>
+    <p class="tip">(customize how it looks by visiting <%= link_to 'the setup wizard', 'http://www.jeroenwijering.com/?page=wizard&example=2'%>)
+    </p>
+  </div>
+</div>
+
+
+
+<h3>Email to a friend</h3>
+
+<%= text_field_tag 'email', 'your_friend@someplace.com', :size=> 30%>
+<%= submit_tag 'send email now'%>
+
+
+<h3>Put '<%=h @asset.name %>' on your facebook Profile</h3>
+COMING SOON

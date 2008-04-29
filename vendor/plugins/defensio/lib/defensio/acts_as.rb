@@ -58,9 +58,9 @@ module Defensio
       # All options can be specified in a YAML config file by default in
       # RAILS_ROOT/config/defensio.yml.
       def acts_as_defensio(type, options={})
-        return if RAILS_ENV == 'development'
         include InstanceMethods
-        
+                return if RAILS_ENV == 'development'
+
         case type
         when :article
           if options.has_key? :announce_when

@@ -1,90 +1,44 @@
+<%= error_messages_for :playlist %>
+<%= render :partial => 'inline_help'%>
 
-<h1>Editing '<%= @playlist.title %>'</h1>
+<% content_for :left do %>
+  
+  <div id="edit_playlist">
+    <% render :layout => 'playlist_layout' do %>
+      <%= link_to 'edit title &amp; description','#edit_playlist_info',:class=>'slide_open_href edit right' %>
+      
+      <div id="pic_upload" class="static_content" style="display:none;">
+    	Upload a square photo, 400px by 400px for best results.<br/>
+    		<% form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
+    			<%= f.file_field :uploaded_data  %>
+    			<%= submit_tag "Upload new Pic" %>
+    		<% end %>
+      </div>
+      <div id="edit_playlist_info" class="static_content"style="display:none;">
+        <% form_for [@user, @playlist] do |f| %>
+          Title<br/>
+            <%= f.text_field :title %><br/>
+          Description<br/>
+            <%= f.text_area :description, :rows => 4, :cols => 40, :class => 'double_trouble' %><br/>
+            <div class="submit_wrapper">
+                <%= f.submit "update" %>
+            </div>
+        <% end %>
+      </div>
+      <%= render :partial => 'track', :collection => @playlist.tracks %>
+    <div id="drop_here">
+      Drop Track here
+    </div>
+    <% end %>
+  </div>
+  
+<% end %>
 	
-	<%= error_messages_for :playlist %>
-	
-	 <div id="edit_playlist">
-		<% render :layout => 'assets/asset_wrapper' do%>
-			<% div_for @playlist do %>
-				<h2>	<%= in_place_editor_field :playlist, 'title' %></h2>
-				<div class="info">
-					<%= link_to_function(image_tag('jewel-case-125.png'), nil, :id => 'pic_upload_link', :class => "jewel_case_125") do |page|
-						page[:pic_upload].toggle
-					end %>
-					<%= image_tag(@playlist.cover(:large), :class => "cover_125") %>
-					<p class="description">
-					  <span id="play_time"><%= @playlist.play_time %></span><br/>
-
-					  <%= in_place_editor_field :playlist, 'description', {}, :rows => 5, :cols => 27 %></p>
-					
-			</div>
-			<div id="pic_upload" style="display:none;">
-					Upload a square photo, 400px by 400px for best results.<br/>
-						<% form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
-							<%= f.file_field :uploaded_data  %>
-							<%= submit_tag "Upload new Pic" %>
-						<% end %>
-					</div>
-			<ul class="tracks" id="tracks">
-				<%= render :partial => 'track', :collection => @tracks %>
-			</ul>
-			<div class="drop_tracks" id="drop_tracks">
-						<p style="text-align:center">Drop tracks here<br/></p>
-			</div>
-
-			<% end %>
-		<% end %>
-
-		
-		
-	</div>
-	
-	<%= drop_receiving_element "playlist_#{@playlist.id.to_s}",
-	    :url => add_track_user_playlist_path(@user, @playlist.permalink),
-		  :accept => "asset",
-	    :hoverclass => "active",
-	 	  :with =>"'asset_id=' + encodeURIComponent(element.id)" %>
-	
-			
-	<%= sortable_element "tracks", :url => sort_tracks_user_playlist_path(@user, @playlist.permalink), :containment => :tracks, :handle => 'move' %>
+<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), :id => 'add_track_url',:class=> 'hidden' %>	
+<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
 
 
+<% content_for :right do %>
+  <%= render :partial => 'playlist_sources' %>
+<% end %>
 
-<div id="playlist_sources" class="draggable_wrapper">
-	<% render :layout => 'assets/asset_wrapper' do %>
-	
-	<div class="draggable_tracks">
-		<h2>Available tracks</h2>
-		<div class="info">
-			<%= render :partial => 'options' %>
-			<div id="search_box" style="display:none;">
-				Search for an alonetone track: <%= render :partial => 'assets/search'%>
-			</div>
-			<br/><br/>
-				Drag tracks from below to your playlist on the left
-		</div>
-    
-    <%= render :partial => 'your_stuff' %>
-
-
-		<div id="your_listens_box" class="playlist_source" style="display:none;">
-			<div class="scriptaculous">
-
-			<%= render :partial => 'listen', :collection => @listens %>
- 			</div>
-		</div>
-
-		<div id="search_alonetone" class="playlist_source" style="display:none;">
-			<div class="scriptaculous">
-				<div id="results"> </div>
-			</div>
-		</div>
-		
-	</div>
-
-	<% end %>
-</div>
-
-<div class="playlist_help">
-	<%= render :partial => 'inline_help'%>
-</div>	

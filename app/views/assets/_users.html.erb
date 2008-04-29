@@ -1,8 +1,9 @@
-<div id="recent_listeners">
+<% if present?(@listeners)%>
+<h2 class="box">Recent Listeners</h2>
+<div id="recent_listeners" class="box static_content">
 
-<h2>Recent Listeners</h2>
-  
-<%= render :partial => 'shared/small_user', :collection => @listeners %>
+    <%= render :partial => 'shared/small_user', :collection => @listeners %>
 
-<div class="clear"></div>
+    <div class="clear"></div>
 </div>
+<% end %>

@@ -1,17 +1,26 @@
 <div id="user_header">
 
+  <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
+  
   <div class="user_title">
-  <%= pretty_text "#{h @user.name}", :h1%>
+    <h1 class="user"><%=h @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+
   </div>
-  <%= link_to(image_tag(@user.avatar(:large), :class => 'large_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
-  <div class="user_links">
-    <%= link_to_unless_current "#{@user.name}'s latest stuff on alonetone", user_home_path(@user) %>
-    <%= link_to_unless_current "Listen to all of #{@user.name}'s tracks", user_tracks_path(@user) if @user.assets_count > 0%>
-    <%= link_to_unless_current "Browse #{@user.name}'s albums and mixes", user_playlists_path(@user) if @user.has_public_playlists? %>
-    <%= link_to_unless_current "View #{@user.name}'s detailed profile", profile_path(@user) if @user.bio %>
-    <%= link_to "Listen to #{@user.name} on iTunes", "http://#{@user.itunes}" if @user.itunes && !@user.itunes.empty? %>
-    <%= link_to "Sudo to #{@user.name}", sudo_user_path(@user) if (admin? || @sudo)%>
+    <% if authorized? %>
+      <%= link_to 'edit your profile', edit_user_path(@user), :class => 'edit right' %>
+    <% end %>
+  <div id="user_links">
+    <ul class="user_links">
+     <%= user_nav_item "Latest", user_home_path(@user), :title => "#{h @user.name}'s latest stuff on alonetone" %>
+     <%= user_nav_item "Albums & Playlists", user_playlists_path(@user), :title => "#{h @user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? %>
+     <%= user_nav_item "Tracks", user_tracks_path(@user), :title => "#{h @user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
+     <%= user_nav_item "Profile", profile_path(@user), :title => "#{h @user.name}'s profile on alonetone" if @user.bio %>
+  
+      <%= user_nav_item "Email", "mailto://#{@user.email}",:added_class => "contact" if admin? %>
+      <%= user_nav_item "Myspace", "http://myspace.com/#{@user.myspace}",:added_class => "contact" if @user.present?(:myspace)%>
+      <%= user_nav_item "iTunes", "http://#{@user.itunes}",:added_class => "contact" if @user.present?(:itunes) %>
+      <%= user_nav_item "Sudo", sudo_user_path(@user),:added_class => "contact" if (admin? || @sudo)%>   
+    </ul>
   </div>
-  <div class="clear"></div>
 </div>
   <%= yield %>

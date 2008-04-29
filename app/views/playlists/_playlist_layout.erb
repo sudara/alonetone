@@ -1,0 +1,43 @@
+<% if @playlist.has_tracks? || authorized_for(@playlist) %>
+
+		<% div_for @playlist, :class => "box #{(@playlist.has_tracks? ? '' : 'empty')} #{@playlist.type}" do %>
+		  <div class="playlist_title box">
+			  <h2><%= @playlist.title %></h2>
+			  <h3><%= pluralize @playlist.tracks_count, 'track'%> by <%= (@playlist.is_mix? ? 'various alonetone artists' : @playlist.user.name )%></h3>
+        <% if authorized_for(@playlist) %>
+          <%= link_to "edit", edit_user_playlist_path(@user, @playlist), :class => 'edit right' %>
+        <% end %>
+				
+      </div>
+			<% if @playlist.tracks.size < 1 %>
+			<div class="empty">
+        Playlist is currently empty and hidden from the public<br/>
+        <%= link_to 'click here',user_playlist_path(@user, @playlist.permalink), :method => :delete, :class =>'delete_confirm'%> to delete it 
+			</div>
+		<% end %>
+
+
+
+			<div class="info">
+		    <div class="cover">
+		      <%= link_to(image_tag('jewel-case-125.png'), edit_or_show(@user.login, @playlist), :class => 'jewel_case_125') %>
+          <%= image_tag(@playlist.cover(:large), :class => 'cover_125') %>
+        </div>
+        
+        <p class="description">
+				  <%= @playlist.description %>
+				  <br/><br/>
+				  <span class="play_time"><%= @playlist.play_time %></span>
+				</p>
+
+			  <div class="clear"> </div>
+			</div>
+		
+			<div class="tracks clear">
+				<%= yield %>
+			</div>
+	<% end %>
+  <% content_for :share do %>
+  	<%= render :partial => 'playlists/share', :object => @playlist %>
+  <% end %>
+<% end %>

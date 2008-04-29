@@ -1,33 +1,41 @@
 <% render(:layout => 'users/user') do %>
   
-  <div id="single_track">
-    <h2><%= @asset.name %></h2>
-    <%= render :partial => 'assets/assets'%>
+  <% content_for :left do %>
+  <div id="single_track" class="box">
+      <%= render :partial => 'assets/assets'%>
+
+      <% if @asset.description && !@asset.description.empty? %>
+      <div id="track_details" class="static_content">
+          <h1>About "<%=h @asset.title %>"</h1>
+          <p><%= @asset.description %></p>
+      </div>
+     <% end %>
+     
+     <% if @asset.youtube_embed && !@asset.youtube_embed.empty? %>
+      <div class='static_content'>
+        <object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
+      </div>
+    <% end %>
+    
+    <div class="static_content">
+    Add your thoughts:<br/>
+    <%= render :partial => 'comment', :object => @asset %>
+    </div>
   </div>
   
-  <div id="track details">
-    <% if @asset.description && !@asset.description.empty? %>
-      <h2 class="big">About this track</h2>
-      <p><%= @asset.description %></p>
-    <% end %>
-    <% if @asset.youtube_embed && !@asset.youtube_embed.empty? %>
-      <object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed></object>
-    <% end %>
-  </div>
-  
-   <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
-  
-   <%= render :partial => 'users'%>
-  
-   <div class="clear"> </div>
-   <%= render :partial => 'stats'%>
-  
-<% end %>
+  <%= render :partial => 'big_share'%>
+  <%= render :partial => 'stats'%>
 
-<% content_for :share do %>
-	<%= render :partial => 'assets/share', :object => @asset %>
-<% end %>
 
-<% content_for :comment do %>
-  	<%= render :partial => 'assets/comment', :object => @asset %>
+      
+  <% end %>
+  
+  <% content_for :right do %>
+    <%= render :partial => 'users'%>
+    <div class="clear"> </div>
+    <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
+
+  <% end %>
+  
+  
 <% end %>

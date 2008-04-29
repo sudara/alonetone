@@ -1,88 +1,134 @@
 // import variables
 @import variables
 html,body
-  :background-color = !background
+  :background-color = !body_background
+  :position relative
 #header
   :position fixed
   :top 0
   :left 0
   :width 100%
-  :height 85px
-  :background #3f3f3f url(../images/header-background.jpg) repeat-x top left
+  :height 110px
   :z-index 1000
-
-#logo  
+  :background url(../images/backgrounds/header.png) repeat-x top left
+  :background-color = !body_background
+a#logo  
   :position absolute
-  :right 0px
-  :top 10px
-  :padding-right 30px
-  :width 96px
-  :height 64px
+  :left 864px
+  :top 15px
+  :width 120px
+  :height 81px
   :z-index 5
-  :background transparent url(../images/alonetone.png) no-repeat left center
-  
-#player
-  :position relative
-  :float left
-  :width 327px
-  :margin 25px 30px
-  :height 35px
-  
+  :background transparent url(../images/alonetone_big.png) no-repeat left center
+
 #nav
   :position absolute
-  :top 25px
-  :left 390px
-  :height 34px
-  :width 391px
-  
-#user-bar
-  :position fixed
-  :top 95px
-  :right 30px
-  :text-align right
-  :z-index 100
-        
+  :top 0px
+  :left 50px
+  :height 80px  
+
+#wrapper
+  :position relative
+  :margin 0
+  :padding 0
+  :background url(../images/backgrounds/body.png) repeat-x top left
+  :margin-top 110px
 #content
   :position relative
-  :margin-top 121px
-  :padding-left 60px
-  :background-color = !background
+  :margin-left 50px
   :margin-bottom 150px
+  :width 890px
+  #top_bar
+    :position relative
+    :width 890px
+    :height 27px
+    :width 100%
+    :margin-bottom 35px
+    #login, #logout
+      :right -15px
+      :top 0px
+    #logout
+      :right -11px
+    #halp
+      :right 86px
+  
 #main
-  :margin-left 55px
-  #user_header
-    :margin-bottom 20px
-  div.help 
-    :position absolute
-    :left 600px
-    :top  30px
-    :border = 1px dashed !orange
-    :background-color #FFF
-    :padding 10px
-    :width 200px
+  :position relative
+  :width 890px
+#static
+  :position relative
+  :width 600px
+#columns
+  :position relative
+  :width 890px
+  :height 1%
+  #left
+    :float left 
+    :width 420px
+  #right
+    :float left
+    :margin-left 50px
+    :width 420px
+
+// prevents content from being buried beneath footer without a scrollbar
+#footer_spacer
+  :clear both
+  :height 60px
+  :width 100%
+  
 #footer
   :position fixed
   :bottom 0
   :left 0
-  :height 40px
+  :height 52px
   :width 100%
-  :z-index 1000
-  :background-color #161616
-  :border-top 3px solid #000
-  :opacity .98
-  &.reporting
-    :height 300px
-  form
-    :height 250px
-    :text-align right
+  :z-index 500
+  :background  url(../images/backgrounds/footer_closed.png) repeat-x bottom left
+  #update, #bug_report
+    :font-size 12px
+  #update
     :position absolute
-    :right 30px
-    :top 50px
-    :margin-bottom 10px
-    select, input, textarea
-      :display block
-      :margin-bottom 5px
-    #user_report_submit
-      :display inline
-    a
-      :font-size 12px
+    :left 50px
+    :top 25px    
+  #footer_right
+    :position absolute
+    :left 520px
+    :top 25px
+    :text-align right
+    :width 420px
+  &.open
+    :height 300px
+#footer_expandable
+  :background url(../images/backgrounds/footer.png) repeat-x top left
+  :position fixed
+  :bottom 0
+  :left 0
+  :height 0px
+  :width 100%
+  :z-index 700
+  #open_footer_content
+    :background-color #c1cab3
+    :margin-top 52px
+    :width 100%
+    :height 100%
+    :position relative
+    #bug_form
+      :position absolute
+      :left 540px
+      form
+        #user_report_category
+          :display block
+          :margin-bottom 15px
+        a
+          :font-size 12px
+      
+// general spacing stuff
+div.box
+  :margin-bottom 30px
+  
+div.notice, div.errorExplanation
+  :background #c7c8c7 url(../images/backgrounds/notice.png) repeat-x top left
+  :padding 20px 30px
+  :margin-bottom 20px
+  :border-bottom 1px solid #7e807e
+  :border-top 1px solid #6f6f6f

@@ -1,4 +1,0 @@
-page.visual_effect :fade, "track_#{@track.id.to_s}"
-page.remove("track_#{@track.id.to_s}")
-page.replace 'play_time', :partial => 'play_time'
-page.visual_effect :highlight, 'play_time'

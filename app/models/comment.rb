@@ -1,4 +1,7 @@
 class Comment < ActiveRecord::Base
+  
+  named_scope :valid, :conditions => [:spam => false]
+  
   belongs_to :commentable, :polymorphic => true
 
   # optional user who made the comment
@@ -13,6 +16,10 @@ class Comment < ActiveRecord::Base
   acts_as_defensio_comment :fields => { :content => :body, :article => :commentable, :author => :commenter }
   attr_accessor :current_user
 
+  
+  def body
+    BlueCloth::new(self[:body]).to_html
+  end
   
   def duplicate?
     Comment.find_by_remote_ip_and_body(self.remote_ip, self.body)

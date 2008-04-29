@@ -1,0 +1,7 @@
+<li class="small_playlists">
+	<%= link_to(image_tag('jewel-case-125.png'), user_playlist_path(playlist.user.login, playlist), :class => 'jewel_case_125') %>
+
+  <%= image_tag(playlist.cover(:large), :class => 'cover_125') %>
+	
+	<%= link_to h(playlist.title), user_playlist_path(playlist.user.login, playlist), :class => 'small_playlist_title'  %></h3>		
+</li>
