@@ -44,11 +44,16 @@ class UserReportsController < ApplicationController
   # POST /user_reports
   # POST /user_reports.xml
   def create
-    @user_report = UserReport.new(params[:user_report])
-    @user_report.env = request.env
+    params = slice_and_dice_params
+    if logged_in?
+      @user_report = current_user.user_reports.create(params[:user_report])
+    else
+      @user_report = UserReport.create(params[:user_report])
+    end
     respond_to do |format|
       format.js do
-         if params[:user_report] && params[:user_report][:description] && !params[:user_report][:description].empty? && @user_report.save
+        if @user_report 
+           @user_report.env = request.env
            return head(:created)
          else
            return head(:bad_request)
@@ -88,6 +93,13 @@ class UserReportsController < ApplicationController
   end
   
   protected
+  
+  def slice_and_dice_params
+    # no auth token
+    params.delete(:authenticity_token)
+    params[:user_report][:params][:request] = request.env
+    params
+  end
   
   def authorized?
     admin?

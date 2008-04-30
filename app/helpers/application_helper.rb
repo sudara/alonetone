@@ -44,7 +44,7 @@ module ApplicationHelper
   end
 
   def link_to_play(asset, referer=nil)
-    link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3), :id=>"play-#{asset.id}", :class => 'play_link', :referer => referer
+    link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link'
   end
   
   def user_nav_item(text, link, options=nil)
@@ -54,6 +54,7 @@ module ApplicationHelper
   
   def link_source(source)
     return source if @@listen_sources.include?(source) || source == 'alonetone' || source == 'unknown'
+    return link_to 'alonetone home', root_path if source == 'home'
     link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, ''), source
   end
   

@@ -3,7 +3,7 @@
   <div class="playlists_carousel">  
     <ul>
       <%= render :partial => 'shared/playlist', :collection => @playlists %>
-    <ul>
+    </ul>
   </div>
   <%= link_to image_tag('buttons/next.png'), '', :class => 'next' if @playlists.size > 4%>
 </div>

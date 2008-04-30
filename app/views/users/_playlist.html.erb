@@ -4,7 +4,7 @@
 
   <%= image_tag(playlist.cover(:large), :class => 'cover_125') %>
 	<div class="small_playlist">
-		<h3><%= link_to h(playlist.title), edit_or_show(@user.login, playlist)  %></h3>		
+		<%= link_to h(playlist.title), edit_or_show(@user.login, playlist)  %>
 	</div>
 	</div>
 </div>

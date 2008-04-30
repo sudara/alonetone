@@ -3,8 +3,11 @@
 	
 	<%= f.select 'category',{"something isn't working..." => :broken, "i have an idea..." => :creative, "i really really like..." => :praise}%>
 	<%= f.text_area 'description', :rows => 10 %>
-	<%= f.hidden_field 'params', params %>
-	<%= f.hidden_field 'user_id' %>
+	<% params.each do |key, value|  %>
+	    <%= hidden_field_tag "user_report[params][#{key}]", value %>
+	<% end %>
+
+
 	<div class="submit_wrapper">
 	  <div class="comment_waiting" >
           <div class="text"><!-- placeholder response text --></div>

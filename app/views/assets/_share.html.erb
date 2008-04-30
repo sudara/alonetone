@@ -1,5 +1,5 @@
-<% id = object.id.to_s %>
 <% object = object.asset if object.respond_to?(:asset) -%>
+<% id = object.unique_id.to_s %>
 
 <div id="share_<%=id%>" class="panel no_border">
     <%= link_to "Home page", user_track_url(object.user, object.permalink) %> for this song:<br/>

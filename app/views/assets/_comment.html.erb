@@ -2,9 +2,9 @@
 
 <div id="comment_<%= object.unique_id %>" class="comment_asset">
   <div class="comment_form">
-    <% form_for :comment, :url => user_track_comments_path(object.user, object) do |f| %>
-     <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble' %>
-     <%= f.hidden_field :commentable_type, :value => 'asset'%>
+    <% form_for :comment, :url => user_track_comments_path(object.user, object), :id=>"comment_form_#{object.unique_id}" do |f| %>
+     <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble', :id=>"comment_body_#{object.unique_id}"  %>
+     <%= f.hidden_field :commentable_type, :value => 'asset', :id=> "comment_commentable_type_#{object.unique_id}"%>
       <div class="submit_wrapper">
         <div class="comment_waiting" >
           <div class="text"><!-- placeholder response text --></div>

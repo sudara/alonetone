@@ -177,7 +177,7 @@ SortablePlaylist = $.klass({
 
 Uploader = $.klass({
   initialize: function(){
-    this.form = $('form');
+    this.form = $('form',this.element);
     this.submit = $('#upload',this.form);
     this.field = $('ul#filefields > li > input');
     this.clone = $('ul#filefields > li:first')

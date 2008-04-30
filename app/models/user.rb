@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many   :playlists,     :dependent => :destroy, :order => 'playlists.created_at DESC'
   has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'created_at DESC'
-
+  has_many   :user_reports,  :dependent => :destroy, :order => 'created_at DESC'
   # Can listen to music, and have that tracked
   has_many :listens, :foreign_key => 'listener_id', :include => :asset, :order => 'listens.created_at DESC'
     

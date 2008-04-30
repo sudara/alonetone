@@ -7,7 +7,7 @@
     			<%= image_tag User.dummy_pic(:small)%>
     	<% end %>
 
-	  <div class="title">
+	<div class="title">
     	<span class="box_title"><%= user_report.user ? (link_to (h user_report.user.name), user_home_path(user_report.user)) : 'Guest' %>
     	said <%= time_ago_in_words(user_report.created_at) %> ago</span>
   	</div>
@@ -18,8 +18,15 @@
 	</div>
 	<div class="comment_body">
 
-		<%= user_report.print %>
-	</div>
+    	<%= user_report.print %>
+    	<% if admin? %>
+    </div>	    
+    	<%= link_to 'show tech details',"#report_details_#{user_report.id}", :class=> 'slide_open_href view_all'%>
+    <div class="comment_body" id="report_details_<%=user_report.id %>" style="display:none;">
+	    <%= debug(user_report.params) %>
+	   <% end %>     
+    </div>
+
 	<div class="clear">
 	 
 	</div>
