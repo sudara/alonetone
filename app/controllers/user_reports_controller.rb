@@ -5,7 +5,7 @@ class UserReportsController < ApplicationController
   # GET /user_reports
   # GET /user_reports.xml
   def index
-    @user_reports = UserReport.find_all_by_spam(false, :include => :user, :order => 'user_reports.created_at DESC')
+    @user_reports = UserReport.valid.paginate(:all, :include => :user, :order => 'user_reports.created_at DESC', :per_page => 15, :page => params[:page])
     @page_title = "Feedback about alonetone"
     respond_to do |format|
       format.html # index.html.erb

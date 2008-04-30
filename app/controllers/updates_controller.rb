@@ -3,7 +3,7 @@ class UpdatesController < ApplicationController
   # GET /updates
   # GET /updates.xml
   def index
-    @updates = Update.find(:all, :order => 'created_at DESC')
+    @updates = Update.paginate(:all, :order => 'created_at DESC', :per_page => 5, :page => params[:page])
     @page_title = "Latest News about alonetone, the kick ass musician's home"
     respond_to do |format|
       format.html # index.html.erb
