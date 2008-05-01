@@ -46,14 +46,14 @@ class UserReportsController < ApplicationController
   def create
     params = slice_and_dice_params
     if logged_in?
-      @user_report = current_user.user_reports.create(params[:user_report])
+      @user_report = current_user.user_reports.build(params[:user_report])
     else
-      @user_report = UserReport.create(params[:user_report])
+      @user_report = UserReport.new(params[:user_report])
     end
     respond_to do |format|
       format.js do
-        if @user_report 
-           @user_report.env = request.env
+        @user_report.env = request.env
+        if @user_report.save 
            return head(:created)
          else
            return head(:bad_request)

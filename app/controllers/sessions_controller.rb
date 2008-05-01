@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     if logged_in?
-      flash[:error] = "Either you aren't allowed to do that, or uhm, you aren't allowed to do that"
+      flash[:error] = "Either you aren't allowed to do that or you aren't allowed to do that"
       redirect_to_default
     end
   end
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     cookies.delete :auth_token
-    flash[:ok] = "Goodbye!"
+    flash[:ok] = "Goodbye, see you soon..."
     redirect_to :back
   end
 
