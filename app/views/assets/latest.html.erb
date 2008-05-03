@@ -10,6 +10,7 @@
 
 <% content_for :left do%>
   <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
+  <%= link_to 'view all', radio_path(:per_page => 40,:source => 'latest'), :class => 'view_all' %>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>

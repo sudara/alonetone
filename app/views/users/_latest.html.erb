@@ -1,4 +1,5 @@
 <div id="user_latest" class="box">
-		<h2 class="box">Latest Music</h2><%= link_to 'view all', user_tracks_path(@user), :class=> 'view_all' if @assets.size > 5%>
-	  <%= render :partial => 'assets/asset', :collection => @assets %>
+	<h2 class="box">Latest Uploaded Music</h2>
+	<%= link_to "view all #{@user.assets_count}", user_tracks_path(@user), :class=> 'view_all' if @user.assets_count > 5%>
+	<%= render :partial => 'assets/asset', :collection => @assets %>
 </div>

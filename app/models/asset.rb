@@ -19,6 +19,7 @@
 class Asset < ActiveRecord::Base
   
   named_scope :descriptionless, {:conditions => 'description = "" OR description IS NULL', :order => 'created_at DESC', :limit => 10}
+  named_scope :recent, {:include => :user, :order => 'assets.created_at DESC'}
     
   # used for extra mime types that dont follow the convention
   @@extra_content_types = { :audio => ['application/ogg'], :movie => ['application/x-shockwave-flash'], :pdf => ['application/pdf'] }.freeze

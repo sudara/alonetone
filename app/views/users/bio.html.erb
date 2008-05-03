@@ -30,8 +30,8 @@
       
       <div class="bio static_content">
     	  <% if @user.has_tracks? && authorized? && @user.present?(:itunes) %>
-    	    Podcast feed: <%= user_feeds_url(@user, :rss) %>
-    	    Podcast URL:<%= link_to 'Your iTunes podcast page', @user.itunes %>
+    	    Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
+            <%= itunes_link_for(@user) %>
     	  <% elsif @user.has_tracks? && authorized? %>
     	    Your Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
     	   <%= link_to 'Submit this feed to iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>

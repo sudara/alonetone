@@ -46,10 +46,10 @@ class AssetsController < ApplicationController
   def latest
     respond_to do |wants|
       wants.html do
-        limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
-        @page_title = "Latest #{limit} uploaded mp3s on alonetone" if params[:latest]
-        @assets = Asset.latest(limit)
-        @popular = Asset.find(:all, :limit => limit, :order => 'hotness DESC')
+        @limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
+        @page_title = "Latest #{@limit} uploaded mp3s on alonetone" if params[:latest]
+        @assets = Asset.latest(@limit)
+        @popular = Asset.find(:all, :limit => @limit, :order => 'hotness DESC')
         @comments = Comment.find_all_by_spam(false, :limit => 5, :order => 'created_at DESC')
         @playlists = Playlist.latest(12)
         @tab = 'home'
@@ -60,6 +60,13 @@ class AssetsController < ApplicationController
         @assets = Asset.latest(50)
       end
     end
+  end
+  
+  def radio
+    # TODO: remove fugliness
+    @per_page = (params[:per_page] && params[:per_page].to_i < 50) ? params[:per_page] : 5
+    @assets = Asset.recent.paginate(:all, :per_page => @per_page, :page => params[:page]) if params[:source] == 'latest'
+    @page_title = "Latest #{@limit} uploaded mp3s on alonetone" if params[:source] == 'latest'
   end
   
   def top

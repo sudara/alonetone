@@ -39,6 +39,9 @@ ActionController::Routing::Routes.draw do |map|
   # latest mp3s uploaded site-wide
   map.latest '/latest/:latest', :controller => 'assets', :action => 'latest'
   
+  map.radio 'radio/:source/:per_page/:page', :controller => 'assets', :action => 'radio', 
+    :source=> 'popular',:per_page =>40, :page=>1
+  
   # top 40
   map.top '/top/:top', :controller => 'assets', :action => 'top'
 
@@ -49,7 +52,7 @@ ActionController::Routing::Routes.draw do |map|
   map.comments ':login/comments', :controller => 'comments'
    
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any} do |user|
-    user.resources :tracks, :controller => :assets, :member => {:share => :get}, :collection => {:latest => :get, :search => :post}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
+    user.resources :tracks, :controller => :assets, :member => {:share => :get, :destroy => :any}, :collection => {:latest => :get, :search => :post}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments
     end
    
