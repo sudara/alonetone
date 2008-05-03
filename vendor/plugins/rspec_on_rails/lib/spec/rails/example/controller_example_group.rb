@@ -72,11 +72,18 @@ module Spec
           #
           # See Spec::Rails::Example::ControllerExampleGroup for more information about
           # Integration and Isolation modes.
-          def integrate_views
-            @integrate_views = true
+          def integrate_views(integrate_views = true)
+            @integrate_views = integrate_views
           end
+          
           def integrate_views? # :nodoc:
             @integrate_views
+          end
+          
+          def inherited(klass) # :nodoc:
+            klass.controller_class_name = controller_class_name
+            klass.integrate_views(integrate_views?)
+            super
           end
 
           # You MUST provide a controller_name within the context of
@@ -106,7 +113,7 @@ module Spec
             end
             EOE
           end
-          @controller.metaclass.class_eval do
+          (class << @controller; self; end).class_eval do
             def controller_path #:nodoc:
               self.class.name.underscore.gsub('_controller', '')
             end
@@ -150,8 +157,8 @@ module Spec
         end
 
         protected
-        def _controller_ivar_proxy
-          @controller_ivar_proxy ||= AssignsHashProxy.new @controller
+        def _assigns_hash_proxy
+          @_assigns_hash_proxy ||= AssignsHashProxy.new @controller
         end
 
         private
@@ -162,18 +169,32 @@ module Spec
         module ControllerInstanceMethods #:nodoc:
           include Spec::Rails::Example::RenderObserver
 
-          # === render(options = nil, deprecated_status = nil, &block)
+          # === render(options = nil, deprecated_status_or_extra_options = nil, &block)
           #
           # This gets added to the controller's singleton meta class,
           # allowing Controller Examples to run in two modes, freely switching
           # from context to context.
-          def render(options=nil, deprecated_status=nil, &block)
+          def render(options=nil, deprecated_status_or_extra_options=nil, &block)
+            if ::Rails::VERSION::STRING >= '2.0.0' && deprecated_status_or_extra_options.nil?
+              deprecated_status_or_extra_options = {}
+            end
+              
             unless block_given?
               unless integrate_views?
-                @template.metaclass.class_eval do
-                  define_method :file_exists? do
-                    true
+                if @template.respond_to?(:finder)
+                  (class << @template.finder; self; end).class_eval do
+                    define_method :file_exists? do
+                      true
+                    end
                   end
+                else
+                  (class << @template; self; end).class_eval do
+                    define_method :file_exists? do
+                      true
+                    end
+                  end
+                end
+                (class << @template; self; end).class_eval do
                   define_method :render_file do |*args|
                     @first_render ||= args[0]
                   end
@@ -186,7 +207,7 @@ module Spec
               @performed_render = true
             else
               unless matching_stub_exists(options)
-                super(options, deprecated_status, &block)
+                super(options, deprecated_status_or_extra_options, &block)
               end
             end
           end

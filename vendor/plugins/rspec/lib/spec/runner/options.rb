@@ -82,7 +82,11 @@ module Spec
         return true unless examples_should_be_run?
         runner = custom_runner || ExampleGroupRunner.new(self)
 
-        runner.load_files(files_to_load)
+        unless @files_loaded
+          runner.load_files(files_to_load)
+          @files_loaded = true
+        end
+
         if example_groups.empty?
           true
         else
@@ -177,9 +181,11 @@ module Spec
       end
 
       def number_of_examples
-        @example_groups.inject(0) do |sum, example_group|
-          sum + example_group.number_of_examples
+        total = 0
+        @example_groups.each do |example_group|
+          total += example_group.number_of_examples
         end
+        total
       end
 
       def files_to_load
@@ -240,9 +246,9 @@ module Spec
       end
       
       def heckle
-        returns = self.heckle_runner.heckle_with
+        heckle_runner = self.heckle_runner
         self.heckle_runner = nil
-        returns
+        heckle_runner.heckle_with
       end
       
       def sorted_files

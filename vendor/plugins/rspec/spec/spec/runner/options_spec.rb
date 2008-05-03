@@ -339,6 +339,45 @@ module Spec
             @options.run_examples
             @options.examples_run?.should be_true
           end
+
+          describe "when using heckle runner" do
+            before(:each) do
+              @heckle_runner_mock = mock("HeckleRunner")
+              @options.heckle_runner = @heckle_runner_mock
+            end
+            
+            it "should heckle" do
+              @heckle_runner_mock.should_receive(:heckle_with)
+              @options.run_examples
+            end
+            
+            it "shouldn't heckle recursively" do
+              heckled = false
+              @heckle_runner_mock.should_receive(:heckle_with) {
+                heckled.should == false
+                heckled = true
+                @options.run_examples
+              }
+              @options.run_examples
+            end
+
+            it "shouldn't load spec files twice" do
+              example_runner = mock("ExampleGroupRunner")
+              example_runner_inside_heckle = mock("ExampleGroupRunner inside Heckle")
+
+              ExampleGroupRunner.should_receive(:new).twice.and_return(
+                example_runner, example_runner_inside_heckle
+              )
+
+              example_runner.stub!(:run)
+              example_runner.should_receive(:load_files)
+              @heckle_runner_mock.stub!(:heckle_with).and_return { @options.run_examples }
+              example_runner_inside_heckle.stub!(:run)
+              example_runner_inside_heckle.should_not_receive(:load_files)
+
+              @options.run_examples
+            end
+          end
         end
 
         describe "when there are no examples" do

@@ -1,6 +1,35 @@
+== Version 1.1.4
+
+Maintenance release.
+
+Note: we've removed the metaclass method from Object. There were some
+generated specs that used it, and they will now break. Just replace the
+metaclass call with (class << self; self; end) and all will be well.
+
+* pending steps print out yellow in stories (patch from Kyle Hargraves)
+* Deprecation warnings for specs that assume auto-inclusion of modules. Closes #326 (patch from Scott Taylor)
+* mock.should_not_receive(:anything) fails fast (once again)
+* Patch from Antti Tarvainen to stop files from being loaded repeatedly when running heckle. Closes #333.
+* Fixed bug in which session object in example was not the same instance used in the controller. Closes #331. 
+* Applied patch from Antti Tarvainen to fix bug where heckle runs rspec runs heckle runs rspec etc. Closes #280.
+* Applied patch from Zach Dennis to merge :steps functionality to :steps_for. Closes #324.
+* Applied patch from Ryan Davis to add eval of block passed to raise_error matcher. Closes #321.
+* alias :context :describe in example_group_methods. Closes #312.
+* Applied patch from Ben Mabey to make the Story runner exit with a non-0 exit code on failing stories. Closes #228.
+* Applied patch from Coda Hale to get the :red hook called in autotest. Closes #279.
+* Applied patch from Patrick Ritchie to support --drb in spec.opts. Closes #274, #293.
+* Moved metaclass method from Object to an internal module which gets included where it is needed.
+* Applied patch from Dayo Esho: and_yield clobbers return value from block. Closes #217.
+* Applied patch from Bob Cotton:  ExampleGroupFactory.default resets previously registered types. Closes #222.
+* Applied patch from Mike Williams to support the lib directory in rails apps with the Textmate Alternate File command. Closes #276.
+* ExampleGroupMethods#xspecify aliases #xit
+* A SharedExampleGroup can be created within another ExampleGroup.
+* Applied patch from Bob Cotton: Nested ExampleGroups do not have a spec_path. Closes #224.
+
 == Version 1.1.3
 
 Maintenance release.
+Notice to autotest users: you must also upgrade to ZenTest-3.9.0.
 
 * Tightened up exceptions list in autotest/rails_spec. Closes #264.
 * Applied patch from Ryan Davis for ZenTest-3.9.0 compatibility
@@ -18,6 +47,7 @@ Maintenance release.
 == Version 1.1.2
 
 Minor bug fixes/enhancements.
+Notice to autotest users: you must also upgrade to ZenTest-3.8.0.
 
 * RSpec's Autotest subclasses compatible with ZenTest-3.8.0 (thanks to Ryan Davis for making it easier on Autotest subs).
 * Applied patch from idl to add spec/lib to rake stats. Closes #226.

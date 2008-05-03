@@ -1,8 +1,8 @@
 module Spec
   module Story
     class Step
-      PARAM_PATTERN = /(\$\w*)/
-      PARAM_OR_GROUP_PATTERN = /(\$\w*)|\(.*?\)/
+      PARAM_PATTERN = /([^\\]|^)(\$(?!\$)\w*)/
+      PARAM_OR_GROUP_PATTERN = /(\$(?!\$)\w*)|\(.*?\)/
       
       attr_reader :name
       def initialize(name, &block)
@@ -48,7 +48,7 @@ module Spec
             expression = string_or_regexp.source
           end
           while expression =~ PARAM_PATTERN
-            expression.gsub!($1, "(.*?)")
+            expression.gsub!($2, "(.*?)")
           end
           @expression = Regexp.new("^#{expression}$")
         end
