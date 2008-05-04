@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio]
   skip_before_filter :login_by_token, :only => :sudo
   
- rescue_from NoMethodError, :with => :user_not_found
+  # rescue_from NoMethodError, :with => :user_not_found
 
   def index
     @page_title = 'the music makers and music lovers of alonetone'
@@ -34,12 +34,13 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = @user.name + " on alonetone - latest music & playlists"
+        @page_title = @user.name + "'s latest music and playlists"
         @tab = 'your_stuff' if current_user == @user
         @assets = @user.assets.find(:all, :limit => 5)
-        @playlists = @user.playlists.find(:all,:conditions => [ "tracks_count > 0"])
+        @playlists = @user.playlists.public.find(:all)
         @listens = @user.listens.find(:all, :limit =>5)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
+        @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
         @comments = @user.comments.find_all_by_spam(false, :limit => 10)
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
@@ -53,7 +54,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @page_title = "Sign up to upload your mp3s on alonetone"
+    @page_title = "Sign up to upload your mp3s"
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
@@ -102,7 +103,7 @@ class UsersController < ApplicationController
   end
   
   def bio
-    @page_title = "#{@user.name}'s detailed biography on alonetone"
+    @page_title = "All about #{@user.name}"
   end
   
   def attach_pic
@@ -131,6 +132,19 @@ class UsersController < ApplicationController
         @user.save ? (return head(:ok)) : (return head(:bad_request))
       end
     end
+  end
+  
+  def toggle_favorite
+    return false unless Asset.find(params[:asset_id]) # no bullshit
+    existing_track = @user.tracks.find(:first, :conditions => {:asset_id => params[:asset_id], :is_favorite => true})
+    if existing_track  
+      existing_track.destroy && Asset.decrement_counter(:favorites_count, params[:asset_id])
+    else
+      favs = Playlist.find_or_create_by_user_id_and_is_favorite(:user_id => @user.id, :is_favorite => true) 
+      added_fav = favs.tracks.create(:asset_id => params[:asset_id], :is_favorite => true, :user_id => @user.id)
+      Asset.increment_counter(:favorites_count, params[:asset_id]) if added_fav
+    end
+    render :nothing => true
   end
 
   def destroy

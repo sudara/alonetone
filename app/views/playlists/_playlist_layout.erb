@@ -2,17 +2,22 @@
 
 		<% div_for @playlist, :class => "box #{(@playlist.has_tracks? ? '' : 'empty')} #{@playlist.type}" do %>
 		  <div class="playlist_title box">
-			  <h2><%= @playlist.title %></h2>
+			  <h2><%= h(@playlist.title)+(@playlist.present?(:year) ? " (#{@playlist.year})" : '') %></h2>
 			  <h3><%= pluralize @playlist.tracks_count, 'track'%> by <%= (@playlist.is_mix? ? 'various alonetone artists' : @playlist.user.name )%></h3>
         <% if authorized_for(@playlist) %>
           <%= link_to "edit", edit_user_playlist_path(@user, @playlist), :class => 'edit right' %>
         <% end %>
 				
       </div>
-			<% if @playlist.tracks.size < 1 %>
+		<% if @playlist.private? && authorized_for(@playlist)%>
 			<div class="empty">
-        Playlist is currently empty and hidden from the public<br/>
-        <%= link_to 'click here',user_playlist_path(@user, @playlist.permalink), :method => :delete, :class =>'delete_confirm'%> to delete it 
+            Playlist is hidden from the public (you can still share it)<br/>
+            <% form_for [@user, @playlist] do |f| %>
+                <%= f.hidden_field :private, :value => 0 %>
+                <%= f.submit 'publish playlist now' %>
+            <% end %>
+            <%= link_to 'delete', destroy_user_playlist_path(@user, @playlist.permalink), :class =>'delete button'%> 
+            
 			</div>
 		<% end %>
 

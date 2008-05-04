@@ -5,8 +5,6 @@ class PlaylistsController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
 
   before_filter :find_tracks, :only => [:show, :edit]
-  in_place_edit_for :playlist, :description
-  in_place_edit_for :playlist, :title
   
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from NoMethodError, :with => :user_not_found
@@ -14,10 +12,15 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.xml
   def index
-    @all_playlists = @user.playlists.find(:all)
+    if logged_in? && current_user.id.to_s == @user.id.to_s
+      @all_playlists = @user.playlists.include_private 
+    else
+      @all_playlists = @user.playlists.public       
+    end
     # TODO: fugly array work
     split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
     @playlists_left, @playlists_right = split[0].try(:compact), split[1].try(:compact)
+    @page_title = "#{@user.name}'s albums and playlists"
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @playlists }
@@ -27,7 +30,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1
   # GET /playlists/1.xml
   def show
-    @page_title = "\"#{@playlist.title}\" by #{@user.name} on alonetone"
+    @page_title = "\"#{@playlist.title}\" by #{@user.name}"
     respond_to do |format|
       format.html # show.html.erb
       format.xml 
@@ -38,7 +41,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/new
   # GET /playlists/new.xml
   def new
-    @playlist = @user.playlists.build
+    @playlist = @user.playlists.build(:private => true)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @playlist }
@@ -60,7 +63,6 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  
   def add_track
     @track = @playlist.tracks.create(:asset => Asset.find(params[:asset_id].split("_")[1])) 
     respond_to do |format|
@@ -129,7 +131,7 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       if @playlist.update_attributes(params[:playlist])
         flash[:notice] = 'Playlist was successfully updated.'
-        format.html { redirect_to(@user,@playlist) }
+        format.html { redirect_to edit_user_playlist_path(@user,@playlist) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -6,16 +6,7 @@
 <%= error_messages_for :playlist %>
 
 <% form_for [@user, @playlist] do |f| %>
-  <p>
-    <b>Title</b><br />
-    <%= f.text_field :title %>
-  </p>
-
-  <p>
-    <b>Description</b><br />
-    <%= f.text_area :description, :rows => 4 %>
-  </p>
-
+  <%= render :partial => 'form', :locals => {:f => f} %>
   <p>
     <%= f.submit "Create" %>
   </p>

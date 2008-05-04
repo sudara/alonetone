@@ -15,6 +15,9 @@ class Track < ActiveRecord::Base
   belongs_to :playlist, :counter_cache => true
   belongs_to :asset
   belongs_to :user
+  
+  named_scope :favorites, {:select => 'DISTINCT assets.*, tracks.*', :conditions => ['is_favorite = ?',true], :order => 'tracks.created_at DESC', :joins => :asset}
+
 
   acts_as_list :scope => :playlist_id, :order => :position
   

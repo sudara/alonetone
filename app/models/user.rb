@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'created_at DESC'
   has_many   :user_reports,  :dependent => :destroy, :order => 'created_at DESC'
+  
+  has_many :tracks
+  
   # Can listen to music, and have that tracked
   has_many :listens, :foreign_key => 'listener_id', :include => :asset, :order => 'listens.created_at DESC'
     
@@ -81,6 +84,10 @@ class User < ActiveRecord::Base
   
   def has_tracks?
     self.assets_count > 0 
+  end
+  
+  def favorites
+    self.playlists.favorites.first
   end
   
   def has_pic?
@@ -185,6 +192,7 @@ class User < ActiveRecord::Base
      self.activation_code = nil
      save(false)
    end
+   
 
    def activated?
      activation_code.nil?

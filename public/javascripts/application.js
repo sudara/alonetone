@@ -46,6 +46,15 @@ DismissableNotice = $.klass(Remote.PutLink,{
 });
 
 
+FavoriteToggle = $.klass(Remote.Link,{
+  beforeSend:function(e){
+    if(this.element.hasClass('favorited'))
+      this.element.removeClass('favorited');
+    else
+      this.element.addClass('favorited');
+  }
+});
+
 // for debug purposes
 $.fn.log = function() {
   if (this.size()==0) return "<em>wrapped set is empty</em>"
@@ -169,7 +178,7 @@ SortablePlaylist = $.klass({
       scrollSensitivity: 100,
       update: $.bind(this.serialize_and_post, this)
     });
-    if(this.emptyWarning) this.emptyWarning.slideUp();
+    //if(this.emptyWarning) this.emptyWarning.slideUp();
     }
   }
   
@@ -385,7 +394,7 @@ Track = $.klass({
     '.play_link' : function(e){ return this.togglePlay()},      // open comments
     '.track_link': function(e){ return this.toggleDetails(1)}, // open info
     '.download_link':function(e){ return this.toggleDetails(2)}, // open sharing
-    '.title':function(e){ return this.toggleDetails(1)} // open 
+    '.title':function(e){ return this.toggleDetails(1)}  // open 
   }),
   
   onmouseenter: $.delegate({
@@ -510,6 +519,7 @@ Track = $.klass({
   createTabbies : function(){
     this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array
     this.commentForm = $('.comment_form form',this.more).attachAndReturn(CommentForm)[0];
+    $('a.add_to_favorites',this.more).attach(FavoriteToggle);
   },
   startTimer : function(){
     if(this.timer != undefined)

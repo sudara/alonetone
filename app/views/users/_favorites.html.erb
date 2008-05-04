@@ -1,0 +1,7 @@
+<div id="user_listens" class="box">
+  <h2 class="box">Favorites of <%=h @user.name %></h2>
+  <%= link_to 'view all', listens_path(@user.login), :class => 'view_all' if @user.favorites.tracks.size > 5 %>
+  <% @favorites.each do |track| %>
+    <%= render :partial => 'favorite', :object => track %>
+  <% end %>
+</div>

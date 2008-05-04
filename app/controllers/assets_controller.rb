@@ -12,7 +12,7 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.xml
   def index
-      @page_title = @user.name + "'s uploaded music on alonetone"
+      @page_title = @user.name + "'s uploaded music (mp3)"
       @assets = @user.assets.paginate(:all, :order => 'created_at DESC', :per_page => 200, :page => params[:page])
       respond_to do |format|
         format.html # index.rhtml
@@ -28,7 +28,7 @@ class AssetsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = "#{@asset.title} by #{@user.name} on alonetone"
+        @page_title = "#{@asset.title} by #{@user.name}"
         @assets = [@asset]
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.find_all_by_spam(false)
@@ -47,11 +47,12 @@ class AssetsController < ApplicationController
     respond_to do |wants|
       wants.html do
         @limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
-        @page_title = "Latest #{@limit} uploaded mp3s on alonetone" if params[:latest]
+        @page_title = "Latest #{@limit} uploaded mp3s" if params[:latest]
         @assets = Asset.latest(@limit)
+        @favorites = Track.favorites.find(:all, :limit => 5)
         @popular = Asset.find(:all, :limit => @limit, :order => 'hotness DESC')
         @comments = Comment.find_all_by_spam(false, :limit => 5, :order => 'created_at DESC')
-        @playlists = Playlist.latest(12)
+        @playlists = Playlist.public.latest(12)
         @tab = 'home'
         @welcome = true unless logged_in?
         
@@ -63,15 +64,20 @@ class AssetsController < ApplicationController
   end
   
   def radio
-    # TODO: remove fugliness
+    # TODO: remove fugliness into model
     @per_page = (params[:per_page] && params[:per_page].to_i < 50) ? params[:per_page] : 5
-    @assets = Asset.recent.paginate(:all, :per_page => @per_page, :page => params[:page]) if params[:source] == 'latest'
-    @page_title = "Latest #{@limit} uploaded mp3s on alonetone" if params[:source] == 'latest'
+    case params[:source]
+    when 'latest'
+      @assets = Asset.recent.paginate(:all, :per_page => @per_page, :page => params[:page])
+    when 'favorites'
+      @favorites = Track.favorites.paginate(:all, :per_page => @per_page, :page => params[:page])
+    end
+    @page_title = "#{params[:source]} #{@per_page} mp3s on alonetone" if params[:source] == 'latest' || 'favorites'
   end
   
   def top
     top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 40
-    @page_title = "Top #{top} tracks on alonetone"
+    @page_title = "Top #{top} tracks"
     @assets = Asset.find(:all, :limit => top, :order => 'hotness DESC')
     respond_to do |wants|
       wants.html 

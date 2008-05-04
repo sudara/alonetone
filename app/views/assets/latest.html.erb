@@ -14,6 +14,12 @@
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>
+  
+  <h2 id="recently_favorited" class="box">Recently favorited</h2>
+  <%= link_to 'view all', radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all' %>
+  <div class="box">
+    <%= render :partial => 'shared/favorite', :collection => @favorites %>
+  </div>
 <% end %>
 
 

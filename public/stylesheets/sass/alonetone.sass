@@ -320,3 +320,22 @@ div.small_spinner
   :height 20px
   :margin-top 5px
   :width 20px
+  
+// favorites
+
+a.add_to_favorites, a.favorited
+  :text-indent -9999px
+  :display block
+  :width 29px
+  :height 25px
+  :background url(../images/icons/favorites.png) no-repeat -29px 0px
+  :opacity 0.55
+  &:hover
+    :background-position -29px 0px
+    :opacity 0.999
+  &.favorited
+    :background-position 0px 0px
+    :opacity 0.99
+    &:hover 
+      :background-position -58px 0px
+  

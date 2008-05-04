@@ -1,9 +1,13 @@
 <% if params[:source] == 'latest' %>
     <h1><%= @page_title %></h1>
+    <% content_for :left do %>
+        <%= render :partial => 'assets/asset', :collection => @assets if @assets%>
+    <% end %>
+<% elsif params[:source] == 'favorites'%>
+    <h1><%= @page_title %></h1>
+    <% content_for :left do %>
+    <%= render :partial => 'shared/favorite', :collection => @favorites if @favorites %>
+    <% end %>
 <% else %>
 <h1>Wait, who said anything about a radio?</h1>
-<% end %>
-
-<% content_for :left do %>
-<%= render :partial => 'assets/asset', :collection => @assets if @assets%>
 <% end %>

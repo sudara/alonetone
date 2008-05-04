@@ -1,23 +1,14 @@
-# == Schema Information
-# Schema version: 16
-#
-# Table name: playlists
-#
-#  id           :integer(11)   not null, primary key
-#  title        :string(255)   
-#  description  :string(255)   
-#  image        :string(255)   
-#  user_id      :integer(11)   
-#  tracks_count :integer(11)   
-#  created_at   :datetime      
-#  updated_at   :datetime      
-#  pic_id       :integer(11)   
-#  permalink    :string(255)   
-#
 require 'zip/zip'
 require 'zip/zipfilesystem'
 class Playlist < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
+  
+  named_scope :mixes, {:conditions => ['is_mix = ?',true]} 
+  named_scope :albums, {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
+  named_scope :favorites, {:conditions => ['is_favorite = ?',true]}
+  named_scope :public, {:conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
+  named_scope :include_private, {:conditions => ['is_favorite = ?',false]}
+
   
   has_one :pic, :as => :picable, :dependent => :destroy
   has_many :tracks, :include => [:asset => :user], :dependent => :destroy, :order => :position
@@ -25,11 +16,13 @@ class Playlist < ActiveRecord::Base
   
   validates_presence_of :title
   validates_length_of :title, :within => 4..100
+  validates_length_of :year, :within => 2..4, :allow_blank => true
   validates_presence_of :description
   
   has_permalink :title
    # make sure we update permalink when user changes title
-  before_save :create_unique_permalink
+  before_validation_on_create  :auto_name_favorites
+  before_save  :create_unique_permalink
   before_update :set_mix_or_album
 
   def to_param
@@ -98,9 +91,14 @@ class Playlist < ActiveRecord::Base
   
   protected 
   
+  # playlist is a mix if there is at least one track with a track from another user  
   def set_mix_or_album
-    # playlist is a mix if there is at least one track with a track from another user
     self.is_mix = self.tracks.any?{ |track| track.asset.user.id.to_s != self.user.id.to_s}
     true
+  end
+  
+  # if this is a "favorites" playlist, give it a name/description to match
+  def auto_name_favorites
+    self.title = self.description = self.user.name + "'s Favorite tracks on alonetone" if self.is_favorite?
   end
 end

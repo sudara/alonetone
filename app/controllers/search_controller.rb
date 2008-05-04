@@ -16,7 +16,7 @@ class SearchController < ApplicationController
   
   def deliver_results
     @query = params[:search][:query]
-    @users = User.paginate(:all, :conditions => User.conditions_by_like(@query,'users.display_name','users.login'), :include => :pic, :per_page => 15, :page => params[:page])
+    @users = User.paginate(:all, :conditions => User.conditions_by_like(@query,'users.display_name','users.login','users.bio'), :include => :pic, :per_page => 15, :page => params[:page])
     @assets = Asset.paginate(:all, :conditions => Asset.conditions_by_like(@query, 'assets.title', 'assets.description'), :include => [:user => :pic], :per_page => 15, :page => params[:page])
   rescue ActiveRecord::RecordNotFound
   end

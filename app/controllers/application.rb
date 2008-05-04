@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_tab, :ie6, :is_sudo
   before_filter :ie6
   before_filter :login_by_token, :display_news
-  before_filter :set_page_title
   before_filter :prep_bugaboo
   before_filter :update_last_seen_at, :only => [:index]
   before_filter :set_latest_update_title
@@ -45,9 +44,13 @@ class ApplicationController < ActionController::Base
   end
   
   def user_not_found
-    # take them to the search
-    flash[:error] = "Hmm, we didn't find that alonetoner, but we did a search for you..."
-    redirect_to search_url(:search =>{:query => params[:login]})
+    if @user
+      flash[:error] = 'There was a problem with that request...'
+    else
+      # take them to the search
+      flash[:error] = "Hmm, we didn't find that alonetoner, but we did a search for you..."
+      redirect_to search_url(:search =>{:query => params[:login]})
+    end
   end
 
   def sudo_to(destination_user)
@@ -102,11 +105,6 @@ class ApplicationController < ActionController::Base
   def admin_or_owner_with_delete(record=current_user)
     admin? || (params[:login].nil? || params[:login] == record.login)
   end
-  
-  def set_page_title
-    @page_title = "alonetone - a damn fine home for musicians. Upload mp3s, host and share your music."
-  end
-  
 
   def render_text(text)
    render :text => text

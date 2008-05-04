@@ -5,6 +5,7 @@
   
   <div id="edit_playlist">
     <% render :layout => 'playlist_layout' do %>
+
       <%= link_to 'edit title &amp; description','#edit_playlist_info',:class=>'slide_open_href edit right' %>
       
       <div id="pic_upload" class="static_content" style="display:none;">
@@ -15,11 +16,10 @@
     		<% end %>
       </div>
       <div id="edit_playlist_info" class="static_content"style="display:none;">
+        <%= link_to 'delete playlist', destroy_user_playlist_path(@user, @playlist), :class => 'delete button'%>
+
         <% form_for [@user, @playlist] do |f| %>
-          Title<br/>
-            <%= f.text_field :title %><br/>
-          Description<br/>
-            <%= f.text_area :description, :rows => 4, :cols => 40, :class => 'double_trouble' %><br/>
+            <%= render :partial => 'form', :locals => {:f => f} %>
             <div class="submit_wrapper">
                 <%= f.submit "update" %>
             </div>

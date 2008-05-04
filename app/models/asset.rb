@@ -125,6 +125,10 @@ class Asset < ActiveRecord::Base
     #find(:all, :include => :user, :limit => limit, :order => 'assets.listens_count DESC')
   end
 
+  def is_favorite_of?(user)
+    user.favorites && user.favorites.tracks.collect(&:asset).include?(self)
+  end
+
   class << self
     def movie?(content_type)
       content_type.to_s =~ /^video/ || extra_content_types[:movie].include?(content_type)

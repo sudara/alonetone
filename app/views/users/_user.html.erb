@@ -12,8 +12,9 @@
   <div id="user_links">
     <ul class="user_links">
      <%= user_nav_item "Latest", user_home_path(@user), :title => "#{h @user.name}'s latest stuff on alonetone" %>
-     <%= user_nav_item "Albums & Playlists", user_playlists_path(@user), :title => "#{h @user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? %>
      <%= user_nav_item "Tracks", user_tracks_path(@user), :title => "#{h @user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
+     <%= user_nav_item "Albums & Playlists", user_playlists_path(@user), :title => "#{h @user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? %>
+     <%= user_nav_item "Favorites", user_playlist_path(@user, @user.favorites) if @user.favorites %>
      <%= user_nav_item "Profile", profile_path(@user), :title => "#{h @user.name}'s profile on alonetone" if @user.bio %>
   
       <%= user_nav_item "Email", "mailto://#{@user.email}",:added_class => "contact" if admin? %>
