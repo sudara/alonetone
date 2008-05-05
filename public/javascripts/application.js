@@ -602,8 +602,9 @@ jQuery(function($) {
   // uploader
   $('#uploader').attach(Uploader);
   
-  // comments on the single track page
+  // single track page love
   $('#single_track .comment_form form').attach(CommentForm);
+  $('#single_track a.add_to_favorites').attach(FavoriteToggle);
 
 });
 

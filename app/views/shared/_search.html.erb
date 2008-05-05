@@ -1,6 +1,6 @@
 <div id="search">  
   <%= link_to '','#',:id => 'search_button' %>
   <% form_tag search_url, :style => 'display:none;' do %>
-    <%= text_field 'search','query' %>
+    <%= text_field_tag 'query', (@query || session[:last_query] || '') %>
   <% end %>
 </div>

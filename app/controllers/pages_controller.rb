@@ -26,6 +26,10 @@ class PagesController < ApplicationController
     @page_title = "About alonetone, the kickass home for musicians"
   end
   
+  def stats
+    @page_title = "Listening and Song Statistics"
+  end
+  
   def actually_going_somewhere_with_facebooker_and_rails
     render :partial => 'facebooker', :layout => true
   end

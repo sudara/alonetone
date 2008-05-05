@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
   
   def has_public_playlists?
-    playlists_count > 0 && playlists.detect{|p| p.has_tracks?}
+    playlists.public.size >= 1
   end
   
   def has_tracks?

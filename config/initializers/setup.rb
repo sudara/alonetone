@@ -20,6 +20,7 @@ Sass::Plugin.options[:always_check] = true
 
 require 'randomness'
 require 'goodies'
+require 'utils'
 PASSWORD_SALT = 'so_salty_its_unbearable'
 
 # DEPENDENCIES 

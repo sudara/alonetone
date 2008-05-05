@@ -17,13 +17,17 @@ class PlaylistsController < ApplicationController
     else
       @all_playlists = @user.playlists.public       
     end
-    # TODO: fugly array work
-    split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
-    @playlists_left, @playlists_right = split[0].try(:compact), split[1].try(:compact)
-    @page_title = "#{@user.name}'s albums and playlists"
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @playlists }
+    if present?(@all_playlists)
+      # TODO: fugly array work
+      split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
+      @playlists_left, @playlists_right = split[0].try(:compact), split[1].try(:compact)
+      @page_title = "#{@user.name}'s albums and playlists"
+      respond_to do |format|
+         format.html # index.html.erb
+         format.xml  { render :xml => @playlists }
+      end
+    else
+      redirect_to user_path(@user)
     end
   end
 
