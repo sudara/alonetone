@@ -12,7 +12,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.xml
   def index
-    if logged_in? && current_user.id.to_s == @user.id.to_s
+    if logged_in? && (current_user.id.to_s == @user.id.to_s || current_user.admin?)
       @all_playlists = @user.playlists.include_private 
     else
       @all_playlists = @user.playlists.public       

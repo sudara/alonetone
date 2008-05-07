@@ -4,14 +4,15 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title ? "#{h(@page_title)} - alonetone" : "alonetone - a damn fine home for musicians. Upload mp3s and share"%> </title>
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','alonetone', :cache => 'alonetone-v2'%>
+        
+        <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','alonetone', :cache => 'alonetone-v2'%>
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
-
+        <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|alonetone.com/ %>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
+        <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
-    <%= javascript_include_tag 'jquery','soundmanager','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-lowpro','jquery-tabs','jquery-png','application', :cache => 'alonetone-v2' %>
+        <%= javascript_include_tag 'jquery','soundmanager','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-lowpro','jquery-tabs','jquery-png','application', :cache => 'alonetone-v2' %>
     
     <!-- ensure token is available to javascript for accessible link posts, etc -->
     <%= render :partial => 'shared/javascript_auth_token' %>
