@@ -7,7 +7,7 @@
         
         <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','alonetone', :cache => 'alonetone-v2'%>
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
-        <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|alonetone.com/ %>
+        <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
