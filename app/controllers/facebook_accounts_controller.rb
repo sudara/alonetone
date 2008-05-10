@@ -6,8 +6,8 @@ class FacebookAccountsController < ApplicationController
   before_filter :check_for_correct_params, :only => [:add_to_profile, :remove_from_profile]
   
   def index
-    @assets = Asset.paginate(:all, :include => :user, :per_page => 10, :order => 'assets.created_at DESC', :page => params[:page])
-    @search_assets = Asset.find(:all, :select => 'id, title, filename', :limit => 200)
+    @latest = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.created_at DESC', :page => params[:page])
+    @kicking_ass = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.hotness DESC', :page => params[:page])
   end
   
   def create
@@ -39,7 +39,7 @@ class FacebookAccountsController < ApplicationController
     else
       flash[:error] = "Whups. huh. That didn't do what you wanted it to do."
     end
-    redirect_to facebook_home_path
+    redirect_to session[:return_to] || facebook_home_path
   end
   
   protected

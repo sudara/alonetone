@@ -18,6 +18,8 @@ class UsersController < ApplicationController
         @user_count = User.count
         @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
       end
+      format.fbml do
+      end
       format.xml do
         @users = User.search(params[:q], :limit => 25)
         render :xml => @users.to_xml
@@ -48,6 +50,9 @@ class UsersController < ApplicationController
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end
+      end
+      format.fbml do
+        @assets = @user.assets.find(:all)
       end
     end
   end

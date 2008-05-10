@@ -1,0 +1,14 @@
+<div class="ubersearch">
+    <div class="search_results clearfix">
+        <div class="column results">
+            <div class="suggestion clearfix" style="text-align:left;">
+                <h1>All music by <%=@user.name%></h1><br/>
+
+            <%= image_tag @user.avatar(:large), :style => "float:left;width:100px;height:100px;padding-right:20px;" %>
+            <%= @user.printable_bio if @user.bio %>
+            <%= link_to "Visit #{h @user.name} on alonetone.com", user_home_url(@user, :canvas => false), :class=>'inputsubmit'%>
+            </div>
+            <%= render :partial => 'shared/asset', :collection => @assets if @assets %>
+        </div>
+    </div>
+</div>

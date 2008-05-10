@@ -1,0 +1,30 @@
+<h1 class="static">Browse all alonetone artists</h1>
+
+<div id="user-index">
+
+  <div id="static_header">
+  
+    
+    <div id="links">
+      <ul class="links">
+       <%= user_nav_item "last seen", {:action => 'index', :sort => nil} %>
+       <%= user_nav_item "last uploaded", {:action => 'index', :sort => 'last_uploaded'}%>
+       <%= user_nav_item "monster uploaders", {:action => 'index', :sort => 'monster_uploaders'} %>
+       <%= user_nav_item "dedicated listeners", {:action => 'index', :sort => 'dedicated_listeners'}%>
+       <%= user_nav_item "recently joined", {:action => 'index', :sort => 'recently_joined'} %>
+      </ul>
+    </div>
+  </div>
+  <% render :layout => 'shared/paginate', :object => @users do %>
+
+  <div id="recently_uploaded">
+
+    <% @users.each do |user| %>
+        <%= user_image_link(user) %>
+    <% end %>
+    <div class="clear"> </div>
+  </div>
+  <% end %>
+
+  <div style="float:none;clear:both;"> </div>
+</div>

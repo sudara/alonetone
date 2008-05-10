@@ -3,12 +3,9 @@ class SearchController < ApplicationController
   
   def index
     respond_to do |wants| 
-      wants.html do
-        
-      end
-      wants.js do
-        
-      end
+      wants.html
+      wants.js
+      wants.fbml
     end
   end
   

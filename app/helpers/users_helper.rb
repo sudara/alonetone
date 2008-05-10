@@ -5,7 +5,7 @@ module UsersHelper
   end
   
   def myspace_for(user)
-    link_to "#{user.name} on Myspace.com",('http://myspace.com'+h(user.myspace))
+    link_to "#{user.name} on Myspace.com",('http://myspace.com/'+h(user.myspace))
   end
   
   def itunes_link_for(user)

@@ -1,6 +1,34 @@
-<%= render :partial => 'alonetoner' if @user %>
+<%= fb_explanation 'Welcome to alonetone on facebook.', "
+  Add tracks uploaded to alonetone to your facebook profile.<br/>
+  " %>
 
-<%= render :partial => 'search' %>
-<h2>Browse the latest alonetone tracks</h2>
-<%= render :partial => 'asset', :collection => @assets %>
-<%= will_paginate @assets %>
+
+
+
+<div>
+     <table class="lists" cellspacing="0" border="0">
+          <tr>
+               <th>
+                    <h4>Latest Tracks</h4>
+               </th>
+               <th class="spacer"></th>
+               <th>
+                    <h4>Kicking a** on alonetone</h4>
+               </th>
+          </tr>
+          <tr>
+               <td class="list">
+                    <%= render :partial => 'shared/asset', :collection => @latest, :locals=>{:user => true, :date => true} if @latest %>
+                </td>
+               <td class="spacer"></td>
+               <td class="list">
+                    <%= render :partial => 'shared/asset', :collection => @kicking_ass, :locals => {:user => true} if @kicking_ass%>
+               </td>
+          </tr>
+          <tr>
+               <td class="see_all"><div> <%= will_paginate @latest%></div></td>
+               <td class="spacer"></td>
+               <td class="see_all"><div><%= will_paginate @kicking_ass%></div></td>
+          </tr>
+     </table>
+</div>

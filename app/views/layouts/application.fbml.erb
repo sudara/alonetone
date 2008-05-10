@@ -1,16 +1,61 @@
+<style>
+.lists th {
+     text-align: left;
+     padding: 5px 10px;
+     background: #6d84b4;
+}
+
+.lists .spacer {
+     background: none;
+     border: none;
+     padding: 0px;
+     margin: 0px;
+     width: 10px; 
+}
+
+.lists th h4 { float: left; color: white; }
+.lists th a { float: right; font-weight: normal; color: #d9dfea; }
+.lists th a:hover { color: white; }
+
+.lists td {
+     margin:0px 10px;
+     padding:0px;
+     vertical-align:top;
+     width:306px;
+}
+
+.lists .list {
+     background:white none repeat scroll 0%;
+     border-color:-moz-use-text-color #BBBBBB;
+     border-style:none solid;
+     border-width:medium 1px;
+}
+
+.lists .list .list_item { border-top:1px solid #E5E5E5; padding: 10px; }
+.lists .list .list_item.first { border-top: none; }
+
+.lists .see_all {
+     background:white none repeat scroll 0%;
+     border-color:-moz-use-text-color #BBBBBB rgb(187, 187, 187);
+     border-style:none solid solid;
+     border-width:medium 1px 1px;
+     text-align:left;
+}
+
+.lists .see_all div { border-top:1px solid #E5E5E5; padding:5px 10px; }
+</style>
+
+
 <fb:dashboard>
 <%= fb_create_button 'upload your music on alonetone', 'http://alonetone.com'%>
 </fb:dashboard>
 <fb:tabs>
-  <fb:tab-item href='<%= facebook_home_path %>' title='Latest tracks on alonetone' selected='true'/>
+  <fb:tab-item href='<%= facebook_home_path %>' title='Latest tracks' <%= controller == 'facebook_accounts' ? "selected='true'" : '' %>/>
+  <fb:tab-item href='<%= users_default_path %>' title='Browse musicians' <%= current_page?(users_default_path) ? "selected='true'" : '' %>/>
+
  </fb:tabs>
+ <%= render :partial => 'shared/search' %>
+
 <%= facebook_messages %>
-<%= fb_explanation 'Welcome to alonetone on facebook!', "
-  Yeah, it is a bit getto here still. But we're having fun.<br/>
-  Right now, you can browse the latest alonetone music <br/>
-  and add single tracks from alonetone (one at a time) to your facebook profile.<br/>
-  " %>
-<div style="padding:20px;">
 <%= yield %>
-</div>
 <fb:google-analytics uacct="UA-241978-4" />
