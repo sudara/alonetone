@@ -8,6 +8,5 @@
 
          <% if user %>
             <%= render :partial => 'shared/tiny_user', :object => asset.user %>
-            <%= link_to "view all songs by #{h asset.user.name}", user_path(asset.user)%>
         <% end %>
 <% end %>
