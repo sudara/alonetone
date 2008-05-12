@@ -1,10 +1,10 @@
 <% render(:layout => 'user') do %>
 
 	<div id="user_home">
-	  	  
+	    <div class="additional_options">
 		<%= link_to "create new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
 		<%= link_to "change playlist order", sort_user_playlists_path(@user), :id => 'sort_playlist_button', :class => 'sort button' if authorized? %>
-		
+		</div>
 		<% if @user.has_public_playlists? %>
 			<h2>Latest Playlists by <%=@user.name%></h2>
 		  <%= render :partial => 'shared/carousel' %>
