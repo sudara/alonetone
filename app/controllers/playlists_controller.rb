@@ -6,8 +6,8 @@ class PlaylistsController < ApplicationController
 
   before_filter :find_tracks, :only => [:show, :edit]
   
-  #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-  #rescue_from NoMethodError, :with => :user_not_found
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  rescue_from NoMethodError, :with => :user_not_found
   
   # GET /playlists
   # GET /playlists.xml
@@ -33,13 +33,13 @@ class PlaylistsController < ApplicationController
 
   def sort
     respond_to do |format| 
+      format.html { @playlists = @user.playlists.include_private.find(:all) }
       format.js do
         params["playlist"].each_with_index do |id, position|
           Playlist.update(id, :position => position)
         end
         render :nothing => true
       end
-      format.html { @playlists = @user.playlists.include_private.find(:all) }
     end
   end
   

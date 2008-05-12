@@ -18,8 +18,7 @@ class UsersController < ApplicationController
         @user_count = User.count
         @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
       end
-      format.fbml do
-      end
+      format.fbml
       format.xml do
         @users = User.search(params[:q], :limit => 25)
         render :xml => @users.to_xml
@@ -44,12 +43,13 @@ class UsersController < ApplicationController
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
         @comments = @user.comments.find_all_by_spam(false, :limit => 10)
-      end
-      format.fbml do
-        @assets = @user.assets.find(:all)
+        render
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
       format.rss { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
+      format.fbml do
+        @assets = @user.assets.find(:all)
+      end
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end
