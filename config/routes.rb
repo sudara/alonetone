@@ -60,7 +60,7 @@ ActionController::Routing::Routes.draw do |map|
    # TODO - figure out a way to use :member_path with rails 2
    # http://dev.rubyonrails.org/changeset/8227
    # for now, i have to specify port to allow :permalink and :id to be sent at the same time
-   user.resources :playlists, :collection => {:latest => :get}, :member=> {:set_playlist_title => :post, :set_playlist_description => :post, :attach_pic => :post, :remove_track => :any, :sort_tracks => :post, :add_track => :post, :destroy => :any},:path_prefix => ':login' do |playlist|
+   user.resources :playlists, :collection => {:latest => :get, :sort => :any}, :member=> {:set_playlist_title => :post, :set_playlist_description => :post, :attach_pic => :post, :remove_track => :any, :sort_tracks => :post, :add_track => :post, :destroy => :any},:path_prefix => ':login' do |playlist|
      playlist.resources :comments
    end
   end
@@ -74,7 +74,7 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect ':controller/:action/:id'
   
   map.root :controller => 'assets', :action => 'latest'
-  map.user_home ':login', :controller => 'users', :action => 'show'  
+  map.user_home ':login', :controller => 'users', :action => 'show'
   map.user_feeds ':login.:format', :controller => 'users', :action => 'show'
   
 end

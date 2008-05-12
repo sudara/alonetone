@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
-  has_many   :playlists,     :dependent => :destroy, :order => 'playlists.created_at DESC'
+  has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position'
   has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'created_at DESC'
   has_many   :user_reports,  :dependent => :destroy, :order => 'created_at DESC'
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   validates_format_of       :login, :with => Format::STRING, :message => ' must be lowercase and only made from numbers and letters'
   validates_length_of       :login, :within => 3..40
   validates_length_of       :display_name, :within => 3..50, :allow_blank => true
-  validates_length_of       :bio, :within => 0..200, :message => "can't be so long, sorry!", :on => :update
+  validates_length_of       :bio, :within => 0..500, :message => "can't be empty (or longer than 600 characters)", :on => :update
   
   validates_format_of       :identity_url, :with => /^https?:\/\//i, :allow_nil => true
   validates_format_of       :itunes, :with => /^phobos.apple.com\/WebObjects\/MZStore.woa\/wa\/viewPodcast\?id=/i, :allow_blank => true, :message => 'link must be a link to the itunes store'

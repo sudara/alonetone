@@ -2,7 +2,8 @@ require 'zip/zip'
 require 'zip/zipfilesystem'
 class Playlist < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
-  
+  acts_as_list :scope => :user_id, :order => :position
+
   named_scope :mixes, {:conditions => ['is_mix = ?',true]} 
   named_scope :albums, {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
   named_scope :favorites, {:conditions => ['is_favorite = ?',true]}

@@ -45,14 +45,14 @@ class UsersController < ApplicationController
         @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
         @comments = @user.comments.find_all_by_spam(false, :limit => 10)
       end
+      format.fbml do
+        @assets = @user.assets.find(:all)
+      end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
       format.rss { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end
-      end
-      format.fbml do
-        @assets = @user.assets.find(:all)
       end
     end
   end
@@ -130,8 +130,11 @@ class UsersController < ApplicationController
       format.html do 
         if @user.save 
           flash[:ok] = "Sweet, updated" 
+          redirect_to edit_user_path(@user)
+        else
+          flash[:error] = "Not so fast, young one"
+          render :action => :edit
         end
-        redirect_to :back
       end
       format.js do
         @user.save ? (return head(:ok)) : (return head(:bad_request))

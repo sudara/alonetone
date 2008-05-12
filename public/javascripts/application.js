@@ -606,6 +606,19 @@ jQuery(function($) {
   $('#single_track .comment_form form').attach(CommentForm);
   $('#single_track a.add_to_favorites').attach(FavoriteToggle);
 
+  // sort playlists 
+  $('#sort_playlists').sortable({
+      revert: true,
+      scroll: true,
+      cursor: 'move',
+      scrollSensitivity: 100,
+      update: function(){
+        $.post($('#sort_url').attr('href'),
+        $.param({'authenticity_token':window.authenticityToken})+'&'+
+        $('#sort_playlists').sortable('serialize'))
+      }
+    });
+
 });
 
 
