@@ -116,6 +116,8 @@ h2#kicking_ass
   :background-position 15px 10px
   :text-indent 51px
   
+h2#recently_favorited
+  
 h2#latest_comments
   :background-image url(../images/icons/comment.png)
   :background-repeat no-repeat
@@ -212,8 +214,9 @@ a.edit
     :background url(../images/buttons/arrow.png) no-repeat right center
   
 a.button
-  &.add, &.new
+  &.add, &.new, &.sort
     :background url(../images/icons/new.png) no-repeat left center
+    :float right
     :height 20px
     :line-height 20px
     :text-indent 25px
@@ -221,6 +224,8 @@ a.button
     :width 200px
     :margin 10px 0
     :font-weight bold  
+  &.sort
+    :background url(../images/icons/latest.png) no-repeat left center
   &.delete, &.remove
     :position absolute
     :background url(../images/icons/delete.png) no-repeat center top

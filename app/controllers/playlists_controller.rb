@@ -32,6 +32,7 @@ class PlaylistsController < ApplicationController
   end
 
   def sort
+    redirect_to user_home_url(@user) unless logged_in? && (@user.id.to_s == current_user.id.to_s) || admin?
     respond_to do |format| 
       format.html { @playlists = @user.playlists.include_private.find(:all) }
       format.js do

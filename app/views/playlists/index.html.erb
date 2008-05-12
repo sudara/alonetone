@@ -1,9 +1,13 @@
+
 <% render(:layout => 'users/user') do %>
-  	
-  	<%= link_to "new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
-    
+  	<div class="additional_options">
+  	    <%= link_to "create new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' if authorized? %>
+	    <%= link_to "change playlist order", sort_user_playlists_path(@user), :id => 'sort_playlist_button', :class => 'sort button' if authorized? %>
+		    
+  	</div>
     <% content_for :left do %>
 		  <%= render :partial => 'playlist', :collection => @playlists_left if @playlists_left %>
+		  
 		<% end %>
 		
 		<% content_for :right do %>
