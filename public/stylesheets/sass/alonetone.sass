@@ -47,6 +47,11 @@
     :height 27px
     &:hover
       :background-position -84px 0
+  a#profile_link
+    :display block
+    :position absolute
+    :width 25px
+    :height 24px
   a#halp
     :background url(../images/buttons/halp.png) no-repeat 0px 0
     :display block
@@ -119,6 +124,14 @@
     .comment_user
       :background-image url(../images/backgrounds/comment.png)
       :background-color = !box_background_even
+  div.private_comment
+    :background url(../images/icons/private.png) no-repeat top left
+    :position absolute
+    :z-index 4
+    :top 51px
+    :left -4px
+    :width 25px
+    :height 25px
   .comment_user, .update_title_bar
     :position relative
     :height 50px

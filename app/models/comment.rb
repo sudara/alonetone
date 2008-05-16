@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   
-  named_scope :valid, :conditions => [:spam => false]
+  named_scope :public, :conditions => [:spam => false, :private => :false]
+  named_scope :include_private, :conditions =>[:spam => false]
   
   belongs_to :commentable, :polymorphic => true
 

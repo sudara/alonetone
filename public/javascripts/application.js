@@ -343,6 +343,8 @@ CommentForm = $.klass(Remote.Form, {
       this.spinner = $('.small_spinner',this.element);
       this.resultBox = $('.comment_waiting', this.element);
       this.textarea = $('textarea', this.element);
+      this.checkbox = $(':checkbox.private', this.element);
+      this.checkbox.click($.bind(this.togglePrivate,this));
       $super();
     },
     beforeSend:function(){
@@ -367,6 +369,17 @@ CommentForm = $.klass(Remote.Form, {
     enable:function(){
       this.submitButton.removeAttr('disabled').
         val(this.submitText);
+    },
+    togglePrivate:function(){
+      if(this.checkbox.is(':checked')){
+        $('span.private', this.element).show();
+        $('span.public',this.element).hide();
+        this.textarea.addClass('private');
+      }else{
+        $('span.public',this.element).show();
+        $('span.private',this.element).hide();
+        this.textarea.removeClass('private');
+      }
     }
 });
 

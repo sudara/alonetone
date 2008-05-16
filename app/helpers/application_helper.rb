@@ -11,7 +11,7 @@ module ApplicationHelper
     logged_in? && ((current_user.id.to_s == user_account.id.to_s) || current_user.admin?)
   end
   
-  def authorized_for_comment(commment)
+  def authorized_for_comment(comment)
     (logged_in? && admin?) || (logged_in? && (comment.commenter == current_user || comment.user == current_user))
   end
   

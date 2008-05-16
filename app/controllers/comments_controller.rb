@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
           @comment = @asset.comments.build(:commenter => @commenter,
                                             :body => params[:comment][:body], 
                                             :user => @asset.user,
+                                            :private => params[:comment][:private],
                                             :remote_ip => request.remote_ip,
                                             :user_agent => request.env['HTTP_USER_AGENT'], 
                                             :referer   => request.env['HTTP_REFERER'])

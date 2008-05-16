@@ -6,6 +6,10 @@
     		<% else %>
     			<%= image_tag User.dummy_pic(:small)%>
     	<% end %>
+    	<% if comment.private %>
+    	    <div class="private_comment">
+    	    </div>
+    	<% end %>
    
 	  <% if !@single_track %>
 	  <div class="comment_about">about <%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></div>
@@ -26,4 +30,4 @@
 	<div class="clear">
 	 
 	</div>
-<% end if comment %>
+<% end if comment && (!comment.private? || authorized_for_comment(comment))%>
