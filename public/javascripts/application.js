@@ -618,6 +618,9 @@ jQuery(function($) {
         $('#sort_playlists').sortable('serialize'))
       }
     });
+  
+  // facebox  
+  $('a[rel*=facebox]').facebox();
 
 });
 

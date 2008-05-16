@@ -141,3 +141,9 @@ ul#nav
 //favorites
 a.add_to_favorites, a.favorited
   :background-image url(../images/icons/ie/favorites.jpg)
+
+// facebox
+
+* html #facebox_overlay  
+  :position absolute
+  :height expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px')
