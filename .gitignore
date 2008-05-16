@@ -16,4 +16,16 @@ public/images/pretty_text/*.*
 log/*.log
 .DS_Store
 *.tmp
-public/stylesheets/*.css
+public/stylesheets/alonetone.css
+public/stylesheets/flash.css
+public/stylesheets/ie6.css
+public/stylesheets/nav.css
+public/stylesheets/player.css
+public/stylesheets/playlists.css
+public/stylesheets/reset.css
+public/stylesheets/share.css
+public/stylesheets/tabs.css
+public/stylesheets/tracks.css
+public/stylesheets/typography.css
+public/stylesheets/variables.css
+
