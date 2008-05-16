@@ -615,7 +615,7 @@ jQuery(function($) {
       update: function(){
         $.post($('#sort_url').attr('href'),
         $.param({'authenticity_token':window.authenticityToken})+'&'+
-        $('#sort_playlists').sortable('serialize'))
+        $('#sort_playlists').sortable('serialize'));
       }
     });
   

@@ -1,6 +1,7 @@
 <%= link_to ' ', about_path, :id => 'halp'%>
 <% if logged_in? %>
   <%= link_to ' ',logout_path, :id => 'logout' %>
+  <%= link_to image_tag(current_user.avatar(:tiny)), user_bio_path(current_user)%>
 <% else %>
   <%= link_to ' ',login_path, :id => 'login' %>
 <% end %>

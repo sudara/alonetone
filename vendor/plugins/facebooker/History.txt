@@ -1,0 +1,11 @@
+=== x.x.x / 2008-xx-xx
+
+* fixed typo in set app properties parser [Andrew Grim, shane]
+* Removed actor_id param from templatized feed [shane]
+* Added admin.get_allocation [shane]
+* Added data.get_cookies and data.set_cookie [shane]
+* Added admin.get_app_properties and admin.set_app_properties [shane]
+
+=== 0.9.5 / 2008-02-13
+
+* Next release of documentation

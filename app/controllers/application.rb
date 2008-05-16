@@ -22,14 +22,9 @@ class ApplicationController < ActionController::Base
   # all errors end up here
   def show_error(exception)
     if RAILS_ENV == 'production'
-      if facebook?
-        flash[:error] = "Alonetone made a boo boo: <br/> #{exception.message}"
-        render :partial => 'facebook_accounts/error', :layout => true
-      else
-        # show something decent for visitors
-        flash[:error] = "Whups! That didn't work out. We've logged it, but feel free to let us know (bottom right) if something is giving you trouble"
-        redirect_to :back
-      end
+      # show something decent for visitors
+      flash[:error] = "Whups! That didn't work out. We've logged it, but feel free to let us know (bottom right) if something is giving you trouble"
+      redirect_to :back
     else
       # let me see what's wrong in dev mode.
       raise exception  
@@ -39,9 +34,6 @@ class ApplicationController < ActionController::Base
   
   
   protected
-  def facebook?
-   !(params[:fb_sig] == nil)
-  end
   
   def user_not_found
     if @user
