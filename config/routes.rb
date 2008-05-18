@@ -49,7 +49,11 @@ ActionController::Routing::Routes.draw do |map|
   map.sorted_users '/users/by/:sort/:page', :controller => 'users', :action => 'index', :page => 1
   
   map.listens  ':login/history', :controller => 'listens'
+  
+  map.all_comments 'comments', :controller => 'comments'
   map.comments ':login/comments', :controller => 'comments'
+  
+  map.hot_track 'hot_track/:position.:format', :controller => 'assets', :action => 'hot_track', :position => 1, :format => 'mp3'
    
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any, :toggle_favorite => :any} do |user|
     # TODO: Confusing, because Tracks is also a model. Don't confuse this route, this is indeed for the Assets model

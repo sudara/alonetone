@@ -1,17 +1,23 @@
-<% if !present?(@users, @assets) %>
-  <h2>Hm, didn't find any users or tracks named "<%=h @query %>"</h2>
-<% else %>
-  <h1>Results for "<%= h @query %>"</h1>
-<% end %>
-
-<% if present?(@assets) %>
-  <h2>Latest music on alonetone</h2>
-  <%= render :partial => 'shared/asset', :collection => @assets if @assets %>
-<% end %>
-
-<% if present?(@users) %>
-  <h2>Alonetone Artists and Listeners</h2>
-  <div id="user_search_results">
-    <%= render :partial => 'shared/user.html.erb', :collection => @users %>
-  </div>
-<% end %>
+<div class="ubersearch">
+    <div class="search_results clearfix">
+        <div class="column results">
+            <div class="suggestion clearfix" style="text-align:left;">
+                <% if !present?(@users, @assets) %>
+                  Hm, didn't find any users or tracks named "<%=h @query %>"
+                <% else %>
+                  Results for "<%=h @query %>"
+                <% end %>
+            </div>
+                 <% if present?(@users) %>
+                  <h2>Alonetone Artists and Listeners</h2>
+                  <div id="user_search_results">
+                    <%= render :partial => 'shared/user.html.erb', :collection => @users %>
+                  </div>
+                <% end %>
+                <% if present?(@assets) %>
+                  <h2>Uploaded Music</h2>
+                  <%= render :partial => 'shared/asset', :collection => @assets %>
+                <% end %>
+        </div>
+    </div>
+</div>

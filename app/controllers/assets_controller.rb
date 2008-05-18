@@ -42,6 +42,17 @@ class AssetsController < ApplicationController
     end
   end
 
+  def hot_track
+    respond_to do |format|
+      format.mp3 do
+        params[:position] = 1 unless params[:position] && params[:position].to_i < 25
+        @asset = Asset.find(:all, :limit => params[:position], :order => 'hotness DESC').last
+        register_listen
+        redirect_to @asset.public_mp3
+      end
+    end
+  end
+
   # aka home page
   def latest
     respond_to do |wants|
@@ -51,7 +62,8 @@ class AssetsController < ApplicationController
         @assets = Asset.latest(@limit)
         @favorites = Track.favorites.find(:all, :limit => 5)
         @popular = Asset.find(:all, :limit => @limit, :order => 'hotness DESC')
-        @comments = Comment.find_all_by_spam(false, :limit => 5, :order => 'created_at DESC')
+        @comments = Comment.public.find(:all, :limit => 5, :order => 'created_at DESC') unless admin?
+        @comments = Comment.include_private.find(:all, :limit => 5, :order => 'created_at DESC') if admin?        
         @playlists = Playlist.public.latest(12)
         @tab = 'home'
         @welcome = true unless logged_in?

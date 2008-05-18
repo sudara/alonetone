@@ -15,7 +15,7 @@
           </tr>
           <tr>
                <td class="list">
-                    <%= render :partial => 'shared/asset', :collection => @latest, :locals=>{:user => true, :date => true} if @latest %>
+                    <%= render :partial => 'shared/asset', :collection => @latest, :locals=>{:date => true} if @latest %>
                 </td>
                <td class="spacer"></td>
                <td class="list">

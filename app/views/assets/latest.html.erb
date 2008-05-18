@@ -34,6 +34,7 @@
   </div>
   
   <h2 id="latest_comments" class="box">Latest Comments</h2>
+  	<%= link_to 'view all', all_comments_path, :class => 'view_all' %>
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>

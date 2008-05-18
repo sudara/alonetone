@@ -8,6 +8,7 @@
             <%= @user.printable_bio if @user.bio %>
             <%= link_to "Visit #{h @user.name} on alonetone.com", user_home_url(@user, :canvas => false), :class=>'inputsubmit'%>
             </div>
+            <% @show_details = true %>
             <%= render :partial => 'shared/asset', :collection => @assets if @assets %>
         </div>
     </div>

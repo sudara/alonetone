@@ -19,8 +19,8 @@
     	said <%= time_ago_in_words(comment.created_at) %> ago
   	</span>
 	 
-	<% if admin? %>
-		<%= link_to 'Delete', comment_path(comment), :class=> 'delete button', :confirm => 'Are you sure?', :method => :delete %>
+	<% if authorized_for_comment(comment) %>
+		<%= link_to 'Delete', comment_path(comment), :class=> 'delete button', :confirm => 'Are you sure you want to mark this comment as spam and delete it?', :method => :delete %>
 	<% end %>
 	</div>
 	<div class="comment_body">

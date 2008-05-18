@@ -8,6 +8,7 @@ class FacebookAccountsController < ApplicationController
   def index
     @latest = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.created_at DESC', :page => params[:page])
     @kicking_ass = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.hotness DESC', :page => params[:page])
+    @show_user = true
   end
   
   def create
@@ -18,13 +19,18 @@ class FacebookAccountsController < ApplicationController
    # one word: Fugly
    @addable = FacebookAddable.find_or_create_by_profile_chunk_type_and_profile_chunk_id_and_facebook_account_id(:profile_chunk_type => params[:addable_type].capitalize,
                   :profile_chunk_id => (params[:addable_id_val] || params[:addable_id]), :facebook_account_id => @facebook_account.id)
-   if @addable
+   @asset = Asset.find(params[:addable_id])
+   if @addable && @asset
      flash[:notice] = "Profile updated! We added that killer track"
+     begin
+       FacebookPublisher.deliver_track_added(facebook_session.user, @asset)
+     rescue Facebooker::Session::TooManyUserActionCalls, Facebooker::Session::InvalidFeedTitleLength
+     end
      @facebook_user.profile_fbml = (render_to_string :partial => 'profile')
+     @assets = @facebook_account.assets
    else 
      flash[:error] = "Hm, that failed to add to your profile"
    end
-     redirect_to facebook_home_path
   end
   
   def remove_from_profile
@@ -44,6 +50,12 @@ class FacebookAccountsController < ApplicationController
   
   protected
   
+  def sorry
+    flash.delete(:notice)
+    flash[:error] = "Shoot, Facebook only lets you add/remove tracks a handful of times a day. We're sorry. Come back tomorrow? Pretty please? Alonetone itself loves you. You can always just go hang out with us. We're cooler than facebook anyway."
+    redirect_to facebook_home_path
+  end
+  
   def check_for_correct_params
     unless params[:addable_type] && params[:addable_id]
       flash[:error] = "Whups, that wasn't possible"
@@ -52,7 +64,13 @@ class FacebookAccountsController < ApplicationController
   end
   
   def find_alonetone_user
-    @user = current_user if logged_in?
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      unless @user.facebook_account 
+        @user.facebook_account = @facebook_account
+        @user.save
+      end
+    end
   end
   
   def find_facebook_user

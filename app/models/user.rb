@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many   :comments,      :dependent => :destroy, :order => 'created_at DESC'
   has_many   :user_reports,  :dependent => :destroy, :order => 'created_at DESC'
   
+  belongs_to :facebook_account
   has_many :tracks
   
   # Can listen to music, and have that tracked

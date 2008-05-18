@@ -1,0 +1,14 @@
+<% assets.each do |asset| %>
+<div style="border-top: 1px solid #D8DFEA;padding-top:3px">
+    <fb:visible-to-owner>
+    <div class="share_and_hide clearfix" style="float:right">
+        <%= link_to "", remove_from_profile_facebook_url(@facebook_account.id, :addable_type => 'Asset', :addable_id => asset), :class => 'x_to_hide', :style=>"height:5px;float:right;"%>
+    </div>
+    <div class=" " style="float:right">
+        <%= render :partial => 'share', :object => asset %>
+    </div>
+
+    </fb:visible-to-owner>
+    <fb:mp3 src="<%= formatted_user_track_url(asset.user, asset, :mp3, :referer=>'facebook', :canvas => false)%>" title="<%= asset.name %>" artist="<%= asset.user.name %>" width="200px"/>
+</div>
+<% end %>
