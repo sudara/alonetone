@@ -18,13 +18,14 @@ class ApplicationController < ActionController::Base
   
   rescue_from ActiveRecord::RecordNotFound, :with => :show_error
   rescue_from NoMethodError, :with => :show_error
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :show_error
   
   # all errors end up here
   def show_error(exception)
     if RAILS_ENV == 'production'
       # show something decent for visitors
       flash[:error] = "Whups! That didn't work out. We've logged it, but feel free to let us know (bottom right) if something is giving you trouble"
-      redirect_to :back
+      redirect_to (session[:return_to] || root_path)
     else
       # let me see what's wrong in dev mode.
       raise exception  
