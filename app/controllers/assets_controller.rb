@@ -9,6 +9,8 @@ class AssetsController < ApplicationController
   rescue_from NoMethodError, :with => :user_not_found
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
+  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes']
+  
   # GET /assets
   # GET /assets.xml
   def index
@@ -203,6 +205,14 @@ class AssetsController < ApplicationController
     end
     
     def register_listen
-      @asset.listens.create(:listener => (current_user || nil), :track_owner=> @asset.user, :source => @referer, :ip => request.remote_ip)
+      @asset.listens.create(:listener => (current_user || nil), 
+        :track_owner=> @asset.user, 
+        :source => @referer, 
+        :ip => request.remote_ip) unless bot?
+      @logger.warn("BOT LISTEN: "+ request.remote_ip + request.user_agent) if bot?
+    end
+    
+    def bot?
+      @@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil
     end
 end
