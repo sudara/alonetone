@@ -1,0 +1,12 @@
+<h1>Editing source_file</h1>
+
+<% form_for(@source_file) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @source_file %> |
+<%= link_to 'Back', source_files_path %>

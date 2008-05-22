@@ -187,17 +187,17 @@ SortablePlaylist = $.klass({
 Uploader = $.klass({
   initialize: function(){
     this.form = $('form',this.element);
-    this.submit = $('#upload',this.form);
-    this.field = $('ul#filefields > li > input');
-    this.clone = $('ul#filefields > li:first')
+    this.submit = $('input[:submit]',this.form);
+    this.field = $('ul.filefields > li > input',this.form);
+    this.clone = $('ul.filefields > li:first', this.form)
     this.field.change($.bind(this.addField, this));
     this.count = 0;
-    this.uploading = $('#uploading');
+    this.uploading = $('.uploading', this.element);
     this.form.submit($.bind(this.waiting, this));
   },
   addField: function(e){
-    $('ul#filefields').append(this.clone.clone());
-    $('ul#filefields li:last input').val('').change($.bind(this.addField, this));
+    $('ul.filefields',this.form).append(this.clone.clone());
+    $('ul.filefields li:last input',this.form).val('').change($.bind(this.addField, this));
     this.count++;
     this.submit.val('Upload '+this.count+' files');
   },
@@ -614,6 +614,9 @@ jQuery(function($) {
 
   // uploader
   $('#uploader').attach(Uploader);
+  
+  // alonetone plus uploader
+  $('#plus_uploader').attach(Uploader);
   
   // single track page love
   $('#single_track .comment_form form').attach(CommentForm);

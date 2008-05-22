@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
     else
       # take them to the search
       flash[:error] = "Hmm, we didn't find that alonetoner, but we did a search for you..."
-      redirect_to search_url(:search =>{:query => params[:login]})
+      redirect_to search_url(:query => params[:login])
     end
   end
 

@@ -1,0 +1,17 @@
+<% render :layout => 'users/user' do %>
+    <h1>Listing source_files</h1>
+
+    <table>
+      <tr>
+      </tr>
+
+    <% for source_file in @source_files %>
+      <tr>
+        <td><%= link_to "Download #{source_file.filename}", user_source_file_path(@user, source_file) %></td>
+        <td><%= link_to 'Destroy', user_source_file_path(@user, source_file), :confirm => 'Are you sure?', :method => :delete, :class => 'destroy' %></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+<% end %>

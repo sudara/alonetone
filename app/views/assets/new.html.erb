@@ -16,6 +16,20 @@
         Por favor publique música de la que tenga derechos de autor (es decir, que usted escribió y grabo la canción). Su cuenta sera borrada y su IP restringido si usted publica música de terceros.
       </div>
 	</div>
+    <% if current_user.plus_enabled? %>
+	<div class="upload box">
+	    <h2 class="box">Upload wav/aif source files</h2>
+	    <div class="static_content">
+	        <%= render :partial => 'source_files/form' if current_user.plus_enabled? %>
+	    </div> 
+	    <div class="static_content">
+            <strong>Congrats!</strong> Your alonetone account has been pimped out with alonetone PLUS&reg;.
+            You may upload wav/aif files up to 100MB each. They remain hidden unless you give out the link.<br/><br/>
+            Forge ahead, you crafty musician, you!
+      </div>
+	</div>
+	<% end %>
+	
 <% end %>
 
 <% content_for :right do%>

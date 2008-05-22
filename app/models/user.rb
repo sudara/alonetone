@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   belongs_to :facebook_account
   has_many :tracks
   
+  has_many :source_files
+  
   # Can listen to music, and have that tracked
   has_many :listens, :foreign_key => 'listener_id', :include => :asset, :order => 'listens.created_at DESC'
     
@@ -194,7 +196,11 @@ class User < ActiveRecord::Base
      self.activation_code = nil
      save(false)
    end
-   
+
+   def enable_plus
+     self[:plus_enabled] = true
+     self.save
+   end
 
    def activated?
      activation_code.nil?
