@@ -106,6 +106,7 @@ class AssetsController < ApplicationController
 
   # GET /assets/new
   def new
+    redirect_to signup_path unless logged_in?
     @tab = 'upload' if current_user == @user
     @asset = Asset.new
   end

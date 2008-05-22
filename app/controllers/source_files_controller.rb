@@ -48,9 +48,11 @@ class SourceFilesController < ApplicationController
     end
     if @source_files.empty?
       flash[:error] = "Well, either you didn't upload anything, it wasn't an aiff/wav, or we're failing you somehow"
+      redirect_to new_user_track_path(current_user)
     else
       flash[:ok] = "Thanks, valued alonetone *plus* user. We're hosting the following files for you <br/>"+
         @source_files.collect{|f| f.filename }.join(',')
+      redirect_to user_source_files_path(current_user)
     end
   end
 
