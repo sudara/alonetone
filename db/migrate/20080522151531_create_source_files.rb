@@ -5,7 +5,7 @@ class CreateSourceFiles < ActiveRecord::Migration
       t.string   "filename"
       t.integer  "size",             :limit => 11
       t.integer  "user_id"
-      t.integer  "downloads_count"
+      t.integer  "downloads_count", :default => 0
       t.timestamps
     end
     add_column :users, :plus_enabled, :boolean, :default => false
