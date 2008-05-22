@@ -1,6 +1,6 @@
 class SourceFilesController < ApplicationController
   before_filter :login_required, :except => [:show]
-  before_filter :find_user, :only => [:show, :index]
+  before_filter :find_user, :only => [:show, :index, :destroy]
   # GET /source_files
   # GET /source_files.xml
   def index
@@ -50,7 +50,7 @@ class SourceFilesController < ApplicationController
       flash[:error] = "Well, either you didn't upload anything, it wasn't an aiff/wav, or we're failing you somehow"
     else
       flash[:ok] = "Thanks, valued alonetone *plus* user. We're hosting the following files for you <br/>"+
-        (@source_files.collect{|f| f.filename }.join[','])
+        @source_files.collect{|f| f.filename }.join(',')
     end
   end
 
@@ -74,13 +74,9 @@ class SourceFilesController < ApplicationController
   # DELETE /source_files/1
   # DELETE /source_files/1.xml
   def destroy
-    @source_file = SourceFile.find(params[:id])
+    @source_file = @user.source_file.find(params[:id])
     @source_file.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(source_files_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to user_source_files_path(@user)
   end
   
   def authorized?

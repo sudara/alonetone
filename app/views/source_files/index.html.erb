@@ -1,17 +1,29 @@
 <% render :layout => 'users/user' do %>
-    <h1>Listing source_files</h1>
-
+    <div class="alonetone_plus box">
+    <h2 class="box">alonetone plus, ghetto edition: your uploaded goodies</h2>
+    <div class="static_content">
+        Right click the filenames and "Download linked file as" or "Save file as" or "Save link as" 
+        unless you want to open these bad boys in your browser (not recommended) <br/><br/>
     <table>
       <tr>
       </tr>
 
     <% for source_file in @source_files %>
-      <tr>
-        <td><%= link_to "Download #{source_file.filename}", user_source_file_path(@user, source_file) %></td>
-        <td><%= link_to 'Destroy', user_source_file_path(@user, source_file), :confirm => 'Are you sure?', :method => :delete, :class => 'destroy' %></td>
+      <tr style="height:20px;">
+        <td>
+        <div class="download-button button">
+        <%= link_to ' ', user_source_file_path(@user, source_file), :class=> 'download button' %>
+        </div>
+        </td>
+            
+        <td><%= link_to "#{source_file.filename}", user_source_file_path(@user, source_file) %></td>
+        
+        <td width='200px' align = "center">Downloaded <%= source_file.downloads_count || '0' %> times</td>
+
+        <td width ="100px" align="center"><%= link_to 'Destroy', user_source_file_path(@user, source_file), :confirm => 'Are you sure?', :method => :delete, :class => 'destroy' %></td>
       </tr>
     <% end %>
     </table>
-
-    <br />
+    </div>
+    </div>
 <% end %>
