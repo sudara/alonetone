@@ -185,35 +185,35 @@ class AssetsController < ApplicationController
   
   protected
     
-    def not_found
-      flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" and redirect_to user_tracks_path(@user) 
+  def not_found
+    flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" and redirect_to user_tracks_path(@user) 
+  end
+  
+  def find_referer
+    case params[:referer]
+      when 'itunes' then @referer = 'itunes'
+      when 'download' then @referer = 'download'
+      when 'home' then @referer = 'home page'
+      when 'facebook' then @referer = 'facebook'
+      else
+        @referer = (request.env['HTTP_REFERER'] && !request.env['HTTP_REFERER'].empty?) ? request.env['HTTP_REFERER'] : 'alonetone'
     end
-    
-    def find_referer
-      case params[:referer]
-        when 'itunes' then @referer = 'itunes'
-        when 'download' then @referer = 'download'
-        when 'home' then @referer = 'home page'
-        when 'facebook' then @referer = 'facebook'
-        else
-          @referer = (request.env['HTTP_REFERER'] && !request.env['HTTP_REFERER'].empty?) ? request.env['HTTP_REFERER'] : 'alonetone'
-      end
-    end
-    
-    def authorized?
-      # admin or the owner of the asset can edit/update/delete
-      admin? || (params[:permalink].nil? || (current_user != :false && @asset.user_id.to_s == current_user.id.to_s))
-    end
-    
-    def register_listen
-      @asset.listens.create(:listener => (current_user || nil), 
-        :track_owner=> @asset.user, 
-        :source => @referer, 
-        :ip => request.remote_ip) unless bot?
-      @logger.warn("BOT LISTEN: "+ request.remote_ip + request.user_agent) if bot?
-    end
-    
-    def bot?
-      @@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil
-    end
+  end
+  
+  def authorized?
+    # admin or the owner of the asset can edit/update/delete
+    admin? || (params[:permalink].nil? || (current_user != :false && @asset.user_id.to_s == current_user.id.to_s))
+  end
+  
+  def register_listen
+    @asset.listens.create(:listener => (current_user || nil), 
+      :track_owner=> @asset.user, 
+      :source => @referer, 
+      :ip => request.remote_ip) unless bot?
+    @logger.warn("BOT LISTEN: "+ request.remote_ip + request.user_agent) if bot?
+  end
+  
+  def bot?
+    @@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil
+  end
 end

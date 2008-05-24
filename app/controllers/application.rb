@@ -36,6 +36,10 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  def display_private_comments_of?(user)
+    admin? || (logged_in? && (current_user.id.to_s == user.id.to_s))
+  end
+      
   def user_not_found
     if @user
       flash[:error] = 'There was a problem with that request...'

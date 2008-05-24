@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   skip_before_filter :update_last_seen_at, :only => [:create, :new, :activate, :sudo]
-  before_filter :find_user,      :except => [:new, :create, :sudo]
+  before_filter :find_user,      :except => [:new, :create]
   
   before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio]
   skip_before_filter :login_by_token, :only => :sudo
@@ -42,7 +42,10 @@ class UsersController < ApplicationController
         @listens = @user.listens.find(:all, :limit =>5)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
-        @comments = @user.comments.find_all_by_spam(false, :limit => 10)
+        
+        @comments = @user.comments.public.find(:all, :limit => 10) unless display_private_comments_of?(@user)
+        @comments = @user.comments.include_private.find(:all, :limit => 10) if display_private_comments_of?(@user)
+        
         render
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
@@ -165,15 +168,14 @@ class UsersController < ApplicationController
   end
   
   def sudo
-    @to_user = User.find_by_login(params[:login] || params[:id])
-    redirect_to :back and return false unless (current_user.admin? || session[:sudo]) && @to_user
-    flash[:ok] = "Sudo to #{@to_user.name}" if sudo_to(@to_user)
+    redirect_to user_home_path(current_user) and return false unless @user && (current_user.admin? || session[:sudo])
+    flash[:ok] = "Sudo to #{@user.name}" if sudo_to(@user)
     redirect_to :back
   end
 
   protected
     def authorized?
-      admin? || (!%w(destroy admin sudo).include?(action_name) && logged_in? && (current_user.id.to_s == @user.id.to_s))
+      admin? || (!%w(destroy admin).include?(action_name) && logged_in? && (current_user.id.to_s == @user.id.to_s)) || (action_name == 'sudo')
     end
     
     def display_user_home_or_index

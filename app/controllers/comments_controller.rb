@@ -41,9 +41,19 @@ class CommentsController < ApplicationController
   
   def index
     if params[:login]
-      @comments_made = Comment.paginate_by_spam(false, :per_page => 10, :page => params[:made_page], :order => 'created_at DESC', :conditions => {:commenter_id => @user.id})
-      @comments = @user.comments.paginate_by_spam(false, :per_page => 10, :page => params[:page])
+      @page_title = "Recent comments of #{@user.name}"
+      if display_private_comments_of?(@user)
+        @comments = @user.comments.include_private.paginate(:all, :per_page => 10, :page => params[:page])
+        @comments_made = Comment.include_private.paginate(:all, :per_page => 10, :page => params[:made_page], 
+          :order => 'created_at DESC', :conditions => {:commenter_id => @user.id})
+      else
+        @comments = @user.comments.public.paginate(:all, :per_page => 10, :page => params[:page])
+        @comments_made = Comment.public.paginate(:all, :per_page => 10, :page => params[:made_page], 
+          :order => 'created_at DESC', :conditions => {:commenter_id => @user.id, :private => false})
+      end
+      
     else
+      @page_title = "Recent Comments"
       @comments = Comment.public.paginate(:all, :per_page => 10, :page => params[:page]) unless admin?
       @comments = Comment.include_private.paginate(:all, :per_page => 10, :page => params[:page]) if admin?
     end
