@@ -32,7 +32,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
     xml.url do
       xml.loc user_tracks_url(user)
       xml.lastmod w3c_date(user.assets.first.created_at)
-      xml.changefreq  "weekly"
+      xml.changefreq  "daily"
       xml.priority 0.5
     end if user.assets_count > 0 
     xml.url do
@@ -41,6 +41,13 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
       xml.changefreq "weekly"
       xml.priority 0.5
     end if user.playlists_count > 0
+    xml.url do
+      xml.loc comments_url(:login => user.login)
+      xml.lastmod w3c_date(user.comments.public.first.updated_at)
+      xml.changefreq "daily"
+      xml.priority 0.5
+    end if user.comments.public.size > 0
+    
     
     if user.assets_count > 0 
       user.assets.each do |asset|

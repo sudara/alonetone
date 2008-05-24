@@ -40,20 +40,20 @@ ActionController::Routing::Routes.draw do |map|
   map.latest '/latest/:latest', :controller => 'assets', :action => 'latest'
   
   map.radio 'radio/:source/:per_page/:page', :controller => 'assets', :action => 'radio', 
-    :source=> 'popular',:per_page =>40, :page=>1
+    :source=> 'popular',:per_page =>40, :defaults => {:page=>1}
   
   # top 40
   map.top '/top/:top', :controller => 'assets', :action => 'top'
 
-  map.users_default '/users/by/activity/:page', :controller => 'users', :action => 'index', :sort => 'active', :page => 1
-  map.sorted_users '/users/by/:sort/:page', :controller => 'users', :action => 'index', :page => 1
+  map.users_default '/users/by/activity/:page', :controller => 'users', :action => 'index', :sort => 'active', :defaults => {:page => 1}
+  map.sorted_users '/users/by/:sort/:page', :controller => 'users', :action => 'index', :defaults => {:page => 1}
   
   map.listens  ':login/history', :controller => 'listens'
   
   map.all_comments 'comments', :controller => 'comments'
   map.comments ':login/comments', :controller => 'comments'
   
-  map.hot_track 'hot_track/:position.:format', :controller => 'assets', :action => 'hot_track', :position => 1, :format => 'mp3'
+  map.hot_track 'hot_track/:position.:format', :controller => 'assets', :action => 'hot_track', :defaults => {:position => 1}, :format => 'mp3'
    
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any, :toggle_favorite => :any} do |user|
     
