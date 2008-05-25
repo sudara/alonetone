@@ -49,7 +49,7 @@ module NewRelic::Agent
     end
   end
   
-  # Implementation defail for the NewRelic Agent
+  # Implementation default for the NewRelic Agent
   class Agent
     # Specifies the version of the agent's communication protocol
     # with the NewRelic hosted site.
@@ -268,10 +268,16 @@ module NewRelic::Agent
     
     # determine the environment we are running in (one of :webrick,
     # :mongrel, :thin, or :unknown) and if the process is listening
-    # on a port, return the port # that we are listening on.
+    # on a port, return the port # that we are listening on.  When
+    # this returns nil for the port, then the agent will not run.
     def determine_environment_and_port
       port = nil
       @environment = :unknown
+      
+      # Disable the agent for rake, irb, ruby and console invocations:
+      if $0 =~ /rake$|irb$/
+        return
+      end
       
       # OPTIONS is set by script/server 
       port = OPTIONS.fetch :port, DEFAULT_PORT
@@ -416,8 +422,9 @@ module NewRelic::Agent
         request.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
       
-      # FIXME for the life of me I cant find the API that assembles query parameters into a 
-      # URI, so I have to hard code it here. Ugly to say the least.
+      # we'd like to use to_query but it is not present in all supported rails platforms
+      # params = {:method => method, :license_key => license_key, :protocol_version => PROTOCOL_VERSION }
+      # uri = "/agent_listener/invoke_raw_method?#{params.to_query}"
       uri = "/agent_listener/invoke_raw_method?method=#{method}&license_key=#{license_key}&protocol_version=#{PROTOCOL_VERSION}"
       response = request.start do |http|
         http.post(uri, post_data) 

@@ -7,7 +7,9 @@ class NewrelicController < ActionController::Base
   include NewrelicHelper
   
   # do not include any filters inside the application since there might be a conflict
-  skip_filter filter_chain.collect(&:filter)
+  if respond_to? :filter_chain
+    skip_filter filter_chain.collect(&:filter)
+  end
   
   # for this controller, the views are located in a different directory from
   # the application's views.
@@ -54,7 +56,6 @@ class NewrelicController < ActionController::Base
     @request_params = @sample.params[:request_params] || {}
     controller_metric = @sample.root_segment.called_segments.first.metric_name
     
-    # TODO move metric parser into the developer edition (the agent?)
     controller_segments = controller_metric.split('/')
     @sample_controller_name = controller_segments[1..-2].join('/').camelize+"Controller"
     @sample_action_name = controller_segments[-1].underscore

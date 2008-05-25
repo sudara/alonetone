@@ -19,12 +19,11 @@
   <%= link_to 'view all', radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all' %>
   <div class="box">
     <%= render :partial => 'shared/favorite', :collection => @favorites %>
-  </div>
+  </div>  
 <% end %>
 
 
 <% content_for :right do %>
-
 	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
 	<%= link_to 'view all', top_path(40), :class => 'view_all' %>
 
@@ -38,4 +37,8 @@
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>
+<% end %>
+
+<% content_for :bottom do %>
+    <%= render :partial => 'shared/visit_us' %>
 <% end %>

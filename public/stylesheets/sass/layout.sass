@@ -25,7 +25,8 @@ a#logo
   :position absolute
   :top 0px
   :left 50px
-  :height 80px  
+  :height 80px
+  :width 730px  
 
 #wrapper
   :position relative
@@ -79,6 +80,24 @@ a#logo
   :height 60px
   :width 100%
   
+.clearfix:after 
+  :clear both
+  :content "."
+  :display block
+  :height 0pt
+  :line-height 0pt
+  :visibility hidden
+
+.clearfix 
+  :display inline-block
+
+html[xmlns] .clearfix 
+  :display block
+
+* html .clearfix 
+  :height 1%
+
+  
 #footer
   :position fixed
   :bottom 0
@@ -89,16 +108,25 @@ a#logo
   :background  url(../images/backgrounds/footer_closed.png) repeat-x bottom left
   #update, #bug_report
     :font-size 12px
+    :line-height 42px
   #update
     :position absolute
     :left 50px
-    :top 25px    
+    :top 15px    
   #footer_right
     :position absolute
     :left 520px
-    :top 25px
+    :top 15px
+    :height 25px
+    :line-height 30px
     :text-align right
     :width 420px
+    #footer_comment_icon 
+      :display inline-block
+      :width 22px
+      :height 30px
+      img
+        :margin-bottom -5px
   &.open
     :height 300px
 #footer_expandable
@@ -118,10 +146,11 @@ a#logo
     #bug_form
       :position absolute
       :left 540px
+      :top -20px
       form
         #user_report_category
           :display block
-          :margin-bottom 15px
+          :margin-bottom 5px
         a
           :font-size 12px
       

@@ -173,7 +173,7 @@ class User < ActiveRecord::Base
         
         unless pager.total_entries
           # the pager didn't manage to guess the total count, do it manually
-          pager.total_entries = User.count(:all, :conditions => 'assets_count > 0')
+          pager.total_entries = User.musicians.count(:all, :conditions => 'assets_count > 0')
         end  
       end
     else # last_seen

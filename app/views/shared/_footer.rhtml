@@ -1,12 +1,12 @@
 <div id="footer">
 
-  <div id="update">Latest Update: 
+  <div id="update">Latest News: 
     <%= link_to "#{truncate(@latest_update.title, 50)}", updates_path, :id=>'updates_link' %>
   </div>
 
   <div id="footer_right">
     <div id="bug_report">
-    Report sumptin <%= link_to "creative", "#", :id => 'creative', :class => 'feedback' %>, <%= link_to "nasty", "#", :id => 'nasty',:class => 'feedback'  %>, <%= link_to "nice", "#", :id=>'nice',:class => 'feedback'  %> or <%= link_to "see what is being said", user_reports_path%>
+    We LOVE your feedback: <%= link_to "Say something!", "#", :id => 'creative', :class => 'feedback' %>  <%= link_to(image_tag('icons/comment.png'), '#', :id => 'footer_comment_icon', :class => 'feedback') %>
     </div>
   </div>
 

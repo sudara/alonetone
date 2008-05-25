@@ -1,3 +1,52 @@
+== master
+
+* ActiveRecord 2.1: remove :include from count query when tables are not
+  referenced in :conditions
+
+== 2.3.2, released 2008-05-16
+
+* Fixed LinkRenderer#stringified_merge by removing "return" from iterator block
+* Ensure that 'href' values in pagination links are escaped URLs
+
+== 2.3.1, released 2008-05-04
+
+* Fixed page numbers not showing with custom routes and implicit first page
+* Try to use Hanna for documentation (falls back to default RDoc template if not)
+
+== 2.3.0, released 2008-04-29
+
+* Changed LinkRenderer to receive collection, options and reference to view template NOT in
+  constructor, but with the #prepare method. This is a step towards supporting passing of
+  LinkRenderer (or subclass) instances that may be preconfigured in some way
+* LinkRenderer now has #page_link and #page_span methods for easier customization of output in
+  subclasses
+* Changed page_entries_info() method to adjust its output according to humanized class name of
+  collection items. Override this with :entry_name parameter (singular).
+    
+    page_entries_info(@posts)
+    #-> "Displaying all 12 posts"
+    page_entries_info(@posts, :entry_name => 'item')
+    #-> "Displaying all 12 items"
+    
+== 2.2.3, released 2008-04-26
+
+* will_paginate gem is no longer published on RubyForge, but on
+  gems.github.com:
+  
+    gem sources -a http://gems.github.com/  (you only need to do this once)
+    gem install mislav-will_paginate
+    
+* extract reusable pagination testing stuff into WillPaginate::View
+* rethink the page URL construction mechanizm to be more bulletproof when
+  combined with custom routing for page parameter
+* test that anchor parameter can be used in pagination links
+
+== 2.2.2, released 2008-04-21
+
+* Add support for page parameter in custom routes like "/foo/page/2"
+* Change output of "page_entries_info" on single-page collection and erraneous
+  output with empty collection as reported by Tim Chater
+  
 == 2.2.1, released 2008-04-08
 
 * take less risky path when monkeypatching named_scope; fix that it no longer

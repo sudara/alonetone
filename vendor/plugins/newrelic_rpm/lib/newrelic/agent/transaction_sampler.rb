@@ -24,7 +24,6 @@ module NewRelic::Agent
     
     def notice_push_scope(scope)
       with_builder do |builder|
-        check_rules(scope)      # TODO no longer necessary once we confirm overhead
         builder.trace_entry(scope)
         
         # in developer mode, capture the stack trace with the segment.
@@ -120,18 +119,8 @@ module NewRelic::Agent
     end
     
     private 
-      # TODO all of this goes away once we confirm that we can always measure samples
-      # at acceptable overhead.  Don't check rules, and remove shold_colelct_sample?
-      def check_rules(scope)
-        return if should_collect_sample?
-        set_should_collect_sample and return #if is_developer_mode?
-      end
-    
       BUILDER_KEY = :transaction_sample_builder
       def get_or_create_builder
-        # Commenting out - see above.  We will leave sampling on all the time.
-#        return nil if @rules.empty? && !is_developer_mode?
-        
         builder = get_builder
         if builder.nil?
           builder = TransactionSampleBuilder.new
@@ -158,16 +147,6 @@ module NewRelic::Agent
       
       def reset_builder
         Thread::current[BUILDER_KEY] = nil
-        set_should_collect_sample(false)
-      end
-      
-      COLLECT_SAMPLE_KEY = :should_collect_sample
-      def should_collect_sample?
-        Thread::current[COLLECT_SAMPLE_KEY]
-      end
-      
-      def set_should_collect_sample(value=true)
-        Thread::current[COLLECT_SAMPLE_KEY] = value
       end
       
       def is_developer_mode?

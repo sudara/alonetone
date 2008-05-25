@@ -259,7 +259,7 @@ ResizeableFooter = $.klass({
     this.next.show();
     this.next.css({opacity:0.999});
     this.next.animate({
-      height: "300px"
+      height: "250px"
     },600,'easeOutQuad');
     this.form.show();
     this.form.animate({
