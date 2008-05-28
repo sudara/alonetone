@@ -10,7 +10,7 @@
   function mapit() {
 
     var map = new google.maps.Map2(document.getElementById("map"));
-    var gx = new google.maps.GeoXml("<%= link_to formatted_users_path(:rss) %>");
+    var gx = new google.maps.GeoXml("<%= formatted_users_url(:rss) %>");
 
     map.setCenter(new google.maps.LatLng(37.4419, -122.1419), 2);
     map.addControl(new google.maps.SmallMapControl(),new GControlPosition(G_ANCHOR_BOTTOM_RIGHT, new GSize(10,10)));
