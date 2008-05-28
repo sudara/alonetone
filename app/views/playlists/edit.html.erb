@@ -15,7 +15,7 @@
     			<%= submit_tag "Upload new Pic" %>
     		<% end %>
       </div>
-      <div id="edit_playlist_info" class="static_content"style="display:none;">
+      <div id="edit_playlist_info" class="static_content" style="display:none;">
         <%= link_to 'delete playlist', destroy_user_playlist_path(@user, @playlist), :class => 'delete button'%>
 
         <% form_for [@user, @playlist] do |f| %>

@@ -72,12 +72,9 @@ class PlaylistsController < ApplicationController
     # TODO: this is bad form, should be relocated to assets/index and listens/index
     @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at DESC', :page => params[:uploads_page])
     @listens = @user.listens.paginate(:all, :limit => 10, :order => 'listens.created_at DESC', :per_page => 10, :page => params[:listens_page])
-    respond_to do |format|
-      format.html
-      format.js do
+    if request.xhr? 
         render :partial => 'your_stuff.html.erb' if params[:uploads_page]
         render :partial => 'your_listens.html.erb' if params[:listens_page]
-      end
     end
   end
 

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   def new
     if logged_in?
       flash[:error] = "Either you aren't allowed to do that or you aren't allowed to do that"
-      redirect_to (session[:return_to] || root_path)
+      redirect_to root_path
     end
   end
 

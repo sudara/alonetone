@@ -29,6 +29,7 @@ module WillPaginate
       :separator    => ' ', # single space is friendly to spiders and non-graphic browsers
       :param_name   => :page,
       :params       => nil,
+      :ignore_get_params => nil,
       :renderer     => 'WillPaginate::LinkRenderer',
       :page_links   => true,
       :container    => true
@@ -301,7 +302,7 @@ module WillPaginate
       unless @url_string and !page_one
         @url_params = {}
         # page links should preserve GET parameters
-        stringified_merge @url_params, @template.params if @template.request.get?
+        stringified_merge @url_params, @template.params if @template.request.get? && !@options[:ignore_get_params]
         stringified_merge @url_params, @options[:params] if @options[:params]
         
         if complex = param_name.index(/[^\w-]/)
