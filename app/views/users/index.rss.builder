@@ -14,6 +14,7 @@ xml.rss "version" => "2.0",
     for @user in @users do
       xml.item do
         xml.title "#{h @user.name} on alonetone"
+        xml.author "#{h @user.name}"
         xml.link user_home_url(@user)
         xml.description "#{image_tag(@user.avatar(:large))}
           <br/>#{h @user.name} 

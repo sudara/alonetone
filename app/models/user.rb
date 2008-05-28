@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   named_scope :activated, {:conditions => {:activation_code => nil}, :order => 'created_at DESC', :include => :pic}
   named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}  
   named_scope :with_location, {:conditions => ['users.country != ""'], :order => 'last_seen_at DESC', :include => :pic}
-  named_scope :geocoded, {:conditions => ['users.lat != ""'], :order => 'last_seen_at DESC', :include => :pic}
+  named_scope :geocoded, {:conditions => ['users.lat != ""'], :order => 'created_at DESC', :include => :pic}
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
