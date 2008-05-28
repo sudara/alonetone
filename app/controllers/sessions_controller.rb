@@ -20,10 +20,11 @@ class SessionsController < ApplicationController
   end
   
   def destroy
+    previous_page = session[:return_to]
     reset_session
     cookies.delete :auth_token
     flash[:ok] = "Goodbye, see you soon..."
-    redirect_to :back
+    redirect_to (previous_page || root_path)
   end
 
   protected

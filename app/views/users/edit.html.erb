@@ -64,9 +64,9 @@
     </div>
     
     <div class="static_content">
-      Display most popular tracks (in place of latest tracks)<br/>
+      Display most popular tracks on your home page?<br/>
       <%= select_tag('user[settings][most_popular]', 
-          options_for_select([['nope, stick with the latest','false'], ['oh, pretty please!','true']], 
+          options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']], 
            setting(:most_popular))) %>
     </div>
     

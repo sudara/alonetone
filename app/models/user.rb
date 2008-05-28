@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   
   named_scope :musicians, {:conditions => ['assets_count > ?',0], :order => 'assets_count DESC', :include => :pic}
   named_scope :activated, {:conditions => {:activation_code => nil}, :order => 'created_at DESC', :include => :pic}
-  named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}
+  named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}  
+  named_scope :with_location, {:conditions => ['users.country != ""'], :order => 'last_seen_at DESC', :include => :pic}
+  named_scope :geocoded, {:conditions => ['users.lat != ""'], :order => 'last_seen_at DESC', :include => :pic}
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
@@ -18,13 +20,16 @@ class User < ActiveRecord::Base
   belongs_to :facebook_account
   has_many :tracks
   
+  acts_as_mappable
+  before_validation :geocode_address
+  
   has_many :source_files
   
   # Can listen to music, and have that tracked
   has_many :listens, :foreign_key => 'listener_id', :include => :asset, :order => 'listens.created_at DESC'
     
   # Can have their music listened to
-  has_many :track_plays, :foreign_key => 'track_owner_id', :class_name => 'Listen', :include => :asset, :order => 'listens.created_at DESC'
+  has_many :track_plays, :foreign_key => 'track_owner_id', :class_name => 'Listen', :include => [:asset], :order => 'listens.created_at DESC'
   
   # And therefore have listeners
   has_many :listeners, :through => :track_plays, :uniq => true
@@ -90,7 +95,7 @@ class User < ActiveRecord::Base
   end
   
   def favorites
-    self.playlists.favorites.first
+    self.playlists.favorites.find(:first)
   end
   
   def has_pic?
@@ -155,7 +160,7 @@ class User < ActiveRecord::Base
     when 'dedicated_listeners'
       @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
         # returns an array, like so: [User, number_of_listens]
-        result = Listen.count(:all, :include => :listener, :order => 'count_all DESC', :conditions => 'listener_id != ""', :group => :listener, :limit => pager.per_page, :offset => pager.offset)
+        result = Listen.count(:all, :order => 'count_all DESC', :conditions => 'listener_id != ""', :group => :listener, :limit => pager.per_page, :offset => pager.offset)
 
         # inject the result array into the paginated collection:
         pager.replace(result)
@@ -167,7 +172,7 @@ class User < ActiveRecord::Base
       end
     when 'last_uploaded'
      @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
-        distinct_users = Asset.find(:all, :select => 'DISTINCT user_id', :order => 'assets.created_at DESC', :limit => pager.per_page, :offset => pager.offset)
+        distinct_users = Asset.find(:all, :select => 'DISTINCT user_id', :include => [:user => :pic], :order => 'assets.created_at DESC', :limit => pager.per_page, :offset => pager.offset)
               
         pager.replace(distinct_users.collect(&:user)) # only send back the users
         
@@ -252,6 +257,11 @@ class User < ActiveRecord::Base
   
   alias_method :reset_token!, :reset_login_key!
   
+  def geocode_address
+    return unless city && country
+    geo=GeoKit::Geocoders::MultiGeocoder.geocode([city, country].compact.join(', '))
+    self.lat, self.lng = geo.lat,geo.lng if geo.success
+  end
   protected
   
   def make_first_user_admin

@@ -43,7 +43,7 @@ class Playlist < ActiveRecord::Base
     is_mix? ? 'mix' : 'album'
   end
   
-  def cover(size)
+  def cover(size=nil)
     return dummy_pic(size) unless self.pic && !self.pic.new_record?
     self.pic.public_filename(size)
   end

@@ -1,0 +1,20 @@
+<div id="map" style="width:860px;height:400px;"></div>
+
+<script type="text/javascript" src="http://www.google.com/jsapi?key=<%=GeoKit::Geocoders::google %>"></script>
+<script type="text/javascript">
+
+  function loadmap(){
+     google.load("maps", "2.x",{"callback":mapit}); 
+  }
+  // Call this function when the page has been loaded
+  function mapit() {
+
+    var map = new google.maps.Map2(document.getElementById("map"));
+    var gx = new google.maps.GeoXml("http://stash.alonetone.com/test.rss");
+
+    map.setCenter(new google.maps.LatLng(37.4419, -122.1419), 2);
+    map.addControl(new google.maps.SmallMapControl(),new GControlPosition(G_ANCHOR_BOTTOM_RIGHT, new GSize(10,10)));
+    map.addOverlay(gx);
+  }
+  google.setOnLoadCallback(loadmap);
+</script>

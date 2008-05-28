@@ -18,8 +18,10 @@
   <div id="recently_uploaded">
      
     <% @users.each do |user| %>
-        <div class="alonetoner">
-        
+    <% if user.try(:first) %>
+      <% user = user.first %>
+    <% end %>
+        <div class="alonetoner">        
          <%= user_image_link(user) %><br/>
          <%= link_to h(user.name), user_home_path(user) %>
         </div>

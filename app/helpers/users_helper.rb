@@ -1,7 +1,7 @@
 module UsersHelper
   
   def website_for(user)
-    link_to "#{user.name}'s website", ('http://'+h(user.website))
+    "#{user.name}'s website " + (link_to "#{user.website}", ('http://'+h(user.website)))
   end
   
   def myspace_for(user)
@@ -34,11 +34,8 @@ module UsersHelper
     logged_in? && current_user.present?(:settings) && current_user.settings.present?('hide_notice') && current_user.settings['hide_notice'].present?(notice)
   end
   
-  def setting(symbol_or_string)
-    if logged_in? && current_user.settings
-      return current_user.settings[symbol_or_string.to_sym]
-    end
-    false
+  def setting(symbol_or_string, user=current_user)
+    logged_in? && user.settings && user.settings[symbol_or_string.to_sym]
   end
   
   def favorite_toggle(asset)

@@ -48,6 +48,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1.xml
   def show
     @page_title = "\"#{@playlist.title}\" by #{@user.name}"
+    @single = true
     respond_to do |format|
       format.html # show.html.erb
       format.xml 

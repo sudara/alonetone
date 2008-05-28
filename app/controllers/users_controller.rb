@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def index
     @page_title = "Musicians and Listeners: #{params[:sort] ? params[:sort].titleize : ''}"
     @tab = 'browse'
-    @users = User.paginate_by_params(params)
+    @users = User.paginate_by_params(params) unless params[:sort] == 'map'
     flash[:info] = "Want to see your pretty face show up here?<br/> Edit <a href='#{edit_user_path(current_user)}'>your profile</a>" unless current_user = :false || current_user.has_pic?
     respond_to do |format|
       format.html do
@@ -22,6 +22,9 @@ class UsersController < ApplicationController
       format.xml do
         @users = User.search(params[:q], :limit => 25)
         render :xml => @users.to_xml
+      end
+      format.rss do
+        @users = User.geocoded.find(:all, :limit => 500)
       end
       format.js do
           render :partial => 'users.html.erb'
@@ -37,11 +40,13 @@ class UsersController < ApplicationController
       format.html do
         @page_title = @user.name + "'s latest music and playlists"
         @tab = 'your_stuff' if current_user == @user
-        @assets = @user.assets.find(:all, :limit => 5)
+        
+        @popular_tracks = @user.assets.find(:all, :limit => 4, :order => 'assets.listens_count DESC')
+        @assets = @user.assets.find(:all, :limit => 4)
         @playlists = @user.playlists.public.find(:all)
-        @listens = @user.listens.find(:all, :limit =>5)
+        @listens = @user.listens.find(:all, :limit =>4)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
-        @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
+        @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 4)
         
         @comments = @user.comments.public.find(:all, :limit => 10) unless display_private_comments_of?(@user)
         @comments = @user.comments.include_private.find(:all, :limit => 10) if display_private_comments_of?(@user)

@@ -13,14 +13,19 @@
        <%= user_nav_item "monster uploaders", {:action => 'index', :sort => 'monster_uploaders'} %>
        <%= user_nav_item "dedicated listeners", {:action => 'index', :sort => 'dedicated_listeners'}%>
        <%= user_nav_item "recently joined", {:action => 'index', :sort => 'recently_joined'} %>
+       <%= user_nav_item "on the map!", {:action => 'index', :sort => 'map'} %>
+
       </ul>
-          <%= will_paginate @users %>
+          <%= will_paginate @users if @users%>
     </div>
   </div>
   
   <div id="recently_uploaded">
-
+    <% if params[:sort] == 'map'%>
+        <%= render :partial => 'map' %>
+    <% else %>
     <%= render :partial => 'shared/user', :collection => @users %>
+    <% end %>
     <div class="clear"> </div>
   </div>
 
