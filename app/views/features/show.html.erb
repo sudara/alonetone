@@ -1,0 +1,28 @@
+<p>
+  <b>Featured user:</b>
+  <%=h @feature.featured_user_id %>
+</p>
+
+<p>
+  <b>Writer:</b>
+  <%=h @feature.writer_id %>
+</p>
+
+<p>
+  <b>Views count:</b>
+  <%=h @feature.views_count %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @feature.body %>
+</p>
+
+<p>
+  <b>Teaser text:</b>
+  <%=h @feature.teaser_text %>
+</p>
+
+
+<%= link_to 'Edit', edit_feature_path(@feature) %> |
+<%= link_to 'Back', features_path %>
