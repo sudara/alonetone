@@ -6,10 +6,12 @@
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
       <li><%= link_to 'share', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
+    <% if logged_in? %>
     <div class="favorite_panel no_border">
         <%= favorite_toggle(asset) %>
     </div>
-
+    <% end %>
+    
   	<div id="details_track_<%= asset.unique_id %>">
 	    <% if asset.present?(:description) %>
 	        <div class="panel no_border">

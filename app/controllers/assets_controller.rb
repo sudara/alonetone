@@ -33,7 +33,7 @@ class AssetsController < ApplicationController
         @page_title = "#{@asset.title} by #{@user.name}"
         @assets = [@asset]
         @listens = @asset.listens.find(:all)
-        @comments = @asset.comments.find_all_by_spam(false)
+        @comments = @asset.comments.public.find_all_by_spam(false)
         @listeners = @asset.listeners.first(5)
         @single_track = true
       end

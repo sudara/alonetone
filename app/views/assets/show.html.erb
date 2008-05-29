@@ -6,10 +6,12 @@
         <%= link_to 'edit', edit_user_track_path(@user, @asset), :class=> 'edit right'%>
       <% end %>
       <%= render :partial => 'assets/assets'%>
-
+      
+      <% if logged_in? %>
       <div class="favorite_panel no_border">
         <%= favorite_toggle(@asset) %>
       </div>
+      <% end %>
       <% if @asset.description && !@asset.description.empty? %>
       <div id="track_details" class="static_content">
           <h1>About "<%=h @asset.title %>"</h1>
@@ -24,7 +26,6 @@
     <% end %>
     
     <div class="static_content">
-    Add your thoughts:<br/>
     <%= render :partial => 'comment', :object => @asset %>
     </div>
   </div>
@@ -39,7 +40,7 @@
   <% content_for :right do %>
     <%= render :partial => 'users'%>
     <div class="clear"> </div>
-    <%= render :partial => 'shared/comments' if @comments && @comments.size > 0%>
+    <%= render :partial => 'shared/comments' if @comments && @comments.size > 0 %>
 
   <% end %>
   
