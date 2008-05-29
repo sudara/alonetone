@@ -35,7 +35,7 @@ class AssetsController < ApplicationController
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.find_all_by_spam(false)
         @listeners = @asset.listeners.first(5)
-        @single = true
+        @single_track = true
       end
       format.mp3 do
         register_listen

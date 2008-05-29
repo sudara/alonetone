@@ -25,7 +25,7 @@
 
 			<div class="info">
 		    <div class="cover">
-		      <% if @single %>
+		      <% if @single_playlist %>
 		      	<%= link_to(image_tag('jewel-case-125.png'), @playlist.cover, :class => 'jewel_case_125', :rel => 'facebox') %>
 		      <% else %>
 		      <%= link_to(image_tag('jewel-case-125.png'), edit_or_show(@user.login, @playlist), :class => 'jewel_case_125') %>
