@@ -4,6 +4,7 @@ class FacebookAccountsController < ApplicationController
   before_filter :find_facebook_user
   before_filter :find_alonetone_user
   before_filter :check_for_correct_params, :only => [:add_to_profile, :remove_from_profile]
+  skip_before_filter :verify_authenticity_token
   
   def index
     @latest = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.created_at DESC', :page => params[:page])
