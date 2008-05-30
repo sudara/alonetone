@@ -1,23 +1,32 @@
 ## The future is bright
 
-We live in a world where 1 person in his spare time can provide limitless distribution for hundreds of artists, thousands of songs, millions of copies. 
+[alonetone](http://alonetone.com) is a growing independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
 
-Truly, we are at the beginning of a revolution in music making.
+alonetone was launched in January 2008 as Sudara's side project.
 
-I invite you to join me in moving music away from countless companies looking to profit from musicians and help me to create the best damn online home for DIY/indy/new musicians.
+## alonetone is looking for more love
+
+We are growing and need your help.
+
+Are you a musician / music lover with Rails or UI/design chops? 
+
+Help us to build the best indy music platform out there.
+
+If you are interested, [sign up over at alonetone](http://alonetone.com/signup) and check out what is there. We could always use more usability/UI/design help, basic testing, general feedback, and eventually, some more Rails love. 
+
+Secondly, please email me at sudara at alonetone dot com.
 
 ### The goal?
 
-To create and run best online home a musician could have. 
+To create and run the best online home a musician could want to have, providing them with the tools they need to reach their listeners and network with other artists.
 
-What would make it the best?
+How do we reach this goal?
 
 * It is easy to use (grandma-friendly)
 * It is attractive to look at
 * It provides musicians with practical, useful and inspiring tools and services
+* It provides listeners and first time site visitors with a 'hook' into their first taste of alonetone music and helps them explore the site in an intelligent and guided way.
 * It does not overwhelm folks with TMI (too much information) or TMO (too many options) or TMF (too many features)
-* It supports and makes it easy to navigate 1000s of musicians
-* The features are developed by the musicians, implemented and refined by the dev team
 
 For more info, visit [the alonetone faq](http://alonetone.com/about)
 
@@ -32,16 +41,14 @@ Really, only the very basics are implemented.
 * Basic artist browsing
 * Tracking of listens and providing useful feedback to artists
 * Very basic commenting system
-* Extremely basic Facebook integration
-* Feeds for itunes and offsite flash players
-
-Please visit [the alonetone todo list](http://alonetone.com/about/todo) for more juicy details regarding how my life is potentially booked this next year.
+* Facebook integration
+* Feeds for iTunes podcasts and offsite flash players
 
 ### Current tech
 
 * Rails 2.1
 * Rspec
-* LowPro and Prototype (moving to jquery)
+* jQuery and LowPro
 * SoundManager 2 (for flash mp3 playback)
 * SASS (the cool stylesheet thing from the haml folks)
 
@@ -50,19 +57,21 @@ Please visit [the alonetone todo list](http://alonetone.com/about/todo) for more
 First of all, talk to me. 
   You can send me electronic mail. Sudara at alonetone com
 
-Secondly, sign up for an account and browse and get used to the exsiting site:
-  http://alonetone.com 
+Secondly, [sign up for an account](http://alonetone.com) and start digging in.
 
-### Set it up
+### Playling with alonetone on localhost
 
-You'll need to setup 6 config files for it to run flawlessly:
+I won't lie. This is not a task for Rails newbees. I've had multiple requests asking me to walk folks through setting up alonetone locally. Unless you have some experience with rails, it's just not going to be worth it unless you have a lot of time to invest.
 
-    alonetone.yml (contains the application "secret")
+If you do want to get jiggy and setup alonetone locally, the best thing to do is to contact me first, as things are ever-changing. 
+
+You'll need to setup 5 config files for it to run flawlessly:
+
+    alonetone.yml (contains the application "secret" and app specefic settings)
     database.yml
-    amazon_s3.yml (you can always ignore this and set Asset and Pic to use the filesysem)
-    basecamp.yml (for todo list, you don't need it unless you want pages/todo)
-    defensio.yml (spam protection)
-    facebooker.yml (for facebook app)
+    amazon_s3.yml (you can always ignore this and set Asset and Pic models to use the filesysem)
+    defensio.yml (spam protection, you can ignore this in development)
+    facebooker.yml (for facebook app, you can ignore this in general)
 
 You'll need some gems, at least:
 
@@ -76,8 +85,6 @@ You'll need some gems, at least:
       rubyzip (for extracting mp3s from zip files)
 
 Then, 
-  rake db:migrate
+      rake db:migrate
 
-Until I write a bootstrapper, you'll need to make sure the database has something in it. 
-  
-If I were you, and I were looking at alonetone and wanting to do anything useful with it....I would email me.
+There is no bootstrapper at this time, so you'll probably need to fiddle with it a bit or bug me to make one.
