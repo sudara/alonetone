@@ -38,10 +38,6 @@ class PagesController < ApplicationController
     raise Fuck
   end
   
-  def todo
-    expire_fragment('todos') if params[:expire]
-  end
-  
   def not_yet
     render :layout => false
   end
