@@ -1,28 +1,45 @@
-<p>
-  <b>Featured user:</b>
-  <%=h @feature.featured_user_id %>
-</p>
+<% content_for :left do %>
+  <% div_for @feature do %>
+      <div class="box">
+        <h2><%=h @feature.featured_user.name %></h2>
+        <h3>written by <%= link_to @feature.writer.name, user_home_path(@feature.writer)%>
+        <%= link_to 'edit', edit_feature_path(@feature.featured_user.login), :class => 'edit right' if authorized?%>
 
-<p>
-  <b>Writer:</b>
-  <%=h @feature.writer_id %>
-</p>
+      </div>
+    <div class="static_content">
+        <p><strong><%= @feature.teaser_text %></strong></p> 
+        <%= @feature.body %>
+      <%= render :partial => 'comment', :object => @feature %>
 
-<p>
-  <b>Views count:</b>
-  <%=h @feature.views_count %>
-</p>
+    </div>
+  <% end %>
+  
+  <div class="box">
+    <h2 class="box">About alonetone Features</h2>
+    <div class="static_content">
+    alonetone features musicians who 
+    give great music away for free, making our home warm and wonderful.
+    (Brownie points if they listen to listen to alonetone music compulsively)
+    <br/><br/>
+    We welcome your suggestions for future features and we're open to have
+    other interested authors contribute text. Step up!
+    </div>
+  </div>
+<% end %>
 
-<p>
-  <b>Body:</b>
-  <%=h @feature.body %>
-</p>
-
-<p>
-  <b>Teaser text:</b>
-  <%=h @feature.teaser_text %>
-</p>
-
-
-<%= link_to 'Edit', edit_feature_path(@feature) %> |
-<%= link_to 'Back', features_path %>
+<% content_for :right do %>
+   <div class="box">
+       <h2 class="box">Vital Stats</h2>
+        <%= link_to "visit #{h @user.name}'s alonetone page", user_home_path(@user), :class => 'view_more'%>
+        <div class="static_content">
+           <%= user_image_link(@feature.featured_user, :album) %>
+           name: <%=h @user.name %><br/>
+           joined alonetone on: <%=h @user.created_at.to_date.to_s(:long) %><br/>
+           tracks on alonetone: <%= link_to @user.assets_count, user_tracks_path(@user) %><br/>
+           tracks listened to on alonetone: <%= @user.listens_count %>
+       </div>
+   </div>
+   
+   <%= render :partial => 'featured_tracks'%>
+   <%= render :partial => 'users/mostly_listens_to' %>
+<% end %>

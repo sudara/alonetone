@@ -11,7 +11,7 @@ class CreateFeatures < ActiveRecord::Migration
       t.boolean :published, :default => false
       t.boolean :published_at, :datetime, :default => nil
       
-      t.permalink :string
+      t.string :permalink
       
       t.timestamps
     end

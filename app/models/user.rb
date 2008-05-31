@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}  
   named_scope :with_location, {:conditions => ['users.country != ""'], :order => 'last_seen_at DESC', :include => :pic}
   named_scope :geocoded, {:conditions => ['users.lat != ""'], :order => 'created_at DESC', :include => :pic}
+  named_scope :alpha, {:order => 'login'}
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
@@ -94,8 +95,16 @@ class User < ActiveRecord::Base
     self.assets_count > 0 
   end
   
+  def has_as_favorite?(asset)
+    favorite_asset_ids.include?(asset.id)
+  end
+  
+  def favorite_asset_ids
+    Track.find(:all, :conditions => {:playlist_id => favorites}).collect(&:asset_id)
+  end
+  
   def favorites
-    self.playlists.favorites.find(:first)
+    @favorites ||= self.playlists.favorites.find(:first)
   end
   
   def has_pic?
@@ -134,6 +143,10 @@ class User < ActiveRecord::Base
   
   def listens_average
     (self.listens_count.to_f / ((((Time.now - self.assets.find(:all, :limit => 1, :order => 'created_at').first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
+  end
+  
+  def mostly_listens_to
+    User.find(most_listened_to_user_ids(10), :include => :pic)
   end
   
   def dummy_pic(size)
@@ -263,6 +276,13 @@ class User < ActiveRecord::Base
     self.lat, self.lng = geo.lat,geo.lng if geo.success
   end
   protected
+  
+  def most_listened_to_user_ids(limit = 10)
+    self.listens.count(:track_owner, :group => 'track_owner_id', 
+      :order => 'count_track_owner DESC', 
+      :limit => limit, 
+      :conditions => ['track_owner_id != ?',self.id]).collect(&:first)
+  end
   
   def make_first_user_admin
     self.admin = true if User.count == 0

@@ -1,0 +1,23 @@
+ <%= f.error_messages %>
+
+  <p>
+    <%= f.label :featured_user_id %><br />
+    <%= f.select :featured_user_id, @users.collect {|p| [ p.name, p.id ] } %>
+  </p>
+  <p>
+    <%= f.label :writer_id %><br />
+    <%= f.select :writer_id, @users.collect {|p| [ p.name, p.id ] } %>
+  </p>
+  <p>
+    List o' featured asset ids, in order to display
+    <%= f.text_field :featured_tracks_list %>     
+  </p>
+  <p>
+    <%= f.label :teaser_text %><br />
+    <%= f.text_area :teaser_text, :rows => 2, :cols => 50 %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body, :rows => 50, :cols => 50 %>
+  </p>
+  

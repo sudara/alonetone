@@ -344,7 +344,7 @@ CommentForm = $.klass(Remote.Form, {
       this.resultBox = $('.comment_waiting', this.element);
       this.textarea = $('textarea', this.element);
       this.checkbox = $(':checkbox.private', this.element);
-      this.checkbox.click($.bind(this.togglePrivate,this));
+      if(this.checkbox != undefined) this.checkbox.click($.bind(this.togglePrivate,this));
       $super();
     },
     beforeSend:function(){
@@ -634,6 +634,9 @@ jQuery(function($) {
         $('#sort_playlists').sortable('serialize'));
       }
     });
+    
+  // features comment form
+  $('.feature .comment_form form').attach(CommentForm);
   
   // facebox  
   $('a[rel*=facebox]').facebox();

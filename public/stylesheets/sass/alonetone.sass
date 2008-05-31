@@ -330,6 +330,10 @@
   :background #e1e2e1
   :line-height 18px
   :margin-bottom 1px
+  p
+    :color = !text_color
+    a, a:visited
+      :color = !text_color
 
 .sidebar
   ul
@@ -347,7 +351,14 @@
     :float left
     :margin-right 24px
   :height 60px
-
+  
+#mostly_listens_to
+  :padding-bottom 0px
+  div
+    :float left
+    :margin-bottom 20px
+    :margin-right 24px
+  
 div.small_spinner
   :margin-top 5px
   :float right
@@ -411,3 +422,42 @@ a.add_to_favorites, a.favorited
 // needed for IE7 not to fuck up the animation
 #pic_upload
   :height 120px
+  
+  
+.feature
+  :width 420px
+  :margin-bottom 30px
+  div.box
+    :background-image url(../images/backgrounds/silver_header.jpg) 
+    :background-color = #E1E2E1
+    :padding-left 25px
+    :padding-top 9px
+    :margin-bottom 1px
+    h2,h1
+      :font-weight normal
+      :font-size 20px
+      :line-height 20px
+      :padding-right 40px
+      :text-shadow rgba(0,3,2,0.23) 2px 2px 1px
+      :color = !text_color
+      :margin 0
+    h3
+      :font-weight normal
+      :font-size 12px
+      :margin 0
+      :padding-bottom 8px
+      :color = !text_color
+
+  div.details
+    :position relative
+    :display block
+    :background url(../images/backgrounds/album.png) repeat-x top left
+    :background-color = !playlist_box_silver
+    :padding 15px 15px 15px 20px
+    div.pic
+      :float left
+      :width 135px
+      :margin-right 10px
+    div.link
+      :height 22px
+      :clear both

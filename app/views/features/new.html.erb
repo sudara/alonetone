@@ -1,30 +1,9 @@
 <h1>New feature</h1>
 
 <% form_for(@feature) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :featured_user_id %><br />
-    <%= f.text_field :featured_user_id %>
-  </p>
-  <p>
-    <%= f.label :writer_id %><br />
-    <%= f.text_field :writer_id %>
-  </p>
-  <p>
-    <%= f.label :views_count %><br />
-    <%= f.text_field :views_count %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.label :teaser_text %><br />
-    <%= f.text_area :teaser_text %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
+ <%= render :partial => 'form', :locals =>{:f => f}%>
+   <p>
+    <%= f.submit "Create Feature (will not be published)" %>
   </p>
 <% end %>
 

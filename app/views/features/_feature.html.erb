@@ -1,0 +1,19 @@
+<% div_for feature do %>
+    <div class="box">
+        <h2>Featured alonetoner: <%=h feature.featured_user.name %></h2>
+        <h3><%= user_location(feature.featured_user)%></h3>
+        <%= link_to 'edit', edit_feature_path(feature.featured_user.login), :class => 'edit right' if authorized?%>
+    </div>
+    <div class="details clearfix">
+        <div class="pic">
+            <%= user_image_link(feature.featured_user) %>
+        </div>
+        <div class="feature_teaser">
+           <%= feature.teaser_text %>
+        </div>
+        <div class="link">
+            <%= link_to "View feature", feature_path(feature.permalink), :class => 'view_more' %>
+        </div>
+    </div>
+
+<% end %>

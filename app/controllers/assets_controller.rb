@@ -69,7 +69,7 @@ class AssetsController < ApplicationController
         @playlists = Playlist.public.latest(12)
         @tab = 'home'
         @welcome = true unless logged_in?
-        
+        @features = Feature.published.find(:all, :limit => 3)
       end
       wants.rss do 
         @assets = Asset.latest(50)

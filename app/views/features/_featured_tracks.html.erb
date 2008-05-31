@@ -1,0 +1,5 @@
+<div id="featured_tracks" class="box">
+	<h2 class="box">Featured Tracks</h2>
+	<%= link_to "view all", user_tracks_path(@feature.featured_user), :class=> 'view_all' %>
+	<%= render :partial => 'assets/asset', :collection => @featured_tracks.collect(&:asset) %>
+</div>

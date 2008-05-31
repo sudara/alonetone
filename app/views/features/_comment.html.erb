@@ -1,7 +1,6 @@
-<% object = object.asset if object.respond_to?(:asset) -%>
 <div id="comment_<%= object.unique_id %>" class="comment_asset">
   <div class="comment_form">
-    <% form_for :comment, :url => user_track_comments_path(object.user, object), :id=>"comment_form_#{object.unique_id}" do |f| %>
+    <% form_for @comment, :id=>"comment_form_#{object.unique_id}" do |f| %>
      <div class="comment_as">
      <% if logged_in? %>
         <%= image_tag current_user.avatar(:tiny) %>Say something, <%=h current_user.name %>:
@@ -10,15 +9,15 @@
      <% end %>
      </div>
      <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble', :id=>"comment_body_#{object.unique_id}"  %>
-     <%= f.check_box :private, :class => 'private' %> <span class="public">Make Private</span><span class="private" style="display:none;"><%= image_tag 'icons/private.png' %> Only <%=h object.user.name%> will see this</span>
+     <%= f.hidden_field :commentable_type, :value => 'feature', :id=> "comment_commentable_type_#{object.unique_id}"%>
+     <%= f.hidden_field :commentable_id, :value => @feature.id, :id=> "comment_commentable_id_#{object.unique_id}"%>
      
-     <%= f.hidden_field :commentable_type, :value => 'asset', :id=> "comment_commentable_type_#{object.unique_id}"%>
      <div class="submit_wrapper">
         <div class="comment_waiting" >
           <div class="text"><!-- placeholder response text --></div>
         </div>
         <div class="small_spinner" style="display:none;"></div>
-        <%= f.submit "send comment to #{h object.user.name}", :class => 'comment_submit',:id => "submit_#{object.unique_id}"%> 
+        <%= f.submit "make your comment", :class => 'comment_submit',:id => "submit_#{object.unique_id}"%> 
       </div>
     <% end %>  
   </div>

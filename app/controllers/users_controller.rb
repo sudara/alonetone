@@ -47,9 +47,9 @@ class UsersController < ApplicationController
         @listens = @user.listens.find(:all, :limit =>4)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 4)
-        
-        @comments = @user.comments.public.find(:all, :limit => 10) unless display_private_comments_of?(@user)
-        @comments = @user.comments.include_private.find(:all, :limit => 10) if display_private_comments_of?(@user)
+        @mostly_listens_to = @user.mostly_listens_to
+        @comments = @user.comments.public.find(:all, :limit => 5) unless display_private_comments_of?(@user)
+        @comments = @user.comments.include_private.find(:all, :limit => 5) if display_private_comments_of?(@user)
         
         render
       end
@@ -117,6 +117,7 @@ class UsersController < ApplicationController
   
   def bio
     @page_title = "All about #{@user.name}"
+    @mostly_listens_to = @user.mostly_listens_to
   end
   
   def attach_pic

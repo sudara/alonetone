@@ -12,18 +12,19 @@
 		<% end %>
 	
 		<% content_for :left do %>
-    		<%= render :partial => 'popular' if @popular_tracks && setting('most_popular', @user)%>
-    	    <%= render :partial => 'latest' if @user.assets_count > 0 %>
-	    
+        	<%= render :partial => 'latest' if @user.assets_count > 0 %>
+
     	    <%= render :partial => 'favorites' if present?(@favorites) %>
-	    
+    
+            <%= render :partial => 'mostly_listens_to' if @mostly_listens_to.size > 2 %>
     	    <%= render :partial => 'listens' if @listens.size > 0 %>	
     		<%= image_tag @user.track_plays_graph if authorized? %>
     	    <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
 	    <% end %>
 	  
 	  <% content_for :right do %>
-	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
+    	    <%= render :partial => 'popular' if @popular_tracks && setting('most_popular', @user)%>
+    	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
 	  <% end %>	
 		
 		

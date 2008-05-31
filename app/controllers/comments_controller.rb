@@ -1,26 +1,22 @@
 class CommentsController < ApplicationController
   
   before_filter :find_user
-  before_filter :find_commenter
   
   def create
     respond_to do |wants|
       wants.js do
-        return head(:bad_request) unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?
+        return head(:bad_request) unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?                                  
         case params[:comment][:commentable_type] 
-        when 'asset'
-          find_asset
-          @comment = @asset.comments.build(:commenter => @commenter,
-                                            :body => params[:comment][:body], 
-                                            :user => @asset.user,
-                                            :private => params[:comment][:private],
-                                            :remote_ip => request.remote_ip,
-                                            :user_agent => request.env['HTTP_USER_AGENT'], 
-                                            :referer   => request.env['HTTP_REFERER'])
-          @comment.env = request.env
-          
+          when 'asset'
+            find_asset
+            @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
+          when 'feature'
+            @feature = Feature.find(params[:comment][:commentable_id])
+            @comment = @feature.comments.build(shared_attributes)
         end
-        return head(:bad_request) unless @comment.save && User.increment_counter(:comments_count, @asset.user)
+        @comment.env = request.env
+        return head(:bad_request) unless @comment.save
+        User.increment_counter(:comments_count, @asset.user) if @asset
         render :nothing => true
       end
     end
@@ -62,10 +58,17 @@ class CommentsController < ApplicationController
   
   protected
   
-  
+  def shared_attributes
+    {:commenter => find_commenter,
+    :body => params[:comment][:body], 
+    :private => (params[:comment][:private] || false),
+    :remote_ip => request.remote_ip,
+    :user_agent => request.env['HTTP_USER_AGENT'], 
+    :referer   => request.env['HTTP_REFERER']}
+  end
   
   def find_commenter
-    @commenter = current_user if logged_in?
+    logged_in? ? current_user : nil
   end
   
 end

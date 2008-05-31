@@ -1,28 +1,7 @@
-<h1>Listing features</h1>
+<h1>Featured Artists on alonetone</h1>
 
-<table>
-  <tr>
-    <th>Featured user</th>
-    <th>Writer</th>
-    <th>Views count</th>
-    <th>Body</th>
-    <th>Teaser text</th>
-  </tr>
+<div class="additional_options">
+<%= link_to 'New feature', new_feature_path, :class => 'add button' if admin? %>
+</div>
 
-<% for feature in @features %>
-  <tr>
-    <td><%=h feature.featured_user_id %></td>
-    <td><%=h feature.writer_id %></td>
-    <td><%=h feature.views_count %></td>
-    <td><%=h feature.body %></td>
-    <td><%=h feature.teaser_text %></td>
-    <td><%= link_to 'Show', feature %></td>
-    <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
-    <td><%= link_to 'Destroy', feature, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New feature', new_feature_path %>
+<%= render :partial => @features %>

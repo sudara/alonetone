@@ -1,10 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :features
-
- 
-  map.resource  :sessions
-  map.resources :comments
-  map.resources :user_reports
+  
+  map.resources :features, :sessions, :comments, :user_reports
   
   # RESTFUL WORKAROUND FOR FACEBOOK
   map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
@@ -53,7 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   map.listens  ':login/history', :controller => 'listens'
   
   map.all_comments 'comments', :controller => 'comments'
-  map.comments ':login/comments', :controller => 'comments'
+  map.user_comments ':login/comments', :controller => 'comments'
   
   map.hot_track 'hot_track/:position.:format', :controller => 'assets', :action => 'hot_track', :defaults => {:position => 1}, :format => 'mp3'
    
