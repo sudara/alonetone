@@ -6,7 +6,7 @@ class FeaturesController < ApplicationController
   # GET /features.xml
   def index
     @features = admin? ? Feature.all: Feature.published
-
+    @page_title = 'Featured Artists'
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @features }
@@ -23,6 +23,7 @@ class FeaturesController < ApplicationController
     @mostly_listens_to = @user.mostly_listens_to
     @comment = Comment.new(:commentable_type => 'feature',:commentable_id => @feature.id)
     @comments = @feature.comments.find(:all, :limit => 10)
+    @page_title = "Featured Artist: #{@user.name}"
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @feature }
