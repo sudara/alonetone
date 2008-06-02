@@ -144,7 +144,7 @@ div.flash
   :margin-bottom 20px
 
 // links that float right
-a.arrows, a.view_more, a.view_all
+a.arrows, a.view_more, a.view_all, a.view_more_no_float
   :background url(../images/buttons/arrow.png) no-repeat right center
   :padding-right 12px
   
@@ -155,6 +155,10 @@ a.arrows, a.view_more, a.view_all
     :float right
     :margin-top -31px
     :margin-right 25px
+  a.view_more_no_float
+    :color = !text_color
+    :text-align right
+    :display block
 div.notice a.hide_notice
   :float right
   :margin-top -31px

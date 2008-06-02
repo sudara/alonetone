@@ -10,9 +10,7 @@
         </div>
         <div class="feature_teaser">
            <%= feature.teaser_text %>
-        </div>
-        <div class="link">
-            <%= link_to "View feature", feature_path(feature.permalink), :class => 'view_more' %>
+           <%= link_to "View feature", feature_path(feature.permalink), :class => 'view_more_no_float' %>
         </div>
     </div>
 

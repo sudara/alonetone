@@ -22,7 +22,7 @@ class FeaturesController < ApplicationController
     @featured_tracks = @feature.featured_tracks
     @mostly_listens_to = @user.mostly_listens_to
     @comment = Comment.new(:commentable_type => 'feature',:commentable_id => @feature.id)
-    @comments = @feature.comments
+    @comments = @feature.comments.find(:all, :limit => 10)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @feature }

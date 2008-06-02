@@ -14,12 +14,14 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..700
   
+  formats_attributes :body
+  
   acts_as_defensio_comment :fields => { :content => :body, :article => :commentable, :author => :commenter }
   attr_accessor :current_user
 
   
   def body
-    BlueCloth::new(self[:body]).to_html
+    self.body_html || BlueCloth::new(self[:body]).to_html
   end
   
   def duplicate?

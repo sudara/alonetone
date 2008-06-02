@@ -8,9 +8,7 @@
       <%= render :partial => 'assets/assets'%>
       
       <% if logged_in? %>
-      <div class="favorite_panel no_border">
         <%= favorite_toggle(@asset) %>
-      </div>
       <% end %>
       <% if @asset.description && !@asset.description.empty? %>
       <div id="track_details" class="static_content">

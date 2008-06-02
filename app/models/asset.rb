@@ -46,6 +46,8 @@ class Asset < ActiveRecord::Base
   
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at DESC'
   
+  formats_attributes :description
+  
   acts_as_defensio_article
   
   has_many :facebook_addables, :as => :profile_chunks
@@ -199,6 +201,11 @@ class Asset < ActiveRecord::Base
     else
       "?:??"
     end
+  end
+  
+  def description
+    return nil unless self[:description]
+    self.description_html || BlueCloth::new(self[:description]).to_html
   end
   
   def self.update_hotness

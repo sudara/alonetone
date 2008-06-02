@@ -5,6 +5,8 @@ class UserReport < ActiveRecord::Base
   validates_presence_of :description, :category
   belongs_to :user
   serialize :params
+  
+  formats_attributes :content
   acts_as_defensio_comment :fields => { :content => :description, :author => :user }
   
   def article
@@ -12,7 +14,7 @@ class UserReport < ActiveRecord::Base
   end
   
   def print
-    BlueCloth::new(self.description).to_html
+    self.description_html || BlueCloth::new(self.description).to_html
   end
   
 end

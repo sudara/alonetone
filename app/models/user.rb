@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   belongs_to :facebook_account
   has_many :tracks
   
+  
+  formats_attributes :bio
   acts_as_mappable
   before_validation :geocode_address
   
@@ -126,7 +128,7 @@ class User < ActiveRecord::Base
   end
   
   def printable_bio
-    BlueCloth::new(self.bio).to_html
+    self.bio_html || BlueCloth::new(self.bio).to_html
   end
   
   def website
@@ -143,6 +145,10 @@ class User < ActiveRecord::Base
   
   def listens_average
     (self.listens_count.to_f / ((((Time.now - self.assets.find(:all, :limit => 1, :order => 'created_at').first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
+  end
+  
+  def number_of_tracks_listened_to
+    Listen.count(:all, :order => 'count_all DESC', :conditions => {:listener_id => self})
   end
   
   def mostly_listens_to
