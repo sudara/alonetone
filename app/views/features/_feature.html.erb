@@ -2,7 +2,7 @@
     <div class="box">
         <h2>Featured alonetoner: <%=h feature.featured_user.name %></h2>
         <h3><%= user_location(feature.featured_user)%></h3>
-        <%= link_to 'edit', edit_feature_path(feature.featured_user.login), :class => 'edit right' if authorized?%>
+        <%= link_to 'edit', edit_feature_path(feature.featured_user.login), :class => 'edit right' if admin? %>
     </div>
     <div class="details clearfix">
         <div class="pic">
