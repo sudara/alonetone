@@ -92,6 +92,10 @@ class FeaturesController < ApplicationController
   
   protected
   
+  def authorized?
+    admin?
+  end
+  
   def find_feature
     @feature = Feature.find_by_permalink(params[:id])
   end
