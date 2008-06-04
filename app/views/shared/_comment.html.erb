@@ -12,7 +12,7 @@
     	<% end %>
    
 	  <% if !@single_track %>
-	  <div class="comment_about">about <%= link_to h(comment.commentable.name), user_track_path(comment.commentable.user,comment.commentable) %></div>
+	  <div class="comment_about">about <%= link_for_comment(comment) %></div>
 	 <% end %>
 	     <span class="comment_user_text">
     	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>

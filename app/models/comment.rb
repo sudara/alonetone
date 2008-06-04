@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   named_scope :include_private, {:conditions =>{:spam => false}, :order => 'created_at DESC', :include => [:commenter => :pic]}
   
   belongs_to :commentable, :polymorphic => true
+  has_many :replies, :as => :commentable, :class_name => 'Comment'
 
   # optional user who made the comment
   belongs_to :commenter, :class_name => 'User'

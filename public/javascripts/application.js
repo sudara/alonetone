@@ -636,7 +636,7 @@ jQuery(function($) {
     });
     
   // features comment form
-  $('.feature .comment_form form').attach(CommentForm);
+  $('.comment_form form').attach(CommentForm);
   
   // facebox  
   $('a[rel*=facebox]').facebox();

@@ -1,7 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :features, :sessions, :comments, :user_reports
   
+  map.blog 'blog', :controller => 'updates', :action => 'index'
+  map.feedback 'feedback', :controller => 'user_reports'
+  map.resources :features, :sessions, :comments, :user_reports, :updates
+    
   # RESTFUL WORKAROUND FOR FACEBOOK
   map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
   map.resources 'facebook', :controller => 'facebook_accounts', 
@@ -16,8 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.search 'search', :controller => 'search', :action => 'index'
   map.search_query 'search/:query', :controller => 'search', :action => 'index'
-  map.resources :updates
-
+  
   map.logged_exceptions 'logged_exceptions/:action/:id',    :controller => 'logged_exceptions'
    
   # You can have the root of your site routed by hooking up '' 

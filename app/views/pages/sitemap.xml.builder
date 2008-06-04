@@ -14,7 +14,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
       xml.priority 0.8
     end
   end
-  ['users', 'updates','user_reports','stats', 'radio/latest', 'radio/favorites', 'top/40','features'].each do |static|
+  ['users', 'blog','feedback','stats', 'radio/latest', 'radio/favorites', 'top/40','features'].each do |static|
     xml.url do
       xml.loc "http://alonetone.com/#{static}"
       xml.lastmod w3c_date(Time.now)

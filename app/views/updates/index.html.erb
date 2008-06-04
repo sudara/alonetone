@@ -2,7 +2,7 @@
   <% content_for :pagination do %>
     <%= will_paginate @updates %>
   <% end %>
-  <h1>Latest grunts from the offices of alonetone</h1>
+  <h1>The alonetone blog: Latest news &amp; grunts from the offices of alonetone</h1>
   <%= link_to 'New update', new_update_path, :class => 'add button' if admin? %>
 
   <%= render :partial => @updates %>

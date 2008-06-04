@@ -2,12 +2,19 @@
   <div class="update_title_bar">
       <%= image_tag User.find(:first).avatar(:small) %>
       <div class="title">
-        <h2 class="box_title"><%= "revision #{update.revision}:" if update.revision %> <%= update.title%></h2>
+        <h2 class="box_title"><%= link_to update.title, update_path(update.permalink)%></h2>
       </div>
       <div class="edit"><%= link_to 'edit', edit_update_path(update) if admin? %></div>
       <span class="about_details"><%= update.created_at.to_date.to_s(:long)%></span>
   </div>
 
   <div class="body"><div class="text"><%= update.print %></div></div>
+  <div class="indented_comments">
+    <h2 class="box small">Your Comments</h2>
+    <%= render :partial => 'shared/comment', :collection => update.comments %>
+    <div class="static_content">
+    <%= render :partial => 'comment', :object => update %>
+    </div>
+  </div>
 <% end %>
 

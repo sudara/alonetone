@@ -7,12 +7,15 @@ class CommentsController < ApplicationController
       wants.js do
         return head(:bad_request) unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?                                  
         case params[:comment][:commentable_type] 
-          when 'asset'
-            find_asset
-            @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
-          when 'feature'
-            @feature = Feature.find(params[:comment][:commentable_id])
-            @comment = @feature.comments.build(shared_attributes)
+        when 'asset'
+          find_asset
+          @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
+        when 'feature'
+          @feature = Feature.find(params[:comment][:commentable_id])
+          @comment = @feature.comments.build(shared_attributes)
+        when 'update'
+          @update = Update.find(params[:comment][:commentable_id])
+          @comment = @update.comments.build(shared_attributesrespond_to do |wants|
         end
         @comment.env = request.env
         return head(:bad_request) unless @comment.save
@@ -20,8 +23,7 @@ class CommentsController < ApplicationController
         render :nothing => true
       end
     end
-  end
-  
+  end  
   
   def destroy
     @comment = Comment.find(params[:id], :include => [:commenter, :user])
