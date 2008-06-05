@@ -1,13 +1,26 @@
-<% if params[:source] == 'latest' %>
-    <h1><%= @page_title %></h1>
-    <% content_for :left do %>
-        <%= render :partial => 'assets/asset', :collection => @assets if @assets%>
+<h1><%= @page_title %></h1>
+<% content_for :left do %>
+    <div class="box">
+    <% if params[:source]=='favorites' %>
+        <%= render :partial => 'shared/favorite', :collection => @assets %>
+    <% else %>
+        <%= render :partial => 'assets/asset', :collection => @assets  %>
     <% end %>
-<% elsif params[:source] == 'favorites'%>
-    <h1><%= @page_title %></h1>
-    <% content_for :left do %>
-    <%= render :partial => 'shared/favorite', :collection => @favorites if @favorites %>
-    <% end %>
-<% else %>
-<h1>Wait, who said anything about a radio?</h1>
+    </div>
 <% end %>
+<% content_for :right do %>
+    <div id="radio_options" class='box'>
+    <h2 class='box'>Choose a radio flavor, dear friend</h2>
+    <div class="static_content">
+        <form id="radio_form">
+        <%= radio_button_tag 'source', 'popular', params[:source] == 'popular' %> Currently kicking ass <br/>
+        <%= radio_button_tag 'source', 'latest', ((params[:source] == 'latest') || (params[:source] == nil)) %> Latest <br/>
+        <%= radio_button_tag 'source', 'mangoz_shuffle', params[:source] == 'mangoz_shuffle' %> The 'Mangoz' shuffle (random) <br/>
+        <%= radio_button_tag 'source', 'songs_you_have_not_heard', params[:source] == 'songs_you_have_not_heard', :disabled => !logged_in? %> Songs you haven't heard <%= login_link %> <br/>
+        <%= radio_button_tag 'source', 'your_favorite_alonetoners', params[:source] == 'your_favorite_alonetoners', :disabled => !logged_in? %> Your favorite alonetoners <%= login_link %><br/>
+        <%= radio_button_tag 'source', 'favorites', params[:source] == 'favorites' %> Recently favorited <br/>
+        <%= radio_button_tag 'source', 'most_favorited', params[:source] == 'most_favorited' %> Most favorited <br/>
+        </form>
+    </div>
+    </div>
+<% end%>

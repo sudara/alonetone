@@ -17,9 +17,6 @@ ActionController::Routing::Routes.draw do |map|
   map.about 'about/:action', :controller => 'pages'
   map.halp  'about/halp/:action', :controller => 'pages'
   
-  map.search 'search', :controller => 'search', :action => 'index'
-  map.search_query 'search/:query', :controller => 'search', :action => 'index'
-  
   map.logged_exceptions 'logged_exceptions/:action/:id',    :controller => 'logged_exceptions'
    
   # You can have the root of your site routed by hooking up '' 
@@ -40,7 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   map.latest '/latest/:latest', :controller => 'assets', :action => 'latest'
   
   map.radio 'radio/:source/:per_page/:page', :controller => 'assets', :action => 'radio', 
-    :source=> 'popular',:per_page =>40, :defaults => {:page=>1}
+     :defaults => {:page=>1, :source=> 'popular',:per_page => 20 }
   
   # top 40
   map.top '/top/:top', :controller => 'assets', :action => 'top'
@@ -70,7 +67,8 @@ ActionController::Routing::Routes.draw do |map|
      playlist.resources :comments
    end
   end
-  
+  map.search 'search', :controller => 'search', :action => 'index'
+  map.search_query 'search/:query', :controller => 'search', :action => 'index'
   map.namespace(:admin) do |admin|
     admin.resources :layouts
     admin.resources :users

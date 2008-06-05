@@ -95,5 +95,9 @@ module ApplicationHelper
       :class => 'hide_notice' if logged_in?
   end
   
+  def login_link
+    logged_in? ? '' : (link_to '(login for this option)', login_path)
+  end
+  
   protected 
 end

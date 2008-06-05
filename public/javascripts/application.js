@@ -326,7 +326,7 @@ AdjustableTextarea = $.klass({
 Tabbies = $.klass({
   initialize : function(desiredTab){
     this.defaultTab = 0;
-    this.element.tabs({ fx: [null,{ height: 'toggle',duration: 300,easing:'easeOut'}, ], selected: (desiredTab || this.defaultTab) });
+    this.element.tabs({selected: (desiredTab || this.defaultTab) });
     this.currentTab = 0;
   },
   openTab : function(desiredTab){
@@ -634,6 +634,13 @@ jQuery(function($) {
         $('#sort_playlists').sortable('serialize'));
       }
     });
+    
+  // radio selector  
+  $('#radio_options form').change(function(){
+      source = $(':checked',this).val();
+      window.location = '/radio/'+source;
+  });
+  
     
   // features comment form
   $('.comment_form form').attach(CommentForm);

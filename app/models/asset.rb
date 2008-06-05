@@ -1,6 +1,6 @@
 class Asset < ActiveRecord::Base
   
-  concerned_with :uploading, :statistics
+  concerned_with :uploading, :radio, :statistics
   
   named_scope :descriptionless, {:conditions => 'description = "" OR description IS NULL', :order => 'created_at DESC', :limit => 10}
   named_scope :recent, {:include => :user, :order => 'assets.created_at DESC'}
@@ -42,19 +42,18 @@ class Asset < ActiveRecord::Base
     "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
     }.join(" OR ") 
   end
-
-
   
   # needed in case we've got multiple assets on the same page
   def unique_id
     object_id
   end
   
+  # make sure the title is there, and if not, the filename is used...
   def name
-    # make sure the title is there, and if not, the filename is used...
     (title && !title.strip.blank?) ? title.strip : clean_filename
   end
   
+  # otherwise permalink gets 'stuck' on edit
   def clean_permalink
     self.permalink = nil
   end

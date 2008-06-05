@@ -40,6 +40,14 @@ class User < ActiveRecord::Base
                   :bio, :display_name, :itunes, :settings, :city, :country
   
   before_create :make_first_user_admin, :make_activation_code
+  
+  def listened_to_today_ids
+    self.listens.find(:all, :select => 'listens.asset_id', :conditions => ['listens.created_at > ?', 1.day.ago]).collect(&:asset_id)
+  end
+  
+  def listened_to_ids
+    self.listens.find(:all, :select => 'listens.asset_id').collect{|l| l.asset_id}.uniq
+  end
     
   def to_param
     "#{self.login}"

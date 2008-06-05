@@ -20,7 +20,6 @@ class User
     User.find(most_listened_to_user_ids(10), :include => :pic)
   end
   
-  protected
   def most_listened_to_user_ids(limit = 10)
     self.listens.count(:track_owner, :group => 'track_owner_id', 
       :order => 'count_track_owner DESC', 

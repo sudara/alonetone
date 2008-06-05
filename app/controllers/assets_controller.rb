@@ -1,12 +1,12 @@
 class AssetsController < ApplicationController  
-  before_filter :find_user
+  before_filter :find_user, :except => [:radio]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy]
   
   # we check to see if the current_user is authorized based on the asset.user
-  before_filter :login_required, :except => [:index, :show, :latest]
+  before_filter :login_required, :except => [:index, :show, :latest, :radio]
   before_filter :find_referer, :only => :show
   
-  rescue_from NoMethodError, :with => :user_not_found
+  #rescue_from NoMethodError, :with => :user_not_found
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
   @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes']
@@ -78,15 +78,8 @@ class AssetsController < ApplicationController
   end
   
   def radio
-    # TODO: remove fugliness into model
-    @per_page = (params[:per_page] && params[:per_page].to_i < 50) ? params[:per_page] : 5
-    case params[:source]
-    when 'latest'
-      @assets = Asset.recent.paginate(:all, :per_page => @per_page, :page => params[:page])
-    when 'favorites'
-      @favorites = Track.favorites.paginate(:all, :per_page => @per_page, :page => params[:page])
-    end
-    @page_title = "#{params[:source]} #{@per_page} mp3s on alonetone" if params[:source] == 'latest' || 'favorites'
+    @page_title = "alonetone radio: #{params[:source].humanize}" 
+    @assets = Asset.radio_for(params, current_user)
   end
   
   def top

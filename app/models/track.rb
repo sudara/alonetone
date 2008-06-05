@@ -23,6 +23,12 @@ class Track < ActiveRecord::Base
   
   validates_presence_of :asset_id, :playlist_id
   
+  def self.most_favorited(limit=10, offset=0)
+    self.count(:all,
+        :conditions => ['tracks.is_favorite = ?', true],
+        :group => 'asset_id', :order => 'count_all DESC', :limit => limit, :offset => offset).collect(&:first)
+  end
+  
   # allow us to pretend that the track has info by forwarding to the asset
   [:length, :name].each do |attribute|
     define_method("#{attribute}?") { self.track.send("#{attribute}") }
