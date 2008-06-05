@@ -1,11 +1,11 @@
 <div class="sidebar">
-    <div class="box faq"> 
-        <h2>Recent News</h2>
+    <div class="box"> 
+        <h2 class="box static">Recent Grunts</h2>
         <div class="static_content">
             <ul>
-                <% for update in @recent_updates %>
-                    <li><%= link_to update.title, update_path(update.permalink) %>
-                <% end %>
+            <% for update in @recent_updates %>
+                <li><%= link_to update.title, update_path(update.permalink) %></li>
+            <% end %>
             </ul>
         </div>
     </div>

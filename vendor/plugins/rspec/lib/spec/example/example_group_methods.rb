@@ -119,8 +119,8 @@ module Spec
 
       def run
         examples = examples_to_run
-        return true if examples.empty?
         reporter.add_example_group(self)
+        return true if examples.empty?
         return dry_run(examples) if dry_run?
 
         plugin_mock_framework
@@ -395,6 +395,7 @@ module Spec
         case scope
         when :each; before_each_parts
         when :all; before_all_parts
+        when :suite; rspec_options.before_suite_parts
         end
       end
 
@@ -402,6 +403,7 @@ module Spec
         case scope
         when :each; after_each_parts
         when :all; after_all_parts
+        when :suite; rspec_options.after_suite_parts
         end
       end
 

@@ -88,6 +88,11 @@ module Spec
         step.matches?("before () after").should be_true
       end
       
+      it "should not get bogged down by regular expression special characters in strings" do
+        step = Step.new("These characters should work ? ( ) [ ] { } ^ !") {}
+        step.matches?("These characters should work ? ( ) [ ] { } ^ !").should be_true
+      end
+      
       it "should match any option of an alteration" do
         step = Step.new(/(he|she) is cool/) {}
         step.matches?("he is cool").should be_true
@@ -121,13 +126,39 @@ module Spec
         step = Step.new(/show me the \$$money/) {}
         step.matches?("show me the $123").should be_true
       end
+      
+      it "should match a multiline regex" do
+        step = Step.new(/.* should have text.$text/) {}
+        step.matches?(<<TEXT).should be_true
+          should have text
+          this is the text
+          and so is this
+TEXT
+      end
+      
+      it "should match the beginning of the string, not the line" do
+        step = Step.new(/should have text/) {}
+        step.matches?(<<TEXT).should be_false
+whatever
+should have text
+TEXT
+      end
+
+      it "should match the end of the string, not the line" do
+        step = Step.new(/should have text/) {}
+        step.matches?(<<TEXT).should be_false
+should have text
+whatever
+TEXT
+      end
     end
     
     describe Step do
-      it "should make complain with no block" do
+      it "should be pending with no block" do
+        step = Step.new("foo")
         lambda {
-          step = Step.new("foo")
-        }.should raise_error
+          step.perform(Object.new)
+        }.should raise_error(Spec::Example::ExamplePendingError, "Not Yet Implemented")
       end
       
       it "should perform itself on an object" do

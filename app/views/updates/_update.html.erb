@@ -8,12 +8,14 @@
       <span class="about_details"><%= update.created_at.to_date.to_s(:long)%></span>
   </div>
 
-  <div class="body"><div class="text"><%= update.print %></div></div>
+  <div class="body"><div class="text">
+    <%= update.print %>  
+  </div></div>
   <div class="indented_comments">
     <h2 class="box small">Your Comments</h2>
     <%= render :partial => 'shared/comment', :collection => update.comments %>
     <div class="static_content">
-    <%= render :partial => 'comment', :object => update %>
+        <%= render :partial => 'comment', :object => update %>
     </div>
   </div>
 <% end %>

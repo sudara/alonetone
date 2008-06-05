@@ -161,7 +161,6 @@
   .comment_body, .body
     :background-color = !box_background
     :padding 10px 20px 30px 20px
-    :clear both
     :margin-bottom 3px
     a
       :color = !text_color
@@ -340,7 +339,15 @@
     :list-style none
     li
       :list-style none
-      :margin 0
+      :list-style-position outside
+      :margin 0px 0px 13px 3px  
+      :font-weight normal
+      :font-size 12px
+      :line-height 14px
+      a, a:visited
+        :font-weight normal
+        :font-size 12px
+        :line-height 14px
 
 #alonetoner_big
   :margin-bottom 40px

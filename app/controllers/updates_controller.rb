@@ -5,7 +5,7 @@ class UpdatesController < ApplicationController
   def index
     @updates = Update.paginate(:all, :order => 'created_at DESC', :per_page => 5, :page => params[:page], :include => [:comments => [:commenter => :pic]])
     @page_title = "Latest News and Updates"
-    @recent_updates = Update.find(:all, :limit => 10)
+    @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @updates }
@@ -18,7 +18,7 @@ class UpdatesController < ApplicationController
     @update = Update.find_by_permalink(params[:id])
     @comments = @update.comments.find(:all, :include => :commenter)
     @page_title = @update.title
-    @recent_updates = Update.find(:all, :limit => 10)
+    @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @update }

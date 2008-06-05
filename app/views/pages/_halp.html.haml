@@ -9,7 +9,7 @@
       = user_nav_item "How do I?...", {:controller => 'pages', :action => 'howto' } 
       = user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact'
       = user_nav_item "Feedback", feedback_path, :added_class => 'contact'
-      = user_nav_item "Blog",blog_path, :added_class => 'contact'
+      = user_nav_item "Latest News", updates_path, :added_class => 'contact'
     = yield :pagination
 - content_for :static do
   = yield
