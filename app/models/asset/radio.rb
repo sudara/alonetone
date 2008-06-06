@@ -24,7 +24,7 @@ class Asset
   
   # random radio, without playing the same track twice in a 24 hour period
   def self.mangoz(user, pagination_options)
-    conditions = user == :false ? nil : ["assets.id NOT IN (?) ",user.listened_to_today_ids]
+    conditions = (user && user.listens.size > 10) ? ["assets.id NOT IN (?) ",user.listened_to_today_ids] : nil
     Asset.paginate(:all, {:conditions => conditions, :order => 'RAND()'}.merge(pagination_options))
   end
   
@@ -37,7 +37,7 @@ class Asset
   
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
   def self.not_heard_by(user, limit)
-    conditions = user == :false ? nil : ["assets.id NOT IN (?) ",user.listened_to_ids]
+    conditions = (user && user.listens.size > 10 ) ? ["assets.id NOT IN (?) ",user.listened_to_ids] : nil
     Asset.find(:all, :conditions => conditions, :order => 'created_at DESC', :limit => limit)
   end
   

@@ -22,7 +22,7 @@ class User
       when :album then 'no-pic-200.png'
       when :large then 'no-pic-125.png'
       when :small then 'no-pic-50.png'
-      when :tiny then 'no-pic-25.png'
+      when :tiny then 'icons/user.png'
       when nil then 'no-pic-200.jpg' 
     end
   end

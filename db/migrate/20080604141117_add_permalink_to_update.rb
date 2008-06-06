@@ -1,5 +1,6 @@
 class AddPermalinkToUpdate < ActiveRecord::Migration
-  def self.up    
+  def self.up
+    add_column :updates, :permalink, :string   
     Update.all.each do |update|
       # generate the permalink
       update.save
