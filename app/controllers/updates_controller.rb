@@ -16,7 +16,7 @@ class UpdatesController < ApplicationController
   # GET /updates/1.xml
   def show
     @update = Update.find_by_permalink(params[:id])
-    @comments = @update.comments.find(:all, :include => :commenter)
+    @comments = @update.comments.public.find(:all, :include => :commenter)
     @page_title = @update.title
     @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
     respond_to do |format|

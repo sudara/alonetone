@@ -6,6 +6,8 @@ class Update < ActiveRecord::Base
   has_permalink :title
   before_save :create_unique_permalink
   
+  acts_as_defensio_article
+  
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
   
   def print
