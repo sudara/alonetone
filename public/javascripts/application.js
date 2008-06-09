@@ -641,9 +641,9 @@ jQuery(function($) {
       window.location = '/radio/'+source;
   });
   
-    
-  // features comment form
-  $('.comment_form form').attach(CommentForm);
+  // features/blog comment form
+  $('#bug_form .comment_form form').attach(CommentForm);
+  $('.comment .comment_form form').attach(CommentForm);
   
   // facebox  
   $('a[rel*=facebox]').facebox();
