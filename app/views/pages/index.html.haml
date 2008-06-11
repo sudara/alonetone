@@ -6,19 +6,17 @@
       Alonetone provides free and unlimited mp3 hosting and distribution for musicians. 
       %br 
       %br
-      In English: If you make music and you own the rights to it (didn't sell your soul),
+      If you make music and you own the rights to it,
       this site is something you should know about. Go 
       =link_to 'sign up!', signup_path
-      and see if it can help you out.
-    
   .faq.box
     %h2.box.static
       Is this a website for musicians?
     .static_content
-      No, it is a website to connect listeners and musicians. We work our butt off to give musicians the tools they need to distribute their music on their own.
+      Yes, it is a website to connect listeners and musicians. We work our butt off to give musicians the tools they need to distribute their music.
       %br
       %br
-      If you love music but don't make it yourself, great. There are tons of gems on this site, and a lot of talent. Hang out with us, listen a while. Heck, signup and make playlists of your favorite tunes if you are so excited!
+      If you love music but don't make it, great. There are tons of musical gems on this site, and a lot of talent. Hang out with us, listen a while. Talk with us. Favorite the tracks you love.
   .faq.box  
     %h2.box.static
       Can I upload my mp3s here?
@@ -95,43 +93,29 @@
       %br
       Anywho, nothing to lose, so stop reading, take 45 seconds and
       =link_to 'sign up.', signup_path
-  .faq.box    
-    %h2.box.static
-      I want to upload this Britney Spears track for my friend.
-    .static_content
-      Cool. Do it. Over email. Or use another service. But not here! 
-      %br We're on your side, but this is the wrong venue. We're small time normal human being musicians, 
-      %br and running into copyright issues and having to delete tracks and accounts is not something we want to handle.
   .faq.box  
     %h2.box.static
       Isn't this costing you money? Are you bad at business?
     .static_content
-      There are some costs, primarily the storage costs. If the site grows much larger, they will be significant,
-      but not unmanageable.
+      There are some costs, primarily the storage costs. If the site grows much larger, they will be significant, but not unmanageable.
       %br
       %br
-      I pay these out of pocket for a few reasons: I want to promote independent music and display the wonderful amazing fact
-      that the music distribution model has changed. I mean, one average person can singlehandedly float thousands of musicians and tens of thousands
-      of mp3s and hundreds of thousands of downloads. Incredible - it points to crazy amazing future world of music. Oh yeah,
-      and with current industry turbulence, I want to make sure the average kid and professional has access to free distribution.
+      I pay these out of pocket for a few reasons: I want to promote independent music and display the wonderful amazing fact that the music distribution model has changed. I mean, one average person can singlehandedly float hundreds of musicians, thousands of mp3s and hundreds of thousands of downloads. Incredible - it points to pretty crazy and amazing future world of music. Oh yeah, and with current industry turbulence, I want to make sure the average kid and professional has access to free distribution.
   .faq.box   
     %h2.box.static
       What if the site explodes in popularity?
     .static_content
-      In the event that the I can no longer afford to singlehandedly keep alonetone up, the popularity of the site and the sheer volume of 
-      users needed to produce the cost would likely ensure that it would be kept afloat by other like-minded do good-ers.
+      In the event that the I can no longer afford to singlehandedly keep alonetone up, the popularity of the site and the sheer volume of users needed to produce the cost would likely ensure that it would be kept afloat by other like-minded do good-ers.
       %br
       %br
-      I have no current intention to pollute the site with advertising
-      or treat the musicians on the site so poorly as to earn a living off of their music before they do. 
+      I have no current intention to pollute the site with advertising.
   .faq.box    
     %h2.box.static
       How is the site built?
     .static_content
       With love. 
       %br
-      %br And Ruby. And Rails. And the help of 1000s of Open Source programmers 
-      %br who have made various pieces of this site without even knowing it themselves. 
+      %br And Ruby. And Rails. And the help of 1000s of Open Source programmers who have made various pieces of this site without even knowing it themselves. 
   .faq.box    
     %h2.box.static
       No, I'm a programmer, dummy. Gimme the specs!
@@ -141,7 +125,7 @@
       %br We use 
       =link_to 'Attachment_fu', 'http://svn.techno-weenie.net/projects/plugins/attachment_fu/'
       =link_to 'Amazon S3 for mp3 hosting', 'http://aws.amazon.com'
-      SASS, will_paginate, rspec, jquery, low pro. Sound is done with Sound Manager 2
+      SASS, will_paginate, rspec, jquery, low pro. Sound is done with Sound Manager 2.
   .faq.box
     %h2.box.static
       Is the code open source?
@@ -151,4 +135,4 @@
       and you can 
       =link_to 'browse the latest release here', 'http://github.com/sudara/alonetone/tree/master'
       We are looking for development help, so go ahead and email me if you are interested.
-    
+= render :partial => 'sidebar'

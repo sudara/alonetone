@@ -1,6 +1,6 @@
 class Feature < ActiveRecord::Base
 
-  named_scope :published, {:conditions => {:published => true}, :include => [[:featured_user => :pic], [:writer => :pic]]}
+  named_scope :published, {:conditions => {:published => true}, :order => 'created_at DESC', :include => [[:featured_user => :pic], [:writer => :pic]]}
   named_scope :all, {:include => [[:featured_user => :pic], [:writer => :pic]]}
 
   has_many :featured_tracks, :include => :asset, :order => 'featured_tracks.position'
@@ -48,7 +48,7 @@ class Feature < ActiveRecord::Base
     self.permalink = User.find(self.featured_user_id).login
   end
   
-  def publish
+  def publish!
     update_attributes(:published => true, :published_at => Time.now)
   end
 end

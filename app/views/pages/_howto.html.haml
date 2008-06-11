@@ -2,7 +2,18 @@
   %h2.box.static
     How do I?...
   .static_content
-    
+    %h3
+      The Basics
     %ul
-      %li
-        = link_to 'Get my songs on itunes?', :action => 'itunes'
+      %li  
+        = link_to "Download a song", :action => 'download_a_song'
+      %li          
+        = link_to "Delete a song", :action => 'delete_a_song'
+      %li  
+        = link_to "Change the title of my song", :action => 'edit_a_song'
+    %h3
+      Advanced
+    %ul 
+      %li  
+        = link_to 'Get my music on iTunes?', :action => 'itunes'
+        

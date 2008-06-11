@@ -27,9 +27,16 @@ class CommentsController < ApplicationController
   
   def destroy
     @comment = Comment.find(params[:id], :include => [:commenter, :user])
-    if current_user.admin? || (@comment.user.id == @comment.commentable.user.id)
-      @comment.report_as_false_negative 
-      flash[:ok] = 'We trashed that feedback, yo'
+    if logged_in? && (current_user.admin? || (@comment.user.id == @comment.commentable.user.id))
+      if current_user.id.to_s == @comment.commenter_id.to_s
+        # if the person who made the comment is the person deleting it, just delete it
+        @comment.destroy
+        flash[:ok] = 'We threw away that comment'
+      else
+        # otherwise mark as spam
+        @comment.report_as_false_negative 
+        flash[:ok] = 'We marked that comment as spam'
+      end
     else
       flash[:error] = "Um, sorry, you can't do that"
     end
