@@ -18,14 +18,15 @@ Secondly, please email me at sudara at alonetone dot com.
 
 ### The goal?
 
-To create and run the best online home a musician could want to have, providing them with the tools they need to reach their listeners and network with other artists.
+To create and run the best online home a musician could want to have, providing them with the tools they need to reach their listeners and network with other artists, without the umbrella of a corporation.
 
 How do we reach this goal?
 
-* It is easy to use (grandma-friendly)
-* It is attractive to look at
+* It is easy to use, intuitive, and consistent (grandma-friendly)
+* It is attractive to look at 
 * It provides musicians with practical, useful and inspiring tools and services
 * It provides listeners and first time site visitors with a 'hook' into their first taste of alonetone music and helps them explore the site in an intelligent and guided way.
+* It encourages artist exploration 
 * It does not overwhelm folks with TMI (too much information) or TMO (too many options) or TMF (too many features)
 
 For more info, visit [the alonetone faq](http://alonetone.com/about)
@@ -78,6 +79,7 @@ You'll need some gems, at least:
       rmagick
       haml
       facebooker
+      json
       ruby-mp3info
       mocha (for rspec)
       googlecharts
