@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :topics
+
+  map.resources :forums
+
   
   
   map.blog 'blog', :controller => 'updates', :action => 'index'
