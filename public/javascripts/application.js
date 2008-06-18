@@ -644,6 +644,8 @@ jQuery(function($) {
   // features/blog comment form
   $('#bug_form .comment_form form').attach(CommentForm);
   $('.comment .comment_form form').attach(CommentForm);
+  $('.update .comment_form form').attach(CommentForm);
+  $('.feature .comment_form form').attach(CommentForm);
   
   // facebox  
   $('a[rel*=facebox]').facebox();
