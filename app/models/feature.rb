@@ -12,7 +12,8 @@ class Feature < ActiveRecord::Base
   validates_presence_of :writer, :featured_user
   before_save :create_permalink
   
-  
+  acts_as_defensio_article
+
   def body
     BlueCloth::new(self[:body]).to_html
   end
