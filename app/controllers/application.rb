@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?, :admin?, :last_active
   
   
-  rescue_from ActiveRecord::RecordNotFound, :with => :show_error
-  rescue_from NoMethodError, :with => :show_error
+  #rescue_from ActiveRecord::RecordNotFound, :with => :show_error
+  #rescue_from NoMethodError, :with => :show_error
   rescue_from ActionController::InvalidAuthenticityToken, :with => :show_error
   
   # all errors end up here
