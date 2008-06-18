@@ -21,9 +21,6 @@ class Topic < ActiveRecord::Base
   
   has_many :voices, :through => :posts, :source => :user, :uniq => true
   
-  has_many :monitorships, :dependent => :delete_all
-  has_many :monitoring_users, :through => :monitorships, :source => :user, :conditions => {"#{Monitorship.table_name}.active" => true}
-  
   validates_presence_of :user_id, :forum_id, :title
   validates_presence_of :body, :on => :create
 
@@ -33,6 +30,7 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
+  before_save :create_unique_permalink
 
   def sticky?
     sticky == 1

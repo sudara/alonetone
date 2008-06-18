@@ -1,3 +1,72 @@
+<% render :layout => 'forums' do %>
+    <% content_for :h1 do %> 
+        <%= link_to 'alonetone Forums', forums_path %>  <span class="arrow">&rarr;</span> <%= @forum.name %>
+    <% end %> 
 
-<%= link_to 'Edit', edit_forum_path(@forum) %> |
-<%= link_to 'Back', forums_path %>
+    <% @page_title = 'alonetone forums - ' + @forum.name %>
+
+    <% content_for :extras do %>
+      <%= feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom) %> 
+      <%= pluralize @forum.topics.size, 'topics' %>, 
+      <%= pluralize @forum.posts.size, 'posts' %>
+    <% end %>
+
+    <% if logged_in? %>
+    <p style="float:right; margin-top:0;"><%= link_to 'New topic', new_forum_topic_path(@forum), :class => "button new" %></p>
+    <% end %>
+    
+    <% if @topics.total_pages > 1 -%>
+        <% content_for :pagination do %>
+            <%= pagination @topics %>
+        <% end %>
+    <% end -%>
+
+    <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+    <tr>
+      <th class="la" colspan="2"><%= 'Topic'%></th>
+      <th width="1%"><%= 'Posts'%></th>
+      <th width="1%"><%= 'Views'%></th>
+      <th class="la"><%= 'Last post'%></th>
+    </tr>
+    <% for topic in @topics %>
+    <tr class="hentry">
+      <td style="padding:5px; width:16px;" class="c1">
+        <% 
+        if topic.locked?
+          icon = "lock"
+          post = ", this topic is locked."
+          color = "darkgrey"
+        end
+        %>
+        <% if recent_topic_activity(topic) %>
+        <%= image_tag "forum/unread.png", :class => "icon green", :title => "Recent activity #{post}" %>
+        <% else %>
+          <%= image_tag "forum/read.png", :class => "icon grey", :title => "No recent activity #{post}" %>
+        <% end %>
+      </td>
+      <td class="c2">
+        <%= "Sticky: <strong>" if topic.sticky? %>
+        <%= topic_title_link (topic), :class => "entry-title", :rel => "bookmark" %>
+        <%= "</strong>" if topic.sticky? %>
+        <% if topic.paged? -%>
+        <small><%= link_to 'last'[], forum_topic_path(@forum, topic, :page => topic.last_page) %></small>
+        <% end -%>
+      </td>
+      <td class="ca inv stat"><%= topic.posts.size %></td>
+      <td class="ca inv stat"><%= number_with_delimiter(topic.hits) %></td>
+      <td class="lp">
+        <abbr class="updated" title="<%= topic.last_updated_at.xmlschema %>"><%= (topic.last_updated_at) %></abbr>
+        <span class="author"><strong class="fn"><%=h topic.last_user.name if topic.last_user %></strong></span>
+        <span><%= link_to 'view', forum_topic_path(@forum, topic, :page => topic.last_page, :anchor => "posts-#{topic.last_post_id}") %></span>
+      </td>
+    </tr>
+    <% end %>
+    </table>
+
+    <%= next_page @topics %>
+    <%= pagination @topics %>
+
+    <% if logged_in? %>
+    <p><%= link_to 'New topic', new_forum_topic_path(@forum), :class => "button new" %></p>
+    <% end%>
+<% end %>

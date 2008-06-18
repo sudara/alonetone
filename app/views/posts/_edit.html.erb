@@ -1,0 +1,36 @@
+<div id="edit" class="editbox">
+<div class="container">
+  <% form_for :post, :url => forum_topic_post_path(@post.forum, @post.topic, @post), 
+    :html => { :method => :put, :id => 'edit-form' } do |f| -%>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td rowspan="2" width="70%">
+        <%= f.text_area :body, :rows => 10, :id => "edit_post_body", :tabindex => 1 %>
+      </td>
+      <td valign="top">
+        <%= link_to('delete post'[], forum_topic_post_path(@post.forum, @post.topic, @post, :page => current_page), 
+              :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?"[:delete_post_conf]) %>  
+
+
+        <h5><%= 'Formatting Help'[] %></h5>
+
+        <ul class="help">
+          <li><%= '*bold*'[:formatting_bold] %></li>
+          <li><%= '_italics_'[:formatting_italics] %></li>
+          <li><%= 'bq. <span>(quotes)</span>'[:formatting_blockquote] %></li>
+          <li>"IBM":http://www.ibm.com</li>
+          <li><%= '* or # <span>(lists)</span>'[:formatting_list] %></li>
+        </ul>
+
+      </td>
+    </tr>
+    <tr>
+      <td valign="bottom" style="padding-bottom:15px;">
+        <%= ajax_spinner_for "editbox", "spinner_black.gif" %>
+        <%= submit_tag 'Save Changes'[], :tabindex => 2 %> or <%= link_to('cancel'[], '#', :id => 'edit-cancel') %>
+      </td>
+    </tr>
+  </table>
+  <% end -%>
+</div>
+</div>

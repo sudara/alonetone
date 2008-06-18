@@ -1,0 +1,13 @@
+<div id="static_header">
+  
+    <div class="title">
+      <h1 class="static"><%= yield :h1 %></h1>
+    </div>
+    
+    <div id="links">
+      <%= yield :pagination %>
+      <%= yield :extras %>
+    </div>
+</div>
+  <%= yield %>
+  

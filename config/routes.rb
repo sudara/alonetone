@@ -1,9 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :topics
+  map.resources :posts
 
-  map.resources :forums
-
-  
   
   map.blog 'blog', :controller => 'updates', :action => 'index'
   map.feedback 'feedback', :controller => 'user_reports'
@@ -56,6 +53,16 @@ ActionController::Routing::Routes.draw do |map|
   
   map.hot_track 'hot_track/:position.:format', :controller => 'assets', :action => 'hot_track', :defaults => {:position => 1}, :format => 'mp3'
   map.user_plus ':login/plus', :controller => 'source_files', :action => 'index'
+
+  map.resources :forums, :has_many => :posts do |forum|
+    forum.resources :topics do |topic|
+      topic.resources :posts
+    end
+    forum.resources :posts
+  end
+  
+  map.resources :posts, :collection => {:search => :get}
+
 
   map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any, :toggle_favorite => :any} do |user|
     user.resources :source_files, :path_prefix => ':login'

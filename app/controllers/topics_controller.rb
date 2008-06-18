@@ -1,85 +1,89 @@
 class TopicsController < ApplicationController
-  # GET /topics
-  # GET /topics.xml
+  before_filter :find_forum
+  before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
+
   def index
-    @topics = Topic.find(:all)
-
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @topics }
+      format.html { redirect_to forum_path(@forum) }
+      format.xml  do
+        @topics = find_forum.topics.paginate(:page => current_page)
+        render :xml  => @topics
+      end
     end
   end
+  
+  def edit
+  end
 
-  # GET /topics/1
-  # GET /topics/1.xml
   def show
-    @topic = Topic.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @topic }
+      format.html do
+        if logged_in?
+          update_last_seen_at
+          (session[:topics] ||= {})[@topic.id] = Time.now.utc
+        end
+        
+        @topic.hit! unless logged_in? && @topic.user_id == current_user.id
+        @posts = @topic.posts.paginate :page => current_page
+        @post  = Post.new
+      end
+      format.xml  { render :xml  => @topic }
     end
   end
 
-  # GET /topics/new
-  # GET /topics/new.xml
   def new
     @topic = Topic.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @topic }
+      format.xml  { render :xml  => @topic }
     end
   end
 
-  # GET /topics/1/edit
-  def edit
-    @topic = Topic.find(params[:id])
-  end
-
-  # POST /topics
-  # POST /topics.xml
   def create
-    @topic = Topic.new(params[:topic])
+    @topic = current_user.post @forum, params[:topic]
 
     respond_to do |format|
-      if @topic.save
-        flash[:notice] = 'Topic was successfully created.'
-        format.html { redirect_to(@topic) }
-        format.xml  { render :xml => @topic, :status => :created, :location => @topic }
-      else
+      if @topic.new_record?
         format.html { render :action => "new" }
-        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
+      else
+        flash[:notice] = 'Topic was successfully created.'
+        format.html { redirect_to(forum_topic_path(@forum, @topic)) }
+        format.xml  { render :xml  => @topic, :status => :created, :location => forum_topic_url(@forum, @topic) }
       end
     end
   end
 
-  # PUT /topics/1
-  # PUT /topics/1.xml
   def update
-    @topic = Topic.find(params[:id])
-
+    current_user.revise @topic, params[:topic]
     respond_to do |format|
-      if @topic.update_attributes(params[:topic])
+      if @topic.errors.empty?
         flash[:notice] = 'Topic was successfully updated.'
-        format.html { redirect_to(@topic) }
+        format.html { redirect_to(forum_topic_path(@forum, @topic)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /topics/1
-  # DELETE /topics/1.xml
   def destroy
-    @topic = Topic.find(params[:id])
     @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to(topics_url) }
+      format.html { redirect_to(@forum) }
       format.xml  { head :ok }
     end
+  end
+
+protected
+  def find_forum
+    @forum = Forum.find_by_permalink(params[:forum_id])
+  end
+  
+  def find_topic
+    @topic = @forum.topics.find_by_permalink(params[:id])
   end
 end

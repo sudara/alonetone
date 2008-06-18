@@ -1,11 +1,16 @@
-<h1>New topic</h1>
+<div class="crumbs" xstyle="margin-top:1.1em;">
+  <%= link_to 'Forums', root_path %> <span class="arrow">&rarr;</span>
+  <%= link_to h(@forum.name), forum_path(@forum) %> <span class="arrow">&rarr;</span>
+</div>
 
-<% form_for(@topic) do |f| %>
-  <%= f.error_messages %>
 
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<h1 id="new_topic"><%= 'New Topic' %></h1>
+<p class="subtitle">by <%=  current_user.name %></p>
 
-<%= link_to 'Back', topics_path %>
+
+<%= error_messages_for :topic %>
+<% form_for :topic,
+     :url  => forum_topics_path(@forum) do |f| -%>
+<%= render :partial => "form", :object => f %>
+<%= submit_tag 'Post Topic', :or => link_to('Cancel', forum_path(@forum)) %>
+<% end -%>

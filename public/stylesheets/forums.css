@@ -1,0 +1,10 @@
+table.forums tbody tr th {
+  text-align: left;
+  background-color: #c7c8c7;
+  height: 16px;
+  line-height: 16px;
+  padding-left: 20px; }
+table.forums tbody tr.even {
+  background-color: #deeacd; }
+table.forums tbody tr.odd {
+  background-color: #c1cab3; }

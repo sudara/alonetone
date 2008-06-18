@@ -8,6 +8,7 @@ class Forum < ActiveRecord::Base
   validates_presence_of :name
     
   has_permalink :name
+  before_save :create_unique_permalink
   
   attr_readonly :posts_count, :topics_count
 
@@ -22,9 +23,6 @@ class Forum < ActiveRecord::Base
 
   has_many :posts,       :order => "#{Post.table_name}.created_at DESC", :dependent => :delete_all
   has_one  :recent_post, :order => "#{Post.table_name}.created_at DESC", :class_name => 'Post'
-
-  has_many :moderatorships, :dependent => :delete_all
-  has_many :moderators, :through => :moderatorships, :source => :user
   
   def to_param
     permalink
