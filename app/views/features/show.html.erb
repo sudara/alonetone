@@ -1,4 +1,5 @@
-<h1>alonetone featured artist: <%=h @user.name %></h1>
+<h1>Featured Artist - <%=h @user.name %></h1>
+<h2><%= link_to "view all featured artists", features_path %></h2>
 <% content_for :left do %>
   <% div_for @feature do %>
       <div class="box">
@@ -18,7 +19,7 @@
   <div class="box">
     <h2 class="box">About alonetone Features</h2>
     <div class="static_content">
-    alonetone features musicians who 
+    <%= link_to "alonetone features musicians", features_path %> who 
     give great music away for free, making our home warm and wonderful.
     (Brownie points if they also listen to alonetone compulsively)
     <br/><br/>
