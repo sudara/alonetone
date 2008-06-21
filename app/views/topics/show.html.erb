@@ -1,40 +1,42 @@
-<% content_for :right do -%>
+<% render :layout => 'forums/forums' do %>
+    <% content_for :h1 do %> 
+        <%= @topic.title %>
+        <% if @topic.locked? %>
+            <span>(locked)</span>
+        <% end %>
+    <% end %> 
+    
+    <% content_for :breadcrumbs do %>
+            <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
+            <%= link_to h(@topic.forum.name),forum_path(@topic.forum) %> <span class="arrow">&rarr;</span> 
+            <%= link_to @topic.title, forum_topic_path(@topic, @topic.forum) %>
+             <% page=session[:forum_page] ? session[:forum_page][@topic.forum.id] : nil
+              if page and page!=1 %>
+                  <small style="color:#ccc">
+                  (<%= link_to 'page {page}'[:page, page], forum_path(:id => @topic.forum, :page => page) %>)
+                  </small>
+             <% end %>
+    <% end %>
 
-<h5><%= 'Who is talking:' %></h5>
+    <% @page_title = "#{@topic.title} - #{h @topic.forum.name} - alonetone forums "%>
+
+    <% content_for :pagination do %>
+        <%= will_paginate @posts %>
+    <% end %>
+    
+    <% content_for :extras do %>
+      <%= pluralize @topic.posts.size, 'post' %>, 
+      <%= pluralize @topic.voices.size, 'person' %> talking
+      <%= feed_icon_tag @topic.title, formatted_forum_topic_path(@forum, @topic, :rss) %>
+
+    <% end %>
+<% end %>
+
 <ul class="flat talking">
 <% @topic.voices.each do | user | %>
   <li><%= link_to h(user.display_name), user_path(user) %></li>
 <% end %>
 </ul>
-
-
-<% end # right content -%>
-
-
-<div class="crumbs">
-  <%= link_to "Forums", root_path %> <span class="arrow">&rarr;</span>
-  <%= link_to h(@topic.forum.name), forum_path(@topic.forum) %> 
-  <% page=session[:forum_page] ? session[:forum_page][@topic.forum.id] : nil
-  if page and page!=1 %>
-  <small style="color:#ccc">
-  (<%= link_to 'page {page}'[:page, page], forum_path(:id => @topic.forum, :page => page) %>)
-  </small>
-  <% end %>
-  <span class="arrow">&rarr;</span>
-</div>
-
-  <h1><%= h @topic.title %>
-  <% if @topic.locked? %>
-  <span>(<%= 'locked' %>)</span>
-  <% end %></h1>
-
-<p class="subtitle">
-  <%= feed_icon_tag @topic.title, formatted_forum_topic_path(@forum, @topic, :rss) %>
-  <%= pluralize @topic.posts.size, 'posts' %>, 
-  <%= pluralize @topic.voices.size, 'person' %>
-</p>
-
-<%= pagination @posts %>
 
 <table border="0" cellspacing="0" cellpadding="0" class="posts wide">
 <% @posts.each do |post| -%>

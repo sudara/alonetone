@@ -1,5 +1,90 @@
 @import variables
-table.forums
+
+#breadcrumbs,#extras
+  :float left
+  :font-size 12px
+  :padding 7px  
+  :padding-left 20px
+  :height 1%
+  a
+    :color = !text_color
+    :text-decoration underline
+    :font-size 12px
+    &:hover
+      :color black
+#extras
+  :float right
+  a.rss
+    :display inline-block
+    :line-height 25px
+  
+
+table.forums, table.topics
+  :border-collapse collapse
+  :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+  :font-size 12px
+  :width 100%
+  :color = !text_color
+  p
+    :color = !text_color
+    :margin-bottom 12px
+  a 
+    :color = !text_color
+    :text-decoration underline
+    :font-size 12px
+    &:hover
+      :color black
+  strong
+    :font-weight bold
+  a.tiny
+    :font-size 0.8em
+    :color #666
+  .icon 
+    :margin-top -5px
+  .title, .entry-title
+    :font-size 14px
+    :color = !text_color
+    :text-decoration underline
+  tr
+    th
+      :background #333
+      :color = !text_color
+      :font-size 0.8em
+      :padding 3px 10px
+      :border 1px solid #222
+      :border-color = !body_background
+    td
+      :padding 9px 7px 5px 7px
+      :border 1px solid #ddd
+      :border-color = !body_background
+    th.la
+      :text-align left
+    td.ca 
+      :text-align center
+    td.inv
+      :background #eee
+    td.vat
+      :vertical-align top 
+    td.narrow 
+      :padding 2px 5px
+    td.lp 
+      :font-size 0.85em
+      :color #333
+    td.lp span 
+      :color #666
+    td.lp span a 
+      :color #369
+
+    
+
+#forum_description, #topic_body
+  :width 99%
+
+table.forums, table.topics
+  .posts
+    :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+    :color #666
+    :font-size 0.8em
   tbody
     tr
       th
@@ -7,9 +92,26 @@ table.forums
         :background-color = !playlist_box_silver
         :height 16px
         :line-height 16px
-        :padding-left 20px
     tr
       &.even
         :background-color = !box_background_even
       &.odd
         :background-color = !box_background
+      td.c1
+        :border-right 0
+        :width 21px
+      td.c2
+        :border-width 1px 0 
+        :padding-left 5px 
+      td.c3 
+        :border-left 0
+        :padding-left 5px 
+
+table.topics
+  td.c1
+    :margin-top 0px
+    :vertical-align top
+    .icon 
+  
+      
+    

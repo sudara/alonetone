@@ -1,10 +1,103 @@
-table.forums tbody tr th {
+#breadcrumbs, #extras {
+  float: left;
+  font-size: 12px;
+  padding: 7px;
+  padding-left: 20px;
+  height: 1%; }
+  #breadcrumbs a,   #extras a {
+    color: #37392b;
+    text-decoration: underline;
+    font-size: 12px; }
+    #breadcrumbs a:hover,     #extras a:hover {
+      color: black; }
+
+#extras {
+  float: right; }
+  #extras a.rss {
+    display: inline-block;
+    line-height: 25px; }
+
+table.forums, table.topics {
+  border-collapse: collapse;
+  font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  width: 100%;
+  color: #37392b; }
+  table.forums p,   table.topics p {
+    color: #37392b;
+    margin-bottom: 12px; }
+  table.forums a,   table.topics a {
+    color: #37392b;
+    text-decoration: underline;
+    font-size: 12px; }
+    table.forums a:hover,     table.topics a:hover {
+      color: black; }
+  table.forums strong,   table.topics strong {
+    font-weight: bold; }
+  table.forums a.tiny,   table.topics a.tiny {
+    font-size: 0.8em;
+    color: #666; }
+  table.forums .icon,   table.topics .icon {
+    margin-top: -5px; }
+  table.forums .title, table.forums .entry-title,   table.topics .title, table.topics .entry-title {
+    font-size: 14px;
+    color: #37392b;
+    text-decoration: underline; }
+  table.forums tr th,   table.topics tr th {
+    background: #333;
+    color: #37392b;
+    font-size: 0.8em;
+    padding: 3px 10px;
+    border: 1px solid #222;
+    border-color: #313327; }
+  table.forums tr td,   table.topics tr td {
+    padding: 9px 7px 5px 7px;
+    border: 1px solid #ddd;
+    border-color: #313327; }
+  table.forums tr th.la,   table.topics tr th.la {
+    text-align: left; }
+  table.forums tr td.ca,   table.topics tr td.ca {
+    text-align: center; }
+  table.forums tr td.inv,   table.topics tr td.inv {
+    background: #eee; }
+  table.forums tr td.vat,   table.topics tr td.vat {
+    vertical-align: top; }
+  table.forums tr td.narrow,   table.topics tr td.narrow {
+    padding: 2px 5px; }
+  table.forums tr td.lp,   table.topics tr td.lp {
+    font-size: 0.85em;
+    color: #333; }
+  table.forums tr td.lp span,   table.topics tr td.lp span {
+    color: #666; }
+  table.forums tr td.lp span a,   table.topics tr td.lp span a {
+    color: #369; }
+
+#forum_description, #topic_body {
+  width: 99%; }
+
+table.forums .posts, table.topics .posts {
+  font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
+  color: #666;
+  font-size: 0.8em; }
+table.forums tbody tr th, table.topics tbody tr th {
   text-align: left;
   background-color: #c7c8c7;
   height: 16px;
-  line-height: 16px;
-  padding-left: 20px; }
-table.forums tbody tr.even {
+  line-height: 16px; }
+table.forums tbody tr.even, table.topics tbody tr.even {
   background-color: #deeacd; }
-table.forums tbody tr.odd {
+table.forums tbody tr.odd, table.topics tbody tr.odd {
   background-color: #c1cab3; }
+table.forums tbody tr td.c1, table.topics tbody tr td.c1 {
+  border-right: 0;
+  width: 21px; }
+table.forums tbody tr td.c2, table.topics tbody tr td.c2 {
+  border-width: 1px 0;
+  padding-left: 5px; }
+table.forums tbody tr td.c3, table.topics tbody tr td.c3 {
+  border-left: 0;
+  padding-left: 5px; }
+
+table.topics td.c1 {
+  margin-top: 0px;
+  vertical-align: top; }

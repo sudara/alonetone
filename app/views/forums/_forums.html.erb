@@ -5,8 +5,13 @@
     </div>
     
     <div id="links">
-      <%= yield :pagination %>
-      <%= yield :extras %>
+        <div id="breadcrumbs">
+            <%= yield :breadcrumbs %>
+        </div>
+            <%= yield :pagination %>
+        <div id="extras">
+            <%= yield :extras %>
+        </div>
     </div>
 </div>
   <%= yield %>

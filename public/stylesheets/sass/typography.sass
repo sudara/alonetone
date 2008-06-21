@@ -237,19 +237,30 @@ a.alonetone_plus_link
   :float right
   :margin-top -40px
   :margin-right 65px
+
+.button_wrapper
+  :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
+  :height 30px
+  :font-size 14px
+  :float right
+  :padding-left 10px
+  :padding-right 15px
+  :margin-left 20px
+  :border 1px solid #666
+
 a.button
   &.add, &.new, &.sort
     :background url(../images/icons/new.png) no-repeat left center
+    :color = !text_color
     :float right
-    :height 20px
-    :line-height 20px
-    :text-indent 25px
+    :height 30px
+    :line-height 33px
+    :text-indent 30px
     :display block
-    :width 200px
-    :margin 10px 0
     :font-weight bold  
   &.sort
     :background url(../images/icons/latest.png) no-repeat left center
+    
   &.delete, &.remove
     :position absolute
     :background url(../images/icons/delete.png) no-repeat center top

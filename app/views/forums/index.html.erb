@@ -2,7 +2,9 @@
     <% content_for :h1 do %>alonetone Forums <% end %>
     
     <% if admin? %>
-       <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>
+       <div class="button_wrapper">
+            <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>
+       </div>
     <% end %>
 
     <% content_for :extras do %>
@@ -39,7 +41,7 @@
 
         <td class="inv lp">
           <% if forum.recent_post -%>
-            <%= forum.recent_post.created_at %><br />
+            <%= time_ago_in_words forum.recent_post.created_at %> ago<br />
             <%= "by #{h(forum.recent_post.user.display_name)}" %>
             <span>(<%= link_to 'view', forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
           <% end -%>
