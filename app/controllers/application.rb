@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_latest_update_title
   
   # let ActionView have a taste of our authentication
-  helper_method :current_user, :logged_in?, :admin?, :last_active
+  helper_method :current_user, :logged_in?, :admin?, :last_active, :current_page, :moderator?
   
   
   #rescue_from ActiveRecord::RecordNotFound, :with => :show_error
@@ -33,6 +33,9 @@ class ApplicationController < ActionController::Base
   end
   
   
+  def current_page
+    @page ||= params[:page].blank? ? 1 : params[:page].to_i
+  end
   
   protected
   
@@ -94,6 +97,14 @@ class ApplicationController < ActionController::Base
   end
   
   # authorization tricks
+  
+  def moderator?
+    logged_in? && current_user.moderator?
+  end
+  
+  def admin_required
+    login_required && admin?
+  end
   
   def admin_or_owner(record=current_user)
     admin? || (!%w(destroy admin edit update).include?(action_name) && (params[:login].nil? || params[:login] == record.login))

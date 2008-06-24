@@ -1,0 +1,19 @@
+<% render :layout => 'forums/forums' do %>
+  <% content_for :h1 do %>alonetone forums: Starting a new topic <% end %>
+  <% content_for :breadcrumbs do %>
+  <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
+  <%= link_to h(@forum.name), forum_path(@forum) %> <span class="arrow">&rarr;</span> New Topic
+  <% end %>
+
+    <h1 id="new_topic"><%= 'New Topic' %></h1>
+    <p class="subtitle">by <%=  current_user.name %></p>
+
+
+    <%= error_messages_for :topic %>
+    <% form_for :topic,
+         :url  => forum_topics_path(@forum) do |f| -%>
+    <%= render :partial => "form", :object => f %>
+    <%= submit_tag 'Post Topic', :or => link_to('Cancel', forum_path(@forum)) %>
+    <% end -%>
+
+<% end %>

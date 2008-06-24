@@ -1,0 +1,40 @@
+
+<table border="0" cellspacing="0" cellpadding="0" class="posts wide">
+<% @posts.each do |post| -%>
+    <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
+      <td class="author vcard">
+        <div class="date">
+          <a href="#<%= dom_id post %>" rel="bookmark">
+          <abbr class="updated" title="<%= post.created_at.xmlschema %>">
+          <%= time_ago_in_words(post.created_at) %> ago
+          </abbr>
+          </a>
+        </div>
+
+        <%= image_tag post.user.avatar(:small) %>
+        <span class="fn"><%= link_to truncate(h(post.user.name), 15), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
+        <% if post.user.moderator %>
+        <span class="admin">
+          alonetone moderator
+        </span>
+        <% end %>
+        
+        <span class="posts"><%= pluralize post.user.posts.size, 'post' %></span>
+        <% if post.user.assets_count > 0 %>
+            <span class="posts"><%= link_to (pluralize post.user.assets_count, 'tracks'), user_tracks_path(post.user) %></span>
+        <% end %>
+
+        <% if logged_in? && post.editable_by?(current_user) -%>
+        <p>
+    	    <%= link_to image_tag('icons/edit.png'), edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+        </p>
+        <% end -%>
+
+
+      </td>
+      <td class="body entry-content" id="post-body-<%= post.id %>">
+            <%= post.body_html %>
+      </td>
+    </tr>
+<% end %>
+</table>

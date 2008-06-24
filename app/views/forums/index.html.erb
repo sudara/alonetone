@@ -1,0 +1,56 @@
+<% render :layout => 'forums' do %>
+    <% content_for :h1 do %>alonetone Forums <% end %>
+    
+    <% if admin? %>
+       <div class="button_wrapper">
+            <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>
+       </div>
+    <% end %>
+
+    <% content_for :extras do %>
+        <%# feed_icon_tag "Recent Posts", formatted_posts_path(:format => 'rss') %>
+    <% end %>
+
+    <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
+      <tr>
+        <th class="la" width="70%" colspan="3"><%= 'Forum' %></th>
+        <th class="la" width="30%" colspan="1"><%= 'Last Post'%></th>
+      </tr>
+    <% for forum in @forums do %>  
+      <tr class="<%= cycle 'even', 'odd' %>">
+        <td class="vat c1">
+    
+          <% if recent_forum_activity(forum) %>
+            <%= image_tag "forum/unread.png", :class => "icon green", :title => 'Recent activity' %>
+          <% else %>
+            <%= image_tag "forum/read.png", :class => "icon grey", :title => 'No recent activity' %>
+          <% end %>
+        </td>
+        <td class="c2 vat">
+          <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
+          <div class="posts">
+            <%= pluralize forum.topics.size, 'topic' %>, 
+            <%= pluralize forum.posts.size, 'post' %>
+          </div>
+          <p class="desc"><%= forum.description_html %>
+          </p>
+        </td>
+        <td class="c3">
+          <%= link_to image_tag('icons/edit.png'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
+        </td>
+
+        <td class="inv lp">
+          <% if forum.recent_post -%>
+            <%= time_ago_in_words forum.recent_post.created_at %> ago<br />
+            <%= "by #{h(forum.recent_post.user.display_name)}" %>
+            <span>(<%= link_to 'view', forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
+          <% end -%>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+
+    <p>
+      <%= link_to 'Recent posts', posts_path %>
+    </p>
+<% end %>

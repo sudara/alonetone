@@ -1,0 +1,79 @@
+<% content_for :sidebar do %>
+<ul class="flat talking">
+<% @topic.voices.each do | user | %>
+  <li><%= link_to h(user.display_name), user_path(user) %></li>
+<% end %>
+</ul>
+<% end %>
+
+<% render :layout => 'forums/forums' do %>
+    <% content_for :h1 do %> 
+        <%= @topic.title %>
+        <% if @topic.locked? %>
+            <span>(locked)</span>
+        <% end %>
+    <% end %> 
+    
+    <% content_for :breadcrumbs do %>
+            <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
+            <%= link_to h(@topic.forum.name),forum_path(@topic.forum) %> <span class="arrow">&rarr;</span> 
+            <%= link_to @topic.title, forum_topic_path(@topic, @topic.forum) %>
+             <% page=session[:forum_page] ? session[:forum_page][@topic.forum.id] : nil
+              if page and page!=1 %>
+                  <small style="color:#ccc">
+                  (<%= link_to "page #{page}", forum_path(:id => @topic.forum, :page => page) %>)
+                  </small>
+             <% end %>
+    <% end %>
+
+    <% @page_title = "#{@topic.title} - #{h @topic.forum.name} - alonetone forums "%>
+
+    <% content_for :pagination do %>
+        <%= will_paginate @posts %>
+    <% end %>
+    
+    <% content_for :extras do %>
+      <%= pluralize @topic.posts.size, 'post' %>, 
+      <%= pluralize @topic.voices.size, 'person' %> talking
+      <%# feed_icon_tag @topic.title, formatted_forum_topic_path(@forum, @topic, :rss) %>
+
+    <% end %>
+
+<h2><%= @topic.title %></h2>
+<%= render :partial => 'posts/posts' %>
+
+<div class="bottom_paginator">
+    <%= pagination @posts %>
+</div>
+
+
+<% if logged_in? %>
+<div id="edit"></div>
+<% if @topic.locked? -%>
+<p>
+    <%= image_tag "icons/private.png", :class => "icon grey", :title => "Topic locked" %> 
+    <label>
+    <%= 'This topic is locked (you cannot add a reply)' %></label>
+</p>
+<% else -%>
+
+
+<div id="reply" class="editbox">
+<div class="container static_content">
+    <h3>Go ahead and say something:</h3>
+
+  <% form_for :post, :url => forum_topic_posts_path(@forum, @topic, :page => @topic.last_page) do |f| -%>
+
+        <%= f.text_area :body, :rows => 8, :cols => 40 %>
+        <div class="submit_wrapper">
+       <%= submit_tag "Post Reply" %>
+       </div>
+
+  <% end -%>
+</div>
+</div>
+<% end %>
+<% end %>
+
+
+<% end %>
