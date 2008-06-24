@@ -1,6 +1,10 @@
 <% render :layout => 'forums' do %>
     <% content_for :h1 do %>alonetone Forums <% end %>
     
+    <% content_for :extras do %>
+        <%= topic_count %>, <%= post_count %>
+    <% end %>
+    
     <% if admin? %>
        <div class="button_wrapper">
             <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>

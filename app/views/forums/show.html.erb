@@ -67,9 +67,10 @@
     <% end %>
     </table>
 
-    <%= pagination @topics %>
-
     <div class="button_wrapper">
         <%= link_to 'New topic', new_forum_topic_path(@forum), :class => "button new" %></p>
+    </div>
+    <div class="bottom_paginator">
+    <%= pagination @topics %>
     </div>
 <% end %>

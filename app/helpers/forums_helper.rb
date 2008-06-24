@@ -33,12 +33,14 @@ module ForumsHelper
     return forum.recent_topic.last_updated_at > ((session[:forums] ||= {})[forum.id] || (session[:last_active] ||= Time.now.utc))
   end
 
-  def topic_count(topics)
-    pluralize topics.size, 'topic'
+  def topic_count(topics=nil)
+    count = topics ? topics.size : Topic.count
+    pluralize count, 'topic'
   end
   
-  def post_count(posts)
-    pluralize posts.size, 'post'
+  def post_count(posts=nil)
+    count = posts ? posts.size : Post.count
+    pluralize count, 'post'
   end
   
   # Ripe for optimization

@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.reply @topic, params[:post][:body]
+    @post = current_user.reply @topic, params[:post][:body], request
     @post.env = request.env
     respond_to do |format|
       if @post.new_record?

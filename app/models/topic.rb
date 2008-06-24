@@ -2,7 +2,6 @@ class Topic < ActiveRecord::Base
   include User::Editable
 
   before_validation_on_create :set_default_attributes
-  after_create   :create_initial_post
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
   before_destroy :count_user_posts_for_counter_cache
@@ -65,10 +64,6 @@ class Topic < ActiveRecord::Base
   end
 
 protected
-  def create_initial_post
-    user.reply self, @body unless locked?
-    @body = nil
-  end
   
   def set_default_attributes
     self.sticky          ||= 0

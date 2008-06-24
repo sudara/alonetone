@@ -24,7 +24,7 @@ class ForumsController < ApplicationController
 
     respond_to do |format|
       format.html do # show.html.erb
-        @topics = @forum.topics.paginate :page => current_page
+        @topics = @forum.topics.paginate :page => current_page, :per_page => 5
       end
       format.xml  { render :xml => @forum }
     end

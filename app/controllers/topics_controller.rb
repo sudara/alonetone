@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to forum_path(@forum) }
       format.xml  do
-        @topics = find_forum.topics.paginate(:page => current_page)
+        @topics = find_forum.topics.paginate(:page => current_page, :per_page => 5)
         render :xml  => @topics
       end
     end
@@ -42,8 +42,8 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = current_user.post @forum, params[:topic]
-    @topic.env = request.env
+    @topic = current_user.post @forum, params[:topic], request
+        
     respond_to do |format|
       if @topic.new_record?
         format.html { render :action => "new" }
