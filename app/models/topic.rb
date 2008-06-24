@@ -30,6 +30,8 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
+  acts_as_defensio_comment :fields => { :content => :body, :article => :body, :author => :user }
+  
   before_save :create_unique_permalink
 
   def sticky?

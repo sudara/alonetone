@@ -1,20 +1,12 @@
 module ForumsHelper
  def pagination(collection)
     if collection.total_pages > 1
-      "<p class='pages'>" + 'Pages'[:pages_title] + ": <strong>" + 
-      will_paginate(collection, :inner_window => 10, :next_label => "next"[], :prev_label => "previous"[]) +
-      "</strong></p>"
+      will_paginate(collection)
     end
   end
   
-  def next_page(collection)
-    unless collection.current_page == collection.total_pages or collection.total_pages == 0
-      "<p style='float:right;'>" + link_to("Next page"[], { :page => collection.current_page.next }.merge(params.reject{|k,v| k=="page"})) + "</p>"
-    end
-  end
-
   def search_posts_title
-    returning(params[:q].blank? ? 'Recent Posts'[] : "Searching for"[] + " '#{h params[:q]}'") do |title|
+    returning(params[:q].blank? ? 'Recent Posts': "Searching for" + " '#{h params[:q]}'") do |title|
       title << " "+'by {user}'[:by_user,h(@user.display_name)] if @user
       title << " "+'in {forum}'[:in_forum,h(@forum.name)] if @forum
     end
@@ -52,6 +44,13 @@ module ForumsHelper
   # Ripe for optimization
   def voice_count
     pluralize current_site.topics.to_a.sum { |t| t.voice_count }, 'voice'
+  end
+  
+  def search_posts_title
+    returning(params[:q].blank? ? 'Recent Posts' : "Searching for" + " '#{h params[:q]}'") do |title|
+      title << " by #{h(@user.display_name)}" if @user
+      title << " in #{h(@forum.name)}" if @forum
+    end
   end
 
 end

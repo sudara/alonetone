@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.reply @topic, params[:post][:body]
-
+    @post.env = request.env
     respond_to do |format|
       if @post.new_record?
         format.html { render :action => "new" }
@@ -88,6 +88,10 @@ protected
     end
   end
   
+  def authorized?
+    (!%w(destroy edit update new).include?(action_name)) || (@topic.user_id.to_s == current_user.id.to_s) || moderator?
+  end
+    
   def find_post
     @post = @topic.posts.find(params[:id])
   end

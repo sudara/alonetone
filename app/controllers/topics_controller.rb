@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
         end
         
         @topic.hit! unless logged_in? && @topic.user_id == current_user.id
-        @posts = @topic.posts.paginate :page => current_page
+        @posts = @topic.posts.paginate :page => current_page, :per_page => 10
         @post  = Post.new
       end
       format.xml  { render :xml  => @topic }
@@ -32,6 +32,7 @@ class TopicsController < ApplicationController
   end
 
   def new
+    redirect_to(login_url) and return false unless logged_in?
     @topic = Topic.new
 
     respond_to do |format|
@@ -42,7 +43,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = current_user.post @forum, params[:topic]
-
+    @topic.env = request.env
     respond_to do |format|
       if @topic.new_record?
         format.html { render :action => "new" }
@@ -79,6 +80,12 @@ class TopicsController < ApplicationController
   end
 
 protected
+  def authorized?
+    (!%w(destroy edit update).include?(action_name)) || 
+      (logged_in? && ((@topic.user.id.to_s == current_user.id.to_s) || 
+      (moderator? || admin?)))
+  end
+  
   def find_forum
     @forum = Forum.find_by_permalink(params[:forum_id])
   end

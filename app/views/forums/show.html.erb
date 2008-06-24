@@ -12,7 +12,7 @@
     <% content_for :extras do %>
       <%= pluralize @forum.topics.size, 'topics' %>, 
       <%= pluralize @forum.posts.size, 'posts' %>
-      <%= feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom)%> 
+      <%# feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom)%> 
     <% end %>
 
     <div class="button_wrapper">
@@ -67,7 +67,6 @@
     <% end %>
     </table>
 
-    <%= next_page @topics %>
     <%= pagination @topics %>
 
     <div class="button_wrapper">

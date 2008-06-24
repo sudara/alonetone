@@ -1,3 +1,6 @@
+#forums_layout {
+  width: 650px; }
+
 #breadcrumbs, #extras {
   float: left;
   font-size: 12px;
@@ -21,7 +24,6 @@ table.forums, table.topics {
   border-collapse: collapse;
   font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
   font-size: 12px;
-  width: 100%;
   color: #37392b; }
   table.forums p,   table.topics p {
     color: #37392b;
@@ -40,7 +42,7 @@ table.forums, table.topics {
   table.forums .icon,   table.topics .icon {
     margin-top: -5px; }
   table.forums .title, table.forums .entry-title,   table.topics .title, table.topics .entry-title {
-    font-size: 14px;
+    font-size: 18px;
     color: #37392b;
     text-decoration: underline; }
   table.forums tr th,   table.topics tr th {
@@ -72,6 +74,9 @@ table.forums, table.topics {
   table.forums tr td.lp span a,   table.topics tr td.lp span a {
     color: #369; }
 
+table.wide {
+  width: 100%; }
+
 #forum_description, #topic_body {
   width: 99%; }
 
@@ -101,3 +106,169 @@ table.forums tbody tr td.c3, table.topics tbody tr td.c3 {
 table.topics td.c1 {
   margin-top: 0px;
   vertical-align: top; }
+
+table.posts {
+  border-bottom: 2px solid #eee;
+  border-color: #313327; }
+
+table.posts tr td {
+  border: 0; }
+
+table.posts tr.spacer td {
+  font-size: 1px; }
+
+.post .author .edit a {
+  font-size: 0.7em;
+  color: #666; }
+
+.post .author img {
+  float: left;
+  margin-right: 0.5em; }
+
+.post .author {
+  border-top: 2px solid #eee;
+  background-color: #c1cab3;
+  border-color: #313327;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #333;
+  font-size: 0.9em;
+  min-height: 32px;
+  width: 10em;
+  min-width: 8em;
+  vertical-align: top; }
+
+.post.even .author {
+  background-color: #deeacd; }
+
+.post .author .posts,
+.post .author .admin {
+  display: block;
+  font-size: 0.75em;
+  color: black;
+  color: #666; }
+
+.post .author a {
+  color: #333;
+  text-decoration: none;
+  font-size: 12px; }
+
+.post .author a.threadauthor {
+  color: #080; }
+
+.post .author a:hover {
+  color: #369;
+  text-decoration: underline; }
+
+.post .date {
+  font-size: 0.75em;
+  color: #666;
+  font-weight: normal;
+  margin-bottom: 0.5em; }
+
+.posts .post .body {
+  border-top: 2px solid #eee;
+  border-color: #313327;
+  background-color: #e1e2e1;
+  padding: 10px 20px; }
+  .posts .post .body p {
+    color: #37392b;
+    font-size: 0.9em; }
+
+.posts .post .body blockquote {
+  border: 1px solid #cda;
+  border-left: 3px solid #9a7;
+  border-color: #313327;
+  border-right: 0;
+  background: #efc;
+  padding: 1px 10px;
+  margin-left: 0; }
+
+.posts .post .body pre {
+  font-size: 0.8em;
+  background: #eee;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-left: 3px solid #ddd;
+  border-color: #313327;
+  border-right: 0;
+  overflow: auto;
+  font-family: "Monaco", "Bitstream Vera Sans Mono", "Courier New", serif; }
+
+.posts .post .body a:hover {
+  color: brown; }
+
+.posts .post .body blockquote p {
+  margin: 0.5em 0; }
+
+.post .body p.topic {
+  font-size: 0.8em;
+  font-weight: bold;
+  background: #eee;
+  padding: 2px 10px; }
+
+.post .author .icon {
+  float: right; }
+
+/* reply */ */
+div.editbox {
+  background: url(/images/reply_background.png);
+  border: 2px solid #333;
+  border-color: #313327;
+  border-width: 2px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 6px 0 7px;
+  z-index: 50; }
+
+div.editbox .container {
+  margin: 0 auto; }
+
+div.editbox p {
+  margin: 0.5em 0; }
+
+div.editbox textarea {
+  width: 100%;
+  background: white;
+  opacity: 1;
+  font-size: 0.8em;
+  font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif; }
+
+div.editbox .button_or a {
+  color: #ccc; }
+
+div.editbox table td {
+  border: 0; }
+
+div.editbox a.utility {
+  color: #f99;
+  font-size: 0.65em;
+  padding: 2px 5px 4px;
+  display: block;
+  font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
+  float: right;
+  text-align: right;
+  margin-top: 0.2em; }
+
+div.editbox h5 {
+  background: #222;
+  color: white;
+  padding: 2px 10px 3px;
+  font-size: 0.7em;
+  margin: 0.2em 0 0.5em; }
+
+div.editbox p.help span,
+div.editbox ul.help span {
+  color: #666; }
+
+div.editbox p.help,
+div.editbox ul.help {
+  padding: 3px 10px;
+  font-size: 0.75em;
+  color: #ccc;
+  font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif; }
+
+div.editbox ul.help {
+  margin: 0; }

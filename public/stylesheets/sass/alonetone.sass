@@ -26,13 +26,16 @@
   span.disabled
     :opacity 0.4
 
-.mini_paginator
+.mini_paginator, .bottom_paginator
   :position relative
   :clear both
   :height 32px
   :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
   .pagination
     :float none
+.bottom_paginator
+  :width 600px
+
 // login and logout
 
 #top_bar #login
@@ -221,6 +224,7 @@
   :height 83px
   :margin-bottom 35px
   :width 100%
+  :height 120px
   #alonetoner 
     :position absolute
     :display block

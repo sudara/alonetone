@@ -1,18 +1,27 @@
-<h1>Listing posts</h1>
 
-<table>
-  <tr>
-  </tr>
+<% render :layout => 'forums/forums' do %>
+<% @page_title = search_posts_title -%>
 
-<% for post in @posts %>
-  <tr>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :h1 do %>
+<% if params[:q].blank? -%>
+  <%= @page_title %>
+<% else -%>
+  <%= 'Searching for' %> '<%= h params[:q] %>'
+<% end -%>
 <% end %>
-</table>
 
-<br />
+<% content_for :breadcrumbs do %>
+        <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
+        Recent Posts
+<% end %>
 
-<%= link_to 'New post', new_post_path %>
+<% content_for :extras do %>
+  <%= pluralize @posts.total_entries, 'total post' %>
+<% end %>
+
+<%= pagination @posts %>
+
+<%= render :partial => 'posts/posts' %>
+<% end %>
+
+<%= pagination @posts %>

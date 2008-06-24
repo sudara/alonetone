@@ -1,3 +1,11 @@
+<% content_for :sidebar do %>
+<ul class="flat talking">
+<% @topic.voices.each do | user | %>
+  <li><%= link_to h(user.display_name), user_path(user) %></li>
+<% end %>
+</ul>
+<% end %>
+
 <% render :layout => 'forums/forums' do %>
     <% content_for :h1 do %> 
         <%= @topic.title %>
@@ -13,7 +21,7 @@
              <% page=session[:forum_page] ? session[:forum_page][@topic.forum.id] : nil
               if page and page!=1 %>
                   <small style="color:#ccc">
-                  (<%= link_to 'page {page}'[:page, page], forum_path(:id => @topic.forum, :page => page) %>)
+                  (<%= link_to "page #{page}", forum_path(:id => @topic.forum, :page => page) %>)
                   </small>
              <% end %>
     <% end %>
@@ -27,96 +35,45 @@
     <% content_for :extras do %>
       <%= pluralize @topic.posts.size, 'post' %>, 
       <%= pluralize @topic.voices.size, 'person' %> talking
-      <%= feed_icon_tag @topic.title, formatted_forum_topic_path(@forum, @topic, :rss) %>
+      <%# feed_icon_tag @topic.title, formatted_forum_topic_path(@forum, @topic, :rss) %>
 
     <% end %>
-<% end %>
 
-<ul class="flat talking">
-<% @topic.voices.each do | user | %>
-  <li><%= link_to h(user.display_name), user_path(user) %></li>
-<% end %>
-</ul>
+<h2><%= @topic.title %></h2>
+<%= render :partial => 'posts/posts' %>
 
-<table border="0" cellspacing="0" cellpadding="0" class="posts wide">
-<% @posts.each do |post| -%>
+<div class="bottom_paginator">
+    <%= pagination @posts %>
+</div>
 
-<tr class="post hentry" id="<%= dom_id post %>-row">
-  <td class="author vcard">
-    <div class="date">
-      <a href="#<%= dom_id post %>" rel="bookmark">
-      <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-      <%= (post.created_at) %>
-      </abbr>
-      </a>
-    </div>
-
-    <%= image_tag post.user.avatar(:small) %>
-    <span class="fn"><%= link_to truncate(h(post.user.name), 15), user_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
-    <% if post.user.moderator %>
-    <span class="admin">
-      Alonetone admin
-    </span>
-    <% end %>
-    <span class="posts"><%= pluralize post.user.posts.size, 'post' %></span>
-
-
-    <% if logged_in? && post.editable_by?(current_user) -%>
-    <p>
-	    <%= link_to 'Edit post', edit_forum_topic_post_path(@forum, @topic, post, :page => current_page), :class => 'utility' %>
-    </p>
-    <% end -%>
-
-
-  </td>
-  <td class="body entry-content" id="post-body-<%= post.id %>">
-        <%= post.body_html %>
-  </td>
-</tr>
-
-<% end %>
-</table>
-       
-<%= next_page @posts %>
-<%= pagination @posts %>
 
 <% if logged_in? %>
 <div id="edit"></div>
 <% if @topic.locked? -%>
 <p>
-    <%= image_tag "clearbits/lock.gif", :class => "icon grey", :title => "Topic locked" %> 
+    <%= image_tag "icons/private.png", :class => "icon grey", :title => "Topic locked" %> 
     <label>
-    <%= 'This topic is locked' %>.</label>
+    <%= 'This topic is locked (you cannot add a reply)' %></label>
 </p>
 <% else -%>
 
-<p><%= link_to 'Reply to topic', "#reply", :class => "utility", :id => 'reply-link' %></p>
 
 <div id="reply" class="editbox">
-<div class="container">
-  <% form_for :post, :url => forum_topic_posts_path(@forum, @topic, :page => @topic.last_page) do |f| -%>
-  <table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-      <td rowspan="2" width="70%">
-        <%= f.text_area :body, :rows => 8 %>
-      </td>
-      <td valign="top">
+<div class="container static_content">
+    <h3>Go ahead and say something:</h3>
 
-      </td>
-    </tr>
-    <tr>
-      <td valign="bottom" style="padding-bottom:15px;">
-       <%= submit_tag "Save Reply" %><span class="button_or">or <%= link_to 'cancel', '#', :id => 'reply-cancel' %></span>
-     </td>
-   </tr>
-  </table>
+  <% form_for :post, :url => forum_topic_posts_path(@forum, @topic, :page => @topic.last_page) do |f| -%>
+
+        <%= f.text_area :body, :rows => 8, :cols => 40 %>
+        <div class="submit_wrapper">
+       <%= submit_tag "Post Reply" %>
+       </div>
+
   <% end -%>
 </div>
 </div>
 <% end %>
 <% end %>
 
-<div class="crumbs" style="margin-top:1.1em;">
-  <%= link_to "Forums"[:forums_title], root_path %> <span class="arrow">&rarr;</span>
-  <%= link_to h(@topic.forum.name), forum_path(@topic.forum) %> <span class="arrow">&rarr;</span>
-</div>
+
+<% end %>

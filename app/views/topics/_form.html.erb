@@ -20,7 +20,7 @@
 </p>
 <% end -%>
 
-<% if admin? && !@topic.new_record? && forums = current_site.ordered_forums -%>
+<% if admin? && !@topic.new_record? && forums = Forum.ordered -%>
 	<% if forums.size > 1 -%>
     <p id="topic_forum_id">
       <label for="topic_forum_id"><%= 'Forum' %></label><br />

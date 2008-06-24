@@ -103,5 +103,7 @@ module ApplicationHelper
     (@feed_icons ||= []) << { :url => url, :title => title }
     link_to image_tag('feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url, :class => 'rss'
   end  
+  
+  
   protected 
 end
