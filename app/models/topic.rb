@@ -29,7 +29,7 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
-  acts_as_defensio_comment :fields => { :content => :body, :article => :body, :author => :user }
+  acts_as_defensio_comment :fields => { :content => :body, :article => self, :author => :user }
   
   before_save :create_unique_permalink
 

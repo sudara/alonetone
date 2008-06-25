@@ -43,7 +43,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.reply @topic, params[:post][:body], request
-    @post.env = request.env
     respond_to do |format|
       if @post.new_record?
         format.html { render :action => "new" }
