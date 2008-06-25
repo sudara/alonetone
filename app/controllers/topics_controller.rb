@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to forum_path(@forum) }
       format.xml  do
-        @topics = find_forum.topics.paginate(:page => current_page, :per_page => 5)
+        @topics = find_forum.topics.paginate(:page => current_page, :per_page => 10)
         render :xml  => @topics
       end
     end

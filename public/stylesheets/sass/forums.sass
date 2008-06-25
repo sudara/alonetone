@@ -46,7 +46,7 @@ table.forums, table.topics
     :font-size 0.8em
     :color #666
   .icon 
-    :margin-top -5px
+    :margin-top -2px
   .title, .entry-title
     :font-size 18px
     :color = !text_color
@@ -82,6 +82,8 @@ table.forums, table.topics
     td.lp span a 
       :color #369
 
+table.topics .icon
+  :margin-top -5px
 table.wide
   :width 100%
 
@@ -92,7 +94,7 @@ table.forums, table.topics
   .posts
     :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
     :color #666
-    :font-size 0.8em
+    :font-size 13px
   tbody
     tr
       &.even
@@ -183,8 +185,14 @@ table.posts tr.spacer td
   :padding 10px 20px
   p
     :color = !text_color
-    :font-size 0.9em
-
+    :font-size 14px
+    a, a:visited
+      :color = !text_color
+      :font-weight bold
+      :font-size 14px
+      :text-decoration underline
+      &:hover
+        :color black
 
 .posts .post .body blockquote
   :border 1px solid #cda
@@ -289,6 +297,10 @@ div.editbox ul.help
 div.editbox ul.help  
   :margin 0 
 
-  
-      
+.forum_login
+  :text-align right
+  :margin 30px 0px
+  :color white
+  a
+    :text-decoration underline
     

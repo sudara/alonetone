@@ -26,16 +26,20 @@
   span.disabled
     :opacity 0.4
 
-.mini_paginator, .bottom_paginator
+.mini_paginator, .forum_paginator
   :position relative
   :clear both
   :height 32px
   :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
   .pagination
-    :float none
-.bottom_paginator
-  :margin-top 40px
+    :float left
+    :width 500px
+.forum_paginator
+  :margin-top 3px
   :width 650px
+  .button_wrapper
+    :border none
+    :clear none
 
 // login and logout
 
@@ -223,9 +227,8 @@
 #user_header, #static_header
   :position relative
   :height 83px
-  :margin-bottom 35px
   :width 100%
-  :height 120px
+  :margin-bottom 40px
   #alonetoner 
     :position absolute
     :display block
