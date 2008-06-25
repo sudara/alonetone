@@ -17,7 +17,7 @@
     <% content_for :breadcrumbs do %>
             <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
             <%= link_to h(@topic.forum.name),forum_path(@topic.forum) %> <span class="arrow">&rarr;</span> 
-            <%= link_to @topic.title, forum_topic_path(@topic, @topic.forum) %>
+            <%= link_to @topic.title, forum_topic_path(@topic.forum, @topic) %>
              <% page=session[:forum_page] ? session[:forum_page][@topic.forum.id] : nil
               if page and page!=1 %>
                   <small style="color:#ccc">
