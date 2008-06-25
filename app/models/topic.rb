@@ -29,9 +29,14 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
-  acts_as_defensio_comment :fields => { :content => :body, :article => self, :author => :user }
+  acts_as_defensio_comment :fields => { :content => :body, :article => :article, :author => :user }
   
   before_save :create_unique_permalink
+
+  # hack for defensio
+  def article 
+    self
+  end
 
   def sticky?
     sticky == 1
