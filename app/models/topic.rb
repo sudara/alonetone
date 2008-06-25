@@ -31,7 +31,7 @@ class Topic < ActiveRecord::Base
   has_permalink :title
   acts_as_defensio_comment :fields => { :content => :body, :article => :article, :author => :user }
   
-  before_save :create_unique_permalink
+  before_create :create_unique_permalink
 
   # hack for defensio
   def article 

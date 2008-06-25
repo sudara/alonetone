@@ -5,16 +5,19 @@
         <%= topic_count %>, <%= post_count %>
     <% end %>
     
-    <% if admin? %>
-       <div class="button_wrapper">
-            <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>
-       </div>
-    <% end %>
 
     <% content_for :extras do %>
         <%# feed_icon_tag "Recent Posts", formatted_posts_path(:format => 'rss') %>
     <% end %>
 
+    <% if admin? %>
+       <div class="additional_options_solo" >
+       <div class="button_wrapper" style="margin-top:-32px;">
+            <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>
+       </div>
+       </div>
+    <% end %>
+        
     <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
       <tr>
         <th class="la" width="70%" colspan="3"><%= 'Forum' %></th>

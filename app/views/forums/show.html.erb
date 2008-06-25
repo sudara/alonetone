@@ -15,15 +15,9 @@
       <%# feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom)%> 
     <% end %>
 
-    <div class="button_wrapper">
+    <div class="button_wrapper" style="margin-top:-32px;">
         <%= link_to 'New topic', new_forum_topic_path(@forum), :class => 'button new'%>
     </div>
-    
-    <% if @topics.total_pages > 1 -%>
-        <% content_for :pagination do %>
-            <%= pagination @topics %>
-        <% end %>
-    <% end -%>
 
     <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
     <tr>
@@ -66,11 +60,11 @@
     </tr>
     <% end %>
     </table>
-
     <div class="button_wrapper">
         <%= link_to 'New topic', new_forum_topic_path(@forum), :class => "button new" %></p>
-    </div>
+    </div>    
     <div class="bottom_paginator">
-    <%= pagination @topics %>
+        <%= pagination @topics %>
     </div>
+
 <% end %>

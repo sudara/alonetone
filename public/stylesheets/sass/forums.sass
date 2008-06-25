@@ -1,4 +1,9 @@
 @import variables
+.content, .content p
+  small a, small a:visited
+    :font-size 11px
+  strong a, strong a:visited
+    :font-weight bold
 
 #forums_layout
   :width 650px
@@ -29,14 +34,14 @@ table.forums, table.topics
   p
     :color = !text_color
     :margin-bottom 12px
-  a 
+  a
     :color = !text_color
     :text-decoration underline
     :font-size 12px
     &:hover
       :color black
-  strong
-    :font-weight bold
+    &:visited 
+      :color = !text_color
   a.tiny
     :font-size 0.8em
     :color #666
@@ -46,14 +51,15 @@ table.forums, table.topics
     :font-size 18px
     :color = !text_color
     :text-decoration underline
+  .entry-title
+    :font-size 15px
   tr
     th
-      :background #333
-      :color = !text_color
+      :background-color = !body_background
+      :color white
+      :font-weight bold
       :font-size 0.8em
       :padding 3px 10px
-      :border 1px solid #222
-      :border-color = !body_background
     td
       :padding 9px 7px 5px 7px
       :border 1px solid #ddd
@@ -88,12 +94,6 @@ table.forums, table.topics
     :color #666
     :font-size 0.8em
   tbody
-    tr
-      th
-        :text-align left
-        :background-color = !playlist_box_silver
-        :height 16px
-        :line-height 16px
     tr
       &.even
         :background-color = !box_background_even
