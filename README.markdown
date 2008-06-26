@@ -2,11 +2,9 @@
 
 [alonetone](http://alonetone.com) is a growing independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
 
-alonetone was launched in January 2008 as Sudara's side project.
+alonetone was launched in January 2008
 
 ## alonetone is looking for more love
-
-We are growing and need your help.
 
 Are you a musician / music lover with Rails or UI/design chops? 
 
@@ -85,6 +83,8 @@ You'll need some gems, at least:
       googlecharts
       aws-s3
       rubyzip (for extracting mp3s from zip files)
+      
+You'll need to have rails 2.1 in the vendor directory.      
 
 Then, 
       rake db:migrate
