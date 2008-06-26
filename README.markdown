@@ -6,8 +6,6 @@ alonetone was launched in January 2008 as Sudara's side project.
 
 ## alonetone is looking for more love
 
-We are growing and need your help.
-
 Are you a musician / music lover with Rails or UI/design chops? 
 
 Help us to build the best indy music platform out there.
@@ -85,6 +83,8 @@ You'll need some gems, at least:
       googlecharts
       aws-s3
       rubyzip (for extracting mp3s from zip files)
+      
+You'll need to have rails 2.1 in the vendor directory.      
 
 Then, 
       rake db:migrate
