@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :profile, :statistics
+  concerned_with :validation, :findability, :profile, :statistics, :posting
   
   named_scope :musicians, {:conditions => ['assets_count > ?',0], :order => 'assets_count DESC', :include => :pic}
   named_scope :activated, {:conditions => {:activation_code => nil}, :order => 'created_at DESC', :include => :pic}
@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     options[:except] ||= []
     options[:except] << :email << :token << :token_expires_at << :crypted_password << :identity_url << :fb_user_id << :activation_code << :admin << :salt
     super
+  end
+  
+  def moderator?
+    (self[:moderator] == true)
   end
   
   protected

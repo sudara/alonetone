@@ -26,13 +26,21 @@
   span.disabled
     :opacity 0.4
 
-.mini_paginator
+.mini_paginator, .forum_paginator
   :position relative
   :clear both
   :height 32px
   :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
   .pagination
-    :float none
+    :float left
+    :width 500px
+.forum_paginator
+  :margin-top 3px
+  :width 650px
+  .button_wrapper
+    :border none
+    :clear none
+
 // login and logout
 
 #top_bar #login
@@ -219,8 +227,8 @@
 #user_header, #static_header
   :position relative
   :height 83px
-  :margin-bottom 68px
   :width 100%
+  :margin-bottom 40px
   #alonetoner 
     :position absolute
     :display block
@@ -250,6 +258,7 @@
     :height 32px
     :background transparent url(../images/backgrounds/user_bar.png) repeat-x top left
     :margin-left 84px
+    :line-height 18px
   ul.user_links, ul.links
     :height 32px
     :width 100px
@@ -399,10 +408,14 @@ a.add_to_favorites, a.favorited
 // misc
 
 .additional_options
-  :width 100%
-  :height 50px
+  :float right
+  :margin-top 4px
+
+.additional_options_solo
   :position relative
-  :margin-top -35px
+  :text-align right
+  :margin-bottom 10px
+.additional_options_dock
   
 .visit_us
   h1

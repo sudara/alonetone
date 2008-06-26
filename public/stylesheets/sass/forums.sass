@@ -1,0 +1,306 @@
+@import variables
+.content, .content p
+  small a, small a:visited
+    :font-size 11px
+  strong a, strong a:visited
+    :font-weight bold
+
+#forums_layout
+  :width 650px
+#breadcrumbs,#extras
+  :float left
+  :font-size 12px
+  :padding 7px  
+  :padding-left 20px
+  :height 1%
+  a
+    :color = !text_color
+    :text-decoration underline
+    :font-size 12px
+    &:hover
+      :color black
+#extras
+  :float right
+  a.rss
+    :display inline-block
+    :line-height 25px
+  
+
+table.forums, table.topics
+  :border-collapse collapse
+  :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+  :font-size 12px
+  :color = !text_color
+  p
+    :color = !text_color
+    :margin-bottom 12px
+  a
+    :color = !text_color
+    :text-decoration underline
+    :font-size 12px
+    &:hover
+      :color black
+    &:visited 
+      :color = !text_color
+  a.tiny
+    :font-size 0.8em
+    :color #666
+  .icon 
+    :margin-top -2px
+  .title, .entry-title
+    :font-size 18px
+    :color = !text_color
+    :text-decoration underline
+  .entry-title
+    :font-size 15px
+  tr
+    th
+      :background-color = !body_background
+      :color white
+      :font-weight bold
+      :font-size 0.8em
+      :padding 3px 10px
+    td
+      :padding 9px 7px 5px 7px
+      :border 1px solid #ddd
+      :border-color = !body_background
+    th.la
+      :text-align left
+    td.ca 
+      :text-align center
+    td.inv
+      :background #eee
+    td.vat
+      :vertical-align top 
+    td.narrow 
+      :padding 2px 5px
+    td.lp 
+      :font-size 0.85em
+      :color #333
+    td.lp span 
+      :color #666
+    td.lp span a 
+      :color #369
+
+table.topics .icon
+  :margin-top -5px
+table.wide
+  :width 100%
+
+#forum_description, #topic_body
+  :width 99%
+
+table.forums, table.topics
+  .posts
+    :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+    :color #666
+    :font-size 13px
+  tbody
+    tr
+      &.even
+        :background-color = !box_background_even
+      &.odd
+        :background-color = !box_background
+      td.c1
+        :border-right 0
+        :width 21px
+      td.c2
+        :border-width 1px 0 
+        :padding-left 5px 
+      td.c3 
+        :border-left 0
+        :padding-left 5px 
+
+table.topics
+  td.c1
+    :margin-top 0px
+    :vertical-align top
+    .icon 
+
+table.posts
+  :border-bottom 2px solid #eee
+  :border-color = !body_background
+
+table.posts tr td
+  :border 0
+
+table.posts tr.spacer td
+  :font-size 1px
+
+.post .author .edit a
+  :font-size 0.7em
+  :color #666
+
+.post .author img 
+  :float left 
+  :margin-right 0.5em
+  
+.post .author
+  :border-top 2px solid #eee
+  :background-color = !box_background
+  :border-color = !body_background
+  :padding 5px 10px
+  :font-weight bold
+  :color #333
+  :font-size 0.9em
+  :min-height 32px
+  :width 10em
+  :min-width 8em
+  :vertical-align top
+.post.even .author
+  :background-color = !box_background_even
+  
+
+
+.post .author .posts,
+.post .author .admin
+  :display block
+  :font-size 0.75em
+  :color black
+  :color #666
+
+.post .author a
+  :color #333
+  :text-decoration none
+  :font-size 12px
+
+.post .author a.threadauthor
+  :color #080
+
+.post .author a:hover
+  :color #369
+  :text-decoration underline
+
+
+.post .date
+  :font-size 0.75em
+  :color #666
+  :font-weight normal
+  :margin-bottom 0.5em
+
+.posts .post .body
+  :border-top 2px solid #eee
+  :border-color = !body_background
+  :background-color = !tab_box_silver
+  :padding 10px 20px
+  p
+    :color = !text_color
+    :font-size 14px
+    a, a:visited
+      :color = !text_color
+      :font-weight bold
+      :font-size 14px
+      :text-decoration underline
+      &:hover
+        :color black
+
+.posts .post .body blockquote
+  :border 1px solid #cda
+  :border-left 3px solid #9a7
+  :border-color = !body_background
+  :border-right 0
+  :background #efc
+  :padding 1px 10px
+  :margin-left 0
+
+
+.posts .post .body pre
+  :font-size 0.8em
+  :background #eee
+  :padding 5px 10px
+  :border 1px solid #ccc
+  :border-left 3px solid #ddd
+  :border-color = !body_background
+  :border-right 0
+  :overflow auto
+  :font-family "Monaco", "Bitstream Vera Sans Mono", "Courier New", serif
+
+
+.posts .post .body a:hover  
+  :color brown 
+
+.posts .post .body blockquote p
+  :margin 0.5em 0  
+
+
+.post .body p.topic
+  :font-size 0.8em
+  :font-weight bold
+  :background #eee
+  :padding 2px 10px
+
+.post .author .icon
+  :float right
+
+/* reply */
+
+div.editbox
+  :background url(/images/reply_background.png)
+  :border 2px solid #333
+  :border-color = !body_background
+  :border-width 2px 0
+  :position fixed
+  :bottom 0
+  :left 0
+  :width 100%
+  :padding 6px 0 7px
+  :z-index 50
+
+
+div.editbox .container
+  :margin 0 auto
+
+div.editbox p  
+  :margin 0.5em 0
+div.editbox textarea
+  :width 100%
+  :background white
+  :opacity 1
+  :font-size 0.8em
+  :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+
+div.editbox .button_or a
+  :color #ccc
+
+div.editbox table td  
+  :border 0 
+div.editbox a.utility
+  :color #f99
+  :font-size 0.65em
+  :padding 2px 5px 4px
+  :display block
+  :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+  :float right
+  :text-align right
+  :margin-top 0.2em
+
+
+div.editbox h5
+  :background #222
+  :color white
+  :padding 2px 10px 3px
+  :font-size 0.7em
+  :margin 0.2em 0 0.5em
+
+
+div.editbox p.help span,
+div.editbox ul.help span  
+  :color #666 
+  
+div.editbox p.help,
+div.editbox ul.help
+  :padding 3px 10px
+  :font-size 0.75em
+  :color #ccc
+  :font-family 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+
+div.editbox ul.help  
+  :margin 0 
+
+.forum_login
+  :text-align right
+  :margin 30px 0px
+  :color white
+  a
+    :text-decoration underline
+    

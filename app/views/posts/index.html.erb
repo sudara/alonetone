@@ -1,0 +1,27 @@
+
+<% render :layout => 'forums/forums' do %>
+<% @page_title = search_posts_title -%>
+
+<% content_for :h1 do %>
+<% if params[:q].blank? -%>
+  <%= @page_title %>
+<% else -%>
+  <%= 'Searching for' %> '<%= h params[:q] %>'
+<% end -%>
+<% end %>
+
+<% content_for :breadcrumbs do %>
+        <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
+        Recent Posts
+<% end %>
+
+<% content_for :extras do %>
+  <%= pluralize @posts.total_entries, 'total post' %>
+<% end %>
+
+<%= pagination @posts %>
+
+<%= render :partial => 'posts/posts' %>
+<% end %>
+
+<%= pagination @posts %>

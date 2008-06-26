@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title || 'alonetone, a damn fine home for musicians. Upload mp3s and share your music.' %> - alonetone</title>
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','facebox','alonetone', :cache => 'alonetone-v2'%>
+    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','facebox','alonetone','forums', :cache => 'alonetone-v2'%>
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
         <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
