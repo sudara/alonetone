@@ -2,7 +2,7 @@
 
 [alonetone](http://alonetone.com) is a growing independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
 
-alonetone was launched in January 2008 as Sudara's side project.
+alonetone was launched in January 2008
 
 ## alonetone is looking for more love
 
