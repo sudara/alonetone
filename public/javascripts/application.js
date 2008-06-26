@@ -652,4 +652,6 @@ jQuery(function($) {
 
 });
 
-
+$(document).ready(function() {
+  soundManager.createMovie();
+});
