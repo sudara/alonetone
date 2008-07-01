@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   rescue_from NoMethodError, :with => :user_not_found
 
   def index
-    @page_title = "Musicians and Listeners: #{params[:sort] ? params[:sort].titleize : ''}"
+    @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
     @users = User.paginate_by_params(params) unless params[:sort] == 'map'
     flash[:info] = "Want to see your pretty face show up here?<br/> Edit <a href='#{edit_user_path(current_user)}'>your profile</a>" unless current_user = :false || current_user.has_pic?

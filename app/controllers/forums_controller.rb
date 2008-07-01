@@ -1,5 +1,6 @@
 class ForumsController < ApplicationController
   before_filter :admin_required, :except => [:index, :show]
+  before_filter :set_forum_tab
 
   # GET /forums
   # GET /forums.xml
@@ -8,7 +9,7 @@ class ForumsController < ApplicationController
     session[:forums_page] = nil
 
     @forums = Forum.ordered
-
+    @page_title = 'alonetone Forums'
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @forums }
@@ -90,5 +91,10 @@ class ForumsController < ApplicationController
       format.html { redirect_to(forums_path) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  def set_forum_tab
+    @tab = "forums"
   end
 end

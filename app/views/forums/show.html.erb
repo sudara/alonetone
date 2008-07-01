@@ -7,7 +7,7 @@
             <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> <%= @forum.name %>
     <% end %>
 
-    <% @page_title = 'alonetone forums - ' + @forum.name %>
+    <% @page_title = @forum.name+ ' forum'%>
 
     <% content_for :extras do %>
       <%= pluralize @forum.topics.size, 'topics' %>, 

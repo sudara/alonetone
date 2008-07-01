@@ -23,4 +23,7 @@
 	</li>	
 	
 	<% end %>
+	<li id='forums'>
+		<%= link_to ' ', forums_path, :title => 'browse all artists on alonetone', :class => "tab#{' active' if @tab == 'forums' }" %>
+	</li>
 </ul>

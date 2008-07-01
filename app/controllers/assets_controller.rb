@@ -203,10 +203,9 @@ class AssetsController < ApplicationController
       :track_owner=> @asset.user, 
       :source => @referer, 
       :ip => request.remote_ip) unless bot?
-    logger.warn("BOT LISTEN: "+ request.remote_ip + request.user_agent) if bot?
   end
   
   def bot?
-    @@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil
+    (@@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil) || (request.user_agent.downcase.include?('bot'))
   end
 end
