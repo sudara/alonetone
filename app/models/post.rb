@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   formats_attributes :body
 
   @@per_page = 10
-
+  cattr_accessor :per_page
   # author of post
   belongs_to :user, :counter_cache => true
   
