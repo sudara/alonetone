@@ -79,7 +79,7 @@ class AssetsController < ApplicationController
   
   def radio
     @page_title = "alonetone radio: #{params[:source].humanize}" 
-    @assets = Asset.radio_for(params, current_user)
+    @assets = Asset.radio(params, current_user, session)
   end
   
   def top

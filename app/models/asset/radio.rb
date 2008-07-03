@@ -1,6 +1,6 @@
 class Asset
   
-  def self.radio_for(params, user)
+  def self.radio(params, user, session)
     per_page = (params[:per_page] && params[:per_page].to_i < 50) ? params[:per_page] : 5
     common_options = {:per_page => per_page, :page => params[:page]}
     

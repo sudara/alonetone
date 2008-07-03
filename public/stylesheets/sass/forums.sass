@@ -183,6 +183,7 @@ table.posts tr.spacer td
   :border-color = !body_background
   :background-color = !tab_box_silver
   :padding 10px 20px
+  :overflow none
   p
     :color = !text_color
     :font-size 14px
@@ -193,6 +194,8 @@ table.posts tr.spacer td
       :text-decoration underline
       &:hover
         :color black
+  img
+    :max-width 480px
 
 .posts .post .body blockquote
   :border 1px solid #cda
@@ -303,4 +306,27 @@ div.editbox ul.help
   :color white
   a
     :text-decoration underline
-    
+
+a#formatting_help_link
+  :color = !text_color
+  :font-size 11px
+  :font-weight normal
+  :display block
+  :margin-top -20px
+table#formatting_help
+  :margin-top 20px
+  :margin-left 20px
+  a
+    :color = !text_color
+  tr
+    th,td
+      :vertical-align top
+      :text-align left
+      :font-size 12px
+      :border 1px solid #ccc
+    th
+      :font-weight bold
+      :background-color = !box_background_even
+      :padding-left 10px
+    td
+      :padding 10px
