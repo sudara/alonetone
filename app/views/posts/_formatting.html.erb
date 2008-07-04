@@ -1,0 +1,42 @@
+<h4><%= link_to 'Want crazy formatting?', '#formatting_help_container', :class => 'slide_open_href', :id=>'formatting_help_link' %></h4>
+      <div id="formatting_help_container" style="display:none;">
+      <table id="formatting_help" >
+          <tbody>
+              <tr>
+                  <th>What to type</th>
+                  <th>What you get</th>
+              </tr>
+              <tr>
+                  <td>*make me slanty*</td>
+                  <td><i>make me slanty</i></td>
+              </tr>
+              <tr>
+                  <td>**make me bold**</td>
+                  <td><strong>make me bold</strong></td>
+              </tr>
+              
+              <tr>
+                  <td>
+                      * one little piggy <br/>
+                      * two little piggies <br/>
+                      * three little piggies <br/>   
+                 </td>
+                  <td>
+                      <ul>
+                      <li>one little piggy </li>
+                      <li>two little piggies </li>
+                      <li>three little piggies </li>  
+                      </ul>
+                  </td>
+              </tr>  
+              <tr>
+                  <td>[a link](http://alonetone.com/radio)</td>
+                  <td><%= link_to 'a link', 'http://alonetone.com/radio'%></td>
+              </tr>
+              <tr>
+                  <td>![a photo](http://alonetone.com/images/alonetone.png)</td>
+                  <td><%= image_tag 'http://alonetone.com/images/alonetone16.jpg', :alt => 'a photo'%></td>
+              </tr>                 
+            </tbody>
+        </table>         
+        </div>       
