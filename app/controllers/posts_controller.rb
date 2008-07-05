@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def index
     @posts = (@parent ? @parent.posts : Post).search(params[:q], :page => current_page)
     @users = @user ? {@user.id => @user} : User.index_from(@posts)
+    @page_title = @description = 'Recent Posts in the alonetone forums'
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml  => @posts }
@@ -49,7 +50,7 @@ class PostsController < ApplicationController
         format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
       else
         flash[:notice] = 'Post was successfully created.'
-        format.html { redirect_to(forum_topic_post_path(@forum, @topic, @post, :anchor => dom_id(@post))) }
+        format.html { redirect_to(forum_topic_path(@forum, @topic, :page => @topic.last_page, :anchor => dom_id(@post))) }
         format.xml  { render :xml  => @post, :status => :created, :location => forum_topic_post_url(@forum, @topic, @post) }
       end
     end

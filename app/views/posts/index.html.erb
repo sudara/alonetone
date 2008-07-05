@@ -19,9 +19,13 @@
   <%= pluralize @posts.total_entries, 'total post' %>
 <% end %>
 
-<%= pagination @posts %>
+<div class="forum_paginator">
+    <%= pagination @posts %>
+</div>
 
 <%= render :partial => 'posts/posts' %>
 <% end %>
 
-<%= pagination @posts %>
+<div class="forum_paginator">
+    <%= pagination @posts %>
+</div>

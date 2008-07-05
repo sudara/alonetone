@@ -21,7 +21,8 @@ class PlaylistsController < ApplicationController
       # TODO: fugly array work
       split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
       @playlists_left, @playlists_right = split[0].try(:compact), split[1].try(:compact)
-      @page_title = "#{@user.name}'s albums and playlists"
+      @page_title = @description = "#{@user.name}'s albums and playlists: "
+      @description += @all_playlists.collect(&:title).join(',')
       respond_to do |format|
          format.html # index.html.erb
          format.xml  { render :xml => @playlists }
@@ -47,7 +48,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1
   # GET /playlists/1.xml
   def show
-    @page_title = "\"#{@playlist.title}\" by #{@user.name}"
+    @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
     @single_playlist = true
     respond_to do |format|
       format.html # show.html.erb

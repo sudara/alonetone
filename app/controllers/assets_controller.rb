@@ -60,7 +60,7 @@ class AssetsController < ApplicationController
     respond_to do |wants|
       wants.html do
         @limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
-        @page_title = "Latest #{@limit} uploaded mp3s" if params[:latest]
+        @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
         @assets = Asset.latest(@limit)
         @favorites = Track.favorites.find(:all, :limit => 5)
         @popular = Asset.find(:all, :limit => @limit, :order => 'hotness DESC')

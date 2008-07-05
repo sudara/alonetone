@@ -10,6 +10,8 @@ class ForumsController < ApplicationController
 
     @forums = Forum.ordered
     @page_title = 'alonetone Forums'
+    @description = 'alonetone forums. Discuss making music, free music, the changing music world, and whatever else comes to you'
+    @keywords = 'alonetone, forums, music, discussion, share'
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @forums }

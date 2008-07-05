@@ -27,10 +27,6 @@
     <% end %>
 
     <% @page_title = "#{@topic.title} - alonetone forums "%>
-
-    <% content_for :pagination do %>
-        <%= will_paginate @posts %>
-    <% end %>
     
     <% content_for :extras do %>
       <%= pluralize @topic.posts.size, 'post' %>, 
@@ -45,6 +41,11 @@
     <%= link_to image_tag('icons/edit.png'), edit_forum_topic_path(@topic.forum, @topic) %>
     <%= link_to image_tag('icons/delete.png'), forum_topic_path(@topic.forum, @topic), :method => :delete, :confirm => 'You want to delete this thread (and all replies?)' %> 
     </div>
+<% end %>
+<% if @posts.total_pages > 1 %>
+<div class="forum_paginator">
+    <%= pagination @posts %>
+</div>
 <% end %>
 <%= render :partial => 'posts/posts' %>
 
