@@ -38,8 +38,8 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = @description = @user.name + "'s latest music and playlists"
-        @keywords = "#{h @user.name}, music, uploaded mp3s, playlists, download, listen"      
+        @page_title = @description = (@user.name + "'s latest music and playlists")
+        @keywords = "#{@user.name}, music, uploaded mp3s, playlists, download, listen"      
 
         @tab = 'your_stuff' if current_user == @user
                
