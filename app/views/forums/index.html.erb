@@ -58,6 +58,16 @@
     </table>
 
     <p>
-      <%= link_to 'Recent posts', posts_path %>
+      <%= link_to 'View Recent Posts', posts_path %>
     </p>
+    <% if @online && !@online.empty?%>
+        <div class="box">
+        <div class="static_content" id="currently_online">
+          alonetoners online: 
+          <% @online.each do |user| %>
+            <%= link_to h(user.name), user_home_path(user.login) %> 
+          <% end %>
+        </div>
+        </div>
+    <% end %>
 <% end %>
