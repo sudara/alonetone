@@ -15,11 +15,11 @@
 <div id="footer_expandable">
   <div id="open_footer_content">
     <div id="feedback_help">
-        Hi! We <em>really</em> love your feedback. Keep it coming!<br/><br/>
+        Hi! <br/><br/>We <em>really</em> love your feedback.<br/><br/>
         <% if logged_in? %>
-            Your feedback will be posted to the <%= link_to 'forums', forums_path %> so that everyone can benefit from it.
+            Your comments will be publicly posted to the <%= link_to 'alonetone forums', forums_path %>.<br/><br/>
         <% end %>
-        If for some reason you need to communicate privately (or you are shy) you can also email sudara@alonetone.com
+        If for some reason you need to communicate privately (a little shy?) you can also email sudara@alonetone.com
     </div>
     <div id="bug_form" style="opacity:0;" class="<%= logged_in? ? 'logged_in_flavor' : 'guest' %>">
     	<div id="form_wrapper">

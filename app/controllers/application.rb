@@ -124,7 +124,7 @@ class ApplicationController < ActionController::Base
   
   def prep_bugaboo
     if logged_in?
-      @topic = Topic.new
+      @forum_feedback = Topic.new
     else  
       @user_report = UserReport.new(:user => @current_user || nil, :params => params)
     end
