@@ -44,16 +44,18 @@ class UserReportsController < ApplicationController
   # POST /user_reports
   # POST /user_reports.xml
   def create
-    params = slice_and_dice_params
     if logged_in?
-      @user_report = current_user.user_reports.build(params[:user_report])
+      @forum = find_forum
+      params[:topic][:title] = @title
+      @record = current_user.post @forum, params[:topic], request
     else
-      @user_report = UserReport.new(params[:user_report])
+      params = slice_and_dice_params
+      @record = UserReport.new(params[:user_report])
     end
     respond_to do |format|
       format.js do
-        @user_report.env = request.env
-        if @user_report.save 
+        @record.env = request.env
+        if @record.save 
            return head(:created)
          else
            return head(:bad_request)
@@ -99,6 +101,13 @@ class UserReportsController < ApplicationController
     params.delete(:authenticity_token)
     params[:user_report][:params][:request] = request.env
     params
+  end
+  
+  def find_forum
+    title_prefix = '[' + params[:topic][:forum_id] + '] '
+    id= params[:topic][:forum_id] == 'bug' ? 2 : 4
+    @title = title_prefix + params[:topic][:title]
+    @forum = Forum.find(id)    
   end
   
   def authorized?

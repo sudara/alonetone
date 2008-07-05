@@ -14,9 +14,13 @@
 </div>
 <div id="footer_expandable">
   <div id="open_footer_content">
-    <div id="bug_form" style="opacity:0;">
+    <div id="bug_form" style="opacity:0;" class="<%= logged_in? ? 'logged_in_flavor' : 'guest' %>">
     	<div id="form_wrapper">
-    		<%= render :partial => 'user_reports/form' %>
+    	    <% if logged_in? %>
+    		    <%= render :partial => 'topics/quick_form'%>
+    		<% else %>
+    		    <%= render :partial => 'user_reports/form' %>
+    		<% end %>
     	</div>
     </div>
   </div>

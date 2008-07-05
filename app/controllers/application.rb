@@ -123,7 +123,11 @@ class ApplicationController < ActionController::Base
   end
   
   def prep_bugaboo
-    @user_report = UserReport.new(:user => @current_user || nil, :params => params)
+    if logged_in?
+      @topic = Topic.new
+    else  
+      @user_report = UserReport.new(:user => @current_user || nil, :params => params)
+    end
   end
 
   def display_news
