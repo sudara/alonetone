@@ -1,6 +1,6 @@
 <div id="user_header">
 
-  <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar'), profile_path(@user), :class => 'image', :id=>'alonetoner') %>
+  <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar', :alt => "#{h(@user.name)}"), profile_path(@user), :class => 'image', :id=>'alonetoner', :title => "#{h(@user.name)}'s profile - all about #{h(@user.name)}") %>
   
   <div class="user_title">
     <h1 class="user"><%=h @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
@@ -12,7 +12,7 @@
     <% end %>
   <div id="user_links">
     <ul class="user_links">
-     <%= user_nav_item "Latest", user_home_path(@user), :title => "#{h @user.name}'s latest stuff on alonetone" %>
+     <%= user_nav_item "Home", user_home_path(@user), :title => "#{h @user.name} on alonetone" %>
      <%= user_nav_item "Tracks", user_tracks_path(@user), :title => "#{h @user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
      <%= user_nav_item "Albums & Playlists", user_playlists_path(@user), :title => "#{h @user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? || (authorized_as(@user) && @user.playlists.include_private.count > 0) %>
      <%= user_nav_item "Favorites", user_playlist_path(@user, @user.favorites),:title => "#{h @user.name}'s favorite tracks on alonetone" if @user.favorites %>

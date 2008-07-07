@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
     @users = User.paginate_by_params(params) unless params[:sort] == 'map'
-    flash[:info] = "Want to see your pretty face show up here?<br/> Edit <a href='#{edit_user_path(current_user)}'>your profile</a>" unless current_user = :false || current_user.has_pic?
     respond_to do |format|
       format.html do
         @user_count = User.count
@@ -38,8 +37,8 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = @description = (@user.name + "'s latest music and playlists")
-        @keywords = "#{@user.name}, music, uploaded mp3s, playlists, download, listen"      
+        @page_title = @description = (@user.name)
+        @keywords = "#{@user.name}, latest, upload, music, mp3, mp3s, playlists, download, listen"      
 
         @tab = 'your_stuff' if current_user == @user
                
@@ -69,7 +68,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @page_title = "Sign up to upload your mp3s"
+    @page_title = "Join alonetone to upload your music in mp3 format"
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
@@ -118,7 +117,7 @@ class UsersController < ApplicationController
   end
   
   def bio
-    @page_title = "All about #{@user.name}"
+    @page_title = "#{@user.name}'s Profile"
     @mostly_listens_to = @user.mostly_listens_to
   end
   

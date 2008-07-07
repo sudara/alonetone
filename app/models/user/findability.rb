@@ -1,7 +1,7 @@
 class User
   
   def self.currently_online
-     User.find(:all, :conditions => ["last_seen_at > ?", Time.now-5.hours])
+     User.find(:all, :conditions => ["last_seen_at > ?", Time.now.utc-15.minutes])
   end
   
   # Generates magic %LIKE% sql statements for all columns

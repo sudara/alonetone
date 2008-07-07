@@ -6,7 +6,7 @@
      <% if logged_in? %>
         <%= image_tag current_user.avatar(:tiny) %>Say something, <%=h current_user.name %>:
      <% else %>
-        <%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path %>:
+        <%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:
      <% end %>
      </div>
      <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble', :id=>"comment_body_#{object.unique_id}"  %>

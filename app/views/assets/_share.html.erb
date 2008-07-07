@@ -8,6 +8,7 @@
 <div class="panel no_border">
     <%= render :partial => 'assets/add_to_facebook', :object => object %>
 </div>
+<div class="clear"> </div>
 <div class="panel no_border">
-    <%= link_to "more sharing options", user_track_path(object.user,object.permalink), :class => 'view_more' %>
+    <%= link_to "more sharing options", user_track_path(object.user,object.permalink), :class => 'view_more', :style => 'margin:0', :alt => "#{h(object.name)}" %>
 </div>

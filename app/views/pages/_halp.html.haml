@@ -5,11 +5,11 @@
       = yield :static_h1
   #links
     %ul.links
-      = user_nav_item "What is alonetone?", {:controller => 'pages', :action => 'index' } 
-      = user_nav_item "How do I?...", {:controller => 'pages', :action => 'howto' } 
-      = user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact'
-      = user_nav_item "Feedback", feedback_path, :added_class => 'contact'
-      = user_nav_item "Latest News", updates_path, :added_class => 'contact'
+      = user_nav_item "What is alonetone?", {:controller => 'pages', :action => 'index' }, :title => 'about alonetone'
+      = user_nav_item "How do I?...", {:controller => 'pages', :action => 'howto' }, :title => 'get help with alonetone' 
+      = user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact', :title => 'alonetone statistics'
+      = user_nav_item "Forums", forums_path, :added_class => 'contact', :title => 'forums'
+      = user_nav_item "Latest News", updates_path, :added_class => 'contact', :title => 'latest news (blog)'
     = yield :pagination
 - content_for :static do
   = yield

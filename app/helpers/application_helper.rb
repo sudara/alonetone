@@ -48,7 +48,7 @@ module ApplicationHelper
   end
 
   def link_to_play(asset, referer=nil)
-    link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link'
+    link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
   end
   
   def user_nav_item(text, link, options=nil)
