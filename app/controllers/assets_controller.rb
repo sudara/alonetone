@@ -30,7 +30,7 @@ class AssetsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = "#{@asset.title} by #{@user.name}"
+        @page_title = "#{@asset.name} by #{@user.name}"
         @assets = [@asset]
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.public.find_all_by_spam(false)
