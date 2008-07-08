@@ -1,5 +1,5 @@
 class Asset
-  @@launch_date = 'Tue Feb 01 00:00:00 +0100 2008'.to_time
+  @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
 
   def self.most_popular(limit=10, time_period=5.days.ago)
     popular = Listen.count(:all,:include => :asset, :group => 'listens.asset_id', :limit => limit, :conditions => ["listens.created_at > ? AND (listens.listener_id IS NULL OR listens.listener_id != listens.track_owner_id)", time_period], :order => 'count_all DESC')
@@ -59,7 +59,7 @@ class Asset
     sum_up_the_months(@@launch_date){|date, sum| monthly_counts << [sum, date]}
     data = monthly_counts.collect(&:first)
     labels = monthly_counts.collect(&:last)
-    chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chbh=35,15' )
+    chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chbh=35,25' )
   end
   
   
