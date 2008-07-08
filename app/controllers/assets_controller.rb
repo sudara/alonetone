@@ -110,6 +110,7 @@ class AssetsController < ApplicationController
   end
 
   def mass_edit
+    redirect_to_default and return false unless logged_in? and current_user.id == @user.id or admin?
     @descriptionless = @user.assets.descriptionless
     if params[:assets] # expects comma seperated list of ids
       @assets = [@user.assets.find(params[:assets])].flatten

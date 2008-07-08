@@ -32,7 +32,7 @@
 	    <% end %>
 	  
 	  <% content_for :right do %>
-    	    <%= render :partial => 'popular' if @popular_tracks && setting('most_popular', @user)%>
+    	    <%= render :partial => 'popular' if present?(@popular_tracks) && setting('most_popular', @user)%>
     	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
 	  <% end %>	
 		
