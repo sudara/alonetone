@@ -4,7 +4,7 @@
     <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
       <td class="author vcard">
         <div class="date">
-          <a href="#<%= dom_id post %>" rel="bookmark">
+          <a href="#<%= dom_id post %>" rel="bookmark" name="<%=dom_id post %>">
           <abbr class="updated" title="<%= post.created_at.xmlschema %>">
           <%= time_ago_in_words(post.created_at) %> ago
           </abbr>
