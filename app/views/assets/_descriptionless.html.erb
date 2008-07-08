@@ -1,0 +1,15 @@
+ <% if @descriptionless %>
+        <h2 class="box">Other tracks that need your love</h2>
+        <div class="box">
+            <div class="static_content">
+                Adding a description helps listeners find your music.<br/><br/>
+                <%= link_to 'Click here to mass-edit all your tracks',mass_edit_user_tracks_path(@user)%><br/><br/>
+                The following tracks of yours could use your love:<br/>
+                <ul>
+                    <% @descriptionless.each do |track| %>
+                        <li><%= link_to "#{h track.name}", edit_user_track_path(@user, track.permalink)%> <small>(<%=track.created_at.to_date.to_s(:short)%></small>)</li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>

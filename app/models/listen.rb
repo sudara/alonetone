@@ -25,7 +25,7 @@ class Listen < ActiveRecord::Base
   end
   
   def self.source_chart
-    data = self.count(:all, :group => :source, :order => 'count_all DESC', :limit => 8, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight])
+    data = self.count(:all, :group => :source, :order => 'count_all DESC', :limit => 10, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight])
     various = self.count(:all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight]) - data.collect(&:last).sum
     data << ['various other sources', various]
     Gchart.pie(:size => '500x125', :background => 'e1e2e1', :data => data.collect(&:last), :labels => data.collect{|d| CGI.escape(d.first.to_s)})

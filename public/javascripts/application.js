@@ -383,6 +383,39 @@ CommentForm = $.klass(Remote.Form, {
     }
 });
 
+EditForm = $.klass(Remote.Form,{
+    initialize : function($super,options) {
+      this.submitButton = $('.comment_submit', this.element);
+      this.submitText = this.submitButton.val();
+      this.spinner = $('.small_spinner',this.element);
+      this.resultBox = $('.comment_waiting', this.element);
+      this.textarea = $('textarea', this.element);
+      $super();
+    },
+    beforeSend:function(){
+      this.spinner.show();
+      this.disable();
+    },
+    complete:function(){
+      this.spinner.hide();
+      this.enable();
+    },
+    success:function(){
+      this.resultBox.text('Saved, thanks!').fadeIn(100);
+    },
+    error: function(){
+      this.resultBox.text("Didn't work. Try again?").fadeIn(100);
+    },
+    disable:function(){
+      this.submitButton.attr('disabled','disabled').
+        val('saving...');
+    },
+    enable:function(){
+      this.submitButton.removeAttr('disabled').
+        val(this.submitText);
+    }
+});
+
 Track = $.klass({  
   initialize: function() {
     this.playButton = $(".play-button",this.element);
@@ -649,6 +682,9 @@ jQuery(function($) {
   
   // facebox  
   $('a[rel*=facebox]').facebox();
+  
+  // mass editing (ajax)
+  $('#mass_edit .edit_track form').attach(EditForm);
 
 });
 

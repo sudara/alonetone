@@ -7,7 +7,7 @@ class AssetsController < ApplicationController
   before_filter :find_referer, :only => :show
   
   #rescue_from NoMethodError, :with => :user_not_found
-  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
   @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes']
   
@@ -109,6 +109,19 @@ class AssetsController < ApplicationController
     @descriptionless = @user.assets.descriptionless
   end
 
+  def mass_edit
+    @descriptionless = @user.assets.descriptionless
+    if params[:assets] # expects comma seperated list of ids
+      @assets = [@user.assets.find(params[:assets])].flatten
+    else
+      @assets = @user.assets
+    end
+  end
+  
+  def mass_update
+    
+  end
+
   # POST /assets
   # POST /assets.xml
   def create
@@ -141,8 +154,8 @@ class AssetsController < ApplicationController
       end
     end
     if good 
-      flash[:ok] = flashes
-      redirect_to user_tracks_path(current_user)
+      flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)"
+      redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
       flash[:error] = flashes 
       flash[:error] = "Please try again with a file that is not empty (or miniscule) and is an mp3. <br/>Click the HALP! button or email sudara@alonetone.com for more help" if @assets.size == 0 
@@ -153,14 +166,19 @@ class AssetsController < ApplicationController
   # PUT /assets/1
   # PUT /assets/1.xml
   def update
-    respond_to do |format|
-      if @asset.update_attributes(params[:asset])
-        flash[:ok] = 'Track updated!'
-        format.html { redirect_to user_track_url(current_user, @asset) }
-        format.xml  { head :ok }
+    result =  @asset.update_attributes(params[:asset])
+    if request.xhr?
+      if result 
+        head :ok
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @asset.errors.to_xml }
+        head :bad_request
+      end
+    else
+      if result
+        redirect_to user_track_url(current_user, @asset) 
+      else
+        flash[:error] = "There was an issue with updating that track"
+        render :action => "edit" 
       end
     end
   end

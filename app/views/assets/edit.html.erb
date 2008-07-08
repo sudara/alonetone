@@ -3,46 +3,11 @@
   <%= error_messages_for :asset %>
 
   <% content_for :left do %>
-      <div class="edit_track box" style="position:relative;">
-      <h2 class="box">Editing "<%=h @asset.name %>"</h2>
-        
-      <%= link_to "delete track", destroy_user_track_path(@user, @asset), :id => 'delete_track_button', :class => 'confirm_before_delete delete button'%>
-
-    <div class="static_content" style="position:relative;">
-
-          <% form_for(:asset, :url => user_track_path(current_user, @asset), :html => { :method => :put }) do |f| %>
-              The title of this track/song/piece 
-              <p> <%= f.text_field :title, :value => @asset.name %> </p>
-              Tell everyone a story or describe this music for us
-               <p> <%= f.text_area :description, :rows => 5, :cols => 50 %> </p>
-              <!--<p><%#= f.text_area :lyrics, :rows => 20, :cols => 50%></p> -->
-            </div>
-             <div class="static_content"> 
-              Have a youtube video of this song?<br/>
-              <small>http://www.youtube.com/watch?v=</small><%= f.text_field :youtube_embed, :size => 15 %>
-            </div>
-            <div class="submit_wrapper static_content"> 
-                <%= submit_tag "Update" %>
-            </div>
-          <% end %>  
-      </div>
+    <%= render :partial => 'edit' %>
   <% end %>
  
  <% content_for :right do %>
-    <% if @descriptionless %>
-        <h2 class="box">Other tracks that need your love</h2>
-        <div class="box">
-            <div class="static_content">
-                Adding a description helps listeners find your music.<br/><br/>
-                The following tracks of yours could use a description:<br/>
-                <ul>
-                    <% @descriptionless.each do |track| %>
-                        <li><%= link_to "#{h track.name}", edit_user_track_path(@user, track.permalink)%> <small>(<%=track.created_at.to_date.to_s(:short)%></small>)</li>
-                    <% end %>
-                </ul>
-            </div>
-        </div>
-    <% end %>
+   <%= render :partial => 'descriptionless'%>
  <% end %>
  
  

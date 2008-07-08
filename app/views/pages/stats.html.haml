@@ -7,7 +7,7 @@
     .static_content 
       %strong
         =Asset.count
-      original tracks
+      original &amp; legally uploaded mp3s
       %br
       %strong
         =Asset.days
@@ -18,19 +18,27 @@
       gigabytes of ones and zeros
   .box 
     %h2.box
+      Uploads per month
+    .static_content
+      =image_tag Asset.monthly_chart
+  .box 
+    %h2.box
       Listens per day
     .static_content
       =image_tag Listen.last_30_days_chart
   .box
     %h2.box
-      Monthly Listens since launch
+      Monthly Listens* since launch
     .static_content
       =image_tag Listen.monthly_chart
       %br
       %strong
         =Listen.monthly_listen_count_for[0]
-      listens so far for 
+      Listens so far for 
       =Listen.monthly_listen_count_for[1]
+      %br 
+      %small
+        * Please note that as of April-July 2008, alonetone began to filter out all hits by search engines & spiders
   .box
     %h2.box
       Where folks listen from

@@ -1,4 +1,6 @@
 class Asset
+  @@launch_date = 'Tue Feb 01 00:00:00 +0100 2008'.to_time
+
   def self.most_popular(limit=10, time_period=5.days.ago)
     popular = Listen.count(:all,:include => :asset, :group => 'listens.asset_id', :limit => limit, :conditions => ["listens.created_at > ? AND (listens.listener_id IS NULL OR listens.listener_id != listens.track_owner_id)", time_period], :order => 'count_all DESC')
     find(popular.collect{|pop| pop.first}, :include => :user)
@@ -51,4 +53,31 @@ class Asset
       else 0.5
     end
   end  
+  
+  def self.monthly_chart
+    monthly_counts = []
+    sum_up_the_months(@@launch_date){|date, sum| monthly_counts << [sum, date]}
+    data = monthly_counts.collect(&:first)
+    labels = monthly_counts.collect(&:last)
+    chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chbh=35,15' )
+  end
+  
+  
+  private 
+  
+  # iterate through the months
+  def self.sum_up_the_months(date = Time.now, &block)    
+    sum = 0
+    while date < Time.now
+      result, label = monthly_sum_for(date)
+      sum = sum + result
+      yield label, sum
+      date += 1.month
+    end
+  end
+  
+  def self.monthly_sum_for(date=Time.now, sum =0)
+    # [count, year_month_label]
+    [sum + self.count(:all, :conditions => ['created_at > ? AND created_at < ?',date.beginning_of_month, date.end_of_month]), "#{date.strftime('%b %y')}"]
+  end
 end
