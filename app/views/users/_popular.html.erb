@@ -1,5 +1,5 @@
 <div id="user_popular" class="box">
 	<h2 class="box">Most Listened to Tracks</h2>
-	<%= link_to "view all #{@user.assets_count}", user_tracks_path(@user), :class=> 'view_all' if @user.assets_count > 5%>
+	<%= link_to "view all #{@user.assets_count}", user_tracks_path(@user), :class=> 'view_all', :title => "uploaded mp3s by #{h(@user.name)}" if @user.assets_count > 5%>
 	<%= render :partial => 'assets/asset', :collection => @popular_tracks %>
 </div>
