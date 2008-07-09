@@ -4,7 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.blog 'blog', :controller => 'updates', :action => 'index'
   map.feedback 'feedback', :controller => 'user_reports'
-  map.resources :features, :sessions, :comments, :user_reports, :updates
+  map.resources :features, :sessions, :user_reports, :updates
+  map.resources :comments, :member => {:unspam => :get}
     
   # RESTFUL WORKAROUND FOR FACEBOOK
   map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}

@@ -265,7 +265,7 @@ a.button
   &.sort
     :background url(../images/icons/latest.png) no-repeat left center
     
-  &.delete, &.remove
+  &.delete, &.remove, &.unspam
     :position absolute
     :background url(../images/icons/delete.png) no-repeat center top
     :display block
@@ -276,7 +276,9 @@ a.button
     :top 5px
     :right 10px
     :padding-top 8px
-.asset div.button a.remove, .asset.hover div.button a.remove
+a.button.unspam
+  :background url(../images/icons/comment.png) no-repeat center top
+.asset div.button a.remove, .asset.hover div.button a.remove, a.button.remove
   :background url(../images/icons/remove.png) no-repeat center top
   :height 30px
   :width 30px    

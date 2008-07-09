@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   
   before_filter :find_user
+  before_filter :find_comment, :only => [:destroy, :unspam]
+  before_filter :login_required, :only => [:destroy, :unspam]
   
   def create
     respond_to do |wants|
@@ -26,23 +28,20 @@ class CommentsController < ApplicationController
   end  
   
   def destroy
-    @comment = Comment.find(params[:id], :include => [:commenter, :user])
-    if logged_in? && (current_user.admin? || (@comment.user.id == @comment.commentable.user.id))
-      if current_user.id.to_s == @comment.commenter_id.to_s
-        # if the person who made the comment is the person deleting it, just delete it
-        @comment.destroy
-        flash[:ok] = 'We threw away that comment'
-      else
-        # otherwise mark as spam
-        @comment.report_as_false_negative 
-        flash[:ok] = 'We marked that comment as spam'
-      end
+    if params[:spam] == true
+      @comment.report_as_false_negative 
+      flash[:ok] = 'We marked that comment as spam'
     else
-      flash[:error] = "Um, sorry, you can't do that"
+      @comment.destroy
+      flash[:ok] = 'We threw away that comment'
     end
     redirect_to :back 
   end
   
+  def unspam
+    @comment.report_as_false_positive
+    redirect_to :back
+  end
   
   def index
     if params[:login]
@@ -61,11 +60,20 @@ class CommentsController < ApplicationController
       @page_title = "Recent Comments"
       @comments = Comment.public.paginate(:all, :per_page => 10, :page => params[:page]) unless admin?
       @comments = Comment.include_private.paginate(:all, :per_page => 10, :page => params[:page]) if admin?
+      @spam = Comment.paginate_by_spam(true, :order => 'created_at DESC', :per_page => 10, :page => params[:spam_page]) if moderator? or admin?
     end
   end
   
   
   protected
+  
+  def find_comment
+    @comment = Comment.find(params[:id], :include => [:commenter, :user])    
+  end
+  
+  def authorized?
+    logged_in? && (current_user.moderator? || current_user.admin? || (@comment.user.id == @comment.commentable.user.id))    
+  end
   
   def shared_attributes
     {:commenter => find_commenter,
