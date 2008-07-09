@@ -12,7 +12,7 @@ module ApplicationHelper
   end
   
   def authorized_for_comment(comment)
-    (logged_in? && admin?) || (logged_in? && (comment.commenter == current_user || comment.user == current_user))
+    (moderator? || admin?) || (logged_in? && (comment.commenter == current_user || comment.user == current_user))
   end
   
   def edit_or_show(user, playlist)
