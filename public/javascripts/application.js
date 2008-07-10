@@ -591,6 +591,79 @@ Track = $.klass({
   }
 });
 
+// same as track, but keeps feeding the browser with tracks
+RadioTrack = $.klass(Track,{
+  startNextTrack: function(){
+    this.pause();
+    this.addClass('played');
+    this.supplyNewTracksIfNeeded();
+    RadioTrack.instances[this.nextTrackIndex()].playOrResume();
+  },
+  supplyNewTracksIfNeeded : function(){
+    Radio.instances[0].supplyNewTracksIfNeeded();
+  }
+});
+
+Radio = $.klass({  
+  
+  initialize : function(){
+    this.controls = $('#radio_controls_form',this.element);
+    this.currentStation = $('li.selected', this.element);
+    this.tracks = $('radioTracks');
+    this.channelName = $('#channel_name');
+    
+    // radio selector  
+  //  this.controls.change(function(){
+  //      source = $(':checked',this).val();
+  //      window.location = '/radio/'+source;
+  //  });
+    
+    $('li', this.controls).hover(function() {
+        if(!$('input',this).attr('disabled'))
+          $(this).addClass('hover');
+      }, function() {
+        $(this).removeClass('hover');
+    });
+    
+    $('li', this.controls).click($.bind(this.changeStation, this));
+    //this.controls.change($.bind(this.changeStation, this));
+  },
+  
+  changeStation : function(newStation){
+    newStation = ($(newStation.target).parent('li').length == 0) ? $(newStation.target) : $(newStation.target).parent('li');
+    if($('input', newStation).attr('disabled')) 
+      return false;
+    this.currentStation.removeClass('selected');
+    $('input',this.currentStation).attr('checked','');    
+    this.currentStation = newStation.addClass('selected');
+    $('input',this.currentStation).attr('checked','checked');
+    this.channelName.html($('span.channel_name',this.currentStation).html());
+    this.replaceTracksWithTracksFrom(newStation);
+  },
+  replaceTracksWithTracksFrom : function(station){
+    //this.trimPlayedTracks();
+    //this.trimUpcomingTracks();
+    //$('.track',this.tracks).attach(Track);
+  },
+  supplyNewTracksIfNeeded : function(){
+    RadioTrack.instances.length - 
+  },
+  checkForPlayingTrack : function(){
+    $('.track'.hasClass('playing'));
+  },
+  getStation : function(){
+    this.station;
+  },
+  
+  setStation : function(){
+    this.currentStation;
+    this.writeCookie();
+  }
+  
+
+})
+
+
 jQuery(function($) {
   // Tracks 
   $('.asset, .track').attach(Track);
@@ -667,12 +740,6 @@ jQuery(function($) {
         $('#sort_playlists').sortable('serialize'));
       }
     });
-    
-  // radio selector  
-  $('#radio_options form').change(function(){
-      source = $(':checked',this).val();
-      window.location = '/radio/'+source;
-  });
   
   // features/blog comment form
   $('#bug_form form').attach(CommentForm);
@@ -685,6 +752,8 @@ jQuery(function($) {
   
   // mass editing (ajax)
   $('#mass_edit .edit_track form').attach(EditForm);
+  
+  $('#radio').attach(Radio);
 
 });
 

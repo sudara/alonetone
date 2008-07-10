@@ -512,3 +512,28 @@ a.add_to_favorites, a.favorited
         :line-height 18px
 .indented_comments
   :margin-left 50px
+
+h1 span#channel_name
+  :color = !orange  
+#radio_controls
+  :padding 0px
+  ul
+    :margin 0
+    :padding 0
+    li
+      :display block
+      :cursor pointer
+      :list-style none inside
+      :margin 0
+      :height 40px
+      :font-size 20px
+      :line-height 40px
+      :border-bottom 1px solid #000
+      :border-color = !text_color
+      :padding-left 30px
+      &.selected, &.hover
+        :background-image url(../images/backgrounds/tracks.png)
+        :background-position 420px 0px
+      input
+        :margin-right 8px
+      

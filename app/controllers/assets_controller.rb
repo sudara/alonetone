@@ -78,8 +78,10 @@ class AssetsController < ApplicationController
   end
   
   def radio
-    @page_title = "alonetone radio: #{params[:source].humanize}" 
+    @channel = params[:source].humanize
+    @page_title = "alonetone Radio: #{@channel}" 
     @assets = Asset.radio(params, current_user, session)
+    @safari = request.env['HTTP_USER_AGENT'].to_s.include? 'AppleWebKit'
   end
   
   def top

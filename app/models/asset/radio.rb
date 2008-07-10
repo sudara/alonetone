@@ -12,7 +12,7 @@ class Asset
     when 'mangoz_shuffle'
       Asset.mangoz(user, common_options)
     when 'most_favorited'
-      Asset.most_favorited(per_page, (per_page.to_i*(params[:page].to_i || 0)))
+      Asset.paginate(:all, {:order => 'favorites_count DESC'}.merge(common_options))
     when 'songs_you_have_not_heard'
       Asset.not_heard_by(user, per_page)
     when 'popular'
@@ -39,10 +39,6 @@ class Asset
   def self.not_heard_by(user, limit)
     conditions = (user && user.listens.size > 10 ) ? ["assets.id NOT IN (?) ",user.listened_to_ids] : nil
     Asset.find(:all, :conditions => conditions, :order => 'created_at DESC', :limit => limit)
-  end
-  
-  def self.most_favorited(limit, offset)
-    Asset.find(Track.most_favorited(limit, offset))
   end
   
   def self.most_listened_to(pagination_options)

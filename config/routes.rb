@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   map.latest '/latest/:latest', :controller => 'assets', :action => 'latest'
   
   map.radio 'radio/:source/:per_page/:page', :controller => 'assets', :action => 'radio', 
-     :defaults => {:page=>1, :source=> 'popular',:per_page => 20 }
+     :defaults => {:page=>1, :source=> 'popular',:per_page => 5 }
   
   # top 40
   map.top '/top/:top', :controller => 'assets', :action => 'top'
