@@ -595,13 +595,20 @@ Track = $.klass({
 RadioTrack = $.klass(Track,{
   startNextTrack: function(){
     this.pause();
-    this.addClass('played');
+    this.element.addClass('played');
     this.supplyNewTracksIfNeeded();
     RadioTrack.instances[this.nextTrackIndex()].playOrResume();
   },
   supplyNewTracksIfNeeded : function(){
     Radio.instances[0].supplyNewTracksIfNeeded();
-  }
+  },
+  nextTrackIndex : function(){
+    // index of next Track in Track.instances
+    var next = RadioTrack.instances.indexOf(this) + 1;
+    // loop back to the first track
+    if(RadioTrack.instances[next] == undefined) next = 0;
+    return next;
+  },
 });
 
 Radio = $.klass({  
@@ -609,9 +616,10 @@ Radio = $.klass({
   initialize : function(){
     this.controls = $('#radio_controls_form',this.element);
     this.currentStation = $('li.selected', this.element);
-    this.tracks = $('radioTracks');
+    this.tracks = $('#radio_tracks');
     this.channelName = $('#channel_name');
-    
+    this.maxNumberPlayedTracks = 1; // trim tracks after 3 have played
+    this.minNumberRemainingTracks = 3;
     // radio selector  
   //  this.controls.change(function(){
   //      source = $(':checked',this).val();
@@ -641,15 +649,38 @@ Radio = $.klass({
     this.replaceTracksWithTracksFrom(newStation);
   },
   replaceTracksWithTracksFrom : function(station){
-    //this.trimPlayedTracks();
-    //this.trimUpcomingTracks();
-    //$('.track',this.tracks).attach(Track);
+    this.trimUpcomingTracks();
+    this.addTracksFrom(station);
   },
   supplyNewTracksIfNeeded : function(){
-    RadioTrack.instances.length - 
+    this.trimPlayedTracks();
+    remainingTracks = RadioTrack.instances.length - this.playedTracksStillOnScreen(); 
+    if(remainingTracks < this.minNumberRemainingTracks)
+      this.addTracksFrom(this.currentStation);
+  },
+  addTracksFrom : function(station){
+    url = '/radio/' + $('input',station).val();
+    this.tracks.load(url);
+    $('.asset').attach(RadioTrack);
   },
   checkForPlayingTrack : function(){
     $('.track'.hasClass('playing'));
+  },
+  trimPlayedTracks : function(){
+    if(this.playedTracksStillOnScreen() > this.maxNumberPlayedTracks)
+      this.trimTracksBy(this.playedTracksStillOnScreen() - this.maxNumberPlayedTracks);
+  },
+  trimTracksBy : function(amount){
+    for(i = 1;i <= amount;i++){
+      console.log('trimming track...');
+      $('.asset.played:first',this.tracks).fadeOut().next('div.tabs').fadeOut();
+    }
+  },
+  trimUpcomingTracks : function(){
+    $('.asset:not(.played)').not('.playing').fadeOut();
+  },
+  playedTracksStillOnScreen : function(){
+    return $('.asset.played').length
   },
   getStation : function(){
     this.station;
@@ -661,12 +692,16 @@ Radio = $.klass({
   }
   
 
-})
+});
 
 
 jQuery(function($) {
   // Tracks 
-  $('.asset, .track').attach(Track);
+  
+  if($('#radio_tracks').length > 0)
+    $('.asset').attach(RadioTrack);
+  else
+    $('.asset, .track').attach(Track);
   
   // Slide open the next element on click
   $('.slide_open_next').attach(SlideOpenNext);

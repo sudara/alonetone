@@ -82,6 +82,7 @@ class AssetsController < ApplicationController
     @page_title = "alonetone Radio: #{@channel}" 
     @assets = Asset.radio(params, current_user, session)
     @safari = request.env['HTTP_USER_AGENT'].to_s.include? 'AppleWebKit'
+    render :partial => 'assets/asset', :collection => @assets, :layout => false if request.xhr?
   end
   
   def top

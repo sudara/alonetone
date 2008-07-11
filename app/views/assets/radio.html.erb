@@ -1,6 +1,6 @@
 <h1 id="radio_title">alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
 <% content_for :left do %>
-    <div class="box">
+    <div id="radio_tracks" class="box">
     <% if params[:source]=='favorites' %>
         <%= render :partial => 'shared/favorite', :collection => @assets %>
     <% else %>
