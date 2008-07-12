@@ -96,7 +96,7 @@ module ApplicationHelper
   end
   
   def login_link
-    logged_in? ? '' : (link_to '(login for this option)', login_path)
+    logged_in? ? '' : '('+(link_to 'login', login_path)+')'
   end
   
   def feed_icon_tag(title, url)
