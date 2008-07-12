@@ -471,9 +471,9 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
     
     // close all other detail panes except currently playing
-    for(var track in Track.instances){
-        if(!Track.instances[track].isPlaying() && this.element != Track.instances[track].element) 
-          Track.instances[track].closeDetails();
+    for(var track in this.behavior.instances){
+        if(!this.behavior.instances[track].isPlaying() && this.element != this.behavior.instances[track].element) 
+          this.behavior.instances[track].closeDetails();
     }
     
     this.element.addClass('open');
@@ -544,12 +544,12 @@ Track = $.klass({
   
   startNextTrack: function(){
     this.pause();
-    Track.instances[this.nextTrackIndex()].playOrResume();
+    this.behavior.instances[this.nextTrackIndex()].playOrResume();
   },
   
   nextTrackIndex : function(){
     // index of next Track in Track.instances
-    var next = Track.instances.indexOf(this) + 1;
+    var next = this.behavior.instances.indexOf(this) + 1;
     // loop back to the first track
     if(this.behavior.instances[next] == undefined) next = 0;
     return next;
