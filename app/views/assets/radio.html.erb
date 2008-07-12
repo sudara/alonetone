@@ -1,11 +1,7 @@
 <h1 id="radio_title">alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
 <% content_for :left do %>
     <div id="radio_tracks" class="box">
-    <% if params[:source]=='favorites' %>
-        <%= render :partial => 'shared/favorite', :collection => @assets %>
-    <% else %>
         <%= render :partial => 'assets/asset', :collection => @assets  %>
-    <% end %>
     </div>
 <% end %>
 <% content_for :right do %>
@@ -26,7 +22,7 @@
                 </form>
             </div>
         </div>
-        
+        <%= @cookies.inspect %>
         <% if @safari %>
         <h2 class="box">Pssst! Hey Safari User</h2>
         <div class="static_content">

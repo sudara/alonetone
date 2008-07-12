@@ -1,12 +1,11 @@
 class Asset
   
-  def self.radio(params, user, session)
+  def self.radio(channel, params, user)
     per_page = (params[:per_page] && params[:per_page].to_i < 50) ? params[:per_page] : 5
     common_options = {:per_page => per_page, :page => params[:page]}
-    
-    case params[:source]
+    case channel
     when 'favorites'
-      Track.favorites.paginate(:all, common_options)
+      Asset.favorited.paginate(:all, common_options)
     when 'your_favorite_alonetoners'
       Asset.from_favorite_artists_of(user, common_options)
     when 'mangoz_shuffle'
@@ -17,7 +16,7 @@ class Asset
       Asset.not_heard_by(user, per_page)
     when 'popular'
       Asset.paginate(:all, {:order => 'hotness DESC'}.merge(common_options))
-    else #latest
+    else # latest
       Asset.recent.paginate(:all, common_options)
     end
   end
@@ -38,7 +37,7 @@ class Asset
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
   def self.not_heard_by(user, limit)
     conditions = (user && user.listens.size > 10 ) ? ["assets.id NOT IN (?) ",user.listened_to_ids] : nil
-    Asset.find(:all, :conditions => conditions, :order => 'created_at DESC', :limit => limit)
+    Asset.find(:all, :conditions => conditions, :order => 'RAND()', :limit => limit)
   end
   
   def self.most_listened_to(pagination_options)

@@ -59,7 +59,7 @@
       klass.superclass = parent;
       klass.subclasses = [];
       klass.addMethods = addMethods;
-
+      
       if (parent) {
         var subclass = function() { };
         subclass.prototype = parent.prototype;
@@ -106,6 +106,7 @@
     return $.klass(behavior, {
       initialize: function($super, element, args) {
         this.element = $(element);
+        this.behavior = behavior;
         if ($super) $super.apply(this, args);
       }
     });
@@ -116,7 +117,7 @@
       instance = new wrapper(el, args);
 
       bindEvents(instance);
-
+            
       if (!behavior.instances) behavior.instances = [];
 
       behavior.instances.push(instance);

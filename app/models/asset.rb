@@ -4,7 +4,7 @@ class Asset < ActiveRecord::Base
   
   named_scope :descriptionless, {:conditions => 'description = "" OR description IS NULL', :order => 'created_at DESC', :limit => 10}
   named_scope :recent, {:include => :user, :order => 'assets.created_at DESC'}
-
+  named_scope :favorited, {:select => 'distinct assets', :include => :tracks, :conditions => {'tracks.is_favorite' => true}, :order => 'tracks.created_at DESC'}
   formats_attributes :description    
   
   has_many :tracks, :dependent => :destroy

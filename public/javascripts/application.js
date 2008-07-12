@@ -427,11 +427,10 @@ Track = $.klass({
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing those tabs
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
-    
+    this.radio = false;
     // dont allow tab details to be opened on editing playlists
     this.allowDetailsOpen = (this.element.hasClass('unopenable') || (this.element.parent().parent('#single_track').size() > 0)) ? false : true;
   },
-  
   
   // Lets Delegate!
   // we want the track to do lots of things onclick, but not add 100s of event handlers
@@ -552,13 +551,13 @@ Track = $.klass({
     // index of next Track in Track.instances
     var next = Track.instances.indexOf(this) + 1;
     // loop back to the first track
-    if(Track.instances[next] == undefined) next = 0;
+    if(this.behavior.instances[next] == undefined) next = 0;
     return next;
   },
   
   killOtherTracks : function(){
-    for(var track in Track.instances){ 
-      if(Track.instances[track].isPlaying()) Track.instances[track].pause();
+    for(var track in this.behavior.instances){ 
+      if(this.behavior.instances[track].isPlaying()) this.behavior.instances[track].pause();
     }
   },
   
@@ -594,21 +593,26 @@ Track = $.klass({
 // same as track, but keeps feeding the browser with tracks
 RadioTrack = $.klass(Track,{
   startNextTrack: function(){
+    this.radio = true;
     this.pause();
     this.element.addClass('played');
-    this.supplyNewTracksIfNeeded();
     RadioTrack.instances[this.nextTrackIndex()].playOrResume();
   },
   supplyNewTracksIfNeeded : function(){
     Radio.instances[0].supplyNewTracksIfNeeded();
   },
-  nextTrackIndex : function(){
-    // index of next Track in Track.instances
-    var next = RadioTrack.instances.indexOf(this) + 1;
-    // loop back to the first track
-    if(RadioTrack.instances[next] == undefined) next = 0;
-    return next;
+  removeFromDom:function(){
+    this.more.remove();
+    this.element.fadeOut('slow',function(){$(this).remove()});
   },
+  pause:function($super){
+    $super();
+    this.element.addClass('played');
+  },
+  playOrResume:function($super){
+   this.supplyNewTracksIfNeeded();   
+   $super(); 
+  }
 });
 
 Radio = $.klass({  
@@ -618,8 +622,9 @@ Radio = $.klass({
     this.currentStation = $('li.selected', this.element);
     this.tracks = $('#radio_tracks');
     this.channelName = $('#channel_name');
-    this.maxNumberPlayedTracks = 1; // trim tracks after 3 have played
-    this.minNumberRemainingTracks = 3;
+    this.maxNumberPlayedTracks = 1; // trim tracks after 2   have played
+    this.minNumberRemainingTracks = 3 ;
+    this.page = {}; // keeps track of paging through the results
     // radio selector  
   //  this.controls.change(function(){
   //      source = $(':checked',this).val();
@@ -634,7 +639,6 @@ Radio = $.klass({
     });
     
     $('li', this.controls).click($.bind(this.changeStation, this));
-    //this.controls.change($.bind(this.changeStation, this));
   },
   
   changeStation : function(newStation){
@@ -646,6 +650,7 @@ Radio = $.klass({
     this.currentStation = newStation.addClass('selected');
     $('input',this.currentStation).attr('checked','checked');
     this.channelName.html($('span.channel_name',this.currentStation).html());
+    document.cookie = 'radio='+$('input',this.currentStation).val()+';path=/';
     this.replaceTracksWithTracksFrom(newStation);
   },
   replaceTracksWithTracksFrom : function(station){
@@ -654,14 +659,20 @@ Radio = $.klass({
   },
   supplyNewTracksIfNeeded : function(){
     this.trimPlayedTracks();
-    remainingTracks = RadioTrack.instances.length - this.playedTracksStillOnScreen(); 
-    if(remainingTracks < this.minNumberRemainingTracks)
+    remainingTracks = $('.asset',this.tracks).length - this.playedTracksStillOnScreen(); 
+    if(remainingTracks < this.minNumberRemainingTracks){
       this.addTracksFrom(this.currentStation);
+    }
   },
   addTracksFrom : function(station){
-    url = '/radio/' + $('input',station).val();
-    this.tracks.load(url);
-    $('.asset').attach(RadioTrack);
+    this.page.station = (this.page.station || 0);
+    this.page.station ++;
+    // /radio/station/per_page/page_number
+    url = '/radio/' + $('input',station).val() + '/4/' + this.page.station 
+    $.get(url, $.bind(this.appendTracks, this));
+  },
+  appendTracks : function (data){
+    $('.asset',this.tracks.append(data)).attach(RadioTrack);
   },
   checkForPlayingTrack : function(){
     $('.track'.hasClass('playing'));
@@ -672,26 +683,30 @@ Radio = $.klass({
   },
   trimTracksBy : function(amount){
     for(i = 1;i <= amount;i++){
-      console.log('trimming track...');
-      $('.asset.played:first',this.tracks).fadeOut().next('div.tabs').fadeOut();
+      toRemove = $('.asset.played:first',this.tracks).not('.playing');
+      this.removeRadioTrack(toRemove[0]);
+    }
+  },
+  removeRadioTrack : function(toRemove){
+    for(j=0;j < RadioTrack.instances.length;j++){
+      if(RadioTrack.instances[j].element[0].id == toRemove.id){
+          RadioTrack.instances[j].removeFromDom();
+          RadioTrack.instances.splice(j,1);
+        }
+    }
+  },
+  removeRadioTracks : function(object){
+    for(i=0;i < object.length;i++){
+      this.removeRadioTrack(object[i]);
     }
   },
   trimUpcomingTracks : function(){
-    $('.asset:not(.played)').not('.playing').fadeOut();
+    upcomingTracks = $('.asset:not(.played)').not('.playing');
+    this.removeRadioTracks(upcomingTracks);
   },
   playedTracksStillOnScreen : function(){
     return $('.asset.played').length
-  },
-  getStation : function(){
-    this.station;
-  },
-  
-  setStation : function(){
-    this.currentStation;
-    this.writeCookie();
   }
-  
-
 });
 
 

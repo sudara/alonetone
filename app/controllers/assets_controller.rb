@@ -78,9 +78,10 @@ class AssetsController < ApplicationController
   end
   
   def radio
+    params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
     @page_title = "alonetone Radio: #{@channel}" 
-    @assets = Asset.radio(params, current_user, session)
+    @assets = Asset.radio(params[:source], params, current_user)
     @safari = request.env['HTTP_USER_AGENT'].to_s.include? 'AppleWebKit'
     render :partial => 'assets/asset', :collection => @assets, :layout => false if request.xhr?
   end
