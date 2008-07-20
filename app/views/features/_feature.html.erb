@@ -1,7 +1,7 @@
 <% div_for feature do %>
     <div class="box">
-        <h2>Featured alonetoner: <%= link_to "#{h feature.featured_user.name}", feature_path(feature.featured_user.login), :title => "featured alonetone artist: #{feature.featured_user.name}" %> </h2>
-        <h3><%= user_location(feature.featured_user)%></h3>
+        <h2><%= link_to "#{h feature.featured_user.name}", feature_path(feature.featured_user.login), :title => "featured alonetone artist: #{feature.featured_user.name}" %> </h2>
+        <h3>Featured alonetone artist (<%= link_to "view all", features_path %>)</h3>
         <%= link_to 'edit', edit_feature_path(feature.featured_user.login), :class => 'edit right' if admin? %>
     </div>
     <div class="details clearfix">
@@ -11,8 +11,6 @@
         <div class="feature_teaser">
            <%= feature.teaser_text %>
            <%= link_to "view feature", feature_path(feature.permalink), :class => 'view_more_no_float', :title => "featured alonetone artist: #{feature.featured_user.name}" %>
-           <%= link_to "view all features", features_path, :class => 'view_more_no_float', :title => "all featured artists" %>
-
         </div>
     </div>
 <% end %>
