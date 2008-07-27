@@ -90,3 +90,9 @@ Then,
       rake db:migrate
 
 There is no bootstrapper at this time, so you'll probably need to fiddle with it a bit or bug me to make one.
+
+### License 
+
+The alonetone source code is released under the MIT license. 
+
+"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008 and may not be used without permission.
