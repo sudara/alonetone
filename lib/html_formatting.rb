@@ -5,9 +5,13 @@ module HtmlFormatting
     self.class.formatted_attributes.each do |attr|
       raw    = read_attribute attr
       return unless raw && !raw.empty?
-      markdowned = BlueCloth::new(raw).to_html
-      autolinked = auto_link(markdowned,:all) { |text| truncate(text, 30) }
-      write_attribute "#{attr}_html", white_list_sanitizer.sanitize(autolinked)
+      result = BlueCloth::new(raw).to_html
+      # let admins post javascript and whatever they like in bluecloth while restricting guests/users
+      unless !self.respond_to?(:user) || (self.user && self.user.admin?)
+        result = auto_link(result,:all) { |text| truncate(text, 35) } 
+        result = white_list_sanitizer.sanitize(result)
+      end
+      write_attribute "#{attr}_html", result
     end
   end
 end
