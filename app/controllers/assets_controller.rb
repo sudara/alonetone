@@ -229,6 +229,10 @@ class AssetsController < ApplicationController
   end
   
   def bot?
-    (@@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil) || (request.user_agent.downcase.include?('bot'))
+    if present? request.user_agent 
+      (@@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil) || (request.user_agent.downcase.include?('bot'))
+    else
+      true
+    end
   end
 end

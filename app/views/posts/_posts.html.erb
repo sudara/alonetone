@@ -1,6 +1,13 @@
 
 <table border="0" cellspacing="0" cellpadding="0" class="posts wide">
 <% @posts.each do |post| -%>
+    <% if @show_title_and_link %>
+    <tr class="post title"%>
+        <td colspan="2">
+            <h2><%= link_to post.topic.title, forum_topic_path(post.forum, post.topic, :page => post.forum.recent_post.topic.last_page) %></h2>
+        </td>
+    </tr>
+    <% end %>
     <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
       <td class="author vcard">
         <div class="date">

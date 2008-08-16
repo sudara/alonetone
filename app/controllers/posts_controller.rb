@@ -9,7 +9,8 @@ class PostsController < ApplicationController
   def index
     @posts = (@parent ? @parent.posts : Post).search(params[:q], :page => current_page)
     @users = @user ? {@user.id => @user} : User.index_from(@posts)
-    @page_title = @description = 'Recent Posts in the alonetone forums'
+    @page_title = @description = 'Recent Forum Posts'
+    @show_title_and_link = true
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml  => @posts }
