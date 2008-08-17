@@ -549,7 +549,17 @@ Track = $.klass({
     this.pause();
     this.behavior.instances[this.nextTrackIndex()].playOrResume();
   },
-  
+  startPreviousTrack:function(){
+    this.pause();
+    this.behavior.instances[this.previousTrackIndex()].playOrResume();
+  },
+  previousTrackIndex : function(){
+    // index of next Track in Track.instances
+    var next = this.behavior.instances.indexOf(this) - 1;
+    // loop back to the first track
+    if(this.behavior.instances[next] == undefined) next = (this.behavior.instances.length - 1);
+    return next;
+  },
   nextTrackIndex : function(){
     // index of next Track in Track.instances
     var next = this.behavior.instances.indexOf(this) + 1;
@@ -632,6 +642,9 @@ Radio = $.klass({
     this.maxNumberPlayedTracks = 2; // trim tracks after 3 have played
     this.minNumberRemainingTracks = 3 ;
     this.page = {}; // keeps track of paging through the results
+    $.hotkeys.add('down', $.bind(this.nextTrack, this));
+    $.hotkeys.add('up', $.bind(this.previousTrack,this));
+
     
     $('li', this.controls).hover(function() {
         if(!$('input',this).attr('disabled'))
@@ -682,8 +695,8 @@ Radio = $.klass({
     $(this.tracks.append(data));  
     $('.asset',this.tracks).not('.instantiated').attach(RadioTrack);
   },
-  checkForPlayingTrack : function(){
-    $('.track'.hasClass('playing'));
+  somethingIsPlaying : function(){
+    return $('.asset.playing').length > 0;
   },
   trimPlayedTracks : function(){
     if(this.playedTracksStillOnScreen() > this.maxNumberPlayedTracks)
@@ -702,6 +715,12 @@ Radio = $.klass({
           RadioTrack.instances[j].removeCompletely();
     }
   },
+  findRadioTrack : function(domTrack){
+    for(j=0;j < RadioTrack.instances.length;j++){
+      if(RadioTrack.instances[j].element[0].id == domTrack.id)
+          return RadioTrack.instances[j];
+    }
+  },
   removeRadioTracks : function(object){
     //console.log('removing a handful');
     for(i=0;i < object.length;i++){
@@ -714,6 +733,21 @@ Radio = $.klass({
   },
   playedTracksStillOnScreen : function(){
     return $('.asset.played').length
+  },
+  nextTrack : function(e){
+    if(this.keyboardEnabled(e)){
+      playing = this.findRadioTrack($('.asset.playing')[0])
+      playing.startNextTrack();
+    } 
+  },
+  previousTrack : function(e){
+    if(this.keyboardEnabled(e)){
+      playing = this.findRadioTrack($('.asset.playing')[0])
+      playing.startPreviousTrack();
+    }     
+  },
+  keyboardEnabled : function(e){
+    return !$(e.target).is('textarea') && this.somethingIsPlaying();
   }
 });
 
