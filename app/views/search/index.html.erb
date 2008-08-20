@@ -6,7 +6,7 @@
 
 <% if present?(@users) %>
   <% content_for :left do %>
-  <h2>Alonetone Artists and Listeners</h2>
+  <h2>Artists and Listeners</h2>
   <div id="user_search_results">
     <%= render :partial => 'shared/user', :collection => @users %>
   </div>
@@ -16,7 +16,7 @@
 
 <% if present?(@assets) %>
   <% content_for :right do %>
-  <h2>Alonetone Artists and Listeners</h2>
+  <h2>Tracks that match "<%=h @query %>"</h2>
   <%= render :partial => 'assets/asset', :collection => @assets if @assets %>
   <% end %>
 <% end %>
