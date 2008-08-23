@@ -9,13 +9,19 @@
         = link_to "Download a song", :action => 'download_a_song'
       %li          
         = link_to "Delete a song", :action => 'delete_a_song'
+      %li          
+        = link_to "Edit a song", :action => 'edit_a_song'
       %li  
-        = link_to "Change the title of my song", :action => 'edit_a_song'
+        = link_to "Change the title of a song", :action => 'edit_a_song'
+      %li
+        = link_to "Delete my account", :action => 'delete_my_account'
     %h3
       Advanced
     %ul 
       %li  
         = link_to 'Get my music on iTunes?', :action => 'itunes'
+      %li  
+        = link_to 'Change my url (alonetone.com/yourname) or email', :action => 'change_my_url'
     %br
     Get more help at the 
     = link_to "alonetone Forums", forums_path, :title => 'forums'
