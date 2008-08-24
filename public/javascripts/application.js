@@ -55,6 +55,30 @@ FavoriteToggle = $.klass(Remote.Link,{
   }
 });
 
+
+if (!Array.prototype.indexOf)
+{
+  Array.prototype.indexOf = function(elt /*, from*/)
+  {
+    var len = this.length;
+
+    var from = Number(arguments[1]) || 0;
+    from = (from < 0)
+         ? Math.ceil(from)
+         : Math.floor(from);
+    if (from < 0)
+      from += len;
+
+    for (; from < len; from++)
+    {
+      if (from in this &&
+          this[from] === elt)
+        return from;
+    }
+    return -1;
+  };
+}
+
 // for debug purposes
 $.fn.log = function() {
   if (this.size()==0) return "<em>wrapped set is empty</em>"
@@ -474,9 +498,9 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
     
     // close all other detail panes except currently playing
-    for(var track in this.behavior.instances){
-        if(!this.behavior.instances[track].isPlaying() && this.element != this.behavior.instances[track].element) 
-          this.behavior.instances[track].closeDetails();
+    for(i=0;i<RadioTrack.instances.length;i++){
+        if(!this.behavior.instances[i].isPlaying() && this.element != this.behavior.instances[i].element) 
+          this.behavior.instances[i].closeDetails();
     }
     
     this.element.addClass('open');
@@ -619,8 +643,8 @@ RadioTrack = $.klass(Track,{
     //if(this.soundIsLoaded()) // remove mp3 from memory
      // soundManager.destroySound(this.SoundID);
     this.more.remove();
-    this.element.fadeOut('slow',function(){$(this).remove()});
-    RadioTrack.instances.splice(this.behavior.instances.indexOf(this),1);
+    this.element.fadeOut('slow',function(){$(this.element).remove()});
+    RadioTrack.instances.splice(RadioTrack.instances.indexOf(this),1);
   },
   pause:function($super){
     $super();
