@@ -533,26 +533,38 @@ h1 span#channel_name
   
 #radio_controls
   :padding 0px
+  :margin 0
+  :min-height 1%
+  form
+    :padding 0
+    :margin 0
   ul
     :margin 0
     :padding 0
-    li
+    :position relative
+    :list-style-position inside
+    li.radio_channel
+      :background-image url(../images/backgrounds/tracks.png)
+      :list-style none
       :display block
+      :float left
+      :width 400px
       :cursor pointer
-      :list-style none inside
+      :padding 0
       :margin 0
       :height 40px
       :font-size 20px
+      :padding-left 20px
       :line-height 40px
       :border-bottom 1px solid #000
       :border-color = !text_color
-      :padding-left 30px
       &.selected, &.hover
         :background-image url(../images/backgrounds/tracks.png)
         :background-position 420px 0px
+      &.disabled
+        :color = !disabled
       input
         :margin-right 8px
-
 .asset.played
   :opacity 0.2
 .asset.playing, .asset.hover

@@ -55,6 +55,30 @@ FavoriteToggle = $.klass(Remote.Link,{
   }
 });
 
+
+if (!Array.prototype.indexOf)
+{
+  Array.prototype.indexOf = function(elt /*, from*/)
+  {
+    var len = this.length;
+
+    var from = Number(arguments[1]) || 0;
+    from = (from < 0)
+         ? Math.ceil(from)
+         : Math.floor(from);
+    if (from < 0)
+      from += len;
+
+    for (; from < len; from++)
+    {
+      if (from in this &&
+          this[from] === elt)
+        return from;
+    }
+    return -1;
+  };
+}
+
 // for debug purposes
 $.fn.log = function() {
   if (this.size()==0) return "<em>wrapped set is empty</em>"
@@ -126,7 +150,7 @@ SortablePlaylist = $.klass({
     this.emptyWarning = $('.empty',this.element);
     this.create_sortable();   
     this.element.droppable({
-      accept: ".asset",
+      accept: ".ui-draggable",
       drop: $.bind(this.add_track, this), // LOVE danwebb and $.bind
       hoverClass: 'adding',
       tolerance: 'touch',
@@ -418,12 +442,15 @@ EditForm = $.klass(Remote.Form,{
 
 Track = $.klass({  
   initialize: function() {
+    this.element.addClass('instantiated');
     this.playButton = $(".play-button",this.element);
     this.trackLink = $("a.track_link",this.element);
     this.time = $('span.counter',this.element);
+    this.track_title = $('a.track_link',this.element).html();
+    this.artist = $('a.artist',this.element).html();
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = $('a.play_link',this.element).attr('href');
-    this.soundID = 'play-'+this.element[0].id; 
+    this.soundID = this.element[0].id; 
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing those tabs
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
@@ -471,9 +498,9 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
     
     // close all other detail panes except currently playing
-    for(var track in this.behavior.instances){
-        if(!this.behavior.instances[track].isPlaying() && this.element != this.behavior.instances[track].element) 
-          this.behavior.instances[track].closeDetails();
+    for(i=0;i< this.behavior.instances.length;i++){
+        if(!this.behavior.instances[i].isPlaying() && this.element != this.behavior.instances[i].element) 
+          this.behavior.instances[i].closeDetails();
     }
     
     this.element.addClass('open');
@@ -546,7 +573,17 @@ Track = $.klass({
     this.pause();
     this.behavior.instances[this.nextTrackIndex()].playOrResume();
   },
-  
+  startPreviousTrack:function(){
+    this.pause();
+    this.behavior.instances[this.previousTrackIndex()].playOrResume();
+  },
+  previousTrackIndex : function(){
+    // index of next Track in Track.instances
+    var next = this.behavior.instances.indexOf(this) - 1;
+    // loop back to the first track
+    if(this.behavior.instances[next] == undefined) next = (this.behavior.instances.length - 1);
+    return next;
+  },
   nextTrackIndex : function(){
     // index of next Track in Track.instances
     var next = this.behavior.instances.indexOf(this) + 1;
@@ -556,7 +593,7 @@ Track = $.klass({
   },
   
   killOtherTracks : function(){
-    for(var track in this.behavior.instances){ 
+    for(track=0;track < this.behavior.instances.length;track++){ 
       if(this.behavior.instances[track].isPlaying()) this.behavior.instances[track].pause();
     }
   },
@@ -580,7 +617,7 @@ Track = $.klass({
       if(seconds < 10) seconds = '0'+seconds; // aww, i miss prototype
       var time = Math.floor(this.elapsed_time/60) + ':' + seconds;
       this.time.html(time); 
-      document.title = '('+time+') '+this.originalDocumentTitle;
+      document.title = time+' - '+this.track_title+' by '+this.artist;
     }
   },
   ensureSoundIsReadyThenPlay : function(){
@@ -601,9 +638,13 @@ RadioTrack = $.klass(Track,{
   supplyNewTracksIfNeeded : function(){
     Radio.instances[0].supplyNewTracksIfNeeded();
   },
-  removeFromDom:function(){
+  removeCompletely:function(){
+    //console.log('removing '+this.track_title);
+    //if(this.soundIsLoaded()) // remove mp3 from memory
+     // soundManager.destroySound(this.SoundID);
     this.more.remove();
     this.element.fadeOut('slow',function(){$(this).remove()});
+    RadioTrack.instances.splice(this.behavior.instances.indexOf(this),1);
   },
   pause:function($super){
     $super();
@@ -622,25 +663,20 @@ Radio = $.klass({
     this.currentStation = $('li.selected', this.element);
     this.tracks = $('#radio_tracks');
     this.channelName = $('#channel_name');
-    this.maxNumberPlayedTracks = 1; // trim tracks after 2   have played
+    this.maxNumberPlayedTracks = 2; // trim tracks after 3 have played
     this.minNumberRemainingTracks = 3 ;
     this.page = {}; // keeps track of paging through the results
-    // radio selector  
-  //  this.controls.change(function(){
-  //      source = $(':checked',this).val();
-  //      window.location = '/radio/'+source;
-  //  });
+    $.hotkeys.add('down', $.bind(this.nextTrack, this));
+    $.hotkeys.add('up', $.bind(this.previousTrack,this));
+
     
-    $('li', this.controls).hover(function() {
-        if(!$('input',this).attr('disabled'))
-          $(this).addClass('hover');
-      }, function() {
-        $(this).removeClass('hover');
-    });
-    
-    $('li', this.controls).click($.bind(this.changeStation, this));
+    this.bindHoverAndClickStation();
   },
-  
+  printTracks : function(){ //debugging
+    for(i=0;i< this.behavior.instances.length;i++){
+      console.log(RadioTrack.instances[i].track_title);
+    }
+  },
   changeStation : function(newStation){
     newStation = ($(newStation.target).parent('li').length == 0) ? $(newStation.target) : $(newStation.target).parent('li');
     if($('input', newStation).attr('disabled')) 
@@ -672,10 +708,12 @@ Radio = $.klass({
     $.get(url, $.bind(this.appendTracks, this));
   },
   appendTracks : function (data){
-    $('.asset',this.tracks.append(data)).attach(RadioTrack);
+    // make sure to only attach RadioTrack to incoming new tracks  
+    $(this.tracks.append(data));  
+    $('.asset',this.tracks).not('.instantiated').attach(RadioTrack);
   },
-  checkForPlayingTrack : function(){
-    $('.track'.hasClass('playing'));
+  somethingIsPlaying : function(){
+    return $('.asset.playing').length > 0;
   },
   trimPlayedTracks : function(){
     if(this.playedTracksStillOnScreen() > this.maxNumberPlayedTracks)
@@ -688,14 +726,20 @@ Radio = $.klass({
     }
   },
   removeRadioTrack : function(toRemove){
+    // given the element, we want to find the RadioTrack 
     for(j=0;j < RadioTrack.instances.length;j++){
-      if(RadioTrack.instances[j].element[0].id == toRemove.id){
-          RadioTrack.instances[j].removeFromDom();
-          RadioTrack.instances.splice(j,1);
-        }
+      if(RadioTrack.instances[j].element[0].id == toRemove.id)
+          RadioTrack.instances[j].removeCompletely();
+    }
+  },
+  findRadioTrack : function(domTrack){
+    for(j=0;j < RadioTrack.instances.length;j++){
+      if(RadioTrack.instances[j].element[0].id == domTrack.id)
+          return RadioTrack.instances[j];
     }
   },
   removeRadioTracks : function(object){
+    //console.log('removing a handful');
     for(i=0;i < object.length;i++){
       this.removeRadioTrack(object[i]);
     }
@@ -706,6 +750,31 @@ Radio = $.klass({
   },
   playedTracksStillOnScreen : function(){
     return $('.asset.played').length
+  },
+  nextTrack : function(e){
+    if(this.keyboardEnabled(e)){
+      playing = this.findRadioTrack($('.asset.playing')[0])
+      playing.startNextTrack();
+    } 
+  },
+  previousTrack : function(e){
+    if(this.keyboardEnabled(e)){
+      playing = this.findRadioTrack($('.asset.playing')[0])
+      playing.startPreviousTrack();
+    }     
+  },
+  keyboardEnabled : function(e){
+    return !$(e.target).is('textarea') && this.somethingIsPlaying();
+  },
+  bindHoverAndClickStation : function(e){
+    $('li', this.controls).hover(function() {
+        if(!$('input',this).attr('disabled'))
+          $(this).addClass('hover');
+      }, function() {
+        $(this).removeClass('hover');
+    });
+    
+    $('li', this.controls).click($.bind(this.changeStation, this));
   }
 });
 

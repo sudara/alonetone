@@ -74,8 +74,8 @@ module ApplicationHelper
     flashes.join
   end
   
-  def check_for_and_display_notices
-    
+  def check_for_and_display_welcome_back
+    render :partial => 'shared/welcome_back' if welcome_back?
   end
   
   def authorized?

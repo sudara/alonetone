@@ -63,6 +63,11 @@ class User < ActiveRecord::Base
     (self[:moderator] == true)
   end
   
+  def hasnt_been_here_in(hours)
+    return false unless last_seen_at and last_session_at
+    last_seen_at.utc < hours.ago.utc
+  end
+  
   protected
   
   def make_first_user_admin
