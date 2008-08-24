@@ -44,5 +44,9 @@ module UsersHelper
     link_to((is_favorite ? 'remove from favorites' : 'add to favorites'), toggle_favorite_user_path(current_user, :asset_id => asset.id), 
       :class => 'add_to_favorites '+(is_favorite ? 'favorited' : ''))
   end
+  
+  def new_to_user?(thing)
+    logged_in? and current_user.last_session_at < thing.created_at
+  end
 
 end
