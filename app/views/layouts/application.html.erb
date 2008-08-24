@@ -15,7 +15,7 @@
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 
-    <%= javascript_include_tag 'jquery','soundmanager','jquery-ui','jquery-fx','jquery-easing','jquery-carousel','jquery-lowpro','jquery-tabs','jquery-hotkeys','facebox','jquery-png','application', :cache => 'allonetone' %>
+    <%= javascript_include_tag 'jquery-1.2.6','soundmanager','jquery-ui-and-tabs','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','jquery-png','application', :cache => 'allonetone' %>
     
     <!-- ensure token is available to javascript for accessible link posts, etc -->
     <%= render :partial => 'shared/javascript_auth_token' %>
@@ -59,7 +59,7 @@
                         last seen at <%= current_user.last_seen_at %><br/>
                         last session at <%= current_user.last_session_at %><br/>
                         <%= debug session %>
-                        <%= debug current_user %>
+                        <%= debug current_user if logged_in? %>
                     <% end %>
                     
                 </div>

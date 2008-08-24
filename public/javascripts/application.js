@@ -150,7 +150,7 @@ SortablePlaylist = $.klass({
     this.emptyWarning = $('.empty',this.element);
     this.create_sortable();   
     this.element.droppable({
-      accept: ".asset",
+      accept: ".ui-draggable",
       drop: $.bind(this.add_track, this), // LOVE danwebb and $.bind
       hoverClass: 'adding',
       tolerance: 'touch',
@@ -498,7 +498,7 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
     
     // close all other detail panes except currently playing
-    for(i=0;i<RadioTrack.instances.length;i++){
+    for(i=0;i< this.behavior.instances.length;i++){
         if(!this.behavior.instances[i].isPlaying() && this.element != this.behavior.instances[i].element) 
           this.behavior.instances[i].closeDetails();
     }
@@ -643,8 +643,8 @@ RadioTrack = $.klass(Track,{
     //if(this.soundIsLoaded()) // remove mp3 from memory
      // soundManager.destroySound(this.SoundID);
     this.more.remove();
-    this.element.fadeOut('slow',function(){$(this.element).remove()});
-    RadioTrack.instances.splice(RadioTrack.instances.indexOf(this),1);
+    this.element.fadeOut('slow',function(){$(this).remove()});
+    RadioTrack.instances.splice(this.behavior.instances.indexOf(this),1);
   },
   pause:function($super){
     $super();
@@ -670,17 +670,10 @@ Radio = $.klass({
     $.hotkeys.add('up', $.bind(this.previousTrack,this));
 
     
-    $('li', this.controls).hover(function() {
-        if(!$('input',this).attr('disabled'))
-          $(this).addClass('hover');
-      }, function() {
-        $(this).removeClass('hover');
-    });
-    
-    $('li', this.controls).click($.bind(this.changeStation, this));
+    this.bindHoverAndClickStation();
   },
   printTracks : function(){ //debugging
-    for(i=0;i<RadioTrack.instances.length;i++){
+    for(i=0;i< this.behavior.instances.length;i++){
       console.log(RadioTrack.instances[i].track_title);
     }
   },
@@ -772,6 +765,16 @@ Radio = $.klass({
   },
   keyboardEnabled : function(e){
     return !$(e.target).is('textarea') && this.somethingIsPlaying();
+  },
+  bindHoverAndClickStation : function(e){
+    $('li', this.controls).hover(function() {
+        if(!$('input',this).attr('disabled'))
+          $(this).addClass('hover');
+      }, function() {
+        $(this).removeClass('hover');
+    });
+    
+    $('li', this.controls).click($.bind(this.changeStation, this));
   }
 });
 
