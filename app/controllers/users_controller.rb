@@ -37,9 +37,9 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = @description = (@user.name)
-        @keywords = "#{@user.name}, latest, upload, music, mp3, mp3s, playlists, download, listen"      
-
+        @page_title = (@user.name)
+        @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
+        @description = "#{@user.name}'s music and albums"
         @tab = 'your_stuff' if current_user == @user
                
         @popular_tracks = @user.assets.find(:all, :limit => 4, :order => 'assets.listens_count DESC')

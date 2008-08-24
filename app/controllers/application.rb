@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_latest_update_title
   
   # let ActionView have a taste of our authentication
-  helper_method :current_user, :logged_in?, :admin?, :last_active, :current_page, :moderator?
+  helper_method :current_user, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?
   
   
   #rescue_from ActiveRecord::RecordNotFound, :with => :show_error

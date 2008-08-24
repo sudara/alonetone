@@ -37,17 +37,34 @@ module AuthenticatedSystem
       false
     end
     
-    def login_by_token  
+    def login_by_token
+      @welcome_back = true if logged_in? && self.current_user.hasnt_been_here_in(3.hours)
+
       return unless cookies[:auth_token] && !logged_in?
       user = cookies[:auth_token] && User.find_by_token(cookies[:auth_token])
       if user && user.token?
         cookies[:auth_token] = { :value => user.token, :expires => 2.weeks.from_now }
         self.current_user = user
+        update_last_session_at
       end    
     end
     
     def login_from_session
-      self.current_user = User.find(session[:user]) if session[:user]
+      if session[:user]
+        self.current_user = User.find(session[:user]) 
+        update_last_session_at
+      end
+    end
+    
+    def welcome_back?
+      @welcome_back
+    end
+    
+    def update_last_session_at
+      if self.current_user
+        # when the user last was on alonetone (used for stats, highlighting what's new)
+        self.current_user.update_attribute(:last_session_at, self.current_user.last_seen_at)
+      end
     end
     
     def default_url
