@@ -19,11 +19,11 @@ class UsersController < ApplicationController
       end
       format.fbml
       format.xml do
-        @users = User.search(params[:q], :limit => 25)
+        @users = User.activated.search(params[:q], :limit => 1000)
         render :xml => @users.to_xml
       end
       format.rss do
-        @users = User.geocoded.find(:all, :limit => 500)
+        @users = User.activated.geocoded.find(:all, :limit => 1000)
       end
       format.js do
           render :partial => 'users.html.erb'

@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] << :email << :token << :token_expires_at << :crypted_password << :identity_url << :fb_user_id << :activation_code << :admin << :salt
+    options[:except] << :email << :token << :token_expires_at << :crypted_password << :identity_url << :fb_user_id << :activation_code << :admin << :salt << :moderator << :ip
     super
   end
   
