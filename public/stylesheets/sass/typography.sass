@@ -182,7 +182,30 @@ div.notice a.hide_notice
   :font-weight bold
   :color = !orange
   
-
+div.footer_box
+  :margin-top 3px
+  :height 30px
+  :width 420px
+  :background #c7c8c7 url(../images/backgrounds/notice.png) repeat-x top left
+  :line-height 30px
+  &.onepx
+    :margin-top 1px
+  a
+    :font-size = 16px
+    :color = !text_color
+    :display block
+    :float right
+    :border-left 1px solid black
+    :height 30px
+    :padding-left 10px
+    :padding-right 22px
+    :line-height 30px
+    :background url(../images/buttons/padded_arrow.png) no-repeat right center
+    &:hover
+      :background-color = !orange
+      :color white
+      :text-decoration none
+    
 span.orange
   :color = !orange
     
