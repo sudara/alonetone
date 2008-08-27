@@ -42,12 +42,12 @@ class UsersController < ApplicationController
         @description = "#{@user.name}'s music and albums"
         @tab = 'your_stuff' if current_user == @user
                
-        @popular_tracks = @user.assets.find(:all, :limit => 4, :order => 'assets.listens_count DESC')
-        @assets = @user.assets.find(:all, :limit => 4)
+        @popular_tracks = @user.assets.find(:all, :limit => 5, :order => 'assets.listens_count DESC')
+        @assets = @user.assets.find(:all, :limit => 5)
         @playlists = @user.playlists.public.find(:all)
-        @listens = @user.listens.find(:all, :limit =>4)
+        @listens = @user.listens.find(:all, :limit =>5)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
-        @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 4)
+        @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
         @mostly_listens_to = @user.mostly_listens_to
         @comments = @user.comments.public.find(:all, :limit => 5) unless display_private_comments_of?(@user)
         @comments = @user.comments.include_private.find(:all, :limit => 5) if display_private_comments_of?(@user)
