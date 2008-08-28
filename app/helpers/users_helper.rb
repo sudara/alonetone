@@ -28,6 +28,7 @@ module UsersHelper
   
   def user_image_link(user, size = :large)
     link_to(image_tag(user.avatar(size),
+      :class => (user.has_pic? ? '' : 'no_border'),
       :alt => "#{user.name} on alonetone"), 
       user_home_path(user), 
       :title => " #{user.name}
@@ -52,7 +53,7 @@ module UsersHelper
   end
   
   def new_to_user?(thing)
-    logged_in? and current_user.last_session_at < thing.created_at
+    logged_in? and current_user.last_session_at < thing.created_at.utc
   end
 
 end

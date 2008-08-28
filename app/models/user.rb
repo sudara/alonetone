@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   
   def hasnt_been_here_in(hours)
     return false unless last_seen_at and last_session_at
-    last_seen_at.utc < hours.ago.utc
+    last_seen_at < hours.ago.utc
   end
   
   protected

@@ -26,4 +26,16 @@ class User
       :limit => limit, 
       :conditions => ['track_owner_id != ?',self.id]).collect(&:first)
   end  
+  
+  def plays_since_last_session
+    return false unless self.assets_count > 0
+    count = Listen.count(:all, :conditions => ['track_owner_id = ? AND created_at BETWEEN ? AND ?',self.id, self.last_session_at, Time.now.utc], :include => [])
+    count > 0 ? count : false
+  end
+  
+  def comments_since_last_session
+    return false unless self.assets_count > 0
+    count = Comment.count(:all, :conditions => ['user_id = ? AND created_at BETWEEN ? AND ?',self.id, self.last_session_at, Time.now.utc], :include => [])
+    count > 0 ? count : false
+  end
 end

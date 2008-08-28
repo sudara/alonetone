@@ -39,7 +39,6 @@ module AuthenticatedSystem
     
     def login_by_token
       @welcome_back = true if logged_in? && self.current_user.hasnt_been_here_in(3.hours)
-
       return unless cookies[:auth_token] && !logged_in?
       user = cookies[:auth_token] && User.find_by_token(cookies[:auth_token])
       if user && user.token?
@@ -64,6 +63,7 @@ module AuthenticatedSystem
       if self.current_user
         # when the user last was on alonetone (used for stats, highlighting what's new)
         self.current_user.update_attribute(:last_session_at, self.current_user.last_seen_at)
+        update_last_seen_at
       end
     end
     

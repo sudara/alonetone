@@ -104,6 +104,14 @@ module ApplicationHelper
     link_to image_tag('feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url, :class => 'rss'
   end  
   
+  def friendly_time_ago(time)
+    if time > 1.week.ago 
+      time_ago_in_words(time) + ' ago'
+    else
+      time.to_date.to_s(:long)
+    end  
+  end
+  
   
   protected 
 end

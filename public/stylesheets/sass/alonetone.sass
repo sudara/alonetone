@@ -107,9 +107,14 @@
     a
       img
         :border 1px solid black
-        :border-color = !body_background
+        :border-top-color rgba(29,31,20,0.38)
+        :border-bottom-color rgba(29,31,20,0.78)
+        :border-left-color rgba(29,31,20,0.48)
+        :border-right-color rgba(29,31,20,0.48)
         :width 125px
         :height 125px
+        &.no_border
+          :border-color = !body_background
       &:hover
         img
           :border 1px solid black
@@ -129,6 +134,8 @@
       :overflow none
       &:hover
         :text-decoration underline
+        :color = !silver
+
 #large_users_grid
   :margin-top 60px
   :width 101%
