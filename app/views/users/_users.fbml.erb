@@ -15,7 +15,7 @@
   </div>
   <% render :layout => 'shared/paginate', :object => @users do %>
 
-  <div id="recently_uploaded">
+  <div id="large_user_grid">
      
     <% @users.each do |user| %>
     <% if user.try(:first) %>

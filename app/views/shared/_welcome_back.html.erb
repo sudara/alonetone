@@ -1,3 +1,15 @@
 <div class="flash">
-  Welcome back, <%= current_user.name %>
+  Welcome back, <%= current_user.name %><br/>
+  <div class="flash_stats">
+      <% if new_plays = current_user.plays_since_last_session %>
+        You have <%= link_to "#{new_plays} new track plays", listens_path(current_user.login) %>
+      <% end %>
+      <% if new_comments = current_user.comments_since_last_session %>
+        <%= new_plays ? ' and ' : 'You have' %>
+        <%= link_to "#{new_comments} new comments", user_comments_path(current_user.login) %>
+      <% end %>
+      <% if new_plays || new_comments %>
+        since you last logged in (<%= friendly_time_ago(current_user.last_session_at) %>)
+      <% end %>
+  </div>
 </div>

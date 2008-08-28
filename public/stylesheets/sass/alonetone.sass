@@ -98,17 +98,33 @@
         :border 1px solid #4b4e3f
        
 // browse all users    
-#user-index, #user_search_results
+#user_index, #user_search_results
   :position relative
   div.user
     :float left
     :margin-right 50px
     :margin-bottom 30px
+    a
+      img
+        :border 1px solid black
+        :border-top-color rgba(29,31,20,0.38)
+        :border-bottom-color rgba(29,31,20,0.78)
+        :border-left-color rgba(29,31,20,0.48)
+        :border-right-color rgba(29,31,20,0.48)
+        :width 125px
+        :height 125px
+        &.no_border
+          :border-color = !body_background
+      &:hover
+        img
+          :border 1px solid black
+          :border-color = !silver
     .name
       :color = !white
+      :text-shadow none
       :text-align center
       :background-color transparent
-      :font-size 14px
+      :font-size 16px
       :font-weight normal
       :text-decoration none
       :margin-top 5px
@@ -117,8 +133,16 @@
       :display block
       :overflow none
       &:hover
-        :font-weight bold
         :text-decoration underline
+        :color = !silver
+
+#large_users_grid
+  :margin-top 60px
+  :width 101%
+  :position relative
+  :padding-left 20px
+  :margin-right 0
+  :padding-right 0
       
 // comments
 
@@ -370,10 +394,13 @@
   
 #mostly_listens_to
   :padding-bottom 0px
+  :margin-bottom -10px
+  :padding-right 0px
   div
     :float left
-    :margin-bottom 20px
-    :margin-right 24px
+    :margin-bottom 10px
+    :margin-top 10px
+    :margin-right 29px
   
 div.small_spinner
   :margin-top 5px
@@ -432,7 +459,7 @@ a.add_to_favorites, a.favorited
     a
       img 
         :margin-bottom 5px
-        
+  
 #map
   :width 860px
   :height 600px
@@ -497,6 +524,7 @@ a.add_to_favorites, a.favorited
     div.pic
       :float left
       :width 135px
+      :height 125px
       :margin-right 10px
     div.link
       :height 22px
@@ -505,7 +533,7 @@ a.add_to_favorites, a.favorited
       :padding-top 15px
       :padding-right 15px
       :color = !text_color
-      :font-size 12px
+      :font-size 14px
       :line-height 16px
 .feature_stats
   :padding 0px

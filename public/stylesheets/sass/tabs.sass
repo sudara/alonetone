@@ -126,6 +126,18 @@ div.tabs,div.big_tabs
     :border-top-color = !body_background
     &.no_border
       :border none
+    &.description_panel
+      :position relative
+      .alonetoner
+        :position absolute
+        :top -15px
+        :left 0
+        :border-right 1px solid 
+        :border-right-color = !text_color
+        :background-color = !body_background
+        :height 100%
+      .description
+        :margin-left 50px
     .track_links 
       :height 22px
       a

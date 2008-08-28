@@ -10,18 +10,20 @@
 
 <% content_for :left do%>
   <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
-  <%= link_to 'view all', radio_path(:per_page => 40,:source => 'latest'), :class => 'view_all', :title => 'latest uploaded mp3s' %>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>
+  <div class="footer_box">
+    <%= link_to 'view all recent music', radio_path(:per_page => 40,:source => 'latest'), :title => 'latest uploaded mp3s' %>
+  </div>
   
   <h2 id="latest_comments" class="box">Latest Comments</h2>
-  	<%= link_to 'view all', all_comments_path, :class => 'view_all', :title => 'view latest comments' %>
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>
-  
- 
+  <div class="footer_box">
+   <%= link_to 'view all latest comments', all_comments_path, :title => 'view latest comments' %>
+   </div>
 <% end %>
 
 
@@ -30,17 +32,22 @@
     <%= render :partial => 'features/feature', :object => @feature if @feature %>
 
 	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
-	<%= link_to 'view all', top_path(40), :class => 'view_all', :title => 'alonetone radio: currently kicking ass' %>
 
   <% @referer = 'home' %>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
+  <div class="footer_box">
+   <%= link_to 'view all kicking ass', top_path(40), :title => 'alonetone radio: currently kicking ass' %>
+  </div>
+  
    <h2 id="recently_favorited" class="box">Recently favorited</h2>
-  <%= link_to 'view all', radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' %>
   <div class="box">
     <%= render :partial => 'shared/favorite', :collection => @favorites %>
   </div>  
+  <div class="footer_box">
+    <%= link_to 'view all recent favorites', radio_path(:per_page => 40, :source => 'favorites'), :title => 'alonetone radio: recently favorited' %>
+  </div>
 <% end %>
 
 <% content_for :bottom do %>

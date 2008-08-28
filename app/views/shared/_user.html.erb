@@ -5,7 +5,7 @@
 
 
 <% div_for(user, :class => 'user-index') do %>
-	<%= user_image_link(user) %><br/>
+	<%= user_image_link(user, :large) %><br/>
 	
 	<%= link_to h(user.name), user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %> 
 	<%= "(#{count})" if count %>

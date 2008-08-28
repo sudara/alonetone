@@ -116,6 +116,8 @@ html[xmlns] .clearfix
     :position absolute
     :left 50px
     :top 13px    
+    #updates_link.new
+      :color = !red 
   #footer_right
     :position absolute
     :left 520px
@@ -200,9 +202,12 @@ html[xmlns] .clearfix
       
 // general spacing stuff
 div.box
-  :margin-bottom 30px
   :position relative
-  
+  :margin-bottom 30px
+div.footer_box
+  :margin-top -29px
+  :margin-bottom 30px
+
 div.notice, div.errorExplanation
   :background #c7c8c7 url(../images/backgrounds/notice.png) repeat-x top left
   :padding 20px 30px

@@ -1,7 +1,9 @@
 <div id="user_listens" class="box">
   <h2 class="box">Recent alonetone favorites</h2>
-  <%= link_to 'view all', listens_path(@user.login), :class => 'view_all' if @user.favorites.tracks.size > 5 %>
   <% @favorites.each do |track| %>
     <%= render :partial => 'favorite', :object => track %>
   <% end %>
+</div>
+<div class="footer_box">
+  <%= link_to "view all favorited tracks", listens_path(@user.login) if @user.favorites.tracks.size > 5 %>
 </div>

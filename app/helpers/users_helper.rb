@@ -27,7 +27,14 @@ module UsersHelper
   end
   
   def user_image_link(user, size = :large)
-    link_to(image_tag(user.avatar(size),:alt => "#{user.name} on alonetone"), user_home_path(user), :title => "#{user.name} on alonetone") 
+    link_to(image_tag(user.avatar(size),
+      :class => (user.has_pic? ? '' : 'no_border'),
+      :alt => "#{user.name} on alonetone"), 
+      user_home_path(user), 
+      :title => " #{user.name}
+ #{user.assets_count > 0 ? pluralize(user.assets_count,'uploaded tracks') : ''} 
+ Joined alonetone #{user.created_at.to_date.to_s(:long)}
+ #{user_location(user)}") 
   end
   
   def notice_hidden?(notice)
@@ -43,6 +50,10 @@ module UsersHelper
     is_favorite = current_user.has_as_favorite?(asset)
     link_to((is_favorite ? 'remove from favorites' : 'add to favorites'), toggle_favorite_user_path(current_user, :asset_id => asset.id), 
       :class => 'add_to_favorites '+(is_favorite ? 'favorited' : ''))
+  end
+  
+  def new_to_user?(thing)
+    logged_in? and current_user.last_session_at < thing.created_at.utc
   end
 
 end
