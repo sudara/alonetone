@@ -54,7 +54,7 @@ class UsersController < ApplicationController
         
         render
       end
-      format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
+      format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC', :limit => (params[:limit] || 10))}
       format.rss { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
       format.fbml do
         @assets = @user.assets.find(:all)

@@ -36,9 +36,10 @@
   <% end %>
   
   <% content_for :right do %>
+    <%= render :partial => 'favoriters' if present?(@favoriters)%>
     <%= render :partial => 'users'%>
     <div class="clear"> </div>
-    <%= render :partial => 'shared/comments' if @comments && @comments.size > 0 %>
+    <%= render :partial => 'shared/comments' if present?(@comments) %>
 
   <% end %>
   

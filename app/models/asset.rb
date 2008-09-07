@@ -15,6 +15,11 @@ class Asset < ActiveRecord::Base
   has_many :listens, :dependent => :destroy
   has_many :listeners, :through => :listens, :order => 'listens.created_at DESC', :uniq => true, :limit => 20
   
+  has_many :favoriters, :source => :user, 
+    :through => :tracks, :conditions => {'tracks.is_favorite' => true}, 
+    :order =>'tracks.created_at DESC', :include => :pic
+  
+  
   has_many :comments, :as => :commentable,  :dependent => :destroy, :order => 'created_at DESC'
     
   acts_as_defensio_article

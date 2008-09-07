@@ -8,6 +8,40 @@ class User
     track_plays.count(:all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight], :group => 'DATE(listens.created_at)').collect{|tp| tp[1]}
   end
   
+  def most_favorited_chart
+    create_chart assets.find(:all, :limit => chart_limit, 
+      :order => 'favorites_count DESC', :include => []), :favorites_count
+  end
+  
+  def most_popular_chart
+    create_chart assets.find(:all, :limit => chart_limit, 
+      :order => 'hotness DESC', :include => []), :hotness
+  end 
+  
+  def most_listened_to_ever_chart
+    create_chart assets.find(:all, :limit => chart_limit,  
+      :order => 'listens_count DESC', :include => []), :listens_count
+  end
+  
+  def most_commented_on_chart
+    create_chart assets.find(:all, :limit => chart_limit, 
+      :order => 'comments_count DESC', :include => []), :comments_count
+  end
+  
+  def chart_limit
+    assets_count > 5 ? 5 : assets_count
+  end
+  
+  def create_chart(data_and_labels, counted)
+    data = data_and_labels.collect(&counted)
+    labels = data_and_labels.collect{|a| ERB::Util.u(a.name)}.join('|')
+    chart = Gchart.bar(:size => '350x150', :data => data, 
+    :background => 'e1e2e1', :orientation => 'horizontal',
+    :axis_with_labels => 'y,r',:axis_labels => [labels,data.reverse.join('|')], :line_colors =>'cc3300')
+  #rescue
+    
+  end
+  
   def listens_average
     (self.listens_count.to_f / ((((Time.now - self.assets.find(:all, :limit => 1, :order => 'created_at').first.created_at)  / 60 / 60 / 24 )).ceil)).ceil
   end
@@ -38,4 +72,5 @@ class User
     count = Comment.count(:all, :conditions => ['user_id = ? AND created_at BETWEEN ? AND ?',self.id, self.last_session_at, Time.now.utc], :include => [])
     count > 0 ? count : false
   end
+  
 end

@@ -62,7 +62,9 @@ class Asset
     sum_up_the_months(@@launch_date){|date, sum| monthly_counts << [sum, date]}
     data = monthly_counts.collect(&:first)
     labels = monthly_counts.collect(&:last)
-    chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chbh=35,25' )
+    chart = Gchart.line(:size => '500x150', :data => data, 
+      :background => 'e1e2e1', :axis_with_labels => 'r,x',
+      :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chbh=35,25' )
   end
   
   

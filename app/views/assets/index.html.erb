@@ -10,4 +10,36 @@
 	</div>
 	<% end %>
 
+    <% content_for :right do %>
+    <% if authorized? %>
+    
+    <div class="box">
+    <h2 class="box">Most Favorited Tracks</h2>
+    <div class="static_content">
+        <%= image_tag @user.most_favorited_chart %> 
+    </div>
+    </div>
+    
+    <div class="box">
+    <h2 class="box">Most Popular Tracks (this week)</h2>
+    <div class="static_content">
+        <%= image_tag @user.most_popular_chart %> 
+    </div>
+    </div>
+    
+    <div class="box">
+    <h2 class="box">Most Commented On Tracks</h2>
+    <div class="static_content">
+        <%= image_tag @user.most_commented_on_chart %> 
+    </div>
+    </div>
+    
+    <div class="box">
+    <h2 class="box">Most Listened To Tracks (total ever)</h2>
+    <div class="static_content">
+        <%= image_tag @user.most_listened_to_ever_chart %> 
+    </div>
+    </div>
+    <% end %>
+    <% end %>
 <% end %>
