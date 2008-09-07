@@ -17,6 +17,7 @@ module AuthenticatedSystem
       return unless logged_in? 
       current_user.update_attribute(:last_seen_at,Time.now.utc)
       current_user.update_attribute(:ip, request.remote_ip)
+      current_user.update_attribute(:browser, request.user_agent)
     end
     
     def login_required

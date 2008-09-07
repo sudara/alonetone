@@ -1,24 +1,32 @@
-require 'thread'
+require 'newrelic/agent/synchronize'
 
 # A worker loop executes a set of registered tasks on a single thread.  
 # A task is a proc or block with a specified call period in seconds.  
 module NewRelic::Agent
+  
   class WorkerLoop
+    include(Synchronize)
+    
     attr_reader :log
     
     def initialize(log = Logger.new(STDERR))
       @tasks = []
-      @mutex = Mutex.new
       @log = log
+      @should_run = true
     end
 
     # run infinitely, calling the registered tasks at their specified
     # call periods.  The caller is responsible for creating the thread
     # that runs this worker loop
     def run
-      while(true) do
+      while(@should_run) do
         run_next_task
       end
+    end
+    
+    
+    def stop
+      @should_run = false
     end
 
     MIN_CALL_PERIOD = 0.1
@@ -27,17 +35,17 @@ module NewRelic::Agent
     # every call_period seconds.  The task is passed as a block
     def add_task(call_period, &task_proc)
       if call_period < MIN_CALL_PERIOD
-        raise ArgumentError.new("Invalid Call Period (must be > #{MIN_CALL_PERIOD}): #{call_period}") 
+        raise ArgumentError, "Invalid Call Period (must be > #{MIN_CALL_PERIOD}): #{call_period}" 
       end
       
-      @mutex.synchronize do 
+      synchronize do 
         @tasks << LoopTask.new(call_period, &task_proc)
       end
     end
       
     private 
       def get_next_task
-        @mutex.synchronize do
+        synchronize do
           return @tasks.inject do |soonest, task|
             (task.next_invocation_time < soonest.next_invocation_time) ? task : soonest
           end
@@ -46,7 +54,7 @@ module NewRelic::Agent
     
       def run_next_task
         if @tasks.empty?
-          sleep 5.0
+          sleep 1.0
           return
         end
         
@@ -56,11 +64,20 @@ module NewRelic::Agent
   
         # sleep until this next task's scheduled invocation time
         sleep_time = task.next_invocation_time - Time.now
-        sleep sleep_time unless sleep_time <= 0
+        
+        # sleep in chunks no longer than 1 second
+        while sleep_time > 0
+          
+          sleep (sleep_time > 1 ? 1 : sleep_time)
+            
+          return if !@should_run
+          
+          sleep_time -= 1
+        end
         
         begin
           task.execute
-        rescue Exception => e
+        rescue Timeout::Error, StandardError => e
           log.debug "Error running task in Agent Worker Loop: #{e}" 
           log.debug e.backtrace.join("\n")
         end

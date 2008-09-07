@@ -1,25 +1,48 @@
 require 'newrelic/transaction_sample'
 require 'thread'
 require 'newrelic/agent/method_tracer'
+require 'newrelic/agent/synchronize'
 
 module NewRelic::Agent
   class TransactionSampler
-    def initialize(agent = nil, max_samples = 100)
+    include(Synchronize)
+    
+    def initialize(agent, options = {})
       @samples = []
-      @mutex = Mutex.new
-      @max_samples = max_samples
+      
+      @options = {:max_samples => 100, :record_sql => :obfuscated}
+      @options.merge!(options)
 
-      # when the agent is nil, we are in a unit test.
-      # don't hook into the stats engine, which owns
-      # the scope stack
-      unless agent.nil?
-        agent.stats_engine.add_scope_stack_listener self
+      @max_samples = @options[:max_samples]
+
+      agent.stats_engine.add_scope_stack_listener self
+
+      agent.set_sql_obfuscator(:replace) do |sql| 
+        default_sql_obfuscator(sql)
       end
     end
     
     
+    def default_sql_obfuscator(sql)
+#      puts "obfuscate: #{sql}"
+      
+      # remove escaped strings
+      sql = sql.gsub("''", "?")
+      
+      # replace all string literals
+      sql = sql.gsub(/'[^']*'/, "?")
+      
+      # replace all number literals
+      sql = sql.gsub(/\d+/, "?")
+      
+#      puts "result: #{sql}"
+      
+      sql
+    end
+    
+    
     def notice_first_scope_push
-      get_or_create_builder
+      create_builder
     end
     
     def notice_push_scope(scope)
@@ -44,6 +67,15 @@ module NewRelic::Agent
         end
       end
     end
+    
+    def scope_depth
+      depth = 0
+      with_builder do |builder|
+        depth = builder.scope_depth
+      end
+      
+      depth
+    end
   
     def notice_pop_scope(scope)
       with_builder do |builder|
@@ -56,7 +88,7 @@ module NewRelic::Agent
         builder.finish_trace
         reset_builder
       
-        @mutex.synchronize do
+        synchronize do
           sample = builder.sample
         
           # ensure we don't collect more than a specified number of samples in memory
@@ -76,19 +108,40 @@ module NewRelic::Agent
       end
     end
     
+    def notice_transaction_cpu_time(cpu_time)
+      with_builder do |builder|
+        builder.set_transaction_cpu_time(cpu_time)
+      end
+    end
+    
+    
+    # params == a hash of parameters to add
+    #
+    def add_request_parameters(params)
+      with_builder do |builder|
+        builder.add_request_parameters(params)
+      end
+    end
+    
     # some statements (particularly INSERTS with large BLOBS
     # may be very large; we should trim them to a maximum usable length
     MAX_SQL_LENGTH = 16384
-    def notice_sql(sql)
-      with_builder do |builder|
-        segment = builder.current_segment
-        if segment
-          if sql.length > MAX_SQL_LENGTH
-            sql = sql[0..MAX_SQL_LENGTH] + '...'
+    def notice_sql(sql, config)
+    
+      if (@options[:record_sql] != :off) && (Thread::current[:record_sql].nil? || Thread::current[:record_sql])
+        with_builder do |builder|
+          segment = builder.current_segment
+          if segment
+            current_sql = segment[:sql]
+            sql = current_sql + ";\n" + sql if current_sql
+
+            if sql.length > (MAX_SQL_LENGTH - 4)
+              sql = sql[0..MAX_SQL_LENGTH-4] + '...'
+            end
+            
+            segment[:sql] = sql
+            segment[:connection_config] = config
           end
-          current_sql = segment[:sql]
-          sql = current_sql + ";\n" + sql if current_sql
-          segment[:sql] = sql
         end
       end
     end
@@ -97,7 +150,7 @@ module NewRelic::Agent
     # and clear the collected sample list. 
     
     def harvest_slowest_sample(previous_slowest = nil)
-      @mutex.synchronize do
+      synchronize do
         slowest = @slowest_sample
         @slowest_sample = nil
 
@@ -113,21 +166,16 @@ module NewRelic::Agent
 
     # get the list of samples without clearing the list.
     def get_samples
-      @mutex.synchronize do
+      synchronize do
         return @samples.clone
       end
     end
     
     private 
       BUILDER_KEY = :transaction_sample_builder
-      def get_or_create_builder
-        builder = get_builder
-        if builder.nil?
-          builder = TransactionSampleBuilder.new
-          Thread::current[BUILDER_KEY] = builder
-        end
-        
-        builder
+
+      def create_builder
+        Thread::current[BUILDER_KEY] = TransactionSampleBuilder.new
       end
       
       # most entry points into the transaction sampler take the current transaction
@@ -198,6 +246,18 @@ module NewRelic::Agent
       @current_segment = nil
     end
     
+    def scope_depth
+      depth = -1        # have to account for the root
+      current = @current_segment
+      
+      while(current)
+        depth += 1
+        current = current.parent_segment
+      end
+      
+      depth
+    end
+    
     def freeze
       @sample.freeze unless sample.frozen?
     end
@@ -208,10 +268,18 @@ module NewRelic::Agent
     
     def set_transaction_info(path, request, params)
       @sample.params[:path] = path
-      @sample.params[:request_params] = params.clone
+      @sample.params[:request_params].merge!(params)
       @sample.params[:request_params].delete :controller
       @sample.params[:request_params].delete :action
       @sample.params[:uri] = request.path if request
+    end
+    
+    def set_transaction_cpu_time(cpu_time)
+      @sample.params[:cpu_time] = cpu_time
+    end
+    
+    def add_request_parameters(params)
+      @sample.params[:request_params].merge!(params)
     end
     
     def sample

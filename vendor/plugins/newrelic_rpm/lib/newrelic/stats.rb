@@ -133,6 +133,12 @@ module NewRelic
       s << "StdDev=#{standard_deviation.to_ms}"
     end
     
+    # Summary string to facilitate testing
+    def summary
+      format = "%m/%d %I:%M%p"
+      "[#{Time.at(begin_time).strftime(format)}, #{duration}s. #{call_count} calls; #{average_call_time.to_ms}ms]"
+    end
+    
     # round all of the values to n decimal points
     def round!(decimal_places = 3)
       self.total_call_time = total_call_time.round_to(decimal_places)
@@ -202,7 +208,12 @@ module NewRelic
       self
     end
 
-    alias :trace_call :record_data_point
+    def trace_call(value, exclusive_time = nil)
+      value = 0 if value < 0
+      exclusive_time = 0 if exclusive_time && exclusive_time < 0
+      
+      record_data_point(value, exclusive_time)
+    end
 
     def freeze
       @end_time = Time.now
@@ -241,14 +252,51 @@ module NewRelic
 end
 
 class Numeric
+  
+  # copied from rails
+  def with_delimiter(delimiter=",", separator=".")
+    begin
+      parts = self.to_s.split('.')
+      parts[0].gsub!(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1#{delimiter}")
+      parts.join separator
+    rescue
+      self
+    end
+  end
+  
+  
   # utlity method that converts floating point time values in seconds
   # to integers in milliseconds, to improve readability in ui
   def to_ms(decimal_places = 0)
     (self * 1000).round_to(decimal_places)
   end
   
+  # return the number of decimal points that this number would best render in
+  #
+  def get_number_decimals_ms
+    base = 0.010
+    decimal = 0
+    
+    while decimal <= 6 && self < base do
+      base /= 10.0
+      decimal += 1
+    end
+    
+    decimal
+  end
+  
+  # auto-adjust the precision based on the value
+  def to_smart_ms
+    to_ms get_number_decimals_ms
+  end
+  
+  
   def to_ns(decimal_places = 0)
     (self * 1000000).round_to(decimal_places)
+  end
+  
+  def to_minutes(decimal_places = 0)
+    (self / 60).round_to(decimal_places)
   end
   
   # utility method that converts floating point percentage values

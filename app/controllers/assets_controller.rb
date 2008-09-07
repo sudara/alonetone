@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
   #rescue_from NoMethodError, :with => :user_not_found
   #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
-  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes']
+  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera']
   
   # GET /assets
   # GET /assets.xml
@@ -209,10 +209,12 @@ class AssetsController < ApplicationController
     case params[:referer]
       when 'itunes' then @referer = 'itunes'
       when 'download' then @referer = 'download'
-      when 'home' then @referer = 'home page'
+      when 'home' then @referer = 'alonetone home'
       when 'facebook' then @referer = 'facebook'
+      when nil then @referer = 'direct hit'
+      when '' then @referer = 'direct hit'
       else
-        @referer = (request.env['HTTP_REFERER'] && !request.env['HTTP_REFERER'].empty?) ? request.env['HTTP_REFERER'] : 'alonetone'
+        @referer = request.env['HTTP_REFERER']
     end
   end
   

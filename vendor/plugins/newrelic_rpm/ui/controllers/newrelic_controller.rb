@@ -8,13 +8,26 @@ class NewrelicController < ActionController::Base
   
   # do not include any filters inside the application since there might be a conflict
   if respond_to? :filter_chain
-    skip_filter filter_chain.collect(&:filter)
+    filters = filter_chain.collect do |f|
+      if f.respond_to? :filter
+        # rails 2.0
+        f.filter
+      elsif f.respond_to? :method
+        # rails 2.1
+        f.method
+      else
+        fail "Unknown filter class. Please send this exception to support@newrelic.com"
+      end
+    end
+    skip_filter filters
   end
   
   # for this controller, the views are located in a different directory from
   # the application's views.
   view_path = File.join(File.dirname(__FILE__), '..', 'views')
-  if public_methods.include? "view_paths"   # rails 2.0+
+  if public_methods.include? 'append_view_path' # rails 2.1+
+    self.append_view_path view_path
+  elsif public_methods.include? "view_paths"   # rails 2.0+
     self.view_paths << view_path
   else                                      # rails <2.0
     self.template_root = view_path
@@ -32,6 +45,10 @@ class NewrelicController < ActionController::Base
     forward_to_file '/newrelic/images/', params[:content_type]
   end
   
+  def javascript
+    forward_to_file '/newrelic/javascript/', 'text/javascript'
+  end
+  
   def forward_to_file(root_path = nil, content_type = nil)
     if root_path &&  file = params[:file]
       full_path = root_path + file
@@ -45,33 +62,31 @@ class NewrelicController < ActionController::Base
     get_samples
   end
   
-  def view_sample
-    get_sample
-    
-    unless @sample
-      render :action => "sample_not_found" 
-      return
-    end
-
-    @request_params = @sample.params[:request_params] || {}
-    controller_metric = @sample.root_segment.called_segments.first.metric_name
-    
-    controller_segments = controller_metric.split('/')
-    @sample_controller_name = controller_segments[1..-2].join('/').camelize+"Controller"
-    @sample_action_name = controller_segments[-1].underscore
-    
-    @pie_chart = GooglePieChart.new
-    @pie_chart.color = '6688AA'
-    
-    chart_data = @sample.breakdown_data(6)
-    chart_data.each { |s| @pie_chart.add_data_point s.metric_name, s.exclusive_time.to_ms }
+  def show_sample_detail
+    show_sample_data
   end
+  
+  def show_sample_summary
+    show_sample_data
+  end
+  
+  def show_sample_sql
+    show_sample_data
+  end
+  
   
   def explain_sql
     get_segment
+    
+    render :action => "sample_not_found" and return unless @sample 
 
     @sql = @segment[:sql]
     @trace = @segment[:backtrace]
+    
+    if NewRelic::Agent.agent.record_sql == :obfuscated  
+      @obfuscated_sql = @segment.obfuscated_sql
+    end
+    
     explanations = @segment.explain_sql
     if explanations
       @explanation = explanations.first 
@@ -119,6 +134,20 @@ class NewrelicController < ActionController::Base
   end
   
 private 
+  def show_sample_data
+    get_sample
+    
+    render :action => "sample_not_found" and return unless @sample 
+    
+    @request_params = @sample.params[:request_params] || {}
+    controller_metric = @sample.root_segment.called_segments.first.metric_name
+    
+    controller_segments = controller_metric.split('/')
+    @sample_controller_name = controller_segments[1..-2].join('/').camelize+"Controller"
+    @sample_action_name = controller_segments[-1].underscore
+    
+    render :action => :show_sample
+  end
   
   def get_samples
     @samples = NewRelic::Agent.instance.transaction_sampler.get_samples.select do |sample|
@@ -144,12 +173,7 @@ private
     return unless @sample
     
     segment_id = params[:segment].to_i
-    @sample.each_segment do |s|
-      if s.segment_id == segment_id
-        @segment = s
-        return
-      end
-    end
+    @segment = @sample.find_segment(segment_id)
   end
 end
 

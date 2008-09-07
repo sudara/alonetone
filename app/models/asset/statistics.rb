@@ -19,20 +19,23 @@ class Asset
   def self.update_hotness
     Asset.find(:all).each do |a|
       a.update_attribute(:hotness, a.calculate_hotness)
+      a.update_attribute(:listens_per_week, a.listens_per_week)
     end 
   end
   
   def calculate_hotness
     # hotness = listens not originating from own user within last 7 days * num of alonetoners who listened to it / age
-    ratio = ((recent_listen_count.to_f) * (((unique_listener_count * 10) / User.count) + 1) * age_ratio )
+    ratio = ((recent_listen_count.to_f) * (((unique_listener_count * 5) / User.count) + 1) * age_ratio )
   end
   
   def recent_listen_count(from = 7.days.ago, to = 1.hour.ago)
    listens.count(:all, :conditions => ['listens.created_at > ? AND listens.created_at < ? AND listens.listener_id != ?',from, to, self.user_id]) 
   end
   
-  def listens_per_day
-    listens.count(:all, :conditions => ['listens.listener_id != ?', self.user_id]).to_f / days_old
+  def listens_per_week
+    listens.count(:all, :conditions => ['listens.listener_id != ?', self.user_id]).to_f / days_old * 7  
+  rescue
+    0
   end
   
   def unique_listener_count
@@ -45,11 +48,11 @@ class Asset
   
   def age_ratio
     case days_old
-      when 0..3 then 20.0
+      when 0..3 then 15.0
       when 4..7 then 8.0
-      when 8..15 then 3.0
-      when 16..30 then 2.5
-      when 31..90 then 1.0
+      when 8..15 then 5.0
+      when 16..30 then 3.5
+      when 31..90 then 2.0
       else 0.5
     end
   end  
