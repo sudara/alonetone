@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
   
   # top tracks
   has_many :top_tracks, :class_name => 'Asset', :limit => 10, :order => 'listens_count DESC'
+  
+  # stalking
+  has_many :stalkers, :class_name => 'Stalking'
+  has_many :stalkees, :class_name => 'Stalking'
+  has_many :new_tracks_from_stalkees, :through => :stalkees, :class_name => 'Asset'
 
   # The following attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,

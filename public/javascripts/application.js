@@ -798,15 +798,20 @@ jQuery(function($) {
   // double the text area size when typing a lot
   $('textarea.double_trouble').attach(AdjustableTextarea,16);
   
-  // slide open the search
+  // search submit
   $('#search_button').click(function(){
-    $(this).addClass('active');
-    $(this).next().width('0px');
-    $(this).next().animate({
-      width: '200px'
-    });
-    $(this).next().focus();
+    $('#search_form').submit();
     return false;
+  });
+  
+  // clear default text from search box
+  $('#query').focus(function(){
+    $(this).addClass('focused');
+    if($(this).val() == 'artist, song title or keyword') 
+      $(this).val('');
+  });
+  $('#query').blur(function(){
+    $(this).removeClass('focused');
   });
   
   // setup the footer

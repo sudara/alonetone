@@ -1,4 +1,4 @@
-- render :layout => 'halp' do
+- render(:layout => 'halp') do
   .faq.box  
     %h2.box.static
       Help! What is this "alonetone" thing?
@@ -159,4 +159,5 @@
       and you can 
       =link_to 'browse the latest release here', 'http://github.com/sudara/alonetone/tree/master'
       We are looking for development help, so go ahead and email me if you are interested.
-= render :partial => 'sidebar'
+      
+= render(:partial => 'sidebar')

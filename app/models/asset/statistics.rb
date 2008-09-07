@@ -33,7 +33,7 @@ class Asset
   end
   
   def listens_per_week
-    listens.count(:all, :conditions => ['listens.listener_id != ?', self.user_id]).to_f / days_old * 7  
+    listens.count(:all, :conditions => ['listens.listener_id != ?', self.user_id]).to_f * 7 / days_old  
   rescue
     0
   end
