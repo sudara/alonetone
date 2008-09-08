@@ -34,7 +34,7 @@ class User
   
   def create_chart(data_and_labels, counted)
     data = data_and_labels.collect(&counted)
-    labels = data_and_labels.collect{|a| ERB::Util.u(a.name)}.join('|')
+    labels = data_and_labels.collect{|a| ERB::Util.u(a.name)}.reverse.join('|')
     chart = Gchart.bar(:size => '350x150', :data => data, 
     :background => 'e1e2e1', :orientation => 'horizontal',
     :axis_with_labels => 'y,r',:axis_labels => [labels,data.reverse.join('|')], :line_colors =>'cc3300')

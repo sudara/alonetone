@@ -40,7 +40,7 @@
     %h2.box.static
       Step 2: Wait (a few days)
     .static_content
-      You'll get an email from iTunes saying the podcast was approved. In that email will be a link.
+      alonetone will get an email that your podcast is approved, with a link to your podcast.
       %br
       %br
       = image_tag 'http://img.skitch.com/20080520-m7shhdk6bntsnue8ys6j2k7b22.jpg', :width => 500
@@ -50,16 +50,21 @@
       %br
       %br 
       That link, when clicked, takes people to the iTunes store, opened to your very own podcast page.
+      %br
+      %br
+      If a few days have passed, and you don't see yourself in the store, email sudara@alonetone.com so he can take a look at it for you.
   .faq.box  
     %h2.box.static
       Step 3: Plug the iTunes link back into alonetone
     .static_content
-      For extra credit, you'll want to edit your profile and put that link back into alonetone. That  will give you a nice direct link to iTunes from your "user bar" in alonetone.
+      For extra credit, you'll want to edit your profile and put that link back into alonetone.
+      %br
+      %br
+      How do you find your link? Search for yourself in the iTunes store (remember, it will take a day or two). When you see a link to your podcast, right-click that link and you'll have the option to "Copy iTunes Store URL". Do it, and you'll be able to paste that magic link into alonetone. That will give you a nice direct link to iTunes from your "user bar" in alonetone.
       - if logged_in?
-      = link_to 'Click here to edit your profile and enter the link now...',edit_user_path(current_user)
+        = link_to 'Click here to edit your profile and enter the link now...',edit_user_path(current_user)
       - else
-      = link_to 'Log in to edit your profile now', login_path
-      - end
+        = link_to 'Log in to edit your profile now', login_path
       %br
       %br
       = image_tag 'http://img.skitch.com/20080520-1wi8pceugftg1nspxgfjku9g2k.jpg'
