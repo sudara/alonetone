@@ -38,8 +38,8 @@ class User
     chart = Gchart.bar(:size => '350x150', :data => data, 
     :background => 'e1e2e1', :orientation => 'horizontal',
     :axis_with_labels => 'y,r',:axis_labels => [labels,data.reverse.join('|')], :line_colors =>'cc3300')
-  #rescue
-    
+  rescue 
+    ''
   end
   
   def listens_average
