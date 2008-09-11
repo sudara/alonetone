@@ -116,14 +116,25 @@ div.tabs
   .home_page_link
     :text-align right
   .comment_waiting
-    :float left
+    :position absolute
     :background-color = !tab_box_silver
     :text-align center
-    :margin-top 9px
+    :bottom 10px
+    :left 19px
     :color = !orange
     :font-weight bold
     :font-size 14px
     :text-align center
+    :height 30px
+    div.ajax_success, div.ajax_fail
+      :background transparent url(../images/icons/ok.png) no-repeat top left
+      :text-indent 35px
+      :height 30px
+      :line-height 30px
+    div.ajax_success
+      :color = !green
+    div.ajax_fail
+      :background transparent url(../images/icons/not_ok.png) no-repeat top left
   .panel
     :border-top 1px solid #000
     :width 380px

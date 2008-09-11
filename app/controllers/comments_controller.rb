@@ -5,29 +5,27 @@ class CommentsController < ApplicationController
   before_filter :login_required, :only => [:destroy, :unspam]
   
   def create
-    respond_to do |wants|
-      wants.js do
-        return head(:bad_request) unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?                                  
-        case params[:comment][:commentable_type] 
-        # TODO: move into model
-        when 'asset'
-          find_asset
-          @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
-        when 'feature'
-          @feature = Feature.find(params[:comment][:commentable_id])
-          @comment = @feature.comments.build(shared_attributes)
-        when 'update'
-          @update = Update.find(params[:comment][:commentable_id])
-          @comment = @update.comments.build(shared_attributes)
-        end
-        @comment.env = request.env
-        return head(:bad_request) unless @comment.save
-        if @asset && !@asset.spam
-          User.increment_counter(:comments_count, @asset.user) 
-          Asset.increment_counter(:comments_count, @asset) 
-        end
-        render :nothing => true
+    if request.xhr? 
+      return head(:bad_request) unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?                                  
+      case params[:comment][:commentable_type] 
+      # TODO: move into model
+      when 'asset'
+        find_asset
+        @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
+      when 'feature'
+        @feature = Feature.find(params[:comment][:commentable_id])
+        @comment = @feature.comments.build(shared_attributes)
+      when 'update'
+        @update = Update.find(params[:comment][:commentable_id])
+        @comment = @update.comments.build(shared_attributes)
       end
+      @comment.env = request.env
+      return head(:bad_request) unless @comment.save
+      if @asset && !@comment.spam
+        User.increment_counter(:comments_count, @asset.user) 
+        Asset.increment_counter(:comments_count, @asset) 
+      end
+      render :nothing => true
     end
   end  
   

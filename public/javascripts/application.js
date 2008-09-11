@@ -379,12 +379,12 @@ CommentForm = $.klass(Remote.Form, {
       this.spinner.hide();
       this.enable();
     },
-    success:function(){
-      this.resultBox.text('Submitted, thanks!').fadeIn(100);
+    success:function(e){
+      this.resultBox.html('<div class="ajax_success">Submitted, thanks!</p>').fadeIn(100);
       this.textarea.val('');
     },
     error: function(){
-      this.resultBox.text("Didn't work. Try again?").fadeIn(100);
+      this.resultBox.html("<div class='ajax_fail'>Sorry, that didn't work</p>").fadeIn(100);
     },
     disable:function(){
       this.submitButton.attr('disabled','disabled').
