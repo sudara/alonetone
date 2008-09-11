@@ -2,9 +2,7 @@
   
   <% content_for :left do %>
   <div id="single_track" class="box">
-      <% if authorized_for(@asset) %>
-        <%= link_to 'edit', edit_user_track_path(@user, @asset), :class=> 'edit right'%>
-      <% end %>
+
       <%= render :partial => 'assets/assets'%>
       
       <% if logged_in? %>
@@ -14,6 +12,11 @@
       <div id="track_details" class="static_content">
           <h1>About "<%=h @asset.title %>"</h1>
           <p><%= @asset.description %></p>
+          <% if authorized_for(@asset) %>
+                <div class="track_links">
+                    <%= link_to "Edit", edit_user_track_path(@asset.user, @asset), :class => 'edit_with_text', :title => 'edit this track' %>
+                </div>
+          <% end %>
       </div>
      <% end %>
      

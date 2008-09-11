@@ -125,7 +125,6 @@ div.tabs
     :font-weight bold
     :font-size 14px
     :text-align center
-    :height 30px
     div.ajax_success, div.ajax_fail
       :background transparent url(../images/icons/ok.png) no-repeat top left
       :text-indent 35px
@@ -165,39 +164,47 @@ div.tabs
       .admin
         :font-size 10px
         :padding-top 20px
-    .track_links 
-      :height 22px
-      :font-size 12px
-      a
-        :margin-top 0
-        :display block
-        :font-weight bold
-      a.view_more
-        :font-weight normal
-        :position absolute
-        :text-decoration none
-        :right -25px
-        :bottom -10px
-        :display block
-        :font-size = 16px
-        :color = !text_color
-        :text-decoration underline
-        :border-color = !body_background
-        :height 30px
-        :padding-left 10px
-        :padding-right 12px
-        :line-height 30px
-        :background none
-        &:hover
-          :background-color = !orange
-          :color white
-          :text-shadow rgba(1,3,0,0.33) 1px 1px 1px
-    
   .description_panel
     :padding-top 5px
     :font-size 12px
     p
       :padding-right 30px
+.track_links 
+  :position relative
+  :height 30px
+  :width 400px
+  a
+    :margin-top 0
+    :display block
+    :font-weight bold
+  a.view_more, a.edit_with_text
+    :font-weight normal
+    :position absolute
+    :text-decoration none
+    :right -25px
+    :bottom -10px
+    :display block
+    :font-size = 16px
+    :color = !text_color
+    :text-decoration underline
+    :border-color = !body_background
+    :height 30px
+    :padding-left 10px
+    :padding-right 12px
+    :line-height 30px
+    :background none
+    &:hover
+      :background-color = !orange
+      :color white
+      :text-shadow rgba(1,3,0,0.33) 1px 1px 1px
+  a.edit_with_text
+    :left 49px
+    :background transparent url(../images/icons/edit.png) no-repeat 10px center
+    :width 50px
+    :padding-left 10px
+    :text-indent 25px
+#single_track .track_links a.edit_with_text
+  :left -9px
     
 .ui-tabs-loading em 
   :padding 0 0 0 20px
