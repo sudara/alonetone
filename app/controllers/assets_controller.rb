@@ -75,6 +75,10 @@ class AssetsController < ApplicationController
       wants.rss do 
         @assets = Asset.latest(50)
       end
+      wants.json do
+        @assets = Asset.find(:all, :limit => 5000, :include => :user)
+        render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
+      end
     end
   end
   
