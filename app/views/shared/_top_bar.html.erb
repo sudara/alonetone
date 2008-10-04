@@ -1,7 +1,7 @@
 <div id="top_bar_left">   
-    <%= link_to ' ', radio_home_path, :id => 'radio'%>
-    <%= link_to ' ', about_path, :id => 'about'%>
-    <%= link_to ' ', about_path(:howto), :id => 'halp'%>
+    <%= link_to ' ', radio_home_path, :id => 'radio_button'%>
+    <%= link_to ' ', about_path, :id => 'about_button'%>
+    <%= link_to ' ', about_path(:howto), :id => 'halp_button'%>
 
     <% if @sudo %>
       <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(User.find(:first)) %></span>
@@ -10,9 +10,9 @@
 <div id="top_bar_right">
     <% if logged_in? %>
       <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :id => 'profile_link'%>      
-      <%= link_to ' ',logout_path, :id => 'logout' %>
+      <%= link_to ' ',logout_path, :id => 'logout_button' %>
     <% else %>
-      <%= link_to ' ',login_path, :id => 'login' %>
+      <%= link_to ' ',login_path, :id => 'login_button' %>
     <% end %>
     <%= render :partial => 'shared/search'%>
 
