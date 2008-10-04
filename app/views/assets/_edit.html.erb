@@ -1,7 +1,10 @@
+<div class="track_options">
+<%= link_to " ", destroy_user_track_path(@user, @asset), :method => :delete, 
+:confirm => 'Are you sure? This will delete the song permanently, including all play history and comments.',
+:class => 'delete_green'%>
+</div>
 <div class="edit_track box" style="position:relative;">
   <h2 class="box">Editing "<%=h @asset.name %>"</h2>
-    
-  <%= link_to "delete track", destroy_user_track_path(@user, @asset), :id => 'delete_track_button', :class => 'confirm_before_delete delete button'%>
 
   <% form_for(:asset, :url => user_track_path(current_user, @asset), :html => { :method => :put }) do |f| %>
 

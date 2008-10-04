@@ -1,5 +1,4 @@
 <h1>Featured Artist - <%=h @user.name %></h1>
-<h2><%= link_to "view all featured artists", features_path %></h2>
 <% content_for :left do %>
   <% div_for @feature do %>
       <div class="box">
@@ -27,12 +26,14 @@
     other interested authors contribute text. Step up!
     </div>
   </div>
+  <div class="footer_box">
+    <%= link_to ' ', features_path, :class => 'view_all_features' %>
+   </div>
 <% end %>
 
 <% content_for :right do %>
    <div class="box feature_stats">
        <h2 class="box">Vital Stats</h2>
-        <%= link_to "visit #{h @user.name}'s alonetone page", user_home_path(@user), :class => 'view_more'%>
         <div class="static_content clearfix">
            <div class="pic">
            <%= user_image_link(@feature.featured_user, :album) %>
@@ -45,10 +46,17 @@
                <%= itunes_link_for(@user) if present? @user.itunes %><br/>
                <%= "This feature viewed #{@feature.views_count} times" if authorized? %>
            </div>
+           <%= link_to " ", user_home_path(@user), :class => 'view_more'%>
        </div>
+   </div>
+   <div class="footer_box">
+    <%= link_to ' ', features_path, :class => 'view_all_features' %>
    </div>
    
    <%= render :partial => 'featured_tracks'%>
+   <div class="footer_box">
+    <%= link_to ' ', user_tracks_path(@user.login), :class => 'view_more_tracks' %>
+   </div>
    <%= render :partial => 'users/mostly_listens_to' %>
    <%= render :partial => 'shared/comment', :collection => @comments %>
 <% end %>

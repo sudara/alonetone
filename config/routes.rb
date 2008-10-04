@@ -38,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
   # latest mp3s uploaded site-wide
   map.latest '/latest/:latest', :controller => 'assets', :action => 'latest'
   
-  map.radio 'radio', :controller => 'assets', :action => 'radio'
+  map.radio_home 'radio', :controller => 'assets', :action => 'radio'
   map.radio 'radio/:source/:per_page/:page', :controller => 'assets', :action => 'radio', :defaults =>{:per_page => 5, :page => 1}
   
   # top 40

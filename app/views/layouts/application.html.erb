@@ -22,7 +22,9 @@
   
   </head>
   <body>
-  
+      <div id="top_bar">
+        <%= render :partial => 'shared/top_bar', :current_user => current_user %>
+      </div>
       <div id="header">
         <a href="/" title="go home to alonetone" id="logo"></a>
 				<%= render :partial=> 'shared/nav' %>
@@ -30,10 +32,6 @@
 		
 	<div id="wrapper">
     <div id="content" class="content">    
-      <div id="top_bar">
-        <%= render :partial => 'shared/search'%>
-        <%= render :partial => 'shared/user_bar', :current_user => current_user %>
-      </div>
 		  <%= check_for_and_display_welcome_back %>
 		  <%= check_for_and_display_flashes %>
       <div id="main">

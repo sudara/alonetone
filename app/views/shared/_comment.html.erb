@@ -1,31 +1,32 @@
 <% div_for comment, :class => (cycle('even', 'odd')) do %>
   
   <div class="comment_user">
-    	<% if comment.commenter %>
-          <%= user_image_link(comment.commenter, :small)%>
-    		<% else %>
-    			<%= image_tag User.dummy_pic(:small)%>
-    	<% end %>
-    	<% if comment.private %>
-    	    <div class="private_comment">
-    	    </div>
-    	<% end %>
+	<% if comment.commenter %>
+        <%= user_image_link(comment.commenter, :small)%>
+	<% else %>
+	    <%= image_tag User.dummy_pic(:small)%>
+	<% end %>
+    <% if comment.private %>
+        <div class="private_comment">
+        </div>
+    <% end %>
    
-	  <% if !@single_track %>
-	  <div class="comment_about">about <%= link_for_comment(comment) %></div>
-	 <% end %>
-	     <span class="comment_user_text">
+    <% if !@single_track %>
+        <div class="comment_about">about <%= link_for_comment(comment) %></div>
+    <% end %>
+    
+	<span class="comment_user_text">
     	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
     	said <%= time_ago_in_words(comment.created_at) %> ago
   	</span>
 	 
 	<% if authorized_for_comment(comment) %>
 	    <% if comment.spam == false %>
-	        <%= link_to 'SPAM', comment_path(comment, :spam => true), :class => 'remove button', :style => 'margin-right: 40px;', :confirm => 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again', :method => :delete%>
+	        <%= link_to ' ', comment_path(comment, :spam => true), :class => 'button spam', :confirm => 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again', :method => :delete%>
 	    <% else %>
-	        <%= link_to 'un-SPAM', unspam_comment_path(comment), :class => 'unspam button', :style => 'margin-right: 40px;', :confirm => 'This will make the comment public. Are you sure?' %>
+	        <%= link_to ' ', unspam_comment_path(comment), :class => 'unspam button',  :confirm => 'This will make the comment public. Are you sure?' %>
         <% end %>
-		<%= link_to 'Delete', comment_path(comment), :class=> 'delete button', :confirm => 'Are you sure you want to delete this comment?', :method => :delete %>
+		<%= link_to ' ', comment_path(comment), :class=> 'delete_comment button', :confirm => 'Are you sure you want to delete this comment?', :method => :delete %>
 	<% end %>
 	</div>
 	<div class="comment_body">

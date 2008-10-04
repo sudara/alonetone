@@ -1,6 +1,14 @@
 <% render(:layout => 'users/user') do %>
   
   <% content_for :left do %>
+    <% if authorized_for(@asset) %>
+        <div class="track_options">
+            <%= link_to " ", edit_user_track_path(@asset.user, @asset), :class => 'edit_green', :title => 'edit this track' %>
+            <%= link_to " ", destroy_user_track_path(@asset.user, @asset), :method => 'delete', :class => 'delete_green ',
+            :confirm => 'Are you sure? This will delete the song permanently, including all play history and comments.',
+            :title => 'delete this track permanently '%>
+        </div>
+    <% end %>
   <div id="single_track" class="box">
 
       <%= render :partial => 'assets/assets'%>
@@ -12,11 +20,6 @@
       <div id="track_details" class="static_content">
           <h1>About "<%=h @asset.title %>"</h1>
           <p><%= @asset.description %></p>
-          <% if authorized_for(@asset) %>
-                <div class="track_links">
-                    <%= link_to "Edit", edit_user_track_path(@asset.user, @asset), :class => 'edit_with_text', :title => 'edit this track' %>
-                </div>
-          <% end %>
       </div>
      <% end %>
      

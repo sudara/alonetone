@@ -3,5 +3,6 @@
 	<%= render :partial => 'assets/asset', :collection => @assets %>
 </div>
 <div class="footer_box">
-	<%= link_to "view all #{@user.assets_count} tracks", user_tracks_path(@user), :title => "uploaded mp3s by #{h(@user.name)}" if @user.assets_count > 5 %>
+	<%= link_to " ", user_tracks_path(@user), 
+	    :class => 'view_more_tracks', :title => "uploaded mp3s by #{h(@user.name)}" if @user.assets_count > 5 %>
 </div>

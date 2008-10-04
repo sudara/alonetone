@@ -1,57 +1,54 @@
 - render(:layout => 'halp') do
   .faq.box  
     %h2.box.static
-      Help! What is this "alonetone" thing?
+      What the heck is "alonetone"?
     .static_content
-      Alonetone provides free and unlimited mp3 hosting and distribution for musicians. 
+      A place where Do-It-Yourself and everyday musicians upload their music to freely share with each other and the world.
       %br 
       %br
-      If you make music and you own the rights to it,
+      If you make music (and you own the rights to it),
       this site is something you should know about. Go 
       =link_to 'sign up!', signup_path
   .faq.box
     %h2.box.static
-      Is this a website for musicians?
+      So, it is a website for musicians?
     .static_content
-      Yes, it is a website to connect listeners and musicians. We work our butt off to give musicians the tools they need to distribute their music.
+      It is a website to connect listeners and musicians. We work our butt off to give musicians the tools they need to distribute their music.
       %br
+      %br
+      There are plenty of fans and friends of musicians who also hang around or sign up for accounts. 
       %br
       If you love music but don't make it, great. There are tons of musical gems on this site, and a lot of talent. Hang out with us, listen a while. Talk with us. Favorite the tracks you love.
   .faq.box  
     %h2.box.static
-      Can I upload my mp3s here?
+      Can I join and upload mp3s here?
     .static_content
-      If you made the music, then of course! 
+      If you made the music and own the rights to it, we would be honored.
       =link_to 'Go sign up.', signup_path
       %br
       %br If you didn't make the music, and just want to share it, then no...go elsewhere! 
     
   .faq.box  
     %h2.box.static
-      I mean, I really don't get it: Why alonetone?
+      I don't get it: Why alonetone?
     .static_content
-      Commercial services for musicians exist. We want to give you something different.
-      We are not interested in making a buck off of you. We are interested in getting musicians on their feet
-      on the web and allowing folks to solidly deliver their music, known or unknown.
+      You are right, there are plenty of websites for musicians to upload their music.  Why alonetone?
       %br
       %br
-      Even the other 'free' services you'll run into elsewhere are running ads or funded
-      by investors hoping to make it big and meanwhile making money off of your "content"...erm music
+      Well, most of the 'free' services you'll run into elsewhere are running ads, funded
+      by investors, or actually owned by media conglomerates. In general, they are hoping making money off of your "content"...erm...music. 
+      Most music communities are overly obsessed with genres and popularity, and we're just not turned on by that. Time for something new, don't you think?
       %br
       %br
-      Beyond that, we want to do it right. Clean, and only the essentials.
+      alonetone was started to provide a non-commercial alternative. Something useful, something different, something that the musicians can feel like they own.
+      %br
+      %br
+      Beyond that, we want to do it right. Clean, only the essentials. Not too dorked-out. Easy to get around.
 
   .faq.box  
     %h2.box.static
-      Ok, no companies, great. So, who makes alonetone?
+      Wow, no company! So who makes alonetone?
     .static_content
-      The musicians and listeners themselves are responsible for steering the ship. 
-      After the initial launch most features were inspired, recommended by, and build to please alonetoners
-      who spoke up and helped by providing their valuable feedback in email conversations with Sudara or
-      via 
-      =link_to 'the alonetone forums', forums_path
-      %br
-      %br
       alonetone is conceived and built by 
       =link_to 'Sudara', user_home_path(User.find :first)
       %br
@@ -68,7 +65,15 @@
       %br
       The forums are moderated by 
       =link_to 'Another Cultural Landslide', user_home_path('anotherculturallandslide')
-
+      %br
+      %br
+      The musicians and listeners themselves are responsible for steering the ship. 
+      After the initial launch most features were inspired, recommended by, and build to please alonetoners
+      who spoke up and helped by providing their valuable feedback in email conversations with Sudara or
+      via 
+      =link_to 'the alonetone forums', forums_path
+      %br
+      %br
   
   .faq.box  
     %h2.box.static
@@ -79,20 +84,23 @@
     %h2.box.static
       Can I sell my music here?
     .static_content
-      Nope. There are many places that you can sell your music at, if you want to take a crack at it.
+      Nope. 
       %br
-      %br I personally believe (and always have) that selling mp3s really won't bring the average musician much luck.
-      %br If you have a marketing machine behind you or already have 1000s of fans, this is another story. 
+      %br
+      We believe in giving our music away. There are many places where you can try and sell your tunes, if you want to take a crack at it.
+      %br
+      %br Selling mp3s really won't bring the average musician anything useful - you'll waste tons of effort, get your hopes up, and....Well, if you have a marketing machine behind you or already have 1000s of fans, 
+      this is another story. Go for it. Otherwise, focus on making great tunes and connecting to people.
   .faq.box    
     %h2.box.static
       But I want to make money with my music.
     .static_content
-      I believe that you can and should be able to. But not by selling mp3s, sorry. 
+      We certainly understand that. 
       %br
       %br
-      The music world is changing fast.
       Selling mp3s is a short-term and short-lived last ditch effort on behalf of the changing industry.
-      Radiohead and NIN are currently getting away with it (though they are also moving to a more free model)...but you? At this point, your best bet is to play live, or get your music into as many hands as you can. 
+      Radiohead and NIN get away with it (though they are also moving to a more free model)...but you? 
+      At this point, your best bet is to play live, or get your music into as many hands as you can. 
       =link_to 'We can help with the latter.', signup_path
       %br
       %br
@@ -118,7 +126,7 @@
     %h2.box.static
       Isn't this costing you money? Are you bad at business?
     .static_content
-      There are some costs, primarily the storage costs. If the site grows much larger, they will be significant, but not unmanageable.
+      There are some costs, primarily the storage costs, which are currently under $100 a month. If the site grows much larger, they will be significant, but not unmanageable.
       %br
       %br
       I pay these out of pocket for a few reasons: I want to promote independent music and display the wonderful amazing fact that the music distribution model has changed. One average person can singlehandedly float hundreds of musicians, thousands of mp3s and hundreds of thousands of downloads. Incredible - it points to pretty crazy and amazing future world of music. 
@@ -129,10 +137,13 @@
     %h2.box.static
       What if the site explodes in popularity?
     .static_content
-      In the event that the I can no longer afford to singlehandedly keep alonetone up, the popularity of the site and the sheer volume of users needed to produce the cost would likely ensure that it would be kept afloat by other like-minded do good-ers.
+      That would be a good problem to have, now wouldn't it!
       %br
       %br
-      I have no current intention to pollute the site with advertising.
+      Seriously, though: In the event that the I can no longer afford to singlehandedly keep alonetone up, the popularity of the site and the sheer volume of users needed to produce the cost would likely ensure that it would be kept afloat by other like-minded do good-ers.
+      %br
+      %br
+      I have no current intention to pollute the site with advertising, even to break even.
   .faq.box    
     %h2.box.static
       How is the site built?
@@ -146,18 +157,14 @@
     .static_content
       alonetone is about 2800 lines of rails code and about the same amount of javascript and css.
       %br
-      %br We use 
-      =link_to 'Attachment_fu', 'http://svn.techno-weenie.net/projects/plugins/attachment_fu/'
-      =link_to 'Amazon S3 for mp3 hosting', 'http://aws.amazon.com'
-      SASS, will_paginate, rspec, jquery, low pro. Sound is done with Sound Manager 2.
   .faq.box
     %h2.box.static
       Is the code open source?
     .static_content
-      You bet. It is available via git at the
-      =link_to 'alonetone git repository', 'http://github.com/sudara/alonetone/wikis'
-      and you can 
-      =link_to 'browse the latest release here', 'http://github.com/sudara/alonetone/tree/master'
+      You bet your sweet programming butt it is. It is available via git at the
+      =link_to 'alonetone git repository', 'http://github.com/sudara/alonetone'
+      %br
+      %br
       We are looking for development help, so go ahead and email me if you are interested.
       
 = render(:partial => 'sidebar')

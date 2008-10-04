@@ -14,7 +14,8 @@
     <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>
   <div class="footer_box">
-    <%= link_to 'view all recent music', radio_path(:per_page => 40,:source => 'latest'), :title => 'latest uploaded mp3s' %>
+    <%= link_to ' ', radio_path(:per_page => 40,:source => 'latest'), 
+        :class=> 'view_all_recent_music', :title => 'latest music on alonetone' %>
   </div>
   
   <h2 id="latest_comments" class="box">Latest Comments</h2>
@@ -22,7 +23,8 @@
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>
   <div class="footer_box">
-   <%= link_to 'view all latest comments', all_comments_path, :title => 'view latest comments' %>
+   <%= link_to ' ', all_comments_path, 
+     :class => 'view_all_comments', :title => 'view latest comments' %>
    </div>
 <% end %>
 
@@ -38,7 +40,8 @@
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
   <div class="footer_box">
-   <%= link_to 'view all kicking ass', top_path(40), :title => 'alonetone radio: currently kicking ass' %>
+   <%= link_to ' ', radio_path(:per_page => 40,:source => 'popular'), :class => "view_all_kicking_ass", 
+      :title => 'alonetone radio: currently kicking ass' %>
   </div>
   
    <h2 id="recently_favorited" class="box">Recently favorited</h2>
@@ -46,7 +49,8 @@
     <%= render :partial => 'shared/favorite', :collection => @favorites %>
   </div>  
   <div class="footer_box">
-    <%= link_to 'view all recent favorites', radio_path(:per_page => 40, :source => 'favorites'), :title => 'alonetone radio: recently favorited' %>
+    <%= link_to ' ', radio_path(:per_page => 40, :source => 'favorites'), 
+      :class => 'view_all_favorites', :title => 'alonetone radio: recently favorited' %>
   </div>
 <% end %>
 

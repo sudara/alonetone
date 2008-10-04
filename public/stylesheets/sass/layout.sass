@@ -2,14 +2,13 @@
 @import variables
 html,body
   :background-color = !body_background
-  :position relative
 #header
   :position fixed
-  :top 0
+  :top 29px
   :left 0
   :width 100%
   :height 110px
-  :z-index 1000
+  :z-index 5
   :background url(../images/backgrounds/header.png) repeat-x top left
   :background-color = !body_background
 a#logo  
@@ -33,25 +32,23 @@ a#logo
   :margin 0
   :padding 0
   :background url(../images/backgrounds/body.png) repeat-x top left
-  :margin-top 110px
+  :margin-top 139px
 #content
   :position relative
   :margin-left 50px
   :margin-bottom 150px
   :width 890px
-  #top_bar
-    :position relative
-    :width 890px
-    :height 27px
-    :width 100%
-    :margin-bottom 35px
-    #login, #logout, #profile_link
-      :right -29px
-      :top 0px
-    #logout, #login 
-      :right 0px
-    #halp
-      :right 96px
+#top_bar
+  :position fixed
+  :top 0
+  :left 0
+  :margin 0
+  :padding 0
+  :background black url(../images/backgrounds/top_menu_background.png) repeat-x top left
+  :height 29px
+  :width 100%
+  :z-index 10
+  :min-width 800px
   
 #main
   :position relative

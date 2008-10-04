@@ -13,7 +13,8 @@
         </div>
     </div>
     <div class="footer_box onepx">
-    <%= link_to "view feature", feature_path(feature.permalink),:title => "featured alonetone artist: #{feature.featured_user.name}" %>
+    <%= link_to "", feature_path(feature.permalink),:class => 'view_feature', 
+        :title => "featured musician: #{feature.featured_user.name}" %>
     </div>
 
 <% end %>

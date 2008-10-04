@@ -3,5 +3,5 @@
 	<%= render :partial => 'users/listen', :collection => @listens %>
 </div>
 <div class="footer_box">
-    <%= link_to 'view listening history', listens_path(@user.login) if @listens.size > 4%>
+    <%= link_to ' ', listens_path(@user.login), :class => 'view_listening_history' if @listens.size > 4%>
 </div>

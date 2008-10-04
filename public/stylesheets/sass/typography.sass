@@ -163,21 +163,18 @@ div.flash
       :text-decoration underline
 
 // links that float right
-a.arrows, a.view_more, a.view_all, a.view_more_no_float
+a.arrows, a.view_all, a.view_more_no_float
   :background url(../images/buttons/arrow.png) no-repeat right center
   :padding-right 12px
   
 .content 
-  a.view_all, a.view_more
+  a.view_all
     :color = !text_color
     :position relative
     :float right
     :margin-top -31px
     :margin-right 25px
-  a.view_more_no_float
-    :color = !text_color
-    :text-align right
-    :display block
+
 div.notice a.hide_notice
   :float right
   :margin-top -31px
@@ -187,7 +184,7 @@ div.notice a.hide_notice
   :color = !orange
   
 div.footer_box
-  :height 30px
+  :height 32px
   :text-align right
   :line-height 30px
   &.onepx
@@ -195,24 +192,94 @@ div.footer_box
   &.empty
     :margin 0
     :background none
-  a, a:visited
-    :font-size = 16px
-    :color = !text_color
-    :text-shadow #fff4ca 1px 1px 1px
+  a, a:visited, a:hover, a:active
     :display block
     :float right
-    :border-left 1px solid black
-    :border-color = !body_background
-    :height 30px
-    :padding-left 10px
-    :padding-right 22px
-    :line-height 30px
-    :background #c7c8c7 url(../images/buttons/padded_arrow.png) no-repeat right center
+    :height 32px
+  a.view_all_recent_music
+    :width 197px
+    :background transparent url(../images/icons/view_all_recent_music.png) no-repeat 0px 0px
     &:hover
-      :background-color = !orange
-      :color white
-      :text-decoration none
-      :text-shadow rgba(1,3,0,0.33) 1px 1px 1px
+      :background-position -197px 0px
+    &:active
+      :background-position -394px 0px
+  a.view_all_kicking_ass
+    :width 185px
+    :background transparent url(../images/icons/view_all_kicking_ass.png) no-repeat 0px 0px
+    &:hover
+      :background-position -185px 0px
+    &:active
+      :background-position -370px 0px
+  a.view_all_favorites
+    :width 169px
+    :background transparent url(../images/icons/view_all_favorites.png) no-repeat 0px 0px
+    &:hover
+      :background-position -169px 0px
+    &:active
+      :background-position -338px 0px
+  a.view_all_comments
+    :width 181px
+    :background transparent url(../images/icons/view_all_comments.png) no-repeat 0px 0px
+    &:hover
+      :background-position -181px 0px
+    &:active
+      :background-position -362px 0px
+  a.view_more_tracks
+    :width 168px
+    :background transparent url(../images/icons/view_more_tracks.png) no-repeat 0px 0px
+    &:hover
+      :background-position -168px 0px
+    &:active
+      :background-position -336px 0px
+  a.view_listening_history
+    :width 202px
+    :background transparent url(../images/icons/view_listening_history.png) no-repeat 0px 0px
+    &:hover
+      :background-position -202px 0px
+    &:active
+      :background-position -404px 0px
+  a.view_all_track_plays
+    :width 186px
+    :background transparent url(../images/icons/view_all_track_plays.png) no-repeat 0px 0px
+    &:hover
+      :background-position -186px 0px
+    &:active
+      :background-position -372px 0px
+  a.view_feature
+    :width 133px
+    :background transparent url(../images/icons/view_feature.png) no-repeat 0px 0px
+    &:hover
+      :background-position -133px 0px
+    &:active
+      :background-position -266px 0px
+  a.view_all_features
+    :width 165px
+    :background transparent url(../images/icons/view_all_features.png) no-repeat 0px 0px
+    &:hover
+      :background-position -165px 0px
+    &:active
+      :background-position -330px 0px
+
+a.edit_green, a.delete_green
+  :display block
+  :float right
+  :height 32px
+  :margin-left 10px
+a.edit_green
+  :width 73px
+  :background transparent url(../images/icons/edit_green.png) no-repeat 0px 0px
+  &:hover
+    :background-position -73px 0px
+  &:active
+    :background-position -146px 0px
+a.delete_green
+  :width 97px
+  :background transparent url(../images/icons/delete_green.png) no-repeat 0px 0px
+  &:hover
+    :background-position -97px 0px
+  &:active
+    :background-position -194px 0px  
+  
     
 span.orange
   :color = !orange
@@ -248,6 +315,19 @@ span.private
   img
     :margin-bottom -3px
 // icon links (add/delete/etc)
+a.view_more
+  :display block
+  :background url(../images/icons/view_more_silver.png) no-repeat left center
+  :text-indent -1000px
+  :width 117px
+  :height 32px
+  :float right
+  :margin-right 5px
+  :margin-bottom 5px
+  &:hover
+    :background-position -117px 0px
+  &:active
+    :background-position -234px 0px
 a.edit
   :display block
   :background url(../images/icons/edit.png) no-repeat left center
@@ -261,23 +341,82 @@ a.edit
     :margin-right 25px
     :float right
     :top 0px
+a.edit_in_box
+  :display block
+  :background url(../images/icons/edit_silver.png) no-repeat left center
+  :text-indent -1000px
+  :width 73px
+  :height 32px
+  :float left
+  &:hover
+    :background-position -73px 0px
+  &:active
+    :background-position -146px 0px
+  
+a.edit_profile
+  :display block
+  :background url(../images/icons/edit_profile.png) no-repeat left center
+  :text-indent -1000px
+  :width 48px
+  :height 48px
+  :position absolute
+  :right 2px
+  :top 1px
+  &:hover
+    :background-position -48px 0px
+  &:active
+    :background-position -96px 0px
 a.alonetone_plus_link
-  :position relative
+  :position absolute
   :float right
-  :margin-top -40px
-  :margin-right 65px
+  :top 12px
+  :right 60px
 
 .button_wrapper
-  :background transparent url(../images/backgrounds/user_bar.png) repeat-x scroll left top
-  :height 30px
-  :font-size 14px
   :float right
-  :padding-left 10px
-  :padding-right 15px
+  :height 32px
   :margin-left 20px
-  :border 1px solid #666
-
+  
+#create_new_playlist
+  :width 185px
+  :height 32px
+  :display block
+  :background transparent url(../images/icons/create_new_playlist.png) no-repeat 0px 0px
+  &:hover
+    :background-position -185px
+  &:active
+    :background-position -370px
+    
+#change_playlist_order
+  :width 203px
+  :height 32px
+  :display block
+  :background transparent url(../images/icons/change_playlist_order.png) no-repeat 0px 0px
+  &:hover
+    :background-position -203px
+  &:active
+    :background-position -406px
+  
 a.button
+  &.unspam, &.spam, &.delete_comment
+    :width 48px
+    :height 48px
+    :position absolute
+    :right 1px
+    :top 0px
+    &:hover
+      :background-position -48px 0px
+    &:active
+      :background-position -96px 0px
+  &.unspam
+    :right 50px
+    :background transparent url(../images/icons/unspam.png) no-repeat 0px 0px
+  &.spam
+    :right 50px
+    :background transparent url(../images/icons/spam.png) no-repeat 0px 0px
+  &.delete_comment  
+    :background transparent url(../images/icons/delete_comment.png) no-repeat 0px 0px
+      
   &.add, &.new, &.sort
     :background url(../images/icons/new.png) no-repeat left center
     :color = !text_color
@@ -290,7 +429,7 @@ a.button
   &.sort
     :background url(../images/icons/latest.png) no-repeat left center
     
-  &.delete, &.remove, &.unspam
+  &.delete, &.remove
     :position absolute
     :background url(../images/icons/delete.png) no-repeat center top
     :display block
@@ -301,8 +440,7 @@ a.button
     :top 5px
     :right 10px
     :padding-top 8px
-a.button.unspam
-  :background url(../images/icons/comment.png) no-repeat center top
+
 .asset div.button a.remove, .asset.hover div.button a.remove, a.button.remove
   :background url(../images/icons/remove.png) no-repeat center top
   :height 30px

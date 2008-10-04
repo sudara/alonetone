@@ -43,61 +43,97 @@
 
 // login and logout
 
-#top_bar #login
-  :background url(../images/buttons/login.png) no-repeat 0px 0
-#top_bar #logout 
-  :background url(../images/buttons/logout.png) no-repeat 0px 0
 #top_bar
-  a#login, a#logout
-    :display block
+  #top_bar_right, #top_bar_left
     :position absolute
-    :width 84px
-    :height 27px
+    :height 29px
+  #top_bar_left 
+    :left 53px
+  #top_bar_right
+    :width 500px
+    :left 440px
+  #top_bar_right a
+    :float right
+    :margin-left 10px
+  #top_bar_left a
+    :float left
+    :margin-right 10px
+  a
+    :margin-top 2px
+    :height 25px
+    :display block
+    :position relative
+  a#radio
+    :width 81px
+    :background url(../images/nav/radio.png) no-repeat 0px 0
     &:hover
-      :background-position -84px 0
-  a#profile_link
-    :display block
-    :position absolute
-    :width 25px
-    :height 24px
+      :background-position -81px 0
+    &:active
+      :background-position -162px 0
   a#halp
-    :background url(../images/buttons/halp.png) no-repeat 0px 0
-    :display block
-    :position absolute
-    :width 91px
-    :height 31px
+    :width 78px
+    :background url(../images/nav/halp.png) no-repeat 0px 0
     &:hover
-      :background-position -91px 0
+      :background-position -78px 0
+    &:active
+      :background-position -156px 0
+  a#about
+    :width 78px
+    :background url(../images/nav/about.png) no-repeat 0px 0
+    &:hover
+      :background-position -78px 0
+    &:active
+      :background-position -156px 0
+  a#login
+    :width 75px
+    :background url(../images/nav/login.png) no-repeat 0px 0
+    &:hover
+      :background-position -75px 0
+    &:active
+      :background-position -150px 0
+  a#logout 
+    :width 88px
+    :background url(../images/nav/logout.png) no-repeat 0px 0
+    &:hover
+      :background-position -88px 0
+    &:active
+      :background-position -176px 0
+  a#profile_link
+    :width 25px
+    :height 25px
+    :margin-left 7px
   div#search
-    :position absolute
-    :left 0px
-    :top 0px
+    :position relative
+    :float right
+    :display block
+    :height 25px
+    :width 330px
     a
-      :background url(../images/buttons/search.png) no-repeat 0px 0
+      :background url(../images/nav/search.png) no-repeat 0px 0
       :display block
-      :position absolute
-      :left 215px
-      :width 84px
-      :height 27px
+      :float right
+      :width 75px
+      :height 25px
+      :margin-left 5px
       &:hover
-        :background-position -84px 0
+        :background-position -75px 0
+      &:active
+        :background-position -150px 0
     form
-      :position absolute
-      :top 0px
-      :left 0px
-      :height 22px
-      :width 200px
+      :height 25px
+      :display inline
       #query
         :margin 0
+        :float right
         :margin-left 0px
-        :margin-top 1px
+        :margin-top 3px
         :height 17px
         :font-size 14px
         :color = !silver
         :padding 2px 3px
         :width 200px
         :background-color #5b5d4a
-        :border 1px solid #4b4e3f
+        :border 1px solid #313327
         &.focused
           :color = #fff
        
@@ -441,6 +477,7 @@ a.add_to_favorites, a.favorited
 #user_home
   :position relative
   :min-height 40px
+  
 .additional_options
   :float right
   :margin-top 4px
@@ -448,9 +485,9 @@ a.add_to_favorites, a.favorited
 
 .additional_options_solo
   :position relative
-  :text-align right
+  :text-align left
   :margin-bottom 10px
-.additional_options_dock
+  :height 35px
   
 .visit_us
   h1
@@ -551,7 +588,7 @@ a.add_to_favorites, a.favorited
       :float left
       :padding-right 10px
     .stats
-      :padding-top 45px
+      :padding-top 25px
       :font-size 12px
       :line-height 18px
       a

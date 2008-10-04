@@ -31,6 +31,7 @@ class AssetsController < ApplicationController
     respond_to do |format|
       format.html do
         @page_title = "#{@asset.name} by #{@user.name}"
+        @description = @page_title + " - #{@asset[:description]}"
         @assets = [@asset]
         @listens = @asset.listens.find(:all)
         @comments = @asset.comments.public.find_all_by_spam(false)

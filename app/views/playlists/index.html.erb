@@ -1,13 +1,13 @@
 
 <% render(:layout => 'users/user') do %>
 	    <% if authorized? %>
-	    <div class="additional_options">
+	    <div class="additional_options_solo">
 		    <div class="button_wrapper">
-		    <%= link_to "create new playlist", new_user_playlist_path(@user), :id => 'add_playlist_button', :class => 'add button' %>
+		    <%= link_to " ", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
 		    </div>
             <% if @user.playlists.public.size > 2 %>
     		    <div class="button_wrapper">
-    		    <%= link_to "change playlist order", sort_user_playlists_path(@user), :id => 'sort_playlist_button', :class => 'sort button'  %>
+    		    <%= link_to " ", sort_user_playlists_path(@user), :id => 'change_playlist_order', :class => 'button'  %>
     		    </div>
 		    <% end %>
 		</div>
