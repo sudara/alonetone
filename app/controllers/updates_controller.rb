@@ -8,7 +8,7 @@ class UpdatesController < ApplicationController
     @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @updates }
+      format.xml
     end
   end
 

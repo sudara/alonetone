@@ -1,6 +1,7 @@
 <div class="sidebar">
     <div class="box"> 
         <h2 class="box static">Recent Grunts</h2>
+        <%= link_to image_tag('feed-icon.png'), 'http://alonetone.com/updates.xml', :style => 'float:right;margin-top:-30px;margin-right:10px;'%>
         <div class="static_content">
             <ul>
             <% for update in @recent_updates %>
