@@ -28,7 +28,7 @@ body{
 	width:76em;	
 }
 #content{
-	width: 984;
+	width: 984px;
 	margin: 10px auto;
 	text-align:left;
 }
@@ -228,12 +228,18 @@ div.flash.notice
 {
 }
 
-#sql_statement
+.sql_statement
 {
 	width: 800px;
 	overflow: auto;
 }
 
+.plan
+{
+    font-family: monospace;
+    font-size: 0.8em;
+    white-space: pre;
+}
 #page_nav
 {
 	height: 42px;

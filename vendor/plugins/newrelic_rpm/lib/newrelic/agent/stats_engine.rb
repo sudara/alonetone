@@ -160,7 +160,7 @@ module NewRelic::Agent
         # the stats inside our hash table for the next time slice.
         stats = @stats_hash[metric_spec]
         if stats.nil? 
-          puts "Nil stats for #{metric_spec.name} (#{metric_spec.scope})"
+          raise "Nil stats for #{metric_spec.name} (#{metric_spec.scope})"
         end
         
         stats_copy = stats.clone
@@ -177,7 +177,10 @@ module NewRelic::Agent
         # don't bother collecting and reporting stats that have zero-values for this timeslice.
         # significant performance boost and storage savings.
         unless stats_copy.call_count == 0
-          metric_data = NewRelic::MetricData.new(metric_spec, stats_copy, metric_ids[metric_spec])
+          
+          metric_spec_for_transport = (metric_ids[metric_spec].nil?) ? metric_spec : nil
+          
+          metric_data = NewRelic::MetricData.new(metric_spec_for_transport, stats_copy, metric_ids[metric_spec])
           
           timeslice_data[metric_spec] = metric_data
         end

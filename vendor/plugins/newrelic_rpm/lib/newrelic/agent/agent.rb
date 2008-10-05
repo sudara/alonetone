@@ -4,6 +4,7 @@ require 'logger'
 require 'singleton'
 require 'zlib'
 
+require 'newrelic/version'
 require 'newrelic/stats'
 require 'newrelic/agent/worker_loop'
 
@@ -20,6 +21,8 @@ module NewRelic::Agent
   
   # an exception that forces an agent to stop reporting until its mongrel is restarted
   class ForceDisconnectException < Exception; end
+    
+  class IgnoreSilentlyException < StandardError; end
   
   # add some convenience methods for easy access to the Agent singleton.
   # the following static methods all point to the same Agent instance:
@@ -57,8 +60,8 @@ module NewRelic::Agent
     # environment - the name of the environment. used for logging only
     # port - the name of this instance. shows up in the RPM UI screens. can be any String
     #
-    def manual_start(environment, port)
-      agent.manual_start(environment, port)
+    def manual_start(environment, identifier)
+      agent.manual_start(environment, identifier)
     end
     
     # This method sets the block sent to this method as a sql obfuscator. 
@@ -103,6 +106,25 @@ module NewRelic::Agent
       agent.transaction_sampler.add_request_parameters(params)
     end
     
+    # This method disables the recording of transaction traces in the given
+    # block.
+    def disable_transaction_tracing
+      state = agent.set_record_tt(false)
+      begin
+        yield
+      ensure
+        agent.set_record_tt(state)
+      end
+    end
+    
+    # This method allows a filter to be applied to errors that RPM will track.
+    # The block should return the exception to track (which could be different from
+    # the original exception) or nil to ignore this exception
+    #
+    def ignore_error_filter(&block)
+      agent.error_collector.ignore_error_filter &block
+    end
+    
   end
   
   
@@ -124,6 +146,8 @@ module NewRelic::Agent
     DEFAULT_HOST = 'localhost'
     DEFAULT_PORT = 3000
     
+    # Config hash
+    attr_accessor :config
     attr_reader :obfuscator
     attr_reader :stats_engine
     attr_reader :transaction_sampler
@@ -131,32 +155,50 @@ module NewRelic::Agent
     attr_reader :worker_loop
     attr_reader :log
     attr_reader :license_key
-    attr_reader :config
     attr_reader :remote_host
     attr_reader :remote_port
     attr_reader :record_sql
-    attr_reader :local_port
+    attr_reader :identifier
     
+    # This method is deprecated.  Use start.
+    def manual_start(environment, identifier)
+      start(environment, identifier, true)
+    end
+
     # Start up the agent, which will connect to the newrelic server and start 
     # reporting performance information.  Typically this is done from the
-    # environment configuration file
-    def start(config)
+    # environment configuration file.  
+    # environment identifies the host environment, like mongrel, thin, or take.
+    # identifier is an identifier which uniquely identifies the process hosting
+    # the agent.  It should be ideally something like a server port, like 3000,
+    # a handler thread name, or a script name.  It should not be a PID because 
+    # that will change
+    # from invocation to invocation.  For something like rake, you could use
+    # the task name.
+    # Return false if the agent was not started
+    def start(environment, identifier, force=false)
+
+      @config ||= ::NR_CONFIG_FILE 
+      
       if @started
         log! "Agent Started Already!"
         raise "Duplicate attempt to start the NewRelic agent"
       end
-      
-      @config = config
-      
-      @local_port = determine_environment_and_port
-      start_reporting if @local_port
+      @environment = environment
+      @identifier = identifier && identifier.to_s
+      if @identifier
+        start_reporting(force)
+        return true
+      else
+        return false
+      end
     end
     
     # this method makes sure that the agent is running. it's important
     # for passenger where processes are forked and the agent is dormant
     #
     def ensure_started
-      return unless @prod_mode_enabled
+      return unless @prod_mode_enabled && !@invalid_license
       if @worker_thread.nil? || !@worker_thread.alive?
         launch_worker_thread
         @stats_engine.spawn_sampler_thread
@@ -168,11 +210,22 @@ module NewRelic::Agent
 
       setup_log
       
+      if @environment == :passenger
+        log.warn "Phusion Passenger has been detected. Some RPM memory statistics may have inaccuracies due to short process lifespans"
+      end
+      
       @worker_loop = WorkerLoop.new(@log)
       @started = true
       
       @license_key = config.fetch('license_key', nil)
       
+      ignore_errors = config.fetch('ignore_errors', "")
+      ignore_errors = ignore_errors.split(",")
+      ignore_errors.each { |error| error.strip! } 
+      
+      @error_collector.ignore(ignore_errors)
+      @capture_params = config.fetch('capture_params', false)
+            
       sampler_config = config.fetch('transaction_tracer', {})
       
       @use_transaction_sampler = sampler_config.fetch('enabled', false)
@@ -181,7 +234,7 @@ module NewRelic::Agent
       @explain_threshold = sampler_config.fetch('explain_threshold', '0.5').to_f
       @explain_enabled = sampler_config.fetch('explain_enabled', true)
       
-      log.info "Transaction tracer enabled: #{@use_transaction_sampler}"
+      log.info "Transaction tracing is enabled in the agent" if @use_transaction_sampler
       log.warn "Agent is configured to send raw SQL to RPM service" if @record_sql == :raw
       
       @use_ssl = config.fetch('ssl', false)
@@ -197,6 +250,11 @@ module NewRelic::Agent
 
       @prod_mode_enabled = force_enable || config['enabled']
       
+      # Initialize transaction sampler
+      @transaction_sampler.capture_params = @capture_params
+      @error_collector.capture_params = @capture_params
+
+      
       # make sure the license key exists and is likely to be really a license key
       # by checking it's string length (license keys are 40 character strings.)
       if @prod_mode_enabled && (!@license_key || @license_key.length != 40)
@@ -204,22 +262,45 @@ module NewRelic::Agent
         return
       end
 
-      instrument_rails if force_enable || ::RPM_TRACERS_ENABLED
+      instrument_rails
       
       if @prod_mode_enabled
         load_samplers
         launch_worker_thread
-        install_at_exit_handler
+        # When the VM shuts down, attempt to send a message to the server that
+        # this agent run is stopping, assuming it has successfully connected
+        at_exit { shutdown }
       end
     end
-    
-    def manual_start(environment, port)
-      @environment = environment
-      @local_port = port
-      
-      start_reporting true      
-    end
 
+    # Attempt a graceful shutdown of the agent.  
+    def shutdown
+      return if ! @started
+      @worker_loop.stop
+      
+      log.debug "Starting Agent shutdown"
+      
+      # if litespeed, then ignore all future SIGUSR1 - it's litespeed trying to shut us down
+      
+      if @environment == :litespeed
+        Signal.trap("SIGUSR1", "IGNORE")
+        Signal.trap("SIGTERM", "IGNORE")
+      end
+      
+      begin
+        
+        # only call graceful_disconnect if we successfully stop the worker thread (since a transaction may be in flight)
+        if @worker_thread.join(30)  
+          graceful_disconnect
+        else
+          log.debug "ERROR - could not stop worker thread"
+        end
+      rescue Exception => e
+        log.debug e
+        log.debug e.backtrace.join("\n")
+      end
+      @started = nil
+    end
     
     def start_transaction
       @stats_engine.start_transaction
@@ -228,6 +309,13 @@ module NewRelic::Agent
     def set_record_sql(should_record)
       prev = Thread::current[:record_sql]
       Thread::current[:record_sql] = should_record
+      
+      prev || true
+    end
+    
+    def set_record_tt(should_record)
+      prev = Thread::current[:record_tt]
+      Thread::current[:record_tt] = should_record
       
       prev || true
     end
@@ -244,32 +332,55 @@ module NewRelic::Agent
       end
     end
 
+    # Collect the Rails::Info into an associative array as well as the list of plugins
+    def gather_info
+      i = []
+      begin 
+        require 'builtin/rails_info/rails/info'
+        i += Rails::Info.properties
+      rescue Exception => e
+        log.debug "Unable to get the Rails info: #{e.inspect}"
+        log.debug e.backtrace.join("\n")
+      end
+      # Would like to get this from config, but how?
+      plugins = Dir[File.join(File.expand_path(__FILE__+"/../../../../.."),"/*")].collect { |p| File.basename p }
+      i << ['Plugin List', plugins]
+      
+      # Look for a capistrano file indicating the current revision:
+      rev_file = File.expand_path(File.join(RAILS_ROOT, "REVISION"))
+      if File.readable?(rev_file) && File.size(rev_file) < 64
+        File.open(rev_file) { | file | i << ['Revision', file.read] } rescue nil
+      end
+      i
+    end
     
     private
+    
     def initialize
       @connected = false
       @launch_time = Time.now
       
       @metric_ids = {}
       @environment = :unknown
-      @initalized_pid = $$
       
       @stats_engine = StatsEngine.new
       @transaction_sampler = TransactionSampler.new(self)
       @error_collector = ErrorCollector.new(self)
       
       @request_timeout = 15 * 60
+      
+      @invalid_license = false
     end
     
     def setup_log
-      if @local_port
-        log_file = "#{RAILS_ROOT}/log/newrelic_agent.#{@local_port}.log"
-      else
-        log_file = "#{RAILS_ROOT}/log/newrelic_agent.log"
-      end
+      log_path = ::RAILS_DEFAULT_LOGGER.instance_eval do
+      File.dirname(@log.path) rescue File.dirname(@logdev.filename) 
+      end rescue "#{RAILS_ROOT}/log"
+      log_path  = File.expand_path(log_path)
+      identifier_part = identifier && identifier[/[\.\w]*$/] 
+      log_file = "#{RAILS_ROOT}/log/newrelic_agent.#{identifier_part ? identifier_part + "." : "" }log"
       
       @log = Logger.new log_file
-      @log.level = Logger::INFO
       
       # change the format just for our logger
       
@@ -290,16 +401,16 @@ module NewRelic::Agent
       end
       
       log! "New Relic RPM Agent Initialized: pid = #{$$}"
-      to_stderr "Agent Log is found in #{log_file}"
+      log! "Agent Log is found in #{log_file}"
       log.info "Runtime environment: #{@environment.to_s.titleize}"
     end
     
     
     def launch_worker_thread
-      
-      # we don't launch the worker_thread for passenger due to the way it spawns processes
-      
-      return if (@environment == :passenger && @initalized_pid == $$)
+      if (@environment == :passenger && $0 =~ /ApplicationSpawner/)
+        log.info "Process is passenger spawner - don't connect to RPM service"
+        return
+      end
       
       @worker_thread = Thread.new do 
         @worker_thread_started = true
@@ -340,46 +451,15 @@ module NewRelic::Agent
     end
     
     
-    def install_at_exit_handler
-      # When the VM shuts down, attempt to send a message to the server that
-      # this agent run is stopping, assuming it has successfully connected
-      at_exit do
-        @worker_loop.stop
-        
-        log.debug "Starting Agent shutdown"
-        
-        # if litespeed, then ignore all future SIGUSR1 - it's litespeed trying to shut us down
-        
-        if @environment == :litespeed
-          Signal.trap("SIGUSR1", "IGNORE")
-          Signal.trap("SIGTERM", "IGNORE")
-        end
-        
-        begin
-          
-          # only call graceful_disconnect if we successfully stop the worker thread (since a transaction may be in flight)
-          if @worker_thread.join(30)  
-            graceful_disconnect
-          else
-            log.debug "ERROR - could not stop worker thread"
-          end
-        rescue Exception => e
-          log.debug e
-          log.debug e.backtrace.join("\n")
-        end
-      end
-    end    
-    
-    
+
     def connect
       @connect_retry_period ||= 5
       @connect_attempts ||= 0
       
       # wait a few seconds for the web server to boot
       sleep @connect_retry_period.to_i
-      
       @agent_id = invoke_remote :launch, @local_host,
-               @local_port, determine_home_directory, $$, @launch_time.to_f
+               @identifier, determine_home_directory, $$, @launch_time.to_f, NewRelic::VERSION::STRING, gather_info
       
       log! "Connected to NewRelic Service at #{@remote_host}:#{@remote_port}."
       log.debug "Agent ID = #{@agent_id}."
@@ -390,7 +470,7 @@ module NewRelic::Agent
       # Ask for mermission to collect error data
       @should_send_errors = invoke_remote :should_collect_errors, @agent_id
       
-      log! "Transaction tracer enabled from RPM service: #{@should_send_samples}"
+      log! "Transaction traces will be sent to the RPM service" if @use_transaction_sampler && @should_send_samples
       
       @connected = true
       @last_harvest_time = Time.now
@@ -400,6 +480,7 @@ module NewRelic::Agent
       log! e.message, :error
       log! "Visit NewRelic.com to obtain a valid license key, or to upgrade your account."
       log! "Turning New Relic Agent off."
+      @invalid_license = true
       return false
       
     rescue Timeout::Error, StandardError => e
@@ -437,85 +518,14 @@ module NewRelic::Agent
     def determine_host
       Socket.gethostname
     end
-    
-    # determine the environment we are running in (one of :webrick,
-    # :mongrel, :thin, or :unknown) and if the process is listening
-    # on a port, return the port # that we are listening on.  When
-    # this returns nil for the port, then the agent will not run.
-    def determine_environment_and_port
-      # Note: log won't be available yet.
-      port = nil
-      @environment = :unknown
-      
-      begin
-        # OPTIONS is set by script/server 
-        port = OPTIONS.fetch :port, DEFAULT_PORT
-        @environment = :webrick
-        return port
-      rescue NameError
-      end # continue on if this didn't succeed...
 
-      # this case covers starting by mongrel_rails
-      if defined? Mongrel::HttpServer
-        ObjectSpace.each_object(Mongrel::HttpServer) do |mongrel|
-          @environment = :mongrel
-          return mongrel.port
-        end
-      end
-      
-      if defined? Thin::Server
-        # This case covers the thin web server
-        # Same issue as above- we assume only one instance per process
-        ObjectSpace.each_object(Thin::Server) do |thin_server|
-          @environment = :thin
-          backend = thin_server.backend
-          # We need a way to uniquely identify and distinguish agents.  The port
-          # works for this.  When using sockets, use the socket file name.
-          if backend.respond_to? :port
-            return backend.port
-          elsif backend.respond_to? :socket
-            return backend.socket
-          end
-        end # each thin instance
-      end
-      
-      if RUBY_PLATFORM =~ /java/
-        # Check for JRuby environment.  Not sure how this works in different appservers
-        require 'java'
-        require 'jruby'
-        @environment = :jruby
-        return java.lang.System.identityHashCode(JRuby.runtime)
-      end
-      
-      if caller.pop =~ /fcgi-bin\/RailsRunner\.rb/
-          @environment = :litespeed
-          return 'litespeed'
-      end
-      
-      if defined? Passenger::AbstractServer
-        @environment = :passenger
-        return 'passenger'
-      end
-      
-      if config['monitor_daemons']
-        @environment = :daemon
-        # return the base part of the file name
-        return File.basename($0).split(".").first
-      end
-      
-      # if no real environment was found
-      return nil
-    end
-    
     def determine_home_directory
       File.expand_path(RAILS_ROOT)
     end
     
     def instrument_rails
-      @instrumented ||= false
-      
       return if @instrumented
-      
+
       @instrumented = true
       
       Module.method_tracer_log = log
@@ -604,19 +614,19 @@ module NewRelic::Agent
         @unsent_errors = []
       end
     end
-    
-    def handle_messages(messages)
-      messages.each do |message|
-        begin
-          message = Marshal.load(message)
-          message.execute(self)
-          log.debug("Received Message: #{message.to_yaml}")
-        rescue => e
-          log.error "Error handling message: #{e}"
-          log.debug e.backtrace.join("\n")
-        end
-      end 
-    end
+#    
+#    def handle_messages(messages)
+#      messages.each do |message|
+#        begin
+#          message = Marshal.load(message)
+#          message.execute(self)
+#          log.debug("Received Message: #{message.to_yaml}")
+#        rescue => e
+#          log.error "Error handling message: #{e}"
+#          log.debug e.backtrace.join("\n")
+#        end
+#      end 
+#    end
     
     # send a message via post
     # As of Version 2, the agent-server protocol is:
@@ -658,7 +668,11 @@ module NewRelic::Agent
           return return_value
         end
       else
-        raise "#{response.code}: #{response.message}"
+        if response.code == 405
+          raise IgnoreSilentlyException.new
+        else
+          raise "#{response.code}: #{response.message}"
+        end
       end 
     rescue ForceDisconnectException => e
       log! "RPM forced this agent to disconnect", :error
@@ -668,6 +682,9 @@ module NewRelic::Agent
       # gathers data and talks to the server. 
       @connected = false
       Thread.exit
+    
+    rescue IgnoreSilentlyException => e
+      raise e
 
     rescue Exception => e
       log.error("Error communicating with RPM Service at #{@remote_host}:#{remote_port}: #{e}")
@@ -691,11 +708,11 @@ module NewRelic::Agent
     end
     
     def graceful_disconnect
-      if @connected && !(remote_host == "localhost" && @port == 3000)
+      if @connected && !(remote_host == "localhost" && @identifier == '3000')
         begin
           log.debug "Sending graceful shutdown message to #{remote_host}:#{remote_port}"
           
-          @request_timeout = 30
+          @request_timeout = 5
           
           harvest_and_send_timeslice_data
           

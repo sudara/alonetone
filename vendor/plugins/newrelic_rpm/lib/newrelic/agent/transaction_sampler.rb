@@ -2,10 +2,13 @@ require 'newrelic/transaction_sample'
 require 'thread'
 require 'newrelic/agent/method_tracer'
 require 'newrelic/agent/synchronize'
+require 'newrelic/agent/param_normalizer'
 
 module NewRelic::Agent
   class TransactionSampler
-    include(Synchronize)
+    include Synchronize
+    
+    attr_accessor :capture_params
     
     def initialize(agent, options = {})
       @samples = []
@@ -14,6 +17,8 @@ module NewRelic::Agent
       @options.merge!(options)
 
       @max_samples = @options[:max_samples]
+      
+      @capture_params = true
 
       agent.stats_engine.add_scope_stack_listener self
 
@@ -175,7 +180,7 @@ module NewRelic::Agent
       BUILDER_KEY = :transaction_sample_builder
 
       def create_builder
-        Thread::current[BUILDER_KEY] = TransactionSampleBuilder.new
+        Thread::current[BUILDER_KEY] = TransactionSampleBuilder.new(@capture_params)
       end
       
       # most entry points into the transaction sampler take the current transaction
@@ -190,16 +195,17 @@ module NewRelic::Agent
       end
       
       def get_builder
-        Thread::current[BUILDER_KEY]
+        if Thread::current[:record_tt].nil? || Thread::current[:record_tt]
+          Thread::current[BUILDER_KEY]
+        else
+          nil
+        end
       end
       
       def reset_builder
         Thread::current[BUILDER_KEY] = nil
       end
       
-      def is_developer_mode?
-        @developer_mode ||= (defined?(::RPM_DEVELOPER) && ::RPM_DEVELOPER)
-      end
   end
 
   # a builder is created with every sampled transaction, to dynamically
@@ -208,7 +214,10 @@ module NewRelic::Agent
   class TransactionSampleBuilder
     attr_reader :current_segment
     
-    def initialize
+    include ParamNormalizer
+    
+    def initialize(capture_params=true)
+      @capture_params = capture_params
       @sample = NewRelic::TransactionSample.new
       @sample.begin_building
       @current_segment = @sample.root_segment
@@ -267,10 +276,18 @@ module NewRelic::Agent
     end
     
     def set_transaction_info(path, request, params)
+      
+      
       @sample.params[:path] = path
-      @sample.params[:request_params].merge!(params)
-      @sample.params[:request_params].delete :controller
-      @sample.params[:request_params].delete :action
+      
+      if @capture_params
+        params = normalize_params params
+        
+        @sample.params[:request_params].merge!(params)
+        @sample.params[:request_params].delete :controller
+        @sample.params[:request_params].delete :action
+      end
+      
       @sample.params[:uri] = request.path if request
     end
     
@@ -279,6 +296,9 @@ module NewRelic::Agent
     end
     
     def add_request_parameters(params)
+      
+      params = normalize_params params
+      
       @sample.params[:request_params].merge!(params)
     end
     

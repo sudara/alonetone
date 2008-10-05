@@ -33,7 +33,7 @@ class NewrelicController < ActionController::Base
     self.template_root = view_path
   end
   
-  layout "default"
+  layout "newrelic_default"
   
   write_inheritable_attribute('do_not_trace', true)
   
@@ -49,14 +49,7 @@ class NewrelicController < ActionController::Base
     forward_to_file '/newrelic/javascript/', 'text/javascript'
   end
   
-  def forward_to_file(root_path = nil, content_type = nil)
-    if root_path &&  file = params[:file]
-      full_path = root_path + file
-      render :file => full_path, :use_full_path => true, :content_type => content_type
-    else
-      render :nothing => true, :status => 404
-    end
-  end
+
   
   def index
     get_samples
@@ -90,28 +83,34 @@ class NewrelicController < ActionController::Base
     explanations = @segment.explain_sql
     if explanations
       @explanation = explanations.first 
-    
-      @row_headers = [
-        nil,
-        "Select Type",
-        "Table",
-        "Type",
-        "Possible Keys",
-        "Key",
-        "Key Length",
-        "Ref",
-        "Rows",
-        "Extra"
-      ];
+      if !@explanation.blank?
+        first_row = @explanation.first
+        # Show the standard headers if it looks like a mysql explain plan
+        # Otherwise show blank headers
+        if first_row.length < NewRelic::MYSQL_EXPLAIN_COLUMNS.length
+          @row_headers = nil
+        else
+          @row_headers = NewRelic::MYSQL_EXPLAIN_COLUMNS
+        end
+      end
     end
   end
   
   # show the selected source file with the highlighted selected line
   def show_source
-    filename = params[:file]
+    @filename = params[:file]
     line_number = params[:line].to_i
     
-    file = File.new(filename, 'r')
+    if !File.readable?(@filename)
+      @source="<p>Unable to read #{@filename}.</p>"
+      return
+    end
+    begin
+      file = File.new(@filename, 'r')
+    rescue => e
+      @source="<p>Unable to access the source file #{@filename} (#{e.message}).</p>"
+      return
+    end
     @source = ""
 
     @source << "<pre>"
@@ -134,6 +133,13 @@ class NewrelicController < ActionController::Base
   end
   
 private 
+
+  # root path is relative to plugin newrelic_rpm/ui/views directory.
+  def forward_to_file(root_path, content_type)
+    render :file => File.expand_path(File.join(__FILE__,"../../views", root_path, params[:file])),
+           :content_type => content_type
+  end
+  
   def show_sample_data
     get_sample
     

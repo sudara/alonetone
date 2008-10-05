@@ -11,13 +11,6 @@ module ActiveRecord
         add_method_tracer find_method, 'ActiveRecord/all', :push_scope => false
       end
       
-      # misc
-#      [:columns].each do |method|
-#        add_method_tracer method, 'ActiveRecord/misc', :push_scope => false
-#        add_method_tracer method, 'ActiveRecord/all', :push_scope => false
-#        add_method_tracer method, 'ActiveRecord/#{self.name}/misc'
-#      end
-      
     end
     [:save, :save!].each do |save_method|
       add_method_tracer save_method, 'ActiveRecord/#{self.class.name}/save'

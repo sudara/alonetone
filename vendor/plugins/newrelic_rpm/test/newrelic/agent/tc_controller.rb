@@ -1,8 +1,5 @@
 
 require 'test/unit'
-require 'vendor/rails/actionpack/lib/action_controller'
-
-::RPM_TRACERS_ENABLED = true
 
 require 'newrelic/agent/method_tracer'
 require 'newrelic/agent/instrumentation/action_controller'
@@ -18,6 +15,12 @@ class TestController < ActionController::Base
   def _filter_parameters(params)
     filter_parameters params
   end
+  
+  newrelic_ignore :only => :action_to_ignore
+  
+  def action_to_ignore(*args)
+  end
+
 end
 
 
@@ -52,6 +55,6 @@ class AgentControllerTests < Test::Unit::TestCase
     puts "Request Params: #{samples[0].params[:request_params]}"
 
 #    assert_equal "[FILTERED]", samples[0].params[:request_params]['social_security_number']
-  end  
-  
+  end
+
 end

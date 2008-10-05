@@ -46,35 +46,32 @@ common: &default_settings
   # proxy_pass:
 
   
-  # Transaction tracer is a EARLY ACCESS feature that captures deep information about slow
+  # Tells transaction tracer and error collector (when enabled) whether or not to capture HTTP params. 
+  # When true, the RoR filter_parameters mechanism is used so that sensitive parameters are not recorded
+  capture_params: false
+
+
+  # Transaction tracer captures deep information about slow
   # transactions and sends this to the RPM service once a minute. Included in the
   # transaction is the exact call sequence of the transactions including any SQL statements
   # issued.
   #
-  # Because this feature is EARLY ACCESS, only accounts that have been approved for
-  # early access features by New Relic will have this capability enabled
   transaction_tracer:
   
-    # The default for transaction tracer is false due to the sensitive nature of the SQL
-    # data we send to the RPM service. Get comfortable with the SQL obfuscator in development
-    # mode before enabling transaction tracer.
-    enabled: false
+    # Transaction tracer is enabled by default. Set this to false to turn it off. This feature
+    # is available at the Advanced and Pro RPM product levels only.
+    enabled: true
   
-    # When transaction tracer is on, only report the slowest trace every minute to RPM
-    # if the trace is slower than this value
-    transaction_threshold: 2.0
  
     # When transaction tracer is on, SQL statements can optionally be recorded. The recorder
     # has three modes, "off" which sends no SQL, "raw" which sends the SQL statement in its 
     # original form, and "obfuscated", which strips out numeric and string literals
     record_sql: obfuscated
     
-    # When transaction tracer is on, should show SQL statements be EXPLAINED
-    explain_enabled: true
-
-    # When EXPLAIN is enabled, only run it for SQL statements slower than this value 
-    explain_threshold: 0.50
-    
+  # To stop specific errors from reporting to RPM, set this property to comma separated 
+  # values
+  #
+  #ignore_errors: ActionController::RoutingError, ...
 
 # override default settings based on your application's environment
 

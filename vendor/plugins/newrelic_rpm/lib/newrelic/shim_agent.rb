@@ -48,7 +48,14 @@ module NewRelic
         yield
       end
       
+      def disable_transaction_tracing
+        yield
+      end
+      
       def add_request_parameters(*args)
+      end
+    
+      def should_ignore_error
       end
     end  
 
@@ -58,8 +65,8 @@ module NewRelic
         @error_collector = ErrorCollector.new
       end
       
-      def Agent.instance
-        @@agent ||= Agent.new
+      def self.instance
+        @@agent ||= new
         
         @@agent
       end      
@@ -76,8 +83,8 @@ end
 
 module ActionController
   class Base
-    def _determine_metric_path
-    end
+    def self.newrelic_ignore(*args); end
+    def _determine_metric_path; end
   end
 end
 

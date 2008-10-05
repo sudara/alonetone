@@ -2,7 +2,20 @@ require 'newrelic/stats'
 
 module NewRelic
   COLLAPSE_SEGMENTS_THRESHOLD = 2
-  
+    
+  MYSQL_EXPLAIN_COLUMNS = [
+        "Id",
+        "Select Type",
+        "Table",
+        "Type",
+        "Possible Keys",
+        "Key",
+        "Key Length",
+        "Ref",
+        "Rows",
+        "Extra"
+      ].freeze
+      
   class TransactionSample
     class Segment
       attr_reader :entry_timestamp
@@ -119,7 +132,7 @@ module NewRelic
       
       # perform this in the runtime environment of a managed application, to explain the sql
       # statement(s) executed within a segment of a transaction sample.
-      # returns an array of explanations (which is an array of results from the explain query)
+      # returns an array of explanations (which is an array of array of string from the explain query)
       # Note this happens only for statements whose execution time exceeds a threshold (e.g. 500ms)
       # and only within the slowest transaction in a report period, selected for shipment to RPM
       def explain_sql        
@@ -129,21 +142,33 @@ module NewRelic
         explanations = []
         statements.each do |statement|
           if statement.split($;, 2)[0].upcase == 'SELECT'
-            explanation = []
+            explain_resultset = []
             begin
-              connection = NewRelic::TransactionSample.get_connection(params[:connection_config])        
-
-        	    if connection
-	              result = connection.execute("EXPLAIN #{statement}")
-  	            result.each {|row| explanation << row }
-  	          end
-            rescue
+              connection = NewRelic::TransactionSample.get_connection(params[:connection_config])    
+              if connection
+                # The resultset type varies for different drivers.  Only thing you can count on is
+                # that it implements each.  Also: can't use select_rows because the native postgres
+                # driver doesn't know that method.
+                explain_resultset = connection.execute("EXPLAIN #{statement}") if connection
+                rows = []
+                # Note: we can't use map.
+                # Note: have to convert from native column element types to string so we can
+                # serialize.  Esp. for postgresql.
+                explain_resultset.each { | row | rows << row.map(&:to_s) }  # Can't use map.  Suck it up.
+                explanations << rows
+                # sleep for a very short period of time in order to yield to the main thread
+                # this is because a remote database call will likely hang the VM
+                sleep 0.05
+              end
+            rescue => e
               x = 1 # this is here so that code coverage knows we've entered this block
               # swallow failed attempts to run an explain.  One example of a failure is the
               # connection for the sql statement is to a different db than the default connection
               # specified in AR::Base
             end
-            explanations << explanation
+            # This is to ensure we convert the row into an array if it is not already.
+            # Needed for PostgreSQL:
+            explanations << explain_resultset.map{|row| row.map(&:to_s)}
           end
         end
 

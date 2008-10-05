@@ -65,22 +65,36 @@ module NewrelicHelper
     end
   end
   
+  
+  def dev_name(metric_name)
+    @@metric_parser_available ||= defined? MetricParser
+    
+    (@@metric_parser_available) ? MetricParser.parse(metric_name).developer_name : metric_name
+  end
+  
+  # write the metric label for a segment metric in the detail view
   def write_segment_label(segment)
     if segment[:backtrace] && (source_url = url_for_source(application_caller(segment[:backtrace])))
-      link_to segment.metric_name, source_url
+      link_to dev_name(segment.metric_name), source_url
     else
-      segment.metric_name
+      dev_name(segment.metric_name)
     end
   end
-
   
+  # write the metric label for a segment metric in the summary table of metrics
+  def write_summary_segment_label(segment)
+    dev_name(segment.metric_name)
+  end
+
+  # write a link to the source for a trace
   def link_to_source(trace)
     image_url = "#{server}/images/"
     image_url << (using_textmate? ? "textmate.png" : "file_icon.png")
     
-    link_to image_tag(image_url), url_for_source(application_caller(trace))
+    link_to image_tag(image_url, :alt => (title = 'View Source'), :title => title), url_for_source(application_caller(trace))
   end
   
+  # print the formatted timestamp for a segment
   def timestamp(segment)
     sprintf("%1.3f", segment.entry_timestamp)
   end
@@ -112,8 +126,12 @@ module NewrelicHelper
       :segment => segment.segment_id)
   end
   
+  def segment_duration_value(segment)
+    link_to "#{segment.duration.to_ms.with_delimiter} ms", explain_sql_url(segment)
+  end
+  
   def line_wrap_sql(sql)
-    sql.gsub(/\,/,', ').squeeze(' ')
+    sql.gsub(/\,/,', ').squeeze(' ') if sql
   end
   
   def render_sample_details(sample)
@@ -152,7 +170,7 @@ module NewrelicHelper
     pie_chart.color, pie_chart.width, pie_chart.height = '6688AA', width, height
     
     chart_data = sample.breakdown_data(6)
-    chart_data.each { |s| pie_chart.add_data_point s.metric_name, s.exclusive_time.to_ms }
+    chart_data.each { |s| pie_chart.add_data_point dev_name(s.metric_name), s.exclusive_time.to_ms }
     
     pie_chart.render
   end
@@ -233,7 +251,8 @@ private
       file =~ /\/active(_)*record\// ||
       file =~ /\/action(_)*controller\// ||
       file =~ /\/activesupport\// ||
-      file =~ /\/actionpack\//
+      file =~ /\/actionpack\// ||
+      file !~ /\.rb/                  # must be a .rb file, otherwise it's a script of something else...we could have gotten trickier and tried to see if this file exists...
   end
   
   def show_view_link(title, page_name)
