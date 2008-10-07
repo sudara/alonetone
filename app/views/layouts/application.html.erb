@@ -52,7 +52,7 @@
 				<div class="clear"> </div>
 				<%= yield :bottom %>
 	  </div> <!-- end columns -->
-            <% if ENV["RAILS_ENV"] == 'development'%>
+            <% if APP_CONFIG.show_debug_info %>
                 <div style="width:100%;min-height:200px;color:#fff">
                     <% if current_user %>
                         last seen at <%= current_user.last_seen_at %><br/>

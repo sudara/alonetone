@@ -1,0 +1,9 @@
+---
+development: &defaults
+  show_debug_info: false
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
