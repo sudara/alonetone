@@ -132,7 +132,8 @@ class ApplicationController < ActionController::Base
 
   def display_news
     return unless logged_in?
-    @display_news = true if session[:last_active] && (session[:last_active] < Update.find(:first, :order => 'created_at DESC').created_at)
+    last_update = Update.find(:first, :order => 'created_at DESC')
+    @display_news = true if session[:last_active] && last_update && (session[:last_active] < last_update.created_at)
   end
 
   def is_sudo

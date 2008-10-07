@@ -13,13 +13,13 @@ class Asset
     'audio%', 'video%', (extra_content_types[:movie] + extra_content_types[:audio] + Technoweenie::AttachmentFu.content_types)]).freeze
   cattr_reader *%w(movie audio image other).collect! { |t| "#{t}_condition".to_sym }
   
-  has_attachment  :storage => :s3, 
+  has_attachment  :storage => :file_system, 
                   :processor => :mp3info,
                   :content_type => ['audio/mpeg','application/zip'],
                   :max_size => 40.megabytes,
-                  :path_prefix => "mp3"
+                  :path_prefix => "public/mp3"
                     
-  validates_as_attachment
+  # validates_as_attachment
 
   def self.extract_mp3s(zip_file, &block)
     # try to open the zip file
@@ -92,7 +92,7 @@ class Asset
   end
   
   def public_mp3
-    self.s3_url
+    self.public_filename
   end
   
   # never allow this to be blank, as permalinks are generated from it

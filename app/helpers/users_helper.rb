@@ -53,7 +53,7 @@ module UsersHelper
   end
   
   def new_to_user?(thing)
-    (logged_in? and current_user.last_session_at) && (current_user.last_session_at < thing.created_at.utc)
+    thing && (logged_in? and current_user.last_session_at) && (current_user.last_session_at < thing.created_at.utc)
   end
 
 end
