@@ -8,6 +8,7 @@ class FacebookAddable < ActiveRecord::Base
   # Each addable item gets it's own entry here so the owner can reference it directly 
   belongs_to :asset,    :class_name => "Asset",
                         :foreign_key => "profile_chunk_id"
+
   belongs_to :playlist, :class_name => "Playlist",
                         :foreign_key => "profile_chunk_id"
                         

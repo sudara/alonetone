@@ -2,13 +2,18 @@ class Listen < ActiveRecord::Base
   
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
   
+  named_scope :from_user, {:conditions => ['listener_id != ""']}
+  
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, :counter_cache => true
 
-  named_scope :from_user, {:conditions => ['listener_id != ""']}
-  
-  belongs_to :listener, :class_name => 'User', :foreign_key => 'listener_id'
-  belongs_to :track_owner, :class_name => 'User', :counter_cache => true
+  belongs_to :listener, 
+    :class_name     => 'User', 
+    :foreign_key    => 'listener_id'
+
+  belongs_to :track_owner, 
+    :class_name     => 'User', 
+    :counter_cache  => true
   
   validates_presence_of :asset_id, :track_owner_id
   
@@ -17,32 +22,73 @@ class Listen < ActiveRecord::Base
   end
   
   def self.total
-    self.count(:all)
+    count(:all)
   end
   
   def self.today
-    self.count(:all, :conditions => {:created_at => Time.now.at_beginning_of_day..Time.now})
+    count(:all, :conditions => {:created_at => Time.now.at_beginning_of_day..Time.now})
+  end
+  
+  def self.count_within_a_month(options={})
+    options[:conditions] = ['listens.created_at > ?', 30.days.ago.at_midnight]
+    count(:all, options)
   end
   
   def self.source_chart
-    data = self.count(:all, :group => :source, :order => 'count_all DESC', :limit => 10, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight])
-    various = self.count(:all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight]) - data.collect(&:last).sum
+    data = count_within_a_month(
+      :group => :source, 
+      :order => 'count_all DESC', 
+      :limit => 10
+    )    
+
+    various = count_within_a_month - data.collect(&:last).sum
+
     data << ['various other sources', various]
-    Gchart.pie(:size => '500x125', :background => 'e1e2e1', :data => data.collect(&:last), :labels => data.collect{|d| CGI.escape(d.first.to_s)})
+
+    Gchart.pie(
+      :size       => '500x125', 
+      :background => 'e1e2e1', 
+      :data       => data.collect(&:last), 
+      :labels     => data.collect{|d| CGI.escape(d.first.to_s)}
+    )
   end
   
   def self.monthly_chart
     monthly_counts = []
-    count_back_the_months(Time.now.months_ago(1)){|month| monthly_counts << self.monthly_listen_count_for(month) }
+    count_back_the_months(Time.now.months_ago(1)) { |month| 
+      monthly_counts << self.monthly_listen_count_for(month) 
+    }
     data = monthly_counts.collect(&:first).reverse
     labels = monthly_counts.collect(&:last).reverse
-    chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chm=B,ff9933,0,0,0' )
+    chart = Gchart.line(
+      :size             => '500x150',
+      :data             => data,
+      :background       => 'e1e2e1',
+      :axis_with_labels => 'r,x',
+      :axis_labels      => [ "0|#{(data.max.to_f/2).round}|#{data.max}", 
+                             "#{labels.join('|')}" ],
+      :line_colors      => 'cc3300',
+      :custom           => 'chm=B,ff9933,0,0,0'
+    )
   end
   
   def self.last_30_days_chart
-    data = self.count :all, :conditions => ['listens.created_at > ?',30.days.ago.at_midnight], :group => 'DATE(listens.created_at)' 
+    data = self.count :all, 
+      :conditions => ['listens.created_at > ?',30.days.ago.at_midnight], 
+      :group => 'DATE(listens.created_at)' 
+      
     data = data.collect(&:last)
-    chart = Gchart.line(:size => '500x150', :data => data, :background => 'e1e2e1', :axis_with_labels => 'r,x', :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","30 days ago|15 days ago|Today"], :line_colors =>'cc3300', :custom => 'chm=B,ff9933,0,0,0' )
+
+    chart = Gchart.line(
+      :size             => '500x150',
+      :data             => data,
+      :background       => 'e1e2e1',
+      :axis_with_labels => 'r,x',
+      :axis_labels      => [ "0|#{(data.max.to_f/2).round}|#{data.max}", 
+                             "30 days ago|15 days ago|Today" ],
+      :line_colors      =>'cc3300',
+      :custom           => 'chm=B,ff9933,0,0,0'
+    )
   end
   
   protected
@@ -56,10 +102,13 @@ class Listen < ActiveRecord::Base
     count_back_the_months(date.months_ago(1),&block) if date > @@launch_date
   end
   
+  
   def self.monthly_listen_count_for(date=Time.now)
     # [count, year_month_label]
-    [Listen.count(:all, :conditions => ['created_at > ? AND created_at < ?',date.beginning_of_month, date.end_of_month]), "#{date.strftime('%b %y')}"]
+    [ Listen.count(:all, 
+        :conditions => ['created_at > ? AND created_at < ?', 
+                        date.beginning_of_month, date.end_of_month]
+      ), 
+      "#{date.strftime('%b %y')}" ]
   end
-  
-
 end

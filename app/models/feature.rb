@@ -6,8 +6,8 @@ class Feature < ActiveRecord::Base
   has_many :featured_tracks, :include => :asset, :order => 'featured_tracks.position'
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at DESC'
 
-  belongs_to :writer, :class_name => 'User'
-  belongs_to :featured_user, :class_name => 'User'
+  belongs_to :writer,         :class_name => 'User'
+  belongs_to :featured_user,  :class_name => 'User'
   
   validates_presence_of :writer, :featured_user
   before_save :create_permalink
