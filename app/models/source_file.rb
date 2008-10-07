@@ -4,7 +4,7 @@ class SourceFile < ActiveRecord::Base
   has_attachment  :storage => :file_system, 
                   :content_type => ['audio/x-aiff','audio/x-wav'],
                   :max_size => 100.megabytes,
-                  :path_prefix => "source_file",
+                  :path_prefix => "public/source_files",
                   :s3_access => :authenticated_read
                   
   validates_as_attachment

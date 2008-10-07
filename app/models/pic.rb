@@ -8,7 +8,7 @@ class Pic < ActiveRecord::Base
                  :content_type => :image,
                  :thumbnails => { :tiny => [25,25], :small => [50,50], :large => [125,125], :album=>[200,200] },
                  :storage => :file_system,
-                 :path_prefix => 'pics',
+                 :path_prefix => 'public/pics',
                  :processor => :Rmagick
   
   # not yet it can ;)
