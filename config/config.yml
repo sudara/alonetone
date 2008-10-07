@@ -1,6 +1,7 @@
 ---
 development: &defaults
   show_debug_info: false
+  video_size: width="370" height="308"
 
 test:
   <<: *defaults
