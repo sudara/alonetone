@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
   
   def create
     if request.xhr? 
-      return head(:bad_request) \ 
       unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?                                  
+        return head(:bad_request) 
+      end
       
       case params[:comment][:commentable_type] 
         # TODO: move into model
