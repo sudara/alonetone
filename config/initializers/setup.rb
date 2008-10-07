@@ -21,16 +21,8 @@ Sass::Plugin.options[:always_check] = true
 require 'randomness'
 require 'goodies'
 require 'utils'
-PASSWORD_SALT = 'so_salty_its_unbearable'
 
-# DEPENDENCIES 
-begin 
-  require 'mp3info'
-  require 'zip/zip'
-  require 'gchart'
-rescue
-  raise GemInstallNeeded
-end
+PASSWORD_SALT = 'so_salty_its_unbearable'
 
 WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2
 WillPaginate::ViewHelpers.pagination_options[:outer_window] = 0
