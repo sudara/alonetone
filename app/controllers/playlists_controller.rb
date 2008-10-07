@@ -71,16 +71,29 @@ class PlaylistsController < ApplicationController
   def edit
     # allow them to add their own assets
     # TODO: this is bad form, should be relocated to assets/index and listens/index
-    @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at DESC', :page => params[:uploads_page])
-    @listens = @user.listens.paginate(:all, :limit => 10, :order => 'listens.created_at DESC', :per_page => 10, :page => params[:listens_page])
+    @assets = @user.assets.paginate( :all, 
+      :limit    => 10, 
+      :per_page => 10, 
+      :order    => 'created_at DESC', 
+      :page     => params[:uploads_page]
+    )
+
+    @listens = @user.listens.paginate(:all, 
+      :limit    => 10, 
+      :order    => 'listens.created_at DESC', 
+      :per_page => 10, 
+      :page     => params[:listens_page]
+    )
+
     if request.xhr? 
-        render :partial => 'your_stuff.html.erb' if params[:uploads_page]
+        render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
         render :partial => 'your_listens.html.erb' if params[:listens_page]
     end
   end
 
   def add_track
-    @track = @playlist.tracks.create(:asset => Asset.find(params[:asset_id].split("_")[1])) 
+    asset = Asset.find(params[:asset_id].split("_")[1])
+    @track = @playlist.tracks.create(:asset => asset) 
     respond_to do |format|
       format.js 
     end
@@ -170,20 +183,26 @@ class PlaylistsController < ApplicationController
   
   protected
   def not_found
-    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" and redirect_to user_playlists_path(@user) 
+    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" 
+    redirect_to user_playlists_path(@user) 
   end
     
   def authorized?
-    (!%w(destroy admin edit update remove_track attach_pic sort_tracks add_track set_playlist_description set_playlist_title).include?(action_name)) || (@playlist.user_id.to_s == current_user.id.to_s) || admin?
+    wrong_action_names = %w(destroy admin edit update remove_track attach_pic sort_tracks add_track set_playlist_description set_playlist_title)
+    
+    return (
+      not wrong_action_names.include?(action_name) ||
+      @playlist.user_id.to_s == current_user.id.to_s || 
+      admin? 
+    )
   end
   
   def find_playlists
     @playlist = @user.playlists.find_by_permalink(params[:permalink] || params[:id])
-    @playlist = @user.playlists.find(params[:id]) if !@playlist && params[:id] 
+    @playlist = @user.playlists.find(params[:id]) if !@playlist && params[:id]
   end
   
   def find_tracks
     @tracks = @playlist.tracks
   end
-  
 end

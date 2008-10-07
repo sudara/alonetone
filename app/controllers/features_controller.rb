@@ -1,7 +1,7 @@
 class FeaturesController < ApplicationController
   
-  before_filter :login_required, :only => [:new, :create, :edit, :update, :delete]
-  before_filter :find_feature, :only => [:update, :delete, :edit]
+  before_filter :login_required,  :only => [:new, :create, :edit, :update, :delete]
+  before_filter :find_feature,    :only => [:update, :delete, :edit]
   # GET /features
   # GET /features.xml
   def index
@@ -16,14 +16,27 @@ class FeaturesController < ApplicationController
   # GET /features/1
   # GET /features/1.xml
   def show
-    @feature = admin? ? Feature.all.find_by_permalink(params[:id]) : Feature.published.find_by_permalink(params[:id])
+    @feature =  admin? ? 
+                Feature.all.find_by_permalink(params[:id]) : 
+                Feature.published.find_by_permalink(params[:id])
+      
     @user = @feature.featured_user
+
     Feature.increment_counter(:views_count, @feature.id) unless admin?
+
     @featured_tracks = @feature.featured_tracks
+
     @mostly_listens_to = @user.mostly_listens_to
-    @comment = Comment.new(:commentable_type => 'feature',:commentable_id => @feature.id)
+
+    @comment = Comment.new(
+      :commentable_type => 'feature',
+      :commentable_id => @feature.id
+    )
+
     @comments = @feature.comments.find(:all, :limit => 10)
+
     @page_title = "Featured Artist: #{@user.name}"
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @feature }
@@ -56,10 +69,17 @@ class FeaturesController < ApplicationController
       if @feature.save
         flash[:notice] = 'Feature was successfully created.'
         format.html { redirect_to(@feature) }
-        format.xml  { render :xml => @feature, :status => :created, :location => @feature }
+        format.xml  { render(
+                        :xml      => @feature, 
+                        :status   => :created, 
+                        :location => @feature 
+                    )}
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @feature.errors, :status => :unprocessable_entity }
+        format.xml  { render(
+                        :xml    => @feature.errors, 
+                        :status => :unprocessable_entity
+                    )}
       end
     end
   end
@@ -75,7 +95,10 @@ class FeaturesController < ApplicationController
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @feature.errors, :status => :unprocessable_entity }
+        format.xml  { render(
+                        :xml    => @feature.errors, 
+                        :status => :unprocessable_entity 
+                    )}
       end
     end
   end
@@ -100,5 +123,4 @@ class FeaturesController < ApplicationController
   def find_feature
     @feature = Feature.find_by_permalink(params[:id])
   end
-  
 end

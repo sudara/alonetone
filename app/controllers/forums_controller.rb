@@ -10,7 +10,8 @@ class ForumsController < ApplicationController
 
     @forums = Forum.ordered
     @page_title = 'alonetone Forums'
-    @description = 'alonetone forums. Discuss making music, free music, the changing music world, and whatever else comes to you'
+    @description = "alonetone forums. Discuss making music, free music, " << 
+                   "the changing music world, and whatever else comes to you"
     @keywords = 'alonetone, forums, music, discussion, share'
     @online =  User.currently_online
     respond_to do |format|
@@ -23,9 +24,14 @@ class ForumsController < ApplicationController
   # GET /forums/1.xml
   def show
     @forum = Forum.find_by_permalink(params[:id])
-    (session[:forums] ||= {})[@forum.id] = Time.now.utc
-    (session[:forums_page] ||= Hash.new(1))[@forum.id] = current_page if current_page > 1
-
+    session[:forums] ||= {}
+    session[:forums][@forum.id] = Time.now.utc
+    
+    if current_page > 1
+      session[:forums_page] ||= Hash.new(1)
+      session[:forums_page][@forum.id] = current_page 
+    end
+    
     respond_to do |format|
       format.html do # show.html.erb
         @topics = @forum.topics.paginate :page => current_page, :per_page => 10
