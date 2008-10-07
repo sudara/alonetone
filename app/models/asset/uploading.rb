@@ -15,11 +15,11 @@ class Asset
   
   has_attachment  :storage => :file_system, 
                   :processor => :mp3info,
-                  :content_type => ['audio/mpeg','application/zip'],
+                  # :content_type => ['audio/mpeg','application/zip'],
                   :max_size => 40.megabytes,
                   :path_prefix => "public/mp3"
                     
-  # validates_as_attachment
+  validates_as_attachment
 
   def self.extract_mp3s(zip_file, &block)
     # try to open the zip file
