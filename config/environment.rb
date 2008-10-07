@@ -26,9 +26,9 @@ Rails::Initializer.run do |config|
     File.directory?(lib = "#{dir}/lib") ? lib : dir
   end
 
-  config.gem('giraffesoft-resource_controller', 
-    :lib => 'resource_controller',
-    :source => 'http://gems.github.com')
+  # config.gem('giraffesoft-resource_controller', 
+  #   :lib => 'resource_controller',
+  #   :source => 'http://gems.github.com')
 
   config.gem 'ruby-mp3info',  :lib => 'mp3info'
   config.gem 'rubyzip',       :lib => 'zip/zip'
