@@ -2,9 +2,15 @@
 development: &defaults
   show_debug_info: false
   video_size: width="370" height="308"
+  storage: file_system
+  path_prefix: "public/"
 
 test:
   <<: *defaults
+  show_debug_info: true
 
 production:
   <<: *defaults
+  storage: s3
+  path_prefix: ""
+  

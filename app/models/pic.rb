@@ -7,8 +7,8 @@ class Pic < ActiveRecord::Base
                  :resize_to => 'x400',
                  :content_type => :image,
                  :thumbnails => { :tiny => [25,25], :small => [50,50], :large => [125,125], :album=>[200,200] },
-                 :storage => :file_system,
-                 :path_prefix => 'public/pics',
+                 :storage => APP_CONFIG.storage,
+                 :path_prefix => "#{APP_CONFIG.path_prefix}pics",
                  :processor => :Rmagick
   
   # not yet it can ;)
