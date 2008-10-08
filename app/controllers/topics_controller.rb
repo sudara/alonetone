@@ -81,9 +81,8 @@ class TopicsController < ApplicationController
 
 protected
   def authorized?
-    (!%w(destroy edit update).include?(action_name)) || 
-      (logged_in? && ((@topic.user.id.to_s == current_user.id.to_s) || 
-      (moderator? || admin?)))
+    not %w(destroy edit update).include?(action_name) || 
+    admin_or_moderator_or_user? @topic.user
   end
   
   def find_forum

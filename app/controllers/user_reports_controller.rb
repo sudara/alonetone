@@ -6,8 +6,16 @@ class UserReportsController < ApplicationController
   # GET /user_reports.xml
   def index
     redirect_to(forums_url, :status=> :moved_permanently) and return false unless logged_in?
-    @user_reports = UserReport.valid.paginate(:all, :include => :user, :order => 'user_reports.created_at DESC', :per_page => 15, :page => params[:page])
+    
+    @user_reports = UserReport.valid.paginate(:all, 
+      :include  => :user, 
+      :order    => 'user_reports.created_at DESC', 
+      :per_page => 15, 
+      :page     => params[:page]
+    )
+
     @page_title = "Feedback about alonetone"
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @user_reports }

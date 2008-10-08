@@ -78,7 +78,16 @@ class ApplicationController < ActionController::Base
   end
   
   def find_user
-    @user = (params[:login] || params[:id])? User.find_by_login(params[:login] || params[:id]) : current_user
+    login = params[:login] || params[:id]
+    @user = User.find_by_login(login) || current_user
+  end
+
+  def admin_or_user?(user)
+    logged_in? && (current_user.id.to_s == user.id.to_s || current_user.admin?)
+  end
+
+  def admin_or_moderator_or_user?(user)
+    admin_or_user? || moderator?
   end
 
   def find_asset
