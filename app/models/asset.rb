@@ -28,19 +28,16 @@ class Asset < ActiveRecord::Base
     :conditions => [ "user_id IN (?)", user_ids ]
   }}
   
-  named_scope :order_by, lambda { |x| {
-    :order => x
-  }}
-  
   named_scope :random_order, :order => "'RAND()'"
   
-  named_scope :limit_by, lambda { |x| {
-    :limit => x
-  }}
+  named_scope :order_by, lambda { |x| { :order => x }}
+  
+  named_scope :limit_by, lambda { |x| { :limit => x }}
 
   formats_attributes :description    
   
   has_many :tracks, :dependent => :destroy
+
   has_many :playlists, :through => :tracks
   
   belongs_to :user, :counter_cache => true
