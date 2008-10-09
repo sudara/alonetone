@@ -1,12 +1,36 @@
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting
   
-  named_scope :musicians, {:conditions => ['assets_count > ?',0], :order => 'assets_count DESC', :include => :pic}
-  named_scope :activated, {:conditions => {:activation_code => nil}, :order => 'created_at DESC', :include => :pic}
-  named_scope :recently_seen, {:order => 'last_seen_at DESC', :include => :pic}  
-  named_scope :with_location, {:conditions => ['users.country != ""'], :order => 'last_seen_at DESC', :include => :pic}
-  named_scope :geocoded, {:conditions => ['users.lat != ""'], :order => 'created_at DESC', :include => :pic}
-  named_scope :alpha, {:order => 'login'}
+  named_scope :musicians, {
+    :conditions => ['assets_count > ?',0], 
+    :order      => 'assets_count DESC', 
+    :include    => :pic
+  }
+  
+  named_scope :activated, {
+    :conditions => {:activation_code => nil}, 
+    :order      => 'created_at DESC', 
+    :include    => :pic
+  }
+  
+  named_scope :recently_seen, {
+    :order    => 'last_seen_at DESC', 
+    :include  => :pic
+  }
+  
+  named_scope :with_location, {
+    :conditions => ['users.country != ""'], 
+    :order      => 'last_seen_at DESC', 
+    :include    => :pic
+  }
+  
+  named_scope :geocoded, {
+    :conditions => ['users.lat != ""'], 
+    :order      => 'created_at DESC', 
+    :include    => :pic
+  }
+  
+  named_scope :alpha, { :order => 'login' }
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
@@ -24,21 +48,37 @@ class User < ActiveRecord::Base
   has_many :source_files
   
   # Can listen to music, and have that tracked
-  has_many :listens, :foreign_key => 'listener_id', :include => :asset, :order => 'listens.created_at DESC'
+  has_many :listens, 
+    :foreign_key  => 'listener_id', 
+    :order        => 'listens.created_at DESC',
+    :include      => :asset
     
   # Can have their music listened to
-  has_many :track_plays, :foreign_key => 'track_owner_id', :class_name => 'Listen', :include => [:asset], :order => 'listens.created_at DESC'
+  has_many :track_plays, 
+    :foreign_key  => 'track_owner_id', 
+    :class_name   => 'Listen', 
+    :order        => 'listens.created_at DESC',
+    :include      => :asset
   
   # And therefore have listeners
-  has_many :listeners, :through => :track_plays, :uniq => true
+  has_many :listeners, 
+    :through  => :track_plays, 
+    :uniq     => true
   
   # top tracks
-  has_many :top_tracks, :class_name => 'Asset', :limit => 10, :order => 'listens_count DESC'
+  has_many :top_tracks, 
+    :class_name => 'Asset', 
+    :limit      => 10, 
+    :order      => 'listens_count DESC'
   
   # stalking
   has_many :stalkers, :class_name => 'Stalking'
+
   has_many :stalkees, :class_name => 'Stalking'
-  has_many :new_tracks_from_stalkees, :through => :stalkees, :class_name => 'Asset'
+
+  has_many :new_tracks_from_stalkees, 
+    :through    => :stalkees, 
+    :class_name => 'Asset'
 
   # The following attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
@@ -47,20 +87,25 @@ class User < ActiveRecord::Base
   before_create :make_first_user_admin, :make_activation_code
   
   def listened_to_today_ids
-    self.listens.find(:all, :select => 'listens.asset_id', :conditions => ['listens.created_at > ?', 1.day.ago]).collect(&:asset_id)
+    listens.find(:all, 
+      :select     =>  'listens.asset_id', 
+      :conditions => ['listens.created_at > ?', 1.day.ago]
+    ).collect(&:asset_id)
   end
   
   def listened_to_ids
-    self.listens.find(:all, :select => 'listens.asset_id').collect{|l| l.asset_id}.uniq
+    listens.find(:all, :select => 'listens.asset_id').collect(&:asset_id).uniq
   end
     
   def to_param
-    "#{self.login}"
+    "#{login}"
   end
   
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] << :email << :token << :token_expires_at << :crypted_password << :identity_url << :fb_user_id << :activation_code << :admin << :salt << :moderator << :ip
+    options[:except] << :email << :token << :token_expires_at << :crypted_password << 
+                        :identity_url << :fb_user_id << :activation_code << :admin << 
+                        :salt << :moderator << :ip
     super
   end
   
@@ -73,13 +118,14 @@ class User < ActiveRecord::Base
   end
   
   def hasnt_been_here_in(hours)
-    return false unless last_seen_at and last_session_at
+    last_seen_at && last_session_at &&
     last_seen_at < hours.ago.utc
   end
   
   protected
   
   def make_first_user_admin
-    self.admin = true if User.count == 0
+    self.admin = true \
+    if User.count == 0
   end
 end
