@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     super
   end
   
+  def listened_more_than?(n)
+    listens.count > n
+  end
+  
   def moderator?
     (self[:moderator] == true)
   end

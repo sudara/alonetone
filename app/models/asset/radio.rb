@@ -16,13 +16,13 @@ class Asset
         Asset.mangoz(user, common_options)
 
       when 'most_favorited'
-        Asset.paginate(:all, {:order => 'favorites_count DESC'}.merge(common_options))
+        Asset.order_by('favorites_count DESC').paginate(:all, common_options)
 
       when 'songs_you_have_not_heard'
         Asset.not_heard_by(user, per_page)
 
       when 'popular'
-        Asset.paginate(:all, {:order => 'hotness DESC'}.merge(common_options))
+        Asset.order_by('hotness DESC').paginate(:all, common_options)
 
       else # latest
         Asset.recent.paginate(:all, common_options)
@@ -31,44 +31,39 @@ class Asset
   
 
   # random radio, without playing the same track twice in a 24 hour period
-  def self.mangoz(user, pagination_options)
-    conditions = ["assets.id NOT IN (?) ", user.listened_to_today_ids] \
-    if user && user.listens.size > 10
-      
-    Asset.paginate(:all, 
-      { :conditions => conditions, 
-        :order      => 'RAND()' 
-      }.merge(pagination_options)
-    )
+  def self.mangoz(user, pagination_options)    
+    assets = Asset.random_order
+    
+    assets.id_not_in(user.listened_to_today_ids) \
+    if user && user.listened_more_than?(10)
+
+    assets.paginate(:all, pagination_options)
   end
+
   
   # random radio, sourcing from the user's favorite artists
   def self.from_favorite_artists_of(user, pagination_options)
-    Asset.paginate(:all,
-      { 
-        :conditions => [ 
-          'user_id IN (?) AND assets.id NOT IN (?)',
-          user.most_listened_to_user_ids(10),
-          user.listened_to_today_ids
-        ],
-        :order => 'RAND()'
-      }.merge(pagination_options)
-    )
+    Asset.
+      id_not_in( user.listened_to_today_ids ).
+      user_id_in( user.most_listened_to_user_ids(10) ).
+      random_order.
+      paginate(:all, pagination_options)
   end
   
+
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
   def self.not_heard_by(user, limit)
-    conditions = ["assets.id NOT IN (?) ",user.listened_to_ids] \
-    if user && user.listens.size > 10
-      
-    Asset.find(:all, 
-      :conditions => conditions, 
-      :order => 'RAND()', 
-      :limit => limit
-    )
+    assets = Asset.random_order.limit_by(limit)
+    assets.id_not_in(user.listened_to_ids) \
+    if user && user.listened_more_than?(10)
+
+    return assets
   end
+
   
   def self.most_listened_to(pagination_options)
-    Asset.paginate(:all, {:order => 'listens_count DESC'}.merge(pagination_options))
+    Asset.
+      order_by('listens_count DESC').
+      paginate(:all, pagination_options)
   end
 end
