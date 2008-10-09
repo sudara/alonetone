@@ -40,7 +40,7 @@ describe PlaylistsController, "edit and delete" do
   #  end
   #end 
   
-  [:show, :index].each do |gettable|
+  [:show].each do |gettable|
     it "should allow #{gettable}" do
       logout
       get gettable, :id => 1, :permalink => 'owp', :login => 'sudara'

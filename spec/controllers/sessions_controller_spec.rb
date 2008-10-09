@@ -23,7 +23,7 @@ describe SessionsController do
   it "should log out when requested" do
     login_as :arthur
     post :destroy
-    response.should redirect_to('http://test.host/arthur')
+    response.should redirect_to('http://test.host/')
     response.should_not be_logged_in
   end
 
