@@ -52,7 +52,11 @@ ActionController::Routing::Routes.draw do |map|
   map.all_comments 'comments', :controller => 'comments'
   map.user_comments ':login/comments', :controller => 'comments'
   
-  map.hot_track 'hot_track/:position.:format', :controller => 'assets', :action => 'hot_track', :defaults => {:position => 1}, :format => 'mp3'
+  map.hot_track 'hot_track/:position.:format', 
+    :controller => 'assets', 
+    :action     => 'hot_track', 
+    :format     => 'mp3'
+    
   map.user_plus ':login/plus', :controller => 'source_files', :action => 'index'
 
   map.resources :forums, :has_many => :posts do |forum|
