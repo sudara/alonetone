@@ -3,7 +3,8 @@ development: &defaults
   show_debug_info: false
   video_size: width="370" height="308"
   storage: file_system
-  path_prefix: "public/"
+  path_prefix: public/
+  site_url: dev.alonetone.com
 
 test:
   <<: *defaults
@@ -13,4 +14,4 @@ production:
   <<: *defaults
   storage: s3
   path_prefix: ""
-  
+  site_url: alonetone.com
