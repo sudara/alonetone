@@ -157,12 +157,15 @@ class AssetsController < ApplicationController
         end
       end
     end
+
     flashes = ''
     good = false
+
     @assets.each do |asset|
       # TODO: find a non-hackish way to ensure content_types are only mp3s at this point
       # The problem is a zip can contain a zip, which passes validation
-      # Furthermore, if there is an issue with the zip, the rescue in the Asset model will hand the file back
+      # Furthermore, if there is an issue with the zip, 
+      # the rescue in the Asset model will hand the file back
       # Butt ugly, my friends. 
       if !asset.new_record? 
         flashes += "#{CGI.escapeHTML asset.filename} uploaded!<br/>"
@@ -172,6 +175,7 @@ class AssetsController < ApplicationController
         flashes  += "'#{CGI.escapeHTML asset.filename}' failed to upload: <br/>#{errors}<br/>"
       end
     end
+
     if good 
       flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)"
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
@@ -183,7 +187,7 @@ class AssetsController < ApplicationController
         flashes
       end
       redirect_to new_user_track_path(current_user)
-    end
+    end # if good
   end
 
   # PUT /assets/1
@@ -240,7 +244,7 @@ class AssetsController < ApplicationController
   
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    params[:permalink].nil? || admin_or_user?(@asset.user)
+    params[:permalink].nil? || current_use_is_admin_or_user?(@asset.user)
   end
   
   def register_listen

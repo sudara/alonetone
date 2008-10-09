@@ -82,7 +82,7 @@ class TopicsController < ApplicationController
 protected
   def authorized?
     not %w(destroy edit update).include?(action_name) || 
-    admin_or_moderator_or_user? @topic.user
+    current_use_is_admin_or_moderator_or_user?(@topic.user)
   end
   
   def find_forum

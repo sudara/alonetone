@@ -82,12 +82,12 @@ class ApplicationController < ActionController::Base
     @user = User.find_by_login(login) || current_user
   end
 
-  def admin_or_user?(user)
+  def current_use_is_admin_or_user?(user)
     logged_in? && (current_user.id.to_s == user.id.to_s || current_user.admin?)
   end
 
-  def admin_or_moderator_or_user?(user)
-    admin_or_user? || moderator?
+  def current_use_is_admin_or_moderator_or_user?(user)
+    current_use_is_admin_or_user? || moderator?
   end
 
   def find_asset
