@@ -194,8 +194,8 @@ class PlaylistsController < ApplicationController
     
   def authorized?
     current_use_is_admin_or_user?(@playlist.user) ||
-    not %w[ destroy admin edit update remove_track attach_pic sort_tracks 
-            add_track set_playlist_description set_playlist_title ].include?(action_name)
+    %w[ destroy admin edit update remove_track attach_pic sort_tracks 
+        add_track set_playlist_description set_playlist_title ].include?(action_name) == false
   end
   
   def find_playlists
