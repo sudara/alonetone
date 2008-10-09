@@ -1,15 +1,27 @@
 class Feature < ActiveRecord::Base
 
-  named_scope :published, {:conditions => {:published => true}, :order => 'created_at DESC', :include => [[:featured_user => :pic], [:writer => :pic]]}
+  named_scope :published, {
+      :conditions => {:published => true}, 
+      :order      => 'created_at DESC', 
+      :include    => [[:featured_user => :pic], [:writer => :pic]]
+    }
+  
   named_scope :all, {:include => [[:featured_user => :pic], [:writer => :pic]]}
 
-  has_many :featured_tracks, :include => :asset, :order => 'featured_tracks.position'
-  has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at DESC'
+  has_many :featured_tracks, 
+    :include  => :asset, 
+    :order    => 'featured_tracks.position'
+    
+  has_many :comments, 
+    :as         => :commentable, 
+    :dependent  => :destroy, 
+    :order      => 'created_at DESC'
 
   belongs_to :writer,         :class_name => 'User'
   belongs_to :featured_user,  :class_name => 'User'
   
   validates_presence_of :writer, :featured_user
+
   before_save :create_permalink
   
   acts_as_defensio_article

@@ -83,7 +83,8 @@ class Listen < ActiveRecord::Base
       :data             => data,
       :background       => 'e1e2e1',
       :axis_with_labels => 'r,x',
-      :axis_labels      => [ GchartHelpers.zero_half_max(data.max), "30 days ago|15 days ago|Today" ],
+      :axis_labels      => [ GchartHelpers.zero_half_max(data.max), 
+                             "30 days ago|15 days ago|Today" ],
       :line_colors      =>'cc3300',
       :custom           => 'chm=B,ff9933,0,0,0'
     )
