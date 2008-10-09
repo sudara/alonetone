@@ -85,7 +85,7 @@ class Asset
       :data             =>  data, 
       :background       =>  'e1e2e1', 
       :axis_with_labels =>  'r,x',
-      :axis_labels      => ["0|#{(data.max.to_f/2).round}|#{data.max}", "#{labels.join('|')}"], 
+      :axis_labels      => [GchartHelpers.zero_half_max(data.max), "#{labels.join('|')}"], 
       :line_colors      =>  'cc3300', 
       :custom           =>  'chbh=35,25'
     )

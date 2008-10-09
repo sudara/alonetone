@@ -1,7 +1,17 @@
 class User
   # graphing
   def track_plays_graph
-    Gchart.line(:size => '420x150',:title => 'listens', :data => track_play_history, :axis_with_labels => 'r,x', :axis_labels => ["0|#{(track_play_history.max.to_f/2).round}|#{track_play_history.max}","30 days ago|15 days ago|Today"], :line_colors =>'cc3300', :background => '313327', :custom => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0') 
+    
+    Gchart.line(
+      :size             => '420x150',
+      :title            => 'listens',
+      :data             => track_play_history,
+      :axis_with_labels => 'r,x',
+      :axis_labels      => [GchartHelpers.zero_half_max(track_play_history.max),"30 days ago|15 days ago|Today"], 
+      :line_colors      => 'cc3300', 
+      :background       => '313327', 
+      :custom           => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0'
+    ) 
   end
   
   def track_play_history
