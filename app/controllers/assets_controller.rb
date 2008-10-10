@@ -40,6 +40,7 @@ class AssetsController < ApplicationController
         @single_track = true
       end
       format.mp3 do
+        render(:text => "Denied due to abuse", :status => 403) and return false if abuser?
         register_listen
         redirect_to @asset.public_mp3
       end
@@ -242,5 +243,9 @@ class AssetsController < ApplicationController
     else
       true
     end
+  end
+  
+  def abuser?
+    request.user_agent and request.user_agent.downcase =~/mp3bot/
   end
 end
