@@ -37,7 +37,7 @@ class Asset
   
   has_attachment  :storage => ALONETONE.storage, 
                   :processor => :mp3info,
-                  # :content_type => ['audio/mpeg','application/zip'],
+                  :content_type => ['audio/mpeg','application/zip'],
                   :max_size => 40.megabytes,
                   :path_prefix => File.join(ALONETONE.path_prefix, "mp3")
                     
