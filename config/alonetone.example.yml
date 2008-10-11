@@ -7,6 +7,7 @@ development: &defaults
   secret: adba8d02b662d7a087f2da7e572deac650bc9dafa31043e814a93547c87ac007bbcf3d79960d0be5f9316d2f9b8eb88c87b58b4569252220b42f27e4797ea091
   storage: file_system
   path_prefix: public
+  image_processor: rmagick
   video_size: width="370" height="308"
   enable_facebook: false
   enable_defensio: false

@@ -8,7 +8,7 @@ class Pic < ActiveRecord::Base
                  :content_type  => :image,
                  :storage       => ALONETONE.storage,
                  :path_prefix   => File.join(ALONETONE.path_prefix, "pics"),
-                 :processor     => :Rmagick,
+                 :processor     => ALONETONE.image_processor,
                  :thumbnails    => { 
                                       :tiny   => [ 25,  25], 
                                       :small  => [ 50,  50], 
