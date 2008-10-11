@@ -1,9 +1,3 @@
-
-# you are working with git
-SVN_COMMAND = 'svn info'
-BRIGHTNESS = ''
-LASTCHANGED = Date.today
-
 # MAKE FACEBOOKER HAPPY
 ActionController::Base.asset_host = ''
 
@@ -12,8 +6,8 @@ FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
 
 # MAILER STUFF
 
-UserMailer.default_url_options[:host] = 'alonetone.com'
-UserMailer.mail_from = 'music@alonetone.com'
+UserMailer.default_url_options[:host] = ALONETONE.url
+UserMailer.mail_from = ALONETONE.email
 
 # GENERATE THE NEEDED CSS STYLESHEETS
 Sass::Plugin.options[:always_check] = true 

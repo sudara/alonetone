@@ -1,3 +1,23 @@
-# use rake secret to generate a hash for this
-alonetone:
-  secret: (big long secret string)
+---
+development: &defaults
+  show_debug_info: true
+  app_name: Your Name Here
+  url: example.com
+  email: yourname@example.com
+  secret: adba8d02b662d7a087f2da7e572deac650bc9dafa31043e814a93547c87ac007bbcf3d79960d0be5f9316d2f9b8eb88c87b58b4569252220b42f27e4797ea091
+  storage: file_system
+  path_prefix: public/
+  video_size: width="370" height="308"
+  enable_facebook: false
+  enable_defensio: false
+
+test:
+  <<: *defaults
+  show_debug_info: false
+
+production:
+  <<: *defaults
+  storage: s3
+  path_prefix: ""
+  site_url: yourwebsite.com
+  show_debug_info: false

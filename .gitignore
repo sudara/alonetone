@@ -5,6 +5,7 @@ config/accelerator_tasks.rb
 config/deploy.rb
 config/deploy/*
 config/alonetone.yml
+config/config.yml
 config/database.yml
 config/amazon_s3.yml
 config/defensio.yml

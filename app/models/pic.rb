@@ -6,8 +6,8 @@ class Pic < ActiveRecord::Base
                  :max_size      => 2048.kilobytes,
                  :resize_to     => 'x400',
                  :content_type  => :image,
-                 :storage       => APP_CONFIG.storage,
-                 :path_prefix   => "#{APP_CONFIG.path_prefix}pics",
+                 :storage       => ALONETONE.storage,
+                 :path_prefix   => "#{ALONETONE.path_prefix}pics",
                  :processor     => :Rmagick,
                  :thumbnails    => { 
                                       :tiny   => [ 25,  25], 

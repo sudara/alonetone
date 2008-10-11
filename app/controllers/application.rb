@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base  
-  helper :all # include all helpers, all the time
+  helper :all # all helpers, all the time
 
-  protect_from_forgery  :secret => YAML.load_file(File.join(RAILS_ROOT,'config','alonetone.yml'))['alonetone']['secret']
+  protect_from_forgery  :secret => ALONETONE.secret
     
   include AuthenticatedSystem
   include ExceptionLoggable
@@ -82,12 +82,12 @@ class ApplicationController < ActionController::Base
     @user = User.find_by_login(login) || current_user
   end
 
-  def current_use_is_admin_or_user?(user)
+  def current_user_is_admin_or_owner?(user)
     logged_in? && (current_user.id.to_s == user.id.to_s || current_user.admin?)
   end
 
-  def current_use_is_admin_or_moderator_or_user?(user)
-    current_use_is_admin_or_user? || moderator?
+  def current_user_is_admin_or_moderator_or_owner?(user)
+    current_user_is_admin_or_owner? || moderator?
   end
 
   def find_asset

@@ -245,7 +245,7 @@ class AssetsController < ApplicationController
   
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    params[:permalink].nil? || current_use_is_admin_or_user?(@asset.user)
+    params[:permalink].nil? || current_user_is_admin_or_owner?(@asset.user)
   end
   
   def register_listen

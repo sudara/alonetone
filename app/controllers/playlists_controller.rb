@@ -12,7 +12,7 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.xml
   def index
-    @all_playlists =  current_use_is_admin_or_user?(@user) ?
+    @all_playlists =  current_user_is_admin_or_owner?(@user) ?
                       @user.playlists.include_private :
                       @user.playlists.public
 
@@ -36,7 +36,7 @@ class PlaylistsController < ApplicationController
 
   def sort
     redirect_to user_home_url(@user) \
-    unless current_use_is_admin_or_user?(@user)
+    unless current_user_is_admin_or_owner?(@user)
 
     respond_to do |format| 
       format.html { @playlists = @user.playlists.include_private.find(:all) }
@@ -193,7 +193,7 @@ class PlaylistsController < ApplicationController
   end
     
   def authorized?
-    current_use_is_admin_or_user?(@playlist.user) ||
+    current_user_is_admin_or_owner?(@playlist.user) ||
     %w[ destroy admin edit update remove_track attach_pic sort_tracks 
         add_track set_playlist_description set_playlist_title ].include?(action_name) == false
   end

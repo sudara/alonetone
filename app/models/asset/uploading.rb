@@ -35,11 +35,11 @@ class Asset
 
   cattr_reader *%w(movie audio image other).collect! { |t| "#{t}_condition".to_sym }
   
-  has_attachment  :storage => APP_CONFIG.storage, 
+  has_attachment  :storage => ALONETONE.storage, 
                   :processor => :mp3info,
                   # :content_type => ['audio/mpeg','application/zip'],
                   :max_size => 40.megabytes,
-                  :path_prefix => "#{APP_CONFIG.path_prefix}mp3"
+                  :path_prefix => "#{ALONETONE.path_prefix}mp3"
                     
   validates_as_attachment
 
