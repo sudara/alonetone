@@ -12,7 +12,7 @@ describe Asset, 'basics: ' do
   end
   
   it 'cannot be any other filetype' do 
-    # assets(:invalid_file).should_not be_valid
+    assets(:invalid_file).should_not be_valid
   end
   
   it 'cannot be over 40 megs' do
@@ -63,12 +63,12 @@ describe Asset, 'on upload' do
   
   it 'should handle strange charsets / characters in title tags' do
     @asset = new_track('japanese-characters.mp3')
-    @asset.title = ''
     @asset.save
     @asset.permalink.should == 'untitled' # name is still 01-\266Ե??\313"
+    @asset.filename.should == 'japanese-characters.mp3'
   end
   
-  it 'should handle empty name' do 
+  it 'should handle empty name in mp3 tag' do 
     @asset = new_track('japanese-characters.mp3')
     @asset.save
     @asset.permalink.should == "untitled" # name is 01-\266Ե??\313"
@@ -80,7 +80,13 @@ describe Asset, 'on upload' do
   it 'should handle non-english filenames and default to untitled' do 
     @asset = new_track('中文測試.mp3')
     @asset.save.should == true
-    @asset.permalink.should == 'untitled'
+    @asset.filename.should == '中文測試.mp3'
+  end
+  
+  it 'should handle umlauts and non english characters in the filename' do
+    @asset = new_track('müppets.mp3')
+    @asset.save
+    @asset.filename.should == 'müppets.mp3' 
   end
   
   it 'should handle titles with only ???? and default to untitled' do 

@@ -125,7 +125,6 @@ class User < ActiveRecord::Base
   protected
   
   def make_first_user_admin
-    self.admin = true \
-    if User.count == 0
+    self.admin = true if User.count == 0
   end
 end

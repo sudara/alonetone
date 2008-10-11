@@ -33,7 +33,7 @@ Rails::Initializer.run do |config|
   config.gem 'ruby-mp3info',  :lib => 'mp3info'
   config.gem 'rubyzip',       :lib => 'zip/zip'
   config.gem 'googlecharts',  :lib => 'gchart'
-  config.gem 'rmagick'
+  # config.gem 'rmagick'
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)

@@ -6,7 +6,7 @@
     <%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), :size => 40,:class => 'tabbed_input' %> <br/>    
 </div>
 <div class="panel no_border">
-    <%= render :partial => 'assets/add_to_facebook', :object => object %>
+    <%= render :partial => 'assets/add_to_facebook', :object => object if ALONETONE.enable_facebook %>
 </div>
 <div class="clear"> </div>
 <div class="panel no_border">

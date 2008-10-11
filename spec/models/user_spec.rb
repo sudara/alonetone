@@ -6,7 +6,6 @@ describe User do
     @user = new_user
   end
 
-
   it "should be valid" do
     @user.should be_valid
   end
@@ -16,8 +15,6 @@ describe User do
     @user.save
     @user.should_not be_valid
   end
-  
-
   
   protected
     def new_user(options = {})

@@ -1,7 +1,0 @@
-# needed for pages/todo to grab todo list from basecamp
-
-basecamp:
-  url: 'yoursite.grouphub.com'
-  user: 'youruser' 
-  pass: 'yourpass'
-  project_id: '1234567'

@@ -47,6 +47,7 @@ class AssetsController < ApplicationController
       end
 
       format.mp3 do
+        render(:text => "Denied due to abuse", :status => 403) and return false if abuser?
         register_listen
         redirect_to @asset.public_mp3
       end
@@ -244,7 +245,7 @@ class AssetsController < ApplicationController
   
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    params[:permalink].nil? || current_use_is_admin_or_user?(@asset.user)
+    params[:permalink].nil? || current_user_is_admin_or_owner?(@asset.user)
   end
   
   def register_listen
@@ -261,5 +262,9 @@ class AssetsController < ApplicationController
     agent = request.user_agent.downcase
     not @@valid_listeners.any?{ |listener| agent.include? listener } || 
     agent.include?('bot')
+  end
+  
+  def abuser?
+    request.user_agent and request.user_agent.downcase =~/mp3bot/
   end
 end

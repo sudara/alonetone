@@ -1,7 +1,8 @@
-APP_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/config.yml")[RAILS_ENV]
+ALONETONE = YAML.load_file("#{RAILS_ROOT}/config/alonetone.yml")[RAILS_ENV]
 
-class << APP_CONFIG
-  APP_CONFIG.keys.each do |key|
-    class_eval "def #{key}; APP_CONFIG['#{key}']; end"
+class << ALONETONE
+  ALONETONE.keys.each do |key|
+    class_eval "def #{key}; ALONETONE['#{key}']; end"
   end  
 end
+  

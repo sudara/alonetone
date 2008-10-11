@@ -45,7 +45,7 @@ class User
   end
   
   def site
-    "#{APP_CONFIG.site_url}/#{login}"
+    "#{ALONETONE.url}/#{login}"
   end
   
   def printable_bio
