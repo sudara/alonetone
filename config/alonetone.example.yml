@@ -20,5 +20,5 @@ production:
   <<: *defaults
   storage: s3
   path_prefix: ""
-  site_url: yourwebsite.com
+  url: yourwebsite.com
   show_debug_info: false
