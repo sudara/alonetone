@@ -4,20 +4,25 @@ class Playlist < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   acts_as_list :scope => :user_id, :order => :position
 
-  named_scope :mixes, {:conditions => ['is_mix = ?',true]} 
-  named_scope :albums, {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
+  named_scope :mixes,     {:conditions => ['is_mix = ?',true]} 
+
+  named_scope :albums,    {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
+
   named_scope :favorites, {:conditions => ['is_favorite = ?',true]}
-  named_scope :public, {:conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
+
+  named_scope :public,    {:conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
+
   named_scope :include_private, {:conditions => ['is_favorite = ?',false]}
 
   
-  has_one :pic, :as => :picable, :dependent => :destroy
+  has_one  :pic, :as => :picable, :dependent => :destroy
+
   has_many :tracks, :include => [:asset => :user], :dependent => :destroy, :order => :position
   has_many :assets, :through => :tracks #, :after_add => 
   
   validates_presence_of :title
-  validates_length_of :title, :within => 4..100
-  validates_length_of :year, :within => 2..4, :allow_blank => true
+  validates_length_of   :title, :within => 4..100
+  validates_length_of   :year, :within => 2..4, :allow_blank => true
   validates_presence_of :description
   
   has_permalink :title
@@ -57,7 +62,10 @@ class Playlist < ActiveRecord::Base
   end
   
   def play_time
-    Asset.formatted_time(self.tracks.inject(0){|total,track| total += track.asset[:length] if track.asset && track.asset[:length]})
+    total_track_length = tracks.inject(0){ |total, 
+      track| total += track.asset_length 
+    }
+    Asset.formatted_time(total_track_length)
   end
   
   def zip(name = self.permalink, set = self.artist.permalink)
@@ -75,7 +83,8 @@ class Playlist < ActiveRecord::Base
        self.tracks.collect {
          |track|
            # add each track to the archive, names using the track's attributes
-           zipfile.add( "#{set}/#{track.num}-#{track.filename}", "#{RAILS_ROOT}/public#{track.public_filename}")
+           zipfile.add( "#{set}/#{track.num}-#{track.filename}", 
+                        "#{RAILS_ROOT}/public#{track.public_filename}" )
          }
      }
 
@@ -87,7 +96,12 @@ class Playlist < ActiveRecord::Base
   end
   
   def self.latest(limit=5)
-    self.find(:all, :conditions => 'playlists.tracks_count > 0', :include => :user, :limit => limit, :order => 'playlists.created_at DESC')
+    self.find(:all, 
+      :conditions => 'playlists.tracks_count > 0', 
+      :include    => :user, 
+      :limit      => limit, 
+      :order      => 'playlists.created_at DESC'
+    )
   end
   
   protected 
@@ -100,6 +114,7 @@ class Playlist < ActiveRecord::Base
   
   # if this is a "favorites" playlist, give it a name/description to match
   def auto_name_favorites
-    self.title = self.description = self.user.name + "'s Favorite tracks on alonetone" if self.is_favorite?
+    self.title = self.description = self.user.name + "'s Favorite tracks on alonetone" \
+    if self.is_favorite?
   end
 end

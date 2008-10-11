@@ -57,8 +57,11 @@ class Topic < ActiveRecord::Base
   def update_cached_post_fields(post)
     # these fields are not accessible to mass assignment
     if remaining_post = post.frozen? ? recent_post : post
-      self.class.update_all(['last_updated_at = ?, last_user_id = ?, last_post_id = ?, posts_count = ?', 
-        remaining_post.created_at, remaining_post.user_id, remaining_post.id, posts.count], ['id = ?', id])
+      self.class.update_all(
+        [ 'last_updated_at = ?, last_user_id = ?, last_post_id = ?, posts_count = ?', 
+          remaining_post.created_at, remaining_post.user_id, remaining_post.id, posts.count ], 
+        ['id = ?', id]
+      )
     else
       self.destroy
     end

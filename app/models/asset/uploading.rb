@@ -1,23 +1,45 @@
 class Asset 
   # used for extra mime types that dont follow the convention
-  @@extra_content_types = { :audio => ['application/ogg'], :movie => ['application/x-shockwave-flash'], :pdf => ['application/pdf'] }.freeze
+  @@extra_content_types = { 
+    :audio => ['application/ogg'], 
+    :movie => ['application/x-shockwave-flash'], 
+    :pdf => ['application/pdf'] 
+  }.freeze
+  
   @@allowed_extensions = %w(.mp3)
+
   cattr_reader :extra_content_types, :allowed_extensions
 
   # use #send due to a ruby 1.8.2 issue
-  @@movie_condition = send(:sanitize_sql, ['content_type LIKE ? OR content_type IN (?)', 'video%', extra_content_types[:movie]]).freeze
-  @@audio_condition = send(:sanitize_sql, ['content_type LIKE ? OR content_type IN (?)', 'audio%', extra_content_types[:audio]]).freeze
-  @@image_condition = send(:sanitize_sql, ['content_type IN (?)', Technoweenie::AttachmentFu.content_types]).freeze
+  @@movie_condition = send(:sanitize_sql, 
+    ['content_type LIKE ? OR content_type IN (?)', 'video%', extra_content_types[:movie]]
+  ).freeze
+
+  @@audio_condition = send(:sanitize_sql, 
+    ['content_type LIKE ? OR content_type IN (?)', 'audio%', extra_content_types[:audio]]
+  ).freeze
+
+  @@image_condition = send(:sanitize_sql, [
+    'content_type IN (?)', 
+    Technoweenie::AttachmentFu.content_types
+  ]).freeze
+
+  @@content_types = extra_content_types[:movie] + 
+                    extra_content_types[:audio] + 
+                    Technoweenie::AttachmentFu.content_types
+  
   @@other_condition = send(:sanitize_sql, [
     'content_type NOT LIKE ? AND content_type NOT LIKE ? AND content_type NOT IN (?)',
-    'audio%', 'video%', (extra_content_types[:movie] + extra_content_types[:audio] + Technoweenie::AttachmentFu.content_types)]).freeze
+    'audio%', 'video%', @@content_types
+  ]).freeze
+
   cattr_reader *%w(movie audio image other).collect! { |t| "#{t}_condition".to_sym }
   
-  has_attachment  :storage => :s3, 
+  has_attachment  :storage => APP_CONFIG.storage, 
                   :processor => :mp3info,
-                  :content_type => ['audio/mpeg','application/zip'],
+                  # :content_type => ['audio/mpeg','application/zip'],
                   :max_size => 40.megabytes,
-                  :path_prefix => "mp3"
+                  :path_prefix => "#{APP_CONFIG.path_prefix}mp3"
                     
   validates_as_attachment
 
@@ -92,7 +114,7 @@ class Asset
   end
   
   def public_mp3
-    self.s3_url
+    self.public_filename
   end
   
   # never allow this to be blank, as permalinks are generated from it

@@ -12,17 +12,19 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.xml
   def index
-    if logged_in? && (current_user.id.to_s == @user.id.to_s || current_user.admin?)
-      @all_playlists = @user.playlists.include_private 
-    else
-      @all_playlists = @user.playlists.public       
-    end
+    @all_playlists =  current_use_is_admin_or_user?(@user) ?
+                      @user.playlists.include_private :
+                      @user.playlists.public
+
     if present?(@all_playlists)
-      # TODO: fugly array work
-      split = @all_playlists.in_groups_of((@all_playlists.size.to_f/2).round)
-      @playlists_left, @playlists_right = split[0].try(:compact), split[1].try(:compact)
-      @page_title = @description = "#{@user.name}'s albums and playlists: "
-      @description += @all_playlists.collect(&:title).join(',')
+      middle = (@all_playlists.size + 1) / 2
+      
+      @playlists_left  = @all_playlists[ 0 ... middle ]
+      @playlists_right = @all_playlists[ middle .. -1 ]
+      
+      @page_title  = "#{@user.name}'s albums and playlists: "
+      @description = @page_title + @all_playlists.collect(&:title).join(',')
+
       respond_to do |format|
          format.html # index.html.erb
          format.xml  { render :xml => @playlists }
@@ -33,7 +35,9 @@ class PlaylistsController < ApplicationController
   end
 
   def sort
-    redirect_to user_home_url(@user) unless logged_in? && (@user.id.to_s == current_user.id.to_s) || admin?
+    redirect_to user_home_url(@user) \
+    unless current_use_is_admin_or_user?(@user)
+
     respond_to do |format| 
       format.html { @playlists = @user.playlists.include_private.find(:all) }
       format.js do
@@ -71,16 +75,30 @@ class PlaylistsController < ApplicationController
   def edit
     # allow them to add their own assets
     # TODO: this is bad form, should be relocated to assets/index and listens/index
-    @assets = @user.assets.paginate(:all, :limit => 10, :per_page => 10, :order => 'created_at DESC', :page => params[:uploads_page])
-    @listens = @user.listens.paginate(:all, :limit => 10, :order => 'listens.created_at DESC', :per_page => 10, :page => params[:listens_page])
+    @assets = @user.assets.paginate( :all, 
+      :limit    => 10, 
+      :per_page => 10, 
+      :order    => 'created_at DESC', 
+      :page     => params[:uploads_page]
+    )
+
+    @listens = @user.listens.paginate(:all, 
+      :limit    => 10, 
+      :order    => 'listens.created_at DESC', 
+      :per_page => 10, 
+      :page     => params[:listens_page]
+    )
+
     if request.xhr? 
-        render :partial => 'your_stuff.html.erb' if params[:uploads_page]
+        render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
         render :partial => 'your_listens.html.erb' if params[:listens_page]
     end
   end
 
   def add_track
-    @track = @playlist.tracks.create(:asset => Asset.find(params[:asset_id].split("_")[1])) 
+    id = params[:asset_id].split("_")[1]
+    asset = Asset.find(id)
+    @track = @playlist.tracks.create(:asset => asset) 
     respond_to do |format|
       format.js 
     end
@@ -170,20 +188,25 @@ class PlaylistsController < ApplicationController
   
   protected
   def not_found
-    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" and redirect_to user_playlists_path(@user) 
+    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" 
+    redirect_to user_playlists_path(@user) 
   end
     
   def authorized?
-    (!%w(destroy admin edit update remove_track attach_pic sort_tracks add_track set_playlist_description set_playlist_title).include?(action_name)) || (@playlist.user_id.to_s == current_user.id.to_s) || admin?
+    current_use_is_admin_or_user?(@playlist.user) ||
+    %w[ destroy admin edit update remove_track attach_pic sort_tracks 
+        add_track set_playlist_description set_playlist_title ].include?(action_name) == false
   end
   
   def find_playlists
-    @playlist = @user.playlists.find_by_permalink(params[:permalink] || params[:id])
-    @playlist = @user.playlists.find(params[:id]) if !@playlist && params[:id] 
+    id = params[:id]
+    permalink = params[:permalink] || id
+
+    @playlist = @user.playlists.find_by_permalink(permalink) ||
+                @user.playlists.find_by_id(id)
   end
   
   def find_tracks
-    @tracks = @playlist.tracks
+    @tracks = @playlist.tracks if @playlist
   end
-  
 end

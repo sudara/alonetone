@@ -45,7 +45,7 @@ class User
   end
   
   def site
-    "alonetone.com/#{login}"
+    "#{APP_CONFIG.site_url}/#{login}"
   end
   
   def printable_bio

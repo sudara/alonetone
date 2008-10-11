@@ -6,7 +6,7 @@ require 'bugaboo'
 #ActionController::Routing::Routes.reload!
 
 # remove when plugin is functional and/or production
-Dependencies.load_once_paths.delete(lib_path)
+ActiveSupport::Dependencies.load_once_paths.delete(lib_path)
 
 # ActionController::Base.view_paths.unshift File.join(directory, 'views')
 

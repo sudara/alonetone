@@ -1,7 +1,8 @@
 class User
   
-  has_many :posts, :order => "#{Post.table_name}.created_at desc"
+  has_many :posts,  :order => "#{ Post.table_name}.created_at desc"
   has_many :topics, :order => "#{Topic.table_name}.created_at desc"
+
   # Creates new topic and post.
   # Only..
   #  - sets sticky/locked bits if you're a moderator or admin 
@@ -13,8 +14,8 @@ class User
       topic.forum = forum
       topic.user  = self
       topic.env = request.env
-      revise_topic topic, attributes
-      self.reply topic, topic.body, request unless topic.locked?
+      revise_topic(topic, attributes)
+      reply(topic, topic.body, request) unless topic.locked?
       topic.body = nil
     end
   end
@@ -38,7 +39,10 @@ class User
   end
   
   def self.prefetch_from(records)
-    find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
+    find(:all, 
+      :select     => 'distinct *', 
+      :conditions => ['id in (?)', records.collect(&:user_id).uniq]
+    )
   end
   
   def self.index_from(records)
@@ -47,9 +51,17 @@ class User
 
 protected
   def revise_topic(topic, attributes)
-    topic.forum_id = attributes[:forum_id] if attributes[:forum_id]
-    topic.title = attributes[:title] if attributes[:title]
-    topic.sticky, topic.locked = attributes[:sticky], attributes[:locked] if moderator?
+    topic.forum_id = attributes[:forum_id] \
+    if attributes[:forum_id]
+      
+    topic.title = attributes[:title] \
+    if attributes[:title]
+    
+    if moderator?
+      topic.sticky = attributes[:sticky]
+      topic.locked = attributes[:locked]
+    end
+    
     topic.save
   end
 end

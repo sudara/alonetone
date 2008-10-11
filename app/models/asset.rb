@@ -2,9 +2,42 @@ class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
-  named_scope :descriptionless, {:conditions => 'description = "" OR description IS NULL', :order => 'created_at DESC', :limit => 10}
-  named_scope :recent, {:include => :user, :order => 'assets.created_at DESC'}
-  named_scope :favorited, {:select => 'distinct assets', :include => :tracks, :conditions => {'tracks.is_favorite' => true}, :order => 'tracks.created_at DESC'}
+  named_scope :descriptionless, {
+    :conditions => 'description = "" OR description IS NULL', 
+    :order      => 'created_at DESC', 
+    :limit      => 10
+  }
+  
+  named_scope :recent, {
+    :include  => :user, 
+    :order    => 'assets.created_at DESC'
+  }
+  
+  named_scope :favorited, {
+    :select     =>  'distinct assets', 
+    :include    =>  :tracks, 
+    :conditions => {'tracks.is_favorite' => true}, 
+    :order      =>  'tracks.created_at DESC'
+  }
+  
+  named_scope :id_not_in, lambda { |assest_ids| {
+    :conditions => [ "assets.id NOT IN (?)", assest_ids ] 
+  }}
+  
+  named_scope :user_id_in, lambda { |user_ids| {
+    :conditions => [ "user_id IN (?)", user_ids ]
+  }}
+  
+  named_scope :order_by, lambda { |x| {
+    :order => x
+  }}
+  
+  named_scope :random_order, :order => "'RAND()'"
+  
+  named_scope :limit_by, lambda { |x| {
+    :limit => x
+  }}
+
   formats_attributes :description    
   
   has_many :tracks, :dependent => :destroy
@@ -13,14 +46,25 @@ class Asset < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   
   has_many :listens, :dependent => :destroy
-  has_many :listeners, :through => :listens, :order => 'listens.created_at DESC', :uniq => true, :limit => 20
+
+  has_many :listeners, 
+    :through  => :listens, 
+    :order    => 'listens.created_at DESC', 
+    :uniq     => true, 
+    :limit    => 20
   
-  has_many :favoriters, :source => :user, 
-    :through => :tracks, :conditions => {'tracks.is_favorite' => true}, 
-    :order =>'tracks.created_at DESC', :include => :pic
+  has_many :favoriters, 
+    :source     =>  :user, 
+    :through    =>  :tracks, 
+    :conditions => {'tracks.is_favorite' => true}, 
+    :order      =>  'tracks.created_at DESC', 
+    :include    =>  :pic
   
   
-  has_many :comments, :as => :commentable,  :dependent => :destroy, :order => 'created_at DESC'
+  has_many :comments, 
+    :as         => :commentable,  
+    :dependent  => :destroy, 
+    :order      => 'created_at DESC'
     
   acts_as_defensio_article
   
@@ -84,7 +128,7 @@ class Asset < ActiveRecord::Base
   def length
     self.class.formatted_time(self[:length])
   end
-  
+    
   protected 
   
   def set_title_to_filename

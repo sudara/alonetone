@@ -7,8 +7,20 @@ class FacebookAccountsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
   def index
-    @latest = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.created_at DESC', :page => params[:page])
-    @kicking_ass = Asset.paginate(:all, :include => {:user => :pic}, :per_page => 10, :order => 'assets.hotness DESC', :page => params[:page])
+    @latest = Asset.paginate( :all, 
+      :include  => {:user => :pic}, 
+      :per_page => 10, 
+      :order    => 'assets.created_at DESC', 
+      :page     => params[:page]
+    )
+    
+    @kicking_ass = Asset.paginate( :all, 
+      :include  => {:user => :pic}, 
+      :per_page => 10, 
+      :order    => 'assets.hotness DESC', 
+      :page     => params[:page]
+    )
+    
     @show_user = true
   end
   
@@ -17,9 +29,13 @@ class FacebookAccountsController < ApplicationController
   end
   
   def add_to_profile
-   # one word: Fugly
-   @addable = FacebookAddable.find_or_create_by_profile_chunk_type_and_profile_chunk_id_and_facebook_account_id(:profile_chunk_type => params[:addable_type].capitalize,
-                  :profile_chunk_id => (params[:addable_id_val] || params[:addable_id]), :facebook_account_id => @facebook_account.id)
+    # one word: Fugly
+    @addable = FacebookAddable.find_or_create_by_profile_chunk_type_and_profile_chunk_id_and_facebook_account_id(
+      :profile_chunk_type   => params[:addable_type].capitalize,
+      :profile_chunk_id     => params[:addable_id_val] || params[:addable_id], 
+      :facebook_account_id  => @facebook_account.id
+    )
+    
    @asset = Asset.find(params[:addable_id])
    if @addable && @asset
      flash[:notice] = "Profile updated! We added that killer track"
@@ -35,14 +51,14 @@ class FacebookAccountsController < ApplicationController
   end
   
   def remove_from_profile
-    @addable = FacebookAddable.find_by_facebook_account_id(@facebook_account.id, :conditions => {:profile_chunk_type => params[:addable_type], :profile_chunk_id => params[:addable_id]})
+    @addable = FacebookAddable.find_by_facebook_account_id( @facebook_account.id, 
+      :conditions => {  :profile_chunk_type => params[:addable_type], 
+                        :profile_chunk_id   => params[:addable_id  ]  }
+    )
     if @addable && @addable.destroy
       flash[:notice] = "Profile updated! We removed that track."
-      if @facebook_account.facebook_addables.find(:all).size > 0
-        @facebook_user.profile_fbml = (render_to_string :partial => 'profile')
-      else
-        @facebook_user.profile_fbml = (render_to_string :partial => 'default_profile')
-      end
+      part = @facebook_account.facebook_addables.count > 0 ? 'profile' : 'default_profile'
+      @facebook_user.profile_fbml = render_to_string :partial => part
     else
       flash[:error] = "Whups. huh. That didn't do what you wanted it to do."
     end
@@ -53,7 +69,9 @@ class FacebookAccountsController < ApplicationController
   
   def sorry
     flash.delete(:notice)
-    flash[:error] = "Shoot, Facebook only lets you add/remove tracks a handful of times a day. We're sorry. Come back tomorrow? Pretty please? Alonetone itself loves you. You can always just go hang out with us. We're cooler than facebook anyway."
+    flash[:error] = "Shoot, Facebook only lets you add/remove tracks a handful of times a day. "   <<
+                    "We're sorry. Come back tomorrow? Pretty please? Alonetone itself loves you. " << 
+                    "You can always just go hang out with us. We're cooler than facebook anyway."
     redirect_to facebook_home_path
   end
   
@@ -77,7 +95,5 @@ class FacebookAccountsController < ApplicationController
   def find_facebook_user
     @facebook_user = session[:facebook_session].user
     @facebook_account = FacebookAccount.find_or_create_by_fb_user_id(@facebook_user.id)
-  end
-
-  
+  end  
 end

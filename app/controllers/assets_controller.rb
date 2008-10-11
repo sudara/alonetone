@@ -15,7 +15,13 @@ class AssetsController < ApplicationController
   # GET /assets.xml
   def index
       @page_title = @user.name + "'s uploaded music (mp3)"
-      @assets = @user.assets.paginate(:all, :order => 'created_at DESC', :per_page => 200, :page => params[:page])
+
+      @assets = @user.assets.paginate(:all, 
+        :order    => 'created_at DESC', 
+        :per_page => 200, 
+        :page     => params[:page]
+      )
+
       respond_to do |format|
         format.html # index.rhtml
         format.xml  { render :xml => @assets.to_xml }
@@ -30,15 +36,16 @@ class AssetsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = "#{@asset.name} by #{@user.name}"
-        @description = @page_title + " - #{@asset[:description]}"
         @assets = [@asset]
-        @listens = @asset.listens.find(:all)
+        @listens = @asset.listens
         @comments = @asset.comments.public.find_all_by_spam(false)
         @listeners = @asset.listeners.first(5)
         @favoriters = @asset.favoriters
+        @page_title = "#{@asset.name} by #{@user.name}"
+        @description = @page_title + " - #{@asset[:description]}"
         @single_track = true
       end
+
       format.mp3 do
         render(:text => "Denied due to abuse", :status => 403) and return false if abuser?
         register_listen
@@ -50,8 +57,9 @@ class AssetsController < ApplicationController
   def hot_track
     respond_to do |format|
       format.mp3 do
-        params[:position] = 1 unless params[:position] && params[:position].to_i < 25
-        @asset = Asset.find(:all, :limit => params[:position], :order => 'hotness DESC').last
+        pos = params[:position]
+        pos = 1 unless pos && pos.to_i < 25
+        @asset = Asset.find(:all, :limit => pos, :order => 'hotness DESC').last
         register_listen
         redirect_to @asset.public_mp3
       end
@@ -150,12 +158,15 @@ class AssetsController < ApplicationController
         end
       end
     end
+
     flashes = ''
     good = false
+
     @assets.each do |asset|
       # TODO: find a non-hackish way to ensure content_types are only mp3s at this point
       # The problem is a zip can contain a zip, which passes validation
-      # Furthermore, if there is an issue with the zip, the rescue in the Asset model will hand the file back
+      # Furthermore, if there is an issue with the zip, 
+      # the rescue in the Asset model will hand the file back
       # Butt ugly, my friends. 
       if !asset.new_record? 
         flashes += "#{CGI.escapeHTML asset.filename} uploaded!<br/>"
@@ -165,14 +176,19 @@ class AssetsController < ApplicationController
         flashes  += "'#{CGI.escapeHTML asset.filename}' failed to upload: <br/>#{errors}<br/>"
       end
     end
+
     if good 
       flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)"
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
-      flash[:error] = flashes 
-      flash[:error] = "Please try again with a file that is not empty (or miniscule) and is an mp3. <br/>Click the HALP! button or email sudara@alonetone.com for more help" if @assets.size == 0 
+      flash[:error] = if (@assets.size == 0)
+        "Please try again with a file that is not empty (or miniscule) and is an mp3. " <<
+        "<br/>Click the HALP! button or email sudara@alonetone.com for more help" 
+      else
+        flashes
+      end
       redirect_to new_user_track_path(current_user)
-    end
+    end # if good
   end
 
   # PUT /assets/1
@@ -199,7 +215,9 @@ class AssetsController < ApplicationController
   # DELETE /assets/1.xml
   def destroy
     @asset.destroy
-    flash[:ok] = 'We threw the puppy away. No one can listen to it again (unless you reupload it, of course ;)'
+    flash[:ok] = "We threw the puppy away. No one can listen to it again " << 
+                 "(unless you reupload it, of course ;)"
+                 
     respond_to do |format|
       format.html { redirect_to user_tracks_url(current_user) }
       format.xml  { head :ok }
@@ -209,40 +227,41 @@ class AssetsController < ApplicationController
   protected
     
   def not_found
-    flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" and redirect_to user_tracks_path(@user) 
+    flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" 
+    redirect_to user_tracks_path(@user) 
   end
   
   def find_referer
-    case params[:referer]
-      when 'itunes' then @referer = 'itunes'
-      when 'download' then @referer = 'download'
-      when 'home' then @referer = 'alonetone home'
-      when 'facebook' then @referer = 'facebook'
-      when nil then @referer = 'direct hit'
-      when '' then @referer = 'direct hit'
-      else
-        @referer = request.env['HTTP_REFERER']
+    @referer = case params[:referer]
+      when 'itunes'   then 'itunes'
+      when 'download' then 'download'
+      when 'home'     then 'alonetone home'
+      when 'facebook' then 'facebook'
+      when nil        then 'direct hit'
+      when ''         then 'direct hit'
+      else request.env['HTTP_REFERER']
     end
   end
   
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    admin? || (params[:permalink].nil? || (current_user != :false && @asset.user_id.to_s == current_user.id.to_s))
+    params[:permalink].nil? || current_use_is_admin_or_user?(@asset.user)
   end
   
   def register_listen
-    @asset.listens.create(:listener => (current_user || nil), 
-      :track_owner=> @asset.user, 
-      :source => @referer, 
-      :ip => request.remote_ip) unless bot?
+    @asset.listens.create(
+      :listener     => current_user || nil, 
+      :track_owner  => @asset.user, 
+      :source       => @referer, 
+      :ip           => request.remote_ip
+    ) unless bot?
   end
   
   def bot?
-    if present? request.user_agent 
-      (@@valid_listeners.detect{ |listener| request.user_agent.downcase.include? listener} == nil) || (request.user_agent.downcase.include?('bot'))
-    else
-      true
-    end
+    return true unless present? request.user_agent 
+    agent = request.user_agent.downcase
+    not @@valid_listeners.any?{ |listener| agent.include? listener } || 
+    agent.include?('bot')
   end
   
   def abuser?

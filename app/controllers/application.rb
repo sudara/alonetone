@@ -78,7 +78,16 @@ class ApplicationController < ActionController::Base
   end
   
   def find_user
-    @user = (params[:login] || params[:id])? User.find_by_login(params[:login] || params[:id]) : current_user
+    login = params[:login] || params[:id]
+    @user = User.find_by_login(login) || current_user
+  end
+
+  def current_use_is_admin_or_user?(user)
+    logged_in? && (current_user.id.to_s == user.id.to_s || current_user.admin?)
+  end
+
+  def current_use_is_admin_or_moderator_or_user?(user)
+    current_use_is_admin_or_user? || moderator?
   end
 
   def find_asset
@@ -132,7 +141,8 @@ class ApplicationController < ActionController::Base
 
   def display_news
     return unless logged_in?
-    @display_news = true if session[:last_active] && (session[:last_active] < Update.find(:first, :order => 'created_at DESC').created_at)
+    last_update = Update.find(:first, :order => 'created_at DESC')
+    @display_news = true if session[:last_active] && last_update && (session[:last_active] < last_update.created_at)
   end
 
   def is_sudo

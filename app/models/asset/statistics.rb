@@ -2,7 +2,17 @@ class Asset
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
 
   def self.most_popular(limit=10, time_period=5.days.ago)
-    popular = Listen.count(:all,:include => :asset, :group => 'listens.asset_id', :limit => limit, :conditions => ["listens.created_at > ? AND (listens.listener_id IS NULL OR listens.listener_id != listens.track_owner_id)", time_period], :order => 'count_all DESC')
+    popular = Listen.count(:all,
+      :include => :asset, 
+      :group => 'listens.asset_id', 
+      :limit => limit, 
+      :order => 'count_all DESC',
+      :conditions => [
+        "listens.created_at > ? AND " << 
+        "(listens.listener_id IS NULL OR " <<
+        "listens.listener_id != listens.track_owner_id)", 
+        time_period ]
+    )
     find(popular.collect{|pop| pop.first}, :include => :user)
     # In the last week, people have been listening to the following
     #find(:all, :include => :user, :limit => limit, :order => 'assets.listens_count DESC')
@@ -29,11 +39,19 @@ class Asset
   end
   
   def recent_listen_count(from = 7.days.ago, to = 1.hour.ago)
-   listens.count(:all, :conditions => ['listens.created_at > ? AND listens.created_at < ? AND listens.listener_id != ?',from, to, self.user_id]) 
+    listens.count(:all, 
+      :conditions => [
+        "listens.created_at > ? AND " << 
+        "listens.created_at < ? AND " <<
+        "listens.listener_id != ?",
+        from, to, self.user_id
+      ]) 
   end
   
   def listens_per_week
-    listens.count(:all, :conditions => ['listens.listener_id != ?', self.user_id]).to_f * 7 / days_old  
+    listens.count(:all, 
+      :conditions => ['listens.listener_id != ?', self.user_id]
+    ).to_f * 7 / days_old
   rescue
     0
   end
@@ -62,9 +80,15 @@ class Asset
     sum_up_the_months(@@launch_date){|date, sum| monthly_counts << [sum, date]}
     data = monthly_counts.collect(&:first)
     labels = monthly_counts.collect(&:last)
-    chart = Gchart.line(:size => '500x150', :data => data, 
-      :background => 'e1e2e1', :axis_with_labels => 'r,x',
-      :axis_labels => ["0|#{(data.max.to_f/2).round}|#{data.max}","#{labels.join('|')}"], :line_colors =>'cc3300', :custom => 'chbh=35,25' )
+    chart = Gchart.line(
+      :size             =>  '500x150', 
+      :data             =>  data, 
+      :background       =>  'e1e2e1', 
+      :axis_with_labels =>  'r,x',
+      :axis_labels      => [GchartHelpers.zero_half_max(data.max), "#{labels.join('|')}"], 
+      :line_colors      =>  'cc3300', 
+      :custom           =>  'chbh=35,25'
+    )
   end
   
   
@@ -81,8 +105,15 @@ class Asset
     end
   end
   
-  def self.monthly_sum_for(date=Time.now, sum =0)
+  def self.monthly_sum_for(date=Time.now, sum=0)
     # [count, year_month_label]
-    [sum + self.count(:all, :conditions => ['created_at > ? AND created_at < ?',date.beginning_of_month, date.end_of_month]), "#{date.strftime('%b %y')}"]
+    month_count = self.count(:all,
+      :conditions => [
+        'created_at > ? AND created_at < ?',
+        date.beginning_of_month, 
+        date.end_of_month
+      ])
+      
+    [sum + month_count, "#{date.strftime('%b %y')}"]
   end
 end
