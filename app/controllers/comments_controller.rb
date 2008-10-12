@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   
   def create
     if request.xhr? 
-      unless params[:comment] && params[:comment][:body] && !params[:comment][:body].empty?                                  
+      unless params[:comment] && !params[:comment][:body].blank?
         return head(:bad_request) 
       end
       
@@ -15,9 +15,11 @@ class CommentsController < ApplicationController
         when 'asset'
           find_asset
           @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
+
         when 'feature'
           @feature = Feature.find(params[:comment][:commentable_id])
           @comment = @feature.comments.build(shared_attributes)
+
         when 'update'
           @update = Update.find(params[:comment][:commentable_id])
           @comment = @update.comments.build(shared_attributes)
@@ -31,10 +33,12 @@ class CommentsController < ApplicationController
         User.increment_counter(:comments_count, @asset.user) 
         Asset.increment_counter(:comments_count, @asset) 
       end
+
       render :nothing => true
     end
   end  
   
+
   def destroy
     if params[:spam] == true
       @comment.report_as_false_negative 
@@ -46,10 +50,12 @@ class CommentsController < ApplicationController
     redirect_to :back 
   end
   
+
   def unspam
     @comment.report_as_false_positive
     redirect_to :back
   end
+  
   
   def index
     if params[:login]
