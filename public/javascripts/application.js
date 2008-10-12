@@ -495,10 +495,13 @@ Track = $.klass({
     if(this.tabbies.currentTab != desiredTab) this.tabbies.openTab(desiredTab);
     
     // open the pane if it is not already open
-    if(this.isOpen != false) this.more.slideDown({duration:300,queue:false});
-    
+    if(this.isOpen != false) // this.more.slideDown({duration:300,queue:false});
+			jQuery(this.more).slideDown(function setFocusOnCurrentComment() {
+				jQuery(".comment_as", jQuery(".open").next()).next().focus();    
+			});
+		
     // close all other detail panes except currently playing
-    for(i=0;i< this.behavior.instances.length;i++){
+    for(var i=0;i< this.behavior.instances.length;i++){
         if(!this.behavior.instances[i].isPlaying() && this.element != this.behavior.instances[i].element) 
           this.behavior.instances[i].closeDetails();
     }
