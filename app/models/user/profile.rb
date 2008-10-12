@@ -4,6 +4,12 @@ class User
   serialize :settings
   formats_attributes :bio
   
+  before_save :normalize_itunes_url
+  
+  def normalize_itunes_url
+    self.itunes = itunes.strip.downcase.gsub(/http\:\/\//, "")
+  end
+  
   def has_public_playlists?
     playlists.public.size >= 1
   end
