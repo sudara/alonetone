@@ -53,12 +53,10 @@ class Asset
 
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
   def self.not_heard_by(user, limit)
-    assets = Asset.random_order.limit_by(limit)
-    
-    assets.id_not_in(user.listened_to_ids) \
-    if user && user.listened_more_than?(0)
-    
-    return assets
+    Asset.
+      random_order.
+      limit_by(limit).
+      id_not_in(user && user.listened_to_ids)
   end
 
   

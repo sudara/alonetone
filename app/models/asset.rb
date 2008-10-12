@@ -20,15 +20,15 @@ class Asset < ActiveRecord::Base
     :order      =>  'tracks.created_at DESC'
   }
   
-  named_scope :id_not_in, lambda { |assest_ids| {
-    :conditions => [ "assets.id NOT IN (?)", assest_ids ] 
+  named_scope :id_not_in, lambda { |asset_ids| {
+    :conditions => [ "assets.id NOT IN (?)", asset_ids ] 
   }}
   
   named_scope :user_id_in, lambda { |user_ids| {
-    :conditions => [ "user_id IN (?)", user_ids ]
+    :conditions => [ "assets.user_id IN (?)", user_ids ]
   }}
   
-  named_scope :random_order, :order => "'RAND()'"
+  named_scope :random_order, :order => "RAND()"
   
   named_scope :order_by, lambda { |x| { :order => x }}
   
