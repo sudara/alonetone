@@ -4,7 +4,7 @@ class SourceFile < ActiveRecord::Base
   has_attachment  :storage      => ALONETONE.storage, 
                   :content_type => ['audio/x-aiff','audio/x-wav'],
                   :max_size     => 100.megabytes,
-                  :path_prefix  => "#{ALONETONE.path_prefix}source_files",
+                  :path_prefix  => File.join(ALONETONE.path_prefix, "source_files"),
                   :s3_access    => :authenticated_read
                   
   validates_as_attachment
