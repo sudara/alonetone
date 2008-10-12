@@ -332,10 +332,10 @@ function css(el, prop) {
     return parseInt($.css(el[0], prop)) || 0;
 };
 function width(el) {
-    return  el[0].offsetWidth + css(el, 'marginLeft') + css(el, 'marginRight');
+    return el[0] && el[0].offsetWidth + css(el, 'marginLeft') + css(el, 'marginRight');
 };
 function height(el) {
-    return el[0].offsetHeight + css(el, 'marginTop') + css(el, 'marginBottom');
+    return el[0] && el[0].offsetHeight + css(el, 'marginTop') + css(el, 'marginBottom');
 };
 
 })(jQuery);
