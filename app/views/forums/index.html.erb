@@ -58,7 +58,7 @@
     </table>
 
     <p>
-      <%= link_to 'View Recent Posts', posts_path %>
+      <%= link_to('View Recent Posts', posts_path) if Post.first %>
     </p>
     <% if @online && !@online.empty?%>
         <div class="box">
