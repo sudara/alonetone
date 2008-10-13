@@ -65,7 +65,7 @@ class Listen < ActiveRecord::Base
       :data             => data,
       :background       => 'e1e2e1',
       :axis_with_labels => 'r,x',
-      :axis_labels      => [ GchartHelpers.zero_half_max(data), "#{labels.join('|')}" ],
+      :axis_labels      => [ GchartHelpers.zero_half_max(data.max), "#{labels.join('|')}" ],
       :line_colors      => 'cc3300',
       :custom           => 'chm=B,ff9933,0,0,0'
     )
@@ -73,7 +73,7 @@ class Listen < ActiveRecord::Base
   
   def self.last_30_days_chart
     data = self.count :all, 
-      :conditions => ['listens.created_at > ?',30.days.ago.at_midnight], 
+      :conditions => ['listens.created_at > ?', 30.days.ago.at_midnight], 
       :group => 'DATE(listens.created_at)' 
       
     data = data.collect(&:last)
