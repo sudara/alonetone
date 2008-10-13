@@ -9,7 +9,9 @@ Rails::Initializer.run do |config|
   config.gem 'ruby-mp3info',  :lib => 'mp3info'
   config.gem 'rubyzip',       :lib => 'zip/zip'
   config.gem 'googlecharts',  :lib => 'gchart'
-  config.gem 'rmagick',       :lib => 'RMagick'
+  
+  # Rmagick is *not* required (for example, sudara uses imagescience)
+  # config.gem 'rmagick',       :lib => 'RMagick'
   config.gem 'json'
   config.gem 'haml'
 
