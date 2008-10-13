@@ -508,7 +508,7 @@ Track = $.klass({
 
 		// setFocusToCurrentCommentBoxWhenClickOnCommentTab
 		jQuery(".ui-tabs-selected a", jQuery(this.element).next()).click( function () {			
-			setTimeout(setFocusToCurrentCommentBox, 30);
+			setTimeout(setFocusToCurrentCommentBox, 60);
 		});
 		
 		return;
