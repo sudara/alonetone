@@ -21,6 +21,7 @@ Sudara::PrettyText.presets[:h2] = {
   :format => 'png',
   :font => 'RonniaReg.otf'
 }
+
 Sudara::PrettyText.presets[:h3] = {
   :pointsize => 18,
   :background_color => '#f3f3f3',

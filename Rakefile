@@ -9,7 +9,7 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
-# Borrow code & idea from spot-us project
+# Borrow & modified from spot-us project
 desc "Copy application sample config for dev/test purposes"
 task :copy_sample_config do
   if Rails.env.development? or Rails.env.test?
