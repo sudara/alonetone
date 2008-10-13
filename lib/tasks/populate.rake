@@ -1,3 +1,4 @@
+# Borrow from spot-us
 namespace :db do
   desc "Loads initial database models for the current environment."
   task :populate => :environment do
