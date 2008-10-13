@@ -67,16 +67,16 @@ I've had multiple requests asking me to walk folks through setting up alonetone 
 
 If you do want to get jiggy and setup alonetone locally, the best thing to do is to contact me first, as things are ever-changing. 
 
-You'll need to setup 5 config files for it to run flawlessly:
+alonetone uses 5 config files:
 
-    alonetone.yml (contains the application "secret" and app specefic settings)
+    alonetone.yml (contains the application "secret" and app-specific settings)
     database.yml
-    amazon_s3.yml (you can always ignore this and set Asset and Pic models to use the filesysem)
-    defensio.yml (spam protection, you can ignore this in development)
-    facebooker.yml (for facebook app, you can ignore this in general)
+    amazon_s3.yml (used in production, by default development mode runs with :file_system storage)
+    defensio.yml (spam protection, ignored in development)
+    facebooker.yml (for facebook app, ignore this in general for now)
 		newrelic.yml (for performance tracking)
 
-    Actually, those file will be generated automatically when you start any rake task
+These files will be created for you the first time you run any rake task. 
 
 You'll need some gems, at least:
 
