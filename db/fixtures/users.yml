@@ -1,14 +1,14 @@
 # admin
 sudara:
   id: 1
-  login: sudara
-  email: sudara@modernthings.net
+  login: admin
+  email: admin@alonetone.com
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 5.days.ago.to_s :db %>
   activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
-  token: sudaratoken
+  token: admintoken
   token_expires_at: <%= 5.days.from_now.to_s :db %>
   admin: true
   
@@ -16,7 +16,7 @@ sudara:
 arthur:
   id: 2
   login: test
-  email: test@example.com
+  email: test@alonetone.com
   salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
