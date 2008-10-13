@@ -1,12 +1,14 @@
 <!-- alonetone home page -->
 <%= render :partial => 'shared/self_confidence' unless logged_in? %>
 
+<% unless @playlists.blank? %>
 <div id="latest_playlists">
-  
+
   <h2>Latest albums &amp; playlists</h2>
   <%= render :partial => 'shared/carousel' %>
 
 </div>
+<% end %>
 
 <% content_for :left do%>
   <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
