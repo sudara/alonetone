@@ -1,8 +1,10 @@
 begin
   require 'json' 
 rescue LoadError => load_error 
+  puts "----------------------------------------------------------------------------------------"
   puts "Need json gem in order to load facebooker plugin."
   puts "Please run 'sudo gem install json'."
+  puts "----------------------------------------------------------------------------------------"
 end
 
 require 'facebooker/batch_request'

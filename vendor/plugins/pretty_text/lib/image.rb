@@ -1,8 +1,13 @@
 begin
   require "RMagick" 
 rescue LoadError => load_error 
+  puts "----------------------------------------------------------------------------------------"
   puts "Need RMagick gem in order to load facebooker plugin."
-  puts "Please run 'sudo gem install rmagick'."
+  puts "Please install imagemagick first"
+  puts "  If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'"
+  puts "  If you are using Mac, you can run 'sudo port install imagemagick'"
+  puts "Then run 'sudo gem install rmagick'."
+  puts "----------------------------------------------------------------------------------------"
 end
 
 module Sudara
