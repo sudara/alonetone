@@ -61,7 +61,7 @@ Thirdly, fork away on github.
 
 ### Playing with alonetone on localhost
 
-I won't lie. This is not a task for Rails newbees. 
+This is *not* a task for Rails newbees. 
 
 I've had multiple requests asking me to walk folks through setting up alonetone locally. Unless you have some experience with rails, it's just not going to be worth it unless you have a lot of time to invest.
 
@@ -90,20 +90,18 @@ You'll need some gems, at least:
       mocha (for rspec)
       
 You can let the system install all required gems for you using following command:
+
       rake gems:install
 
 You can also install them manually:
+
 			sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha
 
-You may need to install imagemagick before install rmagick gem
-
-If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'
-
-If you are using Mac, you can run 'sudo port install imagemagick'
+You may need to install imagemagick before rmagick. If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'. If you are on a Mac, you can 'sudo port install imagemagick'
 			
 You'll need to install rails 2.1 gem or have a copy in the vendor directory.
 
-Then, you can create a development database, runall migrations and load some bootstrap data with:
+Then, you can create a development database, run all migrations and load some bootstrap data with:
 
       rake db:remake
 
@@ -112,7 +110,7 @@ After bootstrap data is loaded, you can login using test account with username=t
 
 You will see session and current\_user information at the end of each page after login. You can turn it off by changing show\_debug_info to false in alonetone.yml
 
-After login, click on "Upload" button to upload a music file.
+After login, click on "Upload" button to upload your first mp3.
 
 ### License 
 
