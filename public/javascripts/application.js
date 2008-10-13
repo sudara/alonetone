@@ -496,9 +496,7 @@ Track = $.klass({
     
     // open the pane if it is not already open
     if(this.isOpen != false) // this.more.slideDown({duration:300,queue:false});
-			jQuery(this.more).slideDown(function setFocusOnCurrentComment() {
-				jQuery(".comment_as", jQuery(".open").next()).next().focus();    
-			});
+			jQuery(this.more).slideDown(setFocusToCurrentCommentBox);
 		
     // close all other detail panes except currently playing
     for(var i=0;i< this.behavior.instances.length;i++){
@@ -507,6 +505,17 @@ Track = $.klass({
     }
     
     this.element.addClass('open');
+
+		// setFocusToCurrentCommentBoxWhenClickOnCommentTab
+		jQuery(".ui-tabs-selected a", jQuery(this.element).next()).click( function () {			
+			setTimeout(setFocusToCurrentCommentBox, 100);
+		});
+		
+		return;
+		// helpers
+		function setFocusToCurrentCommentBox() {
+			jQuery(".comment_as", jQuery(".open").next()).next().focus();
+		}				
   },
   
   closeDetails:function(){
