@@ -12,6 +12,12 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
 
+  config.gem 'ruby-mp3info',  :lib => 'mp3info'
+  config.gem 'rubyzip',       :lib => 'zip/zip'
+  config.gem 'googlecharts',  :lib => 'gchart'
+  config.gem 'rmagick'
+  config.gem 'json'
+
   # Settings in config/environments/* take precedence over those specified here
 
   # Skip frameworks you're not going to use (only works if using vendor/rails)
@@ -25,11 +31,6 @@ Rails::Initializer.run do |config|
   config.load_paths += Dir["#{RAILS_ROOT}/vendor/gems/**"].map do |dir| 
     File.directory?(lib = "#{dir}/lib") ? lib : dir
   end
-
-  config.gem 'ruby-mp3info',  :lib => 'mp3info'
-  config.gem 'rubyzip',       :lib => 'zip/zip'
-  config.gem 'googlecharts',  :lib => 'gchart'
-  config.gem 'rmagick'
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
