@@ -39,7 +39,7 @@ class Asset
                   :processor => :mp3info,
                   # Don't know why can't upload mp3 files (zip files are passed)
                   # so remove content_type for development and test environments
-                  :content_type => if RAILS_ENV == 'production' ? ['audio/mpeg','application/zip'] : nil,
+                  :content_type => (RAILS_ENV == 'production' ? ['audio/mpeg','application/zip'] : nil),
                   :max_size => 40.megabytes,
                   :path_prefix => File.join(ALONETONE.path_prefix, "mp3")
                     
