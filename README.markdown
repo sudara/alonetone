@@ -71,25 +71,35 @@ You'll need to setup 5 config files for it to run flawlessly:
     amazon_s3.yml (you can always ignore this and set Asset and Pic models to use the filesysem)
     defensio.yml (spam protection, you can ignore this in development)
     facebooker.yml (for facebook app, you can ignore this in general)
+		newrelic.yml (for performance tracking)
+
+    Actually, those file will be generated automatically when you start any rake task
 
 You'll need some gems, at least:
 
       rmagick
       haml
-      facebooker
       json
       ruby-mp3info
-      mocha (for rspec)
       googlecharts
-      aws-s3
+      aws-s3 (if you use Amazon S3 to store files)
       rubyzip (for extracting mp3s from zip files)
+      mocha (for rspec)
       
-You'll need to have rails 2.1 in the vendor directory.      
+      You can let the system install all required gems for you using following command:
+      rake gems:install
+
+You'll need to install rails 2.1 gem or have a copy in the vendor directory.
 
 Then, 
-      rake db:migrate
+      rake db:remake
 
-There is no bootstrapper at this time, so you'll probably need to fiddle with it a bit or bug me to make one.
+To create a development database, do all migrations and load some bootstrap data.
+The development environment will use local storage for file uploading.
+After bootstrap data is loaded, you can login using test account with username=test, password=test.
+You will see session and current_user information at the end of each page after login.
+It's not a bug. It's debug info. You can turn it off by changing show_debug_info to false in alonetone.yml
+After login, click on "Upload" button to upload a music file.
 
 ### License 
 
