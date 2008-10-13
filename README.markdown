@@ -53,14 +53,17 @@ Really, only the very basics are implemented.
 
 ### Want to join forces?
 
-First of all, talk to me. 
-  You can send me electronic mail. Sudara at alonetone com
+First of all, talk to Sudara by emailing Sudara at alonetone com
 
 Secondly, [sign up for an account](http://alonetone.com) and start digging in.
 
-### Playling with alonetone on localhost
+Thirdly, fork away on github.
 
-I won't lie. This is not a task for Rails newbees. I've had multiple requests asking me to walk folks through setting up alonetone locally. Unless you have some experience with rails, it's just not going to be worth it unless you have a lot of time to invest.
+### Playing with alonetone on localhost
+
+I won't lie. This is not a task for Rails newbees. 
+
+I've had multiple requests asking me to walk folks through setting up alonetone locally. Unless you have some experience with rails, it's just not going to be worth it unless you have a lot of time to invest.
 
 If you do want to get jiggy and setup alonetone locally, the best thing to do is to contact me first, as things are ever-changing. 
 
@@ -86,27 +89,28 @@ You'll need some gems, at least:
       rubyzip (for extracting mp3s from zip files)
       mocha (for rspec)
       
-      You can let the system install all required gems for you using following command:
+You can let the system install all required gems for you using following command:
       rake gems:install
 
-			If 'rake gems:install' don't work, just install them manually:
+You can also install them manually:
 			sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha
 
-		  You may need to install imagemagick before install rmagick gem
-		    If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'
-		    If you are using Mac, you can run 'sudo port install imagemagick'
+You may need to install imagemagick before install rmagick gem
+
+If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'
+
+If you are using Mac, you can run 'sudo port install imagemagick'
 			
 You'll need to install rails 2.1 gem or have a copy in the vendor directory.
 
-Then, 
+Then, you can create a development database, runall migrations and load some bootstrap data with:
+
       rake db:remake
 
-To create a development database, do all migrations and load some bootstrap data.
-The development environment will use local storage for file uploading.
 
 After bootstrap data is loaded, you can login using test account with username=test, password=test.
-You will see session and current_user information at the end of each page after login.
-It's not a bug. It's debug info. You can turn it off by changing show_debug_info to false in alonetone.yml
+
+You will see session and current\_user information at the end of each page after login. You can turn it off by changing show\_debug_info to false in alonetone.yml
 
 After login, click on "Upload" button to upload a music file.
 
