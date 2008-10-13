@@ -623,14 +623,23 @@ Track = $.klass({
   },
   updateTime : function(){
     this.sound = soundManager.getSoundById(this.soundID);
-    if(this.sound != undefined && this.isPlaying()){
-      this.elapsed_time = Math.round(this.sound.position / 1000);
-      seconds = this.elapsed_time % 60;
-      if(seconds < 10) seconds = '0'+seconds; // aww, i miss prototype
-      var time = Math.floor(this.elapsed_time/60) + ':' + seconds;
+    if (this.sound != undefined && this.isPlaying()) {
+			var time = toTime(this.sound.position);
+			if (!time) return;
       this.time.html(time); 
-      document.title = time+' - '+this.track_title+' by '+this.artist;
+      document.title = [time, '-', this.track_title, 'by', this.artist].join(' ');
     }
+		return;
+		// helpers
+		function toTime(pos) {
+			var elapsed_time = Math.round(pos / 1000);
+			if (isNaN(elapsed_time)) return false;
+
+			var minutes = Math.floor(elapsed_time / 60);
+      var seconds = elapsed_time % 60;
+
+      return [minutes, ':', seconds < 10 ? 0 : '', seconds].join('');
+		}
   },
   ensureSoundIsReadyThenPlay : function(){
     if(soundIsReady) return this.tellSoundManagerToPlay();
