@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    session[:return_to] = params[:return_to] if params[:return_to]
    # if open_id?(params[:login])
    #   open_id_authentication params[:login]
    #else
