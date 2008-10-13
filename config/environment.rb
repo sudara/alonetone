@@ -26,14 +26,11 @@ Rails::Initializer.run do |config|
     File.directory?(lib = "#{dir}/lib") ? lib : dir
   end
 
-  # config.gem('giraffesoft-resource_controller', 
-  #   :lib => 'resource_controller',
-  #   :source => 'http://gems.github.com')
-
   config.gem 'ruby-mp3info',  :lib => 'mp3info'
   config.gem 'rubyzip',       :lib => 'zip/zip'
   config.gem 'googlecharts',  :lib => 'gchart'
-  # config.gem 'rmagick'
+  config.gem 'rmagick'
+  config.gem 'json'
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
