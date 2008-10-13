@@ -89,6 +89,13 @@ You'll need some gems, at least:
       You can let the system install all required gems for you using following command:
       rake gems:install
 
+			If 'rake gems:install' don't work, just install them manually:
+			sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha
+
+		  You may need to install imagemagick before install rmagick gem
+		    If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'
+		    If you are using Mac, you can run 'sudo port install imagemagick'
+			
 You'll need to install rails 2.1 gem or have a copy in the vendor directory.
 
 Then, 
@@ -96,9 +103,11 @@ Then,
 
 To create a development database, do all migrations and load some bootstrap data.
 The development environment will use local storage for file uploading.
+
 After bootstrap data is loaded, you can login using test account with username=test, password=test.
 You will see session and current_user information at the end of each page after login.
 It's not a bug. It's debug info. You can turn it off by changing show_debug_info to false in alonetone.yml
+
 After login, click on "Upload" button to upload a music file.
 
 ### License 
