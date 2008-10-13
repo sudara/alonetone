@@ -30,7 +30,6 @@ Rails::Initializer.run do |config|
   config.gem 'rubyzip',       :lib => 'zip/zip'
   config.gem 'googlecharts',  :lib => 'gchart'
   config.gem 'rmagick'
-  config.gem 'json'
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
