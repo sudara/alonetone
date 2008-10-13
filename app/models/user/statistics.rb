@@ -1,28 +1,38 @@
 class User
   # graphing
-  def track_plays_graph    
+  def track_plays_graph
+    within_30_days_ago = ['listens.created_at > ?', 30.days.ago.at_midnight]
+
+    seconds = (Time.now - track_plays.minimum(:created_at, :conditions => within_30_days_ago)).round
+    hours = seconds / 60 / 60
+    days = hours / 24
+
+    if days > 1
+      labels = "#{days} days ago|#{(days+1)/2} days ago|Today"
+      group_by = 'DATE(listens.created_at)'
+    else
+      labels = "#{hours} hours ago|#{(hours+1)/2} hours ago|Now"
+      group_by = 'HOUR(listens.created_at)'
+    end
+
+    track_play_history = track_plays.count(:all, 
+      :conditions => within_30_days_ago, 
+      :group      => group_by
+    ).collect{ |tp| tp[1] }
+    
     Gchart.line(
       :size             => '420x150',
       :title            => 'listens',
       :data             => track_play_history,
       :axis_with_labels => 'r,x',
-      :axis_labels      => [ GchartHelpers.zero_half_max(track_play_history.max),
-                            "30 days ago|15 days ago|Today" ],
+      :axis_labels      => [ GchartHelpers.zero_half_max(track_play_history.max), labels ],
       :line_colors      => 'cc3300', 
       :background       => '313327', 
       :custom           => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0'
     ) 
   end
 
-  
-  def track_play_history
-    track_plays.count(:all, 
-      :conditions => ['listens.created_at > ?', 30.days.ago.at_midnight], 
-      :group      => 'DATE(listens.created_at)'
-    ).collect{ |tp| tp[1] }
-  end
-
-  
+    
   def assests_order_by(order)
     assets.find(:all, 
       :limit    => chart_limit, 
