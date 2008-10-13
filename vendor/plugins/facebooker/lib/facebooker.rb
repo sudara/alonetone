@@ -1,7 +1,7 @@
 begin
   require 'json' 
 rescue LoadError => load_error 
-  puts "Need json gem inorder to load facebooker plugin."
+  puts "Need json gem in order to load facebooker plugin."
   puts "Please run 'sudo gem install json'."
 end
 

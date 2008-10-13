@@ -1,4 +1,9 @@
-require "RMagick" 
+begin
+  require "RMagick" 
+rescue LoadError => load_error 
+  puts "Need RMagick gem in order to load facebooker plugin."
+  puts "Please run 'sudo gem install rmagick'."
+end
 
 module Sudara
   module PrettyText
