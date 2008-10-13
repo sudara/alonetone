@@ -67,7 +67,7 @@ I've had multiple requests asking me to walk folks through setting up alonetone 
 
 If you do want to get jiggy and setup alonetone locally, the best thing to do is to contact me first, as things are ever-changing. 
 
-alonetone uses 5 config files:
+alonetone uses 6 config files:
 
     alonetone.yml (contains the application "secret" and app-specific settings)
     database.yml
