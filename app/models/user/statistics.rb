@@ -1,9 +1,11 @@
 class User
   # graphing
   def track_plays_graph
-    within_30_days_ago = ['listens.created_at > ?', 30.days.ago.at_midnight]
+    created_within_30_days = ['listens.created_at > ?', 30.days.ago.at_midnight]
 
-    seconds = (Time.now - track_plays.minimum(:created_at, :conditions => within_30_days_ago)).round
+    first_created = track_plays.minimum(:created_at, :conditions => created_within_30_days)
+    first_created ||= Time.now
+    seconds = (Time.now - first_created).round
     hours = seconds / 60 / 60
     days = hours / 24
 
@@ -16,7 +18,7 @@ class User
     end
 
     track_play_history = track_plays.count(:all, 
-      :conditions => within_30_days_ago, 
+      :conditions => created_within_30_days, 
       :group      => group_by
     ).collect{ |tp| tp[1] }
     
