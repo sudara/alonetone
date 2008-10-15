@@ -350,8 +350,16 @@ AdjustableTextarea = $.klass({
 Tabbies = $.klass({
   initialize : function(desiredTab){
     this.defaultTab = 0;
-    this.element.tabs({selected: (desiredTab || this.defaultTab) });
-    this.currentTab = 0;
+    this.currentTab = desiredTab || this.defaultTab;
+
+    this.element.tabs({selected: this.currentTab });
+    
+    // when switching tabs, always focus on comment box if on comment tab
+    this.element.bind('tabsshow', function(event, ui) {
+        if(ui.index==0)
+          $('textarea',ui.panel).focus();
+    });
+
   },
   openTab : function(desiredTab){
     desiredTab = desiredTab || this.defaultTab;
@@ -452,7 +460,7 @@ Track = $.klass({
     this.trackURL = $('a.play_link',this.element).attr('href');
     this.soundID = this.element[0].id; 
     this.more = this.element.next();
-    this.tabbies = false; // wait on initializing those tabs
+    this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     this.radio = false;
     // dont allow tab details to be opened on editing playlists
@@ -491,12 +499,13 @@ Track = $.klass({
     // set up the tabs if this track hasn't been opened yet
     if(!this.tabbies) this.createTabbies();
     
-    // change the tab if the desired is not currently open
+    // change the tab if the clicked tab is not currently open
     if(this.tabbies.currentTab != desiredTab) this.tabbies.openTab(desiredTab);
     
     // open the pane if it is not already open
-    if(this.isOpen != false) // this.more.slideDown({duration:300,queue:false});
-			jQuery(this.more).slideDown(setFocusToCurrentCommentBox);
+    if(this.isOpen != false) this.more.slideDown(300,function(){
+        $('textarea',this).focus();
+    });
 		
     // close all other detail panes except currently playing
     for(var i=0;i< this.behavior.instances.length;i++){
@@ -505,17 +514,9 @@ Track = $.klass({
     }
     
     this.element.addClass('open');
-
-		// setFocusToCurrentCommentBoxWhenClickOnCommentTab
-		jQuery(".ui-tabs-selected a", jQuery(this.element).next()).click( function () {			
-			setTimeout(setFocusToCurrentCommentBox, 60);
-		});
-		
+  
 		return;
-		// helpers
-		function setFocusToCurrentCommentBox() {
-			jQuery(".comment_as", jQuery(".open").next()).next().focus();
-		}				
+		
   },
   
   closeDetails:function(){
@@ -611,7 +612,7 @@ Track = $.klass({
   },
   
   createTabbies : function(){
-    this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array
+    this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array 
     this.commentForm = $('.comment_form form',this.more).attachAndReturn(CommentForm)[0];
     $('a.add_to_favorites',this.more).attach(FavoriteToggle);
   },
