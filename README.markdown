@@ -14,6 +14,10 @@ If you are interested, [sign up over at alonetone](http://alonetone.com/signup) 
 
 Secondly, please email me at sudara at alonetone dot com.
 
+### Bug reporting 
+
+We use [lighthouse](http://alonetone.lighthouseapp.com) to submit bugs and keep track of our work
+
 ### The goal?
 
 To create and run the best online home a musician could want to have, providing them with the tools they need to reach their listeners and network with other artists, without the umbrella of a corporation.
@@ -74,7 +78,7 @@ alonetone uses 6 config files:
     amazon_s3.yml (used in production, by default development mode runs with :file_system storage)
     defensio.yml (spam protection, ignored in development)
     facebooker.yml (for facebook app, ignore this in general for now)
-		newrelic.yml (for performance tracking)
+    newrelic.yml (for performance tracking)
 
 These files will be created for you the first time you run any rake task. 
 
