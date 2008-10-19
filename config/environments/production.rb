@@ -27,7 +27,7 @@ config.after_initialize do
 
       # include any custom auth modules you need
       include AuthenticatedSystem
-      protect_from_forgery  :secret => YAML.load_file(File.join(RAILS_ROOT,'config','alonetone.yml'))['alonetone']['secret']
+      protect_from_forgery  :secret => YAML.load_file(File.join(RAILS_ROOT,'config','alonetone.yml'))['production']['secret']
 
       before_filter :login_required
       
