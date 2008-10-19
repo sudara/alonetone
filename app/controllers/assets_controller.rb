@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
   
   # we check to see if the current_user is authorized based on the asset.user
   before_filter :login_required, :except => [:index, :show, :latest, :radio]
-  before_filter :find_referer, :only => :show
+  before_filter :find_referer, :prevent_abuse, :only => :show
   
   #rescue_from NoMethodError, :with => :user_not_found
   #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
@@ -47,7 +47,6 @@ class AssetsController < ApplicationController
       end
 
       format.mp3 do
-        render(:text => "Denied due to abuse", :status => 403) and return false if abuser?
         register_listen
         redirect_to @asset.public_mp3
       end
@@ -267,7 +266,11 @@ class AssetsController < ApplicationController
     @@valid_listeners.any?{|valid_agent| @agent.include? valid_agent} 
   end
   
+  def prevent_abuse
+    render(:text => "Denied due to abuse", :status => 403) if abuser?    
+  end
+  
   def abuser?
-    request.user_agent and @agent =~/mp3bot/
+    request.user_agent and request.user_agent.include? 'mp3bot'
   end
 end

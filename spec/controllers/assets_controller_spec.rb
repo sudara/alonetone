@@ -35,6 +35,7 @@ describe AssetsController do
   it 'should properly detect leeching blacklisted sites and not register a listen' do
     request.user_agent = 'mp3bot'
     lambda{get_song }.should_not change(Listen, :count)
+    response.response_code.should == 403
   end
 
   it 'should consider an empty user agent to be a spider and not register a listen' do
