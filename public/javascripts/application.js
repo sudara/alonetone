@@ -520,9 +520,19 @@ Track = $.klass({
   },
   
   closeDetails:function(){
-    if(!this.allowDetailsOpen) return false;
+    if(!this.allowDetailsOpen || this.commentBoxIsPopulated()) return false;
     this.more.slideUp({duration:300,queue:false});
     this.element.removeClass('open');
+  },
+  
+  commentBoxIsPopulated:function(){
+    if(this.tabbies && 
+      this.tabbies.currentTab == 0 && 
+      (this.commentForm != undefined) &&
+      ($('textarea',this.more).length > 0) &&
+      ($('textarea',this.more).val().length > 1))
+        return true;
+    else return false;
   },
   
   isOpen:function(){
