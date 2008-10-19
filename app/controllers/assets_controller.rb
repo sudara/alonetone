@@ -249,6 +249,7 @@ class AssetsController < ApplicationController
   end
   
   def register_listen
+    @agent = request.user_agent.downcase
     @asset.listens.create(
       :listener     => current_user || nil, 
       :track_owner  => @asset.user, 
@@ -259,12 +260,14 @@ class AssetsController < ApplicationController
   
   def bot?
     return true unless present? request.user_agent 
-    agent = request.user_agent.downcase
-    not @@valid_listeners.any?{ |listener| agent.include? listener } || 
-    agent.include?('bot')
+    not browser? or @agent.include?('bot')
+  end
+  
+  def browser?
+    @@valid_listeners.any?{|valid_agent| @agent.include? valid_agent} 
   end
   
   def abuser?
-    request.user_agent and request.user_agent.downcase =~/mp3bot/
+    request.user_agent and @agent =~/mp3bot/
   end
 end

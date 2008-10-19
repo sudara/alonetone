@@ -55,7 +55,7 @@ describe UsersController, "permissions" do
   
     it "should let a user or admin update their profile" do
       login_as(user)
-      put :update, :id => 'arthur', :user => {:login => 'arthur', :bio => 'a little more about me'}
+      put :update, :user => {:login => 'arthur', :bio => 'a little more about me'}
       response.should be_success
     end
   end
