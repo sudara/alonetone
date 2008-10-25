@@ -12,7 +12,7 @@ require 'tasks/rails'
 # Borrow & modified from spot-us project
 desc "Copy application sample config for dev/test purposes"
 task :copy_sample_config do
-  if Rails.env.development? or Rails.env.test?
+  if Rails.env == 'development' or Rails.env == 'test'
     
     %w[alonetone amazon_s3 database defensio facebooker newrelic].each do |settings|
       settings_file         = File.join(Rails.root, *%W(config #{settings}.yml))
