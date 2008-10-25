@@ -7,7 +7,7 @@ class User
   before_save :normalize_itunes_url
   
   def normalize_itunes_url
-    self.itunes = itunes.to_s.strip.downcase.gsub(/http\:\/\//, "")
+    self.itunes = itunes.to_s.strip.gsub(/http\:\/\//, "")
   end
   
   def has_public_playlists?
