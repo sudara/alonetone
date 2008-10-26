@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery  :secret => ALONETONE.secret
     
   include AuthenticatedSystem
-  include ExceptionLoggable
   before_filter :set_tab, :ie6, :is_sudo
   before_filter :ie6
   before_filter :login_by_token, :display_news
