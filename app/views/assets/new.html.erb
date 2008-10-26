@@ -18,13 +18,13 @@
 	</div>
     <% if current_user.plus_enabled? %>
 	<div class="upload box">
-	    <h2 class="box">Upload wav/aif source files</h2>
+	    <h2 class="box">Upload wav/aif/zip source files</h2>
 	    <div class="static_content">
 	        <%= render :partial => 'source_files/form' if current_user.plus_enabled? %>
 	    </div> 
 	    <div class="static_content">
             <strong>Congrats!</strong> Your alonetone account has been pimped out with alonetone PLUS&reg;.
-            You may upload wav/aif files up to 100MB each. They remain hidden unless you give out the link.<br/><br/>
+            You may upload wav/aif/zip files up to 150MB each. They remain hidden unless you give out the link.<br/><br/>
             Forge ahead, you crafty musician, you!
       </div>
 	</div>

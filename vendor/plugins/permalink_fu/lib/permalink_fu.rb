@@ -5,18 +5,21 @@ module PermalinkFu
     attr_accessor :translation_to
     attr_accessor :translation_from
     
-    def escape(str)
-      begin # this can fail when its passed japanese characters
-        s = Iconv.iconv(translation_to, translation_from, str).to_s
-      rescue Iconv::InvalidCharacter
-        s = 'untitled'
-      end
-      s.gsub!(/\W+/, ' ') # all non-word chars to spaces
-      s.strip!            # ohh la la
-      s.downcase!         #
-      s.gsub!(/\ +/, '-') # spaces to dashes, preferred separator char everywhere
-      s = (s.blank? ? 'untitled' : s)
-      s
+    # This method does the actual permalink escaping.
+    def escape(string)
+      result = ((translation_to && translation_from) ? Iconv.iconv(translation_to, translation_from, string) : string).to_s
+      result.gsub!(/[^\x00-\x7F]+/, '') # Remove anything non-ASCII entirely (e.g. diacritics).
+      result.gsub!(/[^\w_ \-]+/i,   '') # Remove unwanted chars.
+      result.gsub!(/[ \-]+/i,      '-') # No more than one of the separator in a row.
+      result.gsub!(/^\-|\-$/i,      '') # Remove leading/trailing separator.
+      result.downcase!
+      result.size.zero? ? random_permalink(string) : result
+    rescue
+      random_permalink(string)
+    end
+    
+    def random_permalink(seed = nil)
+      Digest::SHA1.hexdigest("#{seed}#{Time.now.to_s.split(//).sort_by {rand}}")
     end
   end
   
