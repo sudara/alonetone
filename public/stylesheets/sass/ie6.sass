@@ -1,9 +1,26 @@
 // first, some layout help
 
+*
+  :zoom 1
+
 // footer can't be fixed
+
+#content
+  :margin-top 110px
+
 #footer,#footer_expandable
   :position relative
   :clear both
+
+#footer
+  #update
+    :top 26px
+  a#creative
+    :display none
+
+#footer_expandable
+  :background-color #C1CAB3
+  :height 250px
 
 #header
   :position absolute
@@ -44,25 +61,49 @@ div.notice, div.errorExplanation
 div.flash
   :background-image url(../images/backgrounds/ie/flash.jpg) 
 a.arrows, a.view_more, a.view_all,a.edit
-  :background-image url(../images/buttons/ie/arrow.gif)   
+  :background-image url(../images/buttons/ie/arrow.gif)
   
+div.footer_box  
+  a.view_all_kicking_ass
+    :background-image url(../images/icons/ie/view_all_kicking_ass.gif)
+  a.view_all_comments
+    :background-image url(../images/icons/ie/view_all_comments.gif)
+  a.view_all_favorites
+    :background-image url(../images/icons/ie/view_all_favorites.gif)
+  a.view_feature
+    :background-image url(../images/icons/ie/view_feature.gif)
+  a.view_all_recent_music
+    :background-image url(../images/icons/ie/view_all_recent_music.gif)
+    
+div.footer_box.onepx
+  :margin-top 1px
   
 // alonetone.sass
+
+#header
+  a#logo
+    :background none
+    :filter progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/alonetone_big.png', sizingMethod='scale')
 
 span.current, a:hover
   :background-image url(../images/backgrounds/ie/user_bar_selected.jpg)
 .mini_paginator
   :background-image url(../images/backgrounds/ie/user_bar.jpg)
-#top_bar #login
-  :background-image url(../images/buttons/ie/login.jpg) 
-#top_bar #logout 
-  :background-image url(../images/buttons/ie/logout.jpg) 
-#top_bar  
-  a#halp
-    :background-image url(../images/buttons/ie/halp.jpg) 
+
+#top_bar
+  a#radio_button
+    :background-image url(../images/nav/ie/radio.gif)
+  a#halp_button
+    :background-image url(../images/nav/ie/halp.gif) 
+  a#about_button
+    :background-image url(../images/nav/ie/about.gif)
+  a#login_button
+    :background-image url(../images/nav/ie/login.gif) 
+  a#logout_button
+    :background-image url(../images/nav/ie/logout.gif)
   div#search
-    a
-      :background-image url(../images/buttons/ie/search.jpg) 
+    a#search_button
+      :background-image url(../images/nav/ie/search.gif) 
 
 .comment, .user_report, .update, .listen
   .comment_user, .update_title_bar
@@ -84,16 +125,21 @@ span.current, a:hover
 
 #static_header
   .pagination
-    :background-image url(../images/backgrounds/ie/user_bar.jpg)
-    
-    
-    
+    :background-image url(../images/backgrounds/ie/user_bar.jpg)  
+
+h2#latest_comments
+  :background-image url(../images/icons/ie/comments.gif)
+h2#latest_uploaded
+  :background-image url(../images/icons/ie/latest.gif)
+h2#kicking_ass
+  :background-image url(../images/icons/ie/stars.gif)
+   
 // nav.sass
 
 ul#nav
   li
     a
-      :background-image url(../images/buttons/ie/nav.jpg)
+      :background-image url(../images/buttons/ie/nav.gif)
 
 
 
@@ -107,18 +153,25 @@ ul#nav
     :background-image url(../images/backgrounds/ie/album.jpg) 
   .empty
     :background-image url(../images/backgrounds/ie/flash.jpg) 
-    
-    
-    
-    
-    
+
+#playlists_carousel
+  .next
+    :background-image url(../images/buttons/ie/next.gif)
+    :right 40px
+  .prev
+    :background-image url(../images/buttons/ie/prev.gif)
+  a.jewel_case_125
+    :background none
+    :filter progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/jewel-case-125.png', sizingMethod='crop')
+    :cursor pointer
+  a.small_playlist_title:hover
+    background:none
 // tabs
 
 .content ul.ui-tabs-nav 
   :background-image url(../images/backgrounds/ie/tabs.jpg)
   a 
     :background-image url(../images/backgrounds/ie/tabs.jpg)
-
 
 // tracks
 

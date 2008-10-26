@@ -9,6 +9,7 @@ a.next, a.prev
   :width 42px
   :height 42px
   :background-color transparent
+  :text-indent -9999px
   &:hover img
     :background-color = !body_link_hover
   &.disabled
@@ -22,10 +23,12 @@ a.next, a.prev
     :position absolute
     :left 0
     :top 45px
+    :background-image url(../images/buttons/prev.png)
   .next
     :position absolute
     :right 0
     :top 45px
+    :background-image url(../images/buttons/next.png)
 .playlists_carousel
   :height 190px
   :width 800px
@@ -40,17 +43,22 @@ li.small_playlists
   :margin-right 50px
   :margin-bottom 100px
   a.small_playlist_title
-    :display block
     :text-align center
     :font-size = 12px
-    :margin-left 1px
-    :margin-top 10px
+    :position absolute
+    :top 140px
+    :left 0px
+    :width 146px
        
 a.jewel_case_125
   :position absolute
   :left 0 
   :top 0
   :background-color transparent
+  :text-indent -9999px
+  :width 146px
+  :height 136px
+  :background-image url(../images/jewel-case-125.png)
   
 img.cover_125
   :width 125px

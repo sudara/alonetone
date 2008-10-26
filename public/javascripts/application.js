@@ -127,7 +127,7 @@ jQuery.timer = function (interval, callback)
 jQuery.easing.def = "jswing"
 
 // png fix if ie
-$(function(){$(document).pngFix();});
+// $(function(){$(document).pngFix();});
 
 
 // front page carousel
