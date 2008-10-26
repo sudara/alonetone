@@ -1,7 +1,6 @@
 <div id="user_index">
 
-  <div id="static_header">
-  
+  <div id="static_header">  
     <div class="title">
       <h1 class="static">Browse all alonetone artists</h1>
     </div>
@@ -15,7 +14,7 @@
        <%= user_nav_item "recently joined", {:action => 'index', :sort => 'recently_joined'} %>
        <%= user_nav_item "by location", {:action => 'index', :sort => 'map'} %>
       </ul>
-          <%= will_paginate @users if @users%>
+      <%= will_paginate @users if @users%>
     </div>
   </div>
   
@@ -27,7 +26,6 @@
     <% end %>
     <div class="clear"> </div>
   </div>
-
 
   <div style="float:none;clear:both;"> </div>
 </div>
