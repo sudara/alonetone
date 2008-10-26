@@ -48,7 +48,7 @@ class SourceFilesController < ApplicationController
     end
     if @source_files.empty?
       flash[:error] = "Well, either you didn't upload anything, " << 
-                      "it wasn't an aiff/wav, or we're failing you somehow"
+                      "it wasn't an aiff/wav/zip, or we're failing you somehow"
                       
       redirect_to new_user_track_path(current_user)
     else
