@@ -19,7 +19,7 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
     xml.itunes :author, 	@user.name
 		xml.itunes :subtitle, "#{@user.name} on alonetone.com"
 		xml.itunes :summary, 	@user.bio || "Latest music from #{@user.name} on alonetone.com"
-		xml.itunes :keywords, 'independant free alonetone musician artist latest upcoming'
+		xml.itunes :keywords, "independant free alonetone musician artist latest upcoming do-it-yourself DIY #{@user.name} #{@user.login}"
 		xml.itunes :image, :href=>@user.avatar(:album)
 		
 		xml.itunes :owner do

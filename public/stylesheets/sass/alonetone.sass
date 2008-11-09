@@ -188,14 +188,7 @@
 
 .comment, .user_report, .update, .listen
   :position relative
-  :color = !text_color
-  .comment_user, .update_title_bar
-    :background url(../images/backgrounds/comment_even.png) repeat-x top left
-    :background-color = !box_background
-  &.even
-    .comment_user
-      :background-image url(../images/backgrounds/comment.png)
-      :background-color = !box_background_even
+  :color = !white
   div.private_comment
     :background url(../images/icons/private.png) no-repeat top left
     :position absolute
@@ -205,42 +198,32 @@
     :width 25px
     :height 25px
   .comment_user, .update_title_bar
-    :position relative
-    :height 50px
-    :margin-bottom 1px
     a.alonetoner, img
+      :margin-top 1px
       :float left
       :margin-right 10px
-    .comment_user_text, .about_details
-      :line-height 10px
-      :font-size 11px
-      a
-        :font-size 11px
-    .comment_about, .title
-      :line-height 18px
-      :padding-top 8px      
-    a
+  .comment_user_text 
+    :color = !white
+    :margin-left 73px
+    :padding-top 10px
+    :font-size 12px
+    :text-shadow #000 1px 1px 1px
+    a,a:visited
       :font-weight bold
-    .edit
-      :position absolute
-      :top 15px
-      :right 10px
-      a
-        :font-size 12px
-        :text-decoration underline
-      .edit
-        :right 25px
+      :color = !white
+      :text-decoration underline
+      :font-size 12px
+      :text-shadow #000 1px 1px 1px
   .comment_body, .body
-    :background-color = !box_background
-    :padding 10px 20px 30px 20px
+    :padding 5px 20px 30px 0px
     :margin-bottom 3px
+    :margin-left 73px
     a
-      :color = !text_color
-    .comment_about
-      a
-        :font-weight bold
+      :color = !white
+      :text-shadow #000 1px 1px 1px
     p
-      :color = !text_color
+      :color = !white
+      :text-shadow #000 1px 1px 1px
       :margin 16px 0px 0px 0px
       :line-height 18px
     h1,h2,h3
@@ -249,9 +232,7 @@
       :color = !text_color
       :font-size 16px
       :font-weight bold
-  &.even 
-    .comment_body, .body
-      :background-color = !box_background_even
+
       
 .comment_form
   .comment_as
@@ -493,7 +474,7 @@ a.add_to_favorites, a.favorited
   .chunk
     :padding-top 20px
     :float left
-    :width 300px
+    :width 270px
     :text-align center
     a
       img 
