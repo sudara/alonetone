@@ -1,4 +1,4 @@
-<% unless @single_track %>
+<% if not @single_track and comment.commentable_type == 'Asset'%>
   <%= render :partial => 'assets/asset', :locals => { :asset => comment.commentable}%>
 <% end %>
 
