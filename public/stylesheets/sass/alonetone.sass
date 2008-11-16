@@ -186,7 +186,7 @@
       
 // comments
 
-.comment, .user_report, .update, .listen
+.comment, .listen
   :position relative
   :color = !white
   div.private_comment
@@ -250,6 +250,57 @@
 // give the posts some breathing room
 .update
   :margin-bottom 50px
+  .update_title_bar
+    :position relative
+    :height 50px
+    :margin-bottom 1px
+    :background url(../images/backgrounds/comment_even.png) repeat-x top left
+    :background-color = !box_background
+  a.alonetoner, img
+    :margin-top 1px
+    :float left
+    :margin-right 10px
+  .comment_user_text, .about_details
+    :padding 0
+    :line-height 10px
+    :font-size 11px
+    :color = !text_color
+    :text-shadow none  
+    a
+      :font-size 11px
+    .comment_about, .title
+      :line-height 18px
+      :padding-top 8px 
+      :color = !text_color
+      :text-shadow none     
+  .body,.comment
+    :background-color = !box_background
+    :padding 10px 20px 10px 20px
+    :margin-bottom 3px
+    :text-shadow none
+    a
+      :color = !text_color
+      :text-shadow none
+    .comment_about
+      a
+        :font-weight bold
+    p
+      :color = !text_color
+      :margin 16px 0px 0px 0px
+      :line-height 18px
+      :text-shadow none
+    h1,h2,h3
+      :margin-top 32px
+      :margin-bottom 12px
+      :color = !text_color
+      :font-size 16px
+      :font-weight bold
+  .comment.even, .body.even
+    :background-color = !box_background_even
+  .comment_form
+    a
+      :color = !text_color
+    
 
 .user_report .comment_user 
   .title

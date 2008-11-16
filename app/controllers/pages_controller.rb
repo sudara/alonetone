@@ -29,6 +29,13 @@ class PagesController < ApplicationController
   def stats
     @page_title = "Listening and Song Statistics"
     @number_of_musicians = User.musicians.count
+    @comments_per_user = User.average('comments_count').ceil
+    @average_length_of_track = Asset.formatted_time(Asset.average('length').ceil)
+    @listens_per_track = Asset.average('listens_count').ceil
+    @listens_per_user = User.average('listens_count').ceil
+    @tracks_per_user = User.average('assets_count').ceil
+    @listens_per_week_per_track = Asset.average('listens_per_week').ceil
+    @posts_per_user = User.average('posts_count')
   end
   
   def actually_going_somewhere_with_facebooker_and_rails

@@ -3,19 +3,26 @@
     Statistics: Watch alonetone grow
   .box
     %h2.box
-      Currently in stock
+      Currently on alonetone
     .static_content 
+      %strong
+        =@number_of_musicians
+      real-life musicians
+      %br
       %strong
         =Asset.count
       original &amp; legally uploaded mp3s
       %br
+      To listen to all songs, it would take you 
       %strong
         =Asset.days
-      days of continuous free music 
+      days 
       %br
       %strong 
         =Asset.gigs
       gigabytes of ones and zeros
+      %br
+
   .box 
     %h2.box
       Total amount of uploaded mp3s to alonetone
@@ -44,3 +51,34 @@
       Where folks listen from
     .static_content
       =image_tag Listen.source_chart
+  .box
+    %h2.box
+      Fun alonetone averages
+    .static_content 
+      %strong
+        =@tracks_per_user
+      tracks uploaded by the average alonetoner
+      %br
+      %strong
+        =@listens_per_track
+      listens to the average track
+      %br
+      %strong
+        =@listens_per_user
+      listens to the average alonetoner
+      %br
+      Average length of the 
+      =Asset.count
+      uploaded mp3s is 
+      %strong
+        =@average_length_of_track
+      %br
+      %br
+      %strong 
+        =@comments_per_user
+      comments per alonetoner
+      %br
+      %strong
+        =@posts_per_user
+      posts per alonetoner to the 
+      =link_to 'forums', forums_path
