@@ -20,6 +20,16 @@
       <div id="track_details" class="static_content">
           <h1>About "<%=h @asset.title %>"</h1>
           <p><%= @asset.description %></p>
+          
+        <% if playlist = @asset.first_playlist %>
+        From the album / playlist <%= link_to h(playlist.title), user_playlist_path(@asset.user,playlist)%>
+        <div class="min_height_50">
+        <div class="mini_cover">
+          	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(@asset.user,playlist), :class => 'jewel_case_50') %>
+            <%= image_tag(playlist.cover(:small), :class => 'cover_50') %>
+        </div>
+        </div>
+        <% end %>
       </div>
      <% end %>
      
