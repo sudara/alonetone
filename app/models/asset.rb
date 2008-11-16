@@ -60,7 +60,7 @@ class Asset < ActiveRecord::Base
   has_one :first_playlist,
     :source      =>  :playlist,
     :through     =>  :tracks,
-    :conditions  => {'tracks.is_favorite' => false},
+    :conditions  => {'playlists.is_favorite' => false, 'tracks.is_favorite' => false},
     :order       => 'tracks.created_at ASC',
     :include     => :pic  
   
