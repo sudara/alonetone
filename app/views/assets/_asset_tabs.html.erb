@@ -17,18 +17,26 @@
                 <%= user_image_link(asset.user, :small)%>
             </div>
             <div class="description">
+                <div class='min_height_50'>
                 <h3><%=h asset.name %></h3>
-                <%= truncate((asset.description), 260) %>
+                <%= awesome_truncate((asset.description), 260, 
+                  ('... '+link_to('(more)',user_track_path(asset.user, asset)))) %>
                 <% if authorized_for(asset) && !asset.present?(:description) %>
-                    <span class="hint"><%= link_to 'Add a description now',edit_user_track_path(asset.user, asset),:class => :hint %> to help listeners find your music</span>
+                    <span class="hint">
+                    <%= link_to 'Add a description now',edit_user_track_path(asset.user, asset),:class => :hint %> 
+                    to help listeners find your music
+                    </span>
                 <% end %>
+                </div>
                
                 <% if playlist = asset.first_playlist %>
+                  <div class="min_height_50">
           		    <div class="mini_cover">
           		      	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(asset.user,playlist), :class => 'jewel_case_50') %>
                       <%= image_tag(playlist.cover(:small), :class => 'cover_50') %>
                   </div>
                   From the album / playlist <%= link_to h(playlist.title), user_playlist_path(asset.user,playlist)%>
+            	    </div>
             	  <% end %>
             	  
                 <div class="stats">

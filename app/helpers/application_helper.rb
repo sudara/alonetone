@@ -46,6 +46,18 @@ module ApplicationHelper
   def track_name_for(asset, length=40)
     truncate(h(asset.name),length)
   end
+  
+  # Awesome truncate
+  # First regex truncates to the length, plus the rest of that word, if any.
+  # Second regex removes any trailing whitespace or punctuation (except ;).
+  # Unlike the regular truncate method, this avoids the problem with cutting
+  # in the middle of an entity ex.: truncate("this &amp; that",9)  => "this &am..."
+  # though it will not be the exact length.
+  def awesome_truncate(text, length = 30, truncate_string = "...")
+    return if text.nil?
+    l = length - truncate_string.chars.length
+    text.chars.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
+  end
 
   def link_to_play(asset, referer=nil)
     link_to ' ', formatted_user_track_path(asset.user.login, asset.permalink, :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
