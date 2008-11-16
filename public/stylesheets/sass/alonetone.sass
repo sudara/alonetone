@@ -186,7 +186,7 @@
       
 // comments
 
-.comment, .listen
+.comment
   :position relative
   :color = !white
   div.private_comment
@@ -197,7 +197,7 @@
     :left -4px
     :width 25px
     :height 25px
-  .comment_user, .update_title_bar
+  .comment_user
     a.alonetoner, img
       :margin-top 1px
       :float left
@@ -227,6 +227,11 @@
       :margin 16px 0px 0px 0px
       :line-height 18px
       :margin-top 13px
+    .comment_controls
+      :float right
+      a
+        :font-size 11px
+        :font-weight normal
     h1,h2,h3
       :margin-top 32px
       :margin-bottom 12px
@@ -314,11 +319,21 @@
         :color = !text_color
     
 .listen 
-  .comment_user
-    .comment_about
-      :font-size 12px
+  :position relative
+  :height 25px
+  :width 100%
+  :background-color = !box_background
+  .listen_user
+    :float left
+    :margin-right 10px
+  .listen_details
+    :font-size 12px
+    :float left
     a 
       :font-size 12px
+  &.even
+    :background-color = !box_background_even
+
 
 // user layout & static header (with nav)
 #user_header, #static_header
