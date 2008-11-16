@@ -57,6 +57,12 @@ class Asset < ActiveRecord::Base
     :order      =>  'tracks.created_at DESC', 
     :include    =>  :pic
   
+  has_one :first_playlist,
+    :source      =>  :playlist,
+    :through     =>  :tracks,
+    :conditions  => {'tracks.is_favorite' => false},
+    :order       => 'tracks.created_at ASC',
+    :include     => :pic  
   
   has_many :comments, 
     :as         => :commentable,  
@@ -79,7 +85,7 @@ class Asset < ActiveRecord::Base
   # the attachment_fu callback is actually named after_resize
 
 
-    # Generates magic %LIKE% sql statements for all columns
+  # Generates magic %LIKE% sql statements for all columns
   def self.conditions_by_like(value, *columns) 
     columns = self.content_columns if columns.size==0 
     columns = columns[0] if columns[0].kind_of?(Array) 
@@ -89,7 +95,11 @@ class Asset < ActiveRecord::Base
     }.join(" OR ") 
   end
   
-  # needed in case we've got multiple assets on the same page
+  def self.latest(limit=10)
+    find(:all, :include => [:user, :first_playlist], :limit => limit, :order => 'assets.created_at DESC')
+  end
+  
+  # needed for views in case we've got multiple assets on the same page
   def unique_id
     object_id
   end

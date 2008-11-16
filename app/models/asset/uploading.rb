@@ -79,10 +79,6 @@ class Asset
   rescue TypeError => e
     logger.warn("User tried to upload too small file");
   end
-  
-  def self.latest(limit=10)
-    find(:all, :include => :user, :limit => limit, :order => 'assets.created_at DESC')
-  end
 
   class << self
     def movie?(content_type)

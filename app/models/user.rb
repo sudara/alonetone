@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
 
   # The following attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
-                  :bio, :display_name, :itunes, :settings, :city, :country
+                  :bio, :display_name, :itunes, :settings, :city, :country, :twitter
   
   before_create :make_first_user_admin, :make_activation_code
   

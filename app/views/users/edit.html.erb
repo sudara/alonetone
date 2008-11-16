@@ -29,18 +29,33 @@
         <label for="user_website">Did you set up your <%= link_to 'alonetone iTunes podcast?', halp_path(:itunes) %></label><br />
         http://<%= f.text_field :itunes %><br/><br/>
 
-	    <%= link_to("Change your password",'#edit_password',:class=>'slide_open_href') %>
+        <label for "user_myspace">Trendy (or dorky) enough to be on <%= link_to 'twitter', 'http://twitter.com'%>?</label><br/>
+        http://twitter.com/<%= f.text_field :twitter%><br/><br/>
+
+	      <%= link_to("Change your login and alonetone address", '#edit_login', :class=>'slide_open_href')%><br/>
+
+	      <%= link_to("Change your password",'#edit_password',:class=>'slide_open_href') %>
+	      
     </div>
   	  
-  	  <div id="edit_password" class="static_content" style="display:none">
-    		Enter your desired new password twice, please:<br/>
-    		<%= f.password_field :password %><br/>
-    		<%= f.password_field :password_confirmation %>
-  	  </div>
-  	  
-  	  <div class="static_content">
-  	    <%= submit_tag "Update Your Profile" %>
-  	  </div>
+	  <div id="edit_password" class="static_content" style="display:none">
+  		Enter your desired new password twice, please:<br/>
+  		<%= f.password_field :password %><br/>
+  		<%= f.password_field :password_confirmation %>
+	  </div>
+	  
+	  <div id="edit_login" class="static_content" style="display:none">
+  		Enter your new login. <br/>
+  		WARNING: Changing this will break any mp3 players
+  		you or anyone else has put on the web, as well as any links anyone has passed around
+  		to your music, as well as confuse google about where your music is for a few weeks.<br/>
+  		Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.<br/>
+  		http://alonetone.com/<%= f.text_field :login %><br/>
+	  </div>
+	  
+	  <div class="static_content">
+	    <%= submit_tag "Update Your Profile" %>
+	  </div>
   	<% end -%>
   </div>
   <% end %>

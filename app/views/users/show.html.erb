@@ -2,17 +2,17 @@
 
 	<div id="user_home">
 	    <% if authorized? %>
-	    <div class="additional_options">
-		    <div class="button_wrapper">
-		    <%= link_to " ", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
-		    </div>
-            <% if @user.playlists.public.size > 2 %>
-    		    <div class="button_wrapper">
-    		    <%= link_to " ", sort_user_playlists_path(@user), :id => 'change_playlist_order', :class => 'button'  %>
-    		    </div>
-		    <% end %>
-		</div>
-		<% end %>
+  	    <div class="additional_options">
+  		    <div class="button_wrapper">
+  		        <%= link_to " ", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
+  		    </div>
+          <% if @user.playlists.public.size > 2 %>
+  		      <div class="button_wrapper">
+  		          <%= link_to " ", sort_user_playlists_path(@user), :id => 'change_playlist_order', :class => 'button'  %>
+  		      </div>
+  		    <% end %>
+  		  </div>
+		  <% end %>
 		
 		<% if @user.has_public_playlists? %>
 			<h2 id="user_latest_playlists">Latest Playlists by <%=@user.name%></h2>
@@ -20,22 +20,25 @@
 			<div class="clear"> </div>
 		<% end %>
 	
+	
 		<% content_for :left do %>
-        	<%= render :partial => 'latest' if @user.assets_count > 0 %>
+        <%= render :partial => 'latest' if @user.assets_count > 0 %>
 
-    	    <%= render :partial => 'favorites' if present?(@favorites) %>
+    	  <%= render :partial => 'favorites' if present?(@favorites) %>
     
-            <%= render :partial => 'mostly_listens_to' if @mostly_listens_to.size > 2 %>
-    	    <%= render :partial => 'listens' if @listens.size > 0 %>	
+        <%= render :partial => 'mostly_listens_to' if @mostly_listens_to.size > 2 %>
+    	  
+    	  <%= render :partial => 'listens' if @listens.size > 0 %>	
+    		
     		<%= image_tag @user.track_plays_graph if authorized? %>
-    	    <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
-	    <% end %>
+    	  
+    	  <%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+	  <% end %>
 	  
 	  <% content_for :right do %>
-    	    <%= render :partial => 'popular' if present?(@popular_tracks) && setting('most_popular', @user)%>
-    	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
+    	  <%= render :partial => 'popular' if present?(@popular_tracks) && setting('most_popular', @user)%>
+    	  <%= render :partial => 'shared/comments' if @comments.size > 0 %>
 	  <% end %>	
-		
 		
 	</div>
 	

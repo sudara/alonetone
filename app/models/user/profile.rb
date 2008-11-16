@@ -22,7 +22,6 @@ class User
     favorite_asset_ids.include?(asset.id)
   end
 
-
   def dummy_pic(size)
     case size
       when :album then 'no-pic-200.png'

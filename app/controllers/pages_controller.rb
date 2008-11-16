@@ -28,6 +28,7 @@ class PagesController < ApplicationController
   
   def stats
     @page_title = "Listening and Song Statistics"
+    @number_of_musicians = User.musicians.count
   end
   
   def actually_going_somewhere_with_facebooker_and_rails

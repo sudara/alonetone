@@ -26,7 +26,8 @@ class Playlist < ActiveRecord::Base
   validates_presence_of :description
   
   has_permalink :title
-   # make sure we update permalink when user changes title
+  
+  # make sure we update permalink when user changes title
   before_validation_on_create  :auto_name_favorites
   before_save  :create_unique_permalink
   before_update :set_mix_or_album

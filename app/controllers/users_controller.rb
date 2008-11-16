@@ -135,7 +135,7 @@ class UsersController < ApplicationController
   def update
     @user.attributes = params[:user]
     # temp fix to let people with dumb usernames change them
-    # @user.login = params[:user][:login] if not @user.valid? and @user.errors.on(:login)
+    @user.login = params[:user][:login] if not @user.valid? and @user.errors.on(:login)
     respond_to do |format|
       format.html do 
         if @user.save 
