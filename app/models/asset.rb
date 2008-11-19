@@ -96,7 +96,7 @@ class Asset < ActiveRecord::Base
   end
   
   def self.latest(limit=10)
-    find(:all, :include => [:user, :first_playlist], :limit => limit, :order => 'assets.created_at DESC')
+    find(:all, :include => [:user], :limit => limit, :order => 'assets.created_at DESC')
   end
   
   # needed for views in case we've got multiple assets on the same page
