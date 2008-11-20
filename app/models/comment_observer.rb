@@ -12,6 +12,6 @@ class CommentObserver < ActiveRecord::Observer
   
   def user_wants_email?(user)
     # anyone who doesn't have it set to false, aka, opt-out
-    user.settings && (user.settings[:email_comments] != "false")
+    (user.settings == nil) || (user.settings[:email_comments] != "false")
   end
 end
