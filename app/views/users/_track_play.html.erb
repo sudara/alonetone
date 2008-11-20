@@ -1,18 +1,18 @@
 <% div_for track_play, :class => (cycle('even', 'odd')) do %>
   <div class="listen_user">
     	<% if track_play.listener %>
-        <%= user_image_link(track_play.listener, :tiny)%>
+        <%= user_image_link(track_play.listener, :small)%>
     		<% else %>
-    			<%= image_tag User.dummy_pic(:tiny)%>
+    			<%= image_tag User.dummy_pic(:small)%>
     	<% end %>
    </div>
 	  <div class="listen_details">
 	    <strong><%= link_to h(track_play.asset.name), user_track_path(track_play.asset.user, track_play.asset) %></strong><br/>
 	    <%= time_ago_in_words(track_play.created_at) %> ago 
   	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) : 
-  	  "Guest #{present?(track_play.ip) ? '('+track_play.ip+')': ''}" %> via 
-  	  <%= link_source(track_play.source) %>
+  	  "Guest #{present?(track_play.ip) ? '('+track_play.ip+')': ''}" %> 
+  	  <br/>via <%= link_source(track_play.source) %>
 	  </div>
-    <%= present?(track_play.ip) ? image_tag('http://api.hostip.info/flag.php?ip='+track_play.ip, :height => '24', :style => 'float:right; clear:none;') : ''%>
+    <%= present?(track_play.ip) ? image_tag('http://api.hostip.info/flag.php?ip='+track_play.ip, :size => '80x40', :style => 'float:right; clear:none;opacity:0.4;') : ''%>
 <% end %>
 <div class="clear"> </div>
