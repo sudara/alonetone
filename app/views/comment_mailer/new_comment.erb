@@ -1,0 +1,18 @@
+Hey there <%= @name %>,
+
+You got a new comment on your track "<%= @song %>". <%= @number_of_comments > 1 ? 'That makes '+ @number_of_comments.to_s+'!' : ''%>
+
+-----8<-------------------------
+
+<%= @commenter %> says:
+
+<%= @comment %>
+
+-----8<-------------------------
+
+
+Check out all your comments at:
+http://alonetone.com/<%=@login%>/comments
+
+Don't want positive feedback on your tracks via email? Unsubscribe:
+http://alonetone.com/users/<%=@login%>/edit
