@@ -2,7 +2,7 @@ class CommentMailer < ActionMailer::Base
   
 
   def new_comment(comment, asset, sent_at = Time.now)
-    subject    "[alonetone] Comment on #{asset.name} from #{person_who_made(comment)}"
+    subject    "[alonetone] Comment on '#{asset.name}' from #{person_who_made(comment)}"
     recipients comment.user.email
     from       'noreply@alonetone.com'
     sent_on    sent_at
