@@ -1,8 +1,8 @@
 class CommentObserver < ActiveRecord::Observer
   def after_create(comment)
     if !comment.spam? and 
-        user_wants_email?(comment.user) and 
         comment.commentable.class == Asset and
+        user_wants_email?(comment.user) and 
         comment.user != comment.commenter
       CommentMailer.deliver_new_comment(comment, comment.commentable) 
     end
