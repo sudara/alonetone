@@ -148,7 +148,7 @@ module Defensio
           # raising an error here simply makes alonetone dependent upon uptime of Defensio, which is sketchy
           # raise Defensio::Error, response.message unless response.success?
           self.signature = response.signature
-          self.spam      = response.spam
+          self.spam      = response.spam || false
           self.spaminess = response.spaminess
           save(false)
         end
