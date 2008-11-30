@@ -11,13 +11,16 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-    @users = User.paginate_by_params(params) unless params[:sort] == 'map'
+
     respond_to do |format|
       format.html do
+        @users = User.paginate_by_params(params) 
         @user_count = User.count
         @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
       end
-      format.fbml
+      format.fbml do
+        @users = User.paginate_by_params(params) 
+      end
       format.xml do
         @users = User.activated.search(params[:q], :limit => 1000)
         render :xml => @users.to_xml
@@ -25,8 +28,10 @@ class UsersController < ApplicationController
       format.rss do
         @users = User.activated.geocoded.find(:all, :limit => 1000)
       end
+      # API 
       format.js do
-          render :partial => 'users.html.erb'
+        @users = User.musicians.find(:all, :select => 'login, display_name')
+        render :json => @users.to_json
       end
      # format.fbml do
      #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])
