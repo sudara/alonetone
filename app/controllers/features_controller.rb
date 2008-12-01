@@ -56,7 +56,7 @@ class FeaturesController < ApplicationController
 
   # GET /features/1/edit
   def edit
-    @users = User.alpha.musicians
+    @users = User.alpha
     @assets = @feature.featured_user.assets
   end
 
