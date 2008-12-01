@@ -38,6 +38,7 @@
            <div class="pic">
            <%= user_image_link(@feature.featured_user, :album) %>
            </div>
+           <% if @user.has_tracks? %>
            <div class="stats">
                joined alonetone <strong><%=h @user.created_at.to_date.to_s(:long) %></strong><br/>
                <%= link_to "#{@user.playlists.public.size} albums/mixes", user_playlists_path(@user) if @user.playlists.public.size > 0 %><br/>
@@ -47,6 +48,11 @@
                <%= "This feature viewed #{@feature.views_count} times" if authorized? %>
            </div>
            <%= link_to " ", user_home_path(@user), :class => 'view_more'%>
+           <% else %>
+           <div class="stats">
+             <%= @user.printable_bio %>
+            </div>
+           <% end %>
        </div>
    </div>
    <div class="footer_box">
@@ -54,9 +60,7 @@
    </div>
    
    <%= render :partial => 'featured_tracks'%>
-   <div class="footer_box">
-    <%= link_to ' ', user_tracks_path(@user.login), :class => 'view_more_tracks' %>
-   </div>
-   <%= render :partial => 'users/mostly_listens_to' %>
+
+   <%= render :partial => 'users/mostly_listens_to' if @feature.featured_user.has_tracks? %>
    <%= render :partial => 'shared/comment', :collection => @comments %>
 <% end %>

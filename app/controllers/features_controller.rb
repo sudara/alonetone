@@ -47,7 +47,7 @@ class FeaturesController < ApplicationController
   # GET /features/new.xml
   def new
     @feature = Feature.new
-    @users = User.alpha.musicians
+    @users = User.alpha
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @feature }
