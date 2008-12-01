@@ -1,7 +1,9 @@
 <% div_for feature do %>
     <div class="box">
         <h2><%= link_to "#{h feature.featured_user.name}", feature_path(feature.featured_user.login), :title => "featured alonetone artist: #{feature.featured_user.name}" %> </h2>
+        <% if feature.featured_user.has_tracks? %>
         <h3>Featured alonetone artist (<%= link_to "view all", features_path %>)</h3>
+        <% end %>
         <%= link_to 'edit', edit_feature_path(feature.featured_user.login), :class => 'edit right' if admin? %>
     </div>
     <div class="details clearfix">
