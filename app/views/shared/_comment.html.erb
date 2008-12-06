@@ -1,6 +1,6 @@
 <% if not @single_track and comment.commentable_type == 'Asset'%>
   <%= render :partial => 'assets/asset', :locals => { :asset => comment.commentable}%>
-<% else %>
+<% elsif not @single_track %>
   <h2 class="box comment_header"><%= link_for_comment(comment) %></h2>
 <% end %>
 
