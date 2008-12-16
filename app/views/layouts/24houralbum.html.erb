@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
+    <title>The 24 hour album 2008</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/24houralbum.css">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta content="index,follow" name="robots"/>
+    <meta content="24 hour album. alonetone musicians write 24 minutes of music in 24 hours" name="Description"/>
+		<meta content="alonetone 24hour 24 hour album music EP" name="Keywords" />
+  </head>
+  <body>
+    
+    <div id="wrapper">
+      <div id="left-background">
+      </div>
+      
+      <div id="content">
+        <a id="back-to-alonetone" href="/">
+        </a>
+        <div id="albums">
+          <div id="dec6" class="date"></div>
+          <div class="columns clearfix">
+            <%= yield :dec6thalbums %>
+                      
+          </div>
+          
+          <div id="dec13" class="date"></div>
+          <div class="columns clearfix">
+            <%= yield :dec13thalbums %>
+          </div>
+
+          <div id="betterlate" class="date"></div>
+          
+            <div class="columns text clearfix">
+              Excited by the idea? Don't worry, you didn't miss the boat. There was no boat.
+              
+              You can still do a 24 hour album and get it listed here. Just give Sudara a 
+              heads up on <%= link_to 'the 24 hour album features page', '/features/24houralbum' %>
+              and we'll link up your album here.
+            </div>
+        </div>
+
+        
+      </div>
+      <div id="footer">
+
+      </div>
+    </div>
+    
+    
+  </body>  
+</html>

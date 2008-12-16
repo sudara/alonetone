@@ -2,7 +2,11 @@ require 'bluecloth'
 
 class PagesController < ApplicationController
 
-  class Fuck < StandardError; end
+  class Hell < StandardError; end
+
+  def twentyfour
+    render :layout => '24houralbum'
+  end
 
   def index
     @page_title = "About alonetone, the kickass home for musicians"
@@ -43,7 +47,7 @@ class PagesController < ApplicationController
   end
 
   def answers
-    raise Fuck
+    raise Hell
   end
   
   def not_yet
