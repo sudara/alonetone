@@ -8,12 +8,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments, :member => {:unspam => :get}
     
   # RESTFUL WORKAROUND FOR FACEBOOK
-  map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
-  map.resources 'facebook', :controller => 'facebook_accounts', 
-      :member => {:remove_from_profile => :get},
-      :collection => {:add_to_profile => :any}, # hack, because we're not actually using resources
-      :conditions =>{:canvas => true}
-  #map.facebook_resources :facebook_accounts, 'facebook_accounts', :controller => 'facebook_accounts', :condition => {:canvas => true}
+  # map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
+  # map.resources 'facebook', :controller => 'facebook_accounts', 
+  #     :member => {:remove_from_profile => :get},
+  #     :collection => {:add_to_profile => :any}, # hack, because we're not actually using resources
+  #     :conditions =>{:canvas => true}
+  # map.facebook_resources :facebook_accounts, 'facebook_accounts', :controller => 'facebook_accounts', :condition => {:canvas => true}
 
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
   map.about 'about/:action', :controller => 'pages'

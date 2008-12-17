@@ -149,9 +149,9 @@ class ApplicationController < ActionController::Base
   end
   
   # override default behavior to ensure that 'log in to app' returns user somewhere useful
-  def application_is_not_installed_by_facebook_user
-    redirect_to session[:facebook_session].install_url(:next => "#{request.request_uri}")
-  end
+   # def application_is_not_installed_by_facebook_user
+   #   redirect_to session[:facebook_session].install_url(:next => "#{request.request_uri}")
+   # end
   
   def set_latest_update_title
     @latest_update = Update.find(:all, :order => 'created_at DESC', :limit => 1 ).first

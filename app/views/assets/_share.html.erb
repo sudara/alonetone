@@ -4,11 +4,8 @@
 <div id="share_<%=id%>" class="panel no_border">
     <%= link_to "Home page", user_track_url(object.user, object.permalink) %> for this song:<br/>
     <%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), :size => 40,:class => 'tabbed_input' %> <br/>    
-</div>
-<div class="panel no_border">
-    <%= render :partial => 'assets/add_to_facebook', :object => object if ALONETONE.enable_facebook %>
-</div>
-<div class="clear"> </div>
-<div class="panel no_border">
     <%= link_to "more sharing options", user_track_path(object.user,object.permalink), :class => 'view_more', :style => 'margin:0', :title => "#{h(object.name)}" %>
+    <br/>
+    <br/>
 </div>
+

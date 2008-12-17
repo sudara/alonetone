@@ -4,9 +4,6 @@
     </div>
     <fb:mp3 src="<%= formatted_user_track_url(asset.user, asset, :mp3, :referer=>'facebook', :canvas => false)%>" title="<%= asset.name %>" artist="<%= asset.user.name %>" />
     <div class="clearfix" style="height:30px;padding:10px 0px;">
-     <form action="<%= add_to_profile_facebook_url(:addable_type => 'asset', :addable_id => asset.id) %>" method='POST' >
-        <%= submit_tag "Add track to profile", :class => 'inputsubmit', :style => 'text-align:right' %>
-     </form>
 
      </div>
 
