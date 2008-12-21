@@ -18,8 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
   map.about 'about/:action', :controller => 'pages'
   map.halp  'about/halp/:action', :controller => 'pages'
-  
-  map.logged_exceptions 'logged_exceptions/:action/:id',    :controller => 'logged_exceptions'
+
+  map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
    
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.

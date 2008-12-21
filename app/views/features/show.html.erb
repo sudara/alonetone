@@ -62,5 +62,8 @@
    <%= render :partial => 'featured_tracks'%>
 
    <%= render :partial => 'users/mostly_listens_to' if @feature.featured_user.has_tracks? %>
-   <%= render :partial => 'shared/comment', :collection => @comments %>
+   <h2 class="box">Comments</h2>
+      <% @single_track = true %>
+      <%= render :partial => 'shared/comment', :collection => @comments %>
+
 <% end %>
