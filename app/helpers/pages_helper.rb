@@ -16,7 +16,7 @@ module PagesHelper
     album = type == :playlist ? grab_playlist(permalink) : grab_track(permalink)
     result = '<div class="album">'
     result += link_to image_tag(album[:image]), album[:link], :class => 'pic'
-    result += link_to truncate(album[:title],35), album[:link], :class => 'album_title'
+    result += link_to truncate(album[:title],38), album[:link], :class => 'album_title'
     result += link_to album[:username], album[:link], :class => 'artist_name'
     result += '</div>'
     result

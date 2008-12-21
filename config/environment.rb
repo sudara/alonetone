@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
   config.gem 'json'
   config.gem 'haml'
   config.gem 'newrelic-rpm'
+  config.gem 'hpricot' # for comment processing / markdown fixing
   
   # Rmagick is *not* required (for example, sudara uses imagescience)
   # config.gem 'rmagick',       :lib => 'RMagick'
