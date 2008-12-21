@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'googlecharts',  :lib => 'gchart'
   config.gem 'json'
   config.gem 'haml'
+  config.gem 'newrelic-rpm'
   
   # Rmagick is *not* required (for example, sudara uses imagescience)
   # config.gem 'rmagick',       :lib => 'RMagick'
