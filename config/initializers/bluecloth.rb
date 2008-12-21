@@ -1,6 +1,9 @@
 require 'hpricot'
 class BlueCloth
   
+  # The point is that inside <p> tags, line breaks should = <br> tags
+  # This makes markdown usable by the average joe
+  # No more stupid ass <space><space><line-break> to get <br>s
   def to_html_with_friendly_breaks(lite=false)
     parsed = to_html_without_friendly_breaks(lite)
     return BlueCloth.to_user_friendly_html(parsed)

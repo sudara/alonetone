@@ -75,12 +75,17 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :tracks, :controller => :assets, :member => {:share => :get, :destroy => :any}, :collection => {:latest => :get, :search => :post, :mass_edit => :get}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments
     end
-   
-   # TODO - figure out a way to use :member_path with rails 2
-   # http://dev.rubyonrails.org/changeset/8227
-   # for now, i have to specify port to allow :permalink and :id to be sent at the same time
-   user.resources :playlists, :collection => {:latest => :get, :sort => :any}, :member=> {:set_playlist_title => :post, :set_playlist_description => :post, :attach_pic => :post, :remove_track => :any, :sort_tracks => :post, :add_track => :post, :destroy => :any},:path_prefix => ':login' do |playlist|
-     playlist.resources :comments
+    user.favorites 'favorites', :controller => 'playlists', :action => 'favorites',:path_prefix => ':login'
+    
+    # TODO - figure out a way to use :member_path with rails 2
+    # http://dev.rubyonrails.org/changeset/8227
+    # for now, i have to specify port to allow :permalink and :id to be sent at the same time
+    user.resources :playlists, :collection => {:latest => :get, :sort => :any}, 
+    :member=> {:set_playlist_title => :post, :set_playlist_description => :post, 
+              :attach_pic => :post, :remove_track => :any, :sort_tracks => :post, 
+              :add_track => :post, :destroy => :any},
+    :path_prefix => ':login' do |playlist|
+    playlist.resources :comments
    end
   end
   map.search 'search', :controller => 'search', :action => 'index'

@@ -30,7 +30,7 @@ class PlaylistsController < ApplicationController
          format.xml  { render :xml => @playlists }
       end
     else
-      redirect_to user_path(@user)
+      redirect_to user_playlists_path(@user)
     end
   end
 
@@ -49,9 +49,15 @@ class PlaylistsController < ApplicationController
     end
   end
   
+  def favorites
+    @playlist = @user.favorites
+    redirect_to user_playlist_path(@user, @playlist)
+  end
+  
   # GET /playlists/1
   # GET /playlists/1.xml
   def show
+    return not_found unless @playlist
     @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
     @single_playlist = true
     respond_to do |format|
@@ -188,7 +194,7 @@ class PlaylistsController < ApplicationController
   
   protected
   def not_found
-    flash[:error] = "We didn't find that playlist from #{@user.name}, sorry, but try these others" 
+    flash[:error] = "We didn't find that playlist from #{@user.name}! Sorry. Check out what *is* available" 
     redirect_to user_playlists_path(@user) 
   end
     
