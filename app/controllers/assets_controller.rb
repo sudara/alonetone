@@ -125,6 +125,7 @@ class AssetsController < ApplicationController
   # GET /assets/1;edit
   def edit
     @descriptionless = @user.assets.descriptionless
+    @allow_reupload = true
   end
 
   def mass_edit

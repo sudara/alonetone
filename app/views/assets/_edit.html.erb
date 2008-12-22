@@ -20,6 +20,7 @@
       Have a youtube video of this song?<br/>
       <small>http://www.youtube.com/watch?v=</small><%= f.text_field :youtube_embed, :size => 15 %>
     </div>
+    <% if @allow_reupload %>
     <div class="static_content">
       <%= link_to 'Upload a new version of this track',"new_version_#{@asset.object_id}", :class=>'slide_open_next'%>
       <div id="new_version_<%=@asset.object_id%>" style="display:none;">
@@ -31,6 +32,7 @@
         up your act on the sly and fix that hasty mix from last week! Yay!</span>
       </div>
     </div>
+    <% end %>
     <div class="submit_wrapper static_content">
         <div class="comment_waiting" >
           <div class="text"><!-- placeholder response text --></div>
