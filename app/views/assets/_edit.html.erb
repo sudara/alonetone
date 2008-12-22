@@ -6,7 +6,7 @@
 <div class="edit_track box" style="position:relative;">
   <h2 class="box">Editing "<%=h @asset.name %>"</h2>
 
-  <% form_for(:asset, :url => user_track_path(current_user, @asset), :html => { :method => :put }) do |f| %>
+  <% form_for(:asset, :url => user_track_path(current_user, @asset), :html => { :method => :put, :multipart => true }) do |f| %>
 
     <div class="static_content" style="position:relative;">
 
@@ -19,6 +19,17 @@
      <div class="static_content"> 
       Have a youtube video of this song?<br/>
       <small>http://www.youtube.com/watch?v=</small><%= f.text_field :youtube_embed, :size => 15 %>
+    </div>
+    <div class="static_content">
+      <%= link_to 'Upload a new version of this track',"new_version_#{@asset.object_id}", :class=>'slide_open_next'%>
+      <div id="new_version_<%=@asset.object_id%>" style="display:none;">
+        <br/>
+        <%= f.file_field  :uploaded_data, :class=> 'asset_data' %><br/>
+      <span class="note">This will permanently delete the old version.
+        The replacement track will <strong>not</strong> be considered a new track. It will not 
+        show up on the home page under 'latest tracks'. But hey, you get to clean
+        up your act on the sly and fix that hasty mix from last week! Yay!</span>
+      </div>
     </div>
     <div class="submit_wrapper static_content">
         <div class="comment_waiting" >
