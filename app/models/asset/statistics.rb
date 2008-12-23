@@ -38,7 +38,7 @@ class Asset
     ratio = ((recent_listen_count.to_f) * (((unique_listener_count * 3) / User.count) + 1) * age_ratio )
   end
   
-  def recent_listen_count(from = 30.days.ago, to = 1.hour.ago)
+  def recent_listen_count(from = 7.days.ago, to = 1.hour.ago)
     listens.count(:all, 
       :conditions => [
         "listens.created_at > ? AND " << 
