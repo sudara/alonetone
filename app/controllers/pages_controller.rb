@@ -1,7 +1,7 @@
 require 'bluecloth'
 
 class PagesController < ApplicationController
-
+  skip_filter filter_chain, :only => :help_an_app_support_brutha_out
   class Hell < StandardError; end
 
   def twentyfour
@@ -24,6 +24,13 @@ class PagesController < ApplicationController
   def four_oh_four
     @page_title = "Not found"
     flash[:error] = "Gone looking but did not find? Try searching, or let us know!"
+  end
+
+  def help_an_app_support_brutha_out
+    query      = "SELECT version FROM schema_migrations ORDER BY version DESC LIMIT 1"
+    version    = ActiveRecord::Base.connection.select_value(query)
+    time       = Time.now.to_formatted_s(:rfc822)
+    render(:text => "O Hai. You can haz alonetone. kthxbai!")
   end
 
   def about
