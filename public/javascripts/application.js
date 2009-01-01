@@ -55,6 +55,15 @@ FavoriteToggle = $.klass(Remote.Link,{
   }
 });
 
+FollowToggle = $.klass(Remote.Link,{
+  beforeSend:function(e){
+    if(this.element.hasClass('following'))
+      this.element.removeClass('following').html('Follow');
+    else
+      this.element.addClass('following').html('Stop Following');
+  }
+});
+
 
 if (!Array.prototype.indexOf)
 {
@@ -884,6 +893,10 @@ jQuery(function($) {
   // single track page love
   $('#single_track .comment_form form').attach(CommentForm);
   $('#single_track a.add_to_favorites').attach(FavoriteToggle);
+
+  // bio
+  $('a.follow',this.more).attach(FollowToggle);
+
 
   // sort playlists 
   $('#sort_playlists').sortable({

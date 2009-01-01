@@ -29,9 +29,9 @@ class UsersController < ApplicationController
         @users = User.activated.geocoded.find(:all, :limit => 1000)
       end
       # API 
-      format.js do
-        @users = User.musicians.find(:all, :select => 'login, display_name')
-        render :json => @users.to_json
+      format.json do
+        users = User.musicians.find(:all,:include => :pic, :limit => 10)
+        render :json => '{ records : ' + users.to_json(:methods => [:name, :type], :only => [:id,:name,:comments_count,:bio_html,:website,:login]) + '}'
       end
      # format.fbml do
      #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])

@@ -135,7 +135,7 @@ class Asset < ActiveRecord::Base
   def length
     self.class.formatted_time(self[:length])
   end
-    
+  
   protected 
   
   def set_title_to_filename

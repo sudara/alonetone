@@ -122,7 +122,12 @@ class User < ActiveRecord::Base
     last_seen_at < hours.ago.utc
   end
   
+  def type
+    self.class.name
+  end  
+  
   protected
+  
   
   def make_first_user_admin
     self.admin = true if User.count == 0

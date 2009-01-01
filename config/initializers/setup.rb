@@ -16,6 +16,10 @@ require 'randomness'
 require 'goodies'
 require 'utils'
 
+# require s3 and the s3 expires hack
+#require 'aws/s3'
+#require 'asset_hacks'
+
 PASSWORD_SALT = 'so_salty_its_unbearable'
 
 WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2

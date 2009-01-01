@@ -4,7 +4,7 @@
     <ul>
       <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
-      <li><%= link_to 'share', "#share_track_#{asset.unique_id}" %> </li>
+      <li><%= link_to 'more', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
     <% if logged_in? %>
         <%= favorite_toggle(asset) %>
