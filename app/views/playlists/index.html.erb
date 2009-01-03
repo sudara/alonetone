@@ -5,10 +5,10 @@
 		    <div class="button_wrapper">
 		    <%= link_to " ", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
 		    </div>
-            <% if @user.playlists.public.size > 2 %>
-    		    <div class="button_wrapper">
-    		    <%= link_to " ", sort_user_playlists_path(@user), :id => 'change_playlist_order', :class => 'button'  %>
-    		    </div>
+        <% if @user.playlists.public.size > 1 %>
+  		    <div class="button_wrapper">
+  		    <%= link_to " ", sort_user_playlists_path(@user), :id => 'change_playlist_order', :class => 'button'  %>
+  		    </div>
 		    <% end %>
 		</div>
 		<% end %>

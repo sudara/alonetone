@@ -6,13 +6,13 @@
     <% content_for :breadcrumbs do %>
             <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> <%= @forum.name %>
     <% end %>
-
+    
     <% @page_title = @forum.name+ ' forum'%>
 
     <% content_for :extras do %>
       <%= pluralize @forum.topics.size, 'topics' %>, 
       <%= pluralize @forum.posts.size, 'posts' %>
-      <%# feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom)%> 
+      <%= feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom)%> 
     <% end %>
 
     <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
@@ -59,9 +59,9 @@
     
     <div class="forum_paginator clearfix">
         <%= pagination @topics %>
-        <div class="button_wrapper">
-        <%= link_to 'New topic', new_forum_topic_path(@forum), :class => "button new" %></p>
-        </div>
+    </div>
+    <div class="footer_box">
+        <%= link_to ' ', new_forum_topic_path(@forum), :id => "create_new_topic", :class => 'margin1px', :title => 'Start a new forum topic' %></p>
     </div>
 
 <% end %>

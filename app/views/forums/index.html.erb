@@ -7,15 +7,13 @@
     
 
     <% content_for :extras do %>
-        <%# feed_icon_tag "Recent Posts", formatted_posts_path(:format => 'rss') %>
+        <%= feed_icon_tag "Recent Posts", formatted_posts_path(:format => 'atom') %>
     <% end %>
 
     <% if admin? %>
-       <div class="additional_options_solo" >
-       <div class="button_wrapper" style="margin-top:-32px;">
-            <%= link_to "Create New Forum", new_forum_path, :class => 'new button' %>
-       </div>
-       </div>
+	    <div class="button_wrapper" style="margin-top:-30px;">
+	       <%= link_to " ", new_forum_path, :id => 'create_new_forum', :class => 'button'  %>
+	    </div>
     <% end %>
         
     <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
@@ -57,10 +55,7 @@
     <% end %>
     </table>
 
-    <p>
-      <%= link_to('View Recent Posts', posts_path) if Post.first %>
-    </p>
-    <% if @online && !@online.empty?%>
+    <% if present? @online %>
         <div class="box">
         <div class="static_content" id="currently_online">
           alonetoners online: 
@@ -70,4 +65,7 @@
         </div>
         </div>
     <% end %>
+    <div class="footer_box">
+      <%= link_to('', posts_path, :class=>'view_all_recent_posts', :title => 'view all recent posts') if Post.first %>
+    </div>
 <% end %>

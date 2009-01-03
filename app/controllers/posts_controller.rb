@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     @show_title_and_link = true
     respond_to do |format|
       format.html # index.html.erb
+      format.atom
       format.xml  { render :xml  => @posts }
     end
   end
