@@ -48,8 +48,16 @@ module UsersHelper
   def favorite_toggle(asset)
     return unless logged_in?
     is_favorite = current_user.has_as_favorite?(asset)
-    link_to((is_favorite ? 'remove from favorites' : 'add to favorites'), toggle_favorite_user_path(current_user, :asset_id => asset.id), 
+    link_to((is_favorite ? 'remove from favorites' : 'add to favorites'), 
+      toggle_favorite_user_path(current_user, :asset_id => asset.id), 
       :class => 'add_to_favorites '+(is_favorite ? 'favorited' : ''))
+  end
+  
+  def follow_toggle(user)
+    return unless logged_in? and user.id != current_user.id
+    is_favorite = current_user.is_following?(user)
+    link_to ' ', toggle_follow_user_path(current_user, :followee_id => user.id), 
+      :class => 'follow '+(is_favorite ? 'following' : '') 
   end
   
   def new_to_user?(thing)

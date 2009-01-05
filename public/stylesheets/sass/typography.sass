@@ -366,9 +366,9 @@ a.edit_in_box
   &:active
     :background-position -146px 0px
   
-a.edit_profile
+a.edit_profile, a.follow
   :display block
-  :background url(../images/icons/edit_profile.png) no-repeat left center
+  :background url(../images/icons/follow.png) no-repeat left center
   :text-indent -1000px
   :width 48px
   :height 48px
@@ -379,11 +379,22 @@ a.edit_profile
     :background-position -48px 0px
   &:active
     :background-position -96px 0px
+a.edit_profile
+  :right 2px
+  :background url(../images/icons/edit_profile.png) no-repeat left center
+  &.admin
+    :right 50px
+a.follow.following
+  :background-position -144px 0px
+  &:hover
+    :background-position -192px 0px
+  &:active
+    :background-position -240px 0px  
 a.alonetone_plus_link
   :position absolute
   :float right
   :top 12px
-  :right 60px
+  :right 110px
 
 .button_wrapper
   :float right

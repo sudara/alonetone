@@ -98,12 +98,21 @@
     </div>
     
     <div class="static_content">
-      Email you new comments on your tracks?<br/>
+      Should we email you new comments on your tracks?<br/>
       <%= select_tag('user[settings][email_comments]', 
           options_for_select([['of course, silly!','true'], ['I do not like email','false']], 
           setting(:email_comments))) %>
           
     </div>
+
+    <div class="static_content">
+      Email notifications when folks you follow upload tracks?<br/>
+      <%= select_tag('user[settings][email_new_tracks]', 
+          options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']], 
+          setting(:email_new_tracks))) %>
+          
+    </div>
+    
     
     <div class="static_content">
       <%= submit_tag "Save your alonetone settings" %>

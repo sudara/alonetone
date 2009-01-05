@@ -10,9 +10,9 @@ class Playlist < ActiveRecord::Base
 
   named_scope :favorites, {:conditions => ['is_favorite = ?',true]}
 
-  named_scope :public,    {:conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
+  named_scope :public,    {:include => :pic, :conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
 
-  named_scope :include_private, {:conditions => ['is_favorite = ?',false]}
+  named_scope :include_private, {:include => :pic, :conditions => ['is_favorite = ?',false]}
 
   
   has_one  :pic, :as => :picable, :dependent => :destroy

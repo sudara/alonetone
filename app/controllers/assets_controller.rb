@@ -80,6 +80,9 @@ class AssetsController < ApplicationController
         @tab = 'home'
         @welcome = true unless logged_in?
         @feature = Feature.published.first
+        if logged_in? and current_user.has_followees?
+          @followee_tracks = current_user.new_tracks_from_followees(5)
+        end
       end
       wants.rss do 
         @assets = Asset.latest(50)

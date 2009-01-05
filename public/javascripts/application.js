@@ -58,9 +58,9 @@ FavoriteToggle = $.klass(Remote.Link,{
 FollowToggle = $.klass(Remote.Link,{
   beforeSend:function(e){
     if(this.element.hasClass('following'))
-      this.element.removeClass('following').html('Follow');
+      this.element.removeClass('following');
     else
-      this.element.addClass('following').html('Stop Following');
+      this.element.addClass('following');
   }
 });
 
@@ -895,7 +895,7 @@ jQuery(function($) {
   $('#single_track a.add_to_favorites').attach(FavoriteToggle);
 
   // bio
-  $('a.follow',this.more).attach(FollowToggle);
+  $('a.follow').attach(FollowToggle);
 
 
   // sort playlists 

@@ -20,7 +20,7 @@ class Track < ActiveRecord::Base
     :select     => 'DISTINCT assets.*, tracks.*', 
     :conditions => ['is_favorite = ?',true], 
     :order      => 'tracks.created_at DESC', 
-    :joins      => :asset
+    :joins      => {:asset => {:user => :pic}}
   }
 
 

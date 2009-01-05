@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   named_scope :public, {
     :conditions => {:spam => false, :private => :false},
     :order      => 'created_at DESC', 
-    :include    => [:commenter => :pic]
+    :include    => [{:commenter => :pic}, :commentable]
   }
   
   named_scope :include_private, {

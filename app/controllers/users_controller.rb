@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio]
   skip_before_filter :login_by_token, :only => :sudo
   
-  rescue_from NoMethodError, :with => :user_not_found
+  #rescue_from NoMethodError, :with => :user_not_found
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
@@ -167,6 +167,11 @@ class UsersController < ApplicationController
       added_fav = favs.tracks.create(:asset_id => params[:asset_id], :is_favorite => true, :user_id => @user.id)
       Asset.increment_counter(:favorites_count, params[:asset_id]) if added_fav
     end
+    render :nothing => true
+  end
+  
+  def toggle_follow
+    current_user.add_or_remove_followee(params[:followee_id])
     render :nothing => true
   end
 

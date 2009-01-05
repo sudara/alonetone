@@ -46,6 +46,13 @@
       :title => 'alonetone radio: currently kicking ass' %>
   </div>
   
+  <% if @followee_tracks %>
+    <h2 id="kicking_ass" class="box">Tracks from those you follow</h2>
+    <div class="box">
+    <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
+    </div>
+  <% end %>
+  
    <h2 id="recently_favorited" class="box">Recently favorited</h2>
   <div class="box">
     <%= render :partial => 'shared/favorite', :collection => @favorites %>

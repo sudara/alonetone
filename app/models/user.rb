@@ -71,14 +71,15 @@ class User < ActiveRecord::Base
     :limit      => 10, 
     :order      => 'listens_count DESC'
   
-  # stalking
-  has_many :stalkers, :class_name => 'Stalking'
+  
+  has_many :followings, :dependent => :destroy
+  has_many :follows, :dependent => :destroy, :class_name => 'Following', :foreign_key => 'follower_id'    
+  
+  # people who are following this musician
+  has_many :followers, :through => :followings
 
-  has_many :stalkees, :class_name => 'Stalking'
-
-  has_many :new_tracks_from_stalkees, 
-    :through    => :stalkees, 
-    :class_name => 'Asset'
+  # musicians who this person follows
+  has_many :followees, :through => :follows, :source => :follower
 
   # The following attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
@@ -122,12 +123,38 @@ class User < ActiveRecord::Base
     last_seen_at < hours.ago.utc
   end
   
+  def is_following?(user)
+    follows.find_by_user_id(user)
+  end
+  
+  def new_tracks_from_followees(limit)
+    Asset.find(:all, :limit => limit, :order => 'assets.created_at DESC',
+     :conditions => {:user_id => followee_ids})
+  end
+  
+  def has_followees?
+    follows.count > 0
+  end
+    
+  def add_or_remove_followee(followee_id)
+    return if followee_id == id # following yourself would be a pointless affair!
+    if is_following?(followee_id)
+      is_following?(followee_id).destroy 
+    else
+      follows.find_or_create_by_user_id(followee_id)
+    end
+  end
+  
   def type
     self.class.name
   end  
   
   protected
   
+  def followee_ids
+    follows.find(:all, :select => 'user_id').collect(&:user_id)
+  end
+
   
   def make_first_user_admin
     self.admin = true if User.count == 0
