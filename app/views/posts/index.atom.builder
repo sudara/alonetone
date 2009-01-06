@@ -9,7 +9,7 @@ xml.feed(:xmlns => "http://www.w3.org/2005/Atom") do |feed|
       entry.id forum_topic_url(post.topic.forum, post.topic, 
                                :anchor => dom_id(post))
       entry.title post.topic.title
-      entry.content post.body
+      entry.content post.body_html
       entry.updated post.updated_at.to_s(:rfc3339)
       entry.link :href => forum_topic_url(post.topic.forum, post.topic, 
                                           :anchor => dom_id(post))

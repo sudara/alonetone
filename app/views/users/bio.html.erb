@@ -50,11 +50,6 @@
   
     <%= link_to(image_tag(@user.avatar(:album), :class => 'large_avatar'), @user.avatar,  :id=>'alonetoner_big', :rel=>'facebox') %>
     
-    <h2 class="box static">Follow <%= @user.name%></h2>
-    <div class="bio statc_content">
-      Like this artist? 'Follow' them to get emailed when they upload new tracks.
-      <%= link_to 'Follow',toggle_follow_user_path(@user), :class => 'follow'%>
-    </div>
     
     <h2 class="box static"><%= @user.name %>'s stats</h2>
     
