@@ -30,6 +30,9 @@ class AssetsController < ApplicationController
             page.replace 'stash', :partial => "assets"
           end
         end
+        format.json do
+          render :json => '{ records : ' + @assets.to_json(:methods => [:name, :type, :length], :only => [:id,:name,:listens_count, :description,:permalink,:hotness]) + '}'
+        end
       end
   end
 

@@ -136,6 +136,11 @@ class Asset < ActiveRecord::Base
     self.class.formatted_time(self[:length])
   end
   
+  # hack for sproutcore json
+  def type
+    'Track'
+  end
+  
   protected 
   
   def set_title_to_filename

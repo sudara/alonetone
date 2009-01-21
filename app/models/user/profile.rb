@@ -24,11 +24,11 @@ class User
 
   def dummy_pic(size)
     case size
-      when :album then 'no-pic-200.png'
-      when :large then 'no-pic-83.png'
-      when :small then 'no-pic-50.png'
-      when :tiny then 'no-pic-25.png'
-      when nil then 'no-pic-200.jpg' 
+      when :album then 'no-pic.png'
+      when :large then 'no-pic_large.png'
+      when :small then 'no-pic_small.png'
+      when :tiny then 'no-pic_tiny.png'
+      when nil then 'no-pic.png' 
     end
   end
   
