@@ -1,0 +1,138 @@
+/* @override http://localhost:3000/stylesheets/rpm_challenge.css */
+
+/* @override http://localhost:3000/stylesheets/rpm_challenge.css */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+:focus {
+	outline: 0;
+}
+body {
+  line-height: 1;
+  font-family: Helvetica, Arial, Geneva, sans-serif;
+}
+
+a{
+  text-decoration:none;
+}
+ a:hover, a:visited{
+   text-decoration:underline;
+ }
+
+#wrapper{
+  position: relative;
+  width: 100%;
+  text-align: center;
+  background: #261f1e url(../images/rpm/header_background.jpg) repeat-x top center;
+  margin: auto;
+}
+
+#header{
+  width: 1200px;
+  background: #261f1e url(../images/rpm/header.jpg) no-repeat top center;
+  height: 402px;
+  text-align: center;
+  margin: auto;
+}
+
+#content{
+ text-align: center;
+ position: relative;
+ width: 100%;
+ min-height: 600px;
+ min-width: 1200px;
+ background: #1e1918 url(../images/rpm/background.png) repeat-x top center; 
+ margin: auto;
+ clear:both;
+}
+
+a#back-to-alonetone{
+ height: 200px;
+ width:200px;
+ display:block;
+ margin:0 auto; 
+}
+
+div#albums{
+  position:relative;
+  width: 1187px;
+  margin: auto;
+  padding-top:25px;
+  padding-left:13px;
+  min-height: 500px;
+  background: transparent url(../images/rpm/background-lines.jpg) repeat-y 393px 0; 
+}
+div.album{
+  position: relative;
+  float: left;
+  margin-left: 39px;
+  width: 160px;
+  height:250px;
+  overflow: hidden;
+  clear: none;
+}
+div.album .cover{
+  position: relative;
+  margin-bottom: 10px;
+}
+a.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  opacity: 1.0;
+  background-color: transparent;
+  width: 160px;
+  height: 160px;
+  background-image: url(../images/rpm/overlay.png); }
+
+img.cover {
+  width: 150px;
+  height: 150px;
+  margin-left: 1px;
+  margin-top: 3px; }
+  
+a.alonetoner{
+  font-size: 13px;
+  color: #fb8a03;
+}
+
+a.album_title{
+  width: 160px;
+  font-size: 13px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 16px;
+}
+.clearfix:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0pt;
+  line-height: 0pt;
+  visibility: hidden; }
+
+.clearfix {
+  display: inline-block; }
+
+html[xmlns] .clearfix {
+  display: block; }
+
+* html .clearfix {
+  height: 1%; }

@@ -8,6 +8,19 @@ class PagesController < ApplicationController
     render :layout => '24houralbum'
   end
 
+  def rpm_challenge
+    ids = [ 906, 904, 899, 893, 892, 891, 887, 886, 882, 880, 
+            879, 877, 875, 872, 864, 863, 860, 858, 857, 856, 
+            855, 852, 851, 850, 849, 846, 845, 843, 842, 841, 
+            840, 839, 838, 836, 834, 832, 831, 829, 828, 827, 
+            826, 825, 824, 823, 822, 821, 818, 817, 816, 814, 
+            813, 812, 810, 806, 804, 802, 801, 800, 799, 798, 
+            797, 790, 787, 786, 773, 770, 767, 762 , 
+            760, 753, 745, 742, 739, 724, 720]
+    @albums = Playlist.find(:all, :conditions => {:id => ids}, :order => 'created_at ASC')
+    render :layout => 'rpm_challenge'
+  end
+
   def index
     @page_title = "About alonetone, the kickass home for musicians"
   end

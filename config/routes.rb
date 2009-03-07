@@ -2,6 +2,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts
 
   
+  # manual, ghetto, overriding links
+  map.rpm_challenge 'rpm_challenge', :controller => 'pages', :action => 'rpm_challenge'
+  map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
+  
+  
   map.blog 'blog', :controller => 'updates', :action => 'index'
   map.feedback 'feedback', :controller => 'user_reports'
   map.resources :features, :sessions, :user_reports, :updates
@@ -18,8 +23,6 @@ ActionController::Routing::Routes.draw do |map|
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
   map.about 'about/:action', :controller => 'pages'
   map.halp  'about/halp/:action', :controller => 'pages'
-
-  map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
    
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
