@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   
   # manual, ghetto, overriding links
-  map.rpm_challenge 'rpm_challenge', :controller => 'pages', :action => 'rpm_challenge'
+  map.rpm_challenge 'rpmchallenge', :controller => 'pages', :action => 'rpm_challenge'
   map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
   
   
