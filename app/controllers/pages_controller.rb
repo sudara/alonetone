@@ -17,7 +17,7 @@ class PagesController < ApplicationController
             826, 825, 824, 823, 822, 821, 818, 817, 816, 814, 
             812, 810, 806, 805, 804, 802, 801, 800, 716, 799, 798, 
             797, 790, 787, 786, 767, 762 , 
-            760, 753, 745, 742, 739, 724, 720, 809, 819, 830]
+            760, 753, 745, 742, 739, 724, 809, 819, 830]
     @albums = Playlist.find(:all, :conditions => {:id => ids}, :order => 'created_at ASC')
     render :layout => 'rpm_challenge'
   end
