@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-  before_filter :admin_required, :except => [:index, :show]
+  before_filter :login_required, :except => [:index, :show]
   before_filter :set_forum_tab
 
   # GET /forums
@@ -103,6 +103,10 @@ class ForumsController < ApplicationController
   end
   
   protected
+  def authorized?
+    admin?
+  end
+  
   def set_forum_tab
     @tab = "forums"
   end
