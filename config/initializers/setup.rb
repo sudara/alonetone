@@ -15,6 +15,7 @@ Sass::Plugin.options[:always_check] = true
 require 'randomness'
 require 'goodies'
 require 'utils'
+require 'asset_hacks'
 
 # require s3 and the s3 expires hack
 #require 'aws/s3'
