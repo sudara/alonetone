@@ -42,7 +42,7 @@ class User
   end
   
   def favorites
-    @favorites ||= self.playlists.favorites.find(:first)
+    playlists.favorites.find(:first)
   end
   
   def has_pic?

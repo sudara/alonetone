@@ -632,7 +632,7 @@ Track = $.klass({
   },
   
   createTabbies : function(){
-    this.tabbies = $('ul',this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array 
+    this.tabbies = $(this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array 
     this.commentForm = $('.comment_form form',this.more).attachAndReturn(CommentForm)[0];
     $('a.add_to_favorites',this.more).attach(FavoriteToggle);
   },
@@ -872,7 +872,7 @@ jQuery(function($) {
   });
   
   // ability to tab through various track sources
-  $('#playlist_sources ul#playlist_source_options').attach(Tabbies);
+  $('#playlist_tabs').attach(Tabbies);
   
   // the various groups of tracks you can add to a playlist
   $('#playlist_sources').attach(PlaylistSource);

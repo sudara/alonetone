@@ -94,10 +94,17 @@ class PlaylistsController < ApplicationController
       :per_page => 10, 
       :page     => params[:listens_page]
     )
+    
+    @favorites = Track.favorites.paginate_all_by_user_id(@user.id,
+      :limit => 10,
+      :per_page  => 10,
+      :page  =>  params[:favorites_page]
+    )
 
     if request.xhr? 
         render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
         render :partial => 'your_listens.html.erb' if params[:listens_page]
+        render :partial => 'your_favorites.html.erb' if params[:favorites_page]
     end
   end
 
