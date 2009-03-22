@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base  
   helper :all # all helpers, all the time
 
-  protect_from_forgery  :secret => ALONETONE.secret
+  protect_from_forgery
     
   include AuthenticatedSystem
   before_filter :set_tab, :ie6, :is_sudo
@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_admin_or_owner?(user)
-    logged_in? && (current_user.id.to_s == user.id.to_s || current_user.admin?)
+    logged_in? && ((current_user.id == user.id) || current_user.admin?)
   end
 
   def current_user_is_admin_or_moderator_or_owner?(user)
@@ -90,8 +90,8 @@ class ApplicationController < ActionController::Base
   end
 
   def find_asset
-    @asset = @user.assets.find_by_permalink(params[:permalink] || params[:id])
-    @asset = @user.assets.find(params[:id]) if !@asset && params[:id]
+    @asset = Asset.find_by_permalink(params[:permalink] || params[:id])
+    @asset = Asset.find(params[:id]) if !@asset && params[:id]
   end
   
   def find_playlists

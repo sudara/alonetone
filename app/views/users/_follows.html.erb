@@ -1,0 +1,19 @@
+<% if present?(@follows) %>
+  <h2 class="box">Follows</h2>
+  <div id="follows" class="box static_content clearfix">
+
+      <%= render :partial => 'shared/small_user', :collection => @follows %>
+
+      <div class="clear"></div>
+  </div>
+<% else %>
+  <h2 class="box">Listens to</h2>
+  <div id="follows" class="box static_content clearfix">
+
+      <%= render :partial => 'shared/small_user', :collection => @mostly_listens_to %>
+
+      <div class="clear"></div>
+  </div>
+<% end %>
+
+<div class="footer_box empty"></div>

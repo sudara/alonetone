@@ -2,7 +2,7 @@
     
     <% content_for :extras do %>
         <%= topic_count %>, <%= post_count %>
-        <%= feed_icon_tag "Recent Posts", formatted_posts_path(:format => 'atom') %>
+        <%= feed_icon_tag "Recent Posts", posts_path(:format => 'atom') %>
     <% end %>
 
     

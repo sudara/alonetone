@@ -29,7 +29,7 @@ module UsersHelper
   def user_image_link(user, size = :large)
     link_to(image_tag(user.avatar(size),
       :class => (user.has_pic? ? '' : 'no_border'),
-      :alt => "#{user.name} on alonetone"), 
+      :alt => "#{user.name}"), 
       user_home_path(user), 
       :title => " #{user.name}
  #{user.assets_count > 0 ? pluralize(user.assets_count,'uploaded tracks') : ''} 

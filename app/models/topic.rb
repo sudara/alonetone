@@ -87,8 +87,8 @@ protected
   def set_post_forum_id
     return unless @old_forum_id
     posts.update_all :forum_id => forum_id
-    Forum.update_all "posts_count = posts_count - #{posts_count}", ['id = ?', @old_forum_id]
-    Forum.update_all "posts_count = posts_count + #{posts_count}", ['id = ?', forum_id]
+    Forum.decrement_counter(:topics_count, @old_forum_id)
+    Forum.increment_counter(:topics_count, forum_id)
   end
   
   def count_user_posts_for_counter_cache

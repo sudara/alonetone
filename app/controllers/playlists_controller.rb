@@ -6,8 +6,8 @@ class PlaylistsController < ApplicationController
 
   before_filter :find_tracks, :only => [:show, :edit]
   
-  rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-  rescue_from NoMethodError, :with => :user_not_found
+  #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+  #rescue_from NoMethodError, :with => :user_not_found
   
   # GET /playlists
   # GET /playlists.xml
@@ -81,6 +81,7 @@ class PlaylistsController < ApplicationController
   def edit
     # allow them to add their own assets
     # TODO: this is bad form, should be relocated to assets/index and listens/index
+    # TODO: furthermore, ajax requests currently load all 3 instance vars :(
     @assets = @user.assets.paginate( :all, 
       :limit    => 10, 
       :per_page => 10, 
@@ -95,7 +96,7 @@ class PlaylistsController < ApplicationController
       :page     => params[:listens_page]
     )
     
-    @favorites = Track.favorites.paginate_all_by_user_id(@user.id,
+    @favorites = @user.favorites.tracks.paginate(:all,
       :limit => 10,
       :per_page  => 10,
       :page  =>  params[:favorites_page]

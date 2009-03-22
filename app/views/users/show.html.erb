@@ -26,7 +26,7 @@
 
     	  <%= render :partial => 'favorites' if present?(@favorites) %>
     
-        <%= render :partial => 'mostly_listens_to' if @mostly_listens_to.size > 2 %>
+        <%= render :partial => 'follows' if present?(@mostly_listens_to) or present?(@follows)  %>
     	  
     	  <%= render :partial => 'listens' if @listens.size > 0 %>	
     		

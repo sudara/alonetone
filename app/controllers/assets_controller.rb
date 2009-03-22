@@ -209,7 +209,7 @@ class AssetsController < ApplicationController
       end
     else
       if result
-        redirect_to user_track_url(current_user, @asset) 
+        redirect_to user_track_url(@asset.user.login, @asset.permalink) 
       else
         flash[:error] = "There was an issue with updating that track"
         render :action => "edit" 
@@ -251,7 +251,11 @@ class AssetsController < ApplicationController
   
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    params[:permalink].nil? || current_user_is_admin_or_owner?(@asset.user)
+    current_user_is_admin_or_owner?(@asset.user) || !dangerous_action?
+  end
+  
+  def dangerous_action?
+    %w(destroy update edit mass_edit).include? action_name
   end
   
   def register_listen

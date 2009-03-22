@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   has_many :followers, :through => :followings
 
   # musicians who this person follows
-  has_many :followees, :through => :follows, :source => :follower
+  has_many :followees, :through => :follows, :source => :user
 
   # The following attributes can be changed via mass assignment 
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,

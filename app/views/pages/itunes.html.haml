@@ -21,7 +21,7 @@
       = current_user.name + ':'
       %br
         %strong
-          = formatted_user_url(current_user, :rss)
+          = user_url(current_user, :format => :rss)
     - else
       = link_to 'log in', login_path
       and we'll show you which link you should submit.

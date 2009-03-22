@@ -51,8 +51,9 @@ class User
 
 protected
   def revise_topic(topic, attributes)
-    topic.forum_id = attributes[:forum_id] \
     if attributes[:forum_id]
+      topic.forum_id = attributes[:forum_id]
+    end
       
     topic.title = attributes[:title] \
     if attributes[:title]

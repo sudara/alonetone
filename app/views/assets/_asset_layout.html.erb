@@ -14,5 +14,5 @@
 </div>
 
 <div class="download-button button">
-  <%= link_to ' ', formatted_user_track_path(asset.user, asset.permalink, :mp3, :referer => 'download'), :class=> 'download button', :title => "right-click to download mp3" %>
+  <%= link_to ' ', user_track_path(asset.user, asset.permalink, :format => :mp3, :referer => 'download'), :class=> 'download button', :title => "right-click to download mp3" %>
 </div>

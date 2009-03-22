@@ -10,7 +10,7 @@ xml.playlist(:version => 1, :xmlns => "http://xspf.org/ns/0/") do
         xml.title(track.name)
         xml.creator(@user.name)
         xml.image(@user.avatar(:album))
-        xml.location(formatted_user_track_url(@user, track.permalink, :mp3))
+        xml.location(user_track_url(@user, track.permalink, :format => :mp3))
         xml.info(user_track_url(@user, track.permalink))
       end
     end
