@@ -1,4 +1,5 @@
 require 'hpricot'
+require 'bluecloth'
 class BlueCloth
   
   # The point is that inside <p> tags, line breaks should = <br> tags
