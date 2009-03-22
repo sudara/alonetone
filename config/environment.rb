@@ -10,7 +10,7 @@ Rails::Initializer.run do |config|
   config.gem 'rubyzip',       :lib => 'zip/zip'
   config.gem 'googlecharts',  :lib => 'gchart'
   config.gem 'haml'
-  config.gem 'newrelic-rpm'
+  config.gem 'newrelic_rpm'
   config.gem 'BlueCloth' # for comment processing / markdown fixing
   config.gem 'hpricot' # for comment processing / markdown fixing
   

@@ -1,9 +1,17 @@
 <% content_for :sidebar do %>
-  <ul class="flat talking">
-  <% @topic.voices.each do | user | %>
-    <li><%= link_to h(user.display_name), user_path(user) %></li>
-  <% end %>
-  </ul>
+    <div class="sidebar forum">
+      <div class="box"> 
+          <h2 class="box static">Who's talking?</h2>
+          <div class="static_content">
+            <ul class="talking">
+            <% @topic.voices.each do | user | %>
+              <li><%= link_to h(user.display_name), user_path(user.login) %></li>
+            <% end %>
+            </ul>
+          </div>
+      </div>
+    </div>
+
 <% end %>
 
 <% content_for :h1 do %> 

@@ -7,6 +7,7 @@
       %ul.links
         = user_nav_item "What is alonetone?", {:controller => 'pages', :action => 'index' }, :title => 'about alonetone'
         = user_nav_item "How do I?...", {:controller => 'pages', :action => 'howto' }, :title => 'get help with alonetone' 
+        = user_nav_item "Press", {:controller => 'pages', :action => 'press' }, :title => 'press and promotional info' 
         = user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact', :title => 'alonetone statistics'
         = user_nav_item "Forums", forums_path, :added_class => 'contact', :title => 'forums'
         = user_nav_item "Latest News", updates_path, :added_class => 'contact', :title => 'latest news (blog)'

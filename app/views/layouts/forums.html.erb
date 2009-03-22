@@ -15,9 +15,12 @@
     </div>
     <%= yield :pagination %>
 </div>
+  <%= yield :sidebar %>
+
   <div id="forums_layout">
   <%= yield %>
   </div>
+  
 <% end %>
 <%= render :file => 'layouts/application' %>
 
