@@ -36,7 +36,7 @@
 		  <%= check_for_and_display_welcome_back %>
 		  <%= check_for_and_display_flashes %>
       <div id="main">
-		      <%= yield %>
+		      <%= yield(:pages) or yield(:forums) or yield %>
       </div>
       <div id="static">
           <%= yield :static %>

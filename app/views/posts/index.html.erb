@@ -1,5 +1,4 @@
 
-<% render :layout => 'forums/forums' do %>
 <% @page_title = search_posts_title -%>
 
 <% content_for :h1 do %>
@@ -24,7 +23,6 @@
 </div>
 
 <%= render :partial => 'posts/posts' %>
-<% end %>
 
 <div class="forum_paginator">
     <%= pagination @posts %>

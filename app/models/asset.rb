@@ -60,7 +60,8 @@ class Asset < ActiveRecord::Base
   has_one :first_playlist,
     :source      =>  :playlist,
     :through     =>  :tracks,
-    :conditions  => {'playlists.is_favorite' => false, 'tracks.is_favorite' => false},
+    :conditions  => {'playlists.is_favorite' => false, 'tracks.is_favorite' => false,
+      'playlists.user_id' => '#{user_id}' },
     :order       => 'tracks.created_at ASC',
     :include     => :pic  
   
@@ -118,8 +119,8 @@ class Asset < ActiveRecord::Base
   def self.formatted_time(time)
     if time
       min_and_sec = time.divmod(60)
-      minutes = min_and_sec[0].to_s
-      seconds = min_and_sec[1].to_s
+      minutes = min_and_sec[0].to_i.to_s
+      seconds = min_and_sec[1].to_i.to_s
       seconds = "0"+seconds if seconds.length == 1
       minutes + ':' + seconds
     else

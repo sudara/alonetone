@@ -1,0 +1,23 @@
+<% content_for :forums do %>
+<div id="static_header">
+  
+    <div class="title">
+      <h1 class="static"><%= yield :h1 %></h1>
+    </div>
+    
+    <div id="links">
+        <div id="breadcrumbs">
+            <%= yield :breadcrumbs %>
+        </div>
+        <div id="extras">
+            <%= yield :extras %>
+        </div>
+    </div>
+    <%= yield :pagination %>
+</div>
+  <div id="forums_layout">
+  <%= yield %>
+  </div>
+<% end %>
+<%= render :file => 'layouts/application' %>
+

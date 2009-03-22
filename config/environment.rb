@@ -1,4 +1,4 @@
-RAILS_GEM_VERSION = '2.1.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'googlecharts',  :lib => 'gchart'
   config.gem 'haml'
   config.gem 'newrelic-rpm'
+  config.gem 'BlueCloth' # for comment processing / markdown fixing
   config.gem 'hpricot' # for comment processing / markdown fixing
   
   # Rmagick is *not* required (for example, sudara uses imagescience)

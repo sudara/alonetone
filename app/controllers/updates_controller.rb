@@ -1,5 +1,8 @@
 class UpdatesController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
+  layout 'pages'
+  
+  
   # GET /updates
   # GET /updates.xml
   def index

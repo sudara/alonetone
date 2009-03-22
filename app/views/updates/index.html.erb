@@ -1,8 +1,4 @@
-<% render :layout => 'pages/halp' do %>
-  <% content_for :pagination do %>
-    <%= will_paginate @updates %>
-  <% end %> 
-  <%= render :partial => @updates %> 
-<% end %>
-<%= render :partial => 'latest'%>
-
+<% content_for :pagination do %>
+  <%= will_paginate @updates %>
+<% end %> 
+<%= render :partial => @updates %> 

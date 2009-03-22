@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
+  layout "forums"
 
   def index
     respond_to do |format|

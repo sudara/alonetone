@@ -1,4 +1,3 @@
-<% render :layout => 'forums/forums' do %>
   <% content_for :h1 do %>alonetone forums: Starting a new topic <% end %>
   <% content_for :breadcrumbs do %>
     <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
@@ -21,5 +20,3 @@
     <%= render :partial => 'posts/formatting' %>       
 
   </div>  
-
-<% end %>

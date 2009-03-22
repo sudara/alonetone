@@ -43,7 +43,7 @@ class Listen < ActiveRecord::Base
 
     various = count_within_a_month - data.collect(&:last).sum
 
-    data << ['various other sources', various]
+    data['various other sources'] = various
 
     Gchart.pie(
       :size       => '500x125', 

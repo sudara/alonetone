@@ -28,7 +28,7 @@
                 <% end %>
                 </div>
                
-                <% if playlist = asset.first_playlist %>
+                <% if (playlist = asset.first_playlist) %>
                   <div class="min_height_50">
           		    <div class="mini_cover">
           		      	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(asset.user,playlist), :class => 'jewel_case_50') %>

@@ -1,15 +1,11 @@
-<% render :layout => 'forums' do %>
     <% content_for :h1 do %>alonetone Forums <% end %>
     
     <% content_for :extras do %>
         <%= topic_count %>, <%= post_count %>
-    <% end %>
-    
-
-    <% content_for :extras do %>
         <%= feed_icon_tag "Recent Posts", formatted_posts_path(:format => 'atom') %>
     <% end %>
 
+    
     <% if admin? %>
 	    <div class="button_wrapper" style="margin-top:-30px;">
 	       <%= link_to " ", new_forum_path, :id => 'create_new_forum', :class => 'button'  %>
@@ -68,4 +64,3 @@
     <div class="footer_box">
       <%= link_to('', posts_path, :class=>'view_all_recent_posts', :title => 'view all recent posts') if Post.first %>
     </div>
-<% end %>
