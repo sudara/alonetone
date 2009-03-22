@@ -11,7 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'googlecharts',  :lib => 'gchart'
   config.gem 'haml'
   config.gem 'newrelic_rpm'
-  config.gem 'bluecloth' # for comment processing / markdown fixing
+  config.gem 'BlueCloth',     :lib => 'bluecloth' 
   config.gem 'hpricot' # for comment processing / markdown fixing
   
   # Rmagick is *not* required (for example, sudara uses imagescience)
