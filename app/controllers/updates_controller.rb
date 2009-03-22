@@ -1,6 +1,8 @@
 class UpdatesController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
+  before_filter :find_recent_updates, :except => [:destroy, :update]
   layout 'pages'
+  
   
   
   # GET /updates
@@ -14,9 +16,7 @@ class UpdatesController < ApplicationController
     )
     
     @page_title = "Latest News and Updates"
-    
-    @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
-    
+        
     respond_to do |format|
       format.html # index.html.erb
       format.xml
@@ -99,6 +99,10 @@ class UpdatesController < ApplicationController
   end
   
   protected
+  
+  def find_recent_updates
+    @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
+  end
   
   def authorized?
     logged_in? && admin?
