@@ -97,6 +97,8 @@ You can let the system install all required gems for you using following command
 
       rake gems:install
 
+NOTE: On a Windows install using InstantRails with Rails 2.2.2 and RubyGems 1.3, an error such as 'uninitialized constant ApplicationController::ALONETONE' might present itself when using the 'rake gems:install' command. However, I found that if you install all of the gems manually that you can ignore this error message.
+
 You can also install them manually:
 
 			sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha
