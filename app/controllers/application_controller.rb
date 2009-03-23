@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_admin_or_owner?(user)
-    logged_in? && ((current_user.id == user.id) || current_user.admin?)
+    logged_in? && (current_user.admin? || ((current_user.id.to_s == user.id.to_s)))
   end
 
   def current_user_is_admin_or_moderator_or_owner?(user)

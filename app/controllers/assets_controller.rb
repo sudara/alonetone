@@ -251,11 +251,11 @@ class AssetsController < ApplicationController
   
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    current_user_is_admin_or_owner?(@asset.user) || !dangerous_action?
+    !dangerous_action? || current_user_is_admin_or_owner?(@user) || current_user_is_admin_or_owner?(@asset.user)
   end
   
   def dangerous_action?
-    %w(destroy update edit mass_edit).include? action_name
+    %w(destroy update edit mass_edit new create).include? action_name 
   end
   
   def register_listen
