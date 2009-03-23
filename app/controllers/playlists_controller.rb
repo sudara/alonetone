@@ -100,7 +100,7 @@ class PlaylistsController < ApplicationController
       :limit => 10,
       :per_page  => 10,
       :page  =>  params[:favorites_page]
-    )
+    ) rescue nil
 
     if request.xhr? 
         render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
