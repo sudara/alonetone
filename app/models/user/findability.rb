@@ -57,7 +57,7 @@ class User
           )
 
           # inject the result array into the paginated collection:
-          pager.replace(result)
+          pager.replace(result.collect(&:first))
         
           unless pager.total_entries
             # the pager didn't manage to guess the total count, do it manually
