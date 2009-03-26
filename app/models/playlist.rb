@@ -24,6 +24,7 @@ class Playlist < ActiveRecord::Base
   validates_length_of   :title, :within => 4..100
   validates_length_of   :year, :within => 2..4, :allow_blank => true
   validates_presence_of :description
+  validates_length_of :description, :within => 1..2000, :allow_blank => true
   
   has_permalink :title
   
