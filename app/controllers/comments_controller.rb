@@ -59,7 +59,7 @@ class CommentsController < ApplicationController
   
   def index
     if params[:login]
-      @page_title = "Recent comments of #{@user.name}"
+      @page_title = "#{@user.name} Comments"
 
       if display_private_comments_of?(@user)
         @comments = @user.comments.include_private.paginate( :all, 
@@ -68,7 +68,7 @@ class CommentsController < ApplicationController
         )
         
         @comments_made = Comment.include_private.paginate(:all, 
-          :per_page   => 10, 
+          :per_page   => 10,
           :page       => params[:made_page], 
           :order      => 'created_at DESC', 
           :conditions => {:commenter_id => @user.id}

@@ -11,7 +11,7 @@ class User
   end
   
   def has_public_playlists?
-    playlists.public.size >= 1
+    playlists.public.count >= 1
   end
   
   def has_tracks?

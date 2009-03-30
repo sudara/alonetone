@@ -9,8 +9,8 @@
     <% @page_title = @forum.name+ ' forum'%>
 
     <% content_for :extras do %>
-      <%= pluralize @forum.topics.size, 'topics' %>, 
-      <%= pluralize @forum.posts.size, 'posts' %>
+      <%= pluralize @forum.topics.count, 'topics' %>, 
+      <%= pluralize @forum.posts.count, 'posts' %>
       <%= feed_icon_tag @forum.name, forum_posts_path(@forum, :format => :atom)%> 
     <% end %>
 

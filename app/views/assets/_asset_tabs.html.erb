@@ -41,7 +41,7 @@
                 <div class="stats">
                   Uploaded <strong><%= time_ago_in_words asset.created_at %></strong> ago,
         	        listened to <strong><%= asset.listens_count %> times</strong>.
-        	        <% if asset.comments.size > 0 %>
+        	        <% if asset.comments.count > 0 %>
         	           <br/>Commented on <strong><%= pluralize asset.comments.public.size, 'times' %></strong>.
         	        <% end %>
         	        <% if asset.favorites_count > 0 %>

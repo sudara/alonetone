@@ -30,8 +30,8 @@
         <td class="c2 vat">
           <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
           <div class="posts">
-            <%= pluralize forum.topics.size, 'topic' %>, 
-            <%= pluralize forum.posts.size, 'post' %>
+            <%= pluralize forum.topics.count, 'topic' %>, 
+            <%= pluralize forum.posts.count, 'post' %>
           </div>
           <p class="desc"><%= forum.description_html %>
           </p>

@@ -2,6 +2,9 @@ class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
+  default_scope  :include  => [:user => :pic] 
+
+  
   named_scope :descriptionless, {
     :conditions => 'description = "" OR description IS NULL', 
     :order      => 'created_at DESC', 
@@ -10,14 +13,14 @@ class Asset < ActiveRecord::Base
   
   named_scope :recent, {
     :include  => :user, 
-    :order    => 'assets.created_at DESC'
+    :order    => 'assets.id DESC'
   }
   
   named_scope :favorited, {
-    :select     =>  'distinct assets', 
+    :select     =>  'distinct assets.*', 
     :include    =>  :tracks, 
     :conditions => {'tracks.is_favorite' => true}, 
-    :order      =>  'tracks.created_at DESC'
+    :order      =>  'tracks.id DESC'
   }
   
   named_scope :id_not_in, lambda { |asset_ids| {
@@ -97,7 +100,7 @@ class Asset < ActiveRecord::Base
   end
   
   def self.latest(limit=10)
-    find(:all, :include => [{:user => :pic}, :first_playlist], :limit => limit, :order => 'assets.created_at DESC')
+    find(:all, :include => [{:user => :pic}, :first_playlist], :limit => limit, :order => 'assets.id DESC')
   end
   
   # needed for views in case we've got multiple assets on the same page

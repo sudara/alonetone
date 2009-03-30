@@ -1,7 +1,7 @@
 <div id="footer">
 
   <div id="update">Latest News: 
-    <%= link_to "#{truncate(@latest_update && @latest_update.title, 50)}", updates_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+    <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", updates_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
   </div>
 
   <div id="footer_right">

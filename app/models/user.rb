@@ -1,43 +1,40 @@
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting
   
+  default_scope  :include  => :pic
+  
   named_scope :musicians, {
     :conditions => ['assets_count > ?',0], 
     :order      => 'assets_count DESC', 
-    :include    => :pic
   }
   
   named_scope :activated, {
     :conditions => {:activation_code => nil}, 
-    :order      => 'created_at DESC', 
-    :include    => :pic
+    :order      => 'id DESC', 
   }
   
   named_scope :recently_seen, {
     :order    => 'last_seen_at DESC', 
-    :include  => :pic
   }
   
   named_scope :with_location, {
     :conditions => ['users.country != ""'], 
     :order      => 'last_seen_at DESC', 
-    :include    => :pic
   }
   
   named_scope :geocoded, {
     :conditions => ['users.lat != ""'], 
-    :order      => 'created_at DESC', 
-    :include    => :pic
+    :order      => 'id DESC', 
   }
   
   named_scope :alpha, { :order => 'login' }
   
   # Can create music
-  has_many   :assets,        :dependent => :destroy, :order => 'created_at DESC'
-  has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position'
+  has_many   :assets,        :dependent => :destroy, :order => 'id DESC', :include => [:user => :pic]
+  has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position', :include => :pic
   has_one    :pic,           :as => :picable
-  has_many   :comments,      :dependent => :destroy, :order => 'created_at DESC'
-  has_many   :user_reports,  :dependent => :destroy, :order => 'created_at DESC'
+  has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]
+  has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
   
   belongs_to :facebook_account
   has_many :tracks
