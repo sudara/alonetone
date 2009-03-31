@@ -2,9 +2,6 @@ class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
-  default_scope  :include  => [:user => :pic] 
-
-  
   named_scope :descriptionless, {
     :conditions => 'description = "" OR description IS NULL', 
     :order      => 'created_at DESC', 

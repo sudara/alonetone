@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   named_scope :activated, {
     :conditions => {:activation_code => nil}, 
-    :order      => 'id DESC', 
+    :order      => 'users.id DESC', 
   }
   
   named_scope :recently_seen, {
@@ -24,13 +24,13 @@ class User < ActiveRecord::Base
   
   named_scope :geocoded, {
     :conditions => ['users.lat != ""'], 
-    :order      => 'id DESC', 
+    :order      => 'users.id DESC', 
   }
   
   named_scope :alpha, { :order => 'login' }
   
   # Can create music
-  has_many   :assets,        :dependent => :destroy, :order => 'id DESC', :include => [:user => :pic]
+  has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC', :include => [:user => :pic]
   has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position', :include => :pic
   has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]
