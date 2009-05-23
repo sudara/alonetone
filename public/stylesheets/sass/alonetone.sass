@@ -142,34 +142,35 @@
   :position relative
   div.user
     :float left
-    :margin-right 50px
+    :margin-right 25px
     :margin-bottom 30px
-    a
-      img
-        :border 1px solid black
-        :border-top-color rgba(29,31,20,0.38)
-        :border-bottom-color rgba(29,31,20,0.78)
-        :border-left-color rgba(29,31,20,0.48)
-        :border-right-color rgba(29,31,20,0.48)
-        :width 125px
-        :height 125px
-        &.no_border
-          :border-color = !body_background
-      &:hover
-        img
-          :border 1px solid black
-          :border-color = !silver
+    :position relative
+    a.overlay 
+      :position absolute
+      :left 0
+      :top 0
+      :z-index 2
+      :opacity 1.0
+      :background-color transparent
+      :width 137px
+      :height 137px
+    img.cover
+      :width 125px
+      :height 125px
+      :margin-left 6px
+      :margin-top 4px
     .name
-      :color = !white
-      :text-shadow none
+      :margin-left 10px
+      :color = #fff
+      :text-shadow rgba(0, 0, 0, 0.5) 0px 2px 2px
       :text-align center
       :background-color transparent
-      :font-size 16px
-      :font-weight normal
+      :font-size 13px
+      :font-weight bold
       :text-decoration none
-      :margin-top 5px
+      :margin-top 8px
       :height 20px
-      :width 120px
+      :width 115px
       :display block
       :overflow none
       &:hover
@@ -180,7 +181,7 @@
   :margin-top 60px
   :width 101%
   :position relative
-  :padding-left 20px
+  :margin-left 20px
   :margin-right 0
   :padding-right 0
       

@@ -15,11 +15,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         @users = User.paginate_by_params(params) 
+        @sort = params[:sort]
         @user_count = User.count
         @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
-      end
-      format.fbml do
-        @users = User.paginate_by_params(params) 
       end
       format.xml do
         @users = User.activated.search(params[:q], :limit => 1000)

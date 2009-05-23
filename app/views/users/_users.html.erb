@@ -12,14 +12,15 @@
        <%= user_nav_item "monster uploaders", {:action => 'index', :sort => 'monster_uploaders'} %>
        <%= user_nav_item "dedicated listeners", {:action => 'index', :sort => 'dedicated_listeners'}%>
        <%= user_nav_item "recently joined", {:action => 'index', :sort => 'recently_joined'} %>
-       <%= user_nav_item "by location", {:action => 'index', :sort => 'map'} %>
+       <%= user_nav_item "by location", {:action => 'index', :sort => 'map'} %>       
+       <%= user_nav_item "on twitter", {:action => 'index', :sort => 'on_twitter'} %>
       </ul>
       <%= will_paginate @users if @users%>
     </div>
   </div>
   
   <div id="large_users_grid">
-    <% if params[:sort] == 'map'%>
+    <% if @sort == 'map'%>
         <%= render :partial => 'map' %>
     <% else %>
     <%= render :partial => 'shared/user', :collection => @users %>

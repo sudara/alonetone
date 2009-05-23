@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     :order      => 'users.id DESC', 
   }
   
+  named_scope :on_twitter, { 
+    :conditions => ['users.twitter != ?', ''], 
+    :order => 'users.last_seen_at DESC' }
+  
   named_scope :alpha, { :order => 'login' }
   
   # Can create music
@@ -35,14 +39,17 @@ class User < ActiveRecord::Base
   has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]
   has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
-  
-  belongs_to :facebook_account
   has_many :tracks
   
   acts_as_mappable
   before_validation :geocode_address
-  
+
+  # alonetone plus
   has_many :source_files
+  
+  has_many :memberships
+  has_many :groups, :through => :membership
+  
   
   # Can listen to music, and have that tracked
   has_many :listens, 

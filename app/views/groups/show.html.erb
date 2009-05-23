@@ -1,0 +1,5 @@
+<h1><%=h @group.name %></h1>
+
+<h2>Members</h2>
+  
+<%= render :partial => 'shared/user', :collection => @group.users %>
