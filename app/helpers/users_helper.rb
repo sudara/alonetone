@@ -42,7 +42,7 @@ module UsersHelper
   end
   
   def setting(symbol_or_string, user=current_user)
-    logged_in? && user.settings && user.settings[symbol_or_string.to_sym]
+    logged_in? && user.settings && user.settings[symbol_or_string.to_sym] 
   end
   
   def favorite_toggle(asset)

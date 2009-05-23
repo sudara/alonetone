@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
     reset_session
     cookies.delete :auth_token
     flash[:ok] = "Goodbye, see you soon..."
-    redirect_to (previous_page || root_path)
+    redirect_to root_path
   end
 
   protected

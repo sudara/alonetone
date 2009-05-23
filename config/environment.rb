@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
   config.gem 'newrelic_rpm'
   config.gem 'BlueCloth',     :lib => 'bluecloth' 
   config.gem 'hpricot' # for comment processing / markdown fixing
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   
   # Rmagick is *not* required (for example, sudara uses imagescience)
   # config.gem 'rmagick',       :lib => 'RMagick'
