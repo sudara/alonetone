@@ -142,6 +142,7 @@
   :position relative
   div.user
     :float left
+    :width 150px
     :margin-right 25px
     :margin-bottom 30px
     :position relative
@@ -175,7 +176,13 @@
       :overflow none
       &:hover
         :text-decoration underline
-        :color = !silver
+    .twitter
+      :position absolute
+      :bottom 0
+      :right -5px
+      :width 32px
+      :height 32px
+      :background transparent url(../images/icons/tweetzorz.png) no-repeat top left
 
 #large_users_grid
   :margin-top 60px

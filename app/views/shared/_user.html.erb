@@ -6,9 +6,10 @@
 
 	<%= link_to h(user.name), user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %> 
 	
+	
 	<% case @sort 
 	   when 'on_twitter' %>
-	  <br/> On twitter: view or follow
+     	<%= link_to '','http://twitter.com/'+user.twitter, :class => 'twitter'%>
 	<% end %>
 	
 	<span class="details" style="display:none;">
