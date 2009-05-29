@@ -138,4 +138,9 @@ class User
     )
     count > 0 ? count : false
   end
+  
+  def plays_by_month
+    track_plays.count(:all, :group => 'MONTH(listens.created_at)', :include => nil, :conditions => ['listens.created_at > ?', 1.year.ago])
+  end
+
 end

@@ -68,6 +68,14 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def stats
+    @tracks = @user.assets
+    respond_to do |format|
+      format.html 
+      format.xml
+    end
+  end
 
   def new
     @user = User.new

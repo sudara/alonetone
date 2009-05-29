@@ -925,6 +925,23 @@ jQuery(function($) {
   
   $('#radio').attach(Radio);
 
+  // if on the stats page
+  $('#statstable').tablesorter({
+    widgets: ['zebra'],
+    sortList: [[1,1]],
+		sortInitialOrder: 'desc'
+	});
+  $('#statstable a').click(function(){
+    $.ajax({
+     url: $(this).attr('href'),
+     dataType: 'text',
+     success: function(newxml){
+       updateChartXML('total_plays', newxml);
+     }
+   });
+   return false;
+  });
+
 });
 
 $(document).ready(function() {

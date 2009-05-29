@@ -3,7 +3,7 @@ class Listen < ActiveRecord::Base
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
   
   named_scope :from_user, {:conditions => ['listener_id != ""']}
-  
+  named_scope :downloads, {:conditions => {:source => 'download'}}  
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, :counter_cache => true
 
@@ -28,6 +28,7 @@ class Listen < ActiveRecord::Base
   def self.today
     count(:all, :conditions => {:created_at => Time.now.at_beginning_of_day..Time.now})
   end
+
   
   def self.count_within_a_month(options={})
     options[:conditions] = ['listens.created_at > ?', 30.days.ago.at_midnight]
