@@ -105,12 +105,12 @@ class User < ActiveRecord::Base
   def to_param
     "#{login}"
   end
-  
+    
   def to_xml(options = {})
     options[:except] ||= []
     options[:except] << :email << :token << :token_expires_at << :crypted_password << 
                         :identity_url << :fb_user_id << :activation_code << :admin << 
-                        :salt << :moderator << :ip
+                        :salt << :moderator << :ip << :browser << :settings << :plus_enabled
     super
   end
   
@@ -134,6 +134,10 @@ class User < ActiveRecord::Base
   def new_tracks_from_followees(limit)
     Asset.find(:all, :limit => limit, :order => 'assets.created_at DESC',
      :conditions => {:user_id => followee_ids})
+  end
+  
+  def follows_user_ids
+    follows.collect{|f| f.user_id}
   end
   
   def has_followees?
