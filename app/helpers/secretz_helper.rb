@@ -1,0 +1,2 @@
+module SecretzHelper
+end
