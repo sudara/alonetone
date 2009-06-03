@@ -1,0 +1,41 @@
+<% content_for(:css) do %> 
+  <%= javascript_include_tag 'charts.js' %>
+<% end %>
+
+<% render :layout => 'user' do %>
+<% fusion_chart('/charts/FCF_Line.swf', user_stats_path(@user,:format => :xml),'total_plays','800','250',false,false){} %>
+<div class="static_content" id="stats">
+<table id="statstable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Listens</th>
+      <th>Downloads</th>
+      <th>Favorites</th>
+      <th>Comments</th>
+      <th>Plays/Week</th>
+      <th>Uploaded</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <% @tracks.each do |track| %>
+    <tr class>
+      <td><%= link_to track.name, stats_user_track_path(@user, track, :format => :xml) %></td>
+      <td><%= track.listens_count %></td>
+      <td><%= track.listens.downloads.count %></td>
+      <td><%= track.favorites_count %></td>
+      <td><%= track.comments_count %></td>
+      <td><%= sprintf "%0.1f", track.listens_per_week %></td>
+      <td><%= track.created_at.to_date.to_s %></td>  
+     </tr>
+  <% end %>
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+<% end %>

@@ -1,15 +1,22 @@
-<% if user.try(:first) %>
-  <% count = user[1] %>
-  <% user = user.first %>
-<% end %>
-
-
 <% div_for(user, :class => 'user-index') do %>
-	<%= user_image_link(user, :large) %><br/>
-	
+
+  
+  <%= link_to(image_tag('user-cover-125.png'), user_home_path(user), :class => 'overlay', :title => " #{user.name}
+ #{user.assets_count > 0 ? pluralize(user.assets_count,'uploaded tracks') : ''} 
+ Joined alonetone #{user.created_at.to_date.to_s(:long)}
+ #{user_location(user)}") %>
+  <%= image_tag(user.avatar(:large), :class => 'cover') %>
+
 	<%= link_to h(user.name), user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %> 
-	<%= "(#{count})" if count %>
+	
+	
+	<% case @sort 
+	   when 'on_twitter' %>
+     	<%= link_to '','http://twitter.com/'+user.twitter, :class => 'twitter'%>
+	<% end %>
+	
 	<span class="details" style="display:none;">
+	
  		<%= link_to(pluralize(user.assets_count, 'track'), user_tracks_path(user)) if user.assets_count > 0 %><br/>
  		<%= link_to(pluralize(user.playlists_count, 'playlist'), user_playlists_path(user)) if user.playlists_count > 0 %>
 			<% if admin? %>

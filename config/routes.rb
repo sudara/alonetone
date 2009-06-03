@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :groups
+
   map.resources :posts
 
   
@@ -54,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.all_comments 'comments', :controller => 'comments'
   map.user_comments ':login/comments', :controller => 'comments'
+  map.user_stats ':login/stats.:format', :controller => 'users', :action => 'stats'
   
   map.hot_track 'hot_track/:position.:format', 
     :controller => 'assets', 
@@ -72,10 +75,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :collection => {:search => :get}
 
 
-  map.resources :users, :controller => :users, :member => {:attach_pic => :post, :sudo => :any, :toggle_favorite => :any, :toggle_follow => :any} do |user|
+  map.resources :users, :controller => :users, 
+    :member => {:attach_pic => :post, :sudo => :any,
+    :toggle_favorite => :any, :toggle_follow => :any} do |user|
     user.resources :source_files, :path_prefix => ':login'
     # TODO: Confusing, because Tracks is also a model. Don't confuse this route, this is indeed for the Assets model
-    user.resources :tracks, :controller => :assets, :member => {:share => :get, :destroy => :any}, :collection => {:latest => :get, :search => :post, :mass_edit => :get}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
+    user.resources :tracks, :controller => :assets, :member => {:share => :get, :destroy => :any, :stats => :get}, :collection => {:latest => :get, :search => :post, :mass_edit => :get}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
       track.resources :comments
     end
     user.favorites 'favorites', :controller => 'playlists', :action => 'favorites',:path_prefix => ':login'
@@ -91,6 +96,7 @@ ActionController::Routing::Routes.draw do |map|
     playlist.resources :comments
    end
   end
+  
   map.search 'search', :controller => 'search', :action => 'index'
   map.search_query 'search/:query', :controller => 'search', :action => 'index'
   map.namespace(:admin) do |admin|
@@ -98,10 +104,9 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users
   end
   
-  # Install the default route as the lowest priority.
-  #map.connect ':controller/:action/:id'
   
   map.root :controller => 'assets', :action => 'latest'
+  
   map.user_home ':login', :controller => 'users', :action => 'show'
   map.user_feeds ':login.:format', :controller => 'users', :action => 'show'
   

@@ -44,6 +44,12 @@ class User
           :per_page => 15, 
           :page => params[:page]
         )
+      
+      when 'on_twitter'
+        on_twitter.paginate(:all,
+          :per_page => 15,
+          :page => params[:page]
+        )
 
       when 'dedicated_listeners'
         @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|

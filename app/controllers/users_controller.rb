@@ -15,11 +15,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         @users = User.paginate_by_params(params) 
+        @sort = params[:sort]
         @user_count = User.count
         @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
-      end
-      format.fbml do
-        @users = User.paginate_by_params(params) 
       end
       format.xml do
         @users = User.activated.search(params[:q], :limit => 1000)
@@ -31,7 +29,7 @@ class UsersController < ApplicationController
       # API 
       format.json do
         users = User.musicians.find(:all,:include => :pic)
-        render :json => '{ records : ' + users.to_json(:methods => [:name, :type, :avatar], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:tracks_count,:created_at, :user_id]) + '}'
+        render :json => '{ records : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:tracks_count,:created_at, :user_id]) + '}'
       end
      # format.fbml do
      #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])
@@ -68,6 +66,14 @@ class UsersController < ApplicationController
           page.replace 'user_latest', :partial => "latest"
         end
       end
+    end
+  end
+  
+  def stats
+    @tracks = @user.assets
+    respond_to do |format|
+      format.html 
+      format.xml
     end
   end
 

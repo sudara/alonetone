@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController  
   before_filter :find_user, :except => [:radio]
-  before_filter :find_asset, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
   
   # we check to see if the current_user is authorized based on the asset.user
   before_filter :login_required, :except => [:index, :show, :latest, :radio]
@@ -228,6 +228,12 @@ class AssetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_tracks_url(current_user) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def stats
+    respond_to do |format|
+      format.xml
     end
   end
   

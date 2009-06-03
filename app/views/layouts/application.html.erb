@@ -16,7 +16,7 @@
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/updates.rss"/>
 
-    <%= javascript_include_tag 'jquery-1.3.2.min','soundmanager','jquery-ui-1.7.1.custom.min','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','application', :cache => 'allonetone' %>
+    <%= javascript_include_tag 'jquery-1.3.2.min','soundmanager','jquery-ui-1.7.1.custom.min','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','application', 'tablesorter', :cache => 'allonetone' %>
     
     <!-- ensure token is available to javascript for accessible link posts, etc -->
     <%= render :partial => 'shared/javascript_auth_token' %>
@@ -52,20 +52,21 @@
 				<div class="clear"> </div>
 				<%= yield :bottom %>
 	  </div> <!-- end columns -->
-            <% if ALONETONE.show_debug_info %>
-                <div style="width:100%;min-height:200px;color:#fff">
-                    <% if current_user %>
-                        last seen at <%= current_user.last_seen_at %><br/>
-                        last session at <%= current_user.last_session_at %><br/>
-                        <%= debug session %>
-                        <%= debug current_user if logged_in? %>
-                    <% end %>
-                    
-                </div>
-            <% end %>
 
-	   </div><!-- end content -->
-	   </div><!-- end wrapper -->
+
+    <% if ALONETONE.show_debug_info %>
+      <div style="width:100%;min-height:200px;color:#fff">
+          <% if current_user %>
+              last seen at <%= current_user.last_seen_at %><br/>
+              last session at <%= current_user.last_session_at %><br/>
+              <%= debug session %>
+              <%= debug current_user if logged_in? %>
+          <% end %>
+      </div>
+    <% end %>
+
+	    </div><!-- end content -->
+	  </div><!-- end wrapper -->
     <div id="footer_spacer"> </div>
 		<%= render :partial => 'shared/footer' %>
 	  

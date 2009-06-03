@@ -26,8 +26,11 @@ PASSWORD_SALT = 'so_salty_its_unbearable'
 WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2
 WillPaginate::ViewHelpers.pagination_options[:outer_window] = 0
 
-# Take advantage of rails 2.1
-ActiveRecord::Base.partial_updates = true
+ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
+  :nice => '%b %e %y',
+  :short_month => '%b',
+  :long_month_and_year => '%B %Y'
+)
 
 
 # These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable
