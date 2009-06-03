@@ -1,8 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :groups
-
   map.resources :posts
-
+  map.admin 'secretz', :controller => 'secretz'
   
   # manual, ghetto, overriding links
   map.rpm_challenge 'rpmchallenge', :controller => 'pages', :action => 'rpm_challenge'

@@ -270,6 +270,7 @@ class AssetsController < ApplicationController
       :listener     => current_user || nil, 
       :track_owner  => @asset.user, 
       :source       => @referer, 
+      :user_agent   => @agent,
       :ip           => request.remote_ip
     ) unless bot?
   end
@@ -289,7 +290,7 @@ class AssetsController < ApplicationController
   
   def prevent_abuse
     if bot? 
-      Rails.logger.error "#{@asset.filename} #{@agent} #{request.remote_ip} #{@referer} #{current_user || nil}"
+      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.filename} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
       render(:text => "Denied due to abuse", :status => 403)    
     end
   end

@@ -17,7 +17,7 @@ describe AssetsController do
     "",
     "Googlebot/2.1 (+http://www.google.com/bot.html)",
     "you're momma's so bot..."
-    "Baiduspider+(+http://www.baidu.jp/spider/) ",
+    "Baiduspider+(+http://www.baidu.jp/spider/)",
     "baidu/Nutch-1.0 "
   ]
   
