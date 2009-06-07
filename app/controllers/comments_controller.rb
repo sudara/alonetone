@@ -58,53 +58,65 @@ class CommentsController < ApplicationController
   
   
   def index
-    if params[:login]
-      @page_title = "#{@user.name} Comments"
-
-      if display_private_comments_of?(@user)
-        @comments = @user.comments.include_private.paginate( :all, 
-          :per_page   => 10, 
-          :page       => params[:page]
-        )
-        
-        @comments_made = Comment.include_private.paginate(:all, 
-          :per_page   => 10,
-          :page       => params[:made_page], 
-          :order      => 'created_at DESC', 
-          :conditions => {:commenter_id => @user.id}
-        )
-      else
-        @comments = @user.comments.public.paginate( :all,
-          :per_page   => 10, 
-          :page       => params[:page]
-        )
-        
-        @comments_made = Comment.public.paginate( :all, 
-          :per_page   => 10, 
-          :page       => params[:made_page], 
-          :order      => 'created_at DESC', 
-          :conditions => { :commenter_id => @user.id, :private => false }
-        )
+    respond_to do |format|
+      format.json do
+        if present?(params[:start]) && present?(params[:end])
+          @comments = Comment.count_by_user(params[:start].to_date, params[:end].to_date)
+        else
+          @comments = Comment.count_by_user(30.days.ago, Date.today)
+        end
+        render :json => @comments.collect{|c,count| [c.name, c.avatar,count]}.to_json
       end
+      format.html do
+        if params[:login]
+          @page_title = "#{@user.name} Comments"
+
+          if display_private_comments_of?(@user)
+            @comments = @user.comments.include_private.paginate( :all, 
+              :per_page   => 10, 
+              :page       => params[:page]
+            )
+        
+            @comments_made = Comment.include_private.paginate(:all, 
+              :per_page   => 10,
+              :page       => params[:made_page], 
+              :order      => 'created_at DESC', 
+              :conditions => {:commenter_id => @user.id}
+            )
+          else
+            @comments = @user.comments.public.paginate( :all,
+              :per_page   => 10, 
+              :page       => params[:page]
+            )
+        
+            @comments_made = Comment.public.paginate( :all, 
+              :per_page   => 10, 
+              :page       => params[:made_page], 
+              :order      => 'created_at DESC', 
+              :conditions => { :commenter_id => @user.id, :private => false }
+            )
+          end
       
-    else # if params[:login]
-      @page_title = "Recent Comments"
+        else # if params[:login]
+          @page_title = "Recent Comments"
       
-      @comments = Comment.public.paginate( :all,
-          :per_page => 10,
-          :page => params[:page]
-      ) unless admin?
+          @comments = Comment.public.paginate( :all,
+              :per_page => 10,
+              :page => params[:page]
+          ) unless admin?
       
-      @comments = Comment.include_private.paginate( :all,
-          :per_page => 10,
-          :page => params[:page]
-      ) if admin?
+          @comments = Comment.include_private.paginate( :all,
+              :per_page => 10,
+              :page => params[:page]
+          ) if admin?
       
-      @spam = Comment.paginate_by_spam( true,
-          :order    => 'created_at DESC',
-          :per_page => 10,
-          :page     => params[:spam_page]
-      ) if moderator? or admin?
+          @spam = Comment.paginate_by_spam( true,
+              :order    => 'created_at DESC',
+              :per_page => 10,
+              :page     => params[:spam_page]
+          ) if moderator? or admin?
+        end
+      end
     end
   end
   
