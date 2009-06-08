@@ -34,7 +34,7 @@ class Comment < ActiveRecord::Base
   })
   
   attr_accessor :current_user
-  
+
   def body
     self.body_html || BlueCloth::new(self[:body]).to_html
   end
@@ -49,5 +49,11 @@ class Comment < ActiveRecord::Base
   
   def trusted_user
     commenter_id && commenter.admin?
+  end
+  
+  # for montgomeru magic
+  def self.count_by_user(start_date, end_date, limit=30)
+    limit = limit > 100 ? 100 : limit
+    Comment.public.count(:all, :group => :commenter, :conditions => ['created_at > ? AND created_at < ? AND commenter_id IS NOT NULL',start_date, end_date], :limit => limit, :order => 'count_all DESC')
   end
 end

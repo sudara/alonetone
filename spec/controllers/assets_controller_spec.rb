@@ -10,7 +10,6 @@ describe AssetsController do
     "Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)",
     "msie",
     'webkit'
-        
     ]
     
   @bad_user_agents = [
@@ -18,6 +17,8 @@ describe AssetsController do
     "",
     "Googlebot/2.1 (+http://www.google.com/bot.html)",
     "you're momma's so bot..."
+    "Baiduspider+(+http://www.baidu.jp/spider/)",
+    "baidu/Nutch-1.0 "
   ]
   
   

@@ -91,6 +91,18 @@ class Listen < ActiveRecord::Base
     )
   end
   
+  def self.count_by_ip
+    Listen.count(:all, :group => :ip, :conditions => ['created_at > ?',60.days.ago], :order => 'count_all DESC', :limit => 25)
+  end
+  
+  def self.count_by_track
+    Listen.count(:all, :group => :asset, :conditions => ['created_at > ?',60.days.ago], :order => 'count_all DESC', :limit => 25)
+  end
+  
+  def self.find_user_by_ip(ip)
+    Listen.find(:first, :conditions => ['ip = ? AND listener_id IS NOT NULL',ip]).listener rescue nil
+  end
+  
   protected
   
   # iterate through the months

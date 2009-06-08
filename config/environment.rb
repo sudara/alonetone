@@ -15,6 +15,9 @@ Rails::Initializer.run do |config|
   config.gem 'hpricot' # for comment processing / markdown fixing
   config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   
+  config.gem "rspec", :lib => false, :version => ">= 1.2.0"
+  config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"  
+  
   # Rmagick is *not* required (for example, sudara uses imagescience)
   # config.gem 'rmagick',       :lib => 'RMagick'
 

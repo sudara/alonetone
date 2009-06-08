@@ -2,7 +2,7 @@
 <% @page_title = search_posts_title -%>
 
 <% content_for :h1 do %>
-<% if params[:q].blank? -%>
+<% if params[:forum_q].blank? -%>
   <%= @page_title %>
 <% else -%>
   <%= 'Searching for' %> '<%= h params[:q] %>'
@@ -22,7 +22,11 @@
     <%= pagination @posts %>
 </div>
 
+<% if present? @posts %>
 <%= render :partial => 'posts/posts' %>
+<% else %>
+  <h2>:( Sorry, nobody has bothered to talk about '<%=h params[:forum_q]%>' before</h2>
+<% end %>
 
 <div class="forum_paginator">
     <%= pagination @posts %>

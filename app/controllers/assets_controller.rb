@@ -1,15 +1,17 @@
+
 class AssetsController < ApplicationController  
   before_filter :find_user, :except => [:radio]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
   
   # we check to see if the current_user is authorized based on the asset.user
   before_filter :login_required, :except => [:index, :show, :latest, :radio]
-  before_filter :find_referer, :prevent_abuse, :only => :show
+  before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
   
   #rescue_from NoMethodError, :with => :user_not_found
   #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
   @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera', 'safari']
+  @@bots = ['bot','spider','baidu']
   
   # GET /assets
   # GET /assets.xml
@@ -265,26 +267,33 @@ class AssetsController < ApplicationController
   end
   
   def register_listen
-    @agent = request.user_agent.downcase
     @asset.listens.create(
       :listener     => current_user || nil, 
       :track_owner  => @asset.user, 
       :source       => @referer, 
+      :user_agent   => @agent,
       :ip           => request.remote_ip
     ) unless bot?
   end
   
   def bot?
     return true unless present? request.user_agent 
-    not browser? or @agent.include?('bot')
+    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent}
   end
   
   def browser?
     @@valid_listeners.any?{|valid_agent| @agent.include? valid_agent} 
   end
   
+  def set_user_agent
+    @agent = request.user_agent.downcase    
+  end
+  
   def prevent_abuse
-    render(:text => "Denied due to abuse", :status => 403) if abuser?    
+    if bot? 
+      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.filename} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
+      render(:text => "Denied due to abuse", :status => 403)    
+    end
   end
   
   def abuser?
