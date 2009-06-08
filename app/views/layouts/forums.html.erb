@@ -18,6 +18,12 @@
   <%= yield :sidebar %>
 
   <div id="forums_layout">
+        <div class="search">
+          <% form_tag posts_url, :id =>'forum_search',:method => :get do %>
+            <%= text_field_tag 'q', (@q || 'search forums') %>
+            <%= submit_tag 'search' %>
+          <% end %>
+      </div>
   <%= yield %>
   </div>
   

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       end
       # API 
       format.json do
-        users = User.musicians.find(:all,:include => :pic)
+        users = User.alpha.musicians.find(:all,:include => :pic)
         render :json => '{ records : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:tracks_count,:created_at, :user_id]) + '}'
       end
      # format.fbml do

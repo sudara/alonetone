@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     :conditions => ['users.twitter != ?', ''], 
     :order => 'users.last_seen_at DESC' }
   
-  named_scope :alpha, { :order => 'login' }
+  named_scope :alpha, { :order => 'display_name' }
   
   # Can create music
   has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC', :include => [:user => :pic]

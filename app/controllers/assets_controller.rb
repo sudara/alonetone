@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
   #rescue_from NoMethodError, :with => :user_not_found
   #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   
-  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera']
+  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera', 'safari']
   
   # GET /assets
   # GET /assets.xml
