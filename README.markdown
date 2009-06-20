@@ -2,17 +2,15 @@
 
 [alonetone](http://alonetone.com) is a growing independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
 
-alonetone was launched in January 2008
+alonetone was launched in January 2008 and as of June 2009 hosts over 8000 songs from 800 musicians and has delivered over 500,000 mp3s to real listeners.
 
-## alonetone is looking for more love
+## alonetone is always looking for more development love
 
-Are you a musician / music lover with Rails or UI/design chops? 
+Have ruby and/or javascript skills? Help us build the best music platform, period. 
 
-Help us to build the best indy music platform out there.
+Warm the hearts of musicians world wide by working on an app that provides musicians with a home, a connection to each other, to their listeners, and to a source of inspiration. 
 
-If you are interested, [sign up over at alonetone](http://alonetone.com/signup) and check out what is there. We could always use more usability/UI/design help, basic testing, general feedback, and eventually, some more Rails love. 
-
-Secondly, please email me at sudara at alonetone dot com.
+Or get jiggy with our build-to-order API and do something crazy and exciting.
 
 ### Bug reporting 
 
@@ -24,11 +22,11 @@ To create and run the best online home a musician could want to have, providing 
 
 How do we reach this goal?
 
-* It is easy to use, intuitive, and consistent (grandma-friendly)
-* It is attractive to look at 
+* It must be easy to use, straightforward, intuitive, and consistent (grandma-friendly)
+* It must be attractive to look at 
 * It provides musicians with practical, useful and inspiring tools and services
 * It provides listeners and first time site visitors with a 'hook' into their first taste of alonetone music and helps them explore the site in an intelligent and guided way.
-* It encourages artist exploration 
+* It encourages artist exploration and the feeling to stick around.
 * It does not overwhelm folks with TMI (too much information) or TMO (too many options) or TMF (too many features)
 
 For more info, visit [the alonetone faq](http://alonetone.com/about)
@@ -41,15 +39,14 @@ Really, only the very basics are implemented.
 * Unlimited mp3 uploads for musicians
 * Creation of playlists / albums
 * MP3 streaming and download
-* Basic artist browsing
-* Tracking of listens and providing useful feedback to artists
-* Very basic commenting system
-* Facebook integration
+* Artist browsing
+* Tracking of listens and providing useful feedback and statistics to artists
+* Commenting system
 * Feeds for iTunes podcasts and offsite flash players
 
 ### Current tech
 
-* Rails 2.1
+* Rails 2.3
 * Rspec
 * jQuery and LowPro
 * SoundManager 2 (for flash mp3 playback)
