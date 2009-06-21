@@ -71,6 +71,18 @@ class Topic < ActiveRecord::Base
     permalink
   end
 
+  def self.replied_to_by(user)
+    user.posts.find(:all, :order => 'topics.last_updated_at DESC', :limit => 5, :include => :topic)
+  end
+
+  def self.popular
+    Post.count(:all, :group => :topic, :conditions => ['posts.created_at > ?',10.days.ago], :limit => 5, :order => 'count_all DESC')
+  end
+
+  def self.replyless
+    Topic.find(:all, :limit => 5, :order => 'created_at DESC', :conditions => 'posts_count = 1')
+  end
+
 protected
   
   def set_default_attributes
