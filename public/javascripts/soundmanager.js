@@ -307,12 +307,10 @@ function SoundManager(smURL,smID) {
     if (!_s._didInit) {
 	  throw _s._complain('soundManager.play(): '+_s.strings.notReady,arguments.callee.caller);
 	}
-	  console.log(oOptions);
-	  console.log(typeof oOptions);
-	  console.log(typeof(oOptions) !== 'object');
+
     if (!_s._idCheck(sID)) {
       if (typeof oOptions !== 'object') {
-		oOptions = {url:oOptions}; // overloading use case: play('mySound','/path/to/some.mp3');
+		  oOptions = {url:oOptions}; // overloading use case: play('mySound','/path/to/some.mp3');
 	  }
       if (oOptions && oOptions.url) {
         // overloading use case, creation + playing of sound: .play('someID',{url:'/path/to.mp3'});

@@ -716,7 +716,7 @@ Radio = $.klass({
   },
   printTracks : function(){ //debugging
     for(i=0;i< this.behavior.instances.length;i++){
-      console.log(RadioTrack.instances[i].track_title);
+      //console.log(RadioTrack.instances[i].track_title);
     }
   },
   changeStation : function(newStation){
