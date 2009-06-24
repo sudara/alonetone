@@ -13,7 +13,7 @@ class User
   validates_format_of       :login, :with => Format::STRING, :message => ' must be lowercase and only made from numbers and letters'
   validates_length_of       :login, :within => 3..40
   validates_length_of       :display_name, :within => 3..50, :allow_blank => true
-  validates_length_of       :bio, :within => 0..500, :message => "can't be empty (or longer than 600 characters)", :on => :update
+  validates_length_of       :bio, :within => 0..1000, :message => "can't be empty (or longer than 1000 characters, keep it short and simple!)", :on => :update
 
   validates_format_of       :identity_url, :with => /^https?:\/\//i, :allow_nil => true
   validates_format_of       :itunes, :with => /^(phobos|itunes).apple.com\/WebObjects\/MZStore.woa\/wa\//i, :allow_blank => true, :message => 'link must be a link to the itunes store'
