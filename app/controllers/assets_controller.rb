@@ -251,7 +251,7 @@ class AssetsController < ApplicationController
       when 'download' then 'download'
       when 'home'     then 'alonetone home'
       when 'facebook' then 'facebook'
-      when 'listenapp' then 'http//:ListenApp.com'
+      when 'listenapp' then 'http://ListenApp.com'
       when nil        then 'direct hit'
       when ''         then 'direct hit'
       else request.env['HTTP_REFERER']
