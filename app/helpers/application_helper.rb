@@ -71,6 +71,7 @@ module ApplicationHelper
   def link_source(source)
     return source if @@listen_sources.include?(source) || source == 'alonetone' || source == 'unknown' || source == 'direct hit'
     return link_to('alonetone home', root_path) if source == 'home'
+    return link_to('ListenApp!', 'http://listenapp.com') if source.include?('listenapp')
     link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, ''), source
   end
   
