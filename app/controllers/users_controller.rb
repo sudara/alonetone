@@ -29,7 +29,10 @@ class UsersController < ApplicationController
       # API 
       format.json do
         users = User.alpha.musicians.find(:all,:include => :pic)
-        render :json => '{ records : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:tracks_count,:created_at, :user_id]) + '}'
+        cached_json = cache("usersjson-"+User.last.id.to_s) do
+          '{ records : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:tracks_count,:created_at, :user_id]) + '}'
+        end
+        render :json => cached_json
       end
      # format.fbml do
      #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])
