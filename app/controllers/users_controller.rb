@@ -28,8 +28,8 @@ class UsersController < ApplicationController
       end
       # API 
       format.json do
-        users = User.alpha.musicians.find(:all,:include => :pic)
         cached_json = cache("usersjson-"+User.last.id.to_s) do
+          users = User.alpha.musicians.find(:all,:include => :pic)
           '{ records : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:tracks_count,:created_at, :user_id]) + '}'
         end
         render :json => cached_json
