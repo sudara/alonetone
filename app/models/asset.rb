@@ -137,6 +137,10 @@ class Asset < ActiveRecord::Base
     self.class.formatted_time(self[:length])
   end
   
+  def seconds
+    self[:length] # a bit backwards, ain't it?
+  end
+  
   # hack for sproutcore json
   def type
     'Track'
