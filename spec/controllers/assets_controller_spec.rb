@@ -16,7 +16,7 @@ describe AssetsController do
     "Mp3Bot/0.1 (http://mp3realm.org/mp3bot/)",
     "",
     "Googlebot/2.1 (+http://www.google.com/bot.html)",
-    "you're momma's so bot..."
+    "you're momma's so bot...",
     "Baiduspider+(+http://www.baidu.jp/spider/)",
     "baidu/Nutch-1.0 "
   ]

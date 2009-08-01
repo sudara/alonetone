@@ -12,6 +12,7 @@ class AssetsController < ApplicationController
   
   @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera', 'safari']
   @@bots = ['bot','spider','baidu']
+  @@bad_ip_ranges = ['195.239', '220.181', '61.135', '60.28.232', '121.14', '221.194']
   
   # GET /assets
   # GET /assets.xml
@@ -278,8 +279,10 @@ class AssetsController < ApplicationController
   end
   
   def bot?
+    ip = request.remote_ip
     return true unless present? request.user_agent 
-    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent}
+    return true if @@bad_ip_ranges.any?{|cloaked_ip| ip.match /^#{cloaked_ip}/  } # check bad ips that fake user agent
+    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent} # check user agent
   end
   
   def browser?
