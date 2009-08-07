@@ -1,0 +1,491 @@
+/*Main structure*/
+body{
+font-family: Georgia;
+font-size:10px;
+position:relative;
+margin:auto;
+overflow:scroll;
+background: #e4e4d9;
+}
+html{
+width:990px;
+position:relative;
+margin:auto;
+background: transparent;
+}
+div#wrapper{
+position:relative;
+margin:auto;
+width:980px;
+min-height:600px;
+background: transparent url(../img/back.png) center no-repeat;
+float:left;
+}
+/*start left/main side container*/
+div#wp1{/*left side*/
+position:relative;
+margin:auto;
+float:left;
+width:660px;
+min-height:400px;
+background: transparent;
+}
+.post{/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:660px;
+min-height:300px;
+background: transparent;
+}
+.post-title{/*left side post container*/
+position:relative;
+margin:auto;
+float:none;
+width:660px;
+height:20px;
+background: #f2f2ed;
+padding:0 0 10px 0;
+  -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+	-webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+}
+.post-title-left{/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:130px;
+height:20px;
+text-align:left;
+background: transparent;
+}
+.post-title-right{/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:130px;
+height:20px;
+text-align:right;
+background: transparent;
+}
+.post-title-mid {/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:400px;
+height:20px;
+text-align:center;
+background: transparent;
+}
+.post-body{
+position:relative;
+margin:1px 0 0 0;
+float:left;
+width:660px;
+min-height:300px;
+background: #f9f9f6;
+  -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+	-webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+}
+.post-bot{
+position:relative;
+margin:auto;
+float:left;
+width:660px;
+min-height:30px;
+background: transparent;
+}
+.post-bot-left {/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:130px;
+min-height:30px;
+background: transparent url(../img/arro.png) top center no-repeat;
+}
+.post-bot-mid {/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:400px;
+height:30px;
+background: transparent;
+}
+.post-bot-right{/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+cursor:pointer;
+top:-2px;
+width:130px;
+height:30px;
+background: transparent url(../img/com-but.png) 32px 0px no-repeat;
+}
+/*end post*/
+/*strat comment*/
+.comment-all{/*left side post container*/
+position:relative;
+margin:0 0 30px 0;
+float:left;
+width:595px;
+padding-left:65px;
+background:transparent;
+}
+.comment{/*left side post container*/
+position:relative;
+margin:auto;
+float:left;
+width:595px;
+min-height:70px;
+border-bottom:1px solid #e5e5db;
+background: transparent;
+  -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+	-webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+}
+.comment-title{
+position:relative;
+margin:auto;
+float:none;
+width:549px;
+padding: 5px 23px 5px 23px;
+background: #f2f2ed;
+}
+.comment-body{
+position:relative;
+margin:0; /*0 1px 0;  | 1px space bet. comments*/
+float:none;
+width:549px;
+min-height:7px;
+padding: 13px 23px 13px 23px;
+background: #f2f2ed;
+}
+/*end comment*/
+/*end left/main side container*/
+/*start right side container*/
+div#wp2{/*right side*/
+float:right;
+position:relative;
+margin:auto;
+width:320px;
+min-height:400px;
+background: transparent;
+}
+.wp2-title{/*right side container title*/
+float:none;
+position:relative;
+margin:0 8px 0px 10px;
+width:300px;
+padding:1px 0 1px 0;
+background: #f2f2ed;
+  -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+	-webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+}
+.wp2-title-o{/*right side container title orange*/
+float:none;
+position:relative;
+margin:0 10px 0px 10px;
+width:300px;
+padding:1px 0 1px 0;
+background: #fa934d;
+  -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+	-webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+}
+.wp2-mid{/*right side container txt*/
+float:none;
+position:relative;
+margin:1px 10px 1px 10px;
+width:260px; /*40 px les, because of the padding -> 20px*/
+padding: 10px 20px 5px 20px;
+background: #f9f9f6;
+  -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+	-webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
+}
+/*tweeter start*/
+div#tweets{/*right side container txt tweeter*/
+float:none;
+position:relative;
+padding: 0;
+margin:0;
+background: transparent;
+list-style-type: none;
+}
+p.ptweet{
+background: transparent;
+list-style-type: none;
+font-size:12px;
+}
+a.atweet{
+  display:block;
+  font-size:12px;
+  color:#a59493;
+}
+#tweets ul {
+ margin:0; 
+ padding:0;
+}
+#tweets ul li {
+	list-style-type:none; /*keine bullets -> omg that sucked*/
+	outline:none;
+	margin:0;
+	padding:0;
+	margin:auto;
+	!text-decoration:none;
+}
+/*tweeter end*/
+/*end right side container*/
+/*mein end*/
+/*header start*/
+div#header{/*header: logo, link to alonetone, title, */
+position:relative;
+margin:auto;
+width:980px;
+min-height:90px;
+background: #e4e4d9;
+}
+div#hd1{/*header left side*/
+position:relative;
+float:left;
+margin:auto;
+width:660px;
+min-height:90px;
+background: transparent;
+}
+div#hd1-top{/*header left side link to alonetone*/
+position:relative;
+margin:auto;
+width:660px;
+min-height:25px;
+background: transparent;
+}
+div#hd1-bot{/*header left side*/
+position:relative;
+margin:auto;
+width:660px;
+min-height:65px;
+background: transparent url(../img/title.png) center no-repeat;
+}
+div#hd2{/*header right side*/
+position:relative;
+margin:auto;
+float:right;
+width:320px;
+min-height:90px;
+background: transparent url(../img/logo.png) center top no-repeat;
+}
+/*bottom start*/
+div#bottom{
+position:relative;
+margin:30px 0 0 0;
+float:none;
+width:970px;
+min-height:250px;
+background: #574e3e;
+float:left;
+}
+.bottom-left{
+position:relative;
+padding-top:30px;
+margin:auto;
+width:325px;
+min-height:220px;
+border-right: 1px solid #6c614d;
+background: transparent url(../img/latestup.png) 10px 10px no-repeat;
+float:left;
+}
+.bottom-mid{
+position:relative;
+padding-top:30px;
+margin:auto;
+width:320px;
+min-height:220px;
+border-right: 1px solid #6c614d;
+background: transparent url(../img/latestco.png) 8px 10px no-repeat;
+float:left;
+}
+.bottom-right{
+position:relative;
+padding-top:30px;
+margin:auto;
+width:321px;
+min-height:220px;
+background: transparent url(../img/cukickass.png) 9px 9px no-repeat;
+float:left;
+}
+/*bottom end*/
+/*text styles start*/
+h1.h1post{
+  color:#f8ab75;
+  padding:0px;
+  margin:0px;
+	margin: 10px 0 0 0;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:30px;
+	font-weight:bold;
+	text-align:center;
+}
+h2.h2post{
+  padding:0;
+  margin:0;
+  color:#a29f95;
+	margin: 0 0 25px 0;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:10px;
+	font-weight:bolder;
+	text-align:center;
+}
+h1.post-entry{
+  color:#f8ab75;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:11px;
+	font-weight:bold;
+}
+h1.right-orange{
+  color:#f98845;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:11px;
+	font-weight:bold;
+	text-align:center;
+	font-style:italic;
+}
+h1.right-white{
+  color:#fff;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+	font-style:italic;
+}
+h1.h1-comment{
+  margin:0;
+  padding:0;
+  color:#928987;
+	font-size:14px;
+	font-weight:bolder;
+	text-align:left;
+	font-style:normal;
+}
+h2.h2-comment{
+  margin:0;
+  padding:0;
+  color:#928987;
+	font-size:13px;
+	font-weight:bold;
+	text-align:left;
+	font-style:normal;
+}
+h1.h1bottom{
+  color:#fff;
+  margin:0;
+  margin-left:10px;
+  margin-top:15px;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+	font-size:14px;
+	font-weight:bolder;
+	text-align:left;
+	font-style:normal;
+}
+p.p-post{
+  color:#000;
+  margin:10px 64px 46px 64px;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:14px;
+	line-height:20px;
+	font-weight:normal;
+	text-align:justify;
+	font-style:normal;
+}
+p.p-comment{
+  color:#000;
+  margin:0;
+	font-size:13px;
+	font-weight:normal;
+	text-align:left;
+	font-style:normal;
+}
+p.pbottom{
+  color:#fff;
+  margin:0px 0 5px 10px ;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+	font-size:12px;
+	font-weight:normal;
+	text-align:left;
+	font-style:normal;
+}
+
+p.right-black{
+  color:#000;
+  margin:0px;
+  padding:0px;
+	font-size:11px;
+	font-weight:normal;
+	text-align:left;
+	font-style:normal;
+}
+/*text styles end*/
+/*links styles start*/
+a{
+  color:#d55232;
+  display:inline;
+  text-decoration:none;
+}
+
+a.right-red{
+  color:#d55232;
+  display:block;
+  text-decoration:none;
+	font-size:11px;
+  margin:0px 0 5px 0 ;
+  padding:0px;
+	font-weight:normal;
+	text-align:left;
+	font-style:normal;
+}
+a.prev-next{
+  display:block;
+  text-decoration:none;
+  margin:0px;
+  font-size:12px;
+  color:#a9a9a9}
+a.prev-next:visited {
+  display:block;
+  padding-top:8px;
+  text-decoration:none;
+  margin:0px;
+  font-size:12px;
+  color:#a9a9a9}
+a.prev-next:hover {
+  display:block;
+  text-decoration:none;
+  margin:0px;
+  font-size:12px;
+  color:#000}
+/*links styles end*/
+/*ul li post styles start*/
+ul.ul-post{
+  color:#d55232;
+  margin:-35px 0 0 0 ;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:14px;
+	line-height:5px;
+	font-weight:normal;
+	text-align:justify;
+	font-style:normal;
+}
+li.li-post{
+  color:#000;
+  margin: 10px 0 5px 40px;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
+	font-size:14px;
+	line-height:5px;
+	font-weight:normal;
+	text-align:justify;
+	font-style:normal;
+	list-style-image: url(../img/bullet.png);/*bullet img, I could do it with span styles if you would like?*/
+}
+
+/*ul li post styles end*/
+{
+  -moz-outline-style: none;
+}
+
+
+
