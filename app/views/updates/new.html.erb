@@ -2,7 +2,7 @@
 
 <%= error_messages_for :update %>
 
-<% form_for(@update) do |f| %>
+<% form_for @update do |f| %>
   <p>
     <b>Title</b><br />
     <%= f.text_field :title %>
@@ -18,4 +18,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', blog_path %>
+<%= link_to 'Back', blog_home_path %>

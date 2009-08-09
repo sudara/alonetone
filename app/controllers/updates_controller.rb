@@ -1,6 +1,7 @@
+# Yup, this is the blog controller 
 class UpdatesController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
-  before_filter :find_recent_updates, :except => [:destroy, :update]
+  before_filter :gather_sidebar_fun, :except => [:destroy, :update]
     
   # GET /updates
   # GET /updates.xml
@@ -12,7 +13,7 @@ class UpdatesController < ApplicationController
       :include  => [ :comments => [:commenter => :pic] ]
     )
     
-    @page_title = "Latest News and Updates"
+    @page_title = "alonetone Blog"
         
     respond_to do |format|
       format.html # index.html.erb
@@ -24,9 +25,10 @@ class UpdatesController < ApplicationController
   # GET /updates/1.xml
   def show
     @update = Update.find_by_permalink(params[:id])
+    @previous = Update.find(:first, :conditions => ['created_at < ?',@update.created_at], :order => 'created_at DESC')
+    @next = Update.find(:first, :first,:conditions => ['created_at > ?',@update.created_at], :order => 'created_at ASC')
     @comments = @update.comments.public.find(:all, :include => :commenter)
     @page_title = @update.title
-    @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @update }
@@ -97,7 +99,7 @@ class UpdatesController < ApplicationController
   
   protected
   
-  def find_recent_updates
+  def gather_sidebar_fun
     @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
   end
   

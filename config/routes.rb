@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :features, :sessions, :user_reports
   map.blog_home 'blog', :controller => 'updates', :action => 'index'
   map.resources :blog, :controller => 'updates'
+  map.resources :updates
   map.resources :comments, :member => {:unspam => :get}
     
 

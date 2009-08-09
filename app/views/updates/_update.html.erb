@@ -1,22 +1,56 @@
-<% div_for update, :class => cycle("odd", "even") do %>
-  <div class="update_title_bar">
-      <%= image_tag User.find(:first).avatar(:small) %>
-      <div class="title">
-        <h2 class="box_title"><%= link_to update.title, blog_path(update.permalink)%></h2>
+
+      <div class="post update">
+         <% unless @updates %>
+           <div class="post-title">
+             <div class="post-title-left">
+             <%= link_to '&laquo;Previous entry', blog_path(@previous.permalink), :class => 'prev-next' if @previous %> 
+             </div><!-- div end post-title-left -->
+             <div class="post-title-mid">
+             </div><!-- div end post-title-mid -->         
+             <div class="post-title-right"><%= link_to 'Next entry&raquo;', blog_path(@next.permalink),:class => 'prev-next' if @next%></div><!-- div end post-title-right -->        
+           </div><!-- div end post-title -->
+          <% end %>
+
+       <div class="post-body">
+         <h1 class="h1post"><%= link_to update.title, blog_path(update.permalink)%></h1>
+         <h2 class="h2post">- posted by <a href ="/sudara">Sudara</a> on <%= update.created_at.to_s(:short)%> - <%= update.comments.count %> comments -</h1>      
+          <%= update.content_html %>
+       </div><!-- div end post-body -->  
+              
+      <div id="comment_<%= update.id %>" class="comment_new" style="display:none;">
+        <div class="comment_form">
+          <% form_for update.comments.new, :id=>"comment_form_#{update.id}" do |f| %>
+           <div class="comment_as">
+           <% if logged_in? %>
+              <%= image_tag current_user.avatar(:tiny) %>Say something, <%=h current_user.name %>:
+           <% else %>
+              <%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path %>:
+           <% end %>
+           </div>
+           <%= f.text_area :body, :rows => 4, :cols => 60, :class=> 'double_trouble', :id=>"comment_body_#{update.id}"  %>
+           <%= f.hidden_field :commentable_type, :value => 'update', :id=> "comment_commentable_type_#{update.id}"%>
+           <%= f.hidden_field :commentable_id, :value => update.id, :id=> "comment_commentable_id_#{update.id}"%>
+     
+           <div class="submit_wrapper">
+              <div class="comment_waiting" >
+                <div class="text"><!-- placeholder response text --></div>
+              </div>
+              <div class="small_spinner" style="display:none;"></div>
+              <%= f.submit "make your comment", :class => 'comment_submit',:id => "submit_#{update.id}"%> 
+            </div>
+          <% end %>  
+        </div>
       </div>
-      <div class="edit"><%= link_to 'edit', edit_blog_path(update.permalink) if admin? %></div>
-      <span class="about_details"><%= update.created_at.to_date.to_s(:long)%></span>
-  </div>
+       <div class="post-bot">
+         <div class="post-bot-left"></div><!-- div end post-bot-left -->
+         <div class="post-bot-mid"></div><!-- div end post-bot-mid -->         
+         <div class="post-bot-right"><%= link_to "","#comment_#{update.id}", :class => 'slide_open_href'%></div><!-- div end post-bot-right -->   
+       </div><!-- div end post-body -->
 
-  <div class="body"><div class="text">
-    <%= update.print %>  
-  </div></div>
-  <div class="indented_comments">
-    <h2 class="box small">Your Comments</h2>
-    <%= render :partial => 'shared/comment', :collection => update.comments.public %>
-    <div class="static_content">
-        <%= render :partial => 'comment', :object => update %>
-    </div>
-  </div>
-<% end %>
+       <div class="comment-all">
+         
+        <%= render :partial => 'comment', :collection => update.comments %>
+         
+       </div><!-- div end comment-all -->
 
+     </div><!-- div end post -->

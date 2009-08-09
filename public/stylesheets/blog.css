@@ -1,11 +1,56 @@
+/* reset */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100.01%;
+  font-family: inherit;
+  vertical-align: baseline; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+ol, li {
+  list-style: none; }
+
+.clear {
+  display: block;
+  clear: both;
+  content: " "; }
+
+input {
+  margin: 5px 0px; }
+
+div.submit_wrapper {
+  text-align: right; }
+
+div.join_wrapper input {
+  color: #37392b;
+  font-size: 14px;
+  font-weight: bold;
+  width: 150px;
+  height: 25px; }
+
+strong {
+  font-weight: bold; }
+
+em {
+  font-style: italic; }
+
 /*Main structure*/
 body {
   font-family: Georgia;
   font-size: 10px;
   position: relative;
   margin: auto;
-  overflow: scroll;
-  background: #e4e4d9;
+  background: #e4e4d9 url(../images/blog/back.png) no-repeat center 30px;
+
 }
 html {
   width: 990px;
@@ -18,7 +63,6 @@ div#wrapper {
   margin: auto;
   width: 980px;
   min-height: 600px;
-  background: transparent url(../images/blog/back.png) center no-repeat;
   float: left;
 }
 /*start left/main side container*/
@@ -36,6 +80,7 @@ div#wp1 {/*left side*/
   float: left;
   width: 660px;
   min-height: 300px;
+  margin-bottom: 30px;
   background: transparent;
 }
 .post-title {/*left side post container*/
@@ -53,32 +98,37 @@ div#wp1 {/*left side*/
   position:relative;
   margin: auto;
   float: left;
-  width: 130px;
+  width: 150px;
+  line-height: 29px;
   height: 20px;
   text-align: left;
   background: transparent;
+  padding-left: 10px;
 }
 .post-title-right {/*left side post container*/
   position:relative;
   margin: auto;
   float: left;
-  width: 130px;
+  width: 150px;
+  line-height: 29px;
   height: 20px;
   text-align: right;
+  padding-right: 10px;
   background: transparent;
 }
 .post-title-mid {/*left side post container*/
   position:relative;
   margin: auto;
   float: left;
-  width: 400px;
+  width: 320px;
   height: 20px;
+  line-height: 29px;
   text-align: center;
   background: transparent;
 }
 .post-body {
   position: relative;
-  margin: 1px 0 0 0;
+  margin: 0;
   float: left;
   width: 660px;
   min-height: 300px;
@@ -114,11 +164,15 @@ div#wp1 {/*left side*/
   position:relative;
   margin: auto;
   float: left;
-  cursor: pointer;
   top: -2px;
   width: 130px;
   height: 30px;
   background: transparent url(../images/blog/com-but.png) 32px 0px no-repeat;
+}
+.post-bot-right a{
+  display:block;
+  width: 130px;
+  height: 30px;
 }
 /*end post*/
 /*strat comment*/
@@ -135,7 +189,6 @@ div#wp1 {/*left side*/
   margin: auto;
   float: left;
   width: 595px;
-  min-height: 70px;
   border-bottom: 1px solid #e5e5db;
   background: transparent;
   -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
@@ -154,7 +207,7 @@ div#wp1 {/*left side*/
   margin: 0; /*0 1px 0; | 1px space bet. comments*/
   float:none;
   width: 549px;
-  min-height: 7px;
+  min-height: 60px;
   padding: 13px 23px 13px 23px;
   background: #f2f2ed;
 }
@@ -174,7 +227,10 @@ div#wp2 {/*right side*/
   position: relative;
   margin: 0 8px 0px 10px;
   width: 300px;
-  padding: 1px 0 1px 0;
+  height: 30px;
+  line-height: 30px;
+  border-top: 1px solid #F2F2ED;
+  border-bottom: 1px solid #F2F2ED;
   background: #f2f2ed;
   -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
   -webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
@@ -182,7 +238,8 @@ div#wp2 {/*right side*/
 .wp2-title-o {/*right side container title orange*/
   float:none;
   position: relative;
-  margin: 0 10px 0px 10px;
+  text-align: center;
+  margin: 0 20px 0px 10px;
   width: 300px;
   padding: 1px 0 1px 0;
   background: #fa934d;
@@ -192,9 +249,11 @@ div#wp2 {/*right side*/
 .wp2-mid {/*right side container txt*/
   float:none;
   position: relative;
-  margin: 1px 10px 1px 10px;
+  margin: 0px 10px 0px 10px;
   width: 260px; /*40 px les, because of the padding -> 20px*/
-  padding: 10px 20px 5px 20px;
+  border-top: 1px solid #E5E5DB;
+  border-bottom: 1px solid #E5E5DB;
+  padding: 10px 20px 15px 20px;
   background: #f9f9f6;
   -moz-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
   -webkit-box-shadow: 0px 1px 3px rgba(87,78,62,0.10);
@@ -212,6 +271,7 @@ p.ptweet {
   background: transparent;
   list-style-type: none;
   font-size: 12px;
+  margin-bottom: 6px;
 }
 a.atweet {
   display: block;
@@ -239,7 +299,6 @@ div#header {/*header: logo, link to alonetone, title, */
   margin: auto;
   width: 980px;
   min-height: 90px;
-  background: #e4e4d9;
 }
 div#hd1 {/*header left side*/
   position:relative;
@@ -253,7 +312,9 @@ div#hd1-top {/*header left side link to alonetone*/
   position:relative;
   margin: auto;
   width: 660px;
+  margin-left: -15px;
   min-height: 25px;
+  line-height: 25px;
   background: transparent;
 }
 div#hd1-bot {/*header left side*/
@@ -270,6 +331,11 @@ div#hd2 {/*header right side*/
   width: 320px;
   min-height: 90px;
   background: transparent url(../images/blog/logo.png) center top no-repeat;
+}
+#hd2 a{
+  display:block;
+  width: 300px;
+  height: 90px;
 }
 /*bottom start*/
 div#bottom {
@@ -316,10 +382,11 @@ h1.h1post {
   color: #f8ab75;
   padding: 0px;
   margin: 0px;
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
   font-size: 30px;
-  font-weight: bold;
+  font-weight: normal;
+  font-style: italic;
   text-align: center;
 }
 h2.h2post {
@@ -328,8 +395,8 @@ h2.h2post {
   color: #a29f95;
   margin: 0 0 25px 0;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
-  font-size: 10px;
-  font-weight: bolder;
+  font-size: 12px;
+  font-weight: normal;
   text-align: center;
 }
 h1.post-entry {
@@ -350,6 +417,7 @@ h1.right-white {
   color: #fff;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   font-size: 12px;
+  margin-top: 10px;
   font-weight: bold;
   text-align: center;
   font-style: italic;
@@ -383,9 +451,9 @@ h1.h1bottom {
   text-align: left;
   font-style: normal;
 }
-p.p-post {
+.post-body p {
   color: #000;
-  margin: 10px 64px 46px 64px;
+  margin: 10px 64px 16px 64px;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
   font-size: 14px;
   line-height: 20px;
@@ -393,13 +461,22 @@ p.p-post {
   text-align: justify;
   font-style: normal;
 }
-p.p-comment {
+.post-body p img{
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  display:block;
+  -moz-box-shadow: 0px 2px 6px rgba(87,78,62,0.50);
+  -webkit-box-shadow: 0px 2px 6px rgba(87,78,62,0.50);
+}
+.comment-body p {
   color: #000;
   margin: 0;
   font-size: 13px;
   font-weight: normal;
   text-align: left;
   font-style: normal;
+  overflow: hidden;
 }
 p.pbottom {
   color: #fff;
@@ -427,7 +504,9 @@ a {
   display: inline;
   text-decoration: none;
 }
-
+a:hover{
+  text-decoration: underline;
+}
 a.right-red {
   color: #d55232;
   display: block;
@@ -438,6 +517,9 @@ a.right-red {
   font-weight: normal;
   text-align: left;
   font-style: normal;
+}
+a.right-red:hover{
+  text-decoration:underline;
 }
 a.prev-next {
   display: block;
@@ -463,26 +545,94 @@ a.prev-next:hover {
 }
 /*links styles end*/
 /*ul li post styles start*/
-ul.ul-post {
+.comment-body ul,
+.post-body ul {
   color: #d55232;
-  margin: -35px 0 0 0 ;
+  margin: 0px 0 20px 0 ;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
   font-size: 14px;
-  line-height: 5px;
+  line-height: 15px;
   font-weight: normal;
   text-align: justify;
   font-style: normal;
 }
-li.li-post {
+.comment-body li,
+.post-body li {
   color: #000;
-  margin: 10px 0 5px 40px;
+  margin: 0px 0 5px 84px;
   text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
   font-size: 14px;
-  line-height: 5px;
+  line-height: 15px;
   font-weight: normal;
   text-align: justify;
   font-style: normal;
+  list-style-position: inside;
   list-style-image: url(../images/blog/bullet.png);/*bullet img, I could do it with span styles if you would like?*/
+}
+.comment-body ul{
+  margin-top: 15px;
+}
+.comment-body li{
+  margin-left: 20px;
+}
+
+.comment_user{
+  float: left;
+  position: relative;
+  z-index: 100;
+}
+.comment_user a,
+.comment_user > img{
+  display: block;
+  padding:15px;
+}
+
+.comment_new{
+  clear:both;
+  background-color:#9d9990 ;
+  padding: 15px 50px;
+  position: relative;
+}
+.comment_new .comment_as{
+  position: relative;
+  font-size: 14px;
+  height: 25px;
+  margin-bottom: 10px;
+  font-style: italic;
+  color: #fff;
+  text-shadow: rgba(0,0,0,0.5) 1px 1px;
+  line-height: 10px;
+}
+.comment_as img{
+  padding-right: 5px;
+}
+.comment_new textarea{
+  width: 530px;
+  height: 160px;
+}
+
+.comment_waiting{
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    left: 50px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+div.ajax_success, div.ajax_fail{
+  background: transparent url(../images/icons/ok.png) no-repeat top left;
+  text-indent: 35px;
+  height: 30px;
+  line-height: 30px;
+}
+div.ajax_fail{
+  background: transparent url(../images/icons/not_ok.png) no-repeat top left;
+ 
+}
+.pagination{
+  float: right;
+  font-size: 16px;
 }
 
 /*ul li post styles end*/ {

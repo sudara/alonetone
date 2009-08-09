@@ -1,4 +1,4 @@
-<h1>Editing update</h1>
+<h1>Editing blog post</h1>
 
 <%= error_messages_for :update %>
 
@@ -18,5 +18,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @update %> |
+<%= link_to 'Show', blog_path(@update.permalink) %> |
 <%= link_to 'Back', blog_path %>

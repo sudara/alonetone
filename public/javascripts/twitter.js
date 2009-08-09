@@ -28,8 +28,11 @@
  * @date $Date: 2009-03-09 09:46:25 +0000 (Mon, 09 Mar 2009) $
  */
 
+// jquery hack
+Twitter = {};
+
 // to protect variables from resetting if included more than once
-if (typeof renderTwitters != 'function') (function () {
+if (typeof Twitter.renderTwitters != 'function') (function () {
     /** Private variables */
     var browser = (function() {
     	var b = navigator.userAgent.toLowerCase();
@@ -51,7 +54,7 @@ if (typeof renderTwitters != 'function') (function () {
     
     // to create a public function within our private scope, we attach the 
     // the function to the window object
-    window.renderTwitters = function (obj, options) {
+    Twitter.renderTwitters = function (obj, options) {
         // private shortcuts
         function node(e) {
             return document.createElement(e);
@@ -121,7 +124,7 @@ if (typeof renderTwitters != 'function') (function () {
         target.appendChild(ul);
     };
     
-    window.getTwitters = function (target, id, count, options) {
+    Twitter.getTwitters = function (target, id, count, options) {
         guid++;
         
 
@@ -164,7 +167,7 @@ if (typeof renderTwitters != 'function') (function () {
             if (options.timeout) {
                 clearTimeout(window['twitterTimeout' + guid]);
             }
-            renderTwitters(obj, options);
+            Twitter.renderTwitters(obj, options);
         };
 
         // check out the mad currying!
@@ -367,11 +370,11 @@ if (typeof renderTwitters != 'function') (function () {
     }
 })();
 
-getTwitters('tweets', { 
-  id: 'alonetone', 
-  count: 4, 
-  enableLinks: true, 
-  ignoreReplies: false, 
-  clearContents: true,
-  template: '<p class="ptweet">%text%<a class="atweet" href="http://twitter.com/%user_screen_name%/statuses/%id%/" class="timelink">%time%</a></p>'
-});
+      Twitter.getTwitters('tweets', { 
+      id: 'alonetone', 
+      count: 4, 
+      enableLinks: true, 
+      ignoreReplies: false, 
+      clearContents: true,
+      template: '<p class="ptweet">%text%<a class="atweet" href="http://twitter.com/%user_screen_name%/statuses/%id%/" class="timelink">%time%</a></p>'
+    });
