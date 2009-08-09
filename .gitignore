@@ -19,6 +19,8 @@ log/*.log
 .DS_Store
 *.tmp
 public/stylesheets/alonetone.css
+public/stylesheets/allonetone.css
+public/stylesheets/alonetone-v2.css
 public/stylesheets/flash.css
 public/stylesheets/ie6.css
 public/stylesheets/nav.css
