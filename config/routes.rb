@@ -8,25 +8,17 @@ ActionController::Routing::Routes.draw do |map|
   map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
   
   
-  map.blog 'blog', :controller => 'updates', :action => 'index'
   map.feedback 'feedback', :controller => 'user_reports'
-  map.resources :features, :sessions, :user_reports, :updates
+  map.resources :features, :sessions, :user_reports
+  map.blog_home 'blog', :controller => 'updates', :action => 'index'
+  map.resources :blog, :controller => 'updates'
   map.resources :comments, :member => {:unspam => :get}
     
-  # RESTFUL WORKAROUND FOR FACEBOOK
-  # map.facebook_home '', :controller => 'facebook_accounts', :conditions => {:canvas => true}
-  # map.resources 'facebook', :controller => 'facebook_accounts', 
-  #     :member => {:remove_from_profile => :get},
-  #     :collection => {:add_to_profile => :any}, # hack, because we're not actually using resources
-  #     :conditions =>{:canvas => true}
-  # map.facebook_resources :facebook_accounts, 'facebook_accounts', :controller => 'facebook_accounts', :condition => {:canvas => true}
 
   map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
   map.about 'about/:action', :controller => 'pages'
   map.halp  'about/halp/:action', :controller => 'pages'
-   
-  # You can have the root of your site routed by hooking up '' 
-  # -- just remember to delete public/index.html.
+  
   
   map.signup   'signup',        :controller => 'users',   :action => 'new'
   map.settings 'settings',      :controller => 'users',   :action => 'edit'

@@ -7,7 +7,7 @@ module CommentsHelper
     when 'feature'
       link_to h(comment.commentable.name), feature_path(comment.commentable.user.login)
     when 'update' # aka blog
-      link_to h(comment.commentable.name), update_path(comment.commentable.permalink)
+      link_to h(comment.commentable.name), blog_path(comment.commentable.permalink)
     end
   end
 end

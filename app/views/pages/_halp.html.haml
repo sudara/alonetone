@@ -9,7 +9,7 @@
       = user_nav_item "Press", {:controller => 'pages', :action => 'promo' }, :title => 'press and promotional info' 
       = user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact', :title => 'alonetone statistics'
       = user_nav_item "Forums", forums_path, :added_class => 'contact', :title => 'forums'
-      = user_nav_item "Latest News", updates_path, :added_class => 'contact', :title => 'latest news (blog)'
+      = user_nav_item "Blog", blog_path, :added_class => 'contact', :title => 'Blog'
     = yield :pagination
 - content_for :static do
   = yield

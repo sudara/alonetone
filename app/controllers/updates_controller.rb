@@ -1,10 +1,7 @@
 class UpdatesController < ApplicationController
   before_filter :login_required, :except => [:index, :show]
   before_filter :find_recent_updates, :except => [:destroy, :update]
-  layout 'pages'
-  
-  
-  
+    
   # GET /updates
   # GET /updates.xml
   def index

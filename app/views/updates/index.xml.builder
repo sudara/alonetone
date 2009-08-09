@@ -18,7 +18,7 @@ xml.feed "xml:lang" => "en-US", "xmlns" => 'http://www.w3.org/2005/Atom' do
       xml.updated   update.updated_at.xmlschema
       xml.category "term" => 'news and updates'
       xml.link "rel" => "alternate", "type" => "text/html", 
-        "href" => update_path(update)
+        "href" => blog_path(update)
       xml.title     strip_tags(update.title)
       unless update.content_html.blank?
         xml << %{<content type="html">

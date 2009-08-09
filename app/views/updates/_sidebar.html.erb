@@ -5,7 +5,7 @@
         <div class="static_content">
             <ul>
             <% for update in @recent_updates %>
-                <li><%= link_to update.title, update_path(update.permalink) %></li>
+                <li><%= link_to update.title, blog_path(update.permalink) %></li>
             <% end %>
             </ul>
         </div>
