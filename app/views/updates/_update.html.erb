@@ -42,7 +42,8 @@
         </div>
       </div>
        <div class="post-bot">
-         <div class="post-bot-left"></div><!-- div end post-bot-left -->
+         <div class="post-bot-left <%= update.comments.count > 0 ? 'with_arrow' : '' %> "></div><!-- div end post-bot-left -->
+
          <div class="post-bot-mid"></div><!-- div end post-bot-mid -->         
          <div class="post-bot-right"><%= link_to "","#comment_#{update.id}", :class => 'slide_open_href'%></div><!-- div end post-bot-right -->   
        </div><!-- div end post-body -->

@@ -150,7 +150,9 @@ div#wp1 {/*left side*/
   float: left;
   width: 130px;
   min-height: 30px;
-  background: transparent url(../images/blog/arro.png) top center no-repeat;
+}
+.post-bot-left.with_arrow{
+  background: transparent url(../images/blog/arro.png) top center no-repeat;  
 }
 .post-bot-mid {/*left side post container*/
   position:relative;
@@ -461,6 +463,18 @@ h1.h1bottom {
   text-align: justify;
   font-style: normal;
 }
+.post-body blockquote{
+  -moz-box-shadow: 0px 2px 6px rgba(87,78,62,0.30);
+  -webkit-box-shadow: 0px 2px 6px rgba(87,78,62,0.30);
+  margin: 0px 40px 25px 80px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: #EEE;  
+}
+.post-body blockquote p{
+  margin: 5px 20px;
+}
+
 .post-body p img{
   max-width: 500px;
   margin: auto;

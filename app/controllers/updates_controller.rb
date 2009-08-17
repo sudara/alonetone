@@ -59,7 +59,7 @@ class UpdatesController < ApplicationController
     respond_to do |format|
       if @update.save
         flash[:notice] = 'Update was successfully created.'
-        format.html { redirect_to blog_path }
+        format.html { redirect_to blog_path(@update.permalink) }
         format.xml  { render :xml => @update, :status => :created, :location => @update }
       else
         format.html { render :action => "new" }
