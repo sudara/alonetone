@@ -1,3 +1,4 @@
+require 'bluecloth'
 class Comment < ActiveRecord::Base
   
   named_scope :public, {
@@ -23,7 +24,7 @@ class Comment < ActiveRecord::Base
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever
   belongs_to :user
   
-  validates_length_of :body, :within => 1..1000
+  validates_length_of :body, :within => 1..2000
   
   formats_attributes :body
   

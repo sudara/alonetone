@@ -213,6 +213,9 @@ div#wp1 {/*left side*/
   padding: 13px 23px 13px 23px;
   background: #f2f2ed;
 }
+.comment-body p{
+  padding-bottom: 14px;
+}
 /*end comment*/
 /*end left/main side container*/
 /*start right side container*/
