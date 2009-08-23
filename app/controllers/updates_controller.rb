@@ -12,9 +12,7 @@ class UpdatesController < ApplicationController
       :page     => params[:page], 
       :include  => [ :comments => [:commenter => :pic] ]
     )
-    
-    @page_title = "alonetone Blog"
-        
+          
     respond_to do |format|
       format.html # index.html.erb
       format.xml
