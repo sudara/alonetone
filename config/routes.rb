@@ -3,10 +3,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.admin 'secretz', :controller => 'secretz'
   
-  # manual, ghetto, overriding links
   map.rpm_challenge 'rpmchallenge', :controller => 'pages', :action => 'rpm_challenge'
   map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
-  
   
   map.feedback 'feedback', :controller => 'user_reports'
   map.resources :features, :sessions, :user_reports

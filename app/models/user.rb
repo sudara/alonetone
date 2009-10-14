@@ -157,6 +157,11 @@ class User < ActiveRecord::Base
     self.class.name
   end  
   
+  def touch
+    updated_at_will_change!
+    save
+  end
+  
   protected
   
   def followee_ids

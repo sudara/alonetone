@@ -1,3 +1,5 @@
-<% div_for(small_user, :class => 'small_user') do %>
-  <%= user_image_link(small_user, :small)%>
+<% cache("#{small_user.cache_key}-pic-small") do %>
+  <% div_for(small_user, :class => 'small_user') do %>
+    <%= user_image_link(small_user, :small)%>
+  <% end %>
 <% end %>

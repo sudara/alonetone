@@ -1,3 +1,4 @@
+
 <div id="user_header">
 
   <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar', :alt => "#{h(@user.name)}"), profile_path(@user), :class => 'image', :id=>'alonetoner', :title => "#{h(@user.name)}'s profile - all about #{h(@user.name)}") %>
@@ -5,6 +6,9 @@
   <div class="user_title">
     <h1 class="user"><%=h @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
       <%= follow_toggle(@user) %>
+  
+  <% cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>
+
     <% if authorized? %>
       <%= link_to 'edit your profile', edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" %>
       <%= link_to image_tag('icons/alonetone_plus_small.png'), user_plus_path(@user), :class=> 'alonetone_plus_link' if authorized? && @user.plus_enabled? %>
@@ -26,4 +30,5 @@
     </ul>
   </div>
 </div>
+<% end %>
   <%= yield %>

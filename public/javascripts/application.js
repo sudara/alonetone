@@ -47,7 +47,27 @@ DismissableNotice = $.klass(Remote.PutLink,{
 
 
 FavoriteToggle = $.klass(Remote.Link,{
+  
+  // set the correct state to begin with
+  // based on whether it's included in userFavorites array
+  
+  initialize:function(options){
+    if(window.userFavorites.length > 0){
+      item = jQuery.grep(window.userFavorites, function(element, index){
+        return element == options.asset_id; 
+      });
+      if(item.length > 0){ // user has it as a fav
+        this.element.addClass('favorited');
+      }
+    }
+    $super();
+  },
+  
   beforeSend:function(e){
+    // modify the link to use the correct user's username
+    
+    
+    
     if(this.element.hasClass('favorited'))
       this.element.removeClass('favorited');
     else

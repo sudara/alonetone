@@ -16,7 +16,8 @@
 		
 		<% if @user.has_public_playlists? %>
 			<h2 id="user_latest_playlists">Latest Playlists by <%=@user.name%></h2>
-		  <%= render :partial => 'shared/carousel' %>
+		    <%= render :partial => 'shared/carousel' %>
+			
 			<div class="clear"> </div>
 		<% end %>
 	
@@ -37,7 +38,10 @@
 	  
 	  <% content_for :right do %>
     	  <%= render :partial => 'popular' if present?(@popular_tracks) && (setting('most_popular', @user) == 'true')%>
+    	 
+    	  <% cache("#{@user.id}+#{@comments.size}") do %>
     	  <%= render :partial => 'shared/comments' if @comments.size > 0 %>
+	      <% end %>
 	  <% end %>	
 		
 	</div>
