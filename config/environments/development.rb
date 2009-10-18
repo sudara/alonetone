@@ -18,3 +18,5 @@ config.action_controller.perform_caching             = true
 config.action_mailer.raise_delivery_errors = false
 
 config.action_mailer.delivery_method = :test
+
+config.middleware.use "Rack::Bug"
