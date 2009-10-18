@@ -1,0 +1,13 @@
+<% javascript_tag do %>
+  window.authenticityToken = '<%= form_authenticity_token %>'; 
+  window.username = '<%= @user.login %>'; 
+  window.userFavorites = <%= (logged_in? ? current_user.favorite_asset_ids : [] ).to_json%>;
+  window.userPersonalization = '<div class="comment_as">' + 
+     <% if logged_in? %>
+        '<%= image_tag current_user.avatar(:tiny) %>Say something, <%=h current_user.name %>:'+
+     <% else %>
+        '<%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:'+
+     <% end %> 
+  '</div>';
+     
+<% end %>
