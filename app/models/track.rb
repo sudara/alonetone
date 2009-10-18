@@ -17,10 +17,8 @@ class Track < ActiveRecord::Base
   belongs_to :user
   
   named_scope :favorites, {
-    :select     => 'DISTINCT assets.*, tracks.*', 
     :conditions => ['is_favorite = ?',true], 
-    :order      => 'tracks.created_at DESC', 
-    :joins      => {:asset => {:user => :pic}}
+    :order      => 'tracks.created_at DESC'
   }
 
 
