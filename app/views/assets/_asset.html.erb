@@ -8,6 +8,5 @@
 <% end %>
 
 <% cache(asset.cache_key+'tabs') do %>
-
  <%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset, :id => id} unless @single_track %>
 <% end %>

@@ -4,14 +4,17 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title || 'alonetone, a damn fine home for musicians' %> - alonetone</title>
+    
     <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','facebox','alonetone','forums', :cache => 'alonetone-v2'%>
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
-        <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
+    <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
+	
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
-        <meta content="index,follow" name="robots"/>
-        <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from, independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
+    <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
+    <meta content="index,follow" name="robots"/>
+    <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from, independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
 		<meta content="<%=@keywords || 'alonetone, upload, mp3, musician, home, music, independent, artist, free, legal, mp3'%>" name="Keywords" />
+		
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/updates.rss"/>
@@ -53,17 +56,6 @@
 				<%= yield :bottom %>
 	  </div> <!-- end columns -->
 
-
-    <% if ALONETONE.show_debug_info %>
-      <div style="width:100%;min-height:200px;color:#fff">
-          <% if current_user %>
-              last seen at <%= current_user.last_seen_at %><br/>
-              last session at <%= current_user.last_session_at %><br/>
-              <%= debug session %>
-              <%= debug current_user if logged_in? %>
-          <% end %>
-      </div>
-    <% end %>
 
 	    </div><!-- end content -->
 	  </div><!-- end wrapper -->
