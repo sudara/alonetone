@@ -1,6 +1,6 @@
 <% javascript_tag do %>
   window.authenticityToken = '<%= form_authenticity_token %>'; 
-  window.username = '<%= logged_in? ? @user.login : "Guest" %>'; 
+  window.username = '<%= logged_in? ? current_user.login : "Guest" %>'; 
   window.userFavorites = <%= (logged_in? ? current_user.favorite_asset_ids : [] ).to_json%>;
   window.userPersonalization = '<div class="comment_as">' + 
      <% if logged_in? %>
