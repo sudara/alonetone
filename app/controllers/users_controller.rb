@@ -167,13 +167,13 @@ class UsersController < ApplicationController
   end
   
   def toggle_favorite
-    return false unless Asset.find(params[:asset_id]) # no bullshit
-    existing_track = @user.tracks.find(:first, :conditions => {:asset_id => params[:asset_id], :is_favorite => true})
+    return false unless logged_in? && Asset.find(params[:asset_id]) # no bullshit
+    existing_track = current_user.tracks.find(:first, :conditions => {:asset_id => params[:asset_id], :is_favorite => true})
     if existing_track  
       existing_track.destroy && Asset.decrement_counter(:favorites_count, params[:asset_id])
     else
-      favs = Playlist.find_or_create_by_user_id_and_is_favorite(:user_id => @user.id, :is_favorite => true) 
-      added_fav = favs.tracks.create(:asset_id => params[:asset_id], :is_favorite => true, :user_id => @user.id)
+      favs = Playlist.find_or_create_by_user_id_and_is_favorite(:user_id => current_user.id, :is_favorite => true) 
+      added_fav = favs.tracks.create(:asset_id => params[:asset_id], :is_favorite => true, :user_id => current_user.id)
       Asset.increment_counter(:favorites_count, params[:asset_id]) if added_fav
     end
     render :nothing => true

@@ -2,7 +2,7 @@ require 'bluecloth'
 class Comment < ActiveRecord::Base
   
   named_scope :public, {
-    :conditions => {:spam => false, :private => :false},
+    :conditions => {:spam => false, :private => false},
     :order      => 'id DESC'
   }
   

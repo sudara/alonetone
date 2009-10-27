@@ -1,4 +1,5 @@
 <% if present?(@follows) %>
+  <% cache(cache_digest(@follows)) do %>
   <h2 class="box">Follows</h2>
   <div id="follows" class="box static_content clearfix">
 
@@ -6,6 +7,8 @@
 
       <div class="clear"></div>
   </div>
+  <% end %>
+  
 <% else %>
   <h2 class="box">Listens to</h2>
   <div id="follows" class="box static_content clearfix">

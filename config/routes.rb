@@ -67,7 +67,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users, :controller => :users, 
     :member => {:attach_pic => :post, :sudo => :any,
-    :toggle_favorite => :any, :toggle_follow => :any} do |user|
+    :toggle_follow => :any} do |user|
     user.resources :source_files, :path_prefix => ':login'
     # TODO: Confusing, because Tracks is also a model. Don't confuse this route, this is indeed for the Assets model
     user.resources :tracks, :controller => :assets, :member => {:share => :get, :destroy => :any, :stats => :get}, :collection => {:latest => :get, :search => :post, :mass_edit => :get}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
@@ -86,6 +86,8 @@ ActionController::Routing::Routes.draw do |map|
     playlist.resources :comments
    end
   end
+  
+  map.toggle_favorite 'toggle_favorite', :controller => 'users', :action => 'toggle_favorite'
   
   map.search 'search', :controller => 'search', :action => 'index'
   map.search_query 'search/:query', :controller => 'search', :action => 'index'

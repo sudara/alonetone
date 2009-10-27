@@ -51,14 +51,16 @@ FavoriteToggle = $.klass(Remote.Link,{
   // set the correct state to begin with
   // based on whether it's included in userFavorites array
   
-  initialize:function(options){
+  initialize:function($super, options){
+    var asset_id = this.element.attr('href').split('=')[1]; // grab the id from the href
     if(window.userFavorites.length > 0){
       item = jQuery.grep(window.userFavorites, function(element, index){
-        return element == options.asset_id; 
+        return element == Number(asset_id); 
       });
       if(item.length > 0){ // user has it as a fav
         this.element.addClass('favorited');
       }
+      debugger;
     }
     $super();
   },
@@ -405,7 +407,12 @@ CommentForm = $.klass(Remote.Form, {
       this.resultBox = $('.comment_waiting', this.element);
       this.textarea = $('textarea', this.element);
       this.checkbox = $(':checkbox.private', this.element);
+     
       if(this.checkbox != undefined) this.checkbox.click($.bind(this.togglePrivate,this));
+
+      // replace the empty comment personalization with js payload
+      $('.comment_as', this.element).replaceWith(window.userPersonalization);
+     
       $super();
     },
     beforeSend:function(){

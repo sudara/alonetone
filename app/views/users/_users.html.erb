@@ -23,7 +23,9 @@
     <% if @sort == 'map'%>
         <%= render :partial => 'map' %>
     <% else %>
-    <%= render :partial => 'shared/user', :collection => @users %>
+      <% cache(cache_digest(@users)) do %>
+        <%= render :partial => 'shared/user', :collection => @users %>
+      <% end %>
     <% end %>
     <div class="clear"> </div>
   </div>
