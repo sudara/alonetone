@@ -1,5 +1,7 @@
 class ForumsController < ApplicationController
+  
   before_filter :login_required, :except => [:index, :show]
+  before_filter :find_user, :only => :index
   before_filter :set_forum_tab
 
   # GET /forums
@@ -14,6 +16,9 @@ class ForumsController < ApplicationController
                    "the changing music world, and whatever else comes to you"
     @keywords = 'alonetone, forums, music, discussion, share'
     @online =  User.currently_online
+    @user_topics = Topic.replied_to_by(@user).collect(&:topic) if logged_in?
+    @popular_topics = Topic.popular.collect(&:first)
+    @replyless_topics = Topic.replyless
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @forums }

@@ -53,18 +53,6 @@
 				<%= yield :bottom %>
 	  </div> <!-- end columns -->
 
-
-    <% if ALONETONE.show_debug_info %>
-      <div style="width:100%;min-height:200px;color:#fff">
-          <% if current_user %>
-              last seen at <%= current_user.last_seen_at %><br/>
-              last session at <%= current_user.last_session_at %><br/>
-              <%= debug session %>
-              <%= debug current_user if logged_in? %>
-          <% end %>
-      </div>
-    <% end %>
-
 	    </div><!-- end content -->
 	  </div><!-- end wrapper -->
     <div id="footer_spacer"> </div>

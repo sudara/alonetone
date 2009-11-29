@@ -8,7 +8,17 @@
 #forums_layout
   :width 890px
   h2
-    margin: 1em 0 0 0
+    :margin 1em 0 0 0
+  .footer_box
+    :margin-top 0
+  .post_footer
+    :position absolute
+    :font-size 11px
+    :bottom 0px
+    :margin-bottom -30px
+    :opacity 0.3
+  a
+    :color = !text_color
     
 #breadcrumbs,#extras
   :float left
@@ -147,7 +157,7 @@ table.posts tr.spacer td
   :border-top 2px solid #eee
   :background-color = !box_background
   :border-color = !body_background
-  :padding 5px 10px
+  :padding 15px 10px
   :font-weight bold
   :color #333
   :font-size 0.9em
@@ -158,7 +168,9 @@ table.posts tr.spacer td
 .post.even .author
   :background-color = !box_background_even
   
-
+.post_body_html
+  :position relative
+  :height 100%
 
 .post .author .posts,
 .post .author .admin
@@ -171,6 +183,7 @@ table.posts tr.spacer td
   :color #333
   :text-decoration none
   :font-size 12px
+  :line-height 14px
 
 .post .author a.threadauthor
   :color #080
@@ -185,12 +198,13 @@ table.posts tr.spacer td
   :color #666
   :font-weight normal
   :margin-bottom 0.5em
+  :clear both
 
 .posts .post .body
   :border-top 2px solid #eee
   :border-color = !body_background
   :background-color = !tab_box_silver
-  :padding 10px 20px
+  :padding 15px 20px
   :overflow none
   p
     :color = !text_color

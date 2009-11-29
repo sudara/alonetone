@@ -72,15 +72,15 @@ class Topic < ActiveRecord::Base
   end
 
   def self.replied_to_by(user)
-    user.posts.find(:all, :order => 'topics.last_updated_at DESC', :limit => 5, :include => :topic)
+    user.posts.find(:all, :select => 'distinct posts.topic_id, topics.*', :order => 'topics.last_updated_at DESC', :limit => 5, :joins => :topic)
   end
 
   def self.popular
-    Post.count(:all, :group => :topic, :conditions => ['posts.created_at > ?',10.days.ago], :limit => 5, :order => 'count_all DESC')
+    Post.count(:all, :group => :topic, :conditions => ['posts.created_at > ?',10.days.ago], :limit => 3, :order => 'count_all DESC')
   end
 
   def self.replyless
-    Topic.find(:all, :limit => 5, :order => 'created_at DESC', :conditions => 'posts_count = 1')
+    Topic.find(:all, :limit => 3, :order => 'created_at DESC', :conditions => 'posts_count = 1')
   end
 
 protected
