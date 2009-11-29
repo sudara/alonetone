@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   # /forums/1/posts
   # /forums/1/topics/1/posts
   def index
-    @posts = (@parent ? @parent.posts : Post).search(params[:forum_q], :page => current_page)
+    @posts = (@parent ? @parent.posts : Post).search(params[:forum_q], {:page => current_page, :per_page => 10})
     @users = @user ? {@user.id => @user} : User.index_from(@posts)
     @page_title = @description = 'Recent Forum Posts'
     @show_title_and_link = true

@@ -3,7 +3,7 @@
 html,body
   :background-color = !body_background
 #header
-  :position fixed
+  :position absolute
   :top 29px
   :left 0
   :width 100%
@@ -39,7 +39,7 @@ a#logo
   :margin-bottom 150px
   :width 890px
 #top_bar
-  :position fixed
+  :position absolute
   :top 0
   :left 0
   :margin 0
@@ -104,13 +104,13 @@ html[xmlns] .clearfix
   :position fixed
   :bottom 0
   :left 0
-  :height 52px
+  :height 42px
   :width 100%
   :z-index 500
-  :background  url(../images/backgrounds/footer_closed.png) repeat-x bottom left
+  :background  url(../images/backgrounds/footer_closed.png) repeat-x top left
   #update, #bug_report
     :font-size 12px
-    :line-height 42px
+    :line-height 30px
   #update
     :position absolute
     :left 50px
@@ -123,6 +123,8 @@ html[xmlns] .clearfix
     :margin-top 13px
     :text-align right
     :width 420px
+    a
+      :font-weight normal
     #footer_comment_icon 
       :position absolute
       :left 427px
