@@ -31,7 +31,8 @@ class Comment < ActiveRecord::Base
   acts_as_defensio_comment(:fields => { 
     :content  => :body, 
     :article  => :commentable, 
-    :author   => :commenter 
+    :author   => :author_name,
+    :permalink => :full_permalink 
   })
   
   attr_accessor :current_user
@@ -44,12 +45,24 @@ class Comment < ActiveRecord::Base
     Comment.find_by_remote_ip_and_body(self.remote_ip, self.body)
   end
   
+  def author_name
+    if commenter
+      commenter.login
+    else
+      'guest'
+    end
+  end
+  
+  def full_permalink
+    commentable.full_permalink
+  end
+  
   def user_logged_in
-    commenter_id 
+    !!commenter_id 
   end
   
   def trusted_user
-    commenter_id && commenter.admin?
+    commenter_id && commenter.moderator?
   end
   
   # for montgomeru magic

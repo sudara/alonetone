@@ -18,6 +18,7 @@ public/images/pretty_text/*.*
 log/*.log
 .DS_Store
 *.tmp
+public/stylesheets/alonetone-v2.css 
 public/stylesheets/alonetone.css
 public/javascripts/allonetone.js
 public/javascripts/alonetone-v2.jss 

@@ -70,7 +70,7 @@ class Asset < ActiveRecord::Base
     :dependent  => :destroy, 
     :order      => 'created_at DESC'
     
-  acts_as_defensio_article
+  acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
   
   has_many :facebook_addables, :as => :profile_chunks
 
@@ -113,6 +113,10 @@ class Asset < ActiveRecord::Base
   # otherwise permalink gets 'stuck' on edit
   def clean_permalink
     self.permalink = nil
+  end
+  
+  def full_permalink
+    "http://#{ALONETONE.url}/#{user.login}/#{permalink}"
   end
   
   # allows classes outside Asset to use the same format

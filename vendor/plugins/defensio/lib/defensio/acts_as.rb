@@ -141,6 +141,7 @@ module Defensio
         fields.merge! extract_optional_fields_value(article, :permalink)
 
         response = nil
+        logger.warn "SENDING TO DEFENSIO: #{fields.inspect}" # lets see what we are sending plz
         log_and_ignore_error do
           response = self.class.defensio.audit_comment fields
         end

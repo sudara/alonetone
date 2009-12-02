@@ -29,15 +29,27 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
-  acts_as_defensio_comment :fields => { :content => :body, :article => :article, :author => :user }
+  acts_as_defensio_comment :fields => { :content => :body, 
+                                        :article => :article, 
+                                        :author => :author_name,
+                                        :permalink => :full_permalink }
+                                        
+                                      
   
   before_create :create_unique_permalink
 
-  # hack for defensio
-  def article 
+  # hacks for defensio
+  def article
     self
   end
-
+  
+  def author_name 
+    user.login
+  end
+  
+  def full_permalink
+    "http://#{ALONETONE.url}/forums/#{permalink}"
+  end
   def sticky?
     sticky == 1
   end
