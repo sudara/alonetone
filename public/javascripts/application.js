@@ -52,6 +52,7 @@ FavoriteToggle = $.klass(Remote.Link,{
   // based on whether it's included in userFavorites array
   
   initialize:function($super, options){
+    if(this.isGuest()) { this.hide() }
     var asset_id = this.element.attr('href').split('=')[1]; // grab the id from the href
     if(window.userFavorites.length > 0){
       item = jQuery.grep(window.userFavorites, function(element, index){
@@ -60,20 +61,23 @@ FavoriteToggle = $.klass(Remote.Link,{
       if(item.length > 0){ // user has it as a fav
         this.element.addClass('favorited');
       }
-      debugger;
     }
     $super();
   },
   
   beforeSend:function(e){
     // modify the link to use the correct user's username
-    
-    
-    
+    // this.element.attr("href",window.userPersonalization+this.element.attr('href'));
     if(this.element.hasClass('favorited'))
       this.element.removeClass('favorited');
     else
       this.element.addClass('favorited');
+  },
+  isGuest:function(){
+    return (window.username == 'Guest'); // don't show toggle to guests
+  },
+  hide:function(){
+    this.element.remove();
   }
 });
 
@@ -380,16 +384,28 @@ AdjustableTextarea = $.klass({
 // abstracts ui.tabs a bit further   
 Tabbies = $.klass({
   initialize : function(desiredTab){
+    // rewrite ids to further specify (rails caching can mean several tabs have same id, screwing things up)
+    var extraId = String(Math.floor(Math.random()*110));
+    $('ul li a',this.element).each(function(i){
+      $(this).attr('href',$(this).attr('href')+extraId)
+    });
+    $('>div',this.element).each(function(i){
+      $(this).attr('id',$(this).attr('id')+extraId)
+    });
+    
+    
     this.defaultTab = 0;
     this.currentTab = desiredTab || this.defaultTab;
-
-    this.element.tabs({selected: this.currentTab });
+    this.element.tabs({
+      selected: this.currentTab 
+    });
     
     // when switching tabs, always focus on comment box if on comment tab
     this.element.bind('tabsshow', function(event, ui) {
         if(ui.index==0)
           $('textarea',ui.panel).focus();
     });
+
 
   },
   openTab : function(desiredTab){
@@ -411,7 +427,7 @@ CommentForm = $.klass(Remote.Form, {
       if(this.checkbox != undefined) this.checkbox.click($.bind(this.togglePrivate,this));
 
       // replace the empty comment personalization with js payload
-      $('.comment_as', this.element).replaceWith(window.userPersonalization);
+       $('.comment_as', this.element).replaceWith(window.userPersonalization);
      
       $super();
     },
@@ -499,6 +515,7 @@ Track = $.klass({
     this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     this.radio = false;
+    this.reachedEnd = false;
     // dont allow tab details to be opened on editing playlists
     this.allowDetailsOpen = (this.element.hasClass('unopenable') || (this.element.parent().parent('#single_track').size() > 0)) ? false : true;
   },
@@ -576,6 +593,7 @@ Track = $.klass({
   },
   
   togglePlay: function(target){ 
+    alert('toggle');
     if(this.isPlaying()) 
       this.pause();
     else
@@ -585,6 +603,7 @@ Track = $.klass({
   },
   
   playOrResume : function(){
+    alert('play or resume');
     this.killOtherTracks();
     this.element.addClass('playing');
     this.openDetails(0);
@@ -592,9 +611,18 @@ Track = $.klass({
   },
   
   tellSoundManagerToPlay: function(){
+    alert('telling sound manager to play');
     this.startTimer();
     if (this.isPaused()){
-      this.resume();
+        // handle the case that we want to play a song that already ended
+      if(this.reachedEnd == true){
+        alert('you played this one already');
+        this.reachedEnd = false;
+        soundManager.stop(this.soundID);
+        this.play()
+      }else{
+        this.resume();
+      }
     }else{
       this.play();
     }
@@ -630,7 +658,7 @@ Track = $.klass({
   },
   
   startNextTrack: function(){
-    this.pause();
+    this.reachedEnd = true;
     this.behavior.instances[this.nextTrackIndex()].playOrResume();
   },
   startPreviousTrack:function(){

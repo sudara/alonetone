@@ -22,7 +22,7 @@ Rails::Initializer.run do |config|
   config.gem 'newrelic_rpm'
   config.gem 'BlueCloth',     :lib => 'bluecloth' 
   config.gem 'hpricot' # for comment processing / markdown fixing
-  config.gem 'mislav-will_paginate', :lib => 'will_paginate'
+  config.gem 'will_paginate'
   
   config.gem "rspec", :lib => false, :version => ">= 1.2.0"
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"  
