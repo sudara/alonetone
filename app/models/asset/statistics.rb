@@ -28,8 +28,9 @@ class Asset
  
   def self.update_hotness
     Asset.find(:all).each do |a|
-      a.update_attribute(:hotness, a.calculate_hotness)
-      a.update_attribute(:listens_per_week, a.listens_per_week)
+      # These use update_all so that they do not trigger callbacks and invalidate cache
+      Asset.update_all "hotness = #{a.calculate_hotness}", "id = #{a.id}"
+      Asset.update_all "listens_per_week = #{a.listens_per_week}", "id = #{a.id}"
     end 
   end
   

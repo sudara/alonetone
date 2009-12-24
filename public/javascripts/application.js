@@ -510,7 +510,7 @@ Track = $.klass({
     this.artist = $('a.artist',this.element).html();
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = $('a.play_link',this.element).attr('href');
-    this.soundID = this.element[0].id; 
+    this.soundID = this.track_title;
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
@@ -593,7 +593,6 @@ Track = $.klass({
   },
   
   togglePlay: function(target){ 
-    alert('toggle');
     if(this.isPlaying()) 
       this.pause();
     else
@@ -603,7 +602,6 @@ Track = $.klass({
   },
   
   playOrResume : function(){
-    alert('play or resume');
     this.killOtherTracks();
     this.element.addClass('playing');
     this.openDetails(0);
@@ -611,12 +609,10 @@ Track = $.klass({
   },
   
   tellSoundManagerToPlay: function(){
-    alert('telling sound manager to play');
     this.startTimer();
     if (this.isPaused()){
         // handle the case that we want to play a song that already ended
       if(this.reachedEnd == true){
-        alert('you played this one already');
         this.reachedEnd = false;
         soundManager.stop(this.soundID);
         this.play()

@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
     :order      => 'id DESC'
   }
   
-  belongs_to :commentable, :polymorphic => true
+  belongs_to :commentable, :polymorphic => true, :touch => true
   
   has_many :replies, 
     :as         => :commentable, 
