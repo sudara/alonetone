@@ -9,8 +9,9 @@ class AssetsController < ApplicationController
   
   #rescue_from NoMethodError, :with => :user_not_found
   #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-  
-  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera', 'safari']
+
+  # cfnetwork = Safari on osx 10.4 *only* when it tries to download
+  @@valid_listeners = ['msie','webkit','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork']
   @@bots = ['bot','spider','baidu']
   @@bad_ip_ranges = ['195.239', '220.181', '61.135', '60.28.232', '121.14', '221.194']
   
