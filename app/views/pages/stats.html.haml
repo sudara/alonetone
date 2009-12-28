@@ -3,7 +3,7 @@
 .box
   %h2.box
     Currently on alonetone
-  .static_content 
+  .static_content.big_stats 
     %strong
       =@number_of_musicians
     real-life musicians
@@ -26,7 +26,7 @@
   %h2.box
     Total amount of uploaded mp3s to alonetone
   .static_content
-    =image_tag Asset.monthly_chart
+    = fusion_chart('/charts/FCF_Bar2D.swf', render(:partial => 'shared/chart.xml.builder', :locals=>{ :data => Asset.monthly_chart}), 'total_tracks', '800', '250', false, false)
 .box 
   %h2.box
     Listens per day
