@@ -6,37 +6,30 @@
   .static_content.big_stats 
     %strong
       =@number_of_musicians
-    real-life musicians
-    %br
+    musicians have uploaded
     %strong
       =Asset.count
-    original &amp; legally uploaded mp3s
+    original mp3s.
     %br
-    To listen to all songs, it would take you 
+    It would take you 
     %strong
       =Asset.days
-    days 
-    %br
+    days to listen to all
     %strong 
       =Asset.gigs
-    gigabytes of ones and zeros
+    gigabytes of their tunes.
     %br
 
 .box 
   %h2.box
-    Total amount of uploaded mp3s to alonetone
+    Number of mp3s on alonetone
   .static_content
-    = fusion_chart('/charts/FCF_Bar2D.swf', render(:partial => 'shared/chart.xml.builder', :locals=>{ :data => Asset.monthly_chart}), 'total_tracks', '800', '250', false, false)
-.box 
-  %h2.box
-    Listens per day
-  .static_content
-    =image_tag Listen.last_30_days_chart
+    = fusion_chart('/charts/FCF_Line.swf', render(:partial => 'track_totals.xml.builder'), 'total_tracks', '550', '250', false, false,true)
 .box
   %h2.box
-    Monthly Listens* since launch
+    Listens per Month* since launch
   .static_content
-    =image_tag Listen.monthly_chart
+    = fusion_chart('/charts/FCF_Line.swf', render(:partial => 'listens.xml.builder'), 'listens', '550', '250', false, false,true)
     %br
     %strong
       =Listen.monthly_listen_count_for[0]
@@ -52,7 +45,7 @@
     =image_tag Listen.source_chart
 .box
   %h2.box
-    Fun alonetone averages
+    Other fun alonetone numbers
   .static_content 
     %strong
       =@tracks_per_user

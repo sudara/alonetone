@@ -59,17 +59,7 @@ class Listen < ActiveRecord::Base
     count_back_the_months(Time.now.months_ago(1)) { |month| 
       monthly_counts << self.monthly_listen_count_for(month) 
     }
-    data = monthly_counts.collect(&:first).reverse
-    labels = monthly_counts.collect(&:last).reverse
-    chart = Gchart.line(
-      :size             => '500x150',
-      :data             => data,
-      :background       => 'e1e2e1',
-      :axis_with_labels => 'r,x',
-      :axis_labels      => [ GchartHelpers.zero_half_max(data.max), "#{labels.join('|')}" ],
-      :line_colors      => 'cc3300',
-      :custom           => 'chm=B,ff9933,0,0,0'
-    )
+    monthly_counts
   end
   
   def self.last_30_days_chart

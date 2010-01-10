@@ -50,7 +50,7 @@ module ChartsHelper
   # - parameter debug_mode : (Not used in Free version) If value is true, chart is shown in debug mode.
   # - parameter register_with_js : (Not used in Free version) If value is true, the chart is registered with javascript
   # Can be called from html block int he view where the chart needs to be embedded.
-  def fusion_chart(chart_swf,url_or_xml,chart_id,chart_width,chart_height,debug_mode,register_with_js)
+  def fusion_chart(chart_swf,url_or_xml,chart_id,chart_width,chart_height,debug_mode,register_with_js, inline=false)
     chart_width=chart_width.to_s
     chart_height=chart_height.to_s
     
@@ -67,14 +67,14 @@ module ChartsHelper
     
     result += "\t\t\t\tvar chart_"+chart_id+"=new FusionCharts('"+chart_swf+"','"+chart_id+"',"+chart_width+","+chart_height+","+debug_mode_num+","+register_with_js_num+");\n"
     
-    if url_or_xml.match('/')
+    if !inline
       result += "\t\t\t\t<!-- Set the dataURL of the chart -->\n"
       result += "\t\t\t\tchart_"+chart_id+".setDataURL(\""+CGI::escape(url_or_xml)+"\");\n"
       logger.info("The method used is setDataURL.The URL is " + url_or_xml)
     else
       result += "\t\t\t\t<!-- Provide entire XML data using DataXML method -->\n"
       result += "\t\t\t\t"
-      result += 'chart_'+chart_id+'.setDataXML(\''+url_or_xml+'\');'
+      result += 'chart_'+chart_id+'.setDataXML("'+CGI::escape(url_or_xml)+'");'
       result += "\n"
       logger.info("The method used is setDataXML.The XML is " + url_or_xml)
     end

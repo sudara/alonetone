@@ -19,7 +19,7 @@ class Asset
   end
 
   def self.days
-    (Asset.sum(:length).to_f / 60 / 60 / 24).to_s[0..2]
+    (Asset.sum(:length).to_f / 60 / 60 / 24).to_i.to_s
   end
   
   def self.gigs

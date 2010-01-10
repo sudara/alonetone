@@ -1,6 +1,3 @@
-<% content_for(:css) do %> 
-  <%= javascript_include_tag 'charts.js' %>
-<% end %>
 
 <% render :layout => 'user' do %>
 <%= fusion_chart('/charts/FCF_Line.swf', user_stats_path(@user,:format => :xml),'total_plays','800','250',false,false){} %>
