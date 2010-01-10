@@ -21,5 +21,3 @@ config.action_view.cache_template_loading = false
 config.action_mailer.raise_delivery_errors = false
 
 config.action_mailer.delivery_method = :test
-
-config.middleware.use "Rack::Bug", :password => ALONETONE.password, :secret_key => ALONETONE.password

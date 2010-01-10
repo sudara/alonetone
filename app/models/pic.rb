@@ -1,5 +1,5 @@
 class Pic < ActiveRecord::Base
-  belongs_to :picable, :polymorphic => true
+  belongs_to :picable, :polymorphic => true, :touch => true
 
   # Pic
   has_attachment :min_size      => 100.bytes,

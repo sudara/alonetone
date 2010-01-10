@@ -5,7 +5,7 @@ class Listen < ActiveRecord::Base
   named_scope :from_user, {:conditions => ['listener_id != ""']}
   named_scope :downloads, {:conditions => {:source => 'download'}}  
   # A "Listen" occurs when a user listens to another users track
-  belongs_to :asset, :counter_cache => true
+  belongs_to :asset, :counter_cache => true, :touch => true
 
   belongs_to :listener, 
     :class_name     => 'User', 
