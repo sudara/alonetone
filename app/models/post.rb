@@ -19,7 +19,17 @@ class Post < ActiveRecord::Base
   after_create  :update_cached_fields
   after_destroy :update_cached_fields
 
-  acts_as_defensio_comment :fields => { :content => :body, :article => :topic, :author => :user }
+  acts_as_defensio_comment :fields => { :content => :body, 
+                                        :article => :topic, 
+                                        :author => :author_name }
+
+  def author_name
+    user.login
+  end
+
+  def user_logged_in
+    true
+  end
 
   attr_accessible :body
 

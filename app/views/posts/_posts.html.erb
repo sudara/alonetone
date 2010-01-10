@@ -10,23 +10,24 @@
     <% end %>
     <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
       <td class="author vcard">
+
         <div class="date">
           <a href="#<%= dom_id post %>" rel="bookmark" name="<%=dom_id post %>">
           <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-          <%= time_ago_in_words(post.created_at) %> ago
+          Posted <%= time_ago_in_words(post.created_at) %> ago
           </abbr>
           </a>
         </div>
-
+        
         <%= image_tag post.user.avatar(:small) %>
-        <span class="fn"><%= link_to truncate(h(post.user.name), 15), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
+        <span class="fn"><%= link_to truncate(h(post.user.name), 25), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
         <% if post.user.moderator %>
         <span class="admin">
-          alonetone moderator
+          moderator
         </span>
         <% end %>
         
-        <span class="posts"><%= pluralize post.user.posts.size, 'post' %></span>
+        <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>
         <% if post.user.assets_count > 0 %>
             <span class="posts"><%= link_to (pluralize post.user.assets_count, 'tracks'), user_tracks_path(post.user) %></span>
         <% end %>
@@ -40,7 +41,12 @@
 
       </td>
       <td class="body entry-content" id="post-body-<%= post.id %>">
-            <%= post.body_html %>
+          <div class="post_body_html">
+          <%= post.body_html %>
+          <% if moderator? %>
+            <div class="post_footer"><%= post.user.browser %></div>
+          <% end %>
+          </div>
       </td>
     </tr>
 <% end %>

@@ -74,6 +74,7 @@ ActionController::Routing::Routes.draw do |map|
       track.resources :comments
     end
     user.favorites 'favorites', :controller => 'playlists', :action => 'favorites',:path_prefix => ':login'
+    user.posts 'posts', :controller => 'posts', :action => 'index', :path_prefix => ':login'
     
     # TODO - figure out a way to use :member_path with rails 2
     # http://dev.rubyonrails.org/changeset/8227

@@ -7,7 +7,7 @@
   :height 32px
   :position relative
   :text-align right
-  a, span, a:visited
+  em, a, span, a:visited
     :display block
     :float left
     :height 12px
@@ -15,12 +15,13 @@
     :font-size 12px
     :padding 10px 10px
     :color = !text_color
-  span.current, a:hover
+  em, a:hover
     :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
     :color = !white
     :text-decoration none
-  span.current
+  em
     :font-weight bold
+    :font-style normal
   span.gap
     :padding 10px 0px
   span.disabled
@@ -35,8 +36,8 @@
     :width 500px
 .forum_paginator
   :margin-top 3px
-  :width 650px
-  :height 62px
+  :width 890px
+  :height 34px
   .button_wrapper
     :border none
     :clear none

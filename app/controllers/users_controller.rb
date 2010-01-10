@@ -86,17 +86,21 @@ class UsersController < ApplicationController
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
-  
+  # ugliest logic ever. This is one of those areas where you don't want to touch the stuff for fear of breaking things
+  # On the other hand, until it's cleaned up, refactoring and bug fixing is next to impossible
   def create
     respond_to do |format|
       format.html do
         @user = params[:user].blank? ? User.find_by_email(params[:email]) : User.new(params[:user])
-        flash[:error] = "I could not find an account with the email address '#{CGI.escapeHTML params[:email]}'. Did you type it correctly?" if params[:email] and not @user
-        redirect_to login_path and return unless @user
+        if params[:email] and not @user
+          flash[:error] = "I could not find an account with the email address '#{CGI.escapeHTML params[:email].first}'. <br/> Did you make a boo-boo or have another email I could diligently try for you?"
+          redirect_to login_path and return false
+        end
         @user.login = params[:user][:login] unless params[:user].blank?
-        @user.reset_token! 
+        @user.reset_token!
         begin
-          UserMailer.deliver_signup(@user)
+          UserMailer.deliver_signup(@user) if !params[:user].blank?
+          UserMailer.deliver_forgot_password(@user) if params[:user].blank?
         rescue Net::SMTPFatalError => e
           flash[:error] = "A permanent error occured while sending the signup message to '#{CGI.escapeHTML @user.email}'. Please check the e-mail address."
           redirect_to :action => "new"
@@ -117,9 +121,16 @@ class UsersController < ApplicationController
   def activate
     self.current_user = User.find_by_activation_code(params[:activation_code])
     if current_user != false && !current_user.activated?
-      current_user.activate
-      flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
-      redirect_to new_user_track_path(current_user)
+      # Did the user already activate, and this is just a forgot password "activation?"
+      if current_user.activated_at 
+        current_user.activate
+        flash[:ok] = "Sweet, you are back in! <br/>Now quick, update your password below so you don't have to jump through hoops again"
+        redirect_to edit_user_path(current_user)
+      else
+        current_user.activate
+        flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
+        redirect_to new_user_track_path(current_user)
+      end
     else 
       flash[:error] = "Hm. Activation didn't work. Maybe your account is already activated?"
       redirect_to default_url

@@ -58,8 +58,9 @@ module Defensio
       # All options can be specified in a YAML config file by default in
       # RAILS_ROOT/config/defensio.yml.
       def acts_as_defensio(type, options={})
+
         include InstanceMethods
-                return if RAILS_ENV == 'development'
+        return if RAILS_ENV == 'development' || defined? DISABLE_DEFENSIO
 
         case type
         when :article
@@ -140,6 +141,7 @@ module Defensio
         fields.merge! extract_optional_fields_value(article, :permalink)
 
         response = nil
+        logger.warn "SENDING TO DEFENSIO: #{fields.inspect}" # lets see what we are sending plz
         log_and_ignore_error do
           response = self.class.defensio.audit_comment fields
         end

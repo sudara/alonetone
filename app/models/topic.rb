@@ -29,15 +29,27 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
-  acts_as_defensio_comment :fields => { :content => :body, :article => :article, :author => :user }
+  acts_as_defensio_comment :fields => { :content => :body, 
+                                        :article => :article, 
+                                        :author => :author_name,
+                                        :permalink => :full_permalink }
+                                        
+                                      
   
   before_create :create_unique_permalink
 
-  # hack for defensio
-  def article 
+  # hacks for defensio
+  def article
     self
   end
-
+  
+  def author_name 
+    user.login
+  end
+  
+  def full_permalink
+    "http://#{ALONETONE.url}/forums/#{permalink}"
+  end
   def sticky?
     sticky == 1
   end
@@ -72,15 +84,15 @@ class Topic < ActiveRecord::Base
   end
 
   def self.replied_to_by(user)
-    user.posts.find(:all, :order => 'topics.last_updated_at DESC', :limit => 5, :include => :topic)
+    user.posts.find(:all, :select => 'distinct posts.topic_id, topics.*', :order => 'topics.last_updated_at DESC', :limit => 5, :joins => :topic)
   end
 
   def self.popular
-    Post.count(:all, :group => :topic, :conditions => ['posts.created_at > ?',10.days.ago], :limit => 5, :order => 'count_all DESC')
+    Post.count(:all, :group => :topic, :conditions => ['posts.created_at > ?',10.days.ago], :limit => 3, :order => 'count_all DESC')
   end
 
   def self.replyless
-    Topic.find(:all, :limit => 5, :order => 'created_at DESC', :conditions => 'posts_count = 1')
+    Topic.find(:all, :limit => 3, :order => 'created_at DESC', :conditions => 'posts_count = 1')
   end
 
 protected

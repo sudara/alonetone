@@ -51,8 +51,12 @@ class User
     self.class.encrypt(password, salt)
   end
 
+  # Totally bullshit method that apparently is here for no reason, except called by reset_password needs
+  # Note that activation_code and token should be the same thing, but really we pointlessly have both
+  # Horaay to Sudara for not dealing with this yet and still just letting this cruft lie around.
+  # "Someday" we will clean this stuff up.... :/
   def reset_login_key!
-    self.token = Digest::SHA1.hexdigest(Time.now.to_s + crypted_password.to_s + rand(123456789).to_s).to_s
+    self.token = self.activation_code = Digest::SHA1.hexdigest(Time.now.to_s + crypted_password.to_s + rand(123456789).to_s).to_s
     # this is not currently honored
     self.token_expires_at = Time.now.utc+1.year
     save!
@@ -69,7 +73,7 @@ class User
   # Activates the user in the database.
   def activate
     @activated = true
-    self.activated_at = Time.now.utc
+    self.activated_at = Time.now.utc unless self.activated_at
     self.activation_code = nil
     save(false)
   end

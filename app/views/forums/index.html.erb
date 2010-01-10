@@ -52,15 +52,52 @@
     </table>
 
     <% if present? @online %>
-        <div class="box">
         <div class="static_content" id="currently_online">
           alonetoners online: 
           <% @online.each do |user| %>
             <%= link_to h(user.name), user_home_path(user.login) %> 
           <% end %>
         </div>
-        </div>
     <% end %>
+    <div class="static_content">
+      Psssst. We've got an alonetone chat room with your name on it. <%= link_to 'Chat Now', "http://#{ALONETONE.campfire_url}"%>
+    </div>
     <div class="footer_box">
       <%= link_to('', posts_path, :class=>'view_all_recent_posts', :title => 'view all recent posts') if Post.first %>
     </div>
+    
+    <% if logged_in? && present?(@user_topics) %>
+    <h2>Conversations you are a part of</h2>
+      <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+      <tr>
+        <th class="la" colspan="2"><%= 'Topic'%></th>
+        <th width="1%"><%= 'Posts'%></th>
+        <th width="1%"><%= 'Views'%></th>
+        <th class="la"><%= 'Last post'%></th>
+      </tr>
+      <%= render :partial => 'topic', :collection => @user_topics %>
+      </table>
+    <% end %>
+    
+      <h2>Hot on alonetone</h2>
+      <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+      <tr>
+        <th class="la" colspan="2"><%= 'Topic'%></th>
+        <th width="1%"><%= 'Posts'%></th>
+        <th width="1%"><%= 'Views'%></th>
+        <th class="la"><%= 'Last post'%></th>
+      </tr>
+      <%= render :partial => 'topic', :collection => @popular_topics %>
+      </table>
+      
+      <h2>Conversations needing reply love</h2>
+      <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+      <tr>
+        <th class="la" colspan="2"><%= 'Topic'%></th>
+        <th width="1%"><%= 'Posts'%></th>
+        <th width="1%"><%= 'Views'%></th>
+        <th class="la"><%= 'Last post'%></th>
+      </tr>
+      <%= render :partial => 'topic', :collection => @replyless_topics %>
+      </table>
+    
