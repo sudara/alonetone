@@ -42,7 +42,7 @@
   %h2.box
     Where folks listen from
   .static_content
-    =image_tag Listen.source_chart
+    = fusion_chart('/charts/FCF_Pie2D.swf', render(:partial => 'sources.xml.builder'),'listensource','550','250',false, false, true)
 .box
   %h2.box
     Other fun alonetone numbers
