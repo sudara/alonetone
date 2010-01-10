@@ -1,9 +1,9 @@
 <% javascript_tag do %>
   window.authenticityToken = '<%= form_authenticity_token %>'; 
   window.username = '<%= logged_in? ? current_user.login : "Guest" %>'; 
-  
+  window.userIsAdmin = <%= moderator? ? true : false %>;
   window.userFavorites = <%= (logged_in? ? current_user.favorite_asset_ids : [] ).to_json%>;
-  
+  window.showPlayCounts = <%= logged_in? && (current_user.settings[:display_listen_count] == "true") ? true : false %>;
   window.userPersonalization = '<div class="comment_as">' + 
      <% if logged_in? %>
         '<%= image_tag current_user.avatar(:tiny) %>Say something, <%=h current_user.name %>:'+

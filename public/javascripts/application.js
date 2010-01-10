@@ -516,6 +516,7 @@ Track = $.klass({
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     this.radio = false;
     this.reachedEnd = false;
+    this.owner = $('.artist',this.element).attr('href').replace('/','');
     // dont allow tab details to be opened on editing playlists
     this.allowDetailsOpen = (this.element.hasClass('unopenable') || (this.element.parent().parent('#single_track').size() > 0)) ? false : true;
   },
@@ -559,6 +560,19 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown(300,function(){
         $('textarea',this).focus();
     });
+		
+		// Make a 'pretty date' (rails gives us iso dates in UTC)
+		$('.utc_date',this.more).prettyDate();
+		
+		// Show the edit link if admin and/or owner
+		if((this.owner===window.username) || window.userIsAdmin){
+		  $('.show_to_admin_or_owner').show();
+		}
+		
+		// Show mp3 details if admin
+		if(window.userIsAdmin){
+		  $('.show_to_admin').show();
+		}
 		
     // close all other detail panes except currently playing
     for(var i=0;i< this.behavior.instances.length;i++){
@@ -883,6 +897,11 @@ jQuery(function($) {
     $('.asset').attach(RadioTrack);
   else
     $('.asset, .track').attach(Track);
+  
+  // display listen_count when needed
+  if(window.showPlayCounts){
+    $('.listen_count').show();
+  }
   
   // Slide open the next element on click
   $('.slide_open_next').attach(SlideOpenNext);

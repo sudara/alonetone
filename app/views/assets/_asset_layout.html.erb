@@ -5,12 +5,9 @@
  <%= yield %> 
  <span class='counter'> </span>
  
- <% if setting(:display_listen_count) == 'true' %>
-  <span class="listen_count"><%= asset.listens_count %></span>
- <% end %>
+ <span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
    
  <span class='time'><%= asset.length%></span>
- <span class="when" style="display:none;"><%= time_ago_in_words asset.created_at %> ago</span>
 </div>
 
 <div class="download-button button">

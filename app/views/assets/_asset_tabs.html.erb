@@ -8,7 +8,6 @@
     <% if logged_in? %>
         <%= favorite_toggle(asset) %>
     <% end %>
-    
   	<div id="details_track_<%= asset.unique_id %>">
 
         <div class="description_panel panel no_border">
@@ -27,19 +26,9 @@
                     </span>
                 <% end %>
                 </div>
-               
-                <% if (playlist = asset.first_playlist) %>
-                  <div class="min_height_50">
-          		    <div class="mini_cover">
-          		      	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(asset.user,playlist), :class => 'jewel_case_50') %>
-                      <%= image_tag(playlist.cover(:small), :class => 'cover_50') %>
-                  </div>
-                  From the album / playlist <%= link_to h(playlist.title), user_playlist_path(asset.user,playlist)%>
-            	    </div>
-            	  <% end %>
             	  
                 <div class="stats">
-                  Uploaded <strong><%= time_ago_in_words asset.created_at %></strong> ago,
+                  Uploaded <span class="utc_date"><strong><%= asset.created_at.iso8601.gsub(/\+.*/,'') %></strong></span>,
         	        listened to <strong><%= asset.listens_count %> times</strong>.
         	        <% if asset.comments.count > 0 %>
         	           <br/>Commented on <strong><%= pluralize asset.comments.public.size, 'times' %></strong>.
@@ -48,21 +37,20 @@
         	        	Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
         	        <% end %>
     	          </div>
-    	          <div class="admin">
-    	            <% if admin? %>
-    	                Filename: <strong><%= h asset.filename %></strong><br>
-                      Name: <strong> <%=h asset.title%></strong><br/>
-                      Artist:<strong> <%=h asset.artist %></strong><br/>
-                      Album:  <strong><%=h asset.album %></strong><br/>
-                  <% end %>
+    	          
+    	          <div class="admin show_to_admin" style="display:none;">
+	                mp3 name: <strong><%= h asset.filename %></strong><br>
+                  Track Name: <strong> <%=h asset.title%></strong><br/>
+                  Artist:<strong> <%=h asset.artist %></strong><br/>
+                  Album:  <strong><%=h asset.album %></strong><br/>
                 </div>
 	          </div>
             <div class="track_links">
-          	 <% if authorized_for(asset) %>
+          	  <div class="show_to_admin_or_owner" style="display:none;">
                 <%= link_to "Edit", edit_user_track_path(asset.user, asset), 
-                  :class => 'edit_in_box', :title => 'edit this track' %>
-             <% end %>
-    	     
+                  :class => 'edit_in_box show_to_admin_or_owner', :title => 'edit this track' %>
+    	        </div>
+    	          
       	     <%= link_to "View more", user_track_path(asset.user, asset.permalink), 
       	        :class => 'view_more', :title => "#{h(asset.name)} by #{h(asset.user.name)}" unless @single_track %>
             </div>
