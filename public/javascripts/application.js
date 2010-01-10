@@ -562,7 +562,7 @@ Track = $.klass({
     });
 		
 		// Make a 'pretty date' (rails gives us iso dates in UTC)
-		$('.utc_date',this.more).prettyDate();
+		$('.utc_date strong',this.more).prettyDate();
 		
 		// Show the edit link if admin and/or owner
 		if((this.owner===window.username) || window.userIsAdmin){
