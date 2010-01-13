@@ -5,9 +5,8 @@
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
       <li><%= link_to 'more', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
-    <% if logged_in? %>
-        <%= favorite_toggle(asset) %>
-    <% end %>
+    
+    <%= favorite_toggle(asset) %>
   	<div id="details_track_<%= asset.unique_id %>">
 
         <div class="description_panel panel no_border">
