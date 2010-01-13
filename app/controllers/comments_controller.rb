@@ -59,14 +59,7 @@ class CommentsController < ApplicationController
   
   def index
     respond_to do |format|
-      format.json do
-        if present?(params[:start]) && present?(params[:end])
-          @comments = Comment.count_by_user(params[:start].to_date, params[:end].to_date, params[:limit].to_i)
-        else
-          @comments = Comment.count_by_user(30.days.ago, Date.today)
-        end
-        render :json => @comments.collect{|c,count| [c.name, c.avatar,count]}.to_json
-      end
+
       format.html do
         if params[:login]
           @page_title = "#{@user.name} Comments"
@@ -116,6 +109,14 @@ class CommentsController < ApplicationController
               :page     => params[:spam_page]
           ) if moderator? or admin?
         end
+        format.json do
+        if present?(params[:start]) && present?(params[:end])
+          @comments = Comment.count_by_user(params[:start].to_date, params[:end].to_date, params[:limit].to_i)
+        else
+          @comments = Comment.count_by_user(30.days.ago, Date.today)
+        end
+        render :json => @comments.collect{|c,count| [c.name, c.avatar,count]}.to_json
+      end
       end
     end
   end
