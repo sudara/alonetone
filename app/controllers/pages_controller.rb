@@ -89,7 +89,6 @@ class PagesController < ApplicationController
   end
   
   def sitemap
-    @users = User.find(:all)
     respond_to do |wants|
       wants.xml
     end

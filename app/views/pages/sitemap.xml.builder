@@ -6,7 +6,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
     xml.changefreq  "daily"
     xml.priority  0.9
   end
-  ['login', 'signup', 'about', 'search'].each do |static|
+  ['login', 'signup', 'about', 'search','24houralbum','rpmchallenge'].each do |static|
     xml.url do
       xml.loc "http://alonetone.com/#{static}"
       xml.lastmod w3c_date(Time.now)
@@ -23,7 +23,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
     end
   end
   
-  Forum.ordered.each do |forum|
+  Forum.ordered.find_each do |forum|
     xml.url do
       xml.loc forum_url(forum.permalink)
       xml.lastmod w3c_date(forum.posts.last.created_at)
@@ -31,7 +31,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
       xml.priority 0.6
     end
   end
-  @users.each do |user|
+  User.find_each do |user|
     xml.url do
       xml.loc         user_home_url(user)
       xml.lastmod     w3c_date(user.last_seen_at || user.updated_at)
@@ -59,7 +59,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
     
     
     if user.assets_count > 0 
-      user.assets.each do |asset|
+      user.assets.find_each do |asset|
         xml.url do
           xml.loc user_track_url(user, asset.permalink)
           xml.lastmod w3c_date(asset.created_at)
