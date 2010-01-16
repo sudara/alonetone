@@ -7,7 +7,7 @@
     <h1 class="user"><%=h @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
       <%= follow_toggle(@user) %>
   
-  <% cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>
+  <%# cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>
 
     <% if authorized? %>
       <%= link_to 'edit your profile', edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" %>
@@ -30,5 +30,5 @@
     </ul>
   </div>
 </div>
-<% end %>
+<%# end %>
   <%= yield %>
