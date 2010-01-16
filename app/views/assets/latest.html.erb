@@ -56,7 +56,6 @@
     </div>
   <% end %>
 
-  <% cache(@favorites.first.cache_key+'favshome') do %>
   <h2 id="recently_favorited" class="box">Recently favorited</h2>
   <div class="box">
     <%= render :partial => 'shared/favorite', :collection => @favorites %>
@@ -65,7 +64,6 @@
     <%= link_to ' ', radio_path(:per_page => 40, :source => 'favorites'), 
       :class => 'view_all_favorites', :title => 'alonetone radio: recently favorited' %>
   </div>
-  <% end %>
 
 <% end %>
 
