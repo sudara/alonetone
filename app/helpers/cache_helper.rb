@@ -7,7 +7,7 @@ module CacheHelper
   # faster than sorting
   # figure out if cache is still valid for a collection of < 50 items already instantiated in AR
   def cache_digest(collection)
-    Digest::MD5.hexdigest(collection.collect{|a| a.created_at}.join)
+    Digest::MD5.hexdigest(collection.collect{|a| a.updated_at}.join)
   end
 
 end
