@@ -12,7 +12,7 @@
 #
 
 class Track < ActiveRecord::Base
-  belongs_to :playlist, :counter_cache => true
+  belongs_to :playlist, :counter_cache => true, :touch => true
   belongs_to :asset
   belongs_to :user
   

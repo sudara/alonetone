@@ -1,6 +1,6 @@
 class Pic < ActiveRecord::Base
   belongs_to :picable, :polymorphic => true, :touch => true
-
+  
   # Pic
   has_attachment :min_size      => 100.bytes,
                  :max_size      => 2048.kilobytes,
