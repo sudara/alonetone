@@ -22,12 +22,10 @@
         :class=> 'view_all_recent_music', :title => 'latest music on alonetone' %>
   </div>
   
-  <% cache(@comments.first.cache_key+"commenthome") do%>
   <h2 id="latest_comments" class="box">Latest Comments</h2>
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>
-  <% end %>
   
   <div class="footer_box">
    <%= link_to ' ', all_comments_path, 

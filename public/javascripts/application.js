@@ -55,7 +55,7 @@ FavoriteToggle = $.klass(Remote.Link,{
     if(this.isGuest()) { this.hide() }
     var asset_id = this.element.attr('href').split('=')[1]; // grab the id from the href
     if(window.userFavorites.length > 0){
-      item = jQuery.grep(window.userFavorites, function(element, index){
+      var item = jQuery.grep(window.userFavorites, function(element, index){
         return element == Number(asset_id); 
       });
       if(item.length > 0){ // user has it as a fav
@@ -510,7 +510,7 @@ Track = $.klass({
     this.artist = $('a.artist',this.element).html();
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = $('a.play_link',this.element).attr('href');
-    this.soundID = this.track_title;
+    this.soundID = this.trackURL.split('/').pop().split('.')[0];
     this.more = this.element.next();
     this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
@@ -566,7 +566,14 @@ Track = $.klass({
 		
 		// Show the edit link if admin and/or owner
 		if((this.owner===window.username) || window.userIsAdmin){
-		  $('.show_to_admin_or_owner').show();
+		  $('.show_to_admin_or_owner', this.more).show();
+		  
+		  // Show some text prompting them to edit if no description
+		  if($('.description .min_height_50 :not(h3)', this.more).text() == ""){
+		    var href = $('.edit_in_box', this.more).attr('href');
+		    var prompt = '<span class="hint"><a class="hint" href="'+href+'">Add a description now</a> to help listeners find your music</span>';
+		     $('.description .min_height_50', this.more).append(prompt);
+		  }
 		}
 		
 		// Show mp3 details if admin
