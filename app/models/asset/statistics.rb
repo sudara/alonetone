@@ -19,7 +19,7 @@ class Asset
   end
 
   def self.days
-    (Asset.sum(:length).to_f / 60 / 60 / 24).to_s[0..2]
+    (Asset.sum(:length).to_f / 60 / 60 / 24).to_i.to_s
   end
   
   def self.gigs
@@ -83,17 +83,7 @@ class Asset
   def self.monthly_chart
     monthly_counts = []
     sum_up_the_months(@@launch_date){|date, sum| monthly_counts << [sum, date]}
-    data = monthly_counts.collect(&:first)
-    labels = monthly_counts.collect(&:last)
-    chart = Gchart.line(
-      :size             =>  '500x150', 
-      :data             =>  data, 
-      :background       =>  'e1e2e1', 
-      :axis_with_labels =>  'r,x',
-      :axis_labels      => [GchartHelpers.zero_half_max(data.max), "#{labels.join('|')}"], 
-      :line_colors      =>  'cc3300', 
-      :custom           =>  'chbh=35,25'
-    )
+    monthly_counts
   end
   
   
