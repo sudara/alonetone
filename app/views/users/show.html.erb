@@ -39,7 +39,7 @@
 	  <% content_for :right do %>
     	  <%= render :partial => 'popular' if present?(@popular_tracks) && (setting('most_popular', @user) == 'true')%>
     	 
-    	  <% cache(cache_digest(@comments)) do %>
+    	  <% cache(cache_digest(@comments)) do # creates a hash of @comments, which will differ if private comments available  %>
     	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
 	      <% end %>
 	  <% end %>	
