@@ -393,7 +393,6 @@ Tabbies = $.klass({
       $(this).attr('id',$(this).attr('id')+extraId)
     });
     
-    
     this.defaultTab = 0;
     this.currentTab = desiredTab || this.defaultTab;
     this.element.tabs({
@@ -405,8 +404,6 @@ Tabbies = $.klass({
         if(ui.index==0)
           $('textarea',ui.panel).focus();
     });
-
-
   },
   openTab : function(desiredTab){
     desiredTab = desiredTab || this.defaultTab;
@@ -520,6 +517,7 @@ Track = $.klass({
     // dont allow tab details to be opened on editing playlists
     this.allowDetailsOpen = (this.element.hasClass('unopenable') || (this.element.parent().parent('#single_track').size() > 0)) ? false : true;
   },
+    
   
   // Lets Delegate!
   // we want the track to do lots of things onclick, but not add 100s of event handlers
@@ -538,6 +536,10 @@ Track = $.klass({
   onmouseleave: $.delegate({
     '.asset' : function(e){  this.element.removeClass('hover');}
   }),
+  
+  trackIndex: function(){
+    return this.behavior.instances.indexOf(this);
+  },
   
   toggleDetails: function(desiredTab){
     if(this.more.is(':hidden')) this.openDetails(desiredTab);
@@ -676,7 +678,13 @@ Track = $.klass({
   
   startNextTrack: function(){
     this.reachedEnd = true;
-    this.behavior.instances[this.nextTrackIndex()].playOrResume();
+    // how many tracks are on the page?....
+    if(this.behavior.instances.length > 1){
+      this.behavior.instances[this.nextTrackIndex()].playOrResume();
+    }else{
+      // ...because we don't want songs on single track page to repeat endlessly
+      this.pause();
+    }
   },
   startPreviousTrack:function(){
     this.pause();
@@ -684,20 +692,21 @@ Track = $.klass({
   },
   previousTrackIndex : function(){
     // index of next Track in Track.instances
-    var next = this.behavior.instances.indexOf(this) - 1;
-    // loop back to the first track
+    var next = this.trackIndex() - 1;
+    // allow us to loop back to the first track
     if(this.behavior.instances[next] == undefined) next = (this.behavior.instances.length - 1);
     return next;
   },
   nextTrackIndex : function(){
     // index of next Track in Track.instances
-    var next = this.behavior.instances.indexOf(this) + 1;
+    var next = this.trackIndex() + 1;
     // loop back to the first track
     if(this.behavior.instances[next] == undefined) next = 0;
     return next;
   },
   
   killOtherTracks : function(){
+    // basically a dumb way of making sure no other tracks are playing, looping through
     for(track=0;track < this.behavior.instances.length;track++){ 
       if(this.behavior.instances[track].isPlaying()) this.behavior.instances[track].pause();
     }
