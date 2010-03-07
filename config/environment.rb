@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'ruby-mp3info',  :lib => 'mp3info'
   config.gem 'rubyzip',       :lib => 'zip/zip'
   config.gem 'googlecharts',  :lib => 'gchart'
-  config.gem 'haml'
+  config.gem 'haml', :version => '2.0.9'
   config.gem 'newrelic_rpm'
   config.gem 'BlueCloth',     :lib => 'bluecloth' 
   config.gem 'hpricot' # for comment processing / markdown fixing
