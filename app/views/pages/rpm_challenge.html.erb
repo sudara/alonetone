@@ -1,24 +1,26 @@
 <h2>February 2010</h2>
-<% @albums_2010.each do |album| %>
-  <div class="album clearfix">
-    <div class="cover">
-      <%= link_to(image_tag('rpm/overlay.png'), user_playlist_path(album.user.login, album), :class => 'overlay') %>
-      <%= image_tag(album.cover(:album), :class => 'cover') %>
-      <%= link_to awesome_truncate(album.title,50), user_playlist_path(album.user.login, album), :class => 'album_title' %><br/>
-      <%= link_to album.user.name, user_home_path(album.user.login), :class => 'alonetoner'%>
+<% cache(cache_digest(@albums_2010)) do %>
+  <% @albums_2010.each do |album| %>
+    <div class="album clearfix">
+      <div class="cover">
+        <%= link_to(image_tag('rpm/overlay.png'), user_playlist_path(album.user.login, album), :class => 'overlay') %>
+        <%= image_tag(album.cover(:album), :class => 'cover') %>
+        <%= link_to awesome_truncate(album.title,50), user_playlist_path(album.user.login, album), :class => 'album_title' %><br/>
+        <%= link_to album.user.name, user_home_path(album.user.login), :class => 'alonetoner'%>
+      </div>
     </div>
-  </div>
-<% end %>    
-<div class="clearfix"> </div>
-<h2 style="margin-top:120px;">February 2009</h2>
-<% @albums_2009.each do |album| %>
-  <div class="album clearfix">
-    <div class="cover">
-      <%= link_to(image_tag('rpm/overlay.png'), user_playlist_path(album.user.login, album), :class => 'overlay') %>
-      <%= image_tag(album.cover(:album), :class => 'cover') %>
-      <%= link_to awesome_truncate(album.title,50), user_playlist_path(album.user.login, album), :class => 'album_title' %><br/>
-      <%= link_to album.user.name, user_home_path(album.user.login), :class => 'alonetoner'%>
+  <% end %>    
+  <div class="clearfix"> </div>
+  <h2 style="margin-top:120px;">February 2009</h2>
+  <% @albums_2009.each do |album| %>
+    <div class="album clearfix">
+      <div class="cover">
+        <%= link_to(image_tag('rpm/overlay.png'), user_playlist_path(album.user.login, album), :class => 'overlay') %>
+        <%= image_tag(album.cover(:album), :class => 'cover') %>
+        <%= link_to awesome_truncate(album.title,50), user_playlist_path(album.user.login, album), :class => 'album_title' %><br/>
+        <%= link_to album.user.name, user_home_path(album.user.login), :class => 'alonetoner'%>
+      </div>
     </div>
-  </div>
-<% end %>    
+  <% end %>    
+<% end %>
 <div class="clearfix"> </div>

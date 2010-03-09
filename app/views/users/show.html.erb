@@ -39,9 +39,9 @@
 	  <% content_for :right do %>
     	  <%= render :partial => 'popular' if present?(@popular_tracks) && (setting('most_popular', @user) == 'true')%>
     	 
-    	  <% cache(cache_digest(@comments)) do # creates a hash of @comments, which will differ if private comments available  %>
+    	  <% #cache(cache_digest(@comments)) do # doesn't work if new private comments show, also date/times are off  %>
     	    <%= render :partial => 'shared/comments' if @comments.size > 0 %>
-	      <% end %>
+	      <% #end %>
 	  <% end %>	
 		
 	</div>
