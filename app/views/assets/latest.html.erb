@@ -1,15 +1,14 @@
 <!-- alonetone home page -->
 <%= render :partial => 'shared/self_confidence' unless logged_in? %>
 
-<% cache(@playlists.first.cache_key+'plisthome') do %>
-  <% unless @playlists.blank? %>
+<% if !(@playlists.blank?) then cache(@playlists.first.cache_key+'plisthome') do %>
   <div id="latest_playlists">
 
     <h2>Latest albums &amp; playlists</h2>
     <%= render :partial => 'shared/carousel' %>
 
   </div>
-  <% end %>
+<% end %>
 <% end %>
 
 <% content_for :left do%>
