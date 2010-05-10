@@ -12,6 +12,7 @@ config/defensio.yml
 config/facebooker.yml
 config/basecamp.yml
 config/newrelic.yml
+config/memcached.yml
 config/deploy/*
 *.sql
 public/images/pretty_text/*.*
