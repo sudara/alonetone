@@ -13,22 +13,6 @@ end
   
 
 Rails::Initializer.run do |config|
-  # Specify gems that this application depends on. 
-  # They can then be installed with "rake gems:install" on new installations.
-  config.gem 'ruby-mp3info',  :lib => 'mp3info'
-  config.gem 'rubyzip',       :lib => 'zip/zip'
-  config.gem 'googlecharts',  :lib => 'gchart'
-  config.gem 'haml', :version => '2.0.9'
-  config.gem 'newrelic_rpm'
-  config.gem 'BlueCloth',     :lib => 'bluecloth' 
-  config.gem 'hpricot' # for comment processing / markdown fixing
-  config.gem 'will_paginate'
-  
-  config.gem "rspec", :lib => false, :version => ">= 1.2.0"
-  config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"  
-  
-  # Rmagick is *not* required (for example, sudara uses imagescience)
-  # config.gem 'rmagick',       :lib => 'RMagick'
 
 
   # load gems from vendor

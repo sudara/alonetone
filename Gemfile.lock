@@ -1,0 +1,133 @@
+--- 
+dependencies: 
+  mongrel: 
+    group: 
+    - :default
+    version: ">= 0"
+  rails: 
+    group: 
+    - :default
+    version: = 2.3.4
+  mysql: 
+    group: 
+    - :default
+    version: ">= 0"
+  haml: 
+    group: 
+    - :default
+    version: = 2.0.9
+  BlueCloth: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: 
+    - bluecloth
+  newrelic_rpm: 
+    group: 
+    - :default
+    version: ">= 0"
+  ruby-mp3info: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: 
+    - mp3info
+  rspec: 
+    group: 
+    - :default
+    version: ">= 1.2.0"
+    require: []
+
+  rspec-rails: 
+    group: 
+    - :default
+    version: ">= 1.2.0"
+    require: []
+
+  will_paginate: 
+    group: 
+    - :default
+    version: ~> 3.0.0
+  googlecharts: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: 
+    - gchart
+  hpricot: 
+    group: 
+    - :default
+    version: ">= 0"
+  aws-s3: 
+    group: 
+    - :default
+    version: = 0.4.0
+    require: 
+    - aws/s3
+  rubyzip: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: 
+    - zip/zip
+specs: 
+- rake: 
+    version: 0.8.7
+- BlueCloth: 
+    version: 1.0.1
+- activesupport: 
+    version: 2.3.4
+- rack: 
+    version: 1.0.1
+- actionpack: 
+    version: 2.3.4
+- actionmailer: 
+    version: 2.3.4
+- activerecord: 
+    version: 2.3.4
+- activeresource: 
+    version: 2.3.4
+- builder: 
+    version: 2.1.2
+- mime-types: 
+    version: "1.16"
+- xml-simple: 
+    version: 1.0.12
+- aws-s3: 
+    version: 0.4.0
+- cgi_multipart_eof_fix: 
+    version: 2.5.0
+- daemons: 
+    version: 1.0.10
+- fastthread: 
+    version: 1.0.7
+- gem_plugin: 
+    version: 0.2.3
+- googlecharts: 
+    version: 1.6.0
+- haml: 
+    version: 2.0.9
+- hpricot: 
+    version: 0.8.2
+- mongrel: 
+    version: 1.1.5
+- mysql: 
+    version: 2.8.1
+- newrelic_rpm: 
+    version: 2.11.3
+- rails: 
+    version: 2.3.4
+- rspec: 
+    version: 1.3.0
+- rspec-rails: 
+    version: 1.3.2
+- ruby-mp3info: 
+    version: 0.6.13
+- rubyzip: 
+    version: 0.9.4
+- will_paginate: 
+    version: 3.0.0
+hash: ce1c0da467d8f83bf6d5ab802c1ead7d586c30a5
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org
