@@ -4,10 +4,10 @@ servers: 3
 docroot: public    
 environment: production 
 cwd: /data/alonetone/current
-log_file: /var/log/engineyard/mongrel/alonetone/mongrel.log
+log_file: /data/alonetone/current/log/mongrel.log
 pid_file: /var/run/mongrel/alonetone/mongrel.pid
-user: alonetone
-group: alonetone
+user: sudara
+group: sudara
 
 
 

@@ -1,6 +1,7 @@
 source :gemcutter
 gem "rails", "2.3.4"
-gem "mongrel"
+#gem "mongrel", :require => nil
+#gem "mongrel_cluster"
 gem "mysql"
 
 # bundler requires these gems in all environments
@@ -9,7 +10,7 @@ gem "mysql"
 
 gem 'aws-s3', '0.4.0', :require => 'aws/s3'
 
-gem 'will_paginate', '~> 3.0.pre'
+gem 'will_paginate'#, '~> 3.0.pre'
 
 
 gem 'ruby-mp3info',  :require => 'mp3info'

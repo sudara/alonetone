@@ -23,6 +23,9 @@ ey_smtp_settings = {
   :perform_deliveries => true
 }
 
-config.action_mailer.smtp_settings   = ey_smtp_settings
-config.action_mailer.delivery_method = :smtp
+#config.action_mailer.smtp_settings   = ey_smtp_settings
+#config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.delivery_method = :sendmail
+ 
 config.action_view.cache_template_loading = true
