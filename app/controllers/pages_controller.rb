@@ -64,8 +64,15 @@ class PagesController < ApplicationController
     @page_title = "About alonetone, the kickass home for musicians"
   end
   
+  def donate
+    @page_title = "Donate to alonetone"
+  end
+  
+  def donate_thanks
+    @page_title = "Thanks for your donation!"
+  end
+  
   def press
-    
   end
   
   def stats
