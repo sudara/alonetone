@@ -5,10 +5,11 @@ gem "rails", "2.3.4"
 gem "mysql"
 
 # bundler requires these gems in all environments
-# gem "nokogiri", "1.4.2"
+gem "nokogiri"
+
 # gem "geokit"
 
-gem 'aws-s3', '0.4.0', :require => 'aws/s3'
+gem 'aws-s3', '~>0.4.0', :require => 'aws/s3'
 
 gem 'will_paginate'#, '~> 3.0.pre'
 

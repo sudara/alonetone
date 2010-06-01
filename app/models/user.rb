@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting
-  
-  default_scope  :include  => :pic
-  
+    
   named_scope :musicians, {
     :conditions => ['assets_count > ?',0], 
     :order      => 'assets_count DESC', 
@@ -34,7 +32,7 @@ class User < ActiveRecord::Base
   named_scope :alpha, { :order => 'display_name' }
   
   # Can create music
-  has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC', :include => [:user => :pic]
+  has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC'
   has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position', :include => :pic
   has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]

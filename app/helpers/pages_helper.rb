@@ -12,6 +12,16 @@ module PagesHelper
     date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00")
   end
   
+  def sitemap(loc,lastmod,changefreq,priority)
+    "<url>
+      <loc>" + loc + "</loc>
+      <lastmod>" + w3c_date(lastmod) + "</lastmod>
+      <changefreq>" + changefreq + "</changefreq>
+      <priority>" + priority + "</priority>
+    </url>
+    "
+  end
+  
   def twenty_four(permalink, type)
     album = type == :playlist ? grab_playlist(permalink) : grab_track(permalink)
     result = '<div class="album">'

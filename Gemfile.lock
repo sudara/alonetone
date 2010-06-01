@@ -63,10 +63,14 @@ dependencies:
   aws-s3: 
     group: 
     - :default
-    version: = 0.4.0
+    version: ~> 0.4.0
     require: 
     - aws/s3
   hpricot: 
+    group: 
+    - :default
+    version: ">= 0"
+  nokogiri: 
     group: 
     - :default
     version: ">= 0"
@@ -105,6 +109,8 @@ specs:
     version: 2.8.1
 - newrelic_rpm: 
     version: 2.12.1
+- nokogiri: 
+    version: 1.4.2
 - rails: 
     version: 2.3.4
 - rmagick: 
@@ -118,8 +124,8 @@ specs:
 - rubyzip: 
     version: 0.9.4
 - will_paginate: 
-    version: 2.3.12
-hash: 0683c12bb037a27af3841f5efa66df7445622eda
+    version: 2.3.14
+hash: afe03dc0926f89a76236e70eaa9261f4ae8cb714
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
