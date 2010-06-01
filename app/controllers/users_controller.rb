@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       format.html do
         @page_title = (@user.name)
         @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
-        @description = "#{@user.name}'s music and albums"
+        @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
         @tab = 'your_stuff' if current_user == @user
                
         @popular_tracks = @user.assets.find(:all, :limit => 5, :order => 'assets.listens_count DESC')
