@@ -3,7 +3,7 @@ require 'bluecloth'
 class PagesController < ApplicationController
   skip_filter filter_chain, :only => :help_an_app_support_brutha_out
   layout "pages"
-
+  caches_page :sitemap
   
   
   class Hell < StandardError; end
