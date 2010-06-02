@@ -16,6 +16,7 @@ class UpdatesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml
+      format.rss { render 'index.xml.builder' }
     end
   end
 
