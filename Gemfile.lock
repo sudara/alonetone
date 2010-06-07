@@ -28,6 +28,10 @@ dependencies:
     version: ">= 1.2.0"
     require: []
 
+  mime-types: 
+    group: 
+    - :default
+    version: ">= 0"
   ruby-mp3info: 
     group: 
     - :default
@@ -125,7 +129,7 @@ specs:
     version: 0.9.4
 - will_paginate: 
     version: 2.3.14
-hash: afe03dc0926f89a76236e70eaa9261f4ae8cb714
+hash: b60160faa00f29d7e6ef7100c66869b3f96ecad8
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

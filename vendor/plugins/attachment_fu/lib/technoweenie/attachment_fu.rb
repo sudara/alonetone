@@ -291,7 +291,7 @@ module Technoweenie # :nodoc:
       # TODO: Allow it to work with Merb tempfiles too.
       def uploaded_data=(file_data)
         return nil if file_data.nil? || file_data.size == 0
-        self.content_type = file_data.content_type
+        self.content_type = MIME::Types.type_for(file_data.original_filename).first.content_type
         self.filename     = file_data.original_filename if respond_to?(:filename)
         if file_data.is_a?(StringIO)
           file_data.rewind
@@ -383,7 +383,7 @@ module Technoweenie # :nodoc:
         def attachment_attributes_valid?
           [:size, :content_type].each do |attr_name|
             enum = attachment_options[attr_name]
-            errors.add attr_name, ActiveRecord::Errors.default_error_messages[:inclusion] unless enum.nil? || enum.include?(send(attr_name))
+            errors.add attr_name, "This doesn't look like an mp3. Could you double check? <br/>If you double check and still have problems, please email sudara@alonetone.com or ask for help in the forums! Thanks." unless enum.nil? || enum.include?(send(attr_name))
           end
         end
 

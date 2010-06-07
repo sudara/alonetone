@@ -13,7 +13,7 @@ gem 'aws-s3', '~>0.4.0', :require => 'aws/s3'
 
 gem 'will_paginate'#, '~> 3.0.pre'
 
-
+gem "mime-types" 
 gem 'ruby-mp3info',  :require => 'mp3info'
 gem 'rubyzip',       :require => 'zip/zip'
 
