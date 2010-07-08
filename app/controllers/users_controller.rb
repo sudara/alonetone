@@ -158,6 +158,9 @@ class UsersController < ApplicationController
   
   
   def update
+    # fix to not care about password stuff unless both fields are set
+    (params[:user][:password] = params[:user][:password_confirmation] = nil) unless present?(params[:user][:password]) and present?(params[:user][:password_confirmation])
+    
     @user.attributes = params[:user]
     # temp fix to let people with dumb usernames change them
     @user.login = params[:user][:login] if not @user.valid? and @user.errors.on(:login)
