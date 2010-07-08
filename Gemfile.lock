@@ -67,7 +67,7 @@ dependencies:
   aws-s3: 
     group: 
     - :default
-    version: ~> 0.4.0
+    version: ~> 0.5.0
     require: 
     - aws/s3
   hpricot: 
@@ -102,7 +102,7 @@ specs:
 - xml-simple: 
     version: 1.0.12
 - aws-s3: 
-    version: 0.4.0
+    version: 0.5.1
 - googlecharts: 
     version: 1.6.0
 - haml: 
@@ -112,7 +112,7 @@ specs:
 - mysql: 
     version: 2.8.1
 - newrelic_rpm: 
-    version: 2.12.1
+    version: 2.12.3
 - nokogiri: 
     version: 1.4.2
 - rails: 
@@ -129,7 +129,7 @@ specs:
     version: 0.9.4
 - will_paginate: 
     version: 2.3.14
-hash: b60160faa00f29d7e6ef7100c66869b3f96ecad8
+hash: f6f57dcac0102e3f9b74753a1f196c69bc873aa3
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

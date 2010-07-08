@@ -1,5 +1,5 @@
 class AssetObserver < ActiveRecord::Observer
-  def after_create(asset)
+  def after_attachment_saved(asset)
     if followers_exist_for?(asset)
       AssetMailer.deliver_upload_notification(asset,emails_of_followers(asset)) 
     end

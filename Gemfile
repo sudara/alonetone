@@ -9,7 +9,7 @@ gem "nokogiri"
 
 # gem "geokit"
 
-gem 'aws-s3', '~>0.4.0', :require => 'aws/s3'
+gem 'aws-s3', '~>0.5.0', :require => 'aws/s3'
 
 gem 'will_paginate'#, '~> 3.0.pre'
 

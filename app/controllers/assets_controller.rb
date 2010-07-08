@@ -196,8 +196,8 @@ class AssetsController < ApplicationController
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
       flash[:error] = if (@assets.size == 0)
-        "Oh noes! Either that file was not an mp3, or you might be using Firefox, which currently has a bug under certain conditions. " <<
-        "<br/>Try using IE7 / Safari to upload or uploading the mp3(s) as a zip. Worst case: ask for help the forums or email sudara@alonetone.com" 
+        "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. " <<
+        "Need help? Search or ask for help the forums or email sudara@alonetone.com" 
       else
         flashes
       end
