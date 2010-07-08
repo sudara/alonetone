@@ -29,6 +29,6 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
 		
 		xml.itunes :category,:text=>'Music' 
     
-    xml.<< render(:partial => 'shared/asset', :collection => @assets) 
+    xml.<< render(:partial => 'shared/asset', :collection => @assets) if present?(@assets)
   end
 end
