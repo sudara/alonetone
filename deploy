@@ -1,0 +1,52 @@
+#!/bin/bash
+echo "Deployanatoring teh codez!"
+echo 
+
+# ssh in as the user
+ssh linode-deploy '
+  cd /data/alonetone/current; 
+  
+  if [[ $(git diff) > "" ]];
+    then 
+      echo "WARNING: local changes on server, exiting!"; 
+      exit 0;
+  fi;
+  
+  git fetch; 
+  
+  if [[ $(git diff origin/master Gemfile) > "" ]]; 
+    then 
+      echo "Gemfile changed, bundle installing...";
+      git reset --hard origin/master; bundle install --without=test; 
+      echo
+    else 
+      echo "skipping bundle install, gemfile has not changed since last time.";
+      git reset --hard origin/master;
+      echo
+  fi
+  '
+
+
+echo "Roll over, Mongrels! (one at a time)"
+# ssh in as root, to handle monit.
+ssh linode '
+  echo "restarting 5000"
+  monit restart mongrel_alonetone_5000; 
+  echo "giving sleepy mongrel 5000 some seconds to wake up"
+  sleep 30
+  # curling the mongrel, showing 
+  time curl localhost:5000 -I | head -n 1
+  
+  
+  echo "restarting 5001"
+  monit restart mongrel_alonetone_5001; 
+  echo "giving sleepy mongrel 5001 some seconds to wake up"
+  sleep 30;
+  time curl localhost:5001 -I  | head -n 1
+
+  
+  echo "restarting 5000"
+  monit restart mongrel_alonetone_5002
+  time curl localhost:5002 -I | head -n 1
+
+  '
