@@ -34,7 +34,7 @@ ssh linode '
   monit restart mongrel_alonetone_5000; 
   echo "giving sleepy mongrel 5000 some seconds to wake up"
   sleep 30
-  # curling the mongrel, showing 
+  # curling the mongrel, showing the status code and the time it took to complete.
   time curl localhost:5000 -I | head -n 1
   
   
