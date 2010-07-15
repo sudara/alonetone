@@ -5,7 +5,7 @@ docroot: public
 environment: production 
 cwd: /data/alonetone/current
 log_file: /data/alonetone/current/log/mongrel.log
-pid_file: /data/alonetone/current/tmp/pids/mongrel.pid
+pid_file: /data/alonetone/pid/mongrel.pid
 user: sudara
 group: sudara
 
