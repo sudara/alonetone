@@ -16,7 +16,7 @@ class User
   validates_length_of       :bio, :within => 0..1000, :message => "can't be empty (or longer than 1000 characters, keep it short and simple!)", :on => :update, :allow_blank => true
 
   validates_format_of       :identity_url, :with => /^https?:\/\//i, :allow_nil => true
-  validates_format_of       :itunes, :with => /^(phobos|itunes).apple.com\/WebObjects\/MZStore.woa\/wa\//i, :allow_blank => true, :message => 'link must be a link to the itunes store'
+  validates_format_of       :itunes, :with => /^(phobos|itunes).apple.com/i, :allow_blank => true, :message => 'link must be a link to the itunes store'
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password
