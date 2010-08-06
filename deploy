@@ -17,7 +17,7 @@ ssh linode-deploy '
   if [[ $(git diff origin/master Gemfile) > "" ]]; 
     then 
       echo "Gemfile changed, bundle installing...";
-      git reset --hard origin/master; bundle install --without=test; 
+      git reset --hard origin/master; bundle install --deployment; 
       echo
     else 
       echo "skipping bundle install, gemfile has not changed since last time.";

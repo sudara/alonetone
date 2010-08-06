@@ -16,16 +16,17 @@ config.action_controller.perform_caching             = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
-ey_smtp_settings = {
-  :domain             => "nextkillerapp.com", # CHANGEME
-  :address            => "smtp",
-  :port               => 25,
-  :perform_deliveries => true
-}
-
 #config.action_mailer.smtp_settings   = ey_smtp_settings
 #config.action_mailer.delivery_method = :smtp
 
-config.action_mailer.delivery_method = :sendmail
+
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  :address        => "localhost",
+  :port           => 25,
+  :domain         => "ramenmusic.com"
+}
+  
+
  
 config.action_view.cache_template_loading = true
