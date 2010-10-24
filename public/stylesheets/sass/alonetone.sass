@@ -7,6 +7,7 @@
   :height 32px
   :position relative
   :text-align right
+  :font-family "ronnia-1","ronnia-2", Helvetica, Arial
   em, a, span, a:visited
     :display block
     :float left
@@ -15,7 +16,8 @@
     :font-size 12px
     :padding 10px 10px
     :color = !text_color
-  em, a:hover
+    :font-family "ronnia-1","ronnia-2", Helvetica, Arial
+  em, a:hover, span.current
     :background transparent url(../images/backgrounds/user_bar_selected.png) repeat-x top left
     :color = !white
     :text-decoration none
@@ -164,11 +166,12 @@
     .name
       :margin-left 10px
       :color = #fff
-      :text-shadow rgba(0, 0, 0, 0.5) 0px 2px 2px
+      :text-shadow rgba(0, 0, 0, 0.3) 0px 2px 2px
+      :font-family "ronnia-1","ronnia-2", Helvetica, Arial
       :text-align center
       :background-color transparent
       :font-size 13px
-      :font-weight bold
+      :font-weight 500
       :text-decoration none
       :margin-top 8px
       :height 20px
