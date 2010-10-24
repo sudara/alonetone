@@ -161,12 +161,25 @@ class UsersController < ApplicationController
     # fix to not care about password stuff unless both fields are set
     (params[:user][:password] = params[:user][:password_confirmation] = nil) unless present?(params[:user][:password]) and present?(params[:user][:password_confirmation])
     
+    # If the user changes the :block_guest_comments setting then it requires
+    # that the cache for all their tracks be invalidated or else the cached
+    # tabs will not change
+    currently_blocking_guest_comments = @user.settings.present?('block_guest_comments') && @user.settings['block_guest_comments'] == 'true'
+    flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
+    
     @user.attributes = params[:user]
     # temp fix to let people with dumb usernames change them
     @user.login = params[:user][:login] if not @user.valid? and @user.errors.on(:login)
+    
+    successful_save = @user.save
+    if successful_save && flush_asset_caches
+      # Invalidate asset.cache_key for all this users assets
+      Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } )
+    end
+    
     respond_to do |format|
       format.html do 
-        if @user.save 
+        if successful_save
           flash[:ok] = "Sweet, updated" 
           redirect_to edit_user_path(@user)
         else
@@ -175,7 +188,7 @@ class UsersController < ApplicationController
         end
       end
       format.js do
-        @user.save ? (return head(:ok)) : (return head(:bad_request))
+        successful_save ? (return head(:ok)) : (return head(:bad_request))
       end
     end
   end
