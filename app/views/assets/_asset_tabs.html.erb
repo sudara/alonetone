@@ -1,15 +1,19 @@
 <% cache('tabs'+asset.cache_key) do %>
 <div class="more tabs" style="display:none;">
     <ul>
-      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
+			<% if logged_in? || asset.guest_can_comment? %>
+	      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
+			<% end %>
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
       <li><%= link_to 'more', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
     
     <%= favorite_toggle(asset) %>
-    <div id="comment_track_<%= asset.unique_id %>">
-        <%= render :partial => 'assets/comment', :object => asset %>
-    </div>
+		<% if logged_in? || asset.guest_can_comment? %>
+	    <div id="comment_track_<%= asset.unique_id %>">
+	        <%= render :partial => 'assets/comment', :object => asset %>
+	    </div>
+		<% end %>
   	<div id="details_track_<%= asset.unique_id %>">
 
         <div class="description_panel panel no_border">

@@ -81,6 +81,14 @@
           options_for_select([['no thanks','false'], ['yes','true']], 
           setting(:display_listen_count))) %>
     </div>
+
+    <div class="static_content">
+      Accept comments from guests?<br/>
+      <%= select_tag('user[settings][block_guest_comments]', 
+          options_for_select([['yes, anyone can comment','false'], ['no, Alonetone users only please','true']], 
+           setting(:block_guest_comments))) %>
+    </div>
+
     
     <div class="static_content">
       Display most popular tracks on your home page?<br/>
