@@ -15,7 +15,7 @@
        <%= user_nav_item "by location", {:action => 'index', :sort => 'map'} %>       
        <%= user_nav_item "on twitter", {:action => 'index', :sort => 'on_twitter'} %>
       </ul>
-      <%= will_paginate @users if @users%>
+      <%= will_paginate @users if @users && params[:sort] != "map"%>
     </div>
   </div>
   

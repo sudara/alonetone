@@ -7,6 +7,9 @@
           <%= will_paginate @comments, :param_name => :page%>
         </div>
         <%= render :partial => 'shared/comment', :collection => @comments %>
+        <div class="mini_paginator">
+          <%= will_paginate @comments, :param_name => :page%>
+        </div>
       <% end %>
 
       <% content_for :right do %>
@@ -15,25 +18,34 @@
           <%= will_paginate @comments_made, :param_name => :made_page%>
         </div>
         <%= render :partial => 'shared/comment', :collection => @comments_made %>
-      <% end %>
+        <div class="mini_paginator">
+          <%= will_paginate @comments_made, :param_name => :made_page%>
+        </div>
+     <% end %>
 
     <% end %>
 <% else %>
     <% content_for :left do %>
     <h1>Recent Comments</h1>
-    <div class="mini_paginator">
+      <div class="mini_paginator">
+        <%= will_paginate @comments, :param_name => :page%>
+      </div>
+        <%= render :partial => 'shared/comment', :collection => @comments %>
+        <div class="mini_paginator">
           <%= will_paginate @comments, :param_name => :page%>
         </div>
-        <%= render :partial => 'shared/comment', :collection => @comments %>
     <% end %>
 
     <% if moderator? or admin? %>
     <% content_for :right do %>
         <h1>Recent SPAM</h1>
         <div class="mini_paginator">
-              <%= will_paginate @spam, :param_name => :spam_page%>
-            </div>
-            <%= render :partial => 'shared/comment', :collection => @spam %>
+          <%= will_paginate @spam, :param_name => :spam_page%>
+        </div>
+        <%= render :partial => 'shared/comment', :collection => @spam %>
+        <div class="mini_paginator">
+          <%= will_paginate @spam, :param_name => :spam_page%>
+        </div>
         <% end %>
     <% end %>
 

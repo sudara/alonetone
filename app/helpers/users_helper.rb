@@ -21,8 +21,10 @@ module UsersHelper
   end
   
   def user_location(user)
-    if (user.present?(:city) || user.present?(:country))
+    if (user.present?(:city) && user.present?(:country))
       "from #{[user.city.strip, user.country.strip].compact.join(', ')}" 
+    elsif (user.present?(:city) || user.present?(:country))
+      "from #{[user.city.strip, user.country.strip].compact.to_s}" 
     end
   end
   
