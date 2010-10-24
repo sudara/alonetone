@@ -3,6 +3,7 @@
 body
   :font-family Helvetica, Arial, Geneva
   :color = !text_color
+  :text-rendering optimizeLegibility
 a, a:visited
   :font-family Helvetica, Arial, Geneva
   :color = !text_color
@@ -61,27 +62,31 @@ img a, img a:visited
 h1
   :color #f6f6f6
   :font-size 32px
-  :font-weight normal
+  :font-weight 400
   :text-shadow rgba(3,0,0,0.42) 2px 2px 1px
   :margin-bottom 25px
+  :font-family "ronnia-1","ronnia-2", Helvetica, Arial
   &.user, &.static, &.notice
     :color = !text_color
     :text-shadow rgba(255,249,208,0.43) 2px 2px 1px
     :margin 0
 h2
   :color = !white
+  :font-family "ronnia-1","ronnia-2", Helvetica, Arial
   :font-size = 20px
-  :font-weight bold
+  :font-weight 500
   :line-height 2em
   :margin-bottom 1em
   :text-shadow rgba(0,3,2,0.42) 2px 2px 1px
 h2.box
+  :font-family "ronnia-1","ronnia-2", Helvetica, Arial
   :display block
   :color = !text_color
   :height 42px
   :line-height 42px
   :width 100%
   :text-indent 25px
+  :font-weight bold
   :margin-bottom 3px
   :background-color = !box_background
   :text-shadow rgba(255,249,208,0.43) 2px 2px 1px

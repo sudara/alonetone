@@ -20,7 +20,8 @@
 		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
 
     <%= javascript_include_tag 'jquery-1.4.2','soundmanager','utilities','jqueryui-1.8rc3','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','twitter','application', 'highlight','tablesorter','charts', :cache => 'allonetone' %>
-    
+    <script type="text/javascript" src="http://use.typekit.com/rwq4zcv.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <!-- ensure token is available to javascript for accessible link posts, etc -->
     <%= render :partial => 'shared/javascript_payload' %>
   
@@ -61,7 +62,8 @@
 	  </div><!-- end wrapper -->
     <div id="footer_spacer"> </div>
 		<%= render :partial => 'shared/footer' %>
-	  
+	
+
   	<script type="text/javascript">
   	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
