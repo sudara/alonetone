@@ -150,6 +150,14 @@ class Asset < ActiveRecord::Base
     'Track'
   end
   
+  def guest_can_comment?
+    if user.settings.present?( 'block_guest_comments' )
+      user.settings['block_guest_comments'] == "false"
+    else
+      true
+    end
+  end
+  
   protected 
   
   def set_title_to_filename
