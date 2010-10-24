@@ -3,9 +3,9 @@ xml = ::Builder::XmlMarkup.new( :indent => 2 )
 xml.instruct! :xml, :version => "1.0", :encoding => "UTF-8"
 xml.rss :version => "2.0", "xmlns:media" => "http://search.yahoo.com/mrss/" do
   xml.channel do
-    xml.title "listener feed for: #{@user.login}"
-    xml.description "Podcast for listener tracks for user #{@user.login}"
-    xml.link "http://alonetone.com/"
+    xml.title "Listen feed for #{@user.login}"
+    xml.description "A podcast feed of new tracks by artists followed by #{@user.login}"
+    xml.link user_url( @user )
     xml.generator "alonetone.com"
 
     @tracks.each do |track|
