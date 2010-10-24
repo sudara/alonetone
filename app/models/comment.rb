@@ -6,6 +6,10 @@ class Comment < ActiveRecord::Base
     :order      => 'id DESC'
   }
   
+  named_scope :by_member, {
+    :conditions => ['commenter_id IS NOT NULL']
+  }
+  
   named_scope :include_private, {
     :conditions => {:spam => false}, 
     :order      => 'id DESC'

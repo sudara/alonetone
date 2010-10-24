@@ -85,8 +85,11 @@ class AssetsController < ApplicationController
         @assets = Asset.latest(@limit)
         @favorites = Track.favorites.find(:all, :limit => 5)
         @popular = Asset.find(:all, :limit => @limit, :order => 'hotness DESC')
-        @comments = Comment.public.find(:all, :limit => 5) unless admin?
-        @comments = Comment.include_private.find(:all, :limit => 5) if admin?        
+        @comments = if admin?
+          Comment.include_private.find(:all, :limit => 5)
+        else
+          Comment.public.by_member.find(:all, :limit => 5)
+        end
         @playlists = Playlist.public.latest(12)
         @tab = 'home'
         @welcome = true unless logged_in?
