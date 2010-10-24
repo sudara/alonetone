@@ -247,6 +247,19 @@ class AssetsController < ApplicationController
     end
   end
   
+  FEED_SQL = <<-ESQL
+    SELECT DISTINCT a.* FROM assets a INNER JOIN users u ON (a.user_id = u.id) INNER JOIN followings f ON (f.user_id = u.id) WHERE f.follower_id = :user_id ORDER BY a.created_at DESC LIMIT 15
+  ESQL
+  
+  def listen_feed
+    # Note that there is a method User#new_tracks_from_followees. Ideally that method should be refactored
+    # to use this query kind rather than a double-query and IN subquery and then this method can call it.
+    @tracks = Asset.find_by_sql( [FEED_SQL,{:user_id => @user.id}] )
+    respond_to do |format|
+      format.rss
+    end
+  end
+  
   protected
     
   def not_found
