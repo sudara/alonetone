@@ -1035,8 +1035,3 @@ jQuery(function($) {
   $('#forums_layout p').highlight($('#forum_q').val());
   
 });
-
-
-$(document).ready(function() {
-  soundManager.createMovie();
-});
