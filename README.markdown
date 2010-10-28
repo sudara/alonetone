@@ -14,7 +14,7 @@ Or get jiggy with our build-to-order API and do something crazy and exciting.
 
 ### Bug reporting 
 
-We use [lighthouse](http://alonetone.lighthouseapp.com) to submit bugs and keep track of our work
+We use [lighthouse](http://alonetone.lighthouseapp.com) to submit bugs and keep track of our work.
 
 ### The goal?
 
@@ -25,12 +25,11 @@ How do we reach this goal?
 * It must be easy to use, straightforward, intuitive, and consistent (grandma-friendly)
 * It must be attractive to look at 
 * It provides musicians with practical, useful and inspiring tools and services
-* It provides listeners and first time site visitors with a 'hook' into their first taste of alonetone music and helps them explore the site in an intelligent and guided way.
-* It encourages artist exploration and the feeling to stick around.
+* It provides listeners and first time site visitors with a 'hook' into their first taste of alonetone music and helps them explore the site in an intelligent and guided way
+* It encourages artist exploration and the feeling to stick around
 * It does not overwhelm folks with TMI (too much information) or TMO (too many options) or TMF (too many features)
 
 For more info, visit [the alonetone faq](http://alonetone.com/about)
-
 
 ### Current feature set
 
@@ -54,7 +53,7 @@ Really, only the very basics are implemented.
 
 ### Want to join forces?
 
-First of all, talk to Sudara by emailing Sudara at alonetone com
+First of all, talk to Sudara by emailing Sudara at alonetone com.
 
 Secondly, [sign up for an account](http://alonetone.com) and start digging in.
 
@@ -70,14 +69,16 @@ If you do want to get jiggy and setup alonetone locally, the best thing to do is
 
 alonetone uses 6 config files:
 
-    alonetone.yml (contains the application "secret" and app-specific settings)
-    database.yml
-    amazon_s3.yml (used in production, by default development mode runs with :file_system storage)
-    defensio.yml (spam protection, ignored in development)
-    facebooker.yml (for facebook app, ignore this in general for now)
-    newrelic.yml (for performance tracking)
+      alonetone.yml (contains the application "secret" and app-specific settings)
+      database.yml
+      amazon_s3.yml (used in production, by default development mode runs with :file_system storage)
+      defensio.yml (spam protection, ignored in development)
+      facebooker.yml (for facebook app, ignore this in general for now)
+      newrelic.yml (for performance tracking)
 
 These files will be created for you the first time you run any rake task. 
+
+#### Gem installation
 
 You'll need some gems, at least:
 
@@ -89,31 +90,44 @@ You'll need some gems, at least:
       aws-s3 (if you use Amazon S3 to store files)
       rubyzip (for extracting mp3s from zip files)
       mocha (for rspec)
+
+You can install all of the gem dependencies using one of three ways:
+
+1. **Bundler**
+
+   If you have the Bundler gem installed, you can install all of the dependencies like so:
+
+   `    bundle update`
+
+2. **Rake**
       
-You can let the system install all required gems for you using following command:
+   Otherwise, you can install all the required gems using the following command:
 
-      rake gems:install
+   `    rake gems:install`
 
-NOTE: On a Windows install using InstantRails with Rails 2.2.2 and RubyGems 1.3, an error such as 'uninitialized constant ApplicationController::ALONETONE' might present itself when using the 'rake gems:install' command. However, I found that if you install all of the gems manually that you can ignore this error message.
+   NOTE: On a Windows install using InstantRails with Rails 2.2.2 and RubyGems 1.3, an error such as 'uninitialized constant ApplicationController::ALONETONE' might present itself when using the 'rake gems:install' command. However, I found that if you install all of the gems manually that you can ignore this error message.
 
-You can also install them manually:
+3. **Manual installation**
 
-			sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha
+   If you have troubles with the above, you can also install them manually:
 
-You may need to install imagemagick before rmagick. If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'. If you are on a Mac, you can 'sudo port install imagemagick'
-			
-You'll need to install rails 2.1 gem or have a copy in the vendor directory.
+   `    sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha`
+
+   You may need to install imagemagick before rmagick. If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'. If you are on a Mac, you can 'sudo port install imagemagick'.
+
+#### Database setup
 
 Then, you can create a development database, run all migrations and load some bootstrap data with:
 
       rake db:remake
 
+#### Logging in
 
-After bootstrap data is loaded, you can login using test account with username=test, password=test.
+After the bootstrap data is loaded, you can login using the test account (username=test, password=test).
 
-You will see session and current\_user information at the end of each page after login. You can turn it off by changing show\_debug_info to false in alonetone.yml
+You will see session and current\_user information at the end of each page after login. You can turn it off by changing show\_debug_info to false in alonetone.yml.
 
-After login, click on "Upload" button to upload your first mp3.
+After login, click on the "Upload" button to upload your first mp3.
 
 ### License 
 
