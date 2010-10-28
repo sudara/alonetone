@@ -164,8 +164,11 @@ class UsersController < ApplicationController
     # If the user changes the :block_guest_comments setting then it requires
     # that the cache for all their tracks be invalidated or else the cached
     # tabs will not change
-    currently_blocking_guest_comments = @user.settings.present?('block_guest_comments') && @user.settings['block_guest_comments'] == 'true'
-    flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
+    flush_asset_caches = false
+    if params[:user][:settings][:block_guest_comments]
+      currently_blocking_guest_comments = @user.settings && @user.settings.present?('block_guest_comments') && @user.settings['block_guest_comments'] == 'true'
+      flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
+    end
     
     @user.attributes = params[:user]
     # temp fix to let people with dumb usernames change them
