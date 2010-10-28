@@ -43,3 +43,4 @@ public/system
 public/sitemap.xml
 tmp
 .bundle
+Gemfile.lock
