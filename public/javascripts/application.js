@@ -1,5 +1,8 @@
 var soundIsReady = false;
 
+soundManager.debugMode = false;
+soundManager.useHTML5Audio = true; /* for acl, baby */
+soundManager.url= '/javascripts/';
 soundManager.onload = function() {
   // soundManager is ready to use
   soundIsReady = true;
@@ -1031,9 +1034,4 @@ jQuery(function($) {
   // highlighting on forums search
   $('#forums_layout p').highlight($('#forum_q').val());
   
-});
-
-
-$(document).ready(function() {
-  soundManager.createMovie();
 });

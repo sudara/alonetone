@@ -76,7 +76,7 @@
     <h2 class="box">Settings</h2>
     <div class="static_content">
     <% form_for @user, :html => { :method => :put } do |f| -%>
-      Display play counts blatently on all tracks? <br/>
+      Display play counts blatantly on all tracks? <br/>
       <%= select_tag('user[settings][display_listen_count]', 
           options_for_select([['no thanks','false'], ['yes','true']], 
           setting(:display_listen_count))) %>
