@@ -165,7 +165,7 @@ class UsersController < ApplicationController
     # that the cache for all their tracks be invalidated or else the cached
     # tabs will not change
     flush_asset_caches = false
-    if params[:user][:settings][:block_guest_comments]
+    if params[:user] && params[:user][:settings] && params[:user][:settings][:block_guest_comments]
       currently_blocking_guest_comments = @user.settings && @user.settings.present?('block_guest_comments') && @user.settings['block_guest_comments'] == 'true'
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
