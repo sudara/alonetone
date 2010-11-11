@@ -2,7 +2,7 @@ var soundIsReady = false;
 
 soundManager.debugMode = false;
 soundManager.useHTML5Audio = true; /* for acl, baby */
-soundManager.url= '/javascripts/';
+soundManager.url= '/javascripts/soundmanager20101010.swf';
 soundManager.onload = function() {
   // soundManager is ready to use
   soundIsReady = true;
