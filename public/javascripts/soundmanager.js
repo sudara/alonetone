@@ -19,7 +19,7 @@ var soundManager = null;
 
 function SoundManager(smURL, smID) {
 
-  this.flashVersion = 8;             // version of flash to require, either 8 or 9. Some API features require Flash 9.
+  this.flashVersion = 9;             // version of flash to require, either 8 or 9. Some API features require Flash 9.
   this.debugMode = false;             // enable debugging output (div#soundmanager-debug, OR console if available+configured)
   this.debugFlash = false;           // enable debugging output inside SWF, troubleshoot Flash/browser issues
   this.useConsole = true;            // use firebug/safari console.log()-type debug console if available
@@ -28,14 +28,14 @@ function SoundManager(smURL, smID) {
   this.nullURL = 'about:blank';      // path to "null" (empty) MP3 file, used to unload sounds (Flash 8 only)
   this.allowPolling = true;          // allow flash to poll for status update (required for whileplaying() events, peak, sound spectrum functions to work.)
   this.useFastPolling = false;       // uses lower flash timer interval for higher callback frequency, best combined with useHighPerformance
-  this.useMovieStar = false;          // enable support for Flash 9.0r115+ (codename "MovieStar") MPEG4 audio formats (AAC, M4V, FLV, MOV etc.)
+  this.useMovieStar = true;          // enable support for Flash 9.0r115+ (codename "MovieStar") MPEG4 audio formats (AAC, M4V, FLV, MOV etc.)
   this.bgColor = '#ffffff';          // movie (.swf) background color, eg. '#000000'
   this.useHighPerformance = false;   // position:fixed flash movie can help increase js/flash speed, minimize lag
   this.flashLoadTimeout = 1000;      // msec to wait for flash movie to load before failing (0 = infinity)
   this.wmode = null;                 // string: flash rendering mode - null, transparent, opaque (last two allow layering of HTML on top)
   this.allowScriptAccess = 'always'; // for scripting the SWF (object/embed property), either 'always' or 'sameDomain'
   this.useFlashBlock = false;        // *requires flashblock.css, see demos* - allow recovery from flash blockers. Wait indefinitely and apply timeout CSS to SWF, if applicable.
-  this.useHTML5Audio = true;        // Beta feature: Use HTML 5 Audio() where API is supported (most Safari, Chrome versions), Firefox (no MP3/MP4.) Ideally, transparent vs. Flash API where possible.
+  this.useHTML5Audio = false;        // Beta feature: Use HTML 5 Audio() where API is supported (most Safari, Chrome versions), Firefox (no MP3/MP4.) Ideally, transparent vs. Flash API where possible.
   this.html5Test = /^probably$/i;    // HTML5 Audio().canPlayType() test. /^(probably|maybe)$/i if you want to be more liberal/risky.
   this.ondebuglog = false;           // callback made with each log message, regardless of debugMode
 
