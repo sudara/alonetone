@@ -10,7 +10,7 @@ xml.rss :version => "2.0", "xmlns:media" => "http://search.yahoo.com/mrss/" do
 
     @tracks.each do |track|
       xml.item do
-        xml.title "#{track.title} by #{track.user.display_name}"
+        xml.title "#{track.title} by #{track.user.display_name} (#{track.length})"
         xml.link user_track_url( track.user, track )
         xml.pubDate track.created_at.rfc822
         xml.description do |description|
