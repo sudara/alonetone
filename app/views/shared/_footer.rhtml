@@ -19,23 +19,3 @@
   </div>
 
 </div>
-<div id="footer_expandable">
-  <div id="open_footer_content">
-    <div id="feedback_help">
-        Hi! <br/><br/>We <em>really</em> love your feedback.<br/><br/>
-        <% if logged_in? %>
-            Your comments will be publicly posted to the <%= link_to 'alonetone forums', forums_path %>.<br/><br/>
-        <% end %>
-        If for some reason you need to communicate privately (a little shy?) you can also email sudara@alonetone.com
-    </div>
-    <div id="bug_form" style="opacity:0;" class="<%= logged_in? ? 'logged_in_flavor' : 'guest' %>">
-    	<div id="form_wrapper">
-    	    <% if logged_in? %>
-    		    <%= render :partial => 'topics/quick_form'%>
-    		<% else %>
-    		    <%= render :partial => 'user_reports/form' %>
-    		<% end %>
-    	</div>
-    </div>
-  </div>
-</div>
