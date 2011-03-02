@@ -11,7 +11,7 @@ class AssetsController < ApplicationController
   #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit']
+  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone']
   @@bots = ['bot','spider','baidu']
   @@bad_ip_ranges = ['195.239', '220.181', '61.135', '60.28.232', '121.14', '221.194']
   

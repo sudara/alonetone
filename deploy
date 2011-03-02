@@ -24,15 +24,15 @@ ssh linode-deploy '
       git reset --hard origin/master;
       echo
   fi
-  
-  rm -f /data/alonetone/current/public/javascripts/allonetone.js
-  rm -f /data/alonetone/current/public/stylesheets/alonetone-v2.css
   '
 
 
 echo "Roll over, Mongrels! (one at a time)"
 # ssh in as root, to handle monit.
 ssh linode '
+  echo "removing css/js"
+  rm -f /data/alonetone/current/public/javascripts/allonetone.js
+  rm -f /data/alonetone/current/public/stylesheets/alonetone-v2.css
   echo "restarting 5000"
   monit restart mongrel_alonetone_5000; 
   echo "giving sleepy mongrel 5000 some seconds to wake up"

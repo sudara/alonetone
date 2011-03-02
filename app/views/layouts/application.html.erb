@@ -6,11 +6,19 @@
     <title><%= @page_title || 'alonetone, a damn fine home for musicians' %></title>
     
     <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','facebox','alonetone','forums', :cache => 'alonetone-v2'%>
+    
+    <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="/stylesheets/ipad.css" type="text/css" />
+    
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
+		
     <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
-	
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="/images/ipad_icon.png"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
+
     <meta content="index,follow" name="robots"/>
     <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from, independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
 		<meta content="<%=@keywords || 'alonetone, upload, mp3, musician, home, music, independent, artist, free, legal, mp3'%>" name="Keywords" />
@@ -19,7 +27,7 @@
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
 
-    <%= javascript_include_tag 'jquery-1.4.2','soundmanager','utilities','jqueryui-1.8rc3','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','twitter','application', 'highlight','tablesorter','charts', :cache => 'allonetone' %>
+    <%= javascript_include_tag 'jquery-1.4.2','soundmanager20110209/soundmanager2','utilities','jqueryui-1.8rc3','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','twitter','application', 'highlight','tablesorter','charts', :cache => 'allonetone' %>
     <script type="text/javascript" src="http://use.typekit.com/rwq4zcv.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <!-- ensure token is available to javascript for accessible link posts, etc -->
@@ -60,7 +68,6 @@
 
 	    </div><!-- end content -->
 	  </div><!-- end wrapper -->
-    <div id="footer_spacer"> </div>
 		<%= render :partial => 'shared/footer' %>
 	
 

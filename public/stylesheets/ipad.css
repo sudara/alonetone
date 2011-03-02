@@ -1,0 +1,17 @@
+body {
+  -webkit-tap-highlight-color: transparent; }
+
+a * {
+  pointer-events: none; }
+
+#nav {
+  left: 25px; }
+
+#content {
+  margin-left: 25px; }
+
+#top_bar #top_bar_left {
+  left: 27px; }
+
+a#logo {
+  left: 839px; }

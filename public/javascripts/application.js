@@ -1,12 +1,11 @@
-var soundIsReady = false;
+var soundIsReady = true;
 
 soundManager.debugMode = false;
+soundManager.flashVersion = 9;
 soundManager.useHTML5Audio = true; /* for acl, baby */
-soundManager.url= '/javascripts/soundmanager20101010/';
-soundManager.onload = function() {
-  // soundManager is ready to use
-  soundIsReady = true;
-}
+soundManager.consoleOnly = true;
+soundManager.url= '/javascripts/soundmanager20110209/';
+
 
 // we want regular access to the auth token
 Alonetone = {
@@ -985,7 +984,6 @@ jQuery(function($) {
 
   // bio
   $('a.follow').attach(FollowToggle);
-
 
   // sort playlists 
   $('#sort_playlists').sortable({
