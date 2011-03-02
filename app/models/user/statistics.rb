@@ -113,7 +113,7 @@ class User
       :group      =>  'track_owner_id',
       :order      =>  'count_track_owner DESC', 
       :limit      =>  limit, 
-      :conditions => ['track_owner_id != ?', self.id]
+      :conditions => ['track_owner_id != ? AND DATE(`listens`.created_at) > DATE_SUB( CURDATE(), interval 4 month)', self.id]
     ).collect(&:first)
   end  
 
