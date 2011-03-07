@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
   
   # we check to see if the current_user is authorized based on the asset.user
-  before_filter :login_required, :except => [:index, :show, :latest, :radio]
+  before_filter :login_required, :except => [:index, :show, :latest, :radio, :listen_feed]
   before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
   
   #rescue_from NoMethodError, :with => :user_not_found
@@ -114,7 +114,6 @@ class AssetsController < ApplicationController
     @page_title = "alonetone Radio: #{@channel}" 
     @assets = Asset.radio(params[:source], params, current_user)
     @safari = request.env['HTTP_USER_AGENT'].to_s.include? 'AppleWebKit'
-    render :partial => 'assets/asset', :collection => @assets, :layout => false if request.xhr?
   end
   
   def top
@@ -247,14 +246,8 @@ class AssetsController < ApplicationController
     end
   end
   
-  FEED_SQL = <<-ESQL
-    SELECT DISTINCT a.* FROM assets a INNER JOIN users u ON (a.user_id = u.id) INNER JOIN followings f ON (f.user_id = u.id) WHERE f.follower_id = :user_id ORDER BY a.created_at DESC LIMIT 15
-  ESQL
-  
   def listen_feed
-    # Note that there is a method User#new_tracks_from_followees. Ideally that method should be refactored
-    # to use this query kind rather than a double-query and IN subquery and then this method can call it.
-    @tracks = Asset.find_by_sql( [FEED_SQL,{:user_id => @user.id}] )
+    @tracks = @user.new_tracks_from_followees(15)
     respond_to do |format|
       format.rss
     end

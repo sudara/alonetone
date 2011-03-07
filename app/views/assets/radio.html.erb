@@ -1,7 +1,13 @@
 <h1 id="radio_title">alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
 <% content_for :left do %>
+  <div class="mini_paginator">
+    <%= will_paginate @assets %>
+  </div>
     <div id="radio_tracks" class="box">
         <%= render :partial => 'assets/asset', :collection => @assets  %>
+    </div>
+    <div class="mini_paginator">
+      <%= will_paginate @assets %>
     </div>
 <% end %>
 <% content_for :right do %>
@@ -11,13 +17,15 @@
             <div class="static_content" id="radio_controls">
                 <form id="radio_controls_form">
                     <ul>
-                    <%= radio_option 'popular', 'Currently kicking ass' %> 
                     <%= radio_option 'latest', 'Latest', true %> 
-                    <%= radio_option 'mangoz_shuffle', "The 'Mangoz' shuffle (random)" %> 
-                    <%= radio_option 'songs_you_have_not_heard',  "Songs you haven't heard", false, true %>
-                    <%= radio_option 'your_favorite_alonetoners', "Your favorite alonetoners", false, true %>
-                    <%= radio_option 'favorites', "Recently favorited"  %>
+                    <%= radio_option 'popular', 'Currently kicking ass' %>                   
                     <%= radio_option 'most_favorited', "Most favorited" %>
+                    <%= radio_option 'favorites', "Recently favorited"  %>
+                    <%= radio_option 'mangoz_shuffle', "The 'Mangoz' shuffle (random)" %> 
+                    <%= radio_option 'those_you_follow',  "Tracks from those you follow", false, true %>                    
+                    <%= radio_option 'your_favorite_alonetoners', "Your favorite alonetoners", false, true %>
+                    <%= radio_option 'songs_you_have_not_heard',  "Songs you haven't heard", false, true %>
+                    
                     </ul>
                 </form>
             </div>

@@ -1,9 +1,7 @@
 class Asset
   
   def self.radio(channel, params, user)
-    per_page = (params[:per_page] && params[:per_page].to_i < 50) ? params[:per_page] : 5
-
-    common_options = {:per_page => per_page, :page => params[:page]}
+    common_options = {:per_page => 20, :page => params[:page]}
 
     case channel
       when 'favorites'
@@ -19,11 +17,13 @@ class Asset
         Asset.order_by('favorites_count DESC').paginate(:all, common_options)
 
       when 'songs_you_have_not_heard'
-        Asset.not_heard_by(user, per_page)
+        Asset.not_heard_by(user, common_options)
 
       when 'popular'
         Asset.order_by('hotness DESC').paginate(:all, common_options)
-
+        
+      when 'those_you_follow'
+        Asset.recent.new_tracks_from_followees(user, common_options)
       else # latest
         Asset.recent.paginate(:all, common_options)
     end
@@ -50,17 +50,28 @@ class Asset
   
 
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
-  def self.not_heard_by(user, limit)
+  def self.not_heard_by(user, pagination_options)
     Asset.
       random_order.
-      limit_by(limit).
-      id_not_in(user && user.listened_to_ids)
+      id_not_in(user && user.listened_to_ids).paginate(:all, pagination_options)      
   end
 
   
   def self.most_listened_to(pagination_options)
     Asset.
       order_by('listens_count DESC').
+      paginate(:all, pagination_options)
+  end
+  
+  # Since the raw sql doesn't give a meaningful performance boost, I removed it in favor of 
+  # keeping the code clean, dry and more flexible (pagination, etc.)
+  #
+  # SELECT DISTINCT a.* FROM assets a INNER JOIN users u ON (a.user_id = u.id) INNER JOIN followings f ON (f.user_id = u.id) WHERE f.follower_id = :user_id ORDER BY a.created_at DESC LIMIT 15
+  #
+  def self.new_tracks_from_followees(user, pagination_options)
+    Asset.
+      recent.
+      user_id_in(user.follows_user_ids).
       paginate(:all, pagination_options)
   end
 end

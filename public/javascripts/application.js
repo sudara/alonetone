@@ -752,34 +752,6 @@ Track = $.klass({
   }
 });
 
-// same as track, but keeps feeding the browser with tracks
-RadioTrack = $.klass(Track,{
-  startNextTrack: function(){
-    this.radio = true;
-    this.pause();
-    this.element.addClass('played');
-    RadioTrack.instances[this.nextTrackIndex()].playOrResume();
-  },
-  supplyNewTracksIfNeeded : function(){
-    Radio.instances[0].supplyNewTracksIfNeeded();
-  },
-  removeCompletely:function(){
-    //console.log('removing '+this.track_title);
-    //if(this.soundIsLoaded()) // remove mp3 from memory
-     // soundManager.destroySound(this.SoundID);
-    this.more.remove();
-    this.element.fadeOut('slow',function(){$(this).remove()});
-    RadioTrack.instances.splice(this.behavior.instances.indexOf(this),1);
-  },
-  pause:function($super){
-    $super();
-    this.element.addClass('played');
-  },
-  playOrResume:function($super){
-   this.supplyNewTracksIfNeeded();   
-   $super(); 
-  }
-});
 
 Radio = $.klass({  
   
@@ -788,20 +760,12 @@ Radio = $.klass({
     this.currentStation = $('li.selected', this.element);
     this.tracks = $('#radio_tracks');
     this.channelName = $('#channel_name');
-    this.maxNumberPlayedTracks = 2; // trim tracks after 3 have played
-    this.minNumberRemainingTracks = 3 ;
-    this.page = {}; // keeps track of paging through the results
     $.hotkeys.add('down', $.bind(this.nextTrack, this));
     $.hotkeys.add('up', $.bind(this.previousTrack,this));
 
-    
     this.bindHoverAndClickStation();
   },
-  printTracks : function(){ //debugging
-    for(i=0;i< this.behavior.instances.length;i++){
-      //console.log(RadioTrack.instances[i].track_title);
-    }
-  },
+
   changeStation : function(newStation){
     newStation = ($(newStation.target).parent('li').length == 0) ? $(newStation.target) : $(newStation.target).parent('li');
     if($('input', newStation).attr('disabled')) 
@@ -812,70 +776,11 @@ Radio = $.klass({
     $('input',this.currentStation).attr('checked','checked');
     this.channelName.html($('span.channel_name',this.currentStation).html());
     document.cookie = 'radio='+$('input',this.currentStation).val()+';path=/';
-    this.replaceTracksWithTracksFrom(newStation);
+    var url = '/radio/' + $('input',this.currentStation).val();
+    document.location = url;
+    
   },
-  replaceTracksWithTracksFrom : function(station){
-    this.trimUpcomingTracks();
-    this.addTracksFrom(station);
-  },
-  supplyNewTracksIfNeeded : function(){
-    this.trimPlayedTracks();
-    remainingTracks = $('.asset',this.tracks).length - this.playedTracksStillOnScreen(); 
-    if(remainingTracks < this.minNumberRemainingTracks){
-      this.addTracksFrom(this.currentStation);
-    }
-  },
-  addTracksFrom : function(station){
-    this.page.station = (this.page.station || 0);
-    this.page.station ++;
-    // /radio/station/per_page/page_number
-    url = '/radio/' + $('input',station).val() + '/4/' + this.page.station 
-    $.get(url, $.bind(this.appendTracks, this));
-  },
-  appendTracks : function (data){
-    // make sure to only attach RadioTrack to incoming new tracks  
-    $(this.tracks.append(data));  
-    $('.asset',this.tracks).not('.instantiated').attach(RadioTrack);
-  },
-  somethingIsPlaying : function(){
-    return $('.asset.playing').length > 0;
-  },
-  trimPlayedTracks : function(){
-    if(this.playedTracksStillOnScreen() > this.maxNumberPlayedTracks)
-      this.trimTracksBy(this.playedTracksStillOnScreen() - this.maxNumberPlayedTracks);
-  },
-  trimTracksBy : function(amount){
-    for(i = 1;i <= amount;i++){
-      toRemove = $('.asset.played:first',this.tracks).not('.playing');
-      this.removeRadioTrack(toRemove[0]);
-    }
-  },
-  removeRadioTrack : function(toRemove){
-    // given the element, we want to find the RadioTrack 
-    for(j=0;j < RadioTrack.instances.length;j++){
-      if(RadioTrack.instances[j].element[0].id == toRemove.id)
-          RadioTrack.instances[j].removeCompletely();
-    }
-  },
-  findRadioTrack : function(domTrack){
-    for(j=0;j < RadioTrack.instances.length;j++){
-      if(RadioTrack.instances[j].element[0].id == domTrack.id)
-          return RadioTrack.instances[j];
-    }
-  },
-  removeRadioTracks : function(object){
-    //console.log('removing a handful');
-    for(i=0;i < object.length;i++){
-      this.removeRadioTrack(object[i]);
-    }
-  },
-  trimUpcomingTracks : function(){
-    upcomingTracks = $('.asset:not(.played)').not('.playing');
-    this.removeRadioTracks(upcomingTracks);
-  },
-  playedTracksStillOnScreen : function(){
-    return $('.asset.played').length
-  },
+ 
   nextTrack : function(e){
     if(this.keyboardEnabled(e)){
       playing = this.findRadioTrack($('.asset.playing')[0])
@@ -907,10 +812,8 @@ Radio = $.klass({
 jQuery(function($) {
   // Tracks 
   
-  if($('#radio_tracks').length > 0)
-    $('.asset').attach(RadioTrack);
-  else
-    $('.asset, .track').attach(Track);
+
+  $('.asset, .track').attach(Track);
   
   // display listen_count when needed
   if(window.showPlayCounts){

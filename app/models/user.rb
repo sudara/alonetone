@@ -130,8 +130,7 @@ class User < ActiveRecord::Base
   end
   
   def new_tracks_from_followees(limit)
-    Asset.find(:all, :limit => limit, :order => 'assets.created_at DESC',
-     :conditions => {:user_id => followee_ids})
+    Asset.new_tracks_from_followees(self,{:page => 1, :per_page => limit})
   end
   
   def follows_user_ids
@@ -159,12 +158,8 @@ class User < ActiveRecord::Base
     updated_at_will_change!
     save
   end
-  
+
   protected
-  
-  def followee_ids
-    follows.find(:all, :select => 'user_id').collect(&:user_id)
-  end
 
   
   def make_first_user_admin
