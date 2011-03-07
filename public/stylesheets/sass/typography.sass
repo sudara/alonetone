@@ -181,11 +181,32 @@ a.arrows, a.view_all, a.view_more_no_float
 .content 
   a.view_all
     :color = !text_color
+    :text-shadow rgba(255,255,255,0.5) 1px 1px 0
     :position relative
     :float right
-    :margin-top -31px
-    :margin-right 25px
-
+    :padding-left 13px
+    :font-family "ronnia-1","ronnia-2", Helvetica, Arial
+    :font-weight 800
+    :font-size 16px
+    :line-height 30px
+    :border_radius 5px
+    :background-image -webkit-gradient(linear,left bottom,left top,color-stop(0.0,   #6c7959),color-stop(0.499, #869471),color-stop(0.50,  #909d7c),color-stop(0.99,  #a6b195))
+    :background-image -moz-linear-gradient(center bottom,#6c7959 0%,#869471 49.9%,#909d7c 50%,#a6b195 99.9%)
+    :-webkit-box-shadow inset 0 1px 0 #f0f2ed, inset 0 -1px 0 #303627
+    :border-radius 5px
+    :height 32px
+    :-webkit-font-smoothing antialiased
+    :text-decoration none
+    &:hover
+      :background-image -webkit-gradient(linear,left bottom,left top,color-stop(0.0,   #a6b395),color-stop(0.499, #bcc5ab),color-stop(0.50,  #c1cab3),color-stop(0.99,  #cfd6c3))
+      :background-image -moz-linear-gradient(center bottom,#a6b395 0%,#bcc5ab 49.9%,#c1cab3 50%,#cfd6c3 99.9%)
+      :-webkit-box-shadow inset 0 1px 0 #f7f8f5, inset 0 -1px 0 #748658
+    &:active
+      :background-image -webkit-gradient(linear,left bottom,left top,color-stop(0.0,   #86946d),color-stop(0.499, #67784f),color-stop(0.50,  #5c6d48),color-stop(0.99,  #464f39))
+      :background-image -moz-linear-gradient(center bottom,#86946d 0%,#67784f 49.9%,#5c6d48 50%,#464f39 99.9%)
+      :-webkit-box-shadow inset 0 1px 0 #1f231a, inset 0 -1px 0 #eaedcd
+      
+    
 div.notice a.hide_notice
   :float right
   :margin-top -31px
@@ -207,77 +228,6 @@ div.footer_box
     :display block
     :float right
     :height 32px
-  a.view_all_recent_music
-    :width 197px
-    :background transparent url(../images/icons/view_all_recent_music.png) no-repeat 0px 0px
-    &:hover
-      :background-position -197px 0px
-    &:active
-      :background-position -394px 0px
-  a.view_all_kicking_ass
-    :width 185px
-    :background transparent url(../images/icons/view_all_kicking_ass.png) no-repeat 0px 0px
-    &:hover
-      :background-position -185px 0px
-    &:active
-      :background-position -370px 0px
-  a.view_all_favorites
-    :width 169px
-    :background transparent url(../images/icons/view_all_favorites.png) no-repeat 0px 0px
-    &:hover
-      :background-position -169px 0px
-    &:active
-      :background-position -338px 0px
-  a.view_all_comments
-    :width 181px
-    :background transparent url(../images/icons/view_all_comments.png) no-repeat 0px 0px
-    &:hover
-      :background-position -181px 0px
-    &:active
-      :background-position -362px 0px
-  a.view_more_tracks
-    :width 168px
-    :background transparent url(../images/icons/view_more_tracks.png) no-repeat 0px 0px
-    &:hover
-      :background-position -168px 0px
-    &:active
-      :background-position -336px 0px
-  a.view_listening_history
-    :width 202px
-    :background transparent url(../images/icons/view_listening_history.png) no-repeat 0px 0px
-    &:hover
-      :background-position -202px 0px
-    &:active
-      :background-position -404px 0px
-  a.view_all_track_plays
-    :width 186px
-    :background transparent url(../images/icons/view_all_track_plays.png) no-repeat 0px 0px
-    &:hover
-      :background-position -186px 0px
-    &:active
-      :background-position -372px 0px
-  a.view_feature
-    :margin-top 2px
-    :width 133px
-    :background transparent url(../images/icons/view_feature.png) no-repeat 0px 0px
-    &:hover
-      :background-position -133px 0px
-    &:active
-      :background-position -266px 0px
-  a.view_all_features
-    :width 165px
-    :background transparent url(../images/icons/view_all_features.png) no-repeat 0px 0px
-    &:hover
-      :background-position -165px 0px
-    &:active
-      :background-position -330px 0px
-  a.view_all_recent_posts
-    :width 197px
-    :background transparent url(../images/icons/view_all_recent_posts.png) no-repeat 0px 0px
-    &:hover
-      :background-position -197px 0px
-    &:active
-      :background-position -394px 0px
 
 a.edit_green, a.delete_green
   :display block

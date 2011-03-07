@@ -9,6 +9,6 @@
 </div>
 
 <div class="footer_box">
-    <%= link_to ' ', listens_path(@user.login), :class => 'view_all_track_plays' if @track_plays.size > 4%>
+    <%= link_to 'view all plays &rArr;', listens_path(@user.login), :class => 'view_all' if @track_plays.size > 4%>
 </div>
 <% end %>

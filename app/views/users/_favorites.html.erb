@@ -5,5 +5,5 @@
   <% end %>
 </div>
 <div class="footer_box">
-  <%= link_to " ", user_playlist_path(@user, @user.favorites), :class => "view_all_favorites" if @user.favorites.tracks.size > 5 %>
+  <%= link_to "view all favorites &rArr;", user_playlist_path(@user, @user.favorites), :class => "view_all" if @user.favorites.tracks.size > 5 %>
 </div>

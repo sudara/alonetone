@@ -3,6 +3,6 @@
   <%= render :partial => 'shared/comment', :collection => comments %>
 </div>
 <div class="footer_box">
-  <%= link_to ' ', user_comments_path(@user.login), 
-     :class => 'view_all_comments', :title => "all comments about #{h @user.name}'s music" %>
+  <%= link_to 'view all comments &rArr;', user_comments_path(@user.login), 
+     :class => 'view_all', :title => "all comments about #{h @user.name}'s music" %>
 </div>
