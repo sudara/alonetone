@@ -4,7 +4,7 @@ soundManager.debugMode = false;
 soundManager.flashVersion = 9;
 soundManager.useHTML5Audio = true; /* for acl, baby */
 soundManager.consoleOnly = true;
-soundManager.url= '/javascripts/soundmanager20110209/';
+soundManager.url= '/javascripts/soundmanager20110306';
 
 
 // we want regular access to the auth token
