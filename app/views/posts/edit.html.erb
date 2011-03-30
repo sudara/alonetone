@@ -1,19 +1,2 @@
 <h1>Editing Post</h1>
-<div id="edit" class="editbox">
-    <div class="static_content">
-      <% form_for :post, :url => forum_topic_post_path(@post.forum, @post.topic, @post), 
-        :html => { :method => :put, :id => 'edit-form' } do |f| -%>
-
-            <%= f.text_area :body, :rows => 10, :id => "edit_post_body", :tabindex => 1 %>
-
-            <%= link_to('delete post', forum_topic_post_path(@post.forum, @post.topic, @post, :page => current_page), 
-                  :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") %>  
-
-            <%= submit_tag 'Save Changes', :tabindex => 2 %> or <%= link_to('cancel', forum_topic_path(@post.forum, @post.topic), :id => 'edit-cancel') %>
-
-      <% end -%>
-    </div>
-    <div class="static_content" style="padding-top:30px">
-    <%= render :partial => 'formatting'%>
-    </div>
-</div>
+<%= render :partial => 'edit'%>
