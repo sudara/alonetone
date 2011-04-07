@@ -2,8 +2,8 @@
 echo "Deployanatoring teh codez!"
 echo 
 
-# ssh in as the user
-ssh linode-deploy '
+# handle git and bundle install
+ssh alonetone '
   cd /data/alonetone/current; 
   
   if [[ $(git diff) > "" ]];
@@ -26,15 +26,14 @@ ssh linode-deploy '
   fi
   '
 
-
+# handle restarts
 echo "Roll over, Mongrels! (one at a time)"
-# ssh in as root, to handle monit.
-ssh linode '
+ssh alonetone '
   echo "removing css/js"
   rm -f /data/alonetone/current/public/javascripts/allonetone.js
   rm -f /data/alonetone/current/public/stylesheets/alonetone-v2.css
   echo "restarting 5000"
-  monit restart mongrel_alonetone_5000; 
+  sudo monit restart mongrel_alonetone_5000; 
   echo "giving sleepy mongrel 5000 some seconds to wake up"
   sleep 15
   # curling the mongrel, showing the status code and the time it took to complete.
@@ -42,13 +41,13 @@ ssh linode '
   
   
   echo "restarting 5001"
-  monit restart mongrel_alonetone_5001; 
+  sudo monit restart mongrel_alonetone_5001; 
   echo "giving sleepy mongrel 5001 some seconds to wake up"
   sleep 15;
   time curl localhost:5001 -I  | head -n 1
     
   echo "restarting 5000"
-  monit restart mongrel_alonetone_5002
+  sudo monit restart mongrel_alonetone_5002
   time curl localhost:5002 -I | head -n 1
   
   sleep 10
