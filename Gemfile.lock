@@ -22,7 +22,7 @@ GEM
     hpricot (0.8.2)
     mime-types (1.16)
     mysql (2.8.1)
-    newrelic_rpm (2.12.3)
+    newrelic_rpm (2.14.1)
     nokogiri (1.4.3.1)
     rack (1.0.1)
     rails (2.3.4)
@@ -54,7 +54,7 @@ DEPENDENCIES
   hpricot
   mime-types
   mysql
-  newrelic_rpm
+  newrelic_rpm (~> 2.14.1)
   nokogiri
   rails (= 2.3.4)
   rmagick

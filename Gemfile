@@ -20,7 +20,7 @@ gem 'rubyzip',       :require => 'zip/zip'
 gem 'googlecharts',  :require => 'gchart'
 gem 'haml', '2.0.9'
 
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '~>2.14.1'
 gem 'BlueCloth',     :require => 'bluecloth' 
 
 gem 'hpricot' # for comment processing / markdown fixing
