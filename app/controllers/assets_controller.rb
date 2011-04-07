@@ -18,7 +18,7 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.xml
   def index
-      @page_title = @user.name + "'s uploaded music (mp3)"
+      @page_title = "All music by " + @user.name 
 
       @assets = @user.assets.paginate(:all, 
         :order    => 'created_at DESC', 

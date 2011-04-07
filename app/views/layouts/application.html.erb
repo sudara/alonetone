@@ -20,7 +20,7 @@
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <meta content="index,follow" name="robots"/>
-    <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from, independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
+    <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
 		<meta content="<%=@keywords || 'alonetone, upload, mp3, musician, home, music, independent, artist, free, legal, mp3'%>" name="Keywords" />
 		
 		<%= yield :css %>
@@ -80,5 +80,17 @@
   	pageTracker._initData();
   	pageTracker._trackPageview();
   	</script>
+  	
+    <script type="text/javascript">
+    var clicky_site_id = 66408645;
+    (function() {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = '//static.getclicky.com/js';
+      ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+    })();
+    </script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66408645ns.gif" /></p></noscript>
   </body>
 </html>
