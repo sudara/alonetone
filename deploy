@@ -54,6 +54,7 @@ ssh linode '
   sleep 10
   rm -f /data/alonetone/current/public/javascripts/allonetone.js
   rm -f /data/alonetone/current/public/stylesheets/alonetone-v2.css
-  
+
 
   '
+bundle exec newrelic deployments
