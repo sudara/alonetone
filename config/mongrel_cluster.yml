@@ -6,8 +6,8 @@ environment: production
 cwd: /data/alonetone/current
 log_file: /data/alonetone/current/log/mongrel.log
 pid_file: /data/alonetone/pid/mongrel.pid
-user: sudara
-group: sudara
+user: alonetone
+group: alonetone
 
 
 
