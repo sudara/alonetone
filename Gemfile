@@ -28,6 +28,9 @@ gem 'hpricot' # for comment processing / markdown fixing
 gem "rspec", ">= 1.2.0", :require => nil
 gem "rspec-rails", ">= 1.2.0", :require => nil
 
+gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
+
+
 group :production do
   gem 'rmagick'
 end

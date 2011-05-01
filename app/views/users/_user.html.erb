@@ -23,7 +23,6 @@
      <%= user_nav_item "Profile", profile_path(@user), :title => "#{h @user.name}'s profile on alonetone" if @user.bio %>
   
       <%= user_nav_item "Email", "mailto:#{@user.email}",:added_class => "contact" if admin? %>
-      <%= user_nav_item "Myspace", "http://myspace.com/#{@user.myspace}",:added_class => "contact" if @user.present?(:myspace)%>
       <%= user_nav_item "iTunes", "http://#{@user.itunes}",:added_class => "contact" if @user.present?(:itunes) %>
       <%= user_nav_item "Twitter", "http://twitter.com/#{@user.twitter}", :added_class => 'contact' if @user.present?(:twitter) %>
       <%= user_nav_item "Sudo", sudo_user_path(@user),:added_class => "contact" if (admin? || @sudo)%>   

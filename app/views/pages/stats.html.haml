@@ -1,5 +1,7 @@
 - content_for :static_h1 do
   Statistics: Watch alonetone grow
+- content_for :css do
+  = javascript_include_tag 'raphael.min', 'g.raphael.min', 'g.line.min' 
 .box
   %h2.box
     Currently on alonetone
@@ -22,14 +24,14 @@
 
 .box 
   %h2.box
-    Number of mp3s on alonetone
+    Tracks uploaded per week
   .static_content
-    = fusion_chart('/charts/FCF_Line.swf', render(:partial => 'track_totals.xml.builder'), 'total_tracks', '550', '250', false, false,true)
+    = raphael_report_tag(Asset.weekly_report, { :width => 580, :height => 100, :line =>"#6d9312", :fill =>"#8db038", :hover_fill_color => '#5da5ba', :hover_line_color =>'#348fa9'}, { :vertical_label_unit => 'Tracks' })    
 .box
   %h2.box
-    Listens per Month* since launch
+    Listens per Week* since launch
   .static_content
-    = fusion_chart('/charts/FCF_Line.swf', render(:partial => 'listens.xml.builder'), 'listens', '550', '250', false, false,true)
+    = raphael_report_tag(Listen.weekly_report, { :width => 580, :height => 100, :line =>"#6d9312", :fill =>"#8db038", :hover_fill_color => '#5da5ba', :hover_line_color =>'#348fa9'}, { :vertical_label_unit => 'Plays' })    
     %br
     %strong
       =Listen.monthly_listen_count_for[0]
@@ -40,23 +42,23 @@
       * Please note that as of April-July 2008, alonetone began to filter out all hits by search engines & spiders
 .box
   %h2.box
-    Where folks listen from
+    New artists per week
   .static_content
-    = fusion_chart('/charts/FCF_Pie2D.swf', render(:partial => 'sources.xml.builder'),'listensource','550','250',false, false, true)
+    = raphael_report_tag(User.weekly_report, { :width => 580, :height => 100, :line =>"#6d9312", :fill =>"#8db038", :hover_fill_color => '#5da5ba', :hover_line_color =>'#348fa9'}, { :vertical_label_unit => 'Plays' })    
 .box
   %h2.box
     Other fun alonetone numbers
   .static_content 
     %strong
-      =@tracks_per_user
+      ="%.0f" % @tracks_per_user
     tracks uploaded by the average alonetoner
     %br
     %strong
-      =@listens_per_track
+      ="%.0f" % @listens_per_track
     listens to the average track
     %br
     %strong
-      =@listens_per_user
+      ="%.0f" % @listens_per_user
     listens to the average alonetoner
     %br
     Average length of the 
@@ -67,10 +69,10 @@
     %br
     %br
     %strong 
-      =@comments_per_user
-    comments per alonetoner
+      ="%.0f" % @comments_per_user
+    comments made by the average alonetoner
     %br
     %strong
-      =@posts_per_user
+      ="%.1f" %@posts_per_user
     posts per alonetoner to the 
     =link_to 'forums', forums_path

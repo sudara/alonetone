@@ -16,6 +16,9 @@ class Listen < ActiveRecord::Base
     :counter_cache  => true
   
   validates_presence_of :asset_id, :track_owner_id
+
+  reportable :weekly, :aggregation => :count, :grouping => :week
+  
   
   def source
     self[:source] || 'alonetone'

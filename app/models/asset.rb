@@ -44,6 +44,8 @@ class Asset < ActiveRecord::Base
   
   has_many :listens, :dependent => :destroy
 
+  reportable :weekly, :aggregation => :count, :grouping => :week
+
   has_many :listeners, 
     :through  => :listens, 
     :order    => 'listens.created_at DESC', 

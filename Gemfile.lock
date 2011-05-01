@@ -1,3 +1,11 @@
+GIT
+  remote: http://github.com/saulabs/reportable.git
+  revision: 286b96ea8b45f001cc5099ad7307ab7270e1ae28
+  specs:
+    reportable (1.1.2)
+      activerecord (>= 2.0.0)
+      activesupport (>= 2.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -57,6 +65,7 @@ DEPENDENCIES
   newrelic_rpm (~> 2.14.1)
   nokogiri
   rails (= 2.3.4)
+  reportable!
   rmagick
   rspec (>= 1.2.0)
   rspec-rails (>= 1.2.0)

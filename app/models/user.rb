@@ -42,6 +42,8 @@ class User < ActiveRecord::Base
   acts_as_mappable
   before_validation :geocode_address
 
+  reportable :weekly, :aggregation => :count, :grouping => :week
+
   # alonetone plus
   has_many :source_files
   
