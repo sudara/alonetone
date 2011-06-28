@@ -217,10 +217,13 @@ class UsersController < ApplicationController
   def destroy
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
-      @user.assets.delete_all
+      @user.tracks.delete_all
+      @user.playlists.delete_all
+      Listen.delete_all(['track_owner_id = ?',@user.id])
+      Listen.delete_all(['listener_id = ?',@user.id])
+      @user.posts.delete_all
       @user.comments.delete_all
-      @user.listens.delete_all
-      @user.track_plays.delete_all
+      @user.assets.delete_all
       @user.destroy
       redirect_to logout_path
     else
