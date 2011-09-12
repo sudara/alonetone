@@ -83,7 +83,7 @@ class Listen < ActiveRecord::Base
   end
   
   def self.most_active_tracks(limit=25)
-    Listen.count(:all, :group => :asset_, :conditions => ['created_at > ?',30.days.ago], :order => 'count_all DESC', :limit => limit)
+    Listen.count(:all, :group => :asset, :conditions => ['created_at > ?',30.days.ago], :order => 'count_all DESC', :limit => limit)
   end
   
   def self.find_user_by_ip(ip)
