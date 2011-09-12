@@ -2,8 +2,8 @@ class SecretzController < ApplicationController
   before_filter :login_required
   
   def index
-    @ip_listens = Listen.count_by_ip
-    @track_listens = Listen.count_by_track
+    @ip_listens = Listen.most_active_ips
+    @track_listens = Listen.most_active_tracks
   end
 
 end
