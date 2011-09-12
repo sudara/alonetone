@@ -1,8 +1,8 @@
 source :gemcutter
-gem "rails", "2.3.4"
+gem "rails", "~> 2.3.11"
 #gem "mongrel", :require => nil
 #gem "mongrel_cluster"
-gem "mysql"
+gem "mysql2", "~> 0.2.7"
 
 # bundler requires these gems in all environments
 gem "nokogiri"
@@ -11,7 +11,7 @@ gem "nokogiri"
 
 gem 'aws-s3', '~>0.5.0', :require => 'aws/s3'
 
-gem 'will_paginate'#, '~> 3.0.pre'
+gem 'will_paginate', '~> 2.3.14'
 
 gem "mime-types" 
 gem 'ruby-mp3info',  :require => 'mp3info'

@@ -32,12 +32,12 @@ class User < ActiveRecord::Base
   named_scope :alpha, { :order => 'display_name' }
   
   # Can create music
+  has_one    :pic,           :as => :picable
   has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC'
   has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position', :include => :pic
-  has_one    :pic,           :as => :picable
   has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]
   has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
-  has_many :tracks
+  has_many   :tracks
   
   acts_as_mappable
   before_validation :geocode_address
