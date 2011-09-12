@@ -2,23 +2,19 @@
 
 [alonetone](http://alonetone.com) is a growing independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
 
-alonetone was launched in January 2008 and as of June 2009 hosts over 8000 songs from 800 musicians and has delivered over 500,000 mp3s to real listeners.
+alonetone was launched in January 2008. As of September 2011 it hosts over 30,000 songs from 2500 musicians and has delivered over 2 million mp3s to real listeners. 
 
-## alonetone is always looking for more development love
+## Give us some dev love
 
-Have ruby and/or javascript skills? Help us build the best music platform, period. 
-
-Warm the hearts of musicians world wide by working on an app that provides musicians with a home, a connection to each other, to their listeners, and to a source of inspiration. 
-
-Or get jiggy with our build-to-order API and do something crazy and exciting.
+Warm the hearts of musicians worldwide by working the *only* open-source rails app that provides musicians with a free home, a connection to each other, to their listeners, and to a source of inspiration. 
 
 ### Bug reporting 
 
-We use [lighthouse](http://alonetone.lighthouseapp.com) to submit bugs and keep track of our work.
+We use [Github Issues](http://github.com/sudara/alonetone/issues) to submit bugs and keep track of our work.
 
-### The goal?
+### Our goal?
 
-To create and run the best online home a musician could want to have, providing them with the tools they need to reach their listeners and network with other artists, without the umbrella of a corporation.
+To create and run the best online home a musician could want to have, providing them with the tools they need to reach their listeners and network with other artists, without the stank of commercialism or startup flava. Yup, we're half hippie communists. 
 
 How do we reach this goal?
 
@@ -33,11 +29,9 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 
 ### Current feature set
 
-Really, only the very basics are implemented.
-
 * Unlimited mp3 uploads for musicians
 * Creation of playlists / albums
-* MP3 streaming and download
+* MP3 streaming and download (powered by s3)
 * Artist browsing
 * Tracking of listens and providing useful feedback and statistics to artists
 * Commenting system
@@ -45,27 +39,26 @@ Really, only the very basics are implemented.
 
 ### Current tech
 
-* Rails 2.3
-* Rspec
+* Rails 2.3.11
 * jQuery and LowPro
 * SoundManager 2 (for flash mp3 playback)
-* SASS (the cool stylesheet thing from the haml folks)
+* SASS
 
-### Want to join forces?
+### Want to help us?
 
-First of all, talk to Sudara by emailing Sudara at alonetone com.
+First, [sign up for an account](http://alonetone.com) and start digging in.
 
-Secondly, [sign up for an account](http://alonetone.com) and start digging in.
+Second, hop into our Campfire chat room or email us at support@alonetone.com
 
 Thirdly, fork away on github.
 
-### Playing with alonetone on localhost
+### Setting up alonetone on localhost
 
-This is *not* a task for Rails newbees. 
+This is *not* a task for Rails newbees. This is not a 'clone script' that is easy to setup on your servers. We cannot provide ANY support   so please do not email us requesting this.
 
-I've had multiple requests asking me to walk folks through setting up alonetone locally. Unless you have some experience with rails, it's just not going to be worth it unless you have a lot of time to invest.
+Unless you have LOTS of experience with rails, you should not consider trying to set this up.
 
-If you do want to get jiggy and setup alonetone locally, the best thing to do is to contact me first, as things are ever-changing. 
+If you live and breathe rails and you want to get jiggy:
 
 alonetone uses 6 config files:
 
@@ -80,40 +73,12 @@ These files will be created for you the first time you run any rake task.
 
 #### Gem installation
 
-You'll need some gems, at least:
 
-      rmagick
-      haml
-      json
-      ruby-mp3info
-      googlecharts
-      aws-s3 (if you use Amazon S3 to store files)
-      rubyzip (for extracting mp3s from zip files)
-      mocha (for rspec)
+We use bundler. You'll need imagemagick installed.  If you have the Bundler gem installed, you can install all of the dependencies like so:
 
-You can install all of the gem dependencies using one of three ways:
+   `bundle install`
 
-1. **Bundler**
 
-   If you have the Bundler gem installed, you can install all of the dependencies like so:
-
-   `    bundle update`
-
-2. **Rake**
-      
-   Otherwise, you can install all the required gems using the following command:
-
-   `    rake gems:install`
-
-   NOTE: On a Windows install using InstantRails with Rails 2.2.2 and RubyGems 1.3, an error such as 'uninitialized constant ApplicationController::ALONETONE' might present itself when using the 'rake gems:install' command. However, I found that if you install all of the gems manually that you can ignore this error message.
-
-3. **Manual installation**
-
-   If you have troubles with the above, you can also install them manually:
-
-   `    sudo gem install rmagick haml json ruby-mp3info aws-s3 rubyzip mocha`
-
-   You may need to install imagemagick before rmagick. If you are using Ubuntu you can run 'sudo apt-get install imagemagick libmagick9-dev'. If you are on a Mac, you can 'sudo port install imagemagick'.
 
 #### Database setup
 
