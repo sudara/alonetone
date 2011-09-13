@@ -58,7 +58,6 @@ class User
   def most_commented_on_chart
     create_chart(assests_order_by('comments_count DESC'), :comments_count)
   end
-
   
   def chart_limit
     assets_count > 5 ? 5 : assets_count
@@ -93,7 +92,6 @@ class User
     
     (self.listens_count.to_f / x).ceil
   end
-
   
   def number_of_tracks_listened_to
     Listen.count(:all, 
@@ -102,12 +100,10 @@ class User
     )
   end
 
-  
   def mostly_listens_to
     User.find(most_listened_to_user_ids(10), :include => :pic)
   end
 
-  
   def most_listened_to_user_ids(limit = 10)
     self.listens.count(:track_owner, 
       :group      =>  'track_owner_id',
@@ -142,5 +138,14 @@ class User
   def plays_by_month
     track_plays.count(:all, :group => 'MONTH(listens.created_at)', :include => nil, :conditions => ['listens.created_at > ?', 1.year.ago])
   end
+  
+  def self.with_same_ip
+    User.count(:all, 
+              :group => 'ip', 
+              :order => 'count_all DESC', 
+              :limit => 25)
+  end
+
+  
 
 end

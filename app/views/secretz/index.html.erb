@@ -1,9 +1,46 @@
+<h2>Users that share the same IP</h2>
+<div class="static_content" class="stats">
+<table id="listens_by_ip" class="statstable">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>IP</th>
+      <th>Users</th>
+      <th>Examples</th>
+
+    </tr>
+  </thead>
+  
+    <tbody>
+    <% @users.each do |ip, count| %>
+      <% users = User.find(:all, :conditions => {:ip => ip},:limit =>5)%>
+      <tr class>
+        <td>
+            <%= image_tag('http://api.hostip.info/flag.php?ip='+ip, :size => '20x20', :style => 'float:left; clear:none;opacity:0.4;') if ip %>
+        </td>
+        <td>
+            <%= link_to(ip, 'http://www.botsvsbrowsers.com/ip/'+ip) if ip %>
+        </td>
+        <td>
+          <%= count %>
+        </td>
+        <td>
+            <%= users.collect{|u| link_to(u.name, user_path(u.login))}.join(" ") %>
+        </td>
+        <td></td>
+       </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+
+
 <h2>IPs that love to listen</h2>
 <div class="static_content" class="stats">
 <table id="listens_by_ip" class="statstable">
   <thead>
     <tr>
-      <th>Flag</th>
+      <th>Country</th>
       <th>IP</th>
       <th>Count</th>
       <th>User?</th>
