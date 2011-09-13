@@ -4,6 +4,8 @@ echo
 
 # handle git and bundle install
 ssh alonetone '
+  source /etc/profile;
+  source ~/.profile;
   cd /data/alonetone/current; 
   
   if [[ $(git diff) > "" ]];

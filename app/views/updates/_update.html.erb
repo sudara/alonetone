@@ -13,7 +13,7 @@
 
        <div class="post-body">
          <h1 class="h1post"><%= link_to update.title, blog_path(update.permalink)%></h1>
-         <h2 class="h2post">- posted by <a href ="/sudara">Sudara</a> on <%= update.created_at.to_s(:short)%> - <%= update.comments.count %> comments -</h1>      
+         <h2 class="h2post">- posted by <a href ="/sudara">Sudara</a> on <%= update.created_at.to_s(:short)%> - <%= update.comments.count %> comments -</h2>      
           <%= update.content_html %>
        </div><!-- div end post-body -->  
               
