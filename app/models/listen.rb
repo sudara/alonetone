@@ -82,7 +82,7 @@ class Listen < ActiveRecord::Base
     Listen.count(:all, :group => :ip, :conditions => ['created_at > ?',30.days.ago], :order => 'count_all DESC', :limit => limit)
   end
   
-  def self.most_active_tracks(limit=10)
+  def self.most_active_tracks(limit=25)
     Listen.count(:all, 
                  :from => "listens IGNORE INDEX(index_listens_on_asset_id)",
                  :group => :asset, 
