@@ -25,7 +25,7 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
 		
 		xml.itunes :owner do
 			xml.itunes :name, 'alonetone'
-			xml.itunes:email,	'sudara@alonetone.com'
+			xml.itunes:email,	'support@alonetone.com'
 		end
 		
 		xml.itunes :category,:text=>'Music' 

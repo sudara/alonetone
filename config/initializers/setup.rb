@@ -39,7 +39,7 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
 
 # Better Error Message for attachment_fu
 
-I18n.translate('activerecord.errors.messages')[:inclusion] = ActiveRecord::Errors.default_error_messages[:inclusion] ="supposedly wasn't a real mp3 or zip file of mp3s. If you are sure it *was* an mp3 and you think we are crazy (half true anyway), try another browser to confirm. You can also email sudara@alonetone.com and yell at him. Apologies for ze troubles."
+I18n.translate('activerecord.errors.messages')[:inclusion] = ActiveRecord::Errors.default_error_messages[:inclusion] ="supposedly wasn't a real mp3 or zip file of mp3s. If you are sure it *was* an mp3 and you think we are crazy (half true anyway), try another browser to confirm. You can also email support@alonetone.com and yell at him. Apologies for ze troubles."
 
 
 # These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable

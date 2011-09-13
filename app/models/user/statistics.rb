@@ -143,6 +143,7 @@ class User
     User.count(:all, 
               :group => 'ip', 
               :order => 'count_all DESC', 
+              :conditions => 'ip is not NULL',
               :limit => 25)
   end
 

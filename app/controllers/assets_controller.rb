@@ -200,7 +200,7 @@ class AssetsController < ApplicationController
     else
       flash[:error] = if (@assets.size == 0)
         "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. " <<
-        "Need help? Search or ask for help the forums or email sudara@alonetone.com" 
+        "Need help? Search or ask for help the forums or email support@alonetone.com" 
       else
         flashes
       end

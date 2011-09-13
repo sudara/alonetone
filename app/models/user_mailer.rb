@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   include ActionController::UrlWriter
-  @@mail_from = "sudara@alonetone.com"
+  @@mail_from = "support@alonetone.com"
   mattr_accessor :mail_from
 
   def forgot_password(user)

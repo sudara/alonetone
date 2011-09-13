@@ -383,7 +383,7 @@ module Technoweenie # :nodoc:
         def attachment_attributes_valid?
           [:size, :content_type].each do |attr_name|
             enum = attachment_options[attr_name]
-            errors.add attr_name, "This doesn't look like an mp3. Could you double check? <br/>If you double check and still have problems, please email sudara@alonetone.com or ask for help in the forums! Thanks." unless enum.nil? || enum.include?(send(attr_name))
+            errors.add attr_name, "This doesn't look like an mp3. Could you double check? <br/>If you double check and still have problems, please email support@alonetone.com or ask for help in the forums! Thanks." unless enum.nil? || enum.include?(send(attr_name))
           end
         end
 
