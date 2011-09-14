@@ -1,5 +1,5 @@
 source :gemcutter
-gem "rails", "~> 2.3.11"
+gem "rails", "2.3.11"
 #gem "mongrel", :require => nil
 #gem "mongrel_cluster"
 gem "mysql2", "~> 0.2.7"
