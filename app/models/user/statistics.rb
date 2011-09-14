@@ -1,3 +1,4 @@
+require 'gchart'
 class User
   # graphing
   def track_plays_graph
@@ -22,7 +23,7 @@ class User
       :group      => group_by
     ).collect{ |tp| tp[1] }
     
-    Gchart.line(
+    ::Gchart.line(
       :size             => '420x150',
       :title            => 'listens',
       :data             => track_play_history,
