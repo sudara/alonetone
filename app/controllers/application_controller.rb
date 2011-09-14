@@ -107,11 +107,11 @@ class ApplicationController < ActionController::Base
   # authorization tricks
   
   def moderator?
-    logged_in? && moderator?
+    logged_in? && current_user.moderator?
   end
   
   def moderator_required
-    login_required && moderator?
+    login_required && current_user.moderator?
   end
   
   def admin_required
