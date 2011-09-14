@@ -35,6 +35,6 @@ ssh alonetone '
 # handle restarts
 echo "Fly unicorns, fly!"
 
-ssh linode "/etc/monit/scripts/unicorn ramenmusic deploy"
+ssh linode "/etc/monit/scripts/unicorn alonetone deploy"
 
 bundle exec newrelic deployments

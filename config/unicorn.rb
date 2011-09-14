@@ -9,9 +9,13 @@ end
 
 working_directory config['APP_ROOT']
 listen config['UNICORN_SOCKET'], :backlog => 1024
+
 worker_processes 3
 timeout 300
+
 pid config['UNICORN_PID']
+
+
 logger Logger.new("log/unicorn.log")
 
 ##
@@ -19,6 +23,7 @@ logger Logger.new("log/unicorn.log")
 # Not good for some apps, this causes the master to use slighty more ram than a
 # worker process. Otherwise it is about 14MB
 # can't convert strings to booleans
+##
 if config['UNICORN_PRELOAD_APP'] == 'true'
   preload_app true
 elsif config['UNICORN_PRELOAD_APP'] == 'false'
@@ -27,6 +32,12 @@ else
   preload_app true
 end
 
+# REE - http://www.rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
+if config['APP_RUBY'] == 'ree'
+  if GC.respond_to?(:copy_on_write_friendly=)
+    GC.copy_on_write_friendly = true
+  end
+end
 
 before_fork do |server, worker|
   # the following is recomended for Rails + "preload_app true"
