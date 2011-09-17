@@ -168,8 +168,8 @@ class User < ActiveRecord::Base
   def efficiently_destroy_relations
     tracks.delete_all
     playlists.delete_all
-    Listen.delete_all(['track_owner_id = ?',@user.id])
-    Listen.delete_all(['listener_id = ?',@user.id])
+    Listen.delete_all(['track_owner_id = ?',id])
+    Listen.delete_all(['listener_id = ?',id])
     posts.delete_all
     topics.delete_all
     comments.delete_all
