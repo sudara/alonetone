@@ -91,6 +91,8 @@ class User < ActiveRecord::Base
   
   before_create :make_first_user_admin, :make_activation_code
   
+  before_destroy :efficiently_destroy_relations
+  
   def listened_to_today_ids
     listens.find(:all, 
       :select     =>  'listens.asset_id', 
@@ -163,6 +165,16 @@ class User < ActiveRecord::Base
 
   protected
 
+  def efficiently_destroy_relations
+    tracks.delete_all
+    playlists.delete_all
+    Listen.delete_all(['track_owner_id = ?',@user.id])
+    Listen.delete_all(['listener_id = ?',@user.id])
+    posts.delete_all
+    topics.delete_all
+    comments.delete_all
+    assets.delete_all
+  end
   
   def make_first_user_admin
     self.admin = true if User.count == 0
