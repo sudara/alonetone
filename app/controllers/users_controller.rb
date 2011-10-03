@@ -124,6 +124,7 @@ class UsersController < ApplicationController
       # Did the user already activate, and this is just a forgot password "activation?"
       if current_user.activated_at 
         current_user.activate
+        cookies[:auth_token] = { :value => self.current_user.token , :expires => 2.weeks.from_now }
         flash[:ok] = "Sweet, you are back in! <br/>Now quick, update your password below so you don't have to jump through hoops again"
         redirect_to edit_user_path(current_user)
       else
