@@ -18,19 +18,11 @@ pid config['UNICORN_PID']
 
 logger Logger.new("log/unicorn.log")
 
-##
 # Load the app into the master before forking workers for super-fast worker spawn times
 # Not good for some apps, this causes the master to use slighty more ram than a
 # worker process. Otherwise it is about 14MB
-# can't convert strings to booleans
-##
-if config['UNICORN_PRELOAD_APP'] == 'true'
+
   preload_app true
-elsif config['UNICORN_PRELOAD_APP'] == 'false'
-  preload_app false
-else
-  preload_app true
-end
 
 # REE - http://www.rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 if config['APP_RUBY'] == 'ree'
