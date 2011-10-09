@@ -22,7 +22,7 @@ logger Logger.new("log/unicorn.log")
 # Not good for some apps, this causes the master to use slighty more ram than a
 # worker process. Otherwise it is about 14MB
 
-  preload_app true
+preload_app true
 
 # REE - http://www.rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 if config['APP_RUBY'] == 'ree'
