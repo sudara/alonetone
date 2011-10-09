@@ -16,6 +16,7 @@ require 'randomness'
 require 'goodies'
 require 'utils'
 require 'asset_hacks'
+require 'newrelic_rpm'
 
 # require s3 and the s3 expires hack
 #require 'aws/s3'
@@ -64,3 +65,4 @@ GeoKit::Geocoders::google = 'ABQIAAAAb7vQ1d8XHrxuF5AJr8c-oxTbnWe9oX1zcTcDyLcGskh
 # various geocoders.  Make sure you read up on relevant Terms of Use for each
 # geocoder you are going to use.
 GeoKit::Geocoders::provider_order = [:google]
+

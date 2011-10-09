@@ -91,6 +91,7 @@ class UsersController < ApplicationController
   def create
     respond_to do |format|
       format.html do
+        return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
         @user = params[:user].blank? ? User.find_by_email(params[:email]) : User.new(params[:user])
         if params[:email] and not @user
           flash[:error] = "I could not find an account with the email address '#{CGI.escapeHTML params[:email].first}'. <br/> Did you make a boo-boo or have another email I could diligently try for you?"

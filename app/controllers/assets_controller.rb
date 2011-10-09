@@ -13,7 +13,6 @@ class AssetsController < ApplicationController
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
   @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple']
   @@bots = ['bot','spider','baidu']
-  @@bad_ip_ranges = ['195.239', '220.181', '61.135', '60.28.232', '121.14', '221.194']
   
   
   # GET /assets
