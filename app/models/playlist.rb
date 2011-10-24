@@ -64,9 +64,9 @@ class Playlist < ActiveRecord::Base
   end
   
   def play_time
-    total_track_length = tracks.inject(0){ |total, 
-      track| total += track.asset_length 
-    }
+    total_track_length = tracks.inject(0) do |total, track| 
+      total += track.asset_length || 0
+    end
     Asset.formatted_time(total_track_length)
   end
   
