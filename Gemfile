@@ -12,7 +12,11 @@ gem "nokogiri"
 
 gem "paperclip"
 gem "authlogic"
+
+gem "has_permalink"
+gem "acts_as_list"
 gem "redcarpet"
+gem "country-select"
 gem 'will_paginate'
 gem "mime-types" 
 gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
