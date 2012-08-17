@@ -1,8 +1,7 @@
 source :gemcutter
-gem "rails", "2.3.14"
-#gem "mongrel", :require => nil
-#gem "mongrel_cluster"
-gem "mysql2", "~> 0.2.7"
+gem "rails", "3.2.8"
+
+gem "mysql2"
 
 gem "unicorn"
 
@@ -11,30 +10,28 @@ gem "nokogiri"
 
 # gem "geokit"
 
-gem 'aws-s3', '~>0.5.0', :require => 'aws/s3'
-
-gem 'will_paginate', '~> 2.3.14'
-
+gem "paperclip"
+gem "authlogic"
+gem "redcarpet"
+gem 'will_paginate'
 gem "mime-types" 
-gem 'ruby-mp3info',  :require => 'mp3info'
-gem 'rubyzip',       :require => 'zip/zip'
+gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
 
-gem 'googlecharts',  :require => 'gchart'
-gem 'haml', '2.0.9'
+gem 'haml'
 
 gem 'newrelic_rpm'
+
+# replace with 
 gem 'BlueCloth',     :require => 'bluecloth' 
 
 gem 'hpricot' # for comment processing / markdown fixing
-
-gem "rspec", ">= 1.2.0", :require => nil
-gem "rspec-rails", ">= 1.2.0", :require => nil
-
 gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 
-
-group :production do
-  gem 'rmagick'
+group :assets do
+  gem "sass-rails"
+  gem 'yui-compressor'
+  gem 'uglifier'
+  gem "coffee-rails"
 end
 
 group :development do
@@ -43,8 +40,14 @@ group :development do
 
 end
 
-group :test do
-  # bundler requires these gems while running tests
-  # gem "rspec"
-  # gem "faker"
+## Bundle gems used only in certain environments:
+group :test, :development do
+  gem "rspec-rails"
+  gem "capybara"
+  gem "spork"
+  gem "guard-rspec"
+  gem 'database_cleaner'
+  gem "guard-spork"
+  # https://github.com/thoughtbot/factory_girl/wiki/Usage
+  gem "factory_girl_rails"
 end

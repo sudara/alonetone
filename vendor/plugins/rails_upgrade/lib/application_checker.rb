@@ -50,15 +50,15 @@ module Rails
           )
         end
       end
-      
+
       def check_validation_on_methods
         files = []
-        
+
         ["validate_on_create", "validate_on_update"].each do |v|
           lines = grep_for(v, "app/models/")
           files += extract_filenames(lines) || []
         end
-        
+
         unless files.empty?
           alert(
             "Updated syntax for validate_on_* methods",
@@ -68,15 +68,15 @@ module Rails
           )
         end
       end
-      
+
       def check_before_validation_on_methods
         files = []
-        
+
         %w(before_validation_on_create before_validation_on_update).each do |v|
           lines = grep_for(v, "app/models/")
           files += extract_filenames(lines) || []
         end
-        
+
         unless files.empty?
           alert(
             "Updated syntax for before_validation_on_* methods",
@@ -223,7 +223,7 @@ module Rails
 
         unless generators.empty?
           files = generators.reject do |g|
-                    grep_for("def manifest", g).empty? 
+                    grep_for("def manifest", g).empty?
                   end.compact
 
           unless files.empty?
@@ -251,7 +251,7 @@ module Rails
         unless bad_plugins.empty?
           alert(
             "Known broken plugins",
-            "At least one plugin in your app is broken (according to the wiki).  Most of project maintainers are rapidly working towards compatability, but do be aware you may encounter issues.",
+            "At least one plugin in your app is broken (according to the wiki).  Most of project maintainers are rapidly working towards compatibility, but do be aware you may encounter issues.",
             "http://wiki.rubyonrails.org/rails/version3/plugins_and_gems",
             bad_plugins
           )
@@ -267,7 +267,7 @@ module Rails
         lines += grep_for("<% .*form_tag.* do.*%>", "app/views/**/*")
         lines += grep_for("<% .*fields_for.* do.*%>", "app/views/**/*")
         lines += grep_for("<% .*field_set_tag.* do.*%>", "app/views/**/*")
-        
+
         files = extract_filenames(lines)
 
         if !files.blank?
@@ -293,7 +293,7 @@ module Rails
           alert(
             "Deprecated AJAX helper calls",
             "AJAX javascript helpers have been switched to be unobtrusive and use :remote => true instead of having a seperate function to handle remote requests.",
-            "http://www.themodestrubyist.com/2010/02/24/rails-3-ujs-and-csrf-meta-tags/",
+            "http://blog.jordanwest.me/modest-rubyist-archive/rails-3-ujs-and-csrf-meta-tags",
             files
           )
         end
@@ -343,6 +343,35 @@ module Rails
         end
       end
 
+      #Check for old ActionMailer :sent_on attributes
+      def check_old_action_mailer_sent_on_setting
+        files = []
+        lines = grep_for("sent_on", "app/*")
+        files += extract_filenames(lines) || []
+
+        unless files.empty?
+          alert(
+            "Deprecated ActionMailer attribute :sent_on",
+            "Using the new mailer API, you can specify :date to the mail method.",
+            "http://stackoverflow.com/questions/7367185/weird-error-when-delivering-mail-undefined-method-index-for-2011-09-09-2215",
+            files
+          )
+        end
+      end
+      def check_old_filter_parameter
+        files = []
+        lines = grep_for("filter_parameter_logging", "app/controllers/*")
+        files += extract_filenames(lines) || []
+
+        unless files.empty?
+          alert(
+            "Deprecated filter_parameter_logging calls",
+            "The list of filtered parameters are now stored in /config/application.rb. For example: config.filter_parameters += [:password]",
+            "http://asciicasts.com/episodes/224-controllers-in-rails-3",
+            files
+          )
+        end
+      end
     private
       def grep_for_with_perl_regex(text, where = "./", double_quote = false)
         grep_for(text, where, double_quote, true)
@@ -355,7 +384,7 @@ module Rails
       def grep_for(text, where = "./", double_quote = false, perl_regex = false)
         # If they're on Windows, they probably don't have grep.
         @probably_has_grep ||= (Config::CONFIG['host_os'].downcase =~ /mswin|windows|mingw/).nil?
-        
+
         # protect against double root paths in Rails 3
         where.gsub!(Regexp.new(base_path),'')
 
