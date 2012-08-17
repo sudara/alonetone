@@ -2,16 +2,17 @@ source :gemcutter
 gem "rails", "3.2.8"
 
 gem "mysql2"
-
 gem "unicorn"
-
-# bundler requires these gems in all environments
-gem "nokogiri"
-
-# gem "geokit"
 
 gem "paperclip"
 gem "authlogic"
+
+
+gem "geokit"
+gem "defensio"
+
+gem "nokogiri"
+
 
 gem "has_permalink"
 gem "acts_as_list"
@@ -21,9 +22,11 @@ gem 'will_paginate'
 gem "mime-types" 
 gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
 
+# todo: remove
 gem 'haml'
 
 gem 'newrelic_rpm'
+
 
 # replace with 
 gem 'BlueCloth',     :require => 'bluecloth' 
