@@ -1,108 +1,137 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :groups
+# -*- encoding : utf-8 -*-
+Alonetone::Application.routes.draw do
+  resources :groups
 
-  map.admin 'secretz', :controller => 'secretz'
+  # admin stuff
+  match 'secretz' => 'secretz#index'
   
-  map.rpm_challenge 'rpmchallenge', :controller => 'pages', :action => 'rpm_challenge'
-  map.twentyfour '24houralbum', :controller => 'pages', :action => 'twentyfour'  
+  # one-off pages
+  match 'rpmchallenge' => 'pages#rpm_challenge'
+  match '24houralbum' =>  'pages#twentyfour'  
+    
+  resources :features, :sessions, :user_reports
   
-  map.feedback 'feedback', :controller => 'user_reports'
-  map.resources :features, :sessions, :user_reports
-  map.blog_home 'blog', :controller => 'updates', :action => 'index'
-  map.resources :blog, :controller => 'updates'
-  map.resources :updates
-  map.resources :comments, :member => {:unspam => :get}
+  match 'blog' => 'updates#index', :as => "blog_home"
+  
+  resources 'updates', :as => 'blog'
+  resources :updates
+  resources :comments do
+    member do 
+      get :unspam 
+    end
+  end 
     
 
-  map.sitemap 'sitemap.xml', :controller => 'pages', :action => 'sitemap', :format => 'xml'
-  map.about 'about/:action', :controller => 'pages'
-  map.halp  'about/halp/:action', :controller => 'pages'
+  match  'about/:action' => 'pages', :as => "about"
+  match  'about/halp/:action' => 'pages', :as => "halp"
   
   
-  map.signup   'signup',        :controller => 'users',   :action => 'new'
-  map.settings 'settings',      :controller => 'users',   :action => 'edit'
-  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
-  map.login    'login',         :controller => 'sessions', :action => 'create'
-  map.logout   'logout',        :controller => 'sessions', :action => 'destroy'
+  match 'signup'    => 'users#new'
+  match 'settings'  => 'users#edit'
+  match 'login'     => 'sessions#create'
+  match 'logout'    => 'sessions#destroy'
+  match '/activate/:activation_code' => 'users#activate'
+
 
   # shortcut to profile
-  map.profile ':login/bio', :controller => 'users', :action => 'bio'
+  match ':login/bio' => 'users#bio', :as => 'profile'
   
-  map.connect '/latest.:format', :controller => 'assets', :action => 'latest'
+  match '/latest.:format' => 'assets#latest'
   
   # latest mp3s uploaded site-wide
-  map.latest '/latest/:latest', :controller => 'assets', :action => 'latest'
+  match '/latest/:latest' => 'assets#latest', :as => 'latest'
   
-  map.listen_feed '/:login/listenfeed.:format', :controller => 'assets', :action => 'listen_feed'
+  match'/:login/listenfeed.:format' => 'assets#listen_feed', :as => 'listen_feed'
   
-  map.radio_home 'radio', :controller => 'assets', :action => 'radio'
-  map.radio 'radio/:source/:per_page/:page', :controller => 'assets', :action => 'radio', :defaults =>{:per_page => 5, :page => 1}
+  match 'radio' =>'assets#radio', :as => 'radio_home'
+  match 'radio/:source/:per_page/:page' => 'assets#radio', :defaults =>{:per_page => 5, :page => 1}, :as => 'radio'
   
   # top 40
-  map.top '/top/:top', :controller => 'assets', :action => 'top'
+  match  '/top/:top' => 'assets#top', :as => 'top'
 
-  map.users_default '/users/by/activity/:page', :controller => 'users', :action => 'index', :sort => 'active', :defaults => {:page => 1}
-  map.sorted_users '/users/by/:sort/:page', :controller => 'users', :action => 'index', :defaults => {:page => 1}
+  match '/users/by/activity/:page' => 'users#index', :sort => 'active', :defaults => {:page => 1}, :as => 'users_default'
+  match '/users/by/:sort/:page' => 'users#index', :defaults => {:page => 1}, :as => 'sorted_users'
   
-  map.listens  ':login/history', :controller => 'listens'
+  match ':login/history' => 'listens#indexn', :as => 'listens'
   
-  map.all_comments 'comments', :controller => 'comments'
-  map.user_comments ':login/comments', :controller => 'comments'
-  map.user_stats ':login/stats.:format', :controller => 'users', :action => 'stats'
+  match 'comments' => 'comments#index', :as => 'all_comments'
+  match ':login/comments' => 'comments#index', :as => 'user_comments'
+  match ':login/stats.:format' => 'users#stats', :as => 'user_stats'
   
-  map.hot_track 'hot_track/:position.:format', 
-    :controller => 'assets', 
-    :action     => 'hot_track', 
-    :format     => 'mp3'
+  match 'hot_track/:position.:format' => 'assets#hot_track', 
+    :format     => 'mp3',
+    :as => 'hot_track'
     
-  map.user_plus ':login/plus', :controller => 'source_files', :action => 'index'
+  match ':login/plus' => 'source_files#index', :as => 'user_plus'
 
-  map.resources :forums, :has_many => :posts do |forum|
-    forum.resources :topics do |topic|
-      topic.resources :posts
+  resources :forums do
+    resources :topics do 
+      resources :posts
     end
-    forum.resources :posts
+    resources :posts
   end
   
-  map.resources :posts, :collection => {:search => :get}
-
-
-  map.resources :users, :controller => :users, 
-    :member => {:attach_pic => :post, :sudo => :any,
-    :toggle_follow => :any} do |user|
-    user.resources :source_files, :path_prefix => ':login'
-    # TODO: Confusing, because Tracks is also a model. Don't confuse this route, this is indeed for the Assets model
-    user.resources :tracks, :controller => :assets, :member => {:share => :get, :destroy => :any, :stats => :get}, :collection => {:latest => :get, :search => :post, :mass_edit => :get}, :path_prefix => ':login', :member_path => ':login/tracks/:id' do |track|
-      track.resources :comments
+  resources :posts do
+   collection do
+      get :search
     end
-    user.favorites 'favorites', :controller => 'playlists', :action => 'favorites',:path_prefix => ':login'
-    user.posts 'posts', :controller => 'posts', :action => 'index', :path_prefix => ':login'
-    
-    # TODO - figure out a way to use :member_path with rails 2
-    # http://dev.rubyonrails.org/changeset/8227
-    # for now, i have to specify port to allow :permalink and :id to be sent at the same time
-    user.resources :playlists, :collection => {:latest => :get, :sort => :any}, 
-    :member=> {:set_playlist_title => :post, :set_playlist_description => :post, 
-              :attach_pic => :post, :remove_track => :any, :sort_tracks => :post, 
-              :add_track => :post, :destroy => :any},
-    :path_prefix => ':login' do |playlist|
-    playlist.resources :comments
+  end
+
+
+  resources :users do
+    member do
+      post :attach_pic
+      get :sudo
+      get :toggle_follow
+    end
+    resources 'source_files' #:path_prefix => ':login'
+    resources 'tracks', :controller => :assets do
+      member do 
+        get :share 
+        get :destroy
+        get :stats
+      end
+      collection do
+        get  :latest
+        post :search
+        get  :mass_edit 
+      end
+      resources :comments
+    end
+    resources :favorites
+    resources :posts
+    resources :playlists do
+      collection do
+        get :latest
+        get :sort 
+      end
+      member do
+        post :attach_pic
+        get  :remove_track
+        post :set_playlist_title
+        post :set_playlist_description
+        post :sort_tracks
+        post :add_tracks
+        get  :destroy
+      end
+      resources :comments
+    end
    end
+  
+  match 'toggle_favorite' => 'users#toggle_favorite'
+  
+  match 'search' => 'search#index'
+  match 'search/:query' => 'search#index', :as => 'search_query'
+
+  namespace :admin do
+    resources :layouts
+    resources :users
   end
   
-  map.toggle_favorite 'toggle_favorite', :controller => 'users', :action => 'toggle_favorite'
   
-  map.search 'search', :controller => 'search', :action => 'index'
-  map.search_query 'search/:query', :controller => 'search', :action => 'index'
-  map.namespace(:admin) do |admin|
-    admin.resources :layouts
-    admin.resources :users
-  end
+  root :to => 'assets#latest' 
   
-  
-  map.root :controller => 'assets', :action => 'latest'
-  
-  map.user_home ':login', :controller => 'users', :action => 'show'
-  map.user_feeds ':login.:format', :controller => 'users', :action => 'show'
+  match ':login' => 'users#show', :as => "user_home"
+  match ':login.:format' => 'users#show', :as => "user_feeds"
   
 end

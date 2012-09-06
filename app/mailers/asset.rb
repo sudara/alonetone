@@ -18,7 +18,7 @@ class AssetMailer < ActionMailer::Base
   protected
   
   def user_link_for(asset)
-    'http://' + ALONETONE.url + '/' + asset.user.login
+    'http://' + Alonetone.url + '/' + asset.user.login
   end
   
   def play_link_for(asset)

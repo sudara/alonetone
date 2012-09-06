@@ -70,33 +70,6 @@ class Playlist < ActiveRecord::Base
     Asset.formatted_time(total_track_length)
   end
   
-  def zip(name = self.permalink, set = self.artist.permalink)
-     bundle_filename = "#{RAILS_ROOT}/public/uploads/#{set}-#{name}.zip"
-
-
-
-     # set the bundle_filename attribute of this object
-     self.bundle_filename = "/uploads/#{set}-#{name}.zip"
-
-     # open or create the zip file
-     Zip::ZipFile.open(bundle_filename, Zip::ZipFile::CREATE) {
-       |zipfile|
-       # collect the album's tracks
-       self.tracks.collect {
-         |track|
-           # add each track to the archive, names using the track's attributes
-           zipfile.add( "#{set}/#{track.num}-#{track.filename}", 
-                        "#{RAILS_ROOT}/public#{track.public_filename}" )
-         }
-     }
-
-     # set read permissions on the file
-     File.chmod(0644, bundle_filename)
-
-     # save the object
-     self.save
-  end
-  
   def self.latest(limit=5)
     self.find(:all, 
       :conditions => 'playlists.tracks_count > 0', 

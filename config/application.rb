@@ -41,7 +41,7 @@ module Alonetone
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
-
+    
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
@@ -58,5 +58,12 @@ module Alonetone
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+  end
+  
+  # Load up application config found in yml, make available as Alonetone.[settingname] for ease
+  # Not sure if this is the best place for the code or the variables, but seems to "make sense"    
+  # It needs to come before the initializer
+  YAML.load_file("#{Rails.root}/config/alonetone.yml")[Rails.env].each do |key, value|
+    define_singleton_method(key.to_sym) { value } # define_singleton_method is ruby 1.9 only
   end
 end

@@ -118,7 +118,7 @@ class Asset < ActiveRecord::Base
   end
   
   def full_permalink
-    "http://#{ALONETONE.url}/#{user.login}/#{permalink}"
+    "http://#{Alonetone.url}/#{user.login}/#{permalink}"
   end
   
   # allows classes outside Asset to use the same format

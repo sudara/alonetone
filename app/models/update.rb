@@ -20,7 +20,7 @@ class Update < ActiveRecord::Base
   end
   
   def full_permalink
-    "http://#{ALONETONE.url}/blog/#{permalink}"
+    "http://#{Alonetone.url}/blog/#{permalink}"
   end
   
   alias :unique_id :id  

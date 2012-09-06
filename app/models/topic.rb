@@ -48,7 +48,7 @@ class Topic < ActiveRecord::Base
   end
   
   def full_permalink
-    "http://#{ALONETONE.url}/forums/#{permalink}"
+    "http://#{Alonetone.url}/forums/#{permalink}"
   end
   def sticky?
     sticky == 1

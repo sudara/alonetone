@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   
   # all errors end up here
   def show_error(exception)
-    if RAILS_ENV == 'production'
+    if Rails.env.production?
       # show something decent for visitors
       flash[:error] = "Whups! That didn't work out. We've logged it, but feel free to let us know (bottom right) if something is giving you trouble"
       redirect_to (session[:return_to] || root_path)

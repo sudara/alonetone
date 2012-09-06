@@ -50,7 +50,7 @@ class User
   end
   
   def site
-    "#{ALONETONE.url}/#{login}"
+    "#{Alonetone.url}/#{login}"
   end
   
   def printable_bio

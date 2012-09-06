@@ -6,9 +6,9 @@ class Pic < ActiveRecord::Base
                  :max_size      => 2048.kilobytes,
                  :resize_to     => 'x400',
                  :content_type  => :image,
-                 :storage       => ALONETONE.storage,
-                 :path_prefix   => File.join(ALONETONE.path_prefix, "pics"),
-                 :processor     => ALONETONE.image_processor,
+                 :storage       => Alonetone.storage,
+                 :path_prefix   => File.join(Alonetone.path_prefix, "pics"),
+                 :processor     => Alonetone.image_processor,
                  :thumbnails    => { 
                                       :tiny   => [ 25,  25], 
                                       :small  => [ 50,  50], 

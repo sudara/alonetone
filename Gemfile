@@ -7,12 +7,10 @@ gem "unicorn"
 gem "paperclip"
 gem "authlogic"
 
-
 gem "geokit"
+
 gem "defensio"
-
 gem "nokogiri"
-
 
 gem "has_permalink"
 gem "acts_as_list"
@@ -22,16 +20,18 @@ gem 'will_paginate'
 gem "mime-types" 
 gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
 
-# todo: remove
+# todo: remove haml, sudara hates it (requires translating about pages)
 gem 'haml'
-
 gem 'newrelic_rpm'
 
+# allows for great console printing, easiest to specify here
+gem "awesome_print", :require => 'ap'
 
-# replace with 
+# Remove both of these once code is relpaced with redcarpet
 gem 'BlueCloth',     :require => 'bluecloth' 
-
 gem 'hpricot' # for comment processing / markdown fixing
+
+# this will need to be relpaced or updated, it's crufty, but used on about/stats
 gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 
 group :assets do
@@ -44,10 +44,9 @@ end
 group :development do
   # bundler requires these gems in development
   # gem "rails-footnotes"
-
 end
 
-## Bundle gems used only in certain environments:
+## Who loves tests! You do? You do!
 group :test, :development do
   gem "rspec-rails"
   gem "capybara"
