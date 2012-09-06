@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   
-  skip_before_filter :update_last_seen_at, :only => [:create, :new, :activate, :sudo]
   before_filter :find_user,      :except => [:new, :create]
   
   before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]

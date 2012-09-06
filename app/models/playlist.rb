@@ -1,18 +1,16 @@
-require 'zip/zip'
-require 'zip/zipfilesystem'
 class Playlist < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   acts_as_list :scope => :user_id, :order => :position
 
-  named_scope :mixes,     {:conditions => ['is_mix = ?',true]} 
+  scope :mixes,     {:conditions => ['is_mix = ?',true]} 
 
-  named_scope :albums,    {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
+  scope :albums,    {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
 
-  named_scope :favorites, {:conditions => ['is_favorite = ?',true]}
+  scope :favorites, {:conditions => ['is_favorite = ?',true]}
 
-  named_scope :public,    {:include => :pic, :conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
+  scope :public,    {:include => :pic, :conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
 
-  named_scope :include_private, {:include => :pic, :conditions => ['is_favorite = ?',false]}
+  scope :include_private, {:include => :pic, :conditions => ['is_favorite = ?',false]}
 
   
   has_one  :pic, :as => :picable, :dependent => :destroy
@@ -29,7 +27,7 @@ class Playlist < ActiveRecord::Base
   has_permalink :title
   
   # make sure we update permalink when user changes title
-  before_validation_on_create  :auto_name_favorites
+  before_validation  :auto_name_favorites, :on => :create
   before_save  :create_unique_permalink
   before_update :set_mix_or_album
 

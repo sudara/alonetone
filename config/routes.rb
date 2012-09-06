@@ -2,6 +2,10 @@
 Alonetone::Application.routes.draw do
   resources :groups
 
+  match 'login' => 'user_sessions#new'
+  match 'logout' => 'user_sessions#destroy'
+  resources :user_sessions
+
   # admin stuff
   match 'secretz' => 'secretz#index'
   

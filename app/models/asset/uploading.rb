@@ -1,49 +1,14 @@
 class Asset 
-  # used for extra mime types that dont follow the convention
-  @@extra_content_types = { 
-    :audio => ['application/ogg'], 
-    :movie => ['application/x-shockwave-flash'], 
-    :pdf => ['application/pdf'] 
-  }.freeze
-  
-  @@allowed_extensions = %w(.mp3)
 
-  cattr_reader :extra_content_types, :allowed_extensions
-
-  # use #send due to a ruby 1.8.2 issue
-  @@movie_condition = send(:sanitize_sql, 
-    ['content_type LIKE ? OR content_type IN (?)', 'video%', extra_content_types[:movie]]
-  ).freeze
-
-  @@audio_condition = send(:sanitize_sql, 
-    ['content_type LIKE ? OR content_type IN (?)', 'audio%', extra_content_types[:audio]]
-  ).freeze
-
-  @@image_condition = send(:sanitize_sql, [
-    'content_type IN (?)', 
-    Technoweenie::AttachmentFu.content_types
-  ]).freeze
-
-  @@content_types = extra_content_types[:movie] + 
-                    extra_content_types[:audio] + 
-                    Technoweenie::AttachmentFu.content_types
-  
-  @@other_condition = send(:sanitize_sql, [
-    'content_type NOT LIKE ? AND content_type NOT LIKE ? AND content_type NOT IN (?)',
-    'audio%', 'video%', @@content_types
-  ]).freeze
-
-  cattr_reader *%w(movie audio image other).collect! { |t| "#{t}_condition".to_sym }
-  
-  has_attachment  :storage => ALONETONE.storage, 
-                  :processor => :mp3info,
-                  # Don't know why can't upload mp3 files (zip files are passed)
-                  # so remove content_type for development and test environments
-                  :content_type => ['audio/mpeg','application/zip'],
-                  :max_size => 60.megabytes,
-                  :path_prefix => File.join(ALONETONE.path_prefix, "mp3")
-                    
-  validates_as_attachment
+  ##has_attachment  :storage => Alonetone.storage, 
+  #                :processor => :mp3info,
+  #                # Don't know why can't upload mp3 files (zip files are passed)
+  #                # so remove content_type for development and test environments
+  #                :content_type => ['audio/mpeg','application/zip'],
+  #                :max_size => 60.megabytes,
+  #                :path_prefix => File.join(Alonetone.path_prefix, "mp3")
+  #                  
+  #validates_as_attachment
 
   def self.extract_mp3s(zip_file, &block)
     # try to open the zip file

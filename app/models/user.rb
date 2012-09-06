@@ -1,35 +1,39 @@
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting
     
-  named_scope :musicians, {
+  acts_as_authentic do |c|
+    c.transition_from_restful_authentication = true
+  end
+      
+  scope :musicians, {
     :conditions => ['assets_count > ?',0], 
     :order      => 'assets_count DESC', 
   }
   
-  named_scope :activated, {
+  scope :activated, {
     :conditions => {:activation_code => nil}, 
     :order      => 'users.id DESC', 
   }
   
-  named_scope :recently_seen, {
+  scope :recently_seen, {
     :order    => 'last_seen_at DESC', 
   }
   
-  named_scope :with_location, {
+  scope :with_location, {
     :conditions => ['users.country != ""'], 
     :order      => 'last_seen_at DESC', 
   }
   
-  named_scope :geocoded, {
+  scope :geocoded, {
     :conditions => ['users.lat != ""'], 
     :order      => 'users.id DESC', 
   }
   
-  named_scope :on_twitter, { 
+  scope :on_twitter, { 
     :conditions => ['users.twitter != ?', ''], 
     :order => 'users.last_seen_at DESC' }
   
-  named_scope :alpha, { :order => 'display_name' }
+  scope :alpha, { :order => 'display_name' }
   
   # Can create music
   has_one    :pic,           :as => :picable
@@ -39,8 +43,8 @@ class User < ActiveRecord::Base
   has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
   has_many   :tracks
   
-  acts_as_mappable
-  before_validation :geocode_address
+  #acts_as_mappable
+  #before_validation :geocode_address
 
   reportable :weekly, :aggregation => :count, :grouping => :week
 
@@ -158,9 +162,9 @@ class User < ActiveRecord::Base
     self.class.name
   end  
   
-  def touch
-    updated_at_will_change!
-    save
+  # convenince shortcut 
+  def ip
+    last_login_ip
   end
 
   protected

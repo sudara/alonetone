@@ -1,12 +1,12 @@
 class Feature < ActiveRecord::Base
 
-  named_scope :published, {
+  scope :published, {
       :conditions => {:published => true}, 
       :order      => 'created_at DESC', 
       :include    => [[:featured_user => :pic], [:writer => :pic]]
     }
   
-  named_scope :all, {:include => [[:featured_user => :pic], [:writer => :pic]]}
+  scope :all, {:include => [[:featured_user => :pic], [:writer => :pic]]}
 
   has_many :featured_tracks, 
     :include  => :asset, 
@@ -24,7 +24,7 @@ class Feature < ActiveRecord::Base
 
   before_save :create_permalink
   
-  acts_as_defensio_article
+  #acts_as_defensio_article_article
 
   def body
     BlueCloth::new(self[:body]).to_html

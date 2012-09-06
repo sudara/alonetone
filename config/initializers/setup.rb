@@ -1,6 +1,3 @@
-# MAKE FACEBOOKER HAPPY
-ActionController::Base.asset_host = ''
-
 # FLASH STUFF
 FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
 

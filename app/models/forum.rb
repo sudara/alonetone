@@ -1,7 +1,7 @@
 class Forum < ActiveRecord::Base
-  named_scope :ordered, {:order => :position}
+  scope :ordered, {:order => :position}
   
-  formats_attributes :description
+  #formats_attributes :description
   
   acts_as_list
 

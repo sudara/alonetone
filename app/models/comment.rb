@@ -1,16 +1,16 @@
 require 'bluecloth'
 class Comment < ActiveRecord::Base
   
-  named_scope :public, {
+  scopeic, {
     :conditions => {:spam => false, :private => false},
     :order      => 'id DESC'
   }
   
-  named_scope :by_member, {
+  scopeember, {
     :conditions => ['commenter_id IS NOT NULL']
   }
   
-  named_scope :include_private, {
+  scopeude_private, {
     :conditions => {:spam => false}, 
     :order      => 'id DESC'
   }
@@ -30,14 +30,14 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..2000
   
-  formats_attributes :body
+  #formats_attributes :body
   
-  acts_as_defensio_comment(:fields => { 
-    :content  => :body, 
-    :article  => :commentable, 
-    :author   => :author_name,
-    :permalink => :full_permalink 
-  })
+  ##acts_as_defensio_article_comment(:fields => { 
+  #  :content  => :body, 
+  #  :article  => :commentable, 
+  #  :author   => :author_name,
+  #  :permalink => :full_permalink 
+  #})
   
   attr_accessor :current_user
 

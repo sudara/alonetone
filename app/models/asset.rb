@@ -2,39 +2,39 @@ class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
-  named_scope :descriptionless, {
+  scope :descriptionless, {
     :conditions => 'description = "" OR description IS NULL', 
     :order      => 'created_at DESC', 
     :limit      => 10
   }
   
-  named_scope :recent, {
+  scope :recent, {
     :include  => :user, 
     :order    => 'assets.id DESC'
   }
   
-  named_scope :favorited, {
+  scope :favorited, {
     :select     =>  'distinct assets.*', 
     :include    =>  :tracks, 
     :conditions => {'tracks.is_favorite' => true}, 
     :order      =>  'tracks.id DESC'
   }
   
-  named_scope :id_not_in, lambda { |asset_ids| {
+  scope :id_not_in, lambda { |asset_ids| {
     :conditions => [ "assets.id NOT IN (?)", asset_ids ] 
   }}
   
-  named_scope :user_id_in, lambda { |user_ids| {
+  scope :user_id_in, lambda { |user_ids| {
     :conditions => [ "assets.user_id IN (?)", user_ids ]
   }}
   
-  named_scope :random_order, :order => "RAND()"
+  scope :random_order, :order => "RAND()"
   
-  named_scope :order_by, lambda { |x| { :order => x }}
+  scope :order_by, lambda { |x| { :order => x }}
   
-  named_scope :limit_by, lambda { |x| { :limit => x }}
+  scope :limit_by, lambda { |x| { :limit => x }}
 
-  formats_attributes :description    
+  #formats_attributes :description    
   
   has_many :tracks, :dependent => :destroy
 
@@ -72,7 +72,7 @@ class Asset < ActiveRecord::Base
     :dependent  => :destroy, 
     :order      => 'created_at DESC'
     
-  acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
+  #acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
   
   has_many :facebook_addables, :as => :profile_chunks
 

@@ -16,7 +16,7 @@ class Track < ActiveRecord::Base
   belongs_to :asset
   belongs_to :user
   
-  named_scope :favorites, {
+  scope :favorites, {
     :conditions => ['is_favorite = ?',true], 
     :order      => 'tracks.created_at DESC'
   }

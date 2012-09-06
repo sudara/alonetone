@@ -1,4 +1,4 @@
-require 'gchart'
+#require 'gchart'
 class User
   # graphing
   def track_plays_graph

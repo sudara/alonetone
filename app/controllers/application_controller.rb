@@ -6,16 +6,13 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
     
-  include AuthenticatedSystem
   before_filter :set_tab, :ie6, :is_sudo
   before_filter :ie6
-  before_filter :login_by_token, :display_news
-  before_filter :prep_bugaboo
-  before_filter :update_last_seen_at, :only => [:index]
+  before_filter :display_news
   before_filter :set_latest_update_title
   
   # let ActionView have a taste of our authentication
-  helper_method :current_user, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?
+  helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?
   
   
   #rescue_from ActiveRecord::RecordNotFound, :with => :show_error
@@ -107,7 +104,21 @@ class ApplicationController < ActionController::Base
     admin_or_owner
   end
   
-  # authorization tricks
+  # authentication tricks
+
+  def current_user_session
+    return @current_user_session if defined?(@current_user_session)
+    @current_user_session = UserSession.find
+  end
+
+  def current_user
+    return @current_user if defined?(@current_user)
+    @current_user= current_user_session && current_user_session.user
+  end
+  
+  def logged_in?
+    current_user
+  end
   
   def moderator?
     logged_in? && current_user.moderator?
@@ -163,7 +174,35 @@ class ApplicationController < ActionController::Base
   def set_latest_update_title
     @latest_update = Update.find(:all, :order => 'created_at DESC', :limit => 1 ).first
   end
+    
+  def welcome_back?
+    @welcome_back
+  end
 
+  def default_url
+    url = user_home_path(current_user) if logged_in? 
+    url = login_url if !url
+    url
+  end
+  # Store the URI of the current request in the session.
+  #
+  # We can return to this location by calling #redirect_back_or_default.
+  def store_location
+    session[:return_to] = request.request_uri
+  end
+    
+  def redirect_to_default
+    redirect_to(session[:return_to] || default_url)
+    session[:return_to] = nil
+  end
+    
+  def authorized?() 
+    logged_in?
+  end
+    
+  def admin?
+    logged_in? && current_user.admin?
+  end
   private
 
 end

@@ -2,7 +2,6 @@ class User
   
   # has a bunch of prefs
   serialize :settings
-  formats_attributes :bio
   
   before_save :normalize_itunes_url
   
