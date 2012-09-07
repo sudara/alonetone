@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   scope :public, where(:spam => false).where(:private => false).order('id DESC')  
   scope :by_member, where('commenter_id IS NOT NULL')
   
-  scope :include_private, where(:spam => false}
+  scope :include_private, where(:spam => false)
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   
@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..2000
   
-  formats_attributes :body
+  #formats_attributes :body
   
   #acts_as_defensio_comment(:fields => { 
   #  :content  => :body, 

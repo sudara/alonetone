@@ -1,5 +1,5 @@
 class Playlist < ActiveRecord::Base
-  belongs_to :user, :counter_cache => true
+  
   acts_as_list :scope => :user_id, :order => :position
 
   scope :mixes,            where(:is_mix => true)
@@ -8,7 +8,7 @@ class Playlist < ActiveRecord::Base
   scope :public,           where(:private => false).where(:is_favorite => false).where("tracks_count > 1") 
   scope :include_private,  where(:is_favorite => false)
 
-  
+  belongs_to :user, :counter_cache => true  
   has_one  :pic, :as => :picable, :dependent => :destroy
   has_many :tracks, :include => [:asset => :user], :dependent => :destroy, :order => :position
   has_many :assets, :through => :tracks #, :after_add => 

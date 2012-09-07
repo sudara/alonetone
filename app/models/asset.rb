@@ -28,14 +28,6 @@ class Asset < ActiveRecord::Base
     :order      =>  'tracks.created_at DESC'
     # :include    =>  :picable   
   
-  has_one :first_playlist,
-    :source      =>  :playlist,
-    :through     =>  :tracks,
-    :conditions  => {'playlists.is_favorite' => false, 'tracks.is_favorite' => false,
-      'playlists.user_id' => '#{user_id}' },
-    :order       => 'tracks.created_at ASC'
-    #:include     => :picable
-  
   has_many :comments, 
     :as         => :commentable,  
     :dependent  => :destroy, 
@@ -57,6 +49,10 @@ class Asset < ActiveRecord::Base
   # end
   # the attachment_fu callback is actually named after_resize
 
+  def self.latest(limit=10)
+    includes(:user => :pic).limit(limit).order('assets.id DESC')
+  end
+  
   def self.id_not_in(asset_ids)
     where("assets.id NOT IN (?)", asset_ids)
   end
@@ -75,11 +71,8 @@ class Asset < ActiveRecord::Base
     }.join(" OR ") 
   end
   
-  def self.latest(limit=10)
-    find(:all, :include => [{:user => :pic}, :first_playlist], :limit => limit, :order => 'assets.id DESC')
-  end
-  
   # needed for views in case we've got multiple assets on the same page
+  # TODO: this is a view concern, move to helper, or better yet, deal w/it in .js
   def unique_id
     object_id
   end
@@ -96,6 +89,10 @@ class Asset < ActiveRecord::Base
   
   def full_permalink
     "http://#{Alonetone.url}/#{user.login}/#{permalink}"
+  end
+  
+  def self.first_playlist
+    Playlist.public.where(:track_id => Track.where(:asset_id => id).first).order('playlist.id ASC').first
   end
   
   # allows classes outside Asset to use the same format
