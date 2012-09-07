@@ -9,15 +9,14 @@ class User
   # Methods related to validation
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   before_validation { |u| u.identity_url = nil if u.identity_url.blank? }
-  
+    
   def activated?
-    activation_code.nil?
+    activation_code.nil? && perishable_token.nil?
   end
-  
   
   # Returns true if the user has just been activated
   def pending?
-    @activated
+    !perishable_token.nil?
   end
   
   def enable_plus

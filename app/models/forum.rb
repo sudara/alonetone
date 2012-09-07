@@ -1,5 +1,5 @@
 class Forum < ActiveRecord::Base
-  scope :ordered, {:order => :position}
+  scope :ordered, order('position ASC')
   
   #formats_attributes :description
   

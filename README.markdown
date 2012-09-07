@@ -46,12 +46,30 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 * One-way commenting system (No inline relpies. No private messaging. No threaded comments.)
 * Feeds for iTunes podcasts and offsite flash players
 
-### What needs work
-* so
-* so
-* much
+### Features wanted
 
-### Want to help us?
+#### Everything moved to asset pipeline.
+Yeah? Yeah.
+
+#### Browse All Playlists
+Low hanging fruit, boys and girls! Shoulda been a 2008 feature :)
+
+#### On the fly zip downloads of playlists via nginx mod\_zip
+This is very easy. Already implemented on Ramen Music. Essentially just is a having a controller generate a text file of filenames that nginx interrupts and uses to construct a zip that's sent back to the client.
+
+#### Better overall alonetone stats page. 
+We need to expose a bit more info to the admins/mods. We want to see how signups/assets/comments are trending to help us catch anything strange or cool. But we also just want to know some useful stuff.
+
+#### User stats page
+Partial implementation/proof of concept was working on rails 2 branch. Basically, a track-by-track table-view of listens, downloads, sources, etc, along with a graph over time for each track. 
+
+#### A way to manage blacklisted IPs in the backend. 
+We get trouble with downloading bots, spambots. We have manually hardcoded IPs in the source, specefically to prevent downloading mp3 and wasting our bandwidth. We need to create a UI so this can be managed by a non-techie moderator. Also, we need to provide logged in users with a "report" action on their listens if they notice sketchy behavior, so it can go upstream to the mods.
+
+#### Groups. 
+Talk with Sudara about this. There's a partial half-hearted implementation. 
+
+### Want to help out?
 
 First, [sign up for an account](http://alonetone.com) and start digging in.
 

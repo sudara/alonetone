@@ -39,7 +39,7 @@ class PlaylistsController < ApplicationController
     unless current_user_is_admin_or_owner?(@user)
 
     respond_to do |format| 
-      format.html { @playlists = @user.playlists.include_private.find(:all) }
+      format.html { @playlists = @user.playlists.include_private.all }
       format.js do
         params["playlist"].each_with_index do |id, position|
           Playlist.update(id, :position => position)

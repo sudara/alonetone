@@ -5,6 +5,11 @@ class User
   
   before_save :normalize_itunes_url
   
+  # deprecated
+  def last_seen_at
+    last_login_at
+  end
+  
   def normalize_itunes_url
     self.itunes = itunes.to_s.strip.gsub(/http\:\/\//, "")
   end
@@ -41,7 +46,7 @@ class User
   end
   
   def favorites
-    playlists.favorites.find(:first)
+    playlists.favorites.first
   end
   
   def has_pic?
@@ -65,6 +70,6 @@ class User
   end
   
   def self.dummy_pic(size)
-    find(:first).dummy_pic(size)
+    first.dummy_pic(size)
   end
 end

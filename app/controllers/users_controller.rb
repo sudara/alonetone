@@ -49,7 +49,7 @@ class UsersController < ApplicationController
                
         @popular_tracks = @user.assets.find(:all, :limit => 5, :order => 'assets.listens_count DESC')
         @assets = @user.assets.find(:all, :limit => 5)
-        @playlists = @user.playlists.public.find(:all)
+        @playlists = @user.playlists.public.all
         @listens = @user.listens.find(:all, :limit =>5)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)

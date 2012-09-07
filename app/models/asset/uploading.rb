@@ -43,38 +43,8 @@ class Asset
     yield zip_file
   rescue TypeError => e
     logger.warn("User tried to upload too small file");
-  end
-
-  class << self
-    def movie?(content_type)
-      content_type.to_s =~ /^video/ || extra_content_types[:movie].include?(content_type)
-    end
-        
-    def audio?(content_type)
-      content_type.to_s =~ /^audio/ || extra_content_types[:audio].include?(content_type)
-    end
-    
-    def other?(content_type)
-      ![:image, :movie, :audio].any? { |a| send("#{a}?", content_type) }
-    end
-
-    def find_all_by_content_types(types, *args)
-      with_content_types(types) { find *args }
-    end
-
-    def with_content_types(types, &block)
-      with_scope(:find => { :conditions => types_to_conditions(types).join(' OR ') }, &block)
-    end
-
-    def types_to_conditions(types)
-      types.collect! { |t| '(' + send("#{t}_condition") + ')' }
-    end
-  end
+  end  
   
-  
-  [:movie, :audio, :other, :pdf].each do |content|
-    define_method("#{content}?") { self.class.send("#{content}?", content_type) }
-  end
   
   def public_mp3
     self.public_filename

@@ -2,8 +2,9 @@ class Listen < ActiveRecord::Base
   
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
   
-  scope :from_user, {:conditions => ['listener_id != ""']}
-  scope :downloads, {:conditions => {:source => 'download'}}  
+  scope :from_user, where('listener_id != ""')
+  scope :downloads, where(:source => 'download')
+    
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, :counter_cache => true, :touch => true
 

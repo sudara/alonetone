@@ -1,19 +1,10 @@
 require 'bluecloth'
 class Comment < ActiveRecord::Base
   
-  scopeic, {
-    :conditions => {:spam => false, :private => false},
-    :order      => 'id DESC'
-  }
+  scope :public, where(:spam => false).where(:private => false).order('id DESC')  
+  scope :by_member, where('commenter_id IS NOT NULL')
   
-  scopeember, {
-    :conditions => ['commenter_id IS NOT NULL']
-  }
-  
-  scopeude_private, {
-    :conditions => {:spam => false}, 
-    :order      => 'id DESC'
-  }
+  scope :include_private, where(:spam => false}
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   
@@ -30,9 +21,9 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..2000
   
-  #formats_attributes :body
+  formats_attributes :body
   
-  ##acts_as_defensio_article_comment(:fields => { 
+  #acts_as_defensio_comment(:fields => { 
   #  :content  => :body, 
   #  :article  => :commentable, 
   #  :author   => :author_name,

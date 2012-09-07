@@ -2,19 +2,14 @@ class Playlist < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   acts_as_list :scope => :user_id, :order => :position
 
-  scope :mixes,     {:conditions => ['is_mix = ?',true]} 
-
-  scope :albums,    {:conditions => ['is_mix = ? AND is_favorite = ?',false, false]} 
-
-  scope :favorites, {:conditions => ['is_favorite = ?',true]}
-
-  scope :public,    {:include => :pic, :conditions => ['private != ? AND is_favorite = ? AND tracks_count > 1',true, false ]}
-
-  scope :include_private, {:include => :pic, :conditions => ['is_favorite = ?',false]}
+  scope :mixes,            where(:is_mix => true)
+  scope :albums,           where(:is_mix => false).where(:is_favorite => false)
+  scope :favorites,        where(:is_favorite => true)
+  scope :public,           where(:private => false).where(:is_favorite => false).where("tracks_count > 1") 
+  scope :include_private,  where(:is_favorite => false)
 
   
   has_one  :pic, :as => :picable, :dependent => :destroy
-
   has_many :tracks, :include => [:asset => :user], :dependent => :destroy, :order => :position
   has_many :assets, :through => :tracks #, :after_add => 
   
@@ -22,7 +17,7 @@ class Playlist < ActiveRecord::Base
   validates_length_of   :title, :within => 4..100
   validates_length_of   :year, :within => 2..4, :allow_blank => true
   validates_presence_of :description
-  validates_length_of :description, :within => 1..2000, :allow_blank => true
+  validates_length_of   :description, :within => 1..2000, :allow_blank => true
   
   has_permalink :title
   
