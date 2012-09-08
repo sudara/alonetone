@@ -2,7 +2,7 @@ require 'mp3info'
 require "paperclip"
 module Paperclip
   
-  class Mp3PaperclipProcessor
+  class Mp3PaperclipProcessor < Processor
     def initialize(file, options={}, attachment=nil)
       super
       @instance = @attachment.instance
