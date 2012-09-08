@@ -81,7 +81,7 @@ Talk with Sudara about this. There's a partial half-hearted implementation.
 
 ## Want to setup alonetone on your server?
 
-Well unless...
+Unless...
 
 * You know ruby on rails VERY well (Been doing it for more than a few months).
 * You have deployed rails applications, and are comfortable with that.
@@ -91,9 +91,9 @@ Then...
 
 ![Sorry script kiddies](https://img.skitch.com/20120908-1exaxnmix5mb82xaq32tjnrja.png)
 
-We get a LOT of requests from rails n00bs asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language. W
+We get a LOT of requests from rails n00bs asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language. 
 
-Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting a copy in production, it's going to take work (like 40+ hours).
+Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting a copy in production, it's going to take lots of work (like 40+ hours) since it's not intended for that purpose.
 
 **If you still decide to try keep in mind we are unable to provide ANY support** 
 
