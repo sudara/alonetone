@@ -78,7 +78,7 @@ We get trouble with downloading bots, spambots. We have manually hardcoded IPs i
 ### Groups. 
 Talk with Sudara about this. There's a partial half-hearted implementation. 
 
-### Want to help out?
+## Want to help?
 
 First, [sign up for an account](http://alonetone.com) and start digging in.
 
@@ -128,8 +128,8 @@ You will see session and current\_user information at the end of each page after
 
 After login, click on the "Upload" button to upload your first mp3.
 
-### License 
+## License 
 
 The alonetone source code is released under the MIT license. 
 
-"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008 and may not be used without permission.
+"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2012 and may not be used without permission.
