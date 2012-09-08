@@ -1,3 +1,4 @@
+require 'mp3info'
 require "paperclip"
 module Paperclip
   
