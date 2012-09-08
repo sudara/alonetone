@@ -46,27 +46,36 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 * One-way commenting system (No inline relpies. No private messaging. No threaded comments.)
 * Feeds for iTunes podcasts and offsite flash players
 
-### Features wanted
+## Features wanted
 
-#### Everything moved to asset pipeline.
+### Everything moved to asset pipeline.
 Yeah? Yeah.
 
-#### Browse All Playlists
+### Browse All Playlists
 Low hanging fruit, boys and girls! Shoulda been a 2008 feature :)
 
-#### On the fly zip downloads of playlists via nginx mod\_zip
+### On the fly zip downloads of playlists via nginx mod\_zip
 This is very easy. Already implemented on Ramen Music. Essentially just is a having a controller generate a text file of filenames that nginx interrupts and uses to construct a zip that's sent back to the client.
 
-#### Better overall alonetone stats page. 
+### Better discovery though tags
+It's high time. We're small fries perhaps (40k tracks) but we lack any categorization outside of playlists and users. The community has decided NO GENRES and after a bunch of discussion, we've decided going with tags (chosen by the uploader) is likely best. However, problems ensue, including: 
+	1) If it's a free for all, won't it just be like genres, but messy? 
+	2) Should the tags  be moderated and exclude genres? 
+	3) What to do about tagging all the old music, should moderators be able to adjust and add tags for the lazy users/old tracks? 
+	4) Should there be a maximum enforced for UI purposes?
+	
+This is more than just programming, it's ultimately a UI issue. We can look to Ramen's tag implementation (4-5 maximum, taking up 1-2 lines) for inspiration, but it's very easy to do this wrong.
+
+### Better overall alonetone stats page. 
 We need to expose a bit more info to the admins/mods. We want to see how signups/assets/comments are trending to help us catch anything strange or cool. But we also just want to know some useful stuff.
 
-#### User stats page
+### User stats page
 Partial implementation/proof of concept was working on rails 2 branch. Basically, a track-by-track table-view of listens, downloads, sources, etc, along with a graph over time for each track. 
 
-#### A way to manage blacklisted IPs in the backend. 
+### A way to manage blacklisted IPs in the backend. 
 We get trouble with downloading bots, spambots. We have manually hardcoded IPs in the source, specefically to prevent downloading mp3 and wasting our bandwidth. We need to create a UI so this can be managed by a non-techie moderator. Also, we need to provide logged in users with a "report" action on their listens if they notice sketchy behavior, so it can go upstream to the mods.
 
-#### Groups. 
+### Groups. 
 Talk with Sudara about this. There's a partial half-hearted implementation. 
 
 ### Want to help out?
