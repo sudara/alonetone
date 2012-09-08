@@ -78,7 +78,28 @@ We get trouble with downloading bots, spambots. We have manually hardcoded IPs i
 ### Groups. 
 Talk with Sudara about this. There's a partial half-hearted implementation. 
 
-## Want to help?
+
+## Want to setup alonetone on your server?
+
+Well unless...
+
+* You know ruby on rails VERY well (Been doing it for more than a few months).
+* You have deployed rails applications, and are comfortable with that.
+* You are willing to spend 20+ hours removing our branding and logo and site-specific things from the code.
+
+Then...
+
+![Sorry script kiddies](https://img.skitch.com/20120908-1exaxnmix5mb82xaq32tjnrja.png)
+
+We get a LOT of requests from rails n00bs asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language. W
+
+Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting a copy in production, it's going to take work (like 40+ hours).
+
+**If you still decide to try keep in mind we are unable to provide ANY support** 
+
+## Want to help make alonetone.com awesome?
+
+Sweet, now we are talkin'!
 
 First, [sign up for an account](http://alonetone.com) and start digging in.
 
@@ -100,7 +121,6 @@ alonetone uses 6 config files:
       database.yml
       amazon_s3.yml (used in production, by default development mode runs with :file_system storage)
       defensio.yml (spam protection, ignored in development)
-      facebooker.yml (for facebook app, ignore this in general for now)
       newrelic.yml (for performance tracking)
 
 These files will be created for you the first time you run any rake task. 
