@@ -23,7 +23,6 @@ module Paperclip
     end
     
     def write_metadata_to_model(mp3)
-      instance = @attachment.instance
       %w(samplerate bitrate length artist album).each do |simple_attribute|
         # copy the data out of the mp3 
         if mp3.respond_to?(:simple_attribute) and @instance.respond_to?(:simple_attribute)
