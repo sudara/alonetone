@@ -1,0 +1,21 @@
+<div id="footer">
+
+  <div id="update">From the <%= link_to 'Blog',blog_home_path%>: 
+    <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+  </div>
+
+  <div id="footer_right">
+    <div id="bug_report">
+    <%= link_to "About alonetone", '/about/'%>  
+    &bull;
+    <%= link_to "Stats", "/about/stats"%>
+    &bull;
+    <%= link_to "Help", "/about/howto"%>
+    &bull;
+    <%= link_to "Press/Contact", "/about/press"%>
+    &bull;
+    <%= link_to "Donate!", "/about/donate" %>  
+    </div>
+  </div>
+
+</div>
