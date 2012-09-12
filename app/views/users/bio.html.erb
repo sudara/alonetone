@@ -7,7 +7,7 @@
 
         <div class="bio static_content">
         	<p>
-        	    <% if @user.present?(:bio) %>
+        	    <% if @user.try?(:bio) %>
         	        <%= @user.printable_bio %>
         	    <% else %>
         	        <%=h @user.name %> doesn't have anything to say, unfortunately...
@@ -16,13 +16,13 @@
         	</p>
         </div>
       
-      <% if @user.present?(:website) %>
+      <% if @user.try(:website) %>
         <div class="bio static_content">
           	  <%= website_for(@user) %>
         </div>	
       <% end %>
 
-      <% if @user.present?(:myspace) %>
+      <% if @user.try?(:myspace) %>
         <div class="bio static_content">
         	  <%= myspace_for(@user) %>
         </div>	

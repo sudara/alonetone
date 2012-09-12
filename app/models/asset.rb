@@ -127,7 +127,7 @@ class Asset < ActiveRecord::Base
   end
   
   def guest_can_comment?
-    if user.settings && user.settings.present?( 'block_guest_comments' )
+    if user.settings.present? && user.settings['block_guest_comments'].present?
       user.settings['block_guest_comments'] == "false"
     else
       true

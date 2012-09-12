@@ -7,9 +7,6 @@ class AssetsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :latest, :radio, :listen_feed]
   before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
   
-  #rescue_from NoMethodError, :with => :user_not_found
-  #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
   @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple']
   @@bots = ['bot','spider','baidu']
@@ -294,7 +291,7 @@ class AssetsController < ApplicationController
   
   def bot?
     ip = request.remote_ip
-    return true unless present? request.user_agent 
+    return true unless request.user_agent.present?
     return true if @@bad_ip_ranges.any?{|cloaked_ip| ip.match /^#{cloaked_ip}/  } # check bad ips that fake user agent
     not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent} # check user agent agaisnt both white and black lists
   end

@@ -4,7 +4,9 @@ gem "rails", "3.2.8"
 gem "mysql2"
 gem "unicorn"
 
+gem "aws-sdk"
 gem "paperclip"
+
 gem "authlogic"
 
 gem "geokit"

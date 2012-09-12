@@ -38,7 +38,7 @@ class User
   
   def avatar(size = nil)
     return dummy_pic(size) unless self.has_pic?
-    self.pic.public_filename(size) 
+    self.pic.pic.url(size) 
   end
   
   def favorite_asset_ids

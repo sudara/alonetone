@@ -15,9 +15,17 @@ class Pic < ActiveRecord::Base
   #                                   :large  => [125, 125], 
   #                                   :album  => [200, 200] 
   #                                 }
-  
-  # not yet it can ;)
-  #can_be_cropped
-  validates_as_attachment
 
+  has_attached_file :pic, {
+    :styles => {
+      :tiny   => "25x25#", 
+      :small  => "50x50#", 
+      :large  => "125x125#", 
+      :album  => "200x200#", 
+      :original => "400x400#"
+    },
+    :path => "/pics/:id/:filename.:style:extension"
+  }
+  validates_attachment_size :pic, :less_than => 3.megabytes, :greater_than => 100.bytes
+  validates_attachment_content_type :mp3, :content_type => /image/
 end

@@ -1,4 +1,4 @@
-<% cache( logged_in? ? "tabs#{asset.cache_key}" : "guest_tabs#{asset.cache_key}" ) do %>
+<%= cache( logged_in? ? "tabs#{asset.cache_key}" : "guest_tabs#{asset.cache_key}" ) do %>
 <div class="more tabs" style="display:none;">
     <ul>
 			<% if logged_in? || asset.guest_can_comment? %>
@@ -11,7 +11,7 @@
     <%= favorite_toggle(asset) %>
 		<% if logged_in? || asset.guest_can_comment? %>
 	    <div id="comment_track_<%= asset.unique_id %>">
-	        <%= render :partial => 'assets/comment', :object => asset %>
+	        <%= render :partial => 'assets/comment', :locals => {:object => asset} %>
 	    </div>
 		<% end %>
   	<div id="details_track_<%= asset.unique_id %>">
@@ -59,7 +59,7 @@
 
 	    
     <div id="share_track_<%= asset.unique_id %>">
-        <%= render :partial => 'assets/share', :object => asset %>
+        <%= render :partial => 'assets/share', :locals => {:object => asset} %>
     </div>
 	
 	

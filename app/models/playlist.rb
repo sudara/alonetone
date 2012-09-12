@@ -45,7 +45,7 @@ class Playlist < ActiveRecord::Base
   
   def cover(size=nil)
     return dummy_pic(size) unless self.pic && !self.pic.new_record?
-    self.pic.public_filename(size)
+    self.pic.pic.url(size)
   end
   
   def has_tracks?

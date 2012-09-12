@@ -119,7 +119,6 @@ alonetone uses 6 config files:
 
       alonetone.yml (contains the application "secret" and app-specific settings)
       database.yml
-      amazon_s3.yml (used in production, by default development mode runs with :file_system storage)
       defensio.yml (spam protection, ignored in development)
       newrelic.yml (for performance tracking)
 

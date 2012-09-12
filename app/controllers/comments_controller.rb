@@ -110,7 +110,7 @@ class CommentsController < ApplicationController
           ) if moderator? or admin?
         end
         format.json do
-        if present?(params[:start]) && present?(params[:end])
+        if params[:start] && params[:end]
           @comments = Comment.count_by_user(params[:start].to_date, params[:end].to_date, params[:limit].to_i)
         else
           @comments = Comment.count_by_user(30.days.ago, Date.today)

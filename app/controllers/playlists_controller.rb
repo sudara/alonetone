@@ -16,7 +16,7 @@ class PlaylistsController < ApplicationController
                       @user.playlists.include_private :
                       @user.playlists.public
 
-    if present?(@all_playlists)
+    if @all_playlists
       middle = (@all_playlists.size + 1) / 2
       
       @playlists_left  = @all_playlists[ 0 ... middle ]
