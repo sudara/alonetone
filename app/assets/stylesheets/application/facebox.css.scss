@@ -1,13 +1,13 @@
 #facebox .b {
-  background-image: url(../images/facebox/b.png); }
+  background-image: image-url('facebox/b.png'); }
 #facebox .tl {
-  background-image: url(../images/facebox/tl.png); }
+  background-image: image-url('facebox/tl.png'); }
 #facebox .tr {
-  background-image: url(../images/facebox/tr.png); }
+  background-image: image-url('facebox/tr.png'); }
 #facebox .bl {
-  background-image: url(../images/facebox/bl.png); }
+  background-image: image-url('facebox/bl.png'); }
 #facebox .br {
-  background: url(../images/facebox/br.png); }
+  background: image-url('facebox/br.png'); }
 
 #facebox {
   position: absolute;

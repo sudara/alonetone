@@ -49,7 +49,7 @@ body {
   font-size: 10px;
   position: relative;
   margin: auto;
-  background: #e4e4d9 url(../images/blog/back.png) no-repeat center 30px;
+  background: #e4e4d9 image-url('blog/back.png') no-repeat center 30px;
 
 }
 html {
@@ -152,7 +152,7 @@ div#wp1 {/*left side*/
   min-height: 30px;
 }
 .post-bot-left.with_arrow{
-  background: transparent url(../images/blog/arro.png) top center no-repeat;  
+  background: transparent image-url('blog/arro.png') top center no-repeat;  
 }
 .post-bot-mid {/*left side post container*/
   position:relative;
@@ -169,7 +169,7 @@ div#wp1 {/*left side*/
   top: -2px;
   width: 130px;
   height: 30px;
-  background: transparent url(../images/blog/com-but.png) 32px 0px no-repeat;
+  background: transparent image-url('blog/com-but.png') 32px 0px no-repeat;
 }
 .post-bot-right a{
   display:block;
@@ -327,7 +327,7 @@ div#hd1-bot {/*header left side*/
   margin: auto;
   width: 660px;
   min-height: 65px;
-  background: transparent url(../images/blog/title.png) center no-repeat;
+  background: transparent image-url('blog/title.png') center no-repeat;
 }
 div#hd2 {/*header right side*/
   position:relative;
@@ -335,7 +335,7 @@ div#hd2 {/*header right side*/
   float: right;
   width: 320px;
   min-height: 90px;
-  background: transparent url(../images/blog/logo.png) center top no-repeat;
+  background: transparent image-url('blog/logo.png') center top no-repeat;
 }
 #hd2 a{
   display:block;
@@ -359,7 +359,7 @@ div#bottom {
   width: 325px;
   min-height: 220px;
   border-right: 1px solid #6c614d;
-  background: transparent url(../images/blog/latestup.png) 10px 10px no-repeat;
+  background: transparent image-url('blog/latestup.png') 10px 10px no-repeat;
   float: left;
 }
 .bottom-mid {
@@ -369,7 +369,7 @@ div#bottom {
   width: 320px;
   min-height: 220px;
   border-right: 1px solid #6c614d;
-  background: transparent url(../images/blog/latestco.png) 8px 10px no-repeat;
+  background: transparent image-url('blog/latestco.png') 8px 10px no-repeat;
   float: left;
 }
 .bottom-right {
@@ -378,7 +378,7 @@ div#bottom {
   margin: auto;
   width: 321px;
   min-height: 220px;
-  background: transparent url(../images/blog/cukickass.png) 9px 9px no-repeat;
+  background: transparent image-url('blog/cukickass.png') 9px 9px no-repeat;
   float: left;
 }
 /*bottom end*/
@@ -584,7 +584,7 @@ a.prev-next:hover {
   text-align: justify;
   font-style: normal;
   list-style-position: inside;
-  list-style-image: url(../images/blog/bullet.png);/*bullet img, I could do it with span styles if you would like?*/
+  list-style-image: image-url('blog/bullet.png');/*bullet img, I could do it with span styles if you would like?*/
 }
 .comment-body ul{
   margin-top: 15px;
@@ -638,13 +638,13 @@ a.prev-next:hover {
 }
 
 div.ajax_success, div.ajax_fail{
-  background: transparent url(../images/icons/ok.png) no-repeat top left;
+  background: transparent image-url('icons/ok.png') no-repeat top left;
   text-indent: 35px;
   height: 30px;
   line-height: 30px;
 }
 div.ajax_fail{
-  background: transparent url(../images/icons/not_ok.png) no-repeat top left;
+  background: transparent image-url('icons/not_ok.png') no-repeat top left;
  
 }
 .pagination{

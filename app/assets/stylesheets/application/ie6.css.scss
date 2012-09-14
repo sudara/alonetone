@@ -1,0 +1,275 @@
+// first, some layout help
+
+* {
+  zoom: 1;
+}
+
+// footer can't be fixed
+
+#content {
+  margin-top: 110px;
+}
+
+#footer,#footer_expandable {
+  position: relative;
+  clear: both;
+}
+
+#footer {
+  #update {
+    top: 26px;
+  }
+  a#creative {
+    display: none;
+  }
+}
+
+#footer_expandable {
+  background-color: #c1cab3;
+  height: 250px;
+}
+
+#header {
+  position: absolute;
+  height: 110px;
+}
+
+// ie loves floats
+
+// weee, not so DRY anymore!
+
+// layout.sass
+#header {
+  background-image: image-url('backgrounds/ie/header.jpg');
+}
+
+#wrapper {
+  background-image: image-url('backgrounds/ie/body.jpg');
+}
+
+#footer {
+  background-image: image-url('backgrounds/ie/footer_closed.jpg');
+}
+
+#footer_expandable {
+  background-image: image-url('backgrounds/ie/footer.jpg');
+}
+
+div.notice, div.errorExplanation {
+  background-image: image-url('backgrounds/ie/notice.jpg');
+}
+
+// typography.sass
+
+div.flash {
+  background-image: image-url('backgrounds/ie/flash.jpg');
+}
+
+a.arrows, a.view_more, a.view_all,a.edit {
+  background-image: image-url('buttons/ie/arrow.gif');
+}
+
+div.footer_box {
+  a.view_all_kicking_ass {
+    background-image: image-url('icons/ie/view_all_kicking_ass.gif');
+  }
+  a.view_all_comments {
+    background-image: image-url('icons/ie/view_all_comments.gif');
+  }
+  a.view_all_favorites {
+    background-image: image-url('icons/ie/view_all_favorites.gif');
+  }
+  a.view_feature {
+    background-image: image-url('icons/ie/view_feature.gif');
+  }
+  a.view_all_recent_music {
+    background-image: image-url('icons/ie/view_all_recent_music.gif');
+  }
+  a.view_more_tracks {
+    background-image: image-url('icons/ie/view_more_tracks.gif');
+  }
+  a.view_listening_history {
+    background-image: image-url('icons/ie/view_listening_history.gif');
+  }
+}
+
+div.footer_box.onepx {
+  margin-top: 1px;
+}
+
+// alonetone.sass
+
+#header {
+  a#logo {
+    background: none;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/alonetone_big.png', sizingMethod='scale');
+  }
+}
+
+span.current, a:hover {
+  background-image: image-url('backgrounds/ie/user_bar_selected.jpg');
+}
+
+.mini_paginator {
+  background-image: image-url('backgrounds/ie/user_bar.jpg');
+}
+
+#top_bar {
+  a#radio_button {
+    background-image: image-url('nav/ie/radio.gif');
+  }
+  a#halp_button {
+    background-image: image-url('nav/ie/halp.gif');
+  }
+  a#about_button {
+    background-image: image-url('nav/ie/about.gif');
+  }
+  a#login_button {
+    background-image: image-url('nav/ie/login.gif');
+  }
+  a#logout_button {
+    background-image: image-url('nav/ie/logout.gif');
+  }
+  div#search {
+    a#search_button {
+      background-image: image-url('nav/ie/search.gif');
+    }
+  }
+}
+
+.comment, .user_report, .update, .listen {
+  .comment_user, .update_title_bar {
+    background-image: image-url('backgrounds/ie/comment_even.jpg');
+  }
+  &.even {
+    .comment_user {
+      background-image: image-url('backgrounds/ie/comment.jpg');
+    }
+  }
+}
+
+#user_header, #static_header {
+  #user_links, #links {
+    background-image: image-url('backgrounds/ie/user_bar.jpg');
+  }
+  ul.user_links, ul.links {
+    li {
+      background-image: image-url('backgrounds/ie/user_bar_selected.jpg');
+    }
+    a {
+      background-image: image-url('backgrounds/ie/user_bar.jpg');
+      &:hover {
+        background-image: image-url('backgrounds/ie/user_bar_selected.jpg');
+      }
+    }
+  }
+}
+
+#static_header {
+  .pagination {
+    background-image: image-url('backgrounds/ie/user_bar.jpg');
+  }
+}
+
+h2#latest_comments, #user_comments h2 {
+  background-image: image-url('icons/ie/comments.gif');
+}
+
+h2#latest_uploaded, #user_latest h2 {
+  background-image: image-url('icons/ie/latest.gif');
+}
+
+h2#kicking_ass {
+  background-image: image-url('icons/ie/stars.gif');
+}
+
+// nav.sass
+
+ul#nav {
+  li {
+    a {
+      background-image: image-url('buttons/ie/nav.gif');
+    }
+  }
+}
+
+// playlist.sass
+
+.playlist {
+  div.box {
+    background-image: image-url('backgrounds/ie/tracks.jpg');
+  }
+  div.info {
+    background-image: image-url('backgrounds/ie/album.jpg');
+  }
+  .empty {
+    background-image: image-url('backgrounds/ie/flash.jpg');
+  }
+}
+
+#playlists_carousel {
+  .next {
+    background-image: image-url('buttons/ie/next.gif');
+    right: 40px;
+  }
+  .prev {
+    background-image: image-url('buttons/ie/prev.gif');
+  }
+  a.jewel_case_125 {
+    background: none;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/jewel-case-125.png', sizingMethod='crop');
+    cursor: pointer;
+  }
+  a.small_playlist_title:hover {
+    background:none {}
+  }
+}
+
+// tabs
+
+.content ul.ui-tabs-nav {
+  background-image: image-url('backgrounds/ie/tabs.jpg');
+  a {
+    background-image: image-url('backgrounds/ie/tabs.jpg');
+  }
+}
+
+// tracks
+
+.asset, .track {
+  div.button {
+    &.play-button {
+      a {
+        background-image: image-url('icons/ie/play.gif');
+      }
+    }
+    &.download-button {
+      margin-left: 1px;
+      a {
+        background-image: image-url('icons/ie/download.gif');
+      }
+    }
+  }
+  &.hover, &.open {
+    div.button, div.title {
+      background-image: image-url('backgrounds/ie/tracks.jpg');
+    }
+  }
+  &.playing {
+    div.button, div.title {
+      background-image: image-url('backgrounds/ie/tracks.jpg');
+    }
+  }
+}
+
+//favorites
+a.add_to_favorites, a.favorited {
+  background-image: image-url('icons/ie/favorites.jpg');
+}
+
+// facebox
+
+* html #facebox_overlay {
+  position: absolute;
+  height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}

@@ -68,13 +68,13 @@ h3 a{
   position: relative;
   width: 100%;
   text-align: center;
-  background: #261f1e url(../images/rpm/header_background.jpg) repeat-x top center;
+  background: #261f1e image-url('rpm/header_background.jpg') repeat-x top center;
   margin: auto;
 }
 
 #header{
   width: 1200px;
-  background: #261f1e url(../images/rpm/header.jpg) no-repeat top center;
+  background: #261f1e image-url('rpm/header.jpg') no-repeat top center;
   height: 412px;
   text-align: center;
   margin: auto;
@@ -86,7 +86,7 @@ h3 a{
  width: 100%;
  min-height: 600px;
  min-width: 1200px;
- background: #1e1918 url(../images/rpm/background.png) repeat-x top center; 
+ background: #1e1918 image-url('rpm/background.png') repeat-x top center; 
  margin: auto;
  clear:both;
 }
@@ -105,7 +105,7 @@ div#albums{
   padding-top:25px;
   padding-left:13px;
   min-height: 500px;
-  background: transparent url(../images/rpm/background-lines.jpg) repeat-y 393px 0; 
+  background: transparent image-url('rpm/background-lines.jpg') repeat-y 393px 0; 
 }
 div.album{
   position: relative;
@@ -129,7 +129,7 @@ a.overlay {
   background-color: transparent;
   width: 160px;
   height: 160px;
-  background-image: url(../images/rpm/overlay.png); }
+  background-image: image-url('rpm/overlay.png'); }
 
 img.cover {
   width: 150px;

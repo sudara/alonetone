@@ -1,0 +1,980 @@
+// import variables
+@import "variables";
+
+// pagination base
+.pagination {
+  float: right;
+  display: block;
+  height: 32px;
+  position: relative;
+  text-align: right;
+  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  em, a, span, a:visited {
+    display: block;
+    float: left;
+    height: 12px;
+    line-height: 14px;
+    font-size: 12px;
+    padding: 10px 10px;
+    color: $text_color;
+    font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  }
+  em, a:hover, span.current {
+    background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+    color: $white;
+    text-decoration: none;
+  }
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
+  span.gap {
+    padding: 10px 0px;
+  }
+  span.disabled {
+    opacity: 0.4;
+  }
+}
+
+.mini_paginator, .forum_paginator {
+  position: relative;
+  height: 32px;
+  background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
+  .pagination {
+    float: left;
+    width: 500px;
+  }
+}
+
+.forum_paginator {
+  margin-top: 3px;
+  width: 890px;
+  height: 34px;
+  .button_wrapper {
+    border: none;
+    clear: none;
+  }
+}
+
+// login and logout
+
+#top_bar {
+  #top_bar_right, #top_bar_left {
+    position: absolute;
+    height: 29px;
+  }
+  #top_bar_left {
+    left: 53px;
+  }
+  #top_bar_right {
+    width: 500px;
+    left: 440px;
+  }
+  #top_bar_right a {
+    float: right;
+    margin-left: 10px;
+  }
+  #top_bar_left a {
+    float: left;
+    margin-right: 10px;
+  }
+  a {
+    margin-top: 2px;
+    height: 25px;
+    display: block;
+    position: relative;
+  }
+  a#radio_button {
+    width: 81px;
+    background: image-url('nav/radio.png') no-repeat 0px 0;
+    &:hover {
+      background-position: -81px 0;
+    }
+    &:active {
+      background-position: -162px 0;
+    }
+  }
+  a#halp_button {
+    width: 78px;
+    background: image-url('nav/halp.png') no-repeat 0px 0;
+    &:hover {
+      background-position: -78px 0;
+    }
+    &:active {
+      background-position: -156px 0;
+    }
+  }
+  a#about_button {
+    width: 78px;
+    background: image-url('nav/about.png') no-repeat 0px 0;
+    &:hover {
+      background-position: -78px 0;
+    }
+    &:active {
+      background-position: -156px 0;
+    }
+  }
+  a#login_button {
+    width: 75px;
+    background: image-url('nav/login.png') no-repeat 0px 0;
+    &:hover {
+      background-position: -75px 0;
+    }
+    &:active {
+      background-position: -150px 0;
+    }
+  }
+  a#logout_button {
+    width: 88px;
+    background: image-url('nav/logout.png') no-repeat 0px 0;
+    &:hover {
+      background-position: -88px 0;
+    }
+    &:active {
+      background-position: -176px 0;
+    }
+  }
+  a#profile_link {
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+  }
+  div#search {
+    position: relative;
+    float: right;
+    display: block;
+    height: 25px;
+    width: 330px;
+    a {
+      background: image-url('nav/search.png') no-repeat 0px 0;
+      display: block;
+      float: right;
+      width: 75px;
+      height: 25px;
+      margin-left: 5px;
+      &:hover {
+        background-position: -75px 0;
+      }
+      &:active {
+        background-position: -150px 0;
+      }
+    }
+    form {
+      height: 25px;
+      display: inline;
+      #query {
+        margin: 0;
+        float: right;
+        margin-left: 0px;
+        margin-top: 3px;
+        height: 17px;
+        font-size: 14px;
+        color: $silver;
+        padding: 2px 3px;
+        width: 200px;
+        background-color: #5b5d4a;
+        border: 1px solid #313327;
+        &.focused {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+// browse all users
+#user_index, #user_search_results {
+  position: relative;
+  div.user {
+    float: left;
+    width: 150px;
+    margin-right: 25px;
+    margin-bottom: 30px;
+    position: relative;
+    a.overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      opacity: 1;
+      background-color: transparent;
+      width: 137px;
+      height: 137px;
+    }
+    img.cover {
+      width: 125px;
+      height: 125px;
+      margin-left: 6px;
+      margin-top: 4px;
+    }
+    .name {
+      margin-left: 10px;
+      color: white;
+      text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
+      font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+      text-align: center;
+      background-color: transparent;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: 8px;
+      height: 20px;
+      width: 115px;
+      display: block;
+      overflow: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .twitter {
+      position: absolute;
+      bottom: 0;
+      right: -5px;
+      width: 32px;
+      height: 32px;
+      background: transparent image-url('icons/tweetzorz.png') no-repeat top left;
+    }
+  }
+}
+
+#large_users_grid {
+  margin-top: 60px;
+  width: 101%;
+  position: relative;
+  margin-left: 20px;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+// comments
+
+.comment {
+  position: relative;
+  color: $white;
+  background: image-url('backgrounds/new_comment.png') repeat-x top left;
+  div.private_comment {
+    background: image-url('icons/private.png') no-repeat top left;
+    position: absolute;
+    z-index: 4;
+    top: 51px;
+    left: -4px;
+    width: 25px;
+    height: 25px;
+  }
+  .comment_user {
+    a.alonetoner, img {
+      margin-top: 1px;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+  .comment_user_text {
+    color: $white;
+    margin-left: 72px;
+    padding-top: 10px;
+    font-size: 12px;
+    text-shadow: black 1px 1px 1px;
+    a,a:visited {
+      font-weight: bold;
+      color: $white;
+      text-decoration: underline;
+      font-size: 12px;
+      text-shadow: black 1px 1px 1px;
+    }
+  }
+  .comment_body, .body {
+    padding: 0px 20px 30px 0px;
+    margin-bottom: 3px;
+    margin-left: 72px;
+    a, a:visited, a:hover {
+      color: $white;
+      text-shadow: black 1px 1px 1px;
+    }
+    p {
+      color: $white;
+      text-shadow: black 1px 1px 1px;
+      margin: 16px 0px 0px 0px;
+      line-height: 18px;
+      margin-top: 13px;
+    }
+    .comment_controls {
+      float: right;
+      a, a:visited, a:hover {
+        color: $white;
+        font-size: 11px;
+        font-weight: normal;
+      }
+    }
+    h1,h2,h3 {
+      margin-top: 32px;
+      margin-bottom: 12px;
+      color: $text_color;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
+
+.comment_form {
+  .comment_as {
+    line-height: 37px;
+    font-size: 14px;
+    height: 25px;
+    margin-bottom: 5px;
+    img {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+  .public, .private {
+    font-size: 12px;
+  }
+}
+
+// give the posts some breathing room
+.update {
+  margin-bottom: 50px;
+  .update_title_bar {
+    position: relative;
+    height: 50px;
+    margin-bottom: 1px;
+    background: image-url('backgrounds/comment_even.png') repeat-x top left;
+    background-color: $box_background;
+    a.alonetoner, img {
+      margin-top: 1px;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+  .comment_user_text, .about_details {
+    padding: 0;
+    line-height: 10px;
+    font-size: 11px;
+    color: $text_color;
+    text-shadow: none;
+    a {
+      font-size: 11px;
+    }
+    .comment_about, .title {
+      line-height: 18px;
+      padding-top: 8px;
+      color: $text_color;
+      text-shadow: none;
+    }
+  }
+  .body,.comment {
+    background-color: $box_background;
+    background-image: none;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 3px;
+    text-shadow: none;
+    a {
+      color: $text_color;
+      text-shadow: none;
+    }
+    .comment_about {
+      a {
+        font-weight: bold;
+      }
+    }
+    p {
+      color: $text_color;
+      margin: 16px 0px 0px 0px;
+      line-height: 18px;
+      text-shadow: none;
+    }
+    h1,h2,h3 {
+      margin-top: 32px;
+      margin-bottom: 12px;
+      color: $text_color;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+  .comment.even, .body.even {
+    background-color: $box_background_even;
+  }
+  .comment_form {
+    a {
+      color: $text_color;
+    }
+  }
+}
+
+.comment_header {
+  a {
+    font-size: 16px;
+    line-height: 40px;
+    margin-left: -10px;
+  }
+}
+
+.user_report .comment_user {
+  .title {
+    span.box_title {
+      line-height: 30px;
+      padding-top: 8px;
+      font-size: 16px;
+      color: $text_color;
+      a {
+        font-weight: 16px;
+        color: $text_color;
+      }
+    }
+  }
+}
+
+.listen {
+  position: relative;
+  width: 100%;
+  min-height: 40px;
+  background-color: $box_background;
+  .listen_user {
+    float: left;
+    margin-right: 10px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .listen_details {
+    font-size: 12px;
+    float: left;
+    width: 280px;
+    min-height: 25px;
+    a {
+      font-size: 12px;
+    }
+  }
+  &.even {
+    background-color: $box_background_even;
+  }
+}
+
+// user layout & static header (with nav)
+#user_header, #static_header {
+  position: relative;
+  height: 83px;
+  width: 100%;
+  margin-bottom: 40px;
+  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-weight: 500;
+  #alonetoner {
+    position: absolute;
+    display: block;
+    float: left;
+    height: 83px;
+    width: 83px;
+    img {
+      height: 83px;
+      width: 83px;
+    }
+  }
+  .user_title, .title {
+    height: 50px;
+    position: relative;
+    margin-left: 84px;
+    margin-bottom: 1px;
+    background-color: #c1cab3;
+    h1 {
+      font-size: 24px;
+      line-height: 55px;
+      color: $text_color;
+      margin-left: 15px;
+      display: inline;
+      margin-right: 5px;
+    }
+    span.user_location {}
+  }
+  #user_links, #links {
+    height: 32px;
+    background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
+    margin-left: 84px;
+    line-height: 18px;
+  }
+  ul.user_links, ul.links {
+    height: 32px;
+    margin-bottom: 2px;
+    li {
+      color: $text_color;
+      float: left;
+      height: 32px;
+      line-height: 34px;
+      border-right: 1px solid $text_color;
+      background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+      a {
+        float: left;
+        display: block;
+        line-height: 34px;
+        font-size: 14px;
+        padding: 0 15px;
+        color: $text_color;
+        font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+        font-weight: 400;
+        background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
+      }
+      a:hover {
+        background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+        color: $white;
+        text-decoration: none;
+      }
+    }
+    li.contact {
+      float: right;
+      border-right: none;
+      border-left: 1px solid $text_color;
+    }
+    li.current {
+      font-weight: 500;
+      color: $white;
+      padding: 0px 15px;
+    }
+    div.pagination {
+      height: 32px;
+    }
+  }
+}
+
+// static headers are like the user header, but without pics
+#static_header {
+  .title, #links {
+    margin-left: 0px;
+  }
+  .links li, .links li a {
+    font-size: 14px;
+  }
+  .pagination {
+    text-align: center;
+    margin-top: 1px;
+    width: 100%;
+    height: 32px;
+    float: left;
+    background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
+  }
+}
+
+// uploading
+.uploader {
+  form {
+    #filefields {
+      li {
+        list-style: none;
+      }
+    }
+  }
+  .uploading {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+// sign up
+#what-you-get {
+  background-color: #f3f3f3;
+  h2 {
+    color: $text_color;
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-shadow: none;
+  }
+}
+
+// static content
+
+.static_content {
+  padding: 15px 25px;
+  background: #e1e2e1;
+  line-height: 18px;
+  margin-bottom: 1px;
+  p {
+    color: $text_color;
+    a, a:visited {
+      color: $text_color;
+    }
+  }
+}
+
+.sidebar {
+  float: right;
+  ul {
+    list-style: none;
+    li {
+      list-style: none;
+      list-style-position: outside;
+      margin: 0px 0px 13px 3px;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 14px;
+      a, a:visited {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+      }
+    }
+  }
+}
+
+#alonetoner_big {
+  margin-bottom: 40px;
+}
+
+// recent listeners
+#recent_listeners {
+  div {
+    float: left;
+    margin-right: 24px;
+  }
+  height: 60px;
+}
+
+#follows,#mostly_listens_to {
+  padding-bottom: 0px;
+  margin-bottom: -10px;
+  padding-right: 0px;
+  div {
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 29px;
+  }
+}
+
+div.small_spinner {
+  margin-top: 5px;
+  float: right;
+  background: image-url('small_spinner.gif') no-repeat center center;
+  height: 20px;
+  margin-top: 5px;
+  width: 20px;
+}
+
+// favorites
+
+a.add_to_favorites, a.favorited {
+  text-indent: -9999px;
+  position: absolute;
+  right: 15px;
+  margin-top: 13px;
+  z-index: 2;
+  display: block;
+  width: 29px;
+  height: 25px;
+  background: image-url('icons/favorites.png') no-repeat -29px 0px;
+  opacity: 0.55;
+  &:hover {
+    background-position: -29px 0px;
+    opacity: 0.999;
+  }
+  &.favorited {
+    background-position: 0px 0px;
+    opacity: 0.99;
+    &:hover {
+      background-position: -58px 0px;
+    }
+  }
+}
+
+// misc
+
+#user_home {
+  position: relative;
+  min-height: 40px;
+}
+
+.additional_options {
+  float: right;
+  margin-top: 4px;
+  height: 35px;
+}
+
+.additional_options_solo {
+  position: relative;
+  text-align: left;
+  margin-bottom: 10px;
+  height: 35px;
+}
+
+.visit_us {
+  h1 {
+    font-size: 24px;
+  }
+  .chunk {
+    padding-top: 20px;
+    float: left;
+    width: 270px;
+    text-align: center;
+    a {
+      img {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+#map {
+  width: 890px;
+  height: 600px;
+  margin-top: -40px;
+  margin-left: -20px;
+  background: transparent image-url('facebox/loading.gif') no-repeat center center;
+  background-color: $playlist_box_silver;
+  p,a,a:visited {
+    color: $text_color;
+  }
+  #iwsw {
+    img {
+      float: left;
+      padding-right: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+// needed for IE7 not to fuck up the animation
+#pic_upload {
+  height: 50px;
+}
+
+.feature {
+  width: 420px;
+  margin-bottom: 30px;
+  div.box {
+    background-color: #e1e2e1;
+    padding-left: 25px;
+    padding-top: 9px;
+    margin-bottom: 1px;
+    min-height: 30px;
+    h2,h1 {
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 20px;
+      padding-right: 40px;
+      text-shadow: rgba(255, 249, 208, 0.43) 2px 2px 1px;
+      color: $text_color;
+      margin: 0;
+      a {
+        font-size: 20px;
+        font-weight: bold;
+        color: $text_color;
+        text-indent: 25px;
+        margin-bottom: 3px;
+        text-shadow: rgba(255, 249, 208, 0.43) 2px 2px 1px;
+      }
+    }
+    h3 {
+      font-weight: normal;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 8px;
+      color: $text_color;
+      a {
+        font-size: 11px;
+        text-decoration: underline;
+      }
+    }
+  }
+  .static_content {
+    h3 {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    a {
+      color: $text_color;
+    }
+  }
+  div.details {
+    position: relative;
+    display: block;
+    background: image-url('backgrounds/album.png') repeat-x top left;
+    background-color: $playlist_box_silver;
+    div.pic {
+      float: left;
+      width: 135px;
+      height: 125px;
+      margin-right: 10px;
+    }
+    div.link {
+      height: 22px;
+      clear: both;
+    }
+    div.feature_teaser {
+      padding-top: 15px;
+      padding-right: 15px;
+      color: $text_color;
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+}
+
+.feature_stats {
+  padding: 0px;
+  margin: 0px;
+  .static_content {
+    padding: 0px;
+    margin: 0px;
+    .pic {
+      width: 200px;
+      height: 200px;
+      float: left;
+      padding-right: 10px;
+    }
+    .stats {
+      padding-top: 25px;
+      font-size: 12px;
+      line-height: 18px;
+      padding-right: 10px;
+      a {
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+  }
+}
+
+.indented_comments {
+  margin-left: 50px;
+}
+
+h1 span#channel_name {
+  color: $orange;
+}
+
+#radio_controls {
+  padding: 0px;
+  margin: 0;
+  min-height: 320px;
+  form {
+    padding: 0;
+    margin: 0;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style-position: inside;
+    li.radio_channel {
+      background-image: image-url('backgrounds/tracks.png');
+      list-style: none;
+      display: block;
+      float: left;
+      width: 400px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      height: 40px;
+      font-size: 20px;
+      padding-left: 20px;
+      line-height: 40px;
+      border-bottom: 1px solid black;
+      border-color: $text_color;
+      &.selected, &.hover {
+        background-image: image-url('backgrounds/tracks.png');
+        background-position: 420px 0px;
+      }
+      &.disabled {
+        color: $disabled;
+      }
+      input {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.asset.played {
+  opacity: 0.2;
+}
+
+.asset.playing, .asset.hover {
+  opacity: 0.99;
+}
+
+// stats
+h2.stats {
+  text-indent: 45px;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+#total_playsDiv {
+  text-align: left;
+  background-color: $silver;
+  width: 800px;
+  margin: auto;
+}
+
+.static_content#stats, .static_content.stats {
+  padding: 0;
+  margin: 0 auto;
+  width: 800px;
+}
+
+#statstable, .statstable {
+  width: 100%;
+  thead tr {
+    background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
+    height: 25px;
+    border-bottom: 3px solid #37392b;
+    th {
+      line-height: 25px;
+      font-size: 12px;
+      text-align: left;
+      font-weight: bold;
+      padding-left: 15px;
+      padding-right: 10px;
+      background: #c7c8c7 image-url('backgrounds/user_bar.png') repeat-x scroll left bottom;
+      &.headerSortDown {
+        background: #c7c8c7 image-url('icons/small_sort_down.png') no-repeat 3px 8px;
+      }
+      &.headerSortUp {
+        background: #c7c8c7 image-url('icons/small_sort_up.png') no-repeat 3px 8px;
+      }
+    }
+  }
+  tbody {
+    height: 350px;
+    overflow-y: scroll;
+  }
+  tr {
+    width: 100%;
+  }
+  tr td {
+    padding-left: 15px;
+    font-size: 12px;
+    background-color: $box_background;
+    height: 20px;
+    line-height: 20px;
+    a,a:hover {
+      font-size: 12px;
+      color: $text_color;
+      line-height: 20px;
+    }
+  }
+  tr.even td {
+    background-color: $box_background_even;
+  }
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+.static_content.big_stats {
+  font-size: 14px;
+  line-height: 1.5em;
+  strong {
+    font-size: 18px;
+  }
+}
+
+.feed_icon_in_box {
+  position: absolute;
+  top: -30px;
+  right: 18px;
+  z-index: 10;
+}
