@@ -1,3 +1,17 @@
+//= require jquery-1.8.1
+//= require jquery-ui-1.8.23
+
+//= require soundmanager20110306/soundmanager2
+//= require utilities 
+//= require jquery-carousel
+//= require jquery-lowpro
+//= require jquery-hotkeys
+//= require facebox
+//= require twitter
+//= require highlight
+//= require tablesorter
+
+
 var soundIsReady = true;
 
 soundManager.debugMode = false;
