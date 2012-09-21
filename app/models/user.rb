@@ -16,12 +16,12 @@ class User < ActiveRecord::Base
   }
   
   scope :recently_seen, {
-    :order    => 'last_seen_at DESC', 
+    :order    => 'last_login_at DESC', 
   }
   
   scope :with_location, {
     :conditions => ['users.country != ""'], 
-    :order      => 'last_seen_at DESC', 
+    :order      => 'last_login_at DESC', 
   }
   
   scope :geocoded, {

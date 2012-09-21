@@ -1,7 +1,7 @@
 class User
   
   def self.currently_online
-     User.find(:all, :conditions => ["last_seen_at > ?", Time.now.utc-15.minutes])
+     User.find(:all, :conditions => ["last_login_at > ?", Time.now.utc-15.minutes])
   end
   
   # Generates magic %LIKE% sql statements for all columns
@@ -34,28 +34,24 @@ class User
   def self.paginate_by_params(params)
     case params[:sort]
       when 'recently_joined' 
-        activated.paginate(:all, 
-          :per_page => 15, 
+        activated.paginate(:per_page => 15, 
           :page => params[:page]
         )
 
       when 'monster_uploaders'
-        musicians.paginate(:all,
-          :per_page => 15, 
+        musicians.paginate(:per_page => 15, 
           :page => params[:page]
         )
       
       when 'on_twitter'
-        on_twitter.paginate(:all,
-          :per_page => 15,
+        on_twitter.paginate(:per_page => 15,
           :page => params[:page]
         )
 
       when 'dedicated_listeners'
         @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
           # returns an array, like so: [User, number_of_listens]
-          result = Listen.count(:all, 
-            :order      => 'count_all DESC',
+          result = Listen.count(:order      => 'count_all DESC',
             :conditions => 'listener_id != ""',
             :group      => :listener,
             :limit      => pager.per_page,
@@ -73,8 +69,7 @@ class User
 
       when 'last_uploaded'
         @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
-          distinct_users = Asset.find(:all, 
-            :select   => 'DISTINCT user_id', 
+          distinct_users = Asset.find(:select   => 'DISTINCT user_id', 
             :include  => [:user => :pic], 
             :order    => 'assets.created_at DESC', 
             :limit    => pager.per_page, 
@@ -90,7 +85,7 @@ class User
         end
 
       else # last_seen
-        self.recently_seen.paginate(:all, :page => params[:page], :per_page => 15)
+        self.recently_seen.paginate(:page => params[:page], :per_page => 15)
     end
   end
 
