@@ -1,4 +1,4 @@
-<% cache(cache_digest(@playlists)) do %>
+<%= cache(cache_digest(@playlists)) do %>
 
 <div id="playlists_carousel">
   <%= link_to image_tag('buttons/prev.png'), '', :class => 'prev disabled' if @playlists.size > 4 %>

@@ -45,7 +45,9 @@
 		  <%= check_for_and_display_welcome_back %>
 		  <%= check_for_and_display_flashes %>
       <div id="main">
-		      <%= yield(:pages) or yield(:forums) or yield %>
+		      <%= yield :pages %>
+          <%= yield :forums %>
+          <%= yield %>
       </div>
       <div id="static">
           <%= yield :static %>
