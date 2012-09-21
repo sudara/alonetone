@@ -920,10 +920,7 @@ jQuery(function($) {
   $('.comment .comment_form form').attach(CommentForm);
   $('.update .comment_form form').attach(CommentForm);
   $('.feature .comment_form form').attach(CommentForm);
-  
-  // facebox  
-  $('a[rel*=facebox]').facebox();
-  
+    
   // mass editing (ajax)
   $('#mass_edit .edit_track form').attach(EditForm);
   

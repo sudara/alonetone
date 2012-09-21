@@ -24,7 +24,7 @@ class Pic < ActiveRecord::Base
       :album  => "200x200#", 
       :original => "400x400#"
     },
-    :path => "/pics/:id/:filename.:style:extension"
+    :path => "/pics/:id/:basename_:style.:extension"
   }
   validates_attachment_size :pic, :less_than => 3.megabytes, :greater_than => 100.bytes
   validates_attachment_content_type :mp3, :content_type => /image/
