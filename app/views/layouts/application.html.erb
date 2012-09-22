@@ -3,9 +3,8 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title || 'alonetone, a damn fine home for musicians' %></title>
     
-    <%= stylesheet_link_tag 'application' %>
-    
-    <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="/stylesheets/ipad.css" type="text/css" />
+    <%= stylesheet_link_tag 'application' %>    
+    <%= stylesheet_link_tag 'ipad', :media => "only screen and (max-device-width: 1024px)"%>
     
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
 		
