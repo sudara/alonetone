@@ -23,10 +23,13 @@
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
-
-    <script type="text/javascript" src="http://use.typekit.com/rwq4zcv.js"></script>
+    
+    <% if Alonetone.typekit %>
+    <script type="text/javascript" src="http://use.typekit.com/<%= Alonetone.typekit %>.js"></script>
 	  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <!-- ensure token is available to javascript for accessible link posts, etc -->
+    <% end %>
+  
+    <!-- render user specific variables and js helpers -->
     <%= render :partial => 'shared/javascript_payload' %>
   
   </head>
