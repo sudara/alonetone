@@ -8,7 +8,7 @@
   height: 32px;
   position: relative;
   text-align: right;
-  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-family: $header_font, Helvetica, Arial;
   em, a, span, a:visited {
     display: block;
     float: left;
@@ -17,7 +17,7 @@
     font-size: 12px;
     padding: 10px 10px;
     color: $text_color;
-    font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+    font-family: $header_font, Helvetica, Arial;
   }
   em, a:hover, span.current {
     background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
@@ -211,7 +211,7 @@
       margin-left: 10px;
       color: white;
       text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
-      font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+      font-family: $header_font, Helvetica, Arial;
       text-align: center;
       background-color: transparent;
       font-size: 13px;
@@ -457,7 +457,7 @@
   height: 83px;
   width: 100%;
   margin-bottom: 40px;
-  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-family: $header_font, Helvetica, Arial;
   font-weight: 500;
   #alonetoner {
     position: absolute;
@@ -509,7 +509,7 @@
         font-size: 14px;
         padding: 0 15px;
         color: $text_color;
-        font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+        font-family: $header_font, Helvetica, Arial;
         font-weight: 400;
         background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
       }

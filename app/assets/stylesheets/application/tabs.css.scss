@@ -26,7 +26,7 @@ div.tabs {
     // be nice to Opera
     min-width: 100px;
     display: block;
-    font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+    font-family: $header_font, Helvetica, Arial;
     font-size: 15px;
     height: 35px;
     padding: 0 30px;

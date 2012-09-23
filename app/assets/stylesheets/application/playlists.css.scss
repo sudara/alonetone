@@ -52,7 +52,7 @@ li.small_playlists {
   margin-bottom: 100px;
   a.small_playlist_title {
     text-align: center;
-    font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+    font-family: $header_font, Helvetica, Arial;
     font-size: 13px;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;

@@ -83,7 +83,7 @@
       bottom: 9px;
       font-size: 12px;
       opacity: 0.5;
-      font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+      font-family: $header_font, Helvetica, Arial;
     }
     span.listen_count {
       color: $orange;

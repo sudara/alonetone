@@ -88,7 +88,7 @@ h1 {
   font-weight: 600;
   text-shadow: rgba(3, 0, 0, 0.42) 2px 2px 1px;
   margin-bottom: 25px;
-  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-family: $header_font, Helvetica, Arial;
   &.user, &.static, &.notice {
     color: $text_color;
     text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
@@ -98,7 +98,7 @@ h1 {
 
 h2 {
   color: $white;
-  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-family: $header_font, Helvetica, Arial;
   font-size: 20px;
   font-weight: 500;
   line-height: 2em;
@@ -107,7 +107,7 @@ h2 {
 }
 
 h2.box {
-  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-family: $header_font, Helvetica, Arial;
   display: block;
   color: $text_color;
   height: 42px;
@@ -210,7 +210,7 @@ div.flash {
   background: image-url('backgrounds/flash.png') repeat-x top left;
   background-color: $orange_background;
   border-bottom: 1px solid #eb954b;
-  font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+  font-family: $header_font, Helvetica, Arial;
   font-size: 24px;
   color: $white;
   padding: 20px 30px;
@@ -236,7 +236,7 @@ a.arrows, a.view_all, a.view_more_no_float {
     position: relative;
     float: right;
     padding-left: 13px;
-    font-family: "ronnia-1", "ronnia-2", Helvetica, Arial;
+    font-family: $header_font, Helvetica, Arial;
     font-weight: 800;
     font-size: 16px;
     line-height: 31px;
