@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MakePicsPolymorphic < ActiveRecord::Migration
   def self.up
     add_column :pics, :picable_type, :string

@@ -1,6 +1,7 @@
+# -*- encoding : utf-8 -*-
 class FeaturesController < ApplicationController
   
-  before_filter :login_required,  :only => [:new, :create, :edit, :update, :delete]
+  before_filter :require_login,  :only => [:new, :create, :edit, :update, :delete]
   before_filter :find_feature,    :only => [:update, :delete, :edit]
   # GET /features
   # GET /features.xml

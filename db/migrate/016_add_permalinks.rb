@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPermalinks < ActiveRecord::Migration
   def self.up
     add_column :playlists, :permalink, :string

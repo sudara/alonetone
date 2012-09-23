@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPerishableTokenForAuthlogic < ActiveRecord::Migration
   def up
     # activation stuff now handled by authlogic

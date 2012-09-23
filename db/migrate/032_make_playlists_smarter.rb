@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MakePlaylistsSmarter < ActiveRecord::Migration
   def self.up
     add_column :playlists, :is_mix, :boolean

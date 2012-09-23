@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # FLASH STUFF
 FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
 

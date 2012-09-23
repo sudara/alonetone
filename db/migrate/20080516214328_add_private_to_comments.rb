@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPrivateToComments < ActiveRecord::Migration
   def self.up
     add_column :comments, :private, :boolean, :default => false

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SearchController < ApplicationController
   before_filter :deliver_results
   

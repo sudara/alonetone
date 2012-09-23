@@ -1,5 +1,6 @@
+# -*- encoding : utf-8 -*-
 class SourceFilesController < ApplicationController
-  before_filter :login_required, :except => [:show]
+  before_filter :require_login, :except => [:show]
   before_filter :find_user, :only => [:show, :index, :destroy]
   # GET /source_files
   # GET /source_files.xml

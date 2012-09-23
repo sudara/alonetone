@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class User
   
   # has a bunch of prefs

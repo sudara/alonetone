@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Wow, ugliest 3rd party lib ever.
 # Can't complain too much though, yay for free charts!
 # cleaned up a bit...

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddListensPerDayToAsset < ActiveRecord::Migration
   def self.up
     add_column :assets, :listens_per_day, :float, :default => 0

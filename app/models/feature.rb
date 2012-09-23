@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Feature < ActiveRecord::Base
 
   scope :published, where(:published => true).order('created_at DESC')

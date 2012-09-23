@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateFeaturedTracks < ActiveRecord::Migration
   def self.up
     create_table :featured_tracks do |t|

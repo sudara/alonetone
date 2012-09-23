@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class CommentsController < ApplicationController
   
   before_filter :find_user
   before_filter :find_comment, :only => [:destroy, :unspam]
-  before_filter :login_required, :only => [:destroy, :unspam]
+  before_filter :require_login, :only => [:destroy, :unspam]
   
   def create
     if request.xhr? 

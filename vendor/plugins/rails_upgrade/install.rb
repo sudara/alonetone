@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 puts "Thanks for installing the Rails upgrade plugin.  This is a set of generators and analysis tools to help you upgrade your application to Rails 3.  It consists of three tasks...
 
 To get a feel for what you'll need to change to get your app running, run the application analysis:

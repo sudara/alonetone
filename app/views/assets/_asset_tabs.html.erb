@@ -1,9 +1,9 @@
 <%= cache( logged_in? ? "tabs#{asset.cache_key}" : "guest_tabs#{asset.cache_key}" ) do %>
 <div class="more tabs" style="display:none;">
     <ul>
-			<% if logged_in? || asset.guest_can_comment? %>
-	      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
-			<% end %>
+	  <% if logged_in? || asset.guest_can_comment? %>
+      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
+	  <% end %>
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
       <li><%= link_to 'more', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
@@ -22,8 +22,8 @@
             </div>
             <div class="description">
                 <div class='min_height_50'>
-                  <h3><%=h asset.name %></h3>
-                  <%= awesome_truncate((asset.description), 260, 
+                  <h3><%= asset.name %></h3>
+                  <%= awesome_truncate((markdown(asset.description)), 260, 
                     ('... '+link_to('(more)',user_track_path(asset.user, asset.permalink)))) %>
                 </div>
             	  
@@ -52,7 +52,7 @@
     	        </div>
     	          
       	     <%= link_to "View more", user_track_path(asset.user, asset.permalink), 
-      	        :class => 'view_more', :title => "#{h(asset.name)} by #{h(asset.user.name)}" unless @single_track %>
+      	        :class => 'view_more', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
             </div>
         </div>
     </div>

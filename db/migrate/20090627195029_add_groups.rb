@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddGroups < ActiveRecord::Migration
   def self.up
   end

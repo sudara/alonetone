@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Forum < ActiveRecord::Base
   scope :ordered, order('position ASC')
   

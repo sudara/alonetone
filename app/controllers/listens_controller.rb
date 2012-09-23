@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ListensController < ApplicationController
   
   before_filter :find_user

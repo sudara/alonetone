@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FeaturedTrack < ActiveRecord::Base
   
   belongs_to :feature

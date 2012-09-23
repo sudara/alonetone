@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Rails
   module Upgrading
     class GemfileGenerator

@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class PlaylistsController < ApplicationController
   
   before_filter :find_user
   before_filter :find_playlists, :except => [:index, :new, :create, :sort]
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
 
   before_filter :find_tracks, :only => [:show, :edit]
   

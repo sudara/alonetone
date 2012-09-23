@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class User
   
   def self.currently_online

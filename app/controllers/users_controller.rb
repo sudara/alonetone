@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   
   before_filter :find_user,      :except => [:new, :create]
   
-  before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
+  before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   skip_before_filter :login_by_token, :only => :sudo
   
   rescue_from NoMethodError, :with => :user_not_found

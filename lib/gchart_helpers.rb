@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module GchartHelpers
   def self.zero_half_max(max=0)
     max = max.to_i

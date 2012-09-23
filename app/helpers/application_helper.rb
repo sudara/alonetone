@@ -1,4 +1,5 @@
-# Methods added to this helper will be available to all templates in the application.
+# -*- encoding : utf-8 -*-
+require 'ruby_pants'
 module ApplicationHelper
   
   @@listen_sources = %w(itunes home download facebook)
@@ -58,6 +59,15 @@ module ApplicationHelper
     l = length - truncate_string.mb_chars.length
     text.mb_chars.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
   end
+
+
+  def markdown(text)
+    return "" unless text
+    @renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+      :hard_wrap => true, :autolink => true, :no_intraemphasis => true) unless @renderer
+    Redcarpet::Render::SmartyPants.render(@renderer.render(text)).html_safe
+  end
+
 
   def link_to_play(asset, referer=nil)
     link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'

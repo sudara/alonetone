@@ -1,6 +1,7 @@
+# -*- encoding : utf-8 -*-
 class ForumsController < ApplicationController
   
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
   before_filter :find_user, :only => :index
   before_filter :set_forum_tab
 

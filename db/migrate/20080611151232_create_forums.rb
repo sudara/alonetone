@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateForums < ActiveRecord::Migration
   def self.up
     create_table "forums", :force => true do |t|

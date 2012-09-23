@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FleshOutTrack < ActiveRecord::Migration
   def self.up
     add_column :assets, :description, :string

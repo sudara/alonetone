@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TweakPlaylists < ActiveRecord::Migration
   def self.up
     Playlist.find_all_by_description('').each do |playlist|

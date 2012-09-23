@@ -1,6 +1,7 @@
+# -*- encoding : utf-8 -*-
 class GroupsController < ApplicationController
   
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
   
   
   

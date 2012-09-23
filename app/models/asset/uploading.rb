@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Asset 
   include Paperclip
   ##has_attachment  :storage => Alonetone.storage, 

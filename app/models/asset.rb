@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics

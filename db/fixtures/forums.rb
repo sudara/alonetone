@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Forum.delete_all
 Topic.delete_all
 Post.delete_all

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Wonderful code cleanliness helper care of Rick. Needs update for rails 3?
 class << ActiveRecord::Base
   def concerned_with(*concerns)

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class User
   # Validations
   validates_length_of       :display_name, :within => 3..50, :allow_blank => true

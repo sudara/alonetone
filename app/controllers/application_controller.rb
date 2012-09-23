@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base  
   helper :all # all helpers, all the time
 
@@ -98,14 +99,9 @@ class ApplicationController < ActionController::Base
     @playlist = @user.playlists.find_by_permalink(params[:permalink] || params[:id], :include =>[:tracks => :asset])
     @playlist = @user.playlists.find(params[:id], :include =>[:tracks => :asset]) if !@playlist && params[:id] 
   end
-  
-  def authorized?
-    # by default, users can hit every action if it involves their user, and it's not about deleting things.
-    admin_or_owner
-  end
-  
-  # authentication tricks
 
+
+  # authentication tricks
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -120,16 +116,39 @@ class ApplicationController < ActionController::Base
     current_user
   end
   
-  def moderator?
-    logged_in? && current_user.moderator?
-  end
-  
   def moderator_required
-    login_required && current_user.moderator?
+    require_login && current_user.moderator?
   end
   
-  def admin_required
-    login_required && admin?
+  def require_login
+    force_login unless logged_in? and authorized?
+  end
+    
+  def admin_only
+    force_admin_login unless admin?
+  end
+  
+  def moderator_only
+    force_mod_login unless moderator?
+  end
+  
+  def force_login
+    store_location
+    redirect_to login_path, :alert => "Whups, you need to login for that!"
+  end
+  
+  def force_mod_login
+    store_location
+    redirect_to login_path, :alert => "Super special secret area. Alonetone Elite Only."
+  end
+  
+  def force_admin_login
+    store_location
+    redirect_to login_path, :alert => "What do you think you’re doing?! We're calling your mother..."
+  end
+  
+  def store_location
+    session[:return_to] = request.url unless request.xhr?
   end
   
   def admin_or_owner(record=current_user)

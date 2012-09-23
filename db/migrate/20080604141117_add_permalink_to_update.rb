@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPermalinkToUpdate < ActiveRecord::Migration
   def self.up
     add_column :updates, :permalink, :string   

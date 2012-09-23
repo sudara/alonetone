@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PimpUpUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :playlists_count, :integer, :default => 0

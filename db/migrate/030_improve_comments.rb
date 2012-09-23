@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ImproveComments < ActiveRecord::Migration
   def self.up
     remove_column :comments, :owner_id

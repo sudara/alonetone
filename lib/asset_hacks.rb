@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
   # require 'aws/s3'
 
   # # Adds expiration headers to all stored S3 objects through duck-punching.

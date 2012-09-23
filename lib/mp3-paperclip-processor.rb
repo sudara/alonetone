@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'mp3info'
 require "paperclip"
 module Paperclip

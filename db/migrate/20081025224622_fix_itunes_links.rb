@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FixItunesLinks < ActiveRecord::Migration
   def self.up
     old_link = 'phobos.apple.com/webobjects/mzstore.woa/wa/viewpodcast'

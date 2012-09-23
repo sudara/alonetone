@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AssetNotification < ActionMailer::Base
   
 

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddExceptionTable < ActiveRecord::Migration
   def self.up
     create_table "logged_exceptions", :force => true do |t|

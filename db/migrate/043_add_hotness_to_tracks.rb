@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddHotnessToTracks < ActiveRecord::Migration
   def self.up
     add_column :assets, :hotness, :float

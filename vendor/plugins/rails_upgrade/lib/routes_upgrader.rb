@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # TODO: Fix formatting on member/collection methods
 
 module Rails

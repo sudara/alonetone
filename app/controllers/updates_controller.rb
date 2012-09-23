@@ -1,6 +1,7 @@
+# -*- encoding : utf-8 -*-
 # Yup, this is the blog controller 
 class UpdatesController < ApplicationController
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
   before_filter :gather_sidebar_fun, :except => [:destroy, :update]
     
   # GET /updates

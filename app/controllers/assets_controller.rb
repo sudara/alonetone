@@ -1,10 +1,11 @@
+# -*- encoding : utf-8 -*-
 
 class AssetsController < ApplicationController  
   before_filter :find_user, :except => [:radio]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
   
   # we check to see if the current_user is authorized based on the asset.user
-  before_filter :login_required, :except => [:index, :show, :latest, :radio, :listen_feed]
+  before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
   before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
   
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download

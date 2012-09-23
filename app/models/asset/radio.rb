@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Asset
   
   def self.radio(channel, params, user)

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddFieldsToAsset < ActiveRecord::Migration
   def self.up
     add_column :assets, :length, :integer

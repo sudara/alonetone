@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddBrowserToUser < ActiveRecord::Migration
   def self.up
     add_column :users, :browser, :string, :default => nil

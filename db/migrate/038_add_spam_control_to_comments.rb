@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddSpamControlToComments < ActiveRecord::Migration
   def self.up
     add_column :comments, :remote_ip, :string

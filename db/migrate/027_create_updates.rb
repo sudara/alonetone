@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateUpdates < ActiveRecord::Migration
   def self.up
     create_table :updates do |t|

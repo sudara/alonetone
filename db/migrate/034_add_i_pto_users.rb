@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIPtoUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :ip, :string

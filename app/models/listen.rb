@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Listen < ActiveRecord::Base
   
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time

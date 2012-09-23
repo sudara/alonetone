@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # OH SO FUN HELPERS!  
 
 # RANDOMLY EXECUTES A BLOCK X percent OF THE TIME
