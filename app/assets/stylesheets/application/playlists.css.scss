@@ -26,13 +26,13 @@ a.next, a.prev {
     position: absolute;
     left: 0;
     top: 45px;
-    background-image: url(../images/buttons/prev.png);
+    background-image: image-url('buttons/prev.png');
   }
   .next {
     position: absolute;
     right: 0;
     top: 45px;
-    background-image: url(../images/buttons/next.png);
+    background-image: image-url('buttons/next.png');
   }
 }
 
@@ -78,7 +78,7 @@ a.jewel_case_50 {
   text-indent: -9999px;
   width: 59px;
   height: 54px;
-  background-image: url(../images/jewel-case-50.png);
+  background-image: image-url('jewel-case-50.png');
 }
 
 img.cover_50 {
@@ -96,7 +96,7 @@ a.jewel_case_125 {
   text-indent: -9999px;
   width: 146px;
   height: 136px;
-  background-image: url(../images/jewel-case-125.png);
+  background-image: image-url('jewel-case-125.png');
 }
 
 img.cover_125 {
@@ -124,7 +124,7 @@ img.cover_200 {
 
 .playlist {
   div.box {
-    background-image: url(../images/backgrounds/tracks.png);
+    background-image: image-url('backgrounds/tracks.png');
     background-color: #e1e2e1;
     padding-left: 25px;
     padding-top: 9px;
@@ -148,7 +148,7 @@ img.cover_200 {
   div.info {
     position: relative;
     display: block;
-    background: url(../images/backgrounds/album.png) repeat-x top left;
+    background: image-url('images/backgrounds/album.png') repeat-x top left;
     background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
     div.cover {
@@ -170,7 +170,7 @@ img.cover_200 {
   .empty {
     position: relative;
     color: $white;
-    background: url(../images/backgrounds/flash.png) repeat-x top left;
+    background: image-url('backgrounds/flash.png') repeat-x top left;
     padding: 15px;
     margin-bottom: 1px;
     a {
