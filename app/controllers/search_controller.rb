@@ -5,7 +5,6 @@ class SearchController < ApplicationController
     respond_to do |wants| 
       wants.html
       wants.js
-      wants.fbml
     end
   end
   
