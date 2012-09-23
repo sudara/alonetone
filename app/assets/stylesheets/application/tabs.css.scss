@@ -25,11 +25,13 @@ div.tabs {
     margin: 0;
     // be nice to Opera
     min-width: 100px;
+  }
+  a{
     display: block;
-    font-family: $header_font, Helvetica, Arial;
+    font-family: $header_font;
     font-size: 15px;
     height: 35px;
-    padding: 0 30px;
+    padding: 0 25px;
     background: image-url('backgrounds/tabs.png') no-repeat left top;
     // position relative makes opacity fail for disabled tab in IE
     color: $white;
