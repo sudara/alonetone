@@ -1,5 +1,4 @@
-<% javascript_tag do %>
-  window.authenticityToken = '<%= form_authenticity_token %>'; 
+<%= javascript_tag do %>
   window.username = '<%= logged_in? ? current_user.login : "Guest" %>'; 
   window.userIsAdmin = <%= moderator? ? true : false %>;
   window.userFavorites = <%= (logged_in? ? current_user.favorite_asset_ids : [] ).to_json %>;
