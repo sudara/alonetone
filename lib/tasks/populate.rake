@@ -7,13 +7,13 @@ namespace :db do
     puts "Populating data"
 
     # load .yml files
-    Dir[File.join(RAILS_ROOT, 'db', 'fixtures', '*.yml')].sort.each { |fixture| 
+    Dir[File.join(Rails.root, 'db', 'fixtures', '*.yml')].sort.each { |fixture| 
       puts "Loading #{fixture}"
       Fixtures.create_fixtures('db/fixtures', File.basename(fixture, '.*'))
     }
     
     # load .rb files
-    Dir[File.join(RAILS_ROOT, 'db', 'fixtures', '*.rb')].sort.each { |fixture| 
+    Dir[File.join(Rails.root, 'db', 'fixtures', '*.rb')].sort.each { |fixture| 
       puts "Loading #{fixture}"
       load fixture
     }
