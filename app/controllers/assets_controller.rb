@@ -16,30 +16,30 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.xml
   def index
-      @page_title = "All music by " + @user.name 
+    @page_title = "All music by " + @user.name 
 
-      @assets = @user.assets.paginate(:all, 
-        :order    => 'created_at DESC', 
-        :per_page => 200, 
-        :page     => params[:page]
-      ) unless request.format.to_sym == :json
+    @assets = @user.assets.paginate(:all, 
+      :order    => 'created_at DESC', 
+      :per_page => 200, 
+      :page     => params[:page]
+    ) unless request.format.to_sym == :json
 
-      respond_to do |format|
-        format.html # index.rhtml
-        format.xml  { render :xml => @assets.to_xml }
-        format.rss  { render :xml => @assets.to_xml }
-        format.js do  render :update do |page| 
-            page.replace 'stash', :partial => "assets"
-          end
-        end
-        format.json do
-          @assets = @user.assets.find(:all, :order => 'created_at DESC')          
-          cached_json = cache("tracksby"+@user.login+@user.assets.find(:first, :order => 'created_at DESC').created_at.to_s(:db).gsub(/-|:|\s/,'')) do
-            '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
-          end
-          render :json => cached_json
+    respond_to do |format|
+      format.html # index.rhtml
+      format.xml  { render :xml => @assets.to_xml }
+      format.rss  { render :xml => @assets.to_xml }
+      format.js do  render :update do |page| 
+          page.replace 'stash', :partial => "assets"
         end
       end
+      format.json do
+        @assets = @user.assets.find(:all, :order => 'created_at DESC')          
+        cached_json = cache("tracksby"+@user.login+@user.assets.find(:first, :order => 'created_at DESC').created_at.to_s(:db).gsub(/-|:|\s/,'')) do
+          '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
+        end
+        render :json => cached_json
+      end
+    end
   end
 
   def show

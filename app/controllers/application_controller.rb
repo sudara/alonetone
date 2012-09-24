@@ -116,8 +116,16 @@ class ApplicationController < ActionController::Base
     current_user
   end
   
+  def admin?
+    logged_in? && current_subscriber.admin?
+  end
+  
+  def moderator?
+    logged_in? && (current_subscriber.moderator? || current_subscriber.admin?)
+  end
+  
   def moderator_required
-    require_login && current_user.moderator?
+    require_login && moderator?
   end
   
   def require_login
@@ -203,12 +211,7 @@ class ApplicationController < ActionController::Base
     url = login_url if !url
     url
   end
-  # Store the URI of the current request in the session.
-  #
-  # We can return to this location by calling #redirect_back_or_default.
-  def store_location
-    session[:return_to] = request.request_uri
-  end
+
     
   def redirect_to_default
     redirect_to(session[:return_to] || default_url)

@@ -34,9 +34,6 @@ class UsersController < ApplicationController
         end
         render :json => cached_json
       end
-     # format.fbml do
-     #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])
-     # end
     end
   end
 
@@ -62,9 +59,6 @@ class UsersController < ApplicationController
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC', :limit => (params[:limit] || 10))}
       format.rss { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
-      format.fbml do
-        @assets = @user.assets.find(:all)
-      end
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end

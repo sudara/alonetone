@@ -1,4 +1,4 @@
-<% form_tag sessions_path do -%>
+<%= form_tag user_sessions_path do -%>
 <p>
   <label for="login"><%= 'Login' %></label><br />
   <%= text_field_tag :login, params[:login] %>
@@ -10,12 +10,11 @@
   <%= password_field_tag :password %>
 </p>
 
-<%= hidden_field_tag "remember_me", "1" %>
 </div>
 
 <p><%= submit_tag 'Login'%></p>
 <% end -%>
-<%= link_to "Forgot Your Password?", "#reset-password", :class => "slide_open_href"%>
+<%= link_to "Forgot Your Password?", "#reset-password", :class => "slide_open_href" %>
 
 <% form_tag users_path, :id => 'reset-password', :style => 'display:none' do -%>
     <label for="email"><%= 'Enter the email address you signed up with' %></label><br />

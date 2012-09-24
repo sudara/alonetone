@@ -82,7 +82,7 @@ Alonetone::Application.routes.draw do
   end
 
 
-  resources :users do
+  resources :users, :path_prefix => ":login" do
     member do
       post :attach_pic
       get :sudo
