@@ -37,6 +37,7 @@ gem 'hpricot' # for comment processing / markdown fixing
 gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 
 group :assets do
+  gem "jquery-rails"
   gem "sass-rails"
   gem "compass-rails"
   gem 'yui-compressor'
@@ -46,7 +47,9 @@ end
 
 group :development do
   # bundler requires these gems in development
-  # gem "rails-footnotes"
+  gem "rails-footnotes"
+  gem 'quiet_assets'
+  gem 'thin'
 end
 
 ## Who loves tests! You do? You do!

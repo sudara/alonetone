@@ -38,18 +38,7 @@ Alonetone::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
-  # Paperclip defaults
-  config.paperclip_defaults = {
-    :convert_options => { :all => '-strip -colorspace RGB'},
-    :storage => Alonetone.storage,
-    :s3_credentials => {
-      :access_key_id => Alonetone.amazon_id,
-      :secret_access_key => Alonetone.amazon_key
-    },
-    :bucket => Alonetone.bucket,
-    :s3_protocol => 'http',
-    :default_url => nil,
-    :s3_headers => { 'Expires' => 3.years.from_now.httpdate, 
-      'Content-disposition' => 'attachment;'}
-  }
+  # SSSShhhh!!!! Assets shuddup!
+  config.assets.logger = nil
+  
 end

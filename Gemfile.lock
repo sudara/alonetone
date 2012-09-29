@@ -79,11 +79,13 @@ GEM
     compass-rails (1.0.0.rc.2)
       compass (~> 0.12.rc.0)
     country-select (1.1.1)
+    daemons (1.1.8)
     database_cleaner (0.8.0)
     defensio (0.9.1)
       httparty (>= 0.5.0)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.0.0)
@@ -112,6 +114,9 @@ GEM
       multi_xml
     i18n (0.6.0)
     journey (1.0.4)
+    jquery-rails (2.1.2)
+      railties (>= 3.1.0, < 5.0)
+      thor (~> 0.14)
     json (1.7.4)
     kgio (2.7.4)
     libwebsocket (0.1.5)
@@ -138,6 +143,8 @@ GEM
       cocaine (>= 0.0.2)
       mime-types
     polyglot (0.3.3)
+    quiet_assets (1.0.1)
+      railties (~> 3.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -153,6 +160,8 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
+    rails-footnotes (3.7.8)
+      rails (>= 3.0.0)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -200,6 +209,10 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -242,18 +255,22 @@ DEPENDENCIES
   haml
   has_permalink
   hpricot
+  jquery-rails
   mime-types
   mysql2
   newrelic_rpm
   nokogiri
   paperclip
+  quiet_assets
   rails (= 3.2.8)
+  rails-footnotes
   redcarpet
   reportable!
   rspec-rails
   ruby-mp3info (~> 0.7.1)
   sass-rails
   spork
+  thin
   uglifier
   unicorn
   will_paginate

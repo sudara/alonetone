@@ -1,21 +1,14 @@
 # -*- encoding : utf-8 -*-
 class Asset 
   include Paperclip
-  ##has_attachment  :storage => Alonetone.storage, 
-  #                :processor => :mp3info,
-  #                # Don't know why can't upload mp3 files (zip files are passed)
-  #                # so remove content_type for development and test environments
-  #                :content_type => ['audio/mpeg','application/zip'],
-  #                :max_size => 60.megabytes,
-  #                :path_prefix => File.join(Alonetone.path_prefix, "mp3")
-  #                  
-  #validates_as_attachment
 
-  # see environment files for defaults
-  has_attached_file :mp3, {
+  # see config/initializers for defaults
+  attachment_options = {
     :styles => {:original => [:processors => :mp3_paperclip_processor]},
-    :path => "/mp3/:id/:filename.:extension"
-  }
+  }  
+  has_attached_file :mp3, attachment_options
+  attachment_options[:path] = "/mp3/:id/:basename_:style.:extension" if Alonetone.storage == "s3"
+  
   validates_attachment_size :mp3, :less_than => 60.megabytes
   validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'
   validates_attachment_content_type :mp3, :content_type => ['audio/mpeg'], :message => " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"

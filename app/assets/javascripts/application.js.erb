@@ -1,6 +1,6 @@
-//= require jquery-1.8.1
+//= require jquery
 //= require jquery-ui-1.8.23
-
+//= require jquery_ujs
 //= require soundmanager20110306/soundmanager2
 //= require utilities 
 //= require jquery-carousel
@@ -14,11 +14,11 @@
 
 var soundIsReady = true;
 
-soundManager.debugMode = false;
+soundManager.debugMode = true;
 soundManager.flashVersion = 9;
 soundManager.useHTML5Audio = true; /* for acl, baby */
 soundManager.consoleOnly = true;
-soundManager.url= '/javascripts/soundmanager20110306';
+soundManager.url = '<%= asset_path('soundmanager20110306/soundmanager2_flash9.swf')%>';
 
 
 // we want regular access to the auth token
