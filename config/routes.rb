@@ -81,8 +81,24 @@ Alonetone::Application.routes.draw do
     end
   end
 
+  
+  match 'toggle_favorite' => 'users#toggle_favorite'
+  
+  match 'search' => 'search#index'
+  match 'search/:query' => 'search#index', :as => 'search_query'
 
-  resources :users, :path_prefix => ":login" do
+  namespace :admin do
+    resources :layouts
+    resources :users
+  end
+  
+  
+  root :to => 'assets#latest' 
+  
+  match ':login' => 'users#show', :as => "user_home"
+  match ':login.:format' => 'users#show', :as => "user_feeds"
+  
+  resources :users, :path => "" do
     member do
       post :attach_pic
       get :sudo
@@ -121,21 +137,4 @@ Alonetone::Application.routes.draw do
       resources :comments
     end
    end
-  
-  match 'toggle_favorite' => 'users#toggle_favorite'
-  
-  match 'search' => 'search#index'
-  match 'search/:query' => 'search#index', :as => 'search_query'
-
-  namespace :admin do
-    resources :layouts
-    resources :users
-  end
-  
-  
-  root :to => 'assets#latest' 
-  
-  match ':login' => 'users#show', :as => "user_home"
-  match ':login.:format' => 'users#show', :as => "user_feeds"
-  
 end
