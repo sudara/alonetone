@@ -5,16 +5,16 @@ development: &defaults
   url: yourapp.com
   email: support@yourapp.com
   secret: yourappsecret
-  storage: s3
-  bucket: mp3.yourapp.com
-  amazon_id: s3id12341234 
-  amazon_key: s3key12341234
+  storage: local
+  bucket: 
+  amazon_id: 
+  amazon_key: 
   campfire_url: nil
   video_size: width="370" height="308"
   enable_defensio: false
-  ga: YOUR-GOOGLE-ANAYTICS-ID
-  get_clicky: getclickyid
-  typekit: typekitid
+  ga: 
+  get_clicky: 
+  typekit: 
 
 test:
   <<: *defaults
