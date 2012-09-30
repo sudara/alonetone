@@ -6,8 +6,8 @@ class Asset
   attachment_options = {
     :styles => {:original => [:processors => :mp3_paperclip_processor]},
   }  
+  attachment_options[:path] = "/mp3/:id/:basename.:extension" if Alonetone.storage == "s3"
   has_attached_file :mp3, attachment_options
-  attachment_options[:path] = "/mp3/:id/:basename_:style.:extension" if Alonetone.storage == "s3"
   
   validates_attachment_size :mp3, :less_than => 60.megabytes
   validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'
@@ -15,7 +15,9 @@ class Asset
   
   
  # Disable zip uploads for now, make life easier transitioning to paperclip
- # 
+ # Plus this should go bye-bye into a model
+ 
+ 
  # def self.extract_mp3s(zip_file, &block)
  #   # try to open the zip file
  #   Zip::ZipFile.open(zip_file.path) do |z|

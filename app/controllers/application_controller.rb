@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper :all # all helpers, all the time
 
   @@bad_ip_ranges = ['195.239', '220.181', '61.135', '60.28.232', '121.14', '221.194','117.41.183',
-                     '117.41.184','60.169.78','222.186','61.160.232','22.186.24.','127.0.0.1']
+                     '117.41.184','60.169.78','222.186','61.160.232','22.186.24.']
 
   protect_from_forgery
     

@@ -8,9 +8,12 @@ class AssetsController < ApplicationController
   before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
   before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
   
+  # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple']
-  @@bots = ['bot','spider','baidu']
+  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook']
+ 
+  # user agent black list
+  @@bots = ['bot','spider','baidu','mp3bot'] 
   
   
   # GET /assets
@@ -57,7 +60,7 @@ class AssetsController < ApplicationController
 
       format.mp3 do
         register_listen
-        redirect_to @asset.public_mp3
+        redirect_to @asset.mp3.url
       end
     end
   end
@@ -69,7 +72,7 @@ class AssetsController < ApplicationController
         pos = 1 unless pos && pos.to_i < 25
         @asset = Asset.find(:all, :limit => pos, :order => 'hotness DESC').last
         register_listen
-        redirect_to @asset.public_mp3
+        redirect_to @asset.mp3.url
       end
     end
   end
@@ -183,11 +186,11 @@ class AssetsController < ApplicationController
       # the rescue in the Asset model will hand the file back
       # Butt ugly, my friends. 
       if !asset.new_record? 
-        flashes += "#{CGI.escapeHTML asset.filename} uploaded!<br/>"
+        flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
         good = true
       else
         errors = asset.errors.collect{|attr, msg| msg }
-        flashes  += "'#{CGI.escapeHTML asset.filename}' failed to upload: <br/>#{errors}<br/>"
+        flashes  += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload: <br/>#{errors}<br/>"
       end
     end
 
@@ -287,14 +290,18 @@ class AssetsController < ApplicationController
       :source       => @referer, 
       :user_agent   => @agent,
       :ip           => request.remote_ip
-    ) unless bot?
+    ) unless is_a_bot?
   end
   
-  def bot?
-    ip = request.remote_ip
+  def is_a_bot?
+    # gotta have a user agent
     return true unless request.user_agent.present?
-    return true if @@bad_ip_ranges.any?{|cloaked_ip| ip.match /^#{cloaked_ip}/  } # check bad ips that fake user agent
-    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent} # check user agent agaisnt both white and black lists
+    
+    # can't be a blacklisted ip
+    return true if @@bad_ip_ranges.any?{|cloaked_ip| request.remote_ip.match /^#{cloaked_ip}/  }  
+    
+    # check user agent agaisnt both white and black lists
+    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent}  
   end
   
   def browser?
@@ -306,13 +313,9 @@ class AssetsController < ApplicationController
   end
   
   def prevent_abuse
-    if bot? 
-      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.filename} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
+    if is_a_bot?
+      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.mp3_file_name} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
       render(:text => "Denied due to abuse", :status => 403)    
     end
-  end
-  
-  def abuser?
-    request.user_agent and request.user_agent.include? 'mp3bot'
   end
 end

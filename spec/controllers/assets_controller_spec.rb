@@ -26,7 +26,7 @@ describe AssetsController do
   it 'should accept a mp3 extension and redirect to the amazon url' do
     request.env["HTTP_ACCEPT"] = "audio/mpeg" 
     get :show, :id => 'song1', :login => users(:sudara).login, :format => 'mp3'
-    response.should redirect_to(assets(:valid_mp3).public_mp3)
+    response.should redirect_to(assets(:valid_mp3).mp3)
   end
   
   it 'should have a landing page' do

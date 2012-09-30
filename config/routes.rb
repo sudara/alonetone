@@ -108,7 +108,6 @@ Alonetone::Application.routes.draw do
     resources 'tracks', :controller => :assets do
       member do 
         get :share 
-        get :destroy
         get :stats
       end
       collection do

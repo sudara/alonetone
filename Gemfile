@@ -53,7 +53,7 @@ group :development do
 end
 
 ## Who loves tests! You do? You do!
-group :test, :development do
+group :test do
   gem "rspec-rails"
   gem "capybara"
   gem "spork"
