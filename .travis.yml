@@ -1,0 +1,4 @@
+notifications:
+  email:
+    on_success: [always|never|change] # default: change
+    on_failure: [always|never|change] # default: change
