@@ -11,12 +11,6 @@ if defined?(Bundler)
 end
 
 module Alonetone  
-  # Load up application config found in yml, make available as Alonetone.[settingname] for ease
-  # It needs to come before "class Application" to make paperclip happy
-  YAML.load_file("config/alonetone.yml")[Rails.env].each do |key, value|
-    define_singleton_method(key.to_sym) { value } # define_singleton_method is ruby 1.9 only
-  end
-  
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -66,25 +60,6 @@ module Alonetone
     
     config.assets.paths << Rails.root.join("app", "assets", "javascripts","soundmanager20110306")
     config.assets.precompile += ["soundmanager20110306/soundmananger2.js","soundmanager20110306/soundmanager2_flash9.swf"]
-    
-    # Paperclip config, depends on yml loaded above
-    config.paperclip_defaults = {
-      :convert_options => { :all => '-strip -colorspace RGB'},
-      :storage => Alonetone.storage
-    }
-
-    config.paperclip_defaults.merge!({ 
-      :s3_credentials => {
-        :access_key_id => Alonetone.amazon_id,
-        :secret_access_key => Alonetone.amazon_key
-      },
-      :bucket => Alonetone.bucket,
-      :s3_protocol => 'http',
-      :s3_host_alias => Alonetone.bucket,
-      :url => ':s3_alias_url',
-      :s3_headers => { 'Expires' => 3.years.from_now.httpdate, 
-        'Content-disposition' => 'attachment;'}
-    }) if Alonetone.storage == 's3'
-    
+   
   end
 end
