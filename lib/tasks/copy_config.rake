@@ -1,7 +1,7 @@
 require 'rake'
 
 desc "Copy application sample config for dev/test purposes"
-task :copy_sample_config do
+task :copy_config do
   if Rails.env.development? or Rails.env.test?
     
     %w[alonetone database defensio newrelic].each do |settings|
@@ -17,4 +17,4 @@ task :copy_sample_config do
 end
 
 # Run our copy config task before loading up the rails env
-task :environment, [] => :copy_sample_config
+task :environment, [] => :copy_config
