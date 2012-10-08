@@ -109,37 +109,28 @@ Second, hop into our Campfire chat room or email us at support@alonetone.com
 
 Thirdly, fork away on github.
 
-### Setting up alonetone on localhost
+### Setup alonetone on localhost
 
-This is *not* a task for Rails newbees. This is not a 'clone script' that is easy to setup on your servers. We cannot provide ANY support   so please do not email us requesting this.
+Create a database, and load the db/seeds with:
 
-Unless you have LOTS of experience with rails, you should not consider trying to set this up.
+      rake db:setup
 
-If you live and breathe rails and you want to get jiggy:
 
-alonetone uses 6 config files:
+alonetone uses 4 config files that are automagically created (see lib/tasks/) the first time you run any rake task. 
+
 
       alonetone.yml (contains the application "secret" and app-specific settings)
       database.yml
       defensio.yml (spam protection, ignored in development)
       newrelic.yml (for performance tracking)
 
-These files will be created for you the first time you run any rake task. 
-
-#### Gem installation
-
-
-We use bundler. You'll need imagemagick installed.  If you have the Bundler gem installed, you can install all of the dependencies like so:
-
-   `bundle install`
-
 
 
 #### Database setup
 
-Then, you can create a development database, run all migrations and load some bootstrap data with:
+You can create a development database, s and load some bootstrap data with:
 
-      rake db:remake
+      rake db:setup
 
 #### Logging in
 

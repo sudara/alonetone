@@ -1,4 +1,5 @@
-# Borrow & modified from spot-us project
+require 'rake'
+
 desc "Copy application sample config for dev/test purposes"
 task :copy_sample_config do
   if Rails.env.development? or Rails.env.test?
@@ -15,4 +16,5 @@ task :copy_sample_config do
   end
 end
 
-task :environment => :copy_sample_config
+# Run our copy config task before loading up the rails env
+task :environment, [] => :copy_sample_config
