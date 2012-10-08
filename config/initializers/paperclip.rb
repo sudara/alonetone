@@ -1,5 +1,5 @@
 # Paperclip config, depends on yml loaded above
-Paperclip::Attachment.default_options[:convert_options = { :all => '-strip -colorspace RGB'} ]
+Paperclip::Attachment.default_options[:convert_options] = { :all => '-strip -colorspace RGB'}
 Paperclip::Attachment.default_options[:storage] = Alonetone.storage
 
 Paperclip::Attachment.default_options.merge!({ 
