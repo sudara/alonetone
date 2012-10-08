@@ -2,7 +2,6 @@
 .bundle
 public/system/*
 db/*.sqlite3
-db/schema.rb
 log/*.log
 tmp/**/*
 vendor/bundle/**
@@ -11,8 +10,6 @@ vendor/bundle/**
 /.DS_Store
 update
 .rvmrc
-db/schema.rb
-db/schema.sql
 config/deploy.rb
 config/deploy/*
 config/alonetone.yml
