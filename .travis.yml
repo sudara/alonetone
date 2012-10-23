@@ -1,5 +1,5 @@
 before_script:
-  - mysql -e 'create database alonetone_test;
+  - mysql -e 'create database alonetone_test';
   - rake copy_config
 notifications:
   email:
