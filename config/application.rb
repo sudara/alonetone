@@ -58,8 +58,5 @@ module Alonetone
     config.assets.enabled = true
     config.assets.version = '1.0'
     
-    config.assets.paths << Rails.root.join("app", "assets", "javascripts","soundmanager20110306")
-    config.assets.precompile += ["soundmanager20110306/soundmananger2.js","soundmanager20110306/soundmanager2_flash9.swf"]
-   
   end
 end
