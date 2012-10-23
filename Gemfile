@@ -43,6 +43,7 @@ group :assets do
   gem 'yui-compressor'
   gem 'uglifier'
   gem "coffee-rails"
+  gem "soundmanager2-rails"
 end
 
 group :development do
