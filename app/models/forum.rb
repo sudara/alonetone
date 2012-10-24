@@ -9,9 +9,7 @@ class Forum < ActiveRecord::Base
   has_permalink :name
 
   validates_presence_of :name
-    
-  before_save :create_unique_permalink
-  
+      
   attr_readonly :posts_count, :topics_count
 
   has_many :topics, 

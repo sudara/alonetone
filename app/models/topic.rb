@@ -37,8 +37,6 @@ class Topic < ActiveRecord::Base
   #                                      
                                       
   
-  before_create :create_unique_permalink
-
   # hacks for defensio
   def article
     self
