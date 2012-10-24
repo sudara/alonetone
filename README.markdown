@@ -130,13 +130,6 @@ Note: alonetone uses 4 config files that are automagically created (see lib/task
       newrelic.yml (for performance tracking)
 
 
-
-#### Database setup
-
-You can create a development database, s and load some bootstrap data with:
-
-      rake db:setup
-
 #### Logging in
 
 After the bootstrap data is loaded, you can login using the test account (username=test, password=test).
