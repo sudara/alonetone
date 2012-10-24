@@ -355,7 +355,7 @@ ActiveRecord::Schema.define(:version => 20120930000305) do
     t.integer  "login_count",                        :default => 0,      :null => false
     t.datetime "current_login_at"
     t.string   "current_login_ip"
-    t.string   "persistence_token",                                      :null => false
+    t.string   "persistence_token",                  
     t.string   "perishable_token",                   :default => "null"
   end
 
