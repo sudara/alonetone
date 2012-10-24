@@ -111,12 +111,17 @@ Thirdly, fork away on github.
 
 ### Setup alonetone on localhost
 
-Create a database, and load the db/seeds with:
+
+1) Clone the app
+
+2) bundle install
+
+3) Create a database, and load the db/seeds with:
 
       rake db:setup
 
 
-alonetone uses 4 config files that are automagically created (see lib/tasks/) the first time you run any rake task. 
+Note: alonetone uses 4 config files that are automagically created (see lib/tasks/) the first time you run any rake task. 
 
 
       alonetone.yml (contains the application "secret" and app-specific settings)
