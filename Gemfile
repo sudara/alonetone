@@ -38,6 +38,7 @@ gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require =
 
 group :assets do
   gem "jquery-rails"
+  gem "jquery-ui-rails"
   gem "sass-rails"
   gem "compass-rails"
   gem 'yui-compressor'
