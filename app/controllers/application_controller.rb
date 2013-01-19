@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
   
   def find_user
-    login = params[:login] || params[:id]
+    login = params[:login] || params[:user_id] || params[:id]
     @user = User.find_by_login(login) || current_user 
   end
 

@@ -1,4 +1,4 @@
-<% object = object.asset if object.respond_to?(:asset) -%>
+<% object = object.asset if object.respond_to?(:asset) %>
 <div id="comment_<%= object.unique_id %>" class="comment_asset">
   <div class="comment_form">
     <%= form_for :comment, :url => user_track_comments_path(object.user, object), :id=>"comment_form_#{object.unique_id}" do |f| %>

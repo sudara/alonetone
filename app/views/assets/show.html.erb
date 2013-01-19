@@ -1,6 +1,6 @@
-<% render(:layout => 'users/user') do %>
+<%= render :partial => 'users/user' %>
   
-  <% content_for :left do %>
+<% content_for :left do %>
     <% if authorized_for(@asset) %>
         <div class="track_options">
             <%= link_to " ", edit_user_track_path(@asset.user, @asset), :class => 'edit_green', :title => 'edit this track' %>
@@ -10,33 +10,28 @@
         </div>
     <% end %>
   <div id="single_track" class="box">
-
       <%= render :partial => 'assets/assets'%>
-      
-      <% if logged_in? %>
-        <%= favorite_toggle(@asset) %>
-      <% end %>
+      <%= favorite_toggle(@asset) if logged_in? %>
       <% if @asset.description && !@asset.description.empty? %>
       <div id="track_details" class="static_content">
-          <h1>About "<%=h @asset.title %>"</h1>
-          <p><%= @asset.description %></p>
-          
-        <% @asset.first_playlist %>
-        From the album / playlist <%= link_to h(playlist.title), user_playlist_path(@asset.user,playlist)%>
-        <div class="min_height_50">
-        <div class="mini_cover">
-          	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(@asset.user,playlist), :class => 'jewel_case_50') %>
-            <%= image_tag(playlist.cover(:small), :class => 'cover_50') %>
-        </div>
-        </div>
+        <h1>About "<%=h @asset.title %>"</h1>
+        <p><%= @asset.description %></p>
+        <% if playlist = @asset.first_playlist %>  
+          From the album / playlist <%= link_to (playlist.title), user_playlist_path(@asset.user,playlist) %>
+          <div class="min_height_50">
+          <div class="mini_cover">
+            	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(@asset.user,playlist), :class => 'jewel_case_50') %>
+              <%= image_tag(playlist.cover(:small), :class => 'cover_50') %>
+          </div>
+          </div>
+        <% end %>
         <% end %>
       </div>
-     <% end %>
      
-     <% if @asset.youtube_embed && !@asset.youtube_embed.empty? %>
-      <div class='static_content'>
-        <object <%= Alonetone.video_size %><param name="movie" value="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0" type="application/x-shockwave-flash" wmode="transparent" <%= Alonetone.video_size %>></embed></object>
-      </div>
+   <% if @asset.youtube_embed && !@asset.youtube_embed.empty? %>
+    <div class='static_content'>
+      <object <%= Alonetone.video_size %><param name="movie" value="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/<%=@asset.youtube_embed%>&rel=0&color1=0xd6d6d6&color2=0xf0f0f0&border=0" type="application/x-shockwave-flash" wmode="transparent" <%= Alonetone.video_size %>></embed></object>
+    </div>
     <% end %>
 
 		<% if logged_in? || @asset.guest_can_comment? %>
@@ -47,19 +42,13 @@
   </div>
   
   <%= render :partial => 'big_share'%>
-  <%= render :partial => 'stats'%>
-
-
+  <%= render :partial => 'stats' %>
       
-  <% end %>
+<% end %>
   
-  <% content_for :right do %>
-    <%= render :partial => 'favoriters' if present?(@favoriters)%>
-    <%= render :partial => 'users'%>
-    <div class="clear"> </div>
-    <%= render :partial => 'shared/comments' if present?(@comments) %>
-
-  <% end %>
-  
-  
+<% content_for :right do %>
+  <%= render :partial => 'favoriters' if @favoriters.present?%>
+  <%= render :partial => 'users'%>
+  <div class="clear"> </div>
+  <%= render :partial => 'shared/comments' if @comments.present? %>
 <% end %>

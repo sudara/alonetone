@@ -98,7 +98,7 @@ Alonetone::Application.routes.draw do
   match ':login' => 'users#show', :as => "user_home"
   match ':login.:format' => 'users#show', :as => "user_feeds"
   
-  resources :users, :path => "" do
+  resources :users, :path => "/" do
     member do
       post :attach_pic
       get :sudo

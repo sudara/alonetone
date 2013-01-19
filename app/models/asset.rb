@@ -92,8 +92,8 @@ class Asset < ActiveRecord::Base
     "http://#{Alonetone.url}/#{user.login}/#{permalink}"
   end
   
-  def self.first_playlist
-    Playlist.public.where(:track_id => Track.where(:asset_id => id).first).order('playlist.id ASC').first
+  def first_playlist
+    Track.where(:asset_id => id).first.playlists.first rescue nil
   end
   
   # allows classes outside Asset to use the same format
@@ -139,6 +139,10 @@ class Asset < ActiveRecord::Base
   
   def set_title_to_filename
     title = filename.split('.').first unless title
+  end
+  
+  def to_param
+    permalink
   end
    
 end
