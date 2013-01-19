@@ -135,14 +135,15 @@ class Asset < ActiveRecord::Base
     end
   end
   
+  def to_param
+    permalink
+  end
+  
   protected 
   
   def set_title_to_filename
     title = filename.split('.').first unless title
   end
   
-  def to_param
-    permalink
-  end
    
 end
