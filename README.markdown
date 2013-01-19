@@ -126,7 +126,6 @@ Note: alonetone uses 4 config files that are automagically created (see lib/task
 
       alonetone.yml (contains the application "secret" and app-specific settings)
       database.yml
-      defensio.yml (spam protection, ignored in development)
       newrelic.yml (for performance tracking)
 
 

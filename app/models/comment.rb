@@ -24,12 +24,10 @@ class Comment < ActiveRecord::Base
   
   #formats_attributes :body
   
-  #acts_as_defensio_comment(:fields => { 
-  #  :content  => :body, 
-  #  :article  => :commentable, 
-  #  :author   => :author_name,
-  #  :permalink => :full_permalink 
-  #})
+  include Defender::Spammable
+  configure_defender :keys => { 'content' => :body, 
+    'type' => 'comment', 'author-ip' => :remote_ip, 'author-name' => :author_name,
+    'parent-document-permalink' => :full_permalink}
   
   attr_accessor :current_user
 

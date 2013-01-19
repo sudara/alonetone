@@ -1,5 +1,5 @@
 source :gemcutter
-gem "rails", "3.2.8"
+gem "rails", "3.2.11"
 
 gem "mysql2"
 gem "unicorn"
@@ -11,7 +11,7 @@ gem "authlogic"
 
 gem "geokit"
 
-gem "defensio"
+gem 'defender'
 gem "nokogiri"
 
 gem "has_permalink"

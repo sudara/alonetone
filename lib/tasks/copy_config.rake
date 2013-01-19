@@ -4,7 +4,7 @@ desc "Copy application sample config for dev/test purposes"
 task :copy_config do
   if Rails.env.development? or Rails.env.test?
     
-    %w[alonetone database defensio newrelic].each do |settings|
+    %w[alonetone database newrelic].each do |settings|
       settings_file         = File.join(Rails.root, *%W(config #{settings}.yml))
       settings_file_example = File.join(Rails.root, *%W(config #{settings}.example.yml))
 
