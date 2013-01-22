@@ -1,4 +1,4 @@
-<%= render(:layout => 'user') do %>
+<%= render :partial => 'user' %>
 
 	<div id="user_home">
 	    <% if authorized? %>
@@ -16,18 +16,17 @@
 		
 		<% if @user.has_public_playlists? %>
 			<h2 id="user_latest_playlists">Latest Playlists by <%=@user.name%></h2>
-		    <%= render :partial => 'shared/carousel' %>
-			
-			<div class="clear"> </div>
+		   <%= render :partial => 'shared/carousel' %>
+      <div class="clear"> </div>
 		<% end %>
 	
 	
-		<%= content_for :left do %>
+		<% content_for :left do %>
         <%= render :partial => 'latest' if @user.assets_count > 0 %>
 
-    	  <%= render :partial => 'favorites' if present?(@favorites) %>
+    	  <%= render :partial => 'favorites' if @favorites.present? %>
     
-        <%= render :partial => 'follows' if present?(@mostly_listens_to) or present?(@follows)  %>
+        <%= render :partial => 'follows' if @mostly_listens_to.present? or @follows.present?  %>
     	  
     	  <%= render :partial => 'listens' if @listens.size > 0 %>	
     		
@@ -46,4 +45,3 @@
 		
 	</div>
 	
-<% end %>
