@@ -1,4 +1,2 @@
-<% @playlist = playlist %>
-<% render :layout => 'playlist_layout' do %>
-	<%= render :partial => 'assets/asset', :collection => playlist.tracks.collect(&:asset) %>
-<% end %>
+<%= render :partial => 'assets/asset', :collection => playlist.tracks.collect(&:asset),
+      :layout => 'playlists/playlist_layout', :locals => {:playlist => playlist} %>

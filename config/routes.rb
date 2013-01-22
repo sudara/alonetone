@@ -131,7 +131,6 @@ Alonetone::Application.routes.draw do
         post :set_playlist_description
         post :sort_tracks
         post :add_tracks
-        get  :destroy
       end
       resources :comments
     end
