@@ -1,4 +1,4 @@
-<% render(:layout => 'user') do %>
+<%= render(:layout => 'user') do %>
 
 	<div id="user_home">
 	    <% if authorized? %>
@@ -22,7 +22,7 @@
 		<% end %>
 	
 	
-		<% content_for :left do %>
+		<%= content_for :left do %>
         <%= render :partial => 'latest' if @user.assets_count > 0 %>
 
     	  <%= render :partial => 'favorites' if present?(@favorites) %>

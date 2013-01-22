@@ -11,7 +11,7 @@
     <%= favorite_toggle(asset) %>
 		<% if logged_in? || asset.guest_can_comment? %>
 	    <div id="comment_track_<%= asset.unique_id %>">
-	        <%= render :partial => 'assets/comment', :locals => {:object => asset} %>
+	        <%= render :partial => 'assets/comment', :locals => {:asset => asset} %>
 	    </div>
 		<% end %>
   	<div id="details_track_<%= asset.unique_id %>">
