@@ -66,25 +66,20 @@ class CommentsController < ApplicationController
           @page_title = "#{@user.name} Comments"
 
           if display_private_comments_of?(@user)
-            @comments = @user.comments.include_private.paginate( :all, 
-              :per_page   => 10, 
-              :page       => params[:page]
-            )
+            @comments = @user.comments.include_private.paginate(:per_page => 10, 
+              :page => params[:page])
         
-            @comments_made = Comment.include_private.paginate(:all, 
-              :per_page   => 10,
+            @comments_made = Comment.include_private.paginate(:per_page => 10,
               :page       => params[:made_page], 
               :order      => 'created_at DESC', 
               :conditions => {:commenter_id => @user.id}
             )
           else
-            @comments = @user.comments.public.paginate( :all,
-              :per_page   => 10, 
+            @comments = @user.comments.public.paginate(:per_page => 10, 
               :page       => params[:page]
             )
         
-            @comments_made = Comment.public.paginate( :all, 
-              :per_page   => 10, 
+            @comments_made = Comment.public.paginate(:per_page => 10, 
               :page       => params[:made_page], 
               :order      => 'created_at DESC', 
               :conditions => { :commenter_id => @user.id, :private => false }
@@ -94,18 +89,15 @@ class CommentsController < ApplicationController
         else # if params[:login]
           @page_title = "Recent Comments"
       
-          @comments = Comment.public.paginate( :all,
-              :per_page => 10,
+          @comments = Comment.public.paginate(:per_page => 10,
               :page => params[:page]
           ) unless admin?
       
-          @comments = Comment.include_private.paginate( :all,
-              :per_page => 10,
+          @comments = Comment.include_private.paginate(:per_page => 10,
               :page => params[:page]
           ) if admin?
       
-          @spam = Comment.paginate_by_spam( true,
-              :order    => 'created_at DESC',
+          @spam = Comment.paginate_by_spam(:order  => 'created_at DESC',
               :per_page => 10,
               :page     => params[:spam_page]
           ) if moderator? or admin?

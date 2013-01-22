@@ -4,7 +4,7 @@
   <h2 class="box comment_header"><%= link_for_comment(comment) %></h2>
 <% end %>
 
-<% div_for comment, :class => (cycle('even', 'odd')) do %>
+<%= div_for comment, :class => (cycle('even', 'odd')) do %>
   
   <div class="comment_user">
 	  <% if comment.commenter %>

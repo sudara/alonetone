@@ -55,7 +55,7 @@ class Asset
 
   # never allow this to be blank, as permalinks are generated from it
   def clean_filename
-    clean = self.filename[0..-5].gsub(/-|_/,' ').strip.titleize
+    clean = mp3_file_name.split('.')[-2].gsub(/-|_/,' ').strip.titleize
     clean.blank? ? 'untitled' : clean
   end
 end
