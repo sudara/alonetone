@@ -63,7 +63,7 @@
       Psssst. We've got an alonetone chat room with your name on it. <%= link_to 'Chat Now', "http://#{Alonetone.campfire_url}"%>
     </div>
     <div class="footer_box">
-      <%= link_to('view all recent posts &rArr;', posts_path, :class=>'view_all', :title => 'view all recent posts') if Post.first %>
+      <%= link_to('view all recent posts &rArr;'.html_safe, posts_path, :class=>'view_all', :title => 'view all recent posts') if Post.first %>
     </div>
     
     <% if logged_in? && @user_topics.present? %>
