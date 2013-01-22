@@ -3,7 +3,7 @@
 	<div class="title">
 	 <%= link_to track_name_for(track.asset,30), user_track_path(track.asset.user, track.asset.permalink), :class => 'track_link' %><br/>
 	 
-   <%= link_to h(track.asset.user.name), user_home_path(track.asset.user), :class => 'artist' %>
+   <%= link_to track.asset.user.name, user_home_path(track.asset.user), :class => 'artist' %>
 	 <span class='counter'> </span>
 	 
 	 <% if setting(:display_listen_count) == 'true' %>

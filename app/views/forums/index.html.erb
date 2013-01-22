@@ -28,7 +28,7 @@
           <% end %>
         </td>
         <td class="c2 vat">
-          <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
+          <%= link_to forum.name, forum_path(forum), :class => "title" %>
           <div class="posts">
             <%= pluralize forum.topics.count, 'topic' %>, 
             <%= pluralize forum.posts.count, 'post' %>
@@ -55,7 +55,7 @@
         <div class="static_content" id="currently_online">
           alonetoners online: 
           <% @online.each do |user| %>
-            <%= link_to h(user.name), user_home_path(user.login) %> 
+            <%= link_to user.name, user_home_path(user.login) %> 
           <% end %>
         </div>
     <% end %>
