@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..2000
   
-  #formats_attributes :body
+  
   
   include Defender::Spammable
   configure_defender :keys => { 'content' => :body, 

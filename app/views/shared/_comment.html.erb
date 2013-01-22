@@ -31,7 +31,7 @@
   </div>
   
 	<div class="comment_body">
-		<%= comment.body %>
+		<%= markdown(comment.body) %>
 		<% if authorized_for_comment(comment) %>
 		<div class="comment_controls">
   	    <% if comment.spam == false %>

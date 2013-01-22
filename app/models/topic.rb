@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class Topic < ActiveRecord::Base
-  include User::Editable
 
   before_validation :set_default_attributes, :on => :create
   before_update  :check_for_moved_forum
@@ -44,6 +43,10 @@ class Topic < ActiveRecord::Base
   
   def author_name 
     user.login
+  end
+  
+  def editable_by?(user)
+    user && (user.id == user_id || user.moderator? || user.admin?)
   end
   
   def full_permalink

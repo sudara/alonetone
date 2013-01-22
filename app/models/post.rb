@@ -1,8 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Post < ActiveRecord::Base
-  include User::Editable
   
-  ###formats_attributes :body
+  
 
   @@per_page = 10
   cattr_accessor :per_page
@@ -43,6 +42,10 @@ class Post < ActiveRecord::Base
     paginate options
   end
 
+  def editable_by?(user)
+    user && (user.id == user_id || user.moderator? || user.admin?)
+  end
+  
 protected
   def update_cached_fields
     topic.update_cached_post_fields(self)

@@ -8,9 +8,7 @@ class Asset < ActiveRecord::Base
   scope :random_order, order("RAND()")
   scope :favorited, select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC')
     
-  
-
-  #formats_attributes :description    
+ 
   
   has_many :tracks, :dependent => :destroy
   has_many :playlists, :through => :tracks

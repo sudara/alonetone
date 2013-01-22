@@ -2,12 +2,6 @@
 # FLASH STUFF
 FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
 
-require 'randomness'
-require 'asset_hacks'
-
-# require s3 and the s3 expires hack
-#require 'aws/s3'
-#require 'asset_hacks'
 require 'will_paginate'
 require 'will_paginate/view_helpers'
 

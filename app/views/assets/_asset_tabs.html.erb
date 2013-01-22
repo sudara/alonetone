@@ -23,8 +23,8 @@
             <div class="description">
                 <div class='min_height_50'>
                   <h3><%= asset.name %></h3>
-                  <%= awesome_truncate((markdown(asset.description)), 260, 
-                    ('... '+link_to('(more)',user_track_path(asset.user, asset.permalink)))) %>
+                  <%= awesome_truncate(markdown(asset.description), 260, 
+                    ('&hellip;'+link_to('(more)',user_track_path(asset.user, asset.permalink)))) %>
                 </div>
             	  
                 <div class="stats">

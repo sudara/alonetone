@@ -2,7 +2,7 @@
 require 'bluecloth'
 class Update < ActiveRecord::Base
   
-  ##formats_attributes :content
+  
   
   has_permalink :title
   before_save :create_unique_permalink

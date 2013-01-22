@@ -29,10 +29,6 @@ gem 'newrelic_rpm'
 # allows for great console printing, easiest to specify here
 gem "awesome_print", :require => 'ap'
 
-# Remove both of these once code is relpaced with redcarpet
-gem 'BlueCloth',     :require => 'bluecloth' 
-gem 'hpricot' # for comment processing / markdown fixing
-
 # this will need to be relpaced or updated, it's crufty, but used on about/stats
 gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 

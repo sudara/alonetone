@@ -2,7 +2,7 @@
 class Forum < ActiveRecord::Base
   scope :ordered, order('position ASC')
   
-  #formats_attributes :description
+  
   
   acts_as_list
 
