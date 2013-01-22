@@ -1,10 +1,10 @@
-<% if !present?(@users, @assets) %>
+<% unless @users.present? or @assets.present? %>
   <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
 <% else %>
   <h1>Results for "<%= h @query %>"</h1>
 <% end %>
 
-<% if present?(@users) %>
+<% if @users.present? %>
   <% content_for :left do %>
   <h2>Artists and Listeners</h2>
   <div id="user_search_results">
@@ -14,7 +14,7 @@
 <% end %>
 
 
-<% if present?(@assets) %>
+<% if @assets.present? %>
   <% content_for :right do %>
   <h2>Tracks that match "<%= @query %>"</h2>
   <%= render :partial => 'assets/asset', :collection => @assets if @assets %>

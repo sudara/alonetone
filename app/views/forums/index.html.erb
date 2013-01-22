@@ -66,7 +66,7 @@
       <%= link_to('view all recent posts &rArr;', posts_path, :class=>'view_all', :title => 'view all recent posts') if Post.first %>
     </div>
     
-    <% if logged_in? && present?(@user_topics) %>
+    <% if logged_in? && @user_topics.present? %>
     <h2>Conversations you are a part of</h2>
       <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
       <tr>

@@ -41,7 +41,7 @@ module UsersHelper
   end
   
   def notice_hidden?(notice)
-    logged_in? && current_user.present?(:settings) && current_user.settings.present?('hide_notice') && current_user.settings['hide_notice'].present?(notice)
+    logged_in? && current_user.has_setting?('hide_notice') && current_user.settings['hide_notice'][notice].present?
   end
   
   def setting(symbol_or_string, user=current_user)

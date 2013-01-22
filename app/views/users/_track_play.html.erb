@@ -10,9 +10,9 @@
 	    <strong><%= link_to h(track_play.asset.name), user_track_path(track_play.asset.user, track_play.asset) %></strong><br/>
 	    <%= time_ago_in_words(track_play.created_at) %> ago 
   	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) : 
-  	  "Guest #{present?(track_play.ip) ? '('+track_play.ip+')': ''}" %> 
+  	  "Guest #{track_play.ip.present? ? '('+track_play.ip+')': ''}" %> 
   	  <br/>via <%= link_source(track_play.source) %>
 	  </div>
-    <%= present?(track_play.ip) ? image_tag('http://api.hostip.info/flag.php?ip='+track_play.ip, :size => '80x40', :style => 'float:right; clear:none;opacity:0.4;') : ''%>
+    <%= track_play.ip.present? ? image_tag('http://api.hostip.info/flag.php?ip='+track_play.ip, :size => '80x40', :style => 'float:right; clear:none;opacity:0.4;') : ''%>
 <% end %>
 <div class="clear"> </div>

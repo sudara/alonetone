@@ -2,19 +2,19 @@
     <div class="search_results clearfix">
         <div class="column results">
             <div class="suggestion clearfix" style="text-align:left;">
-                <% if !present?(@users, @assets) %>
+                <% unless @users.present? or @assets.present? %>
                   Hm, didn't find any users or tracks named "<%= @query %>"
                 <% else %>
                   Results for "<%= @query %>"
                 <% end %>
             </div>
-                 <% if present?(@users) %>
+                 <% if @users.present? %>
                   <h2>Alonetone Artists and Listeners</h2>
                   <div id="user_search_results">
                     <%= render :partial => 'shared/user.html.erb', :collection => @users %>
                   </div>
                 <% end %>
-                <% if present?(@assets) %>
+                <% if @assets.present? %>
                   <h2>Uploaded Music</h2>
                   <%= render :partial => 'shared/asset', :collection => @assets %>
                 <% end %>

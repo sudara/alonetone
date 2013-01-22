@@ -155,14 +155,13 @@ class UsersController < ApplicationController
   
   def update
     # fix to not care about password stuff unless both fields are set
-    (params[:user][:password] = params[:user][:password_confirmation] = nil) unless present?(params[:user][:password]) and present?(params[:user][:password_confirmation])
-    
+    (params[:user][:password] = params[:user][:password_confirmation] = nil) unless params[:user][:password].present? and params[:user][:password_confirmation].present?    
     # If the user changes the :block_guest_comments setting then it requires
     # that the cache for all their tracks be invalidated or else the cached
     # tabs will not change
     flush_asset_caches = false
     if params[:user] && params[:user][:settings] && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.settings && @user.settings.present?('block_guest_comments') && @user.settings['block_guest_comments'] == 'true'
+      currently_blocking_guest_comments = @user.settings && @user.settings['block_guest_comments'].present? && @user.settings['block_guest_comments'] == 'true'
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
     

@@ -2,7 +2,7 @@
 
 		<% div_for @playlist, :class => "box #{(@playlist.has_tracks? ? '' : 'empty')} #{@playlist.type}" do %>
 		  <div class="playlist_title box">
-			  <h2><%= h(@playlist.title)+(@playlist.present?(:year) ? " (#{@playlist.year})" : '') %></h2>
+			  <h2><%= h(@playlist.title)+(@playlist.year.present? ? " (#{@playlist.year})" : '') %></h2>
 			  <h3><%= pluralize @playlist.tracks_count, 'track'%> by <%= (@playlist.is_mix? ? 'various alonetone artists' : @playlist.user.name )%></h3>
         <% if authorized_for(@playlist) %>
           <%= link_to "edit", edit_user_playlist_path(@user, @playlist), :class => 'edit right' %>

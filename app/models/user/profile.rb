@@ -73,4 +73,12 @@ class User
   def self.dummy_pic(size)
     first.dummy_pic(size)
   end
+  
+  def has_setting?(setting, value=nil)
+    if value != nil # account for testing against false values
+      self.settings.present? && self.settings[setting].present? && (self.settings[setting] == value)
+    else
+      self.settings.present? && self.settings[setting].present? 
+    end
+  end
 end
