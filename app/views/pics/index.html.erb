@@ -13,13 +13,13 @@
 
 <% for pic in @pics %>
   <tr>
-    <td><%=h pic.size %></td>
-    <td><%=h pic.content_type %></td>
-    <td><%=h pic.filename %></td>
-    <td><%=h pic.height %></td>
-    <td><%=h pic.width %></td>
-    <td><%=h pic.parent_id %></td>
-    <td><%=h pic.thumbnail %></td>
+    <td><%= pic.size %></td>
+    <td><%= pic.content_type %></td>
+    <td><%= pic.filename %></td>
+    <td><%= pic.height %></td>
+    <td><%= pic.width %></td>
+    <td><%= pic.parent_id %></td>
+    <td><%= pic.thumbnail %></td>
     <td><%= link_to 'Show', pic %></td>
     <td><%= link_to 'Edit', edit_pic_path(pic) %></td>
     <td><%= link_to 'Destroy', pic, :confirm => 'Are you sure?', :method => :delete %></td>

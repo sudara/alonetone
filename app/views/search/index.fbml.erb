@@ -3,9 +3,9 @@
         <div class="column results">
             <div class="suggestion clearfix" style="text-align:left;">
                 <% if !present?(@users, @assets) %>
-                  Hm, didn't find any users or tracks named "<%=h @query %>"
+                  Hm, didn't find any users or tracks named "<%= @query %>"
                 <% else %>
-                  Results for "<%=h @query %>"
+                  Results for "<%= @query %>"
                 <% end %>
             </div>
                  <% if present?(@users) %>

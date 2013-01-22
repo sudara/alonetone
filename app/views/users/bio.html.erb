@@ -2,7 +2,7 @@
 
   <% content_for :left do %>
     <div id="bio" class="box">
-      <h2 class="box static">All about <%=h @user.name %></h2>
+      <h2 class="box static">All about <%= @user.name %></h2>
       <%= link_to 'Edit', edit_user_path(@user),:class=>'edit right' if authorized? %>
 
         <div class="bio static_content">
@@ -10,7 +10,7 @@
         	    <% if @user.try?(:bio) %>
         	        <%= @user.printable_bio %>
         	    <% else %>
-        	        <%=h @user.name %> doesn't have anything to say, unfortunately...
+        	        <%= @user.name %> doesn't have anything to say, unfortunately...
                 <% end %>
 
         	</p>

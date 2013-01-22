@@ -4,7 +4,7 @@
   <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar', :alt => "#{h(@user.name)}"), profile_path(@user), :class => 'image', :id=>'alonetoner', :title => "#{h(@user.name)}'s profile - all about #{h(@user.name)}") %>
   
   <div class="user_title">
-    <h1 class="user"><%=h @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+    <h1 class="user"><%= @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
       <%= follow_toggle(@user) %>
   
   <%# cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>

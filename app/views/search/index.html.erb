@@ -1,5 +1,5 @@
 <% if !present?(@users, @assets) %>
-  <h2>Hm, didn't find any users or tracks named "<%=h @query %>"</h2>
+  <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
 <% else %>
   <h1>Results for "<%= h @query %>"</h1>
 <% end %>
@@ -16,7 +16,7 @@
 
 <% if present?(@assets) %>
   <% content_for :right do %>
-  <h2>Tracks that match "<%=h @query %>"</h2>
+  <h2>Tracks that match "<%= @query %>"</h2>
   <%= render :partial => 'assets/asset', :collection => @assets if @assets %>
   <% end %>
 <% end %>

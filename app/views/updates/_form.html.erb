@@ -3,7 +3,7 @@
     <% form_for update.comments.build, :id=>"comment_form_#{update.id}" do |f| %>
      <div class="comment_as">
      <% if logged_in? %>
-        <%= image_tag current_user.avatar(:tiny) %>Say something, <%=h current_user.name %>:
+        <%= image_tag current_user.avatar(:tiny) %>Say something, <%= current_user.name %>:
      <% else %>
         <%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path %>:
      <% end %>

@@ -14,7 +14,7 @@
       <%= favorite_toggle(@asset) if logged_in? %>
       <% if @asset.description && !@asset.description.empty? %>
       <div id="track_details" class="static_content">
-        <h1>About "<%=h @asset.title %>"</h1>
+        <h1>About "<%= @asset.title %>"</h1>
         <p><%= @asset.description %></p>
         <% if playlist = @asset.first_playlist %>  
           From the album / playlist <%= link_to (playlist.title), user_playlist_path(@asset.user,playlist) %>

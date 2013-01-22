@@ -17,7 +17,7 @@
 <% content_for :right do %>
     <div class="static_content">
         <% for asset in @assets %>
-            <%= asset.id.to_s%> : <%=h asset.name %><br/>
+            <%= asset.id.to_s%> : <%= asset.name %><br/>
         <% end %>
     </div>
 <% end %>
