@@ -70,12 +70,8 @@ class User
 
       when 'last_uploaded'
         @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
-          distinct_users = Asset.find(:select   => 'DISTINCT user_id', 
-            :include  => [:user => :pic], 
-            :order    => 'assets.created_at DESC', 
-            :limit    => pager.per_page, 
-            :offset   => pager.offset
-          )
+          distinct_users = Asset.select(:user_id).uniq.includes(:user => :pic).order('assets.created_at DESC').limit(pager.per_page).offset(pager.offset)
+
               
           pager.replace(distinct_users.collect(&:user)) # only send back the users
         
