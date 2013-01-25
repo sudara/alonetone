@@ -32,8 +32,6 @@ Alonetone::Application.routes.draw do
   
   match 'signup'    => 'users#new'
   match 'settings'  => 'users#edit'
-  match 'login'     => 'sessions#create'
-  match 'logout'    => 'sessions#destroy'
   match '/activate/:activation_code' => 'users#activate'
 
 

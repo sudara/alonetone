@@ -1,8 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   
-  before_filter :find_user,      :except => [:new, :create]
-  
+  before_filter :find_user, :except => [:new, :create]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   skip_before_filter :login_by_token, :only => :sudo
   
@@ -80,46 +79,28 @@ class UsersController < ApplicationController
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
-  # ugliest logic ever. This is one of those areas where you don't want to touch the stuff for fear of breaking things
-  # On the other hand, until it's cleaned up, refactoring and bug fixing is next to impossible
+
   def create
-    respond_to do |format|
-      format.html do
-        return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
-        @user = params[:user].blank? ? User.find_by_email(params[:email]) : User.new(params[:user])
-        if params[:email] and not @user
-          flash[:error] = "I could not find an account with the email address '#{CGI.escapeHTML params[:email].first}'. <br/> Did you make a boo-boo or have another email I could diligently try for you?"
-          redirect_to login_path and return false
-        end
-        @user.login = params[:user][:login] unless params[:user].blank?
-        @user.reset_token!
-        begin
-          UserMailer.deliver_signup(@user) if !params[:user].blank?
-          UserMailer.deliver_forgot_password(@user) if params[:user].blank?
-        rescue Net::SMTPFatalError => e
-          flash[:error] = "A permanent error occured while sending the signup message to '#{CGI.escapeHTML @user.email}'. Please check the e-mail address."
-          redirect_to :action => "new"
-        rescue Net::SMTPServerBusy, Net::SMTPUnknownError, \
-          Net::SMTPSyntaxError, TimeoutError => e
-          flash[:error] = "The signup message cannot be sent to '#{CGI.escapeHTML @user.email}' at this moment. Please, try again later."
-          redirect_to :action => "new"
-        end
-        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
-      end
+    return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
+    
+    @user = User.new(params[:user])
+    if @user.save_without_session_maintenance
+      @user.deliver_activation_instructions!
+      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
+      redirect_to login_url
+    else
+      render :action => :new
     end
-    rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Whups, there was a small issue"
-      render :action => 'new'
   end
   
   
   def activate
-    self.current_user = User.find_by_activation_code(params[:activation_code])
-    if current_user != false && !current_user.activated?
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
+    raise Exception if @user.active?
+      if current_user != false && !current_user.activated?
       # Did the user already activate, and this is just a forgot password "activation?"
-      if current_user.activated_at 
+      if current_user.active? 
         current_user.activate
-        cookies[:auth_token] = { :value => self.current_user.token , :expires => 2.weeks.from_now }
         flash[:ok] = "Sweet, you are back in! <br/>Now quick, update your password below so you don't have to jump through hoops again"
         redirect_to edit_user_path(current_user)
       else

@@ -168,6 +168,15 @@ class User < ActiveRecord::Base
     last_login_ip
   end
 
+  def active?
+    !!perishable_token
+  end
+
+  def deliver_activation_instructions!
+    reset_perishable_token!
+    UserNotification.signup(self).deliver
+  end
+
   protected
 
   def efficiently_destroy_relations

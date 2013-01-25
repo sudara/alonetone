@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120930000305) do
+ActiveRecord::Schema.define(:version => 20130125160439) do
 
   create_table "assets", :force => true do |t|
     t.string   "mp3_content_type"
@@ -314,7 +314,7 @@ ActiveRecord::Schema.define(:version => 20120930000305) do
   create_table "users", :force => true do |t|
     t.string   "login",               :limit => 40
     t.string   "email",               :limit => 100
-    t.string   "salt",                :limit => 128, :default => "",     :null => false
+    t.string   "salt",                :limit => 128, :default => "",    :null => false
     t.datetime "activated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -323,12 +323,12 @@ ActiveRecord::Schema.define(:version => 20120930000305) do
     t.datetime "token_expires_at"
     t.boolean  "admin",                              :default => false
     t.datetime "last_login_at"
-    t.string   "crypted_password",    :limit => 128, :default => "",     :null => false
-    t.integer  "assets_count",                       :default => 0,      :null => false
+    t.string   "crypted_password",    :limit => 128, :default => "",    :null => false
+    t.integer  "assets_count",                       :default => 0,     :null => false
     t.string   "display_name"
     t.string   "identity_url"
     t.integer  "pic_id"
-    t.integer  "playlists_count",                    :default => 0,      :null => false
+    t.integer  "playlists_count",                    :default => 0,     :null => false
     t.string   "website"
     t.text     "bio"
     t.integer  "listens_count",                      :default => 0
@@ -352,11 +352,11 @@ ActiveRecord::Schema.define(:version => 20120930000305) do
     t.integer  "followers_count",                    :default => 0
     t.string   "remember_token"
     t.string   "remember_created_at"
-    t.integer  "login_count",                        :default => 0,      :null => false
+    t.integer  "login_count",                        :default => 0,     :null => false
     t.datetime "current_login_at"
     t.string   "current_login_ip"
-    t.string   "persistence_token"
-    t.string   "perishable_token",                   :default => "null"
+    t.string   "persistence_token",                                     :null => false
+    t.string   "perishable_token"
   end
 
 end
