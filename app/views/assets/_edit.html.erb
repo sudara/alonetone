@@ -6,7 +6,7 @@
 <div class="edit_track box" style="position:relative;">
   <h2 class="box">Editing "<%= @asset.name %>"</h2>
 
-  <% form_for(:asset, :url => user_track_path(current_user, @asset), :html => { :method => :put, :multipart => true }) do |f| %>
+  <%= form_for(:asset, :url => user_track_path(current_user, @asset), :html => { :method => :put, :multipart => true }) do |f| %>
 
     <div class="static_content" style="position:relative;">
 

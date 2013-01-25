@@ -97,25 +97,19 @@ class UsersController < ApplicationController
   def activate
     @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
     raise Exception if @user.active?
-      if current_user != false && !current_user.activated?
-      # Did the user already activate, and this is just a forgot password "activation?"
-      if current_user.active? 
-        current_user.activate
-        flash[:ok] = "Sweet, you are back in! <br/>Now quick, update your password below so you don't have to jump through hoops again"
-        redirect_to edit_user_path(current_user)
-      else
-        current_user.activate
-        flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
-        redirect_to new_user_track_path(current_user)
-      end
-    else 
-      flash[:error] = "Hm. Activation didn't work. Maybe your account is already activated?"
-      redirect_to default_url
+    
+    if @user.activate!
+      flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
+      UserSession.create(@user, false) # Log user in manually
+      UserNotification.activation(@user).deliver
+      redirect_to new_user_track_path(current_user)
+    else
+      flash[:error] = "Hm. Activation didn't work. Sorry about that!"
+      render :action => :new
     end
   end
   
   def edit
-
   end
   
   def bio

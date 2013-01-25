@@ -12,7 +12,7 @@
 		<% if playlist.private? && authorized_for(playlist)%>
 			<div class="empty">
             Playlist is hidden from the public (you can still share it)<br/>
-            <% form_for [@user, playlist] do |f| %>
+            <%= form_for [@user, playlist] do |f| %>
                 <%= f.hidden_field :private, :value => 0 %>
                 <%= f.submit 'publish playlist now' %>
             <% end %>

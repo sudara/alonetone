@@ -1,6 +1,6 @@
 <div id="edit" class="editbox">
     <div class="static_content">
-      <% form_for [@forum,@topic,@post],
+      <%= form_for [@forum,@topic,@post],
         :html => { :method => :put, :id => 'edit-form' } do |f| -%>
 
             <%= f.text_area :body, :rows => 10, :id => "edit_post_body", :tabindex => 1 %>

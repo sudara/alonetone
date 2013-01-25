@@ -1,6 +1,6 @@
 <h1>Edit Forum</h1>
 
-<% form_for :forum,
+<%= form_for :forum,
      :url  => forum_path(@forum),
      :html => { :method => :put } do |f| -%>
 <%= render :partial => "form", :object => f %>

@@ -1,6 +1,6 @@
 <div id="comment_<%= object.unique_id %>" class="comment_asset">
   <div class="comment_form">
-    <% form_for @comment, :id=>"comment_form_#{object.unique_id}" do |f| %>
+    <%= form_for @comment, :id=>"comment_form_#{object.unique_id}" do |f| %>
      <div class="comment_as">
      <% if logged_in? %>
         <%= image_tag current_user.avatar(:tiny) %>Say something, <%= current_user.name %>:

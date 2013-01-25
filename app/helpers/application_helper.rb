@@ -42,8 +42,6 @@ module ApplicationHelper
     CGI.rfc1123_date(date)
   end
   
-
-  
   def track_name_for(asset, length=40)
     truncate(h(asset.name),:length => length)
   end
@@ -95,7 +93,7 @@ module ApplicationHelper
     [flash[:notice], flash[:error], flash[:info], flash[:ok]].each do |flash|
       flashes << (render :partial => 'shared/flash', :object => flash) if (flash && !flash.empty?)
     end
-    flashes.join
+    flashes.join.html_safe
   end
   
   def check_for_and_display_welcome_back

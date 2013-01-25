@@ -1,7 +1,7 @@
 <%= error_messages_for :asset %>
 <%= error_messages_for :source_file %>
 <div id="uploader">	
-    <% form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
+    <%= form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
     	<dl class="group" class="fileform">
         <dt id="filelbls">
          </dt>

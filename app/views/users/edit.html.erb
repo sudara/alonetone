@@ -6,7 +6,7 @@
     <h2 class="box">Edit your profile</h2>
   	<div class="static_content">
 
-		<% form_for @user, :html => { :method => :put } do |f| -%>
+		<%= form_for @user, :html => { :method => :put } do |f| -%>
 
 		<label for="display_name">The name you want displayed on alonetone</label><br />
 		<%= f.text_field :display_name %><br/><br/>	
@@ -44,7 +44,7 @@
   	<div class="static_content">
   
 	  
-	  	<% form_for @user, :html => { :method => :put } do |f| -%>
+	  	<%= form_for @user, :html => { :method => :put } do |f| -%>
   	
       <%= link_to("Change your login and alonetone address", '#edit_login', :class=>'slide_open_href') %> <br/><br/>
 
@@ -101,7 +101,7 @@
     <div class="static_content">
         <%= image_tag @user.avatar(:small)%><br/>
         Upload a new photo. (400px by 400px square for best results)<br/>
-        <% form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
+        <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
         	<%= f.file_field :uploaded_data  %>
         	<%= submit_tag "Upload new Pic" %>
         <% end %><br/>
@@ -110,7 +110,7 @@
   
     <h2 class="box">Settings</h2>
     <div class="static_content">
-    <% form_for @user, :html => { :method => :put } do |f| -%>
+    <%= form_for @user, :html => { :method => :put } do |f| -%>
       Display play counts blatantly on all tracks? <br/>
       <%= select_tag('user[settings][display_listen_count]', 
           options_for_select([['no thanks','false'], ['yes','true']], 

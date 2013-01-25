@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
                   :bio, :display_name, :itunes, :settings, :city, :country, :twitter
   
-  before_create :make_first_user_admin, :make_activation_code
+  before_create :make_first_user_admin
   
   before_destroy :efficiently_destroy_relations
   

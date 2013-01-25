@@ -2,7 +2,7 @@
 
 <%= error_messages_for :update %>
 
-<% form_for(@update, :url => blog_path(@update.permalink)) do |f| %>
+<%= form_for(@update, :url => blog_path(@update.permalink)) do |f| %>
   <p>
     <b>Title</b><br />
     <%= f.text_field :title %>

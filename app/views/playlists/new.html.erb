@@ -5,7 +5,7 @@
 
 <%= error_messages_for :playlist %>
 
-<% form_for [@user, @playlist] do |f| %>
+<%= form_for [@user, @playlist] do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <p>
     <%= f.submit "Create" %>

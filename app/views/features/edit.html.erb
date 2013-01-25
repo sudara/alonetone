@@ -1,7 +1,7 @@
 <h1>Editing feature</h1>
 
 <% content_for :left do %>
-    <% form_for(@feature) do |f| %>
+    <%= form_for(@feature) do |f| %>
      <%= render :partial => 'form', :locals =>{:f => f}%>
 
       <p>    
