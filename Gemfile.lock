@@ -9,7 +9,6 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    BlueCloth (1.0.1)
     POpen4 (0.1.4)
       Platform (>= 0.4.0)
       open4
@@ -111,7 +110,6 @@ GEM
     haml (3.1.7)
     has_permalink (0.1.4)
     hike (1.2.1)
-    hpricot (0.8.6)
     httparty (0.8.3)
       multi_json (~> 1.0)
       multi_xml
@@ -245,7 +243,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  BlueCloth
   acts_as_list
   authlogic
   awesome_print
@@ -262,7 +259,6 @@ DEPENDENCIES
   guard-spork
   haml
   has_permalink
-  hpricot
   jquery-rails
   jquery-ui-rails
   mime-types

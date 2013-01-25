@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-require 'bluecloth'
 class Comment < ActiveRecord::Base
   
   scope :public, where(:spam => false).where(:private => false).order('id DESC')  

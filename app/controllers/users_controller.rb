@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   skip_before_filter :login_by_token, :only => :sudo
   
-  rescue_from NoMethodError, :with => :user_not_found
+  #rescue_from NoMethodError, :with => :user_not_found
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"

@@ -95,9 +95,10 @@ Alonetone::Application.routes.draw do
   
   root :to => 'assets#latest' 
   
+  resources :users
   match ':login' => 'users#show', :as => "user_home"
   match ':login.:format' => 'users#show', :as => "user_feeds"
-  
+    
   resources :users, :path => "/" do
     member do
       post :attach_pic

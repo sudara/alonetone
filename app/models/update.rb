@@ -1,9 +1,6 @@
 # -*- encoding : utf-8 -*-
-require 'bluecloth'
 class Update < ActiveRecord::Base
-  
-  
-  
+    
   has_permalink :title
   before_save :create_unique_permalink
   

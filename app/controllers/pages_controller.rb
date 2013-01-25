@@ -1,5 +1,4 @@
 # -*- encoding : utf-8 -*-
-require 'bluecloth'
 
 class PagesController < ApplicationController
   skip_filter _process_action_callbacks.map(&:filter), :only => :help_an_app_support_brutha_out
