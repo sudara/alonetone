@@ -1,36 +1,38 @@
 source :gemcutter
 gem "rails", "3.2.11"
 
+# server
 gem "mysql2"
 gem "unicorn"
 
+# uploading
 gem "aws-sdk"
 gem "paperclip"
+gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
+gem "mime-types" 
 
-gem "authlogic"
-
-gem "geokit"
-
-gem 'defender'
-gem "nokogiri"
-
-gem "has_permalink"
+# active record
 gem "acts_as_list"
+gem "has_permalink"
+gem "authlogic"
+gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
+
+# view
 gem "redcarpet"
 gem "country-select"
 gem 'will_paginate'
-gem "mime-types" 
-gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
+gem 'dynamic_form'
+gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating about pages)
 
-# todo: remove haml, sudara hates it (requires translating about pages)
-gem 'haml'
+# external services
+gem 'defender'
+gem "geokit"
 gem 'newrelic_rpm'
 
-# allows for great console printing, easiest to specify here
+# console
 gem "awesome_print", :require => 'ap'
 
-# this will need to be relpaced or updated, it's crufty, but used on about/stats
-gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
+
 
 group :assets do
   gem "jquery-rails"
@@ -44,7 +46,6 @@ group :assets do
 end
 
 group :development do
-  # bundler requires these gems in development
   gem "rails-footnotes"
   gem 'quiet_assets'
   gem 'thin'
