@@ -168,8 +168,17 @@ class User < ActiveRecord::Base
     last_login_ip
   end
 
+  def clear_token!
+    self.update_attribute(:perishable_token,nil)
+  end
+  
+  
   def active?
-    !!perishable_token
+    perishable_token == nil
+  end
+
+  def activate!
+    clear_token!
   end
 
   def deliver_activation_instructions!

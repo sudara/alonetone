@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
       if request.xhr?
         render :text => "Login Failed", :status => 401
       else
-        flash.now[:alert] = "There was a problem logging you in! Please re-check your email and password."
+        flash.now[:error] = "There was a problem logging you in! Please re-check your email and password."
         render :action => :new
       end
     end

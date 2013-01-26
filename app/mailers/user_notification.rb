@@ -8,6 +8,7 @@ class UserNotification < ActionMailer::Base
   end
   
   def signup(user)
+    @user = user
     @url = "http://#{Alonetone.url}/activate/#{user.perishable_token}"
     mail :to => user.email, :subject => "[#{Alonetone.url}] Welcome!"  
   end

@@ -1,13 +1,13 @@
-<%= form_tag user_sessions_path do -%>
+<%= form_for @user_session do |f| %>
 <p>
-  <label for="login"><%= 'Login' %></label><br />
-  <%= text_field_tag :login, params[:login] %>
+  <%= f.label :login %><br />
+  <%= f.text_field :login %>
 </p>
 
 <div id="password_fields">
 <p>
-  <label for="password"><%= 'Password' %></label><br />
-  <%= password_field_tag :password %>
+  <%= f.label :password %><br/>
+  <%= f.password_field :password %>
 </p>
 
 </div>

@@ -824,9 +824,10 @@ Radio = $.klass({
 
 
 jQuery(function($) {
-  // Tracks 
+  // let us cache forms, make sure that auth tokens are replaced
+  $('input[name=authenticity_token]').val($('meta[name=csrf-token]').attr('content'))
   
-
+  // Tracks
   $('.asset, .track').attach(Track);
   
   // display listen_count when needed
