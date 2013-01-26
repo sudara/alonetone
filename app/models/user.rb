@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
   end
   
   def follows_user_ids
-    follows.select(:user_id)
+    follows.select(:user_id).collect(&:user_id)
   end
   
   def has_followees?
