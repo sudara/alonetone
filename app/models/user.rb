@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
     
   acts_as_authentic do |c|
     c.transition_from_restful_authentication = true
+    c.login_field = :login
+    c.disable_perishable_token_maintenance = true # we will handle tokens
   end
       
   scope :musicians, {
@@ -143,7 +145,7 @@ class User < ActiveRecord::Base
   end
   
   def follows_user_ids
-    follows.collect{|f| f.user_id}
+    follows.select(:user_id)
   end
   
   def has_followees?

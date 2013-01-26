@@ -21,8 +21,7 @@ class AssetsController < ApplicationController
   def index
     @page_title = "All music by " + @user.name 
 
-    @assets = @user.assets.paginate(:all, 
-      :order    => 'created_at DESC', 
+    @assets = @user.assets.paginate(:order    => 'created_at DESC', 
       :per_page => 200, 
       :page     => params[:page]
     ) unless request.format.to_sym == :json

@@ -90,14 +90,14 @@ class PlaylistsController < ApplicationController
       :page     => params[:uploads_page]
     )
 
-    @listens = @user.listens.paginate(:all, 
+    @listens = @user.listens.paginate( 
       :limit    => 10, 
       :order    => 'listens.created_at DESC', 
       :per_page => 10, 
       :page     => params[:listens_page]
     )
     
-    @favorites = @user.favorites.tracks.paginate(:all,
+    @favorites = @user.favorites.tracks.paginate(
       :limit => 10,
       :per_page  => 10,
       :page  =>  params[:favorites_page]

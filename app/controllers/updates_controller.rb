@@ -7,7 +7,7 @@ class UpdatesController < ApplicationController
   # GET /updates
   # GET /updates.xml
   def index
-    @updates = Update.paginate(:all, 
+    @updates = Update.paginate( 
       :order    => 'created_at DESC', 
       :per_page => 5, 
       :page     => params[:page], 

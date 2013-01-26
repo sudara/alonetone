@@ -6,20 +6,16 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session].merge({:remember_me => true})) #always stay logged in
+    @user_session = UserSession.new(params[:user_session]) #always stay logged in
     if @user_session.save
-      if request.xhr?
-        render :nothing => true, :status => 200
-      else
-        redirect_back_or_default default_login_path
-      end
+      redirect_to user_path(@user_session.user)
     else
-      if request.xhr?
-        render :text => "Login Failed", :status => 401
+      if params[:user_session][:login] && (user = User.find_by_login(params[:user_session][:login])) && !user.active?
+        flash.now[:error] = "It looks like your account is not active. <br/> Do you have an email from us with activation details?".html_safe
       else
         flash.now[:error] = "There was a problem logging you in! Please re-check your email and password."
-        render :action => :new
       end
+      render :action => :new
     end
   end
 
