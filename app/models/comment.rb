@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Comment < ActiveRecord::Base
   
-  scope :public, where(:spam => false).where(:private => false).order('id DESC')  
-  scope :by_member, where('commenter_id IS NOT NULL')
-  
-  scope :include_private, where(:spam => false)
+  scope :recent, order('id DESC')
+  scope :public,  recent.where(:spam => false).where(:private => false)  
+  scope :by_member, recent.where('commenter_id IS NOT NULL')
+  scope :include_private, recent.where(:spam => false)
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   
@@ -20,8 +20,6 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   
   validates_length_of :body, :within => 1..2000
-  
-  
   
   include Defender::Spammable
   configure_defender :keys => { 'content' => :body, 

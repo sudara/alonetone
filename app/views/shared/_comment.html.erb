@@ -21,7 +21,7 @@
   </div>
   
   <div class="comment_user_text">
-  	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
+  	<%= comment.commenter ? (link_to comment.commenter.name, user_home_path(comment.commenter)) : 'Guest' %>
   	<% if logged_in? %>
 	<span class="comment_ip">
 		(<%= comment.remote_ip %>) 

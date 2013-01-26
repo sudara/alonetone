@@ -43,7 +43,7 @@ module ApplicationHelper
   end
   
   def track_name_for(asset, length=40)
-    truncate(h(asset.name),:length => length)
+    truncate(asset.name,:length => length).html_safe
   end
   
   # Awesome truncate
@@ -143,5 +143,6 @@ module ApplicationHelper
       end
     end
   end
+  
   protected 
 end
