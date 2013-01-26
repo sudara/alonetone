@@ -30,10 +30,6 @@ class Comment < ActiveRecord::Base
   
   attr_accessor :current_user
 
-  def body
-    self.body_html || BlueCloth::new(self[:body]).to_html
-  end
-  
   def duplicate?
     Comment.find_by_remote_ip_and_body(self.remote_ip, self.body)
   end

@@ -117,11 +117,11 @@ class ApplicationController < ActionController::Base
   end
   
   def admin?
-    logged_in? && current_subscriber.admin?
+    logged_in? && current_user.admin?
   end
   
   def moderator?
-    logged_in? && (current_subscriber.moderator? || current_subscriber.admin?)
+    logged_in? && (current_user.moderator? || current_user.admin?)
   end
   
   def moderator_required
