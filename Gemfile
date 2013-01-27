@@ -5,6 +5,11 @@ gem "rails", "3.2.11"
 gem "mysql2"
 gem "unicorn"
 
+# ruby
+gem "sometimes"
+gem "awesome_print", :require => 'ap'
+
+
 # uploading
 gem "aws-sdk"
 gem "paperclip"
@@ -28,11 +33,6 @@ gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating 
 gem 'defender'
 gem "geokit"
 gem 'newrelic_rpm'
-
-# console
-gem "awesome_print", :require => 'ap'
-
-
 
 group :assets do
   gem "jquery-rails"
