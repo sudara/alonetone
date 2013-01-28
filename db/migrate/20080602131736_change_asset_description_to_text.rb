@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeAssetDescriptionToText < ActiveRecord::Migration
   def self.up
     change_column :assets, :description, :text

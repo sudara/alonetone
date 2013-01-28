@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddMp3infoToAssets < ActiveRecord::Migration
   def self.up
     add_column :assets, :samplerate, :integer

@@ -1,0 +1,31 @@
+@import 'variables';
+
+.clear {
+  display: block;
+  clear: both;
+  content: " ";
+}
+
+input {
+  margin: 5px 0px;
+}
+
+div.submit_wrapper {
+  text-align: right;
+}
+
+div.join_wrapper input {
+  color: $text_color;
+  font-size: 14px;
+  font-weight: bold;
+  width: 150px;
+  height: 25px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}

@@ -1,7 +1,7 @@
 <% if params[:login] %>
-    <% render :layout => 'users/user' do %>
+    <%= render :partial => 'users/user' %>
 
-      <% content_for :left do %>
+      <%= content_for :left do %>
         <h2>Comments on <%= @user.name %>'s stuff</h2>
         <div class="mini_paginator">
           <%= will_paginate @comments, :param_name => :page%>
@@ -12,7 +12,7 @@
         </div>
       <% end %>
 
-      <% content_for :right do %>
+      <%= content_for :right do %>
         <h2>Comments made by <%= @user.name %> </h2>
         <div class="mini_paginator">
           <%= will_paginate @comments_made, :param_name => :made_page%>
@@ -23,9 +23,8 @@
         </div>
      <% end %>
 
-    <% end %>
 <% else %>
-    <% content_for :left do %>
+    <%= content_for :left do %>
     <h1>Recent Comments</h1>
       <div class="mini_paginator">
         <%= will_paginate @comments, :param_name => :page%>
@@ -37,7 +36,7 @@
     <% end %>
 
     <% if moderator? or admin? %>
-    <% content_for :right do %>
+    <%= content_for :right do %>
         <h1>Recent SPAM</h1>
         <div class="mini_paginator">
           <%= will_paginate @spam, :param_name => :spam_page%>

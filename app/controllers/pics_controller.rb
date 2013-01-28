@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PicsController < ApplicationController
   # GET /pics
   # GET /pics.xml

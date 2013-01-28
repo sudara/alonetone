@@ -1,5 +1,5 @@
 <% content_tag :div, :id => ("asset_#{asset.id}"), :class => 'asset unopenable ' + cycle('odd', 'even') do %>
   <% render :layout => 'assets/asset_layout', :locals => {:asset => asset, :referer => (@referer) } do %>
-     <%= link_to h(asset.user.name), user_home_path(asset.user), :class => 'artist' %>
+     <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist' %>
   <% end %>
 <% end %>

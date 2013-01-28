@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddPositionToPlaylists < ActiveRecord::Migration
   def self.up
     add_column :playlists, :position, :integer

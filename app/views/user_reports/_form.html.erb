@@ -1,5 +1,5 @@
 
-<% form_for @user_report, :url => user_reports_path do |f| %>
+<%= form_for @user_report, :url => user_reports_path do |f| %>
 	
 	<%= f.select 'category',{"something isn't working..." => :broken, "i have an idea..." => :creative, "i really really like..." => :praise}%>
 	<%= f.text_area 'description', :rows => 10 %>

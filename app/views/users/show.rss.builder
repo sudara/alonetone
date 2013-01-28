@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"=>"2.0" do
   xml.channel do 
-    xml.itunes :block, 'yes' if  @user.settings && @user.settings.present?('block_itunes') && @user.settings['block_itunes'] == 'true'
+    xml.itunes :block, 'yes' if @user.has_setting('block_itunes','true')
     xml.title  "#{@user.name} on alonetone.com"
     
     xml.link  user_home_url(@user)
@@ -30,6 +30,6 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
 		
 		xml.itunes :category,:text=>'Music' 
     
-    xml.<< render(:partial => 'shared/asset', :collection => @assets) if present?(@assets)
+    xml.<< render(:partial => 'shared/asset', :collection => @assets) if @assets.present?
   end
 end

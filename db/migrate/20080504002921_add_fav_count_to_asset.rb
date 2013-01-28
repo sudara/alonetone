@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddFavCountToAsset < ActiveRecord::Migration
   def self.up
     add_column :assets, :favorites_count, :integer, :default => 0

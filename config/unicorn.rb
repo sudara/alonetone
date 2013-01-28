@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 
 config = Hash.new
 base = File.open(File.join(Dir.pwd,'../shared/config/unicorn.conf'),"r")

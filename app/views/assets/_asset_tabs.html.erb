@@ -1,9 +1,9 @@
-<% cache( logged_in? ? "tabs#{asset.cache_key}" : "guest_tabs#{asset.cache_key}" ) do %>
+<%= cache( logged_in? ? "tabs#{asset.cache_key}" : "guest_tabs#{asset.cache_key}" ) do %>
 <div class="more tabs" style="display:none;">
     <ul>
-			<% if logged_in? || asset.guest_can_comment? %>
-	      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
-			<% end %>
+	  <% if logged_in? || asset.guest_can_comment? %>
+      <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
+	  <% end %>
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
       <li><%= link_to 'more', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
@@ -11,7 +11,7 @@
     <%= favorite_toggle(asset) %>
 		<% if logged_in? || asset.guest_can_comment? %>
 	    <div id="comment_track_<%= asset.unique_id %>">
-	        <%= render :partial => 'assets/comment', :object => asset %>
+	        <%= render :partial => 'assets/comment', :locals => {:asset => asset} %>
 	    </div>
 		<% end %>
   	<div id="details_track_<%= asset.unique_id %>">
@@ -22,9 +22,9 @@
             </div>
             <div class="description">
                 <div class='min_height_50'>
-                  <h3><%=h asset.name %></h3>
-                  <%= awesome_truncate((asset.description), 260, 
-                    ('... '+link_to('(more)',user_track_path(asset.user, asset.permalink)))) %>
+                  <h3><%= asset.name %></h3>
+                  <%= awesome_truncate(markdown(asset.description), 260, 
+                    ('&hellip;'+link_to('(more)',user_track_path(asset.user, asset.permalink)))) %>
                 </div>
             	  
                 <div class="stats">
@@ -39,10 +39,10 @@
     	          </div>
     	          
     	          <div class="admin show_to_admin" style="display:none;">
-	                mp3: <strong><%= h asset.filename %></strong><br>
-                  Track: <strong> <%=h asset.title%></strong><br/>
-                  Artist:<strong> <%=h asset.artist %></strong><br/>
-                  Album:  <strong><%=h asset.album %></strong><br/>
+	                mp3: <strong><%= h asset.mp3_file_name %></strong><br>
+                  Track: <strong> <%= asset.title%></strong><br/>
+                  Artist:<strong> <%= asset.artist %></strong><br/>
+                  Album:  <strong><%= asset.album %></strong><br/>
                 </div>
 	          </div>
             <div class="track_links">
@@ -52,14 +52,14 @@
     	        </div>
     	          
       	     <%= link_to "View more", user_track_path(asset.user, asset.permalink), 
-      	        :class => 'view_more', :title => "#{h(asset.name)} by #{h(asset.user.name)}" unless @single_track %>
+      	        :class => 'view_more', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
             </div>
         </div>
     </div>
 
 	    
     <div id="share_track_<%= asset.unique_id %>">
-        <%= render :partial => 'assets/share', :object => asset %>
+        <%= render :partial => 'assets/share', :locals => {:object => asset} %>
     </div>
 	
 	

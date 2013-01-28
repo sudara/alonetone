@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddCounterCache < ActiveRecord::Migration
   def self.up
     add_column :users, :assets_count, :integer, :default => 0

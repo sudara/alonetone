@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReconcileForumTopicCounts < ActiveRecord::Migration
   def self.up
     Forum.all.each do |forum|

@@ -1,10 +1,15 @@
+# -*- encoding : utf-8 -*-
 class User
   
   # has a bunch of prefs
   serialize :settings
-  formats_attributes :bio
   
   before_save :normalize_itunes_url
+  
+  # deprecated
+  def last_seen_at
+    last_login_at
+  end
   
   def normalize_itunes_url
     self.itunes = itunes.to_s.strip.gsub(/http\:\/\//, "")
@@ -34,7 +39,7 @@ class User
   
   def avatar(size = nil)
     return dummy_pic(size) unless self.has_pic?
-    self.pic.public_filename(size) 
+    self.pic.pic.url(size) 
   end
   
   def favorite_asset_ids
@@ -42,7 +47,7 @@ class User
   end
   
   def favorites
-    playlists.favorites.find(:first)
+    playlists.favorites.first
   end
   
   def has_pic?
@@ -50,7 +55,7 @@ class User
   end
   
   def site
-    "#{ALONETONE.url}/#{login}"
+    "#{Alonetone.url}/#{login}"
   end
   
   def printable_bio
@@ -66,6 +71,14 @@ class User
   end
   
   def self.dummy_pic(size)
-    find(:first).dummy_pic(size)
+    first.dummy_pic(size)
+  end
+  
+  def has_setting?(setting, value=nil)
+    if value != nil # account for testing against false values
+      self.settings.present? && self.settings[setting].present? && (self.settings[setting] == value)
+    else
+      self.settings.present? && self.settings[setting].present? 
+    end
   end
 end

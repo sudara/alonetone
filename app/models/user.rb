@@ -1,35 +1,42 @@
+# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting
     
-  named_scope :musicians, {
+  acts_as_authentic do |c|
+    c.transition_from_restful_authentication = true
+    c.login_field = :login
+    c.disable_perishable_token_maintenance = true # we will handle tokens
+  end
+      
+  scope :musicians, {
     :conditions => ['assets_count > ?',0], 
     :order      => 'assets_count DESC', 
   }
   
-  named_scope :activated, {
+  scope :activated, {
     :conditions => {:activation_code => nil}, 
     :order      => 'users.id DESC', 
   }
   
-  named_scope :recently_seen, {
-    :order    => 'last_seen_at DESC', 
+  scope :recently_seen, {
+    :order    => 'last_login_at DESC', 
   }
   
-  named_scope :with_location, {
+  scope :with_location, {
     :conditions => ['users.country != ""'], 
-    :order      => 'last_seen_at DESC', 
+    :order      => 'last_login_at DESC', 
   }
   
-  named_scope :geocoded, {
+  scope :geocoded, {
     :conditions => ['users.lat != ""'], 
     :order      => 'users.id DESC', 
   }
   
-  named_scope :on_twitter, { 
+  scope :on_twitter, { 
     :conditions => ['users.twitter != ?', ''], 
     :order => 'users.last_seen_at DESC' }
   
-  named_scope :alpha, { :order => 'display_name' }
+  scope :alpha, { :order => 'display_name' }
   
   # Can create music
   has_one    :pic,           :as => :picable
@@ -39,8 +46,8 @@ class User < ActiveRecord::Base
   has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
   has_many   :tracks
   
-  acts_as_mappable
-  before_validation :geocode_address
+  #acts_as_mappable
+  #before_validation :geocode_address
 
   reportable :weekly, :aggregation => :count, :grouping => :week
 
@@ -89,7 +96,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
                   :bio, :display_name, :itunes, :settings, :city, :country, :twitter
   
-  before_create :make_first_user_admin, :make_activation_code
+  before_create :make_first_user_admin
   
   before_destroy :efficiently_destroy_relations
   
@@ -138,7 +145,7 @@ class User < ActiveRecord::Base
   end
   
   def follows_user_ids
-    follows.collect{|f| f.user_id}
+    follows.select(:user_id).collect(&:user_id)
   end
   
   def has_followees?
@@ -158,9 +165,27 @@ class User < ActiveRecord::Base
     self.class.name
   end  
   
-  def touch
-    updated_at_will_change!
-    save
+  # convenince shortcut 
+  def ip
+    last_login_ip
+  end
+
+  def clear_token!
+    self.update_attribute(:perishable_token,nil)
+  end
+  
+  
+  def active?
+    perishable_token == nil
+  end
+
+  def activate!
+    clear_token!
+  end
+
+  def deliver_activation_instructions!
+    reset_perishable_token!
+    UserNotification.signup(self).deliver
   end
 
   protected

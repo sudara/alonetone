@@ -1,0 +1,24 @@
+<% if Alonetone.ga %>
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	var pageTracker = _gat._getTracker("<%= Alonetone.ga %>");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+	</script>
+<% end %>
+  	
+<% if Alonetone.get_clicky %>
+  <script type="text/javascript">
+  var clicky_site_id = <%= Alonetone.get_clicky %> ;
+  (function() {
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//static.getclicky.com/js';
+    ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+  })();
+  </script>
+<% end %>

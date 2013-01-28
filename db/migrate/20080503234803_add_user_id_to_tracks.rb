@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddUserIdToTracks < ActiveRecord::Migration
   def self.up
     add_column :tracks, :user_id, :integer

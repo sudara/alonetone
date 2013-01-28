@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ForumsHelper
  def pagination(collection)
     if collection.total_pages > 1

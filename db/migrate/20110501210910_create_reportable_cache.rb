@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateReportableCache < ActiveRecord::Migration
 
   def self.up

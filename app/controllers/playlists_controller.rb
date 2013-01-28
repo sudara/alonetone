@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class PlaylistsController < ApplicationController
   
   before_filter :find_user
   before_filter :find_playlists, :except => [:index, :new, :create, :sort]
-  before_filter :login_required, :except => [:index, :show]
+  before_filter :require_login, :except => [:index, :show]
 
   before_filter :find_tracks, :only => [:show, :edit]
   
@@ -16,7 +17,7 @@ class PlaylistsController < ApplicationController
                       @user.playlists.include_private :
                       @user.playlists.public
 
-    if present?(@all_playlists)
+    if @all_playlists
       middle = (@all_playlists.size + 1) / 2
       
       @playlists_left  = @all_playlists[ 0 ... middle ]
@@ -39,7 +40,7 @@ class PlaylistsController < ApplicationController
     unless current_user_is_admin_or_owner?(@user)
 
     respond_to do |format| 
-      format.html { @playlists = @user.playlists.include_private.find(:all) }
+      format.html { @playlists = @user.playlists.include_private.all }
       format.js do
         params["playlist"].each_with_index do |id, position|
           Playlist.update(id, :position => position)
@@ -89,14 +90,14 @@ class PlaylistsController < ApplicationController
       :page     => params[:uploads_page]
     )
 
-    @listens = @user.listens.paginate(:all, 
+    @listens = @user.listens.paginate( 
       :limit    => 10, 
       :order    => 'listens.created_at DESC', 
       :per_page => 10, 
       :page     => params[:listens_page]
     )
     
-    @favorites = @user.favorites.tracks.paginate(:all,
+    @favorites = @user.favorites.tracks.paginate(
       :limit => 10,
       :per_page  => 10,
       :page  =>  params[:favorites_page]

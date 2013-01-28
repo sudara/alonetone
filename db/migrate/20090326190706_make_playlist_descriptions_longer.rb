@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MakePlaylistDescriptionsLonger < ActiveRecord::Migration
   def self.up
     change_column(:playlists, :description, :text)

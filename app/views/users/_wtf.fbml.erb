@@ -1,6 +1,0 @@
-<% @users.each do |user|-%> 
-	<h2><% user.name %></h2>
-	<% user.assets.each do |track|%>
-	<fb:mp3 src="<%=track.public_mp3 %>" title="<%= track.name %>" artist="<%= user.name %>" /><br/>
-	<% end %>
-<% end %>

@@ -1,6 +1,6 @@
 <h1>New group</h1>
 
-<% form_for(@group) do |f| %>
+<%= form_for(@group) do |f| %>
   <%= f.error_messages %>
     name: <%= f.text_field :name %>
     description: <%= f.text_field :description %>

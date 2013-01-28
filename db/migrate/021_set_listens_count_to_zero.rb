@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SetListensCountToZero < ActiveRecord::Migration
   def self.up
     Asset.find(:all).each do |a|

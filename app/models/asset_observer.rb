@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AssetObserver < ActiveRecord::Observer
   def after_attachment_saved(asset)
     if followers_exist_for?(asset)

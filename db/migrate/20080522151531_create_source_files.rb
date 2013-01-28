@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSourceFiles < ActiveRecord::Migration
   def self.up
     create_table :source_files do |t|

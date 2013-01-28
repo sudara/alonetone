@@ -1,50 +1,64 @@
 source :gemcutter
-gem "rails", "2.3.14"
-#gem "mongrel", :require => nil
-#gem "mongrel_cluster"
-gem "mysql2", "~> 0.2.7"
+gem "rails", "3.2.11"
 
+# server
+gem "mysql2"
 gem "unicorn"
 
-# bundler requires these gems in all environments
-gem "nokogiri"
+# ruby
+gem "sometimes"
+gem "awesome_print", :require => 'ap'
 
-# gem "geokit"
 
-gem 'aws-s3', '~>0.5.0', :require => 'aws/s3'
-
-gem 'will_paginate', '~> 2.3.14'
-
+# uploading
+gem "aws-sdk"
+gem "paperclip"
+gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
 gem "mime-types" 
-gem 'ruby-mp3info',  :require => 'mp3info'
-gem 'rubyzip',       :require => 'zip/zip'
 
-gem 'googlecharts',  :require => 'gchart'
-gem 'haml', '2.0.9'
-
-gem 'newrelic_rpm'
-gem 'BlueCloth',     :require => 'bluecloth' 
-
-gem 'hpricot' # for comment processing / markdown fixing
-
-gem "rspec", ">= 1.2.0", :require => nil
-gem "rspec-rails", ">= 1.2.0", :require => nil
-
+# active record
+gem "acts_as_list"
+gem "has_permalink"
+gem "authlogic"
 gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 
+# view
+gem "redcarpet"
+gem "country-select"
+gem 'will_paginate'
+gem 'dynamic_form'
+gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating about pages)
 
-group :production do
-  gem 'rmagick'
+# external services
+gem 'defender'
+gem "geokit"
+gem 'newrelic_rpm'
+
+group :assets do
+  gem "jquery-rails"
+  gem "jquery-ui-rails"
+  gem "sass-rails"
+  gem "compass-rails"
+  gem 'yui-compressor'
+  gem 'uglifier'
+  gem "coffee-rails"
+  gem "soundmanager2-rails"
 end
 
 group :development do
-  # bundler requires these gems in development
-  # gem "rails-footnotes"
-
+  gem "rails-footnotes"
+  gem 'quiet_assets'
+  gem 'thin'
 end
 
+## Who loves tests! You do? You do!
 group :test do
-  # bundler requires these gems while running tests
-  # gem "rspec"
-  # gem "faker"
+  gem "rspec-rails"
+  gem "capybara"
+  gem "spork"
+  gem "guard-rspec"
+  gem 'database_cleaner'
+  gem "guard-spork"
+  # https://github.com/thoughtbot/factory_girl/wiki/Usage
+  gem "factory_girl_rails"
 end

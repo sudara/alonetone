@@ -1,132 +1,133 @@
-# This file is copied to ~/spec when you run 'ruby script/generate rspec'
-# from the project root directory.
-ENV["RAILS_ENV"] ||= 'test'
-require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
-require 'spec/autorun'
-require 'spec/rails'
+# -*- encoding : utf-8 -*-
+require 'rubygems'
+require 'spork'
 
-Spec::Runner.configure do |config|
-  # If you're not using ActiveRecord you should remove these
-  # lines, delete config/database.yml and disable :active_record
-  # in your config/boot.rb
-  config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  config.global_fixtures = :users
-  config.mock_with :mocha
+# some nice doc/examples for rpsec 2
+#
+# https://gist.github.com/663876
 
 
-  # == Fixtures
-  #
-  # You can declare fixtures for each example_group like this:
-  #   describe "...." do
-  #     fixtures :table_a, :table_b
-  #
-  # Alternatively, if you prefer to declare them only once, you can
-  # do so right here. Just uncomment the next line and replace the fixture
-  # names with your fixtures.
-  #
-  # config.global_fixtures = :table_a, :table_b
-  #
-  # If you declare global fixtures, be aware that they will be declared
-  # for all of your examples, even those that don't use them.
-  #
-  # You can also declare which fixtures to use (for example fixtures for test/fixtures):
-  #
-  # config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  #
-  # == Mock Framework
-  #
-  # RSpec uses it's own mocking framework by default. If you prefer to
-  # use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-  #
-  # == Notes
-  # 
-  # For more information take a look at Spec::Runner::Configuration and Spec::Runner
-def login_as(user)
-    request.session[:user] = user ? users(user).id : nil
-  end
-  
-  def logout
-    request.session[:user] = nil
-  end
-  
-  def logged_in?
-    request.session[:user] != nil
-  end
-  
-  def failed_access_path
-    '/' 
-  end
-  
+Spork.prefork do
+  # Loading more in this block will cause your tests to run faster. However,
+  # if you change any configuration or code from libraries loaded here, you'll
+  # need to restart spork for it take effect.
 
-  def auth_token(token)
-    CGI::Cookie.new('name' => 'auth_token', 'value' => token)
-  end
+  # This file is copied to spec/ when you run 'rails generate rspec:install'
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  require 'rspec/autorun'
+  require "authlogic/test_case"
+  require 'capybara/rspec'
 
-  def cookie_for(user)
-    auth_token users(user).token
-  end
-  
-  def new_user(options = {})
-    User.new({ :login      => 'beeboo', 
-                  :email      => 'boo@example.com', 
-                  :password   => 'quire123', 
-                  :password_confirmation => 'quire123' }.merge(options))
-  end
-  
-  def create_Contact(options = {})
-    User.create({ :login      => 'quire', 
-                  :email      => 'quire@example.com', 
-                  :password   => 'quire', 
-                  :password_confirmation => 'quire' }.merge(options))
-  end
-  
-  def get_all_actions(cont)
-    c= Module.const_get(cont.to_s.pluralize.capitalize + "Controller")
-    c.public_instance_methods(false).reject{ |action| ['rescue_action'].include?(action) }
-  end
 
-  # test actions fail if not logged in
-  # opts[:exclude] contains an array of actions to skip
-  # opts[:include] contains an array of actions to add to the test in addition
-  # to any found by get_all_actions
-  def should_require_login(cont, opts={})
-    except= opts[:except] || []
-    actions_to_test= get_all_actions(cont).reject{ |a| except.include?(a) }
-    actions_to_test += opts[:include] if opts[:include]
-    actions_to_test.each do |a|
-      #puts "... #{a}"
-      get a
-      response.should_not be_success
-      response.should redirect_to('http://test.host/login')
-     end
-  end
-  
-  class BeLoggedIn
-    def initialize; end
-    def matches?(r)
-      r.session && r.session[:user] 
-    end
-  
-    def description
-      "be logged in"
-    end
-  
-    def failure_message
-      " expected to be logged in, but was not"
+  # Requires supporting ruby files with custom matchers and macros, etc,
+  # in spec/support/ and its subdirectories.
+  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+  RSpec.configure do |config|
+    # == Mock Framework
+    #
+    # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
+    #
+    # config.mock_with :mocha
+    # config.mock_with :flexmock
+    # config.mock_with :rr
+    config.mock_with :rspec
+
+    # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+    # Disable transactional fixtures, and instead clean the db out 
+    config.use_transactional_fixtures = true
+
+
+    # If true, the base class of anonymous controllers will be inferred
+    # automatically. This will be the default behavior in future versions of
+    # rspec-rails.
+    config.infer_base_class_for_anonymous_controllers = false
+    
+    config.include Authlogic::TestCase
+
+    config.before(:each) do 
+      Capybara.reset_sessions!
     end
 
-    def negative_failure_message
-      " expected not to be logged in, but was"
-    end
-  end
+    module LoginHelper
+      include Authlogic::TestCase
 
-  def be_logged_in
-    BeLoggedIn.new
+      def login(sub = :subscriber)
+        # Not 100% sure why, but the before filter has to be skipped here, for each example
+        ApplicationController.skip_before_filter :activate_authlogic
+        
+        # And then called manually
+        activate_authlogic
+        SubscriberSession.create(subscribers(sub)) 
+      end
+    end
+    config.include LoginHelper
+
+    def pay!(subscription_type_id, item=nil)
+      post 'paypal/post_payment', :tx => '68E56277NB6235547',:st => 'Completed', :amt => '29.00',:cc => 'USD',:cm => subscription_type_id, :item_number => item 
+    end
   end
 end
+
+
+Spork.each_run do
+
+  # Pretty much all code in this block comes from the response here:
+  # http://stackoverflow.com/questions/9476880/having-issues-with-cache-classes-spork-after-changing-to-capybara-webkit-from
+  if Spork.using_spork?
+    ActiveRecord::Base.instantiate_observers
+  end
+
+  require 'factory_girl_rails'
+
+  # This code will be run each time you run your specs.
+  FactoryGirl.reload
+
+  # Forces all threads to share the same connection, works on Capybara because it starts the web server in a thread.
+  class ActiveRecord::Base
+    mattr_accessor :shared_connection
+    @@shared_connection = nil
+
+    def self.connection
+      @@shared_connection || retrieve_connection
+    end
+  end
+
+  ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+end
+
+# --- Instructions ---
+# Sort the contents of this file into a Spork.prefork and a Spork.each_run
+# block.
+#
+# The Spork.prefork block is run only once when the spork server is started.
+# You typically want to place most of your (slow) initializer code in here, in
+# particular, require'ing any 3rd-party gems that you don't normally modify
+# during development.
+#
+# The Spork.each_run block is run each time you run your specs.  In case you
+# need to load files that tend to change during development, require them here.
+# With Rails, your application modules are loaded automatically, so sometimes
+# this block can remain empty.
+#
+# Note: You can modify files loaded *from* the Spork.each_run block without
+# restarting the spork server.  However, this file itself will not be reloaded,
+# so if you change any of the code inside the each_run block, you still need to
+# restart the server.  In general, if you have non-trivial code in this file,
+# it's advisable to move it into a separate file so you can easily edit it
+# without restarting spork.  (For example, with RSpec, you could move
+# non-trivial code into a file spec/support/my_helper.rb, making sure that the
+# spec/support/* files are require'd from inside the each_run block.)
+#
+# Any code that is left outside the two blocks will be run during preforking
+# *and* during each_run -- that's probably not what you want.
+#
+# These instructions should self-destruct in 10 seconds.  If they don't, feel
+# free to delete them.
+
+
+

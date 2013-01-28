@@ -1,51 +1,19 @@
+# -*- encoding : utf-8 -*-
 class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
-  named_scope :descriptionless, {
-    :conditions => 'description = "" OR description IS NULL', 
-    :order      => 'created_at DESC', 
-    :limit      => 10
-  }
-  
-  named_scope :recent, {
-    :include  => :user, 
-    :order    => 'assets.id DESC'
-  }
-  
-  named_scope :favorited, {
-    :select     =>  'distinct assets.*', 
-    :include    =>  :tracks, 
-    :conditions => {'tracks.is_favorite' => true}, 
-    :order      =>  'tracks.id DESC'
-  }
-  
-  named_scope :id_not_in, lambda { |asset_ids| {
-    :conditions => [ "assets.id NOT IN (?)", asset_ids ] 
-  }}
-  
-  named_scope :user_id_in, lambda { |user_ids| {
-    :conditions => [ "assets.user_id IN (?)", user_ids ]
-  }}
-  
-  named_scope :random_order, :order => "RAND()"
-  
-  named_scope :order_by, lambda { |x| { :order => x }}
-  
-  named_scope :limit_by, lambda { |x| { :limit => x }}
-
-  formats_attributes :description    
+  scope :recent, order('assets.id DESC').includes(:user)
+  scope :descriptionless, where('description = "" OR description IS NULL').order('created_at DESC').limit(10)
+  scope :random_order, order("RAND()")
+  scope :favorited, select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC')
+    
+ 
   
   has_many :tracks, :dependent => :destroy
-
   has_many :playlists, :through => :tracks
-  
   belongs_to :user, :counter_cache => true
-  
   has_many :listens, :dependent => :destroy
-
-  reportable :weekly, :aggregation => :count, :grouping => :week
-
   has_many :listeners, 
     :through  => :listens, 
     :order    => 'listens.created_at DESC', 
@@ -59,24 +27,17 @@ class Asset < ActiveRecord::Base
     :order      =>  'tracks.created_at DESC'
     # :include    =>  :picable   
   
-  has_one :first_playlist,
-    :source      =>  :playlist,
-    :through     =>  :tracks,
-    :conditions  => {'playlists.is_favorite' => false, 'tracks.is_favorite' => false,
-      'playlists.user_id' => '#{user_id}' },
-    :order       => 'tracks.created_at ASC'
-    #:include     => :picable
-  
   has_many :comments, 
     :as         => :commentable,  
     :dependent  => :destroy, 
     :order      => 'created_at DESC'
     
-  acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
+  #acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
   
   has_many :facebook_addables, :as => :profile_chunks
-
+  reportable :weekly, :aggregation => :count, :grouping => :week
   has_permalink :name
+  
   # make sure we update permalink when user changes title
   before_save :create_unique_permalink
   
@@ -87,7 +48,18 @@ class Asset < ActiveRecord::Base
   # end
   # the attachment_fu callback is actually named after_resize
 
+  def self.latest(limit=10)
+    includes(:user => :pic).limit(limit).order('assets.id DESC')
+  end
+  
+  def self.id_not_in(asset_ids)
+    where("assets.id NOT IN (?)", asset_ids)
+  end
 
+  def self.user_id_in(user_ids)
+    where( "assets.user_id IN (?)", user_ids)
+  end
+  
   # Generates magic %LIKE% sql statements for all columns
   def self.conditions_by_like(value, *columns) 
     columns = self.content_columns if columns.size==0 
@@ -98,11 +70,8 @@ class Asset < ActiveRecord::Base
     }.join(" OR ") 
   end
   
-  def self.latest(limit=10)
-    find(:all, :include => [{:user => :pic}, :first_playlist], :limit => limit, :order => 'assets.id DESC')
-  end
-  
   # needed for views in case we've got multiple assets on the same page
+  # TODO: this is a view concern, move to helper, or better yet, deal w/it in .js
   def unique_id
     object_id
   end
@@ -118,7 +87,11 @@ class Asset < ActiveRecord::Base
   end
   
   def full_permalink
-    "http://#{ALONETONE.url}/#{user.login}/#{permalink}"
+    "http://#{Alonetone.url}/#{user.login}/#{permalink}"
+  end
+  
+  def first_playlist
+    Track.where(:asset_id => id).first.playlists.first rescue nil
   end
   
   # allows classes outside Asset to use the same format
@@ -153,11 +126,15 @@ class Asset < ActiveRecord::Base
   end
   
   def guest_can_comment?
-    if user.settings && user.settings.present?( 'block_guest_comments' )
+    if user.settings.present? && user.settings['block_guest_comments'].present?
       user.settings['block_guest_comments'] == "false"
     else
       true
     end
+  end
+  
+  def to_param
+    permalink
   end
   
   protected 
@@ -165,5 +142,6 @@ class Asset < ActiveRecord::Base
   def set_title_to_filename
     title = filename.split('.').first unless title
   end
+  
    
 end

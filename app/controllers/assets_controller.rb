@@ -1,47 +1,47 @@
+# -*- encoding : utf-8 -*-
 
 class AssetsController < ApplicationController  
   before_filter :find_user, :except => [:radio]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
   
   # we check to see if the current_user is authorized based on the asset.user
-  before_filter :login_required, :except => [:index, :show, :latest, :radio, :listen_feed]
+  before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
   before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
   
-  #rescue_from NoMethodError, :with => :user_not_found
-  #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-
+  # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple']
-  @@bots = ['bot','spider','baidu']
+  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook']
+ 
+  # user agent black list
+  @@bots = ['bot','spider','baidu','mp3bot'] 
   
   
   # GET /assets
   # GET /assets.xml
   def index
-      @page_title = "All music by " + @user.name 
+    @page_title = "All music by " + @user.name 
 
-      @assets = @user.assets.paginate(:all, 
-        :order    => 'created_at DESC', 
-        :per_page => 200, 
-        :page     => params[:page]
-      ) unless request.format.to_sym == :json
+    @assets = @user.assets.paginate(:order    => 'created_at DESC', 
+      :per_page => 200, 
+      :page     => params[:page]
+    ) unless request.format.to_sym == :json
 
-      respond_to do |format|
-        format.html # index.rhtml
-        format.xml  { render :xml => @assets.to_xml }
-        format.rss  { render :xml => @assets.to_xml }
-        format.js do  render :update do |page| 
-            page.replace 'stash', :partial => "assets"
-          end
-        end
-        format.json do
-          @assets = @user.assets.find(:all, :order => 'created_at DESC')          
-          cached_json = cache("tracksby"+@user.login+@user.assets.find(:first, :order => 'created_at DESC').created_at.to_s(:db).gsub(/-|:|\s/,'')) do
-            '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
-          end
-          render :json => cached_json
+    respond_to do |format|
+      format.html # index.rhtml
+      format.xml  { render :xml => @assets.to_xml }
+      format.rss  { render :xml => @assets.to_xml }
+      format.js do  render :update do |page| 
+          page.replace 'stash', :partial => "assets"
         end
       end
+      format.json do
+        @assets = @user.assets.find(:all, :order => 'created_at DESC')          
+        cached_json = cache("tracksby"+@user.login+@user.assets.find(:first, :order => 'created_at DESC').created_at.to_s(:db).gsub(/-|:|\s/,'')) do
+          '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
+        end
+        render :json => cached_json
+      end
+    end
   end
 
   def show
@@ -59,7 +59,7 @@ class AssetsController < ApplicationController
 
       format.mp3 do
         register_listen
-        redirect_to @asset.public_mp3
+        redirect_to @asset.mp3.url
       end
     end
   end
@@ -71,7 +71,7 @@ class AssetsController < ApplicationController
         pos = 1 unless pos && pos.to_i < 25
         @asset = Asset.find(:all, :limit => pos, :order => 'hotness DESC').last
         register_listen
-        redirect_to @asset.public_mp3
+        redirect_to @asset.mp3.url
       end
     end
   end
@@ -185,11 +185,11 @@ class AssetsController < ApplicationController
       # the rescue in the Asset model will hand the file back
       # Butt ugly, my friends. 
       if !asset.new_record? 
-        flashes += "#{CGI.escapeHTML asset.filename} uploaded!<br/>"
+        flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
         good = true
       else
         errors = asset.errors.collect{|attr, msg| msg }
-        flashes  += "'#{CGI.escapeHTML asset.filename}' failed to upload: <br/>#{errors}<br/>"
+        flashes  += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload: <br/>#{errors}<br/>"
       end
     end
 
@@ -289,14 +289,18 @@ class AssetsController < ApplicationController
       :source       => @referer, 
       :user_agent   => @agent,
       :ip           => request.remote_ip
-    ) unless bot?
+    ) unless is_a_bot?
   end
   
-  def bot?
-    ip = request.remote_ip
-    return true unless present? request.user_agent 
-    return true if @@bad_ip_ranges.any?{|cloaked_ip| ip.match /^#{cloaked_ip}/  } # check bad ips that fake user agent
-    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent} # check user agent agaisnt both white and black lists
+  def is_a_bot?
+    # gotta have a user agent
+    return true unless request.user_agent.present?
+    
+    # can't be a blacklisted ip
+    return true if @@bad_ip_ranges.any?{|cloaked_ip| request.remote_ip.match /^#{cloaked_ip}/  }  
+    
+    # check user agent agaisnt both white and black lists
+    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent}  
   end
   
   def browser?
@@ -308,13 +312,9 @@ class AssetsController < ApplicationController
   end
   
   def prevent_abuse
-    if bot? 
-      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.filename} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
+    if is_a_bot?
+      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.mp3_file_name} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
       render(:text => "Denied due to abuse", :status => 403)    
     end
-  end
-  
-  def abuser?
-    request.user_agent and request.user_agent.include? 'mp3bot'
   end
 end

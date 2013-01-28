@@ -1,22 +1,22 @@
-<% if @playlist.has_tracks? || authorized_for(@playlist) %>
+<% if playlist.has_tracks? || authorized_for(playlist) %>
 
-		<% div_for @playlist, :class => "box #{(@playlist.has_tracks? ? '' : 'empty')} #{@playlist.type}" do %>
+		<%= div_for playlist, :class => "box #{(playlist.has_tracks? ? '' : 'empty')} #{playlist.type}" do %>
 		  <div class="playlist_title box">
-			  <h2><%= h(@playlist.title)+(@playlist.present?(:year) ? " (#{@playlist.year})" : '') %></h2>
-			  <h3><%= pluralize @playlist.tracks_count, 'track'%> by <%= (@playlist.is_mix? ? 'various alonetone artists' : @playlist.user.name )%></h3>
-        <% if authorized_for(@playlist) %>
-          <%= link_to "edit", edit_user_playlist_path(@user, @playlist), :class => 'edit right' %>
+			  <h2><%= h(playlist.title)+(playlist.year.present? ? " (#{playlist.year})" : '') %></h2>
+			  <h3><%= pluralize playlist.tracks_count, 'track'%> by <%= (playlist.is_mix? ? 'various alonetone artists' : playlist.user.name )%></h3>
+        <% if authorized_for(playlist) %>
+          <%= link_to "edit", edit_user_playlist_path(@user, playlist), :class => 'edit right' %>
         <% end %>
 				
       </div>
-		<% if @playlist.private? && authorized_for(@playlist)%>
+		<% if playlist.private? && authorized_for(playlist)%>
 			<div class="empty">
             Playlist is hidden from the public (you can still share it)<br/>
-            <% form_for [@user, @playlist] do |f| %>
+            <%= form_for [@user, playlist] do |f| %>
                 <%= f.hidden_field :private, :value => 0 %>
                 <%= f.submit 'publish playlist now' %>
             <% end %>
-            <%= link_to 'delete', destroy_user_playlist_path(@user, @playlist.permalink), :class =>'delete button'%> 
+            <%= link_to 'delete', destroy_user_playlist_path(@user, playlist.permalink), :class =>'delete button'%> 
             
 			</div>
 		<% end %>
@@ -26,17 +26,17 @@
 			<div class="info">
 		    <div class="cover">
 		      <% if @single_playlist %>
-		      	<%= link_to(image_tag('jewel-case-125.png'), @playlist.cover, :class => 'jewel_case_125', :rel => 'facebox') %>
+		      	<%= link_to(image_tag('jewel-case-125.png'), playlist.cover, :class => 'jewel_case_125', :rel => 'facebox') %>
 		      <% else %>
-		      <%= link_to(image_tag('jewel-case-125.png'), edit_or_show(@user.login, @playlist), :class => 'jewel_case_125') %>
+		      <%= link_to(image_tag('jewel-case-125.png'), edit_or_show(@user.login, playlist), :class => 'jewel_case_125') %>
               <% end %>
-              <%= image_tag(@playlist.cover(:large), :class => 'cover_125') %>
+              <%= image_tag(playlist.cover(:large), :class => 'cover_125') %>
         </div>
         
         <p class="description">
-				  <%= @playlist.description %>
+				  <%= playlist.description %>
 				  <br/><br/>
-				  <span class="play_time"><%= @playlist.play_time %></span>
+				  <span class="play_time"><%= playlist.play_time %></span>
 				</p>
 
 			  <div class="clear"> </div>
@@ -47,6 +47,6 @@
 			</div>
 	<% end %>
   <% content_for :share do %>
-  	<%= render :partial => 'playlists/share', :object => @playlist %>
+    <%= render :partial => 'playlists/share', :locals => {:playlist => playlist} %>
   <% end %>
 <% end %>

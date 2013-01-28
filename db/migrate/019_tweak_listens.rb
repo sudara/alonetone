@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TweakListens < ActiveRecord::Migration
   def self.up
     remove_column :listens, :user_id

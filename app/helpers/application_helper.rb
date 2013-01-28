@@ -1,4 +1,5 @@
-# Methods added to this helper will be available to all templates in the application.
+# -*- encoding : utf-8 -*-
+require 'ruby_pants'
 module ApplicationHelper
   
   @@listen_sources = %w(itunes home download facebook)
@@ -41,10 +42,8 @@ module ApplicationHelper
     CGI.rfc1123_date(date)
   end
   
-
-  
   def track_name_for(asset, length=40)
-    truncate(h(asset.name),:length => length)
+    truncate(asset.name,:length => length).html_safe
   end
   
   # Awesome truncate
@@ -56,8 +55,18 @@ module ApplicationHelper
   def awesome_truncate(text, length = 30, truncate_string = "...")
     return if text.blank?
     l = length - truncate_string.mb_chars.length
-    text.mb_chars.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
+    result = text.mb_chars.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
+    result.html_safe
   end
+
+
+  def markdown(text)
+    return "" unless text
+    @renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+      :hard_wrap => true, :autolink => true, :no_intraemphasis => true) unless @renderer
+    Redcarpet::Render::SmartyPants.render(@renderer.render(text)).html_safe
+  end
+
 
   def link_to_play(asset, referer=nil)
     link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
@@ -84,7 +93,7 @@ module ApplicationHelper
     [flash[:notice], flash[:error], flash[:info], flash[:ok]].each do |flash|
       flashes << (render :partial => 'shared/flash', :object => flash) if (flash && !flash.empty?)
     end
-    flashes.join
+    flashes.join.html_safe
   end
   
   def check_for_and_display_welcome_back
@@ -128,11 +137,12 @@ module ApplicationHelper
   # Mephisto said it best...
   def sanitize_feed_content(html, sanitize_tables = false)
     options = sanitize_tables ? {} : {:tags => %w(table thead tfoot tbody td tr th)}
-    returning h(html.strip) do |html|
+    returning html.strip do |html|
       html.gsub! /&amp;(#\d+);/ do |s|
         "&#{$1};"
       end
     end
   end
+  
   protected 
 end

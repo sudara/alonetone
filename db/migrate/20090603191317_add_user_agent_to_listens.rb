@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddUserAgentToListens < ActiveRecord::Migration
   def self.up
     add_column :listens, :user_agent, :string

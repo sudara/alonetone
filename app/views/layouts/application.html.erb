@@ -3,10 +3,8 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title || 'alonetone, a damn fine home for musicians' %></title>
     
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'nav', 'flash', 'tracks','playlists','tabs','facebox','alonetone','forums', :cache => 'alonetone-v2'%>
-    
-    <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="/stylesheets/ipad.css" type="text/css" />
-    
+    <%= stylesheet_link_tag 'application' %>    
+    <%= stylesheet_link_tag 'ipad', :media => "only screen and (max-device-width: 1024px)" %>
 		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
 		
     <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
@@ -18,17 +16,20 @@
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <meta content="index,follow" name="robots"/>
+    <%= csrf_meta_tag %>
     <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
 		<meta content="<%=@keywords || 'alonetone, upload, mp3, musician, home, music, independent, artist, free, legal, mp3'%>" name="Keywords" />
 		
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
-
-    <%= javascript_include_tag 'jquery-1.4.2','soundmanager20110306/soundmanager2','utilities','jqueryui-1.8rc3','jquery-carousel','jquery-lowpro','jquery-hotkeys','facebox','twitter','application', 'highlight','tablesorter', :cache => 'allonetone' %>
-    <script type="text/javascript" src="http://use.typekit.com/rwq4zcv.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <!-- ensure token is available to javascript for accessible link posts, etc -->
+    
+    <% if Alonetone.typekit %>
+    <script type="text/javascript" src="http://use.typekit.com/<%= Alonetone.typekit %>.js"></script>
+	  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <% end %>
+  
+    <!-- render user specific variables and js helpers -->
     <%= render :partial => 'shared/javascript_payload' %>
   
   </head>
@@ -46,7 +47,9 @@
 		  <%= check_for_and_display_welcome_back %>
 		  <%= check_for_and_display_flashes %>
       <div id="main">
-		      <%= yield(:pages) or yield(:forums) or yield %>
+		      <%= yield :pages %>
+          <%= yield :forums %>
+          <%= yield %>
       </div>
       <div id="static">
           <%= yield :static %>
@@ -67,28 +70,7 @@
 	    </div><!-- end content -->
 	  </div><!-- end wrapper -->
 		<%= render :partial => 'shared/footer' %>
-	
-
-  	<script type="text/javascript">
-  	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  	</script>
-  	<script type="text/javascript">
-  	var pageTracker = _gat._getTracker("UA-241978-4");
-  	pageTracker._initData();
-  	pageTracker._trackPageview();
-  	</script>
-  	
-    <script type="text/javascript">
-    var clicky_site_id = 66408645;
-    (function() {
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = '//static.getclicky.com/js';
-      ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
-    })();
-    </script>
-    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66408645ns.gif" /></p></noscript>
+    <%= javascript_include_tag "application" %>
+    <%= render :partial => 'shared/analytics' %>
   </body>
 </html>

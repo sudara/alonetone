@@ -1,19 +1,10 @@
-require 'bluecloth'
+# -*- encoding : utf-8 -*-
 class Comment < ActiveRecord::Base
   
-  named_scope :public, {
-    :conditions => {:spam => false, :private => false},
-    :order      => 'id DESC'
-  }
-  
-  named_scope :by_member, {
-    :conditions => ['commenter_id IS NOT NULL']
-  }
-  
-  named_scope :include_private, {
-    :conditions => {:spam => false}, 
-    :order      => 'id DESC'
-  }
+  scope :recent, order('id DESC')
+  scope :public,  recent.where(:spam => false).where(:private => false)  
+  scope :by_member, recent.where('commenter_id IS NOT NULL')
+  scope :include_private, recent.where(:spam => false)
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   
@@ -30,21 +21,13 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..2000
   
-  formats_attributes :body
-  
-  acts_as_defensio_comment(:fields => { 
-    :content  => :body, 
-    :article  => :commentable, 
-    :author   => :author_name,
-    :permalink => :full_permalink 
-  })
+  include Defender::Spammable
+  configure_defender :keys => { 'content' => :body, 
+    'type' => 'comment', 'author-ip' => :remote_ip, 'author-name' => :author_name,
+    'parent-document-permalink' => :full_permalink}
   
   attr_accessor :current_user
 
-  def body
-    self.body_html || BlueCloth::new(self[:body]).to_html
-  end
-  
   def duplicate?
     Comment.find_by_remote_ip_and_body(self.remote_ip, self.body)
   end

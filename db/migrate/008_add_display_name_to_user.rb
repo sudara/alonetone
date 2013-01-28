@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDisplayNameToUser < ActiveRecord::Migration
   def self.up
     add_column :users, :display_name, :string

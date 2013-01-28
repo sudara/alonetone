@@ -1,16 +1,14 @@
-<% render(:layout => 'users/user') do %>
-  <% content_for :left do %>
-  
-    <%# cache("#{@playlist.cache_key}") do %>
+<%= render :partial => 'users/user' %>
 
-  	<div id="single_playlist">
-  		<%= render :partial => @playlist %>
-  	</div>
-  	<% end %>
-  	
-	<%# end %>
+<% content_for :left do %>
+  
+  <%# cache("#{@playlist.cache_key}") do %>
+
+	<div id="single_playlist">
+		<%= render @playlist %>
+	</div>  	
+<% end %>
 	  
-    <% content_for :right do %>
-      <%= render :partial => 'share', :object => @playlist %>
-    <% end %>
+<% content_for :right do %>
+  <%= render :partial => 'share', :locals => {:playlist => @playlist} %>
 <% end %>

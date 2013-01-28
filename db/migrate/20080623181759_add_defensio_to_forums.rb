@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddDefensioToForums < ActiveRecord::Migration
   def self.up
     add_column :topics, :spam, :boolean, :default => false

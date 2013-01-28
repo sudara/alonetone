@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module CacheHelper 
 
   # A humble attempt to create better lazy expiration keys

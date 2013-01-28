@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class User
   
   has_many :posts,  :order => "#{ Post.table_name}.created_at desc"

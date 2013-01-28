@@ -1,12 +1,11 @@
+# -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   
-  skip_before_filter :update_last_seen_at, :only => [:create, :new, :activate, :sudo]
-  before_filter :find_user,      :except => [:new, :create]
-  
-  before_filter :login_required, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
+  before_filter :find_user, :except => [:new, :create]
+  before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   skip_before_filter :login_by_token, :only => :sudo
   
-  rescue_from NoMethodError, :with => :user_not_found
+  #rescue_from NoMethodError, :with => :user_not_found
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
@@ -34,9 +33,6 @@ class UsersController < ApplicationController
         end
         render :json => cached_json
       end
-     # format.fbml do
-     #   @users = User.paginate(:all, :per_page => 10, :order => 'listens_count DESC', :page => params[:page])
-     # end
     end
   end
 
@@ -50,7 +46,7 @@ class UsersController < ApplicationController
                
         @popular_tracks = @user.assets.find(:all, :limit => 5, :order => 'assets.listens_count DESC')
         @assets = @user.assets.find(:all, :limit => 5)
-        @playlists = @user.playlists.public.find(:all)
+        @playlists = @user.playlists.public.all
         @listens = @user.listens.find(:all, :limit =>5)
         @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
         @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
@@ -62,9 +58,6 @@ class UsersController < ApplicationController
       end
       format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC', :limit => (params[:limit] || 10))}
       format.rss { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
-      format.fbml do
-        @assets = @user.assets.find(:all)
-      end
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end
@@ -86,61 +79,37 @@ class UsersController < ApplicationController
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
   
-  # ugliest logic ever. This is one of those areas where you don't want to touch the stuff for fear of breaking things
-  # On the other hand, until it's cleaned up, refactoring and bug fixing is next to impossible
+
   def create
-    respond_to do |format|
-      format.html do
-        return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
-        @user = params[:user].blank? ? User.find_by_email(params[:email]) : User.new(params[:user])
-        if params[:email] and not @user
-          flash[:error] = "I could not find an account with the email address '#{CGI.escapeHTML params[:email].first}'. <br/> Did you make a boo-boo or have another email I could diligently try for you?"
-          redirect_to login_path and return false
-        end
-        @user.login = params[:user][:login] unless params[:user].blank?
-        @user.reset_token!
-        begin
-          UserMailer.deliver_signup(@user) if !params[:user].blank?
-          UserMailer.deliver_forgot_password(@user) if params[:user].blank?
-        rescue Net::SMTPFatalError => e
-          flash[:error] = "A permanent error occured while sending the signup message to '#{CGI.escapeHTML @user.email}'. Please check the e-mail address."
-          redirect_to :action => "new"
-        rescue Net::SMTPServerBusy, Net::SMTPUnknownError, \
-          Net::SMTPSyntaxError, TimeoutError => e
-          flash[:error] = "The signup message cannot be sent to '#{CGI.escapeHTML @user.email}' at this moment. Please, try again later."
-          redirect_to :action => "new"
-        end
-        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
-      end
+    return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
+    
+    @user = User.new(params[:user])
+    if @user.save_without_session_maintenance
+      @user.deliver_activation_instructions!
+      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
+      redirect_to login_url
+    else
+      render :action => :new
     end
-    rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Whups, there was a small issue"
-      render :action => 'new'
   end
   
   
   def activate
-    self.current_user = User.find_by_activation_code(params[:activation_code])
-    if current_user != false && !current_user.activated?
-      # Did the user already activate, and this is just a forgot password "activation?"
-      if current_user.activated_at 
-        current_user.activate
-        cookies[:auth_token] = { :value => self.current_user.token , :expires => 2.weeks.from_now }
-        flash[:ok] = "Sweet, you are back in! <br/>Now quick, update your password below so you don't have to jump through hoops again"
-        redirect_to edit_user_path(current_user)
-      else
-        current_user.activate
-        flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
-        redirect_to new_user_track_path(current_user)
-      end
-    else 
-      flash[:error] = "Hm. Activation didn't work. Maybe your account is already activated?"
-      redirect_to default_url
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
+    raise Exception if @user.active?
+    
+    if @user.activate!
+      flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
+      UserSession.create(@user, false) # Log user in manually
+      UserNotification.activation(@user).deliver
+      redirect_to new_user_track_path(current_user)
+    else
+      flash[:error] = "Hm. Activation didn't work. Sorry about that!"
+      render :action => :new
     end
   end
   
   def edit
-
   end
   
   def bio
@@ -161,14 +130,13 @@ class UsersController < ApplicationController
   
   def update
     # fix to not care about password stuff unless both fields are set
-    (params[:user][:password] = params[:user][:password_confirmation] = nil) unless present?(params[:user][:password]) and present?(params[:user][:password_confirmation])
-    
+    (params[:user][:password] = params[:user][:password_confirmation] = nil) unless params[:user][:password].present? and params[:user][:password_confirmation].present?    
     # If the user changes the :block_guest_comments setting then it requires
     # that the cache for all their tracks be invalidated or else the cached
     # tabs will not change
     flush_asset_caches = false
     if params[:user] && params[:user][:settings] && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.settings && @user.settings.present?('block_guest_comments') && @user.settings['block_guest_comments'] == 'true'
+      currently_blocking_guest_comments = @user.settings && @user.settings['block_guest_comments'].present? && @user.settings['block_guest_comments'] == 'true'
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
     

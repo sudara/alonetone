@@ -28,7 +28,7 @@
           <% end %>
         </td>
         <td class="c2 vat">
-          <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
+          <%= link_to forum.name, forum_path(forum), :class => "title" %>
           <div class="posts">
             <%= pluralize forum.topics.count, 'topic' %>, 
             <%= pluralize forum.posts.count, 'post' %>
@@ -55,18 +55,18 @@
         <div class="static_content" id="currently_online">
           alonetoners online: 
           <% @online.each do |user| %>
-            <%= link_to h(user.name), user_home_path(user.login) %> 
+            <%= link_to user.name, user_home_path(user.login) %> 
           <% end %>
         </div>
     <% end %>
     <div class="static_content">
-      Psssst. We've got an alonetone chat room with your name on it. <%= link_to 'Chat Now', "http://#{ALONETONE.campfire_url}"%>
+      Psssst. We've got an alonetone chat room with your name on it. <%= link_to 'Chat Now', "http://#{Alonetone.campfire_url}"%>
     </div>
     <div class="footer_box">
-      <%= link_to('view all recent posts &rArr;', posts_path, :class=>'view_all', :title => 'view all recent posts') if Post.first %>
+      <%= link_to('view all recent posts &rArr;'.html_safe, posts_path, :class=>'view_all', :title => 'view all recent posts') if Post.first %>
     </div>
     
-    <% if logged_in? && present?(@user_topics) %>
+    <% if logged_in? && @user_topics.present? %>
     <h2>Conversations you are a part of</h2>
       <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
       <tr>

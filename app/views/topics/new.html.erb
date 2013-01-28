@@ -9,7 +9,7 @@
   <div class="container static_content">
     <p class="subtitle">Post will be by <%=  current_user.name %> in the "<%= @forum.name %>" forum</p>
     <%= error_messages_for :topic %>
-    <% form_for :topic,
+    <%= form_for :topic,
          :url  => forum_topics_path(@forum) do |f| -%>
     <%= render :partial => "form", :object => f %>
     <div class="submit_wrapper">

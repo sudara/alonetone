@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreatePlaylists < ActiveRecord::Migration
   def self.up
     create_table :playlists do |t|

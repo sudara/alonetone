@@ -2,7 +2,7 @@
     <% content_for :h1 do %> Edit Topic <% end %>
 
     <%= error_messages_for :topic %>
-    <% form_for :topic,
+    <%= form_for :topic,
          :url  => forum_topic_path(@forum, @topic),
          :html => { :method => :put } do |f| -%>
     <%= render :partial => "form", :object => f %>

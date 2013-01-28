@@ -4,7 +4,7 @@
   <h2 class="box comment_header"><%= link_for_comment(comment) %></h2>
 <% end %>
 
-<% div_for comment, :class => (cycle('even', 'odd')) do %>
+<%= div_for comment, :class => (cycle('even', 'odd')) do %>
   
   <div class="comment_user">
 	  <% if comment.commenter %>
@@ -21,7 +21,7 @@
   </div>
   
   <div class="comment_user_text">
-  	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
+  	<%= comment.commenter ? (link_to comment.commenter.name, user_home_path(comment.commenter)) : 'Guest' %>
   	<% if logged_in? %>
 	<span class="comment_ip">
 		(<%= comment.remote_ip %>) 
@@ -31,7 +31,7 @@
   </div>
   
 	<div class="comment_body">
-		<%= comment.body %>
+		<%= markdown(comment.body) %>
 		<% if authorized_for_comment(comment) %>
 		<div class="comment_controls">
   	    <% if comment.spam == false %>

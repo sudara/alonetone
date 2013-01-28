@@ -1,9 +1,0 @@
-<h1><%= class_name.pluralize %></h1>
-
-<p><%%= link_to "New <%= file_name %>", new_<%= file_name %>_path %></p>
-
-<ul>
-  <%% for <%= file_name %> in @<%= file_name.pluralize %> -%>
-    <li><%%= link_to image_tag(<%= file_name %>.public_filename(:thumb)), <%= file_name %>_path(<%= file_name %>) %></li>
-  <%% end -%>
-</ul>

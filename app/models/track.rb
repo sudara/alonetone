@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 # Schema version: 16
 #
@@ -16,11 +17,7 @@ class Track < ActiveRecord::Base
   belongs_to :asset
   belongs_to :user
   
-  named_scope :favorites, {
-    :conditions => ['is_favorite = ?',true], 
-    :order      => 'tracks.created_at DESC'
-  }
-
+  scope :favorites, where(:is_favorite => true).order('tracks.created_at DESC')
 
   acts_as_list :scope => :playlist_id, :order => :position
   

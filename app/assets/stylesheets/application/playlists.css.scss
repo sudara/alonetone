@@ -1,0 +1,248 @@
+@import "variables";
+
+// small playlists
+
+// carousel
+a.next, a.prev {
+  display: block;
+  width: 42px;
+  height: 42px;
+  background-color: transparent;
+  text-indent: -9999px;
+  &:hover img {
+    background-color: $body_link_hover;
+  }
+  &.disabled {
+    opacity: 0.1;
+    &:hover img {
+      background-color: transparent;
+    }
+  }
+}
+
+#playlists_carousel {
+  position: relative;
+  .prev {
+    position: absolute;
+    left: 0;
+    top: 45px;
+    background-image: image-url('buttons/prev.png');
+  }
+  .next {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background-image: image-url('buttons/next.png');
+  }
+}
+
+.playlists_carousel {
+  height: 190px;
+  width: 800px;
+  overflow: hidden;
+  margin: 0 70px;
+}
+
+li.small_playlists {
+  position: relative;
+  float: left;
+  width: 146px;
+  height: 168px;
+  margin-right: 50px;
+  margin-bottom: 100px;
+  a.small_playlist_title {
+    text-align: center;
+    font-family: $header_font, Helvetica, Arial;
+    font-size: 13px;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
+    position: absolute;
+    top: 140px;
+    left: 0px;
+    width: 146px;
+  }
+}
+
+.mini_cover {
+  position: absolute;
+  left: 10px;
+  width: 59px;
+  height: 54px;
+}
+
+a.jewel_case_50 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  text-indent: -9999px;
+  width: 59px;
+  height: 54px;
+  background-image: image-url('jewel-case-50.png');
+}
+
+img.cover_50 {
+  width: 50px;
+  height: 50px;
+  margin-left: 8px;
+  margin-top: 2px;
+}
+
+a.jewel_case_125 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  text-indent: -9999px;
+  width: 146px;
+  height: 136px;
+  background-image: image-url('jewel-case-125.png');
+}
+
+img.cover_125 {
+  width: 125px;
+  height: 125px;
+  margin-left: 17px;
+  margin-top: 4px;
+}
+
+a.jewel_case_200 {
+  position: absolute;
+  width: 200;
+  height: 200;
+  left: 15px;
+  top: 10px;
+  display: block;
+}
+
+img.cover_200 {
+  margin-left: 23px;
+  margin-top: 7px;
+}
+
+// rendered playlists
+
+.playlist {
+  div.box {
+    background-image: image-url('backgrounds/tracks.png');
+    background-color: #e1e2e1;
+    padding-left: 25px;
+    padding-top: 9px;
+    margin-bottom: 1px;
+    h2 {
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 20px;
+      padding-right: 40px;
+      color: $text_color;
+      margin: 0;
+    }
+    h3 {
+      font-weight: normal;
+      font-size: 12px;
+      margin: 0;
+      padding-bottom: 8px;
+      color: $text_color;
+    }
+  }
+  div.info {
+    position: relative;
+    display: block;
+    background: image-url('images/backgrounds/album.png') repeat-x top left;
+    background-color: $playlist_box_silver;
+    padding: 15px 15px 15px 20px;
+    div.cover {
+      position: relative;
+      float: left;
+      width: 148px;
+      height: 136px;
+    }
+    p.description {
+      float: left;
+      font-size: 12px;
+      width: 210px;
+      margin-left: 20px;
+    }
+    .play_time {
+      font-weight: bold;
+    }
+  }
+  .empty {
+    position: relative;
+    color: $white;
+    background: image-url('backgrounds/flash.png') repeat-x top left;
+    padding: 15px;
+    margin-bottom: 1px;
+    a {
+      color: $white;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+}
+
+// editing, woo hoo!
+
+#edit_playlist {
+  .playlist {
+    .tracks {
+      position: relative;
+    }
+    #drop_here {
+      display: none;
+    }
+    .playlist_title {
+      a.edit {
+        display: none;
+      }
+    }
+    &.adding {
+      #drop_here {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: $playlist_box_silver;
+        text-align: center;
+        color: $orange;
+        padding-top: 50px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+#playlist_sources {
+  .playlist_source {
+    .asset, .track {
+      width: 420px;
+    }
+    padding: 0px 0 0 0;
+    width: 420px;
+  }
+}
+
+#sort_playlists {
+  width: 100%;
+  position: relative;
+  height: 1000px;
+  li.small_playlists {
+    margin-bottom: 20px;
+  }
+}
+
+#edit_playlist {
+  position: relative;
+}
+
+#edit_playlist_info {
+  height: 370px;
+  form p {
+    font-size: 14px;
+  }
+  input {
+    font-size: 13px;
+  }
+}

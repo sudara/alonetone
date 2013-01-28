@@ -1,4 +1,5 @@
-require 'gchart'
+# -*- encoding : utf-8 -*-
+#require 'gchart'
 class User
   # graphing
   def track_plays_graph
@@ -106,9 +107,9 @@ class User
   end
 
   def most_listened_to_user_ids(limit = 10)
-    self.listens.count(:track_owner, 
+    self.listens.count(:track_owner_id, 
       :group      =>  'track_owner_id',
-      :order      =>  'count_track_owner DESC', 
+      :order      =>  'count_track_owner_id DESC', 
       :limit      =>  limit, 
       :conditions => ['track_owner_id != ? AND DATE(`listens`.created_at) > DATE_SUB( CURDATE(), interval 4 month)', self.id]
     ).collect(&:first)

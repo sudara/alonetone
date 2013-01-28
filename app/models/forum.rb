@@ -1,16 +1,15 @@
+# -*- encoding : utf-8 -*-
 class Forum < ActiveRecord::Base
-  named_scope :ordered, {:order => :position}
+  scope :ordered, order('position ASC')
   
-  formats_attributes :description
+  
   
   acts_as_list
 
   has_permalink :name
 
   validates_presence_of :name
-    
-  before_save :create_unique_permalink
-  
+      
   attr_readonly :posts_count, :topics_count
 
   has_many :topics, 

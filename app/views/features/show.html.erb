@@ -1,8 +1,8 @@
-<h1>Alonetone Features: <%=h @user.name %></h1>
+<h1>Alonetone Features: <%= @user.name %></h1>
 <% content_for :left do %>
   <% div_for @feature do %>
       <div class="box">
-        <h2><%=h @feature.featured_user.name %></h2>
+        <h2><%= @feature.featured_user.name %></h2>
         <h3>written by <%= link_to @feature.writer.name, user_home_path(@feature.writer)%>
         <%= link_to 'edit', edit_feature_path(@feature.featured_user.login), :class => 'edit right' if authorized?%>
 
@@ -40,7 +40,7 @@
            </div>
            <% if @user.has_tracks? %>
            <div class="stats">
-               joined alonetone <strong><%=h @user.created_at.to_date.to_s(:long) %></strong><br/>
+               joined alonetone <strong><%= @user.created_at.to_date.to_s(:long) %></strong><br/>
                <%= link_to "#{@user.playlists.public.count} albums/mixes", user_playlists_path(@user) if @user.playlists.public.count > 0 %><br/>
                <%= link_to @user.assets_count, user_tracks_path(@user) %> tracks on alonetone<br/>
                tracks listened to: <%= link_to @user.number_of_tracks_listened_to, listens_path(@user) %><br/>

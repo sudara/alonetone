@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module UsersHelper
   
   def website_for(user)
@@ -14,16 +15,16 @@ module UsersHelper
   
   def avatar(user, size=nil)
     case size
-      when 100 then image_tag(user.has_pic? ? user.pic.public_filename(:large) : 'no-pic-thumb100.jpg')
-      when 50 then image_tag(user.has_pic? ? user.pic.thumb.public_filename(:small) : 'no-pic-thumb50.jpg')
-      when nil then image_tag(user.has_pic? ? user.pic.public_filename(:tiny) : 'no-pic.jpg' )
+      when 100 then image_tag(user.has_pic? ? user.pic.pic.url(:large) : 'no-pic-thumb100.jpg')
+      when 50 then image_tag(user.has_pic? ? user.pic.pic.url(:small) : 'no-pic-thumb50.jpg')
+      when nil then image_tag(user.has_pic? ? user.pic.pic.url(:tiny) : 'no-pic.jpg' )
     end
   end
   
   def user_location(user)
-    if (user.present?(:city) && user.present?(:country))
+    if (user.try(:city) && user.try(:country))
       "from #{[user.city.strip, user.country.strip].compact.join(', ')}" 
-    elsif (user.present?(:city) || user.present?(:country))
+    elsif (user.try(:city) || user.try(:country))
       "from #{[user.city.strip, user.country.strip].compact.to_s}" 
     end
   end
@@ -40,7 +41,7 @@ module UsersHelper
   end
   
   def notice_hidden?(notice)
-    logged_in? && current_user.present?(:settings) && current_user.settings.present?('hide_notice') && current_user.settings['hide_notice'].present?(notice)
+    logged_in? && current_user.has_setting?('hide_notice') && current_user.settings['hide_notice'][notice].present?
   end
   
   def setting(symbol_or_string, user=current_user)

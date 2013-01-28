@@ -1,7 +1,7 @@
+# -*- encoding : utf-8 -*-
 class Topic < ActiveRecord::Base
-  include User::Editable
 
-  before_validation_on_create :set_default_attributes
+  before_validation :set_default_attributes, :on => :create
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
   before_destroy :count_user_posts_for_counter_cache
@@ -29,15 +29,13 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink :title
-  acts_as_defensio_comment :fields => { :content => :body, 
-                                        :article => :article, 
-                                        :author => :author_name,
-                                        :permalink => :full_permalink }
-                                        
+  ##acts_as_defensio_article_comment :fields => { :content => :body, 
+  #                                      :article => :article, 
+  #                                      :author => :author_name,
+  #                                      :permalink => :full_permalink }
+  #                                      
                                       
   
-  before_create :create_unique_permalink
-
   # hacks for defensio
   def article
     self
@@ -47,8 +45,12 @@ class Topic < ActiveRecord::Base
     user.login
   end
   
+  def editable_by?(user)
+    user && (user.id == user_id || user.moderator? || user.admin?)
+  end
+  
   def full_permalink
-    "http://#{ALONETONE.url}/forums/#{permalink}"
+    "http://#{Alonetone.url}/forums/#{permalink}"
   end
   def sticky?
     sticky == 1

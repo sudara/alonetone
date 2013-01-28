@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TopicsController < ApplicationController
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
@@ -20,7 +21,6 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html do
         if logged_in?
-          update_last_seen_at
           (session[:topics] ||= {})[@topic.id] = Time.now.utc
         end
         

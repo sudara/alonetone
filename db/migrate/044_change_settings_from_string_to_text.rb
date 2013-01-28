@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeSettingsFromStringToText < ActiveRecord::Migration
   def self.up
     remove_column :users, :settings

@@ -1,0 +1,105 @@
+@import "variables";
+
+// variables for nav w/o images
+$active_tab_background: #e1e2e1;
+$normal_tab_background: #45473c;
+$hover_tab_background: #da6d25;
+$active_tab_text: #37392b;
+$normal_tab_text: #c1cab3;
+$hover_tab_text: #f6fceb;
+
+ul#nav {
+  background: none;
+  li {
+    float: left;
+    height: 75px;
+    line-height: 0;
+    padding: 0;
+    margin-right: 12px;
+    background: none;
+    a {
+      float: left;
+      display: block;
+      margin: 0;
+      height: 74px;
+      width: 120px;
+      background: transparent image-url('buttons/nav.png') no-repeat 0px 0px;
+    }
+    &#home {
+      margin-right: 70px;
+      a {
+        width: 112px;
+        background-position: 0px 0px;
+        &:hover {
+          background-position: -224px 0px;
+        }
+        &.active {
+          background-position: -112px 0px;
+          &:hover {
+            background-position: -112px 0px;
+          }
+        }
+      }
+    }
+    &#browse {
+      a {
+        width: 124px;
+        background-position: -336px 0px;
+        &:hover {
+          background-position: -582px 0px;
+        }
+        &.active {
+          background-position: -459px 0px;
+          &:hover {
+            background-position: -459px 0px;
+          }
+        }
+      }
+    }
+    &#upload {
+      a {
+        background-position: -706px 0px;
+        width: 123px;
+        &:hover {
+          background-position: -952px 0px;
+        }
+        &.active {
+          background-position: -830px 0px;
+          &:hover {
+            background-position: -830px 0px;
+          }
+        }
+      }
+    }
+    &#your_stuff {
+      a {
+        width: 145px;
+        background-position: -1074px 0px;
+        &:hover {
+          background-position: -1364px 0px;
+        }
+        &.active {
+          background-position: -1219px 0px;
+          &:hover {
+            background-position: -1219px 0px;
+          }
+        }
+      }
+    }
+    &#forums {
+      a {
+        width: 130px;
+        background-position: -1509px 0px;
+        &:hover {
+          background-position: -1769px 0px;
+        }
+        &.active {
+          background-position: -1639px 0px;
+          &:hover {
+            background-position: -1639px 0px;
+          }
+        }
+      }
+    }
+  }
+}

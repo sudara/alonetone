@@ -2,34 +2,33 @@
 
   <% content_for :left do %>
     <div id="bio" class="box">
-      <h2 class="box static">All about <%=h @user.name %></h2>
+      <h2 class="box static">All about <%= @user.name %></h2>
       <%= link_to 'Edit', edit_user_path(@user),:class=>'edit right' if authorized? %>
 
         <div class="bio static_content">
         	<p>
-        	    <% if @user.present?(:bio) %>
-        	        <%= @user.printable_bio %>
-        	    <% else %>
-        	        <%=h @user.name %> doesn't have anything to say, unfortunately...
-                <% end %>
-
+      	    <% if @user.try?(:bio) %>
+      	        <%= @user.printable_bio %>
+      	    <% else %>
+      	        <%= @user.name %> doesn't have anything to say, unfortunately...
+            <% end %>
         	</p>
         </div>
       
-      <% if @user.present?(:website) %>
+      <% if @user.try(:website) %>
         <div class="bio static_content">
           	  <%= website_for(@user) %>
         </div>	
       <% end %>
 
-      <% if @user.present?(:myspace) %>
+      <% if @user.try?(:myspace) %>
         <div class="bio static_content">
         	  <%= myspace_for(@user) %>
         </div>	
       <% end %>
       
       <div class="bio static_content">
-    	  <% if @user.has_tracks? && authorized? && @user.present?(:itunes) %>
+    	  <% if @user.has_tracks? && authorized? && @user.itunes.present? %>
     	    Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
             <%= itunes_link_for(@user) %>
     	  <% elsif @user.has_tracks? && authorized? %>
@@ -37,7 +36,7 @@
     	   <%= link_to 'Submit this feed to iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
     	    to get your music indexed and listed in iTunes under Podcasts > Music. Then come back to update your profile when you have your iTunes feed URL.
     	  
-    	  <% elsif @user.present?(:itunes) %>
+    	  <% elsif @user.itunes.present? %>
             <%= itunes_link_for(@user) %>
     	  <% end %>
     	</div>

@@ -1,7 +1,7 @@
+# -*- encoding : utf-8 -*-
 class Post < ActiveRecord::Base
-  include User::Editable
   
-  formats_attributes :body
+  
 
   @@per_page = 10
   cattr_accessor :per_page
@@ -19,9 +19,9 @@ class Post < ActiveRecord::Base
   after_create  :update_cached_fields
   after_destroy :update_cached_fields
 
-  acts_as_defensio_comment :fields => { :content => :body, 
-                                        :article => :topic, 
-                                        :author => :author_name }
+  ##acts_as_defensio_article_comment :fields => { :content => :body, 
+  #                                      :article => :topic, 
+  #                                      :author => :author_name }
 
   def author_name
     user.login
@@ -42,6 +42,10 @@ class Post < ActiveRecord::Base
     paginate options
   end
 
+  def editable_by?(user)
+    user && (user.id == user_id || user.moderator? || user.admin?)
+  end
+  
 protected
   def update_cached_fields
     topic.update_cached_post_fields(self)

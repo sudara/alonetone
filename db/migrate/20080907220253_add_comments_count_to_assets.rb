@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddCommentsCountToAssets < ActiveRecord::Migration
   def self.up
     add_column :assets, :comments_count, :integer, :default => 0

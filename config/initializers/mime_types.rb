@@ -1,6 +1,5 @@
-# Be sure to restart your server when you modify this file.
-
+# -*- encoding : utf-8 -*-
 # Add new mime types for use in respond_to blocks:
-# Mime::Type.register "text/richtext", :rtf
 Mime::Type.register_alias "audio/mpeg", :mp3
-Mime::Type.register_alias 'text/html', :fbml
+# Mime::Type.register "text/richtext", :rtf
+# Mime::Type.register_alias "text/html", :iphone

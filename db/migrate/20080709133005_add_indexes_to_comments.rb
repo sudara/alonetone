@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddIndexesToComments < ActiveRecord::Migration
   def self.up
     add_index :comments, [:commentable_id, :commentable_type]
