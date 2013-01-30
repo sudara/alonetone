@@ -8,33 +8,13 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
       
-  scope :musicians, {
-    :conditions => ['assets_count > ?',0], 
-    :order      => 'assets_count DESC', 
-  }
-  
-  scope :activated, {
-    :conditions => {:perishable_token => nil}, 
-    :order      => 'users.id DESC', 
-  }
-  
-  scope :recently_seen, {
-    :order    => 'last_login_at DESC', 
-  }
-  
-  scope :with_location, {
-    :conditions => ['users.country != ""'], 
-    :order      => 'last_login_at DESC', 
-  }
-  
-  scope :geocoded, {
-    :conditions => ['users.lat != ""'], 
-    :order      => 'users.id DESC', 
-  }
-  
-  scope :on_twitter, { 
-    :conditions => ['users.twitter != ?', ''], 
-    :order => 'users.last_seen_at DESC' }
+  scope :recent, order('users.id DESC')
+  scope :recently_seen, order('last_login_at DESC')
+  scope :musicians, where(['assets_count > ?',0]).order('assets_count DESC')
+  scope :activated, where(:perishable_token => nil).recent
+  scope :with_location, where(['users.country != ""']).recently_seen
+  scope :geocoded, where(['users.lat != ""']).recent
+  scope :on_twitter, where(['users.twitter != ?', '']).recently_seen
   
   scope :alpha, { :order => 'display_name' }
   
