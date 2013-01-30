@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @users = User.paginate_by_params(params) 
+        @users = User.includes(:pic).paginate_by_params(params)
         @sort = params[:sort]
         @user_count = User.count
         @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)

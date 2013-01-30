@@ -7,9 +7,7 @@ class Asset < ActiveRecord::Base
   scope :descriptionless, where('description = "" OR description IS NULL').order('created_at DESC').limit(10)
   scope :random_order, order("RAND()")
   scope :favorited, select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC')
-    
- 
-  
+   
   has_many :tracks, :dependent => :destroy
   has_many :playlists, :through => :tracks
   belongs_to :user, :counter_cache => true
@@ -105,11 +103,6 @@ class Asset < ActiveRecord::Base
     else
       "?:??"
     end
-  end
-  
-  def description
-    return nil unless self[:description]
-    self.description_html || BlueCloth::new(self[:description]).to_html
   end
   
   def length
