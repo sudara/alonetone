@@ -1,4 +1,4 @@
-<% if not @single_track and comment.commentable_type == 'Asset'%>
+<% if not @single_track and comment.commentable_type == 'Asset' %>
   <%= render :partial => 'assets/asset', :locals => { :asset => comment.commentable}%>
 <% elsif not @single_track %>
   <h2 class="box comment_header"><%= link_for_comment(comment) %></h2>
@@ -32,7 +32,10 @@
   
 	<div class="comment_body">
 		<%= markdown(comment.body) %>
-		<% if authorized_for_comment(comment) %>
+		<% # TODO: move into javascript to enable cachification 
+    if authorized_for_comment(comment) 
+    -%>
+    
 		<div class="comment_controls">
   	    <% if comment.spam == false %>
   	        <%= link_to 'mark as spam', comment_path(comment, :spam => true),  :confirm => 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again', :method => :delete%>

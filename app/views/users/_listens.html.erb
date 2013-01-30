@@ -1,6 +1,6 @@
 <div id="user_listens" class="box">
 	<h2 class="box">Recently listened to</h2>
-	<%= render :partial => 'users/listen', :collection => @listens %>
+	<%= render :partial => 'assets/asset', :collection => @listens %>  
 </div>
 <div class="footer_box">
     <%= link_to 'view history &rArr;'.html_safe, listens_path(@user.login), :class => 'view_all' if @listens.size > 4%>

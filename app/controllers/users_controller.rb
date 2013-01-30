@@ -44,20 +44,20 @@ class UsersController < ApplicationController
         @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
         @tab = 'your_stuff' if current_user == @user
                
-        @popular_tracks = @user.assets.find(:all, :limit => 5, :order => 'assets.listens_count DESC')
-        @assets = @user.assets.find(:all, :limit => 5)
+        @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
+        @assets = @user.assets.limit(5)
         @playlists = @user.playlists.public.all
-        @listens = @user.listens.find(:all, :limit =>5)
-        @track_plays = @user.track_plays.from_user.find(:all, :limit =>10) 
-        @favorites = Track.favorites.find_all_by_user_id(@user.id, :limit => 5)
-        @comments = @user.comments.public.find(:all, :limit => 5) unless display_private_comments_of?(@user)
-        @comments = @user.comments.include_private.find(:all, :limit => 5) if display_private_comments_of?(@user)
+        @listens = @user.listened_to_tracks.limit(5)
+        @track_plays = @user.track_plays.from_user.limit(10)
+        @favorites = @user.tracks.favorites.recent.limit(5)
+        @comments = @user.comments.public.limit(5) unless display_private_comments_of?(@user)
+        @comments = @user.comments.include_private.limit(5) if display_private_comments_of?(@user)
         @follows = @user.followees
         @mostly_listens_to = @user.mostly_listens_to
         render
       end
-      format.xml { @assets = @user.assets.find(:all, :order => 'created_at DESC', :limit => (params[:limit] || 10))}
-      format.rss { @assets = @user.assets.find(:all, :order => 'created_at DESC')}
+      format.xml { @assets = @user.assets.recent.limit(params[:limit] || 10) }
+      format.rss { @assets = @user.assets.recent }
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end

@@ -64,6 +64,12 @@ class User < ActiveRecord::Base
     :order        => 'listens.created_at DESC',
     :include      => :asset
     
+  has_many :listened_to_tracks,
+    :through => :listens,
+    :source => :asset,
+    :uniq => true,
+    :order => 'listens.created_at'
+    
   # Can have their music listened to
   has_many :track_plays, 
     :foreign_key  => 'track_owner_id', 

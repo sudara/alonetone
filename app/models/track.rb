@@ -17,8 +17,8 @@ class Track < ActiveRecord::Base
   belongs_to :asset
   belongs_to :user
   
-  scope :favorites, where(:is_favorite => true).order('tracks.created_at DESC')
-
+  scope :recent, order('tracks.created_at DESC')
+  scope :favorites, where(:is_favorite => true).recent
   acts_as_list :scope => :playlist_id, :order => :position
   
   validates_presence_of :asset_id, :playlist_id
