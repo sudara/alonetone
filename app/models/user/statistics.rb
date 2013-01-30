@@ -24,16 +24,16 @@ class User
       :group      => group_by
     ).collect{ |tp| tp[1] }
     
-    ::Gchart.line(
-      :size             => '420x150',
-      :title            => 'listens',
-      :data             => track_play_history,
-      :axis_with_labels => 'r,x',
-      :axis_labels      => [ GchartHelpers.zero_half_max(track_play_history.max), labels ],
-      :line_colors      => 'cc3300', 
-      :background       => '313327', 
-      :custom           => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0'
-    ) 
+   # ::Gchart.line(
+   #   :size             => '420x150',
+   #   :title            => 'listens',
+   #   :data             => track_play_history,
+   #   :axis_with_labels => 'r,x',
+   #   :axis_labels      => [ GchartHelpers.zero_half_max(track_play_history.max), labels ],
+   #   :line_colors      => 'cc3300', 
+   #   :background       => '313327', 
+   #   :custom           => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0'
+   # ) 
   end
 
     
