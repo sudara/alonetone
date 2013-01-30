@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   }
   
   scope :activated, {
-    :conditions => {:activation_code => nil}, 
+    :conditions => {:perishable_token => nil}, 
     :order      => 'users.id DESC', 
   }
   
