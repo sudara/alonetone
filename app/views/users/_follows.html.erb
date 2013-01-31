@@ -1,19 +1,15 @@
-  <% cache(cache_digest(@follows)) do %>
-  <h2 class="box">Follows</h2>
-  <div id="follows" class="box static_content clearfix">
-          <%= link_to image_tag('feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
-      <%= render :partial => 'shared/small_user', :collection => @follows %>
-
-      <div class="clear"></div>
-  </div>
-  <% end %>
+<% cache(cache_digest(@follows)) do %>
+<h2 class="box">Follows</h2>
+<div id="follows" class="box static_content clearfix">
+    <%= link_to image_tag('feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
+    <%= render :partial => 'shared/small_user', :collection => @follows %>
+    <div class="clear"></div>
+</div>
+<% end %>
   
-<% else %>
   <h2 class="box">Listens to</h2>
   <div id="follows" class="box static_content clearfix">
-
       <%= render :partial => 'shared/small_user', :collection => @mostly_listens_to %>
-
       <div class="clear"></div>
   </div>
 
