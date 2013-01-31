@@ -1,7 +1,7 @@
 <%= cache('layout'+asset.cache_key) do %>
 <%= content_tag :div, :class => 'asset ' + cycle('odd', 'even') do %>
     <%= render :layout => 'assets/asset_layout', :locals => {:asset => asset, :referer => (@referer) } do %>
-      <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{h(asset.user.name)} on alonetone " %>
+      <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
     <% end %>
   <% end %>
 <% end %>

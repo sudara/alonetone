@@ -4,5 +4,5 @@
 </div>
 <div class="footer_box">
 	<%= link_to " ", user_tracks_path(@user),
-	    :class => 'view_more_tracks', :title => "uploaded mp3s by #{h(@user.name)}" if @user.assets_count > 5%>
+	    :class => 'view_more_tracks', :title => "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
 </div>

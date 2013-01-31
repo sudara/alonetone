@@ -1,6 +1,6 @@
 <div class="play-button button"><%= link_to_play asset, referer %></div>
 <div class="title">
- <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{h(asset.name)}" %><br />
+ <%= link_to track_name_for(asset,30), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %><br />
  
  <%= yield %> 
  <span class='counter'> </span>

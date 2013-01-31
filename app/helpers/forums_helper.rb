@@ -52,7 +52,7 @@ module ForumsHelper
   def search_posts_title
     returning(params[:q].blank? ? 'Recent Posts' : "Searching for" + " '#{h params[:q]}'") do |title|
       title << " by #{h(@user.display_name)}" if @user
-      title << " in #{h(@forum.name)}" if @forum
+      title << " in #{@forum.name}" if @forum
     end
   end
 

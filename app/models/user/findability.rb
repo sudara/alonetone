@@ -33,6 +33,7 @@ class User
   
   
   def self.paginate_by_params(params)
+    # TODO this can be factored down to an array of possible params/scopes
     case params[:sort]
       when 'recently_joined' 
         activated.paginate(:per_page => 15, 
