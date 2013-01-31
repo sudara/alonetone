@@ -5,7 +5,7 @@ class SourceFilesController < ApplicationController
   # GET /source_files
   # GET /source_files.xml
   def index
-    @source_files = @user.source_files.find(:all)
+    @source_files = @user.source_files
 
     respond_to do |format|
       format.html # index.html.erb

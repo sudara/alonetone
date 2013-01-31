@@ -27,7 +27,7 @@ class UpdatesController < ApplicationController
     @update = Update.find_by_permalink(params[:id])
     @previous = Update.find(:first, :conditions => ['created_at < ?',@update.created_at], :order => 'created_at DESC')
     @next = Update.find(:first, :first,:conditions => ['created_at > ?',@update.created_at], :order => 'created_at ASC')
-    @comments = @update.comments.public.find(:all, :include => :commenter)
+    @comments = @update.comments.public.includes(:commenter)
     @page_title = @update.title
     respond_to do |format|
       format.html # show.html.erb
@@ -100,7 +100,7 @@ class UpdatesController < ApplicationController
   protected
   
   def gather_sidebar_fun
-    @recent_updates = Update.find(:all, :limit => 10, :order => 'created_at DESC')
+    @recent_updates = Update.limit(10).order('created_at DESC')
   end
   
   def authorized?

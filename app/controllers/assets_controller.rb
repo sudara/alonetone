@@ -35,7 +35,7 @@ class AssetsController < ApplicationController
         end
       end
       format.json do
-        @assets = @user.assets.find(:all, :order => 'created_at DESC')          
+        @assets = @user.assets.order('created_at DESC')          
         cached_json = cache("tracksby"+@user.login+@user.assets.find(:first, :order => 'created_at DESC').created_at.to_s(:db).gsub(/-|:|\s/,'')) do
           '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
         end
@@ -69,7 +69,7 @@ class AssetsController < ApplicationController
       format.mp3 do
         pos = params[:position]
         pos = 1 unless pos && pos.to_i < 25
-        @asset = Asset.find(:all, :limit => pos, :order => 'hotness DESC').last
+        @asset = Asset.limit(pos).order('hotness DESC').last
         register_listen
         redirect_to @asset.mp3.url
       end
@@ -83,12 +83,12 @@ class AssetsController < ApplicationController
         @limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
         @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
         @assets = Asset.latest(@limit)
-        @favorites = Track.favorites.find(:all, :limit => 5)
-        @popular = Asset.find(:all, :limit => @limit, :order => 'hotness DESC')
+        @favorites = Track.favorites.limit(5)
+        @popular = Asset.limit(@limit).order('hotness DESC')
         @comments = if admin?
-          Comment.include_private.find(:all, :limit => 5)
+          Comment.include_private.limit(5)
         else
-          Comment.public.by_member.find(:all, :limit => 5)
+          Comment.public.by_member.limit(5)
         end
         @playlists = Playlist.public.latest(12)
         @tab = 'home'
@@ -102,7 +102,7 @@ class AssetsController < ApplicationController
         @assets = Asset.latest(50)
       end
       wants.json do
-        @assets = Asset.find(:all, :limit => 5000, :include => :user)
+        @assets = Asset.limit(5000).includes(:user)
         render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
       end
     end
@@ -119,7 +119,7 @@ class AssetsController < ApplicationController
   def top
     top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 40
     @page_title = "Top #{top} tracks"
-    @assets = Asset.find(:all, :limit => top, :order => 'hotness DESC')
+    @assets = Asset.limit(top).order('hotness DESC')
     respond_to do |wants|
       wants.html 
       wants.rss
@@ -127,7 +127,7 @@ class AssetsController < ApplicationController
   end
   
   def search
-    @assets = Asset.find(:all, :conditions => [ "assets.filename LIKE ? OR assets.title LIKE ?", "%#{params[:search]}%","%#{params[:search]}%"], :limit => 10)
+    @assets = Asset.where(["assets.filename LIKE ? OR assets.title LIKE ?", "%#{params[:search]}%","%#{params[:search]}%"]).limit(10)
     render :partial => 'results', :layout => false
   end
 

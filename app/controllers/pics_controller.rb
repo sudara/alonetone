@@ -3,7 +3,7 @@ class PicsController < ApplicationController
   # GET /pics
   # GET /pics.xml
   def index
-    @pics = Pic.find(:all)
+    @pics = Pic.limit(10)
 
     respond_to do |format|
       format.html # index.html.erb

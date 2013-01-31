@@ -34,7 +34,7 @@ class FeaturesController < ApplicationController
       :commentable_id => @feature.id
     )
 
-    @comments = @feature.comments.include_private.find(:all)
+    @comments = @feature.comments.include_private
 
     @page_title = "Featured Artist: #{@user.name}"
 

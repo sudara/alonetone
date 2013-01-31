@@ -13,7 +13,7 @@
   
     <tbody>
     <% @users.each do |ip, count| %>
-      <% users = User.find(:all, :conditions => {:ip => ip},:limit =>5)%>
+      <% users = User.where(:ip => ip).limit(5) %>
       <tr class>
         <td>
             <%= image_tag('http://api.hostip.info/flag.php?ip='+ip, :size => '20x20', :style => 'float:left; clear:none;opacity:0.4;') if ip %>

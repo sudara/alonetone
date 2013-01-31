@@ -85,10 +85,7 @@ class User
 
   
   def listens_average
-    first_created_at = assets.find(:all, 
-      :limit => 1, 
-      :order => 'created_at'
-    ).first.created_at
+    first_created_at = assets.limit(1).order('created_at').first.created_at
     
     x = ((Time.now - first_created_at)  / 60 / 60 / 24 ).ceil
     

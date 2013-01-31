@@ -65,12 +65,7 @@ class Playlist < ActiveRecord::Base
   end
   
   def self.latest(limit=5)
-    self.find(:all, 
-      :conditions => 'playlists.tracks_count > 0', 
-      :include    => :user, 
-      :limit      => limit, 
-      :order      => 'playlists.created_at DESC'
-    )
+    self.where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
   end
   
   protected 

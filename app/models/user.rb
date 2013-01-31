@@ -87,14 +87,11 @@ class User < ActiveRecord::Base
   before_destroy :efficiently_destroy_relations
   
   def listened_to_today_ids
-    listens.find(:all, 
-      :select     =>  'listens.asset_id', 
-      :conditions => ['listens.created_at > ?', 1.day.ago]
-    ).collect(&:asset_id)
+    listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).collect(&:asset_id)
   end
   
   def listened_to_ids
-    listens.find(:all, :select => 'listens.asset_id').collect(&:asset_id).uniq
+    listens.select('listens.asset_id').uniq.collect(&:asset_id)
   end
     
   def to_param

@@ -30,8 +30,8 @@ class PagesController < ApplicationController
             812, 810, 806, 805, 804, 802, 801, 800, 716, 799, 798, 
             797, 790, 787, 786, 767, 762 , 
             760, 753, 745, 742, 739, 724, 729,809, 819, 830]
-    @albums_2009 = Playlist.find(:all, :conditions => {:id => ids_2009}, :order => 'created_at ASC', :include => [:pic, :user])
-    @albums_2010 = Playlist.find(:all, :conditions => {:id => ids_2010}, :include => [:user,:pic])
+    @albums_2009 = Playlist.where(:id => ids_2009}).order('created_at ASC').includes([:pic, :user])
+    @albums_2010 = Playlist.where(:id => ids_2010}).includes([:user,:pic])
     render :layout => 'rpm_challenge'
   end
 

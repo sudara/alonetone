@@ -40,10 +40,7 @@ class User
   end
   
   def self.prefetch_from(records)
-    find(:all, 
-      :select     => 'distinct *', 
-      :conditions => ['id in (?)', records.collect(&:user_id).uniq]
-    )
+    select('distinct *').where(['id in (?)', records.collect(&:user_id).uniq])
   end
   
   def self.index_from(records)

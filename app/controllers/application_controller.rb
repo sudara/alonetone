@@ -199,7 +199,7 @@ class ApplicationController < ActionController::Base
    # end
   
   def set_latest_update_title
-    @latest_update = Update.find(:all, :order => 'created_at DESC', :limit => 1 ).first
+    @latest_update = Update.order('created_at DESC').limit(1).first
   end
     
   def welcome_back?

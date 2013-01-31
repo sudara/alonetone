@@ -23,12 +23,12 @@ class UsersController < ApplicationController
         render :xml => @users.to_xml
       end
       format.rss do
-        @users = User.activated.geocoded.find(:all, :limit => 1000)
+        @users = User.activated.geocoded.limit(1000)
       end
       # API 
       format.json do
         cached_json = cache("usersjson-"+User.last.id.to_s) do
-          users = User.alpha.musicians.find(:all,:include => :pic)
+          users = User.alpha.musicians.includes(:pic)
           '{ "records" : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:assets_count,:created_at, :user_id]) + '}'
         end
         render :json => cached_json
