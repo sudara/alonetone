@@ -1,6 +1,6 @@
 <div id="user_comments" class="box">
   <h2 class="box">Latest Comments</h2>
-  <%= render :partial => 'shared/comment', :collection => comments %>
+  <%= render :partial => 'shared/comment', :collection => @comments %>
 </div>
 <div class="footer_box">
   <%= link_to 'view all comments &rArr;'.html_safe, user_comments_path(@user.login), 
