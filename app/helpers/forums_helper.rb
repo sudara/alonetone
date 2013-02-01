@@ -1,10 +1,5 @@
 # -*- encoding : utf-8 -*-
 module ForumsHelper
- def pagination(collection)
-    if collection.total_pages > 1
-      will_paginate(collection)
-    end
-  end
   
   def search_posts_title
     returning(params[:q].blank? ? 'Recent Posts': "Searching for" + " '#{h params[:q]}'") do |title|
