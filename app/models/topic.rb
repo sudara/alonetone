@@ -90,11 +90,11 @@ class Topic < ActiveRecord::Base
   end
 
   def self.popular
-    Post.count.group(:topic).where(['posts.created_at > ?',10.days.ago]).limit(3).order(count_all DESC)
+    Post.group(:topic).where(['posts.created_at > ?',10.days.ago]).limit(3).order('count_all DESC').count
   end
 
   def self.replyless
-    Topic.limit(3).order('created_at DESC').conditions('posts_count = 1')
+    Topic.limit(3).order('created_at DESC').where(:posts_count => 1)
   end
 
 protected

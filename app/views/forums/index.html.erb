@@ -51,7 +51,7 @@
     <% end %>
     </table>
 
-    <% if present? @online %>
+    <% if @online.present? %>
         <div class="static_content" id="currently_online">
           alonetoners online: 
           <% @online.each do |user| %>
