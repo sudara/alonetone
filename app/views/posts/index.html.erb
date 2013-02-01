@@ -2,16 +2,16 @@
 <% @page_title = search_posts_title -%>
 
 <% content_for :h1 do %>
-<% if params[:forum_q].blank? -%>
-  <%= @page_title %>
-<% else -%>
-  <%= 'Searching for' %> '<%= h params[:forum_q] %>'
-<% end -%>
+  <% if params[:forum_q].blank? -%>
+    <%= @page_title %>
+  <% else -%>
+    <%= 'Searching for' %> '<%= h params[:forum_q] %>'
+    <% end %>
 <% end %>
 
 <% content_for :breadcrumbs do %>
-        <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
-        Recent Posts
+  <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
+  Recent Posts
 <% end %>
 
 <% content_for :extras do %>
@@ -23,11 +23,11 @@
 </div>
 
 <% if present? @posts %>
-<%= render :partial => 'posts/posts' %>
+  <%= render :partial => 'posts/posts' %>
 <% else %>
   <h2>:( Sorry, nobody has bothered to talk about '<%= params[:forum_q]%>' before</h2>
 <% end %>
 
 <div class="forum_paginator">
-    <%= pagination @posts %>
+  <%= pagination @posts %>
 </div>
