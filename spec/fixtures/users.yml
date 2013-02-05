@@ -8,8 +8,6 @@ sudara:
   created_at: <%= 5.days.ago.to_s :db %>
   activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
-  token: sudaratoken
-  token_expires_at: <%= 5.days.from_now.to_s :db %>
   admin: true
   
 # normal   
@@ -22,8 +20,6 @@ arthur:
   created_at: <%= 1.days.ago.to_s :db %>
   activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
-  token: arthurtoken
-  token_expires_at: <%= 5.days.ago.to_s :db %>
   
 # deleted
 aaron:
