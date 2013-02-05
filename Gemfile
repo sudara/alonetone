@@ -9,7 +9,6 @@ gem "unicorn"
 gem "sometimes"
 gem "awesome_print", :require => 'ap'
 
-
 # uploading
 gem "aws-sdk"
 gem "paperclip"
@@ -49,6 +48,7 @@ group :development do
   gem "rails-footnotes"
   gem 'quiet_assets'
   gem 'thin'
+  gem 'rspec-rails'
 end
 
 ## Who loves tests! You do? You do!
