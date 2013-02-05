@@ -9,5 +9,5 @@ class SourceFile < ActiveRecord::Base
   #               :s3_access    => :authenticated_read,
   #               :processor    => Alonetone.image_processor 
                   
-  validates_as_attachment
+  
 end
