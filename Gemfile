@@ -58,6 +58,9 @@ group :test do
   gem "spork"
   gem "guard-rspec"
   gem 'database_cleaner'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'guard', :github => 'sudara/guard'
+  gem 'listen', :github => 'sudara/listen', :require => 'guard_listen'
   gem "guard-spork"
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
   gem "factory_girl_rails"
