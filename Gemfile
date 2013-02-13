@@ -49,6 +49,7 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'rspec-rails'
+  gem 'logical-insight'
 end
 
 ## Who loves tests! You do? You do!

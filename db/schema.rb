@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125160439) do
+ActiveRecord::Schema.define(:version => 20120930000305) do
 
   create_table "assets", :force => true do |t|
     t.string   "mp3_content_type"
@@ -355,7 +355,7 @@ ActiveRecord::Schema.define(:version => 20130125160439) do
     t.integer  "login_count",                        :default => 0,     :null => false
     t.datetime "current_login_at"
     t.string   "current_login_ip"
-    t.string   "persistence_token",                                     :null => false
+    t.string   "persistence_token"
     t.string   "perishable_token"
   end
 
