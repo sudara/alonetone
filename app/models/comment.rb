@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   scope :public,  recent.where(:spam => false).where(:private => false)  
   scope :by_member, recent.where('commenter_id IS NOT NULL')
   scope :include_private, recent.where(:spam => false)
+  scope :on_track, where(:commentable_type => 'Asset')
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   

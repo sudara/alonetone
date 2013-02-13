@@ -30,8 +30,8 @@
                 <div class="stats">
                   Uploaded <span class="utc_date"><strong><%= asset.created_at.iso8601.gsub(/\+.*/,'') %></strong></span>,
         	        listened to <strong><%= asset.listens_count %> times</strong>.
-        	        <% if asset.comments.count > 0 %>
-        	           <br/>Commented on <strong><%= pluralize asset.comments.public.size, 'times' %></strong>.
+        	        <% if asset.comments_count > 0 %>
+        	           <br/>Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
         	        <% end %>
         	        <% if asset.favorites_count > 0 %>
         	        	Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.

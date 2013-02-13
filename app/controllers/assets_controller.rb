@@ -82,15 +82,15 @@ class AssetsController < ApplicationController
       wants.html do
         @limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
         @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
-        @assets = Asset.latest(@limit)
+        @assets = Asset.latest(@limit).includes(:user => :pic)
         @favorites = Track.favorites.limit(5)
-        @popular = Asset.limit(@limit).order('hotness DESC')
+        @popular = Asset.limit(@limit).order('hotness DESC').includes(:user => :pic)
         @comments = if admin?
-          Comment.include_private.limit(5)
+          Comment.on_track.include_private.limit(5).includes(:commentable => :user)
         else
-          Comment.public.by_member.limit(5)
+          Comment.on_track.public.by_member.limit(5).includes(:commentable => :user)
         end
-        @playlists = Playlist.public.latest(12)
+        @playlists = Playlist.public.latest(12).includes(:pic)
         @tab = 'home'
         @welcome = true unless logged_in?
         @feature = Feature.published.first
