@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
     c.login_field = :login
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
-      
+  
+  # beta test this to see if appropriate
+  default_scope includes(:pic)
+  
   scope :recent, order('users.id DESC')
   scope :recently_seen, order('last_login_at DESC')
   scope :musicians, where(['assets_count > ?',0]).order('assets_count DESC')

@@ -80,29 +80,21 @@ class AssetsController < ApplicationController
   def latest
     respond_to do |wants|
       wants.html do
-        @limit = (params[:latest] && params[:latest].to_i < 50) ? params[:latest] : 5
         @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
-        @assets = Asset.latest(@limit).includes(:user => :pic)
-        @favorites = Track.favorites.limit(5)
-        @popular = Asset.limit(@limit).order('hotness DESC').includes(:user => :pic)
-        @comments = if admin?
-          Comment.on_track.include_private.limit(5).includes(:commentable => :user)
-        else
-          Comment.on_track.public.by_member.limit(5).includes(:commentable => :user)
-        end
-        @playlists = Playlist.public.latest(12).includes(:pic)
         @tab = 'home'
-        @welcome = true unless logged_in?
-        @feature = Feature.published.first
-        if logged_in? and current_user.has_followees?
-          @followee_tracks = current_user.new_tracks_from_followees(5)
-        end
+                        
+        @assets = Asset.latest.includes(:user => :pic).limit(5)
+        @favorites = Track.favorites_for_home
+        @popular = Asset.limit(5).order('hotness DESC').includes(:user => :pic)
+        @comments = admin? ? Comment.last_5_private : Comment.last_5_public
+        @playlists = Playlist.for_home
+        @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
       end
       wants.rss do 
         @assets = Asset.latest(50)
       end
       wants.json do
-        @assets = Asset.limit(5000).includes(:user)
+        @assets = Asset.limit(1000).includes(:user)
         render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
       end
     end
@@ -258,6 +250,10 @@ class AssetsController < ApplicationController
   def not_found
     flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" 
     redirect_to user_tracks_path(@user) 
+  end
+  
+  def user_has_tracks_from_followees?
+    logged_in? and current_user.has_followees?
   end
   
   def find_referer

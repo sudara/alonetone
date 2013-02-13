@@ -8,6 +8,8 @@ class Playlist < ActiveRecord::Base
   scope :favorites,        where(:is_favorite => true)
   scope :public,           where(:private => false).where(:is_favorite => false).where("tracks_count > 1") 
   scope :include_private,  where(:is_favorite => false)
+  scope :recent,           order('playlists.created_at DESC')
+  scope :for_home,     recent.public.limit(12).includes(:user, :pic)
 
   belongs_to :user, :counter_cache => true  
   has_one  :pic, :as => :picable, :dependent => :destroy

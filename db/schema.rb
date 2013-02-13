@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120930000305) do
+ActiveRecord::Schema.define(:version => 20130213150415) do
 
   create_table "assets", :force => true do |t|
     t.string   "mp3_content_type"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20120930000305) do
     t.datetime "updated_at"
   end
 
+  add_index "assets", ["hotness"], :name => "index_assets_on_hotness"
   add_index "assets", ["permalink"], :name => "index_assets_on_permalink"
   add_index "assets", ["user_id", "listens_per_week"], :name => "index_assets_on_user_id_and_listens_per_day"
   add_index "assets", ["user_id"], :name => "index_assets_on_user_id"
