@@ -1,5 +1,5 @@
 source :gemcutter
-gem "rails", "3.2.11"
+gem "rails", "3.2.12"
 
 # server
 gem "mysql2"
