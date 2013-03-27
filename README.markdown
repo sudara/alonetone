@@ -4,7 +4,7 @@
 
 [alonetone](http://alonetone.com) is at independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
 
-alonetone was launched in January 2008. As of September 2012 it hosts over 40,000 songs from over 3000 musicians and has delivered over 2.5 million mp3s (to real listeners, not google and spambots!)
+alonetone  launched in January 2008. As of 2013 it hosts over 48,000 songs from over 3500 musicians and has delivered over 3 million mp3s (to real listeners, not google and spambots!)
 
 ## Give us some dev love
 
@@ -32,7 +32,7 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 
 ### Current tech
 
-* Rails 3.2.8
+* Rails 3.2.12
 * jQuery
 * SoundManager 2 (for flash + html5 playback)
 
@@ -112,16 +112,18 @@ Thirdly, fork away on github.
 ### Setup alonetone on localhost
 
 
-1) Clone the app
+1) clone
 
-2) bundle install
+2) bundle 
 
-3) Create a database, and load the db/seeds with:
+3) Create needed config, database, and load db/seeds:
 
-      rake db:setup
+      rake setup
+			
+4) rails s
 
 
-Note: alonetone uses 4 config files that are automagically created (see lib/tasks/) the first time you run any rake task. 
+Note: alonetone uses 3 config files that are created by 'rake setup'
 
 
       alonetone.yml (contains the application "secret" and app-specific settings)
@@ -132,8 +134,6 @@ Note: alonetone uses 4 config files that are automagically created (see lib/task
 #### Logging in
 
 After the bootstrap data is loaded, you can login using the test account (username=test, password=test).
-
-You will see session and current\_user information at the end of each page after login. You can turn it off by changing show\_debug_info to false in alonetone.yml.
 
 After login, click on the "Upload" button to upload your first mp3.
 
