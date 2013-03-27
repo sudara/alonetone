@@ -4,7 +4,7 @@ development: &defaults
   app_name: YourAppName
   url: yourapp.com
   email: support@yourapp.com
-  secret: yourappsecret
+  secret: f041541efd6d104c7051041ec61e7aa5
   storage: local
   bucket: 
   amazon_id: 

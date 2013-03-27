@@ -1,5 +1,9 @@
 require 'rake'
 
+desc "Setup alonetone from scratch (copy config, create/seed db)"
+task :setup => [:copy_config, :environment, 'db:setup']
+
+
 desc "Copy application sample config for dev/test purposes"
 task :copy_config do
   if Rails.env.development? or Rails.env.test?
@@ -16,5 +20,4 @@ task :copy_config do
   end
 end
 
-# Run our copy config task before loading up the rails env
-task :environment, [] => :copy_config
+ 
