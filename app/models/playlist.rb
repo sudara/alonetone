@@ -70,11 +70,13 @@ class Playlist < ActiveRecord::Base
     self.where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
   end
   
-  protected 
+   
   
   # playlist is a mix if there is at least one track with a track from another user  
   def set_mix_or_album
-    self.is_mix = self.tracks.any?{ |track| track.asset.user.id.to_s != self.user.id.to_s}
+    # is this a favorites playlist?
+    is_mix = true if is_favorite? and return true
+    is_mix = true if tracks.present? && tracks.count > tracks.count(:all, :conditions => ['user_id != ?',user.id])
     true
   end
   
