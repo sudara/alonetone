@@ -3,10 +3,10 @@ class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
-  scope :recent, order('assets.id DESC').includes(:user)
-  scope :descriptionless, where('description = "" OR description IS NULL').order('created_at DESC').limit(10)
-  scope :random_order, order("RAND()")
-  scope :favorited, select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC')
+  scope :recent, -> { order('assets.id DESC').includes(:user) }
+  scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
+  scope :random_order, -> { order("RAND()") }
+  scope :favorited, -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC') }
    
   has_many :tracks, :dependent => :destroy
   has_many :playlists, :through => :tracks

@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/milgner/compass-rails.git
+  revision: c86e7fd9c2605c80816a2f64a3fb8b7c3a09e494
+  branch: rails4
+  specs:
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
+
+GIT
   remote: git://github.com/sudara/guard.git
   revision: b2b0d345bee88d8af17c9494c42478e0c97ae576
   specs:
@@ -91,8 +99,6 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
     country-select (1.1.1)
     daemons (1.1.9)
     database_cleaner (1.0.1)
@@ -271,7 +277,7 @@ DEPENDENCIES
   aws-sdk
   capybara
   coffee-rails
-  compass-rails
+  compass-rails!
   country-select
   database_cleaner
   defender
