@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
   has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC'
   has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position', :include => :pic
   has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]
-  has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
   has_many   :tracks
   
   #acts_as_mappable
