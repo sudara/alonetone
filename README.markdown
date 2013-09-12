@@ -1,5 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/sudara/alonetone.png)](http://travis-ci.org/sudara/alonetone)
-
+[![Build Status](https://secure.travis-ci.org/sudara/alonetone.png)](http://travis-ci.org/sudara
+/alonetone)
+[![Code Climate](https://codeclimate.com/github/sudara/alonetone.png)](https://codeclimate.com/github/sudara/alonetone)
 ## The future is bright
 
 [alonetone](http://alonetone.com) is at independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
