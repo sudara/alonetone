@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
@@ -30,8 +29,8 @@ class Asset < ActiveRecord::Base
     :dependent  => :destroy, 
     :order      => 'created_at DESC'
     
-  #acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
-  
+  after_create :notify_followers
+    
   has_many :facebook_addables, :as => :profile_chunks
   reportable :weekly, :aggregation => :count, :grouping => :week
   has_permalink :name
@@ -128,6 +127,12 @@ class Asset < ActiveRecord::Base
   
   def to_param
     permalink
+  end
+  
+  def notify_followers
+    if followers_exist_for?(asset)
+      AssetMailer.deliver_upload_notification(asset,emails_of_followers(asset)) 
+    end
   end
   
   protected 

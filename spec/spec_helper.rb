@@ -76,12 +76,6 @@ end
 
 Spork.each_run do
 
-  # Pretty much all code in this block comes from the response here:
-  # http://stackoverflow.com/questions/9476880/having-issues-with-cache-classes-spork-after-changing-to-capybara-webkit-from
-  if Spork.using_spork?
-    ActiveRecord::Base.instantiate_observers
-  end
-
   require 'factory_girl_rails'
 
   # This code will be run each time you run your specs.

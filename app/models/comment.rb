@@ -24,6 +24,8 @@ class Comment < ActiveRecord::Base
   
   validates_length_of :body, :within => 1..2000
   
+  after_create :deliver_comment_notification
+  
   include Defender::Spammable
   configure_defender :keys => { 'content' => :body, 
     'type' => 'comment', 'author-ip' => :remote_ip, 'author-name' => :author_name,
@@ -59,5 +61,14 @@ class Comment < ActiveRecord::Base
   def self.count_by_user(start_date, end_date, limit=30)
     limit = limit > 100 ? 100 : limit
     Comment.public.count(:all, :group => :commenter, :conditions => ['created_at > ? AND created_at < ? AND commenter_id IS NOT NULL',start_date, end_date], :limit => limit, :order => 'count_all DESC')
+  end
+  
+  def deliver_comment_notification
+    if !comment.spam? and 
+        comment.commentable.class == Asset and
+        user_wants_email?(comment.user) and 
+        comment.user != comment.commenter
+      CommentMailer.deliver_new_comment(comment, comment.commentable) 
+    end
   end
 end
