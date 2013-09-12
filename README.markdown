@@ -1,5 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/sudara/alonetone.png)](http://travis-ci.org/sudara
-/alonetone)
+[![Build Status](https://secure.travis-ci.org/sudara/alonetone.png)](http://travis-ci.org/sudara/alonetone)
 [![Code Climate](https://codeclimate.com/github/sudara/alonetone.png)](https://codeclimate.com/github/sudara/alonetone)
 ## The future is bright
 
