@@ -35,6 +35,7 @@ gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating 
 gem 'defender'
 gem "geokit"
 gem 'newrelic_rpm'
+gem 'skylight'
 
 # assets
 gem "jquery-rails"
