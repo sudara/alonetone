@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'active_record/fixtures'
 
-ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "users")
+User.create(:name => 'admin', :admin => true, :password => 'testing123', :password_confirmation => 'testing123')
 
 admin = User.find_by_login("admin")
 
