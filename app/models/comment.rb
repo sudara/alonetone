@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 class Comment < ActiveRecord::Base
   
-  scope :recent, order('id DESC')
-  scope :public,  recent.where(:spam => false).where(:private => false)  
-  scope :by_member, recent.where('commenter_id IS NOT NULL')
-  scope :include_private, recent.where(:spam => false)
-  scope :on_track, where(:commentable_type => 'Asset')
-  scope :last_5_private, on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})
-  scope :last_5_public,  on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})
+  scope :recent,          -> { order('id DESC')                                                                                 }
+  scope :public,          -> { recent.where(:spam => false).where(:private => false)                                            }
+  scope :by_member,       -> { recent.where('commenter_id IS NOT NULL')                                                         }
+  scope :include_private, -> { recent.where(:spam => false)                                                                     }
+  scope :on_track,        -> { where(:commentable_type => 'Asset')                                                              }
+  scope :last_5_private,  -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
+  scope :last_5_public,   -> { on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   
@@ -27,6 +27,7 @@ class Comment < ActiveRecord::Base
   after_create :deliver_comment_notification
   
   include Defender::Spammable
+  
   configure_defender :keys => { 'content' => :body, 
     'type' => 'comment', 'author-ip' => :remote_ip, 'author-name' => :author_name,
     'parent-document-permalink' => :full_permalink}
