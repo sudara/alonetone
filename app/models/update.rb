@@ -6,7 +6,10 @@ class Update < ActiveRecord::Base
   
   #acts_as_defensio_article_article(:fields =>{:permalink => :full_permalink})
   
-  has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
+  has_many :comments,
+    -> { order('created_at ASC')},
+    :as => :commentable, 
+    :dependent => :destroy
   
   def print
     self.content_html || BlueCloth::new(self.content).to_html

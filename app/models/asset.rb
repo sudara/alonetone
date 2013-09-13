@@ -33,6 +33,8 @@ class Asset < ActiveRecord::Base
   
   validates_presence_of :user_id
   
+  attr_accessible :user, :mp3, :size, :name
+  
   # after_resize do |record, mp3|
   #   mp3.tag.author = "#{record.user.name} (#{record.user.site})" unless mp3.tag.author
   # end
@@ -69,15 +71,6 @@ class Asset < ActiveRecord::Base
   # make sure the title is there, and if not, the filename is used...
   def name
     (title && !title.strip.blank?) ? title.strip : clean_filename
-  end
-  
-  # otherwise permalink gets 'stuck' on edit
-  def clean_permalink
-    self.permalink = nil
-  end
-  
-  def full_permalink
-    "http://#{Alonetone.url}/#{user.login}/#{permalink}"
   end
   
   def first_playlist

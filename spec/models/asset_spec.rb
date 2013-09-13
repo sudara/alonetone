@@ -1,5 +1,5 @@
-# -*- encoding : utf-8 -*-
 require File.dirname(__FILE__) + '/../spec_helper'
+include ActionDispatch::TestProcess
 
 describe Asset, 'basics: ' do
   fixtures :users, :assets
@@ -8,8 +8,8 @@ describe Asset, 'basics: ' do
     assets(:valid_mp3).should be_valid
   end
   
-  it 'can be a zip file' do
-    assets(:valid_zip).should be_valid
+  it 'cannot be a zip file' do
+    assets(:valid_zip).should_not be_valid
   end
   
   it 'cannot be any other filetype' do 
@@ -17,7 +17,7 @@ describe Asset, 'basics: ' do
   end
   
   it 'cannot be over 40 megs' do
-    assets(:valid_zip).update_attributes(:size => 45.megabytes).should == false
+    assets(:too_big_file).should_not be_valid
   end
   
   it 'should give its length in a human friendly way' do 
@@ -36,17 +36,17 @@ describe Asset, 'on upload' do
 
   before(:all) do
     # set the correct directory for our batch of test mp3s
-    Asset.attachment_options[:path_prefix] = "#{RAILS_ROOT}/spec/fixtures/assets"
+    # Asset.attachment_options[:path_prefix] = "#{RAILS_ROOT}/spec/fixtures/assets"
   end
   
   before(:each) do
     # fakes out attachment_fu by just saying 'yes, it uploaded' resulting in saved time
-    Asset.any_instance.expects(:save_to_storage).returns(true)
+    # Asset.any_instance.expects(:save_to_storage).returns(true)
   end
   
   it "should upload and increase the user's count" do 
     @asset = new_track('muppets.mp3')
-    lambda{@asset.save}.should change(Asset, :count).by(1)
+    expect{ @asset.save }.to change(Asset, :count).by(1)
   end
   
   it "should use the mp3 tag2 TT2 as name if present" do
@@ -145,5 +145,5 @@ describe Asset, 'on update' do
 end
 
 def new_track(file, content_type = 'audio/mpeg')
-  Asset.new({:user => users(:sudara), :uploaded_data => fixture_file_upload(File.join('assets',file), content_type)})
+  Asset.new({:user => users(:sudara), :mp3 => fixture_file_upload(File.join('assets',file))})
 end
