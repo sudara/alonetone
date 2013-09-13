@@ -1,3 +1,6 @@
+language: ruby
+rvm: 
+  2.0.0
 before_script:
   - mysql -e 'create database alonetone_test';
   - rake copy_config
