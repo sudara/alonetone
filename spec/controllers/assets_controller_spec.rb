@@ -6,7 +6,7 @@ describe AssetsController do
   
   subject do
     request.env["HTTP_ACCEPT"] = "audio/mpeg" 
-    get :show, :id => 'song1', :login => users(:sudara).login 
+    get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
   end
   
   @good_user_agents = [
@@ -30,12 +30,12 @@ describe AssetsController do
   
   it 'should accept a mp3 extension and redirect to the amazon url' do
     request.env["HTTP_ACCEPT"] = "audio/mpeg" 
-    get :show, :id => 'song1', :login => users(:sudara).login
+    subject
     response.should redirect_to(assets(:valid_mp3).mp3)
   end
   
   it 'should have a landing page' do
-    get :show, :id => 'song1', :login => users(:sudara).login
+    get :show, :id => 'song1', :user_id => users(:sudara).login
     response.should be_success
   end
 
