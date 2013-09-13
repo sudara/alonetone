@@ -3,6 +3,7 @@
 public/system/*
 db/*.sqlite3
 *.sqlite3
+*.sqlite
 log/*.log
 tmp/**/*
 vendor/bundle/**
@@ -24,4 +25,3 @@ public/pics
 public/source_files
 public/system
 public/sitemap.xml
-

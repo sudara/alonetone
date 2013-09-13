@@ -2,20 +2,20 @@
 Alonetone::Application.routes.draw do
   resources :groups
 
-  match 'login' => 'user_sessions#new'
-  match 'logout' => 'user_sessions#destroy'
+  get 'login' => 'user_sessions#new'
+  match 'logout' => 'user_sessions#destroy', via: [:get, :post]
   resources :user_sessions
 
   # admin stuff
-  match 'secretz' => 'secretz#index'
+  get 'secretz' => 'secretz#index'
   
   # one-off pages
-  match 'rpmchallenge' => 'pages#rpm_challenge'
-  match '24houralbum' =>  'pages#twentyfour'  
+  get 'rpmchallenge' => 'pages#rpm_challenge'
+  get '24houralbum' =>  'pages#twentyfour'  
     
   resources :features, :sessions, :user_reports
   
-  match 'blog' => 'updates#index', :as => "blog_home"
+  get 'blog' => 'updates#index', :as => "blog_home"
   
   resources 'updates', :as => 'blog'
   resources :updates
@@ -26,45 +26,45 @@ Alonetone::Application.routes.draw do
   end 
     
 
-  match  'about/:action' => 'pages', :as => "about"
-  match  'about/halp/:action' => 'pages', :as => "halp"
+  get  'about/:action' => 'pages', :as => "about"
+  get  'about/halp/:action' => 'pages', :as => "halp"
   
   
-  match 'signup'    => 'users#new'
-  match 'settings'  => 'users#edit'
-  match '/activate/:activation_code' => 'users#activate'
+  get 'signup'    => 'users#new'
+  get 'settings'  => 'users#edit'
+  get '/activate/:activation_code' => 'users#activate'
 
 
   # shortcut to profile
-  match ':login/bio' => 'users#bio', :as => 'profile'
+  get ':login/bio' => 'users#bio', :as => 'profile'
   
-  match '/latest.:format' => 'assets#latest'
+  get '/latest.:format' => 'assets#latest'
   
   # latest mp3s uploaded site-wide
-  match '/latest/:latest' => 'assets#latest', :as => 'latest'
+  get '/latest/:latest' => 'assets#latest', :as => 'latest'
   
-  match'/:login/listenfeed.:format' => 'assets#listen_feed', :as => 'listen_feed'
+  get'/:login/listenfeed.:format' => 'assets#listen_feed', :as => 'listen_feed'
   
-  match 'radio' =>'assets#radio', :as => 'radio_home'
-  match 'radio/:source/:per_page/:page' => 'assets#radio', :defaults =>{:per_page => 5, :page => 1}, :as => 'radio'
+  get 'radio' =>'assets#radio', :as => 'radio_home'
+  get 'radio/:source/:per_page/:page' => 'assets#radio', :defaults =>{:per_page => 5, :page => 1}, :as => 'radio'
   
   # top 40
-  match  '/top/:top' => 'assets#top', :as => 'top'
+  get  '/top/:top' => 'assets#top', :as => 'top'
 
-  match '/users/by/activity/:page' => 'users#index', :sort => 'active', :defaults => {:page => 1}, :as => 'users_default'
-  match '/users/by/:sort/:page' => 'users#index', :defaults => {:page => 1}, :as => 'sorted_users'
+  get '/users/by/activity/:page' => 'users#index', :sort => 'active', :defaults => {:page => 1}, :as => 'users_default'
+  get '/users/by/:sort/:page' => 'users#index', :defaults => {:page => 1}, :as => 'sorted_users'
   
-  match ':login/history' => 'listens#indexn', :as => 'listens'
+  get ':login/history' => 'listens#indexn', :as => 'listens'
   
-  match 'comments' => 'comments#index', :as => 'all_comments'
-  match ':login/comments' => 'comments#index', :as => 'user_comments'
-  match ':login/stats.:format' => 'users#stats', :as => 'user_stats'
+  get 'comments' => 'comments#index', :as => 'all_comments'
+  get ':login/comments' => 'comments#index', :as => 'user_comments'
+  get ':login/stats.:format' => 'users#stats', :as => 'user_stats'
   
-  match 'hot_track/:position.:format' => 'assets#hot_track', 
+  get 'hot_track/:position.:format' => 'assets#hot_track', 
     :format     => 'mp3',
     :as => 'hot_track'
     
-  match ':login/plus' => 'source_files#index', :as => 'user_plus'
+  get ':login/plus' => 'source_files#index', :as => 'user_plus'
 
   resources :forums do
     resources :topics do 
@@ -80,10 +80,10 @@ Alonetone::Application.routes.draw do
   end
 
   
-  match 'toggle_favorite' => 'users#toggle_favorite'
+  get 'toggle_favorite' => 'users#toggle_favorite'
   
-  match 'search' => 'search#index'
-  match 'search/:query' => 'search#index', :as => 'search_query'
+  get 'search' => 'search#index'
+  match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
 
   namespace :admin do
     resources :layouts
@@ -94,8 +94,8 @@ Alonetone::Application.routes.draw do
   root :to => 'assets#latest' 
   
   resources :users
-  match ':login' => 'users#show', :as => "user_home"
-  match ':login.:format' => 'users#show', :as => "user_feeds"
+  get ':login' => 'users#show', :as => "user_home"
+  get ':login.:format' => 'users#show', :as => "user_feeds"
     
   resources :users, :path => "/" do
     member do

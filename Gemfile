@@ -1,5 +1,9 @@
 source "https://rubygems.org"
-gem "rails", "3.2.12"
+
+gem "rails", "~> 4.0.0"
+
+# temporary
+gem "protected_attributes"
 
 # server
 gem "mysql2"
@@ -32,24 +36,24 @@ gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating 
 gem 'defender'
 gem "geokit"
 gem 'newrelic_rpm'
+gem 'skylight'
 
-group :assets do
-  gem "jquery-rails"
-  gem "jquery-ui-rails"
-  gem "sass-rails"
-  gem "compass-rails"
-  gem 'yui-compressor'
-  gem 'uglifier'
-  gem "coffee-rails"
-  gem "soundmanager2-rails"
-end
+# assets
+gem "jquery-rails"
+gem "jquery-ui-rails"
+gem "sass-rails"
+gem 'compass-rails', git: 'git://github.com/milgner/compass-rails.git', branch: 'rails4'
+gem 'yui-compressor'
+gem 'uglifier'
+gem "coffee-rails"
+gem "soundmanager2-rails"
 
 group :development do
   gem "rails-footnotes"
   gem 'quiet_assets'
   gem 'thin'
   gem 'rspec-rails'
-  gem 'logical-insight'
+  # gem 'logical-insight'
 end
 
 ## Who loves tests! You do? You do!
@@ -61,7 +65,7 @@ group :test do
   gem 'database_cleaner'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'guard', :github => 'sudara/guard'
-  gem 'listen', :github => 'sudara/listen', :require => 'guard_listen'
+  gem 'guard_listen', :github => 'sudara/listen', :require => 'guard_listen'
   gem "guard-spork"
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
   gem "factory_girl_rails"

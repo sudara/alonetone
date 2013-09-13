@@ -46,7 +46,7 @@ class UsersController < ApplicationController
                
         @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
         @assets = @user.assets.limit(5)
-        @playlists = @user.playlists.public.all
+        @playlists = @user.playlists.public
         @listens = @user.listened_to_tracks.limit(5)
         @track_plays = @user.track_plays.from_user.limit(10)
         @favorites = @user.tracks.favorites.recent.limit(5)

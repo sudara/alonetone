@@ -5,8 +5,8 @@ class Listen < ActiveRecord::Base
 
   attr_protected nil
   
-  scope :from_user, where('listener_id != ""')
-  scope :downloads, where(:source => 'download')
+  scope :from_user,  -> { where('listener_id != ""')      }
+  scope :downloads,  -> { where(:source => 'download')    }
     
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, :counter_cache => true, :touch => true

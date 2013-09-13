@@ -6,3 +6,4 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Alonetone::Application.config.secret_token = Alonetone.secret
+Alonetone::Application.config.secret_key_base = Alonetone.secret

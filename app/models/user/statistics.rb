@@ -100,16 +100,17 @@ class User
   end
 
   def mostly_listens_to
-    User.find(most_listened_to_user_ids(10), :include => :pic)
+    User.where(:id => most_listened_to_user_ids(10)).includes(:pic)
   end
 
   def most_listened_to_user_ids(limit = 10)
-    self.listens.count(:track_owner_id, 
-      :group      =>  'track_owner_id',
-      :order      =>  'count_track_owner_id DESC', 
-      :limit      =>  limit, 
-      :conditions => ['track_owner_id != ? AND DATE(`listens`.created_at) > DATE_SUB( CURDATE(), interval 4 month)', self.id]
-    ).collect(&:first)
+    listens
+      .where(['track_owner_id != ? AND DATE(`listens`.created_at) > DATE_SUB( CURDATE(), interval 4 month)', self.id])
+      .distinct(:track_owner_id)
+      .group(:track_owner_id)
+      .limit(limit)
+      .order('count_track_owner_id DESC')
+      .count(:track_owner_id)
   end  
 
   

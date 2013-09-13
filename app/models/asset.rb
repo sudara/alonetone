@@ -1,37 +1,29 @@
-# -*- encoding : utf-8 -*-
 class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics
   
-  scope :recent, order('assets.id DESC').includes(:user)
-  scope :descriptionless, where('description = "" OR description IS NULL').order('created_at DESC').limit(10)
-  scope :random_order, order("RAND()")
-  scope :favorited, select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC')
+  scope :recent,          -> { order('assets.id DESC').includes(:user) }
+  scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
+  scope :random_order,    -> { order("RAND()") }
+  scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC') }
    
   has_many :tracks, :dependent => :destroy
   has_many :playlists, :through => :tracks
   belongs_to :user, :counter_cache => true
   has_many :listens, :dependent => :destroy
   has_many :listeners, 
-    :through  => :listens, 
-    :order    => 'listens.created_at DESC', 
-    :uniq     => true, 
-    :limit    => 20
+    -> { order('listens.created_at DESC').uniq.limit(20)},
+    :through  => :listens
   
   has_many :favoriters, 
+    -> { where('tracks.is_favorite' => true).order('tracks.created_at DESC') },
     :source     =>  :user, 
-    :through    =>  :tracks, 
-    :conditions => {'tracks.is_favorite' => true}, 
-    :order      =>  'tracks.created_at DESC'
-    # :include    =>  :picable   
-  
-  has_many :comments, 
-    :as         => :commentable,  
-    :dependent  => :destroy, 
-    :order      => 'created_at DESC'
+    :through    =>  :tracks
+      
+  has_many :comments, :as => :commentable, :dependent  => :destroy
     
-  #acts_as_defensio_article(:fields =>{:permalink => :full_permalink})
-  
+  after_create :notify_followers
+    
   has_many :facebook_addables, :as => :profile_chunks
   reportable :weekly, :aggregation => :count, :grouping => :week
   has_permalink :name
@@ -128,6 +120,12 @@ class Asset < ActiveRecord::Base
   
   def to_param
     permalink
+  end
+  
+  def notify_followers
+    if followers_exist_for?(asset)
+      AssetMailer.deliver_upload_notification(asset,emails_of_followers(asset)) 
+    end
   end
   
   protected 

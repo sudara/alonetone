@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting
     
@@ -7,69 +6,64 @@ class User < ActiveRecord::Base
     c.login_field = :login
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
-  
-  # beta test this to see if appropriate
-  default_scope includes(:pic)
-  
-  scope :recent, order('users.id DESC')
-  scope :recently_seen, order('last_login_at DESC')
-  scope :musicians, where(['assets_count > ?',0]).order('assets_count DESC')
-  scope :activated, where(:perishable_token => nil).recent
-  scope :with_location, where(['users.country != ""']).recently_seen
-  scope :geocoded, where(['users.lat != ""']).recent
-  scope :on_twitter, where(['users.twitter != ?', '']).recently_seen
-  
-  scope :alpha, { :order => 'display_name' }
+
+  scope :recent,        -> { order('users.id DESC')                                   }
+  scope :recently_seen, -> { order('last_login_at DESC')                              }
+  scope :musicians,     -> { where(['assets_count > ?',0]).order('assets_count DESC') }
+  scope :activated,     -> { where(:perishable_token => nil).recent                   }
+  scope :with_location, -> { where(['users.country != ""']).recently_seen             }
+  scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
+  scope :on_twitter,    -> { where(['users.twitter != ?', '']).recently_seen          }
+  scope :alpha,         -> { order('display_name ASC')                                }
   
   # Can create music
   has_one    :pic,           :as => :picable
-  has_many   :assets,        :dependent => :destroy, :order => 'assets.id DESC'
-  has_many   :playlists,     :dependent => :destroy, :order => 'playlists.position', :include => :pic
-  has_many   :comments,      :dependent => :destroy, :order => 'id DESC', :include => [:commenter => :pic]
-  has_many   :user_reports,  :dependent => :destroy, :order => 'id DESC'
+  has_many   :assets, 
+    -> { order('assets.id DESC')},
+    :dependent => :destroy
+    
+  has_many   :playlists,     
+    -> { order('playlists.position')},
+    :dependent => :destroy
+  
+  has_many   :comments,
+    -> {order('comments.id DESC').includes([:commenter => :pic])},
+    :dependent => :destroy
+  
   has_many   :tracks
   
-  #acts_as_mappable
-  #before_validation :geocode_address
-
   reportable :weekly, :aggregation => :count, :grouping => :week
 
   # alonetone plus
   has_many :source_files
-  
   has_many :memberships
   has_many :groups, :through => :membership
   
   
   # Can listen to music, and have that tracked
   has_many :listens, 
-    :foreign_key  => 'listener_id', 
-    :order        => 'listens.created_at DESC',
-    :include      => :asset
+    :foreign_key  => 'listener_id'
     
-  has_many :listened_to_tracks,
-    :through => :listens,
-    :source => :asset,
-    :uniq => true,
-    :order => 'listens.created_at'
+  has_many :listened_to_tracks, 
+    -> { order('listens.created_at') },
+    :through => :listens, 
+    :source => :asset    
     
   # Can have their music listened to
   has_many :track_plays, 
+    -> { order('listens.created_at DESC').includes(:asset)},
     :foreign_key  => 'track_owner_id', 
-    :class_name   => 'Listen', 
-    :order        => 'listens.created_at DESC',
-    :include      => :asset
+    :class_name   => 'Listen'
   
   # And therefore have listeners
   has_many :listeners, 
-    :through  => :track_plays, 
-    :uniq     => true
+    -> { uniq },
+    :through  => :track_plays
   
   # top tracks
   has_many :top_tracks, 
-    :class_name => 'Asset', 
-    :limit      => 10, 
-    :order      => 'listens_count DESC'
+    -> { order('listens_count DESC').limit(10)},
+    :class_name => 'Asset'
   
   
   has_many :followings, :dependent => :destroy

@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class User
   
-  has_many :posts,  :order => "#{ Post.table_name}.created_at desc"
-  has_many :topics, :order => "#{Topic.table_name}.created_at desc"
+  has_many :posts,  -> { order("#{ Post.table_name}.created_at desc")}
+  has_many :topics, -> { order("#{Topic.table_name}.created_at desc")}
 
   # Creates new topic and post.
   # Only..
