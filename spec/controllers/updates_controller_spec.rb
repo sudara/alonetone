@@ -6,7 +6,7 @@ describe UpdatesController do
   fixtures :updates
   
   it "should not allow a normal user to edit an update" do
-    login_as :arthur
+    login :arthur
     get :edit, :id => updates(:one)
     response.should_not be_success
   end
@@ -27,7 +27,7 @@ describe UpdatesController do
   end
   
   it "should allow an admin to edit an user report" do
-    login_as :sudara
+    login :sudara
     get :edit, :id => updates(:one)
     response.should be_success
   end

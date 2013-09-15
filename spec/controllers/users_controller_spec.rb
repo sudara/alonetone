@@ -49,26 +49,26 @@ describe UsersController, "permissions" do
   integrate_views
   [:sudara, :arthur].each do |user|
     it "should let a user or admin edit their profile" do
-      login_as(user)
+      login(user)
       post :edit, :login => 'arthur'
       response.should be_success
     end
   
     it "should let a user or admin update their profile" do
-      login_as(user)
+      login(user)
       put :update, :user => {:login => 'arthur', :bio => 'a little more about me'}
       response.should be_success
     end
   end
   
   it "should not let any old user edit a profile" do
-    login_as(:arthur)
+    login(:arthur)
     post :edit, :login => 'sudara'
     response.should_not be_success
   end
   
   it "should not let any old user update a profile" do
-    login_as(:arthur)
+    login(:arthur)
     put :update, :id => 'sudara', :user => {:login => 'sudara', :bio => 'a little more about me'}    
     response.should_not be_success
   end
@@ -80,14 +80,14 @@ describe UsersController, "permissions" do
   end
   
   it "should not let a normal user sudo" do
-    login_as(:arthur)
+    login(:arthur)
     get :sudo, :id => 'sudara'
     response.should_not be_success
   end
   
   it "should let an admin user sudo" do
     request.env["HTTP_REFERER"] = '/users/blah'
-    login_as(:sudara)
+    login(:sudara)
     get :sudo, :id => 'sudara'
     response.should redirect_to '/users/blah'
   end

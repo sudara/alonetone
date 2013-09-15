@@ -57,13 +57,21 @@ require 'rubygems'
     module LoginHelper
       include Authlogic::TestCase
 
-      def login(sub = :subscriber)
+      def setup_authlogic
         # Not 100% sure why, but the before filter has to be skipped here, for each example
         ApplicationController.skip_before_filter :activate_authlogic
         
         # And then called manually
         activate_authlogic
-        SubscriberSession.create(subscribers(sub)) 
+      end
+
+      def login(user)
+        setup_authlogic
+        UserSession.create(user)
+      end
+      
+      def logout
+        UserSession.find.destroy if UserSession.find
       end
     end
     config.include LoginHelper

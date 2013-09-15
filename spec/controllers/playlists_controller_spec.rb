@@ -35,7 +35,7 @@ describe PlaylistsController, "edit and delete" do
 
   #['sort_tracks', 'add_track', 'remove_track'].each do |postable| 
   #  it 'should forbid any modification of playlist by non logged in' do
-  #    login_as(:arthur)
+  #    login(:arthur)
   #    post postable, :id => 2, :permalink => 'arthurs-playlist', :login => 'arthur'
   #    response.should be_success
   #  end
@@ -56,37 +56,37 @@ describe PlaylistsController, "edit and delete" do
   end
   
   it 'should not let any old user delete a playlist' do 
-    login_as(:arthur)
+    login(:arthur)
     post :destroy, :id => '1', :permalink => 'owp', :login => 'sudara'
     response.should_not be_success
   end
   
   it "should not mistake a playlist for belonging to a user when it doesn't" do
-    login_as(:arthur)
+    login(:arthur)
     get :edit, :id=>'1', :permalink => 'owp', :login=> 'sudara'
     response.should_not be_success
   end
   
   it "should not let any old logged in user edit their playlist" do
     # logged in
-    login_as(:arthur)
+    login(:arthur)
     edit_sudaras_playlist
     response.should_not be_success
   end
   
   it 'should let a user edit their own playlist' do 
-    login_as(:arthur)
+    login(:arthur)
     edit_arthurs_playlist
     response.should be_success
   end
 
   it 'should let an admin delete any playlist' do 
-    login_as(:sudara)
+    login(:sudara)
     lambda{post :destroy, :id => '2', :permalink => 'arthurs-playlist', :login => 'arthur'}.should change(Playlist, :count).by(-1)
   end
   
   it 'should let a user delete their own playlist' do
-    login_as(:arthur)
+    login(:arthur)
     lambda{post :destroy, :id => '2', :permalink => 'arthurs-playlist', :login => 'arthur'}.should change(Playlist, :count).by(-1)
   end
 end
