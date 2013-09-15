@@ -53,13 +53,6 @@ class Asset
  # rescue TypeError => e
  #   logger.warn("User tried to upload too small file");
  # end  
-
-  # never allow this to be blank, as permalinks are generated from it
-  def clean_filename
-    clean = mp3_file_name.split('.')[-2].gsub(/-|_/,' ').strip.titleize
-    clean.blank? ? 'untitled' : clean
-  end
-  
   
   protected 
   

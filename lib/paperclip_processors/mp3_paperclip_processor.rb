@@ -27,7 +27,18 @@ module Paperclip
           @attachment.instance.send("#{simple_attribute}=",mp3.send(simple_attribute))
         end
         # title is a bit more complicated depending on tag type
-        @attachment.instance.title = (mp3.tag.title ? mp3.tag.title.strip : (mp3.tag2.TT2 ? mp3.tag2.TT2.strip : nil)) 
+         @attachment.instance.title = set_title(mp3)
+         @attachment.instance.generate_permalink!
+      end
+    end
+    
+    def set_title(mp3)
+      if mp3.tag.title.present?
+        mp3.tag.title.strip
+      elsif mp3.tag2.TT2.present?
+        mp3.tag2.TT2.strip 
+      else
+        nil
       end
     end
   end

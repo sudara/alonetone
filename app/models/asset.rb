@@ -26,16 +26,21 @@ class Asset < ActiveRecord::Base
     
   has_many :facebook_addables, :as => :profile_chunks
   reportable :weekly, :aggregation => :count, :grouping => :week
-  has_permalink :name
+ 
+  has_permalink :name, true
+  before_update :generate_permalink!, :if => :title_changed?
   
   validates_presence_of :user_id
   
   attr_accessible :user, :mp3, :size, :name, :user_id
-  
-  # after_resize do |record, mp3|
-  #   mp3.tag.author = "#{record.user.name} (#{record.user.site})" unless mp3.tag.author
-  # end
-  # the attachment_fu callback is actually named after_resize
+
+  # override has_permalink method to ensure we don't get empty permas
+  def generate_permalink!
+    self.permalink = fix_duplication(normalize(self.send(generate_from)))
+    if !permalink.present?
+      self.permalink = fix_duplication("untitled")
+    end
+  end
 
   def self.latest(limit=10)
     includes(:user => :pic).limit(limit).order('assets.id DESC')
@@ -67,7 +72,9 @@ class Asset < ActiveRecord::Base
   
   # make sure the title is there, and if not, the filename is used...
   def name
-    (title && !title.strip.blank?) ? title.strip : clean_filename
+    return title.strip if title.present?
+    clean = mp3_file_name.split('.')[-2].gsub(/-|_/,' ').strip.titleize
+    clean.present? ? clean : 'untitled'
   end
   
   def first_playlist
@@ -116,13 +123,5 @@ class Asset < ActiveRecord::Base
     if followers_exist_for?(self)
       #AssetMailer.deliver_upload_notification(self,emails_of_followers(asset)) 
     end
-  end
-  
-  protected 
-  
-  def set_title_to_filename
-    title = filename.split('.').first unless title
-  end
-  
-   
+  end 
 end
