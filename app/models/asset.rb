@@ -28,12 +28,9 @@ class Asset < ActiveRecord::Base
   reportable :weekly, :aggregation => :count, :grouping => :week
   has_permalink :name
   
-  # make sure we update permalink when user changes title
-  before_save :create_unique_permalink
-  
   validates_presence_of :user_id
   
-  attr_accessible :user, :mp3, :size, :name
+  attr_accessible :user, :mp3, :size, :name, :user_id
   
   # after_resize do |record, mp3|
   #   mp3.tag.author = "#{record.user.name} (#{record.user.site})" unless mp3.tag.author
@@ -116,8 +113,8 @@ class Asset < ActiveRecord::Base
   end
   
   def notify_followers
-    if followers_exist_for?(asset)
-      AssetMailer.deliver_upload_notification(asset,emails_of_followers(asset)) 
+    if followers_exist_for?(self)
+      #AssetMailer.deliver_upload_notification(self,emails_of_followers(asset)) 
     end
   end
   

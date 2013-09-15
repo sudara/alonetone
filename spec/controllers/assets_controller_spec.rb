@@ -31,7 +31,7 @@ describe AssetsController do
     request.env["HTTP_ACCEPT"] = "audio/mpeg" 
     request.user_agent = @@good_user_agents.first
     subject
-    response.should redirect_to(assets(:valid_mp3).mp3)
+    response.should redirect_to(assets(:valid_mp3).mp3.url)
   end
   
   it 'should have a landing page' do

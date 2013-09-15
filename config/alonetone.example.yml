@@ -5,7 +5,7 @@ development: &defaults
   url: yourapp.com
   email: support@yourapp.com
   secret: f041541efd6d104c7051041ec61e7aa5
-  storage: local
+  storage: filesystem
   bucket: 
   amazon_id: 
   amazon_key:
@@ -19,6 +19,7 @@ development: &defaults
 
 test:
   <<: *defaults
+  storage: filesystem
   show_debug_info: false
 
 production:

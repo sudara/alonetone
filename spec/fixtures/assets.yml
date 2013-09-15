@@ -30,3 +30,12 @@ valid_arthur_mp3:
   created_at: 2007-04-08 13:00:03
   user: arthur
   length: 45
+too_big_file:
+  id: 5
+  mp3_file_name: Song1.mp3
+  permalink: song1
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 61.megabytes %>
+  created_at: 2007-04-08 13:00:03
+  user_id: 1
+  length: 45

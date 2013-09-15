@@ -2,9 +2,10 @@
 class Asset 
   include Paperclip
 
-  # see config/initializers for defaults
+  # see config/initializers/paperclip for defaults
   attachment_options = {
-    :styles => {:original => [:processors => :mp3_paperclip_processor]},
+    :styles => { :original => ''}, # just makes sure original runs through the processor
+    :processors => [:mp3_paperclip_processor]
   }  
   attachment_options[:path] = "/mp3/:id/:basename.:extension" if Alonetone.storage == "s3"
   has_attached_file :mp3, attachment_options

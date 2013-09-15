@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class User
-  
+    
   def self.currently_online
      User.where(["last_login_at > ?", Time.now.utc-15.minutes])
   end
@@ -36,20 +36,11 @@ class User
     # TODO this can be factored down to an array of possible params/scopes
     case params[:sort]
       when 'recently_joined' 
-        activated.paginate(:per_page => 15, 
-          :page => params[:page]
-        )
-
+        activated.paginate(:page => params[:page], :per_page => 15)
       when 'monster_uploaders'
-        musicians.paginate(:per_page => 15, 
-          :page => params[:page]
-        )
-      
+        musicians.paginate(:page => params[:page], :per_page => 15)
       when 'on_twitter'
-        on_twitter.paginate(:per_page => 15,
-          :page => params[:page]
-        )
-
+        on_twitter.paginate(:page => params[:page], :per_page => 15)
       when 'dedicated_listeners'
         @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
           # returns an array, like so: [User, number_of_listens]
@@ -83,7 +74,7 @@ class User
         end
 
       else # last_seen
-        self.recently_seen.paginate(:page => params[:page], :per_page => 15)
+        recently_seen.paginate(:page => params[:page], :per_page => 15)
     end
   end
 

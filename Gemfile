@@ -16,7 +16,7 @@ gem "awesome_print", :require => 'ap'
 # uploading
 gem "aws-sdk"
 gem "paperclip"
-gem "ruby-mp3info", "~>0.7.1", :require => 'mp3info'
+gem "ruby-mp3info", :require => 'mp3info'
 gem "mime-types" 
 
 # active record
@@ -59,14 +59,14 @@ end
 ## Who loves tests! You do? You do!
 group :test do
   gem "rspec-rails"
+  gem "rspec-mocks"
   gem "capybara"
-  gem "spork"
+  gem 'guard-spring'
   gem "guard-rspec"
   gem 'database_cleaner'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'guard', :github => 'sudara/guard'
   gem 'guard_listen', :github => 'sudara/listen', :require => 'guard_listen'
-  gem "guard-spork"
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
   gem "factory_girl_rails"
 end

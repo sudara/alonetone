@@ -26,7 +26,6 @@ class Playlist < ActiveRecord::Base
   
   # make sure we update permalink when user changes title
   before_validation  :auto_name_favorites, :on => :create
-  before_save  :create_unique_permalink
   before_update :set_mix_or_album
 
   def to_param

@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 require 'rubygems'
-require 'spork'
+#require 'spork'
 
 # some nice doc/examples for rpsec 2
 #
 # https://gist.github.com/663876
 
 
-Spork.prefork do
+#Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
@@ -16,6 +16,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
+  require 'rspec/mocks' 
   require 'rspec/autorun'
   require "authlogic/test_case"
   require 'capybara/rspec'
@@ -71,10 +72,10 @@ Spork.prefork do
       post 'paypal/post_payment', :tx => '68E56277NB6235547',:st => 'Completed', :amt => '29.00',:cc => 'USD',:cm => subscription_type_id, :item_number => item 
     end
   end
-end
+#end
 
 
-Spork.each_run do
+#Spork.each_run do
 
   require 'factory_girl_rails'
 
@@ -92,7 +93,7 @@ Spork.each_run do
   end
 
   ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
-end
+  #end
 
 # --- Instructions ---
 # Sort the contents of this file into a Spork.prefork and a Spork.each_run
