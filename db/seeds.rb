@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'active_record/fixtures'
 
-admin = User.create(:name => 'admin', :login => 'admin', :password => 'testing123', :password_confirmation => 'testing123')
+admin = User.create(:login => 'admin', :password => 'testing123', :password_confirmation => 'testing123')
 admin.update_attribute(:admin, true)
 
 admin = User.find_by_login("admin")
