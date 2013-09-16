@@ -36,7 +36,7 @@ describe AssetsController do
   BAD_USER_AGENTS.each do |agent|
     it "should not register a listen for #{agent}" do
       request.user_agent = agent
-      expect{ subject }.should_not change(Listen, :count).by(1)  
+      expect{ subject }.not_to change(Listen, :count).by(1)  
     end
   end
   
