@@ -5,18 +5,11 @@ module Paperclip
   
   class Mp3PaperclipProcessor < Processor
     
-    # this is the required method for the paperclip processor
+    # required method for the paperclip processor
     def make
-      
-      #begin
-        # rather than create another file, bust open the current one
-        binary_data = ::Mp3Info.open(@file.path) do |mp3|
-          write_meta_data_to_model(mp3)
-        end
-      #rescue
-        # if mp3info can't open it, don't let this attachment succeed
-        #@file = nil 
-        #end
+      binary_data = ::Mp3Info.open(@file.path) do |mp3|
+        write_meta_data_to_model(mp3)
+      end
       @file
     end
     
@@ -26,12 +19,12 @@ module Paperclip
         if @attachment.instance.respond_to?("#{simple_attribute}=") and mp3.respond_to?(simple_attribute)
           @attachment.instance.send("#{simple_attribute}=",mp3.send(simple_attribute))
         end
-        # title is a bit more complicated depending on tag type
          @attachment.instance.title = set_title(mp3)
          @attachment.instance.generate_permalink!
       end
     end
     
+    # title is a bit more complicated depending on tag type
     def set_title(mp3)
       if mp3.tag.title.present?
         mp3.tag.title.strip

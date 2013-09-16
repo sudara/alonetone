@@ -2,8 +2,8 @@
 Alonetone::Application.routes.draw do
   resources :groups
 
-  get 'login' => 'user_sessions#new'
-  match 'logout' => 'user_sessions#destroy', via: [:get, :post]
+  get '/login', :to => 'user_sessions#new', :as => 'login'
+  match '/logout', :to => 'user_sessions#destroy', via: [:get, :post]
   resources :user_sessions
 
   # admin stuff
@@ -24,15 +24,13 @@ Alonetone::Application.routes.draw do
       get :unspam 
     end
   end 
-    
-
+  
   get  'about/:action' => 'pages', :as => "about"
   get  'about/halp/:action' => 'pages', :as => "halp"
   
-  
   get 'signup'    => 'users#new'
   get 'settings'  => 'users#edit'
-  get '/activate/:activation_code' => 'users#activate'
+  get '/activate/:perishable_token' => 'users#activate'
 
 
   # shortcut to profile

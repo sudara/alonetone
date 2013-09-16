@@ -53,22 +53,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def sudo_to(destination_user)
-    return false unless session[:sudo] || current_user.admin?
-    if session[:sudo] && destination_user.admin?
-      logger.warn('coming out of sudo to admin account')
-      session[:sudo] = nil 
-      @sudo = nil
-    else 
-      session[:sudo] = true
-      logger.warn("SUDO: #{current_user.name} is sudoing to #{destination_user.name}")
-      @sudo = true
-    end
-    self.current_user = destination_user
-    logger.warn("SUDO: #{current_user.name}")
-    true
-   end
-
   def ie6
     @ie6 = true if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" 
   end
@@ -159,6 +143,11 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.url unless request.xhr?
   end
   
+  def redirect_back_or_default(default='/')
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
+  
   def admin_or_owner(record=current_user)
     admin? || (!%w(destroy admin edit update).include?(action_name) && (params[:login].nil? || params[:login] == record.login))
   end
@@ -221,10 +210,4 @@ class ApplicationController < ActionController::Base
   def authorized?() 
     logged_in?
   end
-    
-  def admin?
-    logged_in? && current_user && current_user.admin?
-  end
-  private
-
 end

@@ -28,22 +28,21 @@ describe UpdatesController do
   
   it "should allow an admin to edit a blog entry" do
     login users(:sudara)
-    controller.should_receive(:logged_in?).and_return true
+    controller.stub(:current_user).and_return(users(:sudara))
     get :edit, :id => updates(:valid).permalink
-    controller.session["user_credentials"].should == users(:arthur).persistence_token 
+    controller.session["user_credentials"].should == users(:sudara).persistence_token 
     response.should be_success
   end
   
   it "should allow an admin to update a blog entry" do 
     login users(:sudara)
+    controller.stub(:current_user).and_return(users(:sudara))
     put :update, :id => updates(:valid).permalink, :title => 'change me'
-    response.should be_success
+    response.should redirect_to(update_path(updates(:valid).permalink))
   end
   
   it "should not let a normal joe create a blog entry" do
     post :create, :title => 'new', :content => 'report'
     response.should_not be_success
   end
-
-
 end

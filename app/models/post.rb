@@ -1,7 +1,5 @@
 # -*- encoding : utf-8 -*-
 class Post < ActiveRecord::Base
-  
-  
 
   @@per_page = 10
   cattr_accessor :per_page
@@ -18,10 +16,6 @@ class Post < ActiveRecord::Base
 
   after_create  :update_cached_fields
   after_destroy :update_cached_fields
-
-  ##acts_as_defensio_article_comment :fields => { :content => :body, 
-  #                                      :article => :topic, 
-  #                                      :author => :author_name }
 
   def author_name
     user.login

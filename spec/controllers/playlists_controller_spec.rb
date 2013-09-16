@@ -3,12 +3,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PlaylistsController, 'permissions' do
   
-  fixtures :playlists
+  fixtures :playlists, :users
   
-  # 
-  # throughout this file, we specify id and permalink, though in reality we pretty much use just a permalink
-  #
-   
   it "should NOT let a not-logged person edit a playlist" do
     # not logged in
     edit_sudaras_playlist

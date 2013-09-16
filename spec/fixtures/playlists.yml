@@ -23,8 +23,9 @@ empty:
 
 mix:
   id: 4
+  is_mix: true
   user_id: 2
   permalink: mix-tape
   title: mix tape
   tracks_count: 3
-  description: a mix tape, daring and wonderful
+  description: "a mix tape, daring and wonderful"

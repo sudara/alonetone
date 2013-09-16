@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CommentNotification < ActionMailer::Base
   default :from => Alonetone.email
   
@@ -11,7 +10,7 @@ class CommentNotification < ActionMailer::Base
     @number_of_comments = asset.comments_count
     @login = comment.user.login
 
-    mail :to => comment.user.emaill, :subject => "[alonetone] Comment on '#{asset.name}' from #{person_who_made(comment)}"
+    mail :to => comment.user.email, :subject => "[alonetone] Comment on '#{asset.name}' from #{person_who_made(comment)}"
   end
 
 

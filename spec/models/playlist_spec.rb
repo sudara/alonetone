@@ -31,7 +31,6 @@ describe Playlist do
   
   it 'should know if it is a mix on update' do 
     @playlist = playlists(:mix)
-    @playlist.save
     @playlist.is_mix?.should == true
   end
 

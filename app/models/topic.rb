@@ -15,10 +15,17 @@ class Topic < ActiveRecord::Base
   
   belongs_to :forum, :counter_cache => true
 
-  has_many :posts,       :order => "#{Post.table_name}.created_at", :dependent => :delete_all
-  has_one  :recent_post, :order => "#{Post.table_name}.created_at DESC", :class_name => "Post"
+  has_many :posts,       
+    -> { order('posts.created_at DESC') },
+    :dependent => :delete_all
+   
+  has_one  :recent_post,
+    -> { order('pests.created_at DESC') },
+    :class_name => "Post"
   
-  has_many :voices, :through => :posts, :source => :user, :uniq => true
+  has_many :voices,
+    -> { uniq },
+    :through => :posts, :source => :user
   
   validates_presence_of :user_id, :forum_id, :title
   validates_presence_of :body, :on => :create

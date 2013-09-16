@@ -71,8 +71,6 @@ class Playlist < ActiveRecord::Base
     self.where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
   end
   
-   
-  
   # playlist is a mix if there is at least one track with a track from another user  
   def set_mix_or_album
     # is this a favorites playlist?

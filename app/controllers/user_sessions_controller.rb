@@ -22,9 +22,9 @@ class UserSessionsController < ApplicationController
   def destroy
     if logged_in?
       current_user_session.destroy
-      redirect_to new_user_session_url, :notice => "We've logged you out. Your secrets are safe with us!"
+      redirect_to login_path, :notice => "We've logged you out. Your secrets are safe with us!"
     else
-      redirect_to login_path
+      redirect_to login_path, :error => "You weren't logged in to begin with, old chap/dame!"
     end
   end
 end

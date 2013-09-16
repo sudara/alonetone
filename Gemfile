@@ -22,7 +22,7 @@ gem "mime-types"
 # active record
 gem "acts_as_list"
 gem "has_permalink"
-gem "authlogic"
+gem "authlogic", :git => 'https://github.com/binarylogic/authlogic.git' # rails 4 fixes in master
 gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 
 # view
@@ -60,7 +60,7 @@ end
 group :test do
   gem "rspec-rails"
   gem "rspec-mocks"
-  gem "capybara"
+  gem "timecop"
   gem 'guard-spring'
   gem "guard-rspec"
   gem 'database_cleaner'

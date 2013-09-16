@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   end
 
   def clear_token!
-    self.update_attribute(:perishable_token,nil)
+    update_attribute(:perishable_token, nil)
   end
   
   
@@ -160,13 +160,8 @@ class User < ActiveRecord::Base
   end
 
   def activate!
-    clear_token!
-  end
-
-  def deliver_activation_instructions!
-    reset_perishable_token!
-    UserNotification.signup(self).deliver
-  end
+    !active? ? clear_token! : false
+  end  
 
   protected
 

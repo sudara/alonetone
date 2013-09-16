@@ -7,11 +7,6 @@ require 'rubygems'
 # https://gist.github.com/663876
 
 
-#Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However,
-  # if you change any configuration or code from libraries loaded here, you'll
-  # need to restart spork for it take effect.
-
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
@@ -19,7 +14,6 @@ require 'rubygems'
   require 'rspec/mocks' 
   require 'rspec/autorun'
   require "authlogic/test_case"
-  require 'capybara/rspec'
 
 
   # Requires supporting ruby files with custom matchers and macros, etc,
@@ -50,24 +44,19 @@ require 'rubygems'
     
     config.include Authlogic::TestCase
 
-    config.before(:each) do 
-      Capybara.reset_sessions!
-    end
+    # config.before(:each) do 
+    #   Capybara.reset_sessions!
+    # end
 
     module LoginHelper
       include Authlogic::TestCase
-
-      def setup_authlogic
-        # Not 100% sure why, but the before filter has to be skipped here, for each example
-        ApplicationController.skip_before_filter :activate_authlogic
-        
-        # And then called manually
-        activate_authlogic
-      end
-
+      
       def login(user)
-        setup_authlogic
-        UserSession.create(user).should be_true
+        login_as = user.is_a?(User) ? user : users(user) # grab the fixture
+        activate_authlogic # make authlogic happy
+        UserSession.create(login_as).should be_true # make sure we logged in
+        controller.stub(:current_user_session).and_return(UserSession.create(login_as))
+        #controller.stub(:current_user).and_return(login_as) # make authlogic happy
       end
       
       def logout

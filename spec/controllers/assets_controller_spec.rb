@@ -57,18 +57,18 @@ describe AssetsController do
 
   it 'should properly detect leeching blacklisted sites and not register a listen' do
     request.user_agent = 'mp3bot'
-    lambda{ subject }.should_not change(Listen, :count)
+    expect{ subject }.not_to change(Listen, :count)
     response.response_code.should == 403
   end
 
   it 'should consider an empty user agent to be a spider and not register a listen' do
     request.user_agent = ''
-    lambda{ subject }.should_not change(Listen, :count)
+    expect{ subject }.not_to change(Listen, :count)
   end
   
   it 'should consider any user agent with BOT in its string a bot and not register a listen' do
     request.user_agent = 'bot'
-    lambda{ subject }.should_not change(Listen, :count)    
+    expect{ subject }.not_to change(Listen, :count)    
   end
   
 

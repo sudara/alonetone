@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   
   before_filter :find_user, :except => [:new, :create]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
-  skip_before_filter :login_by_token, :only => :sudo
   
   #rescue_from NoMethodError, :with => :user_not_found
 
@@ -85,8 +84,9 @@ class UsersController < ApplicationController
     
     @user = User.new(params[:user])
     if @user.save_without_session_maintenance
-      @user.deliver_activation_instructions!
-      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away."
+      @user.reset_perishable_token!
+      UserNotification.signup(@user).deliver
+      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url
     else
       render :action => :new
@@ -95,17 +95,18 @@ class UsersController < ApplicationController
   
   
   def activate
-    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
-    raise Exception if @user.active?
-    
-    if @user.activate!
+    @user = User.where(:perishable_token => params[:perishable_token]).first
+    if logged_in? 
+      flash[:error] = "You are already activated and logged in! Rejoice and upload!"
+      redirect_to new_user_track_path(current_user)
+    elsif @user and @user.activate!
       flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
       UserSession.create(@user, false) # Log user in manually
       UserNotification.activation(@user).deliver
       redirect_to new_user_track_path(current_user)
     else
       flash[:error] = "Hm. Activation didn't work. Sorry about that!"
-      render :action => :new
+      redirect_to new_user_path
     end
   end
   
@@ -195,14 +196,30 @@ class UsersController < ApplicationController
   end
   
   def sudo
-    redirect_to user_home_path(current_user) and return false unless @user && (current_user.admin? || session[:sudo])
-    flash[:ok] = "Sudo to #{@user.name}" if sudo_to(@user)
-    redirect_to :back
+    if current_user.admin? && params[:id]
+      session[:sudo] = @sudo = current_user.id
+      destination = User.where(:login => params[:id]).first
+      sudo_to(destination)
+      logger.warn("SUDO: #{current_user.name} is sudoing to #{destination.name}")
+    elsif !current_user.admin? && session[:sudo]
+      logger.warn('coming out of sudo back to admin account')
+      sudo_to(User.find(session[:sudo]))
+      @sudo = session[:sudo] = nil
+    else
+      redirect_to root_path
+    end
   end
 
   protected
     def authorized?
       admin? || (!%w(destroy admin).include?(action_name) && logged_in? && (current_user.id.to_s == @user.id.to_s)) || (action_name == 'sudo')
+    end
+    
+    def sudo_to(user)
+      current_user_session.destroy
+      UserSession.create!(user)
+      flash[:ok] = "Sudo to #{user.name}"
+      redirect_back_or_default 
     end
     
     def display_user_home_or_index

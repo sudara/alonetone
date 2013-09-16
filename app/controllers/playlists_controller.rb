@@ -80,33 +80,23 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/1/edit
   def edit
-    # allow them to add their own assets
-    # TODO: this is bad form, should be relocated to assets/index and listens/index
-    # TODO: furthermore, ajax requests currently load all 3 instance vars :(
-    @assets = @user.assets.paginate( :all, 
-      :limit    => 10, 
-      :per_page => 10, 
-      :order    => 'created_at DESC', 
-      :page     => params[:uploads_page]
-    )
 
-    @listens = @user.listens.paginate( 
-      :limit    => 10, 
-      :order    => 'listens.created_at DESC', 
-      :per_page => 10, 
-      :page     => params[:listens_page]
-    )
-    
-    @favorites = @user.favorites.tracks.paginate(
-      :limit => 10,
-      :per_page  => 10,
-      :page  =>  params[:favorites_page]
-    ) rescue nil
+    @assets = @user.assets.order('created_at DESC').paginate(:per_page => 10, :page     => params[:uploads_page])
 
     if request.xhr? 
-        render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
-        render :partial => 'your_listens.html.erb' if params[:listens_page]
-        render :partial => 'your_favorites.html.erb' if params[:favorites_page]
+      render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
+      render :partial => 'your_listens.html.erb' if params[:listens_page]
+      render :partial => 'your_favorites.html.erb' if params[:favorites_page]
+    else
+      @listens = @user.listens.order('listens.created_at DESC').paginate( 
+        :per_page => 10, 
+        :page     => params[:listens_page]
+      )
+    
+      @favorites = @user.favorites.tracks.paginate(
+        :per_page  => 10,
+        :page  =>  params[:favorites_page]
+      ) if @user.favorites.present?
     end
   end
 

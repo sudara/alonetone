@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class UserNotification < ActionMailer::Base
   default :from => Alonetone.email
 
@@ -16,6 +15,5 @@ class UserNotification < ActionMailer::Base
   def activation(user)
     @url = "http://#{Alonetone.url}/#{user.login}"
     mail :to => user.email, :subject => "[#{Alonetone.url}] Your account has been activated!"  
-
   end    
 end

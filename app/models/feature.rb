@@ -1,16 +1,14 @@
-# -*- encoding : utf-8 -*-
 class Feature < ActiveRecord::Base
 
-  scope :published, where(:published => true).order('created_at DESC')
+  scope :published, -> { where(:published => true).order('created_at DESC') }
 
   has_many :featured_tracks, 
-    :include  => :asset, 
-    :order    => 'featured_tracks.position'
-    
+    -> { order('featured_tracks.position').include(:asset)}
+     
   has_many :comments, 
+    -> { order('created_at DESC')},
     :as         => :commentable, 
-    :dependent  => :destroy, 
-    :order      => 'created_at DESC'
+    :dependent  => :destroy
 
   belongs_to :writer,         :class_name => 'User'
   belongs_to :featured_user,  :class_name => 'User'
