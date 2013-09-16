@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 include ActionDispatch::TestProcess
 def new_track(file)
-  upload_file = File.open(File.join('spec/fixtures/assets',file))
+  upload_file = fixture_file_upload(File.join('assets',file),'audio/mpeg')
   Asset.create({:user_id => 1, :mp3 => upload_file })
 end
 
@@ -28,17 +28,19 @@ describe Asset do
     it 'should give its length in a human friendly way' do 
       assets(:valid_mp3).length.should == '0:45'
     end
-  
-    it "should catch empty or bogus files" do
-      asset = new_track('empty.mp3')
-      asset.should be_new_record
-    end
   end
   
   context "uploading" do
     it "should only require a name and mp3 " do
       asset = new_track('muppets.mp3')
       asset.should_not be_new_record
+      asset.errors.should_not be_present
+    end
+    
+    it "should catch empty or bogus files" do
+      asset = new_track('empty.mp3')
+      asset.should be_new_record
+      asset.errors.should be_present
     end
   
     it "should increase the user's count" do

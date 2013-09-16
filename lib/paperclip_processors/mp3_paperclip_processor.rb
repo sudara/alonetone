@@ -7,8 +7,12 @@ module Paperclip
     
     # required method for the paperclip processor
     def make
-      binary_data = ::Mp3Info.open(@file.path) do |mp3|
-        write_meta_data_to_model(mp3)
+      begin
+        binary_data = ::Mp3Info.open(@file.path) do |mp3|
+          write_meta_data_to_model(mp3)
+        end
+      rescue Mp3InfoError
+        raise Paperclip::Error, "This doesn't look like an mp3 file"
       end
       @file
     end
