@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe UsersController do
   
+  fixtures :users
+  
   it "should send user activation email after signup" do
     UserMailer.should_receive(:deliver_signup).with(an_instance_of(User))
     lambda do 
