@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   has_many :followees, :through => :follows, :source => :user
 
   # The following attributes can be changed via mass assignment 
-  attr_accessible :login, :email, :password, :password_confirmation, :website, :myspace,
+  attr_accessible :login, :name, :email, :password, :password_confirmation, :website, :myspace,
                   :bio, :display_name, :itunes, :settings, :city, :country, :twitter
   
   before_create :make_first_user_admin
