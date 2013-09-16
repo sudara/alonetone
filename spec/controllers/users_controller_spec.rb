@@ -48,7 +48,6 @@ end
 
 describe UsersController, "permissions" do
   fixtures :users, :assets
-  integrate_views
   [:sudara, :arthur].each do |user|
     it "should let a user or admin edit their profile" do
       login(user)

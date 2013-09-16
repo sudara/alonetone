@@ -23,5 +23,4 @@ class Update < ActiveRecord::Base
     "http://#{Alonetone.url}/blog/#{permalink}"
   end
   
-  alias :unique_id :id  
 end

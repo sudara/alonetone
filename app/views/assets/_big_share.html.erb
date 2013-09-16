@@ -2,9 +2,9 @@
 <div class="share box">
     <div class="static_content">
         The link to this page (the song's "home"):<br/>
-        <%= text_field_tag "home_#{id}", user_track_url(@asset.user, @asset.permalink), :size => 40,:class => 'tabbed_input' %> <br/>
+        <%= text_field_tag "home_#{@asset.unique_id}", user_track_url(@asset.user, @asset.permalink), :size => 40,:class => 'tabbed_input' %> <br/>
         Direct download link:<br/>
-        <%= text_field_tag "link_#{id}", user_track_url(@asset.user, @asset.permalink, :format => :mp3), :size => 40, :class => 'tabbed_input' %>
+        <%= text_field_tag "link_#{@asset.unique_id}", user_track_url(@asset.user, @asset.permalink, :format => :mp3), :size => 40, :class => 'tabbed_input' %>
     </div>
 
     <div class="static_content ">
@@ -14,6 +14,6 @@
     </div>
 
     <div class="static_content">
-       <%= render :partial => 'add_to_facebook', :object => @asset if Alonetone.enable_facebook %>
+       <%= render :partial => 'add_to_facebook', :object => @asset %>
     </div>
 </div>

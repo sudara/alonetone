@@ -13,8 +13,10 @@ class Playlist < ActiveRecord::Base
 
   belongs_to :user, :counter_cache => true  
   has_one  :pic, :as => :picable, :dependent => :destroy
-  has_many :tracks, :include => [:asset => :user], :dependent => :destroy, :order => :position
-  has_many :assets, :through => :tracks #, :after_add => 
+  has_many :tracks,
+     -> {order(:position).includes(:asset => :user)},
+     :dependent => :destroy
+  has_many :assets, :through => :tracks 
   
   validates_presence_of :title
   validates_length_of   :title, :within => 4..100

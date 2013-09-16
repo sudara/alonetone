@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
   end
   
   def logged_in?
-    current_user
+    !!current_user
   end
   
   def admin?
@@ -185,7 +185,7 @@ class ApplicationController < ActionController::Base
 
   def display_news
     return unless logged_in?
-    last_update = Update.find(:first, :order => 'created_at DESC')
+    last_update = Update.order('created_at DESC').first
     @display_news = true if session[:last_active] && last_update && (session[:last_active] < last_update.created_at)
   end
 
@@ -223,7 +223,7 @@ class ApplicationController < ActionController::Base
   end
     
   def admin?
-    logged_in? && current_user.admin?
+    logged_in? && current_user && current_user.admin?
   end
   private
 

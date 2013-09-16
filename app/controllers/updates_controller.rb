@@ -104,6 +104,6 @@ class UpdatesController < ApplicationController
   end
   
   def authorized?
-    logged_in? && admin?
+    admin?
   end
 end

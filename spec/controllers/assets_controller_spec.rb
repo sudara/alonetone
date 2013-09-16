@@ -8,7 +8,7 @@ describe AssetsController do
     get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
   end
   
-  @@good_user_agents = [
+  GOOD_USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/XX (KHTML, like Gecko) Safari/YY",
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8) Gecko/20060319 Firefox/2.0",
     "iTunes/x.x.x",
@@ -17,7 +17,7 @@ describe AssetsController do
     'webkit'
     ]
     
-  @@bad_user_agents = [
+  BAD_USER_AGENTS = [
     "Mp3Bot/0.1 (http://mp3realm.org/mp3bot/)",
     "",
     "Googlebot/2.1 (+http://www.google.com/bot.html)",
@@ -26,17 +26,33 @@ describe AssetsController do
     "baidu/Nutch-1.0 "
   ]
   
+  GOOD_USER_AGENTS.each do |agent|
+    it "should register a listen for #{agent}" do
+      request.user_agent = agent
+      expect{ subject }.to change(Listen, :count).by(1)  
+    end
+  end
+  
+  BAD_USER_AGENTS.each do |agent|
+    it "should not register a listen for #{agent}" do
+      request.user_agent = agent
+      expect{ subject }.should_not change(Listen, :count).by(1)  
+    end
+  end
+  
   
   it 'should accept a mp3 extension and redirect to the amazon url' do
     request.env["HTTP_ACCEPT"] = "audio/mpeg" 
-    request.user_agent = @@good_user_agents.first
+    request.user_agent = GOOD_USER_AGENTS.first
     subject
     response.should redirect_to(assets(:valid_mp3).mp3.url)
   end
   
   it 'should have a landing page' do
+    request.user_agent = GOOD_USER_AGENTS.first
     get :show, :id => 'song1', :user_id => users(:sudara).login
-    response.should be_success
+    assigns(:assets).should be_present
+    response.response_code.should == 200
   end
 
   it 'should properly detect leeching blacklisted sites and not register a listen' do
@@ -55,17 +71,5 @@ describe AssetsController do
     lambda{ subject }.should_not change(Listen, :count)    
   end
   
-  @@good_user_agents.each do |agent|
-    it "should register a listen for #{agent}" do
-      request.user_agent = agent
-      lambda{ subject }.should change(Listen, :count).by(1)  
-    end
-  end
-  
-  @@bad_user_agents.each do |agent|
-    it "should not register a listen for #{agent}" do
-      request.user_agent = agent
-      lambda{ subject }.should_not change(Listen, :count).by(1)  
-    end
-  end
+
 end

@@ -17,9 +17,9 @@ class Track < ActiveRecord::Base
   belongs_to :asset
   belongs_to :user
   
-  scope :recent, order('tracks.created_at DESC')
-  scope :favorites, where(:is_favorite => true).recent
-  scope :favorites_for_home, favorites.limit(5).includes({:user => :pic}, {:asset => {:user => :pic}})
+  scope :recent, -> { order('tracks.created_at DESC') }
+  scope :favorites, -> { where(:is_favorite => true).recent }
+  scope :favorites_for_home, -> { favorites.limit(5).includes({:user => :pic}, {:asset => {:user => :pic}}) }
   
   acts_as_list :scope => :playlist_id, :order => :position
   

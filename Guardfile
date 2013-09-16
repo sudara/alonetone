@@ -15,7 +15,6 @@
 
 guard 'rspec', :spring => true, :cli => '--colour' do
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
-  watch('spec/spec_helper.rb')  { "spec" }
 
   # Rails example
   watch(%r{^spec/.+_spec\.rb$})
@@ -30,6 +29,7 @@ guard 'rspec', :spring => true, :cli => '--colour' do
   # Capybara request specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
   watch(%r{^spec/.+_spec\.rb$})
+  watch('spec/spec_helper.rb')  { "spec" }
   
 end
 

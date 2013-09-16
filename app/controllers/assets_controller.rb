@@ -49,7 +49,7 @@ class AssetsController < ApplicationController
       format.html do
         @assets = [@asset]
         @listens = @asset.listens
-        @comments = @asset.comments.public.find_all_by_spam(false)
+        @comments = @asset.comments.public.where(:spam => false)
         @listeners = @asset.listeners.first(5)
         @favoriters = @asset.favoriters
         @page_title = "#{@asset.name} by #{@user.name}"

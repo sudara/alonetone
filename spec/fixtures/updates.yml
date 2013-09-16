@@ -1,8 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+valid:
+  id: 1
   title: MyString
+  permalink: mystring
   content: MyText
 
-two:
+same_title:
+  id: 3
   title: MyString
+  permalink: mystring-2
   content: MyText

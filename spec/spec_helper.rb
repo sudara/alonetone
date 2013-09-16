@@ -67,7 +67,7 @@ require 'rubygems'
 
       def login(user)
         setup_authlogic
-        UserSession.create(user)
+        UserSession.create(user).should be_true
       end
       
       def logout
