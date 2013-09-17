@@ -9,13 +9,17 @@ forum.name = "Making Music"
 forum.description = "Talk about how you do it, how you want to do it, and how you feel about it."
 forum.save
 
-topic = admin.topics.create(
+topic = admin.topics.build(
   :title => "Music and passion",
-  :forum_id => forum
 )
 
-post = admin.posts.create(
-  :body => "keep moving on",
-  :topic_id => topic,
-  :forum_id => forum
+topic.forum = forum
+topic.save
+
+post = admin.posts.build(
+  :body => "keep moving on"
 )
+
+post.topic = topic
+post.forum = forum
+post.save
