@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to forum_path(@forum) }
       format.xml  do
-        @topics = find_forum.topics.paginate(:page => current_page, :per_page => 10)
+        @topics = @forum.topics.sticky_and_recent.paginate(:page => current_page, :per_page => 10)
         render :xml  => @topics
       end
     end
@@ -87,10 +87,10 @@ protected
   end
   
   def find_forum
-    @forum = Forum.find_by_permalink(params[:forum_id])
+    @forum = Forum.where(:permalink => params[:forum_id])
   end
   
   def find_topic
-    @topic = @forum.topics.find_by_permalink(params[:id])
+    @topic = @forum.topics.where(:permalink => params[:id])
   end
 end

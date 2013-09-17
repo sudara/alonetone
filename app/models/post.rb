@@ -3,9 +3,11 @@ class Post < ActiveRecord::Base
 
   @@per_page = 10
   cattr_accessor :per_page
+  
+  scope :recent => { order("posts.created_at DESC") }
+  
   # author of post
   belongs_to :user, :counter_cache => true
-  
   belongs_to :topic, :counter_cache => true
   
   # topic's forum (set by callback)
@@ -28,11 +30,11 @@ class Post < ActiveRecord::Base
   attr_accessible :body
 
   def self.search(query, options = {})
-    options[:conditions] ||= ["LOWER(#{Post.table_name}.body) LIKE ?", "%#{query}%"] unless query.blank?
-    options[:select]     ||= "#{Post.table_name}.*, #{Topic.table_name}.title as topic_title, #{Forum.table_name}.name as forum_name"
-    options[:joins]      ||= "inner join #{Topic.table_name} on #{Post.table_name}.topic_id = #{Topic.table_name}.id inner join #{Forum.table_name} on #{Topic.table_name}.forum_id = #{Forum.table_name}.id"
-    options[:order]      ||= "#{Post.table_name}.created_at DESC"
-    options[:count]      ||= {:select => "#{Post.table_name}.id"}
+    options[:conditions] ||= ["LOWER(posts.body) LIKE ?", "%#{query}%"] unless query.blank?
+    options[:select]     ||= "posts.*, topics.title as topic_title, #{Forum.table_name}.name as forum_name"
+    options[:joins]      ||= "inner join topics on posts.topic_id = topics.id inner join #{Forum.table_name} on topics.forum_id = #{Forum.table_name}.id"
+    options[:order]      ||= "posts.created_at DESC"
+    options[:count]      ||= {:select => "posts.id"}
     paginate options
   end
 

@@ -39,11 +39,6 @@ module ForumsHelper
     pluralize count, 'post'
   end
   
-  # Ripe for optimization
-  def voice_count
-    pluralize current_site.topics.to_a.sum { |t| t.voice_count }, 'voice'
-  end
-  
   def search_posts_title
     returning(params[:q].blank? ? 'Recent Posts' : "Searching for" + " '#{h params[:q]}'") do |title|
       title << " by #{h(@user.display_name)}" if @user

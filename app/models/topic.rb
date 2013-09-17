@@ -7,6 +7,9 @@ class Topic < ActiveRecord::Base
   before_destroy :count_user_posts_for_counter_cache
   after_destroy  :update_cached_forum_and_user_counts
 
+  scope :recent => { order('topics.created_at DESC') }
+  scope :sticky_and_recent => { order("topics.sticky desc, topics.last_updated_at desc") }
+
   # creator of forum topic
   belongs_to :user
   
@@ -30,19 +33,11 @@ class Topic < ActiveRecord::Base
   validates_presence_of :user_id, :forum_id, :title
   validates_presence_of :body, :on => :create
 
-  attr_accessor :body
   attr_accessible :title, :body
-
   attr_readonly :posts_count, :hits
   
   has_permalink :title
-  ##acts_as_defensio_article_comment :fields => { :content => :body, 
-  #                                      :article => :article, 
-  #                                      :author => :author_name,
-  #                                      :permalink => :full_permalink }
-  #                                      
-                                      
-  
+                               
   # hacks for defensio
   def article
     self
@@ -59,6 +54,7 @@ class Topic < ActiveRecord::Base
   def full_permalink
     "http://#{Alonetone.url}/forums/#{permalink}"
   end
+  
   def sticky?
     sticky == 1
   end
