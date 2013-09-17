@@ -32,7 +32,7 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 
 ### Current tech
 
-* Rails 3.2.12
+* Rails 4.0.0! 
 * jQuery
 * SoundManager 2 (for flash + html5 playback)
 
@@ -50,8 +50,6 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 
 ## Features wanted
 
-### Everything moved to asset pipeline.
-Yeah? Yeah.
 
 ### Browse All Playlists
 Low hanging fruit, boys and girls! Shoulda been a 2008 feature :)
@@ -83,15 +81,15 @@ Talk with Sudara about this. There's a partial half-hearted implementation.
 
 ## Want to setup alonetone on your server?
 
+![Sorry script kiddies](https://img.skitch.com/20120908-1exaxnmix5mb82xaq32tjnrja.png)
+
 Unless...
 
 * You know ruby on rails VERY well (Been doing it for more than a few months).
 * You have deployed rails applications, and are comfortable with that.
 * You are willing to spend 20+ hours removing our branding and logo and site-specific things from the code.
 
-Then...
-
-![Sorry script kiddies](https://img.skitch.com/20120908-1exaxnmix5mb82xaq32tjnrja.png)
+Then it's not happening.
 
 We get a LOT of requests from rails n00bs asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language. 
 
