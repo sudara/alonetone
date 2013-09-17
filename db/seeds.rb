@@ -11,16 +11,11 @@ forum.save
 
 topic = admin.topics.create(
   :title => "Music and passion",
-  :body => "alonetone rocks!"
+  :forum_id => forum
 )
-
-topic.forum = forum
-topic.save
 
 post = admin.posts.create(
-  :body => "keep moving on"
+  :body => "keep moving on",
+  :topic_id => topic,
+  :forum_id => forum
 )
-
-post.topic = topic
-post.forum = forum
-post.save

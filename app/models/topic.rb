@@ -15,7 +15,6 @@ class Topic < ActiveRecord::Base
   
   # creator of recent post
   belongs_to :last_user, :class_name => "User"
-  
   belongs_to :forum, :counter_cache => true
 
   has_many :posts,       
@@ -31,9 +30,8 @@ class Topic < ActiveRecord::Base
     :through => :posts, :source => :user
   
   validates_presence_of :user_id, :forum_id, :title
-  validates_presence_of :body, :on => :create
 
-  attr_accessible :title, :body
+  attr_accessible :title
   attr_readonly :posts_count, :hits
   
   has_permalink :title
