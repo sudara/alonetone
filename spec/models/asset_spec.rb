@@ -86,8 +86,8 @@ describe Asset do
     end
   
     it 'should handle umlauts and non english characters in the filename' do
-      asset = new_track('müppets.mp3')
-      asset.mp3_file_name.should == 'müppets.mp3' 
+      asset = new_track('müppets.mp3')
+      asset.mp3_file_name.should == 'müppets.mp3' 
     end
   
     it 'should handle permalink with ???? as tags, default to untitled' do 
