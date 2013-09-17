@@ -7,8 +7,8 @@ class Topic < ActiveRecord::Base
   before_destroy :count_user_posts_for_counter_cache
   after_destroy  :update_cached_forum_and_user_counts
 
-  scope :recent => { order('topics.created_at DESC') }
-  scope :sticky_and_recent => { order("topics.sticky desc, topics.last_updated_at desc") }
+  scope :recent, -> { order('topics.created_at DESC') }
+  scope :sticky_and_recent, -> { order("topics.sticky desc, topics.last_updated_at desc") }
 
   # creator of forum topic
   belongs_to :user

@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   @@per_page = 10
   cattr_accessor :per_page
   
-  scope :recent => { order("posts.created_at DESC") }
+  scope :recent, -> { order("posts.created_at DESC") }
   
   # author of post
   belongs_to :user, :counter_cache => true
