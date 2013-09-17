@@ -1,6 +1,7 @@
 language: ruby
 rvm: 
   2.0.0
+install: "bin/wad"
 before_script:
   - mysql -e 'create database alonetone_test';
   - rake copy_config
@@ -12,3 +13,7 @@ notifications:
   email:
     on_success: [always|never|change] # default: change
     on_failure: [always|never|change] # default: change
+env:
+  global:
+    - S3_BUCKET_NAME=skitch.sudara.at
+    secure: "O45V0oniMMy2SfZ4GlCafzkPyvbNvf+ppUd9hu82RLQpANI7l7NKGa7gCW/FYlcDDcIuUkut6D21eEWwPG0x8bLqSIoE9x5kSK6xuOoqCKHkznWxsfMVI+CjoVAkekvS8iDlnu3BTIa7m0264uaJovGhUDWN43YJ+Z9sRxwYh8g="
