@@ -4,7 +4,10 @@ rvm:
 before_script:
   - mysql -e 'create database alonetone_test';
   - rake copy_config
-  - rake db:setup
+  - rake db:drop
+  - rake db:create
+  - rake db:schema:load
+  - rake db:seed
 notifications:
   email:
     on_success: [always|never|change] # default: change
