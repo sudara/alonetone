@@ -4,8 +4,6 @@ require 'active_record/fixtures'
 admin = User.create(:login => 'admin', :password => 'testing123', :password_confirmation => 'testing123')
 admin.update_attribute(:admin, true)
 
-admin = User.find_by_login("admin")
-
 forum = Forum.create
 forum.name = "Making Music"
 forum.description = "Talk about how you do it, how you want to do it, and how you feel about it."
