@@ -11,19 +11,16 @@ class Comment < ActiveRecord::Base
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   
-  has_many :replies, 
-    :as         => :commentable, 
-    :class_name => 'Comment'
+  has_many :replies, :as  => :commentable, :class_name => 'Comment'
 
   # optional user who made the comment
   belongs_to :commenter, :class_name => 'User'
 
-  # optional user who is recieving the comment
+  # optional user who is *recieving* the comment
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever
   belongs_to :user
   
   validates_length_of :body, :within => 1..2000
-  
   after_create :deliver_comment_notification
   
   include Defender::Spammable
@@ -65,11 +62,11 @@ class Comment < ActiveRecord::Base
   end
   
   def deliver_comment_notification
-    if !comment.spam? and 
-        comment.commentable.class == Asset and
-        user_wants_email?(comment.user) and 
-        comment.user != comment.commenter
-      CommentMailer.deliver_new_comment(comment, comment.commentable) 
-    end
+    CommentMailer.deliver_new_comment(self, commentable) if is_deliverable?
+  end
+  
+  def is_deliverable?
+    !spam? and commentable.class == Asset and 
+      user_wants_email?(user) and user != commenter
   end
 end
