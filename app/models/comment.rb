@@ -9,7 +9,6 @@ class Comment < ActiveRecord::Base
   scope :last_5_private,  -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
   scope :last_5_public,   -> { on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
   
-  belongs_to :commentable, :polymorphic => true, :touch => true
   
   has_many :replies, :as  => :commentable, :class_name => 'Comment'
 
@@ -20,19 +19,43 @@ class Comment < ActiveRecord::Base
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever
   belongs_to :user
   
+  belongs_to :commentable, :polymorphic => true, :touch => true
   validates_length_of :body, :within => 1..2000
-  after_create :deliver_comment_notification
+  validates :commentable, presence: true
   
-  include Defender::Spammable
+  before_create :disallow_dupes, :set_spam_status, :set_user
+  after_create :deliver_comment_notification, :increment_counters
   
-  configure_defender :keys => { 'content' => :body, 
-    'type' => 'comment', 'author-ip' => :remote_ip, 'author-name' => :author_name,
-    'parent-document-permalink' => :full_permalink}
-  
-  attr_accessor :current_user
+  attr_accessible :body, :remote_ip, :commentable_type, :commentable_id, :private, :commenter_id, :user_agent, :referrer
+
+  include Rakismet::Model
+  rakismet_attrs  :author =>        proc { author_name },
+                  :author_email =>  proc { commenter.email if commenter },
+                  :content =>       proc { body },
+                  :permalink =>     proc { commentable.full_permalink }
+
 
   def duplicate?
-    Comment.find_by_remote_ip_and_body(self.remote_ip, self.body)
+    Comment.where(:remote_ip => remote_ip, :body => body).first.present?
+  end
+  
+  def disallow_dupes
+    return false if duplicate?
+  end
+  
+  def set_user
+    self.user = commentable.user if commentable.respond_to? :user
+    true
+  end
+  
+  def set_spam_status
+    self[:spam] = spam? # makes API request
+    true
+  end
+  
+  # unfortunately rakismet overrides the .spam? method
+  def is_spam?
+    self[:spam] == 1
   end
   
   def author_name
@@ -42,17 +65,9 @@ class Comment < ActiveRecord::Base
       'guest'
     end
   end
-  
-  def full_permalink
-    commentable.full_permalink
-  end
-  
+
   def user_logged_in
     !!commenter_id 
-  end
-  
-  def trusted_user
-    commenter_id && commenter.moderator?
   end
   
   # for montgomeru magic
@@ -62,11 +77,18 @@ class Comment < ActiveRecord::Base
   end
   
   def deliver_comment_notification
-    CommentMailer.deliver_new_comment(self, commentable) if is_deliverable?
+    CommentNotification.new_comment(self, commentable).deliver if is_deliverable?
+  end
+  
+  def increment_counters
+    if commentable.is_a? Asset
+      User.increment_counter(:comments_count, commentable.user) 
+      Asset.increment_counter(:comments_count, commentable) 
+    end
   end
   
   def is_deliverable?
-    !spam? and commentable.class == Asset and 
-      user_wants_email?(user) and user != commenter
+    !is_spam? and commentable.class == Asset and 
+      user.wants_email? and user != commenter
   end
 end

@@ -33,7 +33,7 @@ gem 'dynamic_form'
 gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating about pages)
 
 # external services
-gem 'defender'
+gem 'rakismet'
 gem "geokit"
 gem 'newrelic_rpm'
 gem 'skylight'

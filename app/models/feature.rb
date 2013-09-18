@@ -17,8 +17,6 @@ class Feature < ActiveRecord::Base
 
   before_save :create_permalink
   
-  #acts_as_defensio_article
-
   def body
     BlueCloth::new(self[:body]).to_html
   end

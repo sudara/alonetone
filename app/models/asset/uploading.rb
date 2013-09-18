@@ -71,8 +71,4 @@ class Asset
     asset.user.followers
   end
   
-  def user_wants_email?(user)
-    # anyone who doesn't have it set to false, aka, opt-out
-    (user.settings == nil) || (user.settings[:email_new_tracks] != "false")
-  end
 end

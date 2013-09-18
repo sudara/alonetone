@@ -115,6 +115,11 @@ class Asset < ActiveRecord::Base
     end
   end
   
+  # needed for spam detection
+  def full_permalink
+    "http://#{Alonetone.url}/#{user.login}/#{permalink}"
+  end
+  
   def to_param
     permalink
   end

@@ -74,6 +74,12 @@ class User
     first.dummy_pic(size)
   end
   
+  def wants_email?
+    # anyone who doesn't have it set to false, aka, opt-out
+    (settings == nil) || (settings[:email_new_tracks] != "false")
+  end
+  
+  
   def has_setting?(setting, value=nil)
     if value != nil # account for testing against false values
       self.settings.present? && self.settings[setting].present? && (self.settings[setting] == value)

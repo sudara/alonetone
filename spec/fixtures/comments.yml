@@ -1,0 +1,46 @@
+valid_comment_on_asset_by_user:
+  id: 1
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well, this is an awesome track, says a user"
+  spam: false
+  user_id: 1
+  commenter_id: 1
+  remote_ip: 127.0.0.1
+
+valid_comment_on_asset_by_guest:
+  id: 2
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well, this is an awesome track, says a nobody"
+  spam: false
+  user_id: 1
+
+spam_comment_on_asset_by_user:
+  id: 3
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well, this is an spammy spam."
+  spam: true
+  user_id: 1
+  commenter_id: 1
+
+spam_comment_on_asset_by_guest:
+  id: 4
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well, this is an spammy spam."
+  spam: true
+  user_id: 1
+    
+comment_with_no_body:
+  id: 5
+  commentable_type: Asset
+  commentable_id: 1
+  
+comment_on_update:
+  id: 6
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well, this is an awesome blog entry"
+  spam: false

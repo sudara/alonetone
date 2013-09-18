@@ -6,35 +6,12 @@ class CommentsController < ApplicationController
   before_filter :require_login, :only => [:destroy, :unspam]
   
   def create
-    if request.xhr? 
+    if request.xhr? # it always is...
       unless params[:comment] && !params[:comment][:body].blank?
         return head(:bad_request) 
       end
-      
-      case params[:comment][:commentable_type] 
-        # TODO: move into model
-        when 'asset'
-          find_asset
-          @comment = @asset.comments.build(shared_attributes.merge(:user => @asset.user))
-
-        when 'feature'
-          @feature = Feature.find(params[:comment][:commentable_id])
-          @comment = @feature.comments.build(shared_attributes)
-
-        when 'update'
-          @update = Update.find(params[:comment][:commentable_id])
-          @comment = @update.comments.build(shared_attributes)
-      end
-
-      @comment.env = request.env
-
+      @comment = Comment.new(massaged_params)
       return head(:bad_request) unless @comment.save
-
-      if @asset && !@comment.spam
-        User.increment_counter(:comments_count, @asset.user) 
-        Asset.increment_counter(:comments_count, @asset) 
-      end
-
       render :nothing => true
     end
   end  
@@ -53,7 +30,13 @@ class CommentsController < ApplicationController
   
 
   def unspam
-    @comment.report_as_false_positive
+    @comment.ham!
+    @comment.update
+    redirect_to :back
+  end
+  
+  def spam
+    @comment.spam!
     redirect_to :back
   end
   
@@ -71,7 +54,6 @@ class CommentsController < ApplicationController
         
             @comments_made = Comment.include_private.paginate(:per_page => 10,
               :page       => params[:made_page], 
-              :order      => 'created_at DESC', 
               :conditions => {:commenter_id => @user.id}
             )
           else
@@ -81,8 +63,7 @@ class CommentsController < ApplicationController
         
             @comments_made = Comment.public.paginate(:per_page => 10, 
               :page       => params[:made_page], 
-              :order      => 'created_at DESC', 
-              :conditions => { :commenter_id => @user.id, :private => false }
+              :conditions => { :commenter_id => @user.id }
             )
           end
       
@@ -122,17 +103,16 @@ class CommentsController < ApplicationController
   end
   
   def authorized?
-    logged_in? && (
-      current_user.moderator? || 
-      current_user.admin? || 
-      @comment.user.id == @comment.commentable.user.id )
+    current_user.moderator? or (@comment.user.id == @comment.commentable.user.id )
   end
   
-  def shared_attributes
+  def massaged_params
     {
-      :commenter  => find_commenter,
-      :body       => params[:comment][:body], 
-      :private    => params[:comment][:private] || false,
+      :commenter          => find_commenter,
+      :body               => params[:comment][:body], 
+      :commentable_type   => params[:comment][:commentable_type], 
+      :commentable_id     => params[:comment][:commentable_id], 
+      :private            => params[:comment][:private] || false,
       :remote_ip  => request.remote_ip,
       :user_agent => request.env['HTTP_USER_AGENT'], 
       :referer    => request.env['HTTP_REFERER']
