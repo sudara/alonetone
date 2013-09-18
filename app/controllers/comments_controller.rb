@@ -42,26 +42,14 @@ class CommentsController < ApplicationController
   
   
   def index
-    respond_to do |format|
-      format.html do
-        if params[:login]
-          @page_title = "#{@user.name} Comments"
-          @comments = @user.comments.public_or_private(display_private?).paginate(:page => params[:page])
-          @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private?).paginate(:page => params[:made_page])
-        else
-          @page_title = "Recent Comments"
-          @comments = Comment.public_or_private(moderator?).paginate(:page => params[:page])
-          @spam = Comment.spam.paginate(:page => params[:page]) if moderator?
-        end
-      end
-      format.json do
-        if params[:start] && params[:end]
-          @comments = Comment.count_by_user(params[:start].to_date, params[:end].to_date, params[:limit].to_i)
-        else
-          @comments = Comment.count_by_user(30.days.ago, Date.today)
-        end
-        render :json => @comments.collect{|c,count| [c.name, c.avatar,count]}.to_json
-      end
+    if params[:login].present?
+      @page_title = "#{@user.name} Comments"
+      @comments = @user.comments.public_or_private(display_private?).paginate(:page => params[:page])
+      @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private?).paginate(:page => params[:made_page])
+    else
+      @page_title = "Recent Comments"
+      @comments = Comment.public_or_private(moderator?).paginate(:page => params[:page])
+      @spam = Comment.spam.paginate(:page => params[:page]) if moderator?
     end
   end
   
