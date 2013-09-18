@@ -5,18 +5,11 @@ class User
      User.where(["last_login_at > ?", Time.now.utc-15.minutes])
   end
   
-  # Generates magic %LIKE% sql statements for all columns
-  def self.conditions_by_like(value, *columns) 
-    columns = self.content_columns if columns.size==0 
-    columns = columns[0] if columns[0].kind_of?(Array)
-    
-    conditions = columns.map{ |c| 
-      c = c.name \
-      if c.kind_of? ActiveRecord::ConnectionAdapters::Column
-      
+  def self.conditions_by_like(value) 
+    conditions = ['users.display_name','users.login','users.bio','users.city','users.country'].collect do |c|
       "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
-      
-    }.join(" OR ") 
+    end
+    where(conditions.join(" OR "))
   end
   
   

@@ -54,14 +54,11 @@ class Asset < ActiveRecord::Base
     where( "assets.user_id IN (?)", user_ids)
   end
   
-  # Generates magic %LIKE% sql statements for all columns
-  def self.conditions_by_like(value, *columns) 
-    columns = self.content_columns if columns.size==0 
-    columns = columns[0] if columns[0].kind_of?(Array) 
-    conditions = columns.map {|c| 
-    c = c.name if c.kind_of? ActiveRecord::ConnectionAdapters::Column 
-    "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
-    }.join(" OR ") 
+  def self.conditions_by_like(value) 
+    conditions = ['assets.title', 'assets.description', 'assets.mp3_file_name'].collect do |c|
+      "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
+    end
+    where(conditions.join(" OR ")) 
   end
   
   # needed for views in case we've got multiple assets on the same page
