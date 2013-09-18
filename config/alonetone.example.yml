@@ -9,7 +9,7 @@ development: &defaults
   bucket: 
   amazon_id: 
   amazon_key:
-  rakismet_key:
+  rakismet_key: "REPLACEME"
   defensio:  
   campfire_url: nil
   video_size: width="370" height="308"
