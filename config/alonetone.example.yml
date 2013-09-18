@@ -9,6 +9,7 @@ development: &defaults
   bucket: 
   amazon_id: 
   amazon_key:
+  rakismet_key:
   defensio:  
   campfire_url: nil
   video_size: width="370" height="308"
