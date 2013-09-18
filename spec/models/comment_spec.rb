@@ -3,6 +3,9 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Comment do
   fixtures :comments, :users, :assets
+  
+  let(:new_comment) { assets(:valid_mp3).comments.new(:body => 'test',:commentable_type => 'Asset', :commentable_id => '1') }
+  
   context "validation" do 
     it "should be valid when made by user" do
       comments(:valid_comment_on_asset_by_user).should be_valid
@@ -21,17 +24,14 @@ describe Comment do
     end
   end
   
-  context "saving" do
-    
+  context "saving" do    
     it "should save with just a body and a commentable" do 
-      comment = assets(:valid_mp3).comments.new(:body => 'test')
-      comment.save.should be_true      
+      new_comment.save.should be_true      
     end
     
     it "should store user_id when commenting on an asset" do
-      comment = assets(:valid_mp3).comments.new(:body => 'test')
-      comment.save.should be_true    
-      comment.user_id.should == assets(:valid_mp3).user_id
+      new_comment.save.should be_true    
+      new_comment.user_id.should == assets(:valid_mp3).user_id
     end
     
     it "should not save a dupe (same content/ip)" do
@@ -42,8 +42,7 @@ describe Comment do
     end
     
     it "should deliver a mail to the user if it was an asset comment" do 
-      comment = assets(:valid_mp3).comments.new(:body => 'test')
-      expect {comment.save}.to change{ActionMailer::Base.deliveries.size}.by(1)
+      expect {new_comment.save}.to change{ActionMailer::Base.deliveries.size}.by(1)
     end
     
     it "should not be delivering mail for non-asset comments" do 
@@ -57,8 +56,16 @@ describe Comment do
     
   end
   
-  context "spam" do 
+  context "spam" do
     
+    it "should ask akismet if there is spam" do 
+      comment = new_comment
+      #comment.should_receive(:spam?)
+      Rakismet.should_receive(:akismet_call)
+      comment.save.should be_true
+      comment.is_spam.should be_false
+    end
   end
+
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130213150415) do
+ActiveRecord::Schema.define(version: 20130918202405) do
 
   create_table "assets", force: true do |t|
     t.string   "mp3_content_type"
@@ -59,10 +59,8 @@ ActiveRecord::Schema.define(version: 20130213150415) do
     t.integer  "user_id"
     t.string   "remote_ip"
     t.string   "user_agent"
-    t.string   "referer"
-    t.boolean  "spam",             default: false
-    t.float    "spaminess"
-    t.string   "signature"
+    t.string   "referrer"
+    t.boolean  "is_spam",          default: false
     t.boolean  "private",          default: false
     t.text     "body_html"
   end
@@ -70,7 +68,7 @@ ActiveRecord::Schema.define(version: 20130213150415) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
   add_index "comments", ["created_at"], name: "index_comments_on_created_at", using: :btree
-  add_index "comments", ["spam"], name: "index_comments_on_spam", using: :btree
+  add_index "comments", ["is_spam"], name: "index_comments_on_is_spam", using: :btree
 
   create_table "facebook_accounts", force: true do |t|
     t.integer "fb_user_id", limit: 8

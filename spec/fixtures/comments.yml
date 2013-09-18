@@ -3,7 +3,7 @@ valid_comment_on_asset_by_user:
   commentable_type: Asset
   commentable_id: 1
   body: "Well, this is an awesome track, says a user"
-  spam: false
+  is_spam: false
   user_id: 1
   commenter_id: 1
   remote_ip: 127.0.0.1
@@ -13,15 +13,15 @@ valid_comment_on_asset_by_guest:
   commentable_type: Asset
   commentable_id: 1
   body: "Well, this is an awesome track, says a nobody"
-  spam: false
+  is_spam: false
   user_id: 1
 
 spam_comment_on_asset_by_user:
   id: 3
   commentable_type: Asset
   commentable_id: 1
-  body: "Well, this is an spammy spam."
-  spam: true
+  body: "Well, this is an is_spammy is_spam."
+  is_spam: true
   user_id: 1
   commenter_id: 1
 
@@ -29,8 +29,8 @@ spam_comment_on_asset_by_guest:
   id: 4
   commentable_type: Asset
   commentable_id: 1
-  body: "Well, this is an spammy spam."
-  spam: true
+  body: "Well, this is an is_spammy is_spam."
+  is_spam: true
   user_id: 1
     
 comment_with_no_body:
@@ -43,5 +43,5 @@ comment_on_update:
   commentable_type: Update
   commentable_id: 1
   body: "Well, this is an awesome blog entry"
-  spam: false
+  is_spam: false
   

@@ -2,13 +2,12 @@
 class Comment < ActiveRecord::Base
   
   scope :recent,          -> { order('id DESC')                                                                                 }
-  scope :public,          -> { recent.where(:spam => false).where(:private => false)                                            }
+  scope :public,          -> { recent.where(:is_spam => false).where(:private => false)                                         }
   scope :by_member,       -> { recent.where('commenter_id IS NOT NULL')                                                         }
-  scope :include_private, -> { recent.where(:spam => false)                                                                     }
+  scope :include_private, -> { recent.where(:is_spam => false)                                                                  }
   scope :on_track,        -> { where(:commentable_type => 'Asset')                                                              }
   scope :last_5_private,  -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
   scope :last_5_public,   -> { on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
-  
   
   has_many :replies, :as  => :commentable, :class_name => 'Comment'
 
@@ -26,14 +25,14 @@ class Comment < ActiveRecord::Base
   before_create :disallow_dupes, :set_spam_status, :set_user
   after_create :deliver_comment_notification, :increment_counters
   
-  attr_accessible :body, :remote_ip, :commentable_type, :commentable_id, :private, :commenter_id, :user_agent, :referrer
+  attr_accessible :body, :remote_ip, :commentable_type, :commentable_id, :private, 
+    :commenter_id, :user_agent, :referrer, :commenter
 
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { author_name },
                   :author_email =>  proc { commenter.email if commenter },
                   :content =>       proc { body },
                   :permalink =>     proc { commentable.full_permalink }
-
 
   def duplicate?
     Comment.where(:remote_ip => remote_ip, :body => body).first.present?
@@ -49,13 +48,8 @@ class Comment < ActiveRecord::Base
   end
   
   def set_spam_status
-    self[:spam] = spam? # makes API request
+    self.is_spam = spam? # makes API request
     true
-  end
-  
-  # unfortunately rakismet overrides the .spam? method
-  def is_spam?
-    self[:spam] == 1
   end
   
   def author_name
