@@ -250,7 +250,7 @@ GEM
       rack
       raindrops (~> 0.7)
     uuidtools (2.1.4)
-    will_paginate (3.0.4)
+    will_paginate (3.0.5)
     yui-compressor (0.9.6)
       POpen4 (>= 0.1.4)
 

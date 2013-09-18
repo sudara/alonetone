@@ -1,13 +1,15 @@
 # -*- encoding : utf-8 -*-
 class Comment < ActiveRecord::Base
   
-  scope :recent,          -> { order('id DESC')                                                                                 }
-  scope :public,          -> { recent.where(:is_spam => false).where(:private => false)                                         }
-  scope :by_member,       -> { recent.where('commenter_id IS NOT NULL')                                                         }
-  scope :include_private, -> { recent.where(:is_spam => false)                                                                  }
-  scope :on_track,        -> { where(:commentable_type => 'Asset')                                                              }
-  scope :last_5_private,  -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
-  scope :last_5_public,   -> { on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
+  scope :recent,             -> { order('id DESC')                                                                                 }
+  scope :public,             -> { recent.where(:is_spam => false).where(:private => false)                                         }
+  scope :by_member,          -> { recent.where('commenter_id IS NOT NULL')                                                         }
+  scope :include_private,    -> { recent.where(:is_spam => false)                                                                  }
+  scope :public_or_private,  -> (has_access) { has_access ? include_private : public                                             }
+  scope :spam,               -> { recent.where(:spam => true)                                                                      }
+  scope :on_track,           -> { where(:commentable_type => 'Asset')                                                              }
+  scope :last_5_private,     -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
+  scope :last_5_public,      -> { on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
   
   has_many :replies, :as  => :commentable, :class_name => 'Comment'
 

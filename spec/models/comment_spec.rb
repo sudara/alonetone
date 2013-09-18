@@ -22,6 +22,14 @@ describe Comment do
     it "should be valid without a user_id" do 
       comments(:comment_on_update).should be_valid
     end
+    
+    it "should be able to be private as user" do 
+      comments(:private_comment_on_asset_by_user).should be_valid
+    end
+    
+    it "should be able to be private as guest" do 
+      comments(:private_comment_on_asset_by_guest).should be_valid
+    end
   end
   
   context "saving" do    
@@ -53,6 +61,7 @@ describe Comment do
   end
   
   context "private and guests" do 
+
     
   end
   

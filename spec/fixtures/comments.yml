@@ -45,3 +45,23 @@ comment_on_update:
   body: "Well, this is an awesome blog entry"
   is_spam: false
   
+private_comment_on_asset_by_guest:
+  id: 7
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well, this is an awesome track, I say in secret"
+  is_spam: false
+  user_id: 1
+  private: true
+
+private_comment_on_asset_by_user:
+  id: 8
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well friend, this is an awesome track."
+  is_spam: false
+  user_id: 1
+  commenter_id: 2
+  remote_ip: 127.0.0.1
+  private: true
+  
