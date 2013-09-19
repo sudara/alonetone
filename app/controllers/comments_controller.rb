@@ -44,8 +44,8 @@ class CommentsController < ApplicationController
   def index
     if params[:login].present?
       @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.public_or_private(display_private?).paginate(:page => params[:page])
-      @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private?).paginate(:page => params[:made_page])
+      @comments = @user.comments.public_or_private(display_private_comments?).paginate(:page => params[:page])
+      @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private_comments?).paginate(:page => params[:made_page])
     else
       @page_title = "Recent Comments"
       @comments = Comment.public_or_private(moderator?).paginate(:page => params[:page])
@@ -62,10 +62,6 @@ class CommentsController < ApplicationController
   
   def authorized?
     moderator? or (@comment.user.id == @comment.commentable.user.id )
-  end
-  
-  def display_private?
-    moderator? or (logged_in? && (current_user.id.to_s == @user.id.to_s))
   end
   
   def massaged_params

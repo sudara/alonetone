@@ -1,7 +1,8 @@
-# -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base  
   helper :all # all helpers, all the time
 
+  include AuthlogicHelpers
+  
   @@bad_ip_ranges = ['195.239', '220.181', '61.135', '60.28.232', '121.14', '221.194','117.41.183',
                      '117.41.184','60.169.78','222.186','61.160.232','22.186.24.']
 
@@ -14,25 +15,7 @@ class ApplicationController < ActionController::Base
   
   # let ActionView have a taste of our authentication
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?
-  
-  
-  #rescue_from ActiveRecord::RecordNotFound, :with => :show_error
-  #rescue_from NoMethodError, :with => :show_error
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :show_error
-  
-  # all errors end up here
-  def show_error(exception)
-    if Rails.env.production?
-      # show something decent for visitors
-      flash[:error] = "Whups! That didn't work out. We've logged it, but feel free to let us know (bottom right) if something is giving you trouble"
-      redirect_to (session[:return_to] || root_path)
-    else
-      # let me see what's wrong in dev mode.
-      raise exception  
-    end
-  end
-  
-  
+    
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
   end
@@ -62,14 +45,6 @@ class ApplicationController < ActionController::Base
     @user = User.find_by_login(login) || current_user 
   end
 
-  def current_user_is_admin_or_owner?(user)
-    logged_in? && (current_user.admin? || ((current_user.id.to_s == user.id.to_s)))
-  end
-
-  def current_user_is_admin_or_moderator_or_owner?(user)
-    current_user_is_admin_or_owner? || moderator?
-  end
-
   def find_asset
     @asset = Asset.find_by_permalink(params[:permalink] || params[:id])
     @asset ||= Asset.find(params[:id]) if params[:id]
@@ -80,64 +55,14 @@ class ApplicationController < ActionController::Base
     @playlist = @user.playlists.find(params[:id], :include =>[:tracks => :asset]) if !@playlist && params[:id] 
   end
 
-
-  # authentication tricks
-  def current_user_session
-    return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
-  end
-
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user= current_user_session && current_user_session.user
-  end
-  
-  def logged_in?
-    !!current_user
-  end
-  
-  def admin?
-    logged_in? && current_user.admin?
-  end
-  
-  def moderator?
-    logged_in? && (current_user.moderator? || current_user.admin?)
-  end
-  
-  def moderator_required
-    require_login && moderator?
-  end
-  
-  def require_login
-    force_login unless logged_in? and authorized?
-  end
-    
-  def admin_only
-    force_admin_login unless admin?
-  end
-  
-  def moderator_only
-    force_mod_login unless moderator?
-  end
-  
-  def force_login
-    store_location
-    redirect_to login_path, :alert => "Whups, you need to login for that!"
-  end
-  
-  def force_mod_login
-    store_location
-    redirect_to login_path, :alert => "Super special secret area. Alonetone Elite Only."
-  end
-  
-  def force_admin_login
-    store_location
-    redirect_to login_path, :alert => "What do you think you’re doing?! We're calling your mother..."
+  def display_private_comments?
+    moderator? or (logged_in? && (current_user.id.to_s == @user.id.to_s))
   end
   
   def store_location
     session[:return_to] = request.url unless request.xhr?
   end
+  
   
   def redirect_back_or_default(default='/')
     redirect_to(session[:return_to] || default)
@@ -150,6 +75,14 @@ class ApplicationController < ActionController::Base
   
   def admin_or_owner_with_delete(record=current_user)
     admin? || (params[:login].nil? || params[:login] == record.login)
+  end
+  
+  def current_user_is_admin_or_owner?(user)
+    logged_in? && (current_user.admin? || ((current_user.id.to_s == user.id.to_s)))
+  end
+
+  def current_user_is_admin_or_moderator_or_owner?(user)
+    current_user_is_admin_or_owner? || moderator?
   end
 
   def render_text(text)
@@ -177,11 +110,6 @@ class ApplicationController < ActionController::Base
   def is_sudo
     @sudo = session[:sudo]
   end
-  
-  # override default behavior to ensure that 'log in to app' returns user somewhere useful
-   # def application_is_not_installed_by_facebook_user
-   #   redirect_to session[:facebook_session].install_url(:next => "#{request.request_uri}")
-   # end
   
   def set_latest_update_title
     @latest_update = Update.order('created_at DESC').limit(1).first
