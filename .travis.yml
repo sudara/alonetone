@@ -11,15 +11,11 @@ before_script:
 script: bundle exec rake spec
 notifications:
   email:
-    on_success:
-      - never
-    on_failure:
-      - never
+    on_success: never
+    on_failure: never
   campfire:
-    on_success:
-      - always
-    on_failure:
-      - change
+    on_success: always
+    on_failure: change
     rooms:
       secure: JojINEVLXaS8X348h26ghP2vQ9l9cGXmHogfEO4QIEQ9whl1le6e3xzcLUKxjfRTZSHleA4fYeXNtCWh3+mbSxqw+wzUQEosiH93yc0c6M+LVroDSRgE2s9iBZmnQn0q3psVF4YREaWILkGrH3JLRfmDiOjoJv8E9Hk7p+odRxw=
 env:
