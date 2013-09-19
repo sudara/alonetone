@@ -1,4 +1,4 @@
-<% if playlist.has_tracks? || authorized_for(playlist) %>
+<% if playlist.has_tracks? %>
 
 		<%= div_for playlist, :class => "box #{(playlist.has_tracks? ? '' : 'empty')} #{playlist.type}" do %>
 		  <div class="playlist_title box">
@@ -9,7 +9,7 @@
         <% end %>
 				
       </div>
-		<% if playlist.private? && authorized_for(playlist)%>
+		<% if playlist.private? && authorized_for(playlist) %>
 			<div class="empty">
             Playlist is hidden from the public (you can still share it)<br/>
             <%= form_for [@user, playlist] do |f| %>
@@ -20,8 +20,6 @@
             
 			</div>
 		<% end %>
-
-
 
 			<div class="info">
 		    <div class="cover">

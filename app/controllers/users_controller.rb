@@ -49,8 +49,7 @@ class UsersController < ApplicationController
         @listens = @user.listened_to_tracks.limit(5)
         @track_plays = @user.track_plays.from_user.limit(10)
         @favorites = @user.tracks.favorites.recent.limit(5)
-        @comments = @user.comments.public.limit(5) unless display_private_comments?(@user)
-        @comments = @user.comments.include_private.limit(5) if display_private_comments?(@user)
+        @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
         @follows = @user.followees
         @mostly_listens_to = @user.mostly_listens_to
         render

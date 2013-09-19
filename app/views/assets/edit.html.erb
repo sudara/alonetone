@@ -1,15 +1,11 @@
-<% render(:layout => 'users/user') do %>
+<%= render(:partial => 'users/user') %>
 
-  <%= error_messages_for :asset %>
+<%= error_messages_for :asset %>
 
-  <% content_for :left do %>
-    <%= render :partial => 'edit' %>
-  <% end %>
- 
- <% content_for :right do %>
-   <%= render :partial => 'descriptionless'%>
- <% end %>
- 
- 
- 
+<% content_for :left do %>
+  <%= render :partial => 'edit' %>
+<% end %>
+
+<% content_for :right do %>
+ <%= render :partial => 'descriptionless'%>
 <% end %>

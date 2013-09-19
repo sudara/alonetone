@@ -1,14 +1,13 @@
-<% render(:layout => 'users/user') do %>
-    <h1>Editing your tracks</h1>
-    <% content_for :left do %>
-        <div id="mass_edit">
-        <% @assets.each do |asset| %>
-            <% @asset = asset %>
-            <%= render :partial => 'edit' %>
-        <% end %>
-        </div>
+<%= render(:partial => 'users/user') %>
+<h1>Editing your tracks</h1>
+<%= content_for :left do %>
+    <div id="mass_edit">
+    <% @assets.each do |asset| %>
+        <% @asset = asset %>
+        <%= render :partial => 'edit' %>
     <% end %>
-    <% content_for :right do %>
-        <%= render :partial => 'descriptionless'%>
-    <% end %>
+    </div>
+<% end %>
+<%= content_for :right do %>
+    <%= render :partial => 'descriptionless'%>
 <% end %>

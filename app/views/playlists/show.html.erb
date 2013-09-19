@@ -1,12 +1,11 @@
 <%= render :partial => 'users/user' %>
 
 <% content_for :left do %>
-  
-  <%# cache("#{@playlist.cache_key}") do %>
-
-	<div id="single_playlist">
-		<%= render @playlist %>
-	</div>  	
+  <div id="single_playlist">
+    <% cache(@playlist) do %>
+      <%= render @playlist %>
+    <% end unless (@playlist.private? && authorized_for(@playlist)) # don't cache private playlists %>
+  </div>  	
 <% end %>
 	  
 <% content_for :right do %>
