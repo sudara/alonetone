@@ -19,7 +19,6 @@ class SourceFilesController < ApplicationController
 
   # GET /source_files/1/edit
   def edit
-    @source_file = SourceFile.find(params[:id])
   end
 
   # POST /source_files
@@ -41,13 +40,8 @@ class SourceFilesController < ApplicationController
   end
 
   def update
-    @source_file = SourceFile.find(params[:id])
-    if @source_file.update_attributes(params[:source_file])
-      flash[:notice] = 'SourceFile was successfully updated.'
-      redirect_to(@source_file) 
-    else
-      render :action => "edit" 
-    end
+    @source_file = @user.source_file.find(params[:id])
+    redirect_to(@source_file) 
   end
 
   def destroy
