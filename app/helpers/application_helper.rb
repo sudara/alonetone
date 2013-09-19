@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-require 'ruby_pants'
 module ApplicationHelper
   
   @@listen_sources = %w(itunes home download facebook)
