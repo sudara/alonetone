@@ -15,16 +15,29 @@ class AssetsController < ApplicationController
   # user agent black list
   @@bots = ['bot','spider','baidu','mp3bot'] 
   
+  # home page
+  def latest
+    respond_to do |wants|
+      wants.html do
+        @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
+        @tab = 'home'
+        @assets = Asset.latest.includes(:user => :pic).limit(5)
+        set_related_lastest_variables
+      end
+      wants.rss do 
+        @assets = Asset.latest(50)
+      end
+      wants.json do
+        @assets = Asset.limit(500).includes(:user)
+        render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
+      end
+    end
+  end
   
-  # GET /assets
-  # GET /assets.xml
+  # index serves assets for a specific user
   def index
     @page_title = "All music by " + @user.name 
-
-    @assets = @user.assets.paginate(:order    => 'created_at DESC', 
-      :per_page => 200, 
-      :page     => params[:page]
-    ) unless request.format.to_sym == :json
+    @assets = @user.assets.recent.paginate(:per_page => 200, :page => params[:page])
 
     respond_to do |format|
       format.html # index.rhtml
@@ -35,8 +48,7 @@ class AssetsController < ApplicationController
         end
       end
       format.json do
-        @assets = @user.assets.order('created_at DESC')          
-        cached_json = cache("tracksby"+@user.login+@user.assets.find(:first, :order => 'created_at DESC').created_at.to_s(:db).gsub(/-|:|\s/,'')) do
+        cached_json = cache("tracksby"+@user.login) do
           '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
         end
         render :json => cached_json
@@ -48,15 +60,8 @@ class AssetsController < ApplicationController
     respond_to do |format|
       format.html do
         @assets = [@asset]
-        @listens = @asset.listens
-        @comments = @asset.comments.public.where(:spam => false)
-        @listeners = @asset.listeners.first(5)
-        @favoriters = @asset.favoriters
-        @page_title = "#{@asset.name} by #{@user.name}"
-        @description = @page_title + " - #{@asset[:description]}"
-        @single_track = true
+        set_related_show_variables
       end
-
       format.mp3 do
         register_listen
         redirect_to @asset.mp3.url
@@ -76,30 +81,6 @@ class AssetsController < ApplicationController
     end
   end
 
-  # aka home page
-  def latest
-    respond_to do |wants|
-      wants.html do
-        @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
-        @tab = 'home'
-                        
-        @assets = Asset.latest.includes(:user => :pic).limit(5)
-        @favorites = Track.favorites_for_home
-        @popular = Asset.limit(5).order('hotness DESC').includes(:user => :pic)
-        @comments = admin? ? Comment.last_5_private : Comment.last_5_public
-        @playlists = Playlist.for_home
-        @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
-      end
-      wants.rss do 
-        @assets = Asset.latest(50)
-      end
-      wants.json do
-        @assets = Asset.limit(1000).includes(:user)
-        render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
-      end
-    end
-  end
-  
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
@@ -122,14 +103,12 @@ class AssetsController < ApplicationController
     render :partial => 'results', :layout => false
   end
 
-  # GET /assets/new
   def new
     redirect_to signup_path unless logged_in?
     @tab = 'upload' if current_user == @user
     @asset = Asset.new
   end
 
-  # GET /assets/1;edit
   def edit
     @descriptionless = @user.assets.descriptionless
     @allow_reupload = true
@@ -149,8 +128,6 @@ class AssetsController < ApplicationController
     
   end
 
-  # POST /assets
-  # POST /assets.xml
   def create
     #collect and prepare
     @assets = []
@@ -203,11 +180,7 @@ class AssetsController < ApplicationController
   def update
     result =  @asset.update_attributes(params[:asset])
     if request.xhr?
-      if result 
-        head :ok
-      else
-        head :bad_request
-      end
+      result ? head(:ok) : head(:bad_request)
     else
       if result
         redirect_to user_track_url(@asset.user.login, @asset.permalink) 
@@ -266,6 +239,24 @@ class AssetsController < ApplicationController
       when ''         then 'direct hit'
       else request.env['HTTP_REFERER']
     end
+  end
+  
+  def set_related_lastest_variables
+    @favorites = Track.favorites_for_home
+    @popular = Asset.limit(5).order('hotness DESC').includes(:user => :pic)
+    @playlists = Playlist.for_home
+    @comments = admin? ? Comment.last_5_private : Comment.last_5_public
+    @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
+  end
+  
+  def set_related_show_variables
+    @listens = @asset.listens
+    @comments = @asset.comments.only_public
+    @listeners = @asset.listeners.first(5)
+    @favoriters = @asset.favoriters
+    @page_title = "#{@asset.name} by #{@user.name}"
+    @description = @page_title + " - #{@asset[:description]}"
+    @single_track = true
   end
   
   def authorized?

@@ -19,10 +19,8 @@ class User
       group_by = 'HOUR(listens.created_at)'
     end
 
-    track_play_history = track_plays.count(:all, 
-      :conditions => created_within_30_days, 
-      :group      => group_by
-    ).collect{ |tp| tp[1] }
+    track_play_history = track_plays.group(group_by).where(created_within_30_days).count
+    track_play_history.collect{ |tp| tp[1] }
     
    # ::Gchart.line(
    #   :size             => '420x150',

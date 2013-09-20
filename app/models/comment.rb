@@ -2,10 +2,10 @@
 class Comment < ActiveRecord::Base
   
   scope :recent,             -> { order('id DESC')                                                                                 }
-  scope :public,             -> { recent.where(:is_spam => false).where(:private => false)                                         }
+  scope :only_public,        -> { recent.where(:is_spam => false).where(:private => false)                                         }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL')                                                         }
   scope :include_private,    -> { recent.where(:is_spam => false)                                                                  }
-  scope :public_or_private,  -> (has_access) { has_access ? include_private : public                                             }
+  scope :public_or_private,  -> (has_access) { has_access ? include_private : only_public                                          }
   scope :spam,               -> { recent.where(:spam => true)                                                                      }
   scope :on_track,           -> { where(:commentable_type => 'Asset')                                                              }
   scope :last_5_private,     -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
@@ -69,7 +69,7 @@ class Comment < ActiveRecord::Base
   # for montgomeru magic
   def self.count_by_user(start_date, end_date, limit=30)
     limit = limit > 100 ? 100 : limit
-    Comment.public.count(:all, :group => :commenter, :conditions => ['created_at > ? AND created_at < ? AND commenter_id IS NOT NULL',start_date, end_date], :limit => limit, :order => 'count_all DESC')
+    Comment.only_public.count(:all, :group => :commenter, :conditions => ['created_at > ? AND created_at < ? AND commenter_id IS NOT NULL',start_date, end_date], :limit => limit, :order => 'count_all DESC')
   end
   
   def deliver_comment_notification
