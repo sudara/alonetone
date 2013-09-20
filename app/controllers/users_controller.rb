@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   before_filter :find_user, :except => [:new, :create]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   
-  #rescue_from NoMethodError, :with => :user_not_found
-
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
@@ -39,15 +37,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         prepare_meta_tags
-        @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
-        @assets = @user.assets.limit(5)
-        @playlists = @user.playlists.public
-        @listens = @user.listened_to_tracks.limit(5)
-        @track_plays = @user.track_plays.from_user.limit(10)
-        @favorites = @user.tracks.favorites.recent.limit(5)
-        @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
-        @follows = @user.followees
-        @mostly_listens_to = @user.mostly_listens_to
+        gather_user_goodies
       end
       format.xml { @assets = @user.assets.recent.limit(params[:limit] || 10) }
       format.rss { @assets = @user.assets.recent }
@@ -75,7 +65,6 @@ class UsersController < ApplicationController
 
   def create
     return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
-    
     @user = User.new(params[:user])
     if @user.save_without_session_maintenance
       @user.reset_perishable_token!
@@ -124,40 +113,24 @@ class UsersController < ApplicationController
   
   
   def update
-    # fix to not care about password stuff unless both fields are set
-    (params[:user][:password] = params[:user][:password_confirmation] = nil) unless params[:user][:password].present? and params[:user][:password_confirmation].present?    
     # If the user changes the :block_guest_comments setting then it requires
-    # that the cache for all their tracks be invalidated or else the cached
-    # tabs will not change
+    # that the cache for all their tracks be invalidated 
     flush_asset_caches = false
     if params[:user] && params[:user][:settings] && params[:user][:settings][:block_guest_comments]
       currently_blocking_guest_comments = @user.settings && @user.settings['block_guest_comments'].present? && @user.settings['block_guest_comments'] == 'true'
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
     
-    @user.attributes = params[:user]
     # temp fix to let people with dumb usernames change them
     @user.login = params[:user][:login] if not @user.valid? and @user.errors.on(:login)
     
-    successful_save = @user.save
-    if successful_save && flush_asset_caches
-      # Invalidate asset.cache_key for all this users assets
-      Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } )
-    end
-    
-    respond_to do |format|
-      format.html do 
-        if successful_save
-          flash[:ok] = "Sweet, updated" 
-          redirect_to edit_user_path(@user)
-        else
-          flash[:error] = "Not so fast, young one"
-          render :action => :edit
-        end
-      end
-      format.js do
-        successful_save ? (return head(:ok)) : (return head(:bad_request))
-      end
+    if @user.update_attributes(params[:user])
+      flash[:ok] = "Sweet, updated" 
+      Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches
+      redirect_to edit_user_path(@user)
+    else
+      flash[:error] = "Not so fast, young one"
+      render :action => :edit
     end
   end
   
@@ -212,6 +185,18 @@ class UsersController < ApplicationController
       @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
       @tab = 'your_stuff' if current_user == @user
     end 
+    
+    def gather_user_goodies
+      @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
+      @assets = @user.assets.limit(5)
+      @playlists = @user.playlists.public
+      @listens = @user.listened_to_tracks.limit(5)
+      @track_plays = @user.track_plays.from_user.limit(10)
+      @favorites = @user.tracks.favorites.recent.limit(5)
+      @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
+      @follows = @user.followees
+      @mostly_listens_to = @user.mostly_listens_to
+    end
     
     def authorized?
       admin? || (!%w(destroy admin).include?(action_name) && logged_in? && (current_user.id.to_s == @user.id.to_s)) || (action_name == 'sudo')
