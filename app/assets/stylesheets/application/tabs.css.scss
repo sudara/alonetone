@@ -44,7 +44,7 @@ div.tabs {
     // prevent dotted border in Firefox
     outline: 0;
   }
-  .ui-tabs-selected a {
+  .ui-state-active a {
     background-position: -420px 0px;
     position: relative;
     top: 0px;

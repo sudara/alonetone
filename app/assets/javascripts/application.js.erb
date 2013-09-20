@@ -413,7 +413,7 @@ Tabbies = $.klass({
     this.defaultTab = 0;
     this.currentTab = desiredTab || this.defaultTab;
     this.element.tabs({
-      selected: this.currentTab 
+      active: 0
     });
     
     // when switching tabs, always focus on comment box if on comment tab
@@ -424,7 +424,7 @@ Tabbies = $.klass({
   },
   openTab : function(desiredTab){
     desiredTab = desiredTab || this.defaultTab;
-    this.element.tabs('select', desiredTab);
+    this.element.tabs( "option", "active", desiredTab );
     this.currentTab = desiredTab;
   }
 });
