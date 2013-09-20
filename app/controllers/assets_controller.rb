@@ -6,7 +6,7 @@ class AssetsController < ApplicationController
   
   # we check to see if the current_user is authorized based on the asset.user
   before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
-  before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
+  before_filter :set_user_agent, :find_referrer, :prevent_abuse, :only => :show
   
   # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
@@ -256,8 +256,8 @@ class AssetsController < ApplicationController
     logged_in? and current_user.has_followees?
   end
   
-  def find_referer
-    @referer = case params[:referer]
+  def find_referrer
+    @referrer = case params[:referrer]
       when 'itunes'   then 'itunes'
       when 'download' then 'download'
       when 'home'     then 'alonetone home'
@@ -282,7 +282,7 @@ class AssetsController < ApplicationController
     @asset.listens.create(
       :listener     => current_user || nil, 
       :track_owner  => @asset.user, 
-      :source       => @referer, 
+      :source       => @referrer, 
       :user_agent   => @agent,
       :ip           => request.remote_ip
     ) unless is_a_bot?
@@ -309,7 +309,7 @@ class AssetsController < ApplicationController
   
   def prevent_abuse
     if is_a_bot?
-      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.mp3_file_name} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
+      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.mp3_file_name} #{@agent} #{request.remote_ip} #{@referrer} User:#{current_user || 0}"
       render(:text => "Denied due to abuse", :status => 403)    
     end
   end

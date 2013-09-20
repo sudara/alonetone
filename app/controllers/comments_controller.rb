@@ -73,7 +73,7 @@ class CommentsController < ApplicationController
       :private            => params[:comment][:private] || false,
       :remote_ip          => request.remote_ip,
       :user_agent         => request.env['HTTP_USER_AGENT'], 
-      :referer            => request.env['HTTP_REFERER']
+      :referrer            => request.env['HTTP_REFERER']
     }
   end
   

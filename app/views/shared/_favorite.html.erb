@@ -1,5 +1,5 @@
 <%= content_tag :div, :id => ("asset_#{favorite.asset.unique_id}"), :class => 'asset ' + cycle('odd', 'even') do %>
-  <%= render :layout => 'assets/asset_layout', :locals => {:asset => favorite.asset, :referer => (@referer) } do %>
+  <%= render :layout => 'assets/asset_layout', :locals => {:asset => favorite.asset, :referrer => (@referrer) } do %>
     <%= link_to favorite.asset.user.name, user_home_path(favorite.asset.user), :class => 'artist' %> 
     <%= link_to "(fav'd by #{favorite.asset.user.name})", user_home_path(favorite.user), :class => 'artist' %>
   <% end %>
