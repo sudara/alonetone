@@ -7,10 +7,12 @@ class Asset < ActiveRecord::Base
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC') }
    
-  has_many :tracks, :dependent => :destroy
+  belongs_to :user,    :counter_cache => true
+  has_many :tracks,    :dependent => :destroy
   has_many :playlists, :through => :tracks
-  belongs_to :user, :counter_cache => true
-  has_many :listens, :dependent => :destroy
+  has_many :listens,   :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent  => :destroy
+  
   has_many :listeners, 
     -> { order('listens.created_at DESC').uniq.limit(20)},
     :through  => :listens
@@ -20,18 +22,13 @@ class Asset < ActiveRecord::Base
     :source     =>  :user, 
     :through    =>  :tracks
       
-  has_many :comments, :as => :commentable, :dependent  => :destroy
-    
-  after_create :notify_followers
-    
-  has_many :facebook_addables, :as => :profile_chunks
   reportable :weekly, :aggregation => :count, :grouping => :week
  
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
+  after_create :notify_followers
   
   validates_presence_of :user_id
-  
   attr_accessible :user, :mp3, :size, :name, :user_id
 
   # override has_permalink method to ensure we don't get empty permas
@@ -97,11 +94,6 @@ class Asset < ActiveRecord::Base
   
   def seconds
     self[:length] # a bit backwards, ain't it?
-  end
-  
-  # hack for sproutcore json
-  def type
-    'Track'
   end
   
   def guest_can_comment?

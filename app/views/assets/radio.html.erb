@@ -25,18 +25,9 @@
                     <%= radio_option 'those_you_follow',  "Tracks from those you follow", false, true %>                    
                     <%= radio_option 'your_favorite_alonetoners', "Your favorite alonetoners", false, true %>
                     <%= radio_option 'songs_you_have_not_heard',  "Songs you haven't heard", false, true %>
-                    
-                    </ul>
+                  </ul>
                 </form>
             </div>
         </div>
-        <% if @safari %>
-        <h2 class="box">Pssst! Hey Safari User</h2>
-        <div class="static_content">
-            Just a heads up: alonetone radio works best when you have it open in its own window.<br/><br/> 
-            Safari won't let us do fancy things (like automatically play the next track)
-            if you have us stuffed somewhere in a background tab. 
-        </div>
-        <% end %>
     </div>
 <% end %>

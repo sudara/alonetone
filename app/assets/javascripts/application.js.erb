@@ -413,11 +413,11 @@ Tabbies = $.klass({
     this.defaultTab = 0;
     this.currentTab = desiredTab || this.defaultTab;
     this.element.tabs({
-      active: 0
+      active: this.currentTab
     });
     
     // when switching tabs, always focus on comment box if on comment tab
-    this.element.bind('tabsshow', function(event, ui) {
+    this.element.bind('activate', function(event, ui) {
         if(ui.index==0)
           $('textarea',ui.panel).focus();
     });

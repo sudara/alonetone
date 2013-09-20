@@ -43,7 +43,6 @@ class Feature < ActiveRecord::Base
     "#{self.user.name}'s alonetone feature"
   end
   
-  alias :unique_id :id
   alias :user :featured_user
   
   protected

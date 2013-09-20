@@ -15,13 +15,13 @@ class Asset
         Asset.mangoz(user, common_options)
 
       when 'most_favorited'
-        Asset.order_by('favorites_count DESC').paginate( common_options)
+        Asset.order('favorites_count DESC').paginate( common_options)
 
       when 'songs_you_have_not_heard'
         Asset.not_heard_by(user, common_options)
 
       when 'popular'
-        Asset.order_by('hotness DESC').paginate( common_options)
+        Asset.order('hotness DESC').paginate( common_options)
         
       when 'those_you_follow'
         Asset.recent.new_tracks_from_followees(user, common_options)
@@ -33,9 +33,7 @@ class Asset
 
   # random radio, without playing the same track twice in a 24 hour period
   def self.mangoz(user, pagination_options)    
-    Asset.
-      random_order.
-      id_not_in(user && user.listened_more_than?(10) && user.listened_to_today_ids).
+    Asset.random_order.id_not_in(user && user.listened_more_than?(10) && user.listened_to_today_ids).
       paginate( pagination_options)
   end
 
@@ -52,16 +50,12 @@ class Asset
 
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
   def self.not_heard_by(user, pagination_options)
-    Asset.
-      random_order.
-      id_not_in(user && user.listened_to_ids).paginate( pagination_options)      
+    Asset.random_order.id_not_in(user && user.listened_to_ids).paginate(pagination_options)      
   end
 
   
   def self.most_listened_to(pagination_options)
-    Asset.
-      order_by('listens_count DESC').
-      paginate( pagination_options)
+    Asset.order('listens_count DESC').paginate(pagination_options)
   end
   
   # Since the raw sql doesn't give a meaningful performance boost, I removed it in favor of 
