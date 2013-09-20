@@ -118,10 +118,9 @@ class AssetsController < ApplicationController
     redirect_to_default and return false unless logged_in? and current_user.id == @user.id or admin?
     @descriptionless = @user.assets.descriptionless
     if params[:assets] # expects comma seperated list of ids
-      @assets = [@user.assets.find(params[:assets])].flatten
-    else
-      @assets = @user.assets
+      @assets = [@user.assets.where(:id => params[:assets])].flatten
     end
+    @assets = @user.assets unless @assets.present?
   end
   
   def mass_update
@@ -129,19 +128,7 @@ class AssetsController < ApplicationController
   end
 
   def create
-    #collect and prepare
-    @assets = []
-    params[:asset] ||= {} 
-    params[:asset_data] ||= []
-    params[:asset].delete(:title) if params[:asset_data].size > 1
-        
-    params[:asset_data].each do |file|
-      unless file.is_a?(String)
-        Asset.extract_mp3s(file) do |valid_mp3|
-          @assets << current_user.assets.create(params[:asset].merge(:uploaded_data => valid_mp3))
-        end
-      end
-    end
+    extract_assets_from_params
 
     flashes = ''
     good = false
@@ -165,14 +152,13 @@ class AssetsController < ApplicationController
       flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)"
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
-      flash[:error] = if (@assets.size == 0)
-        "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. " <<
-        "Need help? Search or ask for help the forums or email support@alonetone.com" 
+     if @assets.present?
+       flash[:error] = flashes
       else
-        flashes
+        flashe[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email support@alonetone.com" 
       end
       redirect_to new_user_track_path(current_user)
-    end # if good
+    end 
   end
 
   # PUT /assets/1
@@ -191,8 +177,6 @@ class AssetsController < ApplicationController
     end
   end
 
-  # DELETE /assets/1
-  # DELETE /assets/1.xml
   def destroy
     @asset.destroy
     flash[:ok] = "We threw the puppy away. No one can listen to it again " << 
@@ -226,6 +210,15 @@ class AssetsController < ApplicationController
   
   def user_has_tracks_from_followees?
     logged_in? and current_user.has_followees?
+  end
+  
+  def extract_assets_from_params
+    @assets = []
+    params[:asset_data].each do |file|
+      unless file.is_a?(String)
+        @assets << current_user.assets.create(file)
+      end
+    end
   end
   
   def find_referrer

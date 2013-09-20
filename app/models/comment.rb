@@ -5,11 +5,11 @@ class Comment < ActiveRecord::Base
   scope :only_public,        -> { recent.where(:is_spam => false).where(:private => false)                                         }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL')                                                         }
   scope :include_private,    -> { recent.where(:is_spam => false)                                                                  }
-  scope :public_or_private,  -> (has_access) { has_access ? include_private : only_public                                          }
+  scope :public_or_private,  ->(has_access) { has_access ? include_private : only_public                                          }
   scope :spam,               -> { recent.where(:spam => true)                                                                      }
   scope :on_track,           -> { where(:commentable_type => 'Asset')                                                              }
   scope :last_5_private,     -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
-  scope :last_5_public,      -> { on_track.public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
+  scope :last_5_public,      -> { on_track.only_public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
   
   has_many :replies, :as  => :commentable, :class_name => 'Comment'
 
@@ -22,7 +22,7 @@ class Comment < ActiveRecord::Base
   
   belongs_to :commentable, :polymorphic => true, :touch => true
   validates_length_of :body, :within => 1..2000
-  validates :commentable, presence: true
+  validates :commentable_id, presence: true
   
   before_create :disallow_dupes, :set_spam_status, :set_user
   after_create :deliver_comment_notification, :increment_counters
@@ -34,7 +34,7 @@ class Comment < ActiveRecord::Base
   rakismet_attrs  :author =>        proc { author_name },
                   :author_email =>  proc { commenter.email if commenter },
                   :content =>       proc { body },
-                  :permalink =>     proc { commentable.full_permalink }
+                  :permalink =>     proc { commentable.try(:full_permalink) }
 
   def duplicate?
     Comment.where(:remote_ip => remote_ip, :body => body).first.present?

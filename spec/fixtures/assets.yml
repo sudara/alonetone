@@ -14,21 +14,21 @@ valid_zip:
   mp3_content_type: application/zip
   mp3_file_size: <%= 10.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user: sudara
+  user_id: 1
 invalid_file:
   id: 3
   mp3_file_name: Somefile.png
   mp3_content_type: image/png
   mp3_file_size: <%= 1.megabyte %>
   created_at: <%= 1.day.ago.to_s :db %>
-  user: sudara
+  user_id: 1
 valid_arthur_mp3:
   id: 4
   mp3_file_name: Song5.mp3
   mp3_content_type: audio/mpeg
   mp3_file_size: 3.megabytes
   created_at: 2007-04-08 13:00:03
-  user: arthur
+  user_id: 2
   length: 45
 too_big_file:
   id: 5

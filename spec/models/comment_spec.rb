@@ -19,7 +19,7 @@ describe Comment do
       comments(:spam_comment_on_asset_by_guest).should be_valid
     end
     
-    it "should be valid without a user_id" do 
+    it "should be valid without a commenter_id" do 
       comments(:comment_on_update).should be_valid
     end
     

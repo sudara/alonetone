@@ -2,7 +2,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
-  fixtures :users
+  fixtures :users, :assets
 
   it "should be valid with email, login and password" do
     new_user.should be_valid
@@ -40,6 +40,9 @@ describe User do
     users(:not_activated).should_not be_active 
   end
   
+  it 'has tracks called assets' do 
+    users(:arthur).assets.should be_present
+  end
   
   protected
     def new_user(options = {})

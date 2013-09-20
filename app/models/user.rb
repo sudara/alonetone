@@ -154,7 +154,6 @@ class User < ActiveRecord::Base
     update_attribute(:perishable_token, nil)
   end
   
-  
   def active?
     perishable_token == nil
   end

@@ -2,6 +2,7 @@
 class Update < ActiveRecord::Base
     
   has_permalink :title
+  scope :recent, -> { order('created_at DESC') }
     
   has_many :comments, :as => :commentable, :dependent => :destroy
   

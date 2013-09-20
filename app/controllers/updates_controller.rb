@@ -7,12 +7,9 @@ class UpdatesController < ApplicationController
   # GET /updates
   # GET /updates.xml
   def index
-    @updates = Update.paginate( 
-      :order    => 'created_at DESC', 
+    @updates = Update.recent.includes(:comments => [:commenter => :pic]).paginate( 
       :per_page => 5, 
-      :page     => params[:page], 
-      :include  => [ :comments => [:commenter => :pic] ]
-    )
+      :page     => params[:page])
           
     respond_to do |format|
       format.html # index.html.erb

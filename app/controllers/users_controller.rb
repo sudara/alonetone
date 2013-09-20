@@ -38,11 +38,7 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @page_title = (@user.name)
-        @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
-        @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
-        @tab = 'your_stuff' if current_user == @user
-               
+        prepare_meta_tags
         @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
         @assets = @user.assets.limit(5)
         @playlists = @user.playlists.public
@@ -52,7 +48,6 @@ class UsersController < ApplicationController
         @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
         @follows = @user.followees
         @mostly_listens_to = @user.mostly_listens_to
-        render
       end
       format.xml { @assets = @user.assets.recent.limit(params[:limit] || 10) }
       format.rss { @assets = @user.assets.recent }
@@ -210,6 +205,14 @@ class UsersController < ApplicationController
   end
 
   protected
+  
+    def prepare_meta_tags
+      @page_title = (@user.name)
+      @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
+      @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
+      @tab = 'your_stuff' if current_user == @user
+    end 
+    
     def authorized?
       admin? || (!%w(destroy admin).include?(action_name) && logged_in? && (current_user.id.to_s == @user.id.to_s)) || (action_name == 'sudo')
     end
