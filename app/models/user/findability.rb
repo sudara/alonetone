@@ -12,13 +12,11 @@ class User
     where(conditions.join(" OR "))
   end
   
-  
   def self.search(query, options = {})
     with_scope :find => { :conditions => build_search_conditions(query) } do
       find :all, options
     end
   end
-  
   
   def self.build_search_conditions(query)
     query && ['LOWER(display_name) LIKE :q OR LOWER(login) LIKE :q', {:q => "%#{query}%"}]
@@ -26,53 +24,49 @@ class User
   
   # feeds the users/index subnav
   def self.paginate_by_params(params)
-    subnav = %w(recently_joined monster_uploaders on_twitter dedicated_listeners last_uploaded)
-    params[:sort] = 'last_seen' if !params[:sort].present? or !subnav.include?(params[:sort])
-    User.send(params[:sort]).page(:page, :per_page => 15)
+    if params[:sort] == 'dedicated_listeners'
+      User.dedicated_listeners(params[:page] || 1, params[:per_page] || 15)
+    else
+      subnav = %w(recently_joined monster_uploaders on_twitter last_uploaded)
+      params[:sort] = 'last_seen' if !params[:sort].present? or !subnav.include?(params[:sort])
+      User.send(params[:sort]).paginate(:page => params[:page], :per_page => 15)
+    end
   end
 
   protected
   
 
   # needed to map incoming params to scopes
-  def self.last_seen recently_seen; end
-  def self.recently_joined activated; end
-  def self.monster_uploaders musicians; end
-  
-  def last_uploaded
-    @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
-      distinct_users = Asset.select(:user_id).uniq.includes(:user => :pic).order('assets.created_at DESC').limit(pager.per_page).offset(pager.offset)
-
-          
-      pager.replace(distinct_users.collect(&:user)) # only send back the users
-    
-      unless pager.total_entries
-        # the pager didn't manage to guess the total count, do it manually
-        pager.total_entries = User.musicians.count(:all, :conditions => 'assets_count > 0')
-      end  
-    end
-    @entries
+  def self.last_seen 
+    recently_seen
   end
   
-  def dedicated_listeners
-    @entries = WillPaginate::Collection.create((params[:page] || 1), 15) do |pager|
+  def self.recently_joined 
+    activated
+  end
+  
+  def self.monster_uploaders 
+    musicians
+  end
+  
+  def self.last_uploaded
+    includes(:assets).order('assets.created_at DESC')
+  end
+  
+  def self.dedicated_listeners(page, per_page)
+   entries = WillPaginate::Collection.create(page, per_page) do |pager|
       # returns an array, like so: [User, number_of_listens]
-      result = Listen.count(:order      => 'count_all DESC',
-        :conditions => 'listener_id != ""',
-        :group      => :listener,
-        :limit      => pager.per_page,
-        :offset     => pager.offset
-      )
+      result = Listen.where('listener_id != ""').since(3.months.ago).group(:listener).order('count_all DESC').limit(pager.per_page).offset(pager.offset).count
 
       # inject the result array into the paginated collection:
       pager.replace(result.collect(&:first))
 
       unless pager.total_entries
         # the pager didn't manage to guess the total count, do it manually
-        pager.total_entries = Listen.count(:listener_id, :conditions => 'listens.listener_id != ""')
+        pager.total_entries = Listen.where('listener_id != ""').count(:listener_id)
       end
-      @enries
     end
+    entries
   end
   
   def geocode_address

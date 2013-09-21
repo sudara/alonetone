@@ -8,6 +8,7 @@ class Listen < ActiveRecord::Base
   scope :from_user,  -> { where('listener_id != ""')      }
   scope :downloads,  -> { where(:source => 'download')    }
   scope :between,    -> (start, finish) {where('listens.created_at BETWEEN ? AND ?', start, finish)}
+  scope :since,      -> (date) { between(date,Time.now.utc) }
     
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, :counter_cache => true, :touch => true

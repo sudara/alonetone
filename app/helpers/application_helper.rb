@@ -72,7 +72,7 @@ module ApplicationHelper
   
   def user_nav_item(text, link, options=nil)
     added_class = options.delete(:added_class) if options.is_a? Hash
-    content_tag(:li, link_to_unless_current(text, link, options),:class=> ("#{added_class} #{"current" if current_page?(link)}"))
+    content_tag(:li, link_to_unless_current(text, link, options), :class=> ("#{added_class} #{"current" if current_page?(link)}"))
   end
   
   # TODO this desperately needs to be fixed, it's fugly
