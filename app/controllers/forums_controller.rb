@@ -13,10 +13,7 @@ class ForumsController < ApplicationController
     
     @forums = Forum.ordered
     set_interesting_topics
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @forums }
-    end
+    render @forums 
   end
 
   # GET /forums/1
