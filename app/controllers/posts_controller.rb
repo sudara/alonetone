@@ -47,7 +47,7 @@ class PostsController < ApplicationController
       render :action => "new"
     else
       flash[:notice] = 'Post was successfully created.'
-      redirect_to(forum_topic_path(@forum, @topic, :page => @topic.last_page, :anchor => dom_id(@post))
+      redirect_to(forum_topic_path(@forum, @topic, :page => @topic.last_page, :anchor => dom_id(@post)))
     end
   end
 
@@ -62,10 +62,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to(forum_topic_path(@forum, @topic)) }
-      format.xml  { head :ok }
-    end
+    redirect_to(forum_topic_path(@forum, @topic))
   end
 
 protected
