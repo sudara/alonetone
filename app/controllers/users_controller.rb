@@ -129,13 +129,9 @@ class UsersController < ApplicationController
   end
   
   def sudo
-    if admin? && params[:id]
-      sudo_to(params[:id])
-    elsif !admin? && session[:sudo]
-      return_from_sudo 
-    else
-      redirect_to root_path
-    end
+    sudo_to_user if admin? && params[:id]
+    return_from_sudo if !admin? && session[:sudo]
+    redirect_to root_path
   end
 
   protected
@@ -174,7 +170,7 @@ class UsersController < ApplicationController
     redirect_back_or_default 
   end
   
-  def sudo_to(user_id)
+  def sudo_to_user
     user = User.where(:login => params[:id]).first
     logger.warn("SUDO: #{current_user.name} is sudoing to #{user.name}")
     @sudo = session[:sudo] = current_user.id
