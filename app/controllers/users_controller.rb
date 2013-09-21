@@ -91,7 +91,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(params[:user])
-      Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches?
+      flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), :ok => "Sweet, updated" 
     else
       flash[:error] =  "Not so fast, young one"
@@ -179,7 +179,7 @@ class UsersController < ApplicationController
     @sudo = session[:sudo] = nil
   end
   
-  def flush_asset_caches?
+  def flush_asset_cache_if_necessary
     # If the user changes the :block_guest_comments setting then it requires
     # that the cache for all their tracks be invalidated 
     flush_asset_caches = false
@@ -187,6 +187,7 @@ class UsersController < ApplicationController
       currently_blocking_guest_comments = @user.has_setting('block_guest_comments', 'true')
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
+    Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches
   end
   
   
