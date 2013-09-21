@@ -36,8 +36,7 @@ class FeaturesController < ApplicationController
   def create
     @feature = Feature.new(params[:feature])
     if @feature.save
-      flash[:notice] = 'Feature was successfully created.'
-      redirect_to(@feature)
+      redirect_to(@feature), :notice => 'Feature was successfully created.'
     else
       render :action => "new" 
     end

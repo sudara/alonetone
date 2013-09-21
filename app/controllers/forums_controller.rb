@@ -12,9 +12,7 @@ class ForumsController < ApplicationController
     session[:forums_page] = nil
     
     @forums = Forum.ordered
-    @user_topics = Topic.replied_to_by(@user).collect(&:topic) if logged_in?
-    @popular_topics = Topic.popular.collect(&:first)
-    @replyless_topics = Topic.replyless
+    set_interesting_topics
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @forums }
@@ -47,10 +45,9 @@ class ForumsController < ApplicationController
   def create
     @forum = Forum.new(params[:forum])
     if @forum.save
-      flash[:notice] = 'Forum was successfully created.'
-      redirect_to(@forum) 
+      redirect_to(@forum), 'Forum was created.' 
     else
-      render :action => "new" 
+      render :action => "new"
     end
   end
 
@@ -72,6 +69,12 @@ class ForumsController < ApplicationController
   end
   
   protected
+  
+  def set_interesting_topics
+    @user_topics = Topic.replied_to_by(@user).collect(&:topic) if logged_in?
+    @popular_topics = Topic.popular.collect(&:first)
+    @replyless_topics = Topic.replyless
+  end
   
   def authorized?
     admin?
