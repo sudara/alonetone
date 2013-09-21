@@ -116,14 +116,11 @@ class UsersController < ApplicationController
     # If the user changes the :block_guest_comments setting then it requires
     # that the cache for all their tracks be invalidated 
     flush_asset_caches = false
-    if params[:user] && params[:user][:settings] && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.settings && @user.settings['block_guest_comments'].present? && @user.settings['block_guest_comments'] == 'true'
+    if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
+      currently_blocking_guest_comments = @user.has_setting('block_guest_comments', 'true')
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
-    
-    # temp fix to let people with dumb usernames change them
-    @user.login = params[:user][:login] if not @user.valid? and @user.errors.on(:login)
-    
+
     if @user.update_attributes(params[:user])
       flash[:ok] = "Sweet, updated" 
       Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches
@@ -136,13 +133,12 @@ class UsersController < ApplicationController
   
   def toggle_favorite
     return false unless logged_in? && Asset.find(params[:asset_id]) # no bullshit
-    existing_track = current_user.tracks.find(:first, :conditions => {:asset_id => params[:asset_id], :is_favorite => true})
+    existing_track = current_user.tracks.favorites.where(:asset_id => params[:asset_id]).first
     if existing_track  
       existing_track.destroy && Asset.decrement_counter(:favorites_count, params[:asset_id])
     else
-      favs = Playlist.find_or_create_by_user_id_and_is_favorite(:user_id => current_user.id, :is_favorite => true) 
-      added_fav = favs.tracks.create(:asset_id => params[:asset_id], :is_favorite => true, :user_id => current_user.id)
-      Asset.increment_counter(:favorites_count, params[:asset_id]) if added_fav
+      added_fav = current_user.favorites.create(:asset_id => params[:asset_id], :is_favorite => true)
+      Asset.increment_counter(:favorites_count, params[:asset_id])
     end
     render :nothing => true
   end
@@ -179,42 +175,46 @@ class UsersController < ApplicationController
 
   protected
   
-    def prepare_meta_tags
-      @page_title = (@user.name)
-      @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
-      @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
-      @tab = 'your_stuff' if current_user == @user
-    end 
-    
-    def gather_user_goodies
-      @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
-      @assets = @user.assets.limit(5)
-      @playlists = @user.playlists.public
-      @listens = @user.listened_to_tracks.limit(5)
-      @track_plays = @user.track_plays.from_user.limit(10)
-      @favorites = @user.tracks.favorites.recent.limit(5)
-      @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
-      @follows = @user.followees
-      @mostly_listens_to = @user.mostly_listens_to
+  def prepare_meta_tags
+    @page_title = (@user.name)
+    @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
+    @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
+    @tab = 'your_stuff' if current_user == @user
+  end 
+  
+  def gather_user_goodies
+    @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
+    @assets = @user.assets.limit(5)
+    @playlists = @user.playlists.public
+    @listens = @user.listened_to_tracks.limit(5)
+    @track_plays = @user.track_plays.from_user.limit(10)
+    @favorites = @user.tracks.favorites.recent.limit(5)
+    @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
+    @follows = @user.followees
+    @mostly_listens_to = @user.mostly_listens_to
+  end
+  
+  def authorized?
+    !dangerous_action? || current_user_is_admin_or_owner?(@user) || @sudo.present? && (action_name == 'sudo')
+  end
+  
+  def dangerous_action?
+    %w(destroy update edit create).include? action_name 
+  end
+  
+  def sudo_to(user)
+    current_user_session.destroy
+    UserSession.create!(user)
+    flash[:ok] = "Sudo to #{user.name}"
+    redirect_back_or_default 
+  end
+  
+  def display_user_home_or_index
+    if params[:login] && User.find_by_login(params[:login])
+      redirect_to user_home_url(params[:user])
+    else
+      redirect_to users_url
     end
-    
-    def authorized?
-      admin? || (!%w(destroy admin).include?(action_name) && logged_in? && (current_user.id.to_s == @user.id.to_s)) || (action_name == 'sudo')
-    end
-    
-    def sudo_to(user)
-      current_user_session.destroy
-      UserSession.create!(user)
-      flash[:ok] = "Sudo to #{user.name}"
-      redirect_back_or_default 
-    end
-    
-    def display_user_home_or_index
-      if params[:login] && User.find_by_login(params[:login])
-        redirect_to user_home_url(params[:user])
-      else
-        redirect_to users_url
-      end
-    end
+  end
     
 end

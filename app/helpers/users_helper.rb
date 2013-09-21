@@ -44,10 +44,6 @@ module UsersHelper
     logged_in? && current_user.has_setting?('hide_notice') && current_user.settings['hide_notice'][notice].present?
   end
   
-  def setting(symbol_or_string, user=current_user)
-    logged_in? && user.settings && user.settings[symbol_or_string.to_sym] 
-  end
-  
   def favorite_toggle(asset)
     link_to('add to favorites', toggle_favorite_path(:asset_id => asset.id), :class => 'add_to_favorites')
   end

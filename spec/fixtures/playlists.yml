@@ -7,7 +7,7 @@ owp:
   tracks_count: 3
   description: sudara's album
   
-arthurs-playlist:
+arthurs_playlist:
   id: 2
   user_id: 2
   permalink: arthurs-playlist
@@ -29,3 +29,12 @@ mix:
   title: mix tape
   tracks_count: 3
   description: "a mix tape, daring and wonderful"
+  
+arthurs_favorites:
+  id: 5
+  is_mix: true
+  is_favorite: true
+  permalink: arthurs-favorites
+  title: Arthur's favorites
+  description: arthur's favorites
+  tracks_count: 1

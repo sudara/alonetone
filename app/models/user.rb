@@ -31,14 +31,14 @@ class User < ActiveRecord::Base
     :dependent => :destroy
   
   has_many   :tracks
-  
+
   reportable :weekly, :aggregation => :count, :grouping => :week
 
   # alonetone plus
   has_many :source_files
   has_many :memberships
   has_many :groups, :through => :membership
-  
+
   
   # Can listen to music, and have that tracked
   has_many :listens, 
@@ -59,13 +59,7 @@ class User < ActiveRecord::Base
   has_many :listeners, 
     -> { uniq },
     :through  => :track_plays
-  
-  # top tracks
-  has_many :top_tracks, 
-    -> { order('listens_count DESC').limit(10)},
-    :class_name => 'Asset'
-  
-  
+    
   has_many :followings, :dependent => :destroy
   has_many :follows, :dependent => :destroy, :class_name => 'Following', :foreign_key => 'follower_id'    
   
@@ -89,6 +83,14 @@ class User < ActiveRecord::Base
   
   def listened_to_ids
     listens.select('listens.asset_id').uniq.collect(&:asset_id)
+  end
+  
+  def top_tracks
+    assets.order('listens_count DESC').limit(10)
+  end
+  
+  def favorites
+    tracks.favorites
   end
     
   def to_param
@@ -165,14 +167,11 @@ class User < ActiveRecord::Base
   protected
 
   def efficiently_destroy_relations
-    tracks.delete_all
-    playlists.delete_all
     Listen.delete_all(['track_owner_id = ?',id])
     Listen.delete_all(['listener_id = ?',id])
-    posts.delete_all
-    topics.delete_all
-    comments.delete_all
-    assets.delete_all
+    %w(tracks playlist posts topics comments assets).each do |thing|
+      thing.delete_all
+    end
   end
   
   def make_first_user_admin

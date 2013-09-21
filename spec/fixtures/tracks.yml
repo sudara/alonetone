@@ -28,3 +28,8 @@ mix3:
   playlist_id: 4
   asset_id: 4
   position: 3
+fav1:
+  id: 7
+  playlist_id: 5
+  asset_id: 1
+  is_favorite: true

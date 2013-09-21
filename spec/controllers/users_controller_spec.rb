@@ -89,51 +89,88 @@ describe UsersController do
     
     
   end
-end
+  context "profile" do
 
-describe UsersController, "profile" do
-  fixtures :users, :assets
-  [:sudara, :arthur].each do |user|
-    it "should let a user or admin" do
-      login(user)
-      controller.stub(:current_user).and_return(users(user))
-      post :edit, :id => 'arthur'
+    fixtures :users, :assets
+    [:sudara, :arthur].each do |user|
+      it "should let a user or admin edit" do
+        login(user)
+        controller.stub(:current_user).and_return(users(user))
+        post :edit, :id => 'arthur'
+        response.should be_success
+      end
+  
+      it "should let a user or admin update" do
+        login(user)
+        controller.stub(:current_user).and_return(users(user))
+        put :update, :id => 'arthur', :user => {:bio => 'a little more about me'}
+        response.should redirect_to(edit_user_path(users(:arthur)))
+      end
+    end
+    
+    it "should let a user change their login" do 
+      login(:arthur)
+      put :update, :id => 'arthur', :user => {:login => 'arthursaurus'}
+      flash[:error].should_not be_present
+      response.should be_redirect
+      User.where(:login => 'arthursaurus').count.should == 1
+    end
+    
+    it 'should not let a user change login to login that exists' do 
+      login(:arthur)
+      put :update, :id => 'arthur', :user => {:login => 'sudara'}
+      flash[:error].should be_present
+      User.where(:login => 'sudara').count.should == 1
+    end
+  
+    it "should not let any old user edit" do
+      login(:arthur)
+      controller.stub(:current_user).and_return(users(:arthur))
+      post :edit, :id => 'sudara'
+      response.should_not be_success
+    end
+  
+    it "should not let any old user update" do
+      login(:arthur)
+      controller.stub(:current_user).and_return(users(:arthur))
+      put :update,  :id => 'sudara', :user => { :bio => 'a little more about me' }
+      response.should_not be_success
+    end
+  
+    it "should not let a logged out user edit" do
+      logout
+      post :edit, :user_id => 'arthur'
+      response.should_not be_success
+    end
+  
+    it 'should deliver an rss feed for any user, to anyone' do
+      get :show, :id => 'sudara', :format => 'rss'
       response.should be_success
     end
+  end
   
-    it "should let a user or admin update" do
-      login(user)
-      controller.stub(:current_user).and_return(users(user))
-      put :update, :id => 'arthur', :user => {:id => 'arthur', :bio => 'a little more about me'}
-      response.should redirect_to(edit_user_path(users(:arthur)))
+  context "favoriting" do
+    subject { get :toggle_favorite, :asset_id => 1 }
+    it 'should let a user favorite a track' do 
+      login(:arthur)
+      expect { subject }.to change{ Track.count }.by(1) 
+      users(:arthur).favorites.collect(&:asset).should include(Asset.find(1))
+      response.should be_success
+    end
+    
+    it 'should let a user unfavorite a track' do 
+      login(:arthur)
+      expect { subject }.to change{ Track.count }.by(1) 
+      get :toggle_favorite, :asset_id => 1  # toggle again
+      users(:arthur).favorites.collect(&:asset).should_not include(Asset.find(1))
+      response.should be_success
+    end
+    
+    it 'should not let a user mess with another users favs' do
+      
     end
   end
   
-  it "should not let any old user edit" do
-    login(:arthur)
-    controller.stub(:current_user).and_return(users(:arthur))
-    post :edit, :id => 'sudara'
-    response.should_not be_success
-  end
-  
-  it "should not let any old user update" do
-    login(:arthur)
-    controller.stub(:current_user).and_return(users(:arthur))
-    put :update,  :id => 'sudara', :user => {:id => 'sudara', :bio => 'a little more about me'}    
-    response.should_not be_success
-  end
-  
-  it "should not let a logged out user edit" do
-    logout
-    post :edit, :user_id => 'arthur'
-    response.should_not be_success
-  end
-  
-  it 'should deliver an rss feed for any user, to anyone' do
-    get :show, :id => 'sudara', :format => 'rss'
-    response.should be_success
-  end
-
   context "sudo" do 
     it "should not let a normal user sudo" do
       controller.session[:return_to] = '/users'

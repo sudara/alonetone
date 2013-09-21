@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_latest_update_title
   
   # let ActionView have a taste of our authentication
-  helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?
+  helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?, :user_setting
     
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
@@ -89,6 +89,10 @@ class ApplicationController < ActionController::Base
    render :text => text
   end
 
+  def user_setting(symbol_or_string, user=current_user)
+    logged_in? && user.settings && user.settings[symbol_or_string.to_sym] 
+  end
+  
   def set_tab
     @tab = ''
   end

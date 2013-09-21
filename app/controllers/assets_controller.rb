@@ -133,12 +133,7 @@ class AssetsController < ApplicationController
     flashes = ''
     good = false
 
-    @assets.each do |asset|
-      # TODO: find a non-hackish way to ensure content_types are only mp3s at this point
-      # The problem is a zip can contain a zip, which passes validation
-      # Furthermore, if there is an issue with the zip, 
-      # the rescue in the Asset model will hand the file back
-      # Butt ugly, my friends. 
+    @assets.each do |asset| 
       if !asset.new_record? 
         flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
         good = true
@@ -258,7 +253,7 @@ class AssetsController < ApplicationController
   end
   
   def dangerous_action?
-    %w(destroy update edit mass_edit new create).include? action_name 
+    %w(destroy update edit create).include? action_name 
   end
   
   def register_listen

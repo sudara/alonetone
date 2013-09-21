@@ -22,8 +22,10 @@ class Track < ActiveRecord::Base
   scope :favorites_for_home, -> { favorites.limit(5).includes({:user => :pic}, {:asset => {:user => :pic}}) }
   
   acts_as_list :scope => :playlist_id, :order => :position
-  
+
+  attr_accessible :asset_id, :is_favorite
   validates_presence_of :asset_id, :playlist_id
+  before_validation :ensure_playlist_if_favorite
   
   def asset_length
     asset ? asset[:length] : 0
@@ -44,5 +46,9 @@ class Track < ActiveRecord::Base
     define_method("#{attribute}?") { 
       self.track.send("#{attribute}") 
     }
+  end
+  
+  def ensure_playlist_if_favorite
+    self.playlist_id = Playlist.find_or_create_by(:user_id => user_id, :is_favorite => true).id if is_favorite?
   end
 end
