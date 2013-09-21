@@ -6,7 +6,7 @@ class Asset < ActiveRecord::Base
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite is ?', true).order('tracks.id DESC') }
-   
+
   belongs_to :user,    :counter_cache => true
   has_many :tracks,    :dependent => :destroy
   has_many :playlists, :through => :tracks

@@ -164,6 +164,16 @@ class User < ActiveRecord::Base
     !active? ? clear_token! : false
   end  
 
+  def toggle_favorite(asset)
+    existing_track = tracks.favorites.where(:asset_id => asset.id).first
+    if existing_track  
+      existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
+    else
+      favorites.create(:asset_id => asset.id)
+      Asset.increment_counter(:favorites_count, asset.id)
+    end
+  end
+
   protected
 
   def efficiently_destroy_relations

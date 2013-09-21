@@ -7,30 +7,10 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-
-    respond_to do |format|
-      format.html do
-        @users = User.includes(:pic).paginate_by_params(params)
-        @sort = params[:sort]
-        @user_count = User.count
-        @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
-      end
-      format.xml do
-        @users = User.activated.search(params[:q], :limit => 1000)
-        render :xml => @users.to_xml
-      end
-      format.rss do
-        @users = User.activated.geocoded.limit(1000)
-      end
-      # API 
-      format.json do
-        cached_json = cache("usersjson-"+User.last.id.to_s) do
-          users = User.alpha.musicians.includes(:pic)
-          '{ "records" : ' + users.to_json(:methods => [:name, :type, :avatar, :follows_user_ids], :only => [:id,:name,:comments_count,:bio_html,:website,:login,:assets_count,:created_at, :user_id]) + '}'
-        end
-        render :json => cached_json
-      end
-    end
+    @users = User.includes(:pic).paginate_by_params(params)
+    @sort = params[:sort]
+    @user_count = User.count
+    @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
   end
 
   def show
@@ -80,16 +60,13 @@ class UsersController < ApplicationController
   def activate
     @user = User.where(:perishable_token => params[:perishable_token]).first
     if logged_in? 
-      flash[:error] = "You are already activated and logged in! Rejoice and upload!"
-      redirect_to new_user_track_path(current_user)
+      redirect_to new_user_track_path(current_user), :error => "You are already activated and logged in! Rejoice and upload!"
     elsif @user and @user.activate!
-      flash[:ok] = "Whew! All done, your account is activated. Go ahead and upload your first track."
       UserSession.create(@user, false) # Log user in manually
       UserNotification.activation(@user).deliver
-      redirect_to new_user_track_path(current_user)
+      redirect_to new_user_track_path(current_user), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
     else
-      flash[:error] = "Hm. Activation didn't work. Sorry about that!"
-      redirect_to new_user_path
+      redirect_to new_user_path, :error => "Hm. Activation didn't work. Sorry about that!"
     end
   end
   
@@ -120,26 +97,19 @@ class UsersController < ApplicationController
       currently_blocking_guest_comments = @user.has_setting('block_guest_comments', 'true')
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
-
     if @user.update_attributes(params[:user])
-      flash[:ok] = "Sweet, updated" 
       Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches
-      redirect_to edit_user_path(@user)
+      redirect_to edit_user_path(@user), :ok => "Sweet, updated" 
     else
-      flash[:error] = "Not so fast, young one"
+      flash[:error] =  "Not so fast, young one"
       render :action => :edit
     end
   end
   
   def toggle_favorite
-    return false unless logged_in? && Asset.find(params[:asset_id]) # no bullshit
-    existing_track = current_user.tracks.favorites.where(:asset_id => params[:asset_id]).first
-    if existing_track  
-      existing_track.destroy && Asset.decrement_counter(:favorites_count, params[:asset_id])
-    else
-      added_fav = current_user.favorites.create(:asset_id => params[:asset_id], :is_favorite => true)
-      Asset.increment_counter(:favorites_count, params[:asset_id])
-    end
+    asset = Asset.find(params[:asset_id])
+    return false unless logged_in? && asset # no bullshit
+    current_user.toggle_favorite(asset)
     render :nothing => true
   end
   
@@ -163,9 +133,7 @@ class UsersController < ApplicationController
       session[:sudo] = @sudo = current_user.id
       destination = User.where(:login => params[:id]).first
       sudo_to(destination)
-      logger.warn("SUDO: #{current_user.name} is sudoing to #{destination.name}")
     elsif !current_user.admin? && session[:sudo]
-      logger.warn('coming out of sudo back to admin account')
       sudo_to(User.find(session[:sudo]))
       @sudo = session[:sudo] = nil
     else
@@ -189,7 +157,7 @@ class UsersController < ApplicationController
     @listens = @user.listened_to_tracks.limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.limit(5)
-    @comments = display_private_comments? ? @user.comments.include_private.limit(5): @user.comments.public.limit(5)  
+    @comments = @user.comments.public_or_private(display_private_comments?).limit(5)
     @follows = @user.followees
     @mostly_listens_to = @user.mostly_listens_to
   end
@@ -203,6 +171,7 @@ class UsersController < ApplicationController
   end
   
   def sudo_to(user)
+    logger.warn("SUDO: #{current_user.name} is sudoing to #{user.name}")
     current_user_session.destroy
     UserSession.create!(user)
     flash[:ok] = "Sudo to #{user.name}"

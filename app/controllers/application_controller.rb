@@ -15,7 +15,10 @@ class ApplicationController < ActionController::Base
   
   # let ActionView have a taste of our authentication
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?, :user_setting
-    
+  
+  # ability to tack these flash types on redirects/renders, access via flash.error
+  add_flash_types(:error, :ok)
+  
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
   end
