@@ -45,11 +45,11 @@ class CommentsController < ApplicationController
     if params[:login].present?
       @page_title = "#{@user.name} Comments"
       @comments = @user.comments.public_or_private(display_private_comments?).paginate(:page => params[:page])
-      @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private_comments?).paginate(:page => params[:made_page])
+      set_comments_made
     else
       @page_title = "Recent Comments"
       @comments = Comment.public_or_private(moderator?).paginate(:page => params[:page])
-      @spam = Comment.spam.paginate(:page => params[:page]) if moderator?
+      set_spam_comments
     end
   end
   
@@ -60,21 +60,25 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id], :include => [:commenter, :user])    
   end
   
+  def set_comments_made
+    @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private_comments?).paginate(:page => params[:made_page])
+  end
+  
+  def set_spam_comments
+    @spam = Comment.spam.paginate(:page => params[:page]) if moderator?
+  end
+  
   def authorized?
     moderator? or (@comment.user.id == @comment.commentable.user.id )
   end
   
   def massaged_params
-    {
+    params.merge({
       :commenter          => find_commenter,
-      :body               => params[:comment][:body], 
-      :commentable_type   => params[:comment][:commentable_type], 
-      :commentable_id     => params[:comment][:commentable_id], 
       :private            => params[:comment][:private] || false,
       :remote_ip          => request.remote_ip,
       :user_agent         => request.env['HTTP_USER_AGENT'], 
-      :referrer            => request.env['HTTP_REFERER']
-    }
+      :referrer           => request.env['HTTP_REFERER']})
   end
   
   def find_commenter
