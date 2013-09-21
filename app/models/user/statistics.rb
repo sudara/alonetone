@@ -35,53 +35,6 @@ class User
   end
 
     
-  def assests_order_by(order)
-    assets.find(:all, 
-      :limit    => chart_limit, 
-      :order    => order,
-      :include  => []
-    )
-  end
-  
-  def most_favorited_chart
-    create_chart(assests_order_by('favorites_count DESC'), :favorites_count)
-  end
-  
-  def most_popular_chart
-    create_chart(assests_order_by('hotness DESC'), :hotness)
-  end 
-  
-  def most_listened_to_ever_chart
-    create_chart(assests_order_by('listens_count DESC'), :listens_count)
-  end
-  
-  def most_commented_on_chart
-    create_chart(assests_order_by('comments_count DESC'), :comments_count)
-  end
-  
-  def chart_limit
-    assets_count > 5 ? 5 : assets_count
-  end
-
-  
-  def create_chart(data_and_labels, counted)
-    data   = data_and_labels.collect(&counted)
-    labels = data_and_labels.collect{|a| ERB::Util.u(a.name)}.reverse.join('|')
-
-    chart = Gchart.bar(
-      :size             => '350x150', 
-      :data             => data, 
-      :background       => 'e1e2e1', 
-      :orientation      => 'horizontal',
-      :axis_with_labels => 'y,r',
-      :axis_labels      => [labels,data.reverse.join('|')], 
-      :line_colors      => 'cc3300'
-    )
-  rescue 
-    ''
-  end
-
-  
   def listens_average
     first_created_at = assets.limit(1).order('created_at').first.created_at
     
@@ -113,24 +66,14 @@ class User
 
   
   def plays_since_last_session
-    return false unless self.assets_count > 0
-    count = Listen.count(:all, 
-      :conditions => [ 'track_owner_id = ? AND created_at BETWEEN ? AND ?',
-                       self.id, self.last_session_at, Time.now.utc ], 
-      :include    => []
-    )
-    count > 0 ? count : false
+    return 0 unless self.assets_count > 0
+    count = track_plays.where('listens.created_at BETWEEN ? AND ?', self.last_session_at, Time.now.utc).count
   end
   
   
   def comments_since_last_session
-    return false unless self.assets_count > 0
-    count = Comment.count(:all, 
-      :conditions => [ 'user_id = ? AND created_at BETWEEN ? AND ?',
-                        self.id, self.last_session_at, Time.now.utc ], 
-      :include    => []
-    )
-    count > 0 ? count : false
+    return 0 unless self.assets_count > 0
+    count = comments.where('comments.created_at BETWEEN ? AND ?', self.last_session_at, Time.now.utc).count
   end
   
   def plays_by_month
