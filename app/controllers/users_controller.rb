@@ -130,12 +130,9 @@ class UsersController < ApplicationController
   
   def sudo
     if current_user.admin? && params[:id]
-      session[:sudo] = @sudo = current_user.id
-      destination = User.where(:login => params[:id]).first
-      sudo_to(destination)
+      sudo_to(params[:id])
     elsif !current_user.admin? && session[:sudo]
-      sudo_to(User.find(session[:sudo]))
-      @sudo = session[:sudo] = nil
+      return_from_sudo 
     else
       redirect_to root_path
     end
@@ -170,13 +167,26 @@ class UsersController < ApplicationController
     %w(destroy update edit create).include? action_name 
   end
   
-  def sudo_to(user)
-    logger.warn("SUDO: #{current_user.name} is sudoing to #{user.name}")
+  def change_user_to(user)
     current_user_session.destroy
     UserSession.create!(user)
     flash[:ok] = "Sudo to #{user.name}"
     redirect_back_or_default 
   end
+  
+  def sudo_to(user_id)
+    user = User.where(:login => params[:id]).first
+    logger.warn("SUDO: #{current_user.name} is sudoing to #{user.name}")
+    @sudo = session[:sudo] = current_user.id
+    change_user_to user
+  end
+  
+  def return_from_sudo
+    logger.warn("SUDO: returning to admin account")
+    change_user_to User.find(session[:sudo])
+    @sudo = session[:sudo] = nil
+  end
+  
   
   def display_user_home_or_index
     if params[:login] && User.find_by_login(params[:login])
