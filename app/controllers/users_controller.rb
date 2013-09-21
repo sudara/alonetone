@@ -90,15 +90,8 @@ class UsersController < ApplicationController
   
   
   def update
-    # If the user changes the :block_guest_comments setting then it requires
-    # that the cache for all their tracks be invalidated 
-    flush_asset_caches = false
-    if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.has_setting('block_guest_comments', 'true')
-      flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
-    end
     if @user.update_attributes(params[:user])
-      Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches
+      Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches?
       redirect_to edit_user_path(@user), :ok => "Sweet, updated" 
     else
       flash[:error] =  "Not so fast, young one"
@@ -184,6 +177,16 @@ class UsersController < ApplicationController
     logger.warn("SUDO: returning to admin account")
     change_user_to User.find(session[:sudo])
     @sudo = session[:sudo] = nil
+  end
+  
+  def flush_asset_caches?
+    # If the user changes the :block_guest_comments setting then it requires
+    # that the cache for all their tracks be invalidated 
+    flush_asset_caches = false
+    if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
+      currently_blocking_guest_comments = @user.has_setting('block_guest_comments', 'true')
+      flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
+    end
   end
   
   
