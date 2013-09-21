@@ -129,9 +129,9 @@ class UsersController < ApplicationController
   end
   
   def sudo
-    if current_user.admin? && params[:id]
+    if admin? && params[:id]
       sudo_to(params[:id])
-    elsif !current_user.admin? && session[:sudo]
+    elsif !admin? && session[:sudo]
       return_from_sudo 
     else
       redirect_to root_path
