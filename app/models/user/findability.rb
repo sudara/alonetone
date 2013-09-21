@@ -27,7 +27,7 @@ class User
   # feeds the users/index subnav
   def self.paginate_by_params(params)
     subnav = %w(recently_joined monster_uploaders on_twitter dedicated_listeners last_uploaded)
-    params[:sort] = 'last_seen' if !params[:sort].present or !subnav.include?(params[:sort])
+    params[:sort] = 'last_seen' if !params[:sort].present? or !subnav.include?(params[:sort])
     User.send(params[:sort]).page(:page, :per_page => 15)
   end
 
