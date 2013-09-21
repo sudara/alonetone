@@ -37,7 +37,7 @@ class FeaturesController < ApplicationController
     @feature = Feature.new(params[:feature])
     if @feature.save
       flash[:notice] = 'Feature was successfully created.'
-      redirect_to(@feature) }
+      redirect_to(@feature)
     else
       render :action => "new" 
     end
@@ -55,10 +55,7 @@ class FeaturesController < ApplicationController
 
   def destroy
     @feature.destroy
-    respond_to do |format|
-      format.html { redirect_to(features_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(features_url)  
   end
   
   protected
