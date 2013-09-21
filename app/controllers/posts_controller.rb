@@ -32,11 +32,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml  => @post }
-    end
   end
 
   def edit
@@ -48,34 +43,25 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.reply @topic, params[:post][:body], request
-    respond_to do |format|
-      if @post.new_record?
-        format.html { render :action => "new" }
-        format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
-      else
-        flash[:notice] = 'Post was successfully created.'
-        format.html { redirect_to(forum_topic_path(@forum, @topic, :page => @topic.last_page, :anchor => dom_id(@post))) }
-        format.xml  { render :xml  => @post, :status => :created, :location => forum_topic_post_url(@forum, @topic, @post) }
-      end
+    if @post.new_record?
+      render :action => "new"
+    else
+      flash[:notice] = 'Post was successfully created.'
+      redirect_to(forum_topic_path(@forum, @topic, :page => @topic.last_page, :anchor => dom_id(@post))
     end
   end
 
   def update
-    respond_to do |format|
-      if @post.update_attributes(params[:post])
-        flash[:notice] = 'Post was successfully updated.'
-        format.html { redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post))) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
-      end
+    if @post.update_attributes(params[:post])
+      flash[:notice] = 'Post was successfully updated.'
+      redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post))) 
+    else
+      render :action => "edit" 
     end
   end
 
   def destroy
     @post.destroy
-
     respond_to do |format|
       format.html { redirect_to(forum_topic_path(@forum, @topic)) }
       format.xml  { head :ok }
