@@ -66,14 +66,11 @@ class User
 
   
   def plays_since_last_session
-    return 0 unless assets_count > 0
-    count = track_plays.where('listens.created_at BETWEEN ? AND ?', self.last_session_at, Time.now.utc).count
+    track_plays.between(self.last_session_at, Time.now.utc).count
   end
   
-  
   def comments_since_last_session
-    return 0 unless assets_count > 0
-    count = comments.where('comments.created_at BETWEEN ? AND ?', self.last_session_at, Time.now.utc).count
+    comments.between(last_session_at, Time.now.utc).count
   end
   
   def plays_by_month

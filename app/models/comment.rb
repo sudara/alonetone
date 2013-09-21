@@ -10,7 +10,8 @@ class Comment < ActiveRecord::Base
   scope :on_track,           -> { where(:commentable_type => 'Asset')                                                              }
   scope :last_5_private,     -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
   scope :last_5_public,      -> { on_track.only_public.by_member.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
-  
+  scope :made_between,       -> (start, finish) {where('comments.created_at BETWEEN ? AND ?', start, finish)}
+
   has_many :replies, :as  => :commentable, :class_name => 'Comment'
 
   # optional user who made the comment

@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
     
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] += [:email  :token, :token_expires_at, :crypted_password, 
+    options[:except] += [:email, :token, :token_expires_at, :crypted_password, 
                         :identity_url, :fb_user_id, :activation_code, :admin, 
                         :salt, :moderator, :ip, :browser, :settings, :plus_enabled]
     super
@@ -106,10 +106,6 @@ class User < ActiveRecord::Base
   
   def listened_more_than?(n)
     listens.count > n
-  end
-  
-  def moderator?
-    (self[:moderator] == true)
   end
   
   def hasnt_been_here_in(hours)
@@ -142,26 +138,10 @@ class User < ActiveRecord::Base
     end
   end
   
-  def type
-    self.class.name
-  end  
-  
   # convenince shortcut 
   def ip
     last_login_ip
-  end
-
-  def clear_token!
-    update_attribute(:perishable_token, nil)
-  end
-  
-  def active?
-    perishable_token == nil
-  end
-
-  def activate!
-    !active? ? clear_token! : false
-  end  
+  end 
 
   def toggle_favorite(asset)
     existing_track = tracks.favorites.where(:asset_id => asset.id).first

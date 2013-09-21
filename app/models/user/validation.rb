@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class User
   # Validations
   validates_length_of       :display_name, :within => 3..50, :allow_blank => true
@@ -11,14 +10,22 @@ class User
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   before_validation { |u| u.identity_url = nil if u.identity_url.blank? }
   
-  # Returns true if the user has just been activated
-  def pending?
-    !perishable_token.nil?
+  
+  # tokens and activation
+  def clear_token!
+    update_attribute(:perishable_token, nil)
   end
   
+  def active?
+    perishable_token == nil
+  end
+
+  def activate!
+    !active? ? clear_token! : false
+  end 
+
   def enable_plus
     self[:plus_enabled] = true
     self.save
   end
-
 end

@@ -11,6 +11,8 @@ module AuthlogicHelpers
     @current_user= current_user_session && current_user_session.user
   end
   
+  
+  
   # basic questions asked at controller/view level
   def logged_in?
     !!current_user
@@ -24,7 +26,9 @@ module AuthlogicHelpers
     logged_in? && (current_user.moderator? || current_user.admin?)
   end
   
-  # for usage in befoer filters
+  
+  
+  # for usage in before filters
   def moderator_required
     require_login && moderator?
   end
@@ -40,6 +44,8 @@ module AuthlogicHelpers
   def moderator_only
     force_mod_login unless moderator?
   end
+  
+  
   
   # force logins at various access levels
   def force_login

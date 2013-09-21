@@ -44,11 +44,11 @@ class CommentsController < ApplicationController
   def index
     if params[:login].present?
       @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.public_or_private(display_private_comments?).paginate(:page => params[:page])
+      @comments = @user.comments.public_or_private(display_private_comments?).page(params[:page])
       set_comments_made
     else
       @page_title = "Recent Comments"
-      @comments = Comment.public_or_private(moderator?).paginate(:page => params[:page])
+      @comments = Comment.public_or_private(moderator?).page(params[:page])
       set_spam_comments
     end
   end
@@ -61,11 +61,11 @@ class CommentsController < ApplicationController
   end
   
   def set_comments_made
-    @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private_comments?).paginate(:page => params[:made_page])
+    @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private_comments?).page(params[:made_page])
   end
   
   def set_spam_comments
-    @spam = Comment.spam.paginate(:page => params[:page]) if moderator?
+    @spam = Comment.spam.page(params[:page]) if moderator?
   end
   
   def authorized?
