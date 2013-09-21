@@ -129,13 +129,14 @@ class UsersController < ApplicationController
   end
   
   def sudo
-    sudo_to_user if admin? && params[:id]
-    return_from_sudo if !admin? && session[:sudo]
-    redirect_to root_path
+    if admin?
+      sudo_to_user
+    else
+      return_from_sudo_if_sudoed
+    end
   end
 
   protected
-  
   def prepare_meta_tags
     @page_title = (@user.name)
     @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
@@ -171,13 +172,15 @@ class UsersController < ApplicationController
   end
   
   def sudo_to_user
+    return false unless params[:id]
     user = User.where(:login => params[:id]).first
     logger.warn("SUDO: #{current_user.name} is sudoing to #{user.name}")
     @sudo = session[:sudo] = current_user.id
     change_user_to user
   end
   
-  def return_from_sudo
+  def return_from_sudo_if_sudoed
+    redirect_to(root_path) and return false if !session[:sudo].present?
     logger.warn("SUDO: returning to admin account")
     change_user_to User.find(session[:sudo])
     @sudo = session[:sudo] = nil
