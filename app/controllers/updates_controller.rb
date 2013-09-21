@@ -32,53 +32,31 @@ class UpdatesController < ApplicationController
     end
   end
 
-  # GET /updates/new
-  # GET /updates/new.xml
   def new
     @update = Update.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @update }
-    end
   end
 
-  # GET /updates/1/edit
   def edit
     @update = Update.find_by_permalink(params[:id])
   end
 
-  # POST /updates
-  # POST /updates.xml
   def create
     @update = Update.new(params[:update])
-
-    respond_to do |format|
-      if @update.save
-        flash[:notice] = 'Update was successfully created.'
-        format.html { redirect_to blog_path(@update.permalink) }
-        format.xml  { render :xml => @update, :status => :created, :location => @update }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @update.errors, :status => :unprocessable_entity }
-      end
+    if @update.save
+      flash[:notice] = 'Update was successfully created.'
+      redirect_to blog_path(@update.permalink) 
+    else
+      format.html { render :action => "new" }
     end
   end
 
-  # PUT /updates/1
-  # PUT /updates/1.xml
   def update
     @update = Update.find_by_permalink(params[:id])
-
-    respond_to do |format|
-      if @update.update_attributes(params[:update])
-        flash[:notice] = 'Update was successfully updated.'
-        format.html { redirect_to blog_path }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @update.errors, :status => :unprocessable_entity }
-      end
+    if @update.update_attributes(params[:update])
+      flash[:notice] = 'Blog entry updated.'
+      redirect_to blog_path 
+    else
+      render :action => "edit"
     end
   end
 
