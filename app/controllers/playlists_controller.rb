@@ -4,46 +4,20 @@ class PlaylistsController < ApplicationController
   before_filter :find_user
   before_filter :find_playlists, :except => [:index, :new, :create, :sort]
   before_filter :require_login, :except => [:index, :show]
-
   before_filter :find_tracks, :only => [:show, :edit]
   
-  #rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-  #rescue_from NoMethodError, :with => :user_not_found
-  
-  # GET /playlists
-  # GET /playlists.xml
+  # all user's playlists
   def index
-    @all_playlists =  current_user_is_admin_or_owner?(@user) ?
-                      @user.playlists.include_private :
-                      @user.playlists.public
-
-    if @all_playlists
-      middle = (@all_playlists.size + 1) / 2
-      
-      @playlists_left  = @all_playlists[ 0 ... middle ]
-      @playlists_right = @all_playlists[ middle .. -1 ]
-      
-      @page_title  = "#{@user.name}'s albums and playlists: "
-      @description = @page_title + @all_playlists.collect(&:title).join(',')
-
-      respond_to do |format|
-         format.html # index.html.erb
-         format.xml  { render :xml => @playlists }
-      end
-    else
-      redirect_to user_playlists_path(@user)
-    end
+    @page_title = @description  = "#{@user.name}'s albums and playlists: "
+    set_all_playlists      
   end
 
   def sort
-    redirect_to user_home_url(@user) \
-    unless current_user_is_admin_or_owner?(@user)
-
-    respond_to do |format| 
+    respond_to do |format|
       format.html { @playlists = @user.playlists.include_private.all }
       format.js do
         params["playlist"].each_with_index do |id, position|
-          Playlist.update(id, :position => position)
+          @user.playlists.update(id, :position => position)
         end
         render :nothing => true
       end
@@ -55,8 +29,6 @@ class PlaylistsController < ApplicationController
     redirect_to user_playlist_path(@user, @playlist)
   end
   
-  # GET /playlists/1
-  # GET /playlists/1.xml
   def show
     return not_found unless @playlist
     @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
@@ -68,8 +40,6 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  # GET /playlists/new
-  # GET /playlists/new.xml
   def new
     @playlist = @user.playlists.build(:private => true)
     respond_to do |format|
@@ -78,25 +48,13 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  # GET /playlists/1/edit
   def edit
-
-    @assets = @user.assets.order('created_at DESC').paginate(:per_page => 10, :page     => params[:uploads_page])
-
+    set_assets
     if request.xhr? 
-      render :partial => 'your_stuff.html.erb'   if params[:uploads_page]
-      render :partial => 'your_listens.html.erb' if params[:listens_page]
-      render :partial => 'your_favorites.html.erb' if params[:favorites_page]
+      render_desired_partial
     else
-      @listens = @user.listens.order('listens.created_at DESC').paginate( 
-        :per_page => 10, 
-        :page     => params[:listens_page]
-      )
-    
-      @favorites = @user.favorites.tracks.paginate(
-        :per_page  => 10,
-        :page  =>  params[:favorites_page]
-      ) if @user.favorites.present?
+      @listens = @user.listens.order('listens.created_at DESC').paginate(:page => params[:listens_page])
+      @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page]) if @user.favorites.present?
     end
   end
 
@@ -121,8 +79,6 @@ class PlaylistsController < ApplicationController
     redirect_to edit_user_playlist_path(@user, @playlist)
   end
   
-  
-  
   def remove_track
     @track = @playlist.tracks.find(params[:track_id]) 
     if @track && @track.destroy 
@@ -139,16 +95,14 @@ class PlaylistsController < ApplicationController
   def sort_tracks
     # get the params for this playlist
     params["track"].each_with_index do |id, position|
-      Track.update(id, :position => position)
+      @user.tracks.update(id, :position => position)
     end
     render :nothing => true
   end
 
-  # POST /playlists
-  # POST /playlists.xml
+
   def create
     @playlist = @user.playlists.build(params[:playlist])
-
     respond_to do |format|
       if @playlist.save
         flash[:notice] = 'Great, go ahead and add some tracks'
@@ -160,13 +114,8 @@ class PlaylistsController < ApplicationController
       end
     end
   end
- 
 
-
-  # PUT /playlists/1
-  # PUT /playlists/1.xml
   def update
-
     respond_to do |format|
       if @playlist.update_attributes(params[:playlist])
         flash[:notice] = 'Playlist was successfully updated.'
@@ -179,19 +128,37 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  # DELETE /playlists/1
-  # DELETE /playlists/1.xml
   def destroy
     @playlist.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(user_playlists_url(@user)) }
-      format.xml  { head :ok }
-    end
+    redirect_to(user_playlists_url(@user))
   end
   
-  
   protected
+  
+  def render_desired_partial
+    render :partial => 'your_stuff.html.erb'     if params[:uploads_page]
+    render :partial => 'your_listens.html.erb'   if params[:listens_page]
+    render :partial => 'your_favorites.html.erb' if params[:favorites_page]
+  end
+  
+  def set_assets
+    @assets = @user.assets.order('created_at DESC').paginate(:page => params[:uploads_page])
+  end
+  
+  def set_all_playlists
+    @all_playlists =  current_user_is_admin_or_owner?(@user) ?
+                      @user.playlists.include_private :
+                      @user.playlists.public
+
+    set_right_and_left_playlists if @all_playlists.present?
+  end
+  
+  def set_right_and_left_playlists
+    middle = (@all_playlists.size + 1) / 2
+    @playlists_left  = @all_playlists[ 0 ... middle ]
+    @playlists_right = @all_playlists[ middle .. -1 ]
+  end 
+  
   def not_found
     flash[:error] = "We didn't find that playlist from #{@user.name}! Sorry. Check out what *is* available" 
     redirect_to user_playlists_path(@user) 
@@ -204,11 +171,8 @@ class PlaylistsController < ApplicationController
   end
   
   def find_playlists
-    id = params[:id]
-    permalink = params[:permalink] || id
-
-    @playlist = @user.playlists.find_by_permalink(permalink) ||
-                @user.playlists.find_by_id(id)
+    permalink = params[:permalink] || params[:id]
+    @playlist = @user.playlists.find_by_permalink(permalink) || @user.playlists.find_by_id(id)
   end
   
   def find_tracks
