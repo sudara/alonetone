@@ -33,7 +33,7 @@ class ForumsController < ApplicationController
     if @forum = Forum.create(params[:forum])
       redirect_to @forum, :notice => 'Forum was created.' 
     else
-      flash[:error] => "Hrm...."
+      flash[:error] = "Hrm...."
       render :action => "new"
     end
   end
