@@ -58,7 +58,7 @@ class TopicsController < ApplicationController
 
 protected
 
-  def session_topics
+  def set_session_topics
     ((session[:topics] ||= {})[@topic.id] = Time.now.utc) if logged_in?
   end 
 
@@ -68,10 +68,10 @@ protected
   end
   
   def find_forum
-    @forum = Forum.where(:permalink => params[:forum_id])
+    @forum = Forum.where(:permalink => params[:forum_id]).first
   end
   
   def find_topic
-    @topic = @forum.topics.where(:permalink => params[:id])
+    @topic = @forum.topics.where(:permalink => params[:id]).first
   end
 end

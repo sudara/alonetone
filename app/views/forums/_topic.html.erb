@@ -14,9 +14,9 @@
       <% end %>
     </td>
     <td class="c2">
-      <%= "Sticky: <strong>" if topic.sticky? %>
+      <%= "Sticky: <strong>".html_safe if topic.sticky? %>
       <%= topic_title_link (topic), :class => "entry-title", :rel => "bookmark" %>
-      <%= "</strong>" if topic.sticky? %>
+      <%= "</strong>".html_safe if topic.sticky? %>
       <% if topic.paged? -%>
       <small><%= link_to 'last page', forum_topic_path((@forum || topic.forum), topic, :page => topic.last_page) %></small>
       <% end -%>

@@ -3,7 +3,7 @@
     <% end %> 
     
     <% content_for :breadcrumbs do %>
-            <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> <%= @forum.name %>
+      <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> <%= @forum.name %>
     <% end %>
     
     <% @page_title = @forum.name+ ' forum'%>
@@ -24,9 +24,7 @@
     <%= render :partial => 'topic', :collection => @topics %>
     </table>
     
-    <div class="forum_paginator clearfix">
-        <%= pagination @topics %>
-    </div>
+
     <div class="footer_box">
         <%= link_to ' ', new_forum_topic_path(@forum), :id => "create_new_topic", :class => 'margin1px', :title => 'Start a new forum topic' %></p>
     </div>

@@ -4,6 +4,7 @@ class ForumsController < ApplicationController
   before_filter :find_user, :only => :index
   before_filter :find_forum, :only => [:show, :edit, :update, :destroy]
   before_filter :set_forum_tab, :set_html_meta
+  layout 'forums'
 
   def index
     reset_session_forums_page
@@ -54,7 +55,7 @@ class ForumsController < ApplicationController
   protected
   
   def find_forum
-    @forum = Forum.find_by_permalink(params[:id])
+    @forum = Forum.where(:permalink => params[:id]).first
   end
   
   def reset_session_forums_page 
