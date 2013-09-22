@@ -1,23 +1,18 @@
-# -*- encoding : utf-8 -*-
 class ForumsController < ApplicationController
   
   before_filter :require_login, :except => [:index, :show]
   before_filter :find_user, :only => :index
+  before_filter :find_forum, :only => [:show, :edit, :update, :destroy]
   before_filter :set_forum_tab, :set_html_meta
 
-
   def index
-    session[:forums_page] = nil
+    reset_session_forums_page
     @forums = Forum.ordered
     set_interesting_topics
   end
 
-  # GET /forums/1
-  # GET /forums/1.xml
   def show
-    @forum = Forum.find_by_permalink(params[:id])
-    handle_forum_session
-    
+    handle_forum_session    
     respond_to do |format|
       format.html do # show.html.erb
         @topics = @forum.topics.sticky_and_recent.paginate :page => current_page, :per_page => 20
@@ -32,20 +27,18 @@ class ForumsController < ApplicationController
 
   # GET /forums/1/edit
   def edit
-    @forum = Forum.find_by_permalink(params[:id])
   end
 
   def create
     if @forum = Forum.create(params[:forum])
       redirect_to @forum, :notice => 'Forum was created.' 
     else
-      flash[:error] => "Hrm..."
+      flash[:error] => "Hrm...."
       render :action => "new"
     end
   end
 
   def update
-    @forum = Forum.find_by_permalink(params[:id])
     if @forum.update_attributes(params[:forum])
       redirect_to @forum, :notice => 'Forum was successfully updated.' 
     else
@@ -54,13 +47,20 @@ class ForumsController < ApplicationController
   end
 
   def destroy
-    @forum = Forum.find_by_permalink(params[:id])
     @forum.destroy
-
     redirect_to(forums_path) 
   end
   
   protected
+  
+  def find_forum
+    @forum = Forum.find_by_permalink(params[:id])
+  end
+  
+  def reset_session_forums_page 
+    # reset the page of each forum we have visited when we go back to index
+    session[:forums_page] = nil
+  end
   
   def set_interesting_topics
     @user_topics = Topic.replied_to_by(@user).collect(&:topic) if logged_in?
