@@ -2,9 +2,9 @@
 [![Code Climate](https://codeclimate.com/github/sudara/alonetone.png)](https://codeclimate.com/github/sudara/alonetone)
 ## The future is bright
 
-[alonetone](http://alonetone.com) is at independent music platform, providing free services for musicians wanting to host and distribute their music in a non-commercial easy-to-use environment.
+[alonetone](http://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
-alonetone  launched in January 2008. As of 2013 it hosts over 48,000 songs from over 3500 musicians and has delivered over 3 million mp3s (to real listeners, not google and spambots!)
+alonetone launched in January 2008. As of 2013 it hosts over 50,000 songs from almost 4000 musicians. We have delivered over 3 million mp3s to real listeners (not google and spambots!)
 
 ## Give us some dev love
 
@@ -16,23 +16,24 @@ We use [Github Issues](http://github.com/sudara/alonetone/issues) to submit bugs
 
 ### Our goal?
 
-To create and run the best online home a musician could want to have. To provide them with the tools they need to reach  listeners and network with other artists—without the stank of commercialism, startup flava, ads, etc. Yup, we're half hippie communists. 
+To create and run the best online home a musician could want to have. To provide them with the tools they need to reach  listeners and network with other artists — without the stank of commercialism, startup flava, ads, etc. 
 
-Here is what we strive to build:
+We strive to build:
 
-* An easy to use, straightforward, intuitive, and consistent interface. Grandma friendly.
+* An easy to use, straightforward, intuitive, and consistent interface. Grandma-friendly (Yes, my grandma does use alonetone).
 * Attractive to look at. UI-first feature building. Designer always involved.
-* Provides musicians with practical, useful tools and services—without too much junk (no facebook integration, etc)
-* Provides listeners and first time site visitors with a 'hook' into their first taste of alonetone music and helps them explore the site in an intelligent and guided way
-* Encourage artist exploration and the feeling to stick around
+* An open-source rails app that is easy to setup, adheres to best practices and can serve as good example.
+* Practical, useful tools and services for musicians — without too much clutter and junk (no facebook integration, etc)
+* Encourage artist exploration and a sense of community: encouragement to stick around vs. cliqueyness
 * It does not overwhelm folks with TMI (too much information) or TMO (too many options) or TMF (too many features).
-* New Features must prove themselves and obey the above principles — not just be built because it sounds cool or would be fun to hack on.
 
-For more info, visit [the alonetone faq](http://alonetone.com/about)
+New Features must prove themselves and obey the above principles — not just be built because it sounds cool or would be fun to hack on. We have said "no" to many "intuitive" or "easy" features like threaded comment replies because they would compromise or distract from the above goals. 
+
+For more info on alonetone, visit [the alonetone faq](http://alonetone.com/about)
 
 ### Current tech
 
-* Rails 4.0.0! 
+* Rails 4.0 
 * jQuery
 * SoundManager 2 (for flash + html5 playback)
 
@@ -45,11 +46,10 @@ For more info, visit [the alonetone faq](http://alonetone.com/about)
 * Artist browsing
 * Track browsing by popularity, who you are following, most favorited, etc.
 * Tracking of listens and providing useful feedback and statistics to artists
-* One-way commenting system (No inline relpies. No private messaging. No threaded comments.)
+* One-way commenting system (No inline relpies. No threaded comments. No "pms")
 * Feeds for iTunes podcasts and offsite flash players
 
 ## Features wanted
-
 
 ### Browse All Playlists
 Low hanging fruit, boys and girls! Shoulda been a 2008 feature :)
@@ -79,17 +79,18 @@ We get trouble with downloading bots, spambots. We have manually hardcoded IPs i
 Talk with Sudara about this. There's a partial half-hearted implementation. 
 
 
-## Want to setup alonetone on your server?
+### Remove alonetone branding from the code
+It would be nice to separate the alonetone branding, email address, url, and so on — out into config files.
+
+## Want to deploy alonetone on your server?
 
 ![Sorry script kiddies](https://img.skitch.com/20120908-1exaxnmix5mb82xaq32tjnrja.png)
 
-Unless...
+It's not going to happen unless:
 
-* You know ruby on rails VERY well (Been doing it for more than a few months).
+* You know ruby on rails well (Been doing it for more than a few months).
 * You have deployed rails applications, and are comfortable with that.
 * You are willing to spend 20+ hours removing our branding and logo and site-specific things from the code.
-
-Then it's not happening.
 
 We get a LOT of requests from rails n00bs asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language. 
 
@@ -131,7 +132,7 @@ Note: alonetone uses 3 config files that are created by 'rake setup'
 
 #### Logging in
 
-After the bootstrap data is loaded, you can login using the test account (username=test, password=test).
+After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
 
 After login, click on the "Upload" button to upload your first mp3.
 
@@ -139,4 +140,4 @@ After login, click on the "Upload" button to upload your first mp3.
 
 The alonetone source code is released under the MIT license. 
 
-"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2012 and may not be used without permission.
+"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2013 and may not be used without permission.
