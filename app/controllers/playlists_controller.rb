@@ -30,14 +30,8 @@ class PlaylistsController < ApplicationController
   end
   
   def show
-    return not_found unless @playlist
     @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
     @single_playlist = true
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml 
-      format.rss 
-    end
   end
 
   def new
@@ -103,15 +97,11 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = @user.playlists.build(params[:playlist])
-    respond_to do |format|
-      if @playlist.save
-        flash[:notice] = 'Great, go ahead and add some tracks'
-        format.html { redirect_to edit_user_playlist_path(@user, @playlist) }
-        format.xml  { render :xml => @playlist, :status => :created, :location => @playlist }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @playlist.errors, :status => :unprocessable_entity }
-      end
+    if @playlist.save
+      flash[:notice] = 'Great, go ahead and add some tracks'
+       redirect_to edit_user_playlist_path(@user, @playlist) 
+    else
+       render :action => "new" 
     end
   end
 
@@ -137,7 +127,7 @@ class PlaylistsController < ApplicationController
   end
   
   def set_assets
-    @assets = @user.assets.order('created_at DESC').paginate(:page => params[:uploads_page])
+    @assets = @user.assets.recent.page(params[:uploads_page])
   end
   
   def set_all_playlists
@@ -154,10 +144,6 @@ class PlaylistsController < ApplicationController
     @playlists_right = @all_playlists[ middle .. -1 ]
   end 
   
-  def not_found
-    flash[:error] = "We didn't find that playlist from #{@user.name}! Sorry. Check out what *is* available" 
-    redirect_to user_playlists_path(@user) 
-  end
     
   def authorized?
     @playlist.nil? || current_user_is_admin_or_owner?(@playlist.user) ||
