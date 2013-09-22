@@ -10,10 +10,8 @@ class ForumsController < ApplicationController
   def index
     # reset the page of each forum we have visited when we go back to index
     session[:forums_page] = nil
-    
     @forums = Forum.ordered
     set_interesting_topics
-    render @forums 
   end
 
   # GET /forums/1
@@ -51,8 +49,7 @@ class ForumsController < ApplicationController
   def update
     @forum = Forum.find_by_permalink(params[:id])
     if @forum.update_attributes(params[:forum])
-      flash[:notice] = 'Forum was successfully updated.'
-      redirect_to(@forum) 
+      redirect_to @forum, :notice => 'Forum was successfully updated.' 
     else
       render :action => "edit" 
     end
