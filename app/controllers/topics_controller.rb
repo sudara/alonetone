@@ -5,31 +5,17 @@ class TopicsController < ApplicationController
   layout "forums"
 
   def index
-    respond_to do |format|
-      format.html { redirect_to forum_path(@forum) }
-      format.xml  do
-        @topics = @forum.topics.sticky_and_recent.paginate(:page => current_page, :per_page => 10)
-        render :xml  => @topics
-      end
-    end
+    redirect_to forum_path(@forum)
   end
   
   def edit
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        if logged_in?
-          (session[:topics] ||= {})[@topic.id] = Time.now.utc
-        end
-        
-        @topic.hit! unless logged_in? && @topic.user_id == current_user.id
-        @posts = @topic.posts.paginate :page => current_page, :per_page => 10
-        @post  = Post.new
-      end
-      format.xml  { render :xml  => @topic }
-    end
+    set_session_topics
+    @topic.hit! unless logged_in? && @topic.user_id == current_user.id
+    @posts = @topic.posts.paginate :page => current_page, :per_page => 10
+    @post  = Post.new
   end
 
   def new
@@ -44,30 +30,20 @@ class TopicsController < ApplicationController
 
   def create
     @topic = current_user.post @forum, params[:topic], request
-        
-    respond_to do |format|
-      if @topic.new_record?
-        format.html { render :action => "new" }
-        format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
-      else
-        flash[:notice] = 'Topic was successfully created.'
-        format.html { redirect_to(forum_topic_path(@forum, @topic)) }
-        format.xml  { render :xml  => @topic, :status => :created, :location => forum_topic_url(@forum, @topic) }
-      end
+    if @topic.new_record?
+      render :action => "new" 
+    else
+      flash[:notice] = 'Topic was successfully created.'
+      redirect_to(forum_topic_path(@forum, @topic)) 
     end
   end
 
   def update
     current_user.revise @topic, params[:topic]
-    respond_to do |format|
-      if @topic.errors.empty?
-        flash[:notice] = 'Topic was successfully updated.'
-        format.html { redirect_to(forum_topic_path(@topic.forum, @topic)) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml  => @topic.errors, :status => :unprocessable_entity }
-      end
+    if @topic.errors.empty?
+      redirect_to(forum_topic_path(@topic.forum, @topic), :notice => 'Topic was updated.')
+    else
+      render :action => "edit" 
     end
   end
 
@@ -81,6 +57,11 @@ class TopicsController < ApplicationController
   end
 
 protected
+
+  def session_topics
+    ((session[:topics] ||= {})[@topic.id] = Time.now.utc) if logged_in?
+  end 
+
   def authorized?
     not %w(destroy edit update).include?(action_name) || 
     current_user_is_admin_or_moderator_or_owner?(@topic.user)
