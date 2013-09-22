@@ -5,10 +5,8 @@ class ForumsController < ApplicationController
   before_filter :find_user, :only => :index
   before_filter :set_forum_tab, :set_html_meta
 
-  # GET /forums
-  # GET /forums.xml
+
   def index
-    # reset the page of each forum we have visited when we go back to index
     session[:forums_page] = nil
     @forums = Forum.ordered
     set_interesting_topics
@@ -38,10 +36,10 @@ class ForumsController < ApplicationController
   end
 
   def create
-    @forum = Forum.new(params[:forum])
-    if @forum.save
-      redirect_to @forum, 'Forum was created.' 
+    if @forum = Forum.create(params[:forum])
+      redirect_to @forum, :notice => 'Forum was created.' 
     else
+      flash[:error] => "Hrm..."
       render :action => "new"
     end
   end
