@@ -40,7 +40,7 @@ class ForumsController < ApplicationController
   def create
     @forum = Forum.new(params[:forum])
     if @forum.save
-      redirect_to(@forum), 'Forum was created.' 
+      redirect_to @forum, 'Forum was created.' 
     else
       render :action => "new"
     end
