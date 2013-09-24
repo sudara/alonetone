@@ -13,9 +13,8 @@ describe CommentsController do
     end
     
     it 'should allow guest to comment on a track (via xhr)' do 
-      params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset"}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
-      xhr :post, :create, params
-      assigns(:comment).errors.should == []
+      params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
+      expect { xhr :post, :create, params }.to change{ Comment.count}.by(1)
       response.should be_success
     end
     
@@ -27,14 +26,14 @@ describe CommentsController do
     
     it 'should allow user comment on a track (via xhr)' do 
       login(:arthur)
-      params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset"}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
+      params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
       xhr :post, :create, params
       response.should be_success
     end
     
     it 'should allow private comment on track' do 
       login(:arthur)
-      params = {:comment => {"body"=>"Comment", "private"=> 1, "commentable_type"=>"Asset"}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink }
+      params = {:comment => {"body"=>"Comment", "private"=> 1, "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink }
       xhr :post, :create, params 
       response.should be_success
     end
