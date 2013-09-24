@@ -50,11 +50,11 @@ class ApplicationController < ActionController::Base
 
   def find_asset
     @asset = Asset.where(:permalink => (params[:permalink] || params[:track_id] || params[:id])).first
-    @asset ||= Asset.where(:id => params[:id]).first if params[:id] # comments, etc
+    @asset ||= Asset.where(:id => params[:id]).first
   end
   
   def find_playlists
-    @playlist = @user.playlists.find_by_permalink(params[:permalink] || params[:id], :include =>[:tracks => :asset])
+    @playlist = @user.playlists.find(:permalink => (params[:permalink] || params[:id]), :include =>[:tracks => :asset]).first
     @playlist = @user.playlists.find(params[:id], :include =>[:tracks => :asset]) if !@playlist && params[:id] 
   end
 
@@ -88,10 +88,6 @@ class ApplicationController < ActionController::Base
     current_user_is_admin_or_owner? || moderator?
   end
 
-  def render_text(text)
-   render :text => text
-  end
-
   def user_setting(symbol_or_string, user=current_user)
     logged_in? && user.settings && user.settings[symbol_or_string.to_sym] 
   end
@@ -100,14 +96,6 @@ class ApplicationController < ActionController::Base
     @tab = ''
   end
   
-  def prep_bugaboo
-    if logged_in?
-      @forum_feedback = Topic.new
-    else  
-      @user_report = UserReport.new(:user => @current_user || nil, :params => params)
-    end
-  end
-
   def display_news
     return unless logged_in?
     last_update = Update.order('created_at DESC').first
