@@ -153,7 +153,7 @@ class PlaylistsController < ApplicationController
   
   def find_playlists
     permalink = params[:permalink] || params[:id]
-    @playlist = @user.playlists.find_by_permalink(permalink) || @user.playlists.find_by_id(id)
+    @playlist = @user.playlists.where(:permalink => permalink).first || @user.playlists.where(:id => permalink).first
   end
   
   def find_tracks

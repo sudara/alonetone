@@ -29,7 +29,7 @@ class Comment < ActiveRecord::Base
   after_create :deliver_comment_notification, :increment_counters
   
   attr_accessible :body, :remote_ip, :commentable_type, :commentable_id, :private, 
-    :commenter_id, :user_agent, :referrer, :commenter
+    :commenter_id, :user_agent, :referrer, :commenter, :user_id, :commentable
 
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { author_name },
@@ -67,11 +67,7 @@ class Comment < ActiveRecord::Base
     !!commenter_id 
   end
   
-  # for montgomeru magic
-  def self.count_by_user(start_date, end_date, limit=30)
-    limit = limit > 100 ? 100 : limit
-    Comment.only_public.count(:all, :group => :commenter, :conditions => ['created_at > ? AND created_at < ? AND commenter_id IS NOT NULL',start_date, end_date], :limit => limit, :order => 'count_all DESC')
-  end
+  
   
   def deliver_comment_notification
     CommentNotification.new_comment(self, commentable).deliver if is_deliverable?

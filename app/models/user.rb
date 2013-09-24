@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
   end
   
   def favorites
-    tracks.favorites
+    playlists.favorites.first
   end
     
   def to_param
@@ -148,7 +148,7 @@ class User < ActiveRecord::Base
     if existing_track  
       existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
     else
-      favorites.create(:asset_id => asset.id)
+      tracks.favorites.create(:asset_id => asset.id)
       Asset.increment_counter(:favorites_count, asset.id)
     end
   end

@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   
   def create
     if request.xhr? # it always is...
-      unless params[:comment] && !params[:comment][:body].blank?
+      unless params[:comment] && params[:comment][:body].present?
         return head(:bad_request) 
       end
       @comment = Comment.new(massaged_params)
@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
       render :nothing => true
     end
   end  
-  
 
   def destroy
     if params[:spam] == true
@@ -27,7 +26,6 @@ class CommentsController < ApplicationController
     end
     redirect_to :back 
   end
-  
 
   def unspam
     @comment.ham!
@@ -39,8 +37,7 @@ class CommentsController < ApplicationController
     @comment.spam!
     redirect_to :back
   end
-  
-  
+
   def index
     if params[:login].present?
       @page_title = "#{@user.name} Comments"
@@ -73,9 +70,8 @@ class CommentsController < ApplicationController
   end
   
   def massaged_params
-    params.merge({
+    params[:comment].merge({
       :commenter          => find_commenter,
-      :private            => params[:comment][:private] || false,
       :remote_ip          => request.remote_ip,
       :user_agent         => request.env['HTTP_USER_AGENT'], 
       :referrer           => request.env['HTTP_REFERER']})

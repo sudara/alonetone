@@ -1,5 +1,5 @@
 <div class="track_options">
-<%= link_to " ", destroy_user_track_path(@user.login, @asset.permalink), :method => :delete, 
+<%= link_to " ", user_track_path(@user.login, @asset.permalink), :method => :delete, 
 :confirm => 'Are you sure? This will delete the song permanently, including all play history and comments.',
 :class => 'delete_green'%>
 </div>
