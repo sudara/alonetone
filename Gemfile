@@ -7,7 +7,6 @@ gem "protected_attributes"
 
 # server
 gem "mysql2"
-gem "unicorn"
 
 # ruby
 gem "sometimes"
@@ -48,11 +47,15 @@ gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
 
+group :production do
+  gem "puma"
+end
+
 group :development do
   gem "rails-footnotes"
   gem 'quiet_assets'
-  gem 'thin'
   gem 'rspec-rails'
+  gem 'thin'
   # gem 'logical-insight'
 end
 
