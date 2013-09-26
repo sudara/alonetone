@@ -14,7 +14,6 @@ class User
     Topic.new(attributes) do |topic|
       topic.forum = forum
       topic.user  = self
-      topic.env = request.env
       revise_topic(topic, attributes)
       reply(topic, topic.body, request) unless topic.locked?
       topic.body = nil
@@ -22,10 +21,9 @@ class User
   end
 
   def reply(topic, body, request)
-    returning topic.posts.build(:body => body) do |post|
+    topic.posts.build(:body => body) do |post|
       post.forum = topic.forum
       post.user  = self
-      post.env = request.env
       post.save
     end
   end
