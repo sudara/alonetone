@@ -12,7 +12,7 @@
   </div>
 <% end %>
     
-<table border="0" cellspacing="0" cellpadding="0" class="wide forums">
+<table  class="wide forums">
   <tr>
     <th class="la" width="70%" colspan="3"><%= 'Forum' %></th>
     <th class="la" width="30%" colspan="1"><%= 'Last Post'%></th>
@@ -66,7 +66,7 @@
 
 <% if logged_in? && @user_topics.present? %>
 <h2>Conversations you are a part of</h2>
-  <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+  <table  class="wide topics">
   <tr>
     <th class="la" colspan="2"><%= 'Topic'%></th>
     <th width="1%"><%= 'Posts'%></th>
@@ -78,7 +78,7 @@
 <% end %>
 
   <h2>Hot on alonetone</h2>
-  <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+  <table  class="wide topics">
   <tr>
     <th class="la" colspan="2"><%= 'Topic'%></th>
     <th width="1%"><%= 'Posts'%></th>
@@ -89,7 +89,7 @@
   </table>
   
   <h2>Conversations needing reply love</h2>
-  <table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+  <table  class="wide topics">
   <tr>
     <th class="la" colspan="2"><%= 'Topic'%></th>
     <th width="1%"><%= 'Posts'%></th>
