@@ -38,7 +38,7 @@ class User
   end
   
   def self.prefetch_from(records)
-    select('distinct *').where(['id in (?)', records.collect(&:user_id).uniq])
+    select('distinct *').where(['id in (?)', records.pluck(:user_id).uniq])
   end
   
   def self.index_from(records)
