@@ -37,15 +37,16 @@ gem "geokit"
 gem 'newrelic_rpm'
 gem 'skylight'
 
-# assets
-gem "jquery-rails"
-gem "jquery-ui-rails"
-gem "sass-rails"
-gem 'compass-rails', git: 'git://github.com/milgner/compass-rails.git', branch: 'rails4'
-gem 'yui-compressor'
-gem 'uglifier'
-gem "coffee-rails"
-gem "soundmanager2-rails"
+group :assets do
+  gem "jquery-rails"
+  gem "jquery-ui-rails"
+  gem "sass-rails"
+  gem 'compass-rails', git: 'git://github.com/milgner/compass-rails.git', branch: 'rails4'
+  gem 'yui-compressor'
+  gem 'uglifier'
+  gem "coffee-rails"
+  gem "soundmanager2-rails"
+end
 
 group :production do
   gem "puma"
