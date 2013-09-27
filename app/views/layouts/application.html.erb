@@ -47,7 +47,15 @@
 		  <%= check_for_and_display_welcome_back %>
 		  <%= check_for_and_display_flashes %>
       <div id="main">
-          <%= yield %>
+        
+    <%=  if yield(:pages).present?
+          yield(:pages)
+        elsif yield(:forums).present?
+          yield(:forums)
+        else
+          yield
+        end
+    %>
       </div>
       <div id="static">
           <%= yield :static %>

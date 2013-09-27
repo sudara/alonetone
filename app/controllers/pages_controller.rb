@@ -1,7 +1,4 @@
-# -*- encoding : utf-8 -*-
-
 class PagesController < ApplicationController
-  skip_filter _process_action_callbacks.map(&:filter), :only => :help_an_app_support_brutha_out
   layout "pages"  
   
   class Hell < StandardError; end
@@ -21,7 +18,6 @@ class PagesController < ApplicationController
   end
 
   def home
-  
   end
   
   def error
