@@ -214,8 +214,12 @@ SortablePlaylist = $.klass({
     $.post(this.sortURL,$.param({'authenticity_token':window.authenticityToken})+'&'+this.sortable_tracks.sortable('serialize') );
   },
   add_track : function (e,ui){
-    $.post(this.addTrackURL, $.param({'asset_id':ui.draggable.attr('id'), 'authenticity_token':window.authenticityToken}),$.bind(this.insert_track,this));
-    
+    $.ajax({
+      type: "POST",
+      url: this.addTrackURL,
+      data: $.param({'asset_id':ui.draggable.attr('id'), 'authenticity_token':window.authenticityToken}),
+      dataType: 'html'
+    }).done($.bind(this.insert_track,this))
   },
   // does the work of inserting the new track and recreating the sortable
   insert_track: function(new_track_html){
