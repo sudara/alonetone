@@ -43,7 +43,7 @@ class User
   end
   
   def favorite_asset_ids
-    Track.where(:playlist_id => favorites).collect(&:asset_id)
+    Track.where(:playlist_id => favorites).pluck(&:asset_id)
   end
   
   def favorites

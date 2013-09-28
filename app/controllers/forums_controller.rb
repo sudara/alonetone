@@ -64,7 +64,7 @@ class ForumsController < ApplicationController
   end
   
   def set_interesting_topics
-    @user_topics = Topic.replied_to_by(@user).collect(&:topic) if logged_in?
+    @user_topics = Topic.replied_to_by(@user).pluck(&:topic) if logged_in?
     @popular_topics = Topic.popular.collect(&:first)
     @replyless_topics = Topic.replyless
   end

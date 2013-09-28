@@ -61,7 +61,7 @@ class User
       .group(:track_owner_id)
       .limit(limit)
       .order('count_track_owner_id DESC')
-      .count(:track_owner_id)
+      .count(:track_owner_id).collect(&:first)
   end  
 
   
