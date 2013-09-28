@@ -23,7 +23,7 @@ class Track < ActiveRecord::Base
   
   acts_as_list :scope => :playlist_id, :order => :position
 
-  attr_accessible :asset_id, :is_favorite, :asset
+  attr_accessible :asset_id, :is_favorite, :asset, :position
   validates_presence_of :asset_id, :playlist_id
   before_validation :ensure_playlist_if_favorite
     

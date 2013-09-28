@@ -45,7 +45,7 @@ class PlaylistsController < ApplicationController
   def edit
     set_assets
     @listens = @user.listens.order('listens.created_at DESC').paginate(:page => params[:listens_page])
-    @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page]) if @user.favorites.tracks.present?
+    @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page]) if @user.favorites.present?
     if request.xhr? 
       render_desired_partial
     end
@@ -88,7 +88,7 @@ class PlaylistsController < ApplicationController
   def sort_tracks
     # get the params for this playlist
     params["track"].each_with_index do |id, position|
-      @user.tracks.update(id, :position => position)
+      Track.update(id, :position => position)
     end
     render :nothing => true
   end
