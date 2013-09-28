@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: http://github.com/saulabs/reportable.git
-  revision: c02ee2af6bde90fc905d662e5d754466900a3ada
+  revision: 7ab93765296ffddba9b6c4ced20188a5136fc6c3
   specs:
     reportable (1.2.0)
       activerecord (>= 3.0)
