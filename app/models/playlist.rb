@@ -79,7 +79,7 @@ class Playlist < ActiveRecord::Base
   # playlist is a mix if there is at least one track with a track from another user  
   def set_mix_or_album
     # is this a favorites playlist?
-    is_mix = true if is_favorite? and return true
+    is_mix = true if is_favorite?
     is_mix = true if tracks.present? && tracks.count > tracks.count(:all, :conditions => ['user_id != ?',user.id])
     true
   end

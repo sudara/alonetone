@@ -139,12 +139,12 @@ class UsersController < ApplicationController
   def gather_user_goodies
     @popular_tracks = @user.assets.includes(:user => :pic).limit(5).order('assets.listens_count DESC')
     @assets = @user.assets.includes(:user => :pic).limit(5)
-    @playlists = @user.playlists.public
+    @playlists = @user.playlists.public.includes(:user, :pic)
     @listens = @user.listened_to_tracks.limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5)
     @comments = @user.comments.public_or_private(display_private_comments?).includes(:commentable => {:user => :pic}).limit(5)
-    @follows = @user.followees
+    @follows = @user.followees.includes(:pic)
     @mostly_listens_to = @user.mostly_listens_to
   end
   

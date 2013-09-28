@@ -2,6 +2,9 @@
   div.input {
     margin-bottom: 10px;
     clear: both;
+    text-align:left;
+    width: 265px;
+    
     /* Required for Webkit, but not for Gecko */
   }
   label {
@@ -12,11 +15,35 @@
       display:none;
     }
   }
+  input {
+    font-size: 1em;
+    padding:5px;
+    margin: 0;
+    &.string, &.password{
+      width: 250px;
+      background-color: white;
+    }
+    &.radio {
+      margin-right: 5px;
+      vertical-align: -3px;
+    }
+    &.check_boxes {
+      margin-left: 3px;
+      vertical-align: -3px;
+    }
+    &.btn{
+      font-size: 1.2em;
+      padding:10px;
+      margin-right: 0px;
+    }
+  }
 }
 
-div.boolean, .simple_form input[type='submit'] {
+div.boolean {
   margin-left: 120px;
 }
+
+
 
 div.boolean label {
   float: none;
@@ -32,35 +59,28 @@ label.collection_radio_buttons {
 }
 
 .field_with_errors {
-  background-color: #ff3333;
+  background-color: #e66d29;
+  margin-left: -10px;
+  padding: 5px;
+  padding-left: 10px;
+  width: 310px;
+  label{
+    color: white;
+  }
 }
 
 .simple_form {
   .error {
-    clear: left;
-    color: black;
+    clear: both;
+    color: white;
     display: block;
-    margin-left: 120px;
   }
   .hint {
     clear: left;
-    margin-left: 120px;
     color: #555;
     display: block;
+    text-align: right;
     font-style: italic;
-  }
-}
-
-input {
-  font-size: 1em;
-  padding:2px;
-  &.radio {
-    margin-right: 5px;
-    vertical-align: -3px;
-  }
-  &.check_boxes {
-    margin-left: 3px;
-    vertical-align: -3px;
   }
 }
 

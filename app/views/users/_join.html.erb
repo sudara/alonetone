@@ -1,10 +1,12 @@
 <h2 class="box">Join alonetone</h2>
   <%= link_to "or login here", login_path, :class=> 'view_more'%>
   <div id="signup" class="static_content box">
-
-  	<%= form_for :user, :url => users_path do |f| -%>
-  	  <%= render :partial => "users/form", :object => f %>
-  	  <div class="submit_wrapper"><%= submit_tag 'Join alonetone' %></div>
+  	<%= simple_form_for :user do |f| -%>
+      <%= f.input :login, :hint => "(Letters and numbers only)" %>
+      <%= f.input :email, :hint => "(we will send you an activation email)" %>
+      <%= f.input :password, :hint => "(pick a nice password)"%>
+      <%= f.input :password_confirmation, :hint => "(enter it once again)" %>
+      <%= f.button :submit, 'Join alonetone' %>
   	<% end -%>
   </div>
    
