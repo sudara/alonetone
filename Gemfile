@@ -57,6 +57,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'thin'
+  gem 'sqlite3'
   # gem 'logical-insight'
 end
 
