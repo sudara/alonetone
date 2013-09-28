@@ -125,8 +125,6 @@ GEM
     guard-spring (0.0.4)
       guard
       spring
-    haml (4.0.3)
-      tilt
     has_permalink (0.1.6)
     hike (1.2.3)
     i18n (0.6.5)
@@ -269,7 +267,6 @@ DEPENDENCIES
   guard-rspec
   guard-spring
   guard_listen!
-  haml
   has_permalink
   jquery-rails
   jquery-ui-rails
