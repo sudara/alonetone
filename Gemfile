@@ -29,7 +29,6 @@ gem "redcarpet"
 gem "country-select"
 gem 'will_paginate'
 gem 'dynamic_form'
-gem 'haml' # TODO: remove remaining haml, sudara hates it (requires translating about pages)
 
 # external services
 gem 'rakismet'
