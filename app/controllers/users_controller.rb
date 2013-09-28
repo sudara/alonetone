@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @users = User.includes(:pic).paginate_by_params(params)
     @sort = params[:sort]
     @user_count = User.count
-    @active     = User.count(:all, :conditions => "assets_count > 0", :include => :pic)
+    @active     = User.where("assets_count > 0").count
   end
 
   def show
@@ -138,13 +138,13 @@ class UsersController < ApplicationController
   end 
   
   def gather_user_goodies
-    @popular_tracks = @user.assets.limit(5).order('assets.listens_count DESC')
-    @assets = @user.assets.limit(5)
+    @popular_tracks = @user.assets.includes(:user => :pic).limit(5).order('assets.listens_count DESC')
+    @assets = @user.assets.includes(:user => :pic).limit(5)
     @playlists = @user.playlists.public
     @listens = @user.listened_to_tracks.limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
-    @favorites = @user.tracks.favorites.recent.limit(5)
-    @comments = @user.comments.public_or_private(display_private_comments?).limit(5)
+    @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5)
+    @comments = @user.comments.public_or_private(display_private_comments?).includes(:commentable => {:user => :pic}).limit(5)
     @follows = @user.followees
     @mostly_listens_to = @user.mostly_listens_to
   end
@@ -184,7 +184,7 @@ class UsersController < ApplicationController
     # that the cache for all their tracks be invalidated 
     flush_asset_caches = false
     if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.has_setting('block_guest_comments', 'true')
+      currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
     Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches

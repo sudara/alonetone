@@ -26,8 +26,9 @@ class Playlist < ActiveRecord::Base
   
   has_permalink :title
   
-  attr_accessible :user_id, :is_favorite
+  attr_accessible :user_id, :is_favorite, :year, :title, :description, :private
   before_validation  :auto_name_favorites, :on => :create
+  before_save :ensure_private_if_less_than_two_tracks
   before_update :set_mix_or_album
 
   def to_param
@@ -69,6 +70,10 @@ class Playlist < ActiveRecord::Base
   
   def self.latest(limit=5)
     self.where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
+  end
+  
+  def ensure_private_if_less_than_two_tracks
+    self.private == true if tracks_count < 2
   end
   
   # playlist is a mix if there is at least one track with a track from another user  

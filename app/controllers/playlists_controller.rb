@@ -44,8 +44,8 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens = @user.listens.order('listens.created_at DESC').paginate(:page => params[:listens_page])
-    @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page]) if @user.favorites.present?
+    @listens = @user.listens.order('listens.created_at DESC').paginate(:page => params[:listens_page], :per_page => 10)
+    @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page], :per_page => 10) if @user.favorites.present?
     if request.xhr? 
       render_desired_partial
     end
@@ -126,7 +126,7 @@ class PlaylistsController < ApplicationController
   end
   
   def set_assets
-    @assets = @user.assets.recent.page(params[:uploads_page])
+    @assets = @user.assets.recent.paginate(:page => params[:uploads_page], :per_page => 10)
   end
   
   def set_all_playlists

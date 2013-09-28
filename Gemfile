@@ -26,7 +26,7 @@ gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require =
 
 # view
 gem "redcarpet"
-gem "country-select"
+gem "country_select"
 gem 'will_paginate'
 gem 'dynamic_form'
 

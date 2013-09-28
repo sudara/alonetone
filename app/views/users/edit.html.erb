@@ -1,170 +1,170 @@
 <%= error_messages_for :user %>
 
-<%= render(:layout => 'user') do %>
-  <%= content_for :left do %>
-  <div class="edit_profile box">
-    <h2 class="box">Edit your profile</h2>
-  	<div class="static_content">
+<%= render :partial => 'users/user' %>
 
-		<%= form_for @user, :html => { :method => :put } do |f| -%>
+<%= content_for :left do %>
+<div class="edit_profile box">
+  <h2 class="box">Edit your profile</h2>
+	<div class="static_content">
 
-		<label for="display_name">The name you want displayed on alonetone</label><br />
-		<%= f.text_field :display_name %><br/><br/>	
+	<%= form_for @user, :html => { :method => :put } do |f| -%>
 
-		<label for="user_bio">Tell us about yourself</label><br />
-		<%= f.text_area :bio, :class=>'double_trouble', :cols => 40, :rows => 4%><br/><br/>
+	<label for="display_name">The name you want displayed on alonetone</label><br />
+	<%= f.text_field :display_name %><br/><br/>	
 
-    <label for="user_bio">What city or town do you live in?</label><br />
-    <%= f.text_field :city %><br/><br/>
+	<label for="user_bio">Tell us about yourself</label><br />
+	<%= f.text_area :bio, :class=>'double_trouble', :cols => 40, :rows => 4%><br/><br/>
 
-    <label for="user_bio">What country?</label><br />
-    <%= f.country_select :country, ['','United States'], :include => :blank %><br/><br/>
+  <label for="user_bio">What city or town do you live in?</label><br />
+  <%= f.text_field :city %><br/><br/>
 
-    <label for="user_website">Have a website?</label><br />
-    http://<%= f.text_field :website %><br/><br/>
+  <label for="user_bio">What country?</label><br />
+  <%= f.country_select(:country, ['','United States'], :include => :blank) %><br/><br/>
 
-    <label for="user_website">Did you set up your <%= link_to 'alonetone iTunes podcast?', halp_path(:itunes) %></label>
-    <br />
-    http://<%= f.text_field :itunes %><br/><br/>
+  <label for="user_website">Have a website?</label><br />
+  http://<%= f.text_field :website %><br/><br/>
 
-    <label for "user_myspace">Trendy (or dorky) enough to be on twitter?</label><br/>
-    http://twitter.com/<%= f.text_field :twitter%><br/><br/>
+  <label for="user_website">Did you set up your <%= link_to 'alonetone iTunes podcast?', halp_path(:itunes) %></label>
+  <br />
+  http://<%= f.text_field :itunes %><br/><br/>
 
-	      
-    </div>
-	  <div class="static_content">
-	    <%= submit_tag "Update Your Profile" %>
-	  </div>
-  	<% end -%>
+  <label for "user_myspace">Trendy (or dorky) enough to be on twitter?</label><br/>
+  http://twitter.com/<%= f.text_field :twitter%><br/><br/>
+
+      
+  </div>
+  <div class="static_content">
+    <%= submit_tag "Update Your Profile" %>
+  </div>
+	<% end -%>
+</div>
+
+
+<div class="edit_profile box">
+  <h2 class="box">Your Account</h2>
+	<div class="static_content">
+
+  
+  	<%= form_for @user, :html => { :method => :put } do |f| -%>
+	
+    <%= link_to("Change your login and alonetone address", '#edit_login', :class=>'slide_open_href') %> <br/><br/>
+
+    <%= link_to("Change your password",'#edit_password',:class=>'slide_open_href') %><br/><br/>
+    
+    <%= link_to("Delete your account",'#destroy_account',:class=>'slide_open_href') %>
+    
+  </div>
+  
+  <div class="static_content">
+  <div id="edit_password" class="static_content" style="display:none">
+		Enter your desired new password twice, please:<br/>
+		<%= f.password_field :password %><br/>
+		<%= f.password_field :password_confirmation %><br/>
+		<%= submit_tag "Change Your Password" %>
+    
+  </div>
+
+  <div id="edit_login" class="static_content" style="display:none">
+		<b>Change your login</b> <br/>
+		WARNING: Changing this will break any mp3 players
+		you or anyone else has put on the web, as well as any links anyone has passed around
+		to your music, as well as confuse google about where your music is for a few weeks.<br/><br/>
+	
+		Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.<br/>
+		http://alonetone.com/<%= f.text_field :login %><br/>
+		
+		<%= submit_tag "Change Your login and account name" %>
+    
+  </div>
+
+  <div id="destroy_account" class="static_content" style="display:none;">
+    <b>WARNING</b><br/>
+    This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone<br/><br/>
+    <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
+    <%= link_to " ", user_path(:login => @user.login), :method => :delete, 
+    :confirm => 'Are you absolutely sure? This will delete your account and tracks permanently, including all play history and comments.',
+    :class => 'delete_green'%> 
+    <br/><br/>
   </div>
   
   
-  <div class="edit_profile box">
-    <h2 class="box">Your Account</h2>
-  	<div class="static_content">
-  
-	  
-	  	<%= form_for @user, :html => { :method => :put } do |f| -%>
-  	
-      <%= link_to("Change your login and alonetone address", '#edit_login', :class=>'slide_open_href') %> <br/><br/>
+   <% end %>
+  </div>
+  </div>
 
-      <%= link_to("Change your password",'#edit_password',:class=>'slide_open_href') %><br/><br/>
-      
-      <%= link_to("Delete your account",'#destroy_account',:class=>'slide_open_href') %>
-      
-    </div>
-    
-    <div class="static_content">
-    <div id="edit_password" class="static_content" style="display:none">
-  		Enter your desired new password twice, please:<br/>
-  		<%= f.password_field :password %><br/>
-  		<%= f.password_field :password_confirmation %><br/>
-  		<%= submit_tag "Change Your Password" %>
-	    
-    </div>
-  
-    <div id="edit_login" class="static_content" style="display:none">
-  		<b>Change your login</b> <br/>
-  		WARNING: Changing this will break any mp3 players
-  		you or anyone else has put on the web, as well as any links anyone has passed around
-  		to your music, as well as confuse google about where your music is for a few weeks.<br/><br/>
-		
-  		Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.<br/>
-  		http://alonetone.com/<%= f.text_field :login %><br/>
-  		
-  		<%= submit_tag "Change Your login and account name" %>
-	    
-    </div>
-  
-    <div id="destroy_account" class="static_content" style="display:none;">
-      <b>WARNING</b><br/>
-      This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone<br/><br/>
-      <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
-      <%= link_to " ", user_path(:login => @user.login), :method => :delete, 
-      :confirm => 'Are you absolutely sure? This will delete your account and tracks permanently, including all play history and comments.',
-      :class => 'delete_green'%> 
-      <br/><br/>
-    </div>
-    
-    
-     <% end %>
-    </div>
-    </div>
-  
-  
-  
-  <% end %>
-  
-  <%= content_for :right do %>
-    <div class="box">
-    <h2 class="box">Change your picture</h2>
-    <div class="static_content">
-        <%= image_tag @user.avatar(:small)%><br/>
-        Upload a new photo. (400px by 400px square for best results)<br/>
-        <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
-        	<%= f.file_field :uploaded_data  %>
-        	<%= submit_tag "Upload new Pic" %>
-        <% end %><br/>
-    </div>
-    </div>
-  
-    <h2 class="box">Settings</h2>
-    <div class="static_content">
-    <%= form_for @user, :html => { :method => :put } do |f| -%>
-      Display play counts blatantly on all tracks? <br/>
-      <%= select_tag('user[settings][display_listen_count]', 
-          options_for_select([['no thanks','false'], ['yes','true']], 
-          user_setting(:display_listen_count))) %>
-    </div>
 
-    <div class="static_content">
-      Accept comments from guests?<br/>
-      <%= select_tag('user[settings][block_guest_comments]', 
-          options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']], 
-           user_setting(:block_guest_comments))) %>
-    </div>
 
-    
-    <div class="static_content">
-      Display most popular tracks on your home page?<br/>
-      <%= select_tag('user[settings][most_popular]', 
-          options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']], 
-           user_setting(:most_popular))) %>
-    </div>
-    
-    <div class="static_content">
-      Increase size of ego by 4x?<br/>
-      <%= select_tag('user[settings][increase_ego]', 
-          options_for_select([['uhm, no thanks','false'], ['hell yes!','true']], 
-          user_setting(:increase_ego))) %>
-          
-    </div>
-    
-    <div class="static_content">
-      Should we email you new comments on your tracks?<br/>
-      <%= select_tag('user[settings][email_comments]', 
-          options_for_select([['of course, silly!','true'], ['I do not like email','false']], 
-          user_setting(:email_comments))) %>
-          
-    </div>
+<% end %>
 
-    <div class="static_content">
-      Email notifications when folks you follow upload tracks?<br/>
-      <%= select_tag('user[settings][email_new_tracks]', 
-          options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']], 
-          user_setting(:email_new_tracks))) %>
-    </div>
+<%= content_for :right do %>
+  <div class="box">
+  <h2 class="box">Change your picture</h2>
+  <div class="static_content">
+      <%= image_tag @user.avatar(:small)%><br/>
+      Upload a new photo. (400px by 400px square for best results)<br/>
+      <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
+      	<%= f.file_field :uploaded_data  %>
+      	<%= submit_tag "Upload new Pic" %>
+      <% end %><br/>
+  </div>
+  </div>
 
-    <div class="static_content">
-      Remove / block your iTunes podcast? <br/>
-      <%= select_tag('user[settings][block_itunes]', 
-          options_for_select([['no','false'], ['yes, block my podcast url from iTunes','true']], 
-          user_setting(:block_itunes))) %>
-    </div>    
-    
-    <div class="static_content">
-      <%= submit_tag "Save your alonetone settings" %>
-    </div>
-    <% end %>
+  <h2 class="box">Settings</h2>
+  <div class="static_content">
+  <%= form_for @user, :html => { :method => :put } do |f| -%>
+    Display play counts blatantly on all tracks? <br/>
+    <%= select_tag('user[settings][display_listen_count]', 
+        options_for_select([['no thanks','false'], ['yes','true']], 
+        user_setting(:display_listen_count))) %>
+  </div>
+
+  <div class="static_content">
+    Accept comments from guests?<br/>
+    <%= select_tag('user[settings][block_guest_comments]', 
+        options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']], 
+         user_setting(:block_guest_comments))) %>
+  </div>
+
+  
+  <div class="static_content">
+    Display most popular tracks on your home page?<br/>
+    <%= select_tag('user[settings][most_popular]', 
+        options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']], 
+         user_setting(:most_popular))) %>
+  </div>
+  
+  <div class="static_content">
+    Increase size of ego by 4x?<br/>
+    <%= select_tag('user[settings][increase_ego]', 
+        options_for_select([['uhm, no thanks','false'], ['hell yes!','true']], 
+        user_setting(:increase_ego))) %>
+        
+  </div>
+  
+  <div class="static_content">
+    Should we email you new comments on your tracks?<br/>
+    <%= select_tag('user[settings][email_comments]', 
+        options_for_select([['of course, silly!','true'], ['I do not like email','false']], 
+        user_setting(:email_comments))) %>
+        
+  </div>
+
+  <div class="static_content">
+    Email notifications when folks you follow upload tracks?<br/>
+    <%= select_tag('user[settings][email_new_tracks]', 
+        options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']], 
+        user_setting(:email_new_tracks))) %>
+  </div>
+
+  <div class="static_content">
+    Remove / block your iTunes podcast? <br/>
+    <%= select_tag('user[settings][block_itunes]', 
+        options_for_select([['no','false'], ['yes, block my podcast url from iTunes','true']], 
+        user_setting(:block_itunes))) %>
+  </div>    
+  
+  <div class="static_content">
+    <%= submit_tag "Save your alonetone settings" %>
+  </div>
   <% end %>
 <% end %>

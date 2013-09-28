@@ -100,7 +100,7 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    country-select (1.1.1)
+    country_select (1.2.0)
     daemons (1.1.9)
     database_cleaner (1.0.1)
     diff-lcs (1.2.4)
@@ -258,7 +258,7 @@ DEPENDENCIES
   aws-sdk
   coffee-rails
   compass-rails!
-  country-select
+  country_select
   database_cleaner
   dynamic_form
   factory_girl_rails

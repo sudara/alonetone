@@ -35,7 +35,7 @@ class Listen < ActiveRecord::Base
   end
   
   def self.today
-    count(:all, :conditions => {:created_at => Time.now.at_beginning_of_day..Time.now})
+    where({:created_at => Time.now.at_beginning_of_day..Time.now}).count
   end
 
   
