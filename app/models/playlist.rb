@@ -18,18 +18,17 @@ class Playlist < ActiveRecord::Base
      :dependent => :destroy
   has_many :assets, :through => :tracks 
   
-  validates_presence_of :title
+  validates_presence_of :description, :title, :user_id
   validates_length_of   :title, :within => 4..100
   validates_length_of   :year, :within => 2..4, :allow_blank => true
-  validates_presence_of :description
   validates_length_of   :description, :within => 1..2000, :allow_blank => true
   
   has_permalink :title
   
   attr_accessible :user_id, :is_favorite, :year, :title, :description, :private
   before_validation  :auto_name_favorites, :on => :create
-  before_save :ensure_private_if_less_than_two_tracks
   before_update :set_mix_or_album
+  after_save :ensure_private_if_less_than_two_tracks
 
   def to_param
     "#{self.permalink}"
@@ -73,7 +72,8 @@ class Playlist < ActiveRecord::Base
   end
   
   def ensure_private_if_less_than_two_tracks
-    self.private == true if tracks_count < 2
+    update_attribute(:private, true) if !is_favorite? and tracks_count < 2
+    true
   end
   
   # playlist is a mix if there is at least one track with a track from another user  

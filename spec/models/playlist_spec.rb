@@ -2,7 +2,11 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Playlist do
-  fixtures :playlists, :tracks, :assets
+  fixtures :playlists, :tracks, :assets, :users 
+  
+  it 'should be valid with title, description, user' do
+    playlists(:owp).should be_valid
+  end
   
   it 'should use its permalink as param' do
     playlists(:owp).permalink.should == playlists(:owp).to_param
@@ -25,18 +29,26 @@ describe Playlist do
   end
   
   it "should update a-ok" do
-    @playlist = playlists(:mix) 
-    @playlist.save.should == true
+    playlist = playlists(:mix) 
+    playlist.save.should == true
   end
   
   it 'should know if it is a mix on update' do 
-    @playlist = playlists(:mix)
-    @playlist.is_mix?.should == true
+    playlist = playlists(:mix)
+    playlist.is_mix?.should == true
+  end
+  
+  it 'should always belong to a user' do 
+    playlists(:mix).user.should_not be_nil
   end
 
   it "should deliver its tracks in order of the position" do 
     playlists(:owp).tracks.first.position.should == 1
     playlists(:owp).tracks[1].position.should == 2
+  end
+  
+  context "favorites" do 
+    
   end
   
 end

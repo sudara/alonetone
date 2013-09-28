@@ -21,11 +21,12 @@ class Track < ActiveRecord::Base
   scope :favorites, -> { where(:is_favorite => true).recent }
   scope :favorites_for_home, -> { favorites.limit(5).includes({:user => :pic}, {:asset => {:user => :pic}}) }
   
+  delegate :length, :name, :to => :asset
   acts_as_list :scope => :playlist_id, :order => :position
 
   attr_accessible :asset_id, :is_favorite, :asset, :position
-  validates_presence_of :asset_id, :playlist_id
   before_validation :ensure_playlist_if_favorite
+  validates_presence_of :asset_id, :playlist_id
     
   def asset_length
     asset ? asset[:length] : 0
@@ -41,14 +42,8 @@ class Track < ActiveRecord::Base
     ).collect(&:first)
   end
   
-  # allow us to pretend that the track has info by forwarding to the asset
-  [:length, :name].each do |attribute|
-    define_method("#{attribute}?") { 
-      self.track.send("#{attribute}") 
-    }
-  end
-  
   def ensure_playlist_if_favorite
-    self.playlist_id = Playlist.find_or_create_by(:user_id => user_id, :is_favorite => true).id if is_favorite?
+    self.playlist_id = Playlist.favorites.where(:user_id => user_id).first_or_create.id if is_favorite?
+    true
   end
 end

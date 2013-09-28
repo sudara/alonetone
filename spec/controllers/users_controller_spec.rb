@@ -152,9 +152,9 @@ describe UsersController do
   context "favoriting" do
     subject { get :toggle_favorite, :asset_id => 1 }
     it 'should let a user favorite a track' do 
-      login(:arthur)
+      login(:arthur)    
       expect { subject }.to change{ Track.count }.by(1) 
-      users(:arthur).favorites.tracks.collect(&:asset).should include(Asset.find(1))
+      users(:arthur).tracks.favorites.collect(&:asset).should include(Asset.find(1))
       response.should be_success
     end
     
@@ -162,7 +162,7 @@ describe UsersController do
       login(:arthur)
       expect { subject }.to change{ Track.count }.by(1) 
       get :toggle_favorite, :asset_id => 1  # toggle again
-      users(:arthur).favorites.tracks.collect(&:asset).should_not include(Asset.find(1))
+      users(:arthur).tracks.favorites.collect(&:asset).should_not include(Asset.find(1))
       response.should be_success
     end
     

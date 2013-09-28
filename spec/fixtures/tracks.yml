@@ -33,3 +33,7 @@ fav1:
   playlist_id: 5
   asset_id: 1
   is_favorite: true
+no_playlist_id:
+  id: 8
+  asset_id: 1
+  
