@@ -77,11 +77,11 @@ class User < ActiveRecord::Base
   before_destroy :efficiently_destroy_relations
   
   def listened_to_today_ids
-    listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(&:asset_id)
+    listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
   end
   
   def listened_to_ids
-    listens.select('listens.asset_id').pluck(&:asset_id).uniq
+    listens.select('listens.asset_id').pluck(:asset_id).uniq
   end
   
   def top_tracks

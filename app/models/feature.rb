@@ -28,7 +28,7 @@ class Feature < ActiveRecord::Base
   # hackish way to add featured tracks quick and dirty w/ csv
   
   def featured_tracks_list
-    self.featured_tracks.pluck(&:asset_id).join(',')
+    self.featured_tracks.pluck(:asset_id).join(',')
   end
   
   def featured_tracks_list=(ids)
