@@ -7,6 +7,14 @@ GIT
       compass (>= 0.12.2, < 0.14)
 
 GIT
+  remote: git://github.com/saulabs/reportable.git
+  revision: 7ab93765296ffddba9b6c4ced20188a5136fc6c3
+  specs:
+    reportable (1.2.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/sudara/guard.git
   revision: c8fa7501e1916efb01cde7e0a7ac44af5aea7fb5
   specs:
@@ -25,14 +33,6 @@ GIT
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
-
-GIT
-  remote: http://github.com/saulabs/reportable.git
-  revision: 7ab93765296ffddba9b6c4ced20188a5136fc6c3
-  specs:
-    reportable (1.2.0)
-      activerecord (>= 3.0)
-      activesupport (>= 3.0.0)
 
 GIT
   remote: https://github.com/binarylogic/authlogic.git

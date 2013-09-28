@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   
   before_filter :find_user, :except => [:new, :create]

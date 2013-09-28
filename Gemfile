@@ -5,9 +5,6 @@ gem "rails", "~> 4.0.0"
 # temporary
 gem "protected_attributes"
 
-# server
-gem "mysql2"
-
 # ruby
 gem "sometimes"
 gem "awesome_print", :require => 'ap'
@@ -22,7 +19,7 @@ gem "mime-types"
 gem "acts_as_list"
 gem "has_permalink"
 gem "authlogic", :git => 'https://github.com/binarylogic/authlogic.git' # rails 4 fixes in master
-gem 'reportable', :git => 'http://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
+gem 'reportable', :git => 'git://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 
 # view
 gem "redcarpet"
@@ -50,6 +47,7 @@ end
 
 group :production do
   gem "puma"
+  gem "mysql2"
 end
 
 group :development do
