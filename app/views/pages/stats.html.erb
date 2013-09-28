@@ -1,0 +1,106 @@
+<% content_for :static_h1 do %>
+  Statistics: Watch alonetone grow
+<% end %>
+<% content_for :css do %>
+  <%= javascript_include_tag 'raphael.min', 'g.raphael.min', 'g.line.min'  %>
+<% end %>
+<div class="box">
+  <h2 class="box">
+    Currently on alonetone
+  </h2>
+  <div class="static_content big_stats">
+    <strong>
+      <%= @number_of_musicians %>
+    </strong>
+    musicians have uploaded
+    <strong>
+      <%= Asset.count %>
+    </strong>
+    original mp3s.
+    <br/>
+    It would take you 
+    <strong>
+      <%= Asset.days %>
+    </strong>
+    days to listen to all
+    <strong>
+      <%= Asset.gigs %>
+    </strong>
+    gigabytes of their tunes.
+    <br/>
+  </div>
+</div>
+<div class="box">
+  <h2 class="box">
+    Tracks uploaded per week
+  </h2>
+  <div class="static_content">
+    <%= raphael_report_tag(Asset.weekly_report, { :width => 580, :height => 100, :line =>"#6d9312", :fill =>"#8db038", :hover_fill_color => '#5da5ba', :hover_line_color =>'#348fa9'}, { :vertical_label_unit => 'Tracks' }).html_safe     %>
+  </div>
+</div>
+<div class="box">
+  <h2 class="box">
+    Listens per Week* since launch
+  </h2>
+  <div class="static_content">
+    <%= raphael_report_tag(Listen.weekly_report, { :width => 580, :height => 100, :line =>"#6d9312", :fill =>"#8db038", :hover_fill_color => '#5da5ba', :hover_line_color =>'#348fa9'}, { :vertical_label_unit => 'Plays' }).html_safe     %>
+    <br/>
+    <strong>
+      <%= Listen.monthly_listen_count_for[0] %>
+    </strong>
+    Listens so far for 
+    <%= Listen.monthly_listen_count_for[1] %>
+    <br/>
+    <small>
+      * Please note that as of April-July 2008, alonetone began to filter out all hits by search engines & spiders
+    </small>
+  </div>
+</div>
+<div class="box">
+  <h2 class="box">
+    New artists per week
+  </h2>
+  <div class="static_content">
+    <%= raphael_report_tag(User.weekly_report, { :width => 580, :height => 100, :line =>"#6d9312", :fill =>"#8db038", :hover_fill_color => '#5da5ba', :hover_line_color =>'#348fa9'}, { :vertical_label_unit => 'Plays' }).html_safe     %>
+  </div>
+</div>
+<div class="box">
+  <h2 class="box">
+    Other fun alonetone numbers
+  </h2>
+  <div class="static_content">
+    <strong>
+      <%= "%.0f" % @tracks_per_user %>
+    </strong>
+    tracks uploaded by the average alonetoner
+    <br/>
+    <strong>
+      <%= "%.0f" % @listens_per_track %>
+    </strong>
+    listens to the average track
+    <br/>
+    <strong>
+      <%= "%.0f" % @listens_per_user %>
+    </strong>
+    listens to the average alonetoner
+    <br/>
+    Average length of the 
+    <%= Asset.count %>
+    uploaded mp3s is 
+    <strong>
+      <%= @average_length_of_track %>
+    </strong>
+    <br/>
+    <br/>
+    <strong>
+      <%= "%.0f" % @comments_per_user %>
+    </strong>
+    comments made by the average alonetoner
+    <br/>
+    <strong>
+      <%= "%.1f" %@posts_per_user %>
+    </strong>
+    posts per alonetoner to the 
+    <%= link_to 'forums', forums_path %>
+  </div>
+</div>

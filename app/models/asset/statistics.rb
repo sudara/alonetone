@@ -23,7 +23,7 @@ class Asset
   end
   
   def self.gigs
-    (Asset.sum(:size).to_f / 1024 / 1024 / 1024).to_s[0..3]
+    (Asset.sum(:mp3_file_size).to_f / 1024 / 1024 / 1024).to_s[0..3]
   end
  
   def self.update_hotness

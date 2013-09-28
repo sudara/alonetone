@@ -1,0 +1,17 @@
+<div id="static_header">
+  <div class="title">
+    %h1.static
+      All about alonetone
+  <div id="links">
+    <ul class="links">                                                                                                                    
+      <%= user_nav_item "What is alonetone?", {:controller => 'pages', :action => 'index' }, :title => 'about alonetone'                  %>
+      <%= user_nav_item "How do I?...", {:controller => 'pages', :action => 'howto' }, :title => 'get help with alonetone'                %>
+      <%= user_nav_item "Press", {:controller => 'pages', :action => 'promo' }, :title => 'press and promotional info'                    %>
+      <%= user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact', :title => 'alonetone statistics'%>
+      <%= user_nav_item "Forums", forums_path, :added_class => 'contact', :title => 'forums'                                              %>
+      <%= user_nav_item "Blog", blog_path, :added_class => 'contact', :title => 'Blog'                                                    %>
+     </ul>
+    <% yield :pagination %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="faq box">
+  <h2 class="box static">
+    How do I get my songs listed on iTunes?
+  </h2>
+  <div class="static_content">
+    <%= image_tag('http://img.skitch.com/20080518-mqmksurts36d32s4r7ki5sr7ac.jpg') %>
+    <br/>
+    <br/>
+    Follow these simple steps, and you will get your very own podcast listed on iTunes. Each time
+    you upload a track to alonetone, a new 'episode' appears on iTunes. People can subscribe and 
+    automatically receive your latest tunes. People can search the iTunes store and find you 
+    and your music.
+  </div>
+</div>
+<div class="faq box">
+  <h2 class="box static">
+    Step 1: Submit your alonetone feed address to iTunes.
+  </h2>
+  <div class="static_content">
+    Wait, wait! There is a step 0: you need iTunes installed on your computer. Got it? Ready to go? Ok.
+    <br/>
+    <br/>
+    <% if logged_in? %>
+      This is your feed address, 
+      <%= current_user.name + ':' %>
+      <br>
+        <strong>
+          <%= user_url(current_user, :format => :rss) %>
+        </strong>
+      </br>
+    <% else %>
+      <%= link_to 'log in', login_path %>
+      and we'll show you which link you should submit.
+    <% end %>
+    <br/>
+    <br/>
+    So the deal is that you want to paste the above link into iTunes. So, just do that. Click on the following link and paste the puppy in there. You'll get an email from iTunes saying the podcast was added and under review.
+    <br/>
+    <br/>
+    <%= link_to 'Click here to open the special "submit podcast" page in iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast' %>
+    <br/>
+    <br/>
+    <%= image_tag('http://img.skitch.com/20080518-e3kj9rsh5pje75iyu86x4hu2rw.jpg', :width => 500) %>
+  </div>
+</div>
+<div class="faq box">
+  <h2 class="box static">
+    Step 2: Wait (a few days)
+  </h2>
+  <div class="static_content">
+    After a few days have gone by, alonetone will get an email that your podcast is approved, with a link to your podcast. 
+    <b>Note: You will not get any email or notification. Only alonetone gets notification.</b>
+    <br/>
+    <br/>
+    After a few days have passed, 
+    <b>search the store for your name. </b>
+    If you don't see yourself after a week, something is wrong: email support@alonetone.com so he can take a look at it for you.
+  </div>
+</div>
+<div class="faq box">
+  <h2 class="box static">
+    Step 3: Plug the iTunes link back into alonetone
+  </h2>
+  <div class="static_content">
+    For extra credit, you'll want to edit your profile and put that link back into alonetone.
+    <br/>
+    <br/>
+    How do you find your link? Search for yourself in the iTunes store (remember, it will take a day or two). When you see a link to your podcast, right-click that link and you'll have the option to "Copy iTunes Store URL". Do it, and you'll be able to paste that magic link into alonetone. That will give you a nice direct link to iTunes from your "user bar" in alonetone.
+    <% if logged_in? %>
+      <%= link_to 'Click here to edit your profile and enter the link now...',edit_user_path(current_user) %>
+    <% else %>
+      <%= link_to 'Log in to edit your profile now', login_path %>
+    <% end %>
+    <br/>
+    <br/>
+    <%= image_tag 'http://img.skitch.com/20080520-1wi8pceugftg1nspxgfjku9g2k.jpg' %>
+  </div>
+</div>

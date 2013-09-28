@@ -1,0 +1,34 @@
+<div class="faq box">
+  <h2 class="box static">
+    Contact
+  </h2>
+  <div class="static_content">
+    You may contact sudara@alonetone.com for more information or questions.
+  </div>
+</div>
+<div class="faq box">
+  <h2 class="box static">
+    alonetone Logos for promotional use
+  </h2>
+  <div class="static_content">
+    All images are copyright Sudara Williams, though you are free to use the images for non-commercial promotional purposes. For further information or questions contact support@alonetone.com
+    <div id="logos">
+      <% %w(logo_rgb_dark_text logo_rgb_bright_text logo_cmyk_dark_text logo_cmyk_bright_text logo_grayscale_dark_text logo_grayscale_bright_text logo_black logo_white).each do |logo| %>
+        <div class="logo clearfix">
+          <%= image_tag 'press/' + logo + '_100.png' %>
+          <br/>
+          <%= logo.humanize.gsub(/Logo|text/,'') %>
+          <br/>
+          <%= link_to 'png', '/images/press/' + logo + '_500.png' %>
+          |
+          <%= link_to 'pdf', '/images/press/' + logo + '.pdf' %>
+          |
+          <%= link_to 'ai', '/images/press/' + logo + '.ai' %>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+    <br/>
+    <br/>
+  </div>
+</div>
