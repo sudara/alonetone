@@ -212,6 +212,9 @@ GEM
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    simple_form (3.0.0)
+      actionpack (>= 4.0.0, < 4.1)
+      activemodel (>= 4.0.0, < 4.1)
     skylight (0.1.8)
       activesupport (>= 3.0.0)
     slop (3.4.6)
@@ -287,6 +290,7 @@ DEPENDENCIES
   rspec-rails
   ruby-mp3info
   sass-rails
+  simple_form
   skylight
   sometimes
   soundmanager2-rails

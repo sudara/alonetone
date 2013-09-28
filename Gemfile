@@ -29,6 +29,7 @@ gem "redcarpet"
 gem "country_select"
 gem 'will_paginate'
 gem 'dynamic_form'
+gem 'simple_form'
 
 # external services
 gem 'rakismet'

@@ -1,19 +1,9 @@
-<%= form_for @user_session do |f| %>
-<p>
-  <%= f.label :login %><br />
-  <%= f.text_field :login %>
-</p>
-
-<div id="password_fields">
-<p>
-  <%= f.label :password %><br/>
-  <%= f.password_field :password %>
-</p>
-
-</div>
-
-<p><%= submit_tag 'Login'%></p>
-<% end -%>
+<%= simple_form_for @user_session do |f| %>
+  <%= f.input :login %><br/>
+  <%= f.input :password %>
+  <%= f.button :submit, "Come on in..." %>
+<% end %>
+  
 <%= link_to "Forgot Your Password?", "#reset-password", :class => "slide_open_href" %>
 
 <% form_tag users_path, :id => 'reset-password', :style => 'display:none' do -%>
