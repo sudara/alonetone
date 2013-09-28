@@ -114,14 +114,14 @@
       Display play counts blatantly on all tracks? <br/>
       <%= select_tag('user[settings][display_listen_count]', 
           options_for_select([['no thanks','false'], ['yes','true']], 
-          setting(:display_listen_count))) %>
+          user_setting(:display_listen_count))) %>
     </div>
 
     <div class="static_content">
       Accept comments from guests?<br/>
       <%= select_tag('user[settings][block_guest_comments]', 
           options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']], 
-           setting(:block_guest_comments))) %>
+           user_setting(:block_guest_comments))) %>
     </div>
 
     
@@ -129,14 +129,14 @@
       Display most popular tracks on your home page?<br/>
       <%= select_tag('user[settings][most_popular]', 
           options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']], 
-           setting(:most_popular))) %>
+           user_setting(:most_popular))) %>
     </div>
     
     <div class="static_content">
       Increase size of ego by 4x?<br/>
       <%= select_tag('user[settings][increase_ego]', 
           options_for_select([['uhm, no thanks','false'], ['hell yes!','true']], 
-          setting(:increase_ego))) %>
+          user_setting(:increase_ego))) %>
           
     </div>
     
@@ -144,7 +144,7 @@
       Should we email you new comments on your tracks?<br/>
       <%= select_tag('user[settings][email_comments]', 
           options_for_select([['of course, silly!','true'], ['I do not like email','false']], 
-          setting(:email_comments))) %>
+          user_setting(:email_comments))) %>
           
     </div>
 
@@ -152,14 +152,14 @@
       Email notifications when folks you follow upload tracks?<br/>
       <%= select_tag('user[settings][email_new_tracks]', 
           options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']], 
-          setting(:email_new_tracks))) %>
+          user_setting(:email_new_tracks))) %>
     </div>
 
     <div class="static_content">
       Remove / block your iTunes podcast? <br/>
       <%= select_tag('user[settings][block_itunes]', 
           options_for_select([['no','false'], ['yes, block my podcast url from iTunes','true']], 
-          setting(:block_itunes))) %>
+          user_setting(:block_itunes))) %>
     </div>    
     
     <div class="static_content">

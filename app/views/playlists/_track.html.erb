@@ -1,4 +1,4 @@
-<% content_tag :div, :id => ("track_#{track.id}"), :class => 'asset unopenable ' + cycle('odd', 'even') do %>
+<%= content_tag :div, :id => ("track_#{track.id}"), :class => 'asset unopenable ' + cycle('odd', 'even') do %>
 	<div class="play-button button"><%= link_to_play track.asset %></div>
 	<div class="title">
 	 <%= link_to track_name_for(track.asset,30), user_track_path(track.asset.user, track.asset.permalink), :class => 'track_link' %><br/>
@@ -6,7 +6,7 @@
    <%= link_to track.asset.user.name, user_home_path(track.asset.user), :class => 'artist' %>
 	 <span class='counter'> </span>
 	 
-	 <% if setting(:display_listen_count) == 'true' %>
+	 <% if user_setting(:display_listen_count) == 'true' %>
 	    <span class="listen_count"><%= track.asset.listens_count %></span>
 	 <% end %>
 	   

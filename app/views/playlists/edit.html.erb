@@ -4,7 +4,7 @@
 <% content_for :left do %>
   
   <div id="edit_playlist">
-    <% render :layout => 'playlist_layout' do %>
+    <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
 
       <%= link_to 'edit title &amp; description','#edit_playlist_info',:class=>'slide_open_href edit_in_box right' %>
       
@@ -16,7 +16,7 @@
     		<% end %>
       </div>
       <div id="edit_playlist_info" class="static_content" style="display:none;">
-        <%= link_to 'delete playlist', destroy_user_playlist_path(@user, @playlist), :class => 'delete button'%>
+        <%= link_to 'delete playlist', user_playlist_path(@user, @playlist), :class => 'delete button'%>
 
         <%= form_for [@user, @playlist] do |f| %>
             <%= render :partial => 'form', :locals => {:f => f} %>
@@ -39,6 +39,28 @@
 
 
 <% content_for :right do %>
-  <%= render :partial => 'playlist_sources' %>
+<div id="playlist_sources" class="draggable_wrapper">	
+	<div class="draggable_tracks">
+		<h2 class="box">Available tracks</h2>
+		  
+		  <div id="playlist_tabs">
+        <ul id="playlist_source_options" class="tabs">
+          <li><%= link_to 'Your Uploads', '#your_uploads', :class => 'playlist_option', :id => 'open_your_stuff' if @user.has_tracks? %>      </li>
+          <li><%= link_to "Your Listens", "#your_listens", :class => 'playlist_option', :id => 'open_your_listens' %>                         </li>
+          <li><%= link_to "Favs", '#your_favorites', :class => 'playlist_option',:id => 'open_your_favorites' %>                                            </li>
+        </ul>
+  
+         <%= render :partial => 'your_stuff' %>
+
+
+  	     <%= render :partial => 'your_listens' %>
+         
+         
+         <%= render :partial => 'your_favorites' if @favorites%>
+    	
+		  </div>
+		
+	</div>
+</div>
 <% end %>
 
