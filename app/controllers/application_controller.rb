@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
   
   protected
+  
+  def is_from_a_bad_ip?
+    @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
+  end
       
   def user_not_found
     if @user

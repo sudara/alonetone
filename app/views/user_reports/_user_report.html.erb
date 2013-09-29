@@ -9,7 +9,7 @@
 
 	<div class="title">
     	<span class="box_title"><%= user_report.user ? (link_to (h user_report.user.name), user_home_path(user_report.user)) : 'Guest' %>
-    	said <%= time_ago_in_words(user_report.created_at) %> ago</span>
+    	said <%= friendly_time_ago(user_report.created_at) %> ago</span>
   	</div>
 	 
 	<% if admin? %>

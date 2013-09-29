@@ -23,6 +23,7 @@ gem "acts_as_list"
 gem "has_permalink"
 gem "authlogic", :git => 'https://github.com/binarylogic/authlogic.git' # rails 4 fixes in master
 gem 'reportable', :git => 'git://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 # view
 gem "redcarpet"

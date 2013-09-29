@@ -1,10 +1,4 @@
-<%= error_messages_for :user %>
-
 <% content_for :left do %>
-  <%= render :partial => 'join' %>
-<% end %>
-
-<% content_for :right do %>
   	<h2 class="box">Why alonetone?</h2>
   	<div id="what-you-get" class="box static_content">
 
@@ -19,13 +13,14 @@
   
     <%= image_tag 'promo/itunes-podcast.jpg'%>
     <h2 class='hug'>Get your music on itunes...</h2>
-
-    <%= image_tag 'promo/add-to-facebook.jpg'%>
-    <h2 class='hug'>...facebook</h2>
   
     <%= image_tag 'promo/embed-player.jpg'%>
     <h2 class='hug'>...and any website, forum or blog</h2>
   </div>
 
+<% end %>
+
+<% content_for :right do %>
+  <%= render :partial => 'join' %>
 <% end %>
 

@@ -37,14 +37,14 @@ describe AssetsController do
     GOOD_USER_AGENTS.each do |agent|
       it "should register a listen for #{agent}" do
         request.user_agent = agent
-        expect{ subject }.to change(Listen, :count).by(1)  
+        expect{ subject }.to change{ Listen.count }.by(1)  
       end
     end
   
     BAD_USER_AGENTS.each do |agent|
       it "should not register a listen for #{agent}" do
         request.user_agent = agent
-        expect{ subject }.not_to change(Listen, :count).by(1)  
+        expect{ subject }.not_to change{ Listen.count }.by(1)  
       end
     end
   

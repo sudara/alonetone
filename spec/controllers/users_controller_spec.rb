@@ -8,7 +8,7 @@ describe UsersController do
   context 'creating' do   
     it "should successfully post to users/create" do
       create_user
-      response.should redirect_to("/login")
+      response.should redirect_to("/login?already_joined=true")
     end
     
     it "should send user activation email after signup" do

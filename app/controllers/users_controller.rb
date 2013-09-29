@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   
+  before_filter :ip_is_acceptable?, :only => :create
   before_filter :find_user, :except => [:new, :create]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   
@@ -40,17 +41,18 @@ class UsersController < ApplicationController
     @page_title = "Join alonetone to upload your music in mp3 format"
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
-  
 
-  def create
-    return false if @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
+  def create    
+    passed_recaptcha?
     @user = User.new(params[:user])
-    if @user.save_without_session_maintenance
+    if @user.valid? and passed_recaptcha? and @user.save_without_session_maintenance
+      session[:recaptcha] = false # make sure they have to recaptcha for new user
       @user.reset_perishable_token!
       UserNotification.signup(@user).deliver
-      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>You just have to click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
-      redirect_to login_url
+      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+      redirect_to login_url(:already_joined => true)
     else
+      flash[:error] = "Hrm, that didn't quite work, try again?"
       render :action => :new
     end
   end
@@ -129,6 +131,19 @@ class UsersController < ApplicationController
   end
 
   protected
+  
+  def ip_is_acceptable?
+    !is_from_a_bad_ip?
+  end
+  
+  def passed_recaptcha?
+    if (session[:recaptcha] == true) || !Alonetone.recaptcha_public.present?
+      @bypass_recaptcha = true  # bypass when already entered or setting not present 
+    else
+      @bypass_recaptcha = session[:recaptcha] = verify_recaptcha(:model => @user) 
+    end
+  end
+  
   def prepare_meta_tags
     @page_title = (@user.name)
     @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      

@@ -11,7 +11,7 @@
 	 <% end %>
 	   
 	 <span class='time'><%= track.asset.length%></span>
-	  <span class="when" style="display:none;"><%= time_ago_in_words track.asset.created_at %> ago</span>
+	  <span class="when" style="display:none;"><%= friendly_time_ago track.asset.created_at %> ago</span>
 	</div>
 	
 	<div class="delete-button button">

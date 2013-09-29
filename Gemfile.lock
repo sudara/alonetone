@@ -190,6 +190,7 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
+    recaptcha (0.3.5)
     redcarpet (3.0.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -285,6 +286,7 @@ DEPENDENCIES
   rails-footnotes
   rakismet
   rb-fsevent (~> 0.9.1)
+  recaptcha
   redcarpet
   reportable!
   rspec-mocks

@@ -7,7 +7,7 @@ class Update < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   
   def print
-    self.content_html || BlueCloth::new(self.content).to_html
+    self.content_html.html_safe || BlueCloth::new(self.content).to_html.html_safe
   end
   
   # The following methods help us keep dry w/ comments

@@ -1,14 +1,15 @@
-# -*- encoding : utf-8 -*-
-# FLASH STUFF
 FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
-
-require 'will_paginate'
-require 'will_paginate/view_helpers'
-
 PASSWORD_SALT = 'so_salty_its_unbearable'
 
 require 'authlogic_helpers'
 require 'sometimes'
+
+if Alonetone.recaptcha_public.present?
+  Recaptcha.configure do |config|
+    config.public_key  = Alonetone.recaptcha_public
+    config.private_key = Alonetone.recaptcha_private
+  end
+end
 
 WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2
 WillPaginate::ViewHelpers.pagination_options[:outer_window] = 0

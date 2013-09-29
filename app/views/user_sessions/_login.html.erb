@@ -3,8 +3,10 @@
   <%= f.input :password %>
   <%= f.button :submit, "Come on in..." %>
 <% end %>
-  
-<%= link_to "Forgot Your Password?", "#reset-password", :class => "slide_open_href" %>
+
+<p>
+  <%= link_to "Forgot Your Password?", "#reset-password", :class => "slide_open_href" %>
+</p>
 
 <% form_tag users_path, :id => 'reset-password', :style => 'display:none' do -%>
     <label for="email"><%= 'Enter the email address you signed up with' %></label><br />

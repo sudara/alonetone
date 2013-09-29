@@ -148,7 +148,7 @@ class AssetsController < ApplicationController
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
      if @assets.present?
-       flash[:error] = flashes
+       flash[:error] = flashes.html_safe
       else
         flashe[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email support@alonetone.com" 
       end
@@ -271,7 +271,7 @@ class AssetsController < ApplicationController
     return true unless request.user_agent.present?
     
     # can't be a blacklisted ip
-    return true if @@bad_ip_ranges.any?{|cloaked_ip| request.remote_ip.match /^#{cloaked_ip}/  }  
+    return true if is_from_a_bad_ip?
     
     # check user agent agaisnt both white and black lists
     not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent}  

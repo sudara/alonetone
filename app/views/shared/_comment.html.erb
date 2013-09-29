@@ -25,7 +25,7 @@
 		(<%= comment.remote_ip %>) 
 	</span>
 	<% end %>
-	said <%= time_ago_in_words(comment.created_at) %> ago
+	said <%= friendly_time_ago(comment.created_at) %> ago
   </div>
   
 	<div class="comment_body">

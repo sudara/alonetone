@@ -2,6 +2,7 @@
 class UserSessionsController < ApplicationController
   def new
     @page_title = "Login"
+    @user = User.new
     @user_session = UserSession.new
   end
 
