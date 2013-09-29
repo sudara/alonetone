@@ -4,6 +4,7 @@ class UserSessionsController < ApplicationController
     @page_title = "Login"
     @user = User.new
     @user_session = UserSession.new
+    @bypass_recaptcha = true unless RECAPTCHA_ENABLED
   end
 
   def create
