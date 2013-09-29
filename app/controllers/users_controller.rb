@@ -137,7 +137,7 @@ class UsersController < ApplicationController
   end
   
   def passed_recaptcha?
-    if (session[:recaptcha] == true) || !Alonetone.recaptcha_public.present?
+    if (session[:recaptcha] == true) || !RECAPTCHA_ENABLED
       @bypass_recaptcha = true  # bypass when already entered or setting not present 
     else
       @bypass_recaptcha = session[:recaptcha] = verify_recaptcha(:model => @user) 

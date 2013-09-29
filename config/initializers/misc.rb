@@ -4,7 +4,9 @@ PASSWORD_SALT = 'so_salty_its_unbearable'
 require 'authlogic_helpers'
 require 'sometimes'
 
-if Alonetone.recaptcha_public.present?
+RECAPTCHA_ENABLED = Alonetone.defined? :recaptcha_public
+  
+if RECAPTCHA_ENABLED
   Recaptcha.configure do |config|
     config.public_key  = Alonetone.recaptcha_public
     config.private_key = Alonetone.recaptcha_private
