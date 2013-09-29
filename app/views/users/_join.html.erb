@@ -6,7 +6,7 @@
     <%= f.input :email, :hint => "(we will send you an activation email)" %>
     <%= f.input :password, :hint => "(pick a nice password)"%>
     <%= f.input :password_confirmation, :hint => "(enter it once again)" %>
-    <%= raw(recaptcha_tags) unless @bypass_recaptcha %>
+    <%= raw(recaptcha_tags(:display => {:theme => 'white'})) unless @bypass_recaptcha %>
     <br/>
     <%= f.button :submit, "Join Alonetone"  %>
 	<% end %>
