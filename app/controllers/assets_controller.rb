@@ -211,7 +211,7 @@ class AssetsController < ApplicationController
     @assets = []
     params[:asset_data].each do |file|
       unless file.is_a?(String)
-        @assets << current_user.assets.create(file)
+        @assets << current_user.assets.create(:mp3 => file)
       end
     end
   end

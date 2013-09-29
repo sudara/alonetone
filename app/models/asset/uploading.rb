@@ -62,7 +62,7 @@ class Asset
   
   def emails_of_followers(asset)
     followers_of(asset).inject([]) do |emails, follower| 
-      emails << follower.email if user_wants_email?(follower)
+      emails << follower.email if follower.wants_email?
       emails
     end 
   end

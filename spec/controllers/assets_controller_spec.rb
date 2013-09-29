@@ -83,7 +83,7 @@ describe AssetsController do
   context '#create' do
     subject do
       login(:sudara)
-      post :create, :user_id => users(:sudara).login, :asset_data => [{:mp3 => fixture_file_upload('assets/muppets.mp3','audio/mpeg')}]
+      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
     end
     
     it 'should successfully upload an mp3' do 
@@ -95,8 +95,8 @@ describe AssetsController do
     
     it 'should successfully upload 2 mp3s' do 
       login(:sudara)
-      post :create, :user_id => users(:sudara).login, :asset_data => [{:mp3 => fixture_file_upload('assets/muppets.mp3','audio/mpeg')},
-        {:mp3 => fixture_file_upload('assets/muppets.mp3','audio/mpeg')}]
+      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),
+        fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
       flash[:error].should_not be_present      
       response.should redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s )
     end
