@@ -17,6 +17,7 @@ class UserSessionsController < ApplicationController
       else
         flash.now[:error] = "There was a problem logging you in! Please re-check your email and password."
       end
+      @user = User.new
       render :action => :new
     end
   end

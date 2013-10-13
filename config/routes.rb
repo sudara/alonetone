@@ -56,6 +56,7 @@ Alonetone::Application.routes.draw do
   get ':login/history' => 'listens#indexn', :as => 'listens'
   
   get 'comments' => 'comments#index', :as => 'all_comments'
+  get 'playlists' => 'comments#index', :as => 'all_playlists'
   get ':login/comments' => 'comments#index', :as => 'user_comments'
   get ':login/stats.:format' => 'users#stats', :as => 'user_stats'
   
