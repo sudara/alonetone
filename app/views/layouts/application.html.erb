@@ -1,81 +1,75 @@
-<!DOCTYPE HTML>
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
     <title><%= @page_title || 'alonetone, a damn fine home for musicians' %></title>
-    
+
     <%= stylesheet_link_tag 'application' %>    
     <%= stylesheet_link_tag 'ipad', :media => "only screen and (max-device-width: 1024px)" %>
-		<%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
-		
+    <%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
+
     <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="apple-touch-icon" href="/images/ipad_icon.png"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <meta content="index,follow" name="robots"/>
     <%= csrf_meta_tag %>
     <meta content="<%=@description ||  'alonetone, the kick ass home for musicians. Listen and download free music from independent artists. Unlimited space for artists to upload mp3s' %>" name="Description"/>
-		<meta content="<%=@keywords || 'alonetone, upload, mp3, musician, home, music, independent, artist, free, legal, mp3'%>" name="Keywords" />
-		
-		<%= yield :css %>
-		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
-		<link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
-    
+    <meta content="<%=@keywords || 'alonetone, upload, mp3, musician, home, music, independent, artist, free, legal, mp3'%>" name="Keywords" />
+
+    <%= yield :css %>
+    <link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
+    <link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
+
     <% if Alonetone.typekit %>
-    <script type="text/javascript" src="http://use.typekit.com/<%= Alonetone.typekit %>.js"></script>
-	  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+      <script type="text/javascript" src="http://use.typekit.com/<%= Alonetone.typekit %>.js"></script>
+      <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <% end %>
   
-    <!-- render user specific variables and js helpers -->
-    <%= render :partial => 'shared/javascript_payload' %>
-  
+      <!-- render user specific variables and js helpers -->
+      <%= render :partial => 'shared/javascript_payload' %>
   </head>
+
   <body>
-      <div id="top_bar">
-        <%= render :partial => 'shared/top_bar', :current_user => current_user %>
-      </div>
-      <div id="header">
-        <a href="/" title="go home to alonetone" id="logo"></a>
-				<%= render :partial=> 'shared/nav' %>
-      </div> <!-- end of header -->
+    <div id="top_bar">
+      <%= render :partial => 'shared/top_bar', :current_user => current_user %>
+    </div>
+    <div id="header">
+      <a href="/" title="home" id="logo"></a>
+  		<%= render :partial=> 'shared/nav' %>
+    </div> 
+    
+  	<div id="wrapper">
+      <div id="content" class="content">    
+  		  <%= check_for_and_display_welcome_back %>
+  		  <%= check_for_and_display_flashes %>
+        <div id="main">
+          <%= 
+              if yield(:pages).present?
+                yield(:pages)
+              elsif yield(:forums).present?
+                yield(:forums)
+              else
+                yield
+              end
+          %>
+        </div>
+        <div id="static">
+            <%= yield :static %>
+        </div>
+        <div id="columns">
+  				<div id="left">
+  					<%= yield :left %>
+  				</div>
 		
-	<div id="wrapper">
-    <div id="content" class="content">    
-		  <%= check_for_and_display_welcome_back %>
-		  <%= check_for_and_display_flashes %>
-      <div id="main">
-        
-    <%= 
-        if yield(:pages).present?
-          yield(:pages)
-        elsif yield(:forums).present?
-          yield(:forums)
-        else
-          yield
-        end
-    %>
-      </div>
-      <div id="static">
-          <%= yield :static %>
-      </div>
-      <div id="columns">
-				<div id="left">
-					<%= yield :left %>
-				</div>
-		
-				<div id="right">
-					<%= yield :right %>
-				</div>	
-				<div class="clear"> </div>
-				<%= yield :bottom %>
-	  </div> <!-- end columns -->
-
-
-	    </div><!-- end content -->
-	  </div><!-- end wrapper -->
+  				<div id="right">
+  					<%= yield :right %>
+  				</div>	
+  				<div class="clear"> </div>
+  				<%= yield :bottom %>
+  	    </div> <!-- end columns -->
+  	  </div><!-- end content -->
+  	</div><!-- end wrapper -->
 		<%= render :partial => 'shared/footer' %>
     <%= javascript_include_tag "application" %>
     <%= render :partial => 'shared/analytics' %>
