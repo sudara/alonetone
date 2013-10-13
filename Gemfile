@@ -31,6 +31,7 @@ gem "country_select"
 gem 'will_paginate'
 gem 'dynamic_form'
 gem 'simple_form'
+gem 'gemoji'
 
 # external services
 gem 'rakismet'

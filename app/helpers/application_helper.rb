@@ -60,11 +60,21 @@ module ApplicationHelper
 
   def markdown(text)
     return "" unless text
+    text = emojify(text)
     @renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
       :hard_wrap => true, :autolink => true, :no_intraemphasis => true) unless @renderer
     Redcarpet::Render::SmartyPants.render(@renderer.render(text)).html_safe
   end
-
+  
+  def emojify(content)
+    content.gsub(/:([a-z0-9\+\-_]+):/) do |match|
+      if Emoji.names.include?($1)
+        '<img alt="' + $1 + '" height="20" src="' + asset_path("emoji/#{$1}.png") + '" style="vertical-align:middle" width="20" />'
+      else
+        match
+      end
+    end.html_safe
+  end
 
   def link_to_play(asset, referrer=nil)
     link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referrer => referrer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'

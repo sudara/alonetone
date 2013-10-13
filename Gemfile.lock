@@ -117,6 +117,7 @@ GEM
     ffi (1.9.0)
     formatador (0.2.4)
     fssm (0.2.10)
+    gemoji (1.4.0)
     geokit (1.6.5)
       multi_json
     guard-rspec (2.5.4)
@@ -267,6 +268,7 @@ DEPENDENCIES
   database_cleaner
   dynamic_form
   factory_girl_rails
+  gemoji
   geokit
   guard!
   guard-rspec
