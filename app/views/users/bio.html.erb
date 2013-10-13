@@ -53,7 +53,7 @@
     <h2 class="box static"><%= @user.name %>'s stats</h2>
     
     <div class="bio static_content">
-        Last seen <%= friendly_time_ago(@user.last_seen_at || @user.created_at)%> ago <br />
+        Last seen <%= friendly_time_ago(@user.last_seen_at || @user.created_at)%> <br />
 	    <% if @user.listens_count > 0 %>
   		People have listened to <%= @user.name %>'s <%= pluralize @user.assets_count, 'track' %> about <%= @user.listens_count %> times.<br/>
   		<% end %>

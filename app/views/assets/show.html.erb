@@ -9,6 +9,7 @@
           :title => 'delete this track permanently '%>
       </div>
   <% end %>
+  
   <div id="single_track" class="box">
     <%= render :partial => 'assets/assets'%>  
     <%= favorite_toggle(@asset) if logged_in? %>
