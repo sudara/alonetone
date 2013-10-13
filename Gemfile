@@ -43,7 +43,7 @@ group :assets do
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "sass-rails"
-  gem 'compass-rails', git: 'git://github.com/milgner/compass-rails.git', branch: 'rails4'
+  gem 'compass-rails', github: 'Compass/compass-rails', branch: 'rails4'
   gem 'yui-compressor'
   gem 'uglifier'
   gem "coffee-rails"
