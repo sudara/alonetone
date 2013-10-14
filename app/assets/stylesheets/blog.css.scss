@@ -49,7 +49,7 @@ body {
   font-size: 10px;
   position: relative;
   margin: auto;
-  background: #e4e4d9 image-url('/blog/back.png') no-repeat center 30px;
+  background: #e4e4d9 url('blog/back.png') no-repeat center 30px;
 }
 html {
   width: 990px;
@@ -292,7 +292,6 @@ a.atweet {
   margin: 0;
   padding: 0;
   margin: auto;
-  !text-decoration:none;
 }
 /*tweeter end*/
 /*end right side container*/
@@ -651,9 +650,6 @@ div.ajax_fail{
   font-size: 16px;
 }
 
-/*ul li post styles end*/ {
-  -moz-outline-style: none;
-}
 
 
 
