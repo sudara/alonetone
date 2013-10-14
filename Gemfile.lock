@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/Compass/compass-rails.git
-  revision: 3e0040191220992eb6d5ccc17ddcc053733ee538
-  branch: rails4
-  specs:
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
-
-GIT
   remote: git://github.com/saulabs/reportable.git
   revision: 7ab93765296ffddba9b6c4ced20188a5136fc6c3
   specs:
@@ -100,6 +92,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (2.0.alpha.0)
+      compass (>= 0.12.2, < 0.14)
     country_select (1.2.0)
     daemons (1.1.9)
     database_cleaner (1.0.1)
@@ -263,7 +257,7 @@ DEPENDENCIES
   awesome_print
   aws-sdk
   coffee-rails
-  compass-rails!
+  compass-rails (= 2.0.alpha.0)
   country_select
   database_cleaner
   dynamic_form

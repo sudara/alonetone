@@ -43,7 +43,7 @@ gem 'skylight'
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "sass-rails"
-gem 'compass-rails', github: 'Compass/compass-rails', branch: 'rails4'
+gem 'compass-rails', '2.0.alpha.0'
 gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
