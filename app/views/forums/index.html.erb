@@ -33,7 +33,7 @@
         <%= pluralize forum.topics.count, 'topic' %>, 
         <%= pluralize forum.posts.count, 'post' %>
       </div>
-      <p class="desc"><%= forum.description_html.html_safe %>
+      <p class="desc"><%= "#{forum.description_html}".html_safe %>
       </p>
     </td>
     <td class="c3">
