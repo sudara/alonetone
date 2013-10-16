@@ -5,7 +5,6 @@
 
     <%= stylesheet_link_tag 'application' %>    
     <%= stylesheet_link_tag 'ipad', :media => "only screen and (max-device-width: 1024px)" %>
-    <%= stylesheet_link_tag 'ie6' if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" %>
 
     <%= '<meta name="robots" content="noindex,nofollow" />' unless request.host =~ /^http:\/\/alonetone.com|^alonetone.com/ %>
 
