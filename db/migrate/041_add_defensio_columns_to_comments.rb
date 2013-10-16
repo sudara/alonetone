@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddDefensioColumnsToComments < ActiveRecord::Migration
   def self.up
     add_column :comments, :spam,      :boolean, :default => false

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class SourceFilesController < ApplicationController
   before_filter :require_login, :except => [:show]
   before_filter :find_user, :only => [:show, :index, :destroy]

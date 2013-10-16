@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Update < ActiveRecord::Base
     
   has_permalink :title

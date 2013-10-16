@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateFeatures < ActiveRecord::Migration
   def self.up
     create_table :features do |t|

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddFbUserIds < ActiveRecord::Migration
   def self.up
     add_column :users, :fb_user_id, :integer

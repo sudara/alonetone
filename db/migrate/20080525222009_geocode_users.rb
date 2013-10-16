@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class GeocodeUsers < ActiveRecord::Migration
   def self.up
     User.with_location.each{|u| u.geocode_address; u.save }

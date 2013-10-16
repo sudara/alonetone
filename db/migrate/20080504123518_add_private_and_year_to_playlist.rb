@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddPrivateAndYearToPlaylist < ActiveRecord::Migration
   def self.up
     add_column :playlists, :year, :string

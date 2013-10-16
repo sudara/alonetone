@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class SetPlaylistToAlbumOrMix < ActiveRecord::Migration
   def self.up
     # if any tracks in the playlist are not from the user, it is a mix

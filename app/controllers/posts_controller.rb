@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class PostsController < ApplicationController
   before_filter :find_parents
   before_filter :find_post, :only => [:edit, :update, :destroy]

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class TellPlaylistsToWakeUp < ActiveRecord::Migration
   def self.up
     remove_column :playlists, :tracks_count

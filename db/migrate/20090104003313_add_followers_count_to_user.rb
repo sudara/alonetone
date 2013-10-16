@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddFollowersCountToUser < ActiveRecord::Migration
   def self.up
     add_column :users, :followers_count, :integer, :default => 0

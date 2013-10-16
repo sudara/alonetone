@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateAssets < ActiveRecord::Migration
   def self.up
     create_table "assets", :force => true do |t|

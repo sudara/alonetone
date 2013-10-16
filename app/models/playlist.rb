@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Playlist < ActiveRecord::Base
   
   acts_as_list :scope => :user_id, :order => :position

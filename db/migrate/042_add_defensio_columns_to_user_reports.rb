@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddDefensioColumnsToUserReports < ActiveRecord::Migration
   def self.up
     add_column :user_reports, :spam,      :boolean, :default => false

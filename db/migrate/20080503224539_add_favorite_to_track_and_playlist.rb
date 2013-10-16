@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddFavoriteToTrackAndPlaylist < ActiveRecord::Migration
   def self.up
     add_column :tracks, :is_favorite, :boolean, :default => false

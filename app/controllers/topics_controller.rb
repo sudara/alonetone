@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class TopicsController < ApplicationController
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]

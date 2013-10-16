@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class UpdateToAuthlogic < ActiveRecord::Migration
   def up
     change_column :users, :crypted_password, :string, :limit => 128,

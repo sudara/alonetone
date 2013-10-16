@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 require 'rubygems'
 
 # some nice doc/examples for rpsec 2

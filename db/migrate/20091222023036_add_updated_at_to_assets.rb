@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddUpdatedAtToAssets < ActiveRecord::Migration
   def self.up
     add_column :assets, :updated_at, :datetime

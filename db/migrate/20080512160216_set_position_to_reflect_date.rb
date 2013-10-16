@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class SetPositionToReflectDate < ActiveRecord::Migration
   def self.up
     User.find(:all).each do |user|

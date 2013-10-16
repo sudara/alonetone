@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module PagesHelper
     
   # proper date format for google sitemaps

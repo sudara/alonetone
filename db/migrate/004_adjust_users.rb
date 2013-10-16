@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AdjustUsers < ActiveRecord::Migration
   def self.up
       remove_column 'users', 'last_updated_at'

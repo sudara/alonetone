@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddListensIndex < ActiveRecord::Migration
   def self.up
     add_index :listens, :created_at

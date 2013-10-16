@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddRevisionToUpdates < ActiveRecord::Migration
   def self.up
     add_column :updates, :revision, :integer

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class FeaturesController < ApplicationController
   
   before_filter :require_login,  :only => [:new, :create, :edit, :update, :delete]

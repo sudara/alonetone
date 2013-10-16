@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddCountsForListens < ActiveRecord::Migration
   def self.up
     add_column :assets, :listens_count, :integer, :default => '0'

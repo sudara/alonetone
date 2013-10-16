@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 Alonetone::Application.routes.draw do
   resources :groups
 

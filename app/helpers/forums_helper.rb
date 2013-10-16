@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module ForumsHelper
   
   def search_posts_title

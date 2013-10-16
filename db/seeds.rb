@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 require 'active_record/fixtures'
 
 admin = User.create(:login => 'admin', :password => 'testing123', :password_confirmation => 'testing123')

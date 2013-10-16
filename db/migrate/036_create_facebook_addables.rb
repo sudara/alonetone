@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateFacebookAddables < ActiveRecord::Migration
   def self.up
     create_table :facebook_addables do |t|

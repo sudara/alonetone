@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class ChangeToPasswordHash < ActiveRecord::Migration
   def self.up
     rename_column :users, :crypted_password, :password_hash

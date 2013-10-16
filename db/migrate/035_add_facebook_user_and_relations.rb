@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddFacebookUserAndRelations < ActiveRecord::Migration
   def self.up
     # out with the old

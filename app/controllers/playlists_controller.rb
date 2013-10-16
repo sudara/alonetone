@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class PlaylistsController < ApplicationController
   
   before_filter :find_user

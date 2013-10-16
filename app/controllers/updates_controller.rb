@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # Yup, this is the blog controller 
 class UpdatesController < ApplicationController
   before_filter :require_login, :except => [:index, :show]

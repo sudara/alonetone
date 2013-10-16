@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class MovePictoPaperclip < ActiveRecord::Migration
   def up
     # before

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddPermalinkToGroups < ActiveRecord::Migration
   def self.up
     add_column :groups, :permalink, :string

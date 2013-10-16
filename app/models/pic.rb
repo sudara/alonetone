@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Pic < ActiveRecord::Base
   belongs_to :picable, :polymorphic => true, :touch => true
 

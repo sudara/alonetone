@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateListens < ActiveRecord::Migration
   def self.up
     create_table :listens do |t|

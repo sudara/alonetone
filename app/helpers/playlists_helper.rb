@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module PlaylistsHelper
   
   def title_and_year_for(playlist)

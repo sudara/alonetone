@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Topic < ActiveRecord::Base
 
   before_validation :set_default_attributes, :on => :create

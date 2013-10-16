@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class Comment < ActiveRecord::Base
   
   scope :recent,             -> { order('id DESC')                                                                                 }

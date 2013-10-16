@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class AddStalkings < ActiveRecord::Migration
   def self.up
     create_table :stalkings do |t|

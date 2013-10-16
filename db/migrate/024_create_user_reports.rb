@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateUserReports < ActiveRecord::Migration
   def self.up
     create_table :user_reports do |t|

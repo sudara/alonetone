@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CommentsController < ApplicationController
   
   before_filter :find_user
