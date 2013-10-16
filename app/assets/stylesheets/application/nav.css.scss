@@ -1,84 +1,52 @@
-@import "variables";
-
-// variables for nav w/o images
-$active_tab_background: #e1e2e1;
-$normal_tab_background: #45473c;
-$hover_tab_background: #da6d25;
-
-$active_tab_text: #37392b;
-$normal_tab_text: #c1cab3;
-$hover_tab_text: #f6fceb;
-
-$default-text-shadow-color: rgba(black, 0.6);
-$default-text-shadow-blur: 3px;
-$default-text-shadow-v-offset: 1px;
-$default-text-shadow-h-offset: 2px;
-
-ul#nav {
-  background: none;
-  li {
-    float: left;
-    height: 65px;
-    line-height: 0;
-    padding: 0;
-    margin-right: 20px;
-    background: none;
-    @include box-shadow(#111111 0px 0px 5px); 
-    a {
-      float: left;
-      display: block;
-      margin: 0;
-      height: 64px;
-      padding-left: 20px;
-      color: #c1cab3;
-      line-height: 86px;
-      font-size: 18px;
-      font-weight: normal;
-      font-family: $header_font;
-      letter-spacing: .6px;
-      @include background-image(linear-gradient(#4a4b41, #313327));
-      @include single-text-shadow;
-      &:hover {
-        color: #f6fceb;
-        @include background-image(linear-gradient(#ffa159, #da6d25));
-        text-decoration: none;
-      }
-      &.active {
-          @include background-image(linear-gradient(#eef1e9, #d1dac3));
-          height: 74px;
-          color: #37392b;
-          line-height: 104px;
-          @include text-shadow(rgba(#333333, 0.2) 0px 0px 0);
-          &:hover {
-          }
-        }
-    }
-
-    &#home {
-      margin-right: 70px;
-      a {
-        width: 86px;
-      }
-    }
-    &#browse {
-      a {
-        width: 98px;
-      }
-    }
-    &#upload {
-      a {
-        width: 97px;
-      }
-    }
-    &#your_stuff {
-      a {
-        width: 119px;
-      }
-    }
-    &#forums {
-      a {
-        width: 104px;
-      }
-    }
-  }
+#nav {
+	li {
+		@include box-shadow(#111111 0 0 5px);
+		display: inline-block;
+		margin-right: 20px;
+		vertical-align: top;
+		a {
+			@include background-image(linear-gradient(#4a4b41, #313327));
+			@include text-shadow(rgba(black, 0.8) 1px 2px 3px);
+			display: block;
+			padding-left: 20px;
+			height: 64px;
+			color: #c1cab3;
+			letter-spacing: .6px;
+			font-weight: normal;
+			font-size: 18px;
+			font-family: $header_font;
+			line-height: 86px;
+			&:hover {
+				@include background-image(linear-gradient(#ffa159, #da6d25));
+				@include text-shadow(none);
+				color: #f6fceb;
+				text-decoration: none;
+			}
+			&.active {
+				@include background-image(linear-gradient(#eef1e9, #d1dac3));
+				@include text-shadow(none);
+				height: 74px;
+				color: #37392b;
+				line-height: 104px;
+			}
+		}
+	}
+	#home {
+		margin-right: 70px;
+		a {
+			width: 86px;
+		}
+	}
+	#browse a {
+		width: 98px;
+	}
+	#upload a {
+		width: 97px;
+	}
+	#your_stuff a {
+		width: 119px;
+	}
+	#forums a {
+		width: 104px;
+	}
 }

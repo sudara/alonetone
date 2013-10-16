@@ -1,11 +1,15 @@
 <div id="welcome" class="notice">
 
+  <%= image_tag "welcome_notice.png" %>
+
+  <div class="welcome_to_alonetone">
+  	Welcome to <span class="welcome_alonetone">alonetone</span>
+  </div>
   
-  <div class="welcome-to-alonetone">Welcome to <span class="welcome-alonetone">alonetone</span></div>
-
-  <div class="a-damn-fine-home">a damn fine home for musicians</div>
-
-  alonetone gives musicians a home for their music<br/> 
-  unlimited distribution, sharing tools &amp; warm fuzzies <br/><br/>
+  <div class="a_damn_fine_home">
+  	a damn fine home for musicians
+  </div>
+  alonetone gives musicians a home for their music<br> 
+  unlimited distribution, sharing tools &amp; warm fuzzies <br><br>
   <%=link_to 'Sign up', signup_path, :title => 'sign up to upload your music' %> to start uploading your tracks or <%=link_to 'read our FAQ', about_path, :title => 'help' %>
 </div>

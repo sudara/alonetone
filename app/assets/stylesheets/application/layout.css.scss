@@ -1,6 +1,3 @@
-// import variables
-@import "variables";
-
 html,body {
   background-color: $body_background;
 }
@@ -13,7 +10,6 @@ html,body {
   height: 110px;
   z-index: 5;
   @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
-  background-color: $body_background;
 }
 
 a#logo {
@@ -27,24 +23,17 @@ a#logo {
 }
 
 #nav {
-  position: absolute;
-  top: 0px;
-  left: 50px;
-  height: 80px;
-  width: 830px;
-  background: none;
+  margin-left: 54px;
 }
 
 #wrapper {
-  position: relative;
-  margin: 0;
-  padding: 0;
+  // position: relative;
   @include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
   margin-top: 123px;
 }
 
 #content {
-  position: relative;
+  // position: relative;
   margin-left: 50px;
   margin-bottom: 150px;
   width: 890px;
@@ -54,8 +43,6 @@ a#logo {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0;
-  padding: 0;
   @include background-image(linear-gradient(#282920, #070705));
   height: 29px;
   width: 100%;
@@ -274,29 +261,36 @@ div.notice, div.errorExplanation {
   border-top: 1px solid #6f6f6f;
 }
 
-div#welcome {
+// This is more specific than layout
+#welcome {
   @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
   height: 153px;
   width: 830px;
   padding-top: 20px;
   padding-left: 26px;
-}
 
-.welcome-to-alonetone {
-  font-family: $header_font, Helvetica, Arial;
+  img {
+    position: absolute;
+    top: 0px;
+    left: 450px;
+  }
+
+  .welcome_to_alonetone {
+  font-family: $header_font;
   font-weight: bold;
   font-size: 30px;
   color: #37392b;
-}
+  }
 
-.welcome-alonetone {
-  color: $orange;
-  letter-spacing: 1.1px;
-}
+  .welcome_alonetone {
+    color: $orange;
+    letter-spacing: 1.1px;
+  }
 
-.a-damn-fine-home {
-  font-family: $header_font, Helvetica, Arial;
-  color: #7d7f76;
-  font-size: 18px;
-  margin-bottom: 40px;
+  .a_damn_fine_home {
+    font-family: $header_font;
+    color: #7d7f76;
+    font-size: 18px;
+    margin-bottom: 40px;
+  }  
 }
