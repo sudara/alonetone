@@ -2,20 +2,20 @@
 	li {
 		@include box-shadow(#111111 0 0 5px);
 		display: inline-block;
-		margin-right: 20px;
+		margin-right: 16px;
 		vertical-align: top;
 		a {
 			@include background-image(linear-gradient(#4a4b41, #313327));
 			@include text-shadow(rgba(black, 0.8) 1px 2px 3px);
 			display: block;
 			padding-left: 20px;
-			height: 64px;
+			height: 61px;
 			color: #c1cab3;
 			letter-spacing: .6px;
 			font-weight: normal;
 			font-size: 18px;
 			font-family: $header_font;
-			line-height: 86px;
+			line-height: 84px;
 			&:hover {
 				@include background-image(linear-gradient(#ffa159, #da6d25));
 				@include text-shadow(none);
@@ -25,28 +25,28 @@
 			&.active {
 				@include background-image(linear-gradient(#eef1e9, #d1dac3));
 				@include text-shadow(none);
-				height: 74px;
+				height: 71px;
 				color: #37392b;
 				line-height: 104px;
 			}
 		}
 	}
 	#home {
-		margin-right: 70px;
+		margin-right: 73px;
 		a {
-			width: 86px;
+			width: 86px - 1px;
 		}
 	}
 	#browse a {
-		width: 98px;
+		width: 98px - 2px;
 	}
 	#upload a {
-		width: 97px;
+		width: 97px - 2px;
 	}
 	#your_stuff a {
-		width: 119px;
+		width: 119px - 2px;
 	}
 	#forums a {
-		width: 104px;
+		width: 104px - 2px;
 	}
 }
