@@ -465,48 +465,58 @@ a.alonetone_plus_link {
 
 // CREATE BUTTONS (grey/black)
 #create_new_playlist {
-  font-weight: 800;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
   width: 170px;
   height: 32px;
   line-height: 28px;
   padding-left: 20px;
   display: block;
   font-family: $header_font;
+  font-weight: 800;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
   border-radius: 5px;
   @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
   @include background-image(linear-gradient(#5F6154, #1B1B15));
-  // background: transparent image-url('icons/create_new_playlist.png') no-repeat 0px 0px;
   &:hover {
     text-decoration: none;
-    background-position: -185px;
     @include background-image(linear-gradient(#7F8274, #414438));
   }
   &:active {
-    background-position: -370px;
   }
 }
 
 #create_new_playlist img {
-  // margin-top: 10px;
   position: relative;
   top: 3px;
   left: -10px;
 }
 
 #change_playlist_order {
-  width: 203px;
+  width: 183px;
   height: 32px;
   display: block;
-  background: transparent image-url('icons/change_playlist_order.png') no-repeat 0px 0px;
+  line-height: 28px;
+  padding-left: 20px;
+  font-family: $header_font;
+  font-weight: 800;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 5px;
+  @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
+  @include background-image(linear-gradient(#5F6154, #1B1B15));
   &:hover {
-    background-position: -203px;
+    text-decoration: none;
+    @include background-image(linear-gradient(#7F8274, #414438));
   }
   &:active {
-    background-position: -406px;
   }
 }
+
+#change_playlist_order img {
+  position: relative;
+  top: 5px;
+  left: -10px;
+  }
 
 #create_new_topic {
   width: 164px;
