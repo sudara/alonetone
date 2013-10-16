@@ -4,101 +4,79 @@
 $active_tab_background: #e1e2e1;
 $normal_tab_background: #45473c;
 $hover_tab_background: #da6d25;
+
 $active_tab_text: #37392b;
 $normal_tab_text: #c1cab3;
 $hover_tab_text: #f6fceb;
+
+$default-text-shadow-color: rgba(black, 0.6);
+$default-text-shadow-blur: 3px;
+$default-text-shadow-v-offset: 1px;
+$default-text-shadow-h-offset: 2px;
 
 ul#nav {
   background: none;
   li {
     float: left;
-    height: 75px;
+    height: 65px;
     line-height: 0;
     padding: 0;
-    margin-right: 12px;
+    margin-right: 20px;
     background: none;
+    @include box-shadow(#111111 0px 0px 5px); 
     a {
       float: left;
       display: block;
       margin: 0;
-      height: 74px;
-      width: 120px;
-      background: transparent image-url('buttons/nav.png') no-repeat 0px 0px;
+      height: 64px;
+      padding-left: 20px;
+      color: #c1cab3;
+      line-height: 86px;
+      font-size: 18px;
+      font-weight: normal;
+      font-family: $header_font;
+      letter-spacing: .6px;
+      @include background-image(linear-gradient(#4a4b41, #313327));
+      @include single-text-shadow;
+      &:hover {
+        @include background-image(linear-gradient(#ffa159, #da6d25));
+        text-decoration: none;
+      }
+      &.active {
+          @include background-image(linear-gradient(#eef1e9, #d1dac3));
+          height: 74px;
+          color: #37392b;
+          line-height: 104px;
+          @include text-shadow(rgba(blue, 0.2) 0px 0px 0);
+          &:hover {
+          }
+        }
     }
+
     &#home {
       margin-right: 70px;
       a {
-        width: 112px;
-        background-position: 0px 0px;
-        &:hover {
-          background-position: -224px 0px;
-        }
-        &.active {
-          background-position: -112px 0px;
-          &:hover {
-            background-position: -112px 0px;
-          }
-        }
+        width: 86px;
       }
     }
     &#browse {
       a {
-        width: 124px;
-        background-position: -336px 0px;
-        &:hover {
-          background-position: -582px 0px;
-        }
-        &.active {
-          background-position: -459px 0px;
-          &:hover {
-            background-position: -459px 0px;
-          }
-        }
+        width: 98px;
       }
     }
     &#upload {
       a {
-        background-position: -706px 0px;
-        width: 123px;
-        &:hover {
-          background-position: -952px 0px;
-        }
-        &.active {
-          background-position: -830px 0px;
-          &:hover {
-            background-position: -830px 0px;
-          }
-        }
+        width: 97px;
       }
     }
     &#your_stuff {
       a {
-        width: 145px;
-        background-position: -1074px 0px;
-        &:hover {
-          background-position: -1364px 0px;
-        }
-        &.active {
-          background-position: -1219px 0px;
-          &:hover {
-            background-position: -1219px 0px;
-          }
-        }
+        width: 119px;
       }
     }
     &#forums {
       a {
-        width: 130px;
-        background-position: -1509px 0px;
-        &:hover {
-          background-position: -1769px 0px;
-        }
-        &.active {
-          background-position: -1639px 0px;
-          &:hover {
-            background-position: -1639px 0px;
-          }
-        }
+        width: 104px;
       }
     }
   }

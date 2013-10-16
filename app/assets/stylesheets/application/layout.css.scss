@@ -275,9 +275,29 @@ div.notice, div.errorExplanation {
 }
 
 div#welcome {
-  background: #c7c8c7 image-url('backgrounds/welcome_notice.png') no-repeat top left;
-  height: 73px;
+  // background: #c7c8c7 image-url('backgrounds/welcome_notice.png') no-repeat top left;
+  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
+  height: 153px;
   width: 830px;
-  padding-top: 100px;
+  padding-top: 20px;
   padding-left: 26px;
+}
+
+.welcome-to-alonetone {
+  font-family: $header_font, Helvetica, Arial;
+  font-weight: bold;
+  font-size: 30px;
+  color: #37392b;
+}
+
+.welcome-alonetone {
+  color: $orange;
+  letter-spacing: 1.1px;
+}
+
+.a-damn-fine-home {
+  font-family: $header_font, Helvetica, Arial;
+  color: #7d7f76;
+  font-size: 18px;
+  margin-bottom: 40px;
 }

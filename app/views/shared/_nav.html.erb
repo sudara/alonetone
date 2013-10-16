@@ -1,29 +1,30 @@
 <ul id='nav'>
   <li id='home'>
-		<%= link_to ' ', root_path, :title => 'home',:class => "tab#{' active' if @tab == 'home' }" %>
+
+		<%= link_to 'Home', root_path, :title => 'home',:class => "tab#{' active' if @tab == 'home' }" %>
 	</li>
 	<li id='browse'>
-		<%= link_to ' ', users_path, :title => 'artists', :class => "tab#{' active' if @tab == 'browse' }" %>
+		<%= link_to 'Artists', users_path, :title => 'artists', :class => "tab#{' active' if @tab == 'browse' }" %>
 	</li>
 
 	<% if logged_in? %>
 	<li id='upload'>
-		<%= link_to ' ', new_user_track_path(current_user), :title => "upload your music in mp3 format", :class => "tab#{' active' if @tab == 'upload' }" %>
+		<%= link_to 'Upload', new_user_track_path(current_user), :title => "upload your music in mp3 format", :class => "tab#{' active' if @tab == 'upload' }" %>
 	</li>
 	<li id='your_stuff'>
-		<%= link_to ' ', user_home_path(current_user), :title => 'your stuff', :class => "tab#{' active' if @tab == 'your_stuff' }" %>
+		<%= link_to 'Your Stuff', user_home_path(current_user), :title => 'your stuff', :class => "tab#{' active' if @tab == 'your_stuff' }" %>
 	</li>	
 	
 	<% else %>
 	<li id='upload'>
-		<%= link_to ' ', signup_path(:new => true), :title => "sign up to upload your music in mp3 format", :class => "tab#{' active' if @tab == 'upload' }" %>
+		<%= link_to 'Upload', signup_path(:new => true), :title => "sign up to upload your music in mp3 format", :class => "tab#{' active' if @tab == 'upload' }" %>
 	</li>
 	<li id='your_stuff'>
-		<%= link_to ' ', signup_path(:new => true), :title => "sign up to upload your music in mp3 format", :class => "tab#{' active' if @tab == 'your_stuff' }" %>
+		<%= link_to 'Your Stuff', signup_path(:new => true), :title => "sign up to upload your music in mp3 format", :class => "tab#{' active' if @tab == 'your_stuff' }" %>
 	</li>	
 	
 	<% end %>
 	<li id='forums'>
-		<%= link_to ' ', forums_path, :title => 'forums', :class => "tab#{' active' if @tab == 'forums' }" %>
+		<%= link_to 'Forums', forums_path, :title => 'forums', :class => "tab#{' active' if @tab == 'forums' }" %>
 	</li>
 </ul>
