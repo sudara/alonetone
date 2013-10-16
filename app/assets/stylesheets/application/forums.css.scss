@@ -84,6 +84,8 @@ table.forums, table.topics {
     font-size: 18px;
     color: $text_color;
     text-decoration: underline;
+    display: block;
+    margin-bottom: 4px;
   }
   .entry-title {
     font-size: 15px;

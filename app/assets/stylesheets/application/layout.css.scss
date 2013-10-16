@@ -133,7 +133,7 @@ html[xmlns] .clearfix {
   position: relative;
   height: 42px;
   width: 100%;
-  background: image-url('backgrounds/footer_closed.png') repeat-x top left;
+  @include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
   #update, #bug_report {
     font-size: 12px;
     line-height: 30px;
@@ -267,7 +267,7 @@ div.footer_box {
 }
 
 div.notice, div.errorExplanation {
-  background: #c7c8c7 image-url('backgrounds/notice.png') repeat-x top left;
+  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
   padding: 20px 30px;
   margin-bottom: 20px;
   border-bottom: 1px solid #7e807e;
@@ -275,7 +275,6 @@ div.notice, div.errorExplanation {
 }
 
 div#welcome {
-  // background: #c7c8c7 image-url('backgrounds/welcome_notice.png') no-repeat top left;
   @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
   height: 153px;
   width: 830px;
