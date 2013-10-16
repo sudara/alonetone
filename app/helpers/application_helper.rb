@@ -121,7 +121,7 @@ module ApplicationHelper
   end
   
   def hide_notice_link(notice)
-    link_to ['Ok, hide this notice', 'Yup! all good, thanks'].rand, 
+    link_to ['Ok, hide this notice', 'Yup! all good, thanks'].sample, 
       user_path(current_user, :user =>{:settings => {:hide_notice => {notice => true}}}, :method => :put),
       :class => 'hide_notice' if logged_in?
   end
