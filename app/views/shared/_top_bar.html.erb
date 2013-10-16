@@ -4,7 +4,7 @@
     <%= link_to ' ', about_path(:howto), :id => 'halp_button'%>
 
     <% if @sudo %>
-      <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(User.find(:first)) %></span>
+      <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', '' %></span>
     <% end %>
 </div>
 <div id="top_bar_right">
