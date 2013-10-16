@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 class AssetsController < ApplicationController  
   before_filter :find_user, :except => [:radio]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]

@@ -82,7 +82,7 @@ Alonetone::Application.routes.draw do
   
   get 'toggle_favorite' => 'users#toggle_favorite'
   
-  get 'search' => 'search#index'
+  match 'search' => 'search#index', via: [:get, :post]
   match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
 
   namespace :admin do

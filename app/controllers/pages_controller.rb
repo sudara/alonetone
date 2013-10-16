@@ -63,10 +63,6 @@ class PagesController < ApplicationController
     @listens_per_week_per_track = Asset.average('listens_per_week').ceil
     @posts_per_user = User.average('posts_count')
   end
-  
-  def actually_going_somewhere_with_facebooker_and_rails
-    render :partial => 'facebooker', :layout => true
-  end
 
   def answers
     raise Hell
