@@ -39,6 +39,7 @@ ul#nav {
       @include background-image(linear-gradient(#4a4b41, #313327));
       @include single-text-shadow;
       &:hover {
+        color: #f6fceb;
         @include background-image(linear-gradient(#ffa159, #da6d25));
         text-decoration: none;
       }
@@ -47,7 +48,7 @@ ul#nav {
           height: 74px;
           color: #37392b;
           line-height: 104px;
-          @include text-shadow(rgba(blue, 0.2) 0px 0px 0);
+          @include text-shadow(rgba(#333333, 0.2) 0px 0px 0);
           &:hover {
           }
         }

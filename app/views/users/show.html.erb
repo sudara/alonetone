@@ -4,7 +4,7 @@
     <% if authorized? %>
 	    <div class="additional_options">
 		    <div class="button_wrapper">
-		        <%= link_to " ", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
+		        <%= link_to image_tag("plus.png") + "create new playlist", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
 		    </div>
         <% if @user.playlists.public.size > 2 %>
 		      <div class="button_wrapper">
