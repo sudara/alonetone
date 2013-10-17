@@ -676,6 +676,35 @@ a.add_to_favorites, a.favorited {
 
 // misc
 
+#welcome {
+  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
+  padding-top: 20px;
+  padding-left: 26px;
+  width: 830px;
+  height: 153px;
+  img {
+    position: absolute;
+    top: 0px;
+    left: 450px;
+  }
+  .welcome_to_alonetone {
+    color: #37392b;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: $header_font;
+  }
+  .welcome_alonetone {
+    color: $orange;
+    letter-spacing: 1.1px;
+  }
+  .a_damn_fine_home {
+    margin-bottom: 40px;
+    color: #7d7f76;
+    font-size: 18px;
+    font-family: $header_font;
+  }  
+}
+
 #user_home {
   position: relative;
   min-height: 40px;
