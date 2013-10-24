@@ -6,7 +6,7 @@
 		vertical-align: top;
 		a {
 			@include background-image(linear-gradient(#4a4b41, #313327));
-			@include text-shadow(rgba(black, 0.8) 1px 2px 3px);
+			@include text-shadow(rgba(black, 0.6) 1px 2px 3px);
 			display: block;
 			padding-left: 20px;
 			height: 61px;
