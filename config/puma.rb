@@ -3,7 +3,7 @@
 environment 'production'
 workers 4
 preload_app!
-deamonize true
+daemonize true
 pidfile '/var/run/puma.pid'
 stdout_redirect '/var/log/puma.log', '/var/log/puma.log', true
 
