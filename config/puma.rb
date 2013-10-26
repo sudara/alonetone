@@ -12,7 +12,7 @@ stdout_redirect '/var/log/puma.log', '/var/log/puma.log', true
 # The default is “tcp://0.0.0.0:9292”
 # bind 'tcp://0.0.0.0:9292'
 
-bind 'unix://var/run/puma.sock'
+bind 'unix:///var/run/puma.sock'
 state_path '/var/run/puma.state'
 
 
