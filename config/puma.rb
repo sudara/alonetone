@@ -4,16 +4,16 @@ environment 'production'
 workers 4
 preload_app!
 daemonize true
-pidfile '/var/run/puma.pid'
-stdout_redirect '/var/log/puma.log', '/var/log/puma.log', true
+pidfile 'tmp/puma.pid'
+stdout_redirect 'log/puma.log', 'log/puma.log', true
 
 
 
 # The default is “tcp://0.0.0.0:9292”
 # bind 'tcp://0.0.0.0:9292'
 
-bind 'unix:///var/run/puma.sock'
-state_path '/var/run/puma.state'
+bind 'unix://tmp/puma.sock'
+state_path 'tmp/puma.state'
 
 
 # on_restart do
