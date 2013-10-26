@@ -27,13 +27,12 @@ ssh alonetone '
       echo
   fi
   
-  rm -f /data/alonetone/current/public/javascripts/allonetone.js
-  rm -f /data/alonetone/current/public/stylesheets/alonetone-v2.css
+   RAILS_ENV=production bundle exec rake assets:precompile
   
   '
 
 # handle restarts
-echo "Fly unicorns, fly!"
+echo "Run puma, run!"
 
 ssh linode "/etc/monit/scripts/unicorn alonetone deploy"
 
