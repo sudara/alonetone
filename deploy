@@ -6,7 +6,7 @@ echo
 ssh alonetone '
   source /etc/profile;
   source ~/.profile;
-  cd /data/alonetone/current; 
+  cd /data/alonetone-rails4; 
   
   if [[ $(git diff) > "" ]];
     then 
@@ -34,6 +34,6 @@ ssh alonetone '
 # handle restarts
 echo "Run puma, run!"
 
-ssh linode "/etc/monit/scripts/unicorn alonetone deploy"
+ssh linode "/etc/monit/scripts/puma deploy"
 
 bundle exec newrelic deployments
