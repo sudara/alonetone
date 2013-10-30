@@ -17,7 +17,7 @@ Alonetone::Application.routes.draw do
   get 'blog' => 'updates#index', :as => "blog_home"
   
   resources 'updates', :as => 'blog'
-  resources :updates
+  resources :updates, :password_resets
   resources :comments do
     member do 
       get :unspam 
