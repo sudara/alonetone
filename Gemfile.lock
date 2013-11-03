@@ -276,7 +276,7 @@ DEPENDENCIES
   protected_attributes
   puma
   quiet_assets
-  rails (~> 4.0.1)
+  rails (~> 4.0.0)
   rakismet
   rb-fsevent (~> 0.9.1)
   recaptcha
