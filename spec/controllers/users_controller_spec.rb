@@ -86,6 +86,12 @@ describe UsersController do
       response.should redirect_to("http://test.host/arthur/tracks/new")
     end
     
+    it 'should NOT activate if you are on a shitty ass IP' do
+      activate_authlogic && create_user
+      @request.env['REMOTE_ADDR'] = '60.169.78.123' # example bad ip
+      get :activate, :perishable_token => User.last.perishable_token
+      expect(flash[:error]).to be_present
+    end
     
   end
   context "profile" do
