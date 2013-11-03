@@ -116,7 +116,7 @@ class UsersController < ApplicationController
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
       @user.destroy # this will run "efficiently_destroy_relations" before_destory callback
-      if admin?
+      if moderator?
         redirect_to root_path
       else
         redirect_to logout_path
