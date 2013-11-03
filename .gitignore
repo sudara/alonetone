@@ -13,6 +13,7 @@ update
 config/deploy.rb
 config/deploy/*
 config/alonetone.yml
+config/skylight.yml
 config/config.yml
 config/database.yml
 config/defensio.yml
