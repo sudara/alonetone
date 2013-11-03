@@ -196,7 +196,7 @@ class AssetsController < ApplicationController
   
   protected
     
-  def not_found
+  def track_not_found
     flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" 
     redirect_to user_tracks_path(@user) 
   end

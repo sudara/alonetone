@@ -29,14 +29,9 @@ class ApplicationController < ActionController::Base
     @@bad_ip_ranges.any?{|cloaked_ip| request.ip.match /^#{cloaked_ip}/  } # check bad ips 
   end
       
-  def user_not_found
-    if @user
-      flash[:error] = 'There was a problem with that request...'
-    else
-      # take them to the search
-      flash[:error] = "Hmm, we didn't find that alonetoner, but we did a search for you..."
-      redirect_to search_url(:query => params[:login])
-    end
+  def not_found
+    flash[:error] = "Hmm, we didn't find that alonetoner"
+    redirect_to root_path
   end
 
   def ie6
@@ -49,7 +44,7 @@ class ApplicationController < ActionController::Base
   
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
-    @user = User.find_by_login(login) || current_user 
+    @user = User.find_by_login(login) || current_user
   end
 
   def find_asset
