@@ -53,7 +53,7 @@ Alonetone::Application.routes.draw do
   get '/users/by/activity/:page' => 'users#index', :sort => 'active', :defaults => {:page => 1}, :as => 'users_default'
   get '/users/(by/:sort(/:page))' => 'users#index', :defaults => {:page => 1}, :as => 'sorted_users'
   
-  get ':login/history' => 'listens#indexn', :as => 'listens'
+  get ':login/history' => 'listens#index', :as => 'listens'
   
   get 'comments' => 'comments#index', :as => 'all_comments'
   get 'playlists' => 'comments#index', :as => 'all_playlists'
