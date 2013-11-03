@@ -53,6 +53,12 @@ describe User do
     end
   end
   
+  context "deletion" do 
+    it 'should remove listens tracks playlists posts topics comments assets as well' do
+
+    end    
+  end
+  
   
   protected
     def new_user(options = {})

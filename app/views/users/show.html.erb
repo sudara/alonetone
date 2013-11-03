@@ -28,7 +28,7 @@
     <%= render :partial => 'follows' if @mostly_listens_to.present? or @follows.present?  %>
     
     <%= render :partial => 'listens' unless @listens.empty? %>	
-    <%= image_tag @user.track_plays_graph if authorized? %>
+    <%# image_tag @user.track_plays_graph if authorized? %>
   	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
   <% end %>
 	  

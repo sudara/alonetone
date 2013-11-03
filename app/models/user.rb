@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
   scope :on_twitter,    -> { where(['users.twitter != ?', '']).recently_seen          }
   scope :alpha,         -> { order('display_name ASC')                                }
   
+  # The before destroy has to be declared *before* has_manys
+  # This ensures User#efficiently_destroy_relations executes first
+  before_create :make_first_user_admin
+  before_destroy :efficiently_destroy_relations
+  
   # Can create music
   has_one    :pic,           :as => :picable
   has_many   :assets, 
@@ -71,10 +76,6 @@ class User < ActiveRecord::Base
   # The following attributes can be changed via mass assignment 
   attr_accessible :login, :name, :email, :password, :password_confirmation, :website, :myspace,
                   :bio, :display_name, :itunes, :settings, :city, :country, :twitter
-  
-  before_create :make_first_user_admin
-  
-  before_destroy :efficiently_destroy_relations
   
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
@@ -158,9 +159,10 @@ class User < ActiveRecord::Base
   def efficiently_destroy_relations
     Listen.delete_all(['track_owner_id = ?',id])
     Listen.delete_all(['listener_id = ?',id])
-    %w(tracks playlist posts topics comments assets).each do |thing|
-      thing.delete_all
+    %w(tracks playlists posts topics comments assets).each do |thing|
+      self.send(thing).delete_all
     end
+    true
   end
   
   def make_first_user_admin
