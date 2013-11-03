@@ -55,7 +55,6 @@ group :production do
 end
 
 group :development do
-  gem "rails-footnotes"
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'thin'
