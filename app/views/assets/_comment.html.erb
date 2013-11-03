@@ -16,7 +16,7 @@
           <div class="text"><!-- placeholder response text --></div>
         </div>
         <div class="small_spinner" style="display:none;"></div>
-        <%= f.submit "send comment to #{h asset.user.name}", :class => 'comment_submit',:id => "submit_#{asset.unique_id}"%> 
+        <%= f.submit "send comment to #{asset.user.name}".html_safe, :class => 'comment_submit',:id => "submit_#{asset.unique_id}"%> 
       </div>
     <% end %>  
   </div>
