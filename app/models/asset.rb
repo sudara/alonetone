@@ -10,7 +10,7 @@ class Asset < ActiveRecord::Base
   belongs_to :user,    :counter_cache => true
   has_many :tracks,    :dependent => :destroy
   has_many :playlists, :through => :tracks
-  has_many :listens,   :dependent => :destroy
+  has_many :listens,   -> { order('listens.created_at DESC') }, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent  => :destroy
   
   has_many :listeners, 

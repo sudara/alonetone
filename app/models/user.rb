@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
   
   # Can listen to music, and have that tracked
-  has_many :listens, :foreign_key  => 'listener_id'
+  has_many :listens, -> { order('listens.created_at DESC')}, :foreign_key  => 'listener_id'
     
   has_many :listened_to_tracks, 
     -> { order('listens.created_at') },

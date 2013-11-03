@@ -344,7 +344,7 @@ tr.post.title {
 /* reply */
 
 div.editbox {
-  background: url(/images/reply_background.png);
+  background: image-url('/images/reply_background.png');
   border: 2px solid #333333;
   border-color: $body_background;
   border-width: 2px 0;
