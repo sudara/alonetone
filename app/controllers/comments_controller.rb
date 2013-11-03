@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
 
   def index
     if params[:login].present?
-      not_found unless @user
+      not_found and return false unless @user
       @page_title = "#{@user.name} Comments"
       @comments = @user.comments.public_or_private(display_private_comments?).page(params[:page])
       set_comments_made
