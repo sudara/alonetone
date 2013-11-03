@@ -39,16 +39,14 @@ gem "geokit"
 gem 'newrelic_rpm'
 gem "skylight", "~> 0.2.0.beta"
 
-group :assets do 
-  gem "jquery-rails"
-  gem "jquery-ui-rails"
-  gem "sass-rails"
-  gem 'compass-rails', '2.0.alpha.0'
-  gem 'yui-compressor'
-  gem 'uglifier'
-  gem "coffee-rails"
-  gem "soundmanager2-rails"
-end
+gem "jquery-rails"
+gem "jquery-ui-rails"
+gem "sass-rails"
+gem 'compass-rails', '2.0.alpha.0'
+gem 'yui-compressor'
+gem 'uglifier'
+gem "coffee-rails"
+gem "soundmanager2-rails"
 
 group :production do
   gem "puma"
