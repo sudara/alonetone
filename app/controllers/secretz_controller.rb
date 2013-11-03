@@ -3,8 +3,9 @@ class SecretzController < ApplicationController
   
   def index
     @ip_listens = Listen.most_active_ips
+    @same_ip_users = User.with_same_ip
     @track_listens = Listen.most_active_tracks
-    @users = User.with_same_ip
+    @all_time_track_listens = Asset.order('listens_count DESC').limit(25)
   end
 
 end

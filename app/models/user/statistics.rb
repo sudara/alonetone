@@ -77,11 +77,7 @@ class User
   end
   
   def self.with_same_ip
-    User.count(:all, 
-              :group => 'ip', 
-              :order => 'count_all DESC', 
-              :conditions => 'ip is not NULL',
-              :limit => 25)
+    User.order('count_all DESC').group(:last_login_ip).where('last_login_ip is not NULL').limit(25).count
   end
 
   

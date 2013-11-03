@@ -12,8 +12,8 @@
   </thead>
   
     <tbody>
-    <% @users.each do |ip, count| %>
-      <% users = User.where(:ip => ip).limit(5) %>
+    <% @same_ip_users.each do |ip, count| %>
+      <% users = User.where(:last_login_ip => ip).limit(5) %>
       <tr class>
         <td>
             <%= image_tag('http://api.hostip.info/flag.php?ip='+ip, :size => '20x20', :style => 'float:left; clear:none;opacity:0.4;') if ip %>
@@ -25,7 +25,7 @@
           <%= count %>
         </td>
         <td>
-            <%= users.collect{|u| link_to(u.name, user_path(u.login))}.join(" ") %>
+            <%= users.collect{|u| link_to(u.name, user_path(u.login))}.join(" ").html_safe %>
         </td>
         <td></td>
        </tr>
@@ -61,7 +61,7 @@
         <%= count %>
       </td>
       <td>
-          <% user = User.find_by_ip(ip) %>
+          <% user = User.where(:last_login_ip => ip) %>
           <%= user.name if user %>
       </td>
       <td></td>
@@ -70,7 +70,6 @@
   </tbody>
 </table>
 </div>
-
 
 
 <h2>Tracks that love to get played</h2>
@@ -91,6 +90,37 @@
     <tr class>
       <td><%= link_to track.name, user_track_path(track.user.login, track.permalink) %></td>
       <td><%= count %></td>
+      <td>
+        <%= image_tag track.user.avatar(:tiny)%>
+        <%= track.user.name %>
+      </td>
+      <td><%= track.title %></td>
+      <td><%= track.artist %></td>
+     </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<h2>All time tracks by play count</h2>
+<div class="static_content" class="stats">
+<table id="listens_by_track" class="statstable">
+  <thead>
+    <tr>
+      <th>Track</th>
+      <th>Count</th>
+      <td>Uploader</td>
+      <th>mp3 title</th>
+      <th>mp3 artist</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <% @all_time_track_listens.each do |track| %>
+    <tr class>
+      <td><%= link_to track.name, user_track_path(track.user.login, track.permalink) %></td>
+      <td><%= track.listens_count %></td>
       <td>
         <%= image_tag track.user.avatar(:tiny)%>
         <%= track.user.name %>
