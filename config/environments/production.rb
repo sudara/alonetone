@@ -70,10 +70,8 @@ Alonetone::Application.configure do
   # }
   
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  config.log_level = :warn
   
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
 end
 
  
