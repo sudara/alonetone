@@ -27,7 +27,6 @@ class PagesController < ApplicationController
   
   def four_oh_four
     @page_title = "Not found"
-    flash[:error] = "Gone looking but did not find? Try searching, or let us know!"
   end
 
   def help_an_app_support_brutha_out
