@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       
   def not_found
     flash[:error] = "Hmm, we didn't find that alonetoner"
-    redirect_to root_path
+    raise ActionController::RoutingError.new('User Not Found')
   end
 
   def ie6
