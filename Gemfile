@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 4.0.0"
+gem "rails", "4.0.0"
 
 # server
 gem "mysql2"
@@ -37,7 +37,7 @@ gem 'gemoji'
 gem 'rakismet'
 gem "geokit"
 gem 'newrelic_rpm'
-gem 'skylight'
+gem "skylight", "~> 0.2.0.beta"
 
 # assets
 gem "jquery-rails"
