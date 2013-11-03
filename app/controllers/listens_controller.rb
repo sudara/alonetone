@@ -10,11 +10,11 @@ class ListensController < ApplicationController
   protected
   
   def find_listen_history
-    @listens = @user.listens.paginate( :all, 
+    @listens = @user.listens.paginate( 
       :per_page => 10, 
       :page     => params[:listens_page]
     )
-    @track_plays = @user.track_plays.paginate( :all, 
+    @track_plays = @user.track_plays.paginate(
       :per_page => 10, 
       :page     => params[:track_plays_page]
     )
