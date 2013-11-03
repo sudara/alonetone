@@ -69,7 +69,11 @@ Alonetone::Application.configure do
   # :domain         => "ramenmusic.com"
   # }
   
-
+  # Set to :debug to see everything in the log.
+  config.log_level = :info
+  
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
 end
 
  
