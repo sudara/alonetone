@@ -1,6 +1,5 @@
-# -*- encoding : utf-8 -*-
 module UsersHelper
-  
+    
   def website_for(user)
     "#{user.name}'s website " + (link_to "#{user.website}", ('http://'+h(user.website)))
   end
@@ -53,6 +52,12 @@ module UsersHelper
   
   def new_to_user?(thing)
     thing && (logged_in? and current_user.last_session_at) && (current_user.last_session_at < thing.created_at.utc)
+  end
+  
+  def cache_key_for_follows(follows)
+    count          = follows.count
+    max_updated_at = follows.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "follows/all-#{count}-#{max_updated_at}"
   end
 
 end

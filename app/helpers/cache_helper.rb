@@ -2,12 +2,11 @@ module CacheHelper
 
   # A humble attempt to create better lazy expiration keys
   
-  
-  # creates a hash of all updated_at the items in the collection
-  # faster than sorting
-  # figure out if cache is still valid for a collection of < 50 items already instantiated in AR
+  # creates a hash of the count + last updated_at for the 
   def cache_digest(collection)
-    Digest::MD5.hexdigest(collection.collect{|a| a.updated_at}.join)
+    count          = collection.count
+    max_updated_at = collection.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "#{collection.name}/all-#{count}-#{max_updated_at}"
   end
 
 end
