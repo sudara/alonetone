@@ -70,7 +70,7 @@ Alonetone::Application.configure do
   # }
   
   # Set to :debug to see everything in the log.
-  config.log_level = :warn
+  config.log_level = :info
   
 end
 
