@@ -21,7 +21,7 @@ class Topic < ActiveRecord::Base
     :dependent => :delete_all
    
   has_one  :recent_post,
-    -> { order('pests.created_at DESC') },
+    -> { order('posts.created_at DESC') },
     :class_name => "Post"
   
   has_many :voices,
