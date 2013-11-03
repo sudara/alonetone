@@ -34,6 +34,6 @@ ssh alonetone '
 # handle restarts
 echo "Run puma, run!"
 
-ssh linode "/etc/monit/scripts/puma deploy"
+ssh linode "/etc/monit/scripts/puma restart"
 
 bundle exec newrelic deployments
