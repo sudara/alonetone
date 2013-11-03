@@ -147,11 +147,12 @@ module ApplicationHelper
   # Mephisto said it best...
   def sanitize_feed_content(html, sanitize_tables = false)
     options = sanitize_tables ? {} : {:tags => %w(table thead tfoot tbody td tr th)}
-    returning html.strip do |html|
+    sanitized = html.strip do |html|
       html.gsub! /&amp;(#\d+);/ do |s|
         "&#{$1};"
       end
     end
+    sanitized
   end
   
   protected 

@@ -4,7 +4,7 @@ xml.item do
   xml.link  user_track_url(asset.user, asset)
   xml.guid url
   xml.pubDate  rss_date asset.created_at
-  xml.enclosure :url=> url,:type=>'audio/mpeg', :size => asset.size
+  xml.enclosure :url=> url, :type=>'audio/mpeg', :size => asset.mp3_file_size
   xml.itunes :summary, asset.description
   xml.itunes :duration, asset.length
   xml.itunes :author, asset.user.name

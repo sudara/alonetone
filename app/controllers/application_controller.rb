@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
-    @user = User.find_by_login(login) || current_user
+    @user = User.where(:login => login).first || current_user
   end
 
   def find_asset
