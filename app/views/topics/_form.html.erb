@@ -1,18 +1,18 @@
 <p>
-<label for="topic_title"><%= 'Title' %></label><br />
-<%= form.text_field :title, :class => "primary", :tabindex => 10 %>
+  <label for="topic_title"><%= 'Title' %></label><br />
+  <%= form.text_field :title, :class => "primary", :tabindex => 10 %>
 
-<% if moderator? %>
-<label style="margin-left:1em;">
-<%= form.check_box :sticky %> <%= 'Sticky'%>
-</label>
+  <% if moderator? %>
+  <label style="margin-left:1em;">
+  <%= form.check_box :sticky %> <%= 'Sticky'%>
+  </label>
 
-<label style="margin-left:1em;">
-<%= form.check_box :locked %> <%= 'Locked' %>
-</label>
-<% end -%>
-
+  <label style="margin-left:1em;">
+  <%= form.check_box :locked %> <%= 'Locked' %>
+  </label>
+  <% end -%>
 </p>
+
 <% if @topic.new_record? -%>
 <p>
 	<label for="topic_body"><%= 'Body' %></label><br />

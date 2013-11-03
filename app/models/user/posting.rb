@@ -9,7 +9,6 @@ class User
   #  - changes forum_id if you're an admin
   #
   def post(forum, attributes, request)
-    attributes.symbolize_keys!
     Topic.new(attributes) do |topic|
       topic.forum = forum
       topic.user  = self

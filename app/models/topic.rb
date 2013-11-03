@@ -29,8 +29,11 @@ class Topic < ActiveRecord::Base
     :through => :posts, :source => :user
   
   validates_presence_of :user_id, :forum_id, :title
+  
+  validates_presence_of :body, :on => :create
 
-  attr_accessible :title
+  attr_accessor :body
+  attr_accessible :title, :body, :sticky, :locked
   attr_readonly :posts_count, :hits
   
   has_permalink :title

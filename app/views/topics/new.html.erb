@@ -1,22 +1,22 @@
-  <% content_for :h1 do %>alonetone forums: Starting a new topic <% end %>
-  <% content_for :breadcrumbs do %>
-    <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
-    <%= link_to h(@forum.name), forum_path(@forum) %> <span class="arrow">&rarr;</span> New Topic
+<% content_for :h1 do %> alonetone forums: Starting a new topic <% end %>
+<% content_for :breadcrumbs do %>
+  <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
+  <%= link_to @forum.name, forum_path(@forum) %> <span class="arrow">&rarr;</span> New Topic
+<% end %>
+
+  <h1 id="new_topic"><%= "Start a New Topic" %></h1>
+
+<div class="container static_content">
+  <p class="subtitle">Post will be by <%= current_user.name %> in the "<%= @forum.name %>" forum</p>
+  <%= error_messages_for :topic %>
+  <%= form_for :topic,
+       :url  => forum_topics_path(@forum) do |f| -%>
+  <%= render :partial => "form", :object => f %>
+  <div class="submit_wrapper">
+    <%= f.submit 'Post Topic' %> or  <%= link_to('Cancel', forum_path(@forum)).html_safe %>
+  </div>
   <% end %>
   
-    <h1 id="new_topic"><%= "Start a New Topic" %></h1>
+  <%= render :partial => 'posts/formatting' %>       
 
-  <div class="container static_content">
-    <p class="subtitle">Post will be by <%=  current_user.name %> in the "<%= @forum.name %>" forum</p>
-    <%= error_messages_for :topic %>
-    <%= form_for :topic,
-         :url  => forum_topics_path(@forum) do |f| -%>
-    <%= render :partial => "form", :object => f %>
-    <div class="submit_wrapper">
-      <%= submit_tag 'Post Topic', :or => link_to('Cancel', forum_path(@forum)) %>
-    </div>
-    <% end -%>
-    
-    <%= render :partial => 'posts/formatting' %>       
-
-  </div>  
+</div>  
