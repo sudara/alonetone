@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    not_found unless @user
     respond_to do |format|
       format.html do
         prepare_meta_tags
