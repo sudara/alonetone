@@ -229,7 +229,7 @@ class AssetsController < ApplicationController
   
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
-    @popular = Asset.limit(5).order('hotness DESC').includes(:user => :pic)
+    @popular = Asset.order('hotness DESC').includes(:user => :pic).limit(5)
     @playlists = Playlist.for_home
     @comments = admin? ? Comment.last_5_private : Comment.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
