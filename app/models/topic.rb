@@ -17,11 +17,11 @@ class Topic < ActiveRecord::Base
   belongs_to :forum, :counter_cache => true
 
   has_many :posts,       
-    -> { order('posts.created_at ASC') },
+    -> { order('posts.created_at DESC') },
     :dependent => :delete_all
    
   has_one  :recent_post,
-    -> { order('posts.created_at ASC') },
+    -> { order('posts.created_at DESC') },
     :class_name => "Post"
   
   has_many :voices,

@@ -12,7 +12,7 @@ class Forum < ActiveRecord::Base
   has_many :posts, :dependent  => :delete_all
     
   def recent_post
-    posts.recent.first
+    posts.order('created_at DESC').first
   end  
     
   def recent_topic

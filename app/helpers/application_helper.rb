@@ -137,7 +137,7 @@ module ApplicationHelper
   
   def friendly_time_ago(time)
     return "Unknown" unless time.present?
-    if time < 1.week.ago 
+    if time > 2.weeks.ago 
       time_ago_in_words(time) + ' ago'
     else
       time.to_date.to_s(:long)
