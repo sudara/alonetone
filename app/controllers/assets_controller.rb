@@ -280,7 +280,7 @@ class AssetsController < ApplicationController
   end
   
   def set_user_agent
-    @agent = request.user_agent.downcase    
+    @agent = request.user_agent.try(:downcase)    
   end
   
   def prevent_abuse
