@@ -57,7 +57,7 @@ class Asset
   end
   
   def unique_listener_count
-    listens.count(:listener_id, :distinct => true)
+    listens.select('distinct listener_id').count(:listener_id)
   end
   
   def days_old
