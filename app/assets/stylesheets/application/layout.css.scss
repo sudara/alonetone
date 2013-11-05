@@ -5,8 +5,8 @@ html,body {
 
 #top_bar {
   @include background-image(linear-gradient(#282920, #070705));
-  position: absolute;
-  top: 0;
+  // position: absolute;
+  // top: 0;
   left: 0;
   z-index: 10;
   min-width: 800px;
@@ -16,8 +16,8 @@ html,body {
 
 #header {
   @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
-  position: absolute;
-  top: 29px;
+  // position: absolute;
+  // top: 29px;
   left: 0;
   z-index: 5;
   width: 100%;
@@ -25,8 +25,8 @@ html,body {
 }
 
 #logo {
-  position: absolute;
-  top: 15px;
+  // position: absolute;
+  // top: 15px;
   left: 864px;
   z-index: 5;
   width: 120px;
@@ -38,34 +38,25 @@ html,body {
   margin-left: 54px;
 }
 
-#wrapper {
-  @include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
-  margin-top: 139px;
-  // margin-top: 160px;
-
-    // min-height: 100%;
-    // height: auto !important;
-    // height: 100%;
-    // margin: 0 auto -21px; 
-    // margin-bottom: -21px; 
-}
-
 #container {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    // margin: 0 auto -21px; 
-    margin-bottom: -21px; 
-
-  }
-
+    margin-top: 0;
+    margin-bottom: -42px;
+ }
 
 .push {
-    height: 21px; /* .push must be the same height as .footer */
+    height: 42px;
 }
 
+#wrapper {
+  @include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
+}
+
+
 #content {
-  margin-bottom: 150px;
+  margin-bottom: 210px;
   margin-left: 50px;
   width: 890px;
 }
