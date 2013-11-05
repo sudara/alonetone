@@ -205,9 +205,10 @@ h2#latest_comments, #user_comments h2 {
 }
 
 div.flash {
-  background: image-url('backgrounds/flash.png') repeat-x top left;
+  // background: image-url('backgrounds/flash.png') repeat-x top left;
   background-color: $orange_background;
-  border-bottom: 1px solid #eb954b;
+  @include background-image(linear-gradient(#EB954B, #E66D29));
+  // border-bottom: 1px solid #eb954b;
   font-family: $header_font, Helvetica, Arial;
   font-size: 24px;
   color: $white;

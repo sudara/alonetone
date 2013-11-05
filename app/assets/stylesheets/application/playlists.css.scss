@@ -168,7 +168,10 @@ img.cover_200 {
   .empty {
     position: relative;
     color: $white;
-    background: image-url('backgrounds/flash.png') repeat-x top left;
+    background-color: $orange_background;
+    @include background-image(linear-gradient(#EB954B, #E66D29));
+
+    // background: image-url('backgrounds/flash.png') repeat-x top left;
     padding: 15px;
     margin-bottom: 1px;
     a {
