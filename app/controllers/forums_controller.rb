@@ -55,7 +55,7 @@ class ForumsController < ApplicationController
   protected
   
   def find_forum
-    @forum = Forum.where(:permalink => params[:id]).first
+    @forum = Forum.where(:permalink => params[:id]).first || not_found
   end
   
   def reset_session_forums_page 
