@@ -170,8 +170,6 @@ img.cover_200 {
     color: $white;
     background-color: $orange_background;
     @include background-image(linear-gradient(#EB954B, #E66D29));
-
-    // background: image-url('backgrounds/flash.png') repeat-x top left;
     padding: 15px;
     margin-bottom: 1px;
     a {
