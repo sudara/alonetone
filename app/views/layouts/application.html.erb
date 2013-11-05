@@ -28,6 +28,8 @@
   </head>
 
   <body>
+    <div id="container">
+      
     <div id="top_bar">
       <%= render :partial => 'shared/top_bar', :current_user => current_user %>
     </div>
@@ -63,10 +65,15 @@
   					<%= yield :right %>
   				</div>	
   				<div class="clear"> </div>
+
   				<%= yield :bottom %>
   	    </div> <!-- end columns -->
-  	  </div><!-- end content -->
+      </div><!-- end content -->
+
   	</div><!-- end wrapper -->
+        <div class="push"></div>
+    </div>
+
 		<%= render :partial => 'shared/footer' %>
     <%= javascript_include_tag "application" %>
     <%= render :partial => 'shared/analytics' %>
