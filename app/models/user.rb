@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   has_many :listens, -> { order('listens.created_at DESC')}, :foreign_key  => 'listener_id'
     
   has_many :listened_to_tracks, 
-    -> { order('listens.created_at') },
+    -> { order('listens.created_at DESC') },
     :through => :listens, 
     :source => :asset    
     
