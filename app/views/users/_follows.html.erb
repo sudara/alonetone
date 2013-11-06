@@ -5,7 +5,7 @@
       <%= render :partial => 'shared/small_user', :collection => @follows %>
       <div class="clear"></div>
   </div>
-<% end %>
+<% end if @follows.present? %>
   
   <h2 class="box">Listens to</h2>
   <div id="follows" class="box static_content clearfix">
