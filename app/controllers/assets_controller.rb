@@ -142,13 +142,13 @@ class AssetsController < ApplicationController
     end
 
     if good 
-      flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)"
+      flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)".html_safe
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
      if @assets.present?
        flash[:error] = flashes.html_safe
       else
-        flashe[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email support@alonetone.com" 
+        flashe[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email #{Alonetone.email}" 
       end
       redirect_to new_user_track_path(current_user)
     end 
