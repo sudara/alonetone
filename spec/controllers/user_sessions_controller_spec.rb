@@ -18,12 +18,18 @@ describe UserSessionsController do
   
   it "should redirect to user's home after login" do
     activate_authlogic
-    session[:return_to] = "/session/back"
+    session[:return_to] = nil
     post :create, :user_session => { :login => 'arthur', :password => 'test'}
     response.should redirect_to('http://test.host/arthur')    
   end
   
-
+  it "should redirect to last page viewed after login" do
+    activate_authlogic
+    session[:return_to] = '/forums'
+    post :create, :user_session => { :login => 'arthur', :password => 'test'}
+    response.should redirect_to('http://test.host/forums')    
+  end
+  
   it "should not login a user with a bad password" do
     activate_authlogic
     post :create, :user_session => { :login => 'arthur', :password => 'bad password' }
