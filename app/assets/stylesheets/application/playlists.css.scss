@@ -122,7 +122,8 @@ img.cover_200 {
 
 .playlist {
   div.box {
-    background-image: image-url('backgrounds/tracks.png');
+    @include background-image(linear-gradient(#FAFAFA, #E1E2E1));
+
     background-color: #e1e2e1;
     padding-left: 25px;
     padding-top: 9px;
@@ -170,7 +171,6 @@ img.cover_200 {
     color: $white;
     background-color: $orange_background;
     @include background-image(linear-gradient(#EB954B, #E66D29));
-    padding: 15px;
     margin-bottom: 1px;
     a {
       color: $white;
