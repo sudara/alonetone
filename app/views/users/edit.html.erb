@@ -103,7 +103,7 @@
       <%= image_tag @user.avatar(:small)%><br/>
       Upload a new photo. (400px by 400px square for best results)<br/>
       <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
-      	<%= f.file_field :uploaded_data  %>
+      	<%= f.file_field :pic  %>
       	<%= submit_tag "Upload new Pic" %>
       <% end %><br/>
   </div>

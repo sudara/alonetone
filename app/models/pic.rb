@@ -16,4 +16,6 @@ class Pic < ActiveRecord::Base
 
   validates_attachment_size :pic, :less_than => 3.megabytes, :greater_than => 100.bytes
   validates_attachment_content_type :pic, :content_type => /image/
+  
+  attr_accessible :pic, :picable_type, :picable_id
 end
