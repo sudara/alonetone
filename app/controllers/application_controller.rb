@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
   
+  before_filter :store_location, :only => [:index, :show]
+  
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
   end
@@ -64,7 +66,6 @@ class ApplicationController < ActionController::Base
   def store_location
     session[:return_to] = request.url unless request.xhr?
   end
-  
   
   def redirect_back_or_default(default='/')
     redirect_to(session[:return_to] || default)

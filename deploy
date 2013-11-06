@@ -16,7 +16,7 @@ ssh alonetone '
   
   git fetch; 
   
-  if [[ $(git diff origin/master Gemfile) > "" ]]; 
+  if [[ $(git diff origin/master Gemfile.lock) > "" ]]; 
     then 
       echo "Gemfile changed, bundle installing...";
       git reset --hard origin/master; bundle install --deployment; 
