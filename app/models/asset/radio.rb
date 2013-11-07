@@ -5,7 +5,7 @@ class Asset
 
     case channel
       when 'favorites'
-        Asset.favorited.paginate( common_options)
+        Asset.favorited.paginate(common_options)
 
       when 'your_favorite_alonetoners'
         Asset.from_favorite_artists_of(user, common_options)
@@ -14,18 +14,18 @@ class Asset
         Asset.mangoz(user, common_options)
 
       when 'most_favorited'
-        Asset.order('favorites_count DESC').paginate( common_options)
+        Asset.order('favorites_count DESC').paginate(common_options)
 
       when 'songs_you_have_not_heard'
         Asset.not_heard_by(user, common_options)
 
       when 'popular'
-        Asset.order('hotness DESC').paginate( common_options)
+        Asset.order('hotness DESC').paginate(common_options)
         
       when 'those_you_follow'
         Asset.recent.new_tracks_from_followees(user, common_options)
       else # latest
-        Asset.recent.paginate( common_options)
+        Asset.recent.paginate(common_options)
     end
   end
   
