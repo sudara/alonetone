@@ -55,7 +55,7 @@ class User
   def self.dedicated_listeners(page, per_page)
    entries = WillPaginate::Collection.create(page, per_page) do |pager|
       # returns an array, like so: [User, number_of_listens]
-      result = Listen.since(4.month.ago).where('listener_id is not null').group(:listener).order('count_all DESC').limit(pager.per_page).offset(pager.offset).count
+      result = Listen.since(1.month.ago).where('listener_id is not null').group(:listener).order('count_all DESC').limit(pager.per_page).offset(pager.offset).count
 
       # inject the result array into the paginated collection:
       pager.replace(result.collect(&:first))
