@@ -1,7 +1,7 @@
 class User
     
   def self.currently_online
-     User.where(["last_login_at > ?", Time.now.utc-15.minutes])
+     User.where(["last_request_at > ?", Time.now.utc-15.minutes])
   end
   
   def self.conditions_by_like(value) 
