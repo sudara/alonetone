@@ -5,7 +5,7 @@
   <div class="mini_paginator">
     <%= will_paginate @listens, :param_name => :listens_page %>
   </div>
-  <%= render :partial => 'users/listen', :collection => @listens%>
+  <%= render :partial => 'users/listen', :collection => @listens %>
 <% end %>
 
 
@@ -15,7 +15,7 @@
   <div class="mini_paginator">
     <%= will_paginate @track_plays, :param_name => :track_plays_page %>
   </div>
-  <%= render :partial => 'users/track_play', :collection => @track_plays%>
+  <%= render :partial => 'users/track_play', :collection => @track_plays %>
 </div>
   
 <% end if authorized? %>

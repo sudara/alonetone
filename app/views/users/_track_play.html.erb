@@ -1,4 +1,4 @@
-<% div_for track_play, :class => (cycle('even', 'odd')) do %>
+<%= div_for track_play, :class => (cycle('even', 'odd')) do %>
   <div class="listen_user">
     	<% if track_play.listener %>
         <%= user_image_link(track_play.listener, :small)%>
