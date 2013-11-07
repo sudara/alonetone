@@ -45,9 +45,13 @@
                   <td><%= link_to 'a link', 'http://alonetone.com/radio'%></td>
               </tr>
               <tr>
-                  <td>![a photo](http://alonetone.com/images/alonetone.png)</td>
-                  <td><%= image_tag 'http://alonetone.com/images/alonetone16.jpg', :alt => 'a photo'%></td>
-              </tr>                 
+                  <td>![a photo](http://alonetone.com/images/emoji/8ball.png)</td>
+                  <td><%= image_tag 'http://alonetone.com/images/emoji/8ball.png', :alt => 'a photo'%></td>
+              </tr>    
+              <tr>
+                <td>:tropical_fish: (see the <a href="http://www.emoji-cheat-sheet.com">cheat sheet</a>)</td>
+                <td><%= emojify(':tropical_fish:') %>
+                           
             </tbody>
         </table>         
         </div>       

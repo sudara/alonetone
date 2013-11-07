@@ -1,5 +1,5 @@
-module ApplicationHelper
-  
+require 'emoji'
+module ApplicationHelper  
   @@listen_sources = %w(itunes home download facebook)
 
   def authorized_for(user_related_record)
