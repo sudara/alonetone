@@ -47,7 +47,15 @@ describe PasswordResetsController do
       User.where(:login => 'arthur').first.perishable_token.should be_nil
       controller.session["user_credentials"].should == users(:arthur).persistence_token # logged in
     end
-    
+
+    it 'should allow user to manually type in password and present edit again if passes do not match' do
+      activate_authlogic
+      post :create, :email => [users(:arthur).email]
+      put :update, :id => User.where(:login => 'arthur').first.perishable_token, 
+        :user => {:password => '123456', :password_confirmation => '1234567'}
+      response.should redirect_to(edit_password_reset_path(User.where(:login => 'arthur').first.perishable_token))
+      controller.session["user_credentials"].should == nil
+    end    
   end
   
 end

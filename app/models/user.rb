@@ -153,11 +153,6 @@ class User < ActiveRecord::Base
       Asset.increment_counter(:favorites_count, asset.id)
     end
   end
-  
-  # Override authlogic version to do an update_attribute
-  def set_last_request_at
-    update_attribute :last_request_at, (default_timezone == :utc ? Time.now.utc : Time.now)
-  end
 
   protected
 
