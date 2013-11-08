@@ -15,7 +15,7 @@
       	</p>
       </div>
     
-    <% if @user.try(:website) %>
+    <% if @user.website.present? %>
       <div class="bio static_content">
         	  <%= website_for(@user).html_safe %>
       </div>	
