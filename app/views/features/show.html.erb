@@ -44,7 +44,7 @@
                <%= link_to "#{@user.playlists.public.count} albums/mixes", user_playlists_path(@user) if @user.playlists.public.count > 0 %><br/>
                <%= link_to @user.assets_count, user_tracks_path(@user) %> tracks on alonetone<br/>
                tracks listened to: <%= link_to @user.number_of_tracks_listened_to, listens_path(@user) %><br/>
-               <%= itunes_link_for(@user) if present? @user.itunes %><br/>
+               <%= itunes_link_for(@user) if @user.itunes.present? %><br/>
                <%= "This feature viewed #{@feature.views_count} times" if authorized? %>
            </div>
            <%= link_to " ", user_home_path(@user), :class => 'view_more'%>

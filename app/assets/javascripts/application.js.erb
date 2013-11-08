@@ -859,16 +859,6 @@ jQuery(function($) {
     return false;
   });
   
-  // clear default text from search box
-  $('#query').focus(function(){
-    $(this).addClass('focused');
-    if($(this).val() == 'artist, song title or keyword') 
-      $(this).val('');
-  });
-  $('#query').blur(function(){
-    $(this).removeClass('focused');
-  });
-  
   // setup the footer
   $('#footer').attach(ResizeableFooter);
   

@@ -21,8 +21,10 @@
     <%= will_paginate @posts %>
 </div>
 
-<% if present? @posts %>
-  <%= render :partial => 'posts/posts' %>
+<% if @posts.present? %>
+  <table class="posts wide">
+    <%= render @posts %>
+  </table>
 <% else %>
   <h2>:( Sorry, nobody has bothered to talk about '<%= params[:forum_q]%>' before</h2>
 <% end %>

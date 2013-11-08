@@ -17,8 +17,8 @@
 
   <div id="forums_layout">
     <div class="search">
-      <% form_tag posts_url, :id =>'forum_search',:method => :get do %>
-        <%= text_field_tag 'forum_q', (params[:forum_q] || 'search forums') %>
+      <%= form_tag posts_url, :id =>'forum_search',:method => :get do %>
+        <%= text_field_tag 'forum_q', params[:forum_q], :placeholder => 'search the forums' %>
         <%= submit_tag 'search' %>
       <% end %>
     </div>
