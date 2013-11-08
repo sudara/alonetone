@@ -3,7 +3,7 @@ class UserNotification < ActionMailer::Base
 
   def forgot_password(user)
     @user = user
-    set_activation_url
+    @url = edit_password_reset_url(@user.perishable_token)
     mail :to => user.email, :subject => "[#{Alonetone.url}] Change your password"
   end
   

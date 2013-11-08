@@ -26,6 +26,7 @@ Alonetone::Application.configure do
   config.active_record.mass_assignment_sanitizer = :strict
 
   #config.middleware.use "Insight::App", :secret_key => "alonetoneisaliveandwellletsdothis"
+  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
     
   # Do not compress assets
