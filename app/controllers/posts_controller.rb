@@ -66,8 +66,8 @@ class PostsController < ApplicationController
 
 protected
   def find_parents
-    if params[:login]
-      @parent = @user = User.find_by_login(params[:login])
+    if params[:user_id]
+      @parent = @user = User.where(:login => params[:user_id]).first
     elsif params[:forum_id]
       @parent = @forum = Forum.find_by_permalink(params[:forum_id])
       @parent = @topic = @forum.topics.find_by_permalink(params[:topic_id]) if params[:topic_id]
