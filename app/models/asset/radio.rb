@@ -31,9 +31,9 @@ class Asset
   
 
   # random radio, without playing the same track twice in a 24 hour period
-  def self.mangoz(user, pagination_options)    
-    Asset.random_order.id_not_in(user && user.listened_more_than?(10) && user.listened_to_today_ids).
-      paginate(pagination_options)
+  def self.mangoz(user, pagination_options) 
+    ids = user && user.listened_more_than?(10) && user.listened_to_today_ids
+    Asset.random_order.id_not_in(ids).paginate(pagination_options)
   end
 
   
