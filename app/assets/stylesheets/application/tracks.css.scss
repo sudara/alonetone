@@ -134,6 +134,9 @@
     background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
     margin-top: 1px;
+    p img {
+      max-width: 385px;
+    }
   }
   textarea {
     margin-top: 10px;

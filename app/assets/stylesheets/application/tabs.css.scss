@@ -198,6 +198,9 @@ div.tabs {
       .description {
         margin-left: 60px;
         font-size: 14px;
+        p img{
+          max-width: 290px;
+        }
       }
       .stats {
         font-size: 12px;
