@@ -256,11 +256,19 @@ table.posts tr.spacer td {
 }
 
 .post .date {
-  font-size: 0.75em;
+  text-align:right;
+  font-size: 11px;
   color: #666666;
   font-weight: normal;
   margin-bottom: 0.5em;
   clear: both;
+  a {
+    color:#aaa;
+    font-size:10px;
+    &:hover{
+      color: $body_link_hover;
+    }
+  }
 }
 
 .posts .post .body {
@@ -272,6 +280,7 @@ table.posts tr.spacer td {
   p {
     color: $text_color;
     font-size: 14px;
+    line-height:18px;
     a, a:visited {
       color: $text_color;
       font-weight: bold;
