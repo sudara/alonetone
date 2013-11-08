@@ -28,7 +28,7 @@ class PasswordResetsController < ApplicationController
       @user.clear_token!
       redirect_to user_home_path(@user.login)  
     else 
-      flash[:error] = "Please try again. The password and confirmation has to match!"
+      flash[:error] = "Please try again. #{@user.errors.full_messages.join('<br/>')}"
       redirect_to edit_password_reset_path(@user.perishable_token)
     end  
   end  
