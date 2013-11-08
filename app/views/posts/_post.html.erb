@@ -7,16 +7,7 @@
 <% end %>
 <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
   <td class="author vcard">
-
-    <div class="date">
-      <a href="#<%= dom_id post %>" rel="bookmark" name="<%=dom_id post %>">
-      <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-      Posted <%= friendly_time_ago(post.created_at) %>
-      </abbr>
-      </a>
-    </div>
-        
-    <%= image_tag post.user.avatar(:large) %>
+    <%= image_tag post.user.avatar(:small) %>
     <span class="fn"><%= link_to awesome_truncate(post.user.name, 25), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span><br/>
     <%= post.user.ip if logged_in? %>
     <% if post.user.moderator? %>
@@ -39,6 +30,14 @@
 
   </td>
   <td class="body entry-content" id="post-body-<%= post.id %>">
+    <div class="date">
+      <a href="#<%= dom_id post %>" rel="bookmark" name="<%=dom_id post %>">
+      <abbr class="updated" title="<%= post.created_at.xmlschema %>">
+      Posted <%= friendly_time_ago(post.created_at) %>
+      </abbr>
+      </a>
+    </div>
+        
       <div class="post_body_html">
       <%= markdown(post.body) %>
       <% if moderator? %>
