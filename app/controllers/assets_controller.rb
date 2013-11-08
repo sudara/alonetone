@@ -142,7 +142,7 @@ class AssetsController < ApplicationController
     end
 
     if good 
-      flash[:ok] = flashes + "<br/>Now, check the title and add description for your track(s)".html_safe
+      flash[:ok] = (flashes + "<br/>Now, check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
      if @assets.present?
