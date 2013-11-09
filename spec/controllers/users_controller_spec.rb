@@ -203,7 +203,26 @@ describe UsersController do
       controller.session["user_credentials"].should == users(:sudara).persistence_token 
       response.should redirect_to '/users'
     end
+  end
+  
+  context "last request at" do 
+    it "should touch last_request_at when logging in" do 
+      # Authlogic does this by default, which fucks things up
+      expect { login(:arthur) }.to change{ users(:arthur).last_request_at}
+    end
     
+    # it "should touch last_request_at when doing anything" do
+    #   Timecop.travel(12.minute.ago)
+    #   login(:arthur)
+    #   Timecop.travel(1.minute.ago)
+    #   expect { get :index }.to change{ User.find_by_login("arthur").last_request_at}
+    #   
+    # end
+    #   
+    # it "should not touch updated_at when logging in" do 
+    #   # Authlogic does this by default, which fucks things up
+    #   expect { login(:arthur) }.to_not change{ User.find_by_login("arthur").updated_at }
+    # end
   end
   
 end

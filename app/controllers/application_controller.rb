@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
     
-  before_filter :set_tab, :ie6, :is_sudo
-  before_filter :ie6
+  before_filter :set_tab, :is_sudo
   before_filter :display_news
   before_filter :set_latest_update_title
   
@@ -34,10 +33,6 @@ class ApplicationController < ActionController::Base
   def not_found
     flash[:error] = "Hmm, we didn't find that alonetoner"
     raise ActionController::RoutingError.new('User Not Found')
-  end
-
-  def ie6
-    @ie6 = true if request.env['HTTP_USER_AGENT'] and request.env['HTTP_USER_AGENT'].include? "MSIE 6.0" 
   end
   
   def currently_online

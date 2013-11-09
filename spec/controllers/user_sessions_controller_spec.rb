@@ -47,15 +47,5 @@ describe UserSessionsController do
     post :destroy
     controller.session["user_credentials"].should_not be_present
   end
-
-  it "should touch last_request_at when logging in" do 
-    # Authlogic does this by default, which fucks things up
-    expect { login(:arthur) }.to change{ users(:arthur).last_request_at}
-  end
-  
-  it "should not touch updated_at when logging in" do 
-    # Authlogic does this by default, which fucks things up
-    expect { login(:arthur) }.to_not change{ users(:arthur).updated_at}
-  end
   
 end
