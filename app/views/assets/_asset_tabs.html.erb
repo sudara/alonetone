@@ -23,7 +23,8 @@
             <div class="description">
                 <div class='min_height_50'>
                   <h3><%= asset.name %></h3>
-                  <%= markdown(awesome_truncate(asset.description, 260) + '...' + link_to('(more)', user_track_path(asset.user, asset.permalink))) %>
+                  <%= markdown(awesome_truncate(asset.description, 260) + '...' + link_to('(more)', 
+                    user_track_path(asset.user, asset.permalink))) if asset.description.present? %>
                 </div>
             	  
                 <div class="stats">
