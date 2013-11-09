@@ -92,6 +92,13 @@ describe AssetsController do
       response.should redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
     end
     
+    it 'should accept an uploaded mp3 from chrome' do
+      login(:sudara)
+      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mp3')]
+      flash[:error].should_not be_present      
+      response.should redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
+    end
+    
     it "should email out followers on upload" do 
       users(:arthur).add_or_remove_followee(users(:sudara).id)
       expect { subject }.to change {ActionMailer::Base.deliveries.size}.by(1)

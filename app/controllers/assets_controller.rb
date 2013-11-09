@@ -136,7 +136,7 @@ class AssetsController < ApplicationController
         flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
         good = true
       else
-        errors = asset.errors.collect{|attr, msg| msg }
+        errors = asset.errors.full_messages.join('.')
         flashes  += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload: <br/>#{errors}<br/>"
       end
     end
