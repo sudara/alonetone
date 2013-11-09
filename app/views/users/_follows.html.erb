@@ -7,11 +7,13 @@
   </div>
 <% end if @follows.present? %>
   
+<% if !@follows.present? && @mostly_listens_to.present? %>
   <h2 class="box">Listens to</h2>
   <div id="follows" class="box static_content clearfix">
       <%= render :partial => 'shared/small_user', :collection => @mostly_listens_to %>
       <div class="clear"></div>
   </div>
+<% end %>
 
 <div class="footer_box empty">
   
