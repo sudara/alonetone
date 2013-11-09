@@ -55,10 +55,6 @@ class Asset
   
   protected 
   
-  def followers_exist_for?(asset)
-    emails_of_followers(asset).size > 0
-  end
-  
   def emails_of_followers(asset)
     followers_of(asset).inject([]) do |emails, follower| 
       emails << follower.email if follower.wants_email?

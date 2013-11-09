@@ -92,6 +92,11 @@ describe AssetsController do
       response.should redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
     end
     
+    it "should email out followers on upload" do 
+      users(:arthur).add_or_remove_followee(users(:sudara).id)
+      expect { subject }.to change {ActionMailer::Base.deliveries.size}.by(1)
+    end
+    
     
     it 'should successfully upload 2 mp3s' do 
       login(:sudara)
