@@ -256,12 +256,18 @@ class AssetsController < ApplicationController
   
   def register_listen
     @asset.listens.create(
-      :listener     => current_user || nil, 
-      :track_owner  => @asset.user, 
-      :source       => @referrer, 
-      :user_agent   => @agent,
-      :ip           => request.remote_ip
-    ) unless is_a_bot?
+        :listener     => current_user || nil, 
+        :track_owner  => @asset.user, 
+        :source       => @referrer, 
+        :user_agent   => @agent,
+        :ip           => request.remote_ip
+      ) 
+    end.unless is_a_bot? or ip_just_registered_this_listen?
+  end
+  
+  def ip_just_registered_this_listen?
+    last_listen = @asset.listens.where(:ip => request.remote_ip).first
+    last_listen.present? && (last_listen.created_at > (Time.now - @asset[:length]))
   end
   
   def is_a_bot?

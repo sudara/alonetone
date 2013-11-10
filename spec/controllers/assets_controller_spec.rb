@@ -48,7 +48,33 @@ describe AssetsController do
       end
     end
   
-  
+    it "should NOT register more than one listen from one ip/track in short amount of time" do 
+      request.user_agent = GOOD_USER_AGENTS.first
+      expect do
+        request.env["HTTP_ACCEPT"] = "audio/mpeg" 
+        get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+        get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+        get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+      end.to change{ Listen.count }.by(1)  
+    end
+    
+    it 'should allow more than one listen to be created by same ip over reasonable amount of time' do
+      request.user_agent = GOOD_USER_AGENTS.first
+            expect do
+        request.env["HTTP_ACCEPT"] = "audio/mpeg" 
+        Timecop.travel(3.hours.ago) do
+          get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+        end
+        Timecop.travel(2.hours.ago) do
+          get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+        end
+        Timecop.travel(1.hour.ago)do
+          get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+        end
+      end.to change{Listen.count}.by(3)
+      Timecop.return
+    end
+    
     it 'should accept a mp3 extension and redirect to the amazon url' do
       request.env["HTTP_ACCEPT"] = "audio/mpeg" 
       request.user_agent = GOOD_USER_AGENTS.first

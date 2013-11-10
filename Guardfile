@@ -33,7 +33,7 @@
 #   
 # end
 
-guard :rspec, :spring => true, :cli => '--colour' do
+guard :rspec, :spring => true, :all_on_start => false, :all_after_pass => false, :cli => '--colour' do
   watch('spec/spec_helper.rb')                        { "spec" }
   watch('config/routes.rb')                           { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
