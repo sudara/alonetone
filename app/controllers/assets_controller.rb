@@ -261,8 +261,7 @@ class AssetsController < ApplicationController
         :source       => @referrer, 
         :user_agent   => @agent,
         :ip           => request.remote_ip
-      ) 
-    end.unless is_a_bot? or ip_just_registered_this_listen?
+      ) unless is_a_bot? or ip_just_registered_this_listen?
   end
   
   def ip_just_registered_this_listen?
