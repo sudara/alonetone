@@ -1103,7 +1103,7 @@ Effect.Methods = {
     new Effect[klass](element, options);
     return element;
   },
-  highlight: function(element, options) {
+  xhighlight: function(element, options) {
     element = $(element);
     new Effect.Highlight(element, options);
     return element;
