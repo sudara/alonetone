@@ -263,6 +263,7 @@
       margin-top: 1px;
       float: left;
       margin-right: 10px;
+      width:50px;
     }
   }
   .comment_user_text {
@@ -622,25 +623,39 @@
   margin-bottom: 40px;
 }
 
-// recent listeners
-#recent_listeners {
-  div {
-    float: left;
-    margin-right: 24px;
-  }
-  height: 60px;
-}
 
-#follows,#mostly_listens_to {
-  padding-bottom: 0px;
-  margin-bottom: 10px;
-  padding-right: 0px;
-  width: 395px;
+#follows,#mostly_listens_to, #recent_listeners {
+  margin:0;
+  padding:0;
+  width: 420px;
   div {
     float: left;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-right: 29px;
+    margin:0;
+    padding:0;
+    &.edge_to_edge_large{
+      height: 105px;
+      width: 105px;
+      img{
+        height: 105px;
+        width: 105px;
+      }
+    }
+    &.edge_to_edge_small{
+      height: 60px;
+      width: 60px;
+      img{
+        height: 60px;
+        width: 60px;
+      }
+    }
+    &.edge_to_edge_tiny{
+      height: 42px;
+      width: 42px;
+      img{
+        height: 42px;
+        width: 42px;
+      }
+    }
   }
 }
 

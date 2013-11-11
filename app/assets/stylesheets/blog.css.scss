@@ -597,8 +597,9 @@ a.prev-next:hover {
   z-index: 100;
 }
 .comment_user a,
-.comment_user > img{
+.comment_user img{
   display: block;
+  width:50px;
   padding:15px;
 }
 

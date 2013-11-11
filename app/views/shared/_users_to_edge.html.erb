@@ -1,0 +1,19 @@
+<% if users.count < 9 %>
+  <% users.each do |user| %>
+    <%= div_for(user, :class => 'edge_to_edge_large') do %>
+      <%= user_image_link(user, :large)%>
+    <% end %>
+  <% end %>
+<% elsif users.count < 21 %>
+  <% users.each do |user| %>
+    <%= div_for(user, :class => 'edge_to_edge_small') do %>
+      <%= user_image_link(user, :large)%>
+    <% end %>
+  <% end %>
+<% else %>
+  <% users.each do |user| %>
+    <%= div_for(user, :class => 'edge_to_edge_tiny') do %>
+      <%= user_image_link(user, :small)%>
+    <% end %>
+  <% end %>
+<% end %>
