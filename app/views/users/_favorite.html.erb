@@ -1,8 +1,8 @@
 <% asset = favorite.asset %>
-<%= content_tag :div, :id => ("asset_#{asset.unique_id}"), :class => 'asset ' + cycle('odd', 'even') do %>
+<%= content_tag :div, :id => ("asset_#{asset.unique_id}"), :class => 'asset ' do %>
   <%= render :layout => 'assets/asset_layout', :locals => {:asset => asset, :referrer => (@referrer) } do %>
     <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist' %>
+	<%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset} unless @single_track %>
   <% end %>
 <% end %>
 
-<%= render :partial => 'assets/asset_tabs', :locals => {:asset => asset} unless @single_track %>

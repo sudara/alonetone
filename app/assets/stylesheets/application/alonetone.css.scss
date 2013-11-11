@@ -917,6 +917,8 @@ h1 span#channel_name {
   }
 }
 
+
+
 .asset.played {
   opacity: 0.2;
 }
@@ -1013,3 +1015,24 @@ h2.stats {
 #recaptcha_privacy{
   display:none;
 }
+
+
+// ZEBRA STRIPING FOR DIFFERENT SECTIONS
+
+// .box_latest .asset:nth-child(4n + 1) {  
+//     div.button, div.title {
+//       background-color: $box_background_even;
+//     }
+// }
+
+.asset:nth-child(even) {
+  div.button, div.title {
+      background-color: $box_background_even;
+    } 
+}
+
+// .box_latest .asset:nth-child(4n + 1) {  
+//     div.button, div.title {
+//       background-color: $box_background_even;
+//     }
+// }

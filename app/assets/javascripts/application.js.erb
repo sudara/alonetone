@@ -531,7 +531,7 @@ Track = $.klass({
     this.deleteButton = $(".delete-button",this.element);
     this.trackURL = $('a.play_link',this.element).attr('href');
     this.soundID = this.trackURL.split('/').pop().split('.')[0];
-    this.more = this.element.next();
+    this.more = this.element.children().last();
     this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     this.radio = false;
@@ -565,6 +565,9 @@ Track = $.klass({
   },
   
   toggleDetails: function(desiredTab){
+
+    console.log(this.more);
+
     if(this.more.is(':hidden')) this.openDetails(desiredTab);
     else if (this.isPlaying()) this.openDetails(desiredTab); // never close the tabs when playing
     else this.closeDetails();
@@ -572,6 +575,7 @@ Track = $.klass({
   },
   
   openDetails: function(desiredTab){
+
     // don't allow this to happen when editing playlist
     if(!this.allowDetailsOpen) return false;
     

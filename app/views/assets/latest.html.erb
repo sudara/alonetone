@@ -46,7 +46,9 @@
     <h2 id="kicking_ass" class="box">Tracks from those you follow</h2>    
     <div class="box">
     <%= link_to image_tag('feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
-    <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
+    <div>
+      <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
+    </div>
     </div>
     <div class="footer_box">
       <%= link_to 'view all &rArr;'.html_safe, radio_path(:per_page => 40, :source => 'those_you_follow'), 
