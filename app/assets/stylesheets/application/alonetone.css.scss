@@ -424,7 +424,8 @@
 .listen {
   position: relative;
   width: 100%;
-  min-height: 40px;
+  min-height: 48px;
+  margin-top: 2px;
   background-color: $box_background;
   .listen_user {
     float: left;
