@@ -35,8 +35,7 @@
         <%= pluralize forum.topics.count, 'topic' %>, 
         <%= pluralize forum.posts.count, 'post' %>
       </div>
-      <p class="desc"><%= "#{forum.description_html}".html_safe %>
-      </p>
+      <%= "#{forum.description_html}".html_safe %>
     </td>
     <td class="c3">
       <%= link_to image_tag('icons/edit.png'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
