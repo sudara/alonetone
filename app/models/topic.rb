@@ -16,9 +16,7 @@ class Topic < ActiveRecord::Base
   belongs_to :last_user, :class_name => "User"
   belongs_to :forum, :counter_cache => true
 
-  has_many :posts,       
-    -> { order('posts.created_at DESC') },
-    :dependent => :delete_all
+  has_many :posts, :dependent => :delete_all
    
   has_one  :recent_post,
     -> { order('posts.created_at DESC') },
