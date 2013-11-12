@@ -204,9 +204,13 @@ table.posts tr.spacer td {
 
 .vcard_image_container {
   float: left;
-  margin-right: 0.5em;
+  margin-right: 8px;
+  margin-top: 2px;
   height: 85px;
   width: 50px;
+  img{
+    width:50px;
+  }
 }
 
 .post_edit_and_delete_links {
@@ -218,13 +222,16 @@ table.posts tr.spacer td {
   background-color: $box_background;
   border-color: $body_background;
   padding: 15px 10px;
-  font-weight: bold;
   color: #333333;
   font-size: 0.9em;
   min-height: 32px;
-  width: 150px;
+  width: 175px;
   min-width: 8em;
   vertical-align: top;
+  .fn a{
+    font-weight: bold;
+    
+  }
 }
 
 .post.even .author {
@@ -251,10 +258,6 @@ table.posts tr.spacer td {
   line-height: 14px;
 }
 
-
-
-
-
 .post .author a.threadauthor {
   color: #008800;
 }
@@ -270,6 +273,7 @@ table.posts tr.spacer td {
   color: #666666;
   font-weight: normal;
   margin-bottom: 0.5em;
+  margin-top: -7px;
   clear: both;
   a {
     color:#aaa;
