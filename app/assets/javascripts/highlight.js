@@ -81,7 +81,7 @@ jQuery.fn.unhighlight = function (options) {
 
 jQuery.fn.highlight = function (words, options) {
 
-    if(typeof words !== 'undefined'){
+    if (typeof words !== 'undefined') {
     
         var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
         jQuery.extend(settings, options);

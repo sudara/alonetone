@@ -1,5 +1,5 @@
 <%= simple_form_for @user_session do |f| %>
-  <%= f.input :login %><br/>
+  <%= f.input :login %><br>
   <%= f.input :password %>
   <%= f.button :submit, "Come on in..." %>
 <% end %>
@@ -9,10 +9,10 @@
 </p>
 
 <%= form_tag password_resets_path, :id => 'reset-password', :style => 'display:none' do |f| %>
-    <label for="email"><%= 'Enter the email address you signed up with' %></label><br />
+    <label for="email"><%= 'Enter the email address you signed up with' %></label><br>
     <%= text_field 'email','' %>
     <%= submit_tag 'Send Me An Email so I can login again!'%>
-<hr />
+	<hr>
 <% end -%>
 
 
