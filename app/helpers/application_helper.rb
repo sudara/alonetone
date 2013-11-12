@@ -61,9 +61,9 @@ module ApplicationHelper
   def markdown(text)
     return "" unless text
     text = emojify(text)
-    @renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-      :hard_wrap => true, :autolink => true, :no_intraemphasis => true) unless @renderer
-    Redcarpet::Render::SmartyPants.render(@renderer.render(text)).html_safe
+    @@renderer ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:hard_wrap => true),
+      :autolink => true, :no_intraemphasis => true) 
+    Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
   end
   
   def emojify(content)
