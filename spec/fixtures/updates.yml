@@ -3,6 +3,7 @@ valid:
   title: MyString
   permalink: mystring
   content: MyText
+  content_html: MyText
 
 same_title:
   id: 3

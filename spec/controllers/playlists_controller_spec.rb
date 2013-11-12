@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PlaylistsController, 'permissions' do
-  
   fixtures :playlists, :users
   
   it "should NOT let a not-logged person edit a playlist" do
@@ -93,9 +92,9 @@ end
  
   def edit_sudaras_playlist
     # a little ghetto, rspec won't honor string ids
-    get :edit, :id => '1', :permalink => 'owp', :user_id => 'sudara'
+    get :edit, :id => 1, :permalink => 'owp', :user_id => 'sudara'
   end
   
   def edit_arthurs_playlist
-    get :edit, :id => '2', :permalink => 'arthurs-playlist', :user_id => 'arthur'
+    get :edit, :id => 2, :permalink => 'arthurs-playlist', :user_id => 'arthur'
   end

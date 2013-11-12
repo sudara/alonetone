@@ -114,9 +114,9 @@ module ApplicationHelper
   end
   
   def notice_for(notice, h1_text, &block)
-    concat content_tag(:div, ((content_tag :h1, h1_text, :class => 'notice') + 
+    content_tag(:div, ((content_tag :h1, h1_text, :class => 'notice') + 
       hide_notice_link(notice) + 
-      capture(&block)), :class => 'notice'),
+      capture(&block)), :class => 'notice') +
       block.binding unless notice_hidden?(notice)
   end
   
