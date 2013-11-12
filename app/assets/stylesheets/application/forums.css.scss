@@ -203,9 +203,15 @@ table.posts tr.spacer td {
   color: #666666;
 }
 
-.post .author img {
+.vcard_image_container {
   float: left;
   margin-right: 0.5em;
+  height: 85px;
+  width: 50px;
+}
+
+.post_edit_and_delete_links {
+  margin-top: 15px;
 }
 
 .post .author {
@@ -245,6 +251,10 @@ table.posts tr.spacer td {
   font-size: 12px;
   line-height: 14px;
 }
+
+
+
+
 
 .post .author a.threadauthor {
   color: #008800;
