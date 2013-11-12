@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   end
 
   scope :recent,        -> { order('users.id DESC')                                   }
-  scope :recently_seen, -> { order('last_login_at DESC')                              }
+  scope :recently_seen, -> { order('last_request_at DESC')                            }
   scope :musicians,     -> { where(['assets_count > ?',0]).order('assets_count DESC') }
   scope :activated,     -> { where(:perishable_token => nil).recent                   }
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }

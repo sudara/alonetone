@@ -63,4 +63,12 @@ module UsersHelper
     "follows/all-#{count}-#{max_updated_at}"
   end
 
+  def digest_for_users 
+    if @sort == "last_seen" or @sort == nil
+      @users.first.last_request_at
+    else
+      cache_digest(@users)
+    end
+  end
+  
 end

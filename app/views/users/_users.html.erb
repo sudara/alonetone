@@ -24,7 +24,7 @@
         <%= render :partial => 'shared/user', :collection => @users %>
       <% end %>
     <% else %>
-      <% cache(cache_digest(@users)) do %>
+      <% cache(digest_for_users) do %>
         <%= render :partial => 'shared/user', :collection => @users %>
       <% end %>
     <% end %>
