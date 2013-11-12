@@ -74,11 +74,13 @@
       font-size: 18px;
       top: 10px;
     }
-    span.time {
-      position: absolute;
+    div.time {
+      float: right;
+      // margin-left: 46px;
+      position: relative;
       text-align: right;
-      right: 60px;
-      bottom: 9px;
+      right: 8px;
+      bottom: 0px;
       font-size: 12px;
       opacity: 0.5;
       font-family: $header_font, Helvetica, Arial;
