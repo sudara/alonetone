@@ -80,12 +80,13 @@ table.forums, table.topics {
   .title, .entry-title {
     font-size: 18px;
     color: $text_color;
-    text-decoration: underline;
     display: block;
+    text-decoration: underline;
     margin-bottom: 4px;
   }
   .entry-title {
     font-size: 15px;
+    display: inline;
   }
   tr {
     th {
@@ -366,7 +367,7 @@ tr.post.title {
 /* reply */
 
 div.editbox {
-  background: image-url('/images/reply_background.png');
+  background: image-url('reply_background.png');
   border: 2px solid #333333;
   border-color: $body_background;
   border-width: 2px 0;

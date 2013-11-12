@@ -14,7 +14,7 @@
       <% end %>
     </td>
     <td class="c2">
-      <%= "Sticky: <strong>".html_safe if topic.sticky? %>
+      <%= "<span class='flag'>Sticky</span> <strong>".html_safe if topic.sticky? %>
       <%= topic_title_link (topic), :class => "entry-title", :rel => "bookmark" %>
       <%= "</strong>".html_safe if topic.sticky? %>
       <% if topic.paged? -%>
