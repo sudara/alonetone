@@ -1032,22 +1032,11 @@ h2.stats {
 }
 
 
-// ZEBRA STRIPING FOR DIFFERENT SECTIONS
 
-// .box_latest .asset:nth-child(4n + 1) {  
-//     div.button, div.title {
-//       background-color: $box_background_even;
-//     }
-// }
+// ZEBRA STRIPES FOR ASSETS
 
 .asset:nth-child(even) {
   div.button, div.title {
       background-color: $box_background_even;
     } 
 }
-
-// .box_latest .asset:nth-child(4n + 1) {  
-//     div.button, div.title {
-//       background-color: $box_background_even;
-//     }
-// }
