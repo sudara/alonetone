@@ -51,7 +51,12 @@
     <% if @user.listens_count > 0 %>
 		People have listened to <%= @user.name %>'s <%= pluralize @user.assets_count, 'track' %> about <%= @user.listens_count %> times.<br/>
 		<% end %>
-	  <%=@user.name%> joined alonetone on <%= @user.created_at.to_date.to_s :long %>
+	  <%= @user.name%> joined alonetone on <%= @user.created_at.to_date.to_s :long %>
+    <% if moderator? %>
+    <p>
+      Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.current_login_ip) %>
+    </p>
+    <% end %>
   </div>
 <% end %>
 

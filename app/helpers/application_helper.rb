@@ -144,6 +144,11 @@ module ApplicationHelper
     end  
   end
   
+  def flag_for(ip)
+    return "" unless ip.present? 
+    image_tag('http://api.hostip.info/flag.php?ip='+ ip, :size => '80x40', :style => 'float:right; clear:none;opacity:0.4;').html_safe 
+  end
+  
   # Mephisto said it best...
   def sanitize_feed_content(html, sanitize_tables = false)
     options = sanitize_tables ? {} : {:tags => %w(table thead tfoot tbody td tr th)}

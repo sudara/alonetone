@@ -15,6 +15,6 @@
   	  "Guest #{track_play.ip.present? ? '('+track_play.ip+')': ''}" %> <br>
       via <%= link_source(track_play.source) %>
 	  </div>
-    <%= track_play.ip.present? ? image_tag('http://api.hostip.info/flag.php?ip='+track_play.ip, :size => '80x40', :style => 'float:right; clear:none;opacity:0.4;') : ''%>
-<% end %>
+    <%= flag_for track_play.ip %>
+ <% end %>
 <div class="clear"></div>
