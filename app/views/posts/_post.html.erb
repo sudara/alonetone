@@ -35,8 +35,9 @@
     <div class="clear"></div>
 
     <div class='post_edit_and_delete_links'>
-      edit, delete
-	    <%= link_to image_tag('icons/edit.png'), edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+      &nbsp;/&nbsp;
+      <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
     </div>
     <% end -%>
 

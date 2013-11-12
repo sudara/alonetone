@@ -217,7 +217,16 @@ table.posts tr.spacer td {
 
 .post_edit_and_delete_links {
   margin-top: 15px;
+  font-size: 7px!important;
+  // font-weight: bold;
+
+  a {
+    font-size: 11px!important;
+    color: #888!important;
+  }
 }
+
+
 
 .post .author {
   border-top: 2px solid #eeeeee;
