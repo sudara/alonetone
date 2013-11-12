@@ -37,7 +37,7 @@ class User
   end
   
   def avatar(size = nil)
-    return dummy_pic(size) unless self.has_pic?
+    return dummy_pic(size) if Alonetone.try(:default_user_images) || !self.has_pic?
     self.pic.pic.url(size) 
   end
   

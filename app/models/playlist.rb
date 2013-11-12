@@ -47,7 +47,7 @@ class Playlist < ActiveRecord::Base
   end
   
   def cover(size=nil)
-    return dummy_pic(size) unless self.pic && !self.pic.new_record?
+    return dummy_pic(size) if Alonetone.try(:default_user_images) or !self.pic.present? or self.pic.new_record?
     self.pic.pic.url(size)
   end
   

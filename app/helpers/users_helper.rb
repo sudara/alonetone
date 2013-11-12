@@ -9,6 +9,7 @@ module UsersHelper
   end
   
   def avatar(user, size=nil)
+    return "no-pic_#{size}.png" if Alonetone.try(:default_user_images)
     case size
       when 100 then image_tag(user.has_pic? ? user.pic.pic.url(:large) : 'no-pic-thumb100.jpg')
       when 50 then image_tag(user.has_pic? ? user.pic.pic.url(:small) : 'no-pic-thumb50.jpg')
