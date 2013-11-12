@@ -1042,7 +1042,7 @@ h2.stats {
 
 // ZEBRA STRIPES FOR ASSETS
 
-.asset:nth-child(even) {
+.asset:nth-child(odd) {
   div.button, div.title {
       background-color: $box_background_even;
     } 
