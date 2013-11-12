@@ -566,8 +566,6 @@ Track = $.klass({
   
   toggleDetails: function(desiredTab){
 
-    console.log(this.more);
-
     if(this.more.is(':hidden')) this.openDetails(desiredTab);
     else if (this.isPlaying()) this.openDetails(desiredTab); // never close the tabs when playing
     else this.closeDetails();

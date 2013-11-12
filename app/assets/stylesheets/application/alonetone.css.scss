@@ -427,6 +427,7 @@
   width: 100%;
   height: 40px;
   background-color: $box_background;
+  margin-top: 3px;
   .listen_user {
     float: left;
     margin-right: 10px;
@@ -1049,7 +1050,11 @@ h2.stats {
   font-size: 10px;
 }
 
+.listen_user img {
+  vertical-align: top;
+  
+}
 
-#user_track_plays a {
+.listen_details a {
   line-height: 14px;
 }
