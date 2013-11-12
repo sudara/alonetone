@@ -238,7 +238,7 @@ class AssetsController < ApplicationController
   def set_related_show_variables
     @listens = @asset.listens
     @comments = @asset.comments.only_public
-    @listeners = @asset.listeners.first(5)
+    @listeners = @asset.listeners.first(6)
     @favoriters = @asset.favoriters
     @page_title = "#{@asset.name} by #{@user.name}"
     @description = @page_title + " - #{@asset[:description]}"
