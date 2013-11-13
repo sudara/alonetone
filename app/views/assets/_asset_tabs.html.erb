@@ -41,8 +41,13 @@
         	           <br>
                      Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
         	        <% end %>
+                  
+                  <% if asset.comments_count == 0 && asset.favorites_count > 0 %>
+                    <br>
+                  <% end %>
+
+
         	        <% if asset.favorites_count > 0 %>
-        	        	<br>
                     Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
         	        <% end %>
     	          </div>
