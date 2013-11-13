@@ -315,6 +315,7 @@ table.posts tr.spacer td {
 }
 
 .posts .post .body {
+  vertical-align: top;
   border-top: 2px solid #eeeeee;
   border-color: $body_background;
   background-color: $tab_box_silver;
