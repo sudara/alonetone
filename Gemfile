@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "rails", "4.0.1"
 
 # server
-gem "mysql2"
+gem "mysql2", "0.3.11"
 
 # temporary
 gem "protected_attributes"
@@ -49,8 +49,9 @@ gem "coffee-rails"
 gem "soundmanager2-rails"
 
 group :production do
-  gem "puma"
-  gem "mysql2"
+  gem "puma"      
+  gem "mysql2", "0.3.11"
+
 end
 
 group :development do

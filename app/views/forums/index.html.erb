@@ -36,9 +36,13 @@
         <%= pluralize forum.posts.count, 'post' %>
       </div>
       <%= "#{forum.description_html}".html_safe %>
+      <div class="edit_forum">
+        <%= link_to "edit forum", edit_forum_path(forum), :class => "tiny", :rel => "directory" if admin? %>
+      </div>
     </td>
     <td class="c3">
-      <%= link_to image_tag('icons/edit.png'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
+      
+
     </td>
 
     <td class="inv lp">
