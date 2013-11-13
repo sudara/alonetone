@@ -314,6 +314,9 @@
 }
 
 .comment_form {
+
+overflow: hidden;
+
   .comment_as {
     line-height: 37px;
     font-size: 14px;
@@ -330,9 +333,8 @@
 }
 
 .private_check_box {
-  float: right!important;
   margin-top:4px;
-  
+  float: left;
 }
 
 // give the posts some breathing room
