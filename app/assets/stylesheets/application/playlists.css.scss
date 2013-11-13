@@ -19,14 +19,32 @@ a.next, a.prev {
 }
 
 #playlists_home{
-  position:relative;
-  li{
+  overflow: hidden;
+  text-align: center;
+  font-size: 11px;
+  margin-bottom: 28px;
+
+  li {
     float:left;
     display:block;
     width:178px;
     img{
       width:128px;
     }
+  }
+
+  .playlists_home_title {
+    color: #FFFFFF;
+    margin-top: 5px;
+    margin-bottom: 0px;
+      a {
+        font-size: 13px;
+
+      }
+   }
+  .playlists_home_user  a {
+    font-size: 12px;
+    color: #BCBCBC;
   }
 }
 
