@@ -224,12 +224,24 @@ table.posts tr.spacer td {
 .post_edit_and_delete_links {
   margin-top: 15px;
   font-size: 7px!important;
-  // font-weight: bold;
 
   a {
     font-size: 11px!important;
     color: #888!important;
   }
+}
+
+.topic_edit_and_delete_links {
+  text-align: left;
+  color: #CCC;
+  font-size: 7px!important;
+  margin-top: -6px;
+
+  a {
+    font-size: 11px!important;
+    color: #888!important;
+  }
+
 }
 
 

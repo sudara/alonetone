@@ -42,9 +42,10 @@
 
 <h2><%= @topic.title %></h2>
 <% if moderator? || admin? %>
-  <div class="additional_options_solo" style="margin-top: -50px">
-    <%= link_to image_tag('icons/edit.png'), edit_forum_topic_path(@topic.forum, @topic) %>
-    <%= link_to image_tag('icons/delete.png'), forum_topic_path(@topic.forum, @topic), :method => :delete, :confirm => 'You want to delete this thread (and all replies?)' %> 
+  <div class="topic_edit_and_delete_links">
+    <%= link_to 'edit', edit_forum_topic_path(@topic.forum, @topic) %>
+    &nbsp;/&nbsp;
+    <%= link_to 'delete', forum_topic_path(@topic.forum, @topic), :method => :delete, :confirm => 'You want to delete this thread (and all replies?)' %> 
   </div>
 <% end %>
 
