@@ -47,12 +47,11 @@
   div.title {
     background-color: $box_background;
     height: 40px;
-    width: 320px;
+    width: 370px;
     overflow: hidden;
     padding-top: 10px;
     a {
       font-size: 18px;
-      margin-left: 20px;
       text-decoration: none;
     }
     span.by {
@@ -65,26 +64,26 @@
       font-size: 12px;
       margin-left: 20px;
     }
-    span.counter {
-      position: absolute;
+    .counter {
       text-align: right;
-      right: 59px;
       font-size: 18px;
-      top: 10px;
+    }
+
+    div {
+      float: none;
     }
     div.time {
-      float: right;
-      position: relative;
       text-align: right;
-      right: 8px;
-      bottom: 0px;
       font-size: 12px;
       opacity: 0.5;
       font-family: $header_font, Helvetica, Arial;
     }
-    span.listen_count {
+    .listen_count {
       color: $orange;
-      font-size: 12px;
+      font-size: 11px;
+      margin-left: 5px;
+      position: relative;
+      top:-3px;
       font-weight: bold;
     }
   }

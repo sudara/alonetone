@@ -349,22 +349,49 @@ span.private {
 }
 
 // icon links (add/delete/etc)
-a.view_more {
+
+.track_about_link {
   display: block;
-  background: image-url('icons/view_more_silver.png') no-repeat left center;
-  text-indent: -1000px;
-  width: 117px;
-  height: 32px;
-  float: right;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
+   @include border-radius(4px, 4px); 
+   border: 1px solid #CCCCCC;
+  // @include text-shadow(rgba(black, 0.6) 1px 2px 3px);
+  font-family: $header_font;
+  width: 73px;
+  height: 28px;
+  float: left;
+  line-height: 28px!important;
+  text-decoration: none!important;
+  text-align: center;
+  margin-left: 8px;
+  
+  &.right {
+    float: right;
+    position: relative;
+    margin-top: -50px;
+    margin-right: 10px;
+  }
+
   &:hover {
-    background-position: -117px 0px;
+    @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
+    @include text-shadow(none);
   }
   &:active {
-    background-position: -234px 0px;
-  }
+  }  
 }
+
+a.edit_in_box {
+  width: 50px;
+}
+
+a.view_more {
+  width: 84px;
+}
+
+a.download {
+  width: 84px;
+}
+
 
 a.edit {
   display: block;
@@ -379,27 +406,6 @@ a.edit {
     margin-right: 25px;
     float: right;
     top: 0px;
-  }
-}
-
-a.edit_in_box {
-  display: block;
-  background: image-url('icons/edit_silver.png') no-repeat left center;
-  text-indent: -1000px;
-  width: 73px;
-  height: 32px;
-  float: left;
-  &.right {
-    float: right;
-    position: relative;
-    margin-top: -50px;
-    margin-right: 10px;
-  }
-  &:hover {
-    background-position: -73px 0px;
-  }
-  &:active {
-    background-position: -146px 0px;
   }
 }
 

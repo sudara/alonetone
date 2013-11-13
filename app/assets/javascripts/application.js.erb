@@ -549,7 +549,10 @@ Track = $.klass({
     '.play_link' : function(e){ return this.togglePlay()},      // open comments
     '.track_link': function(e){ return this.toggleDetails(1)}, // open info
     '.download_link':function(e){ return this.toggleDetails(2)}, // open sharing
-    '.title':function(e){ return this.toggleDetails(1)}  // open 
+    // '.title':function(e){ return this.toggleDetails(1)},  // open 
+    // '.title_left_column':function(e){ return this.toggleDetails(1)},  // open 
+    '.title_left_column_top':function(e){ return this.toggleDetails(1)},  // open 
+    '.title_left_column_bottom':function(e){ return this.toggleDetails(1)}  // open 
   }),
   
   onmouseenter: $.delegate({
@@ -566,7 +569,7 @@ Track = $.klass({
   
   toggleDetails: function(desiredTab){
 
-    if(this.more.is(':hidden')) this.openDetails(desiredTab);
+    if (this.more.is(':hidden')) this.openDetails(desiredTab);
     else if (this.isPlaying()) this.openDetails(desiredTab); // never close the tabs when playing
     else this.closeDetails();
     return false;
@@ -598,7 +601,7 @@ Track = $.klass({
 		  // Show some text prompting them to edit if no description
 		  if($('.description .min_height_50 :not(h3)', this.more).text() == ""){
 		    var href = $('.edit_in_box', this.more).attr('href');
-		    var prompt = '<span class="hint"><a class="hint" href="'+href+'">Add a description now</a> to help listeners find your music</span>';
+		    var prompt = '<span class="hint"><a class="hint" href="'+href+'">Add a description</a> to help listeners find your music</span>';
 		     $('.description .min_height_50', this.more).append(prompt);
 		  }
 		}

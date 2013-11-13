@@ -167,6 +167,8 @@ div.tabs {
     padding: 10px 20px;
     margin-left: -20px;
     border-top-color: $body_background;
+    line-height: 15px;
+
     &.no_border {
       border: none;
     }
@@ -178,7 +180,7 @@ div.tabs {
       }
       .alonetoner {
         position: absolute;
-        top: 7px;
+        // top: 7px;
         left: 15px;
         height: 100%;
         a {
@@ -198,13 +200,14 @@ div.tabs {
       .description {
         margin-left: 60px;
         font-size: 14px;
+        line-height: 16px;
         p img{
           max-width: 290px;
         }
       }
       .stats {
         font-size: 12px;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
       }
       .admin {
         font-size: 10px;
@@ -221,11 +224,19 @@ div.tabs {
   }
 }
 
+.show_to_admin {
+  display: none;
+  float: none;
+  clear: both;
+}
+
+.show_to_admin_or_owner {
+  display: none;
+}
+
 .track_links {
-  position: relative;
-  height: 32px;
-  margin-left: 60px;
-  width: 340px;
+  float: right!important;
+  margin-top: 15px;
 }
 
 #single_track .track_links {

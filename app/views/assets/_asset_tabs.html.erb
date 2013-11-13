@@ -13,45 +13,51 @@
 	        <%= render :partial => 'assets/comment', :locals => {:asset => asset} %>
 	    </div>
 		<% end %>
+
   	<div id="details_track_<%= asset.unique_id %>">
 
         <div class="description_panel panel no_border">
+            
             <div class='alonetoner'>          
                 <%= user_image_link(asset.user, :small)%>
             </div>
+            
             <div class="description">
+                
                 <div class='min_height_50'>
                   <h3><%= asset.name %></h3>
-                  <%= markdown(awesome_truncate(asset.description, 260) + '...' + link_to('(more)', 
-                    user_track_path(asset.user, asset.permalink))) if asset.description.present? %>
+                  <%= markdown(awesome_truncate(asset.description, 260) + '...' + link_to('(more)', user_track_path(asset.user, asset.permalink))) if asset.description.present? %>
                 </div>
             	  
                 <div class="stats">
-                  Uploaded <span class="utc_date"><strong><%= asset.created_at.iso8601.gsub(/\+.*/,'') %></strong></span>,
-        	        listened to <strong><%= asset.listens_count %> times</strong>.
+                  Uploaded <span class="utc_date"><strong><%= asset.created_at.iso8601.gsub(/\+.*/,'') %></strong></span>, listened to <strong><%= asset.listens_count %> times</strong>.
         	        <% if asset.comments_count > 0 %>
-        	           <br/>Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
+        	           <br>
+                     Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
         	        <% end %>
         	        <% if asset.favorites_count > 0 %>
-        	        	Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
+        	        	<br>
+                    Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
         	        <% end %>
     	          </div>
     	          
-    	          <div class="admin show_to_admin" style="display:none;">
+    	          <div class="admin show_to_admin">
 	                mp3: <strong><%= h asset.mp3_file_name %></strong><br>
-                  Track: <strong> <%= asset.title%></strong><br/>
-                  Artist:<strong> <%= asset.artist %></strong><br/>
-                  Album:  <strong><%= asset.album %></strong><br/>
+                  Track: <strong> <%= asset.title%></strong><br>
+                  Artist:<strong> <%= asset.artist %></strong><br>
+                  Album:  <strong><%= asset.album %></strong><br>
                 </div>
+
 	          </div>
+
             <div class="track_links">
-          	  <div class="show_to_admin_or_owner" style="display:none;">
-                <%= link_to "Edit", edit_user_track_path(asset.user, asset), 
-                  :class => 'edit_in_box show_to_admin_or_owner', :title => 'edit this track' %>
-    	        </div>
-    	          
-      	     <%= link_to "View more", user_track_path(asset.user, asset.permalink), 
-      	        :class => 'view_more', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
+          	  
+              <%= link_to "edit", edit_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box track_about_link', :title => 'edit this track' %>
+
+              <%= link_to 'download', user_track_path(asset.user, asset.permalink, :format => :mp3, :referrer => 'download'), :class=> 'download track_about_link', :title => "right-click to download mp3" %>
+
+      	     <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more track_about_link', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
+
             </div>
         </div>
     </div>	
