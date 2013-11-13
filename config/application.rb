@@ -18,7 +18,7 @@ module Alonetone
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     
-    config.exceptions_app = self.routes
+    # config.exceptions_app = self.routes
     
     config.assets.precompile += %w(soundmanager2.swf soundmanager2_flash9.swf ipad.css 24houralbum.css rpm_challenge.css blog.css)
   end
