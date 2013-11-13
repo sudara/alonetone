@@ -282,7 +282,7 @@
   }
   .comment_body, .body {
     padding: 0px 20px 30px 0px;
-    margin-bottom: 3px;
+    margin-bottom: 1px;
     margin-left: 72px;
     a, a:visited, a:hover {
       color: $white;
@@ -435,7 +435,7 @@ overflow: hidden;
   width: 100%;
   height: 40px;
   background-color: $box_background;
-  margin-top: 3px;
+  margin-top: 1px;
   .listen_user {
     float: left;
     margin-right: 10px;
