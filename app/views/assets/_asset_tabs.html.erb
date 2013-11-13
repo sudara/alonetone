@@ -24,9 +24,15 @@
             
             <div class="description">
                 
-                <div class='min_height_50'>
-                  <h3><%= asset.name %></h3>
-                  <%= markdown(awesome_truncate(asset.description, 260) + '...' + link_to('(more)', user_track_path(asset.user, asset.permalink))) if asset.description.present? %>
+                <div class='min_height_40'>
+                  <!-- <h3><%= asset.name %></h3> -->
+                  
+                  <%= markdown( awesome_truncate(asset.description, 300) ) %>
+
+                  <div class="description_more">
+                    <%= markdown(link_to('(read more)', user_track_path(asset.user, asset.permalink))) if asset.description.length > 300 %>
+                  </div>
+
                 </div>
             	  
                 <div class="stats">
@@ -42,10 +48,10 @@
     	          </div>
     	          
     	          <div class="admin show_to_admin">
-	                mp3: <strong><%= h asset.mp3_file_name %></strong><br>
-                  Track: <strong> <%= asset.title%></strong><br>
-                  Artist:<strong> <%= asset.artist %></strong><br>
-                  Album:  <strong><%= asset.album %></strong><br>
+	                mp3: <strong><%= asset.mp3_file_name %></strong><br>
+                  track: <strong> <%= asset.title%></strong><br>
+                  artist: <strong> <%= asset.artist %></strong><br>
+                  album:  <strong><%= asset.album %></strong><br>
                 </div>
 
 	          </div>

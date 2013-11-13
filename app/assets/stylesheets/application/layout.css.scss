@@ -146,6 +146,12 @@ html[xmlns] .clearfix {
   width: 100%;
 }
 
+.min_height_40 {
+  // margin-bottom: 10px;
+  min-height: 40px;
+  // width: 100%;
+}
+
 // general spacing stuff
 div.box {
   position: relative;

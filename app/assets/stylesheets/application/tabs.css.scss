@@ -200,18 +200,33 @@ div.tabs {
       .description {
         margin-left: 60px;
         font-size: 14px;
-        line-height: 16px;
+        line-height: 17px;
         p img{
           max-width: 290px;
         }
+
+        p {
+          margin-top: 0px;
+          margin-bottom:0px;
+        }
+        
+        .description_more p  a {
+          font-weight: bold!important;
+          text-decoration: none!important;
+          font-size: 12px!important;
+        }
+
       }
       .stats {
         font-size: 12px;
+        margin-top: 8px;
         // margin-bottom: 20px;
       }
       .admin {
         font-size: 10px;
         padding-top: 20px;
+        line-height: 12px;
+        color: #666;
       }
     }
   }
