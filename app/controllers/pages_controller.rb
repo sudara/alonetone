@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   
   def four_oh_four
     @page_title = "Not found"
-    flash[:error] = "Gone looking but did not find? Try searching, or let us know!"
+    flash[:error] = "Hmm, couldn't find that..."
     render :status => 404
   end
 

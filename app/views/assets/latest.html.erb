@@ -45,7 +45,7 @@
   <% if @followee_tracks %>
     <h2 id="kicking_ass" class="box">Tracks from those you follow</h2>    
     <div class="box">
-    <%= link_to image_tag('feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
+    <%= link_to image_tag('feed-icon.png'), listen_feed_path(current_user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
     <div>
       <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
     </div>

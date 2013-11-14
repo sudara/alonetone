@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    not_found unless @user
     respond_to do |format|
       format.html do
         prepare_meta_tags
@@ -81,12 +80,11 @@ class UsersController < ApplicationController
   end
   
   def attach_pic
-    @pic = @user.build_pic(params[:pic])
-    if @pic.save
-      flash[:ok] = 'Pic updated!'
-    else
-      flash[:error] = 'Pic not updated!'      
+    if params[:pic].present? 
+      @pic = @user.build_pic(params[:pic])
+      flash[:ok] = 'Picture updated!' if @pic.save
     end
+    flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:ok].present?
     redirect_to edit_user_path(@user)
   end
   
