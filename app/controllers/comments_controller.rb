@@ -28,7 +28,6 @@ class CommentsController < ApplicationController
 
   def unspam
     @comment.ham!
-    @comment.update
     redirect_to :back
   end
   
@@ -62,7 +61,7 @@ class CommentsController < ApplicationController
   end
   
   def set_spam_comments
-    @spam = Comment.spam.page(params[:page]) if moderator?
+    @spam = Comment.spam.page(params[:spam_page]) if moderator?
   end
   
   def authorized?
