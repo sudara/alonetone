@@ -41,7 +41,7 @@
            <% if @user.has_tracks? %>
            <div class="stats">
                joined alonetone <strong><%= @user.created_at.to_date.to_s(:long) %></strong><br/>
-               <%= link_to "#{@user.playlists.public.count} albums/mixes", user_playlists_path(@user) if @user.playlists.public.count > 0 %><br/>
+               <%= link_to "#{@user.playlists.public.count} albums/mixes", user_playlists_path(@user.login) if @user.playlists.public.count > 0 %><br/>
                <%= link_to @user.assets_count, user_tracks_path(@user) %> tracks on alonetone<br/>
                tracks listened to: <%= link_to @user.number_of_tracks_listened_to, listens_path(@user) %><br/>
                <%= itunes_link_for(@user) if @user.itunes.present? %><br/>

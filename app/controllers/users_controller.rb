@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     elsif !is_from_a_bad_ip? and @user and @user.activate!
       UserSession.create(@user, false) # Log user in manually
       UserNotification.activation(@user).deliver
-      redirect_to new_user_track_path(current_user), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
+      redirect_to new_user_track_path(@user.login), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
     else
       redirect_to new_user_path, :error => "Hm. Activation didn't work. Sorry about that!"
     end
