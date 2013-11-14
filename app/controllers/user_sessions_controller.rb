@@ -17,6 +17,7 @@ class UserSessionsController < ApplicationController
         flash.now[:error] = "There was a problem logging you in! Please re-check your email and password."
       end
       @user = User.new
+      @bypass_recaptcha = true unless RECAPTCHA_ENABLED
       render :action => :new
     end
   end
