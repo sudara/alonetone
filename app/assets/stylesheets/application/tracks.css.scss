@@ -34,13 +34,11 @@
       }
     }
     &.play-button {
-      margin-right: 1px;
       a {
         background-image: image-url('icons/play.png');
       }
     }
     &.download-button {
-      margin-left: 1px;
       a {
         background-image: image-url('icons/download.png');
       }
@@ -49,7 +47,7 @@
   div.title {
     background-color: $box_background;
     height: 40px;
-    width: 318px;
+    width: 320px;
     overflow: hidden;
     padding-top: 10px;
     a {
