@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
 
   def find_asset
     @asset = Asset.where(:permalink => (params[:permalink] || params[:track_id] || params[:id])).first
-    @asset ||= Asset.where(:id => params[:id]).first
+    @asset ||= Asset.where(:id => params[:id]).first || track_not_found
   end
   
   def find_playlists
