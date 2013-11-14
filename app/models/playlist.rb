@@ -48,8 +48,12 @@ class Playlist < ActiveRecord::Base
   end
   
   def cover(size=nil)
-    return dummy_pic(size) if Alonetone.try(:default_user_images) or !self.pic.present? or self.pic.new_record?
+    return dummy_pic(size) if has_no_cover?
     self.pic.pic.url(size)
+  end
+  
+  def has_no_cover?
+     Alonetone.try(:default_user_images) or !self.pic.present? or self.pic.new_record? or !self.pic.try(:pic).present?
   end
   
   def has_tracks?
