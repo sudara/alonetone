@@ -31,7 +31,7 @@ class Playlist < ActiveRecord::Base
   before_update :ensure_private_if_less_than_two_tracks
 
   def to_param
-    "#{self.permalink}"
+    "#{permalink}"
   end
   
   def dummy_pic(size)

@@ -29,7 +29,7 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # Disable transactional fixtures, and instead clean the db out 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
 
   # If true, the base class of anonymous controllers will be inferred
@@ -40,11 +40,11 @@ RSpec.configure do |config|
   config.include Authlogic::TestCase
 
   config.before(:suite) do
-     DatabaseCleaner.strategy = :transaction
      DatabaseCleaner.clean_with(:truncation)
   end
   
   config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
   end
 

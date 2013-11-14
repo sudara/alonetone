@@ -144,7 +144,7 @@ describe AssetsController do
     
     it 'should allow user to edit 1 track' do 
       login(:arthur)
-      get :mass_edit, :user_id => users(:arthur).login, :assets => assets(:valid_arthur_mp3).id
+      get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_arthur_mp3).id]
       response.should be_success
       assigns(:assets).should include(assets(:valid_arthur_mp3))
     end
@@ -160,7 +160,7 @@ describe AssetsController do
     
     it 'should not allow user to edit other peoples tracks' do
       login(:arthur)
-      get :mass_edit, :user_id => users(:arthur).login, :assets => assets(:valid_mp3).id
+      get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_mp3).id]
       response.should be_success # no wrong answer here :)
       assigns(:assets).should_not include(assets(:valid_mp3))
       assigns(:assets).should be_present # should be populated with user's own assets

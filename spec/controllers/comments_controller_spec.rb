@@ -8,6 +8,7 @@ describe CommentsController do
     
     it 'should allow anyone to view the comments index' do
       get :index
+       assigns(:comments)
       response.should be_success
     end
     
