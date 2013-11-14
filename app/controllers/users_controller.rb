@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     if logged_in? 
       redirect_to new_user_track_path(current_user), :error => "You are already activated and logged in! Rejoice and upload!"
     elsif !is_from_a_bad_ip? and @user and @user.activate!
-      UserSession.create(@user, false) # Log user in manually
+      UserSession.create(@user, true) # Log user in manually
       UserNotification.activation(@user).deliver
       redirect_to new_user_track_path(@user.login), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
     else
