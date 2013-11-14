@@ -2,7 +2,7 @@
 
 environment 'production'
 workers 4
-threads 0,2
+threads 1,1
 preload_app!
 daemonize true
 pidfile 'tmp/puma.pid'
