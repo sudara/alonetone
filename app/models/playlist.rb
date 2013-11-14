@@ -28,7 +28,7 @@ class Playlist < ActiveRecord::Base
   attr_accessible :user_id, :is_favorite, :year, :title, :description, :private
   before_validation  :auto_name_favorites, :on => :create
   before_update :set_mix_or_album
-  after_save :ensure_private_if_less_than_two_tracks
+  before_update :ensure_private_if_less_than_two_tracks
 
   def to_param
     "#{self.permalink}"
@@ -72,7 +72,7 @@ class Playlist < ActiveRecord::Base
   end
   
   def ensure_private_if_less_than_two_tracks
-    update_attribute(:private, true) if !is_favorite? and tracks_count < 2
+    self.private = true if !is_favorite? and tracks_count < 2
     true
   end
   
