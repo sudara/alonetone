@@ -5,7 +5,6 @@
       <li><%= link_to 'comment', "#comment_track_#{asset.unique_id}" %> </li>
 	  <% end %>
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
-      <li><%= link_to 'more', "#share_track_#{asset.unique_id}" %> </li>
     </ul>
     
     <%= favorite_toggle(asset) %>
@@ -55,13 +54,6 @@
       	        :class => 'view_more', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
             </div>
         </div>
-    </div>
-
-	    
-    <div id="share_track_<%= asset.unique_id %>">
-        <%= render :partial => 'assets/share', :locals => {:object => asset} %>
-    </div>
-	
-	
+    </div>	
   </div>
 <% end %>
