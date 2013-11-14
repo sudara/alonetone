@@ -18,6 +18,18 @@ a.next, a.prev {
   }
 }
 
+#playlists_home{
+  position:relative;
+  li{
+    float:left;
+    display:block;
+    width:178px;
+    img{
+      width:128px;
+    }
+  }
+}
+
 #playlists_carousel {
   position: relative;
   .prev {

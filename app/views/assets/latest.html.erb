@@ -2,8 +2,8 @@
 <%= render :partial => 'shared/self_confidence' unless logged_in? %>
 <%= cache(@playlists.first.cache_key+'plisthome') do %>
   <div id="latest_playlists">
-    <h2>Latest albums &amp; playlists</h2>
-    <%= render :partial => 'shared/carousel' %>
+    <h2>Latest playlists</h2>
+    <%= render :partial => 'playlists/for_home' %>
   </div>
 <% end unless @playlists.blank? %>
 
