@@ -20,10 +20,9 @@ class UpdatesController < ApplicationController
   # GET /updates/1
   # GET /updates/1.xml
   def show
-    @update = Update.find_by_permalink(params[:id])
+    @update = Update.where(:permalink => params[:id]).includes(:comments => [:commenter => :pic]).first
     @previous = Update.find(:first, :conditions => ['created_at < ?',@update.created_at], :order => 'created_at DESC')
     @next = Update.find(:first, :first,:conditions => ['created_at > ?',@update.created_at], :order => 'created_at ASC')
-    @comments = @update.comments.only_public.includes(:commenter)
     @page_title = @update.title
     respond_to do |format|
       format.html # show.html.erb

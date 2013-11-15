@@ -1,15 +1,16 @@
 <div class="comment">
- <div class="comment_user">
-  <% if comment.commenter %>
-      <%= user_image_link(comment.commenter, :small)%>
-	<% else %>
-	    <%= image_tag User.dummy_pic(:small)%>
-	<% end %>
-</div>
+  <div class="comment_user">
+    <% if comment.commenter %>
+        <%= user_image_link(comment.commenter, :small)%>
+    <% else %>
+        <%= image_tag User.dummy_pic(:small)%>
+    <% end %>
+  </div>
 
- <div class="comment-body">
-    <h2 class="h2-comment">  	<%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
+  <div class="comment-body">
+    <h2 class="h2-comment">  	
+        <%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
         said <%= friendly_time_ago(comment.created_at) %></h2>
     <p class="p-comment"><%= "#{comment.body_html}".html_safe %></p>
- </div><!-- div end comment-body -->
+  </div><!-- div end comment-body -->
 </div><!-- div end comment -->
