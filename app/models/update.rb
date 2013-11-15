@@ -3,11 +3,8 @@ class Update < ActiveRecord::Base
   has_permalink :title
   scope :recent, -> { order('created_at DESC') }
     
+  attr_accessible :title, :content
   has_many :comments, :as => :commentable, :dependent => :destroy
-  
-  def print
-    self.content_html.html_safe || BlueCloth::new(self.content).to_html.html_safe
-  end
   
   # The following methods help us keep dry w/ comments
   def name

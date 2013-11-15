@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   
-  before_filter :find_user
+  before_filter :find_user, :except => [:index, :create]
   before_filter :find_comment, :only => [:destroy, :unspam]
   before_filter :require_login, :only => [:destroy, :unspam]
   
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
   def destroy
     if params[:spam] == true
-      @comment.report_as_false_negative 
+      @comment.spam! 
       flash[:ok] = 'We marked that comment as spam'
     else
       @comment.destroy
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
 
   def index
     if params[:login].present?
-      not_found unless @user
+      find_user
       @page_title = "#{@user.name} Comments"
       @comments = @user.comments.public_or_private(display_private_comments?).page(params[:page])
       set_comments_made
