@@ -49,6 +49,8 @@
    </div><!-- div end post-body -->
 
    <div class="comment-all">
-    <%= render :partial => 'updates/comment', :collection => update.comments %>
+     <% update.comments.each do |comment| %>
+        <%= render :partial => 'updates/comment', :locals => {:comment => comment } if comment.body_html.present? %>
+    <% end %>
    </div><!-- div end comment-all -->
  </div><!-- div end post -->
