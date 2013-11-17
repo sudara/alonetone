@@ -27,8 +27,11 @@
       <% if post.user.moderator? %>
         <span class="admin">moderator</span>
       <% end %>
-      
-      
+
+      <span class="posts user_ip">
+        <%= post.user.ip if logged_in? %>
+      </span>
+
     </div>
     <div class="clear"></div>
 
@@ -55,7 +58,7 @@
       <div class="post_body_html">
       <%= markdown(post.body) %>
         <div class="post_footer">     
-           <%= post.user.ip if logged_in? %>
+         
            <%= post.user.browser if moderator? %>
         </div>
       </div>
