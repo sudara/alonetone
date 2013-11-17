@@ -7,49 +7,59 @@
 
 <% end %>
 <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
-  
 
-  <td class="author vcard">
-
-      <div class="vcard_user_name">
-        <span class="fn"><%= link_to truncate(post.user.name, :length => 20), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
-      </div>
-
-      <div class="vcard_image_container">
-        <%= image_tag post.user.avatar(:small) %>
-      </div>
-
-      <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>
+  <td class="author">
       
-      <% if post.user.assets_count > 0 %>
-          <span class="posts"><%= link_to (pluralize post.user.assets_count, 'tracks'), user_tracks_path(post.user) %></span>
-      <% end %>
+      <div class="author_container">
 
-      <% if post.user.moderator? %>
-        <span class="admin">moderator</span>
-      <% end %>
+        <div class="author_top">
 
-      <span class="posts user_ip">
-        <%= post.user.ip if logged_in? %>
-      </span>
+          <div class="vcard_user_name">
+            <span class="fn"><%= link_to truncate(post.user.name, :length => 30), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
+          </div>
 
-    <div class="clear"></div>
+          <div class="vcard_image_container">
+            <%= image_tag post.user.avatar(:small) %>
+          </div>
 
-    <% if logged_in? && post.editable_by?(current_user) -%>
-      
-      <div class='post_edit_and_delete_links'>
-  	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
-        &nbsp;/&nbsp;
-        <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
+          <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>
+          
+          <% if post.user.assets_count > 0 %>
+              <span class="posts"><%= link_to (pluralize post.user.assets_count, 'tracks'), user_tracks_path(post.user) %></span>
+          <% end %>
+
+          <% if post.user.moderator? %>
+            <span class="admin">moderator</span>
+          <% end %>
+
+          <span class="posts user_ip">
+            <%= post.user.ip if logged_in? %>
+          </span>
+          <div class="clear"></div>
+
+        </div>
+
+        <% if logged_in? && post.editable_by?(current_user) -%>
+        
+        <div class="author_bottom">
+          
+          <div class='post_edit_and_delete_links'>
+      	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+            &nbsp;/&nbsp;
+            <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
+
+          </div>
+          <div class="post_browser_specs">
+            <abbr title="<%= post.user.browser %>">
+              <%= truncate(post.user.browser, :length => 33) if moderator? %>
+            </abbr>
+          </div>
+
+        </div>
 
       </div>
-      <div class="post_browser_specs">
-        <abbr title="<%= post.user.browser %>">
-          <%= truncate(post.user.browser, :length => 33) if moderator? %>
-        </abbr>
 
-      </div>
-    <% end -%>
+       <% end -%>
 
   </td>
   <td class="body entry-content" id="post-body-<%= post.id %>">

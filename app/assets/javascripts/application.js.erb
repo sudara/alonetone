@@ -946,4 +946,13 @@ jQuery(function($) {
   // highlighting on forums search
   $('#forums_layout p').highlight($('#forum_q').val());
   
+  // stretching divs to stick info to bottom corner of vcard author section
+
+  $('.author_container').each(function() {
+    // console.log("yo");
+
+    $(this).height($(this).parent().height());
+  });
+
+
 });

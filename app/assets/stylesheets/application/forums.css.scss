@@ -226,7 +226,7 @@ table.posts tr.spacer td {
   float: left;
   margin-right: 8px;
   margin-top: 2px;
-  height: 85px;
+  // height: 85px;
   width: 50px;
   img{
     width:50px;
@@ -234,7 +234,6 @@ table.posts tr.spacer td {
 }
 
 .post_edit_and_delete_links {
-  margin-top: 15px;
   font-size: 7px!important;
 
   a {
@@ -246,7 +245,7 @@ table.posts tr.spacer td {
 .post_browser_specs {
     font-size: 11px!important;
     color: #888!important;
-    margin-top: 2px;
+    margin-top: 3px;
 
 }
 
@@ -260,30 +259,40 @@ table.posts tr.spacer td {
     font-size: 11px!important;
     color: #888!important;
   }
-
 }
-
-
 
 .post .author {
   border-top: 2px solid #eeeeee;
   background-color: $box_background;
   border-color: $body_background;
-  padding: 15px 10px;
+  padding: 15px 10px 10px 10px;
   color: #333333;
   font-size: 0.9em;
-  min-height: 32px;
   width: 175px;
+  height: 100%;
   min-width: 8em;
   vertical-align: top;
-  .fn a{
+  .fn a {
     font-weight: bold;
-    
   }
 }
 
 .post.even .author {
   background-color: $box_background_even;
+}
+
+.author_container {
+  display: table;
+  min-height: 150px;
+}
+
+.author_top {
+  display: table-row;
+  height: 100%;
+}
+
+.author_bottom {
+  display: table-row;
 }
 
 .post_body_html {
@@ -299,6 +308,7 @@ table.posts tr.spacer td {
   color: #666666;
   margin-top: 1px;
   margin-bottom: 1px;
+  width: 180px;
 }
 
 .post .author .posts > a {
@@ -327,7 +337,6 @@ table.posts tr.spacer td {
   font-size: 11px;
   color: #666666;
   margin-bottom: 0.5em;
-  // clear: both;
 
   a {
     color:#666;
