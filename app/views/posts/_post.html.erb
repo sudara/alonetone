@@ -17,9 +17,7 @@
       <div class="vcard_image_container">
         <%= image_tag post.user.avatar(:small) %>
       </div>
-      
 
-          
       <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>
       
       <% if post.user.assets_count > 0 %>
@@ -27,7 +25,7 @@
       <% end %>
 
       <% if post.user.moderator? %>
-      <span class="admin">moderator</span>
+        <span class="admin">moderator</span>
       <% end %>
       
       
@@ -36,11 +34,12 @@
 
     <% if logged_in? && post.editable_by?(current_user) -%>
       
-    <div class='post_edit_and_delete_links'>
-	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
-      &nbsp;/&nbsp;
-      <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
-    </div>
+      <div class='post_edit_and_delete_links'>
+  	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+        &nbsp;/&nbsp;
+        <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
+      </div>
+
     <% end -%>
 
 
@@ -48,11 +47,9 @@
   <td class="body entry-content" id="post-body-<%= post.id %>">
     
     <div class="date">
-      <a href="#<%= dom_id post %>" rel="bookmark" name="<%=dom_id post %>">
       <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-      Posted: <%= friendly_time_ago(post.created_at) %>
+      <%= friendly_time_ago(post.created_at) %>
       </abbr>
-      </a>
     </div>
         
       <div class="post_body_html">
