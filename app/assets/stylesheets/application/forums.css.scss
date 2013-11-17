@@ -211,6 +211,11 @@ table.posts tr.spacer td {
   color: #666666;
 }
 
+.vcard_user_name {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
 .vcard_image_container {
   float: left;
   margin-right: 8px;
@@ -259,6 +264,7 @@ table.posts tr.spacer td {
   min-width: 8em;
   vertical-align: top;
   .fn a{
+    font-size: 13px;
     font-weight: bold;
     
   }
@@ -279,7 +285,14 @@ table.posts tr.spacer td {
   font-size: 0.75em;
   color: black;
   color: #666666;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
+
+.post .author .posts > a {
+  font-size: 12px;
+}
+
 
 .post .author a {
   color: #333333;
