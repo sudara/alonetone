@@ -238,9 +238,16 @@ table.posts tr.spacer td {
   font-size: 7px!important;
 
   a {
+    font-size: 12px!important;
+    color: #444!important;
+  }
+}
+
+.post_browser_specs {
     font-size: 11px!important;
     color: #888!important;
-  }
+    margin-top: 2px;
+
 }
 
 .topic_edit_and_delete_links {

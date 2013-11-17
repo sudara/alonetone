@@ -7,9 +7,10 @@
 
 <% end %>
 <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
+  
+
   <td class="author vcard">
-    <div>
-      
+
       <div class="vcard_user_name">
         <span class="fn"><%= link_to truncate(post.user.name, :length => 20), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
       </div>
@@ -32,7 +33,6 @@
         <%= post.user.ip if logged_in? %>
       </span>
 
-    </div>
     <div class="clear"></div>
 
     <% if logged_in? && post.editable_by?(current_user) -%>
@@ -41,26 +41,31 @@
   	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
         &nbsp;/&nbsp;
         <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
+
       </div>
+      <div class="post_browser_specs">
+        <abbr title="<%= post.user.browser %>">
+          <%= truncate(post.user.browser, :length => 33) if moderator? %>
+        </abbr>
 
+      </div>
     <% end -%>
-
 
   </td>
   <td class="body entry-content" id="post-body-<%= post.id %>">
     
     <div class="date">
       <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-      <%= friendly_time_ago(post.created_at) %>
+        <%= friendly_time_ago(post.created_at) %>
       </abbr>
     </div>
         
       <div class="post_body_html">
       <%= markdown(post.body) %>
+
         <div class="post_footer">     
-         
-           <%= post.user.browser if moderator? %>
         </div>
+
       </div>
   </td>
 </tr>
