@@ -8,7 +8,7 @@
    </div>
 	  <div class="listen_details">
 	    <div>
-        <strong><%= link_to h(track_play.asset.name), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>  
+        <strong><%= link_to h(truncate(track_play.asset.name, :length => 48)), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>  
       </div>
 	    <%= friendly_time_ago(track_play.created_at) %>  
   	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) : 
