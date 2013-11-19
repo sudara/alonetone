@@ -329,6 +329,12 @@ overflow: hidden;
   .public, .private {
     font-size: 12px;
   }
+
+  textarea {
+    height: 60px;
+    margin-bottom: 5px;
+  }
+
 }
 
 .private_check_box {
