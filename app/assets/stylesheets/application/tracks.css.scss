@@ -74,6 +74,7 @@
       font-size: 18px;
       top: 10px;
     }
+    
     div.time {
       float: right;
       position: relative;
@@ -84,6 +85,19 @@
       opacity: 0.5;
       font-family: $header_font, Helvetica, Arial;
     }
+
+    span.time {
+      display: block;
+      float: right;
+      position: relative;
+      text-align: right;
+      right: 8px;
+      bottom: 0px;
+      font-size: 12px;
+      opacity: 0.5;
+      font-family: $header_font, Helvetica, Arial;
+    }
+
     span.listen_count {
       color: $orange;
       font-size: 12px;
