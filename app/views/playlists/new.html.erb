@@ -5,10 +5,13 @@
 
 <%= error_messages_for :playlist %>
 
+
+<div class="container static_content">
 <%= form_for [@user, @playlist] do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <p>
     <%= f.submit "Create" %>
   </p>
 <% end %>
+</div>
 
