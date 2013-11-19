@@ -206,6 +206,7 @@ img.cover_200 {
     color: $white;
     background-color: $orange_background;
     @include background-image(linear-gradient(#EB954B, #E66D29));
+    padding: 10px 20px 10px 20px;
     margin-bottom: 1px;
     a {
       color: $white;
