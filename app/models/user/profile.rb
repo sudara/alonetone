@@ -61,10 +61,6 @@ class User
     "#{Alonetone.url}/#{login}"
   end
   
-  def printable_bio
-    self.bio_html || BlueCloth::new(self.bio).to_html
-  end
-  
   def website
     self[:website] || site
   end

@@ -17,10 +17,6 @@ class Feature < ActiveRecord::Base
 
   before_save :create_permalink
   
-  def body
-    BlueCloth::new(self[:body]).to_html
-  end
-  
   def to_param
     "#{self.permalink}"
   end
