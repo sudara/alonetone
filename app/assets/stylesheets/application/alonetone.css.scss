@@ -805,6 +805,12 @@ a.add_to_favorites, a.favorited {
 // needed for IE7 not to fuck up the animation
 #pic_upload {
   height: 50px;
+  border-bottom: 2px solid #CCC;
+  margin-bottom: 10px;
+  padding-left: 0;
+  font-size: 12px;
+  padding-bottom: 30px;
+  padding-top: 0;
 }
 
 .feature {

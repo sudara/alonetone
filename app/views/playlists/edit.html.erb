@@ -4,19 +4,19 @@
 <% content_for :left do %>
   
   <div id="edit_playlist">
+
     <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
 
-      <%= link_to 'edit title &amp; description','#edit_playlist_info',:class=>'slide_open_href edit_in_box right' %>
-      
-      <div id="pic_upload" class="static_content" style="display:none;">
-    	Upload a square photo, 400px by 400px for best results.<br/>
-    		<%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
-    			<%= f.file_field :pic  %>
-    			<%= submit_tag "Upload new Pic" %>
-    		<% end %>
-      </div>
+
       <div id="edit_playlist_info" class="static_content" style="display:none;">
-        <%= link_to 'delete playlist', user_playlist_path(@user, @playlist), :class => 'delete button'%>
+
+        <div id="pic_upload" class="static_content">
+          Upload a square photo, 400px by 400px for best results.<br>
+      		<%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
+      			<%= f.file_field :pic  %>
+      			<%= submit_tag "Upload new Pic" %>
+      		<% end %>
+        </div>
 
         <%= form_for [@user, @playlist] do |f| %>
             <%= render :partial => 'form', :locals => {:f => f} %>
@@ -25,10 +25,13 @@
             </div>
         <% end %>
       </div>
+
       <%= render :partial => 'track', :collection => @playlist.tracks %>
-    <div id="drop_here">
-      Drop Track here
-    </div>
+      
+      <div id="drop_here">
+        Drop Track here
+      </div>
+
     <% end %>
   </div>
   
@@ -36,7 +39,6 @@
 	
 <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), :id => 'add_track_url',:class=> 'hidden' %>	
 <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
-
 
 <% content_for :right do %>
   <div id="playlist_sources" class="draggable_wrapper">	
