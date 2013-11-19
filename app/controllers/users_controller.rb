@@ -171,7 +171,7 @@ class UsersController < ApplicationController
   end
   
   def dangerous_action?
-    %w(destroy update edit create).include? action_name 
+    %w(destroy update edit create attach_pic).include? action_name 
   end
   
   def change_user_to(user)

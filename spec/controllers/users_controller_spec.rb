@@ -113,6 +113,19 @@ describe UsersController do
       end
     end
     
+    it "should let a user upload a new photo" do 
+      login(:arthur)
+      post :attach_pic, :id => users(:arthur).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
+      flash[:ok].should be_present
+      response.should redirect_to(edit_user_path(users(:arthur)))
+    end
+    
+    it "should not let a user upload a new photo for another user" do 
+      login(:arthur)
+      post :attach_pic, :id => users(:sudara).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
+      response.should redirect_to('/login')
+    end
+    
     it "should let a user change their login" do 
       login(:arthur)
       put :update, :id => 'arthur', :user => {:login => 'arthursaurus'}
