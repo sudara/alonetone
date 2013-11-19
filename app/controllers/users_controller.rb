@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :ip_is_acceptable?, :only => :create
-  before_filter :find_user, :except => [:new, :create, :index]
+  before_filter :find_user, :except => [:new, :create, :index, :activate, :sudo]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   
   def index

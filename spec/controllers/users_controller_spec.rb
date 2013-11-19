@@ -53,16 +53,16 @@ describe UsersController do
     
     it "should activate with a for reals perishable token" do 
       activate_authlogic && create_user
-      controller.stub(:logged_in).and_return(false)
       get :activate, :perishable_token => User.last.perishable_token
-      expect(flash[:error]).to_not be_present
-      response.should be_redirect
+      expect(flash[:ok]).to be_present
+      response.should redirect_to(new_user_track_path(User.last.login))
     end
     
     it 'should log in user on activation' do 
       activate_authlogic && create_user      
-      expect(UserSession).to receive(:create)
+      #expect(UserSession).to receive(:create)
       get :activate, :perishable_token => User.last.perishable_token
+      controller.session["user_credentials"].should == User.last.persistence_token
     end
     
     it 'should send out email on activation' do 
