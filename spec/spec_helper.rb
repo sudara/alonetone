@@ -10,7 +10,9 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/mocks' 
 # require 'rspec/autorun' # screws up "spring" which we now use
-require "authlogic/test_case"
+require 'database_cleaner'
+require 'timecop'
+require 'authlogic/test_case'
 require 'factory_girl_rails'
 
 
@@ -22,7 +24,6 @@ RSpec.configure do |config|
   
   # Yes, I'd like to know when my views 500
   config.render_views
-  
   config.mock_with :rspec
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -38,6 +39,8 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   
   config.include Authlogic::TestCase
+  config.include RSpec::Support::Logging
+  config.include RSpec::Support::LittleHelpers
 
   config.before(:suite) do
      DatabaseCleaner.clean_with(:truncation)

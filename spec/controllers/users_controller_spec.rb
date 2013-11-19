@@ -12,7 +12,7 @@ describe UsersController do
     
     it "should send user activation email after signup" do
       create_user
-      ActionMailer::Base.deliveries.last.to.should == ["quire@example.com"]
+      last_email.to.should == ["quire@example.com"]
     end
 
     it "should have actually created the user" do
@@ -68,7 +68,7 @@ describe UsersController do
     it 'should send out email on activation' do 
       activate_authlogic && create_user
       get :activate, :perishable_token => User.last.perishable_token
-      ActionMailer::Base.deliveries.last.to.should == ["quire@example.com"]
+      last_email.to.should == ["quire@example.com"]
     end
     
     it "should not activate with bullshit perishable token" do

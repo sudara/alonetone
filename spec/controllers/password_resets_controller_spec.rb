@@ -22,7 +22,7 @@ describe PasswordResetsController do
     
     it 'should send an email with link to reset pass' do
       post :create, :email => [users(:arthur).email]
-      ActionMailer::Base.deliveries.last.to.should == [users(:arthur).email]
+      last_email.to.should == [users(:arthur).email]
     end
     
     it 'should render form to reset password given a decent token' do 
