@@ -228,16 +228,17 @@ a.arrows, a.view_all, a.view_more_no_float {
 
 .content {
   a.view_all {
+    font-family: $header_font;
     color: $text_color;
     text-shadow: rgba(255, 255, 255, 0.3) 1px 1px 0;
     position: relative;
     float: right;
     padding-left: 13px;
-    font-family: $header_font, Helvetica, Arial;
-    font-weight: 800;
+    // font-weight: 800;
+    font-weight: bold;
     font-size: 16px;
     line-height: 31px;
-    border_radius: 5px;
+    border-radius: 5px;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6c7959), color-stop(0.499, #869471), color-stop(0.5, #909d7c), color-stop(0.99, #a6b195));
     background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
     -webkit-box-shadow: inset 0 1px 0 #f0f2ed, inset 0 -1px 0 #303627;
@@ -505,6 +506,9 @@ a.alonetone_plus_link {
   width: 164px;
   height: 32px;
   display: block;
+  float: right;
+  margin-top:-40px;
+
   background: transparent image-url('icons/create_new_topic.png') no-repeat 0px 0px;
   &:hover {
     background-position: -164px;
@@ -517,6 +521,7 @@ a.alonetone_plus_link {
 #create_new_forum {
   width: 174px;
   height: 32px;
+  margin-top: -15px;
   display: block;
   background: transparent image-url('icons/create_new_forum.png') no-repeat 0px 0px;
   &:hover {
