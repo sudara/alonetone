@@ -6,29 +6,19 @@
     <% if authorized_for(playlist) %>
       <%= link_to "edit", edit_user_playlist_path(@user, playlist), :class => 'edit right' %>
     <% end %>
-
-          <% if !@single_playlist %>
-        <div class="edit_playlist_button_row">
-          <%= link_to 'delete', user_playlist_path(@user, @playlist), :class => 'playlist_delete_button'%>
-        </div>
-      <% end %>
-
-		
   </div>
-<% if playlist.private? && authorized_for(playlist) %>
-	<div class="empty">
+  
+  <% if playlist.private? && authorized_for(playlist) %>
+  	<div class="empty">
         Playlist is hidden from the public (you can still share it)<br/>
         <%= form_for [@user, playlist] do |f| %>
             <%= f.hidden_field :private, :value => 0 %>
             <%= f.submit 'publish playlist now' %>
         <% end %>
-        <!-- <%= link_to 'delete', user_playlist_path(@user, playlist.permalink), :class =>'delete button'%>  -->
-        
-	</div>
-<% end %>
+  	</div>
+  <% end %>
 
 	<div class="info">
-    
     <div class="cover">
       <% if @single_playlist %>
          <%= link_to(image_tag(playlist.cover(:large)), playlist.cover, :class => 'cover_125', :rel => 'facebox') %> 
@@ -50,8 +40,6 @@
       <p class="description">
         <span class="play_time"><%= playlist.play_time %></span>
       </p>
-      
-
     </div>
     <div class="clear"></div>
   </div>
@@ -60,6 +48,7 @@
 		<%= yield %>
 	</div>
 <% end %>
+
 <% content_for :share do %>
-<%= render :partial => 'playlists/share', :locals => {:playlist => playlist} %>
+  <%= render :partial => 'playlists/share', :locals => {:playlist => playlist} %>
 <% end %>

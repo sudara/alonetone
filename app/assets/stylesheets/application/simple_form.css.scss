@@ -15,6 +15,9 @@
       display:none;
     }
   }
+  textarea{
+    height:200px;
+  }
   input {
     font-size: 1em;
     padding:5px;
@@ -32,7 +35,7 @@
       vertical-align: -3px;
     }
     &.btn{
-      font-size: 1.2em;
+      font-size: 1.4em;
       padding:10px;
       margin-right: 0px;
     }
