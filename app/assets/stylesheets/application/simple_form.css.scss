@@ -43,7 +43,7 @@
 }
 
 div.boolean {
-  margin-left: 120px;
+  // margin-left: 120px;
 }
 
 
@@ -51,6 +51,13 @@ div.boolean {
 div.boolean label {
   float: none;
   margin: 0;
+  // margin-left: 10px;
+}
+
+div.boolean label input {
+  // float: none;
+  // margin: 0;
+  margin-right: 5px;
 }
 
 label.collection_radio_buttons {
