@@ -268,6 +268,15 @@ div.notice a.hide_notice {
   color: $orange;
 }
 
+div.notice li {
+  margin-bottom: 5px;
+}
+
+div.notice ol {
+  margin-top: 8px!important;
+}
+
+
 div.footer_box {
   height: 32px;
   text-align: right;
