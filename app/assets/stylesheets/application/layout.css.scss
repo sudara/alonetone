@@ -24,61 +24,7 @@ html,body {
   height: 110px;
 }
 
-.header_login {
-  position: absolute;
-   left: 864px;
- a#login_button {
-  display: block;
-  
-    width: 75px;
-    height: 25px;
-    background: image-url('nav/login.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -75px 0;
-    }
-    &:active {
-      background-position: -150px 0;
-    }
-        margin-top: 2px;
-    
 
-  }
-  a#logout_button {
-    display: block;
-    width: 88px;
-    background: image-url('nav/logout.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -88px 0;
-    }
-    &:active {
-      background-position: -176px 0;
-    }
-        margin-top: 2px;
-    height: 25px;
-
-  }
-  a#profile_link {
-    width: 25px;
-    height: 25px;
-    margin-left: 7px;
-  }
-
-}
-
-#logo {
-  position: absolute;
-  // top: 15px;
-  // left: 864px;
-  z-index: 5;
-  left: 54px;
-  width: 120px;
-  height: 81px;
-  background: transparent image-url('alonetone_big.png') no-repeat left center;
-}
-
-#nav {
-  margin-left: 254px;
-}
 
 #container {
     min-height: 100%;

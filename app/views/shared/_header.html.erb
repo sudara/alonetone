@@ -1,0 +1,24 @@
+<div class="header_login">
+    <% if @sudo %>
+      <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(@user) %></span>
+    <% end %>
+
+    <% if logged_in? %>
+      <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :id => 'profile_link'%>      
+      <%= link_to ' ',logout_path, :id => 'logout_button' %>
+    <% else %>
+      <%= link_to ' ',login_path, :id => 'login_button' %>
+
+    <% end %>
+</div>
+
+<div class="header_nav">
+	<div class="header_logo">
+		<a href="/" title="home" id="logo"></a>	
+	</div>
+	<%= render :partial=> 'shared/nav' %>	
+</div>
+
+<div class="header_search">
+	<%= render :partial => 'shared/search'%>	
+</div>
