@@ -1,59 +1,58 @@
-  .footer-left {
-  	font-size: 12px;
-    display: inline-block;
-    margin-left: 50px;
-    #updates_link.new {
-      color: $red;
-    }
-  }
-  .footer_right {
-  	font-size: 12px;
-    display: inline-block;
-    width: 677px;
-    vertical-align: top;
-    text-align: right;
-    a {
-      font-weight: normal;
-    }
-  }
+.footer-left {
+	font-size: 12px;
+	display: inline-block;
+	margin-left: 50px;
+	#updates_link.new {
+		color: $red;
+	}
+}
+.footer_right {
+	font-size: 12px;
+	display: inline-block;
+	width: 677px;
+	vertical-align: top;
+	text-align: right;
+	a {
+		font-weight: normal;
+	}
+}
 
-  #radio_button {
-    display: inline-block;
-    
-    height: 25px;
-    width: 81px;
-    background: image-url('nav/radio.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -81px 0;
-    }
-    &:active {
-      background-position: -162px 0;
-    }
-  }
-  #halp_button {
-    display: inline-block;
-    
-    height: 25px;
-    width: 78px;
-    background: image-url('nav/halp.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -78px 0;
-    }
-    &:active {
-      background-position: -156px 0;
-    }
-  }
-  #about_button {
-    display: inline-block;
-    
-    height: 25px;
-    width: 78px;
-    background: image-url('nav/about.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -78px 0;
-    }
-    &:active {
-      background-position: -156px 0;
-    }
-  }
-
+#radio_button {
+	display: inline-block;
+	
+	height: 25px;
+	width: 81px;
+	background: image-url('nav/radio.png') no-repeat 0px 0;
+	&:hover {
+		background-position: -81px 0;
+	}
+	&:active {
+		background-position: -162px 0;
+	}
+}
+#halp_button {
+	display: inline-block;
+	
+	height: 25px;
+	width: 78px;
+	background: image-url('nav/halp.png') no-repeat 0px 0;
+	&:hover {
+		background-position: -78px 0;
+	}
+	&:active {
+		background-position: -156px 0;
+	}
+}
+#about_button {
+	display: inline-block;
+	
+	height: 25px;
+	width: 78px;
+	background: image-url('nav/about.png') no-repeat 0px 0;
+	&:hover {
+		background-position: -78px 0;
+	}
+	&:active {
+		background-position: -156px 0;
+	}
+}
