@@ -30,13 +30,27 @@
   <body>
     <div id="container">
       
-      <div id="top_bar">
-        <%= render :partial => 'shared/top_bar', :current_user => current_user %>
-      </div>
       <div id="header">
         <a href="/" title="home" id="logo"></a>
-    		<%= render :partial=> 'shared/nav' %>
+        <div class="header_login_and_avatar">
+            
+            <% if @sudo %>
+              <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(@user) %></span>
+            <% end %>
+
+            <% if logged_in? %>
+              <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :id => 'profile_link'%>      
+              <%= link_to ' ',logout_path, :id => 'logout_button' %>
+            <% else %>
+              <%= link_to ' ',login_path, :id => 'login_button' %>
+            <% end %>
+
+        </div>
+        <%= render :partial=> 'shared/nav' %>
+
+         <%= render :partial => 'shared/search'%>
       </div> 
+
       
     	<div id="wrapper">
         <div id="content" class="content">    

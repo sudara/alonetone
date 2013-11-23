@@ -1,7 +1,4 @@
 <ul id='nav'>
-  <li id='home'>
-		<%= link_to 'Home', root_path, :title => 'home',:class => "tab#{' active' if @tab == 'home' }" %>
-	</li>
 	<li id='browse'>
 		<%= link_to 'Artists', users_path, :title => 'artists', :class => "tab#{' active' if @tab == 'browse' }" %>
 	</li>
