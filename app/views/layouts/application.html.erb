@@ -31,11 +31,11 @@
     <div id="container">
       <div id="header">
         <%= render :partial=> 'shared/header' %>
-     </div> 
-    	<div id="wrapper">
+      </div> 
+      <div id="wrapper">
         <div id="content" class="content">    
-    		  <%= check_for_and_display_welcome_back %>
-    		  <%= check_for_and_display_flashes %>
+          <%= check_for_and_display_welcome_back %>
+          <%= check_for_and_display_flashes %>
           <div id="main">
             <%= 
                 if yield(:pages).present?
@@ -51,23 +51,23 @@
               <%= yield :static %>
           </div>
           <div id="columns">
-    				<div id="left">
-    					<%= yield :left %>
-    				</div>
-  		
-    				<div id="right">
-    					<%= yield :right %>
-    				</div>	
-    				<div class="clear"> </div>
-
-    				<%= yield :bottom %>
-    	    </div>
+            <div id="left">
+              <%= yield :left %>
+            </div>
+      
+            <div id="right">
+              <%= yield :right %>
+            </div>  
+            <div class="clear"></div>
+            <%= yield :bottom %>
+          </div>
         </div>
-    	</div>
-      <div class="push"></div>
+      </div>
+      <div class="sticky_footer_buffer"></div>
     </div>
-
-		<%= render :partial => 'shared/footer' %>
+    <div id="footer">
+      <%= render :partial => 'shared/footer' %>
+    </div>
     <%= javascript_include_tag "application" %>
     <%= render :partial => 'shared/analytics' %>
   </body>

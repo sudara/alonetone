@@ -52,46 +52,7 @@
   }
 }
 
-// login and logout
-  a#radio_button {
-    display: block;
-    
-    height: 25px;
-    width: 81px;
-    background: image-url('nav/radio.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -81px 0;
-    }
-    &:active {
-      background-position: -162px 0;
-    }
-  }
-  a#halp_button {
-    display: block;
-    
-    height: 25px;
-    width: 78px;
-    background: image-url('nav/halp.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -78px 0;
-    }
-    &:active {
-      background-position: -156px 0;
-    }
-  }
-  a#about_button {
-    display: block;
-    
-    height: 25px;
-    width: 78px;
-    background: image-url('nav/about.png') no-repeat 0px 0;
-    &:hover {
-      background-position: -78px 0;
-    }
-    &:active {
-      background-position: -156px 0;
-    }
-  }
+
 
 // browse all users
 #user_index, #user_search_results {

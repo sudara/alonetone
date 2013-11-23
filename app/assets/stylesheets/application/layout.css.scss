@@ -1,142 +1,115 @@
 html,body {
-  background-color: $body_background;
-  height: 100%;
+	background-color: $body_background;
+	height: 100%;
 }
 
 #header {
-  @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
-  z-index: 5;
-  height: 150px;
+	@include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
+	height: 160px;
 }
 
 #container {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin-top: 0;
-    margin-bottom: -42px;
- }
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin-bottom: -142px;
+}
 
-.push {
-    height: 142px;
+.sticky_footer_buffer {
+	height: 142px;
 }
 
 #wrapper {
-  @include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
+	@include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
 }
 
 #content {
-  margin-bottom: 210px;
-  margin-left: 50px;
-  width: 890px;
+	margin-bottom: 210px;
+	margin-left: 50px;
+	width: 890px;
 }
 
 #main {
-  height: 1%;
+	height: 1%;
 }
 
 #static {
-  width: 600px;
-  height: 1%;
+	width: 600px;
+	height: 1%;
 }
 
 .sidebar {
-  float: right;
-  width: 240px;
+	float: right;
+	width: 240px;
 }
 
 #columns {
-  height: 1%;
-  #left {
-    float: left;
-    width: 420px;
-  }
-  #right {
-    float: left;
-    margin-left: 50px;
-    width: 420px;
-  }
+	height: 1%;
+	#left {
+	float: left;
+	width: 420px;
+	}
+	#right {
+	float: left;
+	margin-left: 50px;
+	width: 420px;
+	}
 }
 
 #footer {
-  @include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
-  height: 121px;
-  font-size: 12px;
-  padding-top: 21px;
-
-  #footer-left {
-    display: inline-block;
-    margin-left: 50px;
-    #updates_link.new {
-      color: $red;
-    }
-  }
-  #footer_right {
-    display: inline-block;
-    width: 677px;
-    vertical-align: top;
-    text-align: right;
-    a {
-      font-weight: normal;
-    }
-  }
-}
-
-// prevents content from being buried beneath footer without a scrollbar
-#footer_spacer {
-  clear: both;
-  width: 100%;
-  height: 60px;
+	@include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
+	height: 121px;
+	padding-top: 21px;
 }
 
 .clearfix:after {
-  display: block;
-  visibility: hidden;
-  clear: both;
-  height: 0pt;
-  content: ".";
-  line-height: 0pt;
+	display: block;
+	visibility: hidden;
+	clear: both;
+	height: 0pt;
+	content: ".";
+	line-height: 0pt;
 }
 
 .clearfix {
-  display: inline-block;
+	display: inline-block;
 }
 
 html[xmlns] .clearfix {
-  display: block;
+	display: block;
 }
 
 * html .clearfix {
-  height: 1%;
+	height: 1%;
 }
 
 .min_height_50 {
-  margin-bottom: 10px;
-  min-height: 80px;
-  width: 100%;
+	margin-bottom: 10px;
+	min-height: 80px;
+	width: 100%;
 }
 
 .min_height_40 {
-  // margin-bottom: 10px;
-  min-height: 40px;
-  // width: 100%;
+	// margin-bottom: 10px;
+	min-height: 40px;
+	// width: 100%;
 }
 
 // general spacing stuff
 div.box {
-  position: relative;
-  margin-bottom: 30px;
+	position: relative;
+	margin-bottom: 30px;
 }
 
 div.footer_box {
-  margin-top: -27px;
-  margin-bottom: 30px;
+	margin-top: -27px;
+	margin-bottom: 30px;
 }
 
 div.notice, div.errorExplanation {
-  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  border-top: 1px solid #6f6f6f;
-  border-bottom: 1px solid #7e807e;
+	@include background-image(linear-gradient(#F7F7F7, #C7C8C7));
+	margin-bottom: 20px;
+	padding: 20px 30px;
+	border-top: 1px solid #6f6f6f;
+	border-bottom: 1px solid #7e807e;
 }

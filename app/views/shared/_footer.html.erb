@@ -1,11 +1,10 @@
-<div id="footer">
-
-  <div id="footer-left">
+  <div class="footer-left">
     From the blog:
+
     <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
   </div>
 
-  <div id="footer_right">
+  <div class="footer_right">
     <%= link_to "About alonetone", '/about/'%>  
     &bull;
     <%= link_to "Stats", "/about/stats"%>
@@ -22,4 +21,3 @@
     <%= link_to ' ', about_path, :id => 'about_button'%>
     <%= link_to ' ', about_path(:howto), :id => 'halp_button'%>
 
-</div>
