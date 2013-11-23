@@ -1,6 +1,6 @@
-<div class="header_logo">
-  <a href="/" title="home" id="logo"></a> 
-</div>
+<!-- <div class="header_logo"> -->
+  <a href="/" title="home" class="header_logo"></a> 
+<!-- </div> -->
 
 <div class="header_nav">
 	<%= render :partial=> 'shared/nav' %>	
@@ -8,26 +8,25 @@
 
 <div class="header_login">
     
-    <% if @sudo %>
-      <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(@user) %></span>
-    <% end %>
+  <% if @sudo %>
+    <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(@user) %></span>
+  <% end %>
 
-    <% if logged_in? %>
-      <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :class => 'profile_link'%>      
-      <%= link_to ' ',logout_path, :class => 'logout_button' %>
-    <% else %>
-      <%= link_to ' ',login_path, :class => 'login_button' %>
+  <% if logged_in? %>
+    <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :class => 'profile_link'%>      
+    <%= link_to ' ',logout_path, :class => 'logout_button' %>
+  <% else %>
+    <%= link_to ' ',login_path, :class => 'login_button' %>
 
-    <% end %>
+  <% end %>
 </div>
 
 <div class="header_search">
 
-    <%= form_tag search_url, :id =>'search_form' do %>
-      <%= text_field_tag 'query', (@query || session[:last_query]), :placeholder => 'artist, song title or keyword' %>
-    <% end %>
-    
-    <%= link_to '','#',:id => 'search_button' %>
+  <%= form_tag search_url, :id =>'search_form' do %>
+    <%= text_field_tag 'query', (@query || session[:last_query]), :placeholder => 'artist, song title or keyword' %>
+  <% end %>
 
+  <%= link_to '','#',:id => 'search_button' %>
 
 </div>
