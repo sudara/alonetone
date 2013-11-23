@@ -3,28 +3,11 @@ html,body {
   height: 100%;
 }
 
-#top_bar {
-  @include background-image(linear-gradient(#282920, #070705));
-  // position: absolute;
-  // top: 0;
-  left: 0;
-  z-index: 10;
-  min-width: 800px;
-  width: 100%;
-  height: 29px;
-}
-
 #header {
   @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
-  // position: absolute;
-  // top: 29px;
-  left: 0;
   z-index: 5;
-  width: 100%;
   height: 110px;
 }
-
-
 
 #container {
     min-height: 100%;
@@ -41,7 +24,6 @@ html,body {
 #wrapper {
   @include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
 }
-
 
 #content {
   margin-bottom: 210px;
