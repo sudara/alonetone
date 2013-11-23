@@ -6,7 +6,7 @@ html,body {
 #header {
   @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
   z-index: 5;
-  height: 110px;
+  height: 150px;
 }
 
 #container {
