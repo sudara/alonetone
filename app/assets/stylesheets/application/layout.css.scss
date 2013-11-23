@@ -56,10 +56,11 @@ html,body {
 	}
 }
 
-#footer {
+.footer {
 	@include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
-	height: 121px;
-	padding-top: 21px;
+	height: 111px;
+	padding-top: 31px;
+	padding-left: 50px;
 }
 
 .clearfix:after {

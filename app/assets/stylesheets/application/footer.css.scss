@@ -1,23 +1,50 @@
-.footer-left {
-	font-size: 12px;
-	display: inline-block;
-	margin-left: 50px;
-	#updates_link.new {
-		color: $red;
+.footer {
+	ul {
+		margin-bottom: 10px;
+
+		li {
+			margin-bottom: 3px;
+		}
 	}
-}
-.footer_right {
-	font-size: 12px;
-	display: inline-block;
-	width: 677px;
-	vertical-align: top;
-	text-align: right;
 	a {
 		font-weight: normal;
 	}
 }
 
-#radio_button {
+%footer_column {
+	font-size: 12px;
+	display: inline-block;
+	width: 210px;
+	margin-right: 25px;
+	#updates_link.new {
+		color: $red;
+	}
+	vertical-align: top;
+}
+
+.footer_column_1 {
+	@extend %footer_column;
+	width: 200px;
+}
+.footer_column_2 {
+	@extend %footer_column;
+}
+.footer_column_3 {
+	@extend %footer_column;
+	width: 260px;
+}
+.footer_column_4 {
+	@extend %footer_column;
+
+}
+
+.footer-column-header {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.radio_button {
 	display: inline-block;
 	
 	height: 25px;
@@ -30,7 +57,7 @@
 		background-position: -162px 0;
 	}
 }
-#halp_button {
+.halp_button {
 	display: inline-block;
 	
 	height: 25px;
@@ -43,7 +70,7 @@
 		background-position: -156px 0;
 	}
 }
-#about_button {
+.about_button {
 	display: inline-block;
 	
 	height: 25px;

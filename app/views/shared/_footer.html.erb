@@ -1,42 +1,54 @@
-  <div class="footer-left">
-    From the blog:
+<div class="footer_column_1">
+  <%= link_to ' ', '/radio/popular', :class => 'radio_button'%>
+  <%= link_to ' ', about_path, :class => 'about_button'%>
+  <%= link_to ' ', about_path(:howto), :class => 'halp_button'%>
+</div>
+<div class="footer_column_2">
 
-    <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+  <div class="footer-column-header">
+    from the blog
+  </div>
+  
+  <ul>
+    <li>
+      <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+    </li>
+  </ul>
+  
+  <div class="footer-column-header">
+    alonetoners online
   </div>
 
-  <div class="footer_right">
-    <%= link_to "About alonetone", '/about/'%>  
-    &bull;
-    <%= link_to "Stats", "/about/stats"%>
-    &bull;
-    <%= link_to "Help", "/about/howto"%>
-    &bull;
-    <%= link_to "Press/Contact", "/about/press"%>
-    &bull;
-    <%= link_to "Donate!", "/about/donate" %>  
-  </div>
+  <ul>
+    <li>
+      <% User.currently_online.each do |user| %>
+        <%= link_to user.name, user_home_path(user.login) %> 
+      <% end %>
+    </li>
+  </ul>
+</div>
+<div class="footer_column_3">
+
+  <div class="footer-column-header">
+    other places to find alonetone
+  </div>    
+
+  <ul>
+     <li><%= link_to 'Alonetone Chat Room', "http://#{Alonetone.campfire_url}"%><br/></li>
+     <li><%= link_to '@alonetone on Twitter', 'http://twitter.com/alonetone'%></li>
+     <li><%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %></li>
+   </ul>   
+
+</div>
+<div class="footer_column_4">
+  
+  <ul>
+    <li><%= link_to "Help", "/about/howto"%></li>
+    <li><%= link_to "Stats", "/about/stats"%></li>
+    <li><%= link_to "Press/Contact", "/about/press"%></li>
+    <li><%= link_to "Donate!", "/about/donate" %></li>
+  </ul>
+
+</div>
 
 
-    <%= link_to ' ', '/radio/popular', :id => 'radio_button'%>
-    <%= link_to ' ', about_path, :id => 'about_button'%>
-    <%= link_to ' ', about_path(:howto), :id => 'halp_button'%>
-
-
-  Other places to find alonetone
-    
-        <%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %>
-       
-        <%= link_to 'Follow alonetone on twitter', 'http://twitter.com/alonetone'%><br/>
-       
-        <%= link_to 'Chat live with fellow alonetoners', "http://#{Alonetone.campfire_url}"%><br/>
-
-
-
-
-<div>Psssst. We've got an alonetone chat room with your name on it. <%= link_to 'Chat Now', "http://#{Alonetone.campfire_url}"%></div>
-
-  <div>alonetoners online: 
-    <% User.currently_online.each do |user| %>
-      <%= link_to user.name, user_home_path(user.login) %> 
-    <% end %>
-  </div>
