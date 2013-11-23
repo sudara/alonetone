@@ -1,13 +1,15 @@
 
-    <% content_for :h1 do %> Edit Topic <% end %>
+<% content_for :h1 do %> Edit Topic <% end %>
 
-    <%= error_messages_for :topic %>
-    <%= form_for :topic,
-         :url  => forum_topic_path(@forum, @topic),
-         :html => { :method => :put } do |f| -%>
-    <%= render :partial => "form", :object => f %>
-    <br />
-    <%= submit_tag 'Save Changes' %> or <%= link_to('Cancel', forum_topic_path(@forum, @topic)) %>
-    <% end -%>
+<div class="forum_form_container container static_content">
+	<%= error_messages_for :topic %>
+	<%= form_for :topic,
+	     :url  => forum_topic_path(@forum, @topic),
+	     :html => { :method => :put } do |f| -%>
+	<%= render :partial => "form", :object => f %>
+	<br>
+	<%= submit_tag 'Save Changes' %> or <%= link_to('Cancel', forum_topic_path(@forum, @topic)) %>
+	<% end -%>
+</div>
 
 

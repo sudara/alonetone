@@ -595,12 +595,20 @@ a.prev-next:hover {
   float: left;
   position: relative;
   z-index: 100;
-}
-.comment_user a,
-.comment_user img{
-  display: block;
-  width:50px;
-  padding:15px;
+  height:100%;
+  img{
+    display: block;
+    width:50px;
+    padding:15px;
+  }
+  a{
+    display: block;
+    width:50px;
+    padding:15px;
+    img {
+      padding:0;
+    }
+  }
 }
 
 .comment_new{

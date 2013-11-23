@@ -4,61 +4,78 @@
         <h2><%= link_to post.topic.title, forum_topic_path(post.forum, post.topic, :page => post.forum.recent_post.topic.last_page) %></h2>
     </td>
 </tr>
+
 <% end %>
 <tr class="post hentry <%= cycle('even','odd') %>" id="<%= dom_id post %>-row">
-  <td class="author vcard">
-    
-    
-    <div>
 
-      <div class="vcard_image_container">
-        <%= image_tag post.user.avatar(:small) %>
+  <td class="author">
+      
+      <div class="author_container">
+
+        <div class="author_top">
+
+          <div class="vcard_user_name">
+            <span class="fn"><%= link_to truncate(post.user.name, :length => 30), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
+          </div>
+
+          <div class="vcard_image_container">
+            <%= image_tag post.user.avatar(:small) %>
+          </div>
+
+          <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>
+          
+          <% if post.user.assets_count > 0 %>
+              <span class="posts"><%= link_to (pluralize post.user.assets_count, 'tracks'), user_tracks_path(post.user) %></span>
+          <% end %>
+
+          <% if post.user.moderator? %>
+            <span class="admin">moderator</span>
+          <% end %>
+
+          <span class="posts user_ip">
+            <%= post.user.ip if logged_in? %>
+          </span>
+          <div class="clear"></div>
+
+        </div>
+
+        <% if logged_in? && post.editable_by?(current_user) -%>
         
+        <div class="author_bottom">
+          
+          <div class='post_edit_and_delete_links'>
+      	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+            &nbsp;/&nbsp;
+            <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
+
+          </div>
+          <div class="post_browser_specs">
+            <abbr title="<%= post.user.browser %>">
+              <%= truncate(post.user.browser, :length => 33) if moderator? %>
+            </abbr>
+          </div>
+
+        </div>
+
       </div>
 
-      <span class="fn"><%= link_to truncate(post.user.login, :length => 20), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span><br/>
-      <% if post.user.moderator? %>
-      <span class="admin">
-        moderator
-      </span>
-      <% end %>
-          
-      <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>
-      <% if post.user.assets_count > 0 %>
-          <span class="posts"><%= link_to (pluralize post.user.assets_count, 'tracks'), user_tracks_path(post.user) %></span>
-      <% end %>
-
-      <% if logged_in? && post.editable_by?(current_user) -%>
-      
-      
-    </div>
-    <div class="clear"></div>
-
-    <div class='post_edit_and_delete_links'>
-	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
-      &nbsp;/&nbsp;
-      <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
-    </div>
-    <% end -%>
-
+       <% end -%>
 
   </td>
   <td class="body entry-content" id="post-body-<%= post.id %>">
     
     <div class="date">
-      <a href="#<%= dom_id post %>" rel="bookmark" name="<%=dom_id post %>">
       <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-      Posted: <%= friendly_time_ago(post.created_at) %>
+        <%= friendly_time_ago(post.created_at) %>
       </abbr>
-      </a>
     </div>
         
       <div class="post_body_html">
       <%= markdown(post.body) %>
+
         <div class="post_footer">     
-           <%= post.user.ip if logged_in? %>
-           <%= post.user.browser if moderator? %>
         </div>
+
       </div>
   </td>
 </tr>

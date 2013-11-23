@@ -37,8 +37,12 @@ class User
   end
   
   def avatar(size = nil)
-    return dummy_pic(size) if Alonetone.try(:default_user_images) || !self.has_pic?
+    return dummy_pic(size) if has_no_avatar?
     self.pic.pic.url(size) 
+  end
+  
+  def has_no_avatar?
+    Alonetone.try(:default_user_images) or !self.pic.present? || !self.pic.try(:pic).present?
   end
   
   def favorite_asset_ids
@@ -55,10 +59,6 @@ class User
   
   def site
     "#{Alonetone.url}/#{login}"
-  end
-  
-  def printable_bio
-    self.bio_html || BlueCloth::new(self.bio).to_html
   end
   
   def website

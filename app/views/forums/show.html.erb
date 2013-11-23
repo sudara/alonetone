@@ -14,6 +14,8 @@
   <%= feed_icon_tag @forum.name, forum_posts_path(@forum, :format => :atom)%> 
 <% end %>
 
+<%= link_to ' ', new_forum_topic_path(@forum), :id => "create_new_topic", :title => 'Start a new forum topic' %></p>
+
 <table  class="wide topics">
   <tr>
     <th class="la" colspan="2"><%= 'Topic'%></th>
@@ -28,6 +30,6 @@
   <%= will_paginate @topics %>
 </div>
 
-<div class="footer_box">
-    <%= link_to ' ', new_forum_topic_path(@forum), :id => "create_new_topic", :class => 'margin1px', :title => 'Start a new forum topic' %></p>
-</div>
+<!-- <div class="footer_box"> -->
+    
+<!-- </div> -->

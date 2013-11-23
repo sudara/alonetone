@@ -12,7 +12,7 @@ describe UsersController do
     
     it "should send user activation email after signup" do
       create_user
-      ActionMailer::Base.deliveries.last.to.should == ["quire@example.com"]
+      last_email.to.should == ["quire@example.com"]
     end
 
     it "should have actually created the user" do
@@ -53,22 +53,22 @@ describe UsersController do
     
     it "should activate with a for reals perishable token" do 
       activate_authlogic && create_user
-      controller.stub(:logged_in).and_return(false)
       get :activate, :perishable_token => User.last.perishable_token
-      expect(flash[:error]).to_not be_present
-      response.should be_redirect
+      expect(flash[:ok]).to be_present
+      response.should redirect_to(new_user_track_path(User.last.login))
     end
     
     it 'should log in user on activation' do 
       activate_authlogic && create_user      
-      expect(UserSession).to receive(:create)
+      #expect(UserSession).to receive(:create)
       get :activate, :perishable_token => User.last.perishable_token
+      controller.session["user_credentials"].should == User.last.persistence_token
     end
     
     it 'should send out email on activation' do 
       activate_authlogic && create_user
       get :activate, :perishable_token => User.last.perishable_token
-      ActionMailer::Base.deliveries.last.to.should == ["quire@example.com"]
+      last_email.to.should == ["quire@example.com"]
     end
     
     it "should not activate with bullshit perishable token" do
@@ -111,6 +111,19 @@ describe UsersController do
         put :update, :id => 'arthur', :user => {:bio => 'a little more about me'}
         response.should redirect_to(edit_user_path(users(:arthur)))
       end
+    end
+    
+    it "should let a user upload a new photo" do 
+      login(:arthur)
+      post :attach_pic, :id => users(:arthur).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
+      flash[:ok].should be_present
+      response.should redirect_to(edit_user_path(users(:arthur)))
+    end
+    
+    it "should not let a user upload a new photo for another user" do 
+      login(:arthur)
+      post :attach_pic, :id => users(:sudara).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
+      response.should redirect_to('/login')
     end
     
     it "should let a user change their login" do 

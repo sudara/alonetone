@@ -14,7 +14,7 @@ xml.rss :version => "2.0", "xmlns:media" => "http://search.yahoo.com/mrss/" do
         xml.link user_track_url( track.user, track )
         xml.pubDate track.created_at.rfc822
         xml.description do |description|
-          description.cdata!( track.description )
+          description.cdata!( track.description || "")
         end
         xml.tag!( "enclosure", :url => track.mp3, :length => track[:length], :type => "audio/mpeg" )
         xml.tag!( "media:content", :duration => track.length )

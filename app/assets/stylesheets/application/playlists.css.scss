@@ -30,6 +30,7 @@ a.next, a.prev {
     width:178px;
     img{
       width:128px;
+      height: 128px;
     }
   }
 
@@ -165,6 +166,7 @@ img.cover_200 {
       padding-right: 40px;
       color: $text_color;
       margin: 0;
+      margin-bottom: 4px;
     }
     h3 {
       font-weight: normal;
@@ -180,16 +182,19 @@ img.cover_200 {
     background: image-url('images/backgrounds/album.png') repeat-x top left;
     background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
+
     div.cover {
       position: relative;
       float: left;
       width: 148px;
       height: 136px;
+      overflow: hidden;
+      
     }
     p.description {
-      float: left;
+      // float: left;
       font-size: 12px;
-      width: 210px;
+      width: 360px;
       margin-left: 20px;
     }
     .play_time {
@@ -201,6 +206,7 @@ img.cover_200 {
     color: $white;
     background-color: $orange_background;
     @include background-image(linear-gradient(#EB954B, #E66D29));
+    padding: 10px 20px 10px 20px;
     margin-bottom: 1px;
     a {
       color: $white;
@@ -227,16 +233,14 @@ img.cover_200 {
     }
     &.adding {
       #drop_here {
-        position: absolute;
-        top: 0;
-        left: 0;
         display: block;
         width: 100%;
-        height: 100%;
+        height: 50px;
+        line-height: 50px;
+        border-top: 1px solid #000;
         background-color: $playlist_box_silver;
         text-align: center;
         color: $orange;
-        padding-top: 50px;
         font-size: 20px;
       }
     }
@@ -267,11 +271,51 @@ img.cover_200 {
 }
 
 #edit_playlist_info {
-  height: 370px;
+  // height: 370px;
   form p {
     font-size: 14px;
   }
   input {
     font-size: 13px;
   }
+  textarea {
+    width: 369px;
+  }
+}
+
+
+.playlist_delete_button {
+    background: image-url('icons/delete.png') no-repeat center top;
+    display: block;
+    height: 30px;
+    width: 110px;
+    font-size: 10px;
+    margin-top: 20px!important;
+    margin-left: 10px;
+    font-weight: normal;
+    line-height: 35px;
+    float: right;
+    position: relative;
+    top: 10px;
+    margin-right: -25px;
+}
+
+.playlist_edit_button {
+  margin: 0!important;
+  float: right!important;
+  margin-right: 20px!important;
+}
+
+.edit_playlist_button_row {
+    // background-color: $playlist_box_silver;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+}
+
+
+.playlists_hidden_blurb {
+  margin: 5px 0 14px 0;
+  font-size: 12px;
 }

@@ -44,9 +44,8 @@
 }
 
 .forum_paginator {
-  margin-top: 3px;
+  margin-top: 0px;
   width: 890px;
-  height: 34px;
   .button_wrapper {
     border: none;
     clear: none;
@@ -330,6 +329,12 @@ overflow: hidden;
   .public, .private {
     font-size: 12px;
   }
+
+  textarea {
+    height: 60px;
+    margin-bottom: 5px;
+  }
+
 }
 
 .private_check_box {
@@ -596,6 +601,7 @@ overflow: hidden;
 // static content
 
 .static_content {
+  overflow: hidden;
   padding: 15px 25px;
   background: #e1e2e1;
   line-height: 18px;
@@ -607,6 +613,13 @@ overflow: hidden;
     }
   }
 }
+
+  .static_content_youtube {
+    padding: 0!important;
+    background: none;
+    
+  }
+
 
 .sidebar {
   float: right;
@@ -635,6 +648,7 @@ overflow: hidden;
 
 #follows,#mostly_listens_to, #recent_listeners {
   margin:0;
+  background: none;
   padding:0;
   width: 420px;
   div {
@@ -791,6 +805,12 @@ a.add_to_favorites, a.favorited {
 // needed for IE7 not to fuck up the animation
 #pic_upload {
   height: 50px;
+  border-bottom: 2px solid #CCC;
+  margin-bottom: 10px;
+  padding-left: 0;
+  font-size: 12px;
+  padding-bottom: 30px;
+  padding-top: 0;
 }
 
 .feature {

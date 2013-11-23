@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session]) #always stay logged in
+    @user_session = UserSession.new(params[:user_session].merge({:remember_me => true})) #always stay logged in
     if @user_session.save
       redirect_back_or_default(user_home_path(@user_session.user))
     else
@@ -17,6 +17,7 @@ class UserSessionsController < ApplicationController
         flash.now[:error] = "There was a problem logging you in! Please re-check your email and password."
       end
       @user = User.new
+      @bypass_recaptcha = true unless RECAPTCHA_ENABLED
       render :action => :new
     end
   end

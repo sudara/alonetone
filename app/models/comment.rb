@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL')                                                         }
   scope :include_private,    -> { recent.where(:is_spam => false)                                                                  }
   scope :public_or_private,  ->(has_access) { has_access ? include_private : only_public                                          }
-  scope :spam,               -> { recent.where(:spam => true)                                                                      }
+  scope :spam,               -> { recent.where(:is_spam => true)                                                                      }
   scope :on_track,           -> { where(:commentable_type => 'Asset')                                                              }
   scope :last_5_private,     -> { on_track.include_private.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic})  }
   scope :last_5_public,      -> { on_track.only_public.limit(5).includes(:commenter => :pic, :commentable => {:user => :pic}) }
@@ -65,8 +65,6 @@ class Comment < ActiveRecord::Base
   def user_logged_in
     !!commenter_id 
   end
-  
-  
   
   def deliver_comment_notification
     CommentNotification.new_comment(self, commentable).deliver if is_deliverable?

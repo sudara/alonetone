@@ -64,15 +64,15 @@ end
 
 ## Who loves tests! You do? You do!
 group :test do
-  gem "rspec-rails"
-  gem "rspec-mocks"
-  gem "timecop"
-  gem 'guard-spring'
-  gem "guard-rspec"
-  gem 'database_cleaner'
-  gem 'rb-fsevent', '~> 0.9.1'
-  gem 'guard', :github => 'sudara/guard'
+  gem "rspec-rails", :require => false
+  gem "rspec-mocks", :require => false
+  gem "timecop", :require => false
+  gem 'guard-spring', :require => false
+  gem "guard-rspec", :require => false
+  gem 'database_cleaner', :require => false
+  gem 'rb-fsevent', '~> 0.9.1', :require => false
+  gem 'guard', :github => 'sudara/guard', :require => false
   gem 'guard_listen', :github => 'sudara/listen', :require => 'guard_listen'
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
-  gem "factory_girl_rails"
+  gem "factory_girl_rails",:require => false
 end

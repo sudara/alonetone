@@ -6,7 +6,7 @@
   </div>
   <% if @user.playlists.public.size > 1 %>
     <div class="button_wrapper">
-    <%= link_to image_tag("arrows.png") + "change playlist order", sort_user_playlists_path(@user), :id => 'change_playlist_order', :class => 'button'  %>
+    <%= link_to image_tag("arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
     </div>
   <% end %>
 </div>

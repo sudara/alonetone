@@ -38,15 +38,16 @@ class ApplicationController < ActionController::Base
   def currently_online
     @online = User.currently_online
   end
-  
+    
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
-    @user = User.where(:login => login).first || current_user
+    @user = User.where(:login => login).first
+    not_found unless @user
   end
 
   def find_asset
     @asset = Asset.where(:permalink => (params[:permalink] || params[:track_id] || params[:id])).first
-    @asset ||= Asset.where(:id => params[:id]).first
+    @asset ||= Asset.where(:id => params[:id]).first || track_not_found
   end
   
   def find_playlists

@@ -72,12 +72,26 @@
     div {
       float: none;
     }
+    
     div.time {
       text-align: right;
       font-size: 12px;
       opacity: 0.5;
       font-family: $header_font, Helvetica, Arial;
     }
+
+    .time {
+      display: block;
+      float: right;
+      position: relative;
+      text-align: right;
+      right: 8px;
+      bottom: 0px;
+      font-size: 12px;
+      opacity: 0.5;
+      font-family: $header_font, Helvetica, Arial;
+    }
+
     .listen_count {
       color: $orange;
       font-size: 11px;

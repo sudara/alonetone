@@ -14,6 +14,7 @@ class Pic < ActiveRecord::Base
   attachment_options[:path] = "/pics/:id/:basename_:style.:extension" if Alonetone.storage == "s3"
   has_attached_file :pic, attachment_options
 
+  validates_attachment_presence :pic, :message => 'must be set. Make sure you chose a file to upload!'
   validates_attachment_size :pic, :less_than => 3.megabytes, :greater_than => 100.bytes
   validates_attachment_content_type :pic, :content_type => /image/
   

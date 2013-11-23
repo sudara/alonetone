@@ -1,5 +1,5 @@
 class AssetsController < ApplicationController  
-  before_filter :find_user, :except => [:radio]
+  before_filter :find_user, :except => [:radio, :latest]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
   
   # we check to see if the current_user is authorized based on the asset.user
@@ -197,8 +197,8 @@ class AssetsController < ApplicationController
   protected
     
   def track_not_found
-    flash[:error] = "We didn't find that mp3 from #{@user.name}, sorry. Maybe it is here?" 
-    redirect_to user_tracks_path(@user) 
+    flash[:error] = "Hmm, we didn't find that track!"
+    raise ActionController::RoutingError.new('Track Not Found')
   end
   
   def user_has_tracks_from_followees?
@@ -265,7 +265,7 @@ class AssetsController < ApplicationController
   end
   
   def ip_just_registered_this_listen?
-    last_listen = @asset.listens.where(:ip => request.remote_ip).first
+    last_listen = @asset.listens.since(1.week.ago).where(:ip => request.remote_ip).first
     last_listen.present? && (last_listen.created_at > (Time.now - @asset[:length]))
   end
   
@@ -277,11 +277,11 @@ class AssetsController < ApplicationController
     return true if is_from_a_bad_ip?
     
     # check user agent agaisnt both white and black lists
-    not browser? or @@bots.any?{|bot_agent| @agent.include? bot_agent}  
+    not browser? or @@bots.any?{ |bot_agent| @agent.include? bot_agent }  
   end
   
   def browser?
-    @@valid_listeners.any?{|valid_agent| @agent.include? valid_agent} 
+    @@valid_listeners.any?{ |valid_agent| @agent.include? valid_agent } 
   end
   
   def set_user_agent

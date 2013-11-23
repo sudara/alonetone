@@ -8,7 +8,7 @@
       <div class="bio static_content">
       	<p>
     	    <% if @user.try(:bio) %>
-    	        <%= @user.printable_bio.html_safe %>
+    	        <%= markdown(@user.bio) %>
     	    <% else %>
     	        <%= @user.name %> doesn't have anything to say, unfortunately...
           <% end %>

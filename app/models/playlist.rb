@@ -8,7 +8,7 @@ class Playlist < ActiveRecord::Base
   scope :public,           -> { where(:private => false).where(:is_favorite => false).where("tracks_count > 1")   }
   scope :include_private,  -> { where(:is_favorite => false)                                                      }
   scope :recent,           -> { order('playlists.created_at DESC')                                                }
-  scope :with_pic,         -> { includes(:pic).where.not(:pics => {:id => nil })                                  }
+  scope :with_pic,         -> { includes(:pic).where.not(:pics => {:id => nil }).references(:pic)                 }
   scope :for_home,         -> { recent.public.limit(5).with_pic.includes(:user)                                  }
 
   belongs_to :user, :counter_cache => true  
@@ -28,10 +28,10 @@ class Playlist < ActiveRecord::Base
   attr_accessible :user_id, :is_favorite, :year, :title, :description, :private
   before_validation  :auto_name_favorites, :on => :create
   before_update :set_mix_or_album
-  after_save :ensure_private_if_less_than_two_tracks
+  before_update :ensure_private_if_less_than_two_tracks
 
   def to_param
-    "#{self.permalink}"
+    "#{permalink}"
   end
   
   def dummy_pic(size)
@@ -48,8 +48,12 @@ class Playlist < ActiveRecord::Base
   end
   
   def cover(size=nil)
-    return dummy_pic(size) if Alonetone.try(:default_user_images) or !self.pic.present? or self.pic.new_record?
+    return dummy_pic(size) if has_no_cover?
     self.pic.pic.url(size)
+  end
+  
+  def has_no_cover?
+     Alonetone.try(:default_user_images) or !self.pic.present? or self.pic.new_record? or !self.pic.try(:pic).present?
   end
   
   def has_tracks?
@@ -72,7 +76,7 @@ class Playlist < ActiveRecord::Base
   end
   
   def ensure_private_if_less_than_two_tracks
-    update_attribute(:private, true) if !is_favorite? and tracks_count < 2
+    self.private = true if !is_favorite? and tracks_count < 2
     true
   end
   

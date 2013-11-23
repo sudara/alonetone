@@ -1,7 +1,6 @@
 class ForumsController < ApplicationController
   
   before_filter :require_login, :except => [:index, :show]
-  before_filter :find_user, :only => :index
   before_filter :find_forum, :only => [:show, :edit, :update, :destroy]
   before_filter :set_forum_tab, :set_html_meta
   layout 'forums'
@@ -64,7 +63,7 @@ class ForumsController < ApplicationController
   end
   
   def set_interesting_topics
-    @user_topics = Topic.replied_to_by(@user).collect(&:topic) if logged_in?
+    @user_topics = Topic.replied_to_by(current_user).collect(&:topic) if logged_in?
     @popular_topics = Topic.popular.collect(&:first)
     @replyless_topics = Topic.replyless
   end

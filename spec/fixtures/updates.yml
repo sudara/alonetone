@@ -10,3 +10,5 @@ same_title:
   title: MyString
   permalink: mystring-2
   content: MyText
+  content_html: MyText
+  

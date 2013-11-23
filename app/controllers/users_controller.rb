@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :ip_is_acceptable?, :only => :create
-  before_filter :find_user, :except => [:new, :create]
+  before_filter :find_user, :except => [:new, :create, :index, :activate, :sudo]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   
   def index
@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    not_found unless @user
     respond_to do |format|
       format.html do
         prepare_meta_tags
@@ -64,9 +63,9 @@ class UsersController < ApplicationController
     if logged_in? 
       redirect_to new_user_track_path(current_user), :error => "You are already activated and logged in! Rejoice and upload!"
     elsif !is_from_a_bad_ip? and @user and @user.activate!
-      UserSession.create(@user, false) # Log user in manually
+      UserSession.create(@user, true) # Log user in manually
       UserNotification.activation(@user).deliver
-      redirect_to new_user_track_path(current_user), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
+      redirect_to new_user_track_path(@user.login), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
     else
       redirect_to new_user_path, :error => "Hm. Activation didn't work. Sorry about that!"
     end
@@ -81,12 +80,11 @@ class UsersController < ApplicationController
   end
   
   def attach_pic
-    @pic = @user.build_pic(params[:pic])
-    if @pic.save
-      flash[:ok] = 'Pic updated!'
-    else
-      flash[:error] = 'Pic not updated!'      
+    if params[:pic].present? 
+      @pic = @user.build_pic(params[:pic])
+      flash[:ok] = 'Picture updated!' if @pic.save
     end
+    flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:ok].present?
     redirect_to edit_user_path(@user)
   end
   
@@ -173,7 +171,7 @@ class UsersController < ApplicationController
   end
   
   def dangerous_action?
-    %w(destroy update edit create).include? action_name 
+    %w(destroy update edit create attach_pic).include? action_name 
   end
   
   def change_user_to(user)
