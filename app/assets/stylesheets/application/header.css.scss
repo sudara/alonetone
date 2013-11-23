@@ -1,6 +1,6 @@
 .header_logo {
 	position: absolute;
-	top: 9px;
+	top: 15px;
 	left: 54px;
 	display: block;
 	width: 120px;
@@ -58,7 +58,8 @@
 .header_search {
 	position: absolute;
 	top: 96px;
-	left: 49px;
+	// left: 49px;
+	left: 640px;
 	#search_form {
 		display: block;
 		float: left;
