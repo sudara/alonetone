@@ -21,3 +21,22 @@
     <%= link_to ' ', about_path, :id => 'about_button'%>
     <%= link_to ' ', about_path(:howto), :id => 'halp_button'%>
 
+
+  Other places to find alonetone
+    
+        <%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %>
+       
+        <%= link_to 'Follow alonetone on twitter', 'http://twitter.com/alonetone'%><br/>
+       
+        <%= link_to 'Chat live with fellow alonetoners', "http://#{Alonetone.campfire_url}"%><br/>
+
+
+
+
+<div>Psssst. We've got an alonetone chat room with your name on it. <%= link_to 'Chat Now', "http://#{Alonetone.campfire_url}"%></div>
+
+  <div>alonetoners online: 
+    <% User.currently_online.each do |user| %>
+      <%= link_to user.name, user_home_path(user.login) %> 
+    <% end %>
+  </div>
