@@ -3,7 +3,7 @@ html,body {
 	height: 100%;
 }
 
-#header {
+.header {
 	@include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
 	height: 160px;
 }
@@ -91,12 +91,9 @@ html[xmlns] .clearfix {
 }
 
 .min_height_40 {
-	// margin-bottom: 10px;
 	min-height: 40px;
-	// width: 100%;
 }
 
-// generalal spacing stuff
 div.box {
 	position: relative;
 	margin-bottom: 30px;
