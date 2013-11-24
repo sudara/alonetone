@@ -36,6 +36,12 @@
         <div id="content" class="content">    
           <%= check_for_and_display_welcome_back %>
           <%= check_for_and_display_flashes %>
+          <div class="header_search">
+            <%= form_tag search_url, :id =>'search_form' do %>
+              <%= text_field_tag 'query', (@query || session[:last_query]), :placeholder => 'Search for artist or song' %>
+            <% end %>
+            <%= link_to '','#',:id => 'search_button' %>
+          </div>
           <div id="main">
             <%= 
                 if yield(:pages).present?

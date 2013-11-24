@@ -56,21 +56,22 @@
 }
 
 .header_search {
-	position: absolute;
-	top: 96px;
+	position: relative;
+  height:50px;
 	// left: 49px;
-	left: 640px;
+	left: 590px;
+  clear:both;
 	#search_form {
 		display: block;
 		float: left;
 		#query {
-			padding: 4px 5px;
-			width: 200px;
-			height: 18px;
-			border: 2px solid #212327;
+			padding: 3px 4px;
+			width: 170px;
+			height: 16px;
+			border: 1px solid #212327;
 			background-color: #5b5d4a;
 			color: $silver;
-			font-size: 14px;
+			font-size: 13px;
 			&.focused {
 				color: white;
 			}

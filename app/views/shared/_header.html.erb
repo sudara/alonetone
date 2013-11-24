@@ -40,13 +40,3 @@
 
   <% end %>
 </div>
-
-<div class="header_search">
-
-  <%= form_tag search_url, :id =>'search_form' do %>
-    <%= text_field_tag 'query', (@query || session[:last_query]), :placeholder => 'artist, song title or keyword' %>
-  <% end %>
-
-  <%= link_to '','#',:id => 'search_button' %>
-
-</div>
