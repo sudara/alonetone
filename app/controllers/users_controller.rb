@@ -155,7 +155,7 @@ class UsersController < ApplicationController
   end 
   
   def gather_user_goodies
-    @popular_tracks = @user.assets.includes(:user => :pic).limit(5).order('assets.listens_count DESC')
+    @popular_tracks = @user.assets.includes(:user => :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(:user => :pic).limit(5)
     @playlists = @user.playlists.public.includes(:user, :pic)
     @listens = @user.listened_to_tracks.limit(5)
