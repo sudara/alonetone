@@ -23,7 +23,8 @@ Alonetone::Application.routes.draw do
   resources :updates, :password_resets
   resources :comments do
     member do 
-      get :unspam 
+      put :unspam 
+      put :spam 
     end
   end 
   

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   
-  before_filter :find_user, :except => [:index, :create]
-  before_filter :find_comment, :only => [:destroy, :unspam]
+  before_filter :find_user, :except => [:index, :create, :spam, :unspam, :destroy]
+  before_filter :find_comment, :only => [:destroy, :unspam, :spam]
   before_filter :require_login, :only => [:destroy, :unspam]
   
   def create
@@ -28,11 +28,13 @@ class CommentsController < ApplicationController
 
   def unspam
     @comment.ham!
+    @comment.update_attribute :is_spam, :false
     redirect_to :back
   end
   
   def spam
     @comment.spam!
+    @comment.update_attribute :is_spam, :true
     redirect_to :back
   end
 
