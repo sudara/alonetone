@@ -3,11 +3,11 @@ rvm: 2.0.0
 install: bin/wad
 before_script:
   - mysql -e 'create database alonetone_test';
-  - rake copy_config
-  - rake db:drop
-  - rake db:create
-  - rake db:schema:load
-  - rake db:seed
+  - bundle exce rake copy_config
+  - bundle exce rake db:drop
+  - bundle exce rake db:create
+  - bundle exce rake db:schema:load
+  - bundle exce rake db:seed
 script: bundle exec rake spec
 notifications:
   email:
