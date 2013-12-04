@@ -1,0 +1,19 @@
+<p>
+  <strong>Title</strong><br>
+  <%= f.text_field :title %>
+</p>
+
+<p>
+  <strong>Year released (e.g. 2008)</strong><br>
+  <%= f.text_field :year, :size => 4 %>
+</p>
+<p>
+  <strong>Description</strong><br>
+  <%= f.text_area :description, :rows => 4 %>
+</p>
+
+<p>
+  <strong>Hidden from the public?</strong><br>
+  <%= f.check_box :private %><br>
+  <span style="font-size: 12px">(Playlist will always be hidden until they have more than 2 tracks)</span>
+</p>
