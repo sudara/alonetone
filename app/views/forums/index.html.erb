@@ -48,7 +48,7 @@
     <td class="inv lp">
       <% if forum.recent_post -%>
         <%= friendly_time_ago forum.recent_post.created_at %><br />
-        <%= "by #{forum.recent_post.try(:user).try(:display_name)}" %>
+        <%= "by #{forum.recent_post.try(:user).try(:display_name) || '[deleted]'}" %>
         <span>(<%= link_to 'view', forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
       <% end -%>
     </td>
