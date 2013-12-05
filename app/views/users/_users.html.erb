@@ -20,11 +20,11 @@
   
   <div id="large_users_grid">
     <% if @sort == 'dedicated_listeners'%>
-      <% cache('dedicated_listeners', :expires_in => 4.hours) do %>
+      <% cache("dedicated-#{params[:page]}", :expires_in => 4.hours) do %>
         <%= render :partial => 'shared/user', :collection => @users %>
       <% end %>
     <% else %>
-      <% cache(digest_for_users) do %>
+      <% cache("#{digest_for_users}-#{params[:page]}") do %>
         <%= render :partial => 'shared/user', :collection => @users %>
       <% end %>
     <% end %>
