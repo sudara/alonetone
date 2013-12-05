@@ -1,5 +1,5 @@
 class Playlist < ActiveRecord::Base
-  
+      
   acts_as_list :scope => :user_id, :order => :position
 
   scope :mixes,            -> { where(:is_mix => true)                                                            }
@@ -36,10 +36,10 @@ class Playlist < ActiveRecord::Base
   
   def dummy_pic(size)
     case size
-      when :small then 'no-cover-50.jpg' 
-      when :large then 'no-cover-125.jpg'
-      when :album then 'no-cover-200.jpg' 
-      when nil then 'no-cover-400.jpg'
+      when :small then 'default/no-cover-50.jpg' 
+      when :large then 'default/no-cover-125.jpg'
+      when :album then 'default/no-cover-200.jpg' 
+      when nil then 'default/no-cover-400.jpg'
     end 
   end
   
