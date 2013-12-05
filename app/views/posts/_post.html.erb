@@ -13,7 +13,7 @@
       <div class="author_container">
 
         <div class="author_top">
-
+          <% if post.user.present? %>
           <div class="vcard_user_name">
             <span class="fn"><%= link_to truncate(post.user.name, :length => 30), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
           </div>
@@ -35,8 +35,17 @@
           <span class="posts user_ip">
             <%= post.user.ip if logged_in? %>
           </span>
+          
+          <% else %>
+            <div class="vcard_user_name">
+              <span class="fn">[deleted]</span>
+            </div>
+            <div class="vcard_image_container">
+              <%= image_tag 'no-pic_small.png' %>
+            </div>
+          <% end %>
           <div class="clear"></div>
-
+      
         </div>
 
         <% if logged_in? && post.editable_by?(current_user) -%>
@@ -50,8 +59,8 @@
 
           </div>
           <div class="post_browser_specs">
-            <abbr title="<%= post.user.browser %>">
-              <%= truncate(post.user.browser, :length => 33) if moderator? %>
+            <abbr title="<%= post.user.try(:browser) %>">
+              <%= truncate(post.user.try(:browser), :length => 33) if moderator? %>
             </abbr>
           </div>
 

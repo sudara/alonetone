@@ -159,7 +159,7 @@ class User < ActiveRecord::Base
   def efficiently_destroy_relations
     Listen.delete_all(['track_owner_id = ?',id])
     Listen.delete_all(['listener_id = ?',id])
-    Topic.where(:user_id => id).where('posts_count > 1').destroy_all # get rid of all orphaned topics
+    Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
     %w(tracks playlists posts comments assets).each do |thing|
       self.send(thing).delete_all
     end

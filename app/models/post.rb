@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   # topic's forum (set by callback)
   belongs_to :forum, :counter_cache => true
   
-  validates_presence_of :user_id, :topic_id, :forum_id, :body
+  validates_presence_of :topic_id, :forum_id, :body
   validate :topic_is_not_locked
 
   after_create  :update_cached_fields
