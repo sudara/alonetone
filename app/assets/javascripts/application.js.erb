@@ -2,11 +2,11 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require soundmanager2
-//= require utilities 
 //= require jquery-carousel
 //= require jquery-lowpro
 //= require jquery-hotkeys
 //= require facebox
+//= require local_time
 //= require twitter
 //= require highlight
 //= require tablesorter
@@ -587,9 +587,6 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown(300,function(){
         $('textarea',this).focus();
     });
-		
-		// Make a 'pretty date' (rails gives us iso dates in UTC)
-		$('.utc_date strong',this.more).prettyDate();
 		
 		// Show the edit link if admin and/or owner
 		if((this.owner===window.username) || window.userIsAdmin){

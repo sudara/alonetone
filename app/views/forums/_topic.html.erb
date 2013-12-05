@@ -24,7 +24,7 @@
     <td class="ca inv stat"><%= topic.posts.size %></td>
     <td class="ca inv stat"><%= number_with_delimiter(topic.hits) %></td>
     <td class="lp">
-      <abbr class="updated" title="<%= topic.last_updated_at.xmlschema %>"><%= friendly_time_ago(topic.last_updated_at) %></abbr>
+      <abbr class="updated" title="<%= topic.last_updated_at.xmlschema %>"><%= local_time_ago(topic.last_updated_at) %></abbr>
       <span class="author">by <strong class="fn"><%= topic.last_user.name if topic.last_user %></strong></span>
       <span><%= link_to 'view', forum_topic_path((@forum || topic.forum), topic, :page => topic.last_page, :anchor => "posts-#{topic.last_post_id}") %></span>
     </td>

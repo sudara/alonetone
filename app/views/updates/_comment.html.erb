@@ -10,7 +10,7 @@
   <div class="comment-body">
     <h2 class="h2-comment">  	
         <%= comment.commenter ? (link_to (h comment.commenter.name), user_home_path(comment.commenter)) : 'Guest' %>
-        said <%= friendly_time_ago(comment.created_at) %></h2>
+        said <%= local_time_ago(comment.created_at) %></h2>
     <p class="p-comment"><%= "#{comment.body_html}".html_safe %></p>
   </div><!-- div end comment-body -->
 </div><!-- div end comment -->

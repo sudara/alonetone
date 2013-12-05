@@ -130,6 +130,8 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.8.0)
+    local_time (0.1.0)
+      coffee-rails
     lumberjack (1.0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -269,6 +271,7 @@ DEPENDENCIES
   has_permalink
   jquery-rails
   jquery-ui-rails
+  local_time
   mime-types
   mysql2 (= 0.3.11)
   newrelic_rpm
