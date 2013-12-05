@@ -53,13 +53,13 @@ a.next, a.prev {
     position: absolute;
     left: 0;
     top: 45px;
-    background-image: image-url('buttons/prev.png');
+    background-image: image-url('icons/prev.png');
   }
   .next {
     position: absolute;
     right: 0;
     top: 45px;
-    background-image: image-url('buttons/next.png');
+    background-image: image-url('icons/next.png');
   }
 }
 
