@@ -1,5 +1,5 @@
 xml.item do
-  url = user_track_url(asset.user, asset, :format => :mp3, :referrer => 'itunes')
+  url = user_track_url(asset.user, asset, :format => :mp3, :referer => 'itunes')
   xml.title  asset.name 
   xml.link  user_track_url(asset.user, asset)
   xml.guid url

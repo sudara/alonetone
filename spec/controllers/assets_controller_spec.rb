@@ -104,6 +104,27 @@ describe AssetsController do
       request.user_agent = 'bot'
       expect{ subject }.not_to change(Listen, :count)    
     end
+        
+    it 'should record the refferer' do
+      request.user_agent = GOOD_USER_AGENTS.first
+      request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah" 
+      expect{ subject }.to change(Listen, :count)    
+      Listen.last.source.should == "http://alonetone.com/blah/blah" 
+    end
+    
+    it 'should allow the refferer to be manually overridden by params' do
+      request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah" 
+      request.user_agent = GOOD_USER_AGENTS.first
+      expect{ get :show, :id => 'song1', :user_id => users(:arthur).login, :format => :mp3, :referer => 'itunes' }.to change(Listen, :count)    
+      Listen.last.source.should == 'itunes'
+    end
+    
+    it 'should say "direct hit" when no referer' do
+      request.env["HTTP_REFERER"] = nil
+      request.user_agent = GOOD_USER_AGENTS.first
+      expect{ subject }.to change(Listen, :count)    
+      Listen.last.source.should == "direct hit" 
+    end
   end
   
   context '#create' do
