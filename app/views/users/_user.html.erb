@@ -14,16 +14,16 @@
   </div>
   <div id="user_links">
     <ul class="user_links">
-     <%= user_nav_item "Home", user_home_path(@user), :title => "#{h @user.name} on alonetone" %>
-     <%= user_nav_item "Tracks", user_tracks_path(@user), :title => "#{h @user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
-     <%= user_nav_item "Playlists", user_playlists_path(@user.login), :title => "#{h @user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? || (authorized_as(@user) && @user.playlists.include_private.count > 0) %>
-     <%= user_nav_item "Favorites", user_playlist_path(@user, @user.favorites),:title => "#{h @user.name}'s favorite tracks on alonetone" if @user.favorites.present? %>
-     <%= user_nav_item "Profile", profile_path(@user), :title => "#{h @user.name}'s profile on alonetone" if @user.bio %>
+     <%= user_nav_item "Home", user_home_path(@user), :title => "#{@user.name} on alonetone" %>
+     <%= user_nav_item "Tracks", user_tracks_path(@user), :title => "#{@user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
+     <%= user_nav_item "Playlists", user_playlists_path(@user.login), :title => "#{@user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? || (authorized_as(@user) && @user.playlists.include_private.count > 0) %>
+     <%= user_nav_item "Favorites", [@user, @user.favorites], :title => "#{@user.name}'s favorite tracks on alonetone" if @user.favorites.present? %>
+     <%= user_nav_item "Profile", profile_path(@user), :title => "#{@user.name}'s profile on alonetone" if @user.bio %>
   
       <%= user_nav_item "Email", "mailto:#{@user.email}",:added_class => "contact" if admin? %>
       <%= user_nav_item "iTunes", "http://#{@user.itunes}",:added_class => "contact" if @user.itunes.present? %>
       <%= user_nav_item "Twitter", "http://twitter.com/#{@user.twitter}", :added_class => 'contact' if @user.twitter.present? %>
-      <%= user_nav_item "Sudo", sudo_user_path(@user),:added_class => "contact" if (admin? || @sudo)%>   
+      <%= user_nav_item "Sudo", sudo_user_path(@user), :added_class => "contact" if (admin? || @sudo)%>   
     </ul>
   </div>
 </div>

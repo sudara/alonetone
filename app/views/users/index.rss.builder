@@ -13,11 +13,11 @@ xml.rss "version" => "2.0",
     
     for @user in @users do
       xml.item do
-        xml.title "#{h @user.name} on alonetone"
-        xml.author "#{h @user.name}"
+        xml.title "#{@user.name} on alonetone"
+        xml.author "#{@user.name}"
         xml.link user_home_url(@user)
         xml.description "#{image_tag(@user.avatar(:large))}
-          <br/>#{h @user.name} 
+          <br/>#{@user.name} 
           #{ @user.printable_bio if @user.bio }
           #{(@user.assets_count > 0) ? ('has '+ pluralize(@user.assets_count.to_s, 'track') + ' on alonetone <br/>') : ''}<br/>
           #{ link_to 'view more',user_home_url(@user)}"
