@@ -86,7 +86,11 @@ module ApplicationHelper
   end
   
   def link_source(source)
-    link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, ''), "/#{source}"
+    if source == 'http://alonetone.com'
+      link_to "home page","/"
+    else
+      link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, '/'), source
+    end
   end
   
   def recently_online
