@@ -14,7 +14,7 @@ class UserSessionsController < ApplicationController
       if params[:user_session][:login] && (user = User.find_by_login(params[:user_session][:login])) && !user.active?
         flash.now[:error] = "It looks like your account is not active. <br/> Do you have an email from us with activation details?".html_safe
       else
-        flash.now[:error] = "There was a problem logging you in! Please re-check your email and password."
+        flash.now[:error] = "There was a problem logging you in! Please check your login and password."
       end
       @user = User.new
       @bypass_recaptcha = true unless RECAPTCHA_ENABLED
