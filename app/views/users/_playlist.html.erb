@@ -1,8 +1,7 @@
 <div class='playlist_cover_and_title'>
   <div class="scriptaculous">
-	<%= link_to(image_tag('jewel-case-125.png'), user_playlist_path(@user.login, playlist), :class => 'jewel_case_125') %>
+	<%= link_to(image_tag(playlist.cover(:large), user_playlist_path(@user.login, playlist), :class => 'cover_125') %>
 
-  <%= image_tag(playlist.cover(:large), :class => 'cover_125') %>
 	<div class="small_playlist">
 		<%= link_to playlist.title, edit_or_show(@user.login, playlist)  %>
 	</div>

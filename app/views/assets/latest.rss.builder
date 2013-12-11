@@ -9,7 +9,7 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
     xml.lastBuildDate  rss_date @assets.first.created_at
     
     xml.image do
-      xml.url  "http://#{Alonetone.url}/images/no-cover-200.jpg"
+      xml.url  "http://#{Alonetone.url}/images/default/no-cover-200.jpg"
       xml.title  "Latest uploaded mp3s from artists at #{Alonetone.url}"
       xml.width 200
       xml.height 200
@@ -21,7 +21,7 @@ xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"
 		xml.itunes :summary, 	'Latest uploaded mp3s from artists at alonetone.com'
 		xml.itunes :keywords, 'independant free alonetone musician artist latest upcoming'
 		xml.itunes :explicit, 'clean' 
-		xml.itunes :image, :href=>'http://www.alonetone.com/images/no-cover-200.jpg'
+		xml.itunes :image, :href=>'http://www.alonetone.com/images/default/no-cover-200.jpg'
 		
 		xml.itunes :owner do
 			xml.itunes :name, 'alonetone'
