@@ -1,31 +1,14 @@
 <div class="footer_column_1">
   <%= link_to ' ', '/radio/popular', :class => 'radio_button'%>
-  <%= link_to ' ', about_path, :class => 'about_button'%>
   <%= link_to ' ', about_path(:howto), :class => 'halp_button'%>
 </div>
 
 <div class="footer_column_2">
-
-  <div class="footer-column-header">
-    from the blog
-  </div>
-  
   <ul>
-    <li>
-      <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
-    </li>
-  </ul>
-  
-  <div class="footer-column-header">
-    alonetoners online
-  </div>
-
-  <ul>
-    <li>
-      <% User.currently_online.each do |user| %>
-        <%= link_to user.name, user_home_path(user.login) %> 
-      <% end %>
-    </li>
+    <li><%= link_to "About", "/about"%></li>    
+    <li><%= link_to "Press/Contact", "/about/press"%></li>
+    <li><%= link_to "Stats", "/about/stats"%></li>
+    <li><%= link_to "Donate!", "/about/donate" %></li>
   </ul>
 </div>
 
@@ -44,12 +27,24 @@
 </div>
 
 <div class="footer_column_4">
-  
+  <div class="footer-column-header">
+    from the blog
+  </div>
   <ul>
-    <li><%= link_to "Help", "/about/howto"%></li>
-    <li><%= link_to "Stats", "/about/stats"%></li>
-    <li><%= link_to "Press/Contact", "/about/press"%></li>
-    <li><%= link_to "Donate!", "/about/donate" %></li>
+    <li>
+      <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+    </li>
   </ul>
+  
+  <div class="footer-column-header">
+    alonetoners online
+  </div>
 
+  <ul>
+    <li>
+      <% User.currently_online.each do |user| %>
+        <%= link_to user.name, user_home_path(user.login) %> 
+      <% end %>
+    </li>
+  </ul>
 </div>
