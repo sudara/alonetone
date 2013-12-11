@@ -27,10 +27,6 @@
 </div>
 
 <div class="header_login">
-    
-  <% if @sudo %>
-    <span class="important">Sudo'd as <%= current_user.name %>. <%= link_to 'return to admin account', sudo_user_path(@user) %></span>
-  <% end %>
 
   <% if logged_in? %>
     <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :class => 'profile_link'%>      
