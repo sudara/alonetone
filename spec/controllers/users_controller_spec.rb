@@ -168,24 +168,26 @@ describe UsersController do
   end
   
   context "favoriting" do
-    subject { get :toggle_favorite, :asset_id => 1 }
+    subject { xhr :get, :toggle_favorite, :asset_id => 100 }
+    
+    it 'should not let a guest favorite a track' do 
+      expect { subject }.to change{ Track.count }.by(0) 
+      response.should_not be_success
+    end
+    
     it 'should let a user favorite a track' do 
       login(:arthur)    
       expect { subject }.to change{ Track.count }.by(1) 
-      users(:arthur).tracks.favorites.collect(&:asset).should include(Asset.find(1))
+      users(:arthur).tracks.favorites.collect(&:asset).should include(Asset.find(100))
       response.should be_success
     end
     
     it 'should let a user unfavorite a track' do 
       login(:arthur)
       expect { subject }.to change{ Track.count }.by(1) 
-      get :toggle_favorite, :asset_id => 1  # toggle again
-      users(:arthur).tracks.favorites.collect(&:asset).should_not include(Asset.find(1))
+      get :toggle_favorite, :asset_id => 100  # toggle again
+      users(:arthur).tracks.favorites.collect(&:asset).should_not include(Asset.find(100))
       response.should be_success
-    end
-    
-    it 'should not let a user mess with another users favs' do
-      
     end
   end
   

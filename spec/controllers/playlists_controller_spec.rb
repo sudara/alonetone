@@ -47,6 +47,20 @@ describe PlaylistsController, 'permissions' do
     edit_arthurs_playlist
     response.should be_success
   end
+  
+  context "sorting" do
+    it 'should display albums to sort' do
+      login(:sudara)
+      get :sort, :user_id => 'sudara'
+      response.should be_success
+    end
+    
+    it 'should allow sorting of playlists' do
+      login(:sudara)
+      xhr :post, :sort, :user_id => 'sudara', :playlist => [3,1] 
+      response.should be_success
+    end
+  end
 
   context "deletion" do
     it "should not let a non-logged in person delete a playlist" do

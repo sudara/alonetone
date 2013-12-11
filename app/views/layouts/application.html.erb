@@ -29,6 +29,11 @@
 
   <body>
     <div id="container">
+      <% if @sudo %>
+        <div class="sudo_bar">
+          Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
+        </div>
+      <% end %>
       <div class="header">
         <%= render :partial=> 'shared/header' %>
       </div> 

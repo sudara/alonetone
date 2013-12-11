@@ -31,6 +31,7 @@ gem "country_select"
 gem 'will_paginate'
 gem 'dynamic_form'
 gem 'simple_form'
+gem 'local_time'
 gem 'gemoji'
 
 # external services

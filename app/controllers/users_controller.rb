@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :ip_is_acceptable?, :only => :create
-  before_filter :find_user, :except => [:new, :create, :index, :activate, :sudo]
+  before_filter :find_user, :except => [:new, :create, :index, :activate, :sudo, :toggle_favorite]
   before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   
   def index
@@ -176,17 +176,22 @@ class UsersController < ApplicationController
   
   def change_user_to(user)
     current_user_session.destroy
-    UserSession.create!(user)
-    flash[:ok] = "Sudo to #{user.name}"
+    user.reset_persistence_token! if !user.persistence_token.present?
+    session = UserSession.create(user)
+    flash[:ok] = "Changed user to #{user.name}"
     redirect_back_or_default 
   end
   
   def sudo_to_user
-    return false unless params[:id]
-    user = User.where(:login => params[:id]).first
-    logger.warn("SUDO: #{current_user.name} is sudoing to #{user.name}")
-    @sudo = session[:sudo] = current_user.id
-    change_user_to user
+    raise "No user specified" unless params[:id]
+    new_user = User.where(:login => params[:id]).first
+    if new_user.present?
+      logger.warn("SUDO: #{current_user.name} is sudoing to #{new_user.name}")
+      @sudo = session[:sudo] = current_user.id
+      change_user_to new_user
+    else
+      flash[:warn] = "Well, that user doesn't exist, broseph"
+    end
   end
   
   def return_from_sudo_if_sudoed

@@ -1,6 +1,6 @@
 require 'emoji'
 module ApplicationHelper  
-  @@listen_sources = %w(itunes home download facebook)
+  @@listen_sources = %w(itunes)
 
   def authorized_for(user_related_record)
     logged_in? && (current_user.admin? || (user_related_record.user == current_user))
@@ -76,8 +76,8 @@ module ApplicationHelper
     end.html_safe
   end
 
-  def link_to_play(asset, referrer=nil)
-    link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referrer => referrer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
+  def link_to_play(asset, referer=nil)
+    link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
   end
   
   def user_nav_item(text, link, options=nil)
@@ -85,12 +85,12 @@ module ApplicationHelper
     content_tag(:li, link_to_unless_current(text, link, options), :class=> ("#{added_class} #{"current" if current_page?(link)}"))
   end
   
-  # TODO this desperately needs to be fixed, it's fugly
   def link_source(source)
-    return source if @@listen_sources.include?(source) || source == 'alonetone' || source == 'unknown' || source == 'direct hit'
-    return link_to('alonetone home', root_path) if source == 'home'
-    return link_to('ListenApp!', 'http://listenapp.com') if source.include?('listenapp')
-    link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, ''), source
+    if source == 'http://alonetone.com'
+      link_to "home page","/"
+    else
+      link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, '/'), source
+    end
   end
   
   def recently_online

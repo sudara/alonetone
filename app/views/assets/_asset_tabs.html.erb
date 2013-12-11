@@ -36,7 +36,8 @@
                 </div>
             	  
                 <div class="stats">
-                  Uploaded <span class="utc_date"><strong><%= asset.created_at.iso8601.gsub(/\+.*/,'') %></strong></span>, listened to <strong><%= asset.listens_count %> times</strong>.
+                  Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
+        	        listened to <strong><%= asset.listens_count %> times</strong>.
         	        <% if asset.comments_count > 0 %>
         	           <br>
                      Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.

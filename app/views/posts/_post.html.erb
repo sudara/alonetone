@@ -75,16 +75,14 @@
     
     <div class="date">
       <abbr class="updated" title="<%= post.created_at.xmlschema %>">
-        <%= friendly_time_ago(post.created_at) %>
+        <%= local_time_ago(post.created_at) %>
       </abbr>
     </div>
         
       <div class="post_body_html">
       <%= markdown(post.body) %>
-
         <div class="post_footer">     
         </div>
-
       </div>
   </td>
 </tr>

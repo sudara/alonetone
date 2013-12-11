@@ -1,27 +1,19 @@
-<div class="play-button button"><%= link_to_play asset, referrer %></div>
-<div class="title">
-	
+<div class="play-button button"><%= link_to_play asset %></div>
+<div class="title">	
 	<div class="title_left_column" style="float:left; width: 300px;">
-
 		<div class="title_left_column_top">
 			<span>
-			<%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
-				
+			  <%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
 			</span>
 			<span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
 		</div>
-
 		<div class="title_left_column_bottom" style="margin-top: 2px;">
 				<%= yield %>
 		</div>
-		
 	</div>
 
 	<div style="float:right; margin-top: 4px; margin-right: 8px;">
-
 		<div class='counter'></div>
 		<div class='time'><%= asset.length%></div>
-	
 	</div>
-
 </div>

@@ -47,7 +47,12 @@ describe Playlist do
   end
   
   context "favorites" do 
-    
+    it 'should create a new playlist for a user who does not have one' do
+      users(:sandbags).playlists.favorites.should_not be_present
+      users(:sandbags).toggle_favorite(assets(:valid_mp3))
+      users(:sandbags).playlists.favorites.first.should be_present
+      users(:sandbags).playlists.favorites.first.permalink.should_not be_nil
+    end
   end
   
 end

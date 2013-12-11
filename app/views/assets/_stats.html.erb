@@ -1,5 +1,5 @@
 <h2 class="box">Stats</h2>
 <div class="static_content">
-Uploaded <strong><%= friendly_time_ago(@asset.created_at) %></strong> on <%= @asset.created_at.to_date.to_s(:long) %><br/>
+Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong><br/>
 Listened to <strong><%= @asset.listens_count %></strong> times
 </div>

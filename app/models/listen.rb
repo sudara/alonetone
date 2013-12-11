@@ -22,7 +22,7 @@ class Listen < ActiveRecord::Base
   
   
   def source
-    self[:source] || 'alonetone'
+    self[:source] || 'direct hit'
   end
   
   def self.total

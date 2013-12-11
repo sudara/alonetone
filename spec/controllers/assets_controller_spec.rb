@@ -104,6 +104,27 @@ describe AssetsController do
       request.user_agent = 'bot'
       expect{ subject }.not_to change(Listen, :count)    
     end
+        
+    it 'should record the refferer' do
+      request.user_agent = GOOD_USER_AGENTS.first
+      request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah" 
+      expect{ subject }.to change(Listen, :count)    
+      Listen.last.source.should == "http://alonetone.com/blah/blah" 
+    end
+    
+    it 'should allow the refferer to be manually overridden by params' do
+      request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah" 
+      request.user_agent = GOOD_USER_AGENTS.first
+      expect{ get :show, :id => 'song1', :user_id => users(:arthur).login, :format => :mp3, :referer => 'itunes' }.to change(Listen, :count)    
+      Listen.last.source.should == 'itunes'
+    end
+    
+    it 'should say "direct hit" when no referer' do
+      request.env["HTTP_REFERER"] = nil
+      request.user_agent = GOOD_USER_AGENTS.first
+      expect{ subject }.to change(Listen, :count)    
+      Listen.last.source.should == "direct hit" 
+    end
   end
   
   context '#create' do
@@ -140,8 +161,17 @@ describe AssetsController do
     end
   end
   
+  context "edit" do 
+    it 'should allow user to upload new version of song' do
+      login(:sudara)
+      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
+      users(:sudara).assets.first.mp3_file_name.should == 'muppets.mp3'
+      put :update, :id => users(:sudara).assets.first, :user_id => users(:sudara).login, :asset => {:mp3 => fixture_file_upload('assets/tag1.mp3','audio/mpeg')}
+      users(:sudara).assets.first.mp3_file_name.should == 'tag1.mp3'
+    end
+  end
+  
   context "#mass_edit" do 
-    
     it 'should allow user to edit 1 track' do 
       login(:arthur)
       get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_arthur_mp3).id]

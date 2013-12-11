@@ -22,11 +22,11 @@ class Playlist < ActiveRecord::Base
   validates_length_of   :title, :within => 4..100
   validates_length_of   :year, :within => 2..4, :allow_blank => true
   validates_length_of   :description, :within => 1..2000, :allow_blank => true
+    
+  attr_accessible :user_id, :is_favorite, :year, :title, :description, :private, :position
   
   has_permalink :title
-  
-  attr_accessible :user_id, :is_favorite, :year, :title, :description, :private
-  before_validation  :auto_name_favorites, :on => :create
+  before_validation  :name_favorites_and_set_permalink, :on => :create
   before_update :set_mix_or_album
   before_update :ensure_private_if_less_than_two_tracks
 
@@ -89,8 +89,8 @@ class Playlist < ActiveRecord::Base
   end
   
   # if this is a "favorites" playlist, give it a name/description to match
-  def auto_name_favorites
-    self.title = self.description = self.user.name + "'s Favorite tracks on alonetone" \
-    if self.is_favorite?
+  def name_favorites_and_set_permalink
+    self.title = self.description = self.user.name + "'s favorite tracks" if self.is_favorite?
+    generate_permalink!
   end
 end

@@ -962,3 +962,19 @@ h2.stats {
 .listen_details a {
   line-height: 14px;
 }
+
+// sudo bar
+
+.sudo_bar{
+  background-color:red;
+  height:25px;
+  line-height:25px;
+  padding-left:55px;
+  text-align:left;
+  font-size: 12px;
+  color: #fff;
+  a{
+    text-decoration: underline;
+    color:white;
+  }
+}

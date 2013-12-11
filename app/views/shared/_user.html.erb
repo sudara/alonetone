@@ -7,7 +7,7 @@
  #{user_location(user)}") %>
   <%= image_tag(user.avatar(:large), :class => 'cover') %>
 
-	<%= link_to user.name, user_home_path(user), :class => (user.admin? ? "admin name" : 'name') %> 
+	<%= link_to user.name, user_home_path(user.login), :class => (user.admin? ? "admin name" : 'name') %> 
 	
 	
 	<% case @sort 
