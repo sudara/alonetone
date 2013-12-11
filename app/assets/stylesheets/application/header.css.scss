@@ -4,8 +4,9 @@
 	left: 54px;
 	display: block;
 	width: 120px;
-	height: 81px;
-	background: transparent image-url('alonetone_big.png');
+	height: 80px;
+	background: transparent image-url('alonetone_big.png') no-repeat;
+  background-size: 100%;
 }
 
 .header_nav {
@@ -59,7 +60,7 @@
 	position: relative;
   height:50px;
 	// left: 49px;
-	left: 590px;
+	left: 684px;
   clear:both;
 	#search_form {
 		display: block;
@@ -80,16 +81,13 @@
 	#search_button {
 		display: block;
 		float: left;
-		margin-top: 6px;
-		margin-left: 8px;
-		width: 75px;
-		height: 24px;
-		background: image-url('nav/search.png') no-repeat 0px 0;
-		&:hover {
-			background-position: -75px 0;
-		}
-		&:active {
-			background-position: -150px 0;
-		}
-	}
+    margin-top:8px;
+    margin-left:4px;
+    width: 18px;
+    height: 18px;
+    img{
+  		width: 18px;
+  		height: 18px; 
+    }	
+  }
 }
