@@ -72,7 +72,9 @@
       <div class="sticky_footer_buffer"></div>
     </div>
     <div class="footer">
-      <%= render :partial => 'shared/footer' %>
+      <%= cache('footer', :expires_in => 3.minutes) do %>
+        <%= render :partial => 'shared/footer' %>
+      <% end %>
     </div>
     <%= javascript_include_tag "application" %>
     <%= render :partial => 'shared/analytics' %>

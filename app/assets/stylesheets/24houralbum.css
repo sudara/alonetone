@@ -130,8 +130,6 @@ a.artist_name{
   height: 100px;
 }
 
-
-
 .clearfix:after {
   clear: both;
   content: ".";

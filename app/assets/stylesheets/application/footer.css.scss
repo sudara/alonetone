@@ -2,11 +2,23 @@
 	ul {
 		margin-bottom: 10px;
 		li {
-			margin-bottom: 3px;
+			margin-bottom: 4px;
+    &.footer-forum-topic{
+      margin-bottom: 8px;
+      a{
+        line-height: 16px;
+      }
+    }
 		}
 	}
 	a {
-		font-weight: normal;
+		font-weight: bold;
+    font-size: 14px;
+    line-height: 20px
+  }
+  .author_name a {
+    font-size: 12px;
+    font-weight: normal;
 	}
 }
 
@@ -38,8 +50,12 @@
 
 .footer-column-header {
 	margin-bottom: 5px;
+  margin-top:20px;
 	font-weight: bold;
 	font-size: 14px;
+  color: #929292;
+  padding-bottom:5px;
+  border-bottom: 1px #929292 solid;
 }
 
 .radio_button {

@@ -8,7 +8,7 @@ class Topic < ActiveRecord::Base
 
   scope :recent, -> { order('topics.created_at DESC') }
   scope :sticky_and_recent, -> { order("topics.sticky desc, topics.last_updated_at desc") }
-
+  scope :for_footer, -> { recent.includes(:recent_post => :user).includes(:forum).limit(3) }
   # creator of forum topic
   belongs_to :user
   

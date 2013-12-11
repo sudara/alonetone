@@ -4,6 +4,7 @@
 </div>
 
 <div class="footer_column_2">
+  <h3 class="footer-column-header">alonetone</h3>    
   <ul>
     <li><%= link_to "About", "/about"%></li>    
     <li><%= link_to "Press/Contact", "/about/press"%></li>
@@ -14,37 +15,43 @@
 
 <div class="footer_column_3">
 
-  <div class="footer-column-header">
-    other places to find alonetone
-  </div>    
-
+  <h3 class="footer-column-header">other places to find alonetone</h3>    
   <ul>
      <li><%= link_to 'Alonetone Chat Room', "http://#{Alonetone.campfire_url}"%><br/></li>
      <li><%= link_to '@alonetone on Twitter', 'http://twitter.com/alonetone'%></li>
      <li><%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %></li>
-   </ul>   
+  </ul>   
+   
+  <h3 class="footer-column-header">alonetoners online</h3>
+
+  <ul>
+   <li>
+     <% User.currently_online.each do |user| %>
+       <%= link_to user.name, user_home_path(user.login) %> 
+     <% end %>
+   </li>
+  </ul>
 
 </div>
 
 <div class="footer_column_4">
-  <div class="footer-column-header">
-    from the blog
-  </div>
+  <h3 class="footer-column-header">latest forum topics</h3>
+  <ul>
+    <% Topic.for_footer.each do |topic| %>
+    <li class="footer-forum-topic">
+      <%= link_to topic.title, forum_topic_path(topic.forum, topic) %> <br>
+      <span>by </span><span class="author_name"><%= link_to topic.recent_post.author_name, "/#{topic.recent_post.user.login}" %></span>
+    </li>
+    <% end %>
+  </ul>
+  
+  <h3 class="footer-column-header">from the blog</h3>
   <ul>
     <li>
       <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
     </li>
   </ul>
   
-  <div class="footer-column-header">
-    alonetoners online
-  </div>
-
-  <ul>
-    <li>
-      <% User.currently_online.each do |user| %>
-        <%= link_to user.name, user_home_path(user.login) %> 
-      <% end %>
-    </li>
-  </ul>
+  
+  
 </div>
