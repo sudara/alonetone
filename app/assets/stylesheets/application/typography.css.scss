@@ -147,8 +147,12 @@ span.note {
 }
 
 // iconified headers
-#latest_playlists h2, h2#user_latest_playlists {
-  background: image-url('icons/playlists.png') no-repeat left center;
+.latest-playlists-header h2 {
+  padding-left: 40px; 
+  line-height: 30px;
+}
+
+h2#user_latest_playlists {
   padding-left: 35px;
 }
 
@@ -167,10 +171,12 @@ h2#alonetone_plus {
 }
 
 h2#latest_uploaded, #user_latest h2 {
-  background-image: image-url('icons/latest.png');
-  background-repeat: no-repeat;
-  background-position: 15px 10px;
-  text-indent: 51px;
+  text-indent: 18px;
+}
+
+.sprites-latest-uploaded {
+  margin-left: 20px;
+  margin-top: 13px;
 }
 
 h2#kicking_ass, #user_popular h2 {
@@ -183,10 +189,12 @@ h2#kicking_ass, #user_popular h2 {
 h2#recently_favorited {}
 
 h2#latest_comments, #user_comments h2 {
-  background-image: image-url('icons/comment.png');
-  background-repeat: no-repeat;
-  background-position: 15px 10px;
-  text-indent: 51px;
+  text-indent: 14px;
+}
+
+.sprites-latest-comments {
+  margin-left: 16px;
+  margin-top: 10px;
 }
 
 .playlist_title h2 {

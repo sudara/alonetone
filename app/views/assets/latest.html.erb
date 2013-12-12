@@ -1,13 +1,15 @@
 <!-- alonetone home page -->
 <%= render :partial => 'shared/self_confidence' unless logged_in? %>
 <%= cache(@playlists.first.cache_key+'plisthome') do %>
-  <div id="latest_playlists">
-    <h2>Latest playlists</h2>
+    <div class="latest-playlists-header">
+      <div class="sprites-latest-playlists sprites-before-heading"></div>
+      <h2>Latest playlists</h2>
+    </div>
     <%= render :partial => 'playlists/for_home' %>
-  </div>
 <% end unless @playlists.blank? %>
 
 <% content_for :left do%>
+  <div class="sprites-latest-uploaded sprites-before-heading"></div>
   <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @assets %>
@@ -17,6 +19,7 @@
         :class=> 'view_all', :title => 'latest music on alonetone' %>
   </div>
   
+  <div class="sprites-latest-comments sprites-before-heading"></div>
   <h2 id="latest_comments" class="box">Latest Comments</h2>
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>

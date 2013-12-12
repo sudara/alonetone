@@ -1,12 +1,11 @@
 @mixin retina-sprite($sprite) {
     $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat);
-    $pos: sprite-position($sprite-map, $sprite, 0, 0);
-    @include background-size(ceil(image-width(sprite-path($sprite-map)) / 2) auto);
 
     background-image: sprite-url($sprite-map);
+    $pos: sprite-position($sprite-map, $sprite, 0, 0);
     background-position: (nth($pos, 1)/2) (nth($pos, 2)/2);
+    @include background-size(ceil(image-width(sprite-path($sprite-map)) / 2) auto);
 
-    display:block;
     width: image-width(sprite-file($sprite-map, $sprite)) /2; 
     height: image-height(sprite-file($sprite-map, $sprite)) /2;
 }
@@ -14,7 +13,10 @@
 @each $thisSprite in 
     play,
     play_hover,
-    pause
+    pause,
+    latest-playlists,
+    latest-uploaded,
+    latest-comments
     {
         .sprites-#{$thisSprite} {
             @include retina-sprite(#{$thisSprite});
@@ -23,5 +25,9 @@
         .sprites-#{$thisSprite}:hover {
             @extend .sprites-#{$thisSprite}_hover;
         }
-        
+
     }
+
+.sprites-before-heading {
+    float: left;
+}
