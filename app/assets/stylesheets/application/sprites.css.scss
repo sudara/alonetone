@@ -1,0 +1,22 @@
+@mixin sprite-retina($name) {
+    $sprites: sprite-map("my-icons/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat); 
+    height: image-height(sprite-file($sprites, $name)) /2 ;
+  	width: image-width(sprite-file($sprites, $name)) /2;
+    $pos: sprite-position($sprites, $name, 0, 0);
+    background-image: sprite-url($sprites);
+    background-position: (nth($pos, 1)/2) (nth($pos, 2)/2);
+    @include background-size(ceil(image-width(sprite-path($sprites)) / 2) auto);
+}
+
+.icon {
+    display:block;
+    @each $myIcon in play, play_hover, pause {
+        &.icon-#{$myIcon} {
+            @include sprite-retina(#{$myIcon});
+        }
+    }
+}
+
+.icon-play:hover {
+	@extend .icon-play_hover;
+}
