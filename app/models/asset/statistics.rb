@@ -52,7 +52,7 @@ class Asset
   end
   
   def uncool_self_plays
-    listens.where(:ip => user.ip).where('listener_id != ?',user.id).where('listener_id is not null').count
+    listens.where(:ip => user.ip).where('listener_id != ?',user.id).where('listener_id is not null').count + 1
   end
   
   def unique_listener_count
