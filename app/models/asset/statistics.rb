@@ -52,7 +52,7 @@ class Asset
   end
   
   def unique_listener_count
-    listens.select('distinct listener_id').count(:listener_id)
+    listens.select('distinct ip').count(:listener_id)
   end
   
   def days_old
