@@ -50,7 +50,7 @@ class Asset
   end
   
   def uncool_self_plays(from = 30.days.ago)
-    listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count + 1
+    listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count 
   end
   
   def alonetoner_play_count(from = 30.days.ago)
