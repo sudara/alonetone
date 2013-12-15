@@ -57,8 +57,8 @@ class Asset
     listens.where("listener_id is not null").where("listens.created_at > (?)",from).count - uncool_self_plays
   end
   
-  def unique_alonetoner_count
-    listens.select('distinct listener_id').count - user.similar_users_by_ip.count - 1
+  def unique_alonetoner_count(from = 30.days.ago)
+    listens.select('distinct listener_id').where("listens.created_at > (?)", from).count - user.similar_users_by_ip.count - 1
   end
   
   def days_old
@@ -67,15 +67,15 @@ class Asset
   
   def age_ratio
     case days_old
-      when 0..1 then 15.0
-      when 1..2 then 12.0
-      when 2..3 then 10.0
-      when 3..4 then 8.0
-      when 5..7 then 6.0
-      when 8..15 then 4.0
-      when 16..30 then 2.5
-      when 31..90 then 1.0
-      else 0.5
+      when 0..1 then 100.0
+      when 1..2 then 80.0
+      when 2..3 then 70.0
+      when 3..4 then 50.0
+      when 5..7 then 35.0
+      when 8..15 then 20.0
+      when 16..30 then 2.0
+      when 31..90 then 0.1
+      else 0.01
     end
   end  
   
