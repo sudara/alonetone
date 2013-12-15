@@ -56,7 +56,7 @@ class Asset
   end
   
   def unique_listener_count
-    listens.select('distinct ip').count - user.similar_users_by_ip.count - 1
+    listens.select('distinct listener_id').count - user.similar_users_by_ip.count - 1
   end
   
   def days_old
