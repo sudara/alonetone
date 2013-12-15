@@ -33,14 +33,12 @@ class Asset
     end 
   end
    
-  def calculate_hotness
-    # hotness = listens not originating from own user within last 7 days * num of alonetoners who listened to it / age
-    ((recent_listen_count - uncool_self_plays).to_f * (unique_listener_count.to_f * 3) * age_ratio.to_f)
+  def calculate_hotness       
+    (guest_play_count + (alonetoner_play_count * 5)).to_f * age_ratio.to_f
   end
   
-  def recent_listen_count(from = 7.days.ago)
-    listens.where("listens.created_at > (?) AND listens.listener_id != ?",
-      from, self.user_id).count 
+  def guest_play_count(from = 30.days.ago)
+    listens.where("listens.created_at > (?) AND listens.listener_id is null",from).count 
   end
   
   def listens_per_week
@@ -51,11 +49,15 @@ class Asset
     0
   end
   
-  def uncool_self_plays
-    listens.where(:listener_id => user.similar_users_by_ip).count + 1
+  def uncool_self_plays(from = 30.days.ago)
+    listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count + 1
   end
   
-  def unique_listener_count
+  def alonetoner_play_count(from = 30.days.ago)
+    listens.where("listener_id is not null").where("listens.created_at > (?)",from).count - uncool_self_plays
+  end
+  
+  def unique_alonetoner_count
     listens.select('distinct listener_id').count - user.similar_users_by_ip.count - 1
   end
   
