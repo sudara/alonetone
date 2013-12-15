@@ -35,7 +35,7 @@ class Asset
    
   def calculate_hotness
     # hotness = listens not originating from own user within last 7 days * num of alonetoners who listened to it / age
-    ((recent_listen_count - uncool_self_plays).to_f * (((unique_listener_count.to_f * 3) / User.count.to_f) + 1) * age_ratio.to_f)
+    ((recent_listen_count - uncool_self_plays).to_f * (unique_listener_count.to_f * 3) * age_ratio.to_f)
   end
   
   def recent_listen_count(from = 7.days.ago)
@@ -65,8 +65,11 @@ class Asset
   
   def age_ratio
     case days_old
-      when 0..3 then 15.0
-      when 4..7 then 7.0
+      when 0..1 then 15.0
+      when 1..2 then 12.0
+      when 2..3 then 10.0
+      when 3..4 then 8.0
+      when 5..7 then 6.0
       when 8..15 then 4.0
       when 16..30 then 2.5
       when 31..90 then 1.0
