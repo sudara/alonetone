@@ -32,10 +32,10 @@ class Asset
       Asset.where(:id => a.id).update_all(:hotness => a.calculate_hotness, :listens_per_week => a.listens_per_week)
     end 
   end
-  
+   
   def calculate_hotness
     # hotness = listens not originating from own user within last 7 days * num of alonetoners who listened to it / age
-    ((recent_listen_count.to_f) * (((unique_listener_count.to_f * 3) / User.count.to_f / uncool_self_plays.to_f) + 1) * age_ratio.to_f)
+    ((recent_listen_count - uncool_self_plays).to_f * (((unique_listener_count.to_f * 3) / User.count.to_f) + 1) * age_ratio.to_f)
   end
   
   def recent_listen_count(from = 7.days.ago)
@@ -56,7 +56,7 @@ class Asset
   end
   
   def unique_listener_count
-    listens.select('distinct ip').count - 1
+    listens.select('distinct ip').count - similar_users_by_ip.count - 1
   end
   
   def days_old
