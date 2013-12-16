@@ -141,8 +141,13 @@ class User < ActiveRecord::Base
   
   # convenince shortcut 
   def ip
-    last_login_ip
+    current_login_ip
   end 
+  
+  def similar_users_by_ip
+    User.where('last_login_ip = ? or last_login_ip = ? or current_login_ip = ? or current_login_ip = ?',
+      last_login_ip, current_login_ip, last_login_ip, current_login_ip).pluck(:id)
+  end
 
   def toggle_favorite(asset)
     existing_track = tracks.favorites.where(:asset_id => asset.id).first

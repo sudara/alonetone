@@ -1,5 +1,12 @@
 #require 'gchart'
 class User
+  
+  def self.calculate_bandwidth_used
+    User.select(:id, :created_at).find_each(:batch_size => 500) do |u|
+      User.where(:id => u.id).update_all(:bandwidth_used => u.calculate_bandwidth_used)
+    end
+  end
+  
   # graphing
   def track_plays_graph
     created_within_30_days = ['listens.created_at > ?', 30.days.ago.at_midnight]
@@ -51,6 +58,15 @@ class User
 
   def mostly_listens_to
     User.where(:id => most_listened_to_user_ids(10)).includes(:pic)
+  end
+
+  def calculate_bandwidth_used
+    assets.sum(&:bandwidth_used).ceil # in gb
+  end
+  
+  def total_bandwidth_cost
+    # s3 is 12 cents a gig
+    ActionController::Base.helpers.number_to_currency((bandwidth_used * 0.12), :unit => '$')
   end
 
   def most_listened_to_user_ids(limit = 10)

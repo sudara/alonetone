@@ -20,7 +20,6 @@
     
     <td width='200px' align = "center">Downloaded <%= source_file.downloads_count || '0' %> times</td>
 
-    <td width ="100px" align="center"><%= link_to 'Destroy', user_source_file_path(@user, source_file), :confirm => 'Are you sure?', :method => :delete, :class => 'destroy' %></td>
   </tr>
 <% end %>
 </table>
