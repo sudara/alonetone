@@ -1,4 +1,4 @@
-@import "sprites/*.png";
+// @import "sprites/*.png";
 
 $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat);
 
@@ -21,7 +21,9 @@ $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $l
     latest-uploaded,
     latest-comments,
     horizontal-arrow,
-    green-plus
+    vertical-arrow,
+    green-plus,
+    pencil
     
 
     {

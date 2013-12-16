@@ -60,12 +60,23 @@
 	          </div>
 
             <div class="track_links">
-          	  
-              <%= link_to "edit", edit_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box track_about_link', :title => 'edit this track' %>
 
-              <%= link_to 'download', user_track_path(asset.user, asset.permalink, :format => :mp3, :referrer => 'download'), :class=> 'download track_about_link', :title => "right-click to download mp3" %>
+              <%= link_to edit_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box track_about_link', :title => 'edit this track' do %>
+                edit <div class="sprites-pencil sprites-before-heading"></div>
+              <% end %>
 
-      	     <%= link_to "view more", user_track_path(asset.user, asset.permalink), :class => 'view_more track_about_link', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
+
+              <%= link_to user_track_path(asset.user, asset.permalink, :format => :mp3, :referrer => 'download'), :class=> 'download track_about_link', :title => "right-click to download mp3" do %>
+                download <div class="sprites-vertical-arrow sprites-after-heading"></div>
+              <% end %>
+
+
+              <%= link_to user_track_path(asset.user, asset.permalink), :class => 'track_about_link', :title => "#{asset.name} by #{asset.user.name}" do %>
+                view more <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+              <% end unless @single_track %>
+
+
+
 
             </div>
         </div>

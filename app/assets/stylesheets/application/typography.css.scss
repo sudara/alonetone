@@ -241,8 +241,16 @@ div.flash {
     font-size: 16px;
     line-height: 31px;
     border-radius: 5px;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6c7959), color-stop(0.499, #869471), color-stop(0.5, #909d7c), color-stop(0.99, #a6b195));
-    background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
+    
+
+    // background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6c7959), color-stop(0.499, #869471), color-stop(0.5, #909d7c), color-stop(0.99, #a6b195));
+    // background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
+
+    // @include background-image(linear-gradient(#6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%));
+    
+    @include background-image(linear-gradient(#a6b195 .1%, #909d7c 49.9%, #869471 50%, #6c7959 100% ));
+
+
     -webkit-box-shadow: inset 0 1px 0 #f0f2ed, inset 0 -1px 0 #303627;
     border-radius: 5px;
     height: 32px;
@@ -364,44 +372,52 @@ span.private {
 
 .track_about_link {
   display: block;
-  @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
-   @include border-radius(4px, 4px); 
-   border: 1px solid #CCCCCC;
-  // @include text-shadow(rgba(black, 0.6) 1px 2px 3px);
+  // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
+  @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
+  @include border-radius(5px, 5px); 
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
   font-family: $header_font;
-  width: 73px;
-  height: 28px;
-  float: left;
-  line-height: 28px!important;
+  height: 32px;
+  padding: 0 8px!important;
+  font-weight: bold!important;
+  font-size: 16px!important;
+  float: left!important;
+  line-height: 31px!important;
   text-decoration: none!important;
-  text-align: center;
+  // text-align: center;
   margin-left: 8px;
+  color: #303225!important;
   
   &.right {
-    float: right;
-    position: relative;
-    margin-top: -50px;
-    margin-right: 10px;
+    // float: right;
+    // position: relative;
+    // margin-top: -50px;
+    // margin-right: 10px;
   }
 
   &:hover {
-    @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
+    // @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
+    @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
+  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
     @include text-shadow(none);
   }
   &:active {
+    @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
+    @include text-shadow(none);
+    
   }  
 }
 
 a.edit_in_box {
-  width: 50px;
+  // width: 50px;
 }
 
 a.view_more {
-  width: 84px;
+  // width: 84px;
 }
 
 a.download {
-  width: 84px;
+  // width: 84px;
 }
 
 
