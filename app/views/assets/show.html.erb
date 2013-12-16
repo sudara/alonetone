@@ -3,10 +3,20 @@
 <% content_for :left do %>
   <% if authorized_for(@asset) %>
       <div class="track_options">
-          <%= link_to " ", edit_user_track_path(@asset.user, @asset), :class => 'edit_green', :title => 'edit this track' %>
-          <%= link_to " ", user_track_path(@asset.user, @asset), :method => 'delete', :class => 'delete_green ',
+          
+          <%= link_to edit_user_track_path(@asset.user, @asset), :class => 'view_all', :title => 'edit this track' do %>
+            edit <div class="sprites-pencil sprites-before-heading"></div>
+          <% end %>
+
+          <%= link_to user_track_path(@asset.user, @asset), :method => 'delete', :class => 'view_all ',
           :confirm => 'Are you sure? This will delete the song permanently, including all play history and comments.',
-          :title => 'delete this track permanently '%>
+          :title => 'delete this track permanently ' do %>
+            delete <div class="sprites-red-x sprites-before-heading"></div>
+          <% end %>
+
+          
+
+
       </div>
   <% end %>
   

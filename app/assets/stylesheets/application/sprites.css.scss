@@ -23,7 +23,8 @@ $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $l
     horizontal-arrow,
     vertical-arrow,
     green-plus,
-    pencil
+    pencil,
+    red-x
     
 
     {
@@ -49,6 +50,21 @@ $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $l
 .sprites-horizontal-arrow {
     margin-top: 8px;
     margin-left: 4px;
+}
+
+.sprites-vertical-arrow {
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.sprites-pencil {
+    margin-right: 7px;
+    margin-top: 7px;
+}
+
+.sprites-red-x {
+    margin-right: 7px;
+    margin-top: 7px;
 }
 
 .sprites-green-plus {

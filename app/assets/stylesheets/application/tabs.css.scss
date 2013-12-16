@@ -169,9 +169,11 @@ div.tabs {
     margin-left: -20px;
     border-top-color: $body_background;
     line-height: 15px;
+    overflow: hidden;
 
     &.no_border {
       border: none;
+
     }
     &.description_panel {
       position: relative;
