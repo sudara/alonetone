@@ -16,6 +16,10 @@
 	    font-size: 14px;
 	    line-height: 20px
   }
+  a:hover {
+  	text-decoration: none;
+  	
+  }
   .author_name a {
     font-size: 12px;
     font-weight: normal;
@@ -112,4 +116,8 @@ a.footer_button_label {
 
 .footer_button_label:hover {
 	text-decoration: none;	
+}
+
+.footer_orange_text {
+	color: $orange;
 }

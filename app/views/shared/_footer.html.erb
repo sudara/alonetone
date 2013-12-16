@@ -32,9 +32,23 @@
   </div>
   <div class="footer_column_2_right">
     <h3 class="footer-column-header">other places to find alonetone</h3>      
-     <div><%= link_to 'Alonetone Chat Room', "http://#{Alonetone.campfire_url}"%></div>
-     <div><%= link_to '@alonetone on Twitter', 'http://twitter.com/alonetone'%></div>
-     <div><%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %></div>
+     <div>
+        <%= link_to "http://#{Alonetone.campfire_url}" do %>
+          Alonetone <span class="footer_orange_text">Chat Room</span>
+        <% end %>
+     </div>
+     <div>
+        <%= link_to 'http://twitter.com/alonetone' do %>
+          <span class="footer_orange_text">@alonetone</span> on Twitter
+        <% end %>
+     </div>
+     <div>
+
+        <%= link_to 'http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' do %>
+          <span class="footer_orange_text">alonetone</span> on iTunes
+        <% end %>
+
+     </div>
   </div>
   
   <div class="footer_column_2_bottom">
