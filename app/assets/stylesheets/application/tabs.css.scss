@@ -8,6 +8,7 @@ div.tabs,div.big_tabs {
 
 div.tabs {
   width: 420px;
+  padding-top:1px;
 }
 
 .content ul.ui-tabs-nav {
@@ -215,12 +216,12 @@ div.tabs {
           font-weight: bold!important;
           text-decoration: none!important;
           font-size: 12px!important;
+          margin-bottom:1em;
         }
 
       }
       .stats {
         font-size: 12px;
-        margin-top: 12px;
         line-height: 14px;
       }
       .admin {

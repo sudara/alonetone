@@ -5,19 +5,19 @@
 </div>
 
 <div class="title">	
-	<div class="title_left_column" style="float:left; width: 300px;">
+	<div class="title_left_column">
 		<div class="title_left_column_top">
 			<span>
 			  <%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
 			</span>
 			<span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
 		</div>
-		<div class="title_left_column_bottom" style="margin-top: 2px;">
+		<div class="title_left_column_bottom">
 				<%= yield %>
 		</div>
 	</div>
 
-	<div style="float:right; margin-top: 4px; margin-right: 8px;">
+	<div class="title_right_column">
 		<div class='counter'></div>
 		<div class='time'><%= asset.length%></div>
 	</div>

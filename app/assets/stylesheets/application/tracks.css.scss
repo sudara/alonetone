@@ -33,6 +33,9 @@
         background-position: -100px 0px;
       }
     }
+    .sprites-play{
+     margin-left:2px; 
+    }
     &.play-button {
     }
     &.download-button {
@@ -41,12 +44,48 @@
   div.title {
     background-color: $box_background;
     height: 40px;
-    width: 370px;
+    width: 367px;
+    padding-left:3px;
     overflow: hidden;
     padding-top: 10px;
+    .title_left_column{
+      float:left; 
+      width: 300px;
+    }
+    .title_right_column{
+      float:right; 
+      position:relative;
+      height:100%;
+      .counter {
+        position:absolute;
+        text-align: right;
+        font-size: 16px;
+        font-weight:bold;
+        bottom:22px;
+        right:14px;
+      }
+      div.time {
+        position:absolute;
+        text-align: right;
+        font-size: 12px;
+        font-family: $header_font, Helvetica, Arial;
+        display: block;
+        text-align: right;
+        right: 15px;
+        bottom: 10px;
+        font-size: 12px;
+        color:#8c8c8c;
+      }
+    }
     a {
       font-size: 18px;
       text-decoration: none;
+      font-family:$header_font;
+      -webkit-font-smoothing: antialiased;
+      color:$text_color;
+    }
+    .title_left_column_bottom{
+      clear:both;
     }
     span.by {
       font-size: 12px;
@@ -57,33 +96,6 @@
     span.track_play, span.latest, span.popular {
       font-size: 12px;
       margin-left: 20px;
-    }
-    .counter {
-      text-align: right;
-      font-size: 18px;
-    }
-
-    div {
-      float: none;
-    }
-    
-    div.time {
-      text-align: right;
-      font-size: 12px;
-      opacity: 0.5;
-      font-family: $header_font, Helvetica, Arial;
-    }
-
-    .time {
-      display: block;
-      float: right;
-      position: relative;
-      text-align: right;
-      right: 8px;
-      bottom: 0px;
-      font-size: 12px;
-      opacity: 0.5;
-      font-family: $header_font, Helvetica, Arial;
     }
 
     .listen_count {
@@ -117,9 +129,12 @@
       }
     }
     div.title {
-      span.counter {
+      div.counter {
         opacity: 0.99;
         color: $white;
+      }
+      div.time{
+        color:#fecda6;
       }
     }
   }

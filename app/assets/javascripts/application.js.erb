@@ -525,7 +525,7 @@ Track = $.klass({
     this.element.addClass('instantiated');
     this.playButton = $(".play-button",this.element);
     this.trackLink = $("a.track_link",this.element);
-    this.time = $('span.counter',this.element);
+    this.time = $('div.counter',this.element);
     this.track_title = $('a.track_link',this.element).html();
     this.artist = $('a.artist',this.element).html();
     this.deleteButton = $(".delete-button",this.element);
@@ -550,9 +550,8 @@ Track = $.klass({
     '.track_link': function(e){ return this.toggleDetails(1)}, // open info
     '.download_link':function(e){ return this.toggleDetails(2)}, // open sharing
     // '.title':function(e){ return this.toggleDetails(1)},  // open 
-    // '.title_left_column':function(e){ return this.toggleDetails(1)},  // open 
-    '.title_left_column_top':function(e){ return this.toggleDetails(1)},  // open 
-    '.title_left_column_bottom':function(e){ return this.toggleDetails(1)}  // open 
+    '.title_left_column':function(e){ return this.toggleDetails(1)},  // open 
+    '.title':function(e){ return this.toggleDetails(1)}  // open 
   }),
   
   onmouseenter: $.delegate({
