@@ -1,41 +1,67 @@
 <div class="footer_column_1">
-  <%= link_to ' ', '/radio/popular', :class => 'radio_button'%>
-  <%= link_to ' ', about_path(:howto), :class => 'halp_button'%>
+  
+  
+  <div class="footer_button_group">
+    
+    <%= link_to '/radio/popular' do %>
+      <span class="sprites-footer-radio"></span>
+    <% end %>
+    <%= link_to "alonetone radio", '/radio/popular', :class => 'footer_button_label' %>
+  </div>
+  
+  <div class="footer_button_group">
+    
+    <%= link_to about_path(:howto) do %>
+      <span class="sprites-footer-help"></span>
+    <% end %>
+    <%= link_to "alonetone help", about_path(:howto), :class => 'footer_button_label' %>
+
+  </div>      
+
 </div>
 
 <div class="footer_column_2">
-  <h3 class="footer-column-header">alonetone</h3>    
-  <ul>
-    <li><%= link_to "About", "/about"%></li>    
-    <li><%= link_to "Press/Contact", "/about/press"%></li>
-    <li><%= link_to "Stats", "/about/stats"%></li>
-    <li><%= link_to "Donate!", "/about/donate" %></li>
-  </ul>
+
+  <div class="footer_column_2_left">
+    <h3 class="footer-column-header">more information</h3>    
+      <div><%= link_to "About", "/about"%></div>    
+      <div><%= link_to "Press/Contact", "/about/press"%></div>
+      <div><%= link_to "Stats", "/about/stats"%></div>
+      <div><%= link_to "Donate!", "/about/donate" %></div>
+    
+  </div>
+  <div class="footer_column_2_right">
+    <h3 class="footer-column-header">other places to find alonetone</h3>      
+     <div><%= link_to 'Alonetone Chat Room', "http://#{Alonetone.campfire_url}"%></div>
+     <div><%= link_to '@alonetone on Twitter', 'http://twitter.com/alonetone'%></div>
+     <div><%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %></div>
+  </div>
+  
+  <div class="footer_column_2_bottom">
+    <h3 class="footer-column-header">alonetoners online</h3>
+
+    <ul>
+     <li>
+       <% User.currently_online.each do |user| %>
+         <%= link_to user.name, user_home_path(user.login) %> 
+       <% end %>
+     </li>
+    </ul>
+    
+  </div>
+
 </div>
 
 <div class="footer_column_3">
 
-  <h3 class="footer-column-header">other places to find alonetone</h3>    
+  <h3 class="footer-column-header">from the blog</h3>
   <ul>
-     <li><%= link_to 'Alonetone Chat Room', "http://#{Alonetone.campfire_url}"%><br/></li>
-     <li><%= link_to '@alonetone on Twitter', 'http://twitter.com/alonetone'%></li>
-     <li><%= link_to 'alonetone on iTunes','http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' %></li>
-  </ul>   
-   
-  <h3 class="footer-column-header">alonetoners online</h3>
-
-  <ul>
-   <li>
-     <% User.currently_online.each do |user| %>
-       <%= link_to user.name, user_home_path(user.login) %> 
-     <% end %>
-   </li>
+    <li>
+      <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+    </li>
   </ul>
 
-</div>
-
-<div class="footer_column_4">
-  <h3 class="footer-column-header">latest forum topics</h3>
+    <h3 class="footer-column-header">latest forum topics</h3>
   <ul>
     <% Topic.for_footer.each do |topic| %>
     <li class="footer-forum-topic">
@@ -45,13 +71,5 @@
     <% end %>
   </ul>
   
-  <h3 class="footer-column-header">from the blog</h3>
-  <ul>
-    <li>
-      <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
-    </li>
-  </ul>
-  
-  
-  
+
 </div>

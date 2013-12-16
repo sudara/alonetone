@@ -13,8 +13,8 @@
 	}
 	a {
 		font-weight: bold;
-    font-size: 14px;
-    line-height: 20px
+	    font-size: 14px;
+	    line-height: 20px
   }
   .author_name a {
     font-size: 12px;
@@ -23,76 +23,93 @@
 }
 
 %footer_column {
-	display: inline-block;
-	margin-right: 25px;
-	width: 210px;
+	display: block;
+	float: left;
+	margin: 0 0;
 	vertical-align: top;
 	font-size: 12px;
 	#updates_link.new {
 		color: $red;
 	}
+	> div {
+		margin-bottom: 3px;
+	}
+
 }
 
 .footer_column_1 {
 	@extend %footer_column;
-	width: 200px;
+	width: 120px;
+	padding-left: 30px;
+	padding-right: 20px;
 }
 .footer_column_2 {
 	@extend %footer_column;
+	width: 390px;
+	padding-right: 40px;
 }
+
+.footer_column_2_left {
+	@extend %footer_column;
+	width: 150px;
+	padding-right: 40px;
+}
+
+.footer_column_2_right {
+	@extend %footer_column;
+	width: 200px;
+	// padding-right: 40px;
+}
+
+.footer_column_2_bottom {
+	@extend %footer_column;
+	clear: both;
+	// width: 200px;
+	// padding-right: 40px;
+}
+
+
 .footer_column_3 {
 	@extend %footer_column;
-	width: 260px;
-}
-.footer_column_4 {
-	@extend %footer_column;
+	width: 280px;
+	padding-right: 40px;
 }
 
 .footer-column-header {
 	margin-bottom: 5px;
-  margin-top:20px;
+	margin-top:20px;
 	font-weight: bold;
 	font-size: 14px;
-  color: #929292;
-  padding-bottom:5px;
-  border-bottom: 1px #929292 solid;
+	color: #585858;
+	padding-bottom:5px;
+	border-bottom: 1px #929292 solid;
 }
 
-.radio_button {
-	display: inline-block;
-	width: 81px;
-	height: 25px;
-	background: image-url('nav/radio.png');
-	&:hover {
-		background-position: -81px 0;
-	}
-	&:active {
-		background-position: -162px 0;
-	}
+.footer_button_group {
+	border: 1px #C2C2C2 solid;
+	@include border-radius(5px, 5px); 
+	width: 104px;
+	text-align: center;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	margin-top: 14px;
+	
 }
 
-.halp_button {
-	display: inline-block;
-	width: 78px;
-	height: 25px;
-	background: image-url('nav/halp.png');
-	&:hover {
-		background-position: -78px 0;
-	}
-	&:active {
-		background-position: -156px 0;
-	}
+.footer_button_group a {
+	width: 64px;
+	display: block;
+	
+	margin: 0 auto;
+	margin-top: 4px;
 }
 
-.about_button {
-	display: inline-block;
-	width: 78px;
-	height: 25px;
-	background: image-url('nav/about.png');
-	&:hover {
-		background-position: -78px 0;
-	}
-	&:active {
-		background-position: -156px 0;
-	}
+a.footer_button_label {
+	font-size: 11px;
+	width: 104px;
+	// margin-left: -8px;
+}
+
+.footer_button_label:hover {
+	text-decoration: none;	
 }

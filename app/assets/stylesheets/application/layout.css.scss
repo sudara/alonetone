@@ -60,7 +60,10 @@ html,body {
 	@include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
 	min-height: 111px;
 	padding-top: 31px;
-	padding-left: 50px;
+	// width: 920px;
+	overflow: hidden;
+	// padding-left: 50px;
+	padding-bottom: 20px;
 }
 
 .clearfix:after {

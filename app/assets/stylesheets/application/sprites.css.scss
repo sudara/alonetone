@@ -1,9 +1,10 @@
-// @import "sprites/*.png";
+@import "sprites/*.png";
 
 $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat);
 
 @mixin retina-sprite($sprite) {
 
+    display: block;
     background-image: sprite-url($sprite-map);
     $pos: sprite-position($sprite-map, $sprite, 0, 0);
     background-position: (nth($pos, 1)/2) (nth($pos, 2)/2);
@@ -24,7 +25,9 @@ $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $l
     vertical-arrow,
     green-plus,
     pencil,
-    red-x
+    red-x,
+    footer-radio,
+    footer-help
     
 
     {
