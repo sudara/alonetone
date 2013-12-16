@@ -523,6 +523,9 @@ EditForm = $.klass(Remote.Form,{
 Track = $.klass({  
   initialize: function() {
     this.element.addClass('instantiated');
+
+    this.innerPlay = $(".play-button",this.element).children().eq(0);
+
     this.playButton = $(".play-button",this.element);
     this.trackLink = $("a.track_link",this.element);
     this.time = $('div.counter',this.element);
@@ -651,6 +654,8 @@ Track = $.klass({
   playOrResume : function(){
     this.killOtherTracks();
     this.element.addClass('playing');
+    this.innerPlay.addClass('sprites-pause')
+    this.innerPlay.removeClass('sprites-play')
     this.openDetails(0);
     this.ensureSoundIsReadyThenPlay();
   },
@@ -685,6 +690,10 @@ Track = $.klass({
   pause: function(){
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
+   this.innerPlay.addClass('sprites-play')
+    this.innerPlay.removeClass('sprites-pause')
+
+    // this.element.firstChild.removeClass('sprites-play');
     this.closeDetails();
   },
   

@@ -30,10 +30,12 @@
         background-position: -51px 0px;
       }
       &.playing {
-        background-position: -100px 0px;
       }
     }
-    .sprites-play{
+    .sprites-play {
+     margin-left:2px; 
+    }
+    .sprites-pause {
      margin-left:2px; 
     }
     &.play-button {

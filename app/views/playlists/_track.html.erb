@@ -1,5 +1,11 @@
 <%= content_tag :div, :id => ("track_#{track.id}"), :class => 'asset unopenable ' do %>
-	<div class="play-button button"><%= link_to_play track.asset %></div>
+	
+	<div class="play-button button">
+	<div class="sprites-play">
+		<%= link_to_play track.asset %>
+	</div>
+	</div>
+
 	<div class="title">
 	 <%= link_to track_name_for(track.asset,30), user_track_path(track.asset.user, track.asset.permalink), :class => 'track_link' %><br/>
 	 
