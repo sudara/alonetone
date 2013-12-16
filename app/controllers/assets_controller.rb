@@ -62,7 +62,11 @@ class AssetsController < ApplicationController
       end
       format.mp3 do
         register_listen
-        redirect_to @asset.mp3.url
+        if Alonetone.play_dummy_mp3s 
+          play_local_mp3
+        else
+          redirect_to @asset.mp3.url
+        end
       end
     end
   end
@@ -195,6 +199,39 @@ class AssetsController < ApplicationController
   end
   
   protected
+  
+  def play_local_mp3
+    file_to_send = File.join(Rails.root,'spec/fixtures/assets/muppets.mp3')
+    
+    length = File.size(file_to_send) # need to do this manually for header to be set correctly
+
+    # SHITTON OF HEADER HACKS TO APPEASE HTML5 locally :)
+    file_begin = 0
+    file_end = length - 1
+    headers['Accept-Ranges'] = 'bytes'
+    headers["Cache-Control"] = "public, must-revalidate, max-age=0"
+    headers["Pragma"] = "no-cache"
+    headers['Connection'] = 'close'
+    if !request.headers["Range"] or request.headers["Range"]=="bytes=0-"# browser wants the whole file
+      status = "200 OK"
+      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
+
+      send_file file_to_send, :type => 'audio/mpeg', :disposition => 'attachment;', 
+      :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
+    else 
+      status = "206 Partial Content" #browser wants part of the file
+      match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
+      if match
+        file_begin = match[1]
+        file_end = match[2] if match[2] && !match[2].empty?
+      end
+      headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
+      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
+      how_many_bytes = file_end.to_i-file_begin.to_i > 0 ? file_end.to_i-file_begin.to_i : 1
+      send_data File.read(file_to_send,how_many_bytes,file_begin.to_i), :type =>'audio/mpeg', :disposition => 'attachment;', 
+      :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
+    end
+  end
     
   def track_not_found
     flash[:error] = "Hmm, we didn't find that track!"

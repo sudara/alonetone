@@ -15,6 +15,7 @@ development: &defaults
   video_size: width="370" height="308"
   enable_defensio: false
   default_user_images: true
+  play_dummy_mp3s: false # set to true if playing off of production dump without s3 cred
   ga: 
   get_clicky: 
   typekit: 
