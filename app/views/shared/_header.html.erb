@@ -24,15 +24,21 @@
       <%= link_to 'Forums', forums_path, :title => 'forums', :class => "tab#{' active' if @tab == 'forums' }" %>
     </li>
   </ul>
-</div>
-
-<div class="header_login">
-
   <% if logged_in? %>
-    <%= link_to image_tag(current_user.avatar(:tiny)), profile_path(current_user), :class => 'profile_link'%>      
-    <%= link_to ' ',logout_path, :class => 'logout_button' %>
-  <% else %>
-    <%= link_to ' ',login_path, :class => 'login_button' %>
-
-  <% end %>
+    <div class="user_dropdown">
+      <%= link_to profile_path(current_user), :class => 'profile_link' do %>
+        <span><%= truncate current_user.name %></span >
+        <%= image_tag(current_user.avatar(:small)) %>
+      <% end %>      
+      <%= link_to ' ',logout_path, :class => 'logout_button' %>
+    </div>
+  <% end %>  
 </div>
+
+<% unless logged_in? %>
+  <div class="header_login">  
+    <li id="login">
+      <%= link_to 'Login',login_path, :class => 'login_button' %>
+    </li>
+  </div>
+<% end %>

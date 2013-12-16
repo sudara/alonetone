@@ -11,56 +11,20 @@
 
 .header_nav {
 	margin-left: 170px;
+  width:770px;
 }
 
 .header_login {
 	position: absolute;
 	top: 0px;
 	width: 940px;
-	.profile_link {
-		display: block; 
-		float: right;
-		margin-left: 7px;
-		width: 25px;
-		height: 25px;
-	}
-	.logout_button {
-		display: block;
-		float: right;
-		margin-top: 2px;
-		width: 88px;
-		height: 25px;
-		background: image-url('nav/logout.png') no-repeat 0px 0;
-		&:hover {
-			background-position: -88px 0;
-		}
-		&:active {
-			background-position: -176px 0;
-		}
-	}
-	.login_button {
-		display: block;
-		float: right;
-		margin-top: 2px;
-		width: 75px;
-		height: 25px;
-		background: image-url('nav/login.png') no-repeat 0px 0;
-		
-		&:hover {
-			background-position: -75px 0;
-		}
-		
-		&:active {
-			background-position: -150px 0;
-		}
-	}
 }
 
 .header_search {
 	position: relative;
   height:50px;
 	// left: 49px;
-	left: 684px;
+	left: 686px;
   padding-top:4px;
   clear:both;
 	#search_form {
@@ -83,7 +47,7 @@
 		display: block;
 		float: left;
     margin-top:8px;
-    margin-left:4px;
+    margin-left:5px;
     width: 18px;
     height: 18px;
     img{
