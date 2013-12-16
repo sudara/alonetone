@@ -673,7 +673,9 @@ Track = $.klass({
   
   play: function(){
     soundManager.createSound({id: this.soundID, url: this.trackURL, onfinish:$.bind(this.startNextTrack,this)}).play();
-    pageTracker._trackPageview(this.trackURL);
+    if(typeof pageTracker != "undefined"){
+      pageTracker._trackPageview(this.trackURL);
+    }
   }, 
   
   isPlaying: function(){
