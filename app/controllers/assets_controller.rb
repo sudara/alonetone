@@ -62,7 +62,11 @@ class AssetsController < ApplicationController
       end
       format.mp3 do
         register_listen
-        redirect_to @asset.mp3.url
+        if Alonetone.play_dummy_mp3s 
+          play_local_mp3
+        else
+          redirect_to @asset.mp3.expiring_url.gsub('s3.amazonaws.com/','')
+        end
       end
     end
   end

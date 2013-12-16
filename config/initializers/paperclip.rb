@@ -15,3 +15,4 @@ Paperclip::Attachment.default_options.merge!({
     'Content-disposition' => 'attachment;'}
 }) if Alonetone.storage == 's3'
     
+    

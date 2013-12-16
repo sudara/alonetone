@@ -4,9 +4,13 @@ class Asset
   # see config/initializers/paperclip for defaults
   attachment_options = {
     :styles => { :original => ''}, # just makes sure original runs through the processor
-    :processors => [:mp3_paperclip_processor]
-  }  
-  attachment_options[:path] = "/mp3/:id/:basename.:extension" if Alonetone.storage == "s3"
+    :processors => [:mp3_paperclip_processor],
+  } 
+  if Alonetone.storage == 's3' 
+    attachment_options[:path] = "/mp3/:id/:basename.:extension" 
+    attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
+  end
+
   has_attached_file :mp3, attachment_options
   
   validates_attachment_size :mp3, :less_than => 60.megabytes
@@ -16,7 +20,6 @@ class Asset
   
  # Disable zip uploads for now, make life easier transitioning to paperclip
  # Plus this should go bye-bye into a model
- 
  
  # def self.extract_mp3s(zip_file, &block)
  #   # try to open the zip file
