@@ -1,5 +1,8 @@
+@import "sprites/*.png";
+
+$sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat);
+
 @mixin retina-sprite($sprite) {
-    $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat);
 
     background-image: sprite-url($sprite-map);
     $pos: sprite-position($sprite-map, $sprite, 0, 0);
@@ -16,7 +19,11 @@
     pause,
     latest-playlists,
     latest-uploaded,
-    latest-comments
+    latest-comments,
+    horizontal-arrow,
+    green-plus
+    
+
     {
         .sprites-#{$thisSprite} {
             @include retina-sprite(#{$thisSprite});
@@ -28,6 +35,21 @@
 
     }
 
+
 .sprites-before-heading {
     float: left;
+}
+
+.sprites-after-heading {
+    float: right;
+}
+
+.sprites-horizontal-arrow {
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.sprites-green-plus {
+    margin-right: 7px;
+    margin-top: 4px;
 }

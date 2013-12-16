@@ -4,7 +4,9 @@
     <% if authorized? %>
 	    <div class="additional_options">
 		    <div class="button_wrapper">
-		        <%= link_to image_tag("icons/plus.png") + "create new playlist", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
+			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
+			      create new playlist <div class="sprites-green-plus sprites-before-heading"></div>
+			    <% end %>
 		    </div>
         <% if @user.playlists.public.size > 2 %>
 		      <div class="button_wrapper">
@@ -24,9 +26,7 @@
 	<% content_for :left do %>
     <%= render :partial => 'latest' if @user.assets_count > 0 %>
     <%= render :partial => 'favorites' if @favorites.present? %>
-    
     <%= render :partial => 'follows' if @mostly_listens_to.present? or @follows.present?  %>
-    
     <%= render :partial => 'listens' unless @listens.empty? %>	
     <%# image_tag @user.track_plays_graph if authorized? %>
   	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
