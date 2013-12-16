@@ -129,7 +129,7 @@ div.tabs {
     text-decoration: underline;
   }
   textarea {
-    width: 380px;
+    width: 374px;
   }
   .tabbed_input {
     width: 360px;
@@ -205,6 +205,11 @@ div.tabs {
         font-size: 14px;
         line-height: 17px;
         width: 304px;
+        .user_description {
+          p{
+            margin-bottom:1em;
+          }
+        }
         p img{
           max-width: 290px;
         }

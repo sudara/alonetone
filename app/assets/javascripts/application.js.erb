@@ -595,10 +595,10 @@ Track = $.klass({
 		  $('.show_to_admin_or_owner', this.more).show();
 		  
 		  // Show some text prompting them to edit if no description
-		  if($('.description .min_height_50 :not(h3)', this.more).text() == ""){
+		  if($('.description .user_description :not(h3)', this.more).text() == ""){
 		    var href = $('.edit_in_box', this.more).attr('href');
 		    var prompt = '<span class="hint"><a class="hint" href="'+href+'">Add a description</a> to help listeners find your music</span>';
-		     $('.description .min_height_50', this.more).append(prompt);
+		     $('.description .user_description', this.more).append(prompt);
 		  }
 		}
 		
