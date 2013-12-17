@@ -53,15 +53,13 @@
   
   <div class="footer_column_2_bottom">
     <h3 class="footer-column-header">alonetoners online</h3>
-
     <ul>
      <li>
-       <% User.currently_online.collect do |user| %>
-         <%= link_to user.name, user_home_path(user.login) %>
-       <% end.join(', ') %>
+       <%= User.currently_online.collect do |user| %>
+         <% link_to user.name, user_home_path(user.login) %>
+       <% end.join(', ').html_safe %>
      </li>
     </ul>
-    
   </div>
 
 </div>

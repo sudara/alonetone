@@ -72,6 +72,9 @@
 .footer_column_2_bottom {
 	@extend %footer_column;
 	clear: both;
+  li{
+    font-size: 14px;
+  }
 	// width: 200px;
 	// padding-right: 40px;
 }
@@ -101,7 +104,6 @@
 	padding-top: 8px;
 	padding-bottom: 8px;
 	margin-top: 14px;
-	
 }
 
 .footer_button_group a {
