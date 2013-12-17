@@ -28,14 +28,14 @@ class CommentsController < ApplicationController
 
   def unspam
     @comment.ham!
-    @comment.update_attribute :is_spam, :false
+    @comment.update_column :is_spam, false
     @comment.deliver_comment_notification
     redirect_to :back
   end
   
   def spam
     @comment.spam!
-    @comment.update_attribute :is_spam, :true
+    @comment.update_column :is_spam, true
     redirect_to :back
   end
 
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   protected
   
   def find_comment
-    @comment = Comment.find(params[:id], :include => [:commenter, :user])    
+    @comment = Comment.where(:id => params[:id]).first    
   end
   
   def set_comments_made
