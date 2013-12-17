@@ -9,7 +9,6 @@
 
     <% if authorized? %>
       <%= link_to 'edit your profile', edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" %>
-      <%= link_to image_tag('icons/alonetone_plus_small.png'), user_plus_path(@user), :class=> 'alonetone_plus_link' if authorized? && @user.plus_enabled? %>
     <% end %>
   </div>
   <div id="user_links">

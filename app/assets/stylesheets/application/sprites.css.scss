@@ -34,12 +34,11 @@ $sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $l
         .sprites-#{$thisSprite} {
             @include retina-sprite(#{$thisSprite});
         }
-
-        .sprites-#{$thisSprite}:hover {
-            @extend .sprites-#{$thisSprite}_hover;
-        }
-
     }
+
+.sprites-play:hover {
+    @extend .sprites-play_hover;
+}
 
 
 .sprites-before-heading {
