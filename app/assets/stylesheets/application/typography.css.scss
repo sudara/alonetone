@@ -448,14 +448,15 @@ a.edit_profile, a.follow {
   background: image-url('icons/follow.png') no-repeat left center;  width: 48px;
   line-height: 20px;
   height: 48px;
-  position: absolute;
+  // position: absolute;
   text-align: center;
   text-decoration: none;
-  
+  margin-right: 2px;
   font-size: 10px;
   font-family: $header_font;
   color: #000!important;
-  right: 2px;
+  float: right;
+  
   top: 1px;
 
   > .sprites-pencil-big {
