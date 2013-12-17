@@ -1,7 +1,7 @@
 <%= div_for(user, :class => 'user-index') do %>
 
   
-  <%= link_to(image_tag('user-cover-125.png'), user_home_path(user), :class => 'overlay', :title => " #{user.name}
+  <%= link_to(' ', user_home_path(user), :class => 'overlay', :title => " #{user.name}
  #{user.assets_count > 0 ? pluralize(user.assets_count,'uploaded tracks') : ''} 
  Joined alonetone #{user.created_at.to_date.to_s(:long)}
  #{user_location(user)}") %>

@@ -52,6 +52,17 @@
   }
 }
 
+a.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  opacity: .8;
+  background: transparent image-url('retina-overlay.png') no-repeat;
+  background-size:100%;
+  width: 137px;
+  height: 137px;
+}
 
 
 // browse all users
@@ -63,16 +74,6 @@
     margin-right: 25px;
     margin-bottom: 30px;
     position: relative;
-    a.overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 2;
-      opacity: 1;
-      background-color: transparent;
-      width: 137px;
-      height: 137px;
-    }
     img.cover {
       width: 125px;
       height: 125px;
@@ -742,7 +743,6 @@ a.add_to_favorites, a.favorited {
   div.details {
     position: relative;
     display: block;
-    background: image-url('backgrounds/album.png') repeat-x top left;
     background-color: $playlist_box_silver;
     div.pic {
       float: left;

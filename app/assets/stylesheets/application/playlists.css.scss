@@ -17,24 +17,31 @@ a.next, a.prev {
 }
 
 #playlists_home{
-  overflow: hidden;
   text-align: center;
   font-size: 11px;
   margin-bottom: 28px;
+  height:168px;
 
   li {
     float:left;
+    position:relative;
     display:block;
     width:178px;
+    a.overlay{
+      margin-left: 20px;
+      opacity:1;
+    }
     img{
-      width:128px;
-      height: 128px;
+      margin-top:4px;
+      margin-left: -1px;
+      width:125px;
+      height: 125px;
     }
   }
 
   .playlists_home_title {
     color: #FFFFFF;
-    margin-top: 5px;
+    margin-top: 7px;
     margin-bottom: 0px;
       a {
         font-size: 13px;
@@ -128,7 +135,7 @@ a.jewel_case_125 {
 img.cover_125 {
   width: 125px;
   height: 125px;
-  margin-left: 17px;
+  margin-left: 6px;
   margin-top: 4px;
 }
 
@@ -176,7 +183,6 @@ img.cover_200 {
   div.info {
     position: relative;
     display: block;
-    background: image-url('images/backgrounds/album.png') repeat-x top left;
     background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
 
@@ -185,8 +191,7 @@ img.cover_200 {
       float: left;
       width: 148px;
       height: 136px;
-      overflow: hidden;
-      
+      overflow: hidden;      
     }
     p.description {
       // float: left;
