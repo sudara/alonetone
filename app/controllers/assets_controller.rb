@@ -62,7 +62,7 @@ class AssetsController < ApplicationController
       end
       format.mp3 do
         register_listen
-        if Alonetone.play_dummy_mp3s 
+        if Alonetone.try(:play_dummy_mp3s)
           play_local_mp3
         else
           redirect_to @asset.mp3.url
