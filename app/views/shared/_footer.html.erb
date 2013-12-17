@@ -56,9 +56,9 @@
 
     <ul>
      <li>
-       <% User.currently_online.each do |user| %>
-         <%= link_to user.name, user_home_path(user.login) %> 
-       <% end %>
+       <% User.currently_online.collect do |user| %>
+         <%= link_to user.name, user_home_path(user.login) %>
+       <% end.join(', ') %>
      </li>
     </ul>
     
