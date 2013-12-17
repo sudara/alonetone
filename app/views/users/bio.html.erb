@@ -23,7 +23,7 @@
                 Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
                 <%= itunes_link_for(@user) %>
               </p>
-        	  <% elsif @user.has_tracks? && (current_user.id == @user.id) %>
+        	  <% elsif @user.has_tracks? && (logged_in? && (current_user.id == @user.id)) %>
         	    Your Podcast feed: <%= user_feeds_url(@user, :rss) %>
               <p>
         	      <%= link_to 'Submit this feed to iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
