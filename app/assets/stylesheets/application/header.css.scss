@@ -62,11 +62,14 @@
 .user_dropdown{
   
   float: right;
+  padding-left: 35px;
+  padding-bottom: 10px;
+  // background-color: #F00;
 
   .profile_link {
       
-      position: relative;
-      z-index: 3;
+        position: relative;
+        z-index: 3;
 
         font-weight: 500;
         padding-bottom:8px;
@@ -76,12 +79,17 @@
         font-size: 14px;
         display: block; 
         height: 26px;
-  
+        
+
        span {
           display: block;
           line-height:34px;
           float:left;
           padding: 0px 10px;
+          &:hover {
+          text-decoration: underline;
+          }
+
         }
         img {
           width: 34px;
