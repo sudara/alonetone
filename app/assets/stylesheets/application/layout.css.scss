@@ -12,11 +12,11 @@ html,body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin-bottom: -142px;
+	margin-bottom: -290px;
 }
 
 .sticky_footer_buffer {
-	height: 142px;
+	height: 290px;
 }
 
 #wrapper {
@@ -24,7 +24,7 @@ html,body {
 }
 
 #content {
-	margin-bottom: 210px;
+	margin-bottom: 100px;
 	margin-left: 50px;
 	width: 890px;
 }
@@ -59,11 +59,8 @@ html,body {
 
 .footer {
 	@include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
-	min-height: 111px;
+	height: 239px;
 	padding-top: 31px;
-	// width: 920px;
-	overflow: hidden;
-	// padding-left: 50px;
 	padding-bottom: 20px;
 	padding-left: 20px;
 }
