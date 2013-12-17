@@ -570,6 +570,8 @@ div.small_spinner {
 // favorites
 
 a.add_to_favorites, a.favorited {
+  
+  @include retina-sprite(heart-with-plus);
   text-indent: -9999px;
   position: absolute;
   right: 16px;
@@ -578,17 +580,17 @@ a.add_to_favorites, a.favorited {
   display: block;
   width: 29px;
   height: 25px;
-  background: image-url('icons/favorites.png') no-repeat -29px 0px;
   opacity: 0.55;
   &:hover {
-    background-position: -29px 0px;
     opacity: 0.999;
   }
   &.favorited {
-    background-position: 0px 0px;
+    right: 14px;
+    margin-top: 19px;
+    @include retina-sprite(heart);
     opacity: 0.99;
     &:hover {
-      background-position: -58px 0px;
+      @include retina-sprite(heart-broken);
     }
   }
 }
