@@ -57,7 +57,12 @@
 </table>
 
 <div class="footer_box">
-  <%= link_to('view all recent posts &rArr;'.html_safe, posts_path, :class=>'view_all', :title => 'view all recent posts') if Post.first %>
+
+  <%= link_to posts_path, :class=>'view_all', :title => 'view all recent posts' do %>
+    view all recent posts <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+  <% end if Post.first %>
+
+
 </div>
 
 <% if logged_in? && @user_topics.present? %>
