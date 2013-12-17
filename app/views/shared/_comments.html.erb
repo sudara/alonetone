@@ -4,12 +4,8 @@
 </div>
 <div class="footer_box">
 
-	<%= link_to listens_path(@user.login), :class => 'view_all' do %>
-	  view all comments <div class="sprites-horizontal-arrow sprites-after-heading"></div>
-	<% end if @listens.size > 4 %>
-
-
-		
-
+	<%= link_to user_comments_path(@user.login), :class => 'view_all' do %>
+	  view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+	<% end if @comments.size > 4 %>
 
 </div>
