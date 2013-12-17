@@ -60,71 +60,60 @@
 
 
 .user_dropdown{
-  
   float: right;
-  padding-left: 35px;
   padding-bottom: 10px;
   // background-color: #F00;
-
   .profile_link {
-      
-        position: relative;
-        z-index: 3;
-
-        font-weight: 500;
-        padding-bottom:8px;
-        font-family: $header_font;
-        color: $nav_item_color;
-        background-color: #222;
-        font-size: 14px;
-        display: block; 
-        height: 26px;
-        
-
-       span {
-          display: block;
-          line-height:34px;
-          float:left;
-          padding: 0px 10px;
-          &:hover {
-          text-decoration: underline;
-          }
-
-        }
-        img {
-          width: 34px;
-          height: 34px;
-        }
+    position: relative;
+    z-index: 3;
+    font-weight: 500;
+    padding-bottom:8px;
+    font-family: $header_font;
+    color: $nav_item_color;
+    background-color: #222;
+    font-size: 14px;
+    display: block; 
+    height: 26px;
+    span {
+      display: block;
+      line-height:34px;
+      float:left;
+      text-align:left;
+      min-width:65px;
+      padding: 0px 10px 0px 15px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    img {
+      width: 34px;
+      height: 34px;
+    }
   }
-
   .user_dropdown_menu {
-
     position: relative;
     top: -60px;
     // display: none;
     z-index: 2;
     a {
-        font-weight: 500;
-        font-family: $header_font;
-        color: $nav_item_color;
-        background-color: #333;
-        font-size: 14px;
-        display: block; 
-        height: 26px;
-        line-height: 26px;
-        padding-left: 10px;
-
-        &:hover {
-          background-color: $orange;
-          color: #fff;
-          text-decoration: none;
-        }
+      font-weight: 500;
+      font-family: $header_font;
+      color: $nav_item_color;
+      background-color: #333;
+      font-size: 14px;
+      display: block; 
+      height: 26px;
+      line-height: 26px;
+      padding-left: 10px;
+      &:hover {
+        background-color: $orange;
+        color: #fff;
+        text-decoration: none;
+      }
      }
-
       :nth-child(odd) {
         background-color: #555;
     }
-
   }
    
   .user_dropdown_menu:nth-child(odd) {
