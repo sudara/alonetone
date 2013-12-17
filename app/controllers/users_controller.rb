@@ -76,7 +76,9 @@ class UsersController < ApplicationController
   
   def bio
     @page_title = "#{@user.name}'s Profile"
+    @follows = @user.followees.includes(:pic)
     @mostly_listens_to = @user.mostly_listens_to
+    @similar_users = User.where(:id => @user.similar_users_by_ip)
   end
   
   def attach_pic
@@ -162,8 +164,6 @@ class UsersController < ApplicationController
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5)
     @comments = @user.comments.public_or_private(display_private_comments?).includes(:commentable => {:user => :pic}).limit(5)
-    @follows = @user.followees.includes(:pic)
-    @mostly_listens_to = @user.mostly_listens_to
   end
   
   def authorized?

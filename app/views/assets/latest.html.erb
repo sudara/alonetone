@@ -31,17 +31,11 @@
       view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
     <% end %>
   </div>
-
-
-
-
 <% end %>
 
 
 <% content_for :right do %>
-
 	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
-
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
@@ -60,12 +54,9 @@
     </div>
     </div>
     <div class="footer_box">
-
       <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
         view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
       <% end %>
-
-
     </div>
   <% end %>
 
@@ -74,13 +65,9 @@
     <%= render :partial => 'shared/favorite', :collection => @favorites %>
   </div>  
   <div class="footer_box">
-
-
     <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
       view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
     <% end %>
-
   </div>
-
 <% end %>
 
