@@ -35,7 +35,8 @@
 
 
 <% content_for :right do %>
-	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
+	<div class="sprites-stars sprites-before-heading"></div>
+  <h2 id="kicking_ass" class="box">Currently kicking ass</h2>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
@@ -46,6 +47,7 @@
   </div>
   
   <% if @followee_tracks %>
+    <div class="sprites-stars sprites-before-heading"></div>
     <h2 id="kicking_ass" class="box">Tracks from those you follow</h2>    
     <div class="box">
     <%= link_to image_tag('icons/feed-icon.png'), listen_feed_path(current_user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
@@ -59,7 +61,7 @@
       <% end %>
     </div>
   <% end %>
-
+  <div class="sprites-stars sprites-before-heading"></div>
   <h2 id="recently_favorited" class="box">Recently favorited</h2>
   <div class="box">
     <%= render :partial => 'shared/favorite', :collection => @favorites %>

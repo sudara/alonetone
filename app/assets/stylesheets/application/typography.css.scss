@@ -179,14 +179,18 @@ h2#latest_uploaded, #user_latest h2 {
   margin-top: 13px;
 }
 
-h2#kicking_ass, #user_popular h2 {
-  background-image: image-url('icons/stars.png');
-  background-repeat: no-repeat;
-  background-position: 15px 10px;
-  text-indent: 51px;
+.sprites-stars {
+  margin-left: 14px;
+  margin-top: 8px;
 }
 
-h2#recently_favorited {}
+h2#kicking_ass, #user_popular h2 {
+  text-indent: 14px;
+}
+
+h2#recently_favorited {
+  text-indent: 14px;
+}
 
 h2#latest_comments, #user_comments h2 {
   text-indent: 14px;
