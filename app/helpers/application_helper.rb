@@ -93,6 +93,8 @@ module ApplicationHelper
   def link_source(source)
     if source == 'http://alonetone.com'
       link_to "home page","/"
+    elsif source =~ /soundmanager2_flash9/
+      link_to "alonetone","/"
     else
       link_to source.gsub!(/http:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/staging.alonetone.com\//, '/'), source
     end
