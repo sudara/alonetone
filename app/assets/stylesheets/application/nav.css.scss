@@ -1,4 +1,4 @@
-#nav,.header_login {
+#nav, .header_login {
 	li {
 		@include box-shadow(#111111 0 0 5px);
 		display: inline-block;
@@ -58,36 +58,6 @@
   }
 }
 
-.header_login{
-  left: 872px;
-  .dropdown{
-    min-width:100px;
-    height: 34px;
-    background-color: #232519;
-  }
-}
-.user_dropdown{
-	float:right;
-  margin-top:-72px;
-  height: 34px;
-  background-color: #232519;
-  a{
-    font-weight: 500;
-    padding-bottom:8px;
-    font-family: $header_font;
-    color: $nav_item_color;
-    font-size: 14px;
-		display: block; 
-		float: right;
-    span{
-      display:block;
-      line-height:34px;
-      float:left;
-      padding: 0px 10px;
-    }
-		img{
-  		width: 34px;
-  		height: 34px;
-		}
-	}
+.header_login li {
+	margin-right: 0;
 }

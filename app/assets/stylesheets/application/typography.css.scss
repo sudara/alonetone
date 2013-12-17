@@ -213,6 +213,7 @@ h2#latest_comments, #user_comments h2 {
 }
 
 div.flash {
+  clear: both;
   background-color: $orange_background;
   @include background-image(linear-gradient(#EB954B, #E66D29));
   font-family: $header_font, Helvetica, Arial;

@@ -957,12 +957,37 @@ jQuery(function($) {
   $('#forums_layout p').highlight($('#forum_q').val());
   
   // stretching divs to stick info to bottom corner of vcard author section
-
   $('.author_container').each(function() {
     // console.log("yo");
 
     $(this).height($(this).parent().height());
   });
 
+
+  $('.profile_link').mouseover(function() {
+    $('.user_dropdown_menu').animate({top: 0}, 400);
+  });
+
+  $('.user_dropdown').mouseleave(function() {
+
+
+    
+
+    $('.user_dropdown_menu').animate({top: -200}, 400);
+  });
+
+
+  $('.profile_link').bind('touchstart', function(event) {
+
+
+    if ( $('.user_dropdown_menu').css('top') == "0px" ) {
+
+
+    } else {
+      event.preventDefault();
+      $('.user_dropdown_menu').animate({top: 0}, 400);
+    }
+
+  })
 
 });
