@@ -8,7 +8,13 @@
   <%# cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>
 
     <% if authorized? %>
-      <%= link_to 'edit your profile', edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" %>
+
+      <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
+        <div class="sprites-pencil-big"></div>
+        edit 
+      <% end %>
+
+
     <% end %>
   </div>
   <div id="user_links">
