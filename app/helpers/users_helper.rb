@@ -50,7 +50,7 @@ module UsersHelper
   def follow_toggle(user)
     return unless logged_in? and user.id != current_user.id
     is_favorite = current_user.is_following?(user)
-    link_to ' ', toggle_follow_user_path(current_user, :followee_id => user.id), 
+    link_to '<div class="sprites-heart-with-plus"></div> follow'.html_safe, toggle_follow_user_path(current_user, :followee_id => user.id), 
       :class => 'follow '+(is_favorite ? 'following' : '') 
   end
   

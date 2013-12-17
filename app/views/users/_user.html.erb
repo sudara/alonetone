@@ -3,6 +3,7 @@
   
   <div class="user_title">
     <h1 class="user"><%= @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+      
       <%= follow_toggle(@user) %>
   
   <%# cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>

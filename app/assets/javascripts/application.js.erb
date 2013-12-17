@@ -103,9 +103,15 @@ FavoriteToggle = $.klass(Remote.Link,{
 FollowToggle = $.klass(Remote.Link,{
   beforeSend:function(e){
     if(this.element.hasClass('following'))
+    {
       this.element.removeClass('following');
+      $('.follow').html('<div class="sprites-heart-broken"></div> un-follow');
+    }
     else
+    {
       this.element.addClass('following');
+      $('.follow').html('<div class="sprites-heart-with-plus"></div> follow');
+    }
   }
 });
 

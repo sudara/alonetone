@@ -445,38 +445,7 @@ a.edit {
 a.edit_profile, a.follow {
   display: block;
   @include border-radius(5px, 5px); 
-  background: image-url('icons/follow.png') no-repeat left center;  width: 48px;
-  line-height: 20px;
-  height: 48px;
-  // position: absolute;
-  text-align: center;
-  text-decoration: none;
-  margin-right: 2px;
-  font-size: 10px;
-  font-family: $header_font;
-  color: #000!important;
-  float: right;
-  
-  top: 1px;
-
-  > .sprites-pencil-big {
-    margin: 0 auto;
-    margin-top: 9px;
-  }
-  &:hover {
-    // background-position: -48px 0px;
-  }
-  &:active {
-    // background-position: -96px 0px;
-  }
-}
-
-a.edit_profile {
-  background-color: #fff;
-  right: 2px;
   @include background-image(linear-gradient(#EDEFE9 0%, #CCD2C2 4%, #B0BAA3 96%, #8F9D7B 100% ));
-  
-  
   @include text-shadow(rgba(white, .9) 1px 1px 1px);
 
   &:hover {
@@ -487,18 +456,51 @@ a.edit_profile {
     @include background-image(linear-gradient(#879674 0%, #ABB59D 4%, #CED6C5 96%, #EDEFE9 100% ));
   }
 
+  line-height: 20px;
+  height: 48px;
+  width: 48px;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 2px;
+  font-size: 10px;
+  font-family: $header_font;
+  color: #000!important;
+  float: right;
+  top: 1px;
+
+  > .sprites-pencil-big {
+    margin: 0 auto;
+    margin-top: 9px;
+  }
+
+  > .sprites-heart-with-plus {
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+
+  > .sprites-heart-broken {
+    margin: 0 auto;
+    margin-top: 6px;
+  }
+}
+
+a.edit_profile {
+  right: 2px;
+
   &.admin {
     right: 50px;
   }
 }
 
 a.follow.following {
-  background-position: -144px 0px;
+
+
+  // background-position: -144px 0px;
   &:hover {
-    background-position: -192px 0px;
+    // background-position: -192px 0px;
   }
   &:active {
-    background-position: -240px 0px;
+    // background-position: -240px 0px;
   }
 }
 
