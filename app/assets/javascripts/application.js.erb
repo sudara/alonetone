@@ -935,6 +935,10 @@ jQuery(function($) {
   $('#mass_edit .edit_track form').attach(EditForm);
   
   $('#radio').attach(Radio);
+  
+  jQuery(document).ready(function($) {
+    $('a[rel*=facebox]').facebox() 
+  })
 
   // if on the stats page
   $('#statstable').tablesorter({
