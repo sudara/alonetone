@@ -29,6 +29,7 @@ class CommentsController < ApplicationController
   def unspam
     @comment.ham!
     @comment.update_attribute :is_spam, :false
+    @comment.deliver_comment_notification
     redirect_to :back
   end
   
