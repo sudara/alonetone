@@ -29,24 +29,19 @@
 
   <body>
     <div id="container">
-      
       <% if @sudo %>
         <div class="sudo_bar">
           Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
         </div>
       <% end %>
-      <div id="top_bar">
-        <%= render :partial => 'shared/top_bar', :current_user => current_user %>
-      </div>
-      <div id="header">
-        <a href="/" title="home" id="logo"></a>
-    		<%= render :partial=> 'shared/nav' %>
+      <div class="header">
+        <%= render :partial=> 'shared/header' %>
       </div> 
-      
-    	<div id="wrapper">
-        <div id="content" class="content">    
-    		  <%= check_for_and_display_welcome_back %>
-    		  <%= check_for_and_display_flashes %>
+      <div id="wrapper">
+        <div id="content" class="content">   
+          <%= render :partial => 'shared/search' %> 
+          <%= check_for_and_display_welcome_back %>
+          <%= check_for_and_display_flashes %>
           <div id="main">
             <%= 
                 if yield(:pages).present?
@@ -62,24 +57,25 @@
               <%= yield :static %>
           </div>
           <div id="columns">
-    				<div id="left">
-    					<%= yield :left %>
-    				</div>
-  		
-    				<div id="right">
-    					<%= yield :right %>
-    				</div>	
-    				<div class="clear"> </div>
-
-    				<%= yield :bottom %>
-    	    </div> <!-- end columns -->
-        </div><!-- end content -->
-
-    	</div><!-- end wrapper -->
-      <div class="push"></div>
+            <div id="left">
+              <%= yield :left %>
+            </div>
+      
+            <div id="right">
+              <%= yield :right %>
+            </div>  
+            <div class="clear"></div>
+            <%= yield :bottom %>
+          </div>
+        </div>
+      </div>
+      <div class="sticky_footer_buffer"></div>
     </div>
-
-		<%= render :partial => 'shared/footer' %>
+    <div class="footer">
+      <%= cache('footer', :expires_in => 3.minutes) do %>
+        <%= render :partial => 'shared/footer' %>
+      <% end %>
+    </div>
     <%= javascript_include_tag "application" %>
     <%= render :partial => 'shared/analytics' %>
   </body>

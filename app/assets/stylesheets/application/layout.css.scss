@@ -1,166 +1,109 @@
 html,body {
-  background-color: $body_background;
-  height: 100%;
+	background-color: $body_background;
+	height: 100%;
 }
 
-#top_bar {
-  @include background-image(linear-gradient(#282920, #070705));
-  // position: absolute;
-  // top: 0;
-  left: 0;
-  z-index: 10;
-  min-width: 800px;
-  width: 100%;
-  height: 29px;
-}
-
-#header {
-  @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
-  // position: absolute;
-  // top: 29px;
-  left: 0;
-  z-index: 5;
-  width: 100%;
-  height: 110px;
-}
-
-#logo {
-  position: absolute;
-  // top: 15px;
-  left: 864px;
-  z-index: 5;
-  width: 120px;
-  height: 81px;
-  background: transparent image-url('alonetone_big.png') no-repeat left center;
-}
-
-#nav {
-  margin-left: 54px;
+.header {
+	@include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
+	height: 110px;
 }
 
 #container {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin-top: 0;
-    margin-bottom: -42px;
- }
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin-bottom: -290px;
+}
 
-.push {
-    height: 42px;
+.sticky_footer_buffer {
+	height: 290px;
 }
 
 #wrapper {
-  @include background-image(linear-gradient(#1F2117, #23241A 2px, #313327 150px));
+	@include background-image(linear-gradient(#1F1817, #303025 1px, #313327 150px));
 }
 
-
 #content {
-  margin-bottom: 210px;
-  margin-left: 50px;
-  width: 890px;
+	margin-bottom: 100px;
+	margin-left: 50px;
+	width: 890px;
 }
 
 #main {
-  height: 1%;
+	height: 1%;
+	clear: both;
 }
 
 #static {
-  width: 600px;
-  height: 1%;
+	width: 600px;
+	height: 1%;
 }
 
 .sidebar {
-  float: right;
-  width: 240px;
+	float: right;
+	width: 240px;
 }
 
 #columns {
-  height: 1%;
-  #left {
-    float: left;
-    width: 420px;
-  }
-  #right {
-    float: left;
-    margin-left: 50px;
-    width: 420px;
-  }
+	height: 1%;
+	#left {
+	float: left;
+	width: 420px;
+	}
+	#right {
+	float: left;
+	margin-left: 50px;
+	width: 420px;
+	}
 }
 
-#footer {
-  @include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
-  height: 21px;
-  font-size: 12px;
-  padding-top: 21px;
-
-  #footer-left {
-    display: inline-block;
-    margin-left: 50px;
-    #updates_link.new {
-      color: $red;
-    }
-  }
-  #footer_right {
-    display: inline-block;
-    width: 677px;
-    vertical-align: top;
-    text-align: right;
-    a {
-      font-weight: normal;
-    }
-  }
-}
-
-// prevents content from being buried beneath footer without a scrollbar
-#footer_spacer {
-  clear: both;
-  width: 100%;
-  height: 60px;
+.footer {
+	@include background-image(linear-gradient($body_background, $body_background 3px, #292929 11px, #DDE2D5 12px, #C1CAB3));
+	height: 239px;
+	padding-top: 31px;
+	padding-bottom: 20px;
+	padding-left: 20px;
 }
 
 .clearfix:after {
-  display: block;
-  visibility: hidden;
-  clear: both;
-  height: 0pt;
-  content: ".";
-  line-height: 0pt;
+	display: block;
+	visibility: hidden;
+	clear: both;
+	height: 0pt;
+	content: ".";
+	line-height: 0pt;
 }
 
 .clearfix {
-  display: inline-block;
+	display: inline-block;
 }
 
 html[xmlns] .clearfix {
-  display: block;
+	display: block;
 }
 
 * html .clearfix {
-  height: 1%;
+	height: 1%;
 }
 
-.min_height_50 {
-  margin-bottom: 10px;
-  min-height: 80px;
-  width: 100%;
+.min_height_40 {
+	min-height: 40px;
 }
 
-// general spacing stuff
 div.box {
-  position: relative;
-  margin-bottom: 30px;
+	position: relative;
+	margin-bottom: 30px;
 }
 
 div.footer_box {
-  margin-top: -27px;
-  margin-bottom: 30px;
+	margin-top: -27px;
+	margin-bottom: 30px;
 }
 
 div.notice, div.errorExplanation {
-  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  border-top: 1px solid #6f6f6f;
-  border-bottom: 1px solid #7e807e;
+	@include background-image(linear-gradient(#F7F7F7, #C7C8C7));
+	margin-bottom: 20px;
+	padding: 20px 30px;
+	border-top: 1px solid #6f6f6f;
+	border-bottom: 1px solid #7e807e;
 }

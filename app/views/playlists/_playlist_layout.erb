@@ -28,9 +28,15 @@
     </div>
 
     <div class="right">
-      <% if !@single_playlist %>
+     
+      <% if @assets %>
         <div class="edit_playlist_button_row">
-          <%= link_to 'edit title &amp; description','#edit_playlist_info',:class=>'slide_open_href edit_in_box playlist_edit_button' %>
+          
+             <%= link_to '#edit_playlist_info', :class => 'slide_open_href track_about_link', :title => 'edit' do %>
+                edit <div class="sprites-pencil sprites-before-heading"></div>
+              <% end %>
+
+
         </div>
       <% end %>
 

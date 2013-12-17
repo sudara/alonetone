@@ -19,11 +19,11 @@
           <br/>
           <%= logo.humanize.gsub(/Logo|text/,'') %>
           <br/>
-          <%= link_to 'png', '/images/press/' + logo + '_500.png' %>
+          <%= link_to 'png', path_to_image('press/' + logo + '_500.png') %>
           |
-          <%= link_to 'pdf', '/images/press/' + logo + '.pdf' %>
+          <%= link_to 'pdf', path_to_image('press/' + logo + '.pdf') %>
           |
-          <%= link_to 'ai', '/images/press/' + logo + '.ai' %>
+          <%= link_to 'ai', path_to_image('press/' + logo + '.ai') %>
         </div>
       <% end %>
       <div class="clear"></div>

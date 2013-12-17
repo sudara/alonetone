@@ -5,5 +5,12 @@
   <% end %>
 </div>
 <div class="footer_box">
-  <%= link_to "view all favorites &rArr;".html_safe, user_playlist_path(@user, @user.favorites), :class => "view_all" if @user.favorites.tracks.size > 5 %>
+  
+
+	<%= link_to user_playlist_path(@user, @user.favorites), :class => "view_all" do %>
+	  view all favorites <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+	<% end if @user.favorites.tracks.size > 5%>
+
+
+
 </div>

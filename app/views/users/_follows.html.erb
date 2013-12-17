@@ -1,7 +1,7 @@
 <% cache(cache_key_for_follows(@follows)) do %>
   <h2 class="box">Follows</h2>
   <div id="follows" class="box static_content clearfix">
-      <%= link_to image_tag('feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
+      <%= link_to image_tag('icons/feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
       <%= render :partial => 'shared/users_to_edge', :locals => {:users => @follows} %>
       <div class="clear"></div>
   </div>
@@ -14,5 +14,13 @@
       <div class="clear"></div>
   </div>
 <% end %>
+<div class="footer_box empty"></div>
 
+<% if moderator? && @similar_users.present? %>
+  <h2 class="box">Other users on <%= @user.ip %></h2>
+  <div id="follows" class="box static_content clearfix">
+    <%= render :partial => 'shared/users_to_edge', :locals => {:users => @similar_users} %>
+      <div class="clear"></div>
+  </div>
+<% end %>
 <div class="footer_box empty"></div>

@@ -1,57 +1,62 @@
 <!-- alonetone home page -->
 <%= render :partial => 'shared/self_confidence' unless logged_in? %>
 <%= cache(@playlists.first.cache_key+'plisthome') do %>
-  <div id="latest_playlists">
-    <h2>Latest playlists</h2>
+    <div class="latest-playlists-header">
+      <div class="sprites-latest-playlists sprites-before-heading"></div>
+      <h2>Latest playlists</h2>
+    </div>
     <%= render :partial => 'playlists/for_home' %>
-  </div>
 <% end unless @playlists.blank? %>
 
 <% content_for :left do%>
+  <div class="sprites-latest-uploaded sprites-before-heading"></div>
   <h2 id="latest_uploaded" class="box">Latest uploaded</h2>
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @assets %>
   </div>
   <div class="footer_box">
-    <%= link_to 'view all latest tracks &rArr;'.html_safe, radio_path(:per_page => 40,:source => 'latest'), 
-        :class=> 'view_all', :title => 'latest music on alonetone' %>
+    <%= link_to radio_path(:per_page => 40,:source => 'latest'), :class=> 'view_all', :title => 'latest music on alonetone' do %>
+      view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+    <% end %>
   </div>
   
+  <div class="sprites-latest-comments sprites-before-heading"></div>
   <h2 id="latest_comments" class="box">Latest Comments</h2>
   <div class="box">
     <%= render :partial => 'shared/comment', :collection => @comments%>
   </div>
   
   <div class="footer_box">
-   <%= link_to 'view all comments &rArr;'.html_safe, all_comments_path, 
-     :class => 'view_all', :title => 'view latest comments' %>
-   </div>
+    <%= link_to all_comments_path, :class => 'view_all', :title => 'view latest comments' do %>
+      view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+    <% end %>
+  </div>
 <% end %>
 
 
 <% content_for :right do %>
-
 	<h2 id="kicking_ass" class="box">Currently kicking ass</h2>
-
   <div class="box">
     <%= render :partial => 'assets/asset', :collection => @popular %>
   </div>
   <div class="footer_box">
-   <%= link_to 'view all kicking ass &rArr;'.html_safe, radio_path(:per_page => 40,:source => 'popular'), :class => "view_all", 
-      :title => 'alonetone radio: currently kicking ass' %>
+    <%= link_to radio_path(:per_page => 40,:source => 'popular'), :class => "view_all", :title => 'alonetone radio: currently kicking ass' do %>
+      view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+    <% end %>
   </div>
   
   <% if @followee_tracks %>
     <h2 id="kicking_ass" class="box">Tracks from those you follow</h2>    
     <div class="box">
-    <%= link_to image_tag('feed-icon.png'), listen_feed_path(current_user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
+    <%= link_to image_tag('icons/feed-icon.png'), listen_feed_path(current_user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
     <div>
       <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
     </div>
     </div>
     <div class="footer_box">
-      <%= link_to 'view all &rArr;'.html_safe, radio_path(:per_page => 40, :source => 'those_you_follow'), 
-        :class => 'view_all', :title => 'alonetone radio: those you follow' %>
+      <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
+        view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+      <% end %>
     </div>
   <% end %>
 
@@ -60,12 +65,9 @@
     <%= render :partial => 'shared/favorite', :collection => @favorites %>
   </div>  
   <div class="footer_box">
-    <%= link_to 'view all favorites &rArr;'.html_safe, radio_path(:per_page => 40, :source => 'favorites'), 
-      :class => 'view_all', :title => 'alonetone radio: recently favorited' %>
+    <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
+      view all <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+    <% end %>
   </div>
-
 <% end %>
 
-<% content_for :bottom do %>
-    <%= render :partial => 'shared/visit_us' %>
-<% end %>

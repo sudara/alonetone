@@ -1,4 +1,4 @@
-#nav {
+#nav, .header_login {
 	li {
 		@include box-shadow(#111111 0 0 5px);
 		display: inline-block;
@@ -10,7 +10,7 @@
 			display: block;
 			padding-left: 20px;
 			height: 61px;
-			color: #c1cab3;
+			color: $nav_item_color;
 			letter-spacing: .6px;
 			font-weight: normal;
 			font-size: 18px;
@@ -25,7 +25,7 @@
 			&.active {
 				@include background-image(linear-gradient(#eef1e9, #d1dac3));
 				@include text-shadow(none);
-				height: 71px;
+				height: 72px;
 				color: #37392b;
 				line-height: 104px;
 			}
@@ -49,4 +49,15 @@
 	#forums a {
 		width: 102px;
 	}
+  #login a{
+    height:38px;
+    width: 53px;
+    line-height:38px;
+    font-size: 16px;
+    padding-left:13px;
+  }
+}
+
+.header_login li {
+	margin-right: 0;
 }

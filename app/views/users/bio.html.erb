@@ -15,27 +15,29 @@
       	</p>
       </div>
     
-    <% if @user.website.present? %>
       <div class="bio static_content">
-        	  <%= website_for(@user).html_safe %>
+        <p>
+        	<%= website_for(@user).html_safe if @user.website.present? %>
+        </p>  
+        	  <% if @user.has_tracks? && authorized? && @user.itunes.present? %>
+              <p>
+                Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
+                <%= itunes_link_for(@user) %>
+              </p>
+        	  <% elsif @user.has_tracks? && (current_user.id == @user.id) %>
+        	    Your Podcast feed: <%= user_feeds_url(@user, :rss) %>
+              <p>
+        	      <%= link_to 'Submit this feed to iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
+        	      to get your music indexed and listed in iTunes under Podcasts > Music. Then come back to update your profile when you have your iTunes feed URL.
+              </p>
+        	  <% elsif @user.itunes.present? %>
+                <p><%= itunes_link_for(@user) %></p>
+        	  <% end %>
       </div>	
-    <% end %>
     
-    <div class="bio static_content">
-  	  <% if @user.has_tracks? && authorized? && @user.itunes.present? %>
-  	    Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
-          <%= itunes_link_for(@user) %>
-  	  <% elsif @user.has_tracks? && authorized? %>
-  	    Your Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
-  	   <%= link_to 'Submit this feed to iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
-  	    to get your music indexed and listed in iTunes under Podcasts > Music. Then come back to update your profile when you have your iTunes feed URL.
-  	  
-  	  <% elsif @user.itunes.present? %>
-          <%= itunes_link_for(@user) %>
-  	  <% end %>
-  	</div>
-  	
   </div>
+  
+  <%= render :partial => 'follows' if @mostly_listens_to.present? or @follows.present?  %>
   
 <% end %>
 
@@ -47,14 +49,22 @@
   <h2 class="box static"><%= @user.name %>'s stats</h2>
   
   <div class="bio static_content">
-      Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%> <br />
+    <p>
+      Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%> 
+    </p>
+    
+    <p>
     <% if @user.listens_count > 0 %>
-		People have listened to <%= @user.name %>'s <%= pluralize @user.assets_count, 'track' %> about <%= @user.listens_count %> times.<br/>
+		  People have listened to <%= @user.name %>'s <strong><%= pluralize @user.assets_count, 'track' %></strong> about <strong><%= @user.listens_count %> </strong>times, about <strong>~<%= @user.bandwidth_used %>GB</strong> of transfer.<br/>
 		<% end %>
-	  <%= @user.name%> joined alonetone on <%= @user.created_at.to_date.to_s :long %>
+    </p>
+    <p>
+	  <%= @user.name%> joined alonetone on <strong><%= @user.created_at.to_date.to_s :long %></strong>
+  </p>
     <% if moderator? %>
     <p>
-      Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.current_login_ip) %>
+      Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.current_login_ip) %><br/>
+      <small>User Agent: <%= @user.browser %></small>
     </p>
     <% end %>
   </div>

@@ -15,7 +15,7 @@
       text-decoration: underline;
     }
   }
-  div {
+  > div {
     float: left;
   }
   div.button {
@@ -30,32 +30,67 @@
         background-position: -51px 0px;
       }
       &.playing {
-        background-position: -100px 0px;
       }
+    }
+    .sprites-play {
+     margin-left:2px; 
+    }
+    .sprites-pause {
+     margin-left:2px; 
     }
     &.play-button {
-      margin-right: 1px;
-      a {
-        background-image: image-url('icons/play.png');
-      }
     }
     &.download-button {
-      margin-left: 1px;
-      a {
-        background-image: image-url('icons/download.png');
-      }
     }
   }
   div.title {
     background-color: $box_background;
     height: 40px;
-    width: 318px;
+    width: 367px;
+    padding-left:3px;
     overflow: hidden;
     padding-top: 10px;
+    .title_left_column{
+      float:left; 
+      width: 300px;
+    }
+    .title_right_column{
+      float:right; 
+      position:relative;
+      height:100%;
+      .counter {
+        position:absolute;
+        text-align: right;
+        font-size: 16px;
+        font-weight:bold;
+        bottom:22px;
+        right:14px;
+      }
+      div.time {
+        position:absolute;
+        text-align: right;
+        font-size: 12px;
+        font-family: $header_font, Helvetica, Arial;
+        display: block;
+        text-align: right;
+        right: 15px;
+        bottom: 10px;
+        font-size: 12px;
+        color:#8c8c8c;
+      }
+    }
     a {
       font-size: 18px;
-      margin-left: 20px;
       text-decoration: none;
+      font-family:$header_font;
+      -webkit-font-smoothing: antialiased;
+      color:$text_color;
+    }
+    .title_left_column_bottom{
+      clear:both;
+      a{
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
     }
     span.by {
       font-size: 12px;
@@ -67,40 +102,13 @@
       font-size: 12px;
       margin-left: 20px;
     }
-    span.counter {
-      position: absolute;
-      text-align: right;
-      right: 59px;
-      font-size: 18px;
-      top: 10px;
-    }
-    
-    div.time {
-      float: right;
-      position: relative;
-      text-align: right;
-      right: 8px;
-      bottom: 0px;
-      font-size: 12px;
-      opacity: 0.5;
-      font-family: $header_font, Helvetica, Arial;
-    }
 
-    span.time {
-      display: block;
-      float: right;
-      position: relative;
-      text-align: right;
-      right: 8px;
-      bottom: 0px;
-      font-size: 12px;
-      opacity: 0.5;
-      font-family: $header_font, Helvetica, Arial;
-    }
-
-    span.listen_count {
+    .listen_count {
       color: $orange;
-      font-size: 12px;
+      font-size: 11px;
+      margin-left: 5px;
+      position: relative;
+      top:-3px;
       font-weight: bold;
     }
   }
@@ -126,9 +134,12 @@
       }
     }
     div.title {
-      span.counter {
+      div.counter {
         opacity: 0.99;
         color: $white;
+      }
+      div.time{
+        color:#fecda6;
       }
     }
   }

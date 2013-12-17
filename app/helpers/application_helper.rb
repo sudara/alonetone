@@ -57,6 +57,11 @@ module ApplicationHelper
     result.html_safe
   end
 
+  def awesome_truncate_with_read_more(asset, length = 30)
+    text = awesome_truncate(asset.description, length) 
+    text << link_to('read more', user_track_path(asset.user, asset.permalink)) if asset.description && asset.description.length > 300
+    text.html_safe
+  end
 
   def markdown(text)
     return "" unless text
@@ -132,7 +137,7 @@ module ApplicationHelper
   
   def feed_icon_tag(title, url)
     (@feed_icons ||= []) << { :url => url, :title => title }
-    link_to image_tag('feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url, :class => 'rss'
+    link_to image_tag('icons/feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url, :class => 'rss'
   end  
   
   def friendly_time_ago(time)

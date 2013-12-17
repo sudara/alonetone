@@ -13,46 +13,68 @@
 	        <%= render :partial => 'assets/comment', :locals => {:asset => asset} %>
 	    </div>
 		<% end %>
+
   	<div id="details_track_<%= asset.unique_id %>">
 
         <div class="description_panel panel no_border">
+            
             <div class='alonetoner'>          
                 <%= user_image_link(asset.user, :small)%>
             </div>
+            
             <div class="description">
-                <div class='min_height_50'>
-                  <h3><%= asset.name %></h3>
-                  <%= markdown(awesome_truncate(asset.description, 260) + '...' + link_to('(more)', 
-                    user_track_path(asset.user, asset.permalink))) if asset.description.present? %>
+                
+                <div class='user_description'>                  
+                  <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
                 </div>
             	  
                 <div class="stats">
                   Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
         	        listened to <strong><%= asset.listens_count %> times</strong>.
         	        <% if asset.comments_count > 0 %>
-        	           <br/>Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
+        	           <br>
+                     Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
         	        <% end %>
+                  
+                  <% if asset.comments_count == 0 && asset.favorites_count > 0 %>
+                    <br>
+                  <% end %>
+
+
         	        <% if asset.favorites_count > 0 %>
-        	        	Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
+                    Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
         	        <% end %>
     	          </div>
     	          
-    	          <div class="admin show_to_admin" style="display:none;">
-	                mp3: <strong><%= h asset.mp3_file_name %></strong><br>
-                  Track: <strong> <%= asset.title%></strong><br/>
-                  Artist:<strong> <%= asset.artist %></strong><br/>
-                  Album:  <strong><%= asset.album %></strong><br/>
+    	          <div class="admin show_to_admin">
+	                mp3: <strong><%= asset.mp3_file_name %></strong><br>
+                  track: <strong> <%= asset.title%></strong><br>
+                  artist: <strong> <%= asset.artist %></strong><br>
+                  album:  <strong><%= asset.album %></strong><br>
                   Size:  <strong><%= number_to_human_size asset.mp3_file_size %></strong><br/>
                 </div>
+
 	          </div>
+
             <div class="track_links">
-          	  <div class="show_to_admin_or_owner" style="display:none;">
-                <%= link_to "Edit", edit_user_track_path(asset.user, asset), 
-                  :class => 'edit_in_box show_to_admin_or_owner', :title => 'edit this track' %>
-    	        </div>
-    	          
-      	     <%= link_to "View more", user_track_path(asset.user, asset.permalink), 
-      	        :class => 'view_more', :title => "#{asset.name} by #{asset.user.name}" unless @single_track %>
+
+              <%= link_to edit_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box track_about_link', :title => 'edit this track' do %>
+                edit <div class="sprites-pencil sprites-before-heading"></div>
+              <% end %>
+
+
+              <%= link_to user_track_path(asset.user, asset.permalink, :format => :mp3, :referrer => 'download'), :class=> 'download track_about_link', :title => "right-click to download mp3" do %>
+                download <div class="sprites-vertical-arrow sprites-after-heading"></div>
+              <% end %>
+
+
+              <%= link_to user_track_path(asset.user, asset.permalink), :class => 'track_about_link', :title => "#{asset.name} by #{asset.user.name}" do %>
+                view more <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+              <% end unless @single_track %>
+
+
+
+
             </div>
         </div>
     </div>	

@@ -1,0 +1,75 @@
+@import "sprites/*.png";
+
+$sprite-map: sprite-map("sprites/*.png", $new-position: 100%, $spacing: 10px, $layout: horizontal, $no-repeat: no-repeat);
+
+@mixin retina-sprite($sprite) {
+
+    display: block;
+    background-image: sprite-url($sprite-map);
+    $pos: sprite-position($sprite-map, $sprite, 0, 0);
+    background-position: (nth($pos, 1)/2) (nth($pos, 2)/2);
+    @include background-size(ceil(image-width(sprite-path($sprite-map)) / 2) auto);
+
+    width: image-width(sprite-file($sprite-map, $sprite)) /2; 
+    height: image-height(sprite-file($sprite-map, $sprite)) /2;
+}
+
+@each $thisSprite in 
+    play,
+    play_hover,
+    pause,
+    latest-playlists,
+    latest-uploaded,
+    latest-comments,
+    horizontal-arrow,
+    vertical-arrow,
+    green-plus,
+    pencil,
+    red-x,
+    footer-radio,
+    footer-help
+    
+
+    {
+        .sprites-#{$thisSprite} {
+            @include retina-sprite(#{$thisSprite});
+        }
+    }
+
+.sprites-play:hover {
+    @extend .sprites-play_hover;
+}
+
+
+.sprites-before-heading {
+    float: left;
+}
+
+.sprites-after-heading {
+    float: right;
+}
+
+.sprites-horizontal-arrow {
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.sprites-vertical-arrow {
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.sprites-pencil {
+    margin-right: 7px;
+    margin-top: 7px;
+}
+
+.sprites-red-x {
+    margin-right: 7px;
+    margin-top: 7px;
+}
+
+.sprites-green-plus {
+    margin-right: 7px;
+    margin-top: 4px;
+}

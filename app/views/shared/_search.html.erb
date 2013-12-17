@@ -1,7 +1,6 @@
-<div id="search">  
-  <%= link_to '','#',:id => 'search_button' %>
-
+<div class="header_search">
   <%= form_tag search_url, :id =>'search_form' do %>
-    <%= text_field_tag 'query', (@query || session[:last_query]), :placeholder => 'artist, song title or keyword' %>
+    <%= text_field_tag 'query', (@query || session[:last_query]), :placeholder => 'Search for artist or song' %>
   <% end %>
+  <%= link_to image_tag('icons/retina/search.png'), '#', :id => 'search_button' %>
 </div>

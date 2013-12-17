@@ -3,5 +3,7 @@
 	<%= render :partial => 'assets/asset', :collection => @listens, :as => :asset %>  
 </div>
 <div class="footer_box">
-    <%= link_to('view history &rArr;'.html_safe, listens_path(@user.login), :class => 'view_all') if @listens.size > 4 %>
+	<%= link_to listens_path(@user.login), :class => 'view_all' do %>
+	  view history <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+	<% end if @listens.size > 4 %>
 </div>

@@ -3,10 +3,20 @@
 <% content_for :left do %>
   <% if authorized_for(@asset) %>
       <div class="track_options">
-          <%= link_to " ", edit_user_track_path(@asset.user, @asset), :class => 'edit_green', :title => 'edit this track' %>
-          <%= link_to " ", user_track_path(@asset.user, @asset), :method => 'delete', :class => 'delete_green ',
+          
+          <%= link_to edit_user_track_path(@asset.user, @asset), :class => 'view_all', :title => 'edit this track' do %>
+            edit <div class="sprites-pencil sprites-before-heading"></div>
+          <% end %>
+
+          <%= link_to user_track_path(@asset.user, @asset), :method => 'delete', :class => 'view_all ',
           :confirm => 'Are you sure? This will delete the song permanently, including all play history and comments.',
-          :title => 'delete this track permanently '%>
+          :title => 'delete this track permanently ' do %>
+            delete <div class="sprites-red-x sprites-before-heading"></div>
+          <% end %>
+
+          
+
+
       </div>
   <% end %>
   
@@ -21,8 +31,7 @@
           From the album / playlist <%= link_to (playlist.title), user_playlist_path(@asset.user,playlist) %>
           <div class="min_height_50">
             <div class="mini_cover">
-              	<%= link_to(image_tag('jewel-case-50.png'), user_playlist_path(@asset.user,playlist), :class => 'jewel_case_50') %>
-                <%= image_tag(playlist.cover(:small), :class => 'cover_50') %>
+              	<%= link_to(image_tag(playlist.cover(:small), user_playlist_path(@asset.user,playlist), :class => 'cover_50')) %>
             </div>
           </div>
         <% end %>    

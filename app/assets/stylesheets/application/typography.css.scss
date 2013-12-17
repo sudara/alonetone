@@ -147,8 +147,12 @@ span.note {
 }
 
 // iconified headers
-#latest_playlists h2, h2#user_latest_playlists {
-  background: image-url('icons/playlists.png') no-repeat left center;
+.latest-playlists-header h2 {
+  padding-left: 40px; 
+  line-height: 30px;
+}
+
+h2#user_latest_playlists {
   padding-left: 35px;
 }
 
@@ -167,10 +171,12 @@ h2#alonetone_plus {
 }
 
 h2#latest_uploaded, #user_latest h2 {
-  background-image: image-url('icons/latest.png');
-  background-repeat: no-repeat;
-  background-position: 15px 10px;
-  text-indent: 51px;
+  text-indent: 18px;
+}
+
+.sprites-latest-uploaded {
+  margin-left: 20px;
+  margin-top: 13px;
 }
 
 h2#kicking_ass, #user_popular h2 {
@@ -183,10 +189,12 @@ h2#kicking_ass, #user_popular h2 {
 h2#recently_favorited {}
 
 h2#latest_comments, #user_comments h2 {
-  background-image: image-url('icons/comment.png');
-  background-repeat: no-repeat;
-  background-position: 15px 10px;
-  text-indent: 51px;
+  text-indent: 14px;
+}
+
+.sprites-latest-comments {
+  margin-left: 16px;
+  margin-top: 10px;
 }
 
 .playlist_title h2 {
@@ -205,6 +213,7 @@ h2#latest_comments, #user_comments h2 {
 }
 
 div.flash {
+  clear: both;
   background-color: $orange_background;
   @include background-image(linear-gradient(#EB954B, #E66D29));
   font-family: $header_font, Helvetica, Arial;
@@ -220,27 +229,29 @@ div.flash {
   }
 }
 
-// links that float right
-a.arrows, a.view_all, a.view_more_no_float {
-  background: image-url('buttons/arrow.png') no-repeat right center;
-  padding-right: 12px;
-}
 
 .content {
   a.view_all {
     font-family: $header_font;
     color: $text_color;
     text-shadow: rgba(255, 255, 255, 0.3) 1px 1px 0;
-    position: relative;
     float: right;
     padding-left: 13px;
-    // font-weight: 800;
+    padding-right:10px;
     font-weight: bold;
     font-size: 16px;
     line-height: 31px;
     border-radius: 5px;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6c7959), color-stop(0.499, #869471), color-stop(0.5, #909d7c), color-stop(0.99, #a6b195));
-    background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
+    margin-left: 8px;
+
+    // background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6c7959), color-stop(0.499, #869471), color-stop(0.5, #909d7c), color-stop(0.99, #a6b195));
+    // background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
+
+    // @include background-image(linear-gradient(#6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%));
+    
+    @include background-image(linear-gradient(#a6b195 .1%, #909d7c 49.9%, #869471 50%, #6c7959 100% ));
+
+
     -webkit-box-shadow: inset 0 1px 0 #f0f2ed, inset 0 -1px 0 #303627;
     border-radius: 5px;
     height: 32px;
@@ -359,22 +370,57 @@ span.private {
 }
 
 // icon links (add/delete/etc)
-a.view_more {
+
+.track_about_link {
   display: block;
-  background: image-url('icons/view_more_silver.png') no-repeat left center;
-  text-indent: -1000px;
-  width: 117px;
+  // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
+  @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
+  @include border-radius(5px, 5px); 
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+  font-family: $header_font;
   height: 32px;
-  float: right;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  padding: 0 12px!important;
+  font-weight: bold!important;
+  font-size: 16px!important;
+  float: left!important;
+  line-height: 31px!important;
+  text-decoration: none!important;
+  // text-align: center;
+  margin-left: 8px;
+  color: #303225!important;
+  
+  &.right {
+    // float: right;
+    // position: relative;
+    // margin-top: -50px;
+    // margin-right: 10px;
+  }
+
   &:hover {
-    background-position: -117px 0px;
+    // @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
+    @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
+  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+    @include text-shadow(none);
   }
   &:active {
-    background-position: -234px 0px;
-  }
+    @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
+    @include text-shadow(none);
+    
+  }  
 }
+
+a.edit_in_box {
+  // width: 50px;
+}
+
+a.view_more {
+  // width: 84px;
+}
+
+a.download {
+  // width: 84px;
+}
+
 
 a.edit {
   display: block;
@@ -389,27 +435,6 @@ a.edit {
     margin-right: 25px;
     float: right;
     top: 0px;
-  }
-}
-
-a.edit_in_box {
-  display: block;
-  background: image-url('icons/edit_silver.png') no-repeat left center;
-  text-indent: -1000px;
-  width: 73px;
-  height: 32px;
-  float: left;
-  &.right {
-    float: right;
-    position: relative;
-    margin-top: -50px;
-    margin-right: 10px;
-  }
-  &:hover {
-    background-position: -73px 0px;
-  }
-  &:active {
-    background-position: -146px 0px;
   }
 }
 
@@ -466,7 +491,8 @@ a.alonetone_plus_link {
   @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
   @include background-image(linear-gradient(#5F6154, #1B1B15));
   display: block;
-  padding-left: 20px;
+  padding-left: 14px;
+  padding-right: 4px;
   width: 170px;
   height: 32px;
   border-radius: 5px;
@@ -478,11 +504,6 @@ a.alonetone_plus_link {
   &:hover {
     @include background-image(linear-gradient(#7F8274, #414438));
     text-decoration: none;
-  }
-  img {
-    position: relative;
-    top: 3px;
-    left: -10px;
   }
 }
 

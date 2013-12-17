@@ -523,9 +523,12 @@ EditForm = $.klass(Remote.Form,{
 Track = $.klass({  
   initialize: function() {
     this.element.addClass('instantiated');
+
+    this.innerPlay = $(".play-button",this.element).children().eq(0);
+
     this.playButton = $(".play-button",this.element);
     this.trackLink = $("a.track_link",this.element);
-    this.time = $('span.counter',this.element);
+    this.time = $('div.counter',this.element);
     this.track_title = $('a.track_link',this.element).html();
     this.artist = $('a.artist',this.element).html();
     this.deleteButton = $(".delete-button",this.element);
@@ -549,7 +552,9 @@ Track = $.klass({
     '.play_link' : function(e){ return this.togglePlay()},      // open comments
     '.track_link': function(e){ return this.toggleDetails(1)}, // open info
     '.download_link':function(e){ return this.toggleDetails(2)}, // open sharing
-    '.title':function(e){ return this.toggleDetails(1)}  // open 
+    '.title':function(e){ return this.toggleDetails(1)},  // open 
+    '.title_left_column_bottom':function(e){ return this.toggleDetails(1)},  // open 
+    '.title_left_column_top':function(e){ return this.toggleDetails(1)}  // open 
   }),
   
   onmouseenter: $.delegate({
@@ -566,7 +571,7 @@ Track = $.klass({
   
   toggleDetails: function(desiredTab){
 
-    if(this.more.is(':hidden')) this.openDetails(desiredTab);
+    if (this.more.is(':hidden')) this.openDetails(desiredTab);
     else if (this.isPlaying()) this.openDetails(desiredTab); // never close the tabs when playing
     else this.closeDetails();
     return false;
@@ -593,10 +598,10 @@ Track = $.klass({
 		  $('.show_to_admin_or_owner', this.more).show();
 		  
 		  // Show some text prompting them to edit if no description
-		  if($('.description .min_height_50 :not(h3)', this.more).text() == ""){
+		  if($('.description .user_description :not(h3)', this.more).text() == ""){
 		    var href = $('.edit_in_box', this.more).attr('href');
-		    var prompt = '<span class="hint"><a class="hint" href="'+href+'">Add a description now</a> to help listeners find your music</span>';
-		     $('.description .min_height_50', this.more).append(prompt);
+		    var prompt = '<span class="hint"><a class="hint" href="'+href+'">Add a description</a> to help listeners find your music</span>';
+		     $('.description .user_description', this.more).append(prompt);
 		  }
 		}
 		
@@ -649,6 +654,8 @@ Track = $.klass({
   playOrResume : function(){
     this.killOtherTracks();
     this.element.addClass('playing');
+    this.innerPlay.addClass('sprites-pause')
+    this.innerPlay.removeClass('sprites-play')
     this.openDetails(0);
     this.ensureSoundIsReadyThenPlay();
   },
@@ -671,7 +678,9 @@ Track = $.klass({
   
   play: function(){
     soundManager.createSound({id: this.soundID, url: this.trackURL, onfinish:$.bind(this.startNextTrack,this)}).play();
-    pageTracker._trackPageview(this.trackURL);
+    if(typeof pageTracker != "undefined"){
+      pageTracker._trackPageview(this.trackURL);
+    }
   }, 
   
   isPlaying: function(){
@@ -681,6 +690,10 @@ Track = $.klass({
   pause: function(){
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
+   this.innerPlay.addClass('sprites-play')
+    this.innerPlay.removeClass('sprites-pause')
+
+    // this.element.firstChild.removeClass('sprites-play');
     this.closeDetails();
   },
   
@@ -922,6 +935,10 @@ jQuery(function($) {
   $('#mass_edit .edit_track form').attach(EditForm);
   
   $('#radio').attach(Radio);
+  
+  jQuery(document).ready(function($) {
+    $('a[rel*=facebox]').facebox() 
+  })
 
   // if on the stats page
   $('#statstable').tablesorter({
@@ -944,12 +961,37 @@ jQuery(function($) {
   $('#forums_layout p').highlight($('#forum_q').val());
   
   // stretching divs to stick info to bottom corner of vcard author section
-
   $('.author_container').each(function() {
     // console.log("yo");
 
     $(this).height($(this).parent().height());
   });
 
+
+  $('.profile_link').mouseover(function() {
+    $('.user_dropdown_menu').animate({top: 0}, 200);
+  });
+
+  $('.user_dropdown').mouseleave(function() {
+
+
+    
+
+    $('.user_dropdown_menu').animate({top: -60}, 200);
+  });
+
+
+  $('.profile_link').bind('touchstart', function(event) {
+
+
+    if ( $('.user_dropdown_menu').css('top') == "0px" ) {
+
+
+    } else {
+      event.preventDefault();
+      $('.user_dropdown_menu').animate({top: 0}, 200);
+    }
+
+  })
 
 });

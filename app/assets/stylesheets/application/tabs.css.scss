@@ -8,6 +8,7 @@ div.tabs,div.big_tabs {
 
 div.tabs {
   width: 420px;
+  padding-top:1px;
 }
 
 .content ul.ui-tabs-nav {
@@ -128,7 +129,7 @@ div.tabs {
     text-decoration: underline;
   }
   textarea {
-    width: 380px;
+    width: 374px;
   }
   .tabbed_input {
     width: 360px;
@@ -167,8 +168,12 @@ div.tabs {
     padding: 10px 20px;
     margin-left: -20px;
     border-top-color: $body_background;
+    line-height: 15px;
+    overflow: hidden;
+
     &.no_border {
       border: none;
+
     }
     &.description_panel {
       position: relative;
@@ -178,7 +183,7 @@ div.tabs {
       }
       .alonetoner {
         position: absolute;
-        top: 7px;
+        // top: 7px;
         left: 15px;
         height: 100%;
         a {
@@ -198,17 +203,39 @@ div.tabs {
       .description {
         margin-left: 60px;
         font-size: 14px;
+        line-height: 17px;
+        width: 304px;
+        .user_description {
+          p{
+            margin-bottom:1em;
+          }
+        }
         p img{
           max-width: 290px;
         }
+
+        p {
+          margin-top: 0px;
+          margin-bottom:0px;
+        }
+        
+        .description_more p  a {
+          font-weight: bold!important;
+          text-decoration: none!important;
+          font-size: 12px!important;
+          margin-bottom:1em;
+        }
+
       }
       .stats {
         font-size: 12px;
-        margin-bottom: 20px;
+        line-height: 14px;
       }
       .admin {
         font-size: 10px;
         padding-top: 20px;
+        line-height: 12px;
+        color: #666;
       }
     }
   }
@@ -221,11 +248,19 @@ div.tabs {
   }
 }
 
+.show_to_admin {
+  display: none;
+  float: none;
+  clear: both;
+}
+
+.show_to_admin_or_owner {
+  display: none;
+}
+
 .track_links {
-  position: relative;
-  height: 32px;
-  margin-left: 60px;
-  width: 340px;
+  float: right!important;
+  margin-top: 15px;
 }
 
 #single_track .track_links {

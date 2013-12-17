@@ -1,5 +1,3 @@
-// small playlists
-
 // carousel
 a.next, a.prev {
   display: block;
@@ -55,13 +53,13 @@ a.next, a.prev {
     position: absolute;
     left: 0;
     top: 45px;
-    background-image: image-url('buttons/prev.png');
+    background-image: image-url('icons/prev.png');
   }
   .next {
     position: absolute;
     right: 0;
     top: 45px;
-    background-image: image-url('buttons/next.png');
+    background-image: image-url('icons/next.png');
   }
 }
 
@@ -125,7 +123,6 @@ a.jewel_case_125 {
   text-indent: -9999px;
   width: 146px;
   height: 136px;
-  background-image: image-url('jewel-case-125.png');
 }
 
 img.cover_125 {
@@ -283,7 +280,6 @@ img.cover_200 {
   }
 }
 
-
 .playlist_delete_button {
     background: image-url('icons/delete.png') no-repeat center top;
     display: block;
@@ -310,7 +306,7 @@ img.cover_200 {
     // background-color: $playlist_box_silver;
     overflow: hidden;
     position: absolute;
-    right: 0;
+    right: 20px;
     bottom: 20px;
 }
 
@@ -318,4 +314,8 @@ img.cover_200 {
 .playlists_hidden_blurb {
   margin: 5px 0 14px 0;
   font-size: 12px;
+}
+
+#edit_playlist .unopenable .title {
+  width: 317px!important;
 }
