@@ -42,7 +42,7 @@ gem "skylight", "~> 0.2.0.beta"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "sass-rails"
+gem "sass-rails", "4.0.1"
 gem 'compass-rails', '2.0.alpha.0'
 gem 'yui-compressor'
 gem 'uglifier'
