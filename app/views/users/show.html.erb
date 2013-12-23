@@ -24,7 +24,7 @@
 	
 	
 	<% content_for :left do %>
-    <%= render :partial => 'latest' if @user.assets_count > 0 %>
+    <%= render :partial => 'latest' if @user.assets.count > 0 %>
     <%= render :partial => 'favorites' if @favorites.present? %>
     <%= render :partial => 'listens' unless @listens.empty? %>	
     <%# image_tag @user.track_plays_graph if authorized? %>
