@@ -48,4 +48,15 @@ describe UserSessionsController do
     controller.session["user_credentials"].should_not be_present
   end
   
+  # this is in authlogic, needs testing since we modify it (see users_controller_spec)
+  it "should update IP and last_request_at" do
+    Timecop.freeze(1.hour.ago) do
+      request.env['REMOTE_ADDR'] = '10.1.1.1'
+      login(:arthur)
+      controller.session["user_credentials"].should == users(:arthur).persistence_token 
+      expect(users(:arthur).current_login_ip).to eq('10.1.1.1')
+      expect(users(:arthur).last_request_at).to eq(Time.now)
+    end
+  end
+  
 end

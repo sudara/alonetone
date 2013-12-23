@@ -102,6 +102,11 @@ class ApplicationController < ActionController::Base
     @sudo = session[:sudo]
   end
   
+  # don't update last_request_at when sudo is present
+  def last_request_update_allowed?
+    !session[:sudo]
+  end
+  
   def set_latest_update_title
     @latest_update = Update.order('created_at DESC').limit(1).first
   end

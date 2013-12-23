@@ -218,6 +218,15 @@ describe UsersController do
       controller.session["user_credentials"].should == users(:sudara).persistence_token 
       response.should redirect_to '/users'
     end
+    
+    it "should not update IP or last_request_at" do
+      request.env['REMOTE_ADDR'] = '10.1.1.1'
+      login(:sudara)
+      get :sudo, :id => 'arthur'
+      controller.session["user_credentials"].should == users(:arthur).persistence_token 
+      expect(users(:arthur).current_login_ip).not_to eq('10.1.1.1')
+      expect(users(:arthur).last_request_at.to_s).to eq(1.day.ago.to_s) # shouldn't have changed from yml
+    end
   end
   
   context "last request at" do 

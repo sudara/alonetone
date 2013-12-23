@@ -20,6 +20,8 @@ arthur:
   created_at: <%= 1.days.ago.to_s :db %>
   activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
+  last_request_at: <%= 1.days.ago.to_s :db %>
+  current_login_ip: 9.9.9.9
   
 # deleted
 aaron:
