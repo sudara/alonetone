@@ -70,7 +70,7 @@ class Asset
   
   def unique_alonetoner_count(from = 30.days.ago)
     alonetoners = listens.select('distinct listener_id').where("listens.created_at > (?)", from).count
-    this_user = listens.select('distinct listener_id').where("listens.created_at > (?)", from).where(:id => user.similar_users_by_ip).count
+    this_user = listens.select('distinct listener_id').where("listens.created_at > (?)", from).where(:listener_id => user.similar_users_by_ip).count
     total = alonetoners - this_user - 1 
     (total + total.abs) / 2 # ensure postitive number or zero
   end
