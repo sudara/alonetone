@@ -34,7 +34,7 @@ class Asset
   end
    
   def calculate_hotness       
-    (guest_play_count + (alonetoner_play_count * 2) + (unique_alonetoner_count * 4)).to_f * age_ratio.to_f
+    (guest_play_count + (alonetoner_play_count * 2) + (unique_alonetoner_count * 4) - self_plays).to_f * age_ratio.to_f
   end
   
   # https://www.desmos.com/calculator/gwnliinim2
@@ -53,15 +53,19 @@ class Asset
   end
   
   def uncool_self_plays(from = 30.days.ago)
-    emphasis = 1.4
+    emphasis = 2.0
     allowance = 3.0
-    user_plays = listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count - allowance
-    uncool_plays = (user_plays + user_plays.abs) / 2 # never want it to be below zero
+    uncool_plays = total_uncool_self_plays - allowance
+    uncool_plays = (uncool_plays + uncool_plays.abs) / 2 # never want it to be below zero
     uncool_plays * emphasis
   end
   
+  def total_uncool_self_plays(from = 30.days.ago)
+    user_plays = listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count
+  end
+  
   def alonetoner_play_count(from = 30.days.ago)
-    listens.where("listener_id is not null").where("listens.created_at > (?)",from).count.to_f - uncool_self_plays.to_f
+    listens.where("listener_id is not null").where("listens.created_at > (?)",from).count.to_f - total_uncool_self_plays.to_f
   end
   
   def unique_alonetoner_count(from = 30.days.ago)

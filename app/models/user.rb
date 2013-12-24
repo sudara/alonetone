@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   before_destroy :efficiently_destroy_relations
   
   # Can create music
-  has_one    :pic,           :as => :picable
+  has_one    :pic, :as => :picable, :dependent => :destroy
   has_many   :assets, 
     -> { order('assets.id DESC')},
     :dependent => :destroy
