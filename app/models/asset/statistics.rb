@@ -37,8 +37,11 @@ class Asset
     (guest_play_count + (alonetoner_play_count * 2) + (unique_alonetoner_count * 4)).to_f * age_ratio.to_f
   end
   
+  # https://www.desmos.com/calculator/gwnliinim2
+  # after about 20 listens, it "compresses" the value of guest listens
   def guest_play_count(from = 30.days.ago)
-    listens.where("listens.created_at > (?) AND listens.listener_id is null",from).count 
+    num = listens.where("listens.created_at > (?) AND listens.listener_id is null",from).count 
+    -7 + (0.19*num.to_f) + Math.log((num.to_f+5),1.25)
   end
   
   def listens_per_week
@@ -50,7 +53,11 @@ class Asset
   end
   
   def uncool_self_plays(from = 30.days.ago)
-    listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count * 1.4
+    emphasis = 1.4
+    allowance = 3.0
+    user_plays = listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)",from).count - allowance
+    uncool_plays = (user_plays + user_plays.abs) / 2 # never want it to be below zero
+    uncool_plays * emphasis
   end
   
   def alonetoner_play_count(from = 30.days.ago)
@@ -58,7 +65,10 @@ class Asset
   end
   
   def unique_alonetoner_count(from = 30.days.ago)
-    listens.select('distinct listener_id').where("listens.created_at > (?)", from).count - user.similar_users_by_ip.count - 1
+    alonetoners = listens.select('distinct listener_id').where("listens.created_at > (?)", from).count
+    this_user = listens.select('distinct listener_id').where("listens.created_at > (?)", from).where(:id => user.similar_users_by_ip).count
+    total = alonetoners - this_user - 1 
+    (total + total.abs) / 2 # ensure postitive number or zero
   end
   
   def bandwidth_used
