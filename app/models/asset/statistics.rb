@@ -34,7 +34,7 @@ class Asset
   end
    
   def calculate_hotness       
-    (guest_play_count + (alonetoner_play_count * 2) + (unique_alonetoner_count * 4) - self_plays).to_f * age_ratio.to_f
+    (guest_play_count + (alonetoner_play_count * 2) + (unique_alonetoner_count * 4) - uncool_self_plays).to_f * age_ratio.to_f
   end
   
   # https://www.desmos.com/calculator/gwnliinim2
