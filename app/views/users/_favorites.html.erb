@@ -8,7 +8,7 @@
   
 
 	<%= link_to user_playlist_path(@user, @user.favorites), :class => "view_all" do %>
-	  view all favorites <div class="sprites-horizontal-arrow sprites-after-heading"></div>
+<span>	  view all favorites </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
 	<% end if @user.favorites.tracks.size > 5%>
 
 

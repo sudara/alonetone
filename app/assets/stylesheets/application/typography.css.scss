@@ -271,6 +271,9 @@ div.flash {
       background-image: -moz-linear-gradient(center bottom, #86946d 0%, #67784f 49.9%, #5c6d48 50%, #464f39 99.9%);
       -webkit-box-shadow: inset 0 1px 0 #1f231a, inset 0 -1px 0 #eaedcd;
     }
+    span{
+      float:left;
+    }
   }
 }
 
@@ -409,8 +412,10 @@ span.private {
   &:active {
     @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
     @include text-shadow(none);
-    
   }  
+  span{
+    float:left;
+  }
 }
 
 a.edit_in_box {
