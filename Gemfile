@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gem "rails", "4.0.2"
 
-# server
 gem "mysql2", "0.3.11"
 
 # temporary
@@ -51,8 +50,6 @@ gem "soundmanager2-rails"
 
 group :production do
   gem "puma"      
-  gem "mysql2", "0.3.11"
-
 end
 
 group :development do
