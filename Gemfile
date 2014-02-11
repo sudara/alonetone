@@ -37,7 +37,7 @@ gem 'gemoji'
 gem 'rakismet'
 gem "geokit"
 gem 'newrelic_rpm'
-gem "skylight", "~> 0.2.0.beta"
+gem "skylight", "~> 0.3.0.rc"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
@@ -54,7 +54,6 @@ end
 
 group :development do
   gem 'quiet_assets'
-  gem 'rspec-rails'
   gem 'thin'
   gem 'sqlite3'
   # gem 'logical-insight'
