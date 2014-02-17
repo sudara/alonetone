@@ -11,7 +11,7 @@ Alonetone::Application.routes.draw do
   get "/404", :to => "pages#four_oh_four"
   get '/500', :to => "pages#error"
   
-  # one-off pages
+  # one-off page
   get 'rpmchallenge' => 'pages#rpm_challenge'
   get '24houralbum' =>  'pages#twentyfour'  
     
