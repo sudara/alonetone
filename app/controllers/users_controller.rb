@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   end
   
   def stats
+    @songs = Asset.where(user_id: @user.id)
     @tracks = @user.assets
     respond_to do |format|
       format.html 

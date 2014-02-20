@@ -137,5 +137,5 @@ Alonetone::Application.routes.draw do
       end
       resources :comments
     end
-   end
+  end
 end
