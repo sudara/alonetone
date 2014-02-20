@@ -1012,6 +1012,7 @@ h2.table{
 }
 .panel {
   border-radius: 4px;
+  padding: 15px 20px;
   background: #E1E2E1;
   margin-bottom: 20px;
   border: 1px solid transparent;
@@ -1026,7 +1027,7 @@ h2.table{
   }
   .panel-body {
     padding: 15px;
-    max-height: 200px;
+    min-height: 200px;
   }
 }
 

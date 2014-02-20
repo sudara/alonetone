@@ -1,76 +1,72 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-<%# render :layout => 'user' do %>
 
 <h2 class="stats">Stats!!! Stats!!! Stats!!!</h2>
-
 <br>
 
 <div class='charts-container'>
 
   <div class='charts-control'>
-    <button id='expand-charts'>Show All</button>
     <button id='collapse-charts'>Hide All</button>
+    <button id='expand-charts' class='hide'>Show All</button>
   </div>
 
-  <div id='song_favorites_chart' class='static_content panel'>
+  <div id='song_favorites_chart' class='panel'>
     <div class='panel-heading'>
-      <button class='toggle-chart pull-right btn'>+</button>
+      <button class='toggle-chart pull-right btn'>-</button>
       <h3 class='panel-title'>Favorites</h3>
     </div>
-    <div class='panel-body hide'>
-      <%= column_chart Asset.group(:title).sum(:favorites_count) %>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:favorites_count), height: '200px' %>
     </div>
   </div>
 
-  <div id='song_comments_chart' class='static_content panel'>
+  <div id='song_comments_chart' class='panel'>
     <div class='panel-heading'>
-      <button class='toggle-chart pull-right btn'>+</button>
+      <button class='toggle-chart pull-right btn'>-</button>
       <h3 class='panel-title'>Comments</h3>
     </div>
-    <div class='panel-body hide'>
-      <%= column_chart Asset.group(:title).sum(:comments_count) %>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:comments_count), height: '200px' %>
     </div>
   </div>
 
-  <div id='song_plays_chart' class='static_content panel'>
+  <div id='song_plays_chart' class='panel'>
     <div class='panel-heading'>
-      <button class='toggle-chart pull-right btn'>+</button>
+      <button class='toggle-chart pull-right btn'>-</button>
       <h3 class='panel-title'>Weekly Plays</h3>
     </div>
-    <div class='panel-body hide'>
-      <%= column_chart Asset.group(:title).sum(:listens_per_week) %>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:listens_per_week), height: '200px' %>
     </div>
   </div>
 
-  <div id='song_listens_chart' class='static_content panel'>
+  <div id='song_listens_chart' class='panel'>
     <div class='panel-heading'>
-      <button class='toggle-chart pull-right btn'>+</button>
+      <button class='toggle-chart pull-right btn'>-</button>
       <h3 class='panel-title'>Listens</h3>
     </div>
-    <div class='panel-body hide'>
-      <%= column_chart Asset.group(:title).sum(:listens_count) %>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:listens_count), height: '200px' %>
     </div>
   </div>
 
-  <div id='song_uploads_chart' class='static_content panel'>
+  <div id='song_uploads_chart' class='panel'>
     <div class='panel-heading'>
-      <button class='toggle-chart pull-right btn'>+</button>
+      <button class='toggle-chart pull-right btn'>-</button>
       <h3 class='panel-title'>Uploads</h3>
     </div>
-    <div class='panel-body hide'>
-      <%= line_chart Asset.group_by_day(:created_at).count %>
+    <div class='panel-body'>
+      <%= line_chart Asset.group_by_day(:created_at).count, height: '200px' %>
     </div>
   </div>
 
-  <div id='song_bitrate_chart' class='static_content panel'>
+  <div id='song_bitrate_chart' class='panel'>
     <div class='panel-heading'>
-      <button class='toggle-chart pull-right btn'>+</button>
+      <button class='toggle-chart pull-right btn'>-</button>
       <h3 class='panel-title'>Average Bitrate</h3>
     </div>
-    <div class='panel-body hide'>
-      <%= pie_chart Asset.group(:bitrate).count %>
+    <div class='panel-body'>
+      <%= pie_chart Asset.group(:bitrate).count, height: '200px' %>
     </div>
   </div>
 </div>
-
-<%# end %>
