@@ -1,69 +1,75 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <%# render :layout => 'user' do %>
 
-<h2 class="stats">Click on a track for detail. Click on a column header to sort</h2>
-
-<div class="static_content" id="stats">
-  <table id="statstable">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Listens</th>
-        <th>Downloads</th>
-        <th>Favorites</th>
-        <th>Comments</th>
-        <th>Plays/Week</th>
-        <th>Uploaded</th>
-      </tr>
-    </thead>
-
-    <tbody>
-    <% @tracks.each do |track| %>
-      <tr>
-        <td><%= track.name %></td>
-        <td><%= track.listens_count %></td>
-        <td><%= track.listens.downloads.count %></td>
-        <td><%= track.favorites_count %></td>
-        <td><%= track.comments_count %></td>
-        <td><%= track.listens_per_week %></td>
-        <td><%= track.created_at.to_date.to_s %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+<h2 class="stats">Stats!!! Stats!!! Stats!!!</h2>
 
 <br>
 
-<div id='user_stats_charts'>
-  <div id='song_favorites_count' class='static_content'>
-    <h3>Favorites</h3>
-    <p><%= column_chart Asset.group(:title).sum(:favorites_count), height: '200px' %></p>
+<div class='charts-container'>
+
+  <div class='charts-control'>
+    <button id='expand-charts'>Show All</button>
+    <button id='collapse-charts'>Hide All</button>
   </div>
 
-  <div id='song_comments_count' class='static_content'>
-    <h3>Comments</h3>
-    <p><%= column_chart Asset.group(:title).sum(:comments_count), height: '200px' %></p>
+  <div id='song_favorites_chart' class='static_content panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>+</button>
+      <h3 class='panel-title'>Favorites</h3>
+    </div>
+    <div class='panel-body hide'>
+      <%= column_chart Asset.group(:title).sum(:favorites_count) %>
+    </div>
   </div>
 
-  <div id='song_plays_count' class='static_content'>
-    <h3>Weekly Plays</h3>
-    <p><%= column_chart Asset.group(:title).sum(:listens_per_week), height: '200px' %></p>
+  <div id='song_comments_chart' class='static_content panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>+</button>
+      <h3 class='panel-title'>Comments</h3>
+    </div>
+    <div class='panel-body hide'>
+      <%= column_chart Asset.group(:title).sum(:comments_count) %>
+    </div>
   </div>
 
-  <div id='song_listens_count' class='static_content'>
-    <h3>Total Plays</h3>
-    <p><%= column_chart Asset.group(:title).sum(:listens_count), height: '200px' %></p>
+  <div id='song_plays_chart' class='static_content panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>+</button>
+      <h3 class='panel-title'>Weekly Plays</h3>
+    </div>
+    <div class='panel-body hide'>
+      <%= column_chart Asset.group(:title).sum(:listens_per_week) %>
+    </div>
   </div>
 
-  <div id='song_uploads_count' class='static_content'>
-    <h3>Uploads</h3>
-    <p><%= line_chart Asset.group_by_day(:created_at).count, height: '200px' %></p>
+  <div id='song_listens_chart' class='static_content panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>+</button>
+      <h3 class='panel-title'>Listens</h3>
+    </div>
+    <div class='panel-body hide'>
+      <%= column_chart Asset.group(:title).sum(:listens_count) %>
+    </div>
   </div>
 
-  <div id='song_average_bitrate' class='static_content'>
-    <h3>Average Bitrate</h3>
-    <p><%= pie_chart Asset.group(:bitrate).count, height: '200px' %></p>
+  <div id='song_uploads_chart' class='static_content panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>+</button>
+      <h3 class='panel-title'>Uploads</h3>
+    </div>
+    <div class='panel-body hide'>
+      <%= line_chart Asset.group_by_day(:created_at).count %>
+    </div>
+  </div>
+
+  <div id='song_bitrate_chart' class='static_content panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>+</button>
+      <h3 class='panel-title'>Average Bitrate</h3>
+    </div>
+    <div class='panel-body hide'>
+      <%= pie_chart Asset.group(:bitrate).count %>
+    </div>
   </div>
 </div>
 

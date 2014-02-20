@@ -993,3 +993,49 @@ h2.table{
     color:white;
   }
 }
+
+// user stats charts
+
+.charts-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  .charts-control{ margin-bottom: 15px }
+  .song_favorites_chart {}
+  .song_comments_chart {}
+  .song_listens_chart {}
+  .song_uploads_chart {}
+  .song_bitrate_chart {}
+  .song_plays_chart {}
+}
+.panel {
+  border-radius: 4px;
+  background: #E1E2E1;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+  .panel-heading {
+    line-height: 30px;
+    color: $text_color;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    .panel-title { border-bottom: 1px solid black }
+    .btn { width: 40px }
+  }
+  .panel-body {
+    padding: 15px;
+    max-height: 200px;
+  }
+}
+
+// helper classes
+
+.pull-right { float: right !important }
+
+.pull-left { float: left !important }
+
+.hide { display: none !important }
+
+.show { display: block !important }
