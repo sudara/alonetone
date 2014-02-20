@@ -41,24 +41,24 @@
     <p><%= column_chart Asset.group(:title).sum(:favorites_count), height: '200px' %></p>
   </div>
 
-  <div id='song_plays_count' class='static_content'>
-    <h3>Weekly Plays</h3>
-    <p><%= column_chart Asset.group(:title).sum(:listens_per_week), height: '200px' %></p>
-  </div>
-
   <div id='song_comments_count' class='static_content'>
     <h3>Comments</h3>
     <p><%= column_chart Asset.group(:title).sum(:comments_count), height: '200px' %></p>
   </div>
 
+  <div id='song_plays_count' class='static_content'>
+    <h3>Weekly Plays</h3>
+    <p><%= column_chart Asset.group(:title).sum(:listens_per_week), height: '200px' %></p>
+  </div>
+
   <div id='song_listens_count' class='static_content'>
-    <h3>Plays</h3>
+    <h3>Total Plays</h3>
     <p><%= column_chart Asset.group(:title).sum(:listens_count), height: '200px' %></p>
   </div>
 
   <div id='song_uploads_count' class='static_content'>
     <h3>Uploads</h3>
-    <p><%= line_chart Asset.group_by_day_of_week(:created_at).count, height: '200px' %></p>
+    <p><%= line_chart Asset.group_by_day(:created_at).count, height: '200px' %></p>
   </div>
 
   <div id='song_average_bitrate' class='static_content'>
