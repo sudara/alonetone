@@ -27,6 +27,13 @@ GIT
       rb-kqueue (>= 0.2)
 
 GIT
+  remote: https://github.com/L1h3r/groupdate.git
+  revision: 1e337accb8d42563bec6c877751cdc4bd5d74a12
+  specs:
+    groupdate (0.1.6)
+      activerecord (>= 3.0.0)
+
+GIT
   remote: https://github.com/binarylogic/authlogic.git
   revision: abc09970ed1fad98c6c12f4ca64d1670d37d11db
   specs:
@@ -75,6 +82,7 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     builder (3.1.4)
+    chartkick (1.2.1)
     chunky_png (1.2.9)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -122,12 +130,11 @@ GEM
     has_permalink (0.1.6)
     hike (1.2.3)
     i18n (0.6.9)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.0.3)
-      jquery-rails
-      railties (>= 3.1.0)
+    jquery-ui-rails (4.2.0)
+      railties (>= 3.2.16)
     json (1.8.0)
     local_time (0.2.0)
       coffee-rails
@@ -255,6 +262,7 @@ DEPENDENCIES
   authlogic!
   awesome_print
   aws-sdk
+  chartkick
   coffee-rails
   compass-rails (~> 1.1.2)
   country_select
@@ -263,6 +271,7 @@ DEPENDENCIES
   factory_girl_rails
   gemoji
   geokit
+  groupdate!
   guard!
   guard-rspec
   guard-spring

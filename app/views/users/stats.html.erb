@@ -1,42 +1,73 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
-<% render :layout => 'user' do %>
-<%= fusion_chart('/charts/FCF_Line.swf', user_stats_path(@user,:format => :xml),'total_plays','800','250',false,false){} %>
-<h2 class="stats">Click on a track for detail. Click on a column header to sort. And remember, never obsess!</h2>
+<%= render 'user' %>
 
-<div class="static_content" id="stats">
+<br>
 
-<table id="statstable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Listens</th>
-      <th>Downloads</th>
-      <th>Favorites</th>
-      <th>Comments</th>
-      <th>Plays/Week</th>
-      <th>Uploaded</th>
-    </tr>
-  </thead>
-  
-  <tbody>
- 
-  <% @tracks.each do |track| %>
-    <tr class>
-      <td><%= link_to track.name, stats_user_track_path(@user, track, :format => :xml) %></td>
-      <td><%= track.listens_count %></td>
-      <td><%= track.listens.downloads.count %></td>
-      <td><%= track.favorites_count %></td>
-      <td><%= track.comments_count %></td>
-      <td><%= sprintf "%0.1f", track.listens_per_week %></td>
-      <td><%= track.created_at.to_date.to_s %></td>  
-     </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class='charts-container'>
 
+  <div class='charts-control'>
+    <button id='collapse-charts'>Hide All</button>
+    <button id='expand-charts' class='hide'>Show All</button>
+  </div>
+
+  <div id='song_favorites_chart' class='panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>-</button>
+      <h3 class='panel-title'>Favorites</h3>
+    </div>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:favorites_count), height: '200px' %>
+    </div>
+  </div>
+
+  <div id='song_comments_chart' class='panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>-</button>
+      <h3 class='panel-title'>Comments</h3>
+    </div>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:comments_count), height: '200px' %>
+    </div>
+  </div>
+
+  <div id='song_plays_chart' class='panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>-</button>
+      <h3 class='panel-title'>Weekly Plays</h3>
+    </div>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:listens_per_week), height: '200px' %>
+    </div>
+  </div>
+
+  <div id='song_listens_chart' class='panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>-</button>
+      <h3 class='panel-title'>Listens</h3>
+    </div>
+    <div class='panel-body'>
+      <%= column_chart Asset.group(:title).sum(:listens_count), height: '200px' %>
+    </div>
+  </div>
+
+  <div id='song_uploads_chart' class='panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>-</button>
+      <h3 class='panel-title'>Uploads</h3>
+    </div>
+    <div class='panel-body'>
+      <%= line_chart Asset.group_by_day(:created_at).count, height: '200px' %>
+    </div>
+  </div>
+
+  <div id='song_bitrate_chart' class='panel'>
+    <div class='panel-heading'>
+      <button class='toggle-chart pull-right btn'>-</button>
+      <h3 class='panel-title'>Average Bitrate</h3>
+    </div>
+    <div class='panel-body'>
+      <%= pie_chart Asset.group(:bitrate).count, height: '200px' %>
+    </div>
+  </div>
 </div>
-
-
-
-
-<% end %>

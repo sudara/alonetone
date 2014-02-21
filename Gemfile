@@ -33,6 +33,10 @@ gem 'simple_form'
 gem 'local_time'
 gem 'gemoji'
 
+# charts
+gem 'groupdate', :git => 'https://github.com/L1h3r/groupdate.git' # sqlite 'support'
+gem 'chartkick'
+
 # external services
 gem 'rakismet'
 gem "geokit"

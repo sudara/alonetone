@@ -12,7 +12,13 @@
 
       <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
         <div class="sprites-pencil-big"></div>
-        edit 
+        edit
+      <% end %>
+
+      <!-- NOTE: class 'edit_profile' is temporary -->
+      <%= link_to user_stats_path(@user, format: :html), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
+        <i class='fa fa-bar-chart-o'></i>
+        stats
       <% end %>
 
 
@@ -29,7 +35,7 @@
       <%= user_nav_item "Email", "mailto:#{@user.email}",:added_class => "contact" if admin? %>
       <%= user_nav_item "iTunes", "http://#{@user.itunes}",:added_class => "contact" if @user.itunes.present? %>
       <%= user_nav_item "Twitter", "http://twitter.com/#{@user.twitter}", :added_class => 'contact' if @user.twitter.present? %>
-      <%= user_nav_item "Sudo", sudo_user_path(@user), :added_class => "contact" if (admin? || @sudo)%>   
+      <%#= user_nav_item "Sudo", sudo_user_path(@user), :added_class => "contact" if (admin? || @sudo)%>   
     </ul>
   </div>
 </div>
