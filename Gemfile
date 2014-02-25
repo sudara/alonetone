@@ -37,7 +37,7 @@ gem 'gemoji'
 gem 'rakismet'
 gem "geokit"
 gem 'newrelic_rpm'
-gem "skylight", "~> 0.3.0.rc"
+gem "skylight", "0.3.0.rc.6"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"

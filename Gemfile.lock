@@ -210,7 +210,7 @@ GEM
     simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
-    skylight (0.3.0.rc.3)
+    skylight (0.3.0.rc.6)
       activesupport (>= 3.0.0)
     slop (3.4.6)
     sometimes (0.0.2)
@@ -289,7 +289,7 @@ DEPENDENCIES
   ruby-mp3info
   sass-rails (= 4.0.1)
   simple_form
-  skylight (~> 0.3.0.rc)
+  skylight (= 0.3.0.rc.6)
   sometimes
   soundmanager2-rails
   sqlite3
