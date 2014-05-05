@@ -216,7 +216,7 @@ GEM
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
-    skylight (0.3.8)
+    skylight (0.3.12)
       activesupport (>= 3.0.0)
     slop (3.4.6)
     sometimes (0.0.2)
