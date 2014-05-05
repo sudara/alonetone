@@ -129,7 +129,7 @@ describe AssetsController do
   
   context '#create' do
     subject do
-      login(:sudara)
+     login(:sudara)
       post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
     end
     
@@ -140,7 +140,7 @@ describe AssetsController do
     end
     
     it 'should accept an uploaded mp3 from chrome' do
-      login(:sudara)
+     login(:sudara)
       post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mp3')]
       flash[:error].should_not be_present      
       response.should redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
@@ -153,7 +153,7 @@ describe AssetsController do
     
     
     it 'should successfully upload 2 mp3s' do 
-      login(:sudara)
+     login(:sudara)
       post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),
         fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
       flash[:error].should_not be_present      
@@ -163,7 +163,7 @@ describe AssetsController do
   
   context "edit" do 
     it 'should allow user to upload new version of song' do
-      login(:sudara)
+     login(:sudara)
       post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
       users(:sudara).assets.first.mp3_file_name.should == 'muppets.mp3'
       put :update, :id => users(:sudara).assets.first, :user_id => users(:sudara).login, :asset => {:mp3 => fixture_file_upload('assets/tag1.mp3','audio/mpeg')}
@@ -173,14 +173,14 @@ describe AssetsController do
   
   context "#mass_edit" do 
     it 'should allow user to edit 1 track' do 
-      login(:arthur)
+     login(:arthur)
       get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_arthur_mp3).id]
       response.should be_success
       assigns(:assets).should include(assets(:valid_arthur_mp3))
     end
     
     it 'should allow user to edit 2 tracks at once' do 
-      login(:sudara)
+     login(:sudara)
       two_assets = [users(:sudara).assets.first,  users(:sudara).assets.last]
       get :mass_edit, :user_id => users(:sudara).login, :assets => two_assets.collect(&:id)
       response.should be_success
@@ -189,7 +189,7 @@ describe AssetsController do
     end
     
     it 'should not allow user to edit other peoples tracks' do
-      login(:arthur)
+     login(:arthur)
       get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_mp3).id]
       response.should be_success # no wrong answer here :)
       assigns(:assets).should_not include(assets(:valid_mp3))

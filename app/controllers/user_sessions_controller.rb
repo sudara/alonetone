@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  
   def new
     @page_title = "Login"
     @user = User.new
@@ -7,6 +8,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
+    Rails.logger.warn params.inspect
     @user_session = UserSession.new(params[:user_session].merge({:remember_me => true})) #always stay logged in
     if @user_session.save
       redirect_back_or_default(user_home_path(@user_session.user))

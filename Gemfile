@@ -36,8 +36,6 @@ gem 'gemoji'
 # external services
 gem 'rakismet'
 gem "geokit"
-gem 'newrelic_rpm'
-gem "skylight"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
@@ -50,6 +48,8 @@ gem "soundmanager2-rails"
 
 group :production do
   gem "puma"      
+  gem 'newrelic_rpm'
+  gem "skylight"
 end
 
 group :development do

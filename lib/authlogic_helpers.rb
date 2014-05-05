@@ -11,8 +11,6 @@ module AuthlogicHelpers
     @current_user= current_user_session && current_user_session.record
   end
   
-  
-  
   # basic questions asked at controller/view level
   def logged_in?
     !!current_user

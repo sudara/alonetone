@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
     
   acts_as_authentic do |c|
     c.transition_from_restful_authentication = true
-    c.login_field = :login
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
 
@@ -135,7 +134,7 @@ class User < ActiveRecord::Base
     if is_following?(followee_id)
       is_following?(followee_id).destroy 
     else
-      follows.find_or_create_by_user_id(followee_id)
+      follows.where(user_id => followee_id).first_or_create
     end
   end
   
