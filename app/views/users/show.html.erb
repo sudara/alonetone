@@ -8,7 +8,7 @@
 			      create new playlist <div class="sprites-wider-green-plus sprites-before-heading"></div>
 			    <% end %>
 		    </div>
-        <% if @user.playlists.public.size > 2 %>
+        <% if @user.playlists.only_public.size > 2 %>
 		      <div class="button_wrapper">
 		          <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
 		      </div>

@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem "rails", "4.0.2"
+gem "rails", "~> 4.1"
 
-gem "mysql2", "0.3.11"
+gem "mysql2"
 
 # temporary
 gem "protected_attributes"
@@ -41,8 +41,8 @@ gem "skylight"
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "sass-rails", "4.0.1"
-gem 'compass-rails', '~> 1.1.2'
+gem "sass-rails"
+gem 'compass-rails'
 gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
@@ -56,6 +56,8 @@ group :development do
   gem 'quiet_assets'
   gem 'thin'
   gem 'sqlite3'
+  gem 'spring'
+  gem 'rack-mini-profiler'
   # gem 'logical-insight'
 end
 

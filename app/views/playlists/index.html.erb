@@ -4,7 +4,7 @@
   <div class="button_wrapper">
   <%= link_to image_tag("icons/plus.png") + "create new playlist", new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' %>
   </div>
-  <% if @user.playlists.public.size > 1 %>
+  <% if @user.playlists.only_public.size > 1 %>
     <div class="button_wrapper">
     <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
     </div>

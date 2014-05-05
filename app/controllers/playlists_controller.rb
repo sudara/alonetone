@@ -131,7 +131,7 @@ class PlaylistsController < ApplicationController
   def set_all_playlists
     @all_playlists =  current_user_is_admin_or_owner?(@user) ?
                       @user.playlists.include_private :
-                      @user.playlists.public
+                      @user.playlists.only_public
 
     set_right_and_left_playlists if @all_playlists.present?
   end
