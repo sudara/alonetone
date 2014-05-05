@@ -9,7 +9,7 @@ describe ForumsController do
   end 
   
   it "should render index without errors for user" do 
-   login(:arthur)
+    login(:arthur)
     get :index
     response.should be_success
   end   

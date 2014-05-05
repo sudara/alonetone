@@ -45,13 +45,13 @@ describe UserSessionsController do
   end
 
   it "should log out when requested" do
-   login(:arthur)
+    login(:arthur)
     post :destroy
     response.should redirect_to('http://test.host/login')
   end
 
   it 'should delete session cookie on logout' do
-   login(:arthur)
+    login(:arthur)
     post :destroy
     controller.session["user_credentials"].should_not be_present
   end
@@ -60,7 +60,7 @@ describe UserSessionsController do
   it "should update IP and last_request_at" do
     Timecop.freeze(1.hour.ago) do
       request.env['REMOTE_ADDR'] = '10.1.1.1'
-     login(:arthur)
+      login(:arthur)
       controller.session["user_credentials"].should == users(:arthur).persistence_token 
       expect(users(:arthur).current_login_ip).to eq('10.1.1.1')
       expect(users(:arthur).last_request_at).to eq(Time.now)

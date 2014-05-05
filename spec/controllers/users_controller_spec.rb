@@ -79,7 +79,7 @@ describe UsersController do
     end
   
     it 'should NOT activate an account if you are already logged in' do
-     login(:arthur)
+      login(:arthur)
       create_user
       get :activate, :perishable_token => User.last.perishable_token
       expect(flash[:error]).to be_present
@@ -99,14 +99,14 @@ describe UsersController do
     fixtures :users, :assets
     [:sudara, :arthur].each do |user|
       it "should let a user or admin edit" do
-       login(user)
+        login(user)
         controller.stub(:current_user).and_return(users(user))
         post :edit, :id => 'arthur'
         response.should be_success
       end
   
       it "should let a user or admin update" do
-       login(user)
+        login(user)
         controller.stub(:current_user).and_return(users(user))
         put :update, :id => 'arthur', :user => {:bio => 'a little more about me'}
         response.should redirect_to(edit_user_path(users(:arthur)))
@@ -114,20 +114,20 @@ describe UsersController do
     end
     
     it "should let a user upload a new photo" do 
-     login(:arthur)
+      login(:arthur)
       post :attach_pic, :id => users(:arthur).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
       flash[:ok].should be_present
       response.should redirect_to(edit_user_path(users(:arthur)))
     end
     
     it "should not let a user upload a new photo for another user" do 
-     login(:arthur)
+      login(:arthur)
       post :attach_pic, :id => users(:sudara).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
       response.should redirect_to('/login')
     end
     
     it "should let a user change their login" do 
-     login(:arthur)
+      login(:arthur)
       put :update, :id => 'arthur', :user => {:login => 'arthursaurus'}
       flash[:error].should_not be_present
       response.should be_redirect
@@ -135,21 +135,21 @@ describe UsersController do
     end
     
     it 'should not let a user change login to login that exists' do 
-     login(:arthur)
+      login(:arthur)
       put :update, :id => 'arthur', :user => {:login => 'sudara'}
       flash[:error].should be_present
       User.where(:login => 'sudara').count.should == 1
     end
   
     it "should not let any old user edit" do
-     login(:arthur)
+      login(:arthur)
       controller.stub(:current_user).and_return(users(:arthur))
       post :edit, :id => 'sudara'
       response.should_not be_success
     end
   
     it "should not let any old user update" do
-     login(:arthur)
+      login(:arthur)
       controller.stub(:current_user).and_return(users(:arthur))
       put :update,  :id => 'sudara', :user => { :bio => 'a little more about me' }
       response.should_not be_success
@@ -176,14 +176,14 @@ describe UsersController do
     end
     
     it 'should let a user favorite a track' do 
-     login(:arthur)    
+      login(:arthur)    
       expect { subject }.to change{ Track.count }.by(1) 
       users(:arthur).tracks.favorites.collect(&:asset).should include(Asset.find(100))
       response.should be_success
     end
     
     it 'should let a user unfavorite a track' do 
-     login(:arthur)
+      login(:arthur)
       expect { subject }.to change{ Track.count }.by(1) 
       get :toggle_favorite, :asset_id => 100  # toggle again
       users(:arthur).tracks.favorites.collect(&:asset).should_not include(Asset.find(100))
@@ -194,14 +194,14 @@ describe UsersController do
   context "sudo" do 
     it "should not let a normal user sudo" do
       controller.session[:return_to] = '/users'
-     login(:arthur)
+      login(:arthur)
       get :sudo, :id => 'sudara'
       flash[:ok].should_not be_present
       response.should redirect_to '/'
     end
   
     it "should let an admin user sudo" do
-     login(:sudara)
+      login(:sudara)
       controller.session[:return_to] = '/users'
       get :sudo, :id => 'arthur'
       flash[:ok].should be_present
@@ -210,7 +210,7 @@ describe UsersController do
     end
     
     it "should let an sudo'd user return to their admin account" do
-     login(:arthur)
+      login(:arthur)
       controller.session[:return_to] = '/users'
       controller.session[:sudo] = 1
       get :sudo, :id => 'arthur'
@@ -221,7 +221,7 @@ describe UsersController do
     
     it "should not update IP or last_request_at" do
       request.env['REMOTE_ADDR'] = '10.1.1.1'
-     login(:sudara)
+      login(:sudara)
       get :sudo, :id => 'arthur'
       controller.session["user_credentials"].should == users(:arthur).persistence_token 
       expect(users(:arthur).current_login_ip).not_to eq('10.1.1.1')
@@ -237,7 +237,7 @@ describe UsersController do
     
     # it "should touch last_request_at when doing anything" do
     #   Timecop.travel(12.minute.ago)
-    #   login(:arthur)
+    #    login(:arthur)
     #   Timecop.travel(1.minute.ago)
     #   expect { get :index }.to change{ User.find_by_login("arthur").last_request_at}
     #   

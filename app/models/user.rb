@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
     if is_following?(followee_id)
       is_following?(followee_id).destroy 
     else
-      follows.where(user_id => followee_id).first_or_create
+      follows.where(:user_id => followee_id).first_or_create
     end
   end
   

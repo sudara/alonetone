@@ -16,7 +16,7 @@ describe PasswordResetsController do
       post :create, :email => [users(:arthur).email]
       flash[:error].should_not be_present
       User.where(:login => 'arthur').first.perishable_token.should_not be_nil
-     login(:arthur)
+      login(:arthur)
       controller.session["user_credentials"].should == nil # can't login
     end
     
