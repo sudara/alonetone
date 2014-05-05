@@ -114,6 +114,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    redirect_to(root_path) and return false if params[:user_id] or !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
       @user.destroy # this will run "efficiently_destroy_relations" before_destory callback
