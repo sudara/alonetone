@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
 
   def self.search(params)
     if params[:forum_q].present?
-      where = where("LOWER(posts.body) LIKE ?", "%#{query}%")
+      where = where("LOWER(posts.body) LIKE ?", "%#{params[:forum_q]}%")
     elsif params[:spam].present?
       where = where(:is_spam => true)
     else
