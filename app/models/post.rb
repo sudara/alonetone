@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :topic, :forum, :body
   validate :topic_is_not_locked
 
+  before_create :set_spam_status
   after_create  :update_cached_fields
   after_destroy :update_cached_fields
   attr_accessible :body
@@ -23,9 +24,13 @@ class Post < ActiveRecord::Base
   rakismet_attrs  :author =>        proc { author_name },
                   :author_email =>  proc { user.email },
                   :content =>       proc { body },
-                  :permalink =>     proc { commentable.try(:full_permalink) }
+                  :permalink =>     proc { topic.try(:full_permalink) }
   
-
+  def set_spam_status
+    self.is_spam = spam? # makes API request
+    true
+  end
+  
   def author_name
     if user.present?
       user.login
