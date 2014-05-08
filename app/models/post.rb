@@ -12,29 +12,37 @@ class Post < ActiveRecord::Base
   # topic's forum (set by callback)
   belongs_to :forum, :counter_cache => true
   
-  validates_presence_of :topic_id, :forum_id, :body
+  validates_presence_of :topic, :forum, :body
   validate :topic_is_not_locked
 
   after_create  :update_cached_fields
   after_destroy :update_cached_fields
+  attr_accessible :body
+  
+  include Rakismet::Model
+  rakismet_attrs  :author =>        proc { author_name },
+                  :author_email =>  proc { user.email },
+                  :content =>       proc { body },
+                  :permalink =>     proc { commentable.try(:full_permalink) }
+  
 
   def author_name
-    user.login
+    if user.present?
+      user.login
+    else
+      "[deleted]"
+    end
   end
 
-  def user_logged_in
-    true
-  end
-
-  attr_accessible :body
-
-  def self.search(query, options = {})
-    options[:conditions] ||= ["LOWER(posts.body) LIKE ?", "%#{query}%"] unless query.blank?
-    options[:select]     ||= "posts.*, topics.title as topic_title, #{Forum.table_name}.name as forum_name"
-    options[:joins]      ||= "inner join topics on posts.topic_id = topics.id inner join #{Forum.table_name} on topics.forum_id = #{Forum.table_name}.id"
-    options[:order]      ||= "posts.created_at DESC"
-    options[:count]      ||= {:select => "posts.id"}
-    paginate options
+  def self.search(params)
+    if params[:forum_q].present?
+      where = where("LOWER(posts.body) LIKE ?", "%#{query}%")
+    elsif params[:spam].present?
+      where = where(:is_spam => true)
+    else
+      where = unscoped
+    end
+    where.includes(:topic => :forum).order("posts.created_at DESC")
   end
 
   def editable_by?(user)

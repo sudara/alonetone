@@ -27,7 +27,6 @@ Alonetone::Application.configure do
 
   #config.middleware.use "Insight::App", :secret_key => "alonetoneisaliveandwellletsdothis"
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
-
     
   # Do not compress assets
   config.assets.compress = false
@@ -38,4 +37,6 @@ Alonetone::Application.configure do
   # SSSShhhh!!!! Assets shuddup!
   config.assets.logger = nil
   
+  # Sometimes we want to use the real rakismet
+  config.rakismet.test = false
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215233423) do
+ActiveRecord::Schema.define(version: 20140507131057) do
 
   create_table "assets", force: true do |t|
     t.string   "mp3_content_type"
@@ -217,10 +217,12 @@ ActiveRecord::Schema.define(version: 20131215233423) do
     t.datetime "updated_at"
     t.integer  "forum_id"
     t.text     "body_html"
-    t.boolean  "spam",       default: false
+    t.boolean  "is_spam",    default: false
     t.float    "spaminess"
     t.string   "signature"
   end
+
+  add_index "posts", ["is_spam"], name: "index_posts_on_is_spam", using: :btree
 
   create_table "reportable_cache", force: true do |t|
     t.string   "model_name",       limit: 100,               null: false

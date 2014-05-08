@@ -2,13 +2,14 @@ class PostsController < ApplicationController
   before_filter :find_parents
   before_filter :find_post, :only => [:edit, :update, :destroy]
   layout "forums"
+  include ActionView::RecordIdentifier
 
   # /posts
   # /users/1/posts
   # /forums/1/posts
   # /forums/1/topics/1/posts
   def index
-    @posts = (@parent ? @parent.posts : Post).search(params[:forum_q], {:page => current_page, :per_page => 10})
+    @posts = (@parent ? @parent.posts : Post).search(params).page(params[:page])
     @users = @user ? {@user.id => @user} : User.index_from(@posts)
     @page_title = @description = 'Recent Forum Posts'
     @show_title_and_link = true

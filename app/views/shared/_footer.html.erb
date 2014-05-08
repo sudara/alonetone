@@ -78,7 +78,7 @@
     <% Topic.for_footer.each do |topic| %>
     <li class="footer-forum-topic">
       <%= link_to topic.title, forum_topic_path(topic.forum, topic) %> <br>
-      <span>by </span><span class="author_name"><%= link_to topic.recent_post.author_name, "/#{topic.recent_post.user.login}" %></span>
+      <span>by </span><span class="author_name"><%= link_to topic.recent_post.author_name, "/#{topic.recent_post.try(:user).try(:login)}" %></span>
     </li>
     <% end %>
   </ul>
