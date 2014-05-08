@@ -45,10 +45,10 @@ gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
+gem 'newrelic_rpm'
 
 group :production do
   gem "puma"      
-  gem 'newrelic_rpm'
   gem "skylight"
 end
 
