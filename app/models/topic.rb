@@ -122,9 +122,9 @@ protected
   end
   
   def update_cached_forum_and_user_counts
-    Forum.update_all "posts_count = posts_count - #{posts_count}", ['id = ?', forum_id]
+    Forum.where(:id => forum_id).update_all "posts_count = posts_count - #{posts_count}"
     @user_posts.each do |user_id, posts|
-      User.update_all "posts_count = posts_count - #{posts.size}", ['id = ?', user_id]
+      User.where(:id => user_id).update_all "posts_count = posts_count - #{posts.size}"
     end
   end
 end

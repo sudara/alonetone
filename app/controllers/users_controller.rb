@@ -210,7 +210,7 @@ class UsersController < ApplicationController
       currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
       flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
     end
-    Asset.update_all( { :updated_at => Time.now }, { :user_id => @user.id } ) if flush_asset_caches
+    Asset.where(:user_id => @user.id).update_all(:updated_at => Time.now) if flush_asset_caches
   end
   
   
