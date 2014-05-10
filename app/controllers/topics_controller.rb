@@ -63,7 +63,9 @@ class TopicsController < ApplicationController
 protected
 
   def set_session_topics
-    ((session[:topics] ||= {})[@topic.id] = Time.now.utc) if logged_in?
+    if @topic
+      ((session[:topics] ||= {})[@topic.id] = Time.now.utc) if logged_in?
+    end 
   end 
 
   def authorized?
