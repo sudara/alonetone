@@ -86,11 +86,11 @@ class Topic < ActiveRecord::Base
   end
 
   def self.replied_to_by(user)
-    user.posts.select('distinct posts.topic_id, topics.*').order('topics.last_updated_at DESC').limit(5).joins(:topic)
+    user.posts.not_spam.select('distinct posts.topic_id, topics.*').order('topics.last_updated_at DESC').limit(5).joins(:topic)
   end
 
   def self.popular
-    Post.group(:topic).where(['posts.created_at > ?',10.days.ago]).limit(3).order('count_all DESC').count
+    Post.group(:topic).not_spam.where(['posts.created_at > ?',10.days.ago]).limit(3).order('count_all DESC').count
   end
 
   def self.replyless

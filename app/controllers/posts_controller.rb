@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :find_parents
-  before_filter :find_post, :only => [:edit, :update, :destroy]
+  before_filter :find_post, :only => [:edit, :update, :destroy, :spam, :unspam]
   layout "forums"
   include ActionView::RecordIdentifier
 
@@ -28,6 +28,18 @@ class PostsController < ApplicationController
         render :xml  => @post
       end
     end
+  end
+  
+  def unspam
+    @post.ham!
+    @post.update_column :is_spam, false
+    redirect_to :back
+  end
+  
+  def spam
+    @post.spam!
+    @post.update_column :is_spam, true
+    redirect_to :back
   end
 
   def new

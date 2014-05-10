@@ -3,7 +3,9 @@ class Post < ActiveRecord::Base
   @@per_page = 10
   cattr_accessor :per_page
   
-  scope :recent, -> { order("posts.created_at asc") }
+  scope :recent, ->   { order("posts.created_at asc") }
+  scope :not_spam, -> { where(:is_spam => false) }
+  scope :spam,    ->  { where(:spam => true) }
   
   # author of post
   belongs_to :user, :counter_cache => true
@@ -45,7 +47,7 @@ class Post < ActiveRecord::Base
     elsif params[:spam].present?
       where = where(:is_spam => true)
     else
-      where = unscoped
+      where = not_spam
     end
     where.includes(:topic => :forum).order("posts.created_at DESC")
   end

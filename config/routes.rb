@@ -72,9 +72,14 @@ Alonetone::Application.routes.draw do
 
   resources :forums do
     resources :topics do 
-      resources :posts
+      resources :posts do
+        member do 
+          put :unspam 
+          put :spam 
+        end
+      end
     end
-    resources :posts
+    resources :posts 
   end
   
   resources :posts do
