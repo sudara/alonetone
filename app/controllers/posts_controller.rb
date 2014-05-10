@@ -33,12 +33,20 @@ class PostsController < ApplicationController
   def unspam
     @post.ham!
     @post.update_column :is_spam, false
+    # unspam the topic too
+    if @post.topic.posts.count == 1 
+      @post.topic.update_column :spam, false
+    end
     redirect_to :back
   end
   
   def spam
     @post.spam!
     @post.update_column :is_spam, true
+    # mark the topic as spam too if it's the only post
+    if @post.topic.posts.count == 1 
+      @post.topic.update_column :spam, true
+    end
     redirect_to :back
   end
 
@@ -88,7 +96,7 @@ protected
   end
   
   def authorized?
-    (!%w(destroy edit update new).include?(action_name)) || (@topic.user_id.to_s == current_user.id.to_s) || moderator?
+    (!%w(destroy edit update new spam unspam).include?(action_name)) || (!%w(spam unspam).include?(action_name) && (@topic.user_id.to_s == current_user.id.to_s)) || moderator?
   end
     
   def find_post

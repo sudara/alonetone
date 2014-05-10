@@ -15,7 +15,7 @@ class ForumsController < ApplicationController
     handle_forum_session    
     respond_to do |format|
       format.html do # show.html.erb
-        @topics = @forum.topics.sticky_and_recent.paginate :page => current_page, :per_page => 20
+        @topics = @forum.topics.not_spam.sticky_and_recent.paginate :page => current_page, :per_page => 20
       end
       format.xml  { render :xml => @forum }
     end

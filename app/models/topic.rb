@@ -7,8 +7,10 @@ class Topic < ActiveRecord::Base
   after_destroy  :update_cached_forum_and_user_counts
 
   scope :recent, -> { order('topics.created_at DESC') }
+  scope :not_spam, -> { where(:spam => false) }
+  scope :spam,    ->  { where(:spam => true) }
   scope :sticky_and_recent, -> { order("topics.sticky desc, topics.last_updated_at desc") }
-  scope :for_footer, -> { recent.includes(:recent_post => :user).includes(:forum).limit(3) }
+  scope :for_footer, -> { recent.not_spam.includes(:recent_post => :user).includes(:forum).limit(3) }
   # creator of forum topic
   belongs_to :user
   
@@ -19,7 +21,7 @@ class Topic < ActiveRecord::Base
   has_many :posts, :dependent => :delete_all
    
   has_one  :recent_post,
-    -> { order('posts.created_at DESC') },
+    -> { not_spam.order('posts.created_at DESC') },
     :class_name => "Post"
   
   has_many :voices,
@@ -94,7 +96,7 @@ class Topic < ActiveRecord::Base
   end
 
   def self.replyless
-    Topic.limit(3).order('created_at DESC').where(:posts_count => 1)
+    Topic.not_spam.limit(3).order('created_at DESC').where(:posts_count => 1)
   end
 
 protected

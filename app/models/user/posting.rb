@@ -9,13 +9,15 @@ class User
   #  - changes forum_id if you're an admin
   #
   def post(forum, attributes, request)
-    Topic.new(attributes) do |topic|
+    new_topic = Topic.new(attributes) do |topic|
       topic.forum = forum
       topic.user  = self
       revise_topic(topic, attributes)
-      reply(topic, topic.body, request) unless topic.locked?
+      post = reply(topic, topic.body, request) unless topic.locked?
       topic.body = nil
     end
+    new_topic.update_column :spam, new_topic.posts.first.is_spam?
+    new_topic
   end
 
   def reply(topic, body, request)

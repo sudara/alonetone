@@ -12,7 +12,7 @@ class Forum < ActiveRecord::Base
   has_many :posts, :dependent  => :delete_all
     
   def recent_post
-    posts.order('created_at DESC').first
+    posts.not_spam.order('created_at DESC').first
   end  
     
   def recent_topic
@@ -20,7 +20,7 @@ class Forum < ActiveRecord::Base
   end    
   
   def recent_topics
-    topics.recent.includes(:user)
+    topics.not_spam.recent.includes(:user) 
   end
   
   def to_param

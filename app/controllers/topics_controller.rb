@@ -13,7 +13,12 @@ class TopicsController < ApplicationController
   def show
     set_session_topics
     @topic.hit! unless logged_in? && @topic.user_id == current_user.id
-    @posts = @topic.posts.recent.not_spam.paginate :page => current_page, :per_page => 10
+    if params[:spam]
+      @posts = @topic.posts.recent
+    else
+      @posts = @topic.posts.recent.not_spam
+    end
+    @posts = @posts.paginate :page => current_page, :per_page => 10
     @post  = Post.new
   end
 
