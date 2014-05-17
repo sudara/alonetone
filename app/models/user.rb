@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
     
   acts_as_authentic do |c|
     c.transition_from_restful_authentication = true
+    c.transition_from_crypto_providers = Authlogic::CryptoProviders::Sha512,
+    c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
 
@@ -26,12 +28,10 @@ class User < ActiveRecord::Base
     -> { order('assets.id DESC')},
     :dependent => :destroy
     
-  has_many   :playlists,     
-    -> { order('playlists.position')},
+  has_many   :playlists, -> { order('playlists.position')},
     :dependent => :destroy
   
-  has_many   :comments,
-    -> {order('comments.id DESC').includes([:commenter => :pic])},
+  has_many   :comments, -> {order('comments.id DESC')},
     :dependent => :destroy
   
   has_many   :tracks

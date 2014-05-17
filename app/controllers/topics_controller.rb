@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
     else
       @posts = @topic.posts.recent.not_spam
     end
-    @posts = @posts.paginate :page => current_page, :per_page => 10
+    @posts = @posts.preload(:user => :pic).page current_page
     @post  = Post.new
   end
 

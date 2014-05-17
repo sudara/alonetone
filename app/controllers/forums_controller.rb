@@ -7,7 +7,7 @@ class ForumsController < ApplicationController
 
   def index
     reset_session_forums_page
-    @forums = Forum.ordered
+    @forums = Forum.ordered.with_topics
     set_interesting_topics
   end
 

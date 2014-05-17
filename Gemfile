@@ -20,7 +20,9 @@ gem "mime-types"
 # active record
 gem "acts_as_list"
 gem "has_permalink"
-gem "authlogic", :git => 'https://github.com/binarylogic/authlogic.git' # rails 4 fixes in master
+gem "authlogic"
+gem "scrypt" # for authlogic
+gem "request_store" # for authlogic
 gem 'reportable', :git => 'git://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 gem 'recaptcha', :require => 'recaptcha/rails'
 

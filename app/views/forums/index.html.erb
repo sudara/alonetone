@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :extras do %>
-    <%= topic_count %>, <%= post_count %>
+    <%= pluralize Topic.count, 'threads' %>, <%= pluralize Post.count, 'post' %>
     <%= feed_icon_tag "Recent Posts", posts_path(:format => 'atom') %>
 <% end %>
 
@@ -19,7 +19,7 @@
     <th class="la" width="70%" colspan="3"><%= 'Forum' %></th>
     <th class="la" width="30%" colspan="1"><%= 'Last Post'%></th>
   </tr>
-<% for forum in @forums do %>  
+<% @forums.each do |forum| %>  
   <tr class="<%= cycle 'even', 'odd' %>">
     <td class="vat c1">
 
@@ -32,8 +32,8 @@
     <td class="c2 vat">
       <%= link_to forum.name, forum_path(forum), :class => "title" %>
       <div class="posts">
-        <%= pluralize forum.topics.count, 'topic' %>, 
-        <%= pluralize forum.posts.count, 'post' %>
+        <%= pluralize forum.topics_count, 'topic' %>, 
+        <%= pluralize forum.posts_count, 'post' %>
       </div>
       <%= "#{forum.description_html}".html_safe %>
       <div class="edit_forum">

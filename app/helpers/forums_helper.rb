@@ -9,9 +9,9 @@ module ForumsHelper
   def topic_title_link(topic, options)
     if topic.title =~ /^\[([^\]]{1,15})\]((\s+)\w+.*)/
       "<span class='flag'>#{$1}</span>".html_safe + 
-      link_to(h($2.strip), forum_topic_path((@forum || topic.forum), topic), options)
+      link_to($2.strip, forum_topic_path((@forum || topic.forum), topic), options)
     else
-      link_to(h(topic.title), forum_topic_path((@forum || topic.forum), topic), options)
+      link_to(topic.title, forum_topic_path((@forum || topic.forum), topic), options)
     end
   end
   
@@ -25,16 +25,6 @@ module ForumsHelper
   def recent_forum_activity(forum)
     return false unless logged_in? && forum.recent_topic
     return forum.recent_topic.last_updated_at > ((session[:forums] ||= {})[forum.id] || (session[:last_active] ||= Time.now.utc))
-  end
-
-  def topic_count(topics=nil)
-    count = topics ? topics.size : Topic.count
-    pluralize count, 'topic'
-  end
-  
-  def post_count(posts=nil)
-    count = posts ? posts.size : Post.count
-    pluralize count, 'post'
   end
   
   def search_posts_title

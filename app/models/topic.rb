@@ -6,9 +6,10 @@ class Topic < ActiveRecord::Base
   before_destroy :count_user_posts_for_counter_cache
   after_destroy  :update_cached_forum_and_user_counts
 
+  scope :with_user, -> { preload(:last_user, :user) }
   scope :recent, -> { order('topics.created_at DESC') }
-  scope :not_spam, -> { where(:spam => false) }
-  scope :spam,    ->  { where(:spam => true) }
+  scope :not_spam, -> { where(:spam => false).with_user }
+  scope :spam,    ->  { where(:spam => true).with_user }
   scope :sticky_and_recent, -> { order("topics.sticky desc, topics.last_updated_at desc") }
   scope :for_footer, -> { recent.not_spam.includes(:recent_post => :user).includes(:forum).limit(3) }
   # creator of forum topic
