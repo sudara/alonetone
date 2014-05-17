@@ -1,6 +1,6 @@
 require 'active_record/fixtures'
 
-admin = User.create(:login => 'admin', :password => 'testing123', :password_confirmation => 'testing123')
+admin = User.create(:login => 'admin', :email => "123@123.com", :password => 'testing123', :password_confirmation => 'testing123')
 admin.update_attribute(:admin, true)
 
 forum = Forum.create
