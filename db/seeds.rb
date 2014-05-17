@@ -10,6 +10,7 @@ forum.save
 
 topic = admin.topics.build(
   :title => "Music and passion",
+  :body  => "Lets tawlk"
 )
 
 topic.forum = forum
