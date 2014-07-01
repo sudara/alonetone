@@ -60,6 +60,7 @@ group :development do
   gem 'sqlite3'
   gem 'spring'
   gem 'rack-mini-profiler'
+  gem 'perf_check', :github => 'rubytune/perf_check'
   # gem 'logical-insight'
 end
 

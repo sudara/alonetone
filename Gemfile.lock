@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/rubytune/perf_check.git
+  revision: 18af561eaae9e56dca83eb01b67d0b15ecda2005
+  specs:
+    perf_check (0.0.8)
+      colorize (= 0.7.3)
+
+GIT
   remote: git://github.com/saulabs/reportable.git
   revision: 7ab93765296ffddba9b6c4ced20188a5136fc6c3
   specs:
@@ -85,6 +92,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colorize (0.7.3)
     compass (0.12.6)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -285,6 +293,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   paperclip
+  perf_check!
   protected_attributes
   puma
   quiet_assets
