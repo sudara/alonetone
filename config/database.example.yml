@@ -5,7 +5,7 @@ development:
   timeout: 5000
 test:
   adapter: mysql2
-  database: alonetone_test
+  database: alonetone_test2
   username: root
   password:
   host: localhost
