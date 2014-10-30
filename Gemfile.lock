@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/rubytune/perf_check.git
-  revision: 18af561eaae9e56dca83eb01b67d0b15ecda2005
-  specs:
-    perf_check (0.0.8)
-      colorize (= 0.7.3)
-
-GIT
   remote: git://github.com/saulabs/reportable.git
   revision: 7ab93765296ffddba9b6c4ced20188a5136fc6c3
   specs:
@@ -104,6 +97,7 @@ GEM
     daemons (1.1.9)
     database_cleaner (1.0.1)
     diff-lcs (1.2.5)
+    diffy (3.0.5)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -158,6 +152,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    perf_check (0.1.18)
+      colorize (= 0.7.3)
+      diffy (= 3.0.5)
     polyglot (0.3.5)
     protected_attributes (1.0.5)
       activemodel (>= 4.0.1, < 5.0)
@@ -293,7 +290,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   paperclip
-  perf_check!
+  perf_check
   protected_attributes
   puma
   quiet_assets
