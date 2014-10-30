@@ -4,6 +4,8 @@ gem "rails", "~> 4.1"
 
 gem "mysql2"
 
+gem 'perf_check'
+
 # temporary
 gem "protected_attributes"
 

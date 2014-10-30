@@ -85,6 +85,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    colorize (0.7.3)
     compass (0.12.6)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -96,6 +97,7 @@ GEM
     daemons (1.1.9)
     database_cleaner (1.0.1)
     diff-lcs (1.2.5)
+    diffy (3.0.5)
     dynamic_form (1.1.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -150,6 +152,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    perf_check (0.1.17)
+      colorize (= 0.7.3)
+      diffy (= 3.0.5)
     polyglot (0.3.4)
     protected_attributes (1.0.5)
       activemodel (>= 4.0.1, < 5.0)
@@ -285,6 +290,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   paperclip
+  perf_check
   protected_attributes
   puma
   quiet_assets
