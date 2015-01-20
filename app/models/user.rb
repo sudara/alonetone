@@ -164,6 +164,11 @@ class User < ActiveRecord::Base
     Listen.delete_all(['track_owner_id = ?',id])
     Listen.delete_all(['listener_id = ?',id])
     Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
+
+    Playlist.joins(:assets).where(:assets => {:user_id => id}).
+      update_all(['tracks_count = tracks_count - 1, updated_at = ?', Time.now])
+    Track.joins(:asset).where(:assets => {:user_id => id}).delete_all
+
     %w(tracks playlists posts comments assets).each do |thing|
       self.send(thing).delete_all
     end
