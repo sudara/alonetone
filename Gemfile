@@ -16,6 +16,7 @@ gem "aws-sdk"
 gem "paperclip"
 gem "ruby-mp3info", :require => 'mp3info'
 gem "mime-types" 
+gem 'ruby-audio'
 
 # active record
 gem "acts_as_list"
