@@ -4,11 +4,8 @@
 
 [alonetone](http://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
-alonetone launched in January 2008. As of 2013 it hosts over 50,000 songs from almost 4000 musicians. We have delivered over 3 million mp3s to real listeners (not google and spambots!)
+alonetone launched in January 2008. As of 2015 it hosts over 58,000 tracks from 4500 musicians. We have delivered over 4.5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
-## Give us some dev love
-
-Warm the hearts of musicians worldwide by working the *only* open-source rails app that provides musicians with a free home, a connection to each other and their friends/listeners.
 
 ### Bug reporting 
 
