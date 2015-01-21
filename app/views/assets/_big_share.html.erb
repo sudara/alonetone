@@ -5,6 +5,10 @@
         <%= text_field_tag "home_#{@asset.unique_id}", user_track_url(@asset.user, @asset.permalink), :size => 40,:class => 'tabbed_input' %> <br/>
         Direct download link:<br/>
         <%= text_field_tag "link_#{@asset.unique_id}", user_track_url(@asset.user, @asset.permalink, :format => :mp3), :size => 40, :class => 'tabbed_input' %>
+        <% if current_user.try(:secret_view_enabled?) && @asset.user.secret_view_enabled? %>
+        <br/>secret_view:<br/>
+        <%= text_field_tag "link_#{@asset.unique_id}", secret_view_user_track_url(@asset.user, @asset.permalink), :size => 40, :class => 'tabbed_input' %>
+        <% end %>
     </div>
 
     <div class="static_content ">

@@ -78,7 +78,10 @@ class User
     (settings == nil) || (settings[:email_new_tracks] != "false")
   end
   
-  
+  def secret_view_enabled?
+    settings.try(:[], :secret_view_enabled)
+  end
+
   def has_setting?(setting, value=nil)
     if value != nil # account for testing against false values
       self.settings.present? && self.settings[setting].present? && (self.settings[setting] == value)

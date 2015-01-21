@@ -115,8 +115,9 @@ Alonetone::Application.routes.draw do
     resources 'source_files' #:path_prefix => ':login'
     resources 'tracks', :controller => :assets do
       member do 
-        get :share 
+        get :share
         get :stats
+        get :secret_view
       end
       collection do
         get  :latest
