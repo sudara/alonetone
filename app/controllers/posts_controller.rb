@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_filter :find_parents
   before_filter :find_post, :only => [:edit, :update, :destroy, :spam, :unspam]
+  before_filter :require_login, :only => :create
   layout "forums"
   include ActionView::RecordIdentifier
 
