@@ -5,7 +5,7 @@ describe TopicsController, 'basics' do
   
   
   def create_topic
-    post :create, :forum_id => 'testforum', :topic => {:title => 'howdy'}
+    post :create, :forum_id => 'testforum', :topic => {:title => 'howdy', :body => '.'}
   end
 
   it "should not allow a post from a guest user" do 

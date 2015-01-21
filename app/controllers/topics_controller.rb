@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_filter :find_forum
   before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
+  before_filter :require_login, :only => [:create, :update]
   layout "forums"
 
   def index
@@ -69,8 +70,8 @@ protected
   end 
 
   def authorized?
-    not %w(destroy edit update).include?(action_name) || 
-    current_user_is_admin_or_moderator_or_owner?(@topic.user)
+    !%w(destroy edit update).include?(action_name) ||
+      current_user_is_admin_or_moderator_or_owner?(@topic.user)
   end
   
   def find_forum
