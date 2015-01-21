@@ -78,3 +78,7 @@ group :test do
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
   gem "factory_girl_rails",:require => false
 end
+
+group :development, :test do
+  gem 'pry'
+end

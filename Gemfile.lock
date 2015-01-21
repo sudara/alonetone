@@ -292,6 +292,7 @@ DEPENDENCIES
   paperclip
   perf_check
   protected_attributes
+  pry
   puma
   quiet_assets
   rack-mini-profiler
