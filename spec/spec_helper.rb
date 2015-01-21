@@ -61,8 +61,8 @@ RSpec.configure do |config|
     def login(user)
       login_as = user.is_a?(User) ? user : users(user) # grab the fixture
       activate_authlogic # make authlogic happy
-      UserSession.create(login_as).should be_true # make sure we logged in
-      controller.stub(:current_user_session).and_return(UserSession.find)
+      (session = UserSession.create(login_as)).should be_true # make sure we logged in
+      controller.stub(:current_user_session).and_return(session)
       controller.stub(:current_user).and_return(login_as) # make authlogic happy
     end
     
