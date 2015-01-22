@@ -19,7 +19,7 @@
   <%= f.text_field :city %><br/><br/>
 
   <label for="user_bio">What country?</label><br />
-  <%= f.country_select(:country, ['','United States'], :include => :blank) %><br/><br/>
+  <%= f.country_select(:country, ['United States'], :include_blank => true) %><br/><br/>
 
   <label for="user_website">Have a website?</label><br />
   http://<%= f.text_field :website %><br/><br/>
