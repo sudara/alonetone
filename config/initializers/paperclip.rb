@@ -14,5 +14,13 @@ Paperclip::Attachment.default_options.merge!({
   :s3_headers => { 'Expires' => 3.years.from_now.httpdate, 
     'Content-disposition' => 'attachment;'}
 }) if Alonetone.storage == 's3'
-    
-    
+
+
+require 'paperclip/media_type_spoof_detector'
+module Paperclip
+  class MediaTypeSpoofDetector
+    def spoofed?
+      false
+    end
+  end
+end
