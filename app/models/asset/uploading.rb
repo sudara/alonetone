@@ -18,6 +18,25 @@ class Asset
   validates_attachment_content_type :mp3, :content_type => ['audio/mpeg', 'audio/mp3'], :message => " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
 
   serialize :waveform, Array
+
+  def extract_waveform(file)
+    tmp = Tempfile.new(['resampled-upload', '.wav'])
+    Paperclip.run(['ffmpeg', '-y', '-i', file, '-af', 'aresample=10', tmp.path])
+
+    waveform = []
+    input = RubyAudio::Sound.open(tmp.path)
+    begin
+      until (signal = input.read(:int, 300).to_a).size.zero?
+        signal.map!{ |s| Array(s).sum.to_f / s.size }
+        waveform.concat(signal)
+      end
+    ensure
+      input.close
+      tmp.close!
+    end
+
+    self.waveform = waveform
+  end
   
  # Disable zip uploads for now, make life easier transitioning to paperclip
  # Plus this should go bye-bye into a model
