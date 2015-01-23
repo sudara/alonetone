@@ -247,7 +247,7 @@ class AssetsController < ApplicationController
     params[:asset_data].each do |file|
       unless file.is_a?(String)
         @assets << asset = current_user.assets.build(:mp3 => file)
-        asset.extract_waveform(file.path) if current_user.secret_view_enabled?
+        asset.extract_waveform(file.path) if current_user.greenfield_enabled?
         asset.save
       end
     end
