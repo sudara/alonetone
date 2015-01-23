@@ -3,9 +3,12 @@
 <% content_for :left do %>
   <% if authorized_for(@asset) %>
       <div class="track_options">
-          
           <%= link_to edit_user_track_path(@asset.user, @asset), :class => 'view_all', :title => 'edit this track' do %>
             edit <div class="sprites-pencil sprites-before-heading"></div>
+          <% end %>
+
+          <%= link_to greenfield.new_post_path(:asset_id => @asset.id), :class => 'view_all', :title => 'edit this track' do %>
+            greenfield <div class="sprites-pencil sprites-before-heading"></div>
           <% end %>
 
           <%= link_to user_track_path(@asset.user, @asset), :method => 'delete', :class => 'view_all ',

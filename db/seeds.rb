@@ -13,7 +13,6 @@ musician.update_attribute(:settings, :greenfield_enabled => true)
 mp3 = fixture_file_upload(File.join('spec/fixtures/assets','muppets.mp3'),'audio/mpeg')
 asset = musician.assets.build(:mp3 => mp3, :title => 'muppets!', :description => '*muppets* poking fun')
 asset.extract_waveform(mp3.path)
-asset.create_greenfield_post(:body => asset.description)
 asset.save
 
 asset.listens.create(

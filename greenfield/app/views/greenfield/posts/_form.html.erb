@@ -1,0 +1,14 @@
+<%= form_for(@post) do |f| %>
+  <div>
+    <%= @post.asset.title %>
+    <%= f.hidden_field :asset_id %>
+  </div>
+
+  <div>
+    <%= f.text_area :body %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
