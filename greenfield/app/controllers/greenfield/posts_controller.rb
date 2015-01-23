@@ -25,7 +25,7 @@ module Greenfield
     def asset_param
       id = params[:asset_id]
       id ||= params[:post].delete(:asset_id)
-      Asset.find(id)
+      current_user.assets.find(id)
     end
   end
 end
