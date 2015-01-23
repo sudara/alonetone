@@ -30,4 +30,19 @@ class Asset
 
     self.waveform = waveform
   end
+
+  def import_waveform
+    tmp = Tempfile.new(['mp3-download', '.mp3'])
+
+    begin
+      url = mp3.expiring_url.gsub('s3.amazonaws.com/','')
+      Paperclip.run(['curl', '-o', Shellwords.shellescape(tmp.path),
+                     Shellwords.shellescape(url)])
+      extract_waveform(tmp.path)
+    ensure
+      tmp.close!
+    end
+
+    save
+  end
 end
