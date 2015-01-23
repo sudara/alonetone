@@ -21,8 +21,13 @@ class Asset
 
   def extract_waveform(file)
     tmp = Tempfile.new(['resampled-upload', '.wav'])
-    Paperclip.run(['ffmpeg', '-y', '-i', file, '-af', 'aresample=10', tmp.path])
 
+    # resample the mp3 down to 8KHz to make it more manageable
+    command = Paperclip.run(['lame', '--mp3input', '--resample', '8',
+                             '--decode', Shellwords.shellescape(file),
+                             Shellwords.shellescape(tmp.path)])
+
+    # read in the data and make it mono
     waveform = []
     input = RubyAudio::Sound.open(tmp.path)
     begin
@@ -34,6 +39,10 @@ class Asset
       input.close
       tmp.close!
     end
+
+    # lame can only downsample to 8KHz, but that's still
+    # way too high so we do a second resampling here
+    waveform = waveform.each_slice(1000).map{ |slice| slice.sum.to_f / slice.size }
 
     self.waveform = waveform
   end

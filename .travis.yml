@@ -2,7 +2,7 @@ language: ruby
 rvm: 2.0.0
 install: bin/wad
 before_install:
-  - sudo apt-get install -y libsndfile-dev ffmpeg
+  - sudo apt-get install -y libsndfile-dev lame
 before_script:
   - mysql -e 'create database alonetone_test';
   - bundle exec rake copy_config
