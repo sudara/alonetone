@@ -1,23 +1,23 @@
 <header>
-  <%= image_tag(@asset.user.avatar(:large)) %>
-  <h1><%= @asset.user.display_name %></h1>
-  <h2>&mdash; <%= @asset.title %></h2>
+  <%= image_tag(@post.asset.user.avatar(:large)) %>
+  <h1><%= @post.asset.user.display_name %></h1>
+  <h2>&mdash; <%= @post.asset.title %></h2>
 </header>
 
 
 <div class="player">
   <div class="play-button play-control">
-    <%= link_to '', main_app.user_track_path(@asset.user.login, @asset.permalink, :format => :mp3) %>
+    <%= link_to '', main_app.user_track_path(@post.asset.user.login, @post.asset.permalink, :format => :mp3) %>
   </div>
 
-  <div class="waveform" data-waveform="<%= @asset.waveform.join(', ') %>">
+  <div class="waveform" data-waveform="<%= @post.asset.waveform.join(', ') %>">
   </div>
 
   <div class="download-button">
-    <%= link_to '', main_app.user_track_path(@asset.user.login, @asset.permalink, :format => :mp3) %>
+    <%= link_to '', main_app.user_track_path(@post.asset.user.login, @post.asset.permalink, :format => :mp3) %>
   </span>
 </div>
 
 <div class="description">
-  <%= markdown(@asset.description) %>
+  <%= markdown(@post.body) %>
 </div>

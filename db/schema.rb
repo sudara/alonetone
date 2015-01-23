@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121210427) do
+ActiveRecord::Schema.define(version: 20150123212106) do
 
   create_table "assets", force: true do |t|
     t.string   "mp3_content_type"
@@ -131,6 +131,13 @@ ActiveRecord::Schema.define(version: 20150121210427) do
 
   add_index "forums", ["permalink"], name: "index_forums_on_permalink"
   add_index "forums", ["position"], name: "index_forums_on_position"
+
+  create_table "greenfield_posts", force: true do |t|
+    t.integer  "asset_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", force: true do |t|
     t.string   "name"

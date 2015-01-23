@@ -8,11 +8,12 @@ moderator = User.create(:login => 'moderator', :email =>'mod@mod.com', :password
 moderator.update_attribute(:moderator, true)
 
 musician = User.create(:login => 'musician', :email =>'music@music.com', :password => 'music123', :password_confirmation => 'music123')
-musician.update_attribute(:settings, :secret_view_enabled => true)
+musician.update_attribute(:settings, :greenfield_enabled => true)
 
 mp3 = fixture_file_upload(File.join('spec/fixtures/assets','muppets.mp3'),'audio/mpeg')
 asset = musician.assets.build(:mp3 => mp3, :title => 'muppets!', :description => '*muppets* poking fun')
 asset.extract_waveform(mp3.path)
+asset.create_greenfield_post(:body => asset.description)
 asset.save
 
 asset.listens.create(

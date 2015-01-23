@@ -1,8 +1,8 @@
 module Greenfield
   class PostsController < ApplicationController
     def show
-      @asset = ::Asset.first
-      @page_title = "#{@asset.user.display_name} - #{@asset.title}"
+      @post = Greenfield::Post.find(params[:id])
+      @page_title = "#{@post.asset.user.display_name} - #{@post.asset.title}"
     end
   end
 end

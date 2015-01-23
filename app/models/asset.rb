@@ -1,6 +1,6 @@
 class Asset < ActiveRecord::Base
   
-  concerned_with :uploading, :radio, :statistics
+  concerned_with :uploading, :radio, :statistics, :greenfield
   
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
