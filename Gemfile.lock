@@ -26,6 +26,12 @@ GIT
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
 
+PATH
+  remote: greenfield
+  specs:
+    greenfield (0.0.1)
+      rails (~> 4.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -279,6 +285,7 @@ DEPENDENCIES
   factory_girl_rails
   gemoji
   geokit
+  greenfield!
   guard!
   guard-rspec
   guard-spring

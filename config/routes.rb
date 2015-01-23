@@ -1,4 +1,6 @@
 Alonetone::Application.routes.draw do
+  mount Greenfield::Engine => "/greenfield"
+
   resources :groups
 
   get '/login', :to => 'user_sessions#new', :as => 'login'
@@ -117,7 +119,6 @@ Alonetone::Application.routes.draw do
       member do 
         get :share
         get :stats
-        get :secret_view
       end
       collection do
         get  :latest
@@ -143,5 +144,5 @@ Alonetone::Application.routes.draw do
       end
       resources :comments
     end
-   end
+  end
 end

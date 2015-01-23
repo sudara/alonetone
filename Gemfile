@@ -4,6 +4,9 @@ gem "rails", "~> 4.1"
 
 gem "mysql2"
 
+# greenfield
+gem 'greenfield', path: "greenfield"
+
 # temporary
 gem "protected_attributes"
 
