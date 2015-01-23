@@ -7,14 +7,14 @@
 
 <div class="player">
   <div class="play-button play-control">
-    <%= link_to '', user_track_path(@asset.user.login, @asset.permalink, :format => :mp3) %>
+    <%= link_to '', main_app.user_track_path(@asset.user.login, @asset.permalink, :format => :mp3) %>
   </div>
 
   <div class="waveform" data-waveform="<%= @asset.waveform.join(', ') %>">
   </div>
 
   <div class="download-button">
-    <%= link_to '', user_track_path(@asset.user.login, @asset.permalink, :format => :mp3) %>
+    <%= link_to '', main_app.user_track_path(@asset.user.login, @asset.permalink, :format => :mp3) %>
   </span>
 </div>
 
