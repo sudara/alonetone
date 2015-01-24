@@ -37,7 +37,9 @@ module Greenfield
             link_to '', link_url
           end,
 
-          content_tag(:div, :class => 'waveform', :'data-waveform' => waveform){ },
+          content_tag(:div, :class => 'waveform', :'data-waveform' => waveform) do
+            content_tag(:div, :class => 'seekbar'){ }
+          end,
 
           content_tag(:div, :class => 'download-button') do
             link_to '', link_url

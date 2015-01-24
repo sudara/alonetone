@@ -59,6 +59,7 @@ $(function() {
 
     var scrubber = $(this);
     var player = $(this).parents('.player');
+    var seekbar = player.find('.seekbar');
     var url = player.find('.play-control a').attr('href');
     var soundID = url.split('/').pop().split('.')[0];
 
@@ -82,14 +83,15 @@ $(function() {
       scrubber.click(function(e) {
         e.preventDefault();
 
-        var offx = (e.offsetX || e.clientX - $(e.target).offset().left);
+        var offx = e.clientX - scrubber.offset().left;
         sound.setPosition((offx / scrubber.width()) * sound.durationEstimate);
         player.find('.play-button').trigger('click');
       });
 
       scrubber.mousemove(function(e) {
-        var offx = (e.offsetX || e.clientX - $(e.target).offset().left);
+        var offx = e.clientX - scrubber.offset().left;
         hoverPosition = offx / scrubber.width();
+        seekbar.css('left', offx);
       }).mouseout(function() { hoverPosition = -1 });
     });
   });
