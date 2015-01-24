@@ -31,7 +31,7 @@ $(function() {
     soundManager.pause(soundID);
   });
 
-  $('.player .waveform').each(function() {
+  $('.waveform').each(function() {
     var data = $(this).data('waveform').split(',').map(function(s) {
       return parseFloat(s);
     });
@@ -47,7 +47,7 @@ $(function() {
     var waveform = new Waveform({
       container: this,
       innerColor: function(percent, _) {
-        if (percent <= soundPosition && (percent <= hoverPosition || hoverPosition == -1))
+        if (percent < soundPosition && (percent < hoverPosition || hoverPosition == -1))
           return '#302f2f';
         else if (percent < soundPosition || percent < hoverPosition)
           return '#c7c6c3';
