@@ -8,7 +8,7 @@ gem "mysql2"
 gem 'greenfield', path: "greenfield"
 
 # temporary
-gem "protected_attributes"
+gem "protected_attributes", '~> 1.0.6'
 
 # ruby
 gem "sometimes"
