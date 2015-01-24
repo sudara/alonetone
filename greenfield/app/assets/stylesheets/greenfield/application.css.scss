@@ -100,22 +100,21 @@ footer {
     right:0;
     width: 540px;
     height: 100%;
-  }
-
-  .seekbar {
-    width: 1px;
-    height: 100%;
-    background-color: #aaa;
-    position: absolute;
-    top: 0px;
-  }
-
-  &:hover .seekbar {
-    display: block;
-  }
-
-  &:not(:hover) .seekbar {
-    display: none;
+    .seekbar {
+      width: 1px;
+      height: 100%;
+      background-color: #aaa;
+      position: absolute;
+      top: 0px;
+    }
+    
+    &:hover .seekbar {
+      display: block;
+    }
+    
+    &:not(:hover) .seekbar {
+      display: none;
+    }
   }
 
   .download-button {
