@@ -1,13 +1,11 @@
 class AssetsController < ApplicationController  
   before_filter :find_user, :except => [:radio, :latest]
-  before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats, :secret_view]
+  before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
 
   # we check to see if the current_user is authorized based on the asset.user
-  before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed, :secret_view]
+  before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
   before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
 
-  before_filter :check_secret_view_feature_flag, :only => :secret_view
-  
   # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
   @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook']
@@ -71,11 +69,6 @@ class AssetsController < ApplicationController
         end
       end
     end
-  end
-
-  def secret_view
-    @page_title = "#{@asset.user.display_name} - #{@asset.title}"
-    render :layout => 'secret_view'
   end
 
   def hot_track
@@ -253,7 +246,9 @@ class AssetsController < ApplicationController
     @assets = []
     params[:asset_data].each do |file|
       unless file.is_a?(String)
-        @assets << current_user.assets.create(:mp3 => file)
+        @assets << asset = current_user.assets.build(:mp3 => file)
+        asset.extract_waveform(file.path) if current_user.greenfield_enabled?
+        asset.save
       end
     end
   end
@@ -330,14 +325,6 @@ class AssetsController < ApplicationController
     if is_a_bot?
       Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.mp3_file_name} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
       render(:text => "Denied due to abuse", :status => 403)    
-    end
-  end
-
-  def check_secret_view_feature_flag
-    unless @asset.user.secret_view_enabled?
-      @page_title = "Not found"
-      flash[:error] = "Hmm, couldn't find that..."
-      render :template => 'pages/four_oh_four', :status => 404
     end
   end
 end

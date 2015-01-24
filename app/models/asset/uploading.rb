@@ -1,4 +1,4 @@
-class Asset 
+class Asset
   include Paperclip
 
   # see config/initializers/paperclip for defaults
@@ -12,12 +12,12 @@ class Asset
   end
 
   has_attached_file :mp3, attachment_options
-  
+
   validates_attachment_size :mp3, :less_than => 60.megabytes
   validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'
   validates_attachment_content_type :mp3, :content_type => ['audio/mpeg', 'audio/mp3'], :message => " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
-  
-  
+
+
  # Disable zip uploads for now, make life easier transitioning to paperclip
  # Plus this should go bye-bye into a model
  

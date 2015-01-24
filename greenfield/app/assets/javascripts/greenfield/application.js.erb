@@ -1,0 +1,96 @@
+//= require jquery
+//= require soundmanager2
+
+var soundIsReady = true;
+
+soundManager.debugMode = true;
+soundManager.flashVersion = 9;
+soundManager.useHTML5Audio = true; /* for acl, baby */
+soundManager.consoleOnly = true;
+soundManager.url = '<%= asset_path('soundmanager2_flash9.swf')%>';
+
+$(function() {
+  $(document).on('click', '.play-button', function(e) {
+    e.preventDefault();
+
+    var container = $(this);
+    var url = $(this).find('a').attr('href');
+    var soundID = url.split('/').pop().split('.')[0];
+
+    container.removeClass('play-button').addClass('pause-button');
+    soundManager.getSoundById(soundID).play();
+  });
+
+  $(document).on('click', '.pause-button', function(e) {
+    e.preventDefault();
+
+    var container = $(this);
+    var url = $(this).find('a').attr('href');
+    var soundID = url.split('/').pop().split('.')[0];
+    container.removeClass('pause-button').addClass('play-button');
+    soundManager.pause(soundID);
+  });
+
+  $('.player .waveform').each(function() {
+    var data = $(this).data('waveform').split(',').map(function(s) {
+      return parseFloat(s);
+    });
+
+    var max = Math.max.apply(Math, data),
+        min = Math.min.apply(Math, data);
+
+    var scale = Math.max(Math.abs(max), Math.abs(min));
+    data = data.map(function(s) { return s / scale });
+
+    var soundPosition = 0;
+    var hoverPosition = -1;
+    var waveform = new Waveform({
+      container: this,
+      innerColor: function(percent, _) {
+        if (percent <= soundPosition && (percent <= hoverPosition || hoverPosition == -1))
+          return '#dd0000';
+        else if (percent < soundPosition || percent < hoverPosition)
+          return '#ddaaaa';
+        else
+          return '#aaa';
+      },
+      data: data
+    });
+
+    var scrubber = $(this);
+    var player = $(this).parents('.player');
+    var url = player.find('.play-control a').attr('href');
+    var soundID = url.split('/').pop().split('.')[0];
+
+    soundManager.onready(function() {
+      var sound = soundManager.createSound({
+        id: soundID,
+        url: url,
+        autoLoad: true,
+        onfinish: function() {
+          player.find('.play-control').
+            removeClass('pause-button').addClass('play-button');
+        }
+      });
+
+      setInterval(function() {
+        soundPosition = sound.position / sound.durationEstimate;
+        waveform.update({ data: data });
+      }, 50);
+
+
+      scrubber.click(function(e) {
+        e.preventDefault();
+
+        var offx = (e.offsetX || e.clientX - $(e.target).offset().left);
+        sound.setPosition((offx / scrubber.width()) * sound.durationEstimate);
+        player.find('.play-button').trigger('click');
+      });
+
+      scrubber.mousemove(function(e) {
+        var offx = (e.offsetX || e.clientX - $(e.target).offset().left);
+        hoverPosition = offx / scrubber.width();
+      }).mouseout(function() { hoverPosition = -1 });
+    });
+  });
+});

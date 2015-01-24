@@ -22,8 +22,8 @@ module Paperclip
         if @attachment.instance.respond_to?("#{simple_attribute}=") and mp3.respond_to?(simple_attribute)
           @attachment.instance.send("#{simple_attribute}=",mp3.send(simple_attribute))
         end
-         @attachment.instance.title = set_title(mp3)
-         @attachment.instance.generate_permalink!
+        @attachment.instance.title = set_title(mp3)
+        @attachment.instance.generate_permalink!
       end
     end
     
@@ -37,5 +37,6 @@ module Paperclip
         nil
       end
     end
+
   end
 end
