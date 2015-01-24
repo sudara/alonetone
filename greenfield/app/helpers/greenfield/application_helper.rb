@@ -33,7 +33,7 @@ module Greenfield
 
       content_tag(:div, :class => 'player') do
         [
-          content_tag(:div, :class => "play-button play-control") do
+          content_tag(:i, :class => "fa fa-play fa-3x play-button play-control") do
             link_to '', link_url
           end,
 
@@ -41,9 +41,14 @@ module Greenfield
             content_tag(:div, :class => 'seekbar'){ }
           end,
 
+          content_tag(:div, :class => 'time') do
+            "0:00 of #{asset.length}"
+          end,
+          
           content_tag(:div, :class => 'download-button') do
             link_to '', link_url
           end
+          
         ].join.html_safe
       end
     end

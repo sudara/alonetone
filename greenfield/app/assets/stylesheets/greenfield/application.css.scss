@@ -1,64 +1,158 @@
 @import "compass/reset";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+$line-height: 14px;
+$black: black;
+$not-quite-black: #353535; 
+$not-quite-white: #fdfbf8;
+$light-gray: #cccbca;
+$lightest-gray: #c7c6c3;
+$waveform-playing: #302f2f;
+
+$alrightblack: normal normal "Alright Sans Black";
+$alrightregular: normal normal "Alright Sans";
+
+// I want to be precise about spacing at regular intervals related to body text size
+$text: 18px;
+
+html,
+body { height: 100%; }
+
+body{
+  display: table;
+  width: 100%;
+  background-color: $not-quite-white;
+  font-family: 'proxima-nova',sans-serif;
+  font-weight: 500;
+  font-size:18px; // this defines em for the site.
+  line-height: 1.5em;
+}
+
+.wrapper{
+  margin: auto;
+  max-width:650px;
+  height: 100%;
+}
 
 header {
+  margin-top: 4em;
   img {
     height: 83px;
     width: 83px;
   }
-
-  h1, h2 {
-    display: inline;
+  h1{
+    font-size:30px;
+  }
+  h2{
+    font-size:24px;
   }
 }
 
-.player {
-  .play-button {
-    font-size: 34px;
-    display: inline-block;
-
-    &:after {
-      content: "PLAY";
+footer {
+  display: table-row;
+  height: 1px;
+  text-align:right;
+  width:100%;
+  line-height:34px;
+  height: 34px;
+  background-color: black;
+  .footer_wrapper{
+    width:650px;
+    margin: auto;
+    a{
+      font-size: 12px;
+      color: $not-quite-white;
+      text-decoration: none;
     }
   }
+}
 
-  .pause-button {
-    font-size: 34px;
+
+.player {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: 126px; // 8em - 2px
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+  display: block;
+  position: relative;
+  
+  .time{
+    color: $lightest-gray;
+    position:absolute;
+    right:0;
+    font-size: 12px;
+    display:inline-block;
+  }
+  .play-button, .pause-button{
+    color: $not-quite-black;
+    margin-top:18px;
+    padding:18px;
+    text-indent: 9px;
+    width:54px;
+    height:54px;
+    vertical-align: middle;
     display: inline-block;
-
-    &:after {
-      content: "PAUSE";
+    border: 1px solid $light-gray;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover{
+      color:$black;
     }
+  }
+  .pause-button{
+    color: $light-gray;
+    text-indent: 4.5px;  
   }
 
   .waveform {
-    position: relative;
-    display: inline-block;
-    width: 575px;
-    height: 50px;
-  }
-
-  .seekbar {
-    width: 1px;
-    height: 100%;
-    background-color: #aaa;
     position: absolute;
-    top: 0px;
-  }
-
-  &:hover .seekbar {
-    display: block;
-  }
-
-  &:not(:hover) .seekbar {
-    display: none;
+    display: inline-block;
+    right:0;
+    width: 540px;
+    height: 100%;
+    .seekbar {
+      width: 1px;
+      height: 100%;
+      background-color: #aaa;
+      position: absolute;
+      top: 0px;
+    }
+    
+    &:hover .seekbar {
+      display: block;
+    }
+    
+    &:not(:hover) .seekbar {
+      display: none;
+    }
   }
 
   .download-button {
     font-size: 34px;
     display: inline-block;
-
-    &:after {
-      content: "DOWNLOAD";
-    }
   }
+}
+
+.post_content{
+  padding-top: 1em;
+  padding-bottom: 3em;
+  p{
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 1em;
+    color: $not-quite-black;
+  }
+}
+
+.alrightsansblack {
+  font-family: "Alright Sans Black";
+  font-style: normal;
+  font-weight: normal;
+}
+
+.alrightsansregular {
+  font-family: "Alright Sans";
+  font-style: normal;
+  font-weight: normal;
 }

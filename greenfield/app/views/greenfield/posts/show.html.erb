@@ -1,11 +1,10 @@
 <header>
-  <%= image_tag(@post.asset.user.avatar(:large)) %>
-  <h1><%= @post.asset.user.display_name %></h1>
-  <h2>&mdash; <%= @post.asset.title %></h2>
+  <h1 class="alrightsansblack"><%= @post.asset.name %></h1>
+  <h2 class="alrightsansregular"><%= @post.asset.user.display_name %></h2>
 </header>
 
 <%= player(@post.asset) %>
 
-<div class="description">
+<div class="post_content">
   <%= markdown(@post.body, post: @post) %>
 </div>

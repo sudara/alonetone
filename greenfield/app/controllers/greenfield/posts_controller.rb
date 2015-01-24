@@ -15,7 +15,7 @@ module Greenfield
 
       params[:post][:attached_assets_attributes].each_with_index do |attrs, i|
         @post.attached_assets[i].extract_waveform(attrs[1][:mp3].path)
-      end
+      end if params[:post][:attached_assets_attributes]
 
       if @post.save
         redirect_to @post

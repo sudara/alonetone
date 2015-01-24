@@ -17,7 +17,7 @@ $(function() {
     var url = $(this).find('a').attr('href');
     var soundID = url.split('/').pop().split('.')[0];
 
-    container.removeClass('play-button').addClass('pause-button');
+    container.removeClass('play-button fa-play').addClass('pause-button fa-pause');
     soundManager.getSoundById(soundID).play();
   });
 
@@ -27,11 +27,11 @@ $(function() {
     var container = $(this);
     var url = $(this).find('a').attr('href');
     var soundID = url.split('/').pop().split('.')[0];
-    container.removeClass('pause-button').addClass('play-button');
+    container.removeClass('pause-button fa-pause').addClass('play-button fa-play');
     soundManager.pause(soundID);
   });
 
-  $('.player .waveform').each(function() {
+  $('.waveform').each(function() {
     var data = $(this).data('waveform').split(',').map(function(s) {
       return parseFloat(s);
     });
@@ -47,12 +47,10 @@ $(function() {
     var waveform = new Waveform({
       container: this,
       innerColor: function(percent, _) {
-        if (percent <= soundPosition && (percent <= hoverPosition || hoverPosition == -1))
-          return '#dd0000';
-        else if (percent < soundPosition || percent < hoverPosition)
-          return '#ddaaaa';
+        if (percent < soundPosition)
+          return '#302f2f';
         else
-          return '#aaa';
+          return '#c7c6c3';
       },
       data: data
     });

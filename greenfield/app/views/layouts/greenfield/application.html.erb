@@ -2,28 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title><%= @page_title || 'alonetone, a damn fine home for musicians' %></title>
+    <title><%= @page_title || 'Greenfield' %></title>
 
     <%= stylesheet_link_tag 'greenfield/application' %>
-
-    <link rel="apple-touch-icon" href="/images/ipad_icon.png"/>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-
+    
+    <!-- Trialing Alright Sans webfont --> 
+    <link href="//cloud.webtype.com/css/bc5f5119-1ed9-491b-a32e-27f12fdc3fa5.css" rel="stylesheet" type="text/css" />
+    
     <meta content="index,follow" name="robots"/>
     <%= csrf_meta_tag %>
-
-    <%= yield :css %>
   </head>
 
   <body>
-    <div class="container">
+    <div class="wrapper">
       <%= yield %>
     </div>
-
+    
     <footer>
-      hosted by <a href="http://www.alonetone.com">alonetone</a>
+      <div class="footer_wrapper">
+        <a href="http://www.alonetone.com">Powered by Greenfield</a>
+      </div>
     </footer>
-
+    
     <%= javascript_include_tag "waveform" %>
     <%= javascript_include_tag "greenfield/application" %>
   </body>
