@@ -48,11 +48,11 @@ $(function() {
       container: this,
       innerColor: function(percent, _) {
         if (percent <= soundPosition && (percent <= hoverPosition || hoverPosition == -1))
-          return '#dd0000';
+          return '#302f2f';
         else if (percent < soundPosition || percent < hoverPosition)
-          return '#ddaaaa';
+          return '#c7c6c3';
         else
-          return '#aaa';
+          return '#c7c6c3';
       },
       data: data
     });

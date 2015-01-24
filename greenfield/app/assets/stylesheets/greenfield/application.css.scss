@@ -6,7 +6,8 @@ $line-height: 14px;
 $black: black;
 $not-quite-black: #353535; 
 $not-quite-white: #fdfbf8;
-$light-gray: #c7c6c3;
+$light-gray: #cccbca;
+$lightest-gray: #c7c6c3;
 $waveform-playing: #302f2f;
 
 $alrightblack: normal normal "Alright Sans Black";
@@ -61,23 +62,37 @@ footer {
 
 
 .player {
-  .play-button {
-    font-size: 34px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: 126px; // 8em - 2px
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+  display: block;
+  position: relative;
+  
+  .play-button, .pause-button{
+    color: $not-quite-black;
+    margin-top:18px;
+    padding:18px;
+    text-indent: 9px;
+    width:54px;
+    height:54px;
+    vertical-align: middle;
     display: inline-block;
+    border: 1px solid $light-gray;
+    border-radius: 50%;
     cursor: pointer;
   }
-
-  .pause-button {
-    font-size: 34px;
-    display: inline-block;
-    cursor: pointer;
+  .pause-button{
+    text-indent: 4.5px;  
   }
 
   .waveform {
-    position: relative;
+    position: absolute;
     display: inline-block;
-    width: 575px;
-    height: 50px;
+    right:0;
+    width: 590px;
+    height: 100%;
   }
 
   .seekbar {
@@ -99,15 +114,13 @@ footer {
   .download-button {
     font-size: 34px;
     display: inline-block;
-
-    &:after {
-      content: "DOWNLOAD";
-    }
   }
 }
 
 .post_content{
-  
+  p{
+    margin-bottom: 1em;
+  }
 }
 
 .alrightsansblack {
