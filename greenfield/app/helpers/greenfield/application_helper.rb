@@ -42,7 +42,8 @@ module Greenfield
           end,
 
           content_tag(:div, :class => 'time') do
-            "0:00 of #{asset.length}"
+            current = content_tag(:span, '0:00', :class => 'index')
+            "#{current} of #{asset.length}".html_safe
           end,
           
           content_tag(:div, :class => 'download-button') do
