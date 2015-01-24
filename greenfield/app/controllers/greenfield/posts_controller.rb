@@ -2,6 +2,7 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     def new
       @post = asset_param.build_greenfield_post
+      @post.attached_assets.build
     end
 
     def show
@@ -11,6 +12,10 @@ module Greenfield
 
     def create
       @post = asset_param.build_greenfield_post(params[:post])
+
+      params[:post][:attached_assets_attributes].each_with_index do |attrs, i|
+        @post.attached_assets[i].extract_waveform(attrs[1][:mp3].path)
+      end
 
       if @post.save
         redirect_to @post
