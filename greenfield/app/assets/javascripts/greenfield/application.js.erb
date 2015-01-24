@@ -17,7 +17,7 @@ $(function() {
     var url = $(this).find('a').attr('href');
     var soundID = url.split('/').pop().split('.')[0];
 
-    container.removeClass('play-button').addClass('pause-button');
+    container.removeClass('play-button fa-play').addClass('pause-button fa-pause');
     soundManager.getSoundById(soundID).play();
   });
 
@@ -27,7 +27,7 @@ $(function() {
     var container = $(this);
     var url = $(this).find('a').attr('href');
     var soundID = url.split('/').pop().split('.')[0];
-    container.removeClass('pause-button').addClass('play-button');
+    container.removeClass('pause-button fa-pause').addClass('play-button fa-play');
     soundManager.pause(soundID);
   });
 

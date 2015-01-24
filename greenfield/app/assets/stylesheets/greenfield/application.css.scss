@@ -9,18 +9,19 @@ $not-quite-white: #fdfbf8;
 $light-gray: #c7c6c3;
 $waveform-playing: #302f2f;
 
-$alrightbold: bold normal "Alright Sans";
+$alrightblack: normal normal "Alright Sans Black";
 $alrightregular: normal normal "Alright Sans";
 
 // I want to be precise about spacing at regular intervals related to body text size
-$text: 16px;
-$line-height: 24px;
+$text: 18px;
 
 
 body{
   background-color: $not-quite-white;
-  font-size: 18px;
-  line-height:27px;
+  font-family: 'proxima-nova',sans-serif;
+  font-weight: 500;
+  font-size:18px; // this defines em for the site.
+  line-height: 1.5em;
 }
 
 .wrapper{
@@ -29,17 +30,16 @@ body{
 }
 
 header {
+  margin-top: 4em;
   img {
     height: 83px;
     width: 83px;
   }
   h1{
     font-size:30px;
-    font: $alrightbold;
   }
   h2{
     font-size:24px;
-    font: $alrightregular;
   }
 }
 
@@ -64,19 +64,13 @@ footer {
   .play-button {
     font-size: 34px;
     display: inline-block;
-
-    &:after {
-      content: "PLAY";
-    }
+    cursor: pointer;
   }
 
   .pause-button {
     font-size: 34px;
     display: inline-block;
-
-    &:after {
-      content: "PAUSE";
-    }
+    cursor: pointer;
   }
 
   .waveform {
@@ -110,4 +104,20 @@ footer {
       content: "DOWNLOAD";
     }
   }
+}
+
+.post_content{
+  
+}
+
+.alrightsansblack {
+  font-family: "Alright Sans Black";
+  font-style: normal;
+  font-weight: normal;
+}
+
+.alrightsansregular {
+  font-family: "Alright Sans";
+  font-style: normal;
+  font-weight: normal;
 }

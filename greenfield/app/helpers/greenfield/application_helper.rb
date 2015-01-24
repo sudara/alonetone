@@ -33,7 +33,7 @@ module Greenfield
 
       content_tag(:div, :class => 'player') do
         [
-          content_tag(:div, :class => "play-button play-control") do
+          content_tag(:i, :class => "fa fa-play play-button play-control") do
             link_to '', link_url
           end,
 
