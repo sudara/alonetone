@@ -97,8 +97,12 @@ footer {
     border: 1px solid $light-gray;
     border-radius: 50%;
     cursor: pointer;
+    &:hover{
+      color:$black;
+    }
   }
   .pause-button{
+    color: $light-gray;
     text-indent: 4.5px;  
   }
 
