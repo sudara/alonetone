@@ -47,6 +47,10 @@ module Greenfield
       self.waveform = waveform
     end
 
+    # This stuff is stubbed for compatibility but should be fixed
+
+    def length; 0; end
+
     attr_accessor :title
     def generate_permalink!; end
   end
