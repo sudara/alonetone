@@ -9,10 +9,3 @@
 <div class="description">
   <%= markdown(@post.body, post: @post) %>
 </div>
-
-<br /><br />
-<div>
-  <% @post.attached_assets.each do |asset| %>
-    <%= link_to asset.mp3_file_name, post_attached_asset_path(@post, asset) %>
-  <% end %>
-</div>
