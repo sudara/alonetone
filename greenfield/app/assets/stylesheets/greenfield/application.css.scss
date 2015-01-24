@@ -16,8 +16,12 @@ $alrightregular: normal normal "Alright Sans";
 // I want to be precise about spacing at regular intervals related to body text size
 $text: 18px;
 
+html,
+body { height: 100%; }
 
 body{
+  display: table;
+  width: 100%;
   background-color: $not-quite-white;
   font-family: 'proxima-nova',sans-serif;
   font-weight: 500;
@@ -28,6 +32,7 @@ body{
 .wrapper{
   margin: auto;
   max-width:650px;
+  height: 100%;
 }
 
 header {
@@ -45,18 +50,21 @@ header {
 }
 
 footer {
-  position:fixed;
-  bottom:0;
+  display: table-row;
+  height: 1px;
   text-align:right;
   width:100%;
   line-height:34px;
   height: 34px;
   background-color: black;
-  a{
-    padding-right:10px;
-    font-size: 12px;
-    color: $not-quite-white;
-    text-decoration: none;
+  .footer_wrapper{
+    width:650px;
+    margin: auto;
+    a{
+      font-size: 12px;
+      color: $not-quite-white;
+      text-decoration: none;
+    }
   }
 }
 
@@ -125,6 +133,7 @@ footer {
 
 .post_content{
   padding-top: 1em;
+  padding-bottom: 3em;
   p{
     margin-bottom: 1em;
   }
