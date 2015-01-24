@@ -9,6 +9,12 @@
   </div>
 
   <div>
+    <%= f.fields_for(:attached_assets) do |f| %>
+      <%= f.file_field :mp3 %>
+    <% end %>
+  </div>
+
+  <div>
     <%= f.submit %>
   </div>
 <% end %>

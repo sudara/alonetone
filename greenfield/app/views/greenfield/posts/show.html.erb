@@ -4,20 +4,15 @@
   <h2>&mdash; <%= @post.asset.title %></h2>
 </header>
 
-
-<div class="player">
-  <div class="play-button play-control">
-    <%= link_to '', main_app.user_track_path(@post.asset.user.login, @post.asset.permalink, :format => :mp3) %>
-  </div>
-
-  <div class="waveform" data-waveform="<%= @post.asset.waveform.join(', ') %>">
-  </div>
-
-  <div class="download-button">
-    <%= link_to '', main_app.user_track_path(@post.asset.user.login, @post.asset.permalink, :format => :mp3) %>
-  </span>
-</div>
+<%= player(@post.asset) %>
 
 <div class="description">
-  <%= markdown(@post.body) %>
+  <%= markdown(@post.body, post: @post) %>
+</div>
+
+<br /><br />
+<div>
+  <% @post.attached_assets.each do |asset| %>
+    <%= link_to asset.mp3_file_name, post_attached_asset_path(@post, asset) %>
+  <% end %>
 </div>

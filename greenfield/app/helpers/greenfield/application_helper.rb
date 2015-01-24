@@ -10,12 +10,42 @@ module Greenfield
       end.html_safe
     end
 
-    def markdown(text)
+    def markdown(text, post: nil)
       return "" unless text
       text = emojify(text)
-      @@renderer ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:hard_wrap => true),
-                                             :autolink => true, :no_intraemphasis => true) 
-      Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
+      if post
+        Greenfield::Markdown.render_with_embeds(post, text)
+      else
+        Greenfield::Markdown.render(text)
+      end
+    end
+
+    def player(asset)
+      if asset.is_a?(Greenfield::AttachedAsset)
+        link_url = Greenfield::Engine.routes.url_helpers.
+                     post_attached_asset_path(asset.post, asset, :format => :mp3)
+      else
+        link_url = Rails.application.routes.url_helpers.
+                     user_track_path(asset.user.login, asset.permalink, :format => :mp3)
+      end
+
+      waveform = asset.waveform.join(', ')
+
+      content_tag(:div, :class => 'player') do
+        [
+          content_tag(:div, :class => "play-button play-control") do
+            link_to '', link_url
+          end,
+
+          content_tag(:div, :class => 'waveform', :'data-waveform' => waveform) do
+            content_tag(:div, :class => 'seekbar'){ }
+          end,
+
+          content_tag(:div, :class => 'download-button') do
+            link_to '', link_url
+          end
+        ].join.html_safe
+      end
     end
   end
 end
