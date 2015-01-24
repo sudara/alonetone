@@ -41,9 +41,14 @@ module Greenfield
             content_tag(:div, :class => 'seekbar'){ }
           end,
 
+          content_tag(:div, :class => 'time') do
+            "0:00 of #{asset.length}"
+          end,
+          
           content_tag(:div, :class => 'download-button') do
             link_to '', link_url
           end
+          
         ].join.html_safe
       end
     end

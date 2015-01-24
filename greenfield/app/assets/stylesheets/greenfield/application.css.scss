@@ -70,6 +70,13 @@ footer {
   display: block;
   position: relative;
   
+  .time{
+    color: $lightest-gray;
+    position:absolute;
+    right:0;
+    font-size: 12px;
+    display:inline-block;
+  }
   .play-button, .pause-button{
     color: $not-quite-black;
     margin-top:18px;
@@ -118,6 +125,7 @@ footer {
 }
 
 .post_content{
+  margin-top: 1em;
   p{
     margin-bottom: 1em;
   }
