@@ -1,5 +1,7 @@
 Greenfield::Engine.routes.draw do
-  resources :posts, :only => [:new, :show, :create] do
-    resources :attached_assets, :only => :show
+  resources :users, :path => '/' do
+    resources :posts, :path => '/', :only => [:new, :show, :edit, :create, :update] do
+      resources :attached_assets, :only => :show
+    end
   end
 end
