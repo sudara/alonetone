@@ -43,6 +43,9 @@ gem 'gemoji'
 gem 'rakismet'
 gem "geokit"
 
+# greenfield
+gem 'font-awesome-sass'
+
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "sass-rails"

@@ -1,15 +1,64 @@
 @import "compass/reset";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+$line-height: 14px;
+$black: black;
+$not-quite-black: #353535; 
+$not-quite-white: #fdfbf8;
+$light-gray: #c7c6c3;
+$waveform-playing: #302f2f;
+
+$alrightbold: bold normal "Alright Sans";
+$alrightregular: normal normal "Alright Sans";
+
+// I want to be precise about spacing at regular intervals related to body text size
+$text: 16px
+$line-height: 24px;
+
+
+body{
+  background-color: $not-quite-white;
+  font-size: 18px;
+  line-height:27px;
+}
+
+.wrapper{
+  margin: auto;
+  max-width:700px;
+}
 
 header {
   img {
     height: 83px;
     width: 83px;
   }
-
-  h1, h2 {
-    display: inline;
+  h1{
+    font-size:30px;
+    font: $alrightbold;
+  }
+  h2{
+    font-size:24px;
+    font: $alrightregular;
   }
 }
+
+footer {
+  position:fixed;
+  bottom:0;
+  text-align:right;
+  width:100%;
+  line-height:34px;
+  height: 34px;
+  background-color: black;
+  a{
+    padding-right:10px;
+    font-size: 12px;
+    color: $not-quite-white;
+    text-decoration: none;
+  }
+}
+
 
 .player {
   .play-button {
