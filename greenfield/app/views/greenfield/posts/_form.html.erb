@@ -1,6 +1,17 @@
 <%= form_for(@post, :url => post_form_path(@post)) do |f| %>
+  <% if @post.errors.any? %>
+    <div class="errors">
+      There were some problems...
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
-    <%= @post.asset.title %>
+    <%= @post.title %>
     <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
   </div>
 

@@ -146,6 +146,17 @@ footer {
 }
 
 .edit_post, .new_post {
+  .errors {
+    padding: 10px;
+    background-color: #faa;
+    border: 1px solid #000;
+
+    ul {
+      padding-left: 20px;
+      list-style-type: circle;
+    }
+  }
+
   textarea {
     width: 100%;
     min-height: 400px;

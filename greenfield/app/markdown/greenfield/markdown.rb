@@ -17,6 +17,12 @@ module Greenfield
       end
     end
 
+    def self.invalid_embeds(post)
+      post.body.scan(/``(\d+)``/).flatten.map(&:to_i).select do |i|
+        i.zero? || i > post.attached_assets.size
+      end
+    end
+
     def self.render(text)
       renderer = Redcarpet::Markdown.new(new(:hard_wrap => true),
                       :autolink => true, :no_intraemphasis => true,

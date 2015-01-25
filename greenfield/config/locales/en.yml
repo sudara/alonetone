@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      attached_assets:
+        mp3: Attachment
+        mp3_content_type: Attachment content type

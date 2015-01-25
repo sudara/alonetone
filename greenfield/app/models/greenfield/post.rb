@@ -9,5 +9,13 @@ module Greenfield
     has_many :attached_assets # embedded assets
     accepts_nested_attributes_for :attached_assets
     attr_accessible :attached_assets_attributes
+
+    validates_presence_of :body
+    validates_presence_of :asset
+    validate do |post|
+      Greenfield::Markdown.invalid_embeds(post).each do |i|
+        post.errors[:base] << "Reference to attachment number #{i} is invalid"
+      end
+    end
   end
 end
