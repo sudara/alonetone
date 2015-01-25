@@ -1,6 +1,8 @@
 module Greenfield
   class AttachedAsset < ActiveRecord::Base
     belongs_to :post
+    has_one :user, :through => :post
+    has_one :alonetone_asset, :through => :post, :source => :asset
 
     # TODO: Need to validate attachment embeds...
 

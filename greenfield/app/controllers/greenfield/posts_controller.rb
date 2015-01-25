@@ -6,7 +6,7 @@ module Greenfield
 
     def show
       @post = find_asset.greenfield_post
-      @page_title = "#{@post.asset.user.display_name} - #{@post.asset.title}"
+      @page_title = "#{@post.user.display_name} - #{@post.title}"
     end
 
     def new
@@ -22,7 +22,7 @@ module Greenfield
       @post = find_asset.build_greenfield_post(params[:post])
 
       if @post.save
-        redirect_to user_post_path(@post.asset.user, @post.asset.permalink)
+        redirect_to user_post_path(@post.user, @post)
       else
         render :new
       end
@@ -31,7 +31,7 @@ module Greenfield
     def update
       @post = find_asset.greenfield_post
       if @post.update_attributes(params[:post])
-        redirect_to user_post_path(@post.asset.user, @post.asset.permalink)
+        redirect_to user_post_path(@post.user, @post)
       else
         render :edit
       end
@@ -48,7 +48,7 @@ module Greenfield
 
     def redirect_to_edit_if_post_exists
       if post = find_asset.greenfield_post
-        redirect_to edit_user_post_path(post.asset.user, post.asset.permalink)
+        redirect_to edit_user_post_path(post.user, post)
       end
     end
 

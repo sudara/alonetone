@@ -23,11 +23,11 @@ module Greenfield
     def player(asset)
       if asset.is_a?(Greenfield::AttachedAsset)
         link_url = Greenfield::Engine.routes.url_helpers.
-                     user_post_attached_asset_path(asset.post.asset.user, asset.post.asset.permalink, 
+                     user_post_attached_asset_path(asset.user, asset.alonetone_asset, 
                                                    asset, :format => :mp3)
       else
         link_url = Rails.application.routes.url_helpers.
-                     user_track_path(asset.user.login, asset.permalink, :format => :mp3)
+                     user_track_path(asset.user, asset, :format => :mp3)
       end
 
       waveform = asset.waveform.join(', ')
