@@ -145,6 +145,13 @@ footer {
   }
 }
 
+.edit_post, .new_post {
+  textarea {
+    width: 100%;
+    min-height: 400px;
+  }
+}
+
 .alrightsansblack {
   font-family: "Alright Sans Black";
   font-style: normal;
