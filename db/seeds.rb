@@ -11,9 +11,7 @@ musician = User.create(:login => 'musician', :email =>'music@music.com', :passwo
 musician.update_attribute(:settings, :greenfield_enabled => true)
 
 mp3 = fixture_file_upload(File.join('spec/fixtures/assets','muppets.mp3'),'audio/mpeg')
-asset = musician.assets.build(:mp3 => mp3, :title => 'muppets!', :description => '*muppets* poking fun')
-asset.extract_waveform(mp3.path)
-asset.save
+asset = musician.assets.create(:mp3 => mp3, :title => 'muppets!', :description => '*muppets* poking fun', :waveform => Greenfield::Waveform.extract(mp3.path))
 
 asset.listens.create(
   :listener     => moderator, 
