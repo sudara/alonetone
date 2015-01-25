@@ -5,7 +5,7 @@ module Greenfield
     before_filter :extract_attached_asset_waveforms, :only => [:create, :update]
 
     def show
-      @post = find_asset.greenfield_post
+      @post = find_post
       @page_title = "#{@post.user.display_name} - #{@post.title}"
     end
 
@@ -15,7 +15,7 @@ module Greenfield
     end
 
     def edit
-      @post = find_asset.greenfield_post
+      @post = find_post
     end
 
     def create
@@ -29,7 +29,7 @@ module Greenfield
     end
 
     def update
-      @post = find_asset.greenfield_post
+      @post = find_post
       if @post.update_attributes(params[:post])
         redirect_to user_post_path(@post.user, @post)
       else
@@ -56,6 +56,10 @@ module Greenfield
       params[:post][:attached_assets_attributes].each_with_index do |attrs, i|
         attrs[1][:waveform] = Greenfield::Waveform.extract(attrs[1][:mp3].path)
       end if params[:post][:attached_assets_attributes]
+    end
+
+    def find_post
+      find_asset.greenfield_post or raise ActiveRecord::RecordNotFound
     end
 
     def find_asset
