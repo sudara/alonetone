@@ -54,6 +54,7 @@ module Greenfield
 
     def extract_attached_asset_waveforms
       params[:post][:attached_assets_attributes].each_with_index do |attrs, i|
+        next unless attrs[1][:mp3].present?
         attrs[1][:waveform] = Greenfield::Waveform.extract(attrs[1][:mp3].path)
       end if params[:post][:attached_assets_attributes]
     end
