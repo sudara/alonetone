@@ -1,6 +1,8 @@
 module Greenfield
   class AttachedAsset < ActiveRecord::Base
     belongs_to :post
+    has_one :user, :through => :post
+    has_one :alonetone_asset, :through => :post, :source => :asset
 
     # TODO: Need to validate attachment embeds...
 
@@ -18,35 +20,18 @@ module Greenfield
     attr_accessible :mp3
 
     serialize :waveform, Array
+    attr_accessible :waveform
 
-    def extract_waveform(file)
-      tmp = Tempfile.new(['resampled-upload', '.wav'])
 
-      # resample the mp3 down to 8KHz to make it more manageable
-      command = Paperclip.run(['lame', '--mp3input', '--resample', '8',
-                               '--decode', Shellwords.shellescape(file),
-                               Shellwords.shellescape(tmp.path)])
+    validates_attachment_size :mp3, :less_than => 60.megabytes
+    validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'
+    validates_attachment_content_type :mp3, :content_type => ['audio/mpeg', 'audio/mp3'], :message => " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
 
-      # read in the data and make it mono
-      waveform = []
-      input = RubyAudio::Sound.open(tmp.path)
-      begin
-        until (signal = input.read(:int, 300).to_a).size.zero?
-          signal.map!{ |s| Array(s).sum.to_f / s.size }
-          waveform.concat(signal)
-        end
-      ensure
-        input.close
-        tmp.close!
-      end
-
-      # lame can only downsample to 8KHz, but that's still
-      # way too high so we do a second resampling here
-      waveform = waveform.each_slice(1000).map{ |slice| slice.sum.to_f / slice.size }
-
-      self.waveform = waveform
+    def length
+      Asset.formatted_time(self[:length])
     end
 
+    # This stuff is stubbed for compatibility with Mp3PaperclipProcessor
     attr_accessor :title
     def generate_permalink!; end
   end

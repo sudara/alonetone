@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124003518) do
+ActiveRecord::Schema.define(version: 20150125023146) do
 
   create_table "assets", force: true do |t|
     t.string   "mp3_content_type"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20150124003518) do
     t.text     "waveform"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "length"
   end
 
   create_table "greenfield_posts", force: true do |t|

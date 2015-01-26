@@ -58,6 +58,7 @@ $(function() {
     var scrubber = $(this);
     var player = $(this).parents('.player');
     var seekbar = player.find('.seekbar');
+    var index = player.find('.time .index');
     var url = player.find('.play-control a').attr('href');
     var soundID = url.split('/').pop().split('.')[0];
 
@@ -75,6 +76,10 @@ $(function() {
       setInterval(function() {
         soundPosition = sound.position / sound.durationEstimate;
         waveform.update({ data: data });
+
+        var time = Math.floor(sound.position / 1000.0);
+        var min = Math.floor(time / 60), sec = time % 60;
+        index.text(min + ':' + (sec >= 10 ? sec : '0'+sec));
       }, 50);
 
 
