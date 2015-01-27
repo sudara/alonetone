@@ -138,10 +138,14 @@ footer {
 .post_content{
   padding-top: 1em;
   padding-bottom: 3em;
+  -webkit-font-smoothing: antialiased;
+  word-break: break-word;
+  word-wrap: break-word;
+  text-rendering: optimizelegibility;
+  color: $not-quite-black;  
   p{
-    -webkit-font-smoothing: antialiased;
     margin-bottom: 1em;
-    color: $not-quite-black;
+    width: 700px;
   }
 }
 
