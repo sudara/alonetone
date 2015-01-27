@@ -2,6 +2,7 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     before_filter :create_and_edit_unless_post_exists, :only => :show
     before_filter :extract_attached_asset_waveforms, :only => :update
+    before_filter :authorize, :only => [:edit, :update]
 
     def show
       @post = find_post
@@ -44,7 +45,13 @@ module Greenfield
 
     def find_asset
       id = params[:asset_permalink] || params[:id]
-      @find_asset ||= current_user.assets.find_by!(:permalink => id)
+      @find_asset ||= Asset.find_by!(:permalink => id)
+    end
+
+    def authorize
+      if find_post.user != current_user
+        raise ActiveRecord::RecordNotFound
+      end
     end
   end
 end
