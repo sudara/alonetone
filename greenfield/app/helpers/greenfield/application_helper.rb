@@ -54,5 +54,19 @@ module Greenfield
         ].join.html_safe
       end
     end
+
+    def mp3_upload(field_name, url, init=[])
+      file_field = file_field_tag(field_name, :'data-url' => url,
+                                  :class => 'mp3_upload', :multiple => true)
+
+      init = init.map(&:mp3).map do |mp3|
+        name = content_tag(:div, mp3.original_filename, :class => 'name')
+        size = content_tag(:div, number_to_human_size(mp3.size), :class => 'status')
+        content_tag(:div, name+size, :class => 'file')
+      end.join.html_safe
+      results = content_tag(:div, init, :class => 'upload-results')
+
+      content_tag(:div, results + file_field)
+    end
   end
 end

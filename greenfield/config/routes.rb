@@ -1,7 +1,7 @@
 Greenfield::Engine.routes.draw do
-  resources :users, :path => '/' do
-    resources :posts, :path => '/', :only => [:new, :show, :edit, :create, :update] do
-      resources :attached_assets, :only => :show
+  scope :path => ':user_id', :as => 'user' do
+    resources :posts, :path => '/', :only => [:show, :edit, :update] do
+      resources :attached_assets, :only => [:show, :create]
     end
   end
 end
