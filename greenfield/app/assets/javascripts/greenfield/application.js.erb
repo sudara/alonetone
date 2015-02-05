@@ -31,12 +31,19 @@ $(function() {
 
       done: function(e, data) {
         data.context.find('.status').html(data.result.status);
+        data.context.removeClass('complete');
         if (!data.result.success)
           data.context.addClass('errors');
       },
 
-      progressall: function(e, data) {
+      progress: function(e, data) {
         var pct = parseInt(data.loaded / data.total * 100, 10);
+        if (pct == 100) {
+          data.context && data.context.addClass('complete');
+          data.context && data.context.find('.status').text('Complete');
+        } else {
+          data.context && data.context.find('.status').text(pct+'%');
+        }
       }
     });
   });

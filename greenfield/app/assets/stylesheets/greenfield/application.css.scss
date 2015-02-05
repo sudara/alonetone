@@ -182,6 +182,11 @@ footer {
     display: table-row;
     width: auto;
     clear: both;
+
+    &.complete {
+      background-color: #e0f0ff;
+    }
+
     &.errors {
       background-color: #ffcc80;
     }
