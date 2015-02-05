@@ -45,6 +45,7 @@ gem "geokit"
 
 # greenfield
 gem 'font-awesome-sass'
+gem 'jquery-fileupload-rails'
 
 gem "jquery-rails"
 gem "jquery-ui-rails"

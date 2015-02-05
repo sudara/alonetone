@@ -133,6 +133,10 @@ GEM
     has_permalink (0.1.6)
     hike (1.2.3)
     i18n (0.6.9)
+    jquery-fileupload-rails (0.4.4)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sass (>= 3.2)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -294,6 +298,7 @@ DEPENDENCIES
   guard-spring
   guard_listen!
   has_permalink
+  jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
   local_time

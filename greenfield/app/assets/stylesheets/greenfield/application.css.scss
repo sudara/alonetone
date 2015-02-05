@@ -174,3 +174,22 @@ footer {
   font-style: normal;
   font-weight: normal;
 }
+
+.upload-results {
+  display: table;
+
+  .file {
+    display: table-row;
+    width: auto;
+    clear: both;
+    &.errors {
+      background-color: #ffcc80;
+    }
+
+    .name, .status {
+      float: left;
+      display: table-column;
+      width: 200px;
+    }
+  }
+}

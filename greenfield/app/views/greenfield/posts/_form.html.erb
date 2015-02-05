@@ -19,11 +19,8 @@
     <%= f.text_area :body %>
   </div>
 
-  <div>
-    <%= f.fields_for(:attached_assets) do |f| %>
-      <%= f.file_field :mp3 %>
-    <% end %>
-  </div>
+  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
+  <%= mp3_upload('attached_asset[mp3]', asset_path, @post.attached_assets) %>
 
   <div>
     <%= f.submit %>

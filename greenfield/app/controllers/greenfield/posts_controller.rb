@@ -1,7 +1,6 @@
 module Greenfield
   class PostsController < Greenfield::ApplicationController
     before_filter :create_and_edit_unless_post_exists, :only => :show
-    before_filter :extract_attached_asset_waveforms, :only => :update
     before_filter :authorize, :only => [:edit, :update]
 
     def show
@@ -31,12 +30,6 @@ module Greenfield
         post.save!(:validate => false)
         redirect_to edit_user_post_path(post.user, post)
       end
-    end
-    def extract_attached_asset_waveforms
-      params[:post][:attached_assets_attributes].each_with_index do |attrs, i|
-        next unless attrs[1][:mp3].present?
-        attrs[1][:waveform] = Greenfield::Waveform.extract(attrs[1][:mp3].path)
-      end if params[:post][:attached_assets_attributes]
     end
 
     def find_post
