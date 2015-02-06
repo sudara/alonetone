@@ -1,0 +1,30 @@
+$line-height: 14px;
+$black: black;
+$not-quite-black: #353535; 
+$not-quite-white: #fdfbf8;
+$light-gray: #cccbca;
+$lightest-gray: #c7c6c3;
+$waveform-playing: #302f2f;
+$bright-highlight: yellow;
+
+$alrightblack: normal normal "Alright Sans Black";
+$alrightregular: normal normal "Alright Sans";
+
+// for some reason I'm too stupid to use scss for font-family
+
+.alrightsansblack {
+  font-family: "Alright Sans Black";
+  font-style: normal;
+  font-weight: normal;
+}
+
+.alrightsansregular {
+  font-family: "Alright Sans";
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+// I want to be precise about spacing at regular intervals related to body text size
+// This is the "em" across the scss except where font-size is definied differently.
+$text: 18px;

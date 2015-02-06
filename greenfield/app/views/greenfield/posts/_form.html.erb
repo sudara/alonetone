@@ -10,19 +10,29 @@
     </div>
   <% end %>
 
-  <div>
-    <%= @post.title %>
-    <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
+  <%= f.fields_for :asset do |ff| %>
+    <header>
+      <h1 class="alrightsansblack"><%= ff.text_field :title, :value => @post.asset.name, :class => 'alrightsansblack' %></h1>
+      <h2 class="alrightsansregular"><%= @post.asset.user.display_name %></h2>
+    </header>
+  <% end %>
+
+  <%= player(@post.asset) %>
+
+  <div class="post_content">
+    <%= f.text_area :body, :placeholder => "Tell your story about this track..." %>
   </div>
-
-  <div>
-    <%= f.text_area :body %>
-  </div>
-
-  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
-  <%= mp3_upload('attached_asset[mp3]', asset_path, @post.attached_assets) %>
-
-  <div>
+  
+  <div class="edit_save">
     <%= f.submit %>
+  </div>
+  
+  <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
+  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
+  <div class="supporting_file_list">
+    <%= mp3_upload('attached_asset[mp3]', asset_path, @post.attached_assets) %>
+  </div>
+  <div class="drag_and_drop_upload">
+      Drop "supporting" mp3 files here
   </div>
 <% end %>

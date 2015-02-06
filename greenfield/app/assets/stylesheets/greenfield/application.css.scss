@@ -1,20 +1,8 @@
 @import "compass/reset";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-
-$line-height: 14px;
-$black: black;
-$not-quite-black: #353535; 
-$not-quite-white: #fdfbf8;
-$light-gray: #cccbca;
-$lightest-gray: #c7c6c3;
-$waveform-playing: #302f2f;
-
-$alrightblack: normal normal "Alright Sans Black";
-$alrightregular: normal normal "Alright Sans";
-
-// I want to be precise about spacing at regular intervals related to body text size
-$text: 18px;
+@import "variables";
+@import "greenfield/edit_post";
 
 html,
 body { height: 100%; }
@@ -35,14 +23,33 @@ body{
   height: 100%;
 }
 
+input{
+  font-size: 18px;
+  font-family: $alrightregular normal normal "Alright Sans";
+  &[type="submit"]{
+    background-color: transparent;
+    border: 1px solid $not-quite-black;
+    cursor: pointer;
+    padding: .5em;
+  }
+}
+
 header {
   margin-top: 4em;
   img {
     height: 83px;
     width: 83px;
   }
-  h1{
+  h1, h1 > input{
     font-size:30px;
+  }
+  h1 > input{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    &:hover{
+      background-color: $bright-highlight;
+    }
   }
   h2{
     font-size:24px;
@@ -135,9 +142,12 @@ footer {
   }
 }
 
-.post_content{
-  padding-top: 1em;
-  padding-bottom: 3em;
+.post_content, .post_content textarea{
+  font-size: $text;
+  background-color: $not-quite-white;
+  border: none;
+  margin-top: 1em;
+  margin-bottom: 3em;
   -webkit-font-smoothing: antialiased;
   word-break: break-word;
   word-wrap: break-word;
@@ -146,59 +156,5 @@ footer {
   p{
     margin-bottom: 1em;
     width: 700px;
-  }
-}
-
-.edit_post, .new_post {
-  .errors {
-    padding: 10px;
-    background-color: #faa;
-    border: 1px solid #000;
-
-    ul {
-      padding-left: 20px;
-      list-style-type: circle;
-    }
-  }
-
-  textarea {
-    width: 100%;
-    min-height: 400px;
-  }
-}
-
-.alrightsansblack {
-  font-family: "Alright Sans Black";
-  font-style: normal;
-  font-weight: normal;
-}
-
-.alrightsansregular {
-  font-family: "Alright Sans";
-  font-style: normal;
-  font-weight: normal;
-}
-
-.upload-results {
-  display: table;
-
-  .file {
-    display: table-row;
-    width: auto;
-    clear: both;
-
-    &.complete {
-      background-color: #e0f0ff;
-    }
-
-    &.errors {
-      background-color: #ffcc80;
-    }
-
-    .name, .status {
-      float: left;
-      display: table-column;
-      width: 200px;
-    }
   }
 }

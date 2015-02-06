@@ -1,0 +1,82 @@
+
+form .post_content{
+  min-height: 100px;
+  margin-bottom: 0; // less space since we have more UI below
+  textarea{
+    min-height:100px;
+    margin-bottom: 0;
+    resize:vertical;
+  }
+}
+
+.post_content {
+  textarea:hover{
+    background-color: $bright-highlight;
+  }
+  textarea:focus{
+    background-color: $not-quite-white;
+  }
+}
+
+
+
+// edit post
+
+.edit_post, .new_post {
+  .errors {
+    padding: 10px;
+    background-color: #faa;
+    border: 1px solid #000;
+
+    ul {
+      padding-left: 20px;
+      list-style-type: circle;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 400px;
+  }
+}
+
+.edit_save{
+  float: right;
+  display: inline-block;
+}
+
+.upload-results {
+  display: table;
+
+  .file {
+    display: table-row;
+    width: auto;
+    clear: both;
+
+    &.complete {
+      background-color: #e0f0ff;
+    }
+
+    &.errors {
+      background-color: #ffcc80;
+    }
+
+    .name, .status {
+      float: left;
+      display: table-column;
+      width: 200px;
+    }
+  }
+}
+
+.drag_and_drop_upload{
+  &:hover{
+    background-color: $bright-highlight;
+  }
+  width: 100%;
+  margin: auto;
+  margin-bottom: 3em;
+  text-align: center;
+  padding: 2em 0em;
+  border: 3px dashed $not-quite-black;
+}

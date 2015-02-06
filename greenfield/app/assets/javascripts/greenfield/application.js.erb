@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery-fileupload/basic
 //= require soundmanager2
+//= require greenfield/resize_textarea
 
 var soundIsReady = true;
 
@@ -136,4 +137,11 @@ $(function() {
       }).mouseout(function() { hoverPosition = -1 });
     });
   });
+});
+
+
+// resizable textarea
+// Example:
+$(document).ready(function(){
+    $('.post_content textarea').autosize();    
 });
