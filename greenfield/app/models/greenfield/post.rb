@@ -3,6 +3,9 @@ module Greenfield
     attr_accessible :body
 
     belongs_to :asset # alonetone asset
+    accepts_nested_attributes_for :asset
+    attr_accessible :asset_attributes
+
     has_one :user, :through => :asset
     delegate :to_param, :title, :to => :asset
     
