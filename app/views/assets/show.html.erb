@@ -7,8 +7,10 @@
             edit <div class="sprites-pencil sprites-before-heading"></div>
           <% end %>
 
-          <%= link_to greenfield.user_post_url(@asset.user, @asset.permalink), :class => 'view_all', :title => 'edit this track' do %>
-            greenfield <div class="sprites-pencil sprites-before-heading"></div>
+          <% if @asset.user.greenfield_enabled? %>
+            <%= link_to greenfield.user_post_url(@asset.user, @asset.permalink), :class => 'view_all', :title => 'edit this track' do %>
+              greenfield <div class="sprites-pencil sprites-before-heading"></div>
+            <% end %>
           <% end %>
 
           <%= link_to user_track_path(@asset.user, @asset), :method => 'delete', :class => 'view_all ',
