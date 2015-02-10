@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PostsController, 'basics' do
+RSpec.describe PostsController, 'basics', :type => :controller do
   fixtures :forums, :topics, :posts, :users
   spec_tagging
   
@@ -15,13 +15,13 @@ describe PostsController, 'basics' do
 
   it "should not allow a post from a guest user" do 
     expect {create_post}.not_to change{ Post.count }
-    response.should be_redirect
+    expect(response).to be_redirect
   end
   
   it "should allow a post from a logged in user" do 
     login(:arthur)
     expect{ create_post }.to change{ Post.count }.by(1)
-    response.should be_redirect
+    expect(response).to be_redirect
   end
 
   

@@ -51,9 +51,9 @@ RSpec.configure do |config|
     def login(user)
       login_as = user.is_a?(User) ? user : users(user) # grab the fixture
       activate_authlogic # make authlogic happy
-      (session = UserSession.create(login_as)).should be_true # make sure we logged in
-      controller.stub(:current_user_session).and_return(session)
-      controller.stub(:current_user).and_return(login_as) # make authlogic happy
+      expect(session = UserSession.create(login_as)).to be_truthy # make sure we logged in
+      allow(controller).to receive(:current_user_session).and_return(session)
+      allow(controller).to receive(:current_user).and_return(login_as) # make authlogic happy
     end
 
     def logout
@@ -65,6 +65,15 @@ RSpec.configure do |config|
   def pay!(subscription_type_id, item=nil)
     post "paypal/post_payment", tx: "68E56277NB6235547", st: "Completed", amt: "29.00", cc: "USD", cm: subscription_type_id, item_number: item
   end
+
+  # Setting this config option `false` removes rspec-core's monkey patching of the
+  # top level methods like `describe`, `shared_examples_for` and `shared_context`
+  # on `main` and `Module`. The methods are always available through the `RSpec`
+  # module like `RSpec.describe` regardless of this setting.
+  # For backwards compatibility this defaults to `true`.
+  #
+  # https://relishapp.com/rspec/rspec-core/v/3-0/docs/configuration/global-namespace-dsl
+  config.expose_dsl_globally = false
 end
 
 FactoryGirl.reload

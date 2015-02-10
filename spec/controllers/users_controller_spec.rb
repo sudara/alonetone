@@ -1,18 +1,18 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe UsersController do
+RSpec.describe UsersController, :type => :controller do
   
   fixtures :users
   
   context 'creating' do   
     it "should successfully post to users/create" do
       create_user
-      response.should redirect_to("/login?already_joined=true")
+      expect(response).to redirect_to("/login?already_joined=true")
     end
     
     it "should send user activation email after signup" do
       create_user
-      last_email.to.should == ["quire@example.com"]
+      expect(last_email.to).to eq(["quire@example.com"])
     end
 
     it "should have actually created the user" do
@@ -27,25 +27,25 @@ describe UsersController do
     it "should require login on signup" do
       create_user :login => nil 
       expect(response).to_not be_redirect
-      expect(assigns(:user)).to have_at_least(1).errors_on(:login)
+      expect(assigns(:user).errors_on(:login).size).to be >= 1
     end
 
     it "should require password on signup" do
       create_user :password => nil 
       expect(response).to_not be_redirect
-      expect(assigns(:user)).to have_at_least(1).errors_on(:password)
+      expect(assigns(:user).errors_on(:password).size).to be >= 1
     end
 
     it "should require password confirmation on signup" do
       create_user :password_confirmation => nil 
-      response.should be_success
-      expect(assigns(:user)).to have_at_least(1).errors_on(:password_confirmation)
+      expect(response).to be_success
+      expect(assigns(:user).errors_on(:password_confirmation).size).to be >= 1
     end
 
     it "should require email on signup" do
       create_user :email => nil 
-      response.should be_success
-      expect(assigns(:user)).to have_at_least(1).errors_on(:email)
+      expect(response).to be_success
+      expect(assigns(:user).errors_on(:email).size).to be >= 1
     end
   end
   
@@ -55,27 +55,27 @@ describe UsersController do
       activate_authlogic && create_user
       get :activate, :perishable_token => User.last.perishable_token
       expect(flash[:ok]).to be_present
-      response.should redirect_to(new_user_track_path(User.last.login))
+      expect(response).to redirect_to(new_user_track_path(User.last.login))
     end
     
     it 'should log in user on activation' do 
       activate_authlogic && create_user      
       #expect(UserSession).to receive(:create)
       get :activate, :perishable_token => User.last.perishable_token
-      controller.session["user_credentials"].should == User.last.persistence_token
+      expect(controller.session["user_credentials"]).to eq(User.last.persistence_token)
     end
     
     it 'should send out email on activation' do 
       activate_authlogic && create_user
       get :activate, :perishable_token => User.last.perishable_token
-      last_email.to.should == ["quire@example.com"]
+      expect(last_email.to).to eq(["quire@example.com"])
     end
     
     it "should not activate with bullshit perishable token" do
       activate_authlogic
       get :activate, :perishable_token => "abunchofbullshit"
       expect(flash[:error]).to be_present
-      response.should redirect_to(new_user_path)
+      expect(response).to redirect_to(new_user_path)
     end
   
     it 'should NOT activate an account if you are already logged in' do
@@ -83,7 +83,7 @@ describe UsersController do
       create_user
       get :activate, :perishable_token => User.last.perishable_token
       expect(flash[:error]).to be_present
-      response.should redirect_to("http://test.host/arthur/tracks/new")
+      expect(response).to redirect_to("http://test.host/arthur/tracks/new")
     end
     
     it 'should NOT activate if you are on a shitty ass IP' do
@@ -100,70 +100,70 @@ describe UsersController do
     [:sudara, :arthur].each do |user|
       it "should let a user or admin edit" do
         login(user)
-        controller.stub(:current_user).and_return(users(user))
+        allow(controller).to receive(:current_user).and_return(users(user))
         post :edit, :id => 'arthur'
-        response.should be_success
+        expect(response).to be_success
       end
   
       it "should let a user or admin update" do
         login(user)
-        controller.stub(:current_user).and_return(users(user))
+        allow(controller).to receive(:current_user).and_return(users(user))
         put :update, :id => 'arthur', :user => {:bio => 'a little more about me'}
-        response.should redirect_to(edit_user_path(users(:arthur)))
+        expect(response).to redirect_to(edit_user_path(users(:arthur)))
       end
     end
     
     it "should let a user upload a new photo" do 
       login(:arthur)
       post :attach_pic, :id => users(:arthur).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
-      flash[:ok].should be_present
-      response.should redirect_to(edit_user_path(users(:arthur)))
+      expect(flash[:ok]).to be_present
+      expect(response).to redirect_to(edit_user_path(users(:arthur)))
     end
     
     it "should not let a user upload a new photo for another user" do 
       login(:arthur)
       post :attach_pic, :id => users(:sudara).login, :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
-      response.should redirect_to('/login')
+      expect(response).to redirect_to('/login')
     end
     
     it "should let a user change their login" do 
       login(:arthur)
       put :update, :id => 'arthur', :user => {:login => 'arthursaurus'}
-      flash[:error].should_not be_present
-      response.should be_redirect
-      User.where(:login => 'arthursaurus').count.should == 1
+      expect(flash[:error]).not_to be_present
+      expect(response).to be_redirect
+      expect(User.where(:login => 'arthursaurus').count).to eq(1)
     end
     
     it 'should not let a user change login to login that exists' do 
       login(:arthur)
       put :update, :id => 'arthur', :user => {:login => 'sudara'}
-      flash[:error].should be_present
-      User.where(:login => 'sudara').count.should == 1
+      expect(flash[:error]).to be_present
+      expect(User.where(:login => 'sudara').count).to eq(1)
     end
   
     it "should not let any old user edit" do
       login(:arthur)
-      controller.stub(:current_user).and_return(users(:arthur))
+      allow(controller).to receive(:current_user).and_return(users(:arthur))
       post :edit, :id => 'sudara'
-      response.should_not be_success
+      expect(response).not_to be_success
     end
   
     it "should not let any old user update" do
       login(:arthur)
-      controller.stub(:current_user).and_return(users(:arthur))
+      allow(controller).to receive(:current_user).and_return(users(:arthur))
       put :update,  :id => 'sudara', :user => { :bio => 'a little more about me' }
-      response.should_not be_success
+      expect(response).not_to be_success
     end
   
     it "should not let a logged out user edit" do
       logout
       post :edit, :user_id => 'arthur'
-      response.should_not be_success
+      expect(response).not_to be_success
     end
   
     it 'should deliver an rss feed for any user, to anyone' do
       get :show, :id => 'sudara', :format => 'rss'
-      response.should be_success
+      expect(response).to be_success
     end
   end
   
@@ -172,22 +172,22 @@ describe UsersController do
     
     it 'should not let a guest favorite a track' do 
       expect { subject }.to change{ Track.count }.by(0) 
-      response.should_not be_success
+      expect(response).not_to be_success
     end
     
     it 'should let a user favorite a track' do 
       login(:arthur)    
       expect { subject }.to change{ Track.count }.by(1) 
-      users(:arthur).tracks.favorites.collect(&:asset).should include(Asset.find(100))
-      response.should be_success
+      expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(Asset.find(100))
+      expect(response).to be_success
     end
     
     it 'should let a user unfavorite a track' do 
       login(:arthur)
       expect { subject }.to change{ Track.count }.by(1) 
       get :toggle_favorite, :asset_id => 100  # toggle again
-      users(:arthur).tracks.favorites.collect(&:asset).should_not include(Asset.find(100))
-      response.should be_success
+      expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(Asset.find(100))
+      expect(response).to be_success
     end
   end
   
@@ -196,17 +196,17 @@ describe UsersController do
       controller.session[:return_to] = '/users'
       login(:arthur)
       get :sudo, :id => 'sudara'
-      flash[:ok].should_not be_present
-      response.should redirect_to '/'
+      expect(flash[:ok]).not_to be_present
+      expect(response).to redirect_to '/'
     end
   
     it "should let an admin user sudo" do
       login(:sudara)
       controller.session[:return_to] = '/users'
       get :sudo, :id => 'arthur'
-      flash[:ok].should be_present
-      controller.session["user_credentials"].should == users(:arthur).persistence_token 
-      response.should redirect_to '/users'
+      expect(flash[:ok]).to be_present
+      expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token) 
+      expect(response).to redirect_to '/users'
     end
     
     it "should let an sudo'd user return to their admin account" do
@@ -214,16 +214,16 @@ describe UsersController do
       controller.session[:return_to] = '/users'
       controller.session[:sudo] = 1
       get :sudo, :id => 'arthur'
-      flash[:ok].should be_present
-      controller.session["user_credentials"].should == users(:sudara).persistence_token 
-      response.should redirect_to '/users'
+      expect(flash[:ok]).to be_present
+      expect(controller.session["user_credentials"]).to eq(users(:sudara).persistence_token) 
+      expect(response).to redirect_to '/users'
     end
     
     it "should not update IP or last_request_at" do
       request.env['REMOTE_ADDR'] = '10.1.1.1'
       login(:sudara)
       get :sudo, :id => 'arthur'
-      controller.session["user_credentials"].should == users(:arthur).persistence_token 
+      expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token) 
       expect(users(:arthur).current_login_ip).not_to eq('10.1.1.1')
       expect(users(:arthur).last_request_at.to_s).to eq(1.day.ago.to_s) # shouldn't have changed from yml
     end

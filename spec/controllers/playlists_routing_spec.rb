@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PlaylistsController, 'routes', :type => :routing do
+RSpec.describe PlaylistsController, 'routes', :type => :routing do
   
   it 'should generate and recognize friendly routes for playlists(based on permalinks)' do
     #route_for(:controller => 'playlists', :action => 'show', :id => 'owp', :user_id => 'sudara').should == '/sudara/playlists/owp'
