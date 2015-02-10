@@ -1,6 +1,6 @@
 module Greenfield
   class PostsController < Greenfield::ApplicationController
-    before_filter :create_and_edit_unless_post_exists, :only => :show
+    before_filter :create_and_edit_unless_post_exists, :only => [:show, :edit]
     before_filter :authorize, :only => [:edit, :update]
 
     def show
