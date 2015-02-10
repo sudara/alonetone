@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125023146) do
+ActiveRecord::Schema.define(version: 20150210192918) do
 
   create_table "assets", force: true do |t|
     t.string   "mp3_content_type"
@@ -380,6 +380,7 @@ ActiveRecord::Schema.define(version: 20150125023146) do
     t.string   "perishable_token"
     t.datetime "last_request_at"
     t.integer  "bandwidth_used"
+    t.boolean  "greenfield_enabled",              default: false
   end
 
 end
