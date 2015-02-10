@@ -1,5 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "rails_helper"
 
-RSpec.describe UpdatesController, :type => :controller do
+RSpec.describe UpdatesController, type: :controller do
 
 end

@@ -1,8 +1,8 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "rails_helper"
 
-RSpec.describe Update, :type => :model do
+RSpec.describe Update, type: :model do
   fixtures :updates
-  
+
   before(:each) do
     #@update = Update.new
   end
