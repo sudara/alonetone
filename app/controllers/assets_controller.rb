@@ -246,7 +246,11 @@ class AssetsController < ApplicationController
     @assets = []
     params[:asset_data].each do |file|
       unless file.is_a?(String)
-        @assets << asset = current_user.assets.create(:mp3 => file)
+        @assets << asset = current_user.assets.build(:mp3 => file)
+        if current_user.greenfield_enabled?
+          asset.waveform = Greenfield::Waveform.extract(file.path)
+        end
+        asset.save
       end
     end
   end
