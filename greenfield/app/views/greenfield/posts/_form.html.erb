@@ -20,7 +20,7 @@
   <%= player(@post.asset) %>
 
   <div class="post_content">
-    <%= f.text_area :body, :placeholder => "Tell your story about this track..." %>
+    <%= f.text_area :body, :placeholder => "Tell us a story..." %>
   </div>
   
   <div class="edit_save">
@@ -28,11 +28,11 @@
   </div>
   
   <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
-  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
-  <div class="supporting_file_list">
-    <%= mp3_upload('attached_asset[mp3]', asset_path, @post.attached_assets) %>
-  </div>
   <div class="drag_and_drop_upload">
       Drop "supporting" mp3 files here
   </div>
+  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
+  <ul class="supporting_file_list fa-ul">
+    <%= mp3_upload('attached_asset[mp3]', asset_path, @post.attached_assets) %>
+  </ul>
 <% end %>

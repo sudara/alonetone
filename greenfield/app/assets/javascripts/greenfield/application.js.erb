@@ -18,11 +18,11 @@ $(function() {
     var results = container.find('.upload-results');
     field.fileupload({
       dataType: 'json',
-
+      //acceptFileTypes: /(\.|\/)(mp3)$/i,
       add: function(e, data) {
-        var result = $('<div class="file">');
-        result.append($('<span class="name">').text(data.files[0].name));
-        result.append($('<span class="status">'));
+        var result = $('<ul class="file fa-li">');
+        result.append($('<li class="name">').text(data.files[0].name));
+        result.append($('<li class="status">'));
         results.append(result);
 
         data.formData = null;
