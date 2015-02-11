@@ -3,6 +3,7 @@ module Greenfield
     def block_code(code, language)
       if language == 'embed'
         asset = Greenfield::AttachedAsset.find(code.to_i)
+        Greenfield::ApplicationController.helpers.view_paths = ['greenfield/app/views']
         Greenfield::ApplicationController.helpers.player(asset)
       else
         %(<pre><code class="#{language}">#{CGI.escapeHTML(code)}</code></pre>)
