@@ -4,9 +4,13 @@ module Greenfield
       tmp = Tempfile.new(['resampled-upload', '.wav'])
 
       # resample the mp3 down to 8KHz to make it more manageable
-      command = Paperclip.run(['lame', '--mp3input', '--resample', '8',
-                               '--decode', Shellwords.shellescape(file),
-                               Shellwords.shellescape(tmp.path)])
+      begin
+        command = Paperclip.run(['lame', '--mp3input', '--resample', '8',
+                                 '--decode', Shellwords.shellescape(file),
+                                 Shellwords.shellescape(tmp.path)])
+      rescue Cocaine::ExitStatusError
+        return nil
+      end
 
       # read in the data and make it mono
       waveform = []
