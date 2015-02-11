@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210192918) do
+ActiveRecord::Schema.define(version: 20150211224140) do
 
   create_table "assets", force: true do |t|
     t.string   "mp3_content_type"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150210192918) do
     t.integer  "site_id"
     t.datetime "created_at"
     t.string   "title"
-    t.integer  "thumbnails_count",            default: 0
+    t.integer  "thumbnails_count",                  default: 0
     t.integer  "user_id"
     t.integer  "length"
     t.string   "album"
@@ -30,19 +30,19 @@ ActiveRecord::Schema.define(version: 20150210192918) do
     t.integer  "bitrate"
     t.string   "genre"
     t.string   "artist"
-    t.integer  "listens_count",               default: 0
+    t.integer  "listens_count",                     default: 0
     t.text     "description"
     t.text     "credits"
     t.string   "youtube_embed"
     t.boolean  "private"
     t.float    "hotness",          limit: 24
-    t.integer  "favorites_count",             default: 0
+    t.integer  "favorites_count",                   default: 0
     t.text     "lyrics"
     t.text     "description_html"
     t.float    "listens_per_week", limit: 24
-    t.integer  "comments_count",              default: 0
+    t.integer  "comments_count",                    default: 0
     t.datetime "updated_at"
-    t.text     "waveform"
+    t.text     "waveform",         limit: 16777215
   end
 
   add_index "assets", ["hotness"], name: "index_assets_on_hotness", using: :btree
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20150210192918) do
     t.string   "mp3_content_type"
     t.integer  "mp3_file_size"
     t.datetime "mp3_updated_at"
-    t.text     "waveform"
+    t.text     "waveform",         limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "length"
