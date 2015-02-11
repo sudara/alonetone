@@ -380,7 +380,6 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string   "perishable_token"
     t.datetime "last_request_at"
     t.integer  "bandwidth_used"
-    t.boolean  "greenfield_enabeled",             default: false
     t.boolean  "greenfield_enabled",              default: false
   end
 
