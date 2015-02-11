@@ -48,32 +48,33 @@ form .post_content{
 }
 
 .upload-results {
-  min-height:0em;
-  display: table;
+}
 
-  .file {
-    display: table-row;
-    width: auto;
-    clear: both;
+.file {
+  width:100%;
+  text-align: left;
+  &.complete {
+    background-color: #e0f0ff;
+  }
 
-    &.complete {
-      background-color: #e0f0ff;
-    }
+  &.errors {
+    background-color: #ffcc80;
+  }
 
-    &.errors {
-      background-color: #ffcc80;
-    }
-
-    .name, .status {
-      float: left;
-      display: table-column;
-    }
-    .status{
-      display: block;
-      font-size: 12px;
-    }
+  .name, .status {
+    font-size: 14px;
+    display: inline-block;
+  }
+  .name{
+    text-indent: 8px;
+  }
+  .status{
+    text-indent: 4px;
+    font-size: 12px;
+    color: $light-gray;
   }
 }
+
 
 .drag_and_drop_upload{
   clear:both;
@@ -84,4 +85,10 @@ form .post_content{
   text-align: center;
   padding: 2em 0em;
   border: 3px dashed $not-quite-black;
+}
+.supporting_file_list{
+  width: 100%; 
+}
+.mp3_upload{
+  margin-bottom: 4em;
 }

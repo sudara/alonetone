@@ -33,6 +33,7 @@
   </div>
   <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
   <ul class="supporting_file_list fa-ul">
-    <%= mp3_upload('attached_asset[mp3]', asset_path, @post.attached_assets) %>
+    <%= list_attached_mp3_assets(@post.attached_assets) %>
   </ul>
+  <%= file_field_tag('attached_asset[mp3]', :'data-url' => asset_path, :class => 'mp3_upload', :multiple => true) %>
 <% end %>
