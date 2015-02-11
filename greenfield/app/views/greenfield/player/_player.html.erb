@@ -1,0 +1,17 @@
+<div class="player">
+  <i class="fa fa-play fa-3x play-button play-control">
+    <%= link_to '', media_url(asset) %>
+  </i>
+
+  <div class="waveform" data-waveform="<%= asset.waveform.join(', ') %>">
+    <div class="seekbar"></div>
+  </div>
+
+  <div class="time">
+    <span class="index">0:00</span> of <%= asset.length %>
+  </div>
+
+  <div class="download-button">
+    <%= link_to '', media_url(asset) %>
+  </div>
+</div>

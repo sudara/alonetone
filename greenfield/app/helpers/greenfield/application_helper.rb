@@ -21,37 +21,17 @@ module Greenfield
     end
 
     def player(asset)
+      render 'greenfield/player/player', {:asset => asset}
+    end
+
+    def media_url(asset)
       if asset.is_a?(Greenfield::AttachedAsset)
-        link_url = Greenfield::Engine.routes.url_helpers.
-                     user_post_attached_asset_path(asset.user, asset.alonetone_asset, 
-                                                   asset, :format => :mp3)
+        Greenfield::Engine.routes.url_helpers.
+          user_post_attached_asset_path(asset.user, asset.alonetone_asset,
+                                        asset, :format => :mp3)
       else
-        link_url = Rails.application.routes.url_helpers.
-                     user_track_path(asset.user, asset, :format => :mp3)
-      end
-
-      waveform = asset.waveform.join(', ')
-
-      content_tag(:div, :class => 'player') do
-        [
-          content_tag(:i, :class => "fa fa-play fa-3x play-button play-control") do
-            link_to '', link_url
-          end,
-
-          content_tag(:div, :class => 'waveform', :'data-waveform' => waveform) do
-            content_tag(:div, :class => 'seekbar'){ }
-          end,
-
-          content_tag(:div, :class => 'time') do
-            current = content_tag(:span, '0:00', :class => 'index')
-            "#{current} of #{asset.length}".html_safe
-          end,
-          
-          content_tag(:div, :class => 'download-button') do
-            link_to '', link_url
-          end
-          
-        ].join.html_safe
+        Rails.application.routes.url_helpers.
+          user_track_path(asset.user, asset, :format => :mp3)
       end
     end
 
