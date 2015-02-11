@@ -4,7 +4,7 @@ class AddGreenfieldEnabledToUsers < ActiveRecord::Migration
 
     User.find_each do |user|
       enabled = !!user.settings.try(:delete, :greenfield_enabled)
-      user.update(:greenfield_enabled, true) if enabled
+      user.update_attribute(:greenfield_enabled, true) if enabled
     end
   end
 end
