@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
 
-  fixtures :users
+  fixtures :users, :assets
 
   context 'creating' do
     it "should successfully post to users/create" do

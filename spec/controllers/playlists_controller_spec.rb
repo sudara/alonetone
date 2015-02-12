@@ -102,6 +102,7 @@ RSpec.describe PlaylistsController, 'permissions', type: :controller do
 end
 
 RSpec.describe PlaylistsController, "sharing and exporting", :type => :controller do
+  fixtures :playlists, :users
 
   it "should deliver us tasty xml for single playlist" do
     request.env["HTTP_ACCEPT"] = "application/xml"

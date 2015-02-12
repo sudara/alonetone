@@ -101,7 +101,7 @@ GEM
       sprockets (<= 2.11.0)
     country_select (1.2.0)
     daemons (1.1.9)
-    database_cleaner (1.0.1)
+    database_cleaner (1.4.0)
     diff-lcs (1.2.5)
     diffy (3.0.5)
     dynamic_form (1.1.4)

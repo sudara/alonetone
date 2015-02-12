@@ -6,8 +6,8 @@ module RSpec
 
       module ClassMethods
         def spec_tagging
-          before(:each) do |spec|
-            log_spec_start(title: spec.example.full_description)
+          before(:each) do |example|
+            log_spec_start(title: example.full_description)
           end
           after(:each) do
             log_spec_end

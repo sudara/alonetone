@@ -2,8 +2,8 @@ require "rails_helper"
 
 include ActionDispatch::TestProcess
 def new_track(file)
-  upload_file = fixture_file_upload(File.join('assets',file),'audio/mpeg')
-  Asset.create({:user_id => 1, :mp3 => upload_file })
+  upload_file = fixture_file_upload(File.join('assets', file), 'audio/mpeg')
+  Asset.create(user_id: 1, mp3: upload_file)
 end
 
 RSpec.describe Asset, type: :model do
@@ -132,6 +132,8 @@ end
 
 
 RSpec.describe Asset, 'on update', type: :model do
+  fixtures :users, :assets
+
   it 'should regenerate a permalink after the title is changed' do
     asset = new_track('muppets.mp3')
     asset.save
