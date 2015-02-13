@@ -24,6 +24,18 @@ $alrightregular: normal normal "Alright Sans";
   font-weight: normal;
 }
 
+.harriettextbold {
+  font-family: "Harriet Text";
+  font-style: normal;
+  font-weight: bold;
+}
+
+.harriettextregular {
+  font-family: "Harriet Text";
+  font-style: normal;
+  font-weight: normal;
+}
+
 
 // I want to be precise about spacing at regular intervals related to body text size
 // This is the "em" across the scss except where font-size is definied differently.
