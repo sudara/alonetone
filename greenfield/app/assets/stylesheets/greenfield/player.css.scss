@@ -1,0 +1,66 @@
+
+.player {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: 126px; // 8em - 2px
+  border-top: 1px solid $light-gray;
+  border-bottom: 1px solid $light-gray;
+  display: block;
+  position: relative;
+  
+  .time{
+    color: $lightest-gray;
+    position:absolute;
+    right:0;
+    font-size: 12px;
+    display:inline-block;
+  }
+  .play-button, .pause-button{
+    color: $not-quite-black;
+    margin-top:18px;
+    padding:18px;
+    text-indent: 9px;
+    width:54px;
+    height:54px;
+    vertical-align: middle;
+    display: inline-block;
+    border: 1px solid $light-gray;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover{
+      color:$black;
+    }
+  }
+  .pause-button{
+    color: $light-gray;
+    text-indent: 4.5px;  
+  }
+
+  .waveform {
+    position: absolute;
+    display: inline-block;
+    right:0;
+    width: 540px;
+    height: 100%;
+    .seekbar {
+      width: 1px;
+      height: 100%;
+      background-color: #aaa;
+      position: absolute;
+      top: 0px;
+    }
+    
+    &:hover .seekbar {
+      display: block;
+    }
+    
+    &:not(:hover) .seekbar {
+      display: none;
+    }
+  }
+
+  .download-button {
+    font-size: 34px;
+    display: inline-block;
+  }
+}

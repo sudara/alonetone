@@ -1,0 +1,32 @@
+
+.post_content, .post_content textarea{
+  font-size: $text;
+  background-color: $not-quite-white;
+  border: none;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  -webkit-font-smoothing: antialiased;
+  word-break: break-word;
+  word-wrap: break-word;
+  text-rendering: optimizelegibility;
+  color: $not-quite-black;  
+  p{
+    margin-bottom: 1em;
+    img{
+      max-width:700px;
+    }
+  }
+  hr{
+    border: 0;
+    margin:1.5em auto;
+    border-bottom: 1px solid $light-gray;
+    width: 433px;
+  }
+  h3{
+    margin-top: 34px; // margin + font size adds up to multiple of em (18px)
+    margin-bottom: 0px;
+    font-family: $bold-header-family;
+    font-size: 20px;
+    color: $not-quite-black;
+  }
+}
