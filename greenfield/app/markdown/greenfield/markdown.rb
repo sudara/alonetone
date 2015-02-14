@@ -9,6 +9,11 @@ module Greenfield
         %(<pre><code class="#{language}">#{CGI.escapeHTML(code)}</code></pre>)
       end
     end
+    
+    def header(text, level)
+      level += 2
+      "<h#{level}>#{text}</h#{level}>"
+    end
 
     def self.transform_embeds(post, text)
       text.gsub(/``(\d+)``/) do |m|

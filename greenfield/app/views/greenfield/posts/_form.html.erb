@@ -12,8 +12,8 @@
 
   <%= f.fields_for :asset do |ff| %>
     <header>
-      <h1 class="alrightsansblack"><%= ff.text_field :title, :value => @post.asset.name, :class => 'alrightsansblack' %></h1>
-      <h2 class="alrightsansregular"><%= @post.asset.user.display_name %></h2>
+      <h1><%= ff.text_field :title, :value => @post.asset.name %></h1>
+      <h2><%= @post.asset.user.display_name %></h2>
     </header>
   <% end %>
 

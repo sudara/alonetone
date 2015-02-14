@@ -13,21 +13,17 @@ form .post_content{
   textarea:hover{
     background-color: $bright-highlight;
   }
+  
   textarea:focus{
     background-color: $not-quite-white;
   }
 }
-
-
-
-// edit post
 
 .edit_post, .new_post {
   .errors {
     padding: 10px;
     background-color: #faa;
     border: 1px solid #000;
-
     ul {
       padding-left: 20px;
       list-style-type: circle;
@@ -47,20 +43,16 @@ form .post_content{
   clear:both;
 }
 
-.upload-results {
-}
-
 .file {
   width:100%;
   text-align: left;
+  
   &.complete {
     background-color: #e0f0ff;
   }
-
   &.errors {
     background-color: #ffcc80;
   }
-
   .name, .status {
     font-size: 14px;
     display: inline-block;
@@ -75,7 +67,6 @@ form .post_content{
   }
 }
 
-
 .drag_and_drop_upload{
   clear:both;
   &:hover{
@@ -86,9 +77,11 @@ form .post_content{
   padding: 2em 0em;
   border: 3px dashed $not-quite-black;
 }
+
 .supporting_file_list{
   width: 100%; 
 }
+
 .mp3_upload{
   margin-bottom: 4em;
 }

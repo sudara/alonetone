@@ -2,6 +2,8 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "variables";
+@import "post";
+@import "player";
 @import "greenfield/edit_post";
 
 html,
@@ -11,7 +13,7 @@ body{
   display: table;
   width: 100%;
   background-color: $not-quite-white;
-  font-family: 'proxima-nova',sans-serif;
+  font-family: $body-font;
   font-weight: 500;
   font-size:18px; // this defines em for the site.
   line-height: 1.5em;
@@ -25,7 +27,7 @@ body{
 
 input{
   font-size: 18px;
-  font-family: $alrightregular normal normal "Alright Sans";
+  font: $body-font;
   &[type="submit"]{
     background-color: transparent;
     border: 1px solid $not-quite-black;
@@ -41,6 +43,7 @@ header {
     width: 83px;
   }
   h1, h1 > input{
+    font-family: $bold-header-family;
     font-size:30px;
   }
   h1 > input{
@@ -53,6 +56,7 @@ header {
   }
   h2{
     font-size:24px;
+    font-family: $normal-header-family;
   }
 }
 
@@ -71,93 +75,6 @@ footer {
       font-size: 12px;
       color: $not-quite-white;
       text-decoration: none;
-    }
-  }
-}
-
-
-.player {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  height: 126px; // 8em - 2px
-  border-top: 1px solid $light-gray;
-  border-bottom: 1px solid $light-gray;
-  display: block;
-  position: relative;
-  
-  .time{
-    color: $lightest-gray;
-    position:absolute;
-    right:0;
-    font-size: 12px;
-    display:inline-block;
-  }
-  .play-button, .pause-button{
-    color: $not-quite-black;
-    margin-top:18px;
-    padding:18px;
-    text-indent: 9px;
-    width:54px;
-    height:54px;
-    vertical-align: middle;
-    display: inline-block;
-    border: 1px solid $light-gray;
-    border-radius: 50%;
-    cursor: pointer;
-    &:hover{
-      color:$black;
-    }
-  }
-  .pause-button{
-    color: $light-gray;
-    text-indent: 4.5px;  
-  }
-
-  .waveform {
-    position: absolute;
-    display: inline-block;
-    right:0;
-    width: 540px;
-    height: 100%;
-    .seekbar {
-      width: 1px;
-      height: 100%;
-      background-color: #aaa;
-      position: absolute;
-      top: 0px;
-    }
-    
-    &:hover .seekbar {
-      display: block;
-    }
-    
-    &:not(:hover) .seekbar {
-      display: none;
-    }
-  }
-
-  .download-button {
-    font-size: 34px;
-    display: inline-block;
-  }
-}
-
-.post_content, .post_content textarea{
-  font-size: $text;
-  background-color: $not-quite-white;
-  border: none;
-  margin-top: 1em;
-  margin-bottom: 3em;
-  -webkit-font-smoothing: antialiased;
-  word-break: break-word;
-  word-wrap: break-word;
-  text-rendering: optimizelegibility;
-  color: $not-quite-black;  
-  p{
-    margin-bottom: 1em;
-    width: 700px;
-    img{
-      max-width:700px;
     }
   }
 }

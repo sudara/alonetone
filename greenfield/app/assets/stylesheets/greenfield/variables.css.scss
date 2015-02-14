@@ -7,35 +7,9 @@ $lightest-gray: #c7c6c3;
 $waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
 
-$alrightblack: normal normal "Alright Sans Black";
-$alrightregular: normal normal "Alright Sans";
-
-// for some reason I'm too stupid to use scss for font-family
-
-.alrightsansblack {
-  font-family: "Alright Sans Black";
-  font-style: normal;
-  font-weight: normal;
-}
-
-.alrightsansregular {
-  font-family: "Alright Sans";
-  font-style: normal;
-  font-weight: normal;
-}
-
-.harriettextbold {
-  font-family: "Harriet Text";
-  font-style: normal;
-  font-weight: bold;
-}
-
-.harriettextregular {
-  font-family: "Harriet Text";
-  font-style: normal;
-  font-weight: normal;
-}
-
+$bold-header-family: "Alright Sans Black", sans-serif;
+$normal-header-family: "Alright Sans", sans-serif;
+$body-font: normal normal "Harriet Text", sans-serif;
 
 // I want to be precise about spacing at regular intervals related to body text size
 // This is the "em" across the scss except where font-size is definied differently.
