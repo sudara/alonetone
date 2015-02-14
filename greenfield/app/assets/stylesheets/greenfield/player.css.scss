@@ -1,8 +1,8 @@
 
 .player {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  height: 126px; // 8em - 2px
+  margin-top: $baseline * .8;
+  margin-bottom: $baseline + 7px;
+  height: ($baseline * 5) - 2px; 
   border-top: 1px solid $light-gray;
   border-bottom: 1px solid $light-gray;
   display: block;
@@ -17,9 +17,9 @@
   }
   .play-button, .pause-button{
     color: $not-quite-black;
-    margin-top:18px;
-    padding:18px;
-    text-indent: 9px;
+    margin-top: $baseline;
+    padding: ($baseline / 2) - 1;
+    text-indent: 11px;
     width:54px;
     height:54px;
     vertical-align: middle;

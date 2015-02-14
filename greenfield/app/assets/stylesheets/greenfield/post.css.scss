@@ -1,29 +1,44 @@
-
 .post_content, .post_content textarea{
   font-size: $text;
   background-color: $not-quite-white;
   border: none;
-  margin-top: 2em;
-  margin-bottom: 3em;
+  margin-top: $baseline;
+  margin-bottom: $baseline * 3;
   -webkit-font-smoothing: antialiased;
   word-break: break-word;
   word-wrap: break-word;
   text-rendering: optimizelegibility;
   color: $not-quite-black;  
   p{
-    margin-bottom: 1em;
+    margin-bottom: $baseline;
     img{
-      max-width:700px;
+      // not quite perfectly the same width
+      margin-left: 1px;
+      max-width:648px;
     }
   }
   hr{
+    position:relative; // needed for icon
+    font-family: "FontAwesome";
     border: 0;
-    margin:1.5em auto;
+    margin:$baseline auto;
     border-bottom: 1px solid $light-gray;
     width: 433px;
+    text-align: center;
+    &:after{
+      -webkit-font-smoothing: antialiased;
+      position:absolute;
+      top:-.55em;
+      left:207px;
+      display:block;
+      color: $lightest-gray;
+      background-color: $not-quite-white-opaque; // interrupt hr
+      content: "\f025"; // with headphone icon
+    }
   }
   h3{
-    margin-top: 34px; // margin + font size adds up to multiple of em (18px)
+    margin-top: $baseline + 2px; 
+    margin-bottom: $baseline - 2px;
     margin-bottom: 0px;
     font-family: $bold-header-family;
     font-size: 20px;

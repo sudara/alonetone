@@ -1,7 +1,8 @@
 $line-height: 14px;
 $black: black;
 $not-quite-black: #353535; 
-$not-quite-white: #fdfbf8;
+$not-quite-white: rgba(253, 251, 249, .7);
+$not-quite-white-opaque: #fdfbf9; // to mask background
 $light-gray: #cccbca;
 $lightest-gray: #c7c6c3;
 $waveform-playing: #302f2f;
@@ -9,8 +10,11 @@ $bright-highlight: rgba(255, 255, 0, .6);
 
 $bold-header-family: "Alright Sans Black", sans-serif;
 $normal-header-family: "Alright Sans", sans-serif;
-$body-font: normal normal "Harriet Text", sans-serif;
+$body-font: "Harriet Text", sans-serif;
 
 // I want to be precise about spacing at regular intervals related to body text size
 // This is the "em" across the scss except where font-size is definied differently.
 $text: 18px;
+
+// everything on a baseline grid
+$baseline: 27px;

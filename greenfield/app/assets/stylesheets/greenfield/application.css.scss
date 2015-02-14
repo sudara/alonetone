@@ -15,8 +15,8 @@ body{
   background-color: $not-quite-white;
   font-family: $body-font;
   font-weight: 500;
-  font-size:18px; // this defines em for the site.
-  line-height: 1.5em;
+  font-size:18px;
+  line-height: $baseline;  // 27px is our baseline
 }
 
 .wrapper{
@@ -32,12 +32,12 @@ input{
     background-color: transparent;
     border: 1px solid $not-quite-black;
     cursor: pointer;
-    padding: .5em;
+    padding: ($baseline / 2) - 1;
   }
 }
 
 header {
-  margin-top: 4em;
+  margin-top: $baseline * 2;
   img {
     height: 83px;
     width: 83px;
@@ -45,6 +45,7 @@ header {
   h1, h1 > input{
     font-family: $bold-header-family;
     font-size:30px;
+    line-height: 36px; // $baseline * 1.3333;
   }
   h1 > input{
     background-color: transparent;
@@ -56,6 +57,7 @@ header {
   }
   h2{
     font-size:24px;
+    line-height: 22px; // $baseline * .815;
     font-family: $normal-header-family;
   }
 }
