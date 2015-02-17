@@ -84,7 +84,9 @@ $(function() {
         min = Math.min.apply(Math, data);
 
     var scale = Math.max(Math.abs(max), Math.abs(min));
-    data = data.map(function(s) { return s / scale });
+    data = data.map(function(s) {
+      return (s < 0 ? -1 : 1 ) * Math.pow(Math.abs(s) / scale, 1/4);
+    });
 
     var soundPosition = 0;
     var hoverPosition = -1;
