@@ -1,10 +1,10 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "rails_helper"
 
-describe PagesController do
-  
-  it "should have an about page that renders without errors" do 
+RSpec.describe PagesController, type: :controller do
+
+  it "should have an about page that renders without errors" do
     get :index
-    response.should be_success
-  end  
-  
+    expect(response).to be_success
+  end
+
 end

@@ -1,104 +1,104 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "rails_helper"
 
-describe CommentsController do
-  
+RSpec.describe CommentsController, type: :controller do
+
   fixtures :users, :comments, :assets
-  
-  context "basics" do 
-    
+
+  context "basics" do
+
     it 'should allow anyone to view the comments index' do
       get :index
        assigns(:comments)
-      response.should be_success
+      expect(response).to be_success
     end
-    
-    it 'should allow guest to comment on a track (via xhr)' do 
+
+    it 'should allow guest to comment on a track (via xhr)' do
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
       expect { xhr :post, :create, params }.to change{ Comment.count}.by(1)
-      response.should be_success
+      expect(response).to be_success
     end
-    
-    it 'should allow guest to comment on a blog post' do 
+
+    it 'should allow guest to comment on a blog post' do
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Update","commentable_id"=> 1 }}
       xhr :post, :create, params
-      response.should be_success
+      expect(response).to be_success
     end
-    
-    it 'should allow user comment on a track (via xhr)' do 
+
+    it 'should allow user comment on a track (via xhr)' do
       login(:arthur)
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
       xhr :post, :create, params
-      response.should be_success
+      expect(response).to be_success
     end
-    
-    it 'should allow private comment on track' do 
+
+    it 'should allow private comment on track' do
       login(:arthur)
       params = {:comment => {"body"=>"Comment", "private"=> 1, "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink }
-      xhr :post, :create, params 
-      response.should be_success
+      xhr :post, :create, params
+      expect(response).to be_success
     end
   end
-  
-  context "private comments made by user" do 
-    it "should be visible to private user viewing their own shit" do 
+
+  context "private comments made by user" do
+    it "should be visible to private user viewing their own shit" do
       login(:arthur)
       get :index, :login => 'arthur'
-      assigns(:comments_made).should include(comments(:private_comment_on_asset_by_user))      
+      expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
-    
-    it "should be visible to admin" do 
+
+    it "should be visible to admin" do
       login(:sudara)
       get :index, :login => 'arthur'
-      assigns(:comments_made).should include(comments(:private_comment_on_asset_by_user))
+      expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
-    
-    it "should be visible to mod" do 
+
+    it "should be visible to mod" do
       login(:sandbags)
       get :index, :login => 'arthur'
-      assigns(:comments_made).should include(comments(:private_comment_on_asset_by_user))
+      expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
-    
-    
-    it "should not be visible to guest" do 
+
+
+    it "should not be visible to guest" do
       get :index, :login => 'arthur'
-      assigns(:comments_made).should_not include(comments(:private_comment_on_asset_by_user))
-    end 
-    
-    it "should not be visible to normal user" do 
+      expect(assigns(:comments_made)).not_to include(comments(:private_comment_on_asset_by_user))
+    end
+
+    it "should not be visible to normal user" do
       login(:joeblow)
       get :index, :login => 'arthur'
-      assigns(:comments_made).should_not include(comments(:private_comment_on_asset_by_user))
+      expect(assigns(:comments_made)).not_to include(comments(:private_comment_on_asset_by_user))
     end
   end
-  
-  
-  
-  context "private comments on index" do 
-  
-    it "should be visible to admin" do 
+
+
+
+  context "private comments on index" do
+
+    it "should be visible to admin" do
       login(:sudara)
       get :index
-      assigns(:comments).should include(comments(:private_comment_on_asset_by_guest))
+      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
     end
-    
-    it "should be visible to mod" do 
+
+    it "should be visible to mod" do
       login(:sandbags)
       get :index
-      assigns(:comments).should include(comments(:private_comment_on_asset_by_guest))
+      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
     end
-    
-    
-    it "should not be visible to guest" do 
+
+
+    it "should not be visible to guest" do
       get :index
-      assigns(:comments).should_not include(comments(:private_comment_on_asset_by_guest))
-    end 
-    
-    it "should not be visible to normal user" do 
+      expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
+    end
+
+    it "should not be visible to normal user" do
       login(:arthur)
       get :index
-      assigns(:comments).should_not include(comments(:private_comment_on_asset_by_guest))
+      expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
     end
-    
+
   end
-  
+
 end

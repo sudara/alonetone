@@ -5,9 +5,9 @@ class Asset
   attachment_options = {
     :styles => { :original => ''}, # just makes sure original runs through the processor
     :processors => [:mp3_paperclip_processor],
-  } 
-  if Alonetone.storage == 's3' 
-    attachment_options[:path] = "/mp3/:id/:basename.:extension" 
+  }
+  if Alonetone.storage == 's3'
+    attachment_options[:path] = "/mp3/:id/:basename.:extension"
     attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
   end
 
@@ -20,16 +20,16 @@ class Asset
 
  # Disable zip uploads for now, make life easier transitioning to paperclip
  # Plus this should go bye-bye into a model
- 
+
  # def self.extract_mp3s(zip_file, &block)
  #   # try to open the zip file
  #   Zip::ZipFile.open(zip_file.path) do |z|
  #     z.each do |entry|
  #       # so, if we've got a file with an mp3 in there with a decent size
  #       if entry.to_s =~ /(\.\w+)$/ && allowed_extensions.include?($1) && entry.size > 2000
- #         # throw together a new tempfile of the rails flavor 
+ #         # throw together a new tempfile of the rails flavor
  #         # spoof the necessary attributes to get Attachment_fu to accept our zipped friends
- #         #temp.content_type = 'audio/mpeg'          
+ #         #temp.content_type = 'audio/mpeg'
  #         # pass back each mp3 within the zip
  #         tempfile_name = File.basename entry.name
  #         temp = ActionController::UploadedTempfile.new(tempfile_name, Technoweenie::AttachmentFu.tempfile_path)
@@ -43,30 +43,30 @@ class Asset
  #         #debugger
  #         # deletes the temp files
  #         temp.close
- # 
+ #
  #         logger.warn("ZIP: #{entry.to_s} was extracted from zip file: #{zip_file.path}")
  #       end
- #     end 
- #   end    
- # # pass back the file unprocessed if the file is not a zip 
+ #     end
+ #   end
+ # # pass back the file unprocessed if the file is not a zip
  # rescue Zip::ZipError => e
  #   logger.warn("User uploaded #{zip_file.path}:"+e)
  #   yield zip_file
  # rescue TypeError => e
  #   logger.warn("User tried to upload too small file");
- # end  
-  
-  protected 
-  
+ # end
+
+  protected
+
   def emails_of_followers(asset)
-    followers_of(asset).inject([]) do |emails, follower| 
+    followers_of(asset).inject([]) do |emails, follower|
       emails << follower.email if follower.wants_email?
       emails
-    end 
+    end
   end
-  
+
   def followers_of(asset)
     asset.user.followers
   end
-  
+
 end

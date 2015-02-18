@@ -1,14 +1,14 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "rails_helper"
 
-describe Update do
+RSpec.describe Update, type: :model do
   fixtures :updates
-  
+
   before(:each) do
     #@update = Update.new
   end
 
   it "should be valid and saveable" do
-    updates(:valid).should be_valid
-    updates(:valid).save.should == true
+    expect(updates(:valid)).to be_valid
+    expect(updates(:valid).save).to eq(true)
   end
 end

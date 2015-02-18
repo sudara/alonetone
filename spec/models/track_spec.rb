@@ -1,24 +1,24 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "rails_helper"
 
-describe Track do
+RSpec.describe Track, type: :model do
   fixtures :playlists, :tracks, :assets, :users
-  
-  it "should be valid with a asset_id and a playlist_id" do 
-    tracks(:owp1).should be_valid
+
+  it "should be valid with a asset_id and a playlist_id" do
+    expect(tracks(:owp1)).to be_valid
   end
-  
-  it "is not valid without a playlist_id" do 
-    tracks(:no_playlist_id).should_not be_valid
+
+  it "is not valid without a playlist_id" do
+    expect(tracks(:no_playlist_id)).not_to be_valid
   end
-  
-  context "as a fav" do 
+
+  context "as a fav" do
     subject { users(:arthur).tracks.favorites.create(:asset_id => 1) }
-    it "should create a favorite playlist if its the first fav" do 
+    it "should create a favorite playlist if its the first fav" do
       expect{subject}.to change{Track.count}
     end
-  
-    it 'should use an existing favorites playlist' do 
-    
+
+    it 'should use an existing favorites playlist' do
+
     end
   end
 end
