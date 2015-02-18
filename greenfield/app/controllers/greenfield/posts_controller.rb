@@ -1,11 +1,21 @@
 module Greenfield
   class PostsController < Greenfield::ApplicationController
+    include Listens
+
     before_filter :create_and_edit_unless_post_exists, :only => [:show, :edit]
     before_filter :authorize, :only => [:edit, :update]
 
     def show
       @post = find_post
-      @page_title = "#{@post.user.display_name} - #{@post.title}"
+      respond_to do |format|
+        format.html do
+          @page_title = "#{@post.user.display_name} - #{@post.title}"
+        end
+
+        format.mp3 do
+          listen(@post.asset)
+        end
+      end
     end
 
     def edit

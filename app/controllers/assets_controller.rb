@@ -1,18 +1,12 @@
 class AssetsController < ApplicationController  
+  include Listens
+
   before_filter :find_user, :except => [:radio, :latest]
   before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
 
   # we check to see if the current_user is authorized based on the asset.user
   before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
-  before_filter :set_user_agent, :find_referer, :prevent_abuse, :only => :show
 
-  # user agent whitelist
-  # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook']
- 
-  # user agent black list
-  @@bots = ['bot','spider','baidu','mp3bot'] 
-  
   # home page
   def latest
     respond_to do |wants|
@@ -61,12 +55,7 @@ class AssetsController < ApplicationController
         set_related_show_variables
       end
       format.mp3 do
-        register_listen
-        if Alonetone.try(:play_dummy_mp3s)
-          play_local_mp3
-        else
-          redirect_to @asset.mp3.expiring_url.gsub('s3.amazonaws.com/','')
-        end
+        listen(@asset)
       end
     end
   end
@@ -199,39 +188,6 @@ class AssetsController < ApplicationController
   end
   
   protected
-  
-  def play_local_mp3
-    file_to_send = File.join(Rails.root,'spec/fixtures/assets/muppets.mp3')
-    
-    length = File.size(file_to_send) # need to do this manually for header to be set correctly
-
-    # SHITTON OF HEADER HACKS TO APPEASE HTML5 locally :)
-    file_begin = 0
-    file_end = length - 1
-    headers['Accept-Ranges'] = 'bytes'
-    headers["Cache-Control"] = "public, must-revalidate, max-age=0"
-    headers["Pragma"] = "no-cache"
-    headers['Connection'] = 'close'
-    if !request.headers["Range"] or request.headers["Range"]=="bytes=0-"# browser wants the whole file
-      status = "200 OK"
-      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
-
-      send_file file_to_send, :type => 'audio/mpeg', :disposition => 'attachment;', 
-      :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
-    else 
-      status = "206 Partial Content" #browser wants part of the file
-      match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
-      if match
-        file_begin = match[1]
-        file_end = match[2] if match[2] && !match[2].empty?
-      end
-      headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
-      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
-      how_many_bytes = file_end.to_i-file_begin.to_i > 0 ? file_end.to_i-file_begin.to_i : 1
-      send_data File.read(file_to_send,how_many_bytes,file_begin.to_i), :type =>'audio/mpeg', :disposition => 'attachment;', 
-      :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
-    end
-  end
     
   def track_not_found
     flash[:error] = "Hmm, we didn't find that track!"
@@ -252,13 +208,6 @@ class AssetsController < ApplicationController
         end
         asset.save
       end
-    end
-  end
-  
-  def find_referer
-    @referer = case params[:referer]
-      when 'itunes' then 'itunes'
-      else request.env['HTTP_REFERER']
     end
   end
   
@@ -287,46 +236,5 @@ class AssetsController < ApplicationController
   
   def dangerous_action?
     %w(destroy update edit create).include? action_name 
-  end
-  
-  def register_listen
-    @asset.listens.create(
-        :listener     => current_user || nil, 
-        :track_owner  => @asset.user, 
-        :source       => @referer, 
-        :user_agent   => @agent,
-        :ip           => request.remote_ip
-      ) unless is_a_bot? or ip_just_registered_this_listen?
-  end
-  
-  def ip_just_registered_this_listen?
-    last_listen = @asset.listens.since(1.week.ago).where(:ip => request.remote_ip).first
-    last_listen.present? && (last_listen.created_at > (Time.now - @asset[:length]))
-  end
-  
-  def is_a_bot?
-    # gotta have a user agent
-    return true unless request.user_agent.present?
-    
-    # can't be a blacklisted ip
-    return true if is_from_a_bad_ip?
-    
-    # check user agent agaisnt both white and black lists
-    not browser? or @@bots.any?{ |bot_agent| @agent.include? bot_agent }  
-  end
-  
-  def browser?
-    @@valid_listeners.any?{ |valid_agent| @agent.include? valid_agent } 
-  end
-  
-  def set_user_agent
-    @agent = request.user_agent.try(:downcase)    
-  end
-  
-  def prevent_abuse
-    if is_a_bot?
-      Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{@asset.mp3_file_name} #{@agent} #{request.remote_ip} #{@referer} User:#{current_user || 0}"
-      render(:text => "Denied due to abuse", :status => 403)    
-    end
   end
 end

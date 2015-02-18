@@ -1,5 +1,10 @@
 Alonetone::Application.routes.draw do
-  mount Greenfield::Engine => "/greenfield"
+  if Alonetone.greenfield?
+    mount Greenfield::Engine => "/"
+    break
+  else
+    mount Greenfield::Engine => "/greenfield"
+  end
 
   resources :groups
 
