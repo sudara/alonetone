@@ -31,7 +31,7 @@
   <div class="drag_and_drop_upload">
       Drop "supporting" mp3 files here
   </div>
-  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
+  <% asset_path = post_attached_assets_path(@post.user, @post) %>
   <ul class="supporting_file_list fa-ul">
     <%= list_attached_mp3_assets(@post.attached_assets) %>
   </ul>

@@ -27,8 +27,8 @@ module Greenfield
     def media_url(asset)
       if asset.is_a?(Greenfield::AttachedAsset)
         Greenfield::Engine.routes.url_helpers.
-          user_post_attached_asset_path(asset.user, asset.alonetone_asset,
-                                        asset, :format => :mp3)
+          post_attached_asset_path( asset.alonetone_asset,
+                                    asset, :format => :mp3)
       else
         Rails.application.routes.url_helpers.
           user_track_path(asset.user, asset, :format => :mp3)

@@ -16,7 +16,7 @@ module Greenfield
     def update
       @post = find_post
       if @post.update_attributes(params[:post])
-        redirect_to user_post_path(@post.user, @post)
+        redirect_to post_path(@post)
       else
         render :edit
       end
@@ -28,7 +28,7 @@ module Greenfield
       if find_asset.user == current_user && !find_asset.greenfield_post
         post = find_asset.build_greenfield_post
         post.save!(:validate => false)
-        redirect_to edit_user_post_path(post.user, post)
+        redirect_to edit_post_path(post)
       end
     end
 
