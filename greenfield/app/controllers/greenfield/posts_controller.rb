@@ -47,8 +47,15 @@ module Greenfield
     end
 
     def find_asset
-      id = params[:asset_permalink] || params[:id]
-      @find_asset ||= Asset.find_by!(:permalink => id)
+      if params[:playlist_id]
+        @playlist_position ||= (params[:position] ||= 1).to_i
+        @playlist ||= Greenfield::Playlist.find_by(permalink: params[:playlist_id])
+        @find_asset ||= @playlist.playlist_tracks.
+                          where(:position => params[:position]).take!.alonetone_asset
+      else
+        id = params[:asset_permalink] || params[:id]
+        @find_asset ||= Asset.find_by!(:permalink => id)
+      end
     end
 
     def authorize

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  playlist_id: 1
+  post_id: 1
+  position: 1
+
+two:
+  playlist_id: 1
+  post_id: 1
+  position: 1

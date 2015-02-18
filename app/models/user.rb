@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :profile, :statistics, :posting
+  concerned_with :validation, :findability, :profile, :statistics, :posting, :greenfield
     
   acts_as_authentic do |c|
     c.transition_from_restful_authentication = true

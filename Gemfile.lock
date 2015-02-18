@@ -30,6 +30,8 @@ PATH
   remote: greenfield
   specs:
     greenfield (0.0.1)
+      acts_as_list
+      has_permalink
       rails (~> 4.1.2)
 
 GEM
