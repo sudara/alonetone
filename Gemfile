@@ -18,7 +18,7 @@ gem "awesome_print", :require => 'ap'
 gem "aws-sdk"
 gem "paperclip"
 gem "ruby-mp3info", :require => 'mp3info'
-gem "mime-types" 
+gem "mime-types"
 gem 'ruby-audio'
 
 # active record
@@ -56,9 +56,10 @@ gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
 gem 'newrelic_rpm'
+gem 'bugsnag'
 
 group :production do
-  gem "puma"      
+  gem "puma"
   gem "skylight"
 end
 
