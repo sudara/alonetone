@@ -1,2 +1,4 @@
-#!/usr/bin/env bash
-exec $(dirname $0)/spring rake "$@"
+#!/usr/bin/env ruby
+require_relative '../config/boot'
+require 'rake'
+Rake.application.run
