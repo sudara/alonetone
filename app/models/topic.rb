@@ -37,7 +37,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title, :body, :sticky, :locked
   attr_readonly :posts_count, :hits
   
-  has_permalink :title
+  has_permalink :title, true
                                
   # hacks for defensio
   def article
