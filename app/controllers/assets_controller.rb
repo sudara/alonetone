@@ -244,7 +244,7 @@ class AssetsController < ApplicationController
   
   def extract_assets_from_params
     @assets = []
-    params[:asset_data].each do |file|
+    Array(params[:asset_data]).each do |file|
       unless file.is_a?(String)
         @assets << asset = current_user.assets.build(:mp3 => file)
         if current_user.greenfield_enabled?
