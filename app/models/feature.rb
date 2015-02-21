@@ -3,7 +3,7 @@ class Feature < ActiveRecord::Base
   scope :published, -> { where(:published => true).order('created_at DESC') }
 
   has_many :featured_tracks, 
-    -> { order('featured_tracks.position').include(:asset)}
+    -> { order('featured_tracks.position').includes(:asset)}
      
   has_many :comments, 
     -> { order('created_at DESC')},
