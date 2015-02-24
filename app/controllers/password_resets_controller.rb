@@ -11,7 +11,7 @@ class PasswordResetsController < ApplicationController
     @user = User.where(:email => email).first 
     if @user.present? 
       @user.reset_perishable_token!
-      UserNotification.forgot_password(@user).deliver
+      UserNotification.forgot_password(@user).deliver_now
       flash[:notice] = "Check your email and click the link to reset your password!"
       redirect_to login_path
     else  

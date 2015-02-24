@@ -67,7 +67,7 @@ class Comment < ActiveRecord::Base
   end
   
   def deliver_comment_notification
-    CommentNotification.new_comment(self, commentable).deliver if is_deliverable?
+    CommentNotification.new_comment(self, commentable).deliver_now if is_deliverable?
   end
   
   def increment_counters

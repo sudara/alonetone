@@ -20,6 +20,8 @@ module Alonetone
     config.exceptions_app = self.routes
         
     config.assets.precompile += %w(soundmanager2.swf soundmanager2_flash9.swf ipad.css 24houralbum.css rpm_challenge.css blog.css)
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 
 end
