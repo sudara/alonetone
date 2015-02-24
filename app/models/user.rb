@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many   :assets, 
     -> { order('assets.id DESC')},
     :dependent => :destroy
+  has_many   :asset_comments, :through => :assets, :source => :comments
     
   has_many   :playlists, -> { order('playlists.position')},
     :dependent => :destroy
@@ -169,7 +170,7 @@ class User < ActiveRecord::Base
       update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
     Track.joins(:asset).where(:assets => {:user_id => id}).delete_all
 
-    %w(tracks playlists posts comments assets).each do |thing|
+    %w(tracks playlists posts asset_comments comments assets).each do |thing|
       self.send(thing).delete_all
     end
     true

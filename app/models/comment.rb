@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
   # optional user who is *recieving* the comment
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever
   belongs_to :user
-  
+
   belongs_to :commentable, :polymorphic => true, :touch => true
   validates_length_of :body, :within => 1..2000
   validates :commentable_id, presence: true
