@@ -30,7 +30,7 @@ For more info on alonetone, visit [the alonetone faq](http://alonetone.com/about
 
 ### Current tech
 
-* Rails 4.0 
+* Rails 4.2
 * jQuery
 * SoundManager 2 (for flash + html5 playback)
 
