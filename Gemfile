@@ -60,7 +60,7 @@ gem 'bugsnag'
 
 group :production do
   gem "puma"
-  gem "skylight"
+  gem "skylight", '~> 0.5.2'
 end
 
 group :development do
