@@ -13,7 +13,7 @@ module Paperclip
       rescue Mp3InfoError
         raise Paperclip::Error, "This doesn't look like an mp3 file"
       end
-      @file
+      File.open(@file.path, 'rb')
     end
 
     def write_meta_data_to_model(mp3)

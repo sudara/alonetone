@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     if @user.valid? and passed_recaptcha? and @user.save_without_session_maintenance
       session[:recaptcha] = false # make sure they have to recaptcha for new user
       @user.reset_perishable_token!
-      UserNotification.signup(@user).deliver
+      UserNotification.signup(@user).deliver_now
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(:already_joined => true)
     else
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       redirect_to new_user_track_path(current_user), :error => "You are already activated and logged in! Rejoice and upload!"
     elsif !is_from_a_bad_ip? and @user and @user.activate!
       UserSession.create(@user, true) # Log user in manually
-      UserNotification.activation(@user).deliver
+      UserNotification.activation(@user).deliver_now
       redirect_to new_user_track_path(@user.login), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
     else
       redirect_to new_user_path, :error => "Hm. Activation didn't work. Sorry about that!"

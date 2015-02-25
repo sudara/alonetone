@@ -117,7 +117,7 @@ class Asset < ActiveRecord::Base
   def notify_followers
     emails = emails_of_followers(self)
     if emails.present?
-      AssetNotification.upload_notification(self, emails).deliver
+      AssetNotification.upload_notification(self, emails).deliver_now
     end
   end 
 end
