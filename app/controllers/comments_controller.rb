@@ -12,6 +12,8 @@ class CommentsController < ApplicationController
       @comment = Comment.new(massaged_params)
       return head(:bad_request) unless @comment.save
       render :nothing => true
+    else
+      render :nothing => true, :status => :bad_request
     end
   end  
 
