@@ -17,7 +17,7 @@ gem "awesome_print", :require => 'ap'
 # uploading
 gem "aws-sdk"
 gem "paperclip"
-gem "ruby-mp3info", :require => 'mp3info'
+gem "ruby-mp3info", '~> 0.7.2', :require => 'mp3info'
 gem "mime-types"
 gem 'ruby-audio'
 

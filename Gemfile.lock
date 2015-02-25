@@ -264,7 +264,7 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     ruby-audio (1.6.1)
-    ruby-mp3info (0.8.5)
+    ruby-mp3info (0.7.2)
     sass (3.4.12)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -358,7 +358,7 @@ DEPENDENCIES
   rspec-mocks
   rspec-rails
   ruby-audio
-  ruby-mp3info
+  ruby-mp3info (~> 0.7.2)
   sass-rails
   scrypt
   simple_form
