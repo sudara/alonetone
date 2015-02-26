@@ -1,6 +1,6 @@
 <div class="track_options">
   <% if @asset.user.greenfield_enabled? %>
-    <%= link_to greenfield.edit_post_url(@asset.permalink), :class => 'view_all', :title => 'edit this track' do %>
+    <%= link_to greenfield.edit_post_url(@asset.permalink, :host => Alonetone.greenfield_url), :class => 'view_all', :title => 'edit this track' do %>
       greenfield <div class="sprites-pencil sprites-before-heading"></div>
     <% end %>
   <% end %>
