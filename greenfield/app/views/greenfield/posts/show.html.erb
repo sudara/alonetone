@@ -1,3 +1,15 @@
+<% if @playlist %>
+  <div class="playlist">
+    <% @playlist.playlist_tracks.each do |track| %>
+      <%= link_to playlist_position_path(@playlist, track.position) do %>
+        <span class="track<%= ' active' if track.position == @playlist_position %>">
+          <%= track.post.title %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
 <header>
   <h1><%= @post.asset.name %></h1>
   <h2><%= @post.asset.user.display_name %></h2>

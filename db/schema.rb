@@ -12,7 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20150226192525) do
-
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
     t.string   "mp3_file_name"
@@ -35,11 +34,11 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.text     "credits"
     t.string   "youtube_embed"
     t.boolean  "private"
-    t.float    "hotness",          limit: 24
+    t.float    "hotness"
     t.integer  "favorites_count",                   default: 0
     t.text     "lyrics"
     t.text     "description_html"
-    t.float    "listens_per_week", limit: 24
+    t.float    "listens_per_week"
     t.integer  "comments_count",                    default: 0
     t.datetime "updated_at"
     t.text     "waveform",         limit: 16777215
@@ -144,7 +143,23 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.integer  "length"
   end
 
-  create_table "greenfield_posts", force: :cascade do |t|
+  create_table "greenfield_playlist_tracks", force: true do |t|
+    t.integer  "playlist_id"
+    t.integer  "post_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "greenfield_playlists", force: true do |t|
+    t.string   "title"
+    t.string   "permalink"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "greenfield_posts", force: true do |t|
     t.integer  "asset_id"
     t.text     "body"
     t.datetime "created_at"
@@ -237,8 +252,8 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.datetime "updated_at"
     t.integer  "forum_id"
     t.text     "body_html"
-    t.boolean  "is_spam",               default: false
-    t.float    "spaminess",  limit: 24
+    t.boolean  "is_spam",    default: false
+    t.float    "spaminess"
     t.string   "signature"
   end
 
@@ -250,7 +265,7 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.string   "grouping",         limit: 10,                null: false
     t.string   "aggregation",      limit: 10,                null: false
     t.string   "conditions",       limit: 100,               null: false
-    t.float    "value",            limit: 24,  default: 0.0, null: false
+    t.float    "value",                        default: 0.0, null: false
     t.datetime "reporting_period",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -275,17 +290,17 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "hits",                       default: 0
-    t.integer  "sticky",                     default: 0
-    t.integer  "posts_count",                default: 0
-    t.boolean  "locked",                     default: false
+    t.integer  "hits",            default: 0
+    t.integer  "sticky",          default: 0
+    t.integer  "posts_count",     default: 0
+    t.boolean  "locked",          default: false
     t.integer  "last_post_id"
     t.datetime "last_updated_at"
     t.integer  "last_user_id"
     t.integer  "site_id"
     t.string   "permalink"
-    t.boolean  "spam",                       default: false
-    t.float    "spaminess",       limit: 24
+    t.boolean  "spam",            default: false
+    t.float    "spaminess"
     t.string   "signature"
   end
 
@@ -326,8 +341,8 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "spam",                        default: false
-    t.float    "spaminess",        limit: 24
+    t.boolean  "spam",             default: false
+    t.float    "spaminess"
     t.string   "signature"
     t.text     "description_html"
   end
@@ -362,8 +377,8 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.string   "myspace"
     t.text     "settings"
     t.boolean  "plus_enabled",                    default: false
-    t.float    "lat",                 limit: 24
-    t.float    "lng",                 limit: 24
+    t.float    "lat"
+    t.float    "lng"
     t.text     "bio_html"
     t.integer  "posts_count",                     default: 0
     t.boolean  "moderator",                       default: false

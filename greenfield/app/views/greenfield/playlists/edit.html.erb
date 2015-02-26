@@ -1,0 +1,32 @@
+<%= form_for(@playlist) do |f| %>
+  <header>
+    <%= link_to '<- playlists', playlists_path %>
+    <h1><%= f.text_field :title %></h1>
+  </header>
+
+  <p style="font-size: 10pt; font-style: italic">
+    click tracks on the right to add them to this playlist
+  </p>
+
+  <ol style="float: left; width: 50%; list-style-type: decimal">
+    <% @playlist.posts.each do |post| %>
+      <li data-post_id="<%= post.id %>">
+        <%= post.title %>
+        <%= link_to 'remove', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
+                     :method => :delete %>
+      </li>
+    <% end %>
+  </ol>
+
+  <ul style="float: right; width: 50%; max-height: 400px; overflow-y: auto">
+    <% (@user.greenfield_posts - @playlist.posts).each do |post| %>
+      <li data-post_id="<%= post.id %>">
+        <%= post.title %>
+        <%= link_to 'remove', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
+                     :method => :delete %>
+
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+

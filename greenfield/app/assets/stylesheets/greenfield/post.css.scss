@@ -1,3 +1,27 @@
+.playlist {
+  width: 200px;
+  margin-left: -215px;
+  float: left;
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .track {
+    padding: 5px;
+    display: block;
+
+    &.active {
+      text-decoration: underline;
+
+      &:before {
+        content: ">"
+      }
+    }
+  }
+}
+
 .post_content, .post_content textarea{
   font-size: $text;
   background-color: $not-quite-white;

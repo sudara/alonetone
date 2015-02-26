@@ -84,7 +84,9 @@ $(function() {
         min = Math.min.apply(Math, data);
 
     var scale = Math.max(Math.abs(max), Math.abs(min));
-    data = data.map(function(s) { return s / scale });
+    data = data.map(function(s) {
+      return (s < 0 ? -1 : 1 ) * Math.pow(Math.abs(s) / scale, 1/4);
+    });
 
     var soundPosition = 0;
     var hoverPosition = -1;
@@ -142,13 +144,47 @@ $(function() {
       }).mouseout(function() { hoverPosition = -1 });
     });
   });
+
+  $('.edit_playlist').each(function() {
+    var form = $(this);
+    var posts = form.find('ol');
+    var sources = form.find('ul');
+
+    sources.on('click', 'li', function(e) {
+      var post = $(this);
+      var post_id = post.data('post_id');
+      $.ajax({
+        method: 'post',
+        url: form.attr('action')+'/posts?post_id='+post_id,
+        success: function() {
+          posts.append(post.detach());
+        }
+      });
+    });
+
+    posts.on('click', 'li a[data-method=delete]', function(e) {
+      var post = $(this).parents('li');
+      var post_id = post.data('post_id');
+      if (e.which == 1 && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+
+        $.ajax({
+          method: 'delete',
+          url: form.attr('action')+'/posts?post_id='+post_id,
+          success: function() {
+            sources.append(post.detach());
+          }
+        });
+      }
+    });
+  });
 });
 
 
 $(document).ready(function(){
-    // resizable textarea for edit page
-    $('.post_content textarea').autosize();  
-    
-    // adjust image margins to fit baseline in posts
-    $('.post_content p > img').baseline(27);  
+  // resizable textarea for edit page
+  $('.post_content textarea').autosize();  
+  
+  // adjust image margins to fit baseline in posts
+  $('.post_content p > img').baseline(27);  
 });

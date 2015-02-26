@@ -5,6 +5,7 @@
 @import "post";
 @import "player";
 @import "greenfield/edit_post";
+@import "greenfield/playlists";
 
 html,
 body { height: 100%; }
@@ -23,17 +24,6 @@ body{
   margin: auto;
   max-width:650px;
   height: 100%;
-}
-
-input{
-  font-size: 18px;
-  font: $body-font;
-  &[type="submit"]{
-    background-color: transparent;
-    border: 1px solid $not-quite-black;
-    cursor: pointer;
-    padding: ($baseline / 2) - 1;
-  }
 }
 
 header {

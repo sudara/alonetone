@@ -30,6 +30,17 @@ form .post_content{
     }
   }
 
+  input{
+    font-size: 18px;
+    font: $body-font;
+    &[type="submit"]{
+      background-color: transparent;
+      border: 1px solid $not-quite-black;
+      cursor: pointer;
+      padding: ($baseline / 2) - 1;
+    }
+  }
+
   textarea {
     width: 100%;
     min-height: 400px;
