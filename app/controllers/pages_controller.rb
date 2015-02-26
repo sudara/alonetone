@@ -57,13 +57,13 @@ class PagesController < ApplicationController
   def stats
     @page_title = "Listening and Song Statistics"
     @number_of_musicians = User.musicians.count
-    @comments_per_user = User.average('comments_count').ceil
-    @average_length_of_track = Asset.formatted_time(Asset.average('length').ceil)
-    @listens_per_track = Asset.average('listens_count').ceil
-    @listens_per_user = User.average('listens_count').ceil
-    @tracks_per_user = User.average('assets_count').ceil
-    @listens_per_week_per_track = Asset.average('listens_per_week').ceil
-    @posts_per_user = User.average('posts_count')
+    @comments_per_user = User.average('comments_count').try(:ceil) || 0
+    @average_length_of_track = Asset.formatted_time(Asset.average('length').try(:ceil) || 0)
+    @listens_per_track = Asset.average('listens_count').try(:ceil) || 0
+    @listens_per_user = User.average('listens_count').try(:ceil) || 0
+    @tracks_per_user = User.average('assets_count').try(:ceil) || 0
+    @listens_per_week_per_track = Asset.average('listens_per_week').try(:ceil) || 0
+    @posts_per_user = User.average('posts_count') || 0
   end
 
   def answers
