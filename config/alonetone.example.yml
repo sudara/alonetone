@@ -19,6 +19,14 @@ development: &defaults
   ga: 
   get_clicky: 
   typekit: 
+  smtp_settings:
+    address:
+    port: 25 # ports 587 and 2525 are also supported with STARTTLS
+    enable_starttls_auto: true # detects and uses STARTTLS
+    user_name:
+    password:
+    authentication: 'login'
+    domain: yourapp.com
 
 test:
   <<: *defaults
