@@ -16,6 +16,10 @@ Alonetone::Application.configure do
 
   config.action_mailer.delivery_method = :test
 
+  # Uncomment to deliver mail in development
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = config_for(:alonetone)['smtp_settings'].symbolize_keys
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
