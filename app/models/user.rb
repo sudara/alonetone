@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
   has_many   :assets, 
     -> { order('assets.id DESC')},
     :dependent => :destroy
-  has_many   :asset_comments, :through => :assets, :source => :comments
     
   has_many   :playlists, -> { order('playlists.position')},
     :dependent => :destroy
@@ -167,10 +166,13 @@ class User < ActiveRecord::Base
     Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
 
     Playlist.joins(:assets).where(:assets => {:user_id => id}).
-      update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+      update_all(['tracks_count = tracks_count - 1, updated_at = ?', Time.now])
     Track.joins(:asset).where(:assets => {:user_id => id}).delete_all
 
-    %w(tracks playlists posts asset_comments comments assets).each do |thing|
+    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id").
+      joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
+
+    %w(tracks playlists posts comments assets).each do |thing|
       self.send(thing).delete_all
     end
     true
