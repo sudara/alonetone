@@ -3,6 +3,7 @@ development: &defaults
   show_debug_info: true
   app_name: YourAppName
   url: yourapp.com
+  greenfield_url: greenfield.dev
   email: support@yourapp.com
   secret: f041541efd6d104c7051041ec61e7aa5
   storage: filesystem

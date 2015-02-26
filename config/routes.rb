@@ -1,9 +1,6 @@
 Alonetone::Application.routes.draw do
-  if Alonetone.greenfield?
+  constraints Greenfield::Constraints do
     mount Greenfield::Engine => "/"
-    break
-  else
-    mount Greenfield::Engine => "/greenfield"
   end
 
   resources :groups
@@ -21,7 +18,7 @@ Alonetone::Application.routes.draw do
   # one-off pages
   get 'rpmchallenge' => 'pages#rpm_challenge'
   get '24houralbum' =>  'pages#twentyfour'  
-    
+
   resources :features, :sessions, :user_reports
   
   get 'blog' => 'updates#index', :as => "blog_home"
@@ -72,9 +69,9 @@ Alonetone::Application.routes.draw do
   get ':login/stats.:format' => 'users#stats', :as => 'user_stats'
   
   get 'hot_track/:position.:format' => 'assets#hot_track', 
-    :format     => 'mp3',
-    :as => 'hot_track'
-    
+      :format     => 'mp3',
+      :as => 'hot_track'
+  
   get ':login/plus' => 'source_files#index', :as => 'user_plus'
 
   resources :forums do
@@ -90,7 +87,7 @@ Alonetone::Application.routes.draw do
   end
   
   resources :posts do
-   collection do
+    collection do
       get :search
     end
   end
@@ -112,7 +109,7 @@ Alonetone::Application.routes.draw do
   resources :users
   get ':login' => 'users#show', :as => "user_home"
   get ':login.:format' => 'users#show', :as => "user_feeds"
-    
+  
   resources :users, :path => "/" do
     member do
       post :attach_pic
