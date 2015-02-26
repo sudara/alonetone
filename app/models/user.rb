@@ -166,7 +166,7 @@ class User < ActiveRecord::Base
     Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
 
     Playlist.joins(:assets).where(:assets => {:user_id => id}).
-      update_all(['tracks_count = tracks_count - 1, updated_at = ?', Time.now])
+      update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
     Track.joins(:asset).where(:assets => {:user_id => id}).delete_all
 
     Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id").
