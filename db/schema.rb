@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211224140) do
+ActiveRecord::Schema.define(version: 20150226192525) do
 
-  create_table "assets", force: true do |t|
+  create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
     t.string   "mp3_file_name"
     t.integer  "mp3_file_size"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.text     "waveform",         limit: 16777215
   end
 
-  add_index "assets", ["hotness"], name: "index_assets_on_hotness", using: :btree
-  add_index "assets", ["permalink"], name: "index_assets_on_permalink", using: :btree
-  add_index "assets", ["user_id", "listens_per_week"], name: "index_assets_on_user_id_and_listens_per_day", using: :btree
-  add_index "assets", ["user_id"], name: "index_assets_on_user_id", using: :btree
+  add_index "assets", ["hotness"], name: "index_assets_on_hotness"
+  add_index "assets", ["permalink"], name: "index_assets_on_permalink"
+  add_index "assets", ["user_id", "listens_per_week"], name: "index_assets_on_user_id_and_listens_per_day"
+  add_index "assets", ["user_id"], name: "index_assets_on_user_id"
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.string   "commentable_type"
     t.integer  "commentable_id"
     t.text     "body"
@@ -66,18 +66,18 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.text     "body_html"
   end
 
-  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
-  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
-  add_index "comments", ["created_at"], name: "index_comments_on_created_at", using: :btree
-  add_index "comments", ["is_spam"], name: "index_comments_on_is_spam", using: :btree
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
+  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id"
+  add_index "comments", ["created_at"], name: "index_comments_on_created_at"
+  add_index "comments", ["is_spam"], name: "index_comments_on_is_spam"
 
-  create_table "facebook_accounts", force: true do |t|
+  create_table "facebook_accounts", force: :cascade do |t|
     t.integer "fb_user_id", limit: 8
   end
 
-  add_index "facebook_accounts", ["fb_user_id"], name: "index_facebook_accounts_on_fb_user_id", using: :btree
+  add_index "facebook_accounts", ["fb_user_id"], name: "index_facebook_accounts_on_fb_user_id"
 
-  create_table "facebook_addables", force: true do |t|
+  create_table "facebook_addables", force: :cascade do |t|
     t.string   "profile_chunk_type"
     t.integer  "profile_chunk_id"
     t.integer  "facebook_account_id"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "updated_at"
   end
 
-  create_table "featured_tracks", force: true do |t|
+  create_table "featured_tracks", force: :cascade do |t|
     t.integer  "position"
     t.integer  "feature_id"
     t.integer  "asset_id"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "updated_at"
   end
 
-  create_table "features", force: true do |t|
+  create_table "features", force: :cascade do |t|
     t.integer  "featured_user_id"
     t.integer  "writer_id"
     t.integer  "views_count",      default: 0
@@ -107,17 +107,17 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "updated_at"
   end
 
-  create_table "followings", force: true do |t|
+  create_table "followings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "follower_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
-  add_index "followings", ["user_id"], name: "index_followings_on_user_id", using: :btree
+  add_index "followings", ["follower_id"], name: "index_followings_on_follower_id"
+  add_index "followings", ["user_id"], name: "index_followings_on_user_id"
 
-  create_table "forums", force: true do |t|
+  create_table "forums", force: :cascade do |t|
     t.integer "site_id"
     t.string  "name"
     t.string  "description"
@@ -129,10 +129,10 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string  "permalink"
   end
 
-  add_index "forums", ["permalink"], name: "index_forums_on_permalink", using: :btree
-  add_index "forums", ["position"], name: "index_forums_on_position", using: :btree
+  add_index "forums", ["permalink"], name: "index_forums_on_permalink"
+  add_index "forums", ["position"], name: "index_forums_on_position"
 
-  create_table "greenfield_attached_assets", force: true do |t|
+  create_table "greenfield_attached_assets", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "mp3_file_name"
     t.string   "mp3_content_type"
@@ -144,14 +144,14 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.integer  "length"
   end
 
-  create_table "greenfield_posts", force: true do |t|
+  create_table "greenfield_posts", force: :cascade do |t|
     t.integer  "asset_id"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "groups", force: true do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string   "permalink"
   end
 
-  create_table "listens", force: true do |t|
+  create_table "listens", force: :cascade do |t|
     t.integer  "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -170,13 +170,13 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string   "user_agent"
   end
 
-  add_index "listens", ["asset_id"], name: "index_listens_on_asset_id", using: :btree
-  add_index "listens", ["created_at"], name: "index_listens_on_created_at", using: :btree
-  add_index "listens", ["listener_id"], name: "index_listens_on_listener_id", using: :btree
-  add_index "listens", ["track_owner_id", "created_at"], name: "index_listens_on_track_owner_id_and_created_at", using: :btree
-  add_index "listens", ["track_owner_id"], name: "index_listens_on_track_owner_id", using: :btree
+  add_index "listens", ["asset_id"], name: "index_listens_on_asset_id"
+  add_index "listens", ["created_at"], name: "index_listens_on_created_at"
+  add_index "listens", ["listener_id"], name: "index_listens_on_listener_id"
+  add_index "listens", ["track_owner_id", "created_at"], name: "index_listens_on_track_owner_id_and_created_at"
+  add_index "listens", ["track_owner_id"], name: "index_listens_on_track_owner_id"
 
-  create_table "logged_exceptions", force: true do |t|
+  create_table "logged_exceptions", force: :cascade do |t|
     t.string   "exception_class"
     t.string   "controller_name"
     t.string   "action_name"
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "created_at"
   end
 
-  create_table "memberships", force: true do |t|
+  create_table "memberships", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.boolean  "admin"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "updated_at"
   end
 
-  create_table "pics", force: true do |t|
+  create_table "pics", force: :cascade do |t|
     t.integer  "pic_file_size"
     t.string   "pic_content_type"
     t.string   "pic_file_name"
@@ -206,9 +206,9 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.integer  "picable_id"
   end
 
-  add_index "pics", ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type", using: :btree
+  add_index "pics", ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
 
-  create_table "playlists", force: true do |t|
+  create_table "playlists", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.string   "image"
@@ -225,11 +225,11 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.integer  "position"
   end
 
-  add_index "playlists", ["permalink"], name: "index_playlists_on_permalink", using: :btree
-  add_index "playlists", ["position"], name: "index_playlists_on_position", using: :btree
-  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
+  add_index "playlists", ["permalink"], name: "index_playlists_on_permalink"
+  add_index "playlists", ["position"], name: "index_playlists_on_position"
+  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
 
-  create_table "posts", force: true do |t|
+  create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
     t.text     "body"
@@ -242,10 +242,10 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string   "signature"
   end
 
-  add_index "posts", ["is_spam"], name: "index_posts_on_is_spam", using: :btree
+  add_index "posts", ["is_spam"], name: "index_posts_on_is_spam"
 
-  create_table "reportable_cache", force: true do |t|
-    t.string   "model_name",       limit: 100,               null: false
+  create_table "reportable_cache", force: :cascade do |t|
+    t.string   "model_class_name", limit: 100,               null: false
     t.string   "report_name",      limit: 100,               null: false
     t.string   "grouping",         limit: 10,                null: false
     t.string   "aggregation",      limit: 10,                null: false
@@ -256,10 +256,10 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "updated_at"
   end
 
-  add_index "reportable_cache", ["model_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true, using: :btree
-  add_index "reportable_cache", ["model_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation", using: :btree
+  add_index "reportable_cache", ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true
+  add_index "reportable_cache", ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation"
 
-  create_table "source_files", force: true do |t|
+  create_table "source_files", force: :cascade do |t|
     t.string   "content_type"
     t.string   "filename"
     t.integer  "size",            limit: 8
@@ -269,7 +269,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.datetime "updated_at"
   end
 
-  create_table "topics", force: true do |t|
+  create_table "topics", force: :cascade do |t|
     t.integer  "forum_id"
     t.integer  "user_id"
     t.string   "title"
@@ -289,11 +289,11 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string   "signature"
   end
 
-  add_index "topics", ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink", using: :btree
-  add_index "topics", ["last_updated_at", "forum_id"], name: "index_topics_on_forum_id_and_last_updated_at", using: :btree
-  add_index "topics", ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at", using: :btree
+  add_index "topics", ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink"
+  add_index "topics", ["last_updated_at", "forum_id"], name: "index_topics_on_forum_id_and_last_updated_at"
+  add_index "topics", ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
 
-  create_table "tracks", force: true do |t|
+  create_table "tracks", force: :cascade do |t|
     t.integer  "playlist_id"
     t.integer  "asset_id"
     t.integer  "position"
@@ -303,12 +303,12 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.integer  "user_id"
   end
 
-  add_index "tracks", ["asset_id"], name: "index_tracks_on_asset_id", using: :btree
-  add_index "tracks", ["is_favorite"], name: "index_tracks_on_is_favorite", using: :btree
-  add_index "tracks", ["playlist_id"], name: "index_tracks_on_playlist_id", using: :btree
-  add_index "tracks", ["user_id"], name: "index_tracks_on_user_id", using: :btree
+  add_index "tracks", ["asset_id"], name: "index_tracks_on_asset_id"
+  add_index "tracks", ["is_favorite"], name: "index_tracks_on_is_favorite"
+  add_index "tracks", ["playlist_id"], name: "index_tracks_on_playlist_id"
+  add_index "tracks", ["user_id"], name: "index_tracks_on_user_id"
 
-  create_table "updates", force: true do |t|
+  create_table "updates", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
     t.datetime "created_at"
@@ -318,7 +318,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.string   "permalink"
   end
 
-  create_table "user_reports", force: true do |t|
+  create_table "user_reports", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "category"
     t.text     "description"
@@ -332,7 +332,7 @@ ActiveRecord::Schema.define(version: 20150211224140) do
     t.text     "description_html"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "login",               limit: 40
     t.string   "email",               limit: 100
     t.string   "salt",                limit: 128, default: "",    null: false
