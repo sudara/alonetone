@@ -1,4 +1,5 @@
 //= require jquery
+//= require jquery-ui
 //= require jquery-fileupload/basic
 //= require soundmanager2
 //= require greenfield/resize_textarea
@@ -178,6 +179,19 @@ $(function() {
           success: function() {
             sources.append(post.detach());
           }
+        });
+      }
+    });
+
+    $(this).find('ol').sortable({
+      stop: function(e, ui) {
+        var posts = form.find('ol').
+          sortable('toArray', { attribute: 'data-post_id' }).
+          filter(function(post_id) { return post_id.length });
+        $.ajax({
+          method: 'put',
+          url: form.attr('action')+'/posts',
+          data: { post_ids: posts }
         });
       }
     });

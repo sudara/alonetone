@@ -5,8 +5,9 @@ Greenfield::Engine.routes.draw do
 
   resources :playlists, :only => [:index, :create, :edit] do
     member do
-      post :posts, :action => 'add_post'
-      delete :posts, :action => 'remove_post'
+      post :posts, :action => 'create_post'
+      put :posts, :action => 'replace_all_posts'
+      delete :posts, :action => 'destroy_post'
     end
   end
 

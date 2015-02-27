@@ -27,15 +27,26 @@ module Greenfield
       @playlist = current_user.greenfield_playlists.find_by(permalink: params[:id])
     end
 
-    def add_post
+    def create_post
       playlist = current_user.greenfield_playlists.find_by(permalink: params[:id])
       playlist.posts << current_user.greenfield_posts.find(params[:post_id])
       render :nothing => true
     end
 
-    def remove_post
+    def destroy_post
       playlist = current_user.greenfield_playlists.find_by(permalink: params[:id])
       playlist.playlist_tracks.where(:post_id => params[:post_id]).destroy_all
+      render :nothing => true
+    end
+
+    def replace_all_posts
+      playlist = current_user.greenfield_playlists.find_by(permalink: params[:id])
+      playlist.transaction do
+        playlist.playlist_tracks.delete_all
+        params[:post_ids].each do |post_id|
+          playlist.posts << current_user.greenfield_posts.find(post_id)
+        end
+      end
       render :nothing => true
     end
 

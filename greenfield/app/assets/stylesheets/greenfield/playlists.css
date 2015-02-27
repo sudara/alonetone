@@ -11,6 +11,7 @@
 }
 
 .edit_playlist li.empty-indicator:last-child {
+  color: #aaa;
   font-style: italic;
   list-style-type: none;
 }
