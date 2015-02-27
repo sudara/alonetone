@@ -1,3 +1,16 @@
-.edit_playlist ul a {
+.edit_playlist ul a[data-method=delete] {
   display: none;
+}
+
+.edit_playlist ol a[data-method=post] {
+  display: none;
+}
+
+.edit_playlist li.empty-indicator:not(:last-child) {
+  display: none;
+}
+
+.edit_playlist li.empty-indicator:last-child {
+  font-style: italic;
+  list-style-type: none;
 }

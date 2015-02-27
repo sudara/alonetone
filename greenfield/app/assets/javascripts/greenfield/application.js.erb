@@ -150,16 +150,20 @@ $(function() {
     var posts = form.find('ol');
     var sources = form.find('ul');
 
-    sources.on('click', 'li', function(e) {
-      var post = $(this);
+    sources.on('click', 'li a[data-method=post]', function(e) {
+      var post = $(this).parents('li');
       var post_id = post.data('post_id');
-      $.ajax({
-        method: 'post',
-        url: form.attr('action')+'/posts?post_id='+post_id,
-        success: function() {
-          posts.append(post.detach());
-        }
-      });
+      if (e.which == 1 && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+
+        $.ajax({
+          method: 'post',
+          url: form.attr('action')+'/posts?post_id='+post_id,
+          success: function() {
+            posts.append(post.detach());
+          }
+        });
+      }
     });
 
     posts.on('click', 'li a[data-method=delete]', function(e) {

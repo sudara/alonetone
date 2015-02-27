@@ -4,27 +4,28 @@
     <h1><%= f.text_field :title %></h1>
   </header>
 
-  <p style="font-size: 10pt; font-style: italic">
-    click tracks on the right to add them to this playlist
-  </p>
-
   <ol style="float: left; width: 50%; list-style-type: decimal">
+    <li class="empty-indicator">playlist is empty</li>
     <% @playlist.posts.each do |post| %>
       <li data-post_id="<%= post.id %>">
         <%= post.title %>
         <%= link_to 'remove', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
                      :method => :delete %>
+        <%= link_to 'add', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
+                     :method => :post %>
       </li>
     <% end %>
   </ol>
 
-  <ul style="float: right; width: 50%; max-height: 400px; overflow-y: auto">
+  <ul style="float: right; width: 49%; max-height: 400px; overflow-y: auto">
+    <li class="empty-indicator">no more sources to choose</li>
     <% (@user.greenfield_posts - @playlist.posts).each do |post| %>
       <li data-post_id="<%= post.id %>">
         <%= post.title %>
         <%= link_to 'remove', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
                      :method => :delete %>
-
+        <%= link_to 'add', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
+                     :method => :post %>
       </li>
     <% end %>
   </ul>
