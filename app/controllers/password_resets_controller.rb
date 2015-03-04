@@ -26,6 +26,7 @@ class PasswordResetsController < ApplicationController
     if @user.save  
       flash[:notice] = "Password successfully updated! Enjoy a much easier life from here on out."  
       @user.clear_token!
+      UserSession.create(@user, true)
       redirect_to user_home_path(@user.login)  
     else 
       flash[:error] = "Please try again. #{@user.errors.full_messages.join('<br/>')}"
