@@ -1,14 +1,9 @@
-module AuthlogicHelpers
-  extend ActiveSupport::Concern
-
-  included do
-    helper_method :session_token
-  end
+module AuthlogicHelpers  
 
   # from Authlogic readme
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find || create_session_from_token
+    @current_user_session = UserSession.find
   end
 
   def current_user
@@ -64,21 +59,6 @@ module AuthlogicHelpers
   def force_admin_login
     store_location
     redirect_to login_path, :alert => "What do you think you’re doing?! We're calling your mother..."
-  end
-
-  private
-
-  def create_session_from_token
-    if params[:session_token]
-      verifier = ActiveSupport::MessageVerifier.new(Alonetone.secret)
-      id, time = verifier.verify(params[:session_token])
-      UserSession.create(User.find(id), true) if Time.now < time
-    end
-  end
-
-  def session_token
-    verifier = ActiveSupport::MessageVerifier.new(Alonetone.secret)
-    verifier.generate([current_user.id, 1.hour.from_now])
-  end
-
+  end  
+  
 end
