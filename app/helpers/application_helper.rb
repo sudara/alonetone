@@ -51,6 +51,7 @@ module ApplicationHelper
   # in the middle of an entity ex.: truncate("this &amp; that",9)  => "this &am..."
   # though it will not be the exact length.
   def awesome_truncate(text, length = 30, truncate_string = "&hellip;")
+    text = text.strip
     return "" if text.blank?
     l = length - truncate_string.mb_chars.length
     result = text.mb_chars.length > length ? text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] + truncate_string : text
