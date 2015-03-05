@@ -75,7 +75,7 @@ protected
   end
   
   def find_forum
-    @forum = Forum.where(:permalink => params[:forum_id]).first
+    @forum = Forum.where(:permalink => params[:forum_id]).take!
   end
   
   def find_topic
