@@ -59,7 +59,9 @@ module Greenfield
     end
 
     def authorize
-      if find_post.user != current_user
+      if !current_user
+        attempt_login_via_alonetone
+      elsif find_post.user != current_user
         raise ActiveRecord::RecordNotFound
       end
     end
