@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226192525) do
+ActiveRecord::Schema.define(version: 20150305213613) do
+
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
     t.string   "mp3_file_name"
@@ -60,8 +61,8 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.string   "remote_ip"
     t.string   "user_agent"
     t.string   "referrer"
-    t.boolean  "is_spam",          default: false
-    t.boolean  "private",          default: false
+    t.boolean  "is_spam",                      default: false
+    t.boolean  "private",                      default: false
     t.text     "body_html"
   end
 
@@ -85,7 +86,7 @@ ActiveRecord::Schema.define(version: 20150226192525) do
   end
 
   create_table "featured_tracks", force: :cascade do |t|
-    t.integer  "position"
+    t.integer  "position",   default: 1
     t.integer  "feature_id"
     t.integer  "asset_id"
     t.datetime "created_at"
@@ -122,7 +123,7 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.string  "description"
     t.integer "topics_count",     default: 0
     t.integer "posts_count",      default: 0
-    t.integer "position",         default: 0
+    t.integer "position",         default: 1
     t.text    "description_html"
     t.string  "state",            default: "public"
     t.string  "permalink"
@@ -143,15 +144,15 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.integer  "length"
   end
 
-  create_table "greenfield_playlist_tracks", force: true do |t|
+  create_table "greenfield_playlist_tracks", force: :cascade do |t|
     t.integer  "playlist_id"
     t.integer  "post_id"
-    t.integer  "position"
+    t.integer  "position",    default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "greenfield_playlists", force: true do |t|
+  create_table "greenfield_playlists", force: :cascade do |t|
     t.string   "title"
     t.string   "permalink"
     t.integer  "user_id"
@@ -159,7 +160,7 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.datetime "updated_at"
   end
 
-  create_table "greenfield_posts", force: true do |t|
+  create_table "greenfield_posts", force: :cascade do |t|
     t.integer  "asset_id"
     t.text     "body"
     t.datetime "created_at"
@@ -237,7 +238,7 @@ ActiveRecord::Schema.define(version: 20150226192525) do
     t.boolean  "private"
     t.boolean  "is_favorite",  default: false
     t.string   "year"
-    t.integer  "position"
+    t.integer  "position",     default: 1
   end
 
   add_index "playlists", ["permalink"], name: "index_playlists_on_permalink"
@@ -311,7 +312,7 @@ ActiveRecord::Schema.define(version: 20150226192525) do
   create_table "tracks", force: :cascade do |t|
     t.integer  "playlist_id"
     t.integer  "asset_id"
-    t.integer  "position"
+    t.integer  "position",    default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_favorite", default: false
