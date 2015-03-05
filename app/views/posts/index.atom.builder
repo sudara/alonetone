@@ -15,7 +15,7 @@ xml.feed(:xmlns => "http://www.w3.org/2005/Atom") do |feed|
                                           :anchor => dom_id(post))
  
       entry.author do |author|
-        author.name post.user.name
+        author.name post.user.try(:name)
       end
     end
   end
