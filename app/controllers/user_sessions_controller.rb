@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token, :if => :greenfield_login_via_alone?
+  skip_before_action :verify_authenticity_token, :if => :attempting_greenfield_login_via_alonetone?
 
   def new
     @page_title = "Login"
@@ -53,7 +53,7 @@ class UserSessionsController < ApplicationController
 
   private
 
-  def greenfield_login_via_alone?
+  def attempting_greenfield_login_via_alonetone?
     ['greenfield_login', 'create_from_token'].include?(action_name) &&
       URI(request.referer).host == Alonetone.greenfield_url
   end
