@@ -30,6 +30,9 @@ class Comment < ActiveRecord::Base
   attr_accessible :body, :remote_ip, :commentable_type, :commentable_id, :private, 
     :commenter_id, :user_agent, :referrer, :commenter, :user_id, :commentable
 
+  before_save :truncate_user_agent
+
+
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { author_name },
                   :author_email =>  proc { commenter.email if commenter },
@@ -80,5 +83,9 @@ class Comment < ActiveRecord::Base
   def is_deliverable?
     !is_spam? and commentable.class == Asset and 
       user.wants_email? and user != commenter
+  end
+
+  def truncate_user_agent
+    self.user_agent = self.user_agent.try(:slice, 0, 255)
   end
 end

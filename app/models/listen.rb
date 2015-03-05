@@ -19,6 +19,8 @@ class Listen < ActiveRecord::Base
   validates_presence_of :asset_id, :track_owner_id
 
   reportable :weekly, :aggregation => :count, :grouping => :week
+
+  before_save :truncate_user_agent
   
   
   def source
@@ -113,5 +115,9 @@ class Listen < ActiveRecord::Base
                         date.beginning_of_month, date.end_of_month]
       ), 
       "#{date.strftime('%b %y')}" ]
+  end
+
+  def truncate_user_agent
+    self.user_agent = self.user_agent.try(:slice, 0, 255)
   end
 end
