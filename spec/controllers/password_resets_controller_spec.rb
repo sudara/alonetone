@@ -45,7 +45,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         :user => {:password => '123456', :password_confirmation => '123456'}
       expect(response).to redirect_to('/arthur')
       expect(User.where(:login => 'arthur').first.perishable_token).to be_nil
-      expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token) # logged in
+      expect(controller.session["user_credentials"]).to eq(User.where(:login => 'arthur').first.persistence_token) # logged in
     end
 
     it 'should allow user to manually type in password and present edit again if passes do not match' do
