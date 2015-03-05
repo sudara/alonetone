@@ -36,14 +36,14 @@ class UserSessionsController < ApplicationController
   def greenfield_login
     if current_user
       verifier = ActiveSupport::MessageVerifier.new(Alonetone.secret)
-      @token = verifier.generate([current_user.id, 1.minute.from_now])
+      @token = verifier.generate([current_user.id, 2.minute.from_now])
     end
   end
 
   def create_from_token
     verifier = ActiveSupport::MessageVerifier.new(Alonetone.secret)
     user_id, time = verifier.verify(params[:token])
-    if Time.now < time
+    if Time.now <= time
       UserSession.create(User.find(user_id), true)
       render :nothing => true
     else
