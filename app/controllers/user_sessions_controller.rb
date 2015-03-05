@@ -26,6 +26,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     if logged_in?
+      session[:sudo] = nil
       current_user_session.destroy
       redirect_to login_path, :notice => "We've logged you out. Your secrets are safe with us!"
     else
