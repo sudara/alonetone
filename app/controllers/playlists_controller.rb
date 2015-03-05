@@ -16,7 +16,7 @@ class PlaylistsController < ApplicationController
       format.html { @playlists = @user.playlists.include_private.all }
       format.js do
         params["playlist"].each_with_index do |id, position|
-          @user.playlists.update(id, :position => position)
+          @user.playlists.update(id, :position => position+1)
         end
         render :nothing => true
       end
