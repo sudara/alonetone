@@ -5,5 +5,6 @@
 //= require greenfield/initialize_soundManager
 //= require greenfield/resize_textarea
 //= require greenfield/file_upload
+//= require greenfield/playlists
 //= require greenfield/player
 //= require greenfield/posts
