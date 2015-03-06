@@ -4,7 +4,6 @@
 //= require soundmanager2
 //= require greenfield/initialize_soundManager
 //= require greenfield/resize_textarea
-//= require greenfield/baseline
 //= require greenfield/file_upload
 //= require greenfield/player
 //= require greenfield/posts
