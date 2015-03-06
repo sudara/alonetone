@@ -1,4 +1,3 @@
-
 .player {
   margin-top: $baseline * .8;
   margin-bottom: $baseline + 7px;
@@ -7,6 +6,26 @@
   border-bottom: 1px solid $light-gray;
   display: block;
   position: relative;
+  background-color: $not-quite-white-opaque;
+
+  &.stuck {
+    position: fixed;
+    top: 0px;
+    width: 650px;
+    height: ($baseline * 2.5);
+    padding-top: 4px;
+    margin-top: 0px;
+    border-top: 0px;
+
+    .waveform {
+      height: 100%;
+    }
+
+    .play-button, .pause-button {
+      margin-top: 5px;
+      padding: 0px;
+    }
+  }
   
   .time{
     color: $lightest-gray;
