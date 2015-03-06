@@ -101,3 +101,13 @@ $(function() {
     });
   });
 });
+
+function reconstructWaveform(container) {
+  var waveform = container.data('waveform');
+  container.find('canvas').remove();
+  container.data('waveform', new Waveform({
+    container: waveform.container,
+    innerColor: waveform.innerColor,
+    data: waveform.data
+  }));
+}
