@@ -45,7 +45,11 @@ class Asset < ActiveRecord::Base
   end
   
   def self.id_not_in(asset_ids)
-    where("assets.id NOT IN (?)", asset_ids) if asset_ids.present?
+    if asset_ids.present?
+      where("assets.id NOT IN (?)", asset_ids)
+    else
+      all
+    end
   end
 
   def self.user_id_in(user_ids)
