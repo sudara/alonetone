@@ -8,7 +8,7 @@
     <li class="empty-indicator">playlist is empty</li>
     <% @playlist.posts.each do |post| %>
       <li data-post_id="<%= post.id %>">
-        <%= post.title %>
+        <%= post.name %>
         <%= link_to 'remove', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
                      :method => :delete %>
         <%= link_to 'add', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
@@ -21,7 +21,7 @@
     <li class="empty-indicator">no more sources to choose</li>
     <% (@user.greenfield_posts - @playlist.posts).each do |post| %>
       <li data-post_id="<%= post.id %>">
-        <%= post.title %>
+        <%= post.name %>
         <%= link_to 'remove', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
                      :method => :delete %>
         <%= link_to 'add', "#{playlist_path(@playlist)}/posts?post_id=#{post.id}",
