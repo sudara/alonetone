@@ -8,10 +8,8 @@ class Asset
     tmp = Tempfile.new(['mp3-download', '.mp3'])
 
     begin
-      url = mp3.expiring_url.gsub('s3.amazonaws.com/','')
-      Paperclip.run(['curl', '-o', Shellwords.shellescape(tmp.path),
-                     Shellwords.shellescape(url)])
-      update_column(:waveform, Greenfield::Waveform.extract(tmp.path))
+      mp3.copy_to_local_file(:original, tmp.path)
+      update!(:waveform => Greenfield::Waveform.extract(tmp.path))
     ensure
       tmp.close!
     end
