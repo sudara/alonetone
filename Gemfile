@@ -57,6 +57,7 @@ gem "coffee-rails"
 gem "soundmanager2-rails"
 gem 'newrelic_rpm'
 gem 'bugsnag'
+gem 'sidekiq'
 
 group :production do
   gem "puma"

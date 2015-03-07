@@ -66,6 +66,8 @@ Alonetone::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = config_for(:alonetone)['smtp_settings'].symbolize_keys
+
+  config.active_job.queue_adapter = :sidekiq
   
   # Set to :debug to see everything in the log.
   config.log_level = :info
