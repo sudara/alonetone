@@ -119,5 +119,6 @@ class Listen < ActiveRecord::Base
 
   def truncate_user_agent
     self.user_agent = self.user_agent.try(:slice, 0, 255)
+    self.source = self.source.try(:slice, 0, 255)
   end
 end
