@@ -524,6 +524,54 @@ EditForm = $.klass(Remote.Form,{
     }
 });
 
+TrackSeekbar = $.klass({
+  initialize: function(track) {
+    var seekbar = this;
+    this.track = track;
+    this.loaded = $('.loaded', this.element);
+    this.handle = $('.handle', this.element);
+
+    this.handle.draggable({
+      axis: 'x',
+      containment: 'parent',
+      start: function() {
+        seekbar.handleIsDragging = true;
+      },
+
+      stop: function(e) {
+        var sound = track.getSound();
+        var value = $(this).position().left / $(this).parents('.seekbar').width();
+        var pos = value * sound.durationEstimate;
+        sound.setPosition(pos);
+        seekbar.handleIsDragging = false;
+      }
+    });
+
+    this.loaded.click(function(e) {
+      var sound = track.getSound();
+      var x = (e.offsetX || e.clientX - $(e.target).offset().left);
+      var value = x / $(this).parents('.seekbar').width();
+      var pos = value * sound.durationEstimate;
+      sound.setPosition(pos);
+    });
+  },
+
+  updateHandle: function() {
+    var sound = this.track.getSound();
+    var value = sound.position / sound.durationEstimate;
+    if (!this.handleIsDragging)
+      this.handle.css('left', this.element.width() * value + 'px');
+  },
+
+  updateLoaded: function() {
+    var sound = this.track.getSound();
+    var value = sound.duration / sound.durationEstimate;
+    if (sound.duration > 15 && this.handle.css('display') == 'none')
+      this.handle.css('display', '');
+    this.loaded.css('width', 100 * value + '%');
+  }
+});
+
 Track = $.klass({  
   initialize: function() {
     this.element.addClass('instantiated');
@@ -539,6 +587,7 @@ Track = $.klass({
     this.trackURL = $('a.play_link',this.element).attr('href');
     this.soundID = this.trackURL.split('/').pop().split('.')[0];
     this.more = this.element.children().last();
+    this.seekbar = $('.seekbar', this.element).attach(TrackSeekbar, this);
     this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     this.radio = false;
@@ -679,9 +728,23 @@ Track = $.klass({
       this.play();
     }
   },
+
+  getSound: function() {
+    if (!this.sound) {
+      var seekbar = this.seekbar.firstAttached(TrackSeekbar);
+      this.sound = soundManager.createSound({
+        id: this.soundID,
+        url: this.trackURL,
+        whileloading: $.bind(seekbar.updateLoaded, seekbar),
+        whileplaying: $.bind(seekbar.updateHandle, seekbar),
+        onfinish: $.bind(this.startNextTrack, this)
+      });
+    }
+    return this.sound;
+  },
   
   play: function(){
-    soundManager.createSound({id: this.soundID, url: this.trackURL, onfinish:$.bind(this.startNextTrack,this)}).play();
+    this.getSound().play();
     if(typeof pageTracker != "undefined"){
       pageTracker._trackPageview(this.trackURL);
     }

@@ -15,9 +15,41 @@
       text-decoration: underline;
     }
   }
-  > div {
+  .button, .title {
     float: left;
   }
+
+  .seekbar {
+    position: absolute;
+    top: 42px;
+    left: 3%;
+    height: .3em;
+    width: 94%;
+
+    .loaded {
+      background-color: #bbb;
+      border-radius: 4px;
+      height: 0.3em;
+    }
+
+    .handle {
+      position: absolute;
+      top: -.15em;
+      margin-left: -.225em;
+      width: .45em;
+      height: .45em;
+      border-radius: 50%;
+      border: 1px solid #d3d3d3;
+      background-color: #ddd;
+    }
+  }
+
+  &:not(.open) {
+    .seekbar {
+      display: none;
+    }
+  }
+
   div.button {
     background-color: $box_background;
     width: 50px;
@@ -166,6 +198,9 @@
   textarea {
     margin-top: 10px;
     width: 380px;
+  }
+  .seekbar {
+    display: block;
   }
 }
 
