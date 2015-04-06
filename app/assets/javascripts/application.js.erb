@@ -547,12 +547,17 @@ TrackSeekbar = $.klass({
       }
     });
 
-    this.loaded.click(function(e) {
-      var sound = track.getSound();
-      var x = (e.offsetX || e.clientX - $(e.target).offset().left);
-      var value = x / $(this).parents('.seekbar').width();
-      var pos = value * sound.durationEstimate;
-      sound.setPosition(pos);
+    this.loaded.mousedown(function(e) {
+      if (!e.seekerWasMoved) {
+        var sound = track.getSound();
+        var x = (e.offsetX || e.clientX - $(e.target).offset().left);
+        var value = x / $(this).parents('.seekbar').width();
+        var pos = value * sound.durationEstimate;
+        sound.setPosition(pos);
+
+        e.seekerWasMoved = true;
+        seekbar.handle.trigger(e);
+      }
     });
   },
 
