@@ -141,7 +141,7 @@ class AssetsController < ApplicationController
      if @assets.present?
        flash[:error] = flashes.html_safe
       else
-        flashe[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email #{Alonetone.email}" 
+        flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email #{Alonetone.email}"
       end
       redirect_to new_user_track_path(current_user)
     end 
