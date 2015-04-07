@@ -119,9 +119,8 @@ class Asset < ActiveRecord::Base
   end
   
   def notify_followers
-    emails = emails_of_followers(self)
-    if emails.present?
-      AssetNotification.upload_notification(self, emails).deliver_now
+    user.followers.select(&:wants_email?).each do |user|
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.email)
     end
   end 
 end
