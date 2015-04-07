@@ -1,4 +1,9 @@
+require 'sidekiq/web'
+require 'admin_constraint'
+
 Alonetone::Application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
+
   constraints Greenfield::Constraints do
     mount Greenfield::Engine => "/"
   end

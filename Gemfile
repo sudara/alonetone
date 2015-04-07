@@ -58,6 +58,7 @@ gem "soundmanager2-rails"
 gem 'newrelic_rpm'
 gem 'bugsnag'
 gem 'sidekiq'
+gem 'sinatra', :require => nil # for sidekiq web ui
 
 group :production do
   gem "puma"
