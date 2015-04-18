@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305213613) do
+ActiveRecord::Schema.define(version: 20150417235646) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20150305213613) do
     t.integer  "commenter_id"
     t.integer  "user_id"
     t.string   "remote_ip"
-    t.string   "user_agent"
+    t.string   "user_agent",       limit: 511
     t.string   "referrer"
     t.boolean  "is_spam",                      default: false
     t.boolean  "private",                      default: false
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 20150305213613) do
     t.integer  "track_owner_id"
     t.string   "source"
     t.string   "ip"
-    t.string   "user_agent"
+    t.string   "user_agent",     limit: 511
   end
 
   add_index "listens", ["asset_id"], name: "index_listens_on_asset_id"
@@ -395,7 +395,7 @@ ActiveRecord::Schema.define(version: 20150305213613) do
     t.string   "persistence_token"
     t.string   "perishable_token"
     t.datetime "last_request_at"
-    t.integer  "bandwidth_used"
+    t.integer  "bandwidth_used",                  default: 0
     t.boolean  "greenfield_enabled",              default: false
   end
 

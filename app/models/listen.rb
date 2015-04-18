@@ -82,14 +82,15 @@ class Listen < ActiveRecord::Base
   end
   
   def self.most_active_ips(limit=25)
-    Listen.count(:all, :group => :ip, :conditions => ['created_at > ?',30.days.ago], :order => 'count_all DESC', :limit => limit)
+    Listen.where('created_at > ?', 30.days.ago).
+      order('count_all DESC').
+      group(:ip).limit(limit).count
   end
   
   def self.most_active_tracks(limit=25)
-    Listen.count(:all, 
-                 :from => "listens IGNORE INDEX(index_listens_on_asset_id)",
-                 :group => :asset, 
-                 :conditions => ['created_at > ?',30.days.ago], :order => 'count_all DESC', :limit => limit)
+    Listen.from('listens IGNORE INDEX(index_listens_on_asset_id)').
+      where('created_at > ?', 30.days.ago).order('count_all DESC').
+      group(:asset).limit(limit).count
   end
   
   def self.find_user_by_ip(ip)
