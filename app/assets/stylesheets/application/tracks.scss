@@ -20,27 +20,19 @@
   }
 
   .seekbar {
-    position: absolute;
-    top: 42px;
-    left: 3%;
-    height: .3em;
-    width: 94%;
+    clear: both;
 
     .loaded {
-      background-color: #bbb;
-      border-radius: 4px;
-      height: 0.3em;
+      padding-top: 2px;
+      padding-bottom: 2px;
+
+      background-color: #1f1d04;
+      height: 5px;
     }
 
-    .handle {
-      position: absolute;
-      top: -.15em;
-      margin-left: -.225em;
-      width: .45em;
-      height: .45em;
-      border-radius: 50%;
-      border: 1px solid #d3d3d3;
-      background-color: #ddd;
+    .played {
+      background-color: #fca744;
+      height: 5px;
     }
   }
 
@@ -190,7 +182,6 @@
     display: block;
     background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
-    margin-top: 1px;
     p img {
       max-width: 385px;
     }

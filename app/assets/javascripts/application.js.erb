@@ -528,52 +528,31 @@ TrackSeekbar = $.klass({
   initialize: function(track) {
     var seekbar = this;
     this.track = track;
+    this.seekbar = $(this.element);
     this.loaded = $('.loaded', this.element);
-    this.handle = $('.handle', this.element);
-
-    this.handle.draggable({
-      axis: 'x',
-      containment: 'parent',
-      start: function() {
-        seekbar.handleIsDragging = true;
-      },
-
-      stop: function(e) {
-        var sound = track.getSound();
-        var value = $(this).position().left / $(this).parents('.seekbar').width();
-        var pos = value * sound.durationEstimate;
-        sound.setPosition(pos);
-        seekbar.handleIsDragging = false;
-      }
-    });
+    this.played = $('.played', this.element);
 
     this.loaded.mousedown(function(e) {
-      if (!e.seekerWasMoved) {
-        var sound = track.getSound();
-        var x = (e.offsetX || e.clientX - $(e.target).offset().left);
-        var value = x / $(this).parents('.seekbar').width();
-        var pos = value * sound.durationEstimate;
-        sound.setPosition(pos);
-
-        e.seekerWasMoved = true;
-        seekbar.handle.trigger(e);
-      }
+      var sound = track.getSound();
+      var x = (e.offsetX || e.clientX - $(e.target).offset().left);
+      var value = x / $(this).parents('.seekbar').width();
+      var pos = value * sound.durationEstimate;
+      sound.setPosition(pos);
     });
   },
 
-  updateHandle: function() {
+  updatePlayed: function() {
     var sound = this.track.getSound();
     var value = sound.position / sound.durationEstimate;
-    if (!this.handleIsDragging)
-      this.handle.css('left', this.element.width() * value + 'px');
+    var maxwidth = this.seekbar.width();
+    this.played.css('width', value * maxwidth);
   },
 
   updateLoaded: function() {
     var sound = this.track.getSound();
     var value = sound.duration / sound.durationEstimate;
-    if (sound.duration > 15 && this.handle.css('display') == 'none')
-      this.handle.css('display', '');
     this.loaded.css('width', 100 * value + '%');
+    this.seekbar.css('display', 'block');
   }
 });
 
@@ -741,7 +720,7 @@ Track = $.klass({
         id: this.soundID,
         url: this.trackURL,
         whileloading: $.bind(seekbar.updateLoaded, seekbar),
-        whileplaying: $.bind(seekbar.updateHandle, seekbar),
+        whileplaying: $.bind(seekbar.updatePlayed, seekbar),
         onfinish: $.bind(this.startNextTrack, this)
       });
     }
