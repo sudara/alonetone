@@ -1,24 +1,30 @@
 <div class="play-button button">
-	<div class="sprites-play">
-		<%= link_to_play asset %>
-	</div>
+  <div class="sprites-play">
+    <%= link_to_play asset %>
+  </div>
 </div>
 
-<div class="title">	
-	<div class="title_left_column">
-		<div class="title_left_column_top">
-			<span>
-			  <%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
-			</span>
-			<span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
-		</div>
-		<div class="title_left_column_bottom">
-				<%= yield %>
-		</div>
-	</div>
+<div class="title">
+  <div class="title_left_column">
+    <div class="title_left_column_top">
+      <span>
+	<%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
+      </span>
+      <span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
+    </div>
+    <div class="title_left_column_bottom">
+      <%= yield %>
+    </div>
+  </div>
 
-	<div class="title_right_column">
-		<div class='counter'></div>
-		<div class='time'><%= asset.length%></div>
-	</div>
+  <div class="title_right_column">
+    <div class='counter'></div>
+    <div class='time'><%= asset.length%></div>
+  </div>
+</div>
+
+<div class="seekbar" style="display: none">
+  <div class="loaded" style="width: 0%">
+    <div class="played" style="width: 0%"></div>
+  </div>
 </div>

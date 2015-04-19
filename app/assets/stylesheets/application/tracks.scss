@@ -15,9 +15,33 @@
       text-decoration: underline;
     }
   }
-  > div {
+  .button, .title {
     float: left;
   }
+
+  .seekbar {
+    clear: both;
+
+    .loaded {
+      padding-top: 2px;
+      padding-bottom: 2px;
+
+      background-color: #1f1d04;
+      height: 5px;
+    }
+
+    .played {
+      background-color: #fca744;
+      height: 5px;
+    }
+  }
+
+  &:not(.open) {
+    .seekbar {
+      display: none;
+    }
+  }
+
   div.button {
     background-color: $box_background;
     width: 50px;
@@ -158,7 +182,6 @@
     display: block;
     background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
-    margin-top: 1px;
     p img {
       max-width: 385px;
     }
@@ -166,6 +189,9 @@
   textarea {
     margin-top: 10px;
     width: 380px;
+  }
+  .seekbar {
+    display: block;
   }
 }
 
