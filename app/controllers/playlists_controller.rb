@@ -7,7 +7,7 @@ class PlaylistsController < ApplicationController
 
   def all
     @playlists = Playlist.recent.only_public.with_pic.
-                   paginate(:page => params[:page], :per_page => 50)
+                   paginate(:page => params[:page], :per_page => 20)
   end
 
   # all user's playlists
