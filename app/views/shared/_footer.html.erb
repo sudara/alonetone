@@ -64,7 +64,7 @@
   <h3 class="footer-column-header">from the blog</h3>
   <ul>
     <li>
-      <%= link_to "#{truncate(@latest_update.try(:title), :length => 50).html_safe}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+      <%= link_to "#{truncate(@latest_update.try(:title), :length => 50, :escape => false).html_safe}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
     </li>
   </ul>
 
