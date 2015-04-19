@@ -33,11 +33,6 @@
   <div class="footer_column_2_right">
     <h3 class="footer-column-header">other places to find alonetone</h3>      
      <div>
-        <%= link_to "http://#{Alonetone.campfire_url}" do %>
-          Alonetone <span class="footer_orange_text">Chat Room</span>
-        <% end %>
-     </div>
-     <div>
         <%= link_to 'http://twitter.com/alonetone' do %>
           <span class="footer_orange_text">@alonetone</span> on Twitter
         <% end %>
@@ -69,7 +64,7 @@
   <h3 class="footer-column-header">from the blog</h3>
   <ul>
     <li>
-      <%= link_to "#{truncate(@latest_update && @latest_update.title, :length => 50)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
+      <%= link_to "#{truncate(@latest_update.try(:title), :length => 50).html_safe}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
     </li>
   </ul>
 
