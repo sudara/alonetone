@@ -1,0 +1,15 @@
+<div id="static_header">
+  <div class="title">
+    <h1 class="static">Browse all alonetone playlists</h1>
+  </div>
+
+  <div class="mini_paginator">
+    <%= will_paginate @playlists, :param_name => :page %>
+  </div>
+</div>
+
+<div style="margin-top: 28px">
+  <% @playlists.each_slice(5) do |playlists| %>
+  <%= render 'row', :playlists => playlists %>
+  <% end %>
+</div>

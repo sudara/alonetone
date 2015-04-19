@@ -3,9 +3,12 @@
 <%= cache(@playlists.first.cache_key+'plisthome') do %>
     <div class="latest-playlists-header">
       <div class="sprites-latest-playlists sprites-before-heading"></div>
-      <h2>Latest playlists</h2>
+      <h2>
+      <%= link_to "Latest playlists".html_safe, all_playlists_path, :title => 'view latest playlists' %> 
+      </h2>
     </div>
-    <%= render :partial => 'playlists/for_home' %>
+
+    <%= render 'playlists/row', :playlists => @playlists %>
 <% end unless @playlists.blank? %>
 
 <% content_for :left do%>

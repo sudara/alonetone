@@ -1,9 +1,14 @@
 class PlaylistsController < ApplicationController
 
-  before_filter :find_user
-  before_filter :find_playlists, :except => [:index, :new, :create, :sort]
-  before_filter :require_login, :except => [:index, :show]
-  before_filter :find_tracks, :only => [:show, :edit]
+  before_filter :find_user, :except => :all
+  before_filter :find_playlists, :except => [:index, :new, :create, :sort, :all]
+  before_filter :require_login, :except => [:index, :show, :all]
+  before_filter :find_tracks, :only => [:show, :edit, :all]
+
+  def all
+    @playlists = Playlist.recent.only_public.with_pic.
+                   paginate(:page => params[:page], :per_page => 20)
+  end
 
   # all user's playlists
   def index
