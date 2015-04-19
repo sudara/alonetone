@@ -69,21 +69,19 @@ $(function() {
         id: soundID,
         url: url,
         autoLoad: true,
+        whileplaying: function() {
+          soundPosition = this.position / this.durationEstimate;
+          container.data('waveform').update({ data: data });
+
+          var time = Math.floor(this.position / 1000.0);
+          var min = Math.floor(time / 60), sec = time % 60;
+          index.text(min + ':' + (sec >= 10 ? sec : '0'+sec));
+        },
         onfinish: function() {
           player.find('.play-control').
             removeClass('pause-button').addClass('play-button');
         }
       });
-
-      setInterval(function() {
-        soundPosition = sound.position / sound.durationEstimate;
-        container.data('waveform').update({ data: data });
-
-        var time = Math.floor(sound.position / 1000.0);
-        var min = Math.floor(time / 60), sec = time % 60;
-        index.text(min + ':' + (sec >= 10 ? sec : '0'+sec));
-      }, 50);
-
 
       scrubber.click(function(e) {
         e.preventDefault();
