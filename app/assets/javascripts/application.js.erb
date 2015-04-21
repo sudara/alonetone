@@ -551,6 +551,7 @@ TrackSeekbar = $.klass({
   updateLoaded: function() {
     var sound = this.track.getSound();
     var value = sound.duration / sound.durationEstimate;
+    this.element.addClass('initialized');
     this.loaded.css('width', 100 * value + '%');
   }
 });

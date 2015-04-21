@@ -25,7 +25,7 @@
       </div>
   <% end %>
   
-  <div id="single_track" class="box">
+  <div id="single_track" class="box<%= ' descriptionless' unless @asset.description.present? %>">
     <%= render :partial => 'assets/assets'%>  
     <%= favorite_toggle(@asset) if logged_in? %>
     <% if @asset.description && !@asset.description.empty? %>

@@ -21,6 +21,7 @@
 
   .seekbar {
     clear: both;
+    height: 9px;
 
     .loaded {
       padding-top: 2px;
@@ -190,8 +191,23 @@
     margin-top: 10px;
     width: 380px;
   }
+
   .seekbar {
     display: block;
+    background-color: $playlist_box_silver;
+
+    &:not(.initialized) {
+      border-top: 1px solid $body_background;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+  }
+
+  &.descriptionless {
+    .seekbar {
+      background-color: $tab_box_silver;
+    }
   }
 }
 
