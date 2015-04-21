@@ -48,7 +48,9 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens = @user.listens.paginate(:page => params[:listens_page], :per_page => 10)
+    @listens = @user.listened_to_tracks.preload(:user).
+                 select('assets.*').distinct.
+                 paginate(:page => params[:listens_page], :per_page => 10)
     @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page], :per_page => 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
