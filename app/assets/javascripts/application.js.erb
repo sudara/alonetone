@@ -624,8 +624,6 @@ Track = $.klass({
     // change the tab if the clicked tab is not currently open
     if(this.tabbies.currentTab != desiredTab) this.tabbies.openTab(desiredTab);
 
-    this.seekbar.css('display', 'block');
-
     // open the pane if it is not already open
     if(this.isOpen != false) this.more.slideDown(300,function(){
         $('textarea',this).focus();
@@ -662,7 +660,6 @@ Track = $.klass({
   
   closeDetails:function(){
     if(!this.allowDetailsOpen || this.commentBoxIsPopulated()) return false;
-    this.seekbar.css('display', 'none');
     this.more.slideUp({duration:300,queue:false});
     this.element.removeClass('open');
   },
@@ -692,6 +689,7 @@ Track = $.klass({
   
   playOrResume : function(){
     this.killOtherTracks();
+    this.seekbar.css('display', 'block');
     this.element.addClass('playing');
     this.innerPlay.addClass('sprites-pause')
     this.innerPlay.removeClass('sprites-play')
@@ -795,8 +793,10 @@ Track = $.klass({
   
   killOtherTracks : function(){
     // basically a dumb way of making sure no other tracks are playing, looping through
-    for(track=0;track < this.behavior.instances.length;track++){ 
-      if(this.behavior.instances[track].isPlaying()) this.behavior.instances[track].pause();
+    for(track=0;track < this.behavior.instances.length;track++){
+      this.behavior.instances[track].seekbar.css('display', 'none');
+      if(this.behavior.instances[track].isPlaying())
+        this.behavior.instances[track].pause();
     }
   },
   
