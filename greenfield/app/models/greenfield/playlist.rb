@@ -1,13 +1,15 @@
 module Greenfield
-  class Playlist < ActiveRecord::Base
-    belongs_to :user
+  class Playlist
+    attr_reader :alonetone_playlist
 
-    has_many :playlist_tracks, :dependent => :destroy
-    has_many :posts, :through => :playlist_tracks, :source => :post
+    delegate :to_param, to: :alonetone_playlist
 
-    attr_accessible :title
-    validates_presence_of :title
+    def initialize(alonetone_playlist)
+      @alonetone_playlist = alonetone_playlist
+    end
 
-    has_permalink :title, true
+    def tracks
+      alonetone_playlist.tracks.joins(asset: :greenfield_post)
+    end
   end
 end
