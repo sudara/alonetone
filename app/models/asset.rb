@@ -120,7 +120,7 @@ class Asset < ActiveRecord::Base
   
   def notify_followers
     user.followers.select(&:wants_email?).each do |user|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.email)
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
     end
   end 
 end
