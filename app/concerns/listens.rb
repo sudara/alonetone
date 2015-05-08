@@ -42,7 +42,7 @@ module Listens
     asset.listens.create(
         :listener     => current_user || nil, 
         :track_owner  => asset.user, 
-        :source       => listen_referer, 
+        :source       => listen_referer,
         :user_agent   => user_agent,
         :ip           => request.remote_ip
       ) unless is_a_bot? or ip_just_registered_this_listen?(asset)

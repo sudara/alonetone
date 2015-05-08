@@ -1,9 +1,14 @@
 class PlaylistsController < ApplicationController
 
-  before_filter :find_user
-  before_filter :find_playlists, :except => [:index, :new, :create, :sort]
-  before_filter :require_login, :except => [:index, :show]
-  before_filter :find_tracks, :only => [:show, :edit]
+  before_filter :find_user, :except => :all
+  before_filter :find_playlists, :except => [:index, :new, :create, :sort, :all]
+  before_filter :require_login, :except => [:index, :show, :all]
+  before_filter :find_tracks, :only => [:show, :edit, :all]
+
+  def all
+    @playlists = Playlist.recent.only_public.with_pic.
+                   paginate(:page => params[:page], :per_page => 20)
+  end
 
   # all user's playlists
   def index
@@ -43,7 +48,9 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens = @user.listens.paginate(:page => params[:listens_page], :per_page => 10)
+    @listens = @user.listened_to_tracks.preload(:user).
+                 select('assets.*').distinct.
+                 paginate(:page => params[:listens_page], :per_page => 10)
     @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page], :per_page => 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial

@@ -2,7 +2,7 @@
 
 <% content_for :left do %>
   <div id="single_playlist">
-    <% cache(@playlist) do %>
+    <% cache([@playlist, authorized_for(@playlist)]) do %>
       <%= render @playlist %>
     <% end unless (@playlist.private? && authorized_for(@playlist)) # don't cache private playlists %>
   </div>  	

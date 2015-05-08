@@ -524,6 +524,38 @@ EditForm = $.klass(Remote.Form,{
     }
 });
 
+TrackSeekbar = $.klass({
+  initialize: function(track) {
+    var seekbar = this;
+    this.track = track;
+    this.seekbar = $(this.element);
+    this.loaded = $('.loaded', this.element);
+    this.played = $('.played', this.element);
+
+    this.loaded.mousedown(function(e) {
+      var sound = track.getSound();
+      var x = (e.offsetX || e.clientX - $(e.target).offset().left);
+      var value = x / $(this).parents('.seekbar').width();
+      var pos = value * sound.durationEstimate;
+      sound.setPosition(pos);
+    });
+  },
+
+  updatePlayed: function() {
+    var sound = this.track.getSound();
+    var value = sound.position / sound.durationEstimate;
+    var maxwidth = this.seekbar.width();
+    this.played.css('width', value * maxwidth);
+  },
+
+  updateLoaded: function() {
+    var sound = this.track.getSound();
+    var value = sound.duration / sound.durationEstimate;
+    this.element.addClass('initialized');
+    this.loaded.css('width', 100 * value + '%');
+  }
+});
+
 Track = $.klass({  
   initialize: function() {
     this.element.addClass('instantiated');
@@ -539,6 +571,7 @@ Track = $.klass({
     this.trackURL = $('a.play_link',this.element).attr('href');
     this.soundID = this.trackURL.split('/').pop().split('.')[0];
     this.more = this.element.children().last();
+    this.seekbar = $('.seekbar', this.element).attach(TrackSeekbar, this);
     this.tabbies = false; // wait on initializing the tabs until we need them
     this.originalDocumentTitle = document.title; // for prepending when playing tracks
     this.radio = false;
@@ -591,7 +624,7 @@ Track = $.klass({
     
     // change the tab if the clicked tab is not currently open
     if(this.tabbies.currentTab != desiredTab) this.tabbies.openTab(desiredTab);
-    
+
     // open the pane if it is not already open
     if(this.isOpen != false) this.more.slideDown(300,function(){
         $('textarea',this).focus();
@@ -657,6 +690,7 @@ Track = $.klass({
   
   playOrResume : function(){
     this.killOtherTracks();
+    this.seekbar.css('display', 'block');
     this.element.addClass('playing');
     this.innerPlay.addClass('sprites-pause')
     this.innerPlay.removeClass('sprites-play')
@@ -679,9 +713,23 @@ Track = $.klass({
       this.play();
     }
   },
+
+  getSound: function() {
+    if (!this.sound) {
+      var seekbar = this.seekbar.firstAttached(TrackSeekbar);
+      this.sound = soundManager.createSound({
+        id: this.soundID,
+        url: this.trackURL,
+        whileloading: $.bind(seekbar.updateLoaded, seekbar),
+        whileplaying: $.bind(seekbar.updatePlayed, seekbar),
+        onfinish: $.bind(this.startNextTrack, this)
+      });
+    }
+    return this.sound;
+  },
   
   play: function(){
-    soundManager.createSound({id: this.soundID, url: this.trackURL, onfinish:$.bind(this.startNextTrack,this)}).play();
+    this.getSound().play();
     if(typeof pageTracker != "undefined"){
       pageTracker._trackPageview(this.trackURL);
     }
@@ -746,8 +794,10 @@ Track = $.klass({
   
   killOtherTracks : function(){
     // basically a dumb way of making sure no other tracks are playing, looping through
-    for(track=0;track < this.behavior.instances.length;track++){ 
-      if(this.behavior.instances[track].isPlaying()) this.behavior.instances[track].pause();
+    for(track=0;track < this.behavior.instances.length;track++){
+      this.behavior.instances[track].seekbar.css('display', 'none');
+      if(this.behavior.instances[track].isPlaying())
+        this.behavior.instances[track].pause();
     }
   },
   

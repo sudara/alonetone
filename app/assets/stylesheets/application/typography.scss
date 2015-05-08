@@ -94,7 +94,7 @@ h1 {
   }
 }
 
-h2 {
+h2, .latest-playlists-header h2 a{
   color: $white;
   font-family: $header_font, Helvetica, Arial;
   font-size: 20px;
@@ -148,10 +148,16 @@ span.note {
 
 // iconified headers
 .latest-playlists-header h2 {
-  padding-left: 40px; 
-  line-height: 30px;
+  padding-left: 35px;
+  margin-bottom:.5em;
+  a{
+    margin-bottom: 0em;
+  }
 }
 
+.sprites-latest-playlists {
+  margin-top:5px;
+}
 h2#user_latest_playlists {
   padding-left: 35px;
 }
