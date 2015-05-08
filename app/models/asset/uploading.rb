@@ -55,18 +55,4 @@ class Asset
  # rescue TypeError => e
  #   logger.warn("User tried to upload too small file");
  # end
-
-  protected
-
-  def emails_of_followers(asset)
-    followers_of(asset).inject([]) do |emails, follower|
-      emails << follower.email if follower.wants_email?
-      emails
-    end
-  end
-
-  def followers_of(asset)
-    asset.user.followers
-  end
-
 end

@@ -1,8 +1,16 @@
 Hi!
 
+<% if @description.present? %>
+<%= @name %> just uploaded a new track on alonetone. <%= @exclamation %>! Here is what they had to say about it:
+
+<%= @description %>
+
+- - - - - - - - - - - - - - - -
+<% else %>
 <%= @name %> just uploaded a new track on alonetone. <%= @exclamation %>!
 
 It's so piping hot we don't even know the juicy details yet. <%= @name %> is still typing them in.
+<% end %>
 
 Listen to it at alonetone:
 <%= @play_link %>
