@@ -2,6 +2,10 @@ module Greenfield
   class ApplicationController < ActionController::Base
     include AuthlogicHelpers
 
+    def nothing
+      render nothing: true
+    end
+
     protected
 
     def attempt_login_via_alonetone
