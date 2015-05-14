@@ -13,12 +13,7 @@ Alonetone::Application.routes.draw do
 
     get '/login', :to => 'user_sessions#new', :as => 'login'
     match '/logout', :to => 'user_sessions#destroy', via: [:get, :post]
-    resources :user_sessions do
-      collection do
-        get :greenfield_login, :constraints => {:format => 'js'}
-        post :create_from_token
-      end
-    end
+    resources :user_sessions
 
     # admin stuff
     get 'secretz' => 'secretz#index'

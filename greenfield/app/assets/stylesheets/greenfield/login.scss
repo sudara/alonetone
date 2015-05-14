@@ -1,0 +1,36 @@
+#new_user_session {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  width: 460px;
+
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  background-color: #fefefe;
+
+  .flash {
+    margin-bottom: 10px;
+
+    &.error {
+      color: #a00;
+    }
+  }
+
+  .field_with_errors {
+    display: inline-block;
+  }
+
+  .field label {
+    display: inline-block;
+    width: 125px;
+  }
+
+  .field input {
+    width: 240px;
+  }
+
+  .actions {
+    margin-left: 125px;
+  }
+}

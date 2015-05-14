@@ -1,7 +1,0 @@
-<% if @token %>
-  $.post('/user_sessions/create_from_token?token=<%= @token %>', function() {
-    location.reload(true);
-  });
-<% else %>
-  window.location = '/login';
-<% end %>

@@ -6,10 +6,19 @@ module Greenfield
       render nothing: true
     end
 
-    protected
+    def require_login(login=nil)
+      @user_session = UserSession.new(login: login.try(:login))
+      render 'greenfield/application/require_login'
+    end
 
-    def attempt_login_via_alonetone
-      render 'layouts/greenfield/login_via_alonetone', :layout => nil
+    def login
+      @user_session = UserSession.new(params[:user_session].merge(remember_me: true))
+      if @user_session.save
+        redirect_to params[:continue]
+      else
+        flash[:message] = nil
+        render action: :require_login
+      end
     end
   end
 end

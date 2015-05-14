@@ -1,0 +1,24 @@
+
+<%= form_for(@user_session) do |f| %>
+  <%= hidden_field_tag :continue, params[:continue] || request.path %>
+
+  <% if flash[:message] %>
+    <div class="flash">
+      <%= flash[:message] %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :login %><%= f.text_field :login %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><%= f.password_field :password, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'continue' %>
+  </div>
+<% end %>
+
+

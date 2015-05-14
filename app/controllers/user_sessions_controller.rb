@@ -1,6 +1,4 @@
 class UserSessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token, :if => :attempting_greenfield_login_via_alonetone?
-
   def new
     @page_title = "Login"
     @user = User.new
@@ -32,30 +30,5 @@ class UserSessionsController < ApplicationController
     else
       redirect_to login_path, :error => "You weren't logged in to begin with, old chap/dame!"
     end
-  end
-
-  def greenfield_login
-    if current_user
-      verifier = ActiveSupport::MessageVerifier.new(Alonetone.secret)
-      @token = verifier.generate([current_user.id, 2.minute.from_now])
-    end
-  end
-
-  def create_from_token
-    verifier = ActiveSupport::MessageVerifier.new(Alonetone.secret)
-    user_id, time = verifier.verify(params[:token])
-    if Time.now <= time
-      UserSession.create(User.find(user_id), true)
-      render :nothing => true
-    else
-      render :nothing => true, :status => :unauthorized
-    end
-  end
-
-  private
-
-  def attempting_greenfield_login_via_alonetone?
-    ['greenfield_login', 'create_from_token'].include?(action_name) &&
-      URI(request.referer).host == Alonetone.greenfield_url
   end
 end

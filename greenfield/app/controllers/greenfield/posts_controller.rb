@@ -3,7 +3,7 @@ module Greenfield
     include Listens
 
     before_filter :create_and_edit_unless_post_exists, :only => [:show, :edit]
-    before_filter :authorize, :only => [:edit, :update]
+    before_filter :require_login, :only => [:edit, :update]
 
     def show
       @post = find_post
@@ -62,11 +62,10 @@ module Greenfield
       end
     end
 
-    def authorize
-      if !current_user
-        attempt_login_via_alonetone
-      elsif find_post.user != current_user
-        raise ActiveRecord::RecordNotFound
+    def require_login
+      if find_post.user != current_user
+        flash[:message] = "You'll need to login to do that"
+        super(find_post.user)
       end
     end
   end
