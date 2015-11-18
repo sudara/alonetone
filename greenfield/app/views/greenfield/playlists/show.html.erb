@@ -15,7 +15,7 @@
     <!-- Track title just switches track details-->
     <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset) do %>
       <span class="track<%= ' active' if track.asset == @playlist_position %>">
-        <%= track.name %>
+        <%= "%02d" % track.position %>. <%= track.name %>
       </span>
     <% end %>
     </li>
