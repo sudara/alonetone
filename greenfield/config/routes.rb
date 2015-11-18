@@ -8,7 +8,7 @@ Greenfield::Engine.routes.draw do
       resources :attached_assets, :only => [:show, :create]
     end
 
-    get 'playlists/:playlist_id', :to => 'posts#show', :as => :playlist
-    get 'playlists/:playlist_id/:position', :to => 'posts#show', :as => :playlist_position
+    get 'playlists/:playlist_id', :to => 'playlists#show', :as => :playlist
+    get 'playlists/:playlist_id/:position', :to => 'playlists#show', :as => :playlist_position
   end
 end

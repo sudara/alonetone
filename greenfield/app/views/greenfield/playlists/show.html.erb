@@ -1,0 +1,36 @@
+<div class="playlist">
+  <%= image_tag @playlist.alonetone_playlist.cover(:album) %>
+  <h1> <%= @playlist.alonetone_playlist.title %>
+  </h1>
+  <h2><%= @post.asset.user.display_name %></h2>
+  <ul>
+  <% @playlist.tracks.each do |track| %>
+    <li>
+      
+    <!-- Play button automagically plays AND changes to relevant track details  -->
+    <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset), class: 'play-button' do %>
+      <i class="fa fa-play"></i>
+    <% end %>
+    
+    <!-- Track title just switches track details-->
+    <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset) do %>
+      <span class="track<%= ' active' if track.asset == @playlist_position %>">
+        <%= track.name %>
+      </span>
+    <% end %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
+<%= player(@post.asset) %>
+
+<header>
+  <h1><%= @post.asset.name %></h1>
+</header>
+
+
+
+<div class="post_content">
+  <%= markdown(@post.body, post: @post) %>
+</div>

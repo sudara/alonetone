@@ -1,7 +1,7 @@
 .player {
   margin-top: $baseline * .8;
   margin-bottom: $baseline + 7px;
-  height: ($baseline * 5) - 2px; 
+  height: ($baseline * 4) - 2px; 
   border-top: 1px solid $light-gray;
   border-bottom: 1px solid $light-gray;
   display: block;
@@ -24,6 +24,7 @@
     .play-button, .pause-button {
       margin-top: 5px;
       padding: 0px;
+      border: none;
     }
   }
   
@@ -35,8 +36,8 @@
     display:inline-block;
   }
   .play-button, .pause-button{
-    color: $not-quite-black;
-    margin-top: $baseline;
+    color: $light-gray;
+    margin-top: $baseline / 2;
     padding: ($baseline / 2) - 1;
     text-indent: 11px;
     width:54px;
@@ -52,7 +53,7 @@
   }
   .pause-button{
     color: $light-gray;
-    text-indent: 4.5px;  
+    text-indent: 4px;  
   }
 
   .waveform {

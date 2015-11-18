@@ -1,5 +1,5 @@
 module Greenfield
-  class PostsController < Greenfield::ApplicationController
+  class PlaylistsController < Greenfield::ApplicationController
     include Listens
 
     before_filter :create_and_edit_unless_post_exists, :only => [:show, :edit]
@@ -11,26 +11,9 @@ module Greenfield
         format.html do
           @page_title = "#{@post.user.display_name} - #{@post.title}"
         end
-
-        format.mp3 do
-          listen(@post.asset)
-        end
       end
     end
 
-    def edit
-      @post = find_post
-      @post.attached_assets.build
-    end
-
-    def update
-      @post = find_post
-      if @post.update_attributes(params[:post])
-        redirect_to user_post_path(@post.user, @post)
-      else
-        render :edit
-      end
-    end
 
     protected
 
@@ -47,8 +30,14 @@ module Greenfield
     end
 
     def find_asset
-      id = params[:asset_permalink] || params[:id]
-      @find_asset ||= Asset.find_by!(:permalink => id)
+      @alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
+      @playlist ||= Greenfield::Playlist.new(@alonetone_playlist)
+      if params[:position].present?
+        @find_asset ||= Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:position]).take!
+      else
+        @find_asset ||= @playlist.tracks.take!.asset
+      end
+      @playlist_position = @find_asset
     end
 
     def require_login
