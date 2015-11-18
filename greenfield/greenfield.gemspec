@@ -7,11 +7,11 @@ require "greenfield/version"
 Gem::Specification.new do |s|
   s.name        = "greenfield"
   s.version     = Greenfield::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Greenfield."
-  s.description = "TODO: Description of Greenfield."
+  s.authors     = ["Peter","Sudara"]
+  s.email       = ["support@alonetone.com"]
+  s.homepage    = "http://listenapp.com"
+  s.summary     = "Summary of Greenfield."
+  s.description = "Listenapp.com"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
