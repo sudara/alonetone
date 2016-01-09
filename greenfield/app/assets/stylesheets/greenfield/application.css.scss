@@ -33,23 +33,27 @@ header {
     height: 83px;
     width: 83px;
   }
-  h1, h1 > input{
-    font-family: $bold-header-family;
-    font-size:30px;
-    line-height: 36px; // $baseline * 1.3333;
+}
+h1, h1 > input{
+  font-family: $bold-header-family;
+  font-size:30px;
+  line-height: 36px; // $baseline * 1.3333;
+}
+h1 > input{
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  &:hover{
+    background-color: $bright-highlight;
   }
-  h1 > input{
-    background-color: transparent;
-    border: none;
-    width: 100%;
-    &:hover{
-      background-color: $bright-highlight;
-    }
-  }
-  h2{
-    font-size:24px;
-    line-height: 22px; // $baseline * .815;
-    font-family: $normal-header-family;
+}
+h2{
+  font-size:24px;
+  line-height: 22px; // $baseline * .815;
+  font-family: $normal-header-family;
+  color: #ccc;
+  span {
+    color: $lightest-gray;
   }
 }
 
