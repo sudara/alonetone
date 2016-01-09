@@ -62,7 +62,6 @@ gem 'sinatra', :require => nil # for sidekiq web ui
 
 group :production do
   gem "puma"
-  gem "skylight", '= 0.3.12'
 end
 
 group :development do
