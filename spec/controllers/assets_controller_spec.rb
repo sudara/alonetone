@@ -146,9 +146,11 @@ RSpec.describe AssetsController, type: :controller do
       expect(response).to redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
     end
 
-    it "should email out followers on upload" do
+    it "should email out followers on upload via the queue" do
       users(:arthur).add_or_remove_followee(users(:sudara).id)
-      expect { subject }.to change {ActionMailer::Base.deliveries.size}.by(1)
+      subject
+      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.size).to eq 1
+      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
 
