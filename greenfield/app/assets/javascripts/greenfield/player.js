@@ -1,51 +1,36 @@
+//= require greenfield/sound
 //= require greenfield/waveform
 
-$(function() {
-  var soundID = function(url) {
-    return url.split('/').pop().split('.')[0];
-  };
-
-  var waveformData = function(csv) {
-    var data = csv.split(',').map(function(s) {
-      return parseFloat(s);
-    });
-
-    var max = Math.max.apply(Math, data),
-        min = Math.min.apply(Math, data);
-
-    var scale = Math.max(Math.abs(max), Math.abs(min));
-    data = data.map(function(s) {
-      return (s < 0 ? -1 : 1 ) * Math.pow(Math.abs(s) / scale, 1/4);
-    });
-
-    return data;
-  };
-
-  $(document).on('click', '.play-button', function(e) {
-    var container = $(this);
-    var url = $(this).find('a').attr('href');
-    container.removeClass('play-button fa-play').addClass('pause-button fa-pause');
-    soundManager.getSoundById(soundID(url)).play();
-
-    e.preventDefault();
+function waveformData(csv) {
+  var data = csv.split(',').map(function(s) {
+    return parseFloat(s);
   });
 
-  $(document).on('click', '.pause-button', function(e) {
-    var container = $(this);
-    var url = $(this).find('a').attr('href');
-    container.removeClass('pause-button fa-pause').addClass('play-button fa-play');
-    soundManager.pause(soundID(url));
-
-    e.preventDefault();
+  var max = Math.max.apply(Math, data),
+      min = Math.min.apply(Math, data);
+  var scale = Math.max(Math.abs(max), Math.abs(min));
+  data = data.map(function(s) {
+    return (s < 0 ? -1 : 1 ) * Math.pow(Math.abs(s) / scale, 0.7);
   });
 
+  return data;
+}
+
+function showWaveform() {
   $('.waveform').each(function() {
     var container = $(this);
+    var player = $(this).parents('.player');
+    var seekbar = player.find('.seekbar');
     var data = waveformData($(this).data('waveform'));
+    var soundId = $(this).parent('[data-sound-id]').data('sound-id');
     $(this).removeAttr('data-waveform');
 
     var soundPosition = 0;
-    var hoverPosition = -1;
+    container.on('update.waveform', function(e, sound) {
+      soundPosition = sound.position;
+      container.data('waveform').update({ data: data });
+    });
+
     container.data('waveform', new Waveform({
       container: this,
       innerColor: function(percent, _) {
@@ -57,55 +42,117 @@ $(function() {
       data: data
     }));
 
-    var scrubber = $(this);
-    var player = $(this).parents('.player');
-    var seekbar = player.find('.seekbar');
-    var index = player.find('.time .index');
-    var url = player.find('.play-control a').attr('href');
-    var soundID = url.split('/').pop().split('.')[0];
+    container.click(function(e) {
+      e.preventDefault();
 
-    soundManager.onready(function() {
-      var sound = soundManager.createSound({
-        id: soundID,
-        url: url,
-        autoLoad: true,
-        whileplaying: function() {
-          soundPosition = this.position / this.durationEstimate;
-          container.data('waveform').update({ data: data });
-
-          var time = Math.floor(this.position / 1000.0);
-          var min = Math.floor(time / 60), sec = time % 60;
-          index.text(min + ':' + (sec >= 10 ? sec : '0'+sec));
-        },
-        onfinish: function() {
-          player.find('.play-control').
-            removeClass('pause-button').addClass('play-button');
-        }
-      });
-
-      scrubber.click(function(e) {
-        e.preventDefault();
-
-        var offx = e.clientX - scrubber.offset().left;
-        sound.setPosition((offx / scrubber.width()) * sound.durationEstimate);
+      var sound, offx;
+      if ((sound = Sound.maybeGetSound(soundId))) {
+        offx = e.clientX - container.offset().left;
+        sound.setPosition(offx / container.width()).play();
+      } else {
         player.find('.play-button').trigger('click');
-      });
-
-      scrubber.mousemove(function(e) {
-        var offx = e.clientX - scrubber.offset().left;
-        hoverPosition = offx / scrubber.width();
-        seekbar.css('left', offx);
-      }).mouseout(function() { hoverPosition = -1 });
+      }
     });
+
+    container.mousemove(function(e) {
+      var offx = e.clientX - container.offset().left;
+      hoverPosition = offx / container.width();
+      seekbar.css('left', offx);
+    }).mouseout(function() { hoverPosition = -1 });
   });
+}
+
+function changeControlActionToPlay(soundId) {
+  var controls = $('[data-sound-id='+soundId+'] .play-button,'+
+                   '[data-sound-id='+soundId+'] .pause-button');
+  controls.removeClass('pause-button').addClass('play-button').
+    find().andSelf().filter('.fa-pause').removeClass('fa-pause').addClass('fa-play');
+}
+
+function changeControlActionToPause(soundId) {
+    var controls = $('[data-sound-id='+soundId+'] .play-button,'+
+                     '[data-sound-id='+soundId+'] .pause-button');
+    controls.removeClass('play-button').addClass('pause-button').
+      find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
+}
+
+
+$('body').on('click', '[data-sound-id] .play-button', function(e) {
+  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  var li = $('.playlist li[data-sound-id=' + soundId + ']');
+  li.siblings().find('.pause-button').trigger('click');
+
+  var url = li.find('a.play-button').attr('href');
+  var sound = Sound.load(url + '.mp3');
+
+  sound.rolling = function() {
+    $.post(url + '/listens');
+  };
+
+  sound.almostFinished = function() {
+    var next = $('.playlist li[data-sound-id='+this.sm.id+']').next();
+    if (next.attr('href'))
+      Sound.load(next.attr('href') + '.mp3');
+  };
+
+  sound.finished = function() {
+    changeControlActionToPlay(this.sm.id);
+    $('.playlist li[data-sound-id='+this.sm.id+']').next().find('.play-button').trigger('click');
+  };
+
+  sound.paused = function() {
+    changeControlActionToPlay(this.sm.id);
+    window['ga'] && window.ga('send', 'event', 'stream', 'play', this.sm.id);
+  };
+
+  sound.resumed = function() {
+    changeControlActionToPause(this.sm.id);
+    window['ga'] && window.ga('send', 'event', 'stream', 'play', this.sm.id);
+  };
+
+  sound.playing = function() {
+    /*
+    // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+    var pos = (100*this.position)+'%';
+    var li = $('.playlist li[data-sound-id='+this.sm.id+']');
+    li.css('background', 'linear-gradient(to right, #fceabb 0%, #f8b500 '+pos+', #ffffff '+pos+', #ffffff 100%)');
+    */
+
+    $('.player[data-sound-id=' + this.sm.id + '] .waveform').trigger('update.waveform', [this]);
+    $('.player[data-sound-id=' + this.sm.id + '] .time .index').text(this.index);
+
+    changeControlActionToPause(this.sm.id);
+  };
+
+  sound.play();
+
+  if (window.location.pathname == $(this).attr('href')) {
+    e.preventDefault();
+    return false;
+  }
 });
 
-function reconstructWaveform(container) {
-  var waveform = container.data('waveform');
-  container.find('canvas').remove();
-  container.data('waveform', new Waveform({
-    container: waveform.container,
-    innerColor: waveform.innerColor,
-    data: waveform.data
-  }));
-}
+$('body').on('click', '[data-sound-id] .pause-button', function(e) {
+  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  var li = $('.playlist li[data-sound-id=' + soundId + ']');
+  var url = li.find('a.play-button, a.pause-button').attr('href');
+
+  Sound.pause(url + '.mp3');
+  changeControlActionToPlay(soundId);
+
+  e.preventDefault();
+  return false;
+});
+
+$('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
+  $('.track-content').replaceWith($(data).find('.track-content'));
+  showWaveform();
+
+  $('.playlist .track').removeClass('active');
+  $(e.target).parent('li').find('.track').addClass('active');
+
+  if (window.history.pushState)
+    window.history.pushState(null, '', e.target.href);
+});
+
+$(document).ready(showWaveform);

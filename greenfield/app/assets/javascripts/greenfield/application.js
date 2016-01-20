@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery-ui
+//= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require soundmanager2
 //= require greenfield/initialize_soundManager

@@ -11,6 +11,10 @@ module Greenfield
         format.html do
           @page_title = "#{@post.user.display_name} - #{@post.title}"
         end
+
+        format.mp3 do
+          listen(@post.asset)
+        end
       end
     end
 
