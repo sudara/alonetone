@@ -23,7 +23,13 @@ module Greenfield
 
       # lame can only downsample to 8KHz, but that's still
       # way too high so we do a second resampling here
-      waveform.each_slice(1000).map{ |slice| Math.sqrt(slice.map{ |x| x*x }.sum) }
+      average(waveform.each_slice([waveform.size / 500, 1].max))
+    end
+
+    private
+
+    def self.average(signal)
+      signal.map{ |slice| Math.sqrt(slice.map{ |x| x*x }.sum) }
     end
   end
 end
