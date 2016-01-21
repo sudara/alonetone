@@ -82,8 +82,8 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   var li = $('.playlist li[data-sound-id=' + soundId + ']');
   li.siblings().find('.pause-button').trigger('click');
 
-  var url = li.find('a.play-button').attr('href');
-  var sound = Sound.load(url + '.mp3');
+  var url = $(this).find('*').andSelf().filter('a').attr('href');
+  var sound = Sound.load(url.replace(/\.mp3$/, '') + '.mp3');
 
   sound.rolling = function() {
     $.post(url + '/listens');
@@ -92,7 +92,7 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   sound.almostFinished = function() {
     var next = $('.playlist li[data-sound-id='+this.sm.id+']').next();
     if (next.attr('href'))
-      Sound.load(next.attr('href') + '.mp3');
+      Sound.load(next.attr('href').replace(/\.mp3$/, '') + '.mp3');
   };
 
   sound.finished = function() {
@@ -134,10 +134,8 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
 
 $('body').on('click', '[data-sound-id] .pause-button', function(e) {
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
-  var li = $('.playlist li[data-sound-id=' + soundId + ']');
-  var url = li.find('a.play-button, a.pause-button').attr('href');
 
-  Sound.pause(url + '.mp3');
+  Sound.pause(soundId);
   changeControlActionToPlay(soundId);
 
   e.preventDefault();
