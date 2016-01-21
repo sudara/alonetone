@@ -5,15 +5,15 @@
     <h2><span class="by">by</span> <%= @post.asset.user.display_name %></h2>  
     <ul>
   <% @playlist.tracks.each do |track| %>
-    <li>
+    <li data-sound-id="<%= track.asset.permalink %>">
       
     <!-- Play button automagically plays AND changes to relevant track details  -->
-    <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset), class: 'play-button' do %>
+    <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset), remote: true, class: 'play-button' do %>
       <i class="fa fa-play"></i>
     <% end %>
     
     <!-- Track title just switches track details-->
-    <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset) do %>
+    <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset), remote: true do %>
       <span class="track<%= ' active' if track.asset == @playlist_position %>">
         <%= "%02d" % track.position %>. <%= track.name %>
       </span>
