@@ -94,38 +94,36 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   };
 
   sound.almostFinished = function() {
-    var next = $('.playlist li[data-sound-id='+attr(this.sm.id)+']').next().find('.play-button');
+    var next = $('.playlist li[data-sound-id='+attr(this.id)+']').next().find('.play-button');
     if (next.attr('href'))
       Sound.load(next.attr('href').replace(/\.mp3$/, '') + '.mp3');
   };
 
   sound.finished = function() {
-    changeControlActionToPlay(this.sm.id);
-    $('.playlist li[data-sound-id='+attr(this.sm.id)+']').next().find('.play-button').trigger('click');
+    changeControlActionToPlay(this.id);
+    $('.playlist li[data-sound-id='+attr(this.id)+']').next().find('.play-button').trigger('click');
   };
 
   sound.paused = function() {
-    changeControlActionToPlay(this.sm.id);
-    window['ga'] && window.ga('send', 'event', 'stream', 'play', this.sm.id);
+    changeControlActionToPlay(this.id);
+    window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
   };
 
   sound.resumed = function() {
-    changeControlActionToPause(this.sm.id);
-    window['ga'] && window.ga('send', 'event', 'stream', 'play', this.sm.id);
+    changeControlActionToPause(this.id);
+    window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
   };
 
   sound.playing = function() {
-    /*
     // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
     var pos = (100*this.position)+'%';
-    var li = $('.playlist li[data-sound-id='+this.sm.id+']');
+    var li = $('.playlist li[data-sound-id='+attr(this.id)+']');
     li.css('background', 'linear-gradient(to right, #fceabb 0%, #f8b500 '+pos+', #ffffff '+pos+', #ffffff 100%)');
-    */
 
-    $('.player[data-sound-id=' + attr(this.sm.id) + '] .waveform').trigger('update.waveform', [this]);
-    $('.player[data-sound-id=' + attr(this.sm.id) + '] .time .index').text(this.index);
+    $('.player[data-sound-id=' + attr(this.id) + '] .waveform').trigger('update.waveform', [this]);
+    $('.player[data-sound-id=' + attr(this.id) + '] .time .index').text(this.index);
 
-    changeControlActionToPause(this.sm.id);
+    changeControlActionToPause(this.id);
   };
 
   sound.play();

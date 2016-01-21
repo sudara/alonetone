@@ -16,6 +16,7 @@ Sound = {
       return this.store[soundId];
 
     var sound = {
+      id: soundId,
       sm: soundManager.createSound({
         id: soundId,
         url: url,
