@@ -66,7 +66,7 @@ function changeControlActionToPlay(soundId) {
   var controls = $('[data-sound-id='+soundId+'] .play-button,'+
                    '[data-sound-id='+soundId+'] .pause-button');
   controls.removeClass('pause-button').addClass('play-button').
-    find().andSelf().filter('.fa-pause').removeClass('fa-pause').addClass('fa-play');
+    find('*').andSelf().filter('.fa-pause').removeClass('fa-pause').addClass('fa-play');
 }
 
 function changeControlActionToPause(soundId) {
