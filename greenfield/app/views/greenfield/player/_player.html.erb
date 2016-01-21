@@ -1,4 +1,4 @@
-<div class="player" data-sound-id="<%= asset.permalink %>">
+<div class="player" data-sound-id="<%= [asset.user.login, asset.permalink].join('/') %>">
   <i class="fa fa-play fa-3x play-button play-control">
     <%= link_to '', media_url(asset) %>
   </i>

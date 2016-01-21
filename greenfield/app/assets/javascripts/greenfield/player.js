@@ -1,6 +1,10 @@
 //= require greenfield/sound
 //= require greenfield/waveform
 
+function attr(val) {
+  return val.replace(/\//g, '\\/');
+}
+
 function waveformData(csv) {
   var data = csv.split(',').map(function(s) {
     return parseFloat(s);
@@ -63,23 +67,23 @@ function showWaveform() {
 }
 
 function changeControlActionToPlay(soundId) {
-  var controls = $('[data-sound-id='+soundId+'] .play-button,'+
-                   '[data-sound-id='+soundId+'] .pause-button');
+  var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
+                   '[data-sound-id='+attr(soundId)+'] .pause-button');
   controls.removeClass('pause-button').addClass('play-button').
     find('*').andSelf().filter('.fa-pause').removeClass('fa-pause').addClass('fa-play');
 }
 
 function changeControlActionToPause(soundId) {
-    var controls = $('[data-sound-id='+soundId+'] .play-button,'+
-                     '[data-sound-id='+soundId+'] .pause-button');
-    controls.removeClass('play-button').addClass('pause-button').
-      find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
+  var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
+                   '[data-sound-id='+attr(soundId)+'] .pause-button');
+  controls.removeClass('play-button').addClass('pause-button').
+    find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
 }
 
 
 $('body').on('click', '[data-sound-id] .play-button', function(e) {
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
-  var li = $('.playlist li[data-sound-id=' + soundId + ']');
+  var li = $('.playlist li[data-sound-id=' + attr(soundId) + ']');
   li.siblings().find('.pause-button').trigger('click');
 
   var url = $(this).find('*').andSelf().filter('a').attr('href');
@@ -90,14 +94,14 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   };
 
   sound.almostFinished = function() {
-    var next = $('.playlist li[data-sound-id='+this.sm.id+']').next().find('.play-button');
+    var next = $('.playlist li[data-sound-id='+attr(this.sm.id)+']').next().find('.play-button');
     if (next.attr('href'))
       Sound.load(next.attr('href').replace(/\.mp3$/, '') + '.mp3');
   };
 
   sound.finished = function() {
     changeControlActionToPlay(this.sm.id);
-    $('.playlist li[data-sound-id='+this.sm.id+']').next().find('.play-button').trigger('click');
+    $('.playlist li[data-sound-id='+attr(this.sm.id)+']').next().find('.play-button').trigger('click');
   };
 
   sound.paused = function() {
@@ -118,8 +122,8 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
     li.css('background', 'linear-gradient(to right, #fceabb 0%, #f8b500 '+pos+', #ffffff '+pos+', #ffffff 100%)');
     */
 
-    $('.player[data-sound-id=' + this.sm.id + '] .waveform').trigger('update.waveform', [this]);
-    $('.player[data-sound-id=' + this.sm.id + '] .time .index').text(this.index);
+    $('.player[data-sound-id=' + attr(this.sm.id) + '] .waveform').trigger('update.waveform', [this]);
+    $('.player[data-sound-id=' + attr(this.sm.id) + '] .time .index').text(this.index);
 
     changeControlActionToPause(this.sm.id);
   };

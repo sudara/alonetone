@@ -5,7 +5,7 @@
     <h2><span class="by">by</span> <%= @post.asset.user.display_name %></h2>  
     <ul>
   <% @playlist.tracks.each do |track| %>
-    <li data-sound-id="<%= track.asset.permalink %>">
+    <li data-sound-id="<%= [track.asset.user.login, track.asset.permalink].join('/') %>">
       
     <!-- Play button automagically plays AND changes to relevant track details  -->
     <%= link_to user_playlist_position_path(@playlist.user, @playlist, track.asset), remote: true, class: 'play-button' do %>

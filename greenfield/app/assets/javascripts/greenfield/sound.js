@@ -2,8 +2,16 @@
 Sound = {
   store: {},
 
+  getId: function(url) {
+    var user, permalink;
+    url = url.replace(/^\/+/, '').replace(/\/+$/, '');
+    user = url.split('/').shift();
+    permalink = url.split('/').pop().split('.')[0];
+    return user + '/' + permalink;
+  },
+
   getSound: function(url) {
-    var soundId = url.split('/').pop().split('.')[0];
+    var soundId = this.getId(url);
     if (this.store[soundId])
       return this.store[soundId];
 
@@ -74,7 +82,7 @@ Sound = {
   },
 
   maybeGetSound: function(url) {
-    var soundId = url.split('/').pop().split('.')[0];
+    var soundId = this.getId(url);
     return this.store[soundId];
   },
 
