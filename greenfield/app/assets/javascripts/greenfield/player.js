@@ -90,7 +90,7 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   };
 
   sound.almostFinished = function() {
-    var next = $('.playlist li[data-sound-id='+this.sm.id+']').next();
+    var next = $('.playlist li[data-sound-id='+this.sm.id+']').next().find('.play-button');
     if (next.attr('href'))
       Sound.load(next.attr('href').replace(/\.mp3$/, '') + '.mp3');
   };
