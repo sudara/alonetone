@@ -1,31 +1,27 @@
 .playlist {
-  display: block;
-  width: 250px;
-  margin-left: -275px;
-  float: left;
-  h1{
+  h1 {
     font-family: $bold-header-family;
-    font-size:30px;
+    font-size: 30px;
     line-height: 36px; // $baseline * 1.3333;
   }
-  h2{
-    font-size:24px;
-    line-height: 22px; // $baseline * .815;
+  h2 {
     font-family: $normal-header-family;
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 22px; // $baseline * .815;
     color: $light-gray;
-    font-weight:100;
   }
   ul {
-  font-size: 12px;
-    li a.play-button, li a.pause-button {
+    font-size: 12px;
+    li a.play-button {
+      line-height: 8px;
       display: inline-block;
-      height:10px;
-      line-height:8px;
-      padding:5px 4px 6px 5px;
       width: 10px;
-      background-color: $light-gray;
+      height: 10px;
       margin-right: 2px;
-      &:hover{
+      padding: 5px 4px 6px 5px;
+      background-color: $light-gray;
+      &:hover {
         color: red;
       };
     }
@@ -34,7 +30,6 @@
       color: $black;
     }
   }
-  
   .track {
     font-size: 12px;
     &.active {
@@ -42,7 +37,6 @@
     }
   }
 }
-
 
 .edit_playlist ul a[data-method=delete] {
   display: none;
@@ -57,7 +51,7 @@
 }
 
 .edit_playlist li.empty-indicator:last-child {
-  color: #aaa;
   font-style: italic;
   list-style-type: none;
+  color: #AAA;
 }

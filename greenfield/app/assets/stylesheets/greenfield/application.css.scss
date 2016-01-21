@@ -8,70 +8,96 @@
 @import "greenfield/edit_post";
 @import "greenfield/playlists";
 
+
+/* LAYOUT */
+
 html,
-body { height: 100%; }
-
-body{
-  display: table;
-  width: 100%;
-  background-color: $not-quite-white;
-  font-family: $body-font;
-  font-weight: 500;
-  font-size:18px;
-  line-height: $baseline;  // 27px is our baseline
-}
-
-.wrapper{
-  margin: auto;
-  max-width:650px;
+body {
   height: 100%;
 }
 
-header {
-  margin-top: $baseline * 2;
-  img {
-    height: 83px;
-    width: 83px;
+body {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.main-table-row {
+  display: table-row;
+  height: 100%;
+  main {
+    overflow: auto;
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 40px;
+    .playlist {
+      float: left;
+      width: 250px;
+    }
+    .track-content {
+      float: left;
+      width: 650px;
+    }
   }
 }
-h1, h1 > input{
-  font-family: $bold-header-family;
-  font-size:30px;
-  line-height: 36px; // $baseline * 1.3333;
+
+.footer-table-row {
+  display: table-row;
+  footer {
+    height: 34px;
+  }
 }
-h1 > input{
-  background-color: transparent;
-  border: none;
+
+/* STYLES */
+
+body {
+  font-family: $body-font;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: $baseline;  // 27px is our baseline
+  background-color: $not-quite-white;
+}
+
+footer {
+  line-height: 34px;
+  text-align: right;
+  background-color: $black;
+  a {
+    font-size: 12px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: $not-quite-white;
+  }
+}
+
+h1,
+h1 > input {
+  font-family: $bold-header-family;
+  font-size: 30px;
+  line-height: 36px; // $baseline * 1.3333;
   width: 100%;
-  &:hover{
+  border: none;
+  background-color: transparent;
+  &:hover {
     background-color: $bright-highlight;
   }
 }
-h2{
-  font-size:24px;
-  line-height: 22px; // $baseline * .815;
+
+h2 {
   font-family: $normal-header-family;
-  color: #ccc;
+  font-size: 24px;
+  line-height: 22px; // $baseline * .815;
+  color: #CCC;
   span {
     color: $lightest-gray;
   }
 }
 
-footer {
-  display: table-row;
-  height: 1px;
-  text-align:right;
-  width:100%;
-  line-height:34px;
-  height: 34px;
-  background-color: black;
-  .footer_wrapper{
-    width:650px;
-    margin: auto;
-    a{
-      font-size: 12px;
-      color: $not-quite-white;
-      text-decoration: none;
-    }
+
+header {
+  margin-top: $baseline * 2;
+  img {
+    width: 83px;
+    height: 83px;
   }
 }

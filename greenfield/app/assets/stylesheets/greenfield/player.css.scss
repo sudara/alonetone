@@ -1,84 +1,78 @@
 .player {
+  position: relative;
+  display: block;
+  height: ($baseline * 4) - 2px;
   margin-top: $baseline * .8;
   margin-bottom: $baseline + 7px;
-  height: ($baseline * 4) - 2px; 
   border-top: 1px solid $light-gray;
   border-bottom: 1px solid $light-gray;
-  display: block;
-  position: relative;
   background-color: $not-quite-white-opaque;
-
   &.stuck {
     position: fixed;
-    top: 0px;
+    top: 0;
     width: 650px;
     height: ($baseline * 2.5);
+    margin-top: 0;
     padding-top: 4px;
-    margin-top: 0px;
-    border-top: 0px;
-
+    border-top: 0;
     .waveform {
       height: 100%;
     }
-
-    .play-button, .pause-button {
+    .play-button,
+    .pause-button {
       margin-top: 5px;
-      padding: 0px;
+      padding: 0;
       border: none;
     }
   }
-  
-  .time{
-    color: $lightest-gray;
-    position:absolute;
-    right:0;
+  .time {
     font-size: 12px;
-    display:inline-block;
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    color: $lightest-gray;
   }
-  .play-button, .pause-button{
-    color: $light-gray;
+  .play-button,
+  .pause-button {
+    display: inline-block;
+    width: 54px;
+    height: 54px;
     margin-top: $baseline / 2;
     padding: ($baseline / 2) - 1;
-    text-indent: 11px;
-    width:54px;
-    height:54px;
+    cursor: pointer;
     vertical-align: middle;
-    display: inline-block;
+    text-indent: 11px;
+    color: $light-gray;
     border: 1px solid $light-gray;
     border-radius: 50%;
-    cursor: pointer;
-    &:hover{
-      color:$black;
+    &:hover {
+      color: $black;
     }
   }
-  .pause-button{
+  .pause-button {
+    text-indent: 4px;
     color: $light-gray;
-    text-indent: 4px;  
   }
-
   .waveform {
     position: absolute;
+    right: 0;
     display: inline-block;
-    right:0;
     width: 540px;
     height: 100%;
     .seekbar {
+      position: absolute;
+      top: 0;
       width: 1px;
       height: 100%;
-      background-color: #aaa;
-      position: absolute;
-      top: 0px;
+      background-color: #AAA;
     }
-    
     &:hover .seekbar {
       display: block;
     }
-    
     &:not(:hover) .seekbar {
       display: none;
     }
   }
-
   .download-button {
     font-size: 34px;
     display: inline-block;

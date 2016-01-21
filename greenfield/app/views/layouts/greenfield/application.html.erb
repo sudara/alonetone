@@ -13,15 +13,17 @@
   </head>
 
   <body>
-    <div class="wrapper">
-      <%= yield %>
+    <div class="main-table-row">
+      <main>
+        <%= yield %>
+      </main>
     </div>
     
-    <footer>
-      <div class="footer_wrapper">
-        <a href="http://www.alonetone.com">Powered by Greenfield</a>
-      </div>
-    </footer>
+    <div class="footer-table-row">
+        <footer>
+            <a href="http://www.alonetone.com">Powered by Greenfield</a>
+        </footer>
+    </div> <!-- .footer-table-row -->
     
     <%= javascript_include_tag "greenfield/application" %>
     <%= render :partial => 'shared/analytics' %>
