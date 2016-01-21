@@ -153,6 +153,11 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
   $('.playlist .track').removeClass('active');
   $(e.target).parent('li').find('.track').addClass('active');
 
+  $('.player .play-button').each(function() {
+    var url = $(this).find('*').andSelf().filter('a').attr('href');
+    Sound.load(url);
+  });
+
   if (window.history.pushState)
     window.history.pushState(null, '', e.target.href);
 });
