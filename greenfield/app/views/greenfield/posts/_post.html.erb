@@ -1,0 +1,9 @@
+<div class="track-content">
+  <h1><%= @post.asset.name %></h1>
+
+  <%= player(@post.asset) %>
+
+  <div class="post_content">
+    <%= markdown(@post.body, post: @post) %>
+  </div>
+</div>

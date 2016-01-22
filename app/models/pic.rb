@@ -4,11 +4,13 @@ class Pic < ActiveRecord::Base
   # Default config for has_attached_file can be found in config/initializers
   attachment_options = {
     :styles => {
-      :tiny   => "25x25#", 
-      :small  => "50x50#", 
-      :large  => "125x125#", 
-      :album  => "200x200#", 
-      :original => "800x800#"
+      :tiny       => "25x25#", 
+      :small      => "50x50#", 
+      :large      => "125x125#", 
+      :album      => "200x200#", 
+      :original   => "800x800#",
+      :greenfield => "1500x1500#",
+      :hq         => "3000x3000#"
   }}
   # required for production alonetone, to be compatible with rails 2/attachment_fu paths
   attachment_options[:path] = "/pics/:id/:name_with_style.:extension" if Alonetone.storage == "s3"
