@@ -13,7 +13,7 @@ module Greenfield
         end
 
         format.mp3 do
-          listen(@post.asset)
+          listen(@post.asset, register: false)
         end
       end
     end
@@ -47,7 +47,7 @@ module Greenfield
     end
 
     def find_asset
-      id = params[:asset_permalink] || params[:id]
+      id = params[:asset_permalink] || params[:post_id] || params[:id]
       @find_asset ||= Asset.find_by!(:permalink => id)
     end
 

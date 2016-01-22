@@ -13,7 +13,7 @@ module Greenfield
         end
 
         format.mp3 do
-          listen(@post.asset)
+          listen(@post.asset, register: false)
         end
       end
     end

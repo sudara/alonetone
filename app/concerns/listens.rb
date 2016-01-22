@@ -7,11 +7,18 @@ module Listens
   @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook']
  
   # user agent black list
-  @@bots = ['bot','spider','baidu','mp3bot'] 
+  @@bots = ['bot','spider','baidu','mp3bot']
 
-  def listen(asset)
+  def create_listen
+    register_listen(find_asset)
+    render nothing: true
+  end
+
+  private
+
+  def listen(asset, register: true)
     unless prevent_abuse(asset)
-      register_listen(asset)
+      register_listen(asset) if register
       if Alonetone.try(:play_dummy_mp3s)
         play_local_mp3
       else

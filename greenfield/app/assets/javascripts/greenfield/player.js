@@ -90,7 +90,7 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   var sound = Sound.load(url.replace(/\.mp3$/, '') + '.mp3');
 
   sound.rolling = function() {
-    $.post(url + '/listens');
+    $.post(url.replace(/\.mp3$/, '') + '/listens');
   };
 
   sound.almostFinished = function() {
