@@ -1,4 +1,5 @@
 class PlaylistsController < ApplicationController
+  include GreenfieldPlaylistDownloads
 
   before_filter :find_user, :except => :all
   before_filter :find_playlists, :except => [:index, :new, :create, :sort, :all]

@@ -21,6 +21,15 @@
     </li>
   <% end %>
   </ul>
+
+  <% if @playlist.downloads.present? %>
+    <hr size="1" />
+    <ul>
+      <% @playlist.downloads.each do |download| %>
+        <li><%= link_to "Download #{download.title}", download.url %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
 
 <div class="track-content">

@@ -20,6 +20,7 @@ gem "paperclip"
 gem "ruby-mp3info", '~> 0.7.2', :require => 'mp3info'
 gem "mime-types"
 gem 'ruby-audio'
+gem "s3_direct_upload"
 
 # active record
 gem "acts_as_list"

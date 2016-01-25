@@ -1,0 +1,12 @@
+<% if @greenfield_download.new_record? %>
+  $("#upload_<%= @unique_id %>").addClass('error');
+  <% @greenfield_download.errors.full_messages.each do |error| %>
+    $("#upload_<%= @unique_id %> ul.messages").append(
+      $('<li>').text("<%= j error.html_safe %>")
+    );
+  <% end %>
+<% else %>
+  $("#upload_<%= @unique_id %> ul.messages").append(
+    $('<li>').text("<%= j @greenfield_download.attachment_file_name %> was saved.")
+  );
+<% end %>
