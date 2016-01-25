@@ -1,3 +1,8 @@
+.track-content{
+  img{
+    max-width: 100%;
+  }
+}
 .post_content, .post_content textarea{
   font-size: $text;
   background-color: $not-quite-white;
