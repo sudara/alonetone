@@ -2,6 +2,9 @@ module Greenfield
   class PlaylistDownload < ActiveRecord::Base
     include Paperclip
 
+    MAX_SIZE     = 20 # 2000.megabytes
+    CONTENT_TYPE = ['application/zip', 'application/gzip']
+
     belongs_to :playlist
 
 
@@ -14,7 +17,7 @@ module Greenfield
 
     has_attached_file :attachment, attachment_options
     validates_attachment_presence :attachment, message: 'must be set. Make sure you chose a file to upload!'
-    validates_attachment_content_type :attachment, :content_type => ['application/zip', 'application/gzip'],
+    validates_attachment_content_type :attachment, content_type: CONTENT_TYPE,
       message: " was wrong. It doesn't look like you uploaded a valid zip file. Could you double check?"
 
     def url
