@@ -20,8 +20,16 @@ module Greenfield
     validates_attachment_content_type :attachment, content_type: CONTENT_TYPE,
       message: " was wrong. It doesn't look like you uploaded a valid zip file. Could you double check?"
 
+    after_validation :destroy_s3_object_if_invalid, on: :create
+
     def url
       attachment.expiring_url.gsub('s3.amazonaws.com/','')
+    end
+
+    protected
+
+    def destroy_s3_object_if_invalid
+      attachment.try(:destroy) if errors.any?
     end
   end
 end
