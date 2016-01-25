@@ -145,6 +145,7 @@ $('body').on('click', '[data-sound-id] .pause-button', function(e) {
 });
 
 $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
+  $('.playlist img').show();
   $('.track-content').replaceWith($(data).find('.track-content'));
   showWaveform();
 
