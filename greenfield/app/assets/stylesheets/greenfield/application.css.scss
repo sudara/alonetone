@@ -71,6 +71,7 @@ footer {
 }
 
 h1,
+h1 a,
 h1 > input {
   font-family: $bold-header-family;
   font-size: 30px;
@@ -78,6 +79,11 @@ h1 > input {
   width: 100%;
   border: none;
   background-color: transparent;
+  text-decoration: none;
+  color: $black;
+}
+
+h1 > input {
   &:hover {
     background-color: $bright-highlight;
   }

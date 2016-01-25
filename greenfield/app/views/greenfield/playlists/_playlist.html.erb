@@ -1,6 +1,6 @@
 <div class="playlist">
-  <%= image_tag @playlist.alonetone_playlist.cover(:album), style: 'display:none' unless @post %>
-    <h1> <%= @playlist.alonetone_playlist.title %>
+  <%= link_to image_tag(@playlist.alonetone_playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist) unless @post %>
+    <h1> <%= link_to @playlist.alonetone_playlist.title, user_playlist_path(@playlist.user, @playlist) %>
     </h1>
     <h2><span class="by">by</span> <%= @playlist.user.display_name %></h2>  
     <ul>
