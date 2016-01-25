@@ -2,7 +2,7 @@ module Greenfield
   class PlaylistDownload < ActiveRecord::Base
     include Paperclip
 
-    MAX_SIZE     = 20 # 2000.megabytes
+    MAX_SIZE     = 2000.megabytes
     CONTENT_TYPE = ['application/zip', 'application/gzip']
 
     belongs_to :playlist
