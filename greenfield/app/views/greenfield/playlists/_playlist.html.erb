@@ -3,7 +3,7 @@
     <h1> <%= link_to @playlist.alonetone_playlist.title, user_playlist_path(@playlist.user, @playlist) %>
     </h1>
     <h2><span class="by">by</span> <%= @playlist.user.display_name %></h2>  
-    <ul>
+    <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
     <li data-sound-id="<%= [track.asset.user.login, track.asset.permalink].join('/') %>">
       
