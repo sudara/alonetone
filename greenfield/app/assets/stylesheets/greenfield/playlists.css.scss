@@ -1,44 +1,88 @@
 .playlist {
+  img {
+    max-width: 100%;
+  }
   h1 {
     font-family: $bold-header-family;
-    font-size: 30px;
-    line-height: 36px; // $baseline * 1.3333;
+    font-size: 22px;
+    line-height: $baseline;
+    margin-top: $baseline / 2;
   }
   h2 {
     font-family: $normal-header-family;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 100;
-    line-height: 22px; // $baseline * .815;
+    line-height: $baseline;
+    margin-top: $baseline / 4;
     color: $light-gray;
   }
-  ul {
-    font-size: 12px;
-    li a.play-button {
-      line-height: 8px;
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-right: 2px;
-      padding: 5px 4px 6px 5px;
-      background-color: $light-gray;
+  div.downloads-links {
+    font-family: Helvetica;
+    color: $not-quite-black;
+    text-align: center;
+      font-size: 10px;
+      color: $light-gray;
+      line-height: $baseline / 2;
+      a {
+        i {
+          margin-right: 2px;
+          font-size: 8px;
+          color: $lightest-gray;
+          
+        }
+        color: $not-quite-black;
+        text-decoration: none;
+        &:hover {
+          i {
+            color: Green;
+          }
+          text-decoration: underline;
+        }
+      }
+  }
+  ul.tracklist {
+    margin-top: $baseline / 2;
+    li {
+      clear: both;
+      overflow: auto;
+      margin-bottom: $baseline / 4;
       &:hover {
-        color: red;
-      };
-    }
-    li a {
-      text-decoration: none;
-      color: $black;
+        a.play-button {
+          color: LawnGreen;
+        }
+      }
+      a.play-button {
+        line-height: 8px;
+        display: block;
+        float: left;
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+        padding: 5px 3px 6px 7px;
+        border-radius: 3px;
+        background-color: $light-gray;
+        &:hover {
+          color: LawnGreen;
+        }
+      }
+      a {
+        font-size: 12px;
+        font-size: 12px;
+        line-height: 23px;
+        display: block;
+        float: left;
+        width: 80%;
+        text-decoration: none;
+        color: $black;
+        .track {
+          &.active {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
-  .track {
-    font-size: 12px;
-    &.active {
-      text-decoration: underline;
-    }
-  }
-  img{
-    max-width: 100%;
-  }
+
 }
 
 .edit_playlist ul a[data-method=delete] {

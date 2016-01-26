@@ -1,52 +1,55 @@
-.track-content{
-  img{
+.track-content {
+  img {
     max-width: 100%;
   }
 }
-.post_content, .post_content textarea{
-  font-size: $text;
-  background-color: $not-quite-white;
-  border: none;
+.post_content,
+.post_content textarea {
+  font-size: $body-font-size;
   margin-top: $baseline;
   margin-bottom: $baseline * 3;
-  -webkit-font-smoothing: antialiased;
-  word-break: break-word;
   word-wrap: break-word;
+  word-break: break-word;
+  color: $not-quite-black;
+  border: none;
+  background-color: $not-quite-white;
+
+  -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
-  color: $not-quite-black;  
-  p{
+  p {
     margin-bottom: $baseline;
-    img{
+    img {
+      max-width: 648px;
       // not quite perfectly the same width
       margin-left: 1px;
-      max-width:648px;
     }
   }
-  hr{
-    position:relative; // needed for icon
-    font-family: "FontAwesome";
-    border: 0;
-    margin:$baseline auto;
-    border-bottom: 1px solid $light-gray;
+  hr {
+    font-family: 'FontAwesome';
+    position: relative; // needed for icon
     width: 433px;
+    margin: $baseline auto;
     text-align: center;
-    &:after{
-      -webkit-font-smoothing: antialiased;
-      position:absolute;
-      top:-.55em;
-      left:207px;
-      display:block;
+    border: 0;
+    border-bottom: 1px solid $light-gray;
+    &:after {
+      position: absolute;
+      top: -.55em;
+      left: 207px;
+      display: block;
+      content: '\f025'; // with headphone icon
       color: $lightest-gray;
       background-color: $not-quite-white-opaque; // interrupt hr
-      content: "\f025"; // with headphone icon
+
+      -webkit-font-smoothing: antialiased;
     }
   }
-  h3{
-    margin-top: $baseline + 2px; 
-    margin-bottom: $baseline - 2px;
-    margin-bottom: 0px;
+  h3 {
+    // margin-bottom: 0px;
     font-family: $bold-header-family;
     font-size: 20px;
+    margin-top: $baseline + 2px;
+    margin-bottom: $baseline - 2px;
     color: $not-quite-black;
   }
 }

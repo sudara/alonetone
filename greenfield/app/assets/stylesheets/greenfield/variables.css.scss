@@ -14,7 +14,7 @@ $body-font: "Harriet Text", sans-serif;
 
 // I want to be precise about spacing at regular intervals related to body text size
 // This is the "em" across the scss except where font-size is definied differently.
-$text: 18px;
+$body-font-size: 18px;
 
 // everything on a baseline grid
 $baseline: 27px;

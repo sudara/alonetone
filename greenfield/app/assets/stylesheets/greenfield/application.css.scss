@@ -27,12 +27,14 @@ body {
   height: 100%;
   main {
     overflow: auto;
-    width: 900px;
+    width: 930px;
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: $baseline * 2;
+    padding-bottom: $baseline * 2;
     .playlist {
       float: left;
-      width: 250px;
+      width: 200px;
+      margin-right: 80px;
     }
     .track-content {
       float: left;
@@ -52,7 +54,7 @@ body {
 
 body {
   font-family: $body-font;
-  font-size: 18px;
+  font-size: $body-font-size;
   font-weight: 500;
   line-height: $baseline;  // 27px is our baseline
   background-color: $not-quite-white;
@@ -77,10 +79,10 @@ h1 > input {
   font-size: 30px;
   line-height: 36px; // $baseline * 1.3333;
   width: 100%;
-  border: none;
-  background-color: transparent;
   text-decoration: none;
   color: $black;
+  border: none;
+  background-color: transparent;
 }
 
 h1 > input {
