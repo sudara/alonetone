@@ -1,5 +1,5 @@
 
-form .post_content{
+form .post-content{
   min-height: 100px;
   margin-bottom: 0; // less space since we have more UI below
   textarea{
@@ -9,7 +9,7 @@ form .post_content{
   }
 }
 
-.post_content {
+.post-content {
   textarea:hover{
     background-color: $bright-highlight;
   }

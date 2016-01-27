@@ -10,7 +10,6 @@
 
 
 /* LAYOUT */
-
 html,
 body {
   height: 100%;
@@ -27,14 +26,14 @@ body {
   height: 100%;
   main {
     overflow: auto;
-    width: 930px;
+    width: 980px;
     margin: 0 auto;
-    padding-top: $baseline * 2;
-    padding-bottom: $baseline * 2;
+    padding-top: $baseline * 3;
+    padding-bottom: $baseline * 3;
     .playlist {
       float: left;
-      width: 200px;
-      margin-right: 80px;
+      width: $baseline * 10; //270px;
+      margin-right: 60px;
     }
     .track-content {
       float: left;
@@ -51,7 +50,6 @@ body {
 }
 
 /* STYLES */
-
 body {
   font-family: $body-font;
   font-size: $body-font-size;
@@ -109,3 +107,181 @@ header {
     height: 83px;
   }
 }
+
+
+
+/* THE DAWN OF MOBILE */
+// i'm not sure yet where I want to put all of these things!
+
+@media only screen and (max-width: 600px) {
+  .main-table-row {
+    main {
+      width: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+      .playlist {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+        img {
+          display: block;
+        }
+        .downloads-links {
+          display: block;
+        }
+        .tracklist {
+          display: block;
+        }
+      }
+      .track-content {
+        display: block;
+        float: none;
+        width: 100%;
+        .player {
+          .waveform {
+            width: 100%;
+          }
+        }
+        .post-content {
+          display: block;
+        }  
+      }
+    }
+  }
+  .footer-table-row {
+    display: none;
+  }
+}
+
+
+// ***** 
+// ***** Uncomment me for Cover / Waveform View
+// ***** 
+
+// @media only screen and (max-width: 600px) {
+//   .main-table-row {
+//     main {
+//       width: 100%;
+//       padding-top: 0;
+//       padding-bottom: 0;
+//       .playlist {
+//         float: none;
+//         width: 100%;
+//         margin-right: 0;
+//         .downloads-links {
+//           display: none;
+//         }
+//         .tracklist {
+//           display: none;
+//         }
+//       }
+//       .track-content {
+//         float: none;
+//         width: 100%;
+//         .player {
+//           .waveform {
+//             width: 100%;
+//           }
+//         }
+//         .post-content {
+//           display: none;
+//         }  
+//       }
+//     }
+//   }
+//   .footer-table-row {
+//     display: none;
+//   }
+// }
+
+// ***** 
+// ***** Uncomment me for Playlist View
+// ***** 
+
+//@media only screen and (max-width: 600px) {
+//  .main-table-row {
+//    main {
+//      width: 100%;
+//      padding-top: 0;
+//      padding-bottom: 0;
+//      .playlist {
+//        float: none;
+//        width: 100%;
+//        margin-right: 0;
+//        img {
+//          display: none;
+//        }
+//        .downloads-links {
+//          display: block;
+//        }
+//        .tracklist {
+//          display: block;
+//        }
+//      }
+//      .track-content {
+//        display: none;
+//        float: none;
+//        width: 100%;
+//        .player {
+//          .waveform {
+//            width: 100%;
+//          }
+//        }
+//        .post-content {
+//          display: none;
+//        }  
+//      }
+//    }
+//  }
+//  .footer-table-row {
+//    display: none;
+//  }
+//}
+
+// ***** 
+// ***** Uncomment me for Post View
+// ***** 
+
+//@media only screen and (max-width: 600px) {
+//  .main-table-row {
+//    main {
+//      width: 100%;
+//      padding-top: 0;
+//      padding-bottom: 0;
+//      .playlist {
+//        float: none;
+//        width: 100%;
+//        margin-right: 0;
+//        img {
+//          display: none;
+//        }
+//        .downloads-links {
+//          display: none;
+//        }
+//        .tracklist {
+//          display: none;
+//        }
+//      }
+//      .track-content {
+//        display: block;
+//        float: none;
+//        width: 100%;
+//        .player {
+//          display: none;
+//          .waveform {
+//            width: 100%;
+//          }
+//        }
+//        .post-content {
+//          display: block;
+//          hr {
+//            display: none;
+//          }
+//        }  
+//      }
+//    }
+//  }
+//  .footer-table-row {
+//    display: none;
+//  }
+//}
