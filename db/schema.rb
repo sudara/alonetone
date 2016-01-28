@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422013647) do
+ActiveRecord::Schema.define(version: 20160128195520) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150422013647) do
     t.text     "description"
     t.text     "credits"
     t.string   "youtube_embed"
-    t.boolean  "private"
+    t.boolean  "private",                           default: false, null: false
     t.float    "hotness"
     t.integer  "favorites_count",                   default: 0
     t.text     "lyrics"
