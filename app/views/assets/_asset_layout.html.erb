@@ -9,6 +9,7 @@
     <div class="title_left_column_top">
       <span>
 	<%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
+        <%= '&#x1f512;'.html_safe unless asset.published? %>
       </span>
       <span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
     </div>
