@@ -2,8 +2,9 @@
   position: relative;
   display: block;
   height: ($baseline * 4) - 2px;
-  margin-top: $baseline * .8;
-  margin-bottom: $baseline + 7px;
+  margin-top: $baseline / 2;
+  margin-bottom: $baseline;
+  // box-sizing: border-box;
   border-top: 1px solid $light-gray;
   border-bottom: 1px solid $light-gray;
   background-color: $not-quite-white-opaque;
@@ -26,25 +27,25 @@
     }
   }
   .time {
-    font-size: 12px;
+    font-size: 10px;
     position: absolute;
-    right: 0;
-    display: inline-block;
+    margin-left: 8px;
+    margin-top: 4px;
+    display: block;
     color: $lightest-gray;
   }
   .play-button,
   .pause-button {
     display: inline-block;
-    width: 54px;
-    height: 54px;
     margin-top: $baseline / 2;
-    padding: ($baseline / 2) - 1;
+    padding: 12px;
     cursor: pointer;
     vertical-align: middle;
     text-indent: 11px;
     color: $light-gray;
     border: 1px solid $light-gray;
     border-radius: 50%;
+    font-size: 36px;
     &:hover {
       color: $black;
     }
@@ -56,8 +57,13 @@
   .waveform {
     position: absolute;
     right: 0;
-    display: inline-block;
+    // display: inline-block;
+    top: 0;
     width: 540px;
+    //padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+
     height: 100%;
     .seekbar {
       position: absolute;

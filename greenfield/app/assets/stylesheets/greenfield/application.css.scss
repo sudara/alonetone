@@ -32,7 +32,7 @@ body {
     padding-bottom: $baseline * 3;
     .playlist {
       float: left;
-      width: $baseline * 10; //270px;
+      width: $baseline * 10; // 270px
       margin-right: 60px;
     }
     .track-content {
@@ -74,11 +74,11 @@ h1,
 h1 a,
 h1 > input {
   font-family: $bold-header-family;
-  font-size: 30px;
-  line-height: 36px; // $baseline * 1.3333;
+  font-size: $baseline;
+  line-height: $baseline; // $baseline * 1.3333;
   width: 100%;
   text-decoration: none;
-  color: $black;
+  color: $not-quite-black;
   border: none;
   background-color: transparent;
 }
@@ -116,35 +116,130 @@ header {
 @media only screen and (max-width: 600px) {
   .main-table-row {
     main {
+      box-sizing: border-box;
       width: 100%;
       padding-top: 0;
+      padding-right: 20px;
       padding-bottom: 0;
+      padding-left: 20px;
+      .tracklist {
+        position: fixed;
+        top: 58px;
+        left: 0;
+        height: 100%;
+        margin-top: 0;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-left: 20px;
+        background-color: #FFF;
+        display: none;
+      }
+      .playlist-link {
+        position: fixed;
+        z-index: 1080;
+        bottom: 10px;
+        right: 10px;
+        margin-bottom: 0;
+        text-decoration: none;
+        color: $gray;
+        bottom: 17px;
+        right: 40px;
+
+      }
       .playlist {
         float: none;
         width: 100%;
         margin-right: 0;
-        img {
+        margin-bottom: $baseline;
+        > * {
+          display: none;
+        }
+        .small-cover {
           display: block;
+          width: 60%;
+          margin: 0 auto;
+          img {
+          }
+        }
+        h1 {
+          display: block;
+          text-align: center;
+          a {
+            font-size: 16px;
+          }
+        }
+        h2 {
+          font-size: 14px;
+          display: block;
+          text-align: center;
         }
         .downloads-links {
-          display: block;
+          // display: block;
         }
-        .tracklist {
-          display: block;
+      }
+      .playlist.fixed {
+        position: fixed;
+        z-index: 1080;
+        margin-bottom: 0;
+        padding-bottom: 10px;
+        border-bottom: $light-gray;
+        margin-top: 0;
+        top: 0;
+        left: 0;
+        .small-cover {
+          width: 10%;
+          margin: 0 auto;
+          float: left;
         }
+        background-color: #fff;
+
       }
       .track-content {
         display: block;
         float: none;
         width: 100%;
+        h1 {
+          font-size: 20px;
+          margin-bottom: $baseline;
+          text-align: center;
+        }
         .player {
+          // background: #000;
+          width: 100%;
+          height: 60px;
+          margin-top: 0;
+          .play-button {
+            font-size: 12px;
+          }
           .waveform {
-            width: 100%;
+            width: 75%;
+          }
+        }
+        .player.fixed {
+          position: fixed;
+          z-index: 1080;
+          bottom: 0;
+          left: 0;
+          margin-bottom: 0;
+          .time {
+            top: 4px;
+            left: 50px;
+          }
+          .waveform {
+            display: none;
           }
         }
         .post-content {
+          font-size: 15px;
           display: block;
-        }  
+          hr {
+            width: 80%;
+            &:after {
+              display: none;
+              content: ''; // with headphone icon
+            }
+          }
+        }
       }
     }
   }
@@ -152,136 +247,3 @@ header {
     display: none;
   }
 }
-
-
-// ***** 
-// ***** Uncomment me for Cover / Waveform View
-// ***** 
-
-// @media only screen and (max-width: 600px) {
-//   .main-table-row {
-//     main {
-//       width: 100%;
-//       padding-top: 0;
-//       padding-bottom: 0;
-//       .playlist {
-//         float: none;
-//         width: 100%;
-//         margin-right: 0;
-//         .downloads-links {
-//           display: none;
-//         }
-//         .tracklist {
-//           display: none;
-//         }
-//       }
-//       .track-content {
-//         float: none;
-//         width: 100%;
-//         .player {
-//           .waveform {
-//             width: 100%;
-//           }
-//         }
-//         .post-content {
-//           display: none;
-//         }  
-//       }
-//     }
-//   }
-//   .footer-table-row {
-//     display: none;
-//   }
-// }
-
-// ***** 
-// ***** Uncomment me for Playlist View
-// ***** 
-
-//@media only screen and (max-width: 600px) {
-//  .main-table-row {
-//    main {
-//      width: 100%;
-//      padding-top: 0;
-//      padding-bottom: 0;
-//      .playlist {
-//        float: none;
-//        width: 100%;
-//        margin-right: 0;
-//        img {
-//          display: none;
-//        }
-//        .downloads-links {
-//          display: block;
-//        }
-//        .tracklist {
-//          display: block;
-//        }
-//      }
-//      .track-content {
-//        display: none;
-//        float: none;
-//        width: 100%;
-//        .player {
-//          .waveform {
-//            width: 100%;
-//          }
-//        }
-//        .post-content {
-//          display: none;
-//        }  
-//      }
-//    }
-//  }
-//  .footer-table-row {
-//    display: none;
-//  }
-//}
-
-// ***** 
-// ***** Uncomment me for Post View
-// ***** 
-
-//@media only screen and (max-width: 600px) {
-//  .main-table-row {
-//    main {
-//      width: 100%;
-//      padding-top: 0;
-//      padding-bottom: 0;
-//      .playlist {
-//        float: none;
-//        width: 100%;
-//        margin-right: 0;
-//        img {
-//          display: none;
-//        }
-//        .downloads-links {
-//          display: none;
-//        }
-//        .tracklist {
-//          display: none;
-//        }
-//      }
-//      .track-content {
-//        display: block;
-//        float: none;
-//        width: 100%;
-//        .player {
-//          display: none;
-//          .waveform {
-//            width: 100%;
-//          }
-//        }
-//        .post-content {
-//          display: block;
-//          hr {
-//            display: none;
-//          }
-//        }  
-//      }
-//    }
-//  }
-//  .footer-table-row {
-//    display: none;
-//  }
-//}
