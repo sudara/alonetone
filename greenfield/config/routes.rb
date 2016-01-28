@@ -1,5 +1,5 @@
 Greenfield::Engine.routes.draw do
-  root to: 'application#nothing'
+  root to: 'pages#home'
 
   post 'login', to: 'application#login', as: :user_sessions
 
