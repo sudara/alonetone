@@ -1,7 +1,8 @@
 class Asset < ActiveRecord::Base
   
   concerned_with :uploading, :radio, :statistics, :greenfield
-  
+
+  scope :published,       -> { where(private: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
   scope :random_order,    -> { order("RAND()") }
@@ -107,6 +108,10 @@ class Asset < ActiveRecord::Base
     else
       true
     end
+  end
+
+  def published?
+    !private?
   end
   
   # needed for spam detection

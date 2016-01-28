@@ -43,6 +43,11 @@ class ApplicationController < ActionController::Base
     @asset = Asset.where(:permalink => (params[:permalink] || params[:track_id] || params[:id])).first
     @asset ||= Asset.where(:id => params[:id]).first || track_not_found
   end
+
+  def find_published_asset
+    find_asset
+    track_not_found unless @asset.published? || current_user_is_admin_or_owner?(@asset.user)
+  end
   
   def find_playlists
     @playlist = @user.playlists.find(:permalink => (params[:permalink] || params[:id]), :include =>[:tracks => :asset]).first

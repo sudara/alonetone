@@ -19,8 +19,8 @@ class UsersController < ApplicationController
         prepare_meta_tags
         gather_user_goodies
       end
-      format.xml { @assets = @user.assets.recent.limit(params[:limit] || 10) }
-      format.rss { @assets = @user.assets.recent }
+      format.xml { @assets = @user.assets.published.recent.limit(params[:limit] || 10) }
+      format.rss { @assets = @user.assets.published.recent }
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
   
   def stats
-    @tracks = @user.assets
+    @tracks = @user.assets.published
     respond_to do |format|
       format.html 
       format.xml
@@ -102,7 +102,7 @@ class UsersController < ApplicationController
   end
   
   def toggle_favorite
-    asset = Asset.find(params[:asset_id])
+    asset = Asset.published.find(params[:asset_id])
     return false unless logged_in? && asset # no bullshit
     current_user.toggle_favorite(asset)
     render :nothing => true
@@ -158,8 +158,8 @@ class UsersController < ApplicationController
   end 
   
   def gather_user_goodies
-    @popular_tracks = @user.assets.includes(:user => :pic).limit(5).reorder('assets.listens_count DESC')
-    @assets = @user.assets.includes(:user => :pic).limit(5)
+    @popular_tracks = @user.assets.published.includes(:user => :pic).limit(5).reorder('assets.listens_count DESC')
+    @assets = @user.assets.published.includes(:user => :pic).limit(5)
     @playlists = @user.playlists.only_public.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
