@@ -113,6 +113,12 @@ class Asset < ActiveRecord::Base
   def published?
     !private?
   end
+
+  def publish!
+    if private?
+      update_column(:private, false) && notify_followers
+    end
+  end
   
   # needed for spam detection
   def full_permalink

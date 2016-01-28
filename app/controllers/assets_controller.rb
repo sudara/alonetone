@@ -148,6 +148,8 @@ class AssetsController < ApplicationController
   # PUT /assets/1.xml
   def update
     result =  @asset.update_attributes(params[:asset])
+    @asset.publish! if params[:commit] == 'Publish'
+
     if request.xhr?
       result ? head(:ok) : head(:bad_request)
     else
