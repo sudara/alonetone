@@ -74,13 +74,6 @@ class UsersController < ApplicationController
   def edit
   end
   
-  def bio
-    @page_title = "#{@user.name}'s Profile"
-    @follows = @user.followees.includes(:pic)
-    @mostly_listens_to = @user.mostly_listens_to
-    @similar_users = User.where(:id => @user.similar_users_by_ip)
-  end
-  
   def attach_pic
     if params[:pic].present? 
       @pic = @user.build_pic(params[:pic])
