@@ -197,9 +197,11 @@ class AssetsController < ApplicationController
   
   def extract_assets_from_params
     @assets = []
+    attrs = { private: !!(params[:commit] =~ /don't publish/) }
     Array(params[:asset_data]).each do |file|
       unless file.is_a?(String)
-        @assets << asset = current_user.assets.create(:mp3 => file)
+        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file),
+                                                      without_protection: true)
         if !asset.new_record? && current_user.greenfield_enabled?
           Greenfield::WaveformExtractJob.perform_later(asset.id)
         end

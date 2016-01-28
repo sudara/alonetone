@@ -27,7 +27,7 @@ class Asset < ActiveRecord::Base
  
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
-  after_create :notify_followers
+  after_create :notify_followers, if: :published?
   
   validates_presence_of :user_id
   attr_accessible :user, :mp3, :size, :name, :user_id, :title, :description, 

@@ -273,7 +273,7 @@ SortablePlaylist = $.klass({
 Uploader = $.klass({
   initialize: function(){
     this.form = $('form',this.element);
-    this.submit = $('input[:submit]',this.form);
+    this.submit = $('input[type=submit]', this.form);
     this.field = $('ul.filefields > li > input',this.form);
     this.clone = $('ul.filefields > li:first', this.form)
     this.field.change($.bind(this.addField, this));
@@ -284,18 +284,17 @@ Uploader = $.klass({
   addField: function(e){
     $('ul.filefields',this.form).append(this.clone.clone());
     $('ul.filefields li:last input',this.form).val('').change($.bind(this.addField, this));
-    this.count++;
-    this.submit.val('Upload '+this.count+' files');
+    var count = ++this.count;
+    this.submit.each(function() {
+      this.value = this.value.replace(/Upload( \d+ files)?/,
+                                      'Upload ' + count + ' files');
+    });
   },
   waiting: function(){
-    this.submit.attr('disabled', 'disabled');
-    this.submit.val('uploading...');
     this.form.hide();
     this.uploading.show();
     this.uploading.prepend('Uploading '+this.count+' files...<br/><br/>');
   }
-  
-  
 });
 
 
