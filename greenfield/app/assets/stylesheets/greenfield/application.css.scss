@@ -123,16 +123,16 @@ header {
       padding-bottom: 0;
       padding-left: 20px;
       .tracklist {
-        position: fixed;
-        top: 58px;
-        left: 0;
+        // position: fixed;
+        // top: 58px;
+        // left: 0;
         height: 100%;
         margin-top: 0;
         padding-top: 20px;
-        padding-right: 20px;
-        padding-left: 20px;
+        padding-right: 0px;
+        padding-left: 0px;
         background-color: #FFF;
-        display: none;
+        // display: none;
       }
       .playlist-link {
         position: fixed;
@@ -152,7 +152,7 @@ header {
         margin-right: 0;
         margin-bottom: $baseline;
         > * {
-          display: none;
+          // display: none;
         }
         .small-cover {
           display: block;
@@ -174,7 +174,7 @@ header {
           text-align: center;
         }
         .downloads-links {
-          // display: block;
+          display: none;
         }
       }
       .playlist.fixed {
@@ -226,7 +226,7 @@ header {
             left: 50px;
           }
           .waveform {
-            display: none;
+            // display: none;
           }
         }
         .post-content {

@@ -193,7 +193,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    perf_check (0.1.18)
+    perf_check (0.3.0)
       colorize (= 0.7.3)
       diffy (= 3.0.5)
     protected_attributes (1.0.8)
