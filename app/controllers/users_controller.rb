@@ -151,14 +151,19 @@ class UsersController < ApplicationController
   end 
   
   def gather_user_goodies
-    @popular_tracks = @user.assets.published.includes(:user => :pic).limit(5).reorder('assets.listens_count DESC')
-    @assets = @user.assets.published.includes(:user => :pic).limit(5)
+    @popular_tracks = @user.assets.includes(:user => :pic).limit(5).reorder('assets.listens_count DESC')
+    @assets = @user.assets.includes(:user => :pic).limit(5)
     @playlists = @user.playlists.only_public.includes(:user, :pic)
-    @listens = @user.listened_to_tracks.published.preload(:user).limit(5)
+    @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5)
     @comments = @user.comments.public_or_private(display_private_comments?).
       preload(:commentable => {:user => :pic}).preload({:commenter => :pic}).limit(5)
+    unless current_user_is_admin_or_owner?(@user)
+      @popular_tracks = @popular_tracks.published
+      @assets = @assets.published
+      @listens = @listens.published
+    end
   end
   
   def authorized?
