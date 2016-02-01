@@ -1,3 +1,7 @@
 <%= render layout: 'playlists/playlist_layout', locals: {playlist: playlist} do %>
-  <%= render partial: 'assets/asset', collection: playlist.tracks.collect(&:asset) %>
+  <% if authorized_for(@playlist) %>
+    <%= render partial: 'assets/asset', collection: playlist.assets %>
+  <% else %>
+    <%= render partial: 'assets/asset', collection: playlist.public_assets %>
+  <% end %>
 <% end %>

@@ -17,6 +17,9 @@ class Playlist < ActiveRecord::Base
      -> {order(:position).includes(:asset => :user)},
      :dependent => :destroy
   has_many :assets, :through => :tracks 
+  has_many :public_assets, 
+    -> { where('assets.private = ?', false)},
+    :through => :tracks, :source => :asset
   
   validates_presence_of :description, :title, :user_id
   validates_length_of   :title, :within => 4..100
