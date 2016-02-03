@@ -150,8 +150,8 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
   $('.track-content').replaceWith($(data).find('.track-content'));
   showWaveform();
 
-  $('.playlist .track').removeClass('active');
-  $(e.target).parent('li').find('.track').addClass('active');
+  $('.playlist .tracklist li').removeClass('active');
+  $(e.target).parent('li').addClass('active');
 
   $('.player .play-button').each(function() {
     var url = $(this).find('*').andSelf().filter('a').attr('href');
