@@ -37,6 +37,7 @@ function showWaveform() {
 
     container.data('waveform', new Waveform({
       container: this,
+      height: 54,
       innerColor: function(percent, _) {
         if (percent < soundPosition)
           return '#302f2f';
