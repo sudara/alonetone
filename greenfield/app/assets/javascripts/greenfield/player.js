@@ -158,8 +158,16 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
     Sound.load(url);
   });
 
-  if (window.history.pushState)
+  if (window.history.pushState && e.target.href != document.location.href)
     window.history.pushState(null, '', e.target.href);
+});
+
+$(window).on('popstate', function(je) {
+  var loc = document.location.pathname;
+  var link = $('.playlist .tracklist a[data-remote=true][href='+attr(loc)+']').last();
+  console.log('setting page back to ', loc);
+  console.log('with link:           ', link);
+  link.trigger('click');
 });
 
 $(document).ready(showWaveform);
