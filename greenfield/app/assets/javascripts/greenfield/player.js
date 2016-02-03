@@ -129,7 +129,7 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
 
   sound.play();
 
-  if (window.location.pathname == $(this).attr('href')) {
+  if (window.location.href == this.href) {
     e.preventDefault();
     return false;
   }
