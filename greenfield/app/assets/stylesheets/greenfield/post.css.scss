@@ -1,10 +1,15 @@
 .track-content {
+  h1{
+    padding-top: $baseline;
+    padding-bottom: $baseline;
+  }
   img {
     max-width: 100%;
   }
 }
 .post-content,
 .post-content textarea {
+  background-color: white;
   font-size: $body-font-size;
   margin-top: $baseline;
   margin-bottom: $baseline * 3;
@@ -12,7 +17,6 @@
   word-break: break-word;
   color: $not-quite-black;
   border: none;
-  background-color: $not-quite-white;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;

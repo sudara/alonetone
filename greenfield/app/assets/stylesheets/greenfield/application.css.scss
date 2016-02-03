@@ -26,18 +26,27 @@ body {
   height: 100%;
   main {
     overflow: auto;
-    width: 980px;
+    width: 1020px;
     margin: 0 auto;
     padding-top: $baseline * 3;
     padding-bottom: $baseline * 3;
     .playlist {
       float: left;
       width: $baseline * 10; // 270px
-      margin-right: 60px;
     }
     .track-content {
       float: left;
-      width: 650px;
+      margin-left:$baseline;
+      .large-cover{
+        width:650px;
+        height:650px;
+        margin-left: -$baseline;
+      }
+      .post-content{
+        width: 550px;
+        padding-left: $baseline * 3;
+        padding-right: $baseline * 3;
+      }
     }
   }
 }
@@ -55,7 +64,7 @@ body {
   font-size: $body-font-size;
   font-weight: 500;
   line-height: $baseline;  // 27px is our baseline
-  background-color: $not-quite-white;
+  background-color: #f9f9f9;
 }
 
 footer {
@@ -94,9 +103,6 @@ h2 {
   font-size: 24px;
   line-height: 22px; // $baseline * .815;
   color: #CCC;
-  span {
-    color: $lightest-gray;
-  }
 }
 
 
@@ -108,142 +114,53 @@ header {
   }
 }
 
-
-
-/* THE DAWN OF MOBILE */
-// i'm not sure yet where I want to put all of these things!
-
-@media only screen and (max-width: 600px) {
-  .main-table-row {
-    main {
-      box-sizing: border-box;
-      width: 100%;
-      padding-top: 0;
-      padding-right: 20px;
-      padding-bottom: 0;
-      padding-left: 20px;
-      .tracklist {
-        // position: fixed;
-        // top: 58px;
-        // left: 0;
-        height: 100%;
-        margin-top: 0;
-        padding-top: 20px;
-        padding-right: 0px;
-        padding-left: 0px;
-        background-color: #FFF;
-        // display: none;
-      }
-      .playlist-link {
-        position: fixed;
-        z-index: 1080;
-        bottom: 10px;
-        right: 10px;
-        margin-bottom: 0;
-        text-decoration: none;
+a.download-button {
+  font-family: $normal-header-family;
+  font-size: 14px;
+  font-weight:300;
+  display: inline-block;
+  width: auto;
+  margin-top: $baseline;
+  margin-right:5px;
+  padding: 5px $baseline/2  ;
+  text-decoration: none;
+  color: $not-quite-white-opaque;
+  border-radius: 2px;
+  background-color: $not-quite-black;
+  i {
+    margin-right: 10px;
+  }
+}
+ul.downloads-links {
+  font-size: 12px;
+  line-height: $baseline / 2;
+  display: none;
+  margin-top: $baseline/4;
+  padding-top: $baseline / 4;
+  padding-bottom: $baseline / 4;
+  padding-left: 0;
+  color: $light-gray;
+  li {
+    margin-bottom: $baseline * .5;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    a {
+      text-decoration: none;
+      color: $black;
+      i {
+        font-size: 14px;
+        margin-right: 12px;
+        margin-left: 0;
         color: $gray;
-        bottom: 17px;
-        right: 40px;
-
       }
-      .playlist {
-        float: none;
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: $baseline;
-        > * {
-          // display: none;
-        }
-        .small-cover {
-          display: block;
-          width: 60%;
-          margin: 0 auto;
-          img {
-          }
-        }
-        h1 {
-          display: block;
-          text-align: center;
-          a {
-            font-size: 16px;
-          }
-        }
-        h2 {
-          font-size: 14px;
-          display: block;
-          text-align: center;
-        }
-        .downloads-links {
-          display: none;
-        }
-      }
-      .playlist.fixed {
-        position: fixed;
-        z-index: 1080;
-        margin-bottom: 0;
-        padding-bottom: 10px;
-        border-bottom: $light-gray;
-        margin-top: 0;
-        top: 0;
-        left: 0;
-        .small-cover {
-          width: 10%;
-          margin: 0 auto;
-          float: left;
-        }
-        background-color: #fff;
-
-      }
-      .track-content {
-        display: block;
-        float: none;
-        width: 100%;
-        h1 {
-          font-size: 20px;
-          margin-bottom: $baseline;
-          text-align: center;
-        }
-        .player {
-          // background: #000;
-          width: 100%;
-          height: 60px;
-          margin-top: 0;
-          .play-button {
-            font-size: 12px;
-          }
-          .waveform {
-            width: 75%;
-          }
-        }
-        .player.fixed {
-          position: fixed;
-          z-index: 1080;
-          bottom: 0;
-          left: 0;
-          margin-bottom: 0;
-          .time {
-            top: 4px;
-            left: 50px;
-          }
-          .waveform {
-            // display: none;
-          }
-        }
-        .post-content {
-          font-size: 15px;
-          display: block;
-          hr {
-            width: 80%;
-            &:after {
-              display: none;
-              content: ''; // with headphone icon
-            }
-          }
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
-  .footer-table-row {
-    display: none;
-  }
 }
+
+// Hello, I would like to be loaded after the styles in this application.scss
+// maybe we should move some stuff to a layout file?
+@import 'mobile.css.scss';

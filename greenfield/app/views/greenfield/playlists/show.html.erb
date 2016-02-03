@@ -1,9 +1,7 @@
-  <%= render 'greenfield/playlists/playlist' %>
+<%= render 'greenfield/playlists/playlist' %>
 
 <% if @post %>
   <%= render @post %>
 <% else %>
-  <div class="track-content">
-    <%= image_tag @playlist.alonetone_playlist.cover(:greenfield) %>
-  </div>
+  <%= render 'greenfield/playlists/cover' %>
 <% end %>

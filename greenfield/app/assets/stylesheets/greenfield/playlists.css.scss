@@ -1,4 +1,5 @@
 .playlist {
+  background-color: white;
   .small-cover {
     display: block;
     img {
@@ -6,9 +7,17 @@
       width: 100%;
     }
   }
+  .playlist-options{
+    text-align:center;
+    width:100%;
+  }
   h1 {
+    text-align: center;
     line-height: 22px;
     margin-top: 5px;
+    &.cover{
+      margin-top: 23px;
+    }
     a {
       font-family: $bold-header-family;
       font-size: 18px;
@@ -17,108 +26,62 @@
     }
   }
   h2 {
+    text-align: center;
     font-family: $normal-header-family;
     font-size: 16px;
     font-weight: 100;
     line-height: $baseline;
     margin-top: 0;
-    color: $light-gray;
-  }
-  div.download-link {
-    margin-top: $baseline;
-    display: inline-block;
-    width: auto;
-    padding: $baseline/4 $baseline/2;
-    border-radius: 5px;
-    background-color: $not-quite-black;
-    a {
-      font-size:16px;
-      letter-spacing: 1px;
-      font-family: $normal-header-family;
-      text-decoration: none;
-      color: $not-quite-white-opaque;
-      i {
-        margin-right: 10px;
-      }
-    }
-  }
-  div.downloads-links {
-    font-family: Helvetica;
-    font-size: 12px;
-    line-height: $baseline / 2;
-    // display: none;
-    margin-top: $baseline/4;
-    padding-top: $baseline / 4;
-    padding-bottom: $baseline / 4;
     color: $not-quite-black;
-    padding-left: 4px;
-    color: $light-gray;
-    // border: 1px solid #CCC;
-    // border-radius: 5px;
-    ul {
-      li {
-        margin-bottom: $baseline / 4;
-        &:last-child {
-          margin-bottom: 0;
-        }
-        a {
-          text-decoration: none;
-          color: $not-quite-black;
-          i {
-            font-size: 14px;
-            margin-right: 12px;
-            margin-left: 12px;
-            color: $gray;
-          }
-          &:hover {
-            text-decoration: underline;
-            i {
-              // color: Green;
-            }
-          }
-        }
-      }
-    }
   }
-}
-ul.tracklist {
-  margin-top: $baseline;
-  li {
-    clear: both;
-    overflow: auto;
-    margin-bottom: $baseline / 6;
-    &:hover {
-      a.play-button {
-        color: LawnGreen;
+  ul.tracklist {
+    margin-top: $baseline;
+    li {
+      height: 35px;
+      line-height: 35px;
+      clear: both;
+      overflow: auto;
+      border-top: 1px solid $not-quite-white-opaque;
+      &:last-child{
+        border-bottom: 1px solid $not-quite-white-opaque;
       }
-    }
-    a.play-button {
-      line-height: 8px;
-      display: block;
-      float: left;
-      width: 10px;
-      height: 10px;
-      margin-right: 8px;
-      padding: 5px 3px 6px 5px;
-      border-radius: 3px;
-      background-color: #DDD;
-      &:hover {
-        color: LawnGreen;
-      }
-    }
-    a {
-      font-size: 12px;
-      font-size: 12px;
-      line-height: 23px;
-      display: block;
-      float: left;
-      width: 80%;
-      text-decoration: none;
-      color: $black;
-      .track {
-        &.active {
-          text-decoration: underline;
+      &:hover, &.active {
+        background-color: $not-quite-black;
+        a.play-button {
+          color: $not-quite-white;
+          border-color: $not-quite-white;
         }
+        a{
+          color: $not-quite-white;
+        }
+      }
+      a.play-button {
+        display:block;
+        float: left;
+        line-height: 9px;
+        font-size: 12px;
+        width: 10px;
+        height: 10px;
+        margin-right: 8px;
+        margin-top: 6px;
+        margin-left: 8px;
+        padding: 4px 3px 5px 6px;
+        border-radius: 11px;
+        border: 1px solid #aaa;
+        color: #aaa;
+        &:hover {
+          color: #fff;
+          border-color: #fff;
+        }
+      }
+      a {
+        line-height: ($baseline * 1.25) - 1px;
+        font-size: 14px;
+        display: block;
+        float: left;
+        width: 80%;
+        text-decoration: none;
+        color: $not-quite-black;
       }
     }
   }

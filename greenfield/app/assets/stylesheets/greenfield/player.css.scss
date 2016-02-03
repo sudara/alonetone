@@ -1,53 +1,25 @@
 .player {
   position: relative;
-  display: block;
-  height: ($baseline * 4) - 2px;
-  margin-top: $baseline / 2;
+  height: $baseline * 3;
   margin-bottom: $baseline;
-  // box-sizing: border-box;
-  border-top: 1px solid $light-gray;
-  border-bottom: 1px solid $light-gray;
-  background-color: $not-quite-white-opaque;
-  &.stuck {
-    position: fixed;
-    top: 0;
-    width: 650px;
-    height: ($baseline * 2.5);
-    margin-top: 0;
-    padding-top: 4px;
-    border-top: 0;
-    .waveform {
-      height: 100%;
-    }
-    .play-button,
-    .pause-button {
-      margin-top: 5px;
-      padding: 0;
-      border: none;
-    }
-  }
-  .time {
-    font-size: 10px;
-    position: absolute;
-    margin-left: 8px;
-    margin-top: 4px;
-    display: block;
-    color: $lightest-gray;
-  }
+  // background-color: $not-quite-white-opaque;
   .play-button,
   .pause-button {
-    display: inline-block;
-    margin-top: $baseline / 2;
-    padding: 12px;
-    cursor: pointer;
-    vertical-align: middle;
-    text-indent: 11px;
-    color: $light-gray;
-    border: 1px solid $light-gray;
-    border-radius: 50%;
     font-size: 36px;
+    display: inline-block;
+    margin-top: 5px;
+    padding: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;
+    text-indent: 10px;
+    color: $gray;
+    border: 1px solid $gray;
+    border-radius: 50%;
+    background-color: white;
     &:hover {
       color: $black;
+      border: 1px solid $black;
     }
   }
   .pause-button {
@@ -56,15 +28,14 @@
   }
   .waveform {
     position: absolute;
-    right: 0;
-    // display: inline-block;
+    width:590px;
+    border-left: $baseline solid $not-quite-white-opaque;
     top: 0;
-    width: 540px;
-    //padding-top: 20px;
-    padding-bottom: 20px;
-    box-sizing: border-box;
-
-    height: 100%;
+    right: 0;
+    background-color:white;
+    padding-top:$baseline / 2;
+    height: $baseline* 2.5;
+    padding-left: 10px;
     .seekbar {
       position: absolute;
       top: 0;
@@ -79,8 +50,39 @@
       display: none;
     }
   }
+  .time {
+    font-size: 10px;
+    display: block;
+    margin-top: -2px;
+    margin-left: 20px;
+    color: $gray;
+  }
   .download-button {
-    font-size: 34px;
-    display: inline-block;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    a {
+      color: $gray;
+      text-decoration: none;
+    }
+  }
+}
+.player.stuck {
+  position: fixed;
+  top: 0;
+  width: 650px;
+  height: $baseline * 2.5;
+  margin-top: 0;
+  padding-top: 4px;
+  border-top: 0;
+  .waveform {
+    height: 100%;
+  }
+  .play-button,
+  .pause-button {
+    margin-top: 5px;
+    padding: 0;
+    border: none;
   }
 }

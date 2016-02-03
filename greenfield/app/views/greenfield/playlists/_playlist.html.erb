@@ -1,11 +1,14 @@
 <div class="playlist">
   <%= link_to image_tag(@playlist.alonetone_playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist), :class => 'small-cover', style: ('display:none;' unless @post) %>
-    <h1> <%= link_to @playlist.alonetone_playlist.title, user_playlist_path(@playlist.user, @playlist) %>
-    </h1>
-    <h2><span class="by">by</span> <%= @playlist.user.display_name %></h2>  
-    <ul class="tracklist">
+  <h1 class="<%= 'cover' unless @asset %>"> 
+    <%= link_to @playlist.alonetone_playlist.title, user_playlist_path(@playlist.user, @playlist) %>
+  </h1>
+  <h2><span class="by">by</span> <%= @playlist.user.display_name %></h2>  
+  
+  <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
-    <li data-sound-id="<%= [track.asset.user.login, track.asset.permalink].join('/') %>">
+    <li class="<%= ' active' if track.asset == @asset %>"
+      data-sound-id="<%= [track.asset.user.login, track.asset.permalink].join('/') %>">
       
     <!-- Play button automagically plays AND changes to relevant track details  -->
     <%= link_to user_playlist_post_path(@playlist.user, @playlist, track.asset), remote: true, class: 'play-button' do %>
@@ -14,22 +17,18 @@
     
     <!-- Track title just switches track details-->
     <%= link_to user_playlist_post_path(@playlist.user, @playlist, track.asset), remote: true do %>
-      <span class="track<%= ' active' if track.asset == @playlist_position %>">
+      <span>
         <%= "%02d" % track.position %>. <%= track.name %>
       </span>
     <% end %>
     </li>
   <% end %>
   </ul>
-  <div class="downloads-links">
-      <ul>
-          <li>
-              <a href="#"><i class="fa fa-download"></i>24bit wav</a>        
-          </li>
-          <li>
-              <a href="#"><i class="fa fa-download"></i>256kbps mp3</a>       
-          </li>
-      </ul>
+  <div class="sidebar-downloads">
+    <a class="download-button" href="javascript:void(0);"><i class="fa fa-download"></i>24 bit wav</a>        
+    <a class="download-button" href="javascript:void(0);"><i class="fa fa-download"></i>256kbit mp3</a>        
+    <a class="download-button" href="javascript:void(0);"><i class="fa fa-spotify"></i>Listen on Spotify</a>        
+    <a class="download-button" href="javascript:void(0);"><i class="fa fa-apple"></i>Listen on iTunes</a>        
   </div>
 </div>
 
