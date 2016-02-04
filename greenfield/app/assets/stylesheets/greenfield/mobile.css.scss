@@ -45,6 +45,7 @@
         float: none;
         width: 100%;
         margin-top: $baseline * 1.5;
+        margin-left: 0;
         h1 {
           font-size: 20px;
           margin-bottom: $baseline;
@@ -69,16 +70,18 @@
             margin-left: 3px;
           }
           .waveform {
-            // width: 75%;
-            width: 80%;
             left: 60px;
+            width: 60%;
             height: 50px;
           }
         }
         .post-content {
           font-size: 15px;
           display: block;
+          width: 100%;
           margin-top: $baseline * 1.5;
+          padding-right: 0;
+          padding-left: 0;
           hr {
             width: 90%;
             &:after {
