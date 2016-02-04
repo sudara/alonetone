@@ -3,7 +3,7 @@ module Greenfield
     include Listens
 
     def show
-      @post = find_asset.try(:greenfield_post)
+      @post = find_asset_from_playlist.try(:greenfield_post)
       respond_to do |format|
         format.html do
           @page_title = "#{@playlist.user.display_name} - #{@playlist.title}"
@@ -17,14 +17,6 @@ module Greenfield
 
 
     protected
-
-    def find_asset
-      @alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
-      @playlist ||= Greenfield::Playlist.new(@alonetone_playlist)
-      if params[:asset_id].present?
-        @asset ||= Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
-      end
-    end
 
     def require_login
       if find_post.user != current_user

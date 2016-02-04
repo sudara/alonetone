@@ -9,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= f.hidden_field :playlist_id, value: @playlist.alonetone_playlist.to_param if @playlist %> 
   <%= f.fields_for :asset do |ff| %>
     <header>
       <h1><%= ff.text_field :title, :value => @post.asset.name %></h1>
