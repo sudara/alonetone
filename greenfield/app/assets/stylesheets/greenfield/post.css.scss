@@ -23,27 +23,27 @@
   p {
     margin-bottom: $baseline;
     img {
-      max-width: 648px;
+      max-width: 550 + ($baseline * 6);
       // not quite perfectly the same width
-      margin-left: 1px;
+      margin-left: -$baseline * 3
     }
   }
   hr {
     font-family: 'FontAwesome';
     position: relative; // needed for icon
-    width: 433px;
-    margin: $baseline auto;
+    width: 550px;
+    margin: ($baseline * 1.5) auto;
     text-align: center;
     border: 0;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid #aaa;
     &:after {
       position: absolute;
       top: -.55em;
-      left: 207px;
+      left: 265px;
       display: block;
       content: '\f025'; // with headphone icon
-      color: $lightest-gray;
-      background-color: $not-quite-white-opaque; // interrupt hr
+      color: #aaa;
+      background-color: white; // interrupt hr
 
       -webkit-font-smoothing: antialiased;
     }
