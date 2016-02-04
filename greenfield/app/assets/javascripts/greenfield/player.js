@@ -117,9 +117,9 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
 
   sound.playing = function() {
     // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
-    var pos = (100*this.position)+'%';
-    var li = $('.playlist li[data-sound-id='+attr(this.id)+']');
-    li.css('background', 'linear-gradient(to right, #fceabb 0%, #f8b500 '+pos+', #ffffff '+pos+', #ffffff 100%)');
+    // var pos = (100*this.position)+'%';
+    // var li = $('.playlist li[data-sound-id='+attr(this.id)+']');
+    // li.css('background', 'linear-gradient(to right, #fceabb 0%, #f8b500 '+pos+', #ffffff '+pos+', #ffffff 100%)');
 
     $('.player[data-sound-id=' + attr(this.id) + '] .waveform').trigger('update.waveform', [this]);
     $('.player[data-sound-id=' + attr(this.id) + '] .time .index').text(this.index);
