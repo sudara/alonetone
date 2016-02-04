@@ -37,11 +37,6 @@ Alonetone::Application.configure do
     
   # Do not compress assets
   config.assets.compress = false
-  
-  # from sassc-rails gem
-  config.sass.inline_source_maps = true
-  config.sass.line_comments = false # source maps don't get output if this is true
-  
 
   # Expands the lines which load the assets
   config.assets.debug = true
