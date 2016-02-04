@@ -1,6 +1,7 @@
 module Greenfield
   class ApplicationController < ActionController::Base
     include AuthlogicHelpers
+    helper_method :current_user
 
     def nothing
       render nothing: true

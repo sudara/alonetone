@@ -9,6 +9,7 @@
 }
 .post-content,
 .post-content textarea {
+  position:relative;
   background-color: white;
   font-size: $body-font-size;
   margin-top: $baseline;
@@ -26,6 +27,16 @@
       max-width: 550 + ($baseline * 6);
       // not quite perfectly the same width
       margin-left: -$baseline * 3
+    }
+  }
+  .edit-link{
+    position:absolute;
+    top:$baseline;
+    right:$baseline *1.5;
+    color: $light-gray;
+    text-decoration: none;
+    &:hover{
+      color: $black;
     }
   }
   hr {
