@@ -23,8 +23,9 @@
     }
   }
   .pause-button {
-    text-indent: 4px;
     color: $light-gray;
+    text-indent: 5px;
+    padding-right: 19px;
   }
   .waveform {
     position: absolute;
