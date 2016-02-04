@@ -49,8 +49,8 @@ gem 'jquery-fileupload-rails'
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "sass-rails"
-gem 'compass-rails'
+gem "compass-rails"
+gem "sassc-rails"
 gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
