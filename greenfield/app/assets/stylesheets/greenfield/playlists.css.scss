@@ -7,15 +7,15 @@
       width: 100%;
     }
   }
-  .playlist-options{
-    text-align:center;
-    width:100%;
+  .playlist-options {
+    width: 100%;
+    text-align: center;
   }
   h1 {
-    text-align: center;
     line-height: 22px;
     margin-top: 5px;
-    &.cover{
+    text-align: center;
+    &.cover {
       margin-top: 23px;
     }
     a {
@@ -26,57 +26,63 @@
     }
   }
   h2 {
-    text-align: center;
     font-family: $normal-header-family;
     font-size: 16px;
     font-weight: 100;
     line-height: $baseline;
     margin-top: 0;
+    text-align: center;
     color: $not-quite-black;
   }
   ul.tracklist {
     margin-top: $baseline;
     li {
-      height: 35px;
       line-height: 35px;
       clear: both;
       overflow: auto;
+      height: 35px;
       border-top: 1px solid $not-quite-white-opaque;
-      &:last-child{
+      &:last-child {
         border-bottom: 1px solid $not-quite-white-opaque;
       }
-      &:hover, &.active {
+      &:hover,
+      &.active {
         background-color: $not-quite-black;
         a.play-button {
           color: $not-quite-white;
           border-color: $not-quite-white;
         }
-        a{
+        a {
           color: $not-quite-white;
         }
       }
-      a.play-button, a.pause-button {
-        display:block;
-        float: left;
-        line-height: 9px;
+      a.play-button,
+      a.pause-button {
         font-size: 12px;
+        line-height: 9px;
+        display: block;
+        float: left;
         width: 10px;
         height: 10px;
-        margin-right: 8px;
         margin-top: 6px;
+        margin-right: 8px;
         margin-left: 8px;
         padding: 4px 3px 5px 6px;
+        color: #AAA;
+        border: 1px solid #AAA;
         border-radius: 11px;
-        border: 1px solid #aaa;
-        color: #aaa;
         &:hover {
-          color: #fff;
-          border-color: #fff;
+          color: #FFF;
+          border-color: #FFF;
         }
       }
+      a.pause-button {
+        width: 11px;
+        padding: 4px 3px 5px 5px;
+      }
       a {
-        line-height: ($baseline * 1.25) - 1px;
         font-size: 14px;
+        line-height: ($baseline * 1.25) - 1px;
         display: block;
         float: left;
         width: 80%;
