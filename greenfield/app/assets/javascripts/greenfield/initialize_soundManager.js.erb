@@ -1,8 +1,10 @@
 var soundIsReady = true;
 
-soundManager.debugMode = false;
-soundManager.flashVersion = 9;
-soundManager.useHTML5Audio = true; /* for acl, baby */
-soundManager.forceUseGlobalHTML5Audio = true;
-soundManager.consoleOnly = true;
-soundManager.url = '<%= asset_path('soundmanager2_flash9.swf')%>';
+soundManager.setup({
+  debugMode = false,
+  flashVersion = 9,
+  useHTML5Audio = true, /* for acl, baby */
+  forceUseGlobalHTML5Audio = true,
+  consoleOnly = true,
+  url = '<%= asset_path('soundmanager2_flash9.swf')%>'
+});
