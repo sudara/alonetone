@@ -24,6 +24,7 @@
   p {
     margin-bottom: $baseline;
     img {
+      margin-top: $baseline;
       max-width: 550 + ($baseline * 6);
       // not quite perfectly the same width
       margin-left: -$baseline * 3
