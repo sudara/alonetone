@@ -7,6 +7,12 @@
     <% else %>
       <%= link_to("Edit", edit_user_post_path(@post.user, @post), class: "edit-link") %>
     <% end %>
-    <%= markdown(@post.body, post: @post) %>
+    <%= markdown(@post.body, post: @post) %>    
   </div>
+   
+  <% if @post.asset.credits.present? %>
+    <div class="track-credits">
+      <%= markdown(@post.asset.credits) %>    
+    </div>
+  <% end %>
 </div>

@@ -1,6 +1,4 @@
 .track-content {
-  h1 {
-    padding-top: $baseline;
     padding-bottom: $baseline;
   }
   img {
@@ -68,4 +66,11 @@
     margin-bottom: $baseline - 2px;
     color: $not-quite-black;
   }
+}
+.track-credits{
+ min-height: $baseline * 3;
+ position:relative;
+ background-color: white;
+ font-size: $body-font-size;
+ margin-bottom: $baseline * 3;  
 }

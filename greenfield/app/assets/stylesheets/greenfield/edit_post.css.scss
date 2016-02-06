@@ -46,6 +46,9 @@ form .post-content{
     min-height: 400px;
     border-bottom: 1px solid $light-gray;
   }
+  textarea#post_asset_attributes_credits{
+    min-height:$baseline;
+  }
 }
 
 .edit_save{

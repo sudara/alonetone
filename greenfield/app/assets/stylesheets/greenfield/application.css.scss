@@ -42,10 +42,12 @@ body {
         height:650px;
         margin-left: -$baseline;
       }
-      .post-content{
+      .post-content, .track-credits{
         width: 550px;
-        padding-left: $baseline * 3;
-        padding-right: $baseline * 3;
+        padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
+      }
+      .track-credits{
+        padding-bottom: $baseline;
       }
     }
   }

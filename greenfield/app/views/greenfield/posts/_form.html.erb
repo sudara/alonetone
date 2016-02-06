@@ -20,7 +20,10 @@
   <%= player(@post.asset) %>
 
   <div class="post_content">
-    <%= f.text_area :body, :placeholder => "Tell us a story..." %>
+    <%= f.text_area :body, placeholder: "Tell us a story..." %>
+    <%= f.fields_for :asset do |ff| %>
+      <%= ff.text_area :credits, value: @post.asset.credits, placeholder: "Credits for this track" %>
+    <% end %>
   </div>
   
   <div class="edit_save">
