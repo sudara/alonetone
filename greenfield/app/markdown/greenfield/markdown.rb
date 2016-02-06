@@ -32,7 +32,7 @@ module Greenfield
     def self.render(text)
       renderer = Redcarpet::Markdown.new(new(:hard_wrap => true),
                       :autolink => true, :no_intraemphasis => true,
-                      :fenced_code_blocks => true)
+                      :fenced_code_blocks => true, :tables => true)
       Redcarpet::Render::SmartyPants.render(renderer.render(text)).html_safe
     end
 
