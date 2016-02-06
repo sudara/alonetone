@@ -1,5 +1,5 @@
 .track-content {
-  h1{
+  h1 {
     padding-top: $baseline;
     padding-bottom: $baseline;
   }
@@ -9,34 +9,34 @@
 }
 .post-content,
 .post-content textarea {
-  position:relative;
-  background-color: white;
   font-size: $body-font-size;
+  position: relative;
   margin-top: $baseline;
   margin-bottom: $baseline * 3;
   word-wrap: break-word;
   word-break: break-word;
   color: $not-quite-black;
   border: none;
+  background-color: white;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
   p {
     margin-bottom: $baseline;
     img {
-      margin-top: $baseline;
       max-width: 550 + ($baseline * 6);
+      margin-top: $baseline;
       // not quite perfectly the same width
-      margin-left: -$baseline * 3
+      margin-left: -$baseline * 3;
     }
   }
-  .edit-link{
-    position:absolute;
-    top:$baseline;
-    right:$baseline *1.5;
-    color: $light-gray;
+  .edit-link {
+    position: absolute;
+    top: $baseline;
+    right: $baseline *1.5;
     text-decoration: none;
-    &:hover{
+    color: $light-gray;
+    &:hover {
       color: $black;
     }
   }
@@ -47,14 +47,14 @@
     margin: ($baseline * 1.5) auto;
     text-align: center;
     border: 0;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #AAA;
     &:after {
       position: absolute;
       top: -.55em;
       left: 265px;
       display: block;
       content: '\f025'; // with headphone icon
-      color: #aaa;
+      color: #AAA;
       background-color: white; // interrupt hr
 
       -webkit-font-smoothing: antialiased;

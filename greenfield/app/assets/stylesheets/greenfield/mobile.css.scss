@@ -82,6 +82,12 @@
           margin-top: $baseline * 1.5;
           padding-right: 0;
           padding-left: 0;
+          p {
+            img {
+              width: 100%;
+              margin-left: 0px;
+            }
+          }
           hr {
             width: 90%;
             &:after {
