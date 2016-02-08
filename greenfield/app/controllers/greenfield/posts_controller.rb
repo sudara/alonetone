@@ -2,7 +2,6 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     include Listens
 
-    before_filter :create_and_edit_unless_post_exists, :only => [:show]
     before_filter :require_login, :only => [:edit, :update]
 
     def show
@@ -19,10 +18,10 @@ module Greenfield
     end
 
     def edit
-      if params[:playlist_id]        
+      if params[:playlist_id]
         @post = find_asset_from_playlist.greenfield_post
       else
-        create_and_edit_unless_post_exists
+        create_unless_post_exists
         @post = find_post
       end
       @post.attached_assets.build
@@ -44,11 +43,9 @@ module Greenfield
 
     protected
 
-    def create_and_edit_unless_post_exists
+    def create_unless_post_exists
       if find_asset.user == current_user && !find_asset.greenfield_post
-        post = find_asset.build_greenfield_post
-        post.save!(:validate => false)
-        redirect_to edit_user_post_path(post.user, post)
+        find_asset.build_greenfield_post.save!(:validate => false)
       end
     end
 
@@ -62,7 +59,7 @@ module Greenfield
     end
 
     def require_login
-      if find_post.user != current_user
+      if find_asset.user != current_user
         flash[:message] = "You'll need to login to do that"
         super(find_post.user)
       end
