@@ -27,12 +27,11 @@ body {
     .track-content {
       float: left;
       margin-left: $baseline;
-      
     }
     form.edit_post {
       float: left;
-      width: 700px;
-      margin-left: 27px;
+      width: 712px;
+      margin-left: $baseline;
     }
   }
 }

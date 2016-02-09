@@ -7,6 +7,7 @@ form {
     min-height: 100px;
     margin-bottom: 0; // less space since we have more UI below
     textarea {
+      box-sizing: border-box;
       width: 100%;
       min-height: 400px;
       margin-bottom: 0;
@@ -97,5 +98,6 @@ form {
     display: inline-block;
     float: right;
     clear: both;
+    margin-top: 20px;
   }
 }
