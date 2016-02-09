@@ -1,24 +1,22 @@
 
-form header {
-  margin-top: 0;
-}
-
-form .post-content {
-  min-height: 100px;
-  margin-bottom: 0; // less space since we have more UI below
-  textarea {
+form {
+  header {
+    margin-top: 0;
+  }
+  .post-content {
     min-height: 100px;
-    margin-bottom: 0;
-    resize: vertical;
-  }
-}
-
-.post-content {
-  textarea:hover {
-    background-color: $bright-highlight;
-  }
-  textarea:focus {
-    background-color: $not-quite-white;
+    margin-bottom: 0; // less space since we have more UI below
+    textarea {
+      min-height: 100px;
+      margin-bottom: 0;
+      resize: vertical;
+      &:hover {
+        background-color: $bright-highlight;
+      }
+      &:focus {
+        background-color: $not-quite-white;
+      }
+    }
   }
 }
 
@@ -37,7 +35,7 @@ form .post-content {
     font: $body-font;
     font-size: 18px;
     &[type='submit'] {
-      padding: ($baseline / 2) - 1;
+      padding: $baseline / 2;
       cursor: pointer;
       border: 1px solid $not-quite-black;
       background-color: transparent;
