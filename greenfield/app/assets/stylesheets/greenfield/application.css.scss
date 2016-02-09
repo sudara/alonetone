@@ -1,12 +1,12 @@
-@import "compass/reset";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-@import "variables";
-@import "login";
-@import "post";
-@import "player";
-@import "greenfield/edit_post";
-@import "greenfield/playlists";
+@import 'compass/reset';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'variables';
+@import 'login';
+@import 'post';
+@import 'player';
+@import 'greenfield/edit_post';
+@import 'greenfield/playlists';
 
 
 /* LAYOUT */
@@ -36,19 +36,25 @@ body {
     }
     .track-content {
       float: left;
-      margin-left:$baseline;
-      .large-cover{
-        width:650px;
-        height:650px;
+      margin-left: $baseline;
+      .large-cover {
+        width: 650px;
+        height: 650px;
         margin-left: -$baseline;
       }
-      .post-content, .track-credits{
+      .post-content,
+      .track-credits {
         width: 550px;
         padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
       }
-      .track-credits{
+      .track-credits {
         padding-bottom: $baseline;
       }
+    }
+    form.edit_post {
+      float: left;
+      width: 700px;
+      margin-left: 27px;
     }
   }
 }
@@ -66,7 +72,7 @@ body {
   font-size: $body-font-size;
   font-weight: 500;
   line-height: $baseline;  // 27px is our baseline
-  background-color: #f9f9f9;
+  background-color: #F9F9F9;
 }
 
 footer {
@@ -119,11 +125,11 @@ header {
 a.download-button {
   font-family: $normal-header-family;
   font-size: 14px;
-  font-weight:300;
+  font-weight: 300;
   display: inline-block;
   width: auto;
   margin-top: $baseline;
-  margin-right:5px;
+  margin-right: 5px;
   padding: 5px $baseline/2  ;
   text-decoration: none;
   color: $not-quite-white-opaque;
