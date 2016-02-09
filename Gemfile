@@ -77,6 +77,7 @@ end
 
 ## Who loves tests! You do? You do!
 group :test do
+  gem "sass-rails"
   gem "rspec-rails", :require => false
   gem "rspec-mocks", :require => false
   gem "timecop", :require => false
