@@ -6,6 +6,10 @@ module PlaylistsHelper
     title
   end
 
+  def allow_greenfield_playlist_downloads?(user)
+    user.greenfield_enabled? && Alonetone.storage.s3?
+  end
+
   def greenfield_upload_form(user, playlist, &block)
     data = {
       'expected-content-type' => Greenfield::PlaylistDownload::CONTENT_TYPE.join(' '),

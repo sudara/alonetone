@@ -1,10 +1,5 @@
 <div id="attachment_upload" class="static_content">
-  <h3>Greenfield Downloads</h3>
-  <ul class="downloads">
-    <% @playlist.greenfield_downloads.each do |download| %>
-      <li><%= link_to download.attachment_file_name, download.url %></li>
-    <% end %>
-  </ul>
+  <h3>Add Greenfield Downloads</h3>
 
   Upload a zip archive of the playlist contents.<br>
   <%= greenfield_upload_form(@user, @playlist) do |s3_uploader_url| %>
