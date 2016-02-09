@@ -7,13 +7,15 @@ form {
     min-height: 100px;
     margin-bottom: 0; // less space since we have more UI below
     textarea {
-      &:post_body {
-        min-height: 400px;
-      }
-      min-height: 100px;
+      width: 100%;
+      min-height: 400px;
       margin-bottom: 0;
       padding: 10px;
       resize: vertical;
+      border-bottom: 1px solid $light-gray;
+      &#post_asset_attributes_credits {
+        min-height: $baseline;
+      }
       &:hover {
         background-color: $bright-highlight;
       }
@@ -31,23 +33,26 @@ form {
       list-style-type: circle;
     }
   }
-  input {
+  input[type='submit'] {
     font: $body-font;
+    font-family: $normal-header-family;
     font-size: 18px;
-    &[type='submit'] {
-      padding: $baseline / 2;
-      cursor: pointer;
-      border: 1px solid $not-quite-black;
-      background-color: transparent;
+    font-size: 14px;
+    font-weight: 300;
+    display: inline-block;
+    width: auto;
+    margin-top: $baseline;
+    padding: 5px $baseline / 2;
+    cursor: pointer;
+    text-decoration: none;
+    color: $not-quite-white-opaque;
+    border: 1px solid $not-quite-black;
+    border-radius: 2px;
+    background-color: transparent;
+    background-color: $not-quite-black;
+    i {
+      margin-right: 10px;
     }
-  }
-  textarea {
-    width: 100%;
-    min-height: 400px;
-    border-bottom: 1px solid $light-gray;
-  }
-  textarea#post_asset_attributes_credits {
-    min-height: $baseline;
   }
   .file {
     width: 100%;
@@ -93,9 +98,4 @@ form {
     float: right;
     clear: both;
   }
-
 }
-
-
-
-
