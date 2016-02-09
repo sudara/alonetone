@@ -383,6 +383,7 @@ DEPENDENCIES
   rspec-rails
   ruby-audio
   ruby-mp3info (~> 0.7.2)
+  sass-rails
   sassc-rails
   scrypt
   sidekiq

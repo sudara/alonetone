@@ -50,7 +50,6 @@ gem 'jquery-fileupload-rails'
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "compass-rails"
-gem "sassc-rails"
 gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
@@ -60,11 +59,13 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq web ui
 
 group :production do
+  gem "sass-rails"
   gem "puma"
   gem 'bugsnag'
 end
 
 group :development do
+  gem "sassc-rails"
   gem 'quiet_assets'
   gem 'thin'
   gem 'sqlite3'
