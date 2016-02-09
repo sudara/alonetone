@@ -19,8 +19,8 @@ class UsersController < ApplicationController
         prepare_meta_tags
         gather_user_goodies
       end
-      format.xml { @assets = @user.assets.recent.limit(params[:limit] || 10) }
-      format.rss { @assets = @user.assets.recent }
+      format.xml { @assets = @user.assets.published.recent.limit(params[:limit] || 10) }
+      format.rss { @assets = @user.assets.published.recent }
       format.js do  render :update do |page| 
           page.replace 'user_latest', :partial => "latest"
         end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
   
   def stats
-    @tracks = @user.assets
+    @tracks = @user.assets.published
     respond_to do |format|
       format.html 
       format.xml
@@ -74,13 +74,6 @@ class UsersController < ApplicationController
   def edit
   end
   
-  def bio
-    @page_title = "#{@user.name}'s Profile"
-    @follows = @user.followees.includes(:pic)
-    @mostly_listens_to = @user.mostly_listens_to
-    @similar_users = User.where(:id => @user.similar_users_by_ip)
-  end
-  
   def attach_pic
     if params[:pic].present? 
       @pic = @user.build_pic(params[:pic])
@@ -102,7 +95,7 @@ class UsersController < ApplicationController
   end
   
   def toggle_favorite
-    asset = Asset.find(params[:asset_id])
+    asset = Asset.published.find(params[:asset_id])
     return false unless logged_in? && asset # no bullshit
     current_user.toggle_favorite(asset)
     render :nothing => true
@@ -166,6 +159,11 @@ class UsersController < ApplicationController
     @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5)
     @comments = @user.comments.public_or_private(display_private_comments?).
       preload(:commentable => {:user => :pic}).preload({:commenter => :pic}).limit(5)
+    unless current_user_is_admin_or_owner?(@user)
+      @popular_tracks = @popular_tracks.published
+      @assets = @assets.published
+      @listens = @listens.published
+    end
   end
   
   def authorized?

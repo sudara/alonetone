@@ -29,7 +29,7 @@ class FeaturesController < ApplicationController
 
   def edit
     @users = User.alpha
-    @assets = @feature.featured_user.assets
+    @assets = @feature.featured_user.assets.published
   end
 
   def create

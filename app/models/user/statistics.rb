@@ -1,4 +1,3 @@
-#require 'gchart'
 class User
   
   def self.calculate_bandwidth_used

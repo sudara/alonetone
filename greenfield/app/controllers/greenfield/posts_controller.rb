@@ -2,7 +2,6 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     include Listens
 
-    before_filter :create_and_edit_unless_post_exists, :only => [:show, :edit]
     before_filter :require_login, :only => [:edit, :update]
 
     def show
@@ -19,14 +18,24 @@ module Greenfield
     end
 
     def edit
-      @post = find_post
+      if params[:playlist_id]
+        @post = find_asset_from_playlist.greenfield_post
+      else
+        create_unless_post_exists
+        @post = find_post
+      end
       @post.attached_assets.build
     end
 
     def update
       @post = find_post
+      @playlist = params[:post].delete('playlist_id')
       if @post.update_attributes(params[:post])
-        redirect_to user_post_path(@post.user, @post)
+        if @playlist 
+          redirect_to user_playlist_post_path(@post.user, @playlist, @post)
+        else
+          redirect_to user_post_path(@post.user, @post) 
+        end
       else
         render :edit
       end
@@ -34,11 +43,9 @@ module Greenfield
 
     protected
 
-    def create_and_edit_unless_post_exists
+    def create_unless_post_exists
       if find_asset.user == current_user && !find_asset.greenfield_post
-        post = find_asset.build_greenfield_post
-        post.save!(:validate => false)
-        redirect_to edit_user_post_path(post.user, post)
+        find_asset.build_greenfield_post.save!(:validate => false)
       end
     end
 
@@ -47,12 +54,12 @@ module Greenfield
     end
 
     def find_asset
-      id = params[:asset_permalink] || params[:post_id] || params[:id]
+      id = params[:asset_permalink] || params[:post_id] || params[:id] || params[:asset_id]
       @find_asset ||= Asset.find_by!(:permalink => id)
     end
 
     def require_login
-      if find_post.user != current_user
+      if find_asset.user != current_user
         flash[:message] = "You'll need to login to do that"
         super(find_post.user)
       end

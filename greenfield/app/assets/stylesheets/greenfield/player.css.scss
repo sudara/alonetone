@@ -1,64 +1,39 @@
 .player {
   position: relative;
-  display: block;
-  height: ($baseline * 4) - 2px;
-  margin-top: $baseline * .8;
-  margin-bottom: $baseline + 7px;
-  border-top: 1px solid $light-gray;
-  border-bottom: 1px solid $light-gray;
-  background-color: $not-quite-white-opaque;
-  &.stuck {
-    position: fixed;
-    top: 0;
-    width: 650px;
-    height: ($baseline * 2.5);
-    margin-top: 0;
-    padding-top: 4px;
-    border-top: 0;
-    .waveform {
-      height: 100%;
-    }
-    .play-button,
-    .pause-button {
-      margin-top: 5px;
-      padding: 0;
-      border: none;
-    }
-  }
-  .time {
-    font-size: 12px;
-    position: absolute;
-    right: 0;
-    display: inline-block;
-    color: $lightest-gray;
-  }
+  height: $baseline * 3;
+  margin-bottom: $baseline;
+  background-color: white;
+  // background-color: $not-quite-white-opaque;
   .play-button,
   .pause-button {
+    font-size: $baseline;
     display: inline-block;
-    width: 54px;
-    height: 54px;
-    margin-top: $baseline / 2;
-    padding: ($baseline / 2) - 1;
+    margin-top: 7px;
+    padding: 13px;
     cursor: pointer;
+    margin-left: 10px;
     vertical-align: middle;
-    text-indent: 11px;
-    color: $light-gray;
-    border: 1px solid $light-gray;
+    text-indent: 6px;
+    color: $black;
+    border: 1px solid $gray;
     border-radius: 50%;
+    background-color: white;
     &:hover {
-      color: $black;
+      border: 1px solid $black;
     }
   }
   .pause-button {
-    text-indent: 4px;
-    color: $light-gray;
+    text-indent: 3px;
+    padding-right: 14px ;
   }
   .waveform {
     position: absolute;
+    width:630px;
+    top: 0;
     right: 0;
-    display: inline-block;
-    width: 540px;
-    height: 100%;
+    background-color:white;
+    padding-top:$baseline / 2;
+    height: $baseline* 2.5;
     .seekbar {
       position: absolute;
       top: 0;
@@ -73,8 +48,39 @@
       display: none;
     }
   }
+  .time {
+    font-size: 10px;
+    display: block;
+    margin-top: -3px;
+    margin-left: 13px;
+    color: $gray;
+  }
   .download-button {
-    font-size: 34px;
-    display: inline-block;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    a {
+      color: $gray;
+      text-decoration: none;
+    }
+  }
+}
+.player.stuck {
+  position: fixed;
+  top: 0;
+  width: 650px;
+  height: $baseline * 2.5;
+  margin-top: 0;
+  padding-top: 4px;
+  border-top: 0;
+  .waveform {
+    height: 100%;
+  }
+  .play-button,
+  .pause-button {
+    margin-top: 5px;
+    padding: 0;
+    border: none;
   }
 }

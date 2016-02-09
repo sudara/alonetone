@@ -2,7 +2,8 @@ class AssetsController < ApplicationController
   include Listens
 
   before_filter :find_user, :except => [:radio, :latest]
-  before_filter :find_asset, :only => [:show, :edit, :update, :destroy, :stats]
+  before_filter :find_asset, :only => [:edit, :update, :destroy, :stats]
+  before_filter :find_published_asset, :only => [:show, :stats]
 
   # we check to see if the current_user is authorized based on the asset.user
   before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
@@ -13,14 +14,14 @@ class AssetsController < ApplicationController
       wants.html do
         @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
         @tab = 'home'
-        @assets = Asset.latest.includes(:user => :pic).limit(5)
+        @assets = Asset.published.latest.includes(:user => :pic).limit(5)
         set_related_lastest_variables
       end
       wants.rss do 
-        @assets = Asset.latest(50)
+        @assets = Asset.published.latest(50)
       end
       wants.json do
-        @assets = Asset.limit(500).includes(:user)
+        @assets = Asset.published.limit(500).includes(:user)
         render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
       end
     end
@@ -28,8 +29,14 @@ class AssetsController < ApplicationController
   
   # index serves assets for a specific user
   def index
-    @page_title = "All music by " + @user.name 
-    @assets = @user.assets.recent.paginate(:per_page => 200, :page => params[:page])
+    @page_title = "All music by " + @user.name
+
+    if current_user_is_admin_or_owner?(@user)
+      @assets = @user.assets
+    else
+      @assets = @user.assets.published
+    end
+    @assets = @assets.recent.paginate(:per_page => 200, :page => params[:page])
 
     respond_to do |format|
       format.html # index.rhtml
@@ -60,29 +67,17 @@ class AssetsController < ApplicationController
     end
   end
 
-  def hot_track
-    respond_to do |format|
-      format.mp3 do
-        pos = params[:position]
-        pos = 1 unless pos && pos.to_i < 25
-        @asset = Asset.limit(pos).order('hotness DESC').last
-        register_listen
-        redirect_to @asset.mp3.url
-      end
-    end
-  end
-
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
     @page_title = "alonetone Radio: #{@channel}" 
-    @assets = Asset.radio(params[:source], params, current_user)
+    @assets = Asset.published.radio(params[:source], params, current_user)
   end
   
   def top
     top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 40
     @page_title = "Top #{top} tracks"
-    @assets = Asset.limit(top).order('hotness DESC')
+    @assets = Asset.published.limit(top).order('hotness DESC')
     respond_to do |wants|
       wants.html 
       wants.rss
@@ -90,7 +85,9 @@ class AssetsController < ApplicationController
   end
   
   def search
-    @assets = Asset.where(["assets.filename LIKE ? OR assets.title LIKE ?", "%#{params[:search]}%","%#{params[:search]}%"]).limit(10)
+    @assets = Asset.published.where("assets.filename LIKE ? OR assets.title LIKE ?",
+                                 "%#{params[:search]}%", "%#{params[:search]}%").
+              limit(10)
     render :partial => 'results', :layout => false
   end
 
@@ -151,6 +148,8 @@ class AssetsController < ApplicationController
   # PUT /assets/1.xml
   def update
     result =  @asset.update_attributes(params[:asset])
+    @asset.publish! if params[:commit] == 'Publish'
+
     if request.xhr?
       result ? head(:ok) : head(:bad_request)
     else
@@ -200,9 +199,11 @@ class AssetsController < ApplicationController
   
   def extract_assets_from_params
     @assets = []
+    attrs = { private: !!(params[:commit] =~ /don't publish/) }
     Array(params[:asset_data]).each do |file|
       unless file.is_a?(String)
-        @assets << asset = current_user.assets.create(:mp3 => file)
+        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file),
+                                                      without_protection: true)
         if !asset.new_record? && current_user.greenfield_enabled?
           Greenfield::WaveformExtractJob.perform_later(asset.id)
         end
@@ -212,7 +213,7 @@ class AssetsController < ApplicationController
   
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
-    @popular = Asset.order('hotness DESC').includes(:user => :pic).limit(5)
+    @popular = Asset.published.order('hotness DESC').includes(:user => :pic).limit(5)
     @playlists = Playlist.for_home
     @comments = admin? ? Comment.last_5_private : Comment.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?

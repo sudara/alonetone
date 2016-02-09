@@ -17,20 +17,18 @@ Sound = {
 
     var sound = {
       id: soundId,
+      loadActions: [],
       sm: soundManager.createSound({
         id: soundId,
         url: url,
-        autoLoad: true,
+        autoLoad: false,
 
         onload: function() {
           if (this.duration) {
-            this.onPosition(this.duration - 10000, function() {
-              sound.almostFinished && sound.almostFinished();
-            });
+            for (var i=0; i < sound.loadActions.length; ++i)
+              sound.loadActions[i].call(sound);
 
-            this.onPosition(5000, function() {
-              sound.rolling && sound.rolling();
-            });
+            sound.loadActions = [];
           }
         },
 
@@ -40,25 +38,29 @@ Sound = {
           sound.position = this.position / this.durationEstimate;
           sound.index    = min + ':' + (sec >= 10 ? sec : '0'+sec);
 
-          sound.playing && sound.playing();
+          sound.playingAction && sound.playingAction();
         },
 
         onpause: function() {
-          sound.paused && sound.paused();
+          sound.pausedAction && sound.pausedAction();
         },
 
         onresume: function() {
-          sound.resumed && sound.resumed();
+          sound.resumedAction && sound.resumedAction();
         },
 
         onplay: function() {
-          sound.resumed && sound.resumed();
+          sound.resumedAction && sound.resumedAction();
         },
 
         onfinish: function() {
-          sound.finished && sound.finished();
+          sound.finishedAction && sound.finishedAction();
         }
       }),
+
+      load: function() {
+        this.sm.load();
+      },
 
       play: function() {
         if (this.sm.playState)
@@ -76,6 +78,38 @@ Sound = {
       setPosition: function(percent) {
         this.sm.setPosition(percent * this.sm.durationEstimate);
         return this;
+      },
+
+      loaded: function(action) {
+        if (this.isLoaded)
+          action.call(this);
+        else
+          this.loadActions.push(action);
+      },
+
+      positioned: function(pos, action) {
+        this.loaded(function() {
+          if (pos < 0)
+            this.sm.onPosition(this.sm.duration + pos, action);
+          else
+            this.sm.onPosition(pos, action);
+        });
+      },
+
+      playing: function(action) {
+        this.playingAction = action;
+      },
+
+      paused: function(action) {
+        this.pausedAction = action;
+      },
+
+      resumed: function(action) {
+        this.resumedAction = action;
+      },
+
+      finished: function(action) {
+        this.finishedAction = action;
       }
     };
 

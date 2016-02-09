@@ -37,5 +37,9 @@ module Greenfield
 
     def list_attached_mp3_assets(assets=[])
     end
+    
+    def owner?
+      @asset && current_user && (current_user.admin? || (current_user.id == @asset.user_id))
+    end
   end
 end

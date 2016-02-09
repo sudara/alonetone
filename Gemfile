@@ -50,22 +50,23 @@ gem 'jquery-fileupload-rails'
 
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "sass-rails"
-gem 'compass-rails'
+gem "compass-rails"
 gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
 gem 'newrelic_rpm'
-gem 'bugsnag'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq web ui
 
 group :production do
+  gem "sass-rails"
   gem "puma"
+  gem 'bugsnag'
 end
 
 group :development do
+  gem "sassc-rails"
   gem 'quiet_assets'
   gem 'thin'
   gem 'sqlite3'
@@ -77,6 +78,7 @@ end
 
 ## Who loves tests! You do? You do!
 group :test do
+  gem "sass-rails"
   gem "rspec-rails", :require => false
   gem "rspec-mocks", :require => false
   gem "timecop", :require => false

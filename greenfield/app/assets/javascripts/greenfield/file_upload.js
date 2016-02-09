@@ -2,7 +2,7 @@ $(function() {
   $('input[type=file].mp3_upload').each(function() {
     var field = $(this);
     var container = field.parent();
-    var results = container.find('.supporting_file_list');
+    var results = container.find('.supporting-file-list');
     field.fileupload({
       dataType: 'json',
       //acceptFileTypes: /(\.|\/)(mp3)$/i,

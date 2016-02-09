@@ -74,10 +74,6 @@ Alonetone::Application.routes.draw do
     get ':login/comments' => 'comments#index', :as => 'user_comments'
     get ':login/stats.:format' => 'users#stats', :as => 'user_stats'
 
-    get 'hot_track/:position.:format' => 'assets#hot_track',
-        :format     => 'mp3',
-        :as => 'hot_track'
-
     get ':login/plus' => 'source_files#index', :as => 'user_plus'
 
     resources :forums do

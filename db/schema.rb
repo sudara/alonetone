@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124235618) do
+ActiveRecord::Schema.define(version: 20160204165441) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160124235618) do
     t.text     "description"
     t.text     "credits"
     t.string   "youtube_embed"
-    t.boolean  "private"
+    t.boolean  "private",                           default: false, null: false
     t.float    "hotness"
     t.integer  "favorites_count",                   default: 0
     t.text     "lyrics"
@@ -233,6 +233,9 @@ ActiveRecord::Schema.define(version: 20160124235618) do
     t.boolean  "is_favorite",  default: false
     t.string   "year"
     t.integer  "position",     default: 1
+    t.string   "link1"
+    t.string   "link2"
+    t.string   "link3"
   end
 
   add_index "playlists", ["permalink"], name: "index_playlists_on_permalink"

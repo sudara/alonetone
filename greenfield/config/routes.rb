@@ -1,5 +1,5 @@
 Greenfield::Engine.routes.draw do
-  root to: 'application#nothing'
+  root to: 'pages#home'
 
   post 'login', to: 'application#login', as: :user_sessions
 
@@ -10,7 +10,8 @@ Greenfield::Engine.routes.draw do
     end
 
     get 'playlists/:playlist_id', :to => 'playlists#show', :as => :playlist
-    get 'playlists/:playlist_id/:position', :to => 'playlists#show', :as => :playlist_position
+    get 'playlists/:playlist_id/:asset_id', :to => 'playlists#show', :as => :playlist_post
+    get 'playlists/:playlist_id/:asset_id/edit', :to => 'posts#edit', :as => :edit_playlist_post
     post 'playlists/:playlist_id/:position/listens', :to => 'playlists#create_listen'
   end
 end

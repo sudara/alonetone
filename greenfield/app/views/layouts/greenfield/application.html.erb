@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= @page_title || 'Greenfield' %></title>
 
     <%= stylesheet_link_tag 'greenfield/application' %>
@@ -23,7 +24,7 @@
         <footer>
             <a href="http://www.alonetone.com">Powered by Greenfield</a>
         </footer>
-    </div> <!-- .footer-table-row -->
+    </div>
     
     <%= javascript_include_tag "greenfield/application" %>
     <%= render :partial => 'shared/analytics' %>

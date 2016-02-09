@@ -41,6 +41,15 @@
       </div>
     </div>
     <% end %>
+    <% unless @asset.published? %>
+    <div class="submit_wrapper static_content">
+        <div class="comment_waiting" >
+          <div class="text"><!-- placeholder response text --></div>
+        </div>
+        <div class="small_spinner" style="display:none;"> </div>
+        <%= f.submit "Publish", :class => 'comment_submit' %>
+    </div>
+    <% end %>
     <div class="submit_wrapper static_content">
         <div class="comment_waiting" >
           <div class="text"><!-- placeholder response text --></div>

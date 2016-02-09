@@ -1,98 +1,101 @@
 
-form .post_content{
-  min-height: 100px;
-  margin-bottom: 0; // less space since we have more UI below
-  textarea{
-    min-height:100px;
-    margin-bottom: 0;
-    resize:vertical;
+form {
+  header {
+    margin-top: 0;
   }
-}
-
-.post_content {
-  textarea:hover{
-    background-color: $bright-highlight;
+  .edit-post-content {
+    min-height: 100px;
+    margin-bottom: 0; // less space since we have more UI below
+    textarea {
+      width: 100%;
+      min-height: 400px;
+      margin-bottom: 0;
+      padding: 10px;
+      resize: vertical;
+      border-bottom: 1px solid $light-gray;
+      &#post_asset_attributes_credits {
+        min-height: $baseline;
+      }
+      &:hover {
+        background-color: $bright-highlight;
+      }
+      &:focus {
+        background-color: $not-quite-white;
+      }
+    }
   }
-  
-  textarea:focus{
-    background-color: $not-quite-white;
-  }
-}
-
-.edit_post, .new_post {
   .errors {
     padding: 10px;
-    background-color: #faa;
     border: 1px solid #000;
+    background-color: #FAA;
     ul {
       padding-left: 20px;
       list-style-type: circle;
     }
   }
-
-  input{
-    font-size: 18px;
+  input[type='submit'] {
     font: $body-font;
-    &[type="submit"]{
-      background-color: transparent;
-      border: 1px solid $not-quite-black;
-      cursor: pointer;
-      padding: ($baseline / 2) - 1;
+    font-family: $normal-header-family;
+    font-size: 18px;
+    font-size: 14px;
+    font-weight: 300;
+    display: inline-block;
+    width: auto;
+    margin-top: $baseline;
+    padding: 5px $baseline / 2;
+    cursor: pointer;
+    text-decoration: none;
+    color: $not-quite-white-opaque;
+    border: 1px solid $not-quite-black;
+    border-radius: 2px;
+    background-color: transparent;
+    background-color: $not-quite-black;
+    i {
+      margin-right: 10px;
     }
   }
-
-  textarea {
+  .file {
     width: 100%;
-    min-height: 400px;
-    border-bottom: 1px solid $light-gray;
+    text-align: left;
+    &.complete {
+      background-color: #E0F0FF;
+    }
+    &.errors {
+      background-color: #FFCC80;
+    }
+    .name,
+    .status {
+      font-size: 14px;
+      display: inline-block;
+    }
+    .name {
+      text-indent: 8px;
+    }
+    .status {
+      font-size: 12px;
+      text-indent: 4px;
+      color: $light-gray;
+    }
   }
-}
-
-.edit_save{
-  float: right;
-  display: inline-block;
-  clear:both;
-}
-
-.file {
-  width:100%;
-  text-align: left;
-  
-  &.complete {
-    background-color: #e0f0ff;
+  .drag-and-drop-upload {
+    clear: both;
+    margin: 2em auto .5em auto;
+    padding: 2em 0;
+    text-align: center;
+    border: 3px dashed $not-quite-black;
+    &:hover {
+      background-color: $bright-highlight;
+    }
   }
-  &.errors {
-    background-color: #ffcc80;
+  .supporting-file-list {
+    width: 100%;
   }
-  .name, .status {
-    font-size: 14px;
+  .mp3-upload {
+    margin-bottom: 4em;
+  }
+  .edit-save {
     display: inline-block;
+    float: right;
+    clear: both;
   }
-  .name{
-    text-indent: 8px;
-  }
-  .status{
-    text-indent: 4px;
-    font-size: 12px;
-    color: $light-gray;
-  }
-}
-
-.drag_and_drop_upload{
-  clear:both;
-  &:hover{
-    background-color: $bright-highlight;
-  }
-  margin: 2em auto .5em auto;
-  text-align: center;
-  padding: 2em 0em;
-  border: 3px dashed $not-quite-black;
-}
-
-.supporting_file_list{
-  width: 100%; 
-}
-
-.mp3_upload{
-  margin-bottom: 4em;
 }
