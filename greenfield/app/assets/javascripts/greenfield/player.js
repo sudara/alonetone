@@ -133,7 +133,7 @@ soundManager.onready(function() {
       next && next.load();
     });
 
-    sound.positioned(-1000, function() {
+    sound.positioned(-180, function() {
       next && $(next.ui).trigger('click');
     });
   });
