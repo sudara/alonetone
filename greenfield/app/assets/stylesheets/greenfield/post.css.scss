@@ -1,5 +1,18 @@
 .track-content {
-  h1{
+  .large-cover {
+    width: 650px;
+    height: 650px;
+    margin-left: -$baseline;
+  }
+  .post-content,
+  .track-credits {
+    width: 550px;
+    padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
+  }
+  .track-credits {
+    padding-bottom: $baseline;
+  }
+  h1 {
     padding-bottom: $baseline;
   }
   img {
@@ -68,10 +81,10 @@
     color: $not-quite-black;
   }
 }
-.track-credits{
- min-height: $baseline * 3;
- position:relative;
- background-color: white;
- font-size: $body-font-size;
- margin-bottom: $baseline * 3;  
+.track-credits {
+  font-size: $body-font-size;
+  position: relative;
+  min-height: $baseline * 3;
+  margin-bottom: $baseline * 3;
+  background-color: white;
 }

@@ -27,19 +27,7 @@ body {
     .track-content {
       float: left;
       margin-left: $baseline;
-      .large-cover {
-        width: 650px;
-        height: 650px;
-        margin-left: -$baseline;
-      }
-      .post-content,
-      .track-credits {
-        width: 550px;
-        padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
-      }
-      .track-credits {
-        padding-bottom: $baseline;
-      }
+      
     }
     form.edit_post {
       float: left;
