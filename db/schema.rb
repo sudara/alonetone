@@ -144,6 +144,16 @@ ActiveRecord::Schema.define(version: 20160204165441) do
     t.integer  "length"
   end
 
+  create_table "greenfield_playlist_downloads", force: :cascade do |t|
+    t.string   "title",                   null: false
+    t.integer  "playlist_id",             null: false
+    t.string   "s3_path",                 null: false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
   create_table "greenfield_posts", force: :cascade do |t|
     t.integer  "asset_id"
     t.text     "body"

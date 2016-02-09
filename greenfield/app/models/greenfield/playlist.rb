@@ -11,5 +11,9 @@ module Greenfield
     def tracks
       alonetone_playlist.tracks.joins(asset: :greenfield_post)
     end
+
+    def downloads
+      alonetone_playlist.greenfield_downloads
+    end
   end
 end

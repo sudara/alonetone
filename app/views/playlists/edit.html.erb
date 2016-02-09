@@ -14,10 +14,17 @@
       		<% end %>
         </div>
 
+        <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
+
         <%= simple_form_for [@user, @playlist] do |f| %>
           <%= f.input :title %>
           <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
           <%= f.input  :description %>
+
+          <%= f.simple_fields_for :greenfield_downloads do |sf| %>
+            <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
+          <% end %>
+
           <%= f.input :private %>
           <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
           <%= f.button :submit, "Save" %> or 

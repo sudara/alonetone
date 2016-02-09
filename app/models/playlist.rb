@@ -1,4 +1,5 @@
 class Playlist < ActiveRecord::Base
+  concerned_with :greenfield
       
   acts_as_list :scope => :user_id, :order => :position
 

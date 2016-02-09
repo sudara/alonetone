@@ -1,0 +1,17 @@
+<div id="attachment_upload" class="static_content">
+  <h3>Add Greenfield Downloads</h3>
+
+  Upload a zip archive of the playlist contents.<br>
+  <%= greenfield_upload_form(@user, @playlist) do |s3_uploader_url| %>
+    <%= file_field_tag :file, multiple: true, data: { url: s3_uploader_url } %>
+  <% end %>
+
+  <div id="uploads_container"></div>
+  <script id="template-upload" type="text/x-tmpl">
+    <div id="upload_{%=o.unique_id%}" class="upload">
+      <h5>{%=o.name%}</h5>
+      <div class="progress progress-striped active"><div class="bar" style="width: 0%"></div></div>
+      <ul class="messages"></ul>
+    </div>
+  </script>
+</div>

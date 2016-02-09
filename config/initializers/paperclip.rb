@@ -15,6 +15,17 @@ Paperclip::Attachment.default_options.merge!({
     'Content-disposition' => 'attachment;'}
 }) if Alonetone.storage == 's3'
 
+Paperclip.interpolates :s3_path do |attachment, _|
+  attachment.instance.s3_path
+end
+
+S3DirectUpload.config do |c|
+  c.access_key_id =  Alonetone.amazon_id
+  c.secret_access_key = Alonetone.amazon_key
+  c.bucket = Alonetone.bucket
+  c.url = "http://#{Alonetone.bucket}"
+end if Alonetone.storage == 's3'
+
 
 require 'paperclip/media_type_spoof_detector'
 module Paperclip
