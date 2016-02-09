@@ -170,7 +170,12 @@ $('body').on('click', '[data-sound-id] .pause-button', function(e) {
 });
 
 $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
-  $('.playlist a.small-cover').show();
+  var cover = $('.playlist a.small-cover');
+  if (cover[0].href == e.target.href)
+    cover.hide();
+  else
+    cover.show();
+
   $('.track-content').replaceWith($(data).find('.track-content'));
   showWaveform();
 
@@ -188,7 +193,7 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
 
 $(window).on('popstate', function(je) {
   var loc = document.location.pathname;
-  var link = $('.playlist .tracklist a[data-remote=true][href='+attr(loc)+']').last();
+  var link = $('.playlist a[data-remote=true][href='+attr(loc)+']').last();
   console.log('setting page back to ', loc);
   console.log('with link:           ', link);
   link.trigger('click');
