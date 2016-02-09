@@ -19,24 +19,26 @@
 
   <%= player(@post.asset) %>
 
-  <div class="post_content">
+  <div class="edit-post-content">
     <%= f.text_area :body, placeholder: "Tell us a story..." %>
     <%= f.fields_for :asset do |ff| %>
       <%= ff.text_area :credits, value: @post.asset.credits, placeholder: "Credits for this track" %>
     <% end %>
   </div>
   
-  <div class="edit_save">
-    <%= f.submit %>
-  </div>
   
   <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
-  <div class="drag_and_drop_upload">
+  <div class="drag-and-drop-upload">
       Drop "supporting" mp3 files here
   </div>
   <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
-  <ul class="supporting_file_list fa-ul">
+  <ul class="supporting-file-list fa-ul">
     <%= list_attached_mp3_assets(@post.attached_assets) %>
   </ul>
   <%= file_field_tag('attached_asset[mp3]', :'data-url' => asset_path, :class => 'mp3_upload', :multiple => true) %>
+
+  <div class="edit-save">
+    <%= f.submit %>
+  </div>
+
 <% end %>

@@ -3,12 +3,16 @@ form {
   header {
     margin-top: 0;
   }
-  .post-content {
+  .edit-post-content {
     min-height: 100px;
     margin-bottom: 0; // less space since we have more UI below
     textarea {
+      &:post_body {
+        min-height: 400px;
+      }
       min-height: 100px;
       margin-bottom: 0;
+      padding: 10px;
       resize: vertical;
       &:hover {
         background-color: $bright-highlight;
@@ -18,10 +22,6 @@ form {
       }
     }
   }
-}
-
-.edit_post,
-.new_post {
   .errors {
     padding: 10px;
     border: 1px solid #000;
@@ -49,53 +49,53 @@ form {
   textarea#post_asset_attributes_credits {
     min-height: $baseline;
   }
-}
-
-.edit_save {
-  display: inline-block;
-  float: right;
-  clear: both;
-}
-
-.file {
-  width: 100%;
-  text-align: left;
-  &.complete {
-    background-color: #E0F0FF;
+  .file {
+    width: 100%;
+    text-align: left;
+    &.complete {
+      background-color: #E0F0FF;
+    }
+    &.errors {
+      background-color: #FFCC80;
+    }
+    .name,
+    .status {
+      font-size: 14px;
+      display: inline-block;
+    }
+    .name {
+      text-indent: 8px;
+    }
+    .status {
+      font-size: 12px;
+      text-indent: 4px;
+      color: $light-gray;
+    }
   }
-  &.errors {
-    background-color: #FFCC80;
+  .drag-and-drop-upload {
+    clear: both;
+    margin: 2em auto .5em auto;
+    padding: 2em 0;
+    text-align: center;
+    border: 3px dashed $not-quite-black;
+    &:hover {
+      background-color: $bright-highlight;
+    }
   }
-  .name,
-  .status {
-    font-size: 14px;
+  .supporting-file-list {
+    width: 100%;
+  }
+  .mp3-upload {
+    margin-bottom: 4em;
+  }
+  .edit-save {
     display: inline-block;
+    float: right;
+    clear: both;
   }
-  .name {
-    text-indent: 8px;
-  }
-  .status {
-    font-size: 12px;
-    text-indent: 4px;
-    color: $light-gray;
-  }
+
 }
 
-.drag_and_drop_upload {
-  clear: both;
-  margin: 2em auto .5em auto;
-  padding: 2em 0;
-  text-align: center;
-  border: 3px dashed $not-quite-black;
-  &:hover {
-    background-color: $bright-highlight;
-  }
-}
 
-.supporting_file_list {
-  width: 100%;
-}
 
-.mp3_upload {
-  margin-bottom: 4em;
-}
+
