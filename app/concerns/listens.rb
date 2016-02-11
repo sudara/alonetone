@@ -4,7 +4,7 @@ module Listens
 
   # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook']
+  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook','stagefright']
  
   # user agent black list
   @@bots = ['bot','spider','baidu','mp3bot']
