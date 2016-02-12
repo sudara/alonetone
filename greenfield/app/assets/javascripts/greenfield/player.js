@@ -81,6 +81,14 @@ function changeControlActionToPause(soundId) {
     find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
 }
 
+function mobileHTML5() {
+  // Use the same test as soundmanager2
+  var ua = navigator.userAgent,
+      is_iDevice = ua.match(/(ipad|iphone|ipod)/i),
+      isAndroid = ua.match(/android/i), isIE = ua.match(/msie/i);
+  return ua.match(/(mobile|pre\/|xoom)/i) || is_iDevice || isAndroid;
+}
+
 Playlist = [];
 
 soundManager.onready(function() {
@@ -120,10 +128,6 @@ soundManager.onready(function() {
 
       changeControlActionToPause(this.id);
     });
-
-    sound.finished(function() {
-      changeControlActionToPlay(this.id);
-    });
   });
 
   $.each(Playlist, function(i, sound) {
@@ -133,9 +137,21 @@ soundManager.onready(function() {
       next && next.load();
     });
 
-    sound.positioned(-180, function() {
-      next && $(next.ui).trigger('click');
-    });
+    if (mobileHTML5()) {
+      sound.finished(function() {
+        changeControlActionToPlay(this.id);
+        console.log('finished, triggering click on next');
+        next && $(next.ui).trigger('click');
+      });
+    } else {
+      sound.finished(function() {
+        changeControlActionToPlay(this.id);
+      });
+      sound.positioned(-180, function() {
+        console.log('pretty much finished, triggering click on next');
+        next && $(next.ui).trigger('click');
+      });
+    }
   });
 });
 
