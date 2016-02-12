@@ -84,8 +84,8 @@ function changeControlActionToPause(soundId) {
 function mobileHTML5() {
   // Use the same test as soundmanager2
   var ua = navigator.userAgent,
-      is_iDevice = ua.match(/(ipad|iphone|ipod)/i),
-      isAndroid = ua.match(/android/i), isIE = ua.match(/msie/i);
+      isAndroid = ua.match(/android/i),
+      is_iDevice = ua.match(/(ipad|iphone|ipod)/i);
   return ua.match(/(mobile|pre\/|xoom)/i) || is_iDevice || isAndroid;
 }
 
