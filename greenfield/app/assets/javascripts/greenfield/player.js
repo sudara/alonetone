@@ -141,11 +141,11 @@ soundManager.onready(function() {
       next && next.load();
     });
 
-    if (mobileHTML5())
+    if (mobileHTML5() && !navigator.userAgent.match(/android/i))
       sound.finished(function() {
         next && $(next.ui).trigger('click');
       });
-    else
+    else if (!mobileHTML5())
       sound.positioned(-180, function() {
         next && $(next.ui).trigger('click');
       });
