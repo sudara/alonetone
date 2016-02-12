@@ -128,6 +128,10 @@ soundManager.onready(function() {
 
       changeControlActionToPause(this.id);
     });
+
+    sound.finished(function() {
+      changeControlActionToPlay(this.id);
+    });
   });
 
   $.each(Playlist, function(i, sound) {
@@ -137,21 +141,14 @@ soundManager.onready(function() {
       next && next.load();
     });
 
-    if (mobileHTML5()) {
+    if (mobileHTML5())
       sound.finished(function() {
-        changeControlActionToPlay(this.id);
-        console.log('finished, triggering click on next');
         next && $(next.ui).trigger('click');
       });
-    } else {
-      sound.finished(function() {
-        changeControlActionToPlay(this.id);
-      });
+    else
       sound.positioned(-180, function() {
-        console.log('pretty much finished, triggering click on next');
         next && $(next.ui).trigger('click');
       });
-    }
   });
 });
 

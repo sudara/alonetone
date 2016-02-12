@@ -17,7 +17,12 @@ Sound = {
 
     var sound = {
       id: soundId,
-      loadActions: [],
+      loadedActions: [],
+      pausedActions: [],
+      playingActions: [],
+      resumedActions: [],
+      finishedActions: [],
+
       sm: soundManager.createSound({
         id: soundId,
         url: url,
@@ -25,10 +30,10 @@ Sound = {
 
         onload: function() {
           if (this.duration) {
-            for (var i=0; i < sound.loadActions.length; ++i)
-              sound.loadActions[i].call(sound);
+            for (var i=0; i < sound.loadedActions.length; ++i)
+              sound.loadedActions[i].call(sound);
 
-            sound.loadActions = [];
+            sound.loadedActions = [];
           }
         },
 
@@ -38,23 +43,28 @@ Sound = {
           sound.position = this.position / this.durationEstimate;
           sound.index    = min + ':' + (sec >= 10 ? sec : '0'+sec);
 
-          sound.playingAction && sound.playingAction();
+          for (var i=0; i < sound.playingActions.length; ++i)
+            sound.playingActions[i].call(sound);
         },
 
         onpause: function() {
-          sound.pausedAction && sound.pausedAction();
+          for (var i=0; i < sound.pausedActions.length; ++i)
+            sound.pausedActions[i].call(sound);
         },
 
         onresume: function() {
-          sound.resumedAction && sound.resumedAction();
+          for (var i=0; i < sound.resumedActions.length; ++i)
+            sound.resumedActions[i].call(sound);
         },
 
         onplay: function() {
-          sound.resumedAction && sound.resumedAction();
+          for (var i=0; i < sound.resumedActions.length; ++i)
+            sound.resumedActions[i].call(sound);
         },
 
         onfinish: function() {
-          sound.finishedAction && sound.finishedAction();
+          for (var i=0; i < sound.finishedActions.length; ++i)
+            sound.finishedActions[i].call(sound);
         }
       }),
 
@@ -84,7 +94,7 @@ Sound = {
         if (this.isLoaded)
           action.call(this);
         else
-          this.loadActions.push(action);
+          this.loadedActions.push(action);
       },
 
       positioned: function(pos, action) {
@@ -97,19 +107,19 @@ Sound = {
       },
 
       playing: function(action) {
-        this.playingAction = action;
+        this.playingActions.push(action);
       },
 
       paused: function(action) {
-        this.pausedAction = action;
+        this.pausedActions.push(action);
       },
 
       resumed: function(action) {
-        this.resumedAction = action;
+        this.resumedActions.push(action);
       },
 
       finished: function(action) {
-        this.finishedAction = action;
+        this.finishedActions.push(action);
       }
     };
 
