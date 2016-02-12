@@ -143,7 +143,8 @@ soundManager.onready(function() {
 
     if (mobileHTML5() && !navigator.userAgent.match(/android/i))
       sound.finished(function() {
-        next && $(next.ui).trigger('click');
+        next.play();
+//        next && $(next.ui).trigger('click');
       });
     else if (!mobileHTML5())
       sound.positioned(-180, function() {
