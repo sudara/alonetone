@@ -11,10 +11,12 @@
     
     <meta content="index,follow" name="robots"/>
     
+    <% if @post or @playlist %>
     <meta property="og:type"               content="music.<%= @playlist ? 'album' : 'song' %>" />
     <meta property="og:title"              content="<%= @page_title %>" />
     <meta property="og:description"        content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
-    <meta property="og:image"              content="<%= @playlist.alonetone_playlist.cover(:greenfield) if @playlist %>" />    
+    <meta property="og:image"              content="<%= @playlist.alonetone_playlist.cover(:greenfield) if @playlist %>" />   
+    <% end %> 
     
     <%= csrf_meta_tag %>
   </head>
@@ -28,7 +30,7 @@
     
     <div class="footer-table-row">
         <footer>
-            <a href="http://www.alonetone.com">Powered by Greenfield</a>
+            <a href="/">Powered by ListenApp</a>
         </footer>
     </div>
     

@@ -1,5 +1,6 @@
 Greenfield::Engine.routes.draw do
   root to: 'pages#home'
+  get "/404" => "pages#not_found"
 
   post 'login', to: 'application#login', as: :user_sessions
 
