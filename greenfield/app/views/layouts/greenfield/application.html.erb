@@ -10,6 +10,12 @@
     <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
     
     <meta content="index,follow" name="robots"/>
+    
+    <meta property="og:type"               content="music.<%= @playlist ? 'album' : 'song' %>" />
+    <meta property="og:title"              content="<%= @page_title %>" />
+    <meta property="og:description"        content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
+    <meta property="og:image"              content="<%= @playlist.alonetone_playlist.cover(:greenfield) if @playlist %>" />    
+    
     <%= csrf_meta_tag %>
   </head>
 

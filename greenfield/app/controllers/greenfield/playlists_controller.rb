@@ -6,7 +6,8 @@ module Greenfield
       @post = find_asset_from_playlist.try(:greenfield_post)
       respond_to do |format|
         format.html do
-          @page_title = "#{@playlist.user.display_name} - #{@playlist.title}"
+          @user = @playlist.user
+          @page_title = "#{@playlist.title} — #{@user.display_name}"
         end
 
         format.mp3 do

@@ -8,7 +8,8 @@ module Greenfield
       @post = find_post
       respond_to do |format|
         format.html do
-          @page_title = "#{@post.user.display_name} - #{@post.title}"
+          @user = @post.user
+          @page_title = "#{@post.title} — #{@user.display_name}"
         end
 
         format.mp3 do
@@ -32,9 +33,9 @@ module Greenfield
       @playlist = params[:post].delete('playlist_id')
       if @post.update_attributes(params[:post])
         if @playlist 
-          redirect_to user_playlist_post_path(@post.user, @playlist, @post)
+          redirect_to user_playlist_post_path(@user, @playlist, @post)
         else
-          redirect_to user_post_path(@post.user, @post) 
+          redirect_to user_post_path(@user, @post) 
         end
       else
         render :edit

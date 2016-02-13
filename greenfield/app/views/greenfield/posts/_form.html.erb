@@ -1,4 +1,4 @@
-<%= form_for([@post.user, @post]) do |f| %>
+<%= form_for([@user, @post]) do |f| %>
   <% if @post.errors.any? %>
     <div class="errors">
       There were some problems...
@@ -30,7 +30,7 @@
   <div class="drag-and-drop-upload">
       Drop "supporting" mp3 files here
   </div>
-  <% asset_path = user_post_attached_assets_path(@post.user, @post) %>
+  <% asset_path = user_post_attached_assets_path(@user, @post) %>
   <ul class="supporting-file-list fa-ul">
     <%= list_attached_mp3_assets(@post.attached_assets) %>
   </ul>
