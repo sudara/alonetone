@@ -1,3 +1,5 @@
+// .playlist-options is for the cover view, which isn't technically the post
+
 .track-content {
   .large-cover {
     width: 650px;
@@ -29,12 +31,25 @@
     display: block;
     float: left;
     margin-top: 0;
-    height: 50px;
+    height: 40px;
     margin-bottom: 0;
-    padding-top: 0;
+    padding-top: 10px;
     padding-bottom: 0;
     border-right: 1px solid #000;
     border-radius: 0;
+    font-family: Helvetica;
+    font-weight: bold;
+    &:nth-child(4) {
+      float: right;
+      border-right: 0;
+      border-left: 1px solid #000;;
+    }
+    &:nth-child(5) {
+      float: right;
+      border-right: 0;
+      border-left: 1px solid #000;;
+
+    }
   }
 }
 
