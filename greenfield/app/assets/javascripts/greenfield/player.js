@@ -137,19 +137,19 @@ soundManager.onready(function() {
   $.each(Playlist, function(i, sound) {
     var next = Playlist[i+1];
 
-    sound.positioned(-10000, function() {
-      next && next.load();
-    });
-
-    if (mobileHTML5() && !navigator.userAgent.match(/android/i))
+    if (mobileHTML5()) {
       sound.finished(function() {
-        next.play();
-//        next && $(next.ui).trigger('click');
+        next && $(next.ui).trigger('click');
       });
-    else if (!mobileHTML5())
+    } else if (!mobileHTML5()) {
+      sound.positioned(-10000, function() {
+        next && next.load();
+      });
+
       sound.positioned(-180, function() {
         next && $(next.ui).trigger('click');
       });
+    }
   });
 });
 
