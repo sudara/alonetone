@@ -19,6 +19,25 @@
     max-width: 100%;
   }
 }
+
+.playlist-options {
+  height: 50px;
+  width: 650px;
+  margin-left: -27px;
+  background-color: $not-quite-black;
+  a.download-button {
+    display: block;
+    float: left;
+    margin-top: 0;
+    height: 50px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-right: 1px solid #000;
+    border-radius: 0;
+  }
+}
+
 .post-content,
 .post-content textarea {
   font-size: $body-font-size;
