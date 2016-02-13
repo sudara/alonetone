@@ -141,7 +141,7 @@ soundManager.onready(function() {
       sound.finished(function() {
         next && $(next.ui).trigger('click');
       });
-    } else if (!mobileHTML5()) {
+    } else {
       sound.positioned(-10000, function() {
         next && next.load();
       });
@@ -151,8 +151,11 @@ soundManager.onready(function() {
       });
     }
   });
-});
 
+  var currentTrack = $('.player .play-control a').attr('href');
+  if (currentTrack)
+    Sound.load(currentTrack).load();
+});
 
 $('body').on('click', '[data-sound-id] .play-button', function(e) {
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
@@ -198,7 +201,8 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
 
   $('.player .play-button').each(function() {
     var url = $(this).find('*').andSelf().filter('a').attr('href');
-    Sound.load(url).load();
+    if (!mobileHTML5())
+      Sound.load(url).load();
   });
 
   if (window.history.pushState && e.target.href != document.location.href)
