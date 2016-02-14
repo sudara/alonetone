@@ -25,6 +25,7 @@ module Greenfield
         create_unless_post_exists
         @post = find_post
       end
+      @user = @post.user
       @post.attached_assets.build
     end
 
