@@ -34,9 +34,9 @@ module Greenfield
       @playlist = params[:post].delete('playlist_id')
       if @post.update_attributes(params[:post])
         if @playlist 
-          redirect_to user_playlist_post_path(@user, @playlist, @post)
+          redirect_to user_playlist_post_path(@playlist.user, @playlist, @post)
         else
-          redirect_to user_post_path(@user, @post) 
+          redirect_to user_post_path(@post.user, @post) 
         end
       else
         render :edit
