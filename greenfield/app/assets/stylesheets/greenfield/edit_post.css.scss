@@ -4,13 +4,15 @@ form {
     margin-top: 0;
   }
   .edit-post-content {
+    background-color: white;
     min-height: 100px;
     margin-bottom: 0; // less space since we have more UI below
     textarea {
+      font-family: $body-font;
       box-sizing: border-box;
       width: 100%;
       min-height: 400px;
-      margin-bottom: 0;
+      margin: 0;
       padding: 10px;
       resize: vertical;
       border-bottom: 1px solid $light-gray;

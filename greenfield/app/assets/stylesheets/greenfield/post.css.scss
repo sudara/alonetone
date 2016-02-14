@@ -7,6 +7,7 @@
     margin-left: -$baseline;
   }
   .post-content,
+  .edit-post-content,
   .track-credits {
     width: 550px;
     padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
@@ -54,7 +55,7 @@
 }
 
 .post-content,
-.post-content textarea {
+.edit-post-content textarea {
   font-size: $body-font-size;
   position: relative;
   margin-top: $baseline;

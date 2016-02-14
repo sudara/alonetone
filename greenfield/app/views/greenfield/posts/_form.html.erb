@@ -1,43 +1,44 @@
-<%= form_for([@user, @post]) do |f| %>
-  <% if @post.errors.any? %>
-    <div class="errors">
-      There were some problems...
-      <ul>
-        <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.hidden_field :playlist_id, value: @playlist.alonetone_playlist.to_param if @playlist %> 
-  <%= f.fields_for :asset do |ff| %>
-    <header>
-      <h1><%= ff.text_field :title, :value => @post.asset.name %></h1>
-      <h2><%= @post.asset.user.display_name %></h2>
-    </header>
-  <% end %>
-
+<div class="track-content">
   <%= player(@post.asset) %>
 
-  <div class="edit-post-content">
-    <%= f.text_area :body, placeholder: "Tell us a story..." %>
-    <%= f.fields_for :asset do |ff| %>
-      <%= ff.text_area :credits, value: @post.asset.credits, placeholder: "Credits for this track" %>
+  <%= form_for([@user, @post]) do |f| %>
+    <% if @post.errors.any? %>
+      <div class="errors">
+        There were some problems...
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </div>
+    <%= f.hidden_field :playlist_id, value: @playlist.alonetone_playlist.to_param if @playlist %> 
+    <div class="edit-post-content">
+    <%= f.fields_for :asset do |ff| %>
+      <header>
+        <h1><%= ff.text_field :title, :value => @post.asset.name %></h1>
+      </header>
+    <% end %>
+
+      <%= f.text_area :body, placeholder: "Tell us a story..." %>
+      <%= f.fields_for :asset do |ff| %>
+        <%= ff.text_area :credits, value: @post.asset.credits, placeholder: "Credits for this track" %>
+      <% end %>
+    </div>
   
-  <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
-  <div class="drag-and-drop-upload">
-      Drop "supporting" mp3 files here
-  </div>
-  <% asset_path = user_post_attached_assets_path(@user, @post) %>
-  <ul class="supporting-file-list fa-ul">
-    <%= list_attached_mp3_assets(@post.attached_assets) %>
-  </ul>
-  <%= file_field_tag('attached_asset[mp3]', :'data-url' => asset_path, :class => 'mp3_upload', :multiple => true) %>
+    <%= hidden_field_tag :asset_permalink, @post.asset.permalink %>
+    <div class="drag-and-drop-upload">
+        Drop "supporting" mp3 files here
+    </div>
+    <% asset_path = user_post_attached_assets_path(@user, @post) %>
+    <ul class="supporting-file-list fa-ul">
+      <%= list_attached_mp3_assets(@post.attached_assets) %>
+    </ul>
+    <%= file_field_tag('attached_asset[mp3]', :'data-url' => asset_path, :class => 'mp3_upload', :multiple => true) %>
 
-  <div class="edit-save">
-    <%= f.submit %>
-  </div>
+    <div class="edit-save">
+      <%= f.submit %>
+    </div>
 
-<% end %>
+  <% end %>
+</div>
