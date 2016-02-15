@@ -40,7 +40,7 @@
       line-height: 35px;
       clear: both;
       overflow: auto;
-      height: 35px;
+      // height: 35px;
       border-top: 1px solid $not-quite-white-opaque;
       &:last-child {
         border-bottom: 1px solid $not-quite-white-opaque;
@@ -79,19 +79,17 @@
       a.play-button {
         i {
           position: relative;
-          top:-.5px;
+          top: -.5px;
         }
-
       }
       a.pause-button {
         width: 11px;
         padding: 4px 3px 5px 5px;
         i {
           position: relative;
-          left:-.5px;
           top: -.5px;
+          left: -.5px;
         }
-
       }
       a {
         font-size: 14px;
@@ -105,14 +103,13 @@
     }
   }
   .sidebar-downloads {
+    margin-top: $baseline;
     ul.downloads-links,
     ul.external-links, {
-      font-size: 12px;
-      color: $light-gray;
       li {
         a {
           font-family: $sans-serif-family;
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 300;
           display: block;
           width: 100%;
@@ -123,12 +120,9 @@
           background-color: $not-quite-black;
           i {
             font-size: 14px;
-            margin-right: 12px;
-            margin-right: 10px;
-            margin-left: 0;
+            margin-right: 11px;
           }
           &:hover {
-            text-decoration: none;
             background-color: black;
           }
         }
