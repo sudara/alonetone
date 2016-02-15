@@ -1,7 +1,7 @@
 <div class="playlist">
-  <%= link_to image_tag(@playlist.alonetone_playlist.cover(:original)), user_playlist_path(@user, @playlist), remote: true, class: 'small-cover', style: ('display:none;' unless @post) %>
+  <%= link_to image_tag(@playlist.alonetone_playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist), remote: true, class: 'small-cover', style: ('display:none;' unless @post) %>
   <h1 class="<%= 'cover' unless @asset %>"> 
-    <%= link_to @playlist.alonetone_playlist.title, user_playlist_path(@user, @playlist) %>
+    <%= link_to @playlist.alonetone_playlist.title, user_playlist_path(@playlist.user, @playlist) %>
   </h1>
   <h2><span class="by">by</span> <%= @user.display_name %></h2>  
   
@@ -25,14 +25,8 @@
   <% end %>
   </ul>
 
-  <div class="sidebar-downloads">
-    <% @playlist.downloads.each do |download| %>
-      <%= link_to download.url, class: "download-button" do %>
-        <i class="fa fa-download"></i><%= download.title %>
-      <% end %>
-    <% end %>
-    <a class="download-button" href="javascript:void(0);"><i class="fa fa-spotify"></i>Listen on Spotify</a>        
-    <a class="download-button" href="javascript:void(0);"><i class="fa fa-apple"></i>Listen on iTunes</a>        
+  <div class="sidebar-downloads" style="<%= 'display:none' if @post %> ">
+    <%= render partial: 'links' %>
   </div>
 </div>
 
