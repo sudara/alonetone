@@ -10,8 +10,10 @@
 
 <ul class="external-links">
   <% [:link1, :link2, :link3].collect do |link| %>
-    <li>
-      <%= external_link_for(@playlist.alonetone_playlist.send(link)) if @playlist.alonetone_playlist.send(link) %>  
-    </li>
+    <% if valid_link = @playlist.alonetone_playlist.send(link) %> 
+      <li>
+        <%= external_link_for(valid_link) %>  
+      </li>
+    <% end %>
   <% end %>
 </ul>

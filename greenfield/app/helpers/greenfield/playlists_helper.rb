@@ -1,11 +1,5 @@
 module Greenfield
-  module PlaylistsHelper
-    def external_links_for(playlist)
-      [:link1, :link2, :link3].collect do |link|
-        external_link_for(playlist.send(link)) if playlist.send(link)
-      end.join.html_safe
-    end
-    
+  module PlaylistsHelper    
     def external_link_for(link)
       text = case link
       when /spotify/i
