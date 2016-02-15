@@ -11,6 +11,7 @@ Greenfield::Engine.routes.draw do
     end
 
     get 'playlists/:playlist_id', :to => 'playlists#show', :as => :playlist
+    get 'playlists/:playlist_id/downloads/:download_id/:download_name', to: 'playlist_downloads#serve', as: :playlist_download
     get 'playlists/:playlist_id/:asset_id', :to => 'playlists#show', :as => :playlist_post
     get 'playlists/:playlist_id/:asset_id/edit', :to => 'posts#edit', :as => :edit_playlist_post
     post 'playlists/:playlist_id/:position/listens', :to => 'playlists#create_listen'

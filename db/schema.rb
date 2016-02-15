@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204165441) do
+ActiveRecord::Schema.define(version: 20160215204019) do
 
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type"
@@ -145,13 +145,14 @@ ActiveRecord::Schema.define(version: 20160204165441) do
   end
 
   create_table "greenfield_playlist_downloads", force: :cascade do |t|
-    t.string   "title",                   null: false
-    t.integer  "playlist_id",             null: false
-    t.string   "s3_path",                 null: false
+    t.string   "title",                               null: false
+    t.integer  "playlist_id",                         null: false
+    t.string   "s3_path",                             null: false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.integer  "serves",                  default: 0, null: false
   end
 
   create_table "greenfield_posts", force: :cascade do |t|
