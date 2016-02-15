@@ -36,7 +36,10 @@
   p {
     margin-bottom: $baseline;
     img {
-      width: 100%;
+      max-width: 550 + ($baseline * 6);
+      margin-top: $baseline;
+      // not quite perfectly the same width
+      margin-left: -$baseline * 3;    
     }
   }
   .edit-link {
