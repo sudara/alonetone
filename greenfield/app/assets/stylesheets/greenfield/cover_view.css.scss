@@ -1,0 +1,66 @@
+// .playlist-options is for the cover view, which isn't technically the post
+
+.track-content {
+  .large-cover {
+    width: 650px;
+    height: 650px;
+    margin-left: -$baseline;
+  }
+  img {
+    max-width: 100%;
+  }
+  .playlist-options {
+    width: 650px;
+    height: 50px;
+    margin-left: -27px;
+    background-color: $not-quite-black;
+    ul {
+      &.downloads-links {
+        float: left;
+      }
+      &.external-links {
+        float: right;
+        // border-left: 1px solid #000;
+          li {
+            border-left: 1px solid #000;
+            border-right: 0;
+        }
+      }
+      li {
+        display: inline-block;
+        height: 50px;
+        background-color: $not-quite-black;
+        &:hover {
+          background-color: #000;
+        }
+        border-right: 1px solid #000;
+        a {
+          font-family: $sans-serif-family;
+          font-size: 12px;
+          display: block;
+          font-weight: 300;
+          width: auto;
+          margin-top: 0;
+          margin-right: 5px;
+          margin-bottom: 0;
+          padding: 5px $baseline / 2;
+          padding-top: 8px;
+          padding-bottom: 0;
+          text-decoration: none;
+          color: $not-quite-white-opaque;
+          i {
+            margin-right: 10px;
+          }
+          .action-text {
+            display: block;
+            color: $gray;
+            font-size: 10px;
+            margin-left: 21px;
+            margin-top: -12px;
+          }
+        }
+      }
+    }
+
+  }
+}
