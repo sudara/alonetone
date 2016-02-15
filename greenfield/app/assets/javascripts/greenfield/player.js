@@ -50,13 +50,14 @@ function showWaveform() {
     container.click(function(e) {
       e.preventDefault();
 
+      $('[data-sound-id]').filter(function() {
+          return $(this).data('sound-id') != soundId;
+      }).find('.pause-button').trigger('click');
+
       var sound, offx;
-      if ((sound = Sound.maybeGetSound(soundId))) {
-        offx = e.clientX - container.offset().left;
-        sound.setPosition(offx / container.width()).play();
-      } else {
-        player.find('.play-button').trigger('click');
-      }
+      sound = Sound.getSound(soundId);
+      offx = e.clientX - container.offset().left;
+      sound.setPosition(offx / container.width()).play();
     });
 
     container.mousemove(function(e) {
