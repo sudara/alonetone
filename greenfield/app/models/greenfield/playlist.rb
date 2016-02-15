@@ -1,8 +1,8 @@
 module Greenfield
   class Playlist
-    attr_reader :alonetone_playlist
+    delegate :to_param, :title, :user, :cover, :link1, :link2, :link3,
+             to: :alonetone_playlist
 
-    delegate :to_param, :title, :user, to: :alonetone_playlist
 
     def initialize(alonetone_playlist)
       @alonetone_playlist = alonetone_playlist
@@ -15,5 +15,10 @@ module Greenfield
     def downloads
       alonetone_playlist.greenfield_downloads
     end
+
+    private
+
+    attr_reader :alonetone_playlist
+
   end
 end

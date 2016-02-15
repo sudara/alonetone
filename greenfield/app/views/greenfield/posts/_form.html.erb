@@ -12,7 +12,7 @@
         </ul>
       </div>
     <% end %>
-    <%= f.hidden_field :playlist_id, value: @playlist.alonetone_playlist.to_param if @playlist %> 
+    <%= f.hidden_field :playlist_id, value: @playlist.to_param if @playlist %>
     <div class="edit-post-content">
     <%= f.fields_for :asset do |ff| %>
       <header>

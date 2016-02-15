@@ -25,8 +25,8 @@ module Greenfield
     protected
     
     def find_asset_from_playlist
-      @alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
-      @playlist ||= Greenfield::Playlist.new(@alonetone_playlist)
+      alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
+      @playlist ||= Greenfield::Playlist.new(alonetone_playlist)
       if params[:asset_id].present?
         @asset ||= Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
       end
