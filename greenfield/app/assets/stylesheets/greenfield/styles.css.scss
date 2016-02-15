@@ -46,57 +46,11 @@ h2 {
   color: #CCC;
 }
 
+// Is this a shared style or just randomly here?
 header {
   margin-top: $baseline * 2;
   img {
     width: 83px;
     height: 83px;
-  }
-}
-
-a.download-button {
-  font-family: $normal-header-family;
-  font-size: 14px;
-  font-weight: 300;
-  display: inline-block;
-  width: auto;
-  margin-top: $baseline;
-  margin-right: 5px;
-  padding: 5px $baseline/2  ;
-  text-decoration: none;
-  color: $not-quite-white-opaque;
-  border-radius: 2px;
-  background-color: $not-quite-black;
-  i {
-    margin-right: 10px;
-  }
-}
-
-ul.downloads-links {
-  font-size: 12px;
-  line-height: $baseline / 2;
-  margin-top: $baseline / 4;
-  padding-top: $baseline / 4;
-  padding-bottom: $baseline / 4;
-  padding-left: 0;
-  color: $light-gray;
-  li {
-    margin-bottom: $baseline / 2;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    a {
-      text-decoration: none;
-      color: $black;
-      i {
-        font-size: 14px;
-        margin-right: 12px;
-        margin-left: 0;
-        color: $gray;
-      }
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }
