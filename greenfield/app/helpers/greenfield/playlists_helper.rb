@@ -11,7 +11,7 @@ module Greenfield
       else
         '<i class="fa fa-link"></i>Website'
       end.html_safe
-      link_to(text, link, class: "download-button").html_safe
+      link_to(text, link).html_safe
     end
   end
 end

@@ -1,7 +1,7 @@
 <ul class="downloads-links">
   <% @playlist.downloads.each do |download| %>
     <li>
-     <%= link_to download.url, class: "download-button" do %>
+     <%= link_to download.url do %>
        <i class="fa fa-download"></i><%= download.title %>
      <% end %>
    </li>

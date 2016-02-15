@@ -93,44 +93,41 @@
   }
   .sidebar-downloads {
     background-color: #F00;
-
-    ul.downloads-links, ul.external-links, {
+    ul.downloads-links,
+    ul.external-links, {
       font-size: 12px;
-      line-height: $baseline / 2;
-      margin-top: $baseline / 4;
-      padding-top: $baseline / 4;
-      padding-bottom: $baseline / 4;
+      // line-height: $baseline / 2;
+      // margin-top: $baseline / 4;
+      // padding-top: $baseline / 4;
+      // padding-bottom: $baseline / 4;
       padding-left: 0;
       color: $light-gray;
       li {
-        &:last-child {
-          margin-bottom: 0;
-        }
+        border-bottom: 1px solid black;
         a {
-          font-family: $normal-header-family;
+          font-family: $sans-serif-family;
           font-size: 14px;
           font-weight: 300;
-          display: inline-block;
+          display: block;
           width: auto;
-          margin-right: 5px;
+          width: 100%;
           padding: 5px $baseline / 2;
           text-decoration: none;
-          color: $not-quite-white-opaque;
+          text-decoration: none;
+          color: white;
           border-radius: 2px;
           background-color: $not-quite-black;
-          i {
-            margin-right: 10px;
-          }
-          text-decoration: none;
-          color: $black;
+
           i {
             font-size: 14px;
             margin-right: 12px;
+            margin-right: 10px;
             margin-left: 0;
-            color: $gray;
+            // color: $gray;
           }
           &:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            background-color: black;
           }
         }
       }
@@ -138,6 +135,9 @@
   }
 }
 
+
+
+// ????
 .edit_playlist ul a[data-method=delete] {
   display: none;
 }
