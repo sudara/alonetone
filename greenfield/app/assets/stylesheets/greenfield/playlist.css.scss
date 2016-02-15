@@ -40,7 +40,6 @@
       line-height: 35px;
       clear: both;
       overflow: auto;
-      // height: 35px;
       border-top: 1px solid $not-quite-white-opaque;
       &:last-child {
         border-bottom: 1px solid $not-quite-white-opaque;
@@ -113,6 +112,7 @@
           font-weight: 300;
           display: block;
           width: 100%;
+          box-sizing: border-box;
           padding: 5px $baseline / 2;
           text-decoration: none;
           color: white;
@@ -124,6 +124,11 @@
           }
           &:hover {
             background-color: black;
+          }
+          .action-text {
+            float: right;
+            color: $gray;
+            font-size: 10px;
           }
         }
       }
