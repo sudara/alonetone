@@ -3,13 +3,13 @@ module Greenfield
     def external_link_for(link)
       text = case link
       when /spotify/i
-        '<i class="fa fa-spotify"></i>Spotify'
+        '<i class="fa fa-spotify"></i>Spotify<span class="action-text">Listen</span>'
       when /app\=music/i
-        '<i class="fa fa-apple"></i>Apple Music'
+        '<i class="fa fa-apple"></i>Apple Music<span class="action-text">Listen</span>'
       when /app\=itunes/i
-        '<i class="fa fa-apple"></i>iTunes'
+        '<i class="fa fa-apple"></i>iTunes<span class="action-text">Buy</span>'
       else
-        '<i class="fa fa-link"></i>Website'
+        '<i class="fa fa-link"></i>Website<span class="action-text">Visit</span>'
       end.html_safe
       link_to(text, link).html_safe
     end
