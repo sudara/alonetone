@@ -76,9 +76,22 @@
           border-color: #FFF;
         }
       }
+      a.play-button {
+        i {
+          position: relative;
+          top:-.5px;
+        }
+
+      }
       a.pause-button {
         width: 11px;
         padding: 4px 3px 5px 5px;
+        i {
+          position: relative;
+          left:-.5px;
+          top: -.5px;
+        }
+
       }
       a {
         font-size: 14px;
