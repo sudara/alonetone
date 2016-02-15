@@ -188,11 +188,14 @@ $('body').on('click', '[data-sound-id] .pause-button', function(e) {
 
 $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
   var cover = $('.playlist a.small-cover');
-  if (cover[0].href == e.target.href)
+  var sidebarDownloads = $('.sidebar-downloads')
+  if (cover[0].href == e.target.href){
     cover.hide();
-  else
+    sidebarDownloads.hide();
+  }else{
     cover.show();
-
+    sidebarDownloads.show();
+  }
   $('.track-content').replaceWith($(data).find('.track-content'));
   showWaveform();
 
