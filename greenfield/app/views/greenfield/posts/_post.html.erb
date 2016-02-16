@@ -4,7 +4,7 @@
     <h1><%= @post.asset.name %></h1>
     <% if owner? and @playlist %> 
       <%= link_to("Edit", user_edit_playlist_post_path(@user, @playlist, @post), class: "edit-link") %>
-    <% else %>
+    <% elsif owner? %>
       <%= link_to("Edit", edit_user_post_path(@user, @post), class: "edit-link") %>
     <% end %>
     <%= markdown(@post.body, post: @post) %>    
