@@ -1,6 +1,7 @@
 module Greenfield
   class Playlist
-    delegate :to_param, :title, :user, :cover, :link1, :link2, :link3,
+    delegate :to_param, :title, :user, :cover, :credits,
+             :link1, :link2, :link3,
              to: :alonetone_playlist
 
 

@@ -5,4 +5,7 @@
   <div class="playlist-options">
     <%= render partial: 'greenfield/playlists/links' %>
   </div>
+  <div class="playlist-credits">
+    <%= markdown(@playlist.credits) %>
+  </div>
 </div>

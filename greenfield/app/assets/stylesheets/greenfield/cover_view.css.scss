@@ -9,6 +9,13 @@
   img {
     max-width: 100%;
   }
+  .playlist-credits{
+    margin-top: $baseline;
+    width: 600px;
+    font-size: 11px;
+    line-height: 11px;
+    color: $gray;
+  }
   .playlist-options {
     width: 650px;
     height: 50px;
