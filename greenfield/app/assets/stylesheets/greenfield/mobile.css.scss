@@ -13,9 +13,9 @@
         margin-right: 0;
         margin-bottom: $baseline/2;
         .small-cover {
-          width: 60%;
-          margin: 0 auto; 
           display: block!important;
+          width: 60%;
+          margin: 0 auto;
         }
         h1 {
           text-align: center;
@@ -49,6 +49,8 @@
           margin-top: 0;
           .play-button {
             font-size: 24px;
+            position: relative;
+            top: 5px;
             display: block;
             width: 14px;
             height: 18px;
@@ -59,18 +61,20 @@
           }
           .pause-button {
             font-size: 24px;
+            position: relative;
+            top: 5px;
             display: block;
             width: 14px;
             height: 18px;
             margin-top: 5px;
             padding: 12px;
             padding-top: 8px;
-            text-indent: 1px;
+            text-indent: -2.5px;
           }
           .time {
             font-size: 8px;
-            margin-top: -5px;
-            margin-left: 3px;
+            margin-top: 0;
+            margin-left: 8px;
           }
           .waveform {
             left: 60px;
@@ -80,27 +84,27 @@
           }
         }
         .large-cover {
+          display: none;
           width: 100%;
           height: auto;
           margin-left: 0;
-          display: none;
         }
         .playlist-options {
-          width: 100%;
           display: none;
+          width: 100%;
         }
         .post-content {
           font-size: 15px;
           display: block;
           width: 92%;
           margin-top: $baseline * 1.5;
+          margin-bottom: $baseline;
           padding-right: 4%;
           padding-left: 4%;
-          margin-bottom: $baseline;
           p {
             img {
               width: 100%;
-              margin-left: 0px;
+              margin-left: 0;
             }
           }
           hr {
@@ -120,20 +124,19 @@
             tr {
               th {
                 img {
-                  height: 30px;
                   width: 30px;
+                  height: 30px;
                 }
               }
             }
           }
-
         }
         .playlist-credits {
           width: 100%;
+          margin-left: 0;
           padding-right: 0;
           padding-left: 0;
           color: $not-quite-black;
-          margin-left: 0;
         }
       }
     }
