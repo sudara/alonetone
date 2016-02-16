@@ -110,6 +110,9 @@
           margin-bottom: $baseline;
           padding-right: 4%;
           padding-left: 4%;
+          iframe {
+            width: 100%;
+          }
           p {
             img {
               width: 100%;
