@@ -36,11 +36,15 @@
             font-weight: bold;
             line-height: 12px;
             vertical-align: top;
+            height: 20px;
           }
         }
         tr:last-child {
           td {
               color: $gray;
+              line-height: 12px;
+              vertical-align: top;
+
           }
         }
       }
