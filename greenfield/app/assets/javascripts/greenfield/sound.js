@@ -76,9 +76,9 @@ Sound = {
 
       play: function() {
         if (this.sm.playState)
-          soundManager.resume(this.sm.id);
+          this.sm.resume();
         else
-          soundManager.play(this.sm.id);
+          this.sm.play();
 
         this.isPlaying = true;
 
