@@ -33,7 +33,7 @@
   ul.tracklist {
     margin-top: $baseline;
     li {
-      line-height: 35px;
+      min-height: 35px;
       clear: both;
       overflow: auto;
       border-top: 1px solid $not-quite-white-opaque;
@@ -88,12 +88,21 @@
       }
       a {
         font-size: 14px;
-        line-height: ($baseline * 1.25) - 1px;
+        // line-height: ($baseline * 1.25) - 1px;
         display: block;
         float: left;
         width: 82%;
         text-decoration: none;
         color: $not-quite-black;
+        padding-top: 7px;
+        padding-bottom: 8px;
+        line-height: 20px;
+
+        span:first-child {
+          display: block;
+          float: left;
+          width: 90%;
+        }
         .time-text {
           float: right;
           color: $gray;
