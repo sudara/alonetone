@@ -29,16 +29,6 @@
         ul.tracklist {
           margin-top: $baseline;
         }
-
-        // a.download-link {
-        //   margin-top: $baseline / 2;
-        //   a {
-        //     font-size: 12px;
-        //     i {
-        //       margin-right: 8px;
-        //     }
-        //   }
-        // }
         .sidebar-downloads {
           display: block!important;
         }
@@ -57,6 +47,16 @@
           height: 60px;
           margin-top: 0;
           .play-button {
+            font-size: 24px;
+            display: block;
+            width: 14px;
+            height: 18px;
+            margin-top: 5px;
+            padding: 12px;
+            padding-top: 8px;
+            text-indent: 1px;
+          }
+          .pause-button {
             font-size: 24px;
             display: block;
             width: 14px;
