@@ -27,6 +27,10 @@ module Greenfield
     validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'
     validates_attachment_content_type :mp3, :content_type => ['audio/mpeg', 'audio/mp3'], :message => " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
 
+    def permalink
+      id.to_s
+    end
+
     def length
       Asset.formatted_time(self[:length])
     end
