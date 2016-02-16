@@ -223,8 +223,8 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
 
   $('.player .play-button').each(function() {
     var url = $(this).find('*').andSelf().filter('a').attr('href');
-    if (!mobileHTML5())
-      soundManager.onready(function() { Sound.load(url).load() });
+//    if (!mobileHTML5())
+//      soundManager.onready(function() { Sound.load(url).load() });
   });
 
   if (window.history.pushState && e.target.href != document.location.href)
