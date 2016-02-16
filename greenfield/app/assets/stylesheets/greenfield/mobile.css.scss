@@ -6,6 +6,7 @@
       box-sizing: border-box;
       width: 100%;
       padding: 0 20px;
+      padding-bottom: $baseline * 2;
       .playlist {
         float: none;
         width: 100%;
@@ -119,6 +120,8 @@
           width: 100%;
           padding-right: 0;
           padding-left: 0;
+          color: $not-quite-black;
+          margin-left: 0;
         }
       }
     }
