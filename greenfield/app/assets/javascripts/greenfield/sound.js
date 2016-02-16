@@ -91,10 +91,12 @@ Sound = {
       },
 
       loaded: function(action) {
-        if (this.isLoaded)
+        if (this.isLoaded && action)
           action.call(this);
-        else
+        else if (action)
           this.loadedActions.push(action);
+        else
+          this.loadedActions.splice(0);
       },
 
       positioned: function(pos, action) {
@@ -108,18 +110,35 @@ Sound = {
 
       playing: function(action) {
         this.playingActions.push(action);
+        if (action)
+          this.playingActions.push(action);
+        else
+          this.playingActions.splice(0);
+        return this;
       },
 
       paused: function(action) {
-        this.pausedActions.push(action);
+        if (action)
+          this.pausedActions.push(action);
+        else
+          this.pausedActions.splice(0);
+        return this;
       },
 
       resumed: function(action) {
-        this.resumedActions.push(action);
+        if (action)
+          this.resumedActions.push(action);
+        else
+          this.resumedActions.splice(0);
+        return this;
       },
 
       finished: function(action) {
-        this.finishedActions.push(action);
+        if (action)
+          this.finishedActions.push(action);
+        else
+          this.finishedActions.splice(0);
+        return this;
       }
     };
 
@@ -141,5 +160,11 @@ Sound = {
 
   pause: function(url) {
     return this.getSound(url).pause();
+  },
+
+  pauseAll: function() {
+    for (var soundId in this.store)
+      this.store[soundId].pause();
+    return this;
   }
 };

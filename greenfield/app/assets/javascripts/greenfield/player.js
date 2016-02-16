@@ -2,7 +2,7 @@
 //= require greenfield/waveform
 
 function attr(val) {
-  return val.replace(/\//g, '\\/');
+  return val.replace(/\//g, '\\/').replace(/@/g, '\\@');
 }
 
 function waveformData(csv) {
@@ -158,13 +158,14 @@ soundManager.onready(function() {
     Sound.load(currentTrack).load();
 });
 
-$('body').on('click', '[data-sound-id] .play-button', function(e) {
+$('body').on('click', '.track-content > .player .play-button,' +
+                      '.tracklist [data-sound-id] .play-button', function(e) {
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
   var li = $('.playlist li[data-sound-id=' + attr(soundId) + ']');
 
   // Pause other tracks unless this event was triggered programmatically
   if (!e.isTrigger)
-    li.siblings().find('.pause-button').trigger('click');
+    Sound.pauseAll();
 
   var sound = Sound.load(soundId)
   if (sound.id != Sound.getId(window.location.pathname))
@@ -177,11 +178,38 @@ $('body').on('click', '[data-sound-id] .play-button', function(e) {
   }
 });
 
+$('body').on('click', '.post-content > .player .play-button', function(e) {
+  var url = $(this).find('a').attr('href');
+  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  var sound = Sound.load(url);
+
+  sound.paused(null).paused(function() {
+    changeControlActionToPlay(this.id);
+  });
+
+  sound.resumed(null).resumed(function() {
+    changeControlActionToPause(this.id);
+  });
+
+  sound.playing(null).playing(function() {
+    $('.player[data-sound-id=' + attr(this.id) + '] .waveform').trigger('update.waveform', [this]);
+    $('.player[data-sound-id=' + attr(this.id) + '] .time .index').text(this.index);
+
+    changeControlActionToPause(this.id);
+  });
+
+  sound.finished(null).finished(function() {
+    changeControlActionToPlay(this.id);
+  });
+
+  Sound.pauseAll();
+  sound.play();
+});
+
 $('body').on('click', '[data-sound-id] .pause-button', function(e) {
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
 
   Sound.pause(soundId);
-  changeControlActionToPlay(soundId);
 
   e.preventDefault();
   return false;
