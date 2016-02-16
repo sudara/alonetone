@@ -65,6 +65,23 @@ function showWaveform() {
       hoverPosition = offx / container.width();
       seekbar.css('left', offx);
     }).mouseout(function() { hoverPosition = -1 });
+
+    soundManager.onready(function() {
+      var sound = Sound.load(player.find('.play-control a').attr('href'));
+
+      sound.resumed(function() {
+        changeControlActionToPause(soundId);
+      });
+
+      sound.paused(function() {
+        changeControlActionToPlay(soundId);
+      });
+
+      sound.playing(function() {
+        container.trigger('update.waveform', [this]);
+        player.find('.time .index').text(this.index);
+      });
+    });
   });
 }
 
@@ -116,18 +133,6 @@ soundManager.onready(function() {
     sound.resumed(function() {
       changeControlActionToPause(this.id);
       window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
-    });
-
-    sound.playing(function() {
-      // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
-      // var pos = (100*this.position)+'%';
-      // var li = $('.playlist li[data-sound-id='+attr(this.id)+']');
-      // li.css('background', 'linear-gradient(to right, #fceabb 0%, #f8b500 '+pos+', #ffffff '+pos+', #ffffff 100%)');
-
-      $('.player[data-sound-id=' + attr(this.id) + '] .waveform').trigger('update.waveform', [this]);
-      $('.player[data-sound-id=' + attr(this.id) + '] .time .index').text(this.index);
-
-      changeControlActionToPause(this.id);
     });
 
     sound.finished(function() {
@@ -183,21 +188,6 @@ $('body').on('click', '.post-content > .player .play-button', function(e) {
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
   var sound = Sound.load(url);
 
-  sound.paused(null).paused(function() {
-    changeControlActionToPlay(this.id);
-  });
-
-  sound.resumed(null).resumed(function() {
-    changeControlActionToPause(this.id);
-  });
-
-  sound.playing(null).playing(function() {
-    $('.player[data-sound-id=' + attr(this.id) + '] .waveform').trigger('update.waveform', [this]);
-    $('.player[data-sound-id=' + attr(this.id) + '] .time .index').text(this.index);
-
-    changeControlActionToPause(this.id);
-  });
-
   sound.finished(null).finished(function() {
     changeControlActionToPlay(this.id);
   });
@@ -234,7 +224,7 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
   $('.player .play-button').each(function() {
     var url = $(this).find('*').andSelf().filter('a').attr('href');
     if (!mobileHTML5())
-      Sound.load(url).load();
+      soundManager.onready(function() { Sound.load(url).load() });
   });
 
   if (window.history.pushState && e.target.href != document.location.href)

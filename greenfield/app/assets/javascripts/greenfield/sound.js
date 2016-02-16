@@ -17,6 +17,7 @@ Sound = {
 
     var sound = {
       id: soundId,
+      isPlaying: false,
       loadedActions: [],
       pausedActions: [],
       playingActions: [],
@@ -77,11 +78,15 @@ Sound = {
           soundManager.resume(this.sm.id);
         else
           soundManager.play(this.sm.id);
+
+        this.isPlaying = true;
+
         return this;
       },
 
       pause: function() {
         soundManager.pause(this.sm.id);
+        this.isPlaying = false;
         return this;
       },
 
@@ -109,7 +114,6 @@ Sound = {
       },
 
       playing: function(action) {
-        this.playingActions.push(action);
         if (action)
           this.playingActions.push(action);
         else
@@ -122,6 +126,10 @@ Sound = {
           this.pausedActions.push(action);
         else
           this.pausedActions.splice(0);
+
+        if (action && !this.isPlaying)
+          action.call(this);
+
         return this;
       },
 
@@ -130,6 +138,10 @@ Sound = {
           this.resumedActions.push(action);
         else
           this.resumedActions.splice(0);
+
+        if (action && this.isPlaying)
+          action.call(this);
+
         return this;
       },
 
