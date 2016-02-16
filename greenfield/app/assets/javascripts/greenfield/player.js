@@ -238,5 +238,3 @@ $(window).on('popstate', function(je) {
   console.log('with link:           ', link);
   link.trigger('click');
 });
-
-$(document).ready(showWaveform);
