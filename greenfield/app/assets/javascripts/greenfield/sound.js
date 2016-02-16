@@ -78,6 +78,7 @@ Sound = {
         if (this.sm.playState) {
           this.sm.resume();
         } else {
+          this.sm.play();
           this.sm.stop();
           this.sm.play();
         }
