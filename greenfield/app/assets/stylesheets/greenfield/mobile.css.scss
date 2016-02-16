@@ -117,6 +117,14 @@
           padding-left: 0;
           table {
             font-size: 9px;
+            tr {
+              th {
+                img {
+                  height: 30px;
+                  width: 30px;
+                }
+              }
+            }
           }
 
         }
