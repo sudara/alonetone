@@ -2,6 +2,7 @@ module Greenfield
   class AttachedAssetsController < Greenfield::ApplicationController
     include ActionView::Helpers::NumberHelper
 
+    before_filter :require_login, :only => :create
     before_filter :extract_waveform, :only => :create
 
     def show
@@ -21,8 +22,15 @@ module Greenfield
     protected
 
     def find_post
-      asset = current_user.assets.find_by!(:permalink => params[:post_id])
-      Greenfield::Post.find_by!(:asset_id => asset.id)
+      @asset ||= Asset.find_by!(:permalink => params[:post_id])
+      @post ||= Greenfield::Post.find_by!(:asset_id => @asset.id)
+    end
+
+    def require_login
+      if find_post.user != current_user
+        flash[:message] = "You'll need to login to do that"
+        super(find_post.user)
+      end
     end
 
     def extract_waveform
