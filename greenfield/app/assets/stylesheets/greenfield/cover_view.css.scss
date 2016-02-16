@@ -27,7 +27,8 @@
         }
       }
       li {
-        display: inline-block;
+        display: block;
+        float: left;
         height: 50px;
         background-color: $not-quite-black;
         &:hover {
