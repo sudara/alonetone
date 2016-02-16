@@ -13,7 +13,8 @@
         margin-bottom: $baseline/2;
         .small-cover {
           width: 60%;
-          margin: 0 auto;
+          margin: 0 auto; 
+          display: block!important;
         }
         h1 {
           text-align: center;
@@ -81,6 +82,7 @@
           width: 100%;
           height: auto;
           margin-left: 0;
+          display: none;
         }
         .playlist-options {
           width: 100%;
