@@ -1,5 +1,13 @@
 /* This is a mobile wetsuit that is put on after the existing desktop styles */
 
+@media only screen and (max-width: 1024px) {
+  .main-table-row {
+    main {
+      padding-top: $baseline;
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .main-table-row {
     main {
