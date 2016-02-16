@@ -127,7 +127,7 @@ soundManager.onready(function() {
 
     sound.paused(function() {
       changeControlActionToPlay(this.id);
-      window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
+      window['ga'] && window.ga('send', 'event', 'stream', 'stop', this.id);
     });
 
     sound.resumed(function() {
