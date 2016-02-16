@@ -10,6 +10,41 @@
     min-height: $baseline * 3;
     margin-bottom: $baseline * 3;
     background-color: white;
+    table {
+      font-size: 12px;
+      thead {
+        tr {
+          th {
+            text-align: center;
+            img {
+              opacity: .4;
+              filter: alpha(opacity=40);
+              width: 50%;
+              height: 50%;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            text-align: center;
+          }
+        }
+        tr:first-child {
+          td {
+            font-weight: bold;
+            line-height: 12px;
+            vertical-align: top;
+          }
+        }
+        tr:last-child {
+          td {
+              color: $gray;
+          }
+        }
+      }
+    }
   }
   
   h1 {
