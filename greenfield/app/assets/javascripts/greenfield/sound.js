@@ -75,10 +75,12 @@ Sound = {
       },
 
       play: function() {
-        if (this.sm.playState)
+        if (this.sm.playState) {
           this.sm.resume();
-        else
+        } else {
+          this.sm.stop();
           this.sm.play();
+        }
 
         this.isPlaying = true;
 
