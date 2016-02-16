@@ -26,7 +26,7 @@
   <% end %>
   </ul>
 
-  <div class="sidebar-downloads" style="<%= 'display:none' if @post %> ">
+  <div class="sidebar-downloads" style="<%= 'display:none' unless @post %> ">
     <%= render partial: 'greenfield/playlists/links' %>
   </div>
 </div>
