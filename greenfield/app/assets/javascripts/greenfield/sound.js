@@ -35,6 +35,7 @@ Sound = {
               sound.loadedActions[i].call(sound);
 
             sound.loadedActions = [];
+            sound.isLoaded = true;
           }
         },
 
