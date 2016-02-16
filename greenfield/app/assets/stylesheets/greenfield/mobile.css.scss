@@ -28,17 +28,18 @@
         ul.tracklist {
           margin-top: $baseline;
         }
-        a.download-link {
-          margin-top: $baseline / 2;
-          a {
-            font-size: 12px;
-            i {
-              margin-right: 8px;
-            }
-          }
-        }
-        .downloads-links {
-          display: none;
+
+        // a.download-link {
+        //   margin-top: $baseline / 2;
+        //   a {
+        //     font-size: 12px;
+        //     i {
+        //       margin-right: 8px;
+        //     }
+        //   }
+        // }
+        .sidebar-downloads {
+          display: block!important;
         }
       }
       .track-content {
@@ -83,6 +84,7 @@
         }
         .playlist-options {
           width: 100%;
+          display: none;
         }
         .post-content {
           font-size: 15px;
