@@ -30,9 +30,10 @@ module Greenfield
     end
 
     def self.render(text)
-      renderer = Redcarpet::Markdown.new(new(:hard_wrap => true),
-                      :autolink => true, :no_intraemphasis => true,
-                      :fenced_code_blocks => true, :tables => true)
+      html_render = new(:hard_wrap => true, link_attributes: { target: '_blank' })
+      renderer = Redcarpet::Markdown.new(html_render,
+                                         :autolink => true, :no_intraemphasis => true,
+                                         :fenced_code_blocks => true, :tables => true)
       Redcarpet::Render::SmartyPants.render(renderer.render(text)).html_safe
     end
 
