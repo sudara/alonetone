@@ -267,7 +267,7 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     ruby-audio (1.6.1)
-    ruby-mp3info (0.7.2)
+    ruby-mp3info (0.8.9)
     s3_direct_upload (0.1.7)
       coffee-rails (>= 3.1)
       jquery-fileupload-rails (~> 0.4.1)
