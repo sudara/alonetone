@@ -374,7 +374,7 @@ DEPENDENCIES
   rspec-mocks
   rspec-rails
   ruby-audio
-  ruby-mp3info (~> 0.7.2)
+  ruby-mp3info
   s3_direct_upload
   sass-rails
   scrypt
