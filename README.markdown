@@ -108,15 +108,17 @@ Thirdly, fork away on github.
 ### Setup alonetone on localhost
 
 
-1) clone
+1) `clone`
 
-2) bundle 
+2) `brew install libsndfile` (required for ruby-audio gem)
+
+2) `bundle `
 
 3) Create needed config, database, and load db/seeds:
 
       rake setup
 			
-4) rails s
+4) `rails s`
 
 
 Note: alonetone uses 3 config files that are created by 'rake setup'
@@ -125,6 +127,10 @@ Note: alonetone uses 3 config files that are created by 'rake setup'
       alonetone.yml (contains the application "secret" and app-specific settings)
       database.yml
       newrelic.yml (for performance tracking)
+
+Note: Issue with event machine 1.0.7? 
+
+`brew link openssl --force`
 
 
 #### Logging in
