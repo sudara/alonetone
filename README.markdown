@@ -128,10 +128,11 @@ Note: alonetone uses 3 config files that are created by 'rake setup'
       database.yml
       newrelic.yml (for performance tracking)
 
-Note: Issue with event machine 1.0.7? 
+Issue with event machine 1.0.7?
 
 `brew link openssl --force`
 
+No sound on development? Set `play_dummy_mp3s: true` in alonetone.yml
 
 #### Logging in
 
