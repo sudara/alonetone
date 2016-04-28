@@ -57,6 +57,7 @@ gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
 gem 'newrelic_rpm'
+gem 'scout_apm'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for sidekiq web ui
 
