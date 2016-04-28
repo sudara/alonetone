@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.public_or_private(display_private_comments?).includes(:comments => {:commenter => :pic, :commentable => {:user => :pic}}).page(params[:page])
+      @comments = @user.comments.public_or_private(display_private_comments?).includes(:commenter => :pic, :commentable => {:user => :pic}).page(params[:page])
       set_comments_made
     else
       @page_title = "Recent Comments"
