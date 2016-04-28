@@ -14,6 +14,7 @@ config/deploy.rb
 config/deploy/*
 config/alonetone.yml
 config/skylight.yml
+config/scout_apm.yml
 config/config.yml
 config/database.yml
 config/defensio.yml
