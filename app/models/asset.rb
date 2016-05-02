@@ -73,8 +73,8 @@ class Asset < ActiveRecord::Base
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
-    clean = mp3_file_name.split('.')[-2].gsub(/-|_/,' ').strip.titleize
-    clean.present? ? clean : 'untitled'
+    clean = mp3_file_name.split('.')[-2].try(:gsub, /-|_/, ' ')
+    clean.present? ? clean.strip.titleize : 'untitled'
   end
   
   def first_playlist
