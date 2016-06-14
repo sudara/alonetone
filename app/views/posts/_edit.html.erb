@@ -1,8 +1,6 @@
 <div id="edit" class="editbox">
     <div class="static_content">
-      <%= form_for [@forum,@topic,@post],
-        :html => { :method => :put, :id => 'edit-form' } do |f| -%>
-
+      <%= form_for [@forum,@topic,@post], html: { id: "edit-form" } do |f| -%>
             <%= f.text_area :body, :rows => 10, :id => "edit_post_body", :tabindex => 1 %>
 
             <%= link_to('delete post', forum_topic_post_path(@post.forum, @post.topic, @post, :page => current_page), 

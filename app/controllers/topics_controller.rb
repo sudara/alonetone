@@ -34,6 +34,12 @@ class TopicsController < ApplicationController
   end
 
   def create
+    unless current_user.can_post?
+      @topic = Topic.new(params[:topic])
+      flash[:error] = "Sorry, we couldn't do that right now. Please try again in a bit."
+      return render "new"
+    end
+
     @topic = current_user.post @forum, params[:topic], request
     if @topic.new_record?
       render :action => "new" 

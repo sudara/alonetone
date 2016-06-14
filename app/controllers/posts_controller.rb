@@ -63,6 +63,14 @@ class PostsController < ApplicationController
   end
 
   def create
+    unless current_user.can_post?
+      @post = Post.new(params[:post])
+      @post.forum = @forum
+      @post.topic = @topic
+      flash[:error] = "Sorry, we couldn't do that right now. Please try again in a bit."
+      return render "new"
+    end
+
     @post = current_user.reply @topic, params[:post][:body], request
     if @post.new_record?
       render :action => "new"

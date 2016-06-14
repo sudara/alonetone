@@ -36,6 +36,10 @@ class User
     end
     record
   end
+
+  def can_post?
+    (Time.now - created_at) >= 1.hour
+  end
   
   def self.prefetch_from(records)
     select('distinct *').where(['id in (?)', records.pluck(:user_id).uniq])
