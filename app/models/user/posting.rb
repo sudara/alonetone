@@ -49,14 +49,14 @@ class User
     prefetch_from(records).index_by(&:id)
   end
 
-protected
+  protected
+
   def revise_topic(topic, attributes)
     if attributes[:forum_id]
       topic.forum_id = attributes[:forum_id]
     end
       
-    topic.title = attributes[:title] \
-    if attributes[:title]
+    topic.title = attributes[:title] if attributes[:title]
     
     if moderator?
       topic.sticky = attributes[:sticky]
