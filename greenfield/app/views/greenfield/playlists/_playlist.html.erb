@@ -26,9 +26,8 @@
   <% end %>
   </ul>
 
-  <div class="sidebar-downloads" 
-    style="<%= 'display:none' unless @post or !@playlist.has_details? %>
-    <%= 'anchor-at-bottom' if @playlist.tracks.count < 11 %> ">
+  <div class="sidebar-downloads <%= 'anchor-at-bottom' if @playlist.tracks.count < 11 %>" 
+    style="<%= 'display:none' unless @post or !@playlist.has_details? %>">
     <%= render partial: 'greenfield/playlists/links' %>
   </div>
 </div>
