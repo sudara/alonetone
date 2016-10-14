@@ -114,9 +114,10 @@
     }
   }
   .sidebar-downloads {
-    position:absolute;
-    bottom:0;
-    width:270px;
+    &.anchor-at-bottom{
+      position:absolute;
+      bottom:0;
+    }
     margin-top: $baseline;
     ul.downloads-links,
     ul.external-links, {
