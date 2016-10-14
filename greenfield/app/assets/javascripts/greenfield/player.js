@@ -218,7 +218,7 @@ $('body').on('click', '[data-sound-id] .pause-button', function(e) {
 });
 
 $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
-  var hasDetails = $('.track-content').hasClass('has-details');
+  var hasDetails = $('body').hasClass('has-details');
   if(hasDetails){
     toggleCover(e.target.href);
     $('.track-content').replaceWith($(data).find('.track-content'));

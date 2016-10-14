@@ -1,4 +1,6 @@
 .playlist {
+  min-height:650px;
+  position:relative;
   background-color: white;
   .small-cover {
     display: block;
@@ -112,6 +114,9 @@
     }
   }
   .sidebar-downloads {
+    position:absolute;
+    bottom:0;
+    width:270px;
     margin-top: $baseline;
     ul.downloads-links,
     ul.external-links, {
