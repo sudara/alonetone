@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem "rails", "4.2.6"
+gem "rails", "4.2.7"
 
-gem "mysql2"
+gem "mysql2", "~> 0.3.20" # Rails is not happy on 4.x yet
 
 # greenfield
 gem 'greenfield', path: "greenfield"
