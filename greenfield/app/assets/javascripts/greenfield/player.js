@@ -20,6 +20,18 @@ function waveformData(csv) {
   return data;
 }
 
+function toggleCover(href){
+  var cover = $('.playlist a.small-cover');
+  var sidebarDownloads = $('.sidebar-downloads')
+  if (cover[0].href == href){
+    cover.hide();
+    sidebarDownloads.hide();
+  }else{
+    cover.show();
+    sidebarDownloads.show();
+  }
+}
+
 function showWaveform() {
   $('.waveform').each(function() {
     var container = $(this);
@@ -206,17 +218,12 @@ $('body').on('click', '[data-sound-id] .pause-button', function(e) {
 });
 
 $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
-  var cover = $('.playlist a.small-cover');
-  var sidebarDownloads = $('.sidebar-downloads')
-  if (cover[0].href == e.target.href){
-    cover.hide();
-    sidebarDownloads.hide();
-  }else{
-    cover.show();
-    sidebarDownloads.show();
+  var hasDetails = $('.track-content').hasClass('has-details');
+  if(hasDetails){
+    toggleCover(e.target.href);
+    $('.track-content').replaceWith($(data).find('.track-content'));
+    showWaveform();
   }
-  $('.track-content').replaceWith($(data).find('.track-content'));
-  showWaveform();
 
   $('.playlist .tracklist li').removeClass('active');
   $(e.target).parent('li').addClass('active');
@@ -227,7 +234,7 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
       soundManager.onready(function() { Sound.load(url).load() });
   });
 
-  if (window.history.pushState && e.target.href != document.location.href)
+  if (hasDetails && window.history.pushState && e.target.href != document.location.href)
     window.history.pushState(null, '', e.target.href);
 });
 

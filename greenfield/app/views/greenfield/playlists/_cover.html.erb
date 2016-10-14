@@ -1,10 +1,12 @@
-<div class="track-content">
+<div class="track-content <%= "has-details" if @playlist.has_details? %> ">
   <div class="large-cover">
     <%= image_tag @playlist.cover(:greenfield) %>
   </div>
-  <div class="playlist-options">
-    <%= render partial: 'greenfield/playlists/links' %>
-  </div>
+  <% if @playlist.has_details? %>
+    <div class="playlist-options">
+      <%= render partial: 'greenfield/playlists/links' %>
+    </div>
+  <% end %>
   <div class="playlist-credits">
     <%= markdown(@playlist.credits) %>
   </div>
