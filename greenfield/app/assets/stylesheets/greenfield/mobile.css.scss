@@ -40,6 +40,10 @@
           margin-top: $baseline;
         }
         .sidebar-downloads {
+          &.anchor-at-bottom{
+            position:static;
+            width:100%;
+          }
           display: block!important;
         }
       }
