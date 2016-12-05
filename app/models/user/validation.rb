@@ -34,9 +34,4 @@ class User
   def self.find_by_login_or_email(login)
     User.find_by_login(login) || User.find_by_email(login)
   end
-
-  def enable_plus
-    self[:plus_enabled] = true
-    self.save
-  end
 end
