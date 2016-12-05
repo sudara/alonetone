@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   
-  before_filter :find_user, :except => [:index, :create, :spam, :unspam, :destroy]
-  before_filter :find_comment, :only => [:destroy, :unspam, :spam]
-  before_filter :require_login, :only => [:destroy, :unspam]
+  before_action :find_user, :except => [:index, :create, :spam, :unspam, :destroy]
+  before_action :find_comment, :only => [:destroy, :unspam, :spam]
+  before_action :require_login, :only => [:destroy, :unspam]
   
   def create
     if request.xhr? # it always is...
@@ -57,6 +57,11 @@ class CommentsController < ApplicationController
   
   protected
   
+  def comment_params
+    params.require(:comment).permit(:body, :remote_ip, :commentable_type, :commentable_id, :private, 
+    :commenter_id, :user_agent, :referrer, :commenter, :user_id, :commentable)
+  end
+  
   def find_comment
     @comment = Comment.where(:id => params[:id]).first    
   end
@@ -74,7 +79,7 @@ class CommentsController < ApplicationController
   end
   
   def massaged_params
-    params[:comment].merge({
+    comment_params.merge({
       :commenter          => find_commenter,
       :remote_ip          => request.remote_ip,
       :user_agent         => request.env['HTTP_USER_AGENT'], 

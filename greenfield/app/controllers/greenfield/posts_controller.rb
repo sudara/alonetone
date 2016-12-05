@@ -2,7 +2,7 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     include Listens
 
-    before_filter :require_login, :only => [:edit, :update]
+    before_action :require_login, :only => [:edit, :update]
 
     def show
       @post = find_post

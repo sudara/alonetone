@@ -8,6 +8,6 @@ module GreenfieldPlaylistDownloads
       attachment_content_type: params[:filetype],
       attachment_updated_at: params[:lastModifiedDate],
       title: params[:filename]
-    }, without_protection: true)
+    })
   end
 end

@@ -30,8 +30,6 @@ class Asset < ActiveRecord::Base
   after_create :notify_followers, if: :published?
   
   validates_presence_of :user_id
-  attr_accessible :user, :mp3, :size, :name, :user_id, :title, :description, 
-    :youtube_embed, :credits
 
   # override has_permalink method to ensure we don't get empty permas
   def generate_permalink!

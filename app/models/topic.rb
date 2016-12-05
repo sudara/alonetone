@@ -34,7 +34,6 @@ class Topic < ActiveRecord::Base
   validates_presence_of :body, :on => :create
 
   attr_accessor :body
-  attr_accessible :title, :body, :sticky, :locked
   attr_readonly :posts_count, :hits
   
   has_permalink :title, true

@@ -1,12 +1,12 @@
 class AssetsController < ApplicationController  
   include Listens
 
-  before_filter :find_user, :except => [:radio, :latest]
-  before_filter :find_asset, :only => [:edit, :update, :destroy, :stats]
-  before_filter :find_published_asset, :only => [:show, :stats]
+  before_action :find_user, :except => [:radio, :latest]
+  before_action :find_asset, :only => [:edit, :update, :destroy, :stats]
+  before_action :find_published_asset, :only => [:show, :stats]
 
   # we check to see if the current_user is authorized based on the asset.user
-  before_filter :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
+  before_action :require_login, :except => [:index, :show, :latest, :radio, :listen_feed]
 
   # home page
   def latest
@@ -147,7 +147,7 @@ class AssetsController < ApplicationController
   # PUT /assets/1
   # PUT /assets/1.xml
   def update
-    result =  @asset.update_attributes(params[:asset])
+    result =  @asset.update_attributes(asset_params)
     @asset.publish! if params[:commit] == 'Publish'
 
     if request.xhr?
@@ -187,6 +187,11 @@ class AssetsController < ApplicationController
   end
   
   protected
+  
+  def asset_params
+    params.require(:asset).permit(:user, :mp3, :size, :name, :user_id, 
+    :title, :description, :youtube_embed, :credits)
+  end
     
   def track_not_found
     flash[:error] = "Hmm, we didn't find that track!"
@@ -202,8 +207,7 @@ class AssetsController < ApplicationController
     attrs = { private: !!(params[:commit] =~ /don't publish/) }
     Array(params[:asset_data]).each do |file|
       unless file.is_a?(String)
-        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file),
-                                                      without_protection: true)
+        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
         if !asset.new_record? && current_user.greenfield_enabled?
           Greenfield::WaveformExtractJob.perform_later(asset.id)
         end

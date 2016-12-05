@@ -26,9 +26,6 @@ class Comment < ActiveRecord::Base
   
   before_create :disallow_dupes, :set_spam_status, :set_user
   after_create :deliver_comment_notification, :increment_counters
-  
-  attr_accessible :body, :remote_ip, :commentable_type, :commentable_id, :private, 
-    :commenter_id, :user_agent, :referrer, :commenter, :user_id, :commentable
 
   before_save :truncate_user_agent
 

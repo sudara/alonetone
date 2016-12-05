@@ -1,6 +1,5 @@
 class Asset
   serialize :waveform, Array
-  attr_accessible :waveform
 
   has_one :greenfield_post, :class_name => '::Greenfield::Post'
 

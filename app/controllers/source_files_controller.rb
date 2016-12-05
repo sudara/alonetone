@@ -1,6 +1,6 @@
 class SourceFilesController < ApplicationController
-  before_filter :require_login, :except => [:show]
-  before_filter :find_user, :only => [:show, :index, :destroy]
+  before_action :require_login, :except => [:show]
+  before_action :find_user, :only => [:show, :index, :destroy]
 
   def index
     @source_files = @user.source_files

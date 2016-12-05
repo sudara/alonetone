@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_filter :find_parents
-  before_filter :find_post, :only => [:edit, :update, :destroy, :spam, :unspam]
-  before_filter :require_login, :only => :create
+  before_action :find_parents
+  before_action :find_post, :only => [:edit, :update, :destroy, :spam, :unspam]
+  before_action :require_login, :only => :create
   layout "forums"
   include ActionView::RecordIdentifier
 
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
 
   def create
     unless current_user.can_post?
-      @post = Post.new(params[:post])
+      @post = Post.new(post_params)
       @post.forum = @forum
       @post.topic = @topic
       flash[:error] = "Sorry, we couldn't do that right now. Please try again in a bit."
@@ -81,7 +81,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       flash[:notice] = 'Post was successfully updated.'
       redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post))) 
     else
@@ -94,7 +94,12 @@ class PostsController < ApplicationController
     redirect_to(forum_topic_path(@forum, @topic))
   end
 
-protected
+  protected
+
+  def post_params
+    params.require(:post).permit(:body)
+  end 
+
   def find_parents
     if params[:user_id]
       @parent = @user = User.where(:login => params[:user_id]).first

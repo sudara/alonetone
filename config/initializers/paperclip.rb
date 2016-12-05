@@ -7,6 +7,7 @@ Paperclip::Attachment.default_options.merge!({
     :access_key_id => Alonetone.amazon_id,
     :secret_access_key => Alonetone.amazon_key
   },
+  :s3_region => 'us_east',
   :bucket => Alonetone.bucket,
   :s3_protocol => 'http',
   :s3_host_alias => Alonetone.bucket,

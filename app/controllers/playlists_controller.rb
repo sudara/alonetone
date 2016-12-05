@@ -1,10 +1,10 @@
 class PlaylistsController < ApplicationController
   include GreenfieldPlaylistDownloads
 
-  before_filter :find_user, :except => :all
-  before_filter :find_playlists, :except => [:index, :new, :create, :sort, :all]
-  before_filter :require_login, :except => [:index, :show, :all]
-  before_filter :find_tracks, :only => [:show, :edit, :all]
+  before_action :find_user, :except => :all
+  before_action :find_playlists, :except => [:index, :new, :create, :sort, :all]
+  before_action :require_login, :except => [:index, :show, :all]
+  before_action :find_tracks, :only => [:show, :edit, :all]
 
   def all
     @playlists = Playlist.recent.only_public.with_pic.
@@ -125,6 +125,10 @@ class PlaylistsController < ApplicationController
   end
 
   protected
+  
+  def playlist_params
+    params.require(:playlist).permit(user_id, :is_favorite, :year, :title, :description, :private, :position)
+  end
 
   def render_desired_partial
     render :partial => 'your_stuff.html.erb'     if params[:uploads_page]

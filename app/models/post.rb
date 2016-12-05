@@ -20,7 +20,6 @@ class Post < ActiveRecord::Base
   before_create :set_spam_status
   after_create  :update_cached_fields
   after_destroy :update_cached_fields
-  attr_accessible :body
   
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { author_name },

@@ -1,21 +1,18 @@
 source "https://rubygems.org"
 
-gem "rails", "4.2.7"
+gem "rails", "~> 5.0"
 
 gem "mysql2", "~> 0.3.20" # Rails is not happy on 4.x yet
 
 # greenfield
 gem 'greenfield', path: "greenfield"
 
-# temporary
-gem "protected_attributes", '~> 1.0.6'
-
 # ruby
 gem "sometimes"
 gem "awesome_print", :require => 'ap'
 
 # uploading
-gem "aws-sdk", '< 2.0'
+gem "aws-sdk"
 gem "paperclip"
 gem "ruby-mp3info", :require => 'mp3info'
 gem "mime-types"
@@ -40,6 +37,9 @@ gem 'simple_form'
 gem 'local_time'
 gem 'gemoji'
 
+# temporary for rails 5 update
+gem 'record_tag_helper'
+
 # external services
 gem 'rakismet'
 gem "geokit"
@@ -59,7 +59,9 @@ gem "soundmanager2-rails"
 gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'sidekiq'
-gem 'sinatra', :require => nil # for sidekiq web ui
+
+gem 'sinatra', '~> 2.0.0.beta2', require: false
+gem 'sinatra-contrib', '~> 2.0.0.beta2', require: false
 
 group :production do
   gem "puma"
@@ -67,10 +69,8 @@ group :production do
 end
 
 group :development do
-  gem 'quiet_assets'
   gem 'thin'
   gem 'sqlite3'
-  gem 'spring'
   gem 'rack-mini-profiler'
   gem 'perf_check'
   # gem 'logical-insight'

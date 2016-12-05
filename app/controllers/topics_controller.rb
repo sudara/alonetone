@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
-  before_filter :find_forum
-  before_filter :find_topic, :only => [:show, :edit, :update, :destroy]
-  before_filter :require_login, :only => [:create, :update]
+  before_action :find_forum
+  before_action :find_topic, :only => [:show, :edit, :update, :destroy]
+  before_action :require_login, :only => [:create, :update]
   layout "forums"
 
   def index
@@ -67,7 +67,11 @@ class TopicsController < ApplicationController
     end
   end
 
-protected
+  private
+ 
+  def topics_params
+    params.require(:topic).permit(:title, :body, :sticky, :locked)
+  end
 
   def set_session_topics
     if @topic

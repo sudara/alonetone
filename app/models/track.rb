@@ -23,7 +23,6 @@ class Track < ActiveRecord::Base
   delegate :length, :name, :to => :asset
   acts_as_list :scope => :playlist_id, :order => :position
 
-  attr_accessible :asset_id, :is_favorite, :asset, :position
   before_validation :ensure_playlist_if_favorite
   validates_presence_of :asset_id, :playlist_id
     

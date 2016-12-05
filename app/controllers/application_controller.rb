@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
     
-  before_filter :set_tab, :is_sudo
-  before_filter :display_news
-  before_filter :set_latest_update_title
+  before_action :set_tab, :is_sudo
+  before_action :display_news
+  before_action :set_latest_update_title
   
   # let ActionView have a taste of our authentication
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?, :user_setting
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
   
-  before_filter :store_location, :only => [:index, :show]
+  before_action :store_location, :only => [:index, :show]
   
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i

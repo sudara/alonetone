@@ -71,10 +71,6 @@ class User < ActiveRecord::Base
 
   # musicians who this person follows
   has_many :followees, :through => :follows, :source => :user
-
-  # The following attributes can be changed via mass assignment 
-  attr_accessible :login, :name, :email, :password, :password_confirmation, :website, :myspace,
-                  :bio, :display_name, :itunes, :settings, :city, :country, :twitter
   
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)

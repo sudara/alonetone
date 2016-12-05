@@ -1,10 +1,7 @@
 module Greenfield
   class Post < ActiveRecord::Base
-    attr_accessible :body
-
     belongs_to :asset # alonetone asset
     accepts_nested_attributes_for :asset
-    attr_accessible :asset_attributes
 
     has_one :user, :through => :asset
     delegate :to_param, :title, :to => :asset
@@ -13,7 +10,6 @@ module Greenfield
     
     accepts_nested_attributes_for :asset # need to update title in greenfield
     accepts_nested_attributes_for :attached_assets
-    attr_accessible :attached_assets_attributes
 
     validates_presence_of :asset
     validate do |post|

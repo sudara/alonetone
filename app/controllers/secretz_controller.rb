@@ -1,5 +1,5 @@
 class SecretzController < ApplicationController
-  before_filter :require_login
+  before_action :require_login
   
   def index
     @ip_listens = Listen.most_active_ips

@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_filter :deliver_results
+  before_action :deliver_results
   
   def index
     respond_to do |wants| 

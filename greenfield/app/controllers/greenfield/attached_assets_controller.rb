@@ -2,8 +2,8 @@ module Greenfield
   class AttachedAssetsController < Greenfield::ApplicationController
     include ActionView::Helpers::NumberHelper
 
-    before_filter :require_login, :only => :create
-    before_filter :extract_waveform, :only => :create
+    before_action :require_login, :only => :create
+    before_action :extract_waveform, :only => :create
 
     def show
       asset = find_post.attached_assets.find(params[:id])

@@ -31,5 +31,4 @@ class Pic < ActiveRecord::Base
     end
   end
       
-  attr_accessible :pic, :picable_type, :picable_id
 end

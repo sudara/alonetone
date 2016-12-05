@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   
-  before_filter :ip_is_acceptable?, :only => :create
-  before_filter :find_user, :except => [:new, :create, :index, :activate, :sudo, :toggle_favorite]
-  before_filter :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
+  before_action :ip_is_acceptable?, :only => :create
+  before_action :find_user, :except => [:new, :create, :index, :activate, :sudo, :toggle_favorite]
+  before_action :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
   
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def create    
     passed_recaptcha?
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.valid? and passed_recaptcha? and @user.save_without_session_maintenance
       session[:recaptcha] = false # make sure they have to recaptcha for new user
       @user.reset_perishable_token!
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
   
   
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), :ok => "Sweet, updated" 
     else
@@ -129,7 +129,12 @@ class UsersController < ApplicationController
     end
   end
 
-  protected
+  private
+  
+  def user_params
+    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, 
+      :website, :myspace, :bio, :display_name, :itunes, :settings, :city, :country, :twitter)
+  end
   
   def ip_is_acceptable?
     !is_from_a_bad_ip?

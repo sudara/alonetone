@@ -17,11 +17,8 @@ module Greenfield
     end
 
     has_attached_file :mp3, attachment_options
-    attr_accessible :mp3
 
     serialize :waveform, Array
-    attr_accessible :waveform
-
 
     validates_attachment_size :mp3, :less_than => 60.megabytes
     validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'

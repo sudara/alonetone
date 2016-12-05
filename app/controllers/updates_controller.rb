@@ -1,7 +1,7 @@
 # Yup, this is the blog controller 
 class UpdatesController < ApplicationController
-  before_filter :require_login, :except => [:index, :show]
-  before_filter :gather_sidebar_fun, :except => [:destroy, :update]
+  before_action :require_login, :except => [:index, :show]
+  before_action :gather_sidebar_fun, :except => [:destroy, :update]
     
   # GET /updates
   # GET /updates.xml

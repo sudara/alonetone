@@ -1,8 +1,8 @@
 class ForumsController < ApplicationController
   
-  before_filter :require_login, :except => [:index, :show]
-  before_filter :find_forum, :only => [:show, :edit, :update, :destroy]
-  before_filter :set_forum_tab, :set_html_meta
+  before_action :require_login, :except => [:index, :show]
+  before_action :find_forum, :only => [:show, :edit, :update, :destroy]
+  before_action :set_forum_tab, :set_html_meta
   layout 'forums'
 
   def index

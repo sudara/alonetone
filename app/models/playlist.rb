@@ -26,9 +26,7 @@ class Playlist < ActiveRecord::Base
   validates_length_of   :title, :within => 4..100
   validates_length_of   :year, :within => 2..4, :allow_blank => true
   validates_length_of   :description, :within => 1..2000, :allow_blank => true
-    
-  attr_accessible :user_id, :is_favorite, :year, :title, :description, :private, :position
-  
+      
   has_permalink :title
   before_validation  :name_favorites_and_set_permalink, :on => :create
   before_update :set_mix_or_album

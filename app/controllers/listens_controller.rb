@@ -1,7 +1,7 @@
 class ListensController < ApplicationController
   
-  before_filter :find_user
-  before_filter :find_listen_history
+  before_action :find_user
+  before_action :find_listen_history
   
   def index
     

@@ -1,7 +1,7 @@
 class FeaturesController < ApplicationController
   
-  before_filter :require_login,  :only => [:new, :create, :edit, :update, :delete]
-  before_filter :find_feature,    :only => [:update, :delete, :edit]
+  before_action :require_login,  :only => [:new, :create, :edit, :update, :delete]
+  before_action :find_feature,    :only => [:update, :delete, :edit]
 
   def index
     @features = admin? ? Feature.all: Feature.published

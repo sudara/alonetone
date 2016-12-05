@@ -2,7 +2,7 @@ module Greenfield
   class PlaylistDownloadsController < Greenfield::ApplicationController
     include Listens
 
-    before_filter :prevent_abuse
+    before_action :prevent_abuse
 
     def serve
       alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
