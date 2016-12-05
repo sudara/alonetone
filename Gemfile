@@ -92,6 +92,7 @@ group :test do
   gem 'guard_listen', :github => 'sudara/listen', :require => 'guard_listen'
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
   gem "factory_girl_rails",:require => false
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
