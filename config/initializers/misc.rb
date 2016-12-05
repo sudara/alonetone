@@ -8,8 +8,8 @@ RECAPTCHA_ENABLED = Alonetone.try(:recaptcha_public)
   
 if RECAPTCHA_ENABLED
   Recaptcha.configure do |config|
-    config.public_key  = Alonetone.recaptcha_public
-    config.private_key = Alonetone.recaptcha_private
+    config.site_key  = Alonetone.recaptcha_public
+    config.secret_key = Alonetone.recaptcha_private
   end
 end
 
