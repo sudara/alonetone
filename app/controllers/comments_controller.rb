@@ -7,13 +7,13 @@ class CommentsController < ApplicationController
   def create
     if request.xhr? # it always is...
       unless params[:comment] && params[:comment][:body].present?
-        return head(:bad_request) 
+        head(:bad_request) 
       end
       @comment = Comment.new(massaged_params)
-      return head(:bad_request) unless @comment.save
-      render :nothing => true
+      head(:bad_request) unless @comment.save
+      head :created, location: @comment
     else
-      render :nothing => true, :status => :bad_request
+      head(:bad_request)
     end
   end  
 

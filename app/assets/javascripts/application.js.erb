@@ -15,6 +15,7 @@
 //= require g.raphael.min
 //= require g.line.min
 //= require upload
+//= require turbolinks
 
 var soundIsReady = true;
 
@@ -184,22 +185,6 @@ jQuery.timer = function (interval, callback)
 };
 
 jQuery.easing.def = "jswing"
-
-// png fix if ie
-// $(function(){$(document).pngFix();});
-
-
-// front page carousel
-$(function() {
-    $(".playlists_carousel").jCarouselLite({
-        btnNext: ".next",
-        btnPrev: ".prev",
-        visible: 4,
-        scroll: 4,
-        circular: false
-    });
-});
-
 
 SortablePlaylist = $.klass({
   initialize : function(){
@@ -895,8 +880,15 @@ Radio = $.klass({
   }
 });
 
+document.addEventListener("turbolinks:load", function() {
+  $(".playlists_carousel").jCarouselLite({
+      btnNext: ".next",
+      btnPrev: ".prev",
+      visible: 4,
+      scroll: 4,
+      circular: false
+  });
 
-jQuery(function($) {
   // let us cache forms, make sure that auth tokens are replaced
   $('input[name=authenticity_token]').val($('meta[name=csrf-token]').attr('content'))
   

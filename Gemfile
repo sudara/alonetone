@@ -56,9 +56,12 @@ gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
+gem 'turbolinks', '~> 5.0.0'
+
 gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'sidekiq'
+
 
 gem 'sinatra', '~> 2.0.0.beta2', require: false
 gem 'sinatra-contrib', '~> 2.0.0.beta2', require: false
