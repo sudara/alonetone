@@ -63,7 +63,7 @@ module Greenfield
     def require_login
       if find_asset.user != current_user
         flash[:message] = "You'll need to login to do that"
-        super(find_post.user)
+        redirect_to '/login'
       end
     end
   end
