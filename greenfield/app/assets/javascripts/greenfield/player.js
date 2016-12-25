@@ -1,10 +1,6 @@
 //= require greenfield/sound
 //= require greenfield/waveform
 
-function hasDetailViews(){
-  $('body').hasClass('has-details');
-}
-
 function attr(val) {
   return val.replace(/\//g, '\\/').replace(/@/g, '\\@');
 }
@@ -222,14 +218,11 @@ $('body').on('click', '[data-sound-id] .pause-button', function(e) {
 });
 
 $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
-  if(hasDetailViews()){
-    // add the track details if presentt
+  var hasDetails = $('body').hasClass('has-details');
+  if(hasDetails){
     toggleCover(e.target.href);
     $('.track-content').replaceWith($(data).find('.track-content'));
     showWaveform();
-  }else{
-    // otherwise, if we just have a cover view, toggle play
-    $("a", this).first().trigger('click');
   }
 
   $('.playlist .tracklist li').removeClass('active');
@@ -241,7 +234,7 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
       soundManager.onready(function() { Sound.load(url).load() });
   });
 
-  if (hasDetailViews() && window.history.pushState && e.target.href != document.location.href)
+  if (hasDetails && window.history.pushState && e.target.href != document.location.href)
     window.history.pushState(null, '', e.target.href);
 });
 
