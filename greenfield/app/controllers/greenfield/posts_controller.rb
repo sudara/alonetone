@@ -2,7 +2,7 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     include Listens
 
-    before_filter :require_login, :only => [:edit, :update]
+    before_action :require_login, :only => [:edit, :update]
 
     def show
       @post = find_post
@@ -63,7 +63,7 @@ module Greenfield
     def require_login
       if find_asset.user != current_user
         flash[:message] = "You'll need to login to do that"
-        redirect_to '/login'
+        super(find_asset.user)
       end
     end
   end
