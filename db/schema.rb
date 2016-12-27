@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014210316) do
+ActiveRecord::Schema.define(version: 20161227061031) do
+
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "assets", force: :cascade do |t|
     t.string   "mp3_content_type", limit: 255
@@ -239,6 +245,7 @@ ActiveRecord::Schema.define(version: 20161014210316) do
     t.string   "link3",        limit: 255
     t.text     "credits",      limit: 65535
     t.boolean  "has_details",                default: false
+    t.string   "theme",        limit: 255
   end
 
   add_index "playlists", ["permalink"], name: "index_playlists_on_permalink", using: :btree
@@ -274,16 +281,6 @@ ActiveRecord::Schema.define(version: 20161014210316) do
 
   add_index "reportable_cache", ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true, using: :btree
   add_index "reportable_cache", ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation", using: :btree
-
-  create_table "source_files", force: :cascade do |t|
-    t.string   "content_type",    limit: 255
-    t.string   "filename",        limit: 255
-    t.integer  "size",            limit: 8
-    t.integer  "user_id",         limit: 4
-    t.integer  "downloads_count", limit: 4,   default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "topics", force: :cascade do |t|
     t.integer  "forum_id",        limit: 4
@@ -377,7 +374,6 @@ ActiveRecord::Schema.define(version: 20161014210316) do
     t.text     "extended_bio",        limit: 65535
     t.string   "myspace",             limit: 255
     t.text     "settings",            limit: 65535
-    t.boolean  "plus_enabled",                      default: false
     t.float    "lat",                 limit: 24
     t.float    "lng",                 limit: 24
     t.text     "bio_html",            limit: 65535
