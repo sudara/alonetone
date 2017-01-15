@@ -11,9 +11,5 @@ stdout_redirect 'log/puma.log', 'log/puma.log', true
 bind 'unix://tmp/puma.sock'
 state_path 'tmp/puma.state'
 
-#  # Currently handled by database_connection.rb
-#  on_worker_boot do
-#    ActiveSupport.on_load(:active_record) do
-#      ActiveRecord::Base.establish_connection
-#    end
-#  end
+# Allow puma to be restarted by `rails restart` command.
+plugin :tmp_restart
