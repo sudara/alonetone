@@ -21,7 +21,7 @@
     <%= csrf_meta_tag %>
   </head>
 
-  <body class="<%= "has-details" if @playlist.has_details? %>">
+  <body class="<%= "has-details" if @playlist.try(:has_details?)%> <%= @playlist.try(:theme) %>">
     <div class="main-table-row">
       <main>
         <%= yield %>
