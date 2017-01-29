@@ -7,7 +7,7 @@ module Greenfield
 
     def show
       asset = find_post.attached_assets.find(params[:id])
-      redirect_to asset.mp3.expiring_url.gsub('s3.amazonaws.com/','')
+      redirect_to asset.mp3.expiring_url
     end
 
     def create

@@ -22,7 +22,7 @@ module Listens
       if Alonetone.try(:play_dummy_mp3s)
         play_local_mp3
       else
-        redirect_to asset.mp3.expiring_url.gsub('s3.amazonaws.com/','')
+        redirect_to asset.mp3.expiring_url
       end
     end
   end

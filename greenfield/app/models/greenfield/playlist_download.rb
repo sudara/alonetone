@@ -23,7 +23,7 @@ module Greenfield
     after_validation :destroy_s3_object_if_invalid, on: :create
 
     def url
-      attachment.expiring_url.gsub('s3.amazonaws.com/','')
+      attachment.expiring_url
     end
 
     protected
