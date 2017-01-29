@@ -10,7 +10,7 @@ RSpec.describe PostsController, 'basics', type: :controller do
   #end
 
   def create_post
-    post :create, :forum_id => 'testforum', :topic_id => 'firsttopic', :post => {:body => 'howdy'}
+    post :create, :params => {:forum_id => 'testforum', :topic_id => 'firsttopic', :post => {:body => 'howdy'}}
   end
 
   it "should not allow a post from a guest user" do

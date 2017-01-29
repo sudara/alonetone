@@ -86,7 +86,7 @@ class Playlist < ActiveRecord::Base
   def set_mix_or_album
     # is this a favorites playlist?
     is_mix = true if is_favorite?
-    is_mix = true if tracks.present? && tracks.count > tracks.count(:all, :conditions => ['user_id != ?',user.id])
+    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?',user.id).count
     true
   end
   

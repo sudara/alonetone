@@ -9,7 +9,7 @@ class User
   #  - changes forum_id if you're an admin
   #
   def post(forum, attributes, request)
-    new_topic = Topic.new(attributes) do |topic|
+    new_topic = Topic.new(attributes.permit(:body)) do |topic|
       topic.forum = forum
       topic.user  = self
       revise_topic(topic, attributes)

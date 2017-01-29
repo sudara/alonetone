@@ -26,6 +26,12 @@ GIT
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
 
+GIT
+  remote: git://github.com/travisjeffery/timecop.git
+  revision: b0a84cd674a380fb76285320b6d73088fc87f5df
+  specs:
+    timecop (0.8.0)
+
 PATH
   remote: greenfield
   specs:
@@ -342,7 +348,6 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.6)
-    timecop (0.8.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -418,7 +423,7 @@ DEPENDENCIES
   soundmanager2-rails
   sqlite3
   thin
-  timecop
+  timecop!
   turbolinks (~> 5.0.0)
   uglifier
   will_paginate

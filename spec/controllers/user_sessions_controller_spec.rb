@@ -63,7 +63,7 @@ RSpec.describe UserSessionsController, type: :controller do
       login(:arthur)
       expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
       expect(users(:arthur).current_login_ip).to eq('10.1.1.1')
-      expect(users(:arthur).last_request_at).to eq(Time.now)
+      expect(users(:arthur).last_request_at).to be_within(1.second).of(DateTime.now)
     end
   end
 
