@@ -12,8 +12,6 @@ module Alonetone
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.exceptions_app = self.routes
-        
-    config.active_record.raise_in_transactional_callbacks = true
     
     config.assets.paths.concat(
       Compass::Frameworks::ALL.map { |f| f.stylesheets_directory }

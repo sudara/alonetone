@@ -50,7 +50,7 @@ class UpdatesController < ApplicationController
 
   def update
     @update = Update.find_by_permalink(params[:id])
-    if @update.update_attributes(params[:update])
+    if @update.update_attributes(params.permit(:title, :content))
       flash[:notice] = 'Blog entry updated.'
       redirect_to blog_path 
     else

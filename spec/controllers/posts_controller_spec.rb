@@ -5,7 +5,7 @@ RSpec.describe PostsController, 'basics', type: :controller do
   spec_tagging
 
   #it "should show a topic" do
-  #  get :show, :id => 1, :forum_id => 'testforum'
+  #  get :show, :params => {:id => 1, :forum_id => 'testforum'}
   #  response.should be_success
   #end
 
@@ -33,14 +33,14 @@ RSpec.describe PostsController, 'basics', type: :controller do
  # end
  #
  # it "should not let a not-logged in user update their playlist" do
- #   put :update, :id => 1, :permalink => 'owp', :user_id => 'sudara', :title => 'new title'
+ #   put :update, :params => {:id => 1, :permalink => 'owp', :user_id => 'sudara', :title => 'new title'}
  #   response.should_not be_success
  #   response.should redirect_to('/login')
  # end
  #
  # [:sort_tracks, :add_track, :remove_track, :attach_pic].each do |postable|
  #   it "should forbid any modification of playlist via #{postable.to_s} by non logged in" do
- #     post postable, :id => 1, :permalink => 'owp', :user_id => 'sudara'
+ #     post postable, :params => {:id => 1, :permalink => 'owp', :user_id => 'sudara'}
  #     response.should_not be_success
  #     response.should redirect_to('/login')
  #   end
@@ -81,38 +81,38 @@ RSpec.describe PostsController, 'basics', type: :controller do
  #
  # context "deletion" do
  #   it "should not let a non-logged in person delete a playlist" do
- #     post :destroy, :id => '1', :permalink => 'owp', :user_id => 'sudara'
+ #     post :destroy, :params => {:id => '1', :permalink => 'owp', :user_id => 'sudara'}
  #     response.should_not be_success
  #   end
  #
  #   it 'should not let any old user delete a playlist' do
  #     login(:arthur)
- #     post :destroy, :id => '1', :permalink => 'owp', :user_id => 'sudara'
+ #     post :destroy, :params => {:id => '1', :permalink => 'owp', :user_id => 'sudara'}
  #     response.should_not be_success
  #   end
  #
  #   it 'should let an admin delete any playlist' do
  #     login(:sudara)
- #     lambda{post :destroy, :id => '2', :permalink => 'arthurs-playlist', :user_id => 'arthur'}.should change(Playlist, :count).by(-1)
+ #     lambda{post :destroy, :params => {:id => '2', :permalink => 'arthurs-playlist', :user_id => 'arthur'}.should change(Playlist, :count).by(-1)}
  #   end
  #
  #   it 'should let a user delete their own playlist' do
  #     login(:arthur)
- #     lambda{post :destroy, :id => '2', :permalink => 'arthurs-playlist', :user_id => 'arthur'}.should change(Playlist, :count).by(-1)
+ #     lambda{post :destroy, :params => {:id => '2', :permalink => 'arthurs-playlist', :user_id => 'arthur'}.should change(Playlist, :count).by(-1)}
  #   end
  # end
  #
  # context "add new pic" do
  #   it "should let a user upload a playlist photo" do
  #     login(:arthur)
- #     post :attach_pic, :id => 'arthurs-playlist', :user_id => 'arthur', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
+ #     post :attach_pic, :params => {:id => 'arthurs-playlist', :user_id => 'arthur', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}}
  #     flash[:notice].should be_present
  #     response.should redirect_to(edit_user_playlist_path(users(:arthur),'arthurs-playlist'))
  #   end
  #
  #   it "should not let a user upload a new photo for another user" do
  #     login(:arthur)
- #     post :attach_pic, :id => 'owp', :user_id => 'sudara', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}
+ #     post :attach_pic, :params => {:id => 'owp', :user_id => 'sudara', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}}
  #     response.should redirect_to('/login')
  #   end
  # end

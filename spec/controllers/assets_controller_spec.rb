@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe AssetsController, type: :controller do
   fixtures :assets, :users
+  include ActiveJob::TestHelper
 
   context "#latest" do
     it "should render the home page" do
@@ -13,7 +14,7 @@ RSpec.describe AssetsController, type: :controller do
   context "#show.mp3" do
     subject do
       request.env["HTTP_ACCEPT"] = "audio/mpeg"
-      get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+      get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
     end
 
     GOOD_USER_AGENTS = [
@@ -52,9 +53,9 @@ RSpec.describe AssetsController, type: :controller do
       request.user_agent = GOOD_USER_AGENTS.first
       expect do
         request.env["HTTP_ACCEPT"] = "audio/mpeg"
-        get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
-        get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
-        get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+        get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
+        get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
+        get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
       end.to change{ Listen.count }.by(1)
     end
 
@@ -63,13 +64,13 @@ RSpec.describe AssetsController, type: :controller do
       expect do
         request.env["HTTP_ACCEPT"] = "audio/mpeg"
         Timecop.travel(3.hours.ago) do
-          get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+          get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
         end
         Timecop.travel(2.hours.ago) do
-          get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+          get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
         end
         Timecop.travel(1.hour.ago) do
-          get :show, :id => 'song1', :user_id => users(:sudara).login, :format => :mp3
+          get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
         end
       end.to change{Listen.count}.by(3)
       Timecop.return
@@ -84,7 +85,7 @@ RSpec.describe AssetsController, type: :controller do
 
     it 'should have a landing page' do
       request.user_agent = GOOD_USER_AGENTS.first
-      get :show, :id => 'song1', :user_id => users(:sudara).login
+      get :show, :params => {:id => 'song1', :user_id => users(:sudara).login}
       expect(assigns(:assets)).to be_present
       expect(response.response_code).to eq(200)
     end
@@ -115,7 +116,7 @@ RSpec.describe AssetsController, type: :controller do
     it 'should allow the refferer to be manually overridden by params' do
       request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah"
       request.user_agent = GOOD_USER_AGENTS.first
-      expect{ get :show, :id => 'song1', :user_id => users(:arthur).login, :format => :mp3, :referer => 'itunes' }.to change(Listen, :count)
+      expect{ get :show, :params => {:id => 'song1', :user_id => users(:arthur).login, :format => :mp3, :referer => 'itunes' }}.to change(Listen, :count)
       expect(Listen.last.source).to eq('itunes')
     end
 
@@ -149,8 +150,8 @@ RSpec.describe AssetsController, type: :controller do
     it "should email out followers on upload via the queue" do
       users(:arthur).add_or_remove_followee(users(:sudara).id)
       subject
-      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.size).to eq 1
-      expect(ActiveJob::Base.queue_adapter.enqueued_jobs.first[:queue]).to eq "mailers"
+      expect(enqueued_jobs.size).to eq 1
+      expect(enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
 
@@ -168,7 +169,7 @@ RSpec.describe AssetsController, type: :controller do
       login(:sudara)
       post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
       expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
-      put :update, :id => users(:sudara).assets.first, :user_id => users(:sudara).login, :asset => {:mp3 => fixture_file_upload('assets/tag1.mp3','audio/mpeg')}
+      put :update, :params => {:id => users(:sudara).assets.first, :user_id => users(:sudara).login, :asset => {:mp3 => fixture_file_upload('assets/tag1.mp3','audio/mpeg')}}
       expect(users(:sudara).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
     end
   end

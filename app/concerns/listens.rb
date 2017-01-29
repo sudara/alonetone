@@ -41,7 +41,7 @@ module Listens
   def prevent_abuse(asset)
     if is_a_bot?
       Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{asset.mp3_file_name} #{user_agent} #{request.remote_ip} #{listen_referer} User:#{current_user || 0}"
-      render(:text => "Denied due to abuse", :status => 403)    
+      render plain: "Denied due to abuse", status: 403
     end
   end
 

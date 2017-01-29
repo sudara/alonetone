@@ -24,7 +24,7 @@ class PlaylistsController < ApplicationController
         params["playlist"].each_with_index do |id, position|
           @user.playlists.update(id, :position => position+1)
         end
-        render :nothing => true
+        head :ok
       end
     end
   end
@@ -71,7 +71,7 @@ class PlaylistsController < ApplicationController
 
   def attach_pic
     if params[:pic].present?
-      @pic = @playlist.build_pic(params[:pic])
+      @pic = @playlist.build_pic(params[:pic].permit(:pic))
       flash[:notice] = 'Picture updated!' if @pic.save
     end
     flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:notice].present?
@@ -82,10 +82,10 @@ class PlaylistsController < ApplicationController
     @track = @playlist.tracks.find(params[:track_id])
     if @track && @track.destroy
       respond_to do |format|
-        format.js {return head(:ok); render :nothing => true}
+        format.js { render head(:ok) }
       end
     else
-      render :nothing => true
+      head :ok
     end
   rescue ActiveRecord::RecordNotFound
     head(:bad_request)
@@ -96,7 +96,7 @@ class PlaylistsController < ApplicationController
     params["track"].each_with_index do |id, position|
       Track.update(id, :position => position+1)
     end
-    render :nothing => true
+    head :ok
   end
 
 

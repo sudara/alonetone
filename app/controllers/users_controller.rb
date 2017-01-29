@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   
   def attach_pic
     if params[:pic].present? 
-      @pic = @user.build_pic(params[:pic])
+      @pic = @user.build_pic(params[:pic].permit(:pic))
       flash[:ok] = 'Picture updated!' if @pic.save
     end
     flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:ok].present?
@@ -98,12 +98,12 @@ class UsersController < ApplicationController
     asset = Asset.published.find(params[:asset_id])
     return false unless logged_in? && asset # no bullshit
     current_user.toggle_favorite(asset)
-    render :nothing => true
+    head :ok
   end
   
   def toggle_follow
     current_user.add_or_remove_followee(params[:followee_id])
-    render :nothing => true
+    head :ok
   end
 
   def destroy
