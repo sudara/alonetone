@@ -237,13 +237,10 @@ ActiveRecord::Schema.define(version: 20161227061031) do
     t.string   "link3"
     t.text     "credits",      limit: 65535
     t.boolean  "has_details",                default: false
-<<<<<<< HEAD
     t.index ["permalink"], name: "index_playlists_on_permalink", using: :btree
     t.index ["position"], name: "index_playlists_on_position", using: :btree
     t.index ["user_id"], name: "index_playlists_on_user_id", using: :btree
-=======
     t.string   "theme",        limit: 255
->>>>>>> master
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -273,21 +270,11 @@ ActiveRecord::Schema.define(version: 20161227061031) do
     t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true, using: :btree
     t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation", using: :btree
   end
-
-<<<<<<< HEAD
-  create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "forum_id"
-    t.integer  "user_id"
-    t.string   "title"
-=======
-  add_index "reportable_cache", ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true, using: :btree
-  add_index "reportable_cache", ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation", using: :btree
-
+  
   create_table "topics", force: :cascade do |t|
     t.integer  "forum_id",        limit: 4
     t.integer  "user_id",         limit: 4
     t.string   "title",           limit: 255
->>>>>>> master
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "hits",                       default: 0
