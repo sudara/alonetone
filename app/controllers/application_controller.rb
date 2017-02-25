@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
   before_action :display_news
   before_action :set_latest_update_title
   
+  rescue_from ActionController::RoutingError do |exception|
+   render 'pages/four_oh_four', status: 404 
+  end
+  
   # let ActionView have a taste of our authentication
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active, :current_page, :moderator?, :welcome_back?, :user_setting
   
