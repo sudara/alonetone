@@ -117,7 +117,7 @@ Alonetone::Application.routes.draw do
         get :toggle_follow
       end
       resources 'source_files' #:path_prefix => ':login'
-      resources 'tracks', :controller => :assets do
+      resources 'tracks', controller: :assets do
         member do
           get :share
           get :stats
@@ -127,7 +127,7 @@ Alonetone::Application.routes.draw do
           post :search
           get  :mass_edit
         end
-        resources :comments
+        resources :comments,  only: [:create, :destroy]
       end
       resources :favorites
       resources :posts
