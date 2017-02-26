@@ -53,7 +53,7 @@ RSpec.describe UsersController, type: :controller do
 
     it "should activate with a for reals perishable token" do
       activate_authlogic && create_user
-      get :activate, :perishable_token => User.last.perishable_token
+      get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(new_user_track_path(User.last.login))
     end
@@ -61,19 +61,19 @@ RSpec.describe UsersController, type: :controller do
     it 'should log in user on activation' do
       activate_authlogic && create_user
       #expect(UserSession).to receive(:create)
-      get :activate, :perishable_token => User.last.perishable_token
+      get :activate, params: { perishable_token: User.last.perishable_token }
       expect(controller.session["user_credentials"]).to eq(User.last.persistence_token)
     end
 
     it 'should send out email on activation' do
       activate_authlogic && create_user
-      get :activate, :perishable_token => User.last.perishable_token
+      get :activate,params: { perishable_token: User.last.perishable_token }
       expect(last_email.to).to eq(["quire@example.com"])
     end
 
     it "should not activate with bullshit perishable token" do
       activate_authlogic
-      get :activate, :perishable_token => "abunchofbullshit"
+      get :activate, params: { perishable_token: "abunchofbullshit" }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to(new_user_path)
     end
@@ -81,7 +81,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should NOT activate an account if you are already logged in' do
       login(:arthur)
       create_user
-      get :activate, :perishable_token => User.last.perishable_token
+      get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to("http://test.host/arthur/tracks/new")
     end
@@ -89,7 +89,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should NOT activate if you are on a shitty ass IP' do
       activate_authlogic && create_user
       @request.env['REMOTE_ADDR'] = '60.169.78.123' # example bad ip
-      get :activate, :perishable_token => User.last.perishable_token
+      get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:error]).to be_present
     end
 
@@ -157,7 +157,7 @@ RSpec.describe UsersController, type: :controller do
 
     it "should not let a logged out user edit" do
       logout
-      post :edit, :user_id => 'arthur'
+      post :edit, params: {user_id: 'arthur'}
       expect(response).not_to be_success
     end
 
@@ -168,7 +168,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context "favoriting" do
-    subject { xhr :get, :toggle_favorite, :asset_id => 100 }
+    subject { get :toggle_favorite, params: { asset_id: 100 }, xhr: true }
 
     it 'should not let a guest favorite a track' do
       expect { subject }.to change{ Track.count }.by(0)
@@ -185,7 +185,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should let a user unfavorite a track' do
       login(:arthur)
       expect { subject }.to change{ Track.count }.by(1)
-      get :toggle_favorite, :asset_id => 100  # toggle again
+      get :toggle_favorite, params: { asset_id: 100}  # toggle again
       expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(Asset.find(100))
       expect(response).to be_success
     end

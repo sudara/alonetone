@@ -41,7 +41,7 @@ RSpec.describe UpdatesController, type: :controller do
   end
 
   it "should not let a normal joe create a blog entry" do
-    post :create, :title => 'new', :content => 'report'
+    post :create, params: { title: 'new', content: 'report' }
     expect(response).not_to be_success
   end
 end

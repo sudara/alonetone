@@ -14,7 +14,7 @@ RSpec.describe AssetsController, type: :controller do
   context "#show.mp3" do
     subject do
       request.env["HTTP_ACCEPT"] = "audio/mpeg"
-      get :show, :params => {:id => 'song1', :user_id => users(:sudara).login, :format => :mp3}
+      get :show, params: {id: 'song1', user_id: users(:sudara).login, format: :mp3}
     end
 
     GOOD_USER_AGENTS = [
@@ -131,7 +131,7 @@ RSpec.describe AssetsController, type: :controller do
   context '#create' do
     subject do
       login(:sudara)
-      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mpeg')] }
     end
 
     it 'should successfully upload an mp3' do
@@ -142,7 +142,7 @@ RSpec.describe AssetsController, type: :controller do
 
     it 'should accept an uploaded mp3 from chrome' do
       login(:sudara)
-      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mp3')]
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mp3')] }
       expect(flash[:error]).not_to be_present
       expect(response).to redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
     end
@@ -157,8 +157,8 @@ RSpec.describe AssetsController, type: :controller do
 
     it 'should successfully upload 2 mp3s' do
       login(:sudara)
-      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),
-                                                                      fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),
+                                                                      fixture_file_upload('assets/muppets.mp3','audio/mpeg')] }
       expect(flash[:error]).not_to be_present
       expect(response).to redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s )
     end
@@ -167,7 +167,7 @@ RSpec.describe AssetsController, type: :controller do
   context "edit" do
     it 'should allow user to upload new version of song' do
       login(:sudara)
-      post :create, :user_id => users(:sudara).login, :asset_data => [fixture_file_upload('assets/muppets.mp3','audio/mpeg')]
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mpeg')] }
       expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
       put :update, :params => {:id => users(:sudara).assets.first, :user_id => users(:sudara).login, :asset => {:mp3 => fixture_file_upload('assets/tag1.mp3','audio/mpeg')}}
       expect(users(:sudara).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
@@ -177,7 +177,7 @@ RSpec.describe AssetsController, type: :controller do
   context "#mass_edit" do
     it 'should allow user to edit 1 track' do
       login(:arthur)
-      get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_arthur_mp3).id]
+      get :mass_edit, params: { user_id: users(:arthur).login, assets: [assets(:valid_arthur_mp3).id] }
       expect(response).to be_success
       expect(assigns(:assets)).to include(assets(:valid_arthur_mp3))
     end
@@ -185,7 +185,7 @@ RSpec.describe AssetsController, type: :controller do
     it 'should allow user to edit 2 tracks at once' do
       login(:sudara)
       two_assets = [users(:sudara).assets.first,  users(:sudara).assets.last]
-      get :mass_edit, :user_id => users(:sudara).login, :assets => two_assets.collect(&:id)
+      get :mass_edit, params: {user_id: users(:sudara).login, assets: two_assets.collect(&:id) }
       expect(response).to be_success
       expect(assigns(:assets)).to include(two_assets.first)
       expect(assigns(:assets)).to include(two_assets.last)
@@ -193,7 +193,7 @@ RSpec.describe AssetsController, type: :controller do
 
     it 'should not allow user to edit other peoples tracks' do
       login(:arthur)
-      get :mass_edit, :user_id => users(:arthur).login, :assets => [assets(:valid_mp3).id]
+      get :mass_edit, params: { user_id: users(:arthur).login, assets: [assets(:valid_mp3).id] }
       expect(response).to be_success # no wrong answer here :)
       expect(assigns(:assets)).not_to include(assets(:valid_mp3))
       expect(assigns(:assets)).to be_present # should be populated with user's own assets

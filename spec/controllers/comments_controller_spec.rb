@@ -8,33 +8,33 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'should allow anyone to view the comments index' do
       get :index
-       assigns(:comments)
+      assigns(:comments)
       expect(response).to be_success
     end
 
     it 'should allow guest to comment on a track (via xhr)' do
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
-      expect { xhr :post, :create, params }.to change{ Comment.count}.by(1)
+      expect { post :create, params: params, xhr: true }.to change{ Comment.count}.by(1)
       expect(response).to be_success
     end
 
     it 'should allow guest to comment on a blog post' do
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Update","commentable_id"=> 1 }}
-      xhr :post, :create, params
+      post :create, params: params, xhr: true
       expect(response).to be_success
     end
 
     it 'should allow user comment on a track (via xhr)' do
       login(:arthur)
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
-      xhr :post, :create, params
+      post :create, params: params, xhr: true
       expect(response).to be_success
     end
 
     it 'should allow private comment on track' do
       login(:arthur)
       params = {:comment => {"body"=>"Comment", "private"=> 1, "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink }
-      xhr :post, :create, params
+      post :create, params: params, xhr: true
       expect(response).to be_success
     end
   end
@@ -42,31 +42,31 @@ RSpec.describe CommentsController, type: :controller do
   context "private comments made by user" do
     it "should be visible to private user viewing their own shit" do
       login(:arthur)
-      get :index, :login => 'arthur'
+      get :index, params: { login: 'arthur'}
       expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should be visible to admin" do
       login(:sudara)
-      get :index, :login => 'arthur'
+      get :index, params: { login: 'arthur'}
       expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should be visible to mod" do
       login(:sandbags)
-      get :index, :login => 'arthur'
+      get :index, params: { login: 'arthur'}
       expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
 
 
     it "should not be visible to guest" do
-      get :index, :login => 'arthur'
+      get :index, params: { login: 'arthur'}
       expect(assigns(:comments_made)).not_to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should not be visible to normal user" do
       login(:joeblow)
-      get :index, :login => 'arthur'
+      get :index, params: { login: 'arthur'}
       expect(assigns(:comments_made)).not_to include(comments(:private_comment_on_asset_by_user))
     end
   end

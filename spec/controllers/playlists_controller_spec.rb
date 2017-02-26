@@ -31,7 +31,7 @@ RSpec.describe PlaylistsController, 'permissions', type: :controller do
 
   it "should not mistake a playlist for belonging to a user when it doesn't" do
     login(:arthur)
-    get :edit, :id=>'1', :permalink => 'owp', :user_id=> 'sudara'
+    get :edit, params: {id: '1', permalink: 'owp', user_id: 'sudara'}
     expect(response).not_to be_success
   end
 
@@ -51,26 +51,26 @@ RSpec.describe PlaylistsController, 'permissions', type: :controller do
   context "sorting" do
     it 'should display albums to sort' do
       login(:sudara)
-      get :sort, :user_id => 'sudara'
+      get :sort, params: { user_id: 'sudara' }
       expect(response).to be_success
     end
 
     it 'should allow sorting of playlists' do
       login(:sudara)
-      xhr :post, :sort, :user_id => 'sudara', :playlist => [3,1]
+      post :sort, params: { user_id: 'sudara', playlist: [3,1] }, xhr: true
       expect(response).to be_success
     end
   end
 
   context "deletion" do
     it "should not let a non-logged in person delete a playlist" do
-      post :destroy, :params => {:id => '1', :permalink => 'owp', :user_id => 'sudara'}
+      post :destroy, params: { id: '1', permalink: 'owp', user_id: 'sudara' }
       expect(response).not_to be_success
     end
 
     it 'should not let any old user delete a playlist' do
       login(:arthur)
-      post :destroy, :params => {:id => '1', :permalink => 'owp', :user_id => 'sudara'}
+      post :destroy, params: { id: '1', permalink: 'owp', user_id: 'sudara' }
       expect(response).not_to be_success
     end
 

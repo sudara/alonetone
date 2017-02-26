@@ -41,7 +41,7 @@ class Comment < ActiveRecord::Base
   end
   
   def disallow_dupes
-    return false if duplicate?
+    throw(:abort) if duplicate?
   end
   
   def set_user
