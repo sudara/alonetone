@@ -66,11 +66,6 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.url unless request.xhr? or request.format.mp3?
   end
   
-  def redirect_back_or_default(default='/')
-    redirect_to(session[:return_to] || default)
-    session[:return_to] = nil
-  end
-  
   def admin_or_owner(record=current_user)
     admin? || (!%w(destroy admin edit update).include?(action_name) && (params[:login].nil? || params[:login] == record.login))
   end

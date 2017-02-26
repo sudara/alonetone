@@ -184,7 +184,7 @@ class UsersController < ApplicationController
     user.reset_persistence_token! if !user.persistence_token.present?
     session = UserSession.create(user)
     flash[:ok] = "Changed user to #{user.name}"
-    redirect_back_or_default 
+    redirect_back(fallback_location: root_path) 
   end
   
   def sudo_to_user
