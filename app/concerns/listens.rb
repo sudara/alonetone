@@ -15,12 +15,18 @@ module Listens
   end
 
   private
+  
+  def cloudfront_url(url,expires_in=20.minutes)
+    Aws::CF::Signer.sign_url url, :expires => Time.now + expires_in
+  end
 
   def listen(asset, register: true)
     unless prevent_abuse(asset)
       register_listen(asset) if register
       if Alonetone.try(:play_dummy_mp3s)
         play_local_mp3
+      elsif Alonetone.try(:cloudfront_enabled)
+        redirect_to cloudfront_url(asset.mp3.url)
       else
         redirect_to asset.mp3.expiring_url
       end

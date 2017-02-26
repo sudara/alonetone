@@ -9,9 +9,9 @@ Paperclip::Attachment.default_options.merge!({
   },
   :s3_region => 'us-east-1',
   :bucket => Alonetone.bucket,
-  :s3_host_alias => Alonetone.bucket,
+  :s3_host_alias => Alonetone.s3_host_alias,
   :url => ':s3_alias_url',
-  :s3_protocol => :http,
+  :s3_protocol => Alonetone.cloudfront_enabled ? :https : :http,
   :s3_url_options => {:virtual_host => true},
   :s3_headers => { 'Expires' => 3.years.from_now.httpdate, 
     'Content-disposition' => 'attachment;'}

@@ -57,7 +57,9 @@ gem 'yui-compressor'
 gem 'uglifier'
 gem "coffee-rails"
 gem "soundmanager2-rails"
-gem 'turbolinks', '~> 5.0.0'
+gem 'turbolinks'
+gem 'cloudfront-signer'
+
 
 gem 'newrelic_rpm'
 gem 'scout_apm'

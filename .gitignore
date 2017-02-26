@@ -21,6 +21,7 @@ config/defensio.yml
 config/newrelic.yml
 config/memcached.yml
 config/deploy/*
+config/certs/*
 *.sql
 public/mp3
 public/pics
