@@ -111,7 +111,7 @@ class PlaylistsController < ApplicationController
   end
 
   def update
-    if @playlist.update_attributes(params[:playlist])
+    if @playlist.update_attributes(playlist_params)
       redirect_to edit_user_playlist_path(@user,@playlist), :notice => 'Playlist was successfully updated.'
     else
       render :action => "edit"
