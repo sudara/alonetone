@@ -4,6 +4,7 @@ environment 'production'
 workers 4
 threads 1,1
 preload_app!
+queue_requests false
 daemonize true
 pidfile 'tmp/puma.pid'
 stdout_redirect 'log/puma.log', 'log/puma.log', true
