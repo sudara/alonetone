@@ -4,7 +4,6 @@
 //= require soundmanager2
 //= require jquery-carousel
 //= require jquery-lowpro
-//= require jquery-hotkeys
 //= require facebox
 //= require local_time
 //= require twitter
@@ -832,8 +831,6 @@ Radio = $.klass({
     this.currentStation = $('li.selected', this.element);
     this.tracks = $('#radio_tracks');
     this.channelName = $('#channel_name');
-    $.hotkeys.add('down', $.bind(this.nextTrack, this));
-    $.hotkeys.add('up', $.bind(this.previousTrack,this));
 
     this.bindHoverAndClickStation();
   },
@@ -853,21 +850,6 @@ Radio = $.klass({
     
   },
  
-  nextTrack : function(e){
-    if(this.keyboardEnabled(e)){
-      playing = this.findRadioTrack($('.asset.playing')[0])
-      playing.startNextTrack();
-    } 
-  },
-  previousTrack : function(e){
-    if(this.keyboardEnabled(e)){
-      playing = this.findRadioTrack($('.asset.playing')[0])
-      playing.startPreviousTrack();
-    }     
-  },
-  keyboardEnabled : function(e){
-    return !$(e.target).is('textarea') && this.somethingIsPlaying();
-  },
   bindHoverAndClickStation : function(e){
     $('li', this.controls).hover(function() {
         if(!$('input',this).attr('disabled'))
