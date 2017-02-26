@@ -15,7 +15,7 @@ class Asset < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent  => :destroy
   
   has_many :listeners, 
-    -> { order('listens.created_at DESC').uniq.limit(20)},
+    -> { order('listens.created_at DESC').distinct.limit(20) },
     :through  => :listens
   
   has_many :favoriters, 
