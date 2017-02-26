@@ -45,11 +45,11 @@ class CommentsController < ApplicationController
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.public_or_private(display_private_comments?).includes(:commenter => :pic, :commentable => {:user => :pic}).page(params[:page])
+      @comments = @user.comments.on_track.public_or_private(display_private_comments?).includes(:commenter => :pic, :commentable => {:user => :pic}).page(params[:page])
       set_comments_made
     else
       @page_title = "Recent Comments"
-      @comments = Comment.includes(:commenter => :pic, :commentable => {:user => :pic}).public_or_private(moderator?).page(params[:page])
+      @comments = Comment.on_track.includes(:commenter => :pic, :commentable => {:user => :pic}).public_or_private(moderator?).page(params[:page])
       set_spam_comments
     end
   end
