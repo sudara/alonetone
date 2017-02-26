@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   
   # And therefore have listeners
   has_many :listeners, 
-    -> { uniq },
+    -> { distinct },
     :through  => :track_plays
     
   has_many :followings, :dependent => :destroy

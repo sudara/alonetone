@@ -26,7 +26,7 @@ class Topic < ActiveRecord::Base
     :class_name => "Post"
   
   has_many :voices,
-    -> { uniq },
+    -> { distinct },
     :through => :posts, :source => :user
   
   validates_presence_of :user_id, :forum_id, :title
