@@ -53,8 +53,8 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = config_for(:alonetone)['smtp_settings'].symbolize_keys
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => Alonetone.postmark_api_token }
 
   config.active_job.queue_adapter = :sidekiq
   

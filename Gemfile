@@ -42,7 +42,8 @@ gem 'record_tag_helper'
 
 # external services
 gem 'rakismet'
-gem "geokit"
+gem 'geokit'
+gem 'postmark-rails'
 
 # greenfield
 gem 'font-awesome-sass'

@@ -216,6 +216,12 @@ GEM
     perf_check (0.7.5)
       colorize (= 0.7.3)
       diffy (= 3.0.5)
+    postmark (1.10.0)
+      json
+      rake
+    postmark-rails (0.15.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.10.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -395,6 +401,7 @@ DEPENDENCIES
   newrelic_rpm
   paperclip
   perf_check
+  postmark-rails
   pry
   puma
   rack-mini-profiler
