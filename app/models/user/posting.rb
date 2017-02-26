@@ -21,7 +21,8 @@ class User
   end
 
   def reply(topic, body, request)
-    topic.posts.build(:body => body) do |post|
+    topic.posts.new do |post|
+      post.body = body
       post.forum = topic.forum
       post.user  = self
       post.save
