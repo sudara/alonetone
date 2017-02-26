@@ -101,7 +101,7 @@ class PlaylistsController < ApplicationController
 
 
   def create
-    @playlist = @user.playlists.build(params[:playlist])
+    @playlist = @user.playlists.build(playlist_params)
     if @playlist.save
       flash[:notice] = 'Great, go ahead and add some tracks'
        redirect_to edit_user_playlist_path(@user, @playlist)
@@ -127,7 +127,7 @@ class PlaylistsController < ApplicationController
   protected
   
   def playlist_params
-    params.require(:playlist).permit(user_id, :is_favorite, :year, :title, :description, :private, :position)
+    params.require(:playlist).permit(:user_id, :is_favorite, :year, :title, :description, :private, :position)
   end
 
   def render_desired_partial
