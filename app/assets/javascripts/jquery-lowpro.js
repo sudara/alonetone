@@ -115,13 +115,11 @@
   var attachBehavior = function(el, behavior, args) {
       var wrapper = behaviorWrapper(behavior);
       instance = new wrapper(el, args);
+      $(el).data("lowpro_behavior", behavior);
+      $(el).data("lowpro_instance", instance);
 
       bindEvents(instance);
             
-      if (!behavior.instances) behavior.instances = [];
-
-      behavior.instances.push(instance);
-      
       return instance;
   };
   
@@ -153,12 +151,9 @@
     attached: function(behavior) {
       var instances = [];
       
-      if (!behavior.instances) return instances;
-      
       this.each(function(i, element) {
-        $.each(behavior.instances, function(i, instance) {
-          if (instance.element.get(0) == element) instances.push(instance);
-        });
+        if ($(element).data("lowpro_behavior") == behavior)
+          instances.push($(element).data("lowpro_instance"));
       });
       
       return instances;

@@ -587,7 +587,8 @@ Track = $.klass({
   }),
   
   trackIndex: function(){
-    return this.behavior.instances.indexOf(this);
+    var instances = TrackInstances();
+    return instances.indexOf(this);
   },
   
   toggleDetails: function(desiredTab){
@@ -632,9 +633,10 @@ Track = $.klass({
 		}
 		
     // close all other detail panes except currently playing
-    for(var i=0;i< this.behavior.instances.length;i++){
-        if(!this.behavior.instances[i].isPlaying() && this.element != this.behavior.instances[i].element) 
-          this.behavior.instances[i].closeDetails();
+    var instances = TrackInstances();
+    for(var i=0; i < instances.length; i++) {
+        if(!instances[i].isPlaying() && this.element != instances[i].element)
+          instances[i].closeDetails();
     }
     
     this.element.addClass('open');
@@ -750,38 +752,46 @@ Track = $.klass({
   startNextTrack: function(){
     this.reachedEnd = true;
     // how many tracks are on the page?....
-    if(this.behavior.instances.length > 1){
-      this.behavior.instances[this.nextTrackIndex()].playOrResume();
-    }else{
+    var instances = TrackInstances();
+    if (instances.length > 1) {
+      instances[this.nextTrackIndex()].playOrResume();
+    } else{
       // ...because we don't want songs on single track page to repeat endlessly
       this.pause();
     }
   },
   startPreviousTrack:function(){
     this.pause();
-    this.behavior.instances[this.previousTrackIndex()].playOrResume();
+
+    var instances = TrackInstances();
+    instances[this.previousTrackIndex()].playOrResume();
   },
   previousTrackIndex : function(){
     // index of next Track in Track.instances
     var next = this.trackIndex() - 1;
+
     // allow us to loop back to the first track
-    if(this.behavior.instances[next] == undefined) next = (this.behavior.instances.length - 1);
+    var instances = TrackInstances();
+    if (instances[next] == undefined) next = (instances.length - 1);
     return next;
   },
   nextTrackIndex : function(){
     // index of next Track in Track.instances
     var next = this.trackIndex() + 1;
+
     // loop back to the first track
-    if(this.behavior.instances[next] == undefined) next = 0;
+    var instances = TrackInstances();
+    if (instances[next] == undefined) next = 0;
     return next;
   },
   
   killOtherTracks : function(){
     // basically a dumb way of making sure no other tracks are playing, looping through
-    for(track=0;track < this.behavior.instances.length;track++){
-      this.behavior.instances[track].seekbar.css('display', 'none');
-      if(this.behavior.instances[track].isPlaying())
-        this.behavior.instances[track].pause();
+    var instances = TrackInstances();
+    for (var track=0; track < instances.length; track++) {
+      instances[track].seekbar.css('display', 'none');
+      if (instances[track].isPlaying())
+        instances[track].pause();
     }
   },
   
@@ -822,6 +832,8 @@ Track = $.klass({
     setTimeout('tryAgain()','300');
   }
 });
+
+TrackInstances = function() { return $('.asset').attached(Track) };
 
 
 Radio = $.klass({  
@@ -875,7 +887,7 @@ document.addEventListener("turbolinks:load", function() {
   $('input[name=authenticity_token]').val($('meta[name=csrf-token]').attr('content'))
   
   // Tracks
-  $('.asset, .track').attach(Track);
+  $('.asset').attach(Track);
   
   // display listen_count when needed
   if(window.showPlayCounts){
