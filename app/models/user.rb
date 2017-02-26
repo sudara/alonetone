@@ -156,8 +156,8 @@ class User < ActiveRecord::Base
   protected
 
   def efficiently_destroy_relations
-    Listen.delete_all(['track_owner_id = ?',id])
-    Listen.delete_all(['listener_id = ?',id])
+    Listen.where(track_owner_id: id).delete_all
+    Listen.where(listener_id: id]).delete_all
     Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
 
     Playlist.joins(:assets).where(:assets => {:user_id => id}).
@@ -167,8 +167,8 @@ class User < ActiveRecord::Base
     Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id").
       joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
 
-    %w(tracks playlists posts comments assets).each do |thing|
-      self.send(thing).delete_all
+    %w(tracks playlists posts comments assets).each do |user_relation|
+      self.send(user_relation).delete_all
     end
     true
   end
