@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(user_session_params.merge({:remember_me => true})) #always stay logged in
     if @user_session.save
-      redirect_back(fallback_location: user_home_path(@user_session.user)
+      redirect_back(fallback_location: user_home_path(@user_session.user))
     else
       if params[:user_session][:login] && (user = User.find_by_login(params[:user_session][:login])) && !user.active?
         flash.now[:error] = "It looks like your account is not active. <br/> Do you have an email from us with activation details?".html_safe
