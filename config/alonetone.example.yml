@@ -7,7 +7,9 @@ development: &defaults
   email: support@yourapp.com
   secret: f041541efd6d104c7051041ec61e7aa5
   storage: filesystem
-  bucket: 
+  bucket: # put your s3 bucket/domain here
+  s3_host_alias: # put your cloudfront domain here
+  cloudfront_enabled: false
   amazon_id: 
   amazon_key:
   rakismet_key: "REPLACEME"
@@ -20,14 +22,7 @@ development: &defaults
   ga: 
   get_clicky: 
   typekit: 
-  smtp_settings:
-    address:
-    port: 25 # ports 587 and 2525 are also supported with STARTTLS
-    enable_starttls_auto: true # detects and uses STARTTLS
-    user_name:
-    password:
-    authentication: 'login'
-    domain: yourapp.com
+  postmark_api_key:
 
 test:
   <<: *defaults
