@@ -18,8 +18,8 @@ Alonetone::Application.routes.draw do
     # admin stuff
     get 'secretz' => 'secretz#index'
 
-    get "/404", :to => "pages#four_oh_four"
-    get '/500', :to => "pages#error"
+    get '404', to: "pages#four_oh_four"
+    get '500', to: "pages#error"
 
     # one-off pages
     get 'rpmchallenge' => 'pages#rpm_challenge'
