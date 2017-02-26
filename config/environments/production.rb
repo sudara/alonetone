@@ -54,7 +54,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :postmark
-  config.action_mailer.postmark_settings = { :api_token => Alonetone.postmark_api_token }
+  config.action_mailer.postmark_settings = { api_token: config_for(:alonetone)['postmark_api_token'] }
 
   config.active_job.queue_adapter = :sidekiq
   
