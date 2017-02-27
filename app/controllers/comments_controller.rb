@@ -25,20 +25,20 @@ class CommentsController < ApplicationController
       @comment.destroy
       flash[:ok] = 'We threw away that comment'
     end
-    redirect_back(fallback_location: root_path) 
+    redirect_to :back 
   end
 
   def unspam
     @comment.ham!
     @comment.update_column :is_spam, false
     @comment.deliver_comment_notification
-    redirect_back(fallback_location: root_path)
+    redirect_to :back
   end
   
   def spam
     @comment.spam!
     @comment.update_column :is_spam, true
-    redirect_back(fallback_location: root_path)
+    redirect_to :back
   end
 
   def index

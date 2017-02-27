@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     if @post.topic.posts.count == 1 
       @post.topic.update_column :spam, false
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to :back
   end
   
   def spam
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     if @post.topic.posts.count == 1 
       @post.topic.update_column :spam, true
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to :back
   end
 
   def new
