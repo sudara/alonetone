@@ -49,8 +49,7 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :dalli_store
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :postmark

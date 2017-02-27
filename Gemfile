@@ -64,7 +64,7 @@ gem 'cloudfront-signer'
 gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'sidekiq'
-
+gem 'dalli'
 
 gem 'sinatra', '~> 2.0.0.beta2', require: false
 gem 'sinatra-contrib', '~> 2.0.0.beta2', require: false
