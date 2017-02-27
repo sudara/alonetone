@@ -116,7 +116,7 @@ protected
     return unless @old_forum_id
     posts.update_all :forum_id => forum_id
     Forum.decrement_counter(:topics_count, @old_forum_id)
-    Forum.increment_counter(:topics_count, forum_id)
+    Forum.increment_counter(:topics_count, forum_id, touch: true)
   end
   
   def count_user_posts_for_counter_cache

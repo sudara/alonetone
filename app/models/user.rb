@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
       existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
     else
       tracks.favorites.create(:asset_id => asset.id)
-      Asset.increment_counter(:favorites_count, asset.id)
+      Asset.increment_counter(:favorites_count, asset.id, touch: true)
     end
   end
 

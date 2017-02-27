@@ -72,8 +72,8 @@ class Comment < ActiveRecord::Base
   
   def increment_counters
     if commentable.is_a? Asset
-      User.increment_counter(:comments_count, commentable.user) 
-      Asset.increment_counter(:comments_count, commentable) 
+      User.increment_counter(:comments_count, commentable.user, touch: true) 
+      Asset.increment_counter(:comments_count, commentable, touch: true) 
     end
   end
   
