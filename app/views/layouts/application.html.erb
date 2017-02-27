@@ -19,8 +19,8 @@
     <link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
 
     <% if Alonetone.typekit %>
-      <script type="text/javascript" src="http://use.typekit.com/<%= Alonetone.typekit %>.js"></script>
-      <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+      <script src="https://use.typekit.net/<%= Alonetone.typekit %>.js"></script>
+      <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <% end %>
   
       <!-- render user specific variables and js helpers -->
