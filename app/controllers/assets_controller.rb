@@ -10,19 +10,21 @@ class AssetsController < ApplicationController
 
   # home page
   def latest
-    respond_to do |wants|
-      wants.html do
-        @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
-        @tab = 'home'
-        @assets = Asset.published.latest.includes(:user => :pic).limit(5)
-        set_related_lastest_variables
-      end
-      wants.rss do 
-        @assets = Asset.published.latest(50)
-      end
-      wants.json do
-        @assets = Asset.published.limit(500).includes(:user)
-        render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
+    if stale?(etag: Asset.last_updated, last_modified: Asset.last_updated.updated_at)
+      respond_to do |wants|
+        wants.html do
+          @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
+          @tab = 'home'
+          @assets = Asset.published.latest.includes(:user => :pic).limit(5)
+          set_related_lastest_variables
+        end
+        wants.rss do 
+          @assets = Asset.published.latest(50)
+        end
+        wants.json do
+          @assets = Asset.published.limit(500).includes(:user)
+          render :json => @assets.to_json(:only => [:name, :title, :id], :methods => [:name], :include =>{:user => {:only => :name, :method => :name}})
+        end
       end
     end
   end
