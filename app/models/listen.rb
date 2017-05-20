@@ -108,11 +108,10 @@ class Listen < ActiveRecord::Base
   
   
   def self.monthly_listen_count_for(date=Time.now)
-    # [count, year_month_label]
-    [ Listen.count(:all, 
-        :conditions => ['created_at > ? AND created_at < ?', 
-                        date.beginning_of_month, date.end_of_month]
-      ), 
+    # returns [count, year_month_label]
+    [ Listen.where('created_at > ? AND created_at < ?', 
+       date.beginning_of_month, date.end_of_month]
+      ).count, 
       "#{date.strftime('%b %y')}" ]
   end
 
