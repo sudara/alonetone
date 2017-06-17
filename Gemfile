@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "~> 5.1.0.beta1"
+gem "rails", "5.1.1"
 
 gem "mysql2", "~> 0.3.20" # Rails is not happy on 4.x yet
 
@@ -70,7 +70,7 @@ gem 'sinatra', '~> 2.0.0.beta2', require: false
 gem 'sinatra-contrib', '~> 2.0.0.beta2', require: false
 
 group :production do
-  gem "puma"
+  gem 'puma'
   gem 'bugsnag'
 end
 
