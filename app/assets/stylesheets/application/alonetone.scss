@@ -494,7 +494,7 @@ overflow: hidden;
   .static_content_youtube {
     padding: 0!important;
     background: none;
-    
+
   }
 
 
@@ -571,7 +571,7 @@ div.small_spinner {
 // favorites
 
 a.add_to_favorites, a.favorited {
-  
+
   @include retina-sprite(heart-with-plus);
   text-indent: -9999px;
   position: absolute;
@@ -597,35 +597,6 @@ a.add_to_favorites, a.favorited {
 }
 
 // misc
-
-#welcome {
-  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
-  padding-top: 20px;
-  padding-left: 26px;
-  width: 830px;
-  height: 153px;
-  img {
-    position: absolute;
-    top: 140px;
-    left: 490px;
-  }
-  .welcome_to_alonetone {
-    color: #37392b;
-    font-weight: bold;
-    font-size: 30px;
-    font-family: $header_font;
-  }
-  .welcome_alonetone {
-    color: $orange;
-    letter-spacing: 1.1px;
-  }
-  .a_damn_fine_home {
-    margin-bottom: 40px;
-    color: #7d7f76;
-    font-size: 18px;
-    font-family: $header_font;
-  }  
-}
 
 #user_home {
   position: relative;
@@ -958,7 +929,7 @@ h2.table{
 .asset:nth-child(odd) {
   div.button, div.title {
       background-color: $box_background_even;
-    } 
+    }
 }
 
 
@@ -971,7 +942,7 @@ h2.table{
 
 .listen_user img {
   vertical-align: top;
-  
+
 }
 
 .listen_details a {
