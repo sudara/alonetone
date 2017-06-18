@@ -1,40 +1,40 @@
 #!/bin/bash
 echo "Deployanatoring teh codez!"
-echo 
+echo
 
 # handle git and bundle install
 ssh alonetone '
   source /etc/profile;
   source ~/.profile;
-  cd /data/alonetone-rails4; 
-  
+  cd /data/alonetone-rails4;
+
   if [[ $(git diff) > "" ]];
-    then 
-      echo "WARNING: local changes on server, exiting!"; 
+    then
+      echo "WARNING: local changes on server, exiting!";
       exit 0;
   fi;
-  
-  git fetch; 
-  
-  if [[ $(git diff origin/master Gemfile.lock) > "" ]]; 
-    then 
+
+  git fetch;
+
+  if [[ $(git diff origin/master Gemfile.lock) > "" ]];
+    then
       echo "Gemfile changed, bundle installing...";
-      git reset --hard origin/master; bundle install --deployment; 
+      git reset --hard origin/master; bundle install --deployment;
       echo
-    else 
+    else
       echo "skipping bundle install, gemfile has not changed since last time.";
       git reset --hard origin/master;
       echo
   fi
-  
+
    echo "Compiling assets..."
    RAILS_ENV=production bundle exec rake assets:precompile
-  
+
   '
 
 # handle restarts
 echo "Run puma, run!"
 
-ssh linode "/etc/monit/scripts/puma restart"
+ssh linode "monit restart puma_alonetone sidekiq"
 
 bundle exec newrelic deployments
