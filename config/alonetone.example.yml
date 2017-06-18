@@ -10,24 +10,25 @@ development: &defaults
   bucket: # put your s3 bucket/domain here
   s3_host_alias: # put your cloudfront domain here
   cloudfront_enabled: false
-  amazon_id: 
+  amazon_id:
   amazon_key:
   rakismet_key: "REPLACEME"
-  defensio:  
+  defensio:
   campfire_url: nil
   video_size: width="370" height="308"
   enable_defensio: false
   default_user_images: true
   play_dummy_mp3s: false # set to true if playing off of production dump without s3 cred
-  ga: 
-  get_clicky: 
-  typekit: 
+  ga:
+  get_clicky:
+  typekit:
   postmark_api_key:
 
 test:
   <<: *defaults
   storage: filesystem
   show_debug_info: false
+  play_dummy_mp3s: true
 
 production:
   <<: *defaults
