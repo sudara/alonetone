@@ -5,7 +5,7 @@ module Listens
   # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
   @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook','stagefright']
- 
+
   # user agent black list
   @@bots = ['bot','spider','baidu','mp3bot']
 
@@ -15,7 +15,7 @@ module Listens
   end
 
   private
-  
+
   def cloudfront_url(url,expires_in=20.minutes)
     Aws::CF::Signer.sign_url url, :expires => Time.now + expires_in
   end
@@ -34,7 +34,7 @@ module Listens
   end
 
   def user_agent
-    request.user_agent.try(:downcase)    
+    request.user_agent.try(:downcase)
   end
 
   def listen_referer
@@ -53,37 +53,37 @@ module Listens
 
   def register_listen(asset)
     asset.listens.create(
-        :listener     => current_user || nil, 
-        :track_owner  => asset.user, 
+        :listener     => current_user || nil,
+        :track_owner  => asset.user,
         :source       => listen_referer,
         :user_agent   => user_agent,
         :ip           => request.remote_ip
       ) unless is_a_bot? or ip_just_registered_this_listen?(asset)
   end
-  
+
   def ip_just_registered_this_listen?(asset)
     last_listen = asset.listens.since(1.week.ago).where(:ip => request.remote_ip).first
     last_listen.present? && (last_listen.created_at > (Time.now - asset[:length]))
   end
-  
+
   def is_a_bot?
     # gotta have a user agent
     return true unless request.user_agent.present?
-    
+
     # can't be a blacklisted ip
     return true if is_from_a_bad_ip?
-    
+
     # check user agent agaisnt both white and black lists
-    not browser? or @@bots.any?{ |bot_agent| user_agent.include? bot_agent }  
+    not browser? or @@bots.any?{ |bot_agent| user_agent.include? bot_agent }
   end
-  
+
   def browser?
-    @@valid_listeners.any?{ |valid_agent| user_agent.include? valid_agent } 
+    @@valid_listeners.any?{ |valid_agent| user_agent.include? valid_agent }
   end
 
   def play_local_mp3
     file_to_send = File.join(Rails.root,'spec/fixtures/assets/muppets.mp3')
-    
+
     length = File.size(file_to_send) # need to do this manually for header to be set correctly
 
     # SHITTON OF HEADER HACKS TO APPEASE HTML5 locally :)
@@ -97,9 +97,9 @@ module Listens
       status = "200 OK"
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
 
-      send_file file_to_send, :type => 'audio/mpeg', :disposition => 'attachment;', 
+      send_file file_to_send, :type => 'audio/mpeg', :disposition => 'attachment;',
       :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
-    else 
+    else
       status = "206 Partial Content" #browser wants part of the file
       match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
       if match
@@ -109,7 +109,7 @@ module Listens
       headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
       how_many_bytes = file_end.to_i-file_begin.to_i > 0 ? file_end.to_i-file_begin.to_i : 1
-      send_data File.read(file_to_send,how_many_bytes,file_begin.to_i), :type =>'audio/mpeg', :disposition => 'attachment;', 
+      send_data File.read(file_to_send,how_many_bytes,file_begin.to_i), :type =>'audio/mpeg', :disposition => 'attachment;',
       :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
     end
   end

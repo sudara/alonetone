@@ -9,6 +9,8 @@ class Asset
   if Alonetone.storage == 's3'
     attachment_options[:path] = "/mp3/:id/:basename.:extension"
     attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
+  else
+    attachment_options[:s3_permissions] = 'public-read' # let localhost/test work without expiring urls
   end
 
   has_attached_file :mp3, attachment_options

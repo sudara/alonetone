@@ -32,8 +32,7 @@ RSpec.describe UserSessionsController, type: :controller do
 
   it "should redirect to last page viewed after login" do
     activate_authlogic
-    request.env['HTTP_REFERER'] = '/forums'
-    post :create, params: { user_session: { login: 'arthur', password: 'test'} }
+    post :create, params: { user_session: { login: 'arthur', password: 'test' }}, session: { return_to: '/forums'}
     expect(response).to redirect_to('http://test.host/forums')
   end
 
