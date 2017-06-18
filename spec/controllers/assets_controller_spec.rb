@@ -80,7 +80,8 @@ RSpec.describe AssetsController, type: :controller do
       request.env["HTTP_ACCEPT"] = "audio/mpeg"
       request.user_agent = GOOD_USER_AGENTS.first
       subject
-      expect(response).to redirect_to(assets(:valid_mp3).mp3.url)
+      # expect(response).to redirect_to(assets(:valid_mp3).mp3.url) # on s3, we get a redirect
+      expect(response.response_code).to eq(200) # in test mode, we get a file
     end
 
     it 'should have a landing page' do
