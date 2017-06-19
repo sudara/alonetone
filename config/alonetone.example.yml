@@ -7,6 +7,7 @@ development: &defaults
   email: support@yourapp.com
   secret: f041541efd6d104c7051041ec61e7aa5
   storage: filesystem
+  play_dummy_mp3s: true # remove to play off s3
   bucket: # put your s3 bucket/domain here
   s3_host_alias: # put your cloudfront domain here
   cloudfront_enabled: false
@@ -18,7 +19,6 @@ development: &defaults
   video_size: width="370" height="308"
   enable_defensio: false
   default_user_images: true
-  play_dummy_mp3s: false # set to true if playing off of production dump without s3 cred
   ga:
   get_clicky:
   typekit:
