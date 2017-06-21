@@ -1,5 +1,5 @@
 class Asset < ActiveRecord::Base
-  
+
   concerned_with :uploading, :radio, :statistics, :greenfield
 
   scope :published,       -> { where(private: false) }
@@ -14,22 +14,22 @@ class Asset < ActiveRecord::Base
   has_many :playlists, :through => :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent  => :destroy
-  
-  has_many :listeners, 
-    -> { order('listens.created_at DESC').distinct.limit(20) },
+
+  has_many :listeners,
+    -> { select("users.*,listens.created_at").order('listens.created_at DESC').limit(20) },
     :through  => :listens
-  
-  has_many :favoriters, 
+
+  has_many :favoriters,
     -> { where('tracks.is_favorite' => true).order('tracks.created_at DESC') },
-    :source     =>  :user, 
+    :source     =>  :user,
     :through    =>  :tracks
-      
+
   reportable :weekly, :aggregation => :count, :grouping => :week
- 
+
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
   after_create :notify_followers, if: :published?
-  
+
   validates_presence_of :user_id
 
   # override has_permalink method to ensure we don't get empty permas
@@ -43,7 +43,7 @@ class Asset < ActiveRecord::Base
   def self.latest(limit=10)
     includes(:user => :pic).limit(limit).order('assets.id DESC')
   end
-  
+
   def self.id_not_in(asset_ids)
     if asset_ids.present?
       where("assets.id NOT IN (?)", asset_ids)
@@ -55,31 +55,31 @@ class Asset < ActiveRecord::Base
   def self.user_id_in(user_ids)
     where( "assets.user_id IN (?)", user_ids)
   end
-  
-  def self.conditions_by_like(value) 
+
+  def self.conditions_by_like(value)
     conditions = ['assets.title', 'assets.description', 'assets.mp3_file_name'].collect do |c|
-      "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%") 
+      "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%")
     end
-    where(conditions.join(" OR ")) 
+    where(conditions.join(" OR "))
   end
-  
+
   # needed for views in case we've got multiple assets on the same page
   # TODO: this is a view concern, move to helper, or better yet, deal w/it in .js
   def unique_id
     object_id
   end
-  
+
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
     clean = mp3_file_name.split('.')[-2].try(:gsub, /-|_/, ' ')
     clean.present? ? clean.strip.titleize : 'untitled'
   end
-  
+
   def first_playlist
     Track.where(:asset_id => id).first.playlists.first rescue nil
   end
-  
+
   # allows classes outside Asset to use the same format
   def self.formatted_time(time)
     if time
@@ -92,15 +92,15 @@ class Asset < ActiveRecord::Base
       "?:??"
     end
   end
-  
+
   def length
     self.class.formatted_time(self[:length])
   end
-  
+
   def seconds
     self[:length] # a bit backwards, ain't it?
   end
-  
+
   def guest_can_comment?
     if user.settings.present? && user.settings['block_guest_comments'].present?
       user.settings['block_guest_comments'] == "false"
@@ -118,19 +118,19 @@ class Asset < ActiveRecord::Base
       update_column(:private, false) && notify_followers
     end
   end
-  
+
   # needed for spam detection
   def full_permalink
     "http://#{Alonetone.url}/#{user.login}/#{permalink}"
   end
-  
+
   def to_param
     permalink
   end
-  
+
   def notify_followers
     user.followers.select(&:wants_email?).each do |user|
       AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
     end
-  end 
+  end
 end
