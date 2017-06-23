@@ -6,13 +6,7 @@
 //= require jquery-lowpro
 //= require facebox
 //= require local_time
-//= require twitter
 //= require highlight
-//= require tablesorter
-//= require highcharts
-//= require raphael.min
-//= require g.raphael.min
-//= require g.line.min
 //= require upload
 //= require turbolinks
 
@@ -34,8 +28,8 @@ Alonetone = {
 Remote.DeleteLink = $.klass(Remote.Base,{
   onclick: function(){
     var options = $.extend({
-      url: this.element.attr('href'), 
-      type: 'POST', 
+      url: this.element.attr('href'),
+      type: 'POST',
       data: $.param({'authenticity_token':window.authenticityToken,'_method':'delete'})
       },this.options);
     return this._makeRequest(options);
@@ -46,8 +40,8 @@ Remote.DeleteLink = $.klass(Remote.Base,{
 Remote.PutLink = $.klass(Remote.Base,{
   onclick: function(){
     var options = $.extend({
-      url: this.element.attr('href'), 
-      type: 'POST', 
+      url: this.element.attr('href'),
+      type: 'POST',
       data: $.param({'authenticity_token':window.authenticityToken,'_method':'put'})
       },this.options);
     return this._makeRequest(options);
@@ -59,7 +53,7 @@ DismissableNotice = $.klass(Remote.PutLink,{
     this.notice = this.element.parents('div.notice');
     $super(); // make sure to call init on parent
   },
-  
+
   success:function(e){
     this.notice.fadeOut('slow');
   }
@@ -67,16 +61,16 @@ DismissableNotice = $.klass(Remote.PutLink,{
 
 
 FavoriteToggle = $.klass(Remote.Link,{
-  
+
   // set the correct state to begin with
   // based on whether it's included in userFavorites array
-  
+
   initialize:function($super, options){
     if(this.isGuest()) { this.hide() }
     var asset_id = this.element.attr('href').split('=')[1]; // grab the id from the href
     if(window.userFavorites.length > 0){
       var item = jQuery.grep(window.userFavorites, function(element, index){
-        return element == Number(asset_id); 
+        return element == Number(asset_id);
       });
       if(item.length > 0){ // user has it as a fav
         this.element.addClass('favorited');
@@ -84,7 +78,7 @@ FavoriteToggle = $.klass(Remote.Link,{
     }
     $super();
   },
-  
+
   beforeSend:function(e){
     // modify the link to use the correct user's username
     // this.element.attr("href",window.userPersonalization+this.element.attr('href'));
@@ -156,30 +150,30 @@ jQuery.timer = function (interval, callback)
 
 	if (!callback)
 		return false;
-	
+
 	_timer = function (interval, callback) {
 		this.stop = function () {
 			clearInterval(self.id);
 		};
-		
+
 		this.internalCallback = function () {
 			callback(self);
 		};
-		
+
 		this.reset = function (val) {
 			if (self.id)
 				clearInterval(self.id);
-			
+
 			var val = val || 100;
 			this.id = setInterval(this.internalCallback, val);
 		};
-		
+
 		this.interval = interval;
 		this.id = setInterval(this.internalCallback, this.interval);
-		
+
 		var self = this;
 	};
-	
+
 	return new _timer(interval, callback);
 };
 
@@ -191,7 +185,7 @@ SortablePlaylist = $.klass({
     this.sortURL = $('#sort_tracks_url').attr('href');
     this.addTrackURL = $('#add_track_url').attr('href');
     this.emptyWarning = $('.empty',this.element);
-    this.create_sortable();   
+    this.create_sortable();
     this.element.droppable({
       accept: ".ui-draggable",
       drop: $.bind(this.add_track, this), // LOVE danwebb and $.bind
@@ -215,7 +209,7 @@ SortablePlaylist = $.klass({
   // does the work of inserting the new track and recreating the sortable
   insert_track: function(new_track_html){
     $('#drop_here').before(new_track_html);
-    if(this.sortable_tracks != undefined) 
+    if(this.sortable_tracks != undefined)
       this.sortable_tracks.sortable('refresh');
     else
       this.create_sortable();
@@ -223,11 +217,11 @@ SortablePlaylist = $.klass({
   // catch all delete/remove calls
   onclick: $.delegate({
     'a.remove' : function(e){ return this.remove_track(e.target)}
-  }),  
+  }),
   onmouseover:$.delegate({
     '.asset':function(e){ $(e).css({cursor:'move'})}
   }),
-  
+
   // delete track and remove on success
   remove_track: function(target){
     $(target).html('wait...').parents('.asset').addClass('hover');
@@ -252,7 +246,7 @@ SortablePlaylist = $.klass({
     //if(this.emptyWarning) this.emptyWarning.slideUp();
     }
   }
-  
+
 });
 
 Uploader = $.klass({
@@ -295,7 +289,7 @@ PlaylistSource = $.klass({
               zindex: 800
               });
         });
-        
+
         // we're not using livequery or delegating the drag/drop..
         return false;
       }})
@@ -310,21 +304,21 @@ ResizeableFooter = $.klass({
   onclick: $.delegate({
     '.feedback' : function(e){ return this.toggleFooter()}
     }),
-  
+
   toggleFooter:function (){
     this.opened ? this.close() : this.open();
     return false;
   },
-  
+
   close: function(){
    // this.form.fadeOut(10);
     this.next.animate({
       opacity: 0.6,
       height: this.originalHeight+'px'
-    },500,'jswing');   
+    },500,'jswing');
     this.opened = false;
   },
-  
+
   open: function(){
     this.next.show();
     this.next.css({opacity:0.999});
@@ -334,14 +328,14 @@ ResizeableFooter = $.klass({
     this.form.show();
     this.form.animate({
       opacity: 0.999
-    },1200,'jswing'); 
+    },1200,'jswing');
     $('.feedback',this.form).click($.bind(this.close,this))
-    
+
     $('#new_user_report',this.form).attach(CommentForm);
     this.opened = true;
-    
+
   }
-  
+
 });
 
 SlideOpenNext = $.klass({
@@ -352,12 +346,12 @@ SlideOpenNext = $.klass({
     this.next.slideToggle('slow');
     return false;
   }
-  
+
 });
 
 // text area that grows 2x in size upon need
 AdjustableTextarea = $.klass({
-  
+
   initialize : function(line_height){
     this.line_height = line_height;
     this.character_width = this.element.attr('cols');
@@ -373,14 +367,14 @@ AdjustableTextarea = $.klass({
       this.element.css({height:(this.collapsed_height_in_px*2)+'px'});
     else
       this.element.css({height:this.collapsed_height_in_px+'px'});
-    
+
   },
   onkeypress: function(){
     this.checkForSizeChange();
-  },  
+  },
   oninput: function(){
     this.checkForSizeChange();
-  },  
+  },
   onpaste: function(){
     this.checkForSizeChange();
   },
@@ -392,7 +386,7 @@ AdjustableTextarea = $.klass({
 
 });
 
-// abstracts ui.tabs a bit further   
+// abstracts ui.tabs a bit further
 Tabbies = $.klass({
   initialize : function(desiredTab){
     // rewrite ids to further specify (rails caching can mean several tabs have same id, screwing things up)
@@ -403,13 +397,13 @@ Tabbies = $.klass({
     $('>div',this.element).each(function(i){
       $(this).attr('id',$(this).attr('id')+extraId)
     });
-    
+
     this.defaultTab = 0;
     this.currentTab = desiredTab || this.defaultTab;
     this.element.tabs({
       active: this.currentTab
     });
-    
+
     // when switching tabs, always focus on comment box if on comment tab
     this.element.bind('activate', function(event, ui) {
         if(ui.index==0)
@@ -431,12 +425,12 @@ CommentForm = $.klass(Remote.Form, {
       this.resultBox = $('.comment_waiting', this.element);
       this.textarea = $('textarea', this.element);
       this.checkbox = $(':checkbox.private', this.element);
-     
+
       if(this.checkbox != undefined) this.checkbox.click($.bind(this.togglePrivate,this));
 
       // replace the empty comment personalization with js payload
        $('.comment_as', this.element).replaceWith(window.userPersonalization);
-     
+
       $super();
     },
     beforeSend:function(){
@@ -540,7 +534,7 @@ TrackSeekbar = $.klass({
   }
 });
 
-Track = $.klass({  
+Track = $.klass({
   initialize: function() {
     this.element.addClass('instantiated');
 
@@ -564,8 +558,8 @@ Track = $.klass({
     // dont allow tab details to be opened on editing playlists
     this.allowDetailsOpen = (this.element.hasClass('unopenable') || (this.element.parent().parent('#single_track').size() > 0)) ? false : true;
   },
-    
-  
+
+
   // Lets Delegate!
   // we want the track to do lots of things onclick, but not add 100s of event handlers
   // so test the origin element of the click using selectors
@@ -573,24 +567,24 @@ Track = $.klass({
     '.play_link' : function(e){ return this.togglePlay()},      // open comments
     '.track_link': function(e){ return this.toggleDetails(1)}, // open info
     '.download_link':function(e){ return this.toggleDetails(2)}, // open sharing
-    '.title':function(e){ return this.toggleDetails(1)},  // open 
-    '.title_left_column_bottom':function(e){ return this.toggleDetails(1)},  // open 
-    '.title_left_column_top':function(e){ return this.toggleDetails(1)}  // open 
+    '.title':function(e){ return this.toggleDetails(1)},  // open
+    '.title_left_column_bottom':function(e){ return this.toggleDetails(1)},  // open
+    '.title_left_column_top':function(e){ return this.toggleDetails(1)}  // open
   }),
-  
+
   onmouseenter: $.delegate({
     '.asset' : function(e){  this.element.addClass('hover');}
   }),
-  
+
   onmouseleave: $.delegate({
     '.asset' : function(e){  this.element.removeClass('hover');}
   }),
-  
+
   trackIndex: function(){
     var instances = TrackInstances();
     return instances.indexOf(this);
   },
-  
+
   toggleDetails: function(desiredTab){
 
     if (this.more.is(':hidden')) this.openDetails(desiredTab);
@@ -598,15 +592,15 @@ Track = $.klass({
     else this.closeDetails();
     return false;
   },
-  
+
   openDetails: function(desiredTab){
 
     // don't allow this to happen when editing playlist
     if(!this.allowDetailsOpen) return false;
-    
+
     // set up the tabs if this track hasn't been opened yet
     if(!this.tabbies) this.createTabbies();
-    
+
     // change the tab if the clicked tab is not currently open
     if(this.tabbies.currentTab != desiredTab) this.tabbies.openTab(desiredTab);
 
@@ -614,11 +608,11 @@ Track = $.klass({
     if(this.isOpen != false) this.more.slideDown(300,function(){
         $('textarea',this).focus();
     });
-		
+
 		// Show the edit link if admin and/or owner
 		if((this.owner===window.username) || window.userIsAdmin){
 		  $('.show_to_admin_or_owner', this.more).show();
-		  
+
 		  // Show some text prompting them to edit if no description
 		  if($('.description .user_description :not(h3)', this.more).text() == ""){
 		    var href = $('.edit_in_box', this.more).attr('href');
@@ -626,54 +620,54 @@ Track = $.klass({
 		     $('.description .user_description', this.more).append(prompt);
 		  }
 		}
-		
+
 		// Show mp3 details if admin
 		if(window.userIsAdmin){
 		  $('.show_to_admin').show();
 		}
-		
+
     // close all other detail panes except currently playing
     var instances = TrackInstances();
     for(var i=0; i < instances.length; i++) {
         if(!instances[i].isPlaying() && this.element != instances[i].element)
           instances[i].closeDetails();
     }
-    
+
     this.element.addClass('open');
-  
+
 		return;
-		
+
   },
-  
+
   closeDetails:function(){
     if(!this.allowDetailsOpen || this.commentBoxIsPopulated()) return false;
     this.more.slideUp({duration:300,queue:false});
     this.element.removeClass('open');
   },
-  
+
   commentBoxIsPopulated:function(){
-    if(this.tabbies && 
-      this.tabbies.currentTab == 0 && 
+    if(this.tabbies &&
+      this.tabbies.currentTab == 0 &&
       (this.commentForm != undefined) &&
       ($('textarea',this.more).length > 0) &&
       ($('textarea',this.more).val().length > 1))
         return true;
     else return false;
   },
-  
+
   isOpen:function(){
     this.more.is(':visible');
   },
-  
-  togglePlay: function(target){ 
-    if(this.isPlaying()) 
+
+  togglePlay: function(target){
+    if(this.isPlaying())
       this.pause();
     else
       this.playOrResume();
     // don't follow the link
     return false;
   },
-  
+
   playOrResume : function(){
     this.killOtherTracks();
     this.seekbar.css('display', 'block');
@@ -683,7 +677,7 @@ Track = $.klass({
     this.openDetails(0);
     this.ensureSoundIsReadyThenPlay();
   },
-  
+
   tellSoundManagerToPlay: function(){
     this.startTimer();
     if (this.isPaused()){
@@ -713,18 +707,18 @@ Track = $.klass({
     }
     return this.sound;
   },
-  
+
   play: function(){
     this.getSound().play();
     if(typeof pageTracker != "undefined"){
       pageTracker._trackPageview(this.trackURL);
     }
-  }, 
-  
+  },
+
   isPlaying: function(){
     return this.element.hasClass('playing');
   },
-  
+
   pause: function(){
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
@@ -734,21 +728,21 @@ Track = $.klass({
     // this.element.firstChild.removeClass('sprites-play');
     this.closeDetails();
   },
-  
+
   isPaused: function(){
     if(this.soundIsLoaded()) return true;
     else return false;
   },
-  
+
   soundIsLoaded: function(){
     if (soundManager.soundIDs.length > 0 && ($.inArray(this.soundID,soundManager.soundIDs) != -1)) return true;
     else return false;
   },
-  
+
   resume: function(){
     soundManager.resume(this.soundID);
   },
-  
+
   startNextTrack: function(){
     this.reachedEnd = true;
     // how many tracks are on the page?....
@@ -784,7 +778,7 @@ Track = $.klass({
     if (instances[next] == undefined) next = 0;
     return next;
   },
-  
+
   killOtherTracks : function(){
     // basically a dumb way of making sure no other tracks are playing, looping through
     var instances = TrackInstances();
@@ -794,9 +788,9 @@ Track = $.klass({
         instances[track].pause();
     }
   },
-  
+
   createTabbies : function(){
-    this.tabbies = $(this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array 
+    this.tabbies = $(this.more).attachAndReturn(Tabbies)[0]; // low pro returns an array
     this.commentForm = $('.comment_form form',this.more).attachAndReturn(CommentForm)[0];
     $('a.add_to_favorites',this.more).attach(FavoriteToggle);
   },
@@ -811,7 +805,7 @@ Track = $.klass({
     if (this.sound != undefined && this.isPlaying()) {
 			var time = toTime(this.sound.position);
 			if (!time) return;
-      this.time.html(time); 
+      this.time.html(time);
       document.title = [time, '-', this.track_title, 'by', this.artist].join(' ');
     }
 		return;
@@ -836,8 +830,8 @@ Track = $.klass({
 TrackInstances = function() { return $('.asset').attached(Track) };
 
 
-Radio = $.klass({  
-  
+Radio = $.klass({
+
   initialize : function(){
     this.controls = $('#radio_controls_form',this.element);
     this.currentStation = $('li.selected', this.element);
@@ -849,19 +843,19 @@ Radio = $.klass({
 
   changeStation : function(newStation){
     newStation = ($(newStation.target).parent('li').length == 0) ? $(newStation.target) : $(newStation.target).parent('li');
-    if($('input', newStation).attr('disabled')) 
+    if($('input', newStation).attr('disabled'))
       return false;
     this.currentStation.removeClass('selected');
-    $('input',this.currentStation).attr('checked','');    
+    $('input',this.currentStation).attr('checked','');
     this.currentStation = newStation.addClass('selected');
     $('input',this.currentStation).attr('checked','checked');
     this.channelName.html($('span.channel_name',this.currentStation).html());
     document.cookie = 'radio='+$('input',this.currentStation).val()+';path=/';
     var url = '/radio/' + $('input',this.currentStation).val();
     document.location = url;
-    
+
   },
- 
+
   bindHoverAndClickStation : function(e){
     $('li', this.controls).hover(function() {
         if(!$('input',this).attr('disabled'))
@@ -869,7 +863,7 @@ Radio = $.klass({
       }, function() {
         $(this).removeClass('hover');
     });
-    
+
     $('li', this.controls).click($.bind(this.changeStation, this));
   }
 });
@@ -885,38 +879,38 @@ document.addEventListener("turbolinks:load", function() {
 
   // let us cache forms, make sure that auth tokens are replaced
   $('input[name=authenticity_token]').val($('meta[name=csrf-token]').attr('content'))
-  
+
   // Tracks
   $('.asset').attach(Track);
-  
+
   // display listen_count when needed
   if(window.showPlayCounts){
     $('.listen_count').show();
   }
-  
+
   // Slide open the next element on click
   $('.slide_open_next').attach(SlideOpenNext);
-  
+
   $('a.confirm_before_delete').click(function(){
     result = confirm('Are you sure?');
     return result;
   });
-  
+
   // double the text area size when typing a lot
   $('textarea.double_trouble').attach(AdjustableTextarea,16);
-  
+
   // search submit
   $('#search_button').click(function(){
     $('#search_form').submit();
     return false;
   });
-  
+
   // setup the footer
   $('#footer').attach(ResizeableFooter);
-  
+
   //$('#edit_playlist .draggable_tracks .track').attach(DraggableTracks);
   $('#edit_playlist .playlist').attach(SortablePlaylist);
-  
+
   // let folks drag tracks to their playlist
   $('#playlist_sources .asset').draggable({
     revert:true,
@@ -925,13 +919,13 @@ document.addEventListener("turbolinks:load", function() {
     snap: true,
     zindex: 800
   });
-  
+
   // ability to tab through various track sources
   $('#playlist_tabs').attach(Tabbies);
-  
+
   // the various groups of tracks you can add to a playlist
   $('#playlist_sources').attach(PlaylistSource);
-  
+
   // $('#edit_playlist .cover a').attach(SlideOpenNext, '#pic_upload');
 
   // all links that have the class 'href' will slide open the id that their class id specifies
@@ -941,7 +935,7 @@ document.addEventListener("turbolinks:load", function() {
 
   // uploader
   $('#uploader').attach(Uploader);
-  
+
   // single track page love
   $('#single_track .comment_form form').attach(CommentForm);
   $('#single_track a.add_to_favorites').attach(FavoriteToggle);
@@ -949,7 +943,7 @@ document.addEventListener("turbolinks:load", function() {
   // bio
   $('a.follow').attach(FollowToggle);
 
-  // sort playlists 
+  // sort playlists
   $('#sort_playlists').sortable({
       revert: true,
       scroll: true,
@@ -961,20 +955,20 @@ document.addEventListener("turbolinks:load", function() {
         $('#sort_playlists').sortable('serialize'));
       }
     });
-  
+
   // features/blog comment form
   $('#bug_form form').attach(CommentForm);
   $('.comment .comment_form form').attach(CommentForm);
   $('.update .comment_form form').attach(CommentForm);
   $('.feature .comment_form form').attach(CommentForm);
-    
+
   // mass editing (ajax)
   $('#mass_edit .edit_track form').attach(EditForm);
-  
+
   $('#radio').attach(Radio);
-  
+
   jQuery(document).ready(function($) {
-    $('a[rel*=facebox]').facebox() 
+    $('a[rel*=facebox]').facebox()
   })
 
   // if on the stats page
@@ -996,7 +990,7 @@ document.addEventListener("turbolinks:load", function() {
 
   // highlighting on forums search
   $('#forums_layout p').highlight($('#forum_q').val());
-  
+
   // stretching divs to stick info to bottom corner of vcard author section
   $('.author_container').each(function() {
     // console.log("yo");
@@ -1012,7 +1006,7 @@ document.addEventListener("turbolinks:load", function() {
   $('.user_dropdown').mouseleave(function() {
 
 
-    
+
 
     $('.user_dropdown_menu').animate({top: -60}, 200);
   });
