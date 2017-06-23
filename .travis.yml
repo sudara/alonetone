@@ -15,13 +15,13 @@ notifications:
   email:
     on_success: never
     on_failure: never
-  slack: 
-    secure: "eYnbvsCww1yHawbVqV6tYMhSB2GzMTnLLiM0GPyUT+DJXKZdEfbxiNEc9SFXqq5NunQhIwVfr+uH6AanDxXejjjCm9luKlsyWQr+/xU1B+2iXcg2r5zzQr/04k4YsGkxeFH9YQqEpoHNMRl/RGSroN2cevubEYPMFrvuMPkiUOk="
+  slack:
     on_success: always
     on_failure: change
     template:
-      - 'https://travis-ci.org/sudara/alonetone.png'
+      - 'https://api.travis-ci.org/sudara/alonetone.svg'
       - "Build %{build_number}: %{message} Deets: %{build_url}"
+    secure: Kba9E2bz1eUuI8sEJ4dVDbeiK6hCRbF1N/fWqtjz+180nFPuRt8h73j2FwauAK2hGPlyQTG28wx4gOOBhzBF0AZAwL5WNvpoiIvxapQD6KdifLLZL7MH64Mk2HnEevLUyUHIms8LBakDqeN9ByB7jzOSL6FdO5d+LNQOQLCgswU=
 env:
   global:
     - S3_BUCKET_NAME=junkinthetrunk
