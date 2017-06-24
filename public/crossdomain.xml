@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- http://alonetone.com/crossdomain.xml -->
+<!-- https://alonetone.com/crossdomain.xml -->
 <cross-domain-policy>
   <allow-access-from domain="*.alonetone.com" />
   <allow-access-from domain="*.amazonaws.com" />

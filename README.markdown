@@ -2,7 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/sudara/alonetone.png)](https://codeclimate.com/github/sudara/alonetone)
 ## The future is bright
 
-[alonetone](http://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
+[alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
 alonetone launched in January 2008. As of 2017 it hosts over 70,000 tracks from 5300 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
@@ -26,7 +26,7 @@ We strive to build:
 
 New Features must prove themselves and obey the above principles — not just be built because it sounds cool or would be fun to hack on. We have said "no" to many "intuitive" or "easy" features like threaded comment replies because they would compromise or distract from the above goals.
 
-For more info on alonetone, visit [the alonetone faq](http://alonetone.com/about)
+For more info on alonetone, visit [the alonetone faq](https://alonetone.com/about)
 
 ### Current tech
 
@@ -93,7 +93,7 @@ Please understand that alonetone is open-source as an educational tool, to encou
 
 Sweet, now we are talkin'!
 
-First, [sign up for an account](http://alonetone.com) and start digging in.
+First, [sign up for an account](https://alonetone.com) and start digging in.
 
 Second, hop into our Campfire chat room or email us at support@alonetone.com
 
