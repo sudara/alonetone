@@ -1,15 +1,15 @@
 language: ruby
 cache: bundler
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y libsndfile-dev lame
+- sudo apt-get update -qq
+- sudo apt-get install -y libsndfile-dev lame
 before_script:
-  - mysql -e 'create database alonetone_test';
-  - bundle exec rake copy_config
-  - bundle exec rake db:drop
-  - bundle exec rake db:create
-  - bundle exec rake db:schema:load
-  - bundle exec rake db:seed
+- mysql -e 'create database alonetone_test';
+- bundle exec rake copy_config
+- bundle exec rake db:drop
+- bundle exec rake db:create
+- bundle exec rake db:schema:load
+- bundle exec rake db:seed
 script: bundle exec rake spec
 notifications:
   email:
@@ -21,8 +21,9 @@ notifications:
     template:
       - 'https://api.travis-ci.org/sudara/alonetone.svg'
       - "Build %{build_number}: %{message} Deets: %{build_url}"
-    secure: Kba9E2bz1eUuI8sEJ4dVDbeiK6hCRbF1N/fWqtjz+180nFPuRt8h73j2FwauAK2hGPlyQTG28wx4gOOBhzBF0AZAwL5WNvpoiIvxapQD6KdifLLZL7MH64Mk2HnEevLUyUHIms8LBakDqeN9ByB7jzOSL6FdO5d+LNQOQLCgswU=
+    rooms:
+      secure: Lz7LDMhQB7TSTOSldtsRcmVGfI3i0FOS+DxUWZL5PTHHOMFmsQ7ABBUh0cBkYgp+AL+vHF5XKmRjYJeUGeVZOJq1t+bs19OuX7F/NOPB4pa9aMyFTUJZYTW5R6ukccAnErkfqY9+7do9EXJoIvaMankdbSFD6mTzfIiOrGligII=
 env:
   global:
-    - S3_BUCKET_NAME=junkinthetrunk
-    - secure: O45V0oniMMy2SfZ4GlCafzkPyvbNvf+ppUd9hu82RLQpANI7l7NKGa7gCW/FYlcDDcIuUkut6D21eEWwPG0x8bLqSIoE9x5kSK6xuOoqCKHkznWxsfMVI+CjoVAkekvS8iDlnu3BTIa7m0264uaJovGhUDWN43YJ+Z9sRxwYh8g=
+  - S3_BUCKET_NAME=junkinthetrunk
+  - secure: O45V0oniMMy2SfZ4GlCafzkPyvbNvf+ppUd9hu82RLQpANI7l7NKGa7gCW/FYlcDDcIuUkut6D21eEWwPG0x8bLqSIoE9x5kSK6xuOoqCKHkznWxsfMVI+CjoVAkekvS8iDlnu3BTIa7m0264uaJovGhUDWN43YJ+Z9sRxwYh8g=
