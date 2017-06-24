@@ -20,6 +20,7 @@ Alonetone::Application.routes.draw do
 
     get '404', to: "pages#four_oh_four"
     get '500', to: "pages#error"
+    get 'ok', to: "pages#ok"
 
     # one-off pages
     get 'rpmchallenge' => 'pages#rpm_challenge'
