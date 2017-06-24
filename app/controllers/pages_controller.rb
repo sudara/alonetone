@@ -72,10 +72,9 @@ class PagesController < ApplicationController
 
   def ok
     ActiveRecord::Base.connection.execute("SELECT 1")
-    sidekiq = Sidekiq::Stats.new
     ok = "OK"
-    ok +='_QUEUE_UNDER_200' if sidekiq.enqueued < 200
-    ok +='_AND_WORKERS_UP' if sidekiq.workers_size > 0
+    ok +='_QUEUE_UNDER_200' if Sidekiq::Stats.new.enqueued < 200
+    ok +='_AND_WORKERS_UP' if Sidekiq::ProcessSet.new.size > 0
     render plain: ok
   end
 

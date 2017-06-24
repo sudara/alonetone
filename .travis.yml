@@ -19,8 +19,7 @@ notifications:
     on_success: always
     on_failure: change
     template:
-      - 'https://api.travis-ci.org/sudara/alonetone.svg'
-      - "Build %{build_number}: %{message} Deets: %{build_url}"
+      - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) by %{author}"
     rooms:
       secure: Lz7LDMhQB7TSTOSldtsRcmVGfI3i0FOS+DxUWZL5PTHHOMFmsQ7ABBUh0cBkYgp+AL+vHF5XKmRjYJeUGeVZOJq1t+bs19OuX7F/NOPB4pa9aMyFTUJZYTW5R6ukccAnErkfqY9+7do9EXJoIvaMankdbSFD6mTzfIiOrGligII=
 env:
