@@ -3,7 +3,7 @@
     <div class="title">
       <h1 class="static"><%= yield :h1 %></h1>
     </div>
-    
+
     <div id="links">
       <div id="breadcrumbs">
           <%= yield :breadcrumbs %>
@@ -17,7 +17,7 @@
 
   <div id="forums_layout">
     <div class="search" style="margin-bottom:15px;">
-      <%= form_tag posts_url, :id =>'forum_search',:method => :get do %>
+      <%= form_tag posts_path, :id =>'forum_search',:method => :get do %>
         <%= text_field_tag 'forum_q', params[:forum_q], :placeholder => 'search the forums' %>
         <%= submit_tag 'search' %>
       <% end %>
