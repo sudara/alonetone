@@ -109,13 +109,13 @@ RSpec.describe AssetsController, type: :controller do
 
     it 'should record the refferer' do
       request.user_agent = GOOD_USER_AGENTS.first
-      request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah"
+      request.env["HTTP_REFERER"] = "https://alonetone.com/blah/blah"
       expect{ subject }.to change(Listen, :count)
-      expect(Listen.last.source).to eq("http://alonetone.com/blah/blah")
+      expect(Listen.last.source).to eq("https://alonetone.com/blah/blah")
     end
 
     it 'should allow the refferer to be manually overridden by params' do
-      request.env["HTTP_REFERER"] = "http://alonetone.com/blah/blah"
+      request.env["HTTP_REFERER"] = "https://alonetone.com/blah/blah"
       request.user_agent = GOOD_USER_AGENTS.first
       expect{ get :show, :params => {:id => 'song1', :user_id => users(:arthur).login, :format => :mp3, :referer => 'itunes' }}.to change(Listen, :count)
       expect(Listen.last.source).to eq('itunes')
