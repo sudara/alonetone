@@ -70,6 +70,15 @@ class PagesController < ApplicationController
     @page_title = "How to get your music on iTunes (as a music podcast) with alonetone"
   end
 
+  def ok
+    ActiveRecord::Base.connection.execute("SELECT 1")
+    sidekiq = Sidekiq::Stats.new
+    ok = "OK"
+    ok +='_QUEUE_UNDER_200' if sidekiq.enqueued < 200
+    ok +='_AND_WORKERS_UP' if sidekiq.workers_size > 0
+    render plain: ok
+  end
+
   def sitemap
     respond_to do |wants|
       wants.xml
