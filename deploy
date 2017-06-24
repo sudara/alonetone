@@ -6,7 +6,7 @@ echo
 ssh alonetone '
   source /etc/profile;
   source ~/.profile;
-  cd /data/alonetone-rails4;
+  cd /data/alonetone;
 
   if [[ $(git diff) > "" ]];
     then
