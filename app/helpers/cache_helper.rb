@@ -6,11 +6,13 @@ module CacheHelper
     if collection.is_a?(WillPaginate::Collection) || collection.is_a?(Array)
       collection_key =  Digest::MD5.hexdigest(collection.collect{|a| a.updated_at}.join)
       name = collection.first.class
+      count = collection.size
     else
       collection_key = collection.maximum(:updated_at).try(:utc).try(:to_s, :number)
       name = collection.name
+      count = collection.reorder('').count
     end
-    "#{name}/all-#{collection.reorder('').count}-#{collection_key}"
+    "#{name}/all-#{count}-#{collection_key}"
   end
 
 end

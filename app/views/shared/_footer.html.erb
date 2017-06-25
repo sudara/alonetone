@@ -23,26 +23,16 @@
 <div class="footer_column_2">
 
   <div class="footer_column_2_left">
-    <h3 class="footer-column-header">more information</h3>
-      <div><%= link_to "About", "/about"%></div>
-      <div><%= link_to "Press / Contact", "/about/press"%></div>
-      <div><%= link_to "Stats", "/about/stats"%></div>
-
+    <h3 class="footer-column-header">Browse</h3>
+      <div><%= link_to "All Artists", "/users"%></div>
+      <div><%= link_to "Recent Playlists", "/about/stats"%></div>
+      <div><%= link_to "Recent Tracks", "/radio/latest"%></div>
   </div>
   <div class="footer_column_2_right">
-    <h3 class="footer-column-header">other places to find alonetone</h3>
-     <div>
-        <%= link_to 'https://twitter.com/alonetone' do %>
-          <span class="footer_orange_text">@alonetone</span> on Twitter
-        <% end %>
-     </div>
-     <div>
-
-        <%= link_to 'https://phobos.apple.com/WebObjects/MZStore.woa/wa/viewArtist?id=275623958' do %>
-          <span class="footer_orange_text">alonetone</span> on iTunes
-        <% end %>
-
-     </div>
+    <h3 class="footer-column-header">More</h3>
+      <div><%= link_to "About", "/about"%></div>
+      <div><%= link_to "Stats", "/about/stats"%></div>
+      <div><%= link_to "Press / Contact", "/about/press"%></div>
   </div>
 
   <div class="footer_column_2_bottom">
@@ -60,14 +50,14 @@
 
 <div class="footer_column_3">
 
-  <h3 class="footer-column-header">from the blog</h3>
+  <h3 class="footer-column-header">Latest Blog Entry</h3>
   <ul>
     <li>
       <%= link_to "#{truncate(@latest_update.try(:title), :length => 50, :escape => false)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
     </li>
   </ul>
 
-    <h3 class="footer-column-header">latest forum topics</h3>
+    <h3 class="footer-column-header">Latest Forum Topics</h3>
   <ul>
     <% Topic.for_footer.each do |topic| %>
     <li class="footer-forum-topic">
