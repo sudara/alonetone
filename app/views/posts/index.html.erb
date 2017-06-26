@@ -2,14 +2,14 @@
 
 <% content_for :h1 do %>
   <% if params[:forum_q].blank? -%>
-    <%= @page_title %>
+    <%= @page_title.truncate(70) %>
   <% else -%>
     <%= 'Searching for' %> '<%= h params[:forum_q] %>'
     <% end %>
 <% end %>
 
 <% content_for :breadcrumbs do %>
-  <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
+  <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span>
   Recent Posts
 <% end %>
 

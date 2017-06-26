@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
     <div class="sidebar forum">
-      <div class="box"> 
+      <div class="box">
           <h2 class="box static">Who's talking?</h2>
           <div class="static_content">
             <ul class="talking">
@@ -13,17 +13,17 @@
     </div>
 <% end %>
 
-<% content_for :h1 do %> 
-    <%= @topic.title %>
+<% content_for :h1 do %>
+    <%= @topic.title.truncate(70) %>
     <% if @topic.locked? %>
         <span>(locked)</span>
     <% end %>
-<% end %> 
+<% end %>
 
 <% content_for :breadcrumbs do %>
-    <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> 
-    <%= link_to h(@topic.forum.name),forum_path(@topic.forum) %> <span class="arrow">&rarr;</span> 
-    <%= link_to @topic.title, forum_topic_path(@topic.forum, @topic) %>
+    <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span>
+    <%= link_to h(@topic.forum.name),forum_path(@topic.forum) %> <span class="arrow">&rarr;</span>
+    <%= link_to @topic.title.truncate(70), forum_topic_path(@topic.forum, @topic) %>
     <% page=session[:forum_page] ? session[:forum_page][@topic.forum.id] : nil
     if page and page!=1 %>
         <small style="color:#ccc">
@@ -33,9 +33,9 @@
 <% end %>
 
 <% @page_title = "#{@topic.title} - alonetone forums "%>
-    
+
 <% content_for :extras do %>
-  <%= pluralize @topic.posts.size, 'post' %>, 
+  <%= pluralize @topic.posts.size, 'post' %>,
   <%= pluralize @topic.voices.size, 'person' %> talking
   <%= feed_icon_tag @topic.title, posts_path(:format => :atom,:forum_id => @forum, :topic_id => @topic) %>
 <% end %>
@@ -45,7 +45,7 @@
   <div class="topic_edit_and_delete_links">
     <%= link_to 'edit', edit_forum_topic_path(@topic.forum, @topic) %>
     &nbsp;/&nbsp;
-    <%= link_to 'delete', forum_topic_path(@topic.forum, @topic), :method => :delete, :confirm => 'You want to delete this thread (and all replies?)' %> 
+    <%= link_to 'delete', forum_topic_path(@topic.forum, @topic), :method => :delete, :confirm => 'You want to delete this thread (and all replies?)' %>
   </div>
 <% end %>
 
@@ -69,7 +69,7 @@
   <div id="edit"></div>
   <% if @topic.locked? -%>
     <p>
-      <%= image_tag "icons/private.png", :class => "icon grey", :title => "Topic locked" %> 
+      <%= image_tag "icons/private.png", :class => "icon grey", :title => "Topic locked" %>
       <label>
       <%= 'This topic is locked (you cannot add a reply)' %></label>
     </p>
@@ -83,13 +83,13 @@
             <%= submit_tag "Post Reply" %>
           </div>
         <% end -%>
-        <%= render :partial => 'posts/formatting' %>       
+        <%= render :partial => 'posts/formatting' %>
       </div>
     </div>
   <% end %>
 <% else %>
   <div class="forum_login">
-    <%= link_to 'login',   login_path %> or 
+    <%= link_to 'login',   login_path %> or
   	<%= link_to 'sign up', signup_path %> to reply
   </div>
 <% end %>
