@@ -53,8 +53,8 @@
     height: 18px;
     img{
       width: 18px;
-      height: 18px; 
-    } 
+      height: 18px;
+    }
   }
 }
 
@@ -72,7 +72,7 @@
     color: $nav_item_color;
     background-color: #222;
     font-size: 14px;
-    display: block; 
+    display: block;
     height: 26px;
     span {
       display: block;
@@ -92,7 +92,7 @@
   }
   .user_dropdown_menu {
     position: relative;
-    top: -60px;
+    top: -78px;
     // display: none;
     z-index: 2;
     a {
@@ -101,7 +101,7 @@
       color: $nav_item_color;
       background-color: #333;
       font-size: 14px;
-      display: block; 
+      display: block;
       height: 26px;
       line-height: 26px;
       padding-left: 10px;
@@ -115,7 +115,7 @@
         background-color: #555;
     }
   }
-   
+
   .user_dropdown_menu:nth-child(odd) {
       background-color: $box_background_even;
   }
