@@ -1,8 +1,5 @@
 <div class="header_inner">
-  
-
-  <a href="/" title="home" class="header_logo"></a> 
-
+  <a href="/" title="home" class="header_logo"></a>
   <div class="header_nav">
     <ul id='nav'>
       <li id='browse'>
@@ -14,14 +11,14 @@
       </li>
       <li id='your_stuff'>
         <%= link_to 'Your Stuff', user_home_path(current_user), :title => 'your stuff', :class => "tab#{' active' if @tab == 'your_stuff' }" %>
-      </li> 
+      </li>
       <% else %>
       <li id='upload'>
         <%= link_to 'Upload', signup_path(:new => true), :title => "sign up to upload your music in mp3 format", :class => "tab#{' active' if @tab == 'upload' }" %>
       </li>
       <li id='your_stuff'>
         <%= link_to 'Your Stuff', signup_path(:new => true), :title => "sign up to upload your music in mp3 format", :class => "tab#{' active' if @tab == 'your_stuff' }" %>
-      </li> 
+      </li>
       <% end %>
       <li id='forums'>
         <%= link_to 'Forums', forums_path, :title => 'forums', :class => "tab#{' active' if @tab == 'forums' }" %>
@@ -29,29 +26,26 @@
     </ul>
   </div>
 
-    <% if logged_in? %>
-      
-      <div class="user_dropdown">
-      
-        <%= link_to profile_path(current_user), :class => 'profile_link' do %>
-          <span><%= truncate current_user.name, :length => 24 %></span>
-          <%= image_tag(current_user.avatar(:small)) %>
-        <% end %>      
-        
-        <div class="user_dropdown_menu">
-          <%= link_to 'edit profile', edit_user_path(current_user), :class => 'edit_button' %>
-          <%= link_to 'log out', logout_path, :class => 'logout_button' %>
-        </div>
-      
+  <% if logged_in? %>
+    <div class="user_dropdown">
+      <%= link_to user_home_path(current_user), :class => 'profile_link' do %>
+        <span><%= truncate current_user.name, :length => 24 %></span>
+        <%= image_tag(current_user.avatar(:small)) %>
+      <% end %>
+
+      <div class="user_dropdown_menu">
+        <%= link_to 'upload', new_user_track_path(current_user) %>
+        <%= link_to 'edit profile', edit_user_path(current_user), :class => 'edit_button' %>
+        <%= link_to 'log out', logout_path, :class => 'logout_button' %>
       </div>
-    <% end %>  
+    </div>
+  <% end %>
 
   <% unless logged_in? %>
-    <div class="header_login">  
+    <div class="header_login">
       <li id="login">
         <%= link_to 'Login',login_path, :class => 'login_button' %>
       </li>
     </div>
   <% end %>
-
 </div>

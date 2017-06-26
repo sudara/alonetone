@@ -971,41 +971,25 @@ document.addEventListener("turbolinks:load", function() {
     $('a[rel*=facebox]').facebox()
   })
 
-  // highlighting on forums search
-  $('#forums_layout p').highlight($('#forum_q').val());
-
   // stretching divs to stick info to bottom corner of vcard author section
   $('.author_container').each(function() {
-    // console.log("yo");
-
     $(this).height($(this).parent().height());
   });
-
 
   $('.profile_link').mouseover(function() {
     $('.user_dropdown_menu').animate({top: 0}, 200);
   });
 
   $('.user_dropdown').mouseleave(function() {
-
-
-
-
-    $('.user_dropdown_menu').animate({top: -60}, 200);
+    $('.user_dropdown_menu').animate({top: -78}, 200);
   });
 
-
   $('.profile_link').bind('touchstart', function(event) {
-
-
     if ( $('.user_dropdown_menu').css('top') == "0px" ) {
-
-
     } else {
       event.preventDefault();
       $('.user_dropdown_menu').animate({top: 0}, 200);
     }
-
   })
 
 });
