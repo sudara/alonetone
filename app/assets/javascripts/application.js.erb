@@ -971,23 +971,6 @@ document.addEventListener("turbolinks:load", function() {
     $('a[rel*=facebox]').facebox()
   })
 
-  // if on the stats page
-  $('#statstable').tablesorter({
-    widgets: ['zebra'],
-    sortList: [[1,1]],
-		sortInitialOrder: 'desc'
-	});
-  $('#statstable a').click(function(){
-    $.ajax({
-     url: $(this).attr('href'),
-     dataType: 'text',
-     success: function(newxml){
-       updateChartXML('total_plays', newxml);
-     }
-   });
-   return false;
-  });
-
   // highlighting on forums search
   $('#forums_layout p').highlight($('#forum_q').val());
 
