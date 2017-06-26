@@ -50,9 +50,8 @@ class PlaylistsController < ApplicationController
   def edit
     set_assets
     @listens = @user.listened_to_tracks.preload(:user).
-                 select('assets.*').distinct.
-                 paginate(:page => params[:listens_page], :per_page => 10)
-    @favorites = @user.favorites.tracks.paginate(:page => params[:favorites_page], :per_page => 10) if @user.favorites.present?
+                 select('distinct assets.*, listens.created_at').paginate(page: params[:listens_page], per_page: 10)
+    @favorites = @user.favorites.tracks.paginate(page: params[:favorites_page], per_page: 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
     end
@@ -125,7 +124,7 @@ class PlaylistsController < ApplicationController
   end
 
   protected
-  
+
   def playlist_params
     params.require(:playlist).permit(:user_id, :is_favorite, :year, :title, :description, :private, :position)
   end
