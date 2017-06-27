@@ -77,7 +77,7 @@
       <div class="sticky_footer_buffer"></div>
     </div>
     <div class="footer">
-      <%= cache("footer/#{theme_name}", :expires_in => 3.minutes) do %>
+      <%= cache("footer/#{theme_name}/#{moderator?}", :expires_in => 3.minutes) do %>
         <%= render :partial => 'shared/footer' %>
       <% end %>
     </div>

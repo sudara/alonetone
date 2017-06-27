@@ -3,7 +3,7 @@ class AddWhiteThemeToggleToUsers < ActiveRecord::Migration[5.1]
     remove_column :users, :last_session_at
     remove_column :users, :remember_token
     remove_column :users, :remember_created_at
-    remove_column :users, :identidy_url
+    remove_column :users, :identity_url
     remove_column :users, :token_expires_at
     remove_column :users, :token
     remove_column :users, :pic_id
