@@ -1,10 +1,10 @@
-<% cache(@track_plays) do %>
+<% cache([@track_plays, theme_name]) do %>
 
 <div id="user_track_plays" class="box">
 	<h2 class="box">Latest listens to your music</h2>
     <div class="static_content">
       <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
-		  <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day) 
+		  <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
     </div>
 	<%= render :partial => 'users/track_play', :collection => @track_plays %>
 </div>

@@ -1,4 +1,4 @@
-class AssetsController < ApplicationController  
+class AssetsController < ApplicationController
   include Listens
 
   before_action :find_user, :except => [:radio, :latest]
@@ -18,7 +18,7 @@ class AssetsController < ApplicationController
           @assets = Asset.published.latest.includes(:user => :pic).limit(5)
           set_related_lastest_variables
         end
-        wants.rss do 
+        wants.rss do
           @assets = Asset.published.latest(50)
         end
         wants.json do
@@ -28,7 +28,7 @@ class AssetsController < ApplicationController
       end
     end
   end
-  
+
   # index serves assets for a specific user
   def index
     @page_title = "All music by " + @user.name
@@ -44,12 +44,12 @@ class AssetsController < ApplicationController
       format.html # index.rhtml
       format.xml  { render :xml => @assets.to_xml }
       format.rss  { render :xml => @assets.to_xml }
-      format.js do  render :update do |page| 
+      format.js do  render :update do |page|
           page.replace 'stash', :partial => "assets"
         end
       end
       format.json do
-        cached_json = cache("tracksby"+@user.login) do
+        cached_json = cache("tracksby/#{@user.login}") do
           '{ "records" : ' + @assets.to_json(:methods => [:name, :type, :length, :seconds], :only => [:id,:name,:listens_count, :description,:permalink,:hotness, :user_id, :created_at]) + '}'
         end
         render :json => cached_json
@@ -72,20 +72,20 @@ class AssetsController < ApplicationController
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
-    @page_title = "alonetone Radio: #{@channel}" 
+    @page_title = "alonetone Radio: #{@channel}"
     @assets = Asset.published.radio(params[:source], params, current_user)
   end
-  
+
   def top
     top = (params[:top] && params[:top].to_i < 50) ? params[:top] : 40
     @page_title = "Top #{top} tracks"
     @assets = Asset.published.limit(top).order('hotness DESC')
     respond_to do |wants|
-      wants.html 
+      wants.html
       wants.rss
     end
   end
-  
+
   def search
     @assets = Asset.published.where("assets.filename LIKE ? OR assets.title LIKE ?",
                                  "%#{params[:search]}%", "%#{params[:search]}%").
@@ -112,9 +112,9 @@ class AssetsController < ApplicationController
     end
     @assets = @user.assets unless @assets.present?
   end
-  
+
   def mass_update
-    
+
   end
 
   def create
@@ -123,8 +123,8 @@ class AssetsController < ApplicationController
     flashes = ''
     good = false
 
-    @assets.each do |asset| 
-      if !asset.new_record? 
+    @assets.each do |asset|
+      if !asset.new_record?
         flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
         good = true
       else
@@ -133,7 +133,7 @@ class AssetsController < ApplicationController
       end
     end
 
-    if good 
+    if good
       flash[:ok] = (flashes + "<br/>Now, check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
@@ -143,7 +143,7 @@ class AssetsController < ApplicationController
         flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email #{Alonetone.email}"
       end
       redirect_to new_user_track_path(current_user)
-    end 
+    end
   end
 
   # PUT /assets/1
@@ -156,54 +156,54 @@ class AssetsController < ApplicationController
       result ? head(:ok) : head(:bad_request)
     else
       if result
-        redirect_to user_track_url(@asset.user.login, @asset.permalink) 
+        redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"
-        render :action => "edit" 
+        render :action => "edit"
       end
     end
   end
 
   def destroy
     @asset.destroy
-    flash[:ok] = "We threw the puppy away. No one can listen to it again " << 
+    flash[:ok] = "We threw the puppy away. No one can listen to it again " <<
                  "(unless you reupload it, of course ;)"
-                 
+
     respond_to do |format|
       format.html { redirect_to user_tracks_url(current_user) }
       format.xml  { head :ok }
     end
   end
-  
+
   def stats
     respond_to do |format|
       format.xml
     end
   end
-  
+
   def listen_feed
     @tracks = @user.new_tracks_from_followees(15)
     respond_to do |format|
       format.rss
     end
   end
-  
+
   protected
-  
+
   def asset_params
-    params.require(:asset).permit(:user, :mp3, :size, :name, :user_id, 
+    params.require(:asset).permit(:user, :mp3, :size, :name, :user_id,
     :title, :description, :youtube_embed, :credits)
   end
-    
+
   def track_not_found
     flash[:error] = "Hmm, we didn't find that track!"
     raise ActionController::RoutingError.new('Track Not Found')
   end
-  
+
   def user_has_tracks_from_followees?
     logged_in? and current_user.has_followees?
   end
-  
+
   def extract_assets_from_params
     @assets = []
     attrs = { private: !!(params[:commit] =~ /don't publish/) }
@@ -216,7 +216,7 @@ class AssetsController < ApplicationController
       end
     end
   end
-  
+
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
     @popular = Asset.published.order('hotness DESC').includes(:user => :pic).limit(5)
@@ -224,7 +224,7 @@ class AssetsController < ApplicationController
     @comments = admin? ? Comment.last_5_private : Comment.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
   end
-  
+
   def set_related_show_variables
     @listens = @asset.listens
     @comments = @asset.comments.only_public
@@ -234,13 +234,13 @@ class AssetsController < ApplicationController
     @description = @page_title + " - #{@asset[:description]}"
     @single_track = true
   end
-  
+
   def authorized?
     # admin or the owner of the asset can edit/update/delete
     !dangerous_action? || current_user_is_admin_or_owner?(@user) || current_user_is_admin_or_owner?(@asset.user)
   end
-  
+
   def dangerous_action?
-    %w(destroy update edit create).include? action_name 
+    %w(destroy update edit create).include? action_name
   end
 end

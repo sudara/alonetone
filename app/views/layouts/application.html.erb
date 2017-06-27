@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title><%= @page_title || 'alonetone, a damn fine home for musicians' %></title>
 
-    <% if current_user.try(:white_theme_enabled) %>
+    <% if white_theme_enabled? %>
       <%= stylesheet_link_tag ('white_theme') %>
     <% else %>
       <%= stylesheet_link_tag ('application') %>
@@ -77,7 +77,7 @@
       <div class="sticky_footer_buffer"></div>
     </div>
     <div class="footer">
-      <%= cache('footer', :expires_in => 3.minutes) do %>
+      <%= cache("footer/#{theme_name}", :expires_in => 3.minutes) do %>
         <%= render :partial => 'shared/footer' %>
       <% end %>
     </div>

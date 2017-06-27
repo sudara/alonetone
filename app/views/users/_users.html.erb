@@ -1,9 +1,9 @@
 <div id="user_index">
-  <div id="static_header">  
+  <div id="static_header">
     <div class="title">
       <h1 class="static">Browse all alonetone artists</h1>
     </div>
-    
+
     <div id="links">
       <ul class="links">
        <%= user_nav_item "last seen&nbsp;".html_safe, {:action => 'index', :sort => nil} %>
@@ -17,14 +17,14 @@
       <%= will_paginate @users if @users && params[:sort] != "map"%>
     </div>
   </div>
-  
+
   <div id="large_users_grid">
     <% if @sort == 'dedicated_listeners'%>
-      <% cache("dedicated-#{params[:page]}", :expires_in => 4.hours) do %>
+      <% cache("dedicated/#{params[:page]}/#{theme_name}", :expires_in => 4.hours) do %>
         <%= render :partial => 'shared/user', :collection => @users %>
       <% end %>
     <% else %>
-      <% cache("#{digest_for_users}-#{params[:page]}") do %>
+      <% cache("#{digest_for_users}/#{params[:page]}/#{theme_name}") do %>
         <%= render :partial => 'shared/user', :collection => @users %>
       <% end %>
     <% end %>
