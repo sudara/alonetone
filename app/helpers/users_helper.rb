@@ -66,7 +66,7 @@ module UsersHelper
   def cache_key_for_follows(follows)
     count          = follows.count
     max_updated_at = follows.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "follows/all-#{count}-#{max_updated_at}"
+    "follows/all-#{count}/#{max_updated_at}/#{theme_name}"
   end
 
   def digest_for_users

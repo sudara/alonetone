@@ -1,4 +1,4 @@
-<%= cache( logged_in? ? "tabs#{asset.cache_key}" : "guest_tabs#{asset.cache_key}" ) do %>
+<%= cache( logged_in? ? "tabs#{asset.cache_key}/#{theme_name}" : "guest_tabs#{asset.cache_key}/#{theme_name}" ) do %>
 <div class="more tabs" style="display:none;">
     <ul>
 	  <% if logged_in? || asset.guest_can_comment? %>
@@ -6,7 +6,7 @@
 	  <% end %>
       <li><%= link_to 'about', "#details_track_#{asset.unique_id}" %> </li>
     </ul>
-    
+
     <%= favorite_toggle(asset) %>
 		<% if logged_in? || asset.guest_can_comment? %>
 	    <div id="comment_track_<%= asset.unique_id %>">
@@ -17,17 +17,17 @@
   	<div id="details_track_<%= asset.unique_id %>">
 
         <div class="description_panel panel no_border">
-            
-            <div class='alonetoner'>          
+
+            <div class='alonetoner'>
                 <%= user_image_link(asset.user, :small)%>
             </div>
-            
+
             <div class="description">
-                
-                <div class='user_description'>                  
+
+                <div class='user_description'>
                   <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
                 </div>
-            	  
+
                 <div class="stats">
                   Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
         	        listened to <strong><%= asset.listens_count %> times</strong>.
@@ -35,7 +35,7 @@
         	           <br>
                      Commented on <strong><%= pluralize asset.comments_count, 'times' %></strong>.
         	        <% end %>
-                  
+
                   <% if asset.comments_count == 0 && asset.favorites_count > 0 %>
                     <br>
                   <% end %>
@@ -45,7 +45,7 @@
                     Favorited by <strong><%= pluralize asset.favorites_count, 'alonetoner' %></strong>.
         	        <% end %>
     	          </div>
-    	          
+
     	          <div class="admin show_to_admin">
 	                mp3: <strong><%= asset.mp3_file_name %></strong><br>
                   track: <strong> <%= asset.title%></strong><br>
@@ -79,6 +79,6 @@
 
             </div>
         </div>
-    </div>	
+    </div>
   </div>
 <% end %>
