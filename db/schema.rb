@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170626233640) do
 
-  create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "mp3_content_type"
     t.string "mp3_file_name"
     t.integer "mp3_file_size"
@@ -30,17 +30,17 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.string "genre"
     t.string "artist"
     t.integer "listens_count", default: 0
-    t.text "description"
-    t.text "credits"
+    t.text "description", limit: 16777215
+    t.text "credits", limit: 16777215
     t.string "youtube_embed"
     t.float "hotness", limit: 24
     t.integer "favorites_count", default: 0
-    t.text "lyrics"
-    t.text "description_html"
+    t.text "lyrics", limit: 16777215
+    t.text "description_html", limit: 16777215
     t.float "listens_per_week", limit: 24
     t.integer "comments_count", default: 0
     t.datetime "updated_at"
-    t.text "waveform", limit: 16777215
+    t.text "waveform", limit: 4294967295
     t.boolean "private", default: false, null: false
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.string "permalink"
   end
 
-  create_table "listens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "listens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.datetime "updated_at"
   end
 
-  create_table "pics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "pics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "pic_file_size"
     t.string "pic_content_type"
     t.string "pic_file_name"
@@ -212,9 +212,9 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
   end
 
-  create_table "playlists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "playlists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "title"
-    t.text "description"
+    t.text "description", limit: 16777215
     t.string "image"
     t.integer "user_id"
     t.datetime "created_at"
@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.string "link1"
     t.string "link2"
     t.string "link3"
-    t.text "credits"
+    t.text "credits", limit: 16777215
     t.boolean "has_details", default: false
     t.string "theme"
     t.index ["permalink"], name: "index_playlists_on_permalink"
@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.index ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
   end
 
-  create_table "tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "playlist_id"
     t.integer "asset_id"
     t.integer "position", default: 1
@@ -327,7 +327,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.text "description_html"
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "login", limit: 40
     t.string "email", limit: 100
     t.string "salt", limit: 128, default: "", null: false
@@ -341,17 +341,17 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.string "display_name"
     t.integer "playlists_count", default: 0, null: false
     t.string "website"
-    t.text "bio"
+    t.text "bio", limit: 16777215
     t.integer "listens_count", default: 0
     t.string "itunes"
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
     t.string "country"
     t.string "city"
-    t.text "settings"
+    t.text "settings", limit: 16777215
     t.float "lat", limit: 24
     t.float "lng", limit: 24
-    t.text "bio_html"
+    t.text "bio_html", limit: 16777215
     t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
     t.string "browser"
