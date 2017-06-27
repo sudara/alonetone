@@ -16,7 +16,8 @@ Alonetone::Application.routes.draw do
     resources :user_sessions
 
     # admin stuff
-    get 'secretz' => 'secretz#index'
+    get 'secretz' => 'admin#secretz'
+    get 'toggle_theme' => 'admin#toggle_theme'
 
     get '404', to: "pages#four_oh_four"
     get '500', to: "pages#error"

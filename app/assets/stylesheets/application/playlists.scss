@@ -173,7 +173,7 @@ img.cover_200 {
       float: left;
       width: 148px;
       height: 136px;
-      overflow: hidden;      
+      overflow: hidden;
     }
     p.description {
       // float: left;
@@ -187,13 +187,13 @@ img.cover_200 {
   }
   .empty {
     position: relative;
-    color: $white;
+    color: $text_color2;
     background-color: $orange_background;
     @include background-image(linear-gradient(#EB954B, #E66D29));
     padding: 10px 20px 10px 20px;
     margin-bottom: 1px;
     a {
-      color: $white;
+      color: $text_color2;
       text-decoration: underline;
       font-weight: bold;
     }

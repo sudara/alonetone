@@ -61,10 +61,10 @@
       }
     }
     .sprites-play {
-     margin-left:2px; 
+     margin-left:2px;
     }
     .sprites-pause {
-     margin-left:2px; 
+     margin-left:2px;
     }
     &.play-button {
     }
@@ -79,11 +79,11 @@
     overflow: hidden;
     padding-top: 10px;
     .title_left_column{
-      float:left; 
+      float:left;
       width: 300px;
     }
     .title_right_column{
-      float:right; 
+      float:right;
       position:relative;
       height:100%;
       .counter {
@@ -164,7 +164,7 @@
     div.title {
       div.counter {
         opacity: 0.99;
-        color: $white;
+        color: $text_color2;
       }
       div.time{
         color:#fecda6;

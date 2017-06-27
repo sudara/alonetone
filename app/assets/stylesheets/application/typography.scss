@@ -28,14 +28,14 @@ img a, img a:visited {
   font-size: 14px;
   a, a:visited {
     font-size: 14px;
-    color: $white;
+    color: $text_color2;
     font-weight: normal;
     &:hover {
       background-color: transparent;
     }
   }
   p {
-    color: $white;
+    color: $text_color2;
     margin-bottom: 20px;
   }
   .static_content {
@@ -95,7 +95,7 @@ h1 {
 }
 
 h2, .latest-playlists-header h2 a{
-  color: $white;
+  color: $text_color2;
   font-family: $header_font, Helvetica, Arial;
   font-size: 20px;
   font-weight: 500;
@@ -221,7 +221,7 @@ div.flash {
   @include background-image(linear-gradient(#EB954B, #E66D29));
   font-family: $header_font, Helvetica, Arial;
   font-size: 24px;
-  color: $white;
+  color: $text_color2;
   padding: 20px 30px;
   margin-bottom: 20px;
   div.flash_stats {
@@ -251,7 +251,7 @@ div.flash {
     // background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
 
     // @include background-image(linear-gradient(#6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%));
-    
+
     @include background-image(linear-gradient(#a6b195 .1%, #909d7c 49.9%, #869471 50%, #6c7959 100% ));
 
 
@@ -381,7 +381,7 @@ span.private {
   display: block;
   // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
   @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
-  @include border-radius(5px, 5px); 
+  @include border-radius(5px, 5px);
   text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
   font-family: $header_font;
   height: 32px;
@@ -394,7 +394,7 @@ span.private {
   // text-align: center;
   margin-left: 8px;
   color: #303225!important;
-  
+
   &.right {
     // float: right;
     // position: relative;
@@ -411,7 +411,7 @@ span.private {
   &:active {
     @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
     @include text-shadow(none);
-  }  
+  }
   span{
     float:left;
   }
@@ -448,12 +448,12 @@ a.edit {
 
 a.edit_profile, a.follow {
   display: block;
-  @include border-radius(5px, 5px); 
+  @include border-radius(5px, 5px);
   @include background-image(linear-gradient(#EDEFE9 0%, #CCD2C2 4%, #B0BAA3 96%, #8F9D7B 100% ));
   @include text-shadow(rgba(white, .9) 1px 1px 1px);
 
   &:hover {
-    @include background-image(linear-gradient(#F1F3ED 0%, #D9DED1 4%, #C4CBBA 96%, #ACB59C 100% ));  
+    @include background-image(linear-gradient(#F1F3ED 0%, #D9DED1 4%, #C4CBBA 96%, #ACB59C 100% ));
   }
 
   &:active {
