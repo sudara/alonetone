@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170626233640) do
 
-  create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "mp3_content_type"
     t.string "mp3_file_name"
     t.integer "mp3_file_size"
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.string "permalink"
   end
 
-  create_table "listens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=CHARSET=utf8 COLLATE=utf8_unicode_ci1" do |t|
+  create_table "listens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "logged_exceptions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=CHARSET=utf8 COLLATE=utf8_unicode_ci1" do |t|
+  create_table "logged_exceptions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "exception_class"
     t.string "controller_name"
     t.string "action_name"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.datetime "updated_at"
   end
 
-  create_table "pics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=CHARSET=utf8 COLLATE=utf8_unicode_ci1" do |t|
+  create_table "pics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "pic_file_size"
     t.string "pic_content_type"
     t.string "pic_file_name"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
   end
 
-  create_table "playlists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=CHARSET=utf8 COLLATE=utf8_unicode_ci1" do |t|
+  create_table "playlists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "title"
     t.text "description"
     t.string "image"
@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.index ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
   end
 
-  create_table "tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=CHARSET=utf8 COLLATE=utf8_unicode_ci1" do |t|
+  create_table "tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "playlist_id"
     t.integer "asset_id"
     t.integer "position", default: 1
@@ -327,7 +327,7 @@ ActiveRecord::Schema.define(version: 20170626233640) do
     t.text "description_html"
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=CHARSET=utf8 COLLATE=utf8_unicode_ci1" do |t|
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "login", limit: 40
     t.string "email", limit: 100
     t.string "salt", limit: 128, default: "", null: false
