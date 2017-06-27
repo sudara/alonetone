@@ -18,7 +18,7 @@
   }
   em, a:hover, span.current {
     background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
-    color: $white;
+    color: $text_color2;
     text-decoration: none;
   }
   em {
@@ -123,7 +123,7 @@ a.overlay {
 
 .comment {
   position: relative;
-  color: $white;
+  color: $text_color2;
   background: image-url('backgrounds/new_comment.png') repeat-x top left;
   div.private_comment {
     background: image-url('icons/private.png') no-repeat top left;
@@ -143,14 +143,14 @@ a.overlay {
     }
   }
   .comment_user_text {
-    color: $white;
+    color: $text_color2;
     margin-left: 72px;
     padding-top: 10px;
     font-size: 12px;
     text-shadow: black 1px 1px 1px;
     a,a:visited {
       font-weight: bold;
-      color: $white;
+      color: $text_color2;
       text-decoration: underline;
       font-size: 12px;
       text-shadow: black 1px 1px 1px;
@@ -161,11 +161,11 @@ a.overlay {
     margin-bottom: 1px;
     margin-left: 72px;
     a, a:visited, a:hover {
-      color: $white;
+      color: $text_color2;
       text-shadow: black 1px 1px 1px;
     }
     p {
-      color: $white;
+      color: $text_color2;
       text-shadow: black 1px 1px 1px;
       margin: 16px 0px 0px 0px;
       line-height: 18px;
@@ -174,7 +174,7 @@ a.overlay {
     .comment_controls {
       float: right;
       a, a:visited, a:hover {
-        color: $white;
+        color: $text_color2;
         font-size: 11px;
         font-weight: normal;
       }
@@ -408,7 +408,7 @@ overflow: hidden;
       }
       a:hover {
         background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
-        color: $white;
+        color: $text_color2;
         text-decoration: none;
       }
     }
@@ -419,7 +419,7 @@ overflow: hidden;
     }
     li.current {
       font-weight: 500;
-      color: $white;
+      color: $text_color2;
       padding: 0px 15px;
     }
     div.pagination {

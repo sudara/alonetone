@@ -7,13 +7,14 @@ $box_background_even: #deeacd;
 // text
 $header_font: ronnia-1, ronnia-2, Helvetica, Arial;
 
-$text_color: #37392b;
+$text_color: #37392b;  // this is in headers and light green areas
+$text_color2: #f6fceb; // this is on the black background, like comments
+
 $nav_item_color: #C1C9B4;
 
 $tab_box_silver: #e1e2e1;
 $playlist_box_silver: #c7c8c7;
 $silver: #c7c8c7;
-$white: #f6fceb;
 $orange: #da6d25;
 $orange_background: #e66d29;
 $red: #d3220c;

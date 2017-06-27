@@ -31,7 +31,7 @@ div.tabs {
     padding: 0 25px;
     background: image-url('backgrounds/tabs.png') no-repeat left top;
     // position relative makes opacity fail for disabled tab in IE
-    color: $white;
+    color: $text_color2;
     font-weight: bold;
     line-height: 35px;
     text-align: center;
@@ -216,7 +216,7 @@ div.tabs {
           margin-top: 0px;
           margin-bottom:0px;
         }
-        
+
         .description_more p  a {
           font-weight: bold!important;
           text-decoration: none!important;

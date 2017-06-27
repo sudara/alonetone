@@ -1,7 +1,12 @@
-class SecretzController < ApplicationController
-  before_action :require_login
-  
-  def index
+class AdminController < ApplicationController
+  before_action :moderator_only
+
+  def toggle_theme
+    current_user.toggle! :white_theme_enabled
+    redirect_back(fallback_location: root_path)
+  end
+
+  def secretz
     @ip_listens = Listen.most_active_ips
     @same_ip_users = User.with_same_ip
     @track_listens = Listen.most_active_tracks

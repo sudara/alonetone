@@ -33,6 +33,10 @@
       <div><%= link_to "About", "/about"%></div>
       <div><%= link_to "Stats", "/about/stats"%></div>
       <div><%= link_to "Press / Contact", "/about/press"%></div>
+      <% if moderator? %>
+      <div><%= link_to "Toggle Theme", "/toggle_theme" %></div>
+      <div><%= link_to "Secretz", "/secretz" %></div>
+      <% end %>
   </div>
 
   <div class="footer_column_2_bottom">
@@ -49,15 +53,7 @@
 </div>
 
 <div class="footer_column_3">
-
-  <h3 class="footer-column-header">Latest Blog Entry</h3>
-  <ul>
-    <li>
-      <%= link_to "#{truncate(@latest_update.try(:title), :length => 50, :escape => false)}", blog_home_path, :id=>'updates_link', :class=> (new_to_user?(@latest_update) ? 'new' : '') %>
-    </li>
-  </ul>
-
-    <h3 class="footer-column-header">Latest Forum Topics</h3>
+  <h3 class="footer-column-header">Latest Forum Topics</h3>
   <ul>
     <% Topic.for_footer.each do |topic| %>
     <li class="footer-forum-topic">
@@ -66,6 +62,4 @@
     </li>
     <% end %>
   </ul>
-
-
 </div>
