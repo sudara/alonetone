@@ -9,8 +9,8 @@ sudara:
   activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
   admin: true
-  
-# normal   
+
+# normal
 arthur:
   id: 2
   login: arthur
@@ -22,7 +22,7 @@ arthur:
   updated_at: <%= 1.days.ago.to_s :db %>
   last_request_at: <%= 1.days.ago.to_s :db %>
   current_login_ip: 9.9.9.9
-  
+
 # deleted
 aaron:
   id: 3
@@ -32,8 +32,7 @@ aaron:
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
-  deleted_at: <%= 5.hours.ago.to_s :db %>
-  
+
 # not activated
 not_activated:
   id: 4
@@ -43,7 +42,7 @@ not_activated:
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
   perishable_token: 8eou87daoeuhdtn
-  
+
 # moderator
 sandbags:
   id: 5
@@ -66,4 +65,3 @@ joeblow:
   created_at: <%= 1.days.ago.to_s :db %>
   activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
-  
