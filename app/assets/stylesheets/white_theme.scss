@@ -19,6 +19,7 @@
 @import "application/forums";
 @import "application/upload";
 
+
 #wrapper{
   background-image:none;
 }
@@ -27,6 +28,26 @@
   background: none;
 }
 
+// no more big tabs
 #nav{
   display:none;
+}
+
+.header{
+  background-color:#fff;
+  height:36px;
+}
+
+// no more icons by h2s
+.sprites-latest-uploaded,
+.sprites-before-heading,
+.sprites-stars {
+  display:none;
+  margin:0;
+}
+
+h2#latest_uploaded, #user_latest h2,
+h2#kicking_ass, #user_popular h2, h2#recently_favorited,
+h2#latest_comments, #user_comments h2 {
+  text-indent: 0px;
 }
