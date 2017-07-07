@@ -1,0 +1,695 @@
+body {
+  font-family: Helvetica, Arial, Geneva;
+  color: $text_color;
+  text-rendering: optimizeLegibility;
+}
+
+a, a:visited {
+  font-family: Helvetica, Arial, Geneva;
+  color: $text_color;
+  line-height: 16px;
+  font-family: Helvetica, Arial, Geneva;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    background-color: transparent;
+  }
+}
+
+img a, img a:visited {
+  color: transparent;
+  &:hover {
+    color: none;
+  }
+}
+
+.content {
+  font-size: 14px;
+  a, a:visited {
+    font-size: 14px;
+    color: $text_color2;
+    font-weight: normal;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  p {
+    color: $text_color2;
+    margin-bottom: 20px;
+  }
+  .static_content {
+    p, .ui-tabs-panel p {
+      color: $text_color;
+    }
+  }
+}
+
+.content .box, .content .comment, .content .user_report .body, .content .update .body, .notice, .footer {
+  a, a:visited {
+    color: $text_color;
+    &:hover {
+      color: #191a13;
+    }
+  }
+  p {
+    color: $text_color;
+    img {
+      max-width: 550px;
+    }
+  }
+  ol li {
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+}
+
+.content .user_report .body, .content .update .body, .notice, .static_content, .content .comment_body {
+  a, a:visited {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  ul {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    li {
+      list-style: square inside none;
+      margin-left: 20px;
+      line-height: 18px;
+    }
+  }
+}
+
+h1 {
+  color: #f6f6f6;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: rgba(3, 0, 0, 0.42) 2px 2px 1px;
+  margin-bottom: 25px;
+  font-family: $header_font, Helvetica, Arial!important;
+  &.user, &.static, &.notice {
+    color: $text_color;
+    text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
+    margin: 0;
+  }
+}
+
+h2, .latest-playlists-header h2 a{
+  color: $text_color2;
+  font-family: $header_font, Helvetica, Arial;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 2em;
+  margin-bottom: 1em;
+  // text-shadow: rgba(0, 3, 2, 0.42) 2px 2px 1px;
+}
+
+h2.box {
+  font-family: $header_font, Helvetica, Arial;
+  display: block;
+  color: $text_color;
+  height: 42px;
+  line-height: 44px;
+  width: 100%;
+  text-indent: 25px;
+  font-weight: bold;
+  margin-bottom: 1px;
+  background-color: $box_background;
+  text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
+}
+
+h2.box.small {
+  height: 25px;
+  font-size: 16px;
+  line-height: 25px;
+  margin-bottom: 3px;
+}
+
+h2.box.static {
+  margin-bottom: 1px;
+}
+
+h3.box.static {
+  margin-top: 1px;
+  text-indent: 25px;
+}
+
+h2.box_title, .content h2.box_title a {
+  margin: 0px 0px 0px 0px;
+  color: $text_color;
+  line-height: 20px;
+  font-size: 20px;
+  text-shadow: rgba(255, 246, 211, 0.55) 2px 2px 1px;
+}
+
+span.note {
+  font-size: 11px;
+}
+
+// iconified headers
+.latest-playlists-header h2 {
+  padding-left: 35px;
+  margin-bottom:.5em;
+  a{
+    margin-bottom: 0em;
+  }
+}
+
+.sprites-latest-playlists {
+  margin-top:5px;
+}
+h2#user_latest_playlists {
+  padding-left: 35px;
+}
+
+#user-index #static_header h1.static {
+  background-image: image-url('icons/user.png');
+  background-repeat: no-repeat;
+  background-position: -4px -3px;
+  padding-left: 27px;
+}
+
+h2#latest_uploaded, #user_latest h2 {
+  text-indent: 18px;
+}
+
+.sprites-latest-uploaded {
+  margin-left: 20px;
+  margin-top: 13px;
+}
+
+.sprites-stars {
+  margin-left: 14px;
+  margin-top: 8px;
+}
+
+h2#kicking_ass, #user_popular h2 {
+  text-indent: 14px;
+}
+
+h2#recently_favorited {
+  text-indent: 14px;
+}
+
+h2#latest_comments, #user_comments h2 {
+  text-indent: 14px;
+}
+
+.sprites-latest-comments {
+  margin-left: 16px;
+  margin-top: 10px;
+}
+
+.playlist_title h2 {
+  text-shadow: white 1px 1px 1px;
+}
+
+.errorExplanation h2 {
+  display: none;
+}
+
+.errorExplanation p, .notice h2 {
+  color: $text_color;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: rgba(0, 3, 2, 0.42) 2px 2px 1px;
+}
+
+div.flash {
+  clear: both;
+  background-color: $orange_background;
+  @include background-image(linear-gradient(#EB954B, #E66D29));
+  font-family: $header_font, Helvetica, Arial;
+  font-size: 24px;
+  color: $text_color2;
+  padding: 20px 30px;
+  margin-bottom: 20px;
+  div.flash_stats {
+    font-size: 14px;
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.content {
+  a.view_all {
+    font-family: $header_font;
+    color: $text_color;
+    text-shadow: rgba(255, 255, 255, 0.3) 1px 1px 0;
+    float: right;
+    padding-left: 13px;
+    padding-right:10px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 31px;
+    border-radius: 5px;
+    margin-left: 8px;
+
+    // background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6c7959), color-stop(0.499, #869471), color-stop(0.5, #909d7c), color-stop(0.99, #a6b195));
+    // background-image: -moz-linear-gradient(center bottom, #6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%);
+
+    // @include background-image(linear-gradient(#6c7959 0%, #869471 49.9%, #909d7c 50%, #a6b195 99.9%));
+
+    @include background-image(linear-gradient(#a6b195 .1%, #909d7c 49.9%, #869471 50%, #6c7959 100% ));
+
+
+    -webkit-box-shadow: inset 0 1px 0 #f0f2ed, inset 0 -1px 0 #303627;
+    border-radius: 5px;
+    height: 32px;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+    &:hover {
+      background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #a6b395), color-stop(0.499, #bcc5ab), color-stop(0.5, #c1cab3), color-stop(0.99, #cfd6c3));
+      background-image: -moz-linear-gradient(center bottom, #a6b395 0%, #bcc5ab 49.9%, #c1cab3 50%, #cfd6c3 99.9%);
+      -webkit-box-shadow: inset 0 1px 0 #f7f8f5, inset 0 -1px 0 #748658;
+    }
+    &:active {
+      background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #86946d), color-stop(0.499, #67784f), color-stop(0.5, #5c6d48), color-stop(0.99, #464f39));
+      background-image: -moz-linear-gradient(center bottom, #86946d 0%, #67784f 49.9%, #5c6d48 50%, #464f39 99.9%);
+      -webkit-box-shadow: inset 0 1px 0 #1f231a, inset 0 -1px 0 #eaedcd;
+    }
+    span{
+      float:left;
+    }
+  }
+}
+
+div.notice a.hide_notice {
+  float: right;
+  margin-top: -31px;
+  margin-right: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  color: $orange;
+}
+
+div.notice li {
+  margin-bottom: 5px;
+}
+
+div.notice ol {
+  margin-top: 8px!important;
+}
+
+
+div.footer_box {
+  height: 32px;
+  text-align: right;
+  line-height: 30px;
+  &.onepx {
+    margin-top: 1px;
+  }
+  &.empty {
+    margin: 0;
+    background: none;
+  }
+  a, a:visited, a:hover, a:active {
+    display: block;
+    float: right;
+    height: 32px;
+  }
+}
+
+a.edit_green, a.delete_green {
+  display: block;
+  float: right;
+  height: 32px;
+  margin-left: 10px;
+}
+
+a.edit_green {
+  width: 73px;
+  background: transparent image-url('icons/edit_green.png') no-repeat 0px 0px;
+  &:hover {
+    background-position: -73px 0px;
+  }
+  &:active {
+    background-position: -146px 0px;
+  }
+}
+
+a.delete_green {
+  width: 97px;
+  background: transparent image-url('icons/delete_green.png') no-repeat 0px 0px;
+  &:hover {
+    background-position: -97px 0px;
+  }
+  &:active {
+    background-position: -194px 0px;
+  }
+}
+
+span.orange {
+  color: $orange;
+}
+
+// for example the sort url and add url on edit playlists
+a.hidden {
+  display: none;
+}
+
+.fieldWithErrors input, .fieldWithErrors textarea {
+  border: $orange 2px solid;
+}
+
+small {
+  font-size: 11px;
+}
+
+textarea.private {
+  border: 1px solid black;
+  border-color: $red;
+}
+
+span.private {
+  color: $red;
+  font-size: 11px!important;
+  img {
+    margin-bottom: -3px;
+  }
+  display: block;
+  margin-top: -2px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+// icon links (add/delete/etc)
+
+.track_about_link {
+  display: block;
+  // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
+  @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
+  @include border-radius(5px, 5px);
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+  font-family: $header_font;
+  height: 32px;
+  padding: 0 12px!important;
+  font-weight: bold!important;
+  font-size: 16px!important;
+  float: left!important;
+  line-height: 31px!important;
+  text-decoration: none!important;
+  // text-align: center;
+  margin-left: 8px;
+  color: #303225!important;
+
+  &.right {
+    // float: right;
+    // position: relative;
+    // margin-top: -50px;
+    // margin-right: 10px;
+  }
+
+  &:hover {
+    // @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
+    @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
+  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+    @include text-shadow(none);
+  }
+  &:active {
+    @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
+    @include text-shadow(none);
+  }
+  span{
+    float:left;
+  }
+}
+
+a.edit_in_box {
+  // width: 50px;
+}
+
+a.view_more {
+  // width: 84px;
+}
+
+a.download {
+  // width: 84px;
+}
+
+
+a.edit {
+  display: block;
+  background: image-url('icons/edit.png') no-repeat left center;
+  text-indent: -1000px;
+  height: 20px;
+  width: 31px;
+  float: left;
+  &.right {
+    position: relative;
+    margin-top: -37px;
+    margin-right: 25px;
+    float: right;
+    top: 0px;
+  }
+}
+
+a.edit_profile, a.follow {
+  display: block;
+  @include border-radius(5px, 5px);
+  @include background-image(linear-gradient(#EDEFE9 0%, #CCD2C2 4%, #B0BAA3 96%, #8F9D7B 100% ));
+  @include text-shadow(rgba(white, .9) 1px 1px 1px);
+
+  &:hover {
+    @include background-image(linear-gradient(#F1F3ED 0%, #D9DED1 4%, #C4CBBA 96%, #ACB59C 100% ));
+  }
+
+  &:active {
+    @include background-image(linear-gradient(#879674 0%, #ABB59D 4%, #CED6C5 96%, #EDEFE9 100% ));
+  }
+
+  line-height: 20px;
+  height: 48px;
+  width: 48px;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 2px;
+  font-size: 10px;
+  font-family: $header_font;
+  color: #000!important;
+  float: right;
+  top: 1px;
+
+  > .sprites-pencil-big {
+    margin: 0 auto;
+    margin-top: 9px;
+  }
+
+  > .sprites-heart-with-plus {
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+
+  > .sprites-heart-broken {
+    margin: 0 auto;
+    margin-top: 6px;
+  }
+}
+
+a.edit_profile {
+  right: 2px;
+
+  &.admin {
+    right: 50px;
+  }
+}
+
+a.follow.following {
+
+
+  // background-position: -144px 0px;
+  &:hover {
+    // background-position: -192px 0px;
+  }
+  &:active {
+    // background-position: -240px 0px;
+  }
+}
+
+.button_wrapper {
+  float: right;
+  height: 32px;
+  margin-left: 20px;
+}
+
+// PLAYLIST BUTTONS (grey/black)
+#create_new_playlist {
+  @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
+  @include background-image(linear-gradient(#5F6154, #1B1B15));
+  display: block;
+  padding-left: 14px;
+  padding-right: 4px;
+  width: 170px;
+  height: 32px;
+  border-radius: 5px;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: $header_font;
+  line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+  &:hover {
+    @include background-image(linear-gradient(#7F8274, #414438));
+    text-decoration: none;
+  }
+}
+
+#change_playlist_order {
+  @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
+  @include background-image(linear-gradient(#5F6154, #1B1B15));
+  display: block;
+  padding-left: 20px;
+  width: 183px;
+  height: 32px;
+  border-radius: 5px;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: $header_font;
+  line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+  &:hover {
+    @include background-image(linear-gradient(#7F8274, #414438));
+    text-decoration: none;
+  }
+  img {
+    position: relative;
+    top: 5px;
+    left: -10px;
+  }
+}
+
+
+#create_new_topic {
+  width: 164px;
+  height: 32px;
+  display: block;
+  float: right;
+  margin-top:-40px;
+
+  background: transparent image-url('icons/create_new_topic.png') no-repeat 0px 0px;
+  &:hover {
+    background-position: -164px;
+  }
+  &:active {
+    background-position: -328px;
+  }
+}
+
+#create_new_forum {
+  width: 174px;
+  height: 32px;
+  margin-top: -15px;
+  display: block;
+  background: transparent image-url('icons/create_new_forum.png') no-repeat 0px 0px;
+  &:hover {
+    background-position: -174px;
+  }
+  &:active {
+    background-position: -348px;
+  }
+}
+
+a.button {
+  &.unspam, &.spam, &.delete_comment {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    right: 1px;
+    top: 0px;
+    &:hover {
+      background-position: -48px 0px;
+    }
+    &:active {
+      background-position: -96px 0px;
+    }
+  }
+  &.unspam {
+    right: 50px;
+    background: transparent image-url('icons/spam.png') no-repeat 0px 0px;
+  }
+  &.spam {
+    right: 50px;
+    background: transparent image-url('icons/spam.png') no-repeat 0px 0px;
+  }
+  &.delete_comment {
+    background: transparent image-url('icons/delete_comment.png') no-repeat 0px 0px;
+  }
+  &.add, &.new, &.sort {
+    background: image-url('icons/new.png') no-repeat left center;
+    color: $text_color;
+    float: right;
+    height: 30px;
+    line-height: 33px;
+    text-indent: 30px;
+    display: block;
+    font-weight: bold;
+  }
+  &.sort {
+    background: image-url('icons/latest.png') no-repeat left center;
+  }
+  &.delete, &.remove {
+    position: absolute;
+    background: image-url('icons/delete.png') no-repeat center top;
+    display: block;
+    height: 30px;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 35px;
+    top: 5px;
+    right: 10px;
+    padding-top: 8px;
+  }
+}
+
+.asset div.button a.remove, .asset.hover div.button a.remove, a.button.remove {
+  background: image-url('icons/remove.png') no-repeat center top;
+  height: 30px;
+  width: 30px;
+}
+
+#footer {
+  a {
+    text-decoration: underline;
+  }
+}
+
+.static_content h3, .panel h3 {
+  font-weight: bold;
+  margin-bottom: 3px;
+  font-size: 14px;
+}
+
+span.hint, .content a.hint, .content a.hint:visited {
+  font-size: 12px;
+  color: $orange;
+}
+
+blockquote {
+  border: 1px solid;
+  border-left: 3px solid;
+  border-color: $box_background;
+  background: $box_background_even;
+  padding: 1px 10px;
+  margin-left: 0;
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+// Press logos
+div.logo {
+  width: 133px;
+  margin-top: 43px;
+  float: left;
+  text-align: center;
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 12px;
+  a, a:visited {
+    text-decoration: none;
+    font-size: 11px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
