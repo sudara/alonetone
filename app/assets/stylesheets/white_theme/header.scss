@@ -1,0 +1,122 @@
+.header_inner {
+  width: 940px;
+}
+
+
+.header_logo {
+  position: absolute;
+  top: 12px;
+  left: 25px;
+  display: block;
+  width: 69px;
+  height: 53.5px;
+  background: transparent image-url('alonetone_big-notext.png') no-repeat;
+  background-size: 100%;
+}
+
+.header_nav {
+  margin-left: 170px;
+  float: left;
+}
+
+.header_login {
+   float: right;
+}
+
+.header_search {
+  position: relative;
+  height:50px;
+  padding-top:4px;
+  float: right;
+  #search_form {
+    display: block;
+    float: left;
+    #query {
+      padding: 3px 4px;
+      width: 170px;
+      height: 16px;
+      border: 1px solid #212327;
+      background-color: #5b5d4a;
+      color: $silver;
+      font-size: 13px;
+      &.focused {
+        color: white;
+      }
+    }
+  }
+  #search_button {
+    display: block;
+    float: left;
+    margin-top:8px;
+    margin-left:5px;
+    width: 18px;
+    height: 18px;
+    img{
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+
+.user_dropdown{
+  float: right;
+  padding-bottom: 10px;
+  // background-color: #F00;
+  .profile_link {
+    position: relative;
+    z-index: 3;
+    font-weight: 500;
+    padding-bottom:8px;
+    font-family: $header_font;
+    color: $nav_item_color;
+    background-color: #222;
+    font-size: 14px;
+    display: block;
+    height: 26px;
+    span {
+      display: block;
+      line-height:34px;
+      float:left;
+      text-align:left;
+      min-width:65px;
+      padding: 0px 10px 0px 15px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    img {
+      width: 34px;
+      height: 34px;
+    }
+  }
+  .user_dropdown_menu {
+    position: relative;
+    top: -78px;
+    // display: none;
+    z-index: 2;
+    a {
+      font-weight: 500;
+      font-family: $header_font;
+      color: $nav_item_color;
+      background-color: #333;
+      font-size: 14px;
+      display: block;
+      height: 26px;
+      line-height: 26px;
+      padding-left: 10px;
+      &:hover {
+        background-color: $orange;
+        color: #fff;
+        text-decoration: none;
+      }
+     }
+      :nth-child(odd) {
+        background-color: #555;
+    }
+  }
+
+  .user_dropdown_menu:nth-child(odd) {
+      background-color: $box_background_even;
+  }
+}
