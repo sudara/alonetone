@@ -84,12 +84,12 @@ h1 {
   color: #f6f6f6;
   font-size: 32px;
   font-weight: bold;
-  text-shadow: rgba(3, 0, 0, 0.42) 2px 2px 1px;
+  // text-shadow: rgba(3, 0, 0, 0.42) 2px 2px 1px;
   margin-bottom: 25px;
   font-family: $header_font, Helvetica, Arial!important;
   &.user, &.static, &.notice {
     color: $text_color;
-    text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
+    // text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
     margin: 0;
   }
 }
@@ -115,7 +115,7 @@ h2.box {
   font-weight: bold;
   margin-bottom: 1px;
   background-color: $box_background;
-  text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
+  // text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
 }
 
 h2.box.small {
@@ -139,7 +139,7 @@ h2.box_title, .content h2.box_title a {
   color: $text_color;
   line-height: 20px;
   font-size: 20px;
-  text-shadow: rgba(255, 246, 211, 0.55) 2px 2px 1px;
+  // text-shadow: rgba(255, 246, 211, 0.55) 2px 2px 1px;
 }
 
 span.note {
@@ -201,7 +201,7 @@ h2#latest_comments, #user_comments h2 {
 }
 
 .playlist_title h2 {
-  text-shadow: white 1px 1px 1px;
+  // text-shadow: white 1px 1px 1px;
 }
 
 .errorExplanation h2 {
@@ -212,7 +212,7 @@ h2#latest_comments, #user_comments h2 {
   color: $text_color;
   font-size: 20px;
   font-weight: bold;
-  text-shadow: rgba(0, 3, 2, 0.42) 2px 2px 1px;
+  // text-shadow: rgba(0, 3, 2, 0.42) 2px 2px 1px;
 }
 
 div.flash {
@@ -237,7 +237,7 @@ div.flash {
   a.view_all {
     font-family: $header_font;
     color: $text_color;
-    text-shadow: rgba(255, 255, 255, 0.3) 1px 1px 0;
+    // text-shadow: rgba(255, 255, 255, 0.3) 1px 1px 0;
     float: right;
     padding-left: 13px;
     padding-right:10px;
@@ -382,7 +382,7 @@ span.private {
   // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
   @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
   @include border-radius(5px, 5px);
-  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
   font-family: $header_font;
   height: 32px;
   padding: 0 12px!important;
@@ -405,12 +405,12 @@ span.private {
   &:hover {
     // @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
     @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
-  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
-    @include text-shadow(none);
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+    // @include text-shadow(none);
   }
   &:active {
     @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
-    @include text-shadow(none);
+    // @include text-shadow(none);
   }
   span{
     float:left;
@@ -450,7 +450,7 @@ a.edit_profile, a.follow {
   display: block;
   @include border-radius(5px, 5px);
   @include background-image(linear-gradient(#EDEFE9 0%, #CCD2C2 4%, #B0BAA3 96%, #8F9D7B 100% ));
-  @include text-shadow(rgba(white, .9) 1px 1px 1px);
+  // @include text-shadow(rgba(white, .9) 1px 1px 1px);
 
   &:hover {
     @include background-image(linear-gradient(#F1F3ED 0%, #D9DED1 4%, #C4CBBA 96%, #ACB59C 100% ));
@@ -516,7 +516,7 @@ a.follow.following {
 
 // PLAYLIST BUTTONS (grey/black)
 #create_new_playlist {
-  @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
+  // @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
   @include background-image(linear-gradient(#5F6154, #1B1B15));
   display: block;
   padding-left: 14px;
@@ -536,7 +536,7 @@ a.follow.following {
 }
 
 #change_playlist_order {
-  @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
+  // @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
   @include background-image(linear-gradient(#5F6154, #1B1B15));
   display: block;
   padding-left: 20px;
