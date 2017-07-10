@@ -364,10 +364,12 @@ span.private {
 .track_about_link {
   display: block;
   // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
-  @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
+  // @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
   @include border-radius(5px, 5px);
   // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
   font-family: $header_font;
+  border-radius: 5px;
+  border: 1px solid #000;
   height: 32px;
   padding: 0 12px!important;
   font-weight: bold!important;
@@ -388,17 +390,17 @@ span.private {
 
   &:hover {
     // @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
-    @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
-  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
+    // @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
+  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
     // @include text-shadow(none);
   }
   &:active {
-    @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
+    // @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
     // @include text-shadow(none);
   }
-  span{
-    float:left;
-  }
+  // span{
+    // float:left;
+  // }
 }
 
 a.edit_in_box {
