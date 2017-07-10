@@ -4,20 +4,21 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-a, a:visited {
-  font-family: Helvetica, Arial, Geneva;
-  color: $text_color;
-  line-height: 16px;
+a,
+a:visited {
   font-family: Helvetica, Arial, Geneva;
   font-weight: bold;
+  line-height: 16px;
   text-decoration: none;
+  color: $text_color;
   &:hover {
     text-decoration: underline;
     background-color: transparent;
   }
 }
 
-img a, img a:visited {
+img a,
+img a:visited {
   color: transparent;
   &:hover {
     color: none;
@@ -26,30 +27,38 @@ img a, img a:visited {
 
 .content {
   font-size: 14px;
-  a, a:visited {
+  a,
+  a:visited {
     font-size: 14px;
-    color: $text_color2;
     font-weight: normal;
+    color: $text_color2;
     &:hover {
       background-color: transparent;
     }
   }
   p {
-    color: $text_color2;
     margin-bottom: 20px;
+    color: $text_color2;
   }
   .static_content {
-    p, .ui-tabs-panel p {
+    p,
+    .ui-tabs-panel p {
       color: $text_color;
     }
   }
 }
 
-.content .box, .content .comment, .content .user_report .body, .content .update .body, .notice, .footer {
-  a, a:visited {
+.content .box,
+.content .comment,
+.content .user_report .body,
+.content .update .body,
+.notice,
+.footer {
+  a,
+  a:visited {
     color: $text_color;
     &:hover {
-      color: #191a13;
+      color: #191A13;
     }
   }
   p {
@@ -59,69 +68,73 @@ img a, img a:visited {
     }
   }
   ol li {
-    list-style-type: decimal;
     list-style-position: inside;
+    list-style-type: decimal;
   }
 }
 
-.content .user_report .body, .content .update .body, .notice, .static_content, .content .comment_body {
-  a, a:visited {
-    text-decoration: underline;
+.content .user_report .body,
+.content .update .body,
+.notice,
+.static_content,
+.content .comment_body {
+  a,
+  a:visited {
     font-weight: bold;
+    text-decoration: underline;
   }
   ul {
     margin-top: 10px;
     margin-bottom: 20px;
     li {
-      list-style: square inside none;
-      margin-left: 20px;
       line-height: 18px;
+      margin-left: 20px;
+      list-style: square inside none;
     }
   }
 }
 
 h1 {
-  color: #f6f6f6;
+  font-family: $header_font, Helvetica, Arial!important;
   font-size: 32px;
   font-weight: bold;
-  // text-shadow: rgba(3, 0, 0, 0.42) 2px 2px 1px;
   margin-bottom: 25px;
-  font-family: $header_font, Helvetica, Arial!important;
-  &.user, &.static, &.notice {
-    color: $text_color;
-    // text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
+  color: #F6F6F6;
+  &.user,
+  &.static,
+  &.notice {
     margin: 0;
+    color: $text_color;
   }
 }
 
-h2, .latest-playlists-header h2 a{
-  color: $text_color2;
+h2,
+.latest-playlists-header h2 a {
   font-family: $header_font, Helvetica, Arial;
   font-size: 20px;
   font-weight: 500;
   line-height: 2em;
   margin-bottom: 1em;
-  // text-shadow: rgba(0, 3, 2, 0.42) 2px 2px 1px;
+  color: $text_color2;
 }
 
 h2.box {
   font-family: $header_font, Helvetica, Arial;
-  display: block;
-  color: $text_color;
-  height: 42px;
-  line-height: 44px;
-  width: 100%;
-  text-indent: 25px;
   font-weight: bold;
+  line-height: 44px;
+  display: block;
+  width: 100%;
+  height: 42px;
   margin-bottom: 1px;
+  text-indent: 25px;
+  color: $text_color;
   background-color: $box_background;
-  // text-shadow: rgba(255, 249, 208, 0.63) 1px 1px 2px;
 }
 
 h2.box.small {
-  height: 25px;
   font-size: 16px;
   line-height: 25px;
+  height: 25px;
   margin-bottom: 3px;
 }
 
@@ -134,12 +147,12 @@ h3.box.static {
   text-indent: 25px;
 }
 
-h2.box_title, .content h2.box_title a {
-  margin: 0px 0px 0px 0px;
-  color: $text_color;
-  line-height: 20px;
+h2.box_title,
+.content h2.box_title a {
   font-size: 20px;
-  // text-shadow: rgba(255, 246, 211, 0.55) 2px 2px 1px;
+  line-height: 20px;
+  margin: 0 0 0 0;
+  color: $text_color;
 }
 
 span.note {
@@ -148,42 +161,44 @@ span.note {
 
 // iconified headers
 .latest-playlists-header h2 {
+  margin-bottom: .5em;
   padding-left: 35px;
-  margin-bottom:.5em;
-  a{
-    margin-bottom: 0em;
+  a {
+    margin-bottom: 0;
   }
 }
 
 .sprites-latest-playlists {
-  margin-top:5px;
+  margin-top: 5px;
 }
 h2#user_latest_playlists {
   padding-left: 35px;
 }
 
 #user-index #static_header h1.static {
+  padding-left: 27px;
   background-image: image-url('icons/user.png');
   background-repeat: no-repeat;
   background-position: -4px -3px;
-  padding-left: 27px;
 }
 
-h2#latest_uploaded, #user_latest h2 {
+h2#latest_uploaded,
+#user_latest h2 {
   text-indent: 18px;
 }
 
 .sprites-latest-uploaded {
-  margin-left: 20px;
   margin-top: 13px;
+  margin-left: 20px;
 }
 
 .sprites-stars {
-  margin-left: 14px;
   margin-top: 8px;
+  margin-left: 14px;
 }
 
-h2#kicking_ass, #user_popular h2 {
+h2#kicking_ass,
+#user_popular h2 {
   text-indent: 14px;
 }
 
@@ -191,39 +206,40 @@ h2#recently_favorited {
   text-indent: 14px;
 }
 
-h2#latest_comments, #user_comments h2 {
+h2#latest_comments,
+#user_comments h2 {
   text-indent: 14px;
 }
 
 .sprites-latest-comments {
-  margin-left: 16px;
   margin-top: 10px;
+  margin-left: 16px;
 }
 
 .playlist_title h2 {
-  // text-shadow: white 1px 1px 1px;
 }
 
 .errorExplanation h2 {
   display: none;
 }
 
-.errorExplanation p, .notice h2 {
-  color: $text_color;
+.errorExplanation p,
+.notice h2 {
   font-size: 20px;
   font-weight: bold;
-  // text-shadow: rgba(0, 3, 2, 0.42) 2px 2px 1px;
+  color: $text_color;
 }
 
 div.flash {
-  clear: both;
-  background-color: $orange_background;
-  @include background-image(linear-gradient(#EB954B, #E66D29));
   font-family: $header_font, Helvetica, Arial;
   font-size: 24px;
-  color: $text_color2;
-  padding: 20px 30px;
+  clear: both;
   margin-bottom: 20px;
+  padding: 20px 30px;
+  color: $text_color2;
+  background-color: $orange_background;
+
+  @include background-image(linear-gradient(#EB954B, #E66D29));
   div.flash_stats {
     font-size: 14px;
     a {
@@ -236,36 +252,35 @@ div.flash {
 .content {
   a.view_all {
     font-family: $header_font;
-    color: $text_color;
-    float: right;
-    padding-left: 13px;
-    padding-right:13px;
-    font-weight: bold;
     font-size: 16px;
+    font-weight: bold;
     line-height: 31px;
-    border-radius: 5px;
-    margin-left: 8px;
-    border: 1px solid #000;
-
-    border-radius: 5px;
+    float: right;
     height: 32px;
-    -webkit-font-smoothing: antialiased;
+    margin-left: 8px;
+    padding-right: 13px;
+    padding-left: 13px;
+    color: $text_color;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    border-radius: 5px;
 
+    -webkit-font-smoothing: antialiased;
     &:hover {
       text-decoration: underline;
     }
-    span{
-      float:left;
+    span {
+      float: left;
     }
   }
 }
 
 div.notice a.hide_notice {
-  float: right;
-  margin-top: -31px;
-  margin-right: 0px;
   font-size: 12px;
   font-weight: bold;
+  float: right;
+  margin-top: -31px;
+  margin-right: 0;
   color: $orange;
 }
 
@@ -279,9 +294,9 @@ div.notice ol {
 
 
 div.footer_box {
+  line-height: 30px;
   height: 32px;
   text-align: right;
-  line-height: 30px;
   &.onepx {
     margin-top: 1px;
   }
@@ -289,14 +304,18 @@ div.footer_box {
     margin: 0;
     background: none;
   }
-  a, a:visited, a:hover, a:active {
+  a,
+  a:visited,
+  a:hover,
+  a:active {
     display: block;
     float: right;
     height: 32px;
   }
 }
 
-a.edit_green, a.delete_green {
+a.edit_green,
+a.delete_green {
   display: block;
   float: right;
   height: 32px;
@@ -305,23 +324,23 @@ a.edit_green, a.delete_green {
 
 a.edit_green {
   width: 73px;
-  background: transparent image-url('icons/edit_green.png') no-repeat 0px 0px;
+  background: transparent image-url('icons/edit_green.png') no-repeat 0 0;
   &:hover {
-    background-position: -73px 0px;
+    background-position: -73px 0;
   }
   &:active {
-    background-position: -146px 0px;
+    background-position: -146px 0;
   }
 }
 
 a.delete_green {
   width: 97px;
-  background: transparent image-url('icons/delete_green.png') no-repeat 0px 0px;
+  background: transparent image-url('icons/delete_green.png') no-repeat 0 0;
   &:hover {
-    background-position: -97px 0px;
+    background-position: -97px 0;
   }
   &:active {
-    background-position: -194px 0px;
+    background-position: -194px 0;
   }
 }
 
@@ -334,7 +353,8 @@ a.hidden {
   display: none;
 }
 
-.fieldWithErrors input, .fieldWithErrors textarea {
+.fieldWithErrors input,
+.fieldWithErrors textarea {
   border: $orange 2px solid;
 }
 
@@ -348,126 +368,84 @@ textarea.private {
 }
 
 span.private {
-  color: $red;
   font-size: 11px!important;
-  img {
-    margin-bottom: -3px;
-  }
   display: block;
   margin-top: -2px;
   margin-bottom: 10px;
   margin-left: 20px;
+  color: $red;
+  img {
+    margin-bottom: -3px;
+  }
 }
 
 // icon links (add/delete/etc)
 
 .track_about_link {
-  display: block;
-  // @include background-image(linear-gradient(#EBEBEB, #CAC9CA));
-  // @include background-image(linear-gradient(#fbfbfb 0%, #e1e2e1 2%, #d2d3d2 98%, #b9bbb9 100% ));
-  @include border-radius(5px, 5px);
-  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
   font-family: $header_font;
-  border-radius: 5px;
-  border: 1px solid #000;
-  height: 32px;
-  padding: 0 12px!important;
-  font-weight: bold!important;
   font-size: 16px!important;
-  float: left!important;
+  font-weight: bold!important;
   line-height: 31px!important;
-  text-decoration: none!important;
-  // text-align: center;
+  display: block;
+  float: left!important;
+  height: 32px;
   margin-left: 8px;
+  padding: 0 12px!important;
+  text-decoration: none!important;
   color: #303225!important;
+  border: 1px solid #000000;
+  border-radius: 5px;
 
-  &.right {
-    // float: right;
-    // position: relative;
-    // margin-top: -50px;
-    // margin-right: 10px;
-  }
-
-  &:hover {
-    // @include background-image(linear-gradient(#D0D0CF, #A9A9A8));
-    // @include background-image(linear-gradient(#fbfbfb 0%, #d0d1d0 2%, #a9aaa9 98%, #787a78 100% ));
-  // text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 0;
-    // @include text-shadow(none);
-  }
-  &:active {
-    // @include background-image(linear-gradient(#787a78 0%, #a9aaa9 2%, #d0d1d0 98%, #fbfbfb 100% ));
-    // @include text-shadow(none);
-  }
-  // span{
-    // float:left;
-  // }
+  @include border-radius(5px, 5px);
 }
-
-a.edit_in_box {
-  // width: 50px;
-}
-
-a.view_more {
-  // width: 84px;
-}
-
-a.download {
-  // width: 84px;
-}
-
 
 a.edit {
   display: block;
-  background: image-url('icons/edit.png') no-repeat left center;
-  text-indent: -1000px;
-  height: 20px;
-  width: 31px;
   float: left;
+  width: 31px;
+  height: 20px;
+  text-indent: -1000px;
+  background: image-url('icons/edit.png') no-repeat left center;
   &.right {
     position: relative;
+    top: 0;
+    float: right;
     margin-top: -37px;
     margin-right: 25px;
-    float: right;
-    top: 0px;
   }
 }
 
-a.edit_profile, a.follow {
+a.edit_profile,
+a.follow {
+  font-family: $header_font;
+  font-size: 10px;
+  line-height: 20px;
+  top: 1px;
   display: block;
+  float: right;
+  width: 48px;
+  height: 48px;
+  margin-right: 2px;
+  text-align: center;
+  text-decoration: none;
+  color: #000000!important;
+
   @include border-radius(5px, 5px);
   @include background-image(linear-gradient(#EDEFE9 0%, #CCD2C2 4%, #B0BAA3 96%, #8F9D7B 100% ));
-  // @include text-shadow(rgba(white, .9) 1px 1px 1px);
-
   &:hover {
     @include background-image(linear-gradient(#F1F3ED 0%, #D9DED1 4%, #C4CBBA 96%, #ACB59C 100% ));
   }
-
   &:active {
     @include background-image(linear-gradient(#879674 0%, #ABB59D 4%, #CED6C5 96%, #EDEFE9 100% ));
   }
-
-  line-height: 20px;
-  height: 48px;
-  width: 48px;
-  text-align: center;
-  text-decoration: none;
-  margin-right: 2px;
-  font-size: 10px;
-  font-family: $header_font;
-  color: #000!important;
-  float: right;
-  top: 1px;
-
   > .sprites-pencil-big {
     margin: 0 auto;
     margin-top: 9px;
   }
-
   > .sprites-heart-with-plus {
     margin: 0 auto;
     margin-top: 5px;
   }
-
   > .sprites-heart-broken {
     margin: 0 auto;
     margin-top: 6px;
@@ -476,21 +454,8 @@ a.edit_profile, a.follow {
 
 a.edit_profile {
   right: 2px;
-
   &.admin {
     right: 50px;
-  }
-}
-
-a.follow.following {
-
-
-  // background-position: -144px 0px;
-  &:hover {
-    // background-position: -192px 0px;
-  }
-  &:active {
-    // background-position: -240px 0px;
   }
 }
 
@@ -502,41 +467,43 @@ a.follow.following {
 
 // PLAYLIST BUTTONS (grey/black)
 #create_new_playlist {
-  // @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
-  @include background-image(linear-gradient(#5F6154, #1B1B15));
+  font-family: $header_font;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 28px;
   display: block;
-  padding-left: 14px;
-  padding-right: 4px;
   width: 170px;
   height: 32px;
+  padding-right: 4px;
+  padding-left: 14px;
   border-radius: 5px;
-  font-weight: 800;
-  font-size: 16px;
-  font-family: $header_font;
-  line-height: 28px;
+
+  @include background-image(linear-gradient(#5F6154, #1B1B15));
   -webkit-font-smoothing: antialiased;
   &:hover {
-    @include background-image(linear-gradient(#7F8274, #414438));
     text-decoration: none;
+
+    @include background-image(linear-gradient(#7F8274, #414438));
   }
 }
 
 #change_playlist_order {
-  // @include text-shadow(rgba(black, 0.5) 1px 1px 2px);
-  @include background-image(linear-gradient(#5F6154, #1B1B15));
+  font-family: $header_font;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 28px;
   display: block;
-  padding-left: 20px;
   width: 183px;
   height: 32px;
+  padding-left: 20px;
   border-radius: 5px;
-  font-weight: 800;
-  font-size: 16px;
-  font-family: $header_font;
-  line-height: 28px;
+
+  @include background-image(linear-gradient(#5F6154, #1B1B15));
   -webkit-font-smoothing: antialiased;
   &:hover {
-    @include background-image(linear-gradient(#7F8274, #414438));
     text-decoration: none;
+
+    @include background-image(linear-gradient(#7F8274, #414438));
   }
   img {
     position: relative;
@@ -547,13 +514,12 @@ a.follow.following {
 
 
 #create_new_topic {
-  width: 164px;
-  height: 32px;
   display: block;
   float: right;
-  margin-top:-40px;
-
-  background: transparent image-url('icons/create_new_topic.png') no-repeat 0px 0px;
+  width: 164px;
+  height: 32px;
+  margin-top: -40px;
+  background: transparent image-url('icons/create_new_topic.png') no-repeat 0 0;
   &:hover {
     background-position: -164px;
   }
@@ -563,11 +529,11 @@ a.follow.following {
 }
 
 #create_new_forum {
+  display: block;
   width: 174px;
   height: 32px;
   margin-top: -15px;
-  display: block;
-  background: transparent image-url('icons/create_new_forum.png') no-repeat 0px 0px;
+  background: transparent image-url('icons/create_new_forum.png') no-repeat 0 0;
   &:hover {
     background-position: -174px;
   }
@@ -577,61 +543,68 @@ a.follow.following {
 }
 
 a.button {
-  &.unspam, &.spam, &.delete_comment {
+  &.unspam,
+  &.spam,
+  &.delete_comment {
+    position: absolute;
+    top: 0;
+    right: 1px;
     width: 48px;
     height: 48px;
-    position: absolute;
-    right: 1px;
-    top: 0px;
     &:hover {
-      background-position: -48px 0px;
+      background-position: -48px 0;
     }
     &:active {
-      background-position: -96px 0px;
+      background-position: -96px 0;
     }
   }
   &.unspam {
     right: 50px;
-    background: transparent image-url('icons/spam.png') no-repeat 0px 0px;
+    background: transparent image-url('icons/spam.png') no-repeat 0 0;
   }
   &.spam {
     right: 50px;
-    background: transparent image-url('icons/spam.png') no-repeat 0px 0px;
+    background: transparent image-url('icons/spam.png') no-repeat 0 0;
   }
   &.delete_comment {
-    background: transparent image-url('icons/delete_comment.png') no-repeat 0px 0px;
+    background: transparent image-url('icons/delete_comment.png') no-repeat 0 0;
   }
-  &.add, &.new, &.sort {
-    background: image-url('icons/new.png') no-repeat left center;
-    color: $text_color;
+  &.add,
+  &.new,
+  &.sort {
+    font-weight: bold;
+    line-height: 33px;
+    display: block;
     float: right;
     height: 30px;
-    line-height: 33px;
     text-indent: 30px;
-    display: block;
-    font-weight: bold;
+    color: $text_color;
+    background: image-url('icons/new.png') no-repeat left center;
   }
   &.sort {
     background: image-url('icons/latest.png') no-repeat left center;
   }
-  &.delete, &.remove {
-    position: absolute;
-    background: image-url('icons/delete.png') no-repeat center top;
-    display: block;
-    height: 30px;
+  &.delete,
+  &.remove {
     font-size: 10px;
     font-weight: normal;
     line-height: 35px;
+    position: absolute;
     top: 5px;
     right: 10px;
+    display: block;
+    height: 30px;
     padding-top: 8px;
+    background: image-url('icons/delete.png') no-repeat center top;
   }
 }
 
-.asset div.button a.remove, .asset.hover div.button a.remove, a.button.remove {
-  background: image-url('icons/remove.png') no-repeat center top;
-  height: 30px;
+.asset div.button a.remove,
+.asset.hover div.button a.remove,
+a.button.remove {
   width: 30px;
+  height: 30px;
+  background: image-url('icons/remove.png') no-repeat center top;
 }
 
 #footer {
@@ -640,40 +613,44 @@ a.button {
   }
 }
 
-.static_content h3, .panel h3 {
+.static_content h3,
+.panel h3 {
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 3px;
-  font-size: 14px;
 }
 
-span.hint, .content a.hint, .content a.hint:visited {
+span.hint,
+.content a.hint,
+.content a.hint:visited {
   font-size: 12px;
   color: $orange;
 }
 
 blockquote {
-  border: 1px solid;
-  border-left: 3px solid;
-  border-color: $box_background;
-  background: $box_background_even;
-  padding: 1px 10px;
-  margin-left: 0;
   width: 80%;
   margin-bottom: 15px;
+  margin-left: 0;
+  padding: 1px 10px;
+  border: 1px solid;
+  border-color: $box_background;
+  border-left: 3px solid;
+  background: $box_background_even;
 }
 
 // Press logos
 div.logo {
-  width: 133px;
-  margin-top: 43px;
-  float: left;
-  text-align: center;
   font-size: 10px;
   font-weight: normal;
   line-height: 12px;
-  a, a:visited {
-    text-decoration: none;
+  float: left;
+  width: 133px;
+  margin-top: 43px;
+  text-align: center;
+  a,
+  a:visited {
     font-size: 11px;
+    text-decoration: none;
   }
   a:hover {
     text-decoration: underline;
