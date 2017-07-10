@@ -1,31 +1,28 @@
-@import "compass/reset";
-@import "compass/css3";
-@import "compass/utilities";
+@import 'compass/reset';
+@import 'compass/css3';
+@import 'compass/utilities';
 
-// @import "application/sprites";
-@import "white_theme/sprites";
-@import "white_theme/variables"; // hi there, i'm different!
-@import "application/reset";
-// @import "application/typography";
-@import "white_theme/typography";
-@import "application/simple_form";
-@import "application/layout";
-// @import "application/header";
-@import "white_theme/header";
-@import "application/nav";
-@import "application/footer";
-@import "application/tracks";
-@import "application/playlists";
-@import "application/tabs";
-@import "application/facebox";
-// @import "application/alonetone";
-@import "white_theme/alonetone";
-@import "application/forums";
-@import "application/upload";
+@import 'white_theme/sprites';
+@import 'white_theme/variables'; // hi there, i'm different!
+@import 'white_theme/typography';
+@import 'white_theme/header';
+@import 'white_theme/alonetone';
+
+@import 'application/reset';
+@import 'application/simple_form';
+@import 'application/layout';
+@import 'application/nav';
+@import 'application/footer';
+@import 'application/tracks';
+@import 'application/playlists';
+@import 'application/tabs';
+@import 'application/facebox';
+@import 'application/forums';
+@import 'application/upload';
 
 
-#wrapper{
-  background-image:none;
+#wrapper {
+  background-image: none;
 }
 
 .comment {
@@ -33,25 +30,29 @@
 }
 
 // no more big tabs
-#nav{
-  display:none;
+#nav {
+  display: none;
 }
 
-.header{
-  background-color:#fff;
-  height:36px;
+.header {
+  height: 36px;
+  background-color: #FFFFFF;
 }
 
 // no more icons by h2s
 .sprites-latest-uploaded,
 .sprites-before-heading,
 .sprites-stars {
-  display:none;
-  margin:0;
+  display: none;
+  margin: 0;
 }
 
-h2#latest_uploaded, #user_latest h2,
-h2#kicking_ass, #user_popular h2, h2#recently_favorited,
-h2#latest_comments, #user_comments h2 {
-  text-indent: 0px;
+h2#latest_uploaded,
+#user_latest h2,
+h2#kicking_ass,
+#user_popular h2,
+h2#recently_favorited,
+h2#latest_comments,
+#user_comments h2 {
+  text-indent: 0;
 }
