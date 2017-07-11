@@ -415,7 +415,7 @@ a.overlay {
       height: 32px;
       color: $text_color;
       border-right: 1px solid $text_color;
-      background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+      background: $orange_background;
       a {
         font-family: $header_font;
         font-size: 14px;
@@ -425,12 +425,12 @@ a.overlay {
         float: left;
         padding: 0 15px;
         color: $text_color;
-        background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
+        background-color: #EEE;
       }
       a:hover {
         text-decoration: none;
         color: $text_color2;
-        background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+        background: $orange_background;
       }
     }
     li.contact {
