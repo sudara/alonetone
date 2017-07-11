@@ -3,18 +3,18 @@
 @import 'compass/utilities';
 
 @import 'white_theme/sprites';
-@import 'white_theme/variables'; // hi there, i'm different!
+@import 'white_theme/variables';
 @import 'white_theme/typography';
 @import 'white_theme/header';
 @import 'white_theme/alonetone';
 @import 'white_theme/layout';
 @import 'white_theme/forums';
+@import 'white_theme/tracks';
 
 @import 'application/reset';
 @import 'application/simple_form';
 @import 'application/nav';
 @import 'application/footer';
-@import 'application/tracks';
 @import 'application/playlists';
 @import 'application/tabs';
 @import 'application/facebox';
