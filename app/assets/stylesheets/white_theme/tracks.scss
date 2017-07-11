@@ -147,14 +147,12 @@
   }
   &.hover, &.open {
     div.button, div.title {
-      background-image: image-url('backgrounds/tracks.png');
-      background-position: 0px 0px;
+      background-color: #EEE;
     }
   }
   &.playing {
     div.button, div.title {
-      background-image: image-url('backgrounds/tracks.png');
-      background-position: 420px 0px;
+      background-color: #EEE;
     }
     div.button {
       a {
