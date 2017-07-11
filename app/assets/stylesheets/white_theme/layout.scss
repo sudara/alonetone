@@ -1,0 +1,112 @@
+html,
+body {
+  height: 100%;
+  background-color: $body_background;
+}
+
+.header {
+  height: 110px;
+  @include background-image(linear-gradient(#313327, #23241A 99%, #1F2117));
+}
+
+#container {
+  height: auto !important;
+  height: 100%;
+  min-height: 100%;
+  margin-bottom: -290px;
+}
+
+.sticky_footer_buffer {
+  height: 290px;
+}
+
+#wrapper {
+  @include background-image(linear-gradient(#1F1817, #303025 1px, #313327 150px));
+}
+
+#content {
+  width: 890px;
+  margin-bottom: 100px;
+  margin-left: 50px;
+}
+
+#main {
+  clear: both;
+  height: 1%;
+}
+
+#static {
+  width: 600px;
+  height: 1%;
+}
+
+.sidebar {
+  float: right;
+  width: 240px;
+}
+
+#columns {
+  height: 1%;
+  #left {
+    float: left;
+    width: 420px;
+  }
+  #right {
+    float: left;
+    width: 420px;
+    margin-left: 50px;
+  }
+}
+
+.footer {
+  height: 239px;
+  padding-top: 31px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  background-color: #EEEEEE;
+}
+
+.clearfix:after {
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  content: '.';
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+.min_height_40 {
+  min-height: 40px;
+}
+
+div.box {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+div.footer_box {
+  margin-top: -27px;
+  margin-bottom: 30px;
+}
+
+div.notice,
+div.errorExplanation {
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border-top: 1px solid #6F6F6F;
+  border-bottom: 1px solid #7E807E;
+
+  @include background-image(linear-gradient(#F7F7F7, #C7C8C7));
+}
