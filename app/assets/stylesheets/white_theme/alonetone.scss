@@ -82,9 +82,8 @@ a.overlay {
     }
     .name {
       margin-left: 10px;
-      color: white;
-      text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
-      font-family: $header_font, Helvetica, Arial;
+      color: $text_color;
+      font-family: $header_font;
       text-align: center;
       background-color: transparent;
       font-size: 13px;
