@@ -1,39 +1,45 @@
 // pagination base
 .pagination {
-  float: right;
-  display: block;
-  height: 32px;
-  position: relative;
-  text-align: right;
   font-family: $header_font;
-  em, a, span, a:visited {
+  position: relative;
+  display: block;
+  float: right;
+  height: 32px;
+  text-align: right;
+  em,
+  a,
+  span,
+  a:visited {
+    font-family: $header_font;
+    font-size: 12px;
+    line-height: 14px;
     display: block;
     float: left;
     height: 12px;
-    line-height: 14px;
-    font-size: 12px;
     padding: 10px 10px;
     color: $text_color;
-    font-family: $header_font;
   }
-  em, a:hover, span.current {
-    background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
-    color: $text_color2;
+  em,
+  a:hover,
+  span.current {
     text-decoration: none;
+    color: $text_color2;
+    background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
   }
   em {
     font-weight: bold;
     font-style: normal;
   }
   span.gap {
-    padding: 10px 0px;
+    padding: 10px 0;
   }
   span.disabled {
-    opacity: 0.4;
+    opacity: .4;
   }
 }
 
-.mini_paginator, .forum_paginator {
+.mini_paginator,
+.forum_paginator {
   position: relative;
   height: 32px;
   background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
@@ -44,64 +50,64 @@
 }
 
 .forum_paginator {
-  margin-top: 0px;
   width: 890px;
+  margin-top: 0;
   .button_wrapper {
-    border: none;
     clear: none;
+    border: none;
   }
 }
 
 a.overlay {
   position: absolute;
-  left: 0;
-  top: 0;
   z-index: 2;
-  opacity: .8;
-  // background: transparent image-url('retina-overlay.png') no-repeat;
-  background-size:100%;
+  top: 0;
+  left: 0;
   width: 137px;
   height: 137px;
+  opacity: .8;
+  background-size: 100%;
 }
 
 
 // browse all users
-#user_index, #user_search_results {
+#user_index,
+#user_search_results {
   position: relative;
   div.user {
+    position: relative;
     float: left;
     width: 150px;
     margin-right: 25px;
     margin-bottom: 30px;
-    position: relative;
     img.cover {
       width: 125px;
       height: 125px;
-      margin-left: 6px;
       margin-top: 4px;
+      margin-left: 6px;
     }
     .name {
-      margin-left: 10px;
-      color: $text_color;
       font-family: $header_font;
-      text-align: center;
-      background-color: transparent;
       font-size: 13px;
       font-weight: 500;
-      text-decoration: none;
-      margin-top: 8px;
-      height: 20px;
-      width: 115px;
       display: block;
       overflow: none;
+      width: 115px;
+      height: 20px;
+      margin-top: 8px;
+      margin-left: 10px;
+      text-align: center;
+      text-decoration: none;
+      color: $text_color;
+      background-color: transparent;
       &:hover {
         text-decoration: underline;
       }
     }
     .twitter {
       position: absolute;
-      bottom: 0;
       right: -5px;
+      bottom: 0;
       width: 32px;
       height: 32px;
       background: transparent image-url('icons/tweetzorz.png') no-repeat top left;
@@ -110,11 +116,11 @@ a.overlay {
 }
 
 #large_users_grid {
-  margin-top: 60px;
-  width: 101%;
   position: relative;
-  margin-left: 20px;
+  width: 101%;
+  margin-top: 60px;
   margin-right: 0;
+  margin-left: 20px;
   padding-right: 0;
 }
 
@@ -125,76 +131,79 @@ a.overlay {
   color: $text_color2;
   background: image-url('backgrounds/new_comment.png') repeat-x top left;
   div.private_comment {
-    background: image-url('icons/private.png') no-repeat top left;
     position: absolute;
     z-index: 4;
     top: 51px;
     left: -4px;
     width: 25px;
     height: 25px;
+    background: image-url('icons/private.png') no-repeat top left;
   }
   .comment_user {
-    a.alonetoner, img {
-      margin-top: 1px;
+    a.alonetoner,
+    img {
       float: left;
+      width: 50px;
+      margin-top: 1px;
       margin-right: 10px;
-      width:50px;
     }
   }
   .comment_user_text {
-    color: $text_color2;
+    font-size: 12px;
     margin-left: 72px;
     padding-top: 10px;
-    font-size: 12px;
-    text-shadow: black 1px 1px 1px;
-    a,a:visited {
-      font-weight: bold;
-      color: $text_color2;
-      text-decoration: underline;
+    color: $text_color2;
+    a,
+    a:visited {
       font-size: 12px;
-      text-shadow: black 1px 1px 1px;
+      font-weight: bold;
+      text-decoration: underline;
+      color: $text_color2;
     }
   }
-  .comment_body, .body {
-    padding: 0px 20px 30px 0px;
+  .comment_body,
+  .body {
     margin-bottom: 1px;
     margin-left: 72px;
-    a, a:visited, a:hover {
+    padding: 0 20px 30px 0;
+    a,
+    a:visited,
+    a:hover {
       color: $text_color2;
-      text-shadow: black 1px 1px 1px;
     }
     p {
-      color: $text_color2;
-      text-shadow: black 1px 1px 1px;
-      margin: 16px 0px 0px 0px;
       line-height: 18px;
+      margin: 16px 0 0 0;
       margin-top: 13px;
+      color: $text_color2;
     }
     .comment_controls {
       float: right;
-      a, a:visited, a:hover {
-        color: $text_color2;
+      a,
+      a:visited,
+      a:hover {
         font-size: 11px;
         font-weight: normal;
+        color: $text_color2;
       }
     }
-    h1,h2,h3 {
+    h1,
+    h2,
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
       margin-top: 32px;
       margin-bottom: 12px;
       color: $text_color;
-      font-size: 16px;
-      font-weight: bold;
     }
   }
 }
 
 .comment_form {
-
-overflow: hidden;
-
+  overflow: hidden;
   .comment_as {
-    line-height: 25px;
     font-size: 14px;
+    line-height: 25px;
     height: 25px;
     margin-bottom: 5px;
     img {
@@ -202,20 +211,19 @@ overflow: hidden;
       margin-right: 5px;
     }
   }
-  .public, .private {
+  .public,
+  .private {
     font-size: 12px;
   }
-
   textarea {
     height: 60px;
     margin-bottom: 5px;
   }
-
 }
 
 .private_check_box {
-  margin-top:2px;
   float: left;
+  margin-top: 2px;
 }
 
 // give the posts some breathing room
@@ -227,33 +235,37 @@ overflow: hidden;
     margin-bottom: 1px;
     background: image-url('backgrounds/comment_even.png') repeat-x top left;
     background-color: $box_background;
-    a.alonetoner, img {
-      margin-top: 1px;
+    a.alonetoner,
+    img {
       float: left;
+      margin-top: 1px;
       margin-right: 10px;
     }
   }
-  .comment_user_text, .about_details {
-    padding: 0;
-    line-height: 10px;
+  .comment_user_text,
+  .about_details {
     font-size: 11px;
+    line-height: 10px;
+    padding: 0;
     color: $text_color;
     text-shadow: none;
     a {
       font-size: 11px;
     }
-    .comment_about, .title {
+    .comment_about,
+    .title {
       line-height: 18px;
       padding-top: 8px;
       color: $text_color;
       text-shadow: none;
     }
   }
-  .body,.comment {
+  .body,
+  .comment {
+    margin-bottom: 3px;
+    padding: 10px 20px 10px 20px;
     background-color: $box_background;
     background-image: none;
-    padding: 10px 20px 10px 20px;
-    margin-bottom: 3px;
     text-shadow: none;
     a {
       color: $text_color;
@@ -265,20 +277,23 @@ overflow: hidden;
       }
     }
     p {
-      color: $text_color;
-      margin: 16px 0px 0px 0px;
       line-height: 18px;
+      margin: 16px 0 0 0;
+      color: $text_color;
       text-shadow: none;
     }
-    h1,h2,h3 {
+    h1,
+    h2,
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
       margin-top: 32px;
       margin-bottom: 12px;
       color: $text_color;
-      font-size: 16px;
-      font-weight: bold;
     }
   }
-  .comment.even, .body.even {
+  .comment.even,
+  .body.even {
     background-color: $box_background_even;
   }
   .comment_form {
@@ -299,9 +314,9 @@ overflow: hidden;
 .user_report .comment_user {
   .title {
     span.box_title {
+      font-size: 16px;
       line-height: 30px;
       padding-top: 8px;
-      font-size: 16px;
       color: $text_color;
       a {
         font-weight: 16px;
@@ -315,8 +330,8 @@ overflow: hidden;
   position: relative;
   width: 100%;
   height: 40px;
-  background-color: $box_background;
   margin-top: 1px;
+  background-color: $box_background;
   .listen_user {
     float: left;
     margin-right: 10px;
@@ -327,10 +342,10 @@ overflow: hidden;
   }
   .listen_details {
     font-size: 12px;
+    line-height: 12px;
     float: left;
     width: 280px;
     min-height: 25px;
-    line-height: 12px;
     div {
       margin-bottom: -1px;
     }
@@ -344,71 +359,74 @@ overflow: hidden;
 }
 
 // user layout & static header (with nav)
-#user_header, #static_header {
-  position: relative;
-  height: 83px;
-  width: 100%;
-  margin-bottom: 40px;
-  font-family: $header_font, Helvetica, Arial;
+#user_header,
+#static_header {
+  font-family: $header_font;
   font-weight: 500;
+  position: relative;
+  width: 100%;
+  height: 83px;
+  margin-bottom: 40px;
   #alonetoner {
     position: absolute;
     display: block;
     float: left;
-    height: 83px;
     width: 83px;
+    height: 83px;
     img {
-      height: 83px;
       width: 83px;
+      height: 83px;
     }
   }
-  .user_title, .title {
-    height: 50px;
+  .user_title,
+  .title {
     position: relative;
-    margin-left: 84px;
+    height: 50px;
     margin-bottom: 1px;
-    background-color: #c1cab3;
+    margin-left: 84px;
+    background-color: #C1CAB3;
     h1 {
       font-size: 24px;
       line-height: 55px;
-      color: $text_color;
-      margin-left: 15px;
       display: inline;
       margin-right: 5px;
+      margin-left: 15px;
+      color: $text_color;
     }
-    span.user_location {}
   }
-  #user_links, #links {
-    height: 32px;
-    background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
-    margin-left: 84px;
+  #user_links,
+  #links {
     line-height: 18px;
+    height: 32px;
+    margin-left: 84px;
+    background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
   }
-  ul.user_links, ul.links {
+  ul.user_links,
+  ul.links {
     height: 32px;
     margin-bottom: 2px;
     li {
-      color: $text_color;
+      line-height: 34px;
       float: left;
       height: 32px;
-      line-height: 34px;
+      color: $text_color;
       border-right: 1px solid $text_color;
       background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
       a {
-        float: left;
-        display: block;
-        line-height: 34px;
+        font-family: $header_font;
         font-size: 14px;
+        font-weight: 400;
+        line-height: 34px;
+        display: block;
+        float: left;
         padding: 0 15px;
         color: $text_color;
-        font-family: $header_font, Helvetica, Arial;
-        font-weight: 400;
         background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
       }
       a:hover {
-        background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
-        color: $text_color2;
         text-decoration: none;
+        color: $text_color2;
+        background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
       }
     }
     li.contact {
@@ -418,8 +436,8 @@ overflow: hidden;
     }
     li.current {
       font-weight: 500;
+      padding: 0 15px;
       color: $text_color2;
-      padding: 0px 15px;
     }
     div.pagination {
       height: 32px;
@@ -429,18 +447,20 @@ overflow: hidden;
 
 // static headers are like the user header, but without pics
 #static_header {
-  .title, #links {
-    margin-left: 0px;
+  .title,
+  #links {
+    margin-left: 0;
   }
-  .links li, .links li a {
+  .links li,
+  .links li a {
     font-size: 14px;
   }
   .pagination {
-    text-align: center;
-    margin-top: 1px;
+    float: left;
     width: 100%;
     height: 32px;
-    float: left;
+    margin-top: 1px;
+    text-align: center;
     background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
   }
 }
@@ -455,21 +475,21 @@ overflow: hidden;
     }
   }
   .uploading {
+    font-size: 18px;
+    font-weight: bold;
     width: 100%;
     height: 100px;
     text-align: center;
-    font-size: 18px;
-    font-weight: bold;
   }
 }
 
 // sign up
 #what-you-get {
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
   h2 {
-    color: $text_color;
     font-size: 14px;
     margin-bottom: 30px;
+    color: $text_color;
     text-shadow: none;
   }
 }
@@ -477,24 +497,24 @@ overflow: hidden;
 // static content
 
 .static_content {
-  overflow: hidden;
-  padding: 15px 25px;
-  background: #e1e2e1;
   line-height: 18px;
+  overflow: hidden;
   margin-bottom: 1px;
+  padding: 15px 25px;
+  background: #E1E2E1;
   p {
     color: $text_color;
-    a, a:visited {
+    a,
+    a:visited {
       color: $text_color;
     }
   }
 }
 
-  .static_content_youtube {
-    padding: 0!important;
-    background: none;
-
-  }
+.static_content_youtube {
+  padding: 0!important;
+  background: none;
+}
 
 
 .sidebar {
@@ -502,15 +522,16 @@ overflow: hidden;
   ul {
     list-style: none;
     li {
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 14px;
+      margin: 0 0 13px 3px;
       list-style: none;
       list-style-position: outside;
-      margin: 0px 0px 13px 3px;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 14px;
-      a, a:visited {
-        font-weight: normal;
+      a,
+      a:visited {
         font-size: 12px;
+        font-weight: normal;
         line-height: 14px;
       }
     }
@@ -522,73 +543,77 @@ overflow: hidden;
 }
 
 
-#follows,#mostly_listens_to, #recent_listeners {
-  margin:0;
-  background: none;
-  padding:0;
+#follows,
+#mostly_listens_to,
+#recent_listeners {
   width: 420px;
+  margin: 0;
+  padding: 0;
+  background: none;
   div {
     float: left;
-    margin:0;
-    padding:0;
-    &.edge_to_edge_large{
-      height: 105px;
+    margin: 0;
+    padding: 0;
+    &.edge_to_edge_large {
       width: 105px;
-      img{
-        height: 105px;
+      height: 105px;
+      img {
         width: 105px;
+        height: 105px;
       }
     }
-    &.edge_to_edge_small{
-      height: 70px;
+    &.edge_to_edge_small {
       width: 70px;
-      img{
-        height: 70px;
+      height: 70px;
+      img {
         width: 70px;
+        height: 70px;
       }
     }
-    &.edge_to_edge_tiny{
-      height: 42px;
+    &.edge_to_edge_tiny {
       width: 42px;
-      img{
-        height: 42px;
+      height: 42px;
+      img {
         width: 42px;
+        height: 42px;
       }
     }
   }
 }
 
 div.small_spinner {
-  margin-top: 5px;
   float: right;
-  background: image-url('icons/small_spinner.gif') no-repeat center center;
+  width: 20px;
   height: 20px;
   margin-top: 5px;
-  width: 20px;
+  margin-top: 5px;
+  background: image-url('icons/small_spinner.gif') no-repeat center center;
 }
 
 // favorites
 
-a.add_to_favorites, a.favorited {
-
-  @include retina-sprite(heart-with-plus);
-  text-indent: -9999px;
+a.add_to_favorites,
+a.favorited {
   position: absolute;
-  right: 16px;
-  margin-top: 17px;
   z-index: 2;
+  right: 16px;
   display: block;
   width: 29px;
   height: 25px;
-  opacity: 0.55;
+  margin-top: 17px;
+  text-indent: -9999px;
+  opacity: .55;
+
+  @include retina-sprite(heart-with-plus);
   &:hover {
-    opacity: 0.999;
+    opacity: .999;
   }
   &.favorited {
     right: 14px;
     margin-top: 19px;
+    opacity: .99;
+
     @include retina-sprite(heart);
-    opacity: 0.99;
     &:hover {
       @include retina-sprite(heart-broken);
     }
@@ -604,15 +629,15 @@ a.add_to_favorites, a.favorited {
 
 .additional_options {
   float: right;
-  margin-top: 4px;
   height: 35px;
+  margin-top: 4px;
 }
 
 .additional_options_solo {
   position: relative;
-  text-align: left;
-  margin-bottom: 10px;
   height: 35px;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 .visit_us {
@@ -620,9 +645,9 @@ a.add_to_favorites, a.favorited {
     font-size: 24px;
   }
   .chunk {
-    padding-top: 20px;
     float: left;
     width: 270px;
+    padding-top: 20px;
     text-align: center;
     a {
       img {
@@ -639,7 +664,9 @@ a.add_to_favorites, a.favorited {
   margin-left: -20px;
   background: transparent image-url('facebox/loading.gif') no-repeat center center;
   background-color: $playlist_box_silver;
-  p,a,a:visited {
+  p,
+  a,
+  a:visited {
     color: $text_color;
   }
   #iwsw {
@@ -653,44 +680,45 @@ a.add_to_favorites, a.favorited {
 
 // needed for IE7 not to fuck up the animation
 #pic_upload {
-  height: 50px;
-  border-bottom: 2px solid #CCC;
-  margin-bottom: 10px;
-  padding-left: 0;
   font-size: 12px;
-  padding-bottom: 30px;
+  height: 50px;
+  margin-bottom: 10px;
   padding-top: 0;
+  padding-bottom: 30px;
+  padding-left: 0;
+  border-bottom: 2px solid #CCCCCC;
 }
 
 .feature {
   width: 420px;
   margin-bottom: 30px;
   div.box {
-    background-color: #e1e2e1;
-    padding-left: 25px;
-    padding-top: 9px;
-    margin-bottom: 1px;
     min-height: 30px;
-    h2,h1 {
-      font-weight: normal;
+    margin-bottom: 1px;
+    padding-top: 9px;
+    padding-left: 25px;
+    background-color: #E1E2E1;
+    h2,
+    h1 {
       font-size: 20px;
+      font-weight: normal;
       line-height: 20px;
-      padding-right: 40px;
-      text-shadow: rgba(255, 249, 208, 0.43) 2px 2px 1px;
-      color: $text_color;
       margin: 0;
+      padding-right: 40px;
+      color: $text_color;
+      text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
       a {
         font-size: 20px;
         font-weight: bold;
-        color: $text_color;
-        text-indent: 25px;
         margin-bottom: 3px;
-        text-shadow: rgba(255, 249, 208, 0.43) 2px 2px 1px;
+        text-indent: 25px;
+        color: $text_color;
+        text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
       }
     }
     h3 {
-      font-weight: normal;
       font-size: 12px;
+      font-weight: normal;
       margin: 0;
       padding: 0;
       padding-bottom: 8px;
@@ -721,35 +749,35 @@ a.add_to_favorites, a.favorited {
       margin-right: 10px;
     }
     div.link {
-      height: 22px;
       clear: both;
+      height: 22px;
     }
     div.feature_teaser {
+      font-size: 14px;
+      line-height: 16px;
       padding-top: 15px;
       padding-right: 15px;
       color: $text_color;
-      font-size: 14px;
-      line-height: 16px;
     }
   }
 }
 
 .feature_stats {
-  padding: 0px;
-  margin: 0px;
+  margin: 0;
+  padding: 0;
   .static_content {
-    padding: 0px;
-    margin: 0px;
+    margin: 0;
+    padding: 0;
     .pic {
+      float: left;
       width: 200px;
       height: 200px;
-      float: left;
       padding-right: 10px;
     }
     .stats {
-      padding-top: 25px;
       font-size: 12px;
       line-height: 18px;
+      padding-top: 25px;
       padding-right: 10px;
       a {
         font-size: 12px;
@@ -768,36 +796,37 @@ h1 span#channel_name {
 }
 
 #radio_controls {
-  padding: 0px;
-  margin: 0;
   min-height: 320px;
+  margin: 0;
+  padding: 0;
   form {
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
   ul {
+    position: relative;
     margin: 0;
     padding: 0;
-    position: relative;
     list-style-position: inside;
     li.radio_channel {
-      background-image: image-url('backgrounds/tracks.png');
-      list-style: none;
+      font-size: 20px;
+      line-height: 40px;
       display: block;
       float: left;
       width: 400px;
-      cursor: pointer;
-      padding: 0;
-      margin: 0;
       height: 40px;
-      font-size: 20px;
+      margin: 0;
+      padding: 0;
       padding-left: 20px;
-      line-height: 40px;
-      border-bottom: 1px solid black;
+      list-style: none;
+      cursor: pointer;
       border-color: $text_color;
-      &.selected, &.hover {
+      border-bottom: 1px solid black;
+      background-image: image-url('backgrounds/tracks.png');
+      &.selected,
+      &.hover {
         background-image: image-url('backgrounds/tracks.png');
-        background-position: 420px 0px;
+        background-position: 420px 0;
       }
       &.disabled {
         color: $disabled;
@@ -812,85 +841,90 @@ h1 span#channel_name {
 
 
 .asset.played {
-  opacity: 0.2;
+  opacity: .2;
 }
 
-.asset.playing, .asset.hover {
-  opacity: 0.99;
+.asset.playing,
+.asset.hover {
+  opacity: .99;
 }
 
 // stats
 h2.stats {
-  text-indent: 45px;
   margin-top: 1.5em;
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
+  text-indent: 45px;
 }
 
 #total_playsDiv {
-  text-align: left;
-  background-color: $silver;
   width: 800px;
   margin: auto;
+  text-align: left;
+  background-color: $silver;
 }
 
-.static_content#stats, .static_content.stats {
-  padding: 0;
-  margin: 0 auto;
+.static_content#stats,
+.static_content.stats {
   width: 800px;
+  margin: 0 auto;
+  padding: 0;
 }
 
-.secretz{
-  padding:0;
-  margin:0;
+.secretz {
+  margin: 0;
+  padding: 0;
 }
-h2.table{
-  padding-top:2em;
-  margin-bottom:.3em;
+h2.table {
+  margin-bottom: .3em;
+  padding-top: 2em;
 }
-#statstable, .statstable {
+#statstable,
+.statstable {
   width: 100%;
   thead tr {
     height: 25px;
-    border-bottom: 3px solid #37392b;
+    border-bottom: 3px solid #37392B;
     th {
-      line-height: 25px;
       font-size: 12px;
-      text-align: left;
       font-weight: bold;
-      padding-left: 15px;
+      line-height: 25px;
       padding-right: 10px;
-      background: #c7c8c7;
+      padding-left: 15px;
+      text-align: left;
+      background: #C7C8C7;
       &.headerSortDown {
-        background: #c7c8c7 image-url('icons/small_sort_down.png') no-repeat 3px 8px;
+        background: #C7C8C7 image-url('icons/small_sort_down.png') no-repeat 3px 8px;
       }
       &.headerSortUp {
-        background: #c7c8c7 image-url('icons/small_sort_up.png') no-repeat 3px 8px;
+        background: #C7C8C7 image-url('icons/small_sort_up.png') no-repeat 3px 8px;
       }
     }
   }
   tbody {
-    height: 350px;
     overflow-y: scroll;
+    height: 350px;
   }
   tr {
     width: 100%;
   }
   tr td {
-    padding-left: 15px;
     font-size: 12px;
-    background-color: $box_background;
-    height: 20px;
     line-height: 20px;
-    &.uploader{
+    height: 20px;
+    padding-left: 15px;
+    background-color: $box_background;
+    &.uploader {
       min-width: 200px;
     }
-    a,a:hover,a:visited {
+    a,
+    a:hover,
+    a:visited {
       font-size: 12px;
-      color: $text_color;
       line-height: 20px;
+      color: $text_color;
     }
-    img{
-      width:25px;
+    img {
+      width: 25px;
     }
   }
   tr:nth-child(odd) td {
@@ -912,13 +946,13 @@ h2.table{
 
 .feed_icon_in_box {
   position: absolute;
+  z-index: 10;
   top: -30px;
   right: 18px;
-  z-index: 10;
 }
 
-#recaptcha_privacy{
-  display:none;
+#recaptcha_privacy {
+  display: none;
 }
 
 
@@ -926,22 +960,22 @@ h2.table{
 // ZEBRA STRIPES FOR ASSETS
 
 .asset:nth-child(odd) {
-  div.button, div.title {
-      background-color: $box_background_even;
-    }
+  div.button,
+  div.title {
+    background-color: $box_background_even;
+  }
 }
 
 
 // SIGN UP PARAGRAPH ADJUST
 
 #login p {
-  margin-top: 20px;
   font-size: 10px;
+  margin-top: 20px;
 }
 
 .listen_user img {
   vertical-align: top;
-
 }
 
 .listen_details a {
@@ -950,16 +984,16 @@ h2.table{
 
 // sudo bar
 
-.sudo_bar{
-  background-color:red;
-  height:25px;
-  line-height:25px;
-  padding-left:55px;
-  text-align:left;
+.sudo_bar {
   font-size: 12px;
-  color: #fff;
-  a{
+  line-height: 25px;
+  height: 25px;
+  padding-left: 55px;
+  text-align: left;
+  color: #FFFFFF;
+  background-color: red;
+  a {
     text-decoration: underline;
-    color:white;
+    color: white;
   }
 }
