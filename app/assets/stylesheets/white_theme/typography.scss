@@ -1,6 +1,7 @@
 body {
   font-family: Helvetica, Arial, Geneva;
   color: $text_color;
+
   text-rendering: optimizeLegibility;
 }
 
@@ -95,11 +96,11 @@ img a:visited {
 }
 
 h1 {
-  font-family: $header_font, Helvetica, Arial!important;
+  font-family: $header_font;
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 25px;
-  color: #F6F6F6;
+  color: $text_color;
   &.user,
   &.static,
   &.notice {
@@ -110,7 +111,7 @@ h1 {
 
 h2,
 .latest-playlists-header h2 a {
-  font-family: $header_font, Helvetica, Arial;
+  font-family: $header_font;
   font-size: 20px;
   font-weight: 500;
   line-height: 2em;
@@ -119,7 +120,7 @@ h2,
 }
 
 h2.box {
-  font-family: $header_font, Helvetica, Arial;
+  font-family: $header_font;
   font-weight: bold;
   line-height: 44px;
   display: block;
@@ -216,8 +217,7 @@ h2#latest_comments,
   margin-left: 16px;
 }
 
-.playlist_title h2 {
-}
+
 
 .errorExplanation h2 {
   display: none;
@@ -231,7 +231,7 @@ h2#latest_comments,
 }
 
 div.flash {
-  font-family: $header_font, Helvetica, Arial;
+  font-family: $header_font;
   font-size: 24px;
   clear: both;
   margin-bottom: 20px;
@@ -476,14 +476,13 @@ a.edit_profile {
   height: 32px;
   padding-right: 4px;
   padding-left: 14px;
+  border: 1px solid #000000;
   border-radius: 5px;
-  border: 1px solid #000;
-
   // @include background-image(linear-gradient(#5F6154, #1B1B15));
+
   -webkit-font-smoothing: antialiased;
   &:hover {
     text-decoration: none;
-
     // @include background-image(linear-gradient(#7F8274, #414438));
   }
 }
@@ -497,18 +496,16 @@ a.edit_profile {
   width: 183px;
   height: 32px;
   padding-left: 20px;
+  border: 1px solid #000000;
   border-radius: 5px;
-  border: 1px solid #000;
+  // @include background-image(linear-gradient(#5F6154, #1B1B15));
 
+  -webkit-font-smoothing: antialiased;
   > img {
     display: none;
   }
-
-  // @include background-image(linear-gradient(#5F6154, #1B1B15));
-  -webkit-font-smoothing: antialiased;
   &:hover {
     text-decoration: none;
-
     // @include background-image(linear-gradient(#7F8274, #414438));
   }
   img {
