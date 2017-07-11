@@ -24,7 +24,9 @@
   span.current {
     text-decoration: none;
     color: $text_color2;
-    background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+    background-color: $orange_background;
+    // background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
+
   }
   em {
     font-weight: bold;
@@ -42,7 +44,9 @@
 .forum_paginator {
   position: relative;
   height: 32px;
-  background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
+  // background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
+  background-color: #EEE;
+
   .pagination {
     float: left;
     width: 500px;
@@ -399,7 +403,7 @@ a.overlay {
     line-height: 18px;
     height: 32px;
     margin-left: 84px;
-    background: transparent image-url('backgrounds/user_bar.png') repeat-x top left;
+    background-color: #EEE;
   }
   ul.user_links,
   ul.links {
