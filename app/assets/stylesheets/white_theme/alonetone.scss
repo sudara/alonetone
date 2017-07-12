@@ -127,7 +127,7 @@ a.overlay {
 .comment {
   position: relative;
   color: $text_color2;
-  background: image-url('backgrounds/new_comment.png') repeat-x top left;
+  // background: image-url('backgrounds/new_comment.png') repeat-x top left;
   div.private_comment {
     position: absolute;
     z-index: 4;

@@ -183,41 +183,22 @@ h2#user_latest_playlists {
   background-position: -4px -3px;
 }
 
-h2#latest_uploaded,
-#user_latest h2 {
-  text-indent: 18px;
-}
-
 .sprites-latest-uploaded {
+  display: none;
   margin-top: 13px;
   margin-left: 20px;
 }
 
 .sprites-stars {
+  display: none;
   margin-top: 8px;
   margin-left: 14px;
-}
-
-h2#kicking_ass,
-#user_popular h2 {
-  text-indent: 14px;
-}
-
-h2#recently_favorited {
-  text-indent: 14px;
-}
-
-h2#latest_comments,
-#user_comments h2 {
-  text-indent: 14px;
 }
 
 .sprites-latest-comments {
   margin-top: 10px;
   margin-left: 16px;
 }
-
-
 
 .errorExplanation h2 {
   display: none;
