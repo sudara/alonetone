@@ -1,0 +1,281 @@
+div.tabs,div.big_tabs {
+  float: none;
+  clear: both;
+  width: 100%;
+  position: relative;
+}
+
+div.tabs {
+  width: 420px;
+}
+
+.content ul.ui-tabs-nav {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 35px;
+  // background: image-url('backgrounds/tabs.png') no-repeat top left;
+  li {
+    height: 35px;
+    float: left;
+    margin: 0;
+    // be nice to Opera
+    min-width: 100px;
+  }
+  a{
+    display: block;
+    font-family: $header_font;
+    font-size: 15px;
+    height: 35px;
+    padding: 0 25px;
+    // background: image-url('backgrounds/tabs.png') no-repeat left top;
+    background-color: $medium_gray;
+    // position relative makes opacity fail for disabled tab in IE
+    color: $text_color2;
+    font-weight: bold;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    // required in IE 6
+    white-space: nowrap;
+    // prevent dotted border in Firefox
+    outline: 0;
+  }
+  .ui-state-active a {
+    background-position: -420px 0px;
+    background-color: $light_gray;
+    position: relative;
+    top: 0px;
+    z-index: 2;
+    margin-top: 0;
+    color: $text_color;
+  }
+}
+
+// clearing without presentational markup, IE gets extra treatment
+.ui-tabs-navafter {
+  display: block;
+  clear: both;
+  content: " ";
+}
+
+.ui-tabs-hide {
+  display: none;
+}
+
+// hide from IE 6
+*>.ui-tabs-nav a span {
+  width: auto;
+  height: auto;
+}
+
+.ui-tabs-nav .ui-tabs-selected a span {
+  padding-bottom: 1px;
+}
+
+.ui-tabs-nav .ui-tabs-selected a, .ui-tabs-nav a:hover, .ui-tabs-nav a:focus, .ui-tabs-nav a:active {
+  background-position: -420px 0px;
+}
+
+.ui-tabs-nav a, .ui-tabs-nav .ui-tabs-disabled a:hover, .ui-tabs-nav .ui-tabs-disabled a:focus, .ui-tabs-nav .ui-tabs-disabled a:active {
+  background-position: 0% 0px;
+}
+
+.ui-tabs-nav .ui-tabs-selected a span, .ui-tabs-nav a:hover span, .ui-tabs-nav a:focus span, .ui-tabs-nav a:active span {
+  background-position: 0 -50px;
+}
+
+.ui-tabs-nav a span, .ui-tabs-nav .ui-tabs-disabled a:hover span, .ui-tabs-nav .ui-tabs-disabled a:focus span, .ui-tabs-nav .ui-tabs-disabled aactive span {
+  background-position: 0 0;
+}
+
+/* @ Opera, use pseudo classes otherwise it confuses cursor... */
+.ui-tabs-nav .ui-tabs-selected a:link, .ui-tabs-nav .ui-tabs-selected a:visited, .ui-tabs-nav .ui-tabs-disabled alink, .ui-tabs-nav .ui-tabs-disabled a:visited {
+  cursor: text;
+}
+
+.ui-tabs-nav a:hover, .ui-tabs-nav a:focus, .ui-tabs-nav a:active,
+.ui-tabs-nav .ui-tabs-unselect a:hover, .ui-tabs-nav .ui-tabs-unselect a:focus, .ui-tabs-nav .ui-tabs-unselect a:active {
+  cursor: pointer;
+}
+
+.ui-tabs-disabled {
+  opacity: 0.4;
+}
+
+.favorite_panel {
+  background: #e1e2e1;
+  position: relative;
+  height: 25px;
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: -20px;
+  a {
+    float: right;
+  }
+}
+
+.ui-tabs-panel {
+  position: relative;
+  clear: both;
+  width: 380px;
+  padding: 15px 20px 10px 20px;
+  // again, NO position:relative, it makes IE fail
+  // declare background color for container to avoid distorted fonts in IE while fading
+  a,a:visited {
+    color: $text_color;
+    text-decoration: underline;
+  }
+  textarea {
+    width: 374px;
+  }
+  .tabbed_input {
+    width: 360px;
+    margin-left: 10px;
+    height: 20px;
+  }
+  .home_page_link {
+    text-align: right;
+  }
+  .comment_waiting {
+    position: absolute;
+    background-color: $tab_box_silver;
+    text-align: center;
+    bottom: 10px;
+    left: 19px;
+    color: $orange;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    div.ajax_success, div.ajax_fail {
+      background: transparent image-url('icons/ok.png') no-repeat top left;
+      text-indent: 35px;
+      height: 30px;
+      line-height: 30px;
+    }
+    div.ajax_success {
+      color: $green;
+    }
+    div.ajax_fail {
+      background: transparent image-url('icons/not_ok.png') no-repeat top left;
+    }
+  }
+  .panel {
+    border-top: 1px solid black;
+    width: 380px;
+    padding: 10px 20px;
+    margin-left: -20px;
+    border-top-color: $body_background;
+    line-height: 15px;
+    overflow: hidden;
+
+    &.no_border {
+      border: none;
+
+    }
+    &.description_panel {
+      position: relative;
+      min-height: 60px;
+      p {
+        color: $text_color;
+      }
+      .alonetoner {
+        position: absolute;
+        // top: 7px;
+        left: 15px;
+        height: 100%;
+        a {
+          width: 50px;
+          height: 50px;
+          overflow: hidden;
+        }
+        a img {
+          border: 1px solid #9fa28d;
+          height: 50px;
+          width: 50px;
+          &.no_border {
+            border: none;
+          }
+        }
+      }
+      .description {
+        margin-left: 60px;
+        font-size: 14px;
+        line-height: 17px;
+        width: 304px;
+        .user_description {
+          p{
+            margin-bottom:1em;
+          }
+        }
+        p img{
+          max-width: 290px;
+        }
+
+        p {
+          margin-top: 0px;
+          margin-bottom:0px;
+        }
+
+        .description_more p  a {
+          font-weight: bold!important;
+          text-decoration: none!important;
+          font-size: 12px!important;
+          margin-bottom:1em;
+        }
+
+      }
+      .stats {
+        font-size: 12px;
+        line-height: 14px;
+      }
+      .admin {
+        font-size: 10px;
+        padding-top: 20px;
+        line-height: 12px;
+        color: #666;
+      }
+    }
+  }
+  .description_panel {
+    padding-top: 5px;
+    font-size: 12px;
+    p {
+      padding-right: 30px;
+    }
+  }
+}
+
+.show_to_admin {
+  display: none;
+  float: none;
+  clear: both;
+}
+
+.show_to_admin_or_owner {
+  display: none;
+}
+
+.track_links {
+  float: right!important;
+  margin-top: 15px;
+}
+
+#single_track .track_links {
+  left: -9px;
+}
+
+.ui-tabs-loading em {
+  padding: 0 0 0 20px;
+  background: url(loading.gif) no-repeat 0 50%;
+}
+
+//auto clear, @ IE 6 & IE 7 Quirks Mode
+* html .ui-tabs-nav {
+  display: inline-block;
+}
+
+*:first-child+html .ui-tabs-nav {
+  display: inline-block;
+}
