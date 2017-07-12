@@ -6,7 +6,6 @@ $box_background_even: #FFFFFF;
 
 // text
 $header_font: ronnia-1, ronnia-2, Ronnia, Helvetica, Arial;
-
 $text_color: #000000;
 $text_color2: #000000;
 $nav_item_color: #C1C9B4;
@@ -22,3 +21,24 @@ $red: #D3220C;
 $green: #66A410;
 $disabled: #8C8E86;
 $body_link_hover: #1A1D13;
+
+
+@mixin default_button() {
+  font-family: $header_font;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 34px;
+  display: block;
+  height: 32px;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  color: $text_color;
+  border: 1px solid $medium_gray;
+  border-radius: 5px;
+
+  -webkit-font-smoothing: antialiased;
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -82,7 +82,7 @@ img a:visited {
   a,
   a:visited {
     font-weight: bold;
-    text-decoration: underline;
+    // text-decoration: underline;
   }
   ul {
     margin-top: 10px;
@@ -229,27 +229,7 @@ div.flash {
 
 .content {
   a.view_all {
-    font-family: $header_font;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 31px;
-    float: right;
-    height: 32px;
-    margin-left: 8px;
-    padding-right: 13px;
-    padding-left: 13px;
-    color: $text_color;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    border-radius: 5px;
-
-    -webkit-font-smoothing: antialiased;
-    &:hover {
-      text-decoration: underline;
-    }
-    span {
-      float: left;
-    }
+    @include default_button();
   }
 }
 
@@ -358,22 +338,11 @@ span.private {
 
 // icon links (add/delete/etc)
 
-.track_about_link {
-  font-family: $header_font;
-  font-size: 16px!important;
-  font-weight: bold!important;
-  line-height: 31px!important;
-  display: block;
-  float: left!important;
-  height: 32px;
-  margin-left: 8px;
-  padding: 0 12px!important;
-  text-decoration: none!important;
-  color: #303225!important;
-  border: 1px solid #000000;
-  border-radius: 5px;
+a.track_about_link {
+  float: right;
+  margin-left: 4px;
 
-  @include border-radius(5px, 5px);
+  @include default_button();
 }
 
 a.edit {
@@ -435,52 +404,21 @@ a.edit_profile {
   margin-left: 20px;
 }
 
-// PLAYLIST BUTTONS (grey/black)
+/* PLAYLIST BUTTONS */
 
 #create_new_playlist {
-  font-family: $header_font;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 28px;
-  display: block;
-  width: 170px;
-  height: 32px;
-  padding-right: 4px;
-  padding-left: 14px;
-  border: 1px solid #000000;
-  border-radius: 5px;
-
-  -webkit-font-smoothing: antialiased;
-  &:hover {
-    text-decoration: none;
-  }
+  @include default_button();
 }
 
 #change_playlist_order {
-  font-family: $header_font;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 28px;
-  display: block;
-  width: 183px;
-  height: 32px;
-  padding-left: 20px;
-  border: 1px solid #000000;
-  border-radius: 5px;
-
-  -webkit-font-smoothing: antialiased;
-  > img {
+  @include default_button();
+  img {
     display: none;
   }
-  &:hover {
-    text-decoration: none;
-  }
-  img {
-    position: relative;
-    top: 5px;
-    left: -10px;
-  }
 }
+
+/* FORUM BUTTONS */
+
 #create_new_topic {
   display: block;
   float: right;
@@ -606,7 +544,8 @@ blockquote {
   background: $box_background_even;
 }
 
-// Press logos
+/* PRESS LOGOS */
+
 div.logo {
   font-size: 10px;
   font-weight: normal;
