@@ -12,18 +12,13 @@
 @import 'white_theme/tracks';
 @import 'white_theme/playlists';
 @import 'white_theme/tabs';
+@import 'white_theme/footer';
 
 @import 'application/reset';
 @import 'application/simple_form';
 @import 'application/nav';
-@import 'application/footer';
 @import 'application/facebox';
 @import 'application/upload';
-
-
-.comment {
-  background: none;
-}
 
 
 // no more icons by h2s
