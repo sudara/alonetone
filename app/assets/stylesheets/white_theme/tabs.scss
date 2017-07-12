@@ -143,7 +143,7 @@ div.tabs {
   // declare background color for container to avoid distorted fonts in IE while fading
   a,
   a:visited {
-    text-decoration: underline;
+    // text-decoration: underline;
     color: $text_color;
   }
   textarea {

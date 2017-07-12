@@ -126,10 +126,10 @@ a.overlay {
 
 .comment {
   position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
   color: $text_color2;
   border-bottom: 1px solid $light_gray;
-  padding-bottom: 15px;
-  margin-bottom: 20px;
   div.private_comment {
     position: absolute;
     z-index: 4;
