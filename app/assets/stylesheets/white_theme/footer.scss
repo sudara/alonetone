@@ -17,9 +17,6 @@
     font-weight: bold;
     line-height: 20px;
   }
-  a:hover {
-    // text-decoration: none;
-  }
   .author_name a {
     font-size: 12px;
     font-weight: normal;
@@ -65,7 +62,6 @@
   width: 200px;
 
   @extend %footer_column;
-  // padding-right: 40px;
 }
 
 .footer_column_2_bottom {
@@ -75,10 +71,7 @@
   li {
     font-size: 14px;
   }
-  // width: 200px;
-  // padding-right: 40px;
 }
-
 
 .footer_column_3 {
   width: 280px;
@@ -93,7 +86,7 @@
   margin-top: 20px;
   margin-bottom: 5px;
   padding-bottom: 5px;
-  color: #585858;
+  color: $black;
   border-bottom: 1px #929292 solid;
 }
 
@@ -118,11 +111,6 @@
 a.footer_button_label {
   font-size: 11px;
   width: 104px;
-  // margin-left: -8px;
-}
-
-a.footer_button_label:hover {
-  // text-decoration: none;	
 }
 
 .footer_orange_text {
