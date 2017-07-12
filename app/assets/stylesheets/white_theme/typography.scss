@@ -1,5 +1,5 @@
 body {
-  font-family: Helvetica, Arial, Geneva;
+  font-family: Helvetica, Arial;
   color: $text_color;
 
   text-rendering: optimizeLegibility;
@@ -7,7 +7,7 @@ body {
 
 a,
 a:visited {
-  font-family: Helvetica, Arial, Geneva;
+  font-family: Helvetica, Arial;
   font-weight: bold;
   line-height: 16px;
   text-decoration: none;
@@ -219,8 +219,6 @@ div.flash {
   padding: 20px 30px;
   color: $text_color2;
   background-color: $orange_background;
-
-  @include background-image(linear-gradient(#EB954B, #E66D29));
   div.flash_stats {
     font-size: 14px;
     a {
@@ -228,7 +226,6 @@ div.flash {
     }
   }
 }
-
 
 .content {
   a.view_all {
@@ -272,7 +269,6 @@ div.notice li {
 div.notice ol {
   margin-top: 8px!important;
 }
-
 
 div.footer_box {
   line-height: 30px;
@@ -398,23 +394,20 @@ a.edit {
 
 a.edit_profile,
 a.follow {
-
-  display: block;
-  border-radius: 5px;
-  border: 1px solid $black;
+  font-family: $header_font;
+  font-size: 10px;
   line-height: 20px;
-  height: 48px;
+  top: 1px;
+  display: block;
+  float: right;
   width: 48px;
+  height: 48px;
+  margin-right: 2px;
   text-align: center;
   text-decoration: none;
-  margin-right: 2px;
-  font-size: 10px;
-  font-family: $header_font;
   color: $black;
-  float: right;
-  top: 1px;
-
-  
+  border: 1px solid $black;
+  border-radius: 5px;
   > .sprites-pencil-big {
     margin: 0 auto;
     margin-top: 9px;
@@ -443,6 +436,7 @@ a.edit_profile {
 }
 
 // PLAYLIST BUTTONS (grey/black)
+
 #create_new_playlist {
   font-family: $header_font;
   font-size: 16px;
@@ -455,12 +449,10 @@ a.edit_profile {
   padding-left: 14px;
   border: 1px solid #000000;
   border-radius: 5px;
-  // @include background-image(linear-gradient(#5F6154, #1B1B15));
 
   -webkit-font-smoothing: antialiased;
   &:hover {
     text-decoration: none;
-    // @include background-image(linear-gradient(#7F8274, #414438));
   }
 }
 
@@ -475,7 +467,6 @@ a.edit_profile {
   padding-left: 20px;
   border: 1px solid #000000;
   border-radius: 5px;
-  // @include background-image(linear-gradient(#5F6154, #1B1B15));
 
   -webkit-font-smoothing: antialiased;
   > img {
@@ -483,7 +474,6 @@ a.edit_profile {
   }
   &:hover {
     text-decoration: none;
-    // @include background-image(linear-gradient(#7F8274, #414438));
   }
   img {
     position: relative;
@@ -491,8 +481,6 @@ a.edit_profile {
     left: -10px;
   }
 }
-
-
 #create_new_topic {
   display: block;
   float: right;
