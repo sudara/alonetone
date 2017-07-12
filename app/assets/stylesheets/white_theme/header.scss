@@ -23,7 +23,7 @@
 
 .header_search {
   position: relative;
-  top: -39px;
+  top: -354px;
   left: -180px;
   float: right;
   height: 50px;
@@ -61,6 +61,7 @@
   float: right;
   padding-top: 10px;
   padding-bottom: 10px;
+  position: relative;
   background-color: #FFFFFF;
   .profile_link {
     font-family: $header_font;
@@ -90,7 +91,7 @@
     }
   }
   .user_dropdown_menu {
-    position: relative;
+    position: absolute;
     z-index: 2;
     top: -90px;
     a {
@@ -102,13 +103,6 @@
       height: 26px;
       padding-left: 10px;
       color: $black;
-      // background-color: #333333;
-      &:hover {
-        text-decoration: none;
-        // color: #FFFFFF;
-        // color: #FFFFFF;
-        // background-color: $orange;
-      }
     }
     :nth-child(odd) {
       // background-color: #555555;
