@@ -1,5 +1,6 @@
 .header_inner {
   width: 940px;
+  position: relative;
 }
 
 .header_logo {
@@ -9,7 +10,7 @@
   display: block;
   width: 69px;
   height: 54px;
-  background: transparent image-url('alonetone_big-notext.png') no-repeat;
+  background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
   background-size: 100%;
 }
 
