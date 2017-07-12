@@ -402,12 +402,13 @@ a.overlay {
   ul.links {
     height: 32px;
     margin-bottom: 2px;
+    border-bottom: 1px solid $light_gray;
     li {
       line-height: 34px;
       float: left;
       height: 32px;
       color: $text_color;
-      background: $orange_background;
+      // background: $orange_background;
       a {
         font-family: $header_font;
         font-size: 14px;
@@ -417,12 +418,12 @@ a.overlay {
         float: left;
         padding: 0 15px;
         color: $text_color;
-        background-color: $light_gray;
+        // background-color: $light_gray;
       }
       a:hover {
         text-decoration: none;
         color: $text_color2;
-        background: $orange_background;
+        background: $light_gray;
       }
     }
     li.contact {
