@@ -25,8 +25,6 @@
     text-decoration: none;
     color: $text_color2;
     background-color: $orange_background;
-    // background: transparent image-url('backgrounds/user_bar_selected.png') repeat-x top left;
-
   }
   em {
     font-weight: bold;
@@ -44,9 +42,7 @@
 .forum_paginator {
   position: relative;
   height: 32px;
-  // background: transparent image-url('backgrounds/user_bar.png') repeat-x scroll left top;
-  background-color: #EEE;
-
+  background-color: #EEEEEE;
   .pagination {
     float: left;
     width: 500px;
@@ -402,7 +398,6 @@ a.overlay {
     line-height: 18px;
     height: 32px;
     margin-left: 84px;
-    background-color: #EEE;
   }
   ul.user_links,
   ul.links {
@@ -424,7 +419,7 @@ a.overlay {
         float: left;
         padding: 0 15px;
         color: $text_color;
-        background-color: #EEE;
+        background-color: #EEEEEE;
       }
       a:hover {
         text-decoration: none;
@@ -464,7 +459,7 @@ a.overlay {
     height: 32px;
     margin-top: 1px;
     text-align: center;
-    background-color: #EEE;
+    background-color: #EEEEEE;
   }
 }
 
