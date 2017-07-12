@@ -1,4 +1,3 @@
-// pagination base
 .pagination {
   font-family: $header_font;
   position: relative;
@@ -70,7 +69,6 @@ a.overlay {
 }
 
 
-// browse all users
 #user_index,
 #user_search_results {
   position: relative;
@@ -227,6 +225,7 @@ a.overlay {
 }
 
 // give the posts some breathing room
+
 .update {
   margin-bottom: 50px;
   .update_title_bar {
@@ -408,7 +407,6 @@ a.overlay {
       float: left;
       height: 32px;
       color: $text_color;
-      // border-right: 1px solid $text_color;
       background: $orange_background;
       a {
         font-family: $header_font;
@@ -463,7 +461,9 @@ a.overlay {
   }
 }
 
-// uploading
+
+/* UPLOADING */
+
 .uploader {
   form {
     #filefields {
@@ -481,7 +481,8 @@ a.overlay {
   }
 }
 
-// sign up
+/* SIGN UP */
+
 #what-you-get {
   background-color: #F3F3F3;
   h2 {
@@ -492,7 +493,7 @@ a.overlay {
   }
 }
 
-// static content
+/* STATIC CONTENT */
 
 .static_content {
   line-height: 18px;
@@ -513,7 +514,6 @@ a.overlay {
   padding: 0!important;
   background: none;
 }
-
 
 .sidebar {
   float: right;
@@ -539,7 +539,6 @@ a.overlay {
 #alonetoner_big {
   margin-bottom: 40px;
 }
-
 
 #follows,
 #mostly_listens_to,
@@ -588,7 +587,7 @@ div.small_spinner {
   background: image-url('icons/small_spinner.gif') no-repeat center center;
 }
 
-// favorites
+/* FAVORITES */
 
 a.add_to_favorites,
 a.favorited {
@@ -618,7 +617,7 @@ a.favorited {
   }
 }
 
-// misc
+/* MISC */
 
 #user_home {
   position: relative;
@@ -836,8 +835,6 @@ h1 span#channel_name {
   }
 }
 
-
-
 .asset.played {
   opacity: .2;
 }
@@ -847,7 +844,8 @@ h1 span#channel_name {
   opacity: .99;
 }
 
-// stats
+/* STATS */
+
 h2.stats {
   margin-top: 1.5em;
   margin-bottom: .5em;
@@ -953,9 +951,7 @@ h2.table {
   display: none;
 }
 
-
-
-// ZEBRA STRIPES FOR ASSETS
+/* ZEBRA STRIPES FOR ASSETS */
 
 .asset:nth-child(odd) {
   div.button,
@@ -964,8 +960,7 @@ h2.table {
   }
 }
 
-
-// SIGN UP PARAGRAPH ADJUST
+/* SIGN UP PARAGRAPH ADJUST */
 
 #login p {
   font-size: 10px;
@@ -980,7 +975,7 @@ h2.table {
   line-height: 14px;
 }
 
-// sudo bar
+/* SUDO BAR */
 
 .sudo_bar {
   font-size: 12px;
