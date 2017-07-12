@@ -417,27 +417,23 @@ a.edit {
 
 a.edit_profile,
 a.follow {
-  font-family: $header_font;
-  font-size: 10px;
-  line-height: 20px;
-  top: 1px;
+
   display: block;
-  float: right;
-  width: 48px;
+  border-radius: 5px;
+  border: 1px solid $black;
+  line-height: 20px;
   height: 48px;
-  margin-right: 2px;
+  width: 48px;
   text-align: center;
   text-decoration: none;
-  color: #000000!important;
+  margin-right: 2px;
+  font-size: 10px;
+  font-family: $header_font;
+  color: $black;
+  float: right;
+  top: 1px;
 
-  @include border-radius(5px, 5px);
-  @include background-image(linear-gradient(#EDEFE9 0%, #CCD2C2 4%, #B0BAA3 96%, #8F9D7B 100% ));
-  &:hover {
-    @include background-image(linear-gradient(#F1F3ED 0%, #D9DED1 4%, #C4CBBA 96%, #ACB59C 100% ));
-  }
-  &:active {
-    @include background-image(linear-gradient(#879674 0%, #ABB59D 4%, #CED6C5 96%, #EDEFE9 100% ));
-  }
+  
   > .sprites-pencil-big {
     margin: 0 auto;
     margin-top: 9px;
