@@ -13,7 +13,7 @@ module Greenfield
     end
 
     def login
-      @user_session = UserSession.new(params[:user_session].merge(remember_me: true))
+      @user_session = UserSession.new(user_session_params.merge(remember_me: true))
       if @user_session.save
         redirect_to params[:continue]
       else
@@ -21,9 +21,13 @@ module Greenfield
         render action: :require_login
       end
     end
-    
+
     protected
-    
+
+    def user_session_params
+      params.require(:user_session).permit(:password, :login)
+    end
+
     def find_asset_from_playlist
       alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
       @playlist ||= Greenfield::Playlist.new(alonetone_playlist)
@@ -31,6 +35,6 @@ module Greenfield
         @asset ||= Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
       end
     end
-    
+
   end
 end

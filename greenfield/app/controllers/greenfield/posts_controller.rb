@@ -32,11 +32,11 @@ module Greenfield
     def update
       @post = find_post
       @playlist = params[:post].delete('playlist_id')
-      if @post.update_attributes(params[:post])
-        if @playlist 
+      if @post.update_attributes(post_params)
+        if @playlist
           redirect_to user_playlist_post_path(@post.user, @playlist, @post)
         else
-          redirect_to user_post_path(@post.user, @post) 
+          redirect_to user_post_path(@post.user, @post)
         end
       else
         render :edit
@@ -44,6 +44,10 @@ module Greenfield
     end
 
     protected
+
+    def post_params
+      params.require(:post).permit(:body)
+    end
 
     def create_unless_post_exists
       if find_asset.user == current_user && !find_asset.greenfield_post
