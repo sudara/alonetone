@@ -95,6 +95,7 @@
     position: absolute;
     z-index: 2;
     top: -90px;
+    margin-top: 45px;
     a {
       font-family: $header_font;
       font-size: 14px;
@@ -105,11 +106,5 @@
       padding-left: 10px;
       color: $black;
     }
-    :nth-child(odd) {
-      // background-color: #555555;
-    }
-  }
-  .user_dropdown_menu:nth-child(odd) {
-    background-color: $box_background_even;
   }
 }
