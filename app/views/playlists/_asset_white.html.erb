@@ -1,0 +1,35 @@
+<div class="track-content">
+  <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
+    <i class="fa fa-play fa-3x play-button play-control">
+      <%= link_to '', media_url(@asset) %>
+    </i>
+
+    <div class="waveform" data-waveform="<%= @asset.waveform.join(', ') %>">
+      <div class="seekbar"></div>
+    </div>
+
+    <div class="time">
+      <span class="index">0:00</span> of <%= @asset.length %>
+    </div>
+
+    <div class="download-button">
+      <%= link_to '', media_url(@asset) %>
+    </div>
+  </div>
+
+  <div class="post-content">
+    <h1><%= @asset.name %></h1>
+    <% if authorized? and @playlist %>
+      <%= link_to("Edit", '', class: "edit-link") %>
+    <% elsif authorized? %>
+      <%= link_to("Edit", '', class: "edit-link") %>
+    <% end %>
+    <%= markdown(@asset.description) %>
+  </div>
+
+  <% if @asset.credits.present? %>
+    <div class="track-credits">
+      <%= markdown(@asset.credits) %>
+    </div>
+  <% end %>
+</div>

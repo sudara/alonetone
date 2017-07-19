@@ -1,0 +1,19 @@
+<%= render 'playlist_white' %>
+
+<% if @asset %>
+  <%= render partial: 'asset_white' %>
+<% else %>
+  <div class="track-content">
+    <div class="large-cover">
+      <%= image_tag @playlist.cover(:greenfield) %>
+    </div>
+    <% if @playlist.has_details? %>
+      <div class="playlist-options">
+        <%= render partial: 'greenfield/playlists/links' %>
+      </div>
+    <% end %>
+    <div class="playlist-credits">
+      <%= markdown(@playlist.credits) %>
+    </div>
+  </div>
+<% end %>

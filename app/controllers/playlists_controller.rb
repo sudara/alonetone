@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
   include GreenfieldPlaylistDownloads
+  include Listens
 
   before_action :find_user, :except => :all
   before_action :find_playlists, :except => [:index, :new, :create, :sort, :all]
@@ -35,8 +36,16 @@ class PlaylistsController < ApplicationController
   end
 
   def show
-    @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
-    @single_playlist = true
+    @asset = find_asset_in_playlist
+    respond_to do |format|
+      format.html do
+        @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
+        render 'show_white' if white_theme_enabled?
+      end
+      format.mp3 do
+        listen(@asset, register: false)
+      end
+    end
   end
 
   def new
@@ -124,6 +133,12 @@ class PlaylistsController < ApplicationController
   end
 
   protected
+
+  def find_asset_in_playlist
+    if params[:asset_id].present?
+      Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
+    end
+  end
 
   def playlist_params
     params.require(:playlist).permit(:user_id, :is_favorite, :year, :title, :description, :private, :position)
