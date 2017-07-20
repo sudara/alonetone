@@ -8,7 +8,6 @@ body {
 a,
 a:visited {
   font-family: Helvetica, Arial;
-  font-weight: bold;
   line-height: 16px;
   text-decoration: none;
   color: $text_color;
@@ -121,7 +120,6 @@ h2,
 
 h2.box {
   font-family: $header_font;
-  font-weight: bold;
   line-height: 44px;
   display: block;
   width: 100%;
