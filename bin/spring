@@ -1,18 +1,17 @@
 #!/usr/bin/env ruby
 
-# This is a special way of invoking the spring gem in order to
-# work around the performance issue discussed in
-# https://github.com/rubygems/rubygems/pull/435
+# This file loads spring without using Bundler, in order to be fast.
+# It gets overwritten when you run the `spring binstub` command.
 
-glob       = "{#{Gem::Specification.dirs.join(",")}}/spring-*.gemspec"
-candidates = Dir[glob].to_a.sort
+unless defined?(Spring)
+  require 'rubygems'
+  require 'bundler'
 
-spec = Gem::Specification.load(candidates.last)
-
-if spec
-  spec.activate
-  load spec.bin_file("spring")
-else
-  $stderr.puts "Could not find spring gem in #{Gem::Specification.dirs.join(", ")}."
-  exit 1
+  lockfile = Bundler::LockfileParser.new(Bundler.default_lockfile.read)
+  spring = lockfile.specs.detect { |spec| spec.name == "spring" }
+  if spring
+    Gem.use_paths Gem.dir, Bundler.bundle_path.to_s, *Gem.path
+    gem 'spring', spring.version
+    require 'spring/binstub'
+  end
 end
