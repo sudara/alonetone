@@ -157,9 +157,9 @@ module ApplicationHelper
     end
   end
 
-  def flag_for(ip)
-    return "" unless ip.present?
-    image_tag('http://api.hostip.info/flag.php?ip='+ ip, :size => '80x40', :style => 'float:right; clear:none;opacity:0.4;').html_safe
+  def flag_for(country)
+    return "" unless country.present?
+    image_tag("#{country}.svg", :size => '80x40', :style => 'float:right; clear:none;').html_safe
   end
 
   # Mephisto said it best...
