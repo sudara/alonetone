@@ -159,7 +159,7 @@ module ApplicationHelper
 
   def flag_for(country)
     return "" unless country.present?
-    image_tag("#{country}.svg", :size => '80x40', :style => 'float:right; clear:none;').html_safe
+    image_tag("flags/#{country}.svg", :size => '80x40', :style => 'float:right; clear:none;').html_safe
   end
 
   # Mephisto said it best...
