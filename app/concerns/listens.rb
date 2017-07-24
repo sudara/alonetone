@@ -57,7 +57,9 @@ module Listens
         :track_owner  => asset.user,
         :source       => listen_referer,
         :user_agent   => user_agent,
-        :ip           => request.remote_ip
+        :ip           => request.remote_ip,
+        :city         => request.headers["GEOIP_CITY"], # set by nginx geoip
+        :country      => request.headers["GEOIP_COUNTRY_CODE"]
       ) unless is_a_bot? or ip_just_registered_this_listen?(asset)
   end
 
