@@ -3,7 +3,7 @@
 <% content_for :left do %>
   <div id="bio" class="box">
     <h2 class="box static">All about <%= @user.name %></h2>
-    
+
       <div class="bio static_content">
       	<p>
     	    <% if @user.try(:bio) %>
@@ -13,11 +13,11 @@
           <% end %>
       	</p>
       </div>
-    
+
       <div class="bio static_content">
         <p>
         	<%= website_for(@user).html_safe if @user.website.present? %>
-        </p>  
+        </p>
         	  <% if @user.has_tracks? && authorized? && @user.itunes.present? %>
               <p>
                 Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
@@ -32,26 +32,26 @@
         	  <% elsif @user.itunes.present? %>
                 <p><%= itunes_link_for(@user) %></p>
         	  <% end %>
-      </div>	
-    
+      </div>
+
   </div>
-  
+
   <%= render :partial => 'follows' if @mostly_listens_to.present? or @follows.present?  %>
-  
+
 <% end %>
 
 <% content_for :right do %>
 
   <%= link_to(image_tag(@user.avatar(:album), :class => 'large_avatar'), @user.avatar,  :id=>'alonetoner_big', :rel=>'facebox') %>
-  
-  
+
+
   <h2 class="box static"><%= @user.name %>'s stats</h2>
-  
+
   <div class="bio static_content">
     <p>
-      Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%> 
+      Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%>
     </p>
-    
+
     <p>
     <% if @user.listens_count > 0 %>
 		  People have listened to <%= @user.name %>'s <strong><%= pluralize @user.assets_count, 'track' %></strong> about <strong><%= @user.listens_count %> </strong>times, about <strong>~<%= @user.bandwidth_used %>GB</strong> of transfer.<br/>
@@ -62,7 +62,7 @@
   </p>
     <% if moderator? %>
     <p>
-      Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.current_login_ip) %><br/>
+      Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.listens.first&.country) %><br/>
       <small>User Agent: <%= @user.browser %></small>
     </p>
     <% end %>

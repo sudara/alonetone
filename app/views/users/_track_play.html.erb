@@ -8,13 +8,13 @@
    </div>
 	  <div class="listen_details">
 	    <div>
-        <strong><%= link_to h(truncate(track_play.asset.name, :length => 48)), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>  
+        <strong><%= link_to h(truncate(track_play.asset.name, :length => 48)), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>
       </div>
-	    <%= local_time_ago(track_play.created_at) %>  
-  	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) : 
+	    <%= local_time_ago(track_play.created_at) %>
+  	  by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) :
   	  "Guest #{track_play.ip.present? ? '('+track_play.ip+')': ''}" %> <br>
       via <%= link_source(track_play.source) %>
 	  </div>
-    <%= flag_for track_play.ip %>
+    <%= flag_for track_play.country %>
  <% end %>
 <div class="clear"></div>
