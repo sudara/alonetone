@@ -2,6 +2,22 @@
 @import 'compass/css3';
 @import 'compass/utilities';
 
+// from listenapp
+
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'greenfield/variables';
+@import 'greenfield/layout';
+@import 'greenfield/styles';
+@import 'greenfield/login';
+@import 'greenfield/playlist';
+@import 'greenfield/player';
+@import 'greenfield/post';
+@import 'greenfield/cover_view';
+@import 'greenfield/edit_post';
+@import 'greenfield/mobile';
+
+
 @import 'white_theme/sprites';
 @import 'white_theme/variables';
 @import 'white_theme/typography';
@@ -21,28 +37,6 @@
 @import 'application/upload';
 
 
-// from listenapp
-
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
-@import 'greenfield/variables';
-@import 'greenfield/layout';
-@import 'greenfield/styles';
-@import 'greenfield/login';
-@import 'greenfield/playlist';
-@import 'greenfield/player';
-@import 'greenfield/post';
-@import 'greenfield/cover_view';
-@import 'greenfield/edit_post';
-@import 'greenfield/mobile';
 
 
-h2#latest_uploaded,
-#user_latest h2,
-h2#kicking_ass,
-#user_popular h2,
-h2#recently_favorited,
-h2#latest_comments,
-#user_comments h2 {
-  text-indent: 0;
-}
+
