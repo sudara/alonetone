@@ -133,6 +133,7 @@ Alonetone::Application.routes.draw do
       end
       resources :favorites
       resources :posts
+      resources :playlists
       resources :playlists do
         collection do
           get :latest
