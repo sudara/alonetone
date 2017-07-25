@@ -120,12 +120,12 @@ h2,
 
 h2.box {
   font-family: $header_font;
+  font-weight: bold;
   line-height: 44px;
   display: block;
   width: 100%;
   height: 42px;
   margin-bottom: 1px;
-  text-indent: 25px;
   color: $text_color;
   background-color: $box_background;
 }
