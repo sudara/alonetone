@@ -32,6 +32,10 @@
       <% end %>
       <div class="header">
         <%= render :partial=> 'shared/header' %>
+        <%= render :partial => 'shared/search' %>
+        <%= check_for_and_display_welcome_back %>
+        <%= check_for_and_display_flashes %>
+
       </div>
     </div>
 
