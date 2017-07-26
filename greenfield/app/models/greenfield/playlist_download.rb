@@ -7,7 +7,6 @@ module Greenfield
 
     belongs_to :playlist
 
-
     # see config/initializers/paperclip for defaults
     attachment_options = {}
     if Alonetone.storage == 's3'
@@ -23,7 +22,7 @@ module Greenfield
     after_validation :destroy_s3_object_if_invalid, on: :create
 
     def url
-      attachment.expiring_url
+      Aws::CF::Signer.sign_url attachment.url, :expires => Time.now + 20.minutes
     end
 
     protected
