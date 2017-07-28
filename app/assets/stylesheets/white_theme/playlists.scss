@@ -55,6 +55,7 @@ a.next, a.prev {
 
 #playlists_carousel {
   position: relative;
+  overflow: hidden;
   .prev {
     position: absolute;
     left: 0;
