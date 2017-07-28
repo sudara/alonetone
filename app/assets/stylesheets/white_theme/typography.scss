@@ -357,7 +357,15 @@ a.edit {
   }
 }
 
-a.edit_profile,
+a.edit_profile {
+  @include default_button();
+  float: right;
+  display: block;
+  > div {
+    display: none;
+  }
+}
+
 a.follow {
   font-family: $header_font;
   font-size: 10px;
@@ -376,6 +384,7 @@ a.follow {
   > .sprites-pencil-big {
     margin: 0 auto;
     margin-top: 9px;
+    display: none;
   }
   > .sprites-heart-with-plus {
     margin: 0 auto;
