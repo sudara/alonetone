@@ -130,6 +130,9 @@ a.overlay {
   padding-bottom: 15px;
   color: $text_color2;
   border-bottom: 1px solid $light_gray;
+  &:last-child {
+    border-bottom: 0;
+  }
   div.private_comment {
     position: absolute;
     z-index: 4;

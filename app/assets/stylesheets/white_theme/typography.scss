@@ -1,5 +1,4 @@
 body {
-  font-family: Helvetica, Arial;
   color: $text_color;
   line-height: 1em;
   text-rendering: optimizeLegibility;
@@ -112,7 +111,7 @@ h2,
 .latest-playlists-header h2 a {
   font-family: $header_font;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 2em;
   margin-bottom: 1em;
   color: $text_color2;
@@ -161,7 +160,6 @@ span.note {
 // iconified headers
 .latest-playlists-header h2 {
   margin-bottom: .5em;
-  padding-left: 35px;
   a {
     margin-bottom: 0;
   }
@@ -171,11 +169,11 @@ span.note {
   margin-top: 5px;
 }
 h2#user_latest_playlists {
-  padding-left: 35px;
+  // padding-left: 35px;
 }
 
 #user-index #static_header h1.static {
-  padding-left: 27px;
+  // padding-left: 27px;
   background-image: image-url('icons/user.png');
   background-repeat: no-repeat;
   background-position: -4px -3px;
