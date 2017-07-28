@@ -1,15 +1,21 @@
+.header {
+  background-color: $light_gray;
+}
+
 .header_inner {
-  width: 940px;
   position: relative;
+  width: 1020px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .header_logo {
   position: absolute;
-  top: 8px;
-  left: 49px;
+  top: 13px;
+  left: 0;
   display: block;
-  width: 69px;
-  height: 54px;
+  width: 44.85px;
+  height: 35.1px;
   background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
   background-size: 100%;
 }
@@ -24,11 +30,10 @@
 
 .header_search {
   position: relative;
-  // top: -54px;
-  // left: -180px;
   float: right;
   height: 50px;
-  padding-top: 4px;
+  margin-right: 50px;
+  padding-top: 6px;
   #search_form {
     display: block;
     float: left;
@@ -37,8 +42,9 @@
       width: 220px;
       height: 30px;
       padding: 3px 12px;
-      color: #666666;
-      border: 1px solid $light_gray;
+      color: #222222;
+      border: 1px solid #DDDDDD;
+      border-radius: 5px;
       &.focused {
         color: white;
       }
@@ -59,22 +65,20 @@
 }
 
 .user_dropdown {
-  float: right;
-  padding-top: 10px;
-  padding-bottom: 10px;
   position: relative;
-  background-color: #FFFFFF;
+  float: right;
+  background-color: $light_gray;
   .profile_link {
     font-family: $header_font;
     font-size: 14px;
-    font-weight: 500;
     position: relative;
     z-index: 3;
     display: block;
-    height: 26px;
-    padding-bottom: 8px;
+    box-sizing: border-box;
+    height: 60px;
+    padding-top: 14px;
     color: $black;
-    background-color: #FFFFFF;
+    background-color: $light_gray;
     span {
       line-height: 34px;
       display: block;
@@ -95,7 +99,7 @@
     position: absolute;
     z-index: 2;
     top: -90px;
-    margin-top: 45px;
+    margin-top: 60px;
     a {
       font-family: $header_font;
       font-size: 14px;
@@ -103,8 +107,10 @@
       line-height: 26px;
       display: block;
       height: 26px;
-      padding-left: 10px;
+      padding-left: 15px;
+      padding-right: 15px;
       color: $black;
+      background-color: $light_gray;
     }
   }
 }
