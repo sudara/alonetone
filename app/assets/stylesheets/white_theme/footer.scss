@@ -1,5 +1,12 @@
 .footer {
-  min-width: 940px;
+  // min-width: 1020px;
+  .footer-inner {
+    width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  width: 100%;
+  background-color: $light_gray;
   ul {
     margin-bottom: 10px;
     li {
@@ -13,8 +20,8 @@
     }
   }
   a {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
+    // font-weight: bold;
     line-height: 20px;
   }
   .author_name a {
@@ -38,7 +45,7 @@
 }
 
 .footer_column_1 {
-  width: 120px;
+  width: 210px;
   padding-right: 20px;
   padding-left: 30px;
 
@@ -88,6 +95,11 @@
   padding-bottom: 5px;
   color: $black;
   border-bottom: 1px #929292 solid;
+  font-family: $header_font;
+  a {
+    font-family: $header_font;
+    font-size: 14px;
+  }
 }
 
 .footer_button_group {
