@@ -6,7 +6,6 @@ body {
 
 a,
 a:visited {
-  font-family: Helvetica, Arial;
   line-height: 16px;
   text-decoration: none;
   color: $text_color;
@@ -52,7 +51,7 @@ img a:visited {
 .content .user_report .body,
 .content .update .body,
 .notice,
-.footer {
+{
   a,
   a:visited {
     color: $text_color;
