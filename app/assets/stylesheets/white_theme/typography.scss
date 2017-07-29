@@ -1,6 +1,7 @@
 body {
-  color: $text_color;
   line-height: 1em;
+  color: $text_color;
+
   text-rendering: optimizeLegibility;
 }
 
@@ -50,8 +51,7 @@ img a:visited {
 .content .comment,
 .content .user_report .body,
 .content .update .body,
-.notice,
-{
+.notice, {
   a,
   a:visited {
     color: $text_color;
@@ -208,11 +208,13 @@ h2#user_latest_playlists {
 
 div.flash {
   font-family: $header_font;
-  font-size: 24px;
-  clear: both;
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  color: $text_color2;
+  font-size: 18x;
+  font-weight: bold;
+  position: relative;
+  z-index: 3;
+  padding: 15px 0;
+  text-align: center;
+  color: $black;
   background-color: $orange_background;
   div.flash_stats {
     font-size: 14px;
@@ -357,9 +359,10 @@ a.edit {
 }
 
 a.edit_profile {
-  @include default_button();
-  float: right;
   display: block;
+  float: right;
+
+  @include default_button();
   > div {
     display: none;
   }
@@ -381,9 +384,9 @@ a.follow {
   border: 1px solid $black;
   border-radius: 5px;
   > .sprites-pencil-big {
+    display: none;
     margin: 0 auto;
     margin-top: 9px;
-    display: none;
   }
   > .sprites-heart-with-plus {
     margin: 0 auto;
