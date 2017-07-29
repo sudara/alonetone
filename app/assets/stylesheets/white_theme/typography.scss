@@ -208,13 +208,13 @@ h2#user_latest_playlists {
 
 div.flash {
   font-family: $header_font;
-  font-size: 18x;
+  font-size: 18px;
   font-weight: bold;
   position: relative;
   z-index: 3;
   padding: 15px 0;
   text-align: center;
-  color: $black;
+  color: $white;
   background-color: $orange_background;
   div.flash_stats {
     font-size: 14px;

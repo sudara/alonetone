@@ -503,9 +503,8 @@ a.overlay {
 
 .static_content {
   line-height: 18px;
-  overflow: hidden;
-  margin-bottom: 1px;
-  padding: 15px 25px;
+  // overflow: hidden;
+  padding: 15px 0px;
   p {
     color: $text_color;
     a,
