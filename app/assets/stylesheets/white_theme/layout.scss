@@ -43,15 +43,13 @@ body {
 }
 
 #columns {
-  height: 1%;
+  display: flex;
+  justify-content: space-between;
   #left {
-    float: left;
-    width: 420px;
+    width: 45%;
   }
   #right {
-    float: left;
-    width: 420px;
-    margin-left: 50px;
+    width: 45%;
   }
 }
 
