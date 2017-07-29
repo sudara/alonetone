@@ -1,55 +1,55 @@
 // carousel
-a.next, a.prev {
+a.next,
+a.prev {
   display: block;
   width: 42px;
   height: 42px;
-  background-color: transparent;
   text-indent: -9999px;
+  background-color: transparent;
   &:hover img {
     background-color: $body_link_hover;
   }
   &.disabled {
-    opacity: 0.1;
+    opacity: .1;
     &:hover img {
       background-color: transparent;
     }
   }
 }
 
-.playlists_row{
-  text-align: center;
+.playlists_row {
   font-size: 11px;
+  height: 168px;
   margin-bottom: 28px;
-  height:168px;
-
+  text-align: center;
   li {
-    float:left;
-    position:relative;
-    display:block;
-    width:178px;
-    a.overlay{
+    position: relative;
+    display: block;
+    float: left;
+    width: 178px;
+    a.overlay {
       margin-left: 20px;
-      opacity:1;
+      opacity: 1;
     }
-    img{
-      margin-top:4px;
-      margin-left: -1px;
-      width:125px;
+    img {
+      width: 125px;
       height: 125px;
+      margin-top: 4px;
+      margin-left: -1px;
     }
   }
-
   .playlists_home_title {
+    font-family: $header_font;
     margin-top: 7px;
-    margin-bottom: 0px;
-      a {
-        font-size: 13px;
-
-      }
-   }
+    margin-bottom: 0;
+    a {
+      font-size: 13px;
+    }
+  }
   .playlists_home_user  a {
+    font-family: $header_font;
     font-size: 12px;
-    color: #000;
+    color: $black;
   }
 }
 
@@ -58,22 +58,22 @@ a.next, a.prev {
   overflow: hidden;
   .prev {
     position: absolute;
-    left: 0;
     top: 45px;
+    left: 0;
     background-image: image-url('icons/prev.png');
   }
   .next {
     position: absolute;
-    right: 0;
     top: 45px;
+    right: 0;
     background-image: image-url('icons/next.png');
   }
 }
 
 .playlists_carousel {
-  height: 190px;
-  width: 800px;
   overflow: hidden;
+  width: 800px;
+  height: 190px;
   margin: 0 70px;
 }
 
@@ -85,14 +85,14 @@ li.small_playlists {
   margin-right: 50px;
   margin-bottom: 100px;
   a.small_playlist_title {
-    text-align: center;
     font-family: $header_font;
     font-size: 13px;
-    color: $black;
     position: absolute;
     top: 140px;
-    left: 0px;
+    left: 0;
     width: 146px;
+    text-align: center;
+    color: $black;
   }
 }
 
@@ -105,54 +105,53 @@ li.small_playlists {
 
 a.jewel_case_125 {
   position: absolute;
-  left: 0;
   top: 0;
-  background-color: transparent;
-  text-indent: -9999px;
+  left: 0;
   width: 146px;
   height: 136px;
+  text-indent: -9999px;
+  background-color: transparent;
 }
 
 img.cover_125 {
   width: 125px;
   height: 125px;
-  margin-left: 6px;
   margin-top: 4px;
+  margin-left: 6px;
 }
 
 a.jewel_case_200 {
   position: absolute;
+  top: 10px;
+  left: 15px;
+  display: block;
   width: 200;
   height: 200;
-  left: 15px;
-  top: 10px;
-  display: block;
 }
 
 img.cover_200 {
-  margin-left: 23px;
   margin-top: 7px;
+  margin-left: 23px;
 }
 
 .playlist {
   div.box {
-
-    background-color: $light_gray;
-    padding-left: 25px;
-    padding-top: 9px;
     margin-bottom: 1px;
+    padding-top: 9px;
+    padding-left: 25px;
+    background-color: $light_gray;
     h2 {
-      font-weight: normal;
       font-size: 20px;
+      font-weight: normal;
       line-height: 20px;
-      padding-right: 40px;
-      color: $text_color;
       margin: 0;
       margin-bottom: 4px;
+      padding-right: 40px;
+      color: $text_color;
     }
     h3 {
-      font-weight: normal;
       font-size: 12px;
+      font-weight: normal;
       margin: 0;
       padding-bottom: 8px;
       color: $text_color;
@@ -161,15 +160,14 @@ img.cover_200 {
   div.info {
     position: relative;
     display: block;
-    background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
-
+    background-color: $playlist_box_silver;
     div.cover {
       position: relative;
       float: left;
+      overflow: hidden;
       width: 148px;
       height: 136px;
-      overflow: hidden;
     }
     p.description {
       // float: left;
@@ -183,14 +181,14 @@ img.cover_200 {
   }
   .empty {
     position: relative;
+    margin-bottom: 1px;
+    padding: 10px 20px 10px 20px;
     color: $text_color2;
     background-color: $orange_background;
-    padding: 10px 20px 10px 20px;
-    margin-bottom: 1px;
     a {
-      color: $text_color2;
-      text-decoration: underline;
       font-weight: bold;
+      text-decoration: underline;
+      color: $text_color2;
     }
   }
 }
@@ -212,15 +210,15 @@ img.cover_200 {
     }
     &.adding {
       #drop_here {
+        font-size: 20px;
+        line-height: 50px;
         display: block;
         width: 100%;
         height: 50px;
-        line-height: 50px;
-        border-top: 1px solid #000;
-        background-color: $playlist_box_silver;
         text-align: center;
         color: $orange;
-        font-size: 20px;
+        border-top: 1px solid #000000;
+        background-color: $playlist_box_silver;
       }
     }
   }
@@ -228,17 +226,18 @@ img.cover_200 {
 
 #playlist_sources {
   .playlist_source {
-    .asset, .track {
+    width: 420px;
+    padding: 0 0 0 0;
+    .asset,
+    .track {
       width: 420px;
     }
-    padding: 0px 0 0 0;
-    width: 420px;
   }
 }
 
 #sort_playlists {
-  width: 100%;
   position: relative;
+  width: 100%;
   height: 1000px;
   li.small_playlists {
     margin-bottom: 20px;
@@ -263,39 +262,39 @@ img.cover_200 {
 }
 
 .playlist_delete_button {
-    background: image-url('icons/delete.png') no-repeat center top;
-    display: block;
-    height: 30px;
-    width: 110px;
-    font-size: 10px;
-    margin-top: 20px!important;
-    margin-left: 10px;
-    font-weight: normal;
-    line-height: 35px;
-    float: right;
-    position: relative;
-    top: 10px;
-    margin-right: -25px;
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 35px;
+  position: relative;
+  top: 10px;
+  display: block;
+  float: right;
+  width: 110px;
+  height: 30px;
+  margin-top: 20px!important;
+  margin-right: -25px;
+  margin-left: 10px;
+  background: image-url('icons/delete.png') no-repeat center top;
 }
 
 .playlist_edit_button {
-  margin: 0!important;
   float: right!important;
+  margin: 0!important;
   margin-right: 20px!important;
 }
 
 .edit_playlist_button_row {
-    // background-color: $playlist_box_silver;
-    overflow: hidden;
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  // background-color: $playlist_box_silver;
+  overflow: hidden;
 }
 
 
 .playlists_hidden_blurb {
-  margin: 5px 0 14px 0;
   font-size: 12px;
+  margin: 5px 0 14px 0;
 }
 
 #edit_playlist .unopenable .title {
