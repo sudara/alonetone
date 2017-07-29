@@ -1,74 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="Qwk1j0Uoh0LDdn9-XUPlEGRnB506ft9wg3klvTI-pOQ" />
-    <title><%= @page_title || 'alonetone' %></title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="Qwk1j0Uoh0LDdn9-XUPlEGRnB506ft9wg3klvTI-pOQ" />
+  <title><%= @page_title || 'alonetone' %></title>
 
-    <%= stylesheet_link_tag ('white_theme') %>
-    <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
+  <%= stylesheet_link_tag ('white_theme') %>
+  <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
 
-    <meta content="index,follow" name="robots"/>
+  <meta content="index,follow" name="robots"/>
 
-    <% if @asset or @playlist %>
-    <meta property="og:type"               content="music.<%= @playlist ? 'album' : 'song' %>" />
-    <meta property="og:title"              content="<%= @playlist.try(:title) || @asset.title %>" />
-    <meta property="og:description"        content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
-    <meta property="og:image"              content="<%= @playlist.cover(:greenfield) if @playlist %>" />
-    <% end %>
+  <% if @asset or @playlist %>
+  <meta property="og:type"               content="music.<%= @playlist ? 'album' : 'song' %>" />
+  <meta property="og:title"              content="<%= @playlist.try(:title) || @asset.title %>" />
+  <meta property="og:description"        content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
+  <meta property="og:image"              content="<%= @playlist.cover(:greenfield) if @playlist %>" />
+  <% end %>
 
-    <%= csrf_meta_tag %>
-    <!-- render user specific variables and js helpers -->
-    <%= render :partial => 'shared/javascript_payload' %>
-  </head>
+  <%= csrf_meta_tag %>
+  <!-- render user specific variables and js helpers -->
+  <%= render :partial => 'shared/javascript_payload' %>
+</head>
 
-  <body class="<%= "has-details" if @playlist %> <%= @playlist.try(:theme) %>">
-    <div id="container">
-      <% if @sudo %>
-        <div class="sudo_bar">
-          Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
+<body class="<%= "has-details" if @playlist %> <%= @playlist.try(:theme) %>">
+    
+  <% if @sudo %>
+  <div class="sudo_bar">
+    Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
+  </div>
+  <% end %>
+  <div class="header">
+    <%= check_for_and_display_flashes %>
+    <%= check_for_and_display_welcome_back %>
+    <%= render :partial=> 'shared/header' %>
+    <%= render :partial => 'shared/search' %>
+  </div>
+
+  <div class="main-table-row content">
+    <main>
+      <%= yield %>
+
+      <%= yield :static %>
+
+      <div id="columns">
+        <div id="left">
+          <%= yield :left %>
         </div>
-      <% end %>
-      <div class="header">
-        <%= render :partial=> 'shared/header' %>
-        <%= render :partial => 'shared/search' %>
-        <%= check_for_and_display_welcome_back %>
-        <%= check_for_and_display_flashes %>
 
+        <div id="right">
+          <%= yield :right %>
+        </div>
+        <%= yield :bottom %>
       </div>
-    </div>
+    </main>
+  </div>
 
-    <div class="main-table-row content">
-      <main>
-        <%= yield %>
+  <div class="footer">
+    <%= cache("footer/#{theme_name}/#{moderator?}", :expires_in => 3.minutes) do %>
+    <%= render :partial => 'shared/footer_white' %>
+    <% end %>
+  </div>
 
-        <%= yield :static %>
+  <%= javascript_include_tag "greenfield/application", "data-turbolinks-eval": "false"  %>
+  <%= javascript_include_tag "application", "data-turbolinks-eval": "false"  %>
+  <%= render :partial => 'layouts/greenfield/ga' %>
 
-        <div id="columns">
-          <div id="left">
-            <%= yield :left %>
-          </div>
-
-          <div id="right">
-            <%= yield :right %>
-          </div>
-          <div class="clear"></div>
-          <%= yield :bottom %>
-        </div>
-      </main>
-    </div>
-
-
-    <div class="footer">
-      <%= cache("footer/#{theme_name}/#{moderator?}", :expires_in => 3.minutes) do %>
-        <!-- <%= render :partial => 'shared/footer' %> -->
-        <%= render :partial => 'shared/footer_white' %>
-      <% end %>
-    </div>
-
-    <%= javascript_include_tag "greenfield/application", "data-turbolinks-eval": "false"  %>
-    <%= javascript_include_tag "application", "data-turbolinks-eval": "false"  %>
-    <%= render :partial => 'layouts/greenfield/ga' %>
-  </body>
+</body>
 </html>
