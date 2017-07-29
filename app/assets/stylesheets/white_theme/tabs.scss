@@ -134,132 +134,114 @@ div.tabs {
   }
 }
 
-.ui-tabs-panel {
-  position: relative;
-  clear: both;
-  width: 380px;
-  padding: 15px 20px 10px 20px;
-  // again, NO position:relative, it makes IE fail
-  // declare background color for container to avoid distorted fonts in IE while fading
-  a,
-  a:visited {
-    // text-decoration: underline;
-    color: $text_color;
+a,
+a:visited {
+  // text-decoration: underline;
+  color: $text_color;
+}
+textarea {
+  width: 374px;
+}
+.tabbed_input {
+  width: 360px;
+  height: 20px;
+  margin-left: 10px;
+}
+.home_page_link {
+  text-align: right;
+}
+input.comment_submit {
+  @include default_button();
+  background-color: transparent;
+}
+.comment_waiting {
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  left: 19px;
+  text-align: center;
+  text-align: center;
+  color: $orange;
+  background-color: $tab_box_silver;
+  div.ajax_success,
+  div.ajax_fail {
+    line-height: 30px;
+    height: 30px;
+    text-indent: 35px;
+    background: transparent image-url('icons/ok.png') no-repeat top left;
   }
-  textarea {
-    width: 374px;
+  div.ajax_success {
+    color: $green;
   }
-  .tabbed_input {
-    width: 360px;
-    height: 20px;
-    margin-left: 10px;
+  div.ajax_fail {
+    background: transparent image-url('icons/not_ok.png') no-repeat top left;
   }
-  .home_page_link {
-    text-align: right;
-  }
-  .comment_waiting {
-    font-size: 14px;
-    font-weight: bold;
-    position: absolute;
-    bottom: 10px;
-    left: 19px;
-    text-align: center;
-    text-align: center;
-    color: $orange;
-    background-color: $tab_box_silver;
-    div.ajax_success,
-    div.ajax_fail {
-      line-height: 30px;
-      height: 30px;
-      text-indent: 35px;
-      background: transparent image-url('icons/ok.png') no-repeat top left;
-    }
-    div.ajax_success {
-      color: $green;
-    }
-    div.ajax_fail {
-      background: transparent image-url('icons/not_ok.png') no-repeat top left;
-    }
-  }
-  .panel {
-    line-height: 15px;
+}
+.no_border {
+  border: none;
+}
+p {
+  color: $text_color;
+}
+.alonetoner {
+  a {
     overflow: hidden;
-    width: 380px;
-    margin-left: -20px;
-    padding: 10px 20px;
-    border-top: 1px solid black;
-    border-top-color: $body_background;
+    width: 50px;
+    height: 50px;
+  }
+  a img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #9FA28D;
     &.no_border {
       border: none;
     }
-    &.description_panel {
-      position: relative;
-      min-height: 60px;
-      p {
-        color: $text_color;
-      }
-      .alonetoner {
-        position: absolute;
-        left: 15px;
-        height: 100%;
-        a {
-          overflow: hidden;
-          width: 50px;
-          height: 50px;
-        }
-        a img {
-          width: 50px;
-          height: 50px;
-          border: 1px solid #9FA28D;
-          &.no_border {
-            border: none;
-          }
-        }
-      }
-      .description {
-        font-size: 14px;
-        line-height: 17px;
-        width: 304px;
-        margin-left: 60px;
-        .user_description {
-          p {
-            margin-bottom: 1em;
-          }
-        }
-        p img {
-          max-width: 290px;
-        }
-        p {
-          margin-top: 0;
-          margin-bottom: 0;
-        }
-        .description_more p  a {
-          font-size: 12px!important;
-          font-weight: bold!important;
-          margin-bottom: 1em;
-          text-decoration: none!important;
-        }
-      }
-      .stats {
-        font-size: 12px;
-        line-height: 14px;
-      }
-      .admin {
-        font-size: 10px;
-        line-height: 12px;
-        padding-top: 20px;
-        color: #666666;
-      }
-    }
-  }
-  .description_panel {
-    font-size: 12px;
-    padding-top: 5px;
-    p {
-      padding-right: 30px;
-    }
   }
 }
+.description {
+  font-size: 12px;
+  line-height: 17px;
+  .user_description {
+    p {
+      margin-bottom: 1em;
+    }
+  }
+  p img {
+    max-width: 290px;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .description_more p  a {
+    font-size: 12px!important;
+    font-weight: bold!important;
+    margin-bottom: 1em;
+    text-decoration: none!important;
+  }
+}
+.stats {
+  font-size: 10px;
+  line-height: 14px;
+  font-family: $header_font;
+}
+.admin {
+  font-size: 10px;
+  line-height: 12px;
+  padding-top: 20px;
+  color: #666666;
+}
+
+
+.description_panel {
+  font-size: 12px;
+  padding-top: 5px;
+  p {
+    padding-right: 30px;
+  }
+}
+
 
 .show_to_admin {
   display: none;

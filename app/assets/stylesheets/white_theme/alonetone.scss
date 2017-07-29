@@ -205,6 +205,7 @@ a.overlay {
 .comment_form {
   overflow: hidden;
   .comment_as {
+    font-family: $header_font;
     font-size: 14px;
     line-height: 25px;
     height: 25px;
@@ -217,10 +218,12 @@ a.overlay {
   .public,
   .private {
     font-size: 12px;
+    font-family: $header_font;
   }
   textarea {
     height: 60px;
     margin-bottom: 5px;
+    padding: 5px;
   }
 }
 
@@ -504,7 +507,7 @@ a.overlay {
 .static_content {
   line-height: 18px;
   // overflow: hidden;
-  padding: 15px 0px;
+  padding: 15px 0;
   p {
     color: $text_color;
     a,
@@ -823,9 +826,6 @@ h1 span#channel_name {
       cursor: pointer;
       border-color: $text_color;
       border-bottom: 1px solid black;
-      &.selected,
-      &.hover {
-      }
       &.disabled {
         color: $disabled;
       }
