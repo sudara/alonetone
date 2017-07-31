@@ -45,11 +45,16 @@ body {
 #columns {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   #left {
-    width: 45%;
+    // width: 45%;
+    width: 320px;
+    background-color: #EDE;
   }
   #right {
-    width: 45%;
+    // width: 45%;
+    width: 320px;
+    background-color: #DDE;
   }
 }
 

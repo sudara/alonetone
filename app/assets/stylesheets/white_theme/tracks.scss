@@ -1,122 +1,111 @@
-// assets & tracks (same diff ;)
+// assets & tracks same diff ;)
 
-.asset, .track {
+.asset,
+.track {
   position: relative;
-  width: 100%;
-  // height: 50px;
-  // overflow guarantees that the elements within this box will float and be cleared
   overflow: hidden;
+  width: 100%;
   margin-top: 1px;
   color: $text_color;
-  a, a:visited {
+  a,
+  a:visited {
     color: $text_color;
     background-color: transparent;
     &:hover {
-      color: $text_color;
       text-decoration: underline;
+      color: $text_color;
     }
   }
-  .button, .title {
+  .button,
+  .title {
     float: left;
   }
-
   .seekbar {
     clear: both;
     height: 9px;
-
     .loaded {
+      overflow: hidden;
+      height: 5px;
       padding-top: 2px;
       padding-bottom: 2px;
-
-      background-color: #1f1d04;
-      height: 5px;
-
-      overflow: hidden;
+      background-color: #1F1D04;
     }
-
     .played {
-      background-color: #fca744;
       height: 5px;
+      background-color: #FCA744;
     }
   }
-
   &:not(.open) {
     .seekbar {
       display: none;
     }
   }
-
   div.button {
-    background-color: $box_background;
     width: 50px;
     height: 50px;
+    background-color: $box_background;
     a {
+      display: block;
       width: 50px;
       height: 50px;
-      display: block;
       &:hover {
-        background-position: -51px 0px;
-      }
-      &.playing {
+        background-position: -51px 0;
       }
     }
     .sprites-play {
-     margin-left:2px;
+      margin-left: 2px;
     }
     .sprites-pause {
-     margin-left:2px;
-    }
-    &.play-button {
-    }
-    &.download-button {
+      margin-left: 2px;
     }
   }
   div.title {
-    background-color: $box_background;
-    height: 40px;
-    width: 367px;
-    padding-left:3px;
     overflow: hidden;
+    width: auto;
+    height: 40px;
     padding-top: 10px;
-    .title_left_column{
-      float:left;
-      width: 300px;
+    padding-left: 3px;
+    background-color: $box_background;
+    .title_left_column {
+      float: left;
+      width: auto;
     }
-    .title_right_column{
-      float:right;
-      position:relative;
-      height:100%;
+    .title_right_column {
+      position: relative;
+      float: right;
+      height: 100%;
       .counter {
-        position:absolute;
-        text-align: right;
         font-size: 16px;
-        font-weight:bold;
-        bottom:22px;
-        right:14px;
+        font-weight: bold;
+        position: absolute;
+        right: 14px;
+        bottom: 22px;
+        text-align: right;
       }
       div.time {
-        position:absolute;
-        text-align: right;
-        font-size: 12px;
         font-family: $header_font, Helvetica, Arial;
-        display: block;
-        text-align: right;
+        font-size: 12px;
+        font-size: 12px;
+        position: absolute;
         right: 15px;
         bottom: 10px;
-        font-size: 12px;
-        color:#8c8c8c;
+        display: block;
+        text-align: right;
+        text-align: right;
+        color: #8C8C8C;
       }
     }
     a {
+      font-family: $header_font;
       font-size: 18px;
       text-decoration: none;
-      font-family:$header_font;
+      color: $text_color;
+
       -webkit-font-smoothing: antialiased;
-      color:$text_color;
     }
-    .title_left_column_bottom{
-      clear:both;
-      a{
+    .title_left_column_bottom {
+      clear: both;
+      a {
         -webkit-font-smoothing: subpixel-antialiased;
       }
     }
@@ -126,46 +115,51 @@
     a.artist {
       font-size: 12px;
     }
-    span.track_play, span.latest, span.popular {
+    span.track_play,
+    span.latest,
+    span.popular {
       font-size: 12px;
       margin-left: 20px;
     }
-
     .listen_count {
-      color: $orange;
       font-size: 11px;
-      margin-left: 5px;
-      position: relative;
-      top:-3px;
       font-weight: bold;
+      position: relative;
+      top: -3px;
+      margin-left: 5px;
+      color: $orange;
     }
   }
   &.even {
-    div.button, div.title {
+    div.button,
+    div.title {
       background-color: $box_background_even;
     }
   }
-  &.hover, &.open {
-    div.button, div.title {
-      background-color: #EEE;
+  &.hover,
+  &.open {
+    div.button,
+    div.title {
+      background-color: #EEEEEE;
     }
   }
   &.playing {
-    div.button, div.title {
-      background-color: #EEE;
+    div.button,
+    div.title {
+      background-color: #EEEEEE;
     }
     div.button {
       a {
-        background-position: -100px 0px;
+        background-position: -100px 0;
       }
     }
     div.title {
       div.counter {
-        opacity: 0.99;
+        opacity: .99;
         color: $text_color2;
       }
-      div.time{
-        color:#fecda6;
+      div.time {
+        color: #FECDA6;
       }
     }
   }
@@ -173,38 +167,35 @@
 
 #single_track {
   h1 {
-    color: $text_color;
     font-size: 14px;
     font-weight: bold;
-    text-shadow: none;
     margin-bottom: 10px;
+    color: $text_color;
+    text-shadow: none;
   }
   #track_details {
     position: relative;
     display: block;
-    background-color: $playlist_box_silver;
     padding: 15px 15px 15px 20px;
+    background-color: $playlist_box_silver;
     p img {
       max-width: 385px;
     }
   }
   textarea {
-    margin-top: 10px;
     width: 380px;
+    margin-top: 10px;
   }
-
   .seekbar {
     display: block;
     background-color: $playlist_box_silver;
-
     &:not(.initialized) {
-      border-top: 1px solid $body_background;
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      border-top: 1px solid $body_background;
     }
   }
-
   &.descriptionless {
     .seekbar {
       background-color: $tab_box_silver;
@@ -213,48 +204,22 @@
 }
 
 div.track_options {
-  height: 32px;
-  width: 100%;
   display: relative;
+  width: 100%;
+  height: 32px;
 }
 
 #radio_tracks {
   margin-bottom: 3px;
 }
 
-
-
-
-
-div.tabs,
-div.big_tabs {
+div.tracks_reveal {
   position: relative;
   float: none;
   clear: both;
   width: 100%;
 }
 
-div.tabs {
-  width: 420px;
-}
-
-
-.favorite_panel {
-  position: relative;
-  height: 25px;
-  margin-bottom: -20px;
-  padding-top: 10px;
-  padding-right: 10px;
-  background: #E1E2E1;
-  a {
-    float: right;
-  }
-}
-
-a,
-a:visited {
-  color: $text_color;
-}
 textarea {
   width: 100%;
 }
@@ -267,8 +232,9 @@ textarea {
   text-align: right;
 }
 input.comment_submit {
-  @include default_button();
   background-color: transparent;
+
+  @include default_button();
 }
 .comment_waiting {
   font-size: 14px;
@@ -305,7 +271,6 @@ p {
   width: 50px;
   height: 50px;
   margin-right: 10px;
-
   a {
     overflow: hidden;
     width: 50px;
@@ -346,15 +311,15 @@ p {
 }
 
 .comment_track {
-  margin-top: 20px;
   clear: both;
+  margin-top: 20px;
 }
 
 .stats {
-  font-size: 10px;
-  line-height: 14px;
   font-family: $header_font;
+  font-size: 10px;
   font-weight: normal;
+  line-height: 14px;
 }
 .admin {
   font-size: 10px;
@@ -363,7 +328,6 @@ p {
   color: #666666;
 }
 
-
 .description_panel {
   font-size: 12px;
   padding-top: 5px;
@@ -371,7 +335,6 @@ p {
     padding-right: 30px;
   }
 }
-
 
 .show_to_admin {
   display: none;
@@ -390,18 +353,4 @@ p {
 
 #single_track .track_links {
   left: -9px;
-}
-
-.ui-tabs-loading em {
-  padding: 0 0 0 20px;
-  background: url(loading.gif) no-repeat 0 50%;
-}
-
-//auto clear, @ IE 6 & IE 7 Quirks Mode
-* html .ui-tabs-nav {
-  display: inline-block;
-}
-
-*:first-child + html .ui-tabs-nav {
-  display: inline-block;
 }
