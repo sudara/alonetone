@@ -18,7 +18,6 @@ div.tabs {
   list-style: none;
   li {
     float: left;
-    // be nice to Opera
     min-width: 100px;
     height: 35px;
     margin: 0;
@@ -32,12 +31,9 @@ div.tabs {
     height: 35px;
     padding: 0 25px;
     text-align: center;
-    // required in IE 6
     white-space: nowrap;
     text-decoration: none;
-    // position relative makes opacity fail for disabled tab in IE
     color: $text_color2;
-    // prevent dotted border in Firefox
     outline: 0;
     background-color: $medium_gray;
   }
@@ -136,11 +132,10 @@ div.tabs {
 
 a,
 a:visited {
-  // text-decoration: underline;
   color: $text_color;
 }
 textarea {
-  width: 374px;
+  width: 100%;
 }
 .tabbed_input {
   width: 360px;
@@ -185,6 +180,9 @@ p {
   color: $text_color;
 }
 .alonetoner {
+  float: left;
+  width: 50px;
+  height: 50px;
   a {
     overflow: hidden;
     width: 50px;
@@ -199,6 +197,8 @@ p {
     }
   }
 }
+
+
 .description {
   font-size: 12px;
   line-height: 17px;
@@ -221,10 +221,17 @@ p {
     text-decoration: none!important;
   }
 }
+
+.comment_track {
+  margin-top: 20px;
+  clear: both;
+}
+
 .stats {
   font-size: 10px;
   line-height: 14px;
   font-family: $header_font;
+  font-weight: normal;
 }
 .admin {
   font-size: 10px;
