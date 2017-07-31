@@ -1,6 +1,6 @@
 <%= cache(cache_digest(playlists)+theme_name) do %>
-  <div class="playlists_row">
-    <ul>
+  <!-- <div class="playlists_row"> -->
+    <ul class="playlists_row">
       <% playlists.each do |playlist| %>
         <li>
           <%= link_to ' ',user_playlist_path(playlist.user.login, playlist), :title => "#{playlist.title} by #{playlist.user.name}", :class=> "overlay" %>
@@ -14,5 +14,5 @@
         </li>
       <% end %>
     </ul>
-  </div>
+  <!-- </div> -->
 <% end %>
