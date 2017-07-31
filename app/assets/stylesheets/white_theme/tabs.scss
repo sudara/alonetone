@@ -10,113 +10,6 @@ div.tabs {
   width: 420px;
 }
 
-.content ul.ui-tabs-nav {
-  width: 100%;
-  height: 35px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  li {
-    float: left;
-    min-width: 100px;
-    height: 35px;
-    margin: 0;
-  }
-  a {
-    font-family: $header_font;
-    font-size: 15px;
-    font-weight: bold;
-    line-height: 35px;
-    display: block;
-    height: 35px;
-    padding: 0 25px;
-    text-align: center;
-    white-space: nowrap;
-    text-decoration: none;
-    color: $text_color2;
-    outline: 0;
-    background-color: $medium_gray;
-  }
-  .ui-state-active a {
-    position: relative;
-    z-index: 2;
-    top: 0;
-    margin-top: 0;
-    color: $text_color;
-    background-color: $light_gray;
-    background-position: -420px 0;
-  }
-}
-
-// clearing without presentational markup, IE gets extra treatment
-.ui-tabs-navafter {
-  display: block;
-  clear: both;
-  content: ' ';
-}
-
-.ui-tabs-hide {
-  display: none;
-}
-
-// hide from IE 6
-* > .ui-tabs-nav a span {
-  width: auto;
-  height: auto;
-}
-
-.ui-tabs-nav .ui-tabs-selected a span {
-  padding-bottom: 1px;
-}
-
-.ui-tabs-nav .ui-tabs-selected a,
-.ui-tabs-nav a:hover,
-.ui-tabs-nav a:focus,
-.ui-tabs-nav a:active {
-  background-position: -420px 0;
-}
-
-.ui-tabs-nav a,
-.ui-tabs-nav .ui-tabs-disabled a:hover,
-.ui-tabs-nav .ui-tabs-disabled a:focus,
-.ui-tabs-nav .ui-tabs-disabled a:active {
-  background-position: 0 0;
-}
-
-.ui-tabs-nav .ui-tabs-selected a span,
-.ui-tabs-nav a:hover span,
-.ui-tabs-nav a:focus span,
-.ui-tabs-nav a:active span {
-  background-position: 0 -50px;
-}
-
-.ui-tabs-nav a span,
-.ui-tabs-nav .ui-tabs-disabled a:hover span,
-.ui-tabs-nav .ui-tabs-disabled a:focus span,
-.ui-tabs-nav .ui-tabs-disabled aactive span {
-  background-position: 0 0;
-}
-
-/* @ Opera, use pseudo classes otherwise it confuses cursor... */
-.ui-tabs-nav .ui-tabs-selected a:link,
-.ui-tabs-nav .ui-tabs-selected a:visited,
-.ui-tabs-nav .ui-tabs-disabled alink,
-.ui-tabs-nav .ui-tabs-disabled a:visited {
-  cursor: text;
-}
-
-.ui-tabs-nav a:hover,
-.ui-tabs-nav a:focus,
-.ui-tabs-nav a:active,
-.ui-tabs-nav .ui-tabs-unselect a:hover,
-.ui-tabs-nav .ui-tabs-unselect a:focus,
-.ui-tabs-nav .ui-tabs-unselect a:active {
-  cursor: pointer;
-}
-
-.ui-tabs-disabled {
-  opacity: .4;
-}
 
 .favorite_panel {
   position: relative;
@@ -183,6 +76,8 @@ p {
   float: left;
   width: 50px;
   height: 50px;
+  margin-right: 10px;
+
   a {
     overflow: hidden;
     width: 50px;
@@ -198,10 +93,10 @@ p {
   }
 }
 
-
 .description {
   font-size: 12px;
   line-height: 17px;
+  padding-top: 5px;
   .user_description {
     p {
       margin-bottom: 1em;
