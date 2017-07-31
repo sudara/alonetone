@@ -1,29 +1,34 @@
 <%= cache( logged_in? ? "asset#{asset.cache_key}/#{theme_name}" : "guest_asset#{asset.cache_key}/#{theme_name}" ) do %>
 
-  <div class="play-button button">
-    <div class="sprites-play">
-      <%= link_to_play asset %>
-    </div>
-  </div>
-
-  <div class="title">
-    <div class="title_left_column">
-      <div class="title_left_column_top">
-        <span>
-          <%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
-          <%= '&#x1f512;'.html_safe unless asset.published? %>
-        </span>
-        <span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
-      </div>
-      <div class="title_left_column_bottom">
-        <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
+  
+  <div class="asset_top">
+    
+    <div class="play-button button">
+      <div class="sprites-play">
+        <%= link_to_play asset %>
       </div>
     </div>
 
-    <div class="title_right_column">
-      <div class='counter'></div>
-      <div class='time'><%= asset.length%></div>
+    <div class="title">
+      <div class="title_left_column">
+        <div class="title_left_column_top">
+          <span>
+            <%= link_to track_name_for(asset,32), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
+            <%= '&#x1f512;'.html_safe unless asset.published? %>
+          </span>
+          <span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
+        </div>
+        <div class="title_left_column_bottom">
+          <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
+        </div>
+      </div>
+
+      <div class="title_right_column">
+        <div class='counter'></div>
+        <div class='time'><%= asset.length%></div>
+      </div>
     </div>
+
   </div>
 
   <div class="seekbar"<%= 'style="display: none"'.html_safe unless @single_track %>>
