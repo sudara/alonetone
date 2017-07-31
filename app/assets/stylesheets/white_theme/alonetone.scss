@@ -206,6 +206,7 @@ a.overlay {
   overflow: hidden;
   .comment_as {
     font-family: $header_font;
+    font-weight: normal;
     font-size: 14px;
     line-height: 25px;
     height: 25px;
@@ -219,6 +220,7 @@ a.overlay {
   .private {
     font-size: 12px;
     font-family: $header_font;
+    font-weight: normal;
   }
   textarea {
     height: 60px;

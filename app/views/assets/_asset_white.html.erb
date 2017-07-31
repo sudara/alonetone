@@ -42,15 +42,15 @@
           <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
         </div>
     </div>
-  	<% if logged_in? || asset.guest_can_comment? %>
-      <div id="comment_track_<%= asset.unique_id %>">
-          <%= render :partial => 'assets/comment', :locals => {:asset => asset} %>
-      </div>
-  	<% end %>
     <div class="stats">
       Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
       listened to <strong><%= asset.listens_count %> times</strong>.
     </div>
+  	<% if logged_in? || asset.guest_can_comment? %>
+      <div id="comment_track_<%= asset.unique_id %>" class="comment_track">
+          <%= render :partial => 'assets/comment', :locals => {:asset => asset} %>
+      </div>
+  	<% end %>
     <div class="track_links">
       <%= link_to edit_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box track_about_link', :title => 'edit this track' do %>
         <span class="sprites-pencil sprites-before-heading"></span>
