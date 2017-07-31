@@ -15,7 +15,8 @@
   }
   .footer_inner {
     display: flex;
-    width: 1020px;
+    flex-wrap: wrap;
+    // width: 1020px;
     margin-right: auto;
     margin-left: auto;
     .footer_column {

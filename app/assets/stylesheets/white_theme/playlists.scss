@@ -4,12 +4,12 @@
   margin-bottom: 28px;
   ul {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     li {
-      width: 178px;
       position: relative;
-        text-align: center;
-
+      width: 178px;
+      text-align: center;
       a.overlay {
         margin-left: 20px;
         opacity: 1;
