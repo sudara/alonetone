@@ -1,11 +1,12 @@
-.playlists_row {
-  font-size: 11px;
-  height: 168px;
-  margin-bottom: 28px;
-  ul {
+  ul.playlists_row {
+    font-size: 11px;
     display: flex;
-    flex-wrap: wrap;
+    // height: 168px;
+    margin-bottom: 28px;
+
     justify-content: space-between;
+    flex-wrap: wrap;
+
     li {
       position: relative;
       width: 178px;
@@ -21,21 +22,21 @@
         margin-left: -1px;
       }
     }
-  }
-  .playlists_home_title {
-    font-family: $header_font;
-    margin-top: 7px;
-    margin-bottom: 0;
-    a {
-      font-size: 13px;
-    }
-  }
-  .playlists_home_user  a {
-    font-family: $header_font;
-    font-size: 12px;
-    color: $black;
+}
+.playlists_home_title {
+  font-family: $header_font;
+  margin-top: 7px;
+  margin-bottom: 0;
+  a {
+    font-size: 13px;
   }
 }
+.playlists_home_user  a {
+  font-family: $header_font;
+  font-size: 12px;
+  color: $black;
+}
+
 
 
 // carousel
