@@ -49,35 +49,33 @@ body {
   #left {
     // width: 45%;
     width: 320px;
-    // background-color: #EDE;
   }
   #right {
     // width: 45%;
     width: 320px;
-    // background-color: #DDE;
   }
 }
 
-.clearfix:after {
-  line-height: 0;
-  display: block;
-  visibility: hidden;
-  clear: both;
-  height: 0;
-  content: '.';
-}
+// .clearfix:after {
+//   line-height: 0;
+//   display: block;
+//   visibility: hidden;
+//   clear: both;
+//   height: 0;
+//   content: '.';
+// }
 
-.clearfix {
-  display: inline-block;
-}
+// .clearfix {
+//   display: inline-block;
+// }
 
-html[xmlns] .clearfix {
-  display: block;
-}
+// html[xmlns] .clearfix {
+//   display: block;
+// }
 
-* html .clearfix {
-  height: 1%;
-}
+// * html .clearfix {
+//   height: 1%;
+// }
 
 .min_height_40 {
   min-height: 40px;

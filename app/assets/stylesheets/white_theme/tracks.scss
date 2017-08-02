@@ -7,15 +7,7 @@
   width: 100%;
   margin-top: 1px;
   color: $text_color;
-  a,
-  a:visited {
-    color: $text_color;
-    background-color: transparent;
-    &:hover {
-      text-decoration: underline;
-      color: $text_color;
-    }
-  }
+
   .button,
   .title {
     float: left;
@@ -45,7 +37,6 @@
     div.button {
       width: 50px;
       height: 50px;
-      background-color: $box_background;
       a {
         display: block;
         width: 50px;
@@ -61,111 +52,110 @@
         margin-left: 2px;
       }
     }
-  }
-  div.title {
-    overflow: hidden;
-    width: auto;
-    height: 40px;
-    padding-top: 10px;
-    padding-left: 3px;
-    background-color: $box_background;
-
-    flex-grow: 1;
-    .title_left_column {
-      float: left;
+    div.title {
+      overflow: hidden;
       width: auto;
-    }
-    .title_right_column {
-      position: relative;
-      float: right;
-      height: 100%;
-      .counter {
-        font-size: 16px;
-        font-weight: bold;
-        position: absolute;
-        right: 14px;
-        bottom: 22px;
-        text-align: right;
-      }
-      div.time {
-        font-family: $header_font;
-        font-size: 12px;
-        font-size: 12px;
-        font-weight: normal;
-        position: absolute;
-        right: 15px;
-        bottom: 10px;
-        display: block;
-        text-align: right;
-        text-align: right;
-        color: #8C8C8C;
-      }
-    }
-    a {
-      font-family: $header_font;
-      font-size: 16px;
-      text-decoration: none;
-      color: $text_color;
+      height: 40px;
+      padding-top: 10px;
+      padding-left: 3px;
 
-      -webkit-font-smoothing: antialiased;
-    }
-    .title_left_column_bottom {
-      clear: both;
+      flex-grow: 1;
+      .title_left_column {
+        float: left;
+        width: auto;
+      }
+      .title_right_column {
+        position: relative;
+        float: right;
+        height: 100%;
+        .counter {
+          font-size: 16px;
+          font-weight: bold;
+          position: absolute;
+          right: 14px;
+          bottom: 22px;
+          text-align: right;
+        }
+        div.time {
+          font-family: $header_font;
+          font-size: 12px;
+          font-size: 12px;
+          font-weight: normal;
+          position: absolute;
+          right: 15px;
+          bottom: 10px;
+          display: block;
+          text-align: right;
+          text-align: right;
+          color: #8C8C8C;
+        }
+      }
       a {
-        -webkit-font-smoothing: subpixel-antialiased;
+        font-family: $header_font;
+        font-size: 16px;
+        text-decoration: none;
+        color: $text_color;
+
+        -webkit-font-smoothing: antialiased;
+      }
+      .title_left_column_bottom {
+        clear: both;
+        a {
+          -webkit-font-smoothing: subpixel-antialiased;
+        }
+      }
+      span.by {
+        font-size: 12px;
+      }
+      a.artist {
+        font-size: 12px;
+      }
+      span.track_play,
+      span.latest,
+      span.popular {
+        font-size: 12px;
+        margin-left: 20px;
+      }
+      .listen_count {
+        font-size: 11px;
+        font-weight: bold;
+        position: relative;
+        top: -3px;
+        margin-left: 5px;
+        color: $orange;
       }
     }
-    span.by {
-      font-size: 12px;
-    }
-    a.artist {
-      font-size: 12px;
-    }
-    span.track_play,
-    span.latest,
-    span.popular {
-      font-size: 12px;
-      margin-left: 20px;
-    }
-    .listen_count {
-      font-size: 11px;
-      font-weight: bold;
-      position: relative;
-      top: -3px;
-      margin-left: 5px;
-      color: $orange;
-    }
-  }
-  &.even {
-    div.button,
-    div.title {
-      background-color: $box_background_even;
-    }
-  }
-  &.hover,
-  &.open {
-    div.button,
-    div.title {
-      background-color: #EEEEEE;
-    }
-  }
-  &.playing {
-    div.button,
-    div.title {
-      background-color: #EEEEEE;
-    }
-    div.button {
-      a {
-        background-position: -100px 0;
+    &.even {
+      div.button,
+      div.title {
+        background-color: $box_background_even;
       }
     }
-    div.title {
-      div.counter {
-        opacity: .99;
-        color: $text_color2;
+    &.hover,
+    &.open {
+      div.button,
+      div.title {
+        background-color: #EEEEEE;
       }
-      div.time {
-        color: #FECDA6;
+    }
+    &.playing {
+      div.button,
+      div.title {
+        background-color: #EEEEEE;
+      }
+      div.button {
+        a {
+          background-position: -100px 0;
+        }
+      }
+      div.title {
+        div.counter {
+          opacity: .99;
+          color: $text_color2;
+        }
+        div.time {
+          color: #FECDA6;
+        }
       }
     }
   }
@@ -220,6 +210,7 @@ div.track_options {
 }
 
 .tracks_reveal {
+  margin-top: 10px;
   .tracks_reveal_top {
     display: flex;
     .alonetoner {
@@ -271,12 +262,6 @@ div.track_options {
       }
     }
   }
-
-  textarea {
-    box-sizing: border-box;
-    max-width: 100%;
-
-  }
   .tabbed_input {
     width: 360px;
     height: 20px;
@@ -285,11 +270,7 @@ div.track_options {
   .home_page_link {
     text-align: right;
   }
-  input.comment_submit {
-    background-color: transparent;
 
-    @include default_button();
-  }
   .comment_waiting {
     font-size: 14px;
     font-weight: bold;
@@ -325,6 +306,16 @@ div.track_options {
   .comment_track {
     clear: both;
     margin-top: 20px;
+    textarea {
+      box-sizing: border-box;
+      max-width: 100%;
+      margin-top: 10px;
+    }
+    input.comment_submit {
+      background-color: transparent;
+
+      @include default_button();
+    }
   }
   
   .admin {
