@@ -152,10 +152,11 @@ a.overlay {
     }
   }
   .comment_user_text {
+    font-family: $header_font;
     font-size: 12px;
+    font-weight: normal;
     margin-left: 72px;
     padding-top: 10px;
-    color: $text_color2;
     a,
     a:visited {
       font-size: 12px;
@@ -181,6 +182,8 @@ a.overlay {
       color: $text_color2;
     }
     .comment_controls {
+      font-family: $header_font;
+      font-weight: normal;
       float: right;
       a,
       a:visited,
@@ -206,8 +209,8 @@ a.overlay {
   overflow: hidden;
   .comment_as {
     font-family: $header_font;
-    font-weight: normal;
     font-size: 14px;
+    font-weight: normal;
     line-height: 25px;
     height: 25px;
     margin-bottom: 5px;
@@ -218,8 +221,8 @@ a.overlay {
   }
   .public,
   .private {
-    font-size: 12px;
     font-family: $header_font;
+    font-size: 12px;
     font-weight: normal;
   }
   textarea {
