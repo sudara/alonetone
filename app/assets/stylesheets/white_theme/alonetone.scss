@@ -128,8 +128,8 @@ a.overlay {
   position: relative;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  color: $text_color2;
   border-bottom: 1px solid $light_gray;
+  margin-top: 10px;
   &:last-child {
     border-bottom: 0;
   }
@@ -170,27 +170,18 @@ a.overlay {
     margin-bottom: 1px;
     margin-left: 72px;
     padding: 0 20px 30px 0;
-    a,
-    a:visited,
-    a:hover {
-      color: $text_color2;
-    }
     p {
       line-height: 18px;
       margin: 16px 0 0 0;
       margin-top: 13px;
-      color: $text_color2;
     }
     .comment_controls {
       font-family: $header_font;
       font-weight: normal;
       float: right;
-      a,
-      a:visited,
-      a:hover {
-        font-size: 11px;
-        font-weight: normal;
-        color: $text_color2;
+      margin-top: 15px;
+      a {
+        @include default_button();
       }
     }
     h1,
@@ -200,7 +191,6 @@ a.overlay {
       font-weight: bold;
       margin-top: 32px;
       margin-bottom: 12px;
-      color: $text_color;
     }
   }
 }
@@ -841,6 +831,8 @@ h1 span#channel_name {
   }
 }
 
+
+// Any reason for these not to be in tracks.scss?
 .asset.played {
   opacity: .2;
 }
@@ -848,6 +840,9 @@ h1 span#channel_name {
 .asset.playing,
 .asset.hover {
   opacity: .99;
+  .asset_top {
+    background-color: #EFEFEF;
+  }
 }
 
 /* STATS */
@@ -962,7 +957,7 @@ h2.table {
 .asset:nth-child(odd) {
   div.button,
   div.title {
-    background-color: $box_background_even;
+    // background-color: $box_background_even;
   }
 }
 
