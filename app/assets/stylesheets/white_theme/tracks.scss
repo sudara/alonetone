@@ -273,7 +273,9 @@ div.track_options {
   }
 
   textarea {
-    width: 98%;
+    box-sizing: border-box;
+    max-width: 100%;
+
   }
   .tabbed_input {
     width: 360px;
