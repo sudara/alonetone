@@ -84,8 +84,11 @@ html[xmlns] .clearfix {
 }
 
 div.box {
-  position: relative;
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  > .asset {
+  }
 }
 
 div.footer_box {

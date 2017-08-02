@@ -88,9 +88,10 @@
         text-align: right;
       }
       div.time {
-        font-family: $header_font, Helvetica, Arial;
+        font-family: $header_font;
         font-size: 12px;
         font-size: 12px;
+        font-weight: normal;
         position: absolute;
         right: 15px;
         bottom: 10px;
@@ -102,7 +103,7 @@
     }
     a {
       font-family: $header_font;
-      font-size: 18px;
+      font-size: 16px;
       text-decoration: none;
       color: $text_color;
 
@@ -218,143 +219,133 @@ div.track_options {
   margin-bottom: 3px;
 }
 
-div.tracks_reveal {
-  position: relative;
-  float: none;
-  clear: both;
-  width: 100%;
-}
-
-textarea {
-  width: 100%;
-}
-.tabbed_input {
-  width: 360px;
-  height: 20px;
-  margin-left: 10px;
-}
-.home_page_link {
-  text-align: right;
-}
-input.comment_submit {
-  background-color: transparent;
-
-  @include default_button();
-}
-.comment_waiting {
-  font-size: 14px;
-  font-weight: bold;
-  position: absolute;
-  bottom: 10px;
-  left: 19px;
-  text-align: center;
-  text-align: center;
-  color: $orange;
-  background-color: $tab_box_silver;
-  div.ajax_success,
-  div.ajax_fail {
-    line-height: 30px;
-    height: 30px;
-    text-indent: 35px;
-    background: transparent image-url('icons/ok.png') no-repeat top left;
-  }
-  div.ajax_success {
-    color: $green;
-  }
-  div.ajax_fail {
-    background: transparent image-url('icons/not_ok.png') no-repeat top left;
-  }
-}
-.no_border {
-  border: none;
-}
-p {
-  color: $text_color;
-}
-.alonetoner {
-  float: left;
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-  a {
-    overflow: hidden;
-    width: 50px;
-    height: 50px;
-  }
-  a img {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #9FA28D;
-    &.no_border {
-      border: none;
+.tracks_reveal {
+  .tracks_reveal_top {
+    display: flex;
+    .alonetoner {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      a {
+        overflow: hidden;
+        width: 50px;
+        height: 50px;
+      }
+      a img {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #9FA28D;
+        &.no_border {
+          border: none;
+        }
+      }
+    }
+    .description {
+      font-size: 12px;
+      line-height: 17px;
+      padding-top: 5px;
+      margin-right: 60px;
+      .user_description {
+        p {
+          margin-bottom: 1em;
+        }
+      }
+      p img {
+        max-width: 290px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .description_more p  a {
+        font-size: 12px!important;
+        font-weight: bold!important;
+        margin-bottom: 1em;
+        text-decoration: none!important;
+      }
+      .stats {
+        font-family: $header_font;
+        font-size: 10px;
+        font-weight: normal;
+        line-height: 14px;
+      }
     }
   }
-}
 
-.description {
-  font-size: 12px;
-  line-height: 17px;
-  padding-top: 5px;
-  .user_description {
-    p {
-      margin-bottom: 1em;
+  textarea {
+    width: 98%;
+  }
+  .tabbed_input {
+    width: 360px;
+    height: 20px;
+    margin-left: 10px;
+  }
+  .home_page_link {
+    text-align: right;
+  }
+  input.comment_submit {
+    background-color: transparent;
+
+    @include default_button();
+  }
+  .comment_waiting {
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    left: 19px;
+    text-align: center;
+    text-align: center;
+    color: $orange;
+    background-color: $tab_box_silver;
+    div.ajax_success,
+    div.ajax_fail {
+      line-height: 30px;
+      height: 30px;
+      text-indent: 35px;
+      background: transparent image-url('icons/ok.png') no-repeat top left;
+    }
+    div.ajax_success {
+      color: $green;
+    }
+    div.ajax_fail {
+      background: transparent image-url('icons/not_ok.png') no-repeat top left;
     }
   }
-  p img {
-    max-width: 290px;
+  .no_border {
+    border: none;
   }
   p {
-    margin-top: 0;
-    margin-bottom: 0;
+    color: $text_color;
   }
-  .description_more p  a {
-    font-size: 12px!important;
-    font-weight: bold!important;
-    margin-bottom: 1em;
-    text-decoration: none!important;
+
+
+  .comment_track {
+    clear: both;
+    margin-top: 20px;
   }
-}
-
-.comment_track {
-  clear: both;
-  margin-top: 20px;
-}
-
-.stats {
-  font-family: $header_font;
-  font-size: 10px;
-  font-weight: normal;
-  line-height: 14px;
-}
-.admin {
-  font-size: 10px;
-  line-height: 12px;
-  padding-top: 20px;
-  color: #666666;
-}
-
-.description_panel {
-  font-size: 12px;
-  padding-top: 5px;
-  p {
-    padding-right: 30px;
+  
+  .admin {
+    font-size: 10px;
+    line-height: 12px;
+    padding-top: 20px;
+    color: #666666;
+  }
+  .show_to_admin {
+    display: none;
+    float: none;
+    clear: both;
+  }
+  .show_to_admin_or_owner {
+    display: none;
+  }
+  .track_links {
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 30px;
   }
 }
 
-.show_to_admin {
-  display: none;
-  float: none;
-  clear: both;
-}
-
-.show_to_admin_or_owner {
-  display: none;
-}
-
-.track_links {
-  float: right!important;
-  margin-top: 15px;
-}
 
 #single_track .track_links {
   left: -9px;
