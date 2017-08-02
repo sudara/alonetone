@@ -248,24 +248,27 @@ div.notice ol {
 }
 
 div.footer_box {
-  line-height: 30px;
+  // line-height: 30px;
   height: 32px;
+  margin-top: 10px;
   text-align: right;
-  &.onepx {
-    margin-top: 1px;
-  }
-  &.empty {
-    margin: 0;
-    background: none;
-  }
-  a,
-  a:visited,
-  a:hover,
-  a:active {
-    display: block;
-    float: right;
-    height: 32px;
-  }
+
+
+  // &.onepx {
+  //   margin-top: 1px;
+  // }
+  // &.empty {
+  //   margin: 0;
+  //   background: none;
+  // }
+  // a,
+  // a:visited,
+  // a:hover,
+  // a:active {
+  //   display: block;
+  //   float: right;
+  //   height: 32px;
+  // }
 }
 
 a.edit_green,

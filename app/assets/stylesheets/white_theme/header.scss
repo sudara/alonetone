@@ -1,116 +1,109 @@
 .header {
   background-color: $light_gray;
-}
-
-.header_inner {
-  position: relative;
-  // width: 1020px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.header_logo {
-  position: absolute;
-  top: 13px;
-  left: 0;
-  display: block;
-  width: 44.85px;
-  height: 35.1px;
-  background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
-  background-size: 100%;
-}
-
-.header_nav {
-  display: none;
-}
-
-.header_login {
-  float: right;
-}
-
-.header_search {
-  position: relative;
-  float: right;
-  height: 40px;
-  margin-right: 50px;
-  padding-top: 12px;
-  #search_form {
-    display: block;
-    float: left;
-    #query {
-      font-size: 14px;
-      width: 220px;
-      height: 22px;
-      padding: 3px 12px;
-      color: #222222;
-      border: 1px solid #DDDDDD;
-      border-radius: 5px;
-      &.focused {
-        color: white;
+  .header_inner {
+    position: relative;
+    // width: 1020px;
+    margin-right: auto;
+    margin-left: auto;
+    .header_logo {
+      position: absolute;
+      top: 13px;
+      display: block;
+      width: 45px;
+      height: 35px;
+      background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
+      background-size: 100%;
+    }
+    .header_nav {
+      display: none;
+    }
+    .header_login {
+      float: right; 
+    }
+    .user_dropdown {
+      position: relative;
+      float: right;
+      background-color: $light_gray;
+      .profile_link {
+        font-family: $header_font;
+        font-size: 14px;
+        position: relative;
+        z-index: 3;
+        display: block;
+        box-sizing: border-box;
+        height: 60px;
+        padding-top: 14px;
+        color: $black;
+        background-color: $light_gray;
+        span {
+          line-height: 34px;
+          display: block;
+          float: left;
+          min-width: 65px;
+          padding: 0 10px 0 15px;
+          text-align: left;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        img {
+          width: 34px;
+          height: 34px;
+        }
+      }
+      .user_dropdown_menu {
+        position: absolute;
+        z-index: 2;
+        top: -90px;
+        margin-top: 60px;
+        a {
+          font-family: $header_font;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 26px;
+          display: block;
+          height: 26px;
+          padding-right: 15px;
+          padding-left: 15px;
+          color: $black;
+          background-color: $light_gray;
+        }
       }
     }
   }
-  #search_button {
-    display: block;
-    float: left;
-    width: 18px;
-    height: 18px;
-    margin-top: 11px;
-    margin-left: 12px;
-    img {
-      width: 18px;
-      height: 18px;
-    }
-  }
-}
-
-.user_dropdown {
-  position: relative;
-  float: right;
-  background-color: $light_gray;
-  .profile_link {
-    font-family: $header_font;
-    font-size: 14px;
+  .header_search {
     position: relative;
-    z-index: 3;
-    display: block;
-    box-sizing: border-box;
-    height: 60px;
-    padding-top: 14px;
-    color: $black;
-    background-color: $light_gray;
-    span {
-      line-height: 34px;
+    float: right;
+    height: 40px;
+    margin-right: 50px;
+    padding-top: 12px;
+    #search_form {
       display: block;
       float: left;
-      min-width: 65px;
-      padding: 0 10px 0 15px;
-      text-align: left;
-      &:hover {
-        text-decoration: underline;
+      #query {
+        font-size: 14px;
+        width: 220px;
+        height: 22px;
+        padding: 3px 12px;
+        color: #222222;
+        border: 1px solid #DDDDDD;
+        border-radius: 5px;
+        &.focused {
+          color: white;
+        }
       }
     }
-    img {
-      width: 34px;
-      height: 34px;
-    }
-  }
-  .user_dropdown_menu {
-    position: absolute;
-    z-index: 2;
-    top: -90px;
-    margin-top: 60px;
-    a {
-      font-family: $header_font;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 26px;
+    #search_button {
       display: block;
-      height: 26px;
-      padding-left: 15px;
-      padding-right: 15px;
-      color: $black;
-      background-color: $light_gray;
+      float: left;
+      width: 18px;
+      height: 18px;
+      margin-top: 11px;
+      margin-left: 12px;
+      img {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 }

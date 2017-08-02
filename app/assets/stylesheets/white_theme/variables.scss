@@ -8,7 +8,7 @@ $box_background: #FFFFFF;
 $box_background_even: #FFFFFF;
 
 // text
-$header_font: "Alright Sans", sans-serif;
+$header_font: 'Alright Sans', sans-serif;
 $text_color: #000000;
 $text_color2: #000000;
 $nav_item_color: #C1C9B4;
@@ -17,6 +17,7 @@ $playlist_box_silver: #FFFFFF;
 $black: #000000;
 $white: #FFFFFF;
 $medium_gray: #666666;
+$light_medium_gray: #BBBBBB;
 $light_gray: #EEEEEE;
 $silver: #C7C8C7;
 $orange: #DA6D25;
@@ -29,20 +30,20 @@ $body_link_hover: #1A1D13;
 
 @mixin default_button() {
   font-family: $header_font;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 34px;
-  display: block;
-  height: 32px;
-  padding: 0 10px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 30px;
+  display: inline-block;
+  height: 28px;
+  padding: 0 14px;
   text-align: center;
   text-decoration: none;
   color: $text_color;
-  border: 1px solid $medium_gray;
-  border-radius: 5px;
-
-  -webkit-font-smoothing: antialiased;
+  border: 1.25px solid $light_medium_gray;
+  border-radius: 6px;
   &:hover {
-    text-decoration: underline;
+    transition: border-color .1s ease-in-out;
+    text-decoration: none;
+    border: 1.25px solid $black;
   }
 }

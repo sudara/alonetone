@@ -40,7 +40,6 @@
       display: none;
     }
   }
-
   .asset_top {
     display: flex;
     div.button {
@@ -63,15 +62,15 @@
       }
     }
   }
-
   div.title {
-    flex-grow: 1;
     overflow: hidden;
     width: auto;
     height: 40px;
     padding-top: 10px;
     padding-left: 3px;
     background-color: $box_background;
+
+    flex-grow: 1;
     .title_left_column {
       float: left;
       width: auto;
@@ -169,8 +168,6 @@
       }
     }
   }
-  
-
 }
 
 #single_track {

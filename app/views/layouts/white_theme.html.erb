@@ -30,15 +30,19 @@
     Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
   </div>
   <% end %>
+
+  <%= check_for_and_display_welcome_back %>
+
   <%= check_for_and_display_flashes %>
+  
   <div class="header">
-    <%= check_for_and_display_welcome_back %>
     <%= render :partial=> 'shared/header' %>
     <%= render :partial => 'shared/search' %>
   </div>
 
   <div class="content">
     <main>
+      
       <%= yield %>
 
       <%= yield :static %>
