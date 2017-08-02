@@ -2,7 +2,6 @@
 
   
   <div class="asset_top">
-    
     <div class="play-button button">
       <div class="sprites-play">
         <%= link_to_play asset %>
@@ -28,7 +27,6 @@
         <div class='time'><%= asset.length%></div>
       </div>
     </div>
-
   </div>
 
   <div class="seekbar"<%= 'style="display: none"'.html_safe unless @single_track %>>
@@ -39,17 +37,19 @@
 
   <div class="tracks_reveal" style="display:none;">
     <%= favorite_toggle(asset) %>
-    <div class='alonetoner'>
-        <%= user_image_link(asset.user, :small)%>
-    </div>
-    <div class="description">
-        <div class='user_description'>
-          <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
-        </div>
-    </div>
-    <div class="stats">
-      Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
-      listened to <strong><%= asset.listens_count %> times</strong>.
+    <div class="tracks_reveal_top">
+      <div class='alonetoner'>
+          <%= user_image_link(asset.user, :small)%>
+      </div>
+      <div class="description">
+          <div class='user_description'>
+            <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
+          </div>
+          <div class="stats">
+            Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
+            listened to <strong><%= asset.listens_count %> times</strong>.
+          </div>
+      </div>
     </div>
   	<% if logged_in? || asset.guest_can_comment? %>
       <div id="comment_track_<%= asset.unique_id %>" class="comment_track">
