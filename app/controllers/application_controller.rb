@@ -7,11 +7,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_action :set_tab, :is_sudo
-  before_action :display_news
-  before_action :set_latest_update_title
+  before_action :set_theme
 
   rescue_from ActionController::RoutingError do |exception|
-   render 'pages/four_oh_four', status: 404
+    render 'pages/four_oh_four', status: 404
   end
 
   # let ActionView have a taste of our authentication
@@ -29,12 +28,18 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def set_theme
+    if white_theme_toggle = params.delete(:white)
+      session[:white] = ActiveModel::Type::Boolean.new.cast(white_theme_toggle)
+    end
+  end
+
   def white_or_normal
     white_theme_enabled? ? 'white_theme' : 'application'
   end
 
   def white_theme_enabled?
-    current_user&.white_theme_enabled?
+    current_user&.white_theme_enabled? || session[:white]
   end
 
   def not_found
@@ -104,12 +109,6 @@ class ApplicationController < ActionController::Base
     @tab = ''
   end
 
-  def display_news
-    return unless logged_in?
-    last_update = Update.order('created_at DESC').first
-    @display_news = true if session[:last_active] && last_update && (session[:last_active] < last_update.created_at)
-  end
-
   def is_sudo
     @sudo = session[:sudo]
   end
@@ -117,10 +116,6 @@ class ApplicationController < ActionController::Base
   # don't update last_request_at when sudo is present
   def last_request_update_allowed?
     !session[:sudo]
-  end
-
-  def set_latest_update_title
-    @latest_update = Update.order('created_at DESC').limit(1).first
   end
 
   def welcome_back?
