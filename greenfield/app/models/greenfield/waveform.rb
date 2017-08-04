@@ -4,7 +4,7 @@ module Greenfield
       tmp = Tempfile.new(['resampled-upload', '.wav'])
 
       # resample the mp3 down to 8KHz to make it more manageable
-      command = Paperclip.run('lame', ['--mp3input', '--resample', '8',
+      command = Paperclip.run('lame', ['--quiet --mp3input', '--resample', '8',
                                '--decode', Shellwords.shellescape(file),
                                Shellwords.shellescape(tmp.path)].join(' '))
 
@@ -17,9 +17,10 @@ module Greenfield
         rms = 0.0
         rms_size = islice = 0
         slice_size = input.info.frames / 500
+        is_mono = input.info.channels == 1
         until (signal = input.read(:int, 300)).real_size.zero?
           signal.each do |frame|
-            mono = frame.sum
+            mono = is_mono ? frame : frame.sum
             rms += mono * mono
           end
 
