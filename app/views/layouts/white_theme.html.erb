@@ -24,7 +24,7 @@
 </head>
 
 <body class="<%= "has-details" if @playlist %> <%= @playlist.try(:theme) %>">
-    
+
   <% if @sudo %>
   <div class="sudo_bar">
     Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
@@ -34,7 +34,7 @@
   <%= check_for_and_display_welcome_back %>
 
   <%= check_for_and_display_flashes %>
-  
+
   <div class="header">
     <%= render :partial=> 'shared/header' %>
     <%= render :partial => 'shared/search' %>
@@ -42,7 +42,7 @@
 
   <div class="content main-table-row">
     <main>
-      
+
       <%= yield %>
 
       <%= yield :static %>
@@ -66,8 +66,7 @@
     <% end %>
   </div>
 
-  <%= javascript_include_tag "greenfield/application", "data-turbolinks-eval": "false"  %>
-  <%= javascript_include_tag "application", "data-turbolinks-eval": "false"  %>
+  <%= javascript_include_tag "white_theme", "data-turbolinks-eval": "false"  %>
   <%= render :partial => 'layouts/greenfield/ga' %>
 
 </body>
