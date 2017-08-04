@@ -1,0 +1,14 @@
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require soundmanager2
+//= require jquery-carousel
+//= require jquery-lowpro
+//= require facebox
+//= require local_time
+//= require highlight
+//= require upload
+//= require turbolinks
+//= require soundmanager_setup
+//= require lowpro_behaviors
+//= require handlers
