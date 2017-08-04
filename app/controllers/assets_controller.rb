@@ -10,7 +10,7 @@ class AssetsController < ApplicationController
 
   # home page
   def latest
-    if stale?(etag: Asset.last_updated, last_modified: Asset.last_updated.updated_at)
+    if stale?(Asset.last_updated)
       respond_to do |wants|
         wants.html do
           @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
