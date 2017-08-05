@@ -12,7 +12,7 @@ module AssetsHelper
       Greenfield::Engine.routes.url_helpers.
         user_post_attached_asset_path(asset.post.user, asset.alonetone_asset,
                                       asset.permalink, :format => :mp3)
-    else
+    elsif @playlist
       user_playlist_path(asset.user, @playlist, asset, :format => :mp3)
     end
   end

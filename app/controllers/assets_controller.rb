@@ -62,6 +62,7 @@ class AssetsController < ApplicationController
       format.html do
         @assets = [@asset]
         set_related_show_variables
+        render 'show_white' if white_theme_enabled?
       end
       format.mp3 do
         listen(@asset)
