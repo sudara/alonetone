@@ -35,11 +35,4 @@
       <%= markdown(@asset.credits) %>
     </div>
   <% end %>
-
-  <div class="social-metadata">
-    <%= render :partial => 'favoriters' if @favoriters.present?%>
-    <%= render :partial => 'users'%>
-    <div class="clear"> </div>
-    <%= render :partial => 'shared/comments' if @comments.present? %>
-  </div>
 </div>
