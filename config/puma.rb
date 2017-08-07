@@ -1,6 +1,7 @@
 #!/usr/bin/env puma
-environment ENV.fetch("RAILS_ENV") { "production" }
-if ENV.fetch("RAILS_ENV") == "production"
+env = ENV.fetch("RAILS_ENV") { "production" }
+environment env
+if env == "production"
 workers 3
 daemonize true
 bind 'unix://tmp/puma.sock'
