@@ -45,6 +45,7 @@ class PlaylistsController < ApplicationController
       format.mp3 do
         listen(@asset, register: false)
       end
+      format.xml
     end
   end
 
