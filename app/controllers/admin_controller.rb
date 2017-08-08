@@ -3,6 +3,7 @@ class AdminController < ApplicationController
 
   def toggle_theme
     current_user.toggle! :white_theme_enabled
+    session[:white] = nil
     redirect_back(fallback_location: root_path)
   end
 
