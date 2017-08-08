@@ -46,10 +46,6 @@ RSpec.describe Asset, type: :model do
     it "should increase the user's count" do
       expect{ new_track('muppets.mp3').save }.to change(Asset, :count).by(1)
     end
-
-    it "should send out email to followers after upload" do
-      # pending
-    end
   end
 
   context "mp3 tags" do

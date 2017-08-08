@@ -155,7 +155,6 @@ RSpec.describe AssetsController, type: :controller do
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
-
     it 'should successfully upload 2 mp3s' do
       login(:sudara)
       post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),
@@ -198,6 +197,29 @@ RSpec.describe AssetsController, type: :controller do
       expect(response).to be_success # no wrong answer here :)
       expect(assigns(:assets)).not_to include(assets(:valid_mp3))
       expect(assigns(:assets)).to be_present # should be populated with user's own assets
+    end
+  end
+
+  context "#update" do
+    before do
+      login(:arthur)
+    end
+
+    it 'should allow user to update track title and description' do
+      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: {description: 'normal description' }}, xhr: true
+      expect(response).to be_success
+    end
+
+    it 'should call out to rakismet on update' do
+      allow(Rakismet).to receive(:akismet_call).and_return('false')
+      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: {description: 'normal description' }}, xhr: true
+      expect(users(:arthur).assets.first.private).to be_falsey
+    end
+
+    it 'should force a track to be private if it is spam' do
+      allow(Rakismet).to receive(:akismet_call).and_return('true')
+      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: {description: 'spammy description' }}, xhr: true
+      expect(assigns(:asset).private).to be_truthy
     end
   end
 end

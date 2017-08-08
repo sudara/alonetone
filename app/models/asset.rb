@@ -28,7 +28,6 @@ class Asset < ActiveRecord::Base
 
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
-  before_create :force_private_if_spam
   after_create :notify_followers, if: :published?
 
   include Rakismet::Model
@@ -38,10 +37,6 @@ class Asset < ActiveRecord::Base
                   :permalink =>     proc { full_permalink }
 
   validates_presence_of :user_id
-
-  def force_private_if_spam
-    -self.private = true if spam? # makes API request
-  end
 
   # override has_permalink method to ensure we don't get empty permas
   def generate_permalink!

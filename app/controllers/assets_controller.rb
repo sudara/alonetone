@@ -151,6 +151,8 @@ class AssetsController < ApplicationController
   # PUT /assets/1.xml
   def update
     result =  @asset.update_attributes(asset_params)
+    is_spam = @asset.spam? #&& @user.created_at > 7.days.ago # makes an api call
+    @asset.update_attribute(:private, true) if is_spam
     @asset.publish! if params[:commit] == 'Publish'
 
     if request.xhr?
