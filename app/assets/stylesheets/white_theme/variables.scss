@@ -1,9 +1,11 @@
-// GREENFIELD VARS
 
-// everything on a baseline grid
+// Size main, inner footer, and inner header
+$desktop_fixed_width: 70%; // or 1300px;
+
+
+// GREENFIELD VARS
 $baseline: 27px;
 
-$black: black;
 $not-quite-black: #353535; 
 $gray: #999;
 $light-gray: #cccbca;
@@ -21,7 +23,7 @@ $sans-serif-family: Helvetica, sans-serif;
 
 // ALONETONE VARS
 
-$body_background_color: #F4F4F4;
+$body_background_color: #FBFBFB;
 
 // in-content boxes
 $box_background: #FFFFFF;

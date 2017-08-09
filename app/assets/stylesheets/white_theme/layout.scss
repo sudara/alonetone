@@ -3,7 +3,10 @@ body {
   flex-direction: column;
   min-height: 100vh;
   main {
-    width: 1020px;
+    width: $desktop_fixed_width;
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
     margin: 40px auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
@@ -20,10 +23,14 @@ body {
       justify-content: space-between;
       flex-wrap: wrap;
       #left {
-        width: 45%;
+        flex: 1;
+        min-width: 320px;
+        max-width: 420px;
       }
       #right {
-        width: 45%;
+        flex: 1;
+        min-width: 320px;
+        max-width: 420px;
       }
     }
     #static {
@@ -36,4 +43,3 @@ body {
     }
   }
 }
-
