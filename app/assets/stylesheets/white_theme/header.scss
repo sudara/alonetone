@@ -20,6 +20,15 @@
     }
     .header_login {
       float: right;
+      li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        a {
+          @include default_button();
+        }
+      }
     }
     .user_dropdown {
       position: relative;
