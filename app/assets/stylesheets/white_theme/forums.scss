@@ -97,7 +97,7 @@ table.forums, table.topics {
   }
   tr {
     th {
-      background-color: $body_background;
+      background-color: $body_background_color;
       color: white;
       font-weight: bold;
       font-size: 0.8em;
@@ -106,7 +106,7 @@ table.forums, table.topics {
     td {
       padding: 9px 7px 5px 7px;
       border: 1px solid #dddddd;
-      border-color: $body_background;
+      border-color: $body_background_color;
     }
     th.la {
       text-align: left;
@@ -195,7 +195,7 @@ table.topics {
 
 table.posts {
   border-bottom: 2px solid #eeeeee;
-  border-color: $body_background;
+  border-color: $body_background_color;
 }
 
 table.posts tr td {
@@ -264,7 +264,7 @@ table.posts tr.spacer td {
 .post .author {
   border-top: 2px solid #eeeeee;
   background-color: $box_background;
-  border-color: $body_background;
+  border-color: $body_background_color;
   padding: 15px 10px 10px 10px;
   color: #333333;
   font-size: 0.9em;
@@ -350,7 +350,7 @@ table.posts tr.spacer td {
 .posts .post .body {
   vertical-align: top;
   border-top: 2px solid #eeeeee;
-  border-color: $body_background;
+  border-color: $body_background_color;
   background-color: $tab_box_silver;
   padding: 15px 20px;
   overflow: none;
@@ -390,7 +390,7 @@ table.posts tr.spacer td {
   padding: 5px 10px;
   border: 1px solid #cccccc;
   border-left: 3px solid #dddddd;
-  border-color: $body_background;
+  border-color: $body_background_color;
   border-right: 0;
   overflow: auto;
   font-family: "Monaco", "Bitstream Vera Sans Mono", "Courier New", serif;
@@ -432,7 +432,7 @@ tr.post.title {
 div.editbox {
   // background: image-url('reply_background.png');
   border: 2px solid #333333;
-  border-color: $body_background;
+  border-color: $body_background_color;
   border-width: 2px 0;
   bottom: 0;
   left: 0;

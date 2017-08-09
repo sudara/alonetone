@@ -1,10 +1,32 @@
 body {
   font-family: $body-font;
   font-size: $body-font-size;
-  // font-weight: 500;
-  // line-height: $baseline;  // 27px is our baseline
-  background-color: #F9F9F9;
+  background-color: $body_background_color;
 }
+
+
+div.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $white;
+}
+
+div.footer_box {
+  margin-bottom: 30px;
+  background-color: $white;
+  text-align: right;
+}
+
+div.notice,
+div.errorExplanation {
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  border-top: 1px solid #6F6F6F;
+  border-bottom: 1px solid #7E807E;
+}
+
+
 
 .pagination {
   font-family: $header_font;
