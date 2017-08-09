@@ -8,14 +8,17 @@ body {
 div.box {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-color: $white;
+
+  justify-content: space-between;
 }
 
 div.footer_box {
   margin-bottom: 30px;
-  background-color: $white;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: right;
+  background-color: $white;
 }
 
 div.notice,
@@ -156,10 +159,10 @@ a.overlay {
 
 .comment {
   position: relative;
+  margin-top: 10px;
   margin-bottom: 20px;
   padding-bottom: 15px;
   border-bottom: 1px solid $light_gray;
-  margin-top: 10px;
   &:last-child {
     border-bottom: 0;
   }
