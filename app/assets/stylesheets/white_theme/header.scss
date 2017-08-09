@@ -13,7 +13,8 @@
       width: 45px;
       height: 35px;
       background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
-      background-size: 100%;
+      background-size: 80%;
+      background-position: 0 3px;
     }
     .header_nav {
       display: none;
@@ -86,15 +87,15 @@
     float: right;
     height: 40px;
     margin-right: 50px;
-    padding-top: 0px;
+    padding-top: 2px;
     #search_form {
       display: block;
       float: left;
       #query {
-        font-size: 14px;
+        font-size: 12px;
         width: 220px;
-        height: 22px;
-        padding: 3px 12px;
+        height: 19px;
+        padding: 3px 12px 2px 12px;
         color: #222222;
         border: 1px solid #DDDDDD;
         border-radius: 5px;
