@@ -2,7 +2,43 @@ html,
 body {
   height: 100%;
   background-color: $body_background;
+
 }
+
+body {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+
+.main-table-row {
+  display: table-row;
+  height: 100%;
+  main {
+    overflow: auto;
+    width: 1020px;
+    margin: 0 auto;
+    margin-top: $baseline * 3;
+    padding-bottom: $baseline * 3;
+    .playlist {
+      float: left;
+      width: $baseline * 10;
+    }
+    .track-content {
+      float: left;
+      margin-left: $baseline;
+    }
+  }
+}
+
+.footer-table-row {
+  display: table-row;
+  footer {
+    height: 34px;
+  }
+}
+
 
 .content {
   width: 1020px;
