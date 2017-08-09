@@ -24,7 +24,7 @@ img a:visited {
   }
 }
 
-.content {
+main {
   font-size: 14px;
   a,
   a:visited {
@@ -47,10 +47,10 @@ img a:visited {
   }
 }
 
-.content .box,
-.content .comment,
-.content .user_report .body,
-.content .update .body,
+main .box,
+main .comment,
+main .user_report .body,
+main .update .body,
 .notice, {
   a,
   a:visited {
@@ -71,11 +71,11 @@ img a:visited {
   }
 }
 
-.content .user_report .body,
-.content .update .body,
+main .user_report .body,
+main .update .body,
 .notice,
 .static_content,
-.content .comment_body {
+main .comment_body {
   a,
   a:visited {
     font-weight: bold;
@@ -145,7 +145,7 @@ h3.box.static {
 }
 
 h2.box_title,
-.content h2.box_title a {
+main h2.box_title a {
   font-size: 20px;
   line-height: 20px;
   margin: 0 0 0 0;
@@ -224,7 +224,7 @@ div.flash {
   }
 }
 
-.content {
+main {
   a.view_all {
     @include default_button();
   }
@@ -537,8 +537,8 @@ a.button.remove {
 }
 
 span.hint,
-.content a.hint,
-.content a.hint:visited {
+main a.hint,
+main a.hint:visited {
   font-size: 12px;
   color: $orange;
 }

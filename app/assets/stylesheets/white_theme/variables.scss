@@ -1,3 +1,33 @@
+// GREENFIELD VARS
+
+// I want to be precise about spacing at regular intervals related to body text size
+// This is the "em" across the scss except where font-size is definied differently.
+$body-font-size: 18px;
+
+// everything on a baseline grid
+$baseline: 27px;
+
+$black: black;
+$not-quite-black: #353535; 
+$gray: #999;
+$light-gray: #cccbca;
+$lightest-gray: #c7c6c3;
+$not-quite-white: #f9f9f9;
+$not-quite-white-opaque: #f9f9f9; // to mask background
+
+$waveform-playing: #302f2f;
+$bright-highlight: rgba(255, 255, 0, .6);
+
+$bold-header-family: "Alright Sans Black", sans-serif;
+$normal-header-family: "Alright Sans", sans-serif;
+$body-font: "Harriet Text", sans-serif;
+$sans-serif-family: Helvetica, sans-serif;
+
+
+
+// ALONETONE VARs
+
+
 
 $static_width: 1020px; //  unused, but perhaps for setting footer, content, header widths for static desktop
 
