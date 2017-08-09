@@ -6,14 +6,11 @@
 
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-@import 'greenfield/variables';
+
+// @import 'greenfield/variables';
 // @import 'greenfield/layout';
-@import 'greenfield/styles';
+// @import 'greenfield/styles';
 // @import 'greenfield/login';
-@import 'greenfield/playlist';
-@import 'greenfield/player';
-@import 'greenfield/post';
-@import 'greenfield/cover_view';
 // @import 'greenfield/edit_post';
 // @import 'greenfield/mobile';
 
@@ -27,6 +24,12 @@
 @import 'white_theme/tracks';
 @import 'white_theme/playlists';
 @import 'white_theme/footer';
+
+@import 'greenfield/playlist';
+@import 'greenfield/player';
+@import 'greenfield/post';
+@import 'greenfield/cover_view';
+
 
 @import 'application/reset';
 @import 'application/simple_form';

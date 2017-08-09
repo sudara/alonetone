@@ -1,3 +1,11 @@
+body {
+  font-family: $body-font;
+  font-size: $body-font-size;
+  // font-weight: 500;
+  // line-height: $baseline;  // 27px is our baseline
+  background-color: #F9F9F9;
+}
+
 .pagination {
   font-family: $header_font;
   position: relative;
