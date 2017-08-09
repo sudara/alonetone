@@ -6,7 +6,6 @@ body {
     width: $desktop_fixed_width;
     margin: 40px auto 0 auto;
     padding-bottom: $baseline * 3;
-
     flex: 1;
     @media only screen and (max-width: 600px) {
       width: 100%;
@@ -23,12 +22,7 @@ body {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      #left {
-        width: 45%;
-        min-width: 320px;
-        max-width: 420px;
-      }
-      #right {
+      > div {
         width: 45%;
         min-width: 320px;
         max-width: 420px;
