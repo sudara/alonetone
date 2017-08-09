@@ -16,22 +16,14 @@ footer#site_footer {
   .footer_inner {
     display: flex;
     flex-wrap: wrap;
-    width: 1020px;
+    width: $desktop_fixed_width;
     margin-right: auto;
     margin-left: auto;
     justify-content: space-between;
     .footer_column {
-      &:nth-child(1) {
+      > div {
         width: 23%;
-      }
-      &:nth-child(2) {
-        width: 23%;
-      }
-      &:nth-child(3) {
-        width: 23%;
-      }
-      &:nth-child(4) {
-        width: 23%;
+        min-width: 150px;
       }
     }
     .footer_column_header {

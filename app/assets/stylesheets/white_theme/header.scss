@@ -3,7 +3,7 @@ header#site_header {
   height: 40px;
   .header_inner {
     position: relative;
-    width: 1020px;
+    width: $desktop_fixed_width;
     margin-right: auto;
     margin-left: auto;
     .header_logo {
