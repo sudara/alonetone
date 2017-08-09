@@ -109,7 +109,7 @@ h1 {
 h2,
 .latest-playlists-header h2 a {
   font-family: $header_font;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 2em;
   margin-bottom: 1em;
@@ -224,9 +224,11 @@ div.flash {
   }
 }
 
-main {
-  a.view_all {
-    @include default_button();
+a.view_all {
+  @include default_button();
+  border: 0;
+  &:hover {
+    border: 0;
   }
 }
 
@@ -247,29 +249,6 @@ div.notice ol {
   margin-top: 8px!important;
 }
 
-div.footer_box {
-  // line-height: 30px;
-  height: 32px;
-  margin-top: 10px;
-  text-align: right;
-
-
-  // &.onepx {
-  //   margin-top: 1px;
-  // }
-  // &.empty {
-  //   margin: 0;
-  //   background: none;
-  // }
-  // a,
-  // a:visited,
-  // a:hover,
-  // a:active {
-  //   display: block;
-  //   float: right;
-  //   height: 32px;
-  // }
-}
 
 a.edit_green,
 a.delete_green {

@@ -2,11 +2,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: $body_background;
   main {
     width: 1020px;
-    margin: 0 auto;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
     .playlist {
@@ -19,13 +17,13 @@ body {
     }
     #columns {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       flex-wrap: wrap;
       #left {
-        width: 420px;
+        width: 45%;
       }
       #right {
-        width: 420px;
+        width: 45%;
       }
     }
     #static {
@@ -39,24 +37,3 @@ body {
   }
 }
 
-
-// boo...
-
-div.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-div.footer_box {
-  margin-top: -27px;
-  margin-bottom: 30px;
-}
-
-div.notice,
-div.errorExplanation {
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  border-top: 1px solid #6F6F6F;
-  border-bottom: 1px solid #7E807E;
-}

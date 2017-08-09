@@ -7,6 +7,7 @@
   width: 100%;
   margin-top: 1px;
   color: $text_color;
+  border-bottom: 1px solid $light_gray;
 
   .button,
   .title {
@@ -189,7 +190,7 @@
       -webkit-box-sizing: border-box;
          -moz-box-sizing: border-box;
               box-sizing: border-box;
-      border-top: 1px solid $body_background;
+      border-top: 1px solid $body_background_color;
     }
   }
   &.descriptionless {
