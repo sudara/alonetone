@@ -1,0 +1,19 @@
+<ul class="downloads-links">
+  <% @playlist.greenfield_downloads.each do |download| %>
+    <li>
+     <%= link_to downloads_user_playlist_path(@playlist.user, @playlist, download, download.attachment_file_name) do %>
+       <i class="fa fa-download"></i><%= download.title %><span class='action-text'>Download</span>
+     <% end %>
+   </li>
+  <% end %>
+</ul>
+
+<ul class="external-links">
+  <% [:link1, :link2, :link3].collect do |link| %>
+    <% if valid_link = @playlist.send(link) %>
+      <li>
+        <%= external_link_for(valid_link) %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
