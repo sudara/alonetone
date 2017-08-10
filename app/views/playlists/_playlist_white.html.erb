@@ -31,7 +31,7 @@
     <ul class="downloads-links">
       <% @playlist.greenfield_downloads.each do |download| %>
         <li>
-         <%= link_to user_playlist_download_path(@playlist.user, @playlist, download, download.attachment_file_name) do %>
+         <%= link_to downloads_user_playlist_path(@playlist.user, @playlist, download, download.attachment_file_name) do %>
            <i class="fa fa-download"></i><%= download.title %><span class='action-text'>Download</span>
          <% end %>
        </li>
