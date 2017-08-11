@@ -384,7 +384,6 @@ a.overlay {
     font-size: 10px;
     line-height: 10px;
     float: left;
-    width: 280px;
     min-height: 25px;
     overflow: hidden;
     height: 40px;
@@ -395,9 +394,6 @@ a.overlay {
       font-size: 10px;
       font-weight: bold;
     }
-  }
-  &.even {
-    background-color: $box_background_even;
   }
 }
 
