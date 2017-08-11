@@ -244,19 +244,23 @@ a.overlay {
   }
   .public,
   .private {
-    // font-family: $header_font;
-    // font-size: 12px;
-    // font-weight: normal;
+    font-family: $header_font;
+    font-weight: normal;
   }
   textarea {
     height: 60px;
     margin-bottom: 5px;
     padding: 5px;
+    width: 100%;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
   }
 }
 
 .private_check_box {
-  float: none;
+  float: left;
   clear: both;
   margin-top: 2px;
 }
