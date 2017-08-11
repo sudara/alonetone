@@ -53,6 +53,8 @@ header#site_header {
           min-width: 65px;
           padding: 0 10px 0 15px;
           text-align: left;
+          position: relative;
+          top: 1px;
           &:hover {
             text-decoration: underline;
           }
