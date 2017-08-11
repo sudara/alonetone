@@ -252,9 +252,9 @@ a.overlay {
     margin-bottom: 5px;
     padding: 5px;
     width: 100%;
-    outline: none;
+    // outline: none;
     &:focus {
-      outline: none;
+      // outline: none;
     }
   }
 }
@@ -370,7 +370,7 @@ a.overlay {
   position: relative;
   width: 100%;
   height: 40px;
-  margin-top: 1px;
+  margin-top: 10px;
   background-color: $box_background;
   .listen_user {
     float: left;
@@ -381,16 +381,19 @@ a.overlay {
     }
   }
   .listen_details {
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 10px;
+    line-height: 10px;
     float: left;
     width: 280px;
     min-height: 25px;
+    overflow: hidden;
+    height: 40px;
     div {
       margin-bottom: -1px;
     }
     a {
-      font-size: 12px;
+      font-size: 10px;
+      font-weight: bold;
     }
   }
   &.even {
@@ -881,6 +884,10 @@ h1 span#channel_name {
   .asset_top {
     background-color: #EFEFEF;
   }
+}
+
+#user_track_plays {
+  font-family: $header_font;
 }
 
 /* STATS */
