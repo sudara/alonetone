@@ -16,14 +16,14 @@
 @import 'white_theme/forums';
 @import 'white_theme/tracks';
 @import 'white_theme/playlists';
+@import 'white_theme/playlist';
+@import 'white_theme/player';
+@import 'white_theme/cover_view';
+@import 'white_theme/post';
 @import 'white_theme/footer';
 
-@import 'greenfield/playlist';
-@import 'greenfield/player';
-@import 'greenfield/post';
-@import 'greenfield/cover_view';
 
-@import 'application/reset';
+@import 'application/reset'; // sketchy!
 @import 'application/simple_form';
 @import 'application/facebox';
 @import 'application/upload';

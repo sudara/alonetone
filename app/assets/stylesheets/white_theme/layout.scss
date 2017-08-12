@@ -3,19 +3,21 @@ body {
   flex-direction: column;
   min-height: 100vh;
   main {
-    width: $desktop_fixed_width;
-    width: 100%;
     margin: 30px auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
-    @media only screen and (max-width: 640px) {
-      width: 100%;
-    }
-    .playlist {
-      width: $baseline * 10;
-    }
-    .track-content {
-      margin-left: $baseline;
+    #playlist-and-track-content {
+      display: flex;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      .playlist {
+        width: 300px;
+      }
+      .track-content {
+        margin-left: $baseline;
+        flex: 1;
+      }      
     }
     #columns {
       display: flex;
@@ -27,7 +29,6 @@ body {
       > div {
         width: 45%;
         min-width: 320px;
-        // max-width: 420px;
         @media only screen and (max-width: 640px) {
           width: 100%;
         }

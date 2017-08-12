@@ -1,0 +1,125 @@
+.track-content {
+  .post-content,
+  .edit-post-content,
+  .track-credits {
+    // width: 550px;
+    padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
+    padding-bottom: $baseline;
+    font-size: $body-font-size;
+    position: relative;
+    min-height: $baseline * 3;
+    margin-bottom: $baseline * 3;
+    background-color: white;
+    table {
+      font-size: 12px;
+      thead {
+        tr {
+          th {
+            text-align: center;
+            img {
+              opacity: .4;
+              filter: alpha(opacity=40);
+              width: 50%;
+              height: auto;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            text-align: center;
+          }
+        }
+        tr:first-child {
+          td {
+            font-weight: bold;
+            line-height: 12px;
+            vertical-align: top;
+            height: 20px;
+          }
+        }
+        tr:last-child {
+          td {
+              color: $gray;
+              line-height: 12px;
+              vertical-align: top;
+
+          }
+        }
+      }
+    }
+  }
+
+  .track-credits {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 680px;
+  }
+  
+  h1 {
+    padding-bottom: $baseline;
+  }
+}
+
+.post-content,
+.edit-post-content textarea {
+  font-size: $body-font-size;
+  position: relative;
+  margin-top: $baseline;
+  margin-bottom: $baseline * 3;
+  word-wrap: break-word;
+  word-break: break-word;
+  color: $not-quite-black;
+  border: none;
+  background-color: white;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+  p {
+    margin-bottom: $baseline;
+    img {
+      max-width: 550 + ($baseline * 6);
+      margin-top: $baseline;
+      // not quite perfectly the same width
+      margin-left: -$baseline * 3;    
+    }
+  }
+  .edit-link {
+    position: absolute;
+    top: $baseline;
+    right: $baseline *1.5;
+    text-decoration: none;
+    color: $light-gray;
+    &:hover {
+      color: $black;
+    }
+  }
+  hr {
+    font-family: 'FontAwesome';
+    position: relative; // needed for icon
+    width: 550px;
+    margin: ($baseline * 1.5) auto;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid #AAA;
+    &:after {
+      position: absolute;
+      top: -.55em;
+      left: 265px;
+      display: block;
+      content: '\f025'; // with headphone icon
+      color: #AAA;
+      background-color: white; // interrupt hr
+
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+  h3 {
+    font-family: $bold-header-family;
+    font-size: 20px;
+    margin-top: $baseline + 2px;
+    margin-bottom: $baseline - 2px;
+    color: $not-quite-black;
+  }
+}
