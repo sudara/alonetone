@@ -1,38 +1,20 @@
 
-// Size main, inner footer, and inner header
-$desktop_fixed_width: 90%; // or 1300px;
+// layout
 
-
-// GREENFIELD VARS
+$desktop_fixed_width: 90%; // or 1300px, used for width on main, inner footer, and inner header
 $baseline: 27px;
 
-$not-quite-black: #353535;
-$gray: #999;
-$light-gray: #cccbca;
-$lightest-gray: #c7c6c3;
-$not-quite-white: #f9f9f9;
-$not-quite-white-opaque: #f9f9f9; // to mask background
+// text
 
-$waveform-playing: #302f2f;
-$bright-highlight: rgba(255, 255, 0, .6);
-
+$body-font-size: 18px;
+$header_font: 'Alright Sans', sans-serif;
 $bold-header-family: "Alright Sans Bold", sans-serif;
 $normal-header-family: "Alright Sans", sans-serif;
 $body-font: "Harriet Text", serif;
 $sans-serif-family: Helvetica, sans-serif;
 
-// ALONETONE VARS
+// colors ( how many of these are used? )
 
-$body_background_color: #FBFBFB;
-
-// in-content boxes
-$box_background: #FFFFFF;
-$box_background_even: #FFFFFF;
-
-
-// text
-$body-font-size: 18px;
-$header_font: 'Alright Sans', sans-serif;
 $text_color: #000000;
 $text_color2: #000000;
 $nav_item_color: #C1C9B4;
@@ -46,19 +28,31 @@ $light_gray: #EEEEEE;
 $silver: #C7C8C7;
 $orange: #DA6D25;
 $orange_background: #E66D29;
+$body_background_color: #FBFBFB;
+$box_background: #FFFFFF;
+$box_background_even: #FFFFFF;
 $red: #D3220C;
 $green: #66A410;
+$not-quite-black: #353535;
+$gray: #999;
+$light-gray: #cccbca;
+$lightest-gray: #c7c6c3;
+$not-quite-white: #f9f9f9;
+$not-quite-white-opaque: #f9f9f9; // to mask background
 $disabled: #8C8E86;
 $body_link_hover: #1A1D13;
+$waveform-playing: #302f2f;
+$bright-highlight: rgba(255, 255, 0, .6);
+
 
 
 @mixin default_button() {
   font-family: $header_font;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
-  line-height: 30px;
+  line-height: 26px;
   display: inline-block;
-  height: 28px;
+  height: 23px;
   padding: 0 14px;
   text-align: center;
   text-decoration: none;
