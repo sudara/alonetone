@@ -4,7 +4,7 @@ footer#site_footer {
   font-weight: normal;
   line-height: 20px;
   width: 100%;
-  padding: 20px 0;
+  padding-bottom: 20px;
   color: #333333;
   background-color: $light_gray;
   .author_name {
@@ -20,7 +20,8 @@ footer#site_footer {
     margin-right: auto;
     margin-left: auto;
     justify-content: space-between;
-    .footer_column {      
+    .footer_column {
+      padding-top: 20px;      
       width: 23%;
       min-width: 150px;
     }

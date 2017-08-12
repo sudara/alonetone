@@ -24,74 +24,6 @@ img a:visited {
   }
 }
 
-main {
-  font-size: 14px;
-  a,
-  a:visited {
-    font-size: 14px;
-    font-weight: normal;
-    color: $text_color2;
-    &:hover {
-      background-color: transparent;
-    }
-  }
-  p {
-    margin-bottom: 20px;
-    color: $text_color2;
-  }
-  .static_content {
-    p,
-    .ui-tabs-panel p {
-      color: $text_color;
-    }
-  }
-}
-
-main .box,
-main .comment,
-main .user_report .body,
-main .update .body,
-.notice, {
-  a,
-  a:visited {
-    color: $text_color;
-    &:hover {
-      color: #191A13;
-    }
-  }
-  p {
-    color: $text_color;
-    img {
-      max-width: 550px;
-    }
-  }
-  ol li {
-    list-style-position: inside;
-    list-style-type: decimal;
-  }
-}
-
-main .user_report .body,
-main .update .body,
-.notice,
-.static_content,
-main .comment_body {
-  a,
-  a:visited {
-    font-weight: bold;
-    // text-decoration: underline;
-  }
-  ul {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    li {
-      line-height: 18px;
-      margin-left: 20px;
-      list-style: square inside none;
-    }
-  }
-}
-
 h1 {
   font-family: $header_font;
   font-size: 32px;
@@ -153,6 +85,76 @@ main h2.box_title a {
   margin: 0 0 0 0;
   color: $text_color;
 }
+
+main {
+  font-size: 14px;
+  a,
+  a:visited {
+    font-size: 14px;
+    font-weight: normal;
+    color: $text_color2;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  p {
+    margin-bottom: 20px;
+    color: $text_color2;
+  }
+  .static_content {
+    p,
+    .ui-tabs-panel p {
+      color: $text_color;
+    }
+  }
+}
+
+main .box,
+main .comment,
+main .user_report .body,
+main .update .body,
+.notice, {
+  a,
+  a:visited {
+    color: $text_color;
+    &:hover {
+      color: #191A13;
+    }
+  }
+  p {
+    color: $text_color;
+    img {
+      max-width: 550px;
+    }
+  }
+  ol li {
+    list-style-position: inside;
+    list-style-type: decimal;
+  }
+}
+
+main .user_report .body,
+main .update .body,
+.notice,
+.static_content,
+main .comment_body {
+  font-size: 13px;
+  a,
+  a:visited {
+    font-weight: bold;
+  }
+  ul {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    li {
+      line-height: 18px;
+      margin-left: 20px;
+      list-style: square inside none;
+    }
+  }
+}
+
+
 
 span.note {
   font-size: 11px;

@@ -23,6 +23,9 @@ body {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
       > div {
         width: 45%;
         min-width: 320px;
