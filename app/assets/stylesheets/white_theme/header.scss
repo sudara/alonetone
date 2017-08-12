@@ -87,8 +87,7 @@ header#site_header {
   .header_search {
     position: relative;
     float: right;
-    height: 40px;
-    margin-right: 50px;
+    margin-right: 4%;
     padding-top: 2px;
     #search_form {
       display: block;
@@ -96,6 +95,11 @@ header#site_header {
       #query {
         font-size: 12px;
         width: 220px;
+        float: right;
+        @media only screen and (max-width: 640px) {
+          width: 70%;
+          padding-right: 4px;
+        }
         height: 19px;
         padding: 3px 12px 2px 12px;
         color: #222222;
