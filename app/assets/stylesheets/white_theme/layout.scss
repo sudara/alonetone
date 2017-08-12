@@ -7,8 +7,9 @@ body {
     width: 100%;
     margin: 30px auto 0 auto;
     padding-bottom: $baseline * 3;
+
     flex: 1;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 640px) {
       width: 100%;
     }
     .playlist {
@@ -21,15 +22,19 @@ body {
     }
     #columns {
       display: flex;
+      max-width: 1100px;
+      margin-right: auto;
+      margin-left: auto;
+
       justify-content: space-around;
       flex-wrap: wrap;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
       > div {
         width: 45%;
         min-width: 320px;
         max-width: 420px;
+        @media only screen and (max-width: 640px) {
+          width: 100%;
+        }
       }
     }
     #static {
