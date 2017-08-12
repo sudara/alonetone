@@ -5,10 +5,9 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  font-family: $body-font;
   color: $text_color;
-  border-bottom: 1px solid $light_gray;
   border-bottom: 1px solid $light-gray;
-
   .button,
   .title {
     float: left;
@@ -121,7 +120,7 @@
       a.artist {
         font-size: 11px;
         position: relative;
-        top: -3px;
+        top: -4px;
       }
       span.track_play,
       span.latest,

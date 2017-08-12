@@ -1,11 +1,11 @@
   ul.playlists_row {
     font-size: 11px;
     display: flex;
-    // height: 168px;
-    margin-bottom: 28px;
-
+    margin-bottom: 40px;
     justify-content: space-between;
-    flex-wrap: wrap;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 
     li {
       position: relative;
@@ -23,6 +23,13 @@
       }
     }
 }
+
+.latest-playlists-header {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .playlists_home_title {
   font-family: $header_font;
   margin-top: 7px;

@@ -4,7 +4,8 @@ body {
   min-height: 100vh;
   main {
     width: $desktop_fixed_width;
-    margin: 40px auto 0 auto;
+    width: 100%;
+    margin: 30px auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
     @media only screen and (max-width: 600px) {
@@ -20,7 +21,7 @@ body {
     }
     #columns {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-wrap: wrap;
       > div {
         width: 45%;
