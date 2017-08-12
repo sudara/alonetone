@@ -94,11 +94,11 @@ header#site_header {
       float: left;
       #query {
         font-size: 12px;
-        width: 220px;
         float: right;
+        width: 140px;
         @media only screen and (max-width: 640px) {
-          width: 70%;
-          padding-right: 4px;
+          width: 110px;
+          // padding-right: 2px;
         }
         height: 19px;
         padding: 3px 12px 2px 12px;
@@ -115,7 +115,7 @@ header#site_header {
       float: left;
       width: 18px;
       height: 18px;
-      margin-top: 11px;
+      margin-top: 10px;
       margin-left: 12px;
       img {
         width: 18px;
