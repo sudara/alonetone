@@ -5,9 +5,9 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  margin-top: 1px;
   color: $text_color;
   border-bottom: 1px solid $light_gray;
+  border-bottom: 1px solid $light-gray;
 
   .button,
   .title {
@@ -36,30 +36,41 @@
   .asset_top {
     display: flex;
     div.button {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       a {
         display: block;
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         &:hover {
           background-position: -51px 0;
         }
       }
       .sprites-play {
         margin-left: 2px;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        top: -5px;
+        left: -5px;
+
       }
       .sprites-pause {
         margin-left: 2px;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        top: -5px;
+        left: -5px;
+
       }
     }
     div.title {
       overflow: hidden;
       width: auto;
-      height: 40px;
-      padding-top: 10px;
+      height: 35px;
+      padding-top: 5px;
       padding-left: 3px;
-
       flex-grow: 1;
       .title_left_column {
         float: left;
@@ -70,7 +81,7 @@
         float: right;
         height: 100%;
         .counter {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: bold;
           position: absolute;
           right: 14px;
@@ -79,7 +90,6 @@
         }
         div.time {
           font-family: $header_font;
-          font-size: 12px;
           font-size: 12px;
           font-weight: normal;
           position: absolute;
@@ -93,7 +103,7 @@
       }
       a {
         font-family: $header_font;
-        font-size: 16px;
+        font-size: 15px;
         text-decoration: none;
         color: $text_color;
 
@@ -106,10 +116,12 @@
         }
       }
       span.by {
-        font-size: 12px;
+        font-size: 11px;
       }
       a.artist {
-        font-size: 12px;
+        font-size: 11px;
+        position: relative;
+        top: -3px;
       }
       span.track_play,
       span.latest,
