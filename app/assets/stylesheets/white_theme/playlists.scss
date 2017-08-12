@@ -6,6 +6,25 @@
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    @media only screen and (max-width: 640px) and (min-width: 420px) {
+      li {
+        display: none;
+        &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+          display: block;
+        } 
+      }
+    }
+    @media only screen and (max-width: 420px) {
+      li {
+        display: none;
+        &:nth-child(3) {
+          display: none;
+        }
+        &:nth-child(1), &:nth-child(2) {
+          display: block;
+        } 
+      }
+    }
 
     li {
       position: relative;
