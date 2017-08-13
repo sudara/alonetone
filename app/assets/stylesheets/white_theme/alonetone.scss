@@ -1,7 +1,6 @@
 body {
-  background-color: $body_background_color;
+  background-color: $body-background-color;
 }
-
 
 div.box {
   display: flex;
@@ -28,7 +27,6 @@ div.errorExplanation {
 }
 
 .pagination {
-  font-family: $sans_font;
   position: relative;
   display: block;
   float: right;
@@ -38,7 +36,6 @@ div.errorExplanation {
   a,
   span,
   a:visited {
-    font-family: $sans_font;
     font-size: 12px;
     line-height: 14px;
     display: block;
@@ -51,7 +48,6 @@ div.errorExplanation {
   a:hover,
   span.current {
     text-decoration: none;
-    color: $text_color2;
     background-color: $orange_background;
   }
   em {
@@ -114,7 +110,6 @@ a.overlay {
       margin-left: 6px;
     }
     .name {
-      font-family: $sans_font;
       font-size: 13px;
       font-weight: 500;
       display: block;
@@ -181,7 +176,6 @@ a.overlay {
     }
   }
   .comment_user_text {
-    font-family: $sans_font;
     font-size: 12px;
     font-weight: normal;
     margin-left: 72px;
@@ -191,7 +185,6 @@ a.overlay {
       font-size: 12px;
       font-weight: bold;
       text-decoration: underline;
-      color: $text_color2;
     }
   }
   .comment_body,
@@ -205,7 +198,6 @@ a.overlay {
       margin-top: 13px;
     }
     .comment_controls {
-      font-family: $sans_font;
       font-weight: normal;
       float: right;
       margin-top: 15px;
@@ -227,7 +219,6 @@ a.overlay {
 .comment_form {
   overflow: hidden;
   .comment_as {
-    font-family: $sans_font;
     font-size: 14px;
     font-weight: normal;
     line-height: 25px;
@@ -240,7 +231,6 @@ a.overlay {
   }
   .public,
   .private {
-    font-family: $sans_font;
     font-weight: normal;
   }
   textarea {
@@ -396,7 +386,6 @@ a.overlay {
 // user layout & static header (with nav)
 #user_header,
 #static_header {
-  font-family: $sans_font;
   font-weight: 500;
   position: relative;
   width: 100%;
@@ -446,7 +435,6 @@ a.overlay {
       color: $text_color;
       // background: $orange_background;
       a {
-        font-family: $sans_font;
         font-size: 14px;
         font-weight: 400;
         line-height: 34px;
@@ -458,7 +446,6 @@ a.overlay {
       }
       a:hover {
         text-decoration: none;
-        color: $text_color2;
         background: $light_gray;
       }
     }
@@ -470,7 +457,6 @@ a.overlay {
     li.current {
       font-weight: 500;
       padding: 0 15px;
-      color: $text_color2;
     }
     div.pagination {
       height: 32px;
@@ -879,7 +865,6 @@ h1 span#channel_name {
 }
 
 #user_track_plays {
-  font-family: $sans_font;
 }
 
 /* STATS */

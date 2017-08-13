@@ -5,7 +5,6 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  font-family: $serif_font;
   color: $text_color;
   border-bottom: 1px solid $light-gray;
   .button,
@@ -88,7 +87,6 @@
           text-align: right;
         }
         div.time {
-          font-family: $sans_font;
           font-size: 12px;
           font-weight: normal;
           position: absolute;
@@ -101,7 +99,6 @@
         }
       }
       a {
-        font-family: $sans_font;
         font-size: 15px;
         text-decoration: none;
         color: $text_color;
@@ -163,7 +160,6 @@
       div.title {
         div.counter {
           opacity: .99;
-          color: $text_color2;
         }
         div.time {
           color: #FECDA6;
@@ -267,7 +263,6 @@ div.track_options {
         text-decoration: none!important;
       }
       .stats {
-        font-family: $sans_font;
         font-size: 10px;
         font-weight: normal;
         line-height: 14px;

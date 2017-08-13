@@ -1,8 +1,8 @@
 body {
-  font-family: $serif_font;
   font-size: 14px;
+  font-family: $sans-font;
   line-height: 1em;
-  color: $text_color;
+  color: $text-color;
   text-rendering: optimizeLegibility;
 }
 
@@ -10,7 +10,7 @@ a,
 a:visited {
   line-height: 16px;
   text-decoration: none;
-  color: $text_color;
+  color: $text-color;
   &:hover {
     text-decoration: underline;
     background-color: transparent;
@@ -26,30 +26,26 @@ img a:visited {
 }
 
 h1 {
-  font-family: $sans_font;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 25px;
-  color: $text_color;
+  color: $text-color;
   &.user,
   &.static,
   &.notice {
     margin: 0;
-    color: $text_color;
+    color: $text-color;
   }
 }
 
 h2 {
-  font-family: $sans_font;
   font-size: 18px;
   font-weight: bold;
   line-height: 2em;
   margin-bottom: 1em;
-  color: $text_color2;
 }
 
 h2.box {
-  font-family: $sans_font;
   font-weight: bold;
   line-height: 45px;
   display: block;
@@ -58,8 +54,8 @@ h2.box {
   height: 42px;
   margin-bottom: 1px;
   padding-left: 7px;
-  color: $text_color;
-  background-color: $box_background;
+  color: $text-color;
+  background-color: $box-background;
 }
 
 h2.box.small {
@@ -83,7 +79,7 @@ main h2.box_title a {
   font-size: 20px;
   line-height: 20px;
   margin: 0 0 0 0;
-  color: $text_color;
+  color: $text-color;
 }
 
 .box,
@@ -162,7 +158,6 @@ span.note {
 }
 
 div.flash {
-  font-family: $sans_font;
   font-size: 18px;
   font-weight: bold;
   position: relative;
@@ -305,7 +300,6 @@ a.edit_profile {
 }
 
 a.follow {
-  font-family: $sans_font;
   font-size: 10px;
   line-height: 20px;
   top: 1px;
