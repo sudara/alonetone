@@ -1,56 +1,53 @@
 
 // layout
 
-$desktop_fixed_width: 90%; // or 1300px, used for width on inner footer and inner header
+$desktop-fixed-width: 90%; // or 1300px, used for width on inner footer and inner header
 $baseline: 27px;
 
 $mobile: 'only screen and (max-width: 640px)';
 
-// text
+// fonts
 
-$body-font-size: 18px;
-$header_font: 'Alright Sans', sans-serif;
-$bold-header-family: "Alright Sans Bold", sans-serif;
-$normal-header-family: "Alright Sans", sans-serif;
-$body-font: "Harriet Text", serif;
-$sans-serif-family: Helvetica, sans-serif;
+$sans-font: 'Alright Sans', sans-serif;
+$bold-serif-font: "Alright Sans Bold", sans-serif;
+$serif-font: "Harriet Text", serif;
 
 // colors ( how many of these are used? )
 
-$text_color: #000000;
-$text_color2: #000000;
-$nav_item_color: #C1C9B4;
-$tab_box_silver: #FFFFFF;
-$playlist_box_silver: #FFFFFF;
+$text-color: #000000;
+$text-color2: #000000;
+$nav-item-color: #C1C9B4;
+$tab-box-silver: #FFFFFF;
+$playlist-box-silver: #FFFFFF;
 $black: #000000;
 $white: #FFFFFF;
-$medium_gray: #666666;
-$light_medium_gray: #888888;
+$medium-gray: #666666;
+$light-medium-gray: #888888;
 $silver: #C7C8C7;
 $orange: #DA6D25;
-$orange_background: #E66D29;
-$body_background_color: #FBFBFB;
-$box_background: #FFFFFF;
-$box_background_even: #FFFFFF;
+$orange-background: #E66D29;
+$body-background-color: #FBFBFB;
+$box-background: #FFFFFF;
+$box-background-even: #FFFFFF;
 $red: #D3220C;
 $green: #66A410;
 $not-quite-black: #353535;
 $gray: #999;
-$light_gray: #EEEEEE;
+$light-gray: #EEEEEE;
 $lightest-gray: #c7c6c3;
 $not-quite-white: #f9f9f9;
 $not-quite-white-opaque: #f9f9f9; // to mask background
 $disabled: #8C8E86;
-$body_link_hover: #1A1D13;
+$body-link-hover: #1A1D13;
 $waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
 
 
-@mixin default_button($type:"") {
+@mixin default-button($type:"") {
   @if $type == "admin" {
     background-color: $orange;
   }
-  font-family: $header_font;
+  font-family: $sans-font;
   font-size: 12px;
   font-weight: normal;
   line-height: 27px;
@@ -59,17 +56,12 @@ $bright-highlight: rgba(255, 255, 0, .6);
   padding: 0 14px;
   text-align: center;
   text-decoration: none;
-  color: $text_color;
-  border: 1.25px solid $light_medium_gray;
+  color: $text-color;
+  border: 1.25px solid $light-medium-gray;
   border-radius: 6px;
   &:hover {
     transition: border-color .1s ease-in-out;
     text-decoration: none;
     border: 1.25px solid $black;
   }
-}
-
-
-@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
-  
 }

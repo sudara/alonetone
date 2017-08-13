@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  font-family: $body-font;
+  font-family: $serif_font;
   color: $text_color;
   border-bottom: 1px solid $light-gray;
   .button,
@@ -88,7 +88,7 @@
           text-align: right;
         }
         div.time {
-          font-family: $header_font;
+          font-family: $sans_font;
           font-size: 12px;
           font-weight: normal;
           position: absolute;
@@ -101,7 +101,7 @@
         }
       }
       a {
-        font-family: $header_font;
+        font-family: $sans_font;
         font-size: 15px;
         text-decoration: none;
         color: $text_color;
@@ -267,7 +267,7 @@ div.track_options {
         text-decoration: none!important;
       }
       .stats {
-        font-family: $header_font;
+        font-family: $sans_font;
         font-size: 10px;
         font-weight: normal;
         line-height: 14px;
