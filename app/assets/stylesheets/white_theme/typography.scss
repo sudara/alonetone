@@ -86,11 +86,10 @@ main h2.box_title a {
   color: $text_color;
 }
 
-
-main .box,
-main .comment,
-main .user_report .body,
-main .update .body,
+.box,
+.comment,
+.user_report .body,
+.update .body,
 .notice, {
   a,
   a:visited {
@@ -111,11 +110,11 @@ main .update .body,
   }
 }
 
-main .user_report .body,
-main .update .body,
+.user_report .body,
+.update .body,
 .notice,
 .static_content,
-main .comment_body {
+.comment_body {
   font-size: 13px;
   a,
   a:visited {
@@ -131,8 +130,6 @@ main .comment_body {
     }
   }
 }
-
-
 
 span.note {
   font-size: 11px;
@@ -154,7 +151,7 @@ span.note {
 }
 
 .errorExplanation h2 {
-  display: none;
+  // display: none;
 }
 
 .errorExplanation p,
