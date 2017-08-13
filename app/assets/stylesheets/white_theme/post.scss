@@ -5,7 +5,6 @@
     // width: 550px;
     padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
     padding-bottom: $baseline;
-    font-size: $body-font-size;
     position: relative;
     min-height: $baseline * 3;
     margin-bottom: $baseline * 3;
@@ -64,7 +63,6 @@
 
 .post-content,
 .edit-post-content textarea {
-  font-size: $body-font-size;
   position: relative;
   margin-top: $baseline;
   margin-bottom: $baseline * 3;
@@ -116,7 +114,7 @@
     }
   }
   h3 {
-    font-family: $bold-header-family;
+    font-family: $bold-serif-font;
     font-size: 20px;
     margin-top: $baseline + 2px;
     margin-bottom: $baseline - 2px;

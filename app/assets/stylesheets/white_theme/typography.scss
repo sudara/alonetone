@@ -1,7 +1,8 @@
 body {
+  font-family: $serif_font;
+  font-size: 14px;
   line-height: 1em;
   color: $text_color;
-
   text-rendering: optimizeLegibility;
 }
 
@@ -25,7 +26,7 @@ img a:visited {
 }
 
 h1 {
-  font-family: $header_font;
+  font-family: $sans_font;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 25px;
@@ -38,9 +39,8 @@ h1 {
   }
 }
 
-h2,
-.latest-playlists-header h2 a {
-  font-family: $header_font;
+h2 {
+  font-family: $sans_font;
   font-size: 18px;
   font-weight: bold;
   line-height: 2em;
@@ -49,15 +49,15 @@ h2,
 }
 
 h2.box {
-  font-family: $header_font;
+  font-family: $sans_font;
   font-weight: bold;
   line-height: 45px;
   display: block;
+  box-sizing: border-box;
   width: 100%;
   height: 42px;
   margin-bottom: 1px;
   padding-left: 7px;
-  box-sizing: border-box;
   color: $text_color;
   background-color: $box_background;
 }
@@ -86,28 +86,6 @@ main h2.box_title a {
   color: $text_color;
 }
 
-main {
-  font-size: 14px;
-  a,
-  a:visited {
-    font-size: 14px;
-    font-weight: normal;
-    color: $text_color2;
-    &:hover {
-      background-color: transparent;
-    }
-  }
-  p {
-    margin-bottom: 20px;
-    color: $text_color2;
-  }
-  .static_content {
-    p,
-    .ui-tabs-panel p {
-      color: $text_color;
-    }
-  }
-}
 
 main .box,
 main .comment,
@@ -160,21 +138,6 @@ span.note {
   font-size: 11px;
 }
 
-// iconified headers
-.latest-playlists-header h2 {
-  margin-bottom: .5em;
-  a {
-    margin-bottom: 0;
-  }
-}
-
-.sprites-latest-playlists {
-  margin-top: 5px;
-}
-h2#user_latest_playlists {
-  // padding-left: 35px;
-}
-
 #user-index #static_header h1.static {
   // padding-left: 27px;
   background-image: image-url('icons/user.png');
@@ -184,19 +147,10 @@ h2#user_latest_playlists {
 
 .sprites-latest-uploaded {
   display: none;
-  margin-top: 13px;
-  margin-left: 20px;
 }
 
 .sprites-stars {
   display: none;
-  margin-top: 8px;
-  margin-left: 14px;
-}
-
-.sprites-latest-comments {
-  margin-top: 10px;
-  margin-left: 16px;
 }
 
 .errorExplanation h2 {
@@ -211,7 +165,7 @@ h2#user_latest_playlists {
 }
 
 div.flash {
-  font-family: $header_font;
+  font-family: $sans_font;
   font-size: 18px;
   font-weight: bold;
   position: relative;
@@ -229,8 +183,8 @@ div.flash {
 }
 
 a.view_all {
-  @include default_button();
   border: 0;
+  @include default_button();
   &:hover {
     border: 0;
   }
@@ -324,7 +278,6 @@ span.private {
 a.track_about_link {
   float: right;
   margin-left: 4px;
-
   @include default_button();
 }
 
@@ -355,7 +308,7 @@ a.edit_profile {
 }
 
 a.follow {
-  font-family: $header_font;
+  font-family: $sans_font;
   font-size: 10px;
   line-height: 20px;
   top: 1px;

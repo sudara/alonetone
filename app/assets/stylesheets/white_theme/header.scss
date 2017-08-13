@@ -36,7 +36,7 @@ header#site_header {
       float: right;
       background-color: $light_gray;
       .profile_link {
-        font-family: $header_font;
+        font-family: $sans_font;
         font-size: 14px;
         position: relative;
         z-index: 3;
@@ -70,7 +70,7 @@ header#site_header {
         margin-top: 40px;
         width: 100%;
         a {
-          font-family: $header_font;
+          font-family: $sans_font;
           font-size: 14px;
           font-weight: normal;
           line-height: 26px;

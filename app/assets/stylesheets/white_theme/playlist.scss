@@ -17,14 +17,14 @@
       margin-top: 23px;
     }
     a {
-      font-family: $bold-header-family;
+      font-family: $bold-serif-font;
       font-size: 18px;
       line-height: 18px;
       margin-top: 0;
     }
   }
   h2 {
-    font-family: $normal-header-family;
+    font-family: $sans-font;
     font-size: 16px;
     font-weight: 100;
     line-height: $baseline;
@@ -124,7 +124,7 @@
     ul.external-links, {
       li {
         a {
-          font-family: $sans-serif-family;
+          font-family: $serif_font;;
           font-size: 12px;
           font-weight: 300;
           display: block;

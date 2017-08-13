@@ -1,6 +1,4 @@
 body {
-  font-family: $body-font;
-  font-size: $body-font-size;
   background-color: $body_background_color;
 }
 
@@ -30,7 +28,7 @@ div.errorExplanation {
 }
 
 .pagination {
-  font-family: $header_font;
+  font-family: $sans_font;
   position: relative;
   display: block;
   float: right;
@@ -40,7 +38,7 @@ div.errorExplanation {
   a,
   span,
   a:visited {
-    font-family: $header_font;
+    font-family: $sans_font;
     font-size: 12px;
     line-height: 14px;
     display: block;
@@ -116,7 +114,7 @@ a.overlay {
       margin-left: 6px;
     }
     .name {
-      font-family: $header_font;
+      font-family: $sans_font;
       font-size: 13px;
       font-weight: 500;
       display: block;
@@ -183,7 +181,7 @@ a.overlay {
     }
   }
   .comment_user_text {
-    font-family: $header_font;
+    font-family: $sans_font;
     font-size: 12px;
     font-weight: normal;
     margin-left: 72px;
@@ -207,7 +205,7 @@ a.overlay {
       margin-top: 13px;
     }
     .comment_controls {
-      font-family: $header_font;
+      font-family: $sans_font;
       font-weight: normal;
       float: right;
       margin-top: 15px;
@@ -229,7 +227,7 @@ a.overlay {
 .comment_form {
   overflow: hidden;
   .comment_as {
-    font-family: $header_font;
+    font-family: $sans_font;
     font-size: 14px;
     font-weight: normal;
     line-height: 25px;
@@ -242,7 +240,7 @@ a.overlay {
   }
   .public,
   .private {
-    font-family: $header_font;
+    font-family: $sans_font;
     font-weight: normal;
   }
   textarea {
@@ -398,7 +396,7 @@ a.overlay {
 // user layout & static header (with nav)
 #user_header,
 #static_header {
-  font-family: $header_font;
+  font-family: $sans_font;
   font-weight: 500;
   position: relative;
   width: 100%;
@@ -448,7 +446,7 @@ a.overlay {
       color: $text_color;
       // background: $orange_background;
       a {
-        font-family: $header_font;
+        font-family: $sans_font;
         font-size: 14px;
         font-weight: 400;
         line-height: 34px;
@@ -881,7 +879,7 @@ h1 span#channel_name {
 }
 
 #user_track_plays {
-  font-family: $header_font;
+  font-family: $sans_font;
 }
 
 /* STATS */
