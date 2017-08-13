@@ -146,6 +146,28 @@ div.small_spinner {
   }
 }
 
+/* PRESS LOGOS */
+
+div.logo {
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 12px;
+  float: left;
+  width: 133px;
+  margin-top: 43px;
+  text-align: center;
+  a,
+  a:visited {
+    font-size: 11px;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+
+
 
 // The following were once in alonetone.scss, wonder if they are in use?
 
