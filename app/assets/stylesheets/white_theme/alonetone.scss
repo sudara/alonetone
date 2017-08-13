@@ -42,7 +42,6 @@ div.errorExplanation {
     float: left;
     height: 12px;
     padding: 10px 10px;
-    color: $text_color;
   }
   em,
   a:hover,
@@ -120,7 +119,6 @@ a.overlay {
       margin-left: 10px;
       text-align: center;
       text-decoration: none;
-      color: $text_color;
       background-color: transparent;
       &:hover {
         text-decoration: underline;
@@ -273,7 +271,6 @@ a.overlay {
     font-size: 11px;
     line-height: 10px;
     padding: 0;
-    color: $text_color;
     text-shadow: none;
     a {
       font-size: 11px;
@@ -282,7 +279,6 @@ a.overlay {
     .title {
       line-height: 18px;
       padding-top: 8px;
-      color: $text_color;
       text-shadow: none;
     }
   }
@@ -294,7 +290,6 @@ a.overlay {
     background-image: none;
     text-shadow: none;
     a {
-      color: $text_color;
       text-shadow: none;
     }
     .comment_about {
@@ -305,7 +300,6 @@ a.overlay {
     p {
       line-height: 18px;
       margin: 16px 0 0 0;
-      color: $text_color;
       text-shadow: none;
     }
     h1,
@@ -315,7 +309,6 @@ a.overlay {
       font-weight: bold;
       margin-top: 32px;
       margin-bottom: 12px;
-      color: $text_color;
     }
   }
   .comment.even,
@@ -324,7 +317,6 @@ a.overlay {
   }
   .comment_form {
     a {
-      color: $text_color;
     }
   }
 }
@@ -343,10 +335,8 @@ a.overlay {
       font-size: 16px;
       line-height: 30px;
       padding-top: 8px;
-      color: $text_color;
       a {
         font-weight: 16px;
-        color: $text_color;
       }
     }
   }
@@ -414,7 +404,6 @@ a.overlay {
       display: inline;
       margin-right: 5px;
       margin-left: 15px;
-      color: $text_color;
     }
   }
   #user_links,
@@ -432,7 +421,6 @@ a.overlay {
       line-height: 34px;
       float: left;
       height: 32px;
-      color: $text_color;
       // background: $orange_background;
       a {
         font-size: 14px;
@@ -441,7 +429,6 @@ a.overlay {
         display: block;
         float: left;
         padding: 0 15px;
-        color: $text_color;
         // background-color: $light_gray;
       }
       a:hover {
@@ -511,7 +498,6 @@ a.overlay {
   h2 {
     font-size: 14px;
     margin-bottom: 30px;
-    color: $text_color;
     text-shadow: none;
   }
 }
@@ -523,10 +509,8 @@ a.overlay {
   // overflow: hidden;
   padding: 15px 0;
   p {
-    color: $text_color;
     a,
     a:visited {
-      color: $text_color;
     }
   }
 }
@@ -685,7 +669,6 @@ a.favorited {
   p,
   a,
   a:visited {
-    color: $text_color;
   }
   #iwsw {
     img {
@@ -723,14 +706,12 @@ a.favorited {
       line-height: 20px;
       margin: 0;
       padding-right: 40px;
-      color: $text_color;
       text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
       a {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 3px;
         text-indent: 25px;
-        color: $text_color;
         text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
       }
     }
@@ -740,7 +721,6 @@ a.favorited {
       margin: 0;
       padding: 0;
       padding-bottom: 8px;
-      color: $text_color;
       a {
         font-size: 11px;
         text-decoration: underline;
@@ -753,7 +733,6 @@ a.favorited {
       margin-bottom: 10px;
     }
     a {
-      color: $text_color;
     }
   }
   div.details {
@@ -775,7 +754,6 @@ a.favorited {
       line-height: 16px;
       padding-top: 15px;
       padding-right: 15px;
-      color: $text_color;
     }
   }
 }
@@ -838,7 +816,6 @@ h1 span#channel_name {
       padding-left: 20px;
       list-style: none;
       cursor: pointer;
-      border-color: $text_color;
       border-bottom: 1px solid black;
       &.disabled {
         color: $disabled;
@@ -940,7 +917,6 @@ h2.table {
     a:visited {
       font-size: 12px;
       line-height: 20px;
-      color: $text_color;
     }
     img {
       width: 25px;

@@ -22,7 +22,6 @@
     opacity: 0.3;
   }
   .static_content a {
-    color: $text_color;
   }
 }
 
@@ -33,7 +32,6 @@
   padding-left: 20px;
   height: 1%;
   a {
-    color: $text_color;
     text-decoration: underline;
     font-size: 12px;
     &:hover {
@@ -54,22 +52,18 @@ table.forums, table.topics {
   border-collapse: collapse;
   font-family: "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
   font-size: 12px;
-  color: $text_color;
   p {
-    color: $text_color;
     margin-bottom: 12px;
     margin-top: 8px;
     line-height: 16px;
   }
   a {
-    color: $text_color;
     text-decoration: underline;
     font-size: 12px;
     &:hover {
       color: black;
     }
     &:visited {
-      color: $text_color;
     }
   }
   .edit_forum {
@@ -86,7 +80,6 @@ table.forums, table.topics {
   }
   .title, .entry-title {
     font-size: 18px;
-    color: $text_color;
     display: block;
     text-decoration: underline;
     margin-bottom: 4px;
@@ -355,11 +348,9 @@ table.posts tr.spacer td {
   padding: 15px 20px;
   overflow: none;
   p {
-    color: $text_color;
     font-size: 14px;
     line-height:18px;
     a, a:visited {
-      color: $text_color;
       font-weight: bold;
       font-size: 14px;
       text-decoration: underline;
@@ -511,7 +502,6 @@ div.editbox ul.help {
 }
 
 a#formatting_help_link {
-  color: $text_color;
   font-size: 11px;
   font-weight: normal;
   display: block;
@@ -522,7 +512,6 @@ table#formatting_help {
   margin-top: 20px;
   margin-left: 20px;
   a {
-    color: $text_color;
   }
   tr {
     th,td {

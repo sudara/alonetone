@@ -5,7 +5,6 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  color: $text_color;
   border-bottom: 1px solid $light-gray;
   .button,
   .title {
@@ -101,7 +100,6 @@
       a {
         font-size: 15px;
         text-decoration: none;
-        color: $text_color;
 
         -webkit-font-smoothing: antialiased;
       }
@@ -174,7 +172,6 @@
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: $text_color;
     text-shadow: none;
   }
   #track_details {
@@ -306,7 +303,6 @@ div.track_options {
     border: none;
   }
   p {
-    color: $text_color;
   }
 
 
