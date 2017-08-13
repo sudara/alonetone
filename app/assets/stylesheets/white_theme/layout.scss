@@ -3,6 +3,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   main {
+    width: 100%;
     margin: 30px auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
