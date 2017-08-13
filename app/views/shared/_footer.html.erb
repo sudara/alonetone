@@ -34,7 +34,7 @@
       <div><%= link_to "Stats", "/about/stats"%></div>
       <div><%= link_to "Press / Contact", "/about/press"%></div>
       <% if moderator? %>
-      <div><%= link_to "Toggle Theme", "/toggle_theme" %></div>
+      <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
       <div><%= link_to "Secretz", "/secretz" %></div>
       <% end %>
   </div>
