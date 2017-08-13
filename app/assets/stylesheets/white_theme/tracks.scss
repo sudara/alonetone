@@ -274,7 +274,6 @@ div.track_options {
   .home_page_link {
     text-align: right;
   }
-
   .comment_waiting {
     font-size: 14px;
     font-weight: bold;
@@ -302,9 +301,6 @@ div.track_options {
   .no_border {
     border: none;
   }
-  p {
-  }
-
 
   .comment_track {
     clear: both;
@@ -342,7 +338,17 @@ div.track_options {
   }
 }
 
-
 #single_track .track_links {
   left: -9px;
+}
+.asset.played {
+  opacity: .2;
+}
+
+.asset.playing,
+.asset.hover {
+  opacity: .99;
+  .asset_top {
+    background-color: #EFEFEF;
+  }
 }

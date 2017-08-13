@@ -1,8 +1,9 @@
-
 // layout
 
 $desktop-fixed-width: 90%; // or 1300px, used for width on inner footer and inner header
 $baseline: 27px;
+
+// media 
 
 $mobile: 'only screen and (max-width: 640px)';
 
@@ -13,13 +14,11 @@ $serif-font: 'Harriet Text', serif;
 
 // colors ( how many of these are used? )
 
-$text-color: #000000;
-
 $black: #000000;
 $not-quite-black: #353535;
 $medium-gray: #666666;
 $light-medium-gray: #888888;
-$gray: #999;
+$gray: #999999;
 $silver: #C7C8C7;
 $lightest-gray: #c7c6c3;
 $light-gray: #EEEEEE;
@@ -42,7 +41,6 @@ $disabled: #8C8E86;
 $body-link-hover: #1A1D13;
 $waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
-
 
 @mixin default-button($type:'') {
   @if $type == 'admin' {

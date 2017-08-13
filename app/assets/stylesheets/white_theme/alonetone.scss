@@ -421,7 +421,6 @@ a.overlay {
       line-height: 34px;
       float: left;
       height: 32px;
-      // background: $orange_background;
       a {
         font-size: 14px;
         font-weight: 400;
@@ -429,7 +428,6 @@ a.overlay {
         display: block;
         float: left;
         padding: 0 15px;
-        // background-color: $light_gray;
       }
       a:hover {
         text-decoration: none;
@@ -438,8 +436,6 @@ a.overlay {
     }
     li.contact {
       float: right;
-      // border-right: none;
-      // border-left: 1px solid $text_color;
     }
     li.current {
       font-weight: 500;
@@ -827,23 +823,6 @@ h1 span#channel_name {
   }
 }
 
-
-// Any reason for these not to be in tracks.scss?
-.asset.played {
-  opacity: .2;
-}
-
-.asset.playing,
-.asset.hover {
-  opacity: .99;
-  .asset_top {
-    background-color: #EFEFEF;
-  }
-}
-
-#user_track_plays {
-}
-
 /* STATS */
 
 h2.stats {
@@ -948,15 +927,6 @@ h2.table {
 
 #recaptcha_privacy {
   display: none;
-}
-
-/* ZEBRA STRIPES FOR ASSETS */
-
-.asset:nth-child(odd) {
-  div.button,
-  div.title {
-    // background-color: $box_background_even;
-  }
 }
 
 /* SIGN UP PARAGRAPH ADJUST */
