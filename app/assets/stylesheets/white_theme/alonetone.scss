@@ -29,8 +29,6 @@ div.errorExplanation {
   border-bottom: 1px solid #7E807E;
 }
 
-
-
 .pagination {
   font-family: $header_font;
   position: relative;
@@ -214,7 +212,7 @@ a.overlay {
       float: right;
       margin-top: 15px;
       a {
-        @include default_button();
+        @include default_button("admin");
       }
     }
     h1,
