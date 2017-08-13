@@ -26,7 +26,6 @@ $black: #000000;
 $white: #FFFFFF;
 $medium_gray: #666666;
 $light_medium_gray: #888888;
-
 $silver: #C7C8C7;
 $orange: #DA6D25;
 $orange_background: #E66D29;
@@ -47,8 +46,10 @@ $waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
 
 
-
-@mixin default_button() {
+@mixin default_button($type:"") {
+  @if $type == "admin" {
+    background-color: $orange;
+  }
   font-family: $header_font;
   font-size: 12px;
   font-weight: normal;
@@ -66,4 +67,9 @@ $bright-highlight: rgba(255, 255, 0, .6);
     text-decoration: none;
     border: 1.25px solid $black;
   }
+}
+
+
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+  
 }
