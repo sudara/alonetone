@@ -5,22 +5,21 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+@import 'application/simple_form';
+@import 'application/facebox';
+@import 'application/upload';
+
 @import 'white_theme/sprites';
 @import 'white_theme/variables';
 @import 'white_theme/layout';
+@import 'white_theme/alonetone';
 @import 'white_theme/typography';
 @import 'white_theme/header';
-@import 'white_theme/alonetone';
-@import 'white_theme/forums';
+@import 'white_theme/footer';
 @import 'white_theme/tracks';
 @import 'white_theme/playlists';
 @import 'white_theme/playlist';
 @import 'white_theme/player';
 @import 'white_theme/cover_view';
 @import 'white_theme/post';
-@import 'white_theme/footer';
-
-@import 'application/reset'; // sketchy!
-@import 'application/simple_form';
-@import 'application/facebox';
-@import 'application/upload';
+@import 'white_theme/forums';
