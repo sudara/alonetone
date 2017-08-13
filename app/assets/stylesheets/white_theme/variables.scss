@@ -14,25 +14,28 @@ $serif-font: 'Harriet Text', serif;
 // colors ( how many of these are used? )
 
 $text-color: #000000;
+
+$black: #000000;
+$not-quite-black: #353535;
+$medium-gray: #666666;
+$light-medium-gray: #888888;
+$gray: #999;
+$silver: #C7C8C7;
+$lightest-gray: #c7c6c3;
+$light-gray: #EEEEEE;
+$white: #FFFFFF;
+
+$red: #D3220C;
+$green: #66A410;
+$orange: #DA6D25;
+$orange-background: #E66D29;
+
 $nav-item-color: #C1C9B4;
 $tab-box-silver: #FFFFFF;
 $playlist-box-silver: #FFFFFF;
-$black: #000000;
-$white: #FFFFFF;
-$medium-gray: #666666;
-$light-medium-gray: #888888;
-$silver: #C7C8C7;
-$orange: #DA6D25;
-$orange-background: #E66D29;
 $body-background-color: #FBFBFB;
 $box-background: #FFFFFF;
 $box-background-even: #FFFFFF;
-$red: #D3220C;
-$green: #66A410;
-$not-quite-black: #353535;
-$gray: #999;
-$light-gray: #EEEEEE;
-$lightest-gray: #c7c6c3;
 $not-quite-white: #f9f9f9;
 $not-quite-white-opaque: #f9f9f9; // to mask background
 $disabled: #8C8E86;
@@ -54,7 +57,6 @@ $bright-highlight: rgba(255, 255, 0, .6);
   padding: 0 14px;
   text-align: center;
   text-decoration: none;
-  color: $text-color;
   border: 1.25px solid $light-medium-gray;
   border-radius: 6px;
   &:hover {

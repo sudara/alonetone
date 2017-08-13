@@ -2,7 +2,6 @@ body {
   font-size: 14px;
   font-family: $sans-font;
   line-height: 1em;
-  color: $text-color;
   text-rendering: optimizeLegibility;
 }
 
@@ -10,7 +9,6 @@ a,
 a:visited {
   line-height: 16px;
   text-decoration: none;
-  color: $text-color;
   &:hover {
     text-decoration: underline;
     background-color: transparent;
@@ -29,12 +27,10 @@ h1 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 25px;
-  color: $text-color;
   &.user,
   &.static,
   &.notice {
     margin: 0;
-    color: $text-color;
   }
 }
 
@@ -54,7 +50,6 @@ h2.box {
   height: 42px;
   margin-bottom: 1px;
   padding-left: 7px;
-  color: $text-color;
   background-color: $box-background;
 }
 
@@ -79,7 +74,6 @@ main h2.box_title a {
   font-size: 20px;
   line-height: 20px;
   margin: 0 0 0 0;
-  color: $text-color;
 }
 
 .box,
@@ -89,13 +83,11 @@ main h2.box_title a {
 .notice, {
   a,
   a:visited {
-    color: $text_color;
     &:hover {
       color: #191A13;
     }
   }
   p {
-    color: $text_color;
     img {
       max-width: 550px;
     }
@@ -154,7 +146,6 @@ span.note {
 .notice h2 {
   font-size: 20px;
   font-weight: bold;
-  color: $text_color;
 }
 
 div.flash {
@@ -421,7 +412,6 @@ a.button {
     float: right;
     height: 30px;
     text-indent: 30px;
-    color: $text_color;
     background: image-url('icons/new.png') no-repeat left center;
   }
   &.sort {
