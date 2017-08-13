@@ -66,9 +66,9 @@ header#site_header {
       }
       .user_dropdown_menu {
         position: absolute;
-        z-index: 2;
         top: -90px;
         margin-top: 40px;
+        width: 100%;
         a {
           font-family: $header_font;
           font-size: 14px;
