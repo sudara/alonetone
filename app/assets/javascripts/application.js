@@ -5,7 +5,7 @@
 //= require jquery-carousel
 //= require jquery-lowpro
 //= require facebox
-//= require local_time
+//= require local-time
 //= require highlight
 //= require upload
 //= require turbolinks
