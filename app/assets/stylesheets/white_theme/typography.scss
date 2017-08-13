@@ -9,6 +9,7 @@ a,
 a:visited {
   line-height: 16px;
   text-decoration: none;
+  color: inherit;
   &:hover {
     text-decoration: underline;
     background-color: transparent;
@@ -41,18 +42,6 @@ h2 {
   margin-bottom: 1em;
 }
 
-h2.box {
-  font-weight: bold;
-  line-height: 45px;
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  height: 42px;
-  margin-bottom: 1px;
-  padding-left: 7px;
-  background-color: $box-background;
-}
-
 h2.box.small {
   font-size: 16px;
   line-height: 25px;
@@ -69,6 +58,14 @@ h3.box.static {
   text-indent: 25px;
 }
 
+.static_content h3,
+.panel h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+
 h2.box_title,
 main h2.box_title a {
   font-size: 20px;
@@ -76,11 +73,64 @@ main h2.box_title a {
   margin: 0 0 0 0;
 }
 
+span.orange {
+  color: $orange;
+}
+
+// for example the sort url and add url on edit playlists
+a.hidden {
+  display: none;
+}
+
+.fieldWithErrors input,
+.fieldWithErrors textarea {
+  border: $orange 2px solid;
+}
+
+small {
+  font-size: 11px;
+}
+
+textarea.private {
+  border: 1px solid black;
+  border-color: $red;
+}
+
+span.private {
+  font-size: 11px!important;
+  display: block;
+  margin-top: -2px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: $red;
+  img {
+    margin-bottom: -3px;
+  }
+}
+
+span.hint,
+main a.hint,
+main a.hint:visited {
+  font-size: 12px;
+  color: $orange;
+}
+
+blockquote {
+  width: 80%;
+  margin-bottom: 15px;
+  margin-left: 0;
+  padding: 1px 10px;
+  border: 1px solid;
+  border-left: 3px solid;
+  background: $box_background_even;
+}
+
+
 .box,
 .comment,
 .user_report .body,
 .update .body,
-.notice, {
+.notice {
   a,
   a:visited {
     &:hover {
@@ -123,13 +173,6 @@ span.note {
   font-size: 11px;
 }
 
-#user-index #static_header h1.static {
-  // padding-left: 27px;
-  background-image: image-url('icons/user.png');
-  background-repeat: no-repeat;
-  background-position: -4px -3px;
-}
-
 .sprites-latest-uploaded {
   display: none;
 }
@@ -139,313 +182,3 @@ span.note {
 }
 
 
-
-a.view_all {
-  border: 0;
-  @include default_button();
-  &:hover {
-    border: 0;
-  }
-}
-
-
-
-a.edit_green,
-a.delete_green {
-  display: block;
-  float: right;
-  height: 32px;
-  margin-left: 10px;
-}
-
-a.edit_green {
-  width: 73px;
-  background: transparent image-url('icons/edit_green.png') no-repeat 0 0;
-  &:hover {
-    background-position: -73px 0;
-  }
-  &:active {
-    background-position: -146px 0;
-  }
-}
-
-a.delete_green {
-  width: 97px;
-  background: transparent image-url('icons/delete_green.png') no-repeat 0 0;
-  &:hover {
-    background-position: -97px 0;
-  }
-  &:active {
-    background-position: -194px 0;
-  }
-}
-
-span.orange {
-  color: $orange;
-}
-
-// for example the sort url and add url on edit playlists
-a.hidden {
-  display: none;
-}
-
-.fieldWithErrors input,
-.fieldWithErrors textarea {
-  border: $orange 2px solid;
-}
-
-small {
-  font-size: 11px;
-}
-
-textarea.private {
-  border: 1px solid black;
-  border-color: $red;
-}
-
-span.private {
-  font-size: 11px!important;
-  display: block;
-  margin-top: -2px;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  color: $red;
-  img {
-    margin-bottom: -3px;
-  }
-}
-
-// icon links (add/delete/etc)
-
-a.track_about_link {
-  float: right;
-  margin-left: 4px;
-  @include default_button();
-}
-
-a.edit {
-  display: block;
-  float: left;
-  width: 31px;
-  height: 20px;
-  text-indent: -1000px;
-  background: image-url('icons/edit.png') no-repeat left center;
-  &.right {
-    position: relative;
-    top: 0;
-    float: right;
-    margin-top: -37px;
-    margin-right: 25px;
-  }
-}
-
-a.edit_profile {
-  display: block;
-  float: right;
-
-  @include default_button();
-  > div {
-    display: none;
-  }
-}
-
-a.follow {
-  font-size: 10px;
-  line-height: 20px;
-  top: 1px;
-  display: block;
-  float: right;
-  width: 48px;
-  height: 48px;
-  margin-right: 2px;
-  text-align: center;
-  text-decoration: none;
-  color: $black;
-  border: 1px solid $black;
-  border-radius: 5px;
-  > .sprites-pencil-big {
-    display: none;
-    margin: 0 auto;
-    margin-top: 9px;
-  }
-  > .sprites-heart-with-plus {
-    margin: 0 auto;
-    margin-top: 5px;
-  }
-  > .sprites-heart-broken {
-    margin: 0 auto;
-    margin-top: 6px;
-  }
-}
-
-a.edit_profile {
-  right: 2px;
-  &.admin {
-    right: 50px;
-  }
-}
-
-.button_wrapper {
-  float: right;
-  height: 32px;
-  margin-left: 20px;
-}
-
-/* PLAYLIST BUTTONS */
-
-#create_new_playlist {
-  @include default_button();
-}
-
-#change_playlist_order {
-  @include default_button();
-  img {
-    display: none;
-  }
-}
-
-/* FORUM BUTTONS */
-
-#create_new_topic {
-  display: block;
-  float: right;
-  width: 164px;
-  height: 32px;
-  margin-top: -40px;
-  background: transparent image-url('icons/create_new_topic.png') no-repeat 0 0;
-  &:hover {
-    background-position: -164px;
-  }
-  &:active {
-    background-position: -328px;
-  }
-}
-
-#create_new_forum {
-  display: block;
-  width: 174px;
-  height: 32px;
-  margin-top: -15px;
-  background: transparent image-url('icons/create_new_forum.png') no-repeat 0 0;
-  &:hover {
-    background-position: -174px;
-  }
-  &:active {
-    background-position: -348px;
-  }
-}
-
-a.button {
-  &.unspam,
-  &.spam,
-  &.delete_comment {
-    position: absolute;
-    top: 0;
-    right: 1px;
-    width: 48px;
-    height: 48px;
-    &:hover {
-      background-position: -48px 0;
-    }
-    &:active {
-      background-position: -96px 0;
-    }
-  }
-  &.unspam {
-    right: 50px;
-    background: transparent image-url('icons/spam.png') no-repeat 0 0;
-  }
-  &.spam {
-    right: 50px;
-    background: transparent image-url('icons/spam.png') no-repeat 0 0;
-  }
-  &.delete_comment {
-    background: transparent image-url('icons/delete_comment.png') no-repeat 0 0;
-  }
-  &.add,
-  &.new,
-  &.sort {
-    font-weight: bold;
-    line-height: 33px;
-    display: block;
-    float: right;
-    height: 30px;
-    text-indent: 30px;
-    background: image-url('icons/new.png') no-repeat left center;
-  }
-  &.sort {
-    background: image-url('icons/latest.png') no-repeat left center;
-  }
-  &.delete,
-  &.remove {
-    font-size: 10px;
-    font-weight: normal;
-    line-height: 35px;
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    display: block;
-    height: 30px;
-    padding-top: 8px;
-    background: image-url('icons/delete.png') no-repeat center top;
-  }
-}
-
-.asset div.button a.remove,
-.asset.hover div.button a.remove,
-a.button.remove {
-  width: 30px;
-  height: 30px;
-  background: image-url('icons/remove.png') no-repeat center top;
-}
-
-#footer {
-  a {
-    text-decoration: underline;
-  }
-}
-
-.static_content h3,
-.panel h3 {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 3px;
-}
-
-span.hint,
-main a.hint,
-main a.hint:visited {
-  font-size: 12px;
-  color: $orange;
-}
-
-blockquote {
-  width: 80%;
-  margin-bottom: 15px;
-  margin-left: 0;
-  padding: 1px 10px;
-  border: 1px solid;
-  border-color: $box_background;
-  border-left: 3px solid;
-  background: $box_background_even;
-}
-
-/* PRESS LOGOS */
-
-div.logo {
-  font-size: 10px;
-  font-weight: normal;
-  line-height: 12px;
-  float: left;
-  width: 133px;
-  margin-top: 43px;
-  text-align: center;
-  a,
-  a:visited {
-    font-size: 11px;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-}

@@ -1,3 +1,90 @@
+/* FORUM BUTTONS */
+
+#create_new_topic {
+  display: block;
+  float: right;
+  width: 164px;
+  height: 32px;
+  margin-top: -40px;
+  background: transparent image-url('icons/create_new_topic.png') no-repeat 0 0;
+  &:hover {
+    background-position: -164px;
+  }
+  &:active {
+    background-position: -328px;
+  }
+}
+
+#create_new_forum {
+  display: block;
+  width: 174px;
+  height: 32px;
+  margin-top: -15px;
+  background: transparent image-url('icons/create_new_forum.png') no-repeat 0 0;
+  &:hover {
+    background-position: -174px;
+  }
+  &:active {
+    background-position: -348px;
+  }
+}
+
+a.button {
+  &.unspam,
+  &.spam,
+  &.delete_comment {
+    position: absolute;
+    top: 0;
+    right: 1px;
+    width: 48px;
+    height: 48px;
+    &:hover {
+      background-position: -48px 0;
+    }
+    &:active {
+      background-position: -96px 0;
+    }
+  }
+  &.unspam {
+    right: 50px;
+    background: transparent image-url('icons/spam.png') no-repeat 0 0;
+  }
+  &.spam {
+    right: 50px;
+    background: transparent image-url('icons/spam.png') no-repeat 0 0;
+  }
+  &.delete_comment {
+    background: transparent image-url('icons/delete_comment.png') no-repeat 0 0;
+  }
+  &.add,
+  &.new,
+  &.sort {
+    font-weight: bold;
+    line-height: 33px;
+    display: block;
+    float: right;
+    height: 30px;
+    text-indent: 30px;
+    background: image-url('icons/new.png') no-repeat left center;
+  }
+  &.sort {
+    background: image-url('icons/latest.png') no-repeat left center;
+  }
+  &.delete,
+  &.remove {
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 35px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    display: block;
+    height: 30px;
+    padding-top: 8px;
+    background: image-url('icons/delete.png') no-repeat center top;
+  }
+}
+
 .content, .content p {
   small a, small a:visited {
     font-size: 11px;
@@ -150,10 +237,10 @@ table.forums, table.topics {
   tbody {
     tr {
       &.even {
-        background-color: $box_background_even;
+        // background-color: $box_background_even;
       }
       &.odd {
-        background-color: $box_background;
+        // background-color: $box_background;
       }
       td.c1 {
         border-right: 0;
@@ -256,7 +343,7 @@ table.posts tr.spacer td {
 
 .post .author {
   border-top: 2px solid #eeeeee;
-  background-color: $box_background;
+  // background-color: $box_background;
   border-color: $body_background_color;
   padding: 15px 10px 10px 10px;
   color: #333333;

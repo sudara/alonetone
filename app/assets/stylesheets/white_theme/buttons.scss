@@ -1,0 +1,111 @@
+a.delete_green {
+  display: block;
+  float: right;
+  height: 32px;
+  margin-left: 10px;
+
+  width: 97px;
+  background: transparent image-url('icons/delete_green.png') no-repeat 0 0;
+  &:hover {
+    background-position: -97px 0;
+  }
+  &:active {
+    background-position: -194px 0;
+  }
+}
+
+a.track_about_link {
+  float: right;
+  margin-left: 4px;
+  @include default_button();
+}
+
+a.edit {
+  display: block;
+  float: left;
+  width: 31px;
+  height: 20px;
+  text-indent: -1000px;
+  background: image-url('icons/edit.png') no-repeat left center;
+  &.right {
+    position: relative;
+    top: 0;
+    float: right;
+    margin-top: -37px;
+    margin-right: 25px;
+  }
+}
+
+a.edit_profile {
+  display: block;
+  float: right;
+
+  @include default_button();
+  > div {
+    display: none;
+  }
+}
+
+a.follow {
+  font-size: 10px;
+  line-height: 20px;
+  top: 1px;
+  display: block;
+  float: right;
+  width: 48px;
+  height: 48px;
+  margin-right: 2px;
+  text-align: center;
+  text-decoration: none;
+  color: $black;
+  border: 1px solid $black;
+  border-radius: 5px;
+  > .sprites-pencil-big {
+    display: none;
+    margin: 0 auto;
+    margin-top: 9px;
+  }
+  > .sprites-heart-with-plus {
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+  > .sprites-heart-broken {
+    margin: 0 auto;
+    margin-top: 6px;
+  }
+}
+
+a.edit_profile {
+  right: 2px;
+  &.admin {
+    right: 50px;
+  }
+}
+
+.button_wrapper {
+  float: right;
+  height: 32px;
+  margin-left: 20px;
+}
+
+/* PLAYLIST BUTTONS */
+
+#create_new_playlist {
+  @include default_button();
+}
+
+#change_playlist_order {
+  @include default_button();
+  img {
+    display: none;
+  }
+}
+
+.asset div.button a.remove,
+.asset.hover div.button a.remove,
+a.button.remove {
+  width: 30px;
+  height: 30px;
+  background: image-url('icons/remove.png') no-repeat center top;
+}
+

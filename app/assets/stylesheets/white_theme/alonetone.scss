@@ -4,10 +4,23 @@ body {
 
 /* STACKED ASSETS */
 
+h2.box {
+  font-weight: bold;
+  line-height: 45px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  margin-bottom: 1px;
+  padding-left: 7px;
+  background-color: $box-background-color;
+}
+
 .box {
   display: flex;
   flex-direction: column;
   background-color: $white;
+
   justify-content: space-between;
 }
 
@@ -16,7 +29,15 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: right;
-  background-color: $white;
+  background-color: $box-background-color;
+}
+
+a.view_all {
+  @include default_button();
+  border: 0;
+  &:hover {
+    border: 0;
+  }
 }
 
 /* NOTIFICATIONS */
@@ -185,7 +206,7 @@ body {
   width: 100%;
   height: 40px;
   margin-top: 10px;
-  background-color: $box_background;
+  background-color: $box-background-color;
   .listen_user {
     float: left;
     margin-right: 10px;
@@ -198,9 +219,9 @@ body {
     font-size: 10px;
     line-height: 10px;
     float: left;
-    min-height: 25px;
     overflow: hidden;
     height: 40px;
+    min-height: 25px;
     div {
       margin-bottom: -1px;
     }
