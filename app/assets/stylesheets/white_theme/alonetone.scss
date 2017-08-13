@@ -2,15 +2,16 @@ body {
   background-color: $body-background-color;
 }
 
-div.box {
+/* STACKED ASSETS */
+
+.box {
   display: flex;
   flex-direction: column;
   background-color: $white;
-
   justify-content: space-between;
 }
 
-div.footer_box {
+.footer_box {
   margin-bottom: 30px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -18,13 +19,57 @@ div.footer_box {
   background-color: $white;
 }
 
-div.notice,
-div.errorExplanation {
+/* NOTIFICATIONS */
+
+.notice,
+.errorExplanation {
   margin-bottom: 20px;
   padding: 20px 30px;
   border-top: 1px solid #6F6F6F;
   border-bottom: 1px solid #7E807E;
 }
+
+.errorExplanation p,
+.notice h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.notice a.hide_notice {
+  font-size: 12px;
+  font-weight: bold;
+  float: right;
+  margin-top: -31px;
+  margin-right: 0;
+  color: $orange;
+}
+
+.notice li {
+  margin-bottom: 5px;
+}
+
+.notice ol {
+  margin-top: 8px!important;
+}
+
+.flash {
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  z-index: 3;
+  padding: 15px 0;
+  text-align: center;
+  color: $white;
+  background-color: $orange_background;
+  .flash_stats {
+    font-size: 14px;
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* PAGINATION */
 
 .pagination {
   position: relative;
@@ -81,266 +126,59 @@ div.errorExplanation {
   }
 }
 
-a.overlay {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 137px;
-  height: 137px;
-  opacity: .8;
-  background-size: 100%;
-}
-
+/* USER LISTS */
 
 #user_index,
 #user_search_results {
   position: relative;
-  div.user {
+  #large_users_grid {
     position: relative;
-    float: left;
-    width: 150px;
-    margin-right: 25px;
-    margin-bottom: 30px;
-    img.cover {
-      width: 125px;
-      height: 125px;
-      margin-top: 4px;
-      margin-left: 6px;
-    }
-    .name {
-      font-size: 13px;
-      font-weight: 500;
-      display: block;
-      overflow: none;
-      width: 115px;
-      height: 20px;
-      margin-top: 8px;
-      margin-left: 10px;
-      text-align: center;
-      text-decoration: none;
-      background-color: transparent;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    .twitter {
-      position: absolute;
-      right: -5px;
-      bottom: 0;
-      width: 32px;
-      height: 32px;
-      background: transparent image-url('icons/tweetzorz.png') no-repeat top left;
-    }
-  }
-}
-
-#large_users_grid {
-  position: relative;
-  width: 101%;
-  margin-top: 60px;
-  margin-right: 0;
-  margin-left: 20px;
-  padding-right: 0;
-}
-
-// comments ( maybe this can get its own file??)
-
-.comment {
-  position: relative;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid $light_gray;
-  &:last-child {
-    border-bottom: 0;
-  }
-  div.private_comment {
-    position: absolute;
-    z-index: 4;
-    top: 51px;
-    left: -4px;
-    width: 25px;
-    height: 25px;
-    background: image-url('icons/private.png') no-repeat top left;
-  }
-  .comment_user {
-    a.alonetoner,
-    img {
+    width: 101%;
+    margin-top: 60px;
+    margin-right: 0;
+    margin-left: 20px;
+    padding-right: 0;
+    div.user {
+      position: relative;
       float: left;
-      width: 50px;
-      margin-top: 1px;
-      margin-right: 10px;
-    }
-  }
-  .comment_user_text {
-    font-size: 12px;
-    font-weight: normal;
-    margin-left: 72px;
-    padding-top: 10px;
-    a,
-    a:visited {
-      font-size: 12px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-  }
-  .comment_body,
-  .body {
-    margin-bottom: 1px;
-    margin-left: 72px;
-    padding: 0 20px 30px 0;
-    p {
-      line-height: 18px;
-      margin: 16px 0 0 0;
-      margin-top: 13px;
-    }
-    .comment_controls {
-      font-weight: normal;
-      float: right;
-      margin-top: 15px;
-      a {
-        @include default_button("admin");
+      width: 150px;
+      margin-right: 25px;
+      margin-bottom: 30px;
+      img.cover {
+        width: 125px;
+        height: 125px;
+        margin-top: 4px;
+        margin-left: 6px;
       }
-    }
-    h1,
-    h2,
-    h3 {
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 32px;
-      margin-bottom: 12px;
-    }
-  }
-}
-
-.comment_form {
-  overflow: hidden;
-  .comment_as {
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 25px;
-    height: 25px;
-    margin-bottom: 5px;
-    img {
-      float: left;
-      margin-right: 5px;
-    }
-  }
-  .public,
-  .private {
-    font-weight: normal;
-  }
-  textarea {
-    height: 60px;
-    margin-bottom: 5px;
-    padding: 5px;
-    width: 100%;
-    // outline: none;
-    &:focus {
-      // outline: none;
-    }
-  }
-}
-
-.private_check_box {
-  float: left;
-  clear: both;
-  margin-top: 2px;
-}
-
-// give the posts some breathing room
-
-.update {
-  margin-bottom: 50px;
-  .update_title_bar {
-    position: relative;
-    height: 50px;
-    margin-bottom: 1px;
-    background: image-url('backgrounds/comment_even.png') repeat-x top left;
-    background-color: $box_background;
-    a.alonetoner,
-    img {
-      float: left;
-      margin-top: 1px;
-      margin-right: 10px;
-    }
-  }
-  .comment_user_text,
-  .about_details {
-    font-size: 11px;
-    line-height: 10px;
-    padding: 0;
-    text-shadow: none;
-    a {
-      font-size: 11px;
-    }
-    .comment_about,
-    .title {
-      line-height: 18px;
-      padding-top: 8px;
-      text-shadow: none;
-    }
-  }
-  .body,
-  .comment {
-    margin-bottom: 3px;
-    padding: 10px 20px 10px 20px;
-    background-color: $box_background;
-    background-image: none;
-    text-shadow: none;
-    a {
-      text-shadow: none;
-    }
-    .comment_about {
-      a {
-        font-weight: bold;
+      .name {
+        font-size: 13px;
+        font-weight: 500;
+        display: block;
+        overflow: none;
+        width: 115px;
+        height: 20px;
+        margin-top: 8px;
+        margin-left: 10px;
+        text-align: center;
+        text-decoration: none;
+        background-color: transparent;
+        &:hover {
+          text-decoration: underline;
+        }
       }
-    }
-    p {
-      line-height: 18px;
-      margin: 16px 0 0 0;
-      text-shadow: none;
-    }
-    h1,
-    h2,
-    h3 {
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 32px;
-      margin-bottom: 12px;
-    }
-  }
-  .comment.even,
-  .body.even {
-    background-color: $box_background_even;
-  }
-  .comment_form {
-    a {
-    }
-  }
-}
-
-.comment_header {
-  a {
-    font-size: 16px;
-    line-height: 40px;
-    margin-left: -10px;
-  }
-}
-
-.user_report .comment_user {
-  .title {
-    span.box_title {
-      font-size: 16px;
-      line-height: 30px;
-      padding-top: 8px;
-      a {
-        font-weight: 16px;
+      .twitter {
+        position: absolute;
+        right: -5px;
+        bottom: 0;
+        width: 32px;
+        height: 32px;
+        background: transparent image-url('icons/tweetzorz.png') no-repeat top left;
       }
     }
   }
 }
+
+/* LISTENS */
 
 .listen {
   position: relative;
@@ -373,173 +211,7 @@ a.overlay {
   }
 }
 
-// user layout & static header (with nav)
-#user_header,
-#static_header {
-  font-weight: 500;
-  position: relative;
-  width: 100%;
-  height: 83px;
-  margin-bottom: 40px;
-  #alonetoner {
-    position: absolute;
-    display: block;
-    float: left;
-    width: 83px;
-    height: 83px;
-    img {
-      width: 83px;
-      height: 83px;
-    }
-  }
-  .user_title,
-  .title {
-    position: relative;
-    height: 50px;
-    margin-bottom: 1px;
-    margin-left: 84px;
-    h1 {
-      font-size: 24px;
-      line-height: 55px;
-      display: inline;
-      margin-right: 5px;
-      margin-left: 15px;
-    }
-  }
-  #user_links,
-  #links {
-    line-height: 18px;
-    height: 32px;
-    margin-left: 84px;
-  }
-  ul.user_links,
-  ul.links {
-    height: 32px;
-    margin-bottom: 2px;
-    border-bottom: 1px solid $light_gray;
-    li {
-      line-height: 34px;
-      float: left;
-      height: 32px;
-      a {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 34px;
-        display: block;
-        float: left;
-        padding: 0 15px;
-      }
-      a:hover {
-        text-decoration: none;
-        background: $light_gray;
-      }
-    }
-    li.contact {
-      float: right;
-    }
-    li.current {
-      font-weight: 500;
-      padding: 0 15px;
-    }
-    div.pagination {
-      height: 32px;
-    }
-  }
-}
-
-// static headers are like the user header, but without pics
-#static_header {
-  .title,
-  #links {
-    margin-left: 0;
-  }
-  .links li,
-  .links li a {
-    font-size: 14px;
-  }
-  .pagination {
-    float: left;
-    width: 100%;
-    height: 32px;
-    margin-top: 1px;
-    text-align: center;
-    background-color: #EEEEEE;
-  }
-}
-
-
-/* UPLOADING */
-
-.uploader {
-  form {
-    #filefields {
-      li {
-        list-style: none;
-      }
-    }
-  }
-  .uploading {
-    font-size: 18px;
-    font-weight: bold;
-    width: 100%;
-    height: 100px;
-    text-align: center;
-  }
-}
-
-/* SIGN UP */
-
-#what-you-get {
-  background-color: #F3F3F3;
-  h2 {
-    font-size: 14px;
-    margin-bottom: 30px;
-    text-shadow: none;
-  }
-}
-
-/* STATIC CONTENT */
-
-.static_content {
-  line-height: 18px;
-  // overflow: hidden;
-  padding: 15px 0;
-  p {
-    a,
-    a:visited {
-    }
-  }
-}
-
-.static_content_youtube {
-  padding: 0!important;
-  background: none;
-}
-
-.sidebar {
-  float: right;
-  ul {
-    list-style: none;
-    li {
-      font-size: 12px;
-      font-weight: normal;
-      line-height: 14px;
-      margin: 0 0 13px 3px;
-      list-style: none;
-      list-style-position: outside;
-      a,
-      a:visited {
-        font-size: 12px;
-        font-weight: normal;
-        line-height: 14px;
-      }
-    }
-  }
-}
-
-#alonetoner_big {
-  margin-bottom: 40px;
-}
+/* LISTENERS */
 
 #follows,
 #mostly_listens_to,
@@ -579,15 +251,6 @@ a.overlay {
   }
 }
 
-div.small_spinner {
-  float: right;
-  width: 20px;
-  height: 20px;
-  margin-top: 5px;
-  margin-top: 5px;
-  background: image-url('icons/small_spinner.gif') no-repeat center center;
-}
-
 /* FAVORITES */
 
 a.add_to_favorites,
@@ -615,347 +278,5 @@ a.favorited {
     &:hover {
       @include retina-sprite(heart-broken);
     }
-  }
-}
-
-/* MISC */
-
-#user_home {
-  position: relative;
-  min-height: 40px;
-}
-
-.additional_options {
-  float: right;
-  height: 35px;
-  margin-top: 4px;
-}
-
-.additional_options_solo {
-  position: relative;
-  height: 35px;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-.visit_us {
-  h1 {
-    font-size: 24px;
-  }
-  .chunk {
-    float: left;
-    width: 270px;
-    padding-top: 20px;
-    text-align: center;
-    a {
-      img {
-        margin-bottom: 5px;
-      }
-    }
-  }
-}
-
-#map {
-  width: 890px;
-  height: 600px;
-  margin-top: -40px;
-  margin-left: -20px;
-  background: transparent image-url('facebox/loading.gif') no-repeat center center;
-  background-color: $playlist_box_silver;
-  p,
-  a,
-  a:visited {
-  }
-  #iwsw {
-    img {
-      float: left;
-      padding-right: 10px;
-      padding-bottom: 10px;
-    }
-  }
-}
-
-// needed for IE7 not to fuck up the animation
-#pic_upload {
-  font-size: 12px;
-  height: 50px;
-  margin-bottom: 10px;
-  padding-top: 0;
-  padding-bottom: 30px;
-  padding-left: 0;
-  border-bottom: 2px solid #CCCCCC;
-}
-
-.feature {
-  width: 420px;
-  margin-bottom: 30px;
-  div.box {
-    min-height: 30px;
-    margin-bottom: 1px;
-    padding-top: 9px;
-    padding-left: 25px;
-    background-color: #E1E2E1;
-    h2,
-    h1 {
-      font-size: 20px;
-      font-weight: normal;
-      line-height: 20px;
-      margin: 0;
-      padding-right: 40px;
-      text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
-      a {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 3px;
-        text-indent: 25px;
-        text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
-      }
-    }
-    h3 {
-      font-size: 12px;
-      font-weight: normal;
-      margin: 0;
-      padding: 0;
-      padding-bottom: 8px;
-      a {
-        font-size: 11px;
-        text-decoration: underline;
-      }
-    }
-  }
-  .static_content {
-    h3 {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    a {
-    }
-  }
-  div.details {
-    position: relative;
-    display: block;
-    background-color: $playlist_box_silver;
-    div.pic {
-      float: left;
-      width: 135px;
-      height: 125px;
-      margin-right: 10px;
-    }
-    div.link {
-      clear: both;
-      height: 22px;
-    }
-    div.feature_teaser {
-      font-size: 14px;
-      line-height: 16px;
-      padding-top: 15px;
-      padding-right: 15px;
-    }
-  }
-}
-
-.feature_stats {
-  margin: 0;
-  padding: 0;
-  .static_content {
-    margin: 0;
-    padding: 0;
-    .pic {
-      float: left;
-      width: 200px;
-      height: 200px;
-      padding-right: 10px;
-    }
-    .stats {
-      font-size: 12px;
-      line-height: 18px;
-      padding-top: 25px;
-      padding-right: 10px;
-      a {
-        font-size: 12px;
-        line-height: 18px;
-      }
-    }
-  }
-}
-
-.indented_comments {
-  margin-left: 50px;
-}
-
-h1 span#channel_name {
-  color: $orange;
-}
-
-#radio_controls {
-  min-height: 320px;
-  margin: 0;
-  padding: 0;
-  form {
-    margin: 0;
-    padding: 0;
-  }
-  ul {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    list-style-position: inside;
-    li.radio_channel {
-      font-size: 20px;
-      line-height: 40px;
-      display: block;
-      float: left;
-      width: 400px;
-      height: 40px;
-      margin: 0;
-      padding: 0;
-      padding-left: 20px;
-      list-style: none;
-      cursor: pointer;
-      border-bottom: 1px solid black;
-      &.disabled {
-        color: $disabled;
-      }
-      input {
-        margin-right: 8px;
-      }
-    }
-  }
-}
-
-/* STATS */
-
-h2.stats {
-  margin-top: 1.5em;
-  margin-bottom: .5em;
-  text-indent: 45px;
-}
-
-#total_playsDiv {
-  width: 800px;
-  margin: auto;
-  text-align: left;
-  background-color: $silver;
-}
-
-.static_content#stats,
-.static_content.stats {
-  width: 800px;
-  margin: 0 auto;
-  padding: 0;
-}
-
-.secretz {
-  margin: 0;
-  padding: 0;
-}
-h2.table {
-  margin-bottom: .3em;
-  padding-top: 2em;
-}
-#statstable,
-.statstable {
-  width: 100%;
-  thead tr {
-    height: 25px;
-    border-bottom: 3px solid #37392B;
-    th {
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 25px;
-      padding-right: 10px;
-      padding-left: 15px;
-      text-align: left;
-      background: #C7C8C7;
-      &.headerSortDown {
-        background: #C7C8C7 image-url('icons/small_sort_down.png') no-repeat 3px 8px;
-      }
-      &.headerSortUp {
-        background: #C7C8C7 image-url('icons/small_sort_up.png') no-repeat 3px 8px;
-      }
-    }
-  }
-  tbody {
-    overflow-y: scroll;
-    height: 350px;
-  }
-  tr {
-    width: 100%;
-  }
-  tr td {
-    font-size: 12px;
-    line-height: 20px;
-    height: 20px;
-    padding-left: 15px;
-    background-color: $box_background;
-    &.uploader {
-      min-width: 200px;
-    }
-    a,
-    a:hover,
-    a:visited {
-      font-size: 12px;
-      line-height: 20px;
-    }
-    img {
-      width: 25px;
-    }
-  }
-  tr:nth-child(odd) td {
-    background-color: $box_background_even;
-  }
-}
-
-.highlight {
-  background-color: yellow;
-}
-
-.static_content.big_stats {
-  font-size: 14px;
-  line-height: 1.5em;
-  strong {
-    font-size: 18px;
-  }
-}
-
-.feed_icon_in_box {
-  position: absolute;
-  z-index: 10;
-  top: -30px;
-  right: 18px;
-}
-
-#recaptcha_privacy {
-  display: none;
-}
-
-/* SIGN UP PARAGRAPH ADJUST */
-
-#login p {
-  font-size: 10px;
-  margin-top: 20px;
-}
-
-.listen_user img {
-  vertical-align: top;
-}
-
-.listen_details a {
-  line-height: 14px;
-}
-
-/* SUDO BAR */
-
-.sudo_bar {
-  font-size: 12px;
-  line-height: 25px;
-  height: 25px;
-  padding-left: 55px;
-  text-align: left;
-  color: #FFFFFF;
-  background-color: red;
-  a {
-    text-decoration: underline;
-    color: white;
   }
 }

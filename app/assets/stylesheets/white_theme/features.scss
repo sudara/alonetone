@@ -1,0 +1,90 @@
+.feature {
+  width: 420px;
+  margin-bottom: 30px;
+  div.box {
+    min-height: 30px;
+    margin-bottom: 1px;
+    padding-top: 9px;
+    padding-left: 25px;
+    background-color: #E1E2E1;
+    h2,
+    h1 {
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 20px;
+      margin: 0;
+      padding-right: 40px;
+      text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
+      a {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 3px;
+        text-indent: 25px;
+        text-shadow: rgba(255, 249, 208, .43) 2px 2px 1px;
+      }
+    }
+    h3 {
+      font-size: 12px;
+      font-weight: normal;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 8px;
+      a {
+        font-size: 11px;
+        text-decoration: underline;
+      }
+    }
+  }
+  .static_content {
+    h3 {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+  div.details {
+    position: relative;
+    display: block;
+    background-color: $playlist_box_silver;
+    div.pic {
+      float: left;
+      width: 135px;
+      height: 125px;
+      margin-right: 10px;
+    }
+    div.link {
+      clear: both;
+      height: 22px;
+    }
+    div.feature_teaser {
+      font-size: 14px;
+      line-height: 16px;
+      padding-top: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+.feature_stats {
+  margin: 0;
+  padding: 0;
+  .static_content {
+    margin: 0;
+    padding: 0;
+    .pic {
+      float: left;
+      width: 200px;
+      height: 200px;
+      padding-right: 10px;
+    }
+    .stats {
+      font-size: 12px;
+      line-height: 18px;
+      padding-top: 25px;
+      padding-right: 10px;
+      a {
+        font-size: 12px;
+        line-height: 18px;
+      }
+    }
+  }
+}
