@@ -29,7 +29,8 @@ body {
       > div {
         width: 45%;
         min-width: 320px;
-        @media only screen and (max-width: 640px) {
+        max-width: 450px;
+        @media #{$mobile} {
           width: 100%;
         }
       }
