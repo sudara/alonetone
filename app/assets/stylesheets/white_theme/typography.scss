@@ -138,32 +138,7 @@ span.note {
   display: none;
 }
 
-.errorExplanation h2 {
-  // display: none;
-}
 
-.errorExplanation p,
-.notice h2 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-div.flash {
-  font-size: 18px;
-  font-weight: bold;
-  position: relative;
-  z-index: 3;
-  padding: 15px 0;
-  text-align: center;
-  color: $white;
-  background-color: $orange_background;
-  div.flash_stats {
-    font-size: 14px;
-    a {
-      text-decoration: underline;
-    }
-  }
-}
 
 a.view_all {
   border: 0;
@@ -173,22 +148,6 @@ a.view_all {
   }
 }
 
-div.notice a.hide_notice {
-  font-size: 12px;
-  font-weight: bold;
-  float: right;
-  margin-top: -31px;
-  margin-right: 0;
-  color: $orange;
-}
-
-div.notice li {
-  margin-bottom: 5px;
-}
-
-div.notice ol {
-  margin-top: 8px!important;
-}
 
 
 a.edit_green,
