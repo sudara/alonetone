@@ -8,14 +8,12 @@ $mobile: 'only screen and (max-width: 640px)';
 
 // fonts
 
-$sans-font: 'Alright Sans', sans-serif;
-$bold-serif-font: "Alright Sans Bold", sans-serif;
-$serif-font: "Harriet Text", serif;
+$sans-font: 'Alright Sans', sans-serif; // "Alright Sans Bold" exists for font-weight: bold or <strong>
+$serif-font: 'Harriet Text', serif;
 
 // colors ( how many of these are used? )
 
 $text-color: #000000;
-$text-color2: #000000;
 $nav-item-color: #C1C9B4;
 $tab-box-silver: #FFFFFF;
 $playlist-box-silver: #FFFFFF;
@@ -43,8 +41,8 @@ $waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
 
 
-@mixin default-button($type:"") {
-  @if $type == "admin" {
+@mixin default-button($type:'') {
+  @if $type == 'admin' {
     background-color: $orange;
   }
   font-family: $sans-font;

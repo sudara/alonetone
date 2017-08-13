@@ -50,7 +50,6 @@
 }
 
 .playlists_home_title {
-  font-family: $sans_font;
   margin-top: 7px;
   margin-bottom: 0;
   a {
@@ -58,7 +57,6 @@
   }
 }
 .playlists_home_user  a {
-  font-family: $sans_font;
   font-size: 12px;
   color: $black;
 }
@@ -119,7 +117,6 @@ li.small_playlists {
   margin-right: 50px;
   margin-bottom: 100px;
   a.small_playlist_title {
-    font-family: $sans_font;
     font-size: 13px;
     position: absolute;
     top: 140px;
@@ -217,12 +214,10 @@ img.cover_200 {
     position: relative;
     margin-bottom: 1px;
     padding: 10px 20px 10px 20px;
-    color: $text_color2;
     background-color: $orange_background;
     a {
       font-weight: bold;
       text-decoration: underline;
-      color: $text_color2;
     }
   }
 }

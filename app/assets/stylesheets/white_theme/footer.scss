@@ -1,5 +1,4 @@
 footer#site_footer {
-  font-family: $sans_font;
   font-size: 13px;
   font-weight: normal;
   line-height: 20px;
@@ -15,18 +14,18 @@ footer#site_footer {
   }
   .footer_inner {
     display: flex;
-    flex-wrap: wrap;
     width: $desktop_fixed_width;
     margin-right: auto;
     margin-left: auto;
+
+    flex-wrap: wrap;
     justify-content: space-between;
     .footer_column {
-      padding-top: 20px;      
       width: 23%;
       min-width: 150px;
+      padding-top: 20px;
     }
     .footer_column_header {
-      font-family: $sans_font;
       font-size: 14px;
       font-weight: bold;
       margin-bottom: 5px;
