@@ -7,20 +7,10 @@ body {
 
 a,
 a:visited {
-  line-height: 16px;
   text-decoration: none;
   color: inherit;
   &:hover {
     text-decoration: underline;
-    background-color: transparent;
-  }
-}
-
-img a,
-img a:visited {
-  color: transparent;
-  &:hover {
-    color: none;
   }
 }
 
@@ -65,7 +55,6 @@ h3.box.static {
   margin-bottom: 3px;
 }
 
-
 h2.box_title,
 main h2.box_title a {
   font-size: 20px;
@@ -80,11 +69,6 @@ span.orange {
 // for example the sort url and add url on edit playlists
 a.hidden {
   display: none;
-}
-
-.fieldWithErrors input,
-.fieldWithErrors textarea {
-  border: $orange 2px solid;
 }
 
 small {
@@ -125,60 +109,64 @@ blockquote {
   background: $box_background_even;
 }
 
-
-.box,
-.comment,
-.user_report .body,
-.update .body,
-.notice {
-  a,
-  a:visited {
-    &:hover {
-      color: #191A13;
-    }
-  }
-  p {
-    img {
-      max-width: 550px;
-    }
-  }
-  ol li {
-    list-style-position: inside;
-    list-style-type: decimal;
-  }
-}
-
-.user_report .body,
-.update .body,
-.notice,
-.static_content,
-.comment_body {
-  font-size: 13px;
-  a,
-  a:visited {
-    font-weight: bold;
-  }
-  ul {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    li {
-      line-height: 18px;
-      margin-left: 20px;
-      list-style: square inside none;
-    }
-  }
-}
-
 span.note {
   font-size: 11px;
 }
 
-.sprites-latest-uploaded {
-  display: none;
-}
 
-.sprites-stars {
-  display: none;
-}
+// img a,
+// img a:visited {
+//   color: transparent;
+//   &:hover {
+//     color: none;
+//   }
+// }
 
 
+// .fieldWithErrors input,
+// .fieldWithErrors textarea {
+//   border: $orange 2px solid;
+// }
+
+// .box,
+// .comment,
+// .user_report .body,
+// .update .body,
+// .notice {
+//   a,
+//   a:visited {
+//     &:hover {
+//       color: #191A13;
+//     }
+//   }
+//   p {
+//     img {
+//       max-width: 550px;
+//     }
+//   }
+//   ol li {
+//     list-style-position: inside;
+//     list-style-type: decimal;
+//   }
+// }
+// 
+// .user_report .body,
+// .update .body,
+// .notice,
+// .static_content,
+// .comment_body {
+//   font-size: 13px;
+//   a,
+//   a:visited {
+//     font-weight: bold;
+//   }
+//   ul {
+//     margin-top: 10px;
+//     margin-bottom: 20px;
+//     li {
+//       line-height: 18px;
+//       margin-left: 20px;
+//       list-style: square inside none;
+//     }
+//   }
+// }
