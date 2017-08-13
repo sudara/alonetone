@@ -43,15 +43,8 @@ $sprite-map: sprite-map('sprites/*.png', $new-position: 100%, $spacing: 10px, $l
   @extend .sprites-play_hover;
 }
 
-
-.sprites-before-heading {
+.sprites-before-heading, .sprites-after-heading {
   display: none;
-  float: left;
-}
-
-.sprites-after-heading {
-  display: none;
-  float: right;
 }
 
 .sprites-horizontal-arrow {
