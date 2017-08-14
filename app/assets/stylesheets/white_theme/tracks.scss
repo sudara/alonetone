@@ -86,12 +86,10 @@
         }
         div.time {
           font-size: 12px;
-          font-weight: normal;
           position: absolute;
           right: 15px;
           bottom: 10px;
           display: block;
-          text-align: right;
           text-align: right;
           color: #8C8C8C;
         }
@@ -258,7 +256,6 @@ div.track_options {
       }
       .stats {
         font-size: 10px;
-        font-weight: normal;
         line-height: 14px;
       }
     }
@@ -277,7 +274,6 @@ div.track_options {
     position: absolute;
     bottom: 10px;
     left: 19px;
-    text-align: center;
     text-align: center;
     color: $orange;
     background-color: $tab_box_silver;
@@ -306,6 +302,7 @@ div.track_options {
       box-sizing: border-box;
       max-width: 100%;
       margin-top: 10px;
+      margin-bottom: 15px;
     }
     input.comment_submit {
       @include default_button();
