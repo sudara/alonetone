@@ -86,7 +86,7 @@ header#site_header {
     position: relative;
     float: right;
     margin-right: 4%;
-    padding-top: 2px;
+    padding-top: 8px;
     #search_form {
       display: block;
       float: left;
@@ -96,7 +96,6 @@ header#site_header {
         width: 140px;
         @media only screen and (max-width: 640px) {
           width: 110px;
-          // padding-right: 2px;
         }
         height: 19px;
         padding: 3px 12px 2px 12px;
@@ -113,7 +112,7 @@ header#site_header {
       float: left;
       width: 18px;
       height: 18px;
-      margin-top: 10px;
+      margin-top: 6px;
       margin-left: 12px;
       img {
         width: 18px;
