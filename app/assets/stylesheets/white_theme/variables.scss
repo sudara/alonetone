@@ -25,42 +25,40 @@ $medium-gray: #666666;
 $light-medium-gray: #888888;
 $gray: #999999;
 $silver: #C7C8C7;
-$lightest-gray: #c7c6c3;
+$lightest-gray: #C7C6C3;
 $light-gray: #EEEEEE;
 $white: #FFFFFF;
-
 $red: #D3220C;
 $green: #66A410;
 $orange: #DA6D25;
 $orange-background: #E66D29;
-
 $nav-item-color: #C1C9B4;
 $tab-box-silver: #FFFFFF;
 $playlist-box-silver: #FFFFFF;
-
 $box-background-even: #FFFFFF;
-$not-quite-white: #f9f9f9;
-$not-quite-white-opaque: #f9f9f9; // to mask background
+$not-quite-white: #F9F9F9;
+$not-quite-white-opaque: #F9F9F9; // to mask background
 $disabled: #8C8E86;
 $body-link-hover: #1A1D13;
-$waveform-playing: #302f2f;
+$waveform-playing: #302F2F;
 $bright-highlight: rgba(255, 255, 0, .6);
 
-@mixin default-button($type:'') {
-  @if $type == 'admin' {
-    background-color: $orange;
-  }
+@mixin default-button($type: '') {
   font-family: $sans-font;
   font-size: 12px;
   font-weight: normal;
-  line-height: 27px;
+  line-height: 24px;
   display: inline-block;
+  box-sizing: border-box;
   height: 23px;
   padding: 0 14px;
   text-align: center;
   text-decoration: none;
   border: 1.25px solid $light-medium-gray;
   border-radius: 6px;
+  @if $type == 'admin' {
+    background-color: $orange;
+  }
   &:hover {
     transition: border-color .1s ease-in-out;
     text-decoration: none;

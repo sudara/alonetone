@@ -308,9 +308,9 @@ div.track_options {
       margin-top: 10px;
     }
     input.comment_submit {
-      background-color: transparent;
-
       @include default_button();
+      float: right;
+      background-color: transparent;
     }
   }
   
