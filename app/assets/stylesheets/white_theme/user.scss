@@ -23,13 +23,14 @@ main {
         margin-top: 6px;
       }
     }
+
     a.edit_profile {
-      display: block;
 
       @include default_button('admin');
       > div {
         display: none;
       }
+      display: block;
     }
   }
   #user_home {
@@ -37,6 +38,7 @@ main {
     width: $desktop-fixed-width;
     margin: 0 auto;
     grid-template-columns: 45% 45%;
+    max-width: 1100px;
     justify-content: space-between;
     grid-template-areas: 'playlists playlists'
     'latest favorites'
@@ -67,6 +69,9 @@ main {
     }
     > * {
       min-width: 320px;
+    }
+    .additional_options {
+      margin-bottom: 15px;
     }
     .user_playlists {
       ul {
