@@ -16,7 +16,7 @@
 <div id="user_home">
     <div id="user_playlists_area">
       <% if authorized? %>
-  	    <div class="additional_options">
+  	    <div class="user_playlists_buttons">
   			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
   			      create new playlist
   			    <% end %>

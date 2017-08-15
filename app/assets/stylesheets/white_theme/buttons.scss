@@ -14,12 +14,6 @@ a.delete_green {
   }
 }
 
-a.track_about_link {
-  float: right;
-  margin-left: 4px;
-  @include default_button();
-}
-
 a.edit {
   display: block;
   float: left;
@@ -37,28 +31,6 @@ a.edit {
 }
 
 
-
-
-
-// .button_wrapper {
-//   float: right;
-//   height: 32px;
-//   margin-left: 20px;
-// }
-
-/* PLAYLIST BUTTONS */
-
-#create_new_playlist {
-  @include default_button("admin");
-}
-
-#change_playlist_order {
-  @include default_button("admin");
-  img {
-    display: none;
-  }
-}
-
 .asset div.button a.remove,
 .asset.hover div.button a.remove,
 a.button.remove {
@@ -66,4 +38,3 @@ a.button.remove {
   height: 30px;
   background: image-url('icons/remove.png') no-repeat center top;
 }
-
