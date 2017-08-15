@@ -1,0 +1,96 @@
+main {
+  #user_header {
+    width: $desktop-fixed-width;
+    margin: 0 auto 30px auto;
+    display: flex;
+    a {
+      display: block;
+    }
+    a.follow {
+      font-size: 10px;
+      line-height: 20px;
+      display: block;
+      width: 48px;
+      height: 48px;
+      text-align: center;
+      border-radius: 5px;
+      > .sprites-heart-with-plus {
+        margin: 0 auto;
+        margin-top: 5px;
+      }
+      > .sprites-heart-broken {
+        margin: 0 auto;
+        margin-top: 6px;
+      }
+    }
+    a.edit_profile {
+      display: block;
+
+      @include default_button('admin');
+      > div {
+        display: none;
+      }
+    }
+  }
+  #user_home {
+    display: grid;
+    width: $desktop-fixed-width;
+    margin: 0 auto;
+    grid-template-columns: 45% 45%;
+    justify-content: space-between;
+    grid-template-areas: 'playlists playlists'
+    'latest favorites'
+    'listens comments'
+    'card card'
+    'plays .....';
+    #user_playlists_area {
+      grid-area: playlists;
+      margin-bottom: 40px;
+    }
+    #user_latest_area {
+      grid-area: latest;
+    }
+    #user_favorites_area {
+      grid-area: favorites;
+    }
+    #user_listens_area {
+      grid-area: listens;
+    }
+    #user_comments_area {
+      grid-area: comments;
+    }
+    #user_card_area {
+      grid-area: card;
+    }
+    #user_plays_area {
+      grid-area: plays;
+    }
+    > * {
+      min-width: 320px;
+    }
+    .user_playlists {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        li {
+          position: relative;
+          width: 146px;
+          height: 172px;
+          background-color: transparent;
+          a.small_playlist_title {
+            font-size: 13px;
+            position: absolute;
+            top: 140px;
+            left: 0;
+            width: 146px;
+            text-align: center;
+          }
+        }
+      }
+    }
+    .user_card_area {
+      background-color: $box-background-color;
+    }
+  }
+}

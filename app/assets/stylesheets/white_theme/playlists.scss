@@ -1,131 +1,54 @@
-  ul.playlists_row {
-    font-size: 11px;
-    display: flex;
-    margin-bottom: 40px;
-    justify-content: space-between;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    @media only screen and (max-width: 640px) and (min-width: 420px) {
-      li {
-        display: none;
-        &:nth-child(1), &:nth-child(2), &:nth-child(3) {
-          display: block;
-        } 
-      }
-    }
-    @media only screen and (max-width: 420px) {
-      li {
-        display: none;
-        &:nth-child(3) {
-          display: none;
-        }
-        &:nth-child(1), &:nth-child(2) {
-          display: block;
-        } 
-      }
-    }
-
-    li {
-      position: relative;
-      width: 178px;
-      text-align: center;
-      a.overlay {
-        margin-left: 20px;
-        opacity: 1;
-      }
-      img {
-        width: 125px;
-        height: 125px;
-        margin-top: 4px;
-        margin-left: -1px;
-      }
-    }
-}
-
-.latest-playlists-header {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.playlists_home_title {
-  margin-top: 7px;
-  margin-bottom: 0;
-  a {
-    font-size: 13px;
-  }
-}
-.playlists_home_user  a {
-  font-size: 12px;
-  color: $black;
-}
-
 
 
 // carousel
-a.next,
-a.prev {
-  display: block;
-  width: 42px;
-  height: 42px;
-  text-indent: -9999px;
-  background-color: transparent;
-  &:hover img {
-    background-color: $body_link_hover;
-  }
-  &.disabled {
-    opacity: .1;
-    &:hover img {
-      background-color: transparent;
-    }
-  }
-}
+//a.next,
+//a.prev {
+//  display: block;
+//  width: 42px;
+//  height: 42px;
+//  text-indent: -9999px;
+//  background-color: transparent;
+//  &:hover img {
+//    background-color: $body_link_hover;
+//  }
+//  &.disabled {
+//    opacity: .1;
+//    &:hover img {
+//      background-color: transparent;
+//    }
+//  }
+//}
 
 
 
 
-#playlists_carousel {
-  position: relative;
-  overflow: hidden;
-  .prev {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    background-image: image-url('icons/prev.png');
-  }
-  .next {
-    position: absolute;
-    top: 45px;
-    right: 0;
-    background-image: image-url('icons/next.png');
-  }
-}
+// #playlists_carousel {
+  // position: relative;
+  // overflow: hidden;
+  // .prev {
+    // position: absolute;
+    // top: 45px;
+    // left: 0;
+    // background-image: image-url('icons/prev.png');
+  // }
+  // .next {
+    // position: absolute;
+    // top: 45px;
+    // right: 0;
+    // background-image: image-url('icons/next.png');
+  // }
+// }
 
-.playlists_carousel {
-  overflow: hidden;
-  width: 800px;
-  height: 190px;
-  margin: 0 70px;
-}
+// .playlists_carousel {
+  // overflow: hidden;
+  // width: 800px;
+  // height: 190px;
+  // margin: 0 70px;
+// }
+// 
 
-li.small_playlists {
-  position: relative;
-  float: left;
-  width: 146px;
-  height: 172px;
-  margin-right: 50px;
-  margin-bottom: 100px;
-  a.small_playlist_title {
-    font-size: 13px;
-    position: absolute;
-    top: 140px;
-    left: 0;
-    width: 146px;
-    text-align: center;
-    color: $black;
-  }
-}
+
+
 
 .mini_cover {
   position: absolute;
@@ -134,36 +57,36 @@ li.small_playlists {
   height: 54px;
 }
 
-a.jewel_case_125 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 146px;
-  height: 136px;
-  text-indent: -9999px;
-  background-color: transparent;
-}
-
+// a.jewel_case_125 {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 146px;
+//   height: 136px;
+//   text-indent: -9999px;
+//   background-color: transparent;
+// }
+// 
 img.cover_125 {
   width: 125px;
   height: 125px;
   margin-top: 4px;
   margin-left: 6px;
 }
-
-a.jewel_case_200 {
-  position: absolute;
-  top: 10px;
-  left: 15px;
-  display: block;
-  width: 200;
-  height: 200;
-}
-
-img.cover_200 {
-  margin-top: 7px;
-  margin-left: 23px;
-}
+// 
+// a.jewel_case_200 {
+//   position: absolute;
+//   top: 10px;
+//   left: 15px;
+//   display: block;
+//   width: 200;
+//   height: 200;
+// }
+// 
+// img.cover_200 {
+//   margin-top: 7px;
+//   margin-left: 23px;
+// }
 
 .playlist {
   div.box {

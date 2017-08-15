@@ -1,55 +1,64 @@
 <div id="user_header">
   <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar', :alt => "#{@user.name}"), profile_path(@user), :class => 'image', :id=>'alonetoner', :title => "#{@user.name}'s profile - all about #{@user.name}") %>
 
-  <div class="user_title">
-    <h1 class="user"><%= @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+  <h1 class="user"><%= @user.name %></h1>
+  <div class="user_location"><%= user_location(@user) %></div>
 
-    <%= follow_toggle(@user) %>
+  <%= follow_toggle(@user) %>
 
-    <% if authorized? %>
-      <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
-        <div class="sprites-pencil-big"></div>
-        edit
-      <% end %>
+  <% if authorized? %>
+    <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
+      edit
     <% end %>
-  </div>
+  <% end %>
 </div>
 
 <div id="user_home">
-    <% if authorized? %>
-	    <div class="additional_options">
-		    <div class="button_wrapper">
-			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
-			      create new playlist <div class="sprites-wider-green-plus sprites-before-heading"></div>
-			    <% end %>
-		    </div>
-        <% if @user.playlists.only_public.size > 2 %>
-		      <div class="button_wrapper">
-		          <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
-		      </div>
-		    <% end %>
-		  </div>
-	  <% end %>
+    <div id="user_playlists_area">
+      <% if authorized? %>
+  	    <div class="additional_options">
+  			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
+  			      create new playlist
+  			    <% end %>
+          <% if @user.playlists.only_public.size > 2 %>
+  		          <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
+  		    <% end %>
+  		  </div>
+  	  <% end %>
 
-	<% if @user.has_public_playlists? %>
-		<h2 id="user_latest_playlists">Latest Playlists by <%= @user.name %></h2>
-    <ul class="playlists">
-      <%= render partial: 'shared/playlist_white' %>
-    </ul>
-	<% end %>
+  		<div class="user_playlists">
+      <% if @user.has_public_playlists? %>
+        <h2 id="user_latest_playlists">Playlists</h2>
+        <ul>
+          <%= render partial: 'shared/playlist_white' %>
+        </ul>
+    	<% end %>
+      </div>
+    </div>
 
 
-  <%= render :partial => 'latest' if @assets.size > 0 %>
-  <%= render :partial => 'favorites' if @favorites.present? %>
-  <%= render :partial => 'listens' unless @listens.empty? %>
+  <div id="user_latest_area">
+    <%= render :partial => 'latest' if @assets.size > 0 %>
+  </div>
+  <div id="user_favorites_area">
+    <%= render :partial => 'favorites' if @favorites.present? %>
+  </div>
+  <div id="user_listens_area">
+    <%= render :partial => 'listens' unless @listens.empty? %>
+  </div>
+  <div id="user_plays_area">
   <%# image_tag @user.track_plays_graph if authorized? %>
 	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+  </div>
+
 
   <%= render :partial => 'popular' if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
-  <%= render :partial => 'shared/comments' if @comments.present? %>
+  <div id="user_comments_area">
+    <%= render :partial => 'shared/comments' if @comments.present? %>
+  </div>
 
 
-  <div class="user_card">
+  <div class="user_card_area">
 
     <%= image_tag(@user.avatar(:original)) %>
 
