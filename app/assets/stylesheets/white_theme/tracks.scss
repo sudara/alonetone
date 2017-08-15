@@ -160,6 +160,136 @@
       }
     }
   }
+  .tracks_reveal {
+    margin-top: 10px;
+    .tracks_reveal_top {
+      display: flex;
+      .alonetoner {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        a {
+          overflow: hidden;
+          width: 50px;
+          height: 50px;
+        }
+        a img {
+          width: 50px;
+          height: 50px;
+          border: 1px solid #9FA28D;
+          &.no_border {
+            border: none;
+          }
+        }
+      }
+      .description {
+        font-size: 14px;
+        line-height: 17px;
+        padding-top: 5px;
+        margin-right: 60px;
+        .user_description {
+          font-family: $serif-font;
+          p {
+            margin-bottom: 1em;
+          }
+        }
+        p img {
+          max-width: 290px;
+        }
+        p {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        .description_more p  a {
+          font-size: 12px!important;
+          font-weight: bold!important;
+          margin-bottom: 1em;
+          text-decoration: none!important;
+        }
+        .stats {
+          font-size: 10px;
+          line-height: 14px;
+        }
+      }
+    }
+    .tabbed_input {
+      width: 360px;
+      height: 20px;
+      margin-left: 10px;
+    }
+    .home_page_link {
+      text-align: right;
+    }
+    .comment_waiting {
+      font-size: 14px;
+      font-weight: bold;
+      position: absolute;
+      bottom: 10px;
+      left: 19px;
+      text-align: center;
+      color: $orange;
+      background-color: $tab_box_silver;
+      div.ajax_success,
+      div.ajax_fail {
+        line-height: 30px;
+        height: 30px;
+        text-indent: 35px;
+        background: transparent image-url('icons/ok.png') no-repeat top left;
+      }
+      div.ajax_success {
+        color: $green;
+      }
+      div.ajax_fail {
+        background: transparent image-url('icons/not_ok.png') no-repeat top left;
+      }
+    }
+    .no_border {
+      border: none;
+    }
+
+    .comment_track {
+      clear: both;
+      margin-top: 20px;
+      textarea {
+        box-sizing: border-box;
+        max-width: 100%;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+      input.comment_submit {
+        @include default_button();
+        float: right;
+        background-color: transparent;
+      }
+    }
+    
+    .admin {
+      font-size: 10px;
+      line-height: 12px;
+      padding-top: 20px;
+      color: #666666;
+    }
+    .show_to_admin {
+      display: none;
+      float: none;
+      clear: both;
+    }
+    .show_to_admin_or_owner {
+      display: none;
+    }
+    .track_links {
+      float: right;
+      margin-top: 15px;
+      margin-bottom: 30px;
+      a {
+        float: right;
+        margin-left: 4px;
+        @include default_button();
+      }
+    }
+  }
+  
+
 }
 
 #single_track {
@@ -209,134 +339,7 @@ div.track_options {
   margin-bottom: 3px;
 }
 
-.tracks_reveal {
-  margin-top: 10px;
-  .tracks_reveal_top {
-    display: flex;
-    .alonetoner {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
-      a {
-        overflow: hidden;
-        width: 50px;
-        height: 50px;
-      }
-      a img {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #9FA28D;
-        &.no_border {
-          border: none;
-        }
-      }
-    }
-    .description {
-      font-size: 14px;
-      line-height: 17px;
-      padding-top: 5px;
-      margin-right: 60px;
-      .user_description {
-        font-family: $serif-font;
-        p {
-          margin-bottom: 1em;
-        }
-      }
-      p img {
-        max-width: 290px;
-      }
-      p {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-      .description_more p  a {
-        font-size: 12px!important;
-        font-weight: bold!important;
-        margin-bottom: 1em;
-        text-decoration: none!important;
-      }
-      .stats {
-        font-size: 10px;
-        line-height: 14px;
-      }
-    }
-  }
-  .tabbed_input {
-    width: 360px;
-    height: 20px;
-    margin-left: 10px;
-  }
-  .home_page_link {
-    text-align: right;
-  }
-  .comment_waiting {
-    font-size: 14px;
-    font-weight: bold;
-    position: absolute;
-    bottom: 10px;
-    left: 19px;
-    text-align: center;
-    color: $orange;
-    background-color: $tab_box_silver;
-    div.ajax_success,
-    div.ajax_fail {
-      line-height: 30px;
-      height: 30px;
-      text-indent: 35px;
-      background: transparent image-url('icons/ok.png') no-repeat top left;
-    }
-    div.ajax_success {
-      color: $green;
-    }
-    div.ajax_fail {
-      background: transparent image-url('icons/not_ok.png') no-repeat top left;
-    }
-  }
-  .no_border {
-    border: none;
-  }
 
-  .comment_track {
-    clear: both;
-    margin-top: 20px;
-    textarea {
-      box-sizing: border-box;
-      max-width: 100%;
-      margin-top: 10px;
-      margin-bottom: 15px;
-    }
-    input.comment_submit {
-      @include default_button();
-      float: right;
-      background-color: transparent;
-    }
-  }
-  
-  .admin {
-    font-size: 10px;
-    line-height: 12px;
-    padding-top: 20px;
-    color: #666666;
-  }
-  .show_to_admin {
-    display: none;
-    float: none;
-    clear: both;
-  }
-  .show_to_admin_or_owner {
-    display: none;
-  }
-  .track_links {
-    float: right;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    a.track_about_link {
-      float: right;
-      margin-left: 4px;
-      @include default_button();
-    }
-  }
-}
 
 #single_track .track_links {
   left: -9px;

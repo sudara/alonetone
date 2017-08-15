@@ -46,16 +46,14 @@
     <%= render :partial => 'listens' unless @listens.empty? %>
   </div>
   <div id="user_plays_area">
-  <%# image_tag @user.track_plays_graph if authorized? %>
-	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+    <%# image_tag @user.track_plays_graph if authorized? %>
+  	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
   </div>
-
 
   <%= render :partial => 'popular' if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
   <div id="user_comments_area">
     <%= render :partial => 'shared/comments' if @comments.present? %>
   </div>
-
 
   <div id="user_card_area">
 
@@ -71,7 +69,7 @@
 
     <p>
   	<%= website_for(@user).html_safe if @user.website.present? %>
-  </p>
+    </p>
 
     <p>
     Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%>
