@@ -38,9 +38,14 @@ a.edit {
 
 a.edit_profile {
   display: block;
+  right: 2px;
+  &.admin {
+    right: 50px;
+  }
+
   float: right;
 
-  @include default_button();
+  @include default_button("admin");
   > div {
     display: none;
   }
@@ -75,12 +80,6 @@ a.follow {
   }
 }
 
-a.edit_profile {
-  right: 2px;
-  &.admin {
-    right: 50px;
-  }
-}
 
 .button_wrapper {
   float: right;
@@ -91,11 +90,11 @@ a.edit_profile {
 /* PLAYLIST BUTTONS */
 
 #create_new_playlist {
-  @include default_button();
+  @include default_button("admin");
 }
 
 #change_playlist_order {
-  @include default_button();
+  @include default_button("admin");
   img {
     display: none;
   }
