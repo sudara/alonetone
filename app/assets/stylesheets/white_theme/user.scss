@@ -40,11 +40,12 @@ main {
     grid-template-columns: 45% 45%;
     max-width: 1100px;
     justify-content: space-between;
-    grid-template-areas: 'playlists playlists'
-    'latest favorites'
-    'listens comments'
-    'card card'
-    'plays .....';
+    grid-template-areas:
+       'playlists playlists'
+       'latest favorites'
+       'listens comments'
+       'card card'
+       'plays .....';
     #user_playlists_area {
       grid-area: playlists;
       margin-bottom: 40px;
@@ -94,7 +95,7 @@ main {
         }
       }
     }
-    .user_card_area {
+    #user_card_area {
       background-color: $box-background-color;
     }
   }
