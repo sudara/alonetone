@@ -48,5 +48,44 @@
   <%= render :partial => 'popular' if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
   <%= render :partial => 'shared/comments' if @comments.present? %>
 
+
+  <div class="user_card">
+
+    <%= image_tag(@user.avatar(:original)) %>
+
+  	<p>
+	    <% if @user.try(:bio) %>
+	        <%= markdown(@user.bio) %>
+	    <% else %>
+	        <%= @user.name %> doesn't have anything to say, unfortunately...
+      <% end %>
+  	</p>
+
+    <p>
+  	<%= website_for(@user).html_safe if @user.website.present? %>
+  </p>
+
+    <p>
+    Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%>
+    </p>
+
+    <% if @user.listens_count > 0 %>
+      <p>
+		  People have listened to <%= @user.name %>'s <strong><%= pluralize @user.assets_count, 'track' %></strong> about <strong><%= @user.listens_count %> </strong>times, about <strong>~<%= @user.bandwidth_used %>GB</strong> of transfer.
+      </p>
+		<% end %>
+
+    <p>
+      <%= @user.name%> joined alonetone on <strong><%= @user.created_at.to_date.to_s :long %></strong>
+    </p>
+
+    <% if moderator? %>
+    <p>
+      Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.listens.first&.country) %><br/>
+      <small>User Agent: <%= @user.browser %></small>
+    </p>
+    <% end %>
+
+  </div>
 </div>
 
