@@ -2,7 +2,7 @@
   .post-content,
   .edit-post-content,
   .track-credits {
-    // width: 550px;
+    max-width: 650px;
     padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
     padding-bottom: $baseline;
     position: relative;
