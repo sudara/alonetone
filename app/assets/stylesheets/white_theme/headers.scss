@@ -1,25 +1,16 @@
-// user layout & static header (with nav)
-
 #static_header {
-  font-weight: 500;
-  position: relative;
   width: 100%;
   height: 83px;
   margin-bottom: 40px;
-  #alonetoner {
-    position: absolute;
-    display: block;
+  .pagination {
     float: left;
-    width: 83px;
-    height: 83px;
-    img {
-      width: 83px;
-      height: 83px;
-    }
+    width: 100%;
+    height: 32px;
+    margin-top: 1px;
+    text-align: center;
+    background-color: #EEEEEE;
   }
-  .user_title,
   .title {
-    position: relative;
     height: 50px;
     margin-bottom: 1px;
     margin-left: 84px;
@@ -31,63 +22,41 @@
       margin-left: 15px;
     }
   }
-  #user_links,
   #links {
     line-height: 18px;
     height: 32px;
     margin-left: 84px;
-  }
-  ul.user_links,
-  ul.links {
-    height: 32px;
-    margin-bottom: 2px;
-    border-bottom: 1px solid $light_gray;
-    li {
-      line-height: 34px;
-      float: left;
+    ul.links {
       height: 32px;
-      a {
-        font-size: 14px;
-        font-weight: 400;
+      margin-bottom: 2px;
+      border-bottom: 1px solid $light_gray;
+      li {
         line-height: 34px;
-        display: block;
         float: left;
+        height: 32px;
+        a {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 34px;
+          display: block;
+          float: left;
+          padding: 0 15px;
+        }
+        a:hover {
+          text-decoration: none;
+          background: $light_gray;
+        }
+      }
+      li.contact {
+        float: right;
+      }
+      li.current {
+        font-weight: 500;
         padding: 0 15px;
       }
-      a:hover {
-        text-decoration: none;
-        background: $light_gray;
+      div.pagination {
+        height: 32px;
       }
     }
-    li.contact {
-      float: right;
-    }
-    li.current {
-      font-weight: 500;
-      padding: 0 15px;
-    }
-    div.pagination {
-      height: 32px;
-    }
-  }
-}
-
-// static headers are like the user header, but without pics
-#static_header {
-  .title,
-  #links {
-    margin-left: 0;
-  }
-  .links li,
-  .links li a {
-    font-size: 14px;
-  }
-  .pagination {
-    float: left;
-    width: 100%;
-    height: 32px;
-    margin-top: 1px;
-    text-align: center;
-    background-color: #EEEEEE;
   }
 }
