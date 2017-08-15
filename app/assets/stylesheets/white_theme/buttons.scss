@@ -36,56 +36,15 @@ a.edit {
   }
 }
 
-a.edit_profile {
-  display: block;
-  right: 2px;
-  &.admin {
-    right: 50px;
-  }
-
-  float: right;
-
-  @include default_button("admin");
-  > div {
-    display: none;
-  }
-}
-
-a.follow {
-  font-size: 10px;
-  line-height: 20px;
-  top: 1px;
-  display: block;
-  float: right;
-  width: 48px;
-  height: 48px;
-  margin-right: 2px;
-  text-align: center;
-  text-decoration: none;
-  color: $black;
-  border: 1px solid $black;
-  border-radius: 5px;
-  > .sprites-pencil-big {
-    display: none;
-    margin: 0 auto;
-    margin-top: 9px;
-  }
-  > .sprites-heart-with-plus {
-    margin: 0 auto;
-    margin-top: 5px;
-  }
-  > .sprites-heart-broken {
-    margin: 0 auto;
-    margin-top: 6px;
-  }
-}
 
 
-.button_wrapper {
-  float: right;
-  height: 32px;
-  margin-left: 20px;
-}
+
+
+// .button_wrapper {
+//   float: right;
+//   height: 32px;
+//   margin-left: 20px;
+// }
 
 /* PLAYLIST BUTTONS */
 
