@@ -1,0 +1,52 @@
+<div id="user_header">
+  <%= link_to(image_tag(@user.avatar(:large), :class => 'small_avatar', :alt => "#{@user.name}"), profile_path(@user), :class => 'image', :id=>'alonetoner', :title => "#{@user.name}'s profile - all about #{@user.name}") %>
+
+  <div class="user_title">
+    <h1 class="user"><%= @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+
+    <%= follow_toggle(@user) %>
+
+    <% if authorized? %>
+      <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
+        <div class="sprites-pencil-big"></div>
+        edit
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div id="user_home">
+    <% if authorized? %>
+	    <div class="additional_options">
+		    <div class="button_wrapper">
+			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
+			      create new playlist <div class="sprites-wider-green-plus sprites-before-heading"></div>
+			    <% end %>
+		    </div>
+        <% if @user.playlists.only_public.size > 2 %>
+		      <div class="button_wrapper">
+		          <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
+		      </div>
+		    <% end %>
+		  </div>
+	  <% end %>
+
+	<% if @user.has_public_playlists? %>
+		<h2 id="user_latest_playlists">Latest Playlists by <%= @user.name %></h2>
+    <ul class="playlists">
+      <%= render partial: 'shared/playlist_white' %>
+    </ul>
+	<% end %>
+
+
+  <%= render :partial => 'latest' if @assets.size > 0 %>
+  <%= render :partial => 'favorites' if @favorites.present? %>
+  <%= render :partial => 'listens' unless @listens.empty? %>
+  <%# image_tag @user.track_plays_graph if authorized? %>
+	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+
+  <%= render :partial => 'popular' if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
+  <%= render :partial => 'shared/comments' if @comments.present? %>
+
+</div>
+

@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  
+
   before_action :ip_is_acceptable?, :only => :create
   before_action :find_user, :except => [:new, :create, :index, :activate, :sudo, :toggle_favorite]
   before_action :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
-  
+
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
@@ -18,20 +18,21 @@ class UsersController < ApplicationController
       format.html do
         prepare_meta_tags
         gather_user_goodies
+        render 'show_white' if white_theme_enabled?
       end
       format.xml { @assets = @user.assets.published.recent.limit(params[:limit] || 10) }
       format.rss { @assets = @user.assets.published.recent }
-      format.js do  render :update do |page| 
+      format.js do  render :update do |page|
           page.replace 'user_latest', :partial => "latest"
         end
       end
     end
   end
-  
+
   def stats
     @tracks = @user.assets.published
     respond_to do |format|
-      format.html 
+      format.html
       format.xml
     end
   end
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
     flash.now[:error] = "Join alonetone to upload and create playlists (it is quick: about 45 seconds)" if params[:new]
   end
 
-  def create    
+  def create
     passed_recaptcha?
     @user = User.new(user_params)
     if @user.valid? and passed_recaptcha? and @user.save_without_session_maintenance
@@ -56,11 +57,11 @@ class UsersController < ApplicationController
       render :action => :new
     end
   end
-  
-  
+
+
   def activate
     @user = User.where(:perishable_token => params[:perishable_token]).first
-    if logged_in? 
+    if logged_in?
       redirect_to new_user_track_path(current_user), :error => "You are already activated and logged in! Rejoice and upload!"
     elsif !is_from_a_bad_ip? and @user and @user.activate!
       UserSession.create(@user, true) # Log user in manually
@@ -70,37 +71,37 @@ class UsersController < ApplicationController
       redirect_to new_user_path, :error => "Hm. Activation didn't work. Sorry about that!"
     end
   end
-  
+
   def edit
   end
-  
+
   def attach_pic
-    if params[:pic].present? 
+    if params[:pic].present?
       @pic = @user.build_pic(params[:pic].permit(:pic))
       flash[:ok] = 'Picture updated!' if @pic.save
     end
     flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:ok].present?
     redirect_to edit_user_path(@user)
   end
-  
-  
+
+
   def update
     if @user.update_attributes(user_params)
       flush_asset_cache_if_necessary
-      redirect_to edit_user_path(@user), :ok => "Sweet, updated" 
+      redirect_to edit_user_path(@user), :ok => "Sweet, updated"
     else
       flash[:error] =  "Not so fast, young one"
       render :action => :edit
     end
   end
-  
+
   def toggle_favorite
     asset = Asset.published.find(params[:asset_id])
     return false unless logged_in? && asset # no bullshit
     current_user.toggle_favorite(asset)
     head :ok
   end
-  
+
   def toggle_follow
     current_user.add_or_remove_followee(params[:followee_id])
     head :ok
@@ -117,10 +118,10 @@ class UsersController < ApplicationController
         redirect_to logout_path
       end
     else
-      redirect_to root_path 
+      redirect_to root_path
     end
   end
-  
+
   def sudo
     if admin?
       sudo_to_user
@@ -130,31 +131,31 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def user_params
-    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, 
+    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
       :website, :myspace, :bio, :display_name, :itunes, :settings, :city, :country, :twitter)
   end
-  
+
   def ip_is_acceptable?
     !is_from_a_bad_ip?
   end
-  
+
   def passed_recaptcha?
     if (session[:recaptcha] == true) || !RECAPTCHA_ENABLED
-      @bypass_recaptcha = true  # bypass when already entered or setting not present 
+      @bypass_recaptcha = true  # bypass when already entered or setting not present
     else
-      @bypass_recaptcha = session[:recaptcha] = verify_recaptcha(:model => @user) 
+      @bypass_recaptcha = session[:recaptcha] = verify_recaptcha(:model => @user)
     end
   end
-  
+
   def prepare_meta_tags
     @page_title = (@user.name)
-    @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"      
+    @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"
     @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
     @tab = 'your_stuff' if current_user == @user
-  end 
-  
+  end
+
   def gather_user_goodies
     @popular_tracks = @user.assets.includes(:user => :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(:user => :pic).limit(5)
@@ -170,23 +171,23 @@ class UsersController < ApplicationController
       @listens = @listens.published
     end
   end
-  
+
   def authorized?
     !dangerous_action? || current_user_is_admin_or_owner?(@user) || @sudo.present? && (action_name == 'sudo')
   end
-  
+
   def dangerous_action?
-    %w(destroy update edit create attach_pic).include? action_name 
+    %w(destroy update edit create attach_pic).include? action_name
   end
-  
+
   def change_user_to(user)
     current_user_session.destroy
     user.reset_persistence_token! if !user.persistence_token.present?
     session = UserSession.create(user)
     flash[:ok] = "Changed user to #{user.name}"
-    redirect_back_or_default 
+    redirect_back_or_default
   end
-  
+
   def sudo_to_user
     raise "No user specified" unless params[:id]
     new_user = User.where(:login => params[:id]).first
@@ -198,17 +199,17 @@ class UsersController < ApplicationController
       flash[:warn] = "Well, that user doesn't exist, broseph"
     end
   end
-  
+
   def return_from_sudo_if_sudoed
     redirect_to(root_path) and return false if !session[:sudo].present?
     logger.warn("SUDO: returning to admin account")
     change_user_to User.find(session[:sudo])
     @sudo = session[:sudo] = nil
   end
-  
+
   def flush_asset_cache_if_necessary
     # If the user changes the :block_guest_comments setting then it requires
-    # that the cache for all their tracks be invalidated 
+    # that the cache for all their tracks be invalidated
     flush_asset_caches = false
     if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
       currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
@@ -216,8 +217,8 @@ class UsersController < ApplicationController
     end
     Asset.where(:user_id => @user.id).update_all(:updated_at => Time.now) if flush_asset_caches
   end
-  
-  
+
+
   def display_user_home_or_index
     if params[:login] && User.find_by_login(params[:login])
       redirect_to user_home_url(params[:user])
@@ -225,5 +226,5 @@ class UsersController < ApplicationController
       redirect_to users_url
     end
   end
-    
+
 end
