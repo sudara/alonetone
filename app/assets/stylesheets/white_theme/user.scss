@@ -71,8 +71,18 @@ main {
     > * {
       min-width: 320px;
     }
-    .additional_options {
+    .user_playlists_buttons {
       margin-bottom: 15px;
+      #create_new_playlist {
+        @include default_button("admin");
+      }
+
+      #change_playlist_order {
+        @include default_button("admin");
+        img {
+          display: none;
+        }
+      }
     }
     .user_playlists {
       ul {
