@@ -1,22 +1,23 @@
 // .playlist-options is for the cover view, which isn't technically the post
 
 .track-content {
+  max-width: 650px;
   .large-cover {
     width: 100%;
+    max-width: 800px;
     height: auto;
     margin-left: -$baseline;
   }
   img {
     max-width: 100%;
   }
-  .playlist-credits{
-    margin-top: $baseline;
-    color: $gray;
-
-    width: 100%;
+  .playlist-credits {
     font-size: 12px;
     line-height: 18px;
+    width: 100%;
+    margin-top: $baseline;
     margin-left: 7px;
+    color: $gray;
   }
   .playlist-options {
     width: 100%;
@@ -29,26 +30,25 @@
       }
       &.external-links {
         float: right;
-        // border-left: 1px solid #000;
-          li {
-            border-left: 1px solid #000;
-            border-right: 0;
+        li {
+          border-right: 0;
+          border-left: 1px solid #000000;
         }
       }
       li {
         display: block;
         float: left;
         height: 50px;
+        border-right: 1px solid #000000;
         background-color: $not-quite-black;
         &:hover {
-          background-color: #000;
+          background-color: #000000;
         }
-        border-right: 1px solid #000;
         a {
-          font-family: $serif_font;;
+          font-family: $serif_font;
           font-size: 12px;
-          display: block;
           font-weight: 300;
+          display: block;
           width: auto;
           margin-top: 0;
           margin-right: 5px;
@@ -57,22 +57,19 @@
           padding-top: 8px;
           padding-bottom: 0;
           text-decoration: none;
-          color: $not-quite-white-opaque;
+          color: $not-quite-white-opaque;;
           i {
             margin-right: 10px;
           }
           .action-text {
-            display: block;
-            color: $gray;
             font-size: 10px;
-            margin-left: 21px;
+            display: block;
             margin-top: -12px;
+            margin-left: 21px;
+            color: $gray;
           }
         }
       }
-    }
-    .playlist-credits {
-      
     }
   }
 }
