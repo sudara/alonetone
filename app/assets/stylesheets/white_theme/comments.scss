@@ -67,12 +67,15 @@
   }
 }
 
+
+// I guess this appears in the blog maybe nowhere else, i want to move this to tracks!!!
 .comment_form {
   overflow: hidden;
   .comment_as {
     font-size: 14px;
     overflow: auto;
     margin-bottom: 5px;
+    // margin-left: $baseline;
     img {
       float: left;
       margin-right: 5px;
@@ -89,6 +92,7 @@
     clear: both;
     margin-top: 2px;
     font-size: 11px;
+    // margin-left: $baseline;
   }
 }
 
