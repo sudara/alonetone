@@ -19,7 +19,6 @@ h1 {
   font-weight: bold;
   margin-bottom: 25px;
   &.user,
-  &.static,
   &.notice {
     margin: 0;
   }
@@ -39,14 +38,14 @@ h2.box.small {
   margin-bottom: 3px;
 }
 
-h2.box.static {
-  margin-bottom: 1px;
-}
-
-h3.box.static {
-  margin-top: 1px;
-  text-indent: 25px;
-}
+// h2.box.static {
+//   margin-bottom: 1px;
+// }
+// 
+// h3.box.static {
+//   margin-top: 1px;
+//   text-indent: 25px;
+// }
 
 .static_content h3,
 .panel h3 {
