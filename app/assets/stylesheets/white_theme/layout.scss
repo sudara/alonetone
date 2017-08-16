@@ -4,7 +4,7 @@ body {
   min-height: 100vh;
   main {
     width: 100%;
-    margin: 30px auto 0 auto;
+    margin: $baseline auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
     #user_index {

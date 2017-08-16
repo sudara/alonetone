@@ -4,6 +4,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+strong {
+  font-weight: bold!important;
+}
+
 a, a:visited {
   font-family: Helvetica, Arial, Geneva;
   color: $text_color;
