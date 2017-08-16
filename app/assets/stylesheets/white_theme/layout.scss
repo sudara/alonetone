@@ -7,6 +7,11 @@ body {
     margin: $baseline auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
+    > h1 {
+      @include match-variable-site-width();
+      margin-left: auto;
+      margin-right: auto;
+    }
     #user_index {
       width: 90%;
       margin-left: auto;
