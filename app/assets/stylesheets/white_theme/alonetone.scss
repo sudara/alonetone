@@ -276,7 +276,7 @@ a.add_to_favorites,
 a.favorited {
   position: absolute;
   z-index: 2;
-  right: 16px;
+  right: $baseline;
   display: block;
   width: 29px;
   height: 25px;

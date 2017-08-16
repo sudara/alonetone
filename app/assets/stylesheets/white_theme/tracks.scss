@@ -161,7 +161,10 @@
     }
   }
   .tracks_reveal {
-    margin-top: 10px;
+    padding-left: $baseline;
+    padding-right: $baseline;
+    box-sizing: border-box;
+    padding-top: $baseline;
     .tracks_reveal_top {
       display: flex;
       .alonetoner {
@@ -250,11 +253,14 @@
     .comment_track {
       clear: both;
       margin-top: 20px;
+      // padding-right: $baseline;
       textarea {
         box-sizing: border-box;
-        max-width: 100%;
         margin-top: 10px;
+        // margin-left: $baseline;
+        // margin-right: $baseline;
         margin-bottom: 15px;
+        // width: calc(100% - #{$baseline} );
       }
       input.comment_submit {
         @include default_button();
@@ -280,7 +286,7 @@
     .track_links {
       float: right;
       margin-top: 15px;
-      margin-bottom: 30px;
+      margin-bottom: $baseline;
       a {
         float: right;
         margin-left: 4px;
