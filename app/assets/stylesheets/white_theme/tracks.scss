@@ -257,10 +257,10 @@
       textarea {
         box-sizing: border-box;
         margin-top: 10px;
-        // margin-left: $baseline;
-        // margin-right: $baseline;
+        margin-left: 3px;
+        margin-right: 3px;
         margin-bottom: 15px;
-        // width: calc(100% - #{$baseline} );
+        width: calc(100% - 6px );
       }
       input.comment_submit {
         @include default_button();
