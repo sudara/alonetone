@@ -1,6 +1,6 @@
 main {
   #user_header {
-    width: $desktop-fixed-width;
+    @include match-variable-site-width();
     margin: 0 auto 30px auto;
     display: flex;
     a {
@@ -35,7 +35,7 @@ main {
   }
   #user_home {
     display: grid;
-    width: $desktop-fixed-width;
+    @include match-variable-site-width();
     margin: 0 auto;
     grid-template-columns: 45% 45%;
     max-width: 1100px;

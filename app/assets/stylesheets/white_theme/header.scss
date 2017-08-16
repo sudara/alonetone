@@ -1,9 +1,9 @@
 header#site_header {
-  background-color: $light_gray;
+  background-color: $light-gray;
   height: 40px;
   .header_inner {
     position: relative;
-    width: $desktop_fixed_width;
+    @include match-variable-site-width();
     margin-right: auto;
     margin-left: auto;
     .header_logo {
@@ -34,7 +34,7 @@ header#site_header {
     .user_dropdown {
       position: relative;
       float: right;
-      background-color: $light_gray;
+      background-color: $light-gray;
       .profile_link {
         font-size: 14px;
         position: relative;
@@ -44,7 +44,7 @@ header#site_header {
         height: 40px;
         padding-top: 3px;
         color: $black;
-        background-color: $light_gray;
+        background-color: $light-gray;
         span {
           line-height: 34px;
           display: block;
@@ -77,7 +77,7 @@ header#site_header {
           padding-right: 15px;
           padding-left: 15px;
           color: $black;
-          background-color: $light_gray;
+          background-color: $light-gray;
         }
       }
     }
