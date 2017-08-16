@@ -1,10 +1,19 @@
 main {
   #user_header {
     @include match-variable-site-width();
-    margin: 0 auto 30px auto;
+    margin: 0 auto $baseline auto;
     display: flex;
-    a {
+    img {
+      width: 62px;
+      height: 62px;
       display: block;
+    }
+    .user {
+      align-self: flex-end;
+      h1.user_name{
+        margin-bottom: 8px;
+      }
+      .user_location{}
     }
     a.follow {
       font-size: 10px;
@@ -23,29 +32,35 @@ main {
         margin-top: 6px;
       }
     }
-
     a.edit_profile {
-
       @include default_button('admin');
       > div {
         display: none;
       }
       display: block;
+      margin-left: auto;
     }
   }
   #user_home {
     display: grid;
-    @include match-variable-site-width();
     margin: 0 auto;
     grid-template-columns: 45% 45%;
     max-width: 1100px;
-    justify-content: space-between;
+    justify-content: space-around;
     grid-template-areas:
        'playlists playlists'
        'latest favorites'
        'listens comments'
        'card card'
        'plays .....';
+    @media #{$mobile} {
+      display: flex;
+      flex-direction: column;
+      > * {
+        width: 100%;
+      }
+    }
+
     #user_playlists_area {
       grid-area: playlists;
       margin-bottom: 40px;
@@ -107,6 +122,29 @@ main {
     }
     #user_card_area {
       background-color: $box-background-color;
+      margin-bottom: $baseline;
+      display: flex;
+      @media #{$mobile} {
+        flex-direction: column;
+      }
+      img {
+        display: block;
+      }
+      .user_card_content {
+        padding: $baseline;
+        margin-left: $baseline;
+        @media #{$mobile} {
+          margin-left: 0;
+        }
+
+        p {
+          margin-bottom: 10px;
+          word-break:break-all;
+        }
+        .user_card_bio {
+          font-family: $serif-font;
+        }
+      }
     }
   }
 }

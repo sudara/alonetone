@@ -20,12 +20,11 @@ h2.box {
   display: flex;
   flex-direction: column;
   background-color: $white;
-
   justify-content: space-between;
 }
 
 .footer_box {
-  margin-bottom: 30px;
+  margin-bottom: $baseline;
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: right;
