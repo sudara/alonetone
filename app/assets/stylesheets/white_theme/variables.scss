@@ -1,10 +1,19 @@
 // layout
 
-$desktop-fixed-width: 90%; // or 1300px, used for width on inner footer and inner header
-$baseline: 27px;
+$desktop-site-width: 90%;    // used for width on inner footer, inner header, user pages, user lists
+$efficient-site-width: 98%;  // replaces above width for efficient media queries
+@mixin match-variable-site-width() {
+  width: $desktop-site-width;
+  @media #{$efficient} {
+    width: $efficient-site-width;
+  }
+}
+
+$baseline: 27px;          // greenfield voodoo, promises design balance 
 
 // media 
 
+$efficient: 'only screen and (max-width: 420px)';
 $mobile: 'only screen and (max-width: 640px)';
 
 // site colors
@@ -57,7 +66,7 @@ $bright-highlight: rgba(255, 255, 0, .6);
   border: 1.25px solid $light-medium-gray;
   border-radius: 6px;
   @if $type == 'admin' {
-    background-color: rgba(218, 109, 37, 0.15);
+    background-color: rgba(218, 109, 37, .15);
   }
   &:hover {
     transition: border-color .1s ease-in-out;

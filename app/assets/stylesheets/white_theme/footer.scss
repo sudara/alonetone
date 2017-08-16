@@ -5,7 +5,7 @@ footer#site_footer {
   width: 100%;
   padding-bottom: 20px;
   color: #333333;
-  background-color: $light_gray;
+  background-color: $light-gray;
   .author_name {
     font-size: 11px;
     font-weight: bold;
@@ -14,7 +14,7 @@ footer#site_footer {
   }
   .footer_inner {
     display: flex;
-    width: $desktop_fixed_width;
+    @include match-variable-site-width();
     margin-right: auto;
     margin-left: auto;
 
