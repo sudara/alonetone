@@ -7,6 +7,11 @@ body {
     margin: 30px auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
+    #user_index {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
     #playlist-and-track-content {
       display: flex;
       justify-content: center;
