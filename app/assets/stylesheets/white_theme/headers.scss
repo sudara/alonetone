@@ -1,15 +1,4 @@
 #static_header {
-  width: 100%;
-  height: 83px;
-  margin-bottom: 40px;
-  .pagination {
-    float: left;
-    width: 100%;
-    height: 32px;
-    margin-top: 1px;
-    text-align: center;
-    background-color: #EEEEEE;
-  }
   #links {
     ul.links {
       li {
@@ -33,12 +22,15 @@
         float: right;
       }
       li.current {
-        font-weight: 500;
         padding: 0 15px;
+        background: $gray;
       }
-      div.pagination {
-        height: 32px;
-      }
+    }
+    .pagination {
+      width: 100%;
+      height: 32px;
+      margin-top: 1px;
+      text-align: center;
     }
   }
 }
