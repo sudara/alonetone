@@ -1,8 +1,7 @@
 .comment {
   position: relative;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
+  margin-bottom: $baseline;
+  padding: $baseline;
   border-bottom: 1px solid $light_gray;
   &:last-child {
     border-bottom: 0;
@@ -37,12 +36,11 @@
       text-decoration: underline;
     }
   }
-  .comment_body,
-  .body {
+  .comment_body {
     font-family: $serif-font;
-    margin-bottom: 1px;
+    // margin-bottom: 1px;
     margin-left: 72px;
-    padding: 0 20px 30px 0;
+    // padding: 0 20px 30px 0;
     p {
       line-height: 18px;
       margin: 16px 0 0 0;
