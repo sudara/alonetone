@@ -1,5 +1,5 @@
 <div class="playlist">
-  <%= link_to image_tag(@playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist), remote: true, class: 'small-cover', style: ('display:none;' unless @asset) %>
+  <%= link_to image_tag(@playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
   <h1 class="<%= 'cover' unless @asset %>">
     <%= link_to @playlist.title, user_playlist_path(@playlist.user, @playlist) %>
   </h1>
@@ -11,12 +11,12 @@
       data-sound-id="<%= [track.asset.user.login, track.asset.permalink].join('/') %>">
 
     <!-- Play button automagically plays AND changes to relevant track details  -->
-    <%= link_to show_track_user_playlist_path(@user, @playlist, track.asset), remote: true, class: 'play-button' do %>
+    <%= link_to show_track_user_playlist_path(@user, @playlist, track.asset), class: 'play-button' do %>
       <i class="fa fa-play"></i>
     <% end %>
 
     <!-- Track title just switches track details-->
-    <%= link_to show_track_user_playlist_path(@user, @playlist, track.asset), remote: true do %>
+    <%= link_to show_track_user_playlist_path(@user, @playlist, track.asset) do %>
       <span>
         <%= "%02d" % track.position %>. <%= track.name %>
       </span>
@@ -27,7 +27,7 @@
   </ul>
 
   <div class="sidebar-downloads <%= 'anchor-at-bottom' if @playlist.tracks.count < 11 %>"
-    style="<%= 'display:none' unless @asset or !@playlist.has_details? %>">
+    style="<%= 'display:none' unless @asset %>">
     <ul class="downloads-links">
       <% @playlist.greenfield_downloads.each do |download| %>
         <li>
