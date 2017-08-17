@@ -63,6 +63,10 @@ class Playlist < ActiveRecord::Base
     (self.tracks_count || 0) > 0
   end
 
+  def has_any_links?
+    link1.present? || link2.present? || greenfield_downloads.present?
+  end
+
   def empty?
     !has_tracks?
   end

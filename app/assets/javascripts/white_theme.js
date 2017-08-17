@@ -17,5 +17,8 @@
 //= require greenfield/initialize_soundManager
 //= require greenfield/resize_textarea
 //= require greenfield/file_upload
-//= require greenfield/player
+//= require greenfield/sound
+//= require greenfield/waveform
 //= require greenfield/posts
+
+//= require white_theme/playlist_player

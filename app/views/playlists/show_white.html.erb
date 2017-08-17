@@ -9,10 +9,10 @@
     <div class="large-cover">
       <%= image_tag @playlist.cover(:greenfield) %>
     </div>
-    <% if @playlist.has_details? %>
-      <div class="playlist-options">
-        <%= render partial: 'links' %>
-      </div>
+    <% if @playlist.has_any_links? %>
+    <div class="playlist-options">
+      <%= render partial: 'links' %>
+    </div>
     <% end %>
     <div class="playlist-credits">
       <%= markdown(@playlist.credits) %>
