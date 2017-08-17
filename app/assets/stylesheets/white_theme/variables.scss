@@ -9,9 +9,9 @@ $efficient-site-width: 98%;  // replaces above width for efficient media queries
   }
 }
 
-$baseline: 27px; // greenfield voodoo, promises design balance 
+$baseline: 27px; // greenfield voodoo, promises design balance
 
-// media 
+// media
 
 $efficient: 'only screen and (max-width: 420px)';
 $mobile: 'only screen and (max-width: 640px)';
@@ -23,6 +23,7 @@ $box-background-color: #FFFFFF;
 
 // fonts
 
+$black-font: 'Alright Sans Black', sans-serif;
 $sans-font: 'Alright Sans', sans-serif; // "Alright Sans Bold" exists for font-weight: bold or <strong>
 $serif-font: 'Harriet Text', serif;
 

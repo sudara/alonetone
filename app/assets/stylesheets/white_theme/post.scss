@@ -55,9 +55,12 @@
     padding-right: 10px;
     width: 680px;
   }
-  
+
   h1 {
     padding-bottom: $baseline;
+    line-height:$baseline;
+    font-size:$baseline;
+    font-family:$black-font;
   }
 }
 
@@ -75,12 +78,15 @@
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
   p {
+    line-height: $baseline;
+    font-size: 18px;
+    font-family: $serif-font;
     margin-bottom: $baseline;
     img {
       max-width: 550 + ($baseline * 6);
       margin-top: $baseline;
       // not quite perfectly the same width
-      margin-left: -$baseline * 3;    
+      margin-left: -$baseline * 3;
     }
   }
   .edit-link {
