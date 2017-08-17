@@ -1,8 +1,17 @@
+ h2#latest_comments + div.box {
+
+  background-color: transparent;
+  .asset {
+    background-color: #FFF;
+  }
+
+}
+
 .comment {
   position: relative;
   margin-bottom: $baseline;
   padding: $baseline;
-  border-bottom: 1px solid $light_gray;
+  background-color: #FFF;
   &:last-child {
     border-bottom: 0;
   }
@@ -38,9 +47,7 @@
   }
   .comment_body {
     font-family: $serif-font;
-    // margin-bottom: 1px;
     margin-left: 72px;
-    // padding: 0 20px 30px 0;
     p {
       line-height: 18px;
       margin: 16px 0 0 0;
@@ -73,7 +80,6 @@
     font-size: 14px;
     overflow: auto;
     margin-bottom: 5px;
-    // margin-left: $baseline;
     img {
       float: left;
       margin-right: 5px;
@@ -90,7 +96,6 @@
     clear: both;
     margin-top: 2px;
     font-size: 11px;
-    // margin-left: $baseline;
   }
 }
 
