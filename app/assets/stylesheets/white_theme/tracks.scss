@@ -165,6 +165,8 @@
     padding-right: $baseline;
     box-sizing: border-box;
     padding-top: $baseline;
+    overflow: auto;
+    background-color: #FCFCFC;
     .tracks_reveal_top {
       display: flex;
       .alonetoner {
