@@ -213,7 +213,7 @@ class AssetsController < ApplicationController
     Array(params[:asset_data]).each do |file|
       unless file.is_a?(String)
         @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
-        if !asset.new_record? && current_user.greenfield_enabled?
+        if !asset.new_record?
           Greenfield::WaveformExtractJob.perform_later(asset.id)
         end
       end
