@@ -8,14 +8,16 @@ main {
       height: 62px;
       display: block;
     }
-    .user {
+    .user_name_and_location {
+      margin-left: $baseline/2;
       align-self: flex-end;
       h1.user_name{
-        margin-bottom: 8px;
+        margin-bottom: 6px;
       }
       .user_location{}
     }
     a.follow {
+      align-self: flex-end;
       font-size: 10px;
       line-height: 20px;
       display: block;
