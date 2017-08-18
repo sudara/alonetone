@@ -205,6 +205,9 @@ a.view_all {
   height: 40px;
   margin-top: 10px;
   background-color: $box-background-color;
+  box-sizing: border-box;
+  padding-left: $baseline;
+  padding-right: $baseline;
   .listen_user {
     float: left;
     margin-right: 10px;
@@ -220,9 +223,6 @@ a.view_all {
     overflow: hidden;
     height: 40px;
     min-height: 25px;
-    div {
-      margin-bottom: -1px;
-    }
     a {
       font-size: 10px;
       font-weight: bold;
@@ -283,19 +283,9 @@ a.favorited {
   margin-top: 17px;
   text-indent: -9999px;
   opacity: .55;
+  background-color: #f00;
 
-  @include retina-sprite(heart-with-plus);
-  &:hover {
-    opacity: .999;
-  }
   &.favorited {
-    right: 14px;
-    margin-top: 19px;
-    opacity: .99;
-
-    @include retina-sprite(heart);
-    &:hover {
-      @include retina-sprite(heart-broken);
-    }
+      background-color: #000;
   }
 }

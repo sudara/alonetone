@@ -1,6 +1,8 @@
-@import 'compass/reset';
-@import 'compass/css3';
-@import 'compass/utilities';
+// @import 'compass/reset';
+// @import 'compass/css3';
+// @import 'compass/utilities';
+
+@import 'white_theme/normalize';
 
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
@@ -9,7 +11,7 @@
 @import 'application/facebox';
 @import 'application/upload';
 
-@import 'white_theme/sprites';
+// @import 'white_theme/sprites';
 @import 'white_theme/variables';
 @import 'white_theme/layout';
 @import 'white_theme/alonetone';
