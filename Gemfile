@@ -25,7 +25,6 @@ gem "has_permalink"
 gem "authlogic"
 gem "scrypt" # for authlogic
 gem "request_store" # for authlogic
-gem 'reportable', :git => 'git://github.com/saulabs/reportable.git', :require => 'saulabs/reportable'
 gem 'recaptcha', :require => 'recaptcha/rails'
 
 # view
@@ -66,8 +65,8 @@ gem 'scout_apm'
 gem 'sidekiq'
 gem 'dalli'
 
-gem 'sinatra', '~> 2.0.0.beta2', require: false
-gem 'sinatra-contrib', '~> 2.0.0.beta2', require: false
+gem 'sinatra', require: false
+gem 'sinatra-contrib', require: false
 
 group :production do
   gem 'puma'
