@@ -16,8 +16,6 @@ class Listen < ActiveRecord::Base
 
   validates_presence_of :asset_id, :track_owner_id
 
-  reportable :weekly, :aggregation => :count, :grouping => :week
-
   before_save :truncate_user_agent
 
 

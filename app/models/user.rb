@@ -36,8 +36,6 @@ class User < ActiveRecord::Base
 
   has_many   :tracks
 
-  reportable :weekly, :aggregation => :count, :grouping => :week
-
   # alonetone plus
   has_many :memberships
   has_many :groups, :through => :membership
