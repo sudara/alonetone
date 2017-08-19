@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819153513) do
+ActiveRecord::Schema.define(version: 20170819160514) do
 
   create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "mp3_content_type"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170819153513) do
 
   create_table "audio_features", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "asset_id"
-    t.text "waveform"
+    t.text "waveform", limit: 16777215
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_id"], name: "index_audio_features_on_asset_id"
