@@ -16,8 +16,8 @@ ssh alonetone '
 
   git fetch;
 
-  if [[ $(git diff origin/master db) > "" ]];
-     then $RUN_MIGRATIONS=1;
+  if [[ $(git diff origin/master db) > "" ]]; then
+    RUN_MIGRATIONS=1;
   fi
 
   if [[ $(git diff origin/master Gemfile.lock) > "" ]];
@@ -31,10 +31,9 @@ ssh alonetone '
       echo
   fi
 
-  if [ ! -v RUN_MIGRATIONS ];
-    then
-      echo "Running migrations, hold tight...";
-      time RAILS_ENV=production bundle exec rake db:migrate;
+  if [[ $RUN_MIGRATIONS ]]; then
+    echo "Running migrations, hold tight...";
+    time RAILS_ENV=production bundle exec rake db:migrate;
   fi
 
    echo "Compiling assets..."
