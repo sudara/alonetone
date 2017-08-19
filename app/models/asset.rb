@@ -25,8 +25,6 @@ class Asset < ActiveRecord::Base
     :source     =>  :user,
     :through    =>  :tracks
 
-  reportable :weekly, :aggregation => :count, :grouping => :week
-
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
   after_create :notify_followers, if: :published?
