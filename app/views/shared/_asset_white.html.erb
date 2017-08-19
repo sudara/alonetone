@@ -4,7 +4,7 @@
       <%= link_to '', media_url(@asset) %>
     </i>
 
-    <div class="waveform" data-waveform="<%= @asset.waveform.join(', ') %>">
+    <div class="waveform" data-waveform="<%= @asset.audio_feature.waveform.join(', ') %>">
       <div class="seekbar"></div>
     </div>
 
