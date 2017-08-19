@@ -1,7 +1,7 @@
 <%= simple_form_for @user_session do |f| %>
   <%= f.input :login %><br>
   <%= f.input :password %>
-  <%= f.button :submit, "Come on in..." %>
+  <%= f.button :submit, "Come on in...", data: { turbolinks: "false" } %>
 <% end %>
 
 <p>
