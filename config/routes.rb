@@ -40,7 +40,7 @@ Alonetone::Application.routes.draw do
       end
     end
 
-    get  'about/' => 'pages#index', :as => "about"
+    get  'about/' => 'pages#about'
     get  'about/:action' => 'pages'
     get  'about/halp/:action' => 'pages', :as => "halp"
 
