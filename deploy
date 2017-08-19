@@ -16,6 +16,10 @@ ssh alonetone '
 
   git fetch;
 
+  if [[ $(git diff origin/master db) > "" ]];
+     then $RUN_MIGRATIONS=1;
+  fi
+
   if [[ $(git diff origin/master Gemfile.lock) > "" ]];
     then
       echo "Gemfile changed, bundle installing...";
@@ -25,6 +29,12 @@ ssh alonetone '
       echo "skipping bundle install, gemfile has not changed since last time.";
       git reset --hard origin/master;
       echo
+  fi
+
+  if [ ! -v RUN_MIGRATIONS ];
+    then
+      echo "Running migrations, hold tight...";
+      time RAILS_ENV=production bundle exec rake db:migrate;
   fi
 
    echo "Compiling assets..."
