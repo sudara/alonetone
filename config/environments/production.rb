@@ -27,6 +27,7 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
+  config.log_level = :info
 
   config.cache_store = :dalli_store
 
