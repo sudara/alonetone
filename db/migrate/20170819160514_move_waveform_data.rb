@@ -4,6 +4,7 @@ class MoveWaveformData < ActiveRecord::Migration[5.1]
     Asset.where('waveform is not null').each do |asset|
       if asset.waveform.present? and asset.waveform.is_a? Array
         asset.create_audio_feature(waveform: asset.waveform)
+      end
     end
   end
 
