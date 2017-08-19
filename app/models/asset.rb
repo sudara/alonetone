@@ -10,6 +10,7 @@ class Asset < ActiveRecord::Base
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
 
   belongs_to :user,    :counter_cache => true
+  has_one  :audio_feature
   has_many :tracks,    :dependent => :destroy
   has_many :playlists, :through => :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, :dependent => :destroy
