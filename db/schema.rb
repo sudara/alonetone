@@ -10,14 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724005230) do
+ActiveRecord::Schema.define(version: 20170819153513) do
 
   create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string "mp3_content_type"
     t.string "mp3_file_name"
     t.integer "mp3_file_size"
-    t.integer "parent_id"
-    t.integer "site_id"
     t.datetime "created_at"
     t.string "title"
     t.integer "thumbnails_count", default: 0
@@ -49,6 +47,14 @@ ActiveRecord::Schema.define(version: 20170724005230) do
     t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
+  create_table "audio_features", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "asset_id"
+    t.text "waveform"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_audio_features_on_asset_id"
+  end
+
   create_table "comments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "commentable_type"
     t.integer "commentable_id"
@@ -67,19 +73,6 @@ ActiveRecord::Schema.define(version: 20170724005230) do
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
     t.index ["created_at"], name: "index_comments_on_created_at"
     t.index ["is_spam"], name: "index_comments_on_is_spam"
-  end
-
-  create_table "facebook_accounts", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "fb_user_id"
-    t.index ["fb_user_id"], name: "index_facebook_accounts_on_fb_user_id"
-  end
-
-  create_table "facebook_addables", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "profile_chunk_type"
-    t.integer "profile_chunk_id"
-    t.integer "facebook_account_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "featured_tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -183,17 +176,6 @@ ActiveRecord::Schema.define(version: 20170724005230) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "logged_exceptions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "exception_class"
-    t.string "controller_name"
-    t.string "action_name"
-    t.text "message"
-    t.text "backtrace"
-    t.text "environment"
-    t.text "request"
-    t.datetime "created_at"
-  end
-
   create_table "memberships", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -252,20 +234,6 @@ ActiveRecord::Schema.define(version: 20170724005230) do
     t.float "spaminess", limit: 24
     t.string "signature"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
-  end
-
-  create_table "reportable_cache", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "model_class_name", limit: 100, null: false
-    t.string "report_name", limit: 100, null: false
-    t.string "grouping", limit: 10, null: false
-    t.string "aggregation", limit: 10, null: false
-    t.string "conditions", limit: 100, null: false
-    t.float "value", limit: 24, default: 0.0, null: false
-    t.datetime "reporting_period", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true
-    t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation"
   end
 
   create_table "topics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
