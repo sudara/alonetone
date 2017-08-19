@@ -1,12 +1,30 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :controller do
+  render_views
   fixtures :assets, :users
   include ActiveJob::TestHelper
 
   context "#latest" do
     it "should render the home page" do
       get :latest
+      expect(response).to be_success
+    end
+
+    it "should render the home page (white)" do
+      get :latest, params: { white: true }
+      expect(response).to be_success
+    end
+  end
+
+  context "show" do
+    it "should render without errors" do
+      get :show, params: {id: 'song1', user_id: users(:sudara).login }
+      expect(response).to be_success
+    end
+
+    it "should render without errors (white)" do
+      get :show, params: {id: 'song1', user_id: users(:sudara).login, white: true}
       expect(response).to be_success
     end
   end
