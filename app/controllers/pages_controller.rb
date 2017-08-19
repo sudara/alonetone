@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout "pages"
+  layout :old_or_white
 
   class Hell < StandardError; end
 
@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     render :layout => 'rpm_challenge'
   end
 
-  def index
+  def about
     @page_title = "About alonetone, the kickass home for musicians"
   end
 
@@ -85,6 +85,10 @@ class PagesController < ApplicationController
   end
 
   protected
+
+  def old_or_white
+    white_theme_enabled? ? 'white_theme' : 'pages'
+  end
 
   def set_2009_albums
     ids_2009 = [ 986, 951,945, 924,912, 915, 916, 918, 921, 923,
