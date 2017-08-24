@@ -7,9 +7,12 @@
     <%= will_paginate @playlists, :param_name => :page %>
   </div>
 </div>
-
+<% if white_theme_enabled? %>
+    <%= render partial: 'shared/playlist_white' %>
+<% else %>
 <div style="margin-top: 28px">
   <% @playlists.each_slice(5) do |playlists| %>
   <%= render 'row', :playlists => playlists %>
   <% end %>
 </div>
+<% end %>
