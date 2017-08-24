@@ -1,5 +1,5 @@
 <div id="user_header">
-  
+
   <%= image_tag(@user.avatar(:large)) %>
 
   <div class="user_name_and_location">
@@ -32,9 +32,7 @@
   		<div class="user_playlists">
       <% if @user.has_public_playlists? %>
         <h2 id="user_latest_playlists">Playlists</h2>
-        <ul>
           <%= render partial: 'shared/playlist_white' %>
-        </ul>
     	<% end %>
       </div>
     </div>
@@ -54,7 +52,7 @@
   </div>
 
   <%= render :partial => 'popular' if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
-  
+
   <div id="user_comments_area">
     <%= render :partial => 'shared/comments' if @comments.present? %>
   </div>
@@ -62,7 +60,7 @@
   <div id="user_card_area">
 
     <%= image_tag(@user.avatar(:original)) %>
-    
+
     <div class="user_card_content">
     	<div class="user_card_bio">
   	    <% if @user.try(:bio) %>
@@ -77,9 +75,9 @@
       </p>
 
         <p>
-          <%= @user.twitter %>  
+          <%= @user.twitter %>
         </p>
-        
+
         <p>
           <%= @user.itunes %>
         </p>
@@ -104,7 +102,7 @@
         <small>User Agent: <%= @user.browser %></small>
       </p>
       <% end %>
-      
+
     </div>
 
   </div>
