@@ -1,3 +1,4 @@
+<ul>
 <% @playlists.each do |playlist| %>
   <%= content_tag_for :li, playlist, :class=>'small_playlists' do %>
     <%= link_to user_playlist_path(playlist.user.login, playlist), :title => "#{playlist.title} by #{playlist.user.name}", :class=> "overlay" do %>
@@ -6,3 +7,4 @@
     <%= link_to(title_and_year_for(playlist), user_playlist_path(playlist.user.login, playlist), :class => 'small_playlist_title',:title => "#{playlist.title} by #{playlist.user.name}" ) %>
   <% end %>
 <% end %>
+</ul>
