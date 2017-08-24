@@ -21,11 +21,19 @@
   <div id="large_users_grid">
     <% if @sort == 'dedicated_listeners'%>
       <% cache("dedicated/#{params[:page]}/#{theme_name}", :expires_in => 4.hours) do %>
+        <% if white_theme_enabled? %>
+        <%= render :partial => 'shared/user_white', collection: @users, as: :user %>
+        <% else %>
         <%= render :partial => 'shared/user', :collection => @users %>
+        <% end %>
       <% end %>
     <% else %>
       <% cache("#{digest_for_users}/#{params[:page]}/#{theme_name}") do %>
+        <% if white_theme_enabled? %>
+        <%= render :partial => 'shared/user_white', collection: @users, as: :user %>
+        <% else %>
         <%= render :partial => 'shared/user', :collection => @users %>
+        <% end %>
       <% end %>
     <% end %>
     <div class="clear"> </div>
