@@ -1,13 +1,29 @@
 
-
-
-
-.mini_cover {
-  position: absolute;
-  left: 10px;
-  width: 59px;
-  height: 54px;
+// /home, /user, /playlists
+ul.playlists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  li {
+    position: relative;
+    width: 146px;
+    height: 172px;
+    background-color: transparent;
+    img.cover_125 {
+      width: 125px;
+      height: 125px;
+    }
+    a.small_playlist_title {
+      font-size: 13px;
+      position: absolute;
+      top: 140px;
+      left: 0;
+      width: 146px;
+      text-align: center;
+    }
+  }
 }
+
 
 // a.jewel_case_125 {
 //   position: absolute;
@@ -19,12 +35,8 @@
 //   background-color: transparent;
 // }
 // 
-img.cover_125 {
-  width: 125px;
-  height: 125px;
-  margin-top: 4px;
-  margin-left: 6px;
-}
+
+
 // 
 // a.jewel_case_200 {
 //   position: absolute;

@@ -4,29 +4,11 @@
   margin-left: auto;
 }
 
-ul.playlists_row {
-  font-size: 11px;
-  display: flex;
+.latest-playlists-header + ul.playlists {
   max-width: 900px;
   margin-right: auto;
   margin-bottom: 40px;
   margin-left: auto;
-  justify-content: space-between;
-  li {
-    position: relative;
-    width: 178px;
-    text-align: center;
-    a.overlay {
-      margin-left: 20px;
-      opacity: 1;
-    }
-    img {
-      width: 125px;
-      height: 125px;
-      margin-top: 4px;
-      margin-left: -1px;
-    }
-  }
   @media only screen and (max-width: 640px) and (min-width: 420px) {
     li {
       display: none;
