@@ -102,25 +102,7 @@ main {
       }
     }
     .user_playlists {
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        li {
-          position: relative;
-          width: 146px;
-          height: 172px;
-          background-color: transparent;
-          a.small_playlist_title {
-            font-size: 13px;
-            position: absolute;
-            top: 140px;
-            left: 0;
-            width: 146px;
-            text-align: center;
-          }
-        }
-      }
+
     }
     #user_card_area {
       background-color: $box-background-color;
