@@ -1,4 +1,4 @@
-<div class="playlist">
+<div class="playlist-sidebar">
   <%= link_to image_tag(@playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
   <h1 class="<%= 'cover' unless @asset %>">
     <%= link_to @playlist.title, user_playlist_path(@playlist.user, @playlist) %>
