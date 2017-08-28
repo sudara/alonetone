@@ -24,6 +24,9 @@ ul.playlists {
   }
 }
 
+#static_header + ul.playlists {
+  @include match-variable-site-width();
+}
 
 
 // .playlist {
