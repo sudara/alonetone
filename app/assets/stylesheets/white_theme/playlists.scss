@@ -5,21 +5,21 @@ ul.playlists {
   flex-wrap: wrap;
   justify-content: space-between;
   li {
-    position: relative;
     width: 146px;
     height: 172px;
-    background-color: transparent;
-    img.cover_125 {
-      width: 125px;
-      height: 125px;
+    text-align: center;
+    a {
+      display: block;
+      img.cover_125 {
+        width: 125px;
+        height: 125px;
+      }
     }
     a.small_playlist_title {
       font-size: 13px;
-      position: absolute;
-      top: 140px;
-      left: 0;
-      width: 146px;
+      display: block;
       text-align: center;
+      margin-top: 10px;
     }
   }
 }
