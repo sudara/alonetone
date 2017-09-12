@@ -156,18 +156,16 @@ a.view_all {
 #user_index,
 #user_search_results {
   #large_users_grid {
-    position: relative;
-    width: 101%;
+    @include match-variable-site-width();
     margin-top: 60px;
-    margin-right: 0;
-    margin-left: 20px;
-    padding-right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     div.user {
       position: relative;
-      float: left;
       width: 150px;
-      margin-right: 25px;
       margin-bottom: 30px;
+      text-align: center;
       img.cover {
         width: 125px;
         height: 125px;
@@ -176,13 +174,7 @@ a.view_all {
       }
       .name {
         font-size: 13px;
-        font-weight: 500;
         display: block;
-        overflow: none;
-        width: 115px;
-        height: 20px;
-        margin-top: 8px;
-        margin-left: 10px;
         text-align: center;
         text-decoration: none;
         background-color: transparent;
