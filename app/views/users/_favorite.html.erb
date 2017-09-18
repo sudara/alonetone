@@ -1,4 +1,3 @@
-<% asset = favorite.asset %>
 <%= content_tag :div, :id => ("asset_#{asset.unique_id}"), :class => 'asset ' do %>
   <%= render :layout => 'assets/asset_layout', :locals => {:asset => asset} do %>
     <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist' %>
