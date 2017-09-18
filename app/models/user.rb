@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   scope :activated,     -> { where(:perishable_token => nil).recent                   }
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
-  scope :on_twitter,    -> { where(['users.twitter != ?', '']).recently_seen          }
   scope :alpha,         -> { order('display_name ASC')                                }
 
   # The before destroy has to be declared *before* has_manys
