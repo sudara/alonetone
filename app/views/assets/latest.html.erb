@@ -70,7 +70,11 @@
   <div class="sprites-stars sprites-before-heading"></div>
   <h2 id="recently_favorited" class="box">Recently favorited</h2>
   <div class="box">
-    <%= render :partial => 'shared/favorite', :collection => @favorites %>
+    <% if white_theme_enabled? %>
+      <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite %>
+    <% else %>
+      <%= render :partial => 'shared/favorite', :collection => @favorites %>
+    <% end %>
   </div>
   <div class="footer_box">
     <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
