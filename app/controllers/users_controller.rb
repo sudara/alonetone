@@ -162,7 +162,7 @@ class UsersController < ApplicationController
     @playlists = @user.playlists.only_public.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
-    @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5)
+    @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5).collect(&:asset)
     @comments = @user.comments.public_or_private(display_private_comments?).
       preload(:commentable => {:user => :pic}).preload({:commenter => :pic}).limit(5)
     unless current_user_is_admin_or_owner?(@user)
