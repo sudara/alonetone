@@ -1,6 +1,6 @@
-<% content_for :h1 do %> 
+<% content_for :h1 do %>
     <%= @forum.name %>
-<% end %> 
+<% end %>
 
 <% content_for :breadcrumbs do %>
   <%= link_to 'alonetone forums', forums_path %>  <span class="arrow">&rarr;</span> <%= @forum.name %>
@@ -9,9 +9,8 @@
 <% @page_title = @forum.name + ' forum'%>
 
 <% content_for :extras do %>
-  <%= pluralize @forum.topics.count, 'topics' %>, 
+  <%= pluralize @forum.topics.count, 'topics' %>,
   <%= pluralize @forum.posts.count, 'posts' %>
-  <%= feed_icon_tag @forum.name, forum_posts_path(@forum, :format => :atom)%> 
 <% end %>
 
 <%= link_to ' ', new_forum_topic_path(@forum), :id => "create_new_topic", :title => 'Start a new forum topic' %></p>
@@ -31,5 +30,5 @@
 </div>
 
 <!-- <div class="footer_box"> -->
-    
+
 <!-- </div> -->
