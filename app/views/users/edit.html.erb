@@ -81,7 +81,8 @@
     <b>WARNING</b><br/>
     This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone<br/><br/>
     <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
-    <%= link_to " ", user_path(:login => @user.login), :method => :delete,
+
+    <%= link_to "Delete", user_path(:login => @user.login), :method => :delete,
     :confirm => 'Are you absolutely sure? This will delete your account and tracks permanently, including all play history and comments.',
     :class => 'delete_green'%>
     <br/><br/>
