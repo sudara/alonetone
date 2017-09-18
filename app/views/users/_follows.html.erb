@@ -1,12 +1,11 @@
 <% cache(cache_key_for_follows(@follows)) do %>
   <h2 class="box">Follows</h2>
   <div id="follows" class="box static_content clearfix">
-      <%= link_to image_tag('icons/feed-icon.png'), listen_feed_path(@user, :format => 'rss'), :alt => "Tracks from those you follow", :class => 'feed_icon_in_box' %>
       <%= render :partial => 'shared/users_to_edge', :locals => {:users => @follows} %>
       <div class="clear"></div>
   </div>
 <% end if @follows.present? %>
-  
+
 <% if !@follows.present? && @mostly_listens_to.present? %>
   <h2 class="box">Listens to</h2>
   <div id="follows" class="box static_content clearfix">

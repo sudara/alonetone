@@ -37,7 +37,6 @@
 <% content_for :extras do %>
   <%= pluralize @topic.posts.size, 'post' %>,
   <%= pluralize @topic.voices.size, 'person' %> talking
-  <%= feed_icon_tag @topic.title, posts_path(:format => :atom,:forum_id => @forum, :topic_id => @topic) %>
 <% end %>
 
 <h2><%= @topic.title %></h2>
