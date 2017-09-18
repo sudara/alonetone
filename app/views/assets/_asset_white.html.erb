@@ -1,6 +1,4 @@
 <%= cache( logged_in? ? "asset#{asset.cache_key}/#{theme_name}" : "guest_asset#{asset.cache_key}/#{theme_name}" ) do %>
-
-  
   <div class="asset_top">
     <div class="play-button button">
       <div class="sprites-play">
@@ -38,12 +36,12 @@
   <div class="tracks_reveal" style="display:none;">
     <!-- <%= favorite_toggle(asset) %> -->
 
-    
-    
+
+
     <a class="add_to_favorites" href="<%= toggle_favorite_path(:asset_id => asset.id) %>">
         <svg viewBox="0 0 29 25"><use xlink:href="#testSVG"></use></svg>
     </a>
-    
+
 
     <div class="tracks_reveal_top">
       <div class='alonetoner'>
@@ -78,5 +76,4 @@
       <% end unless @single_track %>
     </div>
   </div>
-
 <% end %>
