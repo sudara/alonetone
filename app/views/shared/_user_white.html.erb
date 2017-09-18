@@ -10,12 +10,6 @@
 
 	<%= link_to user.name, user_home_path(user.login), :class => (user.admin? ? "admin name" : 'name') %>
 
-
-	<% case @sort
-	   when 'on_twitter' %>
-     	<%= link_to '','http://twitter.com/'+user.twitter, :class => 'twitter'%>
-	<% end %>
-
 	<span class="details" style="display:none;">
 
  		<%= link_to(pluralize(user.assets_count, 'track'), user_tracks_path(user)) if user.assets_count > 0 %><br/>
