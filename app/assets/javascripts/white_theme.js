@@ -32,10 +32,11 @@
 		
 
 		$(".sprites-play").each(function(){
+			$(this).css("top", "2px");
 			$(this).find("svg").prependTo( $(this).find("a") );
 		})
 
-		function PlayListAnim(thisClicked) {
+		function PlayListAnim() {
 
 			var xmlns = "http://www.w3.org/2000/svg";
 			
@@ -49,24 +50,21 @@
 			  return document.querySelectorAll(s);
 			};
 
-			// var mainSVG = select('#testSVG');
+			var mainSVG = select('#testSVG');
 			
-			var mainSVG = $( $(thisClicked).find("svg") )[0];
-
-			console.log ( $( $(thisClicked).find(".spinballGroup") ) ); 
-
 			var mainTl;
 			var dottyRotationTl;
 			var spinballTl;
 			var pauseTl;
 			var pauseGroup = select('.pauseGroup');
 			var spinballGroup = select('.spinballGroup');
-			// var spinballGroup = $( $(thisClicked).find(".spinballGroup") );
 			
 			var outline = select('.outline');
 			
 			var dotty = selectAll('.dotty');
 			var icon = select('.icon');
+
+			console.log( dotty );
 			
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
@@ -178,8 +176,6 @@
 			this.svg = function(){
 				return mainSVG
 			}
-
-
 		}
 
 		//you must initialise it
@@ -198,8 +194,6 @@
 		*/
 		
 		var currentIcon = null, oldIcon = null;
-
-
 
 
 		document.body.onclick = function(e){
@@ -239,30 +233,33 @@
 		} 
 
 
+		 $("div.sprites-play").click(function() {
+		 	
+		 	var testSVG = $("#testSVG");
+
+		 	
+		 	$("div.sprites-play").find("svg").remove();
+		 	
+		 	$("div.sprites-play").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
+
+		 	
+		 	$(this).find("svg").remove();
+
+		 	$(this).append( testSVG );
 
 
-		 $("div.sprites-play").click(function(e) {
+		 	// $(this).append( $('<svg viewBox="0 0 29 25"><use xlink:href="#testSVG"></use></svg>') );
 			
-			var myPlayListAnim = new PlayListAnim($(this));
+			// console.log ( $("body > div").find("#testSVG").remove() );
+
+			var myPlayListAnim = new PlayListAnim();
 			
 			myPlayListAnim.init();
 
-			myPlayListAnim.setPlay();
-			// myPlayListAnim.showLoading();
 			
-			// oldIcon = currentIcon;
-			// currentIcon = e.target;
-			// if(oldIcon){
-			// oldIcon.setAttribute('opacity', 1);
-			// }
-			// currentIcon.setAttribute('opacity', 0);
-			// var svg = e.target.parentNode.appendChild(myPlayListAnim.svg());
+			myPlayListAnim.showLoading();
 			
-			// myPlayListAnim.showLoading()
 		 })
-
-
-		////
 
 
 		function FaveAnim() {
