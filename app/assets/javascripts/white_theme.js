@@ -178,86 +178,54 @@
 			}
 		}
 
-		//you must initialise it
+		
 		/*
-		//simulated usage - REMOVE THIS
-		//pauses on the play icon
-		myPlayListAnim.setPlay()
-		//plays the loading animation
-		//TweenMax.delayedCall(2, function(){myPlayListAnim.showLoading();})
-		//transitions to the pause icon
-		TweenMax.delayedCall(6, function(){myPlayListAnim.showPause();})
-		//set play icon without animation
-		TweenMax.delayedCall(10, function(){myPlayListAnim.setPlay();})
-		//set pause icon without animation
-		TweenMax.delayedCall(13, function(){myPlayListAnim.setPause();})
+			//pauses on the play icon
+			myPlayListAnim.setPlay()
+			
+			//plays the loading animation
+			TweenMax.delayedCall(2, function(){myPlayListAnim.showLoading();})
+			
+			//transitions to the pause icon
+			TweenMax.delayedCall(6, function(){myPlayListAnim.showPause();})
+			
+			//set play icon without animation
+			TweenMax.delayedCall(10, function(){myPlayListAnim.setPlay();})
+			
+			//set pause icon without animation
+			TweenMax.delayedCall(13, function(){myPlayListAnim.setPause();})
+		
 		*/
 		
-		var currentIcon = null, oldIcon = null;
-
-
-		document.body.onclick = function(e){
-
-		  // var myPlayListAnim = new PlayListAnim();
-
-		  // myPlayListAnim.init();
-		  
-		  // myPlayListAnim.setPlay()
-		  
-		  //oldIcon = currentIcon;
-		  //
-		  //currentIcon = e.target;
-//
-		  //if(oldIcon){
-		  //  oldIcon.setAttribute('opacity', 1);
-		  //}
-		  //currentIcon.setAttribute('opacity', 0);
-
-		  // var svg = e.target.parentNode.appendChild(myPlayListAnim.svg());
-
-		  // myPlayListAnim.showLoading()
-
-		/*
-		 if(myPlayListAnim.timeline().time() == 0){
-		  
-		  myPlayListAnim.showLoading()
-		 } else if (myPlayListAnim.timeline().time() == myPlayListAnim.timeline().duration()){
-		  myPlayListAnim.setPlay()
-		   
-		 } else{
-		  myPlayListAnim.showPause();
-		 }*/
-
-		 //console.log(instance)
-		 //
-		} 
-
-
 		 $("div.sprites-play").click(function() {
 		 	
 		 	var testSVG = $("#testSVG");
 
-		 	
 		 	$("div.sprites-play").find("svg").remove();
 		 	
 		 	$("div.sprites-play").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
-
 		 	
 		 	$(this).find("svg").remove();
 
 		 	$(this).append( testSVG );
 
-
-		 	// $(this).append( $('<svg viewBox="0 0 29 25"><use xlink:href="#testSVG"></use></svg>') );
-			
-			// console.log ( $("body > div").find("#testSVG").remove() );
-
 			var myPlayListAnim = new PlayListAnim();
 			
 			myPlayListAnim.init();
 
-			
 			myPlayListAnim.showLoading();
+
+			/*
+				if(myPlayListAnim.timeline().time() == 0){
+
+				myPlayListAnim.showLoading()
+				} else if (myPlayListAnim.timeline().time() == myPlayListAnim.timeline().duration()){
+				myPlayListAnim.setPlay()
+
+				} else{
+				myPlayListAnim.showPause();
+			}*/
+
 			
 		 })
 
