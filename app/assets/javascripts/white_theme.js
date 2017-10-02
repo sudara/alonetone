@@ -29,17 +29,16 @@
 (function($) {
 
 	document.addEventListener("turbolinks:load", function() {
-		
+
 
 		$(".sprites-play").each(function(){
 			$(this).css("top", "2px");
-			$(this).find("svg").prependTo( $(this).find("a") );
 		})
 
 		function PlayListAnim() {
 
 			var xmlns = "http://www.w3.org/2000/svg";
-			
+
 			var xlinkns = "http://www.w3.org/1999/xlink";
 
 			var select = function(s) {
@@ -51,25 +50,25 @@
 			};
 
 			var mainSVG = select('#testSVG');
-			
+
 			var mainTl;
 			var dottyRotationTl;
 			var spinballTl;
 			var pauseTl;
 			var pauseGroup = select('.pauseGroup');
 			var spinballGroup = select('.spinballGroup');
-			
+
 			var outline = select('.outline');
-			
+
 			var dotty = selectAll('.dotty');
 			var icon = select('.icon');
 
 			console.log( dotty );
-			
+
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
 			this.init = function() {
-				
+
 				TweenMax.set(mainSVG, {
 					visibility: 'visible'
 				})
@@ -78,7 +77,7 @@
 					transformOrigin:'50% 50%',
 					scale:1.3
 				})
-			
+
 				TweenMax.set(spinballGroup, {
 					transformOrigin:'50% 50%',
 					scale:0
@@ -99,7 +98,7 @@
 					repeat:-1,
 					ease:Linear.easeNone
 				})
-		   
+
 				mainTl.addLabel('setPlay')
 					.addLabel('showLoading')
 					.to(icon, 1, {
@@ -126,15 +125,15 @@
 				})
 				.to(spinballGroup, 0.2, {
 				autoAlpha:0
-				},'-=1')   
+				},'-=1')
 				.to(pauseGroup, 2, {
 				scaleY:0.7,
 				ease:Elastic.easeOut.config(1, 0.5)
-				},'-=1')   
+				},'-=1')
 				.to(dotty, 1, {
 				scale:1.3,
 				ease:Elastic.easeOut.config(0.3, 0.9)
-				},'-=2') 
+				},'-=2')
 				.addLabel('setPause')
 				spinballTl.to(spinballGroup, 2, {
 				rotation:360,
@@ -145,31 +144,31 @@
 			}
 
 			this.play = function(pos) {
-				if(pos){mainTl.play(pos);} return;    
+				if(pos){mainTl.play(pos);} return;
 				mainTl.play();
 			}
-			
+
 			this.pause = function(pos) {
-				if(pos){mainTl.pause(pos);} return;    
+				if(pos){mainTl.pause(pos);} return;
 				mainTl.pause();
 			}
-			
+
 			this.timeline = function() {
 				return mainTl;
 			}
-			
+
 			this.setPlay = function(){
 				mainTl.pause('setPlay')
 			}
-			
+
 			this.showLoading = function(){
 				mainTl.play('showloading')
 			}
-			
+
 			this.showPause = function(){
 				mainTl.play('showPause')
 			}
-			
+
 			this.setPause = function(){
 				mainTl.pause('setPause')
 			}
@@ -178,39 +177,39 @@
 			}
 		}
 
-		
+
 		/*
 			//pauses on the play icon
 			myPlayListAnim.setPlay()
-			
+
 			//plays the loading animation
 			TweenMax.delayedCall(2, function(){myPlayListAnim.showLoading();})
-			
+
 			//transitions to the pause icon
 			TweenMax.delayedCall(6, function(){myPlayListAnim.showPause();})
-			
+
 			//set play icon without animation
 			TweenMax.delayedCall(10, function(){myPlayListAnim.setPlay();})
-			
+
 			//set pause icon without animation
 			TweenMax.delayedCall(13, function(){myPlayListAnim.setPause();})
-		
+
 		*/
-		
+
 		 $("div.sprites-play").click(function() {
-		 	
+
 		 	var testSVG = $("#testSVG");
 
 		 	$("div.sprites-play").find("svg").remove();
-		 	
+
 		 	$("div.sprites-play").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
-		 	
+
 		 	$(this).find("svg").remove();
 
 		 	$(this).append( testSVG );
 
 			var myPlayListAnim = new PlayListAnim();
-			
+
 			myPlayListAnim.init();
 
 			myPlayListAnim.showLoading();
@@ -226,7 +225,7 @@
 				myPlayListAnim.showPause();
 			}*/
 
-			
+
 		 })
 
 
@@ -239,7 +238,7 @@
 		    },
 		    selectAll = function(s) {
 		      return document.querySelectorAll(s);
-		    }, 
+		    },
 		    mainSVG = select('.faveSVG'),
 		    mainTl, purplePopTl, redPopTl, heartTl, allPopTl, greenPopTl, yellowPopTl, bluePopTl, redPop2Tl, redPop3Tl,
 		      redPop3 = select('.redPop3'),
@@ -261,7 +260,7 @@
 		    })
 
 		    allPopTl = new TimelineMax().timeScale(1);
-		   
+
 		    redPop2Tl = new TimelineMax({}).timeScale(1);
 		    redPop3Tl = new TimelineMax({}).timeScale(1);
 		    bluePopTl = new TimelineMax({}).timeScale(1);
@@ -271,7 +270,7 @@
 		    redPopTl = new TimelineMax({}).timeScale(1);
 		    heartTl = new TimelineMax({}).timeScale(1);
 		    mainTl = new TimelineMax({paused:true}).timeScale(1.6);
-		   
+
 		   mainTl.addLabel('clickFave')
 		    .to(outline, 0.2, {
 		    scale:0.9,
@@ -292,7 +291,7 @@
 		    //ease:Anticipate.easeIn
 		   },'-=0.34')
 		   //.addCallback(function(){allPopTl.play(0)},0.16)
-		   
+
 		   .addLabel('setFave')
 		  .addPause()
 		   .addLabel('clickUnfave')
@@ -301,21 +300,21 @@
 		   }) */
 		   .set(outline, {
 		    autoAlpha:1
-		   }) 
+		   })
 		   .to(heart, 0.4,{
 		     scale:0
 		   })
 		   .to(heart, 0.1, {
 		    fill:'#b4b4b4',
 		    stroke:'#b4b4b4'
-		   },'-=0.4')      
+		   },'-=0.4')
 		   .to(outline, 1, {
 		    scale:1,
 		    ease:Elastic.easeOut.config(1.5, 0.7)
 		   },'-=0.3')
 		   .addLabel('setUnfave')
 		   //POPS
-		   
+
 		   purplePopTl.fromTo(purplePop, 0.4, {
 		    attr:{
 		     r:0
@@ -379,7 +378,7 @@
 		    },
 		    ease:Power3.easeOut
 		   },'-=0.2 ')
-		   
+
 		yellowPopTl.fromTo(yellowPop, 0.4, {
 		    attr:{
 		     r:0
@@ -463,7 +462,7 @@
 		    },
 		    ease:Power3.easeOut
 		   },'-=0.2 ');
-		     
+
 		   allPopTl.add(redPopTl)
 		   .add(purplePopTl,'-=0.56')
 		   .add(yellowPopTl,'-=0.5')
@@ -474,18 +473,18 @@
 		//
 
 		   //mainTl.add(heartTl, 0);
-		   
+
 		  // console.log(redPopTl)
 		   mainTl.add(allPopTl,0.16);
-		   
+
 		  }
 
 		/*   this.play = function(pos) {
-		   if(pos){mainTl.play(pos);} return;    
+		   if(pos){mainTl.play(pos);} return;
 		    mainTl.play();
 		  }
 		  this.pause = function(pos) {
-		   if(pos){mainTl.pause(pos);} return;    
+		   if(pos){mainTl.pause(pos);} return;
 		    mainTl.pause();
 		  } */
 		  this.timeline = function() {
@@ -517,11 +516,11 @@
 		//plays the favourite animation
 		TweenMax.delayedCall(1, function(){myFaveAnim.clickFave();})
 		//plays unfave animation
-		TweenMax.delayedCall(5, function(){myFaveAnim.clickUnfave();}) 
+		TweenMax.delayedCall(5, function(){myFaveAnim.clickUnfave();})
 		//sets to be a fave without animation
-		TweenMax.delayedCall(8, function(){myFaveAnim.setFave();}) 
+		TweenMax.delayedCall(8, function(){myFaveAnim.setFave();})
 		//sets to be an unfave without animation
-		TweenMax.delayedCall(12, function(){myFaveAnim.setUnfave();}) 
+		TweenMax.delayedCall(12, function(){myFaveAnim.setUnfave();})
 
 		*/
 
