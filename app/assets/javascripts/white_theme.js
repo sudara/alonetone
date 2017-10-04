@@ -30,16 +30,11 @@
 
 	document.addEventListener("turbolinks:load", function() {
 
-
 		$(".sprites-play").each(function(){
 			$(this).css("top", "2px");
 		})
 
 		function PlayListAnim() {
-
-			var xmlns = "http://www.w3.org/2000/svg";
-
-			var xlinkns = "http://www.w3.org/1999/xlink";
 
 			var select = function(s) {
 			  return document.querySelector(s);
@@ -63,6 +58,16 @@
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
 			this.init = function() {
+
+				pauseGroup = select('.pauseGroup');
+				spinballGroup = select('.spinballGroup');
+
+				outline = select('.outline');
+				dotty = selectAll('.dotty');
+				icon = select('.icon');
+
+				outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
+
 
 				TweenMax.set(dotty, {
 					transformOrigin:'50% 50%',
@@ -131,21 +136,6 @@
 				ease:Linear.easeNone,
 				repeat:-1
 				})
-
-			}
-
-			this.play = function(pos) {
-				if(pos){mainTl.play(pos);} return;
-				mainTl.play();
-			}
-
-			this.pause = function(pos) {
-				if(pos){mainTl.pause(pos);} return;
-				mainTl.pause();
-			}
-
-			this.timeline = function() {
-				return mainTl;
 			}
 
 			this.setPlay = function(){
@@ -165,24 +155,7 @@
 			}
 		}
 
-
-		/*
-			//pauses on the play icon
-			myPlayListAnim.setPlay()
-
-			//plays the loading animation
-			TweenMax.delayedCall(2, function(){myPlayListAnim.showLoading();})
-
-			//transitions to the pause icon
-			TweenMax.delayedCall(6, function(){myPlayListAnim.showPause();})
-
-			//set play icon without animation
-			TweenMax.delayedCall(10, function(){myPlayListAnim.setPlay();})
-
-			//set pause icon without animation
-			TweenMax.delayedCall(13, function(){myPlayListAnim.setPause();})
-
-		*/
+		var myPlayListAnim = new PlayListAnim();
 
 		 $("div.sprites-play a").click(function() {
 
@@ -196,30 +169,14 @@
 
 		 	$(this).append( testSVG );
 
-			var myPlayListAnim = new PlayListAnim();
-
-			myPlayListAnim.init();
-
+		 	
+			myPlayListAnim.init()
 			myPlayListAnim.setPlay()
 			myPlayListAnim.showLoading();
 
-
-			/*
-				if(myPlayListAnim.timeline().time() == 0){
-
-				myPlayListAnim.showLoading()
-				} else if (myPlayListAnim.timeline().time() == myPlayListAnim.timeline().duration()){
-				myPlayListAnim.setPlay()
-
-				} else{
-				myPlayListAnim.showPause();
-			}*/
-
+			TweenMax.delayedCall(4, function(){myPlayListAnim.showPause();})
 
 		 })
-
-
-
 
 		function FaveAnim() {
 
