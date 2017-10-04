@@ -37,26 +37,29 @@
         display: block;
         width: 40px;
         height: 40px;
+        svg {
+          pointer-events: none;
+        }
         &:hover {
           background-position: -51px 0;
         }
       }
-      .sprites-play {
-        position: relative;
-        top: -5px;
-        left: -5px;
-        width: 40px;
-        height: 40px;
-        margin-left: 2px;
-      }
-      .sprites-pause {
-        position: relative;
-        top: -5px;
-        left: -5px;
-        width: 40px;
-        height: 40px;
-        margin-left: 2px;
-      }
+      // .sprites-play {
+      //   position: relative;
+      //   top: -5px;
+      //   left: -5px;
+      //   width: 40px;
+      //   height: 40px;
+      //   margin-left: 2px;
+      // }
+      // .sprites-pause {
+      //   position: relative;
+      //   top: -5px;
+      //   left: -5px;
+      //   width: 40px;
+      //   height: 40px;
+      //   margin-left: 2px;
+      // }
     }
     div.title {
       overflow: hidden;
