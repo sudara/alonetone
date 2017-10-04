@@ -49,8 +49,6 @@
 			  return document.querySelectorAll(s);
 			};
 
-			var mainSVG = select('#testSVG');
-
 			var mainTl;
 			var dottyRotationTl;
 			var spinballTl;
@@ -59,17 +57,12 @@
 			var spinballGroup = select('.spinballGroup');
 
 			var outline = select('.outline');
-
 			var dotty = selectAll('.dotty');
 			var icon = select('.icon');
 
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
 			this.init = function() {
-
-				TweenMax.set(mainSVG, {
-					visibility: 'visible'
-				})
 
 				TweenMax.set(dotty, {
 					transformOrigin:'50% 50%',
@@ -170,9 +163,6 @@
 			this.setPause = function(){
 				mainTl.pause('setPause')
 			}
-			this.svg = function(){
-				return mainSVG
-			}
 		}
 
 
@@ -210,6 +200,7 @@
 
 			myPlayListAnim.init();
 
+			myPlayListAnim.setPlay()
 			myPlayListAnim.showLoading();
 
 
@@ -226,6 +217,8 @@
 
 
 		 })
+
+
 
 
 		function FaveAnim() {
