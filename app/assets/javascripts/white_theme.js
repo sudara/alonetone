@@ -63,8 +63,6 @@
 			var dotty = selectAll('.dotty');
 			var icon = select('.icon');
 
-			console.log( dotty );
-
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
 			this.init = function() {
@@ -196,13 +194,13 @@
 
 		*/
 
-		 $("div.sprites-play").click(function() {
+		 $("div.sprites-play a").click(function() {
 
 		 	var testSVG = $("#testSVG");
 
 		 	$("div.sprites-play").find("svg").remove();
 
-		 	$("div.sprites-play").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
+		 	$("div.sprites-play a").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
 
 		 	$(this).find("svg").remove();
 
@@ -213,6 +211,7 @@
 			myPlayListAnim.init();
 
 			myPlayListAnim.showLoading();
+
 
 			/*
 				if(myPlayListAnim.timeline().time() == 0){
