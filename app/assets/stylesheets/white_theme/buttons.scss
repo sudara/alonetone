@@ -1,17 +1,6 @@
 a.delete_green {
   display: block;
-  float: right;
-  height: 32px;
-  margin-left: 10px;
-
-  width: 97px;
-  background: transparent image-url('icons/delete_green.png') no-repeat 0 0;
-  &:hover {
-    background-position: -97px 0;
-  }
-  &:active {
-    background-position: -194px 0;
-  }
+  @include default_button('admin');
 }
 
 a.edit {
