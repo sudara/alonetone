@@ -5,9 +5,9 @@
   window.showPlayCounts = <%= logged_in? && current_user.settings && (current_user.settings[:display_listen_count] == "true") ? true : false %>;
   window.userPersonalization = '<div class="comment_as">' +
      <% if logged_in? %>
-        '<%= image_tag current_user.avatar(:small) %>Say something, <%= escape_javascript(current_user.name)%>:'+
+        '<%= image_tag current_user.avatar(:small), size: '25' %>Say something, <%= escape_javascript(current_user.name)%>:'+
      <% else %>
-        '<%= image_tag 'default/no-pic_white.svg' %> Say something as a guest or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:'+
+        '<%= image_tag 'default/no-pic_white.svg', size: '25' %> Say something as a guest or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:'+
      <% end %>
   '</div>';
 
