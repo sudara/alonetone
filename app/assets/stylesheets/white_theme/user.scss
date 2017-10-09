@@ -131,4 +131,9 @@ main {
       }
     }
   }
+  a.delete_green {
+    display: block;
+    float: right;
+    @include default_button('admin');
+  }
 }
