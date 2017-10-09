@@ -48,7 +48,7 @@
 
     <div class="tracks_reveal_top">
       <div class='alonetoner'>
-          <%= user_image_link(asset.user, :small)%>
+          <%= link_to(image_tag(avatar_or_placeholder_for(asset.user)), user_home_path(asset.user)) %>
       </div>
       <div class="description">
           <div class='user_description'>

@@ -39,6 +39,14 @@ module UsersHelper
  #{user_location(user)}")
   end
 
+  def avatar_or_placeholder_for(user, size = :large)
+    if user&.has_pic?
+      user.pic.pic.url(size)
+    else
+      'default/no-pic_white.svg'
+    end
+  end
+
   def notice_hidden?(notice)
     logged_in? && current_user.has_setting?('hide_notice') && current_user.settings['hide_notice'][notice].present?
   end
