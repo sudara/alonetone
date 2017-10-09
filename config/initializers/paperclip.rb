@@ -2,7 +2,7 @@
 Paperclip::Attachment.default_options[:convert_options] = { :all => '-strip -colorspace RGB'}
 Paperclip::Attachment.default_options[:storage] = Alonetone.storage
 
-Paperclip::Attachment.default_options.merge!({ 
+Paperclip::Attachment.default_options.merge!({
   :s3_credentials => {
     :access_key_id => Alonetone.amazon_id,
     :secret_access_key => Alonetone.amazon_key
@@ -13,7 +13,7 @@ Paperclip::Attachment.default_options.merge!({
   :url => ':s3_alias_url',
   :s3_protocol => Alonetone.cloudfront_enabled ? :https : :http,
   :s3_url_options => {:virtual_host => true},
-  :s3_headers => { 'Expires' => 3.years.from_now.httpdate, 
+  :s3_headers => { 'Expires' => 3.years.from_now.httpdate,
     'Content-disposition' => 'attachment;'}
 }) if Alonetone.storage == 's3'
 

@@ -14,7 +14,6 @@
 //= require handlers
 
 //= require jquery-fileupload/basic
-//= require greenfield/initialize_soundManager
 //= require greenfield/resize_textarea
 //= require greenfield/file_upload
 //= require greenfield/sound
@@ -169,7 +168,7 @@
 
 		 	$(this).append( testSVG );
 
-		 	
+
 			myPlayListAnim.init()
 			myPlayListAnim.setPlay()
 			myPlayListAnim.showLoading();
