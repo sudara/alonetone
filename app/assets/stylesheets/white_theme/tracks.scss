@@ -44,22 +44,6 @@
           background-position: -51px 0;
         }
       }
-      // .sprites-play {
-      //   position: relative;
-      //   top: -5px;
-      //   left: -5px;
-      //   width: 40px;
-      //   height: 40px;
-      //   margin-left: 2px;
-      // }
-      // .sprites-pause {
-      //   position: relative;
-      //   top: -5px;
-      //   left: -5px;
-      //   width: 40px;
-      //   height: 40px;
-      //   margin-left: 2px;
-      // }
     }
     div.title {
       overflow: hidden;
@@ -192,7 +176,7 @@
       .description {
         font-size: 14px;
         line-height: 17px;
-        margin-right: 37px;
+        margin-right: 60px;
         .user_description {
           font-family: $serif-font;
           p {
