@@ -5,7 +5,7 @@
  #{user.assets_count > 0 ? pluralize(user.assets_count,'uploaded tracks') : ''}
  Joined alonetone #{user.created_at.to_date.to_s(:long)}
  #{user_location(user)}") do %>
-  <%= image_tag(user.avatar(:large), :class => 'cover') %>
+  <%= image_tag(avatar_or_placeholder_for(user), class: 'cover') %>
   <% end %>
 
 	<%= link_to user.name, user_home_path(user.login), :class => (user.admin? ? "admin name" : 'name') %>
