@@ -24,9 +24,9 @@
     <div><%= link_to "Stats", "/about/stats"%></div>
     <div><%= link_to "Press / Contact", "/about/press"%></div>
   </div>
+  
   <% if moderator? %>
   <div class="footer_column">
-
     <h3 class="footer_column_header">Admin</h3>
     <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
     <div><%= link_to "Secretz", "/secretz" %></div>
@@ -34,4 +34,5 @@
     <div><%= link_to "Job Status", "/sidekiq" %></div>
   </div>
   <% end %>
+
 </div>

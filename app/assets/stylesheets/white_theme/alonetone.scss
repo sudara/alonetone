@@ -27,14 +27,14 @@ h2.box {
   background-color: $white;
   justify-content: space-between;
   > .artist {
-    padding-left: 14px;
+    padding-left: 7px;
     display: block;
     height: 20px;
     line-height: 20px;
     font-size: 11px;
     border-bottom: 1px solid $light-gray;
     background-color: #FEFEFE;
-    margin-top: 10px;
+    padding-top: 10px;
   }
 }
 
