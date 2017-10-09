@@ -35,6 +35,7 @@ h2.box {
     border-bottom: 1px solid $light-gray;
     background-color: #FEFEFE;
     padding-top: 10px;
+    font-weight: bold;
   }
 }
 
@@ -163,9 +164,8 @@ a.view_all {
 
 /* USER LISTS */
 
-#user_index,
+#user_index #large_users_grid,
 #user_search_results {
-  #large_users_grid {
     @include match-variable-site-width();
     margin-top: 60px;
     display: flex;
@@ -192,15 +192,6 @@ a.view_all {
           text-decoration: underline;
         }
       }
-      .twitter {
-        position: absolute;
-        right: -5px;
-        bottom: 0;
-        width: 32px;
-        height: 32px;
-        background: transparent image-url('icons/tweetzorz.png') no-repeat top left;
-      }
-    }
   }
 }
 
