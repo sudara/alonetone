@@ -124,10 +124,27 @@ main {
 
         p {
           margin-bottom: 10px;
-          word-break:break-all;
+          // word-break:break-all;
         }
+        
+        hr {
+          border: 0;
+          height: 1px;
+          background-color: $light-gray;
+          top: 15px;
+          bottom: 15px;
+        }
+
         .user_card_bio {
           font-family: $serif-font;
+        }
+
+        .user_card_links {
+          font-size: 12px;
+        }
+
+        .user_card_stats {
+          font-size: 12px;
         }
       }
     }
