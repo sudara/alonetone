@@ -85,10 +85,10 @@
 				})
 
 				pauseTl = new TimelineMax({}).timeScale(1);
-				dottyRotationTl = new TimelineMax({}).timeScale(1);
 				spinballTl = new TimelineMax({}).timeScale(1);
 				mainTl = new TimelineMax({paused:true}).timeScale(2.2);
 
+				dottyRotationTl = new TimelineMax({}).timeScale(1);
 				dottyRotationTl.to(dotty, 4, {
 					rotation:-360,
 					repeat:-1,
@@ -174,7 +174,7 @@
 			myPlayListAnim.setPlay()
 			myPlayListAnim.showLoading();
 
-			TweenMax.delayedCall(4, function(){myPlayListAnim.showPause();})
+			// TweenMax.delayedCall(4, function(){myPlayListAnim.showPause();})
 
 		 })
 
