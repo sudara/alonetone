@@ -2,6 +2,7 @@
 .track {
   position: relative;
   overflow: hidden;
+  min-height:52px;
   width: 100%;
   border-bottom: 1px solid $light-gray;
   .button,
@@ -35,8 +36,10 @@
       height: 40px;
       a {
         display: block;
-        width: 40px;
-        height: 40px;
+        margin-top: 14px;
+        margin-left: 8px;
+        width: 26px;
+        height: 26px;
         svg {
           pointer-events: none;
         }
@@ -49,9 +52,9 @@
       overflow: hidden;
       box-sizing: border-box;
       width: auto;
-      height: 40px;
-      padding-top: 8px;
-      padding-left: 3px;
+      height: 52px;
+      padding-top: 12px;
+      padding-left: 5px;
 
       flex-grow: 1;
       .title_left_column {
