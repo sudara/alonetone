@@ -17,8 +17,9 @@ h2.box {
   width: 100%;
   height: 42px;
   margin-bottom: 1px;
-  padding-left: 7px;
+  padding: 4px 7px 4px 44px;
   background-color: $box-background-color;
+  color:#cc6600;
 }
 
 .box {
@@ -281,7 +282,7 @@ a.favorited {
   // margin-top: 17px;
   // text-indent: -9999px;
   // opacity: .55;
-  
+
 
   &.favorited {
       // background-color: #000;
