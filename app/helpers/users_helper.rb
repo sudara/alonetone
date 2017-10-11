@@ -4,6 +4,10 @@ module UsersHelper
     "#{user.name}'s website " + (link_to "#{user.website}", ('http://'+h(user.website)))
   end
 
+  def website_for_simple(user)
+    (link_to "#{user.website}", ('http://'+h(user.website)))
+  end
+
   def itunes_link_for(user)
     link_to "Open #{user.name}'s music in iTunes", 'http://'+h(user.itunes)
   end

@@ -76,15 +76,16 @@
       <div class="user_card_links">
         
         <p>
-        	<%= website_for(@user).html_safe if @user.website.present? %>
+        	<%= website_for_simple(@user).html_safe if @user.website.present? %>
         </p>
 
         <p>
-          http://twitter.com/<%= @user.twitter %>
+          <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
         </p>
 
         <p>
-          http://<%= @user.itunes %>
+          <a href="http://<%= @user.itunes %>"><%= @user.itunes %></a>
+          
         </p>
 
       </div>

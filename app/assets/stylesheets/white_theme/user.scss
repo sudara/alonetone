@@ -140,6 +140,9 @@ main {
 
         .user_card_links {
           font-size: 12px;
+          a {
+            text-decoration: underline;
+          }
         }
 
         .user_card_stats {
