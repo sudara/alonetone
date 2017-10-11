@@ -113,7 +113,7 @@ main {
       }
       img {
         display: block;
-        max-width: 100%;
+        max-width: 45%;
       }
       .user_card_content {
         padding: $baseline;
@@ -124,7 +124,6 @@ main {
 
         p {
           margin-bottom: 10px;
-          // word-break:break-all;
         }
         
         hr {
