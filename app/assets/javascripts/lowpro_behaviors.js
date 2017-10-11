@@ -697,7 +697,7 @@ Track = $.klass({
   pause: function(){
     soundManager.pause(this.soundID);
     this.element.removeClass('playing');
-   this.innerPlay.addClass('sprites-play')
+    this.innerPlay.addClass('sprites-play')
     this.innerPlay.removeClass('sprites-pause')
 
     // this.element.firstChild.removeClass('sprites-play');

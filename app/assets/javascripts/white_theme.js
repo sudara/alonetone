@@ -56,8 +56,6 @@
 
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
-			var playlistAnimExist = false;
-
 			this.init = function() {
 
 				pauseGroup = select('.pauseGroup');
@@ -85,26 +83,6 @@
 					scaleY:0
 				})
 
-
-				if (playlistAnimExist == true) {
-					
-					dottyRotationTl.kill();
-					spinballTl.kill();
-					mainTl.kill();
-					pauseTl.kill();
-
-					// TweenMax.to(spinballGroup, 0, {
-					// 	rotation:0,
-					// })
-
-					// TweenMax.to(dotty, 0, {
-					// 	rotation:0,
-					// })
-
-
-				}
-
-
 				pauseTl = new TimelineMax({}).timeScale(1);
 				spinballTl = new TimelineMax({}).timeScale(1);
 				mainTl = new TimelineMax({paused:true}).timeScale(2.2);
@@ -115,9 +93,6 @@
 					repeat:-1,
 					ease:Linear.easeNone
 				})
-
-				playlistAnimExist = true;
-
 
 				mainTl.addLabel('setPlay')
 					.addLabel('showLoading')
@@ -144,7 +119,7 @@
 					ease:Elastic.easeOut.config(0.3, 0.9)
 				})
 				.to(spinballGroup, 0.2, {
-				autoAlpha:0
+				// autoAlpha:0
 				},'-=1')
 				.to(pauseGroup, 2, {
 				scaleY:0.7,
@@ -183,13 +158,13 @@
 
 		var myPlayListAnim = new PlayListAnim();
 
-		 $("div.sprites-play a").click(function() {
+		 $("div.play-button a").click(function() {
 
 		 	var testSVG = $("#testSVG");
 
-		 	$("div.sprites-play").find("svg").remove();
+		 	$("div.play-button > div").find("svg").remove();
 
-		 	$("div.sprites-play a").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
+		 	$("div.play-button > div a").append( '<svg viewBox="0 0 29 25"><use xlink:href="#playIconSymbol"></use></svg>' );
 
 		 	$(this).find("svg").remove();
 
@@ -200,7 +175,7 @@
 			myPlayListAnim.setPlay()
 			myPlayListAnim.showLoading();
 
-			// TweenMax.delayedCall(4, function(){myPlayListAnim.showPause();})
+			TweenMax.delayedCall(1, function(){ myPlayListAnim.showPause(); })
 
 		 })
 
