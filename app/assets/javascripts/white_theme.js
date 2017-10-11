@@ -29,7 +29,7 @@
 
     document.addEventListener("turbolinks:load", function() {
 
-        function PlayListAnim() {
+        function PlayAnimation() {
 
             var select = function(s) {
                 return document.querySelector(s);
@@ -151,11 +151,11 @@
 
         }
 
-        var myPlayListAnim = new PlayListAnim();
+        var myPlayAnimation = new PlayAnimation();
 
         $("div.play-button a").click(function() {
 
-            var testSVG = $("#testSVG");
+            var playAnimationSVG = $("#playAnimationSVG");
 
             $("div.play-button > div").find("svg").remove();
 
@@ -163,13 +163,13 @@
 
             $(this).find("svg").remove();
 
-            $(this).append(testSVG);
+            $(this).append(playAnimationSVG);
 
-            myPlayListAnim.init()
-            myPlayListAnim.setPlay()
-            myPlayListAnim.showLoading();
+            myPlayAnimation.init()
+            myPlayAnimation.setPlay()
+            myPlayAnimation.showLoading();
 
-            TweenMax.delayedCall(1, function() { myPlayListAnim.showPause(); })
+            TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
         })
 
 
