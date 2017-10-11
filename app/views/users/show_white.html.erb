@@ -80,11 +80,11 @@
         </p>
 
         <p>
-          <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
+          <a target="_blank" href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
         </p>
 
         <p>
-          <a href="http://<%= @user.itunes %>"><%= @user.itunes %></a>
+          <a target="_blank" href="http://<%= @user.itunes %>"><%= @user.itunes %></a>
           
         </p>
 
@@ -95,11 +95,11 @@
       <div class="user_card_stats">
         
         <p>
-          Member since <strong><%= @user.created_at.to_date.to_s :long %></strong>
+          Member since <strong><%= @user.created_at.to_date.to_s :long %></strong>.
         </p>
 
         <p>
-          Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>
+          Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
         </p>
 
         <% if @user.listens_count > 0 %>
