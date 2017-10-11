@@ -56,6 +56,8 @@
 
 			var outlinePath = "M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z";
 
+			var playlistAnimExist = false;
+
 			this.init = function() {
 
 				pauseGroup = select('.pauseGroup');
@@ -83,16 +85,39 @@
 					scaleY:0
 				})
 
+
+				if (playlistAnimExist == true) {
+					
+					dottyRotationTl.kill();
+					spinballTl.kill();
+					mainTl.kill();
+					pauseTl.kill();
+
+					// TweenMax.to(spinballGroup, 0, {
+					// 	rotation:0,
+					// })
+
+					// TweenMax.to(dotty, 0, {
+					// 	rotation:0,
+					// })
+
+
+				}
+
+
 				pauseTl = new TimelineMax({}).timeScale(1);
 				spinballTl = new TimelineMax({}).timeScale(1);
 				mainTl = new TimelineMax({paused:true}).timeScale(2.2);
 
 				dottyRotationTl = new TimelineMax({}).timeScale(1);
 				dottyRotationTl.to(dotty, 4, {
-					rotation:-360,
+					rotation:"-=360",
 					repeat:-1,
 					ease:Linear.easeNone
 				})
+
+				playlistAnimExist = true;
+
 
 				mainTl.addLabel('setPlay')
 					.addLabel('showLoading')
@@ -131,7 +156,7 @@
 				},'-=2')
 				.addLabel('setPause')
 				spinballTl.to(spinballGroup, 2, {
-				rotation:360,
+				rotation:"+=360",
 				ease:Linear.easeNone,
 				repeat:-1
 				})
@@ -152,6 +177,8 @@
 			this.setPause = function(){
 				mainTl.pause('setPause')
 			}
+
+			
 		}
 
 		var myPlayListAnim = new PlayListAnim();
