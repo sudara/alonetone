@@ -6,7 +6,7 @@
 
     <div id="links">
       <ul class="links">
-       <%= user_nav_item "last online".html_safe, {:action => 'index', :sort => nil} %>
+       <%= user_nav_item "last online", {:action => 'index', :sort => nil} %>
        <%= user_nav_item "last uploaded", {:action => 'index', :sort => 'last_uploaded'} %>
        <%= user_nav_item "most listened to", {:action => 'index', :sort => 'most_listened_to'} %>
        <%= user_nav_item "new artists", {:action => 'index', :sort => 'new_artists'} %>
