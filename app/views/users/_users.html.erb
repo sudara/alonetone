@@ -6,13 +6,13 @@
 
     <div id="links">
       <ul class="links">
-       <%= user_nav_item "last seen&nbsp;".html_safe, {:action => 'index', :sort => nil} %>
-       <%= user_nav_item "new artists", {:action => 'index', :sort => 'last_uploaded'}%>
-       <%= user_nav_item "monster uploaders", {:action => 'index', :sort => 'monster_uploaders'} %>
+       <%= user_nav_item "last online".html_safe, {:action => 'index', :sort => nil} %>
+       <%= user_nav_item "last uploaded", {:action => 'index', :sort => 'last_uploaded'} %>
+       <%= user_nav_item "most listened to", {:action => 'index', :sort => 'most_listened_to'} %>
+       <%= user_nav_item "new artists", {:action => 'index', :sort => 'new_artists'} %>
+       <%= user_nav_item "all time most uploaded", {:action => 'index', :sort => 'monster_uploaders'} %>
        <%= user_nav_item "dedicated listeners", {:action => 'index', :sort => 'dedicated_listeners'}%>
-       <%= user_nav_item "recently joined", {:action => 'index', :sort => 'recently_joined'} %>
       </ul>
-      <%= will_paginate @users if @users && params[:sort] != "map"%>
     </div>
   </div>
 
