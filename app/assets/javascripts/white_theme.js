@@ -156,7 +156,7 @@
         $("div.play-button a").click(function() {
 
             var playAnimationSVG = $("#playAnimationSVG");
-
+            
             $("div.play-button > div").find("svg").remove();
 
             $("div.play-button > div a").append('<svg viewBox="0 0 29 25"><use xlink:href="/assets/default/play-icon.svg#playIconSymbol"></use></svg>');
