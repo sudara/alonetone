@@ -180,15 +180,10 @@ a.view_all {
       img.cover {
         width: 125px;
         height: 125px;
-        margin-top: 4px;
-        margin-left: 6px;
       }
       .name {
         font-size: 13px;
         display: block;
-        text-align: center;
-        text-decoration: none;
-        background-color: transparent;
         &:hover {
           text-decoration: underline;
         }
@@ -279,12 +274,4 @@ a.favorited {
   display: block;
   width: 50px;
   height: 25px;
-  // margin-top: 17px;
-  // text-indent: -9999px;
-  // opacity: .55;
-
-
-  &.favorited {
-      // background-color: #000;
-  }
 }
