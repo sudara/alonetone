@@ -8,8 +8,7 @@ class PlaylistsController < ApplicationController
   before_action :find_tracks, :only => [:show, :edit, :all]
 
   def all
-    @playlists = Playlist.recent.only_public.with_pic.
-                   paginate(:page => params[:page], :per_page => 20)
+    @playlists = Playlist.recent.only_public.with_pic.paginate(page: params[:page], per_page: 30)
   end
 
   # all user's playlists

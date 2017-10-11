@@ -2,10 +2,6 @@
   <div class="title">
     <h1 class="static">Browse all alonetone playlists</h1>
   </div>
-
-  <div class="mini_paginator">
-    <%= will_paginate @playlists, :param_name => :page %>
-  </div>
 </div>
 <% if white_theme_enabled? %>
     <%= render partial: 'shared/playlist_white' %>
