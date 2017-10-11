@@ -4,7 +4,7 @@
       <div class="sprites-play">
         <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
           id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play'  do %>
-            <svg viewBox="0 0 29 25"><use xlink:href="<%= asset_path('/assets/default/play-icon.svg')%>#playIconSymbol"></use></svg>
+            <svg viewBox="0 0 29 25"><use xlink:href="<%= asset_path('default/play-icon.svg')%>#playIconSymbol"></use></svg>
         <% end %>
       </div>
     </div>
