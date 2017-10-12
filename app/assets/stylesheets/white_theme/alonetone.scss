@@ -173,6 +173,7 @@ a.view_all {
     #static_header {
       width: 30%;
       #links {
+        width: 230px;
         li {
           display: block;
           float: none;
@@ -188,6 +189,9 @@ a.view_all {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      div.clear {
+        display: none;
+      }
       div.user {
         position: relative;
         width: 150px;
@@ -199,6 +203,7 @@ a.view_all {
         }
         .name {
           font-size: 13px;
+          margin-top: 4px;
           display: block;
           &:hover {
             text-decoration: underline;
