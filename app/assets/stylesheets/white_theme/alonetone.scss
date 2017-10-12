@@ -165,7 +165,49 @@ a.view_all {
 
 /* USER LISTS */
 
-#user_index #large_users_grid,
+#user_index {
+  @include match-variable-site-width();
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+    #static_header {
+      width: 30%;
+      #links {
+        li {
+          display: block;
+          float: none;
+          a {
+            float: none;
+          }
+        }
+      }
+    }
+    #large_users_grid {
+      width: 70%;
+      margin-top: 60px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      div.user {
+        position: relative;
+        width: 150px;
+        margin-bottom: 30px;
+        text-align: center;
+        img.cover {
+          width: 125px;
+          height: 125px;
+        }
+        .name {
+          font-size: 13px;
+          display: block;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+}
+
 #user_search_results {
     @include match-variable-site-width();
     margin-top: 60px;
