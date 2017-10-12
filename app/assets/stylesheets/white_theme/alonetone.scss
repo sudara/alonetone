@@ -172,6 +172,9 @@ a.view_all {
   justify-content: space-between;
     #static_header {
       width: 30%;
+      @media #{$mobile} {
+        width: 100%;
+      }
       #links {
         width: 230px;
         li {
@@ -185,6 +188,9 @@ a.view_all {
     }
     #large_users_grid {
       width: 70%;
+      @media #{$mobile} {
+        width: 100%;
+      }
       margin-top: 60px;
       display: flex;
       flex-wrap: wrap;
