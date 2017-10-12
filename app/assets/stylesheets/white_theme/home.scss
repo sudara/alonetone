@@ -2,6 +2,9 @@
   max-width: 900px;
   margin-right: auto;
   margin-left: auto;
+  @media #{$efficient} {
+    width: $efficient-site-width;
+  }
 }
 
 .latest-playlists-header + ul.playlists {
@@ -9,6 +12,10 @@
   margin-right: auto;
   margin-bottom: 40px;
   margin-left: auto;
+  @media #{$efficient} {
+    width: $efficient-site-width;
+    margin-bottom: 20px;
+  }
   @media only screen and (max-width: 640px) and (min-width: 420px) {
     li {
       display: none;
