@@ -2,16 +2,38 @@
 
     document.addEventListener("turbolinks:load", function() {
 
-        $("h2.box").each( function() {
-            $(this).prependTo( $(this).next() );
-            $(this).removeClass("box");
-        });
 
-        $(".footer_box .view_all").each( function() {
-            $(this).prependTo( $(this).parent().prev() );
-        });
+        if ( $(".latest-playlists-header").length > 0 ) {
+        
 
-        $(".footer_box").remove();
+
+            $("h2.box").each( function() {
+                $(this).prependTo( $(this).next() );
+                $(this).removeClass("box");
+            });
+
+            $(".footer_box .view_all").each( function() {
+                $(this).prependTo( $(this).parent().prev() );
+            });
+
+            $(".footer_box").remove();
+
+        } else {
+
+            $("h2.box").each( function() {
+                // $(this).prependTo( $(this).next() );
+                $(this).removeClass("box");
+            });
+
+            $(".footer_box .view_all").each( function() {
+                $(this).prependTo( $(this).parent().prev() );
+            });
+
+            $(".footer_box").remove();
+            
+        }
+
+
 
     });
 
