@@ -357,8 +357,6 @@ div.track_options {
   margin-bottom: 3px;
 }
 
-
-
 #single_track .track_links {
   left: -9px;
 }
@@ -368,8 +366,10 @@ div.track_options {
 
 .asset.playing,
 .asset.hover {
-  opacity: .99;
+  cursor: pointer;
   .asset_top {
-    background-color: #EFEFEF;
+    .title_left_column_top {
+      color: $samo-orange;
+    }
   }
 }
