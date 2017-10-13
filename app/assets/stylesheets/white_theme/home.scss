@@ -2,6 +2,7 @@
   max-width: 900px;
   margin-right: auto;
   margin-left: auto;
+  color: $samo-orange;
   @media #{$efficient} {
     width: $efficient-site-width;
   }
