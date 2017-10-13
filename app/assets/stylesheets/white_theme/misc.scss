@@ -28,37 +28,47 @@
   }
 }
 
-/* STATIC CONTENT */
+/* ABOUT PAGE */
 
-.static_content {
+.faq.box {
+  @include match-variable-site-width();
   padding: $baseline;
-}
-
-.static_content_youtube {
-  padding: 0!important;
-  background: none;
-}
-
-.sidebar {
-  float: right;
-  ul {
-    list-style: none;
-    li {
-      font-size: 12px;
-      font-weight: normal;
-      line-height: 14px;
-      margin: 0 0 13px 3px;
-      list-style: none;
-      list-style-position: outside;
-      a,
-      a:visited {
-        font-size: 12px;
-        font-weight: normal;
-        line-height: 14px;
-      }
-    }
+  h2 {
+    margin-top: 0;
   }
 }
+
+
+
+// .static_content {
+//   padding: $baseline;
+// }
+// 
+// .static_content_youtube {
+//   padding: 0!important;
+//   background: none;
+// }
+// 
+// .sidebar {
+//   float: right;
+//   ul {
+//     list-style: none;
+//     li {
+//       font-size: 12px;
+//       font-weight: normal;
+//       line-height: 14px;
+//       margin: 0 0 13px 3px;
+//       list-style: none;
+//       list-style-position: outside;
+//       a,
+//       a:visited {
+//         font-size: 12px;
+//         font-weight: normal;
+//         line-height: 14px;
+//       }
+//     }
+//   }
+// }
 
 /* RADIO */
 
