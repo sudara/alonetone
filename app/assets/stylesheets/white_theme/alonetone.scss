@@ -32,18 +32,18 @@ ul {
   margin-bottom: $baseline * 2;
   @include samo-shadow-and-radius();
   
-  // What is this? Where is this?
-  // > .artist {
-  //   padding-left: 7px;
-  //   display: block;
-  //   height: 20px;
-  //   line-height: 20px;
-  //   font-size: 11px;
-  //   border-bottom: 1px solid $light-gray;
-  //   background-color: #FEFEFE;
-  //   padding-top: 10px;
-  //   font-weight: bold;
-  // }
+  // For Recently Favorited
+  > .artist {
+    padding-left: 7px;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 11px;
+    border-bottom: 1px solid $light-gray;
+    background-color: #FEFEFE;
+    padding-top: 10px;
+    font-weight: bold;
+  }
 }
 
 .footer_box {
