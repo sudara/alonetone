@@ -9,7 +9,7 @@ ul {
 
 /* STACKED ASSETS */
 
-h2.box {
+.box > h2 {
   font-weight: bold;
   line-height: 45px;
   display: block;
@@ -17,9 +17,10 @@ h2.box {
   width: 100%;
   height: 42px;
   margin-bottom: 1px;
-  padding: 4px 7px 4px 44px;
-  background-color: $box-background-color;
+  padding: 4px 7px 44px 44px;
+  margin-top: 0;
   color: $samo-orange;
+  border-bottom: 1px solid $light-gray;
 }
 
 .box {
@@ -27,17 +28,22 @@ h2.box {
   flex-direction: column;
   background-color: $white;
   justify-content: space-between;
-  > .artist {
-    padding-left: 7px;
-    display: block;
-    height: 20px;
-    line-height: 20px;
-    font-size: 11px;
-    border-bottom: 1px solid $light-gray;
-    background-color: #FEFEFE;
-    padding-top: 10px;
-    font-weight: bold;
-  }
+  position: relative;
+  margin-bottom: $baseline * 2;
+  @include samo-shadow-and-radius();
+  
+  // What is this? Where is this?
+  // > .artist {
+  //   padding-left: 7px;
+  //   display: block;
+  //   height: 20px;
+  //   line-height: 20px;
+  //   font-size: 11px;
+  //   border-bottom: 1px solid $light-gray;
+  //   background-color: #FEFEFE;
+  //   padding-top: 10px;
+  //   font-weight: bold;
+  // }
 }
 
 .footer_box {
@@ -49,11 +55,18 @@ h2.box {
 }
 
 a.view_all {
+  position: absolute;
+  right: 0;
+  top: 16px;
   @include default_button();
   border: 0;
   &:hover {
     border: 0;
+    color: $samo-orange;
   }
+  color: $samo-gray;
+  font-size: 11px;
+
 }
 
 /* NOTIFICATIONS */

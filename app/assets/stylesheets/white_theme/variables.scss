@@ -57,6 +57,13 @@ $body-link-hover: #1A1D13;
 $waveform-playing: #302F2F;
 $bright-highlight: rgba(255, 255, 0, .6);
 
+// SAMO
+
+@mixin samo-shadow-and-radius() {
+  border-radius: 4px;
+  box-shadow: 0px 3px 4px -2px #65666612;
+}
+
 @mixin default-button($type: '') {
   font-family: $sans-font;
   font-size: 12px;
