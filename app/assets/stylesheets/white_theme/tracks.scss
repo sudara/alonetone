@@ -34,6 +34,7 @@
     div.button {
       width: 40px;
       height: 40px;
+      margin-top: 3px;
       a {
         display: block;
         margin-top: 13px;
@@ -53,9 +54,8 @@
       box-sizing: border-box;
       width: auto;
       height: 52px;
-      padding-top: 12px;
+      padding-top: 14px;
       padding-left: 5px;
-
       flex-grow: 1;
       .title_left_column {
         float: left;
@@ -86,11 +86,13 @@
       a {
         font-size: 15px;
         text-decoration: none;
+        font-weight: bold;
 
         -webkit-font-smoothing: antialiased;
       }
       .title_left_column_bottom {
         clear: both;
+        margin-top: 2px;
         a {
           -webkit-font-smoothing: subpixel-antialiased;
         }
@@ -100,6 +102,8 @@
       }
       a.artist {
         font-size: 11px;
+        font-weight: normal;
+        color: $samo-gray;
       }
       span.track_play,
       span.latest,
@@ -114,12 +118,6 @@
         top: -3px;
         margin-left: 5px;
         color: $orange;
-      }
-    }
-    &.even {
-      div.button,
-      div.title {
-        background-color: $box_background_even;
       }
     }
     &.hover,
