@@ -5,6 +5,9 @@
   min-height:52px;
   width: 100%;
   border-bottom: 1px solid $light-gray;
+  &:last-child {
+    border-bottom: 0;
+  }
   .button,
   .title {
     float: left;
@@ -370,6 +373,9 @@ div.track_options {
   .asset_top {
     .title_left_column_top {
       color: $samo-orange;
+    }
+    .time {
+       color: $samo-orange!important;
     }
   }
 }

@@ -11,6 +11,7 @@ ul.playlists {
     background-color: $white;
     padding-bottom: $baseline / 2;
     margin-bottom: 0px;
+    @include samo-shadow-and-radius();
     a {
       display: block;
       img.cover_125 {
