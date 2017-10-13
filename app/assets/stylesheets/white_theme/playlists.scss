@@ -10,6 +10,7 @@ ul.playlists {
     font-size: 11px;
     background-color: $white;
     padding-bottom: $baseline / 2;
+    margin-bottom: 0px;
     a {
       display: block;
       img.cover_125 {
@@ -35,6 +36,9 @@ ul.playlists {
 
 #static_header + ul.playlists {
   @include match-variable-site-width();
+  li {
+    margin-bottom: 30px;
+  }
 }
 
 
