@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
 gem "rails", "5.1.4"
-
 gem "mysql2"
 
 # greenfield
@@ -86,7 +85,6 @@ group :test do
   gem "rspec-rails", :require => false
   gem "rspec-mocks", :require => false
   gem "timecop", :github => 'travisjeffery/timecop', :require => false
-  gem 'guard-spring', :require => false
   gem "guard-rspec", :require => false
   gem 'database_cleaner', :require => false
   gem 'rb-fsevent', '~> 0.9.1', :require => false
