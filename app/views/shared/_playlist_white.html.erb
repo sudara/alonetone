@@ -1,11 +1,7 @@
-<ul class="playlists">
-<% @playlists.each do |playlist| %>
-  <%= content_tag_for :li, playlist, :class=>'small_playlists' do %>
-    <%= link_to user_playlist_path(playlist.user.login, playlist), :title => "#{playlist.title} by #{playlist.user.name}" do %>
-      <%= image_tag(playlist.cover(:large), :class => 'cover_125', :alt => "#{playlist.title} by #{playlist.user.name}") %>
-  	<% end %>
-    <%= link_to(title_and_year_for(playlist), user_playlist_path(playlist.user.login, playlist), :class => 'small_playlist_title',:title => "#{playlist.title} by #{playlist.user.name}" ) %>
-    <%= link_to truncate(playlist.user.name, :length => 26), user_playlist_path(playlist.user.login, playlist) unless @user %>
-  <% end %>
+<%= content_tag_for :li, playlist, :class=>'small_playlists' do %>
+  <%= link_to user_playlist_path(playlist.user.login, playlist), :title => "#{playlist.title} by #{playlist.user.name}" do %>
+    <%= image_tag(playlist.cover(:large), :class => 'cover_125', :alt => "#{playlist.title} by #{playlist.user.name}") %>
+	<% end %>
+  <%= link_to(title_and_year_for(playlist), user_playlist_path(playlist.user.login, playlist), :class => 'small_playlist_title',:title => "#{playlist.title} by #{playlist.user.name}" ) %>
+  <%= link_to truncate(playlist.user.name, :length => 26), user_playlist_path(playlist.user.login, playlist) unless @user %>
 <% end %>
-</ul>
