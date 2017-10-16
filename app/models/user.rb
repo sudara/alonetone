@@ -164,7 +164,9 @@ class User < ActiveRecord::Base
     Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id").
       joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
 
-    %w(tracks playlists posts comments assets).each do |user_relation|
+    assets.destroy_all
+
+    %w(tracks playlists posts comments).each do |user_relation|
       self.send(user_relation).delete_all
     end
     true
