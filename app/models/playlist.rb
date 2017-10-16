@@ -7,8 +7,8 @@ class Playlist < ActiveRecord::Base
   scope :only_public,      -> { where(:private => false).where(:is_favorite => false).where("tracks_count > 1")   }
   scope :include_private,  -> { where(:is_favorite => false)                                                      }
   scope :recent,           -> { order('playlists.created_at DESC')                                                }
-  scope :with_pic,         -> { includes(:pic).where.not(:pics => {:id => nil }).references(:pic)                 }
-  scope :for_home,         -> { recent.only_public.limit(5).with_pic.includes(:user)                                  }
+  scope :with_pic,         -> { preload(:pic)                                                                     }
+  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.limit(5).with_pic.includes(:user)                              }
 
   belongs_to :user, :counter_cache => true
   has_one  :pic, :as => :picable, :dependent => :destroy
