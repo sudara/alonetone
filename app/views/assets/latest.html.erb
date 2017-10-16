@@ -6,12 +6,14 @@
       <%= link_to "Latest playlists".html_safe, all_playlists_path, :title => 'view latest playlists' %>
       </h2>
     </div>
-    <%= cache(cache_digest(@playlists)+theme_name) do %>
-      <% if white_theme_enabled? %>
-        <%= render partial: 'shared/playlist_white',:playlists => @playlists %>
-      <% else %>
-        <%= render 'playlists/row', :playlists => @playlists %>
-      <% end %>
+    <% if white_theme_enabled? %>
+    <ul class="playlists">
+      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
+    </ul>
+    <% else %>
+    <ul class="playlists_row">
+      <%= render partial: 'playlists/row', collection: @playlists, as: :playlist %>
+    </ul>
     <% end %>
 <% end unless @playlists.blank? %>
 
