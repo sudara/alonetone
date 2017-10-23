@@ -60,13 +60,19 @@
       padding-top: 14px;
       padding-left: 5px;
       flex-grow: 1;
+      display: flex;
       .title_left_column {
-        float: left;
-        width: auto;
+        flex-grow: 1;
+        a.track_link {
+          text-overflow: ellipsis;
+          line-height: 1em;
+          overflow: hidden;
+          white-space: nowrap;
+          display: block;
+        }
       }
       .title_right_column {
-        position: relative;
-        float: right;
+        width: 50px;
         height: 100%;
         .counter {
           font-size: 15px;
