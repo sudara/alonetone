@@ -2,10 +2,7 @@
 
     document.addEventListener("turbolinks:load", function() {
 
-
-        if ( $(".latest-playlists-header").length > 0 ) {
-        
-
+        if ( $(".latest-playlists-header").length > 0 ) { // if this is the home page
 
             $("h2.box").each( function() {
                 $(this).prependTo( $(this).next() );
@@ -18,10 +15,11 @@
 
             $(".footer_box").remove();
 
+
+
         } else {
 
             $("h2.box").each( function() {
-                // $(this).prependTo( $(this).next() );
                 $(this).removeClass("box");
             });
 
@@ -30,10 +28,7 @@
             });
 
             $(".footer_box").remove();
-            
         }
-
-
 
     });
 
