@@ -1,6 +1,6 @@
 <div id="user_header">
 
-  <%= image_tag(@user.avatar(:large)) %>
+  <%= image_tag(avatar_or_placeholder_for(@user, :large)) %>
 
   <div class="user_name_and_location">
     <h1 class="user_name"><%= @user.name %></h1>
@@ -59,10 +59,10 @@
 
   <div id="user_card_area">
 
-    <%= image_tag(@user.avatar(:original)) %>
+    <%= image_tag(avatar_or_placeholder_for(@user, :original) %>
 
     <div class="user_card_content">
-    	
+
       <div class="user_card_bio">
   	    <% if @user.try(:bio) %>
   	        <%= markdown(@user.bio) %>
@@ -74,7 +74,7 @@
       <hr>
 
       <div class="user_card_links">
-        
+
         <p>
         	<%= website_for_simple(@user).html_safe if @user.website.present? %>
         </p>
@@ -85,15 +85,15 @@
 
         <p>
           <a target="_blank" href="http://<%= @user.itunes %>"><%= @user.itunes %></a>
-          
+
         </p>
 
       </div>
 
       <hr>
-      
+
       <div class="user_card_stats">
-        
+
         <p>
           Member since <strong><%= @user.created_at.to_date.to_s :long %></strong>.
         </p>
@@ -103,7 +103,7 @@
         </p>
 
         <% if @user.listens_count > 0 %>
-          
+
         <p>
           <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
         </p>
@@ -121,7 +121,7 @@
           <small>User Agent: <%= @user.browser %></small>
         </p>
         <% end %>
-        
+
       </div>
 
 
