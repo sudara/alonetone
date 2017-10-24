@@ -32,7 +32,7 @@
   		<div class="user_playlists">
       <% if @user.has_public_playlists? %>
         <h2 id="user_latest_playlists">Playlists</h2>
-          <%= render partial: 'shared/playlist_white' %>
+          <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
     	<% end %>
       </div>
     </div>
@@ -58,11 +58,8 @@
   </div>
 
   <div id="user_card_area">
-
     <%= image_tag(avatar_or_placeholder_for(@user, :original)) %>
-
     <div class="user_card_content">
-
       <div class="user_card_bio">
   	    <% if @user.try(:bio) %>
   	        <%= markdown(@user.bio) %>
@@ -70,40 +67,28 @@
   	        <%= @user.name %> doesn't have anything to say, unfortunately...
         <% end %>
     	</div>
-
       <hr>
-
       <div class="user_card_links">
-
         <p>
         	<%= website_for_simple(@user).html_safe if @user.website.present? %>
         </p>
-
         <p>
           <a target="_blank" href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
         </p>
-
         <p>
           <a target="_blank" href="http://<%= @user.itunes %>"><%= @user.itunes %></a>
-
         </p>
-
       </div>
-
       <hr>
-
       <div class="user_card_stats">
-
         <p>
           Member since <strong><%= @user.created_at.to_date.to_s :long %></strong>.
         </p>
-
         <p>
           Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
         </p>
 
         <% if @user.listens_count > 0 %>
-
         <p>
           <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
         </p>
@@ -112,21 +97,15 @@
         </p>
           <strong>~<%= @user.bandwidth_used %>GB</strong> transferred.
         </p>
-
         <% end %>
-
         <% if moderator? %>
         <p>
           Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.listens.first&.country) %><br/>
           <small>User Agent: <%= @user.browser %></small>
         </p>
         <% end %>
-
       </div>
-
-
     </div>
-
   </div>
 </div>
 
