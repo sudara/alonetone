@@ -1,5 +1,4 @@
 <div id="user_header">
-
   <%= image_tag(avatar_or_placeholder_for(@user, :large)) %>
 
   <div class="user_name_and_location">
@@ -40,20 +39,67 @@
     </div>
 
   <div id="user_latest_area">
-    <%= render :partial => 'latest' if @assets.size > 0 %>
-  </div>
-  <div id="user_favorites_area">
-    <%= render :partial => 'favorites' if @favorites.present? %>
-  </div>
-  <div id="user_listens_area">
-    <%= render :partial => 'listens' unless @listens.empty? %>
-  </div>
-  <div id="user_plays_area">
-    <%# image_tag @user.track_plays_graph if authorized? %>
-  	<%= render :partial => 'track_plays' if authorized? && @user.listens_count > 0 %>
+    <% if @assets.size > 0 %>
+      <div id="user_latest" class="box">
+        	<%= link_to user_tracks_path(@user), :class => 'view_all', :title => "uploaded mp3s by #{@user.name}"  do %>
+            <span>view all tracks </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+        	<% end if @user.assets_count > 5 %>
+      	<h2>Latest Music</h2>
+      	<%= render :partial => 'assets/asset', :collection => @assets %>
+      </div>
+    <% end %>
   </div>
 
-  <%= render :partial => 'popular' if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
+  <div id="user_favorites_area">
+    <% if @favorites.present? %>
+    <div class="box">
+      <%= link_to user_playlist_path(@user, @user.favorites), :class => "view_all" do %>
+        <span>view all favorites </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+    	<% end if @user.favorites.tracks.size > 5 %>
+      <h2>Recent alonetone favorites</h2>
+      <%= render :partial => 'assets/asset', collection: @favorites, as: :asset %>
+    </div>
+    <% end %>
+  </div>
+
+  <div id="user_listens_area">
+    <% unless @listens.empty? %>
+    <div class="box">
+      	<%= link_to listens_path(@user.login), :class => 'view_all' do %>
+          <span>view history </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+      	<% end if @listens.size > 4 %>
+    	<h2>Recently listened to</h2>
+    	<%= render :partial => 'assets/asset', :collection => @listens, :as => :asset %>
+    </div>
+    <% end %>
+  </div>
+
+  <div id="user_plays_area">
+  	<% if authorized? && @user.listens_count > 0 %>
+    <% cache([@track_plays, theme_name]) do %>
+    <div id="user_track_plays" class="box">
+    	<%= link_to listens_path(@user.login), :class => 'view_all' do %>
+        <span>view all plays </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+    	<% end if @track_plays.size > 4 %>
+    	<h2>Latest listens to your music</h2>
+        <div class="static_content">
+          <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
+    		  <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
+        </div>
+    	<%= render :partial => 'users/track_play', :collection => @track_plays %>
+    </div>
+    <% end%>
+    <% end %>
+  </div>
+
+  <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
+  <div id="user_popular" class="box">
+  	<%= link_to " ", user_tracks_path(@user),
+  	    :class => 'view_more_tracks', :title => "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
+  	<h2>Most Listened To Tracks</h2>
+  	<%= render :partial => 'assets/asset', :collection => @popular_tracks %>
+  </div>
+  <% end %>
 
   <div id="user_comments_area">
     <%= render :partial => 'shared/comments' if @comments.present? %>
