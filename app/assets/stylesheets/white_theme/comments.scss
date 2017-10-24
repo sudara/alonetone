@@ -13,7 +13,7 @@ h2#latest_comments + div.box {
   margin-bottom: $baseline;
   padding: $baseline;
   padding-top: 10px;
-  background-color: $samo-gray;
+  background-color: $samo-background-gray;
   @include samo-shadow-and-radius();
   margin: 0 10px;
   &:last-child {
