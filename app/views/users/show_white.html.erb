@@ -32,8 +32,10 @@
   		<div class="user_playlists">
       <% if @user.has_public_playlists? %>
         <h2 id="user_latest_playlists">Playlists</h2>
+        <ul class="playlists">
           <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
-    	<% end %>
+    	  </ul>
+      <% end %>
       </div>
     </div>
 
