@@ -17,6 +17,7 @@ class AssetsController < ApplicationController
           @tab = 'home'
           @assets = Asset.published.latest.includes(:user => :pic).limit(5)
           set_related_lastest_variables
+          render 'latest_white' if white_theme_enabled?
         end
         wants.rss do
           @assets = Asset.published.latest(50)
