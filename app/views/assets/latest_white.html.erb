@@ -1,0 +1,62 @@
+<%= cache("home/playlists/#{@playlists.first.cache_key}/#{theme_name}") do %>
+    <div class="latest-playlists-header">
+      <h2>
+      <%= link_to "Latest playlists".html_safe, all_playlists_path, :title => 'view latest playlists' %>
+      </h2>
+    </div>
+    <% if white_theme_enabled? %>
+    <ul class="playlists">
+      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
+    </ul>
+    <% else %>
+    <ul class="playlists_row">
+      <%= render partial: 'playlists/row', collection: @playlists, as: :playlist %>
+    </ul>
+    <% end %>
+<% end unless @playlists.blank? %>
+
+<div class="box">
+  <%= link_to radio_path(:per_page => 40,:source => 'latest'), :class=> 'view_all', :title => 'latest music on alonetone' do %>
+  <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+  <% end %>
+  <h2>Latest uploaded</h2>
+  <%= render :partial => 'assets/asset', :collection => @assets %>
+</div>
+
+<div class="box">
+  <%= link_to all_comments_path, :class => 'view_all', :title => 'view latest comments' do %>
+  <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+  <% end %>
+  <h2>Latest Comments</h2>
+  <%= render :partial => 'shared/comment', :collection => @comments %>
+</div>
+
+
+<div class="box">
+  <%= link_to radio_path(:per_page => 40,:source => 'popular'), :class => "view_all", :title => 'alonetone radio: currently kicking ass' do %>
+    <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+  <% end %>
+  <h2>Currently kicking ass</h2>
+  <%= render :partial => 'assets/asset', :collection => @popular %>
+</div>
+
+<% if @followee_tracks %>
+  <div class="box">
+    <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
+      <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+    <% end %>
+    <h2>Tracks from those you follow</h2>
+    <div>
+      <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
+    </div>
+  </div>
+<% end %>
+
+<div class="box">
+  <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
+    <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+  <% end %>
+  <h2>Recently favorited</h2>
+  <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite %>
+</div>
+
