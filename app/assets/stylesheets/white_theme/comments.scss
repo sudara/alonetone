@@ -11,7 +11,9 @@ h2#latest_comments + div.box {
   position: relative;
   margin-bottom: $baseline;
   padding: $baseline;
-  background-color: #FFFFFF;
+  background-color: $samo-gray;
+  @include samo-shadow-and-radius();
+  margin: 0 10px;
   &:last-child {
     border-bottom: 0;
   }
@@ -28,7 +30,8 @@ h2#latest_comments + div.box {
     a.alonetoner,
     img {
       float: left;
-      width: 50px;
+      width: 40px;
+      height: 40px;
       margin-top: 1px;
       margin-right: 10px;
     }
