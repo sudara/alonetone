@@ -51,7 +51,8 @@
   grid-template-areas:
      'playlists playlists'
      'latest popular'
-     'comments favorites';
+     'comments favorites'
+     'follows ......';
   @media #{$mobile} {
     display: flex;
     flex-direction: column;
@@ -71,7 +72,7 @@
     grid-area: popular;
   }
   #home_follows_area {
-    grid-area: listens;
+    grid-area: follows;
   }
   #home_comments_area {
     grid-area: comments;
