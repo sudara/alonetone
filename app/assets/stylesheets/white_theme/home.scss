@@ -40,3 +40,47 @@
     }
   }
 }
+
+
+#home_grid {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 45% 45%;
+  max-width: 1100px;
+  justify-content: space-around;
+  grid-template-areas:
+     'playlists playlists'
+     'latest popular'
+     'comments favorites';
+  @media #{$mobile} {
+    display: flex;
+    flex-direction: column;
+    > * {
+      width: 100%;
+    }
+  }
+
+  #home_playlists_area {
+    grid-area: playlists;
+    margin-bottom: 40px;
+  }
+  #home_latest_area {
+    grid-area: latest;
+  }
+  #home_popular_area {
+    grid-area: popular;
+  }
+  #home_follows_area {
+    grid-area: listens;
+  }
+  #home_comments_area {
+    grid-area: comments;
+  }
+  #home_favorites_area {
+    grid-area: favorites;
+  }
+  > * {
+    min-width: 320px;
+  }
+  
+}
