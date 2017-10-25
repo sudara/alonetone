@@ -17,7 +17,7 @@
     width: $efficient-site-width;
     margin-bottom: 20px;
   }
-  @media only screen and (max-width: 640px) and (min-width: 420px) {
+  @media only screen and (max-width: 710px) and (min-width: 440px) {
     li {
       display: none;
       &:nth-child(1),
@@ -27,7 +27,7 @@
       }
     }
   }
-  @media only screen and (max-width: 420px) {
+  @media only screen and (max-width: 440px) {
     li {
       display: none;
       &:nth-child(3) {
