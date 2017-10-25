@@ -7,6 +7,13 @@ h2#latest_comments + div.box {
   }
 }
 
+
+#home_comments_area {
+  .asset {
+    border-bottom: 0;
+  }
+}
+
 .comment {
   &:before {
     content:"\A";
@@ -24,7 +31,7 @@ h2#latest_comments + div.box {
   background-color: $samo-background-gray;
   @include samo-shadow-and-radius();
   margin: 0 10px;
-  margin-top: 20px;
+  margin-top: 6px;
   &:last-child {
     border-bottom: 0;
   }
