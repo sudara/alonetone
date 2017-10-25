@@ -3,8 +3,8 @@ body {
 }
 
 ul {
-  padding-left: 0;
   list-style: none;
+  padding-left: 0;
 }
 
 /* STACKED ASSETS */
@@ -16,35 +16,34 @@ ul {
   box-sizing: border-box;
   width: 100%;
   height: 42px;
-  margin-top: 0;
   margin-bottom: 1px;
   padding: 4px 7px 44px 44px;
+  margin-top: 0;
   color: $samo-orange;
   border-bottom: 1px solid $light-gray;
   background-color: transparent;
 }
 
 .box {
-  position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: $baseline * 2;
   background-color: $white;
-
   justify-content: space-between;
+  position: relative;
+  margin-bottom: $baseline * 2;
   @include samo-shadow-and-radius();
-
+  
   // For Recently Favorited
-   > .artist {
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 20px;
+  > .artist {
+    padding-left: 7px;
     display: block;
     height: 20px;
-    padding-top: 10px;
-    padding-left: 7px;
+    line-height: 20px;
+    font-size: 11px;
     border-bottom: 1px solid $light-gray;
-    background-color: #fefefe;
+    background-color: #FEFEFE;
+    padding-top: 10px;
+    font-weight: bold;
   }
 }
 
@@ -57,30 +56,32 @@ ul {
 }
 
 a.view_all {
-  font-size: 11px;
   position: absolute;
-  top: 16px;
   right: 0;
-  color: $samo-gray;
-  border: 0;
-
+  top: 16px;
   @include default_button();
+  border: 0;
   &:hover {
-    color: $samo-orange;
     border: 0;
+    color: $samo-orange;
   }
+  color: $samo-gray;
+  font-size: 11px;
+
 }
 
 /* NOTIFICATIONS */
 
-.notice, .errorExplanation {
+.notice,
+.errorExplanation {
   margin-bottom: 20px;
   padding: 20px 30px;
-  border-top: 1px solid #6f6f6f;
-  border-bottom: 1px solid #7e807e;
+  border-top: 1px solid #6F6F6F;
+  border-bottom: 1px solid #7E807E;
 }
 
-.errorExplanation p, .notice h2 {
+.errorExplanation p,
+.notice h2 {
   font-size: 20px;
   font-weight: bold;
 }
@@ -105,13 +106,13 @@ a.view_all {
 .flash {
   font-size: 18px;
   font-weight: bold;
-  line-height: 1.2em;
   position: relative;
   z-index: 3;
   padding: 15px 0;
   text-align: center;
   color: $white;
   background-color: $orange_background;
+  line-height: 1.2em;
   .flash_stats {
     font-size: 14px;
     a {
@@ -128,7 +129,10 @@ a.view_all {
   float: right;
   height: 32px;
   text-align: right;
-  em, a, span, a:visited {
+  em,
+  a,
+  span,
+  a:visited {
     font-size: 12px;
     line-height: 14px;
     display: block;
@@ -136,7 +140,9 @@ a.view_all {
     height: 12px;
     padding: 10px 10px;
   }
-  em, a:hover, span.current {
+  em,
+  a:hover,
+  span.current {
     text-decoration: none;
     background-color: $orange_background;
   }
@@ -152,10 +158,11 @@ a.view_all {
   }
 }
 
-.mini_paginator, .forum_paginator {
+.mini_paginator,
+.forum_paginator {
   position: relative;
   height: 32px;
-  background-color: #eee;
+  background-color: #EEEEEE;
   .pagination {
     float: left;
     width: 500px;
@@ -174,40 +181,65 @@ a.view_all {
 /* USER LISTS */
 
 #user_index {
-  display: flex;
-
   @include match-variable-site-width();
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  #static_header {
-    width: 30%;
-    @media #{$mobile} {
-      width: 100%;
-    }
-    #links {
-      width: 230px;
-      li {
-        display: block;
-        float: none;
-        a {
+    #static_header {
+      width: 30%;
+      @media #{$mobile} {
+        width: 100%;
+      }
+      #links {
+        width: 230px;
+        li {
+          display: block;
           float: none;
+          a {
+            float: none;
+          }
         }
       }
     }
-  }
-  #large_users_grid {
-    display: flex;
-    width: 70%;
-    margin-top: 52px;
+    #large_users_grid {
+      width: 70%;
+      @media #{$mobile} {
+        width: 100%;
+      }
+      margin-top: 52px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      div.clear {
+        display: none;
+      }
+      div.user {
+        position: relative;
+        width: 150px;
+        margin-bottom: 30px;
+        text-align: center;
+        img.cover {
+          width: 125px;
+          height: 125px;
+        }
+        .name {
+          font-size: 13px;
+          margin-top: 4px;
+          display: block;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+}
 
+#user_search_results {
+    @include match-variable-site-width();
+    margin-top: 60px;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    @media #{$mobile} {
-      width: 100%;
-    }
-    div.clear {
-      display: none;
-    }
     div.user {
       position: relative;
       width: 150px;
@@ -220,38 +252,10 @@ a.view_all {
       .name {
         font-size: 13px;
         display: block;
-        margin-top: 4px;
         &:hover {
           text-decoration: underline;
         }
       }
-    }
-  }
-}
-
-#user_search_results {
-  display: flex;
-  margin-top: 60px;
-
-  @include match-variable-site-width();
-  flex-wrap: wrap;
-  justify-content: space-between;
-  div.user {
-    position: relative;
-    width: 150px;
-    margin-bottom: 30px;
-    text-align: center;
-    img.cover {
-      width: 125px;
-      height: 125px;
-    }
-    .name {
-      font-size: 13px;
-      display: block;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }
 
@@ -259,13 +263,13 @@ a.view_all {
 
 .listen {
   position: relative;
-  box-sizing: border-box;
   width: 100%;
   height: 40px;
   margin-top: 10px;
-  padding-right: $baseline;
-  padding-left: $baseline;
   background-color: $box-background-color;
+  box-sizing: border-box;
+  padding-left: $baseline;
+  padding-right: $baseline;
   .listen_user {
     float: left;
     margin-right: 10px;
@@ -290,7 +294,9 @@ a.view_all {
 
 /* LISTENERS */
 
-#follows, #mostly_listens_to, #recent_listeners {
+#follows,
+#mostly_listens_to,
+#recent_listeners {
   width: 420px;
   margin: 0;
   padding: 0;
@@ -328,7 +334,8 @@ a.view_all {
 
 /* FAVORITES */
 
-a.add_to_favorites, a.favorited {
+a.add_to_favorites,
+a.favorited {
   position: absolute;
   z-index: 2;
   right: $baseline;
