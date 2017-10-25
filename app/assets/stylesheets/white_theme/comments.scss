@@ -25,13 +25,12 @@ h2#latest_comments + div.box {
     left: 47%;
   }
   position: relative;
-  margin-bottom: $baseline;
   padding: $baseline;
   padding-top: 10px;
   background-color: $samo-background-gray;
   @include samo-shadow-and-radius();
-  margin: 0 10px;
-  margin-top: 6px;
+  box-shadow: none;
+  margin: 6px 10px 10px 10px;
   &:last-child {
     border-bottom: 0;
   }
@@ -46,6 +45,7 @@ h2#latest_comments + div.box {
   }
   .comment_user {
     position: absolute;
+    top: -6px;
     a.alonetoner,
     img {
       float: left;
@@ -58,7 +58,7 @@ h2#latest_comments + div.box {
   .comment_user_text {
     font-size: 12px;
     font-weight: normal;
-    padding-top: 30px;
+    padding-top: 15px;
     margin-left: 54px;
     a,
     a:visited {
