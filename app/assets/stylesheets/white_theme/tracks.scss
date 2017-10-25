@@ -163,6 +163,11 @@
     padding-top: $baseline;
     padding-right: $baseline;
     padding-left: $baseline;
+    @media #{$mobile} {
+      padding-right: $baseline / 2;
+      padding-left: $baseline / 2;
+    }
+
     box-shadow: inset 0 1px 3px #F2F2F2;
     .tracks_reveal_top {
       display: flex;
@@ -376,7 +381,7 @@ div.track_options {
 
 .asset.playing,
 .asset.hover {
-  cursor: pointer;
+  // cursor: pointer;
   .asset_top {
     .title_left_column_top {
       color: $samo-orange;
