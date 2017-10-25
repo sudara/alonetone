@@ -9,7 +9,7 @@ ul.playlists {
     text-align: center;
     font-size: 11px;
     background-color: $white;
-    padding-bottom: $baseline / 2;
+    padding-bottom: $baseline / 4;
     margin-bottom: 0px;
     @include samo-shadow-and-radius();
     a {
@@ -25,6 +25,10 @@ ul.playlists {
       margin-top: 10px;
       padding: 0 6px;
       font-weight: bold;
+      overflow: hidden;
+      height: 1.2em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     a:last-child {
       display: block;
