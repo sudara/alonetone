@@ -1,23 +1,23 @@
 main {
   #user_header {
-    @include match-variable-site-width();
-    margin: 0 auto $baseline auto;
     display: flex;
+    margin: 0 auto $baseline auto;
+
+    @include match-variable-site-width();
     img {
+      display: block;
       width: 62px;
       height: 62px;
-      display: block;
     }
     .user_name_and_location {
       margin-left: $baseline/2;
+
       align-self: flex-end;
-      h1.user_name{
+      h1.user_name {
         margin-bottom: 6px;
       }
-      .user_location{}
     }
     a.follow {
-      align-self: flex-end;
       font-size: 10px;
       line-height: 20px;
       display: block;
@@ -25,47 +25,51 @@ main {
       height: 48px;
       text-align: center;
       border-radius: 5px;
-      > .sprites-heart-with-plus {
+
+      align-self: flex-end;
+       > .sprites-heart-with-plus {
         margin: 0 auto;
         margin-top: 5px;
       }
-      > .sprites-heart-broken {
+       > .sprites-heart-broken {
         margin: 0 auto;
         margin-top: 6px;
       }
     }
     a.edit_profile {
-      @include default_button('admin');
-      > div {
-        display: none;
-      }
       display: block;
       margin-left: auto;
+
+      @include default_button('admin');
+       > div {
+        display: none;
+      }
     }
   }
   #user_home {
     display: grid;
-    margin: 0 auto;
-    grid-template-columns: 45% 45%;
     max-width: 1100px;
+    margin: 0 auto;
+
+    grid-template-columns: 45% 45%;
     justify-content: space-around;
-    grid-template-areas:
-       'playlists playlists'
-       'latest favorites'
-       'listens comments'
-       'card card'
-       'plays .....';
+    grid-template-areas: 'playlists playlists'
+    'latest favorites'
+    'listens comments'
+    'card card'
+    'plays .....';
     @media #{$mobile} {
       display: flex;
       flex-direction: column;
-      > * {
+       > * {
         width: 100%;
       }
     }
 
     #user_playlists_area {
-      grid-area: playlists;
       margin-bottom: 40px;
+
+      grid-area: playlists;
     }
     #user_latest_area {
       grid-area: latest;
@@ -85,29 +89,27 @@ main {
     #user_plays_area {
       grid-area: plays;
     }
-    > * {
+     > * {
       min-width: 320px;
     }
     .user_playlists_buttons {
       margin-bottom: 15px;
       #create_new_playlist {
-        @include default_button("admin");
+        @include default_button('admin');
       }
 
       #change_playlist_order {
-        @include default_button("admin");
+        @include default_button('admin');
         img {
           display: none;
         }
       }
     }
-    .user_playlists {
 
-    }
     #user_card_area {
-      background-color: $box-background-color;
-      margin-bottom: $baseline;
       display: flex;
+      margin-bottom: $baseline;
+      background-color: $box-background-color;
       @media #{$mobile} {
         flex-direction: column;
       }
@@ -116,26 +118,30 @@ main {
         max-width: 45%;
       }
       .user_card_content {
-        padding: $baseline;
         margin-left: $baseline;
+        padding: $baseline;
+        display: flex;
+        flex-direction: column;
         @media #{$mobile} {
           margin-left: 0;
         }
 
         p {
-          margin-bottom: 10px;
+          margin-bottom: 4px;
+          margin-top: 4px;
         }
-        
+
         hr {
-          border: 0;
-          height: 1px;
-          background-color: $light-gray;
           top: 15px;
           bottom: 15px;
+          height: 1px;
+          border: 0;
+          background-color: $light-gray;
         }
 
         .user_card_bio {
           font-family: $serif-font;
+          flex-grow: 1;
         }
 
         .user_card_links {
@@ -154,6 +160,7 @@ main {
   a.delete_green {
     display: block;
     float: right;
+
     @include default_button('admin');
   }
 }
