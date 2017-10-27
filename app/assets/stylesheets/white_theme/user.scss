@@ -113,9 +113,11 @@ main {
       @media #{$mobile} {
         flex-direction: column;
       }
-      img {
-        display: block;
-        max-width: 45%;
+      .user_card_avatar {
+        img {
+          display: block;
+          max-width: 100%;
+        }
       }
       .user_card_content {
         margin-left: $baseline;

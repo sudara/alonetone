@@ -106,7 +106,9 @@
   </div>
 
   <div id="user_card_area">
-    <%= image_tag(avatar_or_placeholder_for(@user, :original)) %>
+    <div class="user_card_avatar">
+      <%= image_tag(avatar_or_placeholder_for(@user, :original)) %>
+    </div>
     <div class="user_card_content">
       <div class="user_card_bio">
   	    <% if @user.try(:bio) %>
