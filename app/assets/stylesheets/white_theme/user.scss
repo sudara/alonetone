@@ -105,7 +105,6 @@ main {
         }
       }
     }
-
     #user_card_area {
       display: flex;
       margin-bottom: $baseline;
@@ -120,17 +119,17 @@ main {
         }
       }
       .user_card_content {
-        margin-left: $baseline;
-        padding: $baseline;
         display: flex;
         flex-direction: column;
+        margin-left: $baseline;
+        padding: $baseline;
         @media #{$mobile} {
           margin-left: 0;
         }
 
         p {
-          margin-bottom: 4px;
           margin-top: 4px;
+          margin-bottom: 4px;
         }
 
         hr {
@@ -143,6 +142,7 @@ main {
 
         .user_card_bio {
           font-family: $serif-font;
+
           flex-grow: 1;
         }
 

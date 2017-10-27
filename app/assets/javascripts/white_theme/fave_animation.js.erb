@@ -2,6 +2,10 @@
 
     document.addEventListener("turbolinks:load", function() {
 
+        $("body").append( $("<div id='fave-svg-container' style='display:none'></div)") );
+        $("#fave-svg-container").load("<%= asset_path('default/fave-animation.svg') %>");
+
+
         function FaveAnim() {
 
             var select = function(s) {
