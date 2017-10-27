@@ -5,6 +5,8 @@
         $("body").append( $("<div id='play-svg-container' style='display:none'></div)") );
         $("#play-svg-container").load("<%= asset_path('default/play-animation.svg') %>");
 
+        $(".sprites-play > a").load("<%= asset_path('default/play-icon.svg') %>");
+
         function PlayAnimation() {
 
 
@@ -133,12 +135,9 @@
 
             var playAnimationSVG = $("#playAnimationSVG");
 
-            $("div.play-button > div").find("svg").remove();
-
-            /*$("div.play-button > div a").load( <%= asset_path('default/play-icon.svg') %> );*/
-
-
-            $(this).find("svg").remove();
+            $(".playIconSymbol").show();
+            
+            $(this).find("#playIconSymbol").hide();
 
             $(this).append(playAnimationSVG);
 
