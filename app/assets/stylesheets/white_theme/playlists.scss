@@ -4,7 +4,7 @@ ul.playlists {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  li {
+  li.playlist {
     width: 125px;
     text-align: center;
     font-size: 11px;
@@ -40,6 +40,7 @@ ul.playlists {
   }
 }
 
+// This!!
 #static_header + ul.playlists {
   @include match-variable-site-width();
   li {
