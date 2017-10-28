@@ -10,7 +10,7 @@ ul.playlists {
     font-size: 11px;
     background-color: $white;
     padding-bottom: $baseline / 4;
-    margin-bottom: 0px;
+    margin-bottom: $baseline / 2;
     @include samo-shadow-and-radius();
     a {
       display: block;
