@@ -47,9 +47,6 @@
         svg {
           pointer-events: none;
         }
-        &:hover {
-          background-position: -51px 0;
-        }
       }
     }
     div.title {
@@ -381,7 +378,7 @@ div.track_options {
 
 .asset.playing,
 .asset.hover {
-  // cursor: pointer;
+  fill: $samo-orange;
   .asset_top {
     .title_left_column_top {
       color: $samo-orange;
