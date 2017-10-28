@@ -44,7 +44,7 @@
         	<%= link_to user_tracks_path(@user), :class => 'view_all', :title => "uploaded mp3s by #{@user.name}"  do %>
             <span>view all</span>
         	<% end if @user.assets_count > 5 %>
-      	<h2>Latest Music</h2>
+      	<h2>Latest music</h2>
       	<%= render :partial => 'assets/asset', :collection => @assets %>
       </div>
     <% end %>
@@ -56,7 +56,7 @@
       <%= link_to user_playlist_path(@user, @user.favorites), :class => "view_all" do %>
         <span>view all</span>
     	<% end if @user.favorites.tracks.size > 5 %>
-      <h2>Recent alonetone favorites</h2>
+      <h2>Recent favorites</h2>
       <%= render :partial => 'assets/asset', collection: @favorites, as: :asset %>
     </div>
     <% end %>
