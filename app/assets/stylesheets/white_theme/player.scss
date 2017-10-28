@@ -3,23 +3,18 @@
   height: $baseline * 3;
   margin-bottom: $baseline;
   background-color: $white;
+  > i {
+    display: none !important;
+  }
   .play-button,
   .pause-button {
     font-size: $baseline;
     display: inline-block;
-    margin-top: 7px;
-    padding: 13px;
     cursor: pointer;
-    margin-left: 10px;
     vertical-align: middle;
-    text-indent: 6px;
     color: $black;
-    border: 1px solid $gray;
-    border-radius: 50%;
-    background-color: white;
-    &:hover {
-      border: 1px solid $black;
-    }
+    width: 60px;
+    height: 60px;
   }
   .pause-button {
     text-indent: 2.5px;
