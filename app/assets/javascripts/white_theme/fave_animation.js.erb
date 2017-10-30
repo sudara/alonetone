@@ -2,11 +2,18 @@
 
     document.addEventListener("turbolinks:load", function() {
 
-        $("body").append( $("<div id='fave-svg-container' style='display:none'></div)") );
-        $("#fave-svg-container").load("<%= asset_path('default/fave-animation.svg') %>");
+        $("a.add_to_favorites").load("<%= asset_path('default/fave-animation.svg') %>", function(){
+            
+            // console.log( "I am one of many Favorite animations loaded onto this page.")
 
+            var myFaveAnim = new FaveAnim($(this)); // pass in this div
+            myFaveAnim.init();
 
-        function FaveAnim() {
+        });
+
+        function FaveAnim(myDiv) {
+
+            console.log( myDiv );
 
             var select = function(s) {
                 return document.querySelector(s);
@@ -15,8 +22,6 @@
             var selectAll = function(s) {
                 return document.querySelectorAll(s);
             };
-
-            var mainSVG = select('.faveSVG');
 
             var mainTl;
             var purplePopTl;
@@ -28,21 +33,18 @@
             var bluePopTl;
             var redPop2Tl;
             var redPop3Tl;;
-            var redPop3 = select('.redPop3');
-            var redPop2 = select('.redPop2');
-            var bluePop = select('.bluePop');
-            var yellowPop = select('.yellowPop');
-            var purplePop = select('.purplePop');
-            var greenPop = select('.greenPop');
-            var redPop = select('.redPop');
-            var outline = select('.outline');
-            var heart = select('.heart');
+            var redPop3 = $('.redPop3');
+            var redPop2 = $('.redPop2');
+            var bluePop = $('.bluePop');
+            var yellowPop = $('.yellowPop');
+            var purplePop = $('.purplePop');
+            var greenPop = $('.greenPop');
+            var redPop = $('.redPop');
+            var outline = $('.outline');
+            var heart = $('.heart');
 
             this.init = function() {
 
-                TweenMax.set(mainSVG, {
-                    visibility: 'visible'
-                })
                 TweenMax.set([outline, heart], {
                     transformOrigin: '50% 50%'
                 })
@@ -76,16 +78,11 @@
                         scale: 0,
                         fill: '#f638a8',
                         ease: Elastic.easeOut.config(1.5, 0.7)
-                        //ease:Anticipate.easeIn
                     }, '-=0.34')
-                    //.addCallback(function(){allPopTl.play(0)},0.16)
 
                     .addLabel('setFave')
                     .addPause()
                     .addLabel('clickUnfave')
-                    /*    .set(outline, {
-                        scale:0.7
-                       }) */
                     .set(outline, {
                         autoAlpha: 1
                     })
@@ -101,8 +98,8 @@
                         ease: Elastic.easeOut.config(1.5, 0.7)
                     }, '-=0.3')
                     .addLabel('setUnfave')
+                
                 //POPS
-
                 purplePopTl.fromTo(purplePop, 0.4, {
                         attr: {
                             r: 0
@@ -260,7 +257,6 @@
                     .add(redPop3Tl, '-=0.55')
 
                 mainTl.add(allPopTl, 0.16);
-
             }
 
             this.timeline = function() {
@@ -279,41 +275,6 @@
                 mainTl.pause('setUnfave');
             }
         }
-
-
-
-        var myFaveAnim = new FaveAnim();
-        myFaveAnim.init();
-
-
-        //myFaveAnim.play();
-
-        //ScrubGSAPTimeline(myFaveAnim.timeline())
-
-        //simulated usage - REMOVE THIS
-        //pauses on the play icon
-        /*
-        //plays the favourite animation
-        TweenMax.delayedCall(1, function(){myFaveAnim.clickFave();})
-        //plays unfave animation
-        TweenMax.delayedCall(5, function(){myFaveAnim.clickUnfave();})
-        //sets to be a fave without animation
-        TweenMax.delayedCall(8, function(){myFaveAnim.setFave();})
-        //sets to be an unfave without animation
-        TweenMax.delayedCall(12, function(){myFaveAnim.setUnfave();})
-
-        */
-
-        $("a.add_to_favorites").click(function() {
-
-
-            if (myFaveAnim.timeline().time() == 0 || myFaveAnim.timeline().time() == myFaveAnim.timeline().duration()) {
-                myFaveAnim.clickFave()
-            } else {
-                myFaveAnim.clickUnfave();
-            }
-
-        });
 
     });
 
