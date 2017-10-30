@@ -1,2 +1,4 @@
-<%= link_to "#{favorite.user.name} favorited: ", user_home_path(favorite.user), :class => 'artist' %>
+<div class="favorited_by">
+	<%= link_to "#{favorite.user.name}", user_home_path(favorite.user), :class => 'artist' %> favorited
+</div>
 <%= render partial: 'assets/asset', :locals => {:asset => favorite.asset} %>
