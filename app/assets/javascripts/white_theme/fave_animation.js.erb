@@ -21,20 +21,11 @@
                     myFaveAnim.clickFave();
                 } else {
                     myFaveAnim.clickUnfave();
-                    
                 }
             });
         });
 
         function FaveAnim(myDiv) {
-
-            var select = function(s) {
-                return document.querySelector(s);
-            };
-
-            var selectAll = function(s) {
-                return document.querySelectorAll(s);
-            };
 
             var mainTl;
             var purplePopTl;
@@ -285,7 +276,6 @@
                 mainTl.pause('setUnfave');
             }
         }
-
     });
 
 })(jQuery);
