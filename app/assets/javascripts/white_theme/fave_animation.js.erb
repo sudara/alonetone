@@ -25,6 +25,26 @@
             });
         });
 
+        $("a.follow").append( $("<div class='follow_animation'></div>") );
+        
+        $("a.follow .follow_animation").load("<%= asset_path('default/fave-animation.svg') %>", function(){
+            var myFaveAnim = new FaveAnim($("a.follow"));
+            myFaveAnim.init();
+
+            if ( $(this).parent().hasClass("following") ) {
+                myFaveAnim.setFave();                
+            }
+
+            $("a.follow").click( function() {
+                
+                if ( $(this).hasClass("following") ) {
+                    myFaveAnim.clickFave();
+                } else {
+                    myFaveAnim.clickUnfave();
+                }
+            });
+        });
+
         function FaveAnim(myDiv) {
 
             var mainTl;
