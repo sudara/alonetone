@@ -62,6 +62,11 @@ ul {
 }
 
 a.view_all {
+  @include default_button();
+  &:hover {
+    color: $samo-orange;
+    border: 0;
+  }
   font-size: 11px;
   position: absolute;
   top: 16px;
@@ -69,11 +74,6 @@ a.view_all {
   color: $samo-gray;
   border: 0;
 
-  @include default_button();
-  &:hover {
-    color: $samo-orange;
-    border: 0;
-  }
 }
 
 /* NOTIFICATIONS */
