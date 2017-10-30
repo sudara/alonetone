@@ -49,6 +49,7 @@ FavoriteToggle = $.klass(Remote.Link,{
       });
       if(item.length > 0){ // user has it as a fav
         this.element.addClass('favorited');
+        console.log( "Favorited set in Low pro")
       }
     }
     $super();

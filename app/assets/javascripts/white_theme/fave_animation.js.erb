@@ -2,18 +2,31 @@
 
     document.addEventListener("turbolinks:load", function() {
 
-        $("a.add_to_favorites").load("<%= asset_path('default/fave-animation.svg') %>", function(){
-            
-            // console.log( "I am one of many Favorite animations loaded onto this page.")
+        $("a.add_to_favorites").load("<%= asset_path('default/fave-animation.svg') %>");
 
-            var myFaveAnim = new FaveAnim($(this)); // pass in this div
+        $("div.asset").click( function() {
+            console.log( "asset click detected from fave_animations.js" );
+
+            var myFaveAnim = new FaveAnim($(this).find("a.add_to_favorites"));
+
             myFaveAnim.init();
 
+            if ( $(this).find("a.add_to_favorites").hasClass("favorited") ) {
+                myFaveAnim.setFave();
+            }
+
+            $(this).find("a.add_to_favorites").click( function() {
+
+                if ( $(this).hasClass("favorited") ) {
+                    myFaveAnim.clickFave();
+                } else {
+                    myFaveAnim.clickUnfave();
+                    
+                }
+            });
         });
 
         function FaveAnim(myDiv) {
-
-            console.log( myDiv );
 
             var select = function(s) {
                 return document.querySelector(s);
@@ -33,15 +46,15 @@
             var bluePopTl;
             var redPop2Tl;
             var redPop3Tl;;
-            var redPop3 = $('.redPop3');
-            var redPop2 = $('.redPop2');
-            var bluePop = $('.bluePop');
-            var yellowPop = $('.yellowPop');
-            var purplePop = $('.purplePop');
-            var greenPop = $('.greenPop');
-            var redPop = $('.redPop');
-            var outline = $('.outline');
-            var heart = $('.heart');
+            var redPop3 = myDiv.find('.redPop3');
+            var redPop2 = myDiv.find('.redPop2');
+            var bluePop = myDiv.find('.bluePop');
+            var yellowPop = myDiv.find('.yellowPop');
+            var purplePop = myDiv.find('.purplePop');
+            var greenPop = myDiv.find('.greenPop');
+            var redPop = myDiv.find('.redPop');
+            var outline = myDiv.find('.outline');
+            var heart = myDiv.find('.heart');
 
             this.init = function() {
 
@@ -259,9 +272,6 @@
                 mainTl.add(allPopTl, 0.16);
             }
 
-            this.timeline = function() {
-                return mainTl;
-            }
             this.clickFave = function() {
                 mainTl.play('clickFave');
             }
