@@ -5,7 +5,6 @@
         $("a.add_to_favorites").load("<%= asset_path('default/fave-animation.svg') %>");
 
         $("div.asset").click( function() {
-            console.log( "asset click detected from fave_animations.js" );
 
             var myFaveAnim = new FaveAnim($(this).find("a.add_to_favorites"));
 
