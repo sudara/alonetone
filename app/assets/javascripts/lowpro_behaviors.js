@@ -75,11 +75,18 @@ FollowToggle = $.klass(Remote.Link,{
   beforeSend:function(e){
     if(this.element.hasClass('following')){
       this.element.removeClass('following');
-      this.element.html('<div class="sprites-heart-with-plus"></div> follow');
+
+      if ( !this.element.hasClass('white_theme') ) { 
+        this.element.html('<div class="sprites-heart-with-plus"></div> follow');
+      }
+
     }
     else{
       this.element.addClass('following');
-      this.element.html('<div class="sprites-heart-broken"></div> un-follow');
+
+      if ( !this.element.hasClass('white_theme') ) { 
+        this.element.html('<div class="sprites-heart-broken"></div> un-follow');
+      }
     }
   }
 });

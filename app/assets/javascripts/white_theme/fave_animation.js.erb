@@ -25,7 +25,11 @@
             });
         });
 
+        $("a.follow").empty();
+
         $("a.follow").append( $("<div class='follow_animation'></div>") );
+        
+        $("a.follow").addClass("white_theme");
         
         $("a.follow .follow_animation").load("<%= asset_path('default/fave-animation.svg') %>", function(){
             var myFaveAnim = new FaveAnim($("a.follow"));
