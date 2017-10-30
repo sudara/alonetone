@@ -376,9 +376,11 @@ div.track_options {
   opacity: .2;
 }
 
-.asset.playing,
+
 .asset.hover {
-  fill: $samo-orange;
+  #playIconSymbol {
+    fill: $samo-orange;
+  }
   .asset_top {
     .title_left_column_top {
       color: $samo-orange;
