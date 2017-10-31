@@ -34,8 +34,12 @@
   @include match-variable-site-width();
   padding: $baseline;
   box-sizing: border-box;
-  h2 {
+  h2.box {
     margin-top: 0;
+    box-shadow: none;
+  }
+  .static_content {
+    margin: $baseline 0;
   }
 }
 
