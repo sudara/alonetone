@@ -343,6 +343,7 @@ a.add_to_favorites, a.favorited {
   height: 25px;
 }
 
+/* EDIT PAGES */
 
 body.has-details {
   h2.spacey {
@@ -353,6 +354,8 @@ body.has-details {
     @include samo-shadow-and-radius();
     background-color: $white;
     padding: $baseline;
-
   }
 }
+
+/* ABOUT */
+
