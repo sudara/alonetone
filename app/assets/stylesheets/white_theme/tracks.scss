@@ -20,11 +20,13 @@
       height: 5px;
       padding-top: 2px;
       padding-bottom: 2px;
-      background-color: #1F1D04;
+      background-color: $samo-background-gray;
+      // cursor: pointer;
+
     }
     .played {
       height: 5px;
-      background-color: #FCA744;
+      background-color: $samo-orange;
     }
   }
   &:not(.open) {
