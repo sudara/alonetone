@@ -77,9 +77,16 @@ $bright-highlight: rgba(255, 255, 0, .6);
   text-align: center;
   text-decoration: none;
   border: 1.25px solid $light-medium-gray;
-  border-radius: 6px;
+  // border-radius: 6px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 4px -2px #65666612;
+
   @if $type == 'admin' {
-    background-color: rgba(218, 109, 37, .15);
+    // background-color: rgba(218, 109, 37, .50);
+    background-color: $samo-orange;
+    opacity:1;
+    color: #FFF;
+    border: 1.25px solid #555;
   }
   &:hover {
     transition: border-color .1s ease-in-out;

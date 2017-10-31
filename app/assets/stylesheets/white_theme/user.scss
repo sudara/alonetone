@@ -108,6 +108,7 @@ main {
       display: flex;
       margin-bottom: $baseline;
       background-color: $box-background-color;
+      @include samo-shadow-and-radius();
       @media #{$mobile} {
         flex-direction: column;
       }
@@ -155,6 +156,18 @@ main {
         .user_card_stats {
           font-size: 12px;
         }
+      }
+    }
+    #user_plays_area { 
+      #user_track_plays {
+        padding-bottom: $baseline / 2;
+        .static_content {
+          font-size: 12px;
+          margin-left: 44px;
+          margin-top: $baseline / 2;
+          margin-bottom: $baseline / 2;
+        }
+        
       }
     }
   }
