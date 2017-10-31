@@ -67,6 +67,7 @@ a.view_all {
     color: $samo-orange;
     border: 0;
   }
+  box-shadow: none;
   font-size: 11px;
   position: absolute;
   top: 16px;
@@ -261,6 +262,7 @@ a.view_all {
 }
 
 /* LISTENS */
+// is this only on the user page??
 
 .listen {
   position: relative;
@@ -269,11 +271,11 @@ a.view_all {
   height: 40px;
   margin-top: 10px;
   padding-right: $baseline;
-  padding-left: $baseline;
+  padding-left: 44px;
   background-color: $box-background-color;
   .listen_user {
     float: left;
-    margin-right: 10px;
+    margin-right: $baseline / 2;
     img {
       width: 40px;
       height: 40px;
@@ -282,7 +284,6 @@ a.view_all {
   .listen_details {
     font-size: 10px;
     line-height: 10px;
-    float: left;
     overflow: hidden;
     height: 40px;
     min-height: 25px;
