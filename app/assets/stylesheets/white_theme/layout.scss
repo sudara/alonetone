@@ -37,18 +37,31 @@ body {
         width: 45%;
         min-width: 320px;
         max-width: 450px;
+        h2.box {
+          box-shadow: none;
+          border-radius: 0;
+        }
+
+        .static_content {
+          padding: $baseline $baseline / 2;
+          font-size: 13px;
+          label {
+            display: block;
+            margin-bottom: -4px;
+          }
+        }
         @media #{$mobile} {
           width: 100%;
         }
       }
     }
-    #static {
-      width: 600px;
-      height: 1%;
-    }
-    .sidebar {
-      float: right;
-      width: 240px;
-    }
+    // #static {
+    //   width: 600px;
+    //   height: 1%;
+    // }
+    // .sidebar {
+    //   float: right;
+    //   width: 240px;
+    // }
   }
 }
