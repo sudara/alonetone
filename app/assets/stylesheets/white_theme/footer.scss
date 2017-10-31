@@ -4,7 +4,7 @@ footer#site_footer {
   line-height: 20px;
   width: 100%;
   padding-bottom: 20px;
-  color: #333333;
+  color: #333;
   background-color: $light-gray;
   .author_name {
     font-size: 11px;
@@ -14,25 +14,30 @@ footer#site_footer {
   }
   .footer_inner {
     display: flex;
-    @include match-variable-site-width();
     margin-right: auto;
     margin-left: auto;
+    @include match-variable-site-width();
     flex-wrap: wrap;
     justify-content: space-between;
     .footer_column {
-      @media #{$mobile} {
-        width: 100%;
-      }
       width: 23%;
       min-width: 150px;
       padding-top: 20px;
-    }
-    .footer_column_header {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 5px;
-      padding-bottom: 2px;
-      border-bottom: 1px #BBBBBB solid;
+      @media #{$mobile} {
+        font-size: 16px;
+        line-height: 24px;
+        width: 100%;
+        h3.footer_column_header {
+          font-size: 17px;
+        }
+      }
+      .footer_column_header {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        padding-bottom: 2px;
+        border-bottom: 1px #bbb solid;
+      }
     }
   }
 }
