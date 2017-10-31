@@ -30,7 +30,6 @@ ul {
   flex-direction: column;
   margin-bottom: $baseline * 2;
   background-color: $white;
-
   justify-content: space-between;
   @include samo-shadow-and-radius();
 
@@ -342,4 +341,18 @@ a.add_to_favorites, a.favorited {
   display: block;
   width: 50px;
   height: 25px;
+}
+
+
+body.has-details {
+  h2.spacey {
+    @include match-variable-site-width();
+  }
+  .container.static_content {
+    @include match-variable-site-width();
+    @include samo-shadow-and-radius();
+    background-color: $white;
+    padding: $baseline;
+
+  }
 }
