@@ -104,6 +104,7 @@ class AssetsController < ApplicationController
   def edit
     @descriptionless = @user.assets.descriptionless
     @allow_reupload = true
+    render 'edit_white' if white_theme_enabled?
   end
 
   def mass_edit

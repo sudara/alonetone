@@ -1,6 +1,6 @@
 .track-content {
   .post-content,
-  .edit-post-content,
+  .edit-track,
   .track-credits {
     max-width: 650px;
     padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
@@ -65,7 +65,7 @@
 }
 
 .post-content,
-.edit-post-content textarea {
+.edit-track textarea {
   position: relative;
   margin-top: $baseline;
   margin-bottom: $baseline * 3;
