@@ -58,7 +58,6 @@ gem "soundmanager2-rails"
 gem 'turbolinks'
 gem 'cloudfront-signer'
 
-
 gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'sidekiq'
@@ -77,19 +76,18 @@ group :development do
   gem 'sqlite3'
   gem 'rack-mini-profiler'
   gem 'perf_check'
-  # gem 'logical-insight'
 end
 
 ## Who loves tests! You do? You do!
 group :test do
   gem "rspec-rails", :require => false
   gem "rspec-mocks", :require => false
-  gem "timecop", :github => 'travisjeffery/timecop', :require => false
+  gem "timecop", :require => false
   gem "guard-rspec", :require => false
   gem 'database_cleaner', :require => false
-  gem 'rb-fsevent', '~> 0.9.1', :require => false
-  gem 'guard', :github => 'sudara/guard', :require => false
-  gem 'guard_listen', :github => 'sudara/listen', :require => 'guard_listen'
+  gem 'rb-fsevent', :require => false
+  gem 'guard', :require => false
+  gem 'listen', :require => false
   # https://github.com/thoughtbot/factory_girl/wiki/Usage
   gem "factory_girl_rails",:require => false
   gem 'rails-controller-testing'
