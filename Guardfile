@@ -1,6 +1,6 @@
 # # A sample Guardfile
 # # More info at https://github.com/guard/guard#readme
-# 
+#
 # guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
 #   watch('config/application.rb')
 #   watch('config/environment.rb')
@@ -15,7 +15,7 @@
 
 # guard 'rspec', :spring => true, :cli => '--colour' do
 #   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
-# 
+#
 #   # Rails example
 #   watch(%r{^spec/.+_spec\.rb$})
 #   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
@@ -30,10 +30,10 @@
 #   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
 #   watch(%r{^spec/.+_spec\.rb$})
 #   watch('spec/spec_helper.rb')  { "spec" }
-#   
+#
 # end
 
-guard :rspec, :spring => true, :all_on_start => false, :all_after_pass => false, :cli => '--colour' do
+guard :rspec, cmd: 'bundle exec rspec', :all_on_start => false, :all_after_pass => false, :cli => '--colour' do
   watch('spec/spec_helper.rb')                        { "spec" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
   watch(%r{^spec/.+_spec\.rb$})
