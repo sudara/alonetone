@@ -4,10 +4,10 @@ class Pic < ActiveRecord::Base
   # Default config for has_attached_file can be found in config/initializers
   attachment_options = {
     :styles => {
-      :tiny       => "25x25#", 
-      :small      => "50x50#", 
-      :large      => "125x125#", 
-      :album      => "200x200#", 
+      :tiny       => "25x25#",
+      :small      => "50x50#",
+      :large      => "125x125#",
+      :album      => "200x200#",
       :original   => "800x800#",
       :greenfield => "1500x1500#",
       :hq         => "3000x3000#"
@@ -17,9 +17,9 @@ class Pic < ActiveRecord::Base
   has_attached_file :pic, attachment_options
 
   validates_attachment_presence :pic, :message => 'must be set. Make sure you chose a file to upload!'
-  validates_attachment_size :pic, :less_than => 3.megabytes, :greater_than => 100.bytes
+  validates_attachment_size :pic, :less_than => 5.megabytes, :greater_than => 100.bytes
   validates_attachment_content_type :pic, :content_type => /image/
-  
+
   # ids after 69601 have :original style stored as filename_original.jpg instead of filename.jpg
   Paperclip.interpolates 'name_with_style' do |attachment, style|
     if attachment.instance.id.to_i > 69601
@@ -30,5 +30,5 @@ class Pic < ActiveRecord::Base
       "#{basename(attachment, style)}_#{style}"
     end
   end
-      
+
 end
