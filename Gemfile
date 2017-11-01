@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "5.1.4"
+gem "rails", "~> 5.1"
 gem "mysql2"
 
 # greenfield
@@ -11,7 +11,7 @@ gem "sometimes"
 gem "awesome_print", :require => 'ap'
 
 # uploading
-gem "aws-sdk"
+gem "aws-sdk", "<3.0"
 gem "paperclip"
 gem "ruby-mp3info", :require => 'mp3info'
 gem "mime-types"
