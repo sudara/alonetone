@@ -22,6 +22,9 @@ ul {
   color: $samo-orange;
   border-bottom: 1px solid $light-gray;
   background-color: transparent;
+  &.static_content_heading {
+    padding-left: $baseline / 2;
+  }
 }
 
 .box {
