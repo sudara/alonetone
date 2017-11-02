@@ -25,7 +25,7 @@
   }
 }
 
-/* SIGN UP */
+/* LOG IN / SIGN UP */
 
 #what-you-get {
   h2 {
@@ -42,6 +42,24 @@
   margin-bottom: 0;
 }
 
+#login, #signup {
+  input.btn {
+    cursor: pointer;
+    @include default-button();
+  }
+  .hint {
+    font-style: italic;
+    margin-top: 9px;
+  }
+}
+
+#login {
+  input.btn {
+    margin-top: $baseline / 2;
+    margin-bottom: $baseline;
+  }
+}
+
 #login.box, #signup.box, #signup-questions.box {
   margin-bottom: 0;
   box-shadow: none;
@@ -54,14 +72,27 @@
 
 .faq.box {
   @include match-variable-site-width();
-  padding: $baseline;
+  padding: $baseline / 2 $baseline;
   box-sizing: border-box;
+  margin-bottom: 26px;
+
   h2.box {
     margin-top: 0;
     box-shadow: none;
+    padding-left: 0;
+    border-radius: 0;
   }
   .static_content {
     margin: $baseline 0;
+    line-height: 1.3em;
+    a {
+        text-decoration: underline;
+        color: inherit;
+      
+      &:hover {
+        color: $samo-orange;
+      }
+    }
   }
 }
 
