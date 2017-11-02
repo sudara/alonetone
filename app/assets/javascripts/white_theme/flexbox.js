@@ -2,11 +2,17 @@
 
     document.addEventListener("turbolinks:load", function() {
         
+        for (var i = 0; i < 8; i++) {
+            var $flexInvisibleDiv = $("<li></li>").appendTo( $("main > ul.playlists") );
+            $flexInvisibleDiv.width( $flexInvisibleDiv.prev().width() );
+        }
+
+
         // If the playlists on the user page extend to more than one line,
         // use this technique for aligning the orphan row
         if ( $("#user_playlists_area ul.playlists").height() > 300 ) {
 	        for (var i = 0; i < 8; i++) {
-				var $flexInvisibleDiv = $("<li></li>").appendTo( $("#user_playlists_area ul.playlists") );
+				var $flexInvisibleDiv = $("<li></li>").appendTo( $("#user_playlists_area > ul.playlists") );
 				$flexInvisibleDiv.width( $flexInvisibleDiv.prev().width() );
 	        }
         }

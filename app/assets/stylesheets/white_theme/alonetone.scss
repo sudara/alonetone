@@ -37,11 +37,14 @@ ul {
   @include samo-shadow-and-radius();
 
   // For Recently Favorited
+  > h2 + .favorited_by {
+    margin-top: -2px;
+  }
    > .favorited_by {
     font-size: 11px;
     line-height: 25px;
     height: 20px;
-    margin-top: 10px;
+    // margin-top: 10px;
     padding-left: 46px;
     border-bottom: 1px solid $light-gray;
     background-color: $samo-background-gray;
