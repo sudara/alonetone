@@ -55,7 +55,7 @@ main {
     'latest favorites'
     'listens comments'
     'card card'
-    'plays .....';
+    'plays popular';
     @media #{$mobile} {
       display: flex;
       flex-direction: column;
@@ -89,6 +89,9 @@ main {
     }
     #user_plays_area {
       grid-area: plays;
+    }
+    #user_popular_area {
+      grid-area: popular;
     }
      > * {
       min-width: 320px;

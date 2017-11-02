@@ -93,11 +93,13 @@
   </div>
 
   <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
-  <div id="user_popular" class="box">
-  	<%= link_to " ", user_tracks_path(@user),
-  	    :class => 'view_more_tracks', :title => "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
-  	<h2>Most Listened To Tracks</h2>
-  	<%= render :partial => 'assets/asset', :collection => @popular_tracks %>
+  <div id="user_popular_area">
+    <div id="user_popular" class="box">
+    	<%= link_to " ", user_tracks_path(@user),
+    	    :class => 'view_more_tracks', :title => "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
+    	<h2>Most Listened To Tracks</h2>
+    	<%= render :partial => 'assets/asset', :collection => @popular_tracks %>
+    </div>
   </div>
   <% end %>
 
