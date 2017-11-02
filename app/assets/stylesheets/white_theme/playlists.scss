@@ -4,6 +4,10 @@ ul.playlists {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  @media #{$efficient} {
+    justify-content: space-around;
+  }
+
   &.three_or_less_playlists {
     justify-content: flex-start;
     li.playlist {
