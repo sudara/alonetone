@@ -2,6 +2,7 @@
 
     document.addEventListener("turbolinks:load", function() {
         
+        // For the /playlists page, align oprhan rows to the left using this 0 height div trick
         for (var i = 0; i < 8; i++) {
             var $flexInvisibleDiv = $("<li></li>").appendTo( $("main > ul.playlists") );
             $flexInvisibleDiv.width( $flexInvisibleDiv.prev().width() );
