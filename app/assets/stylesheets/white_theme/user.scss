@@ -26,19 +26,18 @@ main {
       text-align: center;
       border-radius: 5px;
       align-self: flex-end;
-       > .sprites-heart-with-plus {
-        margin: 0 auto;
-        margin-top: 5px;
-      }
-       > .sprites-heart-broken {
-        margin: 0 auto;
-        margin-top: 6px;
-      }
+      //  > .sprites-heart-with-plus {
+      //   margin: 0 auto;
+      //   margin-top: 5px;
+      // }
+      //  > .sprites-heart-broken {
+      //   margin: 0 auto;
+      //   margin-top: 6px;
+      // }
     }
     a.edit_profile {
       display: block;
       margin-left: auto;
-
       @include default_button('admin');
        > div {
         display: none;
@@ -69,6 +68,9 @@ main {
       margin-bottom: 40px;
 
       grid-area: playlists;
+      h2 {
+        color: $samo-orange;
+      }
     }
     #user_latest_area {
       grid-area: latest;
