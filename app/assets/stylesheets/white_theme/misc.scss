@@ -1,11 +1,3 @@
-/* RADIO */
-
-#radio_title + #columns {
-  flex-wrap: wrap-reverse;
-
-}
-
-
 /* UPLOADING */
 
 .uploader {
@@ -74,7 +66,7 @@
   }
 }
 
-/* ABOUT PAGE */
+/* ABOUT PAGES */
 
 .faq.box {
   margin-left: auto;
@@ -111,6 +103,11 @@
 }
 
 /* RADIO */
+
+#radio_title + #columns {
+  flex-wrap: wrap-reverse;
+
+}
 
 #radio_controls {
   ul {
@@ -198,197 +195,97 @@ div.logo {
 }
 
 
+/* SECRETS */
 
-
-// The following were once in alonetone.scss, wonder if they are in use?
-
-
-//alonetoner_big {
-// margin-bottom: 40px;
-//
-
-//user_home {
-// position: relative;
-// min-height: 40px;
-//
-
-//additional_options {
-// float: right;
-// height: 35px;
-// margin-top: 4px;
-//
-
-//additional_options_solo {
-// position: relative;
-// height: 35px;
-// margin-bottom: 10px;
-// text-align: left;
-//
-
-//visit_us {
-// h1 {
-//   font-size: 24px;
-// }
-// .chunk {
-//   float: left;
-//   width: 270px;
-//   padding-top: 20px;
-//   text-align: center;
-//   a {
-//     img {
-//       margin-bottom: 5px;
-//     }
-//   }
-// }
-//
-
-//map {
-// width: 890px;
-// height: 600px;
-// margin-top: -40px;
-// margin-left: -20px;
-// background: transparent image-url('facebox/loading.gif') no-repeat center center;
-// background-color: $playlist_box_silver;
-// p,
-// a,
-// a:visited {
-// }
-// #iwsw {
-//   img {
-//     float: left;
-//     padding-right: 10px;
-//     padding-bottom: 10px;
-//   }
-// }
-//
-
-//indented_comments {
-// margin-left: 50px;
-//
-
-//1 span#channel_name {
-// color: $orange;
-//
-
-
-//feed_icon_in_box {
-// position: absolute;
-// z-index: 10;
-// top: -30px;
-// right: 18px;
-//
-
-//recaptcha_privacy {
-// display: none;
-//
-
-//* SIGN UP PARAGRAPH ADJUST */
-
-//login p {
-// font-size: 10px;
-// margin-top: 20px;
-//
-
-//listen_user img {
-// vertical-align: top;
-//
-
-//listen_details a {
-// line-height: 14px;
-//
-
-
-// Secretz?
-
-// h2.stats {
-//   margin-top: 1.5em;
-//   margin-bottom: .5em;
-//   text-indent: 45px;
-// }
-// 
-// #total_playsDiv {
-//   width: 800px;
-//   margin: auto;
-//   text-align: left;
-//   background-color: $silver;
-// }
-// 
-// .static_content#stats,
-// .static_content.stats {
-//   width: 800px;
-//   margin: 0 auto;
-//   padding: 0;
-// }
-// 
-// .secretz {
-//   margin: 0;
-//   padding: 0;
-// }
-// h2.table {
-//   margin-bottom: .3em;
-//   padding-top: 2em;
-// }
-// #statstable,
-// .statstable {
-//   width: 100%;
-//   thead tr {
-//     height: 25px;
-//     border-bottom: 3px solid #37392B;
-//     th {
-//       font-size: 12px;
-//       font-weight: bold;
-//       line-height: 25px;
-//       padding-right: 10px;
-//       padding-left: 15px;
-//       text-align: left;
-//       background: #C7C8C7;
-//       &.headerSortDown {
-//         background: #C7C8C7 image-url('icons/small_sort_down.png') no-repeat 3px 8px;
-//       }
-//       &.headerSortUp {
-//         background: #C7C8C7 image-url('icons/small_sort_up.png') no-repeat 3px 8px;
-//       }
-//     }
-//   }
-//   tbody {
-//     overflow-y: scroll;
-//     height: 350px;
-//   }
-//   tr {
-//     width: 100%;
-//   }
-//   tr td {
-//     font-size: 12px;
-//     line-height: 20px;
-//     height: 20px;
-//     padding-left: 15px;
-//     background-color: $box-background-color;
-//     &.uploader {
-//       min-width: 200px;
-//     }
-//     a,
-//     a:hover,
-//     a:visited {
-//       font-size: 12px;
-//       line-height: 20px;
-//     }
-//     img {
-//       width: 25px;
-//     }
-//   }
-//   tr:nth-child(odd) td {
-//     background-color: $box_background_even;
-//   }
-// }
-// 
-// .highlight {
-//   background-color: yellow;
-// }
-// 
-// .static_content.big_stats {
-//   font-size: 14px;
-//   line-height: 1.5em;
-//   strong {
-//     font-size: 18px;
-//   }
-// }
+ h2.stats {
+   margin-top: 1.5em;
+   margin-bottom: .5em;
+   text-indent: 45px;
+ }
+ 
+ #total_playsDiv {
+   width: 800px;
+   margin: auto;
+   text-align: left;
+   background-color: $silver;
+ }
+ 
+ .static_content#stats,
+ .static_content.stats {
+   width: 800px;
+   margin: 0 auto;
+   padding: 0;
+ }
+ 
+ .secretz {
+   margin: 0;
+   padding: 0;
+ }
+ h2.table {
+   margin-bottom: .3em;
+   padding-top: 2em;
+ }
+ #statstable,
+ .statstable {
+   width: 100%;
+   thead tr {
+     height: 25px;
+     border-bottom: 3px solid #37392B;
+     th {
+       font-size: 12px;
+       font-weight: bold;
+       line-height: 25px;
+       padding-right: 10px;
+       padding-left: 15px;
+       text-align: left;
+       background: #C7C8C7;
+       &.headerSortDown {
+         background: #C7C8C7 image-url('icons/small_sort_down.png') no-repeat 3px 8px;
+       }
+       &.headerSortUp {
+         background: #C7C8C7 image-url('icons/small_sort_up.png') no-repeat 3px 8px;
+       }
+     }
+   }
+   tbody {
+     overflow-y: scroll;
+     height: 350px;
+   }
+   tr {
+     width: 100%;
+   }
+   tr td {
+     font-size: 12px;
+     line-height: 20px;
+     height: 20px;
+     padding-left: 15px;
+     background-color: $box-background-color;
+     &.uploader {
+       min-width: 200px;
+     }
+     a,
+     a:hover,
+     a:visited {
+       font-size: 12px;
+       line-height: 20px;
+     }
+     img {
+       width: 25px;
+     }
+   }
+   tr:nth-child(odd) td {
+     background-color: $box_background_even;
+   }
+ }
+ 
+ .highlight {
+   background-color: yellow;
+ }
+ 
+ .static_content.big_stats {
+   font-size: 14px;
+   line-height: 1.5em;
+   strong {
+     font-size: 18px;
+   }
+ }
