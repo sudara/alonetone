@@ -128,7 +128,7 @@
 }
 
 .track-content-edit {
-  @include match-variable-site-width();
+  @include match-variable-site-width('narrow');
 
   .edit-track {
     max-width: none;
