@@ -1,14 +1,23 @@
 // layout
 
-$desktop-site-width: 90%;    // used for width on inner footer, inner header, user pages, user lists
-$efficient-site-width: 96%;  // replaces above width for efficient media queries
+$desktop-site-width-wide: 90%;
+$efficient-site-width-wide: 96%;  
 
-@mixin match-variable-site-width() {
+$desktop-site-width-narrow: 66%;  
+$efficient-site-width-narrow: 96%;
+
+@mixin match-variable-site-width($type: '') {
   margin-left: auto;
   margin-right: auto;
-  width: $desktop-site-width;
+  width: $desktop-site-width-wide;
   @media #{$efficient} {
-    width: $efficient-site-width;
+    width: $efficient-site-width-wide;
+  }
+  @if $type == 'narrow' {
+    width: $desktop-site-width-narrow;
+    @media #{$efficient} {
+      width: $efficient-site-width-narrow;
+    } 
   }
 }
 

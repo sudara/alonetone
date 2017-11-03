@@ -4,6 +4,6 @@
 	<% end %>
   <%= link_to(title_and_year_for(playlist), user_playlist_path(playlist.user.login, playlist), :class => 'small_playlist_title',:title => "#{playlist.title} by #{playlist.user.name}" ) %>
   <div class="small_playlist_user">
-  <%= link_to truncate(playlist.user.name, :length => 26), user_playlist_path(playlist.user.login, playlist) unless @user %>
-	</div>
+  <%= link_to truncate(playlist.user.name, :length => 26), user_home_path(playlist.user) unless @user %>
+  </div>
 <% end %>

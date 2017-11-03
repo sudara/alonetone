@@ -79,7 +79,7 @@
 .faq.box {
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  @include match-variable-site-width('narrow');
   @media #{$efficient} {
     width: 90%;
   }
