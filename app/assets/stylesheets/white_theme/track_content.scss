@@ -1,7 +1,11 @@
 .track-content {
-  .post-content, .edit-track, .track-credits {
+  .player {
+     @include match-variable-site-width('narrow');
+  }
+  .track-post, .edit-track, .track-credits {
+    box-sizing: border-box;
     position: relative;
-    max-width: 650px;
+    @include match-variable-site-width('narrow');
     min-height: $baseline * 3;
     margin-bottom: $baseline * 3;
     padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
@@ -47,34 +51,17 @@
       }
     }
   }
+}
 
-  .track-credits {
-    width: 680px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-
+.track-post {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
   h1 {
     font-family: $black-font;
     font-size: $baseline;
     line-height: $baseline;
     padding-bottom: $baseline;
   }
-}
-
-.post-content, .edit-track textarea {
-  position: relative;
-  width: 100%;
-  margin-top: $baseline;
-  margin-bottom: $baseline * 3;
-  word-wrap: break-word;
-  word-break: break-word;
-  color: $not-quite-black;
-  border: none;
-  background-color: white;
-
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
   p {
     font-family: $serif-font;
     font-size: 18px;
@@ -127,53 +114,32 @@
   }
 }
 
-.track-content-edit {
-  @include match-variable-site-width('narrow');
-
-  .edit-track {
-    max-width: none;
-
-    header {
-      input {
-        padding: 10px;
-        font-family: $sans-font;
-        font-weight: bold;
-      }
-    }
-    textarea {
-      border: 1px solid $lightest-gray;
-      @include samo-shadow-and-radius();
-      font-family: $serif-font;
-      position: relative;
-      width: 100%;
-      height: 120px;
-      margin-top: $baseline;
-      margin-bottom: $baseline;
-      padding: $baseline / 2;
-      word-wrap: break-word;
-      word-break: break-word;
-      color: $not-quite-black;
-      max-width: 500px;
+.edit-track {
+  header {
+    input {
+      padding: 10px;
+      font-family: $sans-font;
+      font-weight: bold;
     }
   }
-  .edit-track-bottom {
+  textarea {
+    border: 1px solid $lightest-gray;
+    @include samo-shadow-and-radius();
+    font-family: $serif-font;
     position: relative;
     width: 100%;
-    max-width: none;
+    height: 120px;
     margin-top: $baseline;
-    margin-bottom: $baseline * 3;
-    padding: 27px 81px 54px 81px;
+    margin-bottom: $baseline;
+    padding: $baseline / 2;
     word-wrap: break-word;
     word-break: break-word;
     color: $not-quite-black;
-    border: none;
-    background-color: white;
-    box-sizing: border-box;
-
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizelegibility;
+    max-width: 500px;
+  }
     .edit-save {
       margin-top: $baseline;
     }
-  }
 }
+
+
