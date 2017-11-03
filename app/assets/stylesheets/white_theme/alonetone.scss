@@ -11,14 +11,14 @@ ul {
 
 .box > h2 {
   font-weight: bold;
-  line-height: 45px;
+  // line-height: 45px;
   display: block;
   box-sizing: border-box;
   width: 100%;
   height: 42px;
   margin-top: 0;
   margin-bottom: 1px;
-  padding: 4px 7px 44px 44px;
+  padding: 8px 0 0 44px;
   color: $samo-orange;
   border-bottom: 1px solid $light-gray;
   background-color: transparent;
