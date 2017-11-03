@@ -9,7 +9,11 @@ ul {
 
 /* STACKED ASSETS */
 
-#home-grid, #user_home .box > h2 {
+#home_grid .box > h2 {
+  padding-left: 44px;
+}
+
+#home_grid, #user_home .box > h2 {
   padding-left: 44px;
 }
 
