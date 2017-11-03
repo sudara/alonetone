@@ -2,6 +2,7 @@
 
 $desktop-site-width: 90%;    // used for width on inner footer, inner header, user pages, user lists
 $efficient-site-width: 96%;  // replaces above width for efficient media queries
+
 @mixin match-variable-site-width() {
   margin-left: auto;
   margin-right: auto;
