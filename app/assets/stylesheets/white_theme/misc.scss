@@ -71,7 +71,12 @@
 /* ABOUT PAGE */
 
 .faq.box {
-  @include match-variable-site-width();
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  @media #{$efficient} {
+    width: 90%;
+  }
   padding: $baseline / 2 $baseline;
   box-sizing: border-box;
   margin-bottom: 26px;
