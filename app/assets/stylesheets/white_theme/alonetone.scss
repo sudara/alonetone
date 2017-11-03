@@ -9,22 +9,8 @@ ul {
 
 /* STACKED ASSETS */
 
-.box > h2 {
-  font-weight: bold;
-  // line-height: 45px;
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  height: 42px;
-  margin-top: 0;
-  margin-bottom: 1px;
-  padding: 8px 0 0 44px;
-  color: $samo-orange;
-  border-bottom: 1px solid $light-gray;
-  background-color: transparent;
-  &.static_content_heading {
-    padding-left: $baseline / 2;
-  }
+#home-grid, #user_home .box > h2 {
+  padding-left: 44px;
 }
 
 .box {
@@ -35,7 +21,22 @@ ul {
   background-color: $white;
   justify-content: space-between;
   @include samo-shadow-and-radius();
-
+  h2 {
+    font-weight: bold;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 42px;
+    margin-top: 0;
+    margin-bottom: 1px;
+    padding: 8px 0 0 $baseline / 2;
+    color: $samo-orange;
+    border-bottom: 1px solid $light-gray;
+    background-color: transparent;
+    &.static_content_heading {
+      padding-left: $baseline / 2;
+    }
+  }
   // For Recently Favorited
   > h2 + .favorited_by {
     margin-top: -2px;
