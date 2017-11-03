@@ -198,7 +198,7 @@ $(document).on('click', '.track-content > .player .play-button,' +
 });
 
 // single track page
-$(document).on('click', '.post-content > .player .play-button', function(e) {
+$(document).on('click', '.track-post > .player .play-button', function(e) {
   var url = $(this).find('a').attr('href');
   var soundId = $(this).parent('[data-sound-id]').data('sound-id');
   var sound = Sound.load(url);

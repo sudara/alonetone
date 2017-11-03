@@ -1,4 +1,4 @@
-.player {
+.track-player {
   position: relative;
   height: $baseline * 3;
   margin-bottom: $baseline;
@@ -61,13 +61,13 @@
   }
 }
 
-.post-content .waveform {
-  left: 75px;
-  right: 0px;
-  width: auto;
-}
+// .track-post .waveform {
+//   left: 75px;
+//   right: 0px;
+//   width: auto;
+// }
 
-.player.stuck {
+.track-player.stuck {
   position: fixed;
   top: 0;
   width: 650px;

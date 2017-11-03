@@ -1,5 +1,5 @@
 <div class="track-content">
-  <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
+  <div class="track-player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
     <i class="fa fa-play fa-3x play-button play-control">
       <%= link_to '', media_url(@asset) %>
     </i>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="post-content">
+  <div class="track-post">
     <h1><%= @asset.name %></h1>
     <% unless @playlist %>
     <h3>by <%= @asset.user.display_name %></h3>
