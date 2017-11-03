@@ -1,4 +1,4 @@
-<div class="track-content">
+<div class="track-content track-content-edit">
   <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
     <i class="fa fa-play fa-3x play-button play-control">
       <%= link_to '', media_url(@asset) %>
@@ -65,15 +65,15 @@
           <%= f.submit "Publish", :class => 'comment_submit' %>
       </div>
     <% end %>
-    <div class="submit_wrapper static_content">
-        <div class="comment_waiting" >
-          <div class="text"><!-- placeholder response text --></div>
-        </div>
-        <div class="small_spinner" style="display:none;"> </div>
-        <%= f.submit "Save", :class => 'comment_submit' %>
-    </div>
+      <div class="submit_wrapper static_content">
+          <div class="comment_waiting" >
+            <div class="text"><!-- placeholder response text --></div>
+          </div>
+          <div class="small_spinner" style="display:none;"> </div>
+          <%= f.submit "Save", :class => 'comment_submit' %>
+      </div>
   <% end %>
-  </div>
+    </div>
   </div>
 
 </div>

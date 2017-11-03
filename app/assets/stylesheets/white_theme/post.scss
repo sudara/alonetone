@@ -1,13 +1,11 @@
 .track-content {
-  .post-content,
-  .edit-track,
-  .track-credits {
-    max-width: 650px;
-    padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
-    padding-bottom: $baseline;
+  .post-content, .edit-track, .track-credits {
     position: relative;
+    max-width: 650px;
     min-height: $baseline * 3;
     margin-bottom: $baseline * 3;
+    padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
+    padding-bottom: $baseline;
     background-color: white;
     table {
       font-size: 12px;
@@ -16,10 +14,11 @@
           th {
             text-align: center;
             img {
-              opacity: .4;
-              filter: alpha(opacity=40);
               width: 50%;
               height: auto;
+              opacity: .4;
+
+              filter: alpha(opacity=40);
             }
           }
         }
@@ -34,16 +33,15 @@
           td {
             font-weight: bold;
             line-height: 12px;
-            vertical-align: top;
             height: 20px;
+            vertical-align: top;
           }
         }
         tr:last-child {
           td {
-              color: $gray;
-              line-height: 12px;
-              vertical-align: top;
-
+            line-height: 12px;
+            vertical-align: top;
+            color: $gray;
           }
         }
       }
@@ -51,22 +49,22 @@
   }
 
   .track-credits {
-    padding-left: 10px;
-    padding-right: 10px;
     width: 680px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 
   h1 {
+    font-family: $black-font;
+    font-size: $baseline;
+    line-height: $baseline;
     padding-bottom: $baseline;
-    line-height:$baseline;
-    font-size:$baseline;
-    font-family:$black-font;
   }
 }
 
-.post-content,
-.edit-track textarea {
+.post-content, .edit-track textarea {
   position: relative;
+  width: 100%;
   margin-top: $baseline;
   margin-bottom: $baseline * 3;
   word-wrap: break-word;
@@ -74,14 +72,13 @@
   color: $not-quite-black;
   border: none;
   background-color: white;
-  width: 100%;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
   p {
-    line-height: $baseline;
-    font-size: 18px;
     font-family: $serif-font;
+    font-size: 18px;
+    line-height: $baseline;
     margin-bottom: $baseline;
     img {
       max-width: 550 + ($baseline * 6);
@@ -107,14 +104,14 @@
     margin: ($baseline * 1.5) auto;
     text-align: center;
     border: 0;
-    border-bottom: 1px solid #AAA;
+    border-bottom: 1px solid #aaa;
     &:after {
       position: absolute;
       top: -.55em;
       left: 265px;
       display: block;
       content: '\f025'; // with headphone icon
-      color: #AAA;
+      color: #aaa;
       background-color: white; // interrupt hr
 
       -webkit-font-smoothing: antialiased;
@@ -122,43 +119,52 @@
   }
   h3 {
     font-family: $serif-font;
-    font-weight: bold;
     font-size: 20px;
+    font-weight: bold;
     margin-top: $baseline + 2px;
     margin-bottom: $baseline - 2px;
     color: $not-quite-black;
   }
 }
 
-.edit-track textarea {
-  position: relative;
-  margin-top: $baseline;
-  margin-bottom: $baseline;
-  word-wrap: break-word;
-  word-break: break-word;
-  color: $not-quite-black;
-  border: none;
-  background-color: $light-gray;
-  width: 100%;
-  height: 300px;
-  padding: $baseline / 2;
-}
+.track-content-edit {
+  @include match-variable-site-width();
 
-.edit-track-bottom {
-padding: 27px 81px 54px 81px;
- position: relative;
- margin-top: $baseline;
- margin-bottom: $baseline * 3;
- word-wrap: break-word;
- word-break: break-word;
- color: $not-quite-black;
- border: none;
- background-color: white;
- width: 100%;
- max-width: 650px;
+  .edit-track {
+    max-width: none;
 
+    textarea {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      margin-top: $baseline;
+      margin-bottom: $baseline;
+      padding: $baseline / 2;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: $not-quite-black;
+      border: none;
+      background-color: $light-gray;
+    }
+  }
+  .edit-track-bottom {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    margin-top: $baseline;
+    margin-bottom: $baseline * 3;
+    padding: 27px 81px 54px 81px;
+    word-wrap: break-word;
+    word-break: break-word;
+    color: $not-quite-black;
+    border: none;
+    background-color: white;
+    box-sizing: border-box;
 
- -webkit-font-smoothing: antialiased;
- text-rendering: optimizelegibility;
- 
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+    .edit-save {
+      margin-top: $baseline;
+    }
+  }
 }
