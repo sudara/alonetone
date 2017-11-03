@@ -133,18 +133,26 @@
   .edit-track {
     max-width: none;
 
+    header {
+      input {
+        padding: 10px;
+        font-family: $sans-font;
+      }
+    }
     textarea {
+      border: 1px solid $lightest-gray;
+      @include samo-shadow-and-radius();
+      font-family: $serif-font;
       position: relative;
       width: 100%;
-      height: 300px;
+      height: 120px;
       margin-top: $baseline;
       margin-bottom: $baseline;
       padding: $baseline / 2;
       word-wrap: break-word;
       word-break: break-word;
       color: $not-quite-black;
-      border: none;
-      background-color: $light-gray;
+      // border: none;
     }
   }
   .edit-track-bottom {
