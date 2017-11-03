@@ -1,5 +1,5 @@
 .track-content {
-  .player {
+  .track-player {
      @include match-variable-site-width('narrow');
   }
   .track-post, .edit-track, .track-credits {

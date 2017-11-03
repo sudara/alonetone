@@ -6,8 +6,6 @@
         $("#play-svg-container").load("<%= asset_path('default/play-animation.svg') %>");
         $(".sprites-play > a").load("<%= asset_path('default/play-icon.svg') %>");
 
-
-
         function PlayAnimation() {
 
             var select = function(s) {
@@ -153,32 +151,27 @@
             
             var playAnimationSVG = $("#playAnimationSVG");
 
+            $("div.track-player").prepend($("<div class='play-button play-control'></div>"))
 
-            $("div.player").prepend($("<div class='play-button play-control'></div>"))
 
-
-            $("div.player > div:first-child").load("<%= asset_path('default/play-icon.svg') %>");
+            $("div.track-player > div:first-child").load("<%= asset_path('default/play-icon.svg') %>");
             
-            $("div.player > div:first-child").click(function() {
+            $("div.track-player > div:first-child").click(function() {
 
-            var playAnimationSVG = $("#playAnimationSVG");
+                var playAnimationSVG = $("#playAnimationSVG");
 
-            $(".playIconSymbol").show();
-            
-            $(this).find("#playIconSymbol").hide();
+                $(".playIconSymbol").show();
+                
+                $(this).find("#playIconSymbol").hide();
 
-            $(this).append(playAnimationSVG);
+                $(this).append(playAnimationSVG);
 
-            myPlayAnimation.init()
-            myPlayAnimation.setPlay()
-            myPlayAnimation.showLoading();
+                myPlayAnimation.init()
+                myPlayAnimation.setPlay()
+                myPlayAnimation.showLoading();
 
-            TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
-        })
-
-
-
-            // $("div.player > i").append( $("#playAnimationSVG") );    
+                TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
+            })
             
             myPlayAnimation.init()
             myPlayAnimation.setPlay()
