@@ -66,6 +66,12 @@
   label {
     margin-bottom: 2px!important;
   }
+  a {
+    text-decoration: underline;
+    &:hover {
+      color: $samo-orange;
+    }
+  }
 }
 
 /* ABOUT PAGE */

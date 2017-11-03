@@ -74,6 +74,7 @@
   color: $not-quite-black;
   border: none;
   background-color: white;
+  width: 100%;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
@@ -127,4 +128,37 @@
     margin-bottom: $baseline - 2px;
     color: $not-quite-black;
   }
+}
+
+.edit-track textarea {
+  position: relative;
+  margin-top: $baseline;
+  margin-bottom: $baseline;
+  word-wrap: break-word;
+  word-break: break-word;
+  color: $not-quite-black;
+  border: none;
+  background-color: $light-gray;
+  width: 100%;
+  height: 300px;
+  padding: $baseline / 2;
+}
+
+.edit-track-bottom {
+padding: 27px 81px 54px 81px;
+ position: relative;
+ margin-top: $baseline;
+ margin-bottom: $baseline * 3;
+ word-wrap: break-word;
+ word-break: break-word;
+ color: $not-quite-black;
+ border: none;
+ background-color: white;
+ width: 100%;
+ max-width: 650px;
+
+
+ -webkit-font-smoothing: antialiased;
+ text-rendering: optimizelegibility;
+ 
 }

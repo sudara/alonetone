@@ -40,6 +40,9 @@
     <%= hidden_field_tag :asset_permalink, @asset.permalink %>
 
   <% if @allow_reupload %>
+    
+    <div class="edit-track-bottom">
+
     <%= link_to 'Upload a new version of this track',"new_version_#{@asset.object_id}", :class=>'slide_open_next'%>
     <div id="new_version_<%=@asset.object_id%>" style="display:none;">
     <p>
@@ -70,6 +73,7 @@
         <%= f.submit "Save", :class => 'comment_submit' %>
     </div>
   <% end %>
+  </div>
   </div>
 
 </div>
