@@ -191,6 +191,20 @@
         line-height: 17px;
         margin-right: 60px;
         .user_description {
+          span.hint {
+            display: block;
+            font-size: 14px;
+            margin-bottom: $baseline / 2;
+            color: $black;
+            .hint {
+              font-size: 14px;
+              text-decoration: underline;
+              color: $black;
+              &:hover {
+                color: $orange;
+              }
+            }
+          }
           font-family: $serif-font;
           p {
             margin-bottom: 1em;
