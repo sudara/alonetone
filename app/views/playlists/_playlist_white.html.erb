@@ -1,9 +1,12 @@
 <div class="playlist-sidebar">
   <%= link_to image_tag(@playlist.cover(:original)), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
   <h1 class="<%= 'cover' unless @asset %>">
-    <%= link_to @playlist.title, user_playlist_path(@playlist.user, @playlist) %>
+    <%= @playlist.title %>
   </h1>
-  <h2><span class="by">by</span> <%= @user.display_name %></h2>
+  <h2>
+    <span class="by">by</span> <%= link_to @user.display_name, user_home_path(@user) %>
+
+  </h2>
 
   <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
