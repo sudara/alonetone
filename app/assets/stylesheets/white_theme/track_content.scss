@@ -10,7 +10,6 @@
       padding: $baseline / 2;
     }
 
-
     h1 {
       font-size: $baseline;
       line-height: $baseline;
@@ -66,6 +65,8 @@
   .track-edit {
     header {
       input {
+        font-family: $sans-font;
+        font-weight: bold;
         width: 100%;
         max-width: 500px;
         padding: 10px;

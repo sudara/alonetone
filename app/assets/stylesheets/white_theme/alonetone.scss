@@ -1,5 +1,6 @@
 body {
   background-color: $body-background-color;
+  font-family: $sans-font;
   -webkit-font-smoothing: antialiased; // does this do anything?
   text-rendering: optimizelegibility;  // how about this?
 
