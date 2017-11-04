@@ -151,12 +151,12 @@
             
             var playAnimationSVG = $("#playAnimationSVG");
 
-            $("div.player").prepend($("<div class='play-button play-control'></div>"))
+            $("div.player .play-button-container").prepend($("<div class='play-button play-control'></div>"))
 
 
-            $("div.player > div:first-child").load("<%= asset_path('default/play-icon.svg') %>");
+            $("div.player .play-button-container > div:first-child").load("<%= asset_path('default/play-icon.svg') %>");
             
-            $("div.player > div:first-child").click(function() {
+            $("div.player .play-button-container > div:first-child").click(function() {
 
                 var playAnimationSVG = $("#playAnimationSVG");
 

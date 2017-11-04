@@ -1,66 +1,31 @@
 .track-content {
-  .player {
-     @include match-variable-site-width('narrow');
-  }
-  .track-post, .edit-track, .track-credits {
-    box-sizing: border-box;
-    position: relative;
     @include match-variable-site-width('narrow');
-    min-height: $baseline * 3;
-    margin-bottom: $baseline * 3;
-    padding: $baseline ($baseline * 3) ($baseline * 2) ($baseline * 3);
-    padding-bottom: $baseline;
+    // box-sizing: border-box;
+    // position: relative;
+    // min-height: $baseline * 3;
+    // margin-bottom: $baseline * 3;
+    // padding-bottom: $baseline;
+  .track-post, .track-edit, .track-credits {
     background-color: white;
-    table {
-      font-size: 12px;
-      thead {
-        tr {
-          th {
-            text-align: center;
-            img {
-              width: 50%;
-              height: auto;
-              opacity: .4;
-
-              filter: alpha(opacity=40);
-            }
-          }
-        }
-      }
-      tbody {
-        tr {
-          td {
-            text-align: center;
-          }
-        }
-        tr:first-child {
-          td {
-            font-weight: bold;
-            line-height: 12px;
-            height: 20px;
-            vertical-align: top;
-          }
-        }
-        tr:last-child {
-          td {
-            line-height: 12px;
-            vertical-align: top;
-            color: $gray;
-          }
-        }
-      }
-    }
   }
 }
 
-.track-post {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
+// .track-post 
+.track-post, .track-edit {
+  padding: $baseline ($baseline * 3);
   h1 {
-    font-family: $black-font;
+    font-family: $sans-font;
+    font-weight: bold;
     font-size: $baseline;
     line-height: $baseline;
-    padding-bottom: $baseline;
+  }
+  h3 {
+      font-family: $sans-font;
+      // font-size: 20px;
+      // font-weight: bold;
+      margin-top: $baseline;
+      margin-bottom: $baseline - 2px;
+      color: $samo-gray;
   }
   p {
     font-family: $serif-font;
@@ -104,22 +69,12 @@
       -webkit-font-smoothing: antialiased;
     }
   }
-  h3 {
-    font-family: $serif-font;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: $baseline + 2px;
-    margin-bottom: $baseline - 2px;
-    color: $not-quite-black;
-  }
 }
 
-.edit-track {
+.track-edit {
   header {
     input {
       padding: 10px;
-      font-family: $sans-font;
-      font-weight: bold;
     }
   }
   textarea {
@@ -137,9 +92,7 @@
     color: $not-quite-black;
     max-width: 500px;
   }
-    .edit-save {
-      margin-top: $baseline;
-    }
+  .edit-save {
+    margin-top: $baseline;
+  }
 }
-
-
