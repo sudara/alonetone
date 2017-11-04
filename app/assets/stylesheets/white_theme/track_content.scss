@@ -6,6 +6,11 @@
   .track-post, .track-edit {
     position: relative;
     padding: $baseline ($baseline * 3);
+    @media #{$mobile} {
+      padding: $baseline / 2;
+    }
+
+
     h1 {
       font-size: $baseline;
       line-height: $baseline;
@@ -31,7 +36,7 @@
       top: $baseline;
       right: $baseline *1.5;
       text-decoration: none;
-      color: $light-gray;
+      color: $gray;
       &:hover {
         color: $black;
       }
@@ -64,6 +69,7 @@
         width: 100%;
         max-width: 500px;
         padding: 10px;
+        box-sizing: border-box;
       }
     }
     textarea {
@@ -76,9 +82,9 @@
       margin-bottom: $baseline;
       padding: $baseline / 2;
       word-wrap: break-word;
-      word-break: break-word;
       color: $not-quite-black;
       border: 1px solid $lightest-gray;
+      box-sizing: border-box;
 
       @include samo-shadow-and-radius();
     }
