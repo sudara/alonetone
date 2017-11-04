@@ -16,27 +16,27 @@
 </div>
 
 <div id="user_home">
-    <div id="user_playlists_area">
-      <% if authorized? %>
-  	    <div class="user_playlists_buttons">
-  			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
-  			      create new playlist
-  			    <% end %>
-          <% if @user.playlists.only_public.size > 2 %>
-  		          <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
-  		    <% end %>
-  		  </div>
-  	  <% end %>
+  <div id="user_playlists_area">
+    <% if authorized? %>
+	    <div class="user_playlists_buttons">
+			    <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
+			      create new playlist
+			    <% end %>
+        <% if @user.playlists.only_public.size > 2 %>
+		          <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), :id => 'change_playlist_order', :class => 'button'  %>
+		    <% end %>
+		  </div>
+	  <% end %>
 
-  		<div class="user_playlists">
-      <% if @user.has_public_playlists? %>
-        <h2 id="user_latest_playlists">Playlists</h2>
-        <ul class="playlists">
-          <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
-    	  </ul>
-      <% end %>
-      </div>
+		<div class="user_playlists">
+    <% if @user.has_public_playlists? %>
+      <h2 id="user_latest_playlists">Playlists</h2>
+      <ul class="playlists">
+        <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
+  	  </ul>
+    <% end %>
     </div>
+  </div>
 
   <div id="user_latest_area">
     <% if @assets.size > 0 %>

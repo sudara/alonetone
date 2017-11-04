@@ -111,19 +111,23 @@ main {
     }
     #user_card_area {
       display: flex;
-      margin-bottom: $baseline;
+      flex-wrap: wrap;
+      margin-bottom: $baseline * 2;
       background-color: $box-background-color;
       @include samo-shadow-and-radius();
       @media #{$mobile} {
         flex-direction: column;
       }
       .user_card_avatar {
+        max-width: 50%;
+        flex-grow: 1;
         img {
-          display: block;
-          max-width: 100%;
+          height: 100%;
+
         }
       }
       .user_card_content {
+        flex-grow: 1;
         display: flex;
         flex-direction: column;
         margin-left: $baseline;
@@ -147,7 +151,6 @@ main {
 
         .user_card_bio {
           font-family: $serif-font;
-
           flex-grow: 1;
         }
 
