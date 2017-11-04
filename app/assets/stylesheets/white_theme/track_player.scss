@@ -17,8 +17,7 @@
       cursor: pointer;
     }
   }
-
-   > i {
+  > i {
     display: none !important;
   }
   .waveform {
@@ -27,7 +26,6 @@
     height: $baseline* 2.5;
     padding-top: $baseline / 2;
     background-color: white;
-
     flex-grow: 1;
      > canvas {
       width: 100%!important;
