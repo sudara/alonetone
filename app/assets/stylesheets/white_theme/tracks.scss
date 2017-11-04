@@ -191,6 +191,7 @@
         line-height: 17px;
         margin-right: 60px;
         .user_description {
+          word-break: break-all;
           span.hint {
             display: block;
             font-size: 14px;
