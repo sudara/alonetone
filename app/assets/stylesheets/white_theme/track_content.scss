@@ -1,98 +1,89 @@
 .track-content {
-    @include match-variable-site-width('narrow');
-    // box-sizing: border-box;
-    // position: relative;
-    // min-height: $baseline * 3;
-    // margin-bottom: $baseline * 3;
-    // padding-bottom: $baseline;
-  .track-post, .track-edit, .track-credits {
+  @include match-variable-site-width('narrow');
+  > * {
     background-color: white;
   }
-}
-
-// .track-post 
-.track-post, .track-edit {
-  padding: $baseline ($baseline * 3);
-  h1 {
-    font-family: $sans-font;
-    font-weight: bold;
-    font-size: $baseline;
-    line-height: $baseline;
-  }
-  h3 {
-      font-family: $sans-font;
-      // font-size: 20px;
-      // font-weight: bold;
+  .track-post, .track-edit {
+    position: relative;
+    padding: $baseline ($baseline * 3);
+    h1 {
+      font-size: $baseline;
+      line-height: $baseline;
+    }
+    h3 {
       margin-top: $baseline;
       margin-bottom: $baseline - 2px;
       color: $samo-gray;
-  }
-  p {
-    font-family: $serif-font;
-    font-size: 18px;
-    line-height: $baseline;
-    margin-bottom: $baseline;
-    img {
-      max-width: 550 + ($baseline * 6);
-      margin-top: $baseline;
-      // not quite perfectly the same width
-      margin-left: -$baseline * 3;
     }
-  }
-  .edit-link {
-    position: absolute;
-    top: $baseline;
-    right: $baseline *1.5;
-    text-decoration: none;
-    color: $light-gray;
-    &:hover {
-      color: $black;
+    p {
+      font-family: $serif-font;
+      font-size: 18px;
+      line-height: $baseline;
+      margin-bottom: $baseline;
+      img {
+        max-width: 550 + ($baseline * 6);
+        margin-top: $baseline;
+        margin-left: -$baseline * 3;
+      }
     }
-  }
-  hr {
-    font-family: 'FontAwesome';
-    position: relative; // needed for icon
-    width: 550px;
-    margin: ($baseline * 1.5) auto;
-    text-align: center;
-    border: 0;
-    border-bottom: 1px solid #aaa;
-    &:after {
+    .edit-link {
       position: absolute;
-      top: -.55em;
-      left: 265px;
-      display: block;
-      content: '\f025'; // with headphone icon
-      color: #aaa;
-      background-color: white; // interrupt hr
+      top: $baseline;
+      right: $baseline *1.5;
+      text-decoration: none;
+      color: $light-gray;
+      &:hover {
+        color: $black;
+      }
+    }
+    hr {
+      font-family: 'FontAwesome';
+      position: relative; // needed for icon
+      width: 550px;
+      margin: ($baseline * 1.5) auto;
+      text-align: center;
+      border: 0;
+      border-bottom: 1px solid #aaa;
+      &:after {
+        position: absolute;
+        top: -.55em;
+        left: 265px;
+        display: block;
+        content: '\f025'; // with headphone icon
+        color: #aaa;
+        background-color: white; // interrupt hr
 
-      -webkit-font-smoothing: antialiased;
+        -webkit-font-smoothing: antialiased;
+      }
     }
   }
-}
 
-.track-edit {
-  header {
-    input {
-      padding: 10px;
+  .track-edit {
+    header {
+      input {
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+      }
     }
-  }
-  textarea {
-    border: 1px solid $lightest-gray;
-    @include samo-shadow-and-radius();
-    font-family: $serif-font;
-    position: relative;
-    width: 100%;
-    height: 120px;
-    margin-top: $baseline;
-    margin-bottom: $baseline;
-    padding: $baseline / 2;
-    word-wrap: break-word;
-    word-break: break-word;
-    color: $not-quite-black;
-    max-width: 500px;
-  }
-  .edit-save {
-    margin-top: $baseline;
+    textarea {
+      font-family: $serif-font;
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      height: 120px;
+      margin-top: $baseline;
+      margin-bottom: $baseline;
+      padding: $baseline / 2;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: $not-quite-black;
+      border: 1px solid $lightest-gray;
+
+      @include samo-shadow-and-radius();
+    }
+    .edit-save {
+      margin-top: $baseline;
+    }
   }
 }
