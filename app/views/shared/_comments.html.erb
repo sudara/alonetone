@@ -1,11 +1,20 @@
+<% if white_theme_enabled? %>
+<div id="user_comments" class="box">
+	<%= link_to user_comments_path(@user.login), :class => 'view_all' do %>
+    <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+	<% end if @comments.size > 4 %>
+  <h2>Latest comments</h2>
+  <%= render :partial => 'shared/comment', :collection => @comments %>
+</div>
+
+<% else %>
 <div id="user_comments" class="box">
   <h2 class="box">Latest comments</h2>
   <%= render :partial => 'shared/comment', :collection => @comments %>
 </div>
 <div class="footer_box">
-
 	<%= link_to user_comments_path(@user.login), :class => 'view_all' do %>
-<span>	  view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+    <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
 	<% end if @comments.size > 4 %>
-
 </div>
+<% end %>

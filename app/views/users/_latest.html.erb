@@ -4,11 +4,8 @@
 </div>
 
 <div class="footer_box">
-
 	<%= link_to user_tracks_path(@user), :class => 'view_all', :title => "uploaded mp3s by #{@user.name}"  do %>
 <span>	  view all tracks </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
 	<% end if @user.assets_count > 5 %>
-
-
 </div>
 
