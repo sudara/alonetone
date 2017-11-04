@@ -1,4 +1,4 @@
-.track-player {
+.player {
   position: relative;
   height: $baseline * 3;
   margin-bottom: $baseline;
@@ -61,7 +61,7 @@
   }
 }
 
-.track-player.stuck {
+.player.stuck {
   position: fixed;
   top: 0;
   width: 650px;
