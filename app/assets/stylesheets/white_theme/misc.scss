@@ -41,7 +41,8 @@
   }
   .hint {
     font-style: italic;
-    margin-top: 9px;
+    margin-top: $baseline / 4;
+    margin-bottom: $baseline / 4;
   }
 }
 
@@ -106,7 +107,6 @@
 
 #radio_title + #columns {
   flex-wrap: wrap-reverse;
-
 }
 
 #radio_controls {

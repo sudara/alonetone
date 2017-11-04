@@ -24,11 +24,11 @@ footer#site_footer {
       min-width: 150px;
       padding-top: 20px;
       @media #{$mobile} {
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 17px;
+        line-height: 28px;
         width: 100%;
         h3.footer_column_header {
-          font-size: 17px;
+          font-size: 18px;
         }
       }
       .footer_column_header {
