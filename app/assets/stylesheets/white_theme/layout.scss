@@ -20,7 +20,8 @@ body {
       margin-right: auto;
       flex-wrap: wrap;
       .playlist-sidebar {
-        width: 300px;
+        min-width: 300px;
+        width: 35%;
       }
       .track-content {
         margin-left: $baseline;

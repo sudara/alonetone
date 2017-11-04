@@ -1,6 +1,7 @@
 .playlist-sidebar {
   position: relative;
   background-color: white;
+  @include samo-shadow-and-radius();
   margin-bottom: $baseline;
   .small-cover {
     display: block;
@@ -153,6 +154,7 @@
 
 
 
+// ??????
 .edit_playlist ul a[data-method=delete] {
   display: none;
 }

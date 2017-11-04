@@ -2,6 +2,7 @@
   @include match-variable-site-width('narrow');
   > * {
     background-color: white;
+    @include samo-shadow-and-radius();
   }
   .track-post, .track-edit {
     position: relative;
