@@ -38,7 +38,7 @@ header#site_header {
       .profile_link {
         font-size: 14px;
         position: relative;
-        z-index: 3;
+        z-index: 100;
         display: block;
         box-sizing: border-box;
         height: 40px;
@@ -68,6 +68,7 @@ header#site_header {
         top: -90px;
         margin-top: 40px;
         width: 100%;
+        z-index: 99;
         a {
           font-size: 14px;
           font-weight: normal;
