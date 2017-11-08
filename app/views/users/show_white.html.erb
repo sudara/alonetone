@@ -7,14 +7,12 @@
     <% end %>
   <% end %>
 
-
   <div class="user_name_and_location">
     <h1 class="user_name"><%= @user.name %></h1>
     <div class="user_location"><%= user_location(@user) %></div>
   </div>
 
   <%= follow_toggle(@user) %>
-
 
 </div>
 
@@ -154,7 +152,10 @@
         <% if moderator? %>
         <p>&nbsp;</p>
         <p>
-          Current IP: <strong><%= @user.current_login_ip %> <%= flag_for(@user.listens.first&.country) %></strong><br/>
+          Current IP: <strong><%= @user.current_login_ip %>
+        </p>
+        <p>
+          <%= flag_for(@user.listens.first&.country) %>
         </p>
         <p>
           User Agent: <%= @user.browser %>
