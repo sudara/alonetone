@@ -90,8 +90,22 @@
 
       @include samo-shadow-and-radius();
     }
-    .edit-save {
-      margin-top: $baseline;
+    .track-edit-bottom {
+      a {
+        text-decoration: underline;
+        &:hover {
+          color: $samo-orange;
+        }
+      }
+      .edit-save {
+        margin-top: $baseline;
+        input {
+          cursor: pointer;
+          @include default-button('admin');
+          
+        }
+      }
+      
     }
   }
 }
