@@ -152,8 +152,9 @@
         </p>
         <% end %>
         <% if moderator? %>
+        <p>&nbsp;</p>
         <p>
-          Current IP: <%= @user.current_login_ip %> <%= flag_for(@user.listens.first&.country) %><br/>
+          Current IP: <strong><%= @user.current_login_ip %> <%= flag_for(@user.listens.first&.country) %></strong><br/>
         </p>
         <p>
           User Agent: <%= @user.browser %>
