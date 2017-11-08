@@ -25,10 +25,11 @@ footer#site_footer {
       padding-top: 20px;
       @media #{$mobile} {
         font-size: 17px;
-        line-height: 28px;
+        line-height: 32px;
         width: 100%;
         h3.footer_column_header {
           font-size: 18px;
+          margin-bottom: 12px;
         }
       }
       .footer_column_header {
