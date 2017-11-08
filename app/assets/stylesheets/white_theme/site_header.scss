@@ -88,6 +88,9 @@ header#site_header {
     float: right;
     margin-right: 4%;
     padding-top: 8px;
+    @media #{$efficient} {
+      display: none;
+    }
     #search_form {
       display: block;
       float: left;
@@ -95,9 +98,6 @@ header#site_header {
         font-size: 12px;
         float: right;
         width: 140px;
-        @media only screen and (max-width: 640px) {
-          width: 110px;
-        }
         height: 19px;
         padding: 3px 12px 2px 12px;
         color: #222222;
