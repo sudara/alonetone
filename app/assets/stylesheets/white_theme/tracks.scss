@@ -267,6 +267,9 @@
             margin-bottom: 15px;
             margin-left: 3px;
             padding: $baseline / 4;
+            @media #{$mobile} {
+              font-size: 16px;
+            } 
           }
           .private_check_box {
             font-size: 11px;
