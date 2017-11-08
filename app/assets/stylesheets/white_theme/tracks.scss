@@ -164,7 +164,14 @@
       padding-right: $baseline / 2;
       padding-left: $baseline / 2;
     }
-
+    a.add_to_favorites, a.favorited {
+      position: absolute;
+      z-index: 2;
+      right: $baseline;
+      display: block;
+      width: 50px;
+      height: 25px;
+    }
     box-shadow: inset 0 1px 3px #F2F2F2;
     .tracks_reveal_top {
       display: flex;
