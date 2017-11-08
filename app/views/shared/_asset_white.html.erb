@@ -27,7 +27,7 @@
   <div class="track-post">
     <h1><%= @asset.name %></h1>
     <% unless @playlist %>
-    <h3>by <%= @asset.user.display_name %></h3>
+    <h3><%= @asset.user.display_name %></h3>
     <% end %>
     <%= markdown(@asset.description) %>
     <% if authorized? and @playlist %>

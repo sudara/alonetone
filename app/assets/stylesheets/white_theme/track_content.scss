@@ -16,8 +16,8 @@
       line-height: $baseline;
     }
     h3 {
-      margin-top: $baseline;
-      margin-bottom: $baseline - 2px;
+      margin-top: $baseline / 2;
+      margin-bottom: $baseline;
       color: $samo-gray;
     }
     p {

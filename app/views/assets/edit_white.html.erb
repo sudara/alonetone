@@ -38,7 +38,7 @@
     <div class="track-edit">
       <header>
         <h1><%= f.text_field :title, :value => @asset.name %></h1>
-        <h3>by <%= @asset.user.display_name %></h3>
+        <h3><%= @asset.user.display_name %></h3>
       </header>
 
       <%= f.text_area :description, placeholder: "Tell us a story..." %>
