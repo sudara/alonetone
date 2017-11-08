@@ -59,12 +59,6 @@
   label {
     margin-bottom: 2px!important;
   }
-  a {
-    text-decoration: underline;
-    &:hover {
-      color: $samo-orange;
-    }
-  }
 }
 
 /* ABOUT PAGES */
@@ -92,14 +86,6 @@
   .static_content {
     margin: $baseline 0;
     line-height: 1.3em;
-    a {
-        text-decoration: underline;
-        color: inherit;
-      
-      &:hover {
-        color: $samo-orange;
-      }
-    }
   }
 }
 

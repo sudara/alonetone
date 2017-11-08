@@ -143,7 +143,7 @@ main {
         .user_card_bio {
           font-family: $serif-font;
           flex-grow: 1;
-          font-size: 13px;
+          font-size: 14px;
         }
 
         .user_card_links {
@@ -155,6 +155,9 @@ main {
 
         .user_card_stats {
           font-size: 13px;
+        }
+
+        .user_card_mod_stats {
         }
       }
     }
