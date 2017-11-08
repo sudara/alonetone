@@ -1,5 +1,9 @@
-.asset,
-.track {
+.asset, .track {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 50px;
+  border-bottom: 1px solid $light-gray;
   &.hover {
     #playIconSymbol {
       fill: $samo-orange;
@@ -9,20 +13,14 @@
         color: $samo-orange;
       }
       .time {
-         color: $samo-orange!important;
+        color: $samo-orange!important;
       }
     }
   }
-  position: relative;
-  overflow: hidden;
-  min-height:50px;
-  width: 100%;
-  border-bottom: 1px solid $light-gray;
   &:last-child {
     border-bottom: 0;
   }
-  .button,
-  .title {
+  .button, .title {
     float: left;
   }
   .seekbar {
@@ -34,7 +32,6 @@
       padding-top: 2px;
       padding-bottom: 2px;
       background-color: $samo-background-gray;
-
     }
     .played {
       height: 5px;
@@ -53,37 +50,38 @@
       height: 50px;
       a {
         display: block;
-        margin-top: 11px;
-        margin-left: 8px;
         width: 28px;
         height: 28px;
+        margin-top: 11px;
+        margin-left: 8px;
         svg {
           pointer-events: none;
         }
       }
     }
     div.title {
+      display: flex;
       overflow: hidden;
       box-sizing: border-box;
       width: auto;
       height: 50px;
       padding-top: 13px;
+
       flex-grow: 1;
-      display: flex;
       .title_left_column {
         flex-grow: 1;
         a.track_link {
-          text-overflow: ellipsis;
           line-height: 1.1em;
+          display: block;
           overflow: hidden;
           white-space: nowrap;
-          display: block;
+          text-overflow: ellipsis;
         }
       }
       .title_right_column {
+        position: relative;
         width: 50px;
         height: 100%;
-        position: relative;
         .counter {
           font-size: 15px;
           font-weight: bold;
@@ -99,13 +97,13 @@
           bottom: 7px;
           display: block;
           text-align: right;
-          color: #8C8C8C;
+          color: #8c8c8c;
         }
       }
       a {
         font-size: 15px;
-        text-decoration: none;
         font-weight: bold;
+        text-decoration: none;
 
         -webkit-font-smoothing: antialiased;
       }
@@ -124,9 +122,7 @@
         font-weight: normal;
         color: $samo-gray;
       }
-      span.track_play,
-      span.latest,
-      span.popular {
+      span.track_play, span.latest, span.popular {
         font-size: 12px;
         margin-left: 20px;
       }
@@ -139,17 +135,14 @@
         color: $orange;
       }
     }
-    &.hover,
-    &.open {
-      div.button,
-      div.title {
-        background-color: #EEEEEE;
+    &.hover, &.open {
+      div.button, div.title {
+        background-color: #eee;
       }
     }
     &.playing {
-      div.button,
-      div.title {
-        background-color: #EEEEEE;
+      div.button, div.title {
+        background-color: #eee;
       }
       div.button {
         a {
@@ -161,7 +154,7 @@
           opacity: .99;
         }
         div.time {
-          color: #FECDA6;
+          color: #fecda6;
         }
       }
     }
@@ -172,6 +165,7 @@
     padding-top: $baseline;
     padding-right: $baseline;
     padding-left: $baseline;
+    box-shadow: inset 0 1px 3px #f2f2f2;
     @media #{$mobile} {
       padding-right: $baseline / 2;
       padding-left: $baseline / 2;
@@ -184,7 +178,6 @@
       width: 50px;
       height: 25px;
     }
-    box-shadow: inset 0 1px 3px #F2F2F2;
     .tracks_reveal_top {
       display: flex;
       .alonetoner {
@@ -199,7 +192,7 @@
         a img {
           width: 50px;
           height: 50px;
-          border: 1px solid #9FA28D;
+          border: 1px solid #9fa28d;
           &.no_border {
             border: none;
           }
@@ -210,10 +203,11 @@
         line-height: 17px;
         margin-right: 60px;
         .user_description {
+          font-family: $serif-font;
           word-wrap: break-word;
           span.hint {
-            display: block;
             font-size: 14px;
+            display: block;
             margin-bottom: $baseline / 2;
             color: $black;
             .hint {
@@ -225,7 +219,6 @@
               }
             }
           }
-          font-family: $serif-font;
           p {
             margin-bottom: 1em;
           }
@@ -249,100 +242,65 @@
         }
       }
     }
-//    .tabbed_input {
-//      width: 360px;
-//      height: 20px;
-//      margin-left: 10px;
-//    }
-//    .home_page_link {
-//      text-align: right;
-//    }
-
-//    .no_border {
-//      border: none;
-//    }
     .comment_track {
       clear: both;
       margin-top: 20px;
       .comment_form {
         overflow: hidden;
-        .comment_waiting {
-          font-size: 14px;
-          font-weight: bold;
-          position: absolute;
-          bottom: 10px;
-          left: 19px;
-          text-align: center;
-          color: $orange;
-          background-color: $tab_box_silver;
-          div.ajax_success,
-          div.ajax_fail {
-            line-height: 30px;
-            height: 30px;
-            text-indent: 35px;
-            background: transparent image-url('icons/ok.png') no-repeat top left;
+        form {
+          .comment_as {
+            font-size: 12px;
+            line-height: 37px;
+            overflow: auto;
+            img {
+              float: left;
+              width: 27px;
+              height: 27px;
+              margin-right: 10px;
+            }
           }
-          div.ajax_success {
-            color: $green;
+          textarea {
+            box-sizing: border-box;
+            width: calc(100% - 6px );
+            margin-right: 3px;
+            margin-bottom: 15px;
+            margin-left: 3px;
+            padding: $baseline / 4;
+            font-family: $serif-font;
           }
-          div.ajax_fail {
-            background: transparent image-url('icons/not_ok.png') no-repeat top left;
-          }
-        }
-        .comment_as {
-          font-size: 12px;
-          line-height: 37px;
-          overflow: auto;
-          img {
+          .private_check_box {
+            font-size: 11px;
             float: left;
-            width: 27px;
-            height: 27px;
-            margin-right: 10px;
+            clear: both;
+            margin-top: 2px;
+          }
+          div.submit_wrapper {
+            .comment_waiting {
+              margin-top: -5px;
+              font-size: 11px;
+              color: $orange;
+              text-align: right;
+              div.ajax_success, div.ajax_fail {
+                line-height: 30px;
+                height: 30px;
+              }
+              div.ajax_success {
+                color: $green;
+              }
+              div.ajax_fail {
+                color: $red;
+              }
+            }
+          }
+          input.comment_submit {
+            float: right;
+            cursor: pointer;
+            background-color: transparent;
+            @include default_button();
           }
         }
-        .private_check_box {
-          font-size: 11px;
-          float: left;
-          clear: both;
-          margin-top: 2px;
-        }
-      }
-      // .comment_header {
-      //   a {
-      //     font-size: 16px;
-      //     line-height: 40px;
-      //     margin-left: -10px;
-      //   }
-      // }
-      textarea {
-        box-sizing: border-box;
-        width: calc(100% - 6px );
-        margin-right: 3px;
-        margin-bottom: 15px;
-        margin-left: 3px;
-      }
-      input.comment_submit {
-        float: right;
-        cursor: pointer;
-        background-color: transparent;
-
-        @include default_button();
       }
     }
-    // .admin {
-    //   font-size: 10px;
-    //   line-height: 12px;
-    //   padding-top: 20px;
-    //   color: #666666;
-    // }
-    // .show_to_admin {
-    //   display: none;
-    //   float: none;
-    //   clear: both;
-    // }
-    // .show_to_admin_or_owner {
-    //   display: none;
-    // }
     .track_links {
       float: right;
       margin-top: 15px;
@@ -412,6 +370,3 @@
 // .asset.played {
 //   opacity: .2;
 // }
-
-
-

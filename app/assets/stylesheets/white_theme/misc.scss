@@ -135,12 +135,13 @@
 /* PROGRESS INDICATOR */
 
 div.small_spinner {
-  float: right;
-  width: 20px;
-  height: 20px;
-  margin-top: 5px;
-  margin-top: 5px;
-  background: image-url('icons/small_spinner.gif') no-repeat center center;
+  display: none;
+//  float: right;
+//  width: 20px;
+//  height: 20px;
+//  margin-top: 5px;
+//  margin-top: 5px;
+//  background: image-url('icons/small_spinner.gif') no-repeat center center;
 }
 
 /* REPORT A USER */
