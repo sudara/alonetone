@@ -149,19 +149,21 @@
           <strong>~<%= @user.bandwidth_used %>GB</strong> transferred.
         </p>
         <% end %>
+      </div>
         <% if moderator? %>
-        <p>&nbsp;</p>
-        <p>
-          Current IP: <strong><%= @user.current_login_ip %>
-        </p>
-        <p>
-          <%= flag_for(@user.listens.first&.country) %>
-        </p>
-        <p>
-          User Agent: <%= @user.browser %>
-        </p>
+      <div class="user_card_mod_stats">
+          <p>&nbsp;</p>
+          <p>
+            Current IP: <strong><%= @user.current_login_ip %></strong>
+          </p>
+          <p>
+            <%= flag_for(@user.listens.first&.country) %>
+          </p>
+          <p>
+            User Agent: <%= @user.browser %>
+          </p>
+        </div>
         <% end %>
       </div>
-    </div>
   </div>
 </div>
