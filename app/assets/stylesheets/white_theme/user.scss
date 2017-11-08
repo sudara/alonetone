@@ -18,31 +18,21 @@ main {
       }
     }
     a.follow {
-      font-size: 10px;
-      line-height: 20px;
       display: block;
       width: 48px;
       height: 48px;
-      text-align: center;
-      border-radius: 5px;
       align-self: flex-end;
-      //  > .sprites-heart-with-plus {
-      //   margin: 0 auto;
-      //   margin-top: 5px;
-      // }
-      //  > .sprites-heart-broken {
-      //   margin: 0 auto;
-      //   margin-top: 6px;
-      // }
     }
     a.edit_profile {
-      display: block;
-      margin-left: auto;
+      position: absolute;
+      margin-left: 0px;
+      margin-top:70px;
       @include default_button('admin');
        > div {
         display: none;
       }
     }
+
   }
   #user_home {
     display: grid;
@@ -97,7 +87,7 @@ main {
       min-width: 320px;
     }
     .user_playlists_buttons {
-      margin-bottom: 15px;
+      margin-bottom: $baseline;
       #create_new_playlist {
         @include default_button('admin');
       }
@@ -108,6 +98,7 @@ main {
           display: none;
         }
       }
+
     }
     #user_card_area {
       display: flex;
