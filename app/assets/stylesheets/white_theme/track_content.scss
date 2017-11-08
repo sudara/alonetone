@@ -32,14 +32,7 @@
       }
     }
     .edit-link {
-      position: absolute;
-      top: $baseline;
-      right: $baseline *1.5;
-      text-decoration: none;
-      color: $gray;
-      &:hover {
-        color: $black;
-      }
+      @include default-button('admin');
     }
     hr {
       font-family: 'FontAwesome';
