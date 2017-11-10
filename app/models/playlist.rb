@@ -42,7 +42,7 @@ class Playlist < ActiveRecord::Base
       when :small then 'default/no-cover-50.jpg'
       when :large then 'default/no-cover-125.jpg'
       when :album then 'default/no-cover-200.jpg'
-      when nil then 'default/no-cover-400.jpg'
+      else 'default/no-cover-200.jpg'
     end
   end
 
