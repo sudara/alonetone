@@ -53,15 +53,15 @@ ul {
     font-size: 11px;
     line-height: 25px;
     height: 20px;
-    // margin-top: 10px;
-    padding-left: 46px;
+    padding-left: 50px;
     border-bottom: 1px solid $light-gray;
     background-color: $samo-background-gray;
     box-shadow: 0px 3px 3px -1px #65666625;
+    color: $medium-gray;
      > .artist {
-      font-weight: bold;
+      color: $black;
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
       }
     }
   }
