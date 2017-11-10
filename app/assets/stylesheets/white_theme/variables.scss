@@ -1,9 +1,9 @@
 // layout
 
 $desktop-site-width-wide: 90%;
-$efficient-site-width-wide: 96%;  
+$efficient-site-width-wide: 96%;
 
-$desktop-site-width-narrow: 66%;  
+$desktop-site-width-narrow: 66%;
 $efficient-site-width-narrow: 96%;
 
 @mixin match-variable-site-width($type: '') {
@@ -17,7 +17,7 @@ $efficient-site-width-narrow: 96%;
     width: $desktop-site-width-narrow;
     @media #{$efficient} {
       width: $efficient-site-width-narrow;
-    } 
+    }
   }
 }
 
@@ -30,7 +30,7 @@ $mobile: 'only screen and (max-width: 640px)';
 
 // site colors
 
-$body-background-color: #FBFBFB;
+$body-background-color: #f4f4f4;
 $box-background-color: #FFFFFF;
 
 // fonts
@@ -50,7 +50,7 @@ $silver: #C7C8C7;
 $samo-gray: #868686;
 $lightest-gray: #C7C6C3;
 $light-gray: #EEEEEE;
-$samo-background-gray: #F2F2F2;
+$samo-background-gray: #F1F2F2;
 $white: #FFFFFF;
 $red: #D3220C;
 $green: #66A410;
