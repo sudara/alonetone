@@ -80,7 +80,9 @@
       color: $not-quite-black;
       border: 1px solid $lightest-gray;
       box-sizing: border-box;
-
+      @media #{$mobile} {
+        font-size: 16px;
+      }
       @include samo-shadow-and-radius();
     }
     .track-edit-bottom {
