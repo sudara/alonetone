@@ -123,6 +123,9 @@
         font-size: 11px;
         font-weight: normal;
         color: $samo-gray;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       span.track_play, span.latest, span.popular {
         font-size: 12px;
