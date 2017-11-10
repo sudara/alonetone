@@ -10,7 +10,6 @@
 
 		<div class="user_playlists">
     <% if @user.has_public_playlists? %>
-      <h2 id="user_latest_playlists">Playlists</h2>
       <div class="user_playlists_buttons">
         <% if authorized? %>
         <%= link_to new_user_playlist_path(@user), :id => 'create_new_playlist', :class => 'button' do %>
