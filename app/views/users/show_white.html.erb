@@ -1,19 +1,8 @@
 <div id="user_header">
-  <%= image_tag(avatar_or_placeholder_for(@user, :large)) %>
-
-  <% if authorized? %>
-    <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
-      edit profile
-    <% end %>
-  <% end %>
-
   <div class="user_name_and_location">
     <h1 class="user_name"><%= @user.name %></h1>
-    <div class="user_location"><%= user_location(@user) %></div>
   </div>
-
   <%= follow_toggle(@user) %>
-
 </div>
 
 <div id="user_home">
@@ -133,12 +122,14 @@
       <hr>
       <div class="user_card_stats">
         <p>
-          Joined <strong><%= @user.created_at.to_date.to_s :long %></strong>.
+          <div class="user_location"><%= user_location(@user) %></div>
         </p>
         <p>
           Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
         </p>
-
+        <p>
+          Joined <strong><%= @user.created_at.to_date.to_s :long %></strong>.
+        </p>
         <% if @user.listens_count > 0 %>
         <p>
           <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
@@ -150,9 +141,13 @@
         </p>
         <% end %>
       </div>
-        <% if moderator? %>
       <div class="user_card_mod_stats">
-          <p>&nbsp;</p>
+        <% if authorized? %>
+          <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
+            edit profile
+          <% end %>
+        <% end %>
+        <% if moderator? %>
           <p>
             Current IP: <strong><%= @user.current_login_ip %></strong>
           </p>
