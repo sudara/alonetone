@@ -1,6 +1,6 @@
 <%= render :partial => 'notices/create_playlist'  unless (@user.playlists_count > 0) || @user.assets_count < 1 %>
 
-<h1 class="spacey">upload mp3 or zip files, up to 40MB each</h1>
+
 
 <% content_for :left do %>	
   <div class="upload box">
@@ -9,13 +9,14 @@
         <%= render :partial => 'form' %>
     </div>
     <div class="static_content">
-    By clicking "Upload!" you confirm that <span class="important">you own the copyright to the files you upload</span>
-  and accept our totally reasonable terms and conditions.
-    </div>
-    <div class="static_content">
-      Por favor publique música de la que tenga derechos de autor (es decir, que usted escribió y grabo la canción). Su cuenta sera borrada y su IP restringido si usted publica música de terceros.
-    </div>
+    	<p><strong>Upload mp3 or zip files, up to 40MB each.</strong></p>
+
+    	<p>By clicking "Upload!" you confirm that <span class="important">you own the copyright to the files you upload</span>
+  and accept our totally reasonable terms and conditions.</p>
+
+      	<p>Por favor publique música de la que tenga derechos de autor (es decir, que usted escribió y grabo la canción). Su cuenta sera borrada y su IP restringido si usted publica música de terceros.</p>
 	</div>
+</div>
 <% end %>
 
 <% content_for :right do%>
