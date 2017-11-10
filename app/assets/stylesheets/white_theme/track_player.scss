@@ -6,7 +6,7 @@
   margin-bottom: $baseline;
   background-color: $white;
   .play-button-container {
-    width: 80px;
+    min-width: 80px;
     height: 80px;
     .play-button, .pause-button {
       position: relative;
@@ -26,6 +26,7 @@
     height: $baseline* 2.5;
     padding-top: $baseline / 2;
     background-color: white;
+    margin-right: $baseline / 2;
     flex-grow: 1;
      > canvas {
       width: 100%!important;
