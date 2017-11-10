@@ -27,7 +27,11 @@
       <%= link_to radio_path(:per_page => 40,:source => 'latest'), :class=> 'view_all', :title => 'latest music on alonetone' do %>
       <span>view all</span>
       <% end %>
-      <h2>Latest uploaded</h2>
+      <h2>
+        <%= link_to radio_path(:per_page => 40,:source => 'latest'), :title => 'latest music on alonetone' do %>
+        Latest uploaded
+        <% end %>
+      </h2>
       <%= render :partial => 'assets/asset', :collection => @assets %>
     </div>
   </div>
@@ -37,7 +41,11 @@
       <%= link_to all_comments_path, :class => 'view_all', :title => 'view latest comments' do %>
       <span>view all</span>
       <% end %>
-      <h2>Latest Comments</h2>
+      <h2>
+        <%= link_to all_comments_path, :title => 'view latest comments' do %>
+        Latest Comments
+        <% end %>
+      </h2>
       <%= render :partial => 'shared/comment', :collection => @comments %>
     </div>
   </div>
@@ -48,7 +56,11 @@
     <%= link_to radio_path(:per_page => 40,:source => 'popular'), :class => "view_all", :title => 'alonetone radio: currently kicking ass' do %>
       <span>view all</span>
     <% end %>
-    <h2>Currently kicking ass</h2>
+    <h2>
+      <%= link_to radio_path(:per_page => 40,:source => 'popular'), :title => 'alonetone radio: currently kicking ass' do %>
+      Currently kicking ass
+      <% end %>
+    </h2>
     <%= render :partial => 'assets/asset', :collection => @popular %>
     </div>
   </div>
@@ -59,7 +71,11 @@
         <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
           <span>view all</span>
         <% end %>
-        <h2>Tracks from those you follow</h2>
+        <h2>
+          <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :title => 'alonetone radio: those you follow' do %>
+          Tracks from those you follow
+          <% end %>
+        </h2>
         <div>
           <%= render :partial => 'assets/asset', :collection => @followee_tracks %>
         </div>
@@ -72,7 +88,11 @@
         <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
         <span>view all</span>
         <% end %>
-        <h2>Recently favorited</h2>
+        <h2>
+          <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :title => 'alonetone radio: recently favorited' do %>
+          Recently favorited
+          <% end %>
+        </h2>
         <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite %>
       </div>
   </div>
