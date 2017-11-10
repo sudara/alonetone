@@ -95,6 +95,13 @@
   }
 }
 
+#fineprint.box {
+  .static_content {
+    padding-top: $baseline / 4;
+    padding-bottom: $baseline / 4;
+  }
+}
+
 /* RADIO */
 
 #radio_title + #columns {
