@@ -111,7 +111,7 @@
       }
       .title_left_column_bottom {
         clear: both;
-        margin-top: 2px;
+        margin-top: -2px;
         a {
           -webkit-font-smoothing: subpixel-antialiased;
         }
@@ -274,7 +274,7 @@
             padding: $baseline / 4;
             @media #{$mobile} {
               font-size: 16px;
-            } 
+            }
           }
           .private_check_box {
             font-size: 11px;
