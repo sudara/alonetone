@@ -141,7 +141,7 @@ class AssetsController < ApplicationController
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
      if @assets.present?
-       flash[:error] = flashes.html_safe
+        flash[:error] = flashes.html_safe
       else
         flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email #{Alonetone.email}"
       end
@@ -213,13 +213,22 @@ class AssetsController < ApplicationController
     @assets = []
     attrs = { private: !!(params[:commit] =~ /don't publish/) }
     Array(params[:asset_data]).each do |file|
-      unless file.is_a?(String)
-        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
-        if !asset.new_record?
-          Greenfield::WaveformExtractJob.perform_later(asset.id)
+      if file.is_a?(String) and file.starts_with? "http"
+        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => Asset.parse_external_url(file)))
+      elsif file.is_a?(String)
+        # twiddle thumbs
+      elsif file_is_a_zip?(file)
+        Asset.extract_mp3s do |asset|
+          @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
         end
+      else
+        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
       end
     end
+  end
+
+  def file_is_a_zip?(path)
+    Paperclip::ContentTypeDetector.new(path).detect == 'application/zip'
   end
 
   def set_related_lastest_variables

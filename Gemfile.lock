@@ -284,6 +284,7 @@ GEM
     ruby-audio (1.6.1)
     ruby-mp3info (0.8.10)
     ruby_dep (1.5.0)
+    rubyzip (1.2.1)
     s3_direct_upload (0.1.7)
       coffee-rails (>= 3.1)
       jquery-fileupload-rails (~> 0.4.1)
@@ -405,6 +406,7 @@ DEPENDENCIES
   rspec-rails
   ruby-audio
   ruby-mp3info
+  rubyzip
   s3_direct_upload
   sass-rails
   scout_apm
