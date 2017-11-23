@@ -173,6 +173,13 @@ RSpec.describe AssetsController, type: :controller do
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
+    it "should allow an upload from an url" do
+      login(:sudara)
+      post :create, params: { user_id: users(:sudara).login, asset_data: ["https://www.dropbox.com/s/937vb6x3koqwfte/muppets.mp3?dl=0"] }
+      expect(flash[:error]).not_to be_present
+
+    end
+
     it 'should successfully upload 2 mp3s' do
       login(:sudara)
       post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),

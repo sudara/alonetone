@@ -227,8 +227,8 @@ class AssetsController < ApplicationController
     end
   end
 
-  def file_is_a_zip?(path)
-    Paperclip::ContentTypeDetector.new(path).detect == 'application/zip'
+  def file_is_a_zip?(file)
+    Paperclip::ContentTypeDetector.new(file.tempfile) == 'application/zip'
   end
 
   def set_related_lastest_variables
