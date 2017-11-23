@@ -46,6 +46,28 @@ RSpec.describe Asset, type: :model do
     it "should increase the user's count" do
       expect{ new_track('muppets.mp3').save }.to change(Asset, :count).by(1)
     end
+
+    it "should not allow zipfiles" do
+      expect{ new_track('1valid-1invalid.zip').save }.not_to change(Asset, :count)
+    end
+  end
+
+  context "zip files" do
+    it "allow mp3 files to be extracted" do
+      file = fixture_file_upload(File.join('assets', '1valid-1invalid.zip'), 'application/zip')
+      expect { |b| Asset.extract_mp3s(file, &b) }.to yield_control.once
+    end
+
+    it "doesn't barf on fake zip files, hands it to paperclip to validate" do
+      file = fixture_file_upload(File.join('assets', 'broken.zip'), 'application/zip')
+      expect { |b| Asset.extract_mp3s(file, &b) }.to yield_control.once
+    end
+  end
+
+  context "download from url" do
+    it "handles dropbox links well" do
+      expect(Asset.parse_external_url('https://www.dropbox.com/s/dz1rla1x3az0tr7/slow%20motion.mp3?dl=0').to_s[-1]).to eql('1')
+    end
   end
 
   context "mp3 tags" do

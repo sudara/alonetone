@@ -28,6 +28,7 @@ class Asset < ActiveRecord::Base
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
   after_create :notify_followers, if: :published?
+  after_create :create_waveform
 
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { user.display_name },
@@ -137,5 +138,9 @@ class Asset < ActiveRecord::Base
     user.followers.select(&:wants_email?).each do |user|
       AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
     end
+  end
+
+  def create_waveform
+    Greenfield::WaveformExtractJob.perform_later(id)
   end
 end
