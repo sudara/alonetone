@@ -177,7 +177,6 @@ RSpec.describe AssetsController, type: :controller do
       login(:sudara)
       post :create, params: { user_id: users(:sudara).login, asset_data: ["https://www.dropbox.com/s/937vb6x3koqwfte/muppets.mp3?dl=0"] }
       expect(flash[:error]).not_to be_present
-
     end
 
     it 'should successfully upload 2 mp3s' do
