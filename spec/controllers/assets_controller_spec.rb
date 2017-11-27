@@ -159,6 +159,7 @@ RSpec.describe AssetsController, type: :controller do
       expect(response).to redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last.id.to_s)
     end
 
+
     it 'should accept an uploaded mp3 from chrome' do
       login(:sudara)
       post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mp3')] }
@@ -173,12 +174,6 @@ RSpec.describe AssetsController, type: :controller do
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
-    it "should allow an upload from an url" do
-      login(:sudara)
-      post :create, params: { user_id: users(:sudara).login, asset_data: ["https://www.dropbox.com/s/937vb6x3koqwfte/muppets.mp3?dl=0"] }
-      expect(flash[:error]).not_to be_present
-    end
-
     it 'should successfully upload 2 mp3s' do
       login(:sudara)
       post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3','audio/mpeg'),
@@ -186,6 +181,25 @@ RSpec.describe AssetsController, type: :controller do
       expect(flash[:error]).not_to be_present
       expect(response).to redirect_to('http://test.host/sudara/tracks/mass_edit?assets%5B%5D='+Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s )
     end
+
+    it "should successfully extract mp3s from a zip" do
+      login(:sudara)
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/1valid-1invalid.zip','application/zip')] }
+      expect(flash[:error]).not_to be_present
+    end
+
+    it "should allow an mp3 upload from an url" do
+      login(:sudara)
+      post :create, params: { user_id: users(:sudara).login, asset_data: ["https://github.com/sudara/alonetone/raw/master/spec/fixtures/assets/muppets.mp3"] }
+      expect(flash[:error]).not_to be_present
+    end
+
+    it "should allow a zip upload from an url" do
+      login(:sudara)
+      post :create, params: { user_id: users(:sudara).login, asset_data: ["https://github.com/sudara/alonetone/raw/master/spec/fixtures/assets/1valid-1invalid.zip"] }
+      expect(flash[:error]).not_to be_present
+    end
+
   end
 
   context "edit" do
