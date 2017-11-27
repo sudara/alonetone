@@ -58,6 +58,16 @@ RSpec.describe Asset, type: :model do
       expect { |b| Asset.extract_mp3s(file, &b) }.to yield_control.once
     end
 
+    it "names mp3s after what they are called within the zip file" do
+      files = []
+      zip = fixture_file_upload(File.join('assets', '1valid-1invalid.zip'), 'application/zip')
+      Asset.extract_mp3s(zip) do |file|
+        files << file
+      end
+      expect(files.first.path.split('.').last).to eql('mp3')
+      expect(files.first.path.split('/').last).to start_with('muppets')
+    end
+
     it "doesn't barf on fake zip files, hands it to paperclip to validate" do
       file = fixture_file_upload(File.join('assets', 'broken.zip'), 'application/zip')
       expect { |b| Asset.extract_mp3s(file, &b) }.to yield_control.once
