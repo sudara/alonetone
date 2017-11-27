@@ -123,7 +123,7 @@ class AssetsController < ApplicationController
   def create
     extract_assets_from_params
 
-    flashes = ''
+    flashes = ""
     good = false
 
     @assets.each do |asset|
@@ -132,18 +132,18 @@ class AssetsController < ApplicationController
         good = true
       else
         errors = asset.errors.full_messages.join('.')
-        flashes  += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload: <br/>#{errors}<br/>"
+        flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
       end
     end
 
     if good
-      flash[:ok] = (flashes + "<br/>Now, check the title and add description for your track(s)").html_safe
+      flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, :assets => (@assets.collect(&:id)))
     else
      if @assets.present?
         flash[:error] = flashes.html_safe
       else
-        flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload. Need help? Search or ask for help the forums or email #{Alonetone.email}"
+        flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
       end
       redirect_to new_user_track_path(current_user)
     end
@@ -214,21 +214,35 @@ class AssetsController < ApplicationController
     attrs = { private: !!(params[:commit] =~ /don't publish/) }
     Array(params[:asset_data]).each do |file|
       if file.is_a?(String) and file.starts_with? "http"
-        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => Asset.parse_external_url(file)))
+        if url_is_a_zip?(file)
+          open Asset.parse_external_url(file) do |tempfile|
+            create_mp3s_from_zip(tempfile, attrs)
+          end
+        else
+          @assets << current_user.assets.create(attrs.merge(:mp3 => Asset.parse_external_url(file)))
+        end
       elsif file.is_a?(String)
         # twiddle thumbs
       elsif file_is_a_zip?(file)
-        Asset.extract_mp3s do |asset|
-          @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
-        end
+        create_mp3s_from_zip(file, attrs)
       else
-        @assets << asset = current_user.assets.create(attrs.merge(:mp3 => file))
+        @assets << current_user.assets.create(attrs.merge(:mp3 => file))
       end
     end
   end
 
+  def url_is_a_zip?(url)
+    File.basename(URI.parse(url).path).split('.')[1] == "zip"
+  end
+
   def file_is_a_zip?(file)
-    Paperclip::ContentTypeDetector.new(file) == 'application/zip'
+    Paperclip::ContentTypeDetector.new(file.path).detect == 'application/zip'
+  end
+
+  def create_mp3s_from_zip(file, attrs)
+    Asset.extract_mp3s(file) do |asset|
+      @assets << current_user.assets.create(attrs.merge(:mp3 => asset))
+    end
   end
 
   def set_related_lastest_variables
