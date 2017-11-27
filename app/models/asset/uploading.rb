@@ -31,7 +31,7 @@ class Asset
       z.each do |entry|
         # only care if the zip entry is an mp3 of a decent size
         if entry.to_s =~ /(\.\w+)$/ && $1 == '.mp3' && entry.size > 2000
-          tempfile_name = File.basename entry.name
+          tempfile_name = [File.basename(entry.name, '.mp3'), '.mp3']
           temp = Tempfile.new(tempfile_name)
           temp.open
           temp.binmode
