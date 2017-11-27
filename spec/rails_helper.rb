@@ -6,7 +6,7 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'timecop'
 require 'authlogic/test_case'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -74,4 +74,4 @@ RSpec.configure do |config|
   config.expose_dsl_globally = false
 end
 
-FactoryGirl.reload
+FactoryBot.reload
