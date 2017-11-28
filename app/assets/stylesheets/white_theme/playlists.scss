@@ -30,6 +30,8 @@ ul.playlists {
       img.cover_125 {
         width: 125px;
         height: 125px;
+        display: block;
+        border-radius: 4px 4px 0 0;
       }
     }
     a.small_playlist_title {
