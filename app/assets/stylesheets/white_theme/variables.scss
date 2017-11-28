@@ -88,7 +88,7 @@ $bright-highlight: rgba(255, 255, 0, .6);
   text-decoration: none;
   border: 1.25px solid $light-medium-gray;
   border-radius: 4px;
-  box-shadow: 0px 3px 4px -2px #65666612;
+  box-shadow: 0px 4px 4px -2px #65666612;
 
   @if $type == 'admin' {
     // background-color: rgba(218, 109, 37, .50);
