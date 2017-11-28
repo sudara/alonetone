@@ -1,6 +1,7 @@
 .latest-playlists-header {
   margin-right: auto;
   margin-left: auto;
+  padding-left: 50px;
   color: $samo-orange;
   @media #{$efficient} {
     width: $efficient-site-width-wide;
