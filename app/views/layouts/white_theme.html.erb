@@ -12,10 +12,10 @@
   <meta content="index,follow" name="robots"/>
 
   <% if @asset&.persisted? or @playlist&.persisted? %>
-  <meta property="og:type"               content="music.<%= @playlist ? 'album' : 'song' %>" />
-  <meta property="og:title"              content="<%= @playlist.try(:title) || @asset.title %>" />
-  <meta property="og:description"        content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
-  <meta property="og:image"              content="<%= @playlist.cover(:greenfield) if @playlist %>" />
+    <meta property="og:type"        content="music.<%= @playlist ? 'album' : 'song' %>" />
+    <meta property="og:title"       content="<%= @playlist.try(:title) || @asset.title %>" />
+    <meta property="og:description" content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
+    <meta property="og:image"       content="<%= @playlist.cover(:greenfield) if @playlist %>" />
   <% end %>
 
   <%= csrf_meta_tag %>
@@ -32,7 +32,6 @@
   <% end %>
 
   <%= check_for_and_display_welcome_back %>
-
   <%= check_for_and_display_flashes %>
 
   <header id="site_header">
@@ -41,11 +40,8 @@
   </header>
 
   <main>
-
     <%= yield %>
-
     <%= yield :static %>
-
     <div id="columns">
       <div id="left">
         <%= yield :left %>
@@ -66,7 +62,5 @@
 
   <%= javascript_include_tag "white_theme", "data-turbolinks-eval": "false"  %>
   <%= render :partial => 'layouts/greenfield/ga' %>
-
-
 </body>
 </html>
