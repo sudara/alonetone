@@ -15,7 +15,7 @@ body {
     #playlist-and-track-content {
       display: flex;
       justify-content: center;
-      @include match-variable-site-width('narrow');
+      @include match-variable-site-width();
       margin-left: auto;
       margin-right: auto;
       flex-wrap: wrap;
@@ -24,6 +24,7 @@ body {
         width: 35%;
       }
       .track-content {
+        width: auto;
         margin-left: $baseline;
         max-width: 700px;
         @media #{$mobile} {
