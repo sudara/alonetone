@@ -111,7 +111,7 @@ document.addEventListener("turbolinks:load", function() {
   });
 
   $('.user_dropdown').mouseleave(function() {
-    $('.user_dropdown_menu').animate({top: -90}, 200);
+    $('.user_dropdown_menu').animate({top: -118}, 200);
   });
 
   $('.profile_link').bind('touchstart', function(event) {
