@@ -16,7 +16,7 @@
   	<% else %>
   	   <%= image_tag User.dummy_pic(:small)%>
   	<% end %>
-    <% if comment.private %>
+    <% if comment.private && !white_theme_enabled? %>
         <div class="private_comment">
         </div>
     <% end %>
@@ -33,6 +33,13 @@
   </div>
 
 	<div class="comment_body">
+
+      <% if comment.private && white_theme_enabled? %>
+            <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+      <% end %>
+
+
+
 		<%= markdown(comment.body) %>
 		<% # TODO: move into javascript to enable cachification
     if authorized_for_comment(comment)
