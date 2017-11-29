@@ -35,6 +35,7 @@
 
       <div class="user_dropdown_menu">
         <%= link_to 'upload', new_user_track_path(current_user) %>
+        <%= link_to 'create playlist', new_user_playlist_path(current_user) %>
         <%= link_to 'edit profile', edit_user_path(current_user), :class => 'edit_button' %>
         <%= link_to 'log out', logout_path, :class => 'logout_button', data: { turbolinks: "false" } %>
       </div>
