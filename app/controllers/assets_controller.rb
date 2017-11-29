@@ -114,6 +114,7 @@ class AssetsController < ApplicationController
       @assets = [@user.assets.where(:id => params[:assets])].flatten
     end
     @assets = @user.assets unless @assets.present?
+    render 'mass_edit_white' if white_theme_enabled?
   end
 
   def mass_update
