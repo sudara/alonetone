@@ -34,15 +34,6 @@ h2#latest_comments + div.box {
   &:last-child {
     border-bottom: 0;
   }
-  div.private_comment {
-    position: absolute;
-    z-index: 4;
-    top: 51px;
-    left: -4px;
-    width: 25px;
-    height: 25px;
-    background: image-url('icons/private.png') no-repeat top left;
-  }
   .comment_user {
     position: absolute;
     top: -6px;
@@ -74,6 +65,10 @@ h2#latest_comments + div.box {
   }
   .comment_body {
     font-family: $serif-font;
+    i {
+      float: left;
+      margin-right: 8px;
+    }
     p {
       line-height: 18px;
       margin: 16px 0 0 0;
