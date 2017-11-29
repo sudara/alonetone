@@ -1,6 +1,6 @@
 <%= error_messages_for :asset %>
-<div id="uploader">	
-    <%= form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>  
+<div id="uploader">
+    <%= form_for :asset, :url => user_tracks_path(current_user), :html => { :multipart => true } do |f| %>
     	<dl class="group" class="fileform">
         <dt id="filelbls">
          </dt>
@@ -15,13 +15,13 @@
     <div class="submit_wrapper">
       <% if current_user.greenfield_enabled? %>
         <%= submit_tag 'Upload, and publish!', :id => 'upload' %>
-        | <%= submit_tag "Upload, but don't publish" %>
+        <%= submit_tag "Upload, but don't publish" %>
       <% else %>
         <%= submit_tag 'Upload!', :id => 'upload' %>
       <% end %>
     </div>
     <% end -%>
-    <div class="uploading" style='display:none'>	
+    <div class="uploading" style='display:none'>
         <%= image_tag 'icons/uploading.gif'%>
     </div>
 </div>
