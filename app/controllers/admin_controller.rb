@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_action :moderator_only
+  before_action :moderator_only, only: 'secretz'
 
   def toggle_theme
     current_user.toggle! :white_theme_enabled
