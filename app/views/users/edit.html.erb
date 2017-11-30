@@ -34,7 +34,7 @@
 
   </div>
   <div class="static_content">
-    <%= submit_tag "Update Your Profile" %>
+    <%= f.submit "Update Your Profile" %>
   </div>
 	<% end -%>
 </div>
@@ -43,16 +43,10 @@
 <div class="box">
   <h2 class="box">Your Account</h2>
 	<div class="static_content">
-
-
   	<%= form_for @user, :html => { :method => :put } do |f| -%>
-
     <%= link_to("Change your login and alonetone address", '#edit_login', :class=>'slide_open_href') %> <br/><br/>
-
     <%= link_to("Change your password",'#edit_password',:class=>'slide_open_href') %><br/><br/>
-
     <%= link_to("Delete your account",'#destroy_account',:class=>'slide_open_href') %>
-
   </div>
 
   <div class="static_content">
@@ -74,7 +68,6 @@
 		alonetone.com/<%= f.text_field :login %><br/>
 
 		<%= submit_tag "Change Your login and account name" %>
-
   </div>
 
   <div id="destroy_account" class="static_content" style="display:none;">
@@ -88,8 +81,7 @@
     <br/><br/>
   </div>
 
-
-   <% end %>
+  <% end %>
   </div>
   </div>
 
