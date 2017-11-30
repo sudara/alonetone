@@ -63,6 +63,8 @@ class PlaylistsController < ApplicationController
     @favorites = @user.favorites.tracks.paginate(page: params[:favorites_page], per_page: 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
+    elsif white_theme_enabled?
+      render 'edit_white'
     end
   end
 

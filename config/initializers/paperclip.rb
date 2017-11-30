@@ -25,7 +25,7 @@ S3DirectUpload.config do |c|
   c.access_key_id =  Alonetone.amazon_id
   c.secret_access_key = Alonetone.amazon_key
   c.bucket = Alonetone.bucket
-  c.url = "http://#{Alonetone.bucket}"
+  c.url = "https://s3.amazonaws.com/#{Alonetone.bucket}"
 end if Alonetone.storage == 's3'
 
 
