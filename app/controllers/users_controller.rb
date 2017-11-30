@@ -134,7 +134,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
-      :website, :myspace, :bio, :display_name, :itunes, :settings, :city, :country, :twitter)
+      :website, :myspace, :bio, :display_name, :itunes, :settings, :city, :country, :twitter,
+      :settings)
   end
 
   def ip_is_acceptable?

@@ -143,7 +143,7 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_params
-    params.require(:playlist).permit(:user_id, :is_favorite, :year, :title, :description, :private, :position)
+    params.require(:playlist).permit!
   end
 
   def render_desired_partial
