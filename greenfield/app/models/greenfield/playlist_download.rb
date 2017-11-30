@@ -6,6 +6,7 @@ module Greenfield
     CONTENT_TYPE = ['application/zip', 'application/gzip']
 
     belongs_to :playlist
+    before_save :ensure_bucket_not_in_s3_path
 
     # see config/initializers/paperclip for defaults
     attachment_options = {}
@@ -26,6 +27,10 @@ module Greenfield
     end
 
     protected
+
+    def ensure_bucket_not_in_s3_path
+      s3_path.gsub!('/' + Alonetone.bucket,'')
+    end
 
     def destroy_s3_object_if_invalid
       attachment.try(:destroy) if errors.any?
