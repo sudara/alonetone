@@ -29,7 +29,7 @@ module Greenfield
     protected
 
     def ensure_bucket_not_in_s3_path
-      s3_path.gsub!('/' + Alonetone.bucket,'')
+      s3_path = s3_path.gsub('/' + Alonetone.bucket,'')
     end
 
     def destroy_s3_object_if_invalid
