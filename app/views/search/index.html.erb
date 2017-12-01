@@ -21,6 +21,8 @@
 <% if @assets.present? %>
   <% content_for :right do %>
   <h2>Tracks that match "<%= @query %>"</h2>
+  <div class="tracks_search_results">
   <%= render :partial => 'assets/asset', :collection => @assets if @assets %>
+  </div>
   <% end %>
 <% end %>

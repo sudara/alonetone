@@ -2,6 +2,9 @@
 
 .track-content {
   min-width: 400px;
+  @media #{$mobile} {
+    min-width: none;
+  }
   .large-cover {
     width: 100%;
     max-width: 800px;
