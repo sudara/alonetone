@@ -99,10 +99,12 @@
         }
       }
       .edit-save {
+        overflow: auto;
         margin-top: $baseline;
         input {
           cursor: pointer;
-
+          float: left;
+          margin-right: $baseline / 2;
           @include default-button('admin');
         }
       }
