@@ -18,6 +18,33 @@
   }
 }
 
+/* MASS EDIT */
+
+.mass_edit_content {
+  @include match-variable-site-width('narrow');
+  position: relative;
+  div.track_options {
+    a.delete_green {
+      position: absolute;
+      float: none;
+      right: $baseline;
+      z-index: 1;
+      margin-top: 9px;
+    }
+  }
+  div.edit_track {
+    h2.box {
+      margin-left: $baseline;
+      padding-left: 0;
+    }
+    form {
+      padding: $baseline / 2 $baseline;
+      box-sizing: border-box;
+    }
+    
+  }
+}
+
 /* LOG IN / SIGN UP */
 
 #what-you-get {
