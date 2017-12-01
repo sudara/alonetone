@@ -58,6 +58,7 @@ ul {
     color: $medium-gray;
      > .artist {
       color: $black;
+      font-weight: bold;
       &:hover {
         text-decoration: underline;
       }
