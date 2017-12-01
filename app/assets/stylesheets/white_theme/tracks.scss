@@ -333,6 +333,9 @@
         margin-left: 4px;
 
         @include default_button();
+        &.show_to_admin_or_owner {
+          display: none;
+        }
       }
     }
   }
