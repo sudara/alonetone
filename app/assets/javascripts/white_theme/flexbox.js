@@ -11,9 +11,6 @@
 
         // If the playlists on the user page extend to more than one line,
         // use this technique for aligning the orphan row
-
-
-
         if ( $("#user_playlists_area ul.playlists").height() > 300 ) {
 	        for (var i = 0; i < 8; i++) {
 				var $flexInvisibleDiv = $("<li></li>").appendTo( $("#user_playlists_area ul.playlists") );
