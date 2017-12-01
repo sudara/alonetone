@@ -1,10 +1,11 @@
 /* UPLOADING */
 
-.uploader {
+#uploader {
   form {
-    #filefields {
+    .filefields {
       li {
         list-style: none;
+        margin-bottom: $baseline / 4;
       }
     }
   }
