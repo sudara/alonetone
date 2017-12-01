@@ -248,6 +248,13 @@ a.view_all {
   }
 }
 
+/* SEARCH RESULTS */
+
+.tracks_search_results {
+  background-color: #FFF;
+  @include samo-shadow-and-radius();
+}
+
 #user_search_results {
   display: flex;
   margin-top: 60px;
