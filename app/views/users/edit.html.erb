@@ -1,6 +1,6 @@
 <%= error_messages_for :user %>
 
-<%= render :partial => 'users/user' %>
+<%= render :partial => 'users/user' unless white_theme_enabled? %>
 
 <%= content_for :left do %>
   <div class="box">
