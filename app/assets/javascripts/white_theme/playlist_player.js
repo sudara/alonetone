@@ -3,9 +3,13 @@ function attr(val) {
 }
 
 function waveformData(csv) {
-  var data = csv.split(',').map(function(s) {
-    return parseFloat(s);
-  });
+  if(csv.length > 1){
+    var data = csv.split(',').map(function(s) {
+      return parseFloat(s);
+  })}else{
+    var data = [0,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,
+      .9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,0];
+  }
 
   var max = Math.max.apply(Math, data),
       min = Math.min.apply(Math, data);
