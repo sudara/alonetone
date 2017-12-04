@@ -79,6 +79,10 @@ header#site_header {
           padding-left: 15px;
           color: $black;
           background-color: $light-gray;
+          &:hover {
+            background-color: $white;
+            text-decoration: none;
+          }
         }
       }
     }
