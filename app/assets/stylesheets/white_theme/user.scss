@@ -2,6 +2,7 @@ main {
   #user_header {
     display: flex;
     margin: 0 auto $baseline auto;
+    max-width: 1100px;
 
     @include match-variable-site-width();
     img {
@@ -10,7 +11,7 @@ main {
       height: 62px;
     }
     .user_name_and_location {
-      margin-left: $baseline/2;
+      // margin-left: $baseline/2;
 
       align-self: flex-end;
       h1.user_name {
@@ -40,7 +41,7 @@ main {
     margin: 0 auto;
 
     grid-template-columns: 45% 45%;
-    justify-content: space-around;
+    justify-content: space-between;
     grid-template-areas: 'playlists playlists'
     'latest favorites'
     'listens comments'
