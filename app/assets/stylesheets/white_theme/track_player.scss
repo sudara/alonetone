@@ -28,6 +28,7 @@
     background-color: white;
     margin-right: $baseline / 2;
     flex-grow: 1;
+    position: relative;
      > canvas {
       width: 100%!important;
     }
