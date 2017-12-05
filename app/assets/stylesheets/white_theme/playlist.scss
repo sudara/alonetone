@@ -115,9 +115,7 @@
   .sidebar-downloads {
     margin-top: $baseline;
     &.anchor-at-bottom {
-      position: absolute;
-      bottom: 0;
-      width: 270px;
+      width: 100%;
     }
     ul.downloads-links,
     ul.external-links, {
