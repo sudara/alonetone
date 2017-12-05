@@ -168,8 +168,8 @@
     overflow: auto;
     box-sizing: border-box;
     padding-top: $baseline;
-    padding-right: $baseline;
-    padding-left: $baseline;
+    padding-right: 17px;
+    padding-left: 17px;
     box-shadow: inset 0 1px 3px #f2f2f2;
     @media #{$mobile} {
       padding-right: $baseline / 2;
