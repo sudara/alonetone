@@ -1,4 +1,5 @@
 // .playlist-options is for the cover view, which isn't technically the post
+// ok!
 
 .track-content {
   min-width: 400px;
@@ -24,14 +25,17 @@
   .playlist-options {
     width: 100%;
     height: 50px;
-    margin-left: -27px;
     background-color: $not-quite-black;
     ul {
       &.downloads-links {
         float: left;
+        margin-top: 0;
+        margin-bottom: 0;
       }
       &.external-links {
         float: right;
+        margin-top: 0;
+        margin-bottom: 0;
         li {
           border-right: 0;
           border-left: 1px solid #000000;
@@ -66,7 +70,6 @@
           .action-text {
             font-size: 10px;
             display: block;
-            margin-top: -12px;
             margin-left: 21px;
             color: $gray;
           }
