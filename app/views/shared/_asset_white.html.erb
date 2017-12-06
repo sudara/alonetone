@@ -1,5 +1,4 @@
 <div class="track-content">
-
   <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
     <div class="play-button-container">
     </div>
@@ -23,8 +22,9 @@
 
   <div class="track-post">
     <h1><%= @asset.name %></h1>
+
     <% unless @playlist %>
-    <h3><%= @asset.user.display_name %></h3>
+      <h3><%= @asset.user.display_name %></h3>
     <% end %>
     <%= markdown(@asset.description) %>
     <% if authorized? and @playlist %>
@@ -34,9 +34,12 @@
     <% end %>
   </div>
 
-  <% if @asset.credits.present? %>
-    <div class="track-credits">
-      <%= markdown(@asset.credits) %>
-    </div>
-  <% end %>
+  <div class="track-post">
+    Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong><br/>
+    Listened to <strong><%= @asset.listens_count %></strong> times
+    <%= markdown(@asset.credits) if @asset.credits.present? %>
+  </div>
+
+
+  </div>
 </div>
