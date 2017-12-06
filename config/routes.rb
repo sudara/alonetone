@@ -11,6 +11,7 @@ Alonetone::Application.routes.draw do
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
+    get '/upload', :to => 'assets#new'
     get '/login', :to => 'user_sessions#new', :as => 'login'
     match '/logout', :to => 'user_sessions#destroy', via: [:get, :post]
     resources :user_sessions
