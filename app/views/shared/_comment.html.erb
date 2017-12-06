@@ -34,17 +34,12 @@
 
 	<div class="comment_body">
 
-      <% if comment.private && white_theme_enabled? %>
-            <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-      <% end %>
+  <% if comment.private && white_theme_enabled? %>
+    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+  <% end %>
 
-
-
-		<%= markdown(comment.body) %>
-		<% # TODO: move into javascript to enable cachification
-    if authorized_for_comment(comment)
-    -%>
-
+	<%= markdown(comment.body) %>
+	<% if authorized_for_comment(comment) -%>
 		<div class="comment_controls">
   	    <% if comment.is_spam? %>
           <%= link_to 'un-spam', unspam_comment_path(comment),  :data => { :confirm => 'This will make the comment public. Are you sure?'}, :method => :put %>

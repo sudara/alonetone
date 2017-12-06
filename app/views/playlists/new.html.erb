@@ -1,4 +1,4 @@
-<%= render(:partial => 'users/user') %>
+<%= render(:partial => 'users/user') unless white_theme_enabled? %>
 
 <h1>Create a new album or mix</h1>
 <h2 class="spacey">Your playlist will become public as soon as it has some tracks in it</h2>

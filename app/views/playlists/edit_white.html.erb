@@ -1,37 +1,40 @@
 <%= error_messages_for :playlist %>
 <%= render :partial => 'inline_help'%>
 
+<div id="edit_playlist_info" class="faq box">
+  <h2>Edit "<%= @playlist.title %>"</h2>
+
+  Upload a square photo, 2000px by 2000px for best results.<br>
+	<%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
+		<%= f.file_field :pic  %>
+		<%= submit_tag "Upload new Pic" %>
+	<% end %>
+
+  <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
+
+  <%= simple_form_for [@user, @playlist] do |f| %>
+    <%= f.input :title %>
+    <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
+    <%= f.input :credits %>
+    <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
+    <%= f.input :link2, placeholder: 'another link' %>
+
+    <% if moderator? %>
+    <%= f.simple_fields_for :greenfield_downloads do |sf| %>
+      <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
+    <% end %>
+    <% end %>
+
+    <%= f.input :private %>
+    <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
+    <%= f.button :submit, "Save" %> or
+    <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+  <% end %>
+</div>
+
 <% content_for :left do %>
   <div id="edit_playlist">
-
     <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
-      <div id="edit_playlist_info" class="static_content" style="display:none;">
-        <div id="pic_upload" class="static_content">
-          Upload a square photo, 400px by 400px for best results.<br>
-      		<%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
-      			<%= f.file_field :pic  %>
-      			<%= submit_tag "Upload new Pic" %>
-      		<% end %>
-        </div>
-
-        <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
-
-        <%= simple_form_for [@user, @playlist] do |f| %>
-          <%= f.input :title %>
-          <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
-          <%= f.input  :description %>
-
-          <%= f.simple_fields_for :greenfield_downloads do |sf| %>
-            <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
-          <% end %>
-
-          <%= f.input :private %>
-          <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
-          <%= f.button :submit, "Save" %> or
-          <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
-        <% end %>
-      </div>
-
       <div style="height: 12px; background-color: #c7c8c7;"></div>
       <%= render :partial => 'track', :collection => @playlist.tracks %>
 
