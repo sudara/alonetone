@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
   include Listens
 
-  before_action :find_user, :except => [:radio, :latest]
+  before_action :find_user, :except => [:radio, :latest, :new]
   before_action :find_asset, :only => [:edit, :update, :destroy, :stats]
   before_action :find_published_asset, :only => [:show, :stats]
 
@@ -97,6 +97,7 @@ class AssetsController < ApplicationController
 
   def new
     redirect_to signup_path unless logged_in?
+    @user = current_user
     @tab = 'upload' if current_user == @user
     @asset = Asset.new
   end
