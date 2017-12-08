@@ -121,7 +121,7 @@ class Asset < ActiveRecord::Base
 
   def publish!
     if private?
-      update_column(:private, false) && notify_followers
+      update(:private, false) && notify_followers
     end
   end
 
