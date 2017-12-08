@@ -73,21 +73,19 @@ Partial implementation/proof of concept was working on rails 2 branch. Basically
 We get trouble with downloading bots, spambots. We have manually hardcoded IPs in the source, specefically to prevent downloading mp3 and wasting our bandwidth. We need to create a UI so this can be managed by a non-techie moderator. Also, we need to provide logged in users with a "report" action on their listens if they notice sketchy behavior, so it can go upstream to the mods.
 
 
-## Want to deploy alonetone on your server?
+## Want to deploy alonetone on your own server?
 
-![Sorry script kiddies](https://img.skitch.com/20120908-1exaxnmix5mb82xaq32tjnrja.png)
-
-It's not going to happen unless:
+It won't work for you unless:
 
 * You know ruby on rails well (Been doing it for more than a few months).
-* You have deployed rails applications, and are comfortable with that.
-* You are willing to spend 20+ hours removing our branding and logo and site-specific things from the code.
+* You have deployed rails applications before, and are comfortable with that.
+* You are willing to spend 20+ hours removing our branding and logo and site-specific code.
 
-We get a LOT of requests from rails n00bs asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language.
+We get a LOT of requests from people asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language.
 
-Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting a copy in production, it's going to take lots of work (like 40+ hours) since it's not intended for that purpose.
+Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting a copy in production, it's going to take lots of work (40+ hours).
 
-**If you still decide to try keep in mind we are unable to provide ANY support**
+**If you still decide to try, keep in mind we are unable to provide ANY support**
 
 ## Want to help make alonetone.com awesome?
 
@@ -138,4 +136,4 @@ After login, click on the "Upload" button to upload your first mp3.
 
 The alonetone source code is released under the MIT license.
 
-"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2013 and may not be used without permission.
+"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2018 and may not be used without permission.
