@@ -8,7 +8,7 @@
 
   <div class="track-content">
     <div class="large-cover">
-      <%= image_tag @playlist.cover(:greenfield) %>
+      <%= greenfield_playlist_cover(@playlist, :greenfield) %>
     </div>
     <% if @playlist.has_any_links? %>
     <div class="playlist-options">
