@@ -10,6 +10,24 @@ module PlaylistsHelper
     user.greenfield_enabled? && Alonetone.storage.s3?
   end
 
+  def svg_cover
+    "<div class='no_pic'> </div>".html_safe
+  end
+
+  def greenfield_playlist_cover(playlist, size)
+    if playlist.has_no_cover?
+      return svg_cover
+    # greenfield size did not exist before this id
+    elsif size == :greenfield and (playlist.pic.id > 69806 and playlist.pic.id < 72848)
+      size = :original
+    elsif size == :greenfield  and playlist.pic.id < 69807
+      return svg_cover
+    else
+      image_tag playlist.cover(size)
+    end
+  end
+
+
   def greenfield_upload_form(user, playlist, &block)
     data = {
       'expected-content-type' => Greenfield::PlaylistDownload::CONTENT_TYPE.join(' '),

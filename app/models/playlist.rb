@@ -52,12 +52,6 @@ class Playlist < ActiveRecord::Base
 
   def cover(size=nil)
     return dummy_pic(size) if has_no_cover?
-    # greenfield size did not exist before this id
-    if size == :greenfield and (pic.id > 69806 and pic.id < 72848)
-      size = :original
-    elsif size == :greenfield  and pic.id < 69807
-      size = :cover
-    end
     self.pic.pic.url(size)
   end
 
