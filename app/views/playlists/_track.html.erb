@@ -1,5 +1,7 @@
 <%= content_tag :div, :id => ("track_#{track.id}"), :class => 'asset unopenable ' do %>
 	
+	<div class="asset_top">
+
 	<div class="play-button button">
 	<div class="sprites-play">
 		<%= link_to_play track.asset %>
@@ -24,4 +26,5 @@
 	  <%= link_to 'remove', remove_track_user_playlist_path(@user, @playlist, :track_id => track), :class=> 'remove button' %>
 	</div>
 	
+	</div>
 <% end %>

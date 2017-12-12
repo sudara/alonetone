@@ -170,6 +170,9 @@ ul.playlists {
 
 #edit_playlist {
   position: relative;
+  .asset .asset_top div.title {
+    display: block;
+  }
 }
 
 #edit_playlist_info {
@@ -222,5 +225,5 @@ ul.playlists {
 }
 
 #edit_playlist .unopenable .title {
-  width: 317px!important;
+  // width: 317px!important;
 }
