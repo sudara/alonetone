@@ -95,8 +95,8 @@ a.view_all {
 .notice, .errorExplanation {
   margin-bottom: 20px;
   padding: 20px 30px;
-  border-top: 1px solid #6f6f6f;
-  border-bottom: 1px solid #7e807e;
+  background-color: #FFF;
+  @include match-variable-site-width('wide');
 }
 
 .errorExplanation p, .notice h2 {

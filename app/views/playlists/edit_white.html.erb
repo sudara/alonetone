@@ -13,22 +13,30 @@
   <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
 
   <%= simple_form_for [@user, @playlist] do |f| %>
-    <%= f.input :title %>
-    <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
-    <%= f.input :credits %>
-    <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
-    <%= f.input :link2, placeholder: 'another link' %>
 
-    <% if moderator? %>
-    <%= f.simple_fields_for :greenfield_downloads do |sf| %>
-      <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
-    <% end %>
-    <% end %>
+    <div class="edit_playlist_columns">
+      <div class="edit_playlist_left_column">
+        <%= f.input :title %>
+        <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
+        <%= f.input :credits %>
+      </div>
+      <div class="edit_playlist_right_column">
+        <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
+        <%= f.input :link2, placeholder: 'another link' %>
 
-    <%= f.input :private %>
-    <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
-    <%= f.button :submit, "Save" %> or
-    <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+        <% if moderator? %>
+        <%= f.simple_fields_for :greenfield_downloads do |sf| %>
+          <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
+        <% end %>
+        <% end %>
+
+        <%= f.input :private %>
+        <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
+        <%= f.button :submit, "Save" %> or
+        <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+
+      </div>
+    </div>
   <% end %>
 </div>
 
