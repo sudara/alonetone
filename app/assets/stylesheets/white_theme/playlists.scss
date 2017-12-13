@@ -148,6 +148,16 @@ ul.playlists {
   }
 }
 
+#playlist_source_options {
+  overflow: auto;
+  margin-left: $baseline / 2;
+  li {
+    float: left;
+    margin-right: 10px;
+    text-decoration: underline;
+  }
+}
+
 // #playlist_sources {
 //   .playlist_source {
 //     // width: 420px;
@@ -169,6 +179,15 @@ ul.playlists {
 }
 
 #edit_playlist {
+  .playlist_title {
+    h3 {
+      margin-left: $baseline / 2;
+    }
+  }
+  .info {
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+  }
   position: relative;
   .asset .asset_top div.title {
     display: block;
