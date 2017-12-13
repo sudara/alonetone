@@ -1,11 +1,17 @@
+// Dom Manipulations here must be idempotent.
+// This event fires on each page load
+// but also when we hit back / forward and get a cached page
+// so it will re-fire on pages where it's already been fired
 document.addEventListener("turbolinks:load", function() {
-
     // svg default playlists
     $('#playlist-and-track-content .no_pic').each(function(){
       $(this).append(makeSVGFromTitle(800, $('h1:first').text().trim()))
+      $(this).removeClass('no_pic') // otherwise turbolinks:load will keep appending
     })
+
     $('li a .no_pic').each(function(){
       $(this).append(makeSVGFromTitle(800, $(this).parent().attr('title').trim()))
+      $(this).removeClass('no_pic') // otherwise turbolinks:load will keep appending
     })
 
     $("a.add_to_favorites").load("<%= asset_path('default/fave-animation.svg') %>");
@@ -65,8 +71,6 @@ document.addEventListener("turbolinks:load", function() {
 
     if ( $(".track-content").length == 1 ) {
         var playAnimationSVG = $("#playAnimationSVG");
-        $("div.player .play-button-container").prepend($("<div class='play-button play-control'></div>"))
-        $("div.player .play-button-container > div:first-child").load("<%= asset_path('default/play-icon.svg') %>");
         $("div.player .play-button-container > div:first-child").click(function() {
             var playAnimationSVG = $("#playAnimationSVG");
             $(".playIconSymbol").show();
@@ -79,3 +83,53 @@ document.addEventListener("turbolinks:load", function() {
         })
     }
 });
+
+
+
+// playlist player
+$(document).on('click', '.track-content > .player .play-button,' +
+                      '.tracklist [data-sound-id] .play-button', function(e) {
+  console.warn("PLAYING!!!")
+  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  var li = $('.playlist li[data-sound-id=' + attr(soundId) + ']');
+
+  // Pause other tracks unless this event was triggered programmatically
+  if (!e.isTrigger)
+    Sound.pauseAll();
+
+  var sound = Sound.load(soundId)
+  if (sound.id != Sound.getId(window.location.pathname))
+    sound.setPosition(0)
+  sound.play();
+
+  $('.playlist .tracklist li').removeClass('active');
+  li.addClass('active');
+  if (window.location.href == this.href) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// single track page
+$(document).on('click', '.track-post > .player .play-button', function(e) {
+  var url = $(this).find('a').attr('href');
+  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  var sound = Sound.load(url);
+
+  sound.finished(null).finished(function() {
+    changeControlActionToPlay(this.id);
+  });
+
+  Sound.pauseAll();
+  sound.play();
+});
+
+$(document).on('click', '[data-sound-id] .pause-button', function(e) {
+  console.warn("PAUSSSSSE")
+  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  Sound.pause(soundId);
+  e.preventDefault();
+  return false;
+});
+
+document.addEventListener("turbolinks:load", showWaveform);
