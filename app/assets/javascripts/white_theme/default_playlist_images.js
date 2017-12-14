@@ -1,30 +1,34 @@
-function Triangulr (width, height, lineHeight, pointArea, renderingFunction) {
+function Triangulr (props) {
 
   // Tests
-  if (typeof width !== 'number' || width <= 0) {
+  if (typeof props.width !== 'number' || props.width <= 0) {
     throw 'Triangulr: width must be positive';
   }
-  if (typeof height !== 'number' || height <= 0) {
+  if (typeof props.height !== 'number' || props.height <= 0) {
     throw 'Triangulr: height must be positive';
   }
-  if (typeof lineHeight !== 'number' || lineHeight <= 0) {
+  if (typeof props.lineHeight !== 'number' || props.lineHeight <= 0) {
     throw 'Triangulr: lineHeight must be set and be positive number';
   }
-  if (!!pointArea && typeof pointArea !== 'number' || pointArea < 0) {
+  if (!!props.pointArea && typeof props.pointArea !== 'number' || props.pointArea < 0) {
     throw 'Triangulr: pointArea must be set and be a positive number';
   }
-  if (!!renderingFunction && typeof renderingFunction !== 'function') {
+/*  if (!!props.strokeWidth && typeof props.strokeWidth !== 'number' || props.strokeWidth < 0) {
+    throw 'Triangulr: strokeWidth must be set and be a positive number';
+  } */
+  if (!!props.renderingFunction && typeof props.renderingFunction !== 'function') {
     throw 'Triangulr: renderingFunction must be a function';
   }
 
   // Save input
-  this.mapWidth = width;
-  this.mapHeight = height;
-  this.lineHeight = lineHeight;
-  this.pointArea = !!pointArea ? pointArea : 0;
-  this.colorRendering = !!renderingFunction ? renderingFunction : this.generateGray;
+  this.mapWidth = props.width*2;
+  this.mapHeight = props.height*2;
+  this.lineHeight = props.lineHeight;
+  this.pointArea = !!props.pointArea ? props.pointArea : 0;
+  this.strokeWidth = !!props.strokeWidth ? props.strokeWidth : 1;
+  this.colorRendering = !!props.renderingFunction ? props.renderingFunction : this.generateGray;
 
-  this.triangleLine = Math.sqrt(Math.pow(lineHeight/2, 2) + Math.pow(lineHeight, 2));
+  this.triangleLine = Math.sqrt(Math.pow(this.lineHeight/2, 2) + Math.pow(this.lineHeight, 2));
   this.originX = - this.triangleLine;
   this.originY = - this.lineHeight;
   this.lines = [];
@@ -128,12 +132,13 @@ Triangulr.prototype.createTriangles = function () {
 Triangulr.prototype.generateDom = function () {
   var i, j, data, points, style, polygon;
   var svgTag = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  var defsTag = document.createElementNS('http://www.w3.org/2000/svg','defs');
+  var gTag = document.createElementNS('http://www.w3.org/2000/svg','g');
   var output = '';
 
-  svgTag.setAttribute('version', '1.1');
-  svgTag.setAttribute('viewBox', '0 0 ' + this.mapWidth + ' ' + this.mapHeight);
-  svgTag.setAttribute('enable-background', 'new 0 0 ' + this.mapWidth + ' ' + this.mapHeight);
+  svgTag.setAttribute('viewBox', '20 0 ' + this.mapWidth/2 + ' ' + this.mapHeight/2);
   svgTag.setAttribute('preserveAspectRatio', 'xMinYMin slice');
+  //gTag.setAttribute('filter', 'url(#edgeClean)');
 
   for(i in this.exportData) {
     data = this.exportData[i];
@@ -142,16 +147,46 @@ Triangulr.prototype.generateDom = function () {
     points   = 'M' + data.points[0].x + ' ' + data.points[0].y + ' ';
     points  += 'L' + data.points[1].x + ' ' + data.points[1].y + ' ';
     points  += 'L' + data.points[2].x + ' ' + data.points[2].y + ' Z';
+    //points  += 'L' + data.points[2].x + ' ' + data.points[1].y + ' Z';
     polygon.setAttribute('d', points);
     polygon.setAttribute('fill', data.style.fill);
+    polygon.setAttribute('stroke', data.style.fill);
+    if(this.strokeWidth > 1){
+      // if there's a large stroke with, lets curve
+      polygon.setAttribute('stroke-linecap', 'round');
+      polygon.setAttribute('stroke-width', this.strokeWidth);
+      polygon.setAttribute('stroke-linejoin', 'round');
+    }else{
+      polygon.setAttribute('stroke-width', this.strokeWidth);
+    }
     //polygon.setAttribute('shape-rendering', 'geometricPrecision');
     //polygon.setAttribute('shape-rendering', 'crispEdges');
 
-    svgTag.appendChild(polygon);
+    gTag.appendChild(polygon);
   }
+  //console.log(this.cleanEdge())
+  svgTag.appendChild(defsTag);
+  defsTag.appendChild(this.cleanEdge());
+  svgTag.appendChild(gTag);
   return svgTag;
 };
+Triangulr.prototype.cleanEdge = function () {
 
+  var filterTag = document.createElementNS('http://www.w3.org/2000/svg','filter');
+  var feComponentTransfer = document.createElementNS('http://www.w3.org/2000/svg','feComponentTransfer');
+  var feFuncA = document.createElementNS('http://www.w3.org/2000/svg','feFuncA');
+  feComponentTransfer.appendChild(feFuncA);
+  filterTag.appendChild(feComponentTransfer);
+
+  var output = '';
+  filterTag.setAttribute('color-interpolation-filters', 'sRGB');
+  filterTag.setAttribute('id', 'edgeClean');
+  feFuncA.setAttribute('type', 'table');
+  feFuncA.setAttribute('tableValues', '0 .5 1 1');
+  //console.log(filterTag);
+  return filterTag;
+
+}
 /**
  * generateGray
  * default color generator when no function is
@@ -241,32 +276,13 @@ function hsl2rgb(h, s, b){
         Math.floor(s[ (h|8)  % 6 ] * 255) + ")" // blue
 }
 
-
-// modified from https://github.com/stewartlord/identicon.js/blob/master/identicon.js
-function colorFromHash(hash){
-  // grab last 7 chars
-  var hue = parseInt(hash.substr(-7), 16) / 0xfffffff;
-  var saturation = .7
-  var brightness = .7
-  return function(){ hsl2rgb(hue, saturation, brightness)}
-}
-
 function colorsFromAHue(hue){
-  var saturation = randomBetween(75,100)/100
+  //var saturation = randomBetween(35,100)/100
+  var saturation = randomBetween(25,100)/100
   var brightness = randomBetween(10,50)/100
   return hsl2rgb(hue, saturation, brightness)
 }
 
-function booleanFromHashDigit(digit){
-  return parseInt(digit, 16) % 2
-}
-
-function integerRangeFromHashDigit(digit, min, max){
-  var multiplier = parseInt(digit, 16) / 15 // 0.0 to 1.0
-  var range = max - min
-  var selection = Math.floor(multiplier * range)
-  return min + selection
-}
 //var mySVG = new Triangulr (800, 600, 8, 40, getGreenColor);
 //var mySVG = new Triangulr (800, 600, 8, 200, getPurpleColor);
 //var mySVG = new Triangulr (800, 600, 28, 23, colorGenerator);
@@ -275,32 +291,25 @@ function makeSVGFromTitle(height, title){
   Math.seedrandom(title); // this makes all .random calls repeatable per album
 
   var lineHeight = randomBetween(height/20, height/10)
-  var pointArea =  randomBetween(0, 40)
-  var hue = Math.random()
+  var pointArea =  randomBetween(10, 40)
+  var whichColorFunction = Math.random()
+  if(whichColorFunction > .15){
+    var hue = Math.random() // keep the hue for a whole album
+    var colorFunction = colorsFromAHue.bind(null, hue)
+  }else{
+    var colorFunction = getRandomColor
+  }
 
-  // this keeps the hue consistent across albums
-  var colorFunction = colorsFromAHue.bind(null, hue)
-  console.log('lineheight is ' + lineHeight + ' and pointArea is ' + pointArea)
-  return new Triangulr (height, height, lineHeight, pointArea, colorFunction);
+  // do we want circle shapes or just triangles?
+  if(Math.random() > .85)
+    var strokeWidth = randomBetween(10,50)
+  else
+    var strokeWidth = .2
+
+
+  //console.log('lineheight is ' + lineHeight + ' and pointArea is ' + pointArea);
+  var props = {width:200, height:200, lineHeight:lineHeight, pointArea:pointArea, strokeWidth:strokeWidth, renderingFunction:colorFunction}
+  return new Triangulr (props);
 }
 
 //var mySVG = new Triangulr (800, 600, 80, 400, getRandomColor);
-
-/* new TimelineMax().staggerTo('path', 0.5, {
- //alpha:0,
- scale:4,
- cycle:{
-  duration:[7,3,4.2,7,3,8.6],
-  rotation:function(i){
-   return randomBetween(10, 23)
-  },
- },
- transformOrigin:'0% 0%',
- //transformOrigin:'50% 100%',
-
- repeat:-1,
- //ease:Expo.easeIn,
- yoyo:true
-},1.05).seek(10000)
-
- */
