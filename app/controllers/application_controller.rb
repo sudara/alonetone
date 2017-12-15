@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_admin_or_moderator_or_owner?(user)
-    current_user_is_admin_or_owner? || moderator?
+    current_user_is_admin_or_owner?(user) || moderator?
   end
 
   def user_setting(symbol_or_string, user=current_user)
