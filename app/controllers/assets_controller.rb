@@ -2,7 +2,7 @@ class AssetsController < ApplicationController
   include Listens
 
   before_action :find_user, :except => [:radio, :latest, :new]
-  before_action :find_asset, :only => [:edit, :update, :destroy, :stats]
+  before_action :find_asset, :only => [:edit, :update, :destroy, :stats, :spam, :unspam]
   before_action :find_published_asset, :only => [:show, :stats]
 
   # we check to see if the current_user is authorized based on the asset.user
@@ -75,7 +75,7 @@ class AssetsController < ApplicationController
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
     @page_title = "alonetone Radio: #{@channel}"
-    @assets = Asset.published.radio(params[:source], params, current_user)
+    @assets = Asset.radio(params[:source], params, current_user)
   end
 
   def top
@@ -182,6 +182,18 @@ class AssetsController < ApplicationController
     end
   end
 
+  def unspam
+    @asset.ham!
+    @asset.update_column :private, false
+    redirect_back(fallback_location: root_path)
+  end
+
+  def spam
+    @asset.spam!
+    @asset.update_column :private, true
+    redirect_back(fallback_location: root_path)
+  end
+
   def stats
     respond_to do |format|
       format.xml
@@ -267,10 +279,10 @@ class AssetsController < ApplicationController
 
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    !dangerous_action? || current_user_is_admin_or_owner?(@user) || current_user_is_admin_or_owner?(@asset.user)
+    !dangerous_action? || current_user_is_admin_or_moderator_or_owner?(@user) || current_user_is_admin_or_moderator_or_owner?(@asset.user)
   end
 
   def dangerous_action?
-    %w(destroy update edit create).include? action_name
+    %w(destroy update edit create spam unspam).include? action_name
   end
 end
