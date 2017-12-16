@@ -40,12 +40,13 @@
     <% end %>
     <%= markdown(@asset.description) %>
 
+    <p class="track-stats">
+      Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong><br/>
+      Listened to <strong><%= @asset.listens_count %></strong> times
+    </p>
     
-  </div>
-
-  <div class="track-post">
-    Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong><br/>
-    Listened to <strong><%= @asset.listens_count %></strong> times
-    <%= markdown(@asset.credits) if @asset.credits.present? %>
+    <p>
+      <%= markdown(@asset.credits) if @asset.credits.present? %>
+    </p>
   </div>
 </div>
