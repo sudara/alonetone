@@ -3,11 +3,6 @@
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  @media #{$efficient} {
-    justify-content: space-around;
-  }
-
   &.three_or_less_playlists {
     justify-content: flex-start;
     li.playlist {
@@ -24,6 +19,7 @@ ul.playlists {
     background-color: $white;
     padding-bottom: $baseline / 4;
     margin-bottom: $baseline / 2;
+    margin-right: $baseline;
     @include samo-shadow-and-radius();
     a {
       display: block;
