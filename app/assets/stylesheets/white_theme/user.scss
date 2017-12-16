@@ -3,8 +3,6 @@ main {
     display: flex;
     margin: 0 auto $baseline auto;
     max-width: 1100px;
-
-    @include match-variable-site-width();
     img {
       display: block;
       width: 62px;
