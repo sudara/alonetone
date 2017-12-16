@@ -14,7 +14,7 @@ body {
     }
     #playlist-and-track-content {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       @include match-variable-site-width();
       margin-left: auto;
       margin-right: auto;
@@ -22,6 +22,7 @@ body {
       .playlist-sidebar {
         min-width: 300px;
         width: 35%;
+        margin-right: $baseline;
       }
       .track-content {
         width: auto;
