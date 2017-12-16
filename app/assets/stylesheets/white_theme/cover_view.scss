@@ -17,12 +17,14 @@
     display: block;
   }
   .playlist-credits {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 18px;
     width: 100%;
-    margin-top: $baseline;
-    margin-left: 7px;
-    color: $gray;
+    padding: $baseline/2;
+    box-sizing: border-box;
+    color: $black;
+    background-color: #FFF;
+
   }
   .playlist-options {
     width: 100%;
@@ -54,7 +56,6 @@
           background-color: #000000;
         }
         a {
-          font-family: $serif_font;
           font-size: 12px;
           font-weight: 300;
           display: block;
