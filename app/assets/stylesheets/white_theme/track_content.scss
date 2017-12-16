@@ -34,6 +34,8 @@
     }
     .edit-link {
       @include default-button('admin');
+      float: right;
+      margin-top: 18px;
     }
     hr {
       font-family: 'FontAwesome';
