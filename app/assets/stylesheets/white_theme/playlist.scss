@@ -40,6 +40,7 @@
       overflow: auto;
       min-height: 35px;
       border-top: 1px solid $not-quite-white-opaque;
+      display: flex;
       &:last-child {
         border-bottom: 1px solid $not-quite-white-opaque;
       }
@@ -94,7 +95,7 @@
         line-height: 20px;
         display: block;
         float: left;
-        width: 82%;
+        // width: 82%;
         padding-top: 7px;
         padding-bottom: 8px;
         text-decoration: none;
@@ -102,13 +103,24 @@
         span:first-child {
           display: block;
           float: left;
-          width: 88%;
+          // width: 88%;
         }
         .time-text {
           font-size: 10px;
           float: right;
           color: $gray;
         }
+      }
+      a:last-child {
+        flex-grow: 1;
+        display: flex;
+        span:first-child {
+          flex-grow: 1;
+        }
+        span:last-child {
+          margin-right: 12px;
+        }
+
       }
     }
   }
