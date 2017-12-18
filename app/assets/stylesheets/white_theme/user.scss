@@ -156,7 +156,15 @@ main {
         }
 
         .user_card_mod_stats {
-          word-wrap:break-word;
+          margin-top: $baseline / 2;
+          padding-top: $baseline / 2;
+          border-top: 1px solid $light-gray;
+          word-wrap:break-word; 
+          a.edit_profile {
+            @include default-button("admin");
+            margin-bottom: $baseline / 2;
+          }
+
         }
       }
     }
