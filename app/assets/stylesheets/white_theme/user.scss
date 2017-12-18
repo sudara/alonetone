@@ -153,6 +153,10 @@ main {
 
         .user_card_stats {
           font-size: 13px;
+          margin-top: $baseline / 2;
+          padding-top: $baseline / 2;
+          border-top: 1px solid $light-gray;
+
         }
 
         .user_card_mod_stats {
