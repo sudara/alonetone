@@ -12,9 +12,9 @@
     <div class="title">
       <div class="title_left_column">
         <div class="title_left_column_top">
-            <span><%= '&#x1f512;'.html_safe unless asset.published? %></span>
-            <%= link_to track_name_for(asset,200), user_track_path(asset.user, asset.permalink), :class => 'track_link', :title => "#{asset.name}" %>
-          <span class="listen_count" style="display:none;"><%= asset.listens_count %></span>
+          <a href="<%= user_track_path(asset.user, asset.permalink) %>" class="track_link" title="<%= asset.name %>">
+            <%= track_name_for(asset,200) %> <span style="font-size:12px;"><%= '&#x1f512;'.html_safe unless asset.published? %></span>             
+          </a>
         </div>
         <div class="title_left_column_bottom">
           <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
