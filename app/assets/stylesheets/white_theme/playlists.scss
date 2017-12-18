@@ -23,10 +23,13 @@ ul.playlists {
     @include samo-shadow-and-radius();
     a {
       display: block;
-      img.cover_125 {
-        width: 125px;
-        height: 125px;
+      img {
+        // width: 125px;
+        // height: 125px;
         display: block;
+        border-radius: 4px 4px 0 0;
+      }
+      svg {
         border-radius: 4px 4px 0 0;
       }
     }
