@@ -118,8 +118,9 @@ main {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        margin-left: $baseline;
         padding: $baseline;
+        max-width: 50%;
+        box-sizing: border-box;
         @media #{$mobile} {
           margin-left: 0;
         }
@@ -155,6 +156,7 @@ main {
         }
 
         .user_card_mod_stats {
+          word-wrap:break-word;
         }
       }
     }
