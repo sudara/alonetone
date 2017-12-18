@@ -6,7 +6,7 @@
   <%= render partial: 'shared/asset_white' %>
 <% else %>
 
-  <div class="track-content">
+  <div class="track-content track-content-cover-view">
     <div class="large-cover">
       <%= greenfield_playlist_cover(@playlist, :greenfield) %>
     </div>
@@ -15,9 +15,12 @@
       <%= render partial: 'links' %>
     </div>
     <% end %>
+
+    <% if @playlist.credits %>
     <div class="playlist-credits">
       <%= markdown(@playlist.credits) %>
     </div>
+    <% end %>
   </div>
 <% end %>
 
