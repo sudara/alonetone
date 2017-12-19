@@ -150,10 +150,10 @@ Alonetone::Application.routes.draw do
           post :set_playlist_description
           post :sort_tracks
           post :add_track
-          get ':asset_id', :to => 'playlists#show', as: 'show_track'
         end
         resources :comments
       end
+      get '/playlists/:id/:asset_id', :to => 'playlists#show', as: 'show_track_user_playlist'
     end
   end
 end
