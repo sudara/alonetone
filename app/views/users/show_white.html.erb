@@ -1,11 +1,13 @@
-<div id="user_header">
-  <div class="user_name_and_location">
-    <h1 class="user_name"><%= @user.name %></h1>
-  </div>
-  <%= follow_toggle(@user) %>
-</div>
 
 <div id="user_home">
+  <div id="user_header_area">
+    <div id="user_header">
+      <div class="user_name_and_location">
+        <h1 class="user_name"><%= @user.name %></h1>
+      </div>
+      <%= follow_toggle(@user) %>
+    </div>
+  </div>
   <div id="user_playlists_area">
 		<div class="user_playlists">
     <% if @user.has_public_playlists? %>
