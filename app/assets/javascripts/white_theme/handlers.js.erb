@@ -1,8 +1,39 @@
+// on initial load
+  // setup soundmanager
+  // create Sound objects
+  // setup waveform
+
+// on play
+
+
+// within playlist load
+  // change waveform display
+
+// leaving playlist
+  // destroy current Sound objects
+  // create Sound objects
+
+
+soundManager.onready(function() {
+ populatePlaylist();
+});
+
+
+
+document.addEventListener("turbolinks:click", function(event){
+
+  //alert(event.data.url.split('playlists/')[1])
+    //Sound.destroyAll();
+})
+
 // Dom Manipulations here must be idempotent.
 // This event fires on each page load
 // but also when we hit back / forward and get a cached page
 // so it will re-fire on pages where it's already been fired
 document.addEventListener("turbolinks:load", function() {
+    populatePlaylist()
+    showWaveform()
+
     // svg default playlists
     $('#playlist-and-track-content .no_pic').each(function(){
       $(this).append(makeSVGFromTitle(800, $('h1:first').text().trim()))
@@ -69,19 +100,6 @@ document.addEventListener("turbolinks:load", function() {
         TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
     })
 
-    if ( $(".track-content").length == 1 ) {
-        var playAnimationSVG = $("#playAnimationSVG");
-        $("div.player .play-button-container > div:first-child").click(function() {
-            var playAnimationSVG = $("#playAnimationSVG");
-            $(".playIconSymbol").show();
-            $(this).find("#playIconSymbol").hide();
-            $(this).append(playAnimationSVG);
-            myPlayAnimation.init()
-            myPlayAnimation.setPlay()
-            myPlayAnimation.showLoading();
-            TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
-        })
-    }
 });
 
 
@@ -90,7 +108,7 @@ document.addEventListener("turbolinks:load", function() {
 $(document).on('click', '.track-content > .player .play-button,' +
                       '.tracklist [data-sound-id] .play-button', function(e) {
   console.warn("PLAYING!!!")
-  var soundId = $(this).parent('[data-sound-id]').data('sound-id');
+  var soundId = $(this).parents('[data-sound-id]').data('sound-id');
   var li = $('.playlist li[data-sound-id=' + attr(soundId) + ']');
 
   // Pause other tracks unless this event was triggered programmatically
@@ -102,12 +120,19 @@ $(document).on('click', '.track-content > .player .play-button,' +
     sound.setPosition(0)
   sound.play();
 
-  $('.playlist .tracklist li').removeClass('active');
-  li.addClass('active');
   if (window.location.href == this.href) {
     e.preventDefault();
     return false;
   }
+  var myPlayAnimation = new PlayAnimation();
+  var playAnimationSVG = $("#playAnimationSVG");
+  $(".playIconSymbol").show();
+  $(this).find("#playIconSymbol").hide();
+  $(this).append(playAnimationSVG);
+  myPlayAnimation.init()
+  myPlayAnimation.setPlay()
+  myPlayAnimation.showLoading();
+  TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
 });
 
 // single track page
@@ -131,5 +156,3 @@ $(document).on('click', '[data-sound-id] .pause-button', function(e) {
   e.preventDefault();
   return false;
 });
-
-document.addEventListener("turbolinks:load", showWaveform);

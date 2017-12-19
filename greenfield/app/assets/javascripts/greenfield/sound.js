@@ -181,5 +181,10 @@ Sound = {
     for (var soundId in this.store)
       this.store[soundId].pause();
     return this;
+  },
+  destroyAll: function(){
+    for (var soundId in this.store)
+      this.store[soundId].destruct();
+    return this;
   }
 };
