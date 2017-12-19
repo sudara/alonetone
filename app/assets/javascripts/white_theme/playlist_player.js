@@ -21,18 +21,6 @@ function waveformData(csv) {
   return data;
 }
 
-function toggleCover(href){
-  var cover = $('.playlist a.small-cover');
-  var sidebarDownloads = $('.sidebar-downloads')
-  if (cover[0].href == href){
-    cover.hide();
-    sidebarDownloads.hide();
-  }else{
-    cover.show();
-    sidebarDownloads.show();
-  }
-}
-
 function showWaveform() {
   $('.waveform').each(function() {
     var container = $(this);
@@ -80,17 +68,11 @@ function showWaveform() {
     }).mouseout(function() { hoverPosition = -1 });
 
     soundManager.onready(function() {
+      console.log('WOO loading ' + player.find('.play-control a').attr('href'))
       var sound = Sound.load(player.find('.play-control a').attr('href'));
 
-      sound.resumed(function() {
-        changeControlActionToPause(soundId);
-      });
-
-      sound.paused(function() {
-        changeControlActionToPlay(soundId);
-      });
-
       sound.playing(function() {
+        // display pause button
         container.trigger('update.waveform', [this]);
         player.find('.time .index').text(this.index);
       });
@@ -122,24 +104,24 @@ function mobileHTML5() {
 
 Playlist = [];
 
-soundManager.onready(function() {
-  var as = $('.tracklist [data-sound-id] a.play-button');
-  if (!as.length)
-    as = $('.play-button a, .pause-button a');
+function populatePlaylist(){
+  var tracks = $('.tracklist [data-sound-id] a.play-button');
+  if (!tracks.length)
+    tracks = $('.play-button a, .pause-button a');
 
-  as.each(function(i) {
+  tracks.each(function(i) {
     var url = this.attributes.href.nodeValue;
     var sound = Sound.load(this.pathname.replace(/(\.mp3)*$/, '.mp3'));
     Playlist.push(sound);
 
     sound.ui = this;
 
-    sound.positioned(5000, function() {
+    sound.positioned(10000, function() {
       $.post(url.replace(/\.mp3$/, '') + '/listens');
     });
 
     sound.paused(function() {
-      changeControlActionToPlay(this.id);
+      (this.id);
       window['ga'] && window.ga('send', 'event', 'stream', 'stop', this.id);
     });
 
@@ -174,4 +156,4 @@ soundManager.onready(function() {
   var currentTrack = $('.player .play-control a').attr('href');
   if (currentTrack)
     Sound.load(currentTrack).load();
-});
+}
