@@ -149,9 +149,6 @@ class CreateThredded < ActiveRecord::Migration[5.1]
               name: :index_thredded_messageboard_users_for_recently_active
     end
 
-    add_column :thredded_user_preferences, :auto_follow_topics, :boolean, default: false, null: false
-    add_column :thredded_user_messageboard_preferences, :auto_follow_topics, :boolean, default: false, null: false
-
     create_table :thredded_user_preferences do |t|
       t.references :user, null: false
       t.boolean :follow_topics_on_mention, default: true, null: false
