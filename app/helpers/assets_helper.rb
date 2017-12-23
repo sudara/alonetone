@@ -13,7 +13,7 @@ module AssetsHelper
         user_post_attached_asset_path(asset.post.user, asset.alonetone_asset,
                                       asset.permalink, :format => :mp3)
     elsif @playlist
-      show_track_user_playlist_path(asset.user, @playlist, asset, :format => :mp3)
+      user_show_track_in_playlist_path(asset.user, @playlist, asset, :format => :mp3)
     end
   end
 end

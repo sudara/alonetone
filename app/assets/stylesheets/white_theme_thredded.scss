@@ -1,0 +1,17 @@
+@import 'white_theme';
+
+// check out variables and override pre-import
+// https://github.com/thredded/thredded/blob/master/app/assets/stylesheets/thredded/base/_variables.scss
+
+$thredded-base-font-family: $serif-font;
+$thredded-heading-font-family: $sans-font;
+
+@import 'thredded';
+
+li.thredded--user-navigation--private-topics {
+    display: none
+}
+
+li.thredded--user-preferences--notifications-for-private-topics {
+    display: none
+}

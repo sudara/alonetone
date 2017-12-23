@@ -11,9 +11,10 @@ Alonetone::Application.routes.draw do
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
+    mount Thredded::Engine => '/discuss'
     get '/upload', :to => 'assets#new'
     get '/login', :to => 'user_sessions#new', :as => 'login'
-    match '/logout', :to => 'user_sessions#destroy', via: [:get, :post]
+    get '/logout', :to => 'user_sessions#destroy', as: 'logout', via: [:get, :post]
     resources :user_sessions
 
     # admin stuff
@@ -153,7 +154,7 @@ Alonetone::Application.routes.draw do
         end
         resources :comments
       end
-      get '/playlists/:id/:asset_id', :to => 'playlists#show', as: 'show_track_user_playlist'
+      get '/playlists/:id/:asset_id', :to => 'playlists#show', as: 'show_track_in_playlist'
     end
   end
 end

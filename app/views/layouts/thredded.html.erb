@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>alonetone | <%= yield :thredded_page_title %></title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <%= stylesheet_link_tag ('white_theme_thredded') %>
+    <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
+    <%= csrf_meta_tag %>
+    <%= javascript_include_tag 'thredded',
+                               async: !Rails.application.config.assets.debug,
+                               defer: true,
+                               'data-turbolinks-track': 'reload'%>
+	<%= javascript_include_tag "white_theme", "data-turbolinks-eval": "false"  %>					 
+  </head>
+<body>
+  <% if @sudo %>
+  <div class="sudo_bar">
+    Sudo'd as <%= current_user.name %>. <%= link_to 'Return to admin.', sudo_user_path(@sudo) %></span>
+  </div>
+  <% end %>
+
+  <%= check_for_and_display_welcome_back %>
+  <%= check_for_and_display_flashes %>
+
+  <header id="site_header">
+    <%= render :partial=> 'shared/header' %>
+    <%= render :partial => 'shared/search' %>
+  </header>
+
+  <main>
+    <%= yield %>
+  </main>
+
+  <footer id="site_footer">
+    <%= cache("footer/#{theme_name}/#{moderator?}", :expires_in => 3.minutes) do %>
+    <%= render :partial => 'shared/footer_white' %>
+    <% end %>
+  </footer>
+
+  <%= render :partial => 'layouts/greenfield/ga' %>
+</body>
+</html>
