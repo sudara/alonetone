@@ -5,6 +5,7 @@ before_install:
 - sudo apt-get install -y libsndfile-dev lame
 before_script:
 - mysql -e 'create database alonetone_test';
+- gem update --system
 - bundle exec rake copy_config
 - bundle exec rake db:drop
 - bundle exec rake db:create
