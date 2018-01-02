@@ -64,7 +64,6 @@ gem 'cloudfront-signer'
 
 # monitoring & perf
 gem 'newrelic_rpm'
-gem 'scout_apm'
 gem 'sidekiq'
 gem 'dalli'
 
