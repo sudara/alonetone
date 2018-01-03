@@ -13,19 +13,19 @@ ul.playlists {
     }
   }
   li.playlist {
-    width: 225px;
+    width: 200px;
     text-align: center;
     font-size: 11px;
     background-color: $white;
     padding-bottom: $baseline / 4;
-    margin-bottom: $baseline * 1.25;
-    margin-right: $baseline * 1.25;
+    margin-bottom: $baseline * 1.5;
+    margin-right: $baseline * 1.5;
     @include samo-shadow-and-radius();
     a {
       display: block;
       img {
         display: block;
-		width:225px;
+		width:200px;
         border-radius: 4px 4px 0 0;
       }
       svg {
