@@ -4,8 +4,9 @@
 
 [alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
-alonetone launched in January 2008. As of 2017 it hosts over 70,000 tracks from 5300 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
+alonetone launched in January 2008, shortly after soundcloud launched.
 
+As of 2018 it hosts over 70,00 tracks from 5500 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
 ### Bug reporting
 
@@ -30,7 +31,7 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 
 ### Current tech
 
-* Rails 5.1.x
+* Rails 5.2
 * jQuery
 * SoundManager 2 (for flash + html5 playback)
 
@@ -47,9 +48,6 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 * Feeds for iTunes podcasts and offsite flash players
 
 ## Features wanted
-
-### Browse All Playlists
-Low hanging fruit, boys and girls! Shoulda been a 2008 feature :)
 
 ### On the fly zip downloads of playlists via nginx mod\_zip
 This is very easy. Already implemented on Ramen Music. Essentially just is a having a controller generate a text file of filenames that nginx interrupts and uses to construct a zip that's sent back to the client.
