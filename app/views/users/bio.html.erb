@@ -17,21 +17,7 @@
       <div class="bio static_content">
         <p>
         	<%= website_for(@user).html_safe if @user.website.present? %>
-        </p>
-        	  <% if @user.has_tracks? && authorized? && @user.itunes.present? %>
-              <p>
-                Podcast feed: <%= user_feeds_url(@user, :rss) %><br/>
-                <%= itunes_link_for(@user) %>
-              </p>
-        	  <% elsif @user.has_tracks? && (logged_in? && (current_user.id == @user.id)) %>
-        	    Your Podcast feed: <%= user_feeds_url(@user, :rss) %>
-              <p>
-        	      <%= link_to 'Submit this feed to iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast'%>
-        	      to get your music indexed and listed in iTunes under Podcasts > Music. Then come back to update your profile when you have your iTunes feed URL.
-              </p>
-        	  <% elsif @user.itunes.present? %>
-                <p><%= itunes_link_for(@user) %></p>
-        	  <% end %>
+        </p>         
       </div>
 
   </div>
