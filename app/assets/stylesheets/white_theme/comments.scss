@@ -83,7 +83,7 @@ h2#latest_comments + div.box {
       float: right;
       margin-top: 15px;
       a {
-        @include default_button('admin');
+        @include default_button();
       }
     }
     h1,
