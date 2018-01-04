@@ -13,7 +13,7 @@
 	<%= f.text_field :display_name %><br/><br/>
 
 	<label for="user_bio">Tell us about yourself</label><br />
-	<%= f.text_area :bio, :class=>'double_trouble', :cols => 60, :rows => 15 %><br/><br/>
+	<%= f.text_area :bio, :class=>'double_trouble', :cols => 50, :rows => 15 %><br/><br/>
 
   <label for="user_bio">What city or town do you live in?</label><br />
   <%= f.text_field :city %><br/><br/>
@@ -88,8 +88,8 @@
   <div class="box">
   <h2 class="box">Change your picture</h2>
   <div class="static_content">
-      <%= image_tag @user.avatar(:small)%><br/>
-      Upload a new photo. (400px by 400px square for best results)<br/>
+      <p><%= image_tag @user.avatar(:album)%></p>
+      Upload a new photo. (1000px by 1000px square for best results)<br/>
       <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
       	<%= f.file_field :pic  %>
       	<%= submit_tag "Upload new Pic" %>
