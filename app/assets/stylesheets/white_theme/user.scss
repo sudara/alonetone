@@ -26,8 +26,6 @@ main {
       grid-area: header;
     }
     #user_playlists_area {
-      margin-bottom: 40px;
-
       grid-area: playlists;
       h2 {
         color: $samo-orange;
