@@ -187,6 +187,37 @@ main {
           margin-top: $baseline / 2;
           margin-bottom: $baseline / 2;
         }
+        .listen {
+          position: relative;
+          box-sizing: border-box;
+          width: 100%;
+          height: 40px;
+          margin-top: 10px;
+          padding-right: $baseline;
+          padding-left: 50px;
+          background-color: $box-background-color;
+          display: flex;
+          .listen_user {
+            margin-right: $baseline / 2;
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+          .listen_details {
+            font-size: 10px;
+            line-height: 10px;
+            overflow: hidden;
+            height: 40px;
+            min-height: 25px;
+            padding-top: 5px;
+            flex-grow: 1;
+            a {
+              font-size: 10px;
+              font-weight: bold;
+            }
+          }
+        }
         
       }
     }
