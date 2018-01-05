@@ -15,10 +15,8 @@
 
 
 soundManager.onready(function() {
- populatePlaylist();
+ //populatePlaylist();
 });
-
-
 
 document.addEventListener("turbolinks:click", function(event){
 
@@ -31,7 +29,7 @@ document.addEventListener("turbolinks:click", function(event){
 // but also when we hit back / forward and get a cached page
 // so it will re-fire on pages where it's already been fired
 document.addEventListener("turbolinks:load", function() {
-    populatePlaylist()
+    Playlist.setup()
     showWaveform()
 
     // svg default playlists
