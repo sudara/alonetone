@@ -25,11 +25,12 @@ ul.playlists {
       display: block;
       img {
         display: block;
-		width:200px;
+    		width:200px;
         border-radius: 4px 4px 0 0;
       }
       svg {
         border-radius: 4px 4px 0 0;
+        display: block;
       }
     }
     a.small_playlist_title {
