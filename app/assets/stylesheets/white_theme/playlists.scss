@@ -71,7 +71,6 @@ body.has-details {
     margin-left: auto;
     padding: $baseline / 2 $baseline;
     background-color: #fff;
-
     @include match-variable-site-width('narrow');
     @include samo-shadow-and-radius();
     @media #{$efficient} {
@@ -99,6 +98,18 @@ body.has-details {
       width: 100%;
       margin-right: auto;
       margin-left: auto;
+    }
+    .errorExplanation {
+      margin: 0;
+      padding: 0;
+      p {
+        font-size: inherit;
+      }
+      ul {
+        li {
+          list-style-type: disc;
+        }
+      }
     }
     .container.static_content {
       width: 100%;
