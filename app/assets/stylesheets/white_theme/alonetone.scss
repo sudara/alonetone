@@ -335,3 +335,59 @@ body.has-details {
   }
 }
 
+/* USERS/USER/EDIT FORM */
+
+#bio_edit_user_1, .settings-box {
+  br {
+    display: none;
+  }
+  label {
+    margin-bottom: 2px!important;
+  }
+  input, textarea, select {
+    margin-bottom: $baseline;
+    border: 1px solid $light-gray;
+  }
+  textarea {
+    padding-left: 5px;
+    padding-top: 5px;
+    width: 98%;
+    font-family: $serif-font;
+  }
+}
+
+.settings-box {
+  h2 {
+    margin-bottom: $baseline;
+  }
+  .static_content {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    &:last-child {
+      padding-top: $baseline!important;
+    }
+  }
+}
+
+.edit-your-profile-box {
+ .static_content {
+   &:last-child {
+     padding-top: 0!important;
+   }
+ } 
+}
+
+.change-your-picture-box {
+  br {
+    display: none;
+  }
+
+  form {
+    margin-top: $baseline;
+    input:last-child {
+      display: block;
+      margin-top: $baseline;
+
+    }
+  }
+}
