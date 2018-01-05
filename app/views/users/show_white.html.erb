@@ -130,8 +130,8 @@
         </p>
         <% end %>
       </div>
-      <div class="user_card_mod_stats">
         <% if authorized? %>
+          <div class="user_card_mod_stats">
           <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
             edit profile
           <% end %>
@@ -146,8 +146,8 @@
           <p>
             User Agent: <%= @user.browser %>
           </p>
-        </div>
         <% end %>
+        </div>
       </div>
   </div>
 </div>
