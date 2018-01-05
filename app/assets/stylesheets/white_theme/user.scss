@@ -30,6 +30,9 @@ main {
       h2 {
         color: $samo-orange;
       }
+      ul {
+        margin: 0;
+      }
     }
     #user_latest_area {
       grid-area: latest;
@@ -59,8 +62,7 @@ main {
     #user_header_area {
       #user_header {
         display: flex;
-        // margin: 0 auto $baseline auto;
-        // max-width: 1100px;
+        margin-bottom: $baseline;
         img {
           display: block;
           width: 62px;
