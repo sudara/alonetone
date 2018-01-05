@@ -1,17 +1,22 @@
 <%= render(:partial => 'users/user') unless white_theme_enabled? %>
 
-<h1>Create a new album or mix</h1>
-<h2 class="spacey">Your playlist will become public as soon as it has some tracks in it</h2>
+<div class="playlists-new">
 
-<%= error_messages_for :playlist %>
+	<h1>Create a new album or mix</h1>
+	<h2 class="spacey">Your playlist will become public as soon as it has some tracks in it</h2>
+
+	<%= error_messages_for :playlist %>
 
 
-<div class="container static_content">
-<%= form_for [@user, @playlist] do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+	<div class="container static_content">
+	<%= form_for [@user, @playlist] do |f| %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  <p>
+	    <%= f.submit "Create" %>
+	  </p>
+	<% end %>
+	</div>
+
+
+
 </div>
-
