@@ -119,6 +119,10 @@ main {
       .user_card_avatar {
         max-width: 50%;
         flex-grow: 1;
+        @media #{$mobile} {
+          max-width: 100%;
+          width: 100%;
+        }
         img {
           height: 100%;
           width: 100%;
@@ -132,6 +136,8 @@ main {
         max-width: 50%;
         box-sizing: border-box;
         @media #{$mobile} {
+          max-width: 100%;
+          width: 100%;
           margin-left: 0;
         }
 
