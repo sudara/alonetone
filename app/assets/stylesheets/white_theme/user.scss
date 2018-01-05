@@ -77,6 +77,8 @@ main {
           width: 48px;
           height: 48px;
           align-self: flex-end;
+          position: relative;
+          top: 4px;
         }
         a.edit_profile {
           position: absolute;
