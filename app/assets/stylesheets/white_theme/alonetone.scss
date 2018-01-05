@@ -391,3 +391,17 @@ body.has-details {
     }
   }
 }
+
+.your-account-box {
+  .static_content:last-child {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    .static_content {
+      padding: 0!important;
+      padding-bottom: $baseline!important;
+      input:last-child {
+        margin-top: $baseline!important;
+      }
+    }
+  }
+}
