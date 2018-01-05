@@ -171,6 +171,7 @@ main {
           padding-top: $baseline / 2;
           border-top: 1px solid $light-gray;
           word-wrap:break-word; 
+          line-height: 1.3em;
           a.edit_profile {
             @include default-button("admin");
             margin-bottom: $baseline / 2;
