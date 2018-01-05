@@ -22,7 +22,7 @@ notifications:
     template:
       - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) by %{author}"
     rooms:
-      secure: "PGidlOk6p8z59jjKJrUhBUoAvYDMMWgKcDqLNELEcATvJDG3a8wbguJYJsh6DEkWB6El2Xjon9g+4JD9TNF5lXAM/U3GzkoERBKDrLbXjRJ37FLVooVXsN22QVdx7dalDesrLMWyXIKxW1Zj9oiTNk9pNGWifCIVUdTeu1GTYSQ="
+      secure: JlRUT/esqDvsl+8+einhAQx0NUnpLuaoy/Rq70HHCU+zJ7VfwVvbdINMOQKoI44Lj1SeyaJGRfEGkjw9dsWnHBI5TP8wp+i7Z7W9XBWndvWI3Us5SRJ3FoXKt7cVZYVTfcHPvHUOAT7m8szTk+jCkCmeWkRlzKj6X0Lw62UEsB8=
 env:
   global:
   - S3_BUCKET_NAME=junkinthetrunk
