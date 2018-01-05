@@ -155,6 +155,9 @@ main {
          font-size: 13px;
           a {
             text-decoration: underline;
+            &:hover {
+              color: $samo-orange;
+            }
           }
         }
 
