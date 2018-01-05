@@ -63,7 +63,6 @@ ul.playlists {
 
 // playlists/new
 
-
 body.has-details {
   .playlists-new {
     box-sizing: border-box;
@@ -104,11 +103,6 @@ body.has-details {
       padding: 0;
       p {
         font-size: inherit;
-      }
-      ul {
-        li {
-          list-style-type: disc;
-        }
       }
     }
     .container.static_content {
