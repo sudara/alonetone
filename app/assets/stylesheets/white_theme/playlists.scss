@@ -1,5 +1,5 @@
 
-// /home, /user, /playlists
+// /home, /user, /playlists capsules
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
@@ -60,6 +60,127 @@ ul.playlists {
 }
 
 
+// editing, woo hoo!
+
+#edit_playlist {
+  .playlist {
+    .tracks {
+      position: relative;
+    }
+    #drop_here {
+      display: none;
+    }
+    .playlist_title {
+      a.edit {
+        display: none;
+      }
+    }
+    &.adding {
+      #drop_here {
+        font-size: 20px;
+        line-height: 50px;
+        display: block;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        color: $orange;
+        border-top: 1px solid #000000;
+        background-color: $playlist_box_silver;
+      }
+    }
+  }
+}
+
+#playlist_source_options {
+  overflow: auto;
+  margin-left: $baseline / 2;
+  li {
+    float: left;
+    margin-right: 10px;
+    text-decoration: underline;
+  }
+}
+
+#sort_playlists {
+  position: relative;
+  width: 100%;
+  height: 1000px;
+  li.small_playlists {
+    margin-bottom: 20px;
+  }
+}
+
+#edit_playlist {
+  .playlist_title {
+    h3 {
+      margin-left: $baseline / 2;
+    }
+  }
+  .info {
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+  }
+  position: relative;
+  .asset .asset_top div.title {
+    display: block;
+  }
+}
+
+#edit_playlist_info {
+  form p {
+    font-size: 14px;
+  }
+  input {
+    font-size: 13px;
+  }
+  textarea {
+    width: 100%;
+  }
+  .edit_playlist_columns {
+    display: flex;
+    > div {
+      width: 50%;
+    }
+  }
+}
+
+.playlist_delete_button {
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 35px;
+  position: relative;
+  top: 10px;
+  display: block;
+  float: right;
+  width: 110px;
+  height: 30px;
+  margin-top: 20px!important;
+  margin-right: -25px;
+  margin-left: 10px;
+  background: image-url('icons/delete.png') no-repeat center top;
+}
+
+.playlist_edit_button {
+  float: right!important;
+  margin: 0!important;
+  margin-right: 20px!important;
+}
+
+.edit_playlist_button_row {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  overflow: hidden;
+}
+
+.playlists_hidden_blurb {
+  font-size: 12px;
+  margin: 5px 0 14px 0;
+}
+
+
+// I think this will all go away, for the multi-playlist view that has gone away?
+
 // .playlist {
   // div.box {
     // margin-bottom: 1px;
@@ -114,139 +235,3 @@ ul.playlists {
     // }
   // }
 // }
-
-// editing, woo hoo!
-
-#edit_playlist {
-  .playlist {
-    .tracks {
-      position: relative;
-    }
-    #drop_here {
-      display: none;
-    }
-    .playlist_title {
-      a.edit {
-        display: none;
-      }
-    }
-    &.adding {
-      #drop_here {
-        font-size: 20px;
-        line-height: 50px;
-        display: block;
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        color: $orange;
-        border-top: 1px solid #000000;
-        background-color: $playlist_box_silver;
-      }
-    }
-  }
-}
-
-#playlist_source_options {
-  overflow: auto;
-  margin-left: $baseline / 2;
-  li {
-    float: left;
-    margin-right: 10px;
-    text-decoration: underline;
-  }
-}
-
-// #playlist_sources {
-//   .playlist_source {
-//     // width: 420px;
-//     padding: 0 0 0 0;
-//     .asset,
-//     .track {
-//       // width: 420px;
-//     }
-//   }
-// }
-
-#sort_playlists {
-  position: relative;
-  width: 100%;
-  height: 1000px;
-  li.small_playlists {
-    margin-bottom: 20px;
-  }
-}
-
-#edit_playlist {
-  .playlist_title {
-    h3 {
-      margin-left: $baseline / 2;
-    }
-  }
-  .info {
-    padding-left: $baseline / 2;
-    padding-right: $baseline / 2;
-  }
-  position: relative;
-  .asset .asset_top div.title {
-    display: block;
-  }
-}
-
-#edit_playlist_info {
-  form p {
-    font-size: 14px;
-  }
-  input {
-    font-size: 13px;
-  }
-  textarea {
-    width: 100%;
-  }
-  .edit_playlist_columns {
-    display: flex;
-    > div {
-      width: 50%;
-    }
-  }
-
-}
-
-.playlist_delete_button {
-  font-size: 10px;
-  font-weight: normal;
-  line-height: 35px;
-  position: relative;
-  top: 10px;
-  display: block;
-  float: right;
-  width: 110px;
-  height: 30px;
-  margin-top: 20px!important;
-  margin-right: -25px;
-  margin-left: 10px;
-  background: image-url('icons/delete.png') no-repeat center top;
-}
-
-.playlist_edit_button {
-  float: right!important;
-  margin: 0!important;
-  margin-right: 20px!important;
-}
-
-.edit_playlist_button_row {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  // background-color: $playlist_box_silver;
-  overflow: hidden;
-}
-
-
-.playlists_hidden_blurb {
-  font-size: 12px;
-  margin: 5px 0 14px 0;
-}
-
-#edit_playlist .unopenable .title {
-  // width: 317px!important;
-}
