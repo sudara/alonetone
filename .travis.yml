@@ -5,6 +5,7 @@ before_install:
 - sudo apt-get install -y libsndfile-dev lame
 before_script:
 - mysql -e 'create database alonetone_test';
+- gem update --system
 - bundle exec rake copy_config
 - bundle exec rake db:drop
 - bundle exec rake db:create
@@ -21,7 +22,7 @@ notifications:
     template:
       - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) by %{author}"
     rooms:
-      secure: Lz7LDMhQB7TSTOSldtsRcmVGfI3i0FOS+DxUWZL5PTHHOMFmsQ7ABBUh0cBkYgp+AL+vHF5XKmRjYJeUGeVZOJq1t+bs19OuX7F/NOPB4pa9aMyFTUJZYTW5R6ukccAnErkfqY9+7do9EXJoIvaMankdbSFD6mTzfIiOrGligII=
+      secure: JlRUT/esqDvsl+8+einhAQx0NUnpLuaoy/Rq70HHCU+zJ7VfwVvbdINMOQKoI44Lj1SeyaJGRfEGkjw9dsWnHBI5TP8wp+i7Z7W9XBWndvWI3Us5SRJ3FoXKt7cVZYVTfcHPvHUOAT7m8szTk+jCkCmeWkRlzKj6X0Lw62UEsB8=
 env:
   global:
   - S3_BUCKET_NAME=junkinthetrunk

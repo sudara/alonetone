@@ -7,10 +7,13 @@ h2#latest_comments + div.box {
   }
 }
 
-
 #home_comments_area, #user_comments_area {
   .asset {
     border-bottom: 0;
+    border-top: 1px solid #EEEEEE;
+  }
+  h2 + .asset {
+    border-top: 0;
   }
 }
 
@@ -53,7 +56,6 @@ h2#latest_comments + div.box {
     margin-left: 40px;
     a,
     a:visited {
-      // font-size: 12px;
       font-weight: bold;
       text-decoration: none;
     }
@@ -79,7 +81,7 @@ h2#latest_comments + div.box {
       float: right;
       margin-top: 15px;
       a {
-        @include default_button('admin');
+        @include default_button();
       }
     }
     h1,
@@ -92,7 +94,3 @@ h2#latest_comments + div.box {
     }
   }
 }
-
-
-// I guess this appears in the blog/features maybe nowhere else, i want to move this to tracks!!!
-

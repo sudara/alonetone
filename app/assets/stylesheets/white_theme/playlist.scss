@@ -2,17 +2,19 @@
   position: relative;
   background-color: white;
   @include samo-shadow-and-radius();
-  margin-bottom: $baseline;
   .small-cover {
     display: block;
     img {
       display: block;
       width: 100%;
     }
+    svg {
+      border-radius: 4px 4px 0 0;
+    }
   }
   h1 {
     line-height: 22px;
-    margin-top: 5px;
+    margin-top: $baseline/2;
     margin-bottom: 0;
     text-align: center;
     &.cover {
@@ -95,7 +97,6 @@
         line-height: 20px;
         display: block;
         float: left;
-        // width: 82%;
         padding-top: 7px;
         padding-bottom: 8px;
         text-decoration: none;
@@ -103,7 +104,6 @@
         span:first-child {
           display: block;
           float: left;
-          // width: 88%;
         }
         .time-text {
           font-size: 10px;

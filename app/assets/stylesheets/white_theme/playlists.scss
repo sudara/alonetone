@@ -13,20 +13,22 @@ ul.playlists {
     }
   }
   li.playlist {
-    width: 125px;
+    width: 200px;
     text-align: center;
     font-size: 11px;
     background-color: $white;
     padding-bottom: $baseline / 4;
-    margin-bottom: $baseline / 2;
-    margin-right: $baseline;
+    margin-bottom: $baseline * 1.5;
+    margin-right: $baseline * 1.5;
     @include samo-shadow-and-radius();
     a {
       display: block;
-      img.cover_125 {
-        width: 125px;
-        height: 125px;
+      img {
         display: block;
+		width:200px;
+        border-radius: 4px 4px 0 0;
+      }
+      svg {
         border-radius: 4px 4px 0 0;
       }
     }
@@ -37,7 +39,6 @@ ul.playlists {
       padding: 0 6px;
       font-weight: bold;
       overflow: hidden;
-      height: 26px;
     }
     a:last-child {
       display: block;

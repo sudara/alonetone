@@ -73,7 +73,7 @@ $bright-highlight: rgba(255, 255, 0, .6);
 
 @mixin samo-shadow-and-radius() {
   border-radius: 4px;
-  box-shadow: 0px 3px 4px -2px #65666612;
+  box-shadow: 0px 3px 4px -2px #65666627;
 }
 
 @mixin default-button($type: '') {
@@ -92,7 +92,6 @@ $bright-highlight: rgba(255, 255, 0, .6);
   box-shadow: 0px 4px 4px -2px #65666612;
 
   @if $type == 'admin' {
-    // background-color: rgba(218, 109, 37, .50);
     background-color: $samo-orange;
     opacity:1;
     color: #FFF;

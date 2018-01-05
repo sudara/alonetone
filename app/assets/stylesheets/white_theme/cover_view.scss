@@ -2,6 +2,9 @@
 // ok!
 
 .track-content {
+  &.track-content-cover-view {
+     margin-left: -$baseline!important;
+  }
   min-width: 400px;
   @media #{$mobile} {
     min-width: none;
@@ -10,7 +13,10 @@
     width: 100%;
     max-width: 800px;
     height: auto;
-    margin-left: -$baseline;
+    svg {
+      display: block;
+      border-radius: 0 4px 4px 0;
+    }
   }
   img {
     max-width: 100%;

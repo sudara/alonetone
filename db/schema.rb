@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819160514) do
+ActiveRecord::Schema.define(version: 2017_12_22_143311) do
 
-  create_table "assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
     t.string "mp3_file_name"
     t.integer "mp3_file_size"
@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.text "description", limit: 16777215
     t.text "credits", limit: 16777215
     t.string "youtube_embed"
-    t.float "hotness", limit: 24
+    t.float "hotness"
     t.integer "favorites_count", default: 0
     t.text "lyrics", limit: 16777215
     t.text "description_html", limit: 16777215
-    t.float "listens_per_week", limit: 24
+    t.float "listens_per_week"
     t.integer "comments_count", default: 0
     t.datetime "updated_at"
     t.text "waveform", limit: 4294967295
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
-  create_table "audio_features", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "audio_features", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "asset_id"
     t.text "waveform", limit: 16777215
     t.datetime "created_at", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["asset_id"], name: "index_audio_features_on_asset_id"
   end
 
-  create_table "comments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "commentable_type"
     t.integer "commentable_id"
     t.text "body"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["is_spam"], name: "index_comments_on_is_spam"
   end
 
-  create_table "featured_tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "featured_tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "position", default: 1
     t.integer "feature_id"
     t.integer "asset_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.datetime "updated_at"
   end
 
-  create_table "features", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "features", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "featured_user_id"
     t.integer "writer_id"
     t.integer "views_count", default: 0
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.datetime "updated_at"
   end
 
-  create_table "followings", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "followings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "follower_id"
     t.datetime "created_at"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["user_id"], name: "index_followings_on_user_id"
   end
 
-  create_table "forums", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "forums", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "site_id"
     t.string "name"
     t.string "description"
@@ -120,7 +120,19 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["position"], name: "index_forums_on_position"
   end
 
-  create_table "greenfield_attached_assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "slug", limit: 191, null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope", limit: 191
+    t.datetime "created_at", null: false
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "greenfield_attached_assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "post_id"
     t.string "mp3_file_name"
     t.string "mp3_content_type"
@@ -132,7 +144,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.integer "length"
   end
 
-  create_table "greenfield_playlist_downloads", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "greenfield_playlist_downloads", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.integer "playlist_id", null: false
     t.string "s3_path", null: false
@@ -143,14 +155,14 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.integer "serves", default: 0, null: false
   end
 
-  create_table "greenfield_posts", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "greenfield_posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "asset_id"
     t.text "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "groups", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at"
@@ -158,7 +170,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.string "permalink"
   end
 
-  create_table "listens", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "listens", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -176,7 +188,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "memberships", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "memberships", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
     t.boolean "admin"
@@ -184,7 +196,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.datetime "updated_at"
   end
 
-  create_table "pics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "pics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "pic_file_size"
     t.string "pic_content_type"
     t.string "pic_file_name"
@@ -196,7 +208,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
   end
 
-  create_table "playlists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.text "description", limit: 16777215
     t.string "image"
@@ -222,7 +234,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
-  create_table "posts", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "topic_id"
     t.text "body"
@@ -231,12 +243,263 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.integer "forum_id"
     t.text "body_html"
     t.boolean "is_spam", default: false
-    t.float "spaminess", limit: 24
+    t.float "spaminess"
     t.string "signature"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
   end
 
-  create_table "topics", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "messageboard_id", null: false
+    t.string "name", limit: 191, null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug", limit: 191, null: false
+    t.index ["messageboard_id", "slug"], name: "index_thredded_categories_on_messageboard_id_and_slug", unique: true
+    t.index ["messageboard_id"], name: "index_thredded_categories_on_messageboard_id"
+    t.index ["name"], name: "thredded_categories_name_ci"
+  end
+
+  create_table "thredded_messageboard_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "thredded_messageboard_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "messageboard_id", null: false
+    t.string "notifier_key", limit: 90, null: false
+    t.boolean "enabled", default: true, null: false
+    t.index ["user_id", "messageboard_id", "notifier_key"], name: "thredded_messageboard_notifications_for_followed_topics_unique", unique: true
+  end
+
+  create_table "thredded_messageboard_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "thredded_user_detail_id", null: false
+    t.bigint "thredded_messageboard_id", null: false
+    t.datetime "last_seen_at", null: false
+    t.index ["thredded_messageboard_id", "last_seen_at"], name: "index_thredded_messageboard_users_for_recently_active"
+    t.index ["thredded_messageboard_id", "thredded_user_detail_id"], name: "index_thredded_messageboard_users_primary"
+    t.index ["thredded_messageboard_id"], name: "index_thredded_messageboard_users_on_thredded_messageboard_id"
+    t.index ["thredded_user_detail_id"], name: "index_thredded_messageboard_users_on_thredded_user_detail_id"
+  end
+
+  create_table "thredded_messageboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", limit: 191, null: false
+    t.string "slug", limit: 191
+    t.text "description"
+    t.integer "topics_count", default: 0
+    t.integer "posts_count", default: 0
+    t.integer "position", null: false
+    t.bigint "last_topic_id"
+    t.bigint "messageboard_group_id"
+    t.boolean "locked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["last_topic_id"], name: "index_thredded_messageboards_on_last_topic_id"
+    t.index ["messageboard_group_id"], name: "index_thredded_messageboards_on_messageboard_group_id"
+    t.index ["slug"], name: "index_thredded_messageboards_on_slug"
+  end
+
+  create_table "thredded_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "notifier_key", limit: 90, null: false
+    t.boolean "enabled", default: true, null: false
+    t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_followed_topics_unique", unique: true
+  end
+
+  create_table "thredded_notifications_for_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "notifier_key", limit: 90, null: false
+    t.boolean "enabled", default: true, null: false
+    t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_private_topics_unique", unique: true
+  end
+
+  create_table "thredded_post_moderation_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "messageboard_id"
+    t.text "post_content"
+    t.bigint "post_user_id"
+    t.text "post_user_name"
+    t.bigint "moderator_id"
+    t.integer "moderation_state", null: false
+    t.integer "previous_moderation_state", null: false
+    t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display"
+    t.index ["messageboard_id"], name: "index_thredded_post_moderation_records_on_messageboard_id"
+    t.index ["moderator_id"], name: "index_thredded_post_moderation_records_on_moderator_id"
+    t.index ["post_id"], name: "index_thredded_post_moderation_records_on_post_id"
+    t.index ["post_user_id"], name: "index_thredded_post_moderation_records_on_post_user_id"
+  end
+
+  create_table "thredded_post_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", limit: 191, null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "post_type", limit: 191
+    t.index ["post_id", "post_type"], name: "index_thredded_post_notifications_on_post"
+    t.index ["post_id"], name: "index_thredded_post_notifications_on_post_id"
+  end
+
+  create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "content"
+    t.string "ip"
+    t.string "source", default: "web"
+    t.bigint "postable_id", null: false
+    t.bigint "messageboard_id", null: false
+    t.integer "moderation_state", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content"], name: "thredded_posts_content_fts", type: :fulltext
+    t.index ["messageboard_id"], name: "index_thredded_posts_on_messageboard_id"
+    t.index ["moderation_state", "updated_at"], name: "index_thredded_posts_for_display"
+    t.index ["postable_id"], name: "index_thredded_posts_on_postable_id"
+    t.index ["postable_id"], name: "index_thredded_posts_on_postable_id_and_postable_type"
+    t.index ["user_id"], name: "index_thredded_posts_on_user_id"
+  end
+
+  create_table "thredded_private_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "content"
+    t.bigint "postable_id", null: false
+    t.string "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["postable_id"], name: "index_thredded_private_posts_on_postable_id"
+    t.index ["user_id"], name: "index_thredded_private_posts_on_user_id"
+  end
+
+  create_table "thredded_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "last_user_id"
+    t.string "title", null: false
+    t.string "slug", limit: 191, null: false
+    t.integer "posts_count", default: 0
+    t.string "hash_id", limit: 191, null: false
+    t.datetime "last_post_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hash_id"], name: "index_thredded_private_topics_on_hash_id"
+    t.index ["last_user_id"], name: "index_thredded_private_topics_on_last_user_id"
+    t.index ["slug"], name: "index_thredded_private_topics_on_slug"
+    t.index ["user_id"], name: "index_thredded_private_topics_on_user_id"
+  end
+
+  create_table "thredded_private_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "private_topic_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["private_topic_id"], name: "index_thredded_private_users_on_private_topic_id"
+    t.index ["user_id"], name: "index_thredded_private_users_on_user_id"
+  end
+
+  create_table "thredded_topic_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "topic_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_thredded_topic_categories_on_category_id"
+    t.index ["topic_id"], name: "index_thredded_topic_categories_on_topic_id"
+  end
+
+  create_table "thredded_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "last_user_id"
+    t.string "title", null: false
+    t.string "slug", limit: 191, null: false
+    t.bigint "messageboard_id", null: false
+    t.integer "posts_count", default: 0, null: false
+    t.boolean "sticky", default: false, null: false
+    t.boolean "locked", default: false, null: false
+    t.string "hash_id", limit: 191, null: false
+    t.string "type", limit: 191
+    t.integer "moderation_state", null: false
+    t.datetime "last_post_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hash_id"], name: "index_thredded_topics_on_hash_id"
+    t.index ["last_user_id"], name: "index_thredded_topics_on_last_user_id"
+    t.index ["messageboard_id", "slug"], name: "index_thredded_topics_on_messageboard_id_and_slug", unique: true
+    t.index ["messageboard_id"], name: "index_thredded_topics_on_messageboard_id"
+    t.index ["moderation_state", "sticky", "updated_at"], name: "index_thredded_topics_for_display"
+    t.index ["title"], name: "thredded_topics_title_fts", type: :fulltext
+    t.index ["user_id"], name: "index_thredded_topics_on_user_id"
+  end
+
+  create_table "thredded_user_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "latest_activity_at"
+    t.integer "posts_count", default: 0
+    t.integer "topics_count", default: 0
+    t.datetime "last_seen_at"
+    t.integer "moderation_state", default: 0, null: false
+    t.timestamp "moderation_state_changed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["latest_activity_at"], name: "index_thredded_user_details_on_latest_activity_at"
+    t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations"
+    t.index ["user_id"], name: "index_thredded_user_details_on_user_id"
+  end
+
+  create_table "thredded_user_messageboard_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "messageboard_id", null: false
+    t.boolean "follow_topics_on_mention", default: true, null: false
+    t.boolean "auto_follow_topics", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["messageboard_id"], name: "index_thredded_user_messageboard_preferences_on_messageboard_id"
+    t.index ["user_id", "messageboard_id"], name: "thredded_user_messageboard_preferences_user_id_messageboard_id", unique: true
+    t.index ["user_id"], name: "index_thredded_user_messageboard_preferences_on_user_id"
+  end
+
+  create_table "thredded_user_post_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "notified_at", null: false
+    t.index ["post_id"], name: "index_thredded_user_post_notifications_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_thredded_user_post_notifications_on_user_id_and_post_id", unique: true
+  end
+
+  create_table "thredded_user_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "follow_topics_on_mention", default: true, null: false
+    t.boolean "auto_follow_topics", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_thredded_user_preferences_on_user_id"
+  end
+
+  create_table "thredded_user_private_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "postable_id", null: false
+    t.integer "page", default: 1, null: false
+    t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
+    t.index ["user_id"], name: "index_thredded_user_private_topic_read_states_on_user_id"
+  end
+
+  create_table "thredded_user_topic_follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "reason", limit: 1
+    t.index ["user_id", "topic_id"], name: "thredded_user_topic_follows_user_topic", unique: true
+    t.index ["user_id"], name: "index_thredded_user_topic_follows_on_user_id"
+  end
+
+  create_table "thredded_user_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "postable_id", null: false
+    t.integer "page", default: 1, null: false
+    t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["user_id", "postable_id"], name: "thredded_user_topic_read_states_user_postable", unique: true
+    t.index ["user_id"], name: "index_thredded_user_topic_read_states_on_user_id"
+  end
+
+  create_table "topics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "forum_id"
     t.integer "user_id"
     t.string "title"
@@ -252,14 +515,14 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.integer "site_id"
     t.string "permalink"
     t.boolean "spam", default: false
-    t.float "spaminess", limit: 24
+    t.float "spaminess"
     t.string "signature"
     t.index ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink"
     t.index ["last_updated_at", "forum_id"], name: "index_topics_on_forum_id_and_last_updated_at"
     t.index ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
   end
 
-  create_table "tracks", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.integer "playlist_id"
     t.integer "asset_id"
     t.integer "position", default: 1
@@ -273,7 +536,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
-  create_table "updates", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "updates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.datetime "created_at"
@@ -283,7 +546,7 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.string "permalink"
   end
 
-  create_table "user_reports", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.string "category"
     t.text "description"
@@ -292,12 +555,12 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "spam", default: false
-    t.float "spaminess", limit: 24
+    t.float "spaminess"
     t.string "signature"
     t.text "description_html"
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "login", limit: 40
     t.string "email", limit: 100
     t.string "salt", limit: 128, default: "", null: false
@@ -319,8 +582,8 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.string "country"
     t.string "city"
     t.text "settings", limit: 16777215
-    t.float "lat", limit: 24
-    t.float "lng", limit: 24
+    t.float "lat"
+    t.float "lng"
     t.text "bio_html", limit: 16777215
     t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
@@ -339,4 +602,8 @@ ActiveRecord::Schema.define(version: 20170819160514) do
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 
+  add_foreign_key "thredded_messageboard_users", "thredded_messageboards"
+  add_foreign_key "thredded_messageboard_users", "thredded_user_details"
+  add_foreign_key "thredded_user_post_notifications", "thredded_posts", column: "post_id", on_delete: :cascade
+  add_foreign_key "thredded_user_post_notifications", "users", on_delete: :cascade
 end

@@ -32,6 +32,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_record_union (1.2.0)
+      activerecord (>= 4.0)
     activejob (5.2.0.beta2)
       activesupport (= 5.2.0.beta2)
       globalid (>= 0.3.6)
@@ -57,17 +59,22 @@ GEM
       activesupport (>= 3.2, < 5.2)
       request_store (~> 1.0)
       scrypt (>= 1.2, < 4.0)
+    autoprefixer-rails (7.2.3)
+      execjs
     awesome_print (1.8.0)
-    aws-sdk (2.10.92)
-      aws-sdk-resources (= 2.10.92)
-    aws-sdk-core (2.10.92)
+    aws-sdk (2.10.109)
+      aws-sdk-resources (= 2.10.109)
+    aws-sdk-core (2.10.109)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.92)
-      aws-sdk-core (= 2.10.92)
+    aws-sdk-resources (2.10.109)
+      aws-sdk-core (= 2.10.109)
     aws-sigv4 (1.0.2)
-    backports (3.10.3)
-    bugsnag (6.1.1)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
+    bugsnag (6.4.0)
     builder (3.2.3)
     chunky_png (1.3.8)
     climate_control (0.2.0)
@@ -113,6 +120,8 @@ GEM
     daemons (1.2.5)
     dalli (2.7.6)
     database_cleaner (1.6.2)
+    db_text_search (0.2.2)
+      activerecord (>= 4.1.15, < 6.0)
     diff-lcs (1.3)
     diffy (3.2.0)
     dynamic_form (1.1.4)
@@ -124,6 +133,7 @@ GEM
     factory_bot_rails (4.8.2)
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
+    fast_blank (1.0.0)
     ffi (1.9.18)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -131,7 +141,9 @@ GEM
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     formatador (0.2.5)
-    gemoji (3.0.0)
+    friendly_id (5.2.3)
+      activerecord (>= 4.0.0)
+    gemoji (2.1.0)
     geokit (1.11.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -150,9 +162,16 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     has_permalink (0.1.7)
+    html-pipeline (2.7.1)
+      activesupport (>= 2)
+      nokogiri (>= 1.4)
+    htmlentities (4.3.4)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
+    inline_svg (1.3.1)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jmespath (1.3.1)
     jquery-fileupload-rails (0.4.7)
       actionpack (>= 3.1)
@@ -165,6 +184,19 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.1.0)
+    kaminari (1.1.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
+      actionview
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
+      activerecord
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
+    kramdown (1.16.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -184,19 +216,30 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    money (6.10.0)
+    moneta (1.0.0)
+    money (6.10.1)
       i18n (>= 0.6.4, < 1.0)
     multi_json (1.12.2)
-    mustermann (1.0.1)
+    mustache (1.0.5)
     mysql2 (0.4.10)
     nenv (0.3.0)
-    newrelic_rpm (4.6.0.338)
+    newrelic_rpm (4.7.1.340)
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    nokogumbo (1.4.13)
+      nokogiri
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    onebox (1.8.32)
+      fast_blank (>= 1.0.0)
+      htmlentities (~> 4.3)
+      moneta (~> 1.0)
+      multi_json (~> 1.11)
+      mustache
+      nokogiri (~> 1.7)
+      sanitize
     paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -217,6 +260,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     puma (3.11.0)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.3)
     rack-mini-profiler (0.10.7)
       rack (>= 1.2.0)
@@ -255,6 +300,7 @@ GEM
     rake (12.3.0)
     rakismet (1.5.4)
     rb-fsevent (0.10.2)
+    rb-gravatar (1.0.5)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     recaptcha (4.6.2)
@@ -264,6 +310,7 @@ GEM
     redcarpet (3.4.0)
     redis (4.0.1)
     request_store (1.3.2)
+    rinku (2.0.4)
     rspec (3.7.0)
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)
@@ -294,6 +341,10 @@ GEM
       jquery-fileupload-rails (~> 0.4.1)
       rails (>= 3.1)
       sass-rails (>= 3.1)
+    sanitize (4.5.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (~> 1.4.1)
     sass (3.4.25)
     sass-rails (5.0.7)
       railties (>= 4.0.0, < 6)
@@ -301,7 +352,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    scout_apm (2.3.1)
     scrypt (3.0.5)
       ffi-compiler (>= 1.0, < 2.0)
     shellany (0.0.1)
@@ -313,18 +363,6 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
-    sinatra (2.0.0)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.0)
-      tilt (~> 2.0)
-    sinatra-contrib (2.0.0)
-      backports (>= 2.0)
-      multi_json
-      mustermann (~> 1.0)
-      rack-protection (= 2.0.0)
-      sinatra (= 2.0.0)
-      tilt (>= 1.3, < 3)
     sixarm_ruby_unaccent (1.2.0)
     sometimes (0.0.3)
     sort_alphabetical (1.1.0)
@@ -333,6 +371,10 @@ GEM
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
+    sprockets-es6 (0.9.2)
+      babel-source (>= 5.8.11)
+      babel-transpiler
+      sprockets (>= 3.0.0)
     sprockets-rails (3.2.1)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
@@ -344,14 +386,36 @@ GEM
       rack (>= 1, < 3)
     thor (0.20.0)
     thread_safe (0.3.6)
+    thredded (0.14.0)
+      active_record_union (>= 1.2.0)
+      autoprefixer-rails
+      db_text_search (~> 0.2.0)
+      friendly_id
+      gemoji (~> 2.1.0)
+      html-pipeline
+      htmlentities
+      inline_svg
+      kaminari
+      kramdown
+      nokogiri
+      onebox (~> 1.8, >= 1.8.13)
+      pundit (>= 1.1.0)
+      rails (>= 4.2.0)
+      rb-gravatar
+      rinku
+      sanitize
+      sass (>= 3.4.21)
+      sprockets-es6
+      timeago_js
     tilt (2.0.8)
+    timeago_js (3.0.2)
     timecop (0.9.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (3.2.0)
+    uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
     unicode_utils (1.4.0)
     websocket-driver (0.6.5)
@@ -413,16 +477,14 @@ DEPENDENCIES
   rubyzip
   s3_direct_upload
   sass-rails
-  scout_apm
   scrypt
   sidekiq
   simple_form
-  sinatra
-  sinatra-contrib
   sometimes
   soundmanager2-rails
   sqlite3
   thin
+  thredded
   timecop
   turbolinks
   uglifier
@@ -430,4 +492,4 @@ DEPENDENCIES
   yui-compressor
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

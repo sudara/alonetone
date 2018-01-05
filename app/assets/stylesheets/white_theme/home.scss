@@ -11,9 +11,9 @@
   margin-right: auto;
   margin-bottom: 40px;
   margin-left: auto;
-  justify-content: space-between;
+  // justify-content: space-between;
   li.playlist {
-    margin-right: 0;
+    // margin-right: 0;
   }
   @media #{$efficient} {
     width: $efficient-site-width-wide;
@@ -77,7 +77,6 @@
 
   #home_playlists_area {
     grid-area: playlists;
-    margin-bottom: 40px;
   }
   #home_latest_area {
     grid-area: latest;

@@ -13,7 +13,7 @@
 	<%= f.text_field :display_name %><br/><br/>
 
 	<label for="user_bio">Tell us about yourself</label><br />
-	<%= f.text_area :bio, :class=>'double_trouble', :cols => 40, :rows => 4%><br/><br/>
+	<%= f.text_area :bio, :class=>'double_trouble', :cols => 50, :rows => 15 %><br/><br/>
 
   <label for="user_bio">What city or town do you live in?</label><br />
   <%= f.text_field :city %><br/><br/>
@@ -24,13 +24,8 @@
   <label for="user_website">Have a website?</label><br />
   http://<%= f.text_field :website %><br/><br/>
 
-  <label for="user_website">Did you set up your <%= link_to 'alonetone iTunes podcast?', halp_path(:itunes) %></label>
-  <br />
-  http://<%= f.text_field :itunes %><br/><br/>
-
-  <label for "user_twitter">Trendy (or dorky) enough to be on twitter?</label><br/>
+  <label for "user_twitter">On twitter?</label><br/>
   http://twitter.com/<%= f.text_field :twitter%><br/><br/>
-
 
   </div>
   <div class="static_content">
@@ -93,8 +88,8 @@
   <div class="box">
   <h2 class="box">Change your picture</h2>
   <div class="static_content">
-      <%= image_tag @user.avatar(:small)%><br/>
-      Upload a new photo. (400px by 400px square for best results)<br/>
+      <p><%= image_tag @user.avatar(:album)%></p>
+      Upload a new photo. (1000px by 1000px square for best results)<br/>
       <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
       	<%= f.file_field :pic  %>
       	<%= submit_tag "Upload new Pic" %>
@@ -148,13 +143,6 @@
     <%= select_tag('user[settings][email_new_tracks]',
         options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']],
         user_setting(:email_new_tracks))) %>
-  </div>
-
-  <div class="static_content">
-    <label>Remove / block your iTunes podcast? </label><br/>
-    <%= select_tag('user[settings][block_itunes]',
-        options_for_select([['no','false'], ['yes, block my podcast url from iTunes','true']],
-        user_setting(:block_itunes))) %>
   </div>
 
   <div class="static_content">

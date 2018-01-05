@@ -4,7 +4,7 @@
      <ul>
       <li>
         <%= User.currently_online.collect do |user| %>
-          <% link_to user.name, user_home_path(user.login) %>
+          <% link_to user.name, main_app.user_home_path(user.login) %>
         <% end.join(', ').html_safe %>
       </li>
      </ul>

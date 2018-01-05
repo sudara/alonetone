@@ -20,13 +20,12 @@ module PlaylistsHelper
     # greenfield size did not exist before this id
     elsif size == :greenfield and (playlist.pic.id > 69806 and playlist.pic.id < 72848)
       size = :original
-    elsif size == :greenfield  and playlist.pic.id < 69807
+    elsif (size == :greenfield or size == :original) and playlist.pic.id < 69807
       return svg_cover
     else
       image_tag playlist.cover(size)
     end
   end
-
 
   def greenfield_upload_form(user, playlist, &block)
     data = {

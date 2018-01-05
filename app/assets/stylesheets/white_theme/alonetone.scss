@@ -84,7 +84,7 @@ a.view_all {
   }
   box-shadow: none;
   position: absolute;
-  top: 12px;
+  top: 9px;
   right: 0;
   border: 0;
 
@@ -281,39 +281,7 @@ a.view_all {
   }
 }
 
-/* LISTENS */
-// is this only on the user page??
 
-.listen {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  margin-top: 10px;
-  padding-right: $baseline;
-  padding-left: 50px;
-  background-color: $box-background-color;
-  .listen_user {
-    float: left;
-    margin-right: $baseline / 2;
-    img {
-      width: 40px;
-      height: 40px;
-    }
-  }
-  .listen_details {
-    font-size: 10px;
-    line-height: 10px;
-    overflow: hidden;
-    height: 40px;
-    min-height: 25px;
-    padding-top: 10px;
-    a {
-      font-size: 10px;
-      font-weight: bold;
-    }
-  }
-}
 
 /* LISTENERS */
 
