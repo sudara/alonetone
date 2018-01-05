@@ -293,8 +293,8 @@ a.view_all {
   padding-right: $baseline;
   padding-left: 50px;
   background-color: $box-background-color;
+  display: flex;
   .listen_user {
-    float: left;
     margin-right: $baseline / 2;
     img {
       width: 40px;
@@ -308,6 +308,7 @@ a.view_all {
     height: 40px;
     min-height: 25px;
     padding-top: 5px;
+    flex-grow: 1;
     a {
       font-size: 10px;
       font-weight: bold;
