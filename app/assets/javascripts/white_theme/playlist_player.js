@@ -80,20 +80,6 @@ function showWaveform() {
   });
 }
 
-function changeControlActionToPlay(soundId) {
-  var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
-                   '[data-sound-id='+attr(soundId)+'] .pause-button');
-  controls.removeClass('pause-button').addClass('play-button').
-    find('*').andSelf().filter('.fa-pause').removeClass('fa-pause').addClass('fa-play');
-}
-
-function changeControlActionToPause(soundId) {
-  var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
-                   '[data-sound-id='+attr(soundId)+'] .pause-button');
-  controls.removeClass('play-button').addClass('pause-button').
-    find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
-}
-
 function mobileHTML5() {
   // Use the same test as soundmanager2
   var ua = navigator.userAgent,
@@ -102,58 +88,76 @@ function mobileHTML5() {
   return ua.match(/(mobile|pre\/|xoom)/i) || is_iDevice || isAndroid;
 }
 
-Playlist = [];
+Playlist = {
+	elements: $('.tracklist [data-sound-id] a.play-button'),
+	tracks: [],
+	currentTrack: $('.player .play-control a').attr('href'),
+	setup: function(){
+	  // this is for the edge case of a single-track playlist
+	  if (!this.elements.length)
+	    this.elements = $('.play-button a, .pause-button a');
+		this.populateTracks();
+		this.addCallbacksToTracks();
+	  if (this.currentTrack)
+	    Sound.load(this.currentTrack).load();
+	},
+	populateTracks: function(){
+	  this.elements.each(function(i) {
+	    var url = this.attributes.href.nodeValue;
+	    var sound = Sound.load(this.pathname.replace(/(\.mp3)*$/, '.mp3'));
+	    Playlist.tracks.push(sound);
 
-function populatePlaylist(){
-  var tracks = $('.tracklist [data-sound-id] a.play-button');
-  if (!tracks.length)
-    tracks = $('.play-button a, .pause-button a');
+	    sound.ui = this;
 
-  tracks.each(function(i) {
-    var url = this.attributes.href.nodeValue;
-    var sound = Sound.load(this.pathname.replace(/(\.mp3)*$/, '.mp3'));
-    Playlist.push(sound);
+	    sound.positioned(10000, function() {
+	      $.post(url.replace(/\.mp3$/, '') + '/listens');
+	    });
 
-    sound.ui = this;
+	    sound.paused(function() {
+	      Playlist.changeIconInPlaylistToPause(this.id);
+	      window['ga'] && window.ga('send', 'event', 'stream', 'stop', this.id);
+	    });
 
-    sound.positioned(10000, function() {
-      $.post(url.replace(/\.mp3$/, '') + '/listens');
+	    sound.resumed(function() {
+	      Playlist.changeIconInPlaylistToPlay(this.id);
+	      window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
+	    });
+
+	    sound.finished(function() {
+	      this.changeIconToPlay(this.id);
+	    });
+	  });
+	},
+	addCallbacksToTracks: function(){
+    $.each(this.tracks, function(i, sound) {
+      var next = Playlist[i+1];
+
+      if (mobileHTML5()) {
+        sound.finished(function() {
+          next && $(next.ui).trigger('click');
+        });
+      } else {
+        sound.positioned(-10000, function() {
+          next && next.load();
+        });
+
+        sound.positioned(-180, function() {
+          next && $(next.ui).trigger('click');
+        });
+      }
     });
-
-    sound.paused(function() {
-      (this.id);
-      window['ga'] && window.ga('send', 'event', 'stream', 'stop', this.id);
-    });
-
-    sound.resumed(function() {
-      changeControlActionToPause(this.id);
-      window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
-    });
-
-    sound.finished(function() {
-      changeControlActionToPlay(this.id);
-    });
-  });
-
-  $.each(Playlist, function(i, sound) {
-    var next = Playlist[i+1];
-
-    if (mobileHTML5()) {
-      sound.finished(function() {
-        next && $(next.ui).trigger('click');
-      });
-    } else {
-      sound.positioned(-10000, function() {
-        next && next.load();
-      });
-
-      sound.positioned(-180, function() {
-        next && $(next.ui).trigger('click');
-      });
-    }
-  });
-
-  var currentTrack = $('.player .play-control a').attr('href');
-  if (currentTrack)
-    Sound.load(currentTrack).load();
-}
+	},
+	changeIconInPlaylistToPlay:function(soundId){
+		var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
+		                 '[data-sound-id='+attr(soundId)+'] .pause-button');
+		controls.removeClass('play-button').addClass('pause-button').
+		  find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
+	},
+	changeIconInPlaylistToPause:function(soundId){
+		var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
+		                 '[data-sound-id='+attr(soundId)+'] .pause-button');
+		controls.removeClass('pause-button').addClass('play-button').
+		  find('*').andSelf().filter('.fa-pause').removeClass('fa-pause').addClass('fa-play');
+	}
+	
+};
