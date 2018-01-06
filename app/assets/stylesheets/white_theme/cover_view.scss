@@ -7,7 +7,7 @@
   }
   min-width: 400px;
   @media #{$mobile} {
-    min-width: none;
+    // min-width: 0;
   }
   .large-cover {
     width: 100%;
