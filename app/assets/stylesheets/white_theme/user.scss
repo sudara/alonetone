@@ -5,7 +5,10 @@ main {
     max-width: 1100px;
     margin: 0 auto;
 
-    grid-template-columns: 45% 45%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto; 
+    grid-column-gap: $baseline * 1.5;
+    grid-row-gap: $baseline * 1.5;
     justify-content: space-around;
     grid-template-areas:
     'header header'
@@ -14,6 +17,9 @@ main {
     'listens comments'
     'card card'
     'plays popular';
+    .box {
+      margin-bottom: 0;
+    }
     @media #{$mobile} {
       display: flex;
       flex-direction: column;

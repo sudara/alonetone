@@ -43,7 +43,10 @@
 #home_grid {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: 45% 45%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto; 
+  grid-column-gap: $baseline * 1.5;
+  grid-row-gap: $baseline * 1.5;
   max-width: 1100px;
   justify-content: space-around;
   grid-template-areas:
@@ -66,6 +69,9 @@
     > * {
       width: 100%;
     }
+  }
+  .box {
+    margin-bottom: 0;
   }
 
   #home_playlists_area {
