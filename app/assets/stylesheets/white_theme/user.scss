@@ -200,11 +200,14 @@ main {
       }
     }
     #user_plays_area { 
+      .box > h2 {
+        padding-left: $baseline / 2;
+      }
       #user_track_plays {
         padding-bottom: $baseline / 2;
         .static_content {
           font-size: 12px;
-          margin-left: 50px;
+          margin-left: $baseline / 2;
           margin-top: $baseline / 2;
           margin-bottom: $baseline / 2;
         }
@@ -215,7 +218,7 @@ main {
           height: 40px;
           margin-top: 10px;
           padding-right: $baseline;
-          padding-left: 50px;
+          padding-left: $baseline / 2;
           background-color: $box-background-color;
           display: flex;
           .listen_user {
