@@ -21,7 +21,7 @@
 /* MASS EDIT */
 
 .mass_edit_content {
-  @include match-variable-site-width('narrow');
+  @include match-dynamic-site-width('narrow');
   position: relative;
   div.track_options {
     a.delete_green {
@@ -104,8 +104,8 @@
 .faq.box {
   margin-left: auto;
   margin-right: auto;
-  @include match-variable-site-width('narrow');
-  @media #{$efficient} {
+  @include match-dynamic-site-width('narrow');
+  @media #{$mobile} {
     width: 90%;
   }
   padding: $baseline / 2 $baseline;

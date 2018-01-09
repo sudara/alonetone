@@ -2,8 +2,8 @@
   margin-right: auto;
   margin-left: auto;
   color: $samo-orange;
-  @media #{$efficient} {
-    width: $efficient-site-width-wide;
+  @media #{$mobile} {
+    width: $mobile-site-width-wide;
   }
 }
 
@@ -11,8 +11,8 @@
   margin-right: auto;
   margin-bottom: 40px;
   margin-left: auto;
-  @media #{$efficient} {
-    width: $efficient-site-width-wide;
+  @media #{$mobile} {
+    width: $mobile-site-width-wide;
     margin-bottom: 20px;
   }
   @media only screen and (max-width: 1010px) and (min-width: 780px) {
@@ -65,7 +65,7 @@
        'favorites follows .....'
   }
 
-  @media #{$mobile} {
+  @media #{$tablet} {
     display: flex;
     flex-direction: column;
     > * {
