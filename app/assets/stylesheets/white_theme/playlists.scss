@@ -55,7 +55,7 @@ ul.playlists {
 
 // This!!
 #static_header + ul.playlists {
-  @include match-variable-site-width();
+  @include match-dynamic-site-width();
   li {
     margin-bottom: 30px;
   }
@@ -70,9 +70,9 @@ body.has-details {
     margin-left: auto;
     padding: $baseline / 2 $baseline;
     background-color: #fff;
-    @include match-variable-site-width('narrow');
+    @include match-dynamic-site-width('narrow');
     @include samo-shadow-and-radius();
-    @media #{$efficient} {
+    @media #{$mobile} {
       width: 90%;
     }
     h1 {

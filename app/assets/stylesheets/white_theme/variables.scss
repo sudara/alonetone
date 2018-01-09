@@ -1,38 +1,38 @@
 // layout
 
 $desktop-site-width-wide: 90%;
-$efficient-site-width-wide: 96%;
+$mobile-site-width-wide: 96%;
 
 $desktop-site-width-narrow: 66%;
-$efficient-site-width-narrow: 96%;
+$mobile-site-width-narrow: 96%;
 
-@mixin match-variable-site-width($type: '') {
-  margin-left: auto;
-  margin-right: auto;
+@mixin match-dynamic-site-width($type: '') {
   width: $desktop-site-width-wide;
-  @media #{$efficient} {
-    width: $efficient-site-width-wide;
+  margin-right: auto;
+  margin-left: auto;
+  @media #{$mobile} {
+    width: $mobile-site-width-wide;
   }
   @if $type == 'narrow' {
     width: $desktop-site-width-narrow;
-    @media #{$efficient} {
-      width: $efficient-site-width-narrow;
+    @media #{$mobile} {
+      width: $mobile-site-width-narrow;
     }
   }
 }
 
-$baseline: 27px; // greenfield voodoo, promises design balance
+$baseline: 27px; // Used for spacing layout
 
-// media
+// media tiers
 
-$efficient: 'only screen and (max-width: 420px)';
-$mobile: 'only screen and (max-width: 640px)';
+$mobile: 'only screen and (max-width: 420px)';
+$tablet: 'only screen and (max-width: 640px)';
 $widescreen: 'only screen and (min-width: 1500px)';
 
 // site colors
 
 $body-background-color: #f4f4f4;
-$box-background-color: #FFFFFF;
+$box-background-color: #fff;
 
 // fonts
 
@@ -42,39 +42,41 @@ $serif-font: 'Harriet Text', serif;
 
 // colors ( how many of these are used, useful? )
 
-$black: #000000;
+$black: #000;
 $not-quite-black: #353535;
-$medium-gray: #666666;
-$light-medium-gray: #888888;
-$gray: #999999;
-$silver: #C7C8C7;
+$medium-gray: #666;
+$light-medium-gray: #888;
+$gray: #999;
+$silver: #c7c8c7;
 $samo-gray: #868686;
-$lightest-gray: #C7C6C3;
-$light-gray: #EEEEEE;
-$samo-background-gray: #F1F2F2;
-$white: #FFFFFF;
-$red: #D3220C;
-$green: #66A410;
-$orange: #DA6D25;
-$orange-background: #E66D29;
-$samo-orange: #CC6600;
-$nav-item-color: #C1C9B4;
-$tab-box-silver: #FFFFFF;
-$playlist-box-silver: #FFFFFF;
-$box-background-even: #FFFFFF;
-$not-quite-white: #F9F9F9;
-$not-quite-white-opaque: #F9F9F9; // to mask background
-$disabled: #8C8E86;
-$body-link-hover: #1A1D13;
-$waveform-playing: #302F2F;
+$lightest-gray: #c7c6c3;
+$light-gray: #eee;
+$samo-background-gray: #f1f2f2;
+$white: #fff;
+$red: #d3220c;
+$green: #66a410;
+$orange: #da6d25;
+$orange-background: #e66d29;
+$samo-orange: #c60;
+$nav-item-color: #c1c9b4;
+$tab-box-silver: #fff;
+$playlist-box-silver: #fff;
+$box-background-even: #fff;
+$not-quite-white: #f9f9f9;
+$not-quite-white-opaque: #f9f9f9; // to mask background
+$disabled: #8c8e86;
+$body-link-hover: #1a1d13;
+$waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
 
 // SAMO
 
 @mixin samo-shadow-and-radius() {
   border-radius: 4px;
-  box-shadow: 0px 3px 4px -2px #65666627;
+  box-shadow: 0 3px 4px -2px #65666627;
 }
+
+// DEFAULT BUTTON STYLE
 
 @mixin default-button($type: '') {
   font-family: $sans-font;
@@ -89,13 +91,12 @@ $bright-highlight: rgba(255, 255, 0, .6);
   text-decoration: none;
   border: 1.25px solid $light-medium-gray;
   border-radius: 4px;
-  box-shadow: 0px 4px 4px -2px #65666612;
-
+  box-shadow: 0 4px 4px -2px #65666612;
   @if $type == 'admin' {
-    background-color: $samo-orange;
-    opacity:1;
-    color: #FFF;
+    opacity: 1;
+    color: #fff;
     border: 1.25px solid #555;
+    background-color: $samo-orange;
   }
   &:hover {
     transition: border-color .1s ease-in-out;

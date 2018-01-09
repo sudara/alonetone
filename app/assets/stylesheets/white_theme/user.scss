@@ -20,7 +20,7 @@ main {
     .box {
       margin-bottom: 0;
     }
-    @media #{$mobile} {
+    @media #{$tablet} {
       display: flex;
       flex-direction: column;
        > * {
@@ -119,13 +119,13 @@ main {
       margin-bottom: $baseline * 2;
       background-color: $box-background-color;
       @include samo-shadow-and-radius();
-      @media #{$mobile} {
+      @media #{$tablet} {
         flex-direction: column;
       }
       .user_card_avatar {
         max-width: 50%;
         flex-grow: 1;
-        @media #{$mobile} {
+        @media #{$tablet} {
           max-width: 100%;
           width: 100%;
         }
@@ -141,7 +141,7 @@ main {
         padding: $baseline;
         max-width: 50%;
         box-sizing: border-box;
-        @media #{$mobile} {
+        @media #{$tablet} {
           max-width: 100%;
           width: 100%;
           margin-left: 0;

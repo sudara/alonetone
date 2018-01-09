@@ -16,14 +16,14 @@ footer#site_footer {
     display: flex;
     margin-right: auto;
     margin-left: auto;
-    @include match-variable-site-width();
+    @include match-dynamic-site-width();
     flex-wrap: wrap;
     justify-content: space-between;
     .footer_column {
       width: 23%;
       min-width: 150px;
       padding-top: 20px;
-      @media #{$mobile} {
+      @media #{$tablet} {
         font-size: 17px;
         line-height: 32px;
         width: 100%;
