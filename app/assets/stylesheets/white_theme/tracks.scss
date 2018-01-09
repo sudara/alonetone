@@ -328,12 +328,12 @@
     }
     .track_links {
       float: right;
-      margin-top: 15px;
       margin-bottom: $baseline;
+      margin-top: 5px;
       a {
         float: right;
         margin-left: 4px;
-
+        margin-top: 10px;
         @include default_button();
         &.show_to_admin_or_owner {
           display: none;
