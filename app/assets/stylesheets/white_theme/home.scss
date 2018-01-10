@@ -9,8 +9,11 @@
 
 .latest-playlists-header + ul.playlists {
   margin-right: auto;
-  margin-bottom: 40px;
   margin-left: auto;
+  margin-bottom: 0;
+  li.playlist {
+    margin-bottom: 0;
+  }
   @media #{$mobile} {
     width: $mobile-site-width-wide;
     margin-bottom: 20px;
