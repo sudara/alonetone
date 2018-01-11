@@ -1,5 +1,5 @@
 #static_header {
-  @include match-variable-site-width();
+  @include match-dynamic-site-width();
   #links {
     ul.links {
       li {

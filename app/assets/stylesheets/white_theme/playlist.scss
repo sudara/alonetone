@@ -7,6 +7,7 @@
     img {
       display: block;
       width: 100%;
+      border-radius: 4px 4px 0 0;
     }
     svg {
       border-radius: 4px 4px 0 0;
@@ -36,7 +37,7 @@
     color: $not-quite-black;
   }
   ul.tracklist {
-    margin-top: $baseline;
+    margin-top: $baseline / 2;
     li {
       clear: both;
       overflow: auto;

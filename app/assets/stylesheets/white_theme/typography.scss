@@ -8,7 +8,6 @@ strong {
   font-weight: bold;
 }
 
-
 a {
   text-decoration: none;
   color: inherit;
@@ -89,18 +88,6 @@ textarea.private {
   border-color: $red;
 }
 
-// span.private {
-//   font-size: 11px !important;
-//   display: block;
-//   margin-top: 5px;
-//   margin-bottom: 10px;
-//   margin-left: 22px;
-//   color: $red;
-//   img {
-//     display: none;
-//   }
-// }
-
 span.hint,
 main a.hint,
 main a.hint:visited {
@@ -119,17 +106,8 @@ blockquote {
 }
 
 span.note {
-  font-size: 11px;
+  font-size: 13px;
 }
-
-
-// img a,
-// img a:visited {
-//   color: transparent;
-//   &:hover {
-//     color: none;
-//   }
-// }
 
 
 // .fieldWithErrors input,

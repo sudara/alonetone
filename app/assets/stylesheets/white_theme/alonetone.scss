@@ -96,7 +96,7 @@ a.view_all {
   margin-bottom: 20px;
   padding: 20px 30px;
   background-color: #FFF;
-  @include match-variable-site-width('wide');
+  @include match-dynamic-site-width('wide');
 }
 
 .errorExplanation p, .notice h2 {
@@ -195,12 +195,12 @@ a.view_all {
 #user_index {
   display: flex;
 
-  @include match-variable-site-width();
+  @include match-dynamic-site-width();
   flex-wrap: wrap;
   justify-content: space-between;
   #static_header {
     width: 30%;
-    @media #{$mobile} {
+    @media #{$tablet} {
       width: 100%;
     }
     #links {
@@ -221,7 +221,7 @@ a.view_all {
 
     flex-wrap: wrap;
     justify-content: space-between;
-    @media #{$mobile} {
+    @media #{$tablet} {
       width: 100%;
     }
     div.clear {
@@ -259,7 +259,7 @@ a.view_all {
   display: flex;
   margin-top: 60px;
 
-  @include match-variable-site-width();
+  @include match-dynamic-site-width();
   flex-wrap: wrap;
   justify-content: space-between;
   div.user {
@@ -325,13 +325,83 @@ a.view_all {
 
 body.has-details {
   h2.spacey {
-    @include match-variable-site-width();
+    @include match-dynamic-site-width();
   }
   .container.static_content {
-    @include match-variable-site-width();
+    @include match-dynamic-site-width();
     @include samo-shadow-and-radius();
     background-color: $white;
     padding: $baseline;
   }
 }
 
+/* USERS/USER/EDIT FORM */
+
+#bio_edit_user_1, .settings-box {
+  br {
+    display: none;
+  }
+  label {
+    margin-bottom: 2px!important;
+  }
+  input, textarea, select {
+    margin-bottom: $baseline;
+    border: 1px solid $light-gray;
+  }
+  textarea {
+    padding-left: 5px;
+    padding-top: 5px;
+    width: 98%;
+    font-family: $serif-font;
+  }
+}
+
+.settings-box {
+  h2 {
+    margin-bottom: $baseline;
+  }
+  .static_content {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    &:last-child {
+      padding-top: $baseline!important;
+    }
+  }
+}
+
+.edit-your-profile-box {
+ .static_content {
+   &:last-child {
+     padding-top: 0!important;
+   }
+ } 
+}
+
+.change-your-picture-box {
+  br {
+    display: none;
+  }
+
+  form {
+    margin-top: $baseline;
+    input:last-child {
+      display: block;
+      margin-top: $baseline;
+
+    }
+  }
+}
+
+.your-account-box {
+  .static_content:last-child {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    .static_content {
+      padding: 0!important;
+      padding-bottom: $baseline!important;
+      input:last-child {
+        margin-top: $baseline!important;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 .track-content {
-  @include match-variable-site-width('narrow');
+  @include match-dynamic-site-width('narrow');
    > * {
     background-color: white;
 
@@ -8,7 +8,7 @@
   .track-post, .track-edit {
     position: relative;
     padding: $baseline ($baseline * 3);
-    @media #{$mobile} {
+    @media #{$tablet} {
       padding: $baseline / 2;
     }
 
@@ -81,7 +81,7 @@
       box-sizing: border-box;
       width: 100%;
       max-width: 500px;
-      height: 120px;
+      height: 300px;
       margin-top: $baseline;
       margin-bottom: $baseline;
       padding: $baseline / 2;
@@ -90,7 +90,7 @@
       border: 1px solid $lightest-gray;
 
       @include samo-shadow-and-radius();
-      @media #{$mobile} {
+      @media #{$tablet} {
         font-size: 16px;
       }
     }

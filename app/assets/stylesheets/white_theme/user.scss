@@ -3,9 +3,12 @@ main {
   #user_home {
     display: grid;
     max-width: 1100px;
+    padding: 0 $baseline * 1.5;
     margin: 0 auto;
-
-    grid-template-columns: 45% 45%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto; 
+    grid-column-gap: $baseline * 1.5;
+    grid-row-gap: $baseline * 1.5;
     justify-content: space-around;
     grid-template-areas:
     'header header'
@@ -14,7 +17,10 @@ main {
     'listens comments'
     'card card'
     'plays popular';
-    @media #{$mobile} {
+    .box {
+      margin-bottom: 0;
+    }
+    @media #{$tablet} {
       display: flex;
       flex-direction: column;
        > * {
@@ -29,6 +35,9 @@ main {
       grid-area: playlists;
       h2 {
         color: $samo-orange;
+      }
+      ul {
+        margin: 0;
       }
     }
     #user_latest_area {
@@ -59,8 +68,7 @@ main {
     #user_header_area {
       #user_header {
         display: flex;
-        // margin: 0 auto $baseline auto;
-        // max-width: 1100px;
+        margin-bottom: $baseline;
         img {
           display: block;
           width: 62px;
@@ -77,6 +85,8 @@ main {
           width: 48px;
           height: 48px;
           align-self: flex-end;
+          position: relative;
+          top: 4px;
         }
         a.edit_profile {
           position: absolute;
@@ -109,12 +119,16 @@ main {
       margin-bottom: $baseline * 2;
       background-color: $box-background-color;
       @include samo-shadow-and-radius();
-      @media #{$mobile} {
+      @media #{$tablet} {
         flex-direction: column;
       }
       .user_card_avatar {
         max-width: 50%;
         flex-grow: 1;
+        @media #{$tablet} {
+          max-width: 100%;
+          width: 100%;
+        }
         img {
           height: 100%;
           width: 100%;
@@ -127,7 +141,9 @@ main {
         padding: $baseline;
         max-width: 50%;
         box-sizing: border-box;
-        @media #{$mobile} {
+        @media #{$tablet} {
+          max-width: 100%;
+          width: 100%;
           margin-left: 0;
         }
 
@@ -148,12 +164,16 @@ main {
           font-family: $serif-font;
           flex-grow: 1;
           font-size: 14px;
+          line-height: 1.2em;
         }
 
         .user_card_links {
          font-size: 13px;
           a {
             text-decoration: underline;
+            &:hover {
+              color: $samo-orange;
+            }
           }
         }
 
@@ -170,6 +190,7 @@ main {
           padding-top: $baseline / 2;
           border-top: 1px solid $light-gray;
           word-wrap:break-word; 
+          line-height: 1.3em;
           a.edit_profile {
             @include default-button("admin");
             margin-bottom: $baseline / 2;
@@ -179,11 +200,14 @@ main {
       }
     }
     #user_plays_area { 
+      .box > h2 {
+        padding-left: $baseline / 2;
+      }
       #user_track_plays {
         padding-bottom: $baseline / 2;
         .static_content {
           font-size: 12px;
-          margin-left: 50px;
+          margin-left: $baseline / 2;
           margin-top: $baseline / 2;
           margin-bottom: $baseline / 2;
         }
@@ -194,7 +218,7 @@ main {
           height: 40px;
           margin-top: 10px;
           padding-right: $baseline;
-          padding-left: 50px;
+          padding-left: $baseline / 2;
           background-color: $box-background-color;
           display: flex;
           .listen_user {

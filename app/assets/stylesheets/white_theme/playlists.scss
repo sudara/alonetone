@@ -1,7 +1,8 @@
 
-// /home, /user, /playlists
+// /home, /user, /playlists capsules
 ul.playlists {
   display: flex;
+
   flex-wrap: wrap;
   &.three_or_less_playlists {
     justify-content: flex-start;
@@ -13,37 +14,39 @@ ul.playlists {
     }
   }
   li.playlist {
-    width: 200px;
-    text-align: center;
     font-size: 11px;
-    background-color: $white;
-    padding-bottom: $baseline / 4;
-    margin-bottom: $baseline * 1.5;
+    width: 200px;
     margin-right: $baseline * 1.5;
+    margin-bottom: $baseline * 1.5;
+    padding-bottom: $baseline / 4;
+    text-align: center;
+    background-color: $white;
+
     @include samo-shadow-and-radius();
     a {
       display: block;
       img {
         display: block;
-		width:200px;
+        width: 200px;
         border-radius: 4px 4px 0 0;
       }
       svg {
+        display: block;
         border-radius: 4px 4px 0 0;
       }
     }
     a.small_playlist_title {
+      font-weight: bold;
       display: block;
-      text-align: center;
+      overflow: hidden;
       margin-top: 10px;
       padding: 0 6px;
-      font-weight: bold;
-      overflow: hidden;
+      text-align: center;
     }
     a:last-child {
+      font-weight: normal;
       display: block;
       margin-top: 5px;
-      font-weight: normal;
       padding: 0 6px;
       color: $samo-gray;
     }
@@ -52,67 +55,67 @@ ul.playlists {
 
 // This!!
 #static_header + ul.playlists {
-  @include match-variable-site-width();
+  @include match-dynamic-site-width();
   li {
     margin-bottom: 30px;
   }
 }
 
+// playlists/new
 
-// .playlist {
-  // div.box {
-    // margin-bottom: 1px;
-    // padding-top: 9px;
-    // padding-left: 25px;
-    // background-color: $light_gray;
-    // h2 {
-      // font-size: 20px;
-      // font-weight: normal;
-      // line-height: 20px;
-      // margin: 0;
-      // margin-bottom: 4px;
-      // padding-right: 40px;
-    // }
-    // h3 {
-      // font-size: 12px;
-      // font-weight: normal;
-      // margin: 0;
-      // padding-bottom: 8px;
-    // }
-  // }
-  // div.info {
-    // position: relative;
-    // display: block;
-    // padding: 15px 15px 15px 20px;
-    // background-color: $playlist_box_silver;
-    // div.cover {
-      // position: relative;
-      // float: left;
-      // overflow: hidden;
-      // width: 148px;
-      // height: 136px;
-    // }
-    // p.description {
-      // float: left;
-      // font-size: 12px;
-      // width: 360px;
-      // margin-left: 20px;
-    // }
-    // .play_time {
-      // font-weight: bold;
-    // }
-  // }
-  // .empty {
-    // position: relative;
-    // margin-bottom: 1px;
-    // padding: 10px 20px 10px 20px;
-    // background-color: $orange_background;
-    // a {
-      // font-weight: bold;
-      // text-decoration: underline;
-    // }
-  // }
-// }
+body.has-details {
+  .playlists-new {
+    box-sizing: border-box;
+    margin-right: auto;
+    margin-left: auto;
+    padding: $baseline / 2 $baseline;
+    background-color: #fff;
+    @include match-dynamic-site-width('narrow');
+    @include samo-shadow-and-radius();
+    @media #{$mobile} {
+      width: 90%;
+    }
+    h1 {
+      font-weight: bold;
+      line-height: 42px;
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      height: 42px;
+      margin-top: 0;
+      margin-bottom: 1px;
+      padding: 0 0 0 0;
+      color: $samo-orange;
+      border-bottom: 1px solid $light-gray;
+      background-color: transparent;
+      &.static_content_heading {
+        padding-left: $baseline / 2;
+      }
+    }
+    h2.spacey {
+      font-size: 13px;
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .errorExplanation {
+      margin: 0;
+      padding: 0;
+      p {
+        font-size: inherit;
+      }
+    }
+    .container.static_content {
+      width: 100%;
+      padding: 0;
+      background-color: $white;
+      box-shadow: none;
+      strong {
+        font-weight: normal;
+      }
+    }
+  }
+}
 
 // editing, woo hoo!
 
@@ -138,7 +141,7 @@ ul.playlists {
         height: 50px;
         text-align: center;
         color: $orange;
-        border-top: 1px solid #000000;
+        border-top: 1px solid #000;
         background-color: $playlist_box_silver;
       }
     }
@@ -155,17 +158,6 @@ ul.playlists {
   }
 }
 
-// #playlist_sources {
-//   .playlist_source {
-//     // width: 420px;
-//     padding: 0 0 0 0;
-//     .asset,
-//     .track {
-//       // width: 420px;
-//     }
-//   }
-// }
-
 #sort_playlists {
   position: relative;
   width: 100%;
@@ -176,16 +168,16 @@ ul.playlists {
 }
 
 #edit_playlist {
+  position: relative;
   .playlist_title {
     h3 {
       margin-left: $baseline / 2;
     }
   }
   .info {
-    padding-left: $baseline / 2;
     padding-right: $baseline / 2;
+    padding-left: $baseline / 2;
   }
-  position: relative;
   .asset .asset_top div.title {
     display: block;
   }
@@ -203,11 +195,10 @@ ul.playlists {
   }
   .edit_playlist_columns {
     display: flex;
-    > div {
+     > div {
       width: 50%;
     }
   }
-
 }
 
 .playlist_delete_button {
@@ -236,16 +227,68 @@ ul.playlists {
   position: absolute;
   right: 20px;
   bottom: 20px;
-  // background-color: $playlist_box_silver;
   overflow: hidden;
 }
-
 
 .playlists_hidden_blurb {
   font-size: 12px;
   margin: 5px 0 14px 0;
 }
 
-#edit_playlist .unopenable .title {
-  // width: 317px!important;
-}
+
+// I think this will all go away, for the multi-playlist view that has gone away?
+
+// .playlist {
+// div.box {
+// margin-bottom: 1px;
+// padding-top: 9px;
+// padding-left: 25px;
+// background-color: $light_gray;
+// h2 {
+// font-size: 20px;
+// font-weight: normal;
+// line-height: 20px;
+// margin: 0;
+// margin-bottom: 4px;
+// padding-right: 40px;
+// }
+// h3 {
+// font-size: 12px;
+// font-weight: normal;
+// margin: 0;
+// padding-bottom: 8px;
+// }
+// }
+// div.info {
+// position: relative;
+// display: block;
+// padding: 15px 15px 15px 20px;
+// background-color: $playlist_box_silver;
+// div.cover {
+// position: relative;
+// float: left;
+// overflow: hidden;
+// width: 148px;
+// height: 136px;
+// }
+// p.description {
+// float: left;
+// font-size: 12px;
+// width: 360px;
+// margin-left: 20px;
+// }
+// .play_time {
+// font-weight: bold;
+// }
+// }
+// .empty {
+// position: relative;
+// margin-bottom: 1px;
+// padding: 10px 20px 10px 20px;
+// background-color: $orange_background;
+// a {
+// font-weight: bold;
+// text-decoration: underline;
+// }
+// }
+// }

@@ -3,7 +3,7 @@
 <%= render :partial => 'users/user' unless white_theme_enabled? %>
 
 <%= content_for :left do %>
-  <div class="box">
+  <div class="box edit-your-profile-box">
   <h2 class="box">Edit your profile</h2>
 	<div class="static_content">
 
@@ -35,7 +35,7 @@
 </div>
 
 
-<div class="box">
+<div class="box your-account-box">
   <h2 class="box">Your Account</h2>
 	<div class="static_content">
   	<%= form_for @user, html: { method: :put }, namespace: 'password' do |f| -%>
@@ -85,7 +85,7 @@
 <% end %>
 
 <%= content_for :right do %>
-  <div class="box">
+  <div class="box change-your-picture-box">
   <h2 class="box">Change your picture</h2>
   <div class="static_content">
       <p><%= image_tag @user.avatar(:album)%></p>
@@ -97,7 +97,7 @@
   </div>
   </div>
 
-  <div class="box">
+  <div class="box settings-box">
   <h2 class="box">Settings</h2>
   <div class="static_content">
   <%= form_for @user, html: { method: :put }, namespace: 'settings' do |f| -%>

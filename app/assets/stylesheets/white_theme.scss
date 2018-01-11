@@ -4,7 +4,6 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-@import 'application/simple_form';
 @import 'application/facebox';
 @import 'application/upload';
 
@@ -12,6 +11,7 @@
 @import 'white_theme/layout';
 @import 'white_theme/alonetone';
 @import 'white_theme/typography';
+@import 'white_theme/forms';
 @import 'white_theme/buttons';
 @import 'white_theme/misc'; 
 
@@ -29,4 +29,3 @@
 @import 'white_theme/cover_view';
 @import 'white_theme/track_content';
 @import 'white_theme/track_player';
-

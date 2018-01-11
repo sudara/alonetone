@@ -3,7 +3,7 @@ header#site_header {
   height: 40px;
   .header_inner {
     position: relative;
-    @include match-variable-site-width();
+    @include match-dynamic-site-width();
     margin-right: auto;
     margin-left: auto;
     .header_logo {
@@ -51,7 +51,7 @@ header#site_header {
           float: left;
           min-width: 122px;
           padding: 0 10px 0 15px;
-          text-align: left;
+          text-align: right;
           position: relative;
           top: 1px;
           &:hover {
@@ -92,7 +92,7 @@ header#site_header {
     float: right;
     margin-right: 4%;
     padding-top: 8px;
-    @media #{$efficient} {
+    @media #{$mobile} {
       display: none;
     }
     #search_form {

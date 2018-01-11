@@ -6,14 +6,18 @@
      margin-left: -$baseline!important;
   }
   min-width: 400px;
-  @media #{$mobile} {
-    min-width: none;
+  @media #{$tablet} {
+    // min-width: 0;
   }
   .large-cover {
     width: 100%;
     max-width: 800px;
     height: auto;
     svg {
+      display: block;
+      border-radius: 0 4px 4px 0;
+    }
+    img {
       display: block;
       border-radius: 0 4px 4px 0;
     }

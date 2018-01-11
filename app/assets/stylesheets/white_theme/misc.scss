@@ -21,7 +21,7 @@
 /* MASS EDIT */
 
 .mass_edit_content {
-  @include match-variable-site-width('narrow');
+  @include match-dynamic-site-width('narrow');
   position: relative;
   div.track_options {
     a.delete_green {
@@ -50,6 +50,35 @@
     form {
       padding: $baseline / 2 $baseline;
       box-sizing: border-box;
+      input#asset_title {
+        font-family: "Alright Sans", sans-serif;
+        font-weight: bold;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+        font-size: 27px;
+        line-height: 27px;
+      }
+      textarea {
+        font-family: "Harriet Text", serif;
+        font-size: 18px;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+        margin-top: 27px;
+        margin-bottom: 27px;
+        padding: 13.5px;
+        word-wrap: break-word;
+        color: #353535;
+        border: 1px solid #c7c6c3;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 3px 4px -2px #65666627;
+        box-shadow: 0 3px 4px -2px #65666627;
+      }
     }
     
   }
@@ -104,8 +133,8 @@
 .faq.box {
   margin-left: auto;
   margin-right: auto;
-  @include match-variable-site-width('narrow');
-  @media #{$efficient} {
+  @include match-dynamic-site-width('narrow');
+  @media #{$mobile} {
     width: 90%;
   }
   padding: $baseline / 2 $baseline;
@@ -173,12 +202,7 @@
 
 div.small_spinner {
   display: none;
-//  float: right;
-//  width: 20px;
-//  height: 20px;
-//  margin-top: 5px;
-//  margin-top: 5px;
-//  background: image-url('icons/small_spinner.gif') no-repeat center center;
+
 }
 
 /* REPORT A USER */
@@ -327,62 +351,3 @@ div.logo {
      font-size: 18px;
    }
  }
-
-
-
-
- // Who knows?
-
- // #single_track {
-//   h1 {
-//     font-size: 14px;
-//     font-weight: bold;
-//     margin-bottom: 10px;
-//     text-shadow: none;
-//   }
-//   #track_details {
-//     position: relative;
-//     display: block;
-//     padding: 15px 15px 15px 20px;
-//     background-color: $playlist_box_silver;
-//     p img {
-//       max-width: 385px;
-//     }
-//   }
-//   textarea {
-//     width: 380px;
-//     margin-top: 10px;
-//   }
-//   .seekbar {
-//     display: block;
-//     background-color: $playlist_box_silver;
-//     &:not(.initialized) {
-//       -webkit-box-sizing: border-box;
-//          -moz-box-sizing: border-box;
-//               box-sizing: border-box;
-//       border-top: 1px solid $body_background_color;
-//     }
-//   }
-//   &.descriptionless {
-//     .seekbar {
-//       background-color: $tab_box_silver;
-//     }
-//   }
-// }
-
-// div.track_options {
-//   display: relative;
-//   width: 100%;
-//   height: 32px;
-// }
-// 
-// #radio_tracks {
-//   margin-bottom: 3px;
-// }
-// 
-// #single_track .track_links {
-//   left: -9px;
-// }
-// .asset.played {
-//   opacity: .2;
-// }
