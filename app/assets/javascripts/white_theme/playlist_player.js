@@ -1,26 +1,3 @@
-function attr(val) {
-  return val.replace(/\//g, '\\/').replace(/@/g, '\\@');
-}
-
-function waveformData(csv) {
-  if(csv.length > 1){
-    var data = csv.split(',').map(function(s) {
-      return parseFloat(s);
-  })}else{
-    var data = [0,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,
-      .9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,0];
-  }
-
-  var max = Math.max.apply(Math, data),
-      min = Math.min.apply(Math, data);
-  var scale = Math.max(Math.abs(max), Math.abs(min));
-  data = data.map(function(s) {
-    return (s < 0 ? -1 : 1 ) * Math.pow(Math.abs(s) / scale, 0.7);
-  });
-
-  return data;
-}
-
 function showWaveform() {
   $('.waveform').each(function() {
     var container = $(this);
@@ -68,11 +45,9 @@ function showWaveform() {
     }).mouseout(function() { hoverPosition = -1 });
 
     soundManager.onready(function() {
-      console.log('WOO loading ' + player.find('.play-control a').attr('href'))
       var sound = Sound.load(player.find('.play-control a').attr('href'));
 
       sound.playing(function() {
-        // display pause button
         container.trigger('update.waveform', [this]);
         player.find('.time .index').text(this.index);
       });
@@ -88,53 +63,102 @@ function mobileHTML5() {
   return ua.match(/(mobile|pre\/|xoom)/i) || is_iDevice || isAndroid;
 }
 
-Playlist = {
+PlaylistPlayer = {
 	elements: $('.tracklist [data-sound-id] a.play-button'),
 	tracks: [],
-	currentTrack: $('.player .play-control a').attr('href'),
 	setup: function(){
-	  // this is for the edge case of a single-track playlist
+    // each page load might have a different play button
+    this.largePlayButton = $('.largePlaySVG')
+    this.largePlayAnimation = new LargePlayAnimation()
+    
+	  // this is for the edge case of a playlist with only 1 track
 	  if (!this.elements.length)
 	    this.elements = $('.play-button a, .pause-button a');
-		this.populateTracks();
-		this.addCallbacksToTracks();
-	  if (this.currentTrack)
-	    Sound.load(this.currentTrack).load();
+
+    // sometimes tracks will already be populated
+    // for example, a turbolinks:visit
+    // if not, we want to load tracks 
+    if(!this.tracks.length){
+  		this.populateTracks();
+  		this.addCallbacksToTracks();
+    }
+
+    // we preload the current track if there is one
+    this.currentUrl = $('.player .play-control a').attr('href')
+	  this.preloadCurrentTrack()
+    
+    // in every case, we want to set the play button and the waveform
+		this.initLargePlayButton();
+    showWaveform();
+    
+    // if something is currently playing, make sure the playlist reflects that
+    
 	},
+  play: function(soundId){
+    if(this.shouldLoadNewTrackPage(soundId))
+      this.loadNewTrackPage()
+    Sound.load(soundId).play()
+  },
+  pause: function(soundId){
+    Sound.pause(soundId)
+  },
+  shouldLoadNewTrackPage(soundId){
+    // if we 
+    var currentHref = $('.tracklist > li.active a.play-button').attr('href') 
+    var targetHref = $('.tracklist [data-sound-id="'+ soundId + '"] a.play-button').attr('href')
+    if(currentHref != targetHref)
+      Turbolinks.visit(targetHref)
+  },
+  loadNewTrackPage(){
+    
+  },
+  preloadCurrentTrack: function(){
+    // on the cover view, for example, there's no current track
+    if(this.currentUrl)
+      Sound.load(this.currentUrl).load();
+  },
 	populateTracks: function(){
+    // creates Sound Manager objects for each html element
 	  this.elements.each(function(i) {
 	    var url = this.attributes.href.nodeValue;
 	    var sound = Sound.load(this.pathname.replace(/(\.mp3)*$/, '.mp3'));
-	    Playlist.tracks.push(sound);
-
-	    sound.ui = this;
-
-	    sound.positioned(10000, function() {
+	    sound.element = this;
+	   
+      sound.positioned(10000, function() {        
 	      $.post(url.replace(/\.mp3$/, '') + '/listens');
 	    });
-
-	    sound.paused(function() {
-	      Playlist.changeIconInPlaylistToPause(this.id);
+      
+	    sound.paused(function() {        
+	      PlaylistPlayer.changeIconInPlaylistToPlay(this.id);
+        PlaylistPlayer.setLargePlayButtonToPlay()
 	      window['ga'] && window.ga('send', 'event', 'stream', 'stop', this.id);
 	    });
-
+      
+      sound.startedPlaying(function(){
+        PlaylistPlayer.setLargePlayButtonToPause()
+      });
+      
+      // play is clicked
 	    sound.resumed(function() {
-	      Playlist.changeIconInPlaylistToPlay(this.id);
+	      PlaylistPlayer.changeIconInPlaylistToPause(this.id);
+        PlaylistPlayer.animateLargePlayButton();
 	      window['ga'] && window.ga('send', 'event', 'stream', 'play', this.id);
 	    });
 
 	    sound.finished(function() {
-	      this.changeIconToPlay(this.id);
+	      PlaylistPlayer.changeIconInPlaylistToPlay(this.id);
 	    });
+      
+	    PlaylistPlayer.tracks.push(sound);
 	  });
 	},
 	addCallbacksToTracks: function(){
     $.each(this.tracks, function(i, sound) {
-      var next = Playlist[i+1];
+      var next = PlaylistPlayer[i+1];
 
       if (mobileHTML5()) {
         sound.finished(function() {
-          next && $(next.ui).trigger('click');
+          next && $(next.element).trigger('click');
         });
       } else {
         sound.positioned(-10000, function() {
@@ -142,18 +166,36 @@ Playlist = {
         });
 
         sound.positioned(-180, function() {
-          next && $(next.ui).trigger('click');
+          next && $(next.element).trigger('click');
         });
       }
     });
 	},
-	changeIconInPlaylistToPlay:function(soundId){
+  initLargePlayButton:function(){
+		if (this.largePlayButton.length){
+			this.largePlayAnimation.init()
+      this.largePlayAnimation.play()
+    }
+  },
+  animateLargePlayButton:function(){
+		if (this.largePlayButton.length)
+      this.largePlayAnimation.showLoading()
+  },
+  setLargePlayButtonToPause:function(){
+		if (this.largePlayButton.length)
+      this.largePlayAnimation.showPause()
+  },
+  setLargePlayButtonToPlay:function(){
+    if (this.largePlayButton.length)
+      this.largePlayAnimation.setPlay()
+  },
+	changeIconInPlaylistToPause:function(soundId){        
 		var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
 		                 '[data-sound-id='+attr(soundId)+'] .pause-button');
 		controls.removeClass('play-button').addClass('pause-button').
 		  find('*').andSelf().filter('.fa-play').removeClass('fa-play').addClass('fa-pause');
 	},
-	changeIconInPlaylistToPause:function(soundId){
+	changeIconInPlaylistToPlay:function(soundId){
 		var controls = $('[data-sound-id='+attr(soundId)+'] .play-button,'+
 		                 '[data-sound-id='+attr(soundId)+'] .pause-button');
 		controls.removeClass('pause-button').addClass('play-button').
@@ -161,3 +203,27 @@ Playlist = {
 	}
 	
 };
+
+function attr(val) {
+  return val.replace(/\//g, '\\/').replace(/@/g, '\\@');
+}
+
+function waveformData(csv) {
+  if(csv.length > 1){
+    var data = csv.split(',').map(function(s) {
+      return parseFloat(s);
+  })}else{
+    var data = [0,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,
+      .9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,.9,1,0];
+  }
+
+  var max = Math.max.apply(Math, data),
+      min = Math.min.apply(Math, data);
+  var scale = Math.max(Math.abs(max), Math.abs(min));
+  data = data.map(function(s) {
+    return (s < 0 ? -1 : 1 ) * Math.pow(Math.abs(s) / scale, 0.7);
+  });
+
+  return data;
+}
+

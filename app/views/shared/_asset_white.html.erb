@@ -3,15 +3,35 @@
   <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
     <div class="play-button-container">
       <div class='play-button play-control'>
-        <svg id="playIconSymbol" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
-                <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
-        </svg>
+        <%= link_to media_url(@asset) do %>
+				<svg class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+				 <defs>
+				  <clipPath id="dottyMask">
+				      <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>   
+				  </clipPath>
+				 </defs>
+				      <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="15.68"/>
+
+				      <g clip-path="url(#dottyMask)">
+				        <circle class="dotty" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="butt" stroke-width="64" stroke-dasharray="68.99 187.58"/>
+				      </g>
+				      <path class="icon" d="M205.26,457.84,205,142.18a.64.64,0,0,1,1-.56L331.53,214l147.93,85.25a.63.63,0,0,1,0,1.1L206.21,458.39A.63.63,0,0,1,205.26,457.84Z"/>
+				      <circle class="centerCircle" cx="300" cy="300" r="123"/>
+				 <g class="pauseContainer">
+				      <g class="pauseLoopGroup" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
+				        <line x1="245" y1="146" x2="245" y2="450" />
+				        <line x1="355" y1="146" x2="355" y2="450" />
+				      </g>
+				 </g>
+				     <g class="pauseGroup" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
+				        <line x1="245" y1="156" x2="245" y2="430" />
+				        <line x1="355" y1="156" x2="355" y2="430" />
+				      </g> 
+				</svg>
+        <% end %>
       </div>
     </div>
 
-    <i class="fa fa-play fa-3x play-button play-control">
-      <%= link_to '', media_url(@asset) %>
-    </i>
 
     <div class="waveform" data-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
       <div class="seekbar"></div>
