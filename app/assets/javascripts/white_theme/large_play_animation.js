@@ -8,7 +8,7 @@ function LargePlayAnimation() {
     selectAll = function(s) {
       return document.querySelectorAll(s);
     }, 
-    mainSVG = select('.previewSVG'),
+    mainSVG = select('.largePlaySVG'),
     mainTl, dottyRotationTl,eyesTl,
     centerCircle = select('.centerCircle'),
     pauseContainer = select('.pauseContainer'),
