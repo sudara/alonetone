@@ -23,10 +23,16 @@ document.addEventListener("turbolinks:click", function(event){
     //Sound.destroyAll();
 })
 
-// Dom Manipulations here must be idempotent.
+// document on ready handlers, which only need to happen once per layout load
+$(function(){
+  $("#play-svg-container").load("<%= asset_path('default/play-animation.svg') %>");
+  
+})
+
 // This event fires on each page load
 // but also when we hit back / forward and get a cached page
 // so it will re-fire on pages where it's already been fired
+// Dom Manipulations here must be idempotent
 document.addEventListener("turbolinks:load", function() {
     PlaylistPlayer.setup()
 	
@@ -79,21 +85,19 @@ document.addEventListener("turbolinks:load", function() {
         });
     });
 
- //   $("body").append( $("<div id='play-svg-container' style='display:none'></div)") );
-  //  $("#play-svg-container").load("<%= asset_path('default/play-animation.svg') %>");
-//$(".sprites-play > a").load("<%= asset_path('default/play-icon.svg') %>");
+    var myPlayAnimation = new PlayAnimation();
 
-  //  var myPlayAnimation = new PlayAnimation();
-    //
-    // $("div.play-button a").click(function() {
-    //     var playAnimationSVG = $("#playAnimationSVG");
-    //     $(".playIconSymbol").show();
-    //     $(this).find("#playIconSymbol").hide();
-    //     $(this).append(playAnimationSVG);
-    //     myPlayAnimation.init()
-    //     myPlayAnimation.setPlay()
-    //     myPlayAnimation.showLoading();
-    //     TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
-    // })
+    $(".sprites-play > a").load("<%= asset_path('default/play-icon.svg') %>");
 
+    
+  $("div.play-button a").click(function() {
+      var playAnimationSVG = $("#playAnimationSVG");
+      $(".playIconSymbol").show();
+      $(this).find("#playIconSymbol").hide();
+      $(this).append(playAnimationSVG);
+      myPlayAnimation.init()
+      myPlayAnimation.setPlay()
+      myPlayAnimation.showLoading();
+      TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
+  })
 });
