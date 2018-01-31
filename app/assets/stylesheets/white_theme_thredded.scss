@@ -15,3 +15,22 @@ li.thredded--user-navigation--private-topics {
 li.thredded--user-preferences--notifications-for-private-topics {
     display: none
 }
+
+#thredded--container {
+	background-color: #fff;
+	@include samo-shadow-and-radius();
+	font-family: $sans-font;
+}
+
+.thredded--button, .thredded--form--submit {
+	@include default-button();
+}
+
+.thredded--form {
+	.thredded--button, .thredded--form--submit {
+		@include default-button();
+	}
+	label {
+		font-family: $sans-font;
+	}
+}
