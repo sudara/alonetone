@@ -20,6 +20,8 @@ li.thredded--user-preferences--notifications-for-private-topics {
 	background-color: #fff;
 	@include samo-shadow-and-radius();
 	font-family: $sans-font;
+	@include match-dynamic-site-width('wide');
+	max-width: none;
 }
 
 .thredded--button, .thredded--form--submit {
