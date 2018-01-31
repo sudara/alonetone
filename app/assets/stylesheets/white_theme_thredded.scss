@@ -29,7 +29,7 @@ li.thredded--user-preferences--notifications-for-private-topics {
   padding-left: $baseline * 3;
   background-color: #fff;
   @include samo-shadow-and-radius();
-  @include match-dynamic-site-width('wide');
+  @include match-dynamic-site-width('narrow');
   header {
     nav {
       .thredded--main-navigation {
@@ -44,6 +44,10 @@ li.thredded--user-preferences--notifications-for-private-topics {
   }
 
   section.thredded--main-section {
+  	.thredded--messageboard:hover {
+		background-color: inherit;
+		color: inherit;
+  	}
 	margin-bottom: 27px;
 	padding-top: $baseline * .5;
 	border-top: 1px solid $thredded-base-border-color;
