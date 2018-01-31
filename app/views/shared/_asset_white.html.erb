@@ -62,8 +62,7 @@
     <%= markdown(@asset.description) %>
 
     <p class="track-stats">
-      Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong><br/>
-      Listened to <strong><%= @asset.listens_count %></strong> times
+      Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong>. Listened to <strong><%= @asset.listens_count %></strong> times.
     </p>
     
     <p>
