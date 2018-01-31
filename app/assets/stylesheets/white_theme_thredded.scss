@@ -21,6 +21,10 @@ li.thredded--user-preferences--notifications-for-private-topics {
   display: none;
 }
 
+aside.thredded--currently-online {
+	display: none;
+}
+
 #thredded--container {
   box-sizing: border-box;
   padding-top: $baseline;
