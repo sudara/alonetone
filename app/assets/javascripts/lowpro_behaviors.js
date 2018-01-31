@@ -328,7 +328,6 @@ SlideOpenNext = $.klass({
     this.next.slideToggle('slow');
     return false;
   }
-
 });
 
 // text area that grows 2x in size upon need

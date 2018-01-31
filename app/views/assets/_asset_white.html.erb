@@ -1,6 +1,6 @@
 <%= cache( logged_in? ? "asset#{asset.cache_key}/#{theme_name}" : "guest_asset#{asset.cache_key}/#{theme_name}" ) do %>
   <div class="asset_top">
-    <div class="play-button button">
+    <div class="play-button button" data-target="asset.play">
       <div class="sprites-play">
         <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
           id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play'  do %>
@@ -23,7 +23,7 @@
 
       <div class="title_right_column">
         <div class='counter'></div>
-        <div class='time'><%= asset.length%></div>
+        <div class='time' data-target="asset.time"><%= asset.length%></div>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="tracks_reveal" style="display:none;">
+  <div class="tracks_reveal" style="display:none;" data-target="asset.details">
 
     <a class="add_to_favorites" href="<%= toggle_favorite_path(:asset_id => asset.id) %>"></a>
 
