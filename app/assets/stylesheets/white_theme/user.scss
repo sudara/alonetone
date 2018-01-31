@@ -28,6 +28,17 @@ main {
       }
     }
 
+    @media #{$mobile} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .box {
+      @media #{$mobile} {
+        margin-bottom: $baseline * 1.5;
+      }
+    }
+
     #user_header_area {
       grid-area: header;
     }
