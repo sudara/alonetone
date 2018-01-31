@@ -186,6 +186,13 @@ body.has-details {
   .asset .asset_top div.title {
     display: block;
   }
+  .delete-button {
+    margin-right: 5px;
+    font-size: 12px;
+    .remove.button {
+      line-height: 50px;
+    }
+  }
 }
 
 #edit_playlist_info {
