@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@rails/webpacker": "^3.2.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "stimulus": "^1.0.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.11.1"
+  }
+}
