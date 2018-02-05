@@ -4,6 +4,9 @@
 .track-content {
   &.track-content-cover-view {
      margin-left: -$baseline!important;
+     -webkit-box-shadow: 0 3px 4px -2px #65666627;
+     box-shadow: 0 3px 4px -2px #65666627;
+     background-color: #FFF;
   }
   min-width: 400px;
   @media #{$tablet} {
