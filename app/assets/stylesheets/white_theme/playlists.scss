@@ -169,7 +169,9 @@ body.has-details {
 
 #edit_playlist {
   position: relative;
-  .playlist_title {
+
+  .playlist_title.box {
+    margin-bottom: 0;
     h3 {
       margin-left: $baseline / 2;
     }
@@ -177,9 +179,19 @@ body.has-details {
   .info {
     padding-right: $baseline / 2;
     padding-left: $baseline / 2;
+    .cover {
+      display: none;
+    }
   }
   .asset .asset_top div.title {
     display: block;
+  }
+  .delete-button {
+    margin-right: 5px;
+    font-size: 12px;
+    .remove.button {
+      line-height: 50px;
+    }
   }
 }
 
@@ -199,6 +211,7 @@ body.has-details {
       width: 50%;
     }
   }
+
 }
 
 .playlist_delete_button {

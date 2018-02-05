@@ -3,15 +3,116 @@
 // check out variables and override pre-import
 // https://github.com/thredded/thredded/blob/master/app/assets/stylesheets/thredded/base/_variables.scss
 
-$thredded-base-font-family: $serif-font;
+$thredded-base-font-family: $sans-font;
 $thredded-heading-font-family: $sans-font;
+$thredded-grid-container-max-width: none;
+$thredded-brand: $samo-orange;
+$thredded-base-border-color: $light-gray;
+
+$thredded-font-size-small: 13px;
 
 @import 'thredded';
 
 li.thredded--user-navigation--private-topics {
-    display: none
+  display: none;
 }
 
 li.thredded--user-preferences--notifications-for-private-topics {
-    display: none
+  display: none;
+}
+
+aside.thredded--currently-online {
+	display: none;
+}
+
+#thredded--container {
+  box-sizing: border-box;
+  padding-top: $baseline;
+  padding-right: $baseline * 3;
+  padding-bottom: $baseline;
+  padding-left: $baseline * 3;
+  background-color: #fff;
+  @include samo-shadow-and-radius();
+  @include match-dynamic-site-width('narrow');
+  header {
+    nav {
+      .thredded--main-navigation {
+        .thredded--navigation-breadcrumbs {
+          li {
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  section.thredded--main-section {
+  	.thredded--messageboard:hover {
+		background-color: inherit;
+		color: inherit;
+  	}
+	margin-bottom: 27px;
+	padding-top: $baseline * .5;
+	border-top: 1px solid $thredded-base-border-color;
+
+  	.thredded--messageboards--actions {
+		margin-top: $baseline;
+  	}
+    header.thredded--topic-header {
+      padding-bottom: $baseline;
+      border-bottom: 1px solid $thredded-base-border-color;
+      h1.thredded--topic-header--title {
+        color: $thredded-brand;
+      }
+    }
+    article.thredded--post {
+      padding-bottom: 27px;
+      margin-bottom: 27px;
+      border-bottom: 1px solid $thredded-base-border-color;
+      .thredded--post--user {
+        font-size: 1rem;
+      }
+      .thredded--post--content {
+        font-family: $serif-font;
+        font-size: 1rem;
+      }
+    }
+    article.thredded--topics--topic {
+    	border-bottom: 1px solid $light-gray;
+    	padding-bottom: 13px;
+    	margin-bottom: 13px;
+      h1.thredded--topics--title {
+        a {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+      cite.thredded--topics--updated-by {
+      	font-size: 12px;
+      }
+    }
+    .thredded--post-form--wrapper {
+      border-top: 0;
+    }
+  }
+}
+
+.thredded--button, .thredded--form--submit {
+  @include default-button();
+}
+
+.thredded--form {
+  .thredded--button, .thredded--form--submit {
+    @include default-button();
+  }
+  label {
+    // font-family: $sans-font;
+  }
+
+  textarea#post_content, .thredded--preview-area--post {
+    font-family: $serif-font;
+    font-size: 1rem;
+  }
+
 }
