@@ -7,6 +7,9 @@
   <title><%= @page_title || 'alonetone' %></title>
 
   <%= stylesheet_link_tag ('white_theme') %>
+  <%= javascript_include_tag "white_theme", "data-turbolinks-track": "false", async: true  %>
+  <%= javascript_pack_tag "application", "data-turbolinks-track": "false", async: true  %>
+  
   <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
 
   <meta content="index,follow" name="robots"/>
@@ -63,7 +66,6 @@
   <div id='play-svg-container' style='display:none'>
   </div>
   
-  <%= javascript_include_tag "white_theme", "data-turbolinks-eval": "false"  %>
   <%= render :partial => 'layouts/greenfield/ga' %>
 </body>
 </html>

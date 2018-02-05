@@ -1,6 +1,6 @@
 <% if white_theme_enabled? %>
   <div class="asset" data-controller="asset">
-    <% render partial: 'assets/asset_white', :locals => {:asset => asset}%>
+    <%= render partial: 'assets/asset_white', :locals => {:asset => asset }%>
   </div>
 <% else %>
 <%= content_tag :div, :class => 'asset ' do %>
