@@ -9,6 +9,8 @@
 
 // src/application.js
 
+import { TweenMax } from "gsap"
+
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
