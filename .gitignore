@@ -29,3 +29,9 @@ public/source_files
 public/system
 public/sitemap.xml
 .ruby-version
+/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
