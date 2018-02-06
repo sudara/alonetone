@@ -11,6 +11,9 @@
 
 import { TweenMax } from "gsap"
 
+import LocalTime from "local-time"
+LocalTime.start()
+
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
