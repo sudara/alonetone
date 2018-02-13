@@ -11,7 +11,8 @@ export default class extends Controller {
   togglePlay() {
     console.log(this.playTarget)
   }
-  toggle(e) {
+  toggleDetails(e) {
+    alert('wtf')
     e.preventDefault();
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')

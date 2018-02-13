@@ -168,6 +168,7 @@
   .tracks_reveal {
     overflow: auto;
     display:none;
+    visibility:hidden;
     box-sizing: border-box;
     padding-top: $baseline;
     padding-right: 17px;
@@ -327,9 +328,6 @@
         }
       }
     }
-    &.open{
-      display: block;
-    }
     .track_links {
       float: right;
       margin-bottom: $baseline;
@@ -344,5 +342,9 @@
         }
       }
     }
+  }
+  &.open .tracks_reveal{
+    display:block;
+    visibility: visible;
   }
 }
