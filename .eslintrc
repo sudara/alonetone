@@ -5,5 +5,8 @@
     "strict": 0,
     "semi": 0,
     "no-console": 0
+  },
+  "env": {
+    "browser": true
   }
 }
