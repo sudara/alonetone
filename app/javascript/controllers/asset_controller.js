@@ -15,7 +15,7 @@ export default class extends Controller {
     e.preventDefault();
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')
-
+    } else {
       this.element.classList.add('open')
     }
   }
