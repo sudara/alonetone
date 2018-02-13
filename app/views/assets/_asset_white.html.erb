@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="title" data-target="asset.title" data-action="click->asset#toggle">
+    <div class="title" data-target="asset.title" data-action="click->asset#toggleDetails">
       <div class="title_left_column">
         <div class="title_left_column_top">
           <a href="<%= user_track_path(asset.user, asset.permalink) %>" class="track_link" title="<%= asset.name %>">
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="tracks_reveal" style="display:none;" data-target="asset.details">
+  <div class="tracks_reveal" data-target="asset.details">
 
     <a class="add_to_favorites" href="<%= toggle_favorite_path(:asset_id => asset.id) %>"></a>
 
