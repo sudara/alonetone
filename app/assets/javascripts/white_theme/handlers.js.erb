@@ -82,21 +82,5 @@ document.addEventListener("turbolinks:load", function() {
                 myFaveAnim.clickUnfave();
             }
         });
-    });
-
-    var myPlayAnimation = new PlayAnimation();
-
-    $(".sprites-play > a").load("<%= asset_path('default/play-icon.svg') %>");
-
-    
-  $("div.play-button a").click(function() {
-      var playAnimationSVG = $("#playAnimationSVG");
-      $(".playIconSymbol").show();
-      $(this).find("#playIconSymbol").hide();
-      $(this).append(playAnimationSVG);
-      myPlayAnimation.init()
-      myPlayAnimation.setPlay()
-      myPlayAnimation.showLoading();
-      TweenMax.delayedCall(1, function() { myPlayAnimation.showPause(); })
-  })
+    });    
 });
