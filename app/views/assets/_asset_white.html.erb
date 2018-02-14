@@ -1,12 +1,12 @@
 <%= cache( logged_in? ? "asset#{asset.cache_key}/#{theme_name}" : "guest_asset#{asset.cache_key}/#{theme_name}" ) do %>
   <div class="asset_top">
-    <div class="play-button button" data-target="asset.play">
-      <div class="sprites-play">
+    <div class="play-button button" data-target="asset.play" data-action="click->asset#togglePlay">
         <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
-          id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play'  do %>
-            <!-- <svg viewBox="0 0 29 25"><use xlink:href="<%= asset_path('default/play-icon.svg')%>#playIconSymbol"></use></svg> -->
+          id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play' do %>
+            <svg data-target="asset.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+            <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
+            </svg>
         <% end %>
-      </div>
     </div>
 
     <div class="title" data-target="asset.title" data-action="click->asset#toggleDetails">
