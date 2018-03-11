@@ -39,3 +39,6 @@ module Paperclip
 end
 
 Paperclip.options[:command_path] = "/usr/bin/" if Rails.env.production?
+
+# Allow upload via URL
+Paperclip::UriAdapter.register

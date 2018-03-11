@@ -62,25 +62,29 @@ GEM
     autoprefixer-rails (7.2.3)
       execjs
     awesome_print (1.8.0)
-    aws-sdk (2.10.109)
-      aws-sdk-resources (= 2.10.109)
-    aws-sdk-core (2.10.109)
+    aws-partitions (1.70.0)
+    aws-sdk-core (3.17.0)
+      aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.109)
-      aws-sdk-core (= 2.10.109)
+    aws-sdk-kms (1.5.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.8.2)
+      aws-sdk-core (~> 3)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.2)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bugsnag (6.4.0)
+    bugsnag (6.6.4)
+      concurrent-ruby (~> 1.0)
     builder (3.2.3)
     chunky_png (1.3.8)
     climate_control (0.2.0)
     cloudfront-signer (3.0.2)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -166,7 +170,7 @@ GEM
       activesupport (>= 2)
       nokogiri (>= 1.4)
     htmlentities (4.3.4)
-    i18n (0.9.3)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     inline_svg (1.3.1)
@@ -240,12 +244,12 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
-    paperclip (5.1.0)
+    paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
-      cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+      terrapin (~> 0.6.0)
     perf_check (0.9.0)
       colorize
       diffy
@@ -384,6 +388,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    terrapin (0.6.0)
+      climate_control (>= 0.0.3, < 1.0)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -435,7 +441,7 @@ DEPENDENCIES
   acts_as_list
   authlogic
   awesome_print
-  aws-sdk (< 3.0)
+  aws-sdk-s3
   bugsnag
   cloudfront-signer
   coffee-rails
