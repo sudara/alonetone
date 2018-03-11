@@ -28,7 +28,7 @@ RSpec.describe PasswordResetsController, type: :controller do
     it 'should render form to reset password given a decent token' do
       post :create, params: { email: [users(:arthur).email] }
       get :edit, params: { id: User.where(:login => 'arthur').first.perishable_token} 
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(flash[:error]).not_to be_present
     end
 

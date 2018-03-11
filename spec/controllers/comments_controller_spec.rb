@@ -9,33 +9,33 @@ RSpec.describe CommentsController, type: :controller do
     it 'should allow anyone to view the comments index' do
       get :index
       assigns(:comments)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should allow guest to comment on a track (via xhr)' do
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
       expect { post :create, params: params, xhr: true }.to change{ Comment.count}.by(1)
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should allow guest to comment on a blog post' do
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Update","commentable_id"=> 1 }}
       post :create, params: params, xhr: true
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should allow user comment on a track (via xhr)' do
       login(:arthur)
       params = {:comment => {"body"=>"Comment", "private"=>"0", "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink}
       post :create, params: params, xhr: true
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should allow private comment on track' do
       login(:arthur)
       params = {:comment => {"body"=>"Comment", "private"=> 1, "commentable_type"=>"Asset", "commentable_id" => 1}, "user_id"=> users(:sudara).login, "track_id"=> assets(:valid_mp3).permalink }
       post :create, params: params, xhr: true
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

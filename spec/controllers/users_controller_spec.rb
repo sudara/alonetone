@@ -38,13 +38,13 @@ RSpec.describe UsersController, type: :controller do
 
     it "should require password confirmation on signup" do
       create_user :password_confirmation => nil
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:user).errors[:password_confirmation].size).to be >= 1
     end
 
     it "should require email on signup" do
       create_user :email => nil
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:user).errors[:email].size).to be >= 1
     end
   end
@@ -102,7 +102,7 @@ RSpec.describe UsersController, type: :controller do
         login(user)
         allow(controller).to receive(:current_user).and_return(users(user))
         post :edit, :params => {:id => 'arthur'}
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "should let a user or admin update" do
@@ -145,25 +145,25 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
       post :edit, :params => {:id => 'sudara'}
-      expect(response).not_to be_success
+      expect(response).not_to be_successful
     end
 
     it "should not let any old user update" do
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
       put :update,  :params => {:id => 'sudara', :user => { :bio => 'a little more about me' }}
-      expect(response).not_to be_success
+      expect(response).not_to be_successful
     end
 
     it "should not let a logged out user edit" do
       logout
       post :edit, params: {user_id: 'arthur'}
-      expect(response).not_to be_success
+      expect(response).not_to be_successful
     end
 
     it 'should deliver an rss feed for any user, to anyone' do
       get :show, :params => {:id => 'sudara', :format => 'rss'}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -172,14 +172,14 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should not let a guest favorite a track' do
       expect { subject }.to change{ Track.count }.by(0)
-      expect(response).not_to be_success
+      expect(response).not_to be_successful
     end
 
     it 'should let a user favorite a track' do
       login(:arthur)
       expect { subject }.to change{ Track.count }.by(1)
       expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(Asset.find(100))
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should let a user unfavorite a track' do
@@ -187,7 +187,7 @@ RSpec.describe UsersController, type: :controller do
       expect { subject }.to change{ Track.count }.by(1)
       get :toggle_favorite, params: { asset_id: 100}  # toggle again
       expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(Asset.find(100))
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
