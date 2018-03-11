@@ -16,7 +16,7 @@ module Alonetone
     config.assets.paths.concat(
       Compass::Frameworks::ALL.map { |f| f.stylesheets_directory }
     )
-
+    config.active_record.sqlite3.represent_boolean_as_integer = true
     config.assets.quiet = true
   end
 end
