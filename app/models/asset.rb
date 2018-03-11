@@ -28,7 +28,7 @@ class Asset < ActiveRecord::Base
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
   after_create :notify_followers, if: :published?
-  after_create :create_waveform
+  after_commit :create_waveform, on: :create
 
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { user.display_name },
