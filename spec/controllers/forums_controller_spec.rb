@@ -5,13 +5,13 @@ RSpec.describe ForumsController, type: :controller do
 
   it "should render index without errors" do
     get :index
-    expect(response).to be_success
+    expect(response).to be_successful
   end
 
   it "should render index without errors for user" do
     login(:arthur)
     get :index
-    expect(response).to be_success
+    expect(response).to be_successful
   end
 
 end

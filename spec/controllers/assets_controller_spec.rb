@@ -8,24 +8,24 @@ RSpec.describe AssetsController, type: :controller do
   context "#latest" do
     it "should render the home page" do
       get :latest
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "should render the home page (white)" do
       get :latest, params: { white: true }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   context "show" do
     it "should render without errors" do
       get :show, params: {id: 'song1', user_id: users(:sudara).login }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "should render without errors (white)" do
       get :show, params: {id: 'song1', user_id: users(:sudara).login, white: true}
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -216,7 +216,7 @@ RSpec.describe AssetsController, type: :controller do
     it 'should allow user to edit 1 track' do
       login(:arthur)
       get :mass_edit, params: { user_id: users(:arthur).login, assets: [assets(:valid_arthur_mp3).id] }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:assets)).to include(assets(:valid_arthur_mp3))
     end
 
@@ -224,7 +224,7 @@ RSpec.describe AssetsController, type: :controller do
       login(:sudara)
       two_assets = [users(:sudara).assets.first,  users(:sudara).assets.last]
       get :mass_edit, params: {user_id: users(:sudara).login, assets: two_assets.collect(&:id) }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:assets)).to include(two_assets.first)
       expect(assigns(:assets)).to include(two_assets.last)
     end
@@ -232,7 +232,7 @@ RSpec.describe AssetsController, type: :controller do
     it 'should not allow user to edit other peoples tracks' do
       login(:arthur)
       get :mass_edit, params: { user_id: users(:arthur).login, assets: [assets(:valid_mp3).id] }
-      expect(response).to be_success # no wrong answer here :)
+      expect(response).to be_successful # no wrong answer here :)
       expect(assigns(:assets)).not_to include(assets(:valid_mp3))
       expect(assigns(:assets)).to be_present # should be populated with user's own assets
     end
@@ -245,7 +245,7 @@ RSpec.describe AssetsController, type: :controller do
 
     it 'should allow user to update track title and description' do
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: {description: 'normal description' }}, xhr: true
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should call out to rakismet on update' do

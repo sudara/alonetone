@@ -6,7 +6,7 @@ RSpec.describe PostsController, 'basics', type: :controller do
 
   #it "should show a topic" do
   #  get :show, :params => {:id => 1, :forum_id => 'testforum'}
-  #  response.should be_success
+  #  response.should be_successful
   #end
 
   def create_post
@@ -28,20 +28,20 @@ RSpec.describe PostsController, 'basics', type: :controller do
  # it "should NOT let a not-logged person edit a playlist" do
  #   # not logged in
  #   edit_sudaras_playlist
- #   response.should_not be_success
+ #   response.should_not be_successful
  #   response.should redirect_to('/login')
  # end
  #
  # it "should not let a not-logged in user update their playlist" do
  #   put :update, :params => {:id => 1, :permalink => 'owp', :user_id => 'sudara', :title => 'new title'}
- #   response.should_not be_success
+ #   response.should_not be_successful
  #   response.should redirect_to('/login')
  # end
  #
  # [:sort_tracks, :add_track, :remove_track, :attach_pic].each do |postable|
  #   it "should forbid any modification of playlist via #{postable.to_s} by non logged in" do
  #     post postable, :params => {:id => 1, :permalink => 'owp', :user_id => 'sudara'}
- #     response.should_not be_success
+ #     response.should_not be_successful
  #     response.should redirect_to('/login')
  #   end
  # end
@@ -49,46 +49,46 @@ RSpec.describe PostsController, 'basics', type: :controller do
  # it "should not mistake a playlist for belonging to a user when it doesn't" do
  #   login(:arthur)
  #   get :edit, :id=>'1', :permalink => 'owp', :user_id=> 'sudara'
- #   response.should_not be_success
+ #   response.should_not be_successful
  # end
  #
  # it "should not let any old logged in user edit their playlist" do
  #   # logged in
  #   login(:arthur)
  #   edit_sudaras_playlist
- #   response.should_not be_success
+ #   response.should_not be_successful
  # end
  #
  # it 'should let a user edit their own playlist' do
  #   login(:arthur)
  #   edit_arthurs_playlist
- #   response.should be_success
+ #   response.should be_successful
  # end
  #
  # context "sorting" do
  #   it 'should display albums to sort' do
  #     login(:sudara)
  #     get :sort, :user_id => 'sudara'
- #     response.should be_success
+ #     response.should be_successful
  #   end
  #
  #   it 'should allow sorting of playlists' do
  #     login(:sudara)
  #     xhr :post, :sort, :user_id => 'sudara', :playlist => [3,1]
- #     response.should be_success
+ #     response.should be_successful
  #   end
  # end
  #
  # context "deletion" do
  #   it "should not let a non-logged in person delete a playlist" do
  #     post :destroy, :params => {:id => '1', :permalink => 'owp', :user_id => 'sudara'}
- #     response.should_not be_success
+ #     response.should_not be_successful
  #   end
  #
  #   it 'should not let any old user delete a playlist' do
  #     login(:arthur)
  #     post :destroy, :params => {:id => '1', :permalink => 'owp', :user_id => 'sudara'}
- #     response.should_not be_success
+ #     response.should_not be_successful
  #   end
  #
  #   it 'should let an admin delete any playlist' do
