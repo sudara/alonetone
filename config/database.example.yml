@@ -10,6 +10,8 @@ test:
   password:
   host: localhost
   encoding: utf8
+  variables:
+    sql_mode: TRADITIONAL
 
 production:
   adapter: mysql2
@@ -18,4 +20,5 @@ production:
   password: 
   host: localhost
   encoding: utf8
-
+  variables:
+    sql_mode: TRADITIONAL
