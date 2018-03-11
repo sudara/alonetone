@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
   before_action :set_tab, :is_sudo
   before_action :set_theme
 
-  rescue_from ActionController::RoutingError do |exception|
-    render 'pages/four_oh_four', status: 404
-  end
+  rescue_from ActionController::RoutingError, with: :show_404 
+  rescue_from ActiveRecord::RecordNotFound, with: :show_404 
+  rescue_from AbstractController::ActionNotFound, with: :show_404
 
   # let ActionView have a taste of our authentication
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def show_404
+    render 'pages/four_oh_four', status: 404
+  end
 
   def set_theme
     if white_theme_toggle = params.delete(:white)
