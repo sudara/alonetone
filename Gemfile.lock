@@ -250,7 +250,7 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    perf_check (0.9.1)
+    perf_check (0.10.0)
       colorize
       diffy
       rake
