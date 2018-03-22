@@ -3,6 +3,7 @@ owp1:
   playlist_id: 1
   asset_id: 1
   position: 1
+  user_id: 1
 owp2:
   id: 2
   playlist_id: 1
@@ -36,4 +37,5 @@ fav1:
 no_playlist_id:
   id: 8
   asset_id: 1
+  user_id: 1
   
