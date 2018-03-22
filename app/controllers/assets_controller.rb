@@ -279,7 +279,8 @@ class AssetsController < ApplicationController
 
   def authorized?
     # admin or the owner of the asset can edit/update/delete
-    !dangerous_action? || current_user_is_admin_or_moderator_or_owner?(@user) || current_user_is_admin_or_moderator_or_owner?(@asset.user)
+    !dangerous_action? || current_user_is_admin_or_moderator_or_owner?(@user) || 
+      (@asset && current_user_is_admin_or_moderator_or_owner?(@asset.user))
   end
 
   def dangerous_action?

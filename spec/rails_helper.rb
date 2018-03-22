@@ -31,16 +31,18 @@ RSpec.configure do |config|
   config.include Authlogic::TestCase
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LittleHelpers
+  config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+  config.append_after(:each) do
+    DatabaseCleaner.clean
   end
 
   module LoginHelper

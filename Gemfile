@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.0.beta2'
+gem 'rails', '~> 5.2.0.rc2'
 gem 'mysql2'
 
 gem 'thredded'
@@ -13,7 +13,7 @@ gem 'sometimes'
 gem 'awesome_print', :require => 'ap'
 
 # uploading
-gem 'aws-sdk', '<3.0'
+gem 'aws-sdk-s3'
 gem 'paperclip'
 gem 'rubyzip'
 gem 'ruby-mp3info', :require => 'mp3info'
