@@ -93,7 +93,7 @@
           Recently favorited
           <% end %>
         </h2>
-        <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite %>
+        <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite if @favorites.present? %>
       </div>
   </div>
   

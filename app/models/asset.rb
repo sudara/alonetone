@@ -17,8 +17,8 @@ class Asset < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent  => :destroy
 
   has_many :listeners,
-    -> { select("users.*,listens.created_at").order('listens.created_at DESC').limit(20) },
-    :through  => :listens
+    -> { distinct.order('listens.created_at DESC').limit(20) },
+    through: :listens
 
   has_many :favoriters,
     -> { where('tracks.is_favorite' => true).order('tracks.created_at DESC') },
@@ -28,7 +28,7 @@ class Asset < ActiveRecord::Base
   has_permalink :name, true
   before_update :generate_permalink!, :if => :title_changed?
   after_create :notify_followers, if: :published?
-  after_create :create_waveform
+  after_commit :create_waveform, on: :create
 
   include Rakismet::Model
   rakismet_attrs  :author =>        proc { user.display_name },
