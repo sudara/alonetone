@@ -371,9 +371,9 @@ GEM
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
     sixarm_ruby_unaccent (1.2.0)
-    skylight (2.0.0.beta2)
-      skylight-core (= 2.0.0.beta2)
-    skylight-core (2.0.0.beta2)
+    skylight (2.0.0.beta3)
+      skylight-core (= 2.0.0.beta3)
+    skylight-core (2.0.0.beta3)
       activesupport (>= 4.2.0)
     sometimes (0.0.3)
     sort_alphabetical (1.1.0)
@@ -493,7 +493,7 @@ DEPENDENCIES
   scrypt
   sidekiq
   simple_form
-  skylight (~> 2.0.0.beta2)
+  skylight (~> 2.0.0.beta3)
   sometimes
   soundmanager2-rails
   sqlite3
