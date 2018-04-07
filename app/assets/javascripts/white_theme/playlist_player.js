@@ -88,7 +88,7 @@ PlaylistPlayer = {
 	  this.preloadCurrentTrack()
     
     // in every case, we want to set the play button and the waveform
-		this.initLargePlayButton();
+    this.initLargePlayButton();
     showWaveform();
     
     // if something is currently playing, make sure the playlist reflects that
@@ -110,7 +110,6 @@ PlaylistPlayer = {
       Turbolinks.visit(targetHref)
   },
   loadNewTrackPage(){
-    
   },
   preloadCurrentTrack: function(){
     // on the cover view, for example, there's no current track
