@@ -1,4 +1,4 @@
-Sound = {
+SMSound = {
   // cache
   store: {},
 
