@@ -33,7 +33,7 @@ function showWaveform() {
       }).find('.pause-button').trigger('click');
 
       var sound, offx;
-      sound = Sound.getSound(soundId);
+      sound = SMSoundgetSound(soundId);
       offx = e.clientX - container.offset().left;
       sound.setPosition(offx / container.width()).play();
     });
@@ -45,7 +45,7 @@ function showWaveform() {
     }).mouseout(function() { hoverPosition = -1 });
 
     soundManager.onready(function() {
-      var sound = Sound.load(player.find('.play-control a').attr('href'));
+      var sound = SMSound.load(player.find('.play-control a').attr('href'));
 
       sound.playing(function() {
         container.trigger('update.waveform', [this]);
@@ -73,7 +73,7 @@ PlaylistPlayer = {
     
 	  // this is for the edge case of a playlist with only 1 track
 	  if (!this.elements.length)
-	    this.elements = $('.play-button a, .pause-button a');
+	    this.elements = $('.player .play-button a, .player .pause-button a');
 
     // sometimes tracks will already be populated
     // for example, a turbolinks:visit
@@ -97,10 +97,10 @@ PlaylistPlayer = {
   play: function(soundId){
     if(this.shouldLoadNewTrackPage(soundId))
       this.loadNewTrackPage()
-    Sound.load(soundId).play()
+    SMSound.load(soundId).play()
   },
   pause: function(soundId){
-    Sound.pause(soundId)
+    SMSound.pause(soundId)
   },
   shouldLoadNewTrackPage(soundId){
     // if we 
@@ -115,13 +115,13 @@ PlaylistPlayer = {
   preloadCurrentTrack: function(){
     // on the cover view, for example, there's no current track
     if(this.currentUrl)
-      Sound.load(this.currentUrl).load();
+      SMSound.load(this.currentUrl).load();
   },
 	populateTracks: function(){
     // creates Sound Manager objects for each html element
 	  this.elements.each(function(i) {
 	    var url = this.attributes.href.nodeValue;
-	    var sound = Sound.load(this.pathname.replace(/(\.mp3)*$/, '.mp3'));
+	    var sound = SMSound.load(this.pathname.replace(/(\.mp3)*$/, '.mp3'));
 	    sound.element = this;
 	   
       sound.positioned(10000, function() {        

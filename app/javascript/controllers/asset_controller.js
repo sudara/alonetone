@@ -1,34 +1,32 @@
 import { Controller } from 'stimulus'
-import { playAnimation } from '../animation/play_animation'
+import { Howl } from 'howler'
+import PlayAnimation from '../animation/play_animation'
 
 let player
 let currentlyOpen
-const animation = new PlayAnimation();
+const animation = new PlayAnimation()
 
 function soundID(url) {
-  let user, 
-permalink;
   url = url.replace(/^\/+/, '').replace(/\/+$/, '')
-  user = url.split('/').shift()
-  permalink = url.split('/').pop().split('.')[0]
+  const user = url.split('/').shift()
+  const permalink = url.split('/').pop().split('.')[0]
   return `${user}/${permalink}`
 }
 
 export default class extends Controller {
   // data-asset-playing="0" data-asset-opened="0">
-  static targets = ['play', 'playButton', 'title', 'seekbar', 'details']
+  static targets = ['play', 'playButton', 'title', 'details',
+    'seekBarContainer', 'seekBarLoaded', 'seekBarPlayed']
 
   initialize() {
     const controller = this
     this.isPlaying = false
     this.url = this.playTarget.firstElementChild.getAttribute('href')
-    this.soundID = soundID(this.url)
-    console.log(this.url)
     this.sound = new Howl({
       src: Array(this.url),
       html5: true,
       preload: false,
-      // onend: this.playNextTrack.bind(this),
+      onend: controller.playNextTrack.bind(controller),
       onplay() {
         animation.showPause()
         requestAnimationFrame(controller.whilePlaying.bind(controller))
@@ -40,11 +38,13 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.pause()
+    if(this.sound.playing())
+      this.sound.pause()
   }
 
   whilePlaying() {
-    console.log(`${this.sound.seek()}`)
+    // console.log(`${this.sound.seek()}`)
+    this.updateSeekBarPlayed()
     if (this.sound.playing()) {
       setTimeout(requestAnimationFrame(this.whilePlaying.bind(this)), 100);
     }
@@ -56,12 +56,11 @@ export default class extends Controller {
     }
     player = this
     this.isPlaying = true
+    this.openDetails()
     this.animateLoading()
-    this.seekbarTarget.style.display = 'block'
+    this.updateSeekBarLoaded()
     this.element.classList.add('playing')
-    this.sound.load()
     this.sound.play()
-    console.log(this.sound)
   }
 
   pause() {
@@ -80,6 +79,26 @@ export default class extends Controller {
     }
   }
 
+  seek(e) {
+    e.preventDefault()
+    const newPosition = e.offsetX / this.seekBarContainerTarget.offsetWidth
+    console.log(this.sound.duration() * newPosition)
+    this.sound.seek(this.sound.duration() * newPosition)
+  }
+
+  // With SoundManager we used to animate this width to display
+  // how much of the track is downloaded
+  // but it's no longer possible with Howl
+  updateSeekBarLoaded() {
+    this.seekBarContainerTarget.style.display = 'block'
+    this.seekBarLoadedTarget.style.width = '100%'
+  }
+  updateSeekBarPlayed() {
+    const position = this.sound.seek() / this.sound.duration()
+    const maxwidth = this.seekBarLoadedTarget.offsetWidth
+    this.seekBarPlayedTarget.style.width = `${position * maxwidth}px`
+  }
+
   animateLoading() {
     this.playButtonTarget.style.display = 'none'
     this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
@@ -96,13 +115,16 @@ export default class extends Controller {
       currentlyOpen.element.classList.remove('open')
     }
     if (!wasOpen) {
-      currentlyOpen = this
-      this.element.classList.add('open')
+      this.openDetails()
     }
   }
 
-  createSound() {
-
+  openDetails() {
+    if (currentlyOpen) {
+      currentlyOpen.element.classList.remove('open')
+    }
+    currentlyOpen = this
+    this.element.classList.add('open')
   }
 
   playNextTrack() {

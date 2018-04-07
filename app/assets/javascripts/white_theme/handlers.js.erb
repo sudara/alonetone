@@ -5,9 +5,9 @@
 $(document).on('click', '.track-content > .player .play-button,' +
   '.tracklist [data-sound-id] .play-button', function(e) {
   var soundId = $(e.target).parents('[data-sound-id]').data('sound-id')
-    e.preventDefault();
+  e.preventDefault();
   if (!e.isTrigger)
-    Sound.pauseAll();
+    SMSound.pauseAll();
   PlaylistPlayer.play(soundId)
 })
 
@@ -24,9 +24,9 @@ document.addEventListener("turbolinks:click", function(event){
 })
 
 // document on ready handlers, which only need to happen once per layout load
-$(function(){
-  $("#play-svg-container").load("<%= asset_path('default/play-animation.svg') %>");  
-})
+//$(function(){
+// $("#play-svg-container").load("<%= asset_path('default/play-animation.svg') %>");  
+// })
 
 // This event fires on each page load
 // but also when we hit back / forward and get a cached page

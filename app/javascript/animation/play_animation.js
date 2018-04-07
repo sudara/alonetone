@@ -1,6 +1,6 @@
 import { TweenMax } from 'gsap'
 
-export default function playAnimation() {
+export default function PlayAnimation() {
   let select = function (s) {
     return document.querySelector(s);
   };

@@ -1,8 +1,9 @@
 {
   "dependencies": {
-    "@rails/webpacker": "^3.2.1",
+    "@rails/webpacker": "^3.4.1",
     "@shopify/draggable": "^1.0.0-beta.4",
     "gsap": "^1.20.3",
+    "howler": "^2.0.9",
     "local-time": "^2.0.0",
     "stimulus": "^1.0.1"
   },
@@ -14,6 +15,6 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "2.11.2"
   }
 }
