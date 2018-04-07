@@ -6,6 +6,7 @@ let player
 let currentlyOpen
 const animation = new PlayAnimation()
 
+
 function soundID(url) {
   url = url.replace(/^\/+/, '').replace(/\/+$/, '')
   const user = url.split('/').shift()
@@ -28,7 +29,6 @@ export default class extends Controller {
       preload: false,
       onend: controller.playNextTrack.bind(controller),
       onplay() {
-        animation.showPause()
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
       onload() {
@@ -38,8 +38,9 @@ export default class extends Controller {
   }
 
   disconnect() {
-    if(this.sound.playing())
+    if (this.sound.playing()) {
       this.sound.pause()
+    }
   }
 
   whilePlaying() {
@@ -82,7 +83,6 @@ export default class extends Controller {
   seek(e) {
     e.preventDefault()
     const newPosition = e.offsetX / this.seekBarContainerTarget.offsetWidth
-    console.log(this.sound.duration() * newPosition)
     this.sound.seek(this.sound.duration() * newPosition)
   }
 

@@ -1,18 +1,18 @@
 import { TweenMax } from 'gsap'
+import morphSVG from './MorphSVGPlugin.min'
 
 export default function PlayAnimation() {
-  let select = function (s) {
+  const select = function (s) {
     return document.querySelector(s);
   };
 
-  let selectAll = function (s) {
+  const selectAll = function (s) {
     return document.querySelectorAll(s);
   };
 
   let mainTl;
   let dottyRotationTl;
   let spinballTl;
-  let pauseTl;
   let pauseGroup = select('.pauseGroup');
   let spinballGroup = select('.spinballGroup');
 
@@ -48,7 +48,6 @@ export default function PlayAnimation() {
       scaleY: 0,
     })
 
-    pauseTl = new TimelineMax({}).timeScale(1);
     spinballTl = new TimelineMax({}).timeScale(1);
     mainTl = new TimelineMax({ paused: true }).timeScale(2.2);
 
