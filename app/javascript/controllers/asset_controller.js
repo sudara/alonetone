@@ -47,6 +47,7 @@ export default class extends Controller {
     // console.log(`${this.sound.seek()}`)
     this.updateSeekBarPlayed()
     if (this.sound.playing()) {
+      animation.setPause()
       setTimeout(requestAnimationFrame(this.whilePlaying.bind(this)), 100);
     }
   }
