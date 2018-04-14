@@ -4,9 +4,9 @@
 
 [alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
-alonetone launched in January 2008, shortly after soundcloud launched.
+alonetone launched in January 2008 (around the same time as soundcloud).
 
-As of 2018 it hosts over 70,00 tracks from 5500 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
+As of 2018, we host 70,000 tracks from 5500 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
 ### Bug reporting
 
@@ -14,7 +14,7 @@ We use [Github Issues](http://github.com/sudara/alonetone/issues) to submit bugs
 
 ### Our goal?
 
-To create and run the best online home a musician could want to have. To provide them with the tools they need to reach  listeners and network with other artists — without the stank of commercialism, startup flava, ads, etc.
+To create and run the best online home a musician could want to have. To provide them with the tools they need to reach  listeners and network with other artists — without the stank of commercialism, startup flava, ads, growth hacking motives, etc.
 
 We strive to build:
 
@@ -34,7 +34,6 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 * Rails 5.2
 * jQuery
 * SoundManager 2 (for flash + html5 playback)
-
 
 ### Current feature set
 
@@ -70,10 +69,9 @@ Partial implementation/proof of concept was working on rails 2 branch. Basically
 ### A way to manage blacklisted IPs in the backend.
 We get trouble with downloading bots, spambots. We have manually hardcoded IPs in the source, specefically to prevent downloading mp3 and wasting our bandwidth. We need to create a UI so this can be managed by a non-techie moderator. Also, we need to provide logged in users with a "report" action on their listens if they notice sketchy behavior, so it can go upstream to the mods.
 
-
 ## Want to deploy alonetone on your own server?
 
-It won't work for you unless:
+It won't work unless:
 
 * You know ruby on rails well (Been doing it for more than a few months).
 * You have deployed rails applications before, and are comfortable with that.
