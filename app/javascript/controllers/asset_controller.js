@@ -6,7 +6,6 @@ let player
 let currentlyOpen
 const animation = new PlayAnimation()
 
-
 function soundID(url) {
   url = url.replace(/^\/+/, '').replace(/\/+$/, '')
   const user = url.split('/').shift()
@@ -45,7 +44,9 @@ export default class extends Controller {
 
   whilePlaying() {
     // console.log(`${this.sound.seek()}`)
-    this.updateSeekBarPlayed()
+    if (this.data.has("inPlaylist")) {
+      this.updateSeekBarPlayed()
+    }
     if (this.sound.playing()) {
       animation.setPause()
       setTimeout(requestAnimationFrame(this.whilePlaying.bind(this)), 100);
@@ -60,7 +61,9 @@ export default class extends Controller {
     this.isPlaying = true
     this.openDetails()
     this.animateLoading()
-    this.updateSeekBarLoaded()
+    if (this.data.has("inPlaylist")) {
+      this.updateSeekBarLoaded()
+    }
     this.element.classList.add('playing')
     this.sound.play()
   }
@@ -70,6 +73,7 @@ export default class extends Controller {
     player = null
     this.isPlaying = false
     animation.setPlay()
+    this.playButtonTarget.style.display = 'block'
   }
 
   togglePlay(e) {

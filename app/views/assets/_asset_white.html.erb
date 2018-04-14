@@ -2,7 +2,7 @@
   <div class="asset_top">
     <div class="play-button button" data-target="asset.play" data-action="click->asset#togglePlay">
         <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
-          id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play' do %>
+          id: "play-#{asset.unique_id}", class: 'play_link', title: 'play' do %>
             <svg data-target="asset.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
             <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
             </svg>
@@ -35,9 +35,7 @@
   </div>
 
   <div class="tracks_reveal" data-target="asset.details">
-
     <a class="add_to_favorites" href="<%= toggle_favorite_path(:asset_id => asset.id) %>"></a>
-
     <div class="tracks_reveal_top">
       <div class='alonetoner'>
           <%= link_to(image_tag(avatar_or_placeholder_for(asset.user)), user_home_path(asset.user)) %>
