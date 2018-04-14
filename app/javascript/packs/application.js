@@ -10,11 +10,35 @@
 // src/application.js
 
 import LocalTime from 'local-time'
+
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
+import { makeSVGFromTitle } from '../animation/default_playlist_images'
+
+const Turbolinks = require('turbolinks')
+
+Turbolinks.start()
 
 LocalTime.start()
 
 const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(context))
+
+document.addEventListener('turbolinks:load', function () {
+  for (var pic in document.querySelector('#playlist-and-track-content .no_pic') {
+    title = document.querySelector("h1:first").text().trim()
+    pic.append(makeSVGFromTitle(800, title)
+    pic.removeClass('.no_pic') // otherwise turbolinks:visit will keep appending
+  }
+
+  for (var pic in document.querySelector('li a .no_pic')){
+    title = pic.parentNode.attr('title').trim()
+    pic.append(makeSVGFromTitle(800, title)
+    pic.removeClass('.no_pic') // otherwise turbolinks:visit will keep appending
+  }
+
+  // $(this).parent().attr('title').trim()
+  // 'li a .no_pic'
+
+})

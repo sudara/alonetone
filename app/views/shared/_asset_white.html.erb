@@ -1,10 +1,9 @@
-<div class="track-content">
-
+<div class="track-content" data-controller="asset" data-asset-in-playlist="true"> 
   <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
-    <div class="play-button-container">
+    <div class="play-button-container" data-target="asset.play" data-action="click->asset#togglePlay">
       <div class='play-button play-control'>
         <%= link_to media_url(@asset) do %>
-				<svg class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+				<svg data-target="asset.playButton" class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
 				 <defs>
 				  <clipPath id="dottyMask">
 				      <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>   
@@ -34,7 +33,7 @@
 
 
     <div class="waveform" data-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
-      <div class="seekbar"></div>
+      <div class="seekbar" data-target="asset.seekBar"></div>
     </div>
 
     <div class="time">
@@ -46,7 +45,7 @@
     </div>
   </div>
 
-  <div class="track-post">
+  <div class="track-post" data-target="asset.details">
 
     <% if authorized? and @playlist %>
       <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit-link") %>
@@ -54,7 +53,7 @@
       <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit-link") %>
     <% end %>
 
-    <h1><%= @asset.name %></h1>
+    <h1 data-target="asset.title"><%= @asset.name %></h1>
 
     <% unless @playlist %>
       <h3><%= @asset.user.display_name %></h3>
