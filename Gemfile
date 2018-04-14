@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.0.rc2'
+gem 'rails', '~> 5.2.0'
 gem 'mysql2'
 
 gem 'thredded'
@@ -24,7 +24,7 @@ gem 's3_direct_upload'
 # active record
 gem 'acts_as_list'
 gem 'has_permalink'
-gem 'authlogic'
+gem 'authlogic', '~> 3.8'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 gem 'recaptcha', :require => 'recaptcha/rails'
