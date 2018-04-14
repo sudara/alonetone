@@ -25,20 +25,19 @@ const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(context))
 
-document.addEventListener('turbolinks:load', function () {
-  for (var pic of document.querySelectorAll('#playlist-and-track-content .no_pic')) {
-    const title = document.querySelector("h1:first").text().trim()
+document.addEventListener('turbolinks:load', function() {
+  document.querySelectorAll('#playlist-and-track-content .no_pic').forEach((pic) => {
+    const title = document.querySelector('h1:first').text().trim()
     pic.append(makeSVGFromTitle(800, title))
     pic.removeClass('.no_pic') // otherwise turbolinks:visit will keep appending
-  }
+  })
 
-  for (var pic of document.querySelectorAll('li a .no_pic')){
+  document.querySelectorAll('li a .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')
     pic.append(makeSVGFromTitle(800, title))
     pic.classList.remove('.no_pic') // otherwise turbolinks:visit will keep appending
-  }
+  })
 
   // $(this).parent().attr('title').trim()
   // 'li a .no_pic'
-
 })
