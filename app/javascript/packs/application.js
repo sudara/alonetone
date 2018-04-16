@@ -38,8 +38,6 @@ function handlers() {
     pic.append(makeSVGFromTitle(800, title))
     pic.classList.remove('no_pic') // otherwise turbolinks:visit will keep appending
   })
-  // $(this).parent().attr('title').trim()
-  // 'li a .no_pic'
 }
 
 document.addEventListener('turbolinks:load', handlers())
