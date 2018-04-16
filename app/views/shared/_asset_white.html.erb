@@ -31,9 +31,8 @@
       </div>
     </div>
 
-
     <div class="waveform" data-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
-      <div class="seekbar" data-target="asset.seekBar"></div>
+      <div class="seekbar" data-target="asset.seekBarContainer asset.seekBarLoaded asset.seekBarPlayed"></div>
     </div>
 
     <div class="time">
