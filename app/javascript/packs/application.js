@@ -28,9 +28,9 @@ application.load(definitionsFromContext(context))
 
 function handlers() {
   document.querySelectorAll('#playlist-and-track-content .no_pic').forEach((pic) => {
-    const title = document.querySelector('h1:first').text().trim()
+    const title = document.querySelector('h1').textContent.trim()
     pic.append(makeSVGFromTitle(800, title))
-    pic.removeClass('no_pic') // otherwise turbolinks:visit will keep appending
+    pic.classList.remove('no_pic') // otherwise turbolinks:visit will keep appending
   })
 
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
