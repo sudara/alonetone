@@ -25,7 +25,13 @@ export default class extends Controller {
     this.isPlaying = false
     this.url = this.playTarget.firstElementChild.getAttribute('href')
     this.setupHowl()
-    animation = this.inPlaylist() ? largePlayAnimation : playAnimation
+    if (this.inPlaylist()) {
+      animation = largePlayAnimation
+      animation.init()
+      animation.play()
+    } else {
+      animation = playAnimation
+    }
   }
 
 
