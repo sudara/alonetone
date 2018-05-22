@@ -90,10 +90,11 @@ $bright-highlight: rgba(255, 255, 0, .6);
   text-align: center;
   text-decoration: none;
   color: #fff;
+  border: 0;
   border-radius: 4px;
   background-color: #a6abab;
+  box-shadow: none;
 
-  // box-shadow: 0 4px 4px -2px #65666612;
   @if $type == 'admin' {
     opacity: 1;
     color: #fff;
@@ -101,12 +102,12 @@ $bright-highlight: rgba(255, 255, 0, .6);
     background-color: $samo-orange;
   }
   &:hover {
-    background-color: #888888;
+    background-color: #888;
     // transition: border-color .1s ease-in-out;
     // text-decoration: none;
     // border: 1.25px solid $black;
   }
   &:active {
-    background-color: #EB7B0C;
+    background-color: #eb7b0c;
   }
 }
