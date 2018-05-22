@@ -3,7 +3,7 @@ class PlaylistsController < ApplicationController
   include Listens
 
   before_action :find_user, :except => :all
-  before_action :find_playlists, :except => [:index, :new, :create, :sort, :all]
+  before_action :find_playlists, :except => [:index, :new, :create, :all]
   before_action :require_login, :except => [:index, :show, :all]
   before_action :find_tracks, :only => [:show, :edit, :all]
 
@@ -71,12 +71,10 @@ class PlaylistsController < ApplicationController
   def add_track
     id = params[:asset_id].split("_")[1]
     asset = Asset.find(id)
-    @track = @playlist.tracks.create(:asset => asset)
+    @track = @playlist.tracks.create(asset: asset, user: @user)
     respond_to do |format|
-      format.js
+      format.js 
     end
-  rescue ActiveRecord::RecordNotFound, NoMethodError
-    return head(:bad_request)
   end
 
   def attach_pic
@@ -92,7 +90,7 @@ class PlaylistsController < ApplicationController
     @track = @playlist.tracks.find(params[:track_id])
     if @track && @track.destroy
       respond_to do |format|
-        format.js { render head(:ok) }
+        format.js { head(:ok) }
       end
     else
       head :ok
@@ -104,9 +102,11 @@ class PlaylistsController < ApplicationController
   def sort_tracks
     # get the params for this playlist
     params["track"].each_with_index do |id, position|
-      Track.update(id, :position => position+1)
-    end
+      @playlist.tracks.find(id).update_column(:position, position + 1)
+    end 
     head :ok
+  rescue ActiveRecord::RecordNotFound, NoMethodError
+    return head(:bad_request)
   end
 
 
