@@ -2,7 +2,6 @@
 
 $desktop-site-width-wide: 90%;
 $mobile-site-width-wide: 96%;
-
 $desktop-site-width-narrow: 66%;
 $mobile-site-width-narrow: 96%;
 
@@ -49,6 +48,7 @@ $light-medium-gray: #888;
 $gray: #999;
 $silver: #c7c8c7;
 $samo-gray: #868686;
+$new-samo-gray: #a6abab;
 $lightest-gray: #c7c6c3;
 $light-gray: #eee;
 $samo-background-gray: #f1f2f2;
@@ -81,26 +81,32 @@ $bright-highlight: rgba(255, 255, 0, .6);
 @mixin default-button($type: '') {
   font-family: $sans-font;
   font-size: 12px;
-  font-weight: normal;
-  line-height: 24px;
+  font-weight: bold;
+  line-height: 27px;
   display: inline-block;
   box-sizing: border-box;
-  height: 23px;
-  padding: 0 14px;
+  height: 26px;
+  padding: 0 24px;
   text-align: center;
   text-decoration: none;
-  border: 1.25px solid $light-medium-gray;
+  color: #fff;
   border-radius: 4px;
-  box-shadow: 0 4px 4px -2px #65666612;
+  background-color: #a6abab;
+
+  // box-shadow: 0 4px 4px -2px #65666612;
   @if $type == 'admin' {
     opacity: 1;
     color: #fff;
-    border: 1.25px solid #555;
+    // border: 1.25px solid #555;
     background-color: $samo-orange;
   }
   &:hover {
-    transition: border-color .1s ease-in-out;
-    text-decoration: none;
-    border: 1.25px solid $black;
+    background-color: #888888;
+    // transition: border-color .1s ease-in-out;
+    // text-decoration: none;
+    // border: 1.25px solid $black;
+  }
+  &:active {
+    background-color: #EB7B0C;
   }
 }
