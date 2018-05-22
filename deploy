@@ -37,7 +37,7 @@ ssh alonetone '
   fi
 
    echo "Compiling assets..."
-   RAILS_ENV=production bundle exec rake assets:precompile
+   RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile
 
   '
 

@@ -1,4 +1,7 @@
-function LargePlayAnimation() {
+import { TweenMax } from 'gsap'
+import morphSVG from './MorphSVGPlugin.min'
+
+export default function LargePlayAnimation() {
 
   var xmlns = "http://www.w3.org/2000/svg",
     xlinkns = "http://www.w3.org/1999/xlink",

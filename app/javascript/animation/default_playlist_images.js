@@ -1,3 +1,6 @@
+import { seedRandom } from './seed_random'
+
+
 function Triangulr (props) {
 
   // Tests
@@ -287,7 +290,7 @@ function colorsFromAHue(hue){
 //var mySVG = new Triangulr (800, 600, 8, 200, getPurpleColor);
 //var mySVG = new Triangulr (800, 600, 28, 23, colorGenerator);
 
-function makeSVGFromTitle(height, title){
+export function makeSVGFromTitle(height, title){
   Math.seedrandom(title); // this makes all .random calls repeatable per album
 
   var lineHeight = randomBetween(height/20, height/10)

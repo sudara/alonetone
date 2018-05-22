@@ -50,8 +50,14 @@ body {
       max-width: 1100px;
       margin-right: auto;
       margin-left: auto;
-      justify-content: space-around;
+      justify-content: center;
       flex-wrap: wrap;
+      #left {
+        margin-right: $baseline * .75;
+      }
+      #right {
+        margin-left: $baseline * .75;
+      }
       > div {
         width: 45%;
         min-width: 320px;
