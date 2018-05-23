@@ -1,5 +1,10 @@
 [![Build Status](https://api.travis-ci.org/sudara/alonetone.svg?branch=master)](http://travis-ci.org/sudara/alonetone)
 [![Code Climate](https://codeclimate.com/github/sudara/alonetone.png)](https://codeclimate.com/github/sudara/alonetone)
+
+[![View performance data on Skylight](https://badges.skylight.io/problem/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
+[![View performance data on Skylight](https://badges.skylight.io/typical/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
+[![View performance data on Skylight](https://badges.skylight.io/rpm/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
+
 ## The future is bright
 
 [alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
@@ -32,8 +37,8 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 ### Current tech
 
 * Rails 5.2
-* jQuery
-* SoundManager 2 (for flash + html5 playback)
+* [Stimulus js](http://stimulusjs.org)
+* [Howler js](http://howlerjs.com)
 
 ### Current feature set
 
@@ -93,12 +98,12 @@ Second, hop into our Campfire chat room or email us at support@alonetone.com
 
 Thirdly, fork away on github.
 
-### Setup alonetone on localhost
+### Setup alonetone locally on macOS
 
 
 1) `clone`
 
-2) `brew install libsndfile` (required for ruby-audio gem)
+2) `brew install libsndfile lame` (required for id3 tags and waveforms)
 
 3) `bundle `
 
@@ -115,10 +120,6 @@ Note: alonetone uses 3 config files that are created by 'rake setup'
       alonetone.yml (contains the application "secret" and app-specific settings)
       database.yml
       newrelic.yml (for performance tracking)
-
-Issue with event machine 1.0.7?
-
-`brew link openssl --force`
 
 No sound on development? Set `play_dummy_mp3s: true` in alonetone.yml
 
