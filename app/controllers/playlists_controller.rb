@@ -3,7 +3,7 @@ class PlaylistsController < ApplicationController
   include Listens
 
   before_action :find_user, :except => :all
-  before_action :find_playlists, :except => [:index, :new, :create, :all]
+  before_action :find_playlists, :except => [:index, :new, :create, :all, :sort]
   before_action :require_login, :except => [:index, :show, :all]
   before_action :find_tracks, :only => [:show, :edit, :all]
 
@@ -19,10 +19,10 @@ class PlaylistsController < ApplicationController
 
   def sort
     respond_to do |format|
-      format.html { @playlists = @user.playlists.include_private.all }
+      format.html { @playlists = @user.playlists.include_private }
       format.js do
         params["playlist"].each_with_index do |id, position|
-          @user.playlists.update(id, :position => position+1)
+          @user.playlists.find(id).update_column(:position, position + 1)
         end
         head :ok
       end
@@ -80,7 +80,7 @@ class PlaylistsController < ApplicationController
   def attach_pic
     if params[:pic].present?
       @pic = @playlist.build_pic(params[:pic].permit(:pic))
-      flash[:notice] = 'Picture updated!' if @pic.save
+      flash[:notice] = 'Picture updated!' if @pic.save and @playlist.touch
     end
     flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:notice].present?
     redirect_to edit_user_playlist_path(@user, @playlist)
@@ -169,7 +169,6 @@ class PlaylistsController < ApplicationController
     @playlists_left  = @all_playlists[ 0 ... middle ]
     @playlists_right = @all_playlists[ middle .. -1 ]
   end
-
 
   def authorized?
     @playlist.nil? || current_user_is_admin_or_owner?(@user) ||

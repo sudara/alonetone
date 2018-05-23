@@ -13,6 +13,7 @@ arthurs_playlist:
   permalink: arthurs-playlist
   title: Arthur's Playlist
   description: arthurs playlist
+  private: false
   
 empty:
   id: 3
