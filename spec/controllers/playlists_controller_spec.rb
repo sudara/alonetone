@@ -98,6 +98,13 @@ RSpec.describe PlaylistsController, 'permissions', type: :controller do
       post :attach_pic, :params => {:id => 'owp', :user_id => 'sudara', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}}
       expect(response).to redirect_to('/login')
     end
+
+    it "should break the homepage cache" do
+      login(:arthur)
+      expect do 
+       post :attach_pic, :params => {:id => 'arthurs-playlist', :user_id => 'arthur', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}}
+      end.to change { Playlist.recent.only_public.limit(4).cache_key }
+    end
   end
 end
 
