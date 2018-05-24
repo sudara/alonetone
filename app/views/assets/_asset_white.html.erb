@@ -44,10 +44,16 @@
           <div class='user_description'>
             <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
           </div>
+
           <div class="stats">
             Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
             listened to <strong><%= asset.listens_count %> times</strong>.
           </div>
+          
+          <%= link_to user_track_path(asset.user, asset.permalink), :title => "#{asset.name} by #{asset.user.name}" do %>
+            <span>view more</span>
+          <% end unless @single_track %>
+
       </div>
     </div>
   	<% if logged_in? || asset.guest_can_comment? %>
@@ -60,19 +66,12 @@
         <span>edit</span>
       <% end %>
 
-      <%= link_to user_track_path(asset.user, asset.permalink, :format => :mp3, :referrer => 'download'), :class=> 'download', :title => "right-click to download mp3" do %>
-        <span>download</span>
-      <% end %>
-
 	    <% if !asset.private? %>
         <%= link_to 'mark as spam', spam_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box', :data => {:confirm => 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this  to post again'}, :method => :put%>
       <% else %>
         <%= link_to 'unspam', unspam_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box', :data => {:confirm => 'This will publish this track!'}, :method => :put%>
       <% end %>
 
-      <%= link_to user_track_path(asset.user, asset.permalink), :title => "#{asset.name} by #{asset.user.name}" do %>
-        <span>view more</span>
-      <% end unless @single_track %>
     </div>
   </div>
 <% end %>
