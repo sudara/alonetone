@@ -45,14 +45,14 @@
             <%= markdown(awesome_truncate_with_read_more(asset, 300)) %>
           </div>
 
-          <div class="stats">
-            Uploaded <strong><%= local_time_ago(asset.created_at) %></strong>,
-            listened to <strong><%= asset.listens_count %> times</strong>.
+          <div class="below_description">
+            <div class="created"><%= local_time_ago(asset.created_at) %></div>
+            <div class="plays"><%= asset.listens_count %> PLAYS</div>
+            <%= link_to user_track_path(asset.user, asset.permalink), :title => "#{asset.name} by #{asset.user.name}" do %>
+              <span>View more&hellip;</span>
+            <% end unless @single_track %>
           </div>
           
-          <%= link_to user_track_path(asset.user, asset.permalink), :title => "#{asset.name} by #{asset.user.name}" do %>
-            <span>view more</span>
-          <% end unless @single_track %>
 
       </div>
     </div>
