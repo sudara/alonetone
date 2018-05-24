@@ -1,5 +1,6 @@
 header#site_header {
-  background-color: $light-gray;
+  background-color: $white;
+  box-shadow: 0 3px 4px -2px #65666627;
   height: 40px;
   .header_inner {
     position: relative;

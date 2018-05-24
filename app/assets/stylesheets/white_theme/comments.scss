@@ -18,7 +18,7 @@ h2#latest_comments + div.box {
 }
 
 .comment {
-  &:before {
+  &::before {
     content:"\A";
     border-style: solid;
     border-width: 0 9px 13px 9px;
