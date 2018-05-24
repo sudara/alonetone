@@ -90,6 +90,14 @@ a.view_all {
   top: 9px;
   right: 0;
   border: 0;
+  padding-right: 15px;
+  i.fa-chevron-right {
+    margin-left: 12px;
+  }
+  &:hover {
+    background-color: transparent;
+    text-decoration: none;
+  }
 
 }
 

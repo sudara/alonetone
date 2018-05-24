@@ -193,8 +193,8 @@
     }
     .tracks_reveal_top {
       display: flex;
-      margin-right: 10px;
-      margin-left: 10px;
+      margin-right: 14px;
+      margin-left: 14px;
       padding-top: $baseline / 2;
       padding-bottom: $baseline / 2;
       padding-left: 10px;
@@ -290,9 +290,20 @@
       margin-top: 20px;
       padding-left: 10px;
       padding-right: 10px;
+      position: relative;
+       &::before {
+        content:"\A";
+        border-style: solid;
+        border-width: 0 9px 13px 9px;
+        border-color: transparent transparent #D7DBDB transparent;
+        position: absolute;
+        top: -13px;
+        left: 47%;
+      }
       .comment_form {
         overflow: hidden;
         form {
+
           .comment_as {
             font-size: 12px;
             line-height: 37px;
@@ -305,7 +316,9 @@
             }
           }
           textarea {
+            color: #4F4D4D;
           	font-family: $sans-font;
+            font-weight: bold;
             box-sizing: border-box;
             width: calc(100% - 6px );
             margin-right: 3px;
