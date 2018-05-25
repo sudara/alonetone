@@ -196,6 +196,7 @@ body.has-details {
 }
 
 #edit_playlist_info {
+  @include match-dynamic-site-width();
   form p {
     font-size: 14px;
   }
@@ -207,8 +208,13 @@ body.has-details {
   }
   .edit_playlist_columns {
     display: flex;
-     > div {
-      width: 50%;
+    .edit_playlist_left_column {
+      width: 220px;
+    }
+    .edit_playlist_right_column {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 
