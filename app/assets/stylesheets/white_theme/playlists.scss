@@ -215,6 +215,34 @@ body.has-details {
       flex: 1;
       display: flex;
       flex-wrap: wrap;
+      > .edit_playlist_right_column_title_and_year {
+        display: flex;
+        width: 100%;
+      }
+      > .edit_playlist_right_column_links {
+        display: flex;
+        width: 100%;
+      }
+      > .edit_playlist_right_column_credits {
+        display: flex;
+        width: 100%;
+      }
+      > .edit_playlist_right_column_private_and_hiddens {
+        display: flex;
+        width: 100%;
+      }
+      > .edit_playlist_right_column_private_and_hidden {
+        display: flex;
+        width: 100%;
+        div.input {
+          width: auto;
+        }        
+      }
+    }
+  }
+  .edit_playlist_bottom {
+    input {
+      float: right;
     }
   }
 
