@@ -1,4 +1,5 @@
 .simple_form {
+  
   div.input {
     margin-bottom: 10px;
     clear: both;
@@ -7,6 +8,7 @@
     
     /* Required for Webkit, but not for Gecko */
   }
+
   label {
     display: block;
     text-align: left;
@@ -17,14 +19,19 @@
   }
   textarea{
     height:200px;
+    background-color: #F5F5F5;
+    border: 0;
   }
   input {
     font-size: 1em;
     padding:5px;
     margin: 0;
-    &.string, &.password{
+    &.string, &.password {
       width: 250px;
       background-color: white;
+      background-color: #F5F5F5;
+      border: 0;
+      border-radius: 4px;
     }
     &.radio {
       margin-right: 5px;
