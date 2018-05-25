@@ -103,7 +103,7 @@ RSpec.describe PlaylistsController, 'permissions', type: :controller do
       login(:arthur)
       expect do 
        post :attach_pic, :params => {:id => 'arthurs-playlist', :user_id => 'arthur', :pic => {:pic => fixture_file_upload('images/jeffdoessudara.jpg','image/jpeg')}}
-      end.to change { Playlist.recent.only_public.limit(4).cache_key }
+      end.to change { Playlist.recent.where(:private => false).limit(10).cache_key }
     end
   end
 end
