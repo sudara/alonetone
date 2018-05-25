@@ -1,15 +1,8 @@
 <%= error_messages_for :playlist %>
 
-<%= render :partial => 'inline_help' %>
 
 <div id="edit_playlist_info" class="faq box">
-  <h2>Edit "<%= @playlist.title %>"</h2>
-
-  Upload a square photo, 2000px by 2000px for best results.<br>
-	<%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
-		<%= f.file_field :pic  %>
-		<%= submit_tag "Upload new Pic" %>
-	<% end %>
+  <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
 
   <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
 
@@ -17,13 +10,19 @@
 
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
-        <%= f.input :title %>
-        <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
-        <%= f.input :credits %>
+          <%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
+            <%= f.file_field :pic  %>
+            <%= submit_tag "Upload new Pic" %>
+          <% end %>
+          Upload a square photo, 2000px by 2000px for best results.
+
       </div>
       <div class="edit_playlist_right_column">
+        <%= f.input :title %>
+        <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
         <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
         <%= f.input :link2, placeholder: 'another link' %>
+        <%= f.input :credits %>
 
         <% if moderator? %>
         <%= f.simple_fields_for :greenfield_downloads do |sf| %>
@@ -33,10 +32,15 @@
 
         <%= f.input :private %>
         <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
-        <%= f.button :submit, "Save" %> or
-        <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+
+
 
       </div>
+    </div>
+    <div class="edit_playlist_bottom">
+      <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+      <%= f.button :submit, "Save" %> or
+      
     </div>
   <% end %>
 </div>

@@ -96,10 +96,10 @@ $bright-highlight: rgba(255, 255, 0, .6);
   box-shadow: none;
 
   @if $type == 'admin' {
-    opacity: 1;
-    color: #fff;
+    // opacity: 1;
+    // color: #fff;
     // border: 1.25px solid #555;
-    background-color: $samo-orange;
+    // background-color: $samo-orange;
   }
   &:hover {
     background-color: #888;
