@@ -425,7 +425,6 @@ GEM
       timeago_js
     tilt (2.0.8)
     timeago_js (3.0.2)
-    timecop (0.9.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
@@ -506,7 +505,6 @@ DEPENDENCIES
   sqlite3
   thin
   thredded
-  timecop
   turbolinks
   uglifier
   webpacker
