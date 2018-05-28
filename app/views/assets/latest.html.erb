@@ -72,9 +72,9 @@
   <div class="sprites-stars sprites-before-heading"></div>
   <h2 id="recently_favorited" class="box">Recently favorited</h2>
   <div class="box">
-    <% if white_theme_enabled? %>
+    <% if white_theme_enabled? and @favorites.present? %>
       <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite %>
-    <% else %>
+    <% elsif @favorites.present?  %>
       <%= render :partial => 'shared/favorite', :collection => @favorites %>
     <% end %>
   </div>
