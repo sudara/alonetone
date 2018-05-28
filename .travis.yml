@@ -18,7 +18,7 @@ notifications:
     on_failure: never
   slack:
     on_success: always
-    on_failure: change
+    on_failure: always
     template:
       - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) by %{author}"
     rooms:
