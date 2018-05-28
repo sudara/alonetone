@@ -4,7 +4,6 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'database_cleaner'
-require 'timecop'
 require 'authlogic/test_case'
 require 'factory_bot_rails'
 

@@ -252,7 +252,7 @@ RSpec.describe UsersController, type: :controller do
 end
 
 def create_user(options = {})
-  Timecop.travel(1.day.ago)
-  post :create, params: {user: {:login => 'quire', :email => 'quire@example.com', :password => 'quire12345', :password_confirmation => 'quire12345'}.merge(options)}
-  Timecop.return
+  travel_to 1.day.ago do
+    post :create, params: {user: {:login => 'quire', :email => 'quire@example.com', :password => 'quire12345', :password_confirmation => 'quire12345'}.merge(options)}
+  end
 end
