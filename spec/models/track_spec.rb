@@ -11,6 +11,10 @@ RSpec.describe Track, type: :model do
     expect(tracks(:no_playlist_id)).not_to be_valid
   end
 
+  it "is not valid without a user_id" do
+    expect(tracks(:owp2)).not_to be_valid
+  end
+
   context "as a fav" do
     subject { users(:arthur).tracks.favorites.create(:asset_id => 1) }
     it "should create a favorite playlist if its the first fav" do
