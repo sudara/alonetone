@@ -40,7 +40,7 @@ function handlers() {
   })
 
   document.querySelector('.profile_link').addEventListener('mouseover', () => {
-    document.querySelector('.user_dropdown_menu').style.top = '0px' 
+    document.querySelector('.user_dropdown_menu').style.top = '0px'
   })
 
   document.querySelector('.user_dropdown').addEventListener('mouseleave', () => {
@@ -49,7 +49,7 @@ function handlers() {
 
   document.querySelector('.profile_link').addEventListener('touchstart', (event) => {
     if (document.querySelector('.user_dropdown_menu').style.top !== '0px') {
-      event.preventDefault();
+      event.preventDefault()
       document.querySelector('.user_dropdown_menu').style.top = '0px'
     }
   })
