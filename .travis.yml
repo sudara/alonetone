@@ -1,8 +1,11 @@
 language: ruby
-cache: bundler
+cache: 
+  - bundler
+  - yarn
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y libsndfile-dev lame
+- yarn
 before_script:
 - mysql -e 'create database alonetone_test';
 - gem update --system
