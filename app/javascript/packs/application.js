@@ -38,6 +38,21 @@ function handlers() {
     pic.append(makeSVGFromTitle(800, title))
     pic.classList.remove('no_pic') // otherwise turbolinks:visit will keep appending
   })
+
+  document.querySelector('.profile_link').addEventListener('mouseover', () => {
+    document.querySelector('.user_dropdown_menu').style.top = '0px' 
+  })
+
+  document.querySelector('.user_dropdown').addEventListener('mouseleave', () => {
+    document.querySelector('.user_dropdown_menu').style.top = '-118px'
+  })
+
+  document.querySelector('.profile_link').addEventListener('touchstart', (event) => {
+    if (document.querySelector('.user_dropdown_menu').style.top !== '0px') {
+      event.preventDefault();
+      document.querySelector('.user_dropdown_menu').style.top = '0px'
+    }
+  })
 }
 
 document.addEventListener('turbolinks:load', handlers())
