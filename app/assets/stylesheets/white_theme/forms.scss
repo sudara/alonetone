@@ -8,6 +8,19 @@
     /* Required for Webkit, but not for Gecko */
   }
 
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $lightest-gray;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $lightest-gray;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $lightest-gray;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $lightest-gray;
+  }
+
   .error {
     display: block;
     clear: both;

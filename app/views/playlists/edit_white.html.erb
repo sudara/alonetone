@@ -2,6 +2,9 @@
 
 
 <div id="edit_playlist_info" class="faq box">
+  <p>
+    22 tracks total, 38 plays, 4 hearts
+  </p>
   <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
   <p>
     Add metadata or instructions here.
@@ -13,7 +16,7 @@
 
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
-          <h1>ALBUM ARTWORK</h1>
+          <label>ALBUM ARTWORK</label>
           <%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
             <%= f.file_field :pic  %>
             <%= submit_tag "Upload new Pic" %>
