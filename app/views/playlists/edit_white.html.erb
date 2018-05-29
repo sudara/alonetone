@@ -66,10 +66,13 @@
 </div>
 
 <% content_for :left do %>
+  <div class="left_instructions">
+    You can reorder your playlist by dragging your tracks, or remove them from the playlist with the [x] icon.
+  </div>
   <div id="edit_playlist">
     <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
       <div style="height: 12px; background-color: #c7c8c7;"></div>
-      <%= render :partial => 'track', :collection => @playlist.tracks %>
+        <%= render :partial => 'track', :collection => @playlist.tracks %>
 
       <div id="drop_here">
         Drop Track here
@@ -84,6 +87,9 @@
 <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
 
 <% content_for :right do %>
+<div class="right_instructions">
+  Click a track below to instantly add it to the playlist selection.
+</div>
   <div id="playlist_sources" class="box draggable_wrapper">
   	<div class="draggable_tracks">
   		<h2 class="box">Available tracks</h2>
