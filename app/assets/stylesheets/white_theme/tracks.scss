@@ -196,9 +196,9 @@
       margin-right: 14px;
       margin-left: 14px;
       padding-top: $baseline / 2;
+      padding-right: 10px;
       padding-bottom: $baseline / 2;
       padding-left: 10px;
-      padding-right: 10px;
       border-radius: 4px;
       background-color: #f5f5f5;
 
@@ -286,19 +286,19 @@
       }
     }
     .comment_track {
+      position: relative;
       clear: both;
       margin-top: 20px;
-      padding-left: 10px;
       padding-right: 10px;
-      position: relative;
-       &::before {
-        content:"\A";
-        border-style: solid;
-        border-width: 0 9px 13px 9px;
-        border-color: transparent transparent #D7DBDB transparent;
+      padding-left: 10px;
+      &::before {
         position: absolute;
         top: -13px;
         left: 49%;
+        content: '\A';
+        border-width: 0 9px 13px 9px;
+        border-style: solid;
+        border-color: transparent transparent #d7dbdb transparent;
       }
       .comment_form {
         overflow: hidden;
@@ -315,8 +315,7 @@
             }
           }
           textarea {
-            color: #4F4D4D;
-          	font-family: $sans-font;
+            font-family: $sans-font;
             font-weight: bold;
             box-sizing: border-box;
             width: calc(100% - 6px );
@@ -324,6 +323,7 @@
             margin-bottom: 15px;
             margin-left: 3px;
             padding: $baseline / 4;
+            color: #4f4d4d;
             border: 1px solid #d7dbdb;
             border-radius: 4px;
             background-color: #f5f5f5;
@@ -331,24 +331,26 @@
               font-size: 16px;
             }
             &:focus {
-				border-color: #A6ABAB;
-
-
+              border-color: #a6abab;
             }
           }
           .private_check_box {
             font-size: 11px;
             float: left;
             clear: both;
-            margin-top: 2px;
+            margin-top: 24px;
           }
           span.private {
-            font-size: 11px !important;
-            display: block;
-            margin-top: 4px;
-            margin-bottom: 30px;
-            margin-left: 17px;
-            color: $red;
+            font-size: 12px !important;
+            display: block!important;
+            height: 24px;
+            line-height: 24px;
+            color: $white;
+            background-color: $samo-dark-orange;
+            margin-top: 0;
+            position: relative;
+            top: -15px;
+            border-radius: 0 0 4px 4px;
             img {
               display: none;
             }
