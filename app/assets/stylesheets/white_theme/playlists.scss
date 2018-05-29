@@ -219,6 +219,10 @@ body.has-details {
     display: flex;
     .edit_playlist_left_column {
       width: 220px;
+      p {
+        font-size: 12px;
+        color: #a6abab;
+      }
     }
     .edit_playlist_right_column {
       flex: 1;
@@ -289,6 +293,17 @@ body.has-details {
     }
   }
 
+}
+
+
+.edit_playlist_pro_upload {
+  .pro_upload_left {
+    
+  }
+  .upload_zip {
+    @include default-button('jumbo');
+    float: right;
+  }
 }
 
 .playlist_delete_button {

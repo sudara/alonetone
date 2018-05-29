@@ -102,6 +102,15 @@ $bright-highlight: rgba(255, 255, 0, .6);
     // border: 1.25px solid #555;
     // background-color: $samo-orange;
   }
+  @if $type == 'jumbo' {
+    // opacity: 1;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    // color: #fff;
+    // border: 1.25px solid #555;
+    // background-color: $samo-orange;
+  }
   &:hover {
     background-color: #888;
     // transition: border-color .1s ease-in-out;
