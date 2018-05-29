@@ -203,9 +203,6 @@ body.has-details {
   input {
     font-size: 13px;
   }
-  textarea {
-    width: 100%;
-  }
   .edit_playlist_columns {
     display: flex;
     .edit_playlist_left_column {
@@ -215,28 +212,62 @@ body.has-details {
       flex: 1;
       display: flex;
       flex-wrap: wrap;
+      div.input {
+        width: 100%;
+      }
       > .edit_playlist_right_column_title_and_year {
         display: flex;
         width: 100%;
+        > :nth-child(1) {
+          flex: 1;
+          input {
+            width: 100%;
+          }
+          margin-right: 30px;
+        }
+        > :nth-child(2) {
+          width: 140px;
+          input {
+            width: 100%;
+
+          }
+        }
       }
       > .edit_playlist_right_column_links {
         display: flex;
         width: 100%;
+        > :nth-child(1) {
+          flex: 1;
+          input {
+            width: 100%;
+          }
+          margin-right: 30px;
+        }
+        > :nth-child(2) { 
+          flex: 1;
+          input {
+            width: 100%;
+          }
+        }
       }
       > .edit_playlist_right_column_credits {
         display: flex;
         width: 100%;
-      }
-      > .edit_playlist_right_column_private_and_hiddens {
-        display: flex;
-        width: 100%;
+        textarea {
+          width: 100%;
+          height: 4em;
+        }
       }
       > .edit_playlist_right_column_private_and_hidden {
         display: flex;
         width: 100%;
+        font-size: 12px;
         div.input {
           width: auto;
         }        
+        label {
+          text-transform: none;
+        }
       }
     }
   }
