@@ -11,7 +11,7 @@ module PlaylistsHelper
   end
 
   def svg_cover
-    "<div class='no_pic'> </div>".html_safe
+    "<div class='no_pic'></div>".html_safe
   end
 
   def greenfield_playlist_cover(playlist, size)
