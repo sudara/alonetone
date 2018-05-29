@@ -171,6 +171,14 @@ body.has-details {
   }
 }
 
+.left_instructions, .right_instructions {
+  color: $light-medium-gray;
+  padding: 0 10px;
+  line-height: 1.3em;
+  min-height: 36px;
+}
+
+
 #edit_playlist {
   position: relative;
 

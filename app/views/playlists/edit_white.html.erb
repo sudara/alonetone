@@ -56,6 +56,7 @@
 
       </div>
     </div>
+    
     <div class="edit_playlist_bottom">
       <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
       
@@ -64,11 +65,20 @@
     </div>
   <% end %>
 </div>
+<div class="edit_playlist_pro_upload faq box">
+  <h1>Professional Upload System&trade;</h1>
+  <p>
+    You can upload a ZIP file containing the playlist contents, and we'll populate the playlist for you.
+  </p>
+  <a href="">
+    Upload ZIP file
+  </a>
+</div>
 
 <% content_for :left do %>
-  <div class="left_instructions">
+  <p class="left_instructions">
     You can reorder your playlist by dragging your tracks, or remove them from the playlist with the [x] icon.
-  </div>
+  </p>
   <div id="edit_playlist">
     <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
       <div style="height: 12px; background-color: #c7c8c7;"></div>
@@ -87,9 +97,9 @@
 <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
 
 <% content_for :right do %>
-<div class="right_instructions">
+<p class="right_instructions">
   Click a track below to instantly add it to the playlist selection.
-</div>
+</p>
   <div id="playlist_sources" class="box draggable_wrapper">
   	<div class="draggable_tracks">
   		<h2 class="box">Available tracks</h2>
