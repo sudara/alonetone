@@ -148,6 +148,15 @@ body.has-details {
   }
 }
 
+#playlist_tabs {
+  #playlist_source_options {
+    li {
+    }
+
+  }
+
+}
+
 #playlist_source_options {
   overflow: auto;
   margin-left: $baseline / 2;
@@ -155,6 +164,10 @@ body.has-details {
     float: left;
     margin-right: 10px;
     text-decoration: underline;
+    a {
+      @include default-button();
+    }
+
   }
 }
 
