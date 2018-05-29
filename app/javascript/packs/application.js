@@ -27,16 +27,19 @@ application.load(definitionsFromContext(context))
 
 
 function handlers() {
-  document.querySelectorAll('#playlist-and-track-content .no_pic').forEach((pic) => {
+  document.querySelectorAll('.large-cover .no_pic, .small-cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
-    pic.append(makeSVGFromTitle(800, title))
-    pic.classList.remove('no_pic') // otherwise turbolinks:visit will keep appending
+    if (!pic.hasChildNodes()) { 
+      pic.append(makeSVGFromTitle(800, title))
+    }
   })
 
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
-    const title = pic.parentNode.getAttribute('title')
-    pic.append(makeSVGFromTitle(800, title))
-    pic.classList.remove('no_pic') // otherwise turbolinks:visit will keep appending
+    const title = pic.parentNode.getAttribute('title')  
+    console.log(pic.childNodes)
+    if (!pic.hasChildNodes()) {
+      pic.append(makeSVGFromTitle(800, title))
+    }
   })
 
   document.querySelector('.profile_link').addEventListener('mouseover', () => {
@@ -55,4 +58,4 @@ function handlers() {
   })
 }
 
-document.addEventListener('turbolinks:load', handlers())
+document.addEventListener('turbolinks:load', handlers)
