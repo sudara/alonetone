@@ -5,8 +5,6 @@ class Waveform
     @data      = options.data || []
     @outerColor = options.outerColor || "transparent"
     @innerColor = options.innerColor || "#000000"
-    @interpolate = true
-    @interpolate = false if options.interpolate == false
     unless @canvas?
       if @container
         @canvas = @createCanvas(@container, options.width || @container.clientWidth, options.height || @container.clientHeight)
@@ -29,6 +27,8 @@ class Waveform
       @context.scale @ratio, @ratio
 
     if options.data
+      if options.data.length < 2 
+        options.data = [0,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0]
       @update(options)
 
   setData: (data) ->
@@ -41,14 +41,19 @@ class Waveform
     @setData @expandArray(data, @width)
 
   update: (options) ->
-    if options.interpolate?
-      @interpolate = options.interpolate
-    if @interpolate == false
-      @setDataCropped(options.data)
-    else
-      @setDataInterpolated(options.data)
+    scaled = @scale(options.data)
+    console.log(scaled)
+    @setDataInterpolated(scaled)
     @redraw()
 
+  scale: (data) ->
+    data = data.split(',').map (s) -> parseFloat(s)
+    max = Math.max.apply(Math, data)
+    min = Math.min.apply(Math, data)
+    scale = Math.max(Math.abs(max), Math.abs(min))
+    data = data.map (s) -> 
+      Math.pow(Math.abs(s) / scale, 0.7)
+      
   redraw: () =>
     @clear()
     if typeof(@innerColor) == "function"

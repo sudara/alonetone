@@ -42,18 +42,6 @@ export default class extends Controller {
   setupWaveform() {
     let soundPosition = 0
     let data = this.data.get('waveform')
-    if (data.length > 1) {
-      data = data.split(',').map(s => parseFloat(s))
-      const max = Math.max.apply(Math, data);
-      const min = Math.min.apply(Math, data);
-      const scale = Math.max(Math.abs(max), Math.abs(min));
-      data = data.map((s) => {
-        return (s < 0 ? -1 : 1) * ((Math.abs(s) / scale) ** 0.7);
-      })
-    } else {
-      data = [0,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0];
-    }
-    console.log(data)
     return new Waveform({
       container: this.seekBarContainerTarget,
       height: 54,
