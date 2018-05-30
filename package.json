@@ -2,6 +2,8 @@
   "dependencies": {
     "@rails/webpacker": "^3.4.1",
     "@shopify/draggable": "^1.0.0-beta.4",
+    "coffee-loader": "^0.9.0",
+    "coffeescript": "1.12.7",
     "gsap": "^2.0",
     "howler": "^2.0.9",
     "local-time": "^2.0.0",

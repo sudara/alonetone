@@ -1,5 +1,5 @@
 import { TweenMax } from 'gsap/TweenMax'
-import morphSVG from './MorphSVGPlugin.js'
+import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function LargePlayAnimation() {
 
