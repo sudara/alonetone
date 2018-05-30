@@ -185,12 +185,14 @@ class AssetsController < ApplicationController
   def unspam
     @asset.ham!
     @asset.update_column :private, false
+    flash.notice = "Track was made public"
     redirect_back(fallback_location: root_path)
   end
 
   def spam
     @asset.spam!
     @asset.update_column :private, true
+    flash.notice = "Track was marked as spam and is private"
     redirect_back(fallback_location: root_path)
   end
 
