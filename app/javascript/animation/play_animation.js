@@ -1,5 +1,5 @@
 import { TweenMax } from 'gsap'
-import morphSVG from './MorphSVGPlugin.js'
+import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function PlayAnimation() {
   const select = function (s) {

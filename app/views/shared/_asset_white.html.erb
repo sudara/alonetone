@@ -1,4 +1,4 @@
-<div class="track-content" data-controller="asset" data-asset-in-playlist="<%= @playlist.present? %>"> 
+<div class="track-content" data-controller="asset" data-asset-in-playlist="<%= @playlist.present? %>" data-asset-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
   <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
     <div class="play-button-container" data-target="asset.play" data-action="click->asset#togglePlay">
       <div class='play-button play-control'>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="waveform" data-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
+    <div class="waveform">
       <div class="seekbar" data-target="asset.seekBarContainer asset.seekBarLoaded asset.seekBarPlayed"></div>
     </div>
 

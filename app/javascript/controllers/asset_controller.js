@@ -1,7 +1,8 @@
 import { Controller } from 'stimulus'
 import { Howl } from 'howler'
 import PlayAnimation from '../animation/play_animation'
-import LargePlayAnimation from '../animation/play_animation'
+import LargePlayAnimation from '../animation/large_play_animation'
+import Waveform from '../animation/waveform.coffee'
 
 let player
 let currentlyOpen
@@ -26,14 +27,27 @@ export default class extends Controller {
     this.url = this.playTarget.firstElementChild.getAttribute('href')
     this.setupHowl()
     if (this.inPlaylist()) {
-      animation = largePlayAnimation
-      animation.init()
-      animation.play()
+      animation = largePlayAnimation.init()
+      this.waveform = this.setupWaveform()
     } else {
       animation = playAnimation
     }
   }
 
+  setupWaveform() {
+    let soundPosition = 0
+    return new Waveform({
+      container: this.seekBarContainerTarget,
+      height: 54,
+      innerColor: function (percent, _) {
+        if (percent < soundPosition)
+          return '#302f2f';
+        else
+          return '#c7c6c3';
+      },
+      data: this.data.get('waveform'),
+    })
+  }
 
   inPlaylist() {
     return this.data.has('inPlaylist') === true
