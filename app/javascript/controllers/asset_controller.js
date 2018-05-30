@@ -36,7 +36,7 @@ export default class extends Controller {
 
   skim(e) {
     const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
-    this.seekBarLoadedTarget.style.left = offx + 'px'
+    this.seekBarLoadedTarget.style.left = `${offx}px`
   }
 
   setupWaveform() {
@@ -47,7 +47,7 @@ export default class extends Controller {
       height: 54,
       innerColor: function (percent, _) {
         if (percent < soundPosition)
-          return '#302f2f';
+          return '#302fg2f';
         else
           return '#c7c6c3';
       },
