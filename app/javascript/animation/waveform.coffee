@@ -42,7 +42,6 @@ class Waveform
 
   update: (options) ->
     scaled = @scale(options.data)
-    console.log(scaled)
     @setDataInterpolated(scaled)
     @redraw()
 

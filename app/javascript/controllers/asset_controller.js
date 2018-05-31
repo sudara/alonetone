@@ -27,32 +27,12 @@ export default class extends Controller {
     this.url = this.playTarget.firstElementChild.getAttribute('href')
     this.setupHowl()
     if (this.inPlaylist()) {
-      animation = largePlayAnimation.init()
+      animation = largePlayAnimation
+      animation.init()
       this.waveform = this.setupWaveform()
     } else {
       animation = playAnimation
     }
-  }
-
-  skim(e) {
-    const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
-    this.seekBarLoadedTarget.style.left = `${offx}px`
-  }
-
-  setupWaveform() {
-    let soundPosition = 0
-    let data = this.data.get('waveform')
-    return new Waveform({
-      container: this.seekBarContainerTarget,
-      height: 54,
-      innerColor: function (percent, _) {
-        if (percent < soundPosition)
-          return '#302fg2f';
-        else
-          return '#c7c6c3';
-      },
-      data,
-    })
   }
 
   inPlaylist() {
@@ -76,7 +56,7 @@ export default class extends Controller {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
       onload() {
-        console.log(this.seek())
+
       },
     })
   }
@@ -85,8 +65,7 @@ export default class extends Controller {
     // console.log(`${this.sound.seek()}`)
     if (this.inPlaylist()) {
       this.waveform.update()
-    }
-    else {
+    } else {
       this.updateSeekBarPlayed()
     }
     if (this.sound.playing()) {
@@ -101,9 +80,13 @@ export default class extends Controller {
     }
     player = this
     this.isPlaying = true
-    this.openDetails()
     this.animateLoading()
-    if (!this.inPlaylist()) this.updateSeekBarLoaded()
+    if (this.inPlaylist()){
+
+    } else {
+      this.openDetails()
+      this.updateSeekBarLoaded()
+    }
     this.element.classList.add('playing')
     this.sound.play()
   }
@@ -144,10 +127,12 @@ export default class extends Controller {
   }
 
   animateLoading() {
-    this.playButtonTarget.style.display = 'none'
-    this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
-    animation.init()
-    animation.setPlay()
+    if (!this.inPlaylist()) {
+      this.playButtonTarget.style.display = 'none'
+      this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
+      animation.init()
+      animation.setPlay()
+    }
     animation.showLoading()
   }
 
@@ -174,5 +159,26 @@ export default class extends Controller {
   playNextTrack() {
     const next = this.element.nextSibling
     this.getControllerForElementAndIdentifier(next, 'asset').play()
+  }
+
+  skim(e) {
+    const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
+    this.seekBarLoadedTarget.style.left = `${offx}px`
+  }
+
+  setupWaveform() {
+    const soundPosition = 0
+    const data = this.data.get('waveform')
+    return new Waveform({
+      container: this.seekBarContainerTarget,
+      height: 54,
+      innerColor: function (percent, _) {
+        if (percent < soundPosition)
+          return '#302fg2f';
+        else
+          return '#c7c6c3';
+      },
+      data,
+    })
   }
 }
