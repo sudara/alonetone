@@ -158,7 +158,7 @@ export default class extends Controller {
   }
 
   playNextTrack() {
-    const next = this.element.nextSibling
+    const next = this.element.nextElementSibling
     this.application.getControllerForElementAndIdentifier(next, 'asset').play()
   }
 
