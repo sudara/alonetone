@@ -29,6 +29,8 @@ class Waveform
     if options.data
       if options.data.length < 2 
         options.data = [0,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0]
+      scaled = @scale(options.data)
+      @setDataInterpolated(scaled)
       @update(options)
 
   setData: (data) ->
@@ -40,9 +42,7 @@ class Waveform
   setDataCropped: (data) ->
     @setData @expandArray(data, @width)
 
-  update: (options) ->
-    scaled = @scale(options.data)
-    @setDataInterpolated(scaled)
+  update: () ->
     @redraw()
 
   scale: (data) ->
