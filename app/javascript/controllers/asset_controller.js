@@ -50,7 +50,7 @@ export default class extends Controller {
     this.sound = new Howl({
       src: Array(this.url),
       html5: true,
-      preload: false,
+      preload: this.inPlaylist(),
       onend: controller.playNextTrack.bind(controller),
       onplay() {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
