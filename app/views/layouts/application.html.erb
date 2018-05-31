@@ -12,6 +12,7 @@
     <% end %>
 
     <%= stylesheet_link_tag 'ipad', :media => "only screen and (max-device-width: 1024px)" %>
+    <%= javascript_include_tag "application", "data-turbolinks-eval": "false" %>
 
     <link rel="apple-touch-icon" href="/images/ipad_icon.png"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -83,7 +84,6 @@
         <%= render :partial => 'shared/footer' %>
       <% end %>
     </div>
-    <%= javascript_include_tag "application", "data-turbolinks-eval": "false" %>
     <%= render :partial => 'shared/analytics' %>
   </body>
 </html>

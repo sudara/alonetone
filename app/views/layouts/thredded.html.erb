@@ -10,7 +10,7 @@
                                async: !Rails.application.config.assets.debug,
                                defer: true,
                                'data-turbolinks-track': 'reload'%>
-	<%= javascript_include_tag "white_theme", "data-turbolinks-eval": "false"  %>					 
+    <%= javascript_include_tag "application", "data-turbolinks-eval": "false" %>
   </head>
 <body>
   <% if @sudo %>
