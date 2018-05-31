@@ -108,8 +108,9 @@ export default class extends Controller {
   }
 
   seek(e) {
-    e.preventDefault()
-    const newPosition = e.offsetX / this.seekBarContainerTarget.offsetWidth
+    if (!this.isPlaying) this.play()
+    const offset = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
+    const newPosition = offset / this.seekBarContainerTarget.offsetWidth
     this.sound.seek(this.sound.duration() * newPosition)
   }
 
@@ -158,7 +159,7 @@ export default class extends Controller {
 
   playNextTrack() {
     const next = this.element.nextSibling
-    this.getControllerForElementAndIdentifier(next, 'asset').play()
+    this.application.getControllerForElementAndIdentifier(next, 'asset').play()
   }
 
   skim(e) {
@@ -167,14 +168,14 @@ export default class extends Controller {
   }
 
   setupWaveform() {
-    const soundPosition = 0
+    const controller = this
     const data = this.data.get('waveform')
     return new Waveform({
       container: this.seekBarContainerTarget,
       height: 54,
       innerColor: function (percent, _) {
-        if (percent < soundPosition)
-          return '#302fg2f';
+        if (percent < controller.sound.seek() / controller.sound.duration())
+          return '#353535';
         else
           return '#c7c6c3';
       },
