@@ -268,8 +268,6 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.5)
-    rack-mini-profiler (1.0.0)
-      rack (>= 1.2.0)
     rack-protection (2.0.1)
       rack
     rack-proxy (0.6.4)
@@ -478,7 +476,6 @@ DEPENDENCIES
   postmark-rails
   pry
   puma
-  rack-mini-profiler
   rails (~> 5.2.0)
   rails-controller-testing
   rakismet

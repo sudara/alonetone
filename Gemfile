@@ -77,7 +77,6 @@ end
 group :development do
   gem 'thin'
   gem 'sqlite3'
-  gem 'rack-mini-profiler'
   gem 'perf_check'
 end
 
