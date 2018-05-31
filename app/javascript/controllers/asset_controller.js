@@ -24,10 +24,10 @@ export default class extends Controller {
 
   initialize() {
     this.isPlaying = false
-    this.url = this.playTarget.firstElementChild.getAttribute('href')
+    this.url = this.playTarget.querySelector('a').getAttribute('href')
     this.setupHowl()
     if (this.inPlaylist()) {
-      animation = largePlayAnimation
+      animation = new LargePlayAnimation()
       animation.init()
       this.waveform = this.setupWaveform()
     } else {
