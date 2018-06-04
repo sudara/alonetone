@@ -45,7 +45,7 @@ header#site_header {
         height: 40px;
         padding-top: 3px;
         color: $black;
-        background-color: $light-gray;
+        background-color: $white;
         span {
           line-height: 34px;
           display: block;
@@ -79,9 +79,9 @@ header#site_header {
           padding-right: 15px;
           padding-left: 15px;
           color: $black;
-          background-color: $light-gray;
+          background-color: $white;
           &:hover {
-            background-color: $white;
+            background-color: $light-gray;
             text-decoration: none;
           }
         }
