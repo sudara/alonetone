@@ -18,6 +18,11 @@
       }
     }
   }
+  &.open {
+   box-shadow: 0 -2px 15px 4px #65666627;
+   position: relative;
+   z-index: 2;
+  }
   &:last-child {
     border-bottom: 0;
   }
