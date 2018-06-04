@@ -26,6 +26,7 @@ h2#latest_comments + div.box {
     position: absolute;
     top: -13px;
     left: 47%;
+    z-index: 1;
   }
   position: relative;
   padding: $baseline;
