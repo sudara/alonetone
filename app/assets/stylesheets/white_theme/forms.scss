@@ -1,4 +1,99 @@
-.simple_form {
+
+/* INPUT STYLES */
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 1.95em;
+  cursor: pointer;
+  > span {
+    position: relative;
+    top: 4px;
+  }
+}
+
+[type="checkbox"]:not(:checked) + label:hover:before {
+  border: 1px solid #A6ABAB!important;
+}
+
+[type="checkbox"]:not(:checked) + label:active:before,
+[type="checkbox"]:checked + label:active:before {
+  border: 1px solid #D46A00!important;
+  background-color: #EB7B0C!important;
+}
+
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 14px; height: 14px;
+  border: 1px solid #D7DBDB;
+  background: #fff;
+  border-radius: 2.5px;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 14px; height: 14px;
+  border: 1px solid #888888;
+  background-color: #888888;
+  border-radius: 2.5px;
+}
+
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: image-url('checkmark.svg');
+  position: absolute;
+  top: 3px;
+  left: 3px;
+
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  // opacity: 0;
+  // transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  // opacity: 1;
+  // transform: scale(1);
+}
+
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 2px dotted blue;
+}
+
+
+
+// .simple_form {
+
   div.input {
     clear: both;
     width: 265px;
@@ -87,7 +182,7 @@
       padding: 10px;
     }
   }
-}
+// }
 
 input[type="submit"] {
   @include default-button();
