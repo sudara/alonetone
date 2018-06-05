@@ -9,7 +9,7 @@
      <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble', :id=>"comment_body_#{asset.unique_id}"  %>
 
     <div class="private_check_box">
-        <label><%= f.check_box :private, :class => 'private' %> <span class="public">Make Private</span></label>
+        <%= f.check_box :private, :class => 'private', :id => "checkbox_#{asset.unique_id}" %> <label for="checkbox_<%= asset.unique_id %>"><span class="public">Make Private</span></label>
     </div>
 
     <span class="private" style="display:none;">
