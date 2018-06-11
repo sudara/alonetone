@@ -1,24 +1,24 @@
 {
   "dependencies": {
-    "@rails/webpacker": "^3.4.1",
-    "@shopify/draggable": "^1.0.0-beta.4",
+    "@rails/webpacker": "^3.5.3",
+    "@shopify/draggable": "^1.0.0-beta.7",
     "coffee-loader": "^0.9.0",
-    "coffeescript": "1.12.7",
+    "coffeescript": "2.3.1",
     "gsap": "^2.0",
-    "howler": "^2.0.9",
-    "local-time": "^2.0.0",
+    "howler": "^2.0.12",
+    "local-time": "^2.0.1",
     "rails-ujs": "^5.2.0",
     "stimulus": "^1.0.1",
     "turbolinks": "^5.1.1"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
+    "babel-eslint": "^8.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "eslint": "^4.17.0",
+    "eslint": "^4.19.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.6.1",
-    "webpack-dev-server": "2.11.2"
+    "eslint-plugin-react": "^7.9.1",
+    "webpack-dev-server": "3.1.4"
   }
 }

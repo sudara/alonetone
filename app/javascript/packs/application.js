@@ -36,10 +36,21 @@ function handlers() {
 
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')  
-    console.log(pic.childNodes)
     if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))
     }
+  })
+
+  document.querySelectorAll('.tracklist .play-button').forEach((playlistTrack) => {
+    playlistTrack.addEventListener('click',function(e) {
+      document.addEventListener('turbolinks:load', function(event) {
+        const click = document.createEvent('Event');
+        click.initEvent('click', true, true); //can bubble, and is cancellable
+        document.querySelector('.play-button-container').dispatchEvent(click)
+      })
+      console.log(document.querySelector('.play-button-container'))
+      Turbolinks.visit(e.currentTarget.getAttribute('href'))
+    })
   })
 }
 
