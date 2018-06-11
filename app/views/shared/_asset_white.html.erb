@@ -1,9 +1,9 @@
-<div class="track-content" data-controller="asset" data-asset-in-playlist="<%= @playlist.present? %>" data-asset-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
+<div class="track-content" data-controller="playlist-playback" data-playlist-playback-in-playlist="<%= @playlist.present? %>" data-playlist-playback-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
   <div class="player" data-sound-id="<%= [@asset.user.login, @asset.permalink].join('/') %>">
-    <div class="play-button-container" data-target="asset.play" data-action="click->asset#togglePlay">
+    <div class="play-button-container" data-target="playlist-playback.play" data-action="click->playlist-playback#togglePlay">
       <div class='play-button play-control'>
         <%= link_to media_url(@asset) do %>
-				<svg data-target="asset.playButton" class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+				<svg data-target="playlist-playback.playButton" class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
 				 <defs>
 				  <clipPath id="dottyMask">
 				      <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>   
@@ -31,8 +31,8 @@
       </div>
     </div>
 
-    <div class="waveform" data-target='asset.seekBarContainer' data-action='mousemove->asset#skim click->asset#seek'>
-      <div class="seekbar" data-target="asset.seekBarLoaded asset.seekBarPlayed"></div>
+    <div class="waveform" data-target='playlist-playback.seekBarContainer' data-action='mousemove->playlist-playback#skim click->playlist-playback#seek'>
+      <div class="seekbar" data-target="playlist-playback.seekBarLoaded"></div>
     </div>
 
     <div class="time">
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div class="track-post" data-target="asset.details">
+  <div class="track-post">
 
     <% if authorized? %>
       <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit-link") %>
@@ -57,7 +57,7 @@
       <% end %>
     <% end %>
 
-    <h1 data-target="asset.title"><%= @asset.name %></h1>
+    <h1 data-target="playlist-playback.title"><%= @asset.name %></h1>
 
     <% unless @playlist %>
       <h3><%= @asset.user.display_name %></h3>
