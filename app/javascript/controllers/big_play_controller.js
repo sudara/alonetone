@@ -51,11 +51,8 @@ export default class extends Controller {
     return new Waveform({
       container: this.waveformTarget,
       height: 54,
-      innerColor: function (percent, _) {
-        if (percent < controller.percentPlayed)
-          return '#353535';
-        else
-          return '#c7c6c3';
+      percentPlayed: function () {
+        return controller.percentPlayed
       },
       data,
     })
