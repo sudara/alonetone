@@ -8,10 +8,9 @@ export default class extends Controller {
 
   initialize() {
     this.preInitialize()
+    this.loaded = false
     this.isPlaying = false
-    this.url = this.playTarget.querySelector('a').getAttribute('href')
     this.setupHowl()
-    this.postInitialize()
   }
 
   inPlaylist() {
@@ -20,6 +19,7 @@ export default class extends Controller {
 
   disconnect() {
     if (this.sound.playing()) {
+      console.log('disconnecting and stopping playback')
       this.sound.pause()
     }
   }
@@ -41,10 +41,13 @@ export default class extends Controller {
   }
 
   whilePlaying() {
-    this.whilePlayingCallback()
     if (this.sound.playing()) {
-      this.animation.setPause()
-      setTimeout(requestAnimationFrame(this.whilePlaying.bind(this)), 100);
+      this.loaded = true
+      this.whilePlayingCallback()
+      // we don't want to update this 60 times a second, at most 10
+      setTimeout(requestAnimationFrame(this.whilePlaying.bind(this)), 100)
+    } else {
+      console.log('not yet playing')
     }
   }
 
@@ -54,17 +57,16 @@ export default class extends Controller {
     }
     player = this
     this.isPlaying = true
-    this.animateLoading()
-    this.playCallback()
-    this.element.classList.add('playing')
     this.sound.play()
+    this.element.classList.add('playing')
+    this.playCallback()
   }
 
   pause() {
     this.sound.pause()
     player = null
     this.isPlaying = false
-    this.animation.setPlay()
+    this.pauseCallback()
   }
 
   togglePlay(e) {
@@ -76,24 +78,17 @@ export default class extends Controller {
     }
   }
 
-  seek(e) {
+  playNextTrack() {
+    const next = this.element.nextElementSibling
+    this.application.getControllerForElementAndIdentifier(next, this.identifier).play()
+  }
+
+  seek(newPosition) {
     if (!this.isPlaying) this.play()
-    const offset = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
-    const newPosition = offset / this.seekBarContainerTarget.offsetWidth
     this.sound.seek(this.sound.duration() * newPosition)
   }
 
-  animateLoading() {
-    this.animation.showLoading()
-  }
-
-  playNextTrack() {
-    const next = this.element.nextElementSibling
-    this.application.getControllerForElementAndIdentifier(next, 'asset').play()
-  }
-
-  skim(e) {
-    const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
-    this.seekBarLoadedTarget.style.left = `${offx}px`
+  percentPlayed() {
+    return this.sound.seek() / this.sound.duration()
   }
 }

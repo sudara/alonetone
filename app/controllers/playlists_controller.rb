@@ -39,7 +39,11 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       format.html do
         @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
-        render 'show_white' if white_theme_enabled?
+        if request.xhr?
+          render '/shared/_asset_white', layout: false
+        else
+          render 'show_white' if white_theme_enabled?
+        end
       end
       format.mp3 do
         listen(@asset, register: false)

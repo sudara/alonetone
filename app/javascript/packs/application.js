@@ -10,7 +10,7 @@
 // src/application.js
 
 import LocalTime from 'local-time'
-import Rails from 'rails-ujs';
+import Rails from 'rails-ujs'
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
@@ -39,18 +39,6 @@ function handlers() {
     if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))
     }
-  })
-
-  document.querySelectorAll('.tracklist .play-button').forEach((playlistTrack) => {
-    playlistTrack.addEventListener('click',function(e) {
-      document.addEventListener('turbolinks:load', function(event) {
-        const click = document.createEvent('Event');
-        click.initEvent('click', true, true); //can bubble, and is cancellable
-        document.querySelector('.play-button-container').dispatchEvent(click)
-      })
-      console.log(document.querySelector('.play-button-container'))
-      Turbolinks.visit(e.currentTarget.getAttribute('href'))
-    })
   })
 }
 

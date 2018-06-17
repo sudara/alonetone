@@ -11,16 +11,17 @@
 
   <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
-    <li class="<%= ' active' if track.asset == @asset %>"
-      data-sound-id="<%= [track.asset.user.login, track.asset.permalink].join('/') %>">
+    <li data-controller="playlist-playback" data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack" class="<%= ' active' if track.asset == @asset %>">
 
     <!-- Play button automagically plays AND changes to relevant track details  -->
-    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset), class: 'play-button' do %>
+    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
+      class: 'play-button', data: { target: "playlist-playback.play", action: "click->playlist-playback#togglePlay" }  do %>
       <i class="fa fa-play"></i>
     <% end %>
 
     <!-- Track title just switches track details-->
-    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset) do %>
+    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset), 
+      remote: true, data: { target: "playlist-playback.loadTrack" } do %>
       <span>
         <%= "%02d" % track.position %>. <%= track.name %>
       </span>
