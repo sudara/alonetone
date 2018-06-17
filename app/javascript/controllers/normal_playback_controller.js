@@ -10,16 +10,23 @@ export default class extends PlaybackController {
   preInitialize() {
     this.animation = new PlayAnimation()
     this.preload = false
+    this.url = this.playTarget.querySelector('a').getAttribute('href')
   }
-  postInitialize() {}
 
   whilePlayingCallback() {
+    this.animation.setPause()
     this.updateSeekBarPlayed()
   }
 
   playCallback() {
+    this.animateLoading()
     this.openDetails()
     this.updateSeekBarLoaded()
+  }
+  
+  pauseCallback() {
+    this.animation.setPlay()
+    this.playButtonTarget.style.display = 'block'
   }
 
   toggleDetails(e) {
@@ -61,5 +68,16 @@ export default class extends PlaybackController {
     const position = this.sound.seek() / this.sound.duration()
     const maxwidth = this.seekBarLoadedTarget.offsetWidth
     this.seekBarPlayedTarget.style.width = `${position * maxwidth}px`
+  }
+
+  seek(e) {
+    const offset = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
+    const newPosition = offset / this.seekBarContainerTarget.offsetWidth
+    super.seek(newPosition)
+  }
+
+  skim(e) {
+    const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
+    this.seekBarLoadedTarget.style.left = `${offx}px`
   }
 }

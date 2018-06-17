@@ -51,7 +51,7 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
-gem 'webpacker'
+gem 'webpacker', '>= 4.0.x'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
