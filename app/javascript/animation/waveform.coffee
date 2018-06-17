@@ -4,7 +4,7 @@ class Waveform
     @canvas    = options.canvas
     @data      = options.data || []
     @outerColor = options.outerColor || "transparent"
-    @innerColor = options.innerColor || "#000000"
+    @percentPlayed = options.percentPlayed
     unless @canvas?
       if @container
         @canvas = @createCanvas(@container, options.width || @container.clientWidth, options.height || @container.clientHeight)
@@ -26,21 +26,18 @@ class Waveform
       @canvas.style.height = "#{@height}px"
       @context.scale @ratio, @ratio
 
-    if options.data
-      if options.data.length < 2 
-        options.data = [0,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0]
-      scaled = @scale(options.data)
-      @setDataInterpolated(scaled)
-      @update(options)
+    if options.data.length < 2 
+      options.data = [0,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0]
+    scaled = @scale(options.data)
+    @setDataInterpolated(scaled)
+    @update()
+    console.log(@data)
 
   setData: (data) ->
     @data = data
 
   setDataInterpolated: (data) ->
     @setData @interpolateArray(data, @width)
-
-  setDataCropped: (data) ->
-    @setData @expandArray(data, @width)
 
   update: () ->
     @redraw()
@@ -54,17 +51,15 @@ class Waveform
       Math.pow(Math.abs(s) / scale, 0.7)
       
   redraw: () =>
-    @clear()
-    if typeof(@innerColor) == "function"
-      @context.fillStyle = @innerColor()
-    else
-      @context.fillStyle = @innerColor
+    percentPlayed = @percentPlayed()
     middle = @height / 2
     i = 0
     for d in @data
       t = @width / @data.length
-      @context.fillStyle = @innerColor(i/@width, d) if typeof(@innerColor) == "function"
-      @context.clearRect t*i, middle - middle * d, t, (middle * d * 2)
+      if((i/@width) < percentPlayed)
+        @context.fillStyle = '#353535';
+      else
+        @context.fillStyle = '#c7c6c3';
       @context.fillRect t*i, middle - middle * d, t, middle * d * 2
       i++
 
@@ -75,23 +70,12 @@ class Waveform
 
   # rather private helpers:
 
-
-
   createCanvas: (container, width, height) ->
     canvas = document.createElement("canvas")
     container.appendChild(canvas)
     canvas.width  = width
     canvas.height = height
     canvas
-
-  expandArray: (data, limit, defaultValue=0.0) ->
-    newData = []
-    if data.length > limit
-      newData = data.slice(data.length - limit, data.length)
-    else
-      for i in [0..limit-1]
-        newData[i] = data[i] || defaultValue
-    newData
 
   linearInterpolate: (before, after, atPoint) ->
     before + (after - before) * atPoint
@@ -111,25 +95,5 @@ class Waveform
       i++
     newData[fitCount - 1] = data[data.length - 1]
     newData
-
-
-  optionsForSyncedStream: (options={}) ->
-    innerColorWasSet = false
-    that = this
-    {
-      whileplaying: @redraw
-      whileloading: () ->
-        unless innerColorWasSet
-          stream = this
-          that.innerColor = (x, y) ->
-            if x < stream.position / stream.durationEstimate
-              options.playedColor || "rgba(255,  102, 0, 0.8)"
-            else if x < stream.bytesLoaded / stream.bytesTotal
-              options.loadedColor || "rgba(0, 0, 0, 0.8)"
-            else
-              options.defaultColor || "rgba(0, 0, 0, 0.4)"
-          innerColorWasSet = true
-        @redraw
-    }
 
 module.exports = Waveform
