@@ -1,0 +1,63 @@
+import { Controller } from 'stimulus'
+import LargePlayAnimation from '../animation/large_play_animation'
+import Waveform from '../animation/waveform.coffee'
+
+export default class extends Controller {
+  static targets = ['play', 'playButton', 'waveform', 'seekBar']
+
+  initialize() {
+    this.animation = new LargePlayAnimation()
+    this.animation.init()
+    this.waveform = this.setupWaveform()
+    this.percentPlayed = 0.0
+    this.setDelegate()
+    this.checkIfLoading()
+  }
+
+  // if we were initailized *while* an mp3 is loading, connect to it
+  checkIfLoading() {
+    if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
+      this.animation.showLoading()
+    } else if (this.delegate && this.delegate.isPlaying) {
+      this.animation.showPause()
+    }
+  }
+
+  // this is the controller that the big play button / waveform is linked to
+  setDelegate() {
+    const activeTrack = document.querySelector('.tracklist li.active')
+    this.delegate = this.application.getControllerForElementAndIdentifier(activeTrack, 'playlist-playback')
+  }
+
+  togglePlay(e) {
+    this.setDelegate()
+    this.delegate.togglePlay(e)
+  }
+
+  skim(e) {
+    const offx = e.clientX - this.waveformTarget.getBoundingClientRect().left
+    this.seekBarTarget.style.left = `${offx}px`
+  }
+
+  seek(e) {
+    const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
+    const newPosition = offset / this.waveformTarget.offsetWidth
+    this.delegate.seek(newPosition)
+  }
+
+  setupWaveform() {
+    const controller = this
+    const data = this.data.get('waveform')
+    return new Waveform({
+      container: this.waveformTarget,
+      height: 54,
+      innerColor: function (percent, _) {
+        if (percent < controller.percentPlayed)
+          return '#353535';
+        else
+          return '#c7c6c3';
+      },
+      data,
+    })
+  }
+}
