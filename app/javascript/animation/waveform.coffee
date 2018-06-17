@@ -31,7 +31,6 @@ class Waveform
     scaled = @scale(options.data)
     @setDataInterpolated(scaled)
     @update()
-    console.log(@data)
 
   setData: (data) ->
     @data = data
