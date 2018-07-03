@@ -26,8 +26,10 @@ class Waveform
       @canvas.style.height = "#{@height}px"
       @context.scale @ratio, @ratio
 
-    if options.data.length < 2 
+    if options.data.length < 2
       options.data = [0,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0.9,1,0]
+    else
+      options.data = options.data.split(',').map (s) -> parseFloat(s)
     scaled = @scale(options.data)
     @setDataInterpolated(scaled)
     @update()
@@ -42,7 +44,6 @@ class Waveform
     @redraw()
 
   scale: (data) ->
-    data = data.split(',').map (s) -> parseFloat(s)
     max = Math.max.apply(Math, data)
     min = Math.min.apply(Math, data)
     scale = Math.max(Math.abs(max), Math.abs(min))
