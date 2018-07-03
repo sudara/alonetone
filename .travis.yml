@@ -28,7 +28,7 @@ notifications:
     template:
       - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) by %{author}"
     rooms:
-      secure: JlRUT/esqDvsl+8+einhAQx0NUnpLuaoy/Rq70HHCU+zJ7VfwVvbdINMOQKoI44Lj1SeyaJGRfEGkjw9dsWnHBI5TP8wp+i7Z7W9XBWndvWI3Us5SRJ3FoXKt7cVZYVTfcHPvHUOAT7m8szTk+jCkCmeWkRlzKj6X0Lw62UEsB8=
+      secure: QM0e0lpejQw6F19tYUx6kPP3+/DjgJaCmuKIVKSmF+Dedoz/DVwIPdDadwKxnvfoDT/QKr8+KeaJHhis6iJEPeKffb2Jm7U0Z6bjpgtzQ0LnXGtpRhUuoJvzZqlP4oQQgKvQy83VpigXKcM0QvODgIWev4X7/aPPKqaDEBrHO0A=
 env:
   global:
   - S3_BUCKET_NAME=junkinthetrunk
