@@ -38,7 +38,6 @@ export default class extends Controller {
 
   whilePlaying() {
     if (this.sound.playing()) {
-      this.loaded = true
       this.whilePlayingCallback()
       if (!this.nextTrackLoading && this.positionFromEnd(10000)) {
         this.preloadNextTrack()

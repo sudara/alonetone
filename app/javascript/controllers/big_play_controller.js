@@ -8,6 +8,7 @@ export default class extends Controller {
   initialize() {
     this.animation = new LargePlayAnimation()
     this.animation.init()
+    this.animation.play()
     this.waveform = this.setupWaveform()
     this.percentPlayed = 0.0
     this.setDelegate()
@@ -19,7 +20,7 @@ export default class extends Controller {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       this.animation.showLoading()
     } else if (this.delegate && this.delegate.isPlaying) {
-      this.animation.showPause()
+      this.animation.setPause()
     }
   }
 
