@@ -14,10 +14,6 @@ export default class extends Controller {
     this.setupHowl()
   }
 
-  inPlaylist() {
-    return this.data.has('inPlaylist') === true
-  }
-
   disconnect() {
     if (this.sound.playing()) {
       this.sound.pause()
