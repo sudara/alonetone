@@ -9,7 +9,8 @@ export default class extends PlaybackController {
 
   playCallback(e) {
     if (!this.bigPlay) this.setBigPlay()
-    this.bigPlay.animation.showLoading()
+    if (this.loaded) this.bigPlay.animation.setPause()
+    else this.bigPlay.animation.showLoading()
   }
 
   pauseCallback() {
@@ -18,7 +19,10 @@ export default class extends PlaybackController {
 
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
-    if (this.sound.seek() > 0.5) this.bigPlay.animation.setPause()
+    if (!this.loaded) {
+      this.bigPlay.animation.showPause()
+      this.loaded = true
+    }
     this.bigPlay.percentPlayed = this.percentPlayed()
     this.bigPlay.waveform.update()
   }
