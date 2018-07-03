@@ -25,8 +25,11 @@ export default class extends Controller {
 
   // this is the controller that the big play button / waveform is linked to
   setDelegate() {
-    const activeTrack = document.querySelector('.tracklist li.active')
-    this.delegate = this.application.getControllerForElementAndIdentifier(activeTrack, 'playlist-playback')
+    const itemInPlaylist = document.querySelector('.tracklist li.active')
+    if (itemInPlaylist) this.delegate = this.application.getControllerForElementAndIdentifier(itemInPlaylist, 'playlist-playback')
+    else {
+      this.delegate = this.application.getControllerForElementAndIdentifier(this.element, 'single-playback') 
+    }
   }
 
   togglePlay(e) {

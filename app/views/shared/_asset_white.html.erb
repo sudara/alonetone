@@ -1,8 +1,8 @@
-<div class="track-content" data-controller="big-play" data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
+<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
   <div class="player">
     <div class="play-button-container" data-target="big-play.play" data-action="click->big-play#togglePlay">
       <div class='play-button play-control'>
-        <%= link_to media_url(@asset) do %>
+        <%= link_to media_url(@asset), data: { target: 'single-playback.play' } do %>
 				<svg data-target="big-play.playButton" class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
 				 <defs>
 				  <clipPath id="dottyMask">
