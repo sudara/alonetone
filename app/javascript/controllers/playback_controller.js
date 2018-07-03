@@ -10,6 +10,7 @@ export default class extends Controller {
     this.preInitialize()
     this.loaded = false
     this.isPlaying = false
+    this.nextTrackLoading = false
     this.setupHowl()
   }
 
@@ -19,7 +20,6 @@ export default class extends Controller {
 
   disconnect() {
     if (this.sound.playing()) {
-      console.log('disconnecting and stopping playback')
       this.sound.pause()
     }
   }
@@ -30,7 +30,7 @@ export default class extends Controller {
       src: Array(this.url),
       html5: true,
       preload: this.preload,
-      onend: controller.playNextTrack.bind(controller),
+      //onend: controller.playNextTrack.bind(controller),
       onplay() {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
@@ -44,20 +44,26 @@ export default class extends Controller {
     if (this.sound.playing()) {
       this.loaded = true
       this.whilePlayingCallback()
-      // we don't want to update this 60 times a second, at most 10
-      setTimeout(requestAnimationFrame(this.whilePlaying.bind(this)), 100)
-    } else {
-      console.log('not yet playing')
+      if (!this.nextTrackLoading && this.positionFromEnd(10000)) {
+        this.preloadNextTrack()
+        this.nextTrackLoading = true
+      }
+      if (this.positionFromEnd(200)) {
+        this.playNextTrack()
+      } else {
+        // we don't want to update this 60 times a second, at most 10
+        setTimeout(requestAnimationFrame(this.whilePlaying.bind(this), 100))
+      }
     }
   }
 
   play() {
+    this.sound.play()
     if (player) {
       player.pause()
     }
     player = this
     this.isPlaying = true
-    this.sound.play()
     this.element.classList.add('playing')
     this.playCallback()
   }
@@ -78,14 +84,28 @@ export default class extends Controller {
     }
   }
 
-  playNextTrack() {
+  nextTrack() {
     const next = this.element.nextElementSibling
-    this.application.getControllerForElementAndIdentifier(next, this.identifier).play()
+    return this.application.getControllerForElementAndIdentifier(next, this.identifier)
+  }
+
+  playNextTrack() {
+    if (this.nextTrack) this.nextTrack.play()
+  }
+
+  preloadNextTrack() {
+    this.nextTrack = this.nextTrack()
+    if (this.nextTrack) this.nextTrack.sound.load()
   }
 
   seek(newPosition) {
     if (!this.isPlaying) this.play()
     this.sound.seek(this.sound.duration() * newPosition)
+  }
+
+  positionFromEnd(ms) {
+    const positionFromEnd = ((this.sound.duration() - this.sound.seek())) * 1000
+    return ms > positionFromEnd
   }
 
   percentPlayed() {
