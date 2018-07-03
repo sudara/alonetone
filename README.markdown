@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/sudara/alonetone.svg?branch=master)](http://travis-ci.org/sudara/alonetone)
+[![Build Status](https://api.travis-ci.com/sudara/alonetone.svg?branch=master)](http://travis-ci.org/sudara/alonetone)
 [![Code Climate](https://codeclimate.com/github/sudara/alonetone.png)](https://codeclimate.com/github/sudara/alonetone)
 
 [![View performance data on Skylight](https://badges.skylight.io/problem/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
