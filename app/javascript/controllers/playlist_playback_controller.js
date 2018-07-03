@@ -75,7 +75,7 @@ export default class extends PlaybackController {
 
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
-    if (this.sound.seek() > 1) this.bigPlay.animation.setPause()
+    if (this.sound.seek() > 0.5) this.bigPlay.animation.setPause()
     this.bigPlay.percentPlayed = this.percentPlayed()
     this.bigPlay.waveform.update()
   }
