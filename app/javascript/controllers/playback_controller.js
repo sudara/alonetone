@@ -4,7 +4,7 @@ import { Howl } from 'howler'
 let player
 
 export default class extends Controller {
-  static targets = ['play', 'title', 'time', 'seekBarContainer', 'seekBarLoaded']
+  static targets = ['play', 'title', 'seekBarContainer', 'seekBarLoaded']
 
   initialize() {
     this.preInitialize()
@@ -50,6 +50,7 @@ export default class extends Controller {
         setTimeout(requestAnimationFrame(this.whilePlaying.bind(this), 100))
       }
     }
+    this.calculateTime()
   }
 
   play() {
@@ -105,5 +106,12 @@ export default class extends Controller {
 
   percentPlayed() {
     return this.sound.seek() / this.sound.duration()
+  }
+
+  calculateTime() {
+    const time = Math.floor(this.sound.seek())
+    const min = Math.floor(time / 60) 
+    const sec = time % 60
+    this.time = min + ':' + (sec >= 10 ? sec : '0' + sec)
   }
 }

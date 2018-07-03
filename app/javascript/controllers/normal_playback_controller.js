@@ -5,7 +5,7 @@ let currentlyOpen
 
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
-  static targets = ['playButton', 'details', 'seekBarPlayed']
+  static targets = ['playButton', 'details', 'time', 'seekBarPlayed']
 
   preInitialize() {
     this.animation = new PlayAnimation()
@@ -16,16 +16,19 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     this.animation.setPause()
     this.updateSeekBarPlayed()
+    this.timeTarget.innerHTML = this.time
   }
 
   playCallback() {
-    this.animateLoading()
+    if (!this.loaded) this.animateLoading()
+    else this.animation.setPause()
     this.openDetails()
     this.updateSeekBarLoaded()
   }
   
   pauseCallback() {
     this.animation.setPlay()
+    document.getElementById('play-svg-container').append(document.getElementById('playAnimationSVG'))
     this.playButtonTarget.style.display = 'block'
   }
 

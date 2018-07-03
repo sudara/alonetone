@@ -82,6 +82,7 @@ export default class extends PlaybackController {
     } 
     this.bigPlay.percentPlayed = this.percentPlayed()
     this.bigPlay.waveform.update()
+    this.bigPlay.timeTarget.innerHTML = this.time
   }
 
   setBigPlay() {
