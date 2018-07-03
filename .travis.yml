@@ -1,4 +1,6 @@
 language: ruby
+node_js: 
+ - node
 cache: 
   - bundler
   - yarn
