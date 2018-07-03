@@ -5,7 +5,7 @@ cache:
   - directories
     - "node_modules"
 before_install:
-- npm i -g npm@latest
+- npm i -g node@latest
 - sudo apt-get update -qq
 - sudo apt-get install -y libsndfile-dev lame
 - yarn
