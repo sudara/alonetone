@@ -1,6 +1,6 @@
 class Forum < ActiveRecord::Base
   
-  scope :ordered, -> { order('position ASC') }
+  scope :ordered, -> { order(position: :asc) }
   scope :with_topics, -> { preload(:recent_post).preload(:recent_topic) }
   
   acts_as_list
