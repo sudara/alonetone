@@ -43,13 +43,14 @@ Alonetone::Application.routes.draw do
     end
 
     get  'about/' => 'pages#about'
-    get  'about/:action' => 'pages'
-    get  'about/halp/:action' => 'pages', :as => "halp"
 
-    get 'signup'    => 'users#new'
-    get 'settings'  => 'users#edit'
-    get '/activate/:perishable_token' => 'users#activate'
+    %w(about press stats ok).each do |action|
+      get "about/#{action}", to: "pages##{action}"
+    end
 
+    get 'signup', to: 'users#new'
+    get 'settings', to: 'users#edit'
+    get '/activate/:perishable_token', to: 'users#activate'
 
     # shortcut to profile
     get ':login/bio' => 'users#bio', :as => 'profile'
