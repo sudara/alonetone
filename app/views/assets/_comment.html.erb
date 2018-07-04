@@ -1,4 +1,4 @@
-<div id="comment_<%= asset.unique_id %>" class="comment_asset">
+<div id="comment_<%= asset.unique_id %>" class="comment_asset" data-controller="comment">
   <div class="comment_form">
     <%= form_for :comment, :url => user_track_comments_path(asset.user, asset), :id=>"comment_form_#{asset.unique_id}" do |f| %>
      
@@ -9,10 +9,12 @@
      <%= f.text_area :body, :rows => 4, :cols => 40, :class=> 'double_trouble', :id=>"comment_body_#{asset.unique_id}"  %>
 
     <div class="private_check_box">
-        <%= f.check_box :private, :class => 'private', :id => "checkbox_#{asset.unique_id}" %> <label for="checkbox_<%= asset.unique_id %>"><span class="public">Make Private</span></label>
+        <%= f.check_box :private, :class => 'private', 
+          id: "checkbox_#{asset.unique_id}", data: { target: 'comment.checkbox', action: 'comment#toggle'}  %> 
+          <label for="checkbox_<%= asset.unique_id %>"><span class="public">Make Private</span></label>
     </div>
 
-    <span class="private" style="display:none;">
+    <span class="private hidden" data-target="comment.banner">
       <%= image_tag 'icons/private.png' %> Only <%= asset.user.name%> and alonetone mods will see this
     </span>
      

@@ -343,16 +343,10 @@
             float: left;
             clear: both;
             margin-top: 24px;
-
-
-     
-
-
-
           }
           span.private {
             font-size: 12px !important;
-            display: block!important;
+            display: block;
             height: 24px;
             line-height: 24px;
             color: $white;
@@ -361,7 +355,7 @@
             position: relative;
             top: -15px;
             border-radius: 0 0 4px 4px;
-            img {
+            &.hidden {
               display: none;
             }
           }
