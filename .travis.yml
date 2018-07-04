@@ -1,9 +1,8 @@
 language: ruby
-cache: 
-  - bundler
-  - yarn
-  - directories
-    - "node_modules"
+cache:
+- bundler
+- yarn
+- directories - "node_modules"
 before_install:
 - npm i -g node@latest
 - sudo apt-get update -qq
@@ -26,9 +25,10 @@ notifications:
     on_success: always
     on_failure: always
     template:
-      - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) by %{author}"
+    - ":%{result}: Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>)
+      by %{author}"
     rooms:
-      - secure: W4LimJ43184wffHK+yOWvvABRzkeu5QBZSF5HpSbO0i7NuETek0Z0QWHo8qAMZnFHkg6VZRZ7SwvcCH1DK0oWcCXNKvKnDDP3LHCiKPRUlPrCgVkURCiWeal84CeTkKpEmdQ9hfcyj7CjuZmhP6G4AjOE4FGoSbDGiU8IXbod2A=
+      secure: o8OY94XPJy+h6NI5gRKFWOBAkfyZ+T5Z2kn/Ah9LntNzm4n7j/a+6j9bxnbAPp3y962QBugx/X9cPKYmP7lNYICNjqzul+hoKAdaxc1hwrcCaNQO2HeWMQIer8GPjK6Dw4bXcUdqVHWj+XhXy1FR/SrAKZE/1H7NrYFuuJbXAbfVhLPqQSl7Sjlivc8TgOkTRfwfTGeUzg3qyIFOMF+INtcdriEHFf7rBz/bpWsEz3AI52GWxVi8LQly217LGrrJvyBd4IWTz9NLSWIz1qxV6q59WStshhnPxI2h++fdwVToN0oUldLDWLp9Y6Ep4JGquHxKCECLjU422kG82h/aFcUG3CohOvFoxPSoe03sMVSFpts972Pf3Zjzrs3nLdkpkyr5N+Nh9y0FdMK8dGRsEir5p1KIRF82nyqbqz/ZKqZdy/aDQVlAGc3ZNUyic5zd4Xs9bwnPUDtmMIEc6frTOiWNs/iB7A+1o5oiOxulAgc4DgpFw2whPlVs7S+3eJhm4JSrhQFL4S1Z1DcIDdBigrOEFi3PbR6IIGsYAeehIp2CrzfSuxlwTDZhzCSFd0aP0Gf6R+coCVXj+xppaD39BTlYImoJ1emgixeysW89Vpm5IVyQyJvBm0w1vzsxkGoq6M9rXFktaB7nZB28NG8O5ETNU0PIGBwWs/pSBCIfxdk=
 env:
   global:
   - S3_BUCKET_NAME=junkinthetrunk
