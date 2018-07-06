@@ -74,10 +74,10 @@ class Topic < ActiveRecord::Base
   def update_cached_post_fields(post)
     # these fields are not accessible to mass assignment
     if remaining_post = post.frozen? ? recent_post : post
-      last_updated_at = remaining_post.created_at
-      last_user_id = remaining_post.user_id
-      last_post_id = remaining_post.id
-      Topic.reset_counters id, :posts if id
+      update_columns(:last_updated_at => remaining_post.created_at,
+        :last_user_id => remaining_post.user_id,
+        :last_post_id => remaining_post.id)
+      Topic.reset_counters id, :posts
     else
       self.destroy
     end
