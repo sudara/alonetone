@@ -31,13 +31,13 @@ export default class extends PlaybackController {
       Rails.fire(this.loadTrackTarget, 'click')
     }
     this.playTarget.classList.replace('play-button', 'pause-button')
-    this.playTarget.firstElementChild.classList.replace('fa-play', 'fa-pause')
+    this.playTarget.firstElementChild.setAttribute('data-icon', 'pause')
   }
 
   pauseCallback() {
     this.bigPlay.animation.setPlay()
     this.playTarget.classList.replace('pause-button', 'play-button')
-    this.playTarget.firstElementChild.classList.replace('fa-pause', 'fa-play')
+    this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
 
   // called by popstate@window so we don't interrupt playback with back/forward
