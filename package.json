@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0",
     "@rails/webpacker": "4.0.0-pre.2",
     "@shopify/draggable": "^1.0.0-beta.7",
     "coffee-loader": "^0.9.0",
@@ -12,6 +14,7 @@
     "turbolinks": "^5.1.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
     "babel-eslint": "^8.2.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^5.0.1",
