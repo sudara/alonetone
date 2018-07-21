@@ -18,7 +18,7 @@
     width: $mobile-site-width-wide;
     margin-bottom: 20px;
   }
-  @media only screen and (max-width: 1010px) and (min-width: 780px) {
+  @media only screen and (max-width: 1057px) and (min-width: 803px) {
 
     li {
       display: none;
@@ -29,15 +29,15 @@
       }
     }
   }
-  @media only screen and (max-width: 780px) {
+  @media only screen and (max-width: 803px) {
     li {
       display: none;
-      &:nth-child(3) {
-        display: none;
-      }
       &:nth-child(1),
       &:nth-child(2) {
         display: block;
+      }
+      &:nth-child(3) {
+        display: none;
       }
     }
   }
