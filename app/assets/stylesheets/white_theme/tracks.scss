@@ -19,9 +19,9 @@
     }
   }
   &.open {
-   box-shadow: 0 -2px 15px 4px #65666627;
-   position: relative;
-   z-index: 2;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 11px 19px 4px #6566667a;
   }
   &:last-child {
     border-bottom: 0;
@@ -346,15 +346,15 @@
           }
           span.private {
             font-size: 12px !important;
-            display: block;
-            height: 24px;
             line-height: 24px;
-            color: $white;
-            background-color: $samo-dark-orange;
-            margin-top: 0;
             position: relative;
             top: -15px;
+            display: block;
+            height: 24px;
+            margin-top: 0;
+            color: $white;
             border-radius: 0 0 4px 4px;
+            background-color: $samo-dark-orange;
             &.hidden {
               display: none;
             }
