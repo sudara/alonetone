@@ -180,8 +180,6 @@
     box-sizing: border-box;
     margin-top: -400px;
     transition: margin 400ms cubic-bezier(.17, .04, .03, .94);
-    // padding-right: 17px;
-    // padding-left: 17px;
     box-shadow: inset 0 1px 3px #f2f2f2;
     @media #{$tablet} {
       padding-right: $baseline / 2;
@@ -233,6 +231,7 @@
         flex: 1;
         .user_description {
           word-wrap: break-word;
+          margin-bottom: 15px;
           span.hint {
             font-size: 14px;
             display: block;
@@ -298,7 +297,7 @@
       padding-left: 10px;
       &::before {
         position: absolute;
-        top: -13px;
+        top: 25px;
         left: 49%;
         content: '\A';
         border-width: 0 9px 13px 9px;
@@ -314,8 +313,8 @@
             overflow: auto;
             color: #969393;
             span.comment_as_guest {
-              color: #4F4D4D;
               text-transform: capitalize;
+              color: #4f4d4d;
             }
             a {
               color: $samo-orange;
@@ -339,6 +338,8 @@
             border: 1px solid #d7dbdb;
             border-radius: 6px;
             background-color: #f5f5f5;
+            border-radius: 6px 6px 0 0;
+            resize: none;
             @media #{$tablet} {
               font-size: 16px;
             }
@@ -350,7 +351,11 @@
             font-size: 11px;
             float: left;
             clear: both;
-            margin-top: 24px;
+            margin-top: 0;
+            label {
+              text-transform: lowercase;
+              color: #4F4D4D;
+            }
           }
           span.private {
             font-size: 12px !important;
@@ -360,16 +365,25 @@
             display: block;
             height: 24px;
             margin-top: 0;
+            margin-left: 3px;
+            margin-right: 3px;
+            padding-left: 20px;
             color: $white;
-            border-radius: 0 0 4px 4px;
+            border-radius: 0 0 6px 6px;
             background-color: $samo-dark-orange;
+            border-color: #E02A02;
             &.hidden {
               display: none;
+            }
+            color: #FFD1B0;
+            .only_user_name, .only_alonetone_mods {
+              font-weight: bold;
+              color: #FFF;
             }
           }
           div.submit_wrapper {
             position: relative;
-            top: -3px;
+            top: -18px;
             .comment_waiting {
               font-size: 11px;
               font-weight: bold;
@@ -390,6 +404,7 @@
           }
           input.comment_submit {
             float: right;
+            clear: both;
             cursor: pointer;
             background-color: transparent;
 

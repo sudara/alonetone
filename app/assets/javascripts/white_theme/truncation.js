@@ -1,5 +1,7 @@
 (function($) {
 
+	
+
     var playButtonAndTimeWidth = 90; // make this dynamic?
 
     $( window ).resize(function() {

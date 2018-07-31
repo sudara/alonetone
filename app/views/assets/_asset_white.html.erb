@@ -69,15 +69,15 @@
           
           <%= f.text_area :body, :rows =>4, :class=> 'double_trouble', :id=>"comment_body_#{asset.unique_id}"  %>
 
+          <span class="private hidden" data-target="comment.banner">
+            Only <span class="only_user_name"><%= asset.user.name%></span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
+          </span>
+
           <div class="private_check_box">
             <%= f.check_box :private, :class => 'private', 
               id: "checkbox_#{asset.unique_id}", data: { target: 'comment.checkbox', action: 'comment#toggle'}  %> 
               <label for="checkbox_<%= asset.unique_id %>"><span class="public">Make Private</span></label>
           </div>
-
-          <span class="private hidden" data-target="comment.banner">
-            Only <%= asset.user.name%> and alonetone mods will see this
-          </span>
           
           <%= f.hidden_field :commentable_type, :value => 'Asset', :id=> "comment_commentable_type_#{asset.unique_id}"%>
           <%= f.hidden_field :commentable_id, :value => asset.id, :id=> "comment_commentable_type_#{asset.unique_id}"%>
@@ -87,7 +87,7 @@
                 <div class="text"><!-- placeholder response text --></div>
               </div>
               <div class="small_spinner" style="display:none;"></div>
-              <%= f.submit "send comment to #{asset.user.name}".html_safe, :class => 'comment_submit',:id => "submit_#{asset.unique_id}"%> 
+              <%= f.submit "post comment".html_safe, :class => 'comment_submit',:id => "submit_#{asset.unique_id}"%> 
             </div>
           <% end %>  
         </div>
