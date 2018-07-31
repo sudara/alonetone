@@ -312,6 +312,14 @@
             font-size: 12px;
             line-height: 37px;
             overflow: auto;
+            color: #969393;
+            span.comment_as_guest {
+              color: #4F4D4D;
+              text-transform: capitalize;
+            }
+            a {
+              color: $samo-orange;
+            }
             img {
               float: left;
               width: 27px;
