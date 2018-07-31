@@ -46,14 +46,12 @@ document.addEventListener("turbolinks:load", function() {
       $(this).removeClass('no_pic') // otherwise turbolinks:load will keep appending
     })
 
-    $("a.add_to_favorites").load("<%= asset_path('default/fave-animation.svg') %>");
-
     $("div.asset").click( function() {
-        var myFaveAnim = new FaveAnim($(this).find("a.add_to_favorites"));
-        myFaveAnim.init();
-        if ( $(this).find("a.add_to_favorites").hasClass("favorited") ) {
-            myFaveAnim.setFave();
-        }
+       // var myFaveAnim = new FaveAnim($(this).find("a.add_to_favorites"));
+       // myFaveAnim.init();
+      //  if ( $(this).find("a.add_to_favorites").hasClass("favorited") ) {
+      //      myFaveAnim.setFave();
+      //  }
         $(this).find("a.add_to_favorites").click( function() {
             if ( $(this).hasClass("favorited") ) {
                 myFaveAnim.clickFave();

@@ -1,4 +1,7 @@
-function FaveAnim(myDiv) {
+import { TweenMax } from 'gsap/TweenMax'
+import morphSVGPlugin from './MorphSVGPlugin'
+
+export default function FaveAnimation(myDiv) {
     var mainTl;
     var purplePopTl;
     var redPopTl;
@@ -9,15 +12,15 @@ function FaveAnim(myDiv) {
     var bluePopTl;
     var redPop2Tl;
     var redPop3Tl;;
-    var redPop3 = myDiv.find('.redPop3');
-    var redPop2 = myDiv.find('.redPop2');
-    var bluePop = myDiv.find('.bluePop');
-    var yellowPop = myDiv.find('.yellowPop');
-    var purplePop = myDiv.find('.purplePop');
-    var greenPop = myDiv.find('.greenPop');
-    var redPop = myDiv.find('.redPop');
-    var outline = myDiv.find('.outline');
-    var heart = myDiv.find('.heart');
+    var redPop3 = myDiv.querySelector('.redPop3');
+    var redPop2 = myDiv.querySelector('.redPop2');
+  var bluePop = myDiv.querySelector('.bluePop');
+  var yellowPop = myDiv.querySelector('.yellowPop');
+  var purplePop = myDiv.querySelector('.purplePop');
+  var greenPop = myDiv.querySelector('.greenPop');
+  var redPop = myDiv.querySelector('.redPop');
+  var outline = myDiv.querySelector('.outline');
+  var heart = myDiv.querySelector('.heart');
 
     this.init = function() {
 
