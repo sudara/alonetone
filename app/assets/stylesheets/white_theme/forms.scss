@@ -1,6 +1,13 @@
 
 /* INPUT STYLES */
 
+/* Remove Blue Glow from Webkit Browsers on focus */
+input,
+textarea,
+select {
+    outline: 0;
+}
+
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
