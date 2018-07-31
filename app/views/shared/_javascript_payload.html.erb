@@ -7,7 +7,7 @@
      <% if logged_in? %>
         '<%= image_tag current_user.avatar(:small), size: '25' %>Say something, <%= escape_javascript(current_user.name)%>:'+
      <% else %>
-        '<%= image_tag 'default/no-pic_white.svg', size: '25' %> Say something as a guest or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:'+
+        '<%= image_tag 'default/no-pic_white.svg', size: '25' %> Comment as a <span class="comment_as_guest">Guest</span> or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:'+
      <% end %>
   '</div>';
 
