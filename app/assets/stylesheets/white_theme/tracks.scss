@@ -232,6 +232,9 @@
         .user_description {
           word-wrap: break-word;
           margin-bottom: 15px;
+          img {
+            display: none;
+          }
           span.hint {
             font-size: 14px;
             display: block;
