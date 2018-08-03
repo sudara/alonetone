@@ -60,7 +60,8 @@
     <h1><%= @asset.name %></h1>
 
     <% unless @playlist %>
-      <h3><%= @asset.user.display_name %></h3>
+      <h3><%= link_to @asset.user.display_name, user_home_path(@asset.user) %></h3>
+      
     <% end %>
     <%= markdown(@asset.description) %>
 
