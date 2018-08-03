@@ -27,9 +27,9 @@ class Asset
   end
  
   def self.update_hotness
-    Asset.select(:id, :user_id, :created_at).find_each(:batch_size => 500) do |a| # for some reason find_each doesn't work here...
+    Asset.find_each do |a|
       # These use update_all so that they do not trigger callbacks and invalidate cache
-      Asset.where(:id => a.id).update_all(:hotness => a.calculate_hotness, :listens_per_week => a.listens_per_week)
+      a.update(hotness: a.calculate_hotness, listens_per_week: a.listens_per_week)
     end 
   end
    
