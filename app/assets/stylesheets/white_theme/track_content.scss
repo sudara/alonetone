@@ -37,6 +37,11 @@
       float: right;
       margin-top: 18px;
     }
+    .edit-link + .edit-link {
+      margin-right: 8px;
+    }
+
+
     p.track-stats {
       font-family: $sans-font;
       font-size: 12px;
