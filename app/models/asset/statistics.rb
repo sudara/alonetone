@@ -29,7 +29,7 @@ class Asset
   def self.update_hotness
     Asset.find_each do |a|
       # These use update_all so that they do not trigger callbacks and invalidate cache
-      a.update(hotness: a.calculate_hotness, listens_per_week: a.listens_per_week)
+      a.update_columns(hotness: a.calculate_hotness, listens_per_week: a.listens_per_week)
     end 
   end
    
