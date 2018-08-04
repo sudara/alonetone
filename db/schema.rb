@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_12_22_143311) do
+ActiveRecord::Schema.define(version: 2018_01_10_200009) do
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
@@ -250,14 +250,14 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
 
   create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "messageboard_id", null: false
-    t.string "name", limit: 191, null: false
-    t.string "description"
+    t.text "name", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug", limit: 191, null: false
-    t.index ["messageboard_id", "slug"], name: "index_thredded_categories_on_messageboard_id_and_slug", unique: true
+    t.text "slug", null: false
+    t.index ["messageboard_id", "slug"], name: "index_thredded_categories_on_messageboard_id_and_slug", unique: true, length: { slug: 191 }
     t.index ["messageboard_id"], name: "index_thredded_categories_on_messageboard_id"
-    t.index ["name"], name: "thredded_categories_name_ci"
+    t.index ["name"], name: "thredded_categories_name_ci", length: 191
   end
 
   create_table "thredded_messageboard_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -280,14 +280,14 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
     t.bigint "thredded_messageboard_id", null: false
     t.datetime "last_seen_at", null: false
     t.index ["thredded_messageboard_id", "last_seen_at"], name: "index_thredded_messageboard_users_for_recently_active"
-    t.index ["thredded_messageboard_id", "thredded_user_detail_id"], name: "index_thredded_messageboard_users_primary"
+    t.index ["thredded_messageboard_id", "thredded_user_detail_id"], name: "index_thredded_messageboard_users_primary", unique: true
     t.index ["thredded_messageboard_id"], name: "index_thredded_messageboard_users_on_thredded_messageboard_id"
     t.index ["thredded_user_detail_id"], name: "index_thredded_messageboard_users_on_thredded_user_detail_id"
   end
 
   create_table "thredded_messageboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", limit: 191, null: false
-    t.string "slug", limit: 191
+    t.text "name", null: false
+    t.text "slug"
     t.text "description"
     t.integer "topics_count", default: 0
     t.integer "posts_count", default: 0
@@ -299,7 +299,7 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
     t.datetime "updated_at", null: false
     t.index ["last_topic_id"], name: "index_thredded_messageboards_on_last_topic_id"
     t.index ["messageboard_group_id"], name: "index_thredded_messageboards_on_messageboard_group_id"
-    t.index ["slug"], name: "index_thredded_messageboards_on_slug"
+    t.index ["slug"], name: "index_thredded_messageboards_on_slug", unique: true, length: 191
   end
 
   create_table "thredded_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -346,8 +346,7 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
   create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.text "content"
-    t.string "ip"
-    t.string "source", default: "web"
+    t.string "source", limit: 191, default: "web"
     t.bigint "postable_id", null: false
     t.bigint "messageboard_id", null: false
     t.integer "moderation_state", null: false
@@ -365,9 +364,9 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
     t.bigint "user_id"
     t.text "content"
     t.bigint "postable_id", null: false
-    t.string "ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["postable_id", "created_at"], name: "index_thredded_private_posts_on_postable_id_and_created_at"
     t.index ["postable_id"], name: "index_thredded_private_posts_on_postable_id"
     t.index ["user_id"], name: "index_thredded_private_posts_on_user_id"
   end
@@ -375,16 +374,17 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
   create_table "thredded_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
-    t.string "title", null: false
-    t.string "slug", limit: 191, null: false
+    t.text "title", null: false
+    t.text "slug", null: false
     t.integer "posts_count", default: 0
-    t.string "hash_id", limit: 191, null: false
+    t.string "hash_id", limit: 20, null: false
     t.datetime "last_post_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hash_id"], name: "index_thredded_private_topics_on_hash_id"
+    t.index ["last_post_at"], name: "index_thredded_private_topics_on_last_post_at"
     t.index ["last_user_id"], name: "index_thredded_private_topics_on_last_user_id"
-    t.index ["slug"], name: "index_thredded_private_topics_on_slug"
+    t.index ["slug"], name: "index_thredded_private_topics_on_slug", unique: true, length: 191
     t.index ["user_id"], name: "index_thredded_private_topics_on_user_id"
   end
 
@@ -407,23 +407,24 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
   create_table "thredded_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
-    t.string "title", null: false
+    t.text "title", null: false
     t.string "slug", limit: 191, null: false
     t.bigint "messageboard_id", null: false
     t.integer "posts_count", default: 0, null: false
     t.boolean "sticky", default: false, null: false
     t.boolean "locked", default: false, null: false
-    t.string "hash_id", limit: 191, null: false
-    t.string "type", limit: 191
+    t.string "hash_id", limit: 20, null: false
     t.integer "moderation_state", null: false
     t.datetime "last_post_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hash_id"], name: "index_thredded_topics_on_hash_id"
+    t.index ["last_post_at"], name: "index_thredded_topics_on_last_post_at"
     t.index ["last_user_id"], name: "index_thredded_topics_on_last_user_id"
     t.index ["messageboard_id", "slug"], name: "index_thredded_topics_on_messageboard_id_and_slug", unique: true
     t.index ["messageboard_id"], name: "index_thredded_topics_on_messageboard_id"
     t.index ["moderation_state", "sticky", "updated_at"], name: "index_thredded_topics_for_display"
+    t.index ["slug"], name: "index_thredded_topics_on_slug", unique: true
     t.index ["title"], name: "thredded_topics_title_fts", type: :fulltext
     t.index ["user_id"], name: "index_thredded_topics_on_user_id"
   end
@@ -475,7 +476,6 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
   create_table "thredded_user_private_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
-    t.integer "page", default: 1, null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
     t.index ["user_id"], name: "index_thredded_user_private_topic_read_states_on_user_id"
@@ -493,7 +493,6 @@ ActiveRecord::Schema.define(version: 2017_12_22_143311) do
   create_table "thredded_user_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
-    t.integer "page", default: 1, null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id", "postable_id"], name: "thredded_user_topic_read_states_user_postable", unique: true
     t.index ["user_id"], name: "index_thredded_user_topic_read_states_on_user_id"
