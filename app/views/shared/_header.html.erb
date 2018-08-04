@@ -45,7 +45,7 @@
   <% unless logged_in? %>
     <div class="header_login">
       <li id="login">
-        <%= link_to 'Login', login_path, :class => 'login_button' %>
+        <%= link_to 'Login', main_app.login_path, :class => 'login_button' %>
       </li>
     </div>
   <% end %>
