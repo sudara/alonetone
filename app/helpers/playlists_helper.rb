@@ -14,7 +14,7 @@ module PlaylistsHelper
     "<div class='no_pic'></div>".html_safe
   end
 
-  def greenfield_playlist_cover(playlist, size)
+  def playlist_cover(playlist, size)
     if playlist.has_no_cover?
       return svg_cover
     # greenfield size did not exist before this id
