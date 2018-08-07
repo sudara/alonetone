@@ -34,6 +34,12 @@ aside.thredded--currently-online {
   background-color: #fff;
   @include samo-shadow-and-radius();
   @include match-dynamic-site-width('narrow');
+  @media #{$mobile} {
+    padding-left: 4%;
+    padding-right: 4%;
+    width: 100%;
+  }
+
   header {
     nav {
       .thredded--main-navigation {
