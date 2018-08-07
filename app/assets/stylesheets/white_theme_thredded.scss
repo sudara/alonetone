@@ -96,6 +96,11 @@ aside.thredded--currently-online {
       border-top: 0;
     }
   }
+  .thredded--post--content {
+    h1, h2, h3 {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .thredded--button, .thredded--form--submit {
