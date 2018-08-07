@@ -1,5 +1,8 @@
-<div id="playlist-and-track-content">
+<%= content_for :head do %>
+  <link rel="preload" <%= playlist_cover(@playlist, :greenfield) %> as="image">
+<% end %>
 
+<div id="playlist-and-track-content">
 <%= render 'playlist_white' %>
 
 <% if @asset %>
@@ -8,7 +11,7 @@
 
   <div class="track-content track-content-cover-view">
     <div class="large-cover">
-      <%= greenfield_playlist_cover(@playlist, :greenfield) %>
+      <%= playlist_cover(@playlist, :greenfield) %>
     </div>
     <% if @playlist.has_any_links? %>
     <div class="playlist-options">
