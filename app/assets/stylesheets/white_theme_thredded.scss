@@ -101,6 +101,10 @@ aside.thredded--currently-online {
       margin-bottom: 0;
     }
   }
+  [type="checkbox"]:not(:checked), [type="checkbox"] {
+    left: 0;
+    position: static;
+  }
 }
 
 .thredded--button, .thredded--form--submit {
