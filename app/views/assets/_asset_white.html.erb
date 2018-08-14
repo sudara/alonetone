@@ -72,7 +72,7 @@
   	<% if logged_in? || asset.guest_can_comment? %>
       <div id="comment_track_<%= asset.unique_id %>" class="comment_track">
       <div id="comment_<%= asset.unique_id %>" class="comment_asset" data-controller="comment">
-        <div class="comment_form">
+        <div class="comment_form" data-target="comment.div">
           <%= form_with url: user_track_comments_path(asset.user, asset), 
             id: "comment_form_#{asset.unique_id}", data: { action: 'ajax:beforeSend->comment#spin' } do |f| %>
           

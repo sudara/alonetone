@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['banner', 'personalization']
+  static targets = ['banner', 'div', 'personalization']
 
   initialize() {
     this.personalizationTarget.innerHTML = window.userPersonalization
@@ -13,5 +13,6 @@ export default class extends Controller {
 
   toggle() {
     this.bannerTarget.classList.toggle('hidden')
+    this.divTarget.classList.toggle('private_banner_visible')
   }
 }
