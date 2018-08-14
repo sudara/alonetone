@@ -54,11 +54,6 @@
   padding: 0 $baseline * 1.5;
   box-sizing: border-box;
   justify-content: space-around;
-  // grid-template-areas:
-     // 'playlists playlists'
-     // 'latest popular'
-     // 'comments favorites'
-     // 'follows ......';
   grid-template-areas:
      'playlists playlists'
      'left right';

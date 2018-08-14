@@ -13,8 +13,9 @@ main {
     grid-template-areas:
     'header header'
     'playlists playlists'
-    'latest favorites'
-    'listens comments'
+    'left right'
+    // 'latest favorites'
+    // 'listens comments'
     'card card'
     'plays popular';
     .box {
@@ -51,6 +52,28 @@ main {
         margin: 0;
       }
     }
+
+  
+    #user_left_column {
+      grid-area: left;
+      > div {
+        margin-bottom: $baseline * 1.5;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  
+    #user_right_column {
+      grid-area: right;
+      > div {
+        margin-bottom: $baseline * 1.5;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
     #user_latest_area {
       grid-area: latest;
     }
