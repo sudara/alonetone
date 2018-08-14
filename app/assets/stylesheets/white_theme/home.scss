@@ -57,14 +57,6 @@
   grid-template-areas:
      'playlists playlists'
      'left right';
-  @media #{$widescreen} {
-    grid-template-columns: 31% 31% 31%;
-    max-width: none;
-    grid-template-areas:
-       'playlists playlists comments'
-       'latest popular comments'
-       'favorites follows .....'
-  }
 
   @media #{$tablet} {
     display: flex;
