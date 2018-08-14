@@ -2,7 +2,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height: 50px;
+  min-height: 70px;
   border-bottom: 1px solid $light-gray;
   background-color: $white;
   &.hover {
@@ -53,125 +53,145 @@
   .asset_top {
     position: relative;
     z-index: 1;
-    display: flex;
     background-color: #fff;
-    div.button {
-      width: 50px;
-      height: 50px;
-      a {
-        display: block;
+    .asset_top_row {
+      display: flex;
+      div.button {
         width: 50px;
         height: 50px;
-        svg {
-          width: 28px;
-          height: 28px;
-          margin-top: 11px;
-          margin-left: 8px;
-          pointer-events: none;
-        }
-      }
-    }
-    div.title {
-      display: flex;
-      overflow: hidden;
-      box-sizing: border-box;
-      width: auto;
-      height: 50px;
-      padding-top: 13px;
-
-      flex-grow: 1;
-      .title_left_column {
-        flex-grow: 1;
-        a.track_link {
-          line-height: 1.1em;
-          display: block;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-      }
-      .title_right_column {
-        position: relative;
-        width: 50px;
-        height: 100%;
-        .counter {
-          font-size: 15px;
-          font-weight: bold;
-          position: absolute;
-          right: 14px;
-          bottom: 20px;
-          text-align: right;
-        }
-        div.time {
-          font-size: 12px;
-          position: absolute;
-          right: 15px;
-          bottom: 7px;
-          display: block;
-          text-align: right;
-          color: #8c8c8c;
-        }
-      }
-      a {
-        font-size: 15px;
-        font-weight: bold;
-        text-decoration: none;
-
-        -webkit-font-smoothing: antialiased;
-      }
-      .title_left_column_bottom {
-        clear: both;
-        margin-top: -2px;
         a {
-          -webkit-font-smoothing: subpixel-antialiased;
-        }
-      }
-      span.by {
-        font-size: 11px;
-      }
-      a.artist {
-        font-size: 11px;
-        font-weight: normal;
-        color: $samo-gray;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      span.track_play, span.latest, span.popular {
-        font-size: 12px;
-        margin-left: 20px;
-      }
-      .listen_count {
-        font-size: 11px;
-        font-weight: bold;
-        position: relative;
-        top: -3px;
-        margin-left: 5px;
-        color: $orange;
-      }
-    }
-    &.hover, &.open {
-      div.button, div.title {
-        background-color: #eee;
-      }
-    }
-    &.playing {
-      div.button, div.title {
-        background-color: #eee;
-      }
-      div.button {
-        a {
-          background-position: -100px 0;
+          display: block;
+          width: 50px;
+          height: 50px;
+          svg {
+            width: 28px;
+            height: 28px;
+            margin-top: 11px;
+            margin-left: 8px;
+            pointer-events: none;
+          }
         }
       }
       div.title {
-        div.counter {
-          opacity: .99;
+        display: flex;
+        overflow: hidden;
+        box-sizing: border-box;
+        width: auto;
+        height: 50px;
+        padding-top: 13px;
+  
+        flex-grow: 1;
+        .title_left_column {
+          flex-grow: 1;
+          a.track_link {
+            line-height: 1.1em;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
         }
-        div.time {
-          color: #fecda6;
+        .title_right_column {
+          position: relative;
+          width: 50px;
+          height: 100%;
+          .counter {
+            font-size: 15px;
+            font-weight: bold;
+            position: absolute;
+            right: 14px;
+            bottom: 20px;
+            text-align: right;
+          }
+          div.time {
+            font-size: 12px;
+            position: absolute;
+            right: 15px;
+            bottom: 7px;
+            display: block;
+            text-align: right;
+            color: #8c8c8c;
+          }
+        }
+        a {
+          font-size: 15px;
+          font-weight: bold;
+          text-decoration: none;
+  
+          -webkit-font-smoothing: antialiased;
+        }
+        .title_left_column_bottom {
+          clear: both;
+          margin-top: -2px;
+          a {
+            -webkit-font-smoothing: subpixel-antialiased;
+          }
+        }
+        span.by {
+          font-size: 11px;
+        }
+        a.artist {
+          font-size: 11px;
+          font-weight: normal;
+          color: $samo-gray;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        span.track_play, span.latest, span.popular {
+          font-size: 12px;
+          margin-left: 20px;
+        }
+        .listen_count {
+          font-size: 11px;
+          font-weight: bold;
+          position: relative;
+          top: -3px;
+          margin-left: 5px;
+          color: $orange;
         }
       }
+      &.hover, &.open {
+        div.button, div.title {
+          background-color: #eee;
+        }
+      }
+      &.playing {
+        div.button, div.title {
+          background-color: #eee;
+        }
+        div.button {
+          a {
+            background-position: -100px 0;
+          }
+        }
+        div.title {
+          div.counter {
+            opacity: .99;
+          }
+          div.time {
+            color: #fecda6;
+          }
+        }
+      }
+    }
+    .asset_favorited {
+      padding-left: 50px;
+      font-size: 11px;
+      span.heart {
+        display: inline-block;
+        height: 10px;
+        width: 10px;
+        background-color: #F00;
+        margin-right: 5px;
+      }
+      span.favorited_by {
+        font-weight: bold;
+      }
+      span.favorited_when {
+        color: $samo-gray;
+      }
+      clear: both;
     }
   }
   .tracks_reveal {

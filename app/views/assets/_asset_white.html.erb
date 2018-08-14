@@ -1,31 +1,41 @@
 <%= cache( logged_in? ? "asset#{asset.cache_key}/#{theme_name}" : "guest_asset#{asset.cache_key}/#{theme_name}" ) do %>
   <div class="asset_top">
-    <div class="play-button button" data-target="normal-playback.play" data-action="click->normal-playback#togglePlay">
-        <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
-          id: "play-#{asset.unique_id}", class: 'play_link', title: 'play' do %>
-            <svg data-target="normal-playback.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
-            <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
-            </svg>
-        <% end %>
-    </div>
 
-    <div class="title" data-target="normal-playback.title" data-action="click->normal-playback#toggleDetails">
-      <div class="title_left_column">
-        <div class="title_left_column_top">
-          <a href="<%= user_track_path(asset.user, asset.permalink) %>" class="track_link" title="<%= asset.name %>">
-            <%= track_name_for(asset,200) %> <span style="font-size:12px;"><%= '&#x1f512;'.html_safe unless asset.published? %></span>             
-          </a>
-        </div>  
-        <div class="title_left_column_bottom">
-          <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
+    <div class="asset_top_row">
+
+      <div class="play-button button" data-target="normal-playback.play" data-action="click->normal-playback#togglePlay">
+          <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
+            id: "play-#{asset.unique_id}", class: 'play_link', title: 'play' do %>
+              <svg data-target="normal-playback.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+              <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
+              </svg>
+          <% end %>
+      </div>
+
+      <div class="title" data-target="normal-playback.title" data-action="click->normal-playback#toggleDetails">
+        <div class="title_left_column">
+          <div class="title_left_column_top">
+            <a href="<%= user_track_path(asset.user, asset.permalink) %>" class="track_link" title="<%= asset.name %>">
+              <%= track_name_for(asset,200) %> <span style="font-size:12px;"><%= '&#x1f512;'.html_safe unless asset.published? %></span>             
+            </a>
+          </div>  
+          <div class="title_left_column_bottom">
+            <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
+          </div>
+        </div>
+
+        <div class="title_right_column">
+          <div class='counter'></div>
+          <div class='time' data-target="normal-playback.time"><%= asset.length %></div>
         </div>
       </div>
 
-      <div class="title_right_column">
-        <div class='counter'></div>
-        <div class='time' data-target="normal-playback.time"><%= asset.length %></div>
-      </div>
     </div>
+
+    <div class="asset_favorited">
+      <span class="heart"></span> <span class="favorited_by">Norm</span> <span class="favorited_when">20 minutes ago </span>
+    </div>
+
   </div>
 
   <div data-target="normal-playback.seekBarContainer" class="seekbar">
