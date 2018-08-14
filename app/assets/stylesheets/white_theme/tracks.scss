@@ -297,8 +297,8 @@
       position: relative;
       clear: both;
       margin-top: 20px;
-      padding-right: 10px;
-      padding-left: 10px;
+      margin-right: 14px;
+      margin-left: 14px;
       &::before {
         position: absolute;
         top: 25px;
@@ -338,10 +338,8 @@
           textarea {
             font-family: $sans-font;
             box-sizing: border-box;
-            width: calc(100% - 6px );
-            margin-right: 3px;
+            width: 100%;
             margin-bottom: 15px;
-            margin-left: 3px;
             padding: $baseline / 4;
             color: #4f4d4d;
             border: 1px solid #d7dbdb;
