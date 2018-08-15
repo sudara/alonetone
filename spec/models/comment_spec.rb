@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer          not null, primary key
+#  commentable_type :string(255)
+#  commentable_id   :integer
+#  body             :text(65535)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  commenter_id     :integer
+#  user_id          :integer
+#  remote_ip        :string(255)
+#  user_agent       :string(255)
+#  referrer         :string(255)
+#  is_spam          :boolean          default(FALSE)
+#  private          :boolean          default(FALSE)
+#  body_html        :text(65535)
+#
+
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do

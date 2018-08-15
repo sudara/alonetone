@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: tracks
+#
+#  id          :integer          not null, primary key
+#  playlist_id :integer
+#  asset_id    :integer
+#  position    :integer          default(1)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  is_favorite :boolean          default(FALSE)
+#  user_id     :integer
+#
+
 require "rails_helper"
 
 RSpec.describe Track, type: :model do
