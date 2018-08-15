@@ -1,6 +1,5 @@
 <%= error_messages_for :playlist %>
 
-
 <div id="edit_playlist_info" class="faq box">
   <p>
     22 tracks total, 38 plays, 4 hearts
@@ -48,20 +47,14 @@
         <% end %>
         
         <div class="edit_playlist_right_column_private_and_hidden">
-
           <%= f.input :private %> &nbsp; | (Playlists are hidden until they have more than 2 tracks)
-
         </div>
-
-
       </div>
     </div>
     
     <div class="edit_playlist_bottom">
       <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
-      
       <%= f.button :submit, "Save" %>
-      
     </div>
   <% end %>
 </div>
@@ -77,19 +70,21 @@
   </a>
 </div>
 
+<div data-controller="playlist-edit">
 <% content_for :left do %>
   <p class="left_instructions">
-    You can reorder your playlist by dragging your tracks, or remove them from the playlist with the [x] icon.
+    You can reorder your playlist by dragging your tracks. Remove them from the playlist with the [x] icon.
   </p>
   <div id="edit_playlist">
     <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
-      <div style="height: 12px; background-color: #c7c8c7;"></div>
-        <%= render :partial => 'track', :collection => @playlist.tracks %>
-
-      <div id="drop_here">
-        Drop Track here
+      <% @playlist.assets.each do |asset| %>
+      <div class="asset" data-controller="normal-playback">
+        <%= render partial: 'assets/asset_white', locals: { asset: asset} %>
       </div>
-
+      <% end %>
+      <div id="drop_here" data-target="playlist-edit.dropzone">
+        Drop Tracks Here To Add
+      </div>
     <% end %>
   </div>
 
@@ -106,7 +101,7 @@
   	<div class="draggable_tracks">
   		<h2 class="box">Available tracks</h2>
   	  <div id="playlist_tabs">
-        <ul id="playlist_source_options" class="tabs">
+        <ul id="playlist_source_options" class="tabs" data-target="">
           <li><%= link_to 'Your Uploads', '#your_uploads', :class => 'playlist_option', :id => 'open_your_stuff' if @user.has_tracks? %>      </li>
           <li><%= link_to "Your Listens", "#your_listens", :class => 'playlist_option', :id => 'open_your_listens' %>                         </li>
           <li><%= link_to "Favs", '#your_favorites', :class => 'playlist_option',:id => 'open_your_favorites' %>                                            </li>
@@ -119,4 +114,5 @@
   	</div>
   </div>
 <% end %>
+</div>
 
