@@ -1,6 +1,6 @@
 require 'emoji'
 module ApplicationHelper
-  @@listen_sources = %w(itunes)
+  @@listen_sources = %w[itunes]
 
   def theme_name
     white_theme_enabled? ? 'white' : 'dark'
@@ -18,7 +18,7 @@ module ApplicationHelper
     (moderator? || admin?) || (logged_in? && (comment.commenter == current_user || comment.user == current_user))
   end
 
-  def edit_or_show(user, playlist)
+  def edit_or_show(_user, playlist)
     if authorized_for(playlist)
       edit_user_playlist_path(@user.login, playlist)
     else
@@ -28,8 +28,8 @@ module ApplicationHelper
 
   def mp3_info_for(asset)
     mp3 = Mp3Info::Mp3Info.new(asset.authenticated_s3_url)
-    "Filename: #{asset.permalink}<br/>Length: #{mp3.length}<br/>Name: #{mp3.tag.title}<br/>Artist: #{mp3.tag.artist} <br/>Album: #{mp3.tag.album}<br/>#{mp3.to_s}"
-  rescue
+    "Filename: #{asset.permalink}<br/>Length: #{mp3.length}<br/>Name: #{mp3.tag.title}<br/>Artist: #{mp3.tag.artist} <br/>Album: #{mp3.tag.album}<br/>#{mp3}"
+  rescue StandardError
     "File #{asset.permalink} was unopenable or did not exist."
   end
 
@@ -44,8 +44,8 @@ module ApplicationHelper
     CGI.rfc1123_date(date)
   end
 
-  def track_name_for(asset, length=40)
-    truncate(asset.name,:length => length).html_safe
+  def track_name_for(asset, length = 40)
+    truncate(asset.name, length: length).html_safe
   end
 
   # Awesome truncate
@@ -79,47 +79,47 @@ module ApplicationHelper
 
   def emojify(content)
     content.gsub(/:([a-z0-9\+\-_]+):/) do |match|
-      if Emoji.find_by_alias($1)
-        '<img alt="' + $1 + '" height="20" src="' + asset_path("images/emoji/#{$1}.png") + '" style="vertical-align:middle" width="20" />'
+      if Emoji.find_by_alias(Regexp.last_match(1))
+        '<img alt="' + Regexp.last_match(1) + '" height="20" src="' + asset_path("images/emoji/#{Regexp.last_match(1)}.png") + '" style="vertical-align:middle" width="20" />'
       else
         match
       end
     end.html_safe
   end
 
-  def link_to_play(asset, referer=nil)
-    link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referer => referer), :id=>"play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
+  def link_to_play(asset, referer = nil)
+    link_to ' ', user_track_path(asset.user.login, asset.permalink, format: :mp3, referer: referer), id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play the mp3'
   end
 
-  def user_nav_item(text, link, options=nil)
+  def user_nav_item(text, link, options = nil)
     added_class = options.delete(:added_class) if options.is_a? Hash
-    content_tag(:li, link_to_unless_current(text, link, options), :class=> ("#{added_class} #{"current" if current_page?(link)}"))
+    content_tag(:li, link_to_unless_current(text, link, options), class: "#{added_class} #{'current' if current_page?(link)}")
   end
 
   def link_source(source)
     if source == 'https://alonetone.com'
-      link_to "home page","/"
+      link_to "home page", "/"
     elsif source.match(/soundmanager2_flash9/).present?
-      link_to "alonetone","/"
+      link_to "alonetone", "/"
     else
       link_to source.gsub!(/http:\/\/alonetone.com\/|https:\/\/alonetone.com\/|http:\/\/localhost:3000\/|http:\/\/beta.alonetone.com\//, '/'), source
     end
   end
 
   def recently_online
-    @online.each {|person| link_to person.login, user_home_path(person) }
+    @online.each { |person| link_to person.login, user_home_path(person) }
   end
 
   def check_for_and_display_flashes
     flashes = []
     [flash[:notice], flash[:error], flash[:info], flash[:ok]].each do |flash|
-      flashes << (render :partial => 'shared/flash', :object => flash) if (flash && !flash.empty?)
+      flashes << (render partial: 'shared/flash', object: flash) if flash && !flash.empty?
     end
     flashes.join.html_safe
   end
 
   def check_for_and_display_welcome_back
-    render :partial => 'shared/welcome_back' if welcome_back?
+    render partial: 'shared/welcome_back' if welcome_back?
   end
 
   def authorized?
@@ -127,25 +127,29 @@ module ApplicationHelper
   end
 
   def notice_for(notice, h1_text, &block)
-    content_tag(:div, ((content_tag :h1, h1_text, :class => 'notice') +
-      hide_notice_link(notice) +
-      capture(&block)), :class => 'notice') +
-      block.binding unless notice_hidden?(notice)
+    unless notice_hidden?(notice)
+      content_tag(:div, ((content_tag :h1, h1_text, class: 'notice') +
+        hide_notice_link(notice) +
+        capture(&block)), class: 'notice') +
+        block.binding
+    end
   end
 
   def hide_notice_link(notice)
-    link_to ['Ok, hide this notice', 'Yup! all good, thanks'].sample,
-      user_path(current_user, :user =>{:settings => {:hide_notice => {notice => true}}}, :method => :put),
-      :class => 'hide_notice' if logged_in?
+    if logged_in?
+      link_to ['Ok, hide this notice', 'Yup! all good, thanks'].sample,
+              user_path(current_user, user: { settings: { hide_notice: { notice => true } } }, method: :put),
+              class: 'hide_notice'
+    end
   end
 
   def login_link
-    logged_in? ? '' : '('+(link_to 'login', login_path)+')'
+    logged_in? ? '' : '(' + (link_to 'login', login_path) + ')'
   end
 
   def feed_icon_tag(title, url)
-    (@feed_icons ||= []) << { :url => url, :title => title }
-    link_to image_tag('icons/feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url, :class => 'rss'
+    (@feed_icons ||= []) << { url: url, title: title }
+    link_to image_tag('icons/feed-icon.png', size: '14x14', alt: "Subscribe to #{title}"), url, class: 'rss'
   end
 
   def friendly_time_ago(time)
@@ -159,15 +163,15 @@ module ApplicationHelper
 
   def flag_for(country)
     return "" unless country.present?
-    image_tag("flags/#{country.downcase}.svg", :size => '80x40', :style => 'float:right; clear:none;').html_safe
+    image_tag("flags/#{country.downcase}.svg", size: '80x40', style: 'float:right; clear:none;').html_safe
   end
 
   # Mephisto said it best...
   def sanitize_feed_content(html, sanitize_tables = false)
-    options = sanitize_tables ? {} : {:tags => %w(table thead tfoot tbody td tr th)}
+    options = sanitize_tables ? {} : { tags: %w[table thead tfoot tbody td tr th] }
     sanitized = html.strip do |html|
-      html.gsub! /&amp;(#\d+);/ do |s|
-        "&#{$1};"
+      html.gsub! /&amp;(#\d+);/ do |_s|
+        "&#{Regexp.last_match(1)};"
       end
     end
     sanitized

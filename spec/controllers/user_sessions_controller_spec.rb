@@ -5,7 +5,7 @@ RSpec.describe UserSessionsController, type: :controller do
 
   it "should successfully login with alonetone login" do
     activate_authlogic
-    post :create, params: { user_session: { login: 'arthur', password: 'test'} }
+    post :create, params: { user_session: { login: 'arthur', password: 'test' } }
     expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
     expect(assigns(:user_session).login).to eq(users(:arthur).login)
   end
@@ -13,26 +13,26 @@ RSpec.describe UserSessionsController, type: :controller do
   it "should successfully login with email" do
     activate_authlogic
     expect(controller.session["user_credentials"]).to eq(nil)
-    post :create, params: { user_session: { login: 'arthur@example.com', password: 'test'} }
+    post :create, params: { user_session: { login: 'arthur@example.com', password: 'test' } }
     expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
-    #assigns(:user_session).login.should == users(:arthur).login
+    # assigns(:user_session).login.should == users(:arthur).login
   end
 
   it "should always remember user" do
     activate_authlogic
-    post :create, params: { user_session: { login: 'arthur', password: 'test'} }
+    post :create, params: { user_session: { login: 'arthur', password: 'test' } }
     expect(assigns(:user_session).login).to eq(users(:arthur).login)
   end
 
   it "should redirect to user's home after login" do
     activate_authlogic
-    post :create, params: { user_session: { login: 'arthur', password: 'test'} }
+    post :create, params: { user_session: { login: 'arthur', password: 'test' } }
     expect(response).to redirect_to('http://test.host/arthur')
   end
 
   it "should redirect to last page viewed after login" do
     activate_authlogic
-    post :create, params: { user_session: { login: 'arthur', password: 'test' }}, session: { return_to: '/forums'}
+    post :create, params: { user_session: { login: 'arthur', password: 'test' } }, session: { return_to: '/forums' }
     expect(response).to redirect_to('http://test.host/forums')
   end
 
@@ -64,5 +64,4 @@ RSpec.describe UserSessionsController, type: :controller do
       expect(users(:arthur).last_request_at).to be_within(1.second).of(DateTime.now)
     end
   end
-
 end

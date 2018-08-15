@@ -1,35 +1,33 @@
 class User
-
   def self.currently_online
-     User.where(["last_request_at > ?", Time.now.utc-15.minutes])
+    User.where(["last_request_at > ?", Time.now.utc - 15.minutes])
   end
 
   def self.conditions_by_like(value)
-    conditions = ['users.display_name','users.login','users.bio','users.city','users.country'].collect do |c|
+    conditions = ['users.display_name', 'users.login', 'users.bio', 'users.city', 'users.country'].collect do |c|
       "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%")
     end
     where(conditions.join(" OR "))
   end
 
   def self.search(query, options = {})
-    with_scope :find => { :conditions => build_search_conditions(query) } do
+    with_scope find: { conditions: build_search_conditions(query) } do
       find :all, options
     end
   end
 
   def self.build_search_conditions(query)
-    query && ['LOWER(display_name) LIKE :q OR LOWER(login) LIKE :q', {:q => "%#{query}%"}]
+    query && ['LOWER(display_name) LIKE :q OR LOWER(login) LIKE :q', { q: "%#{query}%" }]
   end
 
   # feeds the users/index subnav
   def self.paginate_by_params(params)
-    available_sortings = %w(last_uploaded most_listened_to new_artists monster_uploaders dedicated_listeners)
-    params[:sort] = 'last_seen' if !params[:sort].present? or !available_sortings.include?(params[:sort])
+    available_sortings = %w[last_uploaded most_listened_to new_artists monster_uploaders dedicated_listeners]
+    params[:sort] = 'last_seen' if !params[:sort].present? || !available_sortings.include?(params[:sort])
     User.send(params[:sort])
   end
 
   protected
-
 
   # needed to map incoming params to scopes
   def self.last_seen
@@ -64,7 +62,7 @@ class User
 
   def geocode_address
     return unless city && country
-    geo=GeoKit::Geocoders::MultiGeocoder.geocode([city, country].compact.join(', '))
+    geo = GeoKit::Geocoders::MultiGeocoder.geocode([city, country].compact.join(', '))
 
     if geo.success
       self.lat = geo.lat
