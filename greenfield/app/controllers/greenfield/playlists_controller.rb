@@ -18,7 +18,7 @@ module Greenfield
 
     protected
 
-    alias_method :find_asset, :find_asset_from_playlist
+    alias find_asset find_asset_from_playlist
 
     def require_login
       if find_post.user != current_user

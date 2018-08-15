@@ -5,8 +5,8 @@ module Greenfield
 
       # resample the mp3 down to 8KHz to make it more manageable
       command = Paperclip.run('lame', ['--quiet --mp3input', '--resample', '8',
-                               '--decode', Shellwords.shellescape(file),
-                               Shellwords.shellescape(tmp.path)].join(' '))
+                                       '--decode', Shellwords.shellescape(file),
+                                       Shellwords.shellescape(tmp.path)].join(' '))
 
       # lame can only downsample to 8KHz, but that's still
       # way too high so we do a second resampling here
@@ -25,11 +25,10 @@ module Greenfield
           end
 
           rms_size += signal.real_size
-          if rms_size > slice_size
-            waveform << Math.sqrt(rms).round
-            rms = 0.0
-            rms_size = 0
-          end
+          next unless rms_size > slice_size
+          waveform << Math.sqrt(rms).round
+          rms = 0.0
+          rms_size = 0
         end
         waveform << Math.sqrt(rms)
       ensure

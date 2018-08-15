@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe PagesController, type: :controller do
-
   it "should have an about page that renders without errors" do
     get :about
     expect(response).to be_successful
@@ -16,5 +15,4 @@ RSpec.describe PagesController, type: :controller do
     get :press
     expect(response).to be_successful
   end
-
 end
