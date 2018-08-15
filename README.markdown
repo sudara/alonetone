@@ -101,27 +101,42 @@ Thirdly, fork away on github.
 ### Setup alonetone locally on macOS
 
 
-1) `clone`
+- Clone this repo
+`git clone REPO_GIT`
 
-2) `brew install libsndfile lame` (required for id3 tags and waveforms)
+- `brew install libsndfile lame` (required for id3 tags and waveforms)
 
-3) `bundle `
+- Install gems
+`bundle install`
 
-4) Create needed config, database, and load db/seeds:
+- To create needed config, database, and load db/seeds*:
+`rake setup`
+- Create and seed database
+` bundle exec rake db:create`
 
-      rake setup
-
-5) `rails s`
-
-
-Note: alonetone uses 3 config files that are created by 'rake setup'
+- `rails s`
 
 
-      alonetone.yml (contains the application "secret" and app-specific settings)
-      database.yml
-      newrelic.yml (for performance tracking)
+*Note: alonetone uses 3 config files that are created by 'rake setup
 
-No sound on development? Set `play_dummy_mp3s: true` in alonetone.yml
+> alonetone.yml (contains the application "secret" and app-specific settings)
+> database.yml
+> newrelic.yml (for performance tracking)
+
+#### Issues and workaround:
+
+- No sound on development? Set `play_dummy_mp3s: true` in alonetone.yml
+- Seeing the following yarn error?
+```
+  Your Yarn packages are out of date!
+  Please run `yarn install` to update.
+```
+
+Make sure you have the latest version of `npm` and `node`.
+```
+brew install yarn
+yarn install
+```
 
 #### Logging in
 
