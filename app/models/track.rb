@@ -3,20 +3,13 @@
 # Table name: tracks
 #
 #  id          :integer          not null, primary key
-#  is_favorite :boolean          default(FALSE)
+#  playlist_id :integer
+#  asset_id    :integer
 #  position    :integer          default(1)
 #  created_at  :datetime
 #  updated_at  :datetime
-#  asset_id    :integer
-#  playlist_id :integer
+#  is_favorite :boolean          default(FALSE)
 #  user_id     :integer
-#
-# Indexes
-#
-#  index_tracks_on_asset_id     (asset_id)
-#  index_tracks_on_is_favorite  (is_favorite)
-#  index_tracks_on_playlist_id  (playlist_id)
-#  index_tracks_on_user_id      (user_id)
 #
 
 class Track < ActiveRecord::Base

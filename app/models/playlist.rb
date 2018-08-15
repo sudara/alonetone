@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: playlists
+#
+#  id           :integer          not null, primary key
+#  title        :string(255)
+#  description  :text(16777215)
+#  image        :string(255)
+#  user_id      :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  pic_id       :integer
+#  permalink    :string(255)
+#  tracks_count :integer          default(0)
+#  is_mix       :boolean
+#  private      :boolean
+#  is_favorite  :boolean          default(FALSE)
+#  year         :string(255)
+#  position     :integer          default(1)
+#  link1        :string(255)
+#  link2        :string(255)
+#  link3        :string(255)
+#  credits      :text(16777215)
+#  has_details  :boolean          default(FALSE)
+#  theme        :string(255)
+#
+
 class Playlist < ActiveRecord::Base
   acts_as_list :scope => :user_id, :order => :position
 

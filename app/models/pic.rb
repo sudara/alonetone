@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: pics
+#
+#  id               :integer          not null, primary key
+#  pic_file_size    :integer
+#  pic_content_type :string(255)
+#  pic_file_name    :string(255)
+#  parent_id        :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#  picable_type     :string(255)
+#  picable_id       :integer
+#
+
 class Pic < ActiveRecord::Base
   belongs_to :picable, :polymorphic => true, :touch => true
 

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: featured_tracks
+#
+#  id         :integer          not null, primary key
+#  position   :integer          default(1)
+#  feature_id :integer
+#  asset_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class FeaturedTrack < ActiveRecord::Base
   
   belongs_to :feature

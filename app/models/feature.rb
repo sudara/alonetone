@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: features
+#
+#  id               :integer          not null, primary key
+#  featured_user_id :integer
+#  writer_id        :integer
+#  views_count      :integer          default(0)
+#  body             :text(65535)
+#  teaser_text      :text(65535)
+#  published        :boolean          default(FALSE)
+#  published_at     :boolean
+#  datetime         :boolean
+#  permalink        :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Feature < ActiveRecord::Base
 
   scope :published, -> { where(:published => true).order('created_at DESC') }

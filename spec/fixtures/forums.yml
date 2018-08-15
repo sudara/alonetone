@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: forums
+#
+#  id               :integer          not null, primary key
+#  site_id          :integer
+#  name             :string(255)
+#  description      :string(255)
+#  topics_count     :integer          default(0)
+#  posts_count      :integer          default(0)
+#  position         :integer          default(1)
+#  description_html :text(65535)
+#  state            :string(255)      default("public")
+#  permalink        :string(255)
+#
+
 valid_forum:
   position: 1
   name: Test Forum
