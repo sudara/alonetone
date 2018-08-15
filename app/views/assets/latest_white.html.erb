@@ -84,8 +84,6 @@
       </div>
     </div>
 
-
-
     <div id="home_favorites_area">
         <div class="box">
           <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
@@ -96,14 +94,14 @@
             Recently favorited
             <% end %>
           </h2>
-          <%= render partial: 'shared/favorite_white', collection: @favorites, as: :favorite if @favorites.present? %>
+          <% @favorites.each do |asset| %>
+          <div class="asset" data-controller="normal-playback">
+            <%= render partial: 'assets/asset_white', locals: { asset: asset }, show_favorite: true %>
+          </div>
+          <% end %>
         </div>
     </div>
   </div>
-
-
-
-  
 </div>
 
 
