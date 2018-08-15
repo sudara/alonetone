@@ -96,7 +96,7 @@
           </h2>
           <% @favorites.each do |asset| %>
           <div class="asset" data-controller="normal-playback">
-            <%= render partial: 'assets/asset_white', locals: { asset: asset }, show_favorite: true %>
+            <%= render partial: 'assets/asset_white', locals: { asset: asset, show_favorite: true } %>
           </div>
           <% end %>
         </div>
