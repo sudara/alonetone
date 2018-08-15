@@ -112,7 +112,7 @@ Thirdly, fork away on github.
 - To create needed config, database, and load db/seeds*:
 `rake setup`
 - Create and seed database
-` bundle exec rake db:create`
+`rake db:setup`
 
 - `rails s`
 
