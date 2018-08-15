@@ -29,9 +29,12 @@
       </div>
 
     </div>
-    <% if defined? show_favorite %>
+    <% if defined? favorite %>
     <div class="asset_favorited">
-      <span class="heart"></span> <span class="favorited_by">Norm</span><span class="favorited_when">20 minutes ago</span>
+      <span class="heart"></span> 
+      <span class="favorited_by"> 
+        <%= link_to favorite.user.name, user_home_path(favorite.user), :class => 'artist' %>
+      </span><span class="favorited_when"><%= local_time_ago(favorite.created_at) %></span>
     </div>
     <% end %>
   </div>
