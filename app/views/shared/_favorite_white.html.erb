@@ -1,1 +1,3 @@
-<%= render partial: 'assets/asset', :locals => {:asset => favorite.asset} %>
+  <div class="asset" data-controller="normal-playback">
+    <%= render partial: 'assets/asset_white', locals: {asset: favorite.asset, show_favorite: show_favorite } %>
+  </div>
