@@ -23,6 +23,9 @@ const Turbolinks = require('turbolinks')
 
 Rails.start()
 Turbolinks.start()
+
+LocalTime.config.i18n.en.datetime.at = '{date}' // drop the time from the date
+LocalTime.config.i18n.en.date.on = '{date}' // no "on Sunday", just "Sunday"
 LocalTime.start()
 
 const application = Application.start()
