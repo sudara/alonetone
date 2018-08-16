@@ -15,3 +15,17 @@ class Update < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: updates
+#
+#  id           :integer          not null, primary key
+#  content      :text(65535)
+#  content_html :text(65535)
+#  permalink    :string(255)
+#  revision     :integer
+#  title        :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#

@@ -101,3 +101,36 @@ class Playlist < ActiveRecord::Base
     generate_permalink!
   end
 end
+
+# == Schema Information
+#
+# Table name: playlists
+#
+#  id           :integer          not null, primary key
+#  credits      :text(16777215)
+#  description  :text(16777215)
+#  has_details  :boolean          default(FALSE)
+#  image        :string(255)
+#  is_favorite  :boolean          default(FALSE)
+#  is_mix       :boolean
+#  link1        :string(255)
+#  link2        :string(255)
+#  link3        :string(255)
+#  permalink    :string(255)
+#  position     :integer          default(1)
+#  private      :boolean
+#  theme        :string(255)
+#  title        :string(255)
+#  tracks_count :integer          default(0)
+#  year         :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  pic_id       :integer
+#  user_id      :integer
+#
+# Indexes
+#
+#  index_playlists_on_permalink  (permalink)
+#  index_playlists_on_position   (position)
+#  index_playlists_on_user_id    (user_id)
+#
