@@ -1,14 +1,22 @@
 # == Schema Information
-# Schema version: 16
 #
 # Table name: tracks
 #
-#  id          :integer(11)   not null, primary key
-#  playlist_id :integer(11)   
-#  asset_id    :integer(11)   
-#  position    :integer(11)   
-#  created_at  :datetime      
-#  updated_at  :datetime      
+#  id          :integer          not null, primary key
+#  is_favorite :boolean          default(FALSE)
+#  position    :integer          default(1)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  asset_id    :integer
+#  playlist_id :integer
+#  user_id     :integer
+#
+# Indexes
+#
+#  index_tracks_on_asset_id     (asset_id)
+#  index_tracks_on_is_favorite  (is_favorite)
+#  index_tracks_on_playlist_id  (playlist_id)
+#  index_tracks_on_user_id      (user_id)
 #
 
 class Track < ActiveRecord::Base

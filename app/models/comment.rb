@@ -86,3 +86,30 @@ class Comment < ActiveRecord::Base
     self.user_agent = self.user_agent.try(:slice, 0, 255)
   end
 end
+
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer          not null, primary key
+#  body             :text(65535)
+#  body_html        :text(65535)
+#  commentable_type :string(255)
+#  is_spam          :boolean          default(FALSE)
+#  private          :boolean          default(FALSE)
+#  referrer         :string(255)
+#  remote_ip        :string(255)
+#  user_agent       :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  commentable_id   :integer
+#  commenter_id     :integer
+#  user_id          :integer
+#
+# Indexes
+#
+#  index_comments_on_commentable_id  (commentable_id)
+#  index_comments_on_commenter_id    (commenter_id)
+#  index_comments_on_created_at      (created_at)
+#  index_comments_on_is_spam         (is_spam)
+#

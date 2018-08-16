@@ -51,3 +51,21 @@ class Feature < ActiveRecord::Base
     update_attributes(:published => true, :published_at => Time.now)
   end
 end
+
+# == Schema Information
+#
+# Table name: features
+#
+#  id               :integer          not null, primary key
+#  body             :text(65535)
+#  datetime         :boolean
+#  permalink        :string(255)
+#  published        :boolean          default(FALSE)
+#  published_at     :boolean
+#  teaser_text      :text(65535)
+#  views_count      :integer          default(0)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  featured_user_id :integer
+#  writer_id        :integer
+#

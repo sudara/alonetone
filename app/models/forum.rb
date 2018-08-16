@@ -25,3 +25,24 @@ class Forum < ActiveRecord::Base
     permalink
   end
 end
+
+# == Schema Information
+#
+# Table name: forums
+#
+#  id               :integer          not null, primary key
+#  description      :string(255)
+#  description_html :text(65535)
+#  name             :string(255)
+#  permalink        :string(255)
+#  position         :integer          default(1)
+#  posts_count      :integer          default(0)
+#  state            :string(255)      default("public")
+#  topics_count     :integer          default(0)
+#  site_id          :integer
+#
+# Indexes
+#
+#  index_forums_on_permalink  (permalink)
+#  index_forums_on_position   (position)
+#
