@@ -43,6 +43,10 @@ function handlers() {
     }
   })
 
+  document.querySelectorAll('a.track_link').forEach((title) => {
+    title.style.width = `${document.querySelector('.asset').clientWidth - 90}px`
+  })
+
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')  
     if (!pic.hasChildNodes()) {
@@ -50,5 +54,4 @@ function handlers() {
     }
   })
 }
-
 document.addEventListener('turbolinks:load', handlers)
