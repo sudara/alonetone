@@ -12,12 +12,8 @@
 import LocalTime from 'local-time'
 import Rails from 'rails-ujs'
 import { Application } from 'stimulus'
-import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faPlay, faPause, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
-
-library.add(faPlay, faPause, faChevronRight)
 
 const Turbolinks = require('turbolinks')
 
