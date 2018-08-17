@@ -23,8 +23,8 @@
 <div>
   <label for="user_password"><%= _('Password') %></label><br />
   <p class="entryhelp" style="margin-top:0.5em;"><%= _('Enter a new password twice to change your password. (must be longer than 5 characters)') %></p>
-  <%= settings.password_field :password, :size => 16 %>
+  <%= settings.password_field :password, size: 16 %>
   <span class="entryhelp">(<%= _('once') %>)</span><br />
-  <%= settings.password_field :password_confirmation, :size => 16 %>
+  <%= settings.password_field :password_confirmation, size: 16 %>
   <span class="entryhelp">(<%= _('and again') %>)</span>
 </div>

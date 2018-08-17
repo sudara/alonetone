@@ -1,7 +1,7 @@
 <% cache(cache_key_for_follows(@follows)) do %>
   <h2 class="box">Follows</h2>
   <div id="follows" class="box static_content clearfix">
-      <%= render :partial => 'shared/users_to_edge', :locals => {:users => @follows} %>
+      <%= render partial: 'shared/users_to_edge', locals: {users: @follows} %>
       <div class="clear"></div>
   </div>
 <% end if @follows.present? %>
@@ -9,7 +9,7 @@
 <% if !@follows.present? && @mostly_listens_to.present? %>
   <h2 class="box">Listens to</h2>
   <div id="follows" class="box static_content clearfix">
-    <%= render :partial => 'shared/users_to_edge', :locals => {:users => @mostly_listens_to} %>
+    <%= render partial: 'shared/users_to_edge', locals: {users: @mostly_listens_to} %>
       <div class="clear"></div>
   </div>
 <% end %>
@@ -18,7 +18,7 @@
 <% if moderator? && @similar_users.present? %>
   <h2 class="box">Other users on <%= @user.ip %></h2>
   <div id="follows" class="box static_content clearfix">
-    <%= render :partial => 'shared/users_to_edge', :locals => {:users => @similar_users} %>
+    <%= render partial: 'shared/users_to_edge', locals: {users: @similar_users} %>
       <div class="clear"></div>
   </div>
 <% end %>
