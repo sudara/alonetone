@@ -1,4 +1,4 @@
-<%= div_for track_play, :class => (cycle('even', 'odd')) do %>
+<%= div_for track_play, class: (cycle('even', 'odd')) do %>
   <div class="listen_user">
     <% if track_play.listener&.has_pic? %>
       <%= link_to(image_tag(track_play.listener.pic.pic(:large)), user_home_path(track_play.listener))%>
@@ -8,7 +8,7 @@
   </div>
   <div class="listen_details">
     <div>
-      <strong><%= link_to h(truncate(track_play.asset.name, :length => 48)), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>
+      <strong><%= link_to h(truncate(track_play.asset.name, length: 48)), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>
     </div>
     <%= local_time_ago(track_play.created_at) %>
     by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) :
