@@ -27,6 +27,8 @@ module PlaylistsHelper
   end
 
   def greenfield_upload_form(user, playlist)
+    # leave these hashrokets. breaking spec/request/assets_controller_spec.rb
+    # Will look into it later
     data = {
       'expected-content-type' => Greenfield::PlaylistDownload::CONTENT_TYPE.join(' '),
       'max-file-size' => Greenfield::PlaylistDownload::MAX_SIZE,
