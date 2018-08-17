@@ -29,7 +29,7 @@ xml.graph(caption: "Total Listens for #{@user.name}",
   while start < Date.today.beginning_of_month
     start += 1.month
     xml.set(name: start.to_s(:short_month),
-            #   :color => get_chart_color,
+            #   color: get_chart_color,
             value: plays_by_month[start.month.to_s] || 0,
             hover_text: start.to_s(:long_month_and_year))
   end

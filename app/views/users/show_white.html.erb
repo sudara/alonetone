@@ -9,73 +9,73 @@
     </div>
   </div>
   <div id="user_playlists_area">
-		<div class="user_playlists">
-    <% if @user.has_public_playlists? %>
+    <div class="user_playlists">
+      <% if @user.has_public_playlists? %>
       <ul class="playlists">
         <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
-  	  </ul>
-    <% end %>
+      </ul>
+      <% end %>
     </div>
   </div>
 
   <div id="user_left_column">
 
     <div id="user_latest_area">
-        <% if @assets.size > 0 %>
-          <div id="user_latest" class="box">
-              <%= link_to user_tracks_path(@user), :class => 'view_all', :title => "uploaded mp3s by #{@user.name}"  do %>
-                <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-              <% end if @user.assets_count > 5 %>
-            <h2>Latest music</h2>
-            <%= render :partial => 'assets/asset', :collection => @assets %>
-          </div>
-        <% end %>
+      <% if @assets.size > 0 %>
+      <div id="user_latest" class="box">
+        <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}"  do %>
+        <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+        <% end if @user.assets_count > 5 %>
+        <h2>Latest music</h2>
+        <%= render partial: 'assets/asset', collection: @assets %>
       </div>
-
-        <div id="user_listens_area">
-        <% unless @listens.empty? %>
-        <div class="box">
-            <%= link_to listens_path(@user.login), :class => 'view_all' do %>
-              <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-            <% end if @listens.size > 4 %>
-          <h2>Recently listened to</h2>
-          <%= render :partial => 'assets/asset', :collection => @listens, :as => :asset %>
-        </div>
-        <% end %>
-      </div>
-  
-  
-
-      <div id="user_plays_area">
-        <% if authorized? && @user.listens_count > 0 %>
-        <% cache([@track_plays, theme_name]) do %>
-        <div id="user_track_plays" class="box">
-          <%= link_to listens_path(@user.login), :class => 'view_all' do %>
-            <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
-          <% end if @track_plays.size > 4 %>
-          <h2>Latest listens to your music</h2>
-          <div class="static_content">
-            <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
-            <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
-          </div>
-          <%= render :partial => 'users/track_play', :collection => @track_plays %>
-        </div>
-        <% end%>
-        <% end %>
-      </div>
-
+      <% end %>
     </div>
 
-    <div id="user_right_column">
+    <div id="user_listens_area">
+      <% unless @listens.empty? %>
+      <div class="box">
+        <%= link_to listens_path(@user.login), class: 'view_all' do %>
+        <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+        <% end if @listens.size > 4 %>
+        <h2>Recently listened to</h2>
+        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+      </div>
+      <% end %>
+    </div>
+    
+    
+
+    <div id="user_plays_area">
+      <% if authorized? && @user.listens_count > 0 %>
+      <% cache([@track_plays, theme_name]) do %>
+      <div id="user_track_plays" class="box">
+        <%= link_to listens_path(@user.login), class: 'view_all' do %>
+        <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+        <% end if @track_plays.size > 4 %>
+        <h2>Latest listens to your music</h2>
+        <div class="static_content">
+          <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
+          <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
+        </div>
+        <%= render partial: 'users/track_play', collection: @track_plays %>
+      </div>
+      <% end%>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div id="user_right_column">
 
     <div id="user_favorites_area">
       <% if @favorites.present? %>
       <div class="box">
-        <%= link_to user_playlist_path(@user, @user.favorites), :class => "view_all" do %>
-          <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+        <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
+        <span>view all &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></span>
         <% end if @user.favorites.tracks.size > 5 %>
         <h2>Recent favorites</h2>
-        <%= render :partial => 'assets/asset', collection: @favorites, as: :asset %>
+        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
       </div>
       <% end %>
     </div>
@@ -86,15 +86,15 @@
     <div id="user_popular_area">
       <div id="user_popular" class="box">
         <%= link_to " ", user_tracks_path(@user),
-            :class => 'view_more_tracks', :title => "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
+        class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
         <h2>Most Listened To Tracks</h2>
-        <%= render :partial => 'assets/asset', :collection => @popular_tracks %>
+        <%= render partial: 'assets/asset', collection: @popular_tracks %>
       </div>
     </div>
     <% end %>
 
     <div id="user_comments_area">
-      <%= render :partial => 'shared/comments' if @comments.present? %>
+      <%= render partial: 'shared/comments' if @comments.present? %>
     </div>
 
   </div>
@@ -106,61 +106,61 @@
     </div>
     <div class="user_card_content">
       <div class="user_card_bio">
-  	    <% if @user.try(:bio) %>
-  	        <%= markdown(@user.bio) %>
-  	    <% else %>
-  	        <%= @user.name %> doesn't have anything to say, unfortunately...
-        <% end %>
-    	</div>
-      <hr>
-      <div class="user_card_links">
-        <p>
-        	<%= website_for_simple(@user).html_safe if @user.website.present? %>
-        </p>
-        <p>
-          <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
-        </p>
-      </div>
-      <hr>
-      <div class="user_card_stats">
-        <p>
-          <div class="user_location"><%= user_location(@user) %></div>
-        </p>
-        <p>
-          Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
-        </p>
-        <p>
-          Joined <strong><%= @user.created_at.to_date.to_s :long %></strong>.
-        </p>
-        <% if @user.listens_count > 0 %>
-        <p>
-          <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
-        </p>
-        <p>
-          <strong><%= @user.listens_count %></strong> total listens.
-        </p>
-          <strong>~<%= @user.bandwidth_used %>GB</strong> transferred.
-        </p>
-        <% end %>
-      </div>
-        <% if authorized? %>
-          <div class="user_card_mod_stats">
-          <%= link_to edit_user_path(@user), :class => "edit_profile #{ admin? ? 'admin' : ''}" do %>
-            edit profile
-          <% end %>
-        <% end %>
-        <% if moderator? %>
-          <p>
-            Current IP: <strong><%= @user.current_login_ip %></strong>
-          </p>
-          <p>
-            <%= flag_for(@user.listens.first&.country) %>
-          </p>
-          <p>
-            User Agent: <%= @user.browser %>
-          </p>
-        <% end %>
-        </div>
-      </div>
+       <% if @user.try(:bio) %>
+       <%= markdown(@user.bio) %>
+       <% else %>
+       <%= @user.name %> doesn't have anything to say, unfortunately...
+       <% end %>
+     </div>
+     <hr>
+     <div class="user_card_links">
+      <p>
+       <%= website_for_simple(@user).html_safe if @user.website.present? %>
+     </p>
+     <p>
+      <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
+    </p>
   </div>
+  <hr>
+  <div class="user_card_stats">
+    <p>
+      <div class="user_location"><%= user_location(@user) %></div>
+    </p>
+    <p>
+      Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
+    </p>
+    <p>
+      Joined <strong><%= @user.created_at.to_date.to_s :long %></strong>.
+    </p>
+    <% if @user.listens_count > 0 %>
+    <p>
+      <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
+    </p>
+    <p>
+      <strong><%= @user.listens_count %></strong> total listens.
+    </p>
+    <strong>~<%= @user.bandwidth_used %>GB</strong> transferred.
+  </p>
+  <% end %>
+</div>
+<% if authorized? %>
+<div class="user_card_mod_stats">
+  <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+  edit profile
+  <% end %>
+  <% end %>
+  <% if moderator? %>
+  <p>
+    Current IP: <strong><%= @user.current_login_ip %></strong>
+  </p>
+  <p>
+    <%= flag_for(@user.listens.first&.country) %>
+  </p>
+  <p>
+    User Agent: <%= @user.browser %>
+  </p>
+  <% end %>
+</div>
+</div>
+</div>
 </div>

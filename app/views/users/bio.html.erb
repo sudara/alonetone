@@ -1,4 +1,4 @@
-<%= render :partial => 'user' %>
+<%= render partial: 'user' %>
 
 <% content_for :left do %>
   <div id="bio" class="box">
@@ -17,19 +17,18 @@
       <div class="bio static_content">
         <p>
         	<%= website_for(@user).html_safe if @user.website.present? %>
-        </p>         
+        </p>
       </div>
 
   </div>
 
-  <%= render :partial => 'follows' if @mostly_listens_to.present? or @follows.present?  %>
+  <%= render partial: 'follows' if @mostly_listens_to.present? or @follows.present?  %>
 
 <% end %>
 
 <% content_for :right do %>
 
-  <%= link_to(image_tag(@user.avatar(:album), :class => 'large_avatar'), @user.avatar,  :id=>'alonetoner_big', :rel=>'facebox') %>
-
+  <%= link_to(image_tag(@user.avatar(:album), class: 'large_avatar'), @user.avatar,  i: 'alonetoner_big', re: 'facebox') %>
 
   <h2 class="box static"><%= @user.name %>'s stats</h2>
 
@@ -54,4 +53,3 @@
     <% end %>
   </div>
 <% end %>
-
