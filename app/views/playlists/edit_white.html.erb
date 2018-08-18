@@ -9,8 +9,6 @@
     Add metadata or instructions here.
   </p>
 
-  <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
-
   <%= simple_form_for [@user, @playlist] do |f| %>
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
@@ -55,6 +53,7 @@
     </div>
   <% end %>
 </div>
+<%#= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
 <!-- 
 <div class="edit_playlist_pro_upload faq box">
   <div class="pro_upload_left">
