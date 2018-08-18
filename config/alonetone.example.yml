@@ -15,7 +15,7 @@ development: &defaults
   amazon_key:
   rakismet_key: "REPLACEME"
   defensio:
-  campfire_url: nil
+  chat_url:
   video_size: width="370" height="308"
   enable_defensio: false
   default_user_images: true
@@ -34,5 +34,5 @@ production:
   <<: *defaults
   show_debug_info: false
   enable_defensio: true
-  campfire_url: yourapp.campfirenow.com/chat
+  chat_url: 
 
