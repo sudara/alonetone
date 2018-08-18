@@ -8,6 +8,8 @@ export default class extends Controller {
     this.sortable = new Sortable(this.sortableTarget, {
       draggable: 'li',
     })
-    this.sortable.on('sortable:sorted', () => console.log('sortable:sorted'))
+
+    // need this to fire only when order changed
+    this.sortable.on('drag:stop', () => console.log('sorted'))
   }
 }
