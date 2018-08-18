@@ -12,7 +12,6 @@
   <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
 
   <%= simple_form_for [@user, @playlist] do |f| %>
-
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
           <label>ALBUM ARTWORK</label>
@@ -20,11 +19,9 @@
             <%= f.file_field :pic  %>
             <%= submit_tag "Upload new Pic" %>
           <% end %>
-
           <p>
             Upload a square photo, 2000px by 2000px for best results.
           </p>
-
       </div>
       <div class="edit_playlist_right_column">
         <div class="edit_playlist_right_column_title_and_year">
@@ -58,6 +55,7 @@
     </div>
   <% end %>
 </div>
+<!-- 
 <div class="edit_playlist_pro_upload faq box">
   <div class="pro_upload_left">
     <h1>Professional Upload System&trade;</h1>
@@ -69,7 +67,7 @@
     Upload ZIP file
   </a>
 </div>
-
+--> 
 <div data-controller="playlist-edit">
 <% content_for :left do %>
   <p class="left_instructions">
