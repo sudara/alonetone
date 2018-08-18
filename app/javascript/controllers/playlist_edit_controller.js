@@ -1,14 +1,13 @@
 import { Controller } from 'stimulus'
 import { Sortable } from '@shopify/draggable';
-import { Droppable } from '@shopify/draggable';
 
 export default class extends Controller {
-  static targes = ['playlist', 'dropzone', 'sourceTracks']
+  static targets = ['sortable', 'dropzone', 'sourceTracks']
 
   initialize() {
-    this.droppable = new Droppable(this.sourceTracksElement, {
+    this.sortable = new Sortable(this.sortableTarget, {
       draggable: 'li',
-      dropzone: this.dropzoneElement,
-    });
+    })
+    this.sortable.on('sortable:sorted', () => console.log('sortable:sorted'))
   }
 }
