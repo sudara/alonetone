@@ -23,9 +23,13 @@
     <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
     <% end %>
     <div><%= link_to "About", "/about"%></div>
-    <div><%= link_to "Forums", "/discuss"%></div>
     <div><%= link_to "Stats", "/about/stats"%></div>
-    <div><%= link_to "Press", "/about/press"%></div>
+    <div><%= link_to "Forums", "/discuss"%></div>
+    <% if Alonetone.try(:chat_url) && logged_in? %>
+    <div>
+    <%= link_to "Chat", Alonetone.chat_url %>
+    </div>
+    <% end %>
     <div><%= link_to "Privacy", "/about/privacy"%></div>
   </div>
 
