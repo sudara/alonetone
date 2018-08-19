@@ -59,9 +59,9 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
     ast (2.4.0)
-    authlogic (3.8.0)
-      activerecord (>= 3.2, < 5.3)
-      activesupport (>= 3.2, < 5.3)
+    authlogic (4.3.0)
+      activerecord (>= 4.2, < 5.3)
+      activesupport (>= 4.2, < 5.3)
       request_store (~> 1.0)
       scrypt (>= 1.2, < 4.0)
     autoprefixer-rails (9.1.0)
@@ -468,7 +468,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   annotate
-  authlogic (~> 3.8)
+  authlogic (~> 4.2)
   awesome_print
   aws-sdk-s3
   bugsnag
