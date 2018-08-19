@@ -74,18 +74,18 @@
   <p class="left_instructions">
     You can reorder your playlist by dragging your tracks. Remove them from the playlist with the [x] icon.
   </p>
-  <ul class="sortable" data-target="playlist-edit.sortable">
-    <% @playlist.assets.each do |asset| %>
-    <li>
-      <div class="asset" data-controller="normal-playback">
-        <%= render partial: 'assets/asset_white', locals: { asset: asset } %>
-      </div>
-    <li>
+  <div class="sortable" data-target="playlist-edit.sortable">
+    <% @playlist.tracks.each do |track| %>
+    <div class="asset" data-controller="normal-playback" id="track_<%= track.id %>">
+      <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+    </div>
     <% end %>
-  </ul>
+  </div>
 
-  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), :id => 'add_track_url',:class=> 'hidden' %>
-  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
+  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), 
+    data: {target:'playlist-edit.addUrl' }, class: 'hidden' %>
+  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
+    data: {target:'playlist-edit.sortUrl' }, class: 'hidden' %>
 
   <p class="right_instructions">
     Click a track below to instantly add it to the playlist selection.
