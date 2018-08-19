@@ -153,15 +153,14 @@ RSpec.describe AssetsController, type: :request do
 
   context '#create' do
     before do
-      post '/user_sessions', params: { user_session: { login: 'arthur', password: 'test' } }
+      create_user_session(users(:arthur))
     end
 
     it 'should successfully upload an mp3' do
-      post '/user_sessions', params: { user_session: { login: 'arthur', password: 'test' } }
-
       expect do
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
       end.to change { Asset.count }.by(1)
+
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
     end
 
