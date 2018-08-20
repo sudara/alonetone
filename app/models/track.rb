@@ -1,5 +1,5 @@
 class Track < ActiveRecord::Base
-  belongs_to :playlist, :counter_cache => true, :touch => true
+  belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :asset
   belongs_to :user
 
@@ -28,7 +28,7 @@ class Track < ActiveRecord::Base
   end
 
   def ensure_playlist_if_favorite
-    self.playlist_id = Playlist.favorites.where(:user_id => user_id).first_or_create.id if is_favorite?
+    self.playlist_id = Playlist.favorites.where(user_id: user_id).first_or_create.id if is_favorite?
     true
   end
 end

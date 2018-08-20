@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: tracks
+#
+#  id          :integer          not null, primary key
+#  playlist_id :integer
+#  asset_id    :integer
+#  position    :integer          default(1)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  is_favorite :boolean          default(FALSE)
+#  user_id     :integer
+#
+
 require "rails_helper"
 
 RSpec.describe Track, type: :model do
@@ -16,13 +30,12 @@ RSpec.describe Track, type: :model do
   end
 
   context "as a fav" do
-    subject { users(:arthur).tracks.favorites.create(:asset_id => 1) }
+    subject { users(:arthur).tracks.favorites.create(asset_id: 1) }
     it "should create a favorite playlist if its the first fav" do
-      expect{subject}.to change{Track.count}
+      expect { subject }.to change { Track.count }
     end
 
     it 'should use an existing favorites playlist' do
-
     end
   end
 end

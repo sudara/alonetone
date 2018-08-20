@@ -1,3 +1,37 @@
+# == Schema Information
+#
+# Table name: assets
+#
+#  id               :integer          not null, primary key
+#  mp3_content_type :string(255)
+#  mp3_file_name    :string(255)
+#  mp3_file_size    :integer
+#  created_at       :datetime
+#  title            :string(255)
+#  thumbnails_count :integer          default(0)
+#  user_id          :integer
+#  length           :integer
+#  album            :string(255)
+#  permalink        :string(255)
+#  samplerate       :integer
+#  bitrate          :integer
+#  genre            :string(255)
+#  artist           :string(255)
+#  listens_count    :integer          default(0)
+#  description      :text(16777215)
+#  credits          :text(16777215)
+#  youtube_embed    :string(255)
+#  hotness          :float(24)
+#  favorites_count  :integer          default(0)
+#  lyrics           :text(16777215)
+#  description_html :text(16777215)
+#  listens_per_week :float(24)
+#  comments_count   :integer          default(0)
+#  updated_at       :datetime
+#  waveform         :text(4294967295)
+#  private          :boolean          default(FALSE), not null
+#
+
 require "rails_helper"
 
 include ActionDispatch::TestProcess
@@ -44,11 +78,11 @@ RSpec.describe Asset, type: :model do
     end
 
     it "should increase the user's count" do
-      expect{ new_track('muppets.mp3').save }.to change(Asset, :count).by(1)
+      expect { new_track('muppets.mp3').save }.to change(Asset, :count).by(1)
     end
 
     it "should not allow zipfiles" do
-      expect{ new_track('1valid-1invalid.zip').save }.not_to change(Asset, :count)
+      expect { new_track('1valid-1invalid.zip').save }.not_to change(Asset, :count)
     end
   end
 
@@ -152,12 +186,11 @@ RSpec.describe Asset, type: :model do
     end
 
     it 'should open up a zip and dig out valid mp3 files' do
-      #asset = new_track('1valid-1invalid.zip', 'application/zip')
+      # asset = new_track('1valid-1invalid.zip', 'application/zip')
       # lambda{asset.save}.should change(Asset, :count).by(1)
     end
   end
 end
-
 
 RSpec.describe Asset, 'on update', type: :model do
   fixtures :users, :assets

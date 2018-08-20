@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: memberships
+#
+#  id         :integer          not null, primary key
+#  group_id   :integer
+#  user_id    :integer
+#  admin      :boolean
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Membership < ActiveRecord::Base
   belongs_to :group
   belongs_to :user

@@ -1,7 +1,17 @@
-class Following < ActiveRecord::Base
+# == Schema Information
+#
+# Table name: followings
+#
+#  id          :integer          not null, primary key
+#  user_id     :integer
+#  follower_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
 
-  belongs_to :user, :counter_cache => :followers_count 
-  belongs_to :follower, :class_name => 'User'
+class Following < ActiveRecord::Base
+  belongs_to :user, counter_cache: :followers_count
+  belongs_to :follower, class_name: 'User'
 
   validates_presence_of :user_id, :follower_id
 end

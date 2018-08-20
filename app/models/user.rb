@@ -1,17 +1,62 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  login               :string(40)
+#  email               :string(100)
+#  salt                :string(128)      default(""), not null
+#  activated_at        :datetime
+#  created_at          :datetime
+#  updated_at          :datetime
+#  admin               :boolean          default(FALSE)
+#  last_login_at       :datetime
+#  crypted_password    :string(128)      default(""), not null
+#  assets_count        :integer          default(0), not null
+#  display_name        :string(255)
+#  playlists_count     :integer          default(0), not null
+#  website             :string(255)
+#  bio                 :text(16777215)
+#  listens_count       :integer          default(0)
+#  itunes              :string(255)
+#  comments_count      :integer          default(0)
+#  last_login_ip       :string(255)
+#  country             :string(255)
+#  city                :string(255)
+#  settings            :text(16777215)
+#  lat                 :float(24)
+#  lng                 :float(24)
+#  bio_html            :text(16777215)
+#  posts_count         :integer          default(0)
+#  moderator           :boolean          default(FALSE)
+#  browser             :string(255)
+#  twitter             :string(255)
+#  followers_count     :integer          default(0)
+#  login_count         :integer          default(0), not null
+#  current_login_at    :datetime
+#  current_login_ip    :string(255)
+#  persistence_token   :string(255)
+#  perishable_token    :string(255)
+#  last_request_at     :datetime
+#  bandwidth_used      :integer          default(0)
+#  greenfield_enabled  :boolean          default(FALSE)
+#  white_theme_enabled :boolean          default(FALSE)
+#
+
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :profile, :statistics, :posting, :greenfield
 
   acts_as_authentic do |c|
     c.transition_from_restful_authentication = true
     c.transition_from_crypto_providers = Authlogic::CryptoProviders::Sha512,
-    c.crypto_provider = Authlogic::CryptoProviders::SCrypt
+                                         c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
 
   scope :recent,        -> { order('users.id DESC')                                   }
   scope :recently_seen, -> { order('last_request_at DESC')                            }
-  scope :musicians,     -> { where(['assets_count > ?',0]).order('assets_count DESC') }
-  scope :activated,     -> { where(:perishable_token => nil).recent                   }
+  scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
+  scope :activated,     -> { where(perishable_token: nil).recent }
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
   scope :alpha,         -> { order('display_name ASC')                                }
@@ -22,51 +67,50 @@ class User < ActiveRecord::Base
   before_destroy :efficiently_destroy_relations
 
   # Can create music
-  has_one    :pic, :as => :picable, :dependent => :destroy
+  has_one    :pic, as: :picable, dependent: :destroy
   has_many   :assets,
-    -> { order('assets.id DESC')},
-    :dependent => :destroy
+             -> { order('assets.id DESC') },
+             dependent: :destroy
 
-  has_many   :playlists, -> { order('playlists.position')},
-    :dependent => :destroy
+  has_many   :playlists, -> { order('playlists.position') },
+             dependent: :destroy
 
-  has_many   :comments, -> {order('comments.id DESC')},
-    :dependent => :destroy
+  has_many   :comments, -> { order('comments.id DESC') },
+             dependent: :destroy
 
   has_many   :tracks
 
   # alonetone plus
   has_many :memberships
-  has_many :groups, :through => :membership
-
+  has_many :groups, through: :membership
 
   # Can listen to music, and have that tracked
-  has_many :listens, -> { order('listens.created_at DESC')}, :foreign_key  => 'listener_id'
+  has_many :listens, -> { order('listens.created_at DESC') }, foreign_key: 'listener_id'
 
   has_many :listened_to_tracks,
-    -> { order('listens.created_at DESC') },
-    :through => :listens,
-    :source => :asset
+           -> { order('listens.created_at DESC') },
+           through: :listens,
+           source: :asset
 
   # Can have their music listened to
   has_many :track_plays,
-    -> { order('listens.created_at DESC').includes(:asset)},
-    :foreign_key  => 'track_owner_id',
-    :class_name   => 'Listen'
+           -> { order('listens.created_at DESC').includes(:asset) },
+           foreign_key: 'track_owner_id',
+           class_name: 'Listen'
 
   # And therefore have listeners
   has_many :listeners,
-    -> { distinct },
-    :through  => :track_plays
+           -> { distinct },
+           through: :track_plays
 
-  has_many :followings, :dependent => :destroy
-  has_many :follows, :dependent => :destroy, :class_name => 'Following', :foreign_key => 'follower_id'
+  has_many :followings, dependent: :destroy
+  has_many :follows, dependent: :destroy, class_name: 'Following', foreign_key: 'follower_id'
 
   # people who are following this musician
-  has_many :followers, :through => :followings
+  has_many :followers, through: :followings
 
   # musicians who this person follows
-  has_many :followees, :through => :follows, :source => :user
+  has_many :followees, through: :follows, source: :user
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
@@ -85,14 +129,14 @@ class User < ActiveRecord::Base
   end
 
   def to_param
-    "#{login}"
+    login.to_s
   end
 
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] += [:email, :crypted_password,
-                        :fb_user_id, :activation_code, :admin,
-                        :salt, :moderator, :ip, :browser, :settings]
+    options[:except] += %i[email crypted_password
+                           fb_user_id activation_code admin
+                           salt moderator ip browser settings]
     super
   end
 
@@ -102,7 +146,7 @@ class User < ActiveRecord::Base
 
   def hasnt_been_here_in(hours)
     ast_login_at &&
-    last_login_at < hours.ago.utc
+      last_login_at < hours.ago.utc
   end
 
   def is_following?(user)
@@ -110,7 +154,7 @@ class User < ActiveRecord::Base
   end
 
   def new_tracks_from_followees(limit)
-    Asset.new_tracks_from_followees(self,{:page => 1, :per_page => limit})
+    Asset.new_tracks_from_followees(self, page: 1, per_page: limit)
   end
 
   def follows_user_ids
@@ -126,7 +170,7 @@ class User < ActiveRecord::Base
     if is_following?(followee_id)
       is_following?(followee_id).destroy
     else
-      follows.where(:user_id => followee_id).first_or_create
+      follows.where(user_id: followee_id).first_or_create
     end
   end
 
@@ -137,15 +181,15 @@ class User < ActiveRecord::Base
 
   def similar_users_by_ip
     User.where('last_login_ip = ? or last_login_ip = ? or current_login_ip = ? or current_login_ip = ?',
-      last_login_ip, current_login_ip, last_login_ip, current_login_ip).pluck(:id)
+               last_login_ip, current_login_ip, last_login_ip, current_login_ip).pluck(:id)
   end
 
   def toggle_favorite(asset)
-    existing_track = tracks.favorites.where(:asset_id => asset.id).first
+    existing_track = tracks.favorites.where(asset_id: asset.id).first
     if existing_track
       existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
     else
-      tracks.favorites.create(:asset_id => asset.id)
+      tracks.favorites.create(asset_id: asset.id)
       Asset.increment_counter(:favorites_count, asset.id, touch: true)
     end
   end
@@ -155,19 +199,19 @@ class User < ActiveRecord::Base
   def efficiently_destroy_relations
     Listen.where(track_owner_id: id).delete_all
     Listen.where(listener_id: id).delete_all
-    Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
+    Topic.where(user_id: id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
 
-    Playlist.joins(:assets).where(:assets => {:user_id => id}).
-      update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.joins(:asset).where(:assets => {:user_id => id}).delete_all
+    Playlist.joins(:assets).where(assets: { user_id: id })
+            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+    Track.joins(:asset).where(assets: { user_id: id }).delete_all
 
-    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id").
-      joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
+    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
 
     assets.destroy_all
 
-    %w(tracks playlists posts comments).each do |user_relation|
-      self.send(user_relation).delete_all
+    %w[tracks playlists posts comments].each do |user_relation|
+      send(user_relation).delete_all
     end
     true
   end

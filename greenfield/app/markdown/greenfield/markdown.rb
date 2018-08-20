@@ -9,7 +9,7 @@ module Greenfield
         %(<pre><code class="#{language}">#{CGI.escapeHTML(code)}</code></pre>)
       end
     end
-    
+
     def header(text, level)
       level += 2
       "<h#{level}>#{text}</h#{level}>"
@@ -18,7 +18,7 @@ module Greenfield
     def self.transform_embeds(post, text)
       text.gsub(/``(\d+)``/) do |m|
         asset_num = m.match(/\d+/)[0].to_i
-        asset_id = post.attached_assets[asset_num-1].id
+        asset_id = post.attached_assets[asset_num - 1].id
         "\n\n```embed\n#{asset_id}\n```"
       end
     end
@@ -30,10 +30,10 @@ module Greenfield
     end
 
     def self.render(text)
-      html_render = new(:hard_wrap => true, link_attributes: { target: '_blank' })
+      html_render = new(hard_wrap: true, link_attributes: { target: '_blank' })
       renderer = Redcarpet::Markdown.new(html_render,
-                                         :autolink => true, :no_intraemphasis => true,
-                                         :fenced_code_blocks => true, :tables => true)
+                                         autolink: true, no_intraemphasis: true,
+                                         fenced_code_blocks: true, tables: true)
       Redcarpet::Render::SmartyPants.render(renderer.render(text)).html_safe
     end
 

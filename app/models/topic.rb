@@ -1,6 +1,29 @@
-class Topic < ActiveRecord::Base
+# == Schema Information
+#
+# Table name: topics
+#
+#  id              :integer          not null, primary key
+#  forum_id        :integer
+#  user_id         :integer
+#  title           :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  hits            :integer          default(0)
+#  sticky          :integer          default(0)
+#  posts_count     :integer          default(0)
+#  locked          :boolean          default(FALSE)
+#  last_post_id    :integer
+#  last_updated_at :datetime
+#  last_user_id    :integer
+#  site_id         :integer
+#  permalink       :string(255)
+#  spam            :boolean          default(FALSE)
+#  spaminess       :float(24)
+#  signature       :string(255)
+#
 
-  before_validation :set_default_attributes, :on => :create
+class Topic < ActiveRecord::Base
+  before_validation :set_default_attributes, on: :create
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
   before_destroy :count_user_posts_for_counter_cache
@@ -8,30 +31,30 @@ class Topic < ActiveRecord::Base
 
   scope :with_user, -> { preload(:last_user, :user) }
   scope :recent, -> { order('topics.created_at DESC') }
-  scope :not_spam, -> { where(:spam => false).with_user }
-  scope :spam,    ->  { where(:spam => true).with_user }
+  scope :not_spam, -> { where(spam: false).with_user }
+  scope :spam, ->  { where(spam: true).with_user }
   scope :sticky_and_recent, -> { order("topics.sticky desc, topics.last_updated_at desc") }
-  scope :for_footer, -> { recent.not_spam.includes(:recent_post => :user).includes(:forum).limit(3) }
+  scope :for_footer, -> { recent.not_spam.includes(recent_post: :user).includes(:forum).limit(3) }
   # creator of forum topic
   belongs_to :user
 
   # creator of recent post
-  belongs_to :last_user, :class_name => "User"
-  belongs_to :forum, :counter_cache => true
+  belongs_to :last_user, class_name: "User"
+  belongs_to :forum, counter_cache: true
 
-  has_many :posts, :dependent => :delete_all
+  has_many :posts, dependent: :delete_all
 
   has_one  :recent_post,
-    -> { not_spam.order('posts.created_at DESC') },
-    :class_name => "Post"
+           -> { not_spam.order('posts.created_at DESC') },
+           class_name: "Post"
 
   has_many :voices,
-    -> { distinct },
-    :through => :posts, :source => :user
+           -> { distinct },
+           through: :posts, source: :user
 
   validates_presence_of :user_id, :forum_id, :title
 
-  validates_presence_of :body, :on => :create
+  validates_presence_of :body, on: :create
 
   attr_accessor :body
   attr_readonly :posts_count, :hits
@@ -74,12 +97,12 @@ class Topic < ActiveRecord::Base
   def update_cached_post_fields(post)
     # these fields are not accessible to mass assignment
     if remaining_post = post.frozen? ? recent_post : post
-      update_columns(:last_updated_at => remaining_post.created_at,
-        :last_user_id => remaining_post.user_id,
-        :last_post_id => remaining_post.id)
+      update_columns(last_updated_at: remaining_post.created_at,
+                     last_user_id: remaining_post.user_id,
+                     last_post_id: remaining_post.id)
       Topic.reset_counters id, :posts
     else
-      self.destroy
+      destroy
     end
   end
 
@@ -92,14 +115,14 @@ class Topic < ActiveRecord::Base
   end
 
   def self.popular
-    Post.group(:topic).not_spam.where(['posts.created_at > ?',10.days.ago]).limit(3).order('count_all DESC').count
+    Post.group(:topic).not_spam.where(['posts.created_at > ?', 10.days.ago]).limit(3).order('count_all DESC').count
   end
 
   def self.replyless
-    Topic.not_spam.limit(3).order('created_at DESC').where(:posts_count => 1)
+    Topic.not_spam.limit(3).order('created_at DESC').where(posts_count: 1)
   end
 
-protected
+  protected
 
   def set_default_attributes
     self.sticky          ||= 0
@@ -114,19 +137,19 @@ protected
 
   def set_post_forum_id
     return unless @old_forum_id
-    posts.update_all :forum_id => forum_id
+    posts.update_all forum_id: forum_id
     Forum.decrement_counter(:topics_count, @old_forum_id)
     Forum.increment_counter(:topics_count, forum_id, touch: true)
   end
 
   def count_user_posts_for_counter_cache
-    @user_posts = posts.group_by { |p| p.user_id }
+    @user_posts = posts.group_by(&:user_id)
   end
 
   def update_cached_forum_and_user_counts
-    Forum.where(:id => forum_id).update_all "posts_count = posts_count - #{posts_count}"
+    Forum.where(id: forum_id).update_all "posts_count = posts_count - #{posts_count}"
     @user_posts.each do |user_id, posts|
-      User.where(:id => user_id).update_all "posts_count = posts_count - #{posts.size}"
+      User.where(id: user_id).update_all "posts_count = posts_count - #{posts.size}"
     end
   end
 end

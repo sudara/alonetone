@@ -7,7 +7,7 @@ module Greenfield
       render nothing: true
     end
 
-    def require_login(login=nil)
+    def require_login(login = nil)
       @user_session = UserSession.new(login: login.try(:login))
       render 'greenfield/application/require_login'
     end
@@ -31,10 +31,7 @@ module Greenfield
     def find_asset_from_playlist
       alonetone_playlist = ::Playlist.find_by!(permalink: params[:playlist_id])
       @playlist ||= Greenfield::Playlist.new(alonetone_playlist)
-      if params[:asset_id].present?
-        @asset ||= Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
-      end
+      @asset ||= Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take! if params[:asset_id].present?
     end
-
   end
 end
