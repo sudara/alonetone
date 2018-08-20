@@ -8,17 +8,17 @@
       end
       %>
       <% if recent_topic_activity(topic) %>
-      <%= image_tag "forum/unread.png", :class => "icon green", :title => "Recent activity #{post}" %>
+      <%= image_tag "forum/unread.png", class: "icon green", title: "Recent activity #{post}" %>
       <% else %>
-        <%= image_tag "forum/read.png", :class => "icon grey", :title => "No recent activity #{post}" %>
+        <%= image_tag "forum/read.png", class: "icon grey", title: "No recent activity #{post}" %>
       <% end %>
     </td>
     <td class="c2">
       <%= "<span class='flag'>Sticky</span> <strong>".html_safe if topic.sticky? %>
-      <%= topic_title_link (topic), :class => "entry-title", :rel => "bookmark" %>
+      <%= topic_title_link (topic), class: "entry-title", rel: "bookmark" %>
       <%= "</strong>".html_safe if topic.sticky? %>
       <% if topic.paged? -%>
-      <small><%= link_to 'last page', forum_topic_path((@forum || topic.forum), topic, :page => topic.last_page) %></small>
+      <small><%= link_to 'last page', forum_topic_path((@forum || topic.forum), topic, page: topic.last_page) %></small>
       <% end -%>
     </td>
     <td class="ca inv stat"><%= topic.posts.size %></td>
@@ -26,6 +26,6 @@
     <td class="lp">
       <abbr class="updated"><%= local_time_ago(topic.last_updated_at) %></abbr>
       <span class="author">by <strong class="fn"><%= topic.last_user.name if topic.last_user %></strong></span>
-      <span><%= link_to 'view', forum_topic_path((@forum || topic.forum), topic, :page => topic.last_page, :anchor => "posts-#{topic.last_post_id}") %></span>
+      <span><%= link_to 'view', forum_topic_path((@forum || topic.forum), topic, page: topic.last_page, anchor: "posts-#{topic.last_post_id}") %></span>
     </td>
   </tr>

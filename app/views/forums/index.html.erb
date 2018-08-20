@@ -9,7 +9,7 @@
 
 <% if admin? %>
   <div class="button_wrapper" style="margin-top:-30px;">
-     <%= link_to " ", new_forum_path, :id => 'create_new_forum', :class => 'button'  %>
+     <%= link_to " ", new_forum_path, id: 'create_new_forum', class: 'button'  %>
   </div>
 <% end %>
 
@@ -23,20 +23,20 @@
     <td class="vat c1">
 
       <% if recent_forum_activity(forum) %>
-        <%= image_tag "forum/unread.png", :class => "icon green", :title => 'Recent activity' %>
+        <%= image_tag "forum/unread.png", class: "icon green", title: 'Recent activity' %>
       <% else %>
-        <%= image_tag "forum/read.png", :class => "icon grey", :title => 'No recent activity' %>
+        <%= image_tag "forum/read.png", class: "icon grey", title: 'No recent activity' %>
       <% end %>
     </td>
     <td class="c2 vat">
-      <%= link_to forum.name, forum_path(forum), :class => "title" %>
+      <%= link_to forum.name, forum_path(forum), class: "title" %>
       <div class="posts">
         <%= pluralize forum.topics_count, 'topic' %>,
         <%= pluralize forum.posts_count, 'post' %>
       </div>
       <%= "#{forum.description_html}".html_safe %>
       <div class="edit_forum">
-        <%= link_to "edit forum", edit_forum_path(forum), :class => "tiny", :rel => "directory" if admin? %>
+        <%= link_to "edit forum", edit_forum_path(forum), class: "tiny", rel: "directory" if admin? %>
       </div>
     </td>
     <td class="c3">
@@ -48,7 +48,7 @@
       <% if forum.recent_post -%>
         <%= local_time_ago forum.recent_post.created_at %><br />
         <%= "by #{forum.recent_post.try(:user).try(:display_name) || '[deleted]'}" %>
-        <span>(<%= link_to 'view', forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
+        <span>(<%= link_to 'view', forum_topic_path(forum, forum.recent_post.topic, page: forum.recent_post.topic.last_page, anchor: dom_id(forum.recent_post)) %>)</span>
       <% end -%>
     </td>
   </tr>
@@ -57,7 +57,7 @@
 
 <div class="footer_box">
 
-  <%= link_to posts_path, :class=>'view_all', :title => 'view all recent posts' do %>
+  <%= link_to posts_path, :class=>'view_all', title: 'view all recent posts' do %>
 <span>    view all recent posts </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
   <% end if Post.first %>
 
@@ -73,7 +73,7 @@
     <th width="1%"><%= 'Views'%></th>
     <th class="la"><%= 'Last post'%></th>
   </tr>
-  <%= render :partial => 'topic', :collection => @user_topics %>
+  <%= render partial: 'topic', collection: @user_topics %>
   </table>
 <% end %>
 
@@ -85,7 +85,7 @@
     <th width="1%"><%= 'Views'%></th>
     <th class="la"><%= 'Last post'%></th>
   </tr>
-  <%= render :partial => 'topic', :collection => @popular_topics %>
+  <%= render partial: 'topic', collection: @popular_topics %>
   </table>
 
   <h2>Conversations needing reply love</h2>
@@ -96,5 +96,5 @@
     <th width="1%"><%= 'Views'%></th>
     <th class="la"><%= 'Last post'%></th>
   </tr>
-  <%= render :partial => 'topic', :collection => @replyless_topics %>
+  <%= render partial: 'topic', collection: @replyless_topics %>
   </table>
