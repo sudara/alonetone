@@ -58,10 +58,10 @@ This is very easy. Already implemented on Ramen Music. Essentially just is a hav
 
 ### Better discovery though tags
 It's high time. We're small fries perhaps (40k tracks) but we lack any categorization outside of playlists and users. The community has decided NO GENRES and after a bunch of discussion, we've decided going with tags (chosen by the uploader) is likely best. However, problems ensue, including:
-	1) If it's a free for all, won't it just be like genres, but messy?
-	2) Should the tags  be moderated and exclude genres?
-	3) What to do about tagging all the old music, should moderators be able to adjust and add tags for the lazy users/old tracks?
-	4) Should there be a maximum enforced for UI purposes?
+  1) If it's a free for all, won't it just be like genres, but messy?
+  2) Should the tags  be moderated and exclude genres?
+  3) What to do about tagging all the old music, should moderators be able to adjust and add tags for the lazy users/old tracks?
+  4) Should there be a maximum enforced for UI purposes?
 
 This is more than just programming, it's ultimately a UI issue. We can look to Ramen's tag implementation (4-5 maximum, taking up 1-2 lines) for inspiration, but it's very easy to do this wrong.
 
@@ -113,14 +113,14 @@ Thirdly, fork away on github.
 `rake setup`
 - Create and seed database
 `rake db:setup`
-
 - `rails s`
-
 
 *Note: alonetone uses 3 config files that are created by 'rake setup
 
 > alonetone.yml (contains the application "secret" and app-specific settings)
+>
 > database.yml
+>
 > newrelic.yml (for performance tracking)
 
 #### Issues and workaround:

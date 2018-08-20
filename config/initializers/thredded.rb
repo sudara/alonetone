@@ -26,7 +26,7 @@ end
 Thredded.current_user_method = :"current_#{Thredded.user_class.name.underscore}"
 
 # User avatar URL. rb-gravatar gem is used by default:
-Thredded.avatar_url = ->(user) { user&.pic&.pic&.url(:album) || '/assets/default/no-pic_white.svg' }
+Thredded.avatar_url = ->(user) { user&.pic&.pic&.url(:album) || ActionController::Base.helpers.image_url('/default/o-pic_white.svg') }
 
 # ==> Permissions Configuration
 # By default, thredded uses a simple permission model, where all the users can post to all message boards,
