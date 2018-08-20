@@ -42,10 +42,10 @@ export default class extends Controller {
       url: this.sortUrl,
       type: 'POST',
       data: this.currentParams,
-      success: (data) {
-        this.displaySuccess()
-      }
-    });
+      // success (data) {
+      //   this.displaySuccess()
+      // }
+    })
   }
 
   displaySuccess() {
