@@ -1,25 +1,25 @@
 <% if params[:login] %>
-    <%= render :partial => 'users/user' %>
+    <%= render partial: 'users/user' %>
 
       <%= content_for :left do %>
         <h2>Comments on <%= @user.name %>'s stuff</h2>
         <div class="mini_paginator">
-          <%= will_paginate @comments, :param_name => :page%>
+          <%= will_paginate @comments, param_name: :page%>
         </div>
-        <%= render :partial => 'shared/comment', :collection => @comments %>
+        <%= render partial: 'shared/comment', collection: @comments %>
         <div class="mini_paginator">
-          <%= will_paginate @comments, :param_name => :page%>
+          <%= will_paginate @comments, param_name: :page%>
         </div>
       <% end %>
 
       <%= content_for :right do %>
         <h2>Comments made by <%= @user.name %> </h2>
         <div class="mini_paginator">
-          <%= will_paginate @comments_made, :param_name => :made_page%>
+          <%= will_paginate @comments_made, param_name: :made_page%>
         </div>
-        <%= render :partial => 'shared/comment', :collection => @comments_made %>
+        <%= render partial: 'shared/comment', collection: @comments_made %>
         <div class="mini_paginator">
-          <%= will_paginate @comments_made, :param_name => :made_page%>
+          <%= will_paginate @comments_made, param_name: :made_page%>
         </div>
      <% end %>
 
@@ -27,11 +27,11 @@
     <%= content_for :left do %>
     <h1>Recent Comments</h1>
       <div class="mini_paginator">
-        <%= will_paginate @comments, :param_name => :page%>
+        <%= will_paginate @comments, param_name: :page%>
       </div>
-        <%= render :partial => 'shared/comment', :collection => @comments %>
+        <%= render partial: 'shared/comment', collection: @comments %>
         <div class="mini_paginator">
-          <%= will_paginate @comments, :param_name => :page%>
+          <%= will_paginate @comments, param_name: :page%>
         </div>
     <% end %>
 
@@ -39,11 +39,11 @@
     <%= content_for :right do %>
         <h1>Recent SPAM</h1>
         <div class="mini_paginator">
-          <%= will_paginate @spam, :param_name => :spam_page%>
+          <%= will_paginate @spam, param_name: :spam_page%>
         </div>
-        <%= render :partial => 'shared/comment', :collection => @spam %>
+        <%= render partial: 'shared/comment', collection: @spam %>
         <div class="mini_paginator">
-          <%= will_paginate @spam, :param_name => :spam_page%>
+          <%= will_paginate @spam, param_name: :spam_page%>
         </div>
         <% end %>
     <% end %>
