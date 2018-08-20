@@ -1,7 +1,7 @@
 <h1>New feature</h1>
 
 <%= form_for(@feature) do |f| %>
- <%= render :partial => 'form', :locals =>{:f => f}%>
+ <%= render partial: 'form', locals: {f: f}%>
    <p>
     <%= f.submit "Create Feature (will not be published)" %>
   </p>
