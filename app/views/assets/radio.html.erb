@@ -4,7 +4,7 @@
     <%= will_paginate @assets %>
   </div>
     <div id="radio_tracks" class="box">
-        <%= render :partial => 'assets/asset', :collection => @assets  %>
+        <%= render partial: 'assets/asset', collection: @assets  %>
     </div>
     <div class="mini_paginator">
       <%= will_paginate @assets %>

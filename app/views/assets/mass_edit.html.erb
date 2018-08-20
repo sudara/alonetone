@@ -1,13 +1,13 @@
-<%= render(:partial => 'users/user') %>
+<%= render(partial: 'users/user') %>
 <h1>Editing your tracks</h1>
 <%= content_for :left do %>
     <div id="mass_edit">
     <% @assets.each do |asset| %>
         <% @asset = asset %>
-        <%= render :partial => 'edit' %>
+        <%= render partial: 'edit' %>
     <% end %>
     </div>
 <% end %>
 <%= content_for :right do %>
-    <%= render :partial => 'descriptionless'%>
+    <%= render partial: 'descriptionless'%>
 <% end %>

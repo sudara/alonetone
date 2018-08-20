@@ -3,8 +3,8 @@
 
 <div id="share_<%=id%>" class="panel no_border clearfix">
     <%= link_to "Home page", user_track_url(object.user, object.permalink) %> for this song:<br/>
-    <%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), :size => 40,:class => 'tabbed_input' %> <br/>    
+    <%= text_field_tag "home_#{id}", user_track_url(object.user, object.permalink), size: 40,class: 'tabbed_input' %> <br/>
     <br/>
     <br/><br/>
-    <%= link_to "more sharing options", user_track_path(object.user,object.permalink), :class => 'view_more', :style => 'margin:0', :title => "#{object.name}" %>
+    <%= link_to "more sharing options", user_track_path(object.user,object.permalink), class: 'view_more', style: 'margin:0', title: "#{object.name}" %>
 </div>
