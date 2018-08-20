@@ -13,7 +13,7 @@
   <%= pluralize @forum.posts.count, 'posts' %>
 <% end %>
 
-<%= link_to ' ', new_forum_topic_path(@forum), :id => "create_new_topic", :title => 'Start a new forum topic' %></p>
+<%= link_to ' ', new_forum_topic_path(@forum), id: "create_new_topic", title: 'Start a new forum topic' %></p>
 
 <table  class="wide topics">
   <tr>
@@ -22,7 +22,7 @@
     <th width="1%"><%= 'Views'%></th>
     <th class="la"><%= 'Last post'%></th>
   </tr>
-  <%= render :partial => 'topic', :collection => @topics %>
+  <%= render partial: 'topic', collection: @topics %>
 </table>
 
 <div class="forum_paginator">
