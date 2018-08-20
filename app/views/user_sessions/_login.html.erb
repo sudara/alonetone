@@ -5,10 +5,10 @@
 <% end %>
 
 <p>
-  <%= link_to "Forgot Your Password?", "#reset-password", :class => "slide_open_href" %>
+  <%= link_to "Forgot Your Password?", "#reset-password", class: "slide_open_href" %>
 </p>
 
-<%= form_tag password_resets_path, :id => 'reset-password', :style => 'display:none' do |f| %>
+<%= form_tag password_resets_path, id: 'reset-password', style: 'display:none' do |f| %>
     <label for="email"><%= 'Enter the email address you signed up with' %></label><br>
     <%= text_field 'email','' %>
     <%= submit_tag 'Send Me An Email so I can login again!'%>
