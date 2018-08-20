@@ -2,11 +2,11 @@
 <div class="box">
   <h2 class="box static_content_heading">Don't be shy, come on in</h2>
   <div id="login" class="static_content box">
-    <%= render :partial => 'login' %>
+    <%= render partial: 'login' %>
   </div>
 </div>
 <% end %>
 
 <% content_for :right do %>
-  <%= render :partial => 'users/join' unless params[:already_joined] %>
+  <%= render partial: 'users/join' unless params[:already_joined] %>
 <% end %>
