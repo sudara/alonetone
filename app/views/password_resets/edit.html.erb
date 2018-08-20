@@ -1,7 +1,7 @@
 <% content_for :left do %>
   <h2 class="box">Alright, pick a new password</h2>
   <div id="login" class="static_content box">
-    <%= simple_form_for @user, :url => password_reset_path, :method => :put do |f| %>
+    <%= simple_form_for @user, url: password_reset_path, method: :put do |f| %>
       <%= f.input :password %><br/>
       <%= f.input :password_confirmation %>
       <%= f.button :submit, "Come on in..." %>
