@@ -1,4 +1,4 @@
-<%= render :partial => 'users/user' %>
+<%= render partial: 'users/user' %>
 
 <% content_for :left do %>
   <div id="single_playlist">
@@ -9,5 +9,5 @@
 <% end %>
 
 <% content_for :right do %>
-  <%= render :partial => 'share', :locals => {:playlist => @playlist} %>
+  <%= render partial: 'share', locals: {playlist: @playlist} %>
 <% end %>
