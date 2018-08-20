@@ -39,7 +39,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     it "should raise an error if user is invalid" do
-      post "/users", params: { user: {login: 'bar', login: 'foo'} }
+      post "/users", params: { user: { login: 'bar', password: 'foo' } }
 
       expect(flash[:error]).to be_present
       expect(response).to render_template("users/new")
