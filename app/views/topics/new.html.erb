@@ -3,19 +3,14 @@
   <%= link_to 'Forums', forums_path %> <span class="arrow">&rarr;</span>
   <%= link_to @forum.name, forum_path(@forum) %> <span class="arrow">&rarr;</span> New Topic
 <% end %>
-
-
 <div class="container static_content">
   <p class="subtitle">Post will be by <%= current_user.name %> in the "<%= @forum.name %>" forum</p>
-  <%= error_messages_for :topic %>
-  <%= form_for :topic,
-       :url  => forum_topics_path(@forum) do |f| -%>
-  <%= render :partial => "form", :object => f %>
-  <div class="submit_wrapper">
-    <%= f.submit 'Post Topic' %> or  <%= link_to('Cancel', forum_path(@forum)).html_safe %>
-  </div>
-  <% end %>
-  
-  <%= render :partial => 'posts/formatting' %>       
-
-</div>  
+    <%= error_messages_for :topic %>
+    <%= form_for :topic, url:  forum_topics_path(@forum) do |f| -%>
+      <%= render partial: "form", object: f %>
+      <div class="submit_wrapper">
+        <%= f.submit 'Post Topic' %> or  <%= link_to('Cancel', forum_path(@forum)).html_safe %>
+      </div>
+    <% end %>
+  <%= render partial: 'posts/formatting' %>
+</div>
