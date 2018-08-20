@@ -1,10 +1,10 @@
 <% if present? @featured_tracks %>
 <div id="featured_tracks" class="box">
 	<h2 class="box">Featured Tracks</h2>
-	<%= link_to "view all", user_tracks_path(@feature.featured_user), :class=> 'view_all' if @feature.featured_user.has_tracks?%>
-	<%= render :partial => 'assets/asset', :collection => @featured_tracks.collect(&:asset) %>
+	<%= link_to "view all", user_tracks_path(@feature.featured_user), class: 'view_all' if @feature.featured_user.has_tracks?%>
+	<%= render partial: 'assets/asset', collection: @featured_tracks.collect(&:asset) %>
 </div>
  <div class="footer_box">
-  <%= link_to ' ', user_tracks_path(@user.login), :class => 'view_more_tracks' %>
+  <%= link_to ' ', user_tracks_path(@user.login), class: 'view_more_tracks' %>
  </div>
 <% end %>
