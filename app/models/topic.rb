@@ -130,3 +130,33 @@ protected
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: topics
+#
+#  id              :integer          not null, primary key
+#  hits            :integer          default(0)
+#  last_updated_at :datetime
+#  locked          :boolean          default(FALSE)
+#  permalink       :string(255)
+#  posts_count     :integer          default(0)
+#  signature       :string(255)
+#  spam            :boolean          default(FALSE)
+#  spaminess       :float(24)
+#  sticky          :integer          default(0)
+#  title           :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  forum_id        :integer
+#  last_post_id    :integer
+#  last_user_id    :integer
+#  site_id         :integer
+#  user_id         :integer
+#
+# Indexes
+#
+#  index_topics_on_forum_id_and_last_updated_at  (last_updated_at,forum_id)
+#  index_topics_on_forum_id_and_permalink        (forum_id,permalink)
+#  index_topics_on_sticky_and_last_updated_at    (sticky,last_updated_at,forum_id)
+#

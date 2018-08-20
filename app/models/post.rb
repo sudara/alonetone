@@ -64,3 +64,24 @@ protected
     errors.add_to_base("Topic is locked") if topic && topic.locked?
   end
 end
+
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :integer          not null, primary key
+#  body       :text(65535)
+#  body_html  :text(65535)
+#  is_spam    :boolean          default(FALSE)
+#  signature  :string(255)
+#  spaminess  :float(24)
+#  created_at :datetime
+#  updated_at :datetime
+#  forum_id   :integer
+#  topic_id   :integer
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_posts_on_is_spam  (is_spam)
+#

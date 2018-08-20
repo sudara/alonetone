@@ -144,3 +144,45 @@ class Asset < ActiveRecord::Base
     Greenfield::WaveformExtractJob.perform_later(id)
   end
 end
+
+# == Schema Information
+#
+# Table name: assets
+#
+#  id               :integer          not null, primary key
+#  album            :string(255)
+#  artist           :string(255)
+#  bitrate          :integer
+#  comments_count   :integer          default(0)
+#  credits          :text(16777215)
+#  description      :text(16777215)
+#  description_html :text(16777215)
+#  favorites_count  :integer          default(0)
+#  genre            :string(255)
+#  hotness          :float(24)
+#  length           :integer
+#  listens_count    :integer          default(0)
+#  listens_per_week :float(24)
+#  lyrics           :text(16777215)
+#  mp3_content_type :string(255)
+#  mp3_file_name    :string(255)
+#  mp3_file_size    :integer
+#  permalink        :string(255)
+#  private          :boolean          default(FALSE), not null
+#  samplerate       :integer
+#  thumbnails_count :integer          default(0)
+#  title            :string(255)
+#  waveform         :text(4294967295)
+#  youtube_embed    :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  user_id          :integer
+#
+# Indexes
+#
+#  index_assets_on_hotness                      (hotness)
+#  index_assets_on_permalink                    (permalink)
+#  index_assets_on_updated_at                   (updated_at)
+#  index_assets_on_user_id                      (user_id)
+#  index_assets_on_user_id_and_listens_per_day  (user_id,listens_per_week)
+#
