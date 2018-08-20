@@ -1,21 +1,21 @@
-<% content_for :pages do %> 
+<% content_for :pages do %>
   <div id="static_header">
     <div class="title">
       <h1 class="static">All about alonetone</h1>
     </div>
       <div id="links">
-        <ul class="links">                                                                                                                    
-          <%= user_nav_item "What is alonetone?", {:controller => 'pages', :action => 'index' }, :title => 'about alonetone'                  %>
-          <%= user_nav_item "Press", {:controller => 'pages', :action => 'press' }, :title => 'press and promotional info'                    %>
-          <%= user_nav_item "Stats", {:controller => 'pages', :action => 'stats'}, :added_class => 'contact', :title => 'alonetone statistics'%>
-          <%= user_nav_item "Latest News", blog_home_path, :added_class => 'contact', :title => 'Blog'                                        %>
+        <ul class="links">
+          <%= user_nav_item "What is alonetone?", { controller: 'pages', action: 'index' }, title: 'about alonetone' %>
+          <%= user_nav_item "Press", { controller: 'pages', action: 'press' }, title: 'press and promotional info' %>
+          <%= user_nav_item "Stats", { controller: 'pages', action: 'stats'}, added_class: 'contact', title: 'alonetone statistics' %>
+          <%= user_nav_item "Latest News", blog_home_path, added_class: 'contact', title: 'Blog' %>
         </ul>
       </div>
       <%= yield :pagination %>
-  </div>    
+  </div>
   <% content_for :static do %>
     <%= yield %>
   <% end %>
-<% end %> 
+<% end %>
 
-<%= render :file => "layouts/application"%>
+<%= render file: "layouts/application"%>

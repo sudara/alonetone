@@ -17,12 +17,12 @@
 
   <div id="forums_layout">
     <div class="search" style="margin-bottom:15px;">
-      <%= form_tag posts_path, :id =>'forum_search',:method => :get do %>
-        <%= text_field_tag 'forum_q', params[:forum_q], :placeholder => 'search the forums' %>
+      <%= form_tag posts_path, id: 'forum_search', method: :get do %>
+        <%= text_field_tag 'forum_q', params[:forum_q], placeholder: 'search the forums' %>
         <%= submit_tag 'search' %>
       <% end %>
     </div>
     <%= yield %>
   </div>
 <% end %>
-<%= render :file => 'layouts/application' %>
+<%= render file: 'layouts/application' %>
