@@ -7,7 +7,7 @@
      <% if logged_in? %>
         'Say something, <%= escape_javascript(current_user.name)%>:'+
      <% else %>
-        'Comment as a <span class="comment_as_guest">Guest</span> or <%= link_to 'login', login_path, :title => 'login to alonetone' %>:'+
+        'Comment as a <span class="comment_as_guest">Guest</span> or <%= link_to 'login', login_path, title: 'login to alonetone' %>:'+
      <% end %>
   '</div>';
 

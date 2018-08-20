@@ -26,7 +26,7 @@ The param passed is the max zoom level for the cropping UI. -->
 <h1>Crop Mugshot</h1>
 
 <div>
-	<% form_tag :action => 'crop' do %>
+	<% form_tag action: 'crop' do %>
 		<div id="crop_form_fields">
 			<%= hidden_field_tag "crop_left", "0" %></p>
 			<%= hidden_field_tag "crop_top", "0" %></p>
@@ -49,14 +49,14 @@ The param passed is the max zoom level for the cropping UI. -->
 		        <div id="crop_overlay"></div>
 		        <div id="crop_stencil"></div>
 		        <div id="image_dragger"></div>
-				<%= image_tag(@mugshot.public_filename, :id => "uncropped_image" ) %>
+				<%= image_tag(@mugshot.public_filename, id: "uncropped_image" ) %>
 		    </div>
 		    <div id="crop_footer">
 		    	<div id="zoom_slider">
 		        	<div id="zoom_slider_handle"></div>
 		    	</div>
 				<div id="crop_buttons">
-					<%= submit_tag "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crop Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", :id => "crop_submit_btn" %>
+					<%= submit_tag "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crop Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", id: "crop_submit_btn" %>
 					<input type="button" value="Cancel" id="crop_cancel_btn" onclick="this.form.crop_cancel.value='true';this.form.submit();" />
 					<input type="button" value="&nbsp;Reset&nbsp;" id="crop_reset_btn" />
 				</div>

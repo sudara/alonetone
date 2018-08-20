@@ -1,7 +1,7 @@
 <% if @show_title_and_link %>
 <tr class="post title"%>
     <td colspan="2">
-        <h2><%= link_to post.topic.title, forum_topic_path(post.forum, post.topic, :page => post.forum.recent_post.topic.last_page) %></h2>
+        <h2><%= link_to post.topic.title, forum_topic_path(post.forum, post.topic, page: post.forum.recent_post.topic.last_page) %></h2>
     </td>
 </tr>
 
@@ -15,7 +15,7 @@
         <div class="author_top">
           <% if post.user.present? %>
           <div class="vcard_user_name">
-            <span class="fn"><%= link_to truncate(post.user.name, :length => 30), user_home_path(post.user), :class => (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
+            <span class="fn"><%= link_to truncate(post.user.name, length: 30), user_home_path(post.user), class: (post.user == @posts.first.user ? "threadauthor" : nil) %></span>
           </div>
 
           <div class="vcard_image_container">
@@ -53,21 +53,21 @@
         <div class="author_bottom">
           
           <div class='post_edit_and_delete_links'>
-      	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => 'utility' %>
+      	    <%= link_to 'edit', edit_forum_topic_post_path(post.forum, post.topic, post, page: current_page), class: 'utility' %>
             &nbsp;/&nbsp;
-            <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, :page => current_page), :class => "utility", :method => :delete, :confirm => "Delete this post?  Are you sure?") unless post.new_record? %>  
+            <%= link_to('delete', forum_topic_post_path(post.forum, post.topic, post, page: current_page), class: "utility", method: :delete, confirm: "Delete this post?  Are you sure?") unless post.new_record? %>  
             <% if moderator? %>
               &nbsp;/&nbsp;
         	    <% if post.is_spam? %>
-                <%= link_to 'un-spam', unspam_forum_topic_post_path(post.forum, post.topic, post),  :data => { :confirm => 'This will make the comment public. Are you sure?'}, :method => :put %>
+                <%= link_to 'un-spam', unspam_forum_topic_post_path(post.forum, post.topic, post),  data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put %>
         	    <% else %>
-                <%= link_to 'mark as spam', spam_forum_topic_post_path(post.forum, post.topic, post),  :data => {:confirm => 'Are you sure you want to mark this as SPAM?'}, :method => :put%>  	     
+                <%= link_to 'mark as spam', spam_forum_topic_post_path(post.forum, post.topic, post),  data: {confirm: 'Are you sure you want to mark this as SPAM?'}, method: :put%>  	     
               <% end %>
             <% end %>
           </div>
           <div class="post_browser_specs">
             <abbr title="<%= post.user.try(:browser) %>">
-              <%= truncate(post.user.try(:browser), :length => 33) if moderator? %>
+              <%= truncate(post.user.try(:browser), length: 33) if moderator? %>
             </abbr>
           </div>
 

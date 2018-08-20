@@ -7,8 +7,8 @@
     <br/>
     <br/>
     Follow these simple steps, and you will get your very own podcast listed on iTunes. Each time
-    you upload a track to alonetone, a new 'episode' appears on iTunes. People can subscribe and 
-    automatically receive your latest tunes. People can search the iTunes store and find you 
+    you upload a track to alonetone, a new 'episode' appears on iTunes. People can subscribe and
+    automatically receive your latest tunes. People can search the iTunes store and find you
     and your music.
   </div>
 </div>
@@ -21,11 +21,11 @@
     <br/>
     <br/>
     <% if logged_in? %>
-      This is your feed address, 
+      This is your feed address,
       <%= current_user.name + ':' %>
       <br>
         <strong>
-          <%= user_url(current_user, :format => :rss) %>
+          <%= user_url(current_user, format: :rss) %>
         </strong>
       </br>
     <% else %>
@@ -40,7 +40,7 @@
     <%= link_to 'Click here to open the special "submit podcast" page in iTunes', 'https://phobos.apple.com/WebObjects/MZFinance.woa/wa/publishPodcast' %>
     <br/>
     <br/>
-    <%= image_tag('http://img.skitch.com/20080518-e3kj9rsh5pje75iyu86x4hu2rw.jpg', :width => 500) %>
+    <%= image_tag('http://img.skitch.com/20080518-e3kj9rsh5pje75iyu86x4hu2rw.jpg', width: 500) %>
   </div>
 </div>
 <div class="faq box">
@@ -48,11 +48,11 @@
     Step 2: Wait (a few days)
   </h2>
   <div class="static_content">
-    After a few days have gone by, alonetone will get an email that your podcast is approved, with a link to your podcast. 
+    After a few days have gone by, alonetone will get an email that your podcast is approved, with a link to your podcast.
     <b>Note: You will not get any email or notification. Only alonetone gets notification.</b>
     <br/>
     <br/>
-    After a few days have passed, 
+    After a few days have passed,
     <b>search the store for your name. </b>
     If you don't see yourself after a week, something is wrong: email support@alonetone.com so he can take a look at it for you.
   </div>

@@ -1,6 +1,6 @@
 <%= error_messages_for :user %>
 
-<%= render :partial => 'users/user' unless white_theme_enabled? %>
+<%= render partial: 'users/user' unless white_theme_enabled? %>
 
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
@@ -14,7 +14,7 @@
 
   <p>
     <label for="user_bio">Tell us about yourself</label><br/>
-    <%= f.text_area :bio, :class=>'double_trouble', :cols => 50, :rows => 15 %>
+    <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
   </p>
 
   <p>
@@ -24,7 +24,7 @@
 
   <p>
     <label for="user_bio">What country?</label><br />
-    <%= f.country_select(:country, ['United States'], :include_blank => true) %>
+    <%= f.country_select(:country, ['United States'], include_blank: true) %>
   </p>
 
   <p>
@@ -49,9 +49,9 @@
   <h2 class="box">Your Account</h2>
 	<div class="static_content">
   	<%= form_for @user, html: { method: :put }, namespace: 'password' do |f| -%>
-    <%= link_to("Change your login and alonetone address", '#edit_login', :class=>'slide_open_href') %> <br/><br/>
-    <%= link_to("Change your password",'#edit_password',:class=>'slide_open_href') %><br/><br/>
-    <%= link_to("Delete your account",'#destroy_account',:class=>'slide_open_href') %>
+    <%= link_to("Change your login and alonetone address", '#edit_login', class: 'slide_open_href') %> <br/><br/>
+    <%= link_to("Change your password",'#edit_password', class: 'slide_open_href') %><br/><br/>
+    <%= link_to("Delete your account",'#destroy_account', class: 'slide_open_href') %>
   </div>
 
   <div class="static_content">
@@ -80,9 +80,9 @@
     This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone<br/><br/>
     <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
 
-    <%= link_to "Delete", user_path(:login => @user.login), :method => :delete,
-    :confirm => 'Are you absolutely sure? This will delete your account and tracks permanently, including all play history and comments.',
-    :class => 'delete_green'%>
+    <%= link_to "Delete", user_path(login: @user.login), method: :delete,
+    confirm: 'Are you absolutely sure? This will delete your account and tracks permanently, including all play history and comments.',
+    class: 'delete_green'%>
     <br/><br/>
   </div>
 
@@ -100,7 +100,7 @@
   <div class="static_content">
       <p><%= image_tag @user.avatar(:album)%></p>
       Upload a new photo. (1000px by 1000px square for best results)<br/>
-      <%= form_for :pic, :url => attach_pic_user_path(@user), :html => {:multipart => true, :method => :post} do |f| %>
+      <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
       	<%= f.file_field :pic  %>
       	<%= submit_tag "Upload new Pic" %>
       <% end %><br/>

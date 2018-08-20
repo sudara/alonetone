@@ -44,15 +44,30 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.include Authlogic::TestCase, type: :request
+  config.include Authlogic::TestCase, type: :controller
+
+  config.before(:example, type: :request) do
+    activate_authlogic
+  end
+
+  config.before(:example, type: :controller) do
+    activate_authlogic
+  end
+
   module LoginHelper
     include Authlogic::TestCase
 
     def login(user)
       login_as = user.is_a?(User) ? user : users(user) # grab the fixture
-      activate_authlogic # make authlogic happy
+
       expect(session = UserSession.create(login_as)).to be_truthy # make sure we logged in
       allow(controller).to receive(:current_user_session).and_return(session)
       allow(controller).to receive(:current_user).and_return(login_as) # make authlogic happy
+    end
+
+    def create_user_session(user)
+      post '/user_sessions', params: { user_session: { login: user.login, password: 'test' } }
     end
 
     def logout
