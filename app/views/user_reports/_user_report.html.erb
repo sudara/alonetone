@@ -1,4 +1,4 @@
-<% div_for user_report, :class => (cycle('even', 'odd')) do %>
+<% div_for user_report, class:  (cycle('even', 'odd')) do %>
   
   <div class="comment_user">
     	<% if user_report.user %>
@@ -13,7 +13,7 @@
   	</div>
 	 
 	<% if admin? %>
-		<%= link_to 'Delete', user_report_path(user_report), :class => 'delete button', :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Delete', user_report_path(user_report), class:  'delete button', confirm:  'Are you sure?', method:  :delete %>
 	<% end %>
 	</div>
 	<div class="comment_body">
@@ -21,7 +21,7 @@
     	<%= user_report.print %>
     	<% if admin? %>
     </div>	    
-    	<%= link_to 'show tech details',"#report_details_#{user_report.id}", :class=> 'slide_open_href view_all'%>
+    	<%= link_to 'show tech details',"#report_details_#{user_report.id}", class: 'slide_open_href view_all'%>
     <div class="comment_body" id="report_details_<%=user_report.id %>" style="display:none;">
 	    <%= debug(user_report.params) %>
 	   <% end %>     
