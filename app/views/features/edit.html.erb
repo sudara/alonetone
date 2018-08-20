@@ -2,9 +2,9 @@
 
 <% content_for :left do %>
     <%= form_for(@feature) do |f| %>
-     <%= render :partial => 'form', :locals =>{:f => f}%>
+     <%= render partial: 'form', locals: {f: f}%>
 
-      <p>    
+      <p>
         <%= f.label :published %><br />
         <%= f.check_box :published %>
       </p>
