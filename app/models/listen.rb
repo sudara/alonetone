@@ -117,3 +117,28 @@ class Listen < ActiveRecord::Base
     self.source = self.source.try(:slice, 0, 255)
   end
 end
+
+# == Schema Information
+#
+# Table name: listens
+#
+#  id             :integer          not null, primary key
+#  city           :string(255)
+#  country        :string(255)
+#  ip             :string(255)
+#  source         :string(255)
+#  user_agent     :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  asset_id       :integer
+#  listener_id    :integer
+#  track_owner_id :integer
+#
+# Indexes
+#
+#  index_listens_on_asset_id                       (asset_id)
+#  index_listens_on_created_at                     (created_at)
+#  index_listens_on_listener_id                    (listener_id)
+#  index_listens_on_track_owner_id                 (track_owner_id)
+#  index_listens_on_track_owner_id_and_created_at  (track_owner_id,created_at)
+#
