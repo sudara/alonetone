@@ -11,7 +11,7 @@
       <%= stylesheet_link_tag ('application') %>
     <% end %>
 
-    <%= stylesheet_link_tag 'ipad', :media => "only screen and (max-device-width: 1024px)" %>
+    <%= stylesheet_link_tag 'ipad', media: "only screen and (max-device-width: 1024px)" %>
     <%= javascript_include_tag "application", "data-turbolinks-eval": "false" %>
 
     <link rel="apple-touch-icon" href="/images/ipad_icon.png"/>
@@ -32,7 +32,7 @@
     <% end %>
 
       <!-- render user specific variables and js helpers -->
-      <%= render :partial => 'shared/javascript_payload' %>
+      <%= render partial: 'shared/javascript_payload' %>
   </head>
 
   <body>
@@ -43,11 +43,11 @@
         </div>
       <% end %>
       <div class="header">
-        <%= render :partial=> 'shared/header' %>
+        <%= render partial: 'shared/header' %>
       </div>
       <div id="wrapper">
         <div id="content" class="content">
-          <%= render :partial => 'shared/search' %>
+          <%= render partial: 'shared/search' %>
           <%= check_for_and_display_welcome_back %>
           <%= check_for_and_display_flashes %>
           <div id="main">
@@ -80,10 +80,10 @@
       <div class="sticky_footer_buffer"></div>
     </div>
     <div class="footer">
-      <%= cache("footer/#{theme_name}/#{moderator?}", :expires_in => 3.minutes) do %>
-        <%= render :partial => 'shared/footer' %>
+      <%= cache("footer/#{theme_name}/#{moderator?}", expires_in: 3.minutes) do %>
+        <%= render partial: 'shared/footer' %>
       <% end %>
     </div>
-    <%= render :partial => 'shared/analytics' %>
+    <%= render partial: 'shared/analytics' %>
   </body>
 </html>
