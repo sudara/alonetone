@@ -8,12 +8,12 @@ class Asset < ActiveRecord::Base
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
 
-  belongs_to :user, :counter_cache => true
+  belongs_to :user, counter_cache: true
   has_one  :audio_feature
-  has_many :tracks,    :dependent => :destroy
-  has_many :playlists, :through => :tracks
-  has_many :listens,   -> { order('listens.created_at DESC') }, :dependent => :destroy
-  has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :tracks,    dependent: :destroy
+  has_many :playlists, through: :tracks
+  has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   has_many :listeners,
     -> { distinct.order('listens.created_at DESC').limit(20) },
@@ -21,19 +21,19 @@ class Asset < ActiveRecord::Base
 
   has_many :favoriters,
     -> { where('tracks.is_favorite' => true).order('tracks.created_at DESC') },
-    :source     =>  :user,
-    :through    =>  :tracks
+    source: :user,
+    through: :tracks
 
   has_permalink :name, true
-  before_update :generate_permalink!, :if => :title_changed?
+  before_update :generate_permalink!, if: :title_changed?
   after_create :notify_followers, if: :published?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
-  rakismet_attrs  :author =>        proc { user.display_name },
-                  :author_email =>  proc { user.email },
-                  :content =>       proc { description },
-                  :permalink =>     proc { full_permalink }
+  rakismet_attrs  author: proc { user.display_name },
+                  author_email: proc { user.email },
+                  content: proc { description },
+                  permalink: proc { full_permalink }
 
   validates_presence_of :user_id
 
@@ -44,7 +44,7 @@ class Asset < ActiveRecord::Base
   end
 
   def self.latest(limit = 10)
-    includes(:user => :pic).limit(limit).order('assets.id DESC')
+    includes(user: :pic).limit(limit).order('assets.id DESC')
   end
 
   def self.id_not_in(asset_ids)
@@ -80,7 +80,7 @@ class Asset < ActiveRecord::Base
   end
 
   def first_playlist
-      Track.where(:asset_id => id).first.playlists.first
+      Track.where(asset_id: id).first.playlists.first
   rescue StandardError
       nil
   end

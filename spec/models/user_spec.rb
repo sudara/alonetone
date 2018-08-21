@@ -61,6 +61,6 @@ RSpec.describe User, type: :model do
   protected
 
   def new_user(options = {})
-    User.new({ :email => 'new@user.com', :login => 'newuser', :password => 'quire451', :password_confirmation => 'quire451' }.merge(options))
+    User.new({ email: 'new@user.com', login: 'newuser', password: 'quire451', password_confirmation: 'quire451' }.merge(options))
   end
 end

@@ -1,6 +1,6 @@
 class ForumsController < ApplicationController
-  before_action :require_login, :except => %i[index show]
-  before_action :find_forum, :only => %i[show edit update destroy]
+  before_action :require_login, except: %i[index show]
+  before_action :find_forum, only: %i[show edit update destroy]
   before_action :set_forum_tab, :set_html_meta
   layout :forums_layout
 
@@ -14,9 +14,9 @@ class ForumsController < ApplicationController
     handle_forum_session
     respond_to do |format|
       format.html do # show.html.erb
-        @topics = @forum.topics.not_spam.sticky_and_recent.paginate :page => current_page, :per_page => 20
+        @topics = @forum.topics.not_spam.sticky_and_recent.paginate page: current_page, per_page: 20
       end
-      format.xml  { render :xml => @forum }
+      format.xml  { render xml: @forum }
     end
   end
 
@@ -29,18 +29,18 @@ class ForumsController < ApplicationController
 
   def create
     if @forum = Forum.create(params[:forum])
-      redirect_to @forum, :notice => 'Forum was created.'
+      redirect_to @forum, notice: 'Forum was created.'
     else
       flash[:error] = "Hrm...."
-      render :action => "new"
+      render action: "new"
     end
   end
 
   def update
     if @forum.update_attributes(params[:forum])
-      redirect_to @forum, :notice => 'Forum was successfully updated.'
+      redirect_to @forum, notice: 'Forum was successfully updated.'
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -56,7 +56,7 @@ class ForumsController < ApplicationController
   end
 
   def find_forum
-    @forum = Forum.where(:permalink => params[:id]).first || not_found
+    @forum = Forum.where(permalink: params[:id]).first || not_found
   end
 
   def reset_session_forums_page

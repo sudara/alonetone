@@ -4,13 +4,13 @@ class PagesController < ApplicationController
   class Hell < StandardError; end
 
   def twentyfour
-    render :layout => '24houralbum'
+    render layout: '24houralbum'
   end
 
   def rpm_challenge
     set_2009_albums
     set_2010_albums
-    render :layout => 'rpm_challenge'
+    render layout: 'rpm_challenge'
   end
 
   def about
@@ -26,20 +26,20 @@ class PagesController < ApplicationController
   def error
     @page_title = "Whups, alonetone slipped and fell!"
     flash[:error] = "We have a problem. But, it is not you...it's me."
-    render :status => 500
+    render status: 500
   end
 
   def four_oh_four
     @page_title = "Not found"
     flash[:error] = "Hmm, couldn't find that..."
-    render :status => 404
+    render status: 404
   end
 
   def help_an_app_support_brutha_out
     query      = "SELECT version FROM schema_migrations ORDER BY version DESC LIMIT 1"
     version    = ActiveRecord::Base.connection.select_value(query)
     time       = Time.now.to_formatted_s(:rfc822)
-    render(:text => "O Hai. You can haz alonetone. kthxbai!")
+    render(text: "O Hai. You can haz alonetone. kthxbai!")
   end
 
   def about
@@ -65,7 +65,7 @@ class PagesController < ApplicationController
   end
 
   def not_yet
-    render :layout => false
+    render layout: false
   end
 
   def itunes
@@ -103,7 +103,7 @@ class PagesController < ApplicationController
             812, 810, 806, 805, 804, 802, 801, 800, 716, 799, 798,
             797, 790, 787, 786, 767, 762,
             760, 753, 745, 742, 739, 724, 729, 809, 819, 830]
-    @albums_2009 = Playlist.where(:id => ids_2009).order('created_at ASC').includes(%i[pic user])
+    @albums_2009 = Playlist.where(id: ids_2009).order('created_at ASC').includes(%i[pic user])
   end
 
   def set_2010_albums
@@ -114,6 +114,6 @@ class PagesController < ApplicationController
                 2078, 2108, 2029, 2195, 2083, 2194, 2187, 2182, 2196,
                 2174, 2197, 2200, 2202, 2150, 2209, 2012, 2215, 2245,
                 2241, 2234]
-    @albums_2010 = Playlist.where(:id => ids_2010).includes(%i[user pic])
+    @albums_2010 = Playlist.where(id: ids_2010).includes(%i[user pic])
   end
 end

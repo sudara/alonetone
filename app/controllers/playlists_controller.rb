@@ -2,10 +2,10 @@ class PlaylistsController < ApplicationController
   include GreenfieldPlaylistDownloads
   include Listens
 
-  before_action :find_user, :except => :all
-  before_action :find_playlists, :except => %i[index new create all sort]
-  before_action :require_login, :except => %i[index show all]
-  before_action :find_tracks, :only => %i[show edit all]
+  before_action :find_user, except: :all
+  before_action :find_playlists, except: %i[index new create all sort]
+  before_action :require_login, except: %i[index show all]
+  before_action :find_tracks, only: %i[show edit all]
 
   def all
     @playlists = Playlist.recent.only_public.with_pic.paginate(page: params[:page], per_page: 30)
@@ -53,10 +53,10 @@ class PlaylistsController < ApplicationController
   end
 
   def new
-    @playlist = @user.playlists.build(:private => true)
+    @playlist = @user.playlists.build(private: true)
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @playlist }
+      format.xml  { render xml: @playlist }
     end
   end
 
@@ -119,15 +119,15 @@ class PlaylistsController < ApplicationController
       flash[:notice] = 'Great, go ahead and add some tracks'
       redirect_to edit_user_playlist_path(@user, @playlist)
     else
-       render :action => "new"
+       render action: "new"
     end
   end
 
   def update
     if @playlist.update_attributes(playlist_params)
-      redirect_to edit_user_playlist_path(@user, @playlist), :notice => 'Playlist was successfully updated.'
+      redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.'
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -148,13 +148,13 @@ class PlaylistsController < ApplicationController
   end
 
   def render_desired_partial
-    render :partial => 'your_stuff.html.erb'     if params[:uploads_page]
-    render :partial => 'your_listens.html.erb'   if params[:listens_page]
-    render :partial => 'your_favorites.html.erb' if params[:favorites_page]
+    render partial: 'your_stuff.html.erb'     if params[:uploads_page]
+    render partial: 'your_listens.html.erb'   if params[:listens_page]
+    render partial: 'your_favorites.html.erb' if params[:favorites_page]
   end
 
   def set_assets
-    @assets = @user.assets.recent.paginate(:page => params[:uploads_page], :per_page => 10)
+    @assets = @user.assets.recent.paginate(page: params[:uploads_page], per_page: 10)
   end
 
   def set_all_playlists
@@ -179,7 +179,7 @@ class PlaylistsController < ApplicationController
 
   def find_playlists
     permalink = params[:permalink] || params[:id]
-    @playlist = @user.playlists.where(:permalink => permalink).first || @user.playlists.where(:id => permalink).take!
+    @playlist = @user.playlists.where(permalink: permalink).first || @user.playlists.where(id: permalink).take!
   end
 
   def find_tracks

@@ -11,13 +11,13 @@ class User
   end
 
   def self.search(query, options = {})
-    with_scope :find => { :conditions => build_search_conditions(query) } do
+    with_scope find: { conditions: build_search_conditions(query) } do
       find :all, options
     end
   end
 
   def self.build_search_conditions(query)
-    query && ['LOWER(display_name) LIKE :q OR LOWER(login) LIKE :q', { :q => "%#{query}%" }]
+    query && ['LOWER(display_name) LIKE :q OR LOWER(login) LIKE :q', { q: "%#{query}%" }]
   end
 
   # feeds the users/index subnav

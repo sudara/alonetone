@@ -1,35 +1,35 @@
 class Playlist < ActiveRecord::Base
-  acts_as_list :scope => :user_id, :order => :position
+  acts_as_list scope: :user_id, order: :position
 
-  scope :mixes,            -> { where(:is_mix => true)                                                            }
-  scope :albums,           -> { where(:is_mix => false).where(:is_favorite => false)                              }
-  scope :favorites,        -> { where(:is_favorite => true)                                                       }
-  scope :only_public,      -> { where(:private => false).where(:is_favorite => false).where("tracks_count > 1")   }
-  scope :include_private,  -> { where(:is_favorite => false)                                                      }
+  scope :mixes,            -> { where(is_mix: true) }
+  scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
+  scope :favorites,        -> { where(is_favorite: true) }
+  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
+  scope :include_private,  -> { where(is_favorite: false) }
   scope :recent,           -> { order('playlists.created_at DESC')                                                }
   scope :with_pic,         -> { preload(:pic)                                                                     }
   scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_pic.includes(:user) }
 
-  belongs_to :user, :counter_cache => true
-  has_one  :pic, :as => :picable, :dependent => :destroy
+  belongs_to :user, counter_cache: true
+  has_one  :pic, as: :picable, dependent: :destroy
   has_many :tracks,
-     -> { order(:position).includes(:asset => :user) },
-     :dependent => :destroy
-  has_many :assets, :through => :tracks
+     -> { order(:position).includes(asset: :user) },
+     dependent: :destroy
+  has_many :assets, through: :tracks
   has_many :public_assets,
     -> { where('assets.private = ?', false) },
-    :through => :tracks, :source => :asset
+    through: :tracks, source: :asset
 
-  has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', :dependent => :destroy
+  has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
   accepts_nested_attributes_for :greenfield_downloads
 
   validates_presence_of :description, :title, :user_id
-  validates_length_of   :title, :within => 4..100
-  validates_length_of   :year, :within => 2..4, :allow_blank => true
-  validates_length_of   :description, :within => 1..2000, :allow_blank => true
+  validates_length_of   :title, within: 4..100
+  validates_length_of   :year, within: 2..4, allow_blank: true
+  validates_length_of   :description, within: 1..2000, allow_blank: true
 
   has_permalink :title
-  before_validation :name_favorites_and_set_permalink, :on => :create
+  before_validation :name_favorites_and_set_permalink, on: :create
   before_update :set_mix_or_album
   before_update :ensure_private_if_less_than_two_tracks
 

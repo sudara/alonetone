@@ -1,14 +1,14 @@
 module Greenfield
   class AttachedAsset < ActiveRecord::Base
     belongs_to :post
-    has_one :user, :through => :post
-    has_one :alonetone_asset, :through => :post, :source => :asset
+    has_one :user, through: :post
+    has_one :alonetone_asset, through: :post, source: :asset
 
     # TODO: Need to validate attachment embeds...
 
     attachment_options = {
-      :styles => { :original => '' }, # just makes sure original runs through the processor
-      :processors => [:mp3_paperclip_processor]
+      styles: { original: '' }, # just makes sure original runs through the processor
+      processors: [:mp3_paperclip_processor]
     }
 
     if Alonetone.storage == 's3'
@@ -20,9 +20,9 @@ module Greenfield
 
     serialize :waveform, Array
 
-    validates_attachment_size :mp3, :less_than => 60.megabytes
-    validates_attachment_presence :mp3, :message => 'must be set. Make sure you chose a file to upload!'
-    validates_attachment_content_type :mp3, :content_type => ['audio/mpeg', 'audio/mp3'], :message => " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
+    validates_attachment_size :mp3, less_than: 60.megabytes
+    validates_attachment_presence :mp3, message: 'must be set. Make sure you chose a file to upload!'
+    validates_attachment_content_type :mp3, content_type: ['audio/mpeg', 'audio/mp3'], message: " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
 
     def permalink
       "#{id}-@attachment"

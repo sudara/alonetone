@@ -1,6 +1,6 @@
 class Asset
   def self.radio(channel, params, user)
-    common_options = { :per_page => 20, :page => params[:page] }
+    common_options = { per_page: 20, page: params[:page] }
 
     case channel
     when 'favorites'

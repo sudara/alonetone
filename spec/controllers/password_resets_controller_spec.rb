@@ -14,7 +14,7 @@ RSpec.describe PasswordResetsController, type: :controller do
       activate_authlogic
       post :create, params: { email: [users(:arthur).email] }
       expect(flash[:error]).not_to be_present
-      expect(User.where(:login => 'arthur').first.perishable_token).not_to be_nil
+      expect(User.where(login: 'arthur').first.perishable_token).not_to be_nil
       login(:arthur)
       expect(controller.session["user_credentials"]).to eq(nil) # can't login
     end
@@ -26,13 +26,13 @@ RSpec.describe PasswordResetsController, type: :controller do
 
     it 'should render form to reset password given a decent token' do
       post :create, params: { email: [users(:arthur).email] }
-      get :edit, params: { id: User.where(:login => 'arthur').first.perishable_token }
+      get :edit, params: { id: User.where(login: 'arthur').first.perishable_token }
       expect(response).to be_successful
       expect(flash[:error]).not_to be_present
     end
 
     it 'should not render form to reset password given some bullshit token' do
-      get :edit, :params => { :id => 'oeuouoeu' }
+      get :edit, params: { id: 'oeuouoeu' }
       expect(response).to be_redirect
       expect(flash[:error]).to be_present
     end
@@ -40,19 +40,19 @@ RSpec.describe PasswordResetsController, type: :controller do
     it 'should allow user to manually type in password and login user' do
       activate_authlogic
       post :create, params: { email: [users(:arthur).email] }
-      put :update, :params => { :id => User.where(:login => 'arthur').first.perishable_token,
-                                :user => { :password => '12345678', :password_confirmation => '12345678' } }
+      put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
+                             user: { password: '12345678', password_confirmation: '12345678' } }
       expect(response).to redirect_to('/arthur')
-      expect(User.where(:login => 'arthur').first.perishable_token).to be_nil
-      expect(controller.session["user_credentials"]).to eq(User.where(:login => 'arthur').first.persistence_token) # logged in
+      expect(User.where(login: 'arthur').first.perishable_token).to be_nil
+      expect(controller.session["user_credentials"]).to eq(User.where(login: 'arthur').first.persistence_token) # logged in
     end
 
     it 'should allow user to manually type in password and present edit again if passes do not match' do
       activate_authlogic
       post :create, params: { email: [users(:arthur).email] }
-      put :update, :params => { :id => User.where(:login => 'arthur').first.perishable_token,
-                                :user => { :password => '123456', :password_confirmation => '1234567' } }
-      expect(response).to redirect_to(edit_password_reset_path(User.where(:login => 'arthur').first.perishable_token))
+      put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
+                             user: { password: '123456', password_confirmation: '1234567' } }
+      expect(response).to redirect_to(edit_password_reset_path(User.where(login: 'arthur').first.perishable_token))
       expect(controller.session["user_credentials"]).to eq(nil)
     end
   end

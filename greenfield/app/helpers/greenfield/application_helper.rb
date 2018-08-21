@@ -21,17 +21,17 @@ module Greenfield
     end
 
     def player(asset)
-      render 'greenfield/player/player', :asset => asset
+      render 'greenfield/player/player', asset: asset
     end
 
     def media_url(asset)
       if asset.is_a?(Greenfield::AttachedAsset)
         Greenfield::Engine.routes.url_helpers
                           .user_post_attached_asset_path(asset.post.user, asset.alonetone_asset,
-                                        asset.permalink, :format => :mp3)
+                                        asset.permalink, format: :mp3)
       else
         Greenfield::Engine.routes.url_helpers
-                          .user_post_path(asset.user, asset, :format => :mp3)
+                          .user_post_path(asset.user, asset, format: :mp3)
       end
     end
 
