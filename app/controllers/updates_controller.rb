@@ -1,15 +1,16 @@
-# Yup, this is the blog controller 
+# Yup, this is the blog controller
 class UpdatesController < ApplicationController
-  before_action :require_login, :except => [:index, :show]
-  before_action :gather_sidebar_fun, :except => [:destroy, :update]
-    
+  before_action :require_login, :except => %i[index show]
+  before_action :gather_sidebar_fun, :except => %i[destroy update]
+
   # GET /updates
   # GET /updates.xml
   def index
-    @updates = Update.recent.includes(:comments => [:commenter => :pic]).paginate( 
-      :per_page => 5, 
-      :page     => params[:page])
-          
+    @updates = Update.recent.includes(:comments => [:commenter => :pic]).paginate(
+      :per_page => 5,
+      :page     => params[:page]
+    )
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml
@@ -42,7 +43,7 @@ class UpdatesController < ApplicationController
     @update = Update.new(params[:update])
     if @update.save
       flash[:notice] = 'Update was successfully created.'
-      redirect_to blog_path(@update.permalink) 
+      redirect_to blog_path(@update.permalink)
     else
       format.html { render :action => "new" }
     end
@@ -52,7 +53,7 @@ class UpdatesController < ApplicationController
     @update = Update.find_by_permalink(params[:id])
     if @update.update_attributes(params.permit(:title, :content))
       flash[:notice] = 'Blog entry updated.'
-      redirect_to blog_path 
+      redirect_to blog_path
     else
       render :action => "edit"
     end
@@ -69,13 +70,13 @@ class UpdatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   protected
-  
+
   def gather_sidebar_fun
     @recent_updates = Update.limit(10).order('created_at DESC')
   end
-  
+
   def authorized?
     admin?
   end

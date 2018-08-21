@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :set_tab, :is_sudo
   before_action :set_theme
 
-  rescue_from ActionController::RoutingError, with: :show_404 
-  rescue_from ActiveRecord::RecordNotFound, with: :show_404 
+  rescue_from ActionController::RoutingError, with: :show_404
+  rescue_from ActiveRecord::RecordNotFound, with: :show_404
   rescue_from AbstractController::ActionNotFound, with: :show_404
 
   # let ActionView have a taste of our authentication
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
 
-  before_action :store_location, :only => [:index, :show]
+  before_action :store_location, :only => %i[index show]
 
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
 
   def not_found
     flash[:error] = "Hmm, we didn't find that alonetoner"
-    raise ActionController::RoutingError.new('User Not Found')
+    raise ActionController::RoutingError, 'User Not Found'
   end
 
   def currently_online
@@ -72,28 +72,28 @@ class ApplicationController < ActionController::Base
   end
 
   def find_playlists
-    @playlist = @user.playlists.find(:permalink => (params[:permalink] || params[:id]), :include =>[:tracks => :asset]).first
-    @playlist = @user.playlists.find(params[:id], :include =>[:tracks => :asset]) if !@playlist && params[:id]
+    @playlist = @user.playlists.find(:permalink => (params[:permalink] || params[:id]), :include => [:tracks => :asset]).first
+    @playlist = @user.playlists.find(params[:id], :include => [:tracks => :asset]) if !@playlist && params[:id]
   end
 
   def display_private_comments?
-    moderator? or (logged_in? && (current_user.id.to_s == @user.id.to_s))
+    moderator? || (logged_in? && (current_user.id.to_s == @user.id.to_s))
   end
 
   def store_location
-    session[:return_to] = request.url unless request.xhr? or request.format.mp3?
+    session[:return_to] = request.url unless request.xhr? || request.format.mp3?
   end
 
-  def redirect_back_or_default(default='/')
+  def redirect_back_or_default(default = '/')
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
 
-  def admin_or_owner(record=current_user)
-    admin? || (!%w(destroy admin edit update).include?(action_name) && (params[:login].nil? || params[:login] == record.login))
+  def admin_or_owner(record = current_user)
+    admin? || (!%w[destroy admin edit update].include?(action_name) && (params[:login].nil? || params[:login] == record.login))
   end
 
-  def admin_or_owner_with_delete(record=current_user)
+  def admin_or_owner_with_delete(record = current_user)
     admin? || (params[:login].nil? || params[:login] == record.login)
   end
 
@@ -105,7 +105,7 @@ class ApplicationController < ActionController::Base
     current_user_is_admin_or_owner?(user) || moderator?
   end
 
-  def user_setting(symbol_or_string, user=current_user)
+  def user_setting(symbol_or_string, user = current_user)
     logged_in? && user.settings && user.settings[symbol_or_string.to_sym]
   end
 
@@ -128,17 +128,16 @@ class ApplicationController < ActionController::Base
 
   def default_url
     path = user_home_path(current_user) if logged_in?
-    path = login_path if !path
+    path ||= login_path
     path
   end
-
 
   def redirect_to_default
     redirect_to(session[:return_to] || default_url)
     session[:return_to] = nil
   end
 
-  def authorized?()
+  def authorized?
     logged_in?
   end
 end

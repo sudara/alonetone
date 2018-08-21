@@ -14,8 +14,6 @@ class PlaylistDownloadsController < ApplicationController
   protected
 
   def prevent_abuse
-    if is_a_bot?
-      render(:text => "Denied due to abuse", :status => 403)
-    end
+    render(:text => "Denied due to abuse", :status => 403) if is_a_bot?
   end
 end

@@ -5,8 +5,8 @@ Greenfield::Engine.routes.draw do
   post 'login', to: 'application#login', as: :user_sessions
 
   resources :user, path: '/', only: [] do
-    resources :posts, path: 'tracks', only: [:show, :edit, :update] do
-      resources :attached_assets, :only => [:show, :create]
+    resources :posts, path: 'tracks', only: %i[show edit update] do
+      resources :attached_assets, :only => %i[show create]
       post :listens, to: 'posts#create_listen'
     end
 

@@ -4,10 +4,10 @@ module Listens
 
   # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = ['msie','webkit','quicktime','gecko','mozilla','netscape','itunes','chrome','opera', 'safari','cfnetwork','facebookexternalhit','ipad','iphone','apple','facebook','stagefright']
+  @@valid_listeners = %w[msie webkit quicktime gecko mozilla netscape itunes chrome opera safari cfnetwork facebookexternalhit ipad iphone apple facebook stagefright]
 
   # user agent black list
-  @@bots = ['bot','spider','baidu','mp3bot']
+  @@bots = %w[bot spider baidu mp3bot]
 
   def create_listen
     register_listen(find_asset)
@@ -16,7 +16,7 @@ module Listens
 
   private
 
-  def cloudfront_url(url,expires_in=20.minutes)
+  def cloudfront_url(url, expires_in = 20.minutes)
     Aws::CF::Signer.sign_url url, :expires => Time.now + expires_in
   end
 
@@ -52,7 +52,8 @@ module Listens
   end
 
   def register_listen(asset)
-    asset.listens.create(
+    unless is_a_bot? || ip_just_registered_this_listen?(asset)
+      asset.listens.create(
         :listener     => current_user || nil,
         :track_owner  => asset.user,
         :source       => listen_referer,
@@ -60,7 +61,8 @@ module Listens
         :ip           => request.remote_ip,
         :city         => request.headers["HTTP_GEOIP_CITY"], # set by nginx geoip
         :country      => request.headers["HTTP_GEOIP_COUNTRY_CODE"]
-      ) unless is_a_bot? or ip_just_registered_this_listen?(asset)
+      )
+    end
   end
 
   def ip_just_registered_this_listen?(asset)
@@ -76,15 +78,15 @@ module Listens
     return true if is_from_a_bad_ip?
 
     # check user agent agaisnt both white and black lists
-    not browser? or @@bots.any?{ |bot_agent| user_agent.include? bot_agent }
+    !browser? || @@bots.any? { |bot_agent| user_agent.include? bot_agent }
   end
 
   def browser?
-    @@valid_listeners.any?{ |valid_agent| user_agent.include? valid_agent }
+    @@valid_listeners.any? { |valid_agent| user_agent.include? valid_agent }
   end
 
   def play_local_mp3
-    file_to_send = File.join(Rails.root,'spec/fixtures/assets/muppets.mp3')
+    file_to_send = File.join(Rails.root, 'spec/fixtures/assets/muppets.mp3')
 
     length = File.size(file_to_send) # need to do this manually for header to be set correctly
 
@@ -95,14 +97,14 @@ module Listens
     headers["Cache-Control"] = "public, must-revalidate, max-age=0"
     headers["Pragma"] = "no-cache"
     headers['Connection'] = 'close'
-    if !request.headers["Range"] or request.headers["Range"]=="bytes=0-"# browser wants the whole file
+    if !request.headers["Range"] || (request.headers["Range"] == "bytes=0-") # browser wants the whole file
       status = "200 OK"
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
 
       send_file file_to_send, :type => 'audio/mpeg', :disposition => 'attachment;',
-      :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
+                              :url_based_filename => true, :status => status, :stream => true, :buffer_size => 4096
     else
-      status = "206 Partial Content" #browser wants part of the file
+      status = "206 Partial Content" # browser wants part of the file
       match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
       if match
         file_begin = match[1]
@@ -110,9 +112,9 @@ module Listens
       end
       headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
-      how_many_bytes = file_end.to_i-file_begin.to_i > 0 ? file_end.to_i-file_begin.to_i : 1
-      send_data File.read(file_to_send,how_many_bytes,file_begin.to_i), :type =>'audio/mpeg', :disposition => 'attachment;',
-      :url_based_filename => true, :status => status, :stream => true, :buffer_size  =>  4096
+      how_many_bytes = file_end.to_i - file_begin.to_i > 0 ? file_end.to_i - file_begin.to_i : 1
+      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), :type => 'audio/mpeg', :disposition => 'attachment;',
+                                                                          :url_based_filename => true, :status => status, :stream => true, :buffer_size => 4096
     end
   end
 end
