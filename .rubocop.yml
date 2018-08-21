@@ -121,7 +121,7 @@ Layout/AlignParameters:
   Enabled: false
 
 Style/HashSyntax:
-  Enabled: false
+  Enabled: true
 
 Layout/AlignArray:
   Enabled: false
