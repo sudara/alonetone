@@ -54,6 +54,9 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.9.15)
       activerecord (>= 3.0)
+    annotate (2.7.4)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (9.0.0)
     authlogic (3.8.0)
       activerecord (>= 3.2, < 5.3)
@@ -449,6 +452,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  annotate
   authlogic (~> 3.8)
   awesome_print
   aws-sdk-s3
