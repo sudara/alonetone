@@ -1,7 +1,7 @@
 require 'rake'
 
 desc "Setup alonetone from scratch (copy config, create/seed db)"
-task :setup => [:copy_config, :environment, 'db:setup']
+task setup: [:copy_config, :environment, 'db:setup']
 
 desc "Copy application sample config for dev/test purposes"
 task :copy_config do

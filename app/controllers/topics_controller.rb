@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :find_forum
-  before_action :find_topic, :only => %i[show edit update destroy]
-  before_action :require_login, :only => %i[create update]
+  before_action :find_topic, only: %i[show edit update destroy]
+  before_action :require_login, only: %i[create update]
   layout "forums"
 
   def index
@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
     else
       @posts = @topic.posts.recent.not_spam
     end
-    @posts = @posts.preload(:user => :pic).page current_page
+    @posts = @posts.preload(user: :pic).page current_page
     @post  = Post.new
   end
 
@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @topic }
+      format.xml  { render xml: @topic }
     end
   end
 
@@ -41,7 +41,7 @@ class TopicsController < ApplicationController
 
     @topic = current_user.post @forum, params[:topic], request
     if @topic.new_record?
-      render :action => "new"
+      render action: "new"
     else
       flash[:notice] = 'Topic was successfully created.'
       redirect_to(forum_topic_path(@forum, @topic))
@@ -51,9 +51,9 @@ class TopicsController < ApplicationController
   def update
     current_user.revise @topic, params[:topic]
     if @topic.errors.empty?
-      redirect_to(forum_topic_path(@topic.forum, @topic), :notice => 'Topic was updated.')
+      redirect_to(forum_topic_path(@topic.forum, @topic), notice: 'Topic was updated.')
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -84,10 +84,10 @@ class TopicsController < ApplicationController
   end
 
   def find_forum
-    @forum = Forum.where(:permalink => params[:forum_id]).take!
+    @forum = Forum.where(permalink: params[:forum_id]).take!
   end
 
   def find_topic
-    @topic = @forum.topics.where(:permalink => params[:id]).take!
+    @topic = @forum.topics.where(permalink: params[:id]).take!
   end
 end

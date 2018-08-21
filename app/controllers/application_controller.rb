@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
 
-  before_action :store_location, :only => %i[index show]
+  before_action :store_location, only: %i[index show]
 
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
@@ -57,13 +57,13 @@ class ApplicationController < ActionController::Base
 
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
-    @user = User.where(:login => login).first
+    @user = User.where(login: login).first
     not_found unless @user
   end
 
   def find_asset
-    @asset = @user.assets.where(:permalink => (params[:permalink] || params[:track_id] || params[:id])).first
-    @asset ||= @user.assets.where(:id => params[:id]).first || track_not_found
+    @asset = @user.assets.where(permalink: (params[:permalink] || params[:track_id] || params[:id])).first
+    @asset ||= @user.assets.where(id: params[:id]).first || track_not_found
   end
 
   def find_published_asset
@@ -72,8 +72,8 @@ class ApplicationController < ActionController::Base
   end
 
   def find_playlists
-    @playlist = @user.playlists.find(:permalink => (params[:permalink] || params[:id]), :include => [:tracks => :asset]).first
-    @playlist = @user.playlists.find(params[:id], :include => [:tracks => :asset]) if !@playlist && params[:id]
+    @playlist = @user.playlists.find(permalink: (params[:permalink] || params[:id]), include: [tracks: :asset]).first
+    @playlist = @user.playlists.find(params[:id], include: [tracks: :asset]) if !@playlist && params[:id]
   end
 
   def display_private_comments?

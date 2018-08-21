@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def track_name_for(asset, length = 40)
-    truncate(asset.name, :length => length).html_safe
+    truncate(asset.name, length: length).html_safe
   end
 
   # Awesome truncate
@@ -88,12 +88,12 @@ module ApplicationHelper
   end
 
   def link_to_play(asset, referer = nil)
-    link_to ' ', user_track_path(asset.user.login, asset.permalink, :format => :mp3, :referer => referer), :id => "play-#{asset.unique_id}", :class => 'play_link', :title => 'click to play the mp3'
+    link_to ' ', user_track_path(asset.user.login, asset.permalink, format: :mp3, referer: referer), id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play the mp3'
   end
 
   def user_nav_item(text, link, options = nil)
     added_class = options.delete(:added_class) if options.is_a? Hash
-    content_tag(:li, link_to_unless_current(text, link, options), :class => "#{added_class} #{'current' if current_page?(link)}")
+    content_tag(:li, link_to_unless_current(text, link, options), class: "#{added_class} #{'current' if current_page?(link)}")
   end
 
   def link_source(source)
@@ -113,13 +113,13 @@ module ApplicationHelper
   def check_for_and_display_flashes
     flashes = []
     [flash[:notice], flash[:error], flash[:info], flash[:ok]].each do |flash|
-      flashes << (render :partial => 'shared/flash', :object => flash) if flash && !flash.empty?
+      flashes << (render partial: 'shared/flash', object: flash) if flash && !flash.empty?
     end
     flashes.join.html_safe
   end
 
   def check_for_and_display_welcome_back
-    render :partial => 'shared/welcome_back' if welcome_back?
+    render partial: 'shared/welcome_back' if welcome_back?
   end
 
   def authorized?
@@ -128,9 +128,9 @@ module ApplicationHelper
 
   def notice_for(notice, h1_text, &block)
     unless notice_hidden?(notice)
-      content_tag(:div, ((content_tag :h1, h1_text, :class => 'notice') +
+      content_tag(:div, ((content_tag :h1, h1_text, class: 'notice') +
         hide_notice_link(notice) +
-        capture(&block)), :class => 'notice') +
+        capture(&block)), class: 'notice') +
         block.binding
     end
   end
@@ -138,8 +138,8 @@ module ApplicationHelper
   def hide_notice_link(notice)
     if logged_in?
       link_to ['Ok, hide this notice', 'Yup! all good, thanks'].sample,
-        user_path(current_user, :user => { :settings => { :hide_notice => { notice => true } } }, :method => :put),
-        :class => 'hide_notice'
+        user_path(current_user, user: { settings: { hide_notice: { notice => true } } }, method: :put),
+        class: 'hide_notice'
     end
   end
 
@@ -148,8 +148,8 @@ module ApplicationHelper
   end
 
   def feed_icon_tag(title, url)
-    (@feed_icons ||= []) << { :url => url, :title => title }
-    link_to image_tag('icons/feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url, :class => 'rss'
+    (@feed_icons ||= []) << { url: url, title: title }
+    link_to image_tag('icons/feed-icon.png', size: '14x14', alt: "Subscribe to #{title}"), url, class: 'rss'
   end
 
   def friendly_time_ago(time)
@@ -163,12 +163,12 @@ module ApplicationHelper
 
   def flag_for(country)
     return "" unless country.present?
-    image_tag("flags/#{country.downcase}.svg", :size => '80x40', :style => 'float:right; clear:none;').html_safe
+    image_tag("flags/#{country.downcase}.svg", size: '80x40', style: 'float:right; clear:none;').html_safe
   end
 
   # Mephisto said it best...
   def sanitize_feed_content(html, sanitize_tables = false)
-    options = sanitize_tables ? {} : { :tags => %w[table thead tfoot tbody td tr th] }
+    options = sanitize_tables ? {} : { tags: %w[table thead tfoot tbody td tr th] }
     sanitized = html.strip do |html|
       html.gsub! /&amp;(#\d+);/ do |_s|
         "&#{Regexp.last_match(1)};"

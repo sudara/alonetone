@@ -1,12 +1,12 @@
 class AssetsController < ApplicationController
   include Listens
 
-  before_action :find_user, :except => %i[radio latest new]
-  before_action :find_asset, :only => %i[edit update destroy stats spam unspam]
-  before_action :find_published_asset, :only => %i[show stats]
+  before_action :find_user, except: %i[radio latest new]
+  before_action :find_asset, only: %i[edit update destroy stats spam unspam]
+  before_action :find_published_asset, only: %i[show stats]
 
   # we check to see if the current_user is authorized based on the asset.user
-  before_action :require_login, :except => %i[index show latest radio listen_feed]
+  before_action :require_login, except: %i[index show latest radio listen_feed]
 
   # home page
   def latest
@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
         wants.html do
           @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
           @tab = 'home'
-          @assets = Asset.published.latest.includes(:user => :pic).limit(5)
+          @assets = Asset.published.latest.includes(user: :pic).limit(5)
           set_related_lastest_variables
           render 'latest_white' if white_theme_enabled?
         end
@@ -24,7 +24,7 @@ class AssetsController < ApplicationController
         end
         wants.json do
           @assets = Asset.published.limit(500).includes(:user)
-          render :json => @assets.to_json(:only => %i[name title id], :methods => [:name], :include => { :user => { :only => :name, :method => :name } })
+          render json: @assets.to_json(only: %i[name title id], methods: [:name], include: { user: { only: :name, method: :name } })
         end
       end
     end
@@ -39,22 +39,22 @@ class AssetsController < ApplicationController
     else
       @assets = @user.assets.published
     end
-    @assets = @assets.recent.paginate(:per_page => 200, :page => params[:page])
+    @assets = @assets.recent.paginate(per_page: 200, page: params[:page])
 
     respond_to do |format|
       format.html # index.rhtml
-      format.xml  { render :xml => @assets.to_xml }
-      format.rss  { render :xml => @assets.to_xml }
+      format.xml  { render xml: @assets.to_xml }
+      format.rss  { render xml: @assets.to_xml }
       format.js do
         render :update do |page|
-          page.replace 'stash', :partial => "assets"
+          page.replace 'stash', partial: "assets"
         end
       end
       format.json do
         cached_json = cache("tracksby/#{@user.login}") do
-          '{ "records" : ' + @assets.to_json(:methods => %i[name type length seconds], :only => %i[id name listens_count description permalink hotness user_id created_at]) + '}'
+          '{ "records" : ' + @assets.to_json(methods: %i[name type length seconds], only: %i[id name listens_count description permalink hotness user_id created_at]) + '}'
         end
-        render :json => cached_json
+        render json: cached_json
       end
     end
   end
@@ -93,7 +93,7 @@ class AssetsController < ApplicationController
     @assets = Asset.published.where("assets.filename LIKE ? OR assets.title LIKE ?",
                                  "%#{params[:search]}%", "%#{params[:search]}%")
                    .limit(10)
-    render :partial => 'results', :layout => false
+    render partial: 'results', layout: false
   end
 
   def new
@@ -112,7 +112,7 @@ class AssetsController < ApplicationController
   def mass_edit
     redirect_to_default && (return false) unless logged_in? && (current_user.id == @user.id) || admin?
     @descriptionless = @user.assets.descriptionless
-    @assets = [@user.assets.where(:id => params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
+    @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
     render 'mass_edit_white' if white_theme_enabled?
   end
@@ -137,7 +137,7 @@ class AssetsController < ApplicationController
 
     if good
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
-      redirect_to mass_edit_user_tracks_path(current_user, :assets => @assets.collect(&:id))
+      redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
     else
      if @assets.present?
         flash[:error] = flashes.html_safe
@@ -163,7 +163,7 @@ class AssetsController < ApplicationController
         redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"
-        render :action => "edit"
+        render action: "edit"
       end
     end
   end
@@ -232,14 +232,14 @@ class AssetsController < ApplicationController
             create_mp3s_from_zip(tempfile, attrs)
           end
         else
-          @assets << current_user.assets.create(attrs.merge(:mp3 => Asset.parse_external_url(file)))
+          @assets << current_user.assets.create(attrs.merge(mp3: Asset.parse_external_url(file)))
         end
       elsif file.is_a?(String)
         # twiddle thumbs
       elsif file_is_a_zip?(file)
         create_mp3s_from_zip(file, attrs)
       else
-        @assets << current_user.assets.create(attrs.merge(:mp3 => file))
+        @assets << current_user.assets.create(attrs.merge(mp3: file))
       end
     end
   end
@@ -254,13 +254,13 @@ class AssetsController < ApplicationController
 
   def create_mp3s_from_zip(file, attrs)
     Asset.extract_mp3s(file) do |asset|
-      @assets << current_user.assets.create(attrs.merge(:mp3 => asset))
+      @assets << current_user.assets.create(attrs.merge(mp3: asset))
     end
   end
 
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
-    @popular = Asset.published.order('hotness DESC').includes(:user => :pic).limit(5)
+    @popular = Asset.published.order('hotness DESC').includes(user: :pic).limit(5)
     @playlists = white_theme_enabled? ? Playlist.for_home.limit(4) : Playlist.for_home.limit(5)
     @comments = admin? ? Comment.last_5_private : Comment.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?

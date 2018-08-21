@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Comment, type: :model do
   fixtures :comments, :users, :assets
 
-  let(:new_comment) { assets(:valid_mp3).comments.new(:body => 'test', :commentable_type => 'Asset', :commentable_id => '1') }
+  let(:new_comment) { assets(:valid_mp3).comments.new(body: 'test', commentable_type: 'Asset', commentable_id: '1') }
 
   context "validation" do
     it "should be valid when made by user" do
@@ -44,7 +44,7 @@ RSpec.describe Comment, type: :model do
     it "should not save a dupe (same content/ip)" do
       body = comments(:valid_comment_on_asset_by_user).body
       ip = comments(:valid_comment_on_asset_by_user).remote_ip
-      comment2 = Comment.new(:body => body, :remote_ip => ip, :commentable_type => 'Asset', :commentable_id => '1')
+      comment2 = Comment.new(body: body, remote_ip: ip, commentable_type: 'Asset', commentable_id: '1')
       expect(comment2.save).to be_falsey
     end
 
@@ -53,7 +53,7 @@ RSpec.describe Comment, type: :model do
     end
 
     it "should not be delivering mail for non-asset comments" do
-      comment = Comment.new(:body => "awesome blog post", :commentable_type => 'Update', :commentable_id => 1)
+      comment = Comment.new(body: "awesome blog post", commentable_type: 'Update', commentable_id: 1)
       expect { comment.save }.not_to change { ActionMailer::Base.deliveries.size }
     end
   end

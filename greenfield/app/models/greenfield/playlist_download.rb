@@ -23,7 +23,7 @@ module Greenfield
     after_validation :destroy_s3_object_if_invalid, on: :create
 
     def url
-      Aws::CF::Signer.sign_url attachment.url, :expires => Time.now + 20.minutes
+      Aws::CF::Signer.sign_url attachment.url, expires: Time.now + 20.minutes
     end
 
     protected

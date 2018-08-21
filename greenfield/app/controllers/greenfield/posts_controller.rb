@@ -2,7 +2,7 @@ module Greenfield
   class PostsController < Greenfield::ApplicationController
     include Listens
 
-    before_action :require_login, :only => %i[edit update]
+    before_action :require_login, only: %i[edit update]
 
     def show
       @post = find_post
@@ -50,7 +50,7 @@ module Greenfield
     end
 
     def create_unless_post_exists
-      find_asset.build_greenfield_post.save!(:validate => false) if find_asset.user == current_user && !find_asset.greenfield_post
+      find_asset.build_greenfield_post.save!(validate: false) if find_asset.user == current_user && !find_asset.greenfield_post
     end
 
     def find_post
@@ -59,7 +59,7 @@ module Greenfield
 
     def find_asset
       id = params[:asset_permalink] || params[:post_id] || params[:id] || params[:asset_id]
-      @find_asset ||= Asset.find_by!(:permalink => id)
+      @find_asset ||= Asset.find_by!(permalink: id)
     end
 
     def require_login

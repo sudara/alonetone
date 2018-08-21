@@ -1,17 +1,17 @@
 class Listen < ActiveRecord::Base
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
 
-  scope :from_user,  -> { where('listener_id != ""')      }
-  scope :downloads,  -> { where(:source => 'download')    }
+  scope :from_user,  -> { where('listener_id != ""') }
+  scope :downloads,  -> { where(source: 'download') }
   scope :between,    ->(start, finish) { where('listens.created_at BETWEEN ? AND ?', start, finish) }
   scope :since,      ->(date) { where('listens.created_at > ?', date) }
 
   # A "Listen" occurs when a user listens to another users track
-  belongs_to :asset, :counter_cache => true, :touch => true
+  belongs_to :asset, counter_cache: true, touch: true
 
-  belongs_to :listener, :class_name => 'User', :foreign_key => 'listener_id'
+  belongs_to :listener, class_name: 'User', foreign_key: 'listener_id'
 
-  belongs_to :track_owner, :class_name => 'User', :counter_cache => true
+  belongs_to :track_owner, class_name: 'User', counter_cache: true
 
   validates_presence_of :asset_id, :track_owner_id
 
@@ -26,7 +26,7 @@ class Listen < ActiveRecord::Base
   end
 
   def self.today
-    where(:created_at => Time.now.at_beginning_of_day..Time.now).count
+    where(created_at: Time.now.at_beginning_of_day..Time.now).count
   end
 
   def self.count_within_a_month(options = {})
@@ -36,9 +36,9 @@ class Listen < ActiveRecord::Base
 
   def self.source_chart
     data = count_within_a_month(
-      :group => :source,
-      :order => 'count_all DESC',
-      :limit => 10
+      group: :source,
+      order: 'count_all DESC',
+      limit: 10
     )
 
     various = count_within_a_month - data.collect(&:last).sum
@@ -57,20 +57,20 @@ class Listen < ActiveRecord::Base
 
   def self.last_30_days_chart
     data = count :all,
-      :conditions => ['listens.created_at > ?', 30.days.ago.at_midnight],
-      :group => 'DATE(listens.created_at)'
+      conditions: ['listens.created_at > ?', 30.days.ago.at_midnight],
+      group: 'DATE(listens.created_at)'
 
     data = data.collect(&:last)
 
     chart = Gchart.line(
-      :size             => '500x150',
-      :data             => data,
-      :background       => 'e1e2e1',
-      :axis_with_labels => 'r,x',
-      :axis_labels      => [GchartHelpers.zero_half_max(data.max),
+      size: '500x150',
+      data: data,
+      background: 'e1e2e1',
+      axis_with_labels: 'r,x',
+      axis_labels: [GchartHelpers.zero_half_max(data.max),
                              "30 days ago|15 days ago|Today"],
-      :line_colors => 'cc3300',
-      :custom => 'chm=B,ff9933,0,0,0'
+      line_colors: 'cc3300',
+      custom: 'chm=B,ff9933,0,0,0'
     )
   end
 
@@ -87,7 +87,7 @@ class Listen < ActiveRecord::Base
   end
 
   def self.find_user_by_ip(ip)
-      Listen.find(:first, :conditions => ['ip = ? AND listener_id IS NOT NULL', ip]).listener
+      Listen.find(:first, conditions: ['ip = ? AND listener_id IS NOT NULL', ip]).listener
   rescue StandardError
       nil
   end

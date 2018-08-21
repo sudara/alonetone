@@ -1,11 +1,11 @@
 class PasswordResetsController < ApplicationController
-  before_action :load_user_using_perishable_token, :only => %i[edit update]
+  before_action :load_user_using_perishable_token, only: %i[edit update]
 
   def edit; end
 
   def create
     email = params[:email].present? ? params[:email].first : nil
-    @user = User.where(:email => email).first
+    @user = User.where(email: email).first
     if @user.present?
       @user.reset_perishable_token!
       UserNotification.forgot_password(@user).deliver_now
@@ -34,7 +34,7 @@ class PasswordResetsController < ApplicationController
   private
 
   def load_user_using_perishable_token
-    @user = User.where(:perishable_token => params[:id]).first
+    @user = User.where(perishable_token: params[:id]).first
     unless @user.present?
       flash[:error] = "Hmmm...that didn't work. If you still have issues, email #{Alonetone.email}"
       redirect_to login_path

@@ -1,5 +1,5 @@
 class AssetNotification < ActionMailer::Base
-  default :from => Alonetone.email
+  default from: Alonetone.email
 
   def upload_notification(asset, email, _sent_at = Time.now)
     @track = asset.name
@@ -10,7 +10,7 @@ class AssetNotification < ActionMailer::Base
     @play_link = play_link_for(asset)
     @user_link = user_link_for(asset)
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
-    mail :subject => "[alonetone] '#{asset.user.name}' uploaded a new track!", :to => email
+    mail subject: "[alonetone] '#{asset.user.name}' uploaded a new track!", to: email
   end
 
   protected

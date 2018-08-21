@@ -16,7 +16,7 @@ RSpec.describe Track, type: :model do
   end
 
   context "as a fav" do
-    subject { users(:arthur).tracks.favorites.create(:asset_id => 1) }
+    subject { users(:arthur).tracks.favorites.create(asset_id: 1) }
     it "should create a favorite playlist if its the first fav" do
       expect { subject }.to change { Track.count }
     end

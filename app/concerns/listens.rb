@@ -17,7 +17,7 @@ module Listens
   private
 
   def cloudfront_url(url, expires_in = 20.minutes)
-    Aws::CF::Signer.sign_url url, :expires => Time.now + expires_in
+    Aws::CF::Signer.sign_url url, expires: Time.now + expires_in
   end
 
   def listen(asset, register: true)
@@ -54,19 +54,19 @@ module Listens
   def register_listen(asset)
     unless is_a_bot? || ip_just_registered_this_listen?(asset)
       asset.listens.create(
-        :listener     => current_user || nil,
-        :track_owner  => asset.user,
-        :source       => listen_referer,
-        :user_agent   => user_agent,
-        :ip           => request.remote_ip,
-        :city         => request.headers["HTTP_GEOIP_CITY"], # set by nginx geoip
-        :country      => request.headers["HTTP_GEOIP_COUNTRY_CODE"]
+        listener: current_user || nil,
+        track_owner: asset.user,
+        source: listen_referer,
+        user_agent: user_agent,
+        ip: request.remote_ip,
+        city: request.headers["HTTP_GEOIP_CITY"], # set by nginx geoip
+        country: request.headers["HTTP_GEOIP_COUNTRY_CODE"]
       )
     end
   end
 
   def ip_just_registered_this_listen?(asset)
-    last_listen = asset.listens.since(1.week.ago).where(:ip => request.remote_ip).first
+    last_listen = asset.listens.since(1.week.ago).where(ip: request.remote_ip).first
     last_listen.present? && (last_listen.created_at > (Time.now - asset[:length]))
   end
 
@@ -101,8 +101,8 @@ module Listens
       status = "200 OK"
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
 
-      send_file file_to_send, :type => 'audio/mpeg', :disposition => 'attachment;',
-                              :url_based_filename => true, :status => status, :stream => true, :buffer_size => 4096
+      send_file file_to_send, type: 'audio/mpeg', disposition: 'attachment;',
+                              url_based_filename: true, status: status, stream: true, buffer_size: 4096
     else
       status = "206 Partial Content" # browser wants part of the file
       match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
@@ -113,8 +113,8 @@ module Listens
       headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
       how_many_bytes = file_end.to_i - file_begin.to_i > 0 ? file_end.to_i - file_begin.to_i : 1
-      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), :type => 'audio/mpeg', :disposition => 'attachment;',
-                                                                          :url_based_filename => true, :status => status, :stream => true, :buffer_size => 4096
+      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), type: 'audio/mpeg', disposition: 'attachment;',
+                                                                          url_based_filename: true, status: status, stream: true, buffer_size: 4096
     end
   end
 end

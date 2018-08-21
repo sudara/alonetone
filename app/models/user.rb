@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   scope :recent,        -> { order('users.id DESC')                                   }
   scope :recently_seen, -> { order('last_request_at DESC')                            }
   scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
-  scope :activated,     -> { where(:perishable_token => nil).recent                   }
+  scope :activated,     -> { where(perishable_token: nil).recent }
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
   scope :alpha,         -> { order('display_name ASC')                                }
@@ -22,50 +22,50 @@ class User < ActiveRecord::Base
   before_destroy :efficiently_destroy_relations
 
   # Can create music
-  has_one    :pic, :as => :picable, :dependent => :destroy
+  has_one    :pic, as: :picable, dependent: :destroy
   has_many   :assets,
     -> { order('assets.id DESC') },
-    :dependent => :destroy
+    dependent: :destroy
 
   has_many   :playlists, -> { order('playlists.position') },
-    :dependent => :destroy
+    dependent: :destroy
 
   has_many   :comments, -> { order('comments.id DESC') },
-    :dependent => :destroy
+    dependent: :destroy
 
   has_many   :tracks
 
   # alonetone plus
   has_many :memberships
-  has_many :groups, :through => :membership
+  has_many :groups, through: :membership
 
   # Can listen to music, and have that tracked
-  has_many :listens, -> { order('listens.created_at DESC') }, :foreign_key => 'listener_id'
+  has_many :listens, -> { order('listens.created_at DESC') }, foreign_key: 'listener_id'
 
   has_many :listened_to_tracks,
     -> { order('listens.created_at DESC') },
-    :through => :listens,
-    :source => :asset
+    through: :listens,
+    source: :asset
 
   # Can have their music listened to
   has_many :track_plays,
     -> { order('listens.created_at DESC').includes(:asset) },
-    :foreign_key  => 'track_owner_id',
-    :class_name   => 'Listen'
+    foreign_key: 'track_owner_id',
+    class_name: 'Listen'
 
   # And therefore have listeners
   has_many :listeners,
     -> { distinct },
-    :through => :track_plays
+    through: :track_plays
 
-  has_many :followings, :dependent => :destroy
-  has_many :follows, :dependent => :destroy, :class_name => 'Following', :foreign_key => 'follower_id'
+  has_many :followings, dependent: :destroy
+  has_many :follows, dependent: :destroy, class_name: 'Following', foreign_key: 'follower_id'
 
   # people who are following this musician
-  has_many :followers, :through => :followings
+  has_many :followers, through: :followings
 
   # musicians who this person follows
-  has_many :followees, :through => :follows, :source => :user
+  has_many :followees, through: :follows, source: :user
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
@@ -109,7 +109,7 @@ salt moderator ip browser settings]
   end
 
   def new_tracks_from_followees(limit)
-    Asset.new_tracks_from_followees(self, :page => 1, :per_page => limit)
+    Asset.new_tracks_from_followees(self, page: 1, per_page: limit)
   end
 
   def follows_user_ids
@@ -125,7 +125,7 @@ salt moderator ip browser settings]
     if is_following?(followee_id)
       is_following?(followee_id).destroy
     else
-      follows.where(:user_id => followee_id).first_or_create
+      follows.where(user_id: followee_id).first_or_create
     end
   end
 
@@ -140,11 +140,11 @@ salt moderator ip browser settings]
   end
 
   def toggle_favorite(asset)
-    existing_track = tracks.favorites.where(:asset_id => asset.id).first
+    existing_track = tracks.favorites.where(asset_id: asset.id).first
     if existing_track
       existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
     else
-      tracks.favorites.create(:asset_id => asset.id)
+      tracks.favorites.create(asset_id: asset.id)
       Asset.increment_counter(:favorites_count, asset.id, touch: true)
     end
   end
@@ -154,11 +154,11 @@ salt moderator ip browser settings]
   def efficiently_destroy_relations
     Listen.where(track_owner_id: id).delete_all
     Listen.where(listener_id: id).delete_all
-    Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
+    Topic.where(user_id: id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
 
-    Playlist.joins(:assets).where(:assets => { :user_id => id })
+    Playlist.joins(:assets).where(assets: { user_id: id })
             .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.joins(:asset).where(:assets => { :user_id => id }).delete_all
+    Track.joins(:asset).where(assets: { user_id: id }).delete_all
 
     Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
            .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all

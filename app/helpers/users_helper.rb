@@ -33,10 +33,10 @@ module UsersHelper
 
   def user_image_link(user, size = :large)
     link_to(image_tag(user.avatar(size),
-      :class => (user.has_pic? ? '' : 'no_border'),
-      :alt => user.name.to_s),
+      class: (user.has_pic? ? '' : 'no_border'),
+      alt: user.name.to_s),
       user_home_path(user),
-      :title => " #{user.name}
+      title: " #{user.name}
  #{user.assets_count > 0 ? pluralize(user.assets_count, 'uploaded tracks') : ''}
  Joined alonetone #{user.created_at.to_date.to_s(:long)}
  #{user_location(user)}")
@@ -55,18 +55,18 @@ module UsersHelper
   end
 
   def favorite_toggle(asset)
-    link_to('add to favorites', toggle_favorite_path(:asset_id => asset.id), :class => 'add_to_favorites')
+    link_to('add to favorites', toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites')
   end
 
   def follow_toggle(user)
     return unless logged_in? && (user.id != current_user.id)
     already_following = current_user.is_following?(user)
     if already_following
-      link_to('<div class="sprites-heart-broken"></div> un-follow'.html_safe, toggle_follow_user_path(current_user, :followee_id => user.id),
-        :class => 'follow following')
+      link_to('<div class="sprites-heart-broken"></div> un-follow'.html_safe, toggle_follow_user_path(current_user, followee_id: user.id),
+        class: 'follow following')
     else
-      link_to('<div class="sprites-heart-with-plus"></div> follow'.html_safe, toggle_follow_user_path(current_user, :followee_id => user.id),
-        :class => 'follow')
+      link_to('<div class="sprites-heart-with-plus"></div> follow'.html_safe, toggle_follow_user_path(current_user, followee_id: user.id),
+        class: 'follow')
     end
   end
 

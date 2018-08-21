@@ -1,7 +1,7 @@
 class User
   def self.calculate_bandwidth_used
-    User.select(:id, :created_at).find_each(:batch_size => 500) do |u|
-      User.where(:id => u.id).update_all(:bandwidth_used => u.calculate_bandwidth_used)
+    User.select(:id, :created_at).find_each(batch_size: 500) do |u|
+      User.where(id: u.id).update_all(bandwidth_used: u.calculate_bandwidth_used)
     end
   end
 
@@ -9,7 +9,7 @@ class User
   def track_plays_graph
     created_within_30_days = ['listens.created_at > ?', 30.days.ago.at_midnight]
 
-    first_created = track_plays.minimum(:created_at, :conditions => created_within_30_days)
+    first_created = track_plays.minimum(:created_at, conditions: created_within_30_days)
     first_created ||= Time.now
     seconds = (Time.now - first_created).round
     hours = seconds / 60 / 60
@@ -48,12 +48,12 @@ class User
 
   def number_of_tracks_listened_to
     Listen.count(:all,
-      :order      => 'count_all DESC',
-      :conditions => { :listener_id => self })
+      order: 'count_all DESC',
+      conditions: { listener_id: self })
   end
 
   def mostly_listens_to
-    User.where(:id => most_listened_to_user_ids(10)).includes(:pic)
+    User.where(id: most_listened_to_user_ids(10)).includes(:pic)
   end
 
   def calculate_bandwidth_used
@@ -62,7 +62,7 @@ class User
 
   def total_bandwidth_cost
     # s3 is 12 cents a gig
-    ActionController::Base.helpers.number_to_currency((bandwidth_used * 0.12), :unit => '$')
+    ActionController::Base.helpers.number_to_currency((bandwidth_used * 0.12), unit: '$')
   end
 
   def most_listened_to_user_ids(limit = 10)
@@ -84,7 +84,7 @@ class User
   end
 
   def plays_by_month
-    track_plays.count(:all, :group => 'MONTH(listens.created_at)', :include => nil, :conditions => ['listens.created_at > ?', 1.year.ago])
+    track_plays.count(:all, group: 'MONTH(listens.created_at)', include: nil, conditions: ['listens.created_at > ?', 1.year.ago])
   end
 
   def self.with_same_ip

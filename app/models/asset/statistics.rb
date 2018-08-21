@@ -3,17 +3,17 @@ class Asset
 
   def self.most_popular(limit = 10, time_period = 5.days.ago)
     popular = Listen.count(:all,
-      :include => :asset,
-      :group => 'listens.asset_id',
-      :limit => limit,
-      :order => 'count_all DESC',
-      :conditions => [
+      include: :asset,
+      group: 'listens.asset_id',
+      limit: limit,
+      order: 'count_all DESC',
+      conditions: [
         "listens.created_at > ? AND " \
         "(listens.listener_id IS NULL OR " \
         "listens.listener_id != listens.track_owner_id)",
         time_period
       ])
-    find(popular.collect(&:first), :include => :user)
+    find(popular.collect(&:first), include: :user)
     # In the last week, people have been listening to the following
     # find(:all, :include => :user, :limit => limit, :order => 'assets.listens_count DESC')
   end
@@ -46,7 +46,7 @@ class Asset
 
   def listens_per_week
     listens.count(:all,
-      :conditions => ['listens.listener_id != ?', user_id]).to_f * 7 / days_old
+      conditions: ['listens.listener_id != ?', user_id]).to_f * 7 / days_old
   rescue StandardError
     0
   end
@@ -60,7 +60,7 @@ class Asset
   end
 
   def total_uncool_self_plays(from = 30.days.ago)
-    user_plays = listens.where(:listener_id => user.similar_users_by_ip).where("listens.created_at > (?)", from).count
+    user_plays = listens.where(listener_id: user.similar_users_by_ip).where("listens.created_at > (?)", from).count
   end
 
   def alonetoner_play_count(from = 30.days.ago)
@@ -69,7 +69,7 @@ class Asset
 
   def unique_alonetoner_count(from = 30.days.ago)
     alonetoners = listens.select('distinct listener_id').where("listens.created_at > (?)", from).count
-    this_user = listens.select('distinct listener_id').where("listens.created_at > (?)", from).where(:listener_id => user.similar_users_by_ip).count
+    this_user = listens.select('distinct listener_id').where("listens.created_at > (?)", from).where(listener_id: user.similar_users_by_ip).count
     total = alonetoners - this_user - 1
     (total + total.abs) / 2 # ensure postitive number or zero
   end
@@ -97,7 +97,7 @@ class Asset
   end
 
   def plays_by_month
-    listens.count(:all, :group => 'MONTH(listens.created_at)', :include => nil, :conditions => ['listens.created_at > ?', 1.year.ago])
+    listens.count(:all, group: 'MONTH(listens.created_at)', include: nil, conditions: ['listens.created_at > ?', 1.year.ago])
   end
 
   def self.monthly_chart
@@ -122,7 +122,7 @@ class Asset
   def self.monthly_sum_for(date = Time.now, sum = 0)
     # [count, year_month_label]
     month_count = count(:all,
-      :conditions => [
+      conditions: [
         'created_at > ? AND created_at < ?',
         date.beginning_of_month,
         date.end_of_month

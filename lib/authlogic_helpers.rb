@@ -38,16 +38,16 @@ module AuthlogicHelpers
   # force logins at various access levels
   def force_login
     store_location
-    redirect_to login_path, :alert => "Whups, you need to login for that!"
+    redirect_to login_path, alert: "Whups, you need to login for that!"
   end
 
   def force_mod_login
     store_location
-    redirect_to login_path, :alert => "Super special secret area. Alonetone Elite Only."
+    redirect_to login_path, alert: "Super special secret area. Alonetone Elite Only."
   end
 
   def force_admin_login
     store_location
-    redirect_to login_path, :alert => "What do you think you’re doing?! We're calling your mother..."
+    redirect_to login_path, alert: "What do you think you’re doing?! We're calling your mother..."
   end
 end

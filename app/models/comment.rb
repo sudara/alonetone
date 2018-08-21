@@ -1,26 +1,26 @@
 class Comment < ActiveRecord::Base
   scope :recent,             -> { order('id DESC') }
-  scope :only_public,        -> { recent.where(:is_spam => false).where(:private => false) }
+  scope :only_public,        -> { recent.where(is_spam: false).where(private: false) }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
-  scope :include_private,    -> { recent.where(:is_spam => false) }
+  scope :include_private,    -> { recent.where(is_spam: false) }
   scope :public_or_private,  ->(has_access) { has_access ? include_private : only_public }
-  scope :spam,               -> { recent.where(:is_spam => true) }
-  scope :on_track,           -> { where(:commentable_type => 'Asset') }
-  scope :last_5_private,     -> { on_track.include_private.limit(5).preload(:commenter => :pic, :commentable => { :user => :pic }) }
-  scope :last_5_public,      -> { on_track.only_public.limit(5).preload(:commenter => :pic, :commentable => { :user => :pic }) }
+  scope :spam,               -> { recent.where(is_spam: true) }
+  scope :on_track,           -> { where(commentable_type: 'Asset') }
+  scope :last_5_private,     -> { on_track.include_private.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
+  scope :last_5_public,      -> { on_track.only_public.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
 
-  has_many :replies, :as => :commentable, :class_name => 'Comment'
+  has_many :replies, as: :commentable, class_name: 'Comment'
 
   # optional user who made the comment
-  belongs_to :commenter, :class_name => 'User'
+  belongs_to :commenter, class_name: 'User'
 
   # optional user who is *recieving* the comment
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever
   belongs_to :user
 
-  belongs_to :commentable, :polymorphic => true, :touch => true
-  validates_length_of :body, :within => 1..2000
+  belongs_to :commentable, polymorphic: true, touch: true
+  validates_length_of :body, within: 1..2000
   validates :commentable_id, presence: true
 
   before_create :disallow_dupes, :set_spam_status, :set_user
@@ -29,13 +29,13 @@ class Comment < ActiveRecord::Base
   before_save :truncate_user_agent
 
   include Rakismet::Model
-  rakismet_attrs  :author =>        proc { author_name },
-                  :author_email =>  proc { commenter&.email },
-                  :content =>       proc { body },
-                  :permalink =>     proc { commentable.try(:full_permalink) }
+  rakismet_attrs  author: proc { author_name },
+                  author_email: proc { commenter&.email },
+                  content: proc { body },
+                  permalink: proc { commentable.try(:full_permalink) }
 
   def duplicate?
-    Comment.where(:remote_ip => remote_ip, :body => body).first.present?
+    Comment.where(remote_ip: remote_ip, body: body).first.present?
   end
 
   def disallow_dupes

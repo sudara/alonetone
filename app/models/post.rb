@@ -3,15 +3,15 @@ class Post < ActiveRecord::Base
   cattr_accessor :per_page
 
   scope :recent, ->   { order("posts.created_at asc") }
-  scope :not_spam, -> { where(:is_spam => false) }
-  scope :spam, ->  { where(:is_spam => true) }
+  scope :not_spam, -> { where(is_spam: false) }
+  scope :spam, ->  { where(is_spam: true) }
 
   # author of post
-  belongs_to :user, :counter_cache => true
-  belongs_to :topic, :counter_cache => true
+  belongs_to :user, counter_cache: true
+  belongs_to :topic, counter_cache: true
 
   # topic's forum (set by callback)
-  belongs_to :forum, :counter_cache => true
+  belongs_to :forum, counter_cache: true
 
   validates_presence_of :topic, :forum, :body
   validate :topic_is_not_locked
@@ -21,10 +21,10 @@ class Post < ActiveRecord::Base
   after_destroy :update_cached_fields
 
   include Rakismet::Model
-  rakismet_attrs  :author =>        proc { author_name },
-                  :author_email =>  proc { user.email },
-                  :content =>       proc { body },
-                  :permalink =>     proc { topic.try(:full_permalink) }
+  rakismet_attrs  author: proc { author_name },
+                  author_email: proc { user.email },
+                  content: proc { body },
+                  permalink: proc { topic.try(:full_permalink) }
 
   def set_spam_status
     self.is_spam = spam? # makes API request
@@ -43,11 +43,11 @@ class Post < ActiveRecord::Base
     if params[:forum_q].present?
       where = not_spam.where("LOWER(posts.body) LIKE ?", "%#{params[:forum_q]}%")
     elsif params[:spam].present?
-      where = where(:is_spam => true)
+      where = where(is_spam: true)
     else
       where = not_spam
     end
-    where.includes(:topic => :forum).order("posts.created_at DESC")
+    where.includes(topic: :forum).order("posts.created_at DESC")
   end
 
   def editable_by?(user)

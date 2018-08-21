@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :find_parents
-  before_action :find_post, :only => %i[edit update destroy spam unspam]
-  before_action :require_login, :only => :create
+  before_action :find_post, only: %i[edit update destroy spam unspam]
+  before_action :require_login, only: :create
   layout "forums"
   include ActionView::RecordIdentifier
 
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.atom
-      format.xml  { render :xml => @posts }
+      format.xml  { render xml: @posts }
     end
   end
 
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
       format.html { redirect_to forum_topic_path(@forum, @topic) }
       format.xml  do
         find_post
-        render :xml => @post
+        render xml: @post
       end
     end
   end
@@ -69,19 +69,19 @@ class PostsController < ApplicationController
 
     @post = current_user.reply @topic, params[:post][:body], request
     if @post.new_record?
-      render :action => "new"
+      render action: "new"
     else
       flash[:notice] = 'Post was successfully created.'
-      redirect_to(forum_topic_path(@forum, @topic, :page => @topic.last_page, :anchor => dom_id(@post)))
+      redirect_to(forum_topic_path(@forum, @topic, page: @topic.last_page, anchor: dom_id(@post)))
     end
   end
 
   def update
     if @post.update_attributes(post_params)
       flash[:notice] = 'Post was successfully updated.'
-      redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post)))
+      redirect_to(forum_topic_path(@forum, @topic, anchor: dom_id(@post)))
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -98,7 +98,7 @@ class PostsController < ApplicationController
 
   def find_parents
     if params[:user_id]
-      @parent = @user = User.where(:login => params[:user_id]).first
+      @parent = @user = User.where(login: params[:user_id]).first
     elsif params[:forum_id]
       @parent = @forum = Forum.find_by_permalink(params[:forum_id])
       @parent = @topic = @forum.topics.find_by_permalink(params[:topic_id]) if params[:topic_id]

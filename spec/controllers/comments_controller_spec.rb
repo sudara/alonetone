@@ -17,7 +17,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     it 'should allow guest to comment on a blog post' do
-      params = { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Update", "commentable_id" => 1 } }
+      params = { comment: { "body" => "Comment", "private" => "0", "commentable_type" => "Update", "commentable_id" => 1 } }
       post :create, params: params, xhr: true
       expect(response).to be_successful
     end

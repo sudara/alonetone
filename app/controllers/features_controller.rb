@@ -1,18 +1,18 @@
 class FeaturesController < ApplicationController
-  before_action :require_login, :only => %i[new create edit update delete]
-  before_action :find_feature, :only => %i[update delete edit]
+  before_action :require_login, only: %i[new create edit update delete]
+  before_action :find_feature, only: %i[update delete edit]
 
   def index
     @features = admin? ? Feature.all : Feature.published
     @page_title = 'Featured Artists'
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @features }
+      format.xml  { render xml: @features }
     end
   end
 
   def show
-    @feature = admin? ? find_feature : Feature.published.where(:permalink => params[:id]).first
+    @feature = admin? ? find_feature : Feature.published.where(permalink: params[:id]).first
     set_related_feature_variables
     @page_title = "Featured Artist: #{@user.name}"
   end
@@ -22,7 +22,7 @@ class FeaturesController < ApplicationController
     @users = User.alpha
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @feature }
+      format.xml  { render xml: @feature }
     end
   end
 
@@ -34,9 +34,9 @@ class FeaturesController < ApplicationController
   def create
     @feature = Feature.new(params[:feature])
     if @feature.save
-      redirect_to @feature, :notice => 'Feature was successfully created.'
+      redirect_to @feature, notice: 'Feature was successfully created.'
     else
-      render :action => "new"
+      render action: "new"
     end
   end
 
@@ -45,7 +45,7 @@ class FeaturesController < ApplicationController
       flash[:notice] = 'Feature was successfully updated.'
       redirect_to(@feature)
     else
-      render :action => "edit"
+      render action: "edit"
     end
   end
 
@@ -61,7 +61,7 @@ class FeaturesController < ApplicationController
   end
 
   def find_feature
-    @feature = Feature.where(:permalink => params[:id]).first
+    @feature = Feature.where(permalink: params[:id]).first
   end
 
   def set_related_feature_variables
@@ -69,7 +69,7 @@ class FeaturesController < ApplicationController
     Feature.increment_counter(:views_count, @feature.id) unless admin?
     @featured_tracks = @feature.featured_tracks
     @mostly_listens_to = @user.mostly_listens_to
-    @comment = Comment.new(:commentable_type => 'feature', :commentable_id => @feature.id)
+    @comment = Comment.new(commentable_type: 'feature', commentable_id: @feature.id)
     @comments = @feature.comments.include_private
   end
 end

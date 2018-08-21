@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :find_user, :except => %i[index create spam unspam destroy]
-  before_action :find_comment, :only => %i[destroy unspam spam]
-  before_action :require_login, :only => %i[destroy unspam]
+  before_action :find_user, except: %i[index create spam unspam destroy]
+  before_action :find_comment, only: %i[destroy unspam spam]
+  before_action :require_login, only: %i[destroy unspam]
 
   def create
     if request.xhr? # it always is...
@@ -42,11 +42,11 @@ class CommentsController < ApplicationController
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.on_track.public_or_private(display_private_comments?).includes(:commenter => :pic, :commentable => { :user => :pic }).page(params[:page])
+      @comments = @user.comments.on_track.public_or_private(display_private_comments?).includes(commenter: :pic, commentable: { user: :pic }).page(params[:page])
       set_comments_made
     else
       @page_title = "Recent Comments"
-      @comments = Comment.on_track.includes(:commenter => :pic, :commentable => { :user => :pic }).public_or_private(moderator?).page(params[:page])
+      @comments = Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?).page(params[:page])
       set_spam_comments
     end
   end
@@ -59,11 +59,11 @@ class CommentsController < ApplicationController
   end
 
   def find_comment
-    @comment = Comment.where(:id => params[:id]).first
+    @comment = Comment.where(id: params[:id]).first
   end
 
   def set_comments_made
-    @comments_made = Comment.where(:commenter_id => @user.id).public_or_private(display_private_comments?).page(params[:made_page])
+    @comments_made = Comment.where(commenter_id: @user.id).public_or_private(display_private_comments?).page(params[:made_page])
   end
 
   def set_spam_comments
@@ -76,10 +76,10 @@ class CommentsController < ApplicationController
 
   def massaged_params
     comment_params.merge(
-      :commenter => find_commenter,
-      :remote_ip          => request.remote_ip,
-      :user_agent         => request.env['HTTP_USER_AGENT'],
-      :referrer           => request.env['HTTP_REFERER']
+      commenter: find_commenter,
+      remote_ip: request.remote_ip,
+      user_agent: request.env['HTTP_USER_AGENT'],
+      referrer: request.env['HTTP_REFERER']
     )
   end
 

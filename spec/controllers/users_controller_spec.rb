@@ -25,25 +25,25 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should require login on signup" do
-      create_user :login => nil
+      create_user login: nil
       expect(response).to_not be_redirect
       expect(assigns(:user).errors[:login].size).to be >= 1
     end
 
     it "should require password on signup" do
-      create_user :password => nil
+      create_user password: nil
       expect(response).to_not be_redirect
       expect(assigns(:user).errors[:password].size).to be >= 1
     end
 
     it "should require password confirmation on signup" do
-      create_user :password_confirmation => nil
+      create_user password_confirmation: nil
       expect(response).to be_successful
       expect(assigns(:user).errors[:password_confirmation].size).to be >= 1
     end
 
     it "should require email on signup" do
-      create_user :email => nil
+      create_user email: nil
       expect(response).to be_successful
       expect(assigns(:user).errors[:email].size).to be >= 1
     end
@@ -98,57 +98,57 @@ RSpec.describe UsersController, type: :controller do
       it "should let a user or admin edit" do
         login(user)
         allow(controller).to receive(:current_user).and_return(users(user))
-        post :edit, :params => { :id => 'arthur' }
+        post :edit, params: { id: 'arthur' }
         expect(response).to be_successful
       end
 
       it "should let a user or admin update" do
         login(user)
         allow(controller).to receive(:current_user).and_return(users(user))
-        put :update, :params => { :id => 'arthur', :user => { :bio => 'a little more about me' } }
+        put :update, params: { id: 'arthur', user: { bio: 'a little more about me' } }
         expect(response).to redirect_to(edit_user_path(users(:arthur)))
       end
     end
 
     it "should let a user upload a new photo" do
       login(:arthur)
-      post :attach_pic, :params => { :id => users(:arthur).login, :pic => { :pic => fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
+      post :attach_pic, params: { id: users(:arthur).login, pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(edit_user_path(users(:arthur)))
     end
 
     it "should not let a user upload a new photo for another user" do
       login(:arthur)
-      post :attach_pic, :params => { :id => users(:sudara).login, :pic => { :pic => fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
+      post :attach_pic, params: { id: users(:sudara).login, pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
       expect(response).to redirect_to('/login')
     end
 
     it "should let a user change their login" do
       login(:arthur)
-      put :update, :params => { :id => 'arthur', :user => { :login => 'arthursaurus' } }
+      put :update, params: { id: 'arthur', user: { login: 'arthursaurus' } }
       expect(flash[:error]).not_to be_present
       expect(response).to be_redirect
-      expect(User.where(:login => 'arthursaurus').count).to eq(1)
+      expect(User.where(login: 'arthursaurus').count).to eq(1)
     end
 
     it 'should not let a user change login to login that exists' do
       login(:arthur)
-      put :update, :params => { :id => 'arthur', :user => { :login => 'sudara' } }
+      put :update, params: { id: 'arthur', user: { login: 'sudara' } }
       expect(flash[:error]).to be_present
-      expect(User.where(:login => 'sudara').count).to eq(1)
+      expect(User.where(login: 'sudara').count).to eq(1)
     end
 
     it "should not let any old user edit" do
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
-      post :edit, :params => { :id => 'sudara' }
+      post :edit, params: { id: 'sudara' }
       expect(response).not_to be_successful
     end
 
     it "should not let any old user update" do
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
-      put :update, :params => { :id => 'sudara', :user => { :bio => 'a little more about me' } }
+      put :update, params: { id: 'sudara', user: { bio: 'a little more about me' } }
       expect(response).not_to be_successful
     end
 
@@ -159,7 +159,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'should deliver an rss feed for any user, to anyone' do
-      get :show, :params => { :id => 'sudara', :format => 'rss' }
+      get :show, params: { id: 'sudara', format: 'rss' }
       expect(response).to be_successful
     end
   end
@@ -192,7 +192,7 @@ RSpec.describe UsersController, type: :controller do
     it "should not let a normal user sudo" do
       controller.session[:return_to] = '/users'
       login(:arthur)
-      get :sudo, :params => { :id => 'sudara' }
+      get :sudo, params: { id: 'sudara' }
       expect(flash[:ok]).not_to be_present
       expect(response).to redirect_to '/'
     end
@@ -200,7 +200,7 @@ RSpec.describe UsersController, type: :controller do
     it "should let an admin user sudo" do
       login(:sudara)
       controller.session[:return_to] = '/users'
-      get :sudo, :params => { :id => 'arthur' }
+      get :sudo, params: { id: 'arthur' }
       expect(flash[:ok]).to be_present
       expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
       expect(response).to redirect_to '/users'
@@ -210,7 +210,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       controller.session[:return_to] = '/users'
       controller.session[:sudo] = 1
-      get :sudo, :params => { :id => 'arthur' }
+      get :sudo, params: { id: 'arthur' }
       expect(flash[:ok]).to be_present
       expect(controller.session["user_credentials"]).to eq(users(:sudara).persistence_token)
       expect(response).to redirect_to '/users'
@@ -219,7 +219,7 @@ RSpec.describe UsersController, type: :controller do
     it "should not update IP or last_request_at" do
       request.env['REMOTE_ADDR'] = '10.1.1.1'
       login(:sudara)
-      get :sudo, :params => { :id => 'arthur' }
+      get :sudo, params: { id: 'arthur' }
       expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
       expect(users(:arthur).current_login_ip).not_to eq('10.1.1.1')
       expect(users(:arthur).last_request_at.to_s).to eq(1.day.ago.to_s) # shouldn't have changed from yml
@@ -236,6 +236,6 @@ end
 
 def create_user(options = {})
   travel_to 1.day.ago do
-    post :create, params: { user: { :login => 'quire', :email => 'quire@example.com', :password => 'quire12345', :password_confirmation => 'quire12345' }.merge(options) }
+    post :create, params: { user: { login: 'quire', email: 'quire@example.com', password: 'quire12345', password_confirmation: 'quire12345' }.merge(options) }
   end
 end

@@ -1,16 +1,16 @@
 class Feature < ActiveRecord::Base
-  scope :published, -> { where(:published => true).order('created_at DESC') }
+  scope :published, -> { where(published: true).order('created_at DESC') }
 
   has_many :featured_tracks,
     -> { order('featured_tracks.position').includes(:asset) }
 
   has_many :comments,
     -> { order('created_at DESC') },
-    :as         => :commentable,
-    :dependent  => :destroy
+    as: :commentable,
+    dependent: :destroy
 
-  belongs_to :writer,         :class_name => 'User'
-  belongs_to :featured_user,  :class_name => 'User'
+  belongs_to :writer,         class_name: 'User'
+  belongs_to :featured_user,  class_name: 'User'
 
   validates_presence_of :writer, :featured_user
 
@@ -29,7 +29,7 @@ class Feature < ActiveRecord::Base
   def featured_tracks_list=(ids)
     featured_tracks.destroy_all
     ids.split(',').each_with_index do |id, position|
-      featured_tracks.create(:asset_id => id.to_i, :position => position)
+      featured_tracks.create(asset_id: id.to_i, position: position)
     end
   end
 
@@ -47,7 +47,7 @@ class Feature < ActiveRecord::Base
   end
 
   def publish!
-    update_attributes(:published => true, :published_at => Time.now)
+    update_attributes(published: true, published_at: Time.now)
   end
 end
 
