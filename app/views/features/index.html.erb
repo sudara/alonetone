@@ -2,8 +2,8 @@
 
 <div class="additional_options">
     <div class="button_wrapper">
-        <%= link_to 'New feature', new_feature_path, :class => 'add button' if admin? %>
+        <%= link_to 'New feature', new_feature_path, class: 'add button' if admin? %>
     </div>
 </div>
 
-<%= render :partial => @features %>
+<%= render partial: @features %>

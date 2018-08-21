@@ -1,4 +1,3 @@
-
 <%= form_for(@user_session) do |f| %>
   <%= hidden_field_tag :continue, params[:continue] || request.path %>
 
@@ -20,5 +19,3 @@
     <%= f.submit 'continue' %>
   </div>
 <% end %>
-
-

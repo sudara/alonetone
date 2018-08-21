@@ -4,27 +4,24 @@
 
 <div id="signup" class="static_content box">
 	<%= simple_form_for(@user) do |f| -%>
-    <%= f.input :login, :hint => "(Letters and numbers only)" %>
-    <%= f.input :email, :hint => "(we will send you an activation email)" %>
-    <%= f.input :password, :hint => "(pick a nice password)"%>
-    <%= f.input :password_confirmation, :hint => "(enter it once again)" %>
-    <%= raw(recaptcha_tags(:display => {:theme => 'white'})) unless @bypass_recaptcha %>
+    <%= f.input :login, hint: "(Letters and numbers only)" %>
+    <%= f.input :email, hint: "(we will send you an activation email)" %>
+    <%= f.input :password, hint: "(pick a nice password)"%>
+    <%= f.input :password_confirmation, hint: "(enter it once again)" %>
+    <%= raw(recaptcha_tags(display: {theme: 'white'})) unless @bypass_recaptcha %>
     <br/>
-    <%= f.button :submit, "Join Alonetone"  %>
+    <%= f.button :submit, "Join Alonetone" %>
 	<% end %>
 </div>
 </div>
- 
- <div class="box">
-<h2 class="box static_content_heading">Want to know more?</h2>
-<div id="signup-questions" class="static_content box">
-  <p>
-    alonetone is a non-commercial venture, giving musicians a free home for their music and the tools they need to promote it
-  </p>
-  <p>
-    Read our FAQ by <%= link_to 'clicking here', about_path %>  
-  </p>
-  
-  
-</div>
+<div class="box">
+  <h2 class="box static_content_heading">Want to know more?</h2>
+  <div id="signup-questions" class="static_content box">
+    <p>
+      alonetone is a non-commercial venture, giving musicians a free home for their music and the tools they need to promote it
+    </p>
+    <p>
+      Read our FAQ by <%= link_to 'clicking here', about_path %>
+    </p>
+  </div>
 </div>

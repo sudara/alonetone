@@ -8,7 +8,7 @@
   <tr>
     <td><%= link_to 'Show', group_path(group.permalink) %></td>
     <td><%= link_to 'Edit', edit_group_path(group.permalink) %></td>
-    <td><%= link_to 'Destroy', group.permalink, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', group.permalink, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
