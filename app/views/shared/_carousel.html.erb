@@ -1,13 +1,13 @@
 <%= cache([@user, cache_digest(@playlists), theme_name]) do %>
 
 <div id="playlists_carousel">
-  <%= link_to image_tag('icons/prev.png'), '', :class => 'prev disabled' if @playlists.size > 4 %>
+  <%= link_to image_tag('icons/prev.png'), '', class: 'prev disabled' if @playlists.size > 4 %>
   <div class="playlists_carousel">
     <ul>
-      <%= render :partial => 'shared/playlist', :collection => @playlists %>
+      <%= render partial: 'shared/playlist', collection: @playlists %>
     </ul>
   </div>
-  <%= link_to image_tag('icons/next.png'), '', :class => 'next' if @playlists.size > 4 %>
+  <%= link_to image_tag('icons/next.png'), '', class: 'next' if @playlists.size > 4 %>
 </div>
 
 <% end %>

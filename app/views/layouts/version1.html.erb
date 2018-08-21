@@ -5,13 +5,13 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
     <title><%= @page_title %> </title>
     
-    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','share','alonetone', :cache => 'all'%>
+    <%= stylesheet_link_tag 'reset','typography', 'layout', 'player', 'nav', 'flash', 'playlists','share','alonetone', cache: 'all'%>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="verify-v1" content="aaIrlgAaz4LTgcMLni358eS3yFVofWVpOykHzegpXS4=" />
 		<%= yield :css %>
 		<link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
 
-    <%= javascript_include_tag 'prototype', 'effects', 'slider', 'dragdrop', 'controls','lowpro','soundmanager', 'application', :cache => true %>
+    <%= javascript_include_tag 'prototype', 'effects', 'slider', 'dragdrop', 'controls','lowpro','soundmanager', 'application', cache: true %>
 		<!-- <script type="text/javascript" src="http://static.robotreplay.com/nitobi.replay.js"></script> -->
   </head>
   <body>
@@ -20,13 +20,13 @@
       <div id="header">
         <div id="logo"><a href="/"><i>alonetone home</i></a></div>
 				<div id="tagline"></div>
-				<div id="player"><%= render :partial => 'shared/player', :current_user => current_user %></div>
-				<%= render :partial=> 'shared/nav' %>
+				<div id="player"><%= render partial: 'shared/player', current_user: current_user %></div>
+				<%= render partia: 'shared/nav' %>
       </div>
       <!-- /div.header -->
-			<div id="user-bar"><%= render :partial => 'shared/user_bar', :current_user => current_user %></div>
+			<div id="user-bar"><%= render partial: 'shared/user_bar', current_user: current_user %></div>
     
-		<%= render :partial => 'shared/flash', :locals => {:flash => flash}%>
+		<%= render partial: 'shared/flash', locals: {flash: flash}%>
 		
     <div id="content">    
       
@@ -36,8 +36,8 @@
 				</div>
 				
 		    <div id="main">
-		      <%= render :partial => 'shared/ie6_warning' if @ie6 %>
-		      <%= render :partial => 'shared/javascript_warning' if @ie6%>
+		      <%= render partial: 'shared/ie6_warning' if @ie6 %>
+		      <%= render partial: 'shared/javascript_warning' if @ie6%>
 		      <%= yield %>
 		    </div>
 		
@@ -52,7 +52,7 @@
 				<%= yield :share %>
 				<%= yield :comment %>
 			</div>
-			<%= render :partial => 'shared/footer' %>
+			<%= render partial: 'shared/footer' %>
 		</div>
 	
 	<script type="text/javascript">
