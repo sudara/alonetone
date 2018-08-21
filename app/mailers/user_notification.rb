@@ -18,7 +18,6 @@ class UserNotification < ActionMailer::Base
     mail :to => user.email, :subject => "[#{Alonetone.url}] Your account has been activated!"
   end
 
-
   protected
 
   def set_activation_url

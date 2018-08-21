@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   scope :recent,        -> { order('users.id DESC')                                   }
   scope :recently_seen, -> { order('last_request_at DESC')                            }
-  scope :musicians,     -> { where(['assets_count > ?',0]).order('assets_count DESC') }
+  scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
   scope :activated,     -> { where(:perishable_token => nil).recent                   }
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
@@ -24,13 +24,13 @@ class User < ActiveRecord::Base
   # Can create music
   has_one    :pic, :as => :picable, :dependent => :destroy
   has_many   :assets,
-    -> { order('assets.id DESC')},
+    -> { order('assets.id DESC') },
     :dependent => :destroy
 
-  has_many   :playlists, -> { order('playlists.position')},
+  has_many   :playlists, -> { order('playlists.position') },
     :dependent => :destroy
 
-  has_many   :comments, -> {order('comments.id DESC')},
+  has_many   :comments, -> { order('comments.id DESC') },
     :dependent => :destroy
 
   has_many   :tracks
@@ -39,9 +39,8 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :groups, :through => :membership
 
-
   # Can listen to music, and have that tracked
-  has_many :listens, -> { order('listens.created_at DESC')}, :foreign_key  => 'listener_id'
+  has_many :listens, -> { order('listens.created_at DESC') }, :foreign_key => 'listener_id'
 
   has_many :listened_to_tracks,
     -> { order('listens.created_at DESC') },
@@ -50,14 +49,14 @@ class User < ActiveRecord::Base
 
   # Can have their music listened to
   has_many :track_plays,
-    -> { order('listens.created_at DESC').includes(:asset)},
+    -> { order('listens.created_at DESC').includes(:asset) },
     :foreign_key  => 'track_owner_id',
     :class_name   => 'Listen'
 
   # And therefore have listeners
   has_many :listeners,
     -> { distinct },
-    :through  => :track_plays
+    :through => :track_plays
 
   has_many :followings, :dependent => :destroy
   has_many :follows, :dependent => :destroy, :class_name => 'Following', :foreign_key => 'follower_id'
@@ -85,14 +84,14 @@ class User < ActiveRecord::Base
   end
 
   def to_param
-    "#{login}"
+    login.to_s
   end
 
   def to_xml(options = {})
     options[:except] ||= []
-    options[:except] += [:email, :crypted_password,
-                        :fb_user_id, :activation_code, :admin,
-                        :salt, :moderator, :ip, :browser, :settings]
+    options[:except] += %i[email crypted_password
+fb_user_id activation_code admin
+salt moderator ip browser settings]
     super
   end
 
@@ -102,7 +101,7 @@ class User < ActiveRecord::Base
 
   def hasnt_been_here_in(hours)
     ast_login_at &&
-    last_login_at < hours.ago.utc
+      last_login_at < hours.ago.utc
   end
 
   def is_following?(user)
@@ -110,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def new_tracks_from_followees(limit)
-    Asset.new_tracks_from_followees(self,{:page => 1, :per_page => limit})
+    Asset.new_tracks_from_followees(self, :page => 1, :per_page => limit)
   end
 
   def follows_user_ids
@@ -157,17 +156,17 @@ class User < ActiveRecord::Base
     Listen.where(listener_id: id).delete_all
     Topic.where(:user_id => id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
 
-    Playlist.joins(:assets).where(:assets => {:user_id => id}).
-      update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.joins(:asset).where(:assets => {:user_id => id}).delete_all
+    Playlist.joins(:assets).where(:assets => { :user_id => id })
+            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+    Track.joins(:asset).where(:assets => { :user_id => id }).delete_all
 
-    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id").
-      joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
+    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
 
     assets.destroy_all
 
-    %w(tracks playlists posts comments).each do |user_relation|
-      self.send(user_relation).delete_all
+    %w[tracks playlists posts comments].each do |user_relation|
+      send(user_relation).delete_all
     end
     true
   end

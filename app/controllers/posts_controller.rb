@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_parents
-  before_action :find_post, :only => [:edit, :update, :destroy, :spam, :unspam]
+  before_action :find_post, :only => %i[edit update destroy spam unspam]
   before_action :require_login, :only => :create
   layout "forums"
   include ActionView::RecordIdentifier
@@ -11,13 +11,13 @@ class PostsController < ApplicationController
   # /forums/1/topics/1/posts
   def index
     @posts = (@parent ? @parent.posts : Post).search(params).page(params[:page])
-    @users = @user ? {@user.id => @user} : User.index_from(@posts)
+    @users = @user ? { @user.id => @user } : User.index_from(@posts)
     @page_title = @description = 'Recent Forum Posts'
     @show_title_and_link = true
     respond_to do |format|
       format.html # index.html.erb
       format.atom
-      format.xml  { render :xml  => @posts }
+      format.xml  { render :xml => @posts }
     end
   end
 
@@ -26,28 +26,24 @@ class PostsController < ApplicationController
       format.html { redirect_to forum_topic_path(@forum, @topic) }
       format.xml  do
         find_post
-        render :xml  => @post
+        render :xml => @post
       end
     end
   end
-  
+
   def unspam
     @post.ham!
     @post.update_column :is_spam, false
     # unspam the topic too
-    if @post.topic.posts.count == 1 
-      @post.topic.update_column :spam, false
-    end
+    @post.topic.update_column :spam, false if @post.topic.posts.count == 1
     redirect_back(fallback_location: root_path)
   end
-  
+
   def spam
     @post.spam!
     @post.update_column :is_spam, true
     # mark the topic as spam too if it's the only post
-    if @post.topic.posts.count == 1 
-      @post.topic.update_column :spam, true
-    end
+    @post.topic.update_column :spam, true if @post.topic.posts.count == 1
     redirect_back(fallback_location: root_path)
   end
 
@@ -83,9 +79,9 @@ class PostsController < ApplicationController
   def update
     if @post.update_attributes(post_params)
       flash[:notice] = 'Post was successfully updated.'
-      redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post))) 
+      redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post)))
     else
-      render :action => "edit" 
+      render :action => "edit"
     end
   end
 
@@ -98,7 +94,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body)
-  end 
+  end
 
   def find_parents
     if params[:user_id]
@@ -108,11 +104,11 @@ class PostsController < ApplicationController
       @parent = @topic = @forum.topics.find_by_permalink(params[:topic_id]) if params[:topic_id]
     end
   end
-  
+
   def authorized?
-    (!%w(destroy edit update new spam unspam).include?(action_name)) || (!%w(spam unspam).include?(action_name) && (@topic.user_id.to_s == current_user.id.to_s)) || moderator?
+    !%w[destroy edit update new spam unspam].include?(action_name) || (!%w[spam unspam].include?(action_name) && (@topic.user_id.to_s == current_user.id.to_s)) || moderator?
   end
-    
+
   def find_post
     @post = @topic.posts.find(params[:id])
   end

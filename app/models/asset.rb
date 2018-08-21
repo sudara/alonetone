@@ -1,5 +1,4 @@
 class Asset < ActiveRecord::Base
-
   concerned_with :uploading, :radio, :statistics, :greenfield
 
   scope :published,       -> { where(private: false) }
@@ -9,12 +8,12 @@ class Asset < ActiveRecord::Base
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
 
-  belongs_to :user,    :counter_cache => true
+  belongs_to :user, :counter_cache => true
   has_one  :audio_feature
   has_many :tracks,    :dependent => :destroy
   has_many :playlists, :through => :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, :dependent => :destroy
-  has_many :comments, :as => :commentable, :dependent  => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
 
   has_many :listeners,
     -> { distinct.order('listens.created_at DESC').limit(20) },
@@ -40,13 +39,11 @@ class Asset < ActiveRecord::Base
 
   # override has_permalink method to ensure we don't get empty permas
   def generate_permalink!
-    self.permalink = fix_duplication(normalize(self.send(generate_from)))
-    if !permalink.present?
-      self.permalink = fix_duplication("untitled")
-    end
+    self.permalink = fix_duplication(normalize(send(generate_from)))
+    self.permalink = fix_duplication("untitled") unless permalink.present?
   end
 
-  def self.latest(limit=10)
+  def self.latest(limit = 10)
     includes(:user => :pic).limit(limit).order('assets.id DESC')
   end
 
@@ -59,7 +56,7 @@ class Asset < ActiveRecord::Base
   end
 
   def self.user_id_in(user_ids)
-    where( "assets.user_id IN (?)", user_ids)
+    where("assets.user_id IN (?)", user_ids)
   end
 
   def self.conditions_by_like(value)
@@ -83,7 +80,9 @@ class Asset < ActiveRecord::Base
   end
 
   def first_playlist
-    Track.where(:asset_id => id).first.playlists.first rescue nil
+      Track.where(:asset_id => id).first.playlists.first
+  rescue StandardError
+      nil
   end
 
   # allows classes outside Asset to use the same format
@@ -92,7 +91,7 @@ class Asset < ActiveRecord::Base
       min_and_sec = time.divmod(60)
       minutes = min_and_sec[0].to_i.to_s
       seconds = min_and_sec[1].to_i.to_s
-      seconds = "0"+seconds if seconds.length == 1
+      seconds = "0" + seconds if seconds.length == 1
       minutes + ':' + seconds
     else
       "?:??"
@@ -120,9 +119,7 @@ class Asset < ActiveRecord::Base
   end
 
   def publish!
-    if private?
-      update(:private, false) && notify_followers
-    end
+    update(:private, false) && notify_followers if private?
   end
 
   # needed for spam detection

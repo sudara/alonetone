@@ -3,9 +3,9 @@ class PlaylistsController < ApplicationController
   include Listens
 
   before_action :find_user, :except => :all
-  before_action :find_playlists, :except => [:index, :new, :create, :all, :sort]
-  before_action :require_login, :except => [:index, :show, :all]
-  before_action :find_tracks, :only => [:show, :edit, :all]
+  before_action :find_playlists, :except => %i[index new create all sort]
+  before_action :require_login, :except => %i[index show all]
+  before_action :find_tracks, :only => %i[show edit all]
 
   def all
     @playlists = Playlist.recent.only_public.with_pic.paginate(page: params[:page], per_page: 30)
@@ -13,7 +13,7 @@ class PlaylistsController < ApplicationController
 
   # all user's playlists
   def index
-    @page_title = @description  = "#{@user.name}'s albums and playlists: "
+    @page_title = @description = "#{@user.name}'s albums and playlists: "
     set_all_playlists
   end
 
@@ -62,8 +62,8 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens = @user.listened_to_tracks.preload(:user).
-                 select('distinct assets.*, listens.created_at').paginate(page: params[:listens_page], per_page: 10)
+    @listens = @user.listened_to_tracks.preload(:user)
+                    .select('distinct assets.*, listens.created_at').paginate(page: params[:listens_page], per_page: 10)
     @favorites = @user.favorites.tracks.paginate(page: params[:favorites_page], per_page: 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
@@ -77,14 +77,14 @@ class PlaylistsController < ApplicationController
     asset = Asset.find(id)
     @track = @playlist.tracks.create(asset: asset, user: @user)
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 
   def attach_pic
     if params[:pic].present?
       @pic = @playlist.build_pic(params[:pic].permit(:pic))
-      flash[:notice] = 'Picture updated!' if @pic.save and @playlist.touch
+      flash[:notice] = 'Picture updated!' if @pic.save && @playlist.touch
     end
     flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:notice].present?
     redirect_to edit_user_playlist_path(@user, @playlist)
@@ -92,7 +92,7 @@ class PlaylistsController < ApplicationController
 
   def remove_track
     @track = @playlist.tracks.find(params[:track_id])
-    if @track && @track.destroy
+    if @track&.destroy
       respond_to do |format|
         format.js { head(:ok) }
       end
@@ -107,18 +107,17 @@ class PlaylistsController < ApplicationController
     # get the params for this playlist
     params["track"].each_with_index do |id, position|
       @playlist.tracks.find(id).update_column(:position, position + 1)
-    end 
+    end
     head :ok
   rescue ActiveRecord::RecordNotFound, NoMethodError
     return head(:bad_request)
   end
 
-
   def create
     @playlist = @user.playlists.build(playlist_params)
     if @playlist.save
       flash[:notice] = 'Great, go ahead and add some tracks'
-       redirect_to edit_user_playlist_path(@user, @playlist)
+      redirect_to edit_user_playlist_path(@user, @playlist)
     else
        render :action => "new"
     end
@@ -126,7 +125,7 @@ class PlaylistsController < ApplicationController
 
   def update
     if @playlist.update_attributes(playlist_params)
-      redirect_to edit_user_playlist_path(@user,@playlist), :notice => 'Playlist was successfully updated.'
+      redirect_to edit_user_playlist_path(@user, @playlist), :notice => 'Playlist was successfully updated.'
     else
       render :action => "edit"
     end
@@ -141,9 +140,7 @@ class PlaylistsController < ApplicationController
   protected
 
   def find_asset_in_playlist
-    if params[:asset_id].present?
-      Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
-    end
+    Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take! if params[:asset_id].present?
   end
 
   def playlist_params
@@ -170,14 +167,14 @@ class PlaylistsController < ApplicationController
 
   def set_right_and_left_playlists
     middle = (@all_playlists.size + 1) / 2
-    @playlists_left  = @all_playlists[ 0 ... middle ]
-    @playlists_right = @all_playlists[ middle .. -1 ]
+    @playlists_left  = @all_playlists[0...middle]
+    @playlists_right = @all_playlists[middle..-1]
   end
 
   def authorized?
     @playlist.nil? || current_user_is_admin_or_owner?(@user) ||
-    %w[ destroy admin edit update remove_track attach_pic sort_tracks
-        add_track set_playlist_description set_playlist_title ].include?(action_name) == false
+      %w[ destroy admin edit update remove_track attach_pic sort_tracks
+          add_track set_playlist_description set_playlist_title ].include?(action_name) == false
   end
 
   def find_playlists

@@ -1,6 +1,5 @@
 class CommentNotification < ActionMailer::Base
   default :from => Alonetone.email
-  
 
   def new_comment(comment, asset)
     @comment = comment[:body]
@@ -13,12 +12,9 @@ class CommentNotification < ActionMailer::Base
     mail :to => comment.user.email, :subject => "[alonetone] Comment on '#{asset.name}' from #{person_who_made(comment)}"
   end
 
-
-
   protected
-  
+
   def person_who_made(comment)
     comment.commenter ? comment.commenter.name : 'Guest'
   end
-
 end

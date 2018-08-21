@@ -55,14 +55,12 @@ RSpec.describe User, type: :model do
 
   context "deletion" do
     it 'should remove listens tracks playlists posts topics comments assets as well' do
-
     end
   end
 
-
   protected
-    def new_user(options = {})
-      User.new({ :email => 'new@user.com', :login => 'newuser', :password => 'quire451', :password_confirmation => 'quire451' }.merge(options))
-    end
-end
 
+  def new_user(options = {})
+    User.new({ :email => 'new@user.com', :login => 'newuser', :password => 'quire451', :password_confirmation => 'quire451' }.merge(options))
+  end
+end

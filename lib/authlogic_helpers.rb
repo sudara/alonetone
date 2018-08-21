@@ -1,5 +1,4 @@
 module AuthlogicHelpers
-
   # from Authlogic readme
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
@@ -8,7 +7,7 @@ module AuthlogicHelpers
 
   def current_user
     return @current_user if defined?(@current_user)
-    @current_user= current_user_session && current_user_session.record
+    @current_user = current_user_session&.record
   end
 
   # basic questions asked at controller/view level
@@ -25,7 +24,7 @@ module AuthlogicHelpers
   end
 
   def require_login
-    force_login unless logged_in? and authorized?
+    force_login unless logged_in? && authorized?
   end
 
   def admin_only
@@ -51,5 +50,4 @@ module AuthlogicHelpers
     store_location
     redirect_to login_path, :alert => "What do you think you’re doing?! We're calling your mother..."
   end
-
 end

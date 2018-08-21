@@ -2,8 +2,8 @@ module Greenfield
   module ApplicationHelper
     def emojify(content)
       content.gsub(/:([a-z0-9\+\-_]+):/) do |match|
-        if Emoji.find_by_alias($1)
-          '<img alt="' + $1 + '" height="20" src="' + asset_path("images/emoji/#{$1}.png") + '" style="vertical-align:middle" width="20" />'
+        if Emoji.find_by_alias(Regexp.last_match(1))
+          '<img alt="' + Regexp.last_match(1) + '" height="20" src="' + asset_path("images/emoji/#{Regexp.last_match(1)}.png") + '" style="vertical-align:middle" width="20" />'
         else
           match
         end
@@ -21,23 +21,22 @@ module Greenfield
     end
 
     def player(asset)
-      render 'greenfield/player/player', {:asset => asset}
+      render 'greenfield/player/player', :asset => asset
     end
 
     def media_url(asset)
       if asset.is_a?(Greenfield::AttachedAsset)
-        Greenfield::Engine.routes.url_helpers.
-          user_post_attached_asset_path(asset.post.user, asset.alonetone_asset,
+        Greenfield::Engine.routes.url_helpers
+                          .user_post_attached_asset_path(asset.post.user, asset.alonetone_asset,
                                         asset.permalink, :format => :mp3)
       else
-        Greenfield::Engine.routes.url_helpers.
-          user_post_path(asset.user, asset, :format => :mp3)
+        Greenfield::Engine.routes.url_helpers
+                          .user_post_path(asset.user, asset, :format => :mp3)
       end
     end
 
-    def list_attached_mp3_assets(assets=[])
-    end
-    
+    def list_attached_mp3_assets(assets = []); end
+
     def owner?
       @asset && current_user && (current_user.admin? || (current_user.id == @asset.user_id))
     end

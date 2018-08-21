@@ -1,5 +1,4 @@
 class Topic < ActiveRecord::Base
-
   before_validation :set_default_attributes, :on => :create
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
@@ -9,7 +8,7 @@ class Topic < ActiveRecord::Base
   scope :with_user, -> { preload(:last_user, :user) }
   scope :recent, -> { order('topics.created_at DESC') }
   scope :not_spam, -> { where(:spam => false).with_user }
-  scope :spam,    ->  { where(:spam => true).with_user }
+  scope :spam, ->  { where(:spam => true).with_user }
   scope :sticky_and_recent, -> { order("topics.sticky desc, topics.last_updated_at desc") }
   scope :for_footer, -> { recent.not_spam.includes(:recent_post => :user).includes(:forum).limit(3) }
   # creator of forum topic
@@ -75,11 +74,11 @@ class Topic < ActiveRecord::Base
     # these fields are not accessible to mass assignment
     if remaining_post = post.frozen? ? recent_post : post
       update_columns(:last_updated_at => remaining_post.created_at,
-        :last_user_id => remaining_post.user_id,
-        :last_post_id => remaining_post.id)
+                     :last_user_id => remaining_post.user_id,
+                     :last_post_id => remaining_post.id)
       Topic.reset_counters id, :posts
     else
-      self.destroy
+      destroy
     end
   end
 
@@ -92,14 +91,14 @@ class Topic < ActiveRecord::Base
   end
 
   def self.popular
-    Post.group(:topic).not_spam.where(['posts.created_at > ?',10.days.ago]).limit(3).order('count_all DESC').count
+    Post.group(:topic).not_spam.where(['posts.created_at > ?', 10.days.ago]).limit(3).order('count_all DESC').count
   end
 
   def self.replyless
     Topic.not_spam.limit(3).order('created_at DESC').where(:posts_count => 1)
   end
 
-protected
+  protected
 
   def set_default_attributes
     self.sticky          ||= 0
@@ -120,7 +119,7 @@ protected
   end
 
   def count_user_posts_for_counter_cache
-    @user_posts = posts.group_by { |p| p.user_id }
+    @user_posts = posts.group_by(&:user_id)
   end
 
   def update_cached_forum_and_user_counts

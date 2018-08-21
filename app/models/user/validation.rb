@@ -21,7 +21,7 @@ class User
   end
 
   def active?
-    perishable_token == nil
+    perishable_token.nil?
   end
 
   def activate!

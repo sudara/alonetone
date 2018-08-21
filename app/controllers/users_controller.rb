@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
-
   before_action :ip_is_acceptable?, :only => :create
-  before_action :find_user, :except => [:new, :create, :index, :activate, :sudo, :toggle_favorite]
-  before_action :require_login, :except => [:index, :show, :new, :create, :activate, :bio, :destroy]
+  before_action :find_user, :except => %i[new create index activate sudo toggle_favorite]
+  before_action :require_login, :except => %i[index show new create activate bio destroy]
 
   def index
-    @page_title = "#{params[:sort] ? params[:sort].titleize+' - ' : ''} Musicians and Listeners"
+    @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
     @users = User.includes(:pic).paginate_by_params(params)
     @sort = params[:sort]
@@ -22,7 +21,8 @@ class UsersController < ApplicationController
       end
       format.xml { @assets = @user.assets.published.recent.limit(params[:limit] || 10) }
       format.rss { @assets = @user.assets.published.recent }
-      format.js do  render :update do |page|
+      format.js do
+        render :update do |page|
           page.replace 'user_latest', :partial => "latest"
         end
       end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def create
     passed_recaptcha?
     @user = User.new(user_params)
-    if @user.valid? and passed_recaptcha? and @user.save_without_session_maintenance
+    if @user.valid? && passed_recaptcha? && @user.save_without_session_maintenance
       session[:recaptcha] = false # make sure they have to recaptcha for new user
       @user.reset_perishable_token!
       UserNotification.signup(@user).deliver_now
@@ -58,12 +58,11 @@ class UsersController < ApplicationController
     end
   end
 
-
   def activate
     @user = User.where(:perishable_token => params[:perishable_token]).first
     if logged_in?
       redirect_to new_user_track_path(current_user), :error => "You are already activated and logged in! Rejoice and upload!"
-    elsif !is_from_a_bad_ip? and @user and @user.activate!
+    elsif !is_from_a_bad_ip? && @user && @user.activate!
       UserSession.create(@user, true) # Log user in manually
       UserNotification.activation(@user).deliver_now
       redirect_to new_user_track_path(@user.login), :ok => "Whew! All done, your account is activated. Go ahead and upload your first track."
@@ -72,8 +71,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def attach_pic
     if params[:pic].present?
@@ -84,13 +82,12 @@ class UsersController < ApplicationController
     redirect_to edit_user_path(@user)
   end
 
-
   def update
     if @user.update_attributes(user_params)
       flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), :ok => "Sweet, updated"
     else
-      flash[:error] =  "Not so fast, young one"
+      flash[:error] = "Not so fast, young one"
       render :action => :edit
     end
   end
@@ -108,7 +105,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    redirect_to(root_path) and return false if params[:user_id] or !params[:login] # bug of doom
+    redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
       @user.destroy # this will run "efficiently_destroy_relations" before_destory callback
@@ -144,14 +141,14 @@ class UsersController < ApplicationController
 
   def passed_recaptcha?
     if (session[:recaptcha] == true) || !RECAPTCHA_ENABLED
-      @bypass_recaptcha = true  # bypass when already entered or setting not present
+      @bypass_recaptcha = true # bypass when already entered or setting not present
     else
       @bypass_recaptcha = session[:recaptcha] = verify_recaptcha(:model => @user)
     end
   end
 
   def prepare_meta_tags
-    @page_title = (@user.name)
+    @page_title = @user.name
     @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"
     @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
     @tab = 'your_stuff' if current_user == @user
@@ -163,9 +160,9 @@ class UsersController < ApplicationController
     @playlists = @user.playlists.only_public.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
-    @favorites = @user.tracks.favorites.recent.includes(:asset => {:user => :pic}).limit(5).collect(&:asset)
-    @comments = @user.comments.public_or_private(display_private_comments?).
-      preload(:commentable => {:user => :pic}).preload({:commenter => :pic}).limit(5)
+    @favorites = @user.tracks.favorites.recent.includes(:asset => { :user => :pic }).limit(5).collect(&:asset)
+    @comments = @user.comments.public_or_private(display_private_comments?)
+                     .preload(:commentable => { :user => :pic }).preload(:commenter => :pic).limit(5)
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
@@ -178,12 +175,12 @@ class UsersController < ApplicationController
   end
 
   def dangerous_action?
-    %w(destroy update edit create attach_pic).include? action_name
+    %w[destroy update edit create attach_pic].include? action_name
   end
 
   def change_user_to(user)
     current_user_session.destroy
-    user.reset_persistence_token! if !user.persistence_token.present?
+    user.reset_persistence_token! unless user.persistence_token.present?
     session = UserSession.create(user)
     flash[:ok] = "Changed user to #{user.name}"
     redirect_back_or_default
@@ -202,7 +199,7 @@ class UsersController < ApplicationController
   end
 
   def return_from_sudo_if_sudoed
-    redirect_to(root_path) and return false if !session[:sudo].present?
+    redirect_to(root_path) && (return false) unless session[:sudo].present?
     logger.warn("SUDO: returning to admin account")
     change_user_to User.find(session[:sudo])
     @sudo = session[:sudo] = nil
@@ -214,11 +211,10 @@ class UsersController < ApplicationController
     flush_asset_caches = false
     if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
       currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
-      flush_asset_caches = params[:user][:settings][:block_guest_comments] == ( currently_blocking_guest_comments ? "false" : "true" )
+      flush_asset_caches = params[:user][:settings][:block_guest_comments] == (currently_blocking_guest_comments ? "false" : "true")
     end
     Asset.where(:user_id => @user.id).update_all(:updated_at => Time.now) if flush_asset_caches
   end
-
 
   def display_user_home_or_index
     if params[:login] && User.find_by_login(params[:login])
@@ -227,5 +223,4 @@ class UsersController < ApplicationController
       redirect_to users_url
     end
   end
-
 end

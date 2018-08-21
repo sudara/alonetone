@@ -7,12 +7,12 @@ module Greenfield
     # TODO: Need to validate attachment embeds...
 
     attachment_options = {
-      :styles => { :original => ''}, # just makes sure original runs through the processor
-      :processors => [:mp3_paperclip_processor],
+      :styles => { :original => '' }, # just makes sure original runs through the processor
+      :processors => [:mp3_paperclip_processor]
     }
 
     if Alonetone.storage == 's3'
-      attachment_options[:path] = "/greenfield/:id/:basename.:extension" 
+      attachment_options[:path] = "/greenfield/:id/:basename.:extension"
       attachment_options[:s3_permissions] = 'authenticated-read'
     end
 

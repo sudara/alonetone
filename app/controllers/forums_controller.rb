@@ -1,7 +1,6 @@
 class ForumsController < ApplicationController
-
-  before_action :require_login, :except => [:index, :show]
-  before_action :find_forum, :only => [:show, :edit, :update, :destroy]
+  before_action :require_login, :except => %i[index show]
+  before_action :find_forum, :only => %i[show edit update destroy]
   before_action :set_forum_tab, :set_html_meta
   layout :forums_layout
 
@@ -26,8 +25,7 @@ class ForumsController < ApplicationController
   end
 
   # GET /forums/1/edit
-  def edit
-  end
+  def edit; end
 
   def create
     if @forum = Forum.create(params[:forum])

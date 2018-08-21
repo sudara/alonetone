@@ -11,7 +11,8 @@ class Pic < ActiveRecord::Base
       :original   => "800x800#",
       :greenfield => "1500x1500#",
       :hq         => "3000x3000#"
-  }}
+    }
+  }
   # required for production alonetone, to be compatible with rails 2/attachment_fu paths
   attachment_options[:path] = "/pics/:id/:name_with_style.:extension" if Alonetone.storage == "s3"
   has_attached_file :pic, attachment_options
@@ -30,7 +31,6 @@ class Pic < ActiveRecord::Base
       "#{basename(attachment, style)}_#{style}"
     end
   end
-
 end
 
 # == Schema Information

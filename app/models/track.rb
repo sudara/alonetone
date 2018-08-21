@@ -5,7 +5,7 @@ class Track < ActiveRecord::Base
 
   scope :recent, -> { order('tracks.created_at DESC') }
   scope :favorites, -> { where(:is_favorite => true).recent }
-  scope :favorites_for_home, -> { favorites.limit(5).includes({:user => :pic}, {:asset => {:user => :pic}}) }
+  scope :favorites_for_home, -> { favorites.limit(5).includes({ :user => :pic }, :asset => { :user => :pic }) }
 
   delegate :length, :name, :to => :asset
   acts_as_list :scope => :playlist_id, :order => :position
@@ -17,14 +17,13 @@ class Track < ActiveRecord::Base
     asset ? asset[:length] : 0
   end
 
-  def self.most_favorited(limit=10, offset=0)
-    self.count(:all,
+  def self.most_favorited(limit = 10, offset = 0)
+    count(:all,
       :conditions => ['tracks.is_favorite = ?', true],
       :group      => 'asset_id',
       :order      => 'count_all DESC',
       :limit      => limit,
-      :offset     => offset
-    ).collect(&:first)
+      :offset     => offset).collect(&:first)
   end
 
   def ensure_playlist_if_favorite
