@@ -78,6 +78,7 @@ group :development do
   gem 'thin'
   gem 'sqlite3'
   gem 'perf_check'
+  gem 'annotate'
 end
 
 ## Who loves tests! You do? You do!

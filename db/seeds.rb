@@ -14,7 +14,7 @@ mp3 = fixture_file_upload(File.join('spec/fixtures/assets','muppets.mp3'),'audio
 asset = musician.assets.create(:mp3 => mp3, :title => 'muppets!', :description => '*muppets* poking fun', :waveform => Greenfield::Waveform.extract(mp3.path))
 
 asset.listens.create(
-  :listener     => moderator, 
+  :listener     => moderator,
   :track_owner  => asset.user, 
   :user_agent   => 'db seeds',
   :ip           => '127.0.0.1'
