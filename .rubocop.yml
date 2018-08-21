@@ -114,6 +114,30 @@ Style/CaseEquality:
 Style/MixinUsage:
   Enabled: false
 
+Style/BlockDelimiters:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Layout/AlignArray:
+  Enabled: false
+
+Lint/BlockAlignment:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Style/For:
+  Enabled: false
+
 # naming
 Naming/PredicateName:
   Enabled: false
@@ -133,4 +157,4 @@ AllCops:
     - 'spec/*_helper.rb'
     - 'vendor/**/*'
     - 'node_modules/**/*'
-    - 'app/views/**/*'
+    - 'app/views/**/*.builder'
