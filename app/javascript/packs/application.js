@@ -29,8 +29,6 @@ application.load(definitionsFromContext(context))
 
 
 function handlers() {
-  dom.watch()
-
   document.querySelectorAll('.large-cover .no_pic, .small-cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
     if (!pic.hasChildNodes()) { 
