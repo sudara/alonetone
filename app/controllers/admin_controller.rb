@@ -14,5 +14,4 @@ class AdminController < ApplicationController
     @all_time_track_listens = Asset.order('listens_count DESC').limit(25)
     @expensive_users = User.order('bandwidth_used desc').limit(25)
   end
-
 end
