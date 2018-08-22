@@ -64,15 +64,13 @@
         line-height: 9px;
         display: block;
         float: left;
-        width: 10px;
-        height: 10px;
-        margin-top: 6px;
-        margin-right: 8px;
-        margin-left: 8px;
+        width: 24px;
+        height: 24px;
+        margin-top: 1px;
+        margin-right: 19px;
+        margin-left: 0px;
         padding: 4px 3px 5px 6px;
         color: #AAAAAA;
-        border: 1px solid #AAAAAA;
-        border-radius: 11px;
         &:hover {
           color: #FFFFFF;
           border-color: #FFFFFF;
@@ -80,8 +78,10 @@
       }
       a.play-button {
         i {
-          position: relative;
-          top: -.5px;
+          background-image: url('svg/icon_play_circled.svg');
+          display: inline-block;
+          width: 24px;
+          height: 24px;
         }
       }
       a.pause-button {

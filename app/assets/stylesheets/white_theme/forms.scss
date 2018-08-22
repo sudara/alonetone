@@ -62,7 +62,7 @@ select {
 /* checked mark aspect */
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: image-url('checkmark.svg');
+  content: image-url('svg/icon_checkmark.svg');
   position: absolute;
   top: 3px;
   left: 3px;
@@ -70,12 +70,8 @@ select {
 }
 /* checked mark aspect changes */
 [type="checkbox"]:not(:checked) + label:after {
-  // opacity: 0;
-  // transform: scale(0);
 }
 [type="checkbox"]:checked + label:after {
-  // opacity: 1;
-  // transform: scale(1);
 }
 
 /* disabled checkbox */

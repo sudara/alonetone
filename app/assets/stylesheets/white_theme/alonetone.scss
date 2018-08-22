@@ -93,12 +93,24 @@ a.view_all {
   right: 0;
   border: 0;
   padding-right: 15px;
-  i.fa-chevron-right {
-    margin-left: 12px;
+  span {
+    vertical-align: top;
   }
+  .icon_caret_path {
+    stroke: #868686;
+  }
+
   &:hover {
     background-color: transparent;
     text-decoration: none;
+    // .icon_caret_path {
+      // stroke: $samo-orange;
+      path {
+
+      
+      stroke: #FFF;
+    }
+    // }
   }
 
 }
