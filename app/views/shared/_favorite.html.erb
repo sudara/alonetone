@@ -1,8 +1,8 @@
-<%= content_tag :div, :id => ("asset_#{favorite.asset.unique_id}"), :class => 'asset ' do %>
-  <%= render :layout => 'assets/asset_layout', :locals => {:asset => favorite.asset } do %>
-    <%= link_to favorite.asset.user.name, user_home_path(favorite.asset.user), :class => 'artist' %> 
-    <%= link_to "(fav'd by #{favorite.user.name})", user_home_path(favorite.user), :class => 'artist' %>
+<%= content_tag :div, id: ("asset_#{favorite.asset.unique_id}"), class: 'asset ' do %>
+  <%= render layout: 'assets/asset_layout', locals: {asset: favorite.asset } do %>
+    <%= link_to favorite.asset.user.name, user_home_path(favorite.asset.user), class: 'artist' %> 
+    <%= link_to "(fav'd by #{favorite.user.name})", user_home_path(favorite.user), class: 'artist' %>
   <% end %>
-	<%= render :partial => 'assets/asset_tabs', :locals => {:asset => favorite.asset} unless @single_track %>
+	<%= render partial: 'assets/asset_tabs', locals: {asset: favorite.asset} unless @single_track %>
 <% end %>
 

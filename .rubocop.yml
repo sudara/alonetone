@@ -1,0 +1,160 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Metrics
+Metrics/BlockLength:
+  Exclude:
+    - lib/tasks/**/*.rake
+    - spec/**/*.rb
+
+Metrics/MethodLength:
+  Max: 500
+
+Metrics/AbcSize:
+  Max: 500
+
+Metrics/LineLength:
+  Max: 300
+
+Metrics/ClassLength:
+  Max: 500
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Max: 500
+
+### Lint
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
+
+Lint/UselessAccessModifier:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: false
+
+Lint/EndAlignment:
+  Enabled: false
+
+Lint/HandleExceptions:
+  Enabled: false
+
+Lint/DuplicateMethods:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/UriEscapeUnescape:
+  Enabled: false
+
+### STYLE
+Style/NumericLiterals:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Style/IdenticalConditionalBranches:
+  Enabled: false
+
+Style/CaseEquality:
+  Enabled: false
+
+Style/MixinUsage:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: true
+
+Layout/AlignArray:
+  Enabled: false
+
+Lint/BlockAlignment:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Style/For:
+  Enabled: false
+
+# naming
+Naming/PredicateName:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'Gemfile*'
+    - 'spec/*_helper.rb'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'app/views/**/*.builder'

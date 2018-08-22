@@ -44,11 +44,11 @@ RSpec.describe Asset, type: :model do
     end
 
     it "should increase the user's count" do
-      expect{ new_track('muppets.mp3').save }.to change(Asset, :count).by(1)
+      expect { new_track('muppets.mp3').save }.to change(Asset, :count).by(1)
     end
 
     it "should not allow zipfiles" do
-      expect{ new_track('1valid-1invalid.zip').save }.not_to change(Asset, :count)
+      expect { new_track('1valid-1invalid.zip').save }.not_to change(Asset, :count)
     end
   end
 
@@ -152,12 +152,11 @@ RSpec.describe Asset, type: :model do
     end
 
     it 'should open up a zip and dig out valid mp3 files' do
-      #asset = new_track('1valid-1invalid.zip', 'application/zip')
+      # asset = new_track('1valid-1invalid.zip', 'application/zip')
       # lambda{asset.save}.should change(Asset, :count).by(1)
     end
   end
 end
-
 
 RSpec.describe Asset, 'on update', type: :model do
   fixtures :users, :assets

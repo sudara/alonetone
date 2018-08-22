@@ -26,7 +26,7 @@
           <div class="wp2-title"><h1 class="right-orange"> &bull; recently on ze blog &bull; </h1></div><!-- div end wp2-title-->
           <div class="wp2-mid">
             <% @recent_updates.each do |update| %>
-              <%= link_to update.title, blog_path(update.permalink), :class => 'right-red'%>
+              <%= link_to update.title, blog_path(update.permalink), class: 'right-red'%>
             <% end %>
           </div><!-- div end wp2-mid-->
 

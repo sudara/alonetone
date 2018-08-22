@@ -1,22 +1,22 @@
 <% div_for feature do %>
     <div class="box">
-        <h2><%= link_to "#{h feature.featured_user.name}", feature_path(feature.featured_user.login), :title => "featured alonetone artist: #{feature.featured_user.name}" %> </h2>
+        <h2><%= link_to "#{h feature.featured_user.name}", feature_path(feature.featured_user.login), title: "featured alonetone artist: #{feature.featured_user.name}" %> </h2>
         <% if feature.featured_user.has_tracks? %>
         <h3>Featured alonetone artist (<%= link_to "view all", features_path %>)</h3>
         <% end %>
-        <%= link_to 'edit', edit_feature_path(feature.featured_user.login), :class => 'edit right' if admin? %>
+        <%= link_to 'edit', edit_feature_path(feature.featured_user.login), class: 'edit right' if admin? %>
     </div>
     <div class="details clearfix">
         <div class="pic">
-            <%= link_to(image_tag(feature.featured_user.avatar(:large),:alt => "featured alonetone artist: #{feature.featured_user.name}"), feature_path(feature.featured_user.login), :title => "#{feature.featured_user.name} on alonetone") %>
+            <%= link_to(image_tag(feature.featured_user.avatar(:large), alt: "featured alonetone artist: #{feature.featured_user.name}"), feature_path(feature.featured_user.login), title: "#{feature.featured_user.name} on alonetone") %>
         </div>
         <div class="feature_teaser">
            <%= feature.teaser_text %>
         </div>
     </div>
     <div class="footer_box onepx">
-    <%= link_to "", feature_path(feature.permalink),:class => 'view_feature', 
-        :title => "featured musician: #{feature.featured_user.name}" %>
+    <%= link_to "", feature_path(feature.permalink),class: 'view_feature', 
+        title: "featured musician: #{feature.featured_user.name}" %>
     </div>
 
 <% end %>

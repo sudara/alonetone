@@ -1,9 +1,9 @@
-<%= render :partial => 'notices/create_playlist'  unless (@user.playlists_count > 0) || @user.assets_count < 1 %>
+<%= render partial: 'notices/create_playlist'  unless (@user.playlists_count > 0) || @user.assets_count < 1 %>
 <% content_for :left do %>
   <div class="upload box">
     <h2 class="box">Upload, upload, upload</h2>
     <div class="static_content">
-        <%= render :partial => 'form' %>
+        <%= render partial: 'form' %>
     </div>
     <div class="static_content">
     	<p>Upload mp3 or zip files, up to 40MB each.</p>
