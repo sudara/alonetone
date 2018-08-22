@@ -33,7 +33,7 @@
 #
 # end
 
-guard :rspec, cmd: 'bundle exec rspec', :all_on_start => false, :all_after_pass => false, :cli => '--colour' do
+guard :rspec, cmd: 'bundle exec rspec', all_on_start: false, all_after_pass: false, cli: '--colour' do
   watch('spec/spec_helper.rb')                        { "spec" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
   watch(%r{^spec/.+_spec\.rb$})

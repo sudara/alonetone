@@ -17,7 +17,7 @@
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
           <label>ALBUM ARTWORK</label>
-          <%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
+          <%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
             <%= submit_tag "Upload new Pic" %>
           <% end %>
@@ -30,7 +30,7 @@
       <div class="edit_playlist_right_column">
         <div class="edit_playlist_right_column_title_and_year">
           <%= f.input :title %>
-          <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
+          <%= f.input :year, input_html: {maxlength: 4, size: 4} %>
         </div>
         <div class="edit_playlist_right_column_links">
           <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
@@ -58,7 +58,7 @@
     </div>
     
     <div class="edit_playlist_bottom">
-      <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+      <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
       
       <%= f.button :submit, "Save" %>
       
@@ -82,9 +82,9 @@
     You can reorder your playlist by dragging your tracks, or remove them from the playlist with the [x] icon.
   </p>
   <div id="edit_playlist">
-    <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
+    <%= render layout: 'playlist_layout', locals: {playlist: @playlist} do %>
       <div style="height: 12px; background-color: #c7c8c7;"></div>
-        <%= render :partial => 'track', :collection => @playlist.tracks %>
+        <%= render partial: 'track', collection: @playlist.tracks %>
 
       <div id="drop_here">
         Drop Track here
@@ -95,8 +95,8 @@
 
 <% end %>
 
-<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), :id => 'add_track_url',:class=> 'hidden' %>
-<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
+<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), id: 'add_track_url', class: 'hidden' %>
+<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), id: 'sort_tracks_url', class: 'hidden' %>
 
 <% content_for :right do %>
 <p class="right_instructions">
@@ -107,14 +107,14 @@
   		<h2 class="box">Available tracks</h2>
   	  <div id="playlist_tabs">
         <ul id="playlist_source_options" class="tabs">
-          <li><%= link_to 'Your Uploads', '#your_uploads', :class => 'playlist_option', :id => 'open_your_stuff' if @user.has_tracks? %>      </li>
-          <li><%= link_to "Your Listens", "#your_listens", :class => 'playlist_option', :id => 'open_your_listens' %>                         </li>
-          <li><%= link_to "Favs", '#your_favorites', :class => 'playlist_option',:id => 'open_your_favorites' %>                                            </li>
+          <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %>      </li>
+          <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %>                         </li>
+          <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
         </ul>
 
-         <%= render :partial => 'your_stuff' %>
-  	     <%= render :partial => 'your_listens' %>
-         <%= render :partial => 'your_favorites' if @favorites%>
+         <%= render partial: 'your_stuff' %>
+  	     <%= render partial: 'your_listens' %>
+         <%= render partial: 'your_favorites' if @favorites%>
        </div>
   	</div>
   </div>

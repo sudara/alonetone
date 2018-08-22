@@ -1,11 +1,10 @@
 <div id="user_latest" class="box">
 	<h2 class="box">Latest Music</h2>
-	<%= render :partial => 'assets/asset', :collection => @assets %>
+	<%= render partial: 'assets/asset', collection: @assets %>
 </div>
 
 <div class="footer_box">
-	<%= link_to user_tracks_path(@user), :class => 'view_all', :title => "uploaded mp3s by #{@user.name}"  do %>
-<span>	  view all tracks </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
-	<% end if @user.assets_count > 5 %>
+	<%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}" do %>
+  <span> view all tracks </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
+  <% end if @user.assets_count > 5 %>
 </div>
-

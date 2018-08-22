@@ -18,7 +18,7 @@
             </a>
           </div>  
           <div class="title_left_column_bottom">
-            <%= link_to asset.user.name, user_home_path(asset.user), :class => 'artist', :title => "#{asset.user.name} on alonetone " %>
+            <%= link_to asset.user.name, user_home_path(asset.user), class: 'artist', title: "#{asset.user.name} on alonetone " %>
           </div>
         </div>
 
@@ -33,7 +33,7 @@
     <div class="asset_favorited">
       <span class="heart"></span> 
       <span class="favorited_by"> 
-        <%= link_to favorite.user.name, user_home_path(favorite.user), :class => 'artist' %>
+        <%= link_to favorite.user.name, user_home_path(favorite.user), class: 'artist' %>
       </span><span class="favorited_when"><%= local_time_ago(favorite.created_at) %></span>
     </div>
     <% end %>
@@ -46,7 +46,7 @@
   </div>
 
   <div class="tracks_reveal" data-target="asset.details">
-    <%= link_to toggle_favorite_path(:asset_id => asset.id), remote: true, class: 'add_to_favorites', 
+    <%= link_to toggle_favorite_path(asset_id: asset.id), remote: true, class: 'add_to_favorites', 
       data: {controller: 'favorite', action: 'favorite#toggle' } do %>
       <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
         <path class="outline" d="M370.26,162.44c-29,1-54.55,13.48-70.26,32.1-15.7-18.62-41.2-31.07-70.24-32.1-54.79-2-96.78,34.89-94.45,80.64C140.47,344.39,300,437.64,300,437.64S459.52,344.4,464.69,243.09C467,197.34,425,160.49,370.26,162.44Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
@@ -72,7 +72,7 @@
           <div class="below_description">
             <div class="created"><%= local_time_ago(asset.created_at) %></div>
             <div class="plays"><%= asset.listens_count %> PLAYS</div>
-            <%= link_to user_track_path(asset.user, asset.permalink), :title => "#{asset.name} by #{asset.user.name}" do %>
+            <%= link_to user_track_path(asset.user, asset.permalink), title: "#{asset.name} by #{asset.user.name}" do %>
               <span>View more&hellip;</span>
             <% end unless @single_track %>
           </div>
@@ -91,27 +91,27 @@
               <!-- will be replaced by js payload to allow caching -->
           </div>
           
-          <%= f.text_area :body, :rows =>4, :class=> 'double_trouble', :id=>"comment_body_#{asset.unique_id}"  %>
+          <%= f.text_area :body, rows:4, class: 'double_trouble', id: "comment_body_#{asset.unique_id}"  %>
 
           <span class="private hidden" data-target="comment.banner">
             Only <span class="only_user_name"><%= asset.user.name%></span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
           </span>
 
           <div class="private_check_box">
-            <%= f.check_box :private, :class => 'private', 
+            <%= f.check_box :private, class: 'private', 
               id: "checkbox_#{asset.unique_id}", data: { target: 'comment.checkbox', action: 'comment#toggle'}  %> 
               <label for="checkbox_<%= asset.unique_id %>"><span class="public">Make Private</span></label>
           </div>
           
-          <%= f.hidden_field :commentable_type, :value => 'Asset', :id=> "comment_commentable_type_#{asset.unique_id}"%>
-          <%= f.hidden_field :commentable_id, :value => asset.id, :id=> "comment_commentable_type_#{asset.unique_id}"%>
+          <%= f.hidden_field :commentable_type, value: 'Asset', id: "comment_commentable_type_#{asset.unique_id}"%>
+          <%= f.hidden_field :commentable_id, value: asset.id, id: "comment_commentable_type_#{asset.unique_id}"%>
 
           <div class="submit_wrapper submit_wrapper_comment">
               <div class="comment_waiting" >
                 <div class="text"><!-- placeholder response text --></div>
               </div>
               <div class="small_spinner" style="display:none;"></div>
-              <%= f.submit "post comment".html_safe, :class => 'comment_submit',:id => "submit_#{asset.unique_id}"%> 
+              <%= f.submit "post comment".html_safe, class: 'comment_submit',id: "submit_#{asset.unique_id}"%> 
             </div>
           <% end %>  
         </div>
@@ -120,14 +120,14 @@
       </div>
   	<% end %>
     <div class="track_links">
-      <%= link_to edit_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box', :title => 'edit this track' do %>
+      <%= link_to edit_user_track_path(asset.user, asset), class: 'show_to_admin_or_owner edit_in_box', title: 'edit this track' do %>
         <span>edit</span>
       <% end %>
 
 	    <% if !asset.private? %>
-        <%= link_to 'mark as spam', spam_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box', :data => {:confirm => 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this  to post again'}, :method => :put%>
+        <%= link_to 'mark as spam', spam_user_track_path(asset.user, asset), class: 'show_to_admin_or_owner edit_in_box', data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this  to post again'}, method: :put%>
       <% else %>
-        <%= link_to 'unspam', unspam_user_track_path(asset.user, asset), :class => 'show_to_admin_or_owner edit_in_box', :data => {:confirm => 'This will publish this track!'}, :method => :put%>
+        <%= link_to 'unspam', unspam_user_track_path(asset.user, asset), class: 'show_to_admin_or_owner edit_in_box', data: {confirm: 'This will publish this track!'}, method: :put%>
       <% end %>
 
     </div>

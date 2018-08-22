@@ -4,13 +4,13 @@
       <div class="box">
         <h2><%= @feature.featured_user.name %></h2>
         <h3>written by <%= link_to @feature.writer.name, user_home_path(@feature.writer)%>
-        <%= link_to 'edit', edit_feature_path(@feature.featured_user.login), :class => 'edit right' if authorized?%>
+        <%= link_to 'edit', edit_feature_path(@feature.featured_user.login), class: 'edit right' if authorized?%>
 
       </div>
     <div class="static_content">
-        <p><strong><%= @feature.teaser_text %></strong></p> 
+        <p><strong><%= @feature.teaser_text %></strong></p>
         <%= @feature.body %>
-      <%= render :partial => 'comment', :object => @feature %>
+      <%= render partial: 'comment', object: @feature %>
 
     </div>
   <% end %>
@@ -18,7 +18,7 @@
   <div class="box">
     <h2 class="box">About alonetone Features</h2>
     <div class="static_content">
-    <%= link_to "alonetone features musicians", features_path %> who 
+    <%= link_to "alonetone features musicians", features_path %> who
     give great music away for free, making our home warm and wonderful.
     (Brownie points if they also listen to alonetone compulsively)
     <br/><br/>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="footer_box">
-    <%= link_to ' ', features_path, :class => 'view_all_features' %>
+    <%= link_to ' ', features_path, class: 'view_all_features' %>
    </div>
 <% end %>
 
@@ -47,7 +47,7 @@
                <%= itunes_link_for(@user) if @user.itunes.present? %><br/>
                <%= "This feature viewed #{@feature.views_count} times" if authorized? %>
            </div>
-           <%= link_to " ", user_home_path(@user), :class => 'view_more'%>
+           <%= link_to " ", user_home_path(@user), class: 'view_more'%>
            <% else %>
            <div class="stats">
              <%= @user.printable_bio %>
@@ -56,14 +56,14 @@
        </div>
    </div>
    <div class="footer_box">
-    <%= link_to ' ', features_path, :class => 'view_all_features' %>
+    <%= link_to ' ', features_path, class: 'view_all_features' %>
    </div>
-   
-   <%= render :partial => 'featured_tracks'%>
 
-   <%= render :partial => 'users/follows' if @feature.featured_user.has_tracks? %>
+   <%= render partial: 'featured_tracks'%>
+
+   <%= render partial: 'users/follows' if @feature.featured_user.has_tracks? %>
    <h2 class="box">Comments</h2>
       <% @single_track = true %>
-      <%= render :partial => 'shared/comment', :collection => @comments %>
+      <%= render partial: 'shared/comment', collection: @comments %>
 
 <% end %>

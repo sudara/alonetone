@@ -5,10 +5,10 @@
     </ol>
 <% end %>
 
-<%= link_to '',sort_user_playlists_path(@user.login), :id => 'sort_url' %>
+<%= link_to '',sort_user_playlists_path(@user.login), id: 'sort_url' %>
 
 <ul id="sort_playlists">
-    <%= render :partial => 'shared/playlist', :collection => @playlists %>
+    <%= render partial: 'shared/playlist', collection: @playlists %>
 </ul>
 
 <div class="clearfix"> </div>

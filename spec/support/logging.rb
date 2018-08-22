@@ -27,12 +27,12 @@ module RSpec
         end
       end
 
-      def log_line(options={})
+      def log_line(options = {})
         char = options[:char] || '-'
         ::Rails.logger.debug(char * 80)
       end
 
-      def log_spec_start(options={})
+      def log_spec_start(options = {})
         ::Rails.logger.info("")
         log_line(char: '~')
         ::Rails.logger.info("** #{options[:title]}")
