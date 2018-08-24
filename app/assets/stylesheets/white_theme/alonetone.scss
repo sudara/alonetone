@@ -103,14 +103,9 @@ a.view_all {
   &:hover {
     background-color: transparent;
     text-decoration: none;
-    // .icon_caret_path {
-      // stroke: $samo-orange;
-      path {
-
-      
-      stroke: #FFF;
+      .icon_caret_path {
+        stroke: $samo-orange;
     }
-    // }
   }
 
 }
