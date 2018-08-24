@@ -88,9 +88,10 @@
         width: 11px;
         padding: 4px 3px 5px 5px;
         i {
-          position: relative;
-          top: -.5px;
-          left: -.5px;
+          background-image: url('svg/icon_pause.svg');
+          display: inline-block;
+          width: 24px;
+          height: 24px;
         }
       }
       a {
@@ -166,7 +167,7 @@
   }
 }
 
-.largePlaySVG{
+.largePlaySVG {
 	visibility: hidden;
 }
 
