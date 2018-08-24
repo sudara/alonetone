@@ -1,26 +1,26 @@
 Hi!
 
 <% if @description.present? %>
-<%= @name %> just uploaded a new track on alonetone. <%= @exclamation %>! Here is what they had to say about it:
+New track by <%= @name.capitalize %> was just uploaded to alonetone! <%= @exclamation %>! Here is what they had to say about it:
 
 <%= @description %>
 
 - - - - - - - - - - - - - - - -
 <% else %>
-<%= @name %> just uploaded a new track on alonetone. <%= @exclamation %>!
+New track by <%= @name.capitalize %> was just uploaded to alonetone! <%= @exclamation %>!
 
-It's so piping hot we don't even know the juicy details yet. <%= @name %> is still typing them in.
+It's so piping hot we don't even know the juicy details yet. <%= @name.capitalize %> is still typing them in.
 <% end %>
 
-Listen to it at alonetone:
+To listen to <%= @title %> on alonetone:
 <%= @play_link %>
 
-Download it directly:
+Or download it directly:
 <%= @download_link%>
 
------8<-------------------------
+------------------------------
 
-You are getting this email because you decided to follow <%= @name %>. You can change your mind by clicking "un-follow" here:
+You are getting this email because you decided to follow <%= @name.capitalize %>. You can change your mind by clicking "un-follow" here:
 <%= @user_link %>
 
 You can also turn off all emails by editing your profile at alonetone.
