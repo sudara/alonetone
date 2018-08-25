@@ -1,4 +1,7 @@
 .asset, .track {
+	&.favorite {
+		min-height: 70px;
+	}
 	position: relative;
 	overflow: hidden;
 	width: 100%;
@@ -199,7 +202,7 @@
 		z-index: 0;
 		overflow: auto;
 		box-sizing: border-box;
-		margin-top: -400px;
+		margin-top: -700px;
 		transition: margin 400ms cubic-bezier(.17, .04, .03, .94);
 		box-shadow: inset 0 1px 3px #F2F2F2;
 		@media #{$tablet} {
