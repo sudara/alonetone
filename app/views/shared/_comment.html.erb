@@ -36,11 +36,12 @@
 
 		<div class="comment_body">
 
-		<% if comment.private && white_theme_enabled? %>
-			<i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-		<% end %>
-
 		<%= markdown(comment.body) %>
+
+		<% if comment.private && white_theme_enabled? %>
+			<div class="private_message">private message</div>
+		<% end %>
+	
 		<% if authorized_for_comment(comment) -%>
 			<div class="comment_controls">
 					<% if comment.is_spam? %>
