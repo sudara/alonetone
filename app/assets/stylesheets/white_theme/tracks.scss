@@ -178,14 +178,20 @@
     .asset_favorited {
       padding-left: 50px;
       font-size: 11px;
-      span.heart {
-        display: inline-block;
-        height: 10px;
-        width: 10px;
-        background-color: #F00;
-        margin-right: 5px;
+      position: relative;
+      i.icon_favorite {
+        display: block;
+        
+        position: absolute;
+        top: -7px;
+        left: 45px;
+        svg {
+          width: 86%;
+        }
+
       }
       span.favorited_by {
+        margin-left: 16px;
         font-weight: bold;
       }
       span.favorited_when {
