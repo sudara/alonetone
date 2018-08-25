@@ -52,11 +52,17 @@
 			}
 			&:hover, &.active {
 				background-color: $not-quite-black;
-				a {
+				a.position-name-time {
 					color: $not-quite-white;
 					span.track-name {
 						color: $not-quite-white;
-					}
+          }
+          span.track-position {
+            color: #A6ABAB;
+          }
+          span.time-text {
+            color: #A6ABAB;
+          }
 				}
 			}
 			a.play-button, a.pause-button {
@@ -92,7 +98,7 @@
 					background-image: url('svg/icon_pause_circled.svg');
 				}
 			}
-			a:not(.play-button):not(.pause-button) {
+			a.position-name-time {
 				font-size: 14px;
 				line-height: 20px;
 				display: block;
