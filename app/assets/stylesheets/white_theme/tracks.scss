@@ -181,14 +181,13 @@
       position: relative;
       i.icon_favorite {
         display: block;
-        
         position: absolute;
-        top: -7px;
+        top: -6px;
         left: 45px;
         svg {
-          width: 86%;
+          width: 20px;
+          height: 20px;
         }
-
       }
       span.favorited_by {
         margin-left: 16px;
