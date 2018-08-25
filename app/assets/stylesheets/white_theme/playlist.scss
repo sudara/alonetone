@@ -50,12 +50,15 @@
       &:hover,
       &.active {
         background-color: $not-quite-black;
-        a.play-button {
-          color: $not-quite-white;
-          border-color: $not-quite-white;
-        }
+        // a.play-button {
+        //   color: $not-quite-white;
+        //   border-color: $not-quite-white;
+        // }
         a {
           color: $not-quite-white;
+          span.track-name {
+            color: $not-quite-white;
+          }
         }
       }
       a.play-button,
@@ -109,7 +112,6 @@
         }
         span.track-name {
           display: block;
-          color: black;
           font-weight: bold;
           flex-grow: 1;
         }
