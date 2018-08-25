@@ -287,28 +287,36 @@
 					margin-bottom: 1em;
 					text-decoration: none!important;
 				}
+
+				.created {
+					font-size: 12px;
+					color: #959595;
+					margin-bottom: 10px;
+				}
 				.below_description {
 					display: flex;
-
 					justify-content: space-between;
-					.created {
+					a {
 						font-size: 12px;
-						color: #959595;
+						display: block;
+						color: $samo-orange;
+						flex-grow:1;
 					}
 					.plays {
-						font-size: 9px;
+						font-size: 12px;
 						font-weight: bold;
 						padding-right: 8px;
 						padding-left: 8px;
 						text-align: center;
 						color: #A6ABAB;
-						border-radius: 8px;
-						background-color: #FFF;
 					}
-					a {
+					.favorite_total {
 						font-size: 12px;
-						display: block;
-						color: $samo-orange;
+						font-weight: bold;
+						padding-right: 8px;
+						padding-left: 8px;
+						text-align: center;
+						color: #A6ABAB;
 					}
 				}
 			}
