@@ -187,10 +187,11 @@ a.view_all {
 	}
 	span.disabled {
 		opacity: .5;
-	}
+  }
+  
 }
 
-.mini_paginator, .forum_paginator {
+.mini_paginator{
 	position: relative;
 	height: 32px;
 	border-bottom: 1px solid #DADADA;
@@ -203,15 +204,6 @@ a.view_all {
 		 > * {
 			display: block;
 		}
-	}
-}
-
-.forum_paginator {
-	width: 890px;
-	margin-top: 0;
-	.button_wrapper {
-		clear: none;
-		border: none;
 	}
 }
 
