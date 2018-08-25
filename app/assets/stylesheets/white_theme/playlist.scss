@@ -18,18 +18,19 @@
     margin-top: $baseline/2;
     margin-bottom: 0;
     text-align: center;
+    font-size: 16px;
     &.cover {
       margin-top: 23px;
     }
     a {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       line-height: 18px;
       margin-top: 0;
     }
   }
   h2 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 100;
     line-height: $baseline;
     margin-top: 0;
