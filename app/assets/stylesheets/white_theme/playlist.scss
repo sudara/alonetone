@@ -51,10 +51,6 @@
       &:hover,
       &.active {
         background-color: $not-quite-black;
-        // a.play-button {
-        //   color: $not-quite-white;
-        //   border-color: $not-quite-white;
-        // }
         a {
           color: $not-quite-white;
           span.track-name {
@@ -117,7 +113,7 @@
           flex-grow: 1;
         }
         .time-text {
-          font-size: 10px;
+          font-size: 12px;
           color: $gray;
           margin-right: 12px;
         }
