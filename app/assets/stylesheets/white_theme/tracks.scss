@@ -295,15 +295,23 @@
             font-size: 12px;
             color: #959595;
           }
-          .plays {
-            font-size: 9px;
+          .plays, .favs {
+            font-size: 12px;
             font-weight: bold;
             padding-right: 8px;
             padding-left: 8px;
-            text-align: center;
-            color: #a6abab;
-            border-radius: 8px;
-            background-color: #fff;
+			text-align: center;
+			color: #a6abab;
+			i {
+				position: relative;
+				top: 4px;
+				margin-left: 4px;
+				svg {
+					width: 15px;
+					height: 15px;
+				}
+			}
+			
           }
           a {
             font-size: 12px;
