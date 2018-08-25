@@ -15,20 +15,21 @@
 		margin-bottom: 0;
 	}
 	@media #{$mobile} {
+		display: flex;
+		flex-direction: row;
 		width: $mobile-site-width-wide;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    li {
+		margin-bottom: 20px;
+
+		flex-wrap: wrap;
+		justify-content: space-around;
+		li {
 			&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
-        display: block!important;
-        width: 45%;
-        margin: 0;
-        img {
-          width: 100%;
-        }
+				display: block!important;
+				width: 45%;
+				margin: 0;
+				img {
+					width: 100%;
+				}
 			}
 		}
 	}
@@ -91,7 +92,6 @@
 	#home_playlists_area {
 		grid-area: playlists;
 	}
-
 
 	#home_left_column {
 		grid-area: left;
