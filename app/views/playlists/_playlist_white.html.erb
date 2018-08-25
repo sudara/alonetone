@@ -22,8 +22,11 @@
     <!-- Track title just switches track details-->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset), 
       remote: true, data: { target: "playlist-playback.loadTrack" } do %>
-      <span>
-        <%= "%02d" % track.position %>. <%= track.name %>
+      <span class="track-position">
+        <%= "%02d" % track.position %>.
+      </span>
+      <span class="track-name">
+        <%= track.name %>
       </span>
       <span class='time-text'><%= track.asset.length %></span>
     <% end %>
