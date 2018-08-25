@@ -67,7 +67,7 @@
         width: 24px;
         height: 24px;
         margin-top: 1px;
-        margin-right: 19px;
+        margin-right: 4px;
         margin-left: 0px;
         padding: 4px 3px 5px 6px;
         color: #AAAAAA;
@@ -85,45 +85,45 @@
         }
       }
       a.pause-button {
-        width: 11px;
-        padding: 4px 3px 5px 5px;
         i {
-          background-image: url('svg/icon_pause.svg');
+          background-image: url('svg/icon_pause_circled.svg');
           display: inline-block;
           width: 24px;
           height: 24px;
         }
       }
-      a {
+      a:not(.play-button):not(.pause-button) {
         font-size: 14px;
         line-height: 20px;
         display: block;
-        float: left;
         padding-top: 7px;
         padding-bottom: 8px;
         text-decoration: none;
         color: $not-quite-black;
         white-space: nowrap;
-        span:first-child {
+        span.track-position {
           display: block;
           float: left;
+          color: #868686;
+          margin-right: 4px;
+        }
+        span.track-name {
+          display: block;
+          color: black;
+          font-weight: bold;
+          flex-grow: 1;
         }
         .time-text {
           font-size: 10px;
-          float: right;
           color: $gray;
-        }
-      }
-      a:last-child {
-        flex-grow: 1;
-        display: flex;
-        span:first-child {
-          flex-grow: 1;
-        }
-        span:last-child {
           margin-right: 12px;
         }
-
+        flex-grow: 1;
+        display: flex;
+      }
+      a:last-child {
+        span:last-child {
+        }
       }
     }
   }
