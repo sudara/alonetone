@@ -41,7 +41,7 @@ function handlers() {
   })
 
   document.querySelectorAll('.tracks_reveal').forEach((reveal) => {
-    var revealHeight = "-" + reveal.offsetHeight.toString() + "px";
+    var revealHeight = "-" + reveal.offsetHeight.toString() + "px"
   })
 
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
