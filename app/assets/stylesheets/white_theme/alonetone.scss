@@ -7,15 +7,7 @@ ul {
 	padding-left: 0;
 	list-style: none;
 }
-
-#home_grid .box > h2 {
-	padding-left: 50px;
-}
-
-#user_home .box > h2 {
-	padding-left: 50px;
-}
-
+	
 .box {
 	position: relative;
 	display: flex;
@@ -42,27 +34,6 @@ ul {
 			padding-left: $baseline / 2;
 		}
 	}
-	// For Recently Favorited
-	 > h2 + .favorited_by {
-		margin-top: -2px;
-	}
-	 > .favorited_by {
-		font-size: 11px;
-		line-height: 25px;
-		height: 20px;
-		padding-left: 50px;
-		color: $medium-gray;
-		border-bottom: 1px solid $light-gray;
-		background-color: $samo-background-gray;
-		box-shadow: 0 3px 3px -1px #65666625;
-		 > .artist {
-			font-weight: bold;
-			color: $black;
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-	}
 }
 
 .footer_box {
@@ -86,8 +57,6 @@ a.view_all {
 	border: 0;
 	background-color: transparent;
 	box-shadow: none;
-
-	
 	&:hover {
 		color: $samo-orange;
 		border: 0;
@@ -98,7 +67,6 @@ a.view_all {
 	.icon_caret_path {
 		stroke: #868686;
 	}
-
 	&:hover {
 		text-decoration: none;
 		background-color: transparent;
@@ -107,7 +75,6 @@ a.view_all {
 		}
 	}
 }
-
 
 /* USER LISTS */
 
