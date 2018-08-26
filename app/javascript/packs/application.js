@@ -40,6 +40,18 @@ function handlers() {
     title.style.width = `${document.querySelector('.asset').clientWidth - 90}px`
   })
 
+  document.querySelectorAll('.tracks_reveal').forEach((asset) => {
+    
+    
+
+    var revealHeight = "-" + asset.offsetHeight.toString() + "px";
+    console.log ( revealHeight)
+    console.log ( asset.style.marginTop = revealHeight )
+    
+  })
+
+  
+  
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')  
     if (!pic.hasChildNodes()) {
