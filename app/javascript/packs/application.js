@@ -40,8 +40,8 @@ function handlers() {
     title.style.width = `${document.querySelector('.asset').clientWidth - 90}px`
   })
 
-  document.querySelectorAll('.tracks_reveal').forEach((asset) => {
-    asset.style.marginTop = "-" + asset.offsetHeight.toString() + "px"
+  document.querySelectorAll('.tracks_reveal').forEach((reveal) => {
+    reveal.style.marginTop = "-" + reveal.offsetHeight.toString() + "px"
   })
   
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
