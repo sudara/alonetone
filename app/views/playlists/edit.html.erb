@@ -1,14 +1,14 @@
 <%= error_messages_for :playlist %>
-<%= render :partial => 'inline_help'%>
+<%= render partial: 'inline_help'%>
 
 <% content_for :left do %>
   <div id="edit_playlist">
 
-    <%= render :layout => 'playlist_layout', :locals => {:playlist => @playlist} do %>
+    <%= render layout: 'playlist_layout', locals: {playlist: @playlist} do %>
       <div id="edit_playlist_info" class="static_content" style="display:none;">
         <div id="pic_upload" class="static_content">
           Upload a square photo, 400px by 400px for best results.<br>
-      		<%= form_for :pic, :url => attach_pic_user_playlist_path(@user, @playlist), :html => {:multipart => true, :method => :post} do |f| %>
+      		<%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
       			<%= f.file_field :pic  %>
       			<%= submit_tag "Upload new Pic" %>
       		<% end %>
@@ -18,7 +18,7 @@
 
         <%= simple_form_for [@user, @playlist] do |f| %>
           <%= f.input :title %>
-          <%= f.input :year, :input_html => {:maxlength => 4, :size => 4} %>
+          <%= f.input :year, input_html: {maxlength: 4, size: 4} %>
           <%= f.input  :description %>
 
           <%= f.simple_fields_for :greenfield_downloads do |sf| %>
@@ -27,41 +27,37 @@
 
           <%= f.input :private %>
           <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
-          <%= f.button :submit, "Save" %> or 
-          <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), :method => :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>          
+          <%= f.button :submit, "Save" %> or
+          <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
         <% end %>
       </div>
 
       <div style="height: 12px; background-color: #c7c8c7;"></div>
-      <%= render :partial => 'track', :collection => @playlist.tracks %>
-      
+      <%= render partial: 'track', collection: @playlist.tracks %>
       <div id="drop_here">
         Drop Track here
       </div>
-
     <% end %>
   </div>
-  
 <% end %>
-	
-<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), :id => 'add_track_url',:class=> 'hidden' %>	
-<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), :id => 'sort_tracks_url',:class=> 'hidden' %>
+<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), id: 'add_track_url', class: 'hidden' %>
+<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), id: 'sort_tracks_url', class: 'hidden' %>
 
 <% content_for :right do %>
-  <div id="playlist_sources" class="draggable_wrapper">	
+  <div id="playlist_sources" class="draggable_wrapper">
   	<div class="draggable_tracks">
   		<h2 class="box">Available tracks</h2>
   	  <div id="playlist_tabs">
         <ul id="playlist_source_options" class="tabs">
-          <li><%= link_to 'Your Uploads', '#your_uploads', :class => 'playlist_option', :id => 'open_your_stuff' if @user.has_tracks? %>      </li>
-          <li><%= link_to "Your Listens", "#your_listens", :class => 'playlist_option', :id => 'open_your_listens' %>                         </li>
-          <li><%= link_to "Favs", '#your_favorites', :class => 'playlist_option',:id => 'open_your_favorites' %>                                            </li>
+          <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
+          <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
+          <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
         </ul>
 
-         <%= render :partial => 'your_stuff' %>
-  	     <%= render :partial => 'your_listens' %>
-         <%= render :partial => 'your_favorites' if @favorites%>
-       </div>	
+         <%= render partial: 'your_stuff' %>
+  	     <%= render partial: 'your_listens' %>
+         <%= render partial: 'your_favorites' if @favorites%>
+       </div>
   	</div>
   </div>
 <% end %>

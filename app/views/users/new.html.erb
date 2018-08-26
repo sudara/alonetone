@@ -1,28 +1,26 @@
 <% content_for :left do %>
-  	<div class="box">
+  <div class="box">
     <h2 class="box">Why alonetone?</h2>
   	<div id="what-you-get" class="box static_content">
 
-  	<%= image_tag 'promo/unlimited-uploads.jpg'%>
-  	<h2 class='hug'>Upload your music (mp3 format)</h2>
-	
-  	<%= image_tag 'promo/people-you-like.jpg'%>
-  	<h2 class='hug'>Join a musician community, not a company</h2>
+    	<%= image_tag 'promo/unlimited-uploads.jpg'%>
+    	<h2 class='hug'>Upload your music (mp3 format)</h2>
 
-    <%= image_tag 'promo/track-listens.jpg'%>
-    <h2 class='hug'>Keep track of your musical creations</h2>
-  
-    <%= image_tag 'promo/itunes-podcast.jpg'%>
-    <h2 class='hug'>Get your music on itunes...</h2>
-  
-    <%= image_tag 'promo/embed-player.jpg'%>
-    <h2 class='hug'>...and any website, forum or blog</h2>
-  </div>
-  </div>
+      <%= image_tag 'promo/people-you-like.jpg'%>
+    	<h2 class='hug'>Join a musician community, not a company</h2>
 
+      <%= image_tag 'promo/track-listens.jpg'%>
+      <h2 class='hug'>Keep track of your musical creations</h2>
+
+      <%= image_tag 'promo/itunes-podcast.jpg'%>
+      <h2 class='hug'>Get your music on itunes...</h2>
+
+      <%= image_tag 'promo/embed-player.jpg'%>
+      <h2 class='hug'>...and any website, forum or blog</h2>
+    </div>
+  </div>
 <% end %>
 
 <% content_for :right do %>
-  <%= render :partial => 'join' %>
+  <%= render partial: 'join' %>
 <% end %>
-

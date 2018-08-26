@@ -1,5 +1,4 @@
 class User
-
   # has a bunch of prefs
   serialize :settings
 
@@ -19,7 +18,7 @@ class User
   end
 
   def has_tracks?
-    self.assets_count > 0
+    assets_count > 0
   end
 
   def has_as_favorite?(asset)
@@ -28,25 +27,25 @@ class User
 
   def dummy_pic(size)
     case size
-      when :album then 'default/no-pic.png'
-      when :large then 'default/no-pic_large.png'
-      when :small then 'default/no-pic_small.png'
-      when :tiny then 'default/no-pic_tiny.png'
-      when nil then 'default/no-pic.png'
+    when :album then 'default/no-pic.png'
+    when :large then 'default/no-pic_large.png'
+    when :small then 'default/no-pic_small.png'
+    when :tiny then 'default/no-pic_tiny.png'
+    when nil then 'default/no-pic.png'
     end
   end
 
   def avatar(size = nil)
     return dummy_pic(size) if has_no_avatar?
-    self.pic.pic.url(size)
+    pic.pic.url(size)
   end
 
   def has_no_avatar?
-    Alonetone.try(:default_user_images) or !self.pic.present? || !self.pic.try(:pic).present?
+    Alonetone.try(:default_user_images) || !pic.present? || !pic.try(:pic).present?
   end
 
   def favorite_asset_ids
-    Track.where(:playlist_id => favorites).pluck(:asset_id)
+    Track.where(playlist_id: favorites).pluck(:asset_id)
   end
 
   def favorites
@@ -75,14 +74,14 @@ class User
 
   def wants_email?
     # anyone who doesn't have it set to false, aka, opt-out
-    (settings == nil) || (settings[:email_new_tracks] != "false")
+    settings.nil? || (settings[:email_new_tracks] != "false")
   end
 
-  def has_setting?(setting, value=nil)
-    if value != nil # account for testing against false values
-      self.settings.present? && self.settings[setting].present? && (self.settings[setting] == value)
+  def has_setting?(setting, value = nil)
+    if !value.nil? # account for testing against false values
+      settings.present? && settings[setting].present? && (settings[setting] == value)
     else
-      self.settings.present? && self.settings[setting].present?
+      settings.present? && settings[setting].present?
     end
   end
 end

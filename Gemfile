@@ -24,7 +24,7 @@ gem 's3_direct_upload'
 # active record
 gem 'acts_as_list'
 gem 'has_permalink'
-gem 'authlogic', '~> 3.8'
+gem 'authlogic', '~> 4.2'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 gem 'recaptcha', :require => 'recaptcha/rails'
@@ -78,6 +78,8 @@ group :development do
   gem 'thin'
   gem 'sqlite3'
   gem 'perf_check'
+  gem 'annotate'
+  gem 'rubocop', '~> 0.52.0', require: false
 end
 
 ## Who loves tests! You do? You do!

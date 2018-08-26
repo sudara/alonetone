@@ -1,4 +1,4 @@
-<%= render(:partial => 'users/user') unless white_theme_enabled? %>
+<%= render(partial: 'users/user') unless white_theme_enabled? %>
 
 <div class="playlists-new">
 
@@ -10,7 +10,7 @@
 
 	<div class="container static_content">
 	<%= form_for [@user, @playlist] do |f| %>
-	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  <%= render partial: 'form', locals: {f: f} %>
 	  <p>
 	    <%= f.submit "Create" %>
 	  </p>

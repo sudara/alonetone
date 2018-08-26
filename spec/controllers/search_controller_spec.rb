@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe SearchController, type: :controller do
-
   fixtures :users, :assets
 
   context "basics" do
@@ -18,5 +17,4 @@ RSpec.describe SearchController, type: :controller do
       expect(assigns(:assets)).not_to be_present
     end
   end
-
 end

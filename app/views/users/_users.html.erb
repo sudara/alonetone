@@ -6,31 +6,31 @@
 
     <div id="links">
       <ul class="links">
-       <%= user_nav_item "last online", {:action => 'index', :sort => nil} %>
-       <%= user_nav_item "last uploaded", {:action => 'index', :sort => 'last_uploaded'} %>
-       <%= user_nav_item "most listened to", {:action => 'index', :sort => 'most_listened_to'} %>
-       <%= user_nav_item "new artists", {:action => 'index', :sort => 'new_artists'} %>
-       <%= user_nav_item "all time most uploaded", {:action => 'index', :sort => 'monster_uploaders'} %>
-       <%= user_nav_item "dedicated listeners", {:action => 'index', :sort => 'dedicated_listeners'}%>
+       <%= user_nav_item "last online", {action: 'index', sort: nil} %>
+       <%= user_nav_item "last uploaded", {action: 'index', sort: 'last_uploaded'} %>
+       <%= user_nav_item "most listened to", {action: 'index', sort: 'most_listened_to'} %>
+       <%= user_nav_item "new artists", {action: 'index', sort: 'new_artists'} %>
+       <%= user_nav_item "all time most uploaded", {action: 'index', sort: 'monster_uploaders'} %>
+       <%= user_nav_item "dedicated listeners", {action: 'index', sort: 'dedicated_listeners'}%>
       </ul>
     </div>
   </div>
 
   <div id="large_users_grid">
     <% if @sort == 'dedicated_listeners'%>
-      <% cache("dedicated/#{params[:page]}/#{theme_name}", :expires_in => 4.hours) do %>
+      <% cache("dedicated/#{params[:page]}/#{theme_name}", expires_in: 4.hours) do %>
         <% if white_theme_enabled? %>
-        <%= render :partial => 'shared/user_white', collection: @users, as: :user %>
+        <%= render partial: 'shared/user_white', collection: @users, as: :user %>
         <% else %>
-        <%= render :partial => 'shared/user', :collection => @users %>
+        <%= render partial: 'shared/user', collection: @users %>
         <% end %>
       <% end %>
     <% else %>
       <% cache("#{digest_for_users}/#{params[:page]}/#{theme_name}") do %>
         <% if white_theme_enabled? %>
-        <%= render :partial => 'shared/user_white', collection: @users, as: :user %>
+        <%= render partial: 'shared/user_white', collection: @users, as: :user %>
         <% else %>
-        <%= render :partial => 'shared/user', :collection => @users %>
+        <%= render partial: 'shared/user', collection: @users %>
         <% end %>
       <% end %>
     <% end %>
