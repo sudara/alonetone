@@ -149,6 +149,7 @@ Naming/VariableNumber:
   Enabled: false
 
 AllCops:
+  TargetRubyVersion: 2.5
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'
