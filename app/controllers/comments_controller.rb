@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
     else
       head(:bad_request)
     end
+  rescue SocketError # allow offline dev
   end
 
   def destroy
