@@ -1,3 +1,2 @@
 class PicsController < ApplicationController
-
 end

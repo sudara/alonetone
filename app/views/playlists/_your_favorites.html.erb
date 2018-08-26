@@ -1,9 +1,8 @@
 <div id="your_favorites" class="playlist_source">
   <div class="mini_paginator">
-    <%= will_paginate @favorites, {:param_name => :favorites_page, :ignore_get_params => true}%>
+    <%= will_paginate @favorites, {param_name: :favorites_page, ignore_get_params: true}%>
   </div>
-	
 	<div class="scriptaculous">
-	  <%= render :partial => 'playlists/asset', :collection => @favorites.collect(&:asset) %>
+	  <%= render partial: 'playlists/asset', collection: @favorites.collect(&:asset) %>
 	</div>
 </div>

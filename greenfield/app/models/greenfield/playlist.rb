@@ -4,7 +4,6 @@ module Greenfield
              :link1, :link2, :link3, :has_details?,
              to: :alonetone_playlist
 
-
     def initialize(alonetone_playlist)
       @alonetone_playlist = alonetone_playlist
     end
@@ -20,6 +19,5 @@ module Greenfield
     private
 
     attr_reader :alonetone_playlist
-
   end
 end

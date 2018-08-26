@@ -11,6 +11,7 @@
 
 import LocalTime from 'local-time'
 import Rails from 'rails-ujs'
+import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { faPlay, faPause, faChevronRight } from '@fortawesome/free-solid-svg-icons'
@@ -19,10 +20,11 @@ import { makeSVGFromTitle } from '../animation/default_playlist_images'
 
 library.add(faPlay, faPause, faChevronRight)
 
-const Turbolinks = require('turbolinks')
-
 Rails.start()
 Turbolinks.start()
+
+LocalTime.config.i18n.en.datetime.at = '{date}' // drop the time from the date
+LocalTime.config.i18n.en.date.on = '{date}' // no "on Sunday", just "Sunday"
 LocalTime.start()
 
 const application = Application.start()
@@ -40,12 +42,19 @@ function handlers() {
     }
   })
 
+<<<<<<< HEAD
   document.querySelectorAll('a .no_pic').forEach((pic) => {
+=======
+  document.querySelectorAll('a.track_link').forEach((title) => {
+    title.style.width = `${document.querySelector('.asset').clientWidth - 90}px`
+  })
+
+  document.querySelectorAll('li a .no_pic').forEach((pic) => {
+>>>>>>> master
     const title = pic.parentNode.getAttribute('title')  
     if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))
     }
   })
 }
-
 document.addEventListener('turbolinks:load', handlers)
