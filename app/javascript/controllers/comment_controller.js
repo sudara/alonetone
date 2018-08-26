@@ -1,14 +1,27 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['banner', 'div', 'personalization']
+  static targets = ['banner', 'textarea', 'response', 'spinner', 'personalization']
 
   initialize() {
     this.personalizationTarget.innerHTML = window.userPersonalization
   }
 
   spin() {
-    alert("spin")
+    this.spinnerTarget.style.display = 'block'
+  }
+
+  complete() {
+    this.spinnerTarget.style.display = 'none'
+  }
+
+  success() {
+    this.textareaTarget.value = ''
+    this.responseTarget.innerHTML = '<div class="ajax_success">Submitted, thanks!</div>'
+  }
+
+  error() {
+    this.responseTarget.innerHTML = '<div class="ajax_fail">Sorry, that didn\'t work</div>'
   }
 
   toggle() {
