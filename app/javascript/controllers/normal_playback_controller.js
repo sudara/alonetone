@@ -39,7 +39,7 @@ export default class extends PlaybackController {
     if (currentlyOpen) {
       currentlyOpen.element.classList.remove('open')
     }
-    if (!wasOpen) {
+    if (!wasOpen && !this.data.get('openable')) {
       this.openDetails()
     }
   }

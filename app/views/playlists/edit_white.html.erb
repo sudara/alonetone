@@ -2,7 +2,7 @@
 
 <div id="edit_playlist_info" class="faq box">
   <p>
-    22 tracks total, 38 plays, 4 hearts
+    22 tracks total
   </p>
   <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
   <p>
@@ -76,7 +76,7 @@
   </p>
   <div class="sortable" data-target="playlist-edit.sortable">
     <% @playlist.tracks.each do |track| %>
-    <div class="asset" data-controller="normal-playback" id="track_<%= track.id %>">
+    <div class="asset" data-controller="normal-playback" data-normal-playback-openable="false" id="track_<%= track.id %>">
       <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
     </div>
     <% end %>
