@@ -257,6 +257,9 @@
         flex: 1;
         .user_description {
           word-wrap: break-word;
+          -webkit-hyphens: auto;
+          -moz-hyphens: auto;
+          hyphens: auto;
           margin-bottom: 15px;
           img {
             display: none;
