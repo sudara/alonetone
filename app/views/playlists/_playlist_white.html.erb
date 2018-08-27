@@ -16,14 +16,17 @@
     <!-- Play button automagically plays AND changes to relevant track details  -->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
       class: 'play-button', data: { target: "playlist-playback.play", action: "click->playlist-playback#togglePlay" }  do %>
-      <i class="fa fa-play"></i>
+      <i class="icon_play"></i>
     <% end %>
 
     <!-- Track title just switches track details-->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset), 
-      remote: true, data: { target: "playlist-playback.loadTrack" } do %>
-      <span>
-        <%= "%02d" % track.position %>. <%= track.name %>
+      remote: true, class: 'position-name-time', data: { target: "playlist-playback.loadTrack" } do %>
+      <span class="track-position">
+        <%= "%02d" % track.position %>.
+      </span>
+      <span class="track-name">
+        <%= track.name %>
       </span>
       <span class='time-text'><%= track.asset.length %></span>
     <% end %>
