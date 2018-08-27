@@ -13,12 +13,8 @@ import LocalTime from 'local-time'
 import Rails from 'rails-ujs'
 import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
-import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faPlay, faPause, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
-
-library.add(faPlay, faPause, faChevronRight)
 
 Rails.start()
 Turbolinks.start()
@@ -33,8 +29,6 @@ application.load(definitionsFromContext(context))
 
 
 function handlers() {
-  dom.watch()
-
   document.querySelectorAll('.large-cover .no_pic, .small-cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
     if (!pic.hasChildNodes()) { 
@@ -46,6 +40,10 @@ function handlers() {
     title.style.width = `${document.querySelector('.asset').clientWidth - 90}px`
   })
 
+  document.querySelectorAll('.tracks_reveal').forEach((reveal) => {
+    reveal.style.marginTop = "-" + reveal.offsetHeight.toString() + "px"
+  })
+  
   document.querySelectorAll('li a .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')  
     if (!pic.hasChildNodes()) {

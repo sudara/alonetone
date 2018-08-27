@@ -31,7 +31,11 @@
     </div>
     <% if defined? favorite %>
     <div class="asset_favorited">
-      <span class="heart"></span> 
+      
+      <i class="icon_favorite">
+        <%= render file: svg_path('svg/icon_favorite.svg') %>
+      </i>
+    
       <span class="favorited_by"> 
         <%= link_to favorite.user.name, user_home_path(favorite.user), class: 'artist' %>
       </span><span class="favorited_when"><%= local_time_ago(favorite.created_at) %></span>
@@ -72,11 +76,20 @@
           <div class="created"><%= local_time_ago(asset.created_at) %></div>
 
           <div class="below_description">
-          <%= link_to user_track_path(asset.user, asset.permalink), title: "#{asset.name} by #{asset.user.name}" do %>
-            <span>View more&hellip;</span>
-          <% end unless @single_track %>
-            <div class="plays"><%= asset.listens_count %></div>
-            <div class="favorite_total">XX</div>
+            <div class="created"><%= local_time_ago(asset.created_at) %></div>
+            <div class="plays"><%= asset.listens_count %> <i class="icon_plays">
+            <%= render file: svg_path('svg/icon_play_inverted.svg') %>
+            </i>
+            </div>
+            <div class="favs">XX
+                <i class="icon_favs">
+                <%= render file: svg_path('svg/icon_favorite_circled.svg') %>
+                </i>
+            </div>
+          
+            <%= link_to user_track_path(asset.user, asset.permalink), title: "#{asset.name} by #{asset.user.name}" do %>
+              <span>View more&hellip;</span>
+            <% end unless @single_track %>
           </div>
       </div>
     </div>
