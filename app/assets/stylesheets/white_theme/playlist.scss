@@ -119,8 +119,11 @@
 				span.track-name {
 					font-weight: bold;
 					display: block;
-
 					flex-grow: 1;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					width: 0px;
 				}
 				.time-text {
 					font-size: 12px;
