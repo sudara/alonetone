@@ -33,14 +33,20 @@ export default class extends PlaybackController {
   }
 
   toggleDetails(e) {
-    e.preventDefault()
-    const wasOpen = this.element.classList.contains('open')
-    // if another track details is open, close it
-    if (currentlyOpen) {
-      currentlyOpen.element.classList.remove('open')
-    }
-    if (!wasOpen) {
-      this.openDetails()
+    
+    if (!e.target.classList.contains('artist') ) {
+      // if the link in the track top is the artist link, go to that URL,
+      // otherwise open the track reveal section
+      e.preventDefault()
+
+      const wasOpen = this.element.classList.contains('open')
+      // if another track details is open, close it
+      if (currentlyOpen) {
+        currentlyOpen.element.classList.remove('open')
+      }
+      if (!wasOpen) {
+        this.openDetails()
+      }
     }
   }
 
