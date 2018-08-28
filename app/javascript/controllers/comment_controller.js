@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['banner', 'textarea', 'response', 'spinner', 'personalization']
+  static targets = ['banner', 'div', 'response', 'spinner', 'personalization']
 
   initialize() {
     this.personalizationTarget.innerHTML = window.userPersonalization
