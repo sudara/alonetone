@@ -1,10 +1,9 @@
 FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
-PASSWORD_SALT = 'so_salty_its_unbearable'
 
 require 'authlogic_helpers'
 require 'sometimes'
 
-RECAPTCHA_ENABLED = Alonetone.try(:recaptcha_public)
+RECAPTCHA_ENABLED = Alonetone.try(:enable_recaptcha) 
   
 if RECAPTCHA_ENABLED
   Recaptcha.configure do |config|
