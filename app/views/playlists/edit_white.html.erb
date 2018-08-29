@@ -1,31 +1,28 @@
 <%= error_messages_for :playlist %>
 
-
 <div id="edit_playlist_info" class="faq box">
   <p>
-    22 tracks total, 38 plays, 4 hearts
+    22 tracks total
   </p>
   <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
   <p>
     Add metadata or instructions here.
   </p>
 
-  <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
-
   <%= simple_form_for [@user, @playlist] do |f| %>
-
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
           <label>ALBUM ARTWORK</label>
+          <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}" do %>
+            <%= playlist_cover(@playlist, :original) %>
+          <% end %>
           <%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
             <%= submit_tag "Upload new Pic" %>
           <% end %>
-
           <p>
             Upload a square photo, 2000px by 2000px for best results.
           </p>
-
       </div>
       <div class="edit_playlist_right_column">
         <div class="edit_playlist_right_column_title_and_year">
@@ -48,23 +45,19 @@
         <% end %>
         
         <div class="edit_playlist_right_column_private_and_hidden">
-
           <%= f.input :private %> &nbsp; | (Playlists are hidden until they have more than 2 tracks)
-
         </div>
-
-
       </div>
     </div>
     
     <div class="edit_playlist_bottom">
       <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
-      
       <%= f.button :submit, "Save" %>
-      
     </div>
   <% end %>
 </div>
+<%#= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
+<!-- 
 <div class="edit_playlist_pro_upload faq box">
   <div class="pro_upload_left">
     <h1>Professional Upload System&trade;</h1>
@@ -76,47 +69,41 @@
     Upload ZIP file
   </a>
 </div>
-
-<% content_for :left do %>
+--> 
+<div data-controller="playlist-edit">
   <p class="left_instructions">
-    You can reorder your playlist by dragging your tracks, or remove them from the playlist with the [x] icon.
+    You can reorder your playlist by dragging your tracks. Remove them from the playlist with the [x] icon.
   </p>
-  <div id="edit_playlist">
-    <%= render layout: 'playlist_layout', locals: {playlist: @playlist} do %>
-      <div style="height: 12px; background-color: #c7c8c7;"></div>
-        <%= render partial: 'track', collection: @playlist.tracks %>
-
-      <div id="drop_here">
-        Drop Track here
-      </div>
-
+  <div class="sortable" data-target="playlist-edit.sortable">
+    <% @playlist.tracks.each do |track| %>
+    <div class="asset" data-controller="normal-playback" data-normal-playback-openable="false" id="track_<%= track.id %>">
+      <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+    </div>
     <% end %>
   </div>
 
-<% end %>
+  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), 
+    data: { target:'playlist-edit.addUrl' }, class: 'hidden' %>
+  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
+    data: { target:'playlist-edit.sortUrl' }, class: 'hidden' %>
 
-<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), id: 'add_track_url', class: 'hidden' %>
-<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), id: 'sort_tracks_url', class: 'hidden' %>
-
-<% content_for :right do %>
-<p class="right_instructions">
-  Click a track below to instantly add it to the playlist selection.
-</p>
+  <p class="right_instructions">
+    Click a track below to instantly add it to the playlist selection.
+  </p>
   <div id="playlist_sources" class="box draggable_wrapper">
-  	<div class="draggable_tracks">
-  		<h2 class="box">Available tracks</h2>
-  	  <div id="playlist_tabs">
-        <ul id="playlist_source_options" class="tabs">
-          <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %>      </li>
-          <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %>                         </li>
+    <div class="draggable_tracks">
+      <h2 class="box">Available tracks</h2>
+      <div id="playlist_tabs">
+        <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
+          <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
+          <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
           <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
         </ul>
-
-         <%= render partial: 'your_stuff' %>
-  	     <%= render partial: 'your_listens' %>
-         <%= render partial: 'your_favorites' if @favorites%>
-       </div>
-  	</div>
+        <%= render partial: 'your_stuff' %>
+        <%= render partial: 'your_listens' %>
+        <%= render partial: 'your_favorites' if @favorites %>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
 
