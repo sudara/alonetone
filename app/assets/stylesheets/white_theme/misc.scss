@@ -175,27 +175,40 @@
   flex-wrap: wrap-reverse;
 }
 
-#radio_controls {
-  ul {
-    li.radio_channel {
-      font-size: 15px;
-      line-height: 45px;
-      display: block;
-      box-sizing: border-box;
-      width: 100%;
-      height: 40px;
-      padding-left: 15px;
-      cursor: pointer;
-      border-bottom: 1px solid $light-gray;
-      background-color: $white;
-      &.disabled {
-        color: $disabled;
-      }
-      input {
-        margin-right: 20px;
-      }
-    }
-  }
+body main #columns {
+	#radio_options {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    background-color: transparent;
+    justify-content: space-between;
+    border-radius: 0;
+    box-shadow: none;
+		#radio_controls {
+			padding: 0;
+			ul {
+				li.radio_channel {
+					font-size: 15px;
+					line-height: 45px;
+					display: block;
+					box-sizing: border-box;
+					width: 100%;
+					height: 40px;
+					padding-left: 15px;
+					cursor: pointer;
+					border-bottom: 1px solid $light-gray;
+					background-color: $white;
+					&.disabled {
+						color: $disabled;
+					}
+					input {
+						margin-right: 20px;
+					}
+				}
+			}
+		}
+	}
 }
 
 /* PROGRESS INDICATOR */
