@@ -32,8 +32,7 @@ export default class extends PlaybackController {
     this.playButtonTarget.style.display = 'block'
   }
 
-  toggleDetails(e) {
-    
+  toggleDetails(e) {    
     if (!e.target.classList.contains('artist') ) {
       // if the link in the track top is the artist link, go to that URL,
       // otherwise open the track reveal section
@@ -44,7 +43,7 @@ export default class extends PlaybackController {
       if (currentlyOpen) {
         currentlyOpen.element.classList.remove('open')
       }
-      if (!wasOpen) {
+      if (!wasOpen && !this.data.get('openable')) {
         this.openDetails()
       }
     }

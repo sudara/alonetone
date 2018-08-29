@@ -21,11 +21,12 @@
     </div>
     <% end %>
 
-    <% if @playlist.credits %>
     <div class="playlist-credits">
       <%= markdown(@playlist.credits) %>
+      <%= link_to edit_user_playlist_path(@playlist.user, @playlist), :title => 'edit this playlist' do %>
+      <span>edit</span>
+      <% end %>
     </div>
-    <% end %>
   </div>
 <% end %>
 
