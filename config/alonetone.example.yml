@@ -23,8 +23,7 @@ development: &defaults
   get_clicky:
   typekit:
   postmark_api_key:
-  recaptcha_public: 6Lc6BAAAAAAAAChqRbQZcn_yyyyyyyyyyyyyyyyy
-  recaptcha_private: 6Lc6BAAAAAAAAKN3DRm6VA_xxxxxxxxxxxxxxxxx
+  enable_recaptcha: false
 
 test:
   <<: *defaults
@@ -34,6 +33,8 @@ test:
 
 production:
   <<: *defaults
+  recaptcha_public: 6Lc6BAAAAAAAAChqRbQZcn_yyyyyyyyyyyyyyyyy
+  recaptcha_private: 6Lc6BAAAAAAAAKN3DRm6VA_xxxxxxxxxxxxxxxxx
   show_debug_info: false
   enable_defensio: true
   chat_url: 
