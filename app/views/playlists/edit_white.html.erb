@@ -89,6 +89,15 @@
       </div>
       <% end %>
     </div>
+    <div class="playlist_feedback" data-target="playlist-edit.feedback">
+    </div>
+     <% if @playlist.tracks.size > 0 %>
+     <div class="playlist_size">
+     <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+     <% end %>    
+     </div>
+     <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
+
   </div>
   <div id="right">
     <p class="right_instructions">
@@ -110,14 +119,12 @@
             <% @assets.each do |asset| %>
               <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
                 <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
-                <a href="#" class='add' data-target="playlist-update.remove" data-action="playlist-update#add">
+                <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
                   <div class="add-inner">
                     <i class="icon_+">
-                        <%= render file: svg_path('svg/icon_+.svg') %>
-                      </i>
+                      <%= render file: svg_path('svg/icon_+.svg') %>
+                    </i>
                   </div>
-
-
                 </a>
               </div>
             <% end %>
