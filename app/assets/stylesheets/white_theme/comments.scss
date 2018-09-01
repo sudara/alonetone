@@ -40,6 +40,7 @@ h2#latest_comments + div.box {
     border-radius: 0px 4px 4px 4px;
     padding: $baseline;
     padding-top: 10px;
+    padding-bottom: 10px;
     position: relative;
     box-shadow: none;
     margin: 18px 10px 18px 50px;
@@ -71,6 +72,7 @@ h2#latest_comments + div.box {
       }
     }
     .comment_body {
+      overflow: auto;
       i {
         float: left;
         margin-right: 8px;
@@ -84,6 +86,17 @@ h2#latest_comments + div.box {
         font-weight: normal;
         float: right;
         margin-top: 15px;
+        font-size: 12px;
+        text-transform: capitalize;
+        a:first-child {
+          color: #EB7B0C;
+          font-weight: bold;
+          margin-right: 22px;
+        }
+        a:last-child {
+          color: #E02A02;
+          font-weight: bold;
+        }
       }
       h1,
       h2,
