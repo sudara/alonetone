@@ -182,9 +182,11 @@
 			position: relative;
 			clear: both;
 			padding-left: 50px;
+			height: 30px;
+			line-height: 26px;
 			i.icon_favorite {
 				position: absolute;
-				top: -6px;
+				top: 0px;
 				left: 45px;
 				display: block;
 				svg {
