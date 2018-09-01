@@ -13,7 +13,7 @@
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
           <label>ALBUM ARTWORK</label>
-          <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}" do %>
+          <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}", :class => "cover" do %>
             <%= playlist_cover(@playlist, :original) %>
           <% end %>
           <%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
@@ -70,40 +70,53 @@
   </a>
 </div>
 --> 
-<div data-controller="playlist-edit">
-  <p class="left_instructions">
-    You can reorder your playlist by dragging your tracks. Remove them from the playlist with the [x] icon.
-  </p>
-  <div class="sortable" data-target="playlist-edit.sortable">
-    <% @playlist.tracks.each do |track| %>
-    <div class="asset" data-controller="normal-playback" data-normal-playback-openable="false" id="track_<%= track.id %>">
-      <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+<div id="columns" data-controller="playlist-edit">
+  <div id="left">
+    <p class="left_instructions">
+      You can reorder your playlist by dragging your tracks. Remove them from the playlist with the [x] icon.
+    </p>
+    <div class="sortable" data-target="playlist-edit.sortable">
+      <% @playlist.tracks.each do |track| %>
+      <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
+        <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+        <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove"></a>
+      </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
-
-  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), 
-    data: { target:'playlist-edit.addUrl' }, class: 'hidden' %>
-  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
-    data: { target:'playlist-edit.sortUrl' }, class: 'hidden' %>
-
-  <p class="right_instructions">
-    Click a track below to instantly add it to the playlist selection.
-  </p>
-  <div id="playlist_sources" class="box draggable_wrapper">
-    <div class="draggable_tracks">
-      <h2 class="box">Available tracks</h2>
-      <div id="playlist_tabs">
-        <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
-          <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
-          <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
-          <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
-        </ul>
-        <%= render partial: 'your_stuff' %>
-        <%= render partial: 'your_listens' %>
-        <%= render partial: 'your_favorites' if @favorites %>
+  <div id="right">
+    <p class="right_instructions">
+      Click a track below to instantly add it to the playlist selection.
+    </p>
+    <div id="playlist_sources" class="box draggable_wrapper">
+      <div class="draggable_tracks">
+        <h2 class="box">Available tracks</h2>
+        <div id="playlist_tabs">
+          <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
+            <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
+            <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
+            <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
+          </ul>
+          <div id="your_uploads" class="playlist_source">
+            <div class="mini_paginator">
+              <%= will_paginate @assets, {param_name: :uploads_page, ignore_get_params: true}%>
+            </div>
+            <% @assets.each do |asset| %>
+              <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
+                <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
+                <a href="#" class='add' data-target="playlist-update.remove" data-action="playlist-update#add"></a>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), 
+    data: { target:'playlist-edit.addUrl' }, class: 'hidden add_url' %>  
+  <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink), 
+    data: { target:'playlist-edit.removeUrl' }, class: 'hidden remove_url' %>
+  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
+    data: { target:'playlist-edit.sortUrl' }, class: 'hidden sort_url' %>
 </div>
 
