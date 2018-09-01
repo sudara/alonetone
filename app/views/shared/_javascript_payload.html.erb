@@ -5,7 +5,7 @@
   window.showPlayCounts = <%= logged_in? && current_user.settings && (current_user.settings[:display_listen_count] == "true") ? true : false %>;
   window.userPersonalization = '<div class="comment_as">' +
      <% if logged_in? %>
-        'Say something, <%= escape_javascript(current_user.name)%>:'+
+        'Say something, <span class="comment_as_user"><%= escape_javascript(current_user.name)%></span>:'+
      <% else %>
         'Comment as a <span class="comment_as_guest">Guest</span> or <%= link_to 'login', login_path, title: 'login to alonetone' %>:'+
      <% end %>
