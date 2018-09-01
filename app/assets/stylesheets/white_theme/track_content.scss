@@ -5,6 +5,23 @@
 
     @include samo-shadow-and-radius();
   }
+  .edit-links {
+    background-color: transparent;
+    margin-top: -7px;
+    margin-bottom: 15px;
+    box-shadow: none;
+    border-radius: 0;
+    .edit-link {
+      @include default-button('admin');
+    }
+    .edit-link + .edit-link {
+      margin-left: 6px;
+      text-transform: uppercase;
+      background-color: #FFF;
+      color: #EB7B0C;
+    }
+
+  }
   .track-post, .track-edit {
     position: relative;
     padding: $baseline ($baseline * 3);
@@ -32,14 +49,7 @@
         margin-left: -$baseline * 3;
       }
     }
-    .edit-link {
-      @include default-button('admin');
-      float: right;
-      margin-top: 18px;
-    }
-    .edit-link + .edit-link {
-      margin-right: 8px;
-    }
+
 
 
     p.track-stats {
