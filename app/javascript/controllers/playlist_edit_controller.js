@@ -3,7 +3,7 @@ import { Controller } from 'stimulus'
 import { Sortable } from '@shopify/draggable';
 
 export default class extends Controller {
-  static targets = ['sortable', 'sortUrl', 'addUrl', 'dropzone', 'sourceTracks']
+  static targets = ['sortable', 'sortUrl', 'addUrl', 'dropzone', 'sourceTracks', 'size', 'feedback', 'spinner']
 
   initialize() {
     this.sortable = new Sortable(this.sortableTarget, {
@@ -15,9 +15,19 @@ export default class extends Controller {
       },
     })
     this.sortUrl = this.sortUrlTarget.getAttribute('href')
+    this.spinnerTarget.style.display = 'none'
     this.currentParams = this.paramsFromSortables()
     // need this to fire only when order changed
-    this.sortable.on('drag:stop', () => console.log(this.maybePostToSort()))
+    this.sortable.on('drag:stop', () => this.maybePostToSort())
+
+    // hack related to https://github.com/Shopify/draggable/issues/183
+    // allows elements with certain classes to not behave as handles for draggable
+    this.sortable.on('drag:start', (event) => { 
+      const classListOfTarget = event.originalEvent.target.classList
+      if (classListOfTarget.contains('.add', '.remove', '.play_link', '.play_button')) {
+        event.cancel()
+      }
+    })
   }
 
   sortables() {
@@ -49,6 +59,6 @@ export default class extends Controller {
   }
 
   displaySuccess() {
-    // have "Saved" plus a green check mark flash at top of playlist
+    this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
   }
 }
