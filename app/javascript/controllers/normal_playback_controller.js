@@ -5,12 +5,13 @@ let currentlyOpen
 
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
-  static targets = ['playButton', 'details', 'time', 'seekBarPlayed']
+  static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   preInitialize() {
     this.animation = new PlayAnimation()
     this.preload = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
+    this.titleTarget.style.width = `${this.element.clientWidth - 90}px`
   }
 
   whilePlayingCallback() {
@@ -54,6 +55,8 @@ export default class extends PlaybackController {
       currentlyOpen.element.classList.remove('open')
     }
     currentlyOpen = this
+    this.detailsTarget.style.display = 'block'
+    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
     this.element.classList.add('open')
   }
 

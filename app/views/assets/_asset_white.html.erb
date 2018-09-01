@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="tracks_reveal" data-target="asset.details">
+  <div class="tracks_reveal" data-target="normal-playback.details">
     <%= link_to toggle_favorite_path(asset_id: asset.id), remote: true, class: 'add_to_favorites', 
       data: {controller: 'favorite', action: 'favorite#toggle' } do %>
       <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
