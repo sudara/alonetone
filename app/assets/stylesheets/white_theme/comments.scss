@@ -81,6 +81,7 @@ h2#latest_comments + div.box {
         line-height: 18px;
         margin: 16px 0 0 0;
         margin-top: 13px;
+        color: #4F4D4D;
       }
       div.private_message {
         background-color: #FFD1B0;
@@ -90,6 +91,8 @@ h2#latest_comments + div.box {
         color: #F04E1A;
         width: 96px;
         text-align: center;
+        position: relative;
+        top: 29px;
       }
       .comment_controls {
         font-weight: normal;
