@@ -127,9 +127,9 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@shopify/draggable@^1.0.0-beta.7":
+"@shopify/draggable@https://github.com/Shopify/draggable":
   version "1.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@shopify/draggable/-/draggable-1.0.0-beta.7.tgz#58c3619ffd88841d337c2922506f4a85540ba7ee"
+  resolved "https://github.com/Shopify/draggable#b8ca1321d48d3b2bc190ca614a23b0eefc4c8bd2"
 
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
