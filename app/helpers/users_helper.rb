@@ -43,7 +43,7 @@ module UsersHelper
   end
 
   def avatar_or_placeholder_for(user, size = :large)
-    if user&.has_pic?
+    if !Alonetone.try(:show_dummy_pics) && user&.has_pic? 
       user.pic.pic.url(size)
     else
       'default/no-pic_white.svg'
