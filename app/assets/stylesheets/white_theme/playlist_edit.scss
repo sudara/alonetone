@@ -25,4 +25,12 @@
   .add{
     background-color:green;
   }
+  .remove {
+    .remove-inner {
+      width: 29px;
+      height: 29px;
+      border-radius: 4px;
+      background-color: #C4C4C4;
+    }
+  }
 }
