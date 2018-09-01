@@ -201,7 +201,9 @@
 	}
 	.tracks_reveal {
 		position: relative;
-		z-index: 0;
+    z-index: 0;
+    display:none;
+    margin-top: -361px; // good default, js will tweak
 		overflow: auto;
 		box-sizing: border-box;
 		transition: margin 250ms cubic-bezier(.17, .04, .03, .94);

@@ -36,14 +36,6 @@ function handlers() {
     }
   })
 
-  document.querySelectorAll('a.track_link').forEach((title) => {
-    title.style.width = `${document.querySelector('.asset').clientWidth - 90}px`
-  })
-
-  document.querySelectorAll('.tracks_reveal').forEach((reveal) => {
-    reveal.style.marginTop = "-" + reveal.offsetHeight.toString() + "px"
-  })
-  
   document.querySelectorAll('a .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')  
     if (!pic.hasChildNodes()) {
