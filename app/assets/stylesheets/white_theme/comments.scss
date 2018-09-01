@@ -82,6 +82,15 @@ h2#latest_comments + div.box {
         margin: 16px 0 0 0;
         margin-top: 13px;
       }
+      div.private_message {
+        background-color: #FFD1B0;
+        border-radius: 2px;
+        font-size: 10px;
+        text-transform: uppercase;
+        color: #F04E1A;
+        width: 96px;
+        text-align: center;
+      }
       .comment_controls {
         font-weight: normal;
         float: right;
