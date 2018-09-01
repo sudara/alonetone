@@ -86,6 +86,7 @@
 					flex-grow: 1;
 					a.track_link {
 						line-height: 1.1em;
+						font-size: 16px;
 						display: block;
 						overflow: hidden;
 						white-space: nowrap;
@@ -132,7 +133,7 @@
 					font-size: 11px;
 				}
 				a.artist {
-					font-size: 11px;
+					font-size: 12px;
 					font-weight: normal;
 					color: $samo-gray;
 					&:hover {
@@ -177,7 +178,7 @@
 			}
 		}
 		.asset_favorited {
-			font-size: 11px;
+			font-size: 12px;
 			position: relative;
 			clear: both;
 			padding-left: 50px;
@@ -187,8 +188,8 @@
 				left: 45px;
 				display: block;
 				svg {
-					width: 20px;
-					height: 20px;
+					width: 21px;
+					height: 21px;
 				}
 			}
 			span.favorited_by {
