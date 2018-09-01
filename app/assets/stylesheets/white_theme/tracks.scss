@@ -348,12 +348,12 @@
 		.comment_track {
 			position: relative;
 			clear: both;
-			margin-top: 20px;
+			margin-top: 0px;
 			margin-right: 14px;
 			margin-left: 14px;
 			&::before {
 				position: absolute;
-				top: 25px;
+				top: 17px;
 				left: 49%;
 				content: '\A';
 				border-width: 0 9px 13px 9px;
@@ -370,7 +370,8 @@
 				form {
 					.comment_as {
 						font-size: 12px;
-						line-height: 37px;
+						height: 30px;
+						line-height: 30px;
 						overflow: auto;
 						color: #969393;
 						span.comment_as_guest {
