@@ -2,8 +2,8 @@ class AdminController < ApplicationController
   before_action :moderator_only, only: 'secretz'
 
   def toggle_theme
-    current_user.toggle! :white_theme_enabled
-    session[:white] = nil
+    current_user.toggle! :white_theme_enabled if logged_in?
+    session[:white] = !session.try(:white)
     redirect_back(fallback_location: root_path)
   end
 
