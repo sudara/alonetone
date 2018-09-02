@@ -211,7 +211,13 @@ body.has-details {
 }
 
 #edit_playlist_info {
-  @include match-dynamic-site-width();
+  @include match-dynamic-site-width("narrow");
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 20px;
+  > h2 {
+    padding-left: 60px;
+  }
   form p {
     font-size: 14px;
   }
@@ -220,8 +226,13 @@ body.has-details {
   }
   .edit_playlist_columns {
     display: flex;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 25px;
     .edit_playlist_left_column {
-      width: 220px;
+      // width: 220px;
+      width: 20%;
+      margin-right: 5%;
       p {
         font-size: 12px;
         color: #a6abab;
@@ -231,6 +242,7 @@ body.has-details {
       flex: 1;
       display: flex;
       flex-wrap: wrap;
+      width: 75%;
       div.input {
         width: 100%;
       }
@@ -291,11 +303,26 @@ body.has-details {
     }
   }
   .edit_playlist_bottom {
+    border-top: 1px solid #F5F5F5;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 20px;
     input {
       float: right;
     }
+    a:first-child {
+      @include default-button();
+      background-color: transparent;
+      color: $samo-orange;
+      font-size: 14px;
+      padding: 0;
+      &:hover {
+        color: $samo-orange;
+        text-decoration: underline;
+        background-color: transparent;
+      }
+    }
   }
-
 }
 
 
