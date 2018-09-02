@@ -8,6 +8,10 @@ select {
     outline: 0;
 }
 
+input {
+  font-family: $sans-font;
+}
+
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
