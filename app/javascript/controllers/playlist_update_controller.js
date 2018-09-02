@@ -48,19 +48,19 @@ export default class extends Controller {
   }
 
   errored() {
-    setTimeout(this.stopSpin, 300)
+    setTimeout(this.stopSpin.bind(this), 500)
     this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_fail">Dang, something went wrong!</div>'
   }
 
   removed() {
-    setTimeout(this.stopSpin, 3000)
+    setTimeout(this.stopSpin.bind(this), 500)
     this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_success">Removed</div>'
     this.updatePlaylistSize()
     this.element.parentNode.removeChild(this.element)
   }
 
   added() {
-    setTimeout(this.stopSpin, 300)
+    setTimeout(this.stopSpin.bind(this), 500)
     this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_success">Added!</div>'
     this.playlistEdit.sortableTarget.appendChild(this.element)
     this.updatePlaylistSize()
