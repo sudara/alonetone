@@ -21,7 +21,7 @@ export default class extends Controller {
       type: 'POST',
       data: `asset_id=${this.element.id}`,
       before: this.spin.bind(this),
-      success: this.added.bind(this),
+      success: (response, status, xhr) => this.added(response, status, xhr),
       error: this.errored.bind(this),
     })
   }
@@ -59,8 +59,11 @@ export default class extends Controller {
     this.element.parentNode.removeChild(this.element)
   }
 
-  added() {
+  added(response, status, xhr) {
     setTimeout(this.stopSpin.bind(this), 500)
+    this.element.id = `track_${response}` // give it a track id before assigning it to the sortable
+    this.addTarget.style.display = 'none'
+    this.removeTarget.style.display = 'flex'
     this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_success">Added!</div>'
     this.playlistEdit.sortableTarget.appendChild(this.element)
     this.updatePlaylistSize()
