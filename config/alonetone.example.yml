@@ -18,7 +18,7 @@ development: &defaults
   chat_url:
   video_size: width="370" height="308"
   enable_defensio: false
-  default_user_images: true
+  show_dummy_pics: true
   ga:
   get_clicky:
   typekit:
