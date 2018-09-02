@@ -215,6 +215,7 @@ body.has-details {
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 20px;
+  padding-top: 0;
   > h2 {
     padding-left: 60px;
   }
@@ -322,6 +323,12 @@ body.has-details {
         background-color: transparent;
       }
     }
+  }
+}
+
+.edit_playlist_columns {
+  .asset .asset_top .asset_top_row div.title .title_right_column {
+    display: none;
   }
 }
 
