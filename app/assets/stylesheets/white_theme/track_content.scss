@@ -28,13 +28,19 @@
   }
   .track-post, .track-edit {
     position: relative;
-    padding: $baseline ($baseline * 3);
+    // padding: $baseline ($baseline * 3);
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+
     @media #{$tablet} {
       padding: $baseline / 2;
     }
 
     h1 {
       font-size: $baseline;
+      margin-top: 0;
       line-height: $baseline;
     }
     h3 {
@@ -59,6 +65,7 @@
     p.track-stats {
       font-family: $sans-font;
       font-size: 12px;
+      margin-bottom: 0;
     }
     hr {
       font-family: 'FontAwesome';
@@ -80,6 +87,9 @@
         -webkit-font-smoothing: antialiased;
       }
     }
+  }
+  .comment_asset {
+
   }
 
   .track-edit {
