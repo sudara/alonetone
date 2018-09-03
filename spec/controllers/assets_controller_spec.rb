@@ -5,7 +5,8 @@ RSpec.describe AssetsController, type: :controller do
   render_views
   fixtures :assets, :users, :audio_features
   include ActiveJob::TestHelper
-  after do
+
+  after :each do
     clear_enqueued_jobs
     clear_performed_jobs
   end
@@ -83,7 +84,6 @@ RSpec.describe AssetsController, type: :controller do
 
     it "should NOT enqueue anything if feature is present" do
       asset = assets(:valid_mp3)
-      allow(asset).to receive(:audio_feature).and_return(true)
 
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
 
