@@ -5,6 +5,10 @@
 
     @include samo-shadow-and-radius();
   }
+  .track-favorite {
+    width:100px;
+    margin-right:10px;
+  }
   .edit-links {
     background-color: transparent;
     margin-top: -7px;
