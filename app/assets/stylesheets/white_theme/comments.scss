@@ -44,7 +44,7 @@ h2#latest_comments + div.box {
 	padding-top: 20px;
 	padding-right: 15px;
 	padding-left: 15px;
-	background-color: #F4F4F4;
+	background-color: #F0F0F0;
 	.comment_form {
 		textarea {
 			background-color: #FFF;
@@ -55,10 +55,6 @@ h2#latest_comments + div.box {
 
 /* SHARED BY TRACK AND TRACK_CONTENT */
 .comment_asset {
-	padding-top: 20px;
-	padding-right: 15px;
-	padding-left: 15px;
-	background-color: #F0F0F0;
 	.comment_form.private_banner_visible {
 		form textarea {
 			border-radius: 6px 6px 0 0;
