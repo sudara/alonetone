@@ -17,6 +17,142 @@ h2#latest_comments + div.box {
   }
 }
 
+/* ADDING COMMENTS */
+
+.comment_track {
+  position: relative;
+  clear: both;
+  margin-top: 0px;
+  margin-right: 14px;
+  margin-left: 14px;
+  &::before {
+    position: absolute;
+    top: 17px;
+    left: 49%;
+    content: '\A';
+    border-width: 0 9px 13px 9px;
+    border-style: solid;
+    border-color: transparent transparent #D7DBDB transparent;
+  }
+}
+
+.comment_asset {
+    .comment_form.private_banner_visible {
+      form textarea {
+        border-radius: 6px 6px 0 0;
+      }
+    }
+    .comment_form {
+      overflow: hidden;
+      form {
+        .comment_as {
+          font-size: 12px;
+          height: 30px;
+          line-height: 30px;
+          overflow: auto;
+          color: #969393;
+          span.comment_as_guest {
+            text-transform: capitalize;
+            color: #4F4D4D;
+          }
+          span.comment_as_user {
+            color: #4F4D4D;
+          }
+          a {
+            color: $samo-orange;
+          }
+          img {
+            float: left;
+            width: 27px;
+            height: 27px;
+            margin-right: 10px;
+          }
+        }
+        textarea {
+          font-family: $sans-font;
+          display: block;
+          box-sizing: border-box;
+          width: 100%;
+          margin-bottom: 15px;
+          padding: $baseline / 4;
+          resize: none;
+          color: #4F4D4D;
+          border: 1px solid #D7DBDB;
+          border-radius: 6px;
+          background-color: #F5F5F5;
+          @media #{$tablet} {
+            font-size: 16px;
+          }
+          &:focus {
+            border-color: #A6ABAB;
+          }
+        }
+        .private_check_box {
+          font-size: 11px;
+          float: left;
+          clear: both;
+          margin-top: 0;
+          label {
+            text-transform: lowercase;
+            color: #4F4D4D;
+          }
+        }
+        span.private {
+          font-size: 12px !important;
+          line-height: 27px;
+          position: relative;
+          top: -15px;
+          display: block;
+          height: 24px;
+          margin-top: 0;
+          padding-left: 20px;
+          color: $white;
+          color: #FFD1B0;
+          border-color: #E02A02;
+          border-radius: 0 0 6px 6px;
+          background-color: $samo-dark-orange;
+          &.hidden {
+            display: none;
+          }
+          .only_user_name, .only_alonetone_mods {
+            font-weight: bold;
+            color: #FFF;
+          }
+        }
+        div.submit_wrapper {
+          position: relative;
+          top: -18px;
+          .comment_waiting {
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: -5px;
+            text-align: right;
+            color: $orange;
+            div.ajax_success, div.ajax_fail {
+              line-height: 30px;
+              height: 30px;
+            }
+            div.ajax_success {
+              color: $green;
+            }
+            div.ajax_fail {
+              color: $red;
+            }
+          }
+        }
+        input.comment_submit {
+          float: right;
+          clear: both;
+          cursor: pointer;
+          background-color: transparent;
+
+          @include default_button();
+        }
+      } 
+    }
+  }
+
+
 .comment {
   position: relative;
   background-color: #F5F5F5;
