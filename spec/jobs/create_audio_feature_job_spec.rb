@@ -17,9 +17,4 @@ RSpec.describe CreateAudioFeatureJob, type: :job do
       .with(assets(:valid_arthur_mp3).id)
       .on_queue("default")
   end
-
-  it "executes perform_later" do
-    expect(asset).to receive(:import_waveform)
-    perform_enqueued_jobs { job }
-  end
 end
