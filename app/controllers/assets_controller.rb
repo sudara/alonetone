@@ -8,6 +8,8 @@ class AssetsController < ApplicationController
   # we check to see if the current_user is authorized based on the asset.user
   before_action :require_login, except: %i[index show latest radio listen_feed]
 
+  after_action :create_audio_feature, only: %i[show]
+
   # home page
   def latest
     if stale?(Asset.last_updated)
@@ -284,5 +286,12 @@ class AssetsController < ApplicationController
 
   def dangerous_action?
     %w[destroy update edit create spam unspam].include? action_name
+  end
+
+  def create_audio_feature
+    return if @asset.audio_feature
+
+    # perform_later will queue the job as soon as worker is available
+    CreateAudioFeatureJob.perform_later @asset.id
   end
 end
