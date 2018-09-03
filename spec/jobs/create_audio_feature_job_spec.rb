@@ -22,5 +22,4 @@ RSpec.describe CreateAudioFeatureJob, type: :job do
     expect(asset).to receive(:import_waveform)
     perform_enqueued_jobs { job }
   end
-
 end

@@ -4,6 +4,6 @@ class CreateAudioFeatureJob < ApplicationJob
   def perform(asset_id)
     asset = Asset.find(asset_id)
 
-    asset.import_waveform if asset
+    asset&.import_waveform
   end
 end
