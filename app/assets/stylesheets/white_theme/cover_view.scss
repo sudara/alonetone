@@ -37,6 +37,10 @@
     box-sizing: border-box;
     color: $black;
     background-color: #FFF;
+    text-align: right;
+    > a {
+      @include default-button('admin');
+    }
 
   }
   .playlist-options {

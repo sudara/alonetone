@@ -1,0 +1,69 @@
+
+.draggable-mirror {
+	z-index: 99999;
+	border: 1px solid #000;
+}
+
+.edit_playlist_left_column {
+	.cover img {
+		width: 250px;
+	}
+}
+.playlist_asset {
+	.add, .remove {
+		position: absolute;
+		z-index: 999999;
+		top: 0;
+		right: 0;
+		display: flex;
+		width: 50px;
+		height: 50px;
+		align-items: center;
+		justify-content: center;
+	}
+	.add {
+		&:hover {
+			.add-inner {
+				background-color: #888;
+			}
+		}
+		&:active {
+			.add-inner {
+				background-color: #EB7B0C;
+			}
+		}
+		.add-inner {
+			display: flex;
+			width: 29px;
+			height: 29px;
+			border-radius: 4px;
+			background-color: #C4C4C4;
+
+			align-items: center;
+			justify-content: center;
+		}
+	}
+	.remove {
+		&:hover {
+			.remove-inner {
+				background-color: #888;
+			}
+		}
+		&:active {
+			.remove-inner {
+				background-color: #EB7B0C;
+			}
+		}
+
+		.remove-inner {
+			display: flex;
+			width: 29px;
+			height: 29px;
+			border-radius: 4px;
+			background-color: #C4C4C4;
+
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
