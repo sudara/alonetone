@@ -177,5 +177,9 @@ module ApplicationHelper
     sanitized
   end
 
+  def svg_path(svg)
+    File.join(Rails.root, 'app', 'assets', 'images', svg)
+  end
+
   protected
 end

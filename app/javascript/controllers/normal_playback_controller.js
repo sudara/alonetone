@@ -5,12 +5,13 @@ let currentlyOpen
 
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
-  static targets = ['playButton', 'details', 'time', 'seekBarPlayed']
+  static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   preInitialize() {
     this.animation = new PlayAnimation()
     this.preload = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
+    this.titleTarget.querySelector('.track_link').style.width = `${this.element.clientWidth - 90}px`
   }
 
   whilePlayingCallback() {
@@ -32,15 +33,20 @@ export default class extends PlaybackController {
     this.playButtonTarget.style.display = 'block'
   }
 
-  toggleDetails(e) {
-    e.preventDefault()
-    const wasOpen = this.element.classList.contains('open')
-    // if another track details is open, close it
-    if (currentlyOpen) {
-      currentlyOpen.element.classList.remove('open')
-    }
-    if (!wasOpen) {
-      this.openDetails()
+  toggleDetails(e) {    
+    if (!e.target.classList.contains('artist') ) {
+      // if the link in the track top is the artist link, go to that URL,
+      // otherwise open the track reveal section
+      e.preventDefault()
+
+      const wasOpen = this.element.classList.contains('open')
+      // if another track details is open, close it
+      if (currentlyOpen) {
+        currentlyOpen.element.classList.remove('open')
+      }
+      if (!wasOpen && !this.data.get('openable')) {
+        this.openDetails()
+      }
     }
   }
 
@@ -49,6 +55,8 @@ export default class extends PlaybackController {
       currentlyOpen.element.classList.remove('open')
     }
     currentlyOpen = this
+    this.detailsTarget.style.display = 'block'
+    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
     this.element.classList.add('open')
   }
 

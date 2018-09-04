@@ -57,7 +57,8 @@ $red: #d3220c;
 $green: #66a410;
 $orange: #da6d25;
 $orange-background: #e66d29;
-$samo-orange: #c60;
+// $samo-orange: #c60;
+$samo-orange: #EB7B0C;
 $samo-dark-orange: #f04e1a;
 $nav-item-color: #c1c9b4;
 $tab-box-silver: #fff;
@@ -74,7 +75,8 @@ $bright-highlight: rgba(255, 255, 0, .6);
 
 @mixin samo-shadow-and-radius() {
   border-radius: 6px;
-  box-shadow: 0 3px 4px -2px #65666627;
+  // box-shadow: 0 3px 4px -2px #65666627;
+  box-shadow: 0px 5px 6px -2px #65666644;
 }
 
 // DEFAULT BUTTON STYLE
@@ -83,11 +85,11 @@ $bright-highlight: rgba(255, 255, 0, .6);
   font-family: $sans-font;
   font-size: 12px;
   font-weight: bold;
-  line-height: 26px;
+  line-height: 28px;
   display: inline-block;
   box-sizing: border-box;
   height: 26px;
-  padding: 0 24px;
+  padding: 0 16px;
   text-align: center;
   text-decoration: none;
   color: #fff;
@@ -95,27 +97,15 @@ $bright-highlight: rgba(255, 255, 0, .6);
   border-radius: 4px;
   background-color: #a6abab;
   box-shadow: none;
-
   @if $type == 'admin' {
-    // opacity: 1;
-    // color: #fff;
-    // border: 1.25px solid #555;
-    // background-color: $samo-orange;
   }
   @if $type == 'jumbo' {
-    // opacity: 1;
     height: 60px;
     line-height: 60px;
     font-size: 16px;
-    // color: #fff;
-    // border: 1.25px solid #555;
-    // background-color: $samo-orange;
   }
   &:hover {
     background-color: #888;
-    // transition: border-color .1s ease-in-out;
-    // text-decoration: none;
-    // border: 1.25px solid $black;
   }
   &:active {
     background-color: #eb7b0c;

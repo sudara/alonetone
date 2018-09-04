@@ -8,6 +8,10 @@ select {
     outline: 0;
 }
 
+input {
+  font-family: $sans-font;
+}
+
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
@@ -62,7 +66,7 @@ select {
 /* checked mark aspect */
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: image-url('checkmark.svg');
+  content: image-url('svg/icon_checkmark.svg');
   position: absolute;
   top: 3px;
   left: 3px;
@@ -70,12 +74,8 @@ select {
 }
 /* checked mark aspect changes */
 [type="checkbox"]:not(:checked) + label:after {
-  // opacity: 0;
-  // transform: scale(0);
 }
 [type="checkbox"]:checked + label:after {
-  // opacity: 1;
-  // transform: scale(1);
 }
 
 /* disabled checkbox */
@@ -226,7 +226,90 @@ label.collection_radio_buttons {
   padding-left: 10px;
   background-color: #e66d29;
   label {
-    color: white;
+    color: white;/* EDIT PAGES */
+
+    body.has-details {
+      h2.spacey {
+        @include match-dynamic-site-width();
+      }
+      .container.static_content {
+        padding: $baseline;
+        background-color: $white;
+    
+        @include match-dynamic-site-width();
+        @include samo-shadow-and-radius();
+      }
+    }
+    
+    /* USERS/USER/EDIT FORM */
+    
+    #bio_edit_user_1, .settings-box {
+      br {
+        display: none;
+      }
+      label {
+        margin-bottom: 2px!important;
+      }
+      input, textarea, select {
+        margin-bottom: $baseline;
+        border: 1px solid $light-gray;
+      }
+      textarea {
+        font-family: $serif-font;
+        width: 98%;
+        padding-top: 5px;
+        padding-left: 5px;
+      }
+    }
+    
+    .settings-box {
+      h2 {
+        margin-bottom: $baseline;
+      }
+      .static_content {
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+        &:last-child {
+          padding-top: $baseline!important;
+        }
+      }
+    }
+    
+    .edit-your-profile-box {
+      .static_content {
+        &:last-child {
+          padding-top: 0!important;
+        }
+      }
+    }
+    
+    .change-your-picture-box {
+      br {
+        display: none;
+      }
+    
+      form {
+        margin-top: $baseline;
+        input:last-child {
+          display: block;
+          margin-top: $baseline;
+        }
+      }
+    }
+    
+    .your-account-box {
+      .static_content:last-child {
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+        .static_content {
+          padding: 0!important;
+          padding-bottom: $baseline!important;
+          input:last-child {
+            margin-top: $baseline!important;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -237,3 +320,7 @@ label.collection_check_boxes {
   margin-left: 2px;
   vertical-align: -2px;
 }
+
+
+
+

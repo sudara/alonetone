@@ -6,6 +6,7 @@ class AssetNotification < ActionMailer::Base
     @description = asset.description
     @name = asset.user.name
     @user = asset.user
+    @title = asset.title.present? ? asset.title : "new track"
     @download_link = download_link_for(asset)
     @play_link = play_link_for(asset)
     @user_link = user_link_for(asset)
