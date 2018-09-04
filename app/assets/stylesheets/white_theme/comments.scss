@@ -141,16 +141,22 @@ h2#latest_comments + div.box {
 			div.submit_wrapper {
 				position: relative;
 				top: -18px;
+				display: flex;
+				flex-direction: row;
+				clear: both;
+				justify-content: flex-end;
+				margin-left: 110px;
+				div.small_spinner {
+					position: relative;
+					top: 3px;
+				}
 				.comment_waiting {
-					font-size: 11px;
+					font-size: 12px;
 					font-weight: bold;
-					margin-top: -5px;
-					text-align: right;
+					color: #da6d25;
+					position: relative;
+					top: 7px;
 					color: $orange;
-					div.ajax_success, div.ajax_fail {
-						line-height: 30px;
-						height: 30px;
-					}
 					div.ajax_success {
 						color: $green;
 					}
