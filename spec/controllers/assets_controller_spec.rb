@@ -6,7 +6,7 @@ RSpec.describe AssetsController, type: :controller do
   fixtures :assets, :users, :audio_features
   include ActiveJob::TestHelper
 
-  after :each do
+  before :each do
     clear_enqueued_jobs
     clear_performed_jobs
   end
