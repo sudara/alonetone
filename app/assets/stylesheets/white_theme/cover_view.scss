@@ -36,8 +36,11 @@
     padding: $baseline/2;
     box-sizing: border-box;
     color: $black;
-    background-color: #FFF;
+    background-color: #F9F9F9;
     text-align: right;
+    p {
+      text-align: left;
+    }
     > a {
       @include default-button('admin');
     }
