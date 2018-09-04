@@ -2,30 +2,37 @@
   @include match-dynamic-site-width('narrow');
    > * {
     background-color: white;
-
     @include samo-shadow-and-radius();
   }
-  .track-favorite {
-    width:100px;
-    margin-right:10px;
-  }
-  .edit-links {
+  .edit-links-and-favorite {
+    height: 40px;
+    overflow: auto;
     background-color: transparent;
-    margin-top: -7px;
-    margin-bottom: 15px;
     box-shadow: none;
-    border-radius: 0;
-    .edit-link {
-      @include default-button('admin');
+
+    .edit-links {
+      background-color: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      float: left;
+      .edit-link {
+        @include default-button('admin');
+      }
+      .edit-link + .edit-link {
+        margin-left: 6px;
+        text-transform: uppercase;
+        background-color: #FFF;
+        color: #EB7B0C;
+      }
     }
-    .edit-link + .edit-link {
-      margin-left: 6px;
-      text-transform: uppercase;
-      background-color: #FFF;
-      color: #EB7B0C;
+    .track-favorite {
+      width: 30px;
+      margin-right:10px;
+      float: right;
     }
 
   }
+
   .track-post, .track-edit {
     position: relative;
     // padding: $baseline ($baseline * 3);
