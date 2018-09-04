@@ -14,7 +14,7 @@ module PlaylistsHelper
   end
 
   def playlist_cover(playlist, size)
-    if Alonetone.try(:show_dummy_pics) || playlist.has_no_cover? 
+    if Alonetone.try(:show_dummy_pics) || playlist.has_no_cover?
       svg_cover
     # greenfield size did not exist before this id
     elsif (size == :greenfield) && ((playlist.pic.id > 69806) && (playlist.pic.id < 72848))
