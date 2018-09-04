@@ -12,6 +12,7 @@
 import LocalTime from 'local-time'
 import Rails from 'rails-ujs'
 import Turbolinks from 'turbolinks'
+import { Chartist } from 'chartist'
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
