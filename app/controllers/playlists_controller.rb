@@ -78,9 +78,7 @@ class PlaylistsController < ApplicationController
     @track = @playlist.tracks.create(asset: asset, user: @user)
     respond_to do |format|
       format.js do
-        if white_theme_enabled?
-          render plain: @track.id
-        end
+        render plain: @track.id if white_theme_enabled?
       end
     end
   end
