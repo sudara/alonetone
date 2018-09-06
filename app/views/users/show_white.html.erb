@@ -146,6 +146,9 @@
           <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
             edit profile
           <% end %>
+          <% if moderator? %>
+            <%= link_to "Delete", @user, method: :delete, class: "edit_profile--delete admin" %>
+          <% end %>
         </div>
       <% end %>
       <% if moderator? %>
