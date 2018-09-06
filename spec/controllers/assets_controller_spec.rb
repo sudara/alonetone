@@ -4,12 +4,12 @@ include ActiveJob::TestHelper
 RSpec.describe AssetsController, type: :controller do
   render_views
   fixtures :assets, :users, :audio_features
-  include ActiveJob::TestHelper
 
   before :each do
     clear_enqueued_jobs
     clear_performed_jobs
   end
+
   context "edit" do
     it 'should allow user to upload new version of song' do
       login(:sudara)
