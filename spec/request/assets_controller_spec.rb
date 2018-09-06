@@ -6,6 +6,8 @@ RSpec.describe AssetsController, type: :request do
 
   before(:each) do
     DatabaseCleaner.start
+    clear_enqueued_jobs
+    clear_performed_jobs
   end
 
   append_after(:each) do
