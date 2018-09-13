@@ -42,5 +42,13 @@ function handlers() {
       pic.append(makeSVGFromTitle(800, title))
     }
   })
+
+  document.querySelectorAll('.slide_open_href').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const id = event.target.getAttribute('href')
+      document.querySelector(id).style.display = 'block'
+      event.preventDefault()
+    })
+  })
 }
 document.addEventListener('turbolinks:load', handlers)

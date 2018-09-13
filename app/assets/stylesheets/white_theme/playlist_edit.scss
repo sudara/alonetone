@@ -38,9 +38,11 @@
 			height: 29px;
 			border-radius: 4px;
 			background-color: #C4C4C4;
-
 			align-items: center;
 			justify-content: center;
+			svg {
+				position: relative;
+			}
 		}
 	}
 	.remove {
@@ -64,6 +66,10 @@
 
 			align-items: center;
 			justify-content: center;
+			svg {
+				position: relative;
+			}
+
 		}
 	}
 }
