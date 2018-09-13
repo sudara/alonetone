@@ -30,25 +30,21 @@
       margin-right:10px;
       float: right;
     }
-
   }
 
   .track-post, .track-edit {
     position: relative;
-    // padding: $baseline ($baseline * 3);
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 50px;
     padding-bottom: 30px;
-
     @media #{$tablet} {
       padding: $baseline / 2;
     }
-
     h1 {
       font-size: $baseline;
       margin-top: 0;
-      line-height: $baseline;
+      line-height: 32px;
     }
     h3 {
       margin-top: $baseline / 2;
