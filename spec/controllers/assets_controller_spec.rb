@@ -71,6 +71,7 @@ RSpec.describe AssetsController, type: :controller do
 
   context "#show" do
     before :each do
+      allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
       login(:sudara)
     end
 
@@ -83,6 +84,16 @@ RSpec.describe AssetsController, type: :controller do
     end
 
     it "should NOT enqueue anything if feature is present" do
+      asset = assets(:valid_mp3)
+
+      get :show, params: { id: asset.id, user_id: users(:sudara).login }
+
+      assert_enqueued_jobs(0)
+    end
+
+    it "should NOT enqueue anything if is_a_bot?" do
+      allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(true)
+
       asset = assets(:valid_mp3)
 
       get :show, params: { id: asset.id, user_id: users(:sudara).login }

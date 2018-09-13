@@ -289,6 +289,7 @@ class AssetsController < ApplicationController
   end
 
   def create_audio_feature
+    return if is_a_bot?
     return if @asset.audio_feature
 
     # perform_later will queue the job as soon as worker is available
