@@ -17,19 +17,26 @@ main {
     'header header'
     'playlists playlists'
     'left right'
-    // 'latest favorites'
-    // 'listens comments'
     'card card'
     'plays popular';
     .box {
       margin-bottom: 0;
     }
     @media #{$tablet} {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      // flex-direction: column;
        > * {
         width: 100%;
       }
+      grid-template-columns: none;
+      grid-template-areas:
+        'header'
+        'left'
+        'right'
+        'playlists'
+        'card'
+        'plays'
+        'popular';
     }
 
     @media #{$mobile} {
