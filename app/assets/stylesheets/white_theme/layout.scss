@@ -28,6 +28,7 @@ body {
           width: 100%;
           margin-right: 0;
           margin-bottom: $baseline;
+          order: 2;
         }
       }
       .track-content {
@@ -41,6 +42,7 @@ body {
         }
         @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
           width: 100%;
+          order: 1;
 
         }
         flex: 1;
