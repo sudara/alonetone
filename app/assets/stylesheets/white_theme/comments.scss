@@ -200,9 +200,7 @@ h2#latest_comments + div.box {
 		@include samo-shadow-and-radius();
 		position: relative;
 		margin: 18px 10px 18px 50px;
-		padding: $baseline;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 16px 16px 10px 16px;
 		border-radius: 0 4px 4px 4px;
 		background-color: #FFF;
 		box-shadow: none;
@@ -221,12 +219,13 @@ h2#latest_comments + div.box {
 		.comment_user_text {
 			font-size: 11px;
 			font-weight: normal;
-			padding-top: 16px;
+			color: #969393;
 			a, a:visited {
 				font-weight: bold;
 				text-decoration: none;
 			}
 			a {
+				color: #4F4D4D;
 				&:hover {
 					text-decoration: underline;
 				}
