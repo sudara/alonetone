@@ -197,6 +197,7 @@ h2#latest_comments + div.box {
 		}
 	}
 	.comment_right {
+		@include samo-shadow-and-radius();
 		position: relative;
 		margin: 18px 10px 18px 50px;
 		padding: $baseline;
@@ -205,8 +206,6 @@ h2#latest_comments + div.box {
 		border-radius: 0 4px 4px 4px;
 		background-color: #FFF;
 		box-shadow: none;
-
-		@include samo-shadow-and-radius();
 
 		&::before {
 			position: absolute;
