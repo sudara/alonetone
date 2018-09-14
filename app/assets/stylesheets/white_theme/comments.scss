@@ -110,7 +110,8 @@ h2#latest_comments + div.box {
 				font-size: 11px;
 				float: left;
 				clear: both;
-				margin-top: 0;
+				position: relative;
+				top: 1px;
 				label {
 					text-transform: lowercase;
 					color: #4F4D4D;
