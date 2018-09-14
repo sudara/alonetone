@@ -206,16 +206,16 @@
 	}
 	.tracks_reveal {
 		position: relative;
-    z-index: 0;
-    display:none;
-    margin-top: -361px; // good default, js will tweak
+		z-index: 0;
+		display:none;
+		margin-top: -361px; // good default, js will tweak
 		overflow: auto;
 		box-sizing: border-box;
 		transition: margin 250ms cubic-bezier(.17, .04, .03, .94);
 		box-shadow: inset 0 1px 3px #F2F2F2;
 		@media #{$tablet} {
-			padding-right: $baseline / 2;
-			padding-left: $baseline / 2;
+			// padding-right: $baseline / 2;
+			// padding-left: $baseline / 2;
 		}
 		a.add_to_favorites, a.favorited {
 			position: absolute;
