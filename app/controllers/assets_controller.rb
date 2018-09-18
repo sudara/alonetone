@@ -287,12 +287,4 @@ class AssetsController < ApplicationController
   def dangerous_action?
     %w[destroy update edit create spam unspam].include? action_name
   end
-
-  def create_audio_feature
-    return if is_a_bot?
-    return if @asset.audio_feature
-
-    # perform_later will queue the job as soon as worker is available
-    CreateAudioFeatureJob.perform_later @asset.id
-  end
 end

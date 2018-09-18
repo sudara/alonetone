@@ -36,6 +36,7 @@ class PlaylistsController < ApplicationController
 
   def show
     @asset = find_asset_in_playlist
+    create_audio_feature if @asset
     respond_to do |format|
       format.html do
         @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
