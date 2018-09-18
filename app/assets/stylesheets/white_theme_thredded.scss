@@ -129,5 +129,17 @@ aside.thredded--currently-online {
     font-family: $serif-font;
     font-size: 1rem;
   }
+}
 
+.thredded--alert-info, .thredded--flash-message--notice {
+  background-color: transparent;
+}
+
+.thredded--form [type="color"]:focus, .thredded--form [type="date"]:focus, .thredded--form [type="datetime"]:focus, .thredded--form [type="datetime-local"]:focus, .thredded--form [type="email"]:focus, .thredded--form [type="month"]:focus, .thredded--form [type="number"]:focus, .thredded--form [type="password"]:focus, .thredded--form [type="search"]:focus, .thredded--form [type="tel"]:focus, .thredded--form [type="text"]:focus, .thredded--form [type="time"]:focus, .thredded--form [type="url"]:focus, .thredded--form [type="week"]:focus, .thredded--form input:focus:not([type]), .thredded--form textarea:focus, .thredded--form select[multiple="multiple"]:focus {
+  border: 1px solid #e1e1e1;
+  box-shadow: none;
+}
+
+.thredded--post--dropdown--actions--item, form.button_to>.thredded--post--dropdown--actions--item {
+  height: 51px;
 }
