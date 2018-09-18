@@ -2,13 +2,6 @@ module Listens
   extend ActiveSupport::Concern
   include PreventAbuse
 
-  # user agent whitelist
-  # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = %w[msie webkit quicktime gecko mozilla netscape itunes chrome opera safari cfnetwork facebookexternalhit ipad iphone apple facebook stagefright]
-
-  # user agent black list
-  @@bots = %w[bot spider baidu mp3bot]
-
   def create_listen
     register_listen(find_asset)
     render nothing: true
@@ -68,21 +61,6 @@ module Listens
   def ip_just_registered_this_listen?(asset)
     last_listen = asset.listens.since(1.week.ago).where(ip: request.remote_ip).first
     last_listen.present? && (last_listen.created_at > (Time.now - asset[:length]))
-  end
-
-  def is_a_bot?
-    # gotta have a user agent
-    return true unless request.user_agent.present?
-
-    # can't be a blacklisted ip
-    return true if is_from_a_bad_ip?
-
-    # check user agent agaisnt both white and black lists
-    !browser? || @@bots.any? { |bot_agent| user_agent.include? bot_agent }
-  end
-
-  def browser?
-    @@valid_listeners.any? { |valid_agent| user_agent.include? valid_agent }
   end
 
   def play_local_mp3

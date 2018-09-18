@@ -1,9 +1,14 @@
 require "rails_helper"
+include ActiveJob::TestHelper
 
 RSpec.describe AssetsController, type: :controller do
   render_views
-  fixtures :assets, :users
-  include ActiveJob::TestHelper
+  fixtures :assets, :users, :audio_features
+
+  before :each do
+    clear_enqueued_jobs
+    clear_performed_jobs
+  end
 
   context "edit" do
     it 'should allow user to upload new version of song' do
@@ -61,6 +66,39 @@ RSpec.describe AssetsController, type: :controller do
       allow(Rakismet).to receive(:akismet_call).and_return('true')
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }, xhr: true
       expect(assigns(:asset).private).to be_truthy
+    end
+  end
+
+  context "#show" do
+    before :each do
+      allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
+      login(:sudara)
+    end
+
+    it "should enqueue a CreateAudioFeature job if an asset does not have audio feature" do
+      asset = assets(:valid_mp3_2)
+
+      get :show, params: { id: asset.id, user_id: users(:sudara).login }
+
+      assert_enqueued_jobs(1)
+    end
+
+    it "should NOT enqueue anything if feature is present" do
+      asset = assets(:valid_mp3)
+
+      get :show, params: { id: asset.id, user_id: users(:sudara).login }
+
+      assert_enqueued_jobs(0)
+    end
+
+    it "should NOT enqueue anything if is_a_bot?" do
+      allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(true)
+
+      asset = assets(:valid_mp3)
+
+      get :show, params: { id: asset.id, user_id: users(:sudara).login }
+
+      assert_enqueued_jobs(0)
     end
   end
 end
