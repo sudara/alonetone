@@ -87,7 +87,7 @@
 					display: inline-block;
 					width: 24px;
 					height: 24px;
-					background-image: url('svg/icon_play_circled.svg');
+					background-image: image-url('svg/icon_play_circled.svg');
 				}
 			}
 			a.pause-button {
@@ -95,7 +95,7 @@
 					display: inline-block;
 					width: 24px;
 					height: 24px;
-					background-image: url('svg/icon_pause_circled.svg');
+					background-image: image-url('svg/icon_pause_circled.svg');
 				}
 			}
 			a.position-name-time {
