@@ -28,6 +28,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def create_audio_feature
+    return if is_a_bot?
+    return if @asset.audio_feature
+
+    # perform_later will queue the job as soon as worker is available
+    CreateAudioFeatureJob.perform_later @asset.id
+  end
+
   def show_404
     render 'pages/four_oh_four', status: 404
   end
