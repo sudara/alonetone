@@ -8,6 +8,8 @@ class AssetsController < ApplicationController
   # we check to see if the current_user is authorized based on the asset.user
   before_action :require_login, except: %i[index show latest radio listen_feed]
 
+  etag { current_user&.id }
+
   # home page
   def latest
     if stale?(Asset.last_updated)
