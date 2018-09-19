@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def create_audio_feature
+  def lazily_create_waveform_if_needed
     return if is_a_bot?
     return if @asset.audio_feature
 
