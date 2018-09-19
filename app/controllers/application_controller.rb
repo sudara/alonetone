@@ -51,7 +51,11 @@ class ApplicationController < ActionController::Base
   end
 
   def white_theme_enabled?
-    current_user&.white_theme_enabled? || session[:white]
+    if logged_in?
+      current_user&.white_theme_enabled?
+    else 
+      session[:white]
+    end
   end
 
   def not_found

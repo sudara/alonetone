@@ -5,7 +5,7 @@ class AdminController < ApplicationController
     if logged_in?
       current_user.toggle! :white_theme_enabled
     else
-      session[:white] = !session.try(:white)
+      session[:white] = !session[:white]
     end
     redirect_back(fallback_location: root_path)
   end
