@@ -8,8 +8,6 @@ class AssetsController < ApplicationController
   # we check to see if the current_user is authorized based on the asset.user
   before_action :require_login, except: %i[index show latest radio listen_feed]
 
-  after_action :create_audio_feature, only: %i[show]
-
   # home page
   def latest
     if stale?(Asset.last_updated)
@@ -64,6 +62,7 @@ class AssetsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
+        lazily_create_waveform_if_needed
         @assets = [@asset]
         set_related_show_variables
         render 'show_white' if white_theme_enabled?

@@ -36,9 +36,9 @@ class PlaylistsController < ApplicationController
 
   def show
     @asset = find_asset_in_playlist
-    create_audio_feature if @asset
     respond_to do |format|
       format.html do
+        lazily_create_waveform_if_needed if @asset
         @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
         if request.xhr?
           render '/shared/_asset_white', layout: false
