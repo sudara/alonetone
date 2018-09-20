@@ -92,4 +92,11 @@ export default class extends PlaybackController {
     const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
     this.seekBarLoadedTarget.style.left = `${offx}px`
   }
+
+  // turbolinks will cache this page, so here's our chance to reset things to normal
+  disconnect() {
+    if (this.element.classList.contains('open')) {
+      this.element.classList.remove('open')
+    }
+  }
 }
