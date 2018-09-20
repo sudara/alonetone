@@ -23,6 +23,13 @@ ul.playlists {
     background-color: $white;
 
     @include samo-shadow-and-radius();
+    > a:first-child {
+      height: 200px;
+      @media #{$mobile} {
+        height: auto;
+      }
+  
+    }
     a {
       display: block;
       img {
