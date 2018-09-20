@@ -2,11 +2,10 @@
 
 <div class="playlists-new">
 
-	<h1>Create a new album or mix</h1>
+	<h1>Create a playlist</h1>
 	<h2 class="spacey">Your playlist will become public as soon as it has some tracks in it</h2>
 
 	<%= error_messages_for :playlist %>
-
 
 	<div class="container static_content">
 	<%= form_for [@user, @playlist] do |f| %>
@@ -16,7 +15,4 @@
 	  </p>
 	<% end %>
 	</div>
-
-
-
 </div>
