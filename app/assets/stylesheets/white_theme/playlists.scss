@@ -237,8 +237,9 @@ body.has-details {
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 25px;
+    flex-wrap: wrap;
     .edit_playlist_left_column {
-      // width: 220px;
+      min-width: 220px;
       width: 20%;
       margin-right: 5%;
       p {
