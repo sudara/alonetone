@@ -2,19 +2,22 @@ import { TweenMax } from 'gsap'
 import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function PlayAnimation() {
+  const mainSVG = document.getElementById('playAnimationSVG')
+
   const select = function (s) {
-    return document.querySelector(s);
-  };
+    return mainSVG.querySelector(s)
+  }
 
   const selectAll = function (s) {
-    return document.querySelectorAll(s);
-  };
+    return mainSVG.querySelectorAll(s)
+  }
 
-  let mainTl;
-  let dottyRotationTl;
-  let spinballTl;
-  let pauseGroup = select('.pauseGroup');
-  let spinballGroup = select('.spinballGroup');
+  let mainTl
+  let dottyRotationTl
+  let spinballTl
+
+  let pauseGroup = select('.pauseGroup')
+  let spinballGroup = select('.spinballGroup')
 
   let outline = select('.outline');
   let dotty = selectAll('.dotty');
@@ -33,6 +36,10 @@ export default function PlayAnimation() {
     outlinePath = 'M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z';
 
 
+    TweenMax.set(mainSVG, {
+      visibility: 'visible'
+    })
+    
     TweenMax.set(dotty, {
       transformOrigin: '50% 50%',
       scale: 1.3,
