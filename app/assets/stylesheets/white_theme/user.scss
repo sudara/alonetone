@@ -23,20 +23,20 @@ main {
       margin-bottom: 0;
     }
     @media #{$tablet} {
-      display: grid;
-      // flex-direction: column;
+      display: flex;
+      flex-direction: column;
        > * {
         width: 100%;
       }
-      grid-template-columns: none;
-      grid-template-areas:
-        'header'
-        'left'
-        'right'
-        'playlists'
-        'card'
-        'plays'
-        'popular';
+      // grid-template-columns: none;
+      // grid-template-areas:
+      //   'header'
+      //   'left'
+      //   'right'
+      //   'playlists'
+      //   'card'
+      //   'plays'
+      //   'popular';
     }
 
     @media #{$mobile} {
@@ -123,6 +123,10 @@ main {
           h1.user_name {
             margin-bottom: 6px;
           }
+          @media #{$tablet} {
+            padding-left: 15Gpx;
+          }
+
         }
         a.follow {
           display: block;
