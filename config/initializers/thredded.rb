@@ -19,7 +19,7 @@ Thredded.user_name_column = :login
 # When linking to a user, Thredded will use this lambda to spit out
 # the path or url to your user. This lambda is evaluated in the view context.
 Thredded.user_path = lambda do |user|
-  "/{user.to_param}"
+  "#{user.to_param}"
 end
 
 # This method is used by Thredded controllers and views to fetch the currently signed-in user
