@@ -1,4 +1,4 @@
-import { TweenMax } from 'gsap'
+import { TweenLite, CSSPlugin, TimelineMax } from 'gsap'
 import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function PlayAnimation() {
@@ -36,21 +36,21 @@ export default function PlayAnimation() {
     outlinePath = 'M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z';
 
 
-    TweenMax.set(mainSVG, {
+    TweenLite.set(mainSVG, {
       visibility: 'visible'
     })
     
-    TweenMax.set(dotty, {
+    TweenLite.set(dotty, {
       transformOrigin: '50% 50%',
       scale: 1.3,
     })
 
-    TweenMax.set(spinballGroup, {
+    TweenLite.set(spinballGroup, {
       transformOrigin: '50% 50%',
       scale: 0,
     })
 
-    TweenMax.set(pauseGroup, {
+    TweenLite.set(pauseGroup, {
       transformOrigin: '50% 50%',
       scaleY: 0,
     })

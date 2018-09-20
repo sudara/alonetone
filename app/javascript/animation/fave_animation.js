@@ -1,4 +1,4 @@
-import { TweenMax } from 'gsap/TweenMax'
+import { TweenLite, CSSPlugin, TimelineMax } from 'gsap'
 import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function FaveAnimation(myDiv) {
@@ -24,7 +24,7 @@ export default function FaveAnimation(myDiv) {
 
     this.init = function() {
 
-        TweenMax.set([outline, heart], {
+        TweenLite.set([outline, heart], {
             transformOrigin: '50% 50%'
         })
 

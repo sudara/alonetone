@@ -1,4 +1,4 @@
-import { TweenMax } from 'gsap/TweenMax'
+import { TweenLite, CSSPlugin, TimelineMax } from 'gsap'
 import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function LargePlayAnimation() {
@@ -25,23 +25,23 @@ export default function LargePlayAnimation() {
 
 
   this.init = function() {
-    TweenMax.set(mainSVG, {
+    TweenLite.set(mainSVG, {
       visibility: 'visible'
     })
    
-   TweenMax.set([dotty, centerCircle], {
+   TweenLite.set([dotty, centerCircle], {
     transformOrigin:'50% 50%',
     //scale:1.2,
     strokeWidth:0
    })
-   TweenMax.set(icon, {
+   TweenLite.set(icon, {
     transformOrigin:'35% 50%'    
    })
-   TweenMax.set(outline, {
+   TweenLite.set(outline, {
     transformOrigin:'50% 50%'    
    })
 
-  TweenMax.set([pauseContainer, pauseGroup, pauseLoopGroup], {
+  TweenLite.set([pauseContainer, pauseGroup, pauseLoopGroup], {
     transformOrigin:'50% 50%',
     scaleY:0
    })   
