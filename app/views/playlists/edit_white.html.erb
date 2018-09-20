@@ -90,9 +90,9 @@
      <% if @playlist.tracks.size > 0 %>
      <div class="playlist_size">
      <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
-     <% end %>    
      </div>
-     <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
+     <% end %>    
+    <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
 
   </div>
   <div id="right">

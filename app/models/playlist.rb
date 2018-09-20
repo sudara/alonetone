@@ -23,10 +23,10 @@ class Playlist < ActiveRecord::Base
   has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
   accepts_nested_attributes_for :greenfield_downloads
 
-  validates_presence_of :description, :title, :user_id
-  validates_length_of   :title, within: 4..100
+  validates_presence_of :title, :user_id
+  validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
-  validates_length_of   :description, within: 1..2000, allow_blank: true
+  validates_length_of   :description, within: 0..2000, allow_blank: true
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
