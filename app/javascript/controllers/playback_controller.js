@@ -26,9 +26,9 @@ export default class extends Controller {
       src: Array(this.url),
       html5: true,
       preload: this.preload,
-      //onend: controller.playNextTrack.bind(controller),
+      // onend: controller.playNextTrack.bind(controller),
       onplay() {
-        requestAnimationFrame(controller.whilePlaying.bind(controller))
+        setTimeout(() => requestAnimationFrame(controller.whilePlaying.bind(controller)), 100)
       },
       onload() {
 
