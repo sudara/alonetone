@@ -2,33 +2,33 @@ import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
 let currentlyOpen
+let animation = new PlayAnimation()
 
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   preInitialize() {
-    this.animation = new PlayAnimation()
     this.preload = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
     this.titleTarget.querySelector('.track_link').style.width = `${this.element.clientWidth - 90}px`
   }
 
   whilePlayingCallback() {
-    this.animation.setPause()
+    animation.showPause()
     this.updateSeekBarPlayed()
     this.timeTarget.innerHTML = this.time
   }
 
   playCallback() {
     if (!this.loaded) this.animateLoading()
-    else this.animation.setPause()
+    else animation.setPause()
     this.openDetails()
     this.updateSeekBarLoaded()
   }
   
   pauseCallback() {
-    this.animation.setPlay()
+    animation.setPlay()
     document.getElementById('play-svg-container').append(document.getElementById('playAnimationSVG'))
     this.playButtonTarget.style.display = 'block'
   }
@@ -63,9 +63,9 @@ export default class extends PlaybackController {
   animateLoading() {
     this.playButtonTarget.style.display = 'none'
     this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
-    this.animation.init()
-    this.animation.setPlay()
-    this.animation.showLoading()
+    animation.init()
+    animation.setPlay()
+    animation.showLoading()
   }
 
   // With SoundManager we used to animate this width to display
