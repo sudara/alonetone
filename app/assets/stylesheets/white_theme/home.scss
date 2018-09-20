@@ -70,17 +70,13 @@
   .box h2 {
 	padding-left: 50px;
   }
-  grid-template-areas:
-     'playlists playlists'
-     'left right';
-
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: auto;
 	grid-column-gap: $baseline * 1.5;
 	grid-row-gap: $baseline * 1.5;
 	justify-content: space-around;
 	grid-template-areas: 'playlists playlists'
-	'left right';
+					    'left right';
 
 	@media #{$tablet} {
 		display: flex;
@@ -126,21 +122,6 @@
 		}
 	}
 
-	#home_latest_area {
-		grid-area: latest;
-	}
-	#home_popular_area {
-		grid-area: popular;
-	}
-	#home_follows_area {
-		grid-area: follows;
-	}
-	#home_comments_area {
-		grid-area: comments;
-	}
-	#home_favorites_area {
-		grid-area: favorites;
-	}
 	 > * {
 		min-width: 320px;
 	}
