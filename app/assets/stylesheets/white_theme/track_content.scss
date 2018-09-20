@@ -102,17 +102,17 @@
         font-weight: bold;
         box-sizing: border-box;
         width: 100%;
-        max-width: 500px;
         padding: 10px;
       }
     }
     textarea {
+      font-size: 18px;
+      line-height: 27px;
       font-family: $serif-font;
       font-size: 18px;
       position: relative;
       box-sizing: border-box;
       width: 100%;
-      max-width: 500px;
       height: 300px;
       margin-top: $baseline;
       margin-bottom: $baseline;
@@ -120,8 +120,7 @@
       word-wrap: break-word;
       color: $not-quite-black;
       border: 1px solid $lightest-gray;
-
-      @include samo-shadow-and-radius();
+      background-color: transparent;
       @media #{$tablet} {
         font-size: 16px;
       }
