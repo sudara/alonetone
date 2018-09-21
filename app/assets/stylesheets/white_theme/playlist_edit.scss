@@ -5,9 +5,23 @@
 }
 
 .edit_playlist_left_column {
-	.cover img {
-		width: 250px;
-	}
+	.cover {
+		display: block;
+		border: 1px dashed #D7DBDB;
+		padding: 4px;
+		margin-top: 10px;
+		img {
+			border-radius: 6px;
+			width: 250px;
+			display: block;
+		}
+		div.no_pic {
+			svg {
+				border-radius: 6px;
+				display: block;
+			}
+		}
+	}	
 }
 .playlist_asset {
 	.add, .remove {
