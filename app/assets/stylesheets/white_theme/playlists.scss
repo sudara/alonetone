@@ -308,6 +308,10 @@ body.has-details {
         label {
           text-transform: none;
         }
+
+        [type='checkbox']:not(:checked), [type='checkbox']:checked {
+          position: static;
+        }
       }
     }
   }
