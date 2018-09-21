@@ -41,12 +41,29 @@
       <h3><%= link_to @asset.user.display_name, user_home_path(@asset.user) %></h3>
     <% end %>
     <%= markdown(@asset.description) %>
-    <p class="track-stats">
-      Uploaded <strong><%= local_time_ago(@asset.created_at) %></strong>. Listened to <strong><%= @asset.listens_count %></strong> times.
-    </p>
-    <p>
+    
+    
+
+    <div class="track-stats">
+
+      <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
+
+      <div class="plays"><%= @asset.listens_count %>
+        <i class="icon_plays">
+          <%= render file: svg_path('svg/icon_play_inverted.svg') %>
+        </i>
+      </div>
+        
+      <div class="favorite_total"><%= @asset.favorites_count %>
+        <i class="icon_favs">
+          <%= render file: svg_path('svg/icon_favorite_circled.svg') %>
+        </i>
+      </div>          
+    </div>
+
+    <div>
       <%= markdown(@asset.credits) if @asset.credits.present? %>
-    </p>
+    </div>
   </div>
 
   <%= render partial: 'assets/comment_white', locals: { asset: @asset }%>
