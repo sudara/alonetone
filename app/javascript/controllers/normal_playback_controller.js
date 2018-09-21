@@ -46,12 +46,17 @@ export default class extends PlaybackController {
       const wasOpen = this.element.classList.contains('open')
       // if another track details is open, close it
       if (currentlyOpen) {
-        currentlyOpen.element.classList.remove('open')
+        currentlyOpen.closeDetails()
       }
       if (!wasOpen && !this.data.get('openable')) {
         this.openDetails()
       }
     }
+  }
+
+  closeDetails() {
+    this.element.classList.remove('open')
+    this.seekBarContainerTarget.style.display = 'none'
   }
 
   openDetails() {
