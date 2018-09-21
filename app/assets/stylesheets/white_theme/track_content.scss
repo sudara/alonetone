@@ -5,7 +5,7 @@
     @include samo-shadow-and-radius();
   }
   .edit-links-and-favorite {
-    height: 40px;
+    height: 38px;
     overflow: auto;
     background-color: transparent;
     box-shadow: none;
@@ -29,6 +29,8 @@
       width: 30px;
       margin-right:10px;
       float: right;
+      position: relative;
+      top: -2px
     }
   }
 
