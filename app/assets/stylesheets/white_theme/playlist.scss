@@ -5,6 +5,9 @@
 	@include samo-shadow-and-radius();
 	.small-cover {
 		display: block;
+		width: 100%;
+		height: 0;
+		padding-bottom: 100%;
 		img {
 			display: block;
 			width: 100%;
