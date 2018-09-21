@@ -32,9 +32,9 @@
 		outline: none;
 	}
 	&.draggable-mirror {
-		border: 1px solid $samo-gray;
+		border: 1px solid #EEE;
 		border-radius: 0;
-		box-shadow: 0 11px 11px 4px #6566667A;
+		box-shadow: 0 0px 5px 1px #CCCCCC7A;
 		z-index: 9999999;
 		
 	}
