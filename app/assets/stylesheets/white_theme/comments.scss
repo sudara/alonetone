@@ -157,16 +157,30 @@ h2#latest_comments + div.box {
 				}
 				.comment_waiting {
 					font-size: 12px;
-					font-weight: bold;
+					font-weight: normal;
 					color: #da6d25;
 					position: relative;
 					top: 7px;
-					color: $orange;
+					margin-right: 35px;
 					div.ajax_success {
-						color: $green;
+						padding-right: 2px;
+						color: #67C906;
+						&::after {
+							position: absolute;
+							top: 0px;
+							right: -15px;
+							content: image-url('svg/icon_checkmark_green.svg');
+						}
 					}
 					div.ajax_fail {
-						color: $red;
+						padding-right: 2px;
+						color: #FF1F75;
+						&::after {
+							position: absolute;
+							top: 0px;
+							right: -15px;
+							content: image-url('svg/icon_x_red.svg');
+						}
 					}
 				}
 			}
