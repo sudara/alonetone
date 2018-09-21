@@ -4,7 +4,12 @@
   <% end %>
 <% end %>
 
-<div id="playlist-and-track-content">
+<% if @asset %>
+  <div id="playlist-and-track-content">
+<% else %>
+  <div id="playlist-and-track-content" class="playlist-and-track-content-cover-view">
+<% end %>
+
 <%= render 'playlist_white' %>
 
 <% if @asset %>
