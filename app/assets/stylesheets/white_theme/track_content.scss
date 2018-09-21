@@ -53,9 +53,10 @@
       color: $samo-gray;
     }
     p {
-      font-family: $serif-font;
-      font-size: 18px;
-      line-height: $baseline;
+      font-family: $sans-font;
+      font-size: 16px;
+      line-height: 23px;
+      // line-height: $baseline;
       margin-bottom: $baseline;
       img {
         max-width: 550 + ($baseline * 6);
