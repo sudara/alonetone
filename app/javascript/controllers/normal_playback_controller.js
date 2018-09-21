@@ -16,7 +16,10 @@ export default class extends PlaybackController {
   }
 
   whilePlayingCallback() {
-    animation.showPause()
+    if (!this.loaded) {
+      animation.showPause()
+      this.loaded = true
+    }
     this.updateSeekBarPlayed()
     this.timeTarget.innerHTML = this.time
   }

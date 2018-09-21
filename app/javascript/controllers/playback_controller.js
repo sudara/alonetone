@@ -1,6 +1,11 @@
 import { Controller } from 'stimulus'
 import { Howl } from 'howler'
 
+// Hack for Safari 12 https://github.com/goldfire/howler.js/pull/1047
+const safari = /safari/.test(Howler._navigator && Howler._navigator.userAgent.toLowerCase())
+//if (safari) Howler._canPlayEvent = 'loadedmetadata' 
+
+
 let player
 
 export default class extends Controller {
@@ -28,14 +33,20 @@ export default class extends Controller {
       preload: this.preload,
       // onend: controller.playNextTrack.bind(controller),
       onplay() {
-        setTimeout(() => requestAnimationFrame(controller.whilePlaying.bind(controller)), 100)
+        requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
-      onload() {
-
+      onseek() {
+        requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
+      onplayerror(id, e) {
+        console.log(e)
+        controller.pause()
+      }
     })
   }
 
+  // Called once by the howler onplay/onseek callbacks
+  // and recurses to give us a way to update throughout playback
   whilePlaying() {
     this.position = this.sound.seek()
     if (this.sound.playing()) {
@@ -48,19 +59,21 @@ export default class extends Controller {
         this.playNextTrack()
       } else {
         // we don't want to update this 60 times a second, at most 10
-        requestAnimationFrame(this.whilePlaying.bind(this))
+        setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)
       }
     }
     this.calculateTime()
   }
 
+  // called immedately by js
   play() {
     this.sound.play()
+    console.log('sound.play!')
+    this.isPlaying = true
     if (player) {
       player.pause()
     }
     player = this
-    this.isPlaying = true
     this.element.classList.add('playing')
     this.playCallback()
   }
