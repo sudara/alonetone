@@ -28,14 +28,13 @@
 		padding-bottom: 1px;
 		border-radius: 0 0 6px 6px;
 	}
+	&:focus {
+		outline: none;
+	}
 	&.draggable-mirror {
 		border: 1px solid $samo-gray;
 		border-radius: 0;
 		box-shadow: 0 11px 11px 4px #6566667A;
-		outline: 0;
-		&:focus {
-			outline: none;
-		}
 		z-index: 9999999;
 		
 	}
