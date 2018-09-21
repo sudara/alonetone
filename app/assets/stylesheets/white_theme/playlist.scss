@@ -175,7 +175,7 @@
 .edit_playlist_container {
 	margin-top: 15px;
 	@include match-dynamic-site-width();
-	text-align: right;
+	text-align: left;
 	max-width: 1150px;
 	.edit_playlist {
 		@include default-button();
