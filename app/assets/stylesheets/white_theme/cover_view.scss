@@ -1,13 +1,19 @@
 // .playlist-options is for the cover view, which isn't technically the post
 // ok!
 // yep
+// who wrote these comments?
+
+
+.playlist-and-track-content-cover-view {
+ .playlist-sidebar {
+    border-radius: 6px 0 0 6px;
+ }
+}
 
 .track-content {
   &.track-content-cover-view {
      margin-left: -$baseline!important;
-     -webkit-box-shadow: 0 3px 4px -2px #65666627;
-     box-shadow: 0 3px 4px -2px #65666627;
-     background-color: #FFF;
+    box-shadow: 0px 5px 6px -2px #65666644;
   }
   min-width: 400px;
   @media #{$tablet} {
@@ -39,6 +45,8 @@
     color: $black;
     background-color: #F9F9F9;
     text-align: right;
+    border-radius: 0 0 6px 0;
+    box-shadow: none;
     p {
       text-align: left;
     }
