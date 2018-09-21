@@ -22,7 +22,8 @@
   .large-cover {
     width: 100%;
     max-width: 800px;
-    height: auto;
+    height: 0;
+    padding-bottom: 100%;
     svg {
       display: block;
       border-radius: 0 4px 4px 0;
