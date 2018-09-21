@@ -45,7 +45,11 @@ h2#latest_comments + div.box {
 	padding-right: 15px;
 	padding-left: 15px;
 	background-color: #EFEFEF;
-  box-shadow: none;
+	box-shadow: none;
+	border-radius: 0 0 6px 6px;
+	position: relative;
+	z-index: 2;
+	top: -6px;
 	.comment_form {
 		textarea {
 			background-color: #FFF;
