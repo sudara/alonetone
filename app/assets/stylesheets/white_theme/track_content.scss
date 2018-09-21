@@ -38,7 +38,7 @@
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     @media #{$tablet} {
       padding: $baseline / 2;
     }
@@ -64,12 +64,49 @@
       }
     }
 
-
-
-    p.track-stats {
+    div.track-stats {
       font-family: $sans-font;
       font-size: 12px;
       margin-bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      margin-top: -4px;
+      .created {
+        font-size: 14px;
+        display: block;
+        color: #A6ABAB;
+        flex-grow: 1;
+        time {
+          font-weight: bold;
+        }
+      }
+      .plays {
+        font-size: 12px;
+        font-weight: bold;
+        padding-right: 8px;
+        padding-left: 8px;
+        text-align: center;
+        color: #A6ABAB;
+        display: flex;
+        justify-content: start;
+      }
+      .favorite_total {
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 8px;
+        text-align: center;
+        color: #A6ABAB;
+        display: flex;
+        justify-content: start;
+      }
+      i  {
+        margin-left: 8px;
+        svg {
+          width: 17px;
+          position: relative;
+          top: -4px;              
+        }
+      }
     }
     hr {
       font-family: 'FontAwesome';
