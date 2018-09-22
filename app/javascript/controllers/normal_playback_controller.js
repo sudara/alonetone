@@ -103,11 +103,11 @@ export default class extends PlaybackController {
 
   // turbolinks will cache this page, so here's our chance to reset things to normal
   disconnect() {
-    if (this.element.classList.contains('open')) {
-      this.element.classList.remove('open')
-    }
     if (this.sound.playing()) {
       this.sound.pause()
+    }
+    if (this.element.classList.contains('open')) {
+      this.element.classList.remove('open')
     }
   }
 }
