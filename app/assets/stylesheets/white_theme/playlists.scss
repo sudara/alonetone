@@ -75,13 +75,15 @@ ul.playlists {
 
 body.has-details {
   .playlists-new {
+    @include match-dynamic-site-width('narrow');
+    @include samo-shadow-and-radius();
     box-sizing: border-box;
     margin-right: auto;
     margin-left: auto;
     padding: $baseline / 2 $baseline;
+    padding-left: 0;
+    padding-right: 0;
     background-color: #fff;
-    @include match-dynamic-site-width('narrow');
-    @include samo-shadow-and-radius();
     @media #{$mobile} {
       width: 90%;
     }
@@ -95,6 +97,12 @@ body.has-details {
       margin-top: 0;
       margin-bottom: 1px;
       padding: 0 0 0 0;
+      border-radius: 0;
+      line-height: 20px;
+      height: auto;
+      padding-bottom: 12px;
+      padding-left: $baseline / 2;
+
       color: $samo-orange;
       border-bottom: 1px solid $light-gray;
       background-color: transparent;
@@ -107,6 +115,8 @@ body.has-details {
       width: 100%;
       margin-right: auto;
       margin-left: auto;
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
     }
     .errorExplanation {
       margin: 0;
@@ -118,7 +128,10 @@ body.has-details {
     .container.static_content {
       width: 100%;
       padding: 0;
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
       background-color: $white;
+      box-sizing: border-box;
       box-shadow: none;
       strong {
         font-weight: normal;
