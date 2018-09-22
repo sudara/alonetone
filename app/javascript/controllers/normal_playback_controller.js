@@ -106,5 +106,8 @@ export default class extends PlaybackController {
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')
     }
+    if (this.sound.playing()) {
+      this.sound.pause()
+    }
   }
 }
