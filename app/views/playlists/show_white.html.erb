@@ -26,9 +26,12 @@
     </div>
     <% end %>
 
+    <% if @playlist.credits.present? %>
     <div class="playlist-credits">
       <%= markdown(@playlist.credits) %>
     </div>
+    <% end %>
+
   </div>
 
 <% end %>
