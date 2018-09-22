@@ -13,8 +13,35 @@
       <p>We recommend that you upload 192kbps mp3s.</p>
       <p>128kbps (what soundcloud &amp; bandcamp stream at) is usually pretty artifacty.
         256kbps can take significantly longer for browsers to download and stream.</p>
+	  </div>
 
-	</div>
+    <% if current_user.greenfield_enabled? %>
+      <h2 class="box">Upload by URL</h2>
+      <div class="static_content">
+        <div id="uploader">
+          <%= form_for :asset, url: user_tracks_path(current_user) do |f| %>
+            <dl class="group" class="fileform">
+              <dt id="filelbls">
+              </dt>
+              <dd class="asset-data">
+                <ul class="filefields">
+                  <li>
+                    <%= text_field_tag  'asset_data[]', '', placeholder: 'dropbox url, etc', size: 50 %>
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+          <div class="submit_wrapper">
+            <%= submit_tag 'Upload, and publish!', id: 'upload' %>
+            <%= submit_tag "Upload, but don't publish" %>
+          </div>
+          <% end %>
+          <div class="uploading" style='display:none'>
+            <%= image_tag 'icons/uploading.gif'%>
+          </div>
+      </div>
+    <% end %>
 </div>
 <% end %>
 
