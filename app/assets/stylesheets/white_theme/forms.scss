@@ -165,7 +165,7 @@ input {
 	
 	&.string, &.password {
 		width: 250px;
-		border: 0;
+		border: 1px solid #FFF;
 		border-radius: 4px;
 		background-color: #F5F5F5;
 		&:focus {
