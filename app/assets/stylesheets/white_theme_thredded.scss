@@ -47,6 +47,12 @@ aside.thredded--currently-online {
           li {
             font-size: 18px;
             font-weight: bold;
+            a {
+              color: $samo-orange;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
           }
         }
       }
@@ -67,14 +73,17 @@ aside.thredded--currently-online {
   	}
     header.thredded--topic-header {
       padding-bottom: $baseline;
+      margin-bottom: 1rem;
       border-bottom: 1px solid $thredded-base-border-color;
       h1.thredded--topic-header--title {
-        color: $thredded-brand;
+        font-size: 27px;
+        font-weight: bold;
+        color: #000;
       }
     }
     article.thredded--post {
       padding-bottom: 27px;
-      margin-bottom: 27px;
+      margin-bottom: 16px;
       border-bottom: 1px solid $thredded-base-border-color;
       .thredded--post--user {
         font-size: 1rem;
@@ -103,8 +112,16 @@ aside.thredded--currently-online {
     }
   }
   .thredded--post--content {
+    line-height: 1.5rem;
+    font-size: 1rem;
     h1, h2, h3 {
       margin-bottom: 0;
+    }
+    h2 {
+      color: $not-quite-black;
+      margin-top: 2rem;
+      margin-bottom: .25rem;
+      line-height: 1.5rem;
     }
   }
   [type="checkbox"]:not(:checked), [type="checkbox"] {
@@ -133,6 +150,9 @@ aside.thredded--currently-online {
 
 .thredded--alert-info, .thredded--flash-message--notice {
   background-color: transparent;
+}
+.thredded--flash-message {
+  display: none;
 }
 
 .thredded--form [type="color"]:focus, .thredded--form [type="date"]:focus, .thredded--form [type="datetime"]:focus, .thredded--form [type="datetime-local"]:focus, .thredded--form [type="email"]:focus, .thredded--form [type="month"]:focus, .thredded--form [type="number"]:focus, .thredded--form [type="password"]:focus, .thredded--form [type="search"]:focus, .thredded--form [type="tel"]:focus, .thredded--form [type="text"]:focus, .thredded--form [type="time"]:focus, .thredded--form [type="url"]:focus, .thredded--form [type="week"]:focus, .thredded--form input:focus:not([type]), .thredded--form textarea:focus, .thredded--form select[multiple="multiple"]:focus {
