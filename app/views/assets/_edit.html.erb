@@ -1,10 +1,4 @@
 <div class="track_options">
-  <% if @asset.user.greenfield_enabled? %>
-    <%= link_to greenfield.edit_user_post_url(@asset.user, @asset.permalink, host: Alonetone.greenfield_url), class: 'view_all', title: 'edit this track' do %>
-      greenfield <div class="sprites-pencil sprites-before-heading"></div>
-    <% end %>
-  <% end %>
-
   <%= link_to "delete", user_track_path(@user.login, @asset), method: :delete, 
         confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.',
         class: 'delete_green'%>
@@ -13,19 +7,13 @@
 <div class="edit_track box" style="position:relative;">
   <h2 class="box">Editing "<%= @asset.name %>"</h2>
 
-  <%= form_for(:asset, url: user_track_path(@user, @asset), html: { method: :put, multipart: true }) do |f| %>
+  <%= form_for(:asset, url: user_track_path(@user, @asset), html: { method: :put, multipart: true }, remote: true) do |f| %>
 
     <div class="static_content" style="position:relative;">
-
-          The title of this track/song/piece
-          <p> <%= f.text_field :title, value: @asset.name %> </p>
-          Tell everyone a story or describe this music for us
-           <p> <%= f.text_area :description, rows: 5, cols: 50 %> </p>
-        <!--  <p><%= f.text_area :lyrics, rows: 20, cols: 50%></p> -->
-    </div>
-     <div class="static_content">
-      Have a youtube video of this song?<br/>
-      <small>http://www.youtube.com/watch?v=</small><%= f.text_field :youtube_embed, size: 15 %>
+      The title of this track/song/piece
+      <p> <%= f.text_field :title, value: @asset.name %> </p>
+      Tell everyone a story or describe this music for us
+        <p> <%= f.text_area :description, rows: 5, cols: 50 %> </p>
     </div>
     <% if @allow_reupload %>
     <div class="static_content">
