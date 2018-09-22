@@ -213,7 +213,9 @@ class AssetsController < ApplicationController
   protected
 
   def welcome_to_white_theme
-    return unless logged_in?
+    return if !logged_in? or (session[:white_theme_notified] && session[:white_theme_notified] > 2)
+    session[:white_theme_notified] ||= 1
+    session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
     flash.now[:ok] = "Hey, #{current_user.name }, we've been working hard on an updated, mobile friendly theme.<br/>" +
       "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>Learn More</a> " +
       "on the new forums or switch back by clicking " +
