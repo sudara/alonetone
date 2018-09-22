@@ -146,6 +146,7 @@ label {
 }
 
 textarea {
+	box-sizing: border-box;
 	font-family: $sans-font;
 	padding: 8px;
 	border: 0;
@@ -157,6 +158,7 @@ textarea {
 	}
 }
 input {
+	box-sizing: border-box;
 	font-size: 1em;
 	margin: 0;
 	padding: 8px;
