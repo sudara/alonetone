@@ -130,6 +130,20 @@
 
 /* ABOUT PAGES */
 
+.about-page {
+  .faq.box {
+    padding-left: 0;
+    padding-right: 0;
+    h2.box {
+      padding-left: $baseline / 2;
+    }
+    .static_content {
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+    }
+  }
+}
+
 .faq.box {
   margin-left: auto;
   margin-right: auto;
