@@ -160,6 +160,7 @@ input {
 	font-size: 1em;
 	margin: 0;
 	padding: 8px;
+	
 	&.string, &.password {
 		width: 250px;
 		border: 0;
@@ -241,7 +242,7 @@ label.collection_radio_buttons {
 
 /* USERS/USER/EDIT FORM */
 
-#bio_edit_user_1, .settings-box {
+#bio_edit_user_1, .settings-box, form.new_playlist {
 	br {
 		display: none;
 	}
@@ -250,7 +251,7 @@ label.collection_radio_buttons {
 	}
 	input, textarea, select {
 		margin-bottom: $baseline;
-		border: 0;
+		border: 1px solid #FFF;
 		border-radius: 4px;
 		background-color: #F5F5F5;
 		&:focus {
@@ -329,8 +330,5 @@ form.new_playlist {
 	textarea {
 		box-sizing: border-box;
 		width: 100%;
-		border: 1px solid rgb(238, 238, 238);
-		border-radius: 0;
-		background-color: transparent;
 	}
 }
