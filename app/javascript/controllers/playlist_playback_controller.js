@@ -49,18 +49,19 @@ export default class extends PlaybackController {
   }
 
   highlightPlayingTrack() {
-    // handle the "active" classes 
+    // handle the "active" classes
     if (document.querySelector('.tracklist li.active')) {
       document.querySelector('.tracklist li.active').classList.remove('active')
     }
     this.element.classList.add('active')
   }
 
-  // fires on ajax:success 
+  // fires on ajax:success
   loadTrack(e) {
     this.highlightPlayingTrack()
     // show the cover
     document.querySelector('a.small-cover').style.display = 'block'
+
     // replace track content with result from ajax
     let temp = document.createElement('div')
     temp.innerHTML = e.detail[2].responseText
@@ -79,7 +80,7 @@ export default class extends PlaybackController {
     if (!this.loaded) {
       this.bigPlay.animation.showPause()
       this.loaded = true
-    } 
+    }
     this.bigPlay.percentPlayed = this.percentPlayed()
     this.bigPlay.waveform.update()
     this.bigPlay.timeTarget.innerHTML = this.time

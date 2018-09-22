@@ -3,7 +3,6 @@ import morphSVGPlugin from './MorphSVGPlugin'
 
 export default function PlayAnimation() {
   const mainSVG = document.getElementById('playAnimationSVG')
-
   const select = function (s) {
     return mainSVG.querySelector(s)
   }

@@ -2,7 +2,7 @@ import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
 let currentlyOpen
-let animation = new PlayAnimation()
+let animation
 
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
