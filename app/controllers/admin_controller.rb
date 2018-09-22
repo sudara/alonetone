@@ -3,7 +3,7 @@ class AdminController < ApplicationController
 
   def toggle_theme
     if logged_in?
-      current_user.toggle! :white_theme_enabled
+      current_user.toggle! :use_old_theme
     else
       session[:white] = !session[:white]
     end
