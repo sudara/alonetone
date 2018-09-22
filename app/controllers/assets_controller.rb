@@ -19,6 +19,7 @@ class AssetsController < ApplicationController
           @tab = 'home'
           @assets = Asset.published.latest.includes(user: :pic).limit(5)
           set_related_lastest_variables
+          welcome_to_white_theme
           render 'latest_white' if white_theme_enabled?
         end
         wants.rss do
@@ -210,6 +211,14 @@ class AssetsController < ApplicationController
   end
 
   protected
+
+  def welcome_to_white_theme
+    return unless logged_in?
+    flash.now[:ok] = "Hey, #{current_user.name }, we've been working hard on an updated, mobile friendly theme.<br/>" +
+      "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>Learn More</a> " +
+      "on the new forums or switch back by clicking " +
+      "<a href ='/toggle_theme'>Toggle Theme</a> in the footer.".html_safe
+  end
 
   def asset_params
     params.require(:asset).permit(:user, :mp3, :size, :name, :user_id,
