@@ -75,19 +75,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.index ["is_spam"], name: "index_comments_on_is_spam"
   end
 
-  create_table "facebook_accounts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "fb_user_id"
-    t.index ["fb_user_id"], name: "index_facebook_accounts_on_fb_user_id"
-  end
-
-  create_table "facebook_addables", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "profile_chunk_type"
-    t.integer "profile_chunk_id"
-    t.integer "facebook_account_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "featured_tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "position", default: 1
     t.integer "feature_id"
@@ -201,17 +188,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "logged_exceptions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "exception_class"
-    t.string "controller_name"
-    t.string "action_name"
-    t.text "message"
-    t.text "backtrace"
-    t.text "environment"
-    t.text "request"
-    t.datetime "created_at"
-  end
-
   create_table "memberships", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -270,20 +246,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.float "spaminess"
     t.string "signature"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
-  end
-
-  create_table "reportable_cache", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "model_class_name", limit: 100, null: false
-    t.string "report_name", limit: 100, null: false
-    t.string "grouping", limit: 10, null: false
-    t.string "aggregation", limit: 10, null: false
-    t.string "conditions", limit: 100, null: false
-    t.float "value", default: 0.0, null: false
-    t.datetime "reporting_period", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true
-    t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation"
   end
 
   create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
