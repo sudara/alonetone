@@ -45,15 +45,12 @@
     
 
     <div class="track-stats">
-
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
-
       <div class="plays"><%= @asset.listens_count %>
         <i class="icon_plays">
           <%= render file: svg_path('svg/icon_play_inverted.svg') %>
         </i>
       </div>
-        
       <div class="favorite_total"><%= @asset.favorites_count %>
         <i class="icon_favs">
           <%= render file: svg_path('svg/icon_favorite_circled.svg') %>
@@ -68,4 +65,22 @@
 
   <%= render partial: 'assets/comment_white', locals: { asset: @asset }%>
 
+  <% if @listeners.present? %>
+  <div class="track-social">
+  <h3>Recent Listeners</h3>
+    <div class='recent-listeners'>
+    <%= render partial: 'shared/users_to_edge', locals: {users: @listeners } %>
+    </div>
+  </div>
+  <% end %>
+
+  <% if @favoriters.present? %>
+  <div class="track-social">
+  <h3>Favorited By</h3>
+    <div class='favoriters'>
+    <%= render partial: 'shared/users_to_edge', locals: {users: @favoriters } %>
+    </div>
+  </div>
+  <% end %>
+  
 </div>
