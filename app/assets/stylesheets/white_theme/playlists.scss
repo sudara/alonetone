@@ -8,12 +8,12 @@ ul.playlists {
     justify-content: flex-start;
     li.playlist {
       margin-right: $baseline;
-      &:last-child {
-        margin-right: 0;
-      }
     }
   }
   li.playlist {
+    &:last-child {
+      margin-right: 0;
+    }
     font-size: 11px;
     width: 200px;
     margin-right: $baseline * 1.5;
