@@ -58,8 +58,8 @@
 <% end %>
   
 <% content_for :right do %>
-  <%= render partial: 'favoriters' if @favoriters.present?%>
-  <%= render partial: 'users'%>
+  <%= render partial: 'assets/favoriters' if @favoriters.present?%>
+  <%= render partial: 'assets/recent_listeners'%>
   <div class="clear"> </div>
   <%= render partial: 'shared/comments' if @comments.present? %>
 <% end %>
