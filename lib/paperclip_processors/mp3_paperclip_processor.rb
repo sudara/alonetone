@@ -18,18 +18,23 @@ module Paperclip
       %w[samplerate bitrate length artist album].each do |simple_attribute|
         # copy the data out of the mp3
         @attachment.instance.send("#{simple_attribute}=", mp3.send(simple_attribute)) if @attachment.instance.respond_to?("#{simple_attribute}=") && mp3.respond_to?(simple_attribute)
-        @attachment.instance.title = set_title(mp3)
-        @attachment.instance.generate_permalink!
       end
+      @attachment.instance.title = get_title(mp3)
+      @attachment.instance.id3_track_num = get_track_num
+      @attachment.instance.generate_permalink!
     end
 
     # title is a bit more complicated depending on tag type
-    def set_title(mp3)
+    def get_title(mp3)
       if mp3.tag.title.present?
         mp3.tag.title.strip
       elsif mp3.tag2.TT2.present?
         mp3.tag2.TT2.strip
       end
+    end
+
+    def get_track_num
+      mp3.tag.track_num
     end
   end
 end
