@@ -30,8 +30,7 @@ class Playlist < ActiveRecord::Base
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
-  before_update :set_mix_or_album
-  before_update :ensure_private_if_less_than_two_tracks
+  before_update :set_mix_or_album, :ensure_private_if_less_than_two_tracks, :set_published_at, :notify_followers_if_publishing_album
 
   def to_param
     permalink.to_s
@@ -65,6 +64,34 @@ class Playlist < ActiveRecord::Base
 
   def has_any_links?
     link1.present? || link2.present? || greenfield_downloads.present?
+  end
+
+  def is_album_with_only_private_tracks?
+    # we only care about completely unpublished albums
+    !is_mix? && assets.pluck(:private).uniq == [true]
+  end
+
+  def quietly_publish_assets!
+    # bypasses the after_create on assets that sends out email
+    assets.update_all(private: false)
+  end
+
+  def publishing?
+    private_changed? && private_was(true)
+  end
+
+  def set_published_at
+    published_at = Time.now if publishing?
+  end
+
+  def notify_followers
+    user.followers.select(&:wants_email?).each do |user|
+      AlbumNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
+    end
+  end
+
+  def notify_followers_if_publishing_album
+    quietly_publish_assets! && notify_followers if publishing? && is_album_with_only_private_tracks?
   end
 
   def empty?
@@ -119,6 +146,7 @@ end
 #  permalink    :string(255)
 #  position     :integer          default(1)
 #  private      :boolean
+#  published_at :datetime
 #  theme        :string(255)
 #  title        :string(255)
 #  tracks_count :integer          default(0)
