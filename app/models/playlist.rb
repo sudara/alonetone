@@ -77,7 +77,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def publishing?
-    private_changed? && private_was(true)
+    private_changed? && (private == false)
   end
 
   def set_published_at
