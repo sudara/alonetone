@@ -185,8 +185,8 @@ body main #columns  {
 
 #fineprint.box {
   .static_content {
-    padding-top: $baseline / 4;
-    padding-bottom: $baseline / 4;
+    padding-top: $baseline / 2;
+    padding-bottom: $baseline / 2;
   }
 }
 
@@ -389,6 +389,15 @@ div.logo {
    }
  }
 
+
+
+//  UPLOADING
+
+dl.group {
+  dd {
+    margin-left: 0;
+  }
+}
 
 
 /* LISTENERS */
