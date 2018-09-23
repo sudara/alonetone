@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
 
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
-    @user = User.where(login: login).first || (current_user if action_name == 'new')
+    @user = User.where(login: login).first || (current_user if ['new', 'favorites'].include? action_name)
     not_found unless @user
   end
 

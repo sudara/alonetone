@@ -19,7 +19,6 @@
   </div>
 
   <div id="user_left_column">
-
     <div id="user_latest_area">
       <% if @assets.size > 0 %>
       <div id="user_latest" class="box">
@@ -171,7 +170,10 @@
   <% end %>
   <% if moderator? %>
   <p>
-    Current IP: <strong><%= @user.current_login_ip %></strong>
+    Current IP: <strong><%= @user.current_login_ip %></strong><br/>
+    <% if @other_users_with_same_ip.present? %>
+    Other Users with same IP: <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+    <% end %>
   </p>
   <p>
     <%= flag_for(@user.listens.first&.country) %>
