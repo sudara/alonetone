@@ -157,6 +157,7 @@ end
 #  favorites_count  :integer          default(0)
 #  genre            :string(255)
 #  hotness          :float(24)
+#  id3_track_num    :integer          default(1)
 #  length           :integer
 #  listens_count    :integer          default(0)
 #  listens_per_week :float(24)

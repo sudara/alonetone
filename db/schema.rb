@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_104959) do
+ActiveRecord::Schema.define(version: 2018_09_23_122803) do
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.datetime "updated_at"
     t.text "waveform", limit: 4294967295
     t.boolean "private", default: false, null: false
+    t.integer "id3_track_num", default: 1
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
@@ -73,6 +74,19 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
     t.index ["created_at"], name: "index_comments_on_created_at"
     t.index ["is_spam"], name: "index_comments_on_is_spam"
+  end
+
+  create_table "facebook_accounts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "fb_user_id"
+    t.index ["fb_user_id"], name: "index_facebook_accounts_on_fb_user_id"
+  end
+
+  create_table "facebook_addables", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "profile_chunk_type"
+    t.integer "profile_chunk_id"
+    t.integer "facebook_account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "featured_tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -188,6 +202,17 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
+  create_table "logged_exceptions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "exception_class"
+    t.string "controller_name"
+    t.string "action_name"
+    t.text "message"
+    t.text "backtrace"
+    t.text "environment"
+    t.text "request"
+    t.datetime "created_at"
+  end
+
   create_table "memberships", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -229,6 +254,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.text "credits", limit: 16777215
     t.boolean "has_details", default: false
     t.string "theme"
+    t.datetime "published_at"
     t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
     t.index ["user_id"], name: "index_playlists_on_user_id"
@@ -246,6 +272,20 @@ ActiveRecord::Schema.define(version: 2018_09_22_104959) do
     t.float "spaminess"
     t.string "signature"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
+  end
+
+  create_table "reportable_cache", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "model_class_name", limit: 100, null: false
+    t.string "report_name", limit: 100, null: false
+    t.string "grouping", limit: 10, null: false
+    t.string "aggregation", limit: 10, null: false
+    t.string "conditions", limit: 100, null: false
+    t.float "value", default: 0.0, null: false
+    t.datetime "reporting_period", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true
+    t.index ["model_class_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation"
   end
 
   create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
