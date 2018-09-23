@@ -120,14 +120,20 @@
   }
 }
 
-#login.box, #signup.box, #signup-questions.box {
-  margin-bottom: 0;
-  box-shadow: none;
-  label {
-    margin-bottom: 2px!important;
-  }
-}
+body main #columns  {
 
+  #login.box, #signup.box, #signup-questions.box {
+    margin-bottom: 0;
+    box-shadow: none;
+    label {
+      margin-bottom: 2px!important;
+    }
+    padding-top: $baseline / 2;
+    padding-bottom: $baseline / 2;
+
+  }
+
+}
 /* ABOUT PAGES */
 
 .about-page, .stats-page {
