@@ -286,7 +286,6 @@ label.collection_radio_buttons {
 
 	}
 	textarea {
-		font-family: $serif-font;
 		width: 98%;
 		padding-top: 5px;
 		padding-left: 5px;
@@ -296,6 +295,10 @@ label.collection_radio_buttons {
 form.new_playlist {
 	input {
 		margin-bottom: 0;
+	}
+	textarea {
+		box-sizing: border-box;
+		width: 100%;
 	}
 }
 
@@ -359,8 +362,5 @@ label.collection_check_boxes {
 
 
 form.new_playlist {
-	textarea {
-		box-sizing: border-box;
-		width: 100%;
-	}
+
 }
