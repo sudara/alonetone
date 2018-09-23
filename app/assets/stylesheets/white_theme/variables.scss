@@ -57,7 +57,6 @@ $red: #d3220c;
 $green: #66a410;
 $orange: #da6d25;
 $orange-background: #e66d29;
-// $samo-orange: #c60;
 $samo-orange: #EB7B0C;
 $samo-dark-orange: #f04e1a;
 $nav-item-color: #c1c9b4;
@@ -65,22 +64,16 @@ $tab-box-silver: #fff;
 $playlist-box-silver: #fff;
 $box-background-even: #fff;
 $not-quite-white: #f9f9f9;
-$not-quite-white-opaque: #f9f9f9; // to mask background
+$not-quite-white-opaque: #f9f9f9;
 $disabled: #8c8e86;
 $body-link-hover: #1a1d13;
 $waveform-playing: #302f2f;
 $bright-highlight: rgba(255, 255, 0, .6);
 
-// SAMO
-
 @mixin samo-shadow-and-radius() {
-  border-radius: 4px;
-  // box-shadow: 0 3px 4px -2px #65666627;
-  // box-shadow: 0px 5px 6px -2px #65666644;
+  border-radius: 6px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15)
 }
-
-// DEFAULT BUTTON STYLE
 
 @mixin default-button($type: '') {
   font-family: $sans-font;
