@@ -77,7 +77,8 @@ class Playlist < ActiveRecord::Base
   end
 
   def publishing?
-    private_changed? && (private == false)
+    # it's not publishing if someone marked it private and then public again
+    private_changed? && (private_was == true) && (published_at_was == nil)
   end
 
   def set_published_at
@@ -86,7 +87,7 @@ class Playlist < ActiveRecord::Base
 
   def notify_followers
     user.followers.select(&:wants_email?).each do |user|
-      AlbumNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
+      AlbumNotificationJob.perform_later(id, user.id)
     end
   end
 

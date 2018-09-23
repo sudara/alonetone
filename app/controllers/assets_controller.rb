@@ -270,6 +270,12 @@ class AssetsController < ApplicationController
     Asset.extract_mp3s(file) do |asset|
       @assets << current_user.assets.create(attrs.merge(mp3: asset))
     end
+    # if each track has a track_num in the id3 tag, let's create the playlist
+    create_playlist if all_assets_have_id3_tag_ordering?
+  end
+
+  def assets_have_id3_tag_ordering?
+     @assets.size == @assets.collect(&:id3_track_num).compact.size
   end
 
   def set_related_lastest_variables

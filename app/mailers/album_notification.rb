@@ -6,23 +6,19 @@ class AlbumNotification < ActionMailer::Base
     @name = playlist.user.name
     @user = playlist.user
     @num_tracks = playlist.tracks_count
-    @play_link = play_link_for(asset)
-    @user_link = user_link_for(asset)
+    @play_link = play_link_for(playlist)
+    @user_link = user_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
-    mail subject: "[alonetone] '#{asset.user.name}' uploaded a new album!", to: email
+    mail subject: "[alonetone] '#{playlist.user.name}' released a new album!", to: email
   end
 
   protected
 
-  def user_link_for(asset)
-    'https://' + Alonetone.url + '/' + asset.user.login
+  def user_link
+    'https://' + Alonetone.url + '/' + @user.login
   end
 
-  def play_link_for(asset)
-    user_link_for(asset) + '/playlists/' + playlist.id.to_s
-  end
-
-  def download_link_for(asset)
-    play_link_for(asset) + '.mp3?source=email'
+  def play_link_for(playlist)
+    user_link + '/playlists/' + playlist.to_param
   end
 end
