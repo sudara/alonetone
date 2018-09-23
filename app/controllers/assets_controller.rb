@@ -138,18 +138,16 @@ class AssetsController < ApplicationController
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
       end
     end
-
-    if good
+    if @playlist
+      flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
+      redirect_to edit_user_playlist_path(@user, @playlist)
+    elsif @assets.present?
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
-    else
-     if @assets.present?
-        flash[:error] = flashes.html_safe
      else
-        flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
-      end
-     redirect_to new_user_track_path(current_user)
-    end
+      flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
+      redirect_to new_user_track_path(current_user)
+     end
   end
 
   # PUT /assets/1
@@ -271,10 +269,15 @@ class AssetsController < ApplicationController
       @assets << current_user.assets.create(attrs.merge(mp3: asset))
     end
     # if each track has a track_num in the id3 tag, let's create the playlist
-    create_playlist if all_assets_have_id3_tag_ordering?
+    create_playlist_from_assets! if all_assets_have_id3_tag_ordering?
   end
 
-  def assets_have_id3_tag_ordering?
+  def create_playlist_from_assets!
+    @playlist = @user.playlists.create(title: "#{@user.display_name}'s New Album", private: true)
+    @playlist.assets << @assets.sort_by(&:id3_track_num)
+  end
+
+  def all_assets_have_id3_tag_ordering?
      @assets.size == @assets.collect(&:id3_track_num).compact.size
   end
 

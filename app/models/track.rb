@@ -10,7 +10,7 @@ class Track < ActiveRecord::Base
   delegate :length, :name, to: :asset
   acts_as_list scope: :playlist_id, order: :position
 
-  before_validation :ensure_playlist_if_favorite
+  before_validation :ensure_playlist_if_favorite, :set_user_id_from_playlist
   validates_presence_of :asset_id, :playlist_id, :user_id
 
   def asset_length
@@ -24,6 +24,10 @@ class Track < ActiveRecord::Base
       order: 'count_all DESC',
       limit: limit,
       offset: offset).collect(&:first)
+  end
+
+  def set_user_id_from_playlist
+    self.user_id ||= Playlist.find(playlist_id).user_id
   end
 
   def ensure_playlist_if_favorite
