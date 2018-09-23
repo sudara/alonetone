@@ -3,7 +3,6 @@
 <div id="edit_playlist_info" class="faq box">
   <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
 
-  <%= simple_form_for [@user, @playlist] do |f| %>
     <div class="edit_playlist_columns">
       <div class="edit_playlist_left_column">
           <label>ALBUM ARTWORK</label>
@@ -18,7 +17,7 @@
             Upload a square photo, 2000px by 2000px for best results.
           </p>
       </div>
-      <div class="edit_playlist_right_column">
+      <%= simple_form_for [@user, @playlist], html: { class: 'edit_playlist_right_column' } do |f| %>
         <div class="edit_playlist_right_column_title_and_year">
           <%= f.input :title %>
           <%= f.input :year, input_html: {maxlength: 4, size: 4} %>
@@ -41,14 +40,12 @@
         <div class="edit_playlist_right_column_private_and_hidden">
           <%= f.input :private %> &nbsp; | (Playlists are hidden until they have more than 2 tracks)
         </div>
-      </div>
     </div>
-    
     <div class="edit_playlist_bottom">
       <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
       <%= f.button :submit, "save playlist" %>
     </div>
-  <% end %>
+    <% end %>
 </div>
 <%#= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
 <!-- 
@@ -88,13 +85,13 @@
     <div class="playlist_feedback" data-target="playlist-edit.feedback">
     </div>
      <% if @playlist.tracks.size > 0 %>
-     <div class="playlist_size">
-     <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
-     <% end %>    
-     </div>
+      <div class="playlist_size">
+      <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+      </div>
+    <% end %>    
      <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
-
   </div>
+
   <div id="right">
     <p class="right_instructions">
        Click the [+] icon on a track below to add it to the playlist selection.
