@@ -20,7 +20,7 @@ module Paperclip
         @attachment.instance.send("#{simple_attribute}=", mp3.send(simple_attribute)) if @attachment.instance.respond_to?("#{simple_attribute}=") && mp3.respond_to?(simple_attribute)
       end
       @attachment.instance.title = get_title(mp3)
-      @attachment.instance.id3_track_num = get_track_num
+      @attachment.instance.id3_track_num = get_track_num(mp3)
       @attachment.instance.generate_permalink!
     end
 
@@ -33,7 +33,7 @@ module Paperclip
       end
     end
 
-    def get_track_num
+    def get_track_num(mp3)
       mp3.tag.track_num
     end
   end
