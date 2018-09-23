@@ -7,7 +7,6 @@ class AssetNotification < ActionMailer::Base
     @name = asset.user.name
     @user = asset.user
     @title = asset.title.present? ? asset.title : "new track"
-    @download_link = download_link_for(asset)
     @play_link = play_link_for(asset)
     @user_link = user_link_for(asset)
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
@@ -22,9 +21,5 @@ class AssetNotification < ActionMailer::Base
 
   def play_link_for(asset)
     user_link_for(asset) + '/tracks/' + asset.id.to_s
-  end
-
-  def download_link_for(asset)
-    play_link_for(asset) + '.mp3?source=email'
   end
 end
