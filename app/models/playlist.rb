@@ -30,7 +30,8 @@ class Playlist < ActiveRecord::Base
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
-  before_update :set_mix_or_album, :ensure_private_if_less_than_two_tracks, :set_published_at, :notify_followers_if_publishing_album
+  before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks, 
+    :set_published_at, :notify_followers_if_publishing_album
 
   def to_param
     permalink.to_s
@@ -127,6 +128,10 @@ class Playlist < ActiveRecord::Base
   def name_favorites_and_set_permalink
     self.title = self.description = user.name + "'s favorite tracks" if is_favorite?
     generate_permalink!
+  end
+
+  def check_for_new_permalink
+    generate_permalink! if title_changed?
   end
 end
 

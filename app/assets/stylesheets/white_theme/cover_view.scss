@@ -93,20 +93,31 @@
           margin-top: 0;
           margin-right: 5px;
           margin-bottom: 0;
-          padding: 5px $baseline / 2;
-          padding-top: 8px;
+          padding: 5px 12px 5px 40px;
+          padding-top: 12px;
           padding-bottom: 0;
           text-decoration: none;
-          color: $not-quite-white-opaque;;
-          i {
-            margin-right: 10px;
+          color: $not-quite-white-opaque;
+          background-image: image-url('svg/spotify.svg');
+          background-size: 25px 25px;
+          background-repeat: no-repeat;
+          background-position: 10px 10px;
+          &.spotify {
+            background-image: image-url('svg/spotify.svg');
           }
+          &.itunes {
+            background-image: image-url('svg/itunes.svg');
+            padding-left:px;
+          }
+          &.apple {
+            background-image: image-url('svg/apple_music.svg');
+          }
+
           .action-text {
+            text-align: left;
             font-size: 10px;
             display: block;
-            margin-left: 21px;
             color: $gray;
-            margin-top: 4px;
           }
         }
       }
