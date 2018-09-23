@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 2018_09_23_122803) do
     t.string "permalink"
     t.integer "tracks_count", default: 0
     t.boolean "is_mix"
-    t.boolean "private"
+    t.boolean "private", default: true
     t.boolean "is_favorite", default: false
     t.string "year"
     t.integer "position", default: 1

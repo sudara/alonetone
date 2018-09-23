@@ -34,7 +34,7 @@ module Paperclip
     end
 
     def get_track_num(mp3)
-      mp3.tag.track_num
+      mp3.tag.tracknum
     end
   end
 end
