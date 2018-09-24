@@ -22,6 +22,9 @@ body {
       margin-left: auto;
       margin-right: auto;
       flex-wrap: wrap;
+      @media #{$mobile} {
+        width: 100%;
+      }
       .playlist-sidebar {
         min-width: 300px;
         max-width: 450px;
@@ -33,6 +36,11 @@ body {
           margin-bottom: $baseline;
           order: 2;
         }
+        @media #{$mobile} {
+          border-radius: 0 0 0 0;
+        }
+
+
       }
       .track-content {
         width: auto;

@@ -28,6 +28,9 @@
     svg {
       display: block;
       border-radius: 0 4px 0px 0;
+      @media #{$mobile} { 
+				border-radius: 0 0 0 0;
+			}
     }
     img {
       display: block;
