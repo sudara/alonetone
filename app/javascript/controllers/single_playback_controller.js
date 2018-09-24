@@ -11,6 +11,7 @@ export default class extends PlaybackController {
     if (!this.bigPlay) this.setBigPlay()
     if (this.loaded) this.bigPlay.animation.setPause()
     else this.bigPlay.animation.showLoading()
+    this.registeredListen = false
   }
 
   pauseCallback() {

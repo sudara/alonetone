@@ -10,14 +10,6 @@ export default class extends PlaybackController {
     this.preload = this.playTarget.parentElement.classList.contains('active')
   }
 
-  seekBarContainerTarget() {
-    this.bigPlay.seekBarContainerTarget
-  }
-
-  seekBarLoadedTarget() {
-    this.bigPlay.seekBarLoadedTarget
-  }
-
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
     if (this.playTarget.getAttribute('href') === document.location.pathname) {
@@ -30,6 +22,7 @@ export default class extends PlaybackController {
       // fire the ajax request
       Rails.fire(this.loadTrackTarget, 'click')
     }
+    this.registeredListen = false
     this.playTarget.classList.replace('play-button', 'pause-button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'pause')
   }

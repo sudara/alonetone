@@ -29,8 +29,9 @@ export default class extends PlaybackController {
     else animation.setPause()
     this.openDetails()
     this.updateSeekBarLoaded()
+    this.registeredListen = true
   }
-  
+
   pauseCallback() {
     animation.setPlay()
     document.getElementById('play-svg-container').append(document.getElementById('playAnimationSVG'))

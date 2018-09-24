@@ -1,9 +1,10 @@
 import { Controller } from 'stimulus'
+import Rails from 'rails-ujs'
 import { Howl } from 'howler'
 
 // Hack for Safari 12 https://github.com/goldfire/howler.js/pull/1047
 const safari = /safari/.test(Howler._navigator && Howler._navigator.userAgent.toLowerCase())
-//if (safari) Howler._canPlayEvent = 'loadedmetadata' 
+// if (safari) Howler._canPlayEvent = 'loadedmetadata' 
 
 
 let player
@@ -41,7 +42,7 @@ export default class extends Controller {
       onplayerror(id, e) {
         console.log(e)
         controller.pause()
-      }
+      },
     })
   }
 
@@ -51,6 +52,10 @@ export default class extends Controller {
     this.position = this.sound.seek()
     if (this.sound.playing()) {
       this.whilePlayingCallback()
+      if (!this.registeredListen && this.positionFromStart(5000)) {
+        this.registerListen()
+        this.registeredListen = true
+      }
       if (!this.nextTrackLoading && this.positionFromEnd(10000)) {
         this.preloadNextTrack()
         this.nextTrackLoading = true
@@ -94,6 +99,17 @@ export default class extends Controller {
     }
   }
 
+  registerListen() {
+    Rails.ajax({
+      url: '/listens',
+      type: 'POST',
+      data: `id=${this.data.get('id')}`,
+      success() {
+        console.log('registered')
+      },
+    })
+  }
+
   nextTrack() {
     const next = this.element.nextElementSibling
     return this.application.getControllerForElementAndIdentifier(next, this.identifier)
@@ -116,6 +132,10 @@ export default class extends Controller {
   positionFromEnd(ms) {
     const positionFromEnd = (this.sound.duration() - this.position) * 1000
     return ms > positionFromEnd
+  }
+
+  positionFromStart(ms) {
+    return (this.position * 1000) > ms
   }
 
   percentPlayed() {
