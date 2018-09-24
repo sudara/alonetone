@@ -85,7 +85,7 @@ body.has-details {
     padding-right: 0;
     background-color: #fff;
     @media #{$mobile} {
-      width: 90%;
+      width: 100%;
     }
     h1 {
       font-weight: bold;
@@ -117,6 +117,7 @@ body.has-details {
       margin-left: auto;
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
+      box-sizing: border-box;
     }
     .errorExplanation {
       margin: 0;
