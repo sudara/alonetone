@@ -250,19 +250,6 @@ label.collection_radio_buttons {
 	background-color: #E66D29;
 	label {
 		color: white;/* EDIT PAGES */
-
-		body.has-details {
-			h2.spacey {
-				@include match-dynamic-site-width();
-			}
-			.container.static_content {
-				padding: $baseline;
-				background-color: $white;
-
-				@include match-dynamic-site-width();
-				@include samo-shadow-and-radius();
-			}
-		}
 	}
 }
 
