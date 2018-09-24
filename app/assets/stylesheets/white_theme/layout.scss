@@ -68,9 +68,15 @@ body {
       flex-wrap: wrap;
       #left {
         margin-right: $baseline * .75;
+        @media #{$mobile} {
+          margin-right: 0;
+        }
       }
       #right {
         margin-left: $baseline * .75;
+        @media #{$mobile} {
+          margin-left: 0;
+        }
       }
       > div {
         width: 45%;
