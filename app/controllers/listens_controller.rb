@@ -1,8 +1,16 @@
 class ListensController < ApplicationController
-  before_action :find_user
-  before_action :find_listen_history
+  include Listens
+
+  before_action :find_user, only: [:index]
+  before_action :find_listen_history, only: [:index]
 
   def index; end
+
+  def create
+    @asset = Asset.find(params[:id])
+    register_listen(@asset)
+    head :ok
+  end
 
   protected
 

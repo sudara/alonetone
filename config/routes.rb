@@ -12,6 +12,7 @@ Alonetone::Application.routes.draw do
 
     mount Thredded::Engine => '/discuss'
     get '/upload', :to => 'assets#new'
+    post '/listens', :to => 'listens#create', as: 'register_listen'
     get '/new_album', :to => 'playlists#new'
     get '/favorites', :to => 'playlists#favorites'
     get '/login', :to => 'user_sessions#new', :as => 'login'
