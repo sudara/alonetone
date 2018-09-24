@@ -360,7 +360,7 @@ GEM
     ruby-mp3info (0.8.10)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     s3_direct_upload (0.1.7)
       coffee-rails (>= 3.1)
       jquery-fileupload-rails (~> 0.4.1)
