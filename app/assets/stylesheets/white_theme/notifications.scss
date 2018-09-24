@@ -38,6 +38,11 @@
 	text-align: center;
 	color: $white;
 	background-color: $orange_background;
+	@media #{$mobile} {
+		padding: $baseline / 2;
+		font-size: 14px;
+		text-align: left;
+	}
 	.flash_stats {
 		font-size: 14px;
 		a {
