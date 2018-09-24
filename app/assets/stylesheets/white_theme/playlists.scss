@@ -259,6 +259,10 @@ body.has-details {
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 25px;
+    @media #{$mobile} {
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+    }
     flex-wrap: wrap;
     .edit_playlist_left_column {
       min-width: 220px;
