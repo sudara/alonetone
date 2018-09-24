@@ -237,6 +237,9 @@ body.has-details {
   padding-right: 0;
   padding-bottom: 20px;
   padding-top: 0;
+  @media #{$mobile} {
+    width: 100%;
+  }
   > h2 {
     padding-left: 60px;
   }
