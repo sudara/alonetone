@@ -1,14 +1,16 @@
 // /home, /user, /playlists capsules
+
 ul.playlists {
   display: flex;
-
   flex-wrap: wrap;
+  
   &.three_or_less_playlists {
     justify-content: flex-start;
     li.playlist {
       margin-right: $baseline;
     }
   }
+
   li.playlist {
     &:last-child {
       margin-right: 0;
@@ -57,6 +59,26 @@ ul.playlists {
       color: $samo-gray;
     }
   }
+    
+  @media #{$mobile} {
+		display: flex;
+		flex-direction: row;
+		width: $mobile-site-width-wide;
+		margin-bottom: 20px;
+
+		flex-wrap: wrap;
+		justify-content: space-around;
+		li.playlist {
+			
+				display: block!important;
+				width: 45%;
+				margin: 0;
+				margin-bottom: 18px;
+				img {
+					width: 100%;
+				}
+		}
+	}
 }
 
 // This!!
