@@ -1,16 +1,16 @@
 // /home, /user, /playlists capsules
 
+// There's some playlist code in home.scss that shares too many styles with this file
+
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
-  
   &.three_or_less_playlists {
     justify-content: flex-start;
     li.playlist {
       margin-right: $baseline;
     }
   }
-
   li.playlist {
     &:last-child {
       margin-right: 0;
@@ -22,14 +22,12 @@ ul.playlists {
     padding-bottom: $baseline / 4;
     text-align: center;
     background-color: $white;
-
     @include samo-shadow-and-radius();
     > a:first-child {
       height: 200px;
       @media #{$mobile} {
         height: auto;
-      }
-  
+      }  
     }
     a {
       display: block;
@@ -59,36 +57,32 @@ ul.playlists {
       color: $samo-gray;
     }
   }
-    
   @media #{$mobile} {
 		display: flex;
 		flex-direction: row;
 		width: $mobile-site-width-wide;
 		margin-bottom: 20px;
-
 		flex-wrap: wrap;
 		justify-content: space-around;
 		li.playlist {
-			
-				display: block!important;
-				width: 45%;
-				margin: 0;
-				margin-bottom: 18px;
-				img {
-					width: 100%;
-				}
+      display: block!important;
+      width: 45%;
+      margin: 0;
+      margin-bottom: 18px;
+      img {
+        width: 100%;
+      }
 		}
 	}
 }
 
-// This!!
+// This means something or another, but is so obscure. Add a few classes, + is so unintuitive
 #static_header + ul.playlists {
   @include match-dynamic-site-width();
   li {
     margin-bottom: 30px;
   }
 }
-
 
 // I think this will all go away, for the multi-playlist view that has gone away?
 
