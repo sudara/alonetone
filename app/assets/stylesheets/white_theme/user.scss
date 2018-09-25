@@ -44,12 +44,18 @@ main {
       grid-area: header;
     }
     #user_playlists_area {
+      @media #{$mobile} {
+        order: 1;
+      }
       grid-area: playlists;
       h2 {
         color: $samo-orange;
       }
       ul {
         margin: 0;
+        @media #{$mobile} {
+          margin: 0 auto;
+        }
       }
     }
   
@@ -75,6 +81,9 @@ main {
 
     #user_card_area {
       grid-area: card;
+      @media #{$mobile} {
+        order: 1;
+      }
     }
     #user_plays_area {
       grid-area: plays;
