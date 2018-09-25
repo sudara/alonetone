@@ -15,7 +15,7 @@ alonetone launched in January 2008 (around the same time as soundcloud).
 
 As of 2018, we host 70,000 tracks from 5500 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
-### Bug reporting
+### Bug reportingbrowserstack.svg
 
 We use [Github Issues](http://github.com/sudara/alonetone/issues) to submit bugs and keep track of our work.
 
