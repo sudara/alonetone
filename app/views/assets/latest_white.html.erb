@@ -57,29 +57,6 @@
       </div>
     </div>
 
-    <% if @followee_tracks %>
-      <div id="home_follows_area">
-        <div class="box">
-          <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
-          <span>view all &nbsp;
-            <i class="icon_caret">
-              <%= render file: svg_path('svg/icon_caret.svg') %>
-            </i>
-          </span>
-
-            <% end %>
-          <h2>
-            <%= link_to radio_path(per_page: 40, source: 'those_you_follow'), title: 'alonetone radio: those you follow' do %>
-            Tracks from those you follow
-            <% end %>
-          </h2>
-          <div>
-            <%= render partial: 'assets/asset', collection: @followee_tracks %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
   </div>
   
   <div id="home_right_column">
@@ -125,6 +102,31 @@
           <% end %>
         </div>
     </div>
+
+
+    <% if @followee_tracks %>
+      <div id="home_follows_area">
+        <div class="box">
+          <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
+          <span>view all &nbsp;
+            <i class="icon_caret">
+              <%= render file: svg_path('svg/icon_caret.svg') %>
+            </i>
+          </span>
+
+            <% end %>
+          <h2>
+            <%= link_to radio_path(per_page: 40, source: 'those_you_follow'), title: 'alonetone radio: those you follow' do %>
+            Tracks from those you follow
+            <% end %>
+          </h2>
+          <div>
+            <%= render partial: 'assets/asset', collection: @followee_tracks %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    
   </div>
 </div>
 
