@@ -5,6 +5,8 @@
 [![View performance data on Skylight](https://badges.skylight.io/typical/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
 [![View performance data on Skylight](https://badges.skylight.io/rpm/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
 
+![https://raw.githubusercontent.com/sudara/alonetone/master/app/assets/images/promo/browserstack.svg](browserstack.com)
+
 ## The future is bright
 
 [alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
