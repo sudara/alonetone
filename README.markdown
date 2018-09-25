@@ -5,7 +5,7 @@
 [![View performance data on Skylight](https://badges.skylight.io/typical/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
 [![View performance data on Skylight](https://badges.skylight.io/rpm/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
 
-[![Browserstack](https://raw.githubusercontent.com/sudara/alonetone/master/app/assets/images/promo/browserstack.svg)](https://browserstack.com)
+[![Browserstack](https://github.com/sudara/alonetone/raw/master/app/assets/images/promo/browserstack.svg)](https://browserstack.com)
 
 ## The future is bright
 
