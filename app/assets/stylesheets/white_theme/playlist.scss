@@ -59,13 +59,13 @@
 					color: $not-quite-white;
 					span.track-name {
 						color: $not-quite-white;
-          }
-          span.track-position {
-            color: #A6ABAB;
-          }
-          span.time-text {
-            color: #A6ABAB;
-          }
+					}
+					span.track-position {
+						color: #A6ABAB;
+					}
+					span.time-text {
+						color: #A6ABAB;
+					}
 				}
 			}
 			a.play-button, a.pause-button {
@@ -118,15 +118,17 @@
 					float: left;
 					margin-right: 4px;
 					color: #868686;
+					min-width: 21px;
 				}
 				span.track-name {
 					font-weight: bold;
 					display: block;
-					flex-grow: 1;
 					overflow: hidden;
+					width: 0;
 					white-space: nowrap;
 					text-overflow: ellipsis;
-					width: 0px;
+
+					flex-grow: 1;
 				}
 				.time-text {
 					font-size: 12px;
@@ -176,13 +178,12 @@
 }
 
 .edit_playlist_container {
-	margin-top: 15px;
-	@include match-dynamic-site-width();
-	text-align: left;
 	max-width: 1150px;
+	margin-top: 15px;
+	text-align: left;
+
+	@include match-dynamic-site-width();
 	.edit_playlist {
 		@include default-button();
 	}
 }
-
-
