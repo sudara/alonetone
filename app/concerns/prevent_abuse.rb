@@ -4,7 +4,7 @@ module PreventAbuse
 
   # user agent whitelist
   # cfnetwork = Safari on osx 10.4 *only* when it tries to download
-  @@valid_listeners = %w[msie webkit quicktime gecko mozilla netscape itunes chrome opera safari cfnetwork facebookexternalhit ipad iphone apple facebook stagefright]
+  @@valid_listeners = %w[msie webkit quicktime gecko firefox netscape itunes chrome opera safari cfnetwork facebookexternalhit ipad iphone apple facebook stagefright]
 
   # user agent black list
   @@bots = %w[bot spider baidu mp3bot]
@@ -26,5 +26,9 @@ module PreventAbuse
 
   def browser?
     @@valid_listeners.any? { |valid_agent| user_agent.include? valid_agent }
+  end
+
+  def user_agent
+    request.user_agent.try(:downcase)
   end
 end

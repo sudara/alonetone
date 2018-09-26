@@ -26,10 +26,6 @@ module Listens
     end
   end
 
-  def user_agent
-    request.user_agent.try(:downcase)
-  end
-
   def listen_referer
     case params[:referer]
     when 'itunes' then 'itunes'
