@@ -31,6 +31,7 @@ body {
         width: 35%;
         margin-right: $baseline;
         @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
+          max-width: none;
           width: 100%;
           margin-right: 0;
           margin-bottom: $baseline;
@@ -54,6 +55,8 @@ body {
         @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
           width: 100%;
           order: 1;
+          max-width: none;
+          margin-left: 0 !important;
 
         }
         flex: 1;
