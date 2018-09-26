@@ -3,6 +3,7 @@
 /* Remove Blue Glow from Webkit Browsers on focus */
 input, textarea, select {
 	outline: 0;
+	-webkit-appearance: none;
 }
 
 input {
