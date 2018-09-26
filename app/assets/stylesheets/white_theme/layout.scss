@@ -36,6 +36,7 @@ body {
           margin-right: 0;
           margin-bottom: $baseline;
           order: 2;
+          border-radius: 0 0 6px 6px;
         }
         @media #{$mobile} {
           border-radius: 0 0 0 0;
@@ -57,6 +58,9 @@ body {
           order: 1;
           max-width: none;
           margin-left: 0 !important;
+          svg {
+            border-radius: 4px 4px 0px 0;
+          }
 
         }
         flex: 1;
