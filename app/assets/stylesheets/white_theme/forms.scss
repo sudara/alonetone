@@ -3,8 +3,13 @@
 /* Remove Blue Glow from Webkit Browsers on focus */
 input, textarea, select {
 	outline: 0;
-	-webkit-appearance: none;
+	
 }
+
+input[type='search'], input[type='text'], textarea {
+	-webkit-appearance: none;
+}  
+
 
 input {
 	font-family: $sans-font;
