@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :redirect_to_new_forums_if_white_theme
   before_action :find_parents
   before_action :find_post, only: %i[edit update destroy spam unspam]
   before_action :require_login, only: :create
