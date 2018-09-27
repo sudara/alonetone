@@ -81,6 +81,11 @@
 	@media #{$tablet} {
 		display: flex;
 		flex-direction: column;
+		#home_playlists_area {
+			margin-bottom: $baseline * 1.5;
+			
+		}
+	
 		 > * {
 			width: 100%;
 		}
