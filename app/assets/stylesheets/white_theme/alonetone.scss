@@ -17,7 +17,7 @@ ul {
 
 	justify-content: space-between;
 	@include samo-shadow-and-radius();
-	h2 {
+	h1, h2 {
 		font-weight: bold;
 		line-height: 42px;
 		display: block;

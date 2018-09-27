@@ -50,6 +50,7 @@ class CommentsController < ApplicationController
       @comments = Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?).page(params[:page])
       set_spam_comments
     end
+    render 'index_white' if white_theme_enabled?
   end
 
   protected
