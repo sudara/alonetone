@@ -1,4 +1,5 @@
 class ForumsController < ApplicationController
+  before_action :redirect_to_new_forums_if_white_theme
   before_action :require_login, except: %i[index show]
   before_action :find_forum, only: %i[show edit update destroy]
   before_action :set_forum_tab, :set_html_meta

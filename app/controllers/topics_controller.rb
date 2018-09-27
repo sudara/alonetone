@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  before_action :redirect_to_new_forums_if_white_theme
   before_action :find_forum
   before_action :find_topic, only: %i[show edit update destroy]
   before_action :require_login, only: %i[create update]
