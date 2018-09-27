@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_theme
-    if white_theme_toggle = params.delete(:white)
+    if white_theme_toggle = params.delete(:white) || true
       session[:white] = ActiveModel::Type::Boolean.new.cast(white_theme_toggle)
     end
   end
