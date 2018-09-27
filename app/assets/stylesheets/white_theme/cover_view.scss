@@ -13,8 +13,6 @@
 .track-content {
   &.track-content-cover-view {
     margin-left: -$baseline!important;
-    // box-shadow: 0px 5px 6px -2px #65666644;
-    border-radius: 0 4px 0px 0;
   }
   min-width: 400px;
   @media #{$tablet} {
@@ -27,14 +25,16 @@
     padding-bottom: 100%;
     svg {
       display: block;
-      border-radius: 0 4px 0px 0;
+      @include samo-shadow-and-radius();
+      border-radius: 0 4px 4px 0;
       @media #{$mobile} { 
 				border-radius: 0 0 0 0;
 			}
     }
     img {
       display: block;
-      border-radius: 0 4px 0px 0;
+      @include samo-shadow-and-radius();
+      border-radius: 0 4px 4px 0;
     }
   }
   img {
