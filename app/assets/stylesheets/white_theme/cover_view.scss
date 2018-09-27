@@ -113,21 +113,14 @@
   }
 }
 
-
 .track-content-cover-view .playlist-credits {
   order:10;
-  // width:580px!important;
-  display: flex;
   font-size: 13px;
   line-height: 18px;
   width: 100%;
   padding: $baseline / 2 $baseline;
   box-sizing: border-box;
   color: rgb(153, 153, 153);
-  text-align: left;
-  border-radius: 0 0 6px 0;
   box-shadow: none;
-  margin-left: auto;
-  margin-right: auto;
   background-color: transparent;  
 }
