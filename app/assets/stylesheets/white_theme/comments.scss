@@ -7,7 +7,11 @@ h2#latest_comments + div.box {
 	}
 }
 
-#home_comments_area, #user_comments_area {
+#home_comments_area, #user_comments_area,
+.comments_area {
+  &.box {
+    justify-content: flex-start;
+  }
 	.asset {
 		border-top: 1px solid #EEE;
 		border-bottom: 0;
