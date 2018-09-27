@@ -41,8 +41,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_theme
-    if white_theme_toggle = params.delete(:white) || true
-      session[:white] = ActiveModel::Type::Boolean.new.cast(white_theme_toggle)
+    if logged_in?
+      session[:white] = !current_user.use_old_theme?
+    elsif session[:white].nil?
+      session[:white] = true
+    else
+      session[:white]
     end
   end
 
@@ -51,11 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def white_theme_enabled?
-    if logged_in?
-      session[:white] = !current_user.use_old_theme?
-    else 
-      session[:white]
-    end
+    session[:white]
   end
 
   def not_found
