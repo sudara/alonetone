@@ -52,9 +52,9 @@ class ApplicationController < ActionController::Base
 
   def white_theme_enabled?
     if logged_in?
-      !current_user.use_old_theme?
+      session[:white] = !current_user.use_old_theme?
     else 
-      session[:white] ||= true
+      session[:white]
     end
   end
 
