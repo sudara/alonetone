@@ -1,0 +1,47 @@
+<div id='columns'>
+  <div id="left">
+    <div id="user_tracks box">
+      <% cache("tracks/#{logged_in?}/#{@assets.cache_key}") do %>
+      <% if @user.assets_count > 0 %>
+        <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+        <%= render partial: 'asset', collection: @assets %>
+      <% else %>
+       <h2>Looks like <%= @user.name %> hasn't uploaded anything yet!</h2>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div id='right'>
+    <% if authorized? && @user.assets_count > 2 %>
+    <div class="box">
+    <h2 class="box">Hot Tracks this week</h2>
+      <div class="static_content">
+          <%# image_tag @user.most_popular_chart %>
+      </div>
+    </div>
+
+    <div class="box">
+    <h2 class="box">Most Favorited Tracks</h2>
+      <div class="static_content">
+          <%# image_tag @user.most_favorited_chart %>
+      </div>
+    </div>
+
+
+    <div class="box">
+    <h2 class="box">Most Commented On Tracks</h2>
+      <div class="static_content">
+          <%# image_tag @user.most_commented_on_chart %>
+      </div>
+    </div>
+
+    <div class="box">
+    <h2 class="box">Most Listened To Tracks (ever)</h2>
+      <div class="static_content">
+          <%# image_tag @user.most_listened_to_ever_chart %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

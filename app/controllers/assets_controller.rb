@@ -60,6 +60,7 @@ class AssetsController < ApplicationController
         render json: cached_json
       end
     end
+    render 'index_white' if white_theme_enabled?
   end
 
   def show
