@@ -14,8 +14,8 @@
       </dl>
     <div class="submit_wrapper">
       <% if current_user.greenfield_enabled? %>
-        <%= submit_tag 'Upload, and publish!', id: 'upload' %>
-        <%= submit_tag "Upload, but don't publish" %>
+        <%= submit_tag 'Upload, and publish!', id: 'upload', data: { disable_with: 'Uploading...' } %>
+        <%= submit_tag "Upload, but don't publish", data: { disable_with: 'Uploading...' }  %>
       <% else %>
         <%= submit_tag 'Upload!', id: 'upload' %>
       <% end %>
