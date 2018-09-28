@@ -1,14 +1,17 @@
-<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>"  data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
+<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>"  data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
 
   <%= render partial: 'assets/big_player' %>
 
   <div class= "edit-links-and-favorite">
     <div class="edit-links">
       <% if authorized? %>
+        <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit-link',
+          confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.',
+          title: 'delete this track permanently ' %>
         <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit-link") %>
       <% end %>
       <% if moderator? %>
-        <% if @asset.private? %> 
+        <% if @asset.private? %>
           <%= link_to "Unspam", unspam_user_track_path(@user, @asset), method: :put, class: "edit-link" %>
         <% else %>
           <%= link_to "Spam", spam_user_track_path(@user, @asset), method: :put, class: "edit-link" %>
@@ -18,7 +21,7 @@
 
     <% if logged_in? %>
     <div class="track-favorite">
-    <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites', 
+    <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
         data: {controller: 'favorite', action: 'favorite#toggle' } do %>
         <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
           <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
@@ -41,8 +44,8 @@
       <h3><%= link_to @asset.user.display_name, user_home_path(@asset.user) %></h3>
     <% end %>
     <%= markdown(@asset.description) %>
-    
-    
+
+
 
     <div class="track-stats">
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
@@ -55,7 +58,7 @@
         <i class="icon_favs">
           <%= render file: svg_path('svg/icon_favorite_circled.svg') %>
         </i>
-      </div>          
+      </div>
     </div>
 
     <div>
@@ -82,5 +85,5 @@
     </div>
   </div>
   <% end %>
-  
+
 </div>
