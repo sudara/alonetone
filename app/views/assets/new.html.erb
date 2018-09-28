@@ -13,7 +13,7 @@
       <p>We recommend that you upload 192kbps mp3s.</p>
       <p>128kbps (what soundcloud &amp; bandcamp stream at) is usually pretty artifacty.
         256kbps can take significantly longer for browsers to download and stream.</p>
-	  </div>  
+	  </div>
   </div>
 
   <% if current_user.greenfield_enabled? %>
@@ -35,8 +35,8 @@
         </dl>
       </div>
       <div class="submit_wrapper">
-        <%= submit_tag 'Upload, and publish!', id: 'upload' %>
-        <%= submit_tag "Upload, but don't publish" %>
+        <%= submit_tag 'Upload, and publish!', id: 'upload', data: { disable_with: 'Uploading...' }  %>
+        <%= submit_tag "Upload, but don't publish", data: { disable_with: 'Uploading...' }  %>
       </div>
       <% end %>
       <div class="uploading" style='display:none'>
