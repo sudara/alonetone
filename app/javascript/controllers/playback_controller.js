@@ -4,7 +4,7 @@ import { Howl } from 'howler'
 
 // Hack for Safari 12 https://github.com/goldfire/howler.js/pull/1047
 const safari = /safari/.test(Howler._navigator && Howler._navigator.userAgent.toLowerCase())
-// if (safari) Howler._canPlayEvent = 'loadedmetadata' 
+// if (safari) Howler._canPlayEvent = 'loadedmetadata'
 
 
 let player
@@ -40,7 +40,6 @@ export default class extends Controller {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
       onplayerror(id, e) {
-        console.log(e)
         controller.pause()
       },
     })
@@ -73,7 +72,6 @@ export default class extends Controller {
   // called immedately by js
   play() {
     this.sound.play()
-    console.log('sound.play!')
     this.isPlaying = true
     if (player) {
       player.pause()
@@ -105,7 +103,6 @@ export default class extends Controller {
       type: 'POST',
       data: `id=${this.data.get('id')}`,
       success() {
-        console.log('registered')
       },
     })
   }
@@ -144,7 +141,7 @@ export default class extends Controller {
 
   calculateTime() {
     const time = Math.floor(this.position)
-    const min = Math.floor(time / 60) 
+    const min = Math.floor(time / 60)
     const sec = time % 60
     this.time = min + ':' + (sec >= 10 ? sec : '0' + sec)
   }
