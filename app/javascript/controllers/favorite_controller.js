@@ -1,27 +1,9 @@
-import { Controller } from 'stimulus'
-import FaveAnimation from '../animation/fave_animation'
+import HeartController from './heart_controller'
 
-export default class extends Controller {
-  static targets = ['svg']
+export default class extends HeartController {
 
-  initialize() {
+  isFavorited() {
     this.id = parseInt(this.element.href.split('=')[1])
-    this.favorited = window.userFavorites.includes(this.id)
-    this.animation = new FaveAnimation(this.element)
-    this.animation.init()
-    if (this.favorited) {
-      this.animation.setFave()
-    }
-  }
-
-  // ajax request fires immediately afterwards
-  toggle() {
-    if(this.favorited){
-      this.animation.clickUnfave()
-      this.favorited = false
-    } else {
-      this.animation.clickFave()
-      this.favorited = true
-    }
+    return window.userFavorites.includes(this.id)
   }
 }
