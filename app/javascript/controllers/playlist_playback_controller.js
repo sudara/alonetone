@@ -1,6 +1,9 @@
 import PlaybackController from './playback_controller'
 import Rails from 'rails-ujs'
 
+const smallCover = document.querySelector('a.small-cover')
+const sidebarLinks = document.querySelector('.sidebar-downloads')
+
 export default class extends PlaybackController {
   static targets = ['loadTrack']
 
@@ -52,8 +55,7 @@ export default class extends PlaybackController {
   // fires on ajax:success
   loadTrack(e) {
     this.highlightPlayingTrack()
-    // show the cover
-    document.querySelector('a.small-cover').style.display = 'block'
+    this.showSmallCoverAndSidebarLinks()
 
     // replace track content with result from ajax
     let temp = document.createElement('div')
@@ -77,6 +79,16 @@ export default class extends PlaybackController {
     this.bigPlay.percentPlayed = this.percentPlayed()
     this.bigPlay.waveform.update()
     this.bigPlay.timeTarget.innerHTML = this.time
+  }
+
+  hideSmallCoverAndSidebarLinks() {
+    smallCover.style.display = 'none'
+    sidebarLinks.style.display = 'none'
+  }
+
+  showSmallCoverAndSidebarLinks() {
+    smallCover.style.display = 'block'
+    sidebarLinks.style.display = 'block'
   }
 
   setBigPlay() {
