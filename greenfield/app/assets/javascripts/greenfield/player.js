@@ -241,8 +241,6 @@ $('body').on('ajax:success', '.playlist a[data-remote]', function(e, data) {
 $(window).on('popstate', function(je) {
   var loc = document.location.pathname;
   var link = $('.playlist a[data-remote=true][href='+attr(loc)+']').last();
-  console.log('setting page back to ', loc);
-  console.log('with link:           ', link);
   link.trigger('click');
 });
 
