@@ -5,35 +5,32 @@
 <% end %>
 
 <div id="playlist-and-track-content">
+  <%= render 'playlist_white' %>
 
-<%= render 'playlist_white' %>
-
-<% if @asset %>
-  <%= render partial: 'shared/asset_white' %>
-<% else %>
-
-  <div class="track-content track-content-cover-view">
-    
-    <div class="large-cover-and-credits">
-      <div class="large-cover">
-        <%= playlist_cover(@playlist, :greenfield) %>
+  <% if @asset %>
+    <%= render partial: 'shared/asset_white' %>
+  <% else %>
+    <%= content_for(:body_class, 'cover-view') %>
+    <div class="track-content track-content-cover-view">
+      <div class="large-cover-and-credits">
+        <div class="large-cover">
+          <%= playlist_cover(@playlist, :greenfield) %>
+        </div>
+        <% if @playlist.has_any_links? %>
+        <div class="playlist-options">
+          <%= render partial: 'links' %>
+        </div>
+        <% end %>
       </div>
-      <% if @playlist.has_any_links? %>
-      <div class="playlist-options">
-        <%= render partial: 'links' %>
+      <% if @playlist.credits.present? %>
+        <div class="playlist-credits">
+        <%= markdown(@playlist.credits) %>
       </div>
       <% end %>
     </div>
-    <% if @playlist.credits.present? %>
-      <div class="playlist-credits">
-      <%= markdown(@playlist.credits) %>
-    </div>
-    <% end %>
-  </div>
-
-<% end %>
-
+  <% end %>
 </div>
+
 <% if authorized? %>
 <div class="edit_playlist_container">
   <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>

@@ -8,7 +8,7 @@
   <%= yield :head %>
   <%= stylesheet_link_tag ('white_theme') %>
   <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
-  
+
   <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
   <meta content="index,follow" name="robots"/>
   <% if @asset&.persisted? or @playlist&.persisted? %>
@@ -23,7 +23,7 @@
   <%= render partial: 'shared/javascript_payload' %>
 </head>
 
-<body class="<%= "has-details" if @playlist %> <%= @playlist.try(:theme) %>">
+<body class="<%= yield :body_class %>">
 
   <% if @sudo %>
   <div class="sudo_bar">
