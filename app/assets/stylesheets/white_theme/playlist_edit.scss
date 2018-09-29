@@ -90,7 +90,6 @@
 
 // playlists/new
 
-body.has-details {
 	.playlists-new {
 	  @include match-dynamic-site-width('narrow');
 	  @include samo-shadow-and-radius();
@@ -155,7 +154,6 @@ body.has-details {
 		  font-weight: normal;
 		}
 	  }
-	}
   }
   
   // editing, woo hoo!
