@@ -13,9 +13,8 @@
 .track-content {
   &.track-content-cover-view {
     margin-left: -$baseline!important;
-    box-shadow: 0px 5px 6px -2px #65666644;
-    border-radius: 0 4px 0px 0;
-    border-radius: 0 4px 4px 0;
+    @include samo-shadow-and-radius();
+    border-radius: 0 6px 6px 0;
     overflow: auto;
   }
   min-width: 400px;
