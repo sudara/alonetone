@@ -18,6 +18,9 @@ body.cover-view .playlist-sidebar {
       @include samo-shadow-and-radius();
       border-radius: 0 6px 6px 0;
       overflow: auto;
+      @media only screen and (max-width: 850px) {
+        border-radius: 6px 6px 0 0;
+      }
     }
     .playlist-credits {
       font-size: 13px;
