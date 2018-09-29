@@ -8,9 +8,25 @@
 .track-content {
   &.track-content-cover-view {
     margin-left: -$baseline!important;
-    @include samo-shadow-and-radius();
-    border-radius: 0 6px 6px 0;
-    overflow: auto;
+    .large-cover-and-credits {
+      @include samo-shadow-and-radius();
+      border-radius: 0 6px 6px 0;
+      overflow: auto;  
+    }
+    .playlist-credits {
+      font-size: 13px;
+      line-height: 18px;
+      width: 100%;
+      padding: $baseline/2;
+      box-sizing: border-box;
+      color: rgb(153, 153, 153);
+      text-align: left;
+      border-radius: 0;
+      box-shadow: none;
+      background-color: transparent;
+      position: absolute;
+    }
+    
   }
   min-width: 400px;
   @media #{$tablet} {
@@ -104,22 +120,3 @@
   }
 }
 
-.playlist-credits {
-  order:10;
-  width:580px!important;
-  font-size: 13px;
-  line-height: 18px;
-  width: 100%;
-  padding: $baseline/2;
-  box-sizing: border-box;
-  color: rgb(153, 153, 153);
-  text-align: center;
-  border-radius: 0 0 6px 0;
-  box-shadow: none;
-  p {
-    text-align: center;
-  }
-  > a {
-    @include default-button('admin');
-  }
-}
