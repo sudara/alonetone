@@ -13,20 +13,23 @@
 <% else %>
 
   <div class="track-content track-content-cover-view">
-    <div class="large-cover">
-      <%= playlist_cover(@playlist, :greenfield) %>
+    
+    <div class="large-cover-and-credits">
+      <div class="large-cover">
+        <%= playlist_cover(@playlist, :greenfield) %>
+      </div>
+      <% if @playlist.has_any_links? %>
+      <div class="playlist-options">
+        <%= render partial: 'links' %>
+      </div>
+      <% end %>
     </div>
-    <% if @playlist.has_any_links? %>
-    <div class="playlist-options">
-      <%= render partial: 'links' %>
+    <% if @playlist.credits.present? %>
+      <div class="playlist-credits">
+      <%= markdown(@playlist.credits) %>
     </div>
     <% end %>
   </div>
-  <% if @playlist.credits.present? %>
-  <div class="playlist-credits">
-    <%= markdown(@playlist.credits) %>
-  </div>
-  <% end %>
 
 <% end %>
 
