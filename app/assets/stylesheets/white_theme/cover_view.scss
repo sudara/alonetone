@@ -11,12 +11,11 @@
     .large-cover-and-credits {
       @include samo-shadow-and-radius();
       border-radius: 0 6px 6px 0;
-      overflow: auto;  
+      overflow: auto;  A
     }
     .playlist-credits {
       font-size: 13px;
       line-height: 18px;
-      width: 100%;
       padding: $baseline/2;
       box-sizing: border-box;
       color: rgb(153, 153, 153);
