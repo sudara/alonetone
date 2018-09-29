@@ -89,6 +89,7 @@ export default class extends PlaybackController {
   showSmallCoverAndSidebarLinks() {
     smallCover.style.display = 'block'
     sidebarLinks.style.display = 'block'
+    document.body.classList.remove('cover-view')
   }
 
   setBigPlay() {
