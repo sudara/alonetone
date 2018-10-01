@@ -23,15 +23,17 @@
       <% end %>
     </div>
   </div>
+
+  <% if @user.has_public_playlists? %>
   <div id="user_playlists_area">
     <div class="user_playlists">
-      <% if @user.has_public_playlists? %>
       <ul class="playlists">
         <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
       </ul>
-      <% end %>
     </div>
   </div>
+  <% end %>
+
 
   <div id="user_left_column">
     <div id="user_latest_area">
