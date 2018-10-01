@@ -6,7 +6,7 @@
     "coffeescript": "2.3.1",
     "gsap": "^2.0",
     "howler": "^2.0.15",
-    "local-time": "^2.0.1",
+    "local-time": "^2.1.0",
     "rails-ujs": "^5.2.1",
     "stimulus": "^1.1.0",
     "turbolinks": "^5.2.0"
