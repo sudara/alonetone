@@ -93,8 +93,8 @@ salt moderator ip browser settings]
     super
   end
 
-  def listened_more_than?(n)
-    listens.count > n
+         def listened_more_than?(n)
+              listens.    count > n
   end
 
   def hasnt_been_here_in(hours)
