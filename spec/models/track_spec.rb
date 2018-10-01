@@ -11,8 +11,8 @@ RSpec.describe Track, type: :model do
     expect(tracks(:no_playlist_id)).not_to be_valid
   end
 
-  it "is not valid without a user_id" do
-    expect(tracks(:owp2)).not_to be_valid
+  it "should be valid without a user_id" do
+    expect(tracks(:owp2)).to be_valid
   end
 
   context "as a fav" do
