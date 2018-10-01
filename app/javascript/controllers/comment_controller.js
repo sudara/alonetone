@@ -11,17 +11,16 @@ export default class extends Controller {
     this.spinnerTarget.style.display = 'block'
   }
 
-  complete() {
-    this.spinnerTarget.style.display = 'none'
-  }
-
   success() {
     this.textareaTarget.value = ''
     this.responseTarget.innerHTML = '<div class="ajax_success">Submitted, thanks!</div>'
+    this.spinnerTarget.style.display = 'none'
+
   }
 
   error() {
     this.responseTarget.innerHTML = '<div class="ajax_fail">Sorry, that didn\'t work</div>'
+    this.spinnerTarget.style.display = 'none'
   }
 
   toggle() {
