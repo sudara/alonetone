@@ -225,7 +225,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
-    mini_mime (1.0.0)
+    mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     moneta (1.0.0)
@@ -264,12 +264,12 @@ GEM
       colorize
       diffy
       rake
-    postmark (1.13.0)
+    postmark (1.14.0)
       json
       rake
-    postmark-rails (0.17.0)
+    postmark-rails (0.18.0)
       actionmailer (>= 3.0.0)
-      postmark (~> 1.13.0)
+      postmark (~> 1.14.0)
     powerpack (0.1.2)
     pry (0.11.3)
       coderay (~> 1.1.0)
