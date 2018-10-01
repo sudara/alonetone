@@ -142,7 +142,7 @@ class AssetsController < ApplicationController
     if @playlist
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
-    elsif @assets.present? and @assets.collect(&:persisted?).any? true
+    elsif @assets.present? && (@assets.collect(&:persisted?).any? == true)
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
      else
