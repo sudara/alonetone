@@ -1,6 +1,6 @@
 import { Controller } from 'stimulus'
 import LargePlayAnimation from '../animation/large_play_animation'
-import Waveform from '../animation/waveform.coffee'
+import Waveform from '../animation/waveform'
 
 export default class extends Controller {
   static targets = ['play', 'playButton', 'time', 'waveform', 'seekBar']
