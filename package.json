@@ -2,8 +2,6 @@
   "dependencies": {
     "@rails/webpacker": "4.0.0-pre.2",
     "@shopify/draggable": "^1.0.0-beta.7",
-    "coffee-loader": "^0.9.0",
-    "coffeescript": "2.3.1",
     "gsap": "^2.0",
     "howler": "^2.0.15",
     "local-time": "^2.1.0",
@@ -14,6 +12,8 @@
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "coffee-loader": "^0.9.0",
+    "coffeescript": "2.3.1",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
