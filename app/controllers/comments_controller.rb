@@ -4,15 +4,13 @@ class CommentsController < ApplicationController
   before_action :require_login, only: %i[destroy unspam]
 
   def create
-    if request.xhr? # it always is...
-      head(:bad_request) unless params[:comment] && params[:comment][:body].present?
-      @comment = Comment.new(massaged_params)
-      head(:bad_request) unless @comment.save
+    head :bad_request unless request.xhr?
+    @comment = Comment.new(massaged_params)
+    if @comment.save
       head :created, location: @comment
     else
-      head(:bad_request)
+      head :unprocessable_entity
     end
-  rescue SocketError # allow offline dev
   end
 
   def destroy
@@ -56,8 +54,8 @@ class CommentsController < ApplicationController
   protected
 
   def comment_params
-    params.require(:comment).permit(:body, :remote_ip, :commentable_type, :commentable_id, :private,
-    :commenter_id, :user_agent, :referrer, :commenter, :user_id, :commentable)
+    params.require(:comment).permit(:body, :commentable_type, :commentable_id, :private,
+    :commenter, :commentable)
   end
 
   def find_comment
