@@ -697,7 +697,7 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@rails/webpacker@4.0.0-pre.3":
+"@rails/webpacker@^4.0.0-pre.3":
   version "4.0.0-pre.3"
   resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-4.0.0-pre.3.tgz#8974c98ba6f2fbe4e67e6d2b7812ee5d817d29e8"
   integrity sha512-JOzBFHalcTLYlpex+cS+2UVLjXtISX8q59eko6uTYu2ndrTF8/9LQ3IrEWOiaCS1cNK9HK/uWlyff+7u/qIuNA==
