@@ -82,13 +82,13 @@ export default class extends PlaybackController {
   }
 
   hideSmallCoverAndSidebarLinks() {
-    smallCover.style.display = 'none'
-    sidebarLinks.style.display = 'none'
+    document.querySelector('a.small-cover').style.display = 'none'
+    document.querySelector('.sidebar-downloads').style.display = 'none'
   }
 
   showSmallCoverAndSidebarLinks() {
-    smallCover.style.display = 'block'
-    sidebarLinks.style.display = 'block'
+    document.querySelector('a.small-cover').style.display = 'block'
+    document.querySelector('.sidebar-downloads').style.display = 'block'
     document.body.classList.remove('cover-view')
   }
 
