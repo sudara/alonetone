@@ -29,7 +29,7 @@ export default class extends Controller {
     const itemInPlaylist = document.querySelector('.tracklist li.active')
     if (itemInPlaylist) this.delegate = this.application.getControllerForElementAndIdentifier(itemInPlaylist, 'playlist-playback')
     else {
-      this.delegate = this.application.getControllerForElementAndIdentifier(this.element, 'single-playback') 
+      this.delegate = this.application.getControllerForElementAndIdentifier(this.element, 'single-playback')
     }
   }
 
@@ -47,6 +47,10 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
+  }
+
+  disconnect() {
+    this.waveformTarget.querySelector('canvas').remove()
   }
 
   setupWaveform() {
