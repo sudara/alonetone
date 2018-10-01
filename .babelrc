@@ -1,10 +1,12 @@
 {
   "presets": [
+    ["minify", {
+      "builtIns": false,
+    }],
     ["@babel/preset-env", {
       "modules": false,
       "targets": {
         "browsers": "> 1%",
-        "uglify": true
       },
       "useBuiltIns": false
     }]
