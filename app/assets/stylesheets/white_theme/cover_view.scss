@@ -38,7 +38,7 @@ body.cover-view .playlist-sidebar {
       }
 
     }
-    
+
   }
   min-width: 400px;
   @media #{$tablet} {
@@ -51,12 +51,13 @@ body.cover-view .playlist-sidebar {
     padding-bottom: 100%;
     svg {
       display: block;
-      @media #{$mobile} { 
+      @media #{$mobile} {
 				border-radius: 0 0 0 0;
 			}
     }
     img {
-      display: block;      
+      display: block;
+      width:100%;
     }
   }
   img {
