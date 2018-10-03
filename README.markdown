@@ -97,7 +97,7 @@ Sweet, now we are talkin'!
 
 First, [sign up for an account](https://alonetone.com) and start digging in.
 
-Second, hop into our Campfire chat room or email us at support@alonetone.com
+Second, hop into our [Slack chat room](https://join.slack.com/t/alonetone/shared_invite/enQtNDE4ODIzMzExNjIyLWFmOWZiZGZlMWRiODZjN2FjNWVlM2E3YWY0ODM0ODlhNjUzMzA3ODFjYzI0NDNmNWIxOWM4MDIxZWFmNWZhNTI) or email us at support@alonetone.com
 
 Thirdly, fork away on github.
 
