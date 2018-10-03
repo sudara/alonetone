@@ -147,6 +147,10 @@ salt moderator ip browser settings]
     end
   end
 
+  def brand_new?
+    created_at > 24.hours.ago
+  end
+
   protected
 
   def efficiently_destroy_relations
