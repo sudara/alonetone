@@ -9,10 +9,10 @@
 		border: 1px dashed #D7DBDB;
 		padding: 4px;
 		margin-top: 10px;
+		text-align: center;
 		img {
 			border-radius: 6px;
-			width: 250px;
-			display: block;
+			display: inline-block;
 		}
 		div.no_pic {
 			svg {
