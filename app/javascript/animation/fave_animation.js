@@ -25,7 +25,8 @@ export default function FaveAnimation(myDiv) {
     this.init = function() {
 
         TweenLite.set([outline, heart], {
-            transformOrigin: '50% 50%'
+            // transformOrigin: '50% 50%',
+            svgOrigin: "300 300"
         })
 
         allPopTl = new TimelineMax().timeScale(1);
