@@ -64,6 +64,15 @@ body.cover-view .playlist-sidebar {
     max-width: 100%;
     display: block;
   }
+  .playlist-cover-alert {
+    font-size:14px;
+    line-height: 1.5em;
+    padding:5px 40px;
+    border: 3px dashed $red;
+    a {
+      text-decoration: underline;
+    }
+  }
   .playlist-options {
     width: 100%;
     height: 50px;
