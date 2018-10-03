@@ -7,6 +7,7 @@ class AssetsController < ApplicationController
 
   # we check to see if the current_user is authorized based on the asset.user
   before_action :require_login, except: %i[index show latest radio listen_feed]
+  before_action :check_new_user_abuse, only: %i[create]
 
   etag { "#{white_theme_enabled?}/#{current_user&.id}"}
 
@@ -308,5 +309,13 @@ class AssetsController < ApplicationController
 
   def dangerous_action?
     %w[destroy update edit create spam unspam].include? action_name
+  end
+
+  def check_new_user_abuse
+    if current_user.brand_new? && current_user.tracks.size >= 25
+      flash[:error] = "To prevent abuse, new users are limited to 25 uploads" \
+                      "in their first day. Come back tomorrow!"
+      redirect_to new_user_track_path(current_user)
+    end
   end
 end
