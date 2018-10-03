@@ -16,7 +16,7 @@ alonetone launched in January 2008 (around the same time as soundcloud).
 
 As of 2018, we host 70,000 tracks from 5500 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
-### Bug reportingbrowserstack.svg
+### Bug reporting
 
 We use [Github Issues](http://github.com/sudara/alonetone/issues) to submit bugs and keep track of our work.
 
@@ -76,6 +76,16 @@ Partial implementation/proof of concept was working on rails 2 branch. Basically
 
 ### A way to manage blacklisted IPs in the backend.
 We get trouble with downloading bots, spambots. We have manually hardcoded IPs in the source, specefically to prevent downloading mp3 and wasting our bandwidth. We need to create a UI so this can be managed by a non-techie moderator. Also, we need to provide logged in users with a "report" action on their listens if they notice sketchy behavior, so it can go upstream to the mods.
+
+## Nomenclature and Historical Baggage That Can And Should Change
+
+* The `Asset` model refers to an mp3, `Track` is an entry in a `Playlist`
+* Playlists are either albums or mixes depending on a boolean, determined `after_update`
+* The home page is `assets#latest`
+* The new theme has views prefixed with `_white`
+* Too many views are in `shared/`
+* Some features are behind `greenfield_enabled?` flag on User
+* "Greenfield" is what we called the initial development of a new frontend (listenapp.com) that rode on top of alonetone. We've now pulled those features into alonetone itself. We still need to remove the engine and deal with the content on listenapp.com, such as migrating `Post` content to `Asset#description`. Luckily only 5-6 albums there.
 
 ## Want to deploy alonetone on your own server?
 
