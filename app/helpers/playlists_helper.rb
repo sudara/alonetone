@@ -15,15 +15,15 @@ module PlaylistsHelper
 
   def playlist_cover(playlist, size)
     if Alonetone.try(:show_dummy_pics) || playlist.has_no_cover?
-      svg_cover
+      return svg_cover
     # greenfield size did not exist before this id
     elsif (size == :greenfield) && ((playlist.pic.id > 69806) && (playlist.pic.id < 72848))
       size = :original
     elsif ((size == :greenfield) || (size == :original)) && (playlist.pic.id < 69807)
-      svg_cover
-    else
-      image_tag playlist.cover(size)
+      size = :album
+      @old_cover_alert = true
     end
+    image_tag playlist.cover(size)
   end
 
   def greenfield_upload_form(user, playlist)
