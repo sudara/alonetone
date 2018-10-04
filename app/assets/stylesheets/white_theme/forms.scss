@@ -234,6 +234,8 @@ label.collection_radio_buttons {
 
 /* USERS/USER/EDIT FORM */
 
+
+
 #bio_edit_user_1, .settings-box, form.new_playlist {
 	br {
 		display: none;
@@ -278,6 +280,9 @@ form.new_playlist {
 		&:last-child {
 			padding-top: $baseline!important;
 		}
+	}
+	select {
+		margin-top: 6px;
 	}
 }
 
