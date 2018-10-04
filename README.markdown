@@ -10,7 +10,7 @@ Cross-browser testing donated by
 
 ## The future is bright
 
-[Alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
+[alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
 alonetone launched in January 2008 (around the same time as soundcloud).
 
