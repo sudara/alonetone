@@ -17,6 +17,7 @@ export default class extends Controller {
     this.loaded = false
     this.isPlaying = false
     this.nextTrackLoading = false
+    this.time = "0:00"
     this.setupHowl()
   }
 
