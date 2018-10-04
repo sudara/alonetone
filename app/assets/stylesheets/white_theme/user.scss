@@ -110,7 +110,7 @@ main {
         .user_name_and_location {
           align-self: flex-end;
           h1.user_name {
-            margin-bottom: 6px;
+            margin-bottom: -4px;
           }
           @media #{$tablet} {
             padding-left: 15px;
