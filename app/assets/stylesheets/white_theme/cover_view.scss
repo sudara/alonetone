@@ -3,8 +3,6 @@
 // yep
 // who wrote these comments?
 // get it together
-/// have
-
 
 
 body.cover-view .playlist-sidebar {
@@ -31,6 +29,7 @@ body.cover-view .playlist-sidebar {
       text-align: left;
       border-radius: 0;
       box-shadow: none;
+      max-width: 700px;
       background-color: transparent;
       position: absolute;
       @media only screen and (max-width: 850px) {

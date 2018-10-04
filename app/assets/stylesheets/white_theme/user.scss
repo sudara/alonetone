@@ -48,6 +48,10 @@ main {
         order: 1;
       }
       grid-area: playlists;
+
+      div.user_playlists {
+        margin-bottom: -$baseline * 1.5;
+      }
       h2 {
         color: $samo-orange;
       }
