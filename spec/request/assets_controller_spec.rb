@@ -26,6 +26,18 @@ RSpec.describe AssetsController, type: :request do
     end
   end
 
+  context '#new' do
+    before do
+      create_user_session(users(:new_user))
+    end
+
+    it 'should not allow new users w/ >= 25 tracks to upload' do
+      get '/upload'
+      expect(response).to be_successful
+      expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
+    end
+  end
+
   context "show" do
     it "should render without errors" do
       get user_track_path('sudara', 'song1')
@@ -150,6 +162,18 @@ RSpec.describe AssetsController, type: :request do
         headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
       }.to change(Listen, :count)
       expect(Listen.last.source).to eq("direct hit")
+    end
+  end
+
+  context '#create' do
+    before do
+      create_user_session(users(:new_user))
+    end
+
+    it 'should prevent uploads from new users with >= 25 tracks' do
+      post '/new_user/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+      follow_redirect!
+      expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
     end
   end
 
