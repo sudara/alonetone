@@ -316,18 +316,17 @@ class AssetsController < ApplicationController
   end
 
   def check_new_user_abuse
-    if new_user_potentially_abusive?
-      @upload_disabled = true
+    return unless new_user_potentially_abusive?
+    @upload_disabled = true
 
-      case action_name
-      when "new"
-        flash.now[:error] = "To prevent abuse, new users are limited to 25 " \
-                            "uploads in their first day. Come back tomorrow!"
-      when "create"
-        flash[:error] = "To prevent abuse, new users are limited to 25 " \
-                            "uploads in their first day. Come back tomorrow!"
-        redirect_to new_user_track_path(current_user)
-      end
+    case action_name
+    when "new"
+      flash.now[:error] = "To prevent abuse, new users are limited to 25 " \
+                          "uploads in their first day. Come back tomorrow!"
+    when "create"
+      flash[:error] = "To prevent abuse, new users are limited to 25 " \
+                          "uploads in their first day. Come back tomorrow!"
+      redirect_to new_user_track_path(current_user)
     end
   end
 end
