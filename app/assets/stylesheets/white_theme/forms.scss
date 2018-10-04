@@ -236,7 +236,7 @@ label.collection_radio_buttons {
 
 
 
-#bio_edit_user_1, .settings-box, form.new_playlist {
+#bio_edit_user_1, .settings-box, form.new_playlist, form.edit_user {
 	br {
 		display: none;
 	}
@@ -255,8 +255,8 @@ label.collection_radio_buttons {
 	}
 	textarea {
 		width: 98%;
-		padding-top: 5px;
-		padding-left: 5px;
+		//padding-top: 5px;
+		//padding-left: 5px;
 	}
 }
 
