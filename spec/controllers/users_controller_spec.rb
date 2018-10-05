@@ -54,7 +54,7 @@ RSpec.describe UsersController, type: :controller do
       activate_authlogic && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:ok]).to be_present
-      expect(response).to redirect_to(brand_new_user_track_path(User.last.login))
+      expect(response).to redirect_to(new_user_track_path(User.last.login))
     end
 
     it 'should log in user on activation' do
@@ -74,7 +74,7 @@ RSpec.describe UsersController, type: :controller do
       activate_authlogic
       get :activate, params: { perishable_token: "abunchofbullshit" }
       expect(flash[:error]).to be_present
-      expect(response).to redirect_to(brand_new_user_path)
+      expect(response).to redirect_to(new_user_path)
     end
 
     it 'should NOT activate an account if you are already logged in' do
