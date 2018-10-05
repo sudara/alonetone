@@ -28,7 +28,7 @@ RSpec.describe AssetsController, type: :request do
 
   context '#new' do
     before do
-      create_user_session(users(:new_user))
+      create_user_session(users(:brand_new_user))
     end
 
     it 'should not allow new users w/ >= 25 tracks to upload' do
@@ -167,11 +167,11 @@ RSpec.describe AssetsController, type: :request do
 
   context '#create' do
     before do
-      create_user_session(users(:new_user))
+      create_user_session(users(:brand_new_user))
     end
 
     it 'should prevent uploads from new users with >= 25 tracks' do
-      post '/new_user/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+      post '/brandnewuser/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
       follow_redirect!
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
     end
