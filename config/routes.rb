@@ -19,8 +19,8 @@ Alonetone::Application.routes.draw do
     get '/logout', :to => 'user_sessions#destroy', as: 'logout', via: [:get, :post]
     resources :user_sessions
 
-    get '/notifications/subscribe', to: 'notifications#subscribe'
-    get 'notifications/unsubscribe', to: 'notifications#unsubscribe'
+    get '/notifications/subscribe' => 'notifications#subscribe'
+    get '/notifications/unsubscribe' => 'notifications#unsubscribe'
 
     # admin stuff
     get 'secretz' => 'admin#secretz'
