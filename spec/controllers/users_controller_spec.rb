@@ -4,6 +4,32 @@ RSpec.describe UsersController, type: :controller do
   render_views
   fixtures :users, :assets
 
+  context 'show' do
+    it "should show delete user button for admins" do
+      login(:sudara)
+
+      get :show,  params: { id: 'arthur' }
+      expect(response).to be_successful
+      expect(response.body).to include('Delete User')
+    end
+
+    it "should NOT show delete user button for muggles" do
+      login(:arthur)
+
+      get :show,  params: { id: 'sudara' }
+      expect(response).to be_successful
+      expect(response.body).not_to include('Delete User')
+    end
+
+    it "should NOT show delete user button for own account" do
+      login(:arthur)
+
+      get :show,  params: { id: 'arthur' }
+      expect(response).to be_successful
+      expect(response.body).not_to include('Delete User')
+    end
+  end
+
   context 'creating' do
     it "should successfully post to users/create" do
       create_user
