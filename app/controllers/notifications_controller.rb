@@ -11,8 +11,8 @@ class NotificationsController < ApplicationController
   def unsubscribe
     current_user.settings[:email_new_tracks] = false
     current_user.save!
-    flash[:ok] = "Email notifications disabled.
-                 #{view_context.link_to "Undo", '/notifications/subscribe'}"
+    flash[:ok] = "You've been unsubscribed to email notifications.
+                   #{view_context.link_to "Undo", '/notifications/subscribe'}"
     redirect_to root_path
   end
 end
