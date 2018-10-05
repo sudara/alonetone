@@ -1,6 +1,10 @@
 class User
   # has a bunch of prefs
-  serialize :settings
+  store :settings, accessors: [
+   :display_listen_count, :block_guest_comments,
+   :most_popular, :email_comments, :increase_ego, :email_new_tracks
+  ]
+  # serialize :settings
 
   before_save :normalize_itunes_url
 
@@ -74,7 +78,8 @@ class User
 
   def wants_email?
     # anyone who doesn't have it set to false, aka, opt-out
-    settings.nil? || (settings[:email_new_tracks] != "false")
+    # settings.nil? || (settings[:email_new_tracks] != "false")
+    settings.empty? || (settings[:email_new_tracks] != "false")
   end
 
   def has_setting?(setting, value = nil)
