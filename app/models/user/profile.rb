@@ -37,6 +37,7 @@ class User
 
   def avatar(size = nil)
     return dummy_pic(size) if has_no_avatar?
+
     pic.pic.url(size)
   end
 
