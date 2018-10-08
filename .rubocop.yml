@@ -147,7 +147,8 @@ Naming/AccessorMethodName:
 
 Naming/VariableNumber:
   Enabled: false
-
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
 AllCops:
   TargetRubyVersion: 2.5
   Exclude:
