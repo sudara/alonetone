@@ -222,6 +222,11 @@ main {
             margin-bottom: $baseline / 2;
           }
 
+          a.edit_profile--delete {
+            @include default-button("admin");
+            margin-bottom: $baseline / 2;
+            background-color: $red;
+          }
         }
       }
     }

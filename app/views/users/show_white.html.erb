@@ -174,12 +174,13 @@
   <% end %>
 </div>
 <% if authorized? %>
-<div class="user_card_mod_stats">
-  <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
-  edit profile
-  <% end %>
-  <% end %>
-  <% if moderator? %>
+  <div class="user_card_mod_stats">
+    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+      edit profile
+    <% end %>
+<% end %>
+<% if moderator? %>
+  <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
   <p>
     Current IP: <strong><%= @user.current_login_ip %></strong><br/>
     <% if @other_users_with_same_ip.present? %>
@@ -192,7 +193,7 @@
   <p>
     User Agent: <%= @user.browser %>
   </p>
-  <% end %>
+<% end %>
 </div>
 </div>
 </div>
