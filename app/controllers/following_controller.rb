@@ -24,7 +24,7 @@ class FollowingController < ApplicationController
     end
 
     current_user.add_or_remove_followee(followee.id)
-    flash[:ok] = "You've unfollowed #{followee.name}! 
+    flash[:ok] = "You've unfollowed #{followee.name}!
                    #{view_context.link_to 'Undo', '/follow/' + followee.login}"
     redirect_to root_path
   end
