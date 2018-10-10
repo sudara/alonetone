@@ -22,6 +22,9 @@ Alonetone::Application.routes.draw do
     get '/notifications/subscribe' => 'notifications#subscribe'
     get '/notifications/unsubscribe' => 'notifications#unsubscribe'
 
+    get '/follow/:login' => 'following#follow'
+    get 'unfollow/:login' => 'following#unfollow'
+
     # admin stuff
     get 'secretz' => 'admin#secretz'
     get 'toggle_theme' => 'admin#toggle_theme'
