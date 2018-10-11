@@ -8,9 +8,6 @@ Listen to all <%= @num_tracks %> tracks of "<%= @title %>":
 
 ------------------------------
 
-You are getting this email because you decided to follow <%= @name.capitalize %>. You can change your mind by clicking "un-follow" here:
-<%= @user_link %>
+You are getting this email because you decided to follow <%= @name.capitalize %>. You can change your mind by clicking here: <%= @stop_following_link %>
 
-You can also turn off all emails by editing your profile at alonetone.
-
-
+You can also turn off all emails by unsubscribing here: <%= @unsubscribe_link %>.

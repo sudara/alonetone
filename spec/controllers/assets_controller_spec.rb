@@ -12,7 +12,7 @@ RSpec.describe AssetsController, type: :controller do
 
   context "new" do
     it 'should display limit reached flash for new users with >= 25 tracks' do
-      login(:new_user)
+      login(:brand_new_user)
       get :new
       expect(response).to be_successful
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
@@ -20,7 +20,7 @@ RSpec.describe AssetsController, type: :controller do
   end
 
   it 'should disable the form for new users with >= 24 tracks' do
-    login(:new_user)
+    login(:brand_new_user)
     get :new
     expect(assigns(:upload_disabled)).to be_present
   end
