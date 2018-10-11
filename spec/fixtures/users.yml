@@ -67,10 +67,10 @@ joeblow:
   updated_at: <%= 1.days.ago.to_s :db %>
 
 # Brand new user with 25 tracks
-new_user:
+brand_new_user:
   id: 7
-  login: new_user
-  email: newuser@example.com
+  login: brandnewuser
+  email: brandnewuser@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 5.hours.ago.to_s :db %>
