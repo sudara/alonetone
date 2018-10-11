@@ -99,11 +99,6 @@ class UsersController < ApplicationController
     head :ok
   end
 
-  def toggle_follow
-    current_user.add_or_remove_followee(params[:followee_id])
-    head :ok
-  end
-
   def destroy
     redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
