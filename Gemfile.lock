@@ -261,7 +261,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
-    perf_check (0.10.1)
+    perf_check (0.10.2)
       colorize
       diffy
       rake
