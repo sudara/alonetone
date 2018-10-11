@@ -22,8 +22,9 @@ Alonetone::Application.routes.draw do
     get '/notifications/subscribe' => 'notifications#subscribe'
     get '/notifications/unsubscribe' => 'notifications#unsubscribe'
 
-    get '/follow/:login' => 'following#follow'
-    get 'unfollow/:login' => 'following#unfollow'
+    get '/follow/:login' => 'following#follow', as: :follow
+    get '/unfollow/:login' => 'following#unfollow', as: :unfollow
+    get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
     # admin stuff
     get 'secretz' => 'admin#secretz'
@@ -127,7 +128,6 @@ Alonetone::Application.routes.draw do
       member do
         post :attach_pic
         get :sudo
-        get :toggle_follow
       end
       resources 'source_files' #:path_prefix => ':login'
       resources 'tracks', controller: :assets do
