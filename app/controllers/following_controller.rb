@@ -1,45 +1,38 @@
 class FollowingController < ApplicationController
-  before_action :require_login, :redirect_if_current_user_equals_params
+  before_action :require_login, :find_user, :redirect_on_self_attempt
 
   def follow
-    followee = User.find_by!(login: params[:login])
-
-    if already_following?(followee.id)
-      flash[:error] = "You're already following #{followee.name}!"
-      return redirect_to root_path
+    if !current_user.is_following? @user
+      current_user.add_or_remove_followee(@user.id)
+      flash[:ok] = "You've followed #{@user.name}!
+                    #{view_context.link_to 'Undo', unfollow_path(@user.login)}"
+      redirect_to root_path
+    else
+      flash[:error] = "You're already following #{@user.name}"
+      redirect_to root_path
     end
-
-    current_user.add_or_remove_followee(followee.id)
-    flash[:ok] = "You've followed #{followee.name}!
-                   #{view_context.link_to 'Undo', '/unfollow/' + followee.login}"
-    redirect_to root_path
   end
 
   def unfollow
-    followee = User.find_by!(login: params[:login])
-
-    if not_already_following?(followee.id)
-      flash[:error] = "You're not following #{followee.name}!"
-      return redirect_to root_path
+    if current_user.is_following? @user
+      current_user.add_or_remove_followee(@user.id)
+      flash[:ok] = "You've unfollowed #{@user.name}!
+                    #{view_context.link_to 'Undo', follow_path(@user.login)}"
+      redirect_to root_path
+    else
+      flash[:error] = "You're not following #{@user.name}"
+      redirect_to root_path
     end
+  end
 
-    current_user.add_or_remove_followee(followee.id)
-    flash[:ok] = "You've unfollowed #{followee.name}!
-                   #{view_context.link_to 'Undo', '/follow/' + followee.login}"
-    redirect_to root_path
+  def toggle_follow
+    current_user.add_or_remove_followee(@user.id)
+    head :ok
   end
 
   private
 
-  def redirect_if_current_user_equals_params
-    redirect_to root_path if current_user.login == params[:login].downcase
-  end
-
-  def already_following?(followee_id)
-    current_user.is_following?(followee_id)
-  end
-
-  def not_already_following?(followee_id)
-    !current_user.is_following?(followee_id)
+  def redirect_on_self_attempt
+    redirect_to root_path if current_user == @user
   end
 end
