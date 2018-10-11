@@ -5,7 +5,7 @@
       <div class="user_name_and_location">
         <h1 class="user_name"><%= @user.name %></h1>
       </div>
-      <% if logged_in? %>
+      <% if logged_in? && current_user != @user %>
         <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
         data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
           <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
