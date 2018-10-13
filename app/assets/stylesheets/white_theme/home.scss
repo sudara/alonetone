@@ -17,7 +17,10 @@
 		flex-direction: column;
 		 > * {
 			width: 100%;
-		}
+    }
+    
+
+
 	}
 	@media #{$mobile} {
 		padding-right: 0;
@@ -38,7 +41,10 @@
   }
 	#home_playlists_area {
     grid-area: playlists;
-
+    
+    @media #{$tablet} {
+      margin-bottom: $baseline * 1.5;
+    }
     .latest-playlists-header {
       color: $samo-orange;
       @media #{$mobile} {
@@ -46,51 +52,63 @@
       }
     }
     ul.playlists {
-      margin-right: auto;
       margin-bottom: 0;
-      margin-left: auto;
-      li.playlist {
+      li {
         margin-bottom: 0;
       }
-      @media #{$mobile} {
-        display: flex;
-        flex-direction: row;
-        width: $mobile-site-width-wide;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        justify-content: space-around;
+
+      @media #{$tablet} {
+        justify-content: space-between;
+        margin-bottom: -$baseline * 1.5;
         li {
-          &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
-            display: block!important;
-            width: 45%;
-            margin: 0;
-            margin-bottom: 18px;
-            img {
-              width: 100%;
-            }
+          display: block!important;
+          width: 45%;
+          margin: 0;
+          margin-bottom: $baseline * 1.5;
+          img {
+            width: 100%;
           }
-          
+          svg {
+            width: 100%;
+          }
         }
       }
-      // @media only screen and (max-width: 1015px) and (min-width: 803px) {
-      // 	li {
-      // 		display: none;
-      // 		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
-      // 			display: block;
-      // 		}
-      // 	}
-      // }
-      // @media only screen and (max-width: 803px) {
-      // 	li {
-      // 		display: none;
-      // 		&:nth-child(1), &:nth-child(2) {
-      // 			display: block;
-      // 		}
-      // 		&:nth-child(3) {
-      // 			display: none;
-      // 		}
-      // 	}
-      // }
+
+      @media #{$mobile} {
+        width: 100%;
+        margin-bottom: -$baseline * .75;
+        justify-content: space-around;
+        li {
+          display: block!important;
+          width: 45%;
+          margin: 0;
+          margin-bottom: $baseline * .75;
+        }
+      }
+      
+      @media only screen and (max-width: 980px) {
+      	li {
+      		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
+      			display: block;
+          }
+          &:nth-child(3) {
+            margin-right: 0;
+          }
+          &:nth-child(4) {
+            display: none;
+          }
+      	}
+      }
+      @media only screen and (max-width: 744px) {
+      	li {
+      		&:nth-child(1), &:nth-child(2) {
+      			display: block;
+      		}
+      		&:nth-child(3), &:nth-child(4),  {
+      			display: none;
+      		}
+      	}
+      }
     }
 	}
 

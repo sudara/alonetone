@@ -25,7 +25,7 @@ ul.playlists {
     @include samo-shadow-and-radius();
     > a:first-child {
       height: 200px;
-      @media #{$mobile} {
+      @media #{$tablet} {
         height: auto;
       }  
     }
