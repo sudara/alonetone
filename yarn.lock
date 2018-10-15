@@ -3551,6 +3551,10 @@ howler@^2.0.15:
   resolved "https://registry.yarnpkg.com/howler/-/howler-2.0.15.tgz#8f26d6548d29b257441fc190644b4392ce99ad32"
   integrity sha512-Ceui16WCAdBiRlI3cK/zPmp6eWKG4wU5yIYHtH+X4zPhwqbr2ieRQvt/1J60NCqEXFHuBKdzBrS5DRYkMwiQsg==
 
+"howler@https://github.com/goldfire/howler.js.git":
+  version "2.0.15"
+  resolved "https://github.com/goldfire/howler.js.git#62d501d227975276631ad4d17cc76c1428dae601"
+
 hpack.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/hpack.js/-/hpack.js-2.1.6.tgz#87774c0949e513f42e84575b3c45681fade2a0b2"
