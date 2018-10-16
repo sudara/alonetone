@@ -318,7 +318,8 @@
           }
           .below_description {
             display: flex;
-            justify-content: space-between;
+			justify-content: space-between;
+			height: 24px;
             a {
               font-size: 12px;
               display: block;
