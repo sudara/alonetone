@@ -41,6 +41,14 @@ input {
 	background-color: #EB7B0C!important;
 }
 
+[type='checkbox']:not(:checked) + label:active:after {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	content: image-url('svg/icon_checkmark.svg');
+	display: block;
+}
+
 
 /* checkbox aspect */
 [type='checkbox']:not(:checked) + label:before {
@@ -69,7 +77,7 @@ input {
 }
 
 /* checked mark aspect */
-[type='checkbox']:not(:checked) + label:after, [type='checkbox']:checked + label:after {
+[type='checkbox']:not(:checked) + label:after {
 	position: absolute;
 	top: 3px;
 	left: 3px;
