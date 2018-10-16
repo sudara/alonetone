@@ -33,6 +33,7 @@ input {
 
 [type='checkbox']:not(:checked) + label:hover:before {
 	border: 1px solid #A6ABAB!important;
+	// background-color: #F5F5F5!important;
 }
 
 [type='checkbox']:not(:checked) + label:active:before, [type='checkbox']:checked + label:active:before {
@@ -51,7 +52,7 @@ input {
 	content: '';
 	border: 1px solid #D7DBDB;
 	border-radius: 2.5px;
-	background: #FFF;
+	background-color: #F5F5F5!important;
 }
 
 /* checkbox aspect */
@@ -73,6 +74,16 @@ input {
 	top: 3px;
 	left: 3px;
 	content: image-url('svg/icon_checkmark.svg');
+	display: none;
+}
+
+/* checked mark aspect */
+[type='checkbox']:checked + label:after {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	content: image-url('svg/icon_checkmark.svg');
+	display: block;
 }
 
 /* disabled checkbox */
@@ -80,9 +91,11 @@ input {
 	border-color: #BBB;
 	background-color: #DDD;
 	box-shadow: none;
+	
 }
 [type='checkbox']:disabled:checked + label:after {
 	color: #999;
+	display: block;
 }
 [type='checkbox']:disabled + label {
 	color: #AAA;
