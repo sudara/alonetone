@@ -57,6 +57,9 @@ main {
         @media #{$mobile} {
           margin: 0 auto;
         }
+        li:last-child {
+          margin-right: 36px;
+        }
       }
     }
 
