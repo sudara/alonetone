@@ -177,3 +177,14 @@ aside.thredded--currently-online {
 .thredded--post--dropdown--actions--item, form.button_to>.thredded--post--dropdown--actions--item {
   height: 51px;
 }
+
+
+
+.thredded--post--dropdown {
+  background-image: image-url('svg/icon_gear.svg');
+  width: 15px;
+  height: 15px;
+  svg {
+    display: none;
+  }
+}
