@@ -38,7 +38,7 @@ gem 'simple_form'
 gem 'local_time'
 gem 'gemoji'
 
-# deprecated 
+# deprecated
 gem 'record_tag_helper'
 
 # external services
@@ -69,6 +69,8 @@ gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
+gem 'activeadmin'
+gem 'kaminari'
 group :production do
   gem 'puma'
   gem 'bugsnag'
