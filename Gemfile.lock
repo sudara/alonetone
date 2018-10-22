@@ -129,7 +129,7 @@ GEM
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
     daemons (1.2.6)
-    dalli (2.7.8)
+    dalli (2.7.9)
     database_cleaner (1.7.0)
     db_text_search (0.2.2)
       activerecord (>= 4.1.15, < 6.0)
