@@ -15,6 +15,7 @@ input {
 	font-family: $sans-font;
 }
 
+
 /* Base for label styling */
 [type='checkbox']:not(:checked), [type='checkbox']:checked {
 	position: absolute;
@@ -115,19 +116,19 @@ input {
 
 ::-webkit-input-placeholder {
 	/* Chrome/Opera/Safari */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 ::-moz-placeholder {
 	/* Firefox 19+ */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 :-ms-input-placeholder {
 	/* IE 10+ */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 :-moz-placeholder {
 	/* Firefox 18- */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 
 .error {

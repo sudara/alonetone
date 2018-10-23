@@ -101,11 +101,15 @@ header#site_header {
       float: left;
       #query {
         font-size: 12px;
-        float: right;
+        // float: right;
         width: 180px;
         height: 25px;
-        line-height:25px;
-        padding: 3px 12px 2px 12px;
+        line-height: 1.2em;
+        
+        padding: 0;
+        padding-left: 8px;
+        box-sizing: content-box;
+        
         color: #222222;
         border: 1px solid #DDDDDD;
         border-radius: 5px;
