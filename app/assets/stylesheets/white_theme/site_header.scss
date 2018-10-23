@@ -110,8 +110,8 @@ header#site_header {
         color: #222222;
         border: 1px solid #DDDDDD;
         border-radius: 5px;
-        &.focused {
-          color: white;
+        &:focus {
+          border: 1px solid #AAAAAA;
         }
       }
     }
