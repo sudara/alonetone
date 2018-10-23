@@ -188,7 +188,11 @@ body.cover-view .playlist-sidebar {
 	margin-top: 15px;
 	text-align: left;
 
-	@include match-dynamic-site-width();
+	width: 100%;
+		position: absolute;
+	bottom: -50px;
+
+	// @include match-dynamic-site-width();
 	.edit_playlist {
 		@include default-button();
 	}
