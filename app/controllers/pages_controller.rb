@@ -76,7 +76,7 @@ class PagesController < ApplicationController
     ActiveRecord::Base.connection.execute("SELECT 1")
     ok = "OK"
     ok += '_QUEUE_UNDER_200' if Sidekiq::Stats.new.enqueued < 200
-    ok += '_AND_WORKERS_UP' unless Sidekiq::ProcessSet.new.empty?
+    ok += '_AND_WORKERS_UP' unless Sidekiq::ProcessSet.new.size > 0
     render plain: ok
   end
 
