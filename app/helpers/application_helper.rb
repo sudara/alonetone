@@ -71,7 +71,7 @@ module ApplicationHelper
     return "" unless text
     text = emojify(text)
     @@renderer ||= begin
-                     html = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { rel: "nofollow" })
+                     html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
                      Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
                    end
     Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
