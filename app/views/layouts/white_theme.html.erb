@@ -14,7 +14,7 @@
   <% if @asset&.persisted? or @playlist&.persisted? %>
     <meta property="og:type"        content="music.<%= @playlist ? 'album' : 'song' %>" />
     <meta property="og:title"       content="<%= @playlist.try(:title) || @asset.title %>" />
-    <meta property="og:description" content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
+    <meta property="og:description" content="<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
     <meta property="og:image"       content="<%= @playlist.cover(:greenfield) if @playlist %>" />
   <% end %>
 
