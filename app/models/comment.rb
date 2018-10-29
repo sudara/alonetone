@@ -107,6 +107,7 @@ end
 #
 # Indexes
 #
+#  by_user_id_type_spam_private                                (user_id,commentable_type,is_spam,private)
 #  index_comments_on_commentable_id                            (commentable_id)
 #  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
 #  index_comments_on_commenter_id                              (commenter_id)
