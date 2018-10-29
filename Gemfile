@@ -79,7 +79,7 @@ group :development do
   gem 'sqlite3'
   gem 'perf_check'
   gem 'annotate'
-  gem 'rubocop', '~> 0.59.2', require: false
+  gem 'rubocop', '~> 0.60.0', require: false
 end
 
 ## Who loves tests! You do? You do!
