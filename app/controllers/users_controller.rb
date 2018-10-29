@@ -159,7 +159,7 @@ class UsersController < ApplicationController
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
     @comments = @user.comments.public_or_private(display_private_comments?)
                      .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
-    @other_users_with_same_ip = User.where(last_login_ip: @user.current_login_ip).pluck('login')
+    @other_users_with_same_ip = @user.current_login_ip.present? ? User.where(last_login_ip: @user.current_login_ip).pluck('login') : nil
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
