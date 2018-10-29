@@ -106,8 +106,7 @@ end
 #
 # Indexes
 #
-#  index_comments_on_commentable_id  (commentable_id)
-#  index_comments_on_commenter_id    (commenter_id)
-#  index_comments_on_created_at      (created_at)
-#  index_comments_on_is_spam         (is_spam)
+#  index_comments_on_commentable_id                            (commentable_id)
+#  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
+#  index_comments_on_commenter_id                              (commenter_id)
 #
