@@ -85,6 +85,11 @@ class Asset < ActiveRecord::Base
       nil
   end
 
+  # Helper for rakismet
+  def user_ip
+    user.current_login_ip
+  end
+
   # allows classes outside Asset to use the same format
   def self.formatted_time(time)
     if time
@@ -124,7 +129,7 @@ class Asset < ActiveRecord::Base
 
   # needed for spam detection
   def full_permalink
-    "https://#{Alonetone.url}/#{user.login}/#{permalink}"
+    "https://#{Alonetone.url}/#{user.login}/tracks/#{permalink}"
   end
 
   def to_param

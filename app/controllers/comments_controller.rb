@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def create
     head :bad_request unless request.xhr?
     @comment = Comment.new(massaged_params)
+    @comment.is_spam = @comment.spam? # makes api request
     if @comment.save
       head :created, location: @comment
     else

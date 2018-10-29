@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
   validates_length_of :body, within: 1..2000
   validates :commentable_id, presence: true
 
-  before_create :disallow_dupes, :set_spam_status, :set_user
+  before_create :disallow_dupes, :set_user
   after_create :deliver_comment_notification, :increment_counters
 
   before_save :truncate_user_agent
@@ -33,6 +33,7 @@ class Comment < ActiveRecord::Base
   rakismet_attrs  author: proc { author_name },
                   author_email: proc { commenter&.email },
                   content: proc { body },
+                  user_role: proc { role },
                   permalink: proc { commentable.try(:full_permalink) }
 
   def duplicate?
@@ -44,13 +45,22 @@ class Comment < ActiveRecord::Base
   end
 
   def set_user
-    self.user = commentable.user if commentable.respond_to? :user
-    true
+    self.user = commentable&.user
   end
 
-  def set_spam_status
-    self.is_spam = spam? # makes API request
-    true
+  # Rakismet is failing to get ip via middleware
+  def user_ip
+    remote_ip
+  end
+
+  def role
+    if commenter&.moderator?
+      'admin'
+    elsif commenter.present?
+      'user'
+    else
+      'guest'
+    end
   end
 
   def author_name
