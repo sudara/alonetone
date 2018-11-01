@@ -112,12 +112,6 @@ Alonetone::Application.routes.draw do
     match 'search' => 'search#index', via: [:get, :post]
     match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
 
-    namespace :admin do
-      resources :layouts
-      resources :users
-    end
-
-
     root :to => 'assets#latest'
 
     resources :users
