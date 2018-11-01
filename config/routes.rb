@@ -6,7 +6,9 @@ Alonetone::Application.routes.draw do
   constraints Greenfield::Constraints do
     mount Greenfield::Engine => "/"
   end
-
+  namespace :admin do
+    resources :comments
+  end
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
@@ -105,7 +107,6 @@ Alonetone::Application.routes.draw do
         get :search
       end
     end
-
 
     get 'toggle_favorite' => 'users#toggle_favorite'
 
