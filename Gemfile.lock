@@ -131,6 +131,8 @@ GEM
     daemons (1.2.6)
     dalli (2.7.9)
     database_cleaner (1.7.0)
+    datagrid (1.5.8)
+      rails (>= 4.0)
     db_text_search (0.2.2)
       activerecord (>= 4.1.15, < 6.0)
     diff-lcs (1.3)
@@ -252,6 +254,7 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
+    pagy (0.21.0)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -479,6 +482,7 @@ DEPENDENCIES
   country_select
   dalli
   database_cleaner
+  datagrid
   dynamic_form
   factory_bot_rails
   font-awesome-sass
@@ -496,6 +500,7 @@ DEPENDENCIES
   mime-types
   mysql2
   newrelic_rpm
+  pagy
   paperclip (~> 6.0.0)
   perf_check
   postmark-rails

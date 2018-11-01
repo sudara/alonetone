@@ -69,6 +69,10 @@ gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
+# admin functionality
+gem "datagrid"
+gem "pagy"
+
 group :production do
   gem 'puma'
   gem 'bugsnag'
