@@ -1,25 +1,35 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Admin Comments</h1>
+<h1>Comments</h1>
 
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th></th>
+      <th>UpdatedAt</th>
+      <th>IP/login</th>
+      <th>ID</th>
+      <th>Text</th>
+      <th>Spam</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @admin_comments.each do |admin_comment| %>
+    <% @comments.each do |comment| %>
       <tr>
-        <td><%= link_to 'Show', admin_comment %></td>
-        <td><%= link_to 'Edit', edit_admin_comment_path(admin_comment) %></td>
-        <td><%= link_to 'Destroy', admin_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><input type="checkbox"></td>
+        <td><%= comment.created_at.strftime("%b %d, %y") %></td>
+        <td><%= comment.remote_ip %></td>
+        <td><%= link_to comment.id, comment %></td>
+        <td><%= comment.body_snippet %></td>
+        <td><%= comment.is_spam %></td>
+        <td><button class="spambtn">Mark As Spam</button></td>
+        <td><button class="spambtn">Mark All As Spam</button></td>
+        <td><button class="spambtn">Block</button></td>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Admin Comment', new_admin_comment_path %>
+<%== pagy_nav @pagy %>

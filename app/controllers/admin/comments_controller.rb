@@ -1,5 +1,6 @@
 class Admin::CommentsController < Admin::BaseController
   def index
-    @comments = Comment.all
+    @pagy, @comments = pagy(Comment.all)
+  end
   end
 end
