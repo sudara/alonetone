@@ -16,12 +16,6 @@ RSpec.describe CommentsController, type: :controller do
       expect(response).to be_successful
     end
 
-    it 'should allow guest to comment on a blog post' do
-      params = { comment: { "body" => "Comment", "private" => "0", "commentable_type" => "Update", "commentable_id" => 1 } }
-      post :create, params: params, xhr: true
-      expect(response).to be_successful
-    end
-
     it 'should allow user comment on a track (via xhr)' do
       login(:arthur)
       params = { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => 1 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }

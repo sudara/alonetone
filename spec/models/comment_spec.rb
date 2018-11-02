@@ -51,23 +51,5 @@ RSpec.describe Comment, type: :model do
     it "should deliver a mail to the user if it was an asset comment" do
       expect { new_comment.save }.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
-
-    it "should not be delivering mail for non-asset comments" do
-      comment = Comment.new(body: "awesome blog post", commentable_type: 'Update', commentable_id: 1)
-      expect { comment.save }.not_to change { ActionMailer::Base.deliveries.size }
-    end
-  end
-
-  context "private and guests" do
-  end
-
-  context "spam" do
-    it "should ask akismet if there is spam" do
-      comment = new_comment
-      # comment.should_receive(:spam?)
-      expect(Rakismet).to receive(:akismet_call)
-      expect(comment.save).to be_truthy
-      expect(comment.is_spam).to be_falsey
-    end
   end
 end
