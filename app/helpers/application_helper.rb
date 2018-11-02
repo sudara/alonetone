@@ -1,5 +1,6 @@
 require 'emoji'
 module ApplicationHelper
+  include Pagy::Frontend
   @@listen_sources = %w[itunes]
 
   def theme_name
