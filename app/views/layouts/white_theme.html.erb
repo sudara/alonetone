@@ -34,7 +34,7 @@
   <%= check_for_and_display_welcome_back %>
   <%= check_for_and_display_flashes %>
 
-  <header id="site_header">
+  <header id="site_header" data-turbolinks-permanent>
     <%= render partial: 'shared/header' %>
     <%= render partial: 'shared/search' %>
   </header>
@@ -54,13 +54,13 @@
     </div>
   </main>
 
-  <footer id="site_footer">
+  <footer id="site_footer" data-turbolinks-permanent>
     <%= cache("footer/#{theme_name}/#{moderator?}", expires_in: 3.minutes) do %>
     <%= render partial: 'shared/footer_white' %>
     <% end %>
   </footer>
 
-  <div id='play-svg-container' style='display:none'>
+  <div id='play-svg-container' style='display:none' data-turbolinks-permanent>
    <svg id="playAnimationSVG"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
         <defs>
             <mask id="iconMask">
