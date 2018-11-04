@@ -3,7 +3,7 @@ class CommentNotification < ActionMailer::Base
 
   def new_comment(comment, asset)
     @comment = comment[:body]
-    @name = comment.user.name
+    @name = comment&.user.name || 'Guest'
     @commenter = person_who_made(comment)
     @song = asset.name
     @number_of_comments = asset.comments_count

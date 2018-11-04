@@ -25,7 +25,7 @@ class Comment < ActiveRecord::Base
   validates :commentable_id, presence: true
 
   before_create :disallow_dupes, :set_user
-  after_create :deliver_comment_notification, :increment_counters
+  after_create :increment_counters
 
   before_save :truncate_user_agent
 
@@ -73,10 +73,6 @@ class Comment < ActiveRecord::Base
 
   def user_logged_in
     !!commenter_id
-  end
-
-  def deliver_comment_notification
-    CommentNotification.new_comment(self, commentable).deliver_now if is_deliverable?
   end
 
   def increment_counters

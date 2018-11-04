@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe CommentsController, type: :controller do
   fixtures :users, :comments, :assets
+  include ActiveJob::TestHelper
 
   context "basics" do
     it 'should allow anyone to view the comments index' do
@@ -28,6 +29,24 @@ RSpec.describe CommentsController, type: :controller do
       params = { :comment => { "body" => "Comment", "private" => 1, "commentable_type" => "Asset", "commentable_id" => 1 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
       post :create, params: params, xhr: true
       expect(response).to be_successful
+    end
+
+    it 'should send email to track owner if comment wasnt spam' do
+      login(:sudara)
+      params = { :comment => { "body" => "Comment yo!", "commentable_type" => "Asset", "commentable_id" => 4 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
+      expect { post :create, params: params, xhr: true}.to change { ActionMailer::Base.deliveries.size }.by(1)
+    end
+
+    # perform_enqueued_jobs
+
+    it 'should not email track owner if comment is spam' do
+      login(:arthur)
+      # the "viagra-test-123" guarantees a spam response
+      params = { :comment => { "body" => "viagra-test-123", "private" => 1, "commentable_type" => "Asset", "commentable_id" => 4 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
+      expect do
+         post :create, params: params, xhr: true
+         Comment.last.update_attribute(:is_spam, true)
+      end.to change { ActionMailer::Base.deliveries.size }.by(0)
     end
   end
 

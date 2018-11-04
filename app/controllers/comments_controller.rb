@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(massaged_params)
     @comment.is_spam = @comment.spam? # makes api request
     if @comment.save
+      CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
       head :created, location: @comment
     else
       head :unprocessable_entity

@@ -47,9 +47,5 @@ RSpec.describe Comment, type: :model do
       comment2 = Comment.new(body: body, remote_ip: ip, commentable_type: 'Asset', commentable_id: '1')
       expect(comment2.save).to be_falsey
     end
-
-    it "should deliver a mail to the user if it was an asset comment" do
-      expect { new_comment.save }.to change { ActionMailer::Base.deliveries.size }.by(1)
-    end
   end
 end
