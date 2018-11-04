@@ -2,11 +2,10 @@
 
   <%= render partial: 'assets/big_player' %>
 
-
   <% if logged_in? %>
   <div class= "edit-links-and-favorite">
   <% end %>
-    
+
     <% if logged_in? %>
     <div class="edit-links">
     <% end %>
@@ -17,7 +16,7 @@
           title: 'delete this track permanently ' %>
         <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit-link") %>
       <% end %>
-      
+
       <% if moderator? %>
         <% if @asset.private? %>
           <%= link_to "Unspam", unspam_user_track_path(@user, @asset), method: :put, class: "edit-link" %>
@@ -48,7 +47,7 @@
     <% end %>
     </div>
     <% end %>
- 
+
  <% if logged_in? %>
  </div>
  <% end %>
@@ -59,8 +58,6 @@
       <h3><%= link_to @asset.user.display_name, user_home_path(@asset.user) %></h3>
     <% end %>
     <%= markdown(@asset.description) %>
-
-
 
     <div class="track-stats">
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
@@ -83,6 +80,9 @@
 
   <%= render partial: 'assets/comment_white', locals: { asset: @asset }%>
 
+  <!--
+  <%= render partial: 'shared/comments' if @comments.present? %>
+  -->
   <% if @listeners.present? %>
   <div class="track-social">
   <h3>Recent Listeners</h3>
