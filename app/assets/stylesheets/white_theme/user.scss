@@ -17,10 +17,20 @@ main {
     'playlists playlists'
     'left right'
     'card card'
+    'links links'
+    'stats stats'
+    'mod_stats mod_stats'
     'plays popular';
+
+    > * {
+      min-width: 320px;
+    }
+
+
     .box {
       margin-bottom: 0;
     }
+
     @media #{$tablet} {
       display: flex;
       flex-direction: column;
@@ -43,6 +53,7 @@ main {
     #user_header_area {
       grid-area: header;
     }
+
     #user_playlists_area {
       @media #{$mobile} {
         order: 1;
@@ -92,15 +103,28 @@ main {
         order: 1;
       }
     }
+
+    #user_links_area {
+      grid-area: links;
+    }
+
+    #user_stats_area {
+      grid-area: stats;
+    }
+    
+    #user_mod_stats_area {
+      grid-area: mod_stats;
+    }
+
     #user_plays_area {
       grid-area: plays;
     }
+
     #user_popular_area {
       grid-area: popular;
     }
-     > * {
-      min-width: 320px;
-    }
+
+ 
 
     #user_header_area {
       #user_header {
@@ -175,7 +199,7 @@ main {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        padding: $baseline;
+        padding: 40px;
         max-width: 50%;
         box-sizing: border-box;
         @media #{$tablet} {
@@ -195,10 +219,10 @@ main {
           background-color: $light-gray;
         }
         .user_card_bio {
-          font-family: $serif-font;
           flex-grow: 1;
-          font-size: 14px;
-          line-height: 1.2em;
+          font-size: 16px;
+          line-height: 1.3em;
+          color: #353535;
         }
         .user_card_links {
          font-size: 13px;
@@ -208,12 +232,6 @@ main {
               color: $samo-orange;
             }
           }
-        }
-        .user_card_stats {
-          font-size: 13px;
-          margin-top: $baseline / 2;
-          padding-top: $baseline / 2;
-          border-top: 1px solid $light-gray;
         }
         .user_card_mod_stats {
           margin-top: $baseline / 2;
@@ -233,6 +251,55 @@ main {
           }
         }
       }
+    }
+    #user_stats_area {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: $baseline * 2;
+      > div {        
+        background-color: $box-background-color;
+        @include samo-shadow-and-radius();
+        flex: 1;
+        padding: 16px;
+        display: flex;
+        > div {
+          
+          > div:first-child {
+            color: #868686;
+            font-size: 12px;
+            margin-bottom: 8px;
+          }
+          > div:last-child {
+            font-size: 16px;
+            color: #353535;
+          }
+
+        }
+      }
+      > div.time_and_date {
+        margin-right: 16px;
+        > div {
+          flex: 1;
+        }
+      }
+      > div.tracks_and_listens {
+        div:first-child {
+          width: 35%;
+        }
+        div:last-child {
+          flex: 1;
+        }
+      }
+    }
+    #user_mod_stats_area {
+      background-color: #D7DBDB;
+      @include samo-shadow-and-radius();
+      padding: 16px;
+
+
+    }
+    #user_links_area {
+
     }
     #user_plays_area {
       .box > h2 {
