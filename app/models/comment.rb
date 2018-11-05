@@ -96,7 +96,7 @@ class Comment < ActiveRecord::Base
   end
 
   def body_snippet
-    self.body.truncate(100)
+    body.truncate(100)
   end
 end
 
