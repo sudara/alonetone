@@ -31,7 +31,6 @@ RSpec.describe Admin::Comments::MarkAsSpamController, type: :request do
     let(:comment3) { comments(:public_comment_on_asset_by_user) }
 
     it "should mark all comments as spam" do
-
       post '/admin/mark_as_spam', params: { user_id: user.id }
 
       expect(comment1.is_spam).to eq(true)
