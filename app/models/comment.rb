@@ -94,6 +94,10 @@ class Comment < ActiveRecord::Base
   def truncate_user_agent
     self.user_agent = user_agent.try(:slice, 0, 255)
   end
+
+  def body_snippet
+    self.body.truncate(100)
+  end
 end
 
 # == Schema Information
