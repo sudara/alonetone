@@ -31,13 +31,13 @@ application.load(definitionsFromContext(context))
 function handlers() {
   document.querySelectorAll('.large-cover .no_pic, .small-cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
-    if (!pic.hasChildNodes()) { 
+    if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))
     }
   })
 
   document.querySelectorAll('a .no_pic').forEach((pic) => {
-    const title = pic.parentNode.getAttribute('title')  
+    const title = pic.parentNode.getAttribute('title')
     if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))
     }
