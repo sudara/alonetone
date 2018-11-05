@@ -23,9 +23,9 @@
         <td><%= link_to comment.id, comment %></td>
         <td><%= comment.body_snippet %></td>
         <td><%= comment.is_spam %></td>
-        <td><button class="spambtn">Block</button></td>
         <td><%= button_to "Mark As Spam", admin_mark_as_spam_index_path, method: :post, params: {id: comment.id} %></td>
         <td><%= button_to "Mark All As Spam", admin_mark_as_spam_index_path, method: :post, params: {user_id: comment.commenter_id} %></td>
+        <td><%= button_to "Add to Blocklist", admin_mark_as_spam_index_path, method: :post, params: {id: comment.id} %></td>
 
       </tr>
     <% end %>
