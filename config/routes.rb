@@ -6,9 +6,16 @@ Alonetone::Application.routes.draw do
   constraints Greenfield::Constraints do
     mount Greenfield::Engine => "/"
   end
+
   namespace :admin do
     resources :comments
+
+    scope module: :comments do
+      resources :mark_as_spam, only: :create
+      resources :add_to_blocklist, only: :create
+    end
   end
+
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
