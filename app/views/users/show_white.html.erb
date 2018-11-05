@@ -168,17 +168,16 @@
           </div>
         </div>
         <div>
-           <div>
+          <div>
             Joined
-            </div>
-            <div>
-                <%= @user.created_at.to_date.to_s :long %>
-            </div>
+          </div>
+          <div>
+            <%= @user.created_at.to_date.to_s :long %>
+          </div>
         </div>
       </div>
       <% if @user.listens_count > 0 %>
       <div class="tracks_and_listens">
-
         <div>
           <div>
             Uploaded
@@ -188,39 +187,56 @@
           </div>
         </div>
         <div>
-           <div>
+          <div>
             Listens
-            </div>
-            <div>
-                <%= @user.listens_count %>
-            </div>
+          </div>
+          <div>
+            <%= @user.listens_count %>
+          </div>
         </div>
       </div>
       <% end %>
   </div>
-  <div id="user_mod_stats_area">
+
+  <div>
     <% if authorized? %>
-    <div class="user_card_mod_stats">
-      <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
-        edit profile
-      <% end %>
+    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+      edit profile
+    <% end %>
     <% end %>
     <% if moderator? %>
     <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
-      <p>
-        Current IP: <strong><%= @user.current_login_ip %></strong><br/>
-        <% if @other_users_with_same_ip.present? %>
-        Other Users with same IP: <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
-        <% end %>
-      </p>
-      <p>
-        <%= flag_for(@user.listens.first&.country) %>
-      </p>
-      <p>
-        User Agent: <%= @user.browser %>
-      </p>
     <% end %>
+      
+    <%= flag_for(@user.listens.first&.country) %>
+
+  </div>
+
+  <% if moderator? %>
+  <div id="user_mod_stats_area">
+
+      <div class="user_ip">
+        <div>
+          <div>IP Address</div>
+          <div><%= @user.current_login_ip %></div>
+        </div>
+        <div>
+          <div>Other with the same IP:</div>
+          <div>
+            <% if @other_users_with_same_ip.present? %>
+            <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="user_agent">
+        <div>User agent</div>
+        <div><%= @user.browser %></div>
+      </div>
+      
     </div>
   </div>
+  <% end %>
 
 </div>
