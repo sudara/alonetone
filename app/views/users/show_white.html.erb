@@ -96,7 +96,6 @@
   </div>
 
   <div id="user_right_column">
-
     <% if @favorites.present? %>
     <div id="user_favorites_area">
       <div class="box">
@@ -143,58 +142,85 @@
        <% end %>
      </div>
      <hr>
-     <div class="user_card_links">
-      <p>
-       <%= website_for_simple(@user).html_safe if @user.website.present? %>
-     </p>
-     <p>
-      <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
-    </p>
+     <div class="user_location">
+        <%= user_location(@user) %>
+     </div>
+    </div>
   </div>
-  <hr>
-  <div class="user_card_stats">
+  <div id="user_links_area">
+    <div class="user_card_links">
     <p>
-      <div class="user_location"><%= user_location(@user) %></div>
+    <%= website_for_simple(@user).html_safe if @user.website.present? %>
     </p>
     <p>
-      Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
+    <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
     </p>
-    <p>
-      Joined <strong><%= @user.created_at.to_date.to_s :long %></strong>.
-    </p>
-    <% if @user.listens_count > 0 %>
-    <p>
-      <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
-    </p>
-    <p>
-      <strong><%= @user.listens_count %></strong> total listens.
-    </p>
-    <strong>~<%= @user.bandwidth_used %>GB</strong> transferred.
-  </p>
-  <% end %>
-</div>
-<% if authorized? %>
-  <div class="user_card_mod_stats">
-    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
-      edit profile
+    </div>
+  </div>
+  <div id="user_stats_area">
+      <div class="time_and_date">
+        <div>
+          <div>
+            Last seen
+          </div>
+          <div>
+            <%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>
+          </div>
+        </div>
+        <div>
+           <div>
+            Joined
+            </div>
+            <div>
+                <%= @user.created_at.to_date.to_s :long %>
+            </div>
+        </div>
+      </div>
+      <% if @user.listens_count > 0 %>
+      <div class="tracks_and_listens">
+
+        <div>
+          <div>
+            Uploaded
+          </div>
+          <div>
+            <%= pluralize @user.assets_count, 'track' %>
+          </div>
+        </div>
+        <div>
+           <div>
+            Listens
+            </div>
+            <div>
+                <%= @user.listens_count %>
+            </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+  <div id="user_mod_stats_area">
+    <% if authorized? %>
+    <div class="user_card_mod_stats">
+      <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+        edit profile
+      <% end %>
     <% end %>
-<% end %>
-<% if moderator? %>
-  <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
-  <p>
-    Current IP: <strong><%= @user.current_login_ip %></strong><br/>
-    <% if @other_users_with_same_ip.present? %>
-    Other Users with same IP: <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+    <% if moderator? %>
+    <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
+      <p>
+        Current IP: <strong><%= @user.current_login_ip %></strong><br/>
+        <% if @other_users_with_same_ip.present? %>
+        Other Users with same IP: <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+        <% end %>
+      </p>
+      <p>
+        <%= flag_for(@user.listens.first&.country) %>
+      </p>
+      <p>
+        User Agent: <%= @user.browser %>
+      </p>
     <% end %>
-  </p>
-  <p>
-    <%= flag_for(@user.listens.first&.country) %>
-  </p>
-  <p>
-    User Agent: <%= @user.browser %>
-  </p>
-<% end %>
-</div>
-</div>
-</div>
+    </div>
+  </div>
+
 </div>
