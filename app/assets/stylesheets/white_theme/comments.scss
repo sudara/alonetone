@@ -58,7 +58,11 @@ h2#latest_comments + div.box {
 		textarea {
 			background-color: #FFF;
 		}
+		form div.submit_wrapper .comment_waiting {
+			border-color: #EFEFEF;
+		}	
 	}
+	
 }
 
 
