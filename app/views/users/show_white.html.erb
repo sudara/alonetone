@@ -34,7 +34,6 @@
   </div>
   <% end %>
 
-
   <div id="user_left_column">
     <div id="user_latest_area">
       <% if @assets.size > 0 %>
@@ -92,7 +91,6 @@
       <% end%>
       <% end %>
     </div>
-
   </div>
 
   <div id="user_right_column">
@@ -236,11 +234,8 @@
     <% if moderator? %>
     <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
     <% end %>
-      
-
   </div>
 
   <%= flag_for(@user.listens.first&.country) %>
-
 
 </div>
