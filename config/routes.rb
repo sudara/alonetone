@@ -9,10 +9,10 @@ Alonetone::Application.routes.draw do
 
   namespace :admin do
     resources :comments
+    resources :blocklists, only: [:add, :remove, :index, :create]
 
     scope module: :comments do
       resources :mark_as_spam, only: :create
-      resources :add_to_blocklist, only: :create
     end
   end
 
