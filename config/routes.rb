@@ -8,15 +8,17 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :comments
-    resources :blocklists, only: [:add, :remove, :index, :create]
-
-    scope module: :comments do
-      resources :mark_as_spam, only: :create
+    resources :comments do
+      member do
+        put :unspam
+        put :spam
+      end
     end
+    resources :blocklists, only: [:add, :remove, :index, :create]
   end
 
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
+    # i think this is not used anymore
     resources :groups
 
     mount Thredded::Engine => '/discuss'

@@ -16,6 +16,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    # ToDo can we move this if block to
+    # to use admin/comments/:id/spam
     if params[:spam] == true
       @comment.spam!
       flash[:ok] = 'We marked that comment as spam'
@@ -25,7 +27,7 @@ class CommentsController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
-
+  # ToDo delete and move all views to admin/comments/:id/ham
   def unspam
     @comment.ham!
     @comment.update_column :is_spam, false
@@ -33,6 +35,7 @@ class CommentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  # ToDo delete and move all views to admin/comments/:id/spam
   def spam
     @comment.spam!
     @comment.update_column :is_spam, true
