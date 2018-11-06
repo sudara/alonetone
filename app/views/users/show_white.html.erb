@@ -141,7 +141,7 @@
        <%= @user.name %> doesn't have anything to say, unfortunately...
        <% end %>
      </div>
-     <hr>
+     <div class="user_card_content_divider"></div>
      <div class="user_location">
         <%= user_location(@user) %>
      </div>
@@ -198,7 +198,7 @@
       <% end %>
   </div>
 
-  <div>
+  <div id="user_actions_area">
     <% if authorized? %>
     <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
       edit profile

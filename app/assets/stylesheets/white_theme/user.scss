@@ -18,6 +18,7 @@ main {
     'links links'
     'stats stats'
     'mod_stats mod_stats'
+    'actions actions'
     'plays popular';
 
     > * {
@@ -117,6 +118,10 @@ main {
       grid-area: mod_stats;
     }
 
+    #user_actions_area {
+      grid-area: actions;
+    }
+
     #user_plays_area {
       grid-area: plays;
     }
@@ -199,8 +204,7 @@ main {
       .user_card_content {
         flex-grow: 1;
         display: flex;
-        flex-direction: column;
-        padding: 40px;
+        flex-direction: column;        
         max-width: 50%;
         box-sizing: border-box;
         @media #{$tablet} {
@@ -208,48 +212,23 @@ main {
           width: 100%;
           margin-left: 0;
         }
-        p {
-          margin-top: 4px;
-          margin-bottom: 4px;
-        }
-        hr {
-          top: 15px;
-          bottom: 15px;
-          height: 1px;
-          border: 0;
-          background-color: $light-gray;
-        }
         .user_card_bio {
           flex-grow: 1;
           font-size: 16px;
           line-height: 1.3em;
           color: #353535;
+          padding: 36px;
         }
-        .user_card_links {
-         font-size: 13px;
-          a {
-            text-decoration: underline;
-            &:hover {
-              color: $samo-orange;
-            }
-          }
+        .user_card_content_divider {
+          height: 1px;
+          margin: 0 24px;
+          background-color: $light-gray;
         }
-        .user_card_mod_stats {
-          margin-top: $baseline / 2;
-          padding-top: $baseline / 2;
-          border-top: 1px solid $light-gray;
-          word-wrap:break-word;
-          line-height: 1.3em;
-          a.edit_profile {
-            @include default-button("admin");
-            margin-bottom: $baseline / 2;
-          }
-
-          a.edit_profile--delete {
-            @include default-button("admin");
-            margin-bottom: $baseline / 2;
-            background-color: $red;
-          }
+        .user_location {
+          font-weight: bold;
+          color: #EB7B0C;
+          font-size: 14px;
+          padding: 16px 36px;
         }
       }
     }
@@ -305,7 +284,6 @@ main {
           width: 75%;
         }
       }
-
       .user_agent {
         padding: 16px;
         border-top: 2px solid #FFF;
@@ -318,10 +296,7 @@ main {
           font-size: 16px;
           color: #353535;
         }
-
-
       }
-
       > div {
         > div {
           > div:first-child {
@@ -333,15 +308,28 @@ main {
             font-size: 16px;
             color: #353535;
           }
-          
         }
       }
-
-
     }
+
+    #user_actions_area {
+      background-color: #EFEFEF;
+      @include samo-shadow-and-radius();
+      padding: 16px;
+      a.edit_profile {
+        @include default-button("admin");
+      }
+
+      a.edit_profile--delete {
+        @include default-button("admin");
+        background-color: $red;
+      }
+    }
+
     #user_links_area {
 
     }
+
     #user_plays_area {
       .box > h2 {
         padding-left: $baseline / 2;
@@ -387,14 +375,5 @@ main {
         }
       }
     }
-  }
-  a.delete_green {
-    display: block;
-    float: right;
-    &:hover {
-      color: $white;
-    }
-
-    @include default_button('admin');
   }
 }
