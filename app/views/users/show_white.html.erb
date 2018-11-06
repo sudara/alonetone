@@ -229,16 +229,18 @@
 
   <div id="user_actions_area">
     <% if authorized? %>
-    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
-      edit profile
-    <% end %>
+      <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+        edit profile
+      <% end %>
     <% end %>
     <% if moderator? %>
     <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
     <% end %>
       
-    <%= flag_for(@user.listens.first&.country) %>
 
   </div>
+
+  <%= flag_for(@user.listens.first&.country) %>
+
 
 </div>

@@ -183,7 +183,6 @@ main {
     #user_card_area {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: $baseline * 2;
       background-color: $box-background-color;
       @include samo-shadow-and-radius();
       @media #{$tablet} {
@@ -235,7 +234,6 @@ main {
     #user_stats_area {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: $baseline * 2;
       > div {        
         background-color: $box-background-color;
         @include samo-shadow-and-radius();
@@ -334,6 +332,7 @@ main {
 
         li {
           width: 160px;
+
         }
       }
 
