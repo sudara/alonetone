@@ -24,8 +24,8 @@ class Asset
     when 'those_you_follow'
         published.recent.new_tracks_from_followees(user, common_options)
 
-    when 'private'
-        recent.where(private: true).paginate(common_options)
+    when 'spam'
+        recent.where(is_spam: true).paginate(common_options)
     else # latest
         published.recent.paginate(common_options)
     end
