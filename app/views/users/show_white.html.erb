@@ -147,16 +147,18 @@
      </div>
     </div>
   </div>
+
   <div id="user_links_area">
-    <div class="user_card_links">
-    <p>
-    <%= website_for_simple(@user).html_safe if @user.website.present? %>
-    </p>
-    <p>
-    <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
-    </p>
-    </div>
+    
+    <ul>
+      <li><%= website_for_simple(@user).html_safe if @user.website.present? %></li>
+      <li>
+       <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
+      </li>
+    </ul>
+
   </div>
+
   <div id="user_stats_area">
       <div class="time_and_date">
         <div>
@@ -198,20 +200,6 @@
       <% end %>
   </div>
 
-  <div id="user_actions_area">
-    <% if authorized? %>
-    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
-      edit profile
-    <% end %>
-    <% end %>
-    <% if moderator? %>
-    <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
-    <% end %>
-      
-    <%= flag_for(@user.listens.first&.country) %>
-
-  </div>
-
   <% if moderator? %>
   <div id="user_mod_stats_area">
 
@@ -236,7 +224,21 @@
       </div>
       
     </div>
-  </div>
+  
   <% end %>
+
+  <div id="user_actions_area">
+    <% if authorized? %>
+    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+      edit profile
+    <% end %>
+    <% end %>
+    <% if moderator? %>
+    <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
+    <% end %>
+      
+    <%= flag_for(@user.listens.first&.country) %>
+
+  </div>
 
 </div>

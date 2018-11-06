@@ -327,10 +327,19 @@ main {
     }
 
     #user_links_area {
+      background-color: #353535;
+      @include samo-shadow-and-radius();
+      ul {
+        
+
+        li {
+          width: 160px;
+        }
+      }
 
     }
 
-    #user_plays_area {
+    #user_plays_area {r
       .box > h2 {
         padding-left: $baseline / 2;
       }
