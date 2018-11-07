@@ -223,7 +223,7 @@ class AssetsController < ApplicationController
   end
 
   def asset_params
-    params.require(:asset).permit(:user, :name, :user_id,
+    params.require(:asset).permit(:user, :mp3, :name, :user_id,
     :title, :description, :youtube_embed, :credits)
   end
 
