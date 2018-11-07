@@ -13,6 +13,7 @@ module UsersHelper
 
   def avatar(user, size = nil)
     return "default/no-pic_#{size}.png" if Alonetone.try(:show_dummy_pics)
+
     case size
     when 100 then image_tag(user.has_pic? ? user.pic.pic.url(:large) : 'default/no-pic-thumb100.jpg')
     when 50 then image_tag(user.has_pic? ? user.pic.pic.url(:small) : 'default/no-pic-thumb50.jpg')
@@ -60,6 +61,7 @@ module UsersHelper
 
   def follow_toggle(user)
     return unless logged_in? && (user.id != current_user.id)
+
     already_following = current_user.is_following?(user)
     if already_following
       link_to('<div class="sprites-heart-broken"></div> un-follow'.html_safe, toggle_follow_path(login: user.login),

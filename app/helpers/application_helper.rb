@@ -56,6 +56,7 @@ module ApplicationHelper
   # though it will not be the exact length.
   def awesome_truncate(text, length = 30, truncate_string = "&hellip;")
     return "" if text.blank?
+
     l = length - truncate_string.mb_chars.length
     result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] || '') + truncate_string : text
     result.html_safe
@@ -69,6 +70,7 @@ module ApplicationHelper
 
   def markdown(text)
     return "" unless text
+
     text = emojify(text)
     @@renderer ||= begin
                      html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
@@ -154,6 +156,7 @@ module ApplicationHelper
 
   def friendly_time_ago(time)
     return "Unknown" unless time.present?
+
     if time > 2.weeks.ago
       time_ago_in_words(time) + ' ago'
     else
@@ -163,6 +166,7 @@ module ApplicationHelper
 
   def flag_for(country)
     return "" unless country.present?
+
     image_tag("flags/#{country.downcase}.svg", size: '80x40', style: 'float:right; clear:none;').html_safe
   end
 

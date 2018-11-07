@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
   before_action :require_login, except: %i[index show latest radio listen_feed]
   before_action :check_new_user_abuse, only: %i[new create]
 
-  etag { "#{white_theme_enabled?}/#{current_user&.id}"}
+  etag { "#{white_theme_enabled?}/#{current_user&.id}" }
 
   # home page
   def latest
@@ -148,7 +148,7 @@ class AssetsController < ApplicationController
     elsif @assets.present? && (@assets.collect(&:persisted?).any? == true)
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
-     else
+    else
       flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
       redirect_to new_user_track_path(current_user)
      end
@@ -214,13 +214,14 @@ class AssetsController < ApplicationController
   protected
 
   def welcome_to_white_theme
-    return if !logged_in? or (session[:white_theme_notified] && session[:white_theme_notified] > 2)
+    return if !logged_in? || (session[:white_theme_notified] && session[:white_theme_notified] > 2)
+
     session[:white_theme_notified] ||= 1
     session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
-    flash.now[:ok] = "Hey, #{current_user.name }, we've been working hard on an updated, mobile friendly theme.<br/>" +
-      "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>Learn More</a> " +
-      "on the new forums or switch back by clicking " +
-      "<a href ='/toggle_theme'>Toggle Theme</a> in the footer.".html_safe
+    flash.now[:ok] = "Hey, #{current_user.name}, we've been working hard on an updated, mobile friendly theme.<br/>" \
+                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>Learn More</a> " \
+                     "on the new forums or switch back by clicking " +
+                     "<a href ='/toggle_theme'>Toggle Theme</a> in the footer.".html_safe
   end
 
   def asset_params
@@ -244,9 +245,11 @@ class AssetsController < ApplicationController
     Array(params[:asset_data]).each do |file|
       if file.is_a?(String) && file.starts_with?("http")
         if url_is_a_zip?(file)
+          # rubocop:disable Security/Open
           open Asset.parse_external_url(file) do |tempfile|
             create_mp3s_from_zip(tempfile, attrs)
           end
+          # rubocop:enable Security/Open
         else
           @assets << current_user.assets.create(attrs.merge(mp3: Asset.parse_external_url(file)))
         end
@@ -319,6 +322,7 @@ class AssetsController < ApplicationController
 
   def check_new_user_abuse
     return unless new_user_potentially_abusive?
+
     @upload_disabled = true
 
     case action_name

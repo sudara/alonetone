@@ -26,6 +26,7 @@ module Greenfield
 
           rms_size += signal.real_size
           next unless rms_size > slice_size
+
           waveform << Math.sqrt(rms).round
           rms = 0.0
           rms_size = 0
