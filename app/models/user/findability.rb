@@ -62,6 +62,7 @@ class User
 
   def geocode_address
     return unless city && country
+
     geo = GeoKit::Geocoders::MultiGeocoder.geocode([city, country].compact.join(', '))
 
     if geo.success

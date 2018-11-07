@@ -30,7 +30,7 @@ class Playlist < ActiveRecord::Base
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
-  before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks, 
+  before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
     :set_published_at, :notify_followers_if_publishing_album
 
   def to_param
@@ -52,6 +52,7 @@ class Playlist < ActiveRecord::Base
 
   def cover(size = nil)
     return dummy_pic(size) if has_no_cover?
+
     pic.pic.url(size)
   end
 
@@ -79,7 +80,7 @@ class Playlist < ActiveRecord::Base
 
   def publishing?
     # it's not publishing if someone marked it private and then public again
-    private_changed? && (private_was == true) && (published_at_was == nil)
+    private_changed? && (private_was == true) && published_at_was.nil?
   end
 
   def set_published_at

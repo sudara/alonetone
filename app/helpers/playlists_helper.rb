@@ -23,6 +23,7 @@ module PlaylistsHelper
       size = :album
       @old_cover_alert = true
     end
+
     image_tag playlist.cover(size)
   end
 
