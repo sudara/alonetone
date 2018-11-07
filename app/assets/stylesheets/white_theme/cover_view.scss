@@ -4,7 +4,6 @@
 // who wrote these comments?
 // get it together
 
-
 body.cover-view .playlist-sidebar {
 	border-radius: 6px 0 0 6px;
 }
@@ -48,6 +47,7 @@ body.cover-view .playlist-sidebar {
     max-width: 800px;
     height: 0;
     padding-bottom: 99%;
+    overflow-y: hidden;
     svg {
       display: block;
       @media #{$mobile} {

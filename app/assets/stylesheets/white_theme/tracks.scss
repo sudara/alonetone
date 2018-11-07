@@ -237,12 +237,12 @@
 		}
 		.tracks_reveal_top {
 			display: flex;
-			margin-right: 14px;
-			margin-left: 14px;
-			padding-top: $baseline / 2;
-			padding-right: 10px;
+			margin-right: 10px;
+			margin-left: 10px;
+			padding-top: 16px;
+			padding-right: 16px;
 			padding-bottom: 0;
-			padding-left: 10px;
+			padding-left: 16px;
 			border-radius: 6px;
 			background-color: #F5F5F5;
 
@@ -268,10 +268,11 @@
 				font-size: 14px;
 				line-height: 17px;
 				margin-right: 0;
+				color: #4F4D4D;
 
 				flex: 1;
 				.user_description {
-					margin-bottom: 15px;
+					margin-bottom: 8px;
 					margin-right: 26px;
 					word-wrap: break-word;
 					-webkit-hyphens: auto;
@@ -318,7 +319,8 @@
           }
           .below_description {
             display: flex;
-            justify-content: space-between;
+			justify-content: space-between;
+			height: 24px;
             a {
               font-size: 12px;
               display: block;

@@ -64,10 +64,10 @@ module UsersHelper
 
     already_following = current_user.is_following?(user)
     if already_following
-      link_to('<div class="sprites-heart-broken"></div> un-follow'.html_safe, toggle_follow_user_path(current_user, followee_id: user.id),
+      link_to('<div class="sprites-heart-broken"></div> un-follow'.html_safe, toggle_follow_path(login: user.login),
         class: 'follow following')
     else
-      link_to('<div class="sprites-heart-with-plus"></div> follow'.html_safe, toggle_follow_user_path(current_user, followee_id: user.id),
+      link_to('<div class="sprites-heart-with-plus"></div> follow'.html_safe, toggle_follow_path(login: user.login),
         class: 'follow')
     end
   end

@@ -1,7 +1,8 @@
 class Asset < ActiveRecord::Base
   concerned_with :uploading, :radio, :statistics, :greenfield
+  attribute :user_agent, :string
 
-  scope :published,       -> { where(private: false) }
+  scope :published,       -> { where(private: false, is_spam: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
@@ -16,7 +17,7 @@ class Asset < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
 
   has_many :listeners,
-    -> { distinct.order('listens.created_at DESC').limit(20) },
+    -> { distinct.order('listens.created_at DESC') },
     through: :listens
 
   has_many :favoriters,
@@ -33,7 +34,10 @@ class Asset < ActiveRecord::Base
   rakismet_attrs  author: proc { user.display_name },
                   author_email: proc { user.email },
                   content: proc { description },
-                  permalink: proc { full_permalink }
+                  permalink: proc { full_permalink },
+                  user_role: proc { role },
+                  comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
+
 
   validates_presence_of :user_id
 
@@ -86,6 +90,11 @@ class Asset < ActiveRecord::Base
       nil
   end
 
+  # Helper for rakismet
+  def user_ip
+    user.current_login_ip
+  end
+
   # allows classes outside Asset to use the same format
   def self.formatted_time(time)
     if time
@@ -125,7 +134,7 @@ class Asset < ActiveRecord::Base
 
   # needed for spam detection
   def full_permalink
-    "https://#{Alonetone.url}/#{user.login}/#{permalink}"
+    "https://#{Alonetone.url}/#{user.login}/tracks/#{permalink}"
   end
 
   def to_param
@@ -140,6 +149,14 @@ class Asset < ActiveRecord::Base
 
   def create_waveform
     Greenfield::WaveformExtractJob.perform_later(id)
+  end
+
+  def role
+    if user.moderator?
+      'admin'
+    else
+      'user'
+    end
   end
 end
 
@@ -159,6 +176,7 @@ end
 #  genre            :string(255)
 #  hotness          :float(24)
 #  id3_track_num    :integer          default(1)
+#  is_spam          :boolean          default(FALSE)
 #  length           :integer
 #  listens_count    :integer          default(0)
 #  listens_per_week :float(24)

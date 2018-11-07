@@ -14,5 +14,6 @@ You got a new comment on your track "<%= @song %>". <%= @number_of_comments > 1 
 Check out all your comments at:
 https://alonetone.com/<%=@login%>/comments
 
-Don't want positive feedback on your tracks via email? Unsubscribe:
-https://alonetone.com/users/<%=@login%>/edit
+Don't want positive feedback on your tracks via email? Adjust your settings here: <%= @settings_link %>
+
+You can also turn off all emails by unsubscribing here: <%= @unsubscribe_link %>.

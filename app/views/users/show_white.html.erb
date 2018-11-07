@@ -5,8 +5,8 @@
       <div class="user_name_and_location">
         <h1 class="user_name"><%= @user.name %></h1>
       </div>
-      <% if logged_in? %>
-        <%= link_to toggle_follow_user_path(current_user, followee_id: @user.id), remote: true, class: 'follow',
+      <% if logged_in? && current_user != @user %>
+        <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
         data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
           <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
             <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
@@ -97,8 +97,8 @@
 
   <div id="user_right_column">
 
+    <% if @favorites.present? %>
     <div id="user_favorites_area">
-      <% if @favorites.present? %>
       <div class="box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
           <span>view all &nbsp;
@@ -111,8 +111,8 @@
         <h2>Recent favorites</h2>
         <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
       </div>
-      <% end %>
     </div>
+    <% end %>
 
     <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
     <div id="user_popular_area">

@@ -1,13 +1,13 @@
 .playlist-sidebar {
+	@include samo-shadow-and-radius();
 	position: relative;
 	background-color: white;
-
-	@include samo-shadow-and-radius();
 	.small-cover {
 		display: block;
 		width: 100%;
 		height: 0;
 		padding-bottom: 99%;
+		overflow-y: hidden;
 		img {
 			display: block;
 			width: 100%;
@@ -18,12 +18,12 @@
 		}
 	}
 	h1 {
-		font-size: 16px;
 		line-height: 22px;
 		margin-top: $baseline/2;
 		margin-bottom: 0;
 		text-align: center;
 		&.cover {
+      font-size: 20px;
 			margin-top: 23px;
 		}
 		a {
@@ -110,8 +110,7 @@
 				padding-bottom: 8px;
 				white-space: nowrap;
 				text-decoration: none;
-				color: $not-quite-black;
-
+        color: $not-quite-black;
 				flex-grow: 1;
 				span.track-position {
 					display: block;
@@ -121,13 +120,12 @@
 					min-width: 21px;
 				}
 				span.track-name {
-					font-weight: bold;
+					font-family: $medium-sans;
 					display: block;
 					overflow: hidden;
 					width: 0;
 					white-space: nowrap;
 					text-overflow: ellipsis;
-
 					flex-grow: 1;
 				}
 				.time-text {
@@ -175,20 +173,15 @@
 			}
 		}
 	}
-}
-
-
-body.cover-view .playlist-sidebar {
-	
-}
-
-.edit_playlist_container {
-	max-width: 1150px;
-	margin-top: 15px;
-	text-align: left;
-
-	@include match-dynamic-site-width();
-	.edit_playlist {
-		@include default-button();
+	.edit_playlist_container {
+		max-width: 1150px;
+		margin-top: 15px;
+		text-align: left;
+		width: 100%;
+		position: absolute;
+		bottom: -50px;
+		.edit_playlist {
+			@include default-button();
+		}
 	}
 }

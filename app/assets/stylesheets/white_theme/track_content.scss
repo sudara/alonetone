@@ -44,6 +44,7 @@
       padding: $baseline / 2;
     }
     h1 {
+      font-family: $black-font;
       font-size: $baseline;
       margin-top: 0;
       line-height: 32px;
@@ -103,7 +104,7 @@
         svg {
           width: 17px;
           position: relative;
-          top: -4px;              
+          top: -4px;
         }
       }
     }

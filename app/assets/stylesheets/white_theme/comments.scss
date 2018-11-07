@@ -27,8 +27,8 @@ h2#latest_comments + div.box {
 	position: relative;
 	clear: both;
 	margin-top: 0;
-	margin-right: 14px;
-	margin-left: 14px;
+	margin-right: 10px;
+	margin-left: 10px;
 	&::before {
 		position: absolute;
 		top: 17px;
@@ -58,7 +58,11 @@ h2#latest_comments + div.box {
 		textarea {
 			background-color: #FFF;
 		}
+		form div.submit_wrapper .comment_waiting {
+			border-color: #EFEFEF;
+		}	
 	}
+	
 }
 
 
@@ -160,29 +164,46 @@ h2#latest_comments + div.box {
 					top: 3px;
 				}
 				.comment_waiting {
-					font-size: 12px;
+					font-size: 10px;
+					padding-left: 16px;
+					padding-right: 32px;
 					font-weight: normal;
 					color: #da6d25;
 					position: relative;
-					top: 7px;
-					margin-right: 35px;
+					top: 1px;
+					border-radius: 2px;
+					margin-right: 12px;
+					
+					height: 22px;
+					font-weight: bold;
+
+					border: 1px solid #FFF;
+
+					&.comment_fail {
+						border: 1px solid #FF1F75;
+					}
+					&.comment_success {
+						border: 1px solid #67C906;
+					}
 					div.ajax_success {
 						padding-right: 2px;
-						color: #67C906;
+						color: #2B8800;
+						padding-top: 5px;
 						&::after {
 							position: absolute;
-							top: 0px;
-							right: -15px;
+							top: 6px;
+							right: 10px;
 							content: image-url('svg/icon_checkmark_green.svg');
 						}
 					}
 					div.ajax_fail {
 						padding-right: 2px;
-						color: #FF1F75;
+						color: #B20035;
+						padding-top: 5px;
 						&::after {
 							position: absolute;
-							top: 0px;
-							right: -15px;
+							top: 6px;
+							right: 10px;
 							content: image-url('svg/icon_x_red.svg');
 						}
 					}
