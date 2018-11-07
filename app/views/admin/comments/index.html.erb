@@ -21,11 +21,11 @@
         <td><%= comment.created_at.strftime("%b %d, %y") %></td>
         <td><%= comment.remote_ip %></td>
         <td><%= link_to comment.id, comment %></td>
-        <td><%= comment.body_snippet %></td>
+        <td><%= truncate(comment.body, length: 100) %></td>
         <td><%= comment.is_spam %></td>
-        <td><%= button_to "Mark As Spam", admin_mark_as_spam_index_path, method: :post, params: {id: comment.id} %></td>
-        <td><%= button_to "Mark All As Spam", admin_mark_as_spam_index_path, method: :post, params: {user_id: comment.commenter_id} %></td>
-        <td><%= button_to "Add to Blocklist", admin_mark_as_spam_index_path, method: :post, params: {id: comment.id} %></td>
+        <td><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></td>
+        <td><%= link_to "mark All As Spam", spam_group_admin_comments_path(comment), method: :put, params: {mark_spam_by: {user_id: comment.commenter_id}} %></td>
+        <td><%= button_to "Add to Blocklist", admin_blocklists_path(comment), method: :put %></td>
 
       </tr>
     <% end %>

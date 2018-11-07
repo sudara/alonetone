@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   layout :white_or_normal
 
   include AuthlogicHelpers

@@ -23,15 +23,17 @@
     </div>
 <% else %>
     <div id="left" class="comments_area box">
-    <h1>Recent Comments</h1>
-      <div class="mini_paginator">
-        <%= will_paginate @comments, param_name: :page%>
-      </div>
-        <%= render partial: 'shared/comment', collection: @comments %>
+    <% benchmark("Showing comments") do %>
+      <h1>Recent Comments</h1>
         <div class="mini_paginator">
           <%= will_paginate @comments, param_name: :page%>
         </div>
-    </div>
+          <%= render partial: 'shared/comment', collection: @comments %>
+          <div class="mini_paginator">
+            <%= will_paginate @comments, param_name: :page%>
+          </div>
+      </div>
+    <% end %>
 
     <% if moderator? or admin? %>
     <div id="right" class="comments_area box">

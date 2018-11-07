@@ -26,7 +26,8 @@ module Admin
     # or
     # { mark_spam_by: {user_id: sudara.id}}
     # then we can reuse this method for different mass spam rules
-    def spam_multiples
+    def spam_group
+      binding.pry
       scope = Comment.where(params[:mark_spam_by])
       # limit scope to non_spam comments
       # and we should include private comments as well
@@ -41,6 +42,10 @@ module Admin
 
     def set_comment
       @comment = Comment.find(params[:id])
+    end
+
+    def admin_comment_params
+      params.fetch(:admin_comment, {})
     end
   end
 end

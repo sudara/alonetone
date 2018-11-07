@@ -44,14 +44,15 @@ class CommentsController < ApplicationController
 
   def index
     if params[:login].present?
-      find_user
-      @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.on_track.public_or_private(display_private_comments?).includes(commenter: :pic, commentable: { user: :pic }).page(params[:page])
-      set_comments_made
+      # find_user
+      # @page_title = "#{@user.name} Comments"
+      # @comments = @user.comments.on_track.public_or_private(display_private_comments?).includes(commenter: :pic, commentable: { user: :pic }).page(params[:page])
+      # set_comments_made
     else
       @page_title = "Recent Comments"
       @comments = Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?).page(params[:page])
-      set_spam_comments
+      # @pagy, @comments_for_pagy = pagy(Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?))
+      # set_spam_comments
     end
     render 'index_white' if white_theme_enabled?
   end
