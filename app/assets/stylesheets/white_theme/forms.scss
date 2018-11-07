@@ -6,7 +6,7 @@ input, textarea, select {
 	
 }
 
-input[type='search'], input[type='text'], textarea {
+input[type='search'], input[type='text'], input[type='password'], input[type='email'], textarea {
 	-webkit-appearance: none;
 }  
 
@@ -14,6 +14,7 @@ input[type='search'], input[type='text'], textarea {
 input {
 	font-family: $sans-font;
 }
+
 
 /* Base for label styling */
 [type='checkbox']:not(:checked), [type='checkbox']:checked {
@@ -33,11 +34,20 @@ input {
 
 [type='checkbox']:not(:checked) + label:hover:before {
 	border: 1px solid #A6ABAB!important;
+	// background-color: #F5F5F5!important;
 }
 
 [type='checkbox']:not(:checked) + label:active:before, [type='checkbox']:checked + label:active:before {
 	border: 1px solid #D46A00!important;
 	background-color: #EB7B0C!important;
+}
+
+[type='checkbox']:not(:checked) + label:active:after {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	content: image-url('svg/icon_checkmark.svg');
+	display: block;
 }
 
 
@@ -51,7 +61,7 @@ input {
 	content: '';
 	border: 1px solid #D7DBDB;
 	border-radius: 2.5px;
-	background: #FFF;
+	background-color: #F5F5F5!important;
 }
 
 /* checkbox aspect */
@@ -68,11 +78,21 @@ input {
 }
 
 /* checked mark aspect */
-[type='checkbox']:not(:checked) + label:after, [type='checkbox']:checked + label:after {
+[type='checkbox']:not(:checked) + label:after {
 	position: absolute;
 	top: 3px;
 	left: 3px;
 	content: image-url('svg/icon_checkmark.svg');
+	display: none;
+}
+
+/* checked mark aspect */
+[type='checkbox']:checked + label:after {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	content: image-url('svg/icon_checkmark.svg');
+	display: block;
 }
 
 /* disabled checkbox */
@@ -80,9 +100,11 @@ input {
 	border-color: #BBB;
 	background-color: #DDD;
 	box-shadow: none;
+	
 }
 [type='checkbox']:disabled:checked + label:after {
 	color: #999;
+	display: block;
 }
 [type='checkbox']:disabled + label {
 	color: #AAA;
@@ -94,19 +116,19 @@ input {
 
 ::-webkit-input-placeholder {
 	/* Chrome/Opera/Safari */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 ::-moz-placeholder {
 	/* Firefox 19+ */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 :-ms-input-placeholder {
 	/* IE 10+ */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 :-moz-placeholder {
 	/* Firefox 18- */
-	color: $lightest-gray;
+	color: $samo-gray;
 }
 
 .error {
@@ -233,8 +255,6 @@ label.collection_radio_buttons {
 }
 
 /* USERS/USER/EDIT FORM */
-
-
 
 #bio_edit_user_1, .settings-box, form.new_playlist, form.edit_user {
 	br {

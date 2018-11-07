@@ -134,6 +134,7 @@ class AssetsController < ApplicationController
     @assets.each do |asset|
       if !asset.new_record?
         flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
+        asset.update_attribute(:is_spam, asset.spam?) # makes an api call
         good = true
       else
         errors = asset.errors.full_messages.join('.')
@@ -156,8 +157,7 @@ class AssetsController < ApplicationController
   # PUT /assets/1.xml
   def update
     result =  @asset.update_attributes(asset_params)
-    is_spam = @asset.spam? # && @user.created_at > 7.days.ago # makes an api call
-    @asset.update_attribute(:private, true) if is_spam
+    @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
     @asset.publish! if params[:commit] == 'Publish'
 
     if request.xhr?
@@ -185,15 +185,15 @@ class AssetsController < ApplicationController
 
   def unspam
     @asset.ham!
-    @asset.update_column :private, false
+    @asset.update_column :is_spam, false
     flash.notice = "Track was made public"
     redirect_back(fallback_location: root_path)
   end
 
   def spam
     @asset.spam!
-    @asset.update_column :private, true
-    flash.notice = "Track was marked as spam and is private"
+    @asset.update_column :is_spam, true
+    flash.notice = "Track was marked as spam"
     redirect_back(fallback_location: root_path)
   end
 
@@ -224,7 +224,7 @@ class AssetsController < ApplicationController
   end
 
   def asset_params
-    params.require(:asset).permit(:user, :mp3, :size, :name, :user_id,
+    params.require(:asset).permit(:user, :mp3, :name, :user_id,
     :title, :description, :youtube_embed, :credits)
   end
 
@@ -239,7 +239,8 @@ class AssetsController < ApplicationController
 
   def extract_assets_from_params
     @assets = []
-    attrs = { private: !!(params[:commit] =~ /don't publish/) }
+    attrs = { private: !!(params[:commit] =~ /don't publish/),
+              user_agent: request.env['HTTP_USER_AGENT'] }
     Array(params[:asset_data]).each do |file|
       if file.is_a?(String) && file.starts_with?("http")
         if url_is_a_zip?(file)
@@ -297,7 +298,7 @@ class AssetsController < ApplicationController
     @favorites = Track.favorites_for_home
     @popular = Asset.published.order('hotness DESC').includes(user: :pic).limit(5)
     @playlists = white_theme_enabled? ? Playlist.for_home.limit(4) : Playlist.for_home.limit(5)
-    @comments = admin? ? Comment.last_5_private : Comment.last_5_public
+    @comments = admin? ? Comment.last_5_private : Comment.to_other_members.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
   end
 

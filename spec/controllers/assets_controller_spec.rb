@@ -12,7 +12,7 @@ RSpec.describe AssetsController, type: :controller do
 
   context "new" do
     it 'should display limit reached flash for new users with >= 25 tracks' do
-      login(:new_user)
+      login(:brand_new_user)
       get :new
       expect(response).to be_successful
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
@@ -20,7 +20,7 @@ RSpec.describe AssetsController, type: :controller do
   end
 
   it 'should disable the form for new users with >= 24 tracks' do
-    login(:new_user)
+    login(:brand_new_user)
     get :new
     expect(assigns(:upload_disabled)).to be_present
   end
@@ -77,10 +77,10 @@ RSpec.describe AssetsController, type: :controller do
       expect(users(:arthur).assets.first.private).to be_falsey
     end
 
-    it 'should force a track to be private if it is spam' do
+    it 'should record track as spammy if it is spam' do
       allow(Rakismet).to receive(:akismet_call).and_return('true')
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }, xhr: true
-      expect(assigns(:asset).private).to be_truthy
+      expect(assigns(:asset).is_spam?).to be_truthy
     end
   end
 

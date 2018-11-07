@@ -9,6 +9,7 @@ class Comment < ActiveRecord::Base
   scope :last_5_private,     -> { on_track.include_private.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
   scope :last_5_public,      -> { on_track.only_public.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
+  scope :to_other_members,   -> { where("commenter_id != user_id") }
 
   has_many :replies, as: :commentable, class_name: 'Comment'
 
@@ -23,8 +24,8 @@ class Comment < ActiveRecord::Base
   validates_length_of :body, within: 1..2000
   validates :commentable_id, presence: true
 
-  before_create :disallow_dupes, :set_spam_status, :set_user
-  after_create :deliver_comment_notification, :increment_counters
+  before_create :disallow_dupes, :set_user
+  after_create :increment_counters
 
   before_save :truncate_user_agent
 
@@ -32,6 +33,7 @@ class Comment < ActiveRecord::Base
   rakismet_attrs  author: proc { author_name },
                   author_email: proc { commenter&.email },
                   content: proc { body },
+                  user_role: proc { role },
                   permalink: proc { commentable.try(:full_permalink) }
 
   def duplicate?
@@ -43,13 +45,22 @@ class Comment < ActiveRecord::Base
   end
 
   def set_user
-    self.user = commentable.user if commentable.respond_to? :user
-    true
+    self.user = commentable&.user
   end
 
-  def set_spam_status
-    self.is_spam = spam? # makes API request
-    true
+  # Rakismet is failing to get ip via middleware
+  def user_ip
+    remote_ip
+  end
+
+  def role
+    if commenter&.moderator?
+      'admin'
+    elsif commenter.present?
+      'user'
+    else
+      'guest'
+    end
   end
 
   def author_name
@@ -62,10 +73,6 @@ class Comment < ActiveRecord::Base
 
   def user_logged_in
     !!commenter_id
-  end
-
-  def deliver_comment_notification
-    CommentNotification.new_comment(self, commentable).deliver_now if is_deliverable?
   end
 
   def increment_counters
@@ -106,8 +113,8 @@ end
 #
 # Indexes
 #
-#  index_comments_on_commentable_id  (commentable_id)
-#  index_comments_on_commenter_id    (commenter_id)
-#  index_comments_on_created_at      (created_at)
-#  index_comments_on_is_spam         (is_spam)
+#  by_user_id_type_spam_private                                (user_id,commentable_type,is_spam,private)
+#  index_comments_on_commentable_id                            (commentable_id)
+#  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
+#  index_comments_on_commenter_id                              (commenter_id)
 #

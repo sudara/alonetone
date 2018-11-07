@@ -39,10 +39,3 @@
   <% end %>
 </div>
 
-<% if authorized? %>
-<div class="edit_playlist_container">
-  <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
-    edit playlist
-  <% end %>
-</div>
-<% end %>

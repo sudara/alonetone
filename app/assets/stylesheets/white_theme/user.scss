@@ -54,8 +54,12 @@ main {
       }
       ul {
         margin: 0;
+        margin-right: -36px;
         @media #{$mobile} {
           margin: 0 auto;
+        }
+        li:last-child {
+          margin-right: 36px;
         }
       }
     }

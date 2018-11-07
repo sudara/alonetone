@@ -31,7 +31,6 @@ body {
         max-width: 450px;
         width: 35%;
         margin-right: $baseline;
-        overflow: auto;
         align-self: stretch;
         @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
           max-width: none;
@@ -93,6 +92,8 @@ body {
         width: 45%;
         min-width: 320px;
         max-width: 450px;
+
+
         h2.box {
           box-shadow: none;
           border-radius: 0;
@@ -108,6 +109,9 @@ body {
         }
         @media #{$tablet} {
           width: 100%;
+          margin-left: auto!important;
+          margin-right: auto!important;
+  
         }
       }
     }

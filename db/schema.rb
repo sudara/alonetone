@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_23_122803) do
+ActiveRecord::Schema.define(version: 2018_11_06_233316) do
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2018_09_23_122803) do
     t.text "waveform", limit: 4294967295
     t.boolean "private", default: false, null: false
     t.integer "id3_track_num", default: 1
+    t.boolean "is_spam", default: false
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
@@ -71,9 +72,9 @@ ActiveRecord::Schema.define(version: 2018_09_23_122803) do
     t.boolean "private", default: false
     t.text "body_html"
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
+    t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
-    t.index ["created_at"], name: "index_comments_on_created_at"
-    t.index ["is_spam"], name: "index_comments_on_is_spam"
+    t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private"
   end
 
   create_table "featured_tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -1,105 +1,115 @@
-.latest-playlists-header {
-	margin-right: auto;
-	margin-left: auto;
-	color: $samo-orange;
-	@media #{$mobile} {
-		width: $mobile-site-width-wide;
-	}
-}
-
-.latest-playlists-header + ul.playlists {
-	margin-right: auto;
-	margin-bottom: 0;
-	margin-left: auto;
-	li.playlist {
-		margin-bottom: 0;
-	}
-	@media #{$mobile} {
-		display: flex;
-		flex-direction: row;
-		width: $mobile-site-width-wide;
-		margin-bottom: 20px;
-
-		flex-wrap: wrap;
-		justify-content: space-around;
-		li {
-			&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4) {
-				display: block!important;
-				width: 45%;
-				margin: 0;
-				margin-bottom: 18px;
-				img {
-					width: 100%;
-				}
-			}
-			
-		}
-	}
-	@media only screen and (max-width: 1015px) and (min-width: 803px) {
-		li {
-			display: none;
-			&:nth-child(1), &:nth-child(2), &:nth-child(3) {
-				display: block;
-			}
-		}
-	}
-	@media only screen and (max-width: 803px) {
-		li {
-			display: none;
-			&:nth-child(1), &:nth-child(2) {
-				display: block;
-			}
-			&:nth-child(3) {
-				display: none;
-			}
-		}
-	}
-}
-
 #home_grid {
-  display: grid;
-  margin: 0 auto;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto; 
-  grid-column-gap: $baseline * 1.5;
-  grid-row-gap: $baseline * 1.5;
-  max-width: 1100px;
-  padding: 0 $baseline * 1.5;
-  box-sizing: border-box;
-  justify-content: space-around;
-  .box h2 {
-	padding-left: 50px;
-  }
+	display: grid;
+	margin: 0 auto;
+	max-width: 1100px;
+	padding: 0 $baseline * 1.5;
+	box-sizing: border-box;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: auto;
 	grid-column-gap: $baseline * 1.5;
 	grid-row-gap: $baseline * 1.5;
 	justify-content: space-around;
 	grid-template-areas: 'playlists playlists'
-					    'left right';
+						           'left right';
 
-	@media #{$tablet} {
+  @media #{$tablet} {
 		display: flex;
 		flex-direction: column;
 		 > * {
 			width: 100%;
-		}
-	}
+    }
+    
 
+
+	}
 	@media #{$mobile} {
 		padding-right: 0;
 		padding-left: 0;
 	}
-
 	.box {
-		margin-bottom: 0;
+    margin-bottom: 0;
+    h2 {
+      padding-left: 50px;
+      }
 		@media #{$mobile} {
 			margin-bottom: $baseline * 1.5;
-		}
-	}
-
+    }
+    
+  }
+  > * {
+		min-width: 320px;
+  }
 	#home_playlists_area {
-		grid-area: playlists;
+    grid-area: playlists;
+    
+    @media #{$tablet} {
+      margin-bottom: $baseline * 1.5;
+    }
+    .latest-playlists-header {
+      color: $samo-orange;
+      @media #{$mobile} {
+        width: $mobile-site-width-wide;
+      }
+    }
+    ul.playlists {
+      margin-bottom: 0;
+      li {
+        margin-bottom: 0;
+      }
+
+      @media #{$tablet} {
+        justify-content: space-between;
+        margin-bottom: -$baseline * 1.5;
+        li {
+          display: block!important;
+          width: 45%;
+          margin: 0;
+          margin-bottom: $baseline * 1.5;
+          img {
+            width: 100%;
+          }
+          svg {
+            width: 100%;
+          }
+        }
+      }
+
+      @media #{$mobile} {
+        width: 100%;
+        margin-bottom: -$baseline * .75;
+        justify-content: space-around;
+        li {
+          display: block!important;
+          width: 45%;
+          margin: 0;
+          margin-bottom: $baseline * .75;
+        }
+      }
+      
+      @media only screen and (max-width: 980px) {
+      	li {
+      		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
+      			display: block;
+          }
+          &:nth-child(3) {
+            margin-right: 0;
+          }
+          &:nth-child(4) {
+            display: none;
+          }
+      	}
+      }
+      @media only screen and (max-width: 744px) {
+      	li {
+      		&:nth-child(1), &:nth-child(2) {
+      			display: block;
+      		}
+      		&:nth-child(3), &:nth-child(4),  {
+      			display: none;
+      		}
+      	}
+      }
+    }
 	}
 
 	#home_left_column {
@@ -122,7 +132,5 @@
 		}
 	}
 
-	 > * {
-		min-width: 320px;
-	}
+  
 }

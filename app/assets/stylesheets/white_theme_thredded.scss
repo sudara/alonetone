@@ -34,10 +34,24 @@ aside.thredded--currently-online {
   background-color: #fff;
   @include samo-shadow-and-radius();
   @include match-dynamic-site-width('narrow');
+
+  @media only screen and (max-width: 1000px) {
+    @include match-dynamic-site-width('wide');
+  }
+
+  @media #{$tablet} {
+    padding-left: 4%;
+    padding-right: 4%;
+    width: auto;
+    margin-left: 36px;
+    margin-right: 36px;
+  }
   @media #{$mobile} {
     padding-left: 4%;
     padding-right: 4%;
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   header {
@@ -162,4 +176,15 @@ aside.thredded--currently-online {
 
 .thredded--post--dropdown--actions--item, form.button_to>.thredded--post--dropdown--actions--item {
   height: 51px;
+}
+
+
+
+.thredded--post--dropdown {
+  background-image: image-url('svg/icon_gear.svg');
+  width: 15px;
+  height: 15px;
+  svg {
+    display: none;
+  }
 }

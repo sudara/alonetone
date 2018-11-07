@@ -100,11 +100,6 @@ class UsersController < ApplicationController
     head :ok
   end
 
-  def toggle_follow
-    current_user.add_or_remove_followee(params[:followee_id])
-    head :ok
-  end
-
   def destroy
     redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
@@ -132,8 +127,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
-      :website, :myspace, :bio, :display_name, :itunes, :settings, :city, :country, :twitter,
-      :settings)
+      :website, :myspace, :bio, :display_name, :itunes, :city, :country, :twitter,
+      settings: %i[display_listen_count block_guest_comments most_popular
+        increase_ego email_comments email_new_tracks])
   end
 
   def ip_is_acceptable?
@@ -164,7 +160,7 @@ class UsersController < ApplicationController
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
     @comments = @user.comments.public_or_private(display_private_comments?)
                      .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
-    @other_users_with_same_ip = User.where(last_login_ip: @user.current_login_ip).pluck('login')
+    @other_users_with_same_ip = @user.current_login_ip.present? ? User.where(last_login_ip: @user.current_login_ip).pluck('login') : nil
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
