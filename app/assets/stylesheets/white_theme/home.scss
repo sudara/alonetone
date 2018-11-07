@@ -25,12 +25,19 @@
 	@media #{$mobile} {
 		padding-right: 0;
 		padding-left: 0;
-	}
+  }
+
+  h2 {
+    padding-left: 16px;
+    color: #EB7B0C;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    line-height: 1em;
+  }
+
+
 	.box {
     margin-bottom: 0;
-    h2 {
-      padding-left: 50px;
-      }
 		@media #{$mobile} {
 			margin-bottom: $baseline * 1.5;
     }
