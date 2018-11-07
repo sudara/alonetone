@@ -216,24 +216,31 @@ body main #columns {
 		#radio_controls {
 			padding: 0;
 			ul {
-				li.radio_channel {
-					font-size: 15px;
-					line-height: 45px;
-					display: block;
-					box-sizing: border-box;
+        li {
 					width: 100%;
-					height: 40px;
-					padding-left: 15px;
-					cursor: pointer;
-					border-bottom: 1px solid $light-gray;
-					background-color: $white;
+          height: 40px;
+          text-indent: 25px;
+          line-height: 45px;
+					display: block;
+          box-sizing: border-box;
+          cursor: pointer;
+          border-bottom: 1px solid $light-gray;
+          background-color: $orange-background;
+          color: $white;
+        }
+				li, li a {
+					font-size: 15px;
+          text-decoration: none;
 					&.disabled {
 						color: $disabled;
 					}
-					input {
-						margin-right: 20px;
-					}
-				}
+        }
+        li a{
+          display: block;
+          width:100%;
+          color: $not-quite-black;
+          background-color: $white;
+        }
 			}
 		}
 	}

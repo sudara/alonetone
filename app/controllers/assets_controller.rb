@@ -83,6 +83,7 @@ class AssetsController < ApplicationController
     @channel = params[:source].humanize
     @page_title = "alonetone Radio: #{@channel}"
     @assets = Asset.radio(params[:source], params, current_user)
+    render 'radio_white' if white_theme_enabled?
   end
 
   def top
