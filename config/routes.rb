@@ -9,6 +9,10 @@ Alonetone::Application.routes.draw do
 
   namespace :admin do
     resources :comments do
+      collection do
+        put :spam_group
+      end
+
       member do
         put :unspam
         put :spam
