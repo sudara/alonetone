@@ -244,13 +244,6 @@ class AssetsController < ApplicationController
     Array(params[:asset_data]).each do |file|
       if file.is_a?(String) && file.starts_with?("http")
         if url_is_a_zip?(file)
-          # bad
-          # open(something)
-
-          # # good
-          # File.open(something)
-          # IO.popen(something)
-          # URI.parse(something).open
           # rubocop:disable Security/Open
           open Asset.parse_external_url(file) do |tempfile|
             create_mp3s_from_zip(tempfile, attrs)
