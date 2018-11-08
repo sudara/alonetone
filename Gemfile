@@ -37,8 +37,9 @@ gem 'dynamic_form'
 gem 'simple_form'
 gem 'local_time'
 gem 'gemoji'
+gem 'pagy'
 
-# deprecated 
+# deprecated
 gem 'record_tag_helper'
 
 # external services
@@ -68,6 +69,8 @@ gem 'newrelic_rpm'
 gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
+
+
 
 group :production do
   gem 'puma'
