@@ -184,19 +184,19 @@ class AssetsController < ApplicationController
     end
   end
 
-  def unspam
-    @asset.ham!
-    @asset.update_column :is_spam, false
-    flash.notice = "Track was made public"
-    redirect_back(fallback_location: root_path)
-  end
+  # def unspam
+  #   @asset.ham!
+  #   @asset.update_column :is_spam, false
+  #   flash.notice = "Track was made public"
+  #   redirect_back(fallback_location: root_path)
+  # end
 
-  def spam
-    @asset.spam!
-    @asset.update_column :is_spam, true
-    flash.notice = "Track was marked as spam"
-    redirect_back(fallback_location: root_path)
-  end
+  # def spam
+  #   @asset.spam!
+  #   @asset.update_column :is_spam, true
+  #   flash.notice = "Track was marked as spam"
+  #   redirect_back(fallback_location: root_path)
+  # end
 
   def stats
     respond_to do |format|
