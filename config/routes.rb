@@ -7,6 +7,15 @@ Alonetone::Application.routes.draw do
     mount Greenfield::Engine => "/"
   end
 
+  namespace :admin do
+    resources :comments do
+       member do
+        put :unspam
+        put :spam
+      end
+    end
+  end
+
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
