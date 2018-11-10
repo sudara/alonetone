@@ -7,7 +7,7 @@ RSpec.describe Admin::CommentsController, type: :request do
     create_user_session(users(:sudara))
   end
 
-  describe "for individual comments" do
+  describe "spam for individual comments" do
     let(:comment) { comments(:valid_comment_on_asset_by_guest) }
 
     it "should mark comments as spam" do
@@ -20,6 +20,26 @@ RSpec.describe Admin::CommentsController, type: :request do
     it "should update RAKISMET" do
       expect(Rakismet).to receive(:akismet_call)
       put spam_admin_comment_path(comment.id)
+    end
+  end
+
+  describe "unspam individual comments" do
+    let(:comment) { comments(:public_spam_comment_on_asset_by_user) }
+
+    it "should unspam the comment" do
+      put unspam_admin_comment_path(comment.id)
+      expect(comment.reload.is_spam).to eq(false)
+    end
+
+    it "should update RAKISMET" do
+      expect(Rakismet).to receive(:akismet_call)
+      put unspam_admin_comment_path(comment.id)
+    end
+
+    it "shoudl send notification" do
+      expect do
+        put unspam_admin_comment_path(comment.id)
+      end.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
   end
 
@@ -43,7 +63,6 @@ RSpec.describe Admin::CommentsController, type: :request do
 
     it "should alow mass update by other attributes (like user_id)" do
       put mark_group_as_spam_admin_comments_path, params: { mark_spam_by: { user_id: comment1.user_id } }
-      # not sure why i need to reload here but not above
       expect(comment1.reload.is_spam).to eq(true)
       expect(comment3.reload.is_spam).to eq(true)
     end
