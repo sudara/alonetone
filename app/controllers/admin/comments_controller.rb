@@ -1,6 +1,6 @@
 module Admin
   class CommentsController < Admin::BaseController
-    before_action :set_comment, only: [:unspam, :spam]
+    before_action :set_comment, only: %i[unspam spam]
 
     def index
       @pagy, @comments = pagy(Comment.all)
