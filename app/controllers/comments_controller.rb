@@ -26,19 +26,6 @@ class CommentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def unspam
-    @comment.ham!
-    @comment.update_column :is_spam, false
-    @comment.deliver_comment_notification
-    redirect_back(fallback_location: root_path)
-  end
-
-  def spam
-    @comment.spam!
-    @comment.update_column :is_spam, true
-    redirect_back(fallback_location: root_path)
-  end
-
   def index
     if params[:login].present?
       find_user
