@@ -25,6 +25,7 @@
           <td><%= comment.is_spam %></td>
           <td><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></td>
           <td><%= button_to "Unspam", unspam_admin_comment_path(comment), method: :put %></td>
+          <td><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></td>
         </tr>
       <% end %>
     </tbody>
