@@ -32,19 +32,19 @@ spam_comment_on_asset_by_guest:
   body: "Well, this is an is_spammy is_spam."
   is_spam: true
   user_id: 1
-    
+
 comment_with_no_body:
   id: 5
   commentable_type: Asset
   commentable_id: 1
-  
+
 comment_on_update:
   id: 6
   commentable_type: Update
   commentable_id: 1
   body: "Well, this is an awesome blog entry"
   is_spam: false
-  
+
 private_comment_on_asset_by_guest:
   id: 7
   commentable_type: Asset
@@ -64,4 +64,25 @@ private_comment_on_asset_by_user:
   commenter_id: 2
   remote_ip: 127.0.0.1
   private: true
-  
+
+public_spam_comment_on_asset_by_user:
+  id: 9
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Sudara, don't forget milk."
+  is_spam: true
+  user_id: 1
+  commenter_id: 2
+  remote_ip: 127.0.0.1
+  private: false
+
+ public_comment_on_asset_by_user:
+  id: 10
+  commentable_type: Asset
+  commentable_id: 1
+  body: "Well friend, this is your best work."
+  is_spam: false
+  user_id: 1
+  commenter_id: 2
+  remote_ip: 127.0.0.1
+  private: false
