@@ -1,0 +1,34 @@
+  <h1>Comments</h1>
+<div id="columns">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>UpdatedAt</th>
+        <th>IP/login</th>
+        <th>ID</th>
+        <th>Text</th>
+        <th>Spam</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><%= comment.created_at.strftime("%b %d, %y") %></td>
+          <td><%= comment.remote_ip %></td>
+          <td><%= link_to comment.id, comment %></td>
+          <td><%= truncate(comment.body, length: 100) %></td>
+          <td><%= comment.is_spam %></td>
+          <td><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></td>
+          <td><%= button_to "Unspam", unspam_admin_comment_path(comment), method: :put %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%== pagy_nav @pagy %>
+
+</div>
