@@ -13,6 +13,10 @@ Alonetone::Application.routes.draw do
         put :unspam
         put :spam
       end
+
+      collection do
+        put :mark_group_as_spam
+      end
     end
   end
 

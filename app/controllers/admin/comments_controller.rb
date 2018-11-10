@@ -21,6 +21,17 @@ module Admin
       redirect_back(fallback_location: root_path)
     end
 
+    def mark_group_as_spam
+      # limit scope to non_spam comments
+      # and we should include private comments as well
+      scope = Comment.where(params[:mark_spam_by].permit!)
+      comments = scope.include_private
+
+      comments.map(&:spam!)
+      comments.update_all(is_spam: true)
+      redirect_back(fallback_location: root_path)
+    end
+
     private
 
     def set_comment

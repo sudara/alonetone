@@ -62,7 +62,7 @@ private_comment_on_asset_by_user:
   is_spam: false
   user_id: 1
   commenter_id: 2
-  remote_ip: 127.0.0.1
+  remote_ip: 127.0.0.2
   private: true
 
 public_spam_comment_on_asset_by_user:
@@ -73,10 +73,10 @@ public_spam_comment_on_asset_by_user:
   is_spam: true
   user_id: 1
   commenter_id: 2
-  remote_ip: 127.0.0.1
+  remote_ip: 127.0.0.2
   private: false
 
- public_comment_on_asset_by_user:
+public_comment_on_asset_by_user:
   id: 10
   commentable_type: Asset
   commentable_id: 1
@@ -84,5 +84,5 @@ public_spam_comment_on_asset_by_user:
   is_spam: false
   user_id: 1
   commenter_id: 2
-  remote_ip: 127.0.0.1
+  remote_ip: 127.0.0.2
   private: false
