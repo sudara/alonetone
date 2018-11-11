@@ -3,8 +3,10 @@ module Admin
     before_action :find_asset, only: %i[spam unspam]
 
     def index
-      @pagy, @comments = pagy(Asset.all)
+      @pagy, @assets = pagy(Asset.recent)
     end
+
+    # def show;end
 
     def unspam
       @asset.ham!
@@ -21,7 +23,6 @@ module Admin
     end
 
     def mark_group_as_spam
-      binding.pry
       scope = Asset.where(params[:mark_spam_by].permit!)
       assets = scope.not_spam
 
@@ -32,8 +33,8 @@ module Admin
 
     private
 
-    def set_comment
-      @comment = Comment.find(params[:id])
+    def find_asset
+      @asset = Asset.find(params[:id])
     end
   end
 end
