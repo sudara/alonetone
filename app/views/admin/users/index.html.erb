@@ -21,7 +21,7 @@
           <td><%= user.last_login_ip %></td>
           <td><%= user.login %></td>
           <td><%= truncate(user.bio, length: 200) %></td>
-          <td><%= button_to "Spam All Tracks", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></td>
+          <td><%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></td>
           <td><%= button_to "Delete User", user, method: :delete %></td>
         </tr>
       <% end %>

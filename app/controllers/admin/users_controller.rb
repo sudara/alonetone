@@ -3,10 +3,10 @@ module Admin
     before_action :set_user, only: %i[destroy spam]
 
     def index
-      @pagy, @users = pagy(User.all)
+      @pagy, @users = pagy(User.recent)
     end
 
-    def destroy_user
+    def destroy
       @user.destroy
       redirect_back(fallback_location: root_path)
     end

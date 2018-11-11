@@ -8,11 +8,7 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users do
-      member do
-        put :destroy_user
-      end
-    end
+    resources :users
     resources :comments do
        member do
         put :unspam
