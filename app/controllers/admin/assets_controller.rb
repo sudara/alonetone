@@ -6,8 +6,6 @@ module Admin
       @pagy, @assets = pagy(Asset.recent)
     end
 
-    # def show;end
-
     def unspam
       @asset.ham!
       @asset.update_column :is_spam, false
