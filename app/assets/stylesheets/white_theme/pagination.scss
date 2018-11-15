@@ -1,10 +1,23 @@
+.pagy-nav.pagination {
+	a, a:visited {
+		font-size: 12px;
+		line-height: 14px;
+		display: block;
+		float: left;
+		height: 12px;
+		padding: 0;
+		color: #888;
+	}
+}
+
+
 .pagination {
 	position: relative;
 	display: block;
 	float: right;
 	height: 32px;
 	text-align: right;
-	em, span {
+	em, a, span, a:visited {
 		font-size: 12px;
 		line-height: 14px;
 		display: block;
