@@ -35,43 +35,51 @@
   <% end %>
 
   <div id="user_left_column">
+    <% if @assets.size > 0 %>
     <div id="user_latest_area">
-      <% if @assets.size > 0 %>
+      
+      <h2>Latest music</h2>
+
       <div id="user_latest" class="box">
+        <%= render partial: 'assets/asset', collection: @assets %>
+      </div>
+      <div class="below_box">
         <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}"  do %>
         <span>view all &nbsp;
           <i class="icon_caret">
             <%= render file: svg_path('svg/icon_caret.svg') %>
           </i>
         </span>
-
         <% end if @user.assets_count > 5 %>
-        <h2>Latest music</h2>
-        <%= render partial: 'assets/asset', collection: @assets %>
       </div>
-      <% end %>
     </div>
 
+    <% end %>
+
+    <% unless @listens.empty? %>
     <div id="user_listens_area">
-      <% unless @listens.empty? %>
+      <h2>Recently listened to</h2>
+      
       <div class="box">
-        <%= link_to listens_path(@user.login), class: 'view_all' do %>
+        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+      </div>
+
+      <div class="below_box">
+          <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
-        <% end if @listens.size > 4 %>
-        <h2>Recently listened to</h2>
-        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+          <% end if @listens.size > 4 %>   
       </div>
-      <% end %>
     </div>
+    <% end %>
 
     <div id="user_plays_area">
       <% if authorized? && @user.listens_count > 0 %>
       <% cache([@track_plays, theme_name]) do %>
+      <h2>Latest listens to your music</h2>
       <div id="user_track_plays" class="box">
         <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
@@ -81,7 +89,7 @@
           </span>
 
         <% end if @track_plays.size > 4 %>
-        <h2>Latest listens to your music</h2>
+        
         <div class="static_content">
           <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
           <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
@@ -96,27 +104,32 @@
   <div id="user_right_column">
     <% if @favorites.present? %>
     <div id="user_favorites_area">
+      <h2>Recent favorites</h2>
       <div class="box">
+        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
+        
+        
+        
+      </div>
+      <div class="below_box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
         <% end if @user.favorites.tracks.size > 5 %>
-        <h2>Recent favorites</h2>
-        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
       </div>
     </div>
     <% end %>
 
     <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
     <div id="user_popular_area">
+      <h2>Most Listened To Tracks</h2>
+      
       <div id="user_popular" class="box">
         <%= link_to " ", user_tracks_path(@user),
         class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
-        <h2>Most Listened To Tracks</h2>
         <%= render partial: 'assets/asset', collection: @popular_tracks %>
       </div>
     </div>
