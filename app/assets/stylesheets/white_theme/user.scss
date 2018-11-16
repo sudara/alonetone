@@ -163,10 +163,6 @@ main {
           top: 4px;
           &:hover {
             text-decoration: none;
-            
-            // div.follow_button {
-            //   color: #FFF;
-            // }
           }
           div.follow_button {
             @include default_button();
