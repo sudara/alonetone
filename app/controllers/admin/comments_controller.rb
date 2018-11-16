@@ -11,14 +11,20 @@ module Admin
       @comment.update_column :is_spam, false
       @comment.deliver_comment_notification
 
-      redirect_back(fallback_location: root_path)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
     end
 
     def spam
       @comment.spam!
       @comment.update_column :is_spam, true
 
-      redirect_back(fallback_location: root_path)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
     end
 
     def mark_group_as_spam
