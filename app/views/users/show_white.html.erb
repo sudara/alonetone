@@ -8,7 +8,7 @@
       <% if logged_in? && current_user != @user %>
         <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
         data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
-          <span>Follow</span>
+          <div class="follow_button">Follow</div>
           <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
             <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
             <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
