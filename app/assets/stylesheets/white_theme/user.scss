@@ -20,12 +20,9 @@ main {
     'mod_stats mod_stats'
     'actions actions'
     'plays popular';
-
     > * {
       min-width: 320px;
     }
-
-
     h2 {
       color: #EB7B0C;
       padding-left: 16px;
@@ -149,7 +146,8 @@ main {
         .user_name_and_location {
           align-self: flex-end;
           h1.user_name {
-            margin-bottom: -4px;
+            font-size: 28px;
+
           }
           @media #{$tablet} {
             padding-left: 15px;
