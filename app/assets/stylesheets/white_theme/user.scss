@@ -5,6 +5,7 @@ main {
     max-width: 1100px;
     padding: 0 $baseline * 1.5;
     margin: 0 auto;
+    margin-top: 60px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     grid-column-gap: $baseline * 1.5;
@@ -147,27 +148,41 @@ main {
           align-self: flex-end;
           h1.user_name {
             font-size: 28px;
-
+            line-height: 1em;
+            margin-top: 0;
+            margin-bottom: 0;
           }
           @media #{$tablet} {
             padding-left: 15px;
           }
         }
         a.follow {
-          display: block;
-          width: 48px;
-          height: 48px;
+          display: flex;
           align-self: flex-end;
           position: relative;
           top: 4px;
-        }
-        a.edit_profile {
-          position: absolute;
-          margin-left: 0px;
-          margin-top:70px;
-          @include default_button('admin');
-           > div {
-            display: none;
+          &:hover {
+            text-decoration: none;
+            
+            // div.follow_button {
+            //   color: #FFF;
+            // }
+          }
+          div.follow_button {
+            @include default_button();
+            background-color: #FFF;
+            color: #EB7B0C;
+            margin-left: 24px;
+            margin-right: 12px;
+            &:hover { 
+              background-color: #FFF;
+            }
+          }
+          svg {
+            width: 32px;
+            height: 32px;
+            position: relative;
+            top: -3px;
           }
         }
       }
