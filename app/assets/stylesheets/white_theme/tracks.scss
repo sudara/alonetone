@@ -26,12 +26,12 @@
 	&:last-child {
 		border-bottom: 0;
 		padding-bottom: 1px;
-		border-radius: 0 0 6px 6px;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
 	}
 	&:first-child {
-		// border-bottom: 0;
-		// padding-bottom: 1px;
-		border-radius: 6px 6px 0 0;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 	}
 	&:focus {
 		outline: none;
