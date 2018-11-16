@@ -8,8 +8,15 @@
 		padding: 0;
 		color: #888;
 	}
+	.active {
+		font-weight: bold;
+		color: $samo-orange;
+	}
+	em, a:hover, span.current {
+		text-decoration: none;
+		color: $samo-orange;
+	}
 }
-
 
 .pagination {
 	position: relative;
