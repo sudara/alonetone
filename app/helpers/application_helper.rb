@@ -79,6 +79,17 @@ module ApplicationHelper
     Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
   end
 
+  def markdown_with_html(text)
+    return "" unless text
+
+    text = emojify(text)
+    @@renderer_with_html ||= begin
+                     html = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { rel: "nofollow" })
+                     Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
+                   end
+    Redcarpet::Render::SmartyPants.render(@@renderer_with_html.render(text)).html_safe
+  end
+
   def emojify(content)
     content.gsub(/:([a-z0-9\+\-_]+):/) do |match|
       if Emoji.find_by_alias(Regexp.last_match(1))
