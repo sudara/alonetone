@@ -4,40 +4,59 @@
 
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
-  <h2 class="box">Edit your profile</h2>
-  <%= form_for @user, html: { method: :put }, namespace: 'bio' do |f| -%>
-	<div class="static_content">
-  <p>
-    <label for="display_name">The name you want displayed on alonetone</label><br/>
-    <%= f.text_field :display_name %>
-  </p>
-
-  <p>
-    <label for="user_bio">Tell us about yourself</label><br/>
-    <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
-  </p>
-
-  <p>
-    <label for="user_bio">What city or town do you live in?</label><br/>
-    <%= f.text_field :city %>
-  </p>
-
-  <p>
-    <label for="user_bio">What country?</label><br />
-    <%= f.country_select(:country, ['United States'], include_blank: true) %>
-  </p>
-
-  <p>
-    <label for="user_website">Have a website?</label><br/>
-    https://<%= f.text_field :website %>
-  </p>
-
-  <p>
-    <label for "user_twitter">On twitter?</label><br/>
-    http://twitter.com/<%= f.text_field :twitter%>
-  </p>
+    <h2 class="box">Edit your name</h2>
+    <%= form_for @user, html: { method: :put }, namespace: 'bio' do |f| -%>
+	  <div class="static_content">
+      <p>
+        <label for="display_name">The name you want displayed on alonetone</label><br/>
+        <%= f.text_field :display_name %>
+      </p>
+    </div>
+    <div class="static_content">
+      <%= f.submit "Save" %>
+    </div>
+    <% end %>
   </div>
+  <div class="box edit-your-profile-box">
+    <h2 class="box">Edit your deets</h2>
+    <%= form_for @profile, html: { method: :put }, namespace: 'bio' do |f| -%>
+    <div class="static_content">
+      <p>
+        <label for="user_bio">Tell us about yourself</label><br/>
+        <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
+      </p>
 
+      <p>
+        <label for="user_bio">What city or town do you live in?</label><br/>
+        <%= f.text_field :city %>
+      </p>
+
+      <p>
+        <label for="user_country">What country?</label><br />
+        <%= f.country_select(:country, ['United States'], include_blank: true) %>
+      </p>
+
+      <p>
+        <label for="user_website">Have a website?</label><br/>
+        https://<%= f.text_field :website %>
+      </p>
+
+      <p>
+        <label for "user_spotify>Are you on Spotify?</label><br/>
+        https://open.spotify.com/artist/<%= f.text_field :spotify %>
+      </p>
+
+      <p>
+        <label for "user_twitter">Twitter?</label><br/>
+        https://twitter.com/<%= f.text_field :twitter %>
+      </p>
+
+      <p>
+        <label for "user_instagram">Insta?</label><br/>
+        https://instagram.com/<%= f.text_field :instagram %>
+      </p>
+    </div>
+  </div>
   <div class="static_content">
     <%= f.submit "Update Your Profile" %>
   </div>

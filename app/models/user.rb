@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :profile, :statistics, :posting, :greenfield
+  concerned_with :validation, :findability, :settings, :statistics, :posting, :greenfield
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   # Can create music
   has_one    :pic, as: :picable, dependent: :destroy
+  has_one    :profile, dependent: :destroy
   has_many   :assets,
     -> { order('assets.id DESC') },
     dependent: :destroy
@@ -83,14 +84,6 @@ class User < ActiveRecord::Base
 
   def to_param
     login.to_s
-  end
-
-  def to_xml(options = {})
-    options[:except] ||= []
-    options[:except] += %i[email crypted_password
-fb_user_id activation_code admin
-salt moderator ip browser settings]
-    super
   end
 
   def listened_more_than?(n)
@@ -187,12 +180,7 @@ end
 #  admin              :boolean          default(FALSE)
 #  assets_count       :integer          default(0), not null
 #  bandwidth_used     :integer          default(0)
-#  bio                :text(16777215)
-#  bio_html           :text(16777215)
-#  browser            :string(255)
-#  city               :string(255)
 #  comments_count     :integer          default(0)
-#  country            :string(255)
 #  crypted_password   :string(128)      default(""), not null
 #  current_login_at   :datetime
 #  current_login_ip   :string(255)
@@ -204,9 +192,7 @@ end
 #  last_login_at      :datetime
 #  last_login_ip      :string(255)
 #  last_request_at    :datetime
-#  lat                :float(24)
 #  listens_count      :integer          default(0)
-#  lng                :float(24)
 #  login              :string(40)
 #  login_count        :integer          default(0), not null
 #  moderator          :boolean          default(FALSE)
@@ -216,9 +202,7 @@ end
 #  posts_count        :integer          default(0)
 #  salt               :string(128)      default(""), not null
 #  settings           :text(16777215)
-#  twitter            :string(255)
 #  use_old_theme      :boolean          default(FALSE)
-#  website            :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
 #
