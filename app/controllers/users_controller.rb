@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :ip_is_acceptable?, only: :create
   before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
-  before_action :require_login, except: %i[index show new create activate bio destroy]
+  before_action :require_login, except: %i[index show new create activate destroy]
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
@@ -18,13 +18,6 @@ class UsersController < ApplicationController
         prepare_meta_tags
         gather_user_goodies
         render 'show_white' if white_theme_enabled?
-      end
-      format.xml { @assets = @user.assets.published.recent.limit(params[:limit] || 10) }
-      format.rss { @assets = @user.assets.published.recent }
-      format.js do
-        render :update do |page|
-          page.replace 'user_latest', partial: "latest"
-        end
       end
     end
   end
@@ -49,6 +42,7 @@ class UsersController < ApplicationController
     if @user.valid? && passed_recaptcha? && @user.save_without_session_maintenance
       session[:recaptcha] = false # make sure they have to recaptcha for new user
       @user.reset_perishable_token!
+      @user.create_profile
       UserNotification.signup(@user).deliver_now
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)
@@ -126,8 +120,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
-      :website, :myspace, :bio, :display_name, :itunes, :city, :country, :twitter,
-      settings: %i[display_listen_count block_guest_comments most_popular
+      :display_name, settings: %i[display_listen_count block_guest_comments most_popular
         increase_ego email_comments email_new_tracks])
   end
 
@@ -151,6 +144,7 @@ class UsersController < ApplicationController
   end
 
   def gather_user_goodies
+    @profile = @user.profile
     @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(user: :pic).limit(5)
     @playlists = @user.playlists.only_public.includes(:user, :pic)

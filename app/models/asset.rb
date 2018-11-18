@@ -163,6 +163,7 @@ end
 #  genre            :string(255)
 #  hotness          :float(24)
 #  id3_track_num    :integer          default(1)
+#  is_spam          :boolean          default(FALSE)
 #  length           :integer
 #  listens_count    :integer          default(0)
 #  listens_per_week :float(24)

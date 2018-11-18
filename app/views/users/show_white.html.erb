@@ -133,25 +133,25 @@
     </div>
     <div class="user_card_content">
       <div class="user_card_bio">
-       <% if @user.try(:bio) %>
-       <%= markdown(@user.bio) %>
+       <% if @profile.try(:bio) %>
+       <%= markdown(@profile.bio) %>
        <% else %>
        <%= @user.name %> doesn't have anything to say, unfortunately...
        <% end %>
      </div>
      <div class="user_card_content_divider"></div>
      <div class="user_location">
-        <%= user_location(@user) %>
+        <%= user_location(@profile) %>
      </div>
     </div>
   </div>
 
   <div id="user_links_area">
-    
+
     <ul>
-      <li><%= website_for_simple(@user).html_safe if @user.website.present? %></li>
+      <li><%= website_for_simple(@profile).html_safe if @profile.website.present? %></li>
       <li>
-       <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
+       <a href="http://twitter.com/<%= @profile.twitter %>">twitter.com/<%= @profile.twitter %></a>
       </li>
     </ul>
 
@@ -218,11 +218,11 @@
 
       <div class="user_agent">
         <div>User agent</div>
-        <div><%= @user.browser %></div>
+        <div><%= @profile.user_agent %></div>
       </div>
-      
+
     </div>
-  
+
   <% end %>
 
   <div id="user_actions_area">
