@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def awesome_truncate_with_read_more(asset, length = 30)
-    text = awesome_truncate(asset.description, length)
+    text = awesome_truncate(strip_tags(asset.description), length)
     text << link_to('read more', user_track_path(asset.user, asset.permalink)) if asset.description && asset.description.length > 300
     text.html_safe
   end
