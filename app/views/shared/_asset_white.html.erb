@@ -57,7 +57,7 @@
     <% unless @playlist %>
       <h3><%= link_to @asset.user.display_name, user_home_path(@asset.user) %></h3>
     <% end %>
-    <%= markdown(@asset.description) %>
+    <%= markdown_with_html(@asset.description) %>
 
     <div class="track-stats">
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
