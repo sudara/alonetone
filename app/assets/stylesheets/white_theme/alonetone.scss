@@ -18,7 +18,7 @@ ul {
 	justify-content: space-between;
 	@include samo-shadow-and-radius();
 	h1, h2 {
-		font-family: $medium-sans;
+		font-family: $medium-sans-font;
 		line-height: 42px;
 		display: block;
 		box-sizing: border-box;
@@ -61,10 +61,10 @@ ul {
 		padding-left: 20px;
 		padding-right: 6px;
 		height: 32px;
-		line-height: 32px;	
+		line-height: 32px;
 		@include samo-shadow-and-radius();
 		background-color: #FFF;
-		box-shadow: none;	
+		box-shadow: none;
 		span {
 			vertical-align: top;
 			display: inline-flex;
@@ -89,7 +89,7 @@ ul {
 				.icon_caret_path {
 					stroke: $samo-orange;
 				}
-				
+
 			}
 		}
 	}
