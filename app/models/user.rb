@@ -93,8 +93,8 @@ salt moderator ip browser settings]
     super
   end
 
-  def listened_more_than?(n)
-    listens.count > n
+  def listened_more_than?(num)
+    listens.count > num
   end
 
   def hasnt_been_here_in(hours)
@@ -120,6 +120,7 @@ salt moderator ip browser settings]
 
   def add_or_remove_followee(followee_id)
     return if followee_id == id # following yourself would be a pointless affair!
+
     if is_following?(followee_id)
       is_following?(followee_id).destroy
     else
