@@ -34,7 +34,7 @@ main {
       margin-bottom: 0;
       h2 {
         padding-left: 50px;
-      }  
+      }
     }
 
     @media #{$tablet} {
@@ -117,7 +117,7 @@ main {
     #user_stats_area {
       grid-area: stats;
     }
-    
+
     #user_mod_stats_area {
       grid-area: mod_stats;
     }
@@ -134,7 +134,7 @@ main {
       grid-area: popular;
     }
 
- 
+
 
     #user_header_area {
       #user_header {
@@ -169,8 +169,8 @@ main {
             background-color: #FFF;
             color: #EB7B0C;
             margin-left: 24px;
-            margin-right: 12px;
-            &:hover { 
+            margin-right: 8px;
+            &:hover {
               background-color: #FFF;
             }
           }
@@ -218,7 +218,7 @@ main {
       .user_card_content {
         flex-grow: 1;
         display: flex;
-        flex-direction: column;        
+        flex-direction: column;
         max-width: 50%;
         box-sizing: border-box;
         @media #{$tablet} {
@@ -249,7 +249,7 @@ main {
     #user_stats_area {
       display: flex;
       flex-wrap: wrap;
-      > div {        
+      > div {
         background-color: $box-background-color;
         @include samo-shadow-and-radius();
         flex: 1;
@@ -287,7 +287,7 @@ main {
     #user_mod_stats_area {
       background-color: #EFEFEF;
       @include samo-shadow-and-radius();
-    
+
       .user_ip {
         padding: 16px;
         display: flex;
@@ -344,7 +344,7 @@ main {
       background-color: #353535;
       @include samo-shadow-and-radius();
       ul {
-        
+
 
         li {
           width: 160px;
