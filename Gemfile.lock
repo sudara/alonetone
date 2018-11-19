@@ -252,6 +252,7 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
+    pagy (0.21.0)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -495,6 +496,7 @@ DEPENDENCIES
   mime-types
   mysql2
   newrelic_rpm
+  pagy
   paperclip (~> 6.0.0)
   perf_check
   postmark-rails

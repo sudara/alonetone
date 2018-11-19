@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   include AuthlogicHelpers
   include PreventAbuse
+  include Pagy::Backend
 
   protect_from_forgery
 

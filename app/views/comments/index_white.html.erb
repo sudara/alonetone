@@ -1,49 +1,49 @@
 <div id="columns">
-<% if params[:login] %>
+  <% if params[:login] %>
     <div id="left" class="comments_area box">
       <h2>Comments on <%= @user.name %>'s stuff</h2>
       <div class="mini_paginator">
-        <%= will_paginate @comments, param_name: :page%>
+        <%== pagy_nav @pagy %>
       </div>
       <%= render partial: 'shared/comment', collection: @comments %>
       <div class="mini_paginator">
-        <%= will_paginate @comments, param_name: :page%>
+        <%== pagy_nav @pagy %>
       </div>
     </div>
 
     <div id="right" class="comments_area box">
       <h2>Comments made by <%= @user.name %> </h2>
       <div class="mini_paginator">
-        <%= will_paginate @comments_made, param_name: :made_page%>
+        <%== pagy_nav @pagy_comments_made %>
       </div>
       <%= render partial: 'shared/comment', collection: @comments_made %>
       <div class="mini_paginator">
-        <%= will_paginate @comments_made, param_name: :made_page%>
+        <%== pagy_nav @pagy_comments_made %>
       </div>
     </div>
-<% else %>
+  <% else %>
     <div id="left" class="comments_area box">
-    <h1>Recent Comments</h1>
+      <h1>Recent Comments</h1>
       <div class="mini_paginator">
-        <%= will_paginate @comments, param_name: :page%>
+        <%== pagy_nav @pagy %>
       </div>
-        <%= render partial: 'shared/comment', collection: @comments %>
-        <div class="mini_paginator">
-          <%= will_paginate @comments, param_name: :page%>
-        </div>
+      <%= render partial: 'shared/comment', collection: @comments %>
+      <div class="mini_paginator">
+        <%== pagy_nav @pagy %>
+      </div>
     </div>
 
     <% if moderator? or admin? %>
-    <div id="right" class="comments_area box">
-      <h1>Recent SPAM</h1>
-      <div class="mini_paginator">
-        <%= will_paginate @spam, param_name: :spam_page%>
+      <div id="right" class="comments_area box">
+        <h1>Recent SPAM</h1>
+        <div class="mini_paginator">
+          <%== pagy_nav @pagy_spam %>
+        </div>
+        <%= render partial: 'shared/comment', collection: @spam %>
+        <div class="mini_paginator">
+          <%== pagy_nav @pagy_spam %>
+        </div>
       </div>
-      <%= render partial: 'shared/comment', collection: @spam %>
-      <div class="mini_paginator">
-        <%= will_paginate @spam, param_name: :spam_page%>
-      </div>
-    </div>
     <% end %>
-<% end %>
+  <% end %>
 <div>
