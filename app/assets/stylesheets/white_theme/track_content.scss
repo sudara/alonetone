@@ -129,8 +129,13 @@
       }
     }
   }
-  .comment_asset {
 
+  div.comment_asset + h2 {
+    display: none;
+  }
+
+  div#user_comments {
+    background-color: none;
   }
 
   .track-edit {
