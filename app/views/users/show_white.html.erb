@@ -8,6 +8,7 @@
       <% if logged_in? && current_user != @user %>
         <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
         data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
+          <div class="follow_button">Follow</div>
           <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
             <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
             <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
@@ -34,45 +35,52 @@
   </div>
   <% end %>
 
-
   <div id="user_left_column">
+    <% if @assets.size > 0 %>
     <div id="user_latest_area">
-      <% if @assets.size > 0 %>
+
+      <h2>Latest music</h2>
+
       <div id="user_latest" class="box">
+        <%= render partial: 'assets/asset', collection: @assets %>
+      </div>
+      <div class="below_box">
         <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}"  do %>
         <span>view all &nbsp;
           <i class="icon_caret">
             <%= render file: svg_path('svg/icon_caret.svg') %>
           </i>
         </span>
-
         <% end if @user.assets_count > 5 %>
-        <h2>Latest music</h2>
-        <%= render partial: 'assets/asset', collection: @assets %>
       </div>
-      <% end %>
     </div>
 
+    <% end %>
+
+    <% unless @listens.empty? %>
     <div id="user_listens_area">
-      <% unless @listens.empty? %>
+      <h2>Recently listened to</h2>
+
       <div class="box">
-        <%= link_to listens_path(@user.login), class: 'view_all' do %>
+        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+      </div>
+
+      <div class="below_box">
+          <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
-        <% end if @listens.size > 4 %>
-        <h2>Recently listened to</h2>
-        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+          <% end if @listens.size > 4 %>
       </div>
-      <% end %>
     </div>
+    <% end %>
 
     <div id="user_plays_area">
       <% if authorized? && @user.listens_count > 0 %>
       <% cache([@track_plays, theme_name]) do %>
+      <h2>Latest listens to your music</h2>
       <div id="user_track_plays" class="box">
         <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
@@ -82,7 +90,7 @@
           </span>
 
         <% end if @track_plays.size > 4 %>
-        <h2>Latest listens to your music</h2>
+
         <div class="static_content">
           <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
           <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
@@ -92,34 +100,37 @@
       <% end%>
       <% end %>
     </div>
-
   </div>
 
   <div id="user_right_column">
-
     <% if @favorites.present? %>
     <div id="user_favorites_area">
+      <h2>Recent favorites</h2>
       <div class="box">
+        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
+
+
+
+      </div>
+      <div class="below_box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
         <% end if @user.favorites.tracks.size > 5 %>
-        <h2>Recent favorites</h2>
-        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
       </div>
     </div>
     <% end %>
 
     <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
     <div id="user_popular_area">
+      <h2>Most Listened To Tracks</h2>
+
       <div id="user_popular" class="box">
         <%= link_to " ", user_tracks_path(@user),
         class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
-        <h2>Most Listened To Tracks</h2>
         <%= render partial: 'assets/asset', collection: @popular_tracks %>
       </div>
     </div>
@@ -142,59 +153,98 @@
        <%= @user.name %> doesn't have anything to say, unfortunately...
        <% end %>
      </div>
-     <hr>
-     <div class="user_card_links">
-      <p>
-       <%= website_for_simple(@user).html_safe if @user.website.present? %>
-     </p>
-     <p>
-      <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
-    </p>
+     <div class="user_card_content_divider"></div>
+     <div class="user_location">
+        <%= user_location(@user) %>
+     </div>
+    </div>
   </div>
-  <hr>
-  <div class="user_card_stats">
-    <p>
-      <div class="user_location"><%= user_location(@user) %></div>
-    </p>
-    <p>
-      Last seen <strong><%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>.
-    </p>
-    <p>
-      Joined <strong><%= @user.created_at.to_date.to_s :long %></strong>.
-    </p>
-    <% if @user.listens_count > 0 %>
-    <p>
-      <strong><%= pluralize @user.assets_count, 'track' %></strong> uploaded.
-    </p>
-    <p>
-      <strong><%= @user.listens_count %></strong> total listens.
-    </p>
-    <strong>~<%= @user.bandwidth_used %>GB</strong> transferred.
-  </p>
+
+  <!--
+  <div id="user_links_area">
+    <ul>
+      <li><%= website_for_simple(@user).html_safe if @user.website.present? %></li>
+      <li>
+       <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
+      </li>
+    </ul>
+  </div>
+  -->
+
+  <div id="user_stats_area">
+      <div class="time_and_date">
+        <div>
+          <div>
+            Last seen
+          </div>
+          <div>
+            <%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>
+          </div>
+        </div>
+        <div>
+          <div>
+            Joined
+          </div>
+          <div>
+            <%= @user.created_at.to_date.to_s :long %>
+          </div>
+        </div>
+      </div>
+      <% if @user.listens_count > 0 %>
+      <div class="tracks_and_listens">
+        <div>
+          <div>
+            Uploaded
+          </div>
+          <div>
+            <%= pluralize @user.assets_count, 'track' %>
+          </div>
+        </div>
+        <div>
+          <div>
+            Listens
+          </div>
+          <div>
+            <%= @user.listens_count %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+
+  <% if moderator? %>
+  <div id="user_mod_stats_area">
+      <div class="user_ip">
+        <div>
+          <div>IP Address</div>
+          <div><%= @user.current_login_ip %></div>
+        </div>
+        <div>
+          <div>Other with the same IP:</div>
+          <div>
+            <% if @other_users_with_same_ip.present? %>
+            <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="user_agent">
+        <div>User agent</div>
+        <div><%= @user.browser %></div>
+      </div>
+    </div>
   <% end %>
-</div>
-<% if authorized? %>
-  <div class="user_card_mod_stats">
-    <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
-      edit profile
+
+  <div id="user_actions_area">
+    <% if authorized? %>
+      <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
+        edit profile
+      <% end %>
     <% end %>
-<% end %>
-<% if moderator? %>
-  <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
-  <p>
-    Current IP: <strong><%= @user.current_login_ip %></strong><br/>
-    <% if @other_users_with_same_ip.present? %>
-    Other Users with same IP: <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+    <% if moderator? %>
+    <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
     <% end %>
-  </p>
-  <p>
-    <%= flag_for(@user.listens.first&.country) %>
-  </p>
-  <p>
-    User Agent: <%= @user.browser %>
-  </p>
-<% end %>
-</div>
-</div>
-</div>
+  </div>
+
 </div>

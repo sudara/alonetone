@@ -21,40 +21,45 @@
   <div id="home_left_column">
   
     <div id="home_latest_area">
-      <div class="box">
-        <%= link_to radio_path(per_page: 40, source: 'latest'), class: 'view_all', title: 'latest music on alonetone' do %>
-          <span>view all &nbsp;
-            <i class="icon_caret">
-              <%= render file: svg_path('svg/icon_caret.svg') %>
-            </i>
-          </span>
+      <h2>
+        <%= link_to radio_path(per_page: 40, source: 'latest'), title: 'latest music on alonetone' do %>
+        Latest uploaded
         <% end %>
-        <h2>
-          <%= link_to radio_path(per_page: 40, source: 'latest'), title: 'latest music on alonetone' do %>
-          Latest uploaded
-          <% end %>
-        </h2>
+      </h2>
+      <div class="box">
         <%= render partial: 'assets/asset', collection: @assets %>
       </div>
+      <div class="below_box">
+        <%= link_to radio_path(per_page: 40, source: 'latest'), class: 'view_all', title: 'latest music on alonetone' do %>
+        <span>view all &nbsp;
+          <i class="icon_caret">
+            <%= render file: svg_path('svg/icon_caret.svg') %>
+          </i>
+        </span>
+        <% end %>
+      </div>
+
     </div>
 
     <div id="home_comments_area">
+      <h2>
+        <%= link_to all_comments_path, title: 'view latest comments' do %>
+        Latest Comments
+        <% end %>
+      </h2>
       <div class="box">
+        <%= render partial: 'shared/comment', collection: @comments %>
+      </div>
+      <div class="below_box">
         <%= link_to all_comments_path, class: 'view_all', title: 'view latest comments' do %>
         <span>view all &nbsp;
           <i class="icon_caret">
             <%= render file: svg_path('svg/icon_caret.svg') %>
           </i>
         </span>
-
         <% end %>
-        <h2>
-          <%= link_to all_comments_path, title: 'view latest comments' do %>
-          Latest Comments
-          <% end %>
-        </h2>
-        <%= render partial: 'shared/comment', collection: @comments %>
       </div>
+
     </div>
 
   </div>
@@ -62,68 +67,75 @@
   <div id="home_right_column">
     
     <div id="home_popular_area">
-      <div class="box">
-      <%= link_to radio_path(:per_page => 40,:source => 'popular'), :class => "view_all", :title => 'alonetone radio: currently kicking ass' do %>
-      <span>view all &nbsp;
-        <i class="icon_caret">
-          <%= render file: svg_path('svg/icon_caret.svg') %>
-        </i>
-      </span>
-
-      <% end %>
       <h2>
         <%= link_to radio_path(per_page: 40,source: 'popular'), title: 'alonetone radio: currently kicking ass' do %>
         Currently kicking ass
         <% end %>
       </h2>
+      <div class="box">
       <%= render partial: 'assets/asset', collection: @popular %>
+      </div>
+      <div class="below_box">
+        <%= link_to radio_path(:per_page => 40,:source => 'popular'), :class => "view_all", :title => 'alonetone radio: currently kicking ass' do %>
+        <span>view all &nbsp;
+          <i class="icon_caret">
+            <%= render file: svg_path('svg/icon_caret.svg') %>
+          </i>
+        </span>
+        <% end %>      
       </div>
     </div>
 
     <div id="home_favorites_area">
-        <div class="box">
-          <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
-          <span>view all &nbsp;
-            <i class="icon_caret">
-              <%= render file: svg_path('svg/icon_caret.svg') %>
-            </i>
-          </span>
-
+        <h2>
+          <%= link_to radio_path(per_page: 40, source: 'favorites'), title: 'alonetone radio: recently favorited' do %>
+          Recently favorited
           <% end %>
-          <h2>
-            <%= link_to radio_path(per_page: 40, source: 'favorites'), title: 'alonetone radio: recently favorited' do %>
-            Recently favorited
-            <% end %>
-          </h2>
+        </h2>    
+        <div class="box">
           <% @favorites.each do |favorite| %>
           <div class="asset favorite" data-controller="normal-playback">
             <%= render partial: 'assets/asset_white', locals: { asset: favorite.asset, favorite: favorite } %>
           </div>
           <% end %>
         </div>
+        <div class="below_box">
+          <%= link_to radio_path(:per_page => 40, :source => 'favorites'), :class => 'view_all', :title => 'alonetone radio: recently favorited' do %>
+          <span>view all &nbsp;
+            <i class="icon_caret">
+              <%= render file: svg_path('svg/icon_caret.svg') %>
+            </i>
+          </span>
+          <% end %>
+        </div>
+
     </div>
 
 
     <% if @followee_tracks %>
       <div id="home_follows_area">
+        <h2>
+          <%= link_to radio_path(per_page: 40, source: 'those_you_follow'), title: 'alonetone radio: those you follow' do %>
+          Tracks from those you follow
+          <% end %>
+        </h2>
+
         <div class="box">
+          <div>
+            <%= render partial: 'assets/asset', collection: @followee_tracks %>
+          </div>
+        </div>
+
+        <div class="below_box">
           <%= link_to radio_path(:per_page => 40, :source => 'those_you_follow'), :class => 'view_all', :title => 'alonetone radio: those you follow' do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
-            <% end %>
-          <h2>
-            <%= link_to radio_path(per_page: 40, source: 'those_you_follow'), title: 'alonetone radio: those you follow' do %>
-            Tracks from those you follow
-            <% end %>
-          </h2>
-          <div>
-            <%= render partial: 'assets/asset', collection: @followee_tracks %>
-          </div>
+          <% end %>
         </div>
+        
       </div>
     <% end %>
     
