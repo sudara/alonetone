@@ -43,6 +43,9 @@
     @media #{$tablet} {
       padding: $baseline / 2;
     }
+    iframe {
+      margin-bottom: 10px;
+    }
     h1 {
       font-family: $black-font;
       font-size: $baseline;
