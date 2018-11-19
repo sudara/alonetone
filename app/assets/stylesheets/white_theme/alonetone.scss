@@ -62,7 +62,7 @@ ul {
 		padding-left: 20px;
 		padding-right: 6px;
 		height: 32px;
-		line-height: 32px;
+		line-height: 33px;
 		@include samo-shadow-and-radius();
 		background-color: #FFF;
 		box-shadow: none;
@@ -72,7 +72,7 @@ ul {
 		}
 		i.icon_caret {
 			position: relative;
-			top: 4px;
+			top: 5px;
 			svg {
 				height: 20px;
 			}
