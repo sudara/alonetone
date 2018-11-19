@@ -172,66 +172,76 @@
   -->
 
   <div id="user_stats_area">
-      <div class="time_and_date">
-        <div>
+      <h2 class="area_heading">
+        Stats and Stuff
+      </h2>
+      <div class="area_content">
+        <div class="time_and_date">
           <div>
-            Last seen
+            <div>
+              Last seen
+            </div>
+            <div>
+              <%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>
+            </div>
           </div>
           <div>
-            <%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>
+            <div>
+              Joined
+            </div>
+            <div>
+              <%= @user.created_at.to_date.to_s :long %>
+            </div>
           </div>
         </div>
-        <div>
+        <% if @user.listens_count > 0 %>
+        <div class="tracks_and_listens">
           <div>
-            Joined
+            <div>
+              Uploaded
+            </div>
+            <div>
+              <%= pluralize @user.assets_count, 'track' %>
+            </div>
           </div>
           <div>
-            <%= @user.created_at.to_date.to_s :long %>
+            <div>
+              Listens
+            </div>
+            <div>
+              <%= @user.listens_count %>
+            </div>
           </div>
         </div>
+        <% end %>
       </div>
-      <% if @user.listens_count > 0 %>
-      <div class="tracks_and_listens">
-        <div>
-          <div>
-            Uploaded
-          </div>
-          <div>
-            <%= pluralize @user.assets_count, 'track' %>
-          </div>
-        </div>
-        <div>
-          <div>
-            Listens
-          </div>
-          <div>
-            <%= @user.listens_count %>
-          </div>
-        </div>
-      </div>
-      <% end %>
   </div>
 
   <% if moderator? %>
   <div id="user_mod_stats_area">
-      <div class="user_ip">
-        <div>
-          <div>IP Address</div>
-          <div><%= @user.current_login_ip %></div>
-        </div>
-        <div>
-          <div>Other with the same IP:</div>
+      <h2 class="area_heading">
+        ppsshhhhhh....
+      </h2>
+      <div class="area_content">
+        <div class="user_ip">
           <div>
-            <% if @other_users_with_same_ip.present? %>
-            <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
-            <% end %>
+            <div>IP Address</div>
+            <div><%= @user.current_login_ip %></div>
+          </div>
+          <div>
+            <div>Other with the same IP:</div>
+            <div>
+              <% if @other_users_with_same_ip.present? %>
+              <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="user_agent">
-        <div>User agent</div>
-        <div><%= @user.browser %></div>
+        <div class="user_agent">
+          <div>User agent</div>
+          <div><%= @user.browser %></div>
+        </div>
       </div>
     </div>
   <% end %>

@@ -247,72 +247,74 @@ main {
       }
     }
     #user_stats_area {
-      display: flex;
-      flex-wrap: wrap;
-      > div {
-        background-color: $box-background-color;
-        @include samo-shadow-and-radius();
-        flex: 1;
-        padding: 16px;
+      h2.area_heading {
+        font-size: 24px;
+        color: #000;
+        display: block;
+      }
+      .area_content {      
         display: flex;
+        flex-wrap: wrap;
         > div {
-          > div:first-child {
-            color: #868686;
-            font-size: 12px;
-            margin-bottom: 8px;
-          }
-          > div:last-child {
-            font-size: 16px;
-            color: #353535;
-          }
-
-        }
-      }
-      > div.time_and_date {
-        margin-right: 16px;
-        > div {
-          // flex: 1;
-          width: 240px;
-        }
-      }
-      > div.tracks_and_listens {
-        div:first-child {
-          width: 35%;
-        }
-        div:last-child {
+          background-color: $box-background-color;
+          @include samo-shadow-and-radius();
           flex: 1;
+          padding: 16px;
+          display: flex;
+          > div {
+            > div:first-child {
+              color: #868686;
+              font-size: 12px;
+              margin-bottom: 8px;
+            }
+            > div:last-child {
+              font-size: 16px;
+              color: #353535;
+            }
+
+          }
+        }
+        > div.time_and_date {
+          margin-right: 16px;
+          > div {
+            // flex: 1;
+            width: 240px;
+          }
+        }
+        > div.tracks_and_listens {
+          div:first-child {
+            width: 35%;
+          }
+          div:last-child {
+            flex: 1;
+          }
         }
       }
     }
     #user_mod_stats_area {
-      background-color: #EFEFEF;
-      @include samo-shadow-and-radius();
+      h2.area_heading {
+        font-size: 20px;
+        color: #D7DBDB;
+        display: block;
+      }    
+      .area_content {
 
-      .user_ip {
-        padding: 16px;
-        display: flex;
-        > div:first-child {
-          width: 240px;
+        background-color: #EFEFEF;
+        @include samo-shadow-and-radius();
+
+        .user_ip {
+          padding: 16px;
+          display: flex;
+          > div:first-child {
+            width: 240px;
+          }
+          > div:last-child {
+            flex: 1;
+          }
         }
-        > div:last-child {
-          flex: 1;
-        }
-      }
-      .user_agent {
-        padding: 16px;
-        border-top: 2px solid #FFF;
-        > div:first-child {
-          color: #868686;
-          font-size: 12px;
-          margin-bottom: 8px;
-        }
-        > div:last-child {
-          font-size: 16px;
-          color: #353535;
-        }
-      }
-      > div {
-        > div {
+        .user_agent {
+          padding: 16px;
+          border-top: 2px solid #FFF;
           > div:first-child {
             color: #868686;
             font-size: 12px;
@@ -321,6 +323,19 @@ main {
           > div:last-child {
             font-size: 16px;
             color: #353535;
+          }
+        }
+        > div {
+          > div {
+            > div:first-child {
+              color: #868686;
+              font-size: 12px;
+              margin-bottom: 8px;
+            }
+            > div:last-child {
+              font-size: 16px;
+              color: #353535;
+            }
           }
         }
       }
