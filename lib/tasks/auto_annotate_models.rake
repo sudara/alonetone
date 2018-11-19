@@ -30,7 +30,7 @@ if Rails.env.development?
       'exclude_controllers'       => 'true',
       'exclude_helpers'           => 'true',
       'exclude_sti_subclasses'    => 'false',
-      'ignore_model_sub_dir'      => 'false',
+      'ignore_model_sub_dir'      => 'true',
       'ignore_columns'            => nil,
       'ignore_routes'             => nil,
       'ignore_unknown_models'     => 'false',

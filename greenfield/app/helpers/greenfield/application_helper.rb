@@ -12,6 +12,7 @@ module Greenfield
 
     def markdown(text, post: nil)
       return "" unless text
+
       text = emojify(text)
       if post
         Greenfield::Markdown.render_with_embeds(post, text)

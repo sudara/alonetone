@@ -56,25 +56,38 @@ module ApplicationHelper
   # though it will not be the exact length.
   def awesome_truncate(text, length = 30, truncate_string = "&hellip;")
     return "" if text.blank?
+
     l = length - truncate_string.mb_chars.length
     result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] || '') + truncate_string : text
     result.html_safe
   end
 
   def awesome_truncate_with_read_more(asset, length = 30)
-    text = awesome_truncate(asset.description, length)
+    text = awesome_truncate(strip_tags(asset.description), length)
     text << link_to('read more', user_track_path(asset.user, asset.permalink)) if asset.description && asset.description.length > 300
     text.html_safe
   end
 
   def markdown(text)
     return "" unless text
+
     text = emojify(text)
     @@renderer ||= begin
                      html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
                      Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
                    end
     Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
+  end
+
+  def markdown_with_html(text)
+    return "" unless text
+
+    text = emojify(text)
+    @@renderer_with_html ||= begin
+                     html = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { rel: "nofollow" })
+                     Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
+                   end
+    Redcarpet::Render::SmartyPants.render(@@renderer_with_html.render(text)).html_safe
   end
 
   def emojify(content)
@@ -154,6 +167,7 @@ module ApplicationHelper
 
   def friendly_time_ago(time)
     return "Unknown" unless time.present?
+
     if time > 2.weeks.ago
       time_ago_in_words(time) + ' ago'
     else
@@ -163,6 +177,7 @@ module ApplicationHelper
 
   def flag_for(country)
     return "" unless country.present?
+
     image_tag("flags/#{country.downcase}.svg", size: '80x40', style: 'float:right; clear:none;').html_safe
   end
 
@@ -180,6 +195,5 @@ module ApplicationHelper
   def svg_path(svg)
     File.join(Rails.root, 'app', 'assets', 'images', svg)
   end
-
   protected
 end

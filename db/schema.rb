@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_141157) do
+ActiveRecord::Schema.define(version: 2018_11_06_233316) do
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_141157) do
     t.text "waveform", limit: 4294967295
     t.boolean "private", default: false, null: false
     t.integer "id3_track_num", default: 1
+    t.boolean "is_spam", default: false
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
@@ -479,6 +480,8 @@ ActiveRecord::Schema.define(version: 2018_10_29_141157) do
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "unread_posts_count", default: 0, null: false
+    t.integer "read_posts_count", default: 0, null: false
     t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
     t.index ["user_id"], name: "index_thredded_user_private_topic_read_states_on_user_id"
   end
@@ -496,6 +499,11 @@ ActiveRecord::Schema.define(version: 2018_10_29_141157) do
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "unread_posts_count", default: 0, null: false
+    t.integer "read_posts_count", default: 0, null: false
+    t.bigint "messageboard_id", null: false
+    t.index ["messageboard_id"], name: "index_thredded_user_topic_read_states_on_messageboard_id"
+    t.index ["user_id", "messageboard_id"], name: "thredded_user_topic_read_states_user_messageboard"
     t.index ["user_id", "postable_id"], name: "thredded_user_topic_read_states_user_postable", unique: true
     t.index ["user_id"], name: "index_thredded_user_topic_read_states_on_user_id"
   end

@@ -1,7 +1,8 @@
 class Asset < ActiveRecord::Base
   concerned_with :uploading, :radio, :statistics, :greenfield
+  attribute :user_agent, :string
 
-  scope :published,       -> { where(private: false) }
+  scope :published,       -> { where(private: false, is_spam: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
@@ -33,7 +34,10 @@ class Asset < ActiveRecord::Base
   rakismet_attrs  author: proc { user.display_name },
                   author_email: proc { user.email },
                   content: proc { description },
-                  permalink: proc { full_permalink }
+                  permalink: proc { full_permalink },
+                  user_role: proc { role },
+                  comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
+
 
   validates_presence_of :user_id
 
@@ -75,6 +79,7 @@ class Asset < ActiveRecord::Base
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
+
     clean = mp3_file_name.split('.')[-2].try(:gsub, /-|_/, ' ')
     clean.present? ? clean.strip.titleize : 'untitled'
   end
@@ -145,6 +150,14 @@ class Asset < ActiveRecord::Base
   def create_waveform
     Greenfield::WaveformExtractJob.perform_later(id)
   end
+
+  def role
+    if user.moderator?
+      'admin'
+    else
+      'user'
+    end
+  end
 end
 
 # == Schema Information
@@ -163,6 +176,7 @@ end
 #  genre            :string(255)
 #  hotness          :float(24)
 #  id3_track_num    :integer          default(1)
+#  is_spam          :boolean          default(FALSE)
 #  length           :integer
 #  listens_count    :integer          default(0)
 #  listens_per_week :float(24)
