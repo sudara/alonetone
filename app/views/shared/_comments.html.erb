@@ -1,15 +1,17 @@
 <% if white_theme_enabled? %>
+<h2>Latest comments</h2>
 <div id="user_comments" class="box">
+  
+  <%= render partial: 'shared/comment', collection: @comments %>
+</div>
+<div class="below_box">
 	<%= link_to user_comments_path(@user.login), class: 'view_all' do %>
     <span>view all &nbsp;
       <i class="icon_caret">
         <%= render file: svg_path('svg/icon_caret.svg') %>
       </i>
     </span>
-
 	<% end if @comments.size > 4 %>
-  <h2>Latest comments</h2>
-  <%= render partial: 'shared/comment', collection: @comments %>
 </div>
 
 <% else %>
