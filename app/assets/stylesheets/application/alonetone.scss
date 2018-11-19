@@ -1,3 +1,23 @@
+// pagination for pagy
+.pagy-nav.pagination {
+  a, a:visited {
+    font-size: 12px;
+    line-height: 14px;
+    display: block;
+    float: left;
+    height: 12px;
+    padding: 0;
+    color: #888;
+  }
+  .active {
+    font-weight: bold;
+    color: $text_color2;
+  }
+  em, a:hover, span.current {
+    text-decoration: none;
+    color: $text_color2;
+  }
+}
 // pagination base
 .pagination {
   float: right;
