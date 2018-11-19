@@ -18,7 +18,8 @@ ul {
 	justify-content: space-between;
 	@include samo-shadow-and-radius();
 	h1, h2 {
-		font-family: $medium-sans-font;
+    font-family: $medium-sans-font;
+    font-weight: normal;
 		line-height: 42px;
 		display: block;
 		box-sizing: border-box;
