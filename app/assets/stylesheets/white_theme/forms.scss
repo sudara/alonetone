@@ -145,7 +145,7 @@ input {
 }
 
 label {
-  font-family: $medium-sans;
+  font-family: $medium-sans-font;
 	font-size: 12px;
 	display: block;
 	margin: 2px 0;
@@ -173,7 +173,7 @@ input {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 9px 10px 6px 10px;
-  font-family: $medium-sans;
+  font-family: $medium-sans-font;
   font-size: 14px;
 	&.string, &.password {
 		width: 250px;
