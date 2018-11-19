@@ -7,7 +7,7 @@ ul {
 	padding-left: 0;
 	list-style: none;
 }
-	
+
 .box {
 	position: relative;
 	display: flex;
@@ -18,7 +18,7 @@ ul {
 	justify-content: space-between;
 	@include samo-shadow-and-radius();
 	h1, h2 {
-		font-weight: bold;
+		font-family: $medium-sans;
 		line-height: 42px;
 		display: block;
 		box-sizing: border-box;
