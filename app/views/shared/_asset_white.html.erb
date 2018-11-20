@@ -27,7 +27,12 @@
 
     <% if logged_in? %>
     </div>
+
+    
     <% end %>
+
+
+
 
     <% if logged_in? %>
     <div class="track-favorite">
@@ -47,6 +52,11 @@
     <% end %>
     </div>
     <% end %>
+
+    <div class="download-link">
+      <%= link_to '', media_url(@asset) %>
+    </div>
+
 
  <% if logged_in? %>
  </div>

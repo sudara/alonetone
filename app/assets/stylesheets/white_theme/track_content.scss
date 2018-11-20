@@ -25,9 +25,21 @@
         color: #EB7B0C;
       }
     }
+    .download-link {
+      float: right;
+      a {
+        width: 32px;
+        height: 32px;
+        display: block;
+        background-size: 29px 29px;
+        margin-right: 8px;
+        background-image: image-url('svg/icon_download.svg');
+      }
+      // @include default-button('admin');
+    }
     .track-favorite {
       width: 30px;
-      margin-right:10px;
+      margin-right: 10px;
       float: right;
       position: relative;
     }
