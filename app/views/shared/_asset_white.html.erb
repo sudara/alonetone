@@ -1,10 +1,8 @@
 <div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>"  data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
 
   <%= render partial: 'assets/big_player' %>
-
   
   <div class= "edit-links-and-favorite">
-  
 
     <% if logged_in? %>
     <div class="edit-links">
@@ -28,11 +26,7 @@
     <% if logged_in? %>
     </div>
 
-    
     <% end %>
-
-
-
 
     <% if logged_in? %>
     <div class="track-favorite">
@@ -56,11 +50,7 @@
     <div class="download-link">
       <%= link_to '', media_url(@asset) %>
     </div>
-
-
- 
  </div>
- 
 
   <div class="track-post">
     <h1><%= @asset.name %></h1>
