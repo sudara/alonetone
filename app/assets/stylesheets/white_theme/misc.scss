@@ -108,8 +108,9 @@
   }
   .hint {
     font-style: italic;
-    margin-top: $baseline / 4;
-    margin-bottom: $baseline / 4;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    text-align: left;
   }
 }
 
