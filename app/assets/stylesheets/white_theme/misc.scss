@@ -135,6 +135,8 @@ body main #columns  {
   }
 
 }
+
+
 /* ABOUT PAGES */
 
 .about-page, .stats-page {
@@ -204,6 +206,9 @@ body main #columns  {
   flex-wrap: wrap-reverse;
 }
 
+
+
+
 body main #columns {
 	#radio_options {
     position: relative;
@@ -269,22 +274,6 @@ div.small_spinner {
         font-weight: 16px;
       }
     }
-  }
-}
-
-/* SUDO BAR */
-
-.sudo_bar {
-  font-size: 12px;
-  line-height: 25px;
-  height: 25px;
-  padding-left: 55px;
-  text-align: left;
-  color: #FFFFFF;
-  background-color: red;
-  a {
-    text-decoration: underline;
-    color: white;
   }
 }
 
@@ -413,42 +402,3 @@ dl.group {
     margin-left: 0;
   }
 }
-
-
-/* LISTENERS */
-
-// #follows, #mostly_listens_to, #recent_listeners {
-// 	width: 420px;
-// 	margin: 0;
-// 	padding: 0;
-// 	background: none;
-// 	div {
-// 		float: left;
-// 		margin: 0;
-// 		padding: 0;
-// 		&.edge_to_edge_large {
-// 			width: 105px;
-// 			height: 105px;
-// 			img {
-// 				width: 105px;
-// 				height: 105px;
-// 			}
-// 		}
-// 		&.edge_to_edge_small {
-// 			width: 70px;
-// 			height: 70px;
-// 			img {
-// 				width: 70px;
-// 				height: 70px;
-// 			}
-// 		}
-// 		&.edge_to_edge_tiny {
-// 			width: 42px;
-// 			height: 42px;
-// 			img {
-// 				width: 42px;
-// 				height: 42px;
-// 			}
-// 		}
-// 	}
-// }
