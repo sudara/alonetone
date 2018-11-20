@@ -93,7 +93,7 @@
         }
       }
       
-      @media only screen and (max-width: 980px) {
+      @media only screen and (max-width: 1012px) {
       	li {
       		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
       			display: block;
@@ -106,7 +106,7 @@
           }
       	}
       }
-      @media only screen and (max-width: 744px) {
+      @media only screen and (max-width: 770px) {
       	li {
       		&:nth-child(1), &:nth-child(2) {
       			display: block;
