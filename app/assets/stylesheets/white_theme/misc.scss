@@ -122,7 +122,6 @@
 }
 
 body main #columns  {
-
   #login.box, #signup.box, #signup-questions.box {
     margin-bottom: 0;
     box-shadow: none;
@@ -133,7 +132,6 @@ body main #columns  {
     padding-bottom: $baseline / 2;
 
   }
-
 }
 
 
@@ -206,10 +204,20 @@ body main #columns  {
   flex-wrap: wrap-reverse;
 }
 
-
+.radio_heading {
+  height: 50px;
+}
 
 
 body main #columns {
+  #left {
+    position: relative;
+    h1 {
+      position: absolute;
+      top: -60px;
+      width: 900px;
+    }
+  }
 	#radio_options {
     position: relative;
     display: flex;
@@ -274,6 +282,22 @@ div.small_spinner {
         font-weight: 16px;
       }
     }
+  }
+}
+
+/* SUDO BAR */
+
+.sudo_bar {
+  font-size: 12px;
+  line-height: 25px;
+  height: 25px;
+  padding-left: 55px;
+  text-align: left;
+  color: #FFFFFF;
+  background-color: red;
+  a {
+    text-decoration: underline;
+    color: white;
   }
 }
 
@@ -392,8 +416,6 @@ div.logo {
      font-size: 18px;
    }
  }
-
-
 
 //  UPLOADING
 
