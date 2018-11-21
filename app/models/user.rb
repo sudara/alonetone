@@ -180,7 +180,11 @@ end
 #  admin              :boolean          default(FALSE)
 #  assets_count       :integer          default(0), not null
 #  bandwidth_used     :integer          default(0)
+#  bio                :text(16777215)
+#  browser            :string(255)
+#  city               :string(255)
 #  comments_count     :integer          default(0)
+#  country            :string(255)
 #  crypted_password   :string(128)      default(""), not null
 #  current_login_at   :datetime
 #  current_login_ip   :string(255)
@@ -202,7 +206,9 @@ end
 #  posts_count        :integer          default(0)
 #  salt               :string(128)      default(""), not null
 #  settings           :text(16777215)
+#  twitter            :string(255)
 #  use_old_theme      :boolean          default(FALSE)
+#  website            :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
 #
