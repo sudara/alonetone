@@ -138,6 +138,47 @@ main {
       #user_header {
         justify-content: space-between;
         display: flex;
+        .user_name_and_location_and_follow {
+          display: flex;
+          .user_name_and_location {
+            align-self: flex-end;
+            h1.user_name {
+              font-size: 28px;
+              line-height: 1em;
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+            @media #{$tablet} {
+              padding-left: 15px;
+            }
+          }
+          a.follow {
+            display: flex;
+            align-self: flex-end;
+            position: relative;
+            top: 4px;
+            &:hover {
+              text-decoration: none;
+            }
+            div.follow_button {
+              @include default_button();
+              background-color: #FFF;
+              color: #EB7B0C;
+              margin-left: 24px;
+              margin-right: 8px;
+              &:hover {
+                background-color: #FFF;
+              }
+            }
+            svg {
+              width: 32px;
+              height: 32px;
+              position: relative;
+              top: -3px;
+            }
+          }
+        }
+
         .user_header_avatar {
           overflow: hidden;
           @include samo-shadow-and-radius();
@@ -150,43 +191,7 @@ main {
             height: 48px;
           }
         }
-        .user_name_and_location {
-          align-self: flex-end;
-          h1.user_name {
-            font-size: 28px;
-            line-height: 1em;
-            margin-top: 0;
-            margin-bottom: 0;
-          }
-          @media #{$tablet} {
-            padding-left: 15px;
-          }
-        }
-        a.follow {
-          display: flex;
-          align-self: flex-end;
-          position: relative;
-          top: 4px;
-          &:hover {
-            text-decoration: none;
-          }
-          div.follow_button {
-            @include default_button();
-            background-color: #FFF;
-            color: #EB7B0C;
-            margin-left: 24px;
-            margin-right: 8px;
-            &:hover {
-              background-color: #FFF;
-            }
-          }
-          svg {
-            width: 32px;
-            height: 32px;
-            position: relative;
-            top: -3px;
-          }
-        }
+
       }
     }
     .user_playlists_buttons {
