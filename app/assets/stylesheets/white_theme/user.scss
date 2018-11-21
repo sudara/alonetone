@@ -5,6 +5,7 @@ main {
     max-width: 1100px;
     padding: 0 $baseline * 1.5;
     margin: 0 auto;
+    margin-top: 60px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     grid-column-gap: $baseline * 1.5;
@@ -20,17 +21,20 @@ main {
     'mod_stats mod_stats'
     'actions actions'
     'plays popular';
-
     > * {
       min-width: 320px;
     }
-
-
+    h2 {
+      color: #EB7B0C;
+      padding-left: 16px;
+      margin-bottom: 16px;
+      line-height: 1em;
+    }
     .box {
       margin-bottom: 0;
       h2 {
         padding-left: 50px;
-      }  
+      }
     }
 
     @media #{$tablet} {
@@ -113,7 +117,7 @@ main {
     #user_stats_area {
       grid-area: stats;
     }
-    
+
     #user_mod_stats_area {
       grid-area: mod_stats;
     }
@@ -130,7 +134,7 @@ main {
       grid-area: popular;
     }
 
- 
+
 
     #user_header_area {
       #user_header {
@@ -143,27 +147,38 @@ main {
         .user_name_and_location {
           align-self: flex-end;
           h1.user_name {
-            margin-bottom: -4px;
+            font-size: 28px;
+            line-height: 1em;
+            margin-top: 0;
+            margin-bottom: 0;
           }
           @media #{$tablet} {
             padding-left: 15px;
           }
         }
         a.follow {
-          display: block;
-          width: 48px;
-          height: 48px;
+          display: flex;
           align-self: flex-end;
           position: relative;
           top: 4px;
-        }
-        a.edit_profile {
-          position: absolute;
-          margin-left: 0px;
-          margin-top:70px;
-          @include default_button('admin');
-           > div {
-            display: none;
+          &:hover {
+            text-decoration: none;
+          }
+          div.follow_button {
+            @include default_button();
+            background-color: #FFF;
+            color: #EB7B0C;
+            margin-left: 24px;
+            margin-right: 8px;
+            &:hover {
+              background-color: #FFF;
+            }
+          }
+          svg {
+            width: 32px;
+            height: 32px;
+            position: relative;
+            top: -3px;
           }
         }
       }
@@ -203,7 +218,7 @@ main {
       .user_card_content {
         flex-grow: 1;
         display: flex;
-        flex-direction: column;        
+        flex-direction: column;
         max-width: 50%;
         box-sizing: border-box;
         @media #{$tablet} {
@@ -234,7 +249,7 @@ main {
     #user_stats_area {
       display: flex;
       flex-wrap: wrap;
-      > div {        
+      > div {
         background-color: $box-background-color;
         @include samo-shadow-and-radius();
         flex: 1;
@@ -256,7 +271,8 @@ main {
       > div.time_and_date {
         margin-right: 16px;
         > div {
-          flex: 1;
+          // flex: 1;
+          width: 240px;
         }
       }
       > div.tracks_and_listens {
@@ -271,15 +287,15 @@ main {
     #user_mod_stats_area {
       background-color: #EFEFEF;
       @include samo-shadow-and-radius();
-    
+
       .user_ip {
         padding: 16px;
         display: flex;
         > div:first-child {
-          width: 25%;
+          width: 240px;
         }
         > div:last-child {
-          width: 75%;
+          flex: 1;
         }
       }
       .user_agent {
@@ -328,7 +344,7 @@ main {
       background-color: #353535;
       @include samo-shadow-and-radius();
       ul {
-        
+
 
         li {
           width: 160px;

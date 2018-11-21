@@ -1,5 +1,8 @@
 <script src="https://cdn.headwayapp.co/widget.js" data-turbolinks-eval='false'></script>
 <script>
+  document.addEventListener("turbolinks:before-cache", function() {
+    document.querySelector('.headway').innerHTML = '';
+  })
   // @see https://docs.headwayapp.co/widget for more configuration options.
   var config = {
     selector: ".headway", // CSS selector where to inject the badge

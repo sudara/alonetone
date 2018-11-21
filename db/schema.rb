@@ -496,6 +496,8 @@ ActiveRecord::Schema.define(version: 2018_11_07_201913) do
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "unread_posts_count", default: 0, null: false
+    t.integer "read_posts_count", default: 0, null: false
     t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
     t.index ["user_id"], name: "index_thredded_user_private_topic_read_states_on_user_id"
   end
@@ -513,6 +515,11 @@ ActiveRecord::Schema.define(version: 2018_11_07_201913) do
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "unread_posts_count", default: 0, null: false
+    t.integer "read_posts_count", default: 0, null: false
+    t.bigint "messageboard_id", null: false
+    t.index ["messageboard_id"], name: "index_thredded_user_topic_read_states_on_messageboard_id"
+    t.index ["user_id", "messageboard_id"], name: "thredded_user_topic_read_states_user_messageboard"
     t.index ["user_id", "postable_id"], name: "thredded_user_topic_read_states_user_postable", unique: true
     t.index ["user_id"], name: "index_thredded_user_topic_read_states_on_user_id"
   end

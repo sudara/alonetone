@@ -18,12 +18,12 @@
 		}
 	}
 	h1 {
-		font-size: 16px;
 		line-height: 22px;
 		margin-top: $baseline/2;
 		margin-bottom: 0;
 		text-align: center;
 		&.cover {
+      font-size: 20px;
 			margin-top: 23px;
 		}
 		a {
@@ -110,7 +110,7 @@
 				padding-bottom: 8px;
 				white-space: nowrap;
 				text-decoration: none;
-				color: $not-quite-black;
+        color: $not-quite-black;
 				flex-grow: 1;
 				span.track-position {
 					display: block;
@@ -120,7 +120,7 @@
 					min-width: 21px;
 				}
 				span.track-name {
-					font-weight: bold;
+					font-family: $medium-sans-font;
 					display: block;
 					overflow: hidden;
 					width: 0;

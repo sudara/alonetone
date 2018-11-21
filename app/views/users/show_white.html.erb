@@ -8,6 +8,7 @@
       <% if logged_in? && current_user != @user %>
         <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
         data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
+          <div class="follow_button">Follow</div>
           <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
             <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
             <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
@@ -35,43 +36,51 @@
   <% end %>
 
   <div id="user_left_column">
+    <% if @assets.size > 0 %>
     <div id="user_latest_area">
-      <% if @assets.size > 0 %>
+
+      <h2>Latest music</h2>
+
       <div id="user_latest" class="box">
+        <%= render partial: 'assets/asset', collection: @assets %>
+      </div>
+      <div class="below_box">
         <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}"  do %>
         <span>view all &nbsp;
           <i class="icon_caret">
             <%= render file: svg_path('svg/icon_caret.svg') %>
           </i>
         </span>
-
         <% end if @user.assets_count > 5 %>
-        <h2>Latest music</h2>
-        <%= render partial: 'assets/asset', collection: @assets %>
       </div>
-      <% end %>
     </div>
 
+    <% end %>
+
+    <% unless @listens.empty? %>
     <div id="user_listens_area">
-      <% unless @listens.empty? %>
+      <h2>Recently listened to</h2>
+
       <div class="box">
-        <%= link_to listens_path(@user.login), class: 'view_all' do %>
+        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+      </div>
+
+      <div class="below_box">
+          <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
-        <% end if @listens.size > 4 %>
-        <h2>Recently listened to</h2>
-        <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+          <% end if @listens.size > 4 %>
       </div>
-      <% end %>
     </div>
+    <% end %>
 
     <div id="user_plays_area">
       <% if authorized? && @user.listens_count > 0 %>
       <% cache([@track_plays, theme_name]) do %>
+      <h2>Latest listens to your music</h2>
       <div id="user_track_plays" class="box">
         <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
@@ -81,7 +90,7 @@
           </span>
 
         <% end if @track_plays.size > 4 %>
-        <h2>Latest listens to your music</h2>
+
         <div class="static_content">
           <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
           <%= @user.listens_count %> total plays and downloads (<strong><%= @user.listens_average %></strong> per/day)
@@ -96,27 +105,32 @@
   <div id="user_right_column">
     <% if @favorites.present? %>
     <div id="user_favorites_area">
+      <h2>Recent favorites</h2>
       <div class="box">
+        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
+
+
+
+      </div>
+      <div class="below_box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
           <span>view all &nbsp;
             <i class="icon_caret">
               <%= render file: svg_path('svg/icon_caret.svg') %>
             </i>
           </span>
-
         <% end if @user.favorites.tracks.size > 5 %>
-        <h2>Recent favorites</h2>
-        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
       </div>
     </div>
     <% end %>
 
     <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
     <div id="user_popular_area">
+      <h2>Most Listened To Tracks</h2>
+
       <div id="user_popular" class="box">
         <%= link_to " ", user_tracks_path(@user),
         class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
-        <h2>Most Listened To Tracks</h2>
         <%= render partial: 'assets/asset', collection: @popular_tracks %>
       </div>
     </div>
@@ -146,16 +160,16 @@
     </div>
   </div>
 
+  <!--
   <div id="user_links_area">
-
     <ul>
       <li><%= website_for_simple(@profile).html_safe if @profile.website.present? %></li>
       <li>
        <a href="http://twitter.com/<%= @profile.twitter %>">twitter.com/<%= @profile.twitter %></a>
       </li>
     </ul>
-
   </div>
+  -->
 
   <div id="user_stats_area">
       <div class="time_and_date">
@@ -200,7 +214,6 @@
 
   <% if moderator? %>
   <div id="user_mod_stats_area">
-
       <div class="user_ip">
         <div>
           <div>IP Address</div>
@@ -220,9 +233,7 @@
         <div>User agent</div>
         <div><%= @profile.user_agent %></div>
       </div>
-
     </div>
-
   <% end %>
 
   <div id="user_actions_area">
@@ -235,7 +246,5 @@
     <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
     <% end %>
   </div>
-
-  <%= flag_for(@user.listens.first&.country) %>
 
 </div>
