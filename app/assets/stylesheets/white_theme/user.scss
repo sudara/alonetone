@@ -134,15 +134,21 @@ main {
       grid-area: popular;
     }
 
-
-
     #user_header_area {
       #user_header {
+        justify-content: space-between;
         display: flex;
-        img {
-          display: block;
-          width: 62px;
-          height: 62px;
+        .user_header_avatar {
+          overflow: hidden;
+          @include samo-shadow-and-radius();
+          border: 1px solid #000;
+          position: relative;
+          top: 10px;
+          img {
+            display: block;
+            width: 48px;
+            height: 48px;
+          }
         }
         .user_name_and_location {
           align-self: flex-end;
