@@ -3,11 +3,6 @@ class Settings
   store :settings
   before_save :normalize_itunes_url
 
-  # deprecated
-  def last_seen_at
-    last_login_at
-  end
-
   def has_public_playlists?
     playlists.only_public.count >= 1
   end
