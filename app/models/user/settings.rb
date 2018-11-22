@@ -1,7 +1,4 @@
 class Settings
-  # has a bunch of prefs
-  store :settings
-  before_save :normalize_itunes_url
 
   def has_public_playlists?
     playlists.only_public.count >= 1

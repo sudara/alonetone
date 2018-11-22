@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :settings, :statistics, :posting, :greenfield
+  concerned_with :validation, :findability, :settings, :statistics, :greenfield
+
+  store :settings
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
@@ -65,6 +67,10 @@ class User < ActiveRecord::Base
 
   # musicians who this person follows
   has_many :followees, through: :follows, source: :user
+
+  # old forum
+  has_many :posts,  -> { order("#{Post.table_name}.created_at desc") }
+  has_many :topics, -> { order("topics.created_at desc") }
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
