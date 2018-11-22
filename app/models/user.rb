@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :settings, :statistics, :greenfield
+  concerned_with :validation, :findability, :settings, :statistics
 
   store :settings
 
@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
   # old forum
   has_many :posts,  -> { order("#{Post.table_name}.created_at desc") }
   has_many :topics, -> { order("topics.created_at desc") }
+
+  # will be removed along with /greenfield
+  has_many :greenfield_posts, through: :assets
+
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
