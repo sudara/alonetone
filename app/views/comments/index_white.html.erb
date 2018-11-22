@@ -2,53 +2,53 @@
   <% if params[:login] %>
     <div id="left">
       <h2>Comments on <%= @user.name %>'s stuff</h2>
-      <div class="mini_paginator">
+      <div class="mini_paginator top_paginator">
         <%== pagy_nav @pagy %>
       </div>
       <div class="comments_area box">
-        <%= render partial: 'shared/comment', collection: @comments %>
+      <%= render partial: 'shared/comment', collection: @comments %>
       </div>
-      <div class="mini_paginator">
-        <%== pagy_nav @pagy %>
-      </div>
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
     </div>
 
     <div id="right">
       <h2>Comments made by <%= @user.name %> </h2>
-      <div class="mini_paginator">
+      <div class="mini_paginator top_paginator">
         <%== pagy_nav @pagy_comments_made %>
       </div>
       <div class="comments_area box">
         <%= render partial: 'shared/comment', collection: @comments_made %>
       </div>
-      <div class="mini_paginator">
+      <div class="mini_paginator bottom_paginator">
         <%== pagy_nav @pagy_comments_made %>
       </div>
     </div>
   <% else %>
     <div id="left">
-      <h1>Recent Comments</h1>
-      <div class="mini_paginator">
+      <h2>Recent Comments</h2>
+      <div class="mini_paginator top_paginator">
         <%== pagy_nav @pagy %>
       </div>
       <div class="comments_area box">
         <%= render partial: 'shared/comment', collection: @comments %>
       </div>
-      <div class="mini_paginator">
+      <div class="mini_paginator bottom_paginator">
         <%== pagy_nav @pagy %>
       </div>
     </div>
 
     <% if moderator? or admin? %>
       <div id="right">
-        <h1>Recent SPAM</h1>
-        <div class="mini_paginator">
+        <h2>Recent SPAM</h2>
+        <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy_spam %>
         </div>
         <div class="comments_area box">
           <%= render partial: 'shared/comment', collection: @spam %>
         </div>
-        <div class="mini_paginator">
+        <div class="mini_paginator bottom_paginator">
           <%== pagy_nav @pagy_spam %>
         </div>
       </div>
