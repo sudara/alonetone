@@ -1,4 +1,4 @@
-class Settings
+class User
 
   def has_public_playlists?
     playlists.only_public.count >= 1
