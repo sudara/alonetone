@@ -75,7 +75,6 @@ class User < ActiveRecord::Base
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
 
-
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
   end
