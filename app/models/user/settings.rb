@@ -1,16 +1,11 @@
-class User
+class Settings
   # has a bunch of prefs
   store :settings
-
   before_save :normalize_itunes_url
 
   # deprecated
   def last_seen_at
     last_login_at
-  end
-
-  def normalize_itunes_url
-    self.itunes = itunes.to_s.strip.gsub(/http\:\/\//, "")
   end
 
   def has_public_playlists?
@@ -37,7 +32,6 @@ class User
 
   def avatar(size = nil)
     return dummy_pic(size) if has_no_avatar?
-
     pic.pic.url(size)
   end
 
@@ -55,14 +49,6 @@ class User
 
   def has_pic?
     pic && !pic.new_record?
-  end
-
-  def site
-    "#{Alonetone.url}/#{login}"
-  end
-
-  def website
-    self[:website] || site
   end
 
   def name
