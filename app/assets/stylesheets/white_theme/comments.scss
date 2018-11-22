@@ -7,8 +7,7 @@ h2#latest_comments + div.box {
 	}
 }
 
-#home_comments_area, #user_comments_area,
-.comments_area {
+#home_comments_area, #user_comments_area, .comments_area {
   &.box {
     justify-content: flex-start;
   }
@@ -20,6 +19,11 @@ h2#latest_comments + div.box {
 		border-top: 0;
 	}
 }
+
+.comments_area {
+	margin-bottom: 0;
+}
+
 
 /* ADDING COMMENTS */
 
