@@ -1,11 +1,16 @@
 class CleanUpUser < ActiveRecord::Migration[5.2]
   def change
-    remove_column :users, :lat
-    remove_column :users, :lng
-    remove_column :users, :bio_html
+    puts "removing old crufty user columns"
+    # remove_column :users, :lat
+    # remove_column :users, :lng
+    # remove_column :users, :bio_html
+    # remove_column :users, :activated_at
 
-    removals = User.where(activated_at: nil).where('created_at < ?', 4.week.ago)
-    puts "removing #{removals.count} old non-activated users..."
+    removals = User.where('DATE(created_at) = DATE(updated_at)').where('assets_count = 0').where('created_at < ?', 4.week.ago)
+    puts "removing #{removals.count} old users without tracks who didn't last a day..."
+
+    Post.where(user_id: removals).delete_all
+    Pic.where(picable_type: 'User').where(picable_id: removals).delete_all if Rails.env.production?
     removals.delete_all
 
     puts "creating new profile db records for remaining #{User.count} users"
