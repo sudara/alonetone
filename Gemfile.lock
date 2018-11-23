@@ -252,7 +252,7 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
-    pagy (0.21.0)
+    pagy (1.1.0)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -390,7 +390,7 @@ GEM
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
-    simple_form (4.0.1)
+    simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     sixarm_ruby_unaccent (1.2.0)
