@@ -30,14 +30,13 @@ RSpec.describe CommentsController, type: :controller do
       post :create, params: params, xhr: true
       expect(response).to be_successful
     end
-
+  end
+  context "spam handling" do
     it 'should send email to track owner if comment wasnt spam' do
       login(:sudara)
       params = { :comment => { "body" => "Comment yo!", "commentable_type" => "Asset", "commentable_id" => 4 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
       expect { post :create, params: params, xhr: true}.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
-
-    # perform_enqueued_jobs
 
     it 'should not email track owner if comment is spam' do
       login(:arthur)
