@@ -9,8 +9,7 @@ module Admin
     def unspam
       @comment.ham!
       @comment.update_column :is_spam, false
-      @comment.deliver_comment_notification
-
+      CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
       redirect_back(fallback_location: root_path)
     end
 
