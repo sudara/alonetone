@@ -3,7 +3,7 @@ module Admin
     before_action :set_comment, only: %i[unspam spam]
 
     def index
-      @pagy, @comments = pagy(Comment.all)
+      @pagy, @comments = pagy(Comment.recent)
     end
 
     def unspam
