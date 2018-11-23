@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   render_views
-  fixtures :users, :assets
+  fixtures :users, :profiles, :assets
 
   context 'show' do
     it "should show delete user button for admins" do

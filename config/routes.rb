@@ -61,9 +61,6 @@ Alonetone::Application.routes.draw do
     get 'settings', to: 'users#edit'
     get '/activate/:perishable_token', to: 'users#activate'
 
-    # shortcut to profile
-    get ':login/bio' => 'users#bio', :as => 'profile'
-
     get '/latest.:format' => 'assets#latest'
 
     # latest mp3s uploaded site-wide
@@ -129,6 +126,7 @@ Alonetone::Application.routes.draw do
         post :attach_pic
         get :sudo
       end
+      resource 'profile'
       resources 'source_files' #:path_prefix => ':login'
       resources 'tracks', controller: :assets do
         member do
