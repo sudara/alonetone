@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :find_user, except: %i[index create spam unspam destroy]
-  before_action :find_comment, only: %i[destroy unspam spam]
-  before_action :require_login, only: %i[destroy unspam]
+  before_action :find_user, except: %i[index create destroy]
+  before_action :find_comment, only: %i[destroy]
+  before_action :require_login, only: %i[destroy]
 
   def create
     head :bad_request unless request.xhr?
