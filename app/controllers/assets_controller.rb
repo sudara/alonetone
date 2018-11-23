@@ -111,7 +111,7 @@ class AssetsController < ApplicationController
   end
 
   def edit
-    @descriptionless = @user.assets.descriptionless
+    @descriptionless = @user.assets.not_current(@asset.id).descriptionless if @user.assets.not_current(@asset.id).descriptionless.count > 1
     @allow_reupload = true
     render 'edit_white' if white_theme_enabled?
   end
