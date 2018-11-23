@@ -243,7 +243,8 @@
       <% end %>
     <% end %>
     <% if moderator? %>
-    <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
+    <%= link_to "Delete User", user_path(@user, login: @user.login), method: :delete, class: "edit_profile--delete admin",
+      data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."} %>
     <% end %>
   </div>
 
