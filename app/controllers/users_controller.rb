@@ -13,13 +13,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        prepare_meta_tags
-        gather_user_goodies
-        render 'show_white' if white_theme_enabled?
-      end
-    end
+    prepare_meta_tags
+    gather_user_goodies
+    render 'show_white' if white_theme_enabled?
   end
 
   def stats
@@ -42,7 +38,6 @@ class UsersController < ApplicationController
     if @user.valid? && passed_recaptcha? && @user.save_without_session_maintenance
       session[:recaptcha] = false # make sure they have to recaptcha for new user
       @user.reset_perishable_token!
-      @user.create_profile
       UserNotification.signup(@user).deliver_now
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)
@@ -65,7 +60,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @profile = @user.profile
+  end
 
   def attach_pic
     if params[:pic].present?
@@ -120,9 +117,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
-      :display_name, settings: %i[display_listen_count block_guest_comments most_popular
-        increase_ego email_comments email_new_tracks])
+    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
   end
 
   def ip_is_acceptable?

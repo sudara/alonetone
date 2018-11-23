@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
       expect(users(:sandbags)).to be_moderator
     end
 
-    it "should not require a bio on update" do
+    it "should not require a profile on update" do
       @user = new_user
       @user.save
       @user.save
