@@ -1,14 +1,24 @@
-<div class="footer_inner">
-  <div class="footer_column">
-     <h3 class="footer_column_header">alonetoners online</h3>
-     <ul>
+<div class="footer_alonetoners_online">
+  <h3>Alonetoners online</h3>
+    <ul>
       <li>
         <%= User.currently_online.collect do |user| %>
           <% link_to user.name, main_app.user_home_path(user.login) %>
         <% end.join(', ').html_safe %>
       </li>
-     </ul>
+    </ul>
+</div>  
+
+<div class="footer_forum_topics">
+  <h3>Latest forum topics</h3>
+</div>
+
+<div class="footer_columns">
+  <div class="footer_column">
+     <h3 class="footer_column_header">alone<em>tone</em> radio</h3>
+     <%= render file: svg_path('svg/icon_radio.svg') %>
   </div>
+
   <div class="footer_column">
     <h3 class="footer_column_header">Browse</h3>
     <div><%= link_to "All Artists", "/users"%></div>
@@ -29,6 +39,13 @@
   <% end %>
     </div>
   <% end %>
+
+
+  <div class="footer_column">
+    <h3 class="footer_column_header">Community</h3>
+    <div>Need to re-arrange some footer items</div>
+  </div>
+  
 
   <div class="footer_column">
     <h3 class="footer_column_header">More</h3>
