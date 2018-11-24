@@ -6,27 +6,53 @@ footer#site_footer {
   padding-top: 24px;
   padding-bottom: 24px;
   color: #333;
-  background-color: #272727;
-  .author_name {
-    font-size: 11px;
-    font-weight: bold;
-    position: relative;
-    top: -3px;
+  background-color: #F4F4F4;
+  h3 {
+    color: #DE6A00;
+    line-height: 1.2em;
+    font-size: 12px;
+    font-family: $medium-sans-font;
+    font-weight: normal;
+
+
   }
-  .footer_inner {
+  // .author_name {
+  //   font-size: 11px;
+  //   font-weight: bold;
+  //   position: relative;
+  //   top: -3px;
+  // }
+  .footer_alonetoners_online {
+    ul {
+      li {
+        color: #868686;
+        line-height: 1.2em;
+        font-size: 12px;
+        font-family: $medium-sans-font;
+        font-weight: normal;    
+      }
+    }
+  }
+  .footer_forum_topics {}
+  .footer_columns {
+    background-color: #272727;
     display: flex;
     margin-right: auto;
     margin-left: auto;
     @include match-dynamic-site-width();
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     .footer_column {
+      margin-left: 2px;
+      margin-right: 2px;
       width: 23%;
       min-width: 150px;
       background-color: #353535;
+      border-radius: 3px;
       color: #ffffff;
       line-height: 20px;
       padding: 16px;
+      box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.25);
       @media #{$tablet} {
         font-size: 17px;
         line-height: 32px;
