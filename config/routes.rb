@@ -7,6 +7,19 @@ Alonetone::Application.routes.draw do
     mount Greenfield::Engine => "/"
   end
 
+  namespace :admin do
+    resources :comments do
+       member do
+        put :unspam
+        put :spam
+      end
+
+      collection do
+        put :mark_group_as_spam
+      end
+    end
+  end
+
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
@@ -44,12 +57,7 @@ Alonetone::Application.routes.draw do
 
     resources 'updates', :as => 'blog'
     resources :updates, :password_resets
-    resources :comments do
-      member do
-        put :unspam
-        put :spam
-      end
-    end
+    resources :comments
 
     get  'about/' => 'pages#about'
 
@@ -111,12 +119,6 @@ Alonetone::Application.routes.draw do
 
     match 'search' => 'search#index', via: [:get, :post]
     match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
-
-    namespace :admin do
-      resources :layouts
-      resources :users
-    end
-
 
     root :to => 'assets#latest'
 
