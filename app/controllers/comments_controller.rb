@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :find_user, except: %i[index create spam unspam destroy]
-  before_action :find_comment, only: %i[destroy unspam spam]
-  before_action :require_login, only: %i[destroy unspam]
+  before_action :find_user, except: %i[index create destroy]
+  before_action :find_comment, only: %i[destroy]
+  before_action :require_login, only: %i[destroy]
 
   def create
     head :bad_request unless request.xhr?
@@ -23,19 +23,6 @@ class CommentsController < ApplicationController
       @comment.destroy
       flash[:ok] = 'We threw away that comment'
     end
-    redirect_back(fallback_location: root_path)
-  end
-
-  def unspam
-    @comment.ham!
-    @comment.update_column :is_spam, false
-    @comment.deliver_comment_notification
-    redirect_back(fallback_location: root_path)
-  end
-
-  def spam
-    @comment.spam!
-    @comment.update_column :is_spam, true
     redirect_back(fallback_location: root_path)
   end
 
