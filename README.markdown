@@ -7,6 +7,7 @@
 
 
 Bug reporting provided by Bugsnag's [open source program](https://www.bugsnag.com/open-source/).
+
 Cross-browser testing donated by
 <img src="https://cdn.rawgit.com/sudara/alonetone/master/app/assets/images/promo/browserstack.svg" height="25"/>
 
