@@ -1,12 +1,10 @@
 <div class="footer_alonetoners_online">
   <h3>Alonetoners online</h3>
-    <ul>
-      <li>
+    <div>
         <%= User.currently_online.collect do |user| %>
           <% link_to user.name, main_app.user_home_path(user.login) %>
         <% end.join(', ').html_safe %>
-      </li>
-    </ul>
+    </div>
 </div>  
 
 <div class="footer_forum_topics">
@@ -67,7 +65,7 @@
     <% end %>
       </div>
     <% end %>
-    
+
     <div class="footer_column">
       <h3 class="footer_column_header">More</h3>
       <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>

@@ -22,15 +22,14 @@ footer#site_footer {
     h3 {
       margin-bottom: 0px;
     }
-    ul {
-      margin-top: 8px;
-      li {
+    div {
+        margin-top: 8px;
+        margin-bottom: 8px;
         color: #868686;
         line-height: 1.2em;
         font-size: 12px;
         font-family: $medium-sans-font;
         font-weight: normal;
-      }
     }
   }
   .footer_forum_topics {
@@ -72,6 +71,7 @@ footer#site_footer {
         display: flex;
         justify-content: space-between;
         margin: 0;
+        flex-wrap: wrap;
         li {
           box-sizing: border-box;
           padding: 8px;
