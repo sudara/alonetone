@@ -45,9 +45,9 @@
 		<% if authorized_for_comment(comment) -%>
 			<div class="comment_controls">
 					<% if comment.is_spam? %>
-						<%= link_to 'un-spam', unspam_comment_path(comment),  data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put %>
+						<%= link_to 'un-spam', unspam_admin_comment_path(comment),  data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put %>
 					<% else %>
-						<%= link_to 'mark as spam', spam_comment_path(comment),  data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again'}, method: :put%>
+						<%= link_to 'mark as spam', spam_admin_comment_path(comment),  data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again'}, method: :put%>
 					<% end %>
 				<%= link_to 'delete', comment_path(comment), data: {confirm: 'Are you sure you want to delete this comment?'}, method: :delete %>
 			</div>

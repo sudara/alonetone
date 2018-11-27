@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "@babel/core": "^7.1.2",
+    "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
     "@rails/webpacker": "^4.0.0-pre.3",
     "@shopify/draggable": "^1.0.0-beta.7",
     "babel-loader": "^8.0.4",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
+    "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",

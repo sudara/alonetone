@@ -1,3 +1,23 @@
+.pagy-nav.pagination {
+	a, a:visited {
+		font-size: 12px;
+		line-height: 14px;
+		display: block;
+		float: left;
+		height: 12px;
+		padding: 0;
+		color: #888;
+	}
+	.active {
+		font-weight: bold;
+		color: $samo-orange;
+	}
+	em, a:hover, span.current {
+		text-decoration: none;
+		color: $samo-orange;
+	}
+}
+
 .pagination {
 	position: relative;
 	display: block;
@@ -32,8 +52,11 @@
 .mini_paginator {
 	position: relative;
 	height: 32px;
-	border-bottom: 1px solid #DADADA;
+	// border-bottom: 1px solid #DADADA;
 	background-color: #FFF;
+	@include samo-shadow-and-radius();
+	background-color: #FFF;
+	box-shadow: none;
 	.pagination {
 		display: flex;
 		flex-direction: row;
@@ -43,3 +66,12 @@
 		}
 	}
 }
+
+.mini_paginator.top_paginator {
+	margin-bottom: 12px;
+}
+
+.mini_paginator.bottom_paginator {
+	margin-top: 12px;
+}
+

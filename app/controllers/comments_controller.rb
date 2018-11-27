@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :find_user, except: %i[index create spam unspam destroy]
-  before_action :find_comment, only: %i[destroy unspam spam]
-  before_action :require_login, only: %i[destroy unspam]
+  before_action :find_user, except: %i[index create destroy]
+  before_action :find_comment, only: %i[destroy]
+  before_action :require_login, only: %i[destroy]
 
   def create
     head :bad_request unless request.xhr?
@@ -26,28 +26,15 @@ class CommentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def unspam
-    @comment.ham!
-    @comment.update_column :is_spam, false
-    @comment.deliver_comment_notification
-    redirect_back(fallback_location: root_path)
-  end
-
-  def spam
-    @comment.spam!
-    @comment.update_column :is_spam, true
-    redirect_back(fallback_location: root_path)
-  end
-
   def index
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @comments = @user.comments.on_track.public_or_private(display_private_comments?).includes(commenter: :pic, commentable: { user: :pic }).page(params[:page])
+      @pagy, @comments = pagy(@user.comments.on_track.public_or_private(display_private_comments?).includes(commenter: :pic, commentable: { user: :pic }), page_param: :page)
       set_comments_made
     else
       @page_title = "Recent Comments"
-      @comments = Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?).page(params[:page])
+      @pagy, @comments = pagy(Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?), page_param: :page)
       set_spam_comments
     end
     render 'index_white' if white_theme_enabled?
@@ -65,11 +52,11 @@ class CommentsController < ApplicationController
   end
 
   def set_comments_made
-    @comments_made = Comment.where(commenter_id: @user.id).public_or_private(display_private_comments?).page(params[:made_page])
+    @pagy_comments_made, @comments_made = pagy(Comment.where(commenter_id: @user.id).public_or_private(display_private_comments?), page_param: :page_made)
   end
 
   def set_spam_comments
-    @spam = Comment.spam.page(params[:spam_page]) if moderator?
+    @pagy_spam, @spam = pagy(Comment.spam, page_param: :page_spam) if moderator?
   end
 
   def authorized?

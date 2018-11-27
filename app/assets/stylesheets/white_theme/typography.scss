@@ -17,8 +17,8 @@ a {
 }
 
 h1 {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 24px;
+  font-family: $black-font;
   margin-bottom: 25px;
   &.user,
   &.notice {
@@ -136,7 +136,7 @@ span.note {
 //     list-style-type: decimal;
 //   }
 // }
-// 
+//
 // .user_report .body,
 // .update .body,
 // .notice,

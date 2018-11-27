@@ -9,8 +9,10 @@
 		border: 1px dashed #D7DBDB;
 		padding: 4px;
 		margin-top: 10px;
-		text-align: center;
+    text-align: center;
+    max-width:150px;
 		img {
+      max-width:150px;
 			border-radius: 6px;
 			display: inline-block;
 		}
@@ -20,7 +22,7 @@
 				display: block;
 			}
 		}
-	}	
+	}
 }
 .playlist_asset {
 	.add, .remove {
@@ -118,7 +120,7 @@
 		height: auto;
 		padding-bottom: 12px;
 		padding-left: $baseline / 2;
-  
+
 		color: $samo-orange;
 		border-bottom: 1px solid $light-gray;
 		background-color: transparent;
@@ -155,9 +157,9 @@
 		}
 	  }
   }
-  
+
   // editing, woo hoo!
-  
+
   // #edit_playlist {
 	// .playlist {
 	//   .tracks {
@@ -186,7 +188,7 @@
 	//   }
 	// }
   // }
-  
+
   #playlist_source_options {
 	overflow: auto;
 	margin-left: $baseline / 2;
@@ -197,10 +199,10 @@
 	  a {
 		@include default-button();
 	  }
-  
+
 	}
   }
-  
+
   #sort_playlists {
 	position: relative;
 	width: 100%;
@@ -209,7 +211,7 @@
 	  margin-bottom: 20px;
 	}
   }
-  
+
   .left_instructions, .right_instructions {
 	color: $light-medium-gray;
 	padding: 0 10px;
@@ -217,7 +219,7 @@
 	min-height: 36px;
 
 	}
-	
+
 	.remove-inner-inline {
 		display: inline-flex;
 		width: 20px;
@@ -252,11 +254,11 @@
 
 		}
 	}
-  
-  
+
+
   #edit_playlist {
 	position: relative;
-  
+
 	.playlist_title.box {
 	  margin-bottom: 0;
 	  h3 {
@@ -281,24 +283,25 @@
 	  }
 	}
   }
-  
+
   #edit_playlist_info {
 	@include match-dynamic-site-width("narrow");
 	padding-left: 0;
 	padding-right: 0;
 	padding-bottom: 20px;
-	padding-top: 0;
+  padding-top: 0;
+  background-color: $white;
 	@media #{$mobile} {
 	  width: 100%;
 	}
 	> h2 {
-	  padding-left: 60px;
+    padding-left: 59px;
+    height: 50px;
+    line-height:53px;
+    font-family: $medium-sans-font;
 	}
 	form p {
 	  font-size: 14px;
-	}
-	input {
-	  font-size: 13px;
 	}
 	#pic_pic {
 	  padding-left: 0;
@@ -346,7 +349,7 @@
 			width: 140px;
 			input {
 			  width: 100%;
-  
+
 			}
 		  }
 		}
@@ -360,7 +363,7 @@
 			}
 			margin-right: 30px;
 		  }
-		  > :nth-child(2) { 
+		  > :nth-child(2) {
 			flex: 1;
 			input {
 			  width: 100%;
@@ -381,11 +384,11 @@
 		  font-size: 12px;
 		  div.input {
 			width: auto;
-		  }        
+		  }
 		  label {
 			text-transform: none;
 		  }
-  
+
 		  [type='checkbox']:not(:checked), [type='checkbox']:checked {
 			position: static;
 		  }
@@ -414,24 +417,24 @@
 	  }
 	}
   }
-  
+
   .edit_playlist_columns {
 	.asset .asset_top .asset_top_row div.title .title_right_column {
 	  display: none;
 	}
   }
-  
-  
+
+
   .edit_playlist_pro_upload {
 	.pro_upload_left {
-	  
+
 	}
 	.upload_zip {
 	  @include default-button('jumbo');
 	  float: right;
 	}
   }
-  
+
   .playlist_delete_button {
 	font-size: 10px;
 	font-weight: normal;
@@ -447,22 +450,21 @@
 	margin-left: 10px;
 	background: image-url('icons/delete.png') no-repeat center top;
   }
-  
+
   .playlist_edit_button {
 	float: right!important;
 	margin: 0!important;
 	margin-right: 20px!important;
   }
-  
+
   .edit_playlist_button_row {
 	position: absolute;
 	right: 20px;
 	bottom: 20px;
 	overflow: hidden;
   }
-  
+
   .playlists_hidden_blurb {
 	font-size: 12px;
 	margin: 5px 0 14px 0;
   }
-  

@@ -41,7 +41,7 @@
 		border-radius: 0;
 		box-shadow: 0 0px 5px 1px #CCCCCC7A;
 		z-index: 9999999;
-		
+
 	}
 	.button, .title {
 		float: left;
@@ -102,7 +102,9 @@
 					flex-grow: 1;
 					a.track_link {
 						line-height: 1.1em;
-						font-size: 16px;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: $medium-sans-font;
 						display: block;
 						overflow: hidden;
 						white-space: nowrap;
@@ -357,13 +359,13 @@
               svg {
                 width: 17px;
                 position: relative;
-                top: -4px;              
+                top: -4px;
               }
             }
 				}
 			}
 		}
-		
+
 		.track_links {
 			display: none;
 			float: right;

@@ -7,7 +7,7 @@
 <div class="edit_track box" style="position:relative;">
   <h2 class="box">Editing "<%= @asset.name %>"</h2>
 
-  <%= form_for(:asset, url: user_track_path(@user, @asset), html: { method: :put, multipart: true }, remote: true) do |f| %>
+  <%= form_for(:asset, url: user_track_path(@user, @asset.id), html: { method: :put, multipart: true }, remote: true) do |f| %>
 
     <div class="static_content" style="position:relative;">
       The title of this track/song/piece
