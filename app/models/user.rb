@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
   before_destroy :efficiently_destroy_relations
-  after_create :link_profile
+  after_create :create_profile
 
   # Can create music
   has_one    :pic, as: :picable, dependent: :destroy
@@ -178,10 +178,6 @@ class User < ActiveRecord::Base
 
   def make_first_user_admin
     self.admin = true if User.count == 0
-  end
-
-  def link_profile
-    self.create_profile
   end
 end
 
