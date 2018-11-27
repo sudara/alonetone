@@ -47,6 +47,18 @@ RSpec.describe CommentsController, type: :controller do
          Comment.last.update_attribute(:is_spam, true)
       end.to change { ActionMailer::Base.deliveries.size }.by(0)
     end
+
+    it "should increment comment_count if comment was not a spam" do
+      params = { :comment => { "body" => "Comment", "private" => "0", "commentable_type" => "Asset", "commentable_id" => 1 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
+      expect { post :create, params: params, xhr: true }.to change { Asset.first.comments_count }.by(1)
+    end
+
+    it "should not increment comment_count if comment is spam" do
+      # the "viagra-test-123" guarantees a spam response
+      params = { :comment => { "body" => "viagra-test-123", "private" => 1, "commentable_type" => "Asset", "commentable_id" => 4 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
+      post :create, params: params, xhr: true
+      expect(Asset.find(1).comments_count).to eq(0)
+    end
   end
 
   context "private comments made by user" do
