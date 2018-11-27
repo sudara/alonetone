@@ -47,16 +47,17 @@ echo "Run puma, run!"
 ssh linode "monit restart puma_alonetone sidekiq"
 
 bundle exec newrelic deployments
-REVISION=git rev-parse HEAD
+REVISION="$(git rev-parse --short HEAD)"
 echo "Notifying bugsnag of revision release ${REVISION}"
 curl https://build.bugsnag.com/ \
-    --header "Content-Type: application/json" \
-    --data "{
-      'apiKey': '${BUGSNAG_KEY}',
-      'releaseStage': 'production',
-      'sourceControl': {
-        'provider': 'github',
-        'repository': 'https://github.com/alonetone/sudara',
-        'revision': '${REVISION}''
-      }
-    }"
+  --header "Content-Type: application/json" \
+  --data '{
+    "apiKey": "'"${BUGSNAG_KEY}"'",
+    "appVersion": "'"${REVISION}"'",
+    "releaseStage": "production",
+    "sourceControl": {
+      "provider": "github",
+      "repository": "https://github.com/sudara/alonetone",
+      "revision": "'"${REVISION}"'"
+    }
+  }'
