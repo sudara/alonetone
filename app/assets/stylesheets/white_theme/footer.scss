@@ -14,10 +14,16 @@ footer#site_footer {
     font-weight: normal;
   }
   .footer_alonetoners_online {
-    width: 960px;
+    width: 952px;
     margin-right: auto;
     margin-left: auto;
+    padding-left: 8px;
+    box-sizing: border-box;
+    h3 {
+      margin-bottom: 0px;
+    }
     ul {
+      margin-top: 8px;
       li {
         color: #868686;
         line-height: 1.2em;
@@ -29,11 +35,12 @@ footer#site_footer {
   }
   .footer_forum_topics {
     background-color: rgba(255, 255, 255, 0.5);
+    padding-bottom: 24px;  
+    
     .footer_forum_topics_inner {
-      width: 960px;
+      width: 952px;
       margin-right: auto;
       margin-left: auto;
-      margin-bottom: 32px;
       .forum_view_all {
         margin-top: 6px;
         font-family: $sans-font;
@@ -58,6 +65,7 @@ footer#site_footer {
       h3 {
         margin-top: 0;
         padding-top: 12px;
+        margin-left: 8px;
       }
       ul {
         clear: both;
@@ -70,7 +78,8 @@ footer#site_footer {
           width: 234px;
           height: 64px;
           border-radius: 3px;
-          box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+          background-color: #ffffff;
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, .2);
           .forum_topic {
             font-family: $medium-sans-font;
             line-height: 1.2em;
@@ -90,7 +99,6 @@ footer#site_footer {
       display: flex;
       margin-right: auto;
       margin-left: auto;
-      @include match-dynamic-site-width();
       flex-wrap: wrap;
       justify-content: center;
       padding: 24px;
@@ -126,6 +134,7 @@ footer#site_footer {
           font-size: 14px;
           line-height: 1.2em;
           margin-bottom: 10px;
+          margin-top: 0;
           font-family: $medium-sans-font;
           font-weight: normal;
         }
