@@ -76,6 +76,8 @@ class Comment < ActiveRecord::Base
   end
 
   def increment_counters
+    return if is_spam?
+
     if commentable.is_a? Asset
       User.increment_counter(:comments_count, commentable.user, touch: true)
       Asset.increment_counter(:comments_count, commentable, touch: true)

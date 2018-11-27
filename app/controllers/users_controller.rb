@@ -95,6 +95,7 @@ class UsersController < ApplicationController
   def toggle_favorite
     asset = Asset.published.find(params[:asset_id])
     return false unless logged_in? && asset # no bullshit
+
     current_user.toggle_favorite(asset)
     head :ok
   end
@@ -185,6 +186,7 @@ class UsersController < ApplicationController
 
   def sudo_to_user
     raise "No user specified" unless params[:id]
+
     new_user = User.where(login: params[:id]).first
     if new_user.present?
       logger.warn("SUDO: #{current_user.name} is sudoing to #{new_user.name}")

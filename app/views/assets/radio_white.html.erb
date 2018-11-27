@@ -1,0 +1,37 @@
+<h1>alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
+<div id="columns">
+  <div id="left">
+    <div class="mini_paginator top_paginator">
+      <%= will_paginate @assets %>
+    </div>
+    <div id="radio_tracks" class="box">
+        <%= render partial: 'assets/asset', collection: @assets  %>
+    </div>
+    <div class="mini_paginator bottom_paginator">
+      <%= will_paginate @assets %>
+    </div>
+  </div>
+  <div id="right">
+    <div id="radio" class="box">
+      <h2 class='box'>Choose a radio flavor, dear friend</h2>
+      <div id="radio_options" class='box'>
+        <div class="static_content" id="radio_controls">
+          <ul>
+            <li><%= link_to_unless_current 'Latest uploaded', radio_source_home_path('latest') %></li>
+            <li><%= link_to_unless_current 'Kicking ass', radio_source_home_path('popular') %></li>
+            <li><%= link_to_unless_current 'Most Favorited', radio_source_home_path('most_favorited') %></li>
+            <li><%= link_to_unless_current 'Recently Favorited', radio_source_home_path('favorites') %></li>
+            <li><%= link_to_unless_current 'The "Mangoz Shuffle"', radio_source_home_path('mangoz_shuffle') %></li>
+            <% if logged_in? %>
+            <li><%= link_to_unless_current 'From those you follow', radio_source_home_path('those_you_follow') %></li>
+            <li><%= link_to_unless_current "Songs you haven't heard", radio_source_home_path('songs_you_have_not_heard') %></li>
+            <% end %>
+            <% if moderator? %>
+            <li><%= link_to_unless_current "Spammy Spam", radio_source_home_path('spam') %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -80,7 +80,7 @@
         box-shadow: 0 3px 4px -2px #65666627;
       }
     }
-    
+
   }
 }
 
@@ -140,13 +140,14 @@ body main #columns  {
   .faq.box {
     padding-left: 0;
     padding-right: 0;
+    max-width: 720px;
     h2.box {
       padding-left: $baseline / 2;
     }
     .static_content {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-      margin: $baseline / 2 0;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin: 4px 0px;
     }
   }
 }
@@ -154,6 +155,8 @@ body main #columns  {
 .faq.box {
   margin-left: auto;
   margin-right: auto;
+  box-shadow: none;
+  background: transparent;
   @include match-dynamic-site-width('narrow');
   @media #{$mobile} {
     width: 90%;
@@ -164,16 +167,20 @@ body main #columns  {
 
   h2.box {
     margin-top: 0;
+    color: #8b370d;
+    background: none;
     box-shadow: none;
     padding-left: 0;
     border-radius: 0;
     line-height: 20px;
     height: auto;
     padding-bottom: 12px;
+    border-bottom: 1px solid #80604026;
   }
   .static_content {
     margin: $baseline 0;
-    line-height: 1.3em;
+    line-height: 1.5em;
+    font-size: 16px;
   }
 }
 
@@ -196,6 +203,10 @@ body main #columns  {
   flex-wrap: wrap-reverse;
 }
 
+#radio_tracks {
+  margin-bottom: 0;
+}
+
 body main #columns {
 	#radio_options {
     position: relative;
@@ -209,24 +220,31 @@ body main #columns {
 		#radio_controls {
 			padding: 0;
 			ul {
-				li.radio_channel {
-					font-size: 15px;
-					line-height: 45px;
-					display: block;
-					box-sizing: border-box;
+        li {
 					width: 100%;
-					height: 40px;
-					padding-left: 15px;
-					cursor: pointer;
-					border-bottom: 1px solid $light-gray;
-					background-color: $white;
+          height: 40px;
+          text-indent: 25px;
+          line-height: 45px;
+					display: block;
+          box-sizing: border-box;
+          cursor: pointer;
+          border-bottom: 1px solid $light-gray;
+          background-color: $orange-background;
+          color: $white;
+        }
+				li, li a {
+					font-size: 15px;
+          text-decoration: none;
 					&.disabled {
 						color: $disabled;
 					}
-					input {
-						margin-right: 20px;
-					}
-				}
+        }
+        li a{
+          display: block;
+          width:100%;
+          color: $not-quite-black;
+          background-color: $white;
+        }
 			}
 		}
 	}
@@ -301,21 +319,21 @@ div.logo {
    margin-bottom: .5em;
    text-indent: 45px;
  }
- 
+
  #total_playsDiv {
    width: 800px;
    margin: auto;
    text-align: left;
    background-color: $silver;
  }
- 
+
  .static_content#stats,
  .static_content.stats {
    width: 800px;
    margin: 0 auto;
    padding: 0;
  }
- 
+
  .secretz {
    margin: 0;
    padding: 0;
@@ -376,11 +394,11 @@ div.logo {
      background-color: $box_background_even;
    }
  }
- 
+
  .highlight {
    background-color: yellow;
  }
- 
+
  .static_content.big_stats {
    font-size: 14px;
    line-height: 1.5em;

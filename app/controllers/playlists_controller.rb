@@ -113,7 +113,7 @@ class PlaylistsController < ApplicationController
     end
     head :ok
   rescue ActiveRecord::RecordNotFound, NoMethodError
-    return head(:bad_request)
+    head(:bad_request)
   end
 
   def create

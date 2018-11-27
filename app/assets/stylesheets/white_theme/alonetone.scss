@@ -7,7 +7,7 @@ ul {
 	padding-left: 0;
 	list-style: none;
 }
-	
+
 .box {
 	position: relative;
 	display: flex;
@@ -18,7 +18,8 @@ ul {
 	justify-content: space-between;
 	@include samo-shadow-and-radius();
 	h1, h2 {
-		font-weight: bold;
+    font-family: $medium-sans-font;
+    font-weight: normal;
 		line-height: 42px;
 		display: block;
 		box-sizing: border-box;
@@ -61,17 +62,17 @@ ul {
 		padding-left: 20px;
 		padding-right: 6px;
 		height: 32px;
-		line-height: 32px;	
+		line-height: 33px;
 		@include samo-shadow-and-radius();
 		background-color: #FFF;
-		box-shadow: none;	
+		box-shadow: none;
 		span {
 			vertical-align: top;
 			display: inline-flex;
 		}
 		i.icon_caret {
 			position: relative;
-			top: 4px;
+			top: 5px;
 			svg {
 				height: 20px;
 			}
@@ -89,7 +90,7 @@ ul {
 				.icon_caret_path {
 					stroke: $samo-orange;
 				}
-				
+
 			}
 		}
 	}
