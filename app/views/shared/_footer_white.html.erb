@@ -53,18 +53,18 @@
       <div><%= link_to "Popular Tracks", "/radio/popular"%></div>
     </div>
 
-    <% if logged_in? %>
     <div class="footer_column">
       <h3 class="footer_column_header">Do Stuff</h3>
+    <% if logged_in? %>
         <div><%= link_to "Upload", "/upload"%></div>
         <div><%= link_to "New Playlist/Album", "/new_album"%></div>
+    <% end %>
     <% if moderator? %>
       <div><%= link_to "Secretz", "/secretz" %></div>
       <div><%= link_to "Spam Stats", "https://akismet.com/web/1.0/user-stats.php?blog=alonetone.com&api_key=#{Alonetone.rakismet_key}"%></div>
       <div><%= link_to "Job Status", "/sidekiq" %></div>
     <% end %>
       </div>
-    <% end %>
 
     <div class="footer_column">
       <h3 class="footer_column_header">More</h3>

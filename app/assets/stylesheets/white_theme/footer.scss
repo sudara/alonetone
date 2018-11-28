@@ -35,7 +35,6 @@ footer#site_footer {
   .footer_forum_topics {
     background-color: rgba(255, 255, 255, 0.5);
     padding-bottom: 24px;  
-    
     .footer_forum_topics_inner {
       width: 952px;
       margin-right: auto;
@@ -67,7 +66,7 @@ footer#site_footer {
         margin-left: 8px;
       }
       ul {
-        clear: both;
+        clear: boStarth;
         display: flex;
         justify-content: space-between;
         margin: 0;
@@ -101,7 +100,7 @@ footer#site_footer {
       margin-left: auto;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 0;
       .footer_column {
         &:first-child {
           text-align: center;
