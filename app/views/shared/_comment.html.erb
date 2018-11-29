@@ -1,5 +1,5 @@
 <% if should_display_track_with_comment? %>
-  <%= render partial: 'assets/asset', locals: { asset: comment.commentable } if comment.commentable %>
+  <%= render partial: 'assets/asset', locals: { asset: comment.commentable } if comment.commentable && comment.commentable_type == "Asset" %>
 <% end %>
 
 <%= div_for comment, class: (cycle('even', 'odd')) do %>
