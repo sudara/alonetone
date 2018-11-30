@@ -52,8 +52,11 @@
 .mini_paginator {
 	position: relative;
 	height: 32px;
-	border-bottom: 1px solid #DADADA;
+	// border-bottom: 1px solid #DADADA;
 	background-color: #FFF;
+	@include samo-shadow-and-radius();
+	background-color: #FFF;
+	box-shadow: none;
 	.pagination {
 		display: flex;
 		flex-direction: row;
@@ -63,3 +66,12 @@
 		}
 	}
 }
+
+.mini_paginator.top_paginator {
+	margin-bottom: 12px;
+}
+
+.mini_paginator.bottom_paginator {
+	margin-top: 12px;
+}
+

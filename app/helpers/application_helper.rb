@@ -1,6 +1,6 @@
 require 'emoji'
 module ApplicationHelper
-  include Pagy::Frontend
+  include ::Pagy::Frontend
   @@listen_sources = %w[itunes]
 
   def theme_name
@@ -64,7 +64,7 @@ module ApplicationHelper
   end
 
   def awesome_truncate_with_read_more(asset, length = 30)
-    text = awesome_truncate(asset.description, length)
+    text = awesome_truncate(strip_tags(asset.description), length)
     text << link_to('read more', user_track_path(asset.user, asset.permalink)) if asset.description && asset.description.length > 300
     text.html_safe
   end
@@ -78,6 +78,17 @@ module ApplicationHelper
                      Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
                    end
     Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
+  end
+
+  def markdown_with_html(text)
+    return "" unless text
+
+    text = emojify(text)
+    @@renderer_with_html ||= begin
+                     html = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { rel: "nofollow" })
+                     Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
+                   end
+    Redcarpet::Render::SmartyPants.render(@@renderer_with_html.render(text)).html_safe
   end
 
   def emojify(content)
@@ -180,6 +191,10 @@ module ApplicationHelper
       end
     end
     sanitized
+  end
+
+  def should_display_track_with_comment?
+    !@single_track && !@playlist && !@asset
   end
 
   def svg_path(svg)

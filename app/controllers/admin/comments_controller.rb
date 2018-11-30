@@ -3,13 +3,13 @@ module Admin
     before_action :set_comment, only: %i[unspam spam]
 
     def index
-      @pagy, @comments = pagy(Comment.all)
+      @pagy, @comments = pagy(Comment.recent)
     end
 
     def unspam
       @comment.ham!
       @comment.update_column :is_spam, false
-      @comment.deliver_comment_notification
+      CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
 
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
