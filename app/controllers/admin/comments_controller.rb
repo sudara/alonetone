@@ -3,7 +3,11 @@ module Admin
     before_action :set_comment, only: %i[unspam spam]
 
     def index
-      @pagy, @comments = pagy(Comment.recent)
+      if permitted_params[:filter_by]
+        @pagy, @comments = pagy(Comment.where(permitted_params[:filter_by]).recent)
+      else
+        @pagy, @comments = pagy(Comment.recent)
+      end
     end
 
     def unspam
@@ -30,7 +34,7 @@ module Admin
     def mark_group_as_spam
       # limit scope to non_spam comments
       # and we should include private comments as well
-      scope = Comment.where(params[:mark_spam_by].permit!)
+      scope = Comment.where(permitted_params[:mark_spam_by])
       comments = scope.include_private
 
       comments.map(&:spam!)
@@ -39,6 +43,10 @@ module Admin
     end
 
     private
+
+    def permitted_params
+      params.permit!
+    end
 
     def set_comment
       @comment = Comment.find(params[:id])
