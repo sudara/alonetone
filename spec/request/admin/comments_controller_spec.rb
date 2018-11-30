@@ -36,7 +36,7 @@ RSpec.describe Admin::CommentsController, type: :request do
       put unspam_admin_comment_path(comment.id)
     end
 
-    it "shoudl send notification" do
+    it "should send notification" do
       expect do
         put unspam_admin_comment_path(comment.id)
       end.to change { ActionMailer::Base.deliveries.size }.by(1)

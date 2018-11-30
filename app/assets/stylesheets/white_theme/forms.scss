@@ -3,12 +3,12 @@
 /* Remove Blue Glow from Webkit Browsers on focus */
 input, textarea, select {
 	outline: 0;
-	
+
 }
 
 input[type='search'], input[type='text'], input[type='password'], input[type='email'], textarea {
 	-webkit-appearance: none;
-}  
+}
 
 
 input {
@@ -100,7 +100,7 @@ input {
 	border-color: #BBB;
 	background-color: #DDD;
 	box-shadow: none;
-	
+
 }
 [type='checkbox']:disabled:checked + label:after {
 	color: #999;
@@ -145,6 +145,7 @@ input {
 }
 
 label {
+  font-family: $medium-sans-font;
 	font-size: 12px;
 	display: block;
 	margin: 2px 0;
@@ -170,10 +171,10 @@ textarea {
 }
 input {
 	box-sizing: border-box;
-	font-size: 1em;
 	margin: 0;
-	padding: 8px;
-	
+	padding: 9px 10px 6px 10px;
+  font-family: $medium-sans-font;
+  font-size: 14px;
 	&.string, &.password {
 		width: 250px;
 		border: 1px solid #FFF;
