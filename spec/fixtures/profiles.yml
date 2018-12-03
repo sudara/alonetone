@@ -1,0 +1,21 @@
+sudara:
+  id: 1
+  user_id: 1
+arthur:
+  id: 2
+  user_id: 2
+aaron:
+  id: 3
+  user_id: 3
+not_activated:
+  id: 4
+  user_id: 4
+sandbags:
+  id: 5
+  user_id: 5
+joe_blow:
+  id: 6
+  user_id: 6
+brand_new_user:
+  id: 7
+  user: 7
