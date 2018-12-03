@@ -36,6 +36,7 @@ class PlaylistsController < ApplicationController
 
   def show
     @asset = find_asset_in_playlist
+    @comments = @asset.comments.public_or_private(display_private_comments?) if @asset
     respond_to do |format|
       format.html do
         lazily_create_waveform_if_needed if @asset

@@ -1,11 +1,8 @@
-<% if !@single_track && (comment.commentable_type == 'Asset') %>
-  <%= render partial: 'assets/asset', locals: { asset: comment.commentable } if comment.commentable %>
-<% elsif not @single_track %>
-  <h2 class="box comment_header"><%= link_for_comment(comment) %></h2>
+<% if should_display_track_with_comment? %>
+  <%= render partial: 'assets/asset', locals: { asset: comment.commentable } if comment.commentable && comment.commentable_type == "Asset" %>
 <% end %>
 
 <%= div_for comment, class: (cycle('even', 'odd')) do %>
-
   <div class="comment_user">
     <% if white_theme_enabled? && comment.commenter %>
       <%= link_to(image_tag(avatar_or_placeholder_for(comment.commenter)), user_home_path(comment.commenter))%>
@@ -21,9 +18,8 @@
         </div>
     <% end %>
 	</div>
-	
-	<div class="comment_right">
 
+	<div class="comment_right">
 		<div class="comment_user_text">
 			<%= comment.commenter ? (link_to comment.commenter.name, user_home_path(comment.commenter)) : 'Guest' %>
 			<% if logged_in? %>
@@ -41,13 +37,13 @@
 		<% if comment.private && white_theme_enabled? %>
 			<div class="private_message">private message</div>
 		<% end %>
-	
+
 		<% if authorized_for_comment(comment) -%>
 			<div class="comment_controls">
 					<% if comment.is_spam? %>
-						<%= link_to 'un-spam', unspam_comment_path(comment),  data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put %>
+						<%= link_to 'un-spam', unspam_admin_comment_path(comment),  data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put %>
 					<% else %>
-						<%= link_to 'mark as spam', spam_comment_path(comment),  data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again'}, method: :put%>
+						<%= link_to 'mark as spam', spam_admin_comment_path(comment),  data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this comment to post again'}, method: :put%>
 					<% end %>
 				<%= link_to 'delete', comment_path(comment), data: {confirm: 'Are you sure you want to delete this comment?'}, method: :delete %>
 			</div>

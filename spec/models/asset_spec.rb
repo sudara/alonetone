@@ -155,6 +155,15 @@ RSpec.describe Asset, type: :model do
       # asset = new_track('1valid-1invalid.zip', 'application/zip')
       # lambda{asset.save}.should change(Asset, :count).by(1)
     end
+
+    describe "#publish" do
+      it "should update private false to true" do
+        asset = assets(:private_track)
+        asset.publish!
+        asset.reload
+        expect(asset.private).to eq(false)
+      end
+    end
   end
 end
 
