@@ -13,6 +13,8 @@ module AssetsHelper
                                       asset.permalink, format: :mp3)
     elsif @playlist
       user_show_track_in_playlist_path(asset.user, @playlist, asset, format: :mp3)
+    else
+      user_track_path(asset.user, asset, format: :mp3)
     end
   end
 end
