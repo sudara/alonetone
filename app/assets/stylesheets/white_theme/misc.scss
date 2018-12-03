@@ -108,8 +108,9 @@
   }
   .hint {
     font-style: italic;
-    margin-top: $baseline / 4;
-    margin-bottom: $baseline / 4;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    text-align: left;
   }
 }
 
@@ -121,7 +122,6 @@
 }
 
 body main #columns  {
-
   #login.box, #signup.box, #signup-questions.box {
     margin-bottom: 0;
     box-shadow: none;
@@ -132,8 +132,9 @@ body main #columns  {
     padding-bottom: $baseline / 2;
 
   }
-
 }
+
+
 /* ABOUT PAGES */
 
 .about-page, .stats-page {
@@ -203,11 +204,23 @@ body main #columns  {
   flex-wrap: wrap-reverse;
 }
 
+.radio_heading {
+  height: 50px;
+}
+
 #radio_tracks {
   margin-bottom: 0;
 }
 
 body main #columns {
+  #left {
+    position: relative;
+    h1 {
+      position: absolute;
+      top: -60px;
+      width: 900px;
+    }
+  }
 	#radio_options {
     position: relative;
     display: flex;
@@ -407,8 +420,6 @@ div.logo {
    }
  }
 
-
-
 //  UPLOADING
 
 dl.group {
@@ -416,42 +427,3 @@ dl.group {
     margin-left: 0;
   }
 }
-
-
-/* LISTENERS */
-
-// #follows, #mostly_listens_to, #recent_listeners {
-// 	width: 420px;
-// 	margin: 0;
-// 	padding: 0;
-// 	background: none;
-// 	div {
-// 		float: left;
-// 		margin: 0;
-// 		padding: 0;
-// 		&.edge_to_edge_large {
-// 			width: 105px;
-// 			height: 105px;
-// 			img {
-// 				width: 105px;
-// 				height: 105px;
-// 			}
-// 		}
-// 		&.edge_to_edge_small {
-// 			width: 70px;
-// 			height: 70px;
-// 			img {
-// 				width: 70px;
-// 				height: 70px;
-// 			}
-// 		}
-// 		&.edge_to_edge_tiny {
-// 			width: 42px;
-// 			height: 42px;
-// 			img {
-// 				width: 42px;
-// 				height: 42px;
-// 			}
-// 		}
-// 	}
-// }
