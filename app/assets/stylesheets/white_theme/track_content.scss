@@ -1,7 +1,7 @@
 .track-content {
   max-width: 700px;
   @include match-dynamic-site-width('narrow');
-   > * {
+  > * {
     background-color: white;
     @include samo-shadow-and-radius();
   }
@@ -159,6 +159,8 @@
   }
 
   .track-edit {
+    margin-bottom: $baseline * 2; // to match MASS_EDIT
+
     header {
       input {
         font-family: $sans-font;
@@ -208,6 +210,23 @@
           @include default-button('admin');
         }
       }
+    }
+  }
+  // COPY FROM MASS_EDIT
+  > div.box {
+    > .static_content {
+      padding: $baseline / 2 $baseline;
+      box-sizing: border-box;
+    }
+    h2.box {
+      margin-left: $baseline;
+      margin-right: $baseline;
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: 0;
+      box-shadow: none;
+      border-radius: 0;
+      box-sizing: border-box;
     }
   }
 }
