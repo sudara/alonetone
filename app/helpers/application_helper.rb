@@ -193,6 +193,10 @@ module ApplicationHelper
     sanitized
   end
 
+  def should_display_track_with_comment?
+    !@single_track && !@playlist && !@asset
+  end
+
   def svg_path(svg)
     File.join(Rails.root, 'app', 'assets', 'images', svg)
   end

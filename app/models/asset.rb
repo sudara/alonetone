@@ -129,7 +129,7 @@ class Asset < ActiveRecord::Base
   end
 
   def publish!
-    update(:private, false) && notify_followers if private?
+    update(private: false) && notify_followers if private?
   end
 
   # needed for spam detection

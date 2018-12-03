@@ -4,13 +4,13 @@
 <div id="columns">
   <div id="left">
   <h1>alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
-    <div class="mini_paginator">
+    <div class="mini_paginator top_paginator">
       <%= will_paginate @assets %>
     </div>
     <div id="radio_tracks" class="box">
         <%= render partial: 'assets/asset', collection: @assets  %>
     </div>
-    <div class="mini_paginator">
+    <div class="mini_paginator bottom_paginator">
       <%= will_paginate @assets %>
     </div>
   </div>

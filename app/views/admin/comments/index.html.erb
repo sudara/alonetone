@@ -1,0 +1,43 @@
+<h1>Comments</h1>
+
+<div id="admin_columns">
+  
+  <div class="admin_column_left">
+    <%= render partial: 'admin/navigation' %>
+  </div>
+
+  <div class="admin_column_right">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>UpdatedAt</th>
+          <th>IP/login</th>
+          <th>ID</th>
+          <th>Text</th>
+          <th>Spam</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><%= comment.created_at.strftime("%b %d, %y") %></td>
+            <td><%= comment.remote_ip %></td>
+            <td><%= link_to comment.id, comment %></td>
+            <td><%= truncate(comment.body, length: 80) %></td>
+            <td><%= comment.is_spam %></td>
+            <td><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></td>
+            <td><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put%></td>
+            <td><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%== pagy_nav @pagy %>
+  
+  </div>
+</div>

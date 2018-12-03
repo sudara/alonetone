@@ -1,0 +1,18 @@
+// For admin/comments
+
+#admin_columns {
+	max-width: 1100px;
+	margin-right: auto;
+	margin-left: auto;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	.admin_column_left {
+		width: 15%;
+	}
+	.admin_column_right {
+		width: 80%;
+		min-width: 700px
+	}
+}
+
