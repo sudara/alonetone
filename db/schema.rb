@@ -603,6 +603,9 @@ ActiveRecord::Schema.define(version: 2018_11_07_201913) do
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
     t.text "settings", limit: 16777215
+    t.float "lat"
+    t.float "lng"
+    t.text "bio_html", limit: 16777215
     t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
     t.integer "followers_count", default: 0
