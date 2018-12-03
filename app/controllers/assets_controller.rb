@@ -14,23 +14,12 @@ class AssetsController < ApplicationController
   # home page
   def latest
     if stale?(Asset.last_updated)
-      respond_to do |wants|
-        wants.html do
-          @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
-          @tab = 'home'
-          @assets = Asset.published.latest.includes(user: :pic).limit(5)
-          set_related_lastest_variables
-          welcome_to_white_theme
-          render 'latest_white' if white_theme_enabled?
-        end
-        wants.rss do
-          @assets = Asset.published.latest(50)
-        end
-        wants.json do
-          @assets = Asset.published.limit(500).includes(:user)
-          render json: @assets.to_json(only: %i[name title id], methods: [:name], include: { user: { only: :name, method: :name } })
-        end
-      end
+      @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
+      @tab = 'home'
+      @assets = Asset.published.latest.includes(user: :pic).limit(5)
+      set_related_lastest_variables
+      welcome_to_white_theme
+      render 'latest_white' if white_theme_enabled?
     end
   end
 

@@ -6,7 +6,6 @@ sudara:
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 5.days.ago.to_s :db %>
-  activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
   admin: true
 
@@ -18,7 +17,6 @@ arthur:
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
-  activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
   last_request_at: <%= 1.days.ago.to_s :db %>
   current_login_ip: 9.9.9.9
@@ -51,7 +49,6 @@ sandbags:
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
-  activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
   moderator: true
 
@@ -63,7 +60,6 @@ joeblow:
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
-  activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
 
 # Brand new user with 25 tracks
@@ -74,6 +70,5 @@ brand_new_user:
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 5.hours.ago.to_s :db %>
-  activated_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.hours.ago.to_s :db %>
   assets_count: 25

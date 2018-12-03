@@ -4,53 +4,76 @@
 
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
-  <h2 class="box">Edit your profile</h2>
-  <%= form_for @user, html: { method: :put }, namespace: 'bio' do |f| -%>
-	<div class="static_content">
-  <p>
-    <label for="display_name">The name you want displayed on alonetone</label><br/>
-    <%= f.text_field :display_name %>
-  </p>
-
-  <p>
-    <label for="user_bio">Tell us about yourself</label><br/>
-    <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
-  </p>
-
-  <p>
-    <label for="user_bio">What city or town do you live in?</label><br/>
-    <%= f.text_field :city %>
-  </p>
-
-  <p>
-    <label for="user_bio">What country?</label><br />
-    <%= f.country_select(:country, ['United States'], include_blank: true) %>
-  </p>
-
-  <p>
-    <label for="user_website">Have a website?</label><br/>
-    https://<%= f.text_field :website %>
-  </p>
-
-  <p>
-    <label for "user_twitter">On twitter?</label><br/>
-    http://twitter.com/<%= f.text_field :twitter%>
-  </p>
+    <h2 class="box">Edit your name</h2>
+    <%= form_with model: @user do |f| -%>
+	  <div class="static_content">
+      <p>
+        <label for="display_name">The name you want displayed on alonetone</label><br/>
+        <%= f.text_field :display_name %>
+      </p>
+    </div>
+    <div class="static_content">
+      <%= f.submit "Save" %>
+    </div>
+    <% end %>
   </div>
 
-  <div class="static_content">
-    <%= f.submit "Update Your Profile" %>
-  </div>
-	<% end -%>
-</div>
+  <div class="box edit-your-profile-box">
+    <h2 class="box">Edit your deets</h2>
+    <%= form_with model: [@user, @profile] do |f| %>
+    <div class="static_content">
+      <p>
+        <label for="user_bio">Tell us about yourself</label><br/>
+        <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
+      </p>
 
+      <p>
+        <label for="user_bio">What city or town do you live in?</label><br/>
+        <%= f.text_field :city %>
+      </p>
+
+      <p>
+        <label for="user_country">What country?</label><br />
+        <%= f.country_select(:country, ['United States'], include_blank: true) %>
+      </p>
+
+      <p>
+        <label for="user_website">Have a website?</label><br/>
+        https://<%= f.text_field :website %>
+      </p>
+
+      <p>
+        <label for "user_spotify>Are you on Spotify?</label><br/>
+        https://open.spotify.com/artist/<%= f.text_field :spotify %>
+      </p>
+
+      <p>
+        <label for "user_spotify>Are you on Bandcamp?</label><br/>
+        https://<%= f.text_field :bandcamp %>.bandcamp.com
+      </p>
+
+      <p>
+        <label for "user_twitter">Twitter?</label><br/>
+        https://twitter.com/<%= f.text_field :twitter %>
+      </p>
+
+      <p>
+        <label for "user_instagram">Insta?</label><br/>
+        https://instagram.com/<%= f.text_field :instagram %>
+      </p>
+    </div>
+    <div class="static_content">
+      <%= f.submit "Update Your Profile" %>
+    </div>
+    <% end %>
+  </div>
 
 <div class="box your-account-box">
   <h2 class="box">Your Account</h2>
+  <%= form_for @user, html: { method: :put }, namespace: 'password' do |f| -%>
 	<div class="static_content">
-  	<%= form_for @user, html: { method: :put }, namespace: 'password' do |f| -%>
-    <%= link_to("Change your login and alonetone address", '#edit_login', class: 'slide_open_href') %> <br/><br/>
-    <%= link_to("Change your password",'#edit_password', class: 'slide_open_href') %><br/><br/>
+    <p><%= link_to("Change your login and alonetone address", '#edit_login', class: 'slide_open_href') %></p>
+    <p><%= link_to("Change your password",'#edit_password', class: 'slide_open_href') %></p>
     <%= link_to("Delete your account",'#destroy_account', class: 'slide_open_href') %>
   </div>
 
@@ -81,17 +104,14 @@
     <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
 
     <%= link_to "Delete", user_path(login: @user.login), method: :delete,
-    confirm: 'Are you absolutely sure? This will delete your account and tracks permanently, including all play history and comments.',
-    class: 'delete_green'%>
+    data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."},
+    class: 'delete_green' %>
     <br/><br/>
   </div>
 
   <% end %>
   </div>
   </div>
-
-
-
 <% end %>
 
 <%= content_for :right do %>
@@ -109,8 +129,9 @@
 
   <div class="box settings-box">
   <h2 class="box">Settings</h2>
+  <%= form_for @user do |f| -%>
+
   <div class="static_content">
-  <%= form_for @user, html: { method: :put }, namespace: 'settings' do |f| -%>
     <label>Display play counts blatantly on all tracks?</label> <br/>
     <%= select_tag('user[settings][display_listen_count]',
         options_for_select([['no thanks','false'], ['yes','true']],
@@ -158,6 +179,6 @@
   <div class="static_content">
     <%= submit_tag "Save your alonetone settings" %>
   </div>
-</div>
   <% end %>
+</div>
 <% end %>
