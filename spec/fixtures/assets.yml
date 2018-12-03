@@ -62,7 +62,7 @@ private_track:
   length: 45
   private: true
 spam_track:
-  id: 6
+  id: 7
   mp3_file_name: Song6.mp3
   permalink: song6
   mp3_content_type: audio/mpeg
