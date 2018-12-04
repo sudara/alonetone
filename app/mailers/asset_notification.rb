@@ -1,14 +1,9 @@
 class AssetNotification < ActionMailer::Base
   default from: Alonetone.email
 
-  def upload_notification(asset, email, _sent_at = Time.now)
-    @track = asset.name
-    @description = asset.description
-    @name = asset.user.name
-    @user = asset.user
-    @title = asset.title.present? ? asset.title : "new track"
-    @play_link = play_link_for(asset)
-    @user_link = user_link_for(asset)
+  def upload_notification(assets, user, _sent_at = Time.now)
+    @user = user
+    @tracks = generate_track_hash(assets)
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
@@ -16,6 +11,16 @@ class AssetNotification < ActionMailer::Base
   end
 
   protected
+
+  # I'm sure there is some fancy shmancy way to do the same thing
+  # but I can't think of it right now.
+  def generate_track_hash(assets)
+    assets_array = []
+    assets.each do |asset|
+      assets_array << { title: asset.title, play_link: play_link_for(asset) }
+    end
+    assets_array
+  end
 
   def user_link_for(asset)
     'https://' + Alonetone.url + '/' + asset.user.login

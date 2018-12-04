@@ -124,6 +124,9 @@ class AssetsController < ApplicationController
     end
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
+
+    AssetNotificationJob.set(wait: 10.minutes).perform_now(asset_ids: @assets.map(&:id), user_id: @user.id)
+
     render 'mass_edit_white' if white_theme_enabled?
   end
 
