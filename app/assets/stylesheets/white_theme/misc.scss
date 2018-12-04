@@ -18,6 +18,12 @@
   }
 }
 
+dl.group {
+  dd {
+    margin-left: 0;
+  }
+}
+
 
 /* LOG IN / SIGN UP */
 
@@ -163,33 +169,5 @@ body main #columns  {
   a {
     text-decoration: underline;
     color: white;
-  }
-}
-
-/* PRESS LOGOS */
-
-div.logo {
-  font-size: 10px;
-  font-weight: normal;
-  line-height: 12px;
-  float: left;
-  width: 133px;
-  margin-top: 43px;
-  text-align: center;
-  a,
-  a:visited {
-    font-size: 11px;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-}
-
-//  UPLOADING
-
-dl.group {
-  dd {
-    margin-left: 0;
   }
 }
