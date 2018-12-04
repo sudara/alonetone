@@ -36,15 +36,6 @@ ul {
 	}
 }
 
-.footer_box {
-	margin-bottom: $baseline;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: right;
-	background-color: $box-background-color;
-}
-
-
 .below_box {
 	text-align: right;
 	a.view_all {
@@ -82,12 +73,10 @@ ul {
 			text-decoration: none;
 			span {
 				color: $samo-orange;
-				// background-color: #FFF;
 				text-decoration: none;
 				.icon_caret_path {
 					stroke: $samo-orange;
 				}
-
 			}
 		}
 	}
