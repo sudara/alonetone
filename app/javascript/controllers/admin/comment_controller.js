@@ -18,14 +18,20 @@ export default class extends Controller {
     // console.log("Hello, Stimulus!", this.element)
   }
 
-  spam() {
-    // this.spamvalueTarget
+  toggleDisplay(spam_true) {
+    if (spam_true) {
+      showSpamTarget()
+    } else {
+      showUnspamTarget()
+    }
+  }
+
+  showSpamTarget() {
     this.unspamTarget.style.display = 'block'
     this.spamTarget.style.display = 'none'
   }
 
-  unspam() {
-    // this.spamvalueTarget
+  showUnspamTarget(){
     this.unspamTarget.style.display = 'none'
     this.spamTarget.style.display = 'block'
   }
