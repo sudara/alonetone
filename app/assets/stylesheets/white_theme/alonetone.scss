@@ -81,3 +81,14 @@ ul {
 		}
 	}
 }
+
+
+/* PROGRESS INDICATOR (COMMENT POSTING) */
+
+div.small_spinner {
+  display: none;
+  background: image-url('svg/icon_spinner.svg') no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+}
