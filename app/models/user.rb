@@ -186,11 +186,9 @@ end
 # Table name: users
 #
 #  id                 :integer          not null, primary key
-#  activated_at       :datetime
 #  admin              :boolean          default(FALSE)
 #  assets_count       :integer          default(0), not null
 #  bandwidth_used     :integer          default(0)
-#  bio_html           :text(16777215)
 #  comments_count     :integer          default(0)
 #  crypted_password   :string(128)      default(""), not null
 #  current_login_at   :datetime
@@ -203,9 +201,7 @@ end
 #  last_login_at      :datetime
 #  last_login_ip      :string(255)
 #  last_request_at    :datetime
-#  lat                :float(24)
 #  listens_count      :integer          default(0)
-#  lng                :float(24)
 #  login              :string(40)
 #  login_count        :integer          default(0), not null
 #  moderator          :boolean          default(FALSE)

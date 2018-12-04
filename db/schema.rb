@@ -263,8 +263,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_011838) do
     t.string "instagram"
     t.string "website"
     t.string "user_agent"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -603,9 +602,6 @@ ActiveRecord::Schema.define(version: 2018_12_04_011838) do
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
     t.text "settings", limit: 16777215
-    t.float "lat"
-    t.float "lng"
-    t.text "bio_html", limit: 16777215
     t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
     t.integer "followers_count", default: 0
