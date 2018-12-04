@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_201913) do
+ActiveRecord::Schema.define(version: 2018_12_04_011838) do
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
@@ -263,7 +263,8 @@ ActiveRecord::Schema.define(version: 2018_11_07_201913) do
     t.string "instagram"
     t.string "website"
     t.string "user_agent"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -589,7 +590,6 @@ ActiveRecord::Schema.define(version: 2018_11_07_201913) do
     t.string "login", limit: 40
     t.string "email", limit: 100
     t.string "salt", limit: 128, default: "", null: false
-    t.datetime "activated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "admin", default: false
