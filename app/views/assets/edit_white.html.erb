@@ -1,63 +1,6 @@
-<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>"> 
+<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
 
   <%= render partial: 'big_player' %>
-
-  <%= form_for(@asset, url: user_track_path(@user, @asset)) do |f| %>
-    <% if @asset.errors.any? %>
-      <div class="errors">
-        There were some problems...
-        <ul>
-          <% @asset.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="track-edit">
-      <header>
-        <h1><%= f.text_field :title, value: @asset.name %></h1>
-        <h3><%= @asset.user.display_name %></h3>
-      </header>
-
-      <%= f.text_area :description, placeholder: "Tell us a story..." %>
-      <%= f.text_area :credits, placeholder: "Credits for this track" %>
-
-      <%= hidden_field_tag :asset_permalink, @asset.permalink %>
-
-      <% if @allow_reupload %>
-
-      <div class="track-edit-bottom">
-        <%= link_to 'Upload a new version of this track',"new_version_#{@asset.object_id}", class: 'slide_open_next'%>
-        <div id="new_version_<%=@asset.object_id%>" style="display:none;">
-          <p>
-            <%= f.file_field :mp3, class: 'asset_data' %>
-          </p>
-          <span class="note">This will permanently delete the old version.
-            The replacement track will <strong>not</strong> be considered a new track. It will not
-            show up on the home page under 'latest tracks'. But hey, you get to clean
-            up your act on the sly and fix that hasty mix from last week! Yay!</span>
-        </div>
-        <% end %>
-        <div class="edit-save">
-        <% unless @asset.published? %>
-          <div class="submit_wrapper static_content">
-            <div class="comment_waiting" >
-              <div class="text"><!-- placeholder response text --></div>
-            </div>
-            <div class="small_spinner" style="display:none;"> </div>
-              <%= f.submit "Publish", class: 'comment_submit' %>
-          </div>
-        <% end %>
-        <div class="submit_wrapper static_content">
-          <div class="comment_waiting" >
-            <div class="text"><!-- placeholder response text --></div>
-          </div>
-          <div class="small_spinner" style="display:none;"> </div>
-          <%= f.submit "Save", class: 'comment_submit' %>
-        </div>
-      </div>
-    <% end %>
-    </div>
-  </div>
+  <%= render partial: 'edit_white' %>
+  <%= render partial: 'descriptionless'%>
 </div>

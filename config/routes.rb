@@ -7,6 +7,28 @@ Alonetone::Application.routes.draw do
     mount Greenfield::Engine => "/"
   end
 
+  namespace :admin do
+    resources :users
+    resources :comments do
+       member do
+        put :unspam
+        put :spam
+      end
+      collection do
+        put :mark_group_as_spam
+      end
+    end
+    resources :assets do
+      member do
+        put :unspam
+        put :spam
+      end
+      collection do
+        put :mark_group_as_spam
+      end
+    end
+  end
+
   constraints(->(req){ !Greenfield::Constraints.matches?(req) }) do
     resources :groups
 
@@ -44,12 +66,7 @@ Alonetone::Application.routes.draw do
 
     resources 'updates', :as => 'blog'
     resources :updates, :password_resets
-    resources :comments do
-      member do
-        put :unspam
-        put :spam
-      end
-    end
+    resources :comments
 
     get  'about/' => 'pages#about'
 
@@ -60,9 +77,6 @@ Alonetone::Application.routes.draw do
     get 'signup', to: 'users#new'
     get 'settings', to: 'users#edit'
     get '/activate/:perishable_token', to: 'users#activate'
-
-    # shortcut to profile
-    get ':login/bio' => 'users#bio', :as => 'profile'
 
     get '/latest.:format' => 'assets#latest'
 
@@ -112,12 +126,6 @@ Alonetone::Application.routes.draw do
     match 'search' => 'search#index', via: [:get, :post]
     match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
 
-    namespace :admin do
-      resources :layouts
-      resources :users
-    end
-
-
     root :to => 'assets#latest'
 
     resources :users
@@ -129,6 +137,7 @@ Alonetone::Application.routes.draw do
         post :attach_pic
         get :sudo
       end
+      resource 'profile'
       resources 'source_files' #:path_prefix => ':login'
       resources 'tracks', controller: :assets do
         member do
