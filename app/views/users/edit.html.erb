@@ -122,7 +122,7 @@
       Upload a new photo. (1000px by 1000px square for best results)<br/>
       <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
       	<%= f.file_field :pic  %>
-      	<%= submit_tag "Upload new Pic" %>
+      	<%= submit_tag "Upload New Pic" %>
       <% end %><br/>
   </div>
   </div>
@@ -177,7 +177,7 @@
   </div>
 
   <div class="static_content">
-    <%= submit_tag "Save your alonetone settings" %>
+    <%= submit_tag "Save Your Alonetone Settings" %>
   </div>
   <% end %>
 </div>
