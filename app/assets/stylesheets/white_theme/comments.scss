@@ -145,13 +145,15 @@ h2#latest_comments + div.box {
 			}
 			span.private {
 				font-size: 12px !important;
-				line-height: 27px;
 				position: relative;
 				top: -15px;
 				display: block;
-				height: 24px;
+				height: auto;
+				line-height: 17px;
 				margin-top: 0;
 				padding-left: 20px;
+				padding-top: 8px;
+				padding-bottom: 8px;
 				color: $white;
 				color: #FFD1B0;
 				border-color: #E02A02;
