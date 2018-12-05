@@ -7,6 +7,7 @@ class AssetNotification < ActionMailer::Base
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
+    @upload_user_url = user_link_for(assets.first)
     mail subject: "[alonetone] '#{@user.name}' uploaded a new track!", to: user.email
   end
 
@@ -17,7 +18,7 @@ class AssetNotification < ActionMailer::Base
   def generate_track_hash(assets)
     assets_array = []
     assets.each do |asset|
-      assets_array << { title: asset.title, play_link: play_link_for(asset) }
+      assets_array << { title: asset.title, play_link: play_link_for(asset) } if asset.title
     end
     assets_array
   end
