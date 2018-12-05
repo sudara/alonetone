@@ -45,7 +45,7 @@ h2#latest_comments + div.box {
 	margin-left: 10px;
 	&::before {
 		position: absolute;
-		top: 17px;
+		top: 25px;
 		left: 49%;
 		content: '\A';
 		border-width: 0 9px 13px 9px;
@@ -81,6 +81,7 @@ h2#latest_comments + div.box {
 
 
 /* SHARED BY TRACK AND TRACK_CONTENT */
+
 .comment_asset {
 	.comment_form.private_banner_visible {
 		form textarea {
@@ -120,6 +121,7 @@ h2#latest_comments + div.box {
 				width: 100%;
 				margin-bottom: 15px;
 				padding: $baseline / 4;
+				margin-top: 8px;
 				resize: none;
 				color: #4F4D4D;
 				border: 1px solid #D7DBDB;
