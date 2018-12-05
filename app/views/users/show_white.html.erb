@@ -166,16 +166,50 @@
     </div>
   </div>
 
-  <!--
+  
   <div id="user_links_area">
     <ul>
-      <li><%= website_for_simple(@profile).html_safe if @profile.website.present? %></li>
       <li>
-       <a href="http://twitter.com/<%= @profile.twitter %>">twitter.com/<%= @profile.twitter %></a>
+        <%= website_for_simple(@profile).html_safe if @profile.website.present? %>
+      </li>
+      <li>
+        <a href="http://twitter.com/<%= @profile.twitter %>">
+            <div>on</div>
+            <div>Twitter</div>
+            <%= render file: svg_path('svg/spotify.svg') %>          
+        </a>
+      </li>
+      <li>
+        <a href="http://apple.com/<%= @profile.apple %>">
+          <div>on</div>
+          <div>Apple Music</div>
+          <%= render file: svg_path('svg/spotify.svg') %>          
+        </a>
+      </li>
+      <li>
+        <a href="http://bandcamp.com/<%= @profile.bandcamp %>">
+          <div>on</div>
+          <div>Bandcamp</div>
+          <%= render file: svg_path('svg/spotify.svg') %>          
+        </a>
+      </li>
+      <li>
+        <a href="http://instagram.com/<%= @profile.instagram %>">
+          <div>on</div>
+          <div>Instagram</div>
+          <%= render file: svg_path('svg/spotify.svg') %>          
+        </a>
+      </li>
+      <li>
+        <a href="http://spotify.com/<%= @profile.spotify %>">
+          <div>on</div>
+          <div>Spotify</div>
+          <%= render file: svg_path('svg/spotify.svg') %>          
+        </a>
       </li>
     </ul>
   </div>
-  -->
+  
 
   <div id="user_stats_area">
       <h2 class="area_heading">
@@ -188,11 +222,8 @@
               Last seen
             </div>
             <div>
-              <%= local_time_ago(@user.last_seen_at || @user.created_at)%></strong>
+              <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
             </div>
-          </div>
-          <div>
-            <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
           </div>
         </div>
         <% if @user.listens_count > 0 %>

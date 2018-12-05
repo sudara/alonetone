@@ -362,16 +362,18 @@ main {
 
     #user_links_area {
       background-color: #353535;
+      color: #FFF;
       @include samo-shadow-and-radius();
       ul {
-
-
+        display: flex;
         li {
           width: 160px;
-
+          border-right: 2px solid #FFFFFF;
+          a {
+            opacity: .5;
+          }
         }
       }
-
     }
 
     #user_plays_area {r
