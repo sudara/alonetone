@@ -1,7 +1,6 @@
 <h1>Comments</h1>
 
 <div id="admin_columns">
-  
   <div class="admin_column_left">
     <%= render partial: 'admin/navigation' %>
   </div>
@@ -13,9 +12,7 @@
           <th></th>
           <th>UpdatedAt</th>
           <th>IP/login</th>
-          <th>ID</th>
           <th>Text</th>
-          <th>Spam</th>
           <th></th>
           <th></th>
         </tr>
@@ -23,21 +20,19 @@
 
       <tbody>
         <% @comments.each do |comment| %>
-          <tr>
+          <tr data-controller="admin--comment">
             <td><input type="checkbox"></td>
-            <td><%= comment.created_at.strftime("%b %d, %y") %></td>
-            <td><%= comment.remote_ip %></td>
-            <td><%= link_to comment.id, comment %></td>
+            <td><%= comment.created_at.strftime("%b %d") %></td>
+            <td><%= link_to "#{comment&.commenter&.login} (#{comment.remote_ip})", { filter_by: {commenter_id: comment.commenter_id } } %></td>
             <td><%= truncate(comment.body, length: 80) %></td>
-            <td><%= comment.is_spam %></td>
-            <td><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></td>
-            <td><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?'}, method: :put%></td>
+            <td data-target='admin--comment.spamvalue' style="display: none;"><%= comment.is_spam %></td>
+            <td data-target='admin--comment.spam'><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { action: 'click->admin--comment#showSpamTarget' } %></td>
+            <td data-target='admin--comment.unspam'><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?', action: 'click->admin--comment#showUnspamTarget' }, method: :put, remote: true %></td>
             <td><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
     <%== pagy_nav @pagy %>
-  
   </div>
 </div>

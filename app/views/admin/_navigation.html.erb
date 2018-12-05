@@ -1,10 +1,10 @@
 <ul class="admin_nav">
-  <li><%= link_to 'Users','' %></li>
-  <li><%= link_to 'Comments','' %></li>
+  <li><%= link_to 'Users', admin_users_path %></li>
+  <li><%= link_to 'Tracks', admin_assets_path %></li>
+  <li>Comments</li>
     <ul>
-      <li><%= link_to 'All','' %></li>
-      <li><%= link_to 'Spam','' %> </li>
-      <li><%= link_to 'Not Spam','' %></li>
+      <li><%= link_to 'All',  admin_comments_path %></li>
+      <li><%= link_to 'Spam',  admin_comments_path({filter_by: {is_spam: true}}) %> </li>
+      <li><%= link_to 'Not Spam', admin_comments_path({filter_by: {is_spam: false}}) %></li>
     </ul>
-  <li><%= link_to 'Tracks','' %></li>
 </ul>

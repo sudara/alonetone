@@ -1,0 +1,40 @@
+<h1>Tracks</h1>
+<div id="admin_columns">
+  <div class="admin_column_left">
+    <%= render partial: 'admin/navigation' %>
+  </div>
+  <div class="admin_column_right">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Timestamp</th>
+          <th>IP/login</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Spam</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @assets.each do |asset| %>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><%= asset.created_at.strftime("%b %d") %></td>
+            <td><%= asset.user.ip %></td>
+            <td><%= link_to asset.title, user_track_path(user_id: asset.user&.login, id: asset.id) %></td>
+            <td><%= truncate(asset.description, length: 80) %></td>
+            <td><%= asset.is_spam %></td>
+            <td><%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put %></td>
+            <td><%= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %></td>
+            <td><%= button_to "Delete User", admin_user_path(asset.user_id), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%== pagy_nav @pagy %>
+  </div>
+</div>
