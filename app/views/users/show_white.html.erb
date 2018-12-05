@@ -39,7 +39,7 @@
     <% if @assets.size > 0 %>
     <div id="user_latest_area">
 
-      <h2>Latest music</h2>
+      <h2>Latest Music</h2>
 
       <div id="user_latest" class="box">
         <%= render partial: 'assets/asset', collection: @assets %>
@@ -59,7 +59,7 @@
 
     <% unless @listens.empty? %>
     <div id="user_listens_area">
-      <h2>Recently listened to</h2>
+      <h2>Recently Listened To</h2>
 
       <div class="box">
         <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
@@ -80,7 +80,7 @@
     <div id="user_plays_area">
       <% if authorized? && @user.listens_count > 0 %>
       <% cache([@track_plays, theme_name]) do %>
-      <h2>Latest listens to your music</h2>
+      <h2>Latest Listens To Your Music</h2>
       <div id="user_track_plays" class="box">
         <%= link_to listens_path(@user.login), class: 'view_all' do %>
           <span>view all &nbsp;
@@ -105,7 +105,7 @@
   <div id="user_right_column">
     <% if @favorites.present? %>
     <div id="user_favorites_area">
-      <h2>Recent favorites</h2>
+      <h2>Recent Favorites</h2>
       <div class="box">
         <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
 
