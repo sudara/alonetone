@@ -37,15 +37,14 @@
 
 
 	.box {
-    margin-bottom: 0;
-		@media #{$mobile} {
-			margin-bottom: $baseline * 1.5;
-    }
-    
+    margin-bottom: 0;    
   }
+
   > * {
 		min-width: 320px;
   }
+
+  
 	#home_playlists_area {
     grid-area: playlists;
     
