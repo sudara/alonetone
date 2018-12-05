@@ -28,7 +28,7 @@ class AssetNotification < ActionMailer::Base
   end
 
   def play_link_for(asset)
-    user_link_for(asset) + '/tracks/' + asset.permalink.to_s
+    user_link_for(asset) + '/tracks/' + asset.id.to_s
   end
 
   def stop_following_link
