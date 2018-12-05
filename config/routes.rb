@@ -8,12 +8,21 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :users
     resources :comments do
        member do
         put :unspam
         put :spam
       end
-
+      collection do
+        put :mark_group_as_spam
+      end
+    end
+    resources :assets do
+      member do
+        put :unspam
+        put :spam
+      end
       collection do
         put :mark_group_as_spam
       end
