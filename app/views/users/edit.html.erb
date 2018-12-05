@@ -4,7 +4,7 @@
 
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
-    <h2 class="box">Edit your name</h2>
+    <h2 class="box">Edit Your Name</h2>
     <%= form_with model: @user do |f| -%>
 	  <div class="static_content">
       <p>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="box edit-your-profile-box">
-    <h2 class="box">Edit your deets</h2>
+    <h2 class="box">Edit Your Deets</h2>
     <%= form_with model: [@user, @profile] do |f| %>
     <div class="static_content">
       <p>
@@ -116,7 +116,7 @@
 
 <%= content_for :right do %>
   <div class="box change-your-picture-box">
-  <h2 class="box">Change your picture</h2>
+  <h2 class="box">Change Your Picture</h2>
   <div class="static_content">
       <p><%= image_tag @user.avatar(:album)%></p>
       Upload a new photo. (1000px by 1000px square for best results)<br/>
