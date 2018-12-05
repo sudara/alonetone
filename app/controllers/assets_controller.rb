@@ -14,23 +14,12 @@ class AssetsController < ApplicationController
   # home page
   def latest
     if stale?(Asset.last_updated)
-      respond_to do |wants|
-        wants.html do
-          @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
-          @tab = 'home'
-          @assets = Asset.published.latest.includes(user: :pic).limit(5)
-          set_related_lastest_variables
-          welcome_to_white_theme
-          render 'latest_white' if white_theme_enabled?
-        end
-        wants.rss do
-          @assets = Asset.published.latest(50)
-        end
-        wants.json do
-          @assets = Asset.published.limit(500).includes(:user)
-          render json: @assets.to_json(only: %i[name title id], methods: [:name], include: { user: { only: :name, method: :name } })
-        end
-      end
+      @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
+      @tab = 'home'
+      @assets = Asset.published.latest.includes(user: :pic).limit(5)
+      set_related_lastest_variables
+      welcome_to_white_theme
+      render 'latest_white' if white_theme_enabled?
     end
   end
 
@@ -111,14 +100,19 @@ class AssetsController < ApplicationController
   end
 
   def edit
-    @descriptionless = @user.assets.descriptionless
+    @descriptionless = @user.assets.not_current(@asset.id).descriptionless if @user.assets.not_current(@asset.id).descriptionless.count > 1
     @allow_reupload = true
     render 'edit_white' if white_theme_enabled?
   end
 
   def mass_edit
     redirect_to_default && (return false) unless logged_in? && (current_user.id == @user.id) || admin?
-    @descriptionless = @user.assets.descriptionless
+    # currently we redirect asset # publish to mass_edit with params["assets"]
+    if params["assets"].first && @user.assets.not_current(params["assets"].first).descriptionless.count > 0
+      @descriptionless = @user.assets.not_current(params["assets"].first).descriptionless
+    elsif @user.assets.descriptionless.count > 2
+      @descriptionless = @user.assets.descriptionless
+    end
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
     render 'mass_edit_white' if white_theme_enabled?
@@ -182,20 +176,6 @@ class AssetsController < ApplicationController
       format.html { redirect_to user_tracks_url(current_user) }
       format.xml  { head :ok }
     end
-  end
-
-  def unspam
-    @asset.ham!
-    @asset.update_column :is_spam, false
-    flash.notice = "Track was made public"
-    redirect_back(fallback_location: root_path)
-  end
-
-  def spam
-    @asset.spam!
-    @asset.update_column :is_spam, true
-    flash.notice = "Track was marked as spam"
-    redirect_back(fallback_location: root_path)
   end
 
   def stats

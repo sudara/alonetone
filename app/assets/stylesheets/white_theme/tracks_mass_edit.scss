@@ -1,0 +1,64 @@
+/* MASS EDIT */
+
+.mass_edit_content {
+  @include match-dynamic-site-width("narrow");
+  position: relative;
+  div.track_options {
+    a.delete_green {
+      position: absolute;
+      float: none;
+      right: $baseline;
+      z-index: 1;
+      margin-top: 9px;
+    }
+  }
+  > div.box {
+    > .static_content {
+      padding: $baseline / 2 $baseline;
+      box-sizing: border-box;
+    }
+    h2.box {
+      margin-left: $baseline;
+      margin-right: $baseline;
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: 0;
+      box-shadow: none;
+      border-radius: 0;
+      box-sizing: border-box;
+    }
+    form {
+      padding: $baseline / 2 $baseline;
+      box-sizing: border-box;
+      input#asset_title {
+        font-family: "Alright Sans", sans-serif;
+        font-weight: bold;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+        font-size: 27px;
+        line-height: 27px;
+      }
+      textarea {
+        font-family: "Harriet Text", serif;
+        font-size: 18px;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+        margin-top: 27px;
+        margin-bottom: 27px;
+        padding: 13.5px;
+        word-wrap: break-word;
+        color: #353535;
+        border: 1px solid #c7c6c3;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 3px 4px -2px #65666627;
+        box-shadow: 0 3px 4px -2px #65666627;
+      }
+    }
+  }
+}

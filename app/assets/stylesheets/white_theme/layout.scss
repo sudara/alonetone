@@ -4,8 +4,11 @@ body {
   min-height: 100vh;
   main {
     width: 100%;
-    margin: $baseline auto 0 auto;
+    margin: $baseline * 2 auto 0 auto;
     padding-bottom: $baseline * 3;
+    @media #{$mobile} {
+      margin-top: $baseline;
+    }
     @media #{$tablet} {
       padding-bottom: $baseline;
     }
@@ -70,7 +73,7 @@ body {
 
         }
         flex: 1;
-      }      
+      }
     }
     #columns {
       display: flex;
@@ -114,7 +117,7 @@ body {
           width: 100%;
           margin-left: auto!important;
           margin-right: auto!important;
-  
+
         }
       }
     }

@@ -4,7 +4,7 @@ class User
   end
 
   def self.conditions_by_like(value)
-    conditions = ['users.display_name', 'users.login', 'users.bio', 'users.city', 'users.country'].collect do |c|
+    conditions = ['users.display_name', 'users.login', 'profiles.bio', 'profiles.city', 'profiles.country'].collect do |c|
       "#{c} LIKE " + ActiveRecord::Base.connection.quote("%#{value}%")
     end
     where(conditions.join(" OR "))

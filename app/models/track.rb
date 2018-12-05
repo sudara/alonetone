@@ -5,7 +5,8 @@ class Track < ActiveRecord::Base
 
   scope :recent, -> { order('tracks.created_at DESC') }
   scope :favorites, -> { where(is_favorite: true).recent }
-  scope :favorites_for_home, -> { favorites.limit(5).includes({ user: :pic }, asset: { user: :pic }) }
+  scope :of_other_users, -> { joins(:asset).where('assets.user_id != tracks.user_id') }
+  scope :favorites_for_home, -> { favorites.of_other_users.includes({ user: :pic }, asset: { user: :pic }).limit(5) }
 
   delegate :length, :name, to: :asset
   acts_as_list scope: :playlist_id, order: :position
