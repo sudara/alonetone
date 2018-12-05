@@ -11,7 +11,7 @@
     "gsap": "^2.0",
     "howler": "https://github.com/goldfire/howler.js.git",
     "local-time": "^2.1.0",
-    "rails-ujs": "^5.2.1",
+    "rails-ujs": "^5.2.2",
     "stimulus": "^1.1.0",
     "turbolinks": "^5.2.0"
   },
