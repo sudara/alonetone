@@ -2,14 +2,8 @@
 
   <%= render partial: 'assets/big_player' %>
 
-  <% if logged_in? %>
   <div class= "edit-links-and-favorite">
-  <% end %>
-
-    <% if logged_in? %>
     <div class="edit-links">
-    <% end %>
-
       <% if authorized? %>
         <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit-link',
           data: { confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
@@ -24,15 +18,11 @@
           <%= link_to "Spam", spam_user_track_path(@user, @asset), method: :put, class: "edit-link" %>
         <% end %>
       <% end %>
-
-    <% if logged_in? %>
     </div>
-    <% end %>
-
     <% if logged_in? %>
-    <div class="track-favorite">
-    <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
-        data: {controller: 'favorite', action: 'favorite#toggle' } do %>
+      <div class="track-favorite">
+      <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
+          data: {controller: 'favorite', action: 'favorite#toggle' } do %>
         <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
           <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
           <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
@@ -43,14 +33,15 @@
           <circle class="redPop2" cx="485" cy="130" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
           <circle class="redPop3" cx="480" cy="436" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
           <path class="heart" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="#f6463e" stroke="#f6463e" stroke-miterlimit="10" stroke-width="21" />
-      </svg>
-    <% end %>
-    </div>
+        </svg>
+      <% end %>
+      </div>
     <% end %>
 
- <% if logged_in? %>
+    <div class="download-link">
+      <%= link_to '', media_url(@asset) %>
+    </div>
  </div>
- <% end %>
 
   <div class="track-post">
     <h1><%= @asset.name %></h1>
@@ -79,10 +70,8 @@
   </div>
 
   <%= render partial: 'assets/comment_white', locals: { asset: @asset }%>
-
-  <!--
   <%= render partial: 'shared/comments' if @comments.present? %>
-  -->
+
   <% if @listeners.present? %>
   <div class="track-social">
   <h3>Recent Listeners</h3>

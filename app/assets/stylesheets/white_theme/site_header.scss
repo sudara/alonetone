@@ -10,6 +10,9 @@ header#site_header {
     max-width: 1100px;
     padding: 0 36px;
     box-sizing: border-box;
+    @media #{$mobile} {
+      width: 100%;
+    }
     .header_logo {
       position: absolute;
       top: 4px;

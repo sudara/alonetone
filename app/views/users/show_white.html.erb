@@ -43,7 +43,7 @@
     <% if @assets.size > 0 %>
     <div id="user_latest_area">
 
-      <h2>Latest music</h2>
+      <h2>Latest Music</h2>
 
       <div id="user_latest" class="box">
         <%= render partial: 'assets/asset', collection: @assets %>
@@ -63,7 +63,7 @@
 
     <% unless @listens.empty? %>
     <div id="user_listens_area">
-      <h2>Recently listened to</h2>
+      <h2>Recently Listened To</h2>
 
       <div class="box">
         <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
@@ -85,7 +85,7 @@
     <div id="user_plays_area">
       
       <% cache([@track_plays, theme_name]) do %>
-      <h2>Latest listens to your music</h2>
+      <h2>Latest Listens To Your Music</h2>
       <div id="user_track_plays" class="box">
 
         <div class="static_content">
@@ -114,7 +114,7 @@
   <div id="user_right_column">
     <% if @favorites.present? %>
     <div id="user_favorites_area">
-      <h2>Recent favorites</h2>
+      <h2>Recent Favorites</h2>
       <div class="box">
         <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
       </div>
@@ -153,15 +153,15 @@
     </div>
     <div class="user_card_content">
       <div class="user_card_bio">
-       <% if @user.try(:bio) %>
-       <%= markdown(@user.bio) %>
+       <% if @profile.try(:bio) %>
+       <%= markdown(@profile.bio) %>
        <% else %>
        <%= @user.name %> doesn't have anything to say, unfortunately...
        <% end %>
      </div>
      <div class="user_card_content_divider"></div>
      <div class="user_location">
-        <%= user_location(@user) %>
+        <%= user_location(@profile) %>
      </div>
     </div>
   </div>
@@ -169,9 +169,9 @@
   <!--
   <div id="user_links_area">
     <ul>
-      <li><%= website_for_simple(@user).html_safe if @user.website.present? %></li>
+      <li><%= website_for_simple(@profile).html_safe if @profile.website.present? %></li>
       <li>
-       <a href="http://twitter.com/<%= @user.twitter %>">twitter.com/<%= @user.twitter %></a>
+       <a href="http://twitter.com/<%= @profile.twitter %>">twitter.com/<%= @profile.twitter %></a>
       </li>
     </ul>
   </div>
@@ -192,12 +192,7 @@
             </div>
           </div>
           <div>
-            <div>
-              Joined
-            </div>
-            <div>
-              <%= @user.created_at.to_date.to_s :long %>
-            </div>
+            <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
           </div>
         </div>
         <% if @user.listens_count > 0 %>
@@ -244,10 +239,9 @@
           </div>
         </div>
 
-        <div class="user_agent">
-          <div>User agent</div>
-          <div><%= @user.browser %></div>
-        </div>
+      <div class="user_agent">
+        <div>User agent</div>
+        <div><%= @profile.user_agent %></div>
       </div>
     </div>
   <% end %>
@@ -261,7 +255,8 @@
       <% end %>
     <% end %>
     <% if moderator? %>
-    <%= link_to "Delete User", @user, method: :delete, class: "edit_profile--delete admin" %>
+    <%= link_to "Delete User", user_path(@user, login: @user.login), method: :delete, class: "edit_profile--delete admin",
+      data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."} %>
     <% end %>
 
   <% if authorized? %>

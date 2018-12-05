@@ -1,0 +1,36 @@
+<h1>Users</h1>
+<div id="admin_columns">
+  <div class="admin_column_left">
+    <%= render partial: 'admin/navigation' %>
+  </div>
+  <div class="admin_column_right">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>UpdatedAt</th>
+          <th>IP</th>
+          <th>Login</th>
+          <th>Bio</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td><%= user.created_at.strftime("%b %d") %></td>
+            <td><%= user.last_login_ip %></td>
+            <td><%= link_to user.login, user_path(user.login) %></td>
+            <td><%= truncate(user.bio, length: 200) %></td>
+            <td><%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></td>
+            <td><%= button_to "Delete User", user, method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%== pagy_nav @pagy %>
+  </div>
+</div>

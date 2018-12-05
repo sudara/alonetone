@@ -1,0 +1,15 @@
+<div class="header_inner">
+  <% if admin? %>
+    <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
+      <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
+        <span >Admin</span>
+      <% end %>
+
+      <div class="user_dropdown_menu" data-target="user-dropdown.menu">
+        <%= link_to 'Comments', admin_comments_path %>
+        <%= link_to 'Tracks', admin_assets_path %>
+        <%= link_to 'Users', admin_users_path %>
+      </div>
+    </div>
+  <% end %>
+</div>

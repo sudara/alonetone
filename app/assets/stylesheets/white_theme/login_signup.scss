@@ -1,0 +1,47 @@
+#what-you-get {
+	box-shadow: none;
+	margin-bottom: 0;
+	h2 {
+	  font-size: 14px;
+	  margin-bottom: 30px;
+	  text-shadow: none;
+	  text-align: center;
+	  padding: 0;
+	}
+	img {
+	  align-self: center;
+	}
+}
+  
+#login, #signup {
+	input.btn {
+	  cursor: pointer;
+	  @include default-button();
+	}
+	.hint {
+	  font-style: italic;
+	  margin-top: 8px;
+	  margin-bottom: 12px;
+	  text-align: left;
+	}
+}
+  
+#login {
+	input.btn {
+	  margin-top: $baseline / 2;
+	  margin-bottom: $baseline;
+	}
+}
+  
+body main #columns  {
+	#login.box, #signup.box, #signup-questions.box {
+	  margin-bottom: 0;
+	  box-shadow: none;
+		padding-top: $baseline / 2;
+		padding-bottom: $baseline / 2;
+	  label {
+			margin-bottom: 2px!important;
+	  }  
+	}
+}
+  
