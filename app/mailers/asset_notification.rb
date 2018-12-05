@@ -7,7 +7,7 @@ class AssetNotification < ActionMailer::Base
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
-    mail subject: "[alonetone] '#{asset.user.name}' uploaded a new track!", to: email
+    mail subject: "[alonetone] '#{@user.name}' uploaded a new track!", to: user.email
   end
 
   protected
@@ -27,7 +27,7 @@ class AssetNotification < ActionMailer::Base
   end
 
   def play_link_for(asset)
-    user_link_for(asset) + '/tracks/' + asset.id.to_s
+    user_link_for(asset) + '/tracks/' + asset.permalink.to_s
   end
 
   def stop_following_link
