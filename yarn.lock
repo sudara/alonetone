@@ -6228,10 +6228,10 @@ querystringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
   integrity sha512-sluvZZ1YiTLD5jsqZcDmFyV2EwToyXZBfpoVOmktMmW+VEnhgakFHnasVph65fOjGPTWN0Nw3+XQaSeMayr0kg==
 
-rails-ujs@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/rails-ujs/-/rails-ujs-5.2.1.tgz#2869c6d54fdfefac3aaa257f4efe211d8f5a7169"
-  integrity sha512-kOsSdmBATcilfMzBCYgbefQ+5eUG6BAr9rDy+GC09Cvqx0017XBVp1Xu/Ksvwr6r7fHzgNkEUpKnQoOflpNz+A==
+rails-ujs@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/rails-ujs/-/rails-ujs-5.2.2.tgz#ab01dd087a323975637b50e93e7afcc0f9068568"
+  integrity sha512-tJl7MdysGrQEKmwF7BJkz5XwUOkdnI9E7SvSbT39yO7pdFc96D4hWKm6Sb15pU4n5mt4rLPb/6kkyTQujP1k7Q==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.0.6"
