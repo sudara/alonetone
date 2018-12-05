@@ -1,5 +1,5 @@
 <% if white_theme_enabled? %>
-<h2>Latest comments</h2>
+<h2>Latest Comments</h2>
 <div id="user_comments" class="box">
   
   <%= render partial: 'shared/comment', collection: @comments %>
@@ -16,7 +16,7 @@
 
 <% else %>
 <div id="user_comments" class="box">
-  <h2 class="box">Latest comments</h2>
+  <h2 class="box">Latest Comments</h2>
   <%= render partial: 'shared/comment', collection: @comments %>
 </div>
 <div class="footer_box">

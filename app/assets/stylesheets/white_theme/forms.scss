@@ -257,7 +257,7 @@ label.collection_radio_buttons {
 
 /* USERS/USER/EDIT FORM */
 
-#bio_edit_user_1, .settings-box, form.new_playlist, form.edit_user {
+form {
 	br {
 		display: none;
 	}
@@ -272,10 +272,12 @@ label.collection_radio_buttons {
 		&:focus {
 			border: 1px solid #A6ABAB;
 		}
-
-	}
+  }
+  input[type="file"] {
+    background-color: transparent;
+  }
 	textarea {
-		width: 98%;
+		width: 100%;
 		//padding-top: 5px;
 		//padding-left: 5px;
 	}

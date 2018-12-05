@@ -3,12 +3,13 @@ class Asset < ActiveRecord::Base
   attribute :user_agent, :string
 
   scope :published,       -> { where(private: false, is_spam: false) }
+  scope :not_spam,        -> { where(is_spam: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
-
+  scope :not_current,     ->(id) { where('id != ?', id) }
   belongs_to :user, counter_cache: true
   has_one  :audio_feature
   has_many :tracks,    dependent: :destroy
@@ -129,7 +130,7 @@ class Asset < ActiveRecord::Base
   end
 
   def publish!
-    update(:private, false) && notify_followers if private?
+    update(private: false) && notify_followers if private?
   end
 
   # needed for spam detection

@@ -1,0 +1,29 @@
+.tracks_search_results {
+	background-color: #FFF;
+	@include samo-shadow-and-radius();
+}
+
+#user_search_results {
+	display: flex;
+	margin-top: 60px;
+	@include match-dynamic-site-width();
+	flex-wrap: wrap;
+	justify-content: space-between;
+	div.user {
+		position: relative;
+		width: 150px;
+		margin-bottom: 30px;
+		text-align: center;
+		img.cover {
+			width: 125px;
+			height: 125px;
+		}
+		.name {
+			font-size: 13px;
+			display: block;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
