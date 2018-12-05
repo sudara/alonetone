@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :ip_is_acceptable?, only: :create
   before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
-  before_action :require_login, except: %i[index show new create activate bio destroy]
+  before_action :require_login, except: %i[index show new create activate destroy]
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
@@ -13,20 +13,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        prepare_meta_tags
-        gather_user_goodies
-        render 'show_white' if white_theme_enabled?
-      end
-      format.xml { @assets = @user.assets.published.recent.limit(params[:limit] || 10) }
-      format.rss { @assets = @user.assets.published.recent }
-      format.js do
-        render :update do |page|
-          page.replace 'user_latest', partial: "latest"
-        end
-      end
-    end
+    prepare_meta_tags
+    gather_user_goodies
+    render 'show_white' if white_theme_enabled?
   end
 
   def stats
@@ -71,7 +60,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @profile = @user.profile
+  end
 
   def attach_pic
     if params[:pic].present?
@@ -88,6 +79,7 @@ class UsersController < ApplicationController
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
       flash[:error] = "Not so fast, young one"
+      @profile = @user.profile
       render action: :edit
     end
   end
@@ -126,10 +118,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
-      :website, :myspace, :bio, :display_name, :itunes, :city, :country, :twitter,
-      settings: %i[display_listen_count block_guest_comments most_popular
-        increase_ego email_comments email_new_tracks])
+    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
   end
 
   def ip_is_acceptable?
@@ -152,6 +141,7 @@ class UsersController < ApplicationController
   end
 
   def gather_user_goodies
+    @profile = @user.profile
     @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(user: :pic).limit(5)
     @playlists = @user.playlists.only_public.includes(:user, :pic)

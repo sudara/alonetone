@@ -1,7 +1,6 @@
 class User
   # Validations
   validates_length_of       :display_name, within: 3..50, allow_blank: true
-  validates_length_of       :bio, within: 0..1000, message: "can't be empty (or longer than 1000 characters, keep it short and simple!)", on: :update, allow_blank: true
 
   validates_length_of       :email, within: 3..40
   validates_uniqueness_of   :email, case_sensitive: false
@@ -9,8 +8,6 @@ class User
   validates_uniqueness_of   :login
   validates_format_of       :login, with: /\A[a-z0-9-]+\z/, message: ' must be lowercase and only made from numbers and letters'
   validates_length_of       :login, within: 3..40
-
-  validates_format_of       :itunes, with: /(phobos|itunes).apple.com/i, allow_blank: true, message: 'link must be a link to the itunes store'
 
   # Methods related to validation
   before_save { |u| u.display_name = u.login if u.display_name.blank? }

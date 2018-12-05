@@ -1,0 +1,53 @@
+.about-page, .stats-page {
+  .faq.box {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 720px;
+    h2.box {
+      padding-left: $baseline / 2;
+    }
+    .static_content {
+      padding-left: 12px;
+      padding-right: 12px;
+      margin: 4px 0px;
+    }
+  }
+}
+
+.faq.box {
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: none;
+  background: transparent;
+  @include match-dynamic-site-width('narrow');
+  @media #{$mobile} {
+    width: 90%;
+  }
+  padding: $baseline / 2 $baseline;
+  box-sizing: border-box;
+  margin-bottom: 26px;
+
+  h2.box {
+    margin-top: 0;
+    color: #8b370d;
+    background: none;
+    box-shadow: none;
+    padding-left: 0;
+    border-radius: 0;
+    line-height: 20px;
+    height: auto;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #80604026;
+  }
+  .static_content {
+    margin: $baseline 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+}
+
+.box {
+  .static_content {
+    line-height: 1.3em;
+  }
+}

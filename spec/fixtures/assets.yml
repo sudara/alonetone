@@ -51,3 +51,23 @@ valid_mp3_2:
   created_at: 2007-04-08 13:00:03
   user_id: 1
   length: 45
+private_track:
+  id: 6
+  mp3_file_name: Song7.mp3
+  permalink: song100
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  created_at: 2007-04-08 13:00:03
+  user_id: 1
+  length: 45
+  private: true
+spam_track:
+  id: 7
+  mp3_file_name: Song6.mp3
+  permalink: song6
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  created_at: 2007-04-08 13:00:03
+  user_id: 1
+  length: 45
+  is_spam: true

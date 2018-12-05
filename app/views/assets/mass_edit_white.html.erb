@@ -1,8 +1,8 @@
 <div class="mass_edit_content">
-<h1>Editing your tracks</h1>
-<% @assets.each do |asset| %>
+  <h1>Editing your tracks</h1>
+  <% @assets.each do |asset| %>
     <% @asset = asset %>
     <%= render partial: 'edit' %>
-<% end %>
-<%= render partial: 'descriptionless' %>
+  <% end %>
+  <%= render partial: 'descriptionless' %>
 </div>
