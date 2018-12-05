@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_233316) do
+ActiveRecord::Schema.define(version: 2018_12_04_011838) do
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
@@ -249,6 +249,22 @@ ActiveRecord::Schema.define(version: 2018_11_06_233316) do
     t.float "spaminess"
     t.string "signature"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
+  end
+
+  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "bio"
+    t.string "city"
+    t.string "country"
+    t.string "apple"
+    t.string "twitter"
+    t.string "spotify"
+    t.string "bandcamp"
+    t.string "instagram"
+    t.string "website"
+    t.string "user_agent"
+    t.datetime "updated_at"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -573,7 +589,6 @@ ActiveRecord::Schema.define(version: 2018_11_06_233316) do
     t.string "login", limit: 40
     t.string "email", limit: 100
     t.string "salt", limit: 128, default: "", null: false
-    t.datetime "activated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "admin", default: false
@@ -582,22 +597,13 @@ ActiveRecord::Schema.define(version: 2018_11_06_233316) do
     t.integer "assets_count", default: 0, null: false
     t.string "display_name"
     t.integer "playlists_count", default: 0, null: false
-    t.string "website"
-    t.text "bio", limit: 16777215
     t.integer "listens_count", default: 0
     t.string "itunes"
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
-    t.string "country"
-    t.string "city"
     t.text "settings", limit: 16777215
-    t.float "lat"
-    t.float "lng"
-    t.text "bio_html", limit: 16777215
     t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
-    t.string "browser"
-    t.string "twitter"
     t.integer "followers_count", default: 0
     t.integer "login_count", default: 0, null: false
     t.datetime "current_login_at"
@@ -611,6 +617,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_233316) do
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 
+  add_foreign_key "profiles", "users"
   add_foreign_key "thredded_messageboard_users", "thredded_messageboards"
   add_foreign_key "thredded_messageboard_users", "thredded_user_details"
   add_foreign_key "thredded_user_post_notifications", "thredded_posts", column: "post_id", on_delete: :cascade

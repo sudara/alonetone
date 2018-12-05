@@ -3,7 +3,7 @@
     <div id="home_playlists_area">
       <div class="latest-playlists-header">
         <h2>
-        <%= link_to "Latest playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
+        <%= link_to "Latest Playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
         </h2>
       </div>
       <% if white_theme_enabled? %>
@@ -23,7 +23,7 @@
     <div id="home_latest_area">
       <h2>
         <%= link_to radio_path(per_page: 40, source: 'latest'), title: 'latest music on alonetone' do %>
-        Latest uploaded
+        Latest Uploaded
         <% end %>
       </h2>
       <div class="box">
@@ -69,7 +69,7 @@
     <div id="home_popular_area">
       <h2>
         <%= link_to radio_path(per_page: 40,source: 'popular'), title: 'alonetone radio: currently kicking ass' do %>
-        Currently kicking ass
+        Currently Kicking Ass
         <% end %>
       </h2>
       <div class="box">
@@ -89,7 +89,7 @@
     <div id="home_favorites_area">
         <h2>
           <%= link_to radio_path(per_page: 40, source: 'favorites'), title: 'alonetone radio: recently favorited' do %>
-          Recently favorited
+          Recently Favorited
           <% end %>
         </h2>    
         <div class="box">
@@ -116,7 +116,7 @@
       <div id="home_follows_area">
         <h2>
           <%= link_to radio_path(per_page: 40, source: 'those_you_follow'), title: 'alonetone radio: those you follow' do %>
-          Tracks from those you follow
+          Tracks From Those You Follow
           <% end %>
         </h2>
 

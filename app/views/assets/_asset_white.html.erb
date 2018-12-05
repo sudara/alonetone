@@ -1,4 +1,4 @@
-<%= cache( logged_in? ? "asset#{asset.cache_key}/#{defined? favorite}/#{theme_name}" : "guest_asset#{asset.cache_key}/#{defined? favorite}/#{theme_name}" ) do %>
+<%= cache(asset_cache_key(asset, local_assigns[:favorite])) do %>
   <div class="asset_top">
     <div class="asset_top_row">
       <div class="play-button button" data-target="normal-playback.play" data-action="click->normal-playback#togglePlay">

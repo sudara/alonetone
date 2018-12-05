@@ -34,7 +34,7 @@
 
   <div class="bio static_content">
     <p>
-      Last seen <%= local_time_ago(@user.last_seen_at || @user.created_at)%>
+      Last seen <%= local_time_ago(@user.last_login_at || @user.created_at)%>
     </p>
 
     <p>

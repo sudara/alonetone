@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   render_views
-  fixtures :users, :assets
+  fixtures :users, :profiles, :assets
 
   context 'show' do
     it "should show delete user button for admins" do
@@ -182,11 +182,6 @@ RSpec.describe UsersController, type: :controller do
       logout
       post :edit, params: { user_id: 'arthur' }
       expect(response).not_to be_successful
-    end
-
-    it 'should deliver an rss feed for any user, to anyone' do
-      get :show, params: { id: 'sudara', format: 'rss' }
-      expect(response).to be_successful
     end
   end
 

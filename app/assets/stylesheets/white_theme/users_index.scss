@@ -1,0 +1,54 @@
+#user_index {
+	display: flex;
+	@include match-dynamic-site-width();
+	flex-wrap: wrap;
+	justify-content: space-between;
+	#static_header {
+		width: 30%;
+		line-height: 1.1;
+		@media #{$tablet} {
+			width: 100%;
+		}
+		#links {
+			width: 230px;
+			li {
+				display: block;
+				float: none;
+				a {
+					float: none;
+				}
+			}
+		}
+	}
+	#large_users_grid {
+		display: flex;
+		width: 70%;
+		margin-top: 52px;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		@media #{$tablet} {
+			width: 100%;
+		}
+		div.clear {
+			display: none;
+		}
+		div.user {
+			position: relative;
+			width: 150px;
+			margin-bottom: 30px;
+			text-align: center;
+			img.cover {
+				width: 125px;
+				height: 125px;
+			}
+			.name {
+				font-size: 13px;
+				display: block;
+				margin-top: 4px;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
