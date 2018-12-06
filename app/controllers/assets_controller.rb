@@ -23,10 +23,18 @@ class AssetsController < ApplicationController
     end
   end
 
+  def set_related_user_variables
+    all_user_tracks = Asset.for_user(@user.id)
+    @hot_tracks_this_week = all_user_tracks.hottest.limit(10)
+    @most_fav_tracks = all_user_tracks.favorited.limit(10)
+    @most_commented_tracks = all_user_tracks.most_commented.limit(10)
+    @most_listened_to_tracks = all_user_tracks.most_listened.limit(10)
+  end
+
   # index serves assets for a specific user
   def index
     @page_title = "All music by " + @user.name
-
+    set_related_user_variables
     if current_user_is_admin_or_owner?(@user)
       @assets = @user.assets
     else
