@@ -167,44 +167,78 @@
   </div>
 
   
+<%= website_for_simple(@profile).html_safe if @profile.website.present? %>
+
   <div id="user_links_area">
     <ul>
       <li>
-        <%= website_for_simple(@profile).html_safe if @profile.website.present? %>
+        <a href="<%= @profile.website %>">
+
+          <div class="link_left">
+            <div>has</div>
+            <div>Website</div>
+          </div>
+          
+          <div class="link_right">
+            <%= render file: svg_path('svg/icon_user_spotify.svg') %>          
+          </div>
+        </a>
       </li>
       <li>
         <a href="http://twitter.com/<%= @profile.twitter %>">
-            <div>on</div>
-            <div>Twitter</div>
-            <%= render file: svg_path('svg/spotify.svg') %>          
+            
+            <div class="link_left">
+              <div>on</div>
+              <div>Twitter</div>
+            </div>
+            
+            <div class="link_right">
+              <%= render file: svg_path('svg/icon_user_spotify.svg') %>          
+            </div>
         </a>
       </li>
       <li>
         <a href="http://apple.com/<%= @profile.apple %>">
-          <div>on</div>
-          <div>Apple Music</div>
-          <%= render file: svg_path('svg/spotify.svg') %>          
+          <div class="link_left">
+            <div>on</div>
+            <div>Apple Music</div>
+          </div>
+          <div class="link_right">
+            <%= render file: svg_path('svg/icon_user_apple_music.svg') %>          
+          </div>
         </a>
       </li>
       <li>
         <a href="http://bandcamp.com/<%= @profile.bandcamp %>">
-          <div>on</div>
-          <div>Bandcamp</div>
-          <%= render file: svg_path('svg/spotify.svg') %>          
+          <div class="link_left">
+            <div>on</div>
+            <div>Bandcamp</div>
+          </div>
+          <div class="link_right">
+            <%= render file: svg_path('svg/icon_user_spotify.svg') %>          
+          </div>
         </a>
       </li>
       <li>
         <a href="http://instagram.com/<%= @profile.instagram %>">
-          <div>on</div>
-          <div>Instagram</div>
-          <%= render file: svg_path('svg/spotify.svg') %>          
+          <div class="link_left">
+            <div>on</div>
+            <div>Instagram</div>
+          </div>
+          <div class="link_right">
+            <%= render file: svg_path('svg/icon_user_spotify.svg') %>          
+          </div>
         </a>
       </li>
       <li>
         <a href="http://spotify.com/<%= @profile.spotify %>">
-          <div>on</div>
-          <div>Spotify</div>
-          <%= render file: svg_path('svg/spotify.svg') %>          
+          <div class="link_left">
+            <div>on</div>
+            <div>Spotify</div>
+          </div>
+          <div class="link_right">
+            <%= render file: svg_path('svg/icon_user_spotify.svg') %>          
+          </div>
         </a>
       </li>
     </ul>
