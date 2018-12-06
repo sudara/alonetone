@@ -100,15 +100,20 @@
 				flex-grow: 1;
 				.title_left_column {
 					flex-grow: 1;
-					a.track_link {
-						line-height: 1.1em;
-            font-size: 16px;
-            font-weight: normal;
-            font-family: $medium-sans-font;
-						display: block;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
+					.title_left_column_top {
+						display: flex;
+						a.track_link {
+							line-height: 1.1em;
+							font-size: 16px;
+							font-weight: normal;
+							font-family: $medium-sans-font;
+							display: block;
+							overflow: hidden;
+							white-space: nowrap;
+							flex-grow: 1;
+							width: 50px;
+							text-overflow: ellipsis;
+						}
 					}
 				}
 				.title_right_column {
