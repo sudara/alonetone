@@ -58,29 +58,21 @@
     <div class="footer_column">
       <h3 class="footer_column_header">Do Stuff</h3>
     <% if logged_in? %>
-        <div><%= link_to "Upload", "/upload"%></div>
-        <div><%= link_to "New Playlist/Album", "/new_album"%></div>
+      <div><%= link_to "Upload", "/upload"%></div>
+      <div><%= link_to "New Playlist/Album", "/new_album"%></div>
     <% end %>
+      <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
     <% if moderator? %>
-      <div><%= link_to "Secretz", "/secretz" %></div>
-      <div><%= link_to "Spam Stats", "https://akismet.com/web/1.0/user-stats.php?blog=alonetone.com&api_key=#{Alonetone.rakismet_key}"%></div>
-      <div><%= link_to "Job Status", "/sidekiq" %></div>
+      <div><%= link_to "Admin", "/admin" %></div>
     <% end %>
       </div>
 
     <div class="footer_column">
       <h3 class="footer_column_header">More</h3>
-      <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
       <div><%= link_to "About", "/about"%></div>
       <div><%= link_to "Stats", "/about/stats"%></div>
       <div><%= link_to "Forums", "/discuss"%></div>
-      <% if Alonetone.try(:chat_url) && logged_in? %>
-      <div>
-      <%= link_to "Chat", Alonetone.chat_url %>
-      </div>
-      <% end %>
       <div><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %></div>
-      <div><%= link_to "Privacy", "/about/privacy"%></div>
     </div>
 
   </div>
