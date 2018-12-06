@@ -2,8 +2,14 @@ Hi!
 
 <%= @user.name.capitalize %> just uploaded a track to alonetone! <%= @exclamation %>!
 
-You can listen to <%= @track.title %> track on alonetone:
-<%= @play_link %>
+You can listen to
+<% if @tracks.empty? %>
+  all songs by <%= @user.name.capitalize %> on alonetone: <%= @upload_user_url %>
+<% else %>
+  <% @tracks.each do |track| %>
+    <%= track[:title] %> on alonetone: <%= track[:play_link] %>
+  <% end %>
+<% end %>
 
 ------------------------------
 
