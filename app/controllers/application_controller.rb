@@ -68,10 +68,6 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, 'User Not Found'
   end
 
-  def currently_online
-    @online = User.currently_online
-  end
-
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
     @user = User.where(login: login).first || (current_user if %w[new favorites].include? action_name)

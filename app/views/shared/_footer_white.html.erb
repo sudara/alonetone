@@ -1,3 +1,4 @@
+<% if User.currently_online.count > 2 %>
 <div class="footer_alonetoners_online">
   <h3>Alonetoners online</h3>
     <div>
@@ -5,11 +6,12 @@
           <% link_to user.name, main_app.user_home_path(user.login) %>
         <% end.join(', ').html_safe %>
     </div>
-</div>  
+</div>
+<% end %>
 
 <div class="footer_forum_topics">
   <div class="footer_forum_topics_inner">
-    <a href="#" class="forum_view_all">
+    <a href="/discuss" class="forum_view_all">
         View all... &nbsp;<i class="icon_caret">
         <%= render file: svg_path('svg/icon_caret.svg') %>
         </i>

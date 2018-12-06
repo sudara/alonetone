@@ -120,10 +120,6 @@ module ApplicationHelper
     end
   end
 
-  def recently_online
-    @online.each { |person| link_to person.login, user_home_path(person) }
-  end
-
   def check_for_and_display_flashes
     flashes = []
     [flash[:notice], flash[:error], flash[:info], flash[:ok]].each do |flash|
