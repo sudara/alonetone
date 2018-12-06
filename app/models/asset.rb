@@ -10,6 +10,11 @@ class Asset < ActiveRecord::Base
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
   scope :not_current,     ->(id) { where('id != ?', id) }
+  scope :for_user,        ->(user_id) { where(user_id: user_id) }
+  scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
+  scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
+  scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+
   belongs_to :user, counter_cache: true
   has_one  :audio_feature
   has_many :tracks,    dependent: :destroy
