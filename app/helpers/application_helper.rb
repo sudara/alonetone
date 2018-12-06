@@ -196,5 +196,9 @@ module ApplicationHelper
   def svg_path(svg)
     File.join(Rails.root, 'app', 'assets', 'images', svg)
   end
+
+  def latest_forum_topics
+    Thredded::TopicPolicy::Scope.new(current_user || Thredded::NullUser.new, Thredded::Topic.all.order_recently_posted_first.includes(:last_user).limit(4)).resolve
+  end
   protected
 end

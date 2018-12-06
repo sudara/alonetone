@@ -18,22 +18,12 @@
     </a>
     <h3>Latest forum topics</h3>
     <ul>
+    <% latest_forum_topics.each do |topic|  %>
       <li>
-        <div class="forum_topic"><a href="#">Uploading a new version of track doesn't work</a></div>
-        <div class="forum_author">by <a href="#">anton</a></div>
+        <div class="forum_topic"><%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %> </div>
+        <div class="forum_author">by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
       </li>
-      <li>
-        <div class="forum_topic"><a href="">Cannot Upload songs</a></div>
-        <div class="forum_author">by <a href="#">sudara</a></div>
-      </li>
-      <li>
-        <div class="forum_topic"><a href="">My track is trapped in spam block!</a></div>
-        <div class="forum_author">by <a href="#">bristles</a></div>
-      </li>
-      <li>
-        <div class="forum_topic"><a href="">This site is the answer to my prayers</a></div>
-        <div class="forum_author">by <a href="#">arrsuarez</a></div>
-      </li>
+    <% end %>
     </ul>
   </div>
 </div>
