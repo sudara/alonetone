@@ -86,6 +86,7 @@ ul.playlists {
 
 .playlists_container {
   @include match-dynamic-site-width();
+  max-width: 960px;
   ul.playlists {
     margin-right: -36px;
     li {
