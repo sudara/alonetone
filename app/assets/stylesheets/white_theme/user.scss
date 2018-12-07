@@ -191,6 +191,7 @@ main {
         }
       }
     }
+    
     .user_playlists_buttons {
       margin-bottom: $baseline;
       #create_new_playlist {
@@ -254,6 +255,7 @@ main {
         }
       }
     }
+
     #user_follows_area {
       h2.area_heading {
         font-size: 24px;
@@ -280,9 +282,7 @@ main {
             height: 50px;
           }
         }
-
       }
-
     }
     #user_stats_area {
       h2.area_heading {
@@ -314,7 +314,6 @@ main {
         > div.time_and_date {
           margin-right: 16px;
           > div {
-            // flex: 1;
             width: 240px;
           }
         }
@@ -444,7 +443,7 @@ main {
             }
           }
         }
-    }
+      }
     }
 
     #user_plays_area {
