@@ -154,6 +154,6 @@ class ApplicationController < ActionController::Base
   end
 
   def latest_forum_topics
-    Thredded::TopicPolicy::Scope.new(current_user || Thredded::NullUser.new, Thredded::Topic.all.order_recently_posted_first.includes(:last_user).limit(4)).resolve
+    Thredded::TopicPolicy::Scope.new(current_user || Thredded::NullUser.new, Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).limit(4))
   end
 end
