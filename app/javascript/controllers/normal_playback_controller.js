@@ -12,7 +12,6 @@ export default class extends PlaybackController {
     animation = new PlayAnimation()
     this.preload = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
-    this.titleTarget.querySelector('.track_link').style.width = `${this.element.clientWidth - 90}px`
   }
 
   whilePlayingCallback() {
