@@ -166,6 +166,15 @@
     </div>
   </div>
 
+  <div id="user_follows">
+    <h2 class="area_heading">
+      Who <%= @user.display_name %> follows
+    </h2>
+      <div class="area_content">
+      <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>
+    </div>
+  </div>
+
   <div id="user_links_area">
     <div class="user_links_container">
       <ul>
