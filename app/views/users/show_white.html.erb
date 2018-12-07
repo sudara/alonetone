@@ -83,7 +83,7 @@
 
     <% if authorized? && @user.listens_count > 0 %>
     <div id="user_plays_area">
-      
+
       <% cache([@track_plays, theme_name]) do %>
       <h2>Latest Listens To Your Music</h2>
       <div id="user_track_plays" class="box">
@@ -103,9 +103,9 @@
                 <%= render file: svg_path('svg/icon_caret.svg') %>
               </i>
             </span>
-          <% end if @track_plays.size > 4 %>      
+          <% end if @track_plays.size > 4 %>
       </div>
-      
+
     </div>
     <% end %>
 
@@ -166,84 +166,93 @@
     </div>
   </div>
 
-  
-
-
   <div id="user_links_area">
     <ul>
+      <% if @profile.website.present? %>
       <li>
-        <a href="<%= @profile.website %>">
-
+         <%= link_to "https://#{@profile.website}", rel:"nofollow" do %>
           <div class="link_left">
             <div>has</div>
             <div>Website</div>
           </div>
-          
+
           <div class="link_right">
-            <%= render file: svg_path('svg/icon_user_link.svg') %>          
+            <%= render file: svg_path('svg/icon_user_link.svg') %>
           </div>
-        </a>
+        <% end %>
       </li>
+      <% end %>
+      <% if @profile.twitter.present? %>
       <li>
-        <a href="http://twitter.com/<%= @profile.twitter %>">
-            
+        <a href="https://twitter.com/<%= @profile.twitter %>" rel="nofollow">
+
             <div class="link_left">
               <div>on</div>
               <div>Twitter</div>
             </div>
-            
+
             <div class="link_right">
-              <%= render file: svg_path('svg/icon_user_twitter.svg') %>          
+              <%= render file: svg_path('svg/icon_user_twitter.svg') %>
             </div>
         </a>
       </li>
+      <% end %>
+      <% if @profile.apple.present? %>
       <li>
-        <a href="http://apple.com/<%= @profile.apple %>">
+        <a href="https://itunes.apple.com/us/artist/<%= @profile.apple %>" rel="nofollow">
           <div class="link_left">
             <div>on</div>
             <div>Apple Music</div>
           </div>
           <div class="link_right">
-            <%= render file: svg_path('svg/icon_user_apple_music.svg') %>          
+            <%= render file: svg_path('svg/icon_user_apple_music.svg') %>
           </div>
         </a>
       </li>
+      <% end %>
+      <% if @profile.bandcamp.present? %>
       <li>
-        <a href="http://bandcamp.com/<%= @profile.bandcamp %>">
+        <a href="http://<%= @profile.bandcamp %>.bandcamp.com" rel="nofollow">
           <div class="link_left">
             <div>on</div>
             <div>Bandcamp</div>
           </div>
           <div class="link_right">
-            <%= render file: svg_path('svg/icon_user_bandcamp.svg') %>          
+            <%= render file: svg_path('svg/icon_user_bandcamp.svg') %>
           </div>
         </a>
       </li>
+      <% end %>
+      <% if @profile.instagram.present? %>
       <li>
-        <a href="http://instagram.com/<%= @profile.instagram %>">
+        <a href="https://instagram.com/<%= @profile.instagram %>" rel="nofollow">
           <div class="link_left">
             <div>on</div>
             <div>Instagram</div>
           </div>
           <div class="link_right">
-            <%= render file: svg_path('svg/icon_user_instagram.svg') %>          
+            <%= render file: svg_path('svg/icon_user_instagram.svg') %>
           </div>
         </a>
       </li>
+      <% end %>
+      <% if @profile.spotify.present? %>
       <li>
-        <a href="http://spotify.com/<%= @profile.spotify %>">
+        <a href="https://open.spotify.com/artist/<%= @profile.spotify %>" rel="nofollow">
           <div class="link_left">
             <div>on</div>
             <div>Spotify</div>
           </div>
           <div class="link_right">
-            <%= render file: svg_path('svg/icon_user_spotify.svg') %>          
+            <%= render file: svg_path('svg/icon_user_spotify.svg') %>
           </div>
         </a>
       </li>
+      <% end %>
     </ul>
   </div>
-  
+
+
 
   <div id="user_stats_area">
       <h2 class="area_heading">
