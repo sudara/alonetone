@@ -1,5 +1,6 @@
 #static_header {
   @include match-dynamic-site-width();
+  max-width: 960px;
   #links {
     ul.links {
       li {
