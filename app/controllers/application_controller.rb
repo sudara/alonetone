@@ -152,4 +152,8 @@ class ApplicationController < ActionController::Base
   def authorized?
     logged_in?
   end
+
+  def latest_forum_topics
+    Thredded::TopicPolicy::Scope.new(current_user || Thredded::NullUser.new, Thredded::Topic.all.order_recently_posted_first.includes(:last_user).limit(4)).resolve
+  end
 end
