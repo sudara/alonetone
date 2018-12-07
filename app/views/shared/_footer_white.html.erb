@@ -9,6 +9,7 @@
 </div>
 <% end %>
 
+<% if logged_in? %>
 <div class="footer_forum_topics">
   <div class="footer_forum_topics_inner">
     <a href="/discuss" class="forum_view_all">
@@ -18,7 +19,7 @@
     </a>
     <h3>Latest forum topics</h3>
     <ul>
-    <% latest_forum_topics.each do |topic|  %>
+    <% latest_forum_topics.resolve.each do |topic|  %>
       <li>
         <div class="forum_topic"><%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %> </div>
         <div class="forum_author">by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
@@ -27,6 +28,7 @@
     </ul>
   </div>
 </div>
+<% end %>
 
 <div class="footer_bottom">
   <div class="footer_columns">
