@@ -1,27 +1,31 @@
-
 <div id="user_home">
   <div id="user_header_area">
     <div id="user_header">
-      <div class="user_name_and_location">
-        <h1 class="user_name"><%= @user.name %></h1>
-      </div>
-      <% if logged_in? && current_user != @user %>
-        <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
-        data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
-          <div class="follow_button">Follow</div>
-          <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-            <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
-            <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <circle class="greenPop" cx="206" cy="483" r="123" fill="none" stroke="#3BF686" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <circle class="bluePop" cx="340" cy="120" r="123" fill="none" stroke="#3D45F6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <circle class="yellowPop" cx="112" cy="336" r="123" fill="none" stroke="#F6CD3F" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <circle class="redPop" cx="128" cy="124" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <circle class="redPop2" cx="485" cy="130" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <circle class="redPop3" cx="480" cy="436" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-            <path class="heart" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="#f6463e" stroke="#f6463e" stroke-miterlimit="10" stroke-width="21" />
-          </svg>
+      <div class="user_name_and_location_and_follow">
+        <div class="user_name_and_location">
+          <h1 class="user_name"><%= @user.name %></h1>
+        </div>
+        <% if logged_in? && current_user != @user %>
+          <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
+          data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
+            <div class="follow_button">Follow</div>
+            <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+              <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
+              <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <circle class="greenPop" cx="206" cy="483" r="123" fill="none" stroke="#3BF686" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <circle class="bluePop" cx="340" cy="120" r="123" fill="none" stroke="#3D45F6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <circle class="yellowPop" cx="112" cy="336" r="123" fill="none" stroke="#F6CD3F" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <circle class="redPop" cx="128" cy="124" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <circle class="redPop2" cx="485" cy="130" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <circle class="redPop3" cx="480" cy="436" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+              <path class="heart" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="#f6463e" stroke="#f6463e" stroke-miterlimit="10" stroke-width="21" />
+            </svg>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <div class="user_header_avatar">
+        <%= image_tag(avatar_or_placeholder_for(@user, :original)) %>
+      </div>
     </div>
   </div>
 
@@ -77,19 +81,12 @@
     </div>
     <% end %>
 
+    <% if authorized? && @user.listens_count > 0 %>
     <div id="user_plays_area">
-      <% if authorized? && @user.listens_count > 0 %>
+
       <% cache([@track_plays, theme_name]) do %>
       <h2>Latest Listens To Your Music</h2>
       <div id="user_track_plays" class="box">
-        <%= link_to listens_path(@user.login), class: 'view_all' do %>
-          <span>view all &nbsp;
-            <i class="icon_caret">
-              <%= render file: svg_path('svg/icon_caret.svg') %>
-            </i>
-          </span>
-
-        <% end if @track_plays.size > 4 %>
 
         <div class="static_content">
           <strong><%= @user.track_plays.today %></strong> new plays &amp; downloads today <br/>
@@ -98,8 +95,20 @@
         <%= render partial: 'users/track_play', collection: @track_plays %>
       </div>
       <% end%>
-      <% end %>
+
+      <div class="below_box">
+          <%= link_to listens_path(@user.login), class: 'view_all' do %>
+            <span>view all &nbsp;
+              <i class="icon_caret">
+                <%= render file: svg_path('svg/icon_caret.svg') %>
+              </i>
+            </span>
+          <% end if @track_plays.size > 4 %>
+      </div>
+
     </div>
+    <% end %>
+
   </div>
 
   <div id="user_right_column">
@@ -108,9 +117,6 @@
       <h2>Recent Favorites</h2>
       <div class="box">
         <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
-
-
-
       </div>
       <div class="below_box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
@@ -160,83 +166,175 @@
     </div>
   </div>
 
-  <!--
-  <div id="user_links_area">
-    <ul>
-      <li><%= website_for_simple(@profile).html_safe if @profile.website.present? %></li>
-      <li>
-       <a href="http://twitter.com/<%= @profile.twitter %>">twitter.com/<%= @profile.twitter %></a>
-      </li>
-    </ul>
+  <div id="user_follows_area">
+    <h2 class="area_heading">
+      Who <%= @user.display_name %> follows
+    </h2>
+      <div class="area_content">
+      <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>
+    </div>
   </div>
-  -->
+
+  <div id="user_links_area">
+    <div class="user_links_container">
+      <ul>
+        <% if @profile.website.present? %>
+        <li>
+          <%= link_to "https://#{@profile.website}", rel:"nofollow" do %>
+            <div class="link_left">
+              <div>has</div>
+              <div>Website</div>
+            </div>
+
+            <div class="link_right">
+              <%= render file: svg_path('svg/icon_user_link.svg') %>
+            </div>
+          <% end %>
+        </li>
+        <% end %>
+        <% if @profile.twitter.present? %>
+        <li>
+          <a href="https://twitter.com/<%= @profile.twitter %>" rel="nofollow">
+
+              <div class="link_left">
+                <div>on</div>
+                <div>Twitter</div>
+              </div>
+
+              <div class="link_right">
+                <%= render file: svg_path('svg/icon_user_twitter.svg') %>
+              </div>
+          </a>
+        </li>
+        <% end %>
+        <% if @profile.apple.present? %>
+        <li>
+          <a href="https://itunes.apple.com/us/artist/<%= @profile.apple %>" rel="nofollow">
+            <div class="link_left">
+              <div>on</div>
+              <div>Apple Music</div>
+            </div>
+            <div class="link_right">
+              <%= render file: svg_path('svg/icon_user_apple_music.svg') %>
+            </div>
+          </a>
+        </li>
+        <% end %>
+        <% if @profile.bandcamp.present? %>
+        <li>
+          <a href="http://<%= @profile.bandcamp %>.bandcamp.com" rel="nofollow">
+            <div class="link_left">
+              <div>on</div>
+              <div>Bandcamp</div>
+            </div>
+            <div class="link_right">
+              <%= render file: svg_path('svg/icon_user_bandcamp.svg') %>
+            </div>
+          </a>
+        </li>
+        <% end %>
+        <% if @profile.instagram.present? %>
+        <li>
+          <a href="https://instagram.com/<%= @profile.instagram %>" rel="nofollow">
+            <div class="link_left">
+              <div>on</div>
+              <div>Instagram</div>
+            </div>
+            <div class="link_right">
+              <%= render file: svg_path('svg/icon_user_instagram.svg') %>
+            </div>
+          </a>
+        </li>
+        <% end %>
+        <% if @profile.spotify.present? %>
+        <li>
+          <a href="https://open.spotify.com/artist/<%= @profile.spotify %>" rel="nofollow">
+            <div class="link_left">
+              <div>on</div>
+              <div>Spotify</div>
+            </div>
+            <div class="link_right">
+              <%= render file: svg_path('svg/icon_user_spotify.svg') %>
+            </div>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+
 
   <div id="user_stats_area">
-      <div class="time_and_date">
-        <div>
+      <h2 class="area_heading">
+        Stats and Stuff
+      </h2>
+      <div class="area_content">
+        <div class="time_and_date">
           <div>
-            Last seen
-          </div>
-          <div>
-            <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
-          </div>
-        </div>
-        <div>
-          <div>
-            Joined
-          </div>
-          <div>
-            <%= @user.created_at.to_date.to_s :long %>
+            <div>
+              Last seen
+            </div>
+            <div>
+              <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
+            </div>
           </div>
         </div>
+        <% if @user.listens_count > 0 %>
+        <div class="tracks_and_listens">
+          <div>
+            <div>
+              Uploaded
+            </div>
+            <div>
+              <%= pluralize @user.assets_count, 'track' %>
+            </div>
+          </div>
+          <div>
+            <div>
+              Listens
+            </div>
+            <div>
+              <%= @user.listens_count %>
+            </div>
+          </div>
+        </div>
+        <% end %>
       </div>
-      <% if @user.listens_count > 0 %>
-      <div class="tracks_and_listens">
-        <div>
-          <div>
-            Uploaded
-          </div>
-          <div>
-            <%= pluralize @user.assets_count, 'track' %>
-          </div>
-        </div>
-        <div>
-          <div>
-            Listens
-          </div>
-          <div>
-            <%= @user.listens_count %>
-          </div>
-        </div>
-      </div>
-      <% end %>
   </div>
 
   <% if moderator? %>
   <div id="user_mod_stats_area">
-      <div class="user_ip">
-        <div>
-          <div>IP Address</div>
-          <div><%= @user.current_login_ip %></div>
-        </div>
-        <div>
-          <div>Other with the same IP:</div>
+      <h2 class="area_heading">
+        ppsshhhhhh....
+      </h2>
+      <div class="area_content">
+        <div class="user_ip">
           <div>
-            <% if @other_users_with_same_ip.present? %>
-            <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
-            <% end %>
+            <div>IP Address</div>
+            <div><%= @user.current_login_ip %></div>
+          </div>
+          <div>
+            <div>Other with the same IP:</div>
+            <div>
+              <% if @other_users_with_same_ip.present? %>
+              <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
 
       <div class="user_agent">
         <div>User agent</div>
         <div><%= @profile.user_agent %></div>
       </div>
     </div>
+  </div>
   <% end %>
 
+  <% if authorized? %>
   <div id="user_actions_area">
+  <% end %>
     <% if authorized? %>
       <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
         edit profile
@@ -246,6 +344,9 @@
     <%= link_to "Delete User", user_path(@user, login: @user.login), method: :delete, class: "edit_profile--delete admin",
       data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."} %>
     <% end %>
+
+  <% if authorized? %>
   </div>
+  <% end %>
 
 </div>
