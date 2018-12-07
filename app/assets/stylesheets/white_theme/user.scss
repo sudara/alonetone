@@ -357,15 +357,16 @@ main {
     }
 
     #user_links_area {
-      background-color: #353535;
-      color: #fff;
-      @include samo-shadow-and-radius();
       ul {
-        display: flex;
-        margin-top: 4px;
-        margin-bottom: 4px;
+        display: inline-flex;
+        padding-top: 4px;
+        padding-bottom: 4px;
         padding-left: 0;
-
+        flex-wrap: wrap;
+        background-color: #353535;
+        color: #fff;
+        @include samo-shadow-and-radius();
+        overflow: auto;
         li {
           min-width: 160px;
           border-right: 2px solid #999;
@@ -408,7 +409,7 @@ main {
             }
           }
         }
-      }
+    }
     }
 
     #user_plays_area {
