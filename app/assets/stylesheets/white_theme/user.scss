@@ -5,27 +5,27 @@ main {
     max-width: 1032px;
     padding: 0 $baseline * 1.5;
     margin: 0 auto;
-    margin-top: 60px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     grid-column-gap: $baseline * 1.5;
     grid-row-gap: $baseline * 1.5;
     justify-content: space-around;
     grid-template-areas:
-    'header header'
-    'playlists playlists'
-    'left right'
-    'card card'
-    'links links'
-    'stats stats'
-    'mod_stats mod_stats'
-    'actions actions'
-    'plays popular';
+      "header header"
+      "playlists playlists"
+      "left right"
+      "card card"
+      "links links"
+      "follows follows"
+      "stats stats"
+      "mod_stats mod_stats"
+      "actions actions"
+      "plays popular";
     > * {
       min-width: 320px;
     }
     h2 {
-      color: #EB7B0C;
+      color: #eb7b0c;
       padding-left: 16px;
       margin-bottom: 16px;
       line-height: 1em;
@@ -40,7 +40,7 @@ main {
     @media #{$tablet} {
       display: flex;
       flex-direction: column;
-       > * {
+      > * {
         width: 100%;
       }
     }
@@ -108,6 +108,10 @@ main {
       grid-area: links;
     }
 
+    #user_follows_area {
+      grid-area: follows;
+    }
+
     #user_stats_area {
       grid-area: stats;
     }
@@ -128,62 +132,73 @@ main {
       grid-area: popular;
     }
 
-
-
     #user_header_area {
       #user_header {
+        justify-content: space-between;
         display: flex;
-        img {
-          display: block;
-          width: 62px;
-          height: 62px;
-        }
-        .user_name_and_location {
-          align-self: flex-end;
-          h1.user_name {
-            font-size: 28px;
-            line-height: 1em;
-            margin-top: 0;
-            margin-bottom: 0;
-          }
-          @media #{$tablet} {
-            padding-left: 15px;
-          }
-        }
-        a.follow {
+        .user_name_and_location_and_follow {
           display: flex;
-          align-self: flex-end;
-          position: relative;
-          top: 4px;
-          &:hover {
-            text-decoration: none;
-          }
-          div.follow_button {
-            @include default_button();
-            background-color: #FFF;
-            color: #EB7B0C;
-            margin-left: 24px;
-            margin-right: 8px;
-            &:hover {
-              background-color: #FFF;
+          .user_name_and_location {
+            align-self: flex-end;
+            h1.user_name {
+              font-size: 28px;
+              line-height: 1em;
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+            @media #{$tablet} {
+              padding-left: 15px;
             }
           }
-          svg {
-            width: 32px;
-            height: 32px;
+          a.follow {
+            display: flex;
+            align-self: flex-end;
             position: relative;
-            top: -3px;
+            top: 4px;
+            &:hover {
+              text-decoration: none;
+            }
+            div.follow_button {
+              @include default_button();
+              background-color: #fff;
+              color: #eb7b0c;
+              margin-left: 24px;
+              margin-right: 8px;
+              &:hover {
+                background-color: #fff;
+              }
+            }
+            svg {
+              width: 32px;
+              height: 32px;
+              position: relative;
+              top: -3px;
+            }
+          }
+        }
+
+        .user_header_avatar {
+          overflow: hidden;
+          @include samo-shadow-and-radius();
+          border: 1px solid #000;
+          position: relative;
+          top: 10px;
+          img {
+            display: block;
+            width: 48px;
+            height: 48px;
           }
         }
       }
     }
+    
     .user_playlists_buttons {
       margin-bottom: $baseline;
       #create_new_playlist {
-        @include default_button('admin');
+        @include default_button("admin");
       }
       #change_playlist_order {
-        @include default_button('admin');
+        @include default_button("admin");
         img {
           display: none;
         }
@@ -234,79 +249,107 @@ main {
         }
         .user_location {
           font-weight: bold;
-          color: #EB7B0C;
+          color: #eb7b0c;
           font-size: 14px;
           padding: 16px 36px;
         }
       }
     }
-    #user_stats_area {
-      display: flex;
-      flex-wrap: wrap;
+
+    #user_follows_area {
+      h2.area_heading {
+        font-size: 24px;
+        color: #000;
+        display: block;
+      }
       > div {
         background-color: $box-background-color;
         @include samo-shadow-and-radius();
         flex: 1;
         padding: 16px;
         display: flex;
-        > div {
-          > div:first-child {
-            color: #868686;
-            font-size: 12px;
-            margin-bottom: 8px;
+        flex-wrap: wrap;
+        padding-bottom: 8px;
+        > .edge_to_edge_small {
+          margin-right: 8px;
+          height: 50px;
+          width: 50px;
+          border-radius: 4.29px;
+          margin-bottom: 8px;
+          overflow: hidden;
+          img {
+            width: 50px;
+            height: 50px;
           }
-          > div:last-child {
-            font-size: 16px;
-            color: #353535;
-          }
-
         }
       }
-      > div.time_and_date {
-        margin-right: 16px;
-        > div {
-          // flex: 1;
-          width: 240px;
-        }
+    }
+    #user_stats_area {
+      h2.area_heading {
+        font-size: 24px;
+        color: #000;
+        display: block;
       }
-      > div.tracks_and_listens {
-        div:first-child {
-          width: 35%;
-        }
-        div:last-child {
+      .area_content {
+        display: flex;
+        flex-wrap: wrap;
+        > div {
+          background-color: $box-background-color;
+          @include samo-shadow-and-radius();
           flex: 1;
+          padding: 16px;
+          display: flex;
+          > div {
+            > div:first-child {
+              color: #868686;
+              font-size: 12px;
+              margin-bottom: 8px;
+            }
+            > div:last-child {
+              font-size: 16px;
+              color: #353535;
+            }
+          }
+        }
+        > div.time_and_date {
+          margin-right: 16px;
+          > div {
+            width: 240px;
+          }
+        }
+        > div.tracks_and_listens {
+          div:first-child {
+            width: 35%;
+          }
+          div:last-child {
+            flex: 1;
+          }
         }
       }
     }
     #user_mod_stats_area {
-      background-color: #EFEFEF;
-      @include samo-shadow-and-radius();
+      h2.area_heading {
+        font-size: 20px;
+        color: #d7dbdb;
+        display: block;
+      }
+      .area_content {
+        background-color: #efefef;
+        @include samo-shadow-and-radius();
 
-      .user_ip {
-        padding: 16px;
-        display: flex;
-        > div:first-child {
-          width: 240px;
+        .user_ip {
+          padding: 16px;
+          display: flex;
+          > div:first-child {
+            width: 240px;
+          }
+          > div:last-child {
+            flex: 1;
+          }
         }
-        > div:last-child {
-          flex: 1;
-        }
-      }
-      .user_agent {
-        padding: 16px;
-        border-top: 2px solid #FFF;
-        > div:first-child {
-          color: #868686;
-          font-size: 12px;
-          margin-bottom: 8px;
-        }
-        > div:last-child {
-          font-size: 16px;
-          color: #353535;
-        }
-      }
-      > div {
-        > div {
+        .user_agent {
+          padding: 16px;
+          border-top: 2px solid #fff;
           > div:first-child {
             color: #868686;
             font-size: 12px;
@@ -315,13 +358,26 @@ main {
           > div:last-child {
             font-size: 16px;
             color: #353535;
+          }
+        }
+        > div {
+          > div {
+            > div:first-child {
+              color: #868686;
+              font-size: 12px;
+              margin-bottom: 8px;
+            }
+            > div:last-child {
+              font-size: 16px;
+              color: #353535;
+            }
           }
         }
       }
     }
 
     #user_actions_area {
-      background-color: #EFEFEF;
+      background-color: #efefef;
       @include samo-shadow-and-radius();
       padding: 16px;
       a.edit_profile {
@@ -335,20 +391,62 @@ main {
     }
 
     #user_links_area {
-      background-color: #353535;
-      @include samo-shadow-and-radius();
       ul {
-
-
+        display: inline-flex;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 0;
+        flex-wrap: wrap;
+        background-color: #353535;
+        color: #fff;
+        @include samo-shadow-and-radius();
+        overflow: auto;
         li {
-          width: 160px;
-
+          min-width: 160px;
+          border-right: 2px solid #999;
+          box-sizing: border-box;
+          &:last-child {
+            border-right: 0;
+          }
+          a {
+            height: 40px;
+            overflow: auto;
+            opacity: 0.5;
+            display: block;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 9px;
+            &:hover {
+              opacity: 1;
+            }
+            .link_left {
+              div:nth-child(1) {
+                font-family: $medium-sans-font;
+                margin-bottom: 0px;
+                margin-top: 5px;
+                opacity: 0.5;
+                font-size: 12px;
+              }
+              div:nth-child(2) {
+                font-weight: bold;
+                font-size: 14px;
+              }
+            }
+            .link_right {
+              float: right;
+              width: 24px;
+              height: 24px;
+              svg {
+                margin-top: 8px;
+              }
+            }
+          }
         }
       }
-
     }
 
-    #user_plays_area {r
+    #user_plays_area {
       .box > h2 {
         padding-left: $baseline / 2;
       }
