@@ -40,7 +40,6 @@
   > * {
 		min-width: 320px;
   }
-
   
 	#home_playlists_area {
     grid-area: playlists;
@@ -89,7 +88,7 @@
         }
       }
       
-      @media only screen and (max-width: 1026px) {
+      @media only screen and (max-width: 1038px) {
       	li {
       		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
       			display: block;
@@ -102,7 +101,7 @@
           }
       	}
       }
-      @media only screen and (max-width: 784px) {
+      @media only screen and (max-width: 798px) {
       	li {
       		&:nth-child(1), &:nth-child(2) {
       			display: block;
