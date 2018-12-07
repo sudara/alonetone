@@ -19,6 +19,7 @@ class AssetsController < ApplicationController
       @assets = Asset.published.latest.includes(user: :pic).limit(5)
       set_related_lastest_variables
       welcome_to_white_theme
+      respond_to :html
       render 'latest_white' if white_theme_enabled?
     end
   end
