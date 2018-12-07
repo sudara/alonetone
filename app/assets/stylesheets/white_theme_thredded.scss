@@ -33,7 +33,8 @@ aside.thredded--currently-online {
   padding-left: $baseline * 3;
   background-color: #fff;
   @include samo-shadow-and-radius();
-  @include match-dynamic-site-width('narrow');
+  // @include match-dynamic-site-width('narrow');
+  max-width: 960px;
 
   @media only screen and (max-width: 1000px) {
     @include match-dynamic-site-width('wide');

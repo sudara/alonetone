@@ -3,6 +3,7 @@
 	@include match-dynamic-site-width();
 	flex-wrap: wrap;
 	justify-content: space-between;
+	max-width: 960px;
 	#static_header {
 		width: 30%;
 		line-height: 1.1;
