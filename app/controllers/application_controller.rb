@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    flash[:error] = "Hmm, we didn't find that alonetoner"
+    flash[:error] = "Hmm, we didn't find that..."
     raise ActionController::RoutingError, 'User Not Found'
   end
 
