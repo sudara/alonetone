@@ -16,6 +16,7 @@ main {
       "left right"
       "card card"
       "links links"
+      "follows follows"
       "stats stats"
       "mod_stats mod_stats"
       "actions actions"
@@ -105,6 +106,10 @@ main {
 
     #user_links_area {
       grid-area: links;
+    }
+
+    #user_follows_area {
+      grid-area: follows;
     }
 
     #user_stats_area {
@@ -248,6 +253,36 @@ main {
           padding: 16px 36px;
         }
       }
+    }
+    #user_follows_area {
+      h2.area_heading {
+        font-size: 24px;
+        color: #000;
+        display: block;
+      }
+      > div {
+        background-color: $box-background-color;
+        @include samo-shadow-and-radius();
+        flex: 1;
+        padding: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 8px;
+        > .edge_to_edge_small {
+          margin-right: 8px;
+          height: 50px;
+          width: 50px;
+          border-radius: 4.29px;
+          margin-bottom: 8px;
+          overflow: hidden;
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+
+      }
+
     }
     #user_stats_area {
       h2.area_heading {
