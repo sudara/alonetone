@@ -5,7 +5,6 @@ main {
     max-width: 1032px;
     padding: 0 $baseline * 1.5;
     margin: 0 auto;
-    margin-top: 60px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     grid-column-gap: $baseline * 1.5;
@@ -366,7 +365,7 @@ main {
         margin-top: 4px;
         margin-bottom: 4px;
         padding-left: 0;
-        
+
         li {
           min-width: 160px;
           border-right: 2px solid #999;
