@@ -52,6 +52,8 @@
     <% if logged_in? %>
       <div><%= link_to "Upload", "/upload"%></div>
       <div><%= link_to "New Playlist/Album", "/new_album"%></div>
+    <% else %>
+      <div><%= link_to "Sign Up", "/login"%></div>
     <% end %>
       <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
     <% if moderator? %>
