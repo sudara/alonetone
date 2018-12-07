@@ -15,15 +15,12 @@ class UsersController < ApplicationController
   def show
     prepare_meta_tags
     gather_user_goodies
+    respond_to :html
     render 'show_white' if white_theme_enabled?
   end
 
   def stats
     @tracks = @user.assets.published
-    respond_to do |format|
-      format.html
-      format.xml
-    end
   end
 
   def new
