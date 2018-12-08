@@ -34,16 +34,17 @@
   }
 
 	.box {
-    margin-bottom: 0;    
+    margin-bottom: 0;
   }
 
   > * {
 		min-width: 320px;
   }
-  
+
 	#home_playlists_area {
     grid-area: playlists;
-    
+    margin-bottom: 12px;
+
     @media #{$tablet} {
       margin-bottom: $baseline * 1.5;
     }
@@ -87,7 +88,7 @@
           margin-bottom: $baseline * .75;
         }
       }
-      
+
       @media only screen and (max-width: 1038px) {
       	li {
       		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
