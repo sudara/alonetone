@@ -165,7 +165,7 @@
      </div>
     </div>
   </div>
-
+  <% if @user.followees.present? %>
   <div id="user_follows_area">
     <h2 class="area_heading">
       Who <%= @user.display_name %> follows
@@ -174,7 +174,9 @@
       <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>
     </div>
   </div>
+  <% end %>
 
+  <% if @profile.has_links? %>
   <div id="user_links_area">
     <div class="user_links_container">
       <ul>
@@ -262,7 +264,7 @@
       </ul>
     </div>
   </div>
-
+  <% end %>
 
 
   <div id="user_stats_area">
