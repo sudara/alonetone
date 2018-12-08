@@ -28,13 +28,13 @@ footer#site_footer {
       margin-bottom: 0px;
     }
     div {
-        margin-top: 8px;
-        margin-bottom: 8px;
-        color: #868686;
-        line-height: 1.2em;
-        font-size: 12px;
-        font-family: $medium-sans-font;
-        font-weight: normal;
+      margin-top: 6px;
+      margin-bottom: 14px;
+      color: #868686;
+      line-height: 1.2em;
+      font-size: 12px;
+      font-family: $medium-sans-font;
+      font-weight: normal;
     }
   }
   .footer_forum_topics {
@@ -68,9 +68,8 @@ footer#site_footer {
         }
       }
       h3 {
-        margin-top: 0;
+        margin: 0 0 8px 8px;
         padding-top: 12px;
-        margin-left: 8px;
       }
       ul {
         clear: both;
