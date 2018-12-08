@@ -37,7 +37,7 @@ body {
         max-width: 450px;
         width: 35%;
         margin-right: $baseline;
-        align-self: stretch;
+        // align-self: stretch;
         @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
           max-width: none;
           width: 100%;
