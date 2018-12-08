@@ -145,6 +145,13 @@
 			margin-top: 0;
 			margin-bottom: 0;
 			li {
+				background-color: $not-quite-black;
+				overflow: auto;
+				border-bottom: 1px solid black;
+				&:hover {
+					background-color: black;
+				}
+
 				a {
 					font-family: $sans-font;
 					font-size: 12px;
@@ -153,24 +160,54 @@
 					box-sizing: border-box;
 					width: 100%;
 					padding: 10px $baseline / 2;
+
 					text-decoration: none;
 					color: white;
-					border-bottom: 1px solid black;
-					background-color: $not-quite-black;;
+
+					
+					
+					&.spotify {
+						i {
+							background-image: image-url('svg/icon_playlist_spotify.svg');
+							display: inline-block;
+							background-size: 100%;
+							width: 17px;
+							height: 17px;
+						  }
+					}
+					&.itunes {
+						i {
+							background-image: image-url('svg/icon_playlist_itunes.svg');
+							display: inline-block;
+							background-size: 100%;
+							width: 17px;
+							height: 17px;
+						  }
+					}
 					i {
+						background-image: image-url('svg/icon_playlist_google_play.svg');
+						display: inline-block;
+						background-size: 100%;
+						width: 17px;
+						height: 17px;
 						font-size: 14px;
 						margin-right: 11px;
-					}
-					&:hover {
-						background-color: black;
+						vertical-align: middle;
+						position: relative;
+						top: -1px;
 					}
 					.action-text {
 						font-size: 10px;
 						float: right;
 						color: $gray;
+						position: relative;
+						top: 3px;
 					}
 				}
 			}
+		}
+		ul.downloads-links li a i {
+			background-image: image-url('svg/icon_playlist_download.svg');
 		}
 	}
 	.edit_playlist_container {
