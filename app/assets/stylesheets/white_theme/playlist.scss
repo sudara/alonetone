@@ -22,8 +22,10 @@
 		margin-top: $baseline/2;
 		margin-bottom: 0;
 		text-align: center;
+		font-family: $sans-font;
+		font-weight: bold;
 		&.cover {
-      font-size: 20px;
+			font-size: 20px;
 			margin-top: 23px;
 		}
 		a {
