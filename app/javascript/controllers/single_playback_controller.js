@@ -2,7 +2,7 @@ import PlaybackController from './playback_controller'
 
 export default class extends PlaybackController {
   preInitialize() {
-    this.url = this.playTarget.getAttribute('href') + '.mp3'
+    this.url = this.playTarget.getAttribute('href')
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
     this.preload = this.playTarget.parentElement.classList.contains('active')
   }
