@@ -65,7 +65,8 @@
       line-height: 32px;
     }
     h3 {
-      margin-top: $baseline / 2;
+      // margin-top: $baseline / 2;
+      margin-top: -16px;
       margin-bottom: $baseline;
       color: $samo-gray;
     }
