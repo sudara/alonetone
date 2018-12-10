@@ -313,6 +313,12 @@ main {
         }
         > div.time_and_date {
           margin-right: 16px;
+          @media #{$tablet} {
+            width: 100%;
+            flex: auto;
+            margin-right: 0;
+            margin-bottom: 12px;
+          }
           > div {
             width: 240px;
           }
