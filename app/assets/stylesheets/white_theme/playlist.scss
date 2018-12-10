@@ -1,5 +1,6 @@
 .playlist-sidebar {
 	@include samo-shadow-and-radius();
+	overflow: hidden;
 	position: relative;
 	background-color: white;
 	.small-cover {
