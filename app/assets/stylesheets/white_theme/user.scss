@@ -209,6 +209,7 @@ main {
       flex-wrap: wrap;
       background-color: $box-background-color;
       @include samo-shadow-and-radius();
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
       overflow: hidden;
       @media #{$tablet} {
         flex-direction: column;
@@ -242,6 +243,7 @@ main {
           line-height: 1.3em;
           color: #353535;
           padding: 36px;
+          font-family: $medium-sans-font;
         }
         .user_card_content_divider {
           height: 1px;
