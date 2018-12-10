@@ -59,6 +59,12 @@ RSpec.describe AssetsController, type: :controller do
       expect(assigns(:assets)).not_to include(assets(:valid_mp3))
       expect(assigns(:assets)).to be_present # should be populated with user's own assets
     end
+
+    it 'should not error when user accesses /mass_edit by clicking Click here to mass-edit all your tracks' do
+      login(:arthur)
+      get :mass_edit, params: { user_id: users(:arthur).login }
+      expect(response).to be_successful
+    end
   end
 
   context "#update" do
