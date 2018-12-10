@@ -1,6 +1,7 @@
 import { Controller } from 'stimulus'
 import Rails from 'rails-ujs'
 import { Howl } from 'howler'
+import { bugsnagClient } from '../misc/bugsnag.js.erb'
 
 // Hack for Safari 12 https://github.com/goldfire/howler.js/pull/1047
 const safari = /safari/.test(Howler._navigator && Howler._navigator.userAgent.toLowerCase())
@@ -34,6 +35,9 @@ export default class extends Controller {
       html5: true,
       preload: this.preload,
       // onend: controller.playNextTrack.bind(controller),
+      onloaderror(id, e) {
+        bugsnagClient.notify(`Failed to load mp3. Message: ${e}`)
+      },
       onplay() {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
@@ -41,6 +45,7 @@ export default class extends Controller {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
       onplayerror(id, e) {
+        bugsnagClient.notify(e)
         controller.pause()
       },
     })
