@@ -209,6 +209,7 @@ main {
       flex-wrap: wrap;
       background-color: $box-background-color;
       @include samo-shadow-and-radius();
+      overflow: hidden;
       @media #{$tablet} {
         flex-direction: column;
       }
@@ -386,6 +387,8 @@ main {
       background-color: #efefef;
       @include samo-shadow-and-radius();
       padding: 16px;
+      box-sizing: border-box;
+      
       a.edit_profile {
         @include default-button("admin");
       }
