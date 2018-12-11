@@ -20,6 +20,10 @@
 					background: $light_gray;		
 				}		
 			}		
+			li.current {		
+				padding: 0 15px;		
+				background: $gray;		
+			}		
 		}		
 	}		
 }
