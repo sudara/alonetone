@@ -352,7 +352,6 @@
         label {
           text-transform: none;
         }
-
         [type="checkbox"]:not(:checked),
         [type="checkbox"]:checked {
           position: static;
@@ -396,22 +395,6 @@
     @include default-button("jumbo");
     float: right;
   }
-}
-
-.playlist_delete_button {
-  font-size: 10px;
-  font-weight: normal;
-  line-height: 35px;
-  position: relative;
-  top: 10px;
-  display: block;
-  float: right;
-  width: 110px;
-  height: 30px;
-  margin-top: 20px !important;
-  margin-right: -25px;
-  margin-left: 10px;
-  background: image-url("icons/delete.png") no-repeat center top;
 }
 
 .playlist_edit_button {
