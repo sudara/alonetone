@@ -3737,7 +3737,8 @@ hosted-git-info@^2.1.4:
 
 "howler@https://github.com/goldfire/howler.js.git":
   version "2.0.15"
-  resolved "https://github.com/goldfire/howler.js.git#535c26b63925f9001c9e1a6b049c0a2b223f8022"
+  uid "91d62b61718cf510fd046fd272fea3d04593b624"
+  resolved "https://github.com/goldfire/howler.js.git#91d62b61718cf510fd046fd272fea3d04593b624"
 
 hpack.js@^2.1.6:
   version "2.1.6"
