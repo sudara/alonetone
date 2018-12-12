@@ -81,48 +81,11 @@ ul {
 	}
 }
 
-
 /* PROGRESS INDICATOR (COMMENT POSTING) */
-
 div.small_spinner {
   display: none;
   background: image-url('svg/icon_spinner.svg') no-repeat center center;
   height: 20px;
   width: 20px;
   background-size: 100%;
-}
-
-
-
-
-
-/* REPORT A USER */
-
-.user_report .comment_user {
-  .title {
-    span.box_title {
-      font-size: 16px;
-      line-height: 30px;
-      padding-top: 8px;
-      a {
-        font-weight: 16px;
-      }
-    }
-  }
-}
-
-/* SUDO BAR */
-
-.sudo_bar {
-  font-size: 12px;
-  line-height: 25px;
-  height: 25px;
-  padding-left: 55px;
-  text-align: left;
-  color: #FFFFFF;
-  background-color: red;
-  a {
-    text-decoration: underline;
-    color: white;
-  }
 }
