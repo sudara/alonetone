@@ -3,7 +3,7 @@
     <%= render partial: 'assets/asset_white', locals: {asset: asset } %>
   </div>
 <% else %>
-<%= content_tag :div, class: 'asset ' do %>
+  <%= content_tag :div, class: 'asset ' do %>
     <%= render layout: 'assets/asset_layout', locals: {asset: asset} do %>
       <%= link_to asset.user.name, user_home_path(asset.user), class: 'artist', title: "#{asset.user.name} on alonetone " %>
     <% end %>
