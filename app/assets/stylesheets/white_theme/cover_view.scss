@@ -1,11 +1,6 @@
-// .playlist-options is for the cover view, which isn't technically the post
-// ok!
-// yep
-// who wrote these comments?
-// get it together
-
 body.cover-view .playlist-sidebar {
-	border-radius: 6px 0 0 6px;
+  border-radius: 6px 0 0 6px;
+  align-self: stretch;
 }
 
 .track-content {
@@ -34,9 +29,7 @@ body.cover-view .playlist-sidebar {
       @media only screen and (max-width: 850px) {
         position: static;
       }
-
     }
-
   }
   min-width: 400px;
   @media #{$tablet} {
@@ -83,6 +76,9 @@ body.cover-view .playlist-sidebar {
         float: left;
         margin-top: 0;
         margin-bottom: 0;
+        li a {
+          background-image: image-url('svg/icon_playlist_download.svg');
+        }
       }
       &.external-links {
         float: right;
@@ -115,15 +111,15 @@ body.cover-view .playlist-sidebar {
           padding-bottom: 0;
           text-decoration: none;
           color: $not-quite-white-opaque;
-          background-image: image-url('svg/spotify.svg');
-          background-size: 25px 25px;
+          background-image: image-url('svg/icon_playlist_google_play.svg');
+          background-size: 19px 19px;
           background-repeat: no-repeat;
-          background-position: 10px 10px;
+          background-position: 10px 15px;
           &.spotify {
-            background-image: image-url('svg/spotify.svg');
+            background-image: image-url('svg/icon_playlist_spotify.svg');
           }
           &.itunes {
-            background-image: image-url('svg/itunes.svg');
+            background-image: image-url('svg/icon_playlist_itunes.svg');
             padding-left:px;
           }
           &.apple {
@@ -140,4 +136,3 @@ body.cover-view .playlist-sidebar {
     }
   }
 }
-

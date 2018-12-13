@@ -4,9 +4,6 @@ body {
   line-height: 1em;
   text-rendering: optimizeLegibility;
 }
-strong {
-  font-weight: bold;
-}
 
 a {
   text-decoration: none;
@@ -19,141 +16,8 @@ a {
 h1 {
   font-size: 24px;
   font-family: $black-font;
-  margin-bottom: 25px;
-  &.user,
-  &.notice {
-    margin: 0;
-  }
 }
 
 h2 {
   font-size: 18px;
-  font-weight: bold;
-  line-height: 2em;
-  margin-bottom: 1em;
 }
-
-h2.box.small {
-  font-size: 16px;
-  line-height: 25px;
-  height: 25px;
-  margin-bottom: 3px;
-}
-
-.static_content {
-  a {
-    text-decoration: underline;
-    &:hover {
-      color: $samo-orange;
-    }
-  }
-}
-
-.static_content {
-  input[type='submit'] {
-    @include default-button('admin');
-    cursor: pointer;
-  }
-}
-
-.static_content h3,
-.panel h3 {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 3px;
-}
-
-h2.box_title,
-main h2.box_title a {
-  font-size: 20px;
-  line-height: 20px;
-  margin: 0 0 0 0;
-}
-
-span.orange {
-  color: $orange;
-}
-
-// for example the sort url and add url on edit playlists
-a.hidden {
-  display: none;
-}
-
-small {
-  font-size: 11px;
-}
-
-textarea.private {
-  border: 1px solid black;
-  border-color: $red;
-}
-
-span.hint,
-main a.hint,
-main a.hint:visited {
-  // font-size: 12px;
-  color: $samo-orange;
-}
-
-blockquote {
-  width: 80%;
-  margin-bottom: 15px;
-  margin-left: 0;
-  padding: 1px 10px;
-  border: 1px solid;
-  border-left: 3px solid;
-  background: $box_background_even;
-}
-
-span.note {
-  font-size: 13px;
-}
-
-
-// .fieldWithErrors input,
-// .fieldWithErrors textarea {
-//   border: $orange 2px solid;
-// }
-
-// .box,
-// .comment,
-// .user_report .body,
-// .update .body,
-// .notice {
-//   a,
-//   a:visited {
-//     &:hover {
-//       color: #191A13;
-//     }
-//   }
-//   p {
-//     img {
-//       max-width: 550px;
-//     }
-//   }
-//   ol li {
-//     list-style-position: inside;
-//     list-style-type: decimal;
-//   }
-// }
-//
-// .user_report .body,
-// .update .body,
-// .notice,
-// .static_content,
-// .comment_body {
-//   font-size: 13px;
-//   a,
-//   a:visited {
-//     font-weight: bold;
-//   }
-//   ul {
-//     margin-top: 10px;
-//     margin-bottom: 20px;
-//     li {
-//       line-height: 18px;
-//       margin-left: 20px;
-//       list-style: square inside none;
-//     }
-//   }
-// }

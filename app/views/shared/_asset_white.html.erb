@@ -12,10 +12,10 @@
       <% end %>
 
       <% if moderator? %>
-        <% if @asset.private? %>
-          <%= link_to "Unspam", unspam_user_track_path(@user, @asset), method: :put, class: "edit-link" %>
+        <% if @asset.is_spam? %>
+          <%= link_to "Unspam", unspam_admin_asset_path(@asset.id), method: :put, class: "edit-link" %>
         <% else %>
-          <%= link_to "Spam", spam_user_track_path(@user, @asset), method: :put, class: "edit-link" %>
+          <%= link_to "Spam", spam_admin_asset_path(@asset.id), method: :put, class: "edit-link" %>
         <% end %>
       <% end %>
     </div>

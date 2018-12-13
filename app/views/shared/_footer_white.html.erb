@@ -1,48 +1,73 @@
-<div class="footer_inner">
-  <div class="footer_column">
-     <h3 class="footer_column_header">alonetoners online</h3>
-     <ul>
-      <li>
+<% if User.currently_online.count > 2 %>
+<div class="footer_alonetoners_online">
+  <h3>Alonetoners online</h3>
+    <div>
         <%= User.currently_online.collect do |user| %>
           <% link_to user.name, main_app.user_home_path(user.login) %>
         <% end.join(', ').html_safe %>
-      </li>
-     </ul>
-  </div>
-  <div class="footer_column">
-    <h3 class="footer_column_header">Browse</h3>
-    <div><%= link_to "All Artists", "/users"%></div>
-    <div><%= link_to "Recent Playlists", "/playlists"%></div>
-    <div><%= link_to "Recent Tracks", "/radio/latest"%></div>
-    <div><%= link_to "Popular Tracks", "/radio/popular"%></div>
-  </div>
+    </div>
+</div>
+<% end %>
 
-  <% if logged_in? %>
-  <div class="footer_column">
-    <h3 class="footer_column_header">Do Stuff</h3>
+<% if logged_in? %>
+<div class="footer_forum_topics">
+  <div class="footer_forum_topics_inner">
+    <a href="/discuss" class="forum_view_all">
+        View all... &nbsp;<i class="icon_caret">
+        <%= render file: svg_path('svg/icon_caret.svg') %>
+        </i>
+    </a>
+    <h3>Latest forum topics</h3>
+    <ul>
+    <% latest_forum_topics.resolve.each do |topic|  %>
+      <li>
+        <div class="forum_topic"><%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %> </div>
+        <div class="forum_author">by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<div class="footer_bottom">
+  <div class="footer_columns">
+    <div class="footer_column">
+      <h3 class="footer_column_header">alone<em>tone</em> radio</h3>
+      <a href="/radio/">
+        <%= render file: svg_path('svg/icon_radio.svg') %>
+      </a>
+    </div>
+
+    <div class="footer_column">
+      <h3 class="footer_column_header">Browse</h3>
+      <div><%= link_to "All Artists", "/users"%></div>
+      <div><%= link_to "Recent Playlists", "/playlists"%></div>
+      <div><%= link_to "Recent Tracks", "/radio/latest"%></div>
+      <div><%= link_to "Popular Tracks", "/radio/popular"%></div>
+    </div>
+
+    <div class="footer_column">
+      <h3 class="footer_column_header">Do Stuff</h3>
+    <% if logged_in? %>
       <div><%= link_to "Upload", "/upload"%></div>
       <div><%= link_to "New Playlist/Album", "/new_album"%></div>
-  <% if moderator? %>
-    <div><%= link_to "Secretz", "/secretz" %></div>
-    <div><%= link_to "Spam Stats", "https://akismet.com/web/1.0/user-stats.php?blog=alonetone.com&api_key=#{Alonetone.rakismet_key}"%></div>
-    <div><%= link_to "Job Status", "/sidekiq" %></div>
-  <% end %>
-    </div>
-  <% end %>
-
-  <div class="footer_column">
-    <h3 class="footer_column_header">More</h3>
-    <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
-    <div><%= link_to "About", "/about"%></div>
-    <div><%= link_to "Stats", "/about/stats"%></div>
-    <div><%= link_to "Forums", "/discuss"%></div>
-    <% if Alonetone.try(:chat_url) && logged_in? %>
-    <div>
-    <%= link_to "Chat", Alonetone.chat_url %>
-    </div>
+    <% else %>
+      <div><%= link_to "Sign Up", "/login"%></div>
     <% end %>
-    <div><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %>
-    <div><%= link_to "Privacy", "/about/privacy"%></div>
-  </div>
+      <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
+    <% if moderator? %>
+      <div><%= link_to "Admin", "/admin" %></div>
+    <% end %>
+      </div>
 
+    <div class="footer_column">
+      <h3 class="footer_column_header">More</h3>
+      <div><%= link_to "About", "/about"%></div>
+      <div><%= link_to "Stats", "/about/stats"%></div>
+      <div><%= link_to "Forums", "/discuss"%></div>
+      <div><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %></div>
+    </div>
+
+  </div>
 </div>

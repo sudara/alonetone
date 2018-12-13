@@ -14,9 +14,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :show_404
   rescue_from AbstractController::ActionNotFound, with: :show_404
 
-  # let ActionView have a taste of our authentication
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
-    :current_page, :moderator?, :welcome_back?, :user_setting, :white_theme_enabled?
+    :current_page, :moderator?, :welcome_back?, :user_setting, :white_theme_enabled?, :latest_forum_topics
 
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
@@ -64,12 +63,8 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    flash[:error] = "Hmm, we didn't find that alonetoner"
+    flash[:error] = "Hmm, we didn't find that..."
     raise ActionController::RoutingError, 'User Not Found'
-  end
-
-  def currently_online
-    @online = User.currently_online
   end
 
   def find_user
@@ -156,5 +151,9 @@ class ApplicationController < ActionController::Base
 
   def authorized?
     logged_in?
+  end
+
+  def latest_forum_topics
+    Thredded::TopicPolicy::Scope.new(current_user || Thredded::NullUser.new, Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).limit(4))
   end
 end
