@@ -143,8 +143,6 @@ Alonetone::Application.routes.draw do
         member do
           get :share
           get :stats
-          put :spam
-          put :unspam
         end
         collection do
           get  :latest

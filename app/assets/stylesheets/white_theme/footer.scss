@@ -1,43 +1,151 @@
+$footer-collapse: 'only screen and (max-width: 952px)';
+
 footer#site_footer {
   font-size: 13px;
   font-weight: normal;
   line-height: 20px;
   width: 100%;
-  padding-bottom: 20px;
+  padding-top: 24px;
   color: #333;
-  background-color: $light-gray;
-  .author_name {
-    font-size: 11px;
-    font-weight: bold;
-    position: relative;
-    top: -3px;
+  background-color: #f4f4f4;
+  h3 {
+    color: #de6a00;
+    line-height: 1.2em;
+    font-size: 12px;
+    font-family: $medium-sans-font;
+    font-weight: normal;
   }
-  .footer_inner {
-    display: flex;
+  .footer_alonetoners_online {
+    width: 952px;
     margin-right: auto;
     margin-left: auto;
-    @include match-dynamic-site-width();
-    flex-wrap: wrap;
-    justify-content: space-between;
-    .footer_column {
-      width: 23%;
-      min-width: 150px;
-      padding-top: 20px;
-      @media #{$tablet} {
-        font-size: 17px;
-        line-height: 32px;
+    padding-left: 8px;
+    box-sizing: border-box;
+    @media #{$footer-collapse} {
+      width: 100%;
+    }
+    h3 {
+      margin-bottom: 0px;
+    }
+    div {
+      margin-top: 6px;
+      margin-bottom: 14px;
+      color: #868686;
+      line-height: 1.2em;
+      font-size: 12px;
+      font-family: $medium-sans-font;
+      font-weight: normal;
+    }
+  }
+  .footer_forum_topics {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-bottom: 24px;
+    .footer_forum_topics_inner {
+      width: 952px;
+      margin-right: auto;
+      margin-left: auto;
+      @media #{$footer-collapse} {
         width: 100%;
-        h3.footer_column_header {
-          font-size: 18px;
-          margin-bottom: 12px;
+      }
+      .forum_view_all {
+        margin-top: 6px;
+        font-family: $sans-font;
+        font-weight: bold;
+        color: #de6a00;
+        display: block;
+        float: right;
+        font-size: 12px;
+        i {
+          svg {
+            height: 16px;
+            width: 16px;
+            position: relative;
+            top: 3px;
+            .icon_caret_path {
+              stroke: #de6a00;
+            }
+          }
         }
       }
-      .footer_column_header {
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        padding-bottom: 2px;
-        border-bottom: 1px #bbb solid;
+      h3 {
+        margin: 0 0 8px 8px;
+        padding-top: 12px;
+      }
+      ul {
+        clear: both;
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        flex-wrap: wrap;
+        li {
+          box-sizing: border-box;
+          padding: 8px;
+          width: 234px;
+          height: 64px;
+          border-radius: 3px;
+          background-color: #ffffff;
+          box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.05);
+          @media #{$footer-collapse} {
+            width: 100%;
+            margin-bottom: 8px;
+          }
+
+          .forum_topic {
+            font-family: $medium-sans-font;
+            line-height: 1.2em;
+            height: 32px;
+          }
+          .forum_author {
+            font-family: $sans-font;
+            color: #868686;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+  .footer_bottom {
+    background-color: #272727;
+    .footer_columns {
+      display: flex;
+      margin-right: auto;
+      margin-left: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 24px 0;
+      .footer_column {
+        &:first-child {
+          text-align: center;
+          h3.footer_column_header {
+            text-align: center;
+          }
+        }
+        box-sizing: border-box;
+        margin-left: 2px;
+        margin-right: 2px;
+        width: 236px;
+        min-width: 150px;
+        background-color: #353535;
+        border-radius: 3px;
+        color: #ffffff;
+        line-height: 20px;
+        padding: 16px;
+        box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 4px 8px rgba(0, 0, 0, 0.25);
+        @media #{$footer-collapse} {
+          font-size: 17px;
+          line-height: 32px;
+          width: 100%;
+          margin-bottom: 16px;
+        }
+        .footer_column_header {
+          color: #eb7b0c;
+          font-size: 14px;
+          line-height: 1.2em;
+          margin-bottom: 10px;
+          margin-top: 0;
+          font-family: $medium-sans-font;
+          font-weight: normal;
+        }
       }
     }
   }

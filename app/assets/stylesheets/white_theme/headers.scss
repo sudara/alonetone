@@ -1,37 +1,29 @@
-#static_header {
-  @include match-dynamic-site-width();
-  #links {
-    ul.links {
-      li {
-        line-height: 34px;
-        float: left;
-        height: 32px;
-        a {
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 34px;
-          display: block;
-          float: left;
-          padding: 0 15px;
-        }
-        a:hover {
-          text-decoration: none;
-          background: $light_gray;
-        }
-      }
-      li.contact {
-        float: right;
-      }
-      li.current {
-        padding: 0 15px;
-        background: $gray;
-      }
-    }
-    .pagination {
-      width: 100%;
-      height: 32px;
-      margin-top: 1px;
-      text-align: center;
-    }
-  }
+#static_header {		
+	@include match-dynamic-site-width();		
+	max-width: 960px;		
+	#links {		
+		ul.links {		
+			li {		
+				line-height: 34px;		
+				float: left;		
+				height: 32px;		
+				a {		
+					font-size: 14px;		
+					font-weight: 400;		
+					line-height: 34px;		
+					display: block;		
+					float: left;		
+					padding: 0 15px;		
+				}		
+				a:hover {		
+					text-decoration: none;		
+					background: $light_gray;		
+				}		
+			}		
+			li.current {		
+				padding: 0 15px;		
+				background: $gray;		
+			}		
+		}		
+	}		
 }

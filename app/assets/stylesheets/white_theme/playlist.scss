@@ -1,187 +1,225 @@
 .playlist-sidebar {
-	@include samo-shadow-and-radius();
-	position: relative;
-	background-color: white;
-	.small-cover {
-		display: block;
-		width: 100%;
-		height: 0;
-		padding-bottom: 99%;
-		overflow-y: hidden;
-		img {
-			display: block;
-			width: 100%;
-			border-radius: 4px 4px 0 0;
-		}
-		svg {
-			border-radius: 4px 4px 0 0;
-		}
-	}
-	h1 {
-		line-height: 22px;
-		margin-top: $baseline/2;
-		margin-bottom: 0;
-		text-align: center;
-		&.cover {
+  @include samo-shadow-and-radius();
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+  .small-cover {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 99%;
+    overflow-y: hidden;
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+    }
+    svg {
+      border-radius: 4px 4px 0 0;
+    }
+  }
+  h1 {
+    line-height: 22px;
+    margin-top: $baseline/2;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: $sans-font;
+    font-weight: bold;
+    &.cover {
       font-size: 20px;
-			margin-top: 23px;
-		}
-		a {
-			font-size: 16px;
-			font-weight: bold;
-			line-height: 18px;
-			margin-top: 0;
-		}
-	}
-	h2 {
-		font-size: 14px;
-		font-weight: 100;
-		line-height: $baseline;
-		margin-top: 0;
-		margin-top: -2px;
-		text-align: center;
-		color: $not-quite-black;
-	}
-	ul.tracklist {
-		margin-top: $baseline / 2;
-		li {
-			display: flex;
-			clear: both;
-			overflow: auto;
-			min-height: 35px;
-			border-top: 1px solid $not-quite-white-opaque;
-			&:last-child {
-				border-bottom: 1px solid $not-quite-white-opaque;
-			}
-			&:hover, &.active {
-				background-color: $not-quite-black;
-				a.position-name-time {
-					color: $not-quite-white;
-					span.track-name {
-						color: $not-quite-white;
-					}
-					span.track-position {
-						color: #A6ABAB;
-					}
-					span.time-text {
-						color: #A6ABAB;
-					}
-				}
-			}
-			a.play-button, a.pause-button {
-				font-size: 12px;
-				line-height: 9px;
-				display: block;
-				float: left;
-				width: 24px;
-				height: 24px;
-				margin-top: 1px;
-				margin-right: 4px;
-				margin-left: 0;
-				padding: 4px 3px 5px 6px;
-				color: #AAA;
-				&:hover {
-					color: #FFF;
-					border-color: #FFF;
-				}
-			}
-			a.play-button {
-				i {
-					display: inline-block;
-					width: 24px;
-					height: 24px;
-					background-image: image-url('svg/icon_play_circled.svg');
-				}
-			}
-			a.pause-button {
-				i {
-					display: inline-block;
-					width: 24px;
-					height: 24px;
-					background-image: image-url('svg/icon_pause_circled.svg');
-				}
-			}
-			a.position-name-time {
-				font-size: 14px;
-				line-height: 20px;
-				display: block;
-				display: flex;
-				padding-top: 7px;
-				padding-bottom: 8px;
-				white-space: nowrap;
-				text-decoration: none;
+      margin-top: 23px;
+    }
+    a {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 18px;
+      margin-top: 0;
+    }
+  }
+  h2 {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: $baseline;
+    margin-top: 0;
+    margin-top: -2px;
+    text-align: center;
+    color: $not-quite-black;
+  }
+  ul.tracklist {
+    margin-top: $baseline / 2;
+    li {
+      display: flex;
+      clear: both;
+      overflow: auto;
+      min-height: 35px;
+      border-top: 1px solid $not-quite-white-opaque;
+      &:last-child {
+        border-bottom: 1px solid $not-quite-white-opaque;
+      }
+      &:hover,
+      &.active {
+        background-color: $not-quite-black;
+        a.position-name-time {
+          color: $not-quite-white;
+          span.track-name {
+            color: $not-quite-white;
+          }
+          span.track-position {
+            color: #a6abab;
+          }
+          span.time-text {
+            color: #a6abab;
+          }
+        }
+      }
+      a.play-button,
+      a.pause-button {
+        font-size: 12px;
+        line-height: 9px;
+        display: block;
+        float: left;
+        width: 24px;
+        height: 24px;
+        margin-top: 1px;
+        margin-right: 4px;
+        margin-left: 0;
+        padding: 4px 3px 5px 6px;
+        color: #aaa;
+        &:hover {
+          color: #fff;
+          border-color: #fff;
+        }
+      }
+      a.play-button {
+        i {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          background-image: image-url("svg/icon_play_circled.svg");
+        }
+      }
+      a.pause-button {
+        i {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          background-image: image-url("svg/icon_pause_circled.svg");
+        }
+      }
+      a.position-name-time {
+        font-size: 14px;
+        line-height: 20px;
+        display: block;
+        display: flex;
+        padding-top: 7px;
+        padding-bottom: 8px;
+        white-space: nowrap;
+        text-decoration: none;
         color: $not-quite-black;
-				flex-grow: 1;
-				span.track-position {
-					display: block;
-					float: left;
-					margin-right: 4px;
-					color: #868686;
-					min-width: 21px;
-				}
-				span.track-name {
-					font-family: $medium-sans-font;
-					display: block;
-					overflow: hidden;
-					width: 0;
-					white-space: nowrap;
-					text-overflow: ellipsis;
-					flex-grow: 1;
-				}
-				.time-text {
-					font-size: 12px;
-					margin-right: 12px;
-					color: $gray;
-				}
-			}
-		}
-	}
-	.sidebar-downloads {
-		margin-top: $baseline;
-		&.anchor-at-bottom {
-			width: 100%;
-		}
-		ul.downloads-links, ul.external-links {
-			margin-top: 0;
-			margin-bottom: 0;
-			li {
-				a {
-					font-family: $sans-font;
-					font-size: 12px;
-					font-weight: 300;
-					display: block;
-					box-sizing: border-box;
-					width: 100%;
-					padding: 10px $baseline / 2;
-					text-decoration: none;
-					color: white;
-					border-bottom: 1px solid black;
-					background-color: $not-quite-black;;
-					i {
-						font-size: 14px;
-						margin-right: 11px;
-					}
-					&:hover {
-						background-color: black;
-					}
-					.action-text {
-						font-size: 10px;
-						float: right;
-						color: $gray;
-					}
-				}
-			}
-		}
-	}
-	.edit_playlist_container {
-		max-width: 1150px;
-		margin-top: 15px;
-		text-align: left;
-		width: 100%;
-		position: absolute;
-		bottom: -50px;
-		.edit_playlist {
-			@include default-button();
-		}
-	}
+        flex-grow: 1;
+        span.track-position {
+          display: block;
+          float: left;
+          margin-right: 4px;
+          color: #868686;
+          min-width: 21px;
+        }
+        span.track-name {
+          font-family: $medium-sans-font;
+          display: block;
+          overflow: hidden;
+          width: 0;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          flex-grow: 1;
+        }
+        .time-text {
+          font-size: 12px;
+          margin-right: 12px;
+          color: $gray;
+        }
+      }
+    }
+  }
+  .sidebar-downloads {
+    margin-top: $baseline;
+    &.anchor-at-bottom {
+      width: 100%;
+    }
+    ul.downloads-links,
+    ul.external-links {
+      margin-top: 0;
+      margin-bottom: 0;
+      li {
+        background-color: $not-quite-black;
+        overflow: auto;
+        border-bottom: 1px solid black;
+        &:hover {
+          background-color: black;
+        }
+        a {
+          font-family: $sans-font;
+          font-size: 12px;
+          font-weight: 300;
+          display: block;
+          box-sizing: border-box;
+          width: 100%;
+          padding: 10px $baseline / 2;
+          text-decoration: none;
+          color: white;
+          &.spotify {
+            i {
+              background-image: image-url("svg/icon_playlist_spotify.svg");
+              display: inline-block;
+              background-size: 100%;
+              width: 17px;
+              height: 17px;
+            }
+          }
+          &.itunes {
+            i {
+              background-image: image-url("svg/icon_playlist_itunes.svg");
+              display: inline-block;
+              background-size: 100%;
+              width: 17px;
+              height: 17px;
+            }
+          }
+          i {
+            background-image: image-url("svg/icon_playlist_google_play.svg");
+            display: inline-block;
+            background-size: 100%;
+            width: 17px;
+            height: 17px;
+            font-size: 14px;
+            margin-right: 11px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+          }
+          .action-text {
+            font-size: 10px;
+            float: right;
+            color: $gray;
+            position: relative;
+            top: 3px;
+          }
+        }
+      }
+    }
+    ul.downloads-links li a i {
+      background-image: image-url("svg/icon_playlist_download.svg");
+    }
+  }
+  .edit_playlist_container {
+    max-width: 1150px;
+    margin-top: 15px;
+    text-align: left;
+    width: 100%;
+    position: absolute;
+    bottom: -50px;
+    .edit_playlist {
+      @include default-button();
+    }
+  }
 }

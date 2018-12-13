@@ -1,7 +1,5 @@
 // /home, /user, /playlists capsules
 
-// There's some playlist code in home.scss that shares too many styles with this file
-
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
@@ -17,7 +15,7 @@ ul.playlists {
     }
     font-size: 11px;
     width: 220px;
-    margin-right: 20px;
+    margin-right: 26.66px;
     margin-bottom: $baseline * 1.5;
     padding-bottom: $baseline / 4;
     text-align: center;
@@ -47,11 +45,11 @@ ul.playlists {
       display: block;
       overflow: hidden;
       margin-top: 16px;
-      line-height:11px;
+      line-height: 11px;
       padding: 0 6px;
       text-align: center;
     }
-    a.small_playlist_user{
+    a.small_playlist_user {
       color: $black;
       font-size: 10px;
     }
@@ -63,14 +61,14 @@ ul.playlists {
     }
   }
   @media #{$mobile} {
-		display: flex;
-		flex-direction: row;
-		width: $mobile-site-width-wide;
-		margin-bottom: 20px;
-		flex-wrap: wrap;
-		justify-content: space-around;
-		li.playlist {
-      display: block!important;
+    display: flex;
+    flex-direction: row;
+    width: $mobile-site-width-wide;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    li.playlist {
+      display: block !important;
       width: 45%;
       margin: 0;
       margin-bottom: 18px;
@@ -79,13 +77,13 @@ ul.playlists {
           width: 100%;
         }
       }
-		}
-	}
+    }
+  }
 }
-
 
 .playlists_container {
   @include match-dynamic-site-width();
+  max-width: 960px;
   ul.playlists {
     margin-right: -36px;
     li {
@@ -94,58 +92,57 @@ ul.playlists {
   }
 }
 
-
 .playlist {
-div.box {
-margin-bottom: 1px;
-padding-top: 9px;
-padding-left: 25px;
-background-color: $light_gray;
-h2 {
-font-size: 20px;
-font-weight: normal;
-line-height: 20px;
-margin: 0;
-margin-bottom: 4px;
-padding-right: 40px;
-}
-h3 {
-font-size: 12px;
-font-weight: normal;
-margin: 0;
-padding-bottom: 8px;
-}
-}
-div.info {
-position: relative;
-display: block;
-padding: 15px 15px 15px 20px;
-background-color: $playlist_box_silver;
-div.cover {
-position: relative;
-float: left;
-overflow: hidden;
-width: 148px;
-height: 136px;
-}
-p.description {
-float: left;
-font-size: 12px;
-width: 360px;
-margin-left: 20px;
-}
-.play_time {
-font-weight: bold;
-}
-}
-.empty {
-position: relative;
-margin-bottom: 1px;
-padding: 10px 20px 10px 20px;
-background-color: $orange_background;
-a {
-font-weight: bold;
-text-decoration: underline;
-}
-}
+  div.box {
+    margin-bottom: 1px;
+    padding-top: 9px;
+    padding-left: 25px;
+    background-color: $light_gray;
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 20px;
+      margin: 0;
+      margin-bottom: 4px;
+      padding-right: 40px;
+    }
+    h3 {
+      font-size: 12px;
+      font-weight: normal;
+      margin: 0;
+      padding-bottom: 8px;
+    }
+  }
+  div.info {
+    position: relative;
+    display: block;
+    padding: 15px 15px 15px 20px;
+    background-color: $playlist_box_silver;
+    div.cover {
+      position: relative;
+      float: left;
+      overflow: hidden;
+      width: 148px;
+      height: 136px;
+    }
+    p.description {
+      float: left;
+      font-size: 12px;
+      width: 360px;
+      margin-left: 20px;
+    }
+    .play_time {
+      font-weight: bold;
+    }
+  }
+  .empty {
+    position: relative;
+    margin-bottom: 1px;
+    padding: 10px 20px 10px 20px;
+    background-color: $orange_background;
+    a {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
 }

@@ -1,6 +1,11 @@
 class Profile < ApplicationRecord
   belongs_to :user
   validates :user, presence: true
+
+  def has_links?
+    bio.present? || website.present? || spotify.present? ||
+      twitter.present? || apple.present? || instagram.present?
+  end
 end
 
 # == Schema Information

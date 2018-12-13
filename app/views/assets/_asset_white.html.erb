@@ -108,9 +108,9 @@
       <% end %>
 
 	    <% if !asset.private? %>
-        <%= link_to 'mark as spam', spam_user_track_path(asset.user, asset), class: 'show_to_admin_or_owner edit_in_box', data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this  to post again'}, method: :put%>
+        <%= link_to 'mark as spam', spam_admin_asset_path(asset.id), class: 'show_to_admin_or_owner edit_in_box', data: {confirm: 'Are you sure you want to mark this as SPAM? This will make it harder for the user who posted this  to post again'}, method: :put%>
       <% else %>
-        <%= link_to 'unspam', unspam_user_track_path(asset.user, asset), class: 'show_to_admin_or_owner edit_in_box', data: {confirm: 'This will publish this track!'}, method: :put%>
+        <%= link_to 'unspam', unspam_admin_asset_path(asset.id), class: 'show_to_admin_or_owner edit_in_box', data: {confirm: 'This will publish this track!'}, method: :put%>
       <% end %>
 
     </div>
