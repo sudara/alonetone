@@ -130,7 +130,6 @@ RSpec.describe AssetsController, type: :controller do
     end
 
     it "should display user's track if it is hot" do
-      users(:sudara).update_attributes(assets_count: 3)
       assets(:valid_mp3).update_attributes(hotness: 2)
 
       get :index, params: { user_id: users(:sudara).login }
@@ -139,8 +138,8 @@ RSpec.describe AssetsController, type: :controller do
     end
 
     it "displays a custom message if user doesnt have tracks yet" do
-      get :index, params: { user_id: users(:brand_new_user).login }
-      expect(response.body).to match(/Looks like brandnewuser hasn't uploaded anything yet!/)
+      get :index, params: { user_id: users(:joeblow).login }
+      expect(response.body).to match(/Looks like joeblow hasn't uploaded anything yet!/)
     end
   end
 end
