@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe AssetNotification, type: :mailer do
   describe "upload_notification" do
-    let(:mail) { AssetNotification.upload_notification(assets(:valid_mp3), users(:sudara).email) }
+    let(:mail) { AssetNotification.upload_notification(assets(:valid_mp3), users(:sudara)) }
 
     it "renders the headers" do
       expect(mail.subject).to eq("[alonetone] '#{assets(:valid_mp3).user.name}' uploaded a new track!")
