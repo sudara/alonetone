@@ -212,7 +212,7 @@ RSpec.describe AssetsController, type: :request do
     it "should email followers and generate waveform via queue" do
       users(:sudara).add_or_remove_followee(users(:arthur).id)
       post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
-      expect(enqueued_jobs.size).to eq 2
+      expect(enqueued_jobs.size).to eq 1
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
