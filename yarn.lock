@@ -3736,8 +3736,9 @@ hosted-git-info@^2.1.4:
   integrity sha512-7T/BxH19zbcCTa8XkMlbK5lTo1WtgkFi3GvdWEyNuc4Vex7/9Dqbnpsf4JMydcfj9HCg4zUWFTL3Za6lapg5/w==
 
 "howler@https://github.com/goldfire/howler.js.git":
-  version "2.0.15"
-  resolved "https://github.com/goldfire/howler.js.git#535c26b63925f9001c9e1a6b049c0a2b223f8022"
+  version "2.1.0"
+  uid f768964b1617d5582368f399f91d9003547ef8c8
+  resolved "https://github.com/goldfire/howler.js.git#f768964b1617d5582368f399f91d9003547ef8c8"
 
 hpack.js@^2.1.6:
   version "2.1.6"
