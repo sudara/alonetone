@@ -4,6 +4,9 @@
       <% cache("tracks/#{logged_in?}/#{@assets.cache_key}") do %>
       <% if @user.assets_count > 0 %>
         <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav(@pagy) %>
+        </div>
         <%= render partial: 'asset', collection: @assets %>
       <% else %>
        <h2>Looks like <%= @user.name %> hasn't uploaded anything yet!</h2>

@@ -33,7 +33,7 @@ class AssetsController < ApplicationController
     else
       @assets = @user.assets.published
     end
-    @assets = @assets.recent.paginate(per_page: 200, page: params[:page])
+    @pagy, @assets = pagy(@assets.recent, page_param: :page)
 
     respond_to do |format|
       format.html # index.rhtml
