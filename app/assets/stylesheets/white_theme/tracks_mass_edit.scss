@@ -4,12 +4,14 @@
   @include match-dynamic-site-width("narrow");
   position: relative;
   div.track_options {
-    a.delete_green {
+    a {
       position: absolute;
       float: none;
-      right: $baseline;
+      right: 8px;
       z-index: 1;
-      margin-top: 9px;
+      margin-top: 8px;
+
+      @include default_button();
     }
   }
   > div.box {
