@@ -59,7 +59,6 @@
       margin-bottom: 10px;
     }
     h1 {
-      font-family: $black-font;
       font-size: $baseline;
       margin-top: 0;
       line-height: 32px;
@@ -81,7 +80,6 @@
     }
 
     div.track-stats {
-      font-family: $sans-font;
       font-size: 12px;
       margin-bottom: 0;
       display: flex;
@@ -125,7 +123,6 @@
       }
     }
     hr {
-      font-family: 'FontAwesome';
       position: relative; // needed for icon
       width: 550px;
       margin: ($baseline * 1.5) auto;
@@ -161,21 +158,18 @@
 
   .track-edit {
     margin-bottom: $baseline * 2; // to match MASS_EDIT
-
     header {
       input {
-        font-family: $sans-font;
-        font-weight: bold;
+        font-family: $black-font;
+        font-size: 24px;
         box-sizing: border-box;
         width: 100%;
         padding: 10px;
       }
     }
     textarea {
-      font-size: 18px;
-      line-height: 27px;
-      font-family: $serif-font;
-      font-size: 18px;
+      font-size: 16px;
+      line-height: 23px;
       position: relative;
       box-sizing: border-box;
       width: 100%;
