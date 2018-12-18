@@ -55,7 +55,7 @@
   </main>
 
   <footer id="site_footer" data-turbolinks-permanent>
-    <%= cache("footer/#{theme_name}/#{moderator?}", expires_in: 3.minutes) do %>
+    <%= cache("footer/#{theme_name}/#{logged_in?}/#{moderator?}", expires_in: 1.minute) do %>
     <%= render partial: 'shared/footer_white' %>
     <% end %>
   </footer>
