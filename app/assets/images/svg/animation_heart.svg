@@ -1,11 +1,11 @@
 <svg id="faveSVG" class="faveSVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-    <path class="outline" d="M370.26,162.44c-29,1-54.55,13.48-70.26,32.1-15.7-18.62-41.2-31.07-70.24-32.1-54.79-2-96.78,34.89-94.45,80.64C140.47,344.39,300,437.64,300,437.64S459.52,344.4,464.69,243.09C467,197.34,425,160.49,370.26,162.44Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
+    <path class="outline" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" fill="none" stroke="#b4b4b4" stroke-miterlimit="10" stroke-width="35" />
     <circle class="purplePop" cx="490" cy="410" r="123" fill="none" stroke="#CC3CF6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
     <circle class="greenPop" cx="206" cy="483" r="123" fill="none" stroke="#3BF686" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-    <circle class="bluePop" cx="340" cy="90" r="123" fill="none" stroke="#3D45F6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
+    <circle class="bluePop" cx="340" cy="120" r="123" fill="none" stroke="#3D45F6" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
     <circle class="yellowPop" cx="112" cy="336" r="123" fill="none" stroke="#F6CD3F" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
     <circle class="redPop" cx="128" cy="124" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
     <circle class="redPop2" cx="485" cy="130" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
     <circle class="redPop3" cx="480" cy="436" r="123" fill="none" stroke="#F6463E" stroke-miterlimit="10" stroke-linecap="square" stroke-width="0" />
-    <path class="heart" d="M370.26,162.44c-29,1-54.54,13.48-70.25,32.1-15.7-18.62-41.2-31.07-70.25-32.1-54.78-2-96.78,34.89-94.45,80.64C140.47,344.39,300,437.64,300,437.64S459.52,344.4,464.69,243.08C467,197.33,425,160.49,370.26,162.44Z" fill="#f6463e" stroke="#f6463e" stroke-miterlimit="10" stroke-width="21" />
+    <path class="heart" d="M299.64,180.06C254.2,95.52,123.26,90.77,87.58,197,42.14,332.24,189.85,374.17,299.64,484.42,409.43,374.17,557.14,332.24,511.7,197,476,90.77,345.08,95.52,299.64,180.06Z" transform-origin="20px 20px" fill="#f6463e" stroke="#f6463e" stroke-miterlimit="10" stroke-width="21" />
 </svg>
