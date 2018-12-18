@@ -213,11 +213,7 @@
       }
       input.comment_submit {
         margin-bottom: 0;
-        float: right;
-        clear: both;
-        cursor: pointer;
-        background-color: transparent;
-
+R        float: right;
         @include default_button();
       }
     }
