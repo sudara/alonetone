@@ -229,6 +229,9 @@
     h3 {
       margin-left: $baseline / 2;
     }
+    a {
+      @include default-button();
+    }
   }
   .info {
     padding-right: $baseline / 2;
