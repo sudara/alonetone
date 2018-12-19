@@ -1,3 +1,3 @@
 import bugsnag from '@bugsnag/js'
 
-export const bugsnagClient = bugsnag({ apiKey: '<%= Alonetone.try(:bugsnag_key) || "nokey" %>' })
+export const bugsnagClient = bugsnag({ apiKey: '<%= Alonetone.try(:bugsnag_key) || "nokey" %>', appType: 'js', user: { name: window.username } })
