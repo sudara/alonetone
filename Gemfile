@@ -24,7 +24,7 @@ gem 's3_direct_upload'
 # active record
 gem 'acts_as_list'
 gem 'has_permalink'
-gem 'authlogic', '~> 4.2'
+gem 'authlogic', '~> 4.2.0'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 gem 'recaptcha', :require => 'recaptcha/rails'
@@ -52,6 +52,7 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
+gem 'invisible_captcha'
 gem 'webpacker', '>= 4.0.x'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
