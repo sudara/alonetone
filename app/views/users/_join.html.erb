@@ -4,7 +4,7 @@
 
 <div id="signup" class="static_content box">
 	<%= simple_form_for(@user) do |f| -%>
-    <%= f.invisible_captcha :name %>
+    <%= invisible_captcha :name, :user %>
     <%= f.input :login, hint: "(Letters and numbers only)" %>
     <%= f.input :email, hint: "(we will send you an activation email)" %>
     <%= f.input :password, hint: "(pick a nice password)"%>
