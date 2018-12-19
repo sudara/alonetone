@@ -35,6 +35,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    InvisibleCaptcha.timestamp_enabled = false
   end
   config.before(:each) do
     DatabaseCleaner.start
