@@ -3,7 +3,6 @@ class UserSessionsController < ApplicationController
     @page_title = "Login"
     @user = User.new
     @user_session = UserSession.new
-    @bypass_recaptcha = true unless RECAPTCHA_ENABLED
   end
 
   def create
@@ -17,7 +16,6 @@ class UserSessionsController < ApplicationController
         flash.now[:error] = "There was a problem logging you in! Please check your login and password."
       end
       @user = User.new
-      @bypass_recaptcha = true unless RECAPTCHA_ENABLED
       render action: :new
     end
   end

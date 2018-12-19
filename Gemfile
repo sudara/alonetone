@@ -27,7 +27,6 @@ gem 'has_permalink'
 gem 'authlogic', '~> 4.2.0'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
-gem 'recaptcha', :require => 'recaptcha/rails'
 
 # view
 gem 'redcarpet'

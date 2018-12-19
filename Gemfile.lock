@@ -323,8 +323,6 @@ GEM
     rb-gravatar (1.0.5)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    recaptcha (4.13.1)
-      json
     record_tag_helper (1.0.0)
       actionview (~> 5.x)
     redcarpet (3.4.0)
@@ -515,7 +513,6 @@ DEPENDENCIES
   rails-controller-testing
   rakismet
   rb-fsevent
-  recaptcha
   record_tag_helper
   redcarpet
   request_store
