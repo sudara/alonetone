@@ -61,6 +61,9 @@
 			height: 5px;
 			background-color: $samo-orange;
 		}
+		&:not(.show) {
+			display: none;
+		}
 	}
 	&:not(.open) {
 		.seekbar {

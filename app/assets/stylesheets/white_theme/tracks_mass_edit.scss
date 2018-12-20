@@ -4,12 +4,13 @@
   @include match-dynamic-site-width("narrow");
   position: relative;
   div.track_options {
-    a.delete_green {
+    a {
       position: absolute;
       float: none;
-      right: $baseline;
+      right: 8px;
       z-index: 1;
-      margin-top: 9px;
+      margin-top: 8px;
+      @include default_button();
     }
   }
   > div.box {
@@ -31,33 +32,29 @@
       padding: $baseline / 2 $baseline;
       box-sizing: border-box;
       input#asset_title {
-        font-family: "Alright Sans", sans-serif;
-        font-weight: bold;
+        font-family: $black-font;
+        font-size: 24px;
         box-sizing: border-box;
         width: 100%;
-        max-width: 500px;
         padding: 10px;
-        font-size: 27px;
-        line-height: 27px;
       }
       textarea {
-        font-family: "Harriet Text", serif;
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 23px;
         position: relative;
-        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         width: 100%;
-        max-width: 500px;
         height: 300px;
-        margin-top: 27px;
-        margin-bottom: 27px;
-        padding: 13.5px;
+        margin-top: $baseline;
+        margin-bottom: $baseline;
+        padding: $baseline / 2;
         word-wrap: break-word;
-        color: #353535;
-        border: 1px solid #c7c6c3;
-        border-radius: 4px;
-        -webkit-box-shadow: 0 3px 4px -2px #65666627;
-        box-shadow: 0 3px 4px -2px #65666627;
+        color: $not-quite-black;
+        border: 1px solid $lightest-gray;
+        background-color: transparent;
+        @media #{$tablet} {
+          font-size: 16px;
+        }
       }
     }
   }

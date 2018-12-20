@@ -212,11 +212,8 @@
         }
       }
       input.comment_submit {
+        margin-bottom: 0;
         float: right;
-        clear: both;
-        cursor: pointer;
-        background-color: transparent;
-
         @include default_button();
       }
     }
@@ -300,6 +297,13 @@
         color: #f04e1a;
         border-radius: 2px;
         background-color: #ffd1b0;
+        text-indent: 0;
+      }
+      @media only screen and (max-width: 375px) {
+        .private_message + .comment_controls {
+          float: none;
+          margin-top: 40px;
+        }
       }
       .comment_controls {
         font-size: 12px;
@@ -317,6 +321,7 @@
           font-weight: bold;
           color: #e02a02;
         }
+        
       }
       h1,
       h2,
