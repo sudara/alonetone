@@ -1,6 +1,6 @@
 <div id="your_listens" class="playlist_source">
   <div class="mini_paginator">
-    <%= will_paginate @listens,{param_name: :listens_page, ignore_get_params: true} %>
+    <%== pagy_nav @listens_pagy %>
 	</div>
 	<div class="scriptaculous">
 	<%= render partial: 'listen', collection: @listens %>
