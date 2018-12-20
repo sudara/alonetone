@@ -25,7 +25,7 @@ class AssetsController < ApplicationController
   end
 
   def set_related_user_variables
-    all_user_tracks = Asset.for_user(@user.id)
+    all_user_tracks = @user.assets
     @hot_tracks_this_week = all_user_tracks.hottest.limit(10)
     @most_fav_tracks = all_user_tracks.favorited.limit(10)
     @most_commented_tracks = all_user_tracks.most_commented.limit(10)
