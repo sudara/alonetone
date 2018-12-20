@@ -13,7 +13,7 @@ export default class extends Controller {
 
   success() {
     this.textareaTarget.value = ''
-    this.responseTarget.innerHTML = '<div class="ajax_success">Submitted, thanks!</div>'
+    this.responseTarget.innerHTML = '<div class="ajax_success"><span>Submitted, thanks!</span></div>'
     this.responseTarget.classList.toggle('comment_success')
 
     this.spinnerTarget.style.display = 'none'
@@ -21,7 +21,7 @@ export default class extends Controller {
   }
 
   error() {
-    this.responseTarget.innerHTML = '<div class="ajax_fail">Sorry, that didn\'t work</div>'
+    this.responseTarget.innerHTML = '<div class="ajax_fail"><span>Sorry, that didn\'t work</span></div>'
     this.responseTarget.classList.toggle('comment_fail')
     this.spinnerTarget.style.display = 'none'
   }

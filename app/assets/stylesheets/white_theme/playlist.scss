@@ -1,6 +1,5 @@
 .playlist-sidebar {
   @include samo-shadow-and-radius();
-  overflow: hidden;
   position: relative;
   background-color: white;
   .small-cover {
@@ -143,6 +142,8 @@
   }
   .sidebar-downloads {
     margin-top: $baseline;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
     &.anchor-at-bottom {
       width: 100%;
     }

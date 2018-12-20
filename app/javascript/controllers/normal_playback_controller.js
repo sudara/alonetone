@@ -56,7 +56,7 @@ export default class extends PlaybackController {
 
   closeDetails() {
     this.element.classList.remove('open')
-    this.seekBarContainerTarget.style.display = 'none'
+    this.seekBarContainerTarget.classList.remove('show');
   }
 
   openDetails() {
@@ -81,7 +81,7 @@ export default class extends PlaybackController {
   // how much of the track is downloaded
   // but it's no longer possible with Howl
   updateSeekBarLoaded() {
-    this.seekBarContainerTarget.style.display = 'block'
+    this.seekBarContainerTarget.classList.add('show');
     this.seekBarLoadedTarget.style.width = '100%'
   }
   updateSeekBarPlayed() {
