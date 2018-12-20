@@ -11,7 +11,7 @@ class AssetNotification < ActionMailer::Base
     mail subject: "[alonetone] '#{@user.name}' uploaded a new track!", to: @user.email
   end
 
-  def upload_mass_notification(assets,user, _sent_at = Time.now)
+  def upload_mass_notification(assets, user, _sent_at = Time.now)
     @user = user
     @tracks = generate_track_hash(assets)
     @stop_following_link = stop_following_link
