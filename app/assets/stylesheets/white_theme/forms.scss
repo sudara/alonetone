@@ -181,7 +181,7 @@ input {
 [type="checkbox"]:not(:checked) + label:active:before,
 [type="checkbox"]:checked + label:active:before {
   border: 1px solid #d46a00 !important;
-  background-color: #eb7b0c !important;
+  background-color: $samo-orange !important;
 }
 
 [type="checkbox"]:not(:checked) + label:active:after {
