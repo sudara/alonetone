@@ -42,7 +42,7 @@
     margin-top: 0;
     margin-top: -2px;
     text-align: center;
-    color: $not-quite-black;
+    color: $dark-gray;
   }
   ul.tracklist {
     margin-top: $baseline / 2;
@@ -51,17 +51,17 @@
       clear: both;
       overflow: auto;
       min-height: 35px;
-      border-top: 1px solid $not-quite-white;
+      border-top: 1px solid $lighest-gray;
       &:last-child {
-        border-bottom: 1px solid $not-quite-white;
+        border-bottom: 1px solid $lighest-gray;
       }
       &:hover,
       &.active {
-        background-color: $not-quite-black;
+        background-color: $dark-gray;
         a.position-name-time {
-          color: $not-quite-white;
+          color: $lighest-gray;
           span.track-name {
-            color: $not-quite-white;
+            color: $lighest-gray;
           }
           span.track-position {
             color: $new-samo-gray;
@@ -114,7 +114,7 @@
         padding-bottom: 8px;
         white-space: nowrap;
         text-decoration: none;
-        color: $not-quite-black;
+        color: $dark-gray;
         flex-grow: 1;
         span.track-position {
           display: block;
@@ -152,7 +152,7 @@
       margin-top: 0;
       margin-bottom: 0;
       li {
-        background-color: $not-quite-black;
+        background-color: $dark-gray;
         overflow: auto;
         border-bottom: 1px solid black;
         &:hover {

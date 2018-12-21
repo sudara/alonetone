@@ -110,9 +110,9 @@
         margin-top: 8px;
         resize: none;
         color: #4f4d4d;
-        border: 1px solid $samo-medium-gray;
+        border: 1px solid $samo-light-gray;
         border-radius: 6px;
-        background-color: #f5f5f5;
+        background-color: $samo-alternate-background-gray;
         @media #{$tablet} {
           font-size: 16px;
         }
@@ -222,7 +222,7 @@
 
 .comment {
   position: relative;
-  background-color: #f5f5f5;
+  background-color: $samo-alternate-background-gray;
   &:last-child {
     border-bottom: 0;
     border-radius: 0 0 6px 6px;
