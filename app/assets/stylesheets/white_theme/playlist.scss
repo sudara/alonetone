@@ -51,9 +51,9 @@
       clear: both;
       overflow: auto;
       min-height: 35px;
-      border-top: 1px solid $not-quite-white-opaque;
+      border-top: 1px solid $not-quite-white;
       &:last-child {
-        border-bottom: 1px solid $not-quite-white-opaque;
+        border-bottom: 1px solid $not-quite-white;
       }
       &:hover,
       &.active {
