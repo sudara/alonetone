@@ -248,21 +248,10 @@ form.new_playlist {
   }
 }
 
-label.collection_check_boxes {
-  float: none;
-  margin: 0;
-  margin-left: 2px;
-  vertical-align: -2px;
-}
-
-
-
-
 
 
 /* CUSTOM SVG CHECKBOX REPLACEMENT */
 
-/* Base for label styling */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
   position: absolute;
