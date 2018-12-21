@@ -81,7 +81,7 @@ $waveform-playing: #302f2f;
   color: #fff;
   border: 0;
   border-radius: 4px;
-  background-color: #a6abab;
+  background-color: $new-samo-gray;
   box-shadow: none;
   @if $type == 'admin' {
   }
