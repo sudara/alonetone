@@ -41,7 +41,7 @@ textarea {
   border: 0;
   border: 1px solid #fff;
   border-radius: 4px;
-  background-color: #f5f5f5;
+  background-color: $samo-alternate-background-gray;
   &:focus {
     border: 1px solid $new-samo-gray;
   }
@@ -60,7 +60,7 @@ form {
     margin-bottom: $baseline;
     border: 1px solid #fff;
     border-radius: 4px;
-    background-color: #f5f5f5;
+    background-color: $samo-alternate-background-gray;
     &:focus {
       border: 1px solid $new-samo-gray;
     }
@@ -86,7 +86,7 @@ input {
     width: 250px;
     border: 1px solid #fff;
     border-radius: 4px;
-    background-color: #f5f5f5;
+    background-color: $samo-alternate-background-gray;
     &:focus {
       border: 1px solid $new-samo-gray;
     }
@@ -199,9 +199,9 @@ input {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $samo-medium-gray;
+  border: 1px solid $samo-light-gray;
   border-radius: 2.5px;
-  background-color: #f5f5f5 !important;
+  background-color: $samo-alternate-background-gray !important;
 }
 
 [type="checkbox"]:checked + label:before {
