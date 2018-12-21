@@ -14,7 +14,7 @@
 .comments_columns {
   h2 {
     padding-left: 16px;
-    color: #eb7b0c;
+    color: $samo-orange;
     margin-bottom: 16px;
     margin-top: 0px;
     line-height: 1em;
@@ -315,7 +315,7 @@
         a:first-child {
           font-weight: bold;
           margin-right: 22px;
-          color: #eb7b0c;
+          color: $samo-orange;
         }
         a:last-child {
           font-weight: bold;

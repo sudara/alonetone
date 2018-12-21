@@ -25,7 +25,7 @@ main {
       min-width: 320px;
     }
     h2 {
-      color: #eb7b0c;
+      color: $samo-orange;
       padding-left: 16px;
       margin-bottom: 16px;
       line-height: 1em;
@@ -161,7 +161,7 @@ main {
             div.follow_button {
               @include default_button();
               background-color: #fff;
-              color: #eb7b0c;
+              color: $samo-orange;
               margin-left: 24px;
               margin-right: 8px;
               &:hover {
@@ -252,7 +252,7 @@ main {
         }
         .user_location {
           font-weight: bold;
-          color: #eb7b0c;
+          color: $samo-orange;
           font-size: 14px;
           padding: 16px 36px;
         }
