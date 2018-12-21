@@ -338,21 +338,6 @@ label.collection_check_boxes {
   display: block;
 }
 
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
-  border-color: #bbb;
-  background-color: #ddd;
-  box-shadow: none;
-}
-[type="checkbox"]:disabled:checked + label:after {
-  color: #999;
-  display: block;
-}
-[type="checkbox"]:disabled + label {
-  color: #aaa;
-}
-
 /* accessibility */
 [type="checkbox"]:checked:focus + label:before,
 [type="checkbox"]:not(:checked):focus + label:before {
