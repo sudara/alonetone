@@ -1,8 +1,11 @@
-/* Remove Blue Glow from Webkit Browsers on focus */
 input,
 textarea,
 select {
   outline: 0;
+}
+
+input {
+  font-family: $sans-font;
 }
 
 input[type="search"],
@@ -13,40 +16,9 @@ textarea {
   -webkit-appearance: none;
 }
 
-input {
-  font-family: $sans-font;
-}
-
 input[type="submit"] {
   cursor: pointer;
   @include default-button();
-}
-
-.field_with_errors {
-  width: 250px;
-  margin-left: -8px;
-  padding: 8px;
-  background-color: $samo-orange;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  label {
-    color: white;
-  }
-}
-
-.error {
-  display: block;
-  clear: both;
-  color: white;
-  margin-bottom: 8px;
-  margin-top: -4px;
-}
-.hint {
-  font-style: italic;
-  display: block;
-  clear: left;
-  text-align: right;
-  color: #555;
 }
 
 label {
@@ -72,6 +44,32 @@ textarea {
   background-color: #f5f5f5;
   &:focus {
     border: 1px solid #a6abab;
+  }
+}
+
+form {
+  br {
+    display: none;
+  }
+  label {
+    margin-bottom: 2px !important;
+  }
+  input,
+  textarea,
+  select {
+    margin-bottom: $baseline;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    &:focus {
+      border: 1px solid #a6abab;
+    }
+  }
+  input[type="file"] {
+    background-color: transparent;
+  }
+  textarea {
+    width: 100%;
   }
 }
 
@@ -108,20 +106,38 @@ input {
   }
 }
 
-form#reset-password {
-  input[type="text"] {
-    border: 1px solid #fff;
-    border-radius: 4px;
-    background-color: #f5f5f5;
-    margin-right: 10px;
-    &:focus {
-      border: 1px solid #a6abab;
-    }
+/* VALIDATION FEEDBACK */
+
+.field_with_errors {
+  width: 250px;
+  margin-left: -8px;
+  padding: 8px;
+  background-color: $samo-orange;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  label {
+    color: white;
   }
 }
 
-/* UPLOAD FORM */
+.error {
+  display: block;
+  clear: both;
+  color: white;
+  margin-bottom: 8px;
+  margin-top: -4px;
+}
 
+.hint {
+  font-style: italic;
+  display: block;
+  clear: left;
+  text-align: right;
+  color: #555;
+}
+
+
+/* UPLOAD FORM */
 input#asset_data_ {
   border: 1px solid #fff;
   border-radius: 4px;
@@ -129,84 +145,6 @@ input#asset_data_ {
   margin-right: 10px;
   &:focus {
     border: 1px solid #a6abab;
-  }
-}
-
-form {
-  br {
-    display: none;
-  }
-  label {
-    margin-bottom: 2px !important;
-  }
-  input,
-  textarea,
-  select {
-    margin-bottom: $baseline;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    background-color: #f5f5f5;
-    &:focus {
-      border: 1px solid #a6abab;
-    }
-  }
-  input[type="file"] {
-    background-color: transparent;
-  }
-  textarea {
-    width: 100%;
-  }
-}
-
-.settings-box {
-  h2 {
-    margin-bottom: $baseline;
-  }
-  .static_content {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    &:last-child {
-      padding-top: $baseline !important;
-    }
-  }
-  select {
-    margin-top: 6px;
-  }
-}
-
-.edit-your-profile-box {
-  .static_content {
-    &:last-child {
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-}
-
-.change-your-picture-box {
-  br {
-    display: none;
-  }
-  form {
-    margin-top: $baseline;
-    input:last-child {
-      display: block;
-      margin-top: $baseline;
-    }
-  }
-}
-
-.your-account-box {
-  .static_content:last-child {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    .static_content {
-      padding: 0 !important;
-      padding-bottom: $baseline !important;
-      input:last-child {
-        margin-top: $baseline !important;
-      }
-    }
   }
 }
 
