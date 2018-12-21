@@ -28,7 +28,7 @@ label {
   margin: 2px 0;
   text-align: left;
   text-transform: uppercase;
-  color: #a6abab;
+  color: $new-samo-gray;
   abbr {
     display: none;
   }
@@ -43,7 +43,7 @@ textarea {
   border-radius: 4px;
   background-color: #f5f5f5;
   &:focus {
-    border: 1px solid #a6abab;
+    border: 1px solid $new-samo-gray;
   }
 }
 
@@ -62,7 +62,7 @@ form {
     border-radius: 4px;
     background-color: #f5f5f5;
     &:focus {
-      border: 1px solid #a6abab;
+      border: 1px solid $new-samo-gray;
     }
   }
   input[type="file"] {
@@ -88,7 +88,7 @@ input {
     border-radius: 4px;
     background-color: #f5f5f5;
     &:focus {
-      border: 1px solid #a6abab;
+      border: 1px solid $new-samo-gray;
     }
   }
   &.radio {
@@ -175,7 +175,7 @@ input {
 }
 
 [type="checkbox"]:not(:checked) + label:hover:before {
-  border: 1px solid #a6abab !important;
+  border: 1px solid $new-samo-gray !important;
 }
 
 [type="checkbox"]:not(:checked) + label:active:before,

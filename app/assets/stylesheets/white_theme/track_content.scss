@@ -88,7 +88,7 @@
       .created {
         font-size: 14px;
         display: block;
-        color: #A6ABAB;
+        color: $new-samo-gray;
         flex-grow: 1;
         time {
           font-weight: bold;
@@ -100,7 +100,7 @@
         padding-right: 8px;
         padding-left: 8px;
         text-align: center;
-        color: #A6ABAB;
+        color: $new-samo-gray;
         display: flex;
         justify-content: start;
       }
@@ -109,7 +109,7 @@
         font-weight: bold;
         padding-left: 8px;
         text-align: center;
-        color: #A6ABAB;
+        color: $new-samo-gray;
         display: flex;
         justify-content: start;
       }
