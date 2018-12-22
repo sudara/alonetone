@@ -16,11 +16,7 @@ before_install:
 before_script:
 - mysql -e 'create database alonetone_test';
 - gem update --system
-- bundle exec rake copy_config
-- bundle exec rake db:drop
-- bundle exec rake db:create
-- bundle exec rake db:schema:load
-- bundle exec rake db:seed
+- bundle exec rake copy_config db:drop db:create db:schema:load db:seed
 script: bundle exec rake spec
 notifications:
   email:
