@@ -12,6 +12,7 @@ before_install:
 - sudo apt-get install -y libsndfile-dev lame
 - sudo apt-get -y --reinstall install imagemagick
 - printf "\n" | pecl install imagick-beta
+- yarn
 before_script:
 - mysql -e 'create database alonetone_test';
 - gem update --system
