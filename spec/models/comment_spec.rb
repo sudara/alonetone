@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
-  fixtures :comments, :users, :assets
+  fixtures :users, :comments, :assets
 
   let(:new_comment) { assets(:valid_mp3).comments.new(body: 'test', commentable_type: 'Asset', commentable_id: '1') }
 
@@ -32,10 +32,6 @@ RSpec.describe Comment, type: :model do
   end
 
   context "saving" do
-    it "should save with just a body and a commentable" do
-      expect(new_comment.save).to be_truthy
-    end
-
     it "should store user_id when commenting on an asset" do
       expect(new_comment.save).to be_truthy
       expect(new_comment.user_id).to eq(assets(:valid_mp3).user_id)
