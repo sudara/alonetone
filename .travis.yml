@@ -1,13 +1,13 @@
 dist: trusty
 sudo: required
 language: ruby
-node_js:
-- 'node'
 cache:
 - bundler
 - yarn
 - npm
 before_install:
+- npm i -g node@latest
+- sudo apt-get install -y libsndfile-dev lame
 - yarn
 before_script:
 - mysql -e 'create database alonetone_test';
