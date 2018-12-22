@@ -18,10 +18,6 @@ RSpec.describe Comment, type: :model do
       expect(comments(:spam_comment_on_asset_by_guest)).to be_valid
     end
 
-    it "should be valid without a commenter_id" do
-      expect(comments(:comment_on_update)).to be_valid
-    end
-
     it "should be able to be private as user" do
       expect(comments(:private_comment_on_asset_by_user)).to be_valid
     end
