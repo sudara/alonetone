@@ -15,28 +15,7 @@ asset = musician.assets.create(:mp3 => mp3, :title => 'muppets!', :description =
 
 asset.listens.create(
   :listener     => moderator,
-  :track_owner  => asset.user, 
+  :track_owner  => asset.user,
   :user_agent   => 'db seeds',
   :ip           => '127.0.0.1'
-) 
-
-forum = Forum.create
-forum.name = "Making Music"
-forum.description = "Talk about how you do it, how you want to do it, and how you feel about it."
-forum.save
-
-topic = admin.topics.build(
-  :title => "Music and passion",
-  :body  => "Lets tawlk"
 )
-
-topic.forum = forum
-topic.save
-
-post = admin.posts.build(
-  :body => "keep moving on"
-)
-
-post.topic = topic
-post.forum = forum
-post.save
