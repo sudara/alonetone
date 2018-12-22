@@ -1,10 +1,12 @@
 dist: trusty
 sudo: required
 language: ruby
+node_js:
+- 'node'
 cache:
 - bundler
 - yarn
-- directories - "node_modules"
+- npm
 before_install:
 - yarn
 before_script:
