@@ -87,6 +87,10 @@ end
 
 ## Who loves tests! You do? You do!
 group :test do
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'capybara'
+  gem 'percy-capybara'
   gem 'rspec-rails', :require => false
   gem 'rspec-mocks', :require => false
   gem 'guard-rspec', :require => false
