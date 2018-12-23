@@ -10,13 +10,16 @@ require "selenium/webdriver"
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 Capybara.register_driver :headless_chrome do |app|
-  options = Selenium::WebDriver::Remote::Capabilities.chrome(
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: { args: %w(headless disable-gpu no-sandbox) }
   )
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-end
-Capybara.javascript_driver = :headless_chrome
 
+  Capybara::Selenium::Driver.new app,
+    browser: :chrome,
+    desired_capabilities: capabilities
+end
+
+Capybara.javascript_driver = :headless_chrome
 Percy.config.default_widths = [375, 1280]
 
 # Checks for pending migrations before tests are run.
