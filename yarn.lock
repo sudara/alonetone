@@ -764,23 +764,23 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@bugsnag/browser@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-5.0.2.tgz#6fcabdd622da82a586428f4b599c9a3fbc664167"
-  integrity sha512-uhjfoMU8MGRHdsIE8QqGclhopxcrlGgbwrZVLsWVgtiet2H/phGdwJl/6DTw+W9rTK1SmW1CpzAUCN+XfVI+JA==
+"@bugsnag/browser@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-5.1.0.tgz#e1bad87ae96d01fd5b4ae291d33f1a579db20d33"
+  integrity sha512-u6M/s3h81LQIWcETawliGsHtUTm1LexbP6p7x1RsFTy1bHYd5JOk/ZPZxYuQQ/Hy4W9lKWFza5JeXYecFjJgWA==
 
-"@bugsnag/js@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-5.0.2.tgz#5bfffca3ed87a27e4ba898a9f46c4e377c3d65e1"
-  integrity sha512-CdilcBCrP2vdosbtoMzEjORX4/BDGTOVp1+WrYY58KbjFoSDc1fUmjPjqAmHxdZKty7oi5PAQeQv0fh3nsdtgQ==
+"@bugsnag/js@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-5.1.0.tgz#a60a378d7ec234cbe438caaa330d1e53c48db423"
+  integrity sha512-3ybucr3twZ11P1HFzFbDBjbFx5ylQwZoev5G0Db2n9QTd8ifD+abLaG20h1iWcB1qsyrJxGtCxb3PBofRgbkUA==
   dependencies:
-    "@bugsnag/browser" "^5.0.2"
-    "@bugsnag/node" "^5.0.2"
+    "@bugsnag/browser" "^5.1.0"
+    "@bugsnag/node" "^5.1.0"
 
-"@bugsnag/node@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-5.0.2.tgz#7d762f4c5d416cdfe01df86eff8d7cc53401d0e5"
-  integrity sha512-ad1lR6cE8mXOzFVV9wt/pP8fxZ2gfCvR+p7BIm4c+urSaw+0UnW+/ej6uozbYmhlKTpp8KE1SXU/lr16EM2vvA==
+"@bugsnag/node@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-5.1.0.tgz#8e98835c728c9e529c399f47519a20eac8391fc7"
+  integrity sha512-j2W2UMcdIMhFUIvD5LKedbcVmib9qD6yDoGXiqk2kBoxjeSNlA3jKXNvcd/TJp9Ilvp6n2QxyjR43ti1T5nUPg==
   dependencies:
     byline "^5.0.0"
     error-stack-parser "^2.0.2"
