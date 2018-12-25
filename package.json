@@ -5,7 +5,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@bugsnag/js": "^5.1.0",
-    "@rails/webpacker": "^4.0.0-pre.3",
+    "@rails/webpacker": "^4.0.0-rc.2",
     "@shopify/draggable": "^1.0.0-beta.7",
     "babel-loader": "^8.0.4",
     "babel-preset-minify": "^0.5.0",
