@@ -1,5 +1,7 @@
-import { TweenLite, CSSPlugin, TimelineMax } from 'gsap'
+import { TweenLite, CSSPlugin, TimelineMax } from 'gsap/all'
 import morphSVGPlugin from './MorphSVGPlugin'
+
+const plugins = [CSSPlugin]
 
 export default function PlayAnimation() {
   const mainSVG = document.getElementById('playAnimationSVG')
@@ -38,7 +40,7 @@ export default function PlayAnimation() {
     TweenLite.set(mainSVG, {
       visibility: 'visible'
     })
-    
+
     TweenLite.set(dotty, {
       transformOrigin: '50% 50%',
       scale: 1.3,
