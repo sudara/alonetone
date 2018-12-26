@@ -1,7 +1,7 @@
-import { TweenLite, CSSPlugin, TimelineMax } from 'gsap/all'
+import { TweenLite, Ease, CSSPlugin, TimelineMax } from 'gsap/all'
 import morphSVGPlugin from './MorphSVGPlugin'
 
-const plugins = [CSSPlugin]
+const plugins = [CSSPlugin, Ease]
 
 export default function PlayAnimation() {
   const mainSVG = document.getElementById('playAnimationSVG')
