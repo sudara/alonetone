@@ -1,5 +1,7 @@
-import { TweenLite, CSSPlugin, TimelineMax } from 'gsap'
+import { TweenLite, CSSPlugin, TimelineMax } from 'gsap/all'
 import morphSVGPlugin from './MorphSVGPlugin'
+
+const plugins = [CSSPlugin]
 
 export default function LargePlayAnimation() {
 
@@ -10,7 +12,7 @@ export default function LargePlayAnimation() {
     },
     selectAll = function(s) {
       return document.querySelectorAll(s);
-    }, 
+    },
     mainSVG = select('.largePlaySVG'),
     mainTl, dottyRotationTl,eyesTl,
     centerCircle = select('.centerCircle'),
@@ -21,41 +23,41 @@ export default function LargePlayAnimation() {
     dotty = selectAll('.dotty'),
     icon = select('.icon'),
     allPauseLines = selectAll('.pauseGroup line')
-      
+
 
 
   this.init = function() {
     TweenLite.set(mainSVG, {
       visibility: 'visible'
     })
-   
+
    TweenLite.set([dotty, centerCircle], {
     transformOrigin:'50% 50%',
     //scale:1.2,
     strokeWidth:0
    })
    TweenLite.set(icon, {
-    transformOrigin:'35% 50%'    
+    transformOrigin:'35% 50%'
    })
    TweenLite.set(outline, {
-    transformOrigin:'50% 50%'    
+    transformOrigin:'50% 50%'
    })
 
   TweenLite.set([pauseContainer, pauseGroup, pauseLoopGroup], {
     transformOrigin:'50% 50%',
     scaleY:0
-   })   
-    
+   })
+
    eyesTl = new TimelineMax({repeat:-1}).timeScale(1.8);
    dottyRotationTl = new TimelineMax({}).timeScale(1.9);
     mainTl = new TimelineMax({paused:true}).timeScale(2.6);
-   
+
     dottyRotationTl.to(dotty, 4, {
      rotation:360,
      repeat:-1,
      ease:Linear.easeNone
-    })   
-   
+    })
+
    eyesTl.to(pauseLoopGroup, 0.4, {
     scaleY:0.12,
     ease:Sine.easeInOut
@@ -68,7 +70,7 @@ export default function LargePlayAnimation() {
     ease:Sine.easeIn,
     delay:1
    })
-   
+
    .to(pauseLoopGroup, 0.65, {
     scaleY:0.25,
     //y:-20,
@@ -105,9 +107,9 @@ export default function LargePlayAnimation() {
     ease:Sine.easeIn,
     delay:1
    })
-   
+
    //main
-   
+
    mainTl.addLabel('setPlay')
    .addLabel('showLoading')
    .to(dotty, 1, {
@@ -136,7 +138,7 @@ export default function LargePlayAnimation() {
    //
    .addLabel('showPause')
    .to(pauseContainer, 0.5, {
-    scaleY:0   
+    scaleY:0
    })
 
    .to(centerCircle, 1, {
@@ -154,7 +156,7 @@ export default function LargePlayAnimation() {
     scaleY:1,
     ease:Power1.easeInOut
     //ease:Elastic.easeOut.config(0.95,0.3)
-   },'-=1.2')   
+   },'-=1.2')
    .staggerTo(allPauseLines, 1, {
     cycle:{
      attr:[{x1:235, x2:235}, {x1:365, x2:365}]
@@ -165,27 +167,27 @@ export default function LargePlayAnimation() {
   }
 
   this.play = function(pos) {
-   if(pos){mainTl.play(pos);} return;    
+   if(pos){mainTl.play(pos);} return;
     mainTl.play();
   }
   this.pause = function(pos) {
-   if(pos){mainTl.pause(pos);} return;    
+   if(pos){mainTl.pause(pos);} return;
     mainTl.pause();
   }
   this.timeline = function() {
     return mainTl;
   }
-  
+
   this.setPlay = function(){
    mainTl.pause('setPlay')
   }
   this.showLoading = function(){
    mainTl.play('showloading')
-  }  
+  }
   this.showPause = function(){
    mainTl.play('showPause')
   }
  this.setPause = function(){
    mainTl.pause('setPause')
-  }  
+  }
 }
