@@ -14,6 +14,7 @@
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.0",
     "rails-ujs": "^5.2.2",
+    "seedrandom": "^2.4.4",
     "stimulus": "^1.1.0",
     "turbolinks": "^5.2.0"
   },
@@ -24,6 +25,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-dev-server": "^3.1.13"
   }
 }
