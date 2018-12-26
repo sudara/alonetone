@@ -1,7 +1,7 @@
-import { TweenLite, Ease, CSSPlugin, TimelineMax } from 'gsap/all'
+import { TweenLite, Linear, Elastic, Power1, Power2, Power3, Sine, CSSPlugin, TimelineMax } from 'gsap/all'
 import morphSVGPlugin from './MorphSVGPlugin'
 
-const plugins = [CSSPlugin, Ease]
+const plugins = [CSSPlugin]
 
 export default function FaveAnimation(myDiv) {
     var mainTl;
