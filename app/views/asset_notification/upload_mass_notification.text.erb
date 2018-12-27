@@ -1,10 +1,10 @@
 Hi!
 
-<%= @user.name.capitalize %> just uploaded a track to alonetone! <%= @exclamation %>!
+<%= @asset_author.name.capitalize %> just uploaded a track to alonetone! <%= @exclamation %>!
 
 You can listen to
 <% if @assets.empty? %>
-  all songs by <%= @user.name.capitalize %> on alonetone: <%= @upload_user_url %>
+  all songs by <%= @asset_author.name.capitalize %> on alonetone: <%= @upload_user_url %>
 <% else %>
   <% @assets.each do |track| %>
     <%= track[:title] %> on alonetone: <%= track[:play_link] %>
@@ -13,6 +13,6 @@ You can listen to
 
 ------------------------------
 
-You are getting this email because you decided to follow <%= @user.name.capitalize %>. You can change your mind by clicking clicking here: <%= @stop_following_link %>
+You are getting this email because you decided to follow <%= @asset_author.name.capitalize %>. You can change your mind by clicking clicking here: <%= @stop_following_link %>
 
 You can also turn off all emails by unsubscribing here: <%= @unsubscribe_link %>.
