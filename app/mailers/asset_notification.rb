@@ -13,7 +13,7 @@ class AssetNotification < ActionMailer::Base
 
   def upload_mass_notification(assets, user, _sent_at = Time.now)
     @user = user
-    @tracks = generate_track_hash(assets)
+    @assets = generate_asset_hash(assets)
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
@@ -25,7 +25,7 @@ class AssetNotification < ActionMailer::Base
 
   # I'm sure there is some fancy shmancy way to do the same thing
   # but I can't think of it right now.
-  def generate_track_hash(assets)
+  def generate_asset_hash(assets)
     assets_array = []
     assets.each do |asset|
       assets_array << { title: asset.title, play_link: play_link_for(asset) } if asset.title
