@@ -221,11 +221,15 @@ RSpec.describe AssetsController, type: :request do
     # in order to test that job gets kicked off on mass_edit
     # hit it directly
     it "should send an email to followers" do
+      # add two followers
+      # to test that ActionMailer sends multiple emails
       users(:sudara).add_or_remove_followee(users(:arthur).id)
+      users(:aaron).add_or_remove_followee(users(:arthur).id)
+      # binding.pry
       get mass_edit_user_tracks_path(users(:arthur), assets: users(:arthur).assets.collect(&:id))
-      expect(enqueued_jobs.size).to eq 1
+      expect(enqueued_jobs.size).to eq 2
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
-      expect(enqueued_jobs.first[:job]).to eq AssetNotificationJob
+      expect(enqueued_jobs.last[:job]).to eq AssetNotificationJob
     end
 
     it 'should successfully upload 2 mp3s' do
