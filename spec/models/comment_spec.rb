@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
-  fixtures :comments, :users, :assets
+  fixtures :users, :comments, :assets
 
   let(:new_comment) { assets(:valid_mp3).comments.new(body: 'test', commentable_type: 'Asset', commentable_id: '1') }
 
@@ -18,10 +18,6 @@ RSpec.describe Comment, type: :model do
       expect(comments(:spam_comment_on_asset_by_guest)).to be_valid
     end
 
-    it "should be valid without a commenter_id" do
-      expect(comments(:comment_on_update)).to be_valid
-    end
-
     it "should be able to be private as user" do
       expect(comments(:private_comment_on_asset_by_user)).to be_valid
     end
@@ -32,10 +28,6 @@ RSpec.describe Comment, type: :model do
   end
 
   context "saving" do
-    it "should save with just a body and a commentable" do
-      expect(new_comment.save).to be_truthy
-    end
-
     it "should store user_id when commenting on an asset" do
       expect(new_comment.save).to be_truthy
       expect(new_comment.user_id).to eq(assets(:valid_mp3).user_id)

@@ -40,20 +40,20 @@ body main #columns {
           box-sizing: border-box;
           cursor: pointer;
           border-bottom: 1px solid $light-gray;
-          background-color: $orange-background;
+          background-color: $samo-orange;
           color: $white;
         }
 				li, li a {
 					font-size: 15px;
           text-decoration: none;
 					&.disabled {
-						color: $disabled;
+						color: $samo-gray;
 					}
         }
         li a{
           display: block;
           width:100%;
-          color: $not-quite-black;
+          color: $dark-gray;
           background-color: $white;
         }
 			}

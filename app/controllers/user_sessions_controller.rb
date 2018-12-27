@@ -3,11 +3,10 @@ class UserSessionsController < ApplicationController
     @page_title = "Login"
     @user = User.new
     @user_session = UserSession.new
-    @bypass_recaptcha = true unless RECAPTCHA_ENABLED
   end
 
   def create
-    @user_session = UserSession.new(user_session_params.merge(remember_me: true)) # always stay logged in
+    @user_session = UserSession.new(user_session_params)
     if @user_session.save
       redirect_back_or_default(user_home_path(@user_session.user))
     else
@@ -17,7 +16,6 @@ class UserSessionsController < ApplicationController
         flash.now[:error] = "There was a problem logging you in! Please check your login and password."
       end
       @user = User.new
-      @bypass_recaptcha = true unless RECAPTCHA_ENABLED
       render action: :new
     end
   end
@@ -35,6 +33,6 @@ class UserSessionsController < ApplicationController
   private
 
   def user_session_params
-    params.require(:user_session).permit(:password, :login).to_h
+    params.require(:user_session).permit(:password, :login).to_h.merge(remember_me: true)
   end
 end

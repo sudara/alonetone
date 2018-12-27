@@ -38,13 +38,6 @@ comment_with_no_body:
   commentable_type: Asset
   commentable_id: 1
 
-comment_on_update:
-  id: 6
-  commentable_type: Update
-  commentable_id: 1
-  body: "Well, this is an awesome blog entry"
-  is_spam: false
-
 private_comment_on_asset_by_guest:
   id: 7
   commentable_type: Asset

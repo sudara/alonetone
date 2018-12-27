@@ -259,7 +259,7 @@
 			padding-bottom: 0;
 			padding-left: 16px;
 			border-radius: 6px;
-			background-color: #F5F5F5;
+			background-color: $samo-alternate-background-gray;
 
 			.alonetoner {
 				width: 50px;
@@ -349,7 +349,7 @@
               padding-right: 8px;
               padding-left: 8px;
               text-align: center;
-              color: #A6ABAB;
+              color: $new-samo-gray;
               display: flex;
               justify-content: start;
             }
@@ -358,7 +358,7 @@
               font-weight: bold;
               padding-left: 8px;
               text-align: center;
-              color: #A6ABAB;
+              color: $new-samo-gray;
               display: flex;
               justify-content: start;
             }

@@ -4,12 +4,11 @@
 
 <div id="signup" class="static_content box">
 	<%= simple_form_for(@user) do |f| -%>
+    <%= invisible_captcha :name, :user %>
     <%= f.input :login, hint: "(Letters and numbers only)" %>
     <%= f.input :email, hint: "(we will send you an activation email)" %>
     <%= f.input :password, hint: "(pick a nice password)"%>
     <%= f.input :password_confirmation, hint: "(enter it once again)" %>
-    <%= raw(recaptcha_tags(display: {theme: 'white'})) unless @bypass_recaptcha %>
-    <br/>
     <%= f.button :submit, "Join Alonetone" %>
 	<% end %>
 </div>

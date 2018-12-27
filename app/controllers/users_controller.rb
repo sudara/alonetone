@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :ip_is_acceptable?, only: :create
   before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
   before_action :require_login, except: %i[index show new create activate destroy]
+  invisible_captcha only: [:create, :update], honeypot: :name
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
@@ -30,10 +31,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    passed_recaptcha?
     @user = User.new(user_params)
-    if @user.valid? && passed_recaptcha? && @user.save_without_session_maintenance
-      session[:recaptcha] = false # make sure they have to recaptcha for new user
+    if @user.valid? && @user.save_without_session_maintenance
       @user.reset_perishable_token!
       UserNotification.signup(@user).deliver_now
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
@@ -120,14 +119,6 @@ class UsersController < ApplicationController
 
   def ip_is_acceptable?
     !is_from_a_bad_ip?
-  end
-
-  def passed_recaptcha?
-    if (session[:recaptcha] == true) || !RECAPTCHA_ENABLED
-      @bypass_recaptcha = true # bypass when already entered or setting not present
-    else
-      @bypass_recaptcha = session[:recaptcha] = verify_recaptcha(model: @user)
-    end
   end
 
   def prepare_meta_tags

@@ -199,10 +199,8 @@ class AssetsController < ApplicationController
 
     session[:white_theme_notified] ||= 1
     session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
-    flash.now[:ok] = "Hey, #{current_user.name}, we've been working hard on an updated, mobile friendly theme.<br/>" \
-                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>Learn More</a> " \
-                     "on the new forums or switch back by clicking " +
-                     "<a href ='/toggle_theme'>Toggle Theme</a> in the footer.".html_safe
+    flash.now[:ok] = "#{current_user.name}: missing something on white theme? Let us know " \
+                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>on the forums</a>".html_safe
   end
 
   def asset_params
