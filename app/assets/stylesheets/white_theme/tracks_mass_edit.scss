@@ -49,8 +49,8 @@
         margin-bottom: $baseline;
         padding: $baseline / 2;
         word-wrap: break-word;
-        color: $not-quite-black;
-        border: 1px solid $lightest-gray;
+        color: $dark-gray;
+        border: 1px solid $samo-light-gray;
         background-color: transparent;
         @media #{$tablet} {
           font-size: 16px;

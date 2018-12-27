@@ -24,10 +24,9 @@ gem 's3_direct_upload'
 # active record
 gem 'acts_as_list'
 gem 'has_permalink'
-gem 'authlogic', '~> 4.2'
+gem 'authlogic'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
-gem 'recaptcha', :require => 'recaptcha/rails'
 
 # view
 gem 'redcarpet'
@@ -52,6 +51,7 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
+gem 'invisible_captcha'
 gem 'webpacker', '>= 4.0.x'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -87,6 +87,10 @@ end
 
 ## Who loves tests! You do? You do!
 group :test do
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'capybara'
+  gem 'percy-capybara'
   gem 'rspec-rails', :require => false
   gem 'rspec-mocks', :require => false
   gem 'guard-rspec', :require => false

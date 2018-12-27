@@ -1,10 +1,12 @@
 dist: trusty
 sudo: required
 language: ruby
+addons:
+  chrome: stable
 cache:
 - bundler
 - yarn
-- directories - "node_modules"
+- npm
 before_install:
 - npm i -g node@latest
 - sudo add-apt-repository -y ppa:isage-dna/imagick
@@ -16,10 +18,7 @@ before_install:
 before_script:
 - mysql -e 'create database alonetone_test';
 - gem update --system
-- bundle exec rake copy_config
-- bundle exec rake db:drop
-- bundle exec rake db:create
-- bundle exec rake db:schema:load
+- bundle exec rake copy_config db:drop db:create db:schema:load
 - bundle exec rake db:seed
 script: bundle exec rake spec
 notifications:

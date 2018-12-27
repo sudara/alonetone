@@ -1,55 +1,72 @@
 #user_index {
-	display: flex;
-	@include match-dynamic-site-width();
-	flex-wrap: wrap;
-	justify-content: space-between;
-	max-width: 960px;
-	#static_header {
-		width: 30%;
-		line-height: 1.1;
-		@media #{$tablet} {
-			width: 100%;
-		}
-		#links {
-			width: 230px;
-			li {
-				display: block;
-				float: none;
-				a {
-					float: none;
-				}
-			}
-		}
-	}
-	#large_users_grid {
-		display: flex;
-		width: 70%;
-		margin-top: 52px;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		@media #{$tablet} {
-			width: 100%;
-		}
-		div.clear {
-			display: none;
-		}
-		div.user {
-			position: relative;
-			width: 150px;
-			margin-bottom: 30px;
-			text-align: center;
-			img.cover {
-				width: 125px;
-				height: 125px;
-			}
-			.name {
-				font-size: 13px;
-				display: block;
-				margin-top: 4px;
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
-	}
+  display: flex;
+  @include match-dynamic-site-width();
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 960px;
+  #static_header {
+    width: 30%;
+    line-height: 1.1;
+    @media #{$tablet} {
+      width: 100%;
+    }
+    #links {
+      ul.links {
+        li {
+          line-height: 34px;
+          float: left;
+          display: block;
+          height: 32px;
+          width: 230px;
+          a {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 34px;
+            display: block;
+            float: left;
+            padding: 0 15px;
+          }
+          a:hover {
+            text-decoration: none;
+            background: $light_gray;
+          }
+        }
+        li.current {
+          padding: 0 15px;
+          background: $gray;
+        }
+      }
+    }
+  }
+  #large_users_grid {
+    display: flex;
+    width: 70%;
+    margin-top: 52px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @media #{$tablet} {
+      width: 100%;
+    }
+    div.clear {
+      display: none;
+    }
+    div.user {
+      position: relative;
+      width: 150px;
+      margin-bottom: 30px;
+      text-align: center;
+      img.cover {
+        width: 125px;
+        height: 125px;
+      }
+      .name {
+        font-size: 13px;
+        display: block;
+        margin-top: 4px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }
