@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   scope :alpha,         -> { order('display_name ASC')                                }
 
   before_create :make_first_user_admin
+  after_real_destroy :efficiently_destroy_relations
   after_create :create_profile
 
   # Can create music
