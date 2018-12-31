@@ -15,13 +15,7 @@ class ListensController < ApplicationController
   protected
 
   def find_listen_history
-    @listens = @user.listens.paginate(
-      per_page: 10,
-      page: params[:listens_page]
-    )
-    @track_plays = @user.track_plays.paginate(
-      per_page: 10,
-      page: params[:track_plays_page]
-    )
+    @listens_pagy, @listens = pagy(@user.listens, page_param: :listens_page, items: 10)
+    @track_plays_pagy, @track_plays = pagy(@user.track_plays, page_param: :track_plays_page, items: 10)
   end
 end
