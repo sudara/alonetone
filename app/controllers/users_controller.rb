@@ -94,7 +94,7 @@ class UsersController < ApplicationController
     redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
-      @user.destroy # this will run "efficiently_destroy_relations" before_destory callback
+      @user.destroy
       if moderator?
         redirect_to root_path
       else
@@ -111,6 +111,12 @@ class UsersController < ApplicationController
     else
       return_from_sudo_if_sudoed
     end
+  end
+
+  def restore
+    # this will perform restore on all associated records that also act
+    # as paranoid
+    @user.restore(:recursive => true)
   end
 
   private
