@@ -136,6 +136,7 @@ Alonetone::Application.routes.draw do
       member do
         post :attach_pic
         get :sudo
+        post :restore
       end
       resource 'profile'
       resources 'source_files' #:path_prefix => ':login'
