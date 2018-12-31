@@ -16,10 +16,7 @@ class User < ActiveRecord::Base
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
   scope :alpha,         -> { order('display_name ASC')                                }
 
-  # The before destroy has to be declared *before* has_manys
-  # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
-  before_destroy :efficiently_destroy_relations
   after_create :create_profile
 
   # Can create music
