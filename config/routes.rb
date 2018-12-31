@@ -60,7 +60,7 @@ Alonetone::Application.routes.draw do
     get 'rpmchallenge' => 'pages#rpm_challenge'
     get '24houralbum' =>  'pages#twentyfour'
 
-    resources :features, :user_reports
+    resources :features
 
     get 'blog' => 'updates#index', :as => "blog_home"
 
