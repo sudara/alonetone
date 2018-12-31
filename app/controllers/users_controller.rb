@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :ip_is_acceptable?, only: :create
   before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
   before_action :require_login, except: %i[index show new create activate destroy]
   invisible_captcha only: [:create, :update], honeypot: :name
@@ -32,6 +31,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    if is_from_a_bad_ip? && @user.valid?
+      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+      redirect_to login_url(already_joined: true)
     if @user.valid? && @user.save_without_session_maintenance
       @user.reset_perishable_token!
       UserNotification.signup(@user).deliver_now
