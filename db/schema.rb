@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.boolean "private", default: false, null: false
     t.integer "id3_track_num", default: 1
     t.boolean "is_spam", default: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_assets_on_deleted_at"
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
