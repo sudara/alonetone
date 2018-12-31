@@ -18,7 +18,7 @@
 <% end %>
 
 <div class="forum_paginator">
-    <%= will_paginate @posts %>
+  <%== pagy_nav @pagy %>
 </div>
 
 <% if @posts.present? %>
@@ -30,5 +30,5 @@
 <% end %>
 
 <div class="forum_paginator">
-  <%= will_paginate @posts %>
+  <%== pagy_nav @pagy %>
 </div>
