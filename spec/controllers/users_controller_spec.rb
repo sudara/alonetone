@@ -32,43 +32,65 @@ RSpec.describe UsersController, type: :controller do
 
   context 'creating' do
     it "should successfully post to users/create" do
-      create_user
+      set_good_request_headers && create_user
       expect(response).to redirect_to("/login?already_joined=true")
     end
 
     it "should send user activation email after signup" do
-      create_user
+      expect {
+        set_good_request_headers && create_user
+      }.to change { ActionMailer::Base.deliveries.size }.by(1)
       expect(last_email.to).to eq(["quire@example.com"])
     end
 
+    it "should not send user activation email if bad ip" do
+      expect {
+        set_good_request_headers
+        @request.env['REMOTE_ADDR'] = '60.169.78.123' # example bad ip
+        create_user
+      }.to change { ActionMailer::Base.deliveries.size }.by(0)
+    end
+
+    it "should not send user activation email if bad user agent" do
+      expect {
+        set_good_request_headers
+        @request.env['HTTP_USER_AGENT'] = 'bot'
+        create_user
+      }.to change { ActionMailer::Base.deliveries.size }.by(0)
+    end
+
     it "should have actually created the user" do
-      expect { create_user }.to change(User, :count).by(1)
+      expect { set_good_request_headers && create_user }.to change(User, :count).by(1)
     end
 
     it 'should reset the perishable token' do
-      create_user
+      set_good_request_headers && create_user
       expect(assigns(:user).perishable_token).to_not be_nil
     end
 
     it "should require login on signup" do
+      set_good_request_headers
       create_user login: nil
       expect(response).to_not be_redirect
       expect(assigns(:user).errors[:login].size).to be >= 1
     end
 
     it "should require password on signup" do
+      set_good_request_headers
       create_user password: nil
       expect(response).to_not be_redirect
       expect(assigns(:user).errors[:password].size).to be >= 1
     end
 
     it "should require password confirmation on signup" do
+      set_good_request_headers
       create_user password_confirmation: nil
       expect(response).to be_successful
       expect(assigns(:user).errors[:password_confirmation].size).to be >= 1
     end
 
     it "should require email on signup" do
+      set_good_request_headers
       create_user email: nil
       expect(response).to be_successful
       expect(assigns(:user).errors[:email].size).to be >= 1
@@ -77,27 +99,27 @@ RSpec.describe UsersController, type: :controller do
 
   context 'activation' do
     it "should activate with a for reals perishable token" do
-      activate_authlogic && create_user
+      set_good_request_headers && activate_authlogic && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(new_user_track_path(User.last.login))
     end
 
     it 'should log in user on activation' do
-      activate_authlogic && create_user
+      set_good_request_headers && activate_authlogic && create_user
       # expect(UserSession).to receive(:create)
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(controller.session["user_credentials"]).to eq(User.last.persistence_token)
     end
 
     it 'should send out email on activation' do
-      activate_authlogic && create_user
+      set_good_request_headers && activate_authlogic && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(last_email.to).to eq(["quire@example.com"])
     end
 
     it "should not activate with bullshit perishable token" do
-      activate_authlogic
+      set_good_request_headers && activate_authlogic
       get :activate, params: { perishable_token: "abunchofbullshit" }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to(new_user_path)
@@ -105,17 +127,10 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should NOT activate an account if you are already logged in' do
       login(:arthur)
-      create_user
+      set_good_request_headers && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to("http://test.host/arthur/tracks/new")
-    end
-
-    it 'should NOT activate if you are on a shitty ass IP' do
-      activate_authlogic && create_user
-      @request.env['REMOTE_ADDR'] = '60.169.78.123' # example bad ip
-      get :activate, params: { perishable_token: User.last.perishable_token }
-      expect(flash[:error]).to be_present
     end
   end
   context "profile" do
@@ -253,6 +268,11 @@ RSpec.describe UsersController, type: :controller do
       expect { login(:arthur) }.to change { users(:arthur).last_request_at }
     end
   end
+end
+
+def set_good_request_headers
+  @request.env['HTTP_USER_AGENT'] = 'Safari'
+  @request.env['REMOTE_ADDR'] = '10.1.1.1'
 end
 
 def create_user(options = {})
