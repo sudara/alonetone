@@ -26,7 +26,7 @@
             <td><%= link_to user.login, user_path(user.login) %></td>
             <td><%= truncate(user&.profile&.bio, length: 200) %></td>
             <td><%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></td>
-            <td><%= button_to "Delete User", user, method: :delete %></td>
+            <td><%= button_to "Delete User", user, method: :delete, confirm: "Permanently delete user?" %></td>
           </tr>
         <% end %>
       </tbody>
