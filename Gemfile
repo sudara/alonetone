@@ -31,7 +31,6 @@ gem 'request_store' # for authlogic
 # view
 gem 'redcarpet'
 gem 'country_select'
-gem 'will_paginate'
 gem 'dynamic_form'
 gem 'simple_form'
 gem 'local_time'
