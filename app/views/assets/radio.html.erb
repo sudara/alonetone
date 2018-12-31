@@ -1,13 +1,13 @@
 <h1 id="radio_title">alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
 <% content_for :left do %>
   <div class="mini_paginator">
-    <%= will_paginate @assets %>
+    <%== pagy_nav @pagy %>
   </div>
     <div id="radio_tracks" class="box">
         <%= render partial: 'assets/asset', collection: @assets  %>
     </div>
     <div class="mini_paginator">
-      <%= will_paginate @assets %>
+      <%== pagy_nav @pagy %>
     </div>
 <% end %>
 <% content_for :right do %>
