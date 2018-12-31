@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
+
   concerned_with :validation, :findability, :settings, :statistics
 
   store :settings
@@ -20,17 +22,15 @@ class User < ActiveRecord::Base
   after_create :create_profile
 
   # Can create music
-  has_one    :pic, as: :picable, dependent: :destroy
-  has_one    :profile, dependent: :destroy
+  has_one    :pic, as: :picable
+  has_one    :profile
   has_many   :assets,
     -> { order('assets.id DESC') },
     dependent: :destroy
 
-  has_many   :playlists, -> { order('playlists.position') },
-    dependent: :destroy
+  has_many   :playlists, -> { order('playlists.position') }
 
-  has_many   :comments, -> { order('comments.id DESC') },
-    dependent: :destroy
+  has_many   :comments, -> { order('comments.id DESC') }
 
   has_many   :tracks
 
@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
     -> { distinct },
     through: :track_plays
 
-  has_many :followings, dependent: :destroy
-  has_many :follows, dependent: :destroy, class_name: 'Following', foreign_key: 'follower_id'
+  has_many :followings
+  has_many :follows, class_name: 'Following', foreign_key: 'follower_id'
 
   # people who are following this musician
   has_many :followers, through: :followings
