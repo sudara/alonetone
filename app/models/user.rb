@@ -193,6 +193,7 @@ end
 #  crypted_password   :string(128)      default(""), not null
 #  current_login_at   :datetime
 #  current_login_ip   :string(255)
+#  deleted_at         :datetime
 #  display_name       :string(255)
 #  email              :string(100)
 #  followers_count    :integer          default(0)
@@ -217,5 +218,6 @@ end
 #
 # Indexes
 #
+#  index_users_on_deleted_at  (deleted_at)
 #  index_users_on_updated_at  (updated_at)
 #

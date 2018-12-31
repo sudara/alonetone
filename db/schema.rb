@@ -635,6 +635,8 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.integer "bandwidth_used", default: 0
     t.boolean "greenfield_enabled", default: false
     t.boolean "use_old_theme", default: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 
