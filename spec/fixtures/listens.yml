@@ -1,0 +1,4 @@
+valid_listen:
+  listener_id: 1
+  asset_id: 1
+  track_owner_id: 2

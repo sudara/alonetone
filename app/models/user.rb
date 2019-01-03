@@ -19,7 +19,9 @@ class User < ActiveRecord::Base
   scope :alpha,         -> { order('display_name ASC')                                }
 
   before_create :make_first_user_admin
-  after_real_destroy :efficiently_destroy_relations
+  # need to run this before destroy
+  # to ensure assets are not deleted yet
+  before_real_destroy :efficiently_destroy_relations
   after_create :create_profile
 
   # Can create music
@@ -161,6 +163,7 @@ class User < ActiveRecord::Base
 
     Playlist.joins(:assets).where(assets: { user_id: id })
             .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+
     Track.joins(:asset).where(assets: { user_id: id }).delete_all
 
     Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
@@ -169,7 +172,7 @@ class User < ActiveRecord::Base
     assets.destroy_all
 
     %w[tracks playlists posts comments].each do |user_relation|
-      send(user_relation).delete_all
+      send(user_relation).delete_all unless destroyed?
     end
     true
   end
