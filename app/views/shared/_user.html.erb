@@ -1,7 +1,6 @@
 <%= div_for(user, class: 'user-index') do %>
 
-
-  <%= link_to(' ', user_home_path(user), class: 'overlay', title: " #{user.name}
+<%= link_to(' ', user_home_path(user), class: 'overlay', title: " #{user.name}
  #{user.assets_count > 0 ? pluralize(user.assets_count,'uploaded tracks') : ''}
  Joined alonetone #{user.created_at.to_date.to_s(:long)}
  #{user_location(user)}") %>
@@ -10,7 +9,6 @@
 	<%= link_to user.name, user_home_path(user.login), class: (user.admin? ? "admin name" : 'name') %>
 
 	<span class="details" style="display:none;">
-
  		<%= link_to(pluralize(user.assets_count, 'track'), user_tracks_path(user)) if user.assets_count > 0 %><br/>
  		<%= link_to(pluralize(user.playlists_count, 'playlist'), user_playlists_path(user)) if user.playlists_count > 0 %>
 			<% if admin? %>
