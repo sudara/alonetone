@@ -258,45 +258,45 @@
 
 
   <div id="user_stats_area">
-      <h2 class="area_heading">
-        Stats and Stuff
-      </h2>
-      <div class="area_content">
-        <div class="time_and_date">
+    <h2 class="area_heading">
+      Stats and Stuff
+    </h2>
+    <div class="area_content">
+      <div class="time_and_date">
+        <div>
           <div>
-            <div>
-              Last seen
-            </div>
-            <div>
-              <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
-            </div>
+            Last seen
+          </div>
+          <div>
+            <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
           </div>
         </div>
-        <% if @user.listens_count > 0 %>
-        <div class="tracks_and_listens">
-          <div>
-            <div>
-              Uploaded
-            </div>
-            <div>
-              <%= pluralize @user.assets_count, 'track' %>
-            </div>
-          </div>
-          <div>
-            <div>
-              Listens
-            </div>
-            <div>
-              <%= @user.listens_count %>
-            </div>
-          </div>
-        </div>
-        <% end %>
       </div>
+      <% if @user.listens_count > 0 %>
+      <div class="tracks_and_listens">
+        <div>
+          <div>
+            Uploaded
+          </div>
+          <div>
+            <%= pluralize @user.assets_count, 'track' %>
+          </div>
+        </div>
+        <div>
+          <div>
+            Listens
+          </div>
+          <div>
+            <%= @user.listens_count %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
   </div>
 
   <% if moderator? %>
-  <div id="user_mod_stats_area">
+    <div id="user_mod_stats_area">
       <h2 class="area_heading">
         ppsshhhhhh....
       </h2>
@@ -325,8 +325,8 @@
   <% end %>
 
   <% if authorized? %>
-  <div id="user_actions_area">
-  <% end %>
+    <div id="user_actions_area">
+    <% end %>
     <% if authorized? %>
       <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
         Edit Profile
