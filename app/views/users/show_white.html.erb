@@ -4,6 +4,9 @@
       <div class="user_name_and_location_and_follow">
         <div class="user_name_and_location">
           <h1 class="user_name"><%= @user.name %></h1>
+          <% if authorized? %>
+            <div style="padding: 0.5em 0;"><%= @user.email %></div>
+          <% end %>
         </div>
         <% if logged_in? && current_user != @user %>
           <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
