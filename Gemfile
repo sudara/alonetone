@@ -95,6 +95,7 @@ group :test do
   gem 'rspec-rails', require: false
   gem 'selenium-webdriver'
   gem 'webmock', require: false
+  gem 'shoulda-matchers', '4.0.0.rc1'
 end
 
 group :development, :test do
