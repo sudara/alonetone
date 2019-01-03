@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   scope :recent,             -> { order('id DESC') }
-  scope :only_public,        -> { recent.where(is_spam: false).where(private: false) }
+  scope :without_deleted_users,   -> { joins(:commenter).where('users.deleted_at is NULL') }
+  scope :only_public,        -> { without_deleted_users.recent.where(is_spam: false).where(private: false) }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
   scope :include_private,    -> { recent.where(is_spam: false) }
   scope :public_or_private,  ->(has_access) { has_access ? include_private : only_public }
@@ -118,4 +119,6 @@ end
 #  index_comments_on_commentable_id                            (commentable_id)
 #  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
 #  index_comments_on_commenter_id                              (commenter_id)
+#  index_comments_on_remote_ip                                 (remote_ip)
+#  index_comments_on_user_agent                                (user_agent)
 #

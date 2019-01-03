@@ -4,7 +4,8 @@ class Playlist < ActiveRecord::Base
   scope :mixes,            -> { where(is_mix: true) }
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
-  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
+  scope :without_deleted_users, -> { joins(:user).where('users.deleted_at is NULL') }
+  scope :only_public,      -> { without_deleted_users.where(private: false).where(is_favorite: false).where("tracks_count > 1") }
   scope :include_private,  -> { where(is_favorite: false) }
   scope :recent,           -> { order('playlists.created_at DESC')                                                }
   scope :with_pic,         -> { preload(:pic)                                                                     }
