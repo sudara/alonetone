@@ -116,7 +116,7 @@ class UsersController < ApplicationController
   def restore
     # this will perform restore on all associated records that also act
     # as paranoid
-    @user.restore(:recursive => true)
+    @user.restore(recursive: true)
   end
 
   private
