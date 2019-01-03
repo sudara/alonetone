@@ -52,7 +52,52 @@ RSpec.describe User, type: :model do
   end
 
   context "deletion" do
-    it 'should remove listens tracks playlists posts topics comments assets as well' do
+    let(:user) { users(:sudara) }
+    let!(:asset) { assets(:valid_mp3) }
+    let!(:topic) { topics(:topic1) }
+    let!(:playlist) { playlists(:owp) }
+    let!(:comment) { comments(:valid_comment_on_asset_by_user) }
+    let!(:listen) { listens(:valid_listen) }
+
+    it { is_expected.to act_as_paranoid }
+
+    describe "soft delete" do
+      it "should mark assets as soft deleted" do
+        user.destroy
+
+        expect(user.reload.paranoia_destroyed?).to eq(true)
+        expect(asset.reload.paranoia_destroyed?).to eq(true)
+        expect(user.assets).not_to be_present
+      end
+
+      it "doesnt delete other associated records (listens tracks playlists posts topics comments)" do
+        user.destroy
+
+        expect(user.listens).to be_present
+        expect(user.tracks).to be_present
+        expect(user.playlists).to be_present
+        expect(user.topics).to be_present
+        expect(user.comments).to be_present
+      end
+    end
+
+    describe "really delete" do
+      it "should really destroy all associated assets" do
+        user.really_destroy!
+
+        expect(User.where(id: user.id)).not_to be_present
+        expect(Asset.where(user_id: user.id)).not_to be_present
+      end
+
+      it 'should remove listens tracks playlists posts topics comments assets as well' do
+        user.really_destroy!
+
+        expect(Listen.where(track_owner_id: user.id)).not_to be_present
+        expect(Track.where(user_id: user.id)).not_to be_present
+        expect(Playlist.where(user_id: user.id)).not_to be_present
+        expect(Topic.where(user_id: user.id)).not_to be_present
+        expect(Comment.where(commenter_id: user.id)).not_to be_present
+      end
     end
   end
 
