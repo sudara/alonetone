@@ -39,16 +39,16 @@ RSpec.configure do |config|
   # Use transactional fixtures.
   config.use_transactional_fixtures = true
 
-  config.before(:suite) { Percy::Capybara.initialize_build }
-  config.after(:suite) { Percy::Capybara.finalize_build }
-
-  config.render_views
-
-  config.infer_base_class_for_anonymous_controllers = false
+  # Spec directory determines its type (e.g. models, requests, etc).
   config.infer_spec_type_from_file_location!
 
+  # Filter lines from Rails gems in backtraces.
+  config.filter_rails_from_backtrace!
+
+  # Render views in controller specs by default.
+  config.render_views
+
   config.include ActiveSupport::Testing::TimeHelpers
-  config.include Authlogic::TestCase
   config.include Authlogic::TestCase, type: :controller
   config.include Authlogic::TestCase, type: :request
   config.include FactoryBot::Syntax::Methods
@@ -57,6 +57,7 @@ RSpec.configure do |config|
   config.include RSpec::Support::LoginHelpers
 
   config.before(:suite) do
+    Percy::Capybara.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
   end
 
@@ -66,5 +67,9 @@ RSpec.configure do |config|
 
   config.before(:example, type: :controller) do
     activate_authlogic
+  end
+
+  config.after(:suite) do
+    Percy::Capybara.finalize_build
   end
 end
