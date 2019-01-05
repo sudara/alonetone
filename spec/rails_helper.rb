@@ -48,6 +48,7 @@ RSpec.configure do |config|
   # Render views in controller specs by default.
   config.render_views
 
+  config.include ActiveJob::TestHelper
   config.include ActiveSupport::Testing::TimeHelpers
   config.include Authlogic::TestCase, type: :controller
   config.include Authlogic::TestCase, type: :request
@@ -59,6 +60,11 @@ RSpec.configure do |config|
   config.before(:suite) do
     Percy::Capybara.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
+  end
+
+  config.before(:each) do
+    clear_enqueued_jobs
+    clear_performed_jobs
   end
 
   config.before(:example, type: :request) do
