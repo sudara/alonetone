@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   render_views
-  fixtures :users, :profiles, :assets
 
   context 'show' do
     it "should show delete user button for admins" do
@@ -133,8 +132,8 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to("http://test.host/arthur/tracks/new")
     end
   end
+
   context "profile" do
-    fixtures :users, :assets
     %i[sudara arthur].each do |user|
       it "should let a user or admin edit" do
         login(user)
