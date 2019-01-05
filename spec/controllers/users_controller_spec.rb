@@ -256,8 +256,8 @@ RSpec.describe UsersController, type: :controller do
       login(:sudara)
       get :sudo, params: { id: 'arthur' }
       expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
-      expect(users(:arthur).current_login_ip).not_to eq('10.1.1.1')
-      expect(users(:arthur).last_request_at.utc).to be_within(1.minute).of 1.day.ago # shouldn't have changed from yml
+      expect(users(:arthur).current_login_ip).to eq('9.9.9.9')
+      expect(users(:arthur).last_request_at.utc).to be < 1.hour.ago
     end
   end
 
