@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :request do
-  fixtures :assets, :users
   include ActiveJob::TestHelper
 
   before(:each) do
