@@ -29,8 +29,7 @@ public/pics
 public/sitemap.xml
 public/source_files
 public/system
-public/system/*
-stats.json/public/packs
+stats.json
 tmp
 update
 vendor/bundle
