@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe FollowingController, type: :request do
-  fixtures :users
-
   before :each do
     create_user_session(users(:brand_new_user))
   end
