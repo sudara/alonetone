@@ -1,13 +1,6 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :request do
-  include ActiveJob::TestHelper
-
-  before(:each) do
-    clear_enqueued_jobs
-    clear_performed_jobs
-  end
-
   context "#latest" do
     it "should render the home page" do
       get '/'
