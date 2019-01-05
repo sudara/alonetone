@@ -50,6 +50,7 @@ RSpec.configure do |config|
   config.include Authlogic::TestCase
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LittleHelpers
+  config.include RSpec::Support::LoginHelpers
   config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:suite) do
@@ -75,27 +76,6 @@ RSpec.configure do |config|
   config.before(:example, type: :controller) do
     activate_authlogic
   end
-
-  module LoginHelper
-    include Authlogic::TestCase
-
-    def login(user)
-      login_as = user.is_a?(User) ? user : users(user) # grab the fixture
-
-      expect(session = UserSession.create(login_as)).to be_truthy # make sure we logged in
-      allow(controller).to receive(:current_user_session).and_return(session)
-      allow(controller).to receive(:current_user).and_return(login_as) # make authlogic happy
-    end
-
-    def create_user_session(user)
-      post '/user_sessions', params: { user_session: { login: user.login, password: 'test' } }
-    end
-
-    def logout
-      UserSession.find.destroy if UserSession.find
-    end
-  end
-  config.include LoginHelper
 
   def pay!(subscription_type_id, item=nil)
     post "paypal/post_payment", tx: "68E56277NB6235547", st: "Completed", amt: "29.00", cc: "USD", cm: subscription_type_id, item_number: item
