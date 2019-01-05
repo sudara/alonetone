@@ -7,7 +7,6 @@ require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
 require 'authlogic/test_case'
-require 'factory_bot_rails'
 require "selenium/webdriver"
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -46,18 +45,19 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
 
-  config.include Authlogic::TestCase
-  config.include RSpec::Support::Logging
-  config.include RSpec::Support::LittleHelpers
-  config.include RSpec::Support::LoginHelpers
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include Authlogic::TestCase
+  config.include Authlogic::TestCase, type: :controller
+  config.include Authlogic::TestCase, type: :request
+  config.include FactoryBot::Syntax::Methods
+  config.include RSpec::Support::LittleHelpers
+  config.include RSpec::Support::Logging
+  config.include RSpec::Support::LoginHelpers
 
   config.before(:suite) do
     InvisibleCaptcha.timestamp_enabled = false
   end
 
-  config.include Authlogic::TestCase, type: :request
-  config.include Authlogic::TestCase, type: :controller
 
   config.before(:example, type: :request) do
     activate_authlogic
@@ -67,5 +67,3 @@ RSpec.configure do |config|
     activate_authlogic
   end
 end
-
-FactoryBot.reload
