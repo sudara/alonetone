@@ -3,7 +3,6 @@ include ActiveJob::TestHelper
 
 RSpec.describe AssetsController, type: :controller do
   render_views
-  fixtures :assets, :users, :audio_features
 
   before :each do
     clear_enqueued_jobs
