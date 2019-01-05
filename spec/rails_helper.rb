@@ -6,7 +6,6 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
-require 'database_cleaner'
 require 'authlogic/test_case'
 require 'factory_bot_rails'
 require "selenium/webdriver"
@@ -54,16 +53,7 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
     InvisibleCaptcha.timestamp_enabled = false
-  end
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.append_after(:each) do
-    DatabaseCleaner.clean
   end
 
   config.include Authlogic::TestCase, type: :request
