@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe CommentNotification, type: :mailer do
-  fixtures :comments, :assets
-
   describe "new_comment by user" do
     let(:asset) { assets(:valid_mp3) }
     let(:comment) { comments(:valid_comment_on_asset_by_user) }
