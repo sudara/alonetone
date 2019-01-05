@@ -10,7 +10,6 @@
 /public/packs
 /public/packs-test
 /yarn-error.log
-MorphSVGPlugin.js
 config/alonetone.yml
 config/certs/*
 config/config.yml
