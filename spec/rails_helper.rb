@@ -77,10 +77,6 @@ RSpec.configure do |config|
     activate_authlogic
   end
 
-  def pay!(subscription_type_id, item=nil)
-    post "paypal/post_payment", tx: "68E56277NB6235547", st: "Completed", amt: "29.00", cc: "USD", cm: subscription_type_id, item_number: item
-  end
-
   # Setting this config option `false` removes rspec-core's monkey patching of the
   # top level methods like `describe`, `shared_examples_for` and `shared_context`
   # on `main` and `Module`. The methods are always available through the `RSpec`
