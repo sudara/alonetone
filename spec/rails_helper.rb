@@ -1,7 +1,10 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV['RAILS_ENV'] ||= 'test'
+# frozen_string_literal: true
+
 require 'spec_helper'
-require File.expand_path('../../config/environment', __FILE__)
+
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
+
 require 'rspec/rails'
 require 'database_cleaner'
 require 'authlogic/test_case'
