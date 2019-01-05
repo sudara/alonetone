@@ -2,8 +2,6 @@ require "rails_helper"
 include ActiveJob::TestHelper
 
 RSpec.describe AssetsController, type: :controller do
-  render_views
-
   before :each do
     clear_enqueued_jobs
     clear_performed_jobs
