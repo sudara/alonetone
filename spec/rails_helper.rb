@@ -29,19 +29,19 @@ Percy.config.default_widths = [375, 1280]
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # Use Active Record fixture path relative to spec/ directory.
+  config.fixture_path = Rails.root.join('spec', 'fixtures').to_s
+
+  # All of the fixtures all of the time.
+  config.global_fixtures = :all
+
+  # Use transactional fixtures.
+  config.use_transactional_fixtures = true
 
   config.before(:suite) { Percy::Capybara.initialize_build }
   config.after(:suite) { Percy::Capybara.finalize_build }
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   config.render_views
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = false
 
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
