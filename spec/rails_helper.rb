@@ -1,9 +1,11 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV['RAILS_ENV'] ||= 'test'
+# frozen_string_literal: true
+
 require 'spec_helper'
-require File.expand_path('../../config/environment', __FILE__)
+
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
+
 require 'rspec/rails'
-require 'database_cleaner'
 require 'authlogic/test_case'
 require 'factory_bot_rails'
 require "selenium/webdriver"
@@ -27,19 +29,19 @@ Percy.config.default_widths = [375, 1280]
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # Use Active Record fixture path relative to spec/ directory.
+  config.fixture_path = Rails.root.join('spec', 'fixtures').to_s
+
+  # All of the fixtures all of the time.
+  config.global_fixtures = :all
+
+  # Use transactional fixtures.
+  config.use_transactional_fixtures = true
 
   config.before(:suite) { Percy::Capybara.initialize_build }
   config.after(:suite) { Percy::Capybara.finalize_build }
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   config.render_views
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = false
 
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
@@ -47,19 +49,11 @@ RSpec.configure do |config|
   config.include Authlogic::TestCase
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LittleHelpers
+  config.include RSpec::Support::LoginHelpers
   config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
     InvisibleCaptcha.timestamp_enabled = false
-  end
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.append_after(:each) do
-    DatabaseCleaner.clean
   end
 
   config.include Authlogic::TestCase, type: :request
@@ -72,40 +66,6 @@ RSpec.configure do |config|
   config.before(:example, type: :controller) do
     activate_authlogic
   end
-
-  module LoginHelper
-    include Authlogic::TestCase
-
-    def login(user)
-      login_as = user.is_a?(User) ? user : users(user) # grab the fixture
-
-      expect(session = UserSession.create(login_as)).to be_truthy # make sure we logged in
-      allow(controller).to receive(:current_user_session).and_return(session)
-      allow(controller).to receive(:current_user).and_return(login_as) # make authlogic happy
-    end
-
-    def create_user_session(user)
-      post '/user_sessions', params: { user_session: { login: user.login, password: 'test' } }
-    end
-
-    def logout
-      UserSession.find.destroy if UserSession.find
-    end
-  end
-  config.include LoginHelper
-
-  def pay!(subscription_type_id, item=nil)
-    post "paypal/post_payment", tx: "68E56277NB6235547", st: "Completed", amt: "29.00", cc: "USD", cm: subscription_type_id, item_number: item
-  end
-
-  # Setting this config option `false` removes rspec-core's monkey patching of the
-  # top level methods like `describe`, `shared_examples_for` and `shared_context`
-  # on `main` and `Module`. The methods are always available through the `RSpec`
-  # module like `RSpec.describe` regardless of this setting.
-  # For backwards compatibility this defaults to `true`.
-  #
-  # https://relishapp.com/rspec/rspec-core/v/3-0/docs/configuration/global-namespace-dsl
-  config.expose_dsl_globally = false
 end
 
 FactoryBot.reload

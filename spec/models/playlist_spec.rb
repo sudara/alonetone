@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Playlist, type: :model do
-  fixtures :playlists, :tracks, :assets, :users
-
   it 'should be valid with title, description, user' do
     expect(playlists(:owp)).to be_valid
   end

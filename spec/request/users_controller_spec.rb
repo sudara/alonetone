@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
-  fixtures :users, :profiles
-
   before :each do
     create_user_session(users(:sudara))
   end

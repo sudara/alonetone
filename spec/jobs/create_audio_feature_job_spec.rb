@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe CreateAudioFeatureJob, type: :job do
   include ActiveJob::TestHelper
 
-  fixtures :assets
-
   after do
     clear_enqueued_jobs
     clear_performed_jobs

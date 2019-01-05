@@ -94,7 +94,6 @@ group :test do
   gem 'rspec-rails', :require => false
   gem 'rspec-mocks', :require => false
   gem 'guard-rspec', :require => false
-  gem 'database_cleaner', :require => false
   gem 'rb-fsevent', :require => false
   gem 'guard', :require => false
   gem 'listen', :require => false
