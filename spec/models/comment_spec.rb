@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Comment, type: :model do
-  fixtures :users, :comments, :assets
-
   let(:new_comment) { assets(:valid_mp3).comments.new(body: 'test', commentable_type: 'Asset', commentable_id: '1') }
 
   context "validation" do
