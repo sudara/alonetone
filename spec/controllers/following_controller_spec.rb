@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe FollowingController, type: :controller do
-  fixtures :users
-
   context 'follow' do
     it 'should increment following count by one' do
       login(:brand_new_user)
