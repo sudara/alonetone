@@ -6,26 +6,28 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
-require 'authlogic/test_case'
-require "selenium/webdriver"
+require 'selenium/webdriver'
+
+# Reloads schema.rb when database has pending migrations.
+ActiveRecord::Migration.maintain_test_schema!
+
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(headless disable-gpu no-sandbox) }
-  )
-
-  Capybara::Selenium::Driver.new app,
+# Magic incantation to make Capybara run the feature specs. Nobody knows
+# why this isn't a default in the gem.
+Capybara.register_driver(:headless_chrome) do |app|
+  Capybara::Selenium::Driver.new(
+    app,
     browser: :chrome,
-    desired_capabilities: capabilities
+    desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w[headless disable-gpu no-sandbox] }
+    )
+  )
 end
-
 Capybara.javascript_driver = :headless_chrome
-Percy.config.default_widths = [375, 1280]
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+# Set default resolutions for visual regression testing.
+Percy.config.default_widths = [375, 1280]
 
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
@@ -57,7 +59,6 @@ RSpec.configure do |config|
   config.before(:suite) do
     InvisibleCaptcha.timestamp_enabled = false
   end
-
 
   config.before(:example, type: :request) do
     activate_authlogic
