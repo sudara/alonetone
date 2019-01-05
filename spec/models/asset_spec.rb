@@ -7,7 +7,6 @@ def new_track(file)
 end
 
 RSpec.describe Asset, type: :model do
-  fixtures :users, :assets
   context "validation" do
     it 'can be an mp3 file' do
       expect(assets(:valid_mp3)).to be_valid
@@ -168,8 +167,6 @@ RSpec.describe Asset, type: :model do
 end
 
 RSpec.describe Asset, 'on update', type: :model do
-  fixtures :users, :assets
-
   it 'should regenerate a permalink after the title is changed' do
     asset = new_track('muppets.mp3')
     asset.save

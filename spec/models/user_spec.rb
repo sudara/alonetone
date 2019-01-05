@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  fixtures :users, :assets, :playlists, :tracks
-
   context "validation" do
     it "should be valid with email, login and password" do
       expect(new_user).to be_valid

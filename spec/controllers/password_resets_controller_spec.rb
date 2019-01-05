@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe PasswordResetsController, type: :controller do
-  fixtures :users
-
   context 'resetting' do
     it "should error if the email provided doesn't exist" do
       post :create, params: { email: "blah" }

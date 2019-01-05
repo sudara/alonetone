@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Post, type: :model do
-  fixtures :forums, :topics, :posts, :users
-
   context "validation" do
     it "should be valid" do
       expect(posts(:post1)).to be_valid

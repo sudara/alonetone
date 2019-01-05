@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::CommentsController, type: :request do
-  fixtures :comments, :users
-
   before do
     create_user_session(users(:sudara))
   end
@@ -37,8 +35,6 @@ RSpec.describe Admin::CommentsController, type: :request do
     end
 
     it "should send notification" do
-      allow(comment).to receive(:is_deliverable?).and_return(true)
-
       expect do
         put unspam_admin_comment_path(comment.id)
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
