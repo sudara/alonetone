@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe UserSessionsController, type: :controller do
-  fixtures :users
-
   it "should successfully login with alonetone login" do
     post :create, params: { user_session: { login: 'arthur', password: 'test' } }
     expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
