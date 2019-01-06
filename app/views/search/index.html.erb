@@ -1,7 +1,5 @@
 <% unless @users.present? or @assets.present? %>
   <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
-<% else %>
-  <!-- <h1>Results for "<%= @query %>"</h1> -->
 <% end %>
 
 <% if @users.present? %>
@@ -20,8 +18,14 @@
 <% if @assets.present? %>
   <% content_for :right do %>
     <h2>Tracks that match "<%= @query %>"</h2>
+    <div class="mini_paginator">
+      <%== pagy_nav @assets_pagy %>
+    </div>
     <div class="tracks_search_results">
       <%= render partial: 'assets/asset', collection: @assets if @assets %>
+    </div>
+    <div class="mini_paginator">
+      <%== pagy_nav @assets_pagy %>
     </div>
   <% end %>
 <% end %>
