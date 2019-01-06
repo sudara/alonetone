@@ -6,27 +6,28 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
-require 'authlogic/test_case'
-require 'factory_bot_rails'
-require "selenium/webdriver"
+require 'selenium/webdriver'
+
+# Reloads schema.rb when database has pending migrations.
+ActiveRecord::Migration.maintain_test_schema!
+
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(headless disable-gpu no-sandbox) }
-  )
-
-  Capybara::Selenium::Driver.new app,
+# Magic incantation to make Capybara run the feature specs. Nobody knows
+# why this isn't a default in the gem.
+Capybara.register_driver(:headless_chrome) do |app|
+  Capybara::Selenium::Driver.new(
+    app,
     browser: :chrome,
-    desired_capabilities: capabilities
+    desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w[headless disable-gpu no-sandbox] }
+    )
+  )
 end
-
 Capybara.javascript_driver = :headless_chrome
-Percy.config.default_widths = [375, 1280]
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+# Set default resolutions for visual regression testing.
+Percy.config.default_widths = [375, 1280]
 
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
@@ -38,26 +39,33 @@ RSpec.configure do |config|
   # Use transactional fixtures.
   config.use_transactional_fixtures = true
 
-  config.before(:suite) { Percy::Capybara.initialize_build }
-  config.after(:suite) { Percy::Capybara.finalize_build }
-
-  config.render_views
-
-  config.infer_base_class_for_anonymous_controllers = false
+  # Spec directory determines its type (e.g. models, requests, etc).
   config.infer_spec_type_from_file_location!
 
-  config.include Authlogic::TestCase
-  config.include RSpec::Support::Logging
-  config.include RSpec::Support::LittleHelpers
-  config.include RSpec::Support::LoginHelpers
+  # Filter lines from Rails gems in backtraces.
+  config.filter_rails_from_backtrace!
+
+  # Render views in controller specs by default.
+  config.render_views
+
+  config.include ActiveJob::TestHelper
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include Authlogic::TestCase, type: :controller
+  config.include Authlogic::TestCase, type: :request
+  config.include FactoryBot::Syntax::Methods
+  config.include RSpec::Support::LittleHelpers
+  config.include RSpec::Support::Logging
+  config.include RSpec::Support::LoginHelpers
 
   config.before(:suite) do
+    Percy::Capybara.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
   end
 
-  config.include Authlogic::TestCase, type: :request
-  config.include Authlogic::TestCase, type: :controller
+  config.before(:each) do
+    clear_enqueued_jobs
+    clear_performed_jobs
+  end
 
   config.before(:example, type: :request) do
     activate_authlogic
@@ -66,6 +74,8 @@ RSpec.configure do |config|
   config.before(:example, type: :controller) do
     activate_authlogic
   end
-end
 
-FactoryBot.reload
+  config.after(:suite) do
+    Percy::Capybara.finalize_build
+  end
+end
