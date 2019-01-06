@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
   end
 
   def new_tracks_from_followees(limit)
-    Asset.new_tracks_from_followees(self, page: 1, per_page: limit)
+    Asset.new_tracks_from_followees(self, limit)
   end
 
   def follows_user_ids

@@ -59,7 +59,7 @@ class Asset
   #
   # SELECT DISTINCT a.* FROM assets a INNER JOIN users u ON (a.user_id = u.id) INNER JOIN followings f ON (f.user_id = u.id) WHERE f.follower_id = :user_id ORDER BY a.created_at DESC LIMIT 15
   #
-  def self.new_tracks_from_followees(user, pagination_options)
-    recent.user_id_in(user.follows_user_ids).paginate(pagination_options)
+  def self.new_tracks_from_followees(user, limit)
+    recent.user_id_in(user.follows_user_ids).limit(limit)
   end
 end
