@@ -4,9 +4,6 @@
       <div class="user_name_and_location_and_follow">
         <div class="user_name_and_location">
           <h1 class="user_name"><%= @user.name %></h1>
-          <% if authorized? %>
-            <div style="padding: 0.5em 0;"><%= @user.email %></div>
-          <% end %>
         </div>
         <% if logged_in? && current_user != @user %>
           <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
@@ -303,6 +300,7 @@
       <h2 class="area_heading">
         ppsshhhhhh....
       </h2>
+
       <div class="area_content">
         <div class="user_ip">
           <div>
@@ -319,12 +317,17 @@
           </div>
         </div>
 
-      <div class="user_agent">
-        <div>User agent</div>
-        <div><%= @profile.user_agent %></div>
+        <div class="user_agent">
+          <div>User agent</div>
+          <div><%= @profile.user_agent %></div>
+        </div>
+
+        <div class="user_agent">
+          <div>User's email</div>
+          <div><%= @user.email %></div>
+        </div>
       </div>
     </div>
-  </div>
   <% end %>
 
   <% if authorized? %>
