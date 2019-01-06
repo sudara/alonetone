@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
-    "@bugsnag/js": "^5.0.2",
-    "@rails/webpacker": "^4.0.0-pre.3",
+    "@babel/preset-env": "^7.2.3",
+    "@bugsnag/js": "^5.1.0",
+    "@rails/webpacker": "^4.0.0-rc.2",
     "@shopify/draggable": "^1.0.0-beta.7",
     "babel-loader": "^8.0.4",
     "babel-preset-minify": "^0.5.0",
@@ -14,16 +14,18 @@
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.0",
     "rails-ujs": "^5.2.2",
+    "seedrandom": "^2.4.4",
     "stimulus": "^1.1.0",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.9.0",
+    "eslint": "^5.11.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
-    "webpack-dev-server": "^3.1.9"
+    "eslint-plugin-react": "^7.12.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-dev-server": "^3.1.14"
   }
 }

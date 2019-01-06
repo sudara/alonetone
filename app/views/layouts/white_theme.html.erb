@@ -55,34 +55,13 @@
   </main>
 
   <footer id="site_footer" data-turbolinks-permanent>
-    <%= cache("footer/#{theme_name}/#{moderator?}", expires_in: 3.minutes) do %>
+    <%= cache("footer/#{theme_name}/#{logged_in?}/#{moderator?}", expires_in: 1.minute) do %>
     <%= render partial: 'shared/footer_white' %>
     <% end %>
   </footer>
 
   <div id='play-svg-container' style='display:none' data-turbolinks-permanent>
-   <svg id="playAnimationSVG"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
-        <defs>
-            <mask id="iconMask">
-                <circle class="dotty" cx="300" cy="300" r="245" fill="#FFF" stroke="none" stroke-miterlimit="10" stroke-width="105" />
-                <circle class="dotty" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="105" stroke-dasharray="167.94 51.98" />
-                <g class="spinballGroup">
-                    <circle class="spinball" cx="221" cy="300" r="55" fill="#000" stroke="none" stroke-miterlimit="10" stroke-width="0" />
-                    <circle class="spinball" cx="379" cy="300" r="55" fill="#000" stroke="none" stroke-miterlimit="10" stroke-width="0" />
-                </g>
-            </mask>
-        </defs>
-        <g>
-            <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0" />
-            <g class="iconGroup" mask="url(#iconMask)">
-                <path class="icon" d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
-            </g>
-            <g id="pauseGroup" class="pauseGroup">
-                <line x1="235" y1="96" x2="235" y2="500" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64" />
-                <line x1="365" y1="96" x2="365" y2="500" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64" />
-            </g>
-        </g>
-    </svg>
+    <%= render file: svg_path('svg/animation_play.svg') %>
   </div>
   <%= render partial: 'layouts/greenfield/ga' %>
   <%= render partial: 'shared/headway' if logged_in? %>

@@ -28,3 +28,13 @@ dl.group {
     padding-bottom: $baseline / 2;
   }
 }
+
+input#asset_data_ {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: $samo-alternate-background-gray;
+  margin-right: 10px;
+  &:focus {
+    border: 1px solid $new-samo-gray;
+  }
+}

@@ -1,4 +1,4 @@
- <svg id="playAnimationSVG"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+   <svg id="playAnimationSVG"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
         <defs>
             <mask id="iconMask">
                 <circle class="dotty" cx="300" cy="300" r="245" fill="#FFF" stroke="none" stroke-miterlimit="10" stroke-width="105" />
@@ -19,4 +19,4 @@
                 <line x1="365" y1="96" x2="365" y2="500" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64" />
             </g>
         </g>
-</svg>
+    </svg>

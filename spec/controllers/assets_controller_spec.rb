@@ -1,15 +1,6 @@
 require "rails_helper"
-include ActiveJob::TestHelper
 
 RSpec.describe AssetsController, type: :controller do
-  render_views
-  fixtures :assets, :users, :audio_features
-
-  before :each do
-    clear_enqueued_jobs
-    clear_performed_jobs
-  end
-
   context "new" do
     it 'should display limit reached flash for new users with >= 25 tracks' do
       login(:brand_new_user)
@@ -58,6 +49,12 @@ RSpec.describe AssetsController, type: :controller do
       expect(response).to be_successful # no wrong answer here :)
       expect(assigns(:assets)).not_to include(assets(:valid_mp3))
       expect(assigns(:assets)).to be_present # should be populated with user's own assets
+    end
+
+    it 'should not error when user accesses /mass_edit by clicking Click here to mass-edit all your tracks' do
+      login(:arthur)
+      get :mass_edit, params: { user_id: users(:arthur).login }
+      expect(response).to be_successful
     end
   end
 

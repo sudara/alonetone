@@ -14,15 +14,14 @@ class Comment < ActiveRecord::Base
   has_many :replies, as: :commentable, class_name: 'Comment'
 
   # optional user who made the comment
-  belongs_to :commenter, class_name: 'User'
+  belongs_to :commenter, class_name: 'User', optional: true
 
   # optional user who is *recieving* the comment
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever
-  belongs_to :user
+  belongs_to :user, optional: true
 
   belongs_to :commentable, polymorphic: true, touch: true
   validates_length_of :body, within: 1..2000
-  validates :commentable_id, presence: true
 
   before_create :disallow_dupes, :set_user
   after_create :increment_counters

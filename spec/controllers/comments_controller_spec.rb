@@ -1,9 +1,6 @@
 require "rails_helper"
 
 RSpec.describe CommentsController, type: :controller do
-  fixtures :users, :comments, :assets
-  include ActiveJob::TestHelper
-
   context "basics" do
     it 'should allow anyone to view the comments index' do
       get :index

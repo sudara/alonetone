@@ -1,5 +1,4 @@
-import { seedRandom } from './seed_random'
-
+import { seedRandom } from 'seedrandom'
 
 function Triangulr (props) {
 

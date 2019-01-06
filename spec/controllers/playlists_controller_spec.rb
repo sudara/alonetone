@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe PlaylistsController, 'permissions', type: :controller do
-  fixtures :playlists, :users
-
   it "should show a playlist" do
     get :show, params: { id: 1, permalink: 'owp', user_id: 'sudara' }
     expect(response).to be_successful
@@ -109,8 +107,6 @@ RSpec.describe PlaylistsController, 'permissions', type: :controller do
 end
 
 RSpec.describe PlaylistsController, "sharing and exporting", type: :controller do
-  fixtures :playlists, :users
-
   it "should deliver us tasty xml for single playlist" do
     request.env["HTTP_ACCEPT"] = "application/xml"
     get :show, params: { id: '1', user_id: 'sudara', permalink: 'owp' }

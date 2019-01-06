@@ -41,7 +41,7 @@ class AssetsController < ApplicationController
     else
       @assets = @user.assets.published
     end
-    @assets = @assets.recent.paginate(per_page: 200, page: params[:page])
+    @pagy, @assets = pagy(@assets.recent, page_param: :page)
 
     respond_to do |format|
       format.html # index.rhtml
@@ -117,7 +117,7 @@ class AssetsController < ApplicationController
   def mass_edit
     redirect_to_default && (return false) unless logged_in? && (current_user.id == @user.id) || admin?
     # currently we redirect asset # publish to mass_edit with params["assets"]
-    if params["assets"].first && @user.assets.not_current(params["assets"].first).descriptionless.count > 0
+    if params["assets"]&.first && @user.assets.not_current(params["assets"]&.first).descriptionless.count > 0
       @descriptionless = @user.assets.not_current(params["assets"].first).descriptionless
     elsif @user.assets.descriptionless.count > 2
       @descriptionless = @user.assets.descriptionless
@@ -207,10 +207,8 @@ class AssetsController < ApplicationController
 
     session[:white_theme_notified] ||= 1
     session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
-    flash.now[:ok] = "Hey, #{current_user.name}, we've been working hard on an updated, mobile friendly theme.<br/>" \
-                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>Learn More</a> " \
-                     "on the new forums or switch back by clicking " +
-                     "<a href ='/toggle_theme'>Toggle Theme</a> in the footer.".html_safe
+    flash.now[:ok] = "#{current_user.name}: missing something on white theme? Let us know " \
+                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>on the forums</a>".html_safe
   end
 
   def asset_params

@@ -3,3 +3,4 @@ topic1:
   user_id: 1
   title: Do you like chocolate?
   permalink: firsttopic
+  last_user_id: 1

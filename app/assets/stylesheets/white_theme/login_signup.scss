@@ -20,9 +20,13 @@
 	}
 	.hint {
 	  font-style: italic;
-	  margin-top: 8px;
-	  margin-bottom: 12px;
-	  text-align: left;
+	  margin-top: 12px;
+	  margin-bottom: 16px;
+		text-align: left;
+		color: $new-samo-gray;
+	}
+	a:hover {
+		color: $samo-orange;
 	}
 }
   
@@ -30,6 +34,12 @@
 	input.btn {
 	  margin-top: $baseline / 2;
 	  margin-bottom: $baseline;
+	}
+}
+
+#signup {
+	.input input {
+		margin-bottom: -2px;
 	}
 }
   
@@ -41,7 +51,10 @@ body main #columns  {
 		padding-bottom: $baseline / 2;
 	  label {
 			margin-bottom: 2px!important;
-	  }  
+		} 
+		a {
+			text-decoration: underline;
+		}
 	}
 }
   
