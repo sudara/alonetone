@@ -72,7 +72,7 @@ class AssetsController < ApplicationController
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
     @page_title = "alonetone Radio: #{@channel}"
-    @pagy, @assets = pagy(Asset.radio(params[:source], params, current_user))
+    @pagy, @assets = pagy(Asset.radio(params[:source], current_user), page_param: :page, items: params[:items])
     render 'radio_white' if white_theme_enabled?
   end
 

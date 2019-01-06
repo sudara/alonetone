@@ -86,8 +86,8 @@ Alonetone::Application.routes.draw do
     get'/:login/listenfeed.:format' => 'assets#listen_feed', :as => 'listen_feed'
 
     get 'radio' =>'assets#radio', :as => 'radio_home'
-    get 'radio/:source' => 'assets#radio', :defaults => {:per_page => 5, :page => 1}, :as => 'radio_source_home'
-    get 'radio/:source/:per_page/:page' => 'assets#radio', :defaults => {:per_page => 5, :page => 1}, :as => 'radio'
+    get 'radio/:source' => 'assets#radio', :as => 'radio_source_home'
+    get 'radio/:source/:per_page/:page' => 'assets#radio', :as => 'radio'
 
     # top 40
     get  '/top/:top' => 'assets#top', :as => 'top'

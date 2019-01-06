@@ -3,32 +3,32 @@
   <div class="mini_paginator">
     <%== pagy_nav @pagy %>
   </div>
-    <div id="radio_tracks" class="box">
-        <%= render partial: 'assets/asset', collection: @assets  %>
-    </div>
-    <div class="mini_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
+  <div id="radio_tracks" class="box">
+      <%= render partial: 'assets/asset', collection: @assets  %>
+  </div>
+  <div class="mini_paginator">
+    <%== pagy_nav @pagy %>
+  </div>
 <% end %>
 <% content_for :right do %>
-    <div id="radio" class="box">
-        <h2 class='box'>Choose a radio flavor, dear friend</h2>
-        <div id="radio_options" class='box'>
-            <div class="static_content" id="radio_controls">
-                <form id="radio_controls_form">
-                    <ul>
-                    <%= radio_option 'latest', 'Latest', true %>
-                    <%= radio_option 'popular', 'Currently kicking ass' %>
-                    <%= radio_option 'most_favorited', "Most favorited" %>
-                    <%= radio_option 'favorites', "Recently favorited"  %>
-                    <%= radio_option 'mangoz_shuffle', "The 'Mangoz' shuffle (random)" %>
-                    <%= radio_option 'those_you_follow',  "Tracks from those you follow", false, true %>
-                    <%= radio_option 'your_favorite_alonetoners', "Your favorite alonetoners", false, true %>
-                    <%= radio_option 'songs_you_have_not_heard',  "Songs you haven't heard", false, true %>
-                    <%= radio_option 'spam',  "Spam tracks", false, true %>
-                  </ul>
-                </form>
-            </div>
-        </div>
+  <div id="radio" class="box">
+    <h2 class='box'>Choose a radio flavor, dear friend</h2>
+    <div id="radio_options" class='box'>
+      <div class="static_content" id="radio_controls">
+        <form id="radio_controls_form">
+          <ul>
+          <%= radio_option 'latest', 'Latest', true %>
+          <%= radio_option 'popular', 'Currently kicking ass' %>
+          <%= radio_option 'most_favorited', "Most favorited" %>
+          <%= radio_option 'favorites', "Recently favorited"  %>
+          <%= radio_option 'mangoz_shuffle', "The 'Mangoz' shuffle (random)" %>
+          <%= radio_option 'those_you_follow',  "Tracks from those you follow", false, true %>
+          <%= radio_option 'your_favorite_alonetoners', "Your favorite alonetoners", false, true %>
+          <%= radio_option 'songs_you_have_not_heard',  "Songs you haven't heard", false, true %>
+          <%= radio_option 'spam',  "Spam tracks", false, true %>
+        </ul>
+        </form>
+      </div>
     </div>
+  </div>
 <% end %>

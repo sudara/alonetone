@@ -24,7 +24,7 @@
     <%= render partial: 'assets/asset', collection: @assets %>
   </div>
   <div class="footer_box">
-    <%= link_to radio_path(per_page: 40, source: 'latest'), class: 'view_all', title: 'latest music on alonetone' do %>
+    <%= link_to radio_path(items: 40, source: 'latest'), class: 'view_all', title: 'latest music on alonetone' do %>
     <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
     <% end %>
   </div>
@@ -50,7 +50,7 @@
     <%= render partial: 'assets/asset', collection: @popular %>
   </div>
   <div class="footer_box">
-    <%= link_to radio_path(per_page: 40,source: 'popular'), class: "view_all", title: 'alonetone radio: currently kicking ass' do %>
+    <%= link_to radio_path(items: 40, source: 'popular'), class: "view_all", title: 'alonetone radio: currently kicking ass' do %>
     <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
     <% end %>
   </div>
@@ -64,7 +64,7 @@
     </div>
     </div>
     <div class="footer_box">
-      <%= link_to radio_path(per_page: 40, source: 'those_you_follow'), class: 'view_all', title: 'alonetone radio: those you follow' do %>
+      <%= link_to radio_path(items: 40, source: 'those_you_follow'), class: 'view_all', title: 'alonetone radio: those you follow' do %>
 <span>        view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
       <% end %>
     </div>
@@ -79,7 +79,7 @@
     <% end %>
   </div>
   <div class="footer_box">
-    <%= link_to radio_path(per_page: 40, source: 'favorites'), class: 'view_all', title: 'alonetone radio: recently favorited' do %>
+    <%= link_to radio_path(items: 40, source: 'favorites'), class: 'view_all', title: 'alonetone radio: recently favorited' do %>
 <span>      view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
     <% end %>
   </div>
