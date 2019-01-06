@@ -70,8 +70,6 @@ gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
-
-
 group :production do
   gem 'puma'
   gem 'bugsnag'
@@ -97,8 +95,7 @@ group :test do
   gem 'rb-fsevent', :require => false
   gem 'guard', :require => false
   gem 'listen', :require => false
-  # https://github.com/thoughtbot/factory_bot/wiki/Usage
-  gem 'factory_bot_rails',:require => false
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
 
