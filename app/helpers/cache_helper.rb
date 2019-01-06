@@ -3,7 +3,8 @@ module CacheHelper
 
   # creates a hash of the count + last updated_at for the
   def cache_digest(collection)
-    if collection.is_a?(WillPaginate::Collection) || collection.is_a?(Array)
+    binding.pry
+    if collection.is_a?(Array)
       collection_key = Digest::MD5.hexdigest(collection.collect(&:updated_at).join)
       name = collection.first.class
       count = collection.size
