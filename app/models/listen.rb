@@ -9,11 +9,9 @@ class Listen < ActiveRecord::Base
   # A "Listen" occurs when a user listens to another users track
   belongs_to :asset, counter_cache: true, touch: true
 
-  belongs_to :listener, class_name: 'User', foreign_key: 'listener_id'
+  belongs_to :listener, class_name: 'User', foreign_key: 'listener_id', optional: true
 
   belongs_to :track_owner, class_name: 'User', counter_cache: true
-
-  validates_presence_of :asset_id, :track_owner_id
 
   before_save :truncate_user_agent
 

@@ -20,18 +20,13 @@ $mobile-site-width-narrow: 96%;
   }
 }
 
-$baseline: 24px; // Used for spacing layout, was 27px
+$baseline: 24px; // Used for various layout spacing
 
 // media tiers
 
 $mobile: 'only screen and (max-width: 420px)';
 $tablet: 'only screen and (max-width: 640px)';
 $widescreen: 'only screen and (min-width: 1500px)';
-
-// site colors
-
-$body-background-color: #f4f4f4;
-$box-background-color: #fff;
 
 // fonts
 
@@ -40,36 +35,30 @@ $sans-font: 'Alright Sans', sans-serif; // "Alright Sans Bold" exists for font-w
 $medium-sans-font: 'Alright Sans Medium', sans-serif;
 $serif-font: 'Harriet Text', serif;
 
-// colors ( how many of these are used, useful? )
+// site colors
+
+$body-background-color: #f4f4f4;
+
+// colors
 
 $black: #000;
-$not-quite-black: #353535;
+$dark-gray: #353535;
 $medium-gray: #666;
-$light-medium-gray: #888;
-$gray: #999;
-$silver: #c7c8c7;
 $samo-gray: #868686;
+$gray: #999;
 $new-samo-gray: #a6abab;
-$lightest-gray: #c7c6c3;
+$samo-light-gray: #d7dbdb;
 $light-gray: #eee;
 $samo-background-gray: #f1f2f2;
+$samo-alternate-background-gray: #f5f5f5;
+$lighest-gray: #f9f9f9;
 $white: #fff;
+
 $red: #d3220c;
-$green: #66a410;
 $orange: #da6d25;
-$orange-background: #e66d29;
-$samo-orange: #EB7B0C;
+$samo-orange: #eb7b0c;
 $samo-dark-orange: #f04e1a;
-$nav-item-color: #c1c9b4;
-$tab-box-silver: #fff;
-$playlist-box-silver: #fff;
-$box-background-even: #fff;
-$not-quite-white: #f9f9f9;
-$not-quite-white-opaque: #f9f9f9;
-$disabled: #8c8e86;
-$body-link-hover: #1a1d13;
 $waveform-playing: #302f2f;
-$bright-highlight: rgba(255, 255, 0, .6);
 
 @mixin samo-shadow-and-radius() {
   border-radius: 6px;
@@ -90,7 +79,7 @@ $bright-highlight: rgba(255, 255, 0, .6);
   color: #fff;
   border: 0;
   border-radius: 4px;
-  background-color: #a6abab;
+  background-color: $new-samo-gray;
   box-shadow: none;
   @if $type == 'admin' {
   }

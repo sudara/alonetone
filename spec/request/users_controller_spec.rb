@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
-  fixtures :users, :profiles
-
   before :each do
     create_user_session(users(:sudara))
   end
@@ -10,12 +8,12 @@ RSpec.describe UsersController, type: :request do
   context "GET show" do
     it "displays user info route v1" do
       get "/users/#{users(:sudara).login}"
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "displays user info route v2" do
       get "/#{users(:sudara).login}"
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

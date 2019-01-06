@@ -7,6 +7,7 @@ valid_comment_on_asset_by_user:
   user_id: 1
   commenter_id: 1
   remote_ip: 127.0.0.1
+  created_at: <%= 1.day.ago.to_s :db %>
 
 valid_comment_on_asset_by_guest:
   id: 2
@@ -15,6 +16,7 @@ valid_comment_on_asset_by_guest:
   body: "Well, this is an awesome track, says a nobody"
   is_spam: false
   user_id: 1
+  created_at: <%= 1.day.ago.to_s :db %>
 
 spam_comment_on_asset_by_user:
   id: 3
@@ -24,6 +26,7 @@ spam_comment_on_asset_by_user:
   is_spam: true
   user_id: 1
   commenter_id: 1
+  created_at: <%= 1.day.ago.to_s :db %>
 
 spam_comment_on_asset_by_guest:
   id: 4
@@ -32,18 +35,13 @@ spam_comment_on_asset_by_guest:
   body: "Well, this is an is_spammy is_spam."
   is_spam: true
   user_id: 1
+  created_at: <%= 1.day.ago.to_s :db %>
 
 comment_with_no_body:
   id: 5
   commentable_type: Asset
   commentable_id: 1
-
-comment_on_update:
-  id: 6
-  commentable_type: Update
-  commentable_id: 1
-  body: "Well, this is an awesome blog entry"
-  is_spam: false
+  created_at: <%= 1.day.ago.to_s :db %>
 
 private_comment_on_asset_by_guest:
   id: 7
@@ -53,6 +51,7 @@ private_comment_on_asset_by_guest:
   is_spam: false
   user_id: 1
   private: true
+  created_at: <%= 1.day.ago.to_s :db %>
 
 private_comment_on_asset_by_user:
   id: 8
@@ -64,6 +63,7 @@ private_comment_on_asset_by_user:
   commenter_id: 2
   remote_ip: 127.0.0.2
   private: true
+  created_at: <%= 1.day.ago.to_s :db %>
 
 public_spam_comment_on_asset_by_user:
   id: 9
@@ -75,6 +75,7 @@ public_spam_comment_on_asset_by_user:
   commenter_id: 2
   remote_ip: 127.0.0.2
   private: false
+  created_at: <%= 1.day.ago.to_s :db %>
 
 public_comment_on_asset_by_user:
   id: 10
@@ -86,3 +87,4 @@ public_comment_on_asset_by_user:
   commenter_id: 2
   remote_ip: 127.0.0.2
   private: false
+  created_at: <%= 1.day.ago.to_s :db %>

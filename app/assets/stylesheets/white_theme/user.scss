@@ -25,7 +25,7 @@ main {
       min-width: 320px;
     }
     h2 {
-      color: #eb7b0c;
+      color: $samo-orange;
       padding-left: 16px;
       margin-bottom: 16px;
       line-height: 1em;
@@ -161,7 +161,7 @@ main {
             div.follow_button {
               @include default_button();
               background-color: #fff;
-              color: #eb7b0c;
+              color: $samo-orange;
               margin-left: 24px;
               margin-right: 8px;
               &:hover {
@@ -207,7 +207,7 @@ main {
     #user_card_area {
       display: flex;
       flex-wrap: wrap;
-      background-color: $box-background-color;
+      background-color: $white;
       @include samo-shadow-and-radius();
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
       overflow: hidden;
@@ -252,7 +252,7 @@ main {
         }
         .user_location {
           font-weight: bold;
-          color: #eb7b0c;
+          color: $samo-orange;
           font-size: 14px;
           padding: 16px 36px;
         }
@@ -266,7 +266,7 @@ main {
         display: block;
       }
       > div {
-        background-color: $box-background-color;
+        background-color: $white;
         @include samo-shadow-and-radius();
         flex: 1;
         padding: 16px;
@@ -297,7 +297,7 @@ main {
         display: flex;
         flex-wrap: wrap;
         > div {
-          background-color: $box-background-color;
+          background-color: $white;
           @include samo-shadow-and-radius();
           flex: 1;
           padding: 16px;
@@ -339,7 +339,7 @@ main {
     #user_mod_stats_area {
       h2.area_heading {
         font-size: 20px;
-        color: #d7dbdb;
+        color: $samo-light-gray;
         display: block;
       }
       .area_content {
@@ -477,7 +477,7 @@ main {
           margin-top: 10px;
           padding-right: $baseline;
           padding-left: $baseline / 2;
-          background-color: $box-background-color;
+          background-color: $white;
           display: flex;
           .listen_user {
             margin-right: $baseline / 2;
