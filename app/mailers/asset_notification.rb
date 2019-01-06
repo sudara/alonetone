@@ -2,23 +2,23 @@ class AssetNotification < ActionMailer::Base
   default from: Alonetone.email
 
   def upload_notification(asset, follower_email, _sent_at = Time.now)
-    @asset_author = asset.user
+    @artist = asset.user
     @track = asset
     @play_link = play_link_for(asset)
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
-    mail subject: "[alonetone] '#{@asset_author.name}' uploaded a new track!", to: follower_email
+    mail subject: "[alonetone] '#{@artist.name}' uploaded a new track!", to: follower_email
   end
 
   def upload_mass_notification(assets, follower_email, _sent_at = Time.now)
-    @asset_author = assets.first.user
+    @artist = assets.first.user
     @assets = generate_asset_hash(assets)
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
     @upload_user_url = user_link_for(assets.first)
-    mail subject: "[alonetone] '#{@asset_author.name}' uploaded a new track!", to: follower_email
+    mail subject: "[alonetone] '#{@artist.name}' uploaded a new track!", to: follower_email
   end
 
   protected
@@ -42,7 +42,7 @@ class AssetNotification < ActionMailer::Base
   end
 
   def stop_following_link
-    'https://' + Alonetone.url + '/unfollow/' + @asset_author.login
+    'https://' + Alonetone.url + '/unfollow/' + @artist.login
   end
 
   def unsubscribe_link
