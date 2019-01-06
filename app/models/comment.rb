@@ -10,6 +10,7 @@ class Comment < ActiveRecord::Base
   scope :last_5_public,      -> { on_track.only_public.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
   scope :to_other_members,   -> { where("commenter_id != user_id") }
+  scope :not_my_ip,          -> { joins(:commenter).where("users.current_login_ip != remote_ip") }
 
   has_many :replies, as: :commentable, class_name: 'Comment'
 
