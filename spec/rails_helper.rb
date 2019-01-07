@@ -65,6 +65,7 @@ RSpec.configure do |config|
   config.include Authlogic::TestCase, type: :controller
   config.include Authlogic::TestCase, type: :request
   config.include RSpec::Support::AkismetHelpers
+  config.include RSpec::Support::FileFixtureHelpers
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
