@@ -52,7 +52,6 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
   config.include Authlogic::TestCase, type: :controller
   config.include Authlogic::TestCase, type: :request
-  config.include FactoryBot::Syntax::Methods
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
