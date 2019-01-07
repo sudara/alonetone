@@ -95,7 +95,6 @@ group :test do
   gem 'rb-fsevent', :require => false
   gem 'guard', :require => false
   gem 'listen', :require => false
-  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
 
