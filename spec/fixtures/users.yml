@@ -73,12 +73,26 @@ brand_new_user:
   updated_at: <%= 5.hours.ago.to_s :db %>
   assets_count: 25
 
+# Jamie Kiesl is a 35-year-old human resources manager who lives in Mequon, Wisconsin. She is also
+# damn good at naming cheeses. She created an account to listen to artists on Alonetone.
+jamie_kiesl:
+  login: Jamiek
+  email: jamie.kiesl@example.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  playlists_count: 0
+  assets_count: 0
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.month.ago %>
+
 # Will Studd is an International cheese specialist. Studd has been working with artisan and
 # farmhouse cheeses for more than four decades, and has travelled extensively in his vocation.
 will_studd:
   login: willstudd
   email: willstudd@exmple.com
   salt: <%= salt = Authlogic::Random.hex_token %>
+  playlists_count: 1
+  assets_count: 4
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
   created_at: <%= 1.year.ago %>
   updated_at: <%= 1.year.ago %>
@@ -87,8 +101,11 @@ will_studd:
 # Heerenveen in the Netherlands.
 henri_willig:
   login: henriwillig
+  display_name: Henri Willig
   email: henriwillig@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
+  playlists_count: 1
+  assets_count: 2
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
   created_at: <%= 6.months.ago %>
   updated_at: <%= 6.months.ago %>
