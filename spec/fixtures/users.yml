@@ -72,3 +72,23 @@ brand_new_user:
   created_at: <%= 5.hours.ago.to_s :db %>
   updated_at: <%= 5.hours.ago.to_s :db %>
   assets_count: 25
+
+# Will Studd is an International cheese specialist. Studd has been working with artisan and
+# farmhouse cheeses for more than four decades, and has travelled extensively in his vocation.
+will_studd:
+  login: willstudd
+  email: willstudd@exmple.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  created_at: <%= 1.year.ago %>
+  updated_at: <%= 1.year.ago %>
+
+# Henri Willig has been producing traditional cheeses in its own cheese dairies in Katwoude and
+# Heerenveen in the Netherlands.
+henri_willig:
+  login: henriwillig
+  email: henriwillig@example.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  created_at: <%= 6.months.ago %>
+  updated_at: <%= 6.months.ago %>
