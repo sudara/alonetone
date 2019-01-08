@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'webmock/rspec'
+
 RSpec.configure do |config|
   # The following three options will be default in RSpec 4.
   config.expect_with :rspec do |expectations|
