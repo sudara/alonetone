@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :request do
+  before do
+    akismet_stub_response_ham
+  end
+
   context "#latest" do
     it "should render the home page" do
       get '/'
