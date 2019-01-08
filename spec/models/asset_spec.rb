@@ -1,12 +1,13 @@
 require "rails_helper"
 
-include ActionDispatch::TestProcess
-def new_track(file)
-  upload_file = fixture_file_upload(File.join('assets', file), 'audio/mpeg')
-  Asset.create(user_id: 1, mp3: upload_file)
-end
-
 RSpec.describe Asset, type: :model do
+  def new_track(path)
+    Asset.create(
+      user: users(:sudara),
+      mp3: fixture_file_upload(file_fixture(path), 'audio/mpeg')
+    )
+  end
+
   context "validation" do
     it 'can be an mp3 file' do
       expect(assets(:valid_mp3)).to be_valid
@@ -53,13 +54,13 @@ RSpec.describe Asset, type: :model do
 
   context "zip files" do
     it "allow mp3 files to be extracted" do
-      file = fixture_file_upload(File.join('assets', '1valid-1invalid.zip'), 'application/zip')
+      file = fixture_file_upload(file_fixture('1valid-1invalid.zip'), 'application/zip')
       expect { |b| Asset.extract_mp3s(file, &b) }.to yield_control.once
     end
 
     it "names mp3s after what they are called within the zip file" do
       files = []
-      zip = fixture_file_upload(File.join('assets', '1valid-1invalid.zip'), 'application/zip')
+      zip = fixture_file_upload(file_fixture('1valid-1invalid.zip'), 'application/zip')
       Asset.extract_mp3s(zip) do |file|
         files << file
       end
@@ -68,7 +69,7 @@ RSpec.describe Asset, type: :model do
     end
 
     it "doesn't barf on fake zip files, hands it to paperclip to validate" do
-      file = fixture_file_upload(File.join('assets', 'broken.zip'), 'application/zip')
+      file = fixture_file_upload(file_fixture('broken.zip'), 'application/zip')
       expect { |b| Asset.extract_mp3s(file, &b) }.to yield_control.once
     end
   end
@@ -164,14 +165,14 @@ RSpec.describe Asset, type: :model do
       end
     end
   end
-end
-
-RSpec.describe Asset, 'on update', type: :model do
-  it 'should regenerate a permalink after the title is changed' do
-    asset = new_track('muppets.mp3')
-    asset.save
-    asset.title = 'New Muppets 123'
-    asset.save
-    expect(asset.permalink).to eq('new-muppets-123')
+  
+  context 'on update' do
+    it 'should regenerate a permalink after the title is changed' do
+      asset = new_track('muppets.mp3')
+      asset.save
+      asset.title = 'New Muppets 123'
+      asset.save
+      expect(asset.permalink).to eq('new-muppets-123')
+    end
   end
 end
