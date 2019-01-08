@@ -8,6 +8,9 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'selenium/webdriver'
 
+# The suite needs to be able to connect to localhost for feature specs.
+WebMock.disable_net_connect!(allow_localhost: true)
+
 # Reloads schema.rb when database has pending migrations.
 ActiveRecord::Migration.maintain_test_schema!
 
