@@ -12,7 +12,7 @@ class Track < ActiveRecord::Base
   acts_as_list scope: :playlist_id, order: :position
 
   before_validation :ensure_playlist_if_favorite, :set_user_id_from_playlist
-  validates_presence_of :asset_id, :playlist_id, :user_id
+  validates :asset, :playlist, :user, presence: true
 
   def asset_length
     asset ? asset[:length] : 0
