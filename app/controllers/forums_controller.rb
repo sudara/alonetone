@@ -15,7 +15,7 @@ class ForumsController < ApplicationController
     handle_forum_session
     respond_to do |format|
       format.html do # show.html.erb
-        @pagy, @topics = pagy(@forum.topics.not_spam.sticky_and_recent, page_param: current_page, items: 20)
+        @pagy, @topics = pagy(@forum.topics.not_spam.sticky_and_recent, items: 20)
       end
       format.xml  { render xml: @forum }
     end
