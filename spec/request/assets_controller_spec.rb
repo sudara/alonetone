@@ -1,17 +1,8 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :request do
-  fixtures :assets, :users
-  include ActiveJob::TestHelper
-
-  before(:each) do
-    DatabaseCleaner.start
-    clear_enqueued_jobs
-    clear_performed_jobs
-  end
-
-  append_after(:each) do
-    DatabaseCleaner.clean
+  before do
+    akismet_stub_response_ham
   end
 
   context "#latest" do
@@ -178,8 +169,28 @@ RSpec.describe AssetsController, type: :request do
   end
 
   context '#create' do
+    let(:mp3_asset_url) do
+      'https://example.com/muppets.mp3'
+    end
+    let(:zip_asset_url) do
+      'https://example.com/1valid-1invalid.zip'
+    end
+
     before do
       create_user_session(users(:arthur))
+
+      stub_request(:get, mp3_asset_url).and_return(
+        body: Rails.root.join('spec/fixtures/assets/muppets.mp3').open(
+          encoding: 'binary'
+        ),
+        headers: { 'Content-Type' => 'audio/mpeg' }
+      )
+      stub_request(:get, zip_asset_url).and_return(
+        body: Rails.root.join('spec/fixtures/assets/1valid-1invalid.zip').open(
+          encoding: 'binary'
+        ),
+        headers: { 'Content-Type' => 'application/zip' }
+      )
     end
 
     it 'should successfully upload an mp3' do
@@ -218,13 +229,13 @@ RSpec.describe AssetsController, type: :request do
 
     it "should allow an mp3 upload from an url" do
       expect {
-        post '/arthur/tracks', params: { asset_data: ["https://github.com/sudara/alonetone/raw/master/spec/fixtures/assets/muppets.mp3"] }
+        post '/arthur/tracks', params: { asset_data: [mp3_asset_url] }
       }.to change { Asset.count }.by(1)
     end
 
-    it "should allow a zip upload from an url" do
+    it "should allow a zip upload from tan url" do
       expect {
-        post '/arthur/tracks', params: { asset_data: ["https://github.com/sudara/alonetone/raw/master/spec/fixtures/assets/1valid-1invalid.zip"] }
+        post '/arthur/tracks', params: { asset_data: [zip_asset_url] }
       }.to change { Asset.count }.by(1)
     end
   end

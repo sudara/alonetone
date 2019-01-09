@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::CommentsController, type: :request do
-  fixtures :comments, :users
-
   before do
     create_user_session(users(:sudara))
   end
@@ -11,6 +9,7 @@ RSpec.describe Admin::CommentsController, type: :request do
     let(:comment) { comments(:valid_comment_on_asset_by_guest) }
 
     it "should mark comments as spam" do
+      akismet_stub_submit_spam
       expect(comment.is_spam).to eq(false)
       put "/admin/comments/#{comment.id}/spam"
       comment.reload
@@ -27,6 +26,7 @@ RSpec.describe Admin::CommentsController, type: :request do
     let(:comment) { comments(:public_spam_comment_on_asset_by_user) }
 
     it "should unspam the comment" do
+      akismet_stub_submit_ham
       put unspam_admin_comment_path(comment.id)
       expect(comment.reload.is_spam).to eq(false)
     end
@@ -37,8 +37,7 @@ RSpec.describe Admin::CommentsController, type: :request do
     end
 
     it "should send notification" do
-      allow(comment).to receive(:is_deliverable?).and_return(true)
-
+      akismet_stub_submit_ham
       expect do
         put unspam_admin_comment_path(comment.id)
       end.to change { ActionMailer::Base.deliveries.size }.by(1)
@@ -51,6 +50,8 @@ RSpec.describe Admin::CommentsController, type: :request do
     let(:comment3) { comments(:public_comment_on_asset_by_user) }
 
     it "should mark all comments as spam" do
+      akismet_stub_submit_spam
+
       put mark_group_as_spam_admin_comments_path, params: { mark_spam_by: { remote_ip: '127.0.0.2' } }
 
       expect(comment1.is_spam).to eq(true)
@@ -64,6 +65,8 @@ RSpec.describe Admin::CommentsController, type: :request do
     end
 
     it "should alow mass update by other attributes (like user_id)" do
+      akismet_stub_submit_spam
+
       put mark_group_as_spam_admin_comments_path, params: { mark_spam_by: { user_id: comment1.user_id } }
       expect(comment1.reload.is_spam).to eq(true)
       expect(comment3.reload.is_spam).to eq(true)

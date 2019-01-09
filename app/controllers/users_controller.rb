@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :ip_is_acceptable?, only: :create
   before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
   before_action :require_login, except: %i[index show new create activate destroy]
   invisible_captcha only: [:create, :update], honeypot: :name
@@ -32,7 +31,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.valid? && @user.save_without_session_maintenance
+    if is_a_bot? && @user.valid?
+      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+      redirect_to login_url(already_joined: true)
+    elsif @user.valid? && @user.save_without_session_maintenance
       @user.reset_perishable_token!
       UserNotification.signup(@user).deliver_now
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
@@ -115,10 +117,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
-  end
-
-  def ip_is_acceptable?
-    !is_from_a_bad_ip?
   end
 
   def prepare_meta_tags
