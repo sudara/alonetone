@@ -253,7 +253,6 @@
 }
 
 #edit_playlist_info {
-  @include match-dynamic-site-width("narrow");
   padding-left: 0;
   padding-right: 0;
   padding-bottom: 20px;
@@ -369,6 +368,7 @@
     padding-top: 20px;
     input {
       float: right;
+      @include default-button();
     }
     a:first-child {
       @include default-button();

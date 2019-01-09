@@ -19,7 +19,8 @@
   margin-right: auto;
   box-shadow: none;
   background: transparent;
-  @include match-dynamic-site-width('narrow');
+  // @include match-dynamic-site-width('narrow');
+  max-width: 960px;
   @media #{$mobile} {
     width: 90%;
   }
