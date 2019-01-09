@@ -4,7 +4,11 @@ module RSpec
   module Support
     module FileFixtureHelpers
       def file_fixture(path)
-        ::Rails.root.join(file_fixture_path, path).to_s
+        file_fixture_pathname(path).to_s
+      end
+
+      def file_fixture_pathname(path)
+        ::Rails.root.join(file_fixture_path, path)
       end
 
       def file_fixture_tempfile(path)
