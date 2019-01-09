@@ -162,7 +162,7 @@ RSpec.describe AssetsController, type: :request do
     end
 
     it 'should prevent uploads from new users with >= 25 tracks' do
-      post '/brandnewuser/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+      post '/brandnewuser/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       follow_redirect!
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
     end
@@ -180,13 +180,13 @@ RSpec.describe AssetsController, type: :request do
       create_user_session(users(:arthur))
 
       stub_request(:get, mp3_asset_url).and_return(
-        body: Rails.root.join('spec/fixtures/assets/muppets.mp3').open(
+        body: file_fixture_pathname('muppets.mp3').open(
           encoding: 'binary'
         ),
         headers: { 'Content-Type' => 'audio/mpeg' }
       )
       stub_request(:get, zip_asset_url).and_return(
-        body: Rails.root.join('spec/fixtures/assets/1valid-1invalid.zip').open(
+        body: file_fixture_pathname('1valid-1invalid.zip').open(
           encoding: 'binary'
         ),
         headers: { 'Content-Type' => 'application/zip' }
@@ -195,7 +195,7 @@ RSpec.describe AssetsController, type: :request do
 
     it 'should successfully upload an mp3' do
       expect do
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       end.to change { Asset.count }.by(1)
 
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
@@ -203,27 +203,27 @@ RSpec.describe AssetsController, type: :request do
 
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mp3')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
       }.to change { Asset.count }.by(1)
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
     end
 
     it "should email followers and generate waveform via queue" do
       users(:sudara).add_or_remove_followee(users(:arthur).id)
-      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mp3')] }
+      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
       expect(enqueued_jobs.size).to eq 2
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
     end
 
     it 'should successfully upload 2 mp3s' do
-      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg'),
-                                                                      fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg'),
+                                                                      fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
     end
 
     it "should successfully extract mp3s from a zip" do
        expect {
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('assets/1valid-1invalid.zip', 'application/zip')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/1valid-1invalid.zip', 'application/zip')] }
       }.to change { Asset.count }.by(1)
     end
 
