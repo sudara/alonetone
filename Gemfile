@@ -96,6 +96,7 @@ group :test do
   gem 'rspec-mocks', require: false
   gem 'rspec-rails', require: false
   gem 'selenium-webdriver'
+  gem 'webmock', require: false
 end
 
 group :development, :test do
