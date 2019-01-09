@@ -8,7 +8,7 @@ class PlaylistsController < ApplicationController
   before_action :find_tracks, only: %i[show edit all]
 
   def all
-    @playlist_pagy, @playlists = pagy(Playlist.recent.only_public.with_pic, page_param: :page)
+    @playlist_pagy, @playlists = pagy(Playlist.recent.only_public.with_pic, page_param: :page, items: 30)
   end
 
   # all user's playlists
@@ -65,8 +65,8 @@ class PlaylistsController < ApplicationController
   def edit
     set_assets
     @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user)
-                    .select('distinct assets.*, listens.created_at'), page_param: :listens_page)
-    @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page) if @user.favorites.present?
+                    .select('distinct assets.*, listens.created_at'), page_param: :listens_page, items: 10)
+    @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page, items: 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
     elsif white_theme_enabled?
@@ -158,7 +158,7 @@ class PlaylistsController < ApplicationController
   end
 
   def set_assets
-    @assets_pagy, @assets = pagy(@user.assets.recent, page_param: :uploads_page)
+    @assets_pagy, @assets = pagy(@user.assets.recent, page_param: :uploads_page, items: 10)
   end
 
   def set_all_playlists
