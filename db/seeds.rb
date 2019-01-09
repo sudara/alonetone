@@ -1,5 +1,5 @@
 include ActionDispatch::TestProcess
-muppet_upload = fixture_file_upload(File.join('spec/fixtures/assets/muppets.mp3'), 'audio/mpeg')
+muppet_upload = fixture_file_upload(File.join('spec/fixtures/files/muppets.mp3'), 'audio/mpeg')
 
 def put_user_credentials(username, password)
   puts "You can now sign in with: #{username} - #{password}"
