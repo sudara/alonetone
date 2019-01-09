@@ -6,6 +6,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
+require 'capybara/rspec'
 require 'selenium/webdriver'
 
 # The suite needs to be able to connect to localhost for feature specs. Percy
@@ -33,6 +34,9 @@ Capybara.register_driver(:headless_chrome) do |app|
   )
 end
 Capybara.javascript_driver = :headless_chrome
+# Configure the HTTP server to be silent. Note that Capybara would figure out
+# to use Puma on its own if we remove this line.
+Capybara.server = :puma, { Silent: true }
 
 # Set default resolutions for visual regression testing.
 Percy.config.default_widths = [375, 1280]
