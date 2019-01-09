@@ -13,34 +13,16 @@
   }
   h1 {
     font-weight: bold;
-    line-height: 42px;
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    height: 42px;
-    margin-top: 0;
-    margin-bottom: 1px;
-    padding: 0 0 0 0;
-    border-radius: 0;
-    line-height: 20px;
-    height: auto;
-    padding-bottom: 12px;
+    font-family: $sans-font;
+    font-size: 18px;
+    padding-bottom: 16px;
     padding-left: $baseline / 2;
     color: $samo-orange;
     border-bottom: 1px solid $light-gray;
-    background-color: transparent;
-    &.static_content_heading {
-      padding-left: $baseline / 2;
-    }
   }
   h2.spacey {
     font-size: 13px;
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
     padding-left: $baseline / 2;
-    padding-right: $baseline / 2;
-    box-sizing: border-box;
   }
   .errorExplanation {
     margin: 0;
@@ -51,14 +33,8 @@
   }
   .container.static_content {
     width: 100%;
-    padding: 0;
     padding-left: $baseline / 2;
     padding-right: $baseline / 2;
-    background-color: $white;
     box-sizing: border-box;
-    box-shadow: none;
-    strong {
-      font-weight: normal;
-    }
   }
 }
