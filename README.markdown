@@ -116,7 +116,6 @@ Thirdly, fork away on github.
 
 ### Setup alonetone locally on macOS
 
-
 - Clone this repo
 `git clone REPO_GIT`
 
@@ -154,6 +153,10 @@ brew install yarn
 yarn install
 ```
 
+#### Optional installs
+
+The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascripts/animation/` to use the plugin.
+
 #### Logging in
 
 After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
@@ -164,4 +167,4 @@ After login, click on the "Upload" button to upload your first mp3.
 
 The alonetone source code is released under the MIT license.
 
-"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2018 and may not be used without permission.
+"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2019 and may not be used without permission.

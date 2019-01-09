@@ -1,15 +1,6 @@
 require "rails_helper"
-include ActiveJob::TestHelper
 
 RSpec.describe AssetsController, type: :controller do
-  render_views
-  fixtures :assets, :users, :audio_features
-
-  before :each do
-    clear_enqueued_jobs
-    clear_performed_jobs
-  end
-
   context "new" do
     it 'should display limit reached flash for new users with >= 25 tracks' do
       login(:brand_new_user)
@@ -27,6 +18,7 @@ RSpec.describe AssetsController, type: :controller do
 
   context "edit" do
     it 'should allow user to upload new version of song' do
+      akismet_stub_response_ham
       login(:sudara)
       post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
       expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
@@ -73,18 +65,19 @@ RSpec.describe AssetsController, type: :controller do
     end
 
     it 'should allow user to update track title and description' do
+      akismet_stub_response_ham
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'normal description' } }, xhr: true
       expect(response).to be_successful
     end
 
     it 'should call out to rakismet on update' do
-      allow(Rakismet).to receive(:akismet_call).and_return('false')
+      akismet_stub_response_spam
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'normal description' } }, xhr: true
       expect(users(:arthur).assets.first.private).to be_falsey
     end
 
     it 'should record track as spammy if it is spam' do
-      allow(Rakismet).to receive(:akismet_call).and_return('true')
+      akismet_stub_response_spam
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }, xhr: true
       expect(assigns(:asset).is_spam?).to be_truthy
     end

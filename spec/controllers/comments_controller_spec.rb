@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe CommentsController, type: :controller do
-  fixtures :users, :comments, :assets
-  include ActiveJob::TestHelper
+  before do
+    akismet_stub_response_ham
+  end
 
   context "basics" do
     it 'should allow anyone to view the comments index' do
@@ -40,7 +41,7 @@ RSpec.describe CommentsController, type: :controller do
 
     it 'should not email track owner if comment is spam' do
       login(:arthur)
-      # the "viagra-test-123" guarantees a spam response
+      akismet_stub_response_spam
       params = { :comment => { "body" => "viagra-test-123", "private" => 1, "commentable_type" => "Asset", "commentable_id" => 4 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
       expect do
          post :create, params: params, xhr: true
@@ -54,7 +55,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     it "should not increment comment_count if comment is spam" do
-      # the "viagra-test-123" guarantees a spam response
+      akismet_stub_response_spam
       params = { :comment => { "body" => "viagra-test-123", "private" => 1, "commentable_type" => "Asset", "commentable_id" => 4 }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
       post :create, params: params, xhr: true
       expect(Asset.find(1).comments_count).to eq(0)
