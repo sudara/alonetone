@@ -7,7 +7,6 @@ class UpdatesController < ApplicationController
   # GET /updates.xml
   def index
     @updates_pagy, @updates = pagy(Update.recent.includes(comments: [commenter: :pic]),
-      page_param: params[:page],
       items: 5
     )
     respond_to do |format|

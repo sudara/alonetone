@@ -8,7 +8,7 @@ class PlaylistsController < ApplicationController
   before_action :find_tracks, only: %i[show edit all]
 
   def all
-    @playlist_pagy, @playlists = pagy(Playlist.recent.only_public.with_pic, page_param: :page, items: 30)
+    @playlist_pagy, @playlists = pagy(Playlist.recent.only_public.with_pic, items: 30)
   end
 
   # all user's playlists
