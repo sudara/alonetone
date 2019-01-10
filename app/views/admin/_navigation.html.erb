@@ -1,5 +1,6 @@
 <ul class="admin_nav">
   <li><%= link_to 'Users', admin_users_path %></li>
+  <li><%= link_to 'Deleted Users', admin_users_path({deleted: true}) %></li>
   <li><%= link_to 'Tracks', admin_assets_path %></li>
   <li>Comments</li>
     <ul>
