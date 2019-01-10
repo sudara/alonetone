@@ -39,37 +39,37 @@ ul {
   }
 }
 
-.faq.box {
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: none;
-  background: transparent;
-  max-width: 960px;
-  @media #{$mobile} {
-    width: 90%;
-  }
-  padding: $baseline / 2 $baseline;
-  box-sizing: border-box;
-  margin-bottom: 26px;
+// .faq.box {
+//   margin-left: auto;
+//   margin-right: auto;
+//   box-shadow: none;
+//   background: transparent;
+//   max-width: 960px;
+//   @media #{$mobile} {
+//     width: 90%;
+//   }
+//   padding: $baseline / 2 $baseline;
+//   box-sizing: border-box;
+//   margin-bottom: 26px;
 
-  h2.box {
-    margin-top: 0;
-    color: #8b370d;
-    background: none;
-    box-shadow: none;
-    padding-left: 0;
-    border-radius: 0;
-    line-height: 20px;
-    height: auto;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #80604026;
-  }
-  .static_content {
-    margin: $baseline 0;
-    line-height: 1.5em;
-    font-size: 16px;
-  }
-}
+//   h2.box {
+//     margin-top: 0;
+//     color: #8b370d;
+//     background: none;
+//     box-shadow: none;
+//     padding-left: 0;
+//     border-radius: 0;
+//     line-height: 20px;
+//     height: auto;
+//     padding-bottom: 12px;
+//     border-bottom: 1px solid #80604026;
+//   }
+//   .static_content {
+//     margin: $baseline 0;
+//     line-height: 1.5em;
+//     font-size: 16px;
+//   }
+// }
 
 
 .below_box {
