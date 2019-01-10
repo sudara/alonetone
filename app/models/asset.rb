@@ -19,7 +19,7 @@ class Asset < ActiveRecord::Base
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
 
-  belongs_to :user, counter_cache: true
+  belongs_to :user, -> { with_deleted }, counter_cache: true
   has_one  :audio_feature
   has_many :tracks
   has_many :playlists, through: :tracks

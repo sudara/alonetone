@@ -1,5 +1,11 @@
 <div id="user_home">
   <div id="user_header_area">
+    <% if current_user.moderator? && @user.deleted? %>
+      <div style="background: red; padding: 1em; width: 100%; color: white"">
+        This user was deleted on
+        <%= local_time_ago(@user.deleted_at) %>
+      </div>
+    <% end %>
     <div id="user_header">
       <div class="user_name_and_location_and_follow">
         <div class="user_name_and_location">
