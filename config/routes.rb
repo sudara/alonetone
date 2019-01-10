@@ -87,7 +87,7 @@ Alonetone::Application.routes.draw do
 
     get 'radio' =>'assets#radio', :as => 'radio_home'
     get 'radio/:source' => 'assets#radio', :as => 'radio_source_home'
-    get 'radio/:source/:per_page/:page' => 'assets#radio', :as => 'radio'
+    get 'radio/:source/:items' => 'assets#radio', :as => 'radio'
 
     # top 40
     get  '/top/:top' => 'assets#top', :as => 'top'
