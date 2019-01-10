@@ -2,7 +2,6 @@ body.cover-view .playlist-sidebar {
   border-radius: 6px 0 0 6px;
   align-self: stretch;
 }
-
 .track-content {
   &.track-content-cover-view {
     margin-left: -$baseline!important;
@@ -30,7 +29,7 @@ body.cover-view .playlist-sidebar {
         position: static;
       }
     }
-  }
+  
   min-width: 400px;
   @media #{$tablet} {
     min-width: auto;
@@ -135,4 +134,5 @@ body.cover-view .playlist-sidebar {
       }
     }
   }
+}
 }
