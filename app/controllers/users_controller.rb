@@ -135,7 +135,12 @@ class UsersController < ApplicationController
   def gather_user_goodies
     @profile = @user.profile
     @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
-    @assets = @user.assets.includes(user: :pic).limit(5)
+    if current_user.moderator?
+      @assets = @user.assets.with_deleted.includes(user: :pic).limit(5)
+    else
+      @assets = @user.assets.includes(user: :pic).limit(5)
+    end
+
     @playlists = @user.playlists.only_public.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
