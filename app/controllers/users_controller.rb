@@ -113,7 +113,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def restore
+  def undelete
     # this will perform restore on all associated records that also act
     # as paranoid
     @user.restore(recursive: true)
