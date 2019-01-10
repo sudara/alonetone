@@ -2,34 +2,35 @@ body.cover-view .playlist-sidebar {
   border-radius: 6px 0 0 6px;
   align-self: stretch;
 }
-.track-content {
-  &.track-content-cover-view {
-    margin-left: -$baseline!important;
-    .large-cover-and-credits {
-      @include samo-shadow-and-radius();
-      border-radius: 0 6px 6px 0;
-      overflow: auto;
-      @media only screen and (max-width: 850px) {
-        border-radius: 6px 6px 0 0;
-      }
+
+body.cover-view .track-content {
+  // &.track-content-cover-view {
+  margin-left: -$baseline !important;
+  .large-cover-and-credits {
+    @include samo-shadow-and-radius();
+    border-radius: 0 6px 6px 0;
+    overflow: auto;
+    @media only screen and (max-width: 850px) {
+      border-radius: 6px 6px 0 0;
     }
-    .playlist-credits {
-      font-size: 13px;
-      line-height: 18px;
-      padding: $baseline/2;
-      box-sizing: border-box;
-      color: rgb(153, 153, 153);
-      text-align: left;
-      border-radius: 0;
-      box-shadow: none;
-      max-width: 624px;;
-      background-color: transparent;
-      position: absolute;
-      @media only screen and (max-width: 850px) {
-        position: static;
-      }
+  }
+  .playlist-credits {
+    font-size: 13px;
+    line-height: 18px;
+    padding: $baseline/2;
+    box-sizing: border-box;
+    color: rgb(153, 153, 153);
+    text-align: left;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 624px;
+    background-color: transparent;
+    position: absolute;
+    @media only screen and (max-width: 850px) {
+      position: static;
     }
-  
+  }
+
   min-width: 400px;
   @media #{$tablet} {
     min-width: auto;
@@ -43,12 +44,12 @@ body.cover-view .playlist-sidebar {
     svg {
       display: block;
       @media #{$mobile} {
-				border-radius: 0 0 0 0;
-			}
+        border-radius: 0 0 0 0;
+      }
     }
     img {
       display: block;
-      width:100%;
+      width: 100%;
     }
   }
   img {
@@ -56,9 +57,9 @@ body.cover-view .playlist-sidebar {
     display: block;
   }
   .playlist-cover-alert {
-    font-size:14px;
+    font-size: 14px;
     line-height: 1.5em;
-    padding:5px 40px;
+    padding: 5px 40px;
     border: 3px dashed $red;
     a {
       text-decoration: underline;
@@ -76,7 +77,7 @@ body.cover-view .playlist-sidebar {
         margin-top: 0;
         margin-bottom: 0;
         li a {
-          background-image: image-url('svg/icon_playlist_download.svg');
+          background-image: image-url("svg/icon_playlist_download.svg");
         }
       }
       &.external-links {
@@ -110,19 +111,19 @@ body.cover-view .playlist-sidebar {
           padding-bottom: 0;
           text-decoration: none;
           color: $lightest-gray;
-          background-image: image-url('svg/icon_playlist_google_play.svg');
+          background-image: image-url("svg/icon_playlist_google_play.svg");
           background-size: 19px 19px;
           background-repeat: no-repeat;
           background-position: 10px 15px;
           &.spotify {
-            background-image: image-url('svg/icon_playlist_spotify.svg');
+            background-image: image-url("svg/icon_playlist_spotify.svg");
           }
           &.itunes {
-            background-image: image-url('svg/icon_playlist_itunes.svg');
-            padding-left:px;
+            background-image: image-url("svg/icon_playlist_itunes.svg");
+            padding-left: px;
           }
           &.apple {
-            background-image: image-url('svg/apple_music.svg');
+            background-image: image-url("svg/apple_music.svg");
           }
           .action-text {
             text-align: left;
@@ -133,6 +134,6 @@ body.cover-view .playlist-sidebar {
         }
       }
     }
+    // }
   }
-}
 }
