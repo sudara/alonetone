@@ -51,17 +51,17 @@
       clear: both;
       overflow: auto;
       min-height: 35px;
-      border-top: 1px solid $lighest-gray;
+      border-top: 1px solid $lightest-gray;
       &:last-child {
-        border-bottom: 1px solid $lighest-gray;
+        border-bottom: 1px solid $lightest-gray;
       }
       &:hover,
       &.active {
         background-color: $dark-gray;
         a.position-name-time {
-          color: $lighest-gray;
+          color: $lightest-gray;
           span.track-name {
-            color: $lighest-gray;
+            color: $lightest-gray;
           }
           span.track-position {
             color: $new-samo-gray;
