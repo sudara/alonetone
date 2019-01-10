@@ -24,63 +24,6 @@ body {
       margin-left: auto;
       margin-right: auto;
     }
-    #playlist-and-track-content {
-      display: flex;
-      justify-content: center;
-      // @include match-dynamic-site-width();
-      max-width: 1032px;
-      padding: 0 36px;
-      box-sizing: border-box;
-      margin-left: auto;
-      margin-right: auto;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      @media #{$mobile} {
-        width: 100%;
-      }
-      .playlist-sidebar {
-        min-width: 300px;
-        max-width: 450px;
-        width: 35%;
-        margin-right: $baseline;
-        // align-self: stretch;
-        @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
-          max-width: none;
-          width: 100%;
-          margin-right: 0;
-          margin-bottom: $baseline;
-          order: 2;
-          border-radius: 0 0 6px 6px;
-        }
-        @media #{$mobile} {
-          border-radius: 0 0 0 0;
-        }
-
-
-      }
-      .track-content {
-        width: auto;
-        max-width: 700px;
-        margin-left: 0;
-        margin-right: 0;
-        @media #{$tablet} {
-          margin-left: auto;
-          min-width: 100px;
-        }
-        @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
-          width: 100%;
-          order: 1;
-          max-width: none;
-          margin-left: 0 !important;
-          border-radius: 0;
-          svg {
-            // border-radius: 4px 4px 0px 0;
-          }
-
-        }
-        flex: 1;
-      }
-    }
     #columns {
       display: flex;
       max-width: 960px;
@@ -104,13 +47,10 @@ body {
         width: 48%;
         min-width: 320px;
         max-width: 460px;
-
-
         h2.box {
           box-shadow: none;
           border-radius: 0;
         }
-
         .static_content {
           padding: $baseline $baseline / 2;
           font-size: 13px;
@@ -123,7 +63,6 @@ body {
           width: 100%;
           margin-left: auto!important;
           margin-right: auto!important;
-
         }
       }
     }
