@@ -55,7 +55,7 @@ class Upload
     end
 
     def process_entry(zip, entry)
-      basename = File.basename(entry.to_s)
+      basename = File.basename(entry.name.dup.force_encoding('utf-8'))
 
       # We only care about MP3
       return unless basename.ends_with?('.mp3')
