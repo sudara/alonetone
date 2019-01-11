@@ -19,8 +19,8 @@ end
 # Table name: updates
 #
 #  id           :integer          not null, primary key
-#  content      :text(65535)
-#  content_html :text(65535)
+#  content      :text(16777215)
+#  content_html :text(16777215)
 #  permalink    :string(255)
 #  revision     :integer
 #  title        :string(255)
