@@ -49,9 +49,33 @@ RSpec.describe Upload::ZipFile, type: :model do
 
       expect(zip_file.assets.length).to eq(3)
       zip_file.assets.each do |asset|
+        expect(asset.user).to eq(user)
         expect(asset.mp3_content_type).to eq('audio/mpeg')
         expect(asset.mp3_file_name).to_not be_empty
       end
+    end
+  end
+
+  context 'processing file with one usable and one unusable MP3' do
+    let(:zip_file_filename) { '1valid-1invalid.zip' }
+
+    it 'builds assets for all good MP3 files and no playlist' do
+      expect(zip_file.process).to eq(false)
+
+      expect(zip_file.playlists).to be_empty
+      expect(zip_file.assets.length).to eq(2)
+
+      usable = zip_file.assets.select(&:valid?)[0]
+      expect(usable.user).to eq(user)
+      expect(usable.mp3_content_type).to eq('audio/mpeg')
+      expect(usable.mp3_file_name).to eq('muppets.mp3')
+      expect(usable.errors).to be_empty
+
+      unusable = zip_file.assets.reject(&:valid?)[0]
+      expect(unusable.user).to eq(user)
+      expect(unusable.mp3_content_type).to eq('inode/x-empty')
+      expect(unusable.mp3_file_name).to eq('cavernous.mp3')
+      expect(unusable.errors).to_not be_empty
     end
   end
 
