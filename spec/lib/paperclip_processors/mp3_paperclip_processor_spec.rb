@@ -41,6 +41,22 @@ RSpec.describe Paperclip::Mp3PaperclipProcessor, :model do
     end
   end
 
+  context 'operating on ID3 data that contains BMP characters' do
+    let(:mp3_file_filename) { 'japanese-characters.mp3' }
+
+    it 'extracts ID3 information and applies to an Assset' do
+      expect(processor.make).to be_kind_of(File)
+      expect(asset.album).to eq('Îª°®×öµÄÉµÊÂ')
+      expect(asset.artist).to eq('´÷°®Áá')
+      expect(asset.bitrate).to eq(192)
+      expect(asset.genre).to eq('(13)Pop')
+      expect(asset.id3_track_num).to eq(1)
+      expect(asset.length).to eq("4:37")
+      expect(asset.samplerate).to eq(44100)
+      expect(asset.title).to eq('01-¶ÔµÄÈË')
+    end
+  end
+
   context 'operating on blank MP3' do
     let(:mp3_file_filename) { 'empty.mp3' }
 
