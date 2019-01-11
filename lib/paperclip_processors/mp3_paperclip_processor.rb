@@ -33,10 +33,13 @@ module Paperclip
 
     def copy_id3_tags_to_record(info)
       ATTRIBUTE_TO_ID3_TAG_NAME.each do |attribute_name, tag_name|
-        attachment.instance.public_send(
-          "#{attribute_name}=",
-          info.respond_to?(tag_name) ? info.public_send(tag_name) : info.tag[tag_name]
-        )
+        value = info.respond_to?(tag_name) ? info.public_send(tag_name) : info.tag[tag_name]
+        if value.respond_to?(:encode)
+          value.encode(
+            'UTF-8', invalid: :replace, undef: :replace, replace: "\ufffd"
+          ).mb_chars.normalize
+        end
+        attachment.instance.public_send("#{attribute_name}=", value)
       end
     end
   end
