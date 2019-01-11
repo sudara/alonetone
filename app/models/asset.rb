@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Asset < ActiveRecord::Base
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
@@ -77,12 +79,32 @@ class Asset < ActiveRecord::Base
     object_id
   end
 
+  # MySQL encoding is set to utf8, which only supports Basic Multilingual Plane characters.
+  UNSUPPORTED_UTF_8 = %r{[^\u0000-\uffff]}.freeze
+  MISSING_GLYPH = "\ufffd"
+
+  def title=(title)
+    if title.nil?
+      super
+    else
+      super(title.gsub(UNSUPPORTED_UTF_8, MISSING_GLYPH))
+    end
+  end
+
+  def mp3_file_name=(mp3_file_name)
+    if mp3_file_name.nil?
+      super
+    else
+      super(mp3_file_name.gsub(UNSUPPORTED_UTF_8, MISSING_GLYPH))
+    end
+  end
+
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
 
-    clean = mp3_file_name.split('.')[-2].try(:gsub, /-|_/, ' ')
-    clean.present? ? clean.strip.titleize : 'untitled'
+    name = File.basename(mp3_file_name.to_s, '.*').humanize
+    name.blank? ? 'untitled' : name
   end
 
   def first_playlist
