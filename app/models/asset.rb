@@ -170,9 +170,9 @@ end
 #  artist           :string(255)
 #  bitrate          :integer
 #  comments_count   :integer          default(0)
-#  credits          :text(16777215)
-#  description      :text(16777215)
-#  description_html :text(16777215)
+#  credits          :text(4294967295)
+#  description      :text(4294967295)
+#  description_html :text(4294967295)
 #  favorites_count  :integer          default(0)
 #  genre            :string(255)
 #  hotness          :float(24)
@@ -181,7 +181,7 @@ end
 #  length           :integer
 #  listens_count    :integer          default(0)
 #  listens_per_week :float(24)
-#  lyrics           :text(16777215)
+#  lyrics           :text(4294967295)
 #  mp3_content_type :string(255)
 #  mp3_file_name    :string(255)
 #  mp3_file_size    :integer

@@ -9,7 +9,7 @@ end
 # Table name: audio_features
 #
 #  id         :bigint(8)        not null, primary key
-#  waveform   :text(16777215)
+#  waveform   :text(4294967295)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  asset_id   :bigint(8)
