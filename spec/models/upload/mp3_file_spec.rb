@@ -37,9 +37,7 @@ RSpec.describe Upload::Mp3File, type: :model do
     end
   end
 
-  context 'processing file with ID3 tags' do
-    let(:mp3_file_filename) { 'piano.mp3' }
-
+  context 'processing file without ID3 tags' do
     it 'builds a valid single asset' do
       expect(mp3_file.process).to eq(true)
       expect(mp3_file.assets.length).to eq(1)
@@ -49,12 +47,29 @@ RSpec.describe Upload::Mp3File, type: :model do
       expect(asset.user).to eq(user)
       expect(asset.mp3_content_type).to eq('audio/mpeg')
       expect(asset.mp3_file_name).to eq(mp3_file_filename)
-      expect(asset.mp3_file_size).to eq(37352)
-      expect(asset.title).to eq('Piano')
-      expect(asset.length).to eq('0:04')
-      expect(asset.genre).to eq('Rock')
-      expect(asset.samplerate).to eq(44100)
-      expect(asset.bitrate).to eq(64)
+      expect(asset.mp3_file_size).to eq(72)
+    end
+  end
+
+  context 'processing file with emoji in the filename' do
+    let(:mp3_file_filename) { '🐬.mp3' }
+    let(:mp3_file) do
+      Upload::Mp3File.new(
+        user: user,
+        file: file_fixture_tempfile('smallest.mp3'),
+        filename: mp3_file_filename
+      )
+    end
+
+    it 'builds a valid single asset' do
+      expect(mp3_file.process).to eq(true)
+      expect(mp3_file.assets.length).to eq(1)
+
+      asset = mp3_file.assets.first
+      expect(asset.errors).to be_blank
+      expect(asset.user).to eq(user)
+      expect(asset.name).to eq('�')
+      expect(asset.mp3_file_name).to eq('�.mp3')
     end
   end
 
