@@ -19,15 +19,15 @@ class Upload
   attr_reader :playlists
 
   validates :files, :user, presence: true
-  validates :assets, :playlists, each_valid: true
 
   def process
     process_files(self.class.mime_types(uploaded_files.map(&:path)))
     return false unless valid?
 
-    @assets.each(&:save!)
-    @playlists.each(&:save!)
-
+    # Alonetone tries to import as much from any upload as possible and reports on things that went
+    # wrong. This means we need to call save on all records built while processing files.
+    @assets.each(&:save)
+    @playlists.each(&:save)
     true
   end
 
@@ -40,17 +40,27 @@ class Upload
     uploaded_files.each do |uploaded_file|
       case mime_types[uploaded_file.path]
       when 'application/zip'
-        zip_file = Upload::ZipFile.process(user: user, file: uploaded_file.tempfile)
+        process_zip_file(uploaded_file)
+      when 'audio/mpeg'
+        process_mp3_file(uploaded_file)
+      end
+    end
+  end
+
+  def process_zip_file(uploaded_file)
+    zip_file = Upload::ZipFile.process(
+      user: user, file: uploaded_file.tempfile
+    )
         @assets.concat(zip_file.assets)
         @playlists.concat(zip_file.playlists)
-      when 'audio/mpeg'
+  end
+
+  def process_mp3_file(uploaded_file)
         mp3_file = Upload::Mp3File.process(
           user: user, file: uploaded_file.tempfile, filename: uploaded_file.original_filename
         )
         @assets.concat(mp3_file.assets)
       end
-    end
-  end
 
   def reset
     @assets = []
