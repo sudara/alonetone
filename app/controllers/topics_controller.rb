@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
       @posts = @topic.posts.recent.not_spam
     end
     @posts_pagy, @posts = pagy(@posts.preload(user: :pic))
-    @post  = Post.new
+    @post = Post.new
   end
 
   def new
