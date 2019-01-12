@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true, length: { record_type: 191, name: 191 }
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true, length: 191
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.integer "id3_track_num", default: 1
     t.boolean "is_spam", default: false
     t.index ["hotness"], name: "index_assets_on_hotness"
-    t.index ["permalink"], name: "index_assets_on_permalink", length: 191
+    t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
     t.index ["user_id", "listens_per_week"], name: "index_assets_on_user_id_and_listens_per_day"
     t.index ["user_id"], name: "index_assets_on_user_id"
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.boolean "private", default: false
     t.text "body_html", limit: 16777215
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
-    t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private", length: { commentable_type: 191 }
+    t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
-    t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private", length: { commentable_type: 191 }
+    t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private"
   end
 
   create_table "featured_tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.text "description_html", limit: 16777215
     t.string "state", default: "public"
     t.string "permalink"
-    t.index ["permalink"], name: "index_forums_on_permalink", length: 191
+    t.index ["permalink"], name: "index_forums_on_permalink"
     t.index ["position"], name: "index_forums_on_position"
   end
 
@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.datetime "updated_at"
     t.string "picable_type"
     t.integer "picable_id"
-    t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type", length: { picable_type: 191 }
+    t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
   end
 
   create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.boolean "has_details", default: false
     t.string "theme"
     t.datetime "published_at"
-    t.index ["permalink"], name: "index_playlists_on_permalink", length: 191
+    t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
@@ -563,7 +563,7 @@ ActiveRecord::Schema.define(version: 2019_01_11_084034) do
     t.boolean "spam", default: false
     t.float "spaminess"
     t.string "signature"
-    t.index ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink", length: { permalink: 191 }
+    t.index ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink"
     t.index ["last_updated_at", "forum_id"], name: "index_topics_on_forum_id_and_last_updated_at"
     t.index ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
   end
