@@ -4,6 +4,9 @@
   padding-bottom: 20px;
   padding-top: 0;
   background-color: $white;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
   @media #{$mobile} {
     width: 100%;
   }
