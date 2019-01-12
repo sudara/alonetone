@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
 
-    if current_user.moderator?
+    if current_user&.moderator?
       @user = User.with_deleted.where(login: login).first
     else
       @user = User.where(login: login).first
