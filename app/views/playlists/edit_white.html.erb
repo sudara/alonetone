@@ -1,6 +1,6 @@
 <%= error_messages_for :playlist %>
 
-<div id="edit_playlist_info" class="faq box">
+<div id="edit_playlist_info" class="box">
   <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
 
     <div class="edit_playlist_info_columns">
@@ -67,8 +67,7 @@
  icon.
     </p>
     <div class="box">
-
-    <h2 class="box"><%= @playlist.title %></h2>
+    <h2><%= @playlist.title %></h2>
     <div class="sortable" data-target="playlist-edit.sortable">
       <% @playlist.tracks.each do |track| %>
       <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
@@ -98,7 +97,7 @@
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
       <div class="draggable_tracks">
-        <h2 class="box">Available tracks</h2>
+        <h2>Available tracks</h2>
         <div id="playlist_tabs">
           <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
             <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
