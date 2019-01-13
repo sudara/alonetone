@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  scope :recent,             -> { order('id DESC') }
+  scope :recent, -> { order('id DESC') }
   scope :without_deleted_users, -> { joins(:commenter).where('users.deleted_at is NULL') }
   scope :only_public,        -> { without_deleted_users.recent.where(is_spam: false).where(private: false) }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
