@@ -67,8 +67,12 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, 'User Not Found'
   end
 
+  def user_identifying_params
+     params[:login] || params[:user_id] || params[:id]
+  end
+
   def find_user
-    login = params[:login] || params[:user_id] || params[:id]
+    login = user_identifying_params
 
     if current_user&.moderator?
       @user = User.with_deleted.where(login: login).first
