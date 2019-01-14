@@ -4,12 +4,14 @@ require 'rails_helper'
 
 RSpec.describe Upload::Mp3File, type: :model do
   let(:user) { users(:will_studd) }
+  let(:asset_attributes) { nil }
   let(:mp3_file_filename) { 'smallest.mp3' }
   let(:mp3_file) do
     Upload::Mp3File.new(
       user: user,
       file: file_fixture_tempfile(mp3_file_filename),
-      filename: mp3_file_filename
+      filename: mp3_file_filename,
+      asset_attributes: asset_attributes
     )
   end
 
@@ -34,6 +36,7 @@ RSpec.describe Upload::Mp3File, type: :model do
       expect(asset.mp3_content_type).to eq('audio/mpeg')
       expect(asset.mp3_file_name).to eq(mp3_file_filename)
       expect(asset.mp3_file_size).to eq(72)
+      expect(asset.private).to eq(false)
     end
   end
 
@@ -48,6 +51,7 @@ RSpec.describe Upload::Mp3File, type: :model do
       expect(asset.mp3_content_type).to eq('audio/mpeg')
       expect(asset.mp3_file_name).to eq(mp3_file_filename)
       expect(asset.mp3_file_size).to eq(72)
+      expect(asset.private).to eq(false)
     end
   end
 
@@ -70,6 +74,7 @@ RSpec.describe Upload::Mp3File, type: :model do
       expect(asset.user).to eq(user)
       expect(asset.name).to eq('�')
       expect(asset.mp3_file_name).to eq('�.mp3')
+      expect(asset.private).to eq(false)
     end
   end
 
@@ -83,6 +88,28 @@ RSpec.describe Upload::Mp3File, type: :model do
       asset = mp3_file.assets.first
       expect(asset.errors).to_not be_blank
       expect(asset.errors.details.keys).to eq(%i[mp3_content_type mp3])
+      expect(asset.private).to eq(false)
+    end
+  end
+
+  context 'processing with additional attributes for assets' do
+    let(:user_agent) do
+      'Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)'
+    end
+    let(:asset_attributes) do
+      {
+        private: true,
+        user_agent: user_agent
+      }
+    end
+
+    it 'applies attributes to assets it builds' do
+      expect(mp3_file.process).to eq(true)
+      expect(mp3_file.assets.length).to eq(1)
+
+      asset = mp3_file.assets.first
+      expect(asset.private).to eq(true)
+      expect(asset.user_agent).to eq(user_agent)
     end
   end
 end
