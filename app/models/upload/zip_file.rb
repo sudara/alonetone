@@ -15,6 +15,12 @@ class Upload
     # The user who originate the upload.
     attr_accessor :user
 
+    # Additional attributes to apply to assets.
+    attr_writer :asset_attributes
+
+    # Additional attributes to apply to playlists.
+    attr_writer :playlist_attributes
+
     # Returns assets built for the ZIP.
     attr_reader :assets
 
@@ -23,6 +29,14 @@ class Upload
 
     validates :file, :user, presence: true
     validates :assets, :playlists, each_valid: true
+
+    def asset_attributes
+      @asset_attributes || {}
+    end
+
+    def playlist_attributes
+      @playlist_attributes || {}
+    end
 
     def album_title
       album_title_from_assets || album_title_for_user
@@ -66,7 +80,7 @@ class Upload
         tempfile.write(zip.read(entry))
         tempfile.rewind
         mp3_file = Upload::Mp3File.new(
-          user: user, file: tempfile, filename: basename
+          user: user, file: tempfile, filename: basename, asset_attributes: asset_attributes
         )
         mp3_file.process
         @assets.concat(mp3_file.assets)
@@ -102,7 +116,7 @@ class Upload
     def build_playlists
       return unless album?
 
-      playlist = Playlist.new(user: user, title: album_title)
+      playlist = Playlist.new(playlist_attributes.merge(user: user, title: album_title))
       ordered_assets.each do |asset|
         playlist.tracks.build(user: user, playlist: playlist, asset: asset)
       end
