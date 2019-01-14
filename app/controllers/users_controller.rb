@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
+  before_action :find_user, except: %i[new create index activate sudo toggle_favorite destroy]
   before_action :require_login, except: %i[index show new create activate destroy]
   invisible_captcha only: [:create, :update], honeypot: :name
 
@@ -91,15 +91,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
+    # Jenya: I think adding destroy to find_user will take care of this
+    # redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
       @user.destroy
-      if moderator?
-        redirect_to root_path
-      else
-        redirect_to logout_path
-      end
+      redirect_back(fallback_location: logout_path)
     else
       redirect_to root_path
     end
