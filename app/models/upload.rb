@@ -12,6 +12,12 @@ class Upload
   # The user who initiated the upload.
   attr_accessor :user
 
+  # Additional attributes to apply to assets.
+  attr_accessor :asset_attributes
+
+  # Additional attributes to apply to playlists.
+  attr_accessor :playlist_attributes
+
   # Assets built based on the files uploaded.
   attr_reader :assets
 
@@ -49,18 +55,20 @@ class Upload
 
   def process_zip_file(uploaded_file)
     zip_file = Upload::ZipFile.process(
-      user: user, file: uploaded_file.tempfile
+      user: user, file: uploaded_file.tempfile,
+      asset_attributes: asset_attributes, playlist_attributes: playlist_attributes
     )
-        @assets.concat(zip_file.assets)
-        @playlists.concat(zip_file.playlists)
+    @assets.concat(zip_file.assets)
+    @playlists.concat(zip_file.playlists)
   end
 
   def process_mp3_file(uploaded_file)
-        mp3_file = Upload::Mp3File.process(
-          user: user, file: uploaded_file.tempfile, filename: uploaded_file.original_filename
-        )
-        @assets.concat(mp3_file.assets)
-      end
+    mp3_file = Upload::Mp3File.process(
+      user: user, file: uploaded_file.tempfile, filename: uploaded_file.original_filename,
+      asset_attributes: asset_attributes
+    )
+    @assets.concat(mp3_file.assets)
+  end
 
   def reset
     @assets = []
