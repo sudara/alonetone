@@ -82,8 +82,6 @@ RSpec.describe Upload, type: :model do
     end
   end
 
-  # Disabled because the ZIP contains tracks with UTF-8 sequences not supported by the database
-  # encoding.
   context 'with uploaded ZIP file with tracks in same album' do
     let(:uploaded_filename) { 'Le Duc Vacherin.zip' }
 
