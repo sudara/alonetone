@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   scope :alpha,         -> { order('display_name ASC')                                }
 
   before_create :make_first_user_admin
+  before_destroy :enqueue_real_destroy_job
   # need to run this before destroy
   # to ensure assets are not deleted yet
   before_real_destroy :efficiently_destroy_relations
@@ -180,6 +181,10 @@ class User < ActiveRecord::Base
 
   def make_first_user_admin
     self.admin = true if User.count == 0
+  end
+
+  def enqueue_real_destroy_job
+    DeletedUserCleanupJob.set(wait: 30.days).perform_later(user.id)
   end
 end
 
