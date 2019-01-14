@@ -18,15 +18,22 @@ class Upload
     # The user who originate the upload.
     attr_accessor :user
 
+    # Additional attributes to apply to assets.
+    attr_writer :asset_attributes
+
     # Returns assets built for the MP3, usually this is one.
     attr_reader :assets
 
     validates :file, :filename, :user, presence: true
     validates :assets, each_valid: true
 
+    def asset_attributes
+      @asset_attributes || {}
+    end
+
     def process
       reset
-      @assets << Asset.new(user: user, mp3: file, mp3_file_name: filename)
+      @assets << Asset.new(asset_attributes.merge(user: user, mp3: file, mp3_file_name: filename))
       valid?
     end
 
