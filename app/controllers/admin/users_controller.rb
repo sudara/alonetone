@@ -1,29 +1,37 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[destroy spam]
+    before_action :find_user, only: %i[delete restore]
 
     def index
-      if permitted_params[:deleted]
-        scope = User.only_deleted
-      else
-        scope = User.recent
-      end
+      scope = User.only_deleted if permitted_params[:deleted]
+      # Do we want to display both deleted and active users on index?
+      scope ||= User.with_deleted.recent
+
       @pagy, @users = pagy(scope)
     end
 
-    def destroy
+    def delete
       @user.destroy
-      redirect_back(fallback_location: root_path)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
+    end
+
+    def restore
+      # this will perform restore on all associated records that also act
+      # as paranoid
+      @user.restore(recursive: true)
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: root_path) }
+        format.js
+      end
     end
 
     private
 
     def permitted_params
       params.permit!
-    end
-
-    def set_user
-      @user = User.find(params[:id])
     end
   end
 end

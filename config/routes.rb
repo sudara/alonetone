@@ -8,7 +8,14 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        put :restore
+        # not sure how to route my view action to this controller
+        # without specifying this method
+        put :delete
+      end
+    end
     resources :comments do
        member do
         put :unspam
@@ -136,7 +143,6 @@ Alonetone::Application.routes.draw do
       member do
         post :attach_pic
         get :sudo
-        post :undelete
       end
       resource 'profile'
       resources 'source_files' #:path_prefix => ':login'
