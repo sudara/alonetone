@@ -76,11 +76,11 @@ group :production do
 end
 
 group :development do
-  gem 'thin'
-  gem 'sqlite3'
-  gem 'perf_check'
   gem 'annotate'
-  gem 'rubocop', '~> 0.61.1', require: false
+  gem 'perf_check'
+  gem 'rubocop', require: false
+  gem 'sqlite3'
+  gem 'thin'
 end
 
 ## Who loves tests! You do? You do!
