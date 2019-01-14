@@ -73,14 +73,10 @@ class ApplicationController < ActionController::Base
 
   def find_user
     login = user_identifying_params
-
-    if current_user&.moderator?
-      @user = User.with_deleted.where(login: login).first
-    else
-      @user = User.where(login: login).first
-    end
-
+    @user = User.with_deleted.where(login: login).first if current_user&.moderator?
+    @user ||= User.where(login: login).first
     @user ||= current_user if %w[new favorites].include? action_name
+
     not_found unless @user
   end
 
