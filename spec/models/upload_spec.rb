@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Upload, type: :model do
   let(:user) { users(:will_studd) }
+  let(:asset_attributes) { nil }
+  let(:playlist_attributes) { nil }
   let(:uploaded_filename) { 'smallest.zip' }
   let(:uploaded_file) do
     ActionDispatch::Http::UploadedFile.new(
@@ -15,7 +17,9 @@ RSpec.describe Upload, type: :model do
   let(:upload) do
     Upload.new(
       user: user,
-      files: [uploaded_file]
+      files: [uploaded_file],
+      asset_attributes: asset_attributes,
+      playlist_attributes: playlist_attributes
     )
   end
 
@@ -127,6 +131,36 @@ RSpec.describe Upload, type: :model do
       expect(upload.playlists.length).to eq(0)
       expect(upload.assets.length).to eq(5)
       expect(upload.assets.reject(&:valid?).length).to eq(1)
+    end
+  end
+
+  context 'with additional asset attributes' do
+    let(:uploaded_filename) { 'Le Duc Vacherin.zip' }
+    let(:asset_attributes) do
+      { private: true }
+    end
+
+    it 'applies attributes to assets it builds' do
+      expect(upload.process).to eq(true)
+      expect(upload.assets.length).to eq(3)
+      upload.assets.each do |asset|
+        expect(asset.private).to eq(true)
+      end
+    end
+  end
+
+  context 'with additional playlist attributes' do
+    let(:uploaded_filename) { 'Le Duc Vacherin.zip' }
+    let(:playlist_attributes) do
+      { year: '2019' }
+    end
+
+    it 'applies attributes to assets it builds' do
+      expect(upload.process).to eq(true)
+      expect(upload.playlists.length).to eq(1)
+      upload.playlists.each do |playlist|
+        expect(playlist.year).to eq('2019')
+      end
     end
   end
 end
