@@ -5,10 +5,14 @@ require 'rails_helper'
 RSpec.describe Upload::ZipFile, type: :model do
   let(:user) { users(:will_studd) }
   let(:zip_file_filename) { 'tracks.zip' }
+  let(:asset_attributes) { nil }
+  let(:playlist_attributes) { nil }
   let(:zip_file) do
     Upload::ZipFile.new(
       user: users(:will_studd),
-      file: file_fixture_tempfile(zip_file_filename)
+      file: file_fixture_tempfile(zip_file_filename),
+      asset_attributes: asset_attributes,
+      playlist_attributes: playlist_attributes
     )
   end
 
@@ -24,7 +28,6 @@ RSpec.describe Upload::ZipFile, type: :model do
   context 'processing file with non-related MP3s' do
     it 'builds assets for all MP3 files and no playlist' do
       expect(zip_file.process).to eq(true)
-
       expect(zip_file.playlists).to be_empty
 
       expect(zip_file.assets.length).to eq(3)
@@ -32,6 +35,7 @@ RSpec.describe Upload::ZipFile, type: :model do
         expect(asset.user).to eq(user)
         expect(asset.mp3_content_type).to eq('audio/mpeg')
         expect(asset.mp3_file_name).to_not be_empty
+        expect(asset.private).to eq(false)
       end
     end
   end
@@ -46,12 +50,14 @@ RSpec.describe Upload::ZipFile, type: :model do
       playlist = zip_file.playlists.first
       expect(playlist.user).to eq(user)
       expect(playlist.title).to eq('Le Duc Vacherin')
+      expect(playlist.private).to be_nil
 
       expect(zip_file.assets.length).to eq(3)
       zip_file.assets.each do |asset|
         expect(asset.user).to eq(user)
         expect(asset.mp3_content_type).to eq('audio/mpeg')
         expect(asset.mp3_file_name).to_not be_empty
+        expect(asset.private).to eq(false)
       end
     end
   end
@@ -86,6 +92,52 @@ RSpec.describe Upload::ZipFile, type: :model do
       expect(zip_file.process).to eq(true)
       expect(zip_file.playlists).to be_empty
       expect(zip_file.assets).to be_empty
+    end
+  end
+
+  context 'processing with additional attributes for assets' do
+    let(:user_agent) do
+      'Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)'
+    end
+    let(:asset_attributes) do
+      {
+        private: true,
+        user_agent: user_agent
+      }
+    end
+
+    it 'applies attributes to assets it builds' do
+      expect(zip_file.process).to eq(true)
+      expect(zip_file.playlists).to be_empty
+
+      expect(zip_file.assets.length).to eq(3)
+      zip_file.assets.each do |asset|
+        expect(asset.private).to eq(true)
+        expect(asset.user_agent).to eq(user_agent)
+      end
+    end
+  end
+
+  context 'processing with additional attributes for playlists' do
+    let(:user_agent) do
+      'Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)'
+    end
+    let(:playlist_attributes) do
+      {
+        private: true,
+        year: '2019'
+      }
+    end
+    let(:zip_file_filename) { 'Le Duc Vacherin.zip' }
+
+    it 'applies attributes to playlists it builds' do
+      expect(zip_file.process).to eq(true)
+
+      expect(zip_file.playlists.length).to eq(1)
+      zip_file.playlists.each do |playlist|
+        expect(playlist.private).to eq(true)
+        expect(playlist.year).to eq('2019')
+      end
     end
   end
 end
