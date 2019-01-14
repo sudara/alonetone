@@ -56,12 +56,12 @@ end
 # Table name: features
 #
 #  id               :integer          not null, primary key
-#  body             :text(65535)
+#  body             :text(16777215)
 #  datetime         :boolean
 #  permalink        :string(255)
 #  published        :boolean          default(FALSE)
 #  published_at     :boolean
-#  teaser_text      :text(65535)
+#  teaser_text      :text(16777215)
 #  views_count      :integer          default(0)
 #  created_at       :datetime
 #  updated_at       :datetime

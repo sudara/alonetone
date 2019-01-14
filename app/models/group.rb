@@ -17,7 +17,7 @@ end
 # Table name: groups
 #
 #  id          :integer          not null, primary key
-#  description :text(65535)
+#  description :text(16777215)
 #  name        :string(255)
 #  permalink   :string(255)
 #  created_at  :datetime
