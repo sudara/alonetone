@@ -8,6 +8,7 @@ sudara:
   created_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
   admin: true
+  assets_count: 3
 
 # normal
 arthur:
