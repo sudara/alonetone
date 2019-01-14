@@ -175,9 +175,10 @@ RSpec.describe AssetsController, type: :request do
     let(:zip_asset_url) do
       'https://example.com/1valid-1invalid.zip'
     end
+    let(:user) { users(:arthur) }
 
     before do
-      create_user_session(users(:arthur))
+      create_user_session(user)
 
       stub_request(:get, mp3_asset_url).and_return(
         body: file_fixture_pathname('muppets.mp3').open(
@@ -219,6 +220,16 @@ RSpec.describe AssetsController, type: :request do
       post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg'),
                                                                       fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
+    end
+
+    it 'creates an album from a ZIP' do
+      expect do
+        expect do
+          post '/arthur/tracks', params: {
+            asset_data: [fixture_file_upload('files/Le Duc Vacherin.zip', 'application/zip')]
+          }
+        end.to change { user.assets.count }.by(+3)
+      end.to change { user.playlists.count }.by(+1)
     end
 
     it "should successfully extract mp3s from a zip" do
