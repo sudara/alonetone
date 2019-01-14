@@ -2,6 +2,7 @@
 valid_mp3:
   id: 1
   mp3_file_name: Song1.mp3
+  title: Very good song
   permalink: song1
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
