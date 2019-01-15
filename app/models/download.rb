@@ -56,7 +56,7 @@ class Download
   def rewritten_url
     # Dropbox links contain a dl parameter which indicates whether to immediately start the
     # download. We want to change this to 1 to make sure it downloads.
-    if base_url.include?('dropbox.com/sh') && params.key?('dl')
+    if base_url.include?('dropbox.com') && params.key?('dl')
       base_url + '?' + Rack::Utils.build_query(params.merge('dl' => '1'))
     # Google Drive share URLs are completely different from the direct download URL, but we can
     # rewrite them pretty easily.
@@ -96,7 +96,7 @@ class Download
 
   def filename_from_url
     # Alonetone requires an MP3 file to _always_ end with `.mp3` or it migth not play right.
-    File.basename(base_url, '.*') + '.mp3'
+    Rack::Utils.unescape_path(File.basename(base_url, '.*')) + '.mp3'
   end
 
   def downloaded_file

@@ -80,9 +80,7 @@ RSpec.describe Download, type: :model do
       expect(download.original_filename).to eq('Le Duc Vacherin.zip')
     end
 
-    # Disabled because the ZIP contains tracks with UTF-8 sequences not supported by the database
-    # encoding.
-    it 'processing builds a single asset and no playlists' do
+    it 'processing builds three assets and a playlist' do
       expect do
         expect do
           expect(download.process).to eq(true)
@@ -91,6 +89,35 @@ RSpec.describe Download, type: :model do
 
       expect(download.playlists.length).to eq(1)
       expect(download.assets.length).to eq(3)
+    end
+  end
+
+  context 'Non-preview style Dropbox URL' do
+    let(:url) do
+      'https://www.dropbox.com/s/jj5bmgdiwexwak4/francis%20slo%20blo.mp3?dl=0'
+    end
+
+    let(:stubbed_filename) { 'smallest.mp3' }
+
+    it 'rewrites the URL for direct download' do
+      expect(download.rewritten_url).to eq(
+        'https://www.dropbox.com/s/jj5bmgdiwexwak4/francis%20slo%20blo.mp3?dl=1'
+      )
+    end
+
+    it 'uses the filename in the URL as the original filename' do
+      expect(download.original_filename).to eq('francis slo blo.mp3')
+    end
+
+    it 'processing builds a single asset and no playlists' do
+      expect do
+        expect do
+          expect(download.process).to eq(true)
+        end.to change { user.assets.count }.by(+1)
+      end.to_not change { Playlist.count }
+
+      expect(download.playlists).to be_empty
+      expect(download.assets.length).to eq(1)
     end
   end
 
