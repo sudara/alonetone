@@ -46,7 +46,6 @@ class Asset < ActiveRecord::Base
                   user_role: proc { role },
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
-
   validates_presence_of :user_id
 
   # override has_permalink method to ensure we don't get empty permas
@@ -82,26 +81,6 @@ class Asset < ActiveRecord::Base
   # TODO: this is a view concern, move to helper, or better yet, deal w/it in .js
   def unique_id
     object_id
-  end
-
-  # MySQL encoding is set to utf8, which only supports Basic Multilingual Plane characters.
-  UNSUPPORTED_UTF_8 = %r{[^\u0000-\uffff]}.freeze
-  MISSING_GLYPH = "\ufffd"
-
-  def title=(title)
-    if title.nil?
-      super
-    else
-      super(title.gsub(UNSUPPORTED_UTF_8, MISSING_GLYPH))
-    end
-  end
-
-  def mp3_file_name=(mp3_file_name)
-    if mp3_file_name.nil?
-      super
-    else
-      super(mp3_file_name.gsub(UNSUPPORTED_UTF_8, MISSING_GLYPH))
-    end
   end
 
   # make sure the title is there, and if not, the filename is used...
