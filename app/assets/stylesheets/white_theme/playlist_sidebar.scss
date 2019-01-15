@@ -16,27 +16,16 @@
   }
   h1 {
     line-height: 22px;
-    margin-top: $baseline/2;
+    margin-top: $baseline;
     margin-bottom: 0;
     text-align: center;
     font-family: $sans-font;
     font-weight: bold;
-    &.cover {
-      font-size: 20px;
-      margin-top: 23px;
-    }
-    a {
-      font-size: 16px;
-      font-weight: bold;
-      line-height: 18px;
-      margin-top: 0;
-    }
   }
   h2 {
     font-size: 14px;
-    font-weight: 100;
     line-height: $baseline;
-    margin-top: 0;
+    font-weight: normal;
     margin-top: -2px;
     text-align: center;
     color: $dark-gray;
@@ -141,9 +130,6 @@
     margin-top: $baseline;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
-    &.anchor-at-bottom {
-      width: 100%;
-    }
     ul.downloads-links,
     ul.external-links {
       margin-top: 0;
