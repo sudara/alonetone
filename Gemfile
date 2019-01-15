@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.2.2'
 gem 'mysql2'
+gem 'puma'
 
 gem 'thredded'
 
@@ -70,13 +71,10 @@ gem 'sidekiq'
 gem 'dalli'
 
 group :production do
-  gem 'puma'
   gem 'bugsnag'
 end
 
 group :development do
-  gem 'thin'
-  gem 'sqlite3'
   gem 'perf_check'
   gem 'annotate'
   gem 'rubocop', '~> 0.61.1', require: false
