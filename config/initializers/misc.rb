@@ -3,9 +3,6 @@ FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
 require 'authlogic_helpers'
 require 'sometimes'
 
-WillPaginate::ViewHelpers.pagination_options[:inner_window] = 2
-WillPaginate::ViewHelpers.pagination_options[:outer_window] = 0
-
 # These defaults are used in Geokit::Mappable.distance_to and in acts_as_mappable
 Geokit::default_units = :miles
 Geokit::default_formula = :sphere
@@ -20,7 +17,6 @@ Geokit::Geocoders::request_timeout = 2
 # and http://www.google.com/apis/maps/documentation/#Geocoding_Examples
 Geokit::Geocoders::GoogleGeocoder.api_key =
   'ABQIAAAAb7vQ1d8XHrxuF5AJr8c-oxTbnWe9oX1zcTcDyLcGskh9JPynnBQ3ngxc6atkyQFihW5nLKpXFQ58gQ'
-
 
 # This is the order in which the geocoders are called in a failover scenario
 # If you only want to use a single geocoder, put a single symbol in the array.

@@ -36,7 +36,6 @@
             <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
           <% end %>
         <% end %>
-        
         <div class="edit_playlist_info_right_column_private_and_hidden">
           <%= f.input :private %> &nbsp; | (Playlists are hidden until they have more than 2 tracks)
         </div>
@@ -68,7 +67,6 @@
  icon.
     </p>
     <div class="box">
-    
     <h2><%= @playlist.title %></h2>
     <div class="sortable" data-target="playlist-edit.sortable">
       <% @playlist.tracks.each do |track| %>
@@ -89,7 +87,7 @@
       <div class="playlist_size">
       <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
       </div>
-    <% end %>    
+    <% end %>
      <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
   </div>
 
@@ -108,7 +106,7 @@
           </ul>
           <div id="your_uploads" class="playlist_source">
             <div class="mini_paginator">
-              <%= will_paginate @assets, {param_name: :uploads_page, ignore_get_params: true}%>
+              <%== pagy_nav @assets_pagy %>
             </div>
             <% @assets.each do |asset| %>
               <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
@@ -137,4 +135,3 @@
   <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
     data: { target:'playlist-edit.sortUrl' }, class: 'hidden sort_url' %>
 </div>
-

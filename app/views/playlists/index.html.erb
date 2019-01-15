@@ -1,15 +1,15 @@
 <%= render(partial: 'users/user') %>
 <% if authorized? %>
-<div class="additional_options_solo">
-  <div class="button_wrapper">
-  <%= link_to image_tag("icons/plus.png") + "create new playlist", new_user_playlist_path(@user), id: 'create_new_playlist', class: 'button' %>
-  </div>
-  <% if @user.playlists.only_public.size > 1 %>
+  <div class="additional_options_solo">
     <div class="button_wrapper">
-    <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), id: 'change_playlist_order', class: 'button'  %>
+      <%= link_to image_tag("icons/plus.png") + "create new playlist", new_user_playlist_path(@user), id: 'create_new_playlist', class: 'button' %>
     </div>
-  <% end %>
-</div>
+    <% if @user.playlists.only_public.size > 1 %>
+      <div class="button_wrapper">
+        <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), id: 'change_playlist_order', class: 'button'  %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 <% content_for :left do %>
   <%= render partial: 'playlist', collection: @playlists_left if @playlists_left %>
