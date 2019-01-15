@@ -1,7 +1,6 @@
 .track-content {
-
   max-width: 700px;
-  @include match-dynamic-site-width('narrow');
+  @include match-dynamic-site-width("narrow");
   > * {
     background-color: white;
     @include samo-shadow-and-radius();
@@ -11,19 +10,18 @@
     overflow: auto;
     background-color: transparent;
     box-shadow: none;
-
     .edit-links {
       background-color: transparent;
       box-shadow: none;
       border-radius: 0;
       float: left;
       .edit-link {
-        @include default-button('admin');
+        @include default-button("admin");
       }
       .edit-link + .edit-link {
         margin-left: 6px;
         text-transform: uppercase;
-        background-color: #FFF;
+        background-color: #fff;
         color: $samo-orange;
       }
     }
@@ -35,7 +33,7 @@
         display: block;
         background-size: 29px 29px;
         margin-right: 8px;
-        background-image: image-url('svg/icon_download.svg');
+        background-image: image-url("svg/icon_download.svg");
       }
     }
     .track-favorite {
@@ -45,8 +43,8 @@
       position: relative;
     }
   }
-
-  .track-post, .track-edit {
+  .track-post,
+  .track-edit {
     position: relative;
     z-index: 3;
     padding-left: 40px;
@@ -65,7 +63,6 @@
       line-height: 32px;
     }
     h3 {
-      // margin-top: $baseline / 2;
       margin-top: -16px;
       margin-bottom: $baseline;
       color: $samo-gray;
@@ -79,7 +76,6 @@
         margin-top: $baseline;
       }
     }
-
     div.track-stats {
       font-size: 12px;
       margin-bottom: 0;
@@ -114,7 +110,7 @@
         display: flex;
         justify-content: start;
       }
-      i  {
+      i {
         margin-left: 8px;
         svg {
           width: 17px;
@@ -132,31 +128,26 @@
       border-bottom: 1px solid #aaa;
       &:after {
         position: absolute;
-        top: -.55em;
+        top: -0.55em;
         left: 265px;
         display: block;
-        content: '\f025'; // with headphone icon
+        content: "\f025"; // with headphone icon
         color: #aaa;
         background-color: white; // interrupt hr
-
         -webkit-font-smoothing: antialiased;
       }
     }
   }
-
   div.comment_asset + h2 {
     display: none;
   }
-
   div#user_comments {
     background-color: none;
     box-shadow: none;
   }
-
   div#user_comments + .below_box {
     display: none;
   }
-
   .track-edit {
     margin-bottom: $baseline * 2; // to match MASS_EDIT
     header {
@@ -203,12 +194,11 @@
           cursor: pointer;
           float: left;
           margin-right: $baseline / 2;
-          @include default-button('admin');
+          @include default-button("admin");
         }
       }
     }
   }
-  // COPY FROM MASS_EDIT
   > div.box {
     > .static_content {
       padding: $baseline / 2 $baseline;
