@@ -6,7 +6,7 @@ body.cover-view {
   .track-content {
     margin-left: -$baseline !important;
     min-width: 400px;
-    @media #{$tablet} {
+    @media #{$one-column} {
       min-width: auto;
     }
     .large-cover-and-credits {

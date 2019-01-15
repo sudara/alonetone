@@ -52,7 +52,7 @@
         color: $dark-gray;
         border: 1px solid $samo-light-gray;
         background-color: transparent;
-        @media #{$tablet} {
+        @media #{$one-column} {
           font-size: 16px;
         }
       }

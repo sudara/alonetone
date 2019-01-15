@@ -6,6 +6,7 @@ body {
     width: 100%;
     margin: $baseline * 2 auto 0 auto;
     padding-bottom: $baseline * 3;
+    flex: 1;
     #static_header {
       width: 90%;
       margin-right: auto;
@@ -15,10 +16,6 @@ body {
     @media #{$mobile} {
       margin-top: $baseline;
     }
-    @media #{$tablet} {
-      padding-bottom: $baseline;
-    }
-    flex: 1;
     > h1 {
       @include match-dynamic-site-width();
       margin-left: auto;
@@ -59,7 +56,7 @@ body {
             margin-bottom: -4px;
           }
         }
-        @media #{$tablet} {
+        @media #{$one-column} {
           width: 100%;
           margin-left: auto!important;
           margin-right: auto!important;

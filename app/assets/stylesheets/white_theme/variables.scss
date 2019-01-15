@@ -2,6 +2,7 @@
 
 $desktop-site-width-wide: 90%;
 $mobile-site-width-wide: 96%;
+
 $desktop-site-width-narrow: 66%;
 $mobile-site-width-narrow: 96%;
 
@@ -25,7 +26,7 @@ $baseline: 24px; // Used for various layout spacing
 // media tiers
 
 $mobile: 'only screen and (max-width: 420px)';
-$tablet: 'only screen and (max-width: 640px)';
+$one-column: 'only screen and (max-width: 640px)';
 
 // fonts
 
