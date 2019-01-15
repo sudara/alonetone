@@ -6,7 +6,6 @@ ul {
   padding-left: 0;
   list-style: none;
 }
-
 .box {
   position: relative;
   display: flex;
@@ -36,6 +35,12 @@ ul {
   }
   .static_content {
     line-height: 1.3em;
+    padding: $baseline $baseline / 2;
+    font-size: 13px;
+    label {
+      display: block;
+      margin-bottom: -4px;
+    }
   }
 }
 

@@ -9,7 +9,7 @@
     box-shadow: none;
     background: transparent;
     box-sizing: border-box;
-    margin-bottom: 26px;  
+    margin-bottom: $baseline;
     h2 {
       color: #8b370d;
       box-shadow: none;  
@@ -21,7 +21,6 @@
     }
     .static_content {
       padding: 0 12px;
-      margin: $baseline 0;
       line-height: 1.5em;
       font-size: 16px;
     }
