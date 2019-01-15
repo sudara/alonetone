@@ -44,18 +44,6 @@ body {
         width: 48%;
         min-width: 320px;
         max-width: 460px;
-        h2.box {
-          box-shadow: none;
-          border-radius: 0;
-        }
-        .static_content {
-          padding: $baseline $baseline / 2;
-          font-size: 13px;
-          label {
-            display: block;
-            margin-bottom: -4px;
-          }
-        }
         @media #{$one-column} {
           width: 100%;
           margin-left: auto!important;
