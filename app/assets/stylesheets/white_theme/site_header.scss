@@ -106,7 +106,7 @@ header#site_header {
     float: right;
     margin-right: 4%;
     padding-top: 8px;
-    @media #{$mobile} {
+    @media #{$one-column} {
       display: none;
     }
     #search_form {
