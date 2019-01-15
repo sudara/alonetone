@@ -12,6 +12,11 @@ class Asset < ActiveRecord::Base
   scope :random_order,    -> { order("RAND()") }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
   scope :not_current,     ->(id) { where('id != ?', id) }
+  scope :for_user,        ->(user_id) { where(user_id: user_id) }
+  scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
+  scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
+  scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+
   belongs_to :user, counter_cache: true
   has_one  :audio_feature
   has_many :tracks,    dependent: :destroy
@@ -192,9 +197,9 @@ end
 #  artist           :string(255)
 #  bitrate          :integer
 #  comments_count   :integer          default(0)
-#  credits          :text(16777215)
-#  description      :text(16777215)
-#  description_html :text(16777215)
+#  credits          :text(4294967295)
+#  description      :text(4294967295)
+#  description_html :text(4294967295)
 #  favorites_count  :integer          default(0)
 #  genre            :string(255)
 #  hotness          :float(24)
@@ -203,7 +208,7 @@ end
 #  length           :integer
 #  listens_count    :integer          default(0)
 #  listens_per_week :float(24)
-#  lyrics           :text(16777215)
+#  lyrics           :text(4294967295)
 #  mp3_content_type :string(255)
 #  mp3_file_name    :string(255)
 #  mp3_file_size    :integer

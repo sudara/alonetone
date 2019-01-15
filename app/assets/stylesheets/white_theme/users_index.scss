@@ -7,7 +7,7 @@
   #static_header {
     width: 30%;
     line-height: 1.1;
-    @media #{$tablet} {
+    @media #{$one-column} {
       width: 100%;
     }
     #links {
@@ -44,7 +44,7 @@
     margin-top: 52px;
     flex-wrap: wrap;
     justify-content: space-between;
-    @media #{$tablet} {
+    @media #{$one-column} {
       width: 100%;
     }
     div.clear {
