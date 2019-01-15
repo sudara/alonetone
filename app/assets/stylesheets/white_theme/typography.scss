@@ -20,4 +20,8 @@ h1 {
 
 h2 {
   font-size: 18px;
+  &.box {
+    box-shadow: none;
+    border-radius: 0;
+  }
 }

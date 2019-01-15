@@ -210,7 +210,7 @@ end
 #  playlists_count    :integer          default(0), not null
 #  posts_count        :integer          default(0)
 #  salt               :string(128)      default(""), not null
-#  settings           :text(16777215)
+#  settings           :text(4294967295)
 #  use_old_theme      :boolean          default(FALSE)
 #  created_at         :datetime
 #  updated_at         :datetime

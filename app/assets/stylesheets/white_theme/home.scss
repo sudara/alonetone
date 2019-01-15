@@ -12,7 +12,7 @@
 	grid-template-areas: 'playlists playlists'
 						           'left right';
 
-  @media #{$tablet} {
+  @media #{$one-column} {
 		display: flex;
 		flex-direction: column;
 		 > * {
@@ -45,7 +45,7 @@
     grid-area: playlists;
     margin-bottom: 12px;
 
-    @media #{$tablet} {
+    @media #{$one-column} {
       margin-bottom: $baseline * 1.5;
     }
     .latest-playlists-header {
@@ -60,7 +60,7 @@
         margin-bottom: 0;
       }
 
-      @media #{$tablet} {
+      @media #{$one-column} {
         justify-content: space-between;
         margin-bottom: -$baseline * 1.5;
         li {

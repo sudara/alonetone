@@ -30,7 +30,7 @@ end
 #
 #  id               :integer          not null, primary key
 #  description      :string(255)
-#  description_html :text(65535)
+#  description_html :text(16777215)
 #  name             :string(255)
 #  permalink        :string(255)
 #  position         :integer          default(1)
