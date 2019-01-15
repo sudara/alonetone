@@ -200,19 +200,22 @@
     }
   }
   > div.box {
-    > .static_content {
-      padding: $baseline / 2 $baseline;
-      box-sizing: border-box;
-    }
     h2.box {
-      margin-left: $baseline;
-      margin-right: $baseline;
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
       margin-top: 0;
       box-shadow: none;
       border-radius: 0;
       box-sizing: border-box;
+    }
+    > .static_content {
+      padding: $baseline / 2 $baseline / 2;
+      box-sizing: border-box;
+      ul {
+        li {
+          margin-bottom: 4px;
+        }
+      }
     }
   }
 }
