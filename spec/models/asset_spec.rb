@@ -1,12 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Asset, type: :model do
-  it 'replaces characters outside of the BMP from title so it saves to the database' do
-    expect(Asset.new(title: '😢').title).to eq('�')
-  end
-
-  it 'replaces characters outside of the BMP from filename so it saves to the database' do
-    expect(Asset.new(mp3_file_name: '😢.mp3').mp3_file_name).to eq('�.mp3')
+  it 'supports characters outside of the in the title' do
+    expect(Asset.new(title: '👍').title).to eq('👍')
   end
 
   context "validation" do
