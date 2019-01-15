@@ -5,17 +5,10 @@ export default class extends Controller {
 
   initialize() {
     if (this.deletedvalueTarget.innerHTML == "true") {
-      this.restorebuttonTarget.style.display = 'block'
-      this.deletedbuttonTarget.style.display = 'none'
-      this.deletedvalueTarget.parentNode.style.color = "red"
+      this.showRestoreButtonTarget()
     } else {
-      this.restorebuttonTarget.style.display = 'none'
-      this.deletedbuttonTarget.style.display = 'block'
+      this.showDeleteButtonTarget()
     }
-  }
-
-  connect() {
-    // console.log("Hello, Stimulus!", this.element)
   }
 
   showDeleteButtonTarget() {
