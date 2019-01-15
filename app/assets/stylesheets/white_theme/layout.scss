@@ -23,15 +23,23 @@ body {
     }
     #columns {
       display: flex;
-      max-width: 960px;
+      max-width: 1032px;
+      box-sizing: border-box;
+      padding: 0 $baseline * 1.5;
       margin-right: auto;
       margin-left: auto;
       justify-content: center;
       flex-wrap: wrap;
+      @media #{$mobile} {
+        padding-right: 0;
+        padding-left: 0;
+      }
+      @media #{$one-column} {
+        display: block;
+      }
       > div {
-        width: 46%;
         min-width: 320px;
-        max-width: 460px;
+        flex: 1;
         &#left {
           margin-right: $baseline * 0.75;
         }
@@ -42,13 +50,8 @@ body {
           width: 100%;
           margin-left: auto !important;
           margin-right: auto !important;
-          &#left {
-            margin-right: 0;
-          }
-          &#right {
-            margin-left: 0;
-          }
         }
+      
       }
     }
   }
