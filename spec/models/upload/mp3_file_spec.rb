@@ -72,8 +72,8 @@ RSpec.describe Upload::Mp3File, type: :model do
       asset = mp3_file.assets.first
       expect(asset.errors).to be_blank
       expect(asset.user).to eq(user)
-      expect(asset.name).to eq('�')
-      expect(asset.mp3_file_name).to eq('�.mp3')
+      expect(asset.name).to eq('🐬')
+      expect(asset.mp3_file_name).to eq('🐬.mp3')
       expect(asset.private).to eq(false)
     end
   end
