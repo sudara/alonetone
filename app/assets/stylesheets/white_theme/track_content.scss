@@ -211,6 +211,12 @@
     > .static_content {
       padding: $baseline / 2 $baseline / 2;
       box-sizing: border-box;
+      a {
+        text-decoration: underline;
+        &:hover {
+          color: $samo-orange;
+        }
+      }
       ul {
         li {
           margin-bottom: 4px;
