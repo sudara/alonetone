@@ -184,7 +184,7 @@ class User < ActiveRecord::Base
   end
 
   def enqueue_real_destroy_job
-    DeletedUserCleanupJob.set(wait: 30.days).perform_later(user.id)
+    DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
   end
 end
 
