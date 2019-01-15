@@ -20,7 +20,7 @@
       <% if @hot_tracks_this_week.present? %>
         <div class="box">
           <h2 class="box">Hot Tracks this week</h2>
-          <div class="static_content">
+          <div>
             <%= render partial: 'asset', collection: @hot_tracks_this_week %>
             <%# image_tag @user.most_popular_chart %>
           </div>
@@ -29,7 +29,7 @@
       <% if @most_fav_tracks.present? %>
         <div class="box">
           <h2 class="box">Most Favorited Tracks</h2>
-          <div class="static_content">
+          <div>
             <%= render partial: 'asset', collection: @most_fav_tracks %>
             <%# image_tag @user.most_favorited_chart %>
           </div>
@@ -38,7 +38,7 @@
       <% if @most_commented_tracks.present? %>
         <div class="box">
           <h2 class="box">Most Commented On Tracks</h2>
-          <div class="static_content">
+          <div>
             <%= render partial: 'asset', collection: @most_commented_tracks %>
             <%# image_tag @user.most_commented_on_chart %>
           </div>
@@ -47,7 +47,7 @@
       <% if @most_listened_to_tracks.present? %>
         <div class="box">
           <h2 class="box">Most Listened To Tracks (ever)</h2>
-          <div class="static_content">
+          <div>
             <%= render partial: 'asset', collection: @most_listened_to_tracks %>
             <%# image_tag @user.most_listened_to_ever_chart %>
           </div>
