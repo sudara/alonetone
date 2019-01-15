@@ -1,4 +1,5 @@
 .mass_edit_content {
+  position: relative;
   @include match-dynamic-site-width("narrow");
   div.track_options {
     a {
