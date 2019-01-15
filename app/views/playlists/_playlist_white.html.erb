@@ -34,7 +34,7 @@
   <% end %>
   </ul>
 
-  <div class="sidebar-downloads <%= 'anchor-at-bottom' if @playlist.tracks.count < 11 %>"
+  <div class="sidebar-downloads"
     style="<%= 'display:none' unless @asset %>">
     <ul class="downloads-links">
       <% @playlist.greenfield_downloads.each do |download| %>
