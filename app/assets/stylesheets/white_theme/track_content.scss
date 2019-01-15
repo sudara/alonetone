@@ -51,7 +51,7 @@
     padding-right: 40px;
     padding-top: 50px;
     padding-bottom: 20px;
-    @media #{$tablet} {
+    @media #{$one-column} {
       padding: $baseline / 2;
     }
     iframe {
@@ -173,7 +173,7 @@
       color: $dark-gray;
       border: 1px solid $samo-light-gray;
       background-color: transparent;
-      @media #{$tablet} {
+      @media #{$one-column} {
         font-size: 16px;
       }
     }

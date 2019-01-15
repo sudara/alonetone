@@ -36,7 +36,7 @@
     max-width: 700px;
     margin-left: 0;
     margin-right: 0;
-    @media #{$tablet} {
+    @media #{$one-column} {
       margin-left: auto;
       min-width: 100px;
     }
