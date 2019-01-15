@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Asset < ActiveRecord::Base
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
@@ -44,7 +46,6 @@ class Asset < ActiveRecord::Base
                   user_role: proc { role },
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
-
   validates_presence_of :user_id
 
   # override has_permalink method to ensure we don't get empty permas
@@ -86,8 +87,8 @@ class Asset < ActiveRecord::Base
   def name
     return title.strip if title.present?
 
-    clean = mp3_file_name.split('.')[-2].try(:gsub, /-|_/, ' ')
-    clean.present? ? clean.strip.titleize : 'untitled'
+    name = File.basename(mp3_file_name.to_s, '.*').humanize
+    name.blank? ? 'untitled' : name
   end
 
   def first_playlist

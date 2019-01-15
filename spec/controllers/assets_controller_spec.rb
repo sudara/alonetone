@@ -20,9 +20,9 @@ RSpec.describe AssetsController, type: :controller do
     it 'should allow user to upload new version of song' do
       akismet_stub_response_ham
       login(:sudara)
-      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
-      put :update, params: { id: users(:sudara).assets.first, user_id: users(:sudara).login, asset: { mp3: fixture_file_upload('assets/tag1.mp3', 'audio/mpeg') } }
+      put :update, params: { id: users(:sudara).assets.first, user_id: users(:sudara).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
       expect(users(:sudara).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
     end
   end
