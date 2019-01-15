@@ -60,7 +60,7 @@ module Listens
   end
 
   def play_local_mp3
-    file_to_send = File.join(Rails.root, 'spec/fixtures/assets/muppets.mp3')
+    file_to_send = File.join(Rails.root, 'spec/fixtures/files/muppets.mp3')
 
     length = File.size(file_to_send) # need to do this manually for header to be set correctly
 

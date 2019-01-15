@@ -130,7 +130,8 @@ class AssetsController < ApplicationController
   def mass_update; end
 
   def create
-    extract_assets_from_params
+    @assets = assets
+    @playlists = playlists
 
     flashes = ""
     good = false
@@ -160,7 +161,7 @@ class AssetsController < ApplicationController
   # PUT /assets/1
   # PUT /assets/1.xml
   def update
-    result =  @asset.update_attributes(asset_params)
+    result = @asset.update_attributes(asset_params)
     @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
     @asset.publish! if params[:commit] == 'Publish'
 
@@ -225,54 +226,65 @@ class AssetsController < ApplicationController
     logged_in? && current_user.has_followees?
   end
 
-  def extract_assets_from_params
-    @assets = []
-    attrs = { private: !!(params[:commit] =~ /don't publish/),
-              user_agent: request.env['HTTP_USER_AGENT'] }
-    Array(params[:asset_data]).each do |file|
-      if file.is_a?(String) && file.starts_with?("http")
-        if url_is_a_zip?(file)
-          # rubocop:disable Security/Open
-          open Asset.parse_external_url(file) do |tempfile|
-            create_mp3s_from_zip(tempfile, attrs)
-          end
-          # rubocop:enable Security/Open
-        else
-          @assets << current_user.assets.create(attrs.merge(mp3: Asset.parse_external_url(file)))
-        end
-      elsif file.is_a?(String)
-        # twiddle thumbs
-      elsif file_is_a_zip?(file)
-        create_mp3s_from_zip(file, attrs)
-      else
-        @assets << current_user.assets.create(attrs.merge(mp3: file))
-      end
+  def uploaded_files
+    params.fetch(:asset_data, []).reject do |item|
+      item.try(:starts_with?, 'http')
     end
   end
 
-  def url_is_a_zip?(url)
-    File.basename(URI.parse(url).path).split('.')[1] == "zip"
-  end
-
-  def file_is_a_zip?(file)
-    Paperclip::ContentTypeDetector.new(file.path).detect == 'application/zip'
-  end
-
-  def create_mp3s_from_zip(file, attrs)
-    Asset.extract_mp3s(file) do |asset|
-      @assets << current_user.assets.create(attrs.merge(mp3: asset))
+  def selected_urls
+    params.fetch(:asset_data, []).select do |item|
+      item.try(:starts_with?, 'http')
     end
-    # if each track has a track_num in the id3 tag, let's create the playlist
-    create_playlist_from_assets! if all_assets_have_id3_tag_ordering?
   end
 
-  def create_playlist_from_assets!
-    @playlist = @user.playlists.create(title: "#{@user.display_name}'s New Album", private: true)
-    @playlist.assets << @assets.sort_by(&:id3_track_num)
+  DONT_PUBLISH_RE = /don't publish/
+
+  def dont_publish_param?
+    DONT_PUBLISH_RE.match?(params[:commit].to_s)
   end
 
-  def all_assets_have_id3_tag_ordering?
-     @assets.size == @assets.collect(&:id3_track_num).compact.size
+  def asset_attributes
+    {
+      private: dont_publish_param?,
+      user_agent: request.user_agent
+    }
+  end
+
+  def playlist_attributes
+    {
+      private: dont_publish_param?
+    }
+  end
+
+  def upload
+    @upload ||= Upload.process(
+      user: current_user,
+      files: uploaded_files,
+      asset_attributes: asset_attributes,
+      playlist_attributes: playlist_attributes
+    )
+  end
+
+  def downloads
+    @downloads ||= selected_urls.map do |url|
+      Download.process(
+        user: current_user,
+        url: url,
+        asset_attributes: asset_attributes,
+        playlist_attributes: playlist_attributes
+      )
+    end
+  end
+
+  def assets
+    upload.assets +
+      downloads.inject([]) { |accumulator, download| accumulator + download.assets }
+  end
+
+  def playlists
+    upload.assets +
+      downloads.inject([]) { |accumulator, download| accumulator + download.playlists }
   end
 
   def set_related_lastest_variables
