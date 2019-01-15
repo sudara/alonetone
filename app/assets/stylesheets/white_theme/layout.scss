@@ -7,14 +7,14 @@ body {
     margin: $baseline * 2 auto 0 auto;
     padding-bottom: $baseline * 3;
     flex: 1;
+    @media #{$mobile} {
+        margin-top: $baseline;
+    }
     #static_header {
       width: 90%;
       margin-right: auto;
       margin-left: auto;
       max-width: 960px;
-    }
-    @media #{$mobile} {
-      margin-top: $baseline;
     }
     > h1 {
       @include match-dynamic-site-width();
@@ -28,26 +28,26 @@ body {
       margin-left: auto;
       justify-content: center;
       flex-wrap: wrap;
-      #left {
-        margin-right: $baseline * .75;
-        @media #{$mobile} {
-          margin-right: 0;
-        }
-      }
-      #right {
-        margin-left: $baseline * .75;
-        @media #{$mobile} {
-          margin-left: 0;
-        }
-      }
       > div {
-        width: 48%;
+        width: 46%;
         min-width: 320px;
         max-width: 460px;
+        &#left {
+          margin-right: $baseline * 0.75;
+        }
+        &#right {
+          margin-left: $baseline * 0.75;
+        }
         @media #{$one-column} {
           width: 100%;
-          margin-left: auto!important;
-          margin-right: auto!important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          &#left {
+            margin-right: 0;
+          }
+          &#right {
+            margin-left: 0;
+          }
         }
       }
     }
