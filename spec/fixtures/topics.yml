@@ -1,6 +1,6 @@
 topic1:
   forum: valid_forum
-  user_id: 1
+  user: sudara
   title: Do you like chocolate?
   permalink: firsttopic
-  last_user_id: 1
+  last_user: sudara
