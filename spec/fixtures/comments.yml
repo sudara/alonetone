@@ -1,90 +1,72 @@
 valid_comment_on_asset_by_user:
-  id: 1
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well, this is an awesome track, says a user"
   is_spam: false
-  user_id: 1
-  commenter_id: 1
+  user: sudara
+  commenter: sudara
   remote_ip: 127.0.0.1
   created_at: <%= 1.day.ago.to_s :db %>
 
 valid_comment_on_asset_by_guest:
-  id: 2
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well, this is an awesome track, says a nobody"
   is_spam: false
-  user_id: 1
+  user: sudara
   created_at: <%= 1.day.ago.to_s :db %>
 
 spam_comment_on_asset_by_user:
-  id: 3
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well, this is an is_spammy is_spam."
   is_spam: true
-  user_id: 1
-  commenter_id: 1
+  user: sudara
+  commenter: sudara
   created_at: <%= 1.day.ago.to_s :db %>
 
 spam_comment_on_asset_by_guest:
-  id: 4
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well, this is an is_spammy is_spam."
   is_spam: true
-  user_id: 1
+  user: sudara
   created_at: <%= 1.day.ago.to_s :db %>
 
 comment_with_no_body:
-  id: 5
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   created_at: <%= 1.day.ago.to_s :db %>
 
 private_comment_on_asset_by_guest:
-  id: 7
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well, this is an awesome track, I say in secret"
   is_spam: false
-  user_id: 1
+  user: sudara
   private: true
   created_at: <%= 1.day.ago.to_s :db %>
 
 private_comment_on_asset_by_user:
-  id: 8
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well friend, this is an awesome track."
   is_spam: false
-  user_id: 1
-  commenter_id: 2
+  user: sudara
+  commenter: arthur
   remote_ip: 127.0.0.2
   private: true
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_spam_comment_on_asset_by_user:
-  id: 9
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Sudara, don't forget milk."
   is_spam: true
-  user_id: 1
-  commenter_id: 2
+  user: sudara
+  commenter: arthur
   remote_ip: 127.0.0.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_comment_on_asset_by_user:
-  id: 10
-  commentable_type: Asset
-  commentable_id: 1
+  commentable: valid_mp3 (Asset)
   body: "Well friend, this is your best work."
   is_spam: false
-  user_id: 1
-  commenter_id: 2
+  user: sudara
+  commenter: arthur
   remote_ip: 127.0.0.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
