@@ -3,7 +3,7 @@
 class Asset < ApplicationRecord
   include SoftDeletion
 
-  concerned_with :uploading, :radio, :statistics, :greenfield
+  concerned_with :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
   scope :published,       -> { where(private: false, is_spam: false) }
