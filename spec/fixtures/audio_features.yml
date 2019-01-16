@@ -1,4 +1,4 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 valid_audio_feature:
   waveform: [77523880, 125726681740, 87340240119, 66892444660, 69311543653, 67487566034]
-  asset_id: 1
+  asset: valid_mp3
