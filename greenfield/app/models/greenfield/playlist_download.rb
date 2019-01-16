@@ -10,7 +10,7 @@ module Greenfield
 
     # see config/initializers/paperclip for defaults
     attachment_options = {}
-    if Alonetone.storage == 's3'
+    if Alonetone.storage.s3?
       attachment_options[:path] = ":s3_path"
       attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
     end
