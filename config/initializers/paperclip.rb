@@ -1,6 +1,6 @@
 # Paperclip config, depends on yml loaded above
 Paperclip::Attachment.default_options[:convert_options] = { :all => '-quality 68 -strip -filter Triangle -define filter:support=2 -dither None -posterize 136 -colorspace sRGB -interlace none'}
-Paperclip::Attachment.default_options[:storage] = Alonetone.storage_service
+Paperclip::Attachment.default_options[:storage] = Alonetone.storage.s3? ? 's3' : 'filesystem'
 
 Paperclip::Attachment.default_options.merge!({
   :s3_credentials => {
