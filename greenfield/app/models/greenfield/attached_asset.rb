@@ -11,7 +11,7 @@ module Greenfield
       processors: [:mp3_paperclip_processor]
     }
 
-    if Alonetone.storage == 's3'
+    if Alonetone.storage.s3?
       attachment_options[:path] = "/greenfield/:id/:basename.:extension"
       attachment_options[:s3_permissions] = 'authenticated-read'
     end
