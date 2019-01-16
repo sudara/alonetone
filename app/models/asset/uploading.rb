@@ -7,7 +7,7 @@ class Asset
     styles: { original: '' }, # just makes sure original runs through the processor
     processors: [:mp3_paperclip_processor]
   }
-  if Alonetone.storage == 's3'
+  if Alonetone.storage.s3?
     attachment_options[:path] = "/mp3/:id/:basename.:extension"
     attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
   else
