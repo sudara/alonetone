@@ -36,3 +36,4 @@ test:
   url: alonetone.example.com
   storage_service: temporary
   play_dummy_mp3s: false
+  rakismet_key: unusable
