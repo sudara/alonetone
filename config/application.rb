@@ -39,7 +39,7 @@ module Alonetone
     end
 
     def remote_storage?
-      config.active_storage.service == :s3
+      config.active_storage.service.to_s == 's3'
     end
 
     def show_dummy_image?
