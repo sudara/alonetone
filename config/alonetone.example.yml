@@ -43,3 +43,6 @@ test:
   # interaction with services in examples.
   play_dummy_audio: false
   show_dummy_image: false
+  # Use a fake rakismet key to allow requests to happen in the test
+  # environment.
+  rakismet_key: unusable
