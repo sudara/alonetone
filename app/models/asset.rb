@@ -141,7 +141,7 @@ class Asset < ApplicationRecord
 
   # needed for spam detection
   def full_permalink
-    "https://#{Alonetone.url}/#{user.login}/tracks/#{permalink}"
+    "https://#{hostname}/#{user.login}/tracks/#{permalink}"
   end
 
   def to_param
