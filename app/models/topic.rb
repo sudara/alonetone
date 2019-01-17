@@ -51,7 +51,7 @@ class Topic < ApplicationRecord
   end
 
   def full_permalink
-    "https://#{Alonetone.url}/forums/#{permalink}"
+    "https://#{hostname}/forums/#{permalink}"
   end
 
   def sticky?
