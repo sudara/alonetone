@@ -12,7 +12,7 @@ module UsersHelper
   end
 
   def avatar(user, size = nil)
-    return "default/no-pic_#{size}.png" if Alonetone.try(:show_dummy_pics)
+    return "default/no-pic_#{size}.png" if Rails.application.show_dummy_image?
 
     case size
     when 100 then image_tag(user.has_pic? ? user.pic.pic.url(:large) : 'default/no-pic-thumb100.jpg')
@@ -44,7 +44,7 @@ module UsersHelper
   end
 
   def avatar_or_placeholder_for(user, size = :large)
-    if !Alonetone.try(:show_dummy_pics) && user&.has_pic?
+    if !Rails.application.show_dummy_image? && user&.has_pic?
       user.pic.pic.url(size)
     else
       'default/no-pic_white.svg'
