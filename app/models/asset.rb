@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Asset < ActiveRecord::Base
+class Asset < ApplicationRecord
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
