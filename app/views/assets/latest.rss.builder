@@ -1,16 +1,16 @@
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 xml.rss "xmlns:itunes"=> "http://www.itunes.com/dtds/podcast-1.0.dtd", "version"=>"2.0" do
   xml.channel do 
-    xml.title  "Latest uploaded mp3s from artists at #{Alonetone.url}"
+    xml.title  "Latest uploaded mp3s from artists at #{hostname}"
     
-    xml.link  "http://#{Alonetone.url}/"
-    xml.description  "The artists on #{Alonetone.url} give away their music. Listen to the lastest by subscribing"
+    xml.link  "http://#{hostname}/"
+    xml.description  "The artists on #{hostname} give away their music. Listen to the lastest by subscribing"
     xml.language  "en-us"
     xml.lastBuildDate  rss_date @assets.first.created_at
     
     xml.image do
-      xml.url  "http://#{Alonetone.url}/images/default/no-cover-200.jpg"
-      xml.title  "Latest uploaded mp3s from artists at #{Alonetone.url}"
+      xml.url  "http://#{hostname}/images/default/no-cover-200.jpg"
+      xml.title  "Latest uploaded mp3s from artists at #{hostname}"
       xml.width 200
       xml.height 200
     end
