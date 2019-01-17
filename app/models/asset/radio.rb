@@ -39,7 +39,7 @@ class Asset
   # random radio, sourcing from the user's favorite artists
   def self.from_favorite_artists_of(user)
       id_not_in(user.listened_to_today_ids)
-        .user_id_in(user.most_listened_to_user_ids(10))
+        .user_id_in(user&.most_listened_to_user_ids(10))
         .random_order
   end
 
@@ -49,6 +49,6 @@ class Asset
   end
 
   def self.new_tracks_from_followees(user, limit = DEFAULT_LIMIT)
-    recent.user_id_in(user.follows_user_ids).limit(limit)
+    recent.user_id_in(user&.follows_user_ids).limit(limit)
   end
 end
