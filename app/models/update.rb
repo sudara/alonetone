@@ -10,7 +10,7 @@ class Update < ApplicationRecord
   end
 
   def full_permalink
-    "https://#{Alonetone.url}/blog/#{permalink}"
+    "https://#{hostname}/blog/#{permalink}"
   end
 end
 
