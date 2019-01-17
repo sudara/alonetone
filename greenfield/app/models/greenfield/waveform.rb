@@ -4,9 +4,14 @@ module Greenfield
       tmp = Tempfile.new(['resampled-upload', '.wav'])
 
       # resample the mp3 down to 8KHz to make it more manageable
-      command = Paperclip.run('lame', ['--quiet --mp3input', '--resample', '8',
-                               '--decode', Shellwords.shellescape(file),
-                               Shellwords.shellescape(tmp.path)].join(' '))
+      system(
+        'lame',
+        '--quiet',
+        '--mp3input',
+        '--resample', '8',
+        '--decode', Shellwords.shellescape(file),
+        Shellwords.shellescape(tmp.path)
+      )
 
       # lame can only downsample to 8KHz, but that's still
       # way too high so we do a second resampling here
