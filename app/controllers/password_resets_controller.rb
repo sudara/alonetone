@@ -36,7 +36,7 @@ class PasswordResetsController < ApplicationController
   def load_user_using_perishable_token
     @user = User.where(perishable_token: params[:id]).first
     unless @user.present?
-      flash[:error] = "Hmmm...that didn't work. If you still have issues, email #{Alonetone.email}"
+      flash[:error] = "Hmmm...that didn't work. If you still have issues, email #{Rails.configuration.alonetone.email}"
       redirect_to login_path
     end
     true
