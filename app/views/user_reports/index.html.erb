@@ -1,9 +1,0 @@
-<% render partial: 'pages/halp' %>
-  <% content_for :pagination do %>
-    <%= will_paginate @user_reports %>
-  <% end %>
-  
-
-<div id='user_reports'>
-	<%= render partial: 'user_report', collection: @user_reports %>
-</div>

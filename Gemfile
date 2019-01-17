@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.2.2'
 gem 'mysql2'
+gem 'puma'
 
 gem 'thredded'
 
@@ -10,13 +11,13 @@ gem 'greenfield', path: 'greenfield'
 
 # ruby
 gem 'sometimes'
-gem 'awesome_print', :require => 'ap'
+gem 'awesome_print', require: 'ap'
 
 # uploading
 gem 'aws-sdk-s3'
 gem 'paperclip', '~> 6.0.0'
 gem 'rubyzip'
-gem 'ruby-mp3info', :require => 'mp3info'
+gem 'ruby-mp3info', require: 'mp3info'
 gem 'mime-types'
 gem 'ruby-audio'
 gem 's3_direct_upload'
@@ -31,7 +32,6 @@ gem 'request_store' # for authlogic
 # view
 gem 'redcarpet'
 gem 'country_select'
-gem 'will_paginate'
 gem 'dynamic_form'
 gem 'simple_form'
 gem 'local_time'
@@ -70,16 +70,11 @@ gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
-
-
 group :production do
-  gem 'puma'
   gem 'bugsnag'
 end
 
 group :development do
-  gem 'thin'
-  gem 'sqlite3'
   gem 'perf_check'
   gem 'annotate'
   gem 'rubocop', '~> 0.61.1', require: false
@@ -87,20 +82,18 @@ end
 
 ## Who loves tests! You do? You do!
 group :test do
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
   gem 'capybara'
+  gem 'chromedriver-helper'
+  gem 'guard', require: false
+  gem 'guard-rspec', require: false
+  gem 'listen', require: false
   gem 'percy-capybara'
-  gem 'rspec-rails', :require => false
-  gem 'rspec-mocks', :require => false
-  gem 'guard-rspec', :require => false
-  gem 'database_cleaner', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'guard', :require => false
-  gem 'listen', :require => false
-  # https://github.com/thoughtbot/factory_bot/wiki/Usage
-  gem 'factory_bot_rails',:require => false
   gem 'rails-controller-testing'
+  gem 'rb-fsevent', require: false
+  gem 'rspec-mocks', require: false
+  gem 'rspec-rails', require: false
+  gem 'selenium-webdriver'
+  gem 'webmock', require: false
 end
 
 group :development, :test do

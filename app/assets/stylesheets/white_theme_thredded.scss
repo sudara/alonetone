@@ -40,7 +40,7 @@ aside.thredded--currently-online {
     @include match-dynamic-site-width('wide');
   }
 
-  @media #{$tablet} {
+  @media #{$one-column} {
     padding-left: 4%;
     padding-right: 4%;
     width: auto;

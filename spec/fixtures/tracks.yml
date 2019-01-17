@@ -1,42 +1,80 @@
 owp1:
-  id: 1
-  playlist_id: 1
-  asset_id: 1
+  playlist: owp
+  asset: valid_mp3
   position: 1
-  user_id: 1
+  user: sudara
+  created_at: <%= 1.day.ago.to_s :db %>
 owp2:
-  id: 2
-  playlist_id: 1
-  asset_id: 1
+  playlist: owp
+  asset: valid_mp3
   position: 2
+  created_at: <%= 1.day.ago.to_s :db %>
 owp3:
-  id: 3
-  playlist_id: 1
-  asset_id: 1
+  playlist: owp
+  asset: valid_mp3
   position: 3
+  created_at: <%= 1.day.ago.to_s :db %>
+
 mix1:
-  id: 4
-  playlist_id: 4
-  asset_id: 1
+  playlist: mix
+  asset: valid_mp3
   position: 1
+  created_at: <%= 1.day.ago.to_s :db %>
 mix2:
-  id: 5
-  playlist_id: 4
-  asset_id: 1
+  playlist: mix
+  asset: valid_mp3
   position: 2
-mix3: 
-  id: 6
-  playlist_id: 4
-  asset_id: 4
+  created_at: <%= 1.day.ago.to_s :db %>
+mix3:
+  playlist: mix
+  asset: valid_arthur_mp3
   position: 3
+  created_at: <%= 1.day.ago.to_s :db %>
+
 fav1:
-  id: 7
-  playlist_id: 5
-  asset_id: 1
-  user_id: 2
+  playlist: arthurs_favorites
+  asset: valid_mp3
+  user: arthur
+  position: 1
   is_favorite: true
+  created_at: <%= 1.day.ago.to_s :db %>
+
 no_playlist_id:
-  id: 8
-  asset_id: 1
-  user_id: 1
-  
+  asset: valid_mp3
+  user: sudara
+  position: 1
+  created_at: <%= 1.day.ago.to_s :db %>
+
+# Three of the four assets meant for Will's Rockfort playlist.
+will_studd_rockfort_1:
+  playlist: will_studd_rockfort
+  user: will_studd
+  asset: will_studd_rockfort_combalou
+  position: 1
+  created_at: <%= 3.months.ago %>
+will_studd_rockfort_2:
+  playlist: will_studd_rockfort
+  user: will_studd
+  asset: will_studd_rockfort_white_wild_tangy
+  position: 2
+  created_at: <%= 3.months.ago %>
+will_studd_rockfort_3:
+  playlist: will_studd_rockfort
+  user: will_studd
+  asset: will_studd_magnificent_lacaune
+  position: 3
+  created_at: <%= 3.months.ago %>
+
+# All assets for Henry's Polderkaas playlist.
+henri_willig_polderkaas_1:
+  playlist: henri_willig_polderkaas
+  user: henri_willig
+  asset: henri_willig_finest_cheese
+  position: 1
+  created_at: <%= 3.months.ago %>
+henri_willig_polderkaas_2:
+  playlist: henri_willig_polderkaas
+  user: henri_willig
+  asset: henri_willig_the_goat
+  position: 2
+  created_at: <%= 3.months.ago %>
