@@ -1,38 +1,45 @@
----
 development: &defaults
-  show_debug_info: true
-  app_name: YourAppName
-  url: yourapp.com
-  greenfield_url: greenfield.dev
-  email: support@yourapp.com
-  secret: f041541efd6d104c7051041ec61e7aa5
-  storage: filesystem
-  play_dummy_mp3s: true # remove to play off s3
-  bucket: # put your s3 bucket/domain here
-  s3_host_alias: # put your cloudfront domain here
-  cloudfront_enabled: false
-  amazon_id:
-  amazon_key:
-  rakismet_key: "REPLACEME"
-  defensio:
-  chat_url:
-  video_size: width="370" height="308"
-  enable_defensio: false
-  show_dummy_pics: true
-  ga:
-  get_clicky:
-  typekit:
-  postmark_api_key:
+  # Used by mailers and models as hostname to generate URLs to Alonetone.
+  hostname: localhost:3000
+  # Default FROM address when sending email.
+  email: support@example.com
+  # Secret key base used by Rails (normally configured in config/secrets.yml)
+  secret: ~
+  # Type of storage provider to use, see config/storage.yml for options.
+  storage_service: filesystem
+  # When set to true the application will play dummy audio (instead of
+  # uploaded MP3s).
+  play_dummy_audio: false
+  # When set to true the application will show dummy images (instead of
+  # uploaded images).
+  show_dummy_image: false
+  # Amazon S3 configuration. Leave blank when using disk based storage.
+  amazon_access_key_id: ~
+  amazon_secret_access_key: ~
+  amazon_s3_region: ~
+  amazon_s3_bucket_name: ~
+  # Amazon CloudFront configuration. Leave blank to serve files directly out
+  # of the S3 bucket.
+  amazon_cloud_front_domain_name: ~
+  amazon_cloud_front_key_pair_id: ~
+  # API token to use when accessing Askimet for spam filtering. You can
+  # register at https://akismet.com.
+  rakismet_key: ~
+  # Google Analytics will track usage when configured with a analytics
+  # tracking ID.
+  google_analytics_tracking_id: ~
+  # Configure Typekit token to start using Typekit for fonts.
+  typekit_embed_token: ~
+  # Deprecated: used by Greenfield views as hostname for URLs linking to
+  # Greenfield.
+  greenfield_hostname: localhost:3000
 
 test:
   <<: *defaults
-  storage: filesystem
-  show_debug_info: false
-  play_dummy_mp3s: true
-
-production:
-  <<: *defaults
-  show_debug_info: false
-  enable_defensio: true
-  chat_url:
-
+  hostname: alonetone.example.com
+  # Temporary storage writes to temp files on disk.
+  storage_service: temporary
+  # Don't use dummies in the spec suite because we sometimes rely on
+  # interaction with services in examples.
+  play_dummy_audio: false
+  show_dummy_image: false
