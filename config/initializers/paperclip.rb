@@ -27,7 +27,7 @@ end
 
 S3DirectUpload.config do |c|
   c.access_key_id =  Rails.configuration.alonetone.amazon_access_key_id
-  c.secret_access_key = ails.configuration.alonetone.amazon_secret_access_key
+  c.secret_access_key = Rails.configuration.alonetone.amazon_secret_access_key
   c.bucket = Rails.configuration.alonetone.amazon_s3_bucket_name
   c.url = "https://s3.amazonaws.com/#{Rails.configuration.alonetone.amazon_s3_bucket_name}"
 end if Rails.application.remote_storage?
