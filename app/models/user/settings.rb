@@ -28,7 +28,7 @@ class User
   end
 
   def has_no_avatar?
-    Alonetone.try(:show_dummy_pics) || !pic.present? || !pic.try(:pic).present?
+    Rails.application.show_dummy_image? || !pic.present? || !pic.try(:pic).present?
   end
 
   def favorite_asset_ids
