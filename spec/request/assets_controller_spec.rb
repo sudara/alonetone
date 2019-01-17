@@ -82,8 +82,10 @@ RSpec.describe AssetsController, type: :request do
     it 'should accept a mp3 extension and redirect to the amazon url' do
       agent = GOOD_USER_AGENTS.first
       get user_track_path('sudara', 'song1', format: :mp3), headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
-      # expect(response).to redirect_to(assets(:valid_mp3).mp3.url) # on s3, we get a redirect
-      expect(response.response_code).to eq(200) # in test mode, we get a file
+
+      expect(response.status).to eq(302)
+      expect(response.location).to start_with('http')
+      expect(response.location).to end_with('original/Song1.mp3')
     end
 
     GOOD_USER_AGENTS.each do |agent|
