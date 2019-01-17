@@ -1,9 +1,6 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  render_views
-  fixtures :users, :profiles, :assets
-
   context 'show' do
     it "should show delete user button for admins" do
       login(:sudara)
@@ -133,8 +130,8 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to("http://test.host/arthur/tracks/new")
     end
   end
+
   context "profile" do
-    fixtures :users, :assets
     %i[sudara arthur].each do |user|
       it "should let a user or admin edit" do
         login(user)
@@ -201,7 +198,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context "favoriting" do
-    subject { get :toggle_favorite, params: { asset_id: 100 }, xhr: true }
+    let(:asset) { assets(:valid_mp3_2) }
+    subject { get :toggle_favorite, params: { asset_id: asset.id }, xhr: true }
 
     it 'should not let a guest favorite a track' do
       expect { subject }.to change { Track.count }.by(0)
@@ -211,15 +209,15 @@ RSpec.describe UsersController, type: :controller do
     it 'should let a user favorite a track' do
       login(:arthur)
       expect { subject }.to change { Track.count }.by(1)
-      expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(Asset.find(100))
+      expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(asset)
       expect(response).to be_successful
     end
 
     it 'should let a user unfavorite a track' do
       login(:arthur)
       expect { subject }.to change { Track.count }.by(1)
-      get :toggle_favorite, params: { asset_id: 100 } # toggle again
-      expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(Asset.find(100))
+      get :toggle_favorite, params: { asset_id: asset.id }, xhr: true # toggle again
+      expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(asset)
       expect(response).to be_successful
     end
   end
@@ -245,7 +243,7 @@ RSpec.describe UsersController, type: :controller do
     it "should let an sudo'd user return to their admin account" do
       login(:arthur)
       controller.session[:return_to] = '/users'
-      controller.session[:sudo] = 1
+      controller.session[:sudo] = users(:sudara).id
       get :sudo, params: { id: 'arthur' }
       expect(flash[:ok]).to be_present
       expect(controller.session["user_credentials"]).to eq(users(:sudara).persistence_token)
@@ -257,8 +255,8 @@ RSpec.describe UsersController, type: :controller do
       login(:sudara)
       get :sudo, params: { id: 'arthur' }
       expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
-      expect(users(:arthur).current_login_ip).not_to eq('10.1.1.1')
-      expect(users(:arthur).last_request_at.utc).to be_within(1.minute).of 1.day.ago # shouldn't have changed from yml
+      expect(users(:arthur).current_login_ip).to eq('9.9.9.9')
+      expect(users(:arthur).last_request_at.utc).to be < 1.hour.ago
     end
   end
 

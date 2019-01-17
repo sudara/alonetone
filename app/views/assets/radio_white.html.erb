@@ -1,13 +1,13 @@
 <div id="columns">
   <div id="left">
     <div class="mini_paginator top_paginator">
-      <%= will_paginate @assets %>
+      <%== pagy_nav @pagy %>
     </div>
     <div id="radio_tracks" class="box">
         <%= render partial: 'assets/asset', collection: @assets  %>
     </div>
     <div class="mini_paginator bottom_paginator">
-      <%= will_paginate @assets %>
+      <%== pagy_nav @pagy %>
     </div>
   </div>
   <div id="right">

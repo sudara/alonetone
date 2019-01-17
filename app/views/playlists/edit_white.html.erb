@@ -1,10 +1,10 @@
 <%= error_messages_for :playlist %>
 
-<div id="edit_playlist_info" class="faq box">
+<div id="edit_playlist_info" class="box">
   <h2>Playlist Settings for "<%= @playlist.title %>"</h2>
 
-    <div class="edit_playlist_columns">
-      <div class="edit_playlist_left_column">
+    <div class="edit_playlist_info_columns">
+      <div class="edit_playlist_info_left_column">
           <label>ALBUM ARTWORK</label>
           <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}", :class => "cover" do %>
             <%= playlist_cover(@playlist, :original) %>
@@ -17,17 +17,17 @@
             Upload a square photo, 2000px by 2000px for best results.
           </p>
       </div>
-      <%= simple_form_for [@user, @playlist], html: { class: 'edit_playlist_right_column' } do |f| %>
-        <div class="edit_playlist_right_column_title_and_year">
+      <%= simple_form_for [@user, @playlist], html: { class: 'edit_playlist_info_right_column' } do |f| %>
+        <div class="edit_playlist_info_right_column_title_and_year">
           <%= f.input :title %>
           <%= f.input :year, input_html: {maxlength: 4, size: 4} %>
         </div>
-        <div class="edit_playlist_right_column_links">
+        <div class="edit_playlist_info_right_column_links">
           <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
           <%= f.input :link2, placeholder: 'another link' %>
         </div>
 
-        <div class="edit_playlist_right_column_credits">
+        <div class="edit_playlist_info_right_column_credits">
           <%= f.input :credits %>
         </div>
 
@@ -36,12 +36,11 @@
             <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
           <% end %>
         <% end %>
-        
-        <div class="edit_playlist_right_column_private_and_hidden">
+        <div class="edit_playlist_info_right_column_private_and_hidden">
           <%= f.input :private %> &nbsp; | (Playlists are hidden until they have more than 2 tracks)
         </div>
     </div>
-    <div class="edit_playlist_bottom">
+    <div class="edit_playlist_info_bottom">
       <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
       <%= f.button :submit, "save playlist" %>
     </div>
@@ -68,8 +67,7 @@
  icon.
     </p>
     <div class="box">
-    
-    <h2 class="box"><%= @playlist.title %></h2>
+    <h2><%= @playlist.title %></h2>
     <div class="sortable" data-target="playlist-edit.sortable">
       <% @playlist.tracks.each do |track| %>
       <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
@@ -89,7 +87,7 @@
       <div class="playlist_size">
       <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
       </div>
-    <% end %>    
+    <% end %>
      <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
   </div>
 
@@ -99,7 +97,7 @@
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
       <div class="draggable_tracks">
-        <h2 class="box">Available tracks</h2>
+        <h2>Available tracks</h2>
         <div id="playlist_tabs">
           <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
             <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
@@ -108,7 +106,7 @@
           </ul>
           <div id="your_uploads" class="playlist_source">
             <div class="mini_paginator">
-              <%= will_paginate @assets, {param_name: :uploads_page, ignore_get_params: true}%>
+              <%== pagy_nav @assets_pagy %>
             </div>
             <% @assets.each do |asset| %>
               <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
@@ -137,4 +135,3 @@
   <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
     data: { target:'playlist-edit.sortUrl' }, class: 'hidden sort_url' %>
 </div>
-

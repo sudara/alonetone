@@ -6,124 +6,41 @@ body {
     width: 100%;
     margin: $baseline * 2 auto 0 auto;
     padding-bottom: $baseline * 3;
-    #static_header {
-      width: 90%;
-      margin-right: auto;
-      margin-left: auto;
-      max-width: 960px;
-    }
-    @media #{$mobile} {
-      margin-top: $baseline;
-    }
-    @media #{$tablet} {
-      padding-bottom: $baseline;
-    }
     flex: 1;
-    > h1 {
-      @include match-dynamic-site-width();
-      margin-left: auto;
-      margin-right: auto;
+    @media #{$mobile} {
+        margin-top: $baseline;
     }
-    #playlist-and-track-content {
-      display: flex;
-      justify-content: center;
-      // @include match-dynamic-site-width();
-      max-width: 1032px;
-      padding: 0 36px;
-      box-sizing: border-box;
-      margin-left: auto;
-      margin-right: auto;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      @media #{$mobile} {
-        width: 100%;
-      }
-      .playlist-sidebar {
-        min-width: 300px;
-        max-width: 450px;
-        width: 35%;
-        margin-right: $baseline;
-        // align-self: stretch;
-        @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
-          max-width: none;
-          width: 100%;
-          margin-right: 0;
-          margin-bottom: $baseline;
-          order: 2;
-          border-radius: 0 0 6px 6px;
-        }
-        @media #{$mobile} {
-          border-radius: 0 0 0 0;
-        }
-
-
-      }
-      .track-content {
-        width: auto;
-        max-width: 700px;
-        margin-left: 0;
-        margin-right: 0;
-        @media #{$tablet} {
-          margin-left: auto;
-          min-width: 100px;
-        }
-        @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
-          width: 100%;
-          order: 1;
-          max-width: none;
-          margin-left: 0 !important;
-          border-radius: 0;
-          svg {
-            // border-radius: 4px 4px 0px 0;
-          }
-
-        }
-        flex: 1;
-      }
+    #static_header {
+      @include match-dynamic-site-width();
+      max-width: 960px;
     }
     #columns {
       display: flex;
-      max-width: 960px;
+      max-width: 1032px;
+      box-sizing: border-box;
+      padding: 0 $baseline * 1.5;
       margin-right: auto;
       margin-left: auto;
-      justify-content: center;
-      flex-wrap: wrap;
-      #left {
-        margin-right: $baseline * .75;
-        @media #{$mobile} {
-          margin-right: 0;
-        }
+      @media #{$one-column} {
+        display: block;
       }
-      #right {
-        margin-left: $baseline * .75;
-        @media #{$mobile} {
-          margin-left: 0;
-        }
+      @media #{$mobile} {
+        padding-right: 0;
+        padding-left: 0;
       }
       > div {
-        width: 48%;
         min-width: 320px;
-        max-width: 460px;
-
-
-        h2.box {
-          box-shadow: none;
-          border-radius: 0;
+        flex: 1;
+        &#left {
+          margin-right: $baseline * 0.75;
         }
-
-        .static_content {
-          padding: $baseline $baseline / 2;
-          font-size: 13px;
-          label {
-            display: block;
-            margin-bottom: -4px;
-          }
+        &#right {
+          margin-left: $baseline * 0.75;
         }
-        @media #{$tablet} {
+        @media #{$one-column} {
           width: 100%;
-          margin-left: auto!important;
-          margin-right: auto!important;
-
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
       }
     }

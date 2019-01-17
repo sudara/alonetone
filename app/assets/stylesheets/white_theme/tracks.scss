@@ -238,7 +238,7 @@
 		box-sizing: border-box;
 		transition: margin 250ms cubic-bezier(.17, .04, .03, .94);
 		box-shadow: inset 0 1px 3px #F2F2F2;
-		@media #{$tablet} {
+		@media #{$one-column} {
 			// padding-right: $baseline / 2;
 			// padding-left: $baseline / 2;
 		}

@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::AssetsController, type: :request do
-  fixtures :assets, :users
-
   before do
     create_user_session(users(:sudara))
   end
@@ -11,6 +9,7 @@ RSpec.describe Admin::AssetsController, type: :request do
     let(:track) { assets(:valid_mp3) }
 
     it "should mark asset as spam" do
+      akismet_stub_submit_spam
       expect(track.is_spam).to eq(false)
       put "/admin/assets/#{track.id}/spam"
       track.reload
@@ -27,6 +26,7 @@ RSpec.describe Admin::AssetsController, type: :request do
     let(:track) { assets(:spam_track) }
 
     it "should unspam the comment" do
+      akismet_stub_submit_ham
       put unspam_admin_asset_path(track.id)
       expect(track.reload.is_spam).to eq(false)
     end
@@ -43,7 +43,11 @@ RSpec.describe Admin::AssetsController, type: :request do
     let(:track3) { assets(:spam_track) }
 
     it "should mark all assets as spam" do
-      put mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: 1 } }
+      akismet_stub_submit_spam
+      put(
+        mark_group_as_spam_admin_assets_path,
+        params: { mark_spam_by: { user_id: users(:sudara).id } }
+      )
 
       expect(track1.is_spam).to eq(true)
       expect(track2.is_spam).to eq(true)

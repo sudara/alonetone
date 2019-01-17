@@ -70,8 +70,8 @@ end
 # Table name: posts
 #
 #  id         :integer          not null, primary key
-#  body       :text(65535)
-#  body_html  :text(65535)
+#  body       :text(16777215)
+#  body_html  :text(16777215)
 #  is_spam    :boolean          default(FALSE)
 #  signature  :string(255)
 #  spaminess  :float(24)

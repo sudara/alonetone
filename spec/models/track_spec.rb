@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Track, type: :model do
-  fixtures :playlists, :tracks, :assets, :users
-
   it "should be valid with a asset_id and a playlist_id" do
     expect(tracks(:owp1)).to be_valid
   end
@@ -16,7 +14,7 @@ RSpec.describe Track, type: :model do
   end
 
   context "as a fav" do
-    subject { users(:arthur).tracks.favorites.create(asset_id: 1) }
+    subject { users(:arthur).tracks.favorites.create(asset: assets(:valid_mp3)) }
     it "should create a favorite playlist if its the first fav" do
       expect { subject }.to change { Track.count }
     end

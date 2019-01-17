@@ -50,7 +50,7 @@
 
 <% if @posts.total_pages > 1 %>
   <div class="forum_paginator">
-      <%= will_paginate @posts %>
+    <%== pagy_nav @posts_pagy %>
   </div>
 <% end %>
 
@@ -60,7 +60,7 @@
 
 <% if @posts.total_pages > 1 %>
 <div class="forum_paginator">
-  <%= will_paginate @posts %>
+  <%== pagy_nav @posts_pagy %>
 </div>
 <% end %>
 

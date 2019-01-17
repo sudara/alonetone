@@ -1,0 +1,43 @@
+.playlists-new {
+  @include samo-shadow-and-radius();
+  box-sizing: border-box;
+  margin-right: auto;
+  margin-left: auto;
+  padding: $baseline / 2 $baseline;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #fff;
+  max-width: 960px;
+  @media #{$mobile} {
+    width: 100%;
+  }
+  h1 {
+    font-weight: bold;
+    font-family: $sans-font;
+    font-size: 18px;
+    padding-bottom: 16px;
+    padding-left: $baseline / 2;
+    color: $samo-orange;
+    border-bottom: 1px solid $light-gray;
+  }
+  h2.spacey {
+    font-size: 13px;
+    padding-left: $baseline / 2;
+  }
+  .errorExplanation {
+    margin: 12px;
+    padding: 0;
+    p {
+      font-size: 16px;
+    }
+    h2 {
+      font-size: 16px;
+    }
+  }
+  .container.static_content {
+    width: 100%;
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+    box-sizing: border-box;
+  }
+}

@@ -141,8 +141,8 @@ end
 # Table name: playlists
 #
 #  id           :integer          not null, primary key
-#  credits      :text(16777215)
-#  description  :text(16777215)
+#  credits      :text(4294967295)
+#  description  :text(4294967295)
 #  has_details  :boolean          default(FALSE)
 #  image        :string(255)
 #  is_favorite  :boolean          default(FALSE)
