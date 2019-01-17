@@ -1,4 +1,4 @@
-class Update < ActiveRecord::Base
+class Update < ApplicationRecord
   has_permalink :title
   scope :recent, -> { order('created_at DESC') }
 
