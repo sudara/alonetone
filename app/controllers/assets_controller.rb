@@ -291,7 +291,7 @@ class AssetsController < ApplicationController
     @favorites = Track.favorites_for_home
     @popular = Asset.published.order('hotness DESC').includes(user: :pic).limit(5)
     @playlists = white_theme_enabled? ? Playlist.for_home.limit(4) : Playlist.for_home.limit(5)
-    @comments = admin? ? Comment.last_5_private : Comment.to_other_members.not_my_ip.last_5_public
+    @comments = admin? ? Comment.last_5_private : Comment.to_other_members.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
   end
 
