@@ -6,6 +6,11 @@ ul {
   padding-left: 0;
   list-style: none;
 }
+
+.hidden {
+  display: none;
+}
+
 .box {
   position: relative;
   display: flex;
