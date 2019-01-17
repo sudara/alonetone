@@ -7,15 +7,15 @@ RSpec.describe AssetNotification, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("[alonetone] '#{assets(:valid_mp3).user.name}' uploaded a new track!")
       expect(mail.to).to eq(["#{users(:sudara).email}"])
-      expect(mail.from).to eq(["#{Alonetone.email}"])
+      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
     end
 
     it "includes the unfollow link" do
-      expect(mail.body).to include("https://#{Alonetone.url}/unfollow/#{assets(:valid_mp3).user.login}")
+      expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/unfollow/#{assets(:valid_mp3).user.login}")
     end
 
     it "includes the unsubscribe link" do
-      expect(mail.body).to include("https://#{Alonetone.url}/notifications/unsubscribe")
+      expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/notifications/unsubscribe")
     end
   end
 end
