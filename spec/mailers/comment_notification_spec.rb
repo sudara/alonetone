@@ -8,18 +8,18 @@ RSpec.describe CommentNotification, type: :mailer do
 
     it "renders the headers" do
       expect(mail.to).to eq(["sudara@modernthings.net"])
-      expect(mail.from).to eq(["#{Alonetone.email}"])
+      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
       expect(mail.subject).to eq("[alonetone] Comment on '#{asset.name}' from sudara")
     end
 
     it "renders the body" do
       expect(mail.body).to include("Hey there sudara")
       expect(mail.body).to include("sudara says:")
-      expect(mail.body).to include("https://#{Alonetone.url}/sudara/edit")
+      expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/sudara/edit")
     end
 
     it "includes the unsubscribe link" do
-      expect(mail.body).to include("https://#{Alonetone.url}/notifications/unsubscribe")
+      expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/notifications/unsubscribe")
     end
   end
 
@@ -30,18 +30,18 @@ RSpec.describe CommentNotification, type: :mailer do
 
     it "renders the headers" do
       expect(mail.to).to eq(["sudara@modernthings.net"])
-      expect(mail.from).to eq(["#{Alonetone.email}"])
+      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
       expect(mail.subject).to eq("[alonetone] Comment on '#{asset.name}' from Guest")
     end
 
     it "renders the body" do
       expect(mail.body).to include("Hey there sudara")
       expect(mail.body).to include("Guest says:")
-      expect(mail.body).to include("https://#{Alonetone.url}/sudara/edit")
+      expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/sudara/edit")
     end
 
     it "includes the unsubscribe link" do
-      expect(mail.body).to include("https://#{Alonetone.url}/notifications/unsubscribe")
+      expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/notifications/unsubscribe")
     end
   end
 end
