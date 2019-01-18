@@ -201,16 +201,27 @@
     }
   }
   #right {
-    #playlist_source_options {
-      overflow: auto;
-      margin-left: $baseline / 2;
-      li {
-        float: left;
-        margin-right: 10px;
-        text-decoration: underline;
-        a {
-          @include default-button();
+    #playlist_sources {
+      h2 {
+        margin-bottom: 0;
+      }
+      #playlist_tabs {
+        background-color: #E1E2E2;
+        #playlist_source_options {
+          overflow: auto;
+          margin-left: $baseline / 2;
+          li {
+            float: left;
+            margin-right: 10px;
+            text-decoration: underline;
+            a {
+              @include default-button();
+            }
+          }
         }
+      }
+      .mini_paginator {
+        border-bottom: 1px solid $light-gray;
       }
     }
   }
@@ -222,10 +233,10 @@
     min-height: 42px;
     .remove-inner-inline {
       display: inline-flex;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       position: relative;
-      top: -4px;
+      top: -3px;
       border-radius: 4px;
       background-color: #c4c4c4;
       align-items: center;
@@ -238,10 +249,10 @@
     }
     .add-inner-inline {
       display: inline-flex;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       position: relative;
-      top: -4px;
+      top: -3px;
       border-radius: 4px;
       background-color: #c4c4c4;
       align-items: center;

@@ -103,7 +103,6 @@
        Click the <span class="add-inner-inline"><%= render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
-      <div class="draggable_tracks">
         <h2>Available tracks</h2>
         <div id="playlist_tabs">
           <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
@@ -111,28 +110,27 @@
             <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
             <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
           </ul>
-          <div id="your_uploads" class="playlist_source">
-            <div class="mini_paginator">
-              <%== pagy_nav @assets_pagy %>
-            </div>
-            <% @assets.each do |asset| %>
-              <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
-                <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
-                <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
-                  <div class="add-inner">
-                    <%= render file: svg_path('svg/icon_+.svg') %>
-                  </div>
-                </a>
-                <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
-                  <div class="remove-inner">
-                      <%= render file: svg_path('svg/icon_x.svg') %>
-                  </div>
-                </a>
-              </div>
-            <% end %>
-          </div>
         </div>
-      </div>
+        <div id="your_uploads" class="playlist_source">
+          <div class="mini_paginator">
+            <%== pagy_nav @assets_pagy %>
+          </div>
+          <% @assets.each do |asset| %>
+            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
+              <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
+              <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
+                <div class="add-inner">
+                  <%= render file: svg_path('svg/icon_+.svg') %>
+                </div>
+              </a>
+              <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
+                <div class="remove-inner">
+                    <%= render file: svg_path('svg/icon_x.svg') %>
+                </div>
+              </a>
+            </div>
+          <% end %>
+        </div>
     </div>
   </div>
   <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), 
