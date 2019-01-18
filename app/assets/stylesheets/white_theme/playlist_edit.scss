@@ -153,6 +153,20 @@
   }
 }
 .edit_playlist_columns {
+  #left {
+    .playlist_size {
+      border-radius: 4px;
+      background-color: $samo-alternate-background-gray;
+      font-size: 13px;
+      color: $samo-gray;
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      margin: 130px 10px 10px 10px;
+      font-family: $medium-sans-font;
+    }
+
+  }
   #right {
     #playlist_source_options {
       overflow: auto;
