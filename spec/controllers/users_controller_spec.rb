@@ -198,7 +198,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context "favoriting" do
-    subject { get :toggle_favorite, params: { asset_id: 100 }, xhr: true }
+    let(:asset) { assets(:valid_mp3_2) }
+    subject { get :toggle_favorite, params: { asset_id: asset.id }, xhr: true }
 
     it 'should not let a guest favorite a track' do
       expect { subject }.to change { Track.count }.by(0)
@@ -208,15 +209,15 @@ RSpec.describe UsersController, type: :controller do
     it 'should let a user favorite a track' do
       login(:arthur)
       expect { subject }.to change { Track.count }.by(1)
-      expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(Asset.find(100))
+      expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(asset)
       expect(response).to be_successful
     end
 
     it 'should let a user unfavorite a track' do
       login(:arthur)
       expect { subject }.to change { Track.count }.by(1)
-      get :toggle_favorite, params: { asset_id: 100 } # toggle again
-      expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(Asset.find(100))
+      get :toggle_favorite, params: { asset_id: asset.id }, xhr: true # toggle again
+      expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(asset)
       expect(response).to be_successful
     end
   end
@@ -242,7 +243,7 @@ RSpec.describe UsersController, type: :controller do
     it "should let an sudo'd user return to their admin account" do
       login(:arthur)
       controller.session[:return_to] = '/users'
-      controller.session[:sudo] = 1
+      controller.session[:sudo] = users(:sudara).id
       get :sudo, params: { id: 'arthur' }
       expect(flash[:ok]).to be_present
       expect(controller.session["user_credentials"]).to eq(users(:sudara).persistence_token)

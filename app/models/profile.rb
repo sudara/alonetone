@@ -15,7 +15,7 @@ end
 #  id         :bigint(8)        not null, primary key
 #  apple      :string(255)
 #  bandcamp   :string(255)
-#  bio        :text(65535)
+#  bio        :text(16777215)
 #  city       :string(255)
 #  country    :string(255)
 #  instagram  :string(255)

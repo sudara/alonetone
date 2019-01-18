@@ -1,8 +1,6 @@
-/* MASS EDIT */
-
 .mass_edit_content {
-  @include match-dynamic-site-width("narrow");
   position: relative;
+  @include match-dynamic-site-width("narrow");
   div.track_options {
     a {
       position: absolute;
@@ -19,10 +17,8 @@
       box-sizing: border-box;
     }
     h2.box {
-      margin-left: $baseline;
-      margin-right: $baseline;
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
       margin-top: 0;
       box-shadow: none;
       border-radius: 0;
@@ -52,7 +48,7 @@
         color: $dark-gray;
         border: 1px solid $samo-light-gray;
         background-color: transparent;
-        @media #{$tablet} {
+        @media #{$one-column} {
           font-size: 16px;
         }
       }

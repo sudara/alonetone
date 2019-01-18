@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
   end
 
   def new_tracks_from_followees(limit)
-    Asset.new_tracks_from_followees(self, page: 1, per_page: limit)
+    Asset.new_tracks_from_followees(self, limit)
   end
 
   def follows_user_ids
@@ -210,7 +210,7 @@ end
 #  playlists_count    :integer          default(0), not null
 #  posts_count        :integer          default(0)
 #  salt               :string(128)      default(""), not null
-#  settings           :text(16777215)
+#  settings           :text(4294967295)
 #  use_old_theme      :boolean          default(FALSE)
 #  created_at         :datetime
 #  updated_at         :datetime

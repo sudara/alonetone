@@ -44,7 +44,10 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     it "should mark all assets as spam" do
       akismet_stub_submit_spam
-      put mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: 1 } }
+      put(
+        mark_group_as_spam_admin_assets_path,
+        params: { mark_spam_by: { user_id: users(:sudara).id } }
+      )
 
       expect(track1.is_spam).to eq(true)
       expect(track2.is_spam).to eq(true)

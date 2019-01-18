@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.2.2'
 gem 'mysql2'
+gem 'puma'
 
 gem 'thredded'
 
@@ -31,7 +32,6 @@ gem 'request_store' # for authlogic
 # view
 gem 'redcarpet'
 gem 'country_select'
-gem 'will_paginate'
 gem 'dynamic_form'
 gem 'simple_form'
 gem 'local_time'
@@ -71,7 +71,6 @@ gem 'sidekiq'
 gem 'dalli'
 
 group :production do
-  gem 'puma'
   gem 'bugsnag'
 end
 

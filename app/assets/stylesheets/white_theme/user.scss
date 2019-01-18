@@ -37,7 +37,7 @@ main {
       }
     }
 
-    @media #{$tablet} {
+    @media #{$one-column} {
       display: flex;
       flex-direction: column;
       > * {
@@ -146,7 +146,7 @@ main {
               margin-top: 0;
               margin-bottom: 0;
             }
-            @media #{$tablet} {
+            @media #{$one-column} {
               padding-left: 15px;
             }
           }
@@ -211,13 +211,13 @@ main {
       @include samo-shadow-and-radius();
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
       overflow: hidden;
-      @media #{$tablet} {
+      @media #{$one-column} {
         flex-direction: column;
       }
       .user_card_avatar {
         max-width: 50%;
         flex-grow: 1;
-        @media #{$tablet} {
+        @media #{$one-column} {
           max-width: 100%;
           width: 100%;
         }
@@ -232,7 +232,7 @@ main {
         flex-direction: column;
         max-width: 50%;
         box-sizing: border-box;
-        @media #{$tablet} {
+        @media #{$one-column} {
           max-width: 100%;
           width: 100%;
           margin-left: 0;
@@ -316,7 +316,7 @@ main {
         }
         > div.time_and_date {
           margin-right: 16px;
-          @media #{$tablet} {
+          @media #{$one-column} {
             width: 100%;
             flex: auto;
             margin-right: 0;

@@ -30,11 +30,11 @@ class CommentsController < ApplicationController
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @pagy, @comments = pagy(@user.comments.on_track.only_public.includes(commenter: :pic, commentable: { user: :pic }), page_param: :page)
+      @pagy, @comments = pagy(@user.comments.on_track.only_public.includes(commenter: :pic, commentable: { user: :pic }))
       set_comments_made
     else
       @page_title = "Recent Comments"
-      @pagy, @comments = pagy(Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?), page_param: :page)
+      @pagy, @comments = pagy(Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?))
       set_spam_comments
     end
     render 'index_white' if white_theme_enabled?

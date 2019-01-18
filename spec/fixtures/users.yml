@@ -1,17 +1,17 @@
 # admin
 sudara:
-  id: 1
   login: sudara
   email: sudara@modernthings.net
   salt: <%= salt = Authlogic::Random.hex_token %>
+  persistence_token: <%= SecureRandom.hex(64) %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
   created_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
   admin: true
+  assets_count: 3
 
 # normal
 arthur:
-  id: 2
   login: arthur
   email: arthur@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
@@ -23,7 +23,6 @@ arthur:
 
 # deleted
 aaron:
-  id: 3
   login: aaron
   email: aaron@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
@@ -33,7 +32,6 @@ aaron:
 
 # not activated
 not_activated:
-  id: 4
   email: ben@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
@@ -43,7 +41,6 @@ not_activated:
 
 # moderator
 sandbags:
-  id: 5
   login: sandbags
   email: sandbags@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
@@ -54,7 +51,6 @@ sandbags:
 
 # another joe blow
 joeblow:
-  id: 6
   login: joeblow
   email: joe@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
@@ -64,7 +60,6 @@ joeblow:
 
 # Brand new user with 25 tracks
 brand_new_user:
-  id: 7
   login: brandnewuser
   email: brandnewuser@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
@@ -72,3 +67,40 @@ brand_new_user:
   created_at: <%= 5.hours.ago.to_s :db %>
   updated_at: <%= 5.hours.ago.to_s :db %>
   assets_count: 25
+
+# Jamie Kiesl is a 35-year-old human resources manager who lives in Mequon, Wisconsin. She is also
+# damn good at naming cheeses. She created an account to listen to artists on Alonetone.
+jamie_kiesl:
+  login: Jamiek
+  email: jamie.kiesl@example.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  playlists_count: 0
+  assets_count: 0
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.month.ago %>
+
+# Will Studd is an International cheese specialist. Studd has been working with artisan and
+# farmhouse cheeses for more than four decades, and has travelled extensively in his vocation.
+will_studd:
+  login: willstudd
+  email: willstudd@exmple.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  playlists_count: 1
+  assets_count: 4
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  created_at: <%= 1.year.ago %>
+  updated_at: <%= 1.year.ago %>
+
+# Henri Willig has been producing traditional cheeses in its own cheese dairies in Katwoude and
+# Heerenveen in the Netherlands.
+henri_willig:
+  login: henriwillig
+  display_name: Henri Willig
+  email: henriwillig@example.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  playlists_count: 1
+  assets_count: 2
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  created_at: <%= 6.months.ago %>
+  updated_at: <%= 6.months.ago %>

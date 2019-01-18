@@ -1,6 +1,6 @@
 <div id="your_uploads" class="playlist_source">
   <div class="mini_paginator">
-    <%= will_paginate @assets, {param_name: :uploads_page, ignore_get_params: true}%>
+    <%== pagy_nav @assets_pagy %>
   </div>
 
 	<div class="scriptaculous">

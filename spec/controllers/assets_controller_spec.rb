@@ -20,9 +20,9 @@ RSpec.describe AssetsController, type: :controller do
     it 'should allow user to upload new version of song' do
       akismet_stub_response_ham
       login(:sudara)
-      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('assets/muppets.mp3', 'audio/mpeg')] }
+      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
-      put :update, params: { id: users(:sudara).assets.first, user_id: users(:sudara).login, asset: { mp3: fixture_file_upload('assets/tag1.mp3', 'audio/mpeg') } }
+      put :update, params: { id: users(:sudara).assets.first, user_id: users(:sudara).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
       expect(users(:sudara).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
     end
   end
@@ -113,6 +113,32 @@ RSpec.describe AssetsController, type: :controller do
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
 
       assert_enqueued_jobs(0)
+    end
+  end
+
+  context "index" do
+    before :each do
+      login(:sudara)
+    end
+
+    it "should render index_white template" do
+      get :index, params: { user_id: users(:sudara).login }
+      expect(response.status).to eq(200)
+      expect(response).to render_template(:index_white)
+      expect(response.content_type).to eq("text/html")
+    end
+
+    it "should display user's track if it is hot" do
+      assets(:valid_mp3).update_attributes(hotness: 2)
+
+      get :index, params: { user_id: users(:sudara).login }
+      expect(response.body).to match(/Hot Tracks this week/)
+      expect(response.body).to match(/Very good song/)
+    end
+
+    it "displays a custom message if user doesnt have tracks yet" do
+      get :index, params: { user_id: users(:joeblow).login }
+      expect(response.body).to match(/Looks like joeblow hasn't uploaded anything yet!/)
     end
   end
 end

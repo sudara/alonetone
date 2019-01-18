@@ -1,34 +1,31 @@
-# belongs to sudara
+# Sudara's playlists.
 owp:
-  id: 1
-  user_id: 1
+  user: sudara
   permalink: owp
   title: obsessed with progression
   tracks_count: 3
   description: sudara's album
   created_at: <%= 1.day.ago.to_s :db %>
 
+empty:
+  user: sudara
+  permalink: empty-playlist
+  title: Empty Playlist
+  description: something coming
+  created_at: <%= 1.day.ago.to_s :db %>
+
+# Arthur's playlists.
 arthurs_playlist:
-  id: 2
-  user_id: 2
+  user: arthur
   permalink: arthurs-playlist
   title: Arthur's Playlist
   description: arthurs playlist
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
 
-empty:
-  id: 3
-  user_id: 1
-  permalink: empty-playlist
-  title: Empty Playlist
-  description: something coming
-  created_at: <%= 1.day.ago.to_s :db %>
-
 mix:
-  id: 4
   is_mix: true
-  user_id: 2
+  user: arthur
   permalink: mix-tape
   title: mix tape
   tracks_count: 3
@@ -36,12 +33,32 @@ mix:
   created_at: <%= 1.day.ago.to_s :db %>
 
 arthurs_favorites:
-  id: 5
   is_mix: true
   is_favorite: true
   permalink: arthurs-favorites
   title: Arthur's favorites
   description: arthur's favorites
   tracks_count: 1
-  user_id: 2
+  user: arthur
   created_at: <%= 1.day.ago.to_s :db %>
+
+# Rockfort is Will's experimental progrock album about blue cheese.
+will_studd_rockfort:
+  user: will_studd
+  permalink: rockfort
+  title: Rockfort
+  tracks_count: 3
+  description: >
+    Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
+    is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
+    interpretation of this fine cheese.
+
+# Polderkaas is Henry's Polderrock album.
+henri_willig_polderkaas:
+  user: henri_willig
+  permalink: polderkaas
+  title: Polderkaas
+  tracks_count: 2
+  description: >
+    Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
+    goodness as they cheese it was named after.

@@ -1,73 +1,125 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 valid_mp3:
-  id: 1
   mp3_file_name: Song1.mp3
+  title: Very good song
   permalink: song1
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user_id: 1
+  user: sudara
   length: 45
 valid_zip:
-  id: 2
   mp3_file_name: MySongs.zip
   permalink: song1
   mp3_content_type: application/zip
   mp3_file_size: <%= 10.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user_id: 1
+  user: sudara
 invalid_file:
-  id: 3
   mp3_file_name: Somefile.png
   permalink: song1
   mp3_content_type: image/png
   mp3_file_size: <%= 1.megabyte %>
   created_at: <%= 1.day.ago.to_s :db %>
-  user_id: 1
+  user: sudara
 valid_arthur_mp3:
-  id: 4
   permalink: song1
   mp3_file_name: Song5.mp3
   mp3_content_type: audio/mpeg
   mp3_file_size: 3.megabytes
   created_at: 2007-04-08 13:00:03
-  user_id: 2
+  user: arthur
   length: 45
 too_big_file:
-  id: 5
   mp3_file_name: Song1.mp3
   permalink: song1
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 61.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user_id: 1
+  user: sudara
   length: 45
 valid_mp3_2:
-  id: 100
   mp3_file_name: Song1.mp3
   permalink: song100
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user_id: 1
+  user: sudara
   length: 45
 private_track:
-  id: 6
   mp3_file_name: Song7.mp3
   permalink: song100
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user_id: 1
+  user: sudara
   length: 45
   private: true
 spam_track:
-  id: 7
   mp3_file_name: Song6.mp3
   permalink: song6
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
   created_at: 2007-04-08 13:00:03
-  user_id: 1
+  user: sudara
   length: 45
   is_spam: true
+
+# This block of assets are all meant for Will's Rockfort playlist.
+will_studd_rockfort_combalou:
+  user: will_studd
+  title: Combalou Caves of Roquefort-sur-Soulzon
+  permalink: combalou
+  mp3_file_name: Untitled Copy 1.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.3.megabytes %>
+  length: 156
+  created_at: <%= 3.months.ago %>
+will_studd_rockfort_white_wild_tangy:
+  user: will_studd
+  title: White, Wild, and Tangy
+  permalink: white-wild-and-tangy
+  mp3_file_name: Untitled Copy 2 premix.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 2.8.megabytes %>
+  length: 143
+  created_at: <%= 3.months.ago %>
+will_studd_magnificent_lacaune:
+  user: will_studd
+  title: Magnificent Lacuane
+  permalink: magnificent-lacaune
+  mp3_file_name: mixs for will 3.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 4.5.megabytes %>
+  length: 167
+  created_at: <%= 3.months.ago %>
+# Belongs to the Rockfort playlist, but is not added yet.
+will_studd_appellation_controlee:
+  user: will_studd
+  title: Appellation d'origine contrôlée
+  permalink: appellation-dorigine-controlee
+  mp3_file_name: 4.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 2.4.megabytes %>
+  length: 123
+  created_at: <%= 2.months.ago %>
+
+# Following block of tracks are all included in Henry's Polderkaas playlist.
+henri_willig_finest_cheese:
+  user: henri_willig
+  title: Manufacturer of the Finest Cheese
+  permalink: manufacturer-of-the-finest-cheese
+  mp3_file_name: track-1.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 1.3.megabytes %>
+  length: 50
+  created_at: <%= 1.month.ago %>
+henri_willig_the_goat:
+  user: henri_willig
+  title: Greatest Of All Times
+  permalink: greatest-of-all-times
+  mp3_file_name: track-2.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 2.3.megabytes %>
+  length: 140
+  created_at: <%= 1.month.ago %>
