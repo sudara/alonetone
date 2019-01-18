@@ -67,7 +67,14 @@
  icon.
     </p>
     <div class="box">
-      <h2><%= @playlist.title %></h2>
+      <div class="left_column_box_header">
+        <h2><%= @playlist.title %> <span class="playlist_date">(2018)</span></h2>
+        <div>
+           <span class="playlist_track_size">9 tracks</span> <span class="playlist_dash">&mdash;</span> <span class="playlist_total_time">24:81</span>
+        </div>
+
+      </div>
+      
       <div class="sortable" data-target="playlist-edit.sortable">
         <% @playlist.tracks.each do |track| %>
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
