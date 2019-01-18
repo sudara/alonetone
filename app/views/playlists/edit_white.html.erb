@@ -67,26 +67,26 @@
  icon.
     </p>
     <div class="box">
-    <h2><%= @playlist.title %></h2>
-    <div class="sortable" data-target="playlist-edit.sortable">
-      <% @playlist.tracks.each do |track| %>
-      <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
-        <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
-        <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
-          <div class="remove-inner">
-              <%= render file: svg_path('svg/icon_x.svg') %>
-          </div>
-        </a>
+      <h2><%= @playlist.title %></h2>
+      <div class="sortable" data-target="playlist-edit.sortable">
+        <% @playlist.tracks.each do |track| %>
+        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
+          <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+          <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+            <div class="remove-inner">
+                <%= render file: svg_path('svg/icon_x.svg') %>
+            </div>
+          </a>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
+     <% if @playlist.tracks.size > 0 %>
+      <div class="playlist_size">
+      <%= "<span data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+      </div>
     </div>
     <div class="playlist_feedback" data-target="playlist-edit.feedback">
     </div>
-     <% if @playlist.tracks.size > 0 %>
-      <div class="playlist_size">
-      <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
-      </div>
     <% end %>
      <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
   </div>
