@@ -181,6 +181,11 @@
           color: $samo-orange;
         }
       }
+    }
+    .playlist_asset:last-child {
+      border-bottom: 1px solid $light-gray;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
 
     }
     .playlist_size {
