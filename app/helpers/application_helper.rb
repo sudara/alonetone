@@ -70,14 +70,19 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    return "" unless text
+    begin
 
-    text = emojify(text)
-    @@renderer ||= begin
-                     html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
-                     Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
-                   end
-    Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
+      return "" unless text
+
+      text = emojify(text)
+      @@renderer ||= begin
+                       html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
+                       Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
+                     end
+        Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
+    rescue ActionView::Template::Error
+      binding.pry
+    end
   end
 
   def markdown_with_html(text)
