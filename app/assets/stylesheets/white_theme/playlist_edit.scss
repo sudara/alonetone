@@ -154,6 +154,35 @@
 }
 .edit_playlist_columns {
   #left {
+    .left_column_box_header {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid $light-gray;
+      h2 {
+        border-bottom: 0;
+        width: auto;
+        span.playlist_date {
+          color: $samo-gray;
+        }
+        margin-right: auto;
+      }
+      div {
+        margin-top: 16px;
+        font-family: $medium-sans-font;
+        font-size: 13px;
+        margin-right: 20px;
+        span.playlist_track_size {
+          color: $samo-gray;
+        }
+        span.playlist_dash {
+          color: #e1e2e2;
+        }
+        span.playlist_total_time {
+          color: $samo-orange;
+        }
+      }
+
+    }
     .playlist_size {
       border-radius: 4px;
       background-color: $samo-alternate-background-gray;
@@ -165,7 +194,6 @@
       margin: 130px 10px 10px 10px;
       font-family: $medium-sans-font;
     }
-
   }
   #right {
     #playlist_source_options {
