@@ -227,8 +227,28 @@
             float: left;
             margin-right: 10px;
             text-decoration: underline;
+            &:first-child {
+              a {
+                background-color: $samo-orange;
+                border: 1px solid #DE6A00;
+                color: $white;
+                &:hover {
+                  background-color: $samo-orange;
+                  border: 1px solid #DE6A00;
+                  color: $white;
+                }
+              }
+            }
             a {
               @include default-button();
+              background-color: $white; 
+              color: #888888;
+              font-family: $medium-sans-font;
+              font-weight: normal;
+              &:hover {
+                background-color: #888888;
+                color: $white;
+              }
             }
           }
         }
