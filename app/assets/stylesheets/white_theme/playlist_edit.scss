@@ -114,17 +114,22 @@
       }
       > .edit_playlist_info_right_column_private_and_hidden {
         display: flex;
+        flex-direction: row;
         width: 100%;
         font-size: 12px;
+        position: relative;
         div.input {
           width: auto;
         }
         label {
           text-transform: none;
+          color: #4F4D4D;
         }
-        [type="checkbox"]:not(:checked),
-        [type="checkbox"]:checked {
-          position: static;
+        span.private_notice {
+         color: $new-samo-gray;
+         font-family: $medium-sans-font;
+         margin-left: 4px;
+         margin-top: 5px;
         }
       }
     }
