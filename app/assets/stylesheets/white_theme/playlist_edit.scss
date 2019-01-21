@@ -220,11 +220,14 @@
       #playlist_tabs {
         display: flex;
         background-color: #e1e2e2;
+        height: 36px;
+        box-sizing: border-box; 
         #playlist_source_options {
-          overflow: auto;
           margin-left: $baseline / 2;
+          display: flex;
+          flex-direction: row;
+          margin-top: 5px;
           li {
-            float: left;
             margin-right: 10px;
             text-decoration: underline;
             &:first-child {
@@ -245,6 +248,7 @@
               color: #888888;
               font-family: $medium-sans-font;
               font-weight: normal;
+              height: 26px;
               &:hover {
                 background-color: #888888;
                 color: $white;
