@@ -186,7 +186,6 @@
       border-bottom: 1px solid $light-gray;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-
     }
     .playlist_size {
       border-radius: 4px;
@@ -202,11 +201,25 @@
   }
   #right {
     #playlist_sources {
-      h2 {
-        margin-bottom: 0;
+      .right_column_box_header {
+        display: flex;
+        flex-direction: row;
+        h2 {
+          margin-bottom: 0;
+          width: auto;
+        }
+        .available_tracks_total {
+          margin-top: 16px;
+          font-family: $medium-sans-font;
+          font-size: 13px;
+          margin-right: 20px;
+          color: $samo-gray;
+          margin-left: auto;
+        }  
       }
       #playlist_tabs {
-        background-color: #E1E2E2;
+        display: flex;
+        background-color: #e1e2e2;
         #playlist_source_options {
           overflow: auto;
           margin-left: $baseline / 2;
@@ -321,7 +334,7 @@
         height: 29px;
         border-radius: 4px;
         background-color: #c4c4c4;
-  
+
         align-items: center;
         justify-content: center;
         svg {

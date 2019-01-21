@@ -72,9 +72,7 @@
         <div>
            <span class="playlist_track_size">9 tracks</span> <span class="playlist_dash">&mdash;</span> <span class="playlist_total_time">24:81</span>
         </div>
-
       </div>
-      
       <div class="sortable" data-target="playlist-edit.sortable">
         <% @playlist.tracks.each do |track| %>
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
@@ -103,7 +101,12 @@
        Click the <span class="add-inner-inline"><%= render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
-        <h2>Available tracks</h2>
+        <div class="right_column_box_header">
+          <h2>Available tracks</h2>
+          <div class="available_tracks_total">
+            2,181 tracks total
+          </div>
+        </div>
         <div id="playlist_tabs">
           <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
             <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
