@@ -100,9 +100,9 @@
         </div>
         <div id="playlist_tabs">
           <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
-            <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
-            <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
-            <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
+            <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
+            <li><%= link_to "your listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
+            <li><%= link_to "favorites", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
           </ul>
         </div>
         <div id="your_uploads" class="playlist_source">
