@@ -11,10 +11,10 @@
           <% end %>
           <%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
-            <%= submit_tag "Upload new Pic" %>
+            <%= submit_tag "Upload artwork" %>
           <% end %>
           <p>
-            Upload a square photo, 2000px by 2000px for best results.
+            Upload a square photo,<br> 2000px by 2000px for<br> best results.
           </p>
       </div>
       <%= simple_form_for [@user, @playlist], html: { class: 'edit_playlist_info_right_column' } do |f| %>
