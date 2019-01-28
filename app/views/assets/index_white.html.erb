@@ -1,9 +1,12 @@
+<div id="columns_header">
+        <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+</div>
 <div id='columns'>
   <div id="left">
     <div id="user_tracks box">
       <% cache("tracks/#{logged_in?}/#{@assets.cache_key}") do %>
       <% if @user.assets_count > 0 %>
-        <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy %>
         </div>
@@ -19,7 +22,7 @@
     <% if authorized? && @user.assets_count > 2 %>
       <% if @hot_tracks_this_week.present? %>
         <div class="box">
-          <h2 class="box">Hot Tracks this week</h2>
+          <h2 class="box">Hot Tracks This Week</h2>
           <div>
             <%= render partial: 'asset', collection: @hot_tracks_this_week %>
             <%# image_tag @user.most_popular_chart %>
