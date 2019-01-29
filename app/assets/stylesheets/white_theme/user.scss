@@ -222,6 +222,7 @@ main {
       overflow: hidden;
       @media #{$one-column} {
         flex-direction: column;
+        margin-top: $baseline * 1.5;
       }
       .user_card_avatar {
         max-width: 50%;
@@ -269,6 +270,9 @@ main {
     }
 
     #user_follows_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
       h2.area_heading {
         font-size: 24px;
         color: #000;
@@ -297,6 +301,10 @@ main {
       }
     }
     #user_stats_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
       h2.area_heading {
         font-size: 24px;
         color: #000;
@@ -346,6 +354,10 @@ main {
       }
     }
     #user_mod_stats_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
       h2.area_heading {
         font-size: 20px;
         color: $samo-light-gray;
@@ -395,6 +407,10 @@ main {
     }
 
     #user_actions_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
       background-color: #efefef;
       @include samo-shadow-and-radius();
       padding: 16px;
@@ -411,6 +427,10 @@ main {
     }
 
     #user_links_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
       ul {
         display: inline-flex;
         padding-top: 4px;
@@ -467,6 +487,10 @@ main {
     }
 
     #user_plays_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
       .box > h2 {
         padding-left: $baseline / 2;
       }
