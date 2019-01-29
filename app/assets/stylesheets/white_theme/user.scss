@@ -80,6 +80,10 @@ main {
     #user_left_column {
       margin-top: -$baseline * 1.5;
       grid-area: left;
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+ 
       > div {
         margin-bottom: $baseline * 1.5;
         &:last-child {
@@ -91,6 +95,9 @@ main {
     #user_right_column {
       margin-top: -$baseline * 1.5;
       grid-area: right;
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
       > div {
         margin-bottom: $baseline * 1.5;
         &:last-child {
