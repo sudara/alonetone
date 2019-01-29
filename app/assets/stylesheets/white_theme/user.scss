@@ -40,6 +40,8 @@ main {
     @media #{$one-column} {
       display: flex;
       flex-direction: column;
+      grid-column-gap: 0;
+      grid-row-gap: 0;  
       > * {
         width: 100%;
       }

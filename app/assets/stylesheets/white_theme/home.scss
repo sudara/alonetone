@@ -14,9 +14,13 @@
 
   @media #{$one-column} {
 		display: flex;
-		flex-direction: column;
+    flex-direction: column;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+  
 		 > * {
-			width: 100%;
+      width: 100%;
+      margin-bottom: $baseline * 1.5;
     }
 
 	}
@@ -44,7 +48,6 @@
 	#home_playlists_area {
     grid-area: playlists;
     margin-bottom: 12px;
-
     @media #{$one-column} {
       margin-bottom: $baseline * 1.5;
     }
