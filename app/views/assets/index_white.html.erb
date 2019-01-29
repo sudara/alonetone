@@ -25,7 +25,7 @@
     <% if authorized? && @user.assets_count > 2 %>
       <% if @hot_tracks_this_week.present? %>
         <div class="box">
-          <h2 class="box">Hot Tracks This Week</h2>
+          <h2 class="box">Hot Tracks this week</h2>
           <div>
             <%= render partial: 'asset', collection: @hot_tracks_this_week %>
             <%# image_tag @user.most_popular_chart %>
