@@ -28,7 +28,7 @@ main {
       color: $samo-orange;
       padding-left: 16px;
       margin-bottom: 16px;
-      line-height: 1em;
+      line-height: 1;
     }
     .box {
       margin-bottom: 0;
@@ -144,7 +144,7 @@ main {
             align-self: flex-end;
             h1.user_name {
               font-size: 28px;
-              line-height: 1em;
+              line-height: 1;
               margin-top: 0;
               margin-bottom: 0;
             }
@@ -242,7 +242,7 @@ main {
         .user_card_bio {
           flex-grow: 1;
           font-size: 16px;
-          line-height: 1.3em;
+          line-height: 1.3;
           color: #353535;
           padding: 36px;
           font-family: $medium-sans-font;
