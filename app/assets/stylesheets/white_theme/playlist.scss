@@ -8,9 +8,6 @@
   margin-right: auto;
   flex-wrap: wrap;
   align-items: flex-start;
-  @media #{$mobile} {
-    width: 100%;
-  }
   .playlist-sidebar {
     @include samo-shadow-and-radius();
     position: relative;
@@ -20,30 +17,24 @@
     width: 35%;
     margin-right: $baseline;
     @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
+      order: 2;
       max-width: none;
       width: 100%;
       margin-right: 0;
       margin-bottom: $baseline;
-      order: 2;
-      border-radius: 0 0 6px 6px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
     }
   }
   .track-content {
-    width: auto;
-    max-width: 700px;
-    min-width: 300px;
-    margin-left: 0;
-    margin-right: 0;
-    @media #{$one-column} {
-      margin-left: auto;
-    }
-    @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
-      width: 100%;
-      order: 1;
-      max-width: none;
-      margin-left: 0 !important;
-      border-radius: 0;
-    }
     flex: 1;
+    min-width: 300px;
+    @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
+      order: 1;
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto!important;
+      margin-right: auto;
+    }
   }
 }
