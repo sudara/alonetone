@@ -27,18 +27,15 @@
       order: 2;
       border-radius: 0 0 6px 6px;
     }
-    @media #{$mobile} {
-      border-radius: 0 0 0 0;
-    }
   }
   .track-content {
     width: auto;
     max-width: 700px;
+    min-width: 300px;
     margin-left: 0;
     margin-right: 0;
     @media #{$one-column} {
       margin-left: auto;
-      min-width: 100px;
     }
     @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
       width: 100%;
