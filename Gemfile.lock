@@ -90,7 +90,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bugsnag (6.10.0)
+    bugsnag (6.11.1)
       concurrent-ruby (~> 1.0)
     builder (3.2.3)
     capybara (3.13.2)
