@@ -12,7 +12,7 @@
     "gsap": "^2.0",
     "howler": "https://github.com/goldfire/howler.js.git",
     "local-time": "^2.1.0",
-    "rails-erb-loader": "^5.5.0",
+    "rails-erb-loader": "^5.5.1",
     "rails-ujs": "^5.2.2",
     "seedrandom": "^2.4.4",
     "stimulus": "^1.1.0",
