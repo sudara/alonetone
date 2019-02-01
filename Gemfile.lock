@@ -150,7 +150,7 @@ GEM
     db_text_search (0.3.0)
       activerecord (>= 4.1.15, < 6.0)
     diff-lcs (1.3)
-    diffy (3.2.1)
+    diffy (3.3.0)
     dynamic_form (1.1.4)
     erubi (1.8.0)
     excon (0.62.0)
@@ -285,7 +285,7 @@ GEM
       addressable
       excon
       faraday (>= 0.9)
-    perf_check (0.10.2)
+    perf_check (0.10.4)
       colorize
       diffy
       rake
