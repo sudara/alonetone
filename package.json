@@ -4,7 +4,7 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
-    "@bugsnag/js": "^5.1.0",
+    "@bugsnag/js": "^5.2.0",
     "@rails/webpacker": "^4.0.0-rc.2",
     "@shopify/draggable": "^1.0.0-beta.7",
     "babel-loader": "^8.0.4",
