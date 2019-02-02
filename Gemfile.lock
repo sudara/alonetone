@@ -289,12 +289,11 @@ GEM
       colorize
       diffy
       rake
-    postmark (1.14.0)
+    postmark (1.15.0)
       json
-      rake
-    postmark-rails (0.18.0)
+    postmark-rails (0.19.0)
       actionmailer (>= 3.0.0)
-      postmark (~> 1.14.0)
+      postmark (~> 1.15.0)
     powerpack (0.1.2)
     pry (0.12.2)
       coderay (~> 1.1.0)
