@@ -29,6 +29,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.update_attribute(:is_spam, @user.spam?)
+
     if is_a_bot? && @user.valid?
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)

@@ -76,6 +76,12 @@ class User < ActiveRecord::Base
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
 
+  include Rakismet::Model
+  rakismet_attrs  author: proc { display_name },
+                  author_email: proc { email },
+                  user_agent: proc { request.user_agent },
+                  user_ip: proc { current_login_ip }
+
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
   end
