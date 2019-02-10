@@ -8,8 +8,6 @@ class UsersController < ApplicationController
     @tab = 'browse'
     @users = User.includes(:pic).activated.not_spam.paginate_by_params(params)
     @sort = params[:sort]
-    @user_count = User.count
-    @active     = User.where("assets_count > 0").count
   end
 
   def show
