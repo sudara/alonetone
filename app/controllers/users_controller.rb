@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-    @users = User.includes(:pic).paginate_by_params(params)
+    @users = User.includes(:pic).activated.not_spam.paginate_by_params(params)
     @sort = params[:sort]
     @user_count = User.count
     @active     = User.where("assets_count > 0").count

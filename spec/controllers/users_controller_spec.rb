@@ -1,6 +1,18 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
+
+  context "index" do
+    it "should only show active and non spam users" do
+      users(:arthur).update_attributes(is_spam: true)
+
+      get :index
+      expect(response).to be_successful
+      expect(assigns(:users).count).to eq(User.count - 2)
+      expect(assigns(:users)).not_to include(users(:arthur))
+    end
+  end
+
   context 'show' do
     it "should show delete user button for admins" do
       login(:sudara)

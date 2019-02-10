@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
   scope :alpha,         -> { order('display_name ASC')                                }
-
+  scope :not_spam,      -> { where(is_spam: false) }
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
