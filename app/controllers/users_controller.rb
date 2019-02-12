@@ -91,12 +91,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # Jenya: I think adding destroy to find_user will take care of this
-    # redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
       @user.destroy
-      redirect_back(fallback_location: logout_path)
+      if moderator?
+        redirect_to root_path
+      else
+        redirect_to logout_path
+      end
     else
       redirect_to root_path
     end
