@@ -27,6 +27,15 @@ RSpec.describe AssetsController, type: :controller do
     end
   end
 
+  context "#radio" do
+    ['those_you_follow', 'songs_you_have_not_heard', 'mangoz_shuffle'].each do |source|
+      it "should raise an error if trying to access #{source} with no current user" do
+        get :radio, params: { source: source }
+        expect(response.status).to eq(404)
+      end
+    end
+  end
+
   context "#mass_edit" do
     it 'should allow user to edit 1 track' do
       login(:arthur)
