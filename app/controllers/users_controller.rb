@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: %i[new create index activate sudo toggle_favorite destroy]
+  before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
   before_action :require_login, except: %i[index show new create activate destroy]
   invisible_captcha only: [:create, :update], honeypot: :name
 
