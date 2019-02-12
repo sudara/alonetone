@@ -32,23 +32,23 @@ class Asset
 
   # random radio, without playing the same track twice in a 24 hour period
   def self.mangoz(user)
-    ids = user&.listened_more_than?(10) && user&.listened_to_today_ids
+    ids = user.listened_more_than?(10) && user.listened_to_today_ids
     random_order.id_not_in(ids)
   end
 
   # random radio, sourcing from the user's favorite artists
   def self.from_favorite_artists_of(user)
       id_not_in(user.listened_to_today_ids)
-        .user_id_in(user&.most_listened_to_user_ids(10))
+        .user_id_in(user.most_listened_to_user_ids(10))
         .random_order
   end
 
   # finds all tracks not heard by the logged in user (or just the latest tracks for guests)
   def self.not_heard_by(user)
-    random_order.id_not_in(user&.listened_to_ids)
+    random_order.id_not_in(user.listened_to_ids)
   end
 
   def self.new_tracks_from_followees(user, limit = DEFAULT_LIMIT)
-    recent.user_id_in(user&.follows_user_ids).limit(limit)
+    recent.user_id_in(user.follows_user_ids).limit(limit)
   end
 end
