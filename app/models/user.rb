@@ -79,12 +79,7 @@ class User < ActiveRecord::Base
   include Rakismet::Model
   rakismet_attrs  author: proc { display_name },
                   author_email: proc { email },
-                  user_agent: proc { request_user_agent },
                   user_ip: proc { current_login_ip }
-
-  def request_user_agent
-    request.user_agent
-  end
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
