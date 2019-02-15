@@ -1,4 +1,5 @@
 .mass_edit_content {
+  position: relative;
   @include match-dynamic-site-width("narrow");
   div.track_options {
     a {
@@ -28,6 +29,7 @@
       box-sizing: border-box;
       input#asset_title {
         font-family: $black-font;
+        font-weight: normal;
         font-size: 24px;
         box-sizing: border-box;
         width: 100%;

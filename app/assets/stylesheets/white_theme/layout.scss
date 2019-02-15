@@ -14,6 +14,14 @@ body {
       @include match-dynamic-site-width();
       max-width: 960px;
     }
+    #columns_header {
+      max-width: 1032px;
+      box-sizing: border-box;
+      padding: 0 $baseline * 1.5;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: $baseline * 1.5;
+    }
     #columns {
       display: flex;
       max-width: 1032px;

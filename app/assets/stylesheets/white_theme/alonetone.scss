@@ -6,6 +6,11 @@ ul {
   padding-left: 0;
   list-style: none;
 }
+
+.hidden {
+  display: none;
+}
+
 .box {
   position: relative;
   display: flex;
@@ -34,7 +39,7 @@ ul {
     }
   }
   .static_content {
-    line-height: 1.3em;
+    line-height: 1.3;
     padding: $baseline $baseline / 2;
     font-size: 13px;
     label {

@@ -1,7 +1,7 @@
 body {
   font-size: 14px;
   font-family: $sans-font;
-  line-height: 1em;
+  line-height: 1;
   text-rendering: optimizeLegibility;
 }
 
@@ -16,6 +16,7 @@ a {
 h1 {
   font-size: 24px;
   font-family: $black-font;
+  font-weight: normal;
 }
 
 h2 {
