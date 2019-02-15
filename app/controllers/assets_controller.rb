@@ -124,6 +124,11 @@ class AssetsController < ApplicationController
     end
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
+
+    @user.followers.select(&:wants_email?).each do |follower|
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
+    end
+
     render 'mass_edit_white' if white_theme_enabled?
   end
 
@@ -146,6 +151,7 @@ class AssetsController < ApplicationController
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
       end
     end
+
     if @playlist
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
