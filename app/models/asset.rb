@@ -35,7 +35,6 @@ class Asset < ActiveRecord::Base
 
   has_permalink :name, true
   before_update :generate_permalink!, if: :title_changed?
-  after_create :notify_followers, if: :published?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
@@ -150,7 +149,7 @@ class Asset < ActiveRecord::Base
 
   def notify_followers
     user.followers.select(&:wants_email?).each do |user|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user.id)
     end
   end
 
