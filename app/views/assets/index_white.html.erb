@@ -1,9 +1,15 @@
+<div id="columns_header">
+  <% cache("tracks/#{logged_in?}/#{@assets.cache_key}") do %>
+  <% if @user.assets_count > 0 %>
+    <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+  <% end %>
+  <% end %>
+</div>
 <div id='columns'>
   <div id="left">
     <div id="user_tracks box">
       <% cache("tracks/#{logged_in?}/#{@assets.cache_key}") do %>
       <% if @user.assets_count > 0 %>
-        <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy %>
         </div>
