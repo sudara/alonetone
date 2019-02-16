@@ -79,6 +79,10 @@ class AssetsController < ApplicationController
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
+    if !logged_in? && %w(those_you_follow songs_you_have_not_heard mangoz_shuffle).include?(params[:source])
+      flash[:error] = "Sorry. Page you've been looking for is not found."
+      raise ActionController::RoutingError, 'Page Not Found'
+    end
     @page_title = "alonetone Radio: #{@channel}"
     @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
     render 'radio_white' if white_theme_enabled?
