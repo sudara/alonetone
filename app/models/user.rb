@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  # validates :password, presence: true
+  # validates :password_confirmation, presence: true
+  validates_confirmation_of :password
   concerned_with :validation, :findability, :settings, :statistics
 
   store :settings
