@@ -23,6 +23,9 @@ RSpec.describe Admin::CommentsController, type: :request do
   end
 
   describe "unspam individual comments" do
+    # asset id 1 is needed for comment's commentable to return true
+    # for is_deliverable?
+    let!(:asset) { assets(:valid_mp3) }
     let(:comment) { comments(:public_spam_comment_on_asset_by_user) }
 
     it "should unspam the comment" do
