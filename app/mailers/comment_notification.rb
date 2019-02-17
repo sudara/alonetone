@@ -1,6 +1,4 @@
-class CommentNotification < ActionMailer::Base
-  default from: Alonetone.email
-
+class CommentNotification < ApplicationMailer
   def new_comment(comment, asset)
     @comment = comment[:body]
     @name = comment&.user.name || 'Guest'
@@ -21,10 +19,10 @@ class CommentNotification < ActionMailer::Base
   end
 
   def unsubscribe_link
-    'https://' + Alonetone.url + '/notifications/unsubscribe'
+    'https://' + hostname + '/notifications/unsubscribe'
   end
 
   def settings_link(user)
-    'https://' + Alonetone.url + '/' + user + '/edit'
+    'https://' + hostname + '/' + user + '/edit'
   end
 end

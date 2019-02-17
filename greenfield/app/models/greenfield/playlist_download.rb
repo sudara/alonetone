@@ -10,7 +10,7 @@ module Greenfield
 
     # see config/initializers/paperclip for defaults
     attachment_options = {}
-    if Alonetone.storage == 's3'
+    if Rails.application.remote_storage?
       attachment_options[:path] = ":s3_path"
       attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
     end
@@ -29,7 +29,7 @@ module Greenfield
     protected
 
     def ensure_bucket_not_in_s3_path
-      s3_path = s3_path.gsub('/' + Alonetone.bucket, '')
+      s3_path = s3_path.gsub('/' + Rails.configuration.alonetone.amazon_s3_bucket_name, '')
     end
 
     def destroy_s3_object_if_invalid

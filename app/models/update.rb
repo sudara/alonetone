@@ -1,4 +1,4 @@
-class Update < ActiveRecord::Base
+class Update < ApplicationRecord
   has_permalink :title
   scope :recent, -> { order('created_at DESC') }
 
@@ -10,7 +10,7 @@ class Update < ActiveRecord::Base
   end
 
   def full_permalink
-    "https://#{Alonetone.url}/blog/#{permalink}"
+    "https://#{hostname}/blog/#{permalink}"
   end
 end
 
