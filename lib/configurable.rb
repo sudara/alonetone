@@ -15,7 +15,8 @@ class Configurable
     'show_dummy_pics' => 'show_dummy_image',
     'storage' => 'storage_service',
     'typekit' => 'typekit_embed_token',
-    'url' => 'hostname'
+    'url' => 'hostname',
+    'bugsnag_key' => 'bugsnag_api_key'
   }.freeze
 
   attr_accessor(
