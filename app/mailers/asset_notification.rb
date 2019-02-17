@@ -1,6 +1,4 @@
-class AssetNotification < ActionMailer::Base
-  default from: Alonetone.email
-
+class AssetNotification < ApplicationMailer
   def upload_notification(asset, follower_email, _sent_at = Time.now)
     @artist = asset.user
     @track = asset
@@ -34,7 +32,7 @@ class AssetNotification < ActionMailer::Base
   end
 
   def user_link_for(asset)
-    'https://' + Alonetone.url + '/' + asset.user.login
+    'https://' + hostname + '/' + asset.user.login
   end
 
   def play_link_for(asset)
@@ -42,10 +40,10 @@ class AssetNotification < ActionMailer::Base
   end
 
   def stop_following_link
-    'https://' + Alonetone.url + '/unfollow/' + @artist.login
+    'https://' + hostname + '/unfollow/' + @artist.login
   end
 
   def unsubscribe_link
-    'https://' + Alonetone.url + '/notifications/unsubscribe'
+    'https://' + hostname + '/notifications/unsubscribe'
   end
 end

@@ -57,7 +57,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def has_no_cover?
-     Alonetone.try(:show_dummy_pics) || !pic.present? || pic.new_record? || !pic.try(:pic).present?
+    Rails.application.show_dummy_image? || !pic.present? || pic.new_record? || !pic.try(:pic).present?
   end
 
   def has_tracks?

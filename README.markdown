@@ -140,7 +140,7 @@ Thirdly, fork away on github.
 
 #### Issues and workaround:
 
-- No sound on development? Set `play_dummy_mp3s: true` in alonetone.yml
+- No sound on development? Set `play_dummy_audio: true` in alonetone.yml
 - Seeing the following yarn error?
 ```
   Your Yarn packages are out of date!
