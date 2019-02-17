@@ -16,9 +16,9 @@ module Listens
   def listen(asset, register: true)
     unless prevent_abuse(asset)
       register_listen(asset) if register
-      if Alonetone.try(:play_dummy_mp3s)
+      if Rails.application.play_dummy_audio?
         play_local_mp3
-      elsif Alonetone.try(:cloudfront_enabled)
+      elsif Rails.application.cloudfront_enabled?
         redirect_to cloudfront_url(asset.mp3.url)
       else
         redirect_to asset.mp3.expiring_url

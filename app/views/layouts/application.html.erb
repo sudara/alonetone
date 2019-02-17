@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
   <head>
     <meta charset="utf-8">
@@ -26,8 +27,8 @@
     <link rel="alternate" type="application/rss+xml" title="Latest uploaded mp3s on alonetone" href="/latest.rss"/>
     <link rel="alternate" type="application/rss+xml" title="alonetone news" href="/blog.rss"/>
 
-    <% if Alonetone.typekit %>
-      <script src="https://use.typekit.net/<%= Alonetone.typekit %>.js"></script>
+    <% if typekit_embed_token = Rails.configuration.alonetone.typekit_embed_token %>
+      <script src="https://use.typekit.net/<%= typekit_embed_token %>.js"></script>
       <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <% end %>
 

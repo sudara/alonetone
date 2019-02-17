@@ -8,7 +8,7 @@
           <% end %>
 
           <% if @asset.user.greenfield_enabled? && @asset.greenfield_post.present? %>
-            <%= link_to greenfield.user_post_url(@asset.user, @asset.permalink, host: Alonetone.greenfield_url), class: 'view_all' do %>
+            <%= link_to greenfield.user_post_url(@asset.user, @asset.permalink, host: greenfield_hostname), class: 'view_all' do %>
               greenfield <div class="sprites-pencil sprites-before-heading"></div>
             <% end %>
           <% end %>

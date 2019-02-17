@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   before_validation :set_default_attributes, on: :create
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
@@ -51,7 +51,7 @@ class Topic < ActiveRecord::Base
   end
 
   def full_permalink
-    "https://#{Alonetone.url}/forums/#{permalink}"
+    "https://#{hostname}/forums/#{permalink}"
   end
 
   def sticky?
