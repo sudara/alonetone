@@ -197,6 +197,7 @@ end
 #  email              :string(100)
 #  followers_count    :integer          default(0)
 #  greenfield_enabled :boolean          default(FALSE)
+#  is_spam            :boolean          default(FALSE)
 #  itunes             :string(255)
 #  last_login_at      :datetime
 #  last_login_ip      :string(255)

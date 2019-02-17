@@ -209,11 +209,27 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
     end
 
-    it "should email followers and generate waveform via queue" do
+    # this action is performed as an after_create callback
+    it "should generate waveform via queue" do
       users(:sudara).add_or_remove_followee(users(:arthur).id)
       post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+      expect(enqueued_jobs.size).to eq 1
+      expect(enqueued_jobs.first[:queue]).to eq "default"
+      expect(enqueued_jobs.first[:job]).to eq Greenfield::WaveformExtractJob
+    end
+
+    # in order to test that job gets kicked off on mass_edit
+    # hit it directly
+    it "should send an email to followers" do
+      # add two followers
+      # to test that ActionMailer sends multiple emails
+      users(:sudara).add_or_remove_followee(users(:arthur).id)
+      users(:aaron).add_or_remove_followee(users(:arthur).id)
+      # binding.pry
+      get mass_edit_user_tracks_path(users(:arthur), assets: users(:arthur).assets.collect(&:id))
       expect(enqueued_jobs.size).to eq 2
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
+      expect(enqueued_jobs.last[:job]).to eq AssetNotificationJob
     end
 
     it 'should successfully upload 2 mp3s' do
