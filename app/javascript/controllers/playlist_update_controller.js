@@ -32,7 +32,7 @@ export default class extends Controller {
     Rails.ajax({
       url: this.removeUrl,
       type: 'GET',
-      data: `track_id=${this.element.id.replace('track_', '')}`,
+      data: `track_id=${this.element.getAttribute('data-id').replace('track_', '')}`,
       before: this.spin.bind(this),
       success: this.removed.bind(this),
       error: this.errored.bind(this),
@@ -61,7 +61,7 @@ export default class extends Controller {
 
   added(response, status, xhr) {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.element.id = `track_${response}` // give it a track id before assigning it to the sortable
+    this.element.setAttribute('data-id', `track_${response}`) // give it a track id before assigning it to the sortable
     this.addTarget.style.display = 'none'
     this.removeTarget.style.display = 'flex'
     this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_success">Added!</div>'
@@ -70,7 +70,7 @@ export default class extends Controller {
   }
 
   updatePlaylistSize() {
-    const size = this.playlistEdit.sortables().length
+    const size = this.playlistEdit.sortable.toArray.length
     this.playlistEdit.sizeTarget.innerHTML = `${size}`
   }
 }
