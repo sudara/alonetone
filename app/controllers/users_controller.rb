@@ -146,6 +146,7 @@ class UsersController < ApplicationController
 
   def gather_assets
     return @user.assets.with_deleted.includes(user: :pic).limit(5) if @user.moderator?
+
     @user.assets.includes(user: :pic).limit(5)
   end
 
