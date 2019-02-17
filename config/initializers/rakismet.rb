@@ -1,17 +1,15 @@
 require 'rakismet'
-if Alonetone.rakismet_key
-  RAKISMET_ENABLED = true
-  Alonetone::Application.config.rakismet.key = Alonetone.rakismet_key
-  Alonetone::Application.config.rakismet.url = Alonetone.url
-else
-  RAKISMET_ENABLED = false
-end
 
-module RakismetLog
-  def akismet_call(function, args={})
-    Rails.logger.warn("RAKISMET #{function}: #{args}")
-    super
+if Rails.configuration.alonetone.rakismet_key.present?
+  Rails.application.config.rakismet.key = Rails.configuration.alonetone.rakismet_key
+  Rails.application.config.rakismet.url = Rails.configuration.alonetone.hostname
+
+  module RakismetLog
+    def akismet_call(function, args={})
+      Rails.logger.warn("RAKISMET #{function}: #{args}")
+      super
+    end
   end
-end
 
-Rakismet.singleton_class.prepend RakismetLog
+  Rakismet.singleton_class.prepend RakismetLog
+end

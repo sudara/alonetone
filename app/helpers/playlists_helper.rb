@@ -6,7 +6,7 @@ module PlaylistsHelper
   end
 
   def allow_greenfield_playlist_downloads?(user)
-    user.greenfield_enabled? && Alonetone.storage.s3?
+    user.greenfield_enabled? && Rails.application.remote_storage?
   end
 
   def svg_cover
@@ -14,7 +14,7 @@ module PlaylistsHelper
   end
 
   def playlist_cover(playlist, size)
-    if Alonetone.try(:show_dummy_pics) || playlist.has_no_cover?
+    if Rails.application.show_dummy_image? || playlist.has_no_cover?
       return svg_cover
     # greenfield size did not exist before this id
     elsif (size == :greenfield) && ((playlist.pic.id > 69806) && (playlist.pic.id < 72848))

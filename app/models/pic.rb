@@ -13,8 +13,10 @@ class Pic < ActiveRecord::Base
       hq: "3000x3000#"
     }
   }
-  # required for production alonetone, to be compatible with rails 2/attachment_fu paths
-  attachment_options[:path] = "/pics/:id/:name_with_style.:extension" if Alonetone.storage == "s3"
+  if Rails.application.remote_storage?
+    # required for production alonetone, to be compatible with rails 2/attachment_fu paths
+    attachment_options[:path] = "/pics/:id/:name_with_style.:extension"
+  end
   has_attached_file :pic, attachment_options
 
   validates_attachment_presence :pic, message: 'must be set. Make sure you chose a file to upload!'
