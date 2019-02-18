@@ -12,12 +12,24 @@ class User < ActiveRecord::Base
       if: :will_save_change_to_email?
     }
 
+  validates :login,
+    format: {
+      with: /\A[a-z0-9]+\z/,
+      message: "should use only letters and numbers."
+    },
+    length: { within: 3..100 },
+    uniqueness: {
+      case_sensitive: false,
+      if: :will_save_change_to_login?
+  }
+
   store :settings
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
     c.validate_email_field = false
+    c.validate_login_field = false
   end
 
   scope :recent,        -> { order('users.id DESC')                                   }
