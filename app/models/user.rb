@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     uniqueness: {
       case_sensitive: false,
       if: :will_save_change_to_email?
-    }
+  }
 
   validates :login,
     format: {
@@ -23,6 +23,19 @@ class User < ActiveRecord::Base
       if: :will_save_change_to_login?
   }
 
+  validates :password,
+    confirmation: { if: :require_password? },
+    length: {
+      minimum: 8,
+      if: :require_password?
+  }
+
+  validates :password_confirmation,
+    length: {
+      minimum: 8,
+      if: :require_password?
+  }
+
   store :settings
 
   acts_as_authentic do |c|
@@ -30,6 +43,7 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true # we will handle tokens
     c.validate_email_field = false
     c.validate_login_field = false
+    c.validate_password_field = false
   end
 
   scope :recent,        -> { order('users.id DESC')                                   }
