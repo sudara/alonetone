@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     uniqueness: {
       case_sensitive: false,
       if: :will_save_change_to_email?
-  }
+    }
 
   validates :login,
     format: {
@@ -21,20 +21,20 @@ class User < ActiveRecord::Base
     uniqueness: {
       case_sensitive: false,
       if: :will_save_change_to_login?
-  }
+    }
 
   validates :password,
     confirmation: { if: :require_password? },
     length: {
       minimum: 8,
       if: :require_password?
-  }
+    }
 
   validates :password_confirmation,
     length: {
       minimum: 8,
       if: :require_password?
-  }
+    }
 
   store :settings
 
