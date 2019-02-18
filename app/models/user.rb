@@ -1,11 +1,23 @@
 class User < ActiveRecord::Base
   concerned_with :validation, :findability, :settings, :statistics
 
+  validates :email,
+    format: {
+      with: /@/,
+      message: "should look like an email address."
+    },
+    length: { maximum: 100 },
+    uniqueness: {
+      case_sensitive: false,
+      if: :will_save_change_to_email?
+    }
+
   store :settings
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
+    c.validate_email_field = false
   end
 
   scope :recent,        -> { order('users.id DESC')                                   }
