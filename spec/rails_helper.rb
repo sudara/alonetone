@@ -75,6 +75,7 @@ RSpec.configure do |config|
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
+  config.include RSpec::Support::StorageServiceHelpers
 
   config.before(:suite) do
     InvisibleCaptcha.timestamp_enabled = false
