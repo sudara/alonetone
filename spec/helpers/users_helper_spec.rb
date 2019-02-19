@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe UsersHelper, type: :helper do
   it "returns request path for a missing avatar image" do
-    expect(UsersHelper.no_avatar_path).to eq('/assets/default/no-pic_white.svg')
+    expect(UsersHelper.no_avatar_path).to eq('default/no-pic_white.svg')
   end
 
   context "user with an avatar" do
