@@ -154,6 +154,18 @@ class User < ActiveRecord::Base
     created_at > 24.hours.ago
   end
 
+  # Returns true when the user has a usable avatar.
+  def avatar_image_present?
+    pic.present? && pic.image_present?
+  end
+
+  # Generates a URL to user's avater with the requested variant. Returns nil when the user does
+  # not have a usable avatar.
+  def avatar_url(variant:)
+    ImageVariant.verify(variant)
+    pic&.url(variant: variant)
+  end
+
   protected
 
   def efficiently_destroy_relations
