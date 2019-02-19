@@ -10,7 +10,7 @@ class ImageVariant
     original: [800, 800],
     greenfield: [1500, 1500],
     hq: [3000, 3000]
-  }
+  }.freeze
 
   # Fit a variant inside these dimensions (width x height) to generate the variant.
   def self.resize_to_fit(variant_name)
