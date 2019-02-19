@@ -19,7 +19,7 @@ class ImageVariant
 
   # Raises ArgumentError with explanation when the variant name does not exist.
   def self.verify(variant_name)
-    unless ImageVariant::VARIANTS.has_key?(variant_name.to_sym)
+    unless ImageVariant::VARIANTS.key?(variant_name.to_sym)
       raise(
         ArgumentError,
         "Unknown variant: `#{variant_name.inspect}', please use: #{variants_as_sentence}"
