@@ -11,6 +11,22 @@ module UsersHelper
     link_to "Open #{user.name}'s music in iTunes", 'http://' + h(user.itunes)
   end
 
+  def self.no_avatar_path
+    # NOTE: we need to general a URL to the image because it will end up on a different path
+    # when the asset is compiled for production.
+    ActionController::Base.helpers.image_url('/assets/default/no-pic_white.svg')
+  end
+
+  # Returns a URL to the user's avatar or the default Alonetone avatar when the user has no
+  # avatar. Always returns the default avatar when `show_dummy_image' is enabled in the config.
+  def user_avatar_url(user, variant:)
+    if Rails.application.show_dummy_image?
+      UsersHelper.no_avatar_path
+    else
+      user.avatar_url(variant: variant) || UsersHelper.no_avatar_path
+    end
+  end
+
   def avatar(user, size = nil)
     return "default/no-pic_#{size}.png" if Rails.application.show_dummy_image?
 
