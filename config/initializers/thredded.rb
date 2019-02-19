@@ -25,12 +25,10 @@ end
 # This method is used by Thredded controllers and views to fetch the currently signed-in user
 Thredded.current_user_method = :"current_#{Thredded.user_class.name.underscore}"
 
-# User avatar URL. rb-gravatar gem is used by default:
-Thredded.avatar_url = ->(user) { user&.pic&.pic&.url(:album) || ActionController::Base.helpers.image_url('/default/o-pic_white.svg') }
-
-# ==> Permissions Configuration
-# By default, thredded uses a simple permission model, where all the users can post to all message boards,
-# and admins and moderators are determined by a flag on the users table.
+# Configure which URL to use for an avatar.
+Thredded.avatar_url = ->(user) {
+  user.avatar_url(variant: :album) || UsersHelper.no_avatar_path
+}
 
 # The name of the moderator flag column on the users table.
 Thredded.moderator_column = :moderator
