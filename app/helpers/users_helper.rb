@@ -12,9 +12,7 @@ module UsersHelper
   end
 
   def self.no_avatar_path
-    # NOTE: we need to general a URL to the image because it will end up on a different path
-    # when the asset is compiled for production.
-    ActionController::Base.helpers.image_url('/assets/default/no-pic_white.svg')
+    'default/no-pic_white.svg'
   end
 
   # Returns a URL to the user's avatar or the default Alonetone avatar when the user has no
