@@ -11,6 +11,14 @@ module UsersHelper
     link_to "Open #{user.name}'s music in iTunes", 'http://' + h(user.itunes)
   end
 
+  # Returns the user's location, e.g. from Vienna, AT.
+  def user_location(profile = nil)
+    return '' unless profile
+
+    locality = [profile.city.presence, profile.country.presence].compact.map(&:strip).join(', ')
+    locality.present? ? 'from ' + locality : ''
+  end
+
   def self.no_avatar_path
     'default/no-pic_white.svg'
   end
@@ -32,17 +40,6 @@ module UsersHelper
     when 100 then image_tag(user.has_pic? ? user.pic.pic.url(:large) : 'default/no-pic-thumb100.jpg')
     when 50 then image_tag(user.has_pic? ? user.pic.pic.url(:small) : 'default/no-pic-thumb50.jpg')
     when nil then image_tag(user.has_pic? ? user.pic.pic.url(:tiny) : 'default/no-pic.jpg')
-    end
-  end
-
-  def user_location(user)
-    if (user.try(:city).present? && user.try(:country)).present?
-      "from #{[user.city.strip, user.country.strip].compact.join(', ')}"
-    elsif (user.try(:city).present? || user.try(:country)).present?
-      location = (user.try(:city) || user.try(:country)).to_s
-      "from #{location}"
-    else
-      ""
     end
   end
 
