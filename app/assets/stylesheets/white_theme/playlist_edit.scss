@@ -109,7 +109,7 @@
         width: 100%;
         textarea {
           width: 100%;
-          height: 4em;
+          height: 6em;
         }
       }
       > .edit_playlist_info_right_column_private_and_hidden {
@@ -121,6 +121,10 @@
         }
         label {
           text-transform: none;
+        }
+        span {
+          position: relative;
+          top: 2px;
         }
         [type="checkbox"]:not(:checked),
         [type="checkbox"]:checked {
