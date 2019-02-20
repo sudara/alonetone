@@ -18,4 +18,19 @@ RSpec.describe AssetNotification, type: :mailer do
       expect(mail.body).to include("https://#{Rails.configuration.alonetone.hostname}/notifications/unsubscribe")
     end
   end
+
+  describe "mass_upload_notification" do
+    let(:mail) { AssetNotification.upload_mass_notification([assets(:valid_mp3), assets(:valid_arthur_mp3)], users(:sudara).email) }
+
+    it "should render the headers" do
+      expect(mail.subject).to eq("[alonetone] '#{assets(:valid_mp3).user.name}' uploaded new tracks!")
+      expect(mail.to).to eq(["#{users(:sudara).email}"])
+      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
+    end
+
+    it "includes all titles of songs" do
+      expect(mail.body).to include(assets(:valid_mp3).title)
+      expect(mail.body).to include(assets(:valid_arthur_mp3).title)
+    end
+  end
 end
