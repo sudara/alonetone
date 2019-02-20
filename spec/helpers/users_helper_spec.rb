@@ -69,9 +69,20 @@ RSpec.describe UsersHelper, type: :helper do
     it "formats a default dark avatar URL" do
       [:album, :large].each do |variant|
         url = dark_user_avatar_url(nil, variant: variant)
-        expect(url).to start_with('default/no-pic')
-        expect(url).to end_with('.png')
+        expect(url).to eq(UsersHelper.no_dark_avatar_path(variant: variant))
       end
+    end
+
+    it "formats an image element" do
+      element = user_image(nil, variant: :large)
+      expect(element).to match_css('img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_avatar_path)
+    end
+
+    it "formats an image element for the dark theme" do
+      element = dark_user_image(nil, variant: :large)
+      expect(element).to match_css('img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :large))
     end
   end
 
@@ -91,6 +102,20 @@ RSpec.describe UsersHelper, type: :helper do
         expect(url).to end_with('.jpg')
       end
     end
+
+    it "formats an image element" do
+      element = user_image(user, variant: :large)
+      expect(element).to match_css('img[src][alt="sudara\'s avatar"]')
+      expect(element).to match_css('img:not([class])')
+      expect(element).to include(user_avatar_url(user, variant: :large))
+    end
+
+    it "formats an image element for the dark theme" do
+      element = dark_user_image(user, variant: :large)
+      expect(element).to match_css('img[src][alt="sudara\'s avatar"]')
+      expect(element).to match_css('img:not([class])')
+      expect(element).to include(dark_user_avatar_url(user, variant: :large))
+    end
   end
 
   context "user without an avatar" do
@@ -106,6 +131,19 @@ RSpec.describe UsersHelper, type: :helper do
           dark_user_avatar_url(user, variant: variant)
         ).to eq(UsersHelper.no_dark_avatar_path(variant: variant))
       end
+    end
+
+
+    it "formats an image element" do
+      element = user_image(user, variant: :large)
+      expect(element).to match_css('img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_avatar_path)
+    end
+
+    it "formats an image element for the dark theme" do
+      element = dark_user_image(user, variant: :large)
+      expect(element).to match_css('img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :large))
     end
 
     it "actually has the default avatar on disk" do

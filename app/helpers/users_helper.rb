@@ -33,6 +33,15 @@ module UsersHelper
     ].compact.join("\n")
   end
 
+  # Returns an <img> tag with the avatar for the user or the default avatar when the user is nil.
+  def user_image(user = nil, variant:)
+    image_tag(
+      user_avatar_url(user, variant: variant),
+      class: user&.avatar_image_present? ? nil : 'no_border',
+      alt: user ? I18n.t('helpers.labels.users.avatar', name: user.name) : nil
+    )
+  end
+
   # Returns a URL to the user's avatar or the default Alonetone avatar when user is nill or the
   # user has no avatar. Always returns the default avatar when `show_dummy_image' is enabled in the
   # config.
@@ -47,6 +56,15 @@ module UsersHelper
   # Returns the image path to use as a default avatar.
   def self.no_avatar_path
     'default/no-pic_white.svg'
+  end
+
+  # @deprecated Used by the dark theme.
+  def dark_user_image(user = nil, variant:)
+    image_tag(
+      dark_user_avatar_url(user, variant: variant),
+      class: user&.avatar_image_present? ? nil : 'no_border',
+      alt: I18n.t('helpers.labels.users.avatar', name: user&.name)
+    )
   end
 
   # @deprecated Used by the dark theme.
@@ -76,17 +94,6 @@ module UsersHelper
     when 50 then image_tag(user.has_pic? ? user.pic.pic.url(:small) : 'default/no-pic-thumb50.jpg')
     when nil then image_tag(user.has_pic? ? user.pic.pic.url(:tiny) : 'default/no-pic.jpg')
     end
-  end
-
-  def user_image_link(user, size = :large)
-    link_to(image_tag(user.avatar(size),
-      class: (user.has_pic? ? '' : 'no_border'),
-      alt: user.name.to_s),
-      user_home_path(user),
-      title: " #{user.name}
- #{user.assets_count > 0 ? pluralize(user.assets_count, 'uploaded tracks') : ''}
- Joined alonetone #{user.created_at.to_date.to_s(:long)}
- #{user_location(user)}")
   end
 
   def avatar_or_placeholder_for(user, size = :large)
