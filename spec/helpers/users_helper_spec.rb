@@ -69,6 +69,14 @@ RSpec.describe UsersHelper, type: :helper do
       expect(url).to start_with('/system/pics')
       expect(url).to end_with('.jpg')
     end
+
+    it "formats a dark avatar URL" do
+      [:album, :large].each do |variant|
+        url = dark_user_avatar_url(user, variant: variant)
+        expect(url).to start_with('/system/pics')
+        expect(url).to end_with('.jpg')
+      end
+    end
   end
 
   context "user without an avatar" do
@@ -76,6 +84,25 @@ RSpec.describe UsersHelper, type: :helper do
 
     it "formats a default avatar URL" do
       expect(user_avatar_url(user, variant: :album)).to eq(UsersHelper.no_avatar_path)
+    end
+
+    it "formats a default dark avatar URL" do
+      [:album, :large].each do |variant|
+        expect(
+          dark_user_avatar_url(user, variant: variant)
+        ).to eq(UsersHelper.no_dark_avatar_path(variant: variant))
+      end
+    end
+
+    it "actually has the default avatar on disk" do
+      expect(Rails.application.assets.find_asset(UsersHelper.no_avatar_path)).to_not be_nil
+    end
+
+    it "actually has all default dark avatars on disk" do
+      ImageVariant::VARIANTS.keys.each do |variant|
+        path = UsersHelper.no_dark_avatar_path(variant: variant)
+        expect(Rails.application.assets.find_asset(path)).to_not be_nil
+      end
     end
   end
 end
