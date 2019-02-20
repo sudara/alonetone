@@ -36,7 +36,7 @@
        <h2 class="box">Vital Stats</h2>
         <div class="static_content clearfix">
            <div class="pic">
-           <%= user_image_link(@feature.featured_user, :album) %>
+           <%= user_image_link(@feature.featured_user, variant: :album) %>
            </div>
            <% if @user.has_tracks? %>
            <div class="stats">
