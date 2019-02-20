@@ -1,0 +1,5 @@
+en:
+  helpers:
+    labels:
+      users:
+        avatar: "%{name}'s avatar"
