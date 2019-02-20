@@ -33,6 +33,16 @@ class Pic < ActiveRecord::Base
       "#{basename(attachment, style)}_#{style}"
     end
   end
+
+  # Returns true when this represents a usable picture.
+  def image_present?
+    pic_file_name.present? && pic_content_type.start_with?('image/')
+  end
+
+  # Generates a URL to the requested variant.
+  def url(variant:)
+    image_present? ? pic.url(variant) : nil
+  end
 end
 
 # == Schema Information

@@ -56,6 +56,46 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "generating URLs to an avatar" do
+    context "with an avatar" do
+      let(:user) { users(:sudara) }
+
+      it "knows the user has an avatar" do
+        expect(user.avatar_image_present?).to eq(true)
+      end
+
+      it "returns a URL to a variant" do
+        url = user.avatar_url(variant: :large)
+        expect(url).to start_with('/system/pics')
+        expect(url).to end_with('.jpg')
+      end
+    end
+
+    context "with an avatar that has missing information" do
+      let(:user) { users(:aaron) }
+
+      it "knows the user does not have an avatar" do
+        expect(user.avatar_image_present?).to eq(false)
+      end
+
+      it "does not return a URL to a variant" do
+        expect(user.avatar_url(variant: :large)).to be_nil
+      end
+    end
+
+    context "without an avatar" do
+      let(:user) { users(:arthur) }
+
+      it "knows the user does not have an avatar" do
+        expect(user.avatar_image_present?).to eq(false)
+      end
+
+      it "does not return a URL to a variant" do
+        expect(user.avatar_url(variant: :large)).to be_nil
+      end
+    end
+  end
+
   protected
 
   def new_user(options = {})
