@@ -57,9 +57,7 @@
       <% end %>
     <% end %>
     <div class="tracks_reveal_top">
-      <div class='alonetoner'>
-          <%= link_to(image_tag(avatar_or_placeholder_for(asset.user)), user_home_path(asset.user)) %>
-      </div>
+      <div class='alonetoner'><%= user_image_link(asset.user, variant: :large) %></div>
       <div class="description">
           <div class='user_description'>
             <%= awesome_truncate_with_read_more(asset, 250) %>
