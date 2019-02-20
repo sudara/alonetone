@@ -33,6 +33,30 @@ module UsersHelper
     ].compact.join("\n")
   end
 
+  # Returns an <img> element with the avatar for a user. Automatically switches to the dark theme
+  # when selected by the user.
+  def user_image_link(user = nil, variant:)
+    if white_theme_enabled?
+      white_theme_user_image_link(user, variant: variant)
+    else
+      dark_theme_user_image_link(user, variant: variant)
+    end
+  end
+
+  # Returns an <a> element with the avatar for a user or an <img> element with the default
+  # avatar when the user is nil.
+  def white_theme_user_image_link(user = nil, variant:)
+    if user
+      link_to(
+        user_image(user, variant: variant),
+        user_home_path(user),
+        title: user_summary(user)
+      )
+    else
+      user_image(user, variant: variant)
+    end
+  end
+
   # Returns an <img> tag with the avatar for the user or the default avatar when the user is nil.
   def user_image(user = nil, variant:)
     image_tag(
@@ -56,6 +80,19 @@ module UsersHelper
   # Returns the image path to use as a default avatar.
   def self.no_avatar_path
     'default/no-pic_white.svg'
+  end
+
+  # @deprecated Used by the dark theme.
+  def dark_theme_user_image_link(user = nil, variant:)
+    if user
+      link_to(
+        dark_user_image(user, variant: variant),
+        user_home_path(user),
+        title: user_summary(user)
+      )
+    else
+      dark_user_image(user, variant: variant)
+    end
   end
 
   # @deprecated Used by the dark theme.

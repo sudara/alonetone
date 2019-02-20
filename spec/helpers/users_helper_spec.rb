@@ -3,6 +3,10 @@
 require "rails_helper"
 
 RSpec.describe UsersHelper, type: :helper do
+  def white_theme_enabled?
+    @white_theme_enable
+  end
+
   it "returns request path for a missing avatar image" do
     expect(UsersHelper.no_avatar_path).to eq('default/no-pic_white.svg')
   end
@@ -61,6 +65,18 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_summary(user)).to eq(profile.strip)
   end
 
+  it "renders white theme image link when white theme was selected" do
+    @white_theme_enable = true
+    element = user_image_link(nil, variant: :large)
+    expect(element).to include(UsersHelper.no_avatar_path)
+  end
+
+  it "renders dark theme image link when dark theme was selected" do
+    @white_theme_enable = false
+    element = user_image_link(nil, variant: :large)
+    expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :large))
+  end
+
   context "no user" do
     it "formats a default avatar URL" do
       expect(user_avatar_url(nil, variant: :album)).to eq(UsersHelper.no_avatar_path)
@@ -83,6 +99,20 @@ RSpec.describe UsersHelper, type: :helper do
       element = dark_user_image(nil, variant: :large)
       expect(element).to match_css('img[class="no_border"][src]')
       expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :large))
+    end
+
+    it "formats a placeholder instead of link" do
+      element = white_theme_user_image_link(nil, variant: :small)
+      expect(element).to_not match_css('a')
+      expect(element).to match_css('img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_avatar_path)
+    end
+
+    it "formats a dark placeholder instead of link" do
+      element = dark_theme_user_image_link(nil, variant: :small)
+      expect(element).to_not match_css('a')
+      expect(element).to match_css('img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :small))
     end
   end
 
@@ -116,6 +146,18 @@ RSpec.describe UsersHelper, type: :helper do
       expect(element).to match_css('img:not([class])')
       expect(element).to include(dark_user_avatar_url(user, variant: :large))
     end
+
+    it "formats a link with a user avatar" do
+      element = white_theme_user_image_link(user, variant: :small)
+      expect(element).to match_css('a > img[src]')
+      expect(element).to include(user_avatar_url(user, variant: :small))
+    end
+
+    it "formats a link with a dark user avatar" do
+      element = dark_theme_user_image_link(user, variant: :small)
+      expect(element).to match_css('a > img[src]')
+      expect(element).to include(dark_user_avatar_url(user, variant: :small))
+    end
   end
 
   context "user without an avatar" do
@@ -133,7 +175,6 @@ RSpec.describe UsersHelper, type: :helper do
       end
     end
 
-
     it "formats an image element" do
       element = user_image(user, variant: :large)
       expect(element).to match_css('img[class="no_border"][src]')
@@ -144,6 +185,18 @@ RSpec.describe UsersHelper, type: :helper do
       element = dark_user_image(user, variant: :large)
       expect(element).to match_css('img[class="no_border"][src]')
       expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :large))
+    end
+
+    it "formats a placeholder instead of link" do
+      element = white_theme_user_image_link(user, variant: :tiny)
+      expect(element).to match_css('a > img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_avatar_path)
+    end
+
+    it "formats a dark placeholder instead of link" do
+      element = dark_theme_user_image_link(user, variant: :tiny)
+      expect(element).to match_css('a > img[class="no_border"][src]')
+      expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :tiny))
     end
 
     it "actually has the default avatar on disk" do
