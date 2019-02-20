@@ -33,17 +33,38 @@ module UsersHelper
     ].compact.join("\n")
   end
 
+  # Returns a URL to the user's avatar or the default Alonetone avatar when user is nill or the
+  # user has no avatar. Always returns the default avatar when `show_dummy_image' is enabled in the
+  # config.
+  def user_avatar_url(user = nil, variant:)
+    if user.nil? || Rails.application.show_dummy_image?
+      UsersHelper.no_avatar_path
+    else
+      user.avatar_url(variant: variant) || UsersHelper.no_avatar_path
+    end
+  end
+
+  # Returns the image path to use as a default avatar.
   def self.no_avatar_path
     'default/no-pic_white.svg'
   end
 
-  # Returns a URL to the user's avatar or the default Alonetone avatar when the user has no
-  # avatar. Always returns the default avatar when `show_dummy_image' is enabled in the config.
-  def user_avatar_url(user, variant:)
-    if Rails.application.show_dummy_image?
-      UsersHelper.no_avatar_path
+  # @deprecated Used by the dark theme.
+  def dark_user_avatar_url(user = nil, variant:)
+    if user.nil? || Rails.application.show_dummy_image?
+      UsersHelper.no_dark_avatar_path(variant: variant)
     else
-      user.avatar_url(variant: variant) || UsersHelper.no_avatar_path
+      user.avatar_url(variant: variant) || UsersHelper.no_dark_avatar_path(variant: variant)
+    end
+  end
+
+  # @deprecated Used by the dark theme.
+  def self.no_dark_avatar_path(variant:)
+    case variant
+    when :large, :small, :tiny
+      "default/no-pic_#{variant}.png"
+    else
+      'default/no-pic.png'
     end
   end
 
