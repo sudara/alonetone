@@ -18,6 +18,49 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_location(profiles(:william_shatner))).to eq('')
   end
 
+  it "formats a summary for a missing user" do
+    expect(user_summary(nil)).to be_blank
+  end
+
+  it "format summary for a user" do
+    user = users(:jamie_kiesl)
+    date = user.created_at.to_date.to_s(:long)
+    profile = <<~PROFILE
+      Jamiek
+      Joined alonetone #{date}
+      from Wilwaukee, US
+    PROFILE
+    expect(user_summary(user)).to eq(profile.strip)
+
+    user = users(:will_studd)
+    date = user.created_at.to_date.to_s(:long)
+    profile = <<~PROFILE
+      willstudd
+      4 uploaded tracks
+      Joined alonetone #{date}
+      from AU
+    PROFILE
+    expect(user_summary(user)).to eq(profile.strip)
+
+    user = users(:henri_willig)
+    date = user.created_at.to_date.to_s(:long)
+    profile = <<~PROFILE
+      Henri Willig
+      2 uploaded tracks
+      Joined alonetone #{date}
+      from Edam
+    PROFILE
+    expect(user_summary(user)).to eq(profile.strip)
+
+    user = users(:william_shatner)
+    date = user.created_at.to_date.to_s(:long)
+    profile = <<~PROFILE
+      Captain Bill
+      Joined alonetone #{date}
+    PROFILE
+    expect(user_summary(user)).to eq(profile.strip)
+  end
+
   context "user with an avatar" do
     let(:user) { users(:sudara) }
 
