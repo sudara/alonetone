@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def website_for(user)
     "#{user.name}'s website " + (link_to user.website.to_s, ('http://' + h(user.website)))
