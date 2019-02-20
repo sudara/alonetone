@@ -1,10 +1,6 @@
 <div class="comment">
   <div class="comment_user">
-    <% if comment.commenter %>
-        <%= user_image_link(comment.commenter, :small)%>
-    <% else %>
-        <%= image_tag User.dummy_pic(:small)%>
-    <% end %>
+    <%= user_image_link(comment.commenter, variant: :small)%>
   </div>
 
   <div class="comment-body">
