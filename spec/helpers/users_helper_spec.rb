@@ -61,6 +61,20 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_summary(user)).to eq(profile.strip)
   end
 
+  context "no user" do
+    it "formats a default avatar URL" do
+      expect(user_avatar_url(nil, variant: :album)).to eq(UsersHelper.no_avatar_path)
+    end
+
+    it "formats a default dark avatar URL" do
+      [:album, :large].each do |variant|
+        url = dark_user_avatar_url(nil, variant: variant)
+        expect(url).to start_with('default/no-pic')
+        expect(url).to end_with('.png')
+      end
+    end
+  end
+
   context "user with an avatar" do
     let(:user) { users(:sudara) }
 
