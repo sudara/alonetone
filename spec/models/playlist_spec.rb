@@ -52,4 +52,44 @@ RSpec.describe Playlist, type: :model do
       expect(users(:sandbags).playlists.favorites.first.permalink).not_to be_nil
     end
   end
+
+  describe "generating URLs to their cover" do
+    context "with a cover" do
+      let(:playlist) { playlists(:will_studd_rockfort) }
+
+      it "knows the playlist has an cover" do
+        expect(playlist.cover_image_present?).to eq(true)
+      end
+
+      it "returns a URL to a variant" do
+        url = playlist.cover_url(variant: :large)
+        expect(url).to start_with('/system/pics')
+        expect(url).to end_with('.jpg')
+      end
+    end
+
+    context "with an cover that has missing information" do
+      let(:playlist) { playlists(:henri_willig_polderkaas) }
+
+      it "knows the playlist does not have an cover" do
+        expect(playlist.cover_image_present?).to eq(false)
+      end
+
+      it "does not return a URL to a variant" do
+        expect(playlist.cover_url(variant: :large)).to be_nil
+      end
+    end
+
+    context "without an cover" do
+      let(:playlist) { playlists(:william_shatners_favorites) }
+
+      it "knows the playlist does not have an cover" do
+        expect(playlist.cover_image_present?).to eq(false)
+      end
+
+      it "does not return a URL to a variant" do
+        expect(playlist.cover_url(variant: :large)).to be_nil
+      end
+    end
+  end
 end
