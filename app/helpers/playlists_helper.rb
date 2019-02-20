@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PlaylistsHelper
   def title_and_year_for(playlist)
     title = playlist.title.to_s
