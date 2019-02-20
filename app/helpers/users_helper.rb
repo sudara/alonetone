@@ -21,6 +21,18 @@ module UsersHelper
     locality.present? ? 'from ' + locality : ''
   end
 
+  # Returns a summary of the user's history on Alonetone.
+  def user_summary(user = nil)
+    return '' unless user
+
+    [
+      user.name,
+      user.assets_count > 0 ? pluralize(user.assets_count, 'uploaded tracks') : nil,
+      "Joined alonetone #{user.created_at.to_date.to_s(:long)}",
+      user_location(user.profile).presence
+    ].compact.join("\n")
+  end
+
   def self.no_avatar_path
     'default/no-pic_white.svg'
   end
