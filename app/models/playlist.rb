@@ -108,6 +108,18 @@ class Playlist < ActiveRecord::Base
     Asset.formatted_time(total_track_length)
   end
 
+  # Returns true when the user has a usable avatar.
+  def cover_image_present?
+    pic.present? && pic.image_present?
+  end
+
+  # Generates a URL to playlist's cover with the requested variant. Returns nil when the playlist
+  # does not have a usable cover.
+  def cover_url(variant:)
+    ImageVariant.verify(variant)
+    pic&.url(variant: variant)
+  end
+
   def self.latest(limit = 5)
     where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
   end
