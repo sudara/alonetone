@@ -121,7 +121,7 @@
   <div class="box change-your-picture-box">
   <h2 class="box">Change Your Picture</h2>
   <div class="static_content">
-      <p><%= image_tag @user.avatar(:album)%></p>
+      <p><%= user_image(@user, variant: :album) %></p>
       Upload a new photo. (1000px by 1000px square for best results)<br/>
       <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
       	<%= f.file_field :pic  %>
