@@ -47,7 +47,7 @@
     <% end %>
 </div>
 <%#= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
-<!-- 
+<!--
 <div class="edit_playlist_pro_upload faq box">
   <div class="pro_upload_left">
     <h1>Professional Upload System&trade;</h1>
@@ -59,7 +59,7 @@
     Upload ZIP file
   </a>
 </div>
---> 
+-->
 <div id="columns" class="edit_playlist_columns" data-controller="playlist-edit">
   <div id="left">
     <p class="left_instructions">
@@ -70,7 +70,7 @@
     <h2><%= @playlist.title %></h2>
     <div class="sortable" data-target="playlist-edit.sortable">
       <% @playlist.tracks.each do |track| %>
-      <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="track_<%= track.id %>">
+      <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%=track.id %>">
         <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
         <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
           <div class="remove-inner">
@@ -128,10 +128,10 @@
       </div>
     </div>
   </div>
-  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), 
-    data: { target:'playlist-edit.addUrl' }, class: 'hidden add_url' %>  
-  <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink), 
+  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),
+    data: { target:'playlist-edit.addUrl' }, class: 'hidden add_url' %>
+  <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink),
     data: { target:'playlist-edit.removeUrl' }, class: 'hidden remove_url' %>
-  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), 
+  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink),
     data: { target:'playlist-edit.sortUrl' }, class: 'hidden sort_url' %>
 </div>
