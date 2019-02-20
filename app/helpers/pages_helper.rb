@@ -36,7 +36,7 @@ module PagesHelper
 
   def grab_track(permalink)
     track = Asset.find_by_permalink(permalink)
-    { image: track.user.avatar(:small),
+    { image: user_avatar_url(track.user, variant: :small),
       link: user_track_path(track.user, track.permalink),
       username: track.user.name,
       title: track.name }
