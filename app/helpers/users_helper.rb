@@ -59,11 +59,7 @@ module UsersHelper
 
   # Returns an <img> tag with the avatar for the user or the default avatar when the user is nil.
   def user_image(user = nil, variant:)
-    image_tag(
-      user_avatar_url(user, variant: variant),
-      class: user&.avatar_image_present? ? nil : 'no_border',
-      alt: user ? "#{user.name}'s avatar" : nil
-    )
+    _user_image(user, url: user_avatar_url(user, variant: variant))
   end
 
   # Returns a URL to the user's avatar or the default Alonetone avatar when user is nill or the
@@ -97,11 +93,7 @@ module UsersHelper
 
   # @deprecated Used by the dark theme.
   def dark_user_image(user = nil, variant:)
-    image_tag(
-      dark_user_avatar_url(user, variant: variant),
-      class: user&.avatar_image_present? ? nil : 'no_border',
-      alt: user ? "#{user.name}'s avatar" : nil
-    )
+    _user_image(user, url: dark_user_avatar_url(user, variant: variant))
   end
 
   # @deprecated Used by the dark theme.
@@ -160,5 +152,15 @@ module UsersHelper
     else
       cache_digest(@users)
     end
+  end
+
+  private
+
+  def _user_image(user, url:)
+    image_tag(
+      url,
+      class: user&.avatar_image_present? ? nil : 'no_border',
+      alt: user ? "#{user.name}'s avatar" : nil
+    )
   end
 end
