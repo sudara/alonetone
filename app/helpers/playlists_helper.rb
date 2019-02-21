@@ -11,8 +11,10 @@ module PlaylistsHelper
     user.greenfield_enabled? && Rails.application.remote_storage?
   end
 
-  def svg_cover
-    "<div class='no_pic'></div>".html_safe
+  # DIV element which is ‘filled’ by the JavaScript with a a generated pattern
+  # based on the playlist title.
+  def playlist_cover_div
+    content_tag(:div, '', class: 'no_pic')
   end
 
   # Returns true when the Pic with this ID does not have a greenfield variant.
@@ -40,7 +42,7 @@ module PlaylistsHelper
 
   def playlist_cover(playlist, size)
     if Rails.application.show_dummy_image? || playlist.has_no_cover?
-      return svg_cover
+      return playlist_cover_div
     # greenfield size did not exist before this id
     elsif (size == :greenfield) && ((playlist.pic.id > 69806) && (playlist.pic.id < 72848))
       size = :original

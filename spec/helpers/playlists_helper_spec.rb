@@ -7,6 +7,11 @@ RSpec.describe PlaylistsHelper, type: :helper do
     @white_theme_enable
   end
 
+  it "generates a div which is filled by the JavaScript with generated cover" do
+    element = playlist_cover_div
+    expect(element).to match_css('div[class]')
+  end
+
   it "downgrades original variant to album for ancient covers" do
     [1, 69806].each do |pic_id|
       expect(
