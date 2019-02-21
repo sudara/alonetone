@@ -51,4 +51,36 @@ RSpec.describe PlaylistsHelper, type: :helper do
       ).to eq(:greenfield)
     end
   end
+
+  context "playlist with a cover" do
+    let(:playlist) { playlists(:will_studd_rockfort) }
+
+    it "formats a cover URL" do
+      [:large, :album, :greenfield].each do |variant|
+        url = playlist_cover_url(playlist, variant: variant)
+        expect(url).to start_with('/system/pics')
+        expect(url).to end_with('.jpg')
+      end
+    end
+
+    it "downgrades the cover URL for older covers" do
+      # Pretend this is an old pic
+      playlist.pic.id = 1
+
+      url = playlist_cover_url(playlist, variant: :greenfield)
+      expect(url).to start_with('/system/pics')
+      expect(url).to end_with('.jpg')
+      expect(url).to include('album')
+    end
+  end
+
+  context "playlist without a cover" do
+    let(:playlist) { playlists(:henri_willig_polderkaas) }
+
+    it "does not format a cover URL" do
+      [:large, :album, :greenfield].each do |variant|
+        expect(playlist_cover_url(playlist, variant: variant)).to be_nil
+      end
+    end
+  end
 end

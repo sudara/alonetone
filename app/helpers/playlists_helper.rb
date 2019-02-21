@@ -40,6 +40,14 @@ module PlaylistsHelper
     end
   end
 
+  # Returns a URL to the playlist's cover or nil when there is no cover.
+  def playlist_cover_url(playlist, variant:)
+    if playlist.cover_image_present?
+      variant = downgrade_variant(playlist.pic.id, variant: variant)
+      playlist.cover_url(variant: variant)
+    end
+  end
+
   def playlist_cover(playlist, size)
     if Rails.application.show_dummy_image? || playlist.has_no_cover?
       return playlist_cover_div
