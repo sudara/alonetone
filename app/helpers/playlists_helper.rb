@@ -30,9 +30,9 @@ module PlaylistsHelper
   # Returns a different variant when the Pic with the supplied ID does not have the variant.
   def downgrade_variant(pic_id, variant:)
     if no_greenfield_and_original_variant?(pic_id)
-      %i[greenfield original].include?(variant) ? :album : variant
+      downgrade_ancient_variant(variant: variant)
     elsif no_greenfield_variant?(pic_id)
-      variant == :greenfield ? :original : variant
+      downgrade_old_variant(variant: variant)
     else
       variant
     end
@@ -122,5 +122,15 @@ module PlaylistsHelper
       '<i class="fa fa-link"></i>Website<span class="action-text">Visit</span>'
     end.html_safe
     link_to(text, link, class: service).html_safe
+  end
+
+  private
+
+  def downgrade_ancient_variant(variant:)
+    %i[greenfield original].include?(variant) ? :album : variant
+  end
+
+  def downgrade_old_variant(variant:)
+    variant == :greenfield ? :original : variant
   end
 end
