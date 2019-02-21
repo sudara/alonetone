@@ -52,6 +52,14 @@ RSpec.describe PlaylistsHelper, type: :helper do
     end
   end
 
+  it "returns a default dark cover URL" do
+    [:small, :large, :album, :greenfield].each do |variant|
+      url = dark_default_cover_url(variant: variant)
+      expect(url).to start_with('/images/default/no-cover')
+      expect(url).to end_with('.jpg')
+    end
+  end
+
   context "playlist with a cover" do
     let(:playlist) { playlists(:will_studd_rockfort) }
 
