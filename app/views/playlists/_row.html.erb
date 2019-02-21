@@ -1,6 +1,6 @@
 <li>
   <%= link_to ' ',user_playlist_path(playlist.user.login, playlist), title: "#{playlist.title} by #{playlist.user.name}", class: "overlay" %>
-  <%= image_tag(playlist.cover(:album), alt: "#{playlist.title} by #{playlist.user.name}") %>
+  <%= image_tag(dark_playlist_cover_url(playlist, variant: :album), alt: "#{playlist.title} by #{playlist.user.name}") %>
   <div class="playlists_home_title">
     <%= link_to truncate(playlist.title, length: 26), user_playlist_path(playlist.user.login, playlist), title: "#{playlist.title} by #{playlist.user.name}" %>
   </div>
