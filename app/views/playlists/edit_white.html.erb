@@ -17,18 +17,35 @@
             Upload a square photo, 2000px by 2000px for best results.
           </p>
       </div>
-      <%= simple_form_for [@user, @playlist], html: { class: 'edit_playlist_info_right_column' } do |f| %>
+      <%= form_with model: [@user, @playlist], html: { class: 'edit_playlist_info_right_column', id: 'edit_playlist' } do |f| %>
         <div class="edit_playlist_info_right_column_title_and_year">
-          <%= f.input :title %>
-          <%= f.input :year, input_html: {maxlength: 4, size: 4} %>
+          <div>
+            <label for="">Title</label>
+            <%= f.text_field :title %>
+          </div>
+          <div>
+            <label for="">Year</label>
+              <%= f.text_field :year, input_html: {maxlength: 4, size: 4} %>
+          </div>
+
         </div>
         <div class="edit_playlist_info_right_column_links">
-          <%= f.input :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
-          <%= f.input :link2, placeholder: 'another link' %>
+          <div>
+            <label for="">Link 1</label>
+            <%= f.text_field :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
+          </div>
+
+          <div>
+            <label for="">Link 2</label>
+            <%= f.text_field :link2, placeholder: 'another link' %>
+          </div>
         </div>
 
         <div class="edit_playlist_info_right_column_credits">
-          <%= f.input :credits %>
+          <div class="input">
+            <label for="">Credits</label>
+            <%= f.text_area :credits %>
+          </div>
         </div>
 
         <% if moderator? %>
@@ -37,12 +54,12 @@
           <% end %>
         <% end %>
         <div class="edit_playlist_info_right_column_private_and_hidden">
-          <%= f.input :private %> &nbsp; | (Playlists are hidden until they have more than 2 tracks)
+          <div class="input"><%= f.check_box :private %></div> <label for="">&nbsp;&nbsp;Private</label> &nbsp;&nbsp; <span>| (Playlists are always private until they have more than 2 tracks)</span>
         </div>
     </div>
     <div class="edit_playlist_info_bottom">
       <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
-      <%= f.button :submit, "save playlist" %>
+      <%= submit_tag "save playlist", form: 'edit_playlist' %>
     </div>
     <% end %>
 </div>
