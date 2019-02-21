@@ -11,8 +11,8 @@ module PlaylistsHelper
     user.greenfield_enabled? && Rails.application.remote_storage?
   end
 
-  # DIV element which is ‘filled’ by the JavaScript with a a generated pattern
-  # based on the playlist title.
+  # DIV element which is ‘filled’ by the JavaScript with a a generated pattern based on the
+  # playlist title.
   def playlist_cover_div
     content_tag(:div, '', class: 'no_pic')
   end
@@ -22,14 +22,12 @@ module PlaylistsHelper
     (69806..72848).include?(pic_id)
   end
 
-  # Returns true when the Pic with this ID does not have a greenfield nor
-  # an original variant.
+  # Returns true when the Pic with this ID does not have a greenfield nor an original variant.
   def no_greenfield_and_original_variant?(pic_id)
     pic_id < 69807
   end
 
-  # Returns a different variant when the Pic with the supplied ID does not have
-  # the variant.
+  # Returns a different variant when the Pic with the supplied ID does not have the variant.
   def downgrade_variant(pic_id, variant:)
     if no_greenfield_and_original_variant?(pic_id)
       [:greenfield, :original].include?(variant) ? :album : variant
@@ -46,6 +44,15 @@ module PlaylistsHelper
       variant = downgrade_variant(playlist.pic.id, variant: variant)
       playlist.cover_url(variant: variant)
     end
+  end
+
+  # Returns an <img> tag with the cover for the playlst. Breaks when the playlist does not have
+  # a cover.
+  def playlist_cover_image(playlist, variant:)
+    image_tag(
+      playlist_cover_url(playlist, variant: variant),
+      alt: 'Playlist cover'
+    )
   end
 
   def playlist_cover(playlist, size)
