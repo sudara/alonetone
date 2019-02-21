@@ -67,6 +67,7 @@ RSpec.configure do |config|
   config.include RSpec::Support::AkismetHelpers
   config.include RSpec::Support::FileFixtureHelpers
   config.include RSpec::Support::HTMLMatchers, type: :helper
+  config.include RSpec::Support::HTMLMatchers, type: :request
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
