@@ -19,7 +19,7 @@ module PlaylistsHelper
 
   # Returns true when the Pic with this ID does not have a greenfield variant.
   def no_greenfield_variant?(pic_id)
-    (69806..72848).include?(pic_id)
+    (69806..72848).cover?(pic_id)
   end
 
   # Returns true when the Pic with this ID does not have a greenfield nor an original variant.
@@ -30,9 +30,9 @@ module PlaylistsHelper
   # Returns a different variant when the Pic with the supplied ID does not have the variant.
   def downgrade_variant(pic_id, variant:)
     if no_greenfield_and_original_variant?(pic_id)
-      [:greenfield, :original].include?(variant) ? :album : variant
+      %i[greenfield original].include?(variant) ? :album : variant
     elsif no_greenfield_variant?(pic_id)
-      (variant == :greenfield) ? :original : variant
+      variant == :greenfield ? :original : variant
     else
       variant
     end
