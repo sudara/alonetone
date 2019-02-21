@@ -15,6 +15,29 @@ module PlaylistsHelper
     "<div class='no_pic'></div>".html_safe
   end
 
+  # Returns true when the Pic with this ID does not have a greenfield variant.
+  def no_greenfield_variant?(pic_id)
+    (69806..72848).include?(pic_id)
+  end
+
+  # Returns true when the Pic with this ID does not have a greenfield nor
+  # an original variant.
+  def no_greenfield_and_original_variant?(pic_id)
+    pic_id < 69807
+  end
+
+  # Returns a different variant when the Pic with the supplied ID does not have
+  # the variant.
+  def downgrade_variant(pic_id, variant:)
+    if no_greenfield_and_original_variant?(pic_id)
+      [:greenfield, :original].include?(variant) ? :album : variant
+    elsif no_greenfield_variant?(pic_id)
+      (variant == :greenfield) ? :original : variant
+    else
+      variant
+    end
+  end
+
   def playlist_cover(playlist, size)
     if Rails.application.show_dummy_image? || playlist.has_no_cover?
       return svg_cover
