@@ -50,16 +50,6 @@ class Playlist < ActiveRecord::Base
     is_mix? ? 'mix' : 'album'
   end
 
-  def cover(size = nil)
-    return dummy_pic(size) if has_no_cover?
-
-    pic.pic.url(size)
-  end
-
-  def has_no_cover?
-    Rails.application.show_dummy_image? || !pic.present? || pic.new_record? || !pic.try(:pic).present?
-  end
-
   def has_tracks?
     (tracks_count || 0) > 0
   end
