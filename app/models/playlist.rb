@@ -37,15 +37,6 @@ class Playlist < ActiveRecord::Base
     permalink.to_s
   end
 
-  def dummy_pic(size)
-    case size
-    when :small then 'default/no-cover-50.jpg'
-    when :large then 'default/no-cover-125.jpg'
-    when :album then 'default/no-cover-200.jpg'
-    else 'default/no-cover-200.jpg'
-    end
-  end
-
   def type
     is_mix? ? 'mix' : 'album'
   end
