@@ -62,7 +62,7 @@ module UsersHelper
     image_tag(
       user_avatar_url(user, variant: variant),
       class: user&.avatar_image_present? ? nil : 'no_border',
-      alt: user ? I18n.t('helpers.labels.users.avatar', name: user.name) : nil
+      alt: user ? "#{user.name}'s avatar" : nil
     )
   end
 
@@ -100,7 +100,7 @@ module UsersHelper
     image_tag(
       dark_user_avatar_url(user, variant: variant),
       class: user&.avatar_image_present? ? nil : 'no_border',
-      alt: I18n.t('helpers.labels.users.avatar', name: user&.name)
+      alt: user ? "#{user.name}'s avatar" : nil
     )
   end
 
