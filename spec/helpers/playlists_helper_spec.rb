@@ -78,6 +78,11 @@ RSpec.describe PlaylistsHelper, type: :helper do
       expect(element).to match_css('img[src][alt="Playlist cover"]')
       expect(element).to include(playlist_cover_url(playlist, variant: :greenfield))
     end
+
+    it "formats an image for the cover element" do
+      element = playlist_cover(playlist, variant: :greenfield)
+      expect(element).to match_css('img')
+    end
   end
 
   context "playlist without a cover" do
@@ -93,6 +98,11 @@ RSpec.describe PlaylistsHelper, type: :helper do
       expect do
         playlist_cover_image(playlist, variant: :greenfield)
       end.to raise_error(ArgumentError)
+    end
+
+    it "formats a div for the cover element" do
+      element = playlist_cover(playlist, variant: :greenfield)
+      expect(element).to match_css('div')
     end
   end
 end
