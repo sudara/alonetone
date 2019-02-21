@@ -32,7 +32,7 @@
           From the album / playlist <%= link_to (playlist.title), user_playlist_path(@asset.user,playlist) %>
           <div class="min_height_50">
             <div class="mini_cover">
-              	<%= link_to(image_tag(playlist.cover(:small), user_playlist_path(@asset.user,playlist), class: 'cover_50')) %>
+              	<%= link_to(image_tag(playlist_cover_url(playlist, variant: :small), user_playlist_path(@asset.user,playlist), class: 'cover_50')) %>
             </div>
           </div>
         <% end %>    
