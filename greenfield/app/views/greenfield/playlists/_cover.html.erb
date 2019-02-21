@@ -1,6 +1,6 @@
 <div class="track-content">
   <div class="large-cover">
-    <%= image_tag @playlist.cover(:greenfield) %>
+    <%= image_tag playlist_cover_url(@playlist, variant: :greenfield) %>
   </div>
   <% if @playlist.has_details? %>
     <div class="playlist-options">
