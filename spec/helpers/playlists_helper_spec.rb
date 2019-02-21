@@ -91,6 +91,12 @@ RSpec.describe PlaylistsHelper, type: :helper do
       element = playlist_cover(playlist, variant: :greenfield)
       expect(element).to match_css('img')
     end
+
+    it "formats a URL to the dark playlist's cover" do
+      expect(
+        dark_playlist_cover_url(playlist, variant: :large)
+      ).to eq(playlist_cover_url(playlist, variant: :large))
+    end
   end
 
   context "playlist without a cover" do
@@ -111,6 +117,12 @@ RSpec.describe PlaylistsHelper, type: :helper do
     it "formats a div for the cover element" do
       element = playlist_cover(playlist, variant: :greenfield)
       expect(element).to match_css('div')
+    end
+
+    it "formats a URL to the dark playlist's default cover" do
+      expect(
+        dark_playlist_cover_url(playlist, variant: :large)
+      ).to eq(dark_default_cover_url(variant: :large))
     end
   end
 end
