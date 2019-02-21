@@ -46,7 +46,7 @@ module PlaylistsHelper
     end
   end
 
-  # Returns an <img> tag with the cover for the playlst. Breaks when the playlist does not have
+  # Returns an <img> tag with the cover for the playlist. Breaks when the playlist does not have
   # a cover.
   def playlist_cover_image(playlist, variant:)
     image_tag(
@@ -55,18 +55,14 @@ module PlaylistsHelper
     )
   end
 
-  def playlist_cover(playlist, size)
-    if Rails.application.show_dummy_image? || playlist.has_no_cover?
-      return playlist_cover_div
-    # greenfield size did not exist before this id
-    elsif (size == :greenfield) && ((playlist.pic.id > 69806) && (playlist.pic.id < 72848))
-      size = :original
-    elsif ((size == :greenfield) || (size == :original)) && (playlist.pic.id < 69807)
-      size = :album
-      @old_cover_alert = true
+  # Returns an <img> tag when the playlist has a cover or a <div> to be filled by JavaScript when
+  # playlist has no cover or show_dummy_image is enabled.
+  def playlist_cover(playlist, variant:)
+    if Rails.application.show_dummy_image? || !playlist.cover_image_present?
+      playlist_cover_div
+    else
+      playlist_cover_image(playlist, variant: variant)
     end
-
-    image_tag playlist.cover(size)
   end
 
   def greenfield_upload_form(user, playlist)
