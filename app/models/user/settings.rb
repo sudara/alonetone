@@ -11,16 +11,6 @@ class User
     favorite_asset_ids.include?(asset.id)
   end
 
-  def dummy_pic(size)
-    case size
-    when :album then 'default/no-pic.png'
-    when :large then 'default/no-pic_large.png'
-    when :small then 'default/no-pic_small.png'
-    when :tiny then 'default/no-pic_tiny.png'
-    when nil then 'default/no-pic.png'
-    end
-  end
-
   def favorite_asset_ids
     Track.where(playlist_id: favorites).pluck(:asset_id)
   end
