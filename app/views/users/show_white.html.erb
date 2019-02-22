@@ -14,7 +14,7 @@
         <% end %>
       </div>
       <div class="user_header_avatar">
-        <%= image_tag(avatar_or_placeholder_for(@user, :original)) %>
+        <%= user_image(@user, variant: :original) %>
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@
 
   <div id="user_card_area">
     <div class="user_card_avatar">
-      <%= image_tag(avatar_or_placeholder_for(@user, :original)) %>
+      <%= user_image(@user, variant: :original) %>
     </div>
     <div class="user_card_content">
       <div class="user_card_bio">

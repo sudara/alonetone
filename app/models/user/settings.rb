@@ -1,5 +1,4 @@
 class User
-
   def has_public_playlists?
     playlists.only_public.count >= 1
   end
@@ -22,25 +21,12 @@ class User
     end
   end
 
-  def avatar(size = nil)
-    return dummy_pic(size) if has_no_avatar?
-    pic.pic.url(size)
-  end
-
-  def has_no_avatar?
-    Rails.application.show_dummy_image? || !pic.present? || !pic.try(:pic).present?
-  end
-
   def favorite_asset_ids
     Track.where(playlist_id: favorites).pluck(:asset_id)
   end
 
   def favorites
     playlists.favorites.first
-  end
-
-  def has_pic?
-    pic && !pic.new_record?
   end
 
   def name

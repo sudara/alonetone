@@ -1,10 +1,6 @@
 <%= div_for track_play, class: (cycle('even', 'odd')) do %>
   <div class="listen_user">
-    <% if track_play.listener&.has_pic? %>
-      <%= link_to(image_tag(track_play.listener.pic.pic(:large)), user_home_path(track_play.listener))%>
-    <% else %>
-      <%= image_tag 'default/no-pic_white.svg' %>
-    <% end %>
+    <%= user_image_link(track_play.listener, variant: :large) %>
   </div>
   <div class="listen_details">
     <div>
