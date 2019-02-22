@@ -1,5 +1,7 @@
 include ActionDispatch::TestProcess
 muppet_upload = fixture_file_upload(File.join('spec/fixtures/files/muppets.mp3'), 'audio/mpeg')
+cover_upload = fixture_file_upload(File.join('spec/fixtures/images/manfreddoescover.jpg'), 'image/jpeg')
+avatar_upload = fixture_file_upload(File.join('spec/fixtures/images/jeffdoessudara.jpg'), 'image/jpeg')
 
 def put_user_credentials(username, password)
   puts "You can now sign in with: #{username} - #{password}"
@@ -27,6 +29,7 @@ moderator = User.create!(
   password_confirmation: moderator_password,
   moderator: true
 )
+moderator.create_pic!(pic: avatar_upload)
 put_user_credentials(moderator.login, moderator_password)
 
 # Create regular musician account.
@@ -75,6 +78,7 @@ playlist.description = <<~DESC
   after the original AOC in 1983.
 DESC
 playlist.save!
+playlist.create_pic!(pic: cover_upload)
 playlist.tracks.create!(user: marie, asset: instrument_of_accession)
 playlist.tracks.create!(user: marie, asset: tropical_semi_evergreen)
 playlist.update(private: false)
