@@ -1,3 +1,4 @@
+# All users MUST have a profile.
 <% %w(
   sudara
   arthur
@@ -6,10 +7,37 @@
   sandbags
   joeblow
   brand_new_user
-  jamie_kiesl
-  will_studd
-  henri_willig
 ).each do |user| %>
 <%= user %>:
   user: <%= user %>
 <% end %>
+
+jamie_kiesl:
+  user: jamie_kiesl
+  bio: Really good at naming lots of cheese names in 30 seconds.
+  city: Wilwaukee
+  country: US
+  apple: jamiek
+  twitter: jamiek
+  spotify: jamiek
+  bandcamp: jamiek
+  instagram: jamiek
+  website: http://jamiek.com
+  user_agent: Mozilla/1.0
+  updated_at: <%= 2.months.ago %>
+
+will_studd:
+  user: will_studd
+  bio: Will Studd has been working with specialist cheese for more than four decades and has travelled extensively in his vocation.
+  city: ~
+  country: AU
+  updated_at: <%= 1.week.ago %>
+
+henri_willig:
+  user: henri_willig
+  city: Edam
+  country: ~
+  updated_at: <%= 2.months.ago %>
+
+william_shatner:
+  user: william_shatner
