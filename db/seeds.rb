@@ -52,13 +52,13 @@ marie = User.create!(
 put_user_credentials(marie.login, marie_password)
 
 # Create a few assets for the musician.
-instrument_of_accession = marie.assets.create(
+instrument_of_accession = marie.assets.create!(
   mp3: muppet_upload,
   title: 'Commonly Blue-grey',
   description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.',
   waveform: Greenfield::Waveform.extract(muppet_upload.path)
 )
-tropical_semi_evergreen = marie.assets.create(
+tropical_semi_evergreen = marie.assets.create!(
   mp3: muppet_upload,
   title: 'Aqueous Suspension',
   description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.',
@@ -83,7 +83,7 @@ playlist.update(private: false)
 Asset.find_each do |asset|
   User.find_each do |user|
     if rand(4) == 1
-      asset.listens.create(
+      asset.listens.create!(
         listener: user,
         track_owner: asset.user,
         user_agent: 'seeds/v1.0',
