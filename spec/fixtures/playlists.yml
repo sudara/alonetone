@@ -62,3 +62,13 @@ henri_willig_polderkaas:
   description: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
     goodness as they cheese it was named after.
+
+# Bill added all his favorite tracks to a playlist.
+william_shatners_favorites:
+  is_mix: true
+  is_favorite: true
+  permalink: bills-favorites
+  title: Bill's favorites
+  description: What I like to listen to when I'm eating cheese in the captain's chair.
+  tracks_count: 1
+  user: william_shatner

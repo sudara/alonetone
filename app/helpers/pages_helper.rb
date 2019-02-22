@@ -28,7 +28,7 @@ module PagesHelper
 
   def grab_playlist(permalink)
     playlist = Playlist.find_by_permalink(permalink)
-    { image: playlist.cover(:small),
+    { image: playlist_cover_url(playlist, variant: :small),
       link: user_playlist_path(playlist.user, playlist.permalink),
       username: playlist.user.name,
       title: playlist.title }
