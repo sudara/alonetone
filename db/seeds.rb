@@ -5,11 +5,13 @@ def put_user_credentials(username, password)
   puts "You can now sign in with: #{username} - #{password}"
 end
 
+selected_password = ENV.fetch('PASSWORD', 'testing123')
+
 # Create admin account.
-admin_password = 'testing123'
-admin = User.create(
+admin_password = selected_password
+admin = User.create!(
   login: 'admin',
-  email: '123@123.com',
+  email: 'admin@example.com',
   password: admin_password,
   password_confirmation: admin_password,
   admin: true
@@ -17,10 +19,10 @@ admin = User.create(
 put_user_credentials(admin.login, admin_password)
 
 # Create moderator account.
-moderator_password = 'mod123'
-moderator = User.create(
-  login: 'admin',
-  email: 'mod@mod.com',
+moderator_password = selected_password
+moderator = User.create!(
+  login: 'moderator',
+  email: 'moderator@example.com',
   password: moderator_password,
   password_confirmation: moderator_password,
   moderator: true
@@ -28,7 +30,7 @@ moderator = User.create(
 put_user_credentials(moderator.login, moderator_password)
 
 # Create regular musician account.
-musician_password = 'music123'
+musician_password = selected_password
 musician = User.create!(
   login: 'musician',
   email: 'musician@example.com',
@@ -39,7 +41,7 @@ musician = User.create!(
 put_user_credentials(musician.login, musician_password)
 
 # Create a regular musician account with playlists and tracks.
-marie_password = 'testing123'
+marie_password = selected_password
 marie = User.create!(
   login: 'marieh',
   email: 'marie.harel@example.com',
