@@ -7,7 +7,7 @@
       <div class="edit_playlist_info_left_column">
           <label>ALBUM ARTWORK</label>
           <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}", :class => "cover" do %>
-            <%= playlist_cover(@playlist, :original) %>
+            <%= playlist_cover(@playlist, variant: :original) %>
           <% end %>
           <%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
