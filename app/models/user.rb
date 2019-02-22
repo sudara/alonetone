@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   validates :email,
     format: {
-      with: /@/,
+      with: URI::MailTo::EMAIL_REGEXP,
       message: "should look like an email address."
     },
     length: { maximum: 100 },
