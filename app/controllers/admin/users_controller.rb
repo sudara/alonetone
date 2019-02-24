@@ -11,7 +11,7 @@ module Admin
     end
 
     def delete
-      @user.destroy
+      @user.destroy(recursive: true)
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
         format.js
