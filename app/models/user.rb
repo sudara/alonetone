@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  acts_as_paranoid
-
   concerned_with :validation, :findability, :settings, :statistics
 
   store :settings

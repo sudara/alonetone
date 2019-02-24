@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
-  acts_as_paranoid
-
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
