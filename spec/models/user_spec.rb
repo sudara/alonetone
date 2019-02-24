@@ -59,19 +59,16 @@ RSpec.describe User, type: :model do
     let!(:comment) { comments(:valid_comment_on_asset_by_user) }
     let!(:listen) { listens(:valid_listen) }
 
-    it { is_expected.to act_as_paranoid }
-
     describe "soft delete" do
       it "should mark assets as soft deleted" do
-        user.destroy
+        user.destroy(recursive: true)
 
-        expect(user.reload.paranoia_destroyed?).to eq(true)
-        expect(asset.reload.paranoia_destroyed?).to eq(true)
-        expect(user.assets).not_to be_present
+        expect(user.reload.deleted_at).not_to be_nil
+        expect(asset.reload.deleted_at).not_to be_nil
       end
 
       it "doesnt delete other associated records (listens tracks playlists posts topics comments)" do
-        user.destroy
+        user.destroy(recursive: true)
 
         expect(user.listens).to be_present
         expect(user.tracks).to be_present
