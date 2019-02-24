@@ -30,10 +30,7 @@ class User < ActiveRecord::Base
   # Can create music
   has_one    :pic, as: :picable
   has_one    :profile
-  has_many   :assets,
-    -> { order('assets.id DESC') },
-    dependent: :destroy
-
+  has_many   :assets,    -> { with_deleted.order('assets.id DESC') }
   has_many   :playlists, -> { order('playlists.position') }
 
   has_many   :comments, -> { order('comments.id DESC') }
@@ -81,15 +78,18 @@ class User < ActiveRecord::Base
 
   alias_method :really_destroy!, :destroy
   # overwriting destroy method to allow for soft-deletion
-  def destroy
+  def destroy(recursive: false)
     self.update_attributes(deleted_at: Time.now)
+    self.assets.map(&:destroy) if recursive
+  end
+
+  def deleted?
+    deleted_at != nil
   end
 
   def restore(recursive: false)
     self.update_attributes(deleted_at: nil)
-    if recursive
-      self.assets.map(&:restore)
-    end
+    self.assets.map(&:restore) if recursive
   end
 
   def listened_to_today_ids
