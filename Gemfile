@@ -28,7 +28,6 @@ gem 'has_permalink'
 gem 'authlogic'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
-gem "paranoia", "~> 2.2"
 
 # view
 gem 'redcarpet'
