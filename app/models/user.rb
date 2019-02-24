@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
   scope :with_deleted, -> { unscope(where: :deleted_at) }
 
   before_create :make_first_user_admin
-  before_destroy :enqueue_real_destroy_job
   # need to run this before destroy
   # to ensure assets are not deleted yet
   before_real_destroy :efficiently_destroy_relations
@@ -81,6 +80,7 @@ class User < ActiveRecord::Base
   def destroy(recursive: false)
     self.update_attributes(deleted_at: Time.now)
     self.assets.map(&:destroy) if recursive
+    enqueue_real_destroy_job
   end
 
   def deleted?
