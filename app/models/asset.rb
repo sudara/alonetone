@@ -4,6 +4,8 @@ class Asset < ApplicationRecord
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
+  default_scope { where(deleted_at: nil) }
+
   scope :published,       -> { where(private: false, is_spam: false) }
   scope :not_spam,        -> { where(is_spam: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
@@ -16,6 +18,8 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+  scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
+  scope :with_deleted, -> { unscope(where: :deleted_at) }
 
   belongs_to :user, -> { with_deleted }, counter_cache: true
   has_one  :audio_feature
@@ -46,6 +50,16 @@ class Asset < ApplicationRecord
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
   validates_presence_of :user_id
+
+  alias_method :really_destroy!, :destroy
+  # overwriting destroy method to allow for soft-deletion
+  def destroy
+    self.update_attributes(deleted_at: Time.now)
+  end
+
+  def restore
+    self.update_attributes(deleted_at: nil)
+  end
 
   # override has_permalink method to ensure we don't get empty permas
   def generate_permalink!
