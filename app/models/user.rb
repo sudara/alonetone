@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   before_create :make_first_user_admin
   # need to run this before destroy
   # to ensure assets are not deleted yet
-  before_real_destroy :efficiently_destroy_relations
+  before_destroy :efficiently_destroy_relations
   after_create :create_profile
 
   # Can create music
