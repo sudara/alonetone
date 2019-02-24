@@ -35,7 +35,6 @@ gem 'country_select'
 gem 'dynamic_form'
 gem 'simple_form'
 gem 'local_time'
-gem 'gemoji'
 gem 'pagy'
 
 # deprecated
