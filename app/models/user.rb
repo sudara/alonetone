@@ -21,8 +21,7 @@ class User < ActiveRecord::Base
   scope :with_deleted, -> { unscope(where: :deleted_at) }
 
   before_create :make_first_user_admin
-  # need to run this before destroy
-  # to ensure assets are not deleted yet
+
   before_destroy :efficiently_destroy_relations
   after_create :create_profile
 
@@ -186,7 +185,7 @@ class User < ActiveRecord::Base
            .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
 
     profile.destroy
-    assets.destroy_all
+    assets.map(&:really_destroy!)
 
     %w[tracks playlists posts comments].each do |user_relation|
       send(user_relation).delete_all unless destroyed?
