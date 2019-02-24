@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
 
+  default_scope { where(deleted_at: nil) }
+
   scope :recent,        -> { order('users.id DESC')                                   }
   scope :recently_seen, -> { order('last_request_at DESC')                            }
   scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
@@ -15,6 +17,8 @@ class User < ActiveRecord::Base
   scope :with_location, -> { where(['users.country != ""']).recently_seen             }
   scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
   scope :alpha,         -> { order('display_name ASC')                                }
+  scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
+  scope :with_deleted, -> { unscope(where: :deleted_at) }
 
   before_create :make_first_user_admin
   before_destroy :enqueue_real_destroy_job
@@ -74,6 +78,19 @@ class User < ActiveRecord::Base
 
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
+
+  alias_method :really_destroy!, :destroy
+  # overwriting destroy method to allow for soft-deletion
+  def destroy
+    self.update_attributes(deleted_at: Time.now)
+  end
+
+  def restore(recursive: false)
+    self.update_attributes(deleted_at: nil)
+    if recursive
+      self.assets.map(&:restore)
+    end
+  end
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
