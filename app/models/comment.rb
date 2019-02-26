@@ -101,6 +101,7 @@ end
 #  body             :text(16777215)
 #  body_html        :text(16777215)
 #  commentable_type :string(255)
+#  deleted_at       :datetime
 #  is_spam          :boolean          default(FALSE)
 #  private          :boolean          default(FALSE)
 #  referrer         :string(255)
@@ -118,4 +119,5 @@ end
 #  index_comments_on_commentable_id                            (commentable_id)
 #  index_comments_on_commentable_type_and_is_spam_and_private  (commentable_type,is_spam,private)
 #  index_comments_on_commenter_id                              (commenter_id)
+#  index_comments_on_deleted_at                                (deleted_at)
 #
