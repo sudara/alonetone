@@ -1,13 +1,14 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[destroy spam]
+    before_action :set_user, only: %i[delete spam]
 
     def index
       @pagy, @users = pagy(User.recent)
     end
 
-    def destroy
-      @user.destroy
+    def delete
+      @user.soft_delete
+      @user.efficiently_soft_delete_relations
       redirect_back(fallback_location: root_path)
     end
 
