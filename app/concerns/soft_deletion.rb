@@ -8,5 +8,9 @@ module SoftDeletion
 
     scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
     scope :with_deleted, -> { unscope(where: :deleted_at) }
+
+    def soft_delete
+      self.update_attributes(deleted_at: Time.now)
+    end
   end
 end
