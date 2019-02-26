@@ -52,7 +52,24 @@ RSpec.describe User, type: :model do
   end
 
   context "deletion" do
-    it 'should remove listens tracks playlists posts topics comments assets as well' do
+    let(:user) { users(:sudara) }
+    let!(:asset) { assets(:valid_mp3) }
+    let!(:topic) { topics(:topic1) }
+    let!(:playlist) { playlists(:owp) }
+    let!(:comment) { comments(:valid_comment_on_asset_by_user) }
+    let!(:listen) { listens(:valid_listen) }
+
+    describe "soft delete" do
+      it "should soft delete associated recored" do
+        user.soft_delete_relations
+
+        expect(user.assets).not_to be_present
+        expect(user.listens).not_to be_present
+        expect(user.tracks).not_to be_present
+        expect(user.playlists).not_to be_present
+        expect(user.topics).not_to be_present
+        expect(user.comments).not_to be_present
+      end
     end
   end
 
