@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   validates :login,
     format: {
-      with: /\A[\w\.+-@]+\z/,
+      with: /[\A\w\+\z]/,
       message: "should use only letters and numbers."
     },
     length: { within: 3..100 },
