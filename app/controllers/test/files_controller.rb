@@ -25,7 +25,7 @@ module Test
     end
 
     def path
-      @path ||= request.path.split('/')[2..].map { |part| Rack::Utils.unescape(part) }
+      @path ||= request.path.split('/')[2..-1].map { |part| Rack::Utils.unescape(part) }
     end
 
     def image_pathname
