@@ -8,7 +8,7 @@ module Admin
 
     def delete
       @user.soft_delete
-      @user.efficiently_soft_delete_relations
+      @user.soft_delete_relations
       redirect_back(fallback_location: root_path)
     end
 
