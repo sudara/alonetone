@@ -1,4 +1,6 @@
 class Listen < ActiveRecord::Base
+  include SoftDeletion
+
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
 
   scope :from_user,  -> { where('listener_id != ""') }

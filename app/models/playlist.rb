@@ -1,4 +1,6 @@
 class Playlist < ActiveRecord::Base
+  include SoftDeletion
+
   acts_as_list scope: :user_id, order: :position
 
   scope :mixes,            -> { where(is_mix: true) }

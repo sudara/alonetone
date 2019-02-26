@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include SoftDeletion
+
   concerned_with :validation, :findability, :settings, :statistics
 
   store :settings

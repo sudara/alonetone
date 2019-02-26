@@ -1,4 +1,6 @@
 class Track < ActiveRecord::Base
+  include SoftDeletion
+
   belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :asset
   belongs_to :user
