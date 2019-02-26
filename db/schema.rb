@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_022413) do
+ActiveRecord::Schema.define(version: 2019_02_26_040112) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -279,6 +279,8 @@ ActiveRecord::Schema.define(version: 2019_02_26_022413) do
     t.boolean "is_spam", default: false
     t.float "spaminess"
     t.string "signature"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
   end
 
