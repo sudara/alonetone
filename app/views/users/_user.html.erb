@@ -1,7 +1,11 @@
 <div id="user_header">
-  <%= link_to(image_tag(@user.avatar(:large), class: 'small_avatar', alt: "#{@user.name}"), user_path(@user), class: 'image', id: 'alonetoner', title: "#{@user.name}'s profile - all about #{@user.name}") %>
+  <%= link_to(
+    image_tag(user_avatar_url(@user, variant: :large), class: 'small_avatar', alt: "#{@user.name}"),
+    user_path(@user),
+    class: 'image', id: 'alonetoner', title: "#{@user.name}'s profile - all about #{@user.name}"
+  ) %>
   <div class="user_title">
-    <h1 class="user"><%= @user.name %></h1><span class="user_location"><%= user_location(@user) %></span>
+    <h1 class="user"><%= @user.name %></h1><span class="user_location"><%= user_location(@user.profile) %></span>
       <%= follow_toggle(@user) %>
   <%# cache("#{user.cache_key}+#{authorized?}+#{admin?}") do %>
 

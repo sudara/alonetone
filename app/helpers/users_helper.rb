@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def website_for(user)
     "#{user.name}'s website " + (link_to user.website.to_s, ('http://' + h(user.website)))
@@ -11,43 +13,105 @@ module UsersHelper
     link_to "Open #{user.name}'s music in iTunes", 'http://' + h(user.itunes)
   end
 
-  def avatar(user, size = nil)
-    return "default/no-pic_#{size}.png" if Rails.application.show_dummy_image?
+  # Returns the user's location, e.g. from Vienna, AT.
+  def user_location(profile = nil)
+    return '' unless profile
 
-    case size
-    when 100 then image_tag(user.has_pic? ? user.pic.pic.url(:large) : 'default/no-pic-thumb100.jpg')
-    when 50 then image_tag(user.has_pic? ? user.pic.pic.url(:small) : 'default/no-pic-thumb50.jpg')
-    when nil then image_tag(user.has_pic? ? user.pic.pic.url(:tiny) : 'default/no-pic.jpg')
+    locality = [profile.city.presence, profile.country.presence].compact.map(&:strip).join(', ')
+    locality.present? ? 'from ' + locality : ''
+  end
+
+  # Returns a summary of the user's history on Alonetone.
+  def user_summary(user = nil)
+    return '' unless user
+
+    [
+      user.name,
+      user.assets_count > 0 ? pluralize(user.assets_count, 'uploaded tracks') : nil,
+      "Joined alonetone #{user.created_at.to_date.to_s(:long)}",
+      user_location(user.profile).presence
+    ].compact.join("\n")
+  end
+
+  # Returns an <img> element with the avatar for a user. Automatically switches to the dark theme
+  # when selected by the user.
+  def user_image_link(user = nil, variant:)
+    if white_theme_enabled?
+      white_theme_user_image_link(user, variant: variant)
+    else
+      dark_theme_user_image_link(user, variant: variant)
     end
   end
 
-  def user_location(user)
-    if (user.try(:city).present? && user.try(:country)).present?
-      "from #{[user.city.strip, user.country.strip].compact.join(', ')}"
-    elsif (user.try(:city).present? || user.try(:country)).present?
-      location = (user.try(:city) || user.try(:country)).to_s
-      "from #{location}"
+  # Returns an <a> element with the avatar for a user or an <img> element with the default
+  # avatar when the user is nil.
+  def white_theme_user_image_link(user = nil, variant:)
+    if user
+      link_to(
+        user_image(user, variant: variant),
+        user_home_path(user),
+        title: user_summary(user)
+      )
     else
-      ""
+      user_image(user, variant: variant)
     end
   end
 
-  def user_image_link(user, size = :large)
-    link_to(image_tag(user.avatar(size),
-      class: (user.has_pic? ? '' : 'no_border'),
-      alt: user.name.to_s),
-      user_home_path(user),
-      title: " #{user.name}
- #{user.assets_count > 0 ? pluralize(user.assets_count, 'uploaded tracks') : ''}
- Joined alonetone #{user.created_at.to_date.to_s(:long)}
- #{user_location(user)}")
+  # Returns an <img> tag with the avatar for the user or the default avatar when the user is nil.
+  def user_image(user = nil, variant:)
+    _user_image(user, url: user_avatar_url(user, variant: variant))
   end
 
-  def avatar_or_placeholder_for(user, size = :large)
-    if !Rails.application.show_dummy_image? && user&.has_pic?
-      user.pic.pic.url(size)
+  # Returns a URL to the user's avatar or the default Alonetone avatar when user is nill or the
+  # user has no avatar. Always returns the default avatar when `show_dummy_image' is enabled in the
+  # config.
+  def user_avatar_url(user = nil, variant:)
+    if user.nil? || Rails.application.show_dummy_image?
+      UsersHelper.no_avatar_path
     else
-      'default/no-pic_white.svg'
+      user.avatar_url(variant: variant) || UsersHelper.no_avatar_path
+    end
+  end
+
+  # Returns the image path to use as a default avatar.
+  def self.no_avatar_path
+    'default/no-pic_white.svg'
+  end
+
+  # @deprecated Used by the dark theme.
+  def dark_theme_user_image_link(user = nil, variant:)
+    if user
+      link_to(
+        dark_user_image(user, variant: variant),
+        user_home_path(user),
+        title: user_summary(user)
+      )
+    else
+      dark_user_image(user, variant: variant)
+    end
+  end
+
+  # @deprecated Used by the dark theme.
+  def dark_user_image(user = nil, variant:)
+    _user_image(user, url: dark_user_avatar_url(user, variant: variant))
+  end
+
+  # @deprecated Used by the dark theme.
+  def dark_user_avatar_url(user = nil, variant:)
+    if user.nil? || Rails.application.show_dummy_image?
+      UsersHelper.no_dark_avatar_path(variant: variant)
+    else
+      user.avatar_url(variant: variant) || UsersHelper.no_dark_avatar_path(variant: variant)
+    end
+  end
+
+  # @deprecated Used by the dark theme.
+  def self.no_dark_avatar_path(variant:)
+    case variant
+    when :large, :small, :tiny
+      "default/no-pic_#{variant}.png"
+    else
+      'default/no-pic.png'
     end
   end
 
@@ -88,5 +152,15 @@ module UsersHelper
     else
       cache_digest(@users)
     end
+  end
+
+  private
+
+  def _user_image(user, url:)
+    image_tag(
+      url,
+      class: user&.avatar_image_present? ? nil : 'no_border',
+      alt: user ? "#{user.name}'s avatar" : nil
+    )
   end
 end

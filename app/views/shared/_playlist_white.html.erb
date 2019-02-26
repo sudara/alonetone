@@ -1,6 +1,6 @@
 <%= content_tag_for :li, playlist, class: 'small_playlists' do %>
   <%= link_to user_playlist_path(playlist.user.login, playlist), title: "#{playlist.title}" do %>
-    <%= playlist_cover(playlist, :original) %>
+    <%= playlist_cover(playlist, variant: :original) %>
 	<% end %>
   <%= link_to(title_and_year_for(playlist), user_playlist_path(playlist.user.login, playlist), class: 'small_playlist_title', title: "#{playlist.title} by #{playlist.user.name}" ) %>
   <div class="small_playlist_user">

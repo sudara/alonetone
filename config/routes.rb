@@ -173,4 +173,11 @@ Alonetone::Application.routes.draw do
       get '/playlists/:id/:asset_id', :to => 'playlists#show', as: 'show_track_in_playlist'
     end
   end
+
+  if Rails.env.test?
+    # Paperclip serves its files from the public directory, something that does't work well
+    # with mocked uploaded files in feature specs. The files controller serves these files
+    # so we don't have to muck around in the Rack middleware stack to solve this.
+    get '/system/*path', to: 'test/files#show'
+  end
 end

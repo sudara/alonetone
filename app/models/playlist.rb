@@ -37,27 +37,8 @@ class Playlist < ActiveRecord::Base
     permalink.to_s
   end
 
-  def dummy_pic(size)
-    case size
-    when :small then 'default/no-cover-50.jpg'
-    when :large then 'default/no-cover-125.jpg'
-    when :album then 'default/no-cover-200.jpg'
-    else 'default/no-cover-200.jpg'
-    end
-  end
-
   def type
     is_mix? ? 'mix' : 'album'
-  end
-
-  def cover(size = nil)
-    return dummy_pic(size) if has_no_cover?
-
-    pic.pic.url(size)
-  end
-
-  def has_no_cover?
-    Rails.application.show_dummy_image? || !pic.present? || pic.new_record? || !pic.try(:pic).present?
   end
 
   def has_tracks?
@@ -106,6 +87,18 @@ class Playlist < ActiveRecord::Base
       total += track.asset_length || 0
     end
     Asset.formatted_time(total_track_length)
+  end
+
+  # Returns true when the user has a usable avatar.
+  def cover_image_present?
+    pic.present? && pic.image_present?
+  end
+
+  # Generates a URL to playlist's cover with the requested variant. Returns nil when the playlist
+  # does not have a usable cover.
+  def cover_url(variant:)
+    ImageVariant.verify(variant)
+    pic&.url(variant: variant)
   end
 
   def self.latest(limit = 5)
