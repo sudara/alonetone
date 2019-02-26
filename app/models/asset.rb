@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
+  include SoftDeletion
+
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
