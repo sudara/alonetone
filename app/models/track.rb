@@ -42,6 +42,7 @@ end
 # Table name: tracks
 #
 #  id          :integer          not null, primary key
+#  deleted_at  :datetime
 #  is_favorite :boolean          default(FALSE)
 #  position    :integer          default(1)
 #  created_at  :datetime
@@ -53,6 +54,7 @@ end
 # Indexes
 #
 #  index_tracks_on_asset_id     (asset_id)
+#  index_tracks_on_deleted_at   (deleted_at)
 #  index_tracks_on_is_favorite  (is_favorite)
 #  index_tracks_on_playlist_id  (playlist_id)
 #  index_tracks_on_user_id      (user_id)

@@ -176,6 +176,7 @@ end
 #  bitrate          :integer
 #  comments_count   :integer          default(0)
 #  credits          :text(4294967295)
+#  deleted_at       :datetime
 #  description      :text(4294967295)
 #  description_html :text(4294967295)
 #  favorites_count  :integer          default(0)
@@ -203,6 +204,7 @@ end
 #
 # Indexes
 #
+#  index_assets_on_deleted_at                   (deleted_at)
 #  index_assets_on_hotness                      (hotness)
 #  index_assets_on_permalink                    (permalink)
 #  index_assets_on_updated_at                   (updated_at)

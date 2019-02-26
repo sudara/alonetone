@@ -136,6 +136,7 @@ end
 # Table name: topics
 #
 #  id              :integer          not null, primary key
+#  deleted_at      :datetime
 #  hits            :integer          default(0)
 #  last_updated_at :datetime
 #  locked          :boolean          default(FALSE)
@@ -156,6 +157,7 @@ end
 #
 # Indexes
 #
+#  index_topics_on_deleted_at                    (deleted_at)
 #  index_topics_on_forum_id_and_last_updated_at  (last_updated_at,forum_id)
 #  index_topics_on_forum_id_and_permalink        (forum_id,permalink)
 #  index_topics_on_sticky_and_last_updated_at    (sticky,last_updated_at,forum_id)

@@ -135,6 +135,7 @@ end
 #
 #  id           :integer          not null, primary key
 #  credits      :text(4294967295)
+#  deleted_at   :datetime
 #  description  :text(4294967295)
 #  has_details  :boolean          default(FALSE)
 #  image        :string(255)
@@ -158,7 +159,8 @@ end
 #
 # Indexes
 #
-#  index_playlists_on_permalink  (permalink)
-#  index_playlists_on_position   (position)
-#  index_playlists_on_user_id    (user_id)
+#  index_playlists_on_deleted_at  (deleted_at)
+#  index_playlists_on_permalink   (permalink)
+#  index_playlists_on_position    (position)
+#  index_playlists_on_user_id     (user_id)
 #
