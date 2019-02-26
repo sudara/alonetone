@@ -15,6 +15,15 @@ RSpec.describe UsersController, type: :request do
       get "/#{users(:sudara).login}"
       expect(response).to be_successful
     end
+
+    it "displays user info for all users" do
+      User.find_each do |user|
+        unless user.login.blank?
+          get "/#{user.login}"
+          expect(response).to be_successful
+        end
+      end 
+    end
   end
 
   context "POST create" do

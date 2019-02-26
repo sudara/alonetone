@@ -1,6 +1,6 @@
 <%= content_for :head do %>
-  <% unless @playlist.has_no_cover? %>
-  <link rel="preload" href="<%= @playlist.cover(:greenfield) %>" as="image">
+  <% if @playlist.cover_image_present? %>
+    <%= tag(:link, rel: 'preload', href: playlist_cover_url(@playlist, variant: :greenfield), as: 'image')%>
   <% end %>
 <% end %>
 
@@ -14,7 +14,7 @@
     <div class="track-content">
       <div class="large-cover-and-credits">
         <div class="large-cover">
-          <%= playlist_cover(@playlist, :greenfield) %>
+          <%= playlist_cover(@playlist, variant: :greenfield) %>
         </div>
         <% if @playlist.has_any_links? %>
         <div class="playlist-options">

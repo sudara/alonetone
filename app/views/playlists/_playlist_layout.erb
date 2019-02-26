@@ -1,42 +1,37 @@
 <%= div_for playlist, class: "box #{(playlist.has_tracks? ? '' : 'empty')} #{playlist.type}" do %>
-  
   <div class="playlist_title box">
-	  <h2><%= h(playlist.title)+(playlist.year.present? ? " (#{playlist.year})" : '') %></h2>
-	  <h3><%= pluralize playlist.tracks_count, 'track'%> by <%= (playlist.is_mix? ? 'various alonetone artists' : playlist.user.name )%></h3>
+    <h2><%= h(playlist.title)+(playlist.year.present? ? " (#{playlist.year})" : '') %></h2>
+    <h3><%= pluralize playlist.tracks_count, 'track'%> by <%= (playlist.is_mix? ? 'various alonetone artists' : playlist.user.name )%></h3>
     <% if authorized_for(playlist) %>
       <%= link_to "edit", edit_user_playlist_path(@user, playlist), class: 'edit right' %>
     <% end %>
   </div>
-  
+
   <% if playlist.private? && authorized_for(playlist) %>
-  	<div class="empty">
+    <div class="empty">
         Playlist is hidden from the public (you can still share it)<br/>
         <%= form_for [@user, playlist] do |f| %>
             <%= f.hidden_field :private, value: 0 %>
             <%= f.submit 'publish playlist now' %>
         <% end %>
-  	</div>
+    </div>
   <% end %>
 
-	<div class="info">
+  <div class="info">
     <div class="cover">
-      <% if @single_playlist %>
-         <%= link_to(image_tag(playlist.cover(:large)), playlist.cover, class: 'cover_125', rel: 'facebox') %> 
-      <% else %>
-          <%= link_to(image_tag(playlist.cover(:large)), playlist.cover, class: 'cover_125', rel: 'facebox') %> 
-      <% end %>
+      <%= link_to(
+        image_tag(dark_playlist_cover_url(playlist, variant: :large)),
+        dark_playlist_cover_url(playlist, variant: :album),
+        class: 'cover_125', rel: 'facebox'
+      ) %>
     </div>
 
     <div class="right">
-     
       <% if @assets %>
         <div class="edit_playlist_button_row">
-          
-             <%= link_to '#edit_playlist_info', class: 'slide_open_href track_about_link', title: 'edit' do %>
-                edit <div class="sprites-pencil sprites-before-heading"></div>
-              <% end %>
-
-
+          <%= link_to '#edit_playlist_info', class: 'slide_open_href track_about_link', title: 'edit' do %>
+            edit <div class="sprites-pencil sprites-before-heading"></div>
+          <% end %>
         </div>
       <% end %>
 
@@ -50,9 +45,9 @@
     <div class="clear"></div>
   </div>
 
-	<div class="tracks clear">
-		<%= yield %>
-	</div>
+  <div class="tracks clear">
+    <%= yield %>
+  </div>
 <% end %>
 
 <% content_for :share do %>
