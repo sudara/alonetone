@@ -1,0 +1,4 @@
+valid_listen:
+  listener: sudara
+  asset: valid_mp3
+  track_owner: arthur
