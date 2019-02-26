@@ -170,6 +170,24 @@ class User < ActiveRecord::Base
 
   protected
 
+  def efficiently_soft_delete_relations
+    Listen.where(track_owner_id: id).map(&:soft_delete)
+    Listen.where(listener_id: id).map(&:soft_delete)
+    Topic.where(user_id: id).where('posts_count < 2').map(&:soft_delete)
+    Playlist.joins(:assets).where(assets: { user_id: id })
+            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+    Track.joins(:asset).where(assets: { user_id: id }).map(&:soft_delete)
+    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).map(&:soft_delete)
+
+    assets.map(&:soft_delete)
+
+    %w[tracks playlists posts comments].each do |user_relation|
+      send(user_relation).map(&:soft_delete)
+    end
+    true
+  end
+
   def efficiently_destroy_relations
     Listen.where(track_owner_id: id).delete_all
     Listen.where(listener_id: id).delete_all
