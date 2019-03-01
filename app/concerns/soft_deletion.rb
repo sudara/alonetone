@@ -10,16 +10,16 @@ module SoftDeletion
     scope :with_deleted, -> { unscope(where: :deleted_at) }
 
     def soft_delete
-      self.update_attribute('deleted_at', Time.now)
+      update_attribute('deleted_at', Time.now)
     end
 
     def soft_deleted?
-      self.deleted_at != nil
+      deleted_at != nil
     end
 
     # would like to be able to skip any validation
     def restore
-      self.update_attribute('deleted_at', nil)
+      update_attribute('deleted_at', nil)
     end
   end
 end
