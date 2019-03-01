@@ -62,6 +62,7 @@ RSpec.describe User, type: :model do
     describe "soft delete" do
       it "should soft delete associated recored" do
         user.soft_delete_relations
+        user.reload
 
         expect(user.assets).not_to be_present
         expect(user.listens).not_to be_present
