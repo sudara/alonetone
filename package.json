@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@bugsnag/js": "^5.2.0",
+    "@bugsnag/js": "^6.0.0",
     "@rails/webpacker": "^4.0.0-rc.7",
     "gsap": "^2.1",
     "howler": "https://github.com/goldfire/howler.js.git",
