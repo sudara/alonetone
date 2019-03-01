@@ -76,7 +76,7 @@ end
 group :development do
   gem 'perf_check'
   gem 'annotate'
-  gem 'rubocop', '~> 0.63.1', require: false
+  gem 'rubocop', '~> 0.65.0', require: false
 end
 
 ## Who loves tests! You do? You do!
