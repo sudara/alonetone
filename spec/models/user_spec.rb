@@ -6,6 +6,18 @@ RSpec.describe User, type: :model do
       expect(new_user).to be_valid
       expect(users(:sudara)).to be_valid
     end
+    # https://www.wikiwand.com/en/Email_address#/Examples
+    it "should validate email" do
+      expect(new_user(email: "userEmail1&@gmail.com")).to be_valid
+      expect(new_user(email: "userEmail1&@gmail.")).not_to be_valid
+      expect(new_user(email: "Abc.example.com")).not_to be_valid
+      expect(new_user(email: "A@b@c@example.com")).not_to be_valid
+      expect(new_user(email: "a\"b(c)d,e:f;g<h>i[j\k]l@example.com")).not_to be_valid
+      expect(new_user(email: 'just"not"right@example.com')).not_to be_valid
+      expect(new_user(email: 'this is"not\allowed@example.com')).not_to be_valid
+      expect(new_user(email: 'this\ still\"not\\allowed@example.com ')).not_to be_valid
+      expect(new_user(email: 'expect(new_user(email: "Abc.example.com")).not_to be_valid')).not_to be_valid
+    end
 
     it "can be an admin" do
       expect(users(:sudara)).to be_admin
