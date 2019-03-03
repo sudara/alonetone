@@ -455,9 +455,9 @@ GEM
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     sixarm_ruby_unaccent (1.2.0)
-    skylight (3.1.4)
-      skylight-core (= 3.1.4)
-    skylight-core (3.1.4)
+    skylight (4.0.0.beta)
+      skylight-core (= 4.0.0.beta)
+    skylight-core (4.0.0.beta)
       activesupport (>= 4.2.0)
     sometimes (0.0.3)
     sort_alphabetical (1.1.0)
@@ -586,7 +586,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   simple_form
-  skylight
+  skylight (>= 4.0.0.beta)
   sometimes
   soundmanager2-rails
   thredded
