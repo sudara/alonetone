@@ -27,7 +27,7 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  config.cache_store = :dalli_store
+  config.cache_store = :mem_cache_store
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :postmark
