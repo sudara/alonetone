@@ -39,9 +39,6 @@ class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
-    c.validate_email_field = false
-    c.validate_login_field = false
-    c.validate_password_field = false
   end
 
   scope :recent,        -> { order('users.id DESC')                                   }
