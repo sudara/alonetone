@@ -24,16 +24,14 @@ class User < ActiveRecord::Base
     }
 
   validates :password,
-    confirmation: { if: :require_password? },
+    confirmation: true,
     length: {
-      minimum: 8,
-      if: :require_password?
+      minimum: 8
     }
 
   validates :password_confirmation,
     length: {
       minimum: 8,
-      if: :require_password?
     }
 
   store :settings
