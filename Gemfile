@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.0.0.beta2'
 gem 'mysql2'
 gem 'puma'
 
@@ -38,7 +38,7 @@ gem 'local_time'
 gem 'pagy'
 
 # deprecated
-gem 'record_tag_helper'
+gem 'record_tag_helper', github: 'mmoll/record_tag_helper', branch: 'update_gemspec'
 
 # external services
 gem 'rakismet'
