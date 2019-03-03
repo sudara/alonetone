@@ -654,29 +654,28 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bugsnag/browser@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-5.2.0.tgz#69ff77c8d310eccbdecd545744a22ea6030703f1"
-  integrity sha512-QImSbwVjcEbaUjCxNRVOELUahdHmRfkZ9o0UJpMDsfYNqpMpYzI7DdyH0BUnXv/yI4ymGpAQbFSEqVMTqSa9WA==
+"@bugsnag/browser@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-6.0.0.tgz#d6e55e05d2f7cfa1f729ac5143b60e4a715122bf"
+  integrity sha512-EZ+I9CscLLkCsPdY8+X47yAjb7n/qWdLx299GNdW53/D4pO2Yo2sKCE53flyUx5BtR9yfE1Yu1vCojq89uKq7w==
 
-"@bugsnag/js@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-5.2.0.tgz#3ef8c63cfac7fc8764459461ad33a31fe44cad36"
-  integrity sha512-tL+Jr4DnQbCH+nLR6Kb9m5QbstIbmFbL9yKId2W3z0MvPxTg9vhRSlu35+99+04CRHrQu0VdY2n9RzDbD5kpgg==
+"@bugsnag/js@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-6.0.0.tgz#78c245b9e97bfe445559abeee3004068afa81883"
+  integrity sha512-tF1D7hjhG8aXPk5rx23rDo0j7ZrIjuRSTcgkvD0mJX6cg3f1+qqXL2GlUMQ1siSx6hvNONTr3Q7SnlhEEQ1G6A==
   dependencies:
-    "@bugsnag/browser" "^5.2.0"
-    "@bugsnag/node" "^5.2.0"
+    "@bugsnag/browser" "^6.0.0"
+    "@bugsnag/node" "^6.0.0"
 
-"@bugsnag/node@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-5.2.0.tgz#b1c193161d2a006fabf8ce2c22484c297d57f4ad"
-  integrity sha512-2KqUcZ/uTkNP9G4aGW+sKhdce3Z68pg9I+LnjUDvpMEQ82O/zxy+NLkGTSz9hveNBdznJ1YoqjfoBdRnHkyRSw==
+"@bugsnag/node@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-6.0.0.tgz#bae6e6b4d7c172755e66253ecdd66a06505e98e5"
+  integrity sha512-TUsX8N9Dzpxisfml8n6LmMyo2YdjItJ5A3RoIVokZ8qBHbFXp3lQmtvp5nTVQc/buL42hFW2+ZPWxcNRQUDcEA==
   dependencies:
     byline "^5.0.0"
     error-stack-parser "^2.0.2"
     iserror "^0.0.2"
     pump "^3.0.0"
-    request "^2.87.0"
     stack-generator "^2.0.3"
 
 "@csstools/convert-colors@^1.4.0":
