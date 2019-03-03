@@ -36,7 +36,8 @@ class Configurable
     :secret,
     :show_dummy_image,
     :storage_service,
-    :typekit_embed_token
+    :typekit_embed_token,
+    :postmark_api_token
   )
 
   attr_reader :environment
