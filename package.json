@@ -10,7 +10,9 @@
     "seedrandom": "^2.4.4",
     "sortablejs": "^1.8.3",
     "stimulus": "^1.1.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "babel-preset-minify": "^0.5.0",
+    "babel-loader": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -18,8 +20,6 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
-    "babel-preset-minify": "^0.5.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
