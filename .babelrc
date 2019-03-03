@@ -1,8 +1,5 @@
 {
   "presets": [
-    ["minify", {
-      "builtIns": false,
-    }],
     ["@babel/preset-env", {
       "modules": false,
       "targets": {
@@ -11,7 +8,13 @@
       "useBuiltIns": false
     }]
   ],
-
+  "env": {
+    "production": {
+      "presets": [
+        "minify"
+      ]
+    }
+  },
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-proposal-class-properties"]
