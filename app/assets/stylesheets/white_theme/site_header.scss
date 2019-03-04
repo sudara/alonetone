@@ -142,3 +142,9 @@ header#site_header {
     }
   }
 }
+
+#HW_frame_cont {
+  @media #{$mobile} {
+    max-width: 320px;
+  }
+}
