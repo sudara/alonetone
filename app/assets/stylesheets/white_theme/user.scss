@@ -145,19 +145,30 @@ main {
       #user_header {
         justify-content: space-between;
         display: flex;
+        flex-wrap: wrap;
         .user_name_and_follow {
           display: flex;
+          flex-wrap: wrap;
+          @media #{$mobile} {
+            flex: 1;
+            padding-left: 16px;
+            padding-right: 16px;
+          }
           h1.user_name {
             font-size: 28px;
             line-height: 1;
             margin-top: 0;
             margin-bottom: 0;
+            @media #{$mobile} {
+              width: 100%;
+              margin-bottom: 16px;
+            }
           }
           a.follow {
             display: flex;
-            align-self: flex-end;
-            position: relative;
-            top: 4px;
+            @media #{$mobile} {
+              width: 100%;
+            }
             &:hover {
               text-decoration: none;
             }
@@ -167,6 +178,10 @@ main {
               color: $samo-orange;
               margin-left: 24px;
               margin-right: 8px;
+              @media #{$mobile} {
+                margin-left: 0;
+              }
+  
               &:hover {
                 background-color: #fff;
               }
@@ -179,13 +194,12 @@ main {
             }
           }
         }
-
         .user_header_avatar {
           overflow: hidden;
           @include samo-shadow-and-radius();
           border: 1px solid #000;
-          position: relative;
-          top: 10px;
+          width: 48px;
+          height: 48px;
           img {
             display: block;
             width: 48px;
