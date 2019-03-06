@@ -3,7 +3,7 @@ module AssetsHelper
   def asset_cache_key(asset, favorite)
     [ asset.cache_key,
       logged_in? ? "user" : "guest",
-      favorite.nil? ? "false" : favorite.user_id,
+      favorite.nil? ? "no_fav" : 'favorite.user_id,'
       theme_name
     ].join('/')
   end
