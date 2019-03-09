@@ -1,11 +1,9 @@
 <div id="user_home">
   <div id="user_header_area">
     <div id="user_header">
-      <div class="user_name_and_location_and_follow">
-        <div class="user_name_and_location">
+      <div class="user_name_and_follow">
           <h1 class="user_name"><%= @user.name %></h1>
-        </div>
-        <% if logged_in? && current_user != @user %>
+          <% if logged_in? && current_user != @user %>
           <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
           data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
             <div class="follow_button">Follow</div>

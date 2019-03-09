@@ -122,7 +122,7 @@ export default function LargePlayAnimation() {
     ease:Power1.easeInOut
    },'-=1')
    .from(centerCircle, 1, {
-    scale:0,
+    scale:0.01,
     ease:Power1.easeInOut
    },'-=1')
    .to(outline, 1, {
@@ -182,7 +182,10 @@ export default function LargePlayAnimation() {
    mainTl.pause('setPlay')
   }
   this.showLoading = function(){
-   mainTl.play('showloading')
+    TweenLite.set(".dotty", { visibility: "visible" });
+    TweenLite.set(".pauseContainer", { visibility: "visible" });
+    TweenLite.set(".centerCircle", { visibility: "visible" });
+    mainTl.play('showloading')
   }
   this.showPause = function(){
    mainTl.play('showPause')

@@ -71,6 +71,7 @@ RSpec.configure do |config|
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
+  config.include RSpec::Support::CapybaraHelpers, type: :feature
 
   config.before(:suite) do
     Percy::Capybara.initialize_build
