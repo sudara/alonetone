@@ -32,7 +32,7 @@ module Greenfield
     def update
       @post = find_post
       @playlist = params[:post].delete('playlist_id')
-      if @post.update_attributes(post_params)
+      if @post.update(post_params)
         if @playlist
           redirect_to user_playlist_post_path(@post.user, @playlist, @post)
         else
