@@ -54,12 +54,12 @@
           <% end %>
         <% end %>
         <div class="edit_playlist_info_right_column_private_and_hidden">
-          <div class="input boolean optional playlist_private">
-            <input value="0" type="hidden" name="playlist[private]">
-            <input class="boolean optional" type="checkbox" value="1" checked="checked" name="playlist[private]" id="playlist_private">
-            <label class="boolean optional control-label checkbox" for="playlist_private"><span>Private</span></label>
-          </div>
+          <div class="input">
+            <%= f.check_box :private %>
+            <label for="playlist_private"><span>Private</span></label>
+          </div> 
           <span class="private_notice">| Playlists are hidden until they have more than 2 tracks</span>
+          
         </div>
     </div>
     <div class="edit_playlist_info_bottom">
