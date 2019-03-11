@@ -217,7 +217,7 @@ RSpec.describe AssetsController, type: :request do
       post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
       expect(enqueued_jobs.size).to eq 1
       expect(enqueued_jobs.first[:queue]).to eq "default"
-      expect(enqueued_jobs.first[:job]).to eq Greenfield::WaveformExtractJob
+      expect(enqueued_jobs.first[:job]).to eq WaveformExtractJob
     end
 
     # in order to test that job gets kicked off on mass_edit
