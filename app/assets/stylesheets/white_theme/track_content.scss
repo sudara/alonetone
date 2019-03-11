@@ -99,7 +99,7 @@
         text-align: center;
         color: $new-samo-gray;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
       }
       .favorite_total {
         font-size: 12px;
@@ -108,7 +108,7 @@
         text-align: center;
         color: $new-samo-gray;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
       }
       i {
         margin-left: 8px;
@@ -153,6 +153,7 @@
     header {
       input {
         font-family: $black-font;
+        font-weight: normal;
         font-size: 24px;
         box-sizing: border-box;
         width: 100%;

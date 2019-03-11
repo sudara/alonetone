@@ -19,7 +19,7 @@
           </div>
 
           <div class="vcard_image_container">
-            <%= image_tag post.user.avatar(:small) %>
+            <%= user_image(post.user, variant: :small) %>
           </div>
 
           <span class="posts"><%= link_to (pluralize post.user.posts.size, 'post'),user_posts_path(post.user.login) %></span>

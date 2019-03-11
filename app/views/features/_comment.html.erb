@@ -3,9 +3,9 @@
     <%= form_for @comment, id: "comment_form_#{object.unique_id}" do |f| %>
      <div class="comment_as">
      <% if logged_in? %>
-        <%= image_tag current_user.avatar(:tiny) %>Say something, <%= current_user.name %>:
+       <%= user_image(current_user, variant: :tiny)%>Say something, <%= current_user.name %>:
      <% else %>
-        <%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path %>:
+       <%= image_tag 'icons/user.png' %> Say something as a guest or <%= link_to 'login', login_path %>:
      <% end %>
      </div>
      <%= f.text_area :body, rows: 4, cols: 40, class: 'double_trouble', id: "comment_body_#{object.unique_id}"  %>

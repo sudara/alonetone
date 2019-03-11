@@ -17,7 +17,7 @@
     color: $samo-orange;
     margin-bottom: 16px;
     margin-top: 0px;
-    line-height: 1em;
+    line-height: 1;
   }
   .comments_area {
     margin-bottom: 0;
@@ -273,7 +273,7 @@
       }
     }
     .comment_body {
-      overflow: auto;
+      overflow: hidden;
       i {
         float: left;
         margin-right: 8px;

@@ -8,7 +8,7 @@ class Asset
 
     begin
       mp3.copy_to_local_file(:original, tmp.path)
-      create_audio_feature!(waveform: Greenfield::Waveform.extract(tmp.path))
+      create_audio_feature!(waveform: Waveform.extract(tmp.path))
     ensure
       tmp.close!
     end

@@ -156,4 +156,7 @@ class ApplicationController < ActionController::Base
   def latest_forum_topics
     Thredded::TopicPolicy::Scope.new(current_user || Thredded::NullUser.new, Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).limit(4))
   end
+
+  delegate :greenfield_hostname, to: 'Rails.configuration.alonetone'
+  helper_method :greenfield_hostname
 end

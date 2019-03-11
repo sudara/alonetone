@@ -31,7 +31,7 @@
     <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
       <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
         <span><%= truncate current_user.name, length: 24 %></span>
-        <%= image_tag(current_user.avatar(:small)) %>
+        <%= user_image(current_user, variant: :small) %>
       <% end %>
 
       <div class="user_dropdown_menu" data-target="user-dropdown.menu">
