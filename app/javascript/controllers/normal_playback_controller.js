@@ -24,6 +24,7 @@ export default class extends PlaybackController {
   }
 
   playCallback() {
+    this.showAnimation()
     if (!this.loaded) this.animateLoading()
     else animation.setPause()
     this.openDetails()
@@ -37,7 +38,7 @@ export default class extends PlaybackController {
     this.playButtonTarget.style.display = 'block'
   }
 
-  toggleDetails(e) {    
+  toggleDetails(e) {
     if (!e.target.classList.contains('artist') ) {
       // if the link in the track top is the artist link, go to that URL,
       // otherwise open the track reveal section
@@ -69,9 +70,12 @@ export default class extends PlaybackController {
     this.element.classList.add('open')
   }
 
-  animateLoading() {
+  showAnimation() {
     this.playButtonTarget.style.display = 'none'
     this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
+  }
+
+  animateLoading() {
     animation.init()
     animation.setPlay()
     animation.showLoading()

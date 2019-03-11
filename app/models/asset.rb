@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Asset < ActiveRecord::Base
+class Asset < ApplicationRecord
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
@@ -35,7 +35,6 @@ class Asset < ActiveRecord::Base
 
   has_permalink :name, true
   before_update :generate_permalink!, if: :title_changed?
-  after_create :notify_followers, if: :published?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
@@ -141,7 +140,7 @@ class Asset < ActiveRecord::Base
 
   # needed for spam detection
   def full_permalink
-    "https://#{Alonetone.url}/#{user.login}/tracks/#{permalink}"
+    "https://#{hostname}/#{user.login}/tracks/#{permalink}"
   end
 
   def to_param
@@ -150,12 +149,12 @@ class Asset < ActiveRecord::Base
 
   def notify_followers
     user.followers.select(&:wants_email?).each do |user|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(id, user.id)
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user.id)
     end
   end
 
   def create_waveform
-    Greenfield::WaveformExtractJob.perform_later(id)
+    WaveformExtractJob.perform_later(id)
   end
 
   def role

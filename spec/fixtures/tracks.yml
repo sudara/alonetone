@@ -78,3 +78,11 @@ henri_willig_polderkaas_2:
   asset: henri_willig_the_goat
   position: 2
   created_at: <%= 3.months.ago %>
+
+# Bill's favorites.
+william_shatners_favorites_1:
+  playlist: william_shatners_favorites
+  user: william_shatner
+  asset: henri_willig_finest_cheese
+  position: 1
+  created_at: <%= 2.days.ago %>

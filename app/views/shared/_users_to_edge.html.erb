@@ -1,5 +1,5 @@
 <% users.each do |user| %>
   <%= div_for(user, class: 'edge_to_edge_small') do %>
-    <%= user_image_link(user, :large)%>
+    <%= user_image_link(user, variant: :large)%>
   <% end %>
 <% end %>

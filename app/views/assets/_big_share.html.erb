@@ -7,7 +7,7 @@
         <%= text_field_tag "link_#{@asset.unique_id}", user_track_url(@asset.user, @asset.permalink, format: :mp3), size: 40, class: 'tabbed_input' %>
         <% if current_user.try(:greenfield_enabled?) && @asset.user.greenfield_enabled? && @asset.greenfield_post.present? %>
         <br/>greenfield:<br/>
-        <%= text_field_tag "link_#{@asset.unique_id}", greenfield.user_post_url(@asset.user, @asset.permalink, host: Alonetone.greenfield_url), size: 40, class: 'tabbed_input' %>
+        <%= text_field_tag "link_#{@asset.unique_id}", greenfield.user_post_url(@asset.user, @asset.permalink, host: greenfield_hostname), size: 40, class: 'tabbed_input' %>
         <% end %>
     </div>
 

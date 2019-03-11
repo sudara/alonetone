@@ -8,7 +8,7 @@
     </div>
     <div class="details clearfix">
         <div class="pic">
-            <%= link_to(image_tag(feature.featured_user.avatar(:large), alt: "featured alonetone artist: #{feature.featured_user.name}"), feature_path(feature.featured_user.login), title: "#{feature.featured_user.name} on alonetone") %>
+            <%= link_to(user_image(feature.featured_user, variant: :large), alt: "featured alonetone artist: #{feature.featured_user.name}"), feature_path(feature.featured_user.login), title: "#{feature.featured_user.name} on alonetone") %>
         </div>
         <div class="feature_teaser">
            <%= feature.teaser_text %>

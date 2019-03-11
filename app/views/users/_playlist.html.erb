@@ -1,6 +1,6 @@
 <div class='playlist_cover_and_title'>
   <div class="scriptaculous">
-	<%= link_to(image_tag(playlist.cover(:large), user_playlist_path(@user.login, playlist), class: 'cover_125') %>
+	<%= link_to(image_tag(playlist_cover_url(playlist, variant: :large), user_playlist_path(@user.login, playlist), class: 'cover_125') %>
 	<div class="small_playlist">
 		<%= link_to playlist.title, edit_or_show(@user.login, playlist)  %>
 	</div>
