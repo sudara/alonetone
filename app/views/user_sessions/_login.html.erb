@@ -1,15 +1,24 @@
-<%= simple_form_for @user_session do |f| %>
-  <%= f.input :login %><br>
-  <%= f.input :password %>
-  <%= f.button :submit, "Come on in...", data: { turbolinks: "false" } %>
+<%= form_with model: @user_session, local: true do |f| %>
+  <%= f.label :login %>
+  <%= f.text_field :login %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <div>
+    <%= f.submit "Come on in...", data: { turbolinks: "false" } %>
+  </div>
 <% end %>
 
 <p>
   <%= link_to "Forgot Your Password?", "#reset-password", class: "slide_open_href" %>
 </p>
 
-<%= form_tag password_resets_path, id: 'reset-password', style: 'display:none' do |f| %>
-    <label for="email"><%= 'Enter the email address you signed up with' %></label><br>
-    <%= text_field 'email','' %>
-    <%= submit_tag 'Send Me An Email so I can login again!'%>
+<%= form_with url: password_resets_path, id: 'reset-password', style: 'display:none' do |f| %>
+  <label for="email">Enter the email address you signed up with</label>
+
+  <%= f.text_field 'email' %>
+  <div>
+    <%= f.submit 'Send Me An Email so I can login again!'%>
+  </div>
 <% end %>

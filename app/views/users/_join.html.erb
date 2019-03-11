@@ -3,13 +3,23 @@
 <h2 class="box static_content_heading">Join alonetone</h2>
 
 <div id="signup" class="static_content box">
-	<%= simple_form_for(@user) do |f| -%>
+	<%= form_with model: @user, local: true do |f| %>
     <%= invisible_captcha :name, :user %>
-    <%= f.input :login, hint: "(Letters and numbers only)" %>
-    <%= f.input :email, hint: "(we will send you an activation email)" %>
-    <%= f.input :password, hint: "(pick a nice password)"%>
-    <%= f.input :password_confirmation, hint: "(enter it once again)" %>
-    <%= f.button :submit, "Join Alonetone" %>
+    <%= f.label :login, "Pick a login and alonetone address" %>
+    alonetone.com/<%= f.text_field :login, placeholder: 'yournamehere' %>
+
+    <%= f.label :email, "Email Address (needed to activate)" %>
+    <%= f.email_field :email, hint: "(we will send you an activation email)" %>
+
+    <%= f.label :password, "Pick a nice password" %>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation, "Enter it again"%>
+    <%= f.password_field :password_confirmation %>
+
+    <div>
+      <%= f.submit "Join Alonetone", data: { turbolinks: "false" } %>
+    </div>
 	<% end %>
 </div>
 </div>
