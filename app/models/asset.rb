@@ -154,7 +154,7 @@ class Asset < ApplicationRecord
   end
 
   def create_waveform
-    Greenfield::WaveformExtractJob.perform_later(id)
+    WaveformExtractJob.perform_later(id)
   end
 
   def role
