@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :settings, :statistics
+  concerned_with :findability, :settings, :statistics
+
+  validates_length_of :display_name, within: 3..50, allow_blank: true
 
   validates :email,
     format: {
@@ -14,7 +16,7 @@ class User < ActiveRecord::Base
 
   validates :login,
     format: {
-      with: /[\A\w\+\z]/,
+      with: /\A\w+\z/,
       message: "should use only letters and numbers."
     },
     length: { within: 3..100 },
@@ -55,6 +57,7 @@ class User < ActiveRecord::Base
   # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
   before_destroy :efficiently_destroy_relations
+  before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
   # Can create music
@@ -110,6 +113,23 @@ class User < ActiveRecord::Base
 
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
+
+  # tokens and activation
+  def clear_token!
+    update_attribute(:perishable_token, nil)
+  end
+
+  def active?
+    perishable_token.nil?
+  end
+
+  def activate!
+    !active? ? clear_token! : false
+  end
+
+  def self.find_by_login_or_email(login)
+    User.find_by_login(login) || User.find_by_email(login)
+  end
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
