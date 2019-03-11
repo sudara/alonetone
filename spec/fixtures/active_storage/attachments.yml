@@ -1,73 +1,80 @@
 # Attachments for all asset fixtures
 valid_mp3_original:
-  name: original
+  name: audio_file
   record: valid_mp3 (Asset)
   blob: valid_mp3_original
   created_at: <%= 10.years.ago %>
 valid_zip_original:
-  name: original
+  name: audio_file
   record: valid_zip (Asset)
   blob: valid_zip_original
   created_at: 2007-04-08 13:00:03
 invalid_file_original:
-  name: original
+  name: audio_file
   record: invalid_file (Asset)
   blob: invalid_file_original
   created_at: <%= 1.day.ago.to_s :db %>
 valid_arthur_mp3_original:
-  name: original
+  name: audio_file
   record: valid_arthur_mp3 (Asset)
   blob: valid_arthur_mp3_original
   created_at: 2007-04-08 13:00:03
 too_big_file_original:
-  name: original
+  name: audio_file
   record: too_big_file (Asset)
   blob: too_big_file_original
   created_at: 2007-04-08 13:00:03
 valid_mp3_2_original:
-  name: original
+  name: audio_file
   record: valid_mp3_2 (Asset)
   blob: valid_mp3_2_original
   created_at: 2007-04-08 13:00:03
 private_track_original:
-  name: original
+  name: audio_file
   record: private_track (Asset)
   blob: private_track_original
   created_at: 2007-04-08 13:00:03
 spam_track_original:
-  name: original
+  name: audio_file
   record: spam_track (Asset)
   blob: spam_track_original
   created_at: 2007-04-08 13:00:03
 
 will_studd_rockfort_combalou_original:
-  name: original
+  name: audio_file
   record: will_studd_rockfort_combalou (Asset)
   blob: will_studd_rockfort_combalou_original
   created_at: <%= 3.months.ago %>
 will_studd_rockfort_white_wild_tangy_original:
-  name: original
+  name: audio_file
   record: will_studd_rockfort_white_wild_tangy (Asset)
   blob: will_studd_rockfort_white_wild_tangy_original
   created_at: <%= 3.months.ago %>
 will_studd_magnificent_lacaune_original:
-  name: original
+  name: audio_file
   record: will_studd_magnificent_lacaune (Asset)
   blob: will_studd_magnificent_lacaune_original
   created_at: <%= 3.months.ago %>
 will_studd_appellation_controlee_original:
-  name: original
+  name: audio_file
   record: will_studd_appellation_controlee (Asset)
   blob: will_studd_appellation_controlee_original
   created_at: <%= 2.months.ago %>
 
 henri_willig_finest_cheese_original:
-  name: original
+  name: audio_file
   record: henri_willig_finest_cheese (Asset)
   blob: henri_willig_finest_cheese_original
   created_at: <%= 1.month.ago %>
 henri_willig_the_goat_original:
-  name: original
+  name: audio_file
   record: henri_willig_the_goat (Asset)
   blob: henri_willig_the_goat_original
   created_at: <%= 1.month.ago %>
+
+# Attachments for all playlist fixtures.
+will_studd_rockfort_cover:
+  name: cover_image
+  record: will_studd_rockfort (Playlist)
+  blob: will_studd_rockfort_cover
+  created_at: <%= 2.months.ago %>
