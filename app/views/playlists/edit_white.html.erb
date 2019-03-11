@@ -20,30 +20,30 @@
       <%= form_with model: [@user, @playlist], html: { class: 'edit_playlist_info_right_column', id: 'edit_playlist' } do |f| %>
         <div class="edit_playlist_info_right_column_title_and_year">
           <div>
-            <label for="">Title</label>
+            <label for="playlist_title">Title</label>
             <%= f.text_field :title %>
           </div>
           <div>
-            <label for="">Year</label>
+            <label for="playlist_year">Year</label>
               <%= f.text_field :year, input_html: {maxlength: 4, size: 4} %>
           </div>
 
         </div>
         <div class="edit_playlist_info_right_column_links">
           <div>
-            <label for="">Link 1</label>
+            <label for="playlist_link1">Link 1</label>
             <%= f.text_field :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
           </div>
 
           <div>
-            <label for="">Link 2</label>
+            <label for="playlist_link2">Link 2</label>
             <%= f.text_field :link2, placeholder: 'another link' %>
           </div>
         </div>
 
         <div class="edit_playlist_info_right_column_credits">
           <div class="input">
-            <label for="">Credits</label>
+            <label for="playlist_credits">Credits</label>
             <%= f.text_area :credits %>
           </div>
         </div>
