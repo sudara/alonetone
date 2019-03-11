@@ -33,7 +33,6 @@ gem 'request_store' # for authlogic
 gem 'redcarpet'
 gem 'country_select'
 gem 'dynamic_form'
-gem 'simple_form'
 gem 'local_time'
 gem 'pagy'
 
