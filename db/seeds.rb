@@ -59,13 +59,13 @@ instrument_of_accession = marie.assets.create!(
   mp3: muppet_upload,
   title: 'Commonly Blue-grey',
   description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.',
-  waveform: Greenfield::Waveform.extract(muppet_upload.path)
+  waveform: Waveform.extract(muppet_upload.path)
 )
 tropical_semi_evergreen = marie.assets.create!(
   mp3: muppet_upload,
   title: 'Aqueous Suspension',
   description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.',
-  waveform: Greenfield::Waveform.extract(muppet_upload.path)
+  waveform: Waveform.extract(muppet_upload.path)
 )
 
 # Add the assets to a playlist.
