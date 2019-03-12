@@ -1,0 +1,6 @@
+en:
+  errors:
+    messages:
+      byte_size_too_small: must be greater than %{greater_than_human_size}
+      byte_size_too_large: must be less than %{less_than_human_size}
+      invalid_content_type: does not look the right file type
