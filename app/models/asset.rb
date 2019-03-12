@@ -45,7 +45,7 @@ class Asset < ApplicationRecord
                   user_role: proc { role },
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
-  validates_presence_of :user_id
+  validates :user, presence: true
 
   def self.latest(limit = 10)
     includes(user: :pic).limit(limit).order('assets.id DESC')
