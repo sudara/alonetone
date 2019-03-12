@@ -79,6 +79,10 @@ class AssetsController < ApplicationController
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
+    if !logged_in? && %w(those_you_follow songs_you_have_not_heard mangoz_shuffle).include?(params[:source])
+      flash[:error] = "Sorry. Page you've been looking for is not found."
+      raise ActionController::RoutingError, 'Page Not Found'
+    end
     @page_title = "alonetone Radio: #{@channel}"
     @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
     render 'radio_white' if white_theme_enabled?
@@ -124,6 +128,11 @@ class AssetsController < ApplicationController
     end
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
+
+    @user.followers.select(&:wants_email?).each do |follower|
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
+    end
+
     render 'mass_edit_white' if white_theme_enabled?
   end
 
@@ -146,6 +155,7 @@ class AssetsController < ApplicationController
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
       end
     end
+
     if @playlist
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
@@ -209,7 +219,7 @@ class AssetsController < ApplicationController
     session[:white_theme_notified] ||= 1
     session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
     flash.now[:ok] = "#{current_user.name}: missing something on white theme? Let us know " \
-                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>on the forums</a>".html_safe
+                     "<a href='/discuss/white-theme'>on the forums</a>".html_safe
   end
 
   def asset_params

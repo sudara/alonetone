@@ -2,11 +2,12 @@
   <div class="comment_form">
     <%= form_for update.comments.build, id: "comment_form_#{update.id}" do |f| %>
      <div class="comment_as">
-     <% if logged_in? %>
-        <%= image_tag current_user.pic.pic(:small) %>Say something, <%= current_user.name %>:
-     <% else %>
-        <%= image_tag 'default/no-pic_white.svg' %> Say something as a guest or <%= link_to 'login', login_path %>:
-     <% end %>
+       <%= user_image(current_user, variant: :small) -%>
+       <% if logged_in? -%>
+         Say something, <%= current_user.name %>:
+       <% else -%>
+         Say something as a guest or <%= link_to 'login', login_path %>:
+       <% end -%>
      </div>
      <%= f.text_area :body, rows:  4, cols:  60, class: 'double_trouble', id: "comment_body_#{update.id}"  %>
      <%= f.hidden_field :commentable_type, value:  'update', id: "comment_commentable_type_#{update.id}"%>

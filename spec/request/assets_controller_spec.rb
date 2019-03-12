@@ -82,8 +82,10 @@ RSpec.describe AssetsController, type: :request do
     it 'should accept a mp3 extension and redirect to the amazon url' do
       agent = GOOD_USER_AGENTS.first
       get user_track_path('sudara', 'song1', format: :mp3), headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
-      # expect(response).to redirect_to(assets(:valid_mp3).mp3.url) # on s3, we get a redirect
-      expect(response.response_code).to eq(200) # in test mode, we get a file
+
+      expect(response.status).to eq(302)
+      expect(response.location).to start_with('http')
+      expect(response.location).to end_with('original/Song1.mp3')
     end
 
     GOOD_USER_AGENTS.each do |agent|
@@ -209,11 +211,27 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
     end
 
-    it "should email followers and generate waveform via queue" do
+    # this action is performed as an after_create callback
+    it "should generate waveform via queue" do
       users(:sudara).add_or_remove_followee(users(:arthur).id)
       post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+      expect(enqueued_jobs.size).to eq 1
+      expect(enqueued_jobs.first[:queue]).to eq "default"
+      expect(enqueued_jobs.first[:job]).to eq WaveformExtractJob
+    end
+
+    # in order to test that job gets kicked off on mass_edit
+    # hit it directly
+    it "should send an email to followers" do
+      # add two followers
+      # to test that ActionMailer sends multiple emails
+      users(:sudara).add_or_remove_followee(users(:arthur).id)
+      users(:aaron).add_or_remove_followee(users(:arthur).id)
+      # binding.pry
+      get mass_edit_user_tracks_path(users(:arthur), assets: users(:arthur).assets.collect(&:id))
       expect(enqueued_jobs.size).to eq 2
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
+      expect(enqueued_jobs.last[:job]).to eq AssetNotificationJob
     end
 
     it 'should successfully upload 2 mp3s' do

@@ -1,5 +1,42 @@
 class User < ActiveRecord::Base
-  concerned_with :validation, :findability, :settings, :statistics
+  concerned_with :findability, :settings, :statistics
+
+  validates_length_of :display_name, within: 3..50, allow_blank: true
+
+  validates :email,
+    format: {
+      with: URI::MailTo::EMAIL_REGEXP,
+      message: "should look like an email address."
+    },
+    length: { maximum: 100 },
+    uniqueness: {
+      case_sensitive: false,
+      if: :will_save_change_to_email?
+    }
+
+  validates :login,
+    format: {
+      with: /\A\w+\z/,
+      message: "should use only letters and numbers."
+    },
+    length: { within: 3..100 },
+    uniqueness: {
+      case_sensitive: false,
+      if: :will_save_change_to_login?
+    }
+
+  validates :password,
+    confirmation: { if: :require_password? },
+    length: {
+      minimum: 8,
+      if: :require_password?
+    }
+
+  validates :password_confirmation,
+    length: {
+      minimum: 8,
+      if: :require_password?
+    }
 
   store :settings
 
@@ -20,6 +57,7 @@ class User < ActiveRecord::Base
   # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
   before_destroy :efficiently_destroy_relations
+  before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
   # Can create music
@@ -80,6 +118,23 @@ class User < ActiveRecord::Base
   rakismet_attrs  author: proc { display_name },
                   author_email: proc { email },
                   user_ip: proc { current_login_ip }
+
+  # tokens and activation
+  def clear_token!
+    update_attribute(:perishable_token, nil)
+  end
+
+  def active?
+    perishable_token.nil?
+  end
+
+  def activate!
+    !active? ? clear_token! : false
+  end
+
+  def self.find_by_login_or_email(login)
+    User.find_by_login(login) || User.find_by_email(login)
+  end
 
   def listened_to_today_ids
     listens.select('listens.asset_id').where(['listens.created_at > ?', 1.day.ago]).pluck(:asset_id)
@@ -157,6 +212,18 @@ class User < ActiveRecord::Base
 
   def brand_new?
     created_at > 24.hours.ago
+  end
+
+  # Returns true when the user has a usable avatar.
+  def avatar_image_present?
+    pic.present? && pic.image_present?
+  end
+
+  # Generates a URL to user's avater with the requested variant. Returns nil when the user does
+  # not have a usable avatar.
+  def avatar_url(variant:)
+    ImageVariant.verify(variant)
+    pic&.url(variant: variant)
   end
 
   protected

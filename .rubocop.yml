@@ -50,7 +50,7 @@ Lint/ShadowingOuterLocalVariable:
 Lint/ParenthesesAsGroupedExpression:
   Enabled: false
 
-Lint/EndAlignment:
+Layout/EndAlignment:
   Enabled: false
 
 Lint/HandleExceptions:
@@ -126,7 +126,7 @@ Style/HashSyntax:
 Layout/AlignArray:
   Enabled: false
 
-Lint/BlockAlignment:
+Layout/BlockAlignment:
   Enabled: false
 
 Style/ConditionalAssignment:
@@ -150,7 +150,7 @@ Naming/VariableNumber:
 Naming/MemoizedInstanceVariableName:
   Enabled: false
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'

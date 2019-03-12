@@ -1,6 +1,6 @@
 <div class="playlist-sidebar">
 
-  <%= link_to playlist_cover(@playlist, :original), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
+  <%= link_to playlist_cover(@playlist, variant: :original), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
   <h1 class="<%= 'cover' unless @asset %>">
     <%= @playlist.title %>
   </h1>

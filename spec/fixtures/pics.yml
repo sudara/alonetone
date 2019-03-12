@@ -1,0 +1,29 @@
+# Avatar image for Sudara.
+sudara_avatar:
+  picable: sudara (User)
+  pic_content_type: image/jpeg
+  pic_file_name: Copy of Original Untitled 2.jpg
+  pic_file_size: 82736
+  created_at: <%= 2.years.ago %>
+  updated_at: <%= 2.years.ago %>
+
+# Avatar image for Aaron that doesn't actually point to a file.
+orphan:
+  picable: aaron (User)
+  created_at: <%= 2.years.ago %>
+  updated_at: <%= 2.years.ago %>
+
+# Cover for the Rockfort album
+will_studd_rockfort_cover:
+  picable: will_studd_rockfort (Playlist)
+  pic_content_type: image/jpeg
+  pic_file_name: d0e3ba4a-72d9-4039-a236-5b784a2e722f.jpg
+  pic_file_size: 345544
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.month.ago %>
+
+# Cover for the Polderkaas album that doesn't actually point to a file.
+henri_willig_polderkaas_cover:
+  picable: henri_willig_polderkaas (Playlist)
+  created_at: <%= 2.months.ago %>
+  updated_at: <%= 3.months.ago %>

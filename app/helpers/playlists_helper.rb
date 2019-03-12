@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PlaylistsHelper
   def title_and_year_for(playlist)
     title = playlist.title.to_s
@@ -6,25 +8,81 @@ module PlaylistsHelper
   end
 
   def allow_greenfield_playlist_downloads?(user)
-    user.greenfield_enabled? && Alonetone.storage.s3?
+    user.greenfield_enabled? && Rails.application.remote_storage?
   end
 
-  def svg_cover
-    "<div class='no_pic'></div>".html_safe
+  # DIV element which is ‘filled’ by the JavaScript with a a generated pattern based on the
+  # playlist title.
+  def playlist_cover_div
+    content_tag(:div, '', class: 'no_pic')
   end
 
-  def playlist_cover(playlist, size)
-    if Alonetone.try(:show_dummy_pics) || playlist.has_no_cover?
-      return svg_cover
-    # greenfield size did not exist before this id
-    elsif (size == :greenfield) && ((playlist.pic.id > 69806) && (playlist.pic.id < 72848))
-      size = :original
-    elsif ((size == :greenfield) || (size == :original)) && (playlist.pic.id < 69807)
-      size = :album
-      @old_cover_alert = true
+  # Returns true when the Pic with this ID does not have a greenfield variant.
+  def no_greenfield_variant?(pic_id)
+    (69806..72848).cover?(pic_id)
+  end
+
+  # Returns true when the Pic with this ID does not have a greenfield nor an original variant.
+  def no_greenfield_and_original_variant?(pic_id)
+    pic_id < 69807
+  end
+
+  # Returns a different variant when the Pic with the supplied ID does not have the variant.
+  def downgrade_variant(pic_id, variant:)
+    if no_greenfield_and_original_variant?(pic_id)
+      downgrade_ancient_variant(variant: variant)
+    elsif no_greenfield_variant?(pic_id)
+      downgrade_old_variant(variant: variant)
+    else
+      variant
     end
+  end
 
-    image_tag playlist.cover(size)
+  # Returns a URL to the playlist's cover or nil when there is no cover.
+  def playlist_cover_url(playlist, variant:)
+    if playlist.cover_image_present?
+      variant = downgrade_variant(playlist.pic.id, variant: variant)
+      playlist.cover_url(variant: variant)
+    end
+  end
+
+  # Returns an <img> tag with the cover for the playlist. Breaks when the playlist does not have
+  # a cover.
+  def playlist_cover_image(playlist, variant:)
+    image_tag(
+      playlist_cover_url(playlist, variant: variant),
+      alt: 'Playlist cover'
+    )
+  end
+
+  # Returns an <img> tag when the playlist has a cover or a <div> to be filled by JavaScript when
+  # playlist has no cover or show_dummy_image is enabled.
+  def playlist_cover(playlist, variant:)
+    if Rails.application.show_dummy_image? || !playlist.cover_image_present?
+      playlist_cover_div
+    else
+      playlist_cover_image(playlist, variant: variant)
+    end
+  end
+
+  # @deprecated Returns default cover image URL for dark theme.
+  def dark_default_cover_url(variant:)
+    path = case variant
+           when :small then 'default/no-cover-50.jpg'
+           when :large then 'default/no-cover-125.jpg'
+           when :album then 'default/no-cover-200.jpg'
+           else 'default/no-cover-200.jpg'
+    end
+    image_url(path)
+  end
+
+  # @deprecated Returns a URL to the playlist's cover or a default image when there is no cover.
+  def dark_playlist_cover_url(playlist, variant:)
+    if Rails.application.show_dummy_image? || !playlist.cover_image_present?
+      dark_default_cover_url(variant: variant)
+    else
+      playlist_cover_url(playlist, variant: variant)
+    end
   end
 
   def greenfield_upload_form(user, playlist)
@@ -64,5 +122,15 @@ module PlaylistsHelper
       '<i class="fa fa-link"></i>Website<span class="action-text">Visit</span>'
     end.html_safe
     link_to(text, link, class: service).html_safe
+  end
+
+  private
+
+  def downgrade_ancient_variant(variant:)
+    %i[greenfield original].include?(variant) ? :album : variant
+  end
+
+  def downgrade_old_variant(variant:)
+    variant == :greenfield ? :original : variant
   end
 end

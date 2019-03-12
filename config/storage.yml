@@ -1,0 +1,12 @@
+temporary:
+  service: Disk
+  root: <%= File.join(Dir.tmpdir, 'alonetone') %>
+filesystem:
+  service: Disk
+  root: <%= Rails.root.join('storage') %>
+s3:
+  service: S3
+  access_key_id: <%= Rails.configuration.alonetone.amazon_access_key_id %>
+  secret_access_key: <%= Rails.configuration.alonetone.amazon_secret_access_key %>
+  region: <%= Rails.configuration.alonetone.amazon_s3_region %>
+  bucket: <%= Rails.configuration.alonetone.amazon_s3_bucket_name %>
