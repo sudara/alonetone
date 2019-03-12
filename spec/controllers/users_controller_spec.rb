@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-
   context "index" do
     it "should only show active and non spam users" do
       users(:arthur).update_attributes(is_spam: true)
@@ -40,6 +39,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context 'creating' do
+    before :each do
+      akismet_stub_response_ham
+    end
+
     it "should successfully post to users/create" do
       set_good_request_headers && create_user
       expect(response).to redirect_to("/login?already_joined=true")
@@ -85,6 +88,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should require password on signup" do
+      akismet_stub_response_ham
       set_good_request_headers
       create_user password: nil
       expect(response).to_not be_redirect
@@ -107,6 +111,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context 'activation' do
+    before :each do
+      akismet_stub_response_ham
+    end
+
     it "should activate with a for reals perishable token" do
       set_good_request_headers && activate_authlogic && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
