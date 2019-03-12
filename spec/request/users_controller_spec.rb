@@ -39,6 +39,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     it "should create a user and redirect" do
+      akismet_stub_response_ham
       post "/users", params: params
 
       expect(response.status).to eq(302)
@@ -46,10 +47,26 @@ RSpec.describe UsersController, type: :request do
     end
 
     it "should raise an error if user is invalid" do
+      akismet_stub_response_ham
       post "/users", params: { user: { login: 'bar', password: 'foo' } }
 
       expect(flash[:error]).to be_present
       expect(response).to render_template("users/new")
+    end
+
+    it "should raise an error if user fails Akismet check" do
+      akismet_stub_response_spam
+      post "/users", params: { user: { login: 'bar', password: 'foo' } }
+
+      expect(flash[:error]).to be_present
+      expect(response).to render_template("users/new")
+    end
+
+    it "should mark user as spam if Akismet check fails" do
+      akismet_stub_response_spam
+      post "/users", params: { user: { login: 'bar', password: 'foo' } }
+
+      expect(User.last.is_spam?).to eq(true)
     end
   end
 end
