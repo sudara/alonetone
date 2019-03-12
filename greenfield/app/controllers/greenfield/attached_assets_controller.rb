@@ -35,7 +35,7 @@ module Greenfield
 
     def extract_waveform
       param = params[:attached_asset]
-      param[:waveform] = Greenfield::Waveform.extract(param[:mp3].path)
+      param[:waveform] = Waveform.extract(param[:mp3].path)
     end
   end
 end

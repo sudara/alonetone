@@ -104,3 +104,17 @@ henri_willig:
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
   created_at: <%= 6.months.ago %>
   updated_at: <%= 6.months.ago %>
+
+# William Shatner is a cheese enthousiast. He's also the last person in the world to use the old
+# theme.
+william_shatner:
+  login: william-shatner
+  display_name: Captain Bill
+  email: williamshatner@example.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  playlists_count: 0
+  assets_count: 0
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  use_old_theme: true
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.month.ago %>

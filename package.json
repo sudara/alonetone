@@ -1,31 +1,31 @@
 {
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.3.1",
-    "@bugsnag/js": "^5.2.0",
+    "@babel/preset-env": "^7.3.4",
+    "@bugsnag/js": "^6.0.0",
     "@rails/webpacker": "^4.0.0-rc.7",
-    "@shopify/draggable": "^1.0.0-beta.7",
     "babel-loader": "^8.0.5",
     "babel-preset-minify": "^0.5.0",
-    "gsap": "^2.0",
+    "gsap": "^2.1.2",
     "howler": "https://github.com/goldfire/howler.js.git",
     "local-time": "^2.1.0",
-    "rails-erb-loader": "^5.5.1",
+    "rails-erb-loader": "^5.5.2",
     "rails-ujs": "^5.2.2",
     "seedrandom": "^2.4.4",
+    "sortablejs": "^1.8.3",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.12.1",
+    "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-bundle-analyzer": "^3.0.4",
+    "webpack-dev-server": "^3.2.1"
   }
 }

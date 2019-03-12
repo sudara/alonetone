@@ -16,7 +16,7 @@ xml.rss "version" => "2.0",
         xml.title "#{@user.name} on alonetone"
         xml.author "#{@user.name}"
         xml.link user_home_url(@user)
-        xml.description "#{image_tag(@user.avatar(:large))}
+        xml.description "#{user_image(@user, variant: :large)}
           <br/>#{@user.name} 
           #{ @user.printable_bio if @user.bio }
           #{(@user.assets_count > 0) ? ('has '+ pluralize(@user.assets_count.to_s, 'track') + ' on alonetone <br/>') : ''}<br/>

@@ -1,24 +1,38 @@
-class AssetNotification < ActionMailer::Base
-  default from: Alonetone.email
-
-  def upload_notification(asset, email, _sent_at = Time.now)
-    @track = asset.name
-    @description = asset.description
-    @name = asset.user.name
-    @user = asset.user
-    @title = asset.title.present? ? asset.title : "new track"
+class AssetNotification < ApplicationMailer
+  def upload_notification(asset, follower_email, _sent_at = Time.now)
+    @artist = asset.user
+    @track = asset
     @play_link = play_link_for(asset)
-    @user_link = user_link_for(asset)
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
-    mail subject: "[alonetone] '#{asset.user.name}' uploaded a new track!", to: email
+    mail subject: "[alonetone] '#{@artist.name}' uploaded a new track!", to: follower_email
+  end
+
+  def upload_mass_notification(assets, follower_email, _sent_at = Time.now)
+    @artist = assets.first.user
+    @assets = generate_asset_hash(assets)
+    @stop_following_link = stop_following_link
+    @unsubscribe_link = unsubscribe_link
+    @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
+    @upload_user_url = user_link_for(assets.first)
+    mail subject: "[alonetone] '#{@artist.name}' uploaded new tracks!", to: follower_email
   end
 
   protected
 
+  # I'm sure there is some fancy shmancy way to do the same thing
+  # but I can't think of it right now.
+  def generate_asset_hash(assets)
+    assets_array = []
+    assets.each do |asset|
+      assets_array << { title: asset.title, play_link: play_link_for(asset) } if asset.title
+    end
+    assets_array
+  end
+
   def user_link_for(asset)
-    'https://' + Alonetone.url + '/' + asset.user.login
+    'https://' + hostname + '/' + asset.user.login
   end
 
   def play_link_for(asset)
@@ -26,10 +40,10 @@ class AssetNotification < ActionMailer::Base
   end
 
   def stop_following_link
-    'https://' + Alonetone.url + '/unfollow/' + @user.login
+    'https://' + hostname + '/unfollow/' + @artist.login
   end
 
   def unsubscribe_link
-    'https://' + Alonetone.url + '/notifications/unsubscribe'
+    'https://' + hostname + '/notifications/unsubscribe'
   end
 end

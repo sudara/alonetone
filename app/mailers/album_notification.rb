@@ -1,6 +1,4 @@
-class AlbumNotification < ActionMailer::Base
-  default from: Alonetone.email
-
+class AlbumNotification < ApplicationMailer
   def album_release(playlist, email, _sent_at = Time.now)
     @title = playlist.title
     @name = playlist.user.name
@@ -17,7 +15,7 @@ class AlbumNotification < ActionMailer::Base
   protected
 
   def user_link
-    'https://' + Alonetone.url + '/' + @user.login
+    'https://' + hostname + '/' + @user.login
   end
 
   def play_link_for(playlist)
@@ -25,10 +23,10 @@ class AlbumNotification < ActionMailer::Base
   end
 
   def stop_following_link
-    'https://' + Alonetone.url + '/unfollow/' + @user.login
+    'https://' + hostname + '/unfollow/' + @user.login
   end
 
   def unsubscribe_link
-    'https://' + Alonetone.url + '/notifications/unsubscribe'
+    'https://' + hostname + '/notifications/unsubscribe'
   end
 end

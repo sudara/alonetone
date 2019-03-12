@@ -1,4 +1,3 @@
-require 'emoji'
 module ApplicationHelper
   include ::Pagy::Frontend
   @@listen_sources = %w[itunes]
@@ -72,7 +71,6 @@ module ApplicationHelper
   def markdown(text)
     return "" unless text
 
-    text = emojify(text)
     @@renderer ||= begin
                      html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
                      Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
@@ -83,22 +81,11 @@ module ApplicationHelper
   def markdown_with_html(text)
     return "" unless text
 
-    text = emojify(text)
     @@renderer_with_html ||= begin
                      html = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { rel: "nofollow" })
                      Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
                    end
     Redcarpet::Render::SmartyPants.render(@@renderer_with_html.render(text)).html_safe
-  end
-
-  def emojify(content)
-    content.gsub(/:([a-z0-9\+\-_]+):/) do |match|
-      if Emoji.find_by_alias(Regexp.last_match(1))
-        '<img alt="' + Regexp.last_match(1) + '" height="20" src="' + asset_path("images/emoji/#{Regexp.last_match(1)}.png") + '" style="vertical-align:middle" width="20" />'
-      else
-        match
-      end
-    end.html_safe
   end
 
   def link_to_play(asset, referer = nil)

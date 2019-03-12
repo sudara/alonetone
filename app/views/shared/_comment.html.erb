@@ -4,15 +4,7 @@
 
 <%= div_for comment, class: (cycle('even', 'odd')) do %>
   <div class="comment_user">
-    <% if white_theme_enabled? && comment.commenter %>
-      <%= link_to(image_tag(avatar_or_placeholder_for(comment.commenter)), user_home_path(comment.commenter))%>
-    <% elsif white_theme_enabled? %>
-      <%= image_tag(avatar_or_placeholder_for(comment.commenter)) %>
-	  <% elsif comment.commenter %>
-      <%= user_image_link(comment.commenter, :small) %>
-  	<% else %>
-  	   <%= image_tag User.dummy_pic(:small)%>
-  	<% end %>
+    <%= user_image_link(comment.commenter, variant: :large)%>
     <% if comment.private && !white_theme_enabled? %>
         <div class="private_comment">
         </div>
