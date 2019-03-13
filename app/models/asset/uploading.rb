@@ -21,8 +21,8 @@ class Asset
   validates_attachment_content_type :mp3, content_type: ['audio/mpeg', 'audio/mp3', 'audio/x-mp3'], message: " was wrong, this doesn't look like an Mp3..."
 
   def self.parse_external_url(url)
-    url.gsub!('dl=0', 'dl=1') # make dropbox links easier to work with
-    URI.parse(url)
+    # make dropbox links easier to work with
+    URI.parse(url.gsub('dl=0', 'dl=1'))
   end
 
   def self.extract_mp3s(zip_file)
