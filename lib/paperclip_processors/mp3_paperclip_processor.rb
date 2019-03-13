@@ -19,7 +19,6 @@ module Paperclip
 
     def make
       process_id3_tags
-      attachment.instance.generate_permalink!
       File.open(@file.path, 'r', encoding: 'binary')
     end
 
