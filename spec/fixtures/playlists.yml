@@ -4,6 +4,7 @@ owp:
   permalink: owp
   title: obsessed with progression
   tracks_count: 3
+  cover_quality: modern
   description: sudara's album
   created_at: <%= 1.day.ago.to_s :db %>
 
@@ -11,6 +12,7 @@ empty:
   user: sudara
   permalink: empty-playlist
   title: Empty Playlist
+  cover_quality: modern
   description: something coming
   created_at: <%= 1.day.ago.to_s :db %>
 
@@ -19,6 +21,7 @@ arthurs_playlist:
   user: arthur
   permalink: arthurs-playlist
   title: Arthur's Playlist
+  cover_quality: modern
   description: arthurs playlist
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
@@ -29,6 +32,7 @@ mix:
   permalink: mix-tape
   title: mix tape
   tracks_count: 3
+  cover_quality: modern
   description: "a mix tape, daring and wonderful"
   created_at: <%= 1.day.ago.to_s :db %>
 
@@ -37,6 +41,7 @@ arthurs_favorites:
   is_favorite: true
   permalink: arthurs-favorites
   title: Arthur's favorites
+  cover_quality: modern
   description: arthur's favorites
   tracks_count: 1
   user: arthur
@@ -48,6 +53,7 @@ will_studd_rockfort:
   permalink: rockfort
   title: Rockfort
   tracks_count: 3
+  cover_quality: modern
   description: >
     Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
     is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
@@ -59,6 +65,7 @@ henri_willig_polderkaas:
   permalink: polderkaas
   title: Polderkaas
   tracks_count: 2
+  cover_quality: modern
   description: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
     goodness as they cheese it was named after.
@@ -69,6 +76,18 @@ william_shatners_favorites:
   is_favorite: true
   permalink: bills-favorites
   title: Bill's favorites
+  cover_quality: ancient
   description: What I like to listen to when I'm eating cheese in the captain's chair.
   tracks_count: 1
   user: william_shatner
+
+# Jamie added all her favorite tracks to a playlist.
+jamie_kiesl_loves:
+  is_mix: true
+  is_favorite: true
+  permalink: jamie-loves
+  title: Jamie Loves
+  cover_quality: legacy
+  description: Did I mention that I'm really good at naming cheeses really quickly?
+  tracks_count: 1
+  user: jamie_kiesl
