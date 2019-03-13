@@ -38,7 +38,7 @@ class ForumsController < ApplicationController
   end
 
   def update
-    if @forum.update_attributes(params[:forum])
+    if @forum.update(params[:forum])
       redirect_to @forum, notice: 'Forum was successfully updated.'
     else
       render action: "edit"
