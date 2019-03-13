@@ -2,11 +2,11 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
-    t.text "metadata", limit: 16777215
+    t.text "metadata", size: :medium
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
@@ -49,13 +49,13 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "genre"
     t.string "artist"
     t.integer "listens_count", default: 0
-    t.text "description", limit: 4294967295
-    t.text "credits", limit: 4294967295
+    t.text "description", size: :long
+    t.text "credits", size: :long
     t.string "youtube_embed"
     t.float "hotness"
     t.integer "favorites_count", default: 0
-    t.text "lyrics", limit: 4294967295
-    t.text "description_html", limit: 4294967295
+    t.text "lyrics", size: :long
+    t.text "description_html", size: :long
     t.float "listens_per_week"
     t.integer "comments_count", default: 0
     t.datetime "updated_at"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "audio_features", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "asset_id"
-    t.text "waveform", limit: 4294967295
+    t.text "waveform", size: :long
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_id"], name: "index_audio_features_on_asset_id"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
   create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "commentable_type"
     t.integer "commentable_id"
-    t.text "body", limit: 16777215
+    t.text "body", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "commenter_id"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "referrer"
     t.boolean "is_spam", default: false
     t.boolean "private", default: false
-    t.text "body_html", limit: 16777215
+    t.text "body_html", size: :medium
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
@@ -109,8 +109,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.integer "featured_user_id"
     t.integer "writer_id"
     t.integer "views_count", default: 0
-    t.text "body", limit: 16777215
-    t.text "teaser_text", limit: 16777215
+    t.text "body", size: :medium
+    t.text "teaser_text", size: :medium
     t.boolean "published", default: false
     t.boolean "published_at"
     t.boolean "datetime"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.integer "topics_count", default: 0
     t.integer "posts_count", default: 0
     t.integer "position", default: 1
-    t.text "description_html", limit: 16777215
+    t.text "description_html", size: :medium
     t.string "state", default: "public"
     t.string "permalink"
     t.index ["permalink"], name: "index_forums_on_permalink"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "mp3_content_type"
     t.integer "mp3_file_size"
     t.datetime "mp3_updated_at"
-    t.text "waveform", limit: 4294967295
+    t.text "waveform", size: :long
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "length"
@@ -179,14 +179,14 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "greenfield_posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "asset_id"
-    t.text "body", limit: 16777215
+    t.text "body", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
-    t.text "description", limit: 16777215
+    t.text "description", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "permalink"
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
-    t.text "description", limit: 4294967295
+    t.text "description", size: :long
     t.string "image"
     t.integer "user_id"
     t.datetime "created_at"
@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "link1"
     t.string "link2"
     t.string "link3"
-    t.text "credits", limit: 4294967295
+    t.text "credits", size: :long
     t.boolean "has_details", default: false
     t.string "theme"
     t.datetime "published_at"
@@ -260,11 +260,11 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
   create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "topic_id"
-    t.text "body", limit: 16777215
+    t.text "body", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "forum_id"
-    t.text "body_html", limit: 16777215
+    t.text "body_html", size: :medium
     t.boolean "is_spam", default: false
     t.float "spaminess"
     t.string "signature"
@@ -273,7 +273,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
-    t.text "bio", limit: 16777215
+    t.text "bio", size: :medium
     t.string "city"
     t.string "country"
     t.string "apple"
@@ -283,17 +283,17 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "instagram"
     t.string "website"
     t.string "user_agent"
-    t.datetime "updated_at"
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "messageboard_id", null: false
-    t.text "name", limit: 16777215, null: false
-    t.text "description", limit: 16777215
+    t.text "name", size: :medium, null: false
+    t.text "description", size: :medium
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "slug", limit: 16777215, null: false
+    t.text "slug", size: :medium, null: false
     t.index ["messageboard_id", "slug"], name: "index_thredded_categories_on_messageboard_id_and_slug", unique: true, length: { slug: 191 }
     t.index ["messageboard_id"], name: "index_thredded_categories_on_messageboard_id"
     t.index ["name"], name: "thredded_categories_name_ci", length: 191
@@ -325,9 +325,9 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
   end
 
   create_table "thredded_messageboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.text "name", limit: 16777215, null: false
-    t.text "slug", limit: 16777215
-    t.text "description", limit: 16777215
+    t.text "name", size: :medium, null: false
+    t.text "slug", size: :medium
+    t.text "description", size: :medium
     t.integer "topics_count", default: 0
     t.integer "posts_count", default: 0
     t.integer "position", null: false
@@ -358,9 +358,9 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
   create_table "thredded_post_moderation_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "post_id"
     t.bigint "messageboard_id"
-    t.text "post_content", limit: 16777215
+    t.text "post_content", size: :medium
     t.bigint "post_user_id"
-    t.text "post_user_name", limit: 16777215
+    t.text "post_user_name", size: :medium
     t.bigint "moderator_id"
     t.integer "moderation_state", null: false
     t.integer "previous_moderation_state", null: false
@@ -384,7 +384,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
-    t.text "content", limit: 16777215
+    t.text "content", size: :medium
     t.string "source", limit: 191, default: "web"
     t.bigint "postable_id", null: false
     t.bigint "messageboard_id", null: false
@@ -401,7 +401,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "thredded_private_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "content", limit: 16777215
+    t.text "content", size: :medium
     t.bigint "postable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -413,8 +413,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
   create_table "thredded_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
-    t.text "title", limit: 16777215, null: false
-    t.text "slug", limit: 16777215, null: false
+    t.text "title", size: :medium, null: false
+    t.text "slug", size: :medium, null: false
     t.integer "posts_count", default: 0
     t.string "hash_id", limit: 20, null: false
     t.datetime "last_post_at"
@@ -446,7 +446,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
   create_table "thredded_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
-    t.text "title", limit: 16777215, null: false
+    t.text "title", size: :medium, null: false
     t.string "slug", limit: 191, null: false
     t.bigint "messageboard_id", null: false
     t.integer "posts_count", default: 0, null: false
@@ -583,18 +583,18 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "updates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
-    t.text "content", limit: 16777215
+    t.text "content", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "revision"
-    t.text "content_html", limit: 16777215
+    t.text "content_html", size: :medium
     t.string "permalink"
   end
 
   create_table "user_reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.string "category"
-    t.text "description", limit: 16777215
+    t.text "description", size: :medium
     t.string "params"
     t.string "path"
     t.datetime "created_at"
@@ -602,7 +602,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.boolean "spam", default: false
     t.float "spaminess"
     t.string "signature"
-    t.text "description_html", limit: 16777215
+    t.text "description_html", size: :medium
   end
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -621,7 +621,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_121546) do
     t.string "itunes"
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
-    t.text "settings", limit: 4294967295
+    t.text "settings", size: :long
     t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
     t.integer "followers_count", default: 0
