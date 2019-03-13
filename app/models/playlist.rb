@@ -33,6 +33,15 @@ class Playlist < ActiveRecord::Base
   before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
     :set_published_at, :notify_followers_if_publishing_album
 
+  enum(
+    cover_quality: {
+      ancient: 0,
+      legacy: 1,
+      modern: 2
+    },
+    _suffix: true
+  )
+
   def to_param
     permalink.to_s
   end
@@ -133,28 +142,29 @@ end
 #
 # Table name: playlists
 #
-#  id           :integer          not null, primary key
-#  credits      :text(4294967295)
-#  description  :text(4294967295)
-#  has_details  :boolean          default(FALSE)
-#  image        :string(255)
-#  is_favorite  :boolean          default(FALSE)
-#  is_mix       :boolean
-#  link1        :string(255)
-#  link2        :string(255)
-#  link3        :string(255)
-#  permalink    :string(255)
-#  position     :integer          default(1)
-#  private      :boolean
-#  published_at :datetime
-#  theme        :string(255)
-#  title        :string(255)
-#  tracks_count :integer          default(0)
-#  year         :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  pic_id       :integer
-#  user_id      :integer
+#  id            :integer          not null, primary key
+#  cover_quality :integer          default("modern")
+#  credits       :text(4294967295)
+#  description   :text(4294967295)
+#  has_details   :boolean          default(FALSE)
+#  image         :string(255)
+#  is_favorite   :boolean          default(FALSE)
+#  is_mix        :boolean
+#  link1         :string(255)
+#  link2         :string(255)
+#  link3         :string(255)
+#  permalink     :string(255)
+#  position      :integer          default(1)
+#  private       :boolean
+#  published_at  :datetime
+#  theme         :string(255)
+#  title         :string(255)
+#  tracks_count  :integer          default(0)
+#  year          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  pic_id        :integer
+#  user_id       :integer
 #
 # Indexes
 #
