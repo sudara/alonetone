@@ -1,6 +1,8 @@
 # Generates a list of RMS-like amplitudes which can be used to render a
 # waveform for an MP3.
 module Waveform
+  LENGTH = 500
+
   class Reduction
     attr_reader :sound
     attr_reader :slice_size
@@ -19,7 +21,7 @@ module Waveform
       while signal = read
         rms = 0.0
         for frame in signal
-          rms += (mono? ? frame : frame.sum) ** 2
+          rms += (mono? ? frame : frame.sum)**2
         end
         samples << Math.sqrt(rms).round
       end
@@ -32,7 +34,7 @@ module Waveform
 
     def info=(info)
       @mono = info.channels == 1
-      @slice_size = (info.frames / 500.0).ceil
+      @slice_size = (info.frames / Waveform::LENGTH.to_f).ceil
     end
 
     def read
