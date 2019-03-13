@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/mmoll/record_tag_helper.git
-  revision: c5d2023ac6a76b08994faa8f6b5c7aefc2ecfd69
-  branch: update_gemspec
-  specs:
-    record_tag_helper (1.0.0)
-      actionview (>= 5)
-
-GIT
   remote: git://github.com/rails/coffee-rails.git
   revision: fcb80dc8c7097005cd0b98125c40995eeeba5ec3
   specs:
@@ -582,7 +574,6 @@ DEPENDENCIES
   rails-controller-testing
   rakismet
   rb-fsevent
-  record_tag_helper!
   redcarpet
   request_store
   rspec-mocks
