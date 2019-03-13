@@ -66,7 +66,7 @@ RSpec.describe UsersController, type: :request do
       akismet_stub_response_spam
       post "/users", params: { user: { login: 'bar', password: 'foo' } }
 
-      expect(User.last.is_spam?).to eq(true)
+      expect(assigns(:user).is_spam?).to eq(true)
     end
   end
 end

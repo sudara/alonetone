@@ -88,7 +88,6 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should require password on signup" do
-      akismet_stub_response_ham
       set_good_request_headers
       create_user password: nil
       expect(response).to_not be_redirect
