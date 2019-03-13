@@ -100,6 +100,7 @@ RSpec.describe AssetsController, type: :controller do
 
     it "should enqueue a CreateAudioFeature job if an asset does not have audio feature" do
       asset = assets(:valid_mp3_2)
+      asset.audio_feature.delete
 
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
 
