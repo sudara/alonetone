@@ -3,6 +3,6 @@
   <%= form_with model: @user, url: password_reset_path, method: :put do |f| %>
     <%= f.password_field :password %><br/>
     <%= f.password_filed :password_confirmation %>
-    <%= f.submit, "Come on in..." %>
+    <%= f.submit "Come on in..." %>
   <% end %>
 </div>
