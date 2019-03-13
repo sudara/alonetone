@@ -53,6 +53,26 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe 'cover quality' do
+    it 'defaults to modern' do
+      playlist = Playlist.new
+      expect(playlist.cover_quality).to eq('modern')
+      expect(playlist.modern_cover_quality?).to eq(true)
+    end
+
+    it 'can be ancient' do
+      playlist = playlists(:henri_willig_polderkaas)
+      playlist.update(cover_quality: :ancient)
+      expect(playlist.cover_quality).to eq('ancient')
+    end
+
+    it 'can be legacy' do
+      playlist = playlists(:henri_willig_polderkaas)
+      playlist.update(cover_quality: :legacy)
+      expect(playlist.cover_quality).to eq('legacy')
+    end
+  end
+
   describe "generating URLs to their cover" do
     context "with a cover" do
       let(:playlist) { playlists(:will_studd_rockfort) }
