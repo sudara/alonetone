@@ -1,4 +1,4 @@
-<%= form_with model: @user_session, local: true do |f| %>
+<%= form_with model: @user_session, local: true, id: 'login_form' do |f| %>
   <%= f.label :login %>
   <%= f.text_field :login %>
 
