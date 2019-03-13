@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_10_014509) do
+ActiveRecord::Schema.define(version: 2019_03_13_121546) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 2019_02_10_014509) do
     t.float "listens_per_week"
     t.integer "comments_count", default: 0
     t.datetime "updated_at"
-    t.text "waveform", limit: 4294967295
     t.boolean "private", default: false, null: false
     t.integer "id3_track_num", default: 1
     t.boolean "is_spam", default: false

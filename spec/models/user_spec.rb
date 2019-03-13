@@ -6,6 +6,17 @@ RSpec.describe User, type: :model do
       expect(new_user).to be_valid
       expect(users(:sudara)).to be_valid
     end
+
+    it "should validate logins" do
+      expect(new_user(login: "bobbyf")).to be_valid
+      expect(new_user(login: "BobbyF")).to be_valid
+      expect(new_user(login: "r00ter")).to be_valid
+      expect(new_user(login: "with spaces")).not_to be_valid
+      expect(new_user(login: "with_underscore")).to be_valid
+      expect(new_user(login: "!7384.")).not_to be_valid
+      expect(new_user(login: "aa")).not_to be_valid
+    end
+
     # https://www.wikiwand.com/en/Email_address#/Examples
     it "should validate email" do
       expect(new_user(email: "userEmail1&@gmail.com")).to be_valid

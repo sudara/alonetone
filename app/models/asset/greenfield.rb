@@ -4,13 +4,13 @@ class Asset
   has_one :greenfield_post, class_name: '::Greenfield::Post'
 
   def import_waveform
-    tmp = Tempfile.new(['mp3-download', '.mp3'])
-
-    begin
-      mp3.copy_to_local_file(:original, tmp.path)
-      create_audio_feature!(waveform: Greenfield::Waveform.extract(tmp.path))
-    ensure
-      tmp.close!
+    Tempfile.open(%w[mp3-download .mp3]) do |tempfile|
+      mp3.copy_to_local_file(:original, tempfile.path)
+      update!(
+        audio_feature_attributes: {
+          waveform: Waveform.extract(tempfile.path)
+        }
+      )
     end
   end
 end

@@ -4,7 +4,7 @@
     <div class="album clearfix">
       <div class="cover">
         <%= link_to(image_tag('rpm/overlay.png'), user_playlist_path(album.user.login, album), class: 'overlay') %>
-        <%= image_tag(album.cover(:album), class: 'cover') %>
+        <%= image_tag(playlist_cover_url(album, variant: :album), class: 'cover') %>
         <%= link_to awesome_truncate(album.title, 50), user_playlist_path(album.user.login, album), class: 'album_title' %><br/>
         <%= link_to album.user.name, user_home_path(album.user.login), class: 'alonetoner'%>
       </div>
