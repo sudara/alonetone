@@ -195,7 +195,6 @@ end
 #  samplerate       :integer
 #  thumbnails_count :integer          default(0)
 #  title            :string(255)
-#  waveform         :text(4294967295)
 #  youtube_embed    :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
