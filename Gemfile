@@ -37,9 +37,6 @@ gem 'simple_form'
 gem 'local_time'
 gem 'pagy'
 
-# deprecated
-gem 'record_tag_helper', github: 'mmoll/record_tag_helper', branch: 'update_gemspec'
-
 # external services
 gem 'rakismet'
 gem 'geokit'
