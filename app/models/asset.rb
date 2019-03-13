@@ -18,7 +18,8 @@ class Asset < ApplicationRecord
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
 
   belongs_to :user, counter_cache: true
-  has_one  :audio_feature
+  has_one :audio_feature, dependent: :destroy
+  accepts_nested_attributes_for :audio_feature
   has_many :tracks,    dependent: :destroy
   has_many :playlists, through: :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
