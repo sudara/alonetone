@@ -1,5 +1,6 @@
 include ActionDispatch::TestProcess
 muppet_upload = fixture_file_upload(File.join('spec/fixtures/files/muppets.mp3'), 'audio/mpeg')
+piano_upload = fixture_file_upload(File.join('spec/fixtures/files/piano.mp3'), 'audio/mpeg')
 cover_upload = fixture_file_upload(File.join('spec/fixtures/images/manfreddoescover.jpg'), 'image/jpeg')
 avatar_upload = fixture_file_upload(File.join('spec/fixtures/images/jeffdoessudara.jpg'), 'image/jpeg')
 
@@ -55,20 +56,23 @@ marie = User.create!(
 put_user_credentials(marie.login, marie_password)
 
 # Create a few assets for the musician.
-instrument_of_accession = marie.assets.create!(
+commonly_blue_green = marie.assets.create!(
   mp3: muppet_upload,
   title: 'Commonly Blue-grey',
   description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.',
-  waveform: Greenfield::Waveform.extract(muppet_upload.path)
+  audio_feature_attributes: {
+    waveform: Waveform.extract(muppet_upload.path)
+  }
 )
-tropical_semi_evergreen = marie.assets.create!(
+aqueous_suspension = marie.assets.create!(
   mp3: muppet_upload,
   title: 'Aqueous Suspension',
   description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.',
-  waveform: Greenfield::Waveform.extract(muppet_upload.path)
+  audio_feature_attributes: {
+    waveform: Waveform.extract(muppet_upload.path)
+  }
 )
-
-# Add the assets to a playlist.
+# Create a playlist for the tracks.
 playlist = marie.playlists.build(
   title: 'Before fungi were understood',
   year: Date.today.year - 1
@@ -79,8 +83,39 @@ playlist.description = <<~DESC
 DESC
 playlist.save!
 playlist.create_pic!(pic: cover_upload)
-playlist.tracks.create!(user: marie, asset: instrument_of_accession)
-playlist.tracks.create!(user: marie, asset: tropical_semi_evergreen)
+playlist.tracks.create!(user: marie, asset: commonly_blue_green)
+playlist.tracks.create!(user: marie, asset: aqueous_suspension)
+playlist.update(private: false)
+
+# Create some more assets.
+baguette_laonnaise = marie.assets.create!(
+  mp3: piano_upload,
+  title: 'Baguette Laonnaise',
+  description: 'The cheese is typically loaf-shaped and has a supple interior as well as a sticky orange-brown rind.',
+  audio_feature_attributes: {
+    waveform: Waveform.extract(piano_upload.path)
+  }
+)
+appellation_description = marie.assets.create!(
+  mp3: piano_upload,
+  title: 'Appellation description d’origine protégée',
+  description: 'In Switzerland, the appellation d’origine protégée (AOP, protected designation of origin) is a geographical indication protecting the origin and the quality of traditional food products',
+  audio_feature_attributes: {
+    waveform: Waveform.extract(piano_upload.path)
+  }
+)
+# Create a playlist for those assets.
+playlist = marie.playlists.build(
+  title: 'Raclette',
+  year: Date.today.year
+)
+playlist.description = <<~DESC
+  Raclette /rəˈklɛt/ is a semi-hard cheese that is usually fashioned into a wheel of about
+  6 kg (13 lb).
+DESC
+playlist.save!
+playlist.tracks.create!(user: marie, asset: baguette_laonnaise)
+playlist.tracks.create!(user: marie, asset: appellation_description)
 playlist.update(private: false)
 
 # Some random listens.
