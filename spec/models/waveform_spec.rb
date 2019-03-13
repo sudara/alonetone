@@ -11,7 +11,7 @@ RSpec.describe Waveform do
     it 'generates RMS samples' do
       data = Waveform.extract(path)
       expect(data).to_not be_empty
-      expect(data.length).to eq(500)
+      expect(data.length).to be_within(1).of(500)
       data.each { |sample| expect(sample).to be_kind_of(Numeric) }
     end
   end
