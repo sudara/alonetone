@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe UsersController, type: :controller do
   context "index" do
     it "should only show active and non spam users" do
-      users(:arthur).update_attributes(is_spam: true)
+      users(:arthur).update(is_spam: true)
 
       get :index
       expect(response).to be_successful
