@@ -34,8 +34,7 @@ class Asset < ApplicationRecord
     source: :user,
     through: :tracks
 
-  has_permalink :name, true
-  before_update :generate_permalink!, if: :title_changed?
+  before_save :ensure_unique_permalink, if: :permalink_changed?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
@@ -46,13 +45,7 @@ class Asset < ApplicationRecord
                   user_role: proc { role },
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
-  validates_presence_of :user_id
-
-  # override has_permalink method to ensure we don't get empty permas
-  def generate_permalink!
-    self.permalink = fix_duplication(normalize(send(generate_from)))
-    self.permalink = fix_duplication("untitled") unless permalink.present?
-  end
+  validates :user, presence: true
 
   def self.latest(limit = 10)
     includes(user: :pic).limit(limit).order('assets.id DESC')
@@ -83,12 +76,21 @@ class Asset < ApplicationRecord
     object_id
   end
 
+  def title=(title)
+    super
+    rename
+  end
+
+  def mp3_file_name=(mp3_file_name)
+    super
+    rename
+  end
+
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
 
-    name = File.basename(mp3_file_name.to_s, '.*').humanize
-    name.blank? ? 'untitled' : name
+    basename.humanize.presence || 'untitled'
   end
 
   def first_playlist
@@ -164,6 +166,27 @@ class Asset < ApplicationRecord
     else
       'user'
     end
+  end
+
+  private
+
+  include HasPermalink::InstanceMethods
+
+  # Required when calling fix_duplication.
+  def auto_fix_duplication
+    true
+  end
+
+  def rename
+    self.permalink = normalize(name).presence || 'untitled'
+  end
+
+  def ensure_unique_permalink
+    self.permalink = fix_duplication(permalink)
+  end
+
+  def basename
+    File.basename(mp3_file_name.to_s, '.*')
   end
 end
 

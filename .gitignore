@@ -26,6 +26,7 @@
 /public/source_files
 /public/system
 /stats.json
+/storage
 /vendor/bundle
 /yarn-debug.log*
 /yarn-error.log

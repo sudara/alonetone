@@ -1,7 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe Asset, type: :model do
-  it 'supports characters outside of the in the title' do
+  it "supports characters outside of the basic multilingual plane in the title" do
     expect(Asset.new(title: '👍').title).to eq('👍')
   end
 
@@ -35,9 +37,9 @@ RSpec.describe Asset, type: :model do
     end
 
     it "should catch empty or bogus files" do
-      asset = file_fixture_asset('empty.mp3', content_type: 'audio/mpeg')
-      expect(asset).to be_new_record
-      expect(asset.errors).to be_present
+      expect do
+        file_fixture_asset('empty.mp3', content_type: 'audio/mpeg')
+      end.to raise_error(ArgumentError)
     end
 
     it "should increase the user's count" do
