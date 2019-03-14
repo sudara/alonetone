@@ -114,7 +114,7 @@ RSpec.describe Asset, type: :model do
     end
 
     it 'should handle umlauts and non english characters in the filename' do
-      filename = 'müppets.mp3'.mb_chars.normalize
+      filename = 'müppets.mp3'.unicode_normalize(:nfc)
       asset = file_fixture_asset(
         'muppets.mp3',
         filename: filename,
