@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
   has_many :greenfield_posts, through: :assets
 
   include Rakismet::Model
-  rakismet_attrs  author: proc { display_name },
+  rakismet_attrs  author: proc { login },
                   author_email: proc { email },
                   user_ip: proc { current_login_ip }
 
