@@ -37,7 +37,7 @@ module Paperclip
         if value.respond_to?(:encode)
           value.encode(
             'UTF-8', invalid: :replace, undef: :replace, replace: "\ufffd"
-          ).mb_chars.normalize
+          ).unicode_normalize(:nfkc)
         end
         attachment.instance.public_send("#{attribute_name}=", value)
       end
