@@ -31,9 +31,5 @@ module Greenfield
     def length
       Asset.formatted_time(self[:length])
     end
-
-    # This stuff is stubbed for compatibility with Mp3PaperclipProcessor
-    attr_accessor :title
-    def generate_permalink!; end
   end
 end

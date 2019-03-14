@@ -15,6 +15,9 @@ class Upload
     # file.
     attr_accessor :filename
 
+    # Content-type of the posted data if known.
+    attr_accessor :content_type
+
     # The user who originate the upload.
     attr_accessor :user
 
@@ -33,7 +36,7 @@ class Upload
 
     def process
       reset
-      @assets << Asset.new(asset_attributes.merge(user: user, mp3: file, mp3_file_name: filename))
+      @assets << Asset.new(combined_attributes)
       valid?
     end
 
@@ -45,6 +48,23 @@ class Upload
       mp3_file = new(attributes)
       mp3_file.process
       mp3_file
+    end
+
+    private
+
+    def metadata
+      @metadata ||= Upload::Metadata.new(file)
+    end
+
+    def combined_attributes
+      asset_attributes
+        .merge(metadata.attributes)
+        .merge({
+          user: user,
+          mp3: file,
+          mp3_file_name: filename,
+          mp3_content_type: content_type
+        }.compact)
     end
   end
 end
