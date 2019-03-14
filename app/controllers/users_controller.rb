@@ -28,8 +28,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params_with_ip)
     @user.is_spam = @user.spam?
+    Rails.logger.info "Rakismet response: #{@user.akismet_response}"
 
     if is_a_bot? && @user.valid?
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
@@ -117,6 +118,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
+  end
+
+  def user_params_with_ip
+    user_params.merge(current_login_ip: request.remote_ip)
   end
 
   def prepare_meta_tags
