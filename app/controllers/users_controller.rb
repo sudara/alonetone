@@ -29,10 +29,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params_with_ip)
-    @user.is_spam = @user.spam?
-    Rails.logger.info "Rakismet response: #{@user.akismet_response}"
 
-    if is_a_bot? && @user.valid?
+    if @user.spam?
+      @user.is_spam = @user.spam?
+      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+      render action: :new
+    elsif is_a_bot? && @user.valid?
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)
     elsif @user.valid? && @user.save_without_session_maintenance

@@ -56,15 +56,15 @@ RSpec.describe UsersController, type: :request do
 
     it "should raise an error if user fails Akismet check" do
       akismet_stub_response_spam
-      post "/users", params: { user: { login: 'bar', password: 'foo' } }
+      post "/users", params: params
 
-      expect(flash[:error]).to be_present
+      expect(flash[:error]).to match (/magic fairies/)
       expect(response).to render_template("users/new")
     end
 
     it "should mark user as spam if Akismet check fails" do
       akismet_stub_response_spam
-      post "/users", params: { user: { login: 'bar', password: 'foo' } }
+      post "/users", params: params
 
       expect(assigns(:user).is_spam?).to eq(true)
     end
