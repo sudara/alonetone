@@ -75,9 +75,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    if @user.update(user_params) && !@user.spam?
       flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
+    elsif @user.is_spam?
+      @user.is_spam = @user.spam?
+      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+      @profile = @user.profile
+      render action: :edit
     else
       flash[:error] = "Not so fast, young one"
       @profile = @user.profile
