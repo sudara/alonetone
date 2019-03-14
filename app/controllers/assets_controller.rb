@@ -171,7 +171,7 @@ class AssetsController < ApplicationController
   # PUT /assets/1
   # PUT /assets/1.xml
   def update
-    result = @asset.update_attributes(asset_params)
+    result = @asset.update(asset_params)
     @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
     @asset.publish! if params[:commit] == 'Publish'
 

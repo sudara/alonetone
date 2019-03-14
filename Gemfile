@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.0.0.beta2'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded'
+gem 'thredded', github: 'sudara/thredded'
 
 # greenfield
 gem 'greenfield', path: 'greenfield'
@@ -37,9 +37,6 @@ gem 'simple_form'
 gem 'local_time'
 gem 'pagy'
 
-# deprecated
-gem 'record_tag_helper'
-
 # external services
 gem 'rakismet'
 gem 'geokit'
@@ -58,14 +55,14 @@ gem 'sass-rails'
 gem 'compass-rails'
 gem 'yui-compressor'
 gem 'uglifier'
-gem 'coffee-rails'
+gem 'coffee-rails', github: 'rails/coffee-rails'
 gem 'soundmanager2-rails'
 gem 'turbolinks'
 gem 'cloudfront-signer'
 
 # monitoring & perf
 gem 'newrelic_rpm'
-gem 'skylight'
+gem 'skylight', '>= 4.0.0.beta'
 gem 'sidekiq'
 gem 'dalli'
 
