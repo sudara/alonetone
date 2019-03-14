@@ -32,8 +32,9 @@ class Track < ActiveRecord::Base
   end
 
   def ensure_playlist_if_favorite
-    self.playlist_id = Playlist.favorites.where(user_id: user_id).first_or_create.id if is_favorite?
-    true
+    return unless is_favorite?
+
+    self.playlist = Playlist.favorites.where(user_id: user_id).first_or_initialize
   end
 end
 
