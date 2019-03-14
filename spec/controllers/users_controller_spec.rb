@@ -1,7 +1,8 @@
+#
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  context "index" do
+  context '#index' do
     it "should only show active and non spam users" do
       users(:arthur).update(is_spam: true)
 
@@ -12,7 +13,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  context 'show' do
+  context '#show' do
     it "should show delete user button for admins" do
       login(:sudara)
 
@@ -38,7 +39,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  context 'creating' do
+  context '#create' do
     before :each do
       akismet_stub_response_ham
     end
@@ -109,7 +110,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  context 'activation' do
+  context '#activate' do
     before :each do
       akismet_stub_response_ham
     end
@@ -153,17 +154,44 @@ RSpec.describe UsersController, type: :controller do
   context "profile" do
     %i[sudara arthur].each do |user|
       it "should let a user or admin edit" do
+        akismet_stub_response_ham
         login(user)
         allow(controller).to receive(:current_user).and_return(users(user))
+
         post :edit, params: { id: 'arthur' }
+
         expect(response).to be_successful
       end
 
       it "should let a user or admin update" do
+        akismet_stub_response_ham
         login(user)
         allow(controller).to receive(:current_user).and_return(users(user))
+
         put :update, params: { id: 'arthur', user: { bio: 'a little more about me' } }
+
         expect(response).to redirect_to(edit_user_path(users(:arthur)))
+      end
+
+      it "should raise an error if user is marked as spam" do
+        login(user)
+        allow(controller).to receive(:current_user).and_return(users(user))
+        akismet_stub_response_spam
+
+        put :update, params: { id: 'arthur', user: { display_name: 'spam-name' } }
+
+        expect(flash[:error]).to match(/magic fairies/)
+        expect(response).to be_successful
+      end
+
+      it "will set user as spam if it fails Akismet check" do
+        login(user)
+        allow(controller).to receive(:current_user).and_return(users(user))
+        akismet_stub_response_spam
+
+        put :update, params: { id: 'arthur', user: { display_name: 'spam-name'} }
+
+        expect(users(:arthur).reload.is_spam).to eq(true)
       end
     end
 
@@ -181,6 +209,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should let a user change their login" do
+      akismet_stub_response_ham
       login(:arthur)
       put :update, params: { id: 'arthur', user: { login: 'arthursaurus' } }
       expect(flash[:error]).not_to be_present
@@ -189,6 +218,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'should not let a user change login to login that exists' do
+      akismet_stub_response_ham
       login(:arthur)
       put :update, params: { id: 'arthur', user: { login: 'sudara' } }
       expect(flash[:error]).to be_present
@@ -203,6 +233,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should not let any old user update" do
+      akismet_stub_response_ham
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
       put :update, params: { id: 'sudara', user: { bio: 'a little more about me' } }

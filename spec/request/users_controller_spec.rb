@@ -61,12 +61,5 @@ RSpec.describe UsersController, type: :request do
       expect(flash[:error]).to match (/magic fairies/)
       expect(response).to render_template("users/new")
     end
-
-    it "should mark user as spam if Akismet check fails" do
-      akismet_stub_response_spam
-      post "/users", params: params
-
-      expect(assigns(:user).is_spam?).to eq(true)
-    end
   end
 end
