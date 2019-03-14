@@ -2,7 +2,7 @@ dist: xenial
 sudo: required
 language: ruby
 rvm:
-  2.6.0
+  2.6.1
 addons:
   chrome: stable
 services:
@@ -17,6 +17,7 @@ before_install:
 - yarn
 before_script:
 - mysql -e 'create database alonetone_test';
+- cp config/database.example.yml config/database.yml
 - bundle exec rake setup:copy_config setup:touch_js db:drop db:create db:schema:load
 - bundle exec rake db:seed
 script: bundle exec rake spec
