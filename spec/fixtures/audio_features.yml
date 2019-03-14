@@ -1,4 +1,43 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-valid_audio_feature:
-  waveform: [77523880, 125726681740, 87340240119, 66892444660, 69311543653, 67487566034]
+# Every Asset must have an AudioFeature.
+valid_mp3:
   asset: valid_mp3
+  waveform: <%= waveform %>
+valid_zip:
+  asset: valid_zip
+  waveform: <%= waveform %>
+invalid_file:
+  asset: invalid_file
+  waveform: <%= waveform %>
+valid_arthur_mp3:
+  asset: valid_arthur_mp3
+  waveform: <%= waveform %>
+too_big_file:
+  asset: too_big_file
+  waveform: <%= waveform %>
+valid_mp3_2:
+  asset: valid_mp3_2
+  waveform: <%= waveform %>
+private_track:
+  asset: private_track
+  waveform: <%= waveform %>
+spam_track:
+  asset: spam_track
+  waveform: <%= waveform %>
+will_studd_rockfort_combalou:
+  asset: will_studd_rockfort_combalou
+  waveform: <%= waveform %>
+will_studd_rockfort_white_wild_tangy:
+  asset: will_studd_rockfort_white_wild_tangy
+  waveform: <%= waveform %>
+will_studd_magnificent_lacaune:
+  asset: will_studd_magnificent_lacaune
+  waveform: <%= waveform %>
+will_studd_appellation_controlee:
+  asset: will_studd_appellation_controlee
+  waveform: <%= waveform %>
+henri_willig_finest_cheese:
+  asset: henri_willig_finest_cheese
+  waveform: <%= waveform %>
+henri_willig_the_goat:
+  asset: henri_willig_the_goat
+  waveform: <%= waveform %>
