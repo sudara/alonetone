@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/sudara/thredded.git
-  revision: fa297d013f195bd408038715d796c123786897e5
+  revision: f6aa8cefbe4ad7d31cb99c6955691d85191495e8
   specs:
     thredded (0.16.9)
       active_record_union (>= 1.3.0)
