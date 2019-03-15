@@ -14,18 +14,10 @@
 }
   
 #login, #signup {
-	.hint {
-	  font-style: italic;
-	  margin-top: 12px;
-	  margin-bottom: 16px;
-		text-align: left;
-		color: $new-samo-gray;
-	}
 	a:hover {
 		color: $samo-orange;
 	}
 }
-  
   
 body main #columns  {
 	#login.box, #signup.box, #signup-questions.box {
