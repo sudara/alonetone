@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   rakismet_attrs  author: proc { login },
                   author_email: proc { email },
                   user_ip: proc { current_login_ip },
-                  content: proc { profile&.bio}
+                  content: proc { profile&.bio }
 
   # tokens and activation
   def clear_token!
