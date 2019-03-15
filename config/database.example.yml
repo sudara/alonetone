@@ -1,25 +1,16 @@
 development:
   adapter: mysql2
+  encoding: utf8mb4
   database: alonetone_development
-  encoding: utf8mb4
   pool: 5
-  timeout: 5000
-test:
-  adapter: mysql2
-  database: alonetone_test2
-  encoding: utf8mb4
-  username: root
-  password:
   host: localhost
   variables:
     sql_mode: TRADITIONAL
-
-production:
+test:
   adapter: mysql2
-  database: 
-  username: alonetone_prod
   encoding: utf8mb4
-  password: 
+  database: alonetone_test
+  pool: 5
   host: localhost
   variables:
     sql_mode: TRADITIONAL
