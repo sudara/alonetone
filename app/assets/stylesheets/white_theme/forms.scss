@@ -7,6 +7,14 @@ form {
     outline: 0;
     -webkit-appearance: none;
   }
+  input[type="search"],
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: 280px;
+  }
+
+
   input[type="submit"] {
     cursor: pointer;
     @include default-button();
