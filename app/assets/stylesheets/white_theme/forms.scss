@@ -54,6 +54,13 @@ form {
   label {
     margin-bottom: 2px !important;
   }
+  input {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 9px 10px 6px 10px;
+    font-family: $medium-sans-font;
+    font-size: 14px;
+  }
   input,
   textarea,
   select {
@@ -70,39 +77,6 @@ form {
   }
   textarea {
     width: 100%;
-  }
-}
-
-/* SIMPLE FORM */
-
-input {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 9px 10px 6px 10px;
-  font-family: $medium-sans-font;
-  font-size: 14px;
-  &.string,
-  &.password {
-    width: 250px;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    background-color: $samo-alternate-background-gray;
-    &:focus {
-      border: 1px solid $new-samo-gray;
-    }
-  }
-  &.radio {
-    margin-right: 5px;
-    vertical-align: -3px;
-  }
-  &.check_boxes {
-    margin-left: 3px;
-    vertical-align: -3px;
-  }
-  &.btn {
-    font-size: 1.4em;
-    margin-right: 0;
-    padding: 10px;
   }
 }
 
