@@ -3,7 +3,6 @@ form {
   input[type="text"],
   input[type="password"],
   input[type="email"],
-  select,
   textarea {
     outline: 0;
     -webkit-appearance: none;
@@ -31,36 +30,27 @@ form {
       display: none;
     }
   }
-  input {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 9px 10px 6px 10px;
-    font-family: $medium-sans-font;
-    font-size: 14px;
-  }
   input,
   textarea,
   select {
+    box-sizing: border-box;
     margin-bottom: $baseline;
     border: 1px solid #fff;
     border-radius: 4px;
     background-color: $samo-alternate-background-gray;
+    font-size: 14px;
     &:focus {
       border: 1px solid $new-samo-gray;
     }
   }
+  input {
+    padding: 9px 10px 6px 10px;
+    font-family: $medium-sans-font;
+  }
   textarea {
-    width: 100%;
-    box-sizing: border-box;
     font-family: $sans-font;
+    width: 100%;
     padding: 8px;
-    border: 0;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    background-color: $samo-alternate-background-gray;
-    &:focus {
-      border: 1px solid $new-samo-gray;
-    }
   }
 }
 
