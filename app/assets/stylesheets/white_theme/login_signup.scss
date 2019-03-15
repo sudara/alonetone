@@ -14,10 +14,6 @@
 }
   
 #login, #signup {
-	input.btn {
-	  cursor: pointer;
-	  @include default-button();
-	}
 	.hint {
 	  font-style: italic;
 	  margin-top: 12px;
@@ -30,18 +26,6 @@
 	}
 }
   
-#login {
-	input.btn {
-	  margin-top: $baseline / 2;
-	  margin-bottom: $baseline;
-	}
-}
-
-#signup {
-	.input input {
-		margin-bottom: -2px;
-	}
-}
   
 body main #columns  {
 	#login.box, #signup.box, #signup-questions.box {
