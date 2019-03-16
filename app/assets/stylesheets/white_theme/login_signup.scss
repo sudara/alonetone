@@ -18,6 +18,12 @@
 		color: $samo-orange;
 	}
 }
+
+#login {
+	#reset-password {
+		display: none;
+	}
+}
   
 body main #columns  {
 	#login.box, #signup.box, #signup-questions.box {
