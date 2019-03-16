@@ -165,9 +165,3 @@ form {
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }
-
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 2px dotted blue;
-}
