@@ -65,14 +65,8 @@ form {
 /* VALIDATION FEEDBACK */
 
 .field_with_errors {
-  width: 250px;
-  margin-left: -8px;
-  padding: 8px;
-  background-color: $samo-orange;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  label {
-    color: white;
+  input {
+    border: 1px dotted $samo-orange;
   }
 }
 
