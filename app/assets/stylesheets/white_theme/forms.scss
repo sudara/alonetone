@@ -13,8 +13,6 @@ form {
   input[type="email"] {
     width: 280px;
   }
-
-
   input[type="submit"] {
     cursor: pointer;
     @include default-button();
