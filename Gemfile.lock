@@ -477,9 +477,6 @@ GEM
       rack (>= 1.5.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
-    simple_form (4.1.0)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
     sixarm_ruby_unaccent (1.2.0)
     skylight (4.0.0.beta2)
       skylight-core (= 4.0.0.beta2)
@@ -589,7 +586,6 @@ DEPENDENCIES
   scrypt
   selenium-webdriver
   sidekiq
-  simple_form
   skylight (>= 4.0.0.beta)
   sometimes
   soundmanager2-rails

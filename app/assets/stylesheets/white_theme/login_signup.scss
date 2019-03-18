@@ -14,32 +14,14 @@
 }
   
 #login, #signup {
-	input.btn {
-	  cursor: pointer;
-	  @include default-button();
-	}
-	.hint {
-	  font-style: italic;
-	  margin-top: 12px;
-	  margin-bottom: 16px;
-		text-align: left;
-		color: $new-samo-gray;
-	}
 	a:hover {
 		color: $samo-orange;
 	}
 }
-  
-#login {
-	input.btn {
-	  margin-top: $baseline / 2;
-	  margin-bottom: $baseline;
-	}
-}
 
-#signup {
-	.input input {
-		margin-bottom: -2px;
+#login {
+	#reset-password {
+		display: none;
 	}
 }
   
@@ -57,4 +39,3 @@ body main #columns  {
 		}
 	}
 }
-  
