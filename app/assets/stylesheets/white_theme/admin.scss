@@ -1,7 +1,11 @@
-// For admin/comments
+#admin_header {
+	max-width: 960px;
+	margin-right: auto;
+	margin-left: auto;
+}
 
 #admin_columns {
-	max-width: 1100px;
+	max-width: 960px;
 	margin-right: auto;
 	margin-left: auto;
 	display: flex;
