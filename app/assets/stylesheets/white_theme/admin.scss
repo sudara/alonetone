@@ -1,23 +1,50 @@
 #admin_header {
-	max-width: 960px;
-	margin-right: auto;
-	margin-left: auto;
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #admin_columns {
-	max-width: 960px;
-	margin-right: auto;
-	margin-left: auto;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	.admin_column_left {
-		width: 15%;
-	}
-	.admin_column_right {
-		width: 80%;
-		min-width: 700px;
-		background-color: #fff;
-	}
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .admin_column_left {
+    width: 15%;
+    .admin_nav {
+      li {
+        line-height: 34px;
+        display: block;
+        width: 100%;
+        a {
+          font-size: 14px;
+          line-height: 34px;
+          padding: 0 15px;
+		}
+		> div {
+			padding-left: 15px;
+		}
+		ul {
+			padding: 0 15px;
+			li {
+			}
+		}
+        a:hover {
+          text-decoration: none;
+          background: $light_gray;
+        }
+      }
+      li.current {
+        padding: 0 15px;
+        background: $gray;
+      }
+    }
+  }
+  .admin_column_right {
+    width: 80%;
+    min-width: 700px;
+    background-color: #fff;
+  }
 }
-
