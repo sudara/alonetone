@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
   has_many   :comments, -> { order('comments.id DESC') },
     dependent: :destroy
 
-  has_many   :tracks
+  has_many   :tracks,
+    dependent: :destroy
 
   # alonetone plus
   has_many :memberships
