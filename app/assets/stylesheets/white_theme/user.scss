@@ -41,7 +41,7 @@ main {
       display: flex;
       flex-direction: column;
       grid-column-gap: 0;
-      grid-row-gap: 0;  
+      grid-row-gap: 0;
       > * {
         width: 100%;
       }
@@ -83,7 +83,7 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
- 
+
       > div {
         margin-bottom: $baseline * 1.5;
         &:last-child {
@@ -145,25 +145,30 @@ main {
       #user_header {
         justify-content: space-between;
         display: flex;
-        .user_name_and_location_and_follow {
+        flex-wrap: wrap;
+        .user_name_and_follow {
           display: flex;
-          .user_name_and_location {
-            align-self: flex-end;
-            h1.user_name {
-              font-size: 28px;
-              line-height: 1;
-              margin-top: 0;
-              margin-bottom: 0;
-            }
-            @media #{$one-column} {
-              padding-left: 15px;
+          flex-wrap: wrap;
+          @media #{$mobile} {
+            flex: 1;
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+          h1.user_name {
+            font-size: 28px;
+            line-height: 1;
+            margin-top: 0;
+            margin-bottom: 0;
+            @media #{$mobile} {
+              width: 100%;
+              margin-bottom: 16px;
             }
           }
           a.follow {
             display: flex;
-            align-self: flex-end;
-            position: relative;
-            top: 4px;
+            @media #{$mobile} {
+              width: 100%;
+            }
             &:hover {
               text-decoration: none;
             }
@@ -173,6 +178,10 @@ main {
               color: $samo-orange;
               margin-left: 24px;
               margin-right: 8px;
+              @media #{$mobile} {
+                margin-left: 0;
+              }
+  
               &:hover {
                 background-color: #fff;
               }
@@ -185,13 +194,16 @@ main {
             }
           }
         }
-
         .user_header_avatar {
           overflow: hidden;
           @include samo-shadow-and-radius();
           border: 1px solid #000;
-          position: relative;
-          top: 10px;
+          width: 48px;
+          height: 48px;
+          @media #{$mobile} {
+            margin-right: 16px;
+          }
+
           img {
             display: block;
             width: 48px;
@@ -200,7 +212,7 @@ main {
         }
       }
     }
-    
+
     .user_playlists_buttons {
       margin-bottom: $baseline;
       #create_new_playlist {
@@ -218,7 +230,8 @@ main {
       flex-wrap: wrap;
       background-color: $white;
       @include samo-shadow-and-radius();
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15),
+        0px 6px 24px rgba(134, 134, 134, 0.75);
       overflow: hidden;
       @media #{$one-column} {
         flex-direction: column;
@@ -415,7 +428,7 @@ main {
       @include samo-shadow-and-radius();
       padding: 16px;
       box-sizing: border-box;
-      
+
       a.edit_profile {
         @include default-button("admin");
       }

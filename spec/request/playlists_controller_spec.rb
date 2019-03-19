@@ -20,4 +20,28 @@ RSpec.describe PlaylistsController, type: :request do
       )
     end
   end
+
+  context "a musician" do
+    let(:user) { users(:jamie_kiesl) }
+    before do
+      create_user_session(user)
+    end
+
+    it "creates a new playlist" do
+      post(
+        "/Jamiek/playlists",
+        params: {
+          playlist: {
+            title: '🧀 THE FUNK 🧀',
+            year: '',
+            description: 'Best of Danny de Funk'
+          }
+        }
+      )
+      expect(response).to be_redirect
+      uri = URI.parse(response.headers['Location'])
+      expect(uri.path).to start_with('/Jamiek/playlists')
+      expect(uri.path).to end_with('/edit')
+    end
+  end
 end

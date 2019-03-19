@@ -171,7 +171,7 @@ class AssetsController < ApplicationController
   # PUT /assets/1
   # PUT /assets/1.xml
   def update
-    result = @asset.update_attributes(asset_params)
+    result = @asset.update(asset_params)
     @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
     @asset.publish! if params[:commit] == 'Publish'
 
@@ -219,7 +219,7 @@ class AssetsController < ApplicationController
     session[:white_theme_notified] ||= 1
     session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
     flash.now[:ok] = "#{current_user.name}: missing something on white theme? Let us know " \
-                     "<a href='/discuss/white-theme/don-t-panic-the-white-theme-faq'>on the forums</a>".html_safe
+                     "<a href='/discuss/white-theme'>on the forums</a>".html_safe
   end
 
   def asset_params
