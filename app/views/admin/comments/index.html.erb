@@ -26,7 +26,7 @@
       </header>
 
       <div class="admin_comment_rows">
-      <% @comments.each do |comment| %>
+        <% @comments.each do |comment| %>
             <div data-controller="admin--comment">
               <div><input type="checkbox"></div>
               <div><%= comment.created_at.strftime("%b %d") %></div>
@@ -37,7 +37,7 @@
               <div data-target='admin--comment.unspam'><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?', action: 'click->admin--comment#showUnspamTarget' }, method: :put, remote: true %></div>
               <div><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></div>
             </div>
-          <% end %>
+        <% end %>
       </div>
     
     </div>
