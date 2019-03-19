@@ -168,6 +168,10 @@ class User < ActiveRecord::Base
     pic&.url(variant: variant)
   end
 
+  def deleted?
+    deleted_at != nil
+  end
+
   def soft_delete_relations
     efficiently_soft_delete_relations
   end
