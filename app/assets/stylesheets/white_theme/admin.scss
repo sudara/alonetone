@@ -44,30 +44,42 @@
   }
   .admin_column_right {
     width: 80%;
-    
     .pagy-nav {
       width: 100%;
       float: none;
     }
     .admin_column_right_inner {
       background-color: #fff;
-      padding: $baseline / 2;
+      padding: $baseline / 2 0;
       margin-bottom: 0;
-      header.admin_comments_header {
+      padding-bottom: 5px;
+      header.admin_comments_header, header.admin_users_header, header.admin_assets_header {
         display: flex;
-        border-bottom: 2px solid $gray;
         div {
           flex: 1;
           font-weight: bold;
+          padding-bottom: $baseline / 2;
         }
       }
-      .admin_comment_rows {
-        div {
+      .admin_comment_rows, .admin_users_rows, .admin_assets_rows  {
+        > div {
           display: flex;
           div {
             flex: 1;
-            border-bottom: 1px solid $gray;
+            border-top: 1px solid $light-gray;
             padding: $baseline / 2;
+            &:nth-child(1) {
+              width: 10%;
+            }
+            &:nth-child(2) {
+              width: 10%;
+            }
+            &:nth-child(3) {
+              width: 10%;
+            }
+            &:nth-child(4) {
+              width: 10%;
+            }
           }
         }
       }
