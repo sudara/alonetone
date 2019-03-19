@@ -15,7 +15,7 @@
     width: 15%;
     ul.admin_nav {
       margin: 0;
-       li {
+      li {
         line-height: 34px;
         display: block;
         &:hover {
@@ -44,20 +44,31 @@
   }
   .admin_column_right {
     width: 80%;
-    background-color: #fff;
-    padding: $baseline / 2;
-
-    header.admin_comments_header {
-      display: flex;
-      div {
-        flex: 1;
-      }
-    } 
-    .admin_comment_rows {
-      div {
+    
+    .pagy-nav {
+      width: 100%;
+      float: none;
+    }
+    .admin_column_right_inner {
+      background-color: #fff;
+      padding: $baseline / 2;
+      margin-bottom: 0;
+      header.admin_comments_header {
         display: flex;
+        border-bottom: 2px solid $gray;
         div {
           flex: 1;
+          font-weight: bold;
+        }
+      }
+      .admin_comment_rows {
+        div {
+          display: flex;
+          div {
+            flex: 1;
+            border-bottom: 1px solid $gray;
+            padding: $baseline / 2;
+          }
         }
       }
     }
