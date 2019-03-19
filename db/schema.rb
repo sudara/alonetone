@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.integer "id3_track_num", default: 1
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_assets_on_deleted_at"
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
@@ -92,12 +91,11 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.string "referrer"
     t.boolean "is_spam", default: false
     t.boolean "private", default: false
-    t.text "body_html", limit: :medium
+    t.text "body_html", size: :medium
     t.datetime "deleted_at"
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
-    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
     t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private"
   end
 
@@ -121,8 +119,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.string "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_features_on_deleted_at"
   end
 
   create_table "followings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -212,7 +208,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.datetime "deleted_at"
     t.index ["asset_id"], name: "index_listens_on_asset_id"
     t.index ["created_at"], name: "index_listens_on_created_at"
-    t.index ["deleted_at"], name: "index_listens_on_deleted_at"
     t.index ["listener_id"], name: "index_listens_on_listener_id"
     t.index ["track_owner_id", "created_at"], name: "index_listens_on_track_owner_id_and_created_at"
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
@@ -261,7 +256,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.string "theme"
     t.datetime "published_at"
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_playlists_on_deleted_at"
     t.integer "cover_quality", default: 2
     t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
@@ -279,8 +273,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.boolean "is_spam", default: false
     t.float "spaminess"
     t.string "signature"
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_posts_on_deleted_at"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
   end
 
@@ -296,7 +288,7 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.string "instagram"
     t.string "website"
     t.string "user_agent"
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -576,7 +568,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.float "spaminess"
     t.string "signature"
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_topics_on_deleted_at"
     t.index ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink"
     t.index ["last_updated_at", "forum_id"], name: "index_topics_on_forum_id_and_last_updated_at"
     t.index ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
@@ -592,7 +583,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.integer "user_id"
     t.datetime "deleted_at"
     t.index ["asset_id"], name: "index_tracks_on_asset_id"
-    t.index ["deleted_at"], name: "index_tracks_on_deleted_at"
     t.index ["is_favorite"], name: "index_tracks_on_is_favorite"
     t.index ["playlist_id"], name: "index_tracks_on_playlist_id"
     t.index ["user_id"], name: "index_tracks_on_user_id"
@@ -653,7 +643,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.boolean "use_old_theme", default: false
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 

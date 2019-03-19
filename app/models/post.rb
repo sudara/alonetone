@@ -74,7 +74,6 @@ end
 #  id         :integer          not null, primary key
 #  body       :text(16777215)
 #  body_html  :text(16777215)
-#  deleted_at :datetime
 #  is_spam    :boolean          default(FALSE)
 #  signature  :string(255)
 #  spaminess  :float(24)
@@ -86,6 +85,5 @@ end
 #
 # Indexes
 #
-#  index_posts_on_deleted_at  (deleted_at)
-#  index_posts_on_is_spam     (is_spam)
+#  index_posts_on_is_spam  (is_spam)
 #
