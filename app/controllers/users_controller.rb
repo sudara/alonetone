@@ -95,8 +95,8 @@ class UsersController < ApplicationController
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
 
-      @user.soft_delete
       @user.soft_delete_relations
+      @user.soft_delete
 
       if moderator?
         redirect_to root_path
