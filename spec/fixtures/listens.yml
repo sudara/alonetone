@@ -2,3 +2,7 @@ valid_listen:
   listener: sudara
   asset: valid_mp3
   track_owner: arthur
+valid_listen:
+  listener: arthur
+  asset: valid_mp3
+  track_owner: sudara
