@@ -13,38 +13,45 @@
   flex-wrap: wrap;
   .admin_column_left {
     width: 15%;
-    .admin_nav {
-      li {
+    ul.admin_nav {
+      margin: 0;
+       li {
         line-height: 34px;
         display: block;
-        width: 100%;
+        &:hover {
+          background: $samo-light-gray;
+          text-decoration: none;
+        }
+        &:first-child {
+          // background-color: $gray;
+        }
         a {
           font-size: 14px;
           line-height: 34px;
           padding: 0 15px;
-		}
-		> div {
-			padding-left: 15px;
-		}
-		ul {
-			padding: 0 15px;
-			li {
-			}
-		}
-        a:hover {
-          text-decoration: none;
-          background: $light_gray;
+          width: 100%;
+          display: block;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        ul {
+          
         }
       }
-      li.current {
+      > div {
+        padding-left: 15px;
+        line-height: 34px;
+
+      }
+      > ul {
         padding: 0 15px;
-        background: $gray;
       }
     }
   }
   .admin_column_right {
     width: 80%;
-    min-width: 700px;
     background-color: #fff;
+    padding: $baseline / 2;
   }
 }
