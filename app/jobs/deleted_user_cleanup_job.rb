@@ -5,6 +5,6 @@ class DeletedUserCleanupJob < ApplicationJob
     user = User.with_deleted.find(user_id)
     return unless user.deleted?
 
-    user.really_destroy!
+    user.destroy!
   end
 end
