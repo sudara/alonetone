@@ -76,7 +76,7 @@ will_studd_rockfort_combalou_original:
   created_at: <%= 3.months.ago %>
 will_studd_rockfort_white_wild_tangy_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
-  filename:  Untitled Copy 2 premix.mp3
+  filename: Untitled Copy 2 premix.mp3
   content_type: audio/mpeg
   metadata: {}
   byte_size: <%= 2.8.megabytes %>
@@ -84,7 +84,7 @@ will_studd_rockfort_white_wild_tangy_original:
   created_at: <%= 3.months.ago %>
 will_studd_magnificent_lacaune_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
-  filename:  mixs for will 3.mp3
+  filename: mixs for will 3.mp3
   content_type: audio/mpeg
   metadata: {}
   byte_size: <%= 4.5.megabytes %>
@@ -92,7 +92,7 @@ will_studd_magnificent_lacaune_original:
   created_at: <%= 3.months.ago %>
 will_studd_appellation_controlee_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
-  filename:  4.mp3
+  filename: 4.mp3
   content_type: audio/mpeg
   metadata: {}
   byte_size: <%= 2.4.megabytes %>
@@ -101,7 +101,7 @@ will_studd_appellation_controlee_original:
 
 henri_willig_finest_cheese_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
-  filename:  track-1.mp3
+  filename: track-1.mp3
   content_type: audio/mpeg
   metadata: {}
   byte_size: <%= 1.3.megabytes %>
@@ -109,9 +109,19 @@ henri_willig_finest_cheese_original:
   created_at: <%= 1.month.ago %>
 henri_willig_the_goat_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
-  filename:  track-2.mp3
+  filename: track-2.mp3
   content_type: audio/mpeg
   metadata: {}
   byte_size: <%= 2.3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 1.month.ago %>
+
+# Blobs for all playlist fixtures
+will_studd_rockfort_cover:
+  key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
+  filename: cover.jpg
+  content_type: image/jpeg
+  metadata: {}
+  byte_size: <%= 200.kilobytes %>
+  checksum: <%= Digest::MD5.base64digest('OK!') %>
+  created_at: <%= 2.months.ago %>

@@ -16,12 +16,12 @@ module Alonetone
     # Load config/alonetone.yml and rescue when it's not there so the setup
     # tasks work.
     begin
-      config.alonetone = Configurable.new(Rails.env.to_s, config_for(:alonetone))
+      config.alonetone = ::Configurable.new(Rails.env.to_s, config_for(:alonetone))
     rescue RuntimeError
-      config.alonetone = Configurable.new(Rails.env.to_s, {})
+      config.alonetone = ::Configurable.new(Rails.env.to_s, {})
     end
 
-    config.load_defaults 5.2
+    config.load_defaults 6.0
 
     config.exceptions_app = routes
 

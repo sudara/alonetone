@@ -1,7 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe Asset, type: :model do
-  it 'supports characters outside of the in the title' do
+  it "supports characters outside of the basic multilingual plane in the title" do
     expect(Asset.new(title: '👍').title).to eq('👍')
   end
 
@@ -35,9 +37,9 @@ RSpec.describe Asset, type: :model do
     end
 
     it "should catch empty or bogus files" do
-      asset = file_fixture_asset('empty.mp3', content_type: 'audio/mpeg')
-      expect(asset).to be_new_record
-      expect(asset.errors).to be_present
+      expect do
+        file_fixture_asset('empty.mp3', content_type: 'audio/mpeg')
+      end.to raise_error(ArgumentError)
     end
 
     it "should increase the user's count" do
@@ -114,7 +116,7 @@ RSpec.describe Asset, type: :model do
     end
 
     it 'should handle umlauts and non english characters in the filename' do
-      filename = 'müppets.mp3'.mb_chars.normalize
+      filename = 'müppets.mp3'.unicode_normalize(:nfc)
       asset = file_fixture_asset(
         'muppets.mp3',
         filename: filename,
@@ -173,6 +175,49 @@ RSpec.describe Asset, type: :model do
       asset.title = 'New Muppets 123'
       asset.save
       expect(asset.permalink).to eq('new-muppets-123')
+    end
+  end
+
+  describe 'audio features' do
+    let(:asset) { assets(:will_studd_appellation_controlee) }
+    let(:asset_filename) { asset.mp3.path(:original) }
+
+    before do
+      # Using local storage for files in tests so the
+      # original should be on disk.
+      FileUtils.mkdir_p(File.dirname(asset_filename))
+      FileUtils.cp(
+        file_fixture('piano.mp3'),
+        asset_filename
+      )
+    end
+
+    after do
+      FileUtils.rm_f(asset_filename)
+    end
+
+    context 'asset without audio feature' do
+      before do
+        asset.audio_feature.delete
+      end
+
+      it 'creates a new audio feature with a waveform' do
+        asset.import_waveform
+        asset.reload
+        expect(asset.audio_feature.waveform).to eq(
+          Waveform.extract(asset_filename)
+        )
+      end
+    end
+
+    context 'asset with audio feature' do
+      it 'updates existing audio feature with a waveform' do
+        asset.import_waveform
+        asset.reload
+        expect(asset.audio_feature.waveform).to eq(
+          Waveform.extract(asset_filename)
+        )
+      end
     end
   end
 end

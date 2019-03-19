@@ -22,6 +22,10 @@ ActiveRecord::Migration.maintain_test_schema!
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+# Include helpers into the fixture context to generate data which is hard
+# to write by hand.
+ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
+
 # Magic incantation to make Capybara run the feature specs. Nobody knows
 # why this isn't a default in the gem.
 Capybara.register_driver(:headless_chrome) do |app|
@@ -71,6 +75,7 @@ RSpec.configure do |config|
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
+  config.include RSpec::Support::CapybaraHelpers, type: :feature
 
   config.before(:suite) do
     Percy::Capybara.initialize_build

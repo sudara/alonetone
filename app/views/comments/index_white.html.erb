@@ -39,19 +39,19 @@
       </div>
     </div>
 
+    <div id="right">
     <% if moderator? or admin? %>
-      <div id="right">
-        <h2>Recent SPAM</h2>
-        <div class="mini_paginator top_paginator">
-          <%== pagy_nav @pagy_spam %>
-        </div>
-        <div class="comments_area box">
-          <%= render partial: 'shared/comment', collection: @spam %>
-        </div>
-        <div class="mini_paginator bottom_paginator">
-          <%== pagy_nav @pagy_spam %>
-        </div>
+      <h2>Recent SPAM</h2>
+      <div class="mini_paginator top_paginator">
+        <%== pagy_nav @pagy_spam %>
+      </div>
+      <div class="comments_area box">
+        <%= render partial: 'shared/comment', collection: @spam %>
+      </div>
+      <div class="mini_paginator bottom_paginator">
+        <%== pagy_nav @pagy_spam %>
       </div>
     <% end %>
+    </div>
   <% end %>
 </div>

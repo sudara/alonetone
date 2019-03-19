@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :require_login, :find_user
 
   def update
-    @user.profile.update_attributes(profile_params)
+    @user.profile.update(profile_params)
     redirect_back(fallback_location: edit_user_path(@user))
   end
 

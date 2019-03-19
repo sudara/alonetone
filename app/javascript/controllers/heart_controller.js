@@ -8,6 +8,7 @@ export default class extends Controller {
     this.favorited = this.isFavorited()
     this.animation = new FaveAnimation(this.element)
     this.animation.init()
+    this.animation.setUnfave()
     if (this.favorited) {
       this.animation.setFave()
     }

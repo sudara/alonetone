@@ -17,22 +17,12 @@ module PlaylistsHelper
     content_tag(:div, '', class: 'no_pic')
   end
 
-  # Returns true when the Pic with this ID does not have a greenfield variant.
-  def no_greenfield_variant?(pic_id)
-    (69806..72848).cover?(pic_id)
-  end
-
-  # Returns true when the Pic with this ID does not have a greenfield nor an original variant.
-  def no_greenfield_and_original_variant?(pic_id)
-    pic_id < 69807
-  end
-
   # Returns a different variant when the Pic with the supplied ID does not have the variant.
-  def downgrade_variant(pic_id, variant:)
-    if no_greenfield_and_original_variant?(pic_id)
+  def downgrade_variant(playlist, variant:)
+    if playlist.ancient_cover_quality?
       downgrade_ancient_variant(variant: variant)
-    elsif no_greenfield_variant?(pic_id)
-      downgrade_old_variant(variant: variant)
+    elsif playlist.legacy_cover_quality?
+      downgrade_legacy_variant(variant: variant)
     else
       variant
     end
@@ -41,7 +31,7 @@ module PlaylistsHelper
   # Returns a URL to the playlist's cover or nil when there is no cover.
   def playlist_cover_url(playlist, variant:)
     if playlist.cover_image_present?
-      variant = downgrade_variant(playlist.pic.id, variant: variant)
+      variant = downgrade_variant(playlist, variant: variant)
       playlist.cover_url(variant: variant)
     end
   end
@@ -130,7 +120,7 @@ module PlaylistsHelper
     %i[greenfield original].include?(variant) ? :album : variant
   end
 
-  def downgrade_old_variant(variant:)
+  def downgrade_legacy_variant(variant:)
     variant == :greenfield ? :original : variant
   end
 end

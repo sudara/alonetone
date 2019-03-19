@@ -42,7 +42,7 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 
 ### Current tech
 
-* Rails 5.2
+* Rails 6
 * [Stimulus js](http://stimulusjs.org)
 * [Howler js](http://howlerjs.com)
 

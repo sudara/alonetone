@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else

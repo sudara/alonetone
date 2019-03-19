@@ -44,28 +44,41 @@ class Upload
   def process_files(mime_types)
     reset
     uploaded_files.each do |uploaded_file|
-      case mime_types[uploaded_file.path]
-      when 'application/zip'
-        process_zip_file(uploaded_file)
-      when 'audio/mpeg'
-        process_mp3_file(uploaded_file)
-      end
+      content_type = mime_types[uploaded_file.path]
+      # When the `file` command thinks the file is raw data we'll try to process using the
+      # content-type reported by the client.
+      content_type = uploaded_file.content_type if content_type == 'application/octet-stream'
+      process_file(uploaded_file, content_type: content_type)
+    end
+  end
+
+  def process_file(uploaded_file, content_type:)
+    case content_type
+    when %r{zip}
+      process_zip_file(uploaded_file)
+    when %r{audio}
+      process_mp3_file(uploaded_file, content_type: content_type)
     end
   end
 
   def process_zip_file(uploaded_file)
     zip_file = Upload::ZipFile.process(
-      user: user, file: uploaded_file.tempfile,
-      asset_attributes: asset_attributes, playlist_attributes: playlist_attributes
+      user: user,
+      file: uploaded_file.tempfile,
+      asset_attributes: asset_attributes,
+      playlist_attributes: playlist_attributes
     )
     @assets.concat(zip_file.assets)
     @playlists.concat(zip_file.playlists)
   end
 
-  def process_mp3_file(uploaded_file)
+  def process_mp3_file(uploaded_file, content_type:)
     mp3_file = Upload::Mp3File.process(
-      user: user, file: uploaded_file.tempfile, filename: uploaded_file.original_filename,
-      asset_attributes: asset_attributes
+      user: user,
+      file: uploaded_file.tempfile,
+      filename: uploaded_file.original_filename,
+      asset_attributes: asset_attributes,
+      content_type: content_type
     )
     @assets.concat(mp3_file.assets)
   end
