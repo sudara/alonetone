@@ -172,6 +172,10 @@ class User < ActiveRecord::Base
     efficiently_soft_delete_relations
   end
 
+  def enqueue_real_destroy_job
+    DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
+  end
+
   protected
 
   def efficiently_soft_delete_relations
