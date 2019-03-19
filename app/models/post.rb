@@ -1,6 +1,4 @@
 class Post < ActiveRecord::Base
-  include SoftDeletion
-
   @@per_page = 10
   cattr_accessor :per_page
 

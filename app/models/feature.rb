@@ -1,6 +1,4 @@
 class Feature < ActiveRecord::Base
-  include SoftDeletion
-
   scope :published, -> { where(published: true).order('created_at DESC') }
 
   has_many :featured_tracks,
