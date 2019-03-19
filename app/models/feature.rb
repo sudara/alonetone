@@ -60,7 +60,6 @@ end
 #  id               :integer          not null, primary key
 #  body             :text(16777215)
 #  datetime         :boolean
-#  deleted_at       :datetime
 #  permalink        :string(255)
 #  published        :boolean          default(FALSE)
 #  published_at     :boolean
@@ -70,8 +69,4 @@ end
 #  updated_at       :datetime
 #  featured_user_id :integer
 #  writer_id        :integer
-#
-# Indexes
-#
-#  index_features_on_deleted_at  (deleted_at)
 #
