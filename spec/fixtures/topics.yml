@@ -4,3 +4,9 @@ topic1:
   title: Do you like chocolate?
   permalink: firsttopic
   last_user: sudara
+topic1:
+  forum: valid_forum
+  user: arthur
+  title: Do you like chocolate?
+  permalink: firsttopic
+  last_user: arthur
