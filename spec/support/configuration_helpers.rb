@@ -14,6 +14,12 @@ module RSpec
           ::Rails.application.config.alonetone = before
         end
       end
+
+      # Returns random RSA private and public key in PEM format as string.
+      def generate_amazon_cloud_front_private_key
+        rsa = OpenSSL::PKey::RSA.new(2048)
+        rsa.to_s + rsa.public_key.to_s
+      end
     end
   end
 end
