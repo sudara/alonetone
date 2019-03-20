@@ -70,8 +70,8 @@ RSpec.describe Admin::CommentsController, type: :request do
     it "should alow mass update by other attributes (like user_id)" do
       akismet_stub_submit_spam
 
-      put mark_group_as_spam_admin_comments_path, params: { mark_spam_by: { user_id: comment1.user_id } }
-      expect(comment1.reload.is_spam).to eq(true)
+      put mark_group_as_spam_admin_comments_path, params: { mark_spam_by: { user_id: comment2.user_id } }
+      expect(comment2.reload.is_spam).to eq(true)
       expect(comment3.reload.is_spam).to eq(true)
     end
   end
