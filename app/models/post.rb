@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include SoftDeletion
+
   @@per_page = 10
   cattr_accessor :per_page
 
@@ -72,6 +74,7 @@ end
 #  id         :integer          not null, primary key
 #  body       :text(16777215)
 #  body_html  :text(16777215)
+#  deleted_at :datetime
 #  is_spam    :boolean          default(FALSE)
 #  signature  :string(255)
 #  spaminess  :float(24)
