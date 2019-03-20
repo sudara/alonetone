@@ -16,6 +16,7 @@ module Admin
 
     def restore
       @user.restore
+      @user.restore_relations
     end
 
     private
