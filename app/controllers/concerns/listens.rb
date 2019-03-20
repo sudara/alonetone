@@ -7,11 +7,21 @@ module Listens
     render nothing: true
   end
 
-  private
-
-  def cloudfront_url(url, expires_in = 20.minutes)
-    Aws::CF::Signer.sign_url url, expires: Time.now + expires_in
+  def self.cloud_front_signer
+    Aws::CloudFront::UrlSigner.new(
+      key_pair_id: Rails.configuration.alonetone.amazon_cloud_front_key_pair_id,
+      private_key_path: File.join(Rails.root, 'config', 'certs', 'cloudfront.pem')
+    )
   end
+
+  def self.cloudfront_url(public_cloud_front_url)
+    Listens.cloud_front_signer.signed_url(
+      public_cloud_front_url,
+      expires: 20.minutes.from_now
+    )
+  end
+
+  private
 
   def listen(asset, register: true)
     unless prevent_abuse(asset)
@@ -19,7 +29,7 @@ module Listens
       if Rails.application.play_dummy_audio?
         play_local_mp3
       elsif Rails.application.cloudfront_enabled?
-        redirect_to cloudfront_url(asset.mp3.url)
+        redirect_to Listens.cloudfront_url(asset.mp3.url)
       else
         redirect_to asset.mp3.expiring_url
       end
