@@ -6,7 +6,7 @@ module Admin
       @pagy, @users = pagy(User.with_deleted.recent)
     end
 
-    # should we rescue/display any error that occured to admin user 
+    # should we rescue/display any error that occured to admin user
     def delete
       @user.soft_delete_relations
       @user.enqueue_real_destroy_job
