@@ -232,35 +232,52 @@ class User < ActiveRecord::Base
     efficiently_soft_delete_relations
   end
 
+  def restore_relations
+    efficiently_restore_relations
+  end
+
   def enqueue_real_destroy_job
     DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
   end
 
   protected
 
+  def efficiently_restore_relations
+    Asset.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Listen.with_deleted.where(track_owner_id: id).update_all(deleted_at: nil)
+    Listen.with_deleted.where(listener_id: id).update_all(deleted_at: nil)
+    Playlist.with_deleted.joins(:assets).where(assets: { user_id: id })
+            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+    Track.with_deleted.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: nil)
+    Comment.with_deleted.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: nil)
+
+    Track.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Playlist.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Post.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Comment.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+
+    true
+  end
+
   def efficiently_soft_delete_relations
-    Listen.where(track_owner_id: id).map(&:soft_delete)
-    Listen.where(listener_id: id).map(&:soft_delete)
-    Topic.where(user_id: id).where('posts_count < 2').map(&:soft_delete)
+    Listen.where(track_owner_id: id).update_all(deleted_at: Time.now)
+    Listen.where(listener_id: id).update_all(deleted_at: Time.now)
+    Topic.where(user_id: id).where('posts_count < 2').destroy_all
     Playlist.joins(:assets).where(assets: { user_id: id })
             .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.joins(:asset).where(assets: { user_id: id }).map(&:soft_delete)
+    Track.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: Time.now)
     Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).map(&:soft_delete)
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: Time.now)
 
-    assets.map(&:soft_delete)
+    assets.update_all(deleted_at: Time.now)
 
-    %w[tracks playlists posts comments].each do |user_relation|
-      send(user_relation).map(&:soft_delete)
-    end
     true
   end
 
   def efficiently_destroy_relations
     Listen.where(track_owner_id: id).delete_all
     Listen.where(listener_id: id).delete_all
-    Topic.where(user_id: id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
-
     Playlist.joins(:assets).where(assets: { user_id: id })
             .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
     Track.joins(:asset).where(assets: { user_id: id }).delete_all

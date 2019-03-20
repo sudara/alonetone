@@ -5,6 +5,38 @@ RSpec.describe Admin::AssetsController, type: :request do
     create_user_session(users(:sudara))
   end
 
+  describe '#restore' do
+    before :each do
+      users(:arthur).soft_delete_relations
+      users(:arthur).update(deleted_at: Time.now - 1.week)
+
+    end
+
+    it "should restore a user" do
+      expect {
+        put restore_admin_user_path(users(:arthur))
+      }.to change(User, :count).by(1)
+    end
+
+    it "should set deleted_at to nil" do
+      put restore_admin_user_path(users(:arthur))
+      expect(users(:arthur).reload.deleted_at).to be_nil
+    end
+
+    it "should restore users relations" do
+      put restore_admin_user_path(users(:arthur))
+
+      users(:arthur).reload
+
+      expect(users(:arthur).assets.count).to be > 0
+      expect(users(:arthur).tracks.count).to be > 0
+      expect(users(:arthur).listens.count).to be > 0
+      expect(users(:arthur).playlists.count).to be > 0
+      expect(users(:arthur).topics.count).to eq(0)
+      expect(users(:arthur).comments.count).to be > 0
+    end
+  end
+
   describe '#delete' do
     it "should delete a user" do
       expect {
