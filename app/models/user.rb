@@ -272,6 +272,10 @@ class User < ActiveRecord::Base
 
     assets.update_all(deleted_at: Time.now)
 
+    %w[tracks playlists posts comments].each do |user_relation|
+      send(user_relation).update_all(deleted_at: Time.now)
+    end
+
     true
   end
 
