@@ -23,7 +23,8 @@ RSpec.describe Listens, type: :model do
     around do |example|
       with_alonetone_configuration(
         amazon_cloud_front_domain_name: amazon_cloud_front_domain_name,
-        amazon_cloud_front_key_pair_id: amazon_cloud_front_key_pair_id
+        amazon_cloud_front_key_pair_id: amazon_cloud_front_key_pair_id,
+        amazon_cloud_front_private_key: generate_amazon_cloud_front_private_key
       ) do
         example.call
       end
