@@ -48,8 +48,14 @@ class Configurable
     @environment = environment
     @upgraded = {}
     @deprecated = []
-    rewrite_attributes(attributes).each { |name, value| public_send("#{name}=", value) }
+    update(attributes)
     print_upgrade_warning
+  end
+
+  def update(attributes)
+    rewrite_attributes(attributes).each do |name, value|
+      public_send("#{name}=", value)
+    end
   end
 
   def method_missing(method, *attributes, &block)
