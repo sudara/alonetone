@@ -7,10 +7,19 @@ module Listens
     render nothing: true
   end
 
+  def self.cloud_front_private_key_filename
+    File.join(Rails.root, 'config', 'certs', 'cloudfront.pem')
+  end
+
+  def self.cloud_front_private_key
+    Rails.configuration.alonetone.amazon_cloud_front_private_key.presence ||
+      File.read(cloud_front_private_key_filename)
+  end
+
   def self.cloud_front_signer
     Aws::CloudFront::UrlSigner.new(
       key_pair_id: Rails.configuration.alonetone.amazon_cloud_front_key_pair_id,
-      private_key_path: File.join(Rails.root, 'config', 'certs', 'cloudfront.pem')
+      private_key: cloud_front_private_key
     )
   end
 
