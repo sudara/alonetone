@@ -3,10 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Listens, type: :model do
-  it "returns a CloudFront signer instance" do
-    expect(Listens.cloud_front_signer).to be_kind_of(Aws::CloudFront::UrlSigner)
-  end
-
   context "when CloudFront is configured" do
     let(:asset) do
       assets(:will_studd_rockfort_combalou)
@@ -28,6 +24,10 @@ RSpec.describe Listens, type: :model do
       ) do
         example.call
       end
+    end
+
+    it "returns a CloudFront signer instance" do
+      expect(Listens.cloud_front_signer).to be_kind_of(Aws::CloudFront::UrlSigner)
     end
 
     it "signs a CloudFront URL" do
