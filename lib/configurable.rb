@@ -23,6 +23,7 @@ class Configurable
     :amazon_access_key_id,
     :amazon_cloud_front_domain_name,
     :amazon_cloud_front_key_pair_id,
+    :amazon_cloud_front_private_key,
     :amazon_s3_bucket_name,
     :amazon_s3_region,
     :amazon_secret_access_key,
