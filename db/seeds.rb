@@ -310,6 +310,6 @@ Greenfield::Post.first_or_create!(
 playlist = Playlist.first
 playlist.greenfield_downloads.first_or_create!(
   title: playlist.title,
-  s3_path: 'playlists/le_duc_vacherin.zip',
+  s3_path: '/playlists/le_duc_vacherin.zip',
   attachment: upload('files/Le Duc Vacherin.zip')
 )
