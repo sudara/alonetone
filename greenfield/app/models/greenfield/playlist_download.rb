@@ -29,6 +29,8 @@ module Greenfield
     protected
 
     def ensure_bucket_not_in_s3_path
+      return unless Rails.application.remote_storage?
+
       self.s3_path = s3_path.gsub('/' + Rails.configuration.alonetone.amazon_s3_bucket_name, '')
     end
 
