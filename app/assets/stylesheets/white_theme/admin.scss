@@ -44,6 +44,7 @@
   }
   .admin_column_right {
     width: 80%;
+    font-size: 13px;
     .pagy-nav {
       width: 100%;
       float: none;
@@ -53,32 +54,69 @@
       padding: $baseline / 2 0;
       margin-bottom: 0;
       padding-bottom: 5px;
-      header.admin_comments_header, header.admin_users_header, header.admin_assets_header {
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+
+      header.admin_comments_header,
+      header.admin_users_header,
+      header.admin_assets_header {
         display: flex;
         div {
-          flex: 1;
           font-weight: bold;
           padding-bottom: $baseline / 2;
+          &:nth-child(1) {
+            width: 60px;
+          }
+          &:nth-child(2) {
+            width: 100px;
+          }
+          &:nth-child(3) {
+            width: 120px;
+          }
+          &:nth-child(4) {
+            width: 120px;
+            overflow: hidden;
+          }
+          &:nth-child(5) {
+            width: 250px;
+
+          }
+
         }
       }
-      .admin_comment_rows, .admin_users_rows, .admin_assets_rows  {
+
+      .admin_comment_rows,
+      .admin_users_rows,
+      .admin_assets_rows {
         > div {
           display: flex;
-          div {
-            flex: 1;
+          > div {
             border-top: 1px solid $light-gray;
-            padding: $baseline / 2;
+            // padding: $baseline / 2;
             &:nth-child(1) {
-              width: 10%;
+              padding-left: 0;
+              width: 60px;
+              input[type="checkbox"] {
+                position: static;
+              }
             }
             &:nth-child(2) {
-              width: 10%;
+              width: 100px;
             }
             &:nth-child(3) {
-              width: 10%;
+              width: 120px;
             }
             &:nth-child(4) {
-              width: 10%;
+              width: 120px;
+              overflow: hidden;
+            }
+            &:nth-child(5) {
+              width: 250px;
+            }
+            &:last-child {
+              input[type="submit"] {
+                margin-bottom: $baseline / 2;
+              }
             }
           }
         }
