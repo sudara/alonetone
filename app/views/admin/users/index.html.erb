@@ -17,25 +17,28 @@
     <div class="admin_column_right_inner box">
     
       <header class="admin_users_header">
-        <div>Check</div>
-        <div>UpdatedAt</div>
-        <div>IP/login</div>
-        <div>Login</div>
-        <div>Bio</div>
-        <div></div>
-        <div></div>
+        <div class="date_column">Date</div>
+        <div class="user_column">User</div>
+        <div class="bio_column">Bio</div>
       </header>
 
       <div class="admin_users_rows">
         <% @users.each do |user| %>
           <div>
-            <div><input type="checkbox"></div>
-            <div><%= user.created_at.strftime("%b %d") %></div>
-            <div><%= user.current_login_ip %></div>
-            <div><%= link_to user.login, user_path(user.login) %></div>
-            <div><%= truncate(user&.profile&.bio, length: 200) %></div>
-            <div><%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></div>
-            <div><%= button_to "Delete User", user, method: :delete, confirm: "Permanently delete user?" %></div>
+            <div class="date_column"><%= user.created_at.strftime("%b %d") %></div>
+            <div></div>
+            <div class="user_column">
+              <div><%= link_to user.login, user_path(user.login) %></div>
+              <div><%= user.current_login_ip %></div>
+            </div>
+            <div class="bio_column">
+              <div><%= truncate(user&.profile&.bio, length: 200) %></div>
+            </div>
+            <div class="button_column">
+              <%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %>
+              <%= button_to "Delete User", user, method: :delete, confirm: "Permanently delete user?" %>
+            </div>
+
           </div>
         <% end %>
       </div>
