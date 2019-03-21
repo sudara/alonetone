@@ -4,10 +4,13 @@
 </div>
 
 <div id="admin_columns">
+  
   <div class="admin_column_left">
     <%= render partial: 'admin/navigation' %>
   </div>
+  
   <div class="admin_column_right">
+
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
@@ -22,7 +25,7 @@
           <div>
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
-              <div><%= asset.user.name %></div>
+              <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
               <div><%= asset.user.ip %></div>
             </div>
             <div class="track_column">
@@ -37,7 +40,9 @@
           </div>
         <% end %>
       </div>
+
     </div>
+
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>
