@@ -54,60 +54,73 @@
       padding: $baseline / 2 0;
       margin-bottom: 0;
       padding-bottom: 5px;
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-
-
+      padding-left: 0;
+      padding-right: 0;
+      
       input[type=checkbox] {
         position: static;
       }
 
+      .date_column {
+        // font-family: $medium-sans-font;
+        min-width: 60px;
+      }
+
+      .user_column {
+        min-width: 120px;
+        padding-right: 6px;
+        div:first-child {
+          margin-bottom: 5px;
+          font-family: $medium-sans-font;
+        }
+        div:last-child {
+          font-style: italic;
+          font-size: 13px;
+          line-height: 1.1;
+        }
+      }
+
+      .track_column {
+        flex: 1;
+        padding-right: 6px;
+        div:first-child {
+          margin-bottom: 5px;
+          font-family: $medium-sans-font;
+        }
+        div:last-child {
+          font-style: italic;
+          font-size: 13px;
+          line-height: 1.1;
+        }
+      }
+
+      .button_column {
+        display: flex;
+        form {
+          input[type=submit] {
+            margin-bottom: 0;
+            padding: 6px 6px;
+            height: auto;
+            font-size: 11px;
+            white-space: normal;
+            line-height: 1.2;
+            margin-left: 6px;
+            margin-top: 3px;
+          }
+        }
+      }
 
       header.admin_comments_header,
       header.admin_users_header,
       header.admin_assets_header {
         display: flex;
+        border-bottom: 1px solid $samo-light-gray;
+        padding-left: $baseline / 2;
+        padding-right: $baseline / 2;
+
         div {
           font-weight: bold;
           padding-bottom: $baseline / 2;
-          &:nth-child(1) {
-            min-width: 30px;
-          }
-          &:nth-child(2) {
-            min-width: 100px;
-          }
-          &:nth-child(3) {
-            min-width: 120px;
-          }
-          &:nth-child(4) {
-            min-width: 120px;
-            padding-left: 6px;
-          }
-          &:nth-child(5) {
-            min-width: 180px;;
-            padding-left: 6px;
-          }
-          &:nth-child(6) {
-            // flex: 1;
-          }
-        }
-      }
-
-      .buttons {
-        display: flex;
-        form {
-          max-width: 60px;
-          input[type=submit] {
-            margin-bottom: $baseline / 2;
-            padding: 6px 6px;
-            height: auto;
-            font-size: 10px;
-            font-size: 10px;
-            white-space: normal;
-            line-height: 1.2;
-            width: 57px;
-            margin-left: 6px;
-          }
         }
       }
 
@@ -116,33 +129,17 @@
       .admin_assets_rows {
         > div {
           display: flex;
+          border-top: 1px solid $light-gray;
+          padding: $baseline / 2 0;
+          padding-left: $baseline / 2;
+          padding-right: $baseline / 2;
+
+          &:first-child {
+            border-top: 0;
+          }
           > div {
-            border-top: 1px solid $light-gray;
-            padding: $baseline / 2 0;
-            &:nth-child(1) {
-              min-width: 30px;
-            }
-            &:nth-child(2) {
-              min-width: 100px;
-            }
-            &:nth-child(3) {
-              min-width: 120px;
-            }
-            &:nth-child(4) {
-              min-width: 120px;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              padding-left: 6px;
-            }
-            &:nth-child(5) {
-              min-width: 180px;;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              padding-left: 6px;
-            }
-            &:nth-child(6) {
-              // flex: 1;
-            }
+            
+            
           }
         }
       }
