@@ -57,6 +57,12 @@
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
 
+
+      input[type=checkbox] {
+        position: static;
+      }
+
+
       header.admin_comments_header,
       header.admin_users_header,
       header.admin_assets_header {
@@ -65,23 +71,43 @@
           font-weight: bold;
           padding-bottom: $baseline / 2;
           &:nth-child(1) {
-            width: 60px;
+            min-width: 30px;
           }
           &:nth-child(2) {
-            width: 100px;
+            min-width: 100px;
           }
           &:nth-child(3) {
-            width: 120px;
+            min-width: 120px;
           }
           &:nth-child(4) {
-            width: 120px;
-            overflow: hidden;
+            min-width: 120px;
+            padding-left: 6px;
           }
           &:nth-child(5) {
-            width: 250px;
-
+            min-width: 180px;;
+            padding-left: 6px;
           }
+          &:nth-child(6) {
+            // flex: 1;
+          }
+        }
+      }
 
+      .buttons {
+        display: flex;
+        form {
+          max-width: 60px;
+          input[type=submit] {
+            margin-bottom: $baseline / 2;
+            padding: 6px 6px;
+            height: auto;
+            font-size: 10px;
+            font-size: 10px;
+            white-space: normal;
+            line-height: 1.2;
+            width: 57px;
+            margin-left: 6px;
+          }
         }
       }
 
@@ -92,31 +118,30 @@
           display: flex;
           > div {
             border-top: 1px solid $light-gray;
-            // padding: $baseline / 2;
+            padding: $baseline / 2 0;
             &:nth-child(1) {
-              padding-left: 0;
-              width: 60px;
-              input[type="checkbox"] {
-                position: static;
-              }
+              min-width: 30px;
             }
             &:nth-child(2) {
-              width: 100px;
+              min-width: 100px;
             }
             &:nth-child(3) {
-              width: 120px;
+              min-width: 120px;
             }
             &:nth-child(4) {
-              width: 120px;
+              min-width: 120px;
               overflow: hidden;
+              text-overflow: ellipsis;
+              padding-left: 6px;
             }
             &:nth-child(5) {
-              width: 250px;
+              min-width: 180px;;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              padding-left: 6px;
             }
-            &:last-child {
-              input[type="submit"] {
-                margin-bottom: $baseline / 2;
-              }
+            &:nth-child(6) {
+              // flex: 1;
             }
           }
         }

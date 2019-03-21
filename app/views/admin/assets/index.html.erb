@@ -15,12 +15,11 @@
     <div class="admin_column_right_inner box">
 
       <header class="admin_assets_header">
-        <div>Check</div>
+        <div></div>
         <div>Timestamp</div>
         <div>IP/login</div>
         <div>Title</div>
         <div>Description</div>
-        <div>Spam</div>
         <div></div>
       </header>
 
@@ -32,10 +31,10 @@
             <div><%= asset.user.ip %></div>
             <div><%= link_to asset.title, user_track_path(user_id: asset.user&.login, id: asset.id) %></div>
             <div><%= truncate(asset.description, length: 80) %></div>
-            <div class="button-column">
-              <div><%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put %></div>
-              <div><%= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %></div>
-              <div><%= button_to "Delete User", admin_user_path(asset.user_id), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :delete %></div>
+            <div class="buttons">
+              <%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put %>
+              <%= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %>
+              <%= button_to "Delete User", admin_user_path(asset.user_id), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :delete %>
             </div>
           </div>
         <% end %>
