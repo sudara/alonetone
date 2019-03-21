@@ -39,9 +39,7 @@ module Paperclip
           ).unicode_normalize(:nfkc)
         end
         attribute_writer = "#{attribute_name}="
-        if attachment.instance.respond_to?(attribute_writer)
-          attachment.instance.public_send(attribute_writer, value)
-        end
+        attachment.instance.public_send(attribute_writer, value) if attachment.instance.respond_to?(attribute_writer)
       end
     end
   end
