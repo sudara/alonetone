@@ -8,19 +8,15 @@
     <%= render partial: 'admin/navigation' %>
   </div>
   <div class="admin_column_right">
-
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
     <div class="admin_column_right_inner box">
-
       <header class="admin_assets_header">
         <div class="date_column">Date</div>
         <div class="user_column">User</div>
         <div class="track_column">Track</div>
-        
       </header>
-
       <div class="admin_assets_rows">
         <% @assets.each do |asset| %>
           <div>
@@ -41,13 +37,9 @@
           </div>
         <% end %>
       </div>
-    </table>
-
     </div>
-  
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>
-
   </div>
 </div>

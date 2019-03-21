@@ -74,6 +74,7 @@
           font-family: $medium-sans-font;
         }
         div:last-child {
+          color: $dark-gray;
           font-style: italic;
           font-size: 13px;
           line-height: 1.1;
@@ -89,6 +90,7 @@
         }
         div:last-child {
           font-style: italic;
+          color: $dark-gray;
           font-size: 13px;
           line-height: 1.1;
         }
