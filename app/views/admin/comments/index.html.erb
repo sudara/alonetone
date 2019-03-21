@@ -9,7 +9,6 @@
   </div>
   <div class="admin_column_right">
 
-
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
@@ -17,25 +16,26 @@
     <div class="admin_column_right_inner box">
 
       <header class="admin_comments_header">
-        <div>Check</div>
-        <div>UpdatedAt</div>
-        <div>IP/login</div>
-        <div>Text</div>
-        <div></div>
-        <div></div>
+        <div class="date_column">Date</div>
+        <div class="user_column">User</div>
+        <div class="text_column">Text</div>
       </header>
 
       <div class="admin_comment_rows">
         <% @comments.each do |comment| %>
             <div data-controller="admin--comment">
-              <div><input type="checkbox"></div>
-              <div><%= comment.created_at.strftime("%b %d") %></div>
-              <div><%= link_to "#{comment&.commenter&.login} (#{comment.remote_ip})", { filter_by: {commenter_id: comment.commenter_id } } %></div>
-              <div><%= truncate(comment.body, length: 80) %></div>
-              <div data-target='admin--comment.spamvalue' style="display: none;"><%= comment.is_spam %></div>
-              <div data-target='admin--comment.spam'><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { action: 'click->admin--comment#showSpamTarget' } %></div>
-              <div data-target='admin--comment.unspam'><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?', action: 'click->admin--comment#showUnspamTarget' }, method: :put, remote: true %></div>
-              <div><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></div>
+              <div class="date_column"><%= comment.created_at.strftime("%b %d") %></div>
+              <div class="user_column">
+                <div><%= link_to "#{comment&.commenter&.login}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
+                <div><%= link_to "#{comment.remote_ip}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
+              </div>
+              <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
+              <div class="button_column">
+                <div data-target='admin--comment.spamvalue' style="display: none;"><%= comment.is_spam %></div>
+                <div data-target='admin--comment.spam'><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { action: 'click->admin--comment#showSpamTarget' } %></div>
+                <div data-target='admin--comment.unspam'><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?', action: 'click->admin--comment#showUnspamTarget' }, method: :put, remote: true %></div>
+                <div><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></div>
+              </div>
             </div>
         <% end %>
       </div>
@@ -45,8 +45,6 @@
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>
-
-
 
   </div>
 </div>

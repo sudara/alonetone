@@ -102,7 +102,7 @@
 		  line-height: 1.1;
 		}
 	  }
-	  .track_column, .bio_column {
+	  .track_column, .bio_column, .text_column {
 		flex: 1;
 		padding-right: 6px;
 		div:first-child {
@@ -116,7 +116,7 @@
 		}
 	  }
 
-	  .bio_column {
+	  .bio_column, .text_column {
 		  div:first-child {
 			  font-family: $sans-font;
 			  font-size: 13px;
