@@ -12,11 +12,14 @@ module RSpec
 
       # Temporarily switches out the global storage service class.
       def with_storage_service(storage_service)
+        before = ::Rails.application.config.active_storage.service
         service = ActiveStorage::Blob.service
         begin
+          ::Rails.application.config.active_storage.service = storage_service
           ActiveStorage::Blob.service = storage_service(storage_service)
           yield
         ensure
+          ::Rails.application.config.active_storage.service = before
           ActiveStorage::Blob.service = service
         end
       end
