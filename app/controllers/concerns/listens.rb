@@ -7,29 +7,6 @@ module Listens
     render nothing: true
   end
 
-  def self.cloud_front_private_key_filename
-    File.join(Rails.root, 'config', 'certs', 'cloudfront.pem')
-  end
-
-  def self.cloud_front_private_key
-    Rails.configuration.alonetone.amazon_cloud_front_private_key.presence ||
-      File.read(cloud_front_private_key_filename)
-  end
-
-  def self.cloud_front_signer
-    Aws::CloudFront::UrlSigner.new(
-      key_pair_id: Rails.configuration.alonetone.amazon_cloud_front_key_pair_id,
-      private_key: cloud_front_private_key
-    )
-  end
-
-  def self.cloudfront_url(public_cloud_front_url)
-    Listens.cloud_front_signer.signed_url(
-      public_cloud_front_url,
-      expires: 20.minutes.from_now
-    )
-  end
-
   private
 
   def listen(asset, register: true)
@@ -37,10 +14,8 @@ module Listens
       register_listen(asset) if register
       if Rails.application.play_dummy_audio?
         play_local_mp3
-      elsif Rails.application.cloudfront_enabled?
-        redirect_to Listens.cloudfront_url(asset.mp3.url)
       else
-        redirect_to asset.mp3.expiring_url
+        asset.download_url
       end
     end
   end
