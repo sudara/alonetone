@@ -5,7 +5,7 @@ valid_mp3_original:
   key: mp3/1/Song1.mp3
   filename: Song1.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 10.years.ago %>
@@ -13,7 +13,7 @@ valid_zip_original:
   key: mp3/2/MySongs.zip
   filename: MySongs.zip
   content_type: application/zip
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 10.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: 2007-04-08 13:00:03
@@ -21,7 +21,7 @@ invalid_file_original:
   key: mp3/3/Somefile.png
   filename: Somefile.png
   content_type: image/png
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 1.megabyte %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 1.day.ago.to_s :db %>
@@ -29,7 +29,7 @@ valid_arthur_mp3_original:
   key: mp3/4/Song5.mp3
   filename: Song5.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: 2007-04-08 13:00:03
@@ -37,7 +37,7 @@ too_big_file_original:
   key: mp3/5/Song1.mp3
   filename: Song1.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 61.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: 2007-04-08 13:00:03
@@ -45,7 +45,7 @@ valid_mp3_2_original:
   key: mp3/6/Song1.mp3
   filename: Song1.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: 2007-04-08 13:00:03
@@ -53,7 +53,7 @@ private_track_original:
   key: mp3/7/Song7.mp3
   filename: Song7.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: 2007-04-08 13:00:03
@@ -61,7 +61,7 @@ spam_track_original:
   key: mp3/8/Song6.mp3
   filename: Song6.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: 2007-04-08 13:00:03
@@ -70,7 +70,7 @@ will_studd_rockfort_combalou_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: Untitled Copy 1.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 2.8.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 3.months.ago %>
@@ -78,7 +78,7 @@ will_studd_rockfort_white_wild_tangy_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: Untitled Copy 2 premix.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 2.8.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 3.months.ago %>
@@ -86,7 +86,7 @@ will_studd_magnificent_lacaune_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: mixs for will 3.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 4.5.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 3.months.ago %>
@@ -94,7 +94,7 @@ will_studd_appellation_controlee_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: 4.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 2.4.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 2.months.ago %>
@@ -103,7 +103,7 @@ henri_willig_finest_cheese_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: track-1.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 1.3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 1.month.ago %>
@@ -111,7 +111,7 @@ henri_willig_the_goat_original:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: track-2.mp3
   content_type: audio/mpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 2.3.megabytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 1.month.ago %>
@@ -121,7 +121,7 @@ will_studd_rockfort_cover:
   key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
   filename: cover.jpg
   content_type: image/jpeg
-  metadata: {}
+  metadata: "{}"
   byte_size: <%= 200.kilobytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 2.months.ago %>
