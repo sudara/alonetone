@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# An asset represents an audio track.
 class Asset < ApplicationRecord
   include SoftDeletion
 
@@ -50,6 +51,37 @@ class Asset < ApplicationRecord
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
   validates :user, presence: true
+  validates :audio_file, attached: {
+    content_type: %w[audio/mpeg audio/mp3 audio/x-mp3],
+    byte_size: { less_than: 60.megabytes }
+  }
+
+  # @deprecated Please use asset.audio_file.filename.
+  def mp3_file_name
+    if filename = audio_file&.filename
+      filename.to_s
+    end
+  end
+
+  # @deprecated Please use asset.audio_file.byte_size.
+  def mp3_file_size
+    audio_file.attached? ? audio_file.byte_size : nil
+  end
+
+  # @deprecated Please use asset.audio_file.content_type.
+  def mp3_content_type
+    audio_file.attached? ? audio_file.content_type : nil
+  end
+
+  def title=(title)
+    super
+    rename
+  end
+
+  def audio_file=(audio_file)
+    super
+    rename
+  end
 
   def self.latest(limit = 10)
     includes(user: :pic).limit(limit).order('assets.id DESC')
@@ -80,27 +112,18 @@ class Asset < ApplicationRecord
     object_id
   end
 
-  def title=(title)
-    super
-    rename
-  end
-
-  def mp3_file_name=(mp3_file_name)
-    super
-    rename
-  end
-
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
 
-    basename.humanize.presence || 'untitled'
+    name = audio_file.attached? ? audio_file.filename.base.humanize : nil
+    name.presence || 'untitled'
   end
 
   def first_playlist
-      Track.where(asset_id: id).first.playlists.first
+    Track.where(asset_id: id).first.playlists.first
   rescue StandardError
-      nil
+    nil
   end
 
   # Helper for rakismet
@@ -172,6 +195,12 @@ class Asset < ApplicationRecord
     end
   end
 
+  def download_location
+    return nil unless audio_file.attached?
+
+    Storage::Location.new(audio_file, signed: true)
+  end
+
   private
 
   include HasPermalink::InstanceMethods
@@ -187,10 +216,6 @@ class Asset < ApplicationRecord
 
   def ensure_unique_permalink
     self.permalink = fix_duplication(permalink)
-  end
-
-  def basename
-    File.basename(mp3_file_name.to_s, '.*')
   end
 end
 
