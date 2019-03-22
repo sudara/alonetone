@@ -44,7 +44,7 @@ module Waveform
   end
 
   def self.extract(file)
-    Tempfile.open(['resampled-upload', '.wav']) do |tempfile|
+    Tempfile.open(['resampled-upload', '.wav'], encoding: 'binary') do |tempfile|
       reduce_file(tempfile) if decode_resample(file, tempfile)
     end
   end
