@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   include SoftDeletion
+  include Rakismet::Model
+
+  rakismet_attrs  author: proc { display_name },
+                  author_email: proc { email },
+                  user_ip: proc { current_login_ip }
 
   concerned_with :findability, :settings, :statistics
 
