@@ -39,14 +39,29 @@ RSpec.describe DeletedUserCleanupJob, type: :job do
   end
 
   describe "not soft deleted user" do
-    subject(:job) { described_class.perform_later(users(:arthur).id) }
+    subject(:job) { described_class.perform_later(id) }
 
-    it "should not delete a user that has not been soft deleted" do
-      perform_enqueued_jobs do
-        expect(User.where(login: 'arthur').first).not_to be_nil
-        job
+    describe "user exists" do
+      let!(:id) { users(:arthur).id }
+
+      it "should not delete a user that has not been soft deleted" do
+        perform_enqueued_jobs do
+          expect(User.where(login: 'arthur').first).not_to be_nil
+          job
+        end
+        assert_performed_jobs 1
       end
-      assert_performed_jobs 1
+    end
+
+    describe "user does not exist" do
+      let!(:id) { 99999 }
+
+      it "raises no error" do
+        perform_enqueued_jobs do
+          expect { job }.not_to raise_error
+        end
+        assert_performed_jobs 1
+      end
     end
   end
 end
