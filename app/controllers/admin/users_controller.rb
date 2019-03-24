@@ -8,9 +8,7 @@ module Admin
 
     # should we rescue/display any error that occured to admin user
     def delete
-      @user.soft_delete_relations
-      @user.enqueue_real_destroy_job
-      @user.soft_delete
+      @user.soft_delete_with_relations
       redirect_back(fallback_location: root_path)
     end
 

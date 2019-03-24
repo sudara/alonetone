@@ -233,6 +233,12 @@ class User < ActiveRecord::Base
     deleted_at != nil
   end
 
+  def soft_delete_with_relations
+    soft_delete_relations
+    enqueue_real_destroy_job
+    soft_delete
+  end
+
   def soft_delete_relations
     efficiently_soft_delete_relations
   end
