@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :request do
           get "/#{user.login}"
           expect(response).to be_successful
         end
-      end 
+      end
     end
   end
 
@@ -37,19 +37,51 @@ RSpec.describe UsersController, type: :request do
         }
       }
     end
+    context "if Akismet check returns ham" do
+      before do
+        allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
+        akismet_stub_response_ham
+      end
 
-    it "should create a user and redirect" do
-      post "/users", params: params
+      it "should create a user" do
+        expect {
+          post "/users", params: params
+        }.to change(User, :count).by(1)
+      end
 
-      expect(response.status).to eq(302)
-      expect(response).to redirect_to(login_url(already_joined: true))
+      it "should redirect" do
+        post "/users", params: params
+
+        expect(response.status).to eq(302)
+        expect(response).to redirect_to(login_url(already_joined: true))
+      end
+
+      it "should raise an error if user is invalid" do
+        post "/users", params: { user: { login: 'bar', password: 'foo' } }
+
+        expect(flash[:error]).to be_present
+        expect(response).to render_template("users/new")
+      end
     end
 
-    it "should raise an error if user is invalid" do
-      post "/users", params: { user: { login: 'bar', password: 'foo' } }
+    context "if Akismet check returns spam" do
+      before do
+        allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
+        akismet_stub_response_spam
+      end
 
-      expect(flash[:error]).to be_present
-      expect(response).to render_template("users/new")
+      it "should return an error message and logout" do
+        post "/users", params: params
+
+        expect(flash[:error]).to match (/magic fairies/)
+        expect(response).to redirect_to(logout_path)
+      end
+
+      it "should not create a user" do
+        expect {
+          post "/users", params: params
+        }.not_to change(User, :count)
+      end
     end
   end
 end
