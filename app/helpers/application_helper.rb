@@ -92,9 +92,8 @@ module ApplicationHelper
     link_to ' ', user_track_path(asset.user.login, asset.permalink, format: :mp3, referer: referer), id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play the mp3'
   end
 
-  def user_nav_item(text, link, options = nil)
-    added_class = options.delete(:added_class) if options.is_a? Hash
-    content_tag(:li, link_to_unless_current(text, link, options), class: "#{added_class} #{'current' if current_page?(link)}")
+  def navigation_item(text, link, options = nil)
+    content_tag(:li, link_to_unless_current(text, link, options), class: "#{'current' if current_page?(link)}")
   end
 
   def link_source(source)
