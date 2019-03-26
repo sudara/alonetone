@@ -137,21 +137,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "soft deletion" do
-    it "soft deletes" do
-      expect do
-        User.all.map(&:soft_delete)
-      end.not_to change { User.unscoped.count }
-    end
-
-    it "changes scope" do
-      original_count = User.count
-      expect do
-        User.all.map(&:soft_delete)
-      end.to change { User.count }.from(original_count).to(0)
-    end
-  end
-
   protected
 
   def new_user(options = {})
