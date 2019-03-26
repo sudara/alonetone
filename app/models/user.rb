@@ -254,7 +254,6 @@ class User < ActiveRecord::Base
 
     Track.with_deleted.where(user_id: id).update_all(deleted_at: nil)
     Playlist.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Post.with_deleted.where(user_id: id).update_all(deleted_at: nil)
     Comment.with_deleted.where(user_id: id).update_all(deleted_at: nil)
   end
 
@@ -270,7 +269,7 @@ class User < ActiveRecord::Base
 
     assets.update_all(deleted_at: time)
 
-    %w[tracks playlists posts comments].each do |user_relation|
+    %w[tracks playlists comments].each do |user_relation|
       send(user_relation).update_all(deleted_at: time)
     end
   end
