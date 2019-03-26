@@ -256,8 +256,6 @@ class User < ActiveRecord::Base
     Playlist.with_deleted.where(user_id: id).update_all(deleted_at: nil)
     Post.with_deleted.where(user_id: id).update_all(deleted_at: nil)
     Comment.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-
-    true
   end
 
   def efficiently_soft_delete_relations(time = Time.now)
@@ -275,8 +273,6 @@ class User < ActiveRecord::Base
     %w[tracks playlists posts comments].each do |user_relation|
       send(user_relation).update_all(deleted_at: time)
     end
-
-    true
   end
 
   def efficiently_destroy_relations
