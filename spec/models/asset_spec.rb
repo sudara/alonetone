@@ -220,4 +220,19 @@ RSpec.describe Asset, type: :model do
       end
     end
   end
+
+  describe "soft deletion" do
+    it "soft deletes" do
+      expect do
+        Asset.all.map(&:soft_delete)
+      end.not_to change { Asset.unscoped.count }
+    end
+
+    it "changes scope" do
+      original_count = Asset.count
+      expect do
+        Asset.all.map(&:soft_delete)
+      end.to change { Asset.count }.from(original_count).to(0)
+    end
+  end
 end
