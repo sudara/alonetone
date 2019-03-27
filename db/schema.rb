@@ -273,7 +273,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.boolean "is_spam", default: false
     t.float "spaminess"
     t.string "signature"
-    t.datetime "deleted_at"
     t.index ["is_spam"], name: "index_posts_on_is_spam"
   end
 
