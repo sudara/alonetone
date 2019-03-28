@@ -192,10 +192,10 @@
           div.ajax_success {
             padding-right: 2px;
             color: #2b8800;
-            padding-top: px;
+            padding-top: 6.5px;
             &::after {
               position: absolute;
-              top: 6px;
+              top: 7px;
               right: 10px;
               content: image-url("svg/icon_checkmark_green.svg");
             }
@@ -206,7 +206,7 @@
             padding-top: 6.5px;
             &::after {
               position: absolute;
-              top: 7px;
+              top: 7.5px;
               right: 10px;
               content: image-url("svg/icon_x_red.svg");
             }
