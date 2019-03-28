@@ -192,7 +192,7 @@
           div.ajax_success {
             padding-right: 2px;
             color: #2b8800;
-            padding-top: 5px;
+            padding-top: 6.5px;
             &::after {
               position: absolute;
               top: 6px;
@@ -203,11 +203,13 @@
           div.ajax_fail {
             padding-right: 2px;
             color: #b20035;
-            padding-top: 5px;
+            padding-top: 6.5px;
             &::after {
               position: absolute;
               top: 6px;
               right: 10px;
+              width: 6px;
+              height: 6px;
               content: image-url("svg/icon_x_red.svg");
             }
           }
