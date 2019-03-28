@@ -77,12 +77,14 @@
   .comment_form {
     overflow: hidden;
     form {
-      .comment_as {
+      > .comment_as {
         font-size: 12px;
-        line-height: 30px;
+        line-height: 20px;
         overflow: auto;
-        height: 30px;
         color: #969393;
+        font-family: $medium-sans-font;
+        margin-top: 9px;
+        padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
           color: #4f4d4d;
