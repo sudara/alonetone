@@ -1,6 +1,6 @@
 <div id="home_grid">
-  <div id="home_playlists_area">
   <% if @playlists.present? %>
+  <div id="home_playlists_area">
     <div class="latest-playlists-header">
       <h2>
       <%= link_to "Latest Playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
@@ -9,8 +9,8 @@
     <ul class="playlists">
       <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
     </ul>
-  <% end %>
   </div>
+  <% end %>
   <div id="home_left_column">
     <div id="home_latest_area">
       <h2>
