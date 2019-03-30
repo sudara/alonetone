@@ -9,7 +9,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       Percy::Capybara.snapshot(page, name: 'Playlist Cover')
 
       first_track.click
-      Percy::Capybara.snapshot(page, name: 'Playlist Cover')
+      Percy::Capybara.snapshot(page, name: 'Playlist Track')
     end
   end
 end
