@@ -8,7 +8,7 @@ RSpec.describe 'home page', type: :feature, js: true do
     track_chunk = find(".asset", match: :first)
     track_chunk.click
     expect(track_chunk).not_to have_selector('.add_to_favorites')
-    Percy::Capybara.snapshot(page, name: 'as guest')
+    Percy::Capybara.snapshot(page, name: 'Home as Guest')
   end
 
   it 'renders logged in' do
@@ -18,7 +18,7 @@ RSpec.describe 'home page', type: :feature, js: true do
       track_chunk = find(".asset", match: :first)
       track_chunk.click
       expect(track_chunk).to have_selector('.add_to_favorites')
-      Percy::Capybara.snapshot(page, name: 'as user')
+      Percy::Capybara.snapshot(page, name: 'Home as User')
     end
   end
 end
