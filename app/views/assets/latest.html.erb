@@ -1,21 +1,13 @@
 <!-- alonetone home page -->
-<%= cache("home/playlists/#{@playlists.cache_key}/#{theme_name}") do %>
-    <div class="latest-playlists-header">
-      <div class="sprites-latest-playlists sprites-before-heading"></div>
-      <h2>
-      <%= link_to "Latest playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
-      </h2>
-    </div>
-    <% if white_theme_enabled? %>
-    <ul class="playlists">
-      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
-    </ul>
-    <% else %>
-    <ul class="playlists_row">
-      <%= render partial: 'playlists/row', collection: @playlists, as: :playlist %>
-    </ul>
-    <% end %>
-<% end unless @playlists.blank? %>
+<div class="latest-playlists-header">
+  <div class="sprites-latest-playlists sprites-before-heading"></div>
+  <h2>
+  <%= link_to "Latest playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
+  </h2>
+</div>
+<ul class="playlists_row">
+  <%= render partial: 'playlists/row', collection: @playlists, as: :playlist, cached: true %>
+</ul>
 
 <% content_for :left do%>
   <div class="sprites-latest-uploaded sprites-before-heading"></div>
