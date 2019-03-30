@@ -3,11 +3,12 @@ require "rails_helper"
 RSpec.describe 'playlists', type: :feature, js: true do
   it 'renders track and cover pages' do
     logged_in do
-      visit 'henriwillig/playlists/polderkaas/manufacturer-of-the-finest-cheese'
-      find('ul.tracklist li:first-child').hover
-      Percy::Capybara.snapshot(page, name: 'Playlist Track')
+      visit 'henriwillig/playlists/polderkaas'
+      first_track = find('ul.tracklist li:first-child')
+      first_track.hover
+      Percy::Capybara.snapshot(page, name: 'Playlist Cover')
 
-      find('a.small-cover').click
+      first_track.click
       Percy::Capybara.snapshot(page, name: 'Playlist Cover')
     end
   end
