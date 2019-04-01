@@ -14,7 +14,7 @@
     "rails-erb-loader": "^5.5.2",
     "rails-ujs": "^5.2.2",
     "seedrandom": "^2.4.4",
-    "sortablejs": "^1.8.3",
+    "sortablejs": "^1.8.4",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
