@@ -318,7 +318,7 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
-    pagy (2.1.2)
+    pagy (2.1.5)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
