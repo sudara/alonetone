@@ -79,7 +79,7 @@ RSpec.describe Upload::ZipFile, type: :model do
 
       unusable = zip_file.assets.reject(&:valid?)[0]
       expect(unusable.user).to eq(user)
-      expect(unusable.mp3_content_type).to eq('inode/x-empty')
+      expect(unusable.mp3_content_type).to eq('audio/mpeg')
       expect(unusable.mp3_file_name).to eq('cavernous.mp3')
       expect(unusable.errors).to_not be_empty
     end
