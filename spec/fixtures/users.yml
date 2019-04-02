@@ -32,6 +32,7 @@ aaron:
 
 # not activated
 not_activated:
+  login: ben
   email: ben@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
