@@ -1,4 +1,4 @@
-<%= cache( logged_in? ? "tabs#{asset.cache_key}/#{theme_name}" : "guest_tabs#{asset.cache_key}/#{theme_name}" ) do %>
+<%= cache([asset, logged_in?]) do %>
 <div class="more tabs" style="display:none;">
     <ul>
 	  <% if logged_in? || asset.guest_can_comment? %>

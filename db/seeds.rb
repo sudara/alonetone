@@ -295,3 +295,21 @@ end
   asset = Asset.where.not(user_id: user.id).order('RAND()').first
   user.toggle_favorite(asset)
 end
+
+# --- Greenfield ---
+
+# Create a post with some attached assets
+Greenfield::Post.first_or_create!(
+  asset: Asset.first
+).attached_assets.first_or_create!(
+  mp3: muppet_upload,
+  waveform: Waveform.extract(muppet_upload.path)
+)
+
+# Create playlist download
+playlist = Playlist.first
+playlist.greenfield_downloads.first_or_create!(
+  title: playlist.title,
+  s3_path: '/playlists/le_duc_vacherin.zip',
+  attachment: upload('files/Le Duc Vacherin.zip')
+)
