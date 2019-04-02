@@ -36,6 +36,8 @@ class Asset < ApplicationRecord
     source: :user,
     through: :tracks
 
+  has_one_attached :audio_file
+
   before_save :ensure_unique_permalink, if: :permalink_changed?
   after_commit :create_waveform, on: :create
 

@@ -117,6 +117,8 @@ class User < ActiveRecord::Base
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
 
+  has_one_attached :avatar_image
+
   # tokens and activation
   def clear_token!
     update_attribute(:perishable_token, nil)
