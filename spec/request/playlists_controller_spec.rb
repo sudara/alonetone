@@ -6,7 +6,7 @@ RSpec.describe PlaylistsController, type: :request do
   context "a visitor" do
     it "sees a playlist without a cover image" do
       playlist = playlists(:william_shatners_favorites)
-      get "/william-shatner/playlists/bills-favorites"
+      get "/williamshatner/playlists/bills-favorites"
       expect(response).to be_successful
       expect(response.body).to_not match_css('link[rel="preload"]')
     end
