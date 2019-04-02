@@ -18,22 +18,22 @@ comments = [
 
 def upload(path)
   filename = File.expand_path(
-    File.join('..', 'spec', 'fixtures', path),
+    File.join('..', 'spec', 'fixtures', 'files', path),
     __dir__
   )
   content_type = Marcel::MimeType.for(filename)
   fixture_file_upload(filename, content_type)
 end
 
-muppet_upload = upload('files/muppets.mp3')
-piano_upload = upload('files/piano.mp3')
+muppet_upload = upload('muppets.mp3')
+piano_upload = upload('piano.mp3')
 
-sudara_avatar_upload = upload('images/jeffdoessudara.jpg')
-marie_avatar_upload = upload('images/marie.jpg')
+sudara_avatar_upload = upload('jeffdoessudara.jpg')
+marie_avatar_upload = upload('marie.jpg')
 
-manfred_cover_upload = upload('images/manfreddoescover.jpg')
-blue_de_bresse_upload = upload('images/blue_de_bresse.jpg')
-cheshire_cheese_upload = upload('images/cheshire_cheese.jpg')
+manfred_cover_upload = upload('manfreddoescover.jpg')
+blue_de_bresse_upload = upload('blue_de_bresse.jpg')
+cheshire_cheese_upload = upload('cheshire_cheese.jpg')
 
 def put_user_credentials(username, password)
   puts "You can now sign in with: #{username} - #{password}"
@@ -311,5 +311,5 @@ playlist = Playlist.first
 playlist.greenfield_downloads.first_or_create!(
   title: playlist.title,
   s3_path: '/playlists/le_duc_vacherin.zip',
-  attachment: upload('files/Le Duc Vacherin.zip')
+  attachment: upload('Le Duc Vacherin.zip')
 )
