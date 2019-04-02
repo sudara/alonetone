@@ -109,7 +109,7 @@ henri_willig:
 # William Shatner is a cheese enthousiast. He's also the last person in the world to use the old
 # theme.
 william_shatner:
-  login: william-shatner
+  login: williamshatner
   display_name: Captain Bill
   email: williamshatner@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
