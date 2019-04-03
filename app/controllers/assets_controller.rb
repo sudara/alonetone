@@ -168,8 +168,6 @@ class AssetsController < ApplicationController
      end
   end
 
-  # PUT /assets/1
-  # PUT /assets/1.xml
   def update
     result = @asset.update(asset_params)
     @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
@@ -223,8 +221,16 @@ class AssetsController < ApplicationController
   end
 
   def asset_params
-    params.require(:asset).permit(:user, :mp3, :name, :user_id,
-    :title, :description, :youtube_embed, :credits)
+    params.require(:asset).permit(
+      :audio_file,
+      :credits,
+      :description,
+      :name,
+      :title,
+      :user,
+      :user_id,
+      :youtube_embed
+    )
   end
 
   def track_not_found
