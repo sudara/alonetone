@@ -1,9 +1,7 @@
 class AdminController < ApplicationController
   before_action :moderator_only, except: 'toggle_theme'
 
-  def index
-
-  end
+  def index; end
 
   def secretz
     @ip_listens = Listen.most_active_ips
