@@ -159,6 +159,19 @@ RSpec.describe Asset, type: :model do
     end
   end
 
+  context "creation" do
+    let(:user) { users(:will_studd) }
+
+    it "schedules a job to create a waveform" do
+      expect do
+        user.assets.create!(
+          title: 'Smallest',
+          audio_file: fixture_file_upload('files/smallest.mp3', 'audio/mpeg')
+        )
+      end.to have_enqueued_job(WaveformExtractJob)
+    end
+  end
+
   context "on update" do
     it "should regenerate a permalink after the title is changed" do
       asset = file_fixture_asset('muppets.mp3', content_type: 'audio/mpeg')
