@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include SoftDeletion
+
   scope :recent,             -> { order('id DESC') }
   scope :only_public,        -> { recent.where(is_spam: false).where(private: false) }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
@@ -101,6 +103,7 @@ end
 #  body             :text(16777215)
 #  body_html        :text(16777215)
 #  commentable_type :string(255)
+#  deleted_at       :datetime
 #  is_spam          :boolean          default(FALSE)
 #  private          :boolean          default(FALSE)
 #  referrer         :string(255)
