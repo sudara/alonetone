@@ -45,7 +45,7 @@ module Admin
     private
 
     def permitted_params
-      params.permit!
+      params.permit(:mark_spam_by, :filter_by)
     end
 
     def set_comment

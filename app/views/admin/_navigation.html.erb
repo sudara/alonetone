@@ -1,9 +1,12 @@
 <ul class="admin_nav">
   <%= navigation_item 'Users', admin_users_path %>
   <ul>
-    <%= navigation_item 'Only Deleted', admin_users_path({deleted: true}) %>
+    <%= navigation_item 'Only Deleted', admin_users_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'Tracks', admin_assets_path %>
+    <ul>
+    <%= navigation_item 'Only Spam', admin_assets_path({filter_by: {is_spam: true}}) %>
+  </ul>
   <%= navigation_item 'Comments',  admin_comments_path %>
   <ul>
     <%= navigation_item 'Only Spam',  admin_comments_path({filter_by: {is_spam: true}}) %>
