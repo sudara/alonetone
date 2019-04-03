@@ -59,10 +59,10 @@ moderator = User.create!(
   password: moderator_password,
   password_confirmation: moderator_password,
   moderator: true,
-  current_login_ip: 'fc00:1:1::2'
+  current_login_ip: 'fc00:1:1::2',
+  avatar_image: sudara_avatar_upload
 )
 put_user_credentials(moderator.login, moderator_password)
-moderator.create_pic!(pic: sudara_avatar_upload)
 moderator.profile.update(
   country: 'Austria'
 )
@@ -88,10 +88,10 @@ marie = User.create!(
   password: marie_password,
   password_confirmation: marie_password,
   greenfield_enabled: true,
-  current_login_ip: 'fc00:1:1::4'
+  current_login_ip: 'fc00:1:1::4',
+  avatar_image: marie_avatar_upload
 )
 put_user_credentials(marie.login, marie_password)
-marie.create_pic!(pic: marie_avatar_upload)
 marie.profile.update(
   bio: 'The phrase is not commonly used to describe the colour of a cheese, though there are some cheeses with a greenish tint, usually from mold or added herbs.',
   country: 'Spain',
@@ -99,51 +99,39 @@ marie.profile.update(
 )
 
 commonly_blue_green = marie.assets.create!(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   title: 'Commonly Blue-grey',
-  description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(muppet_upload.path)
-  }
+  description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.'
 )
 aqueous_suspension = marie.assets.create!(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   title: 'Aqueous Suspension',
-  description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(muppet_upload.path)
-  }
+  description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.'
 )
 
 playlist = marie.playlists.build(
   title: 'Before fungi were understood',
-  year: Date.today.year - 1
+  year: Date.today.year - 1,
+  cover_image: manfred_cover_upload
 )
 playlist.description = <<~DESC
   The variety named Camembert de Normandie was granted a protected designation of origin in 1992
   after the original AOC in 1983.
 DESC
 playlist.save!
-playlist.create_pic!(pic: manfred_cover_upload)
 playlist.tracks.create!(user: marie, asset: commonly_blue_green)
 playlist.tracks.create!(user: marie, asset: aqueous_suspension)
 playlist.update(private: false)
 
 baguette_laonnaise = marie.assets.create!(
-  mp3: piano_upload,
+  audio_file: piano_upload,
   title: 'Baguette Laonnaise',
-  description: 'The cheese is typically loaf-shaped and has a supple interior as well as a sticky orange-brown rind.',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(piano_upload.path)
-  }
+  description: 'The cheese is typically loaf-shaped and has a supple interior as well as a sticky orange-brown rind.'
 )
 appellation_description = marie.assets.create!(
-  mp3: piano_upload,
+  audio_file: piano_upload,
   title: 'Appellation description d’origine protégée',
-  description: 'In Switzerland, the appellation d’origine protégée (AOP, protected designation of origin) is a geographical indication protecting the origin and the quality of traditional food products',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(piano_upload.path)
-  }
+  description: 'In Switzerland, the appellation d’origine protégée (AOP, protected designation of origin) is a geographical indication protecting the origin and the quality of traditional food products'
 )
 
 playlist = marie.playlists.build(
@@ -178,25 +166,20 @@ carole.profile.update(
 )
 
 creamy_interior = carole.assets.create(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   title: 'Creamy Interior',
-  description: 'Contains patches of blue mold',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(muppet_upload.path)
-  }
+  description: 'Contains patches of blue mold'
 )
 cylindrical_rounds = carole.assets.create(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   title: 'Cylindrical Rounds',
-  description: 'It is shaped into cylindrical rounds weighing from 125 to 500 grams.',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(muppet_upload.path)
-  }
+  description: 'It is shaped into cylindrical rounds weighing from 125 to 500 grams.'
 )
 
 edible_coating = carole.playlists.build(
   title: 'Edible Coating',
-  year: Date.today.year
+  year: Date.today.year,
+  cover_image: blue_de_bresse_upload
 )
 edible_coating.description = <<~DESC
   Edible coating which is characteristically white in color and has an aroma of mushrooms.
@@ -205,7 +188,6 @@ edible_coating.save!
 edible_coating.tracks.create!(user: carole, asset: creamy_interior)
 edible_coating.tracks.create!(user: carole, asset: cylindrical_rounds)
 edible_coating.update(private: false)
-edible_coating.create_pic!(pic: blue_de_bresse_upload)
 
 # --- Petere ---
 
@@ -226,25 +208,20 @@ petere.profile.update(
 )
 
 keep_tradition_alive = petere.assets.create(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   title: 'Keep Tradition Alive',
-  description: 'Cloth-bound Cheshire cheeses from their own unpasteurised milk',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(muppet_upload.path)
-  }
+  description: 'Cloth-bound Cheshire cheeses from their own unpasteurised milk'
 )
 much_like_cheddar = petere.assets.create(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   title: 'Much Like Cheddar',
-  description: 'Cheshire cheese is made much like cheddar (now the name of a process, rather than a geographical designation) or Lancashire',
-  audio_feature_attributes: {
-    waveform: Waveform.extract(muppet_upload.path)
-  }
+  description: 'Cheshire cheese is made much like cheddar (now the name of a process, rather than a geographical designation) or Lancashire'
 )
 
 mrs_applebys_cheshire = petere.playlists.build(
   title: "Mrs Appleby's Cheshire",
-  year: Date.today.year - 2
+  year: Date.today.year - 2,
+  cover_image: cheshire_cheese_upload
 )
 mrs_applebys_cheshire.description = <<~DESC
   Edible coating which is characteristically white in color and has an aroma of mushrooms.
@@ -253,7 +230,6 @@ mrs_applebys_cheshire.save!
 mrs_applebys_cheshire.tracks.create!(user: petere, asset: keep_tradition_alive)
 mrs_applebys_cheshire.tracks.create!(user: petere, asset: much_like_cheddar)
 mrs_applebys_cheshire.update(private: false)
-mrs_applebys_cheshire.create_pic!(pic: cheshire_cheese_upload)
 
 # Some random listens.
 10.times do
@@ -302,7 +278,7 @@ end
 Greenfield::Post.first_or_create!(
   asset: Asset.first
 ).attached_assets.first_or_create!(
-  mp3: muppet_upload,
+  audio_file: muppet_upload,
   waveform: Waveform.extract(muppet_upload.path)
 )
 
@@ -311,5 +287,5 @@ playlist = Playlist.first
 playlist.greenfield_downloads.first_or_create!(
   title: playlist.title,
   s3_path: '/playlists/le_duc_vacherin.zip',
-  attachment: upload('Le Duc Vacherin.zip')
+  zip_file: upload('Le Duc Vacherin.zip')
 )
