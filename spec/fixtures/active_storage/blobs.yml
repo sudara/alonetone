@@ -125,3 +125,13 @@ will_studd_rockfort_cover:
   byte_size: <%= 200.kilobytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 2.months.ago %>
+
+# Blobs for all user avatars
+henri_willig_avatar:
+  key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
+  filename: avatar.jpg
+  content_type: image/jpeg
+  metadata: "{}"
+  byte_size: <%= 60.kilobytes %>
+  checksum: <%= Digest::MD5.base64digest('OK!') %>
+  created_at: <%= 2.months.ago %>
