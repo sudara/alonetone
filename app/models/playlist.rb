@@ -25,8 +25,6 @@ class Playlist < ActiveRecord::Base
   has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
   accepts_nested_attributes_for :greenfield_downloads
 
-  has_one_attached :cover_image
-
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
@@ -36,6 +34,15 @@ class Playlist < ActiveRecord::Base
   before_validation :name_favorites_and_set_permalink, on: :create
   before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
     :set_published_at, :notify_followers_if_publishing_album
+
+  # Active Storage normally does lazy processing for image variants but we
+  # want to process when the attachment changes.
+  before_save -> { @process_variants = attachment_changes.key?('cover_image') }
+  after_commit :process_variants
+
+  # We have to define attachments last to make the Active Record callbacks
+  # fire in the right order.
+  has_one_attached :cover_image
 
   enum(
     cover_quality: {
@@ -102,16 +109,20 @@ class Playlist < ActiveRecord::Base
     Asset.formatted_time(total_track_length)
   end
 
-  # Returns true when the user has a usable avatar.
+  # Returns true when the playlist has a usable cover image.
   def cover_image_present?
-    pic.present? && pic.image_present?
+    cover_image.attached?
   end
 
-  # Generates a URL to playlist's cover with the requested variant. Returns nil when the playlist
-  # does not have a usable cover.
-  def cover_url(variant:)
-    ImageVariant.verify(variant)
-    pic&.url(variant: variant)
+  # Generates a location to playlist's cover with the requested variant. Returns nil when the
+  # playlist does not have a usable cover.
+  def cover_image_location(variant:)
+    return unless cover_image.attached?
+
+    Storage::Location.new(
+      ImageVariant.variant(cover_image, variant: variant),
+      signed: false
+    )
   end
 
   def self.latest(limit = 5)
@@ -139,6 +150,15 @@ class Playlist < ActiveRecord::Base
 
   def check_for_new_permalink
     generate_permalink! if title_changed?
+  end
+
+  protected
+
+  def process_variants
+    return unless @process_variants
+    return unless cover_image.attached?
+
+    ImageVariant.process(cover_image)
   end
 end
 

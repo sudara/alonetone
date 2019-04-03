@@ -73,6 +73,26 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe "assigning a new cover image" do
+    context "without a cover" do
+      let(:playlist) { playlists(:william_shatners_favorites) }
+
+      it "creates the cover and variants" do
+        playlist.update!(cover_image: file_fixture_uploaded_file('blue_de_bresse.jpg'))
+        expect(playlist.cover_image).to be_attached
+      end
+    end
+
+    context "with an cover" do
+      let(:playlist) { playlists(:will_studd_rockfort) }
+
+      it "replaces the cover and variants" do
+        playlist.update!(cover_image: file_fixture_uploaded_file('blue_de_bresse.jpg'))
+        expect(playlist.cover_image).to be_attached
+      end
+    end
+  end
+
   describe "generating URLs to their cover" do
     context "with a cover" do
       let(:playlist) { playlists(:will_studd_rockfort) }
@@ -81,22 +101,11 @@ RSpec.describe Playlist, type: :model do
         expect(playlist.cover_image_present?).to eq(true)
       end
 
-      it "returns a URL to a variant" do
-        url = playlist.cover_url(variant: :large)
-        expect(url).to start_with('/system/pics')
-        expect(url).to end_with('.jpg')
-      end
-    end
-
-    context "with an cover that has missing information" do
-      let(:playlist) { playlists(:henri_willig_polderkaas) }
-
-      it "knows the playlist does not have an cover" do
-        expect(playlist.cover_image_present?).to eq(false)
-      end
-
-      it "does not return a URL to a variant" do
-        expect(playlist.cover_url(variant: :large)).to be_nil
+      it "returns a location to a variant" do
+        location = playlist.cover_image_location(variant: :large)
+        expect(location).to_not be_signed
+        expect(location).to be_kind_of(Storage::Location)
+        expect(location.attachment).to be_kind_of(ActiveStorage::Variant)
       end
     end
 
@@ -108,7 +117,7 @@ RSpec.describe Playlist, type: :model do
       end
 
       it "does not return a URL to a variant" do
-        expect(playlist.cover_url(variant: :large)).to be_nil
+        expect(playlist.cover_image_location(variant: :large)).to be_nil
       end
     end
   end
