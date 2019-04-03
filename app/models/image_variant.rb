@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Helper class to translate between variant names and dimensions.
+# Helper class to translate variant names to Active Storage variants
+# and process them.
 class ImageVariant
   VARIANTS = {
     tiny: [25, 25],
@@ -12,8 +13,42 @@ class ImageVariant
     hq: [3000, 3000]
   }.freeze
 
+  attr_reader :attachment
+  attr_reader :variant_name
+
+  def initialize(attachment, variant:)
+    ImageVariant.verify(variant)
+
+    @attachment = attachment
+    @variant_name = variant
+  end
+
+  def process
+    to_active_storage_variant.processed
+  end
+
+  def resize_to_limit
+    ImageVariant.resize_to_limit(variant_name)
+  end
+
+  def to_active_storage_variant
+    attachment.variant(resize_to_limit: resize_to_limit)
+  end
+
+  # Returns an Active Storage variant for a named variant.
+  def self.variant(attachment, variant:)
+    new(attachment, variant: variant).to_active_storage_variant
+  end
+
+  # Processes all variants for an attachment.
+  def self.process(attachment)
+    VARIANTS.keys.map do |variant_name|
+      new(attachment, variant: variant_name).process
+    end
+  end
+
   # Fit a variant inside these dimensions (width x height) to generate the variant.
-  def self.resize_to_fit(variant_name)
+  def self.resize_to_limit(variant_name)
     VARIANTS[variant_name.to_sym]
   end
 
