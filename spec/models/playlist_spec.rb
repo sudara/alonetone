@@ -73,6 +73,22 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe "scopes" do
+    it "select playlists which shall be shown on the homepage" do
+      playlists = Playlist.for_home.to_a
+      # Note: this number may change as fixture are added.
+      expect(playlists.size).to eq(2)
+
+      last_time = Time.zone.now
+      playlists.each do |playlist|
+        expect(playlist.created_at).to be < last_time
+        expect(playlist).to be_public
+
+        last_time = playlist.created_at
+      end
+    end
+  end
+
   context "favorites" do
     it 'should create a new playlist for a user who does not have one' do
       expect(users(:sandbags).playlists.favorites).not_to be_present

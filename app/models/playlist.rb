@@ -3,14 +3,13 @@ class Playlist < ActiveRecord::Base
 
   acts_as_list scope: :user_id, order: :position
 
-  scope :mixes,            -> { where(is_mix: true) }
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
-  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
+  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_preloads }
   scope :include_private,  -> { where(is_favorite: false) }
+  scope :mixes,            -> { where(is_mix: true) }
+  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
   scope :recent,           -> { order('playlists.created_at DESC')                                                }
-  scope :with_pic,         -> { preload(:pic)                                                                     }
-  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_pic.includes(:user) }
 
   belongs_to :user, counter_cache: true
   has_one  :pic, as: :picable, dependent: :destroy
