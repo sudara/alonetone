@@ -71,11 +71,12 @@ class UsersController < ApplicationController
   end
 
   def attach_pic
-    if params[:pic].present?
-      @pic = @user.build_pic(params[:pic].permit(:pic))
-      flash[:ok] = 'Picture updated!' if @pic.save
+    avatar_image = params.dig(:pic, :pic)
+    if avatar_image && @user.update(avatar_image: avatar_image)
+      flash[:ok] = 'Picture updated!'
+    else
+      flash[:error] = 'Whups, picture not updated! Try again.'
     end
-    flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:ok].present?
     redirect_to edit_user_path(@user)
   end
 
