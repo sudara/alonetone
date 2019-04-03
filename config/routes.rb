@@ -54,6 +54,7 @@ Alonetone::Application.routes.draw do
     get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
     # admin stuff
+    get 'admin' => 'admin#index'
     get 'secretz' => 'admin#secretz'
     get 'toggle_theme' => 'admin#toggle_theme'
 

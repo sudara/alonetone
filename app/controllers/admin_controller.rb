@@ -1,13 +1,8 @@
 class AdminController < ApplicationController
-  before_action :moderator_only, only: 'secretz'
+  before_action :moderator_only, except: 'toggle_theme'
 
-  def toggle_theme
-    if logged_in?
-      current_user.toggle! :use_old_theme
-    else
-      session[:white] = !session[:white]
-    end
-    redirect_back(fallback_location: root_path)
+  def index
+
   end
 
   def secretz
@@ -16,5 +11,14 @@ class AdminController < ApplicationController
     @track_listens = Listen.most_active_tracks
     @all_time_track_listens = Asset.order('listens_count DESC').limit(25)
     @expensive_users = User.order('bandwidth_used desc').limit(25)
+  end
+
+  def toggle_theme
+    if logged_in?
+      current_user.toggle! :use_old_theme
+    else
+      session[:white] = !session[:white]
+    end
+    redirect_back(fallback_location: root_path)
   end
 end
