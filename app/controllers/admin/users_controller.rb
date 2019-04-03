@@ -3,7 +3,10 @@ module Admin
     before_action :set_user, only: %i[delete restore]
 
     def index
-      @pagy, @users = pagy(User.with_deleted.recent)
+      scope = User.only_deleted if permitted_params[:deleted]
+      scope ||= User.with_deleted.recent
+
+      @pagy, @users = pagy(scope)
     end
 
     # should we rescue/display any error that occured to admin user
@@ -18,6 +21,10 @@ module Admin
     end
 
     private
+
+    def permitted_params
+      params.permit!
+    end
 
     def set_user
       @user = User.with_deleted.find_by_login(params[:id])

@@ -22,6 +22,8 @@ module Greenfield
 
     after_validation :destroy_s3_object_if_invalid, on: :create
 
+    has_one_attached :zip_file
+
     def url
       Aws::CF::Signer.sign_url attachment.url, expires: Time.now + 20.minutes
     end
@@ -29,7 +31,9 @@ module Greenfield
     protected
 
     def ensure_bucket_not_in_s3_path
-      s3_path = s3_path.gsub('/' + Rails.configuration.alonetone.amazon_s3_bucket_name, '')
+      return unless Rails.application.remote_storage?
+
+      self.s3_path = s3_path.gsub('/' + Rails.configuration.alonetone.amazon_s3_bucket_name, '')
     end
 
     def destroy_s3_object_if_invalid

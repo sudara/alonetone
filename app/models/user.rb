@@ -122,6 +122,8 @@ class User < ActiveRecord::Base
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
 
+  has_one_attached :avatar_image
+
   # tokens and activation
   def clear_token!
     update_attribute(:perishable_token, nil)
@@ -248,7 +250,7 @@ class User < ActiveRecord::Base
   end
 
   def enqueue_real_destroy_job
-    DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
+    DeletedUserCleanupJob.set(wait: 1.day).perform_later(id)
   end
 
   protected
