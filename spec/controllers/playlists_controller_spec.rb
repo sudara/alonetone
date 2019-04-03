@@ -93,21 +93,33 @@ RSpec.describe PlaylistsController, type: :controller do
   context "add new pic" do
     it "should let a user upload a playlist photo" do
       login(:arthur)
-      post :attach_pic, params: { id: 'arthurs-playlist', user_id: 'arthur', pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
+      post :attach_pic, params: {
+        id: 'arthurs-playlist',
+        user_id: 'arthur',
+        pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
+      }
       expect(flash[:notice]).to be_present
       expect(response).to redirect_to(edit_user_playlist_path(users(:arthur), 'arthurs-playlist'))
     end
 
     it "should not let a user upload a new photo for another user" do
       login(:arthur)
-      post :attach_pic, params: { id: 'owp', user_id: 'sudara', pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
+      post :attach_pic, params: {
+        id: 'owp',
+        user_id: 'sudara',
+        pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
+      }
       expect(response).to redirect_to('/login')
     end
 
     it "should break the homepage cache" do
       login(:arthur)
       expect do
-       post :attach_pic, params: { id: 'arthurs-playlist', user_id: 'arthur', pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
+       post :attach_pic, params: {
+         id: 'arthurs-playlist',
+         user_id: 'arthur',
+         pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
+      }
       end.to change { Playlist.recent.where(private: false).limit(10).cache_key }
     end
   end

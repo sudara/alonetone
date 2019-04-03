@@ -86,11 +86,12 @@ class PlaylistsController < ApplicationController
   end
 
   def attach_pic
-    if params[:pic].present?
-      @pic = @playlist.build_pic(params[:pic].permit(:pic))
-      flash[:notice] = 'Picture updated!' if @pic.save && @playlist.touch
+    cover_image = params.dig(:pic, :pic)
+    if cover_image && @playlist.update(cover_image: cover_image)
+      flash[:notice] = 'Picture updated!'
+    else
+      flash[:error] = 'Whups, picture not updated! Try again.'
     end
-    flash[:error] = 'Whups, picture not updated! Try again.' unless flash[:notice].present?
     redirect_to edit_user_playlist_path(@user, @playlist)
   end
 
