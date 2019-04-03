@@ -16,7 +16,7 @@
     <meta property="og:type"               content="music.<%= @playlist ? 'album' : 'song' %>" />
     <meta property="og:title"              content="<%= @playlist.try(:title) || @post.title %>" />
     <meta property="og:description"        content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
-    <meta property="og:image"              content="<%= @playlist.cover_url(variant: :greenfield) if @playlist %>" />
+    <meta property="og:image"              content="<%= @playlist.cover_image_location(variant: :greenfield).to_s if @playlist %>" />
     <% end %>
 
     <%= csrf_meta_tag %>
