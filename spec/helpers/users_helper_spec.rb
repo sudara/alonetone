@@ -83,7 +83,7 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     it "formats a default dark avatar URL" do
-      [:album, :large].each do |variant|
+      %i[album large].each do |variant|
         url = dark_user_avatar_url(nil, variant: variant)
         expect(url).to eq(UsersHelper.no_dark_avatar_path(variant: variant))
       end
@@ -117,58 +117,65 @@ RSpec.describe UsersHelper, type: :helper do
   end
 
   context "user with an avatar" do
-    let(:user) { users(:sudara) }
+    let(:user) { users(:henri_willig) }
+    let(:hostname) { 'alonetone.example.com' }
+
+    around do |example|
+      with_storage_current_host(hostname) do
+        example.call
+      end
+    end
 
     it "formats an avatar URL" do
       url = user_avatar_url(user, variant: :album)
-      expect(url).to start_with('/system/pics')
+      expect(url).to include(hostname)
       expect(url).to end_with('.jpg')
     end
 
     it "formats a dark avatar URL" do
-      [:album, :large].each do |variant|
+      %i[album large].each do |variant|
         url = dark_user_avatar_url(user, variant: variant)
-        expect(url).to start_with('/system/pics')
+        expect(url).to include(hostname)
         expect(url).to end_with('.jpg')
       end
     end
 
     it "formats an image element" do
       element = user_image(user, variant: :large)
-      expect(element).to match_css('img[src][alt="sudara\'s avatar"]')
+      expect(element).to match_css('img[src][alt="Henri Willig\'s avatar"]')
       expect(element).to match_css('img:not([class])')
-      expect(element).to include(user_avatar_url(user, variant: :large))
+      expect(element).to include(hostname)
     end
 
     it "formats an image element for the dark theme" do
       element = dark_user_image(user, variant: :large)
-      expect(element).to match_css('img[src][alt="sudara\'s avatar"]')
+      expect(element).to match_css('img[src][alt="Henri Willig\'s avatar"]')
       expect(element).to match_css('img:not([class])')
-      expect(element).to include(dark_user_avatar_url(user, variant: :large))
+      expect(element).to include(hostname)
     end
 
     it "formats a link with a user avatar" do
       element = white_theme_user_image_link(user, variant: :small)
       expect(element).to match_css('a > img[src]')
-      expect(element).to include(user_avatar_url(user, variant: :small))
+      expect(element).to include(hostname)
     end
 
     it "formats a link with a dark user avatar" do
       element = dark_theme_user_image_link(user, variant: :small)
       expect(element).to match_css('a > img[src]')
-      expect(element).to include(dark_user_avatar_url(user, variant: :small))
+      expect(element).to include(hostname)
     end
   end
 
   context "user without an avatar" do
-    let(:user) { users(:arthur) }
+    let(:user) { users(:william_shatner) }
 
     it "formats a default avatar URL" do
       expect(user_avatar_url(user, variant: :album)).to eq(UsersHelper.no_avatar_path)
     end
 
     it "formats a default dark avatar URL" do
-      [:album, :large].each do |variant|
+      %i[album large].each do |variant|
         expect(
           dark_user_avatar_url(user, variant: variant)
         ).to eq(UsersHelper.no_dark_avatar_path(variant: variant))
