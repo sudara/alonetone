@@ -15,7 +15,7 @@ module Listens
       if Rails.application.play_dummy_audio?
         play_local_mp3
       else
-        asset.download_url
+        redirect_to asset.download_location.to_s
       end
     end
   end
