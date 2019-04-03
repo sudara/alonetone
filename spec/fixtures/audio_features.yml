@@ -37,7 +37,7 @@ will_studd_appellation_controlee:
   waveform: <%= waveform %>
 henri_willig_finest_cheese:
   asset: henri_willig_finest_cheese
-  waveform: <%= waveform %>
+  waveform: # let us see the default waveform
 henri_willig_the_goat:
   asset: henri_willig_the_goat
   waveform: <%= waveform %>

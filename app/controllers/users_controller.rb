@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-    @users = User.includes(:pic).paginate_by_params(params)
+    @users = User.includes(:pic, :profile).paginate_by_params(params)
     @sort = params[:sort]
     @user_count = User.count
     @active     = User.where("assets_count > 0").count
@@ -94,7 +94,11 @@ class UsersController < ApplicationController
     redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
-      @user.destroy # this will run "efficiently_destroy_relations" before_destory callback
+
+      @user.soft_delete_relations
+      @user.enqueue_real_destroy_job
+      @user.soft_delete
+
       if moderator?
         redirect_to root_path
       else

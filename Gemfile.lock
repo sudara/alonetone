@@ -1,13 +1,13 @@
 GIT
-  remote: git://github.com/rails/coffee-rails.git
-  revision: 4cdd5fcc5c8e4b113e693c30f1376ac7d4085b25
+  remote: https://github.com/rails/coffee-rails.git
+  revision: 800d7abbe2fd08776443e444a72fa43de7b7cd64
   specs:
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
+      railties (>= 5.2.0)
 
 GIT
-  remote: git://github.com/sudara/thredded.git
+  remote: https://github.com/sudara/thredded.git
   revision: f6aa8cefbe4ad7d31cb99c6955691d85191495e8
   specs:
     thredded (0.16.9)
@@ -119,18 +119,20 @@ GEM
       execjs
     awesome_print (1.8.0)
     aws-eventstream (1.0.2)
-    aws-partitions (1.144.0)
-    aws-sdk-core (3.47.0)
+    aws-partitions (1.148.0)
+    aws-sdk-cloudfront (1.13.0)
+      aws-sdk-core (~> 3, >= 3.48.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-core (3.48.3)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
-      http-2 (~> 0.10)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.14.0)
-      aws-sdk-core (~> 3, >= 3.47.0)
+    aws-sdk-kms (1.16.0)
+      aws-sdk-core (~> 3, >= 3.48.2)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.32.0)
-      aws-sdk-core (~> 3, >= 3.47.0)
+    aws-sdk-s3 (1.36.0)
+      aws-sdk-core (~> 3, >= 3.48.2)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.1.0)
@@ -142,8 +144,8 @@ GEM
     bugsnag (6.11.1)
       concurrent-ruby (~> 1.0)
     builder (3.2.3)
-    byebug (11.0.0)
-    capybara (3.14.0)
+    byebug (11.0.1)
+    capybara (3.16.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -153,12 +155,11 @@ GEM
       xpath (~> 3.2)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    chromedriver-helper (2.1.0)
+    chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     chunky_png (1.3.11)
     climate_control (0.2.0)
-    cloudfront-signer (3.0.2)
     coderay (1.1.2)
     coffee-script (2.4.1)
       coffee-script-source
@@ -193,7 +194,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
-    dalli (2.7.9)
+    dalli (2.7.10)
     db_text_search (0.3.0)
       activerecord (>= 4.1.15, < 6.0)
     diff-lcs (1.3)
@@ -295,15 +296,15 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    moneta (1.0.0)
+    moneta (1.1.0)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     mustache (1.1.0)
     mysql2 (0.5.2)
     nenv (0.3.0)
-    newrelic_rpm (6.1.0.352)
+    newrelic_rpm (6.2.0.354)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
     nokogumbo (2.0.1)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -317,7 +318,7 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
-    pagy (2.1.2)
+    pagy (2.1.5)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -352,7 +353,7 @@ GEM
       pry (~> 0.10)
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.1)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
     rack (2.0.6)
@@ -477,9 +478,6 @@ GEM
       rack (>= 1.5.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
-    simple_form (4.1.0)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
     sixarm_ruby_unaccent (1.2.0)
     skylight (4.0.0.beta2)
       skylight-core (= 4.0.0.beta2)
@@ -529,7 +527,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yui-compressor (0.12.0)
-    zeitwerk (1.3.4)
+    zeitwerk (1.4.0)
 
 PLATFORMS
   ruby
@@ -539,11 +537,11 @@ DEPENDENCIES
   annotate
   authlogic
   awesome_print
+  aws-sdk-cloudfront
   aws-sdk-s3
   bugsnag
   capybara
   chromedriver-helper
-  cloudfront-signer
   coffee-rails!
   compass-rails
   country_select
@@ -555,6 +553,7 @@ DEPENDENCIES
   guard
   guard-rspec
   has_permalink
+  http-2
   invisible_captcha
   jquery-fileupload-rails
   jquery-rails
@@ -589,7 +588,6 @@ DEPENDENCIES
   scrypt
   selenium-webdriver
   sidekiq
-  simple_form
   skylight (>= 4.0.0.beta)
   sometimes
   soundmanager2-rails
