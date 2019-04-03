@@ -33,4 +33,19 @@ RSpec.describe Track, type: :model do
       expect(user.playlists.favorites.count).to eq(1)
     end
   end
+
+  describe "soft deletion" do
+    it "soft deletes" do
+      expect do
+        Track.all.map(&:soft_delete)
+      end.not_to change { Track.unscoped.count }
+    end
+
+    it "changes scope" do
+      original_count = Track.count
+      expect do
+        Track.all.map(&:soft_delete)
+      end.to change { Track.count }.from(original_count).to(0)
+    end
+  end
 end

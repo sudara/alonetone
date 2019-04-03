@@ -1,4 +1,6 @@
 class Listen < ActiveRecord::Base
+  include SoftDeletion
+
   @@launch_date = 'Tue Jan 01 00:00:00 +0100 2008'.to_time
 
   scope :from_user,  -> { where('listener_id != ""') }
@@ -121,6 +123,7 @@ end
 #  id             :integer          not null, primary key
 #  city           :string(255)
 #  country        :string(255)
+#  deleted_at     :datetime
 #  ip             :string(255)
 #  source         :string(255)
 #  user_agent     :string(255)

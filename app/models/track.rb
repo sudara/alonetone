@@ -1,4 +1,6 @@
 class Track < ActiveRecord::Base
+  include SoftDeletion
+
   belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :asset
   belongs_to :user
@@ -43,6 +45,7 @@ end
 # Table name: tracks
 #
 #  id          :integer          not null, primary key
+#  deleted_at  :datetime
 #  is_favorite :boolean          default(FALSE)
 #  position    :integer          default(1)
 #  created_at  :datetime
