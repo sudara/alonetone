@@ -23,7 +23,7 @@ Alonetone::Application.routes.draw do
         put :mark_group_as_spam
       end
     end
-    resources :assets, path: 'admin/users/(:filter_by)' do
+    resources :assets, path: 'users/(:filter_by)' do
       member do
         put :unspam
         put :spam
