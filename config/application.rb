@@ -31,6 +31,7 @@ module Alonetone
     config.action_mailer.default_url_options = { host: config.alonetone.hostname }
 
     config.active_storage.service = config.alonetone.storage_service
+    config.active_storage.variant_processor = :vips
 
     def cloudfront_enabled?
       remote_storage? &&
