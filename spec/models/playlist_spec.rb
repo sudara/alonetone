@@ -44,6 +44,35 @@ RSpec.describe Playlist, type: :model do
     expect(playlists(:owp).tracks[1].position).to eq(2)
   end
 
+  describe "visibility" do
+    let(:playlist) do
+      Playlist.new(
+        is_favorite: false,
+        private: false,
+        tracks_count: 2
+      )
+    end
+
+    it "can be public" do
+      expect(playlist).to be_public
+    end
+
+    it "is not public when contains favorites" do
+      playlist.is_favorite = true
+      expect(playlist).to_not be_public
+    end
+
+    it "is not public when marked as private" do
+      playlist.private = true
+      expect(playlist).to_not be_public
+    end
+
+    it "is not public when has no tracks" do
+      playlist.tracks_count = 0
+      expect(playlist).to_not be_public
+    end
+  end
+
   context "favorites" do
     it 'should create a new playlist for a user who does not have one' do
       expect(users(:sandbags).playlists.favorites).not_to be_present

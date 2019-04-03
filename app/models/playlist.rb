@@ -65,6 +65,11 @@ class Playlist < ActiveRecord::Base
     (tracks_count || 0) > 0
   end
 
+  # Returns true when the playlist may be publicly viewed.
+  def public?
+    !private && !is_favorite && has_tracks?
+  end
+
   def has_any_links?
     link1.present? || link2.present? || greenfield_downloads.present?
   end
