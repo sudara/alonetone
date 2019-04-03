@@ -97,42 +97,51 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "assigning a new avatar image" do
+    context "without an avatar" do
+      let(:user) { users(:william_shatner) }
+
+      it "creates the avatar and variants" do
+        user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
+        expect(user.avatar_image).to be_attached
+      end
+    end
+
+    context "with an avatar" do
+      let(:user) { users(:henri_willig) }
+
+      it "replaces the avatar and variants" do
+        user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
+        expect(user.avatar_image).to be_attached
+      end
+    end
+  end
+
   describe "generating URLs to an avatar" do
     context "with an avatar" do
-      let(:user) { users(:sudara) }
+      let(:user) { users(:henri_willig) }
 
       it "knows the user has an avatar" do
         expect(user.avatar_image_present?).to eq(true)
       end
 
-      it "returns a URL to a variant" do
-        url = user.avatar_url(variant: :large)
-        expect(url).to start_with('/system/pics')
-        expect(url).to end_with('.jpg')
-      end
-    end
-
-    context "with an avatar that has missing information" do
-      let(:user) { users(:aaron) }
-
-      it "knows the user does not have an avatar" do
-        expect(user.avatar_image_present?).to eq(false)
-      end
-
-      it "does not return a URL to a variant" do
-        expect(user.avatar_url(variant: :large)).to be_nil
+      it "returns a storage location to a variant" do
+        location = user.avatar_location(variant: :large)
+        expect(location).to be_kind_of(Storage::Location)
+        expect(location.attachment).to be_kind_of(ActiveStorage::Variant)
+        expect(location).to_not be_signed
       end
     end
 
     context "without an avatar" do
-      let(:user) { users(:arthur) }
+      let(:user) { users(:william_shatner) }
 
       it "knows the user does not have an avatar" do
         expect(user.avatar_image_present?).to eq(false)
       end
 
       it "does not return a URL to a variant" do
-        expect(user.avatar_url(variant: :large)).to be_nil
+        expect(user.avatar_location(variant: :large)).to be_nil
       end
     end
   end
