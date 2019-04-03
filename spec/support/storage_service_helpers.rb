@@ -23,6 +23,16 @@ module RSpec
           ActiveStorage::Blob.service = service
         end
       end
+
+      def with_storage_current_host(hostname)
+        before = ActiveStorage::Current.host
+        begin
+          ActiveStorage::Current.host = hostname
+          yield
+        ensure
+          ActiveStorage::Current.host = before
+        end
+      end
     end
   end
 end
