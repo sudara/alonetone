@@ -37,10 +37,12 @@ class Asset < ApplicationRecord
     source: :user,
     through: :tracks
 
-  has_one_attached :audio_file
-
   before_save :ensure_unique_permalink, if: :permalink_changed?
   after_commit :create_waveform, on: :create
+
+  # We have to define attachments last to make the Active Record callbacks
+  # fire in the right order.
+  has_one_attached :audio_file
 
   include Rakismet::Model
   rakismet_attrs  author: proc { user.display_name },
