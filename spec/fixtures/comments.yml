@@ -70,3 +70,13 @@ public_comment_on_asset_by_user:
   remote_ip: 127.0.0.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
+
+another_public_comment_on_asset_by_user:
+  commentable: valid_mp3 (Asset)
+  body: "This is your best work."
+  is_spam: false
+  user: arthur
+  commenter: sudara
+  remote_ip: 127.0.0.5
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>

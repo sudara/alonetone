@@ -1,4 +1,6 @@
 class Playlist < ActiveRecord::Base
+  include SoftDeletion
+
   acts_as_list scope: :user_id, order: :position
 
   scope :mixes,            -> { where(is_mix: true) }
@@ -22,6 +24,8 @@ class Playlist < ActiveRecord::Base
 
   has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
   accepts_nested_attributes_for :greenfield_downloads
+
+  has_one_attached :cover_image
 
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
@@ -145,6 +149,7 @@ end
 #  id            :integer          not null, primary key
 #  cover_quality :integer          default("modern")
 #  credits       :text(4294967295)
+#  deleted_at    :datetime
 #  description   :text(4294967295)
 #  has_details   :boolean          default(FALSE)
 #  image         :string(255)

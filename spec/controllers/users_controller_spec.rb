@@ -260,6 +260,62 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  context '#destroy' do
+    context "admin" do
+      before do
+        login(:sudara)
+      end
+
+      it "should allow admin to delete another user" do
+        expect {
+          delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        }.to change(User, :count).by(-1)
+      end
+
+      it "should redirect to root path" do
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sets deleted_at to true" do
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        expect(users(:arthur).deleted_at).not_to be_nil
+      end
+
+      it "soft deletes all associated records" do
+        expect(users(:arthur).assets.count).to be > 0
+        expect(users(:arthur).tracks.count).to be > 0
+        expect(users(:arthur).listens.count).to be > 0
+        expect(users(:arthur).playlists.count).to be > 0
+        expect(users(:arthur).topics.count).to be > 0
+        expect(users(:arthur).topics.count).to be > 0
+
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+
+        users(:arthur).reload
+
+        expect(users(:arthur).assets.count).to eq(0)
+        expect(users(:arthur).tracks.count).to eq(0)
+        expect(users(:arthur).listens.count).to eq(0)
+        expect(users(:arthur).playlists.count).to eq(0)
+        expect(users(:arthur).topics.count).to eq(0)
+        expect(users(:arthur).comments.count).to eq(0)
+      end
+
+      it "enqueues the job to really destroy the record" do
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        expect(enqueued_jobs.size).to eq 1
+        expect(enqueued_jobs.first[:queue]).to eq "default"
+        expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
+      end
+    end
+
+    context "user" do
+      # would like to figure out how to loop through users ^
+      # it would not let me maintain correct current_user session between tests
+    end
+  end
+
   context "last request at" do
     it "should touch last_request_at when logging in" do
       # Authlogic does this by default, which fucks things up

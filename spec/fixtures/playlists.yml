@@ -54,6 +54,8 @@ will_studd_rockfort:
   title: Rockfort
   tracks_count: 3
   cover_quality: modern
+  private: false
+  published_at: <%= 1.day.ago.to_s :db %>
   description: >
     Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
     is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
@@ -65,6 +67,8 @@ henri_willig_polderkaas:
   permalink: polderkaas
   title: Polderkaas
   tracks_count: 2
+  private: false
+  published_at: <%= 1.day.ago.to_s :db %>
   cover_quality: modern
   description: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy

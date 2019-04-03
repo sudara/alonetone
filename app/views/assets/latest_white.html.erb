@@ -1,25 +1,17 @@
 <div id="home_grid">
-  <%= cache("home/playlists/#{@playlists.first.cache_key}/#{theme_name}") do %>
-    <div id="home_playlists_area">
-      <div class="latest-playlists-header">
-        <h2>
-        <%= link_to "Latest Playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
-        </h2>
-      </div>
-      <% if white_theme_enabled? %>
-      <ul class="playlists">
-        <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
-      </ul>
-      <% else %>
-      <ul class="playlists_row">
-        <%= render partial: 'playlists/row', collection: @playlists, as: :playlist %>
-      </ul>
-      <% end %>
+  <% if @playlists.present? %>
+  <div id="home_playlists_area">
+    <div class="latest-playlists-header">
+      <h2>
+      <%= link_to "Latest Playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
+      </h2>
     </div>
-  <% end unless @playlists.blank? %>
-
+    <ul class="playlists">
+      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
+    </ul>
+  </div>
+  <% end %>
   <div id="home_left_column">
-  
     <div id="home_latest_area">
       <h2>
         <%= link_to radio_path(items: 40, source: 'latest'), title: 'latest music on alonetone' do %>
@@ -38,7 +30,6 @@
         </span>
         <% end %>
       </div>
-
     </div>
 
     <div id="home_comments_area">
@@ -48,7 +39,7 @@
         <% end %>
       </h2>
       <div class="box">
-        <%= render partial: 'shared/comment', collection: @comments %>
+        <%= render partial: 'shared/comment', collection: @comments, cached: true %>
       </div>
       <div class="below_box">
         <%= link_to all_comments_path, class: 'view_all', title: 'view latest comments' do %>
@@ -59,13 +50,10 @@
         </span>
         <% end %>
       </div>
-
     </div>
-
   </div>
-  
+
   <div id="home_right_column">
-    
     <div id="home_popular_area">
       <h2>
         <%= link_to radio_path(items: 40, source: 'popular'), title: 'alonetone radio: currently kicking ass' do %>
@@ -82,7 +70,7 @@
             <%= render file: svg_path('svg/icon_caret.svg') %>
           </i>
         </span>
-        <% end %>      
+        <% end %>
       </div>
     </div>
 

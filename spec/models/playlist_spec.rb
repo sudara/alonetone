@@ -112,4 +112,19 @@ RSpec.describe Playlist, type: :model do
       end
     end
   end
+
+  describe "soft deletion" do
+    it "only soft deletes" do
+      expect do
+        Playlist.all.map(&:soft_delete)
+      end.not_to change { Playlist.unscoped.count }
+    end
+
+    it "changes scope" do
+      original_count = Playlist.count
+      expect do
+        Playlist.all.map(&:soft_delete)
+      end.to change { Playlist.count }.from(original_count).to(0)
+    end
+  end
 end

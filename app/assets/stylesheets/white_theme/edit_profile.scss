@@ -32,6 +32,9 @@ form#reset-password {
       padding-top: 0 !important;
       padding-bottom: 0 !important;
     }
+    input[type="text"] {
+      width: 190px;
+    }
   }
 }
 
