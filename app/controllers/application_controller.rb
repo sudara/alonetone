@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
   layout :white_or_normal
 
+  # Sets ActiveStorage::Current.host based on the current request so all Active
+  # Storage models can generate URLs out of the view context. This is mostly
+  # used in development because in production we use CloudFront URLs.
+  include ActiveStorage::SetCurrent
   include AuthlogicHelpers
-  include PreventAbuse
   include Pagy::Backend
+  include PreventAbuse
 
   protect_from_forgery
 
