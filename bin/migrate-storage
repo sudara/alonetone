@@ -93,7 +93,7 @@ module Storage
     end
 
     def resize_to_limit
-      ImageVariant.resize_to_fit(variant_name)
+      ImageVariant.resize_to_limit(variant_name)
     end
   end
 
