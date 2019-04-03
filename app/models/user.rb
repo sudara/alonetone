@@ -68,6 +68,11 @@ class User < ActiveRecord::Base
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
+  # Active Storage normally does lazy processing for image variants but we
+  # want to process when the attachment changes.
+  before_save -> { @process_variants = attachment_changes.key?('avatar_image') }
+  after_commit :process_variants
+
   # Can create music
   has_one    :pic, as: :picable, dependent: :destroy
   has_one    :profile, dependent: :destroy
@@ -123,6 +128,8 @@ class User < ActiveRecord::Base
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
 
+  # We have to define attachments last to make the Active Record callbacks
+  # fire in the right order.
   has_one_attached :avatar_image
 
   # tokens and activation
@@ -222,14 +229,18 @@ class User < ActiveRecord::Base
 
   # Returns true when the user has a usable avatar.
   def avatar_image_present?
-    pic.present? && pic.image_present?
+    avatar_image.attached?
   end
 
-  # Generates a URL to user's avater with the requested variant. Returns nil when the user does
-  # not have a usable avatar.
-  def avatar_url(variant:)
-    ImageVariant.verify(variant)
-    pic&.url(variant: variant)
+  # Generates a location to user's avater with the requested variant. Returns nil when the user
+  # does not have a usable avatar.
+  def avatar_location(variant:)
+    return unless avatar_image.attached?
+
+    Storage::Location.new(
+      ImageVariant.variant(avatar_image, variant: variant),
+      signed: false
+    )
   end
 
   def deleted?
@@ -304,6 +315,13 @@ class User < ActiveRecord::Base
       send(user_relation).delete_all
     end
     true
+  end
+
+  def process_variants
+    return unless @process_variants
+    return unless avatar_image.attached?
+
+    ImageVariant.process(avatar_image)
   end
 
   def make_first_user_admin
