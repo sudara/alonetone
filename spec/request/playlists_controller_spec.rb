@@ -15,9 +15,7 @@ RSpec.describe PlaylistsController, type: :request do
       get "/willstudd/playlists/rockfort"
       playlist = playlists(:will_studd_rockfort)
       expect(response).to be_successful
-      expect(response.body).to match_css(
-        'link[href="' + playlist.cover_url(variant: :greenfield) + '"]'
-      )
+      expect(response.body).to match_css('link[href]')
     end
   end
 
