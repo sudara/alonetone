@@ -36,7 +36,6 @@ module Admin
       # and we should include private comments as well
       scope = Comment.where(permitted_params[:mark_spam_by])
       comments = scope.include_private
-
       comments.map(&:spam!)
       comments.update_all(is_spam: true)
       redirect_back(fallback_location: root_path)
@@ -45,7 +44,7 @@ module Admin
     private
 
     def permitted_params
-      params.permit(:mark_spam_by, :filter_by)
+      params.permit(:filter_by, mark_spam_by: [:user_id, :remote_ip])
     end
 
     def set_comment

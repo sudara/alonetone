@@ -25,7 +25,7 @@ module Admin
     end
 
     def mark_group_as_spam
-      scope = Asset.where(params[:mark_spam_by].permit!)
+      scope = Asset.where(permitted_params[:mark_spam_by])
       assets = scope.not_spam
 
       assets.map(&:spam!)
@@ -40,7 +40,7 @@ module Admin
     end
 
     def permitted_params
-      params.permit(:filter_by)
+      params.permit(:filter_by, mark_spam_by: :user_id)
     end
   end
 end
