@@ -1,4 +1,6 @@
 class Playlist < ActiveRecord::Base
+  include SoftDeletion
+
   acts_as_list scope: :user_id, order: :position
 
   scope :mixes,            -> { where(is_mix: true) }
@@ -147,6 +149,7 @@ end
 #  id            :integer          not null, primary key
 #  cover_quality :integer          default("modern")
 #  credits       :text(4294967295)
+#  deleted_at    :datetime
 #  description   :text(4294967295)
 #  has_details   :boolean          default(FALSE)
 #  image         :string(255)

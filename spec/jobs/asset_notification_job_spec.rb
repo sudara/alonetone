@@ -32,7 +32,7 @@ RSpec.describe AssetNotificationJob, type: :job do
   end
 
   describe "does not send notification" do
-    subject(:job) { described_class.perform_later( asset_ids: [999999], user_id: users(:arthur).id ) }
+    subject(:job) { described_class.perform_later( asset_ids: [999999], user_id: 99999 ) }
 
     it "when assets not found" do
       perform_enqueued_jobs do
@@ -49,6 +49,13 @@ RSpec.describe AssetNotificationJob, type: :job do
         expect(AssetNotification).not_to receive(:upload_mass_notification)
         expect(AssetNotification).not_to receive(:upload_notification)
         job
+      end
+      assert_performed_jobs 1
+    end
+
+    it "does not error if user not found" do
+      perform_enqueued_jobs do
+        expect{ job }.not_to raise_error
       end
       assert_performed_jobs 1
     end
