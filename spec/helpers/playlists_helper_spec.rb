@@ -66,11 +66,18 @@ RSpec.describe PlaylistsHelper, type: :helper do
 
   context 'playlist with a cover' do
     let(:playlist) { playlists(:will_studd_rockfort) }
+    let(:hostname) { 'alonetone.example.com' }
+
+    around do |example|
+      with_storage_current_host(hostname) do
+        example.call
+      end
+    end
 
     it 'formats a cover URL' do
       %i[large album greenfield].each do |variant|
         url = playlist_cover_url(playlist, variant: variant)
-        expect(url).to start_with('/system/pics')
+        expect(url).to start_with('http://')
         expect(url).to end_with('.jpg')
       end
     end
@@ -79,15 +86,14 @@ RSpec.describe PlaylistsHelper, type: :helper do
       playlist.cover_quality = :ancient
 
       url = playlist_cover_url(playlist, variant: :greenfield)
-      expect(url).to start_with('/system/pics')
+      expect(url).to start_with('http://alonetone.example.com')
       expect(url).to end_with('.jpg')
-      expect(url).to include('album')
     end
 
     it 'formats an image element with the cover' do
       element = playlist_cover_image(playlist, variant: :greenfield)
       expect(element).to match_css('img[src][alt="Playlist cover"]')
-      expect(element).to include(playlist_cover_url(playlist, variant: :greenfield))
+      expect(element).to include(hostname)
     end
 
     it 'formats an image for the cover element' do
@@ -96,9 +102,11 @@ RSpec.describe PlaylistsHelper, type: :helper do
     end
 
     it 'formats a URL to the dark playlist cover' do
+      # Singed URLs to active storage disk controller intentionally doesn't
+      # expose any information about the URL we just built.
       expect(
         dark_playlist_cover_url(playlist, variant: :large)
-      ).to eq(playlist_cover_url(playlist, variant: :large))
+      ).to start_with('http://alonetone.example.com')
     end
   end
 
