@@ -9,7 +9,6 @@ RSpec.describe Admin::AssetsController, type: :request do
     before :each do
       users(:arthur).soft_delete_relations
       users(:arthur).update(deleted_at: Time.now - 1.week)
-
     end
 
     it "should restore a user" do
@@ -80,6 +79,29 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect(enqueued_jobs.size).to eq 1
       expect(enqueued_jobs.first[:queue]).to eq "default"
       expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
+    end
+  end
+
+  describe '#index' do
+    before :each do
+      users(:arthur).update(deleted_at: Time.now - 1.week)
+    end
+
+    context "if deleted: true flag is passed" do\
+      it "should return users with deleted" do
+        get admin_users_path({deleted: true})
+        expect(response.body).to match(/arthur/)
+        expect(response.body).not_to match(/ben/)
+      end
+    end
+
+    context "if deleted: flag is not passed" do
+
+      it "should return users count without deleted if" do
+        get admin_users_path
+        expect(response.body).to match(/arthur/)
+        expect(response.body).to match(/sudara/)
+      end
     end
   end
 end

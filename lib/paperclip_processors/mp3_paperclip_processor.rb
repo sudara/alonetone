@@ -38,7 +38,8 @@ module Paperclip
             'UTF-8', invalid: :replace, undef: :replace, replace: "\ufffd"
           ).unicode_normalize(:nfkc)
         end
-        attachment.instance.public_send("#{attribute_name}=", value)
+        attribute_writer = "#{attribute_name}="
+        attachment.instance.public_send(attribute_writer, value) if attachment.instance.respond_to?(attribute_writer)
       end
     end
   end

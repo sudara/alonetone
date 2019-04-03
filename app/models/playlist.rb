@@ -25,6 +25,8 @@ class Playlist < ActiveRecord::Base
   has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
   accepts_nested_attributes_for :greenfield_downloads
 
+  has_one_attached :cover_image
+
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true

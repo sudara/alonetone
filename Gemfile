@@ -17,6 +17,7 @@ gem 'awesome_print', require: 'ap'
 
 # uploading
 gem 'http-2' # used by AWS SDK but not in dependencies
+gem 'aws-sdk-cloudfront'
 gem 'aws-sdk-s3'
 gem 'paperclip', '~> 6.0.0'
 gem 'rubyzip'
@@ -60,7 +61,6 @@ gem 'uglifier'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem 'soundmanager2-rails'
 gem 'turbolinks'
-gem 'cloudfront-signer'
 
 # monitoring & perf
 gem 'newrelic_rpm'

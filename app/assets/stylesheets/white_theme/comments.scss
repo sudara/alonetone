@@ -77,12 +77,14 @@
   .comment_form {
     overflow: hidden;
     form {
-      .comment_as {
+      > .comment_as {
         font-size: 12px;
-        line-height: 30px;
+        line-height: 20px;
         overflow: auto;
-        height: 30px;
         color: #969393;
+        font-family: $medium-sans-font;
+        margin-top: 9px;
+        padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
           color: #4f4d4d;
@@ -190,10 +192,10 @@
           div.ajax_success {
             padding-right: 2px;
             color: #2b8800;
-            padding-top: 5px;
+            padding-top: 6.5px;
             &::after {
               position: absolute;
-              top: 6px;
+              top: 7px;
               right: 10px;
               content: image-url("svg/icon_checkmark_green.svg");
             }
@@ -201,10 +203,10 @@
           div.ajax_fail {
             padding-right: 2px;
             color: #b20035;
-            padding-top: 5px;
+            padding-top: 6.5px;
             &::after {
               position: absolute;
-              top: 6px;
+              top: 7.5px;
               right: 10px;
               content: image-url("svg/icon_x_red.svg");
             }

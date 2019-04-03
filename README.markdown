@@ -120,9 +120,11 @@ Thirdly, fork away on github.
 `git clone REPO_GIT`
 
 - `brew install libsndfile lame` (required for id3 tags and waveforms)
-
+- `brew install yarn` (required for building assets)
 - Install gems
 `bundle install`
+- Install front-end dependencies
+`yarn install --check-files`
 
 - To create needed config, database, and load db/seeds*:
 `rake setup`
