@@ -51,7 +51,7 @@ RSpec.describe Storage::CloudFrontLocation, type: :model do
   it "coerces to string" do
     expect(
       Storage::CloudFrontLocation.new(key, signed: false).to_s
-    ).to start_with('http://')
+    ).to start_with('https://')
   end
 
   context "unsigned" do
