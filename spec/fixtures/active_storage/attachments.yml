@@ -78,3 +78,10 @@ will_studd_rockfort_cover:
   record: will_studd_rockfort (Playlist)
   blob: will_studd_rockfort_cover
   created_at: <%= 2.months.ago %>
+
+# Attachments for all user avatars
+henri_willig_avatar:
+  name: avatar_image
+  record: henri_willig (User)
+  blob: henri_willig_avatar
+  created_at: <%= 2.months.ago %>
