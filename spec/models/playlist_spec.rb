@@ -87,6 +87,10 @@ RSpec.describe Playlist, type: :model do
         last_time = playlist.created_at
       end
     end
+
+    it "preload associations to reduce the number of queries" do
+      expect(Playlist.with_preloads.count).to eq(Playlist.count)
+    end
   end
 
   context "favorites" do
