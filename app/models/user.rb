@@ -232,9 +232,9 @@ class User < ActiveRecord::Base
     avatar_image.attached?
   end
 
-  # Generates a location to user's avater with the requested variant. Returns nil when the user
+  # Generates a location to user's avatar with the requested variant. Returns nil when the user
   # does not have a usable avatar.
-  def avatar_location(variant:)
+  def avatar_image_location(variant:)
     return unless avatar_image.attached?
 
     Storage::Location.new(
