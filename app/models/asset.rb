@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
+  include SoftDeletion
+
   concerned_with :uploading, :radio, :statistics, :greenfield
   attribute :user_agent, :string
 
@@ -202,6 +204,7 @@ end
 #  bitrate          :integer
 #  comments_count   :integer          default(0)
 #  credits          :text(4294967295)
+#  deleted_at       :datetime
 #  description      :text(4294967295)
 #  description_html :text(4294967295)
 #  favorites_count  :integer          default(0)
