@@ -1,39 +1,50 @@
-<h1>Users</h1>
+<div id="admin_header">
+  <h1>Users</h1>
+</div>
+
 <div id="admin_columns">
   <div class="admin_column_left">
     <%= render partial: 'admin/navigation' %>
   </div>
-  <div class="admin_column_right">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>UpdatedAt</th>
-          <th>IP</th>
-          <th>Login</th>
-          <th>Bio</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
 
-      <tbody>
+  <div class="admin_column_right">
+
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
+
+    <div class="admin_column_right_inner box">
+
+      <header class="admin_users_header">
+        <div class="date_column">Date</div>
+        <div class="user_column">User</div>
+        <div class="bio_column">Bio</div>
+      </header>
+
+      <div class="admin_users_rows">
         <% @users.each do |user| %>
-          <tr data-controller="admin--user">
-            <td><input type="checkbox"></td>
-            <td><%= user.created_at.strftime("%b %d") %></td>
-            <td><%= user.current_login_ip %></td>
-            <td><%= link_to user.login, user_path(user.login) %></td>
-            <td><%= truncate(user&.profile&.bio, length: 200) %></td>
-            <td><%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></td>
-                        <td data-target='admin--user.deletedvalue' style="display: none;"><%= user.soft_deleted? %></td>
-            <td data-target='admin--user.deletedbutton'><%= button_to "Delete User", delete_admin_user_path(user), method: :put, remote: true, data: { action: 'click->admin--user#showRestoreButtonTarget' } %></td>
-            <td data-target='admin--user.restorebutton'><%= button_to "Restore User", restore_admin_user_path(user), method: :put, remote: true, data: { action: 'click->admin--user#showDeleteButtonTarget' } %></td>
-          </tr>
+          <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>">
+            <div class="date_column"><%= user.created_at.strftime("%b %d") %></div>
+            <div class="user_column">
+              <div><%= link_to user.login, user_path(user.login) %></div>
+              <div><%= user.current_login_ip %></div>
+            </div>
+            <div class="bio_column">
+              <div><%= truncate(user&.profile&.bio, length: 200) %></div>
+            </div>
+            <div class="button_column">
+              <%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %>
+              <%= button_to "Delete User", delete_admin_user_path(user), method: :put, remote: true, data: { target: 'admin--user.deleteButton', action: 'admin--user#showRestoreButton' } %></td>
+              <%= button_to "Restore User", restore_admin_user_path(user), method: :put, remote: true, data: { target: 'admin--user.restoreButton', action: 'click->admin--user#showDeleteButton' } %></td>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
-    <%== pagy_nav @pagy %>
+      </div>
+    </div>
+
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
+
   </div>
 </div>

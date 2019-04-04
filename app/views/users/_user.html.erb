@@ -21,14 +21,14 @@
   </div>
   <div id="user_links">
     <ul class="user_links">
-     <%= user_nav_item "Home", user_home_path(@user), title: "#{@user.name} on alonetone" %>
-     <%= user_nav_item "Tracks", user_tracks_path(@user), title: "#{@user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
-     <%= user_nav_item "Playlists", user_playlists_path(@user.login), title: "#{@user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? || (authorized_as(@user) && @user.playlists.include_private.count > 0) %>
-     <%= user_nav_item "Favorites", [@user, @user.favorites], title: "#{@user.name}'s favorite tracks on alonetone" if @user.favorites.present? %>
-      <%= user_nav_item "Email", "mailto:#{@user.email}",added_class: "contact" if admin? %>
-      <%= user_nav_item "iTunes", "http://#{@user.itunes}",added_class: "contact" if @user.itunes.present? %>
-      <%= user_nav_item "Twitter", "http://twitter.com/#{@user.profile.twitter}", added_class: 'contact' if @user.profile.twitter.present? %>
-      <%= user_nav_item "Sudo", sudo_user_path(@user), added_class: "contact" if (admin? || @sudo)%>
+     <%= navigation_item "Home", user_home_path(@user), title: "#{@user.name} on alonetone" %>
+     <%= navigation_item "Tracks", user_tracks_path(@user), title: "#{@user.name}'s uploaded mp3s on alonetone" if @user.assets_count > 0 %>
+     <%= navigation_item "Playlists", user_playlists_path(@user.login), title: "#{@user.name}'s albums and playlists on alonetone" if @user.has_public_playlists? || (authorized_as(@user) && @user.playlists.include_private.count > 0) %>
+     <%= navigation_item "Favorites", [@user, @user.favorites], title: "#{@user.name}'s favorite tracks on alonetone" if @user.favorites.present? %>
+      <%= navigation_item "Email", "mailto:#{@user.email}",added_class: "contact" if admin? %>
+      <%= navigation_item "iTunes", "http://#{@user.itunes}",added_class: "contact" if @user.itunes.present? %>
+      <%= navigation_item "Twitter", "http://twitter.com/#{@user.profile.twitter}", added_class: 'contact' if @user.profile.twitter.present? %>
+      <%= navigation_item "Sudo", sudo_user_path(@user), added_class: "contact" if (admin? || @sudo)%>
     </ul>
   </div>
 </div>
