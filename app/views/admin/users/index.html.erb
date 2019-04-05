@@ -27,7 +27,9 @@
             <td><%= link_to user.login, user_path(user.login) %></td>
             <td><%= truncate(user&.profile&.bio, length: 200) %></td>
             <td><%= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %></td>
-                        <td data-target='admin--user.deletedvalue' style="display: none;"><%= user.soft_deleted? %></td>
+            <td data-target='admin--user.deletedvalue' style="display: none;"><%= user.soft_deleted? %></td>
+            <td data-target='admin--user.spamvalue' style="display: none;"><%= user.is_spam? %></td>
+            <td data-target='admin--user.unspambutton'><%= button_to "Unspam User", unspam_admin_user_path(user), method: :put, remote: true, data: { action: 'click->admin--user#hideUnspamButtonTarget' } %></td>
             <td data-target='admin--user.deletedbutton'><%= button_to "Delete User", delete_admin_user_path(user), method: :put, remote: true, data: { action: 'click->admin--user#showRestoreButtonTarget' } %></td>
             <td data-target='admin--user.restorebutton'><%= button_to "Restore User", restore_admin_user_path(user), method: :put, remote: true, data: { action: 'click->admin--user#showDeleteButtonTarget' } %></td>
           </tr>

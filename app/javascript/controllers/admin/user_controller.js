@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['deletedbutton', 'restorebutton', 'deletedvalue']
+  static targets = ['deletedbutton', 'restorebutton', 'deletedvalue', 'spamvalue', 'unspambutton']
 
   initialize() {
     if (this.deletedvalueTarget.innerHTML == "true") {
@@ -9,6 +9,18 @@ export default class extends Controller {
     } else {
       this.showDeleteButtonTarget()
     }
+
+    if (this.spamvalueTarget.innerHTML == "false") {
+      this.hideUnspamButtonTarget()
+    }
+  }
+
+  showUnspamButtonTarget() {
+    this.unspambuttonTarget.style.display = "block"
+  }
+
+  hideUnspamButtonTarget() {
+    this.unspambuttonTarget.style.display = "none"
   }
 
   showDeleteButtonTarget() {
