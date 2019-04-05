@@ -1,6 +1,9 @@
 <ul class="admin_nav">
   <li><%= link_to 'Users', admin_users_path %></li>
-  <li><%= link_to ' \_ Deleted Users', admin_users_path({deleted: true}) %></li>
+    <ul>
+      <li><%= link_to ' \_ Deleted Users', admin_users_path({deleted: true}) %></li>
+      <li><%= link_to ' \_ Spam Users', admin_users_path({filter_by: { is_spam: true}}) %></li>
+    </ul>
   <li><%= link_to 'Tracks', admin_assets_path %></li>
   <li><%= link_to 'Comments',  admin_comments_path %></li>
     <ul>
