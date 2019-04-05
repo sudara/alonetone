@@ -5,6 +5,25 @@ RSpec.describe Admin::AssetsController, type: :request do
     create_user_session(users(:sudara))
   end
 
+  describe '#unspam' do
+    before :each do
+      users(:arthur).update(is_spam: true)
+    end
+
+    let!(:user) { users(:arthur) }
+
+    it "should unspam the user" do
+      akismet_stub_submit_ham
+      put unspam_admin_user_path(user.login)
+      expect(user.reload.is_spam).to eq(false)
+    end
+
+    it "should update RAKISMET with updated information about user" do
+      expect(Rakismet).to receive(:akismet_call)
+      put unspam_admin_user_path(user.login)
+    end
+  end
+
   describe '#restore' do
     before :each do
       users(:arthur).soft_delete_relations
