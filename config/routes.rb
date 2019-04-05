@@ -12,6 +12,7 @@ Alonetone::Application.routes.draw do
       member do
         put :delete
         put :restore
+        put :unspam
       end
     end
     resources :comments do
