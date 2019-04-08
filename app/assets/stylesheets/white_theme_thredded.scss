@@ -1,4 +1,4 @@
-@import 'white_theme';
+@import "white_theme";
 
 // check out variables and override pre-import
 // https://github.com/thredded/thredded/blob/master/app/assets/stylesheets/thredded/base/_variables.scss
@@ -11,7 +11,7 @@ $thredded-base-border-color: $light-gray;
 
 $thredded-font-size-small: 13px;
 
-@import 'thredded';
+@import "thredded";
 
 li.thredded--user-navigation--private-topics {
   display: none;
@@ -22,23 +22,15 @@ li.thredded--user-preferences--notifications-for-private-topics {
 }
 
 aside.thredded--currently-online {
-	display: none;
+  display: none;
 }
 
 #thredded--container {
   box-sizing: border-box;
-  padding-top: $baseline;
-  padding-right: $baseline * 3;
-  padding-bottom: $baseline;
-  padding-left: $baseline * 3;
+  padding: $baseline $baseline * 3;
   background-color: #fff;
   @include samo-shadow-and-radius();
-  // @include match-dynamic-site-width('narrow');
   max-width: 960px;
-
-  @media only screen and (max-width: 1000px) {
-    @include match-dynamic-site-width('wide');
-  }
 
   @media #{$one-column} {
     padding-left: 4%;
@@ -57,6 +49,12 @@ aside.thredded--currently-online {
 
   header {
     nav {
+      .thredded--user-navigation {
+        .thredded--nav-text {
+          font-family: $medium-sans-font;
+        }
+
+      }
       .thredded--main-navigation {
         .thredded--navigation-breadcrumbs {
           li {
@@ -75,17 +73,40 @@ aside.thredded--currently-online {
   }
 
   section.thredded--main-section {
-  	.thredded--messageboard:hover {
-		background-color: inherit;
-		color: inherit;
-  	}
-	margin-bottom: 27px;
-	padding-top: $baseline * .5;
-	border-top: 1px solid $thredded-base-border-color;
+    .thredded--messageboards-group--title {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+    .thredded--messageboards-group {
+      display: block;
+      .thredded--messageboard {
+        border: 0;
+        border-top: 1px solid $light-gray;
+        padding-left: 0;
+      }
+      .thredded--messageboard--header {
+        margin-bottom: $baseline / 2;
+      }
+      .thredded--messageboard:hover {
+        background-color: inherit;
+        color: inherit;
+      }
+    }
+    
+    margin-bottom: $baseline;
+    padding-top: $baseline * 0.5;
+    border-top: 1px solid $thredded-base-border-color;
 
-  	.thredded--messageboards--actions {
-		margin-top: $baseline;
-  	}
+    .thredded--messageboard--description,
+    .thredded--messageboard--meta,
+    .thredded--messageboard--byline {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .thredded--messageboards--actions {
+      margin-top: $baseline;
+    }
     header.thredded--topic-header {
       padding-bottom: $baseline;
       margin-bottom: 1rem;
@@ -108,9 +129,9 @@ aside.thredded--currently-online {
       }
     }
     article.thredded--topics--topic {
-    	border-bottom: 1px solid $light-gray;
-    	padding-bottom: 13px;
-    	margin-bottom: 13px;
+      border-bottom: 1px solid $light-gray;
+      padding-bottom: 13px;
+      margin-bottom: 13px;
       h1.thredded--topics--title {
         a {
           font-size: 18px;
@@ -118,7 +139,7 @@ aside.thredded--currently-online {
         }
       }
       cite.thredded--topics--updated-by {
-      	font-size: 12px;
+        font-size: 12px;
       }
     }
     .thredded--post-form--wrapper {
@@ -128,62 +149,91 @@ aside.thredded--currently-online {
   .thredded--post--content {
     line-height: 1.5rem;
     font-size: 1rem;
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
       margin-bottom: 0;
     }
     h2 {
       color: $dark-gray;
       margin-top: 2rem;
-      margin-bottom: .25rem;
+      margin-bottom: 0.25rem;
       line-height: 1.5rem;
     }
   }
-  [type="checkbox"]:not(:checked), [type="checkbox"] {
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"] {
     left: 0;
     position: static;
   }
 }
 
-.thredded--button, .thredded--form--submit {
+.thredded--button,
+.thredded--form--submit {
   @include default-button();
 }
 
 .thredded--form {
-  .thredded--button, .thredded--form--submit {
+  .thredded--button,
+  .thredded--form--submit {
     @include default-button();
   }
   label {
     // font-family: $sans-font;
   }
 
-  textarea#post_content, .thredded--preview-area--post {
-    font-size: 1rem;
+  textarea#post_content,
+  .thredded--preview-area--post {
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 
-.thredded--alert-info, .thredded--flash-message--notice {
+.thredded--alert-info,
+.thredded--flash-message--notice {
   background-color: transparent;
 }
 .thredded--flash-message {
   display: none;
 }
 
-.thredded--form [type="color"]:focus, .thredded--form [type="date"]:focus, .thredded--form [type="datetime"]:focus, .thredded--form [type="datetime-local"]:focus, .thredded--form [type="email"]:focus, .thredded--form [type="month"]:focus, .thredded--form [type="number"]:focus, .thredded--form [type="password"]:focus, .thredded--form [type="search"]:focus, .thredded--form [type="tel"]:focus, .thredded--form [type="text"]:focus, .thredded--form [type="time"]:focus, .thredded--form [type="url"]:focus, .thredded--form [type="week"]:focus, .thredded--form input:focus:not([type]), .thredded--form textarea:focus, .thredded--form select[multiple="multiple"]:focus {
+.thredded--form [type="color"]:focus,
+.thredded--form [type="date"]:focus,
+.thredded--form [type="datetime"]:focus,
+.thredded--form [type="datetime-local"]:focus,
+.thredded--form [type="email"]:focus,
+.thredded--form [type="month"]:focus,
+.thredded--form [type="number"]:focus,
+.thredded--form [type="password"]:focus,
+.thredded--form [type="search"]:focus,
+.thredded--form [type="tel"]:focus,
+.thredded--form [type="text"]:focus,
+.thredded--form [type="time"]:focus,
+.thredded--form [type="url"]:focus,
+.thredded--form [type="week"]:focus,
+.thredded--form input:focus:not([type]),
+.thredded--form textarea:focus,
+.thredded--form select[multiple="multiple"]:focus {
   border: 1px solid #e1e1e1;
   box-shadow: none;
 }
 
-.thredded--post--dropdown--actions--item, form.button_to>.thredded--post--dropdown--actions--item {
+.thredded--post--dropdown--actions--item,
+form.button_to > .thredded--post--dropdown--actions--item {
   height: 51px;
 }
 
-
-
 .thredded--post--dropdown {
-  background-image: image-url('svg/icon_gear.svg');
+  background-image: image-url("svg/icon_gear.svg");
   width: 15px;
   height: 15px;
   svg {
     display: none;
   }
+}
+
+
+
+.thredded--post-moderation-record--moderation-state-notice a, .thredded--post-moderation-record--content-changed-notice a, .thredded--link, .thredded--messageboard, .thredded--post--user a, .thredded--post--topic a, .thredded--post--user-and-topic a, .thredded--post--content a, .thredded--post--content--spoiler--summary, .thredded--topic-header--participants--participant > a, .thredded--topic-header--started-by a, .thredded--topic-header--edit-topic, .thredded--topic-header--follow-info form input[type=submit], .thredded--topic-header--follow-info form button, .thredded--topics--title a, .thredded--topics--updated-by a, .thredded--topics--messageboard a {
+  transition: 0;
 }
