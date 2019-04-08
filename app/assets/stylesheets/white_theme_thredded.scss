@@ -86,22 +86,39 @@ aside.thredded--currently-online {
       }
       .thredded--messageboard--header {
         margin-bottom: $baseline / 2;
+        .thredded--messageboard--title {
+          font-size: 18px;
+        }
       }
       .thredded--messageboard:hover {
-        background-color: inherit;
-        color: inherit;
+        background-color: transparent;
+        .thredded--messageboard--header {
+          text-decoration: underline;
+          color: $samo-orange;
+          
+        }
+        
       }
     }
     
     margin-bottom: $baseline;
     padding-top: $baseline * 0.5;
     border-top: 1px solid $thredded-base-border-color;
-
+    .thredded--messageboard--meta--counts {
+      font-size: 12px;
+      line-height: 15px;
+      font-family: $medium-sans-font;
+    }
     .thredded--messageboard--description,
-    .thredded--messageboard--meta,
-    .thredded--messageboard--byline {
+    .thredded--messageboard--meta {
       font-size: 14px;
-      line-height: 17px;
+      line-height: 18px;
+    }
+
+    .thredded--messageboard--byline {
+      font-size: 12px;
+      line-height: 15px;
+      margin-top: 4px;
     }
 
     .thredded--messageboards--actions {
