@@ -53,7 +53,6 @@ aside.thredded--currently-online {
         .thredded--nav-text {
           font-family: $medium-sans-font;
         }
-
       }
       .thredded--main-navigation {
         .thredded--navigation-breadcrumbs {
@@ -95,9 +94,7 @@ aside.thredded--currently-online {
         .thredded--messageboard--header {
           text-decoration: underline;
           color: $samo-orange;
-          
         }
-        
       }
     }
     
@@ -195,10 +192,6 @@ aside.thredded--currently-online {
   .thredded--form--submit {
     @include default-button();
   }
-  label {
-    // font-family: $sans-font;
-  }
-
   textarea#post_content,
   .thredded--preview-area--post {
     font-size: 14px;
@@ -248,8 +241,6 @@ form.button_to > .thredded--post--dropdown--actions--item {
     display: none;
   }
 }
-
-
 
 .thredded--post-moderation-record--moderation-state-notice a, .thredded--post-moderation-record--content-changed-notice a, .thredded--link, .thredded--messageboard, .thredded--post--user a, .thredded--post--topic a, .thredded--post--user-and-topic a, .thredded--post--content a, .thredded--post--content--spoiler--summary, .thredded--topic-header--participants--participant > a, .thredded--topic-header--started-by a, .thredded--topic-header--edit-topic, .thredded--topic-header--follow-info form input[type=submit], .thredded--topic-header--follow-info form button, .thredded--topics--title a, .thredded--topics--updated-by a, .thredded--topics--messageboard a {
   transition: 0;
