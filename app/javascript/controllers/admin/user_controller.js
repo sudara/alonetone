@@ -1,13 +1,13 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['deletedbutton', 'restorebutton', 'deletedvalue', 'spamvalue', 'unspambutton']
+  static targets = ['deleteButton', 'restoreButton', 'spamvalue', 'unspambutton']
 
   initialize() {
-    if (this.deletedvalueTarget.innerHTML == "true") {
-      this.showRestoreButtonTarget()
+    if (this.data.get('deleted') === 'true') {
+      this.showRestoreButton()
     } else {
-      this.showDeleteButtonTarget()
+      this.showDeleteButton()
     }
 
     if (this.spamvalueTarget.innerHTML == "false") {
@@ -23,15 +23,17 @@ export default class extends Controller {
     this.unspambuttonTarget.style.display = "none"
   }
 
-  showDeleteButtonTarget() {
-    this.restorebuttonTarget.style.display = 'none'
-    this.deletedbuttonTarget.style.display = 'block'
-    this.deletedvalueTarget.parentNode.style.color = "black"
+  showDeleteButton() {
+    this.data.set('deleted', 'false')
+    this.element.classList.remove('deleted')
+    this.restoreButtonTarget.style.display = 'none'
+    this.deleteButtonTarget.style.display = 'block'
   }
 
-  showRestoreButtonTarget(){
-    this.restorebuttonTarget.style.display = 'block'
-    this.deletedbuttonTarget.style.display = 'none'
-    this.deletedvalueTarget.parentNode.style.color = "red"
+  showRestoreButton() {
+    this.data.set('deleted', 'true')
+    this.element.classList.add('deleted')
+    this.restoreButtonTarget.style.display = 'block'
+    this.deleteButtonTarget.style.display = 'none'
   }
 }

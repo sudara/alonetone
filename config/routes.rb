@@ -8,14 +8,14 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users do
+    resources :users, path: 'users/(:filter_by)' do
       member do
         put :delete
         put :restore
         put :unspam
       end
     end
-    resources :comments do
+    resources :comments, path: 'comments/(:filter_by)' do
        member do
         put :unspam
         put :spam
@@ -24,7 +24,7 @@ Alonetone::Application.routes.draw do
         put :mark_group_as_spam
       end
     end
-    resources :assets do
+    resources :assets, path: 'assets/(:filter_by)' do
       member do
         put :unspam
         put :spam
@@ -55,6 +55,7 @@ Alonetone::Application.routes.draw do
     get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
     # admin stuff
+    get 'admin' => 'admin#index'
     get 'secretz' => 'admin#secretz'
     get 'toggle_theme' => 'admin#toggle_theme'
 

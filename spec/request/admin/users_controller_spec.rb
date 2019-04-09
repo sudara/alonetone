@@ -109,7 +109,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     context "if deleted: true flag is passed" do\
       it "should return users with deleted" do
-        get admin_users_path({deleted: true})
+        get admin_users_path(filter_by: 'deleted')
         expect(response.body).to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end

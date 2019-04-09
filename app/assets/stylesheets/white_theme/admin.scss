@@ -1,18 +1,166 @@
-// For admin/comments
-
-#admin_columns {
-	max-width: 1100px;
-	margin-right: auto;
-	margin-left: auto;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	.admin_column_left {
-		width: 15%;
-	}
-	.admin_column_right {
-		width: 80%;
-		min-width: 700px
-	}
+#admin_header {
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
+#admin_columns {
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .admin_column_left {
+    width: 15%;
+    ul.admin_nav {
+      margin: 0;
+      li {
+        line-height: 34px;
+        display: block;
+				&.current {
+					background-color: $gray;
+					padding: 0 15px;
+				}
+        &:hover {
+          text-decoration: none;
+        }
+        a {
+          font-size: 14px;
+          line-height: 34px;
+          padding: 0 15px;
+          width: 100%;
+					display: block;
+					box-sizing: border-box;
+          &:hover {
+            text-decoration: none;
+            background: $samo-light-gray;
+          }
+        }
+      }
+      > div {
+				padding-left: 15px;
+				padding-right: 15px;
+        line-height: 34px;
+      }
+      > ul {
+				padding: 0 15px;
+				// box-sizing: border-box;
+				padding-right: 30px;
+				li {
+					padding-left: 0;
+					width: 100%;
+					a {
+						padding-right: 15px;
+						box-sizing: content-box;
+					}
+				}
+      }
+    }
+  }
+  .admin_column_right {
+    width: 80%;
+		font-size: 13px;
+		min-width: 768px;
+    .pagy-nav {
+      width: 100%;
+      float: none;
+    }
+    .admin_column_right_inner {
+      background-color: $white;
+      padding: $baseline / 2 0;
+      margin-bottom: 0;
+      padding-bottom: 5px;
+      padding-left: 0;
+      padding-right: 0;
+
+      header.admin_comments_header,
+      header.admin_users_header,
+      header.admin_assets_header {
+        display: flex;
+        border-bottom: 1px solid $samo-light-gray;
+        padding-left: $baseline / 2;
+        padding-right: $baseline / 2;
+        div {
+          font-family: $medium-sans-font;
+          padding-bottom: $baseline / 2;
+          color: $dark-gray;
+        }
+      }
+
+      .admin_comment_rows,
+      .admin_users_rows,
+      .admin_assets_rows {
+        > div {
+          display: flex;
+          border-top: 1px solid $light-gray;
+          padding: $baseline / 2 0;
+          padding-left: $baseline / 2;
+          padding-right: $baseline / 2;
+          &:first-child {
+            border-top: 0;
+          }
+          &.deleted {
+            border: 1px solid red;
+          }
+        }
+      }
+
+      .date_column {
+        min-width: 60px;
+      }
+      .user_column {
+        min-width: 110px;
+        padding-right: 6px;
+        div:first-child {
+          margin-bottom: 5px;
+          font-family: $medium-sans-font;
+        }
+        div:last-child {
+          color: $dark-gray;
+          font-size: 13px;
+          line-height: 1.1;
+        }
+      }
+      .track_column,
+      .bio_column,
+      .text_column {
+        flex: 1;
+        padding-right: 6px;
+        div:first-child {
+          margin-bottom: 5px;
+          font-family: $medium-sans-font;
+        }
+        div:last-child {
+          color: $dark-gray;
+          font-size: 13px;
+          line-height: 1.1;
+        }
+      }
+
+      .bio_column,
+      .text_column {
+        div:first-child {
+          font-family: $sans-font;
+          font-size: 13px;
+          line-height: 1.1;
+        }
+      }
+      .button_column {
+        display: flex;
+        form {
+          input[type="submit"] {
+            margin-bottom: 0;
+            padding: 7px 6px 5px 6px;
+            height: auto;
+            font-size: 11px;
+            white-space: normal;
+            margin-left: 6px;
+            margin-top: 3px;
+            line-height: 1.7;
+          }
+        }
+      }
+    }
+  }
+}
