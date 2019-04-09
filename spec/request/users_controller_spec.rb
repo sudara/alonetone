@@ -37,7 +37,7 @@ RSpec.describe UsersController, type: :request do
         }
       }
     end
-    context "if Akismet check returns ham" do
+    context "if Akismet check returns not spam" do
       before do
         allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
         akismet_stub_response_ham
@@ -81,6 +81,12 @@ RSpec.describe UsersController, type: :request do
         expect {
           post "/users", params: params
         }.not_to change(User, :count)
+      end
+
+      it "should mark that user request as soft_deleted" do
+        post "/users", params: params
+
+        expect(User.with_deleted.where(login: params[:user][:login])).to be_present
       end
     end
   end
