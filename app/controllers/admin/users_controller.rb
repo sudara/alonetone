@@ -3,7 +3,7 @@ module Admin
     before_action :set_user, only: %i[delete restore unspam]
 
     def index
-      scope = User.only_deleted if permitted_params[:filter_by] == 'deleted'
+      scope = User.only_deleted if permitted_params[:deleted]
       scope ||= User.with_deleted.recent
 
       if permitted_params[:filter_by]
@@ -33,7 +33,7 @@ module Admin
     private
 
     def permitted_params
-      params.permit(:filter_by)
+      params.permit(:filter_by, :deleted)
     end
 
     def set_user
