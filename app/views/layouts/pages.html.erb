@@ -5,10 +5,10 @@
     </div>
       <div id="links">
         <ul class="links">
-          <%= user_nav_item "What is alonetone?", { controller: 'pages', action: 'index' }, title: 'about alonetone' %>
-          <%= user_nav_item "Press", { controller: 'pages', action: 'press' }, title: 'press and promotional info' %>
-          <%= user_nav_item "Stats", { controller: 'pages', action: 'stats'}, added_class: 'contact', title: 'alonetone statistics' %>
-          <%= user_nav_item "Latest News", blog_home_path, added_class: 'contact', title: 'Blog' %>
+          <%= navigation_item "What is alonetone?", { controller: 'pages', action: 'index' }, title: 'about alonetone' %>
+          <%= navigation_item "Press", { controller: 'pages', action: 'press' }, title: 'press and promotional info' %>
+          <%= navigation_item "Stats", { controller: 'pages', action: 'stats'}, added_class: 'contact', title: 'alonetone statistics' %>
+          <%= navigation_item "Latest News", blog_home_path, added_class: 'contact', title: 'Blog' %>
         </ul>
       </div>
       <%= yield :pagination %>
