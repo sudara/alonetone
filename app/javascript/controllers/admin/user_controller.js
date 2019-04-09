@@ -9,7 +9,7 @@ export default class extends Controller {
     } else {
       this.showDeleteButton()
     }
-    console.log(this.data.get('spam'))
+
     if (this.data.get('spam') == 'false') {
       this.hideUnspamButtonTarget()
     }
