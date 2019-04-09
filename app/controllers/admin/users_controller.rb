@@ -6,9 +6,7 @@ module Admin
       scope = User.only_deleted if permitted_params[:deleted]
       scope ||= User.with_deleted.recent
 
-      if permitted_params[:filter_by]
-        scope = scope.where(permitted_params[:filter_by])
-      end
+      scope = scope.where(permitted_params[:filter_by]) if permitted_params[:filter_by]
 
       @pagy, @users = pagy(scope)
     end
