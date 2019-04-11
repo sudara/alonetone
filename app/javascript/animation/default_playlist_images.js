@@ -1,4 +1,4 @@
-import { seedRandom } from 'seedrandom'
+const seedrandom = require('seedrandom')
 
 function Triangulr (props) {
 
@@ -290,7 +290,7 @@ function colorsFromAHue(hue){
 //var mySVG = new Triangulr (800, 600, 28, 23, colorGenerator);
 
 export function makeSVGFromTitle(height, title){
-  Math.seedrandom(title); // this makes all .random calls repeatable per album
+  seedrandom(title); // this makes all .random calls repeatable per album
 
   var lineHeight = randomBetween(height/20, height/10)
   var pointArea =  randomBetween(10, 40)
