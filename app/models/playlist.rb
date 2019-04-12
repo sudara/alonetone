@@ -1,7 +1,7 @@
 class Playlist < ActiveRecord::Base
   include SoftDeletion
 
-  acts_as_list scope: :user_id, order: :position
+  acts_as_list scope: :user_id, order: :position, add_new_at: :top
 
   scope :mixes,            -> { where(is_mix: true) }
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
