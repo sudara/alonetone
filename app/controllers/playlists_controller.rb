@@ -14,7 +14,8 @@ class PlaylistsController < ApplicationController
   # all user's playlists
   def index
     @page_title = @description = "#{@user.name}'s albums and playlists: "
-    set_all_playlists
+    set_playlists
+    render 'index_white' if white_theme_enabled?
   end
 
   def sort
@@ -161,18 +162,18 @@ class PlaylistsController < ApplicationController
     @assets_pagy, @assets = pagy(@user.assets.recent, page_param: :uploads_page, items: 10)
   end
 
-  def set_all_playlists
-    @all_playlists =  current_user_is_admin_or_owner?(@user) ?
+  def set_playlists
+    @playlists =  current_user_is_admin_or_owner?(@user) ?
                       @user.playlists.include_private :
                       @user.playlists.only_public
 
-    set_right_and_left_playlists if @all_playlists.present?
+    set_right_and_left_playlists if @playlists.present?
   end
 
   def set_right_and_left_playlists
-    middle = (@all_playlists.size + 1) / 2
-    @playlists_left  = @all_playlists[0...middle]
-    @playlists_right = @all_playlists[middle..-1]
+    middle = (@playlists.size + 1) / 2
+    @playlists_left  = @playlists[0...middle]
+    @playlists_right = @playlists[middle..-1]
   end
 
   def authorized?
