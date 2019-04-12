@@ -1,7 +1,7 @@
-<div id="user_playlists_area">
-  <div class="user_playlists">
-    <ul class="playlists">
-      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
-    </ul>
-  </div>
+
+<div class="user_playlists">
+  <h1 class="user_name"><%= @user.name %>'s Playlistsz</h1>
+  <ul class="playlists">
+    <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
+  </ul>
 </div>
