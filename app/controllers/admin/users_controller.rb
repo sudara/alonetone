@@ -1,6 +1,6 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[delete restore unspam]
+    before_action :set_user, only: %i[delete restore unspam spam]
 
     def index
       scope = User.only_deleted if permitted_params[:deleted]
@@ -25,7 +25,12 @@ module Admin
     def unspam
       @user.ham!
       @user.update_column :is_spam, false
-      redirect_back(fallback_location: root_path)
+    end
+
+    def spam
+      @user.spam!
+      @user.update_column :is_spam, true
+      @user.soft_delete_with_relations
     end
 
     private
