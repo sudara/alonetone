@@ -28,7 +28,7 @@
               <div><%= asset.user.ip %></div>
             </div>
             <div class="track_column">
-              <div><%= link_to asset.title, user_track_path(user_id: asset.user&.login, id: asset.id) %></div>
+              <div><%= link_to asset.title, user_track_path(asset.user, asset.permalink) %></div>
               <div><%= truncate(asset.description, length: 80) %></div>
             </div>
             <div class="button_column">
