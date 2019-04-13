@@ -1,12 +1,18 @@
 #user_index {
   display: flex;
-  @include match-dynamic-site-width();
+  
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 960px;
+  box-sizing: border-box;
+  max-width: 1032px;
+  padding: 0 $baseline * 1.5;
+  margin-left: auto;
+  margin-right: auto;
+
   #static_header {
     width: 30%;
     line-height: 1.1;
+    padding-left: 0;
     @media #{$one-column} {
       width: 100%;
     }
