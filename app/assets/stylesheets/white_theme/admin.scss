@@ -137,11 +137,13 @@
         div:first-child {
           margin-bottom: 5px;
           font-family: $medium-sans-font;
+          word-break: break-all;
         }
         div:last-child {
           color: $dark-gray;
           font-size: 13px;
           line-height: 1.1;
+          word-break: break-all;
         }
       }
 
