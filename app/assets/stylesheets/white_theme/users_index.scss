@@ -15,8 +15,10 @@
     min-width: 185px;
     margin-right: 5%;
     padding-left: 0;
+    overflow: hidden;
     h2 {
       color: $samo-orange;
+      margin-bottom: 0;
     }
     @media #{$one-column} {
       width: 100%;
