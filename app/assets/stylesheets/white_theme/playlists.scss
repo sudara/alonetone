@@ -82,6 +82,11 @@ ul.playlists {
 }
 
 .playlists_container {
+  h2 {
+    color: $samo-orange;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
   max-width: 1032px;
   padding: 0 $baseline * 1.5;
   box-sizing: border-box;
