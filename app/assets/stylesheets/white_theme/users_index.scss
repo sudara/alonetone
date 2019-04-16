@@ -2,16 +2,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
   box-sizing: border-box;
   max-width: 1032px;
   padding: 0 $baseline * 1.5;
   margin-left: auto;
   margin-right: auto;
 
-  #static_header {
+  .users_menu {
     width: 30%;
     line-height: 1.1;
     padding-left: 0;
+    h2 {
+      color: $samo-orange;
+    }
     @media #{$one-column} {
       width: 100%;
     }
