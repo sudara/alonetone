@@ -1,19 +1,23 @@
+<% if white_theme_enabled? %>
+
+  <div class="playlists_container">
+
+    <h2>Browse all alonetone playlists</h2>
+
+    <ul class="playlists">
+      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
+    </ul>
+  </div>
+
+<% else %>
+
 <div id="static_header">
   <div class="title">
     <h1 class="static">Browse all alonetone playlists</h1>
   </div>
 </div>
-<% if white_theme_enabled? %>
 
-  <div class="playlists_container">
-  
-  <ul class="playlists">
-    <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
-  </ul>
 
-  </div>
-
-<% else %>
 <div style="margin-top: 28px">
   <% @playlists.each_slice(5) do |playlists| %>
     <ul class="playlists_row">
@@ -21,4 +25,5 @@
     </ul>
   <% end %>
 </div>
+
 <% end %>
