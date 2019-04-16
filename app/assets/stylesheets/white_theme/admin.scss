@@ -110,11 +110,18 @@
         min-width: 60px;
       }
       .user_column {
-        min-width: 110px;
-        padding-right: 6px;
+        width: 120px;
+        min-width: 120px;
+        margin-right: 12px;
+        overflow: hidden;
         div:first-child {
           margin-bottom: 5px;
           font-family: $medium-sans-font;
+          a {
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
         }
         div:last-child {
           color: $dark-gray;
