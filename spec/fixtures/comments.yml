@@ -80,3 +80,33 @@ another_public_comment_on_asset_by_user:
   remote_ip: 127.0.0.5
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_to_self:
+  commentable: valid_mp3 (Asset)
+  body: "This is some great work."
+  is_spam: false
+  user: jamie_kiesl
+  commenter: jamie_kiesl
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_to_another_user:
+  commentable: valid_mp3 (Asset)
+  body: "This is too cheesy."
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.6
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_to_self_by_ip:
+  commentable: valid_mp3 (Asset)
+  body: "Amazing. This is your best work."
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
