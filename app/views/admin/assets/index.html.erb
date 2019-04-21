@@ -22,7 +22,7 @@
       <div class="admin_assets_rows">
         <% @assets.each do |asset| %>
           <div>
-            <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
+            <div data-controller="admin--asset" class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
               <div><%= asset.user.ip %></div>
@@ -33,7 +33,7 @@
             </div>
             <div class="button_column">
               <%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put %>
-              <%= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %>
+              <%#= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %>
               <%= button_to "Delete User", admin_user_path(asset.user_id), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :delete %>
             </div>
           </div>
