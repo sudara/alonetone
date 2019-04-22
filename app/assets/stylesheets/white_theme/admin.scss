@@ -101,7 +101,10 @@
             border-top: 0;
           }
           &.deleted {
-            border: 1px solid red;
+              background-color: #FF0000CC;
+              input[value='Restore User'] {
+                  background-color: $dark-gray;
+              }
           }
         }
       }
