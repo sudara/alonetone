@@ -103,6 +103,9 @@
           &.deleted {
             border: 1px solid red;
           }
+          &.spam {
+            border: 1px solid red;
+          }
         }
       }
 
