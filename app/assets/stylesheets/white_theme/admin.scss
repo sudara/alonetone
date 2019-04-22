@@ -134,6 +134,7 @@
       .text_column {
         flex: 1;
         padding-right: 6px;
+        word-break: break-all;
         div:first-child {
           margin-bottom: 5px;
           font-family: $medium-sans-font;
