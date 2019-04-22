@@ -26,8 +26,11 @@
           <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>">
             <div class="date_column"><%= user.created_at.strftime("%b %d") %></div>
             <div class="user_column">
-              <div><%= link_to user.login, user_path(user.login) %></div>
-              <div><%= user.current_login_ip %></div>
+              <div class="avatar"></div>
+              <div>
+                <div><%= link_to user.login, user_path(user.login) %></div>
+                <div><%= user.current_login_ip %></div>
+              </div>
             </div>
             <div class="bio_column">
               <div><%= truncate(user&.profile&.bio, length: 200) %></div>
