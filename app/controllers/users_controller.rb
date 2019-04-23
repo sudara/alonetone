@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params_with_ip)
 
     if @user.spam?
-      @user.is_spam = @user.spam?
+      @user.is_spam = true
       # since we don't have any relations at this point yet,
       # only perform soft-deletion
       @user.soft_delete
