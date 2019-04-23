@@ -26,7 +26,9 @@
           <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>" data-admin--user-spam="<%= user.is_spam? %>">
             <div class="date_column"><%= user.created_at.strftime("%b %d") %></div>
             <div class="user_column">
-              <div class="avatar"></div>
+              <div class="avatar">
+                <%= user_image(@user, variant: :original) %>
+              </div>
               <div>
                 <div><%= link_to user.login, user_path(user.login) %></div>
                 <div><%= user.current_login_ip %></div>
