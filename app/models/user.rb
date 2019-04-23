@@ -1,5 +1,11 @@
 class User < ActiveRecord::Base
   include SoftDeletion
+  include Rakismet::Model
+
+  rakismet_attrs  author: proc { display_name },
+                  author_email: proc { email },
+                  user_ip: proc { current_login_ip },
+                  content: proc { profile&.bio }
 
   concerned_with :findability, :settings, :statistics
 
@@ -228,6 +234,12 @@ class User < ActiveRecord::Base
 
   def deleted?
     deleted_at != nil
+  end
+
+  def soft_delete_with_relations
+    soft_delete_relations
+    enqueue_real_destroy_job
+    soft_delete
   end
 
   def soft_delete_relations
