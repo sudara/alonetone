@@ -30,8 +30,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if is_a_bot? && @user.valid?
+    @user = User.new(user_params_with_ip)
+
+    if @user.spam?
+      @user.is_spam = true
+      # since we don't have any relations at this point yet,
+      # only perform soft-deletion
+      @user.soft_delete
+      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+      redirect_to logout_path
+    elsif is_a_bot? && @user.valid?
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)
     elsif @user.valid? && @user.save_without_session_maintenance
@@ -95,9 +103,7 @@ class UsersController < ApplicationController
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
 
-      @user.soft_delete_relations
-      @user.enqueue_real_destroy_job
-      @user.soft_delete
+      @user.soft_delete_with_relations
 
       if moderator?
         redirect_to root_path
@@ -121,6 +127,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
+  end
+
+  def user_params_with_ip
+    user_params.merge(current_login_ip: request.remote_ip)
   end
 
   def prepare_meta_tags
