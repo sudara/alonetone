@@ -8,7 +8,9 @@
   </div>
 
   <div class="admin_column_right">
-
+    <div class="admin_stats">
+      <%= User.count%> users.
+    </div>
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
