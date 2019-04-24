@@ -24,9 +24,11 @@
       <div class="admin_users_rows">
         <% @users.each do |user| %>
           <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>" data-admin--user-spam="<%= user.is_spam? %>">
-            <div class="date_column"><%= user.created_at.strftime("%b %d") %></div>
+            <div class="date_column"><%= local_time_ago user.created_at %></div>
             <div class="user_column">
-              <div class="avatar"></div>
+              <div class="avatar">
+                <%= user_image(@user, variant: :original) %>
+              </div>
               <div>
                 <div><%= link_to user.login, user_path(user.login) %></div>
                 <div><%= user.current_login_ip %></div>
@@ -34,6 +36,7 @@
             </div>
             <div class="bio_column">
               <div><%= truncate(user&.profile&.bio, length: 200) %></div>
+              <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0 %></div>
             </div>
             <div class="button_column">
               <%#= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %>
