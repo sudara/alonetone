@@ -100,7 +100,8 @@
             border-top: 0;
           }
           &.deleted {
-              background-color: #FF0000CC;
+              background-color: #B20035;
+              color:#FFF;
               input[value='Restore User'] {
                   background-color: $dark-gray;
               }
@@ -108,7 +109,7 @@
         }
       }
       .date_column {
-        min-width: 60px;
+        width: 90px;
       }
       .user_column {
         width: 164x;
@@ -116,7 +117,6 @@
         margin-right: 12px;
         display: flex;
         div.avatar {
-          background-color: blue;
           width: 40px;
           height: 40px;
           margin-right: 8px;
