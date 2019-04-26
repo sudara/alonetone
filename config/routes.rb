@@ -12,6 +12,8 @@ Alonetone::Application.routes.draw do
       member do
         put :delete
         put :restore
+        put :unspam
+        put :spam
       end
     end
     resources :comments, path: 'comments/(:filter_by)' do
