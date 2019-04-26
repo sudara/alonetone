@@ -20,7 +20,7 @@ before_script:
 - cp config/database.example.yml config/database.yml
 - bundle exec rake setup:copy_config setup:touch_js db:drop db:create db:schema:load
 - bundle exec rake db:seed
-script: bundle exec rake spec
+script: npx percy exec -- bundle exec rake spec
 notifications:
   email:
     on_success: never
