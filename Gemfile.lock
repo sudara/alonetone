@@ -201,10 +201,7 @@ GEM
     diffy (3.3.0)
     dynamic_form (1.1.4)
     erubi (1.8.0)
-    excon (0.62.0)
     execjs (2.7.0)
-    faraday (0.15.4)
-      multipart-post (>= 1.2, < 3)
     ffi (1.10.0)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -298,7 +295,6 @@ GEM
     minitest (5.11.3)
     moneta (1.1.0)
     multi_json (1.13.1)
-    multipart-post (2.0.0)
     mustache (1.1.0)
     mysql2 (0.5.2)
     nenv (0.3.0)
@@ -328,13 +324,7 @@ GEM
     parallel (1.14.0)
     parser (2.6.0.0)
       ast (~> 2.4.0)
-    percy-capybara (3.2.0)
-      addressable (~> 2)
-      percy-client (~> 2.0)
-    percy-client (2.0.3)
-      addressable
-      excon
-      faraday (>= 0.9)
+    percy-capybara (4.0.0)
     perf_check (0.10.4)
       colorize
       diffy
