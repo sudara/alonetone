@@ -76,7 +76,6 @@ RSpec.configure do |config|
   config.include RSpec::Support::LoginHelpers
 
   config.before(:suite) do
-    Percy.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
   end
 
@@ -91,9 +90,5 @@ RSpec.configure do |config|
 
   config.before(:example, type: :controller) do
     activate_authlogic
-  end
-
-  config.after(:suite) do
-    Percy.finalize_build
   end
 end
