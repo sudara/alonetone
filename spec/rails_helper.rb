@@ -10,14 +10,6 @@ require 'capybara/rspec'
 require 'selenium/webdriver'
 require 'percy'
 
-# The suite needs to be able to connect to localhost for feature specs. Percy
-# sends its build response out of the test process so it also needs to connect
-# to its API.
-WebMock.disable_net_connect!(
-  allow_localhost: true,
-  allow: 'percy.io'
-)
-
 # Reloads schema.rb when database has pending migrations.
 ActiveRecord::Migration.maintain_test_schema!
 
