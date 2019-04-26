@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-env": "^7.4.3",
     "@bugsnag/js": "^6.0.0",
     "@rails/webpacker": "^4.0.2",
     "babel-loader": "^8.0.5",
@@ -12,7 +12,7 @@
     "howler": "https://github.com/goldfire/howler.js.git",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
-    "rails-ujs": "^5.2.2",
+    "rails-ujs": "^5.2.3",
     "seedrandom": "^2.4.4",
     "sortablejs": "^1.8.4",
     "stimulus": "^1.1.1",
@@ -20,12 +20,12 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "webpack-bundle-analyzer": "^3.0.4",
+    "webpack-bundle-analyzer": "^3.1.0",
     "webpack-dev-server": "^3.2.1"
   }
 }
