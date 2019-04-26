@@ -79,7 +79,7 @@ RSpec.configure do |config|
   config.include RSpec::Support::LoginHelpers
 
   config.before(:suite) do
-    Percy::Capybara.initialize_build
+    Percy.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
   end
 
@@ -97,6 +97,6 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    Percy::Capybara.finalize_build
+    Percy.finalize_build
   end
 end

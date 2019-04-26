@@ -6,10 +6,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
       visit 'henriwillig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
       first_track.hover
-      Percy::Capybara.snapshot(page, name: 'Playlist Cover')
+      Percy.snapshot(page, name: 'Playlist Cover')
 
       first_track.click
-      Percy::Capybara.snapshot(page, name: 'Playlist Track')
+      Percy.snapshot(page, name: 'Playlist Track')
     end
   end
 end
