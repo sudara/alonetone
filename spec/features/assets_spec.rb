@@ -7,6 +7,6 @@ RSpec.describe 'single track playing', type: :feature, js: true do
 
     # TODO: find a way to accomplish this without creating jank
     # play_button.click
-    Percy::Capybara.snapshot(page, name: 'Single Track Play')
+    Percy.snapshot(page, name: 'Single Track Play')
   end
 end
