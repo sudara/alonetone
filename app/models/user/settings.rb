@@ -7,10 +7,6 @@ class User
     assets_count > 0
   end
 
-  def has_as_favorite?(asset)
-    favorite_asset_ids.include?(asset.id)
-  end
-
   def favorite_asset_ids
     Track.where(playlist_id: favorites).pluck(:asset_id)
   end
@@ -21,10 +17,6 @@ class User
 
   def name
     self[:display_name] || login
-  end
-
-  def self.dummy_pic(size)
-    first.dummy_pic(size)
   end
 
   def wants_email?
