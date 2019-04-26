@@ -10,16 +10,6 @@ class User
     where(conditions.join(" OR "))
   end
 
-  def self.search(query, options = {})
-    with_scope find: { conditions: build_search_conditions(query) } do
-      find :all, options
-    end
-  end
-
-  def self.build_search_conditions(query)
-    query && ['LOWER(display_name) LIKE :q OR LOWER(login) LIKE :q', { q: "%#{query}%" }]
-  end
-
   # feeds the users/index subnav
   def self.paginate_by_params(params)
     available_sortings = %w[last_uploaded most_listened_to new_artists monster_uploaders dedicated_listeners]
@@ -58,16 +48,5 @@ class User
   def self.dedicated_listeners
     result = Listen.since(1.month.ago).where('listener_id is not null').group(:listener).order('count_all DESC').limit(30).count
     result.collect(&:first)
-  end
-
-  def geocode_address
-    return unless city && country
-
-    geo = GeoKit::Geocoders::MultiGeocoder.geocode([city, country].compact.join(', '))
-
-    if geo.success
-      self.lat = geo.lat
-      self.lng = geo.lng
-    end
   end
 end
