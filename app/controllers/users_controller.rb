@@ -32,21 +32,23 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params_with_ip)
 
-    if @user.spam?
-      @user.is_spam = true
-      # since we don't have any relations at this point yet,
-      # only perform soft-deletion
-      @user.soft_delete
-      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
-      redirect_to logout_path
-    elsif is_a_bot? && @user.valid?
-      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
-      redirect_to login_url(already_joined: true)
-    elsif @user.valid? && @user.save_without_session_maintenance
-      @user.reset_perishable_token!
-      UserNotification.signup(@user).deliver_now
-      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
-      redirect_to login_url(already_joined: true)
+    if @user.valid?
+      if @user.spam?
+        @user.is_spam = true
+        @user.soft_delete
+
+        flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+        redirect_to logout_path
+      elsif is_a_bot?
+        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+        redirect_to login_url(already_joined: true)
+      elsif @user.save_without_session_maintenance
+        @user.reset_perishable_token!
+        UserNotification.signup(@user).deliver_now
+
+        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+        redirect_to login_url(already_joined: true)
+      end
     else
       flash[:error] = "Hrm, that didn't quite work, try again?"
       render action: :new
