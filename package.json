@@ -13,7 +13,7 @@
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
     "rails-ujs": "^5.2.3",
-    "seedrandom": "^3.0.1",
+    "seedrandom": "^2.4.4",
     "sortablejs": "^1.8.4",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
