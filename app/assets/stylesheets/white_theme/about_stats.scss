@@ -18,11 +18,20 @@
       height: auto;
       padding-bottom: 12px;
       border-bottom: 1px solid #80604026;
+      @media #{$mobile} {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+      }  
     }
     .static_content {
       padding: 0 12px;
       line-height: 1.5;
       font-size: 16px;
+      @media #{$mobile} {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 }
