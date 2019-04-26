@@ -88,6 +88,22 @@ RSpec.describe UsersController, type: :request do
 
         expect(User.with_deleted.where(login: params[:user][:login])).to be_present
       end
+      context "invalid user" do
+        before do
+          params[:user].delete(:login)
+        end
+
+        it "should raise validation error if user's missing login before Akismet check" do
+          post "/users", params: { user: params }
+          expect(flash[:error]).to match(/that didn't quite work/)
+        end
+
+        it "should not create user if user is invalid" do
+          expect do
+            post "/users", params: { user: params }
+          end.not_to change(User, :count)
+        end
+      end
     end
   end
 end
