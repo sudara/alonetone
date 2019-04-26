@@ -82,7 +82,7 @@ another_public_comment_on_asset_by_user:
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_non_spam_comment_to_self:
-  commentable: valid_mp3 (Asset)
+  commentable: jamie_kiesl_the_duck (Asset)
   body: "This is some great work."
   is_spam: false
   user: jamie_kiesl
@@ -92,7 +92,7 @@ public_non_spam_comment_to_self:
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_non_spam_comment_to_another_user:
-  commentable: valid_mp3 (Asset)
+  commentable: jamie_kiesl_the_duck (Asset)
   body: "This is too cheesy."
   is_spam: false
   user: jamie_kiesl
@@ -102,7 +102,7 @@ public_non_spam_comment_to_another_user:
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_non_spam_comment_to_self_by_ip:
-  commentable: valid_mp3 (Asset)
+  commentable: jamie_kiesl_the_duck (Asset)
   body: "Amazing. This is your best work."
   is_spam: false
   user: jamie_kiesl

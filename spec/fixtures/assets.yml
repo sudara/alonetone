@@ -123,3 +123,13 @@ henri_willig_the_goat:
   mp3_file_size: <%= 2.3.megabytes %>
   length: 140
   created_at: <%= 1.month.ago %>
+
+jamie_kiesl_the_duck:
+  user: jamie_kiesl
+  title: Get your ducks in a row
+  permalink: get-your-ducks-in-a-row
+  mp3_file_name: duck-duck-goose.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 2.3.megabytes %>
+  length: 140
+  created_at: <%= 1.month.ago %>
