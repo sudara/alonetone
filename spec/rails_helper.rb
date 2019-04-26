@@ -42,9 +42,6 @@ Capybara.javascript_driver = :headless_chrome
 # to use Puma on its own if we remove this line.
 Capybara.server = :puma, { Silent: true }
 
-# Set default resolutions for visual regression testing.
-Percy.config.default_widths = [375, 1280]
-
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
   config.fixture_path = Rails.root.join('spec', 'fixtures').to_s
