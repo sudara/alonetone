@@ -5,6 +5,44 @@ RSpec.describe Admin::AssetsController, type: :request do
     create_user_session(users(:sudara))
   end
 
+  describe '#unspam' do
+    before :each do
+      users(:arthur).update(is_spam: true)
+    end
+
+    let!(:user) { users(:arthur) }
+
+    it "should unspam the user" do
+      akismet_stub_submit_ham
+      put unspam_admin_user_path(user.login)
+      expect(user.reload.is_spam).to eq(false)
+    end
+
+    it "should update RAKISMET with updated information about user" do
+      expect(Rakismet).to receive(:akismet_call)
+      put unspam_admin_user_path(user.login)
+    end
+  end
+
+  describe '#spam' do
+    before :each do
+      users(:arthur).update(is_spam: false)
+    end
+
+    let!(:user) { users(:arthur) }
+
+    it "should unspam the user" do
+      akismet_stub_submit_spam
+      put spam_admin_user_path(user.login)
+      expect(user.reload.is_spam).to eq(true)
+    end
+
+    it "should update RAKISMET with updated information about user" do
+      expect(Rakismet).to receive(:akismet_call)
+      put spam_admin_user_path(user.login)
+    end
+  end
+
   describe '#restore' do
     before :each do
       users(:arthur).soft_delete_relations
@@ -85,22 +123,31 @@ RSpec.describe Admin::AssetsController, type: :request do
   describe '#index' do
     before :each do
       users(:arthur).update(deleted_at: Time.now - 1.week)
+      users(:aaron).update(is_spam: true)
     end
 
     context "if deleted: true flag is passed" do\
       it "should return users with deleted" do
-        get admin_users_path(filter_by: 'deleted')
+        get admin_users_path(deleted: true)
         expect(response.body).to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
     end
 
     context "if deleted: flag is not passed" do
-
       it "should return users count without deleted if" do
         get admin_users_path
         expect(response.body).to match(/arthur/)
         expect(response.body).to match(/sudara/)
+      end
+    end
+
+    context "with filter" do
+      it "should return spam users only if flag is passed" do
+        get admin_users_path({filter_by: { is_spam: true}})
+        expect(response.body).to match(/aaron/)
+        expect(response.body).not_to match(/arthur/)
+        expect(response.body).not_to match(/ben/)
       end
     end
   end

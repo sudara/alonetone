@@ -45,7 +45,6 @@
       }
       > ul {
 				padding: 0 15px;
-				// box-sizing: border-box;
 				padding-right: 30px;
 				li {
 					padding-left: 0;
@@ -101,32 +100,44 @@
             border-top: 0;
           }
           &.deleted {
-            border: 1px solid red;
+              background-color: #B20035;
+              color:#FFF;
+              input[value='Restore User'] {
+                  background-color: $dark-gray;
+              }
           }
         }
       }
-
       .date_column {
-        min-width: 60px;
+        width: 90px;
       }
       .user_column {
-        width: 120px;
-        min-width: 120px;
+        width: 164x;
+        min-width: 164px;
         margin-right: 12px;
-        overflow: hidden;
-        div:first-child {
-          margin-bottom: 5px;
-          font-family: $medium-sans-font;
-          a {
-            display: block;
-            text-overflow: ellipsis;
-            overflow: hidden;
-          }
+        display: flex;
+        div.avatar {
+          width: 40px;
+          height: 40px;
+          margin-right: 8px;
         }
-        div:last-child {
-          color: $dark-gray;
-          font-size: 13px;
-          line-height: 1.1;
+        div {
+          overflow: hidden;
+          div:first-child {
+            margin-bottom: 5px;
+            font-family: $medium-sans-font;
+            a {
+              display: block;
+              text-overflow: ellipsis;
+              overflow: hidden;
+            }
+          }
+          div:last-child {
+            color: $dark-gray;
+            font-size: 13px;
+            line-height: 1.1;
+          }
+
         }
       }
       .track_column,
@@ -134,19 +145,28 @@
       .text_column {
         flex: 1;
         padding-right: 6px;
+        word-break: break-all;
         div:first-child {
           margin-bottom: 5px;
           font-family: $medium-sans-font;
           word-break: break-all;
         }
-        div:last-child {
+        div:nth-child(2) {
           color: $dark-gray;
           font-size: 13px;
           line-height: 1.1;
           word-break: break-all;
+          margin-bottom: 5px;
+        }
+        div:nth-child(3) {
+          color: $dark-gray;
+          font-size: 11px;
+          line-height: 1.1;
+          word-break: break-all;
+          font-style: italic;
+
         }
       }
-
       .bio_column,
       .text_column {
         div:first-child {
@@ -167,6 +187,7 @@
             margin-left: 6px;
             margin-top: 3px;
             line-height: 1.7;
+            min-width: 104px;
           }
         }
       }

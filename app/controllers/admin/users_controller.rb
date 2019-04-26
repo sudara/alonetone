@@ -1,19 +1,19 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[delete restore]
+    before_action :set_user, only: %i[delete restore unspam spam]
 
     def index
-      scope = User.only_deleted if permitted_params[:filter_by] == 'deleted'
+      scope = User.only_deleted if permitted_params[:deleted]
       scope ||= User.with_deleted.recent
+
+      scope = scope.where(permitted_params[:filter_by]) if permitted_params[:filter_by]
 
       @pagy, @users = pagy(scope)
     end
 
     # should we rescue/display any error that occured to admin user
     def delete
-      @user.soft_delete_relations
-      @user.enqueue_real_destroy_job
-      @user.soft_delete
+      @user.soft_delete_with_relations
       redirect_back(fallback_location: root_path)
     end
 
@@ -22,10 +22,21 @@ module Admin
       @user.restore_relations
     end
 
+    def unspam
+      @user.ham!
+      @user.update_column :is_spam, false
+    end
+
+    def spam
+      @user.spam!
+      @user.update_column :is_spam, true
+      @user.soft_delete_with_relations
+    end
+
     private
 
     def permitted_params
-      params.permit(:filter_by)
+      params.permit(:filter_by, :deleted)
     end
 
     def set_user
