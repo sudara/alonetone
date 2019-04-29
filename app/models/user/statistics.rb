@@ -5,39 +5,6 @@ class User
     end
   end
 
-  # graphing
-  def track_plays_graph
-    created_within_30_days = ['listens.created_at > ?', 30.days.ago.at_midnight]
-
-    first_created = track_plays.minimum(:created_at, conditions: created_within_30_days)
-    first_created ||= Time.now
-    seconds = (Time.now - first_created).round
-    hours = seconds / 60 / 60
-    days = hours / 24
-
-    if days > 1
-      labels = "#{days} days ago|#{(days + 1) / 2} days ago|Today"
-      group_by = 'DATE(listens.created_at)'
-    else
-      labels = "#{hours} hours ago|#{(hours + 1) / 2} hours ago|Now"
-      group_by = 'HOUR(listens.created_at)'
-    end
-
-    track_play_history = track_plays.group(group_by).where(created_within_30_days).count
-    track_play_history.collect { |tp| tp[1] }
-
-    # ::Gchart.line(
-    #   :size             => '420x150',
-    #   :title            => 'listens',
-    #   :data             => track_play_history,
-    #   :axis_with_labels => 'r,x',
-    #   :axis_labels      => [ GchartHelpers.zero_half_max(track_play_history.max), labels ],
-    #   :line_colors      => 'cc3300',
-    #   :background       => '313327',
-    #   :custom           => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0'
-    # )
-  end
-
   def number_of_tracks_listened_to
     Listen.count(:all,
       order: 'count_all DESC',
