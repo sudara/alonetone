@@ -132,6 +132,12 @@
               overflow: hidden;
             }
           }
+          div:nth-child(2) {            
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-bottom: 5px;
+          }
           div:last-child {
             color: $dark-gray;
             font-size: 13px;
