@@ -40,6 +40,11 @@
     border-width: 0 9px 13px 9px;
     border-style: solid;
     border-color: transparent transparent #d7dbdb transparent;
+    @media #{$mobile} {
+      display: none;
+    }
+
+
   }
   .comment_asset {
     background-color: transparent;
