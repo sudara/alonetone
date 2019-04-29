@@ -42,10 +42,6 @@ class User
     comments.between(last_session_at, Time.now.utc).count
   end
 
-  def plays_by_month
-    track_plays.count(:all, group: 'MONTH(listens.created_at)', include: nil, conditions: ['listens.created_at > ?', 1.year.ago])
-  end
-
   def self.with_same_ip
     User.order('count_all DESC').group(:last_login_ip).where('last_login_ip is not NULL').limit(25).count
   end

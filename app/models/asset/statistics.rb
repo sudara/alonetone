@@ -96,10 +96,6 @@ class Asset
     end
   end
 
-  def plays_by_month
-    listens.count(:all, group: 'MONTH(listens.created_at)', include: nil, conditions: ['listens.created_at > ?', 1.year.ago])
-  end
-
   def self.monthly_chart
     monthly_counts = []
     sum_up_the_months(@@launch_date) { |date, sum| monthly_counts << [sum, date] }
