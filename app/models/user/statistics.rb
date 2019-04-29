@@ -38,14 +38,6 @@ class User
     # )
   end
 
-  def listens_average
-    first_created_at = assets.limit(1).order('created_at').first.created_at
-
-    x = ((Time.now - first_created_at) / 60 / 60 / 24).ceil
-
-    (listens_count.to_f / x).ceil
-  end
-
   def number_of_tracks_listened_to
     Listen.count(:all,
       order: 'count_all DESC',
