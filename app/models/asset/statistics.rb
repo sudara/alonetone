@@ -95,35 +95,4 @@ class Asset
     else 0.01
     end
   end
-
-  def self.monthly_chart
-    monthly_counts = []
-    sum_up_the_months(@@launch_date) { |date, sum| monthly_counts << [sum, date] }
-    monthly_counts
-  end
-
-  private
-
-  # iterate through the months
-  def self.sum_up_the_months(date = Time.now)
-    sum = 0
-    while date < Time.now
-      result, label = monthly_sum_for(date)
-      sum += result
-      yield label, sum
-      date += 1.month
-    end
-  end
-
-  def self.monthly_sum_for(date = Time.now, sum = 0)
-    # [count, year_month_label]
-    month_count = count(:all,
-      conditions: [
-        'created_at > ? AND created_at < ?',
-        date.beginning_of_month,
-        date.end_of_month
-      ])
-
-    [sum + month_count, date.strftime('%b %y').to_s]
-  end
 end
