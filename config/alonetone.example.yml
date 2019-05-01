@@ -39,6 +39,12 @@ test:
   hostname: alonetone.example.com
   # Temporary storage writes to temp files on disk.
   storage_service: temporary
+  # Amazon S3 configuration. We have to set these because ActiveStorage service
+  # configuration is read when starting the suite.
+  amazon_access_key_id: XXXXXXXXXXXXXXXXXXXX
+  amazon_secret_access_key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  amazon_s3_region: eu-central-1
+  amazon_s3_bucket_name: xxxxxxxxxxxxxxxxxxxx
   # Don't use dummies in the spec suite because we sometimes rely on
   # interaction with services in examples.
   play_dummy_audio: false
