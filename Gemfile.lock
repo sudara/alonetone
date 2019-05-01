@@ -298,7 +298,7 @@ GEM
     mustache (1.1.0)
     mysql2 (0.5.2)
     nenv (0.3.0)
-    newrelic_rpm (6.2.0.354)
+    newrelic_rpm (6.3.0.355)
     nio4r (2.3.1)
     nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
