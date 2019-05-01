@@ -25,6 +25,11 @@ def upload(path)
   fixture_file_upload(filename, content_type)
 end
 
+def extract_metadata(attributes)
+  metadata = Upload::Metadata.new(attributes[:audio_file])
+  metadata.attributes.merge(attributes)
+end
+
 muppet_upload = upload('muppets.mp3')
 piano_upload = upload('piano.mp3')
 
@@ -98,16 +103,16 @@ marie.profile.update(
   city: 'Madrid'
 )
 
-commonly_blue_green = marie.assets.create!(
+commonly_blue_green = marie.assets.create!(extract_metadata(
   audio_file: muppet_upload,
   title: 'Commonly Blue-grey',
   description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.'
-)
-aqueous_suspension = marie.assets.create!(
+))
+aqueous_suspension = marie.assets.create!(extract_metadata(
   audio_file: muppet_upload,
   title: 'Aqueous Suspension',
   description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.'
-)
+))
 
 playlist = marie.playlists.build(
   title: 'Before fungi were understood',
@@ -123,16 +128,16 @@ playlist.tracks.create!(user: marie, asset: commonly_blue_green)
 playlist.tracks.create!(user: marie, asset: aqueous_suspension)
 playlist.update(private: false)
 
-baguette_laonnaise = marie.assets.create!(
+baguette_laonnaise = marie.assets.create!(extract_metadata(
   audio_file: piano_upload,
   title: 'Baguette Laonnaise',
   description: 'The cheese is typically loaf-shaped and has a supple interior as well as a sticky orange-brown rind.'
-)
-appellation_description = marie.assets.create!(
+))
+appellation_description = marie.assets.create!(extract_metadata(
   audio_file: piano_upload,
   title: 'Appellation description d’origine protégée',
   description: 'In Switzerland, the appellation d’origine protégée (AOP, protected designation of origin) is a geographical indication protecting the origin and the quality of traditional food products'
-)
+))
 
 playlist = marie.playlists.build(
   title: 'Raclette',
@@ -165,16 +170,16 @@ carole.profile.update(
   city: 'Perth'
 )
 
-creamy_interior = carole.assets.create(
+creamy_interior = carole.assets.create!(extract_metadata(
   audio_file: muppet_upload,
   title: 'Creamy Interior',
   description: 'Contains patches of blue mold'
-)
-cylindrical_rounds = carole.assets.create(
+))
+cylindrical_rounds = carole.assets.create!(extract_metadata(
   audio_file: muppet_upload,
   title: 'Cylindrical Rounds',
   description: 'It is shaped into cylindrical rounds weighing from 125 to 500 grams.'
-)
+))
 
 edible_coating = carole.playlists.build(
   title: 'Edible Coating',
@@ -207,16 +212,16 @@ petere.profile.update(
   city: 'Medjå'
 )
 
-keep_tradition_alive = petere.assets.create(
+keep_tradition_alive = petere.assets.create!(extract_metadata(
   audio_file: muppet_upload,
   title: 'Keep Tradition Alive',
   description: 'Cloth-bound Cheshire cheeses from their own unpasteurised milk'
-)
-much_like_cheddar = petere.assets.create(
+))
+much_like_cheddar = petere.assets.create!(extract_metadata(
   audio_file: muppet_upload,
   title: 'Much Like Cheddar',
   description: 'Cheshire cheese is made much like cheddar (now the name of a process, rather than a geographical designation) or Lancashire'
-)
+))
 
 mrs_applebys_cheshire = petere.playlists.build(
   title: "Mrs Appleby's Cheshire",
