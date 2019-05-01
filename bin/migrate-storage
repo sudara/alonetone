@@ -219,7 +219,7 @@ module Storage
       options.logger.info("Migrate #{model.name} (#{paperclip_attachments_names.to_sentence})")
       paperclip_attachments_names.each do |paperclip_attachment_name|
         model.find_in_batches do |batch|
-          Parallel.each(batch) do |record|
+          Parallel.each(batch, in_threads: 4) do |record|
             # Don't re-use the connection from the main thread.
             ActiveRecord::Base.connection_pool.with_connection do
               migrate_record(record, paperclip_attachment_name: paperclip_attachment_name)
