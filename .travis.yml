@@ -12,9 +12,8 @@ cache:
 - yarn
 - npm
 before_install:
-- npm i -g node@latest
 - sudo apt-get install -y libsndfile-dev lame
-- yarn
+- yarn install
 before_script:
 - mysql -e 'create database alonetone_test';
 - cp config/database.example.yml config/database.yml
