@@ -9,13 +9,33 @@ addons:
     packages:
     - libsndfile-dev
     - lame
+    # For VIPS
+    - libexpat1-dev
+    - gettext
+    - libglib2.0-dev
+    - liborc-0.4-dev
+    - libfftw3-dev
+    - liblcms2-dev
+    - libmagickwand-dev
+    - libopenexr-dev
+    - libcfitsio3-dev
+    - libgif-dev
+    - libgsf-1-dev
+    - libmatio-dev
+    - libopenslide-dev
+    - libpango1.0-dev
+    - libpoppler-glib-dev
+    - librsvg2-dev
+    - libwebp-dev
 services:
 - mysql
 cache:
-- bundler
-- yarn
-- npm
+  bundler: true
+  yarn: true
+  directories:
+  - $HOME/vips
 before_install:
+- bash script/install-vips.sh
 - yarn install
 before_script:
 - mysql -e 'create database alonetone_test';
@@ -39,5 +59,14 @@ env:
   global:
   - S3_BUCKET_NAME=junkinthetrunk
   - secure: O45V0oniMMy2SfZ4GlCafzkPyvbNvf+ppUd9hu82RLQpANI7l7NKGa7gCW/FYlcDDcIuUkut6D21eEWwPG0x8bLqSIoE9x5kSK6xuOoqCKHkznWxsfMVI+CjoVAkekvS8iDlnu3BTIa7m0264uaJovGhUDWN43YJ+Z9sRxwYh8g=
+  # Decrease Nokogiri gem build times.
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  # Used to install vips locally
+  - VIPS_VERSION_MAJOR=8
+  - VIPS_VERSION_MINOR=7
+  - VIPS_VERSION_MICRO=2
+  - PATH=$HOME/vips/bin:$PATH
+  - LD_LIBRARY_PATH=$HOME/vips/lib:$LD_LIBRARY_PATH
+  - PKG_CONFIG_PATH=$HOME/vips/lib/pkgconfig:$PKG_CONFIG_PATH
 dd:
   secure: P8Dl8rMYdZxUCBvSsGiFgaDIdut8tcsNoOngzNb4n8GG5M9+8nGyLNr/jKGmeBW4cBig2pFCfCzaR9J4Uk29dB5oS11as3fC/+wFT9pOnSBGNYErMpKKii4puVYOylEAynhiW/u8pbWpnjvhyyUaWy1if1oJcdL1qfPQ+VZPARCz6ru97PISGviOvMTy/FeLzXBt1g8yIuzNHme4nkqFufzlKGLgOietTkXTbqZGDstVlbmefwuZrD/d6vMBfu98W1CqlguO+hcpW/r7HIxcgSnqAftZ02eKcpbyxx3zkn3wQkA+kySTRC3NsXwzojw16jNZpu0Vbr4DIwi21y0YMusp15+5XcHUibaYnFdbxbAIcsBnrliRdikKz0lTMYws0JkHyftwFZJuDJZG1XOAo/Fsb7CPz9h5TPQaMlomxje72SB8wtXt4Qb60uPQHKRHqMKVFVqG/1WQ0JGVKOaP4BbjaOXrutDpkdQIV1xP+aXmy99TCwwfIpH90pPyTUkeRDaF9vWLauXEVCf22d31BGwOnfByRRZYrgTlru4XXodZLY+QIdqzZ4mLinrcotaiy9AYc0h06UzWNu1ZQSXqekrPGvGCJfJ8j0f578GO3wHNpwjZtIwGh/OGWIgHsLp8zvPdDENsUElaF0/FkKXkRbrU8x8NyJrYfQHrNNDhnto=
