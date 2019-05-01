@@ -3,6 +3,9 @@
 # Helper class to translate variant names to Active Storage variants
 # and process them.
 class ImageVariant
+  include ActiveSupport::Benchmarkable
+  delegate :logger, to: Rails
+
   S3_PUBLIC_ACL = 'public-read'
   VARIANTS = {
     tiny: [25, 25],
@@ -25,9 +28,11 @@ class ImageVariant
   end
 
   def process
-    variant = to_active_storage_variant.processed
-    put_s3_object_acl
-    variant
+    logger.tagged('ImageVariant') do
+      variant = to_active_storage_variant.processed
+      put_s3_object_acl
+      variant
+    end
   end
 
   def resize_to_limit
@@ -87,7 +92,9 @@ class ImageVariant
     # Image variants are expected to be publicly readable from from the bucket
     # so we have to change their ACL.
     if object_acl = to_s3_object&.acl
-      object_acl.put(acl: S3_PUBLIC_ACL)
+      benchmark "Setting ACL for S3 object to #{S3_PUBLIC_ACL}", level: :debug do
+        object_acl.put(acl: S3_PUBLIC_ACL)
+      end
     end
   end
 end
