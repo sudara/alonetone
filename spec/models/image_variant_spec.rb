@@ -20,7 +20,7 @@ RSpec.describe ImageVariant, type: :model do
     end.to raise_error(ArgumentError)
   end
 
-  context "with uploaded attachement" do
+  context "with uploaded attachment" do
     let(:attachment) do
       playlists(:will_studd_rockfort).cover_image
     end
@@ -36,6 +36,32 @@ RSpec.describe ImageVariant, type: :model do
       expect(image_variant.attachment).to eq(attachment)
       expect(image_variant.variant_name).to eq(:greenfield)
       expect(image_variant.resize_to_limit).to eq([1500, 1500])
+    end
+
+    it "does not set ACL on S3 object when using file storage" do
+      image_variant = ImageVariant.new(attachment, variant: :greenfield)
+      expect(image_variant.process).to be_kind_of(ActiveStorage::Variant)
+    end
+
+    it "sets the correct ACL for the S3 object when using S3 storage" do
+      image_variant = ImageVariant.new(attachment, variant: :greenfield)
+
+      # Read details about the storage object.
+      stub_request(
+        :head,
+        %r{https://.*\.amazonaws.com/#{image_variant.to_active_storage_variant.key}}
+      )
+      # Set the ACL on the storage object.
+      stub_request(
+        :put,
+        %r{https://.*\.amazonaws.com/#{image_variant.to_active_storage_variant.key}}
+      ).with(
+        headers: { 'X-Amz-Acl' => 'public-read' }
+      )
+
+      with_storage_service('s3') do
+        expect(image_variant.process).to be_kind_of(ActiveStorage::Variant)
+      end
     end
 
     it "raises exception when trying to instantiate variant for nonexistent variant name" do

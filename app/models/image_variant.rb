@@ -3,6 +3,7 @@
 # Helper class to translate variant names to Active Storage variants
 # and process them.
 class ImageVariant
+  S3_PUBLIC_ACL = 'public-read'
   VARIANTS = {
     tiny: [25, 25],
     small: [50, 50],
@@ -24,7 +25,9 @@ class ImageVariant
   end
 
   def process
-    to_active_storage_variant.processed
+    variant = to_active_storage_variant.processed
+    put_s3_object_acl
+    variant
   end
 
   def resize_to_limit
@@ -69,5 +72,22 @@ class ImageVariant
       last_word_connector: ', or ',
       locale: :en
     )
+  end
+
+  private
+
+  def to_s3_object
+    variant = to_active_storage_variant
+    variant.service.send(:object_for, variant.key)
+  rescue NoMethodError
+    nil
+  end
+
+  def put_s3_object_acl
+    # Image variants are expected to be publicly readable from from the bucket
+    # so we have to change their ACL.
+    if object_acl = to_s3_object&.acl
+      object_acl.put(acl: S3_PUBLIC_ACL)
+    end
   end
 end
