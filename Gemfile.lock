@@ -321,8 +321,8 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    parallel (1.14.0)
-    parser (2.6.0.0)
+    parallel (1.17.0)
+    parser (2.6.3.0)
       ast (~> 2.4.0)
     percy-capybara (4.0.0)
     perf_check (0.10.4)
@@ -334,14 +334,12 @@ GEM
     postmark-rails (0.19.0)
       actionmailer (>= 3.0.0)
       postmark (~> 1.15.0)
-    powerpack (0.1.2)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     pry-byebug (3.7.0)
       byebug (~> 11.0)
       pry (~> 0.10)
-    psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
     pundit (2.0.1)
@@ -417,15 +415,13 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.65.0)
+    rubocop (0.68.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
-      powerpack (~> 0.1)
-      psych (>= 3.1.0)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.4.0)
+      unicode-display_width (>= 1.4.0, < 1.6)
     ruby-audio (1.6.1)
     ruby-mp3info (0.8.10)
     ruby-progressbar (1.10.0)
@@ -501,7 +497,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.4.1)
+    unicode-display_width (1.5.0)
     unicode_utils (1.4.0)
     webmock (3.5.1)
       addressable (>= 2.3.6)
@@ -569,7 +565,7 @@ DEPENDENCIES
   request_store
   rspec-mocks
   rspec-rails
-  rubocop (~> 0.65.0)
+  rubocop (~> 0.68.1)
   ruby-audio
   ruby-mp3info
   rubyzip
