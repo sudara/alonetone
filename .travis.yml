@@ -5,6 +5,10 @@ rvm:
   2.6.1
 addons:
   chrome: stable
+  apt:
+    packages:
+    - libsndfile-dev
+    - lame
 services:
 - mysql
 cache:
@@ -12,7 +16,6 @@ cache:
 - yarn
 - npm
 before_install:
-- sudo apt-get install -y libsndfile-dev lame
 - yarn install
 before_script:
 - mysql -e 'create database alonetone_test';
