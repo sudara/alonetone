@@ -6,7 +6,7 @@ rvm:
 addons:
   chrome: stable
 services:
-  - mysql
+- mysql
 cache:
 - bundler
 - yarn
