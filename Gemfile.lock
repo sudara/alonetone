@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rails/coffee-rails.git
-  revision: 800d7abbe2fd08776443e444a72fa43de7b7cd64
+  revision: 32a2939acc139564a0d5a4f1d740200ef57ac88c
   specs:
-    coffee-rails (4.2.2)
+    coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
 
@@ -300,7 +300,7 @@ GEM
     nenv (0.3.0)
     newrelic_rpm (6.2.0.354)
     nio4r (2.3.1)
-    nokogiri (1.10.2)
+    nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     nokogumbo (2.0.1)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -346,7 +346,7 @@ GEM
     puma (3.12.1)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
-    rack (2.0.6)
+    rack (2.0.7)
     rack-protection (2.0.5)
       rack
     rack-proxy (0.6.5)
@@ -517,7 +517,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yui-compressor (0.12.0)
-    zeitwerk (1.4.0)
+    zeitwerk (1.4.3)
 
 PLATFORMS
   ruby
