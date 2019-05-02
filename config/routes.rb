@@ -8,7 +8,7 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, path: 'users/(:filter_by)' do
+    resources :users, path: 'users/(:filter_by)', defaults: { filter_by: nil }, only: [:index] do
       member do
         put :delete
         put :restore
@@ -16,7 +16,7 @@ Alonetone::Application.routes.draw do
         put :spam
       end
     end
-    resources :comments, path: 'comments/(:filter_by)' do
+    resources :comments, path: 'comments/(:filter_by)', defaults: { filter_by: nil }, only: [:index] do
        member do
         put :unspam
         put :spam
@@ -25,7 +25,7 @@ Alonetone::Application.routes.draw do
         put :mark_group_as_spam
       end
     end
-    resources :assets, path: 'assets/(:filter_by)' do
+    resources :assets, path: 'assets/(:filter_by)', defaults: { filter_by: nil }, only: [:index] do
       member do
         put :unspam
         put :spam
