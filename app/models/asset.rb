@@ -4,9 +4,11 @@ class Asset < ApplicationRecord
   include SoftDeletion
 
   require_dependency 'asset/radio'
+  require_dependency 'asset/statistics'
   require_dependency 'asset/waveform'
 
   include Asset::Radio
+  include Asset::Statistics
   include Asset::Waveform
 
   concerned_with :uploading, :radio, :statistics
