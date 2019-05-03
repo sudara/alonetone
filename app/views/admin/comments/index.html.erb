@@ -30,6 +30,7 @@
                 </div>
                 <div>
                   <div><%= link_to "#{comment&.commenter&.login}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
+                  <div><%= comment&.commenter&.email %></div>
                   <div><%= link_to "#{comment.remote_ip}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
                 </div>
               </div>
