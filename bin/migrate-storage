@@ -129,10 +129,66 @@ module Storage
       )
     end
 
-    def original_s3_object
-      @original_s3_object ||= ActiveStorage::Blob.service.send(
-        :object_for, paperclip_attachment.path[1..]
+    def s3_object(variant_name)
+      @objects ||= {}
+      @objects[variant_name] ||= s3_object_variant_name(variant_name)
+    end
+
+    def s3_object_variant_name(variant_name)
+      ActiveStorage::Blob.service.send(
+        :object_for,
+        paperclip_attachment.path(variant_name)[1..]
       )
+    end
+
+    def find_highest_quality_object
+      variant_names.reverse.each do |variant_name|
+        object = s3_object(variant_name)
+        if object.exists?
+          options.logger.info(
+            "Using variant `#{variant_name}' because it's the largest."
+          )
+          return object
+        end
+      end
+      nil
+    end
+
+    def find_original_s3_object
+      variant_names.each do |variant_name|
+        begin
+          object = s3_object(variant_name)
+          if object.content_length == original_byte_size
+            options.logger.info(
+              "Using variant `#{variant_name}' because it has the correct byte size."
+            )
+            return object
+          end
+        rescue  Aws::S3::Errors::NotFound
+        end
+      end
+      nil
+    end
+
+    def paperclip_original_s3_object
+      object = s3_object(paperclip_attachment.path)
+      object if object.exists?
+    end
+
+    def original_s3_object
+      if defined?(@original_s3_object)
+        @original_s3_object
+      else
+        @original_s3_object = begin
+          if paperclip_attachment_name == 'pic'
+            paperclip_original_s3_object || find_original_s3_object || find_highest_quality_object
+          else
+            paperclip_original_s3_object
+          end
+        end
+        options.logger.info("Using object with key `#{@original_s3_object.key}'")
+        @original_s3_object
+      end
     end
 
     def copy_s3_object
