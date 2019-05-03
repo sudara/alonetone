@@ -11,9 +11,11 @@ class User < ApplicationRecord
 
   require_dependency 'user/findability'
   require_dependency 'user/settings'
+  require_dependency 'user/statistics'
 
   include User::Findability
   include User::Settings
+  include User::Statistics
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
 
