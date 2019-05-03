@@ -10,6 +10,9 @@ require 'parallel'
 require 'ruby-progressbar'
 
 module Storage
+  class SkipRecord < StandardError
+  end
+
   class VariantMigration
     attr_reader :blob
     attr_reader :variant_name
@@ -33,6 +36,11 @@ module Storage
 
     def storage_variant
       storage_attachment.variant(resize_to_limit: resize_to_limit)
+    rescue ActiveStorage::InvariableError
+      raise(
+        Storage::SkipRecord,
+        "Can't process variant because original is not an image: `#{original_s3_object.key}'"
+      )
     end
 
     def original_s3_object
@@ -118,7 +126,13 @@ module Storage
     end
 
     def storage_attachment_name
-      storage_attachment_names[storage_record.class]
+      if storage_record.nil?
+        raise(
+          Storage::SkipRecord,
+          "There is no storage record associated as `#{paperclip_attachment_name}'"
+        )
+      end
+      storage_attachment_names.fetch(storage_record.class)
     end
 
     # Returns ActiveStorage attachable
@@ -221,6 +235,9 @@ module Storage
       if paperclip_attachment_name == 'pic'
         copy_variants
       end
+    rescue Storage::SkipRecord => error
+      options.logger.info(error.message)
+      return
     end
 
     private
@@ -241,6 +258,14 @@ module Storage
     end
 
     def attach_blob
+      if original_s3_object.nil?
+        raise(
+          Storage::SkipRecord,
+          "Skipping migration for `#{storage_attachment_name}' because original S3 object is " \
+          "missing"
+        )
+      end
+
       # Perform copy and Blob creation in a transaction so it rolls back when something goes
       # wrong.
       record.class.transaction do
@@ -383,7 +408,8 @@ module Storage
         model, storage_attachment_names: storage_attachment_names, options: options
       ).migrate
     end
-
+  rescue Interrupt
+  ensure
     options.progress.finish
   end
 
