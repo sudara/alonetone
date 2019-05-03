@@ -158,14 +158,11 @@ module Storage
     # A MD5 checksum of the file data is required Blob. Unfortunately that means we need to
     # fetch the entire file from storage so this might take a while for large MP3s.
     def checksum
-      # For local files this returns an absolute path (e.g. /systems/pics/…) so we need to
-      # differentiate between an actual URL and a local file.
-      url = paperclip_attachment.url
-      if url.start_with?('http')
-        # Unfortunately we need to download the entire object to compute its MD5.
-        Digest::MD5.base64digest(Net::HTTP.get(URI(url)))
-      else
-        Digest::MD5.file(Rails.root.join('public' + url)).base64digest
+      @checksum ||= begin
+        Tempfile.open(encoding: 'binary') do |tempfile|
+          IO.copy_stream(original_s3_object.get.body, tempfile)
+          Digest::MD5.file(tempfile.path).base64digest
+        end
       end
     end
 
