@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
+  include Paperclip
   include SoftDeletion
 
   require_dependency 'asset/radio'
   require_dependency 'asset/statistics'
+  require_dependency 'asset/uploading'
   require_dependency 'asset/waveform'
 
   include Asset::Radio
   include Asset::Statistics
+  include Asset::Uploading
   include Asset::Waveform
-
-  concerned_with :uploading, :radio, :statistics
 
   attribute :user_agent, :string
   serialize :waveform, Array
