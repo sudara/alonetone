@@ -78,6 +78,12 @@ module Storage
         options.logger.info(
           "Generated variant #{variant_name}"
         )
+      rescue ActiveStorage::IntegrityError
+        options.logger.info(
+          "Failed to generate #{variant_name} because #{storage_variant.blob.key} " \
+          "has the wrong checksum."
+        )
+        raise
       rescue ActiveStorage::FileNotFoundError
         options.logger.info(
           "Failed to generate #{variant_name} because #{storage_variant.blob.key} is " \
@@ -152,13 +158,17 @@ module Storage
       record.send("#{paperclip_attachment_name}_content_type")
     end
 
-    def blob
-      @blob ||= ActiveStorage::Blob.new(
+    def build_blob
+      ActiveStorage::Blob.new(
         filename: original_filename,
         byte_size: original_byte_size,
         content_type: original_content_type,
         checksum: checksum
       )
+    end
+
+    def blob
+      @blob ||= storage_attachment.attached? ? storage_attachment.blob : build_blob
     end
 
     def s3_object(variant_name)
@@ -207,18 +217,22 @@ module Storage
       object if object.exists?
     end
 
+    def determine_original_s3_object
+      if paperclip_attachment_name == 'pic'
+        paperclip_original_s3_object || find_original_s3_object || find_highest_quality_object
+      else
+        paperclip_original_s3_object
+      end
+    end
+
     def original_s3_object
       if defined?(@original_s3_object)
         @original_s3_object
       else
-        @original_s3_object = begin
-          if paperclip_attachment_name == 'pic'
-            paperclip_original_s3_object || find_original_s3_object || find_highest_quality_object
-          else
-            paperclip_original_s3_object
-          end
+        @original_s3_object = determine_original_s3_object
+        if @original_s3_object
+          options.logger.info("Using object with key `#{@original_s3_object.key}'")
         end
-        options.logger.info("Using object with key `#{@original_s3_object.key}'")
         @original_s3_object
       end
     end
@@ -249,12 +263,7 @@ module Storage
     # A MD5 checksum of the file data is required Blob. Unfortunately that means we need to
     # fetch the entire file from storage so this might take a while for large MP3s.
     def checksum
-      @checksum ||= begin
-        Tempfile.open(encoding: 'binary') do |tempfile|
-          IO.copy_stream(original_s3_object.get.body, tempfile)
-          Digest::MD5.file(tempfile.path).base64digest
-        end
-      end
+      @checksum ||= Digest::MD5.base64digest(original_s3_object.get.body.string)
     end
 
     def attach_blob
