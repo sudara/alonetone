@@ -1,4 +1,6 @@
-class User < ActiveRecord::Base
+# frozen_string_literal: true
+
+class User < ApplicationRecord
   include SoftDeletion
   include Rakismet::Model
 
@@ -7,7 +9,9 @@ class User < ActiveRecord::Base
                   user_ip: proc { current_login_ip },
                   content: proc { profile&.bio }
 
-  concerned_with :findability, :settings, :statistics
+  require_dependency 'user/findability'
+
+  include User::Findability
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
 
