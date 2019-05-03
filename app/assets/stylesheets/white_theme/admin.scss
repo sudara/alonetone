@@ -69,7 +69,7 @@
       background-color: $white;
       padding: $baseline / 2 0;
       margin-bottom: 0;
-      padding-bottom: 5px;
+      padding-bottom: 0px;
       padding-left: 0;
       padding-right: 0;
 
@@ -100,10 +100,11 @@
             border-top: 0;
           }
           &.deleted {
-              background-color: #B20035;
-              color:#FFF;
+              background-color: $samo-background-gray;
+              box-shadow: inset 0 0 3px $samo-light-gray;
               input[value='Restore User'] {
-                  background-color: $dark-gray;
+                background-color: $samo-orange;
+                opacity: 1;
               }
           }
         }
@@ -112,7 +113,7 @@
         width: 90px;
       }
       .user_column {
-        width: 164x;
+        width: 164px;
         min-width: 164px;
         margin-right: 12px;
         display: flex;
@@ -131,6 +132,12 @@
               text-overflow: ellipsis;
               overflow: hidden;
             }
+          }
+          div:nth-child(2) {            
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-bottom: 5px;
           }
           div:last-child {
             color: $dark-gray;
