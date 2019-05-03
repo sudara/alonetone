@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
 require File.expand_path('../config/environment', __dir__)
+
+# Use VIPS as the variant processor.
+Rails.application.config.active_storage.variant_processor = :vips
+
 require 'optparse'
 require 'parallel'
 require 'ruby-progressbar'
@@ -54,11 +58,25 @@ module Storage
           options: options
         )
       else
-        storage_variant.processed
+        process
       end
     end
 
     private
+
+    def process
+      begin
+        storage_variant.processed unless options.dry_run
+        options.logger.info(
+          "Generated variant #{variant_name}"
+        )
+      rescue ActiveStorage::FileNotFoundError
+        options.logger.info(
+          "Failed to generate #{variant_name} because #{storage_variant.blob.key} is " \
+          "missing."
+        )
+      end
+    end
 
     def resize_to_limit
       ImageVariant.resize_to_fit(variant_name)
