@@ -22,7 +22,7 @@ class Asset < ApplicationRecord
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
-  scope :random_order,    -> { order("RAND()") }
+  scope :random_order,    -> { order(Arel.sql('RAND()')) }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
   scope :not_current,     ->(id) { where('id != ?', id) }
   scope :for_user,        ->(user_id) { where(user_id: user_id) }
