@@ -10,8 +10,10 @@ class User < ApplicationRecord
                   content: proc { profile&.bio }
 
   require_dependency 'user/findability'
+  require_dependency 'user/settings'
 
   include User::Findability
+  include User::Settings
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
 
