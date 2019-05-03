@@ -105,10 +105,11 @@ RSpec.describe PlaylistsController, type: :controller do
     end
 
     it "should break the homepage cache" do
+      playlist = playlists(:arthurs_playlist)
       login(:arthur)
       expect do
-       post :attach_pic, params: { id: 'arthurs-playlist', user_id: 'arthur', pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
-      end.to change { Playlist.recent.where(private: false).limit(10).cache_key }
+       post :attach_pic, params: { id: playlist.permalink, user_id: 'arthur', pic: { pic: fixture_file_upload('images/jeffdoessudara.jpg', 'image/jpeg') } }
+      end.to change { playlist.reload.updated_at }
     end
   end
 
