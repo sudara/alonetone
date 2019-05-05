@@ -176,15 +176,12 @@ class AssetsController < ApplicationController
     @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
     @asset.publish! if params[:commit] == 'Publish'
 
-    if request.xhr?
-      result ? head(:ok) : head(:bad_request)
+    if result
+      flash[:ok] = "Your track has been updated."
+      redirect_to user_track_url(@asset.user.login, @asset.permalink)
     else
-      if result
-        redirect_to user_track_url(@asset.user.login, @asset.permalink)
-      else
-        flash[:error] = "There was an issue with updating that track"
-        render action: "edit"
-      end
+      flash[:error] = "There was an issue with updating that track"
+      render action: "edit"
     end
   end
 
