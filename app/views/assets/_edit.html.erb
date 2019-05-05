@@ -1,5 +1,5 @@
 <div class="track_options">
-  <%= link_to "delete", user_track_path(@user.login, @asset), method: :delete, 
+  <%= link_to "delete", user_track_path(@user.login, @asset), method: :delete,
         confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.',
         class: 'delete_green'%>
 </div>
@@ -23,7 +23,7 @@
         <%= f.file_field :mp3, class: 'asset_data' %>
       </p>
       <span class="note">This will permanently delete the old version.
-        The replacement track will <strong>not</strong> be considered a new track. It will not 
+        The replacement track will <strong>not</strong> be considered a new track. It will not
         show up on the home page under 'latest tracks'. But hey, you get to clean
         up your act on the sly and fix that hasty mix from last week! Yay!</span>
       </div>
@@ -43,7 +43,7 @@
           <div class="text"><!-- placeholder response text --></div>
         </div>
         <div class="small_spinner" style="display:none;"> </div>
-        <%= f.submit "Save", class: 'comment_submit' %> 
+        <%= f.submit "Save", class: 'comment_submit' %>
     </div>
-  <% end %>  
+  <% end %>
 </div>
