@@ -1,11 +1,18 @@
 #!/usr/bin/env ruby
 
 require File.expand_path('../config/environment', __dir__)
+
+# Use VIPS as the variant processor.
+Rails.application.config.active_storage.variant_processor = :vips
+
 require 'optparse'
 require 'parallel'
 require 'ruby-progressbar'
 
 module Storage
+  class SkipRecord < StandardError
+  end
+
   class VariantMigration
     attr_reader :blob
     attr_reader :variant_name
@@ -29,6 +36,11 @@ module Storage
 
     def storage_variant
       storage_attachment.variant(resize_to_limit: resize_to_limit)
+    rescue ActiveStorage::InvariableError
+      raise(
+        Storage::SkipRecord,
+        "Can't process variant because original is not an image: `#{original_s3_object.key}'"
+      )
     end
 
     def original_s3_object
@@ -54,11 +66,31 @@ module Storage
           options: options
         )
       else
-        storage_variant.processed
+        process
       end
     end
 
     private
+
+    def process
+      begin
+        storage_variant.processed unless options.dry_run
+        options.logger.info(
+          "Generated variant #{variant_name}"
+        )
+      rescue ActiveStorage::IntegrityError
+        options.logger.info(
+          "Failed to generate #{variant_name} because #{storage_variant.blob.key} " \
+          "has the wrong checksum."
+        )
+        raise
+      rescue ActiveStorage::FileNotFoundError
+        options.logger.info(
+          "Failed to generate #{variant_name} because #{storage_variant.blob.key} is " \
+          "missing."
+        )
+      end
+    end
 
     def resize_to_limit
       ImageVariant.resize_to_fit(variant_name)
@@ -100,7 +132,13 @@ module Storage
     end
 
     def storage_attachment_name
-      storage_attachment_names[storage_record.class]
+      if storage_record.nil?
+        raise(
+          Storage::SkipRecord,
+          "There is no storage record associated as `#{paperclip_attachment_name}'"
+        )
+      end
+      storage_attachment_names.fetch(storage_record.class)
     end
 
     # Returns ActiveStorage attachable
@@ -120,8 +158,8 @@ module Storage
       record.send("#{paperclip_attachment_name}_content_type")
     end
 
-    def blob
-      @blob ||= ActiveStorage::Blob.new(
+    def build_blob
+      ActiveStorage::Blob.new(
         filename: original_filename,
         byte_size: original_byte_size,
         content_type: original_content_type,
@@ -129,10 +167,74 @@ module Storage
       )
     end
 
-    def original_s3_object
-      @original_s3_object ||= ActiveStorage::Blob.service.send(
-        :object_for, paperclip_attachment.path[1..]
+    def blob
+      @blob ||= storage_attachment.attached? ? storage_attachment.blob : build_blob
+    end
+
+    def s3_object(variant_name)
+      @objects ||= {}
+      @objects[variant_name] ||= s3_object_variant_name(variant_name)
+    end
+
+    def s3_object_variant_name(variant_name)
+      ActiveStorage::Blob.service.send(
+        :object_for,
+        paperclip_attachment.path(variant_name)[1..]
       )
+    end
+
+    def find_highest_quality_object
+      variant_names.reverse.each do |variant_name|
+        object = s3_object(variant_name)
+        if object.exists?
+          options.logger.info(
+            "Using variant `#{variant_name}' because it's the largest."
+          )
+          return object
+        end
+      end
+      nil
+    end
+
+    def find_original_s3_object
+      variant_names.each do |variant_name|
+        begin
+          object = s3_object(variant_name)
+          if object.content_length == original_byte_size
+            options.logger.info(
+              "Using variant `#{variant_name}' because it has the correct byte size."
+            )
+            return object
+          end
+        rescue  Aws::S3::Errors::NotFound
+        end
+      end
+      nil
+    end
+
+    def paperclip_original_s3_object
+      object = s3_object(paperclip_attachment.path)
+      object if object.exists?
+    end
+
+    def determine_original_s3_object
+      if paperclip_attachment_name == 'pic'
+        paperclip_original_s3_object || find_original_s3_object || find_highest_quality_object
+      else
+        paperclip_original_s3_object
+      end
+    end
+
+    def original_s3_object
+      if defined?(@original_s3_object)
+        @original_s3_object
+      else
+        @original_s3_object = determine_original_s3_object
+        if @original_s3_object
+          options.logger.info("Using object with key `#{@original_s3_object.key}'")
+        end
+        @original_s3_object
+      end
     end
 
     def copy_s3_object
@@ -147,6 +249,9 @@ module Storage
       if paperclip_attachment_name == 'pic'
         copy_variants
       end
+    rescue Storage::SkipRecord => error
+      options.logger.info(error.message)
+      return
     end
 
     private
@@ -158,18 +263,18 @@ module Storage
     # A MD5 checksum of the file data is required Blob. Unfortunately that means we need to
     # fetch the entire file from storage so this might take a while for large MP3s.
     def checksum
-      # For local files this returns an absolute path (e.g. /systems/pics/…) so we need to
-      # differentiate between an actual URL and a local file.
-      url = paperclip_attachment.url
-      if url.start_with?('http')
-        # Unfortunately we need to download the entire object to compute its MD5.
-        Digest::MD5.base64digest(Net::HTTP.get(URI(url)))
-      else
-        Digest::MD5.file(Rails.root.join('public' + url)).base64digest
-      end
+      @checksum ||= Digest::MD5.base64digest(original_s3_object.get.body.string)
     end
 
     def attach_blob
+      if original_s3_object.nil?
+        raise(
+          Storage::SkipRecord,
+          "Skipping migration for `#{storage_attachment_name}' because original S3 object is " \
+          "missing"
+        )
+      end
+
       # Perform copy and Blob creation in a transaction so it rolls back when something goes
       # wrong.
       record.class.transaction do
@@ -312,7 +417,8 @@ module Storage
         model, storage_attachment_names: storage_attachment_names, options: options
       ).migrate
     end
-
+  rescue Interrupt
+  ensure
     options.progress.finish
   end
 
