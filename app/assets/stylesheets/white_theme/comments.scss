@@ -40,6 +40,9 @@
     border-width: 0 9px 13px 9px;
     border-style: solid;
     border-color: transparent transparent #d7dbdb transparent;
+    @media #{$mobile} {
+      display: none;
+    }
   }
   .comment_asset {
     background-color: transparent;
@@ -185,14 +188,25 @@
           border: 1px solid #fff;
           &.comment_fail {
             border: 1px solid #ff1f75;
+            @media #{$mobile} {
+              border: 0;
+            }
           }
           &.comment_success {
             border: 1px solid #67c906;
+            @media #{$mobile} {
+              border: 0;
+            }
           }
           div.ajax_success {
             padding-right: 2px;
             color: #2b8800;
             padding-top: 6.5px;
+            @media #{$mobile} {
+              span {
+                display: none;
+              }
+            }
             &::after {
               position: absolute;
               top: 7px;
@@ -204,6 +218,11 @@
             padding-right: 2px;
             color: #b20035;
             padding-top: 6.5px;
+            @media #{$mobile} {
+              span {
+                display: none;
+              }
+            }
             &::after {
               position: absolute;
               top: 7.5px;

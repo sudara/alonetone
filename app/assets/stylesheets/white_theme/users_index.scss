@@ -1,39 +1,55 @@
 #user_index {
   display: flex;
-  @include match-dynamic-site-width();
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 960px;
-  #static_header {
-    width: 30%;
-    line-height: 1.1;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 1032px;
+  padding: 0 $baseline * 1.5;
+  margin-left: auto;
+  margin-right: auto;
+
+  .users_menu {
+    box-shadow: none;
+    width: 25%;
+    min-width: 185px;
+    margin-right: 5%;
+    padding-left: 0;
+    overflow: hidden;
+    h2 {
+      color: $samo-orange;
+      margin-bottom: 0;
+    }
     @media #{$one-column} {
       width: 100%;
     }
     #links {
       ul.links {
+        margin-top: 0;
+        margin-bottom: 0;
         li {
-          line-height: 34px;
-          float: left;
+          line-height: 40px;
           display: block;
-          height: 32px;
-          width: 230px;
+          height: 40px;
+          width: 100%;
+          box-sizing: border-box;
+          &:hover {
+            background: $light_gray;
+            a {
+              text-decoration: none;
+            }
+          }
           a {
             font-size: 14px;
             font-weight: 400;
-            line-height: 34px;
             display: block;
-            float: left;
             padding: 0 15px;
-          }
-          a:hover {
-            text-decoration: none;
-            background: $light_gray;
           }
         }
         li.current {
           padding: 0 15px;
-          background: $gray;
+          background: $samo-orange;
+          color: #FFF;
         }
       }
     }
@@ -41,9 +57,8 @@
   #large_users_grid {
     display: flex;
     width: 70%;
-    margin-top: 52px;
     flex-wrap: wrap;
-    justify-content: space-between;
+    margin-right: -18px;
     @media #{$one-column} {
       width: 100%;
     }
@@ -55,6 +70,7 @@
       width: 150px;
       margin-bottom: 30px;
       text-align: center;
+      margin-right: 18px;
       img.cover {
         width: 125px;
         height: 125px;
