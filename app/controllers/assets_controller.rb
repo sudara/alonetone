@@ -148,8 +148,12 @@ class AssetsController < ApplicationController
 
     @assets.each do |asset|
       if !asset.new_record?
-        flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
-        asset.update_attribute(:is_spam, asset.spam?) # makes an api call
+        if asset.spam?
+          asset.update_attribute(:is_spam, true) # makes an api call
+          flashes += "Hrm, robots marked your track as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+        else
+          flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
+        end
         good = true
       else
         errors = asset.errors.full_messages.join('.')
@@ -160,7 +164,7 @@ class AssetsController < ApplicationController
     if @playlist
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
-    elsif @assets.present? && (@assets.collect(&:persisted?).any? == true)
+    elsif @assets.present? && (@assets.collect(&:persisted?).any? == true) && !(@assets.collect(&:is_spam?).any? == true)
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id), send_email: true)
     else
