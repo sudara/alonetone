@@ -201,14 +201,14 @@ RSpec.describe AssetsController, type: :request do
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       end.to change { Asset.count }.by(1)
 
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s + '&send_email=true')
     end
 
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
       }.to change { Asset.count }.by(1)
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s + '&send_email=true')
     end
 
     # this action is performed as an after_create callback
@@ -228,7 +228,7 @@ RSpec.describe AssetsController, type: :request do
       users(:sudara).add_or_remove_followee(users(:arthur).id)
       users(:aaron).add_or_remove_followee(users(:arthur).id)
       # binding.pry
-      get mass_edit_user_tracks_path(users(:arthur), assets: users(:arthur).assets.collect(&:id))
+      get mass_edit_user_tracks_path(users(:arthur), assets: users(:arthur).assets.collect(&:id), send_email: true)
       expect(enqueued_jobs.size).to eq 2
       expect(enqueued_jobs.first[:queue]).to eq "mailers"
       expect(enqueued_jobs.last[:job]).to eq AssetNotificationJob
@@ -237,7 +237,7 @@ RSpec.describe AssetsController, type: :request do
     it 'should successfully upload 2 mp3s' do
       post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg'),
                                                                       fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s + '&send_email=true')
     end
 
     it 'creates an album from a ZIP' do
