@@ -128,9 +128,10 @@ class AssetsController < ApplicationController
     end
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
-
-    @user.followers.select(&:wants_email?).each do |follower|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
+    if params[:send_email]
+      @user.followers.select(&:wants_email?).each do |follower|
+        AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
+      end
     end
 
     render 'mass_edit_white' if white_theme_enabled?
@@ -161,7 +162,7 @@ class AssetsController < ApplicationController
       redirect_to edit_user_playlist_path(@user, @playlist)
     elsif @assets.present? && (@assets.collect(&:persisted?).any? == true)
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
-      redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
+      redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id), send_email: true)
     else
       flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
       redirect_to new_user_track_path(current_user)
