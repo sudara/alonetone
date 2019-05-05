@@ -1,20 +1,47 @@
 <div id="user_index">
-  <div id="static_header">
-    <div class="title">
-      <h1 class="static">Browse all alonetone artists</h1>
+
+
+  <% if white_theme_enabled? %>
+
+     <div class="users_menu box">
+  
+      <h2>Browse Artists</h2>
+      
+      <div id="links">
+        <ul class="links">
+        <%= navigation_item "Last Online", {action: 'index', sort: nil} %>
+        <%= navigation_item "Last Uploaded", {action: 'index', sort: 'last_uploaded'} %>
+        <%= navigation_item "Most Listened To", {action: 'index', sort: 'most_listened_to'} %>
+        <%= navigation_item "New Artists", {action: 'index', sort: 'new_artists'} %>
+        <%= navigation_item "All Time Top Uploaders", {action: 'index', sort: 'monster_uploaders'} %>
+        <%= navigation_item "Dedicated Listeners", {action: 'index', sort: 'dedicated_listeners'}%>
+        </ul>
+      </div>
+      
     </div>
 
-    <div id="links">
-      <ul class="links">
-       <%= navigation_item "last online", {action: 'index', sort: nil} %>
-       <%= navigation_item "last uploaded", {action: 'index', sort: 'last_uploaded'} %>
-       <%= navigation_item "most listened to", {action: 'index', sort: 'most_listened_to'} %>
-       <%= navigation_item "new artists", {action: 'index', sort: 'new_artists'} %>
-       <%= navigation_item "all time most uploaded", {action: 'index', sort: 'monster_uploaders'} %>
-       <%= navigation_item "dedicated listeners", {action: 'index', sort: 'dedicated_listeners'}%>
-      </ul>
+  
+  <% else %>
+    <div id="static_header">
+  
+      <div class="title">
+        <h1 class="static">Browse all alonetone artists</h1>
+      </div>
+
+      <div id="links">
+        <ul class="links">
+        <%= navigation_item "last online", {action: 'index', sort: nil} %>
+        <%= navigation_item "last uploaded", {action: 'index', sort: 'last_uploaded'} %>
+        <%= navigation_item "most listened to", {action: 'index', sort: 'most_listened_to'} %>
+        <%= navigation_item "new artists", {action: 'index', sort: 'new_artists'} %>
+        <%= navigation_item "all time most uploaded", {action: 'index', sort: 'monster_uploaders'} %>
+        <%= navigation_item "dedicated listeners", {action: 'index', sort: 'dedicated_listeners'}%>
+        </ul>
+      </div>
+      
     </div>
-  </div>
+    
+  <% end %>
 
   <div id="large_users_grid">
     <% if @sort == 'dedicated_listeners'%>
