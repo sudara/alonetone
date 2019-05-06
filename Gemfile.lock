@@ -120,16 +120,16 @@ GEM
       execjs
     awesome_print (1.8.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.154.0)
+    aws-partitions (1.157.0)
     aws-sdk-cloudfront (1.15.0)
       aws-sdk-core (~> 3, >= 3.48.2)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.48.6)
+    aws-sdk-core (3.49.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.17.0)
+    aws-sdk-kms (1.18.0)
       aws-sdk-core (~> 3, >= 3.48.2)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.36.1)
@@ -239,6 +239,9 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
+    image_processing (1.9.0)
+      mini_magick (>= 4.9.3, < 5)
+      ruby-vips (>= 2.0.13, < 3)
     inline_svg (1.4.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
@@ -291,6 +294,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
     mimemagic (0.3.3)
+    mini_magick (4.9.3)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
@@ -299,7 +303,7 @@ GEM
     mustache (1.1.0)
     mysql2 (0.5.2)
     nenv (0.3.0)
-    newrelic_rpm (6.2.0.354)
+    newrelic_rpm (6.3.0.355)
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
@@ -308,7 +312,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    onebox (1.8.86)
+    onebox (1.8.87)
       htmlentities (~> 4.3)
       moneta (~> 1.0)
       multi_json (~> 1.11)
@@ -430,6 +434,8 @@ GEM
     ruby-audio (1.6.1)
     ruby-mp3info (0.8.10)
     ruby-progressbar (1.10.0)
+    ruby-vips (2.0.13)
+      ffi (~> 1.9)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     s3_direct_upload (0.1.7)
@@ -518,7 +524,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yui-compressor (0.12.0)
-    zeitwerk (2.1.5)
+    zeitwerk (2.1.6)
 
 PLATFORMS
   ruby
@@ -545,6 +551,7 @@ DEPENDENCIES
   guard-rspec
   has_permalink
   http-2
+  image_processing
   invisible_captcha
   jquery-fileupload-rails
   jquery-rails
