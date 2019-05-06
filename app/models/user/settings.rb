@@ -1,42 +1,46 @@
-class User
-  def has_public_playlists?
-    playlists.only_public.count >= 1
-  end
+# frozen_string_literal: true
 
-  def has_tracks?
-    assets_count > 0
-  end
+class User < ApplicationRecord
+  module Settings
+    def has_public_playlists?
+      playlists.only_public.count >= 1
+    end
 
-  def has_as_favorite?(asset)
-    favorite_asset_ids.include?(asset.id)
-  end
+    def has_tracks?
+      assets_count > 0
+    end
 
-  def favorite_asset_ids
-    Track.where(playlist_id: favorites).pluck(:asset_id)
-  end
+    def has_as_favorite?(asset)
+      favorite_asset_ids.include?(asset.id)
+    end
 
-  def favorites
-    playlists.favorites.first
-  end
+    def favorite_asset_ids
+      Track.where(playlist_id: favorites).pluck(:asset_id)
+    end
 
-  def name
-    self[:display_name] || login
-  end
+    def favorites
+      playlists.favorites.first
+    end
 
-  def self.dummy_pic(size)
-    first.dummy_pic(size)
-  end
+    def name
+      self[:display_name] || login
+    end
 
-  def wants_email?
-    # anyone who doesn't have it set to false, aka, opt-out
-    settings.empty? || (settings[:email_new_tracks] != "false")
-  end
+    def self.dummy_pic(size)
+      first.dummy_pic(size)
+    end
 
-  def has_setting?(setting, value = nil)
-    if !value.nil? # account for testing against false values
-      settings.present? && settings[setting].present? && (settings[setting] == value)
-    else
-      settings.present? && settings[setting].present?
+    def wants_email?
+      # anyone who doesn't have it set to false, aka, opt-out
+      settings.empty? || (settings[:email_new_tracks] != "false")
+    end
+
+    def has_setting?(setting, value = nil)
+      if !value.nil? # account for testing against false values
+        settings.present? && settings[setting].present? && (settings[setting] == value)
+      else
+        settings.present? && settings[setting].present?
+      end
     end
   end
 end

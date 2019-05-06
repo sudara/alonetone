@@ -24,6 +24,7 @@ arthurs_playlist:
   cover_quality: modern
   description: arthurs playlist
   private: false
+  updated_at: <%= 1.day.ago.to_s :db %>
   created_at: <%= 1.day.ago.to_s :db %>
 
 mix:
