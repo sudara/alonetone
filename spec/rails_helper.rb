@@ -8,6 +8,7 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
+require 'percy'
 
 # The suite needs to be able to connect to localhost for feature specs. Percy
 # sends its build response out of the test process so it also needs to connect
@@ -41,9 +42,6 @@ Capybara.javascript_driver = :headless_chrome
 # Configure the HTTP server to be silent. Note that Capybara would figure out
 # to use Puma on its own if we remove this line.
 Capybara.server = :puma, { Silent: true }
-
-# Set default resolutions for visual regression testing.
-Percy.config.default_widths = [375, 1280]
 
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
@@ -79,7 +77,6 @@ RSpec.configure do |config|
   config.include RSpec::Support::LoginHelpers
 
   config.before(:suite) do
-    Percy::Capybara.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
   end
 
@@ -94,9 +91,5 @@ RSpec.configure do |config|
 
   config.before(:example, type: :controller) do
     activate_authlogic
-  end
-
-  config.after(:suite) do
-    Percy::Capybara.finalize_build
   end
 end

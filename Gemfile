@@ -19,11 +19,12 @@ gem 'awesome_print', require: 'ap'
 gem 'http-2' # used by AWS SDK but not in dependencies
 gem 'aws-sdk-cloudfront'
 gem 'aws-sdk-s3'
-gem 'paperclip', '~> 6.0.0'
-gem 'rubyzip'
-gem 'ruby-mp3info', require: 'mp3info'
+gem 'image_processing'
 gem 'mime-types'
+gem 'paperclip', '~> 6.0.0'
 gem 'ruby-audio'
+gem 'ruby-mp3info', require: 'mp3info'
+gem 'rubyzip'
 gem 's3_direct_upload'
 
 # active record
