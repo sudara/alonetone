@@ -68,7 +68,7 @@ class User < ApplicationRecord
   scope :random_order,  -> { order(Arel.sql('RAND()')) }
   scope :recent,        -> { order('users.id DESC') }
   scope :recently_seen, -> { order('last_request_at DESC') }
-  scope :with_location, -> { where(['users.country != ""']).recently_seen}
+  scope :with_location, -> { where(['users.country != ""']).recently_seen }
 
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
