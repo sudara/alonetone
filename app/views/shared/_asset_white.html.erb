@@ -23,7 +23,7 @@
       <div class="track-favorite">
       <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
           data: {controller: 'favorite', action: 'favorite#toggle' } do %>
-          <%= render file: svg_path('svg/animation_heart.svg') %>
+          <%== render file: svg_path('svg/animation_heart.svg') %>
       <% end %>
       </div>
     <% end %>
@@ -44,12 +44,12 @@
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
       <div class="plays"><%= @asset.listens_count %>
         <i class="icon_plays">
-          <%= render file: svg_path('svg/icon_play_inverted.svg') %>
+          <%== render file: svg_path('svg/icon_play_inverted.svg') %>
         </i>
       </div>
       <div class="favorite_total"><%= @asset.favorites_count %>
         <i class="icon_favs">
-          <%= render file: svg_path('svg/icon_favorite_circled.svg') %>
+          <%== render file: svg_path('svg/icon_favorite_circled.svg') %>
         </i>
       </div>
     </div>
