@@ -1,10 +1,7 @@
-<div id="admin_header">
-  <h1>Tracks</h1>
-</div>
-
 <div id="admin_columns">
 
-  <div class="admin_column_left">
+  <div class="admin_column_left box">
+    <h2>Admin</h2>
     <%= render partial: 'admin/navigation' %>
   </div>
 
@@ -29,6 +26,7 @@
               </div>
               <div>
                 <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
+                <div><%= asset.user.email %></div>
                 <div><%= asset.user.ip %></div>
               </div>
             </div>
