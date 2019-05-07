@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../config/environment', __dir__)
+
+require 'optparse'
+require 'parallel'
+require 'ruby-progressbar'
+
+Aws.config[:logger] = Rails.logger
+
+module Storage
+  class Verification
+    attr_reader :model
+    attr_reader :attachment_name
+    attr_reader :options
+
+    def initialize(model, attachment_name:, options:)
+      @model = model
+      @attachment_name = attachment_name
+      @options = options
+    end
+
+    def verify
+      options.logger.info("Verify #{model.name}")
+      model.find_in_batches do |batch|
+        Parallel.each(batch, in_threads: 4) do |record|
+          # Don't re-use the connection from the main thread.
+          ActiveRecord::Base.connection_pool.with_connection do
+            verify_record(record)
+            options.progress.increment
+          end
+        end
+      end
+    end
+
+    private
+
+    def verify_record(record)
+      storage_attachment = record.send(attachment_name)
+      if storage_attachment.attached?
+        unless storage_attachment.exist?
+          options.logger("Found attached without stored object: #{storage_attachment.path}")
+        end
+      end
+    end
+  end
+
+  def self.options
+    @options ||= OpenStruct.new
+  end
+
+  # rubocop:disable AbcSize
+  # rubocop:disable Metrics/BlockLength
+  def self.option_parser
+    OptionParser.new do |parser|
+      parser.banner = "Usage: #{$0} [options]"
+
+      parser.separator ""
+      parser.separator "Options:"
+
+      parser.on_tail("-h", "--help", "Show this message") do
+        options.run = false
+        STDOUT.puts parser
+        exit
+      end
+    end
+  end
+  # rubocop:enable Metrics/BlockLength
+  # rubocop:enable AbcSize
+
+  def self.logger_filename
+    File.expand_path('../log/storage_verification.log', __dir__)
+  end
+
+  def self.verify(argv, models)
+    option_parser.parse!(argv)
+
+    FileUtils.mkdir_p(File.dirname(logger_filename))
+    options.logger = Logger.new(logger_filename)
+    options.logger.info("Starting run")
+
+    options.progress = ProgressBar.create(
+      title: 'Migrating',
+      format: '%t |%E | %B',
+      total: models.sum { |model, _| model.count }
+    )
+
+    models.each do |model, attachment_name|
+      Storage::Verification.new(model, attachment_name: attachment_name, options: options).verify
+    end
+  rescue Interrupt
+  ensure
+    options.progress.finish
+  end
+end
+
+Storage.verify(
+  ARGV,
+  User => 'avatar_image',
+  Playlist => 'cover_image',
+  Asset => 'audio_file',
+  Greenfield::AttachedAsset => 'audio_file',
+  Greenfield::PlaylistDownload => 'zip_file'
+)

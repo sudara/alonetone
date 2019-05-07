@@ -1,52 +1,59 @@
 require 'zip'
-class Asset
-  include Paperclip
 
-  # see config/initializers/paperclip for defaults
-  attachment_options = {
-    styles: { original: '' }, # just makes sure original runs through the processor
-    processors: [:mp3_paperclip_processor]
-  }
-  if Rails.application.remote_storage?
-    attachment_options[:path] = "/mp3/:id/:basename.:extension"
-    attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
-  else
-    attachment_options[:s3_permissions] = 'public-read' # let localhost/test work without expiring urls
-  end
+class Asset < ApplicationRecord
+  module Uploading
+    extend ActiveSupport::Concern
 
-  has_attached_file :mp3, attachment_options
+    included do
+      # see config/initializers/paperclip for defaults
+      attachment_options = {
+        styles: { original: '' }, # just makes sure original runs through the processor
+        processors: [:mp3_paperclip_processor]
+      }
+      if Rails.application.remote_storage?
+        attachment_options[:path] = "/mp3/:id/:basename.:extension"
+        attachment_options[:s3_permissions] = 'authenticated-read' # don't want these facing the public
+      else
+        attachment_options[:s3_permissions] = 'public-read' # let localhost/test work without expiring urls
+      end
 
-  validates_attachment_size :mp3, less_than: 60.megabytes
-  validates_attachment_presence :mp3, message: 'must be set. Make sure you chose a file to upload!'
-  validates_attachment_content_type :mp3, content_type: ['audio/mpeg', 'audio/mp3', 'audio/x-mp3'], message: " was wrong, this doesn't look like an Mp3..."
+      has_attached_file :mp3, attachment_options
 
-  def self.parse_external_url(url)
-    # make dropbox links easier to work with
-    URI.parse(url.gsub('dl=0', 'dl=1'))
-  end
+      validates_attachment_size :mp3, less_than: 60.megabytes
+      validates_attachment_presence :mp3, message: 'must be set. Make sure you chose a file to upload!'
+      validates_attachment_content_type :mp3, content_type: ['audio/mpeg', 'audio/mp3', 'audio/x-mp3'], message: " was wrong, this doesn't look like an Mp3..."
+    end
 
-  def self.extract_mp3s(zip_file)
-    # try to open the zip file
-    Zip::File.open(zip_file.path) do |z|
-      z.each do |entry|
-        # only care if the zip entry is an mp3 of a decent size
-        next unless entry.to_s =~ /(\.\w+)$/ && Regexp.last_match(1) == '.mp3' && entry.size > 2000
+    module ClassMethods
+      def parse_external_url(url)
+        # make dropbox links easier to work with
+        URI.parse(url.gsub('dl=0', 'dl=1'))
+      end
 
-        tempfile_name = [File.basename(entry.name, '.mp3'), '.mp3']
-        temp = Tempfile.new(tempfile_name)
-        temp.open
-        temp.binmode
-        temp << z.read(entry)
-        yield temp
-        temp.close
-        logger.warn("ZIP: #{entry} was extracted from zip file: #{zip_file.path}")
+      def extract_mp3s(zip_file)
+        # try to open the zip file
+        Zip::File.open(zip_file.path) do |z|
+          z.each do |entry|
+            # only care if the zip entry is an mp3 of a decent size
+            next unless entry.to_s =~ /(\.\w+)$/ && Regexp.last_match(1) == '.mp3' && entry.size > 2000
+
+            tempfile_name = [File.basename(entry.name, '.mp3'), '.mp3']
+            temp = Tempfile.new(tempfile_name)
+            temp.open
+            temp.binmode
+            temp << z.read(entry)
+            yield temp
+            temp.close
+            logger.warn("ZIP: #{entry} was extracted from zip file: #{zip_file.path}")
+          end
+        end
+      # pass back the file unprocessed if the file is not a zip
+      rescue Zip::ZipError => e
+        logger.warn("User uploaded #{zip_file.path}:" + e.message)
+        yield zip_file
+      rescue TypeError => e
+        logger.warn("User tried to upload too small file")
       end
     end
-  # pass back the file unprocessed if the file is not a zip
-  rescue Zip::ZipError => e
-    logger.warn("User uploaded #{zip_file.path}:" + e.message)
-    yield zip_file
-  rescue TypeError => e
-    logger.warn("User tried to upload too small file")
   end
 end
