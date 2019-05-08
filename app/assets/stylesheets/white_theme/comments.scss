@@ -43,6 +43,10 @@
     @media #{$mobile} {
       display: none;
     }
+    @media #{$two-column-narrow} {
+       display: none;
+    }
+
   }
   .comment_asset {
     background-color: transparent;
@@ -191,10 +195,16 @@
             @media #{$mobile} {
               border: 0;
             }
+            @media #{$two-column-narrow} {
+              border: 0;
+            }
           }
           &.comment_success {
             border: 1px solid #67c906;
             @media #{$mobile} {
+              border: 0;
+            }
+            @media #{$two-column-narrow} {
               border: 0;
             }
           }
@@ -203,6 +213,11 @@
             color: #2b8800;
             padding-top: 6.5px;
             @media #{$mobile} {
+              span {
+                display: none;
+              }
+            }
+            @media #{$two-column-narrow} {
               span {
                 display: none;
               }
@@ -219,6 +234,11 @@
             color: #b20035;
             padding-top: 6.5px;
             @media #{$mobile} {
+              span {
+                display: none;
+              }
+            }
+            @media #{$two-column-narrow} {
               span {
                 display: none;
               }
