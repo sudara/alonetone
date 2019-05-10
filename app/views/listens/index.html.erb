@@ -1,5 +1,7 @@
 <% if white_theme_enabled? %>
 
+  <div class="history">
+
   <% content_for :left do %>
     <h2><%= @user.name %>'s listening history</h2>
     <div class="mini_paginator top_paginator">
@@ -19,7 +21,9 @@
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @track_plays_pagy %>
     </div>
-    <%= render partial: 'users/track_play', collection: @track_plays %>
+    <div class="box">
+      <%= render partial: 'users/track_play', collection: @track_plays %>
+    </div>
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @track_plays_pagy %>
     </div>
