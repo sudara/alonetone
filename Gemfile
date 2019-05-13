@@ -6,7 +6,7 @@ gem 'rails', '~> 6.0.0.rc1'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'sudara/thredded'
+gem 'thredded'
 
 # greenfield
 gem 'greenfield', path: 'greenfield'
