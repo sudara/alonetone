@@ -254,9 +254,9 @@ end
 
 # Some random comments
 1.upto(20) do |i|
-  commentable = Asset.order('RAND()').first
+  commentable = Asset.random_order.first
   recipient = commentable.user
-  commenter = User.where.not(id: recipient.id).order('RAND()').first
+  commenter = User.where.not(id: recipient.id).random_order.first
   comment = Comment.new(
     commentable: commentable,
     commenter: commenter,
@@ -272,8 +272,8 @@ end
 
 # Some random favorites
 20.times do
-  user = User.order('RAND()').first
-  asset = Asset.where.not(user_id: user.id).order('RAND()').first
+  user = User.random_order.first
+  asset = Asset.where.not(user_id: user.id).random_order.first
   user.toggle_favorite(asset)
 end
 
