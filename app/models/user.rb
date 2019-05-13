@@ -1,7 +1,21 @@
-class User < ActiveRecord::Base
-  include SoftDeletion
+# frozen_string_literal: true
 
-  concerned_with :findability, :settings, :statistics
+class User < ApplicationRecord
+  include SoftDeletion
+  include Rakismet::Model
+
+  rakismet_attrs  author: proc { display_name },
+                  author_email: proc { email },
+                  user_ip: proc { current_login_ip },
+                  content: proc { profile&.bio }
+
+  require_dependency 'user/findability'
+  require_dependency 'user/settings'
+  require_dependency 'user/statistics'
+
+  include User::Findability
+  include User::Settings
+  include User::Statistics
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
 
@@ -47,13 +61,14 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
 
-  scope :recent,        -> { order('users.id DESC')                                   }
-  scope :recently_seen, -> { order('last_request_at DESC')                            }
-  scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
   scope :activated,     -> { where(perishable_token: nil).recent }
-  scope :with_location, -> { where(['users.country != ""']).recently_seen             }
-  scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
-  scope :alpha,         -> { order('display_name ASC')                                }
+  scope :alpha,         -> { order('display_name ASC') }
+  scope :geocoded,      -> { where(['users.lat != ""']).recent }
+  scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
+  scope :random_order,  -> { order(Arel.sql('RAND()')) }
+  scope :recent,        -> { order('users.id DESC') }
+  scope :recently_seen, -> { order('last_request_at DESC') }
+  scope :with_location, -> { where(['users.country != ""']).recently_seen }
 
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
@@ -228,6 +243,12 @@ class User < ActiveRecord::Base
 
   def deleted?
     deleted_at != nil
+  end
+
+  def soft_delete_with_relations
+    soft_delete_relations
+    enqueue_real_destroy_job
+    soft_delete
   end
 
   def soft_delete_relations

@@ -65,8 +65,7 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user)
-                    .select('distinct assets.*, listens.created_at'), page_param: :listens_page, items: 10)
+    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_param: :listens_page, items: 10)
     @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page, items: 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
