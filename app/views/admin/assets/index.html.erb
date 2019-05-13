@@ -1,10 +1,7 @@
-<div id="admin_header">
-  <h1>Tracks</h1>
-</div>
-
 <div id="admin_columns">
 
-  <div class="admin_column_left">
+  <div class="admin_column_left box">
+    <h2>Admin</h2>
     <%= render partial: 'admin/navigation' %>
   </div>
 
@@ -24,12 +21,19 @@
           <div>
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
-              <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
-              <div><%= asset.user.ip %></div>
+              <div class="avatar">
+                <%= user_image(@user, variant: :original) %>
+              </div>
+              <div>
+                <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
+                <div><%= asset.user.email %></div>
+                <div><%= asset.user.ip %></div>
+              </div>
             </div>
             <div class="track_column">
-              <div><%= link_to asset.title, user_track_path(user_id: asset.user&.login, id: asset.id) %></div>
+              <div><%= link_to asset.title, user_track_path(asset.user, asset.permalink) %></div>
               <div><%= truncate(asset.description, length: 80) %></div>
+              <div>N comments / N listens</div>
             </div>
             <div class="button_column">
               <%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put %>

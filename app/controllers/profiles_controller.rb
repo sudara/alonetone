@@ -3,7 +3,15 @@ class ProfilesController < ApplicationController
 
   def update
     @user.profile.update(profile_params)
-    redirect_back(fallback_location: edit_user_path(@user))
+    if @user.spam?
+      @user.is_spam = true
+      # delete all user's associations
+      @user.soft_delete_with_relations
+      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+      redirect_to logout_path
+    else
+      redirect_back(fallback_location: edit_user_path(@user))
+    end
   end
 
   protected
