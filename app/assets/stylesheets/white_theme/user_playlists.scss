@@ -6,6 +6,28 @@ main {
     max-width: 960px;
     ul.playlists {
       margin-right: -36px;
+      li {
+        &.private {
+          background-color: $dark-gray;
+          position: relative;
+          a.small_playlist_title {
+            color: $white;
+            position: relative;
+            &:after {
+              display: inline-block;
+              content: '';
+              background-image: image-url("svg/icon_lock.svg");
+              background-size: 10px 10px;
+              margin-left: 4px;
+              height: 10px;
+              width: 10px;
+              position: absolute;
+              // top: -1px;
+              
+            }
+          }
+        }
+      }
     }
   }
 }
