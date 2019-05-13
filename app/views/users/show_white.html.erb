@@ -28,7 +28,7 @@
         <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
         <span>view all &nbsp;
           <i class="icon_caret">
-            <%= render file: svg_path('svg/icon_caret.svg') %>
+            <%== render file: svg_path('svg/icon_caret.svg') %>
           </i>
         </span>
         <% end if @playlists.count > 4 %>
