@@ -8,13 +8,30 @@ class ImageVariant
 
   S3_PUBLIC_ACL = 'public-read'
   VARIANTS = {
-    tiny: [25, 25],
-    small: [50, 50],
-    large: [125, 125],
-    album: [200, 200],
-    original: [800, 800],
-    greenfield: [1500, 1500],
-    hq: [3000, 3000]
+    small: {
+      resize_to_fill: [50, 50],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    },
+    large: {
+      resize_to_fill: [125, 125],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    },
+    album: {
+      resize_to_fill: [200, 200],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    },
+    original: {
+      resize_to_fill: [800, 800],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    },
+    greenfield: {
+      resize_to_fill: [1500, 1500],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    },
+    hq: {
+      resize_to_fill: [3000, 3000],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    }
   }.freeze
 
   attr_reader :attachment
@@ -29,18 +46,16 @@ class ImageVariant
 
   def process
     logger.tagged('ImageVariant') do
-      variant = to_active_storage_variant.processed
-      put_s3_object_acl
-      variant
+      to_active_storage_variant.processed
     end
   end
 
-  def resize_to_limit
-    ImageVariant.resize_to_limit(variant_name)
+  def variant_options
+    ImageVariant.variant_options(variant_name)
   end
 
   def to_active_storage_variant
-    attachment.variant(resize_to_limit: resize_to_limit)
+    attachment.variant(**variant_options)
   end
 
   # Returns an Active Storage variant for a named variant.
@@ -55,8 +70,8 @@ class ImageVariant
     end
   end
 
-  # Fit a variant inside these dimensions (width x height) to generate the variant.
-  def self.resize_to_limit(variant_name)
+  # Returns options to pass to VIPS to generate a variant of the original file.
+  def self.variant_options(variant_name)
     VARIANTS[variant_name.to_sym]
   end
 
@@ -77,24 +92,5 @@ class ImageVariant
       last_word_connector: ', or ',
       locale: :en
     )
-  end
-
-  private
-
-  def to_s3_object
-    variant = to_active_storage_variant
-    variant.service.send(:object_for, variant.key)
-  rescue NoMethodError
-    nil
-  end
-
-  def put_s3_object_acl
-    # Image variants are expected to be publicly readable from from the bucket
-    # so we have to change their ACL.
-    if object_acl = to_s3_object&.acl
-      benchmark "Setting ACL for S3 object to #{S3_PUBLIC_ACL}", level: :debug do
-        object_acl.put(acl: S3_PUBLIC_ACL)
-      end
-    end
   end
 end
