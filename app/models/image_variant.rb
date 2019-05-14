@@ -8,6 +8,10 @@ class ImageVariant
 
   S3_PUBLIC_ACL = 'public-read'
   VARIANTS = {
+    tiny: {
+      resize_to_fill: [25, 25],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    },
     small: {
       resize_to_fill: [50, 50],
       saver: { quality: 68, optimize_coding: true, strip: true }
