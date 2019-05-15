@@ -6,36 +6,14 @@ class ImageVariant
   include ActiveSupport::Benchmarkable
   delegate :logger, to: Rails
 
-  S3_PUBLIC_ACL = 'public-read'
   VARIANTS = {
-    tiny: {
-      resize_to_fill: [25, 25],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    },
-    small: {
-      resize_to_fill: [50, 50],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    },
-    large: {
-      resize_to_fill: [125, 125],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    },
-    album: {
-      resize_to_fill: [200, 200],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    },
-    original: {
-      resize_to_fill: [800, 800],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    },
-    greenfield: {
-      resize_to_fill: [1500, 1500],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    },
-    hq: {
-      resize_to_fill: [3000, 3000],
-      saver: { quality: 68, optimize_coding: true, strip: true }
-    }
+    tiny: { resize_to_fit: [25, 25] },
+    small: { resize_to_fit: [50, 50] },
+    large: { resize_to_fit: [125, 125] },
+    album: { resize_to_fit: [200, 200] },
+    original: { resize_to_fit: [800, 800] },
+    greenfield: { resize_to_fit: [1500, 1500] },
+    hq: { resize_to_fit: [3000, 3000] }
   }.freeze
 
   attr_reader :attachment
