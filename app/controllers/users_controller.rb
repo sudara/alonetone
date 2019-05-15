@@ -31,9 +31,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params_with_ip)
-
     if @user.valid?
-      if @user.spam?
+      if @user.spam? && @user.save_without_session_maintenance
         @user.is_spam = true
         @user.soft_delete
 
