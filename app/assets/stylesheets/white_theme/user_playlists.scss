@@ -7,6 +7,9 @@ main {
     ul.playlists {
       margin-right: -36px;
       li {
+        &.sortable-ghost {
+          opacity: .2;
+        }
         &.private {
           background-color: $dark-gray;
           position: relative;
