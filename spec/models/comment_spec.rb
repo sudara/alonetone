@@ -38,4 +38,19 @@ RSpec.describe Comment, type: :model do
       expect(comment2.save).to be_falsey
     end
   end
+
+  describe "soft deletion" do
+    it "only soft deletes" do
+      expect do
+        Comment.all.map(&:soft_delete)
+      end.not_to change { Comment.unscoped.count }
+    end
+
+    it "changes scope" do
+      original_count = Comment.count
+      expect do
+        Comment.all.map(&:soft_delete)
+      end.to change { Comment.count }.from(original_count).to(0)
+    end
+  end
 end

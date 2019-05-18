@@ -55,7 +55,8 @@
       padding: $baseline / 2;
     }
     iframe {
-      margin-bottom: 10px;
+      margin-bottom: $baseline;
+      max-width: 100%;
     }
     h1 {
       font-size: $baseline;
@@ -138,8 +139,19 @@
       }
     }
   }
+
   div.comment_asset + h2 {
     display: none;
+  }
+  div.comment_asset {
+    .comment_form {
+      form {
+        > .comment_as {
+          margin-top: 0;
+          padding-left: 24px;
+        }
+      }
+    }
   }
   div#user_comments {
     background-color: none;
@@ -149,7 +161,7 @@
     display: none;
   }
   .track-edit {
-    margin-bottom: $baseline * 2; // to match MASS_EDIT
+    margin-bottom: $baseline * 2; 
     header {
       input {
         font-family: $black-font;

@@ -53,6 +53,26 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe 'cover quality' do
+    it 'defaults to modern' do
+      playlist = Playlist.new
+      expect(playlist.cover_quality).to eq('modern')
+      expect(playlist.modern_cover_quality?).to eq(true)
+    end
+
+    it 'can be ancient' do
+      playlist = playlists(:henri_willig_polderkaas)
+      playlist.update(cover_quality: :ancient)
+      expect(playlist.cover_quality).to eq('ancient')
+    end
+
+    it 'can be legacy' do
+      playlist = playlists(:henri_willig_polderkaas)
+      playlist.update(cover_quality: :legacy)
+      expect(playlist.cover_quality).to eq('legacy')
+    end
+  end
+
   describe "generating URLs to their cover" do
     context "with a cover" do
       let(:playlist) { playlists(:will_studd_rockfort) }
@@ -90,6 +110,21 @@ RSpec.describe Playlist, type: :model do
       it "does not return a URL to a variant" do
         expect(playlist.cover_url(variant: :large)).to be_nil
       end
+    end
+  end
+
+  describe "soft deletion" do
+    it "only soft deletes" do
+      expect do
+        Playlist.all.map(&:soft_delete)
+      end.not_to change { Playlist.unscoped.count }
+    end
+
+    it "changes scope" do
+      original_count = Playlist.count
+      expect do
+        Playlist.all.map(&:soft_delete)
+      end.to change { Playlist.count }.from(original_count).to(0)
     end
   end
 end

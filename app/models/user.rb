@@ -1,5 +1,21 @@
-class User < ActiveRecord::Base
-  concerned_with :findability, :settings, :statistics
+# frozen_string_literal: true
+
+class User < ApplicationRecord
+  include SoftDeletion
+  include Rakismet::Model
+
+  rakismet_attrs  author: proc { display_name },
+                  author_email: proc { email },
+                  user_ip: proc { current_login_ip },
+                  content: proc { profile&.bio }
+
+  require_dependency 'user/findability'
+  require_dependency 'user/settings'
+  require_dependency 'user/statistics'
+
+  include User::Findability
+  include User::Settings
+  include User::Statistics
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
 
@@ -45,13 +61,14 @@ class User < ActiveRecord::Base
     c.disable_perishable_token_maintenance = true # we will handle tokens
   end
 
-  scope :recent,        -> { order('users.id DESC')                                   }
-  scope :recently_seen, -> { order('last_request_at DESC')                            }
-  scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
   scope :activated,     -> { where(perishable_token: nil).recent }
-  scope :with_location, -> { where(['users.country != ""']).recently_seen             }
-  scope :geocoded,      -> { where(['users.lat != ""']).recent                        }
-  scope :alpha,         -> { order('display_name ASC')                                }
+  scope :alpha,         -> { order('display_name ASC') }
+  scope :geocoded,      -> { where(['users.lat != ""']).recent }
+  scope :musicians,     -> { where(['assets_count > ?', 0]).order('assets_count DESC') }
+  scope :random_order,  -> { order(Arel.sql('RAND()')) }
+  scope :recent,        -> { order('users.id DESC') }
+  scope :recently_seen, -> { order('last_request_at DESC') }
+  scope :with_location, -> { where(['users.country != ""']).recently_seen }
 
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
@@ -73,7 +90,8 @@ class User < ActiveRecord::Base
   has_many   :comments, -> { order('comments.id DESC') },
     dependent: :destroy
 
-  has_many   :tracks
+  has_many   :tracks,
+    dependent: :destroy
 
   # alonetone plus
   has_many :memberships
@@ -113,6 +131,8 @@ class User < ActiveRecord::Base
 
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
+
+  has_one_attached :avatar_image
 
   # tokens and activation
   def clear_token!
@@ -221,13 +241,65 @@ class User < ActiveRecord::Base
     pic&.url(variant: variant)
   end
 
+  def deleted?
+    deleted_at != nil
+  end
+
+  def soft_delete_with_relations
+    soft_delete_relations
+    enqueue_real_destroy_job
+    soft_delete
+  end
+
+  def soft_delete_relations
+    efficiently_soft_delete_relations
+  end
+
+  def restore_relations
+    efficiently_restore_relations
+  end
+
+  def enqueue_real_destroy_job
+    DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
+  end
+
   protected
+
+  def efficiently_restore_relations
+    Asset.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Listen.with_deleted.where(track_owner_id: id).update_all(deleted_at: nil)
+    Listen.with_deleted.where(listener_id: id).update_all(deleted_at: nil)
+    Playlist.with_deleted.joins(:assets).where(assets: { user_id: id })
+            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+    Track.with_deleted.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: nil)
+    Comment.with_deleted.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: nil)
+
+    Track.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Playlist.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+    Comment.with_deleted.where(user_id: id).update_all(deleted_at: nil)
+  end
+
+  def efficiently_soft_delete_relations(time = Time.now)
+    Listen.where(track_owner_id: id).update_all(deleted_at: time)
+    Listen.where(listener_id: id).update_all(deleted_at: time)
+    Topic.where(user_id: id).where('posts_count < 2').destroy_all
+    Playlist.joins(:assets).where(assets: { user_id: id })
+            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', time])
+    Track.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: time)
+    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
+           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: time)
+
+    assets.update_all(deleted_at: time)
+
+    %w[tracks playlists comments].each do |user_relation|
+      send(user_relation).update_all(deleted_at: time)
+    end
+  end
 
   def efficiently_destroy_relations
     Listen.where(track_owner_id: id).delete_all
     Listen.where(listener_id: id).delete_all
-    Topic.where(user_id: id).where('posts_count < 2').destroy_all # get rid of all orphaned topics
-
     Playlist.joins(:assets).where(assets: { user_id: id })
             .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
     Track.joins(:asset).where(assets: { user_id: id }).delete_all
@@ -260,6 +332,7 @@ end
 #  crypted_password   :string(128)      default(""), not null
 #  current_login_at   :datetime
 #  current_login_ip   :string(255)
+#  deleted_at         :datetime
 #  display_name       :string(255)
 #  email              :string(100)
 #  followers_count    :integer          default(0)

@@ -23,6 +23,7 @@ class Configurable
     :amazon_access_key_id,
     :amazon_cloud_front_domain_name,
     :amazon_cloud_front_key_pair_id,
+    :amazon_cloud_front_private_key,
     :amazon_s3_bucket_name,
     :amazon_s3_region,
     :amazon_secret_access_key,
@@ -48,8 +49,14 @@ class Configurable
     @environment = environment
     @upgraded = {}
     @deprecated = []
-    rewrite_attributes(attributes).each { |name, value| public_send("#{name}=", value) }
+    update(attributes)
     print_upgrade_warning
+  end
+
+  def update(attributes)
+    rewrite_attributes(attributes).each do |name, value|
+      public_send("#{name}=", value)
+    end
   end
 
   def method_missing(method, *attributes, &block)

@@ -100,6 +100,7 @@ RSpec.describe AssetsController, type: :controller do
 
     it "should enqueue a CreateAudioFeature job if an asset does not have audio feature" do
       asset = assets(:valid_mp3_2)
+      asset.audio_feature.delete
 
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
 
@@ -138,7 +139,7 @@ RSpec.describe AssetsController, type: :controller do
     end
 
     it "should display user's track if it is hot" do
-      assets(:valid_mp3).update_attributes(hotness: 2)
+      assets(:valid_mp3).update(hotness: 2)
 
       get :index, params: { user_id: users(:sudara).login }
       expect(response.body).to match(/Hot Tracks this week/)

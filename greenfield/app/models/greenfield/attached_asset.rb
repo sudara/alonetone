@@ -24,6 +24,8 @@ module Greenfield
     validates_attachment_presence :mp3, message: 'must be set. Make sure you chose a file to upload!'
     validates_attachment_content_type :mp3, content_type: ['audio/mpeg', 'audio/mp3'], message: " was wrong. It doesn't look like you uploaded a valid mp3 file. Could you double check?"
 
+    has_one_attached :audio_file
+
     def permalink
       "#{id}-@attachment"
     end
@@ -31,9 +33,5 @@ module Greenfield
     def length
       Asset.formatted_time(self[:length])
     end
-
-    # This stuff is stubbed for compatibility with Mp3PaperclipProcessor
-    attr_accessor :title
-    def generate_permalink!; end
   end
 end

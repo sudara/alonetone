@@ -10,16 +10,16 @@
 <% end %>
 
 <% if logged_in? %>
-<div class="footer_forum_topics">
+<div class="footer_forum_topics" data-turbolinks="false">
   <div class="footer_forum_topics_inner">
     <a href="/discuss" class="forum_view_all">
         View all... &nbsp;<i class="icon_caret">
-        <%= render file: svg_path('svg/icon_caret.svg') %>
+        <%== render file: svg_path('svg/icon_caret.svg') %>
         </i>
     </a>
     <h3>Latest forum topics</h3>
     <ul>
-    <% latest_forum_topics.resolve.each do |topic|  %>
+    <% latest_forum_topics.each do |topic|  %>
       <li>
         <div class="forum_topic"><%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %> </div>
         <div class="forum_author">by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
@@ -34,8 +34,8 @@
   <div class="footer_columns">
     <div class="footer_column">
       <h3 class="footer_column_header">alone<em>tone</em> radio</h3>
-      <a href="/radio/">
-        <%= render file: svg_path('svg/icon_radio.svg') %>
+      <a href="/radio/latest">
+        <%== render file: svg_path('svg/icon_radio.svg') %>
       </a>
     </div>
 
@@ -65,7 +65,7 @@
       <h3 class="footer_column_header">More</h3>
       <div><%= link_to "About", "/about"%></div>
       <div><%= link_to "Stats", "/about/stats"%></div>
-      <div><%= link_to "Forums", "/discuss"%></div>
+      <div data-turbolinks="false"><%= link_to "Forums", "/discuss"%></div>
       <div><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %></div>
     </div>
 

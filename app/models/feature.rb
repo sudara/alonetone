@@ -47,7 +47,7 @@ class Feature < ActiveRecord::Base
   end
 
   def publish!
-    update_attributes(published: true, published_at: Time.now)
+    update(published: true, published_at: Time.now)
   end
 end
 

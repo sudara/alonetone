@@ -1,20 +1,8 @@
 <div id="columns">
   <div id="left">
-    <div class="mini_paginator top_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-    <div id="radio_tracks" class="box">
-        <%= render partial: 'assets/asset', collection: @assets  %>
-    </div>
-    <div class="mini_paginator bottom_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-  </div>
-  <div id="right">
     <div id="radio" class="box">
-      <h2 class='box'>Choose A Radio Flavor, Dear Friend</h2>
-      <div id="radio_options" class='box'>
-        <div class="static_content" id="radio_controls">
+      <h2>Choose A Radio Flavor, Dear Friend</h2>
+        <div id="radio_controls">
           <ul>
             <li><%= link_to_unless_current 'Latest uploaded', radio_source_home_path('latest') %></li>
             <li><%= link_to_unless_current 'Kicking ass', radio_source_home_path('popular') %></li>
@@ -30,7 +18,17 @@
             <% end %>
           </ul>
         </div>
-      </div>
+    </div>
+  </div>
+  <div id="right">
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
+    <div id="radio_tracks" class="box">
+        <%= render partial: 'assets/asset', collection: @assets  %>
+    </div>
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @pagy %>
     </div>
   </div>
 </div>

@@ -14,12 +14,38 @@ RSpec.describe Track, type: :model do
   end
 
   context "as a fav" do
-    subject { users(:arthur).tracks.favorites.create(asset: assets(:valid_mp3)) }
+    let(:user) { users(:will_studd) }
+
     it "should create a favorite playlist if its the first fav" do
-      expect { subject }.to change { Track.count }
+      expect(user.playlists.favorites.count).to eq(0)
+      expect do
+        user.tracks.favorites.create(asset: assets(:henri_willig_finest_cheese))
+      end.to change(Track, :count).by(+1)
+      expect(user.playlists.favorites.count).to eq(1)
     end
 
     it 'should use an existing favorites playlist' do
+      expect(user.playlists.favorites.count).to eq(0)
+      expect do
+        user.tracks.favorites.create(asset: assets(:henri_willig_finest_cheese))
+        user.tracks.favorites.create(asset: assets(:henri_willig_the_goat))
+      end.to change(Track, :count).by(+2)
+      expect(user.playlists.favorites.count).to eq(1)
+    end
+  end
+
+  describe "soft deletion" do
+    it "soft deletes" do
+      expect do
+        Track.all.map(&:soft_delete)
+      end.not_to change { Track.unscoped.count }
+    end
+
+    it "changes scope" do
+      original_count = Track.count
+      expect do
+        Track.all.map(&:soft_delete)
+      end.to change { Track.count }.from(original_count).to(0)
     end
   end
 end

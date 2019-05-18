@@ -27,10 +27,25 @@ module RSpec
       end
 
       def file_fixture_asset(path, filename: nil, content_type: nil, user: nil)
-        Asset.create(
-          user: user || users(:sudara),
-          mp3: file_fixture_uploaded_file(path, filename: filename, content_type: content_type)
+        asset = process_file_fixture_uploaded_file(
+          path, filename: filename, content_type: content_type, user: user
         )
+        raise(
+          ArgumentError,
+          "Can't process file fixture at `#{file_fixture_pathname(path).to_s}'"
+        ) if asset.nil?
+        asset
+      end
+
+      private
+
+      def process_file_fixture_uploaded_file(path, filename: nil, content_type: nil, user: nil)
+        Upload.process(
+          user: user || users(:sudara),
+          files: [
+            file_fixture_uploaded_file(path, filename: filename, content_type: content_type)
+          ]
+        ).assets.first
       end
     end
   end

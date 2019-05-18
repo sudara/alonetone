@@ -64,8 +64,7 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user)
-                    .select('distinct assets.*, listens.created_at'), page_param: :listens_page, items: 10)
+    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_param: :listens_page, items: 10)
     @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page, items: 10) if @user.favorites.present?
     if request.xhr?
       render_desired_partial
@@ -128,7 +127,7 @@ class PlaylistsController < ApplicationController
   end
 
   def update
-    if @playlist.update_attributes(playlist_params)
+    if @playlist.update(playlist_params)
       redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.'
     else
       render action: "edit"
