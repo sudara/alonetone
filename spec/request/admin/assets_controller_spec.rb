@@ -25,7 +25,7 @@ RSpec.describe Admin::AssetsController, type: :request do
   describe "unspam individual assets" do
     let(:track) { assets(:spam_track) }
 
-    it "should unspam the comment" do
+    it "should unspam the track" do
       akismet_stub_submit_ham
       put unspam_admin_asset_path(track.id)
       expect(track.reload.is_spam).to eq(false)

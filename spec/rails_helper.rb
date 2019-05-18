@@ -8,6 +8,7 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
+require 'percy'
 
 # The suite needs to be able to connect to localhost for feature specs. Percy
 # sends its build response out of the test process so it also needs to connect
@@ -21,6 +22,10 @@ WebMock.disable_net_connect!(
 ActiveRecord::Migration.maintain_test_schema!
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+# Include helpers into the fixture context to generate data which is hard
+# to write by hand.
+ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
 # Magic incantation to make Capybara run the feature specs. Nobody knows
 # why this isn't a default in the gem.
@@ -37,9 +42,6 @@ Capybara.javascript_driver = :headless_chrome
 # Configure the HTTP server to be silent. Note that Capybara would figure out
 # to use Puma on its own if we remove this line.
 Capybara.server = :puma, { Silent: true }
-
-# Set default resolutions for visual regression testing.
-Percy.config.default_widths = [375, 1280]
 
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
@@ -65,16 +67,16 @@ RSpec.configure do |config|
   config.include Authlogic::TestCase, type: :controller
   config.include Authlogic::TestCase, type: :request
   config.include RSpec::Support::AkismetHelpers
+  config.include RSpec::Support::CapybaraHelpers, type: :feature
+  config.include RSpec::Support::ConfigurationHelpers
   config.include RSpec::Support::FileFixtureHelpers
   config.include RSpec::Support::HTMLMatchers, type: :helper
   config.include RSpec::Support::HTMLMatchers, type: :request
   config.include RSpec::Support::LittleHelpers
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
-  config.include RSpec::Support::CapybaraHelpers, type: :feature
 
   config.before(:suite) do
-    Percy::Capybara.initialize_build
     InvisibleCaptcha.timestamp_enabled = false
   end
 
@@ -89,9 +91,5 @@ RSpec.configure do |config|
 
   config.before(:example, type: :controller) do
     activate_authlogic
-  end
-
-  config.after(:suite) do
-    Percy::Capybara.finalize_build
   end
 end

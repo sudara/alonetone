@@ -8,7 +8,7 @@
 	<%= link_to user_comments_path(@user.login), class: 'view_all' do %>
     <span>view all &nbsp;
       <i class="icon_caret">
-        <%= render file: svg_path('svg/icon_caret.svg') %>
+        <%== render file: svg_path('svg/icon_caret.svg') %>
       </i>
     </span>
 	<% end if @comments.size > 4 %>

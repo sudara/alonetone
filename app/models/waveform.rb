@@ -1,46 +1,74 @@
+# Generates a list of RMS-like amplitudes which can be used to render a
+# waveform for an MP3.
 module Waveform
-  def self.extract(file)
-    tmp = Tempfile.new(['resampled-upload', '.wav'])
+  LENGTH = 500
 
-    # resample the mp3 down to 8KHz to make it more manageable
+  class Reduction
+    attr_reader :sound
+    attr_reader :slice_size
+
+    def initialize(sound)
+      @sound = sound
+      self.info = sound.info
+    end
+
+    def mono?
+      @mono
+    end
+
+    def samples
+      samples = []
+      while signal = read
+        rms = 0.0
+        for frame in signal
+          rms += (mono? ? frame : frame.sum)**2
+        end
+        samples << Math.sqrt(rms).round
+      end
+      samples
+    end
+
+    private
+
+    attr_reader :signal
+
+    def info=(info)
+      @mono = info.channels == 1
+      @slice_size = (info.frames / Waveform::LENGTH.to_f).ceil
+    end
+
+    def read
+      signal = sound.read(:int, slice_size)
+      signal.real_size == 0 ? nil : signal
+    end
+  end
+
+  def self.extract(file)
+    Tempfile.open(['resampled-upload', '.wav']) do |tempfile|
+      reduce_file(tempfile) if decode_resample(file, tempfile)
+    end
+  end
+
+  # Resample the source MP3 down to 8KHz to make it more manageable.
+  def self.decode_resample(file, tempfile)
     system(
       'lame',
       '--quiet',
       '--mp3input',
       '--resample', '8',
       '--decode', Shellwords.shellescape(file),
-      Shellwords.shellescape(tmp.path)
+      Shellwords.shellescape(tempfile.path),
+      out: File::NULL, err: File::NULL
     )
+  end
 
-    # lame can only downsample to 8KHz, but that's still
-    # way too high so we do a second resampling here
-    # computing a RMS-like quantity over 500 slices
-    waveform = []
-    input = RubyAudio::Sound.open(tmp.path)
-    begin
-      rms = 0.0
-      rms_size = islice = 0
-      slice_size = input.info.frames / 500
-      is_mono = input.info.channels == 1
-      until (signal = input.read(:int, 300)).real_size.zero?
-        signal.each do |frame|
-          mono = is_mono ? frame : frame.sum
-          rms += mono * mono
-        end
+  def self.reduce_file(tempfile)
+    RubyAudio::Sound.open(tempfile.path) { |sound| reduce(sound) }
+  rescue RubyAudio::Error
+  end
 
-        rms_size += signal.real_size
-        next unless rms_size > slice_size
-
-        waveform << Math.sqrt(rms).round
-        rms = 0.0
-        rms_size = 0
-      end
-      waveform << Math.sqrt(rms)
-    ensure
-      input.close
-      tmp.close!
-    end
-
-    waveform
+  # Compute RMS-like values to reduce the number of aplitudes to 500.
+  def self.reduce(sound)
+    Waveform::Reduction.new(sound).samples
   end
 end

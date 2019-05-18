@@ -1,21 +1,65 @@
-<%= render partial: 'users/user' %>
+<% if white_theme_enabled? %>
 
-<% content_for :left do %>
-  <h2 class="box"><%= @user.name %>'s listening history</h2>
-  <div class="mini_paginator">
-    <%== pagy_nav @listens_pagy %>
+  <div class="history">
+
+  <% content_for :left do %>
+    <h2><%= @user.name %>'s listening history</h2>
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @listens_pagy %>
+    </div>
+    <%= render partial: 'users/listen', collection: @listens %>
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @listens_pagy %>
+    </div>
+
+  <% end %>
+
+
+  <% content_for :right do %>
+
+    <h2>Latest Listens to your tracks</h2>
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @track_plays_pagy %>
+    </div>
+    <div class="box">
+      <%= render partial: 'users/track_play', collection: @track_plays %>
+    </div>
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @track_plays_pagy %>
+    </div>
+
   </div>
-  <%= render partial: 'users/listen', collection: @listens %>
+
+  <% end if authorized? %>
+
+
+
+
+<% else %>
+
+  <%= render partial: 'users/user' %>
+
+
+  <% content_for :left do %>
+    <h2 class="box"><%= @user.name %>'s listening history</h2>
+    <div class="mini_paginator">
+      <%== pagy_nav @listens_pagy %>
+    </div>
+    <%= render partial: 'users/listen', collection: @listens %>
+  <% end %>
+
+
+  <% content_for :right do %>
+    <div class ="all_listens box">
+    <h2 class="box">Latest Listens to your tracks</h2>
+    <div class="mini_paginator">
+      <%== pagy_nav @track_plays_pagy %>
+    </div>
+    <%= render partial: 'users/track_play', collection: @track_plays %>
+  </div>
+
+  <% end if authorized? %>
+
+
 <% end %>
 
-
-<% content_for :right do %>
-  <div class ="all_listens box">
-  <h2 class="box">Latest Listens to your tracks</h2>
-  <div class="mini_paginator">
-    <%== pagy_nav @track_plays_pagy %>
-  </div>
-  <%= render partial: 'users/track_play', collection: @track_plays %>
-</div>
-
-<% end if authorized? %>

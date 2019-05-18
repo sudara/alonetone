@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.2'
+git_source(:github) { |name| "https://github.com/#{name}.git" }
+
+gem 'rails', '~> 6.0.0.rc1'
 gem 'mysql2'
 gem 'puma'
 
@@ -14,12 +16,15 @@ gem 'sometimes'
 gem 'awesome_print', require: 'ap'
 
 # uploading
+gem 'http-2' # used by AWS SDK but not in dependencies
+gem 'aws-sdk-cloudfront'
 gem 'aws-sdk-s3'
-gem 'paperclip', '~> 6.0.0'
-gem 'rubyzip'
-gem 'ruby-mp3info', require: 'mp3info'
+gem 'image_processing'
 gem 'mime-types'
+gem 'paperclip', '~> 6.0.0'
 gem 'ruby-audio'
+gem 'ruby-mp3info', require: 'mp3info'
+gem 'rubyzip'
 gem 's3_direct_upload'
 
 # active record
@@ -33,12 +38,8 @@ gem 'request_store' # for authlogic
 gem 'redcarpet'
 gem 'country_select'
 gem 'dynamic_form'
-gem 'simple_form'
 gem 'local_time'
 gem 'pagy'
-
-# deprecated
-gem 'record_tag_helper'
 
 # external services
 gem 'rakismet'
@@ -58,14 +59,13 @@ gem 'sass-rails'
 gem 'compass-rails'
 gem 'yui-compressor'
 gem 'uglifier'
-gem 'coffee-rails'
+gem 'coffee-rails', github: 'rails/coffee-rails'
 gem 'soundmanager2-rails'
 gem 'turbolinks'
-gem 'cloudfront-signer'
 
 # monitoring & perf
 gem 'newrelic_rpm'
-gem 'skylight'
+gem 'skylight', '>= 4.0.0.beta'
 gem 'sidekiq'
 gem 'dalli'
 

@@ -82,8 +82,16 @@ ul.playlists {
 }
 
 .playlists_container {
-  @include match-dynamic-site-width();
-  max-width: 960px;
+  h2 {
+    color: $samo-orange;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  max-width: 1032px;
+  padding: 0 $baseline * 1.5;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
   ul.playlists {
     margin-right: -36px;
     li {

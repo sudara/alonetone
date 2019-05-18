@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-    @users = User.includes(:pic).paginate_by_params(params)
+    @users = User.includes(:pic, :profile).paginate_by_params(params)
     @sort = params[:sort]
     @user_count = User.count
     @active     = User.where("assets_count > 0").count
@@ -30,8 +30,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if is_a_bot? && @user.valid?
+    @user = User.new(user_params_with_ip)
+
+    if @user.spam?
+      @user.is_spam = true
+      # since we don't have any relations at this point yet,
+      # only perform soft-deletion
+      @user.soft_delete
+      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+      redirect_to logout_path
+    elsif is_a_bot? && @user.valid?
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)
     elsif @user.valid? && @user.save_without_session_maintenance
@@ -72,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
@@ -94,7 +102,9 @@ class UsersController < ApplicationController
     redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
-      @user.destroy # this will run "efficiently_destroy_relations" before_destory callback
+
+      @user.soft_delete_with_relations
+
       if moderator?
         redirect_to root_path
       else
@@ -117,6 +127,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
+  end
+
+  def user_params_with_ip
+    user_params.merge(current_login_ip: request.remote_ip)
   end
 
   def prepare_meta_tags

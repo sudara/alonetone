@@ -48,18 +48,13 @@
           </div>
         </div>
 
-        <% if moderator? %>
-          <%= f.simple_fields_for :greenfield_downloads do |sf| %>
-            <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
-          <% end %>
-        <% end %>
         <div class="edit_playlist_info_right_column_private_and_hidden">
           <div class="input">
             <%= f.check_box :private %>
             <label for="playlist_private"><span>Private</span></label>
-          </div> 
+          </div>
           <span class="private_notice">| Playlists are hidden until they have more than 2 tracks</span>
-          
+
         </div>
     </div>
     <div class="edit_playlist_info_bottom">
@@ -71,7 +66,7 @@
 <div id="columns" class="edit_playlist_columns" data-controller="playlist-edit">
   <div id="left">
     <p class="left_instructions">
-      You can reorder your playlist by dragging your tracks. Remove them from the playlist with the <span class="remove-inner-inline"><%= render file: svg_path('svg/icon_x.svg') %></span>
+      You can reorder your playlist by dragging your tracks. Remove them from the playlist with the <span class="remove-inner-inline"><%== render file: svg_path('svg/icon_x.svg') %></span>
  icon.
     </p>
     <div class="box">
@@ -87,7 +82,7 @@
           <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
           <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
             <div class="remove-inner">
-                <%= render file: svg_path('svg/icon_x.svg') %>
+                <%== render file: svg_path('svg/icon_x.svg') %>
             </div>
           </a>
         </div>
@@ -106,7 +101,7 @@
 
   <div id="right">
     <p class="right_instructions">
-       Click the <span class="add-inner-inline"><%= render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
+       Click the <span class="add-inner-inline"><%== render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
         <div class="right_column_box_header">
@@ -131,12 +126,27 @@
               <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
               <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
                 <div class="add-inner">
-                  <%= render file: svg_path('svg/icon_+.svg') %>
+                  <%== render file: svg_path('svg/icon_+.svg') %>
                 </div>
               </a>
               <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
                 <div class="remove-inner">
-                    <%= render file: svg_path('svg/icon_x.svg') %>
+                    <%== render file: svg_path('svg/icon_x.svg') %>
+                </div>
+              </a>
+            </div>
+          <% end %>
+          <% @assets.each do |asset| %>
+            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
+              <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
+              <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
+                <div class="add-inner">
+                  <%== render file: svg_path('svg/icon_+.svg') %>
+                </div>
+              </a>
+              <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
+                <div class="remove-inner">
+                    <%== render file: svg_path('svg/icon_x.svg') %>
                 </div>
               </a>
             </div>

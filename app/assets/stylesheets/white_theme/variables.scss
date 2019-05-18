@@ -21,19 +21,19 @@ $mobile-site-width-narrow: 96%;
   }
 }
 
-$baseline: 24px; // Used for various layout spacing
+$baseline: 24px; // used for various layout spacing
 
 // media tiers
 
 $mobile: 'only screen and (max-width: 420px)';
+$two-column-narrow: 'only screen and (min-width: 749px) and (max-width: 920px)';
 $one-column: 'only screen and (max-width: 748px)';
 
 // fonts
 
 $black-font: 'Alright Sans Black', sans-serif;
-$sans-font: 'Alright Sans', sans-serif; // "Alright Sans Bold" exists for font-weight: bold or <strong>
+$sans-font: 'Alright Sans', sans-serif; // "Alright Sans Bold" exists using font-weight: bold or <strong> on this fontface
 $medium-sans-font: 'Alright Sans Medium', sans-serif;
-$serif-font: 'Harriet Text', serif;
 
 // site colors
 
@@ -81,13 +81,6 @@ $waveform-playing: #302f2f;
   border-radius: 4px;
   background-color: $new-samo-gray;
   box-shadow: none;
-  @if $type == 'admin' {
-  }
-  @if $type == 'jumbo' {
-    height: 60px;
-    line-height: 60px;
-    font-size: 16px;
-  }
   &:hover {
     background-color: #888;
   }

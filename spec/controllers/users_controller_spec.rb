@@ -28,6 +28,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context 'creating' do
+    before :each do
+      akismet_stub_response_ham
+    end
+
     it "should successfully post to users/create" do
       set_good_request_headers && create_user
       expect(response).to redirect_to("/login?already_joined=true")
@@ -95,6 +99,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   context 'activation' do
+    before :each do
+      akismet_stub_response_ham
+    end
+
     it "should activate with a for reals perishable token" do
       set_good_request_headers && activate_authlogic && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
@@ -257,6 +265,62 @@ RSpec.describe UsersController, type: :controller do
       expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
       expect(users(:arthur).current_login_ip).to eq('9.9.9.9')
       expect(users(:arthur).last_request_at.utc).to be < 1.hour.ago
+    end
+  end
+
+  context '#destroy' do
+    context "admin" do
+      before do
+        login(:sudara)
+      end
+
+      it "should allow admin to delete another user" do
+        expect {
+          delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        }.to change(User, :count).by(-1)
+      end
+
+      it "should redirect to root path" do
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "sets deleted_at to true" do
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        expect(users(:arthur).deleted_at).not_to be_nil
+      end
+
+      it "soft deletes all associated records" do
+        expect(users(:arthur).assets.count).to be > 0
+        expect(users(:arthur).tracks.count).to be > 0
+        expect(users(:arthur).listens.count).to be > 0
+        expect(users(:arthur).playlists.count).to be > 0
+        expect(users(:arthur).topics.count).to be > 0
+        expect(users(:arthur).topics.count).to be > 0
+
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+
+        users(:arthur).reload
+
+        expect(users(:arthur).assets.count).to eq(0)
+        expect(users(:arthur).tracks.count).to eq(0)
+        expect(users(:arthur).listens.count).to eq(0)
+        expect(users(:arthur).playlists.count).to eq(0)
+        expect(users(:arthur).topics.count).to eq(0)
+        expect(users(:arthur).comments.count).to eq(0)
+      end
+
+      it "enqueues the job to really destroy the record" do
+        delete :destroy, params: { id: 'arthur', login: 'arthur' }
+        expect(enqueued_jobs.size).to eq 1
+        expect(enqueued_jobs.first[:queue]).to eq "default"
+        expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
+      end
+    end
+
+    context "user" do
+      # would like to figure out how to loop through users ^
+      # it would not let me maintain correct current_user session between tests
     end
   end
 

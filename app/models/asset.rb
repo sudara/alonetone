@@ -1,15 +1,28 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
-  concerned_with :uploading, :radio, :statistics, :greenfield
+  include Paperclip
+  include SoftDeletion
+
+  require_dependency 'asset/radio'
+  require_dependency 'asset/statistics'
+  require_dependency 'asset/uploading'
+  require_dependency 'asset/waveform'
+
+  include Asset::Radio
+  include Asset::Statistics
+  include Asset::Uploading
+  include Asset::Waveform
+
   attribute :user_agent, :string
+  serialize :waveform, Array
 
   scope :published,       -> { where(private: false, is_spam: false) }
   scope :not_spam,        -> { where(is_spam: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
-  scope :random_order,    -> { order("RAND()") }
+  scope :random_order,    -> { order(Arel.sql('RAND()')) }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
   scope :not_current,     ->(id) { where('id != ?', id) }
   scope :for_user,        ->(user_id) { where(user_id: user_id) }
@@ -18,7 +31,9 @@ class Asset < ApplicationRecord
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
 
   belongs_to :user, counter_cache: true
-  has_one  :audio_feature
+  has_one :audio_feature, dependent: :destroy
+  accepts_nested_attributes_for :audio_feature
+  has_one :greenfield_post, class_name: '::Greenfield::Post'
   has_many :tracks,    dependent: :destroy
   has_many :playlists, through: :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
@@ -33,8 +48,9 @@ class Asset < ApplicationRecord
     source: :user,
     through: :tracks
 
-  has_permalink :name, true
-  before_update :generate_permalink!, if: :title_changed?
+  has_one_attached :audio_file
+
+  before_save :ensure_unique_permalink, if: :permalink_changed?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
@@ -45,13 +61,7 @@ class Asset < ApplicationRecord
                   user_role: proc { role },
                   comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
-  validates_presence_of :user_id
-
-  # override has_permalink method to ensure we don't get empty permas
-  def generate_permalink!
-    self.permalink = fix_duplication(normalize(send(generate_from)))
-    self.permalink = fix_duplication("untitled") unless permalink.present?
-  end
+  validates :user, presence: true
 
   def self.latest(limit = 10)
     includes(user: :pic).limit(limit).order('assets.id DESC')
@@ -82,12 +92,21 @@ class Asset < ApplicationRecord
     object_id
   end
 
+  def title=(title)
+    super
+    rename
+  end
+
+  def mp3_file_name=(mp3_file_name)
+    super
+    rename
+  end
+
   # make sure the title is there, and if not, the filename is used...
   def name
     return title.strip if title.present?
 
-    name = File.basename(mp3_file_name.to_s, '.*').humanize
-    name.blank? ? 'untitled' : name
+    basename.humanize.presence || 'untitled'
   end
 
   def first_playlist
@@ -164,6 +183,27 @@ class Asset < ApplicationRecord
       'user'
     end
   end
+
+  private
+
+  include HasPermalink::InstanceMethods
+
+  # Required when calling fix_duplication.
+  def auto_fix_duplication
+    true
+  end
+
+  def rename
+    self.permalink = normalize(name).presence || 'untitled'
+  end
+
+  def ensure_unique_permalink
+    self.permalink = fix_duplication(permalink)
+  end
+
+  def basename
+    File.basename(mp3_file_name.to_s, '.*')
+  end
 end
 
 # == Schema Information
@@ -176,6 +216,7 @@ end
 #  bitrate          :integer
 #  comments_count   :integer          default(0)
 #  credits          :text(4294967295)
+#  deleted_at       :datetime
 #  description      :text(4294967295)
 #  description_html :text(4294967295)
 #  favorites_count  :integer          default(0)
@@ -195,7 +236,6 @@ end
 #  samplerate       :integer
 #  thumbnails_count :integer          default(0)
 #  title            :string(255)
-#  waveform         :text(4294967295)
 #  youtube_embed    :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime

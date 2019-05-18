@@ -41,7 +41,7 @@ class FeaturesController < ApplicationController
   end
 
   def update
-    if @feature.update_attributes(params[:feature])
+    if @feature.update(params[:feature])
       flash[:notice] = 'Feature was successfully updated.'
       redirect_to(@feature)
     else

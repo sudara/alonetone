@@ -1,15 +1,22 @@
 require 'sidekiq/web'
-require 'admin_constraint'
+require 'moderator_constraint'
 
 Alonetone::Application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
+  mount Sidekiq::Web => '/sidekiq', :constraints => ModeratorConstraint.new
   constraints Greenfield::Constraints do
     mount Greenfield::Engine => "/"
   end
 
   namespace :admin do
-    resources :users
-    resources :comments do
+    resources :users, path: 'users/(:filter_by)', only: [:index] do
+      member do
+        put :delete
+        put :restore
+        put :unspam
+        put :spam
+      end
+    end
+    resources :comments, path: 'comments/(:filter_by)', only: [:index] do
        member do
         put :unspam
         put :spam
@@ -18,7 +25,7 @@ Alonetone::Application.routes.draw do
         put :mark_group_as_spam
       end
     end
-    resources :assets do
+    resources :assets, path: 'assets/(:filter_by)', only: [:index] do
       member do
         put :unspam
         put :spam
@@ -49,6 +56,7 @@ Alonetone::Application.routes.draw do
     get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
     # admin stuff
+    get 'admin' => 'admin#index'
     get 'secretz' => 'admin#secretz'
     get 'toggle_theme' => 'admin#toggle_theme'
 

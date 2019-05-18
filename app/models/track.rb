@@ -1,4 +1,6 @@
 class Track < ActiveRecord::Base
+  include SoftDeletion
+
   belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :asset
   belongs_to :user
@@ -32,8 +34,9 @@ class Track < ActiveRecord::Base
   end
 
   def ensure_playlist_if_favorite
-    self.playlist_id = Playlist.favorites.where(user_id: user_id).first_or_create.id if is_favorite?
-    true
+    return unless is_favorite?
+
+    self.playlist = Playlist.favorites.where(user_id: user_id).first_or_initialize
   end
 end
 
@@ -42,6 +45,7 @@ end
 # Table name: tracks
 #
 #  id          :integer          not null, primary key
+#  deleted_at  :datetime
 #  is_favorite :boolean          default(FALSE)
 #  position    :integer          default(1)
 #  created_at  :datetime
