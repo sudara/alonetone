@@ -81,6 +81,17 @@ ul.playlists {
   }
 }
 
+.user_playlists {
+  ul.playlists {
+    li.playlist {
+      a.small_playlist_title {
+        padding: 0 8px 8px 8px;
+      }
+    }
+  }
+}
+
+
 .playlists_container {
   h2 {
     color: $samo-orange;
