@@ -1,17 +1,22 @@
-<div id="columns_header">
-  <% if @user.assets_count > 0 %>
-    <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
-  <% end %>
-</div>
-<div id='columns'>
+<div id="columns" class="user_tracks">
   <div id="left">
-    <div id="user_tracks box">
+    <% if @user.assets_count > 0 %>
+    <h2><%= pluralize @user.assets_count, 'tracks'%> by <%= @user.name %></h2>
+    <% end %>
+
+    <div>
       <%= cache([@user, moderator?]) do %>
       <% if @user.assets_count > 0 %>
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy %>
         </div>
+        <div class="box">
         <%= render partial: 'asset', collection: @assets, cached: true %>
+        </div>
+        <div class="mini_paginator bottom_paginator">
+          <%== pagy_nav @pagy %>
+        </div>
+
       <% else %>
        <h2>Looks like <%= @user.name %> hasn't uploaded anything yet!</h2>
       <% end %>
