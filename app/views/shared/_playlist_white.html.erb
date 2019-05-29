@@ -1,4 +1,4 @@
-<%= content_tag_for :li, playlist, class: "small_playlists #{'private' if playlist.private?}" do %>
+<%= content_tag_for :li, playlist, data: { 'id': playlist.id }, class: "small_playlists #{'private' if playlist.private?}" do %>
   <%= link_to user_playlist_path(playlist.user.login, playlist), title: "#{playlist.title}" do %>
     <%= playlist_cover(playlist, variant: :original) %>
 	<% end %>
