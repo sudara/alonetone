@@ -22,7 +22,7 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       format.html { @playlists = @user.playlists.include_private }
       format.js do
-        params["playlist"].each_with_index do |id, position|
+        params[:playlist].each_with_index do |id, position|
           @user.playlists.find(id).update_column(:position, position + 1)
         end
         head :ok

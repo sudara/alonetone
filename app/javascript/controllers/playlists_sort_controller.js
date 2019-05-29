@@ -3,17 +3,17 @@ import Sortable from 'sortablejs'
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['sortable']
+  static targets = ['sortable', 'feedback']
 
   initialize() {
-    this.sortable = new Sortable(this.sortableTarget, {
-      onEnd: () => this.maybePostToSort(),
-    })
-    this.currentParams = this.paramsFromSortables()
+    if (this.data.get('enabled') === 'true') {
+      this.setupSortable()
+    }
   }
 
+  //  "playlist"=>["10", "7", "146", "8", "88", "3895", "160", "8969", "9110", "10434", "14789", "15274", "18687"], "user_id"=>"sudara"}
   paramsFromSortables() {
-    // return `track[]=${this.sortable.toArray().join('&track[]=')}`
+    return `playlist[]=${this.sortable.toArray().join('&playlist[]=')}`
   }
 
   // only fire when order changed
@@ -25,17 +25,23 @@ export default class extends Controller {
     }
   }
 
+  setupSortable() {
+    this.sortable = new Sortable(this.sortableTarget, {
+      onEnd: () => this.maybePostToSort(),
+    })
+    this.currentParams = this.paramsFromSortables()
+  }
+
   sort() {
     Rails.ajax({
-      // url: this.sortUrl,
-      // type: 'POST',
-      // data: this.currentParams,
-      // success: this.displaySuccess.bind(this),
+      url: `${window.location}/sort.js`,
+      type: 'POST',
+      data: this.currentParams,
+      success: this.displaySuccess.bind(this),
     })
   }
 
   displaySuccess() {
-    // this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
-    alert("success!");
+    this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
   }
 }
