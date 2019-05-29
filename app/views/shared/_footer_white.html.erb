@@ -10,7 +10,7 @@
 <% end %>
 
 <% if logged_in? %>
-<div class="footer_forum_topics">
+<div class="footer_forum_topics" data-turbolinks="false">
   <div class="footer_forum_topics_inner">
     <a href="/discuss" class="forum_view_all">
         View all... &nbsp;<i class="icon_caret">
@@ -65,7 +65,7 @@
       <h3 class="footer_column_header">More</h3>
       <div><%= link_to "About", "/about"%></div>
       <div><%= link_to "Stats", "/about/stats"%></div>
-      <div><%= link_to "Forums", "/discuss"%></div>
+      <div data-turbolinks="false"><%= link_to "Forums", "/discuss"%></div>
       <div><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %></div>
     </div>
 

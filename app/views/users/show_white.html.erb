@@ -268,7 +268,7 @@
             Last seen
           </div>
           <div>
-            <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
+            <%= local_time_ago(@user.last_request_at || @user.created_at)%></strong>
           </div>
         </div>
       </div>
