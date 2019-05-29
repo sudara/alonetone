@@ -3,7 +3,9 @@ main {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-    max-width: 960px;
+    max-width: 1032px;
+    padding: 0 $baseline * 1.5;
+    box-sizing: border-box;
     ul.playlists {
       margin-right: -36px;
       li {
