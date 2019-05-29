@@ -70,7 +70,6 @@ export default class extends Controller {
   }
 
   updatePlaylistSize() {
-    const size = this.playlistEdit.sortable.toArray.length
-    this.playlistEdit.sizeTarget.innerHTML = `${size}`
+    this.playlistEdit.updatePlaylistSize()
   }
 }
