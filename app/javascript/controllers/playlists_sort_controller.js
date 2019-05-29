@@ -42,6 +42,6 @@ export default class extends Controller {
   }
 
   displaySuccess() {
-    this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
+    this.feedbackTarget.innerHTML = '<div class="ajax_success"><span>Saved!</span></div>'
   }
 }
