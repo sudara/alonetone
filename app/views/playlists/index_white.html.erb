@@ -3,7 +3,7 @@
   <h1><%= @user.name %>'s Playlists</h1>
   <% if current_user_is_admin_or_moderator_or_owner?(@user) %>
     <p class='sort_instructions'>
-      Drag to reorder. Remember that only the first 4 display on your page!
+      Drag to reorder.
     </p>
     <div class="playlists_feedback" data-target="playlists-sort.feedback">
     </div>
