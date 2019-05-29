@@ -1,7 +1,7 @@
 
-<div class="user_playlists" data-controller="playlists-sort" data-playlists-sort-enabled="<%= current_user_is_admin_or_moderator_or_owner?(@user) %>">
+<div class="user_playlists" data-controller="playlists-sort" data-playlists-sort-enabled="<%= current_user_is_mod_or_owner?(@user) %>">
   <h1><%= @user.name %>'s Playlists</h1>
-  <% if current_user_is_admin_or_moderator_or_owner?(@user) %>
+  <% if current_user_is_mod_or_owner?(@user) %>
     <p class='sort_instructions'>
       Drag to reorder.
     </p>

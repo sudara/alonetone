@@ -81,7 +81,7 @@ class TopicsController < ApplicationController
 
   def authorized?
     !%w[destroy edit update].include?(action_name) ||
-      current_user_is_admin_or_moderator_or_owner?(@topic.user)
+      current_user_is_mod_or_owner?(@topic.user)
   end
 
   def find_forum
