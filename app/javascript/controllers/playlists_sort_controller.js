@@ -42,6 +42,7 @@ export default class extends Controller {
   }
 
   displaySuccess() {
-    this.feedbackTarget.innerHTML = '<div class="ajax_success"><span>Saved!</span></div>'
+    const flashController = this.application.getControllerForElementAndIdentifier(document.getElementsByClassName('floating_feedback')[0], 'flash')
+    flashController.alert('<div class="ajax_success"><span>Saved!</span></div>')
   }
 }
