@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   rescue_from AbstractController::ActionNotFound, with: :show_404
 
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
-    :current_user_is_admin_or_moderator_or_owner?,
+    :current_user_is_mod_or_owner?,
     :current_page, :moderator?, :welcome_back?, :user_setting, :white_theme_enabled?, :latest_forum_topics
 
   # ability to tack these flash types on redirects/renders, access via flash.error
@@ -114,7 +114,7 @@ class ApplicationController < ActionController::Base
     logged_in? && (current_user.admin? || ((current_user.id.to_s == user.id.to_s)))
   end
 
-  def current_user_is_admin_or_moderator_or_owner?(user)
+  def current_user_is_mod_or_owner?(user)
     current_user_is_admin_or_owner?(user) || moderator?
   end
 
