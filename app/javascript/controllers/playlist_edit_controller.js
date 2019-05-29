@@ -3,7 +3,8 @@ import Sortable from 'sortablejs'
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['sortable', 'sortUrl', 'addUrl', 'dropzone', 'sourceTracks', 'size', 'feedback', 'spinner']
+  static targets = ['sortable', 'sortUrl', 'addUrl', 'dropzone', 'sourceTracks',
+    'feedback', 'spinner', 'size', 'trackCount', 'totalTime']
 
   initialize() {
     this.sortable = new Sortable(this.sortableTarget, {
@@ -39,5 +40,18 @@ export default class extends Controller {
 
   displaySuccess() {
     this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
+  }
+
+  updatePlaylistSize() {
+    const size = this.sortable.toArray().length
+    this.sizeTarget.innerHTML =`${size}`
+    this.trackCountTarget.innerHTML = `${size} tracks`
+  }
+
+  calculateTime() {
+    const time = Math.floor(this.position)
+    const min = Math.floor(time / 60)
+    const sec = time % 60
+    this.time = min + ':' + (sec >= 10 ? sec : '0' + sec)
   }
 }
