@@ -105,6 +105,8 @@ div.small_spinner {
 }
 
 .floating_feedback {
+  opacity: 0;
+  visibility: hidden;
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);
