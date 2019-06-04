@@ -18,7 +18,7 @@
     <% if @playlist %>
     <meta property="og:image"       content="<%= playlist_cover_url(@playlist, variant: :greenfield) %>" />
     <% else %>
-    <meta property="og:image"       content="<%= user_image(@user, variant: :greenfield) %>" />
+    <meta property="og:image"       content="<%= user_avatar_url(@user, variant: :greenfield) %>" />
     <% end %>
   <% end %>
 
