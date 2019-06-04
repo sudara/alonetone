@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="edit_playlist_info_bottom">
-      <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+      <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } %>
       <%= submit_tag "save playlist", form: 'edit_playlist' %>
     </div>
     <% end %>
