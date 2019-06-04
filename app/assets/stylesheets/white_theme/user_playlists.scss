@@ -18,28 +18,6 @@ main {
         &.sortable-ghost {
           opacity: .2;
         }
-        &.private {
-          background-color: $dark-gray;
-          position: relative;
-          .private_playlist_padlock {
-            display: block;
-            content: '';
-            background-image: image-url("svg/icon_lock.svg");
-            background-size: 30px 30px;
-            margin-left: 4px;
-            height: 26px;
-            width: 26px;
-            position: absolute;
-            top: 6px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-          }
-          a.small_playlist_title {
-            color: $white;
-            position: relative;
-            &:after {
-            }
-          }
-        }
       }
     }
   }
