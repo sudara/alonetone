@@ -57,9 +57,6 @@ main {
     }
 
     #user_playlists_area {
-      @media #{$mobile} {
-        order: 1;
-      }
       grid-area: playlists;
 
       h2 {
@@ -135,6 +132,10 @@ main {
       .below_box {
         margin-top: -36px;
         margin-bottom: 20px;
+        @media #{$mobile} {
+          margin-top: 0;
+        }
+
       }
     }
 
