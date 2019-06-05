@@ -92,7 +92,7 @@ main {
             }
           }
         }
-  
+
         @media #{$mobile} {
           width: 100%;
           margin-bottom: -$baseline * .75;
@@ -104,7 +104,7 @@ main {
             margin-bottom: $baseline * .75;
           }
         }
-  
+
         @media only screen and (max-width: 1038px) {
           li {
             &:nth-child(1), &:nth-child(2), &:nth-child(3) {
@@ -131,11 +131,13 @@ main {
       }
       .below_box {
         margin-top: -36px;
-        margin-bottom: 20px;
+        margin-bottom: 26px;
         @media #{$mobile} {
           margin-top: 0;
         }
-
+        &.sparse {
+          text-align: left;
+        }
       }
     }
 
@@ -243,7 +245,7 @@ main {
               @media #{$mobile} {
                 margin-left: 0;
               }
-  
+
               &:hover {
                 background-color: #fff;
               }
