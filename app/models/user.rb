@@ -245,6 +245,12 @@ class User < ApplicationRecord
     deleted_at != nil
   end
 
+  def spam_and_mark_for_deletion!
+    @user.spam!   # makes an api request
+    @user.update_column :is_spam, true
+    @user.soft_delete_with_relations
+  end
+
   def soft_delete_with_relations
     soft_delete_relations
     enqueue_real_destroy_job
