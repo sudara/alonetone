@@ -30,7 +30,6 @@ class Playlist < ActiveRecord::Base
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
-  validates_length_of   :description, within: 0..2000, allow_blank: true
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
@@ -133,7 +132,7 @@ class Playlist < ActiveRecord::Base
 
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites_and_set_permalink
-    self.title = self.description = user.name + "'s favorite tracks" if is_favorite?
+    self.title = user.name + "'s favorite tracks" if is_favorite?
     generate_permalink!
   end
 
