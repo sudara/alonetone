@@ -15,7 +15,7 @@ require 'percy'
 # to its API.
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: 'percy.io'
+  allow: ['percy.io', 'chromedriver.storage.googleapis.com']
 )
 
 # Reloads schema.rb when database has pending migrations.
@@ -34,7 +34,7 @@ Capybara.register_driver(:headless_chrome) do |app|
     app,
     browser: :chrome,
     desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: { args: %w[headless disable-gpu no-sandbox] }
+      chromeOptions: { args: %w[headless disable-gpu no-sandbox disable-dev-shm-usage] }
     )
   )
 end
