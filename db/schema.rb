@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_134953) do
+ActiveRecord::Schema.define(version: 2019_06_05_122226) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -235,7 +235,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
 
   create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
-    t.text "description", size: :long
     t.string "image"
     t.integer "user_id"
     t.datetime "created_at"
@@ -255,8 +254,8 @@ ActiveRecord::Schema.define(version: 2019_03_13_134953) do
     t.boolean "has_details", default: false
     t.string "theme"
     t.datetime "published_at"
-    t.datetime "deleted_at"
     t.integer "cover_quality", default: 2
+    t.datetime "deleted_at"
     t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
     t.index ["user_id"], name: "index_playlists_on_user_id"
