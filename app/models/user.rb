@@ -269,6 +269,21 @@ class User < ApplicationRecord
     DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
   end
 
+  def self.filter_by(filter)
+    case filter
+    when "deleted"
+      only_deleted.order('deleted_at DESC')
+    when "is_spam"
+      with_deleted.where(is_spam: true).recent
+    when "not_spam"
+      with_deleted.where(is_spam: false).recent
+    when String
+      where("email like '%#{filter}%' or login like '%#{filter}%'").recent
+    else
+      with_deleted.recent
+    end
+  end
+
   protected
 
   def efficiently_restore_relations
