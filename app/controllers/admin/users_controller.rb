@@ -3,12 +3,7 @@ module Admin
     before_action :set_user, except: %i[index]
 
     def index
-      scope = User.only_deleted if permitted_params[:deleted]
-      scope ||= User.with_deleted.recent
-
-      scope = scope.where(permitted_params[:filter_by]) if permitted_params[:filter_by]
-
-      @pagy, @users = pagy(scope)
+      @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]))
     end
 
     # should we rescue/display any error that occured to admin user
@@ -41,7 +36,7 @@ module Admin
     private
 
     def permitted_params
-      params.permit(:filter_by, :deleted)
+      params.permit(:filter_by)
     end
 
     def set_user
