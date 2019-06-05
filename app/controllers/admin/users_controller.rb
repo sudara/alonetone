@@ -1,6 +1,6 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[delete restore unspam spam]
+    before_action :set_user, except: %i[index]
 
     def index
       scope = User.only_deleted if permitted_params[:deleted]
@@ -28,9 +28,14 @@ module Admin
     end
 
     def spam
-      @user.spam!
-      @user.update_column :is_spam, true
-      @user.soft_delete_with_relations
+      @user.spam_and_mark_for_deletion!
+    end
+
+    def mark_all_users_with_ip_as_spam
+      ip = @user.current_login_ip
+      count = User.where(current_login_ip: ip).count
+      MarkAllUsersWithIpAsSpam.perform_later(ip)
+      redirect_to :index, notice: "#{count} accounts by #{ip} being marked as spam..."
     end
 
     private
