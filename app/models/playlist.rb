@@ -150,7 +150,6 @@ end
 #  cover_quality :integer          default("modern")
 #  credits       :text(4294967295)
 #  deleted_at    :datetime
-#  description   :text(4294967295)
 #  has_details   :boolean          default(FALSE)
 #  image         :string(255)
 #  is_favorite   :boolean          default(FALSE)
