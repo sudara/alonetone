@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
       set_comments_made
     else
       @page_title = "Recent Comments"
-      @pagy, @comments = pagy(Comment.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?))
+      @pagy, @comments = pagy(Comment.on_track.includes(commenter: :pic, commentable: { user: :pic }).public_or_private(moderator?))
       set_spam_comments
     end
     render 'index_white' if white_theme_enabled?
