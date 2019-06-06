@@ -6,7 +6,7 @@ gem 'rails', '~> 6.0.0.rc1'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'sudara/thredded'
+gem 'thredded'
 
 # greenfield
 gem 'greenfield', path: 'greenfield'
@@ -82,7 +82,7 @@ end
 ## Who loves tests! You do? You do!
 group :test do
   gem 'capybara'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false

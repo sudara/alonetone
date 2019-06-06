@@ -3,6 +3,10 @@ import { Controller } from 'stimulus'
 export default class extends Controller {
   static targets = ['menu']
 
+  initialize() {
+    this.menuTarget.style.top = '-118px'
+  }
+
   slideOpen() {
     this.menuTarget.style.top = '0px'
   }
@@ -17,4 +21,6 @@ export default class extends Controller {
       this.slideOpen()
     }
   }
+
+
 }

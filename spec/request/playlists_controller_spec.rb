@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 require "rails_helper"
@@ -33,8 +34,7 @@ RSpec.describe PlaylistsController, type: :request do
         params: {
           playlist: {
             title: '🧀 THE FUNK 🧀',
-            year: '',
-            description: 'Best of Danny de Funk'
+            year: '1999'
           }
         }
       )

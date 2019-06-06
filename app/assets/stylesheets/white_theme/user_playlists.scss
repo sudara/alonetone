@@ -1,0 +1,24 @@
+main {
+  .user_playlists {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1032px;
+    padding: 0 $baseline * 1.5;
+    box-sizing: border-box;
+    .sort_instructions {
+      color: #868686;
+      margin: 8px 0;
+    }
+    
+    ul.playlists {
+      margin-right: -36px;
+      li {
+
+        &.sortable-ghost {
+          opacity: .2;
+        }
+      }
+    }
+  }
+}
