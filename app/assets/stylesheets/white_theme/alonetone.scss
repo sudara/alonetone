@@ -103,3 +103,37 @@ div.small_spinner {
   width: 20px;
   background-size: 100%;
 }
+
+.floating_feedback {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 10px;
+  padding-left: 16px;
+  padding-right: 32px;
+  border: 1px solid #67c906;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 55px;
+  height: 22px;
+  background-color: #FFFFFFEE;
+  z-index: 1;
+  font-weight: bold;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  div.ajax_success {
+    padding-right: 2px;
+    color: #2b8800;
+    padding-top: 6.5px;
+    padding-right: 2px;
+    color: #2b8800;
+    &::after {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      content: image-url("svg/icon_checkmark_green.svg");
+    }
+  }
+}
