@@ -15,7 +15,11 @@
     <meta property="og:type"        content="music.<%= @playlist ? 'album' : 'song' %>" />
     <meta property="og:title"       content="<%= @playlist.try(:title) || @asset.title %>" />
     <meta property="og:description" content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.display_name %>" />
-    <meta property="og:image"       content="<%= playlist_cover_url(@playlist, variant: :greenfield) if @playlist %>" />
+    <% if @playlist %>
+    <meta property="og:image"       content="<%= playlist_cover_url(@playlist, variant: :greenfield) %>" />
+    <% else %>
+    <meta property="og:image"       content="<%= user_avatar_url(@user, variant: :greenfield) %>" />
+    <% end %>
   <% end %>
 
   <%= csrf_meta_tag %>
@@ -61,8 +65,14 @@
   </footer>
 
   <div id='play-svg-container' style='display:none' data-turbolinks-permanent>
-    <%= render file: svg_path('svg/animation_play.svg') %>
+    <%== render file: svg_path('svg/animation_play.svg') %>
   </div>
+
+  <div class="floating_feedback" data-controller="flash">
+    <div class="ajax_success"><span>Saved!</span></div>
+  </div>
+
+
   <%= render partial: 'layouts/greenfield/ga' %>
   <%= render partial: 'shared/headway' if logged_in? %>
 </body>
