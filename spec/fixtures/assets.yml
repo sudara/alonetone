@@ -132,4 +132,4 @@ jamie_kiesl_the_duck:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 2.3.megabytes %>
   length: 140
-  created_at: <%= 1.month.ago %>
+  created_at: 2019-01-01 13:00:03
