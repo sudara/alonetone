@@ -119,7 +119,7 @@ playlist = marie.playlists.build(
   title: 'Before fungi were understood',
   year: Date.today.year - 1
 )
-playlist.description = <<~DESC
+playlist.credits = <<~DESC
   The variety named Camembert de Normandie was granted a protected designation of origin in 1992
   after the original AOC in 1983.
 DESC
@@ -150,7 +150,7 @@ playlist = marie.playlists.build(
   title: 'Raclette',
   year: Date.today.year
 )
-playlist.description = <<~DESC
+playlist.credits = <<~DESC
   Raclette /rəˈklɛt/ is a semi-hard cheese that is usually fashioned into a wheel of about
   6 kg (13 lb).
 DESC
@@ -198,7 +198,7 @@ edible_coating = carole.playlists.build(
   title: 'Edible Coating',
   year: Date.today.year
 )
-edible_coating.description = <<~DESC
+edible_coating.credits = <<~DESC
   Edible coating which is characteristically white in color and has an aroma of mushrooms.
 DESC
 edible_coating.save!
@@ -246,7 +246,7 @@ mrs_applebys_cheshire = petere.playlists.build(
   title: "Mrs Appleby's Cheshire",
   year: Date.today.year - 2
 )
-mrs_applebys_cheshire.description = <<~DESC
+mrs_applebys_cheshire.credits = <<~DESC
   Edible coating which is characteristically white in color and has an aroma of mushrooms.
 DESC
 mrs_applebys_cheshire.save!
@@ -273,9 +273,9 @@ end
 
 # Some random comments
 1.upto(20) do |i|
-  commentable = Asset.order('RAND()').first
+  commentable = Asset.random_order.first
   recipient = commentable.user
-  commenter = User.where.not(id: recipient.id).order('RAND()').first
+  commenter = User.where.not(id: recipient.id).random_order.first
   comment = Comment.new(
     commentable: commentable,
     commenter: commenter,
@@ -291,8 +291,8 @@ end
 
 # Some random favorites
 20.times do
-  user = User.order('RAND()').first
-  asset = Asset.where.not(user_id: user.id).order('RAND()').first
+  user = User.random_order.first
+  asset = Asset.where.not(user_id: user.id).random_order.first
   user.toggle_favorite(asset)
 end
 

@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="edit_playlist_info_bottom">
-      <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+      <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } %>
       <%= submit_tag "save playlist", form: 'edit_playlist' %>
     </div>
     <% end %>
@@ -75,7 +75,7 @@
 <div id="columns" class="edit_playlist_columns" data-controller="playlist-edit">
   <div id="left">
     <p class="left_instructions">
-      You can reorder your playlist by dragging your tracks. Remove them from the playlist with the <span class="remove-inner-inline"><%= render file: svg_path('svg/icon_x.svg') %></span>
+      You can reorder your playlist by dragging your tracks. Remove them from the playlist with the <span class="remove-inner-inline"><%== render file: svg_path('svg/icon_x.svg') %></span>
  icon.
     </p>
     <div class="box">
@@ -86,7 +86,7 @@
         <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
         <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
           <div class="remove-inner">
-              <%= render file: svg_path('svg/icon_x.svg') %>
+              <%== render file: svg_path('svg/icon_x.svg') %>
           </div>
         </a>
       </div>
@@ -105,7 +105,7 @@
 
   <div id="right">
     <p class="right_instructions">
-       Click the <span class="add-inner-inline"><%= render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
+       Click the <span class="add-inner-inline"><%== render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
       <div class="draggable_tracks">
@@ -125,12 +125,12 @@
                 <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
                 <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
                   <div class="add-inner">
-                    <%= render file: svg_path('svg/icon_+.svg') %>
+                    <%== render file: svg_path('svg/icon_+.svg') %>
                   </div>
                 </a>
                 <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
                   <div class="remove-inner">
-                      <%= render file: svg_path('svg/icon_x.svg') %>
+                      <%== render file: svg_path('svg/icon_x.svg') %>
                   </div>
                 </a>
               </div>

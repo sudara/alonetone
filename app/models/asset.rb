@@ -1,17 +1,28 @@
 # frozen_string_literal: true
 
 class Asset < ApplicationRecord
+  include Paperclip
   include SoftDeletion
 
-  concerned_with :uploading, :radio, :statistics, :greenfield
+  require_dependency 'asset/radio'
+  require_dependency 'asset/statistics'
+  require_dependency 'asset/uploading'
+  require_dependency 'asset/waveform'
+
+  include Asset::Radio
+  include Asset::Statistics
+  include Asset::Uploading
+  include Asset::Waveform
+
   attribute :user_agent, :string
+  serialize :waveform, Array
 
   scope :published,       -> { where(private: false, is_spam: false) }
   scope :not_spam,        -> { where(is_spam: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
-  scope :random_order,    -> { order("RAND()") }
+  scope :random_order,    -> { order(Arel.sql('RAND()')) }
   scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
   scope :not_current,     ->(id) { where('id != ?', id) }
   scope :for_user,        ->(user_id) { where(user_id: user_id) }
@@ -22,6 +33,7 @@ class Asset < ApplicationRecord
   belongs_to :user, counter_cache: true
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
+  has_one :greenfield_post, class_name: '::Greenfield::Post'
   has_many :tracks,    dependent: :destroy
   has_many :playlists, through: :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
@@ -38,7 +50,7 @@ class Asset < ApplicationRecord
 
   has_one_attached :audio_file
 
-  before_save :ensure_unique_permalink, if: :permalink_changed?
+  before_save :ensure_unique_permalink, if: :title_changed?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
