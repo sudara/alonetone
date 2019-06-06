@@ -30,7 +30,7 @@ module Admin
       ip = @user.current_login_ip
       count = User.where(current_login_ip: ip).count
       MarkAllUsersWithIpAsSpam.perform_later(ip)
-      redirect_to :index, notice: "#{count} accounts by #{ip} being marked as spam..."
+      redirect_back fallback_location: { action: :index }, notice: "#{count} accounts by #{ip} being marked as spam..."
     end
 
     private
