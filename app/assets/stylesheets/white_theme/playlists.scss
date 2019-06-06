@@ -1,5 +1,3 @@
-// /home, /user, /playlists capsules
-
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
@@ -13,6 +11,27 @@ ul.playlists {
     &:last-child {
       margin-right: 0;
     }
+    &.private {
+      background-color: $dark-gray;
+      position: relative;
+      .private_playlist_padlock {
+        display: block;
+        content: '';
+        background-image: image-url("svg/icon_lock.svg");
+        background-size: 30px 30px;
+        margin-left: 4px;
+        height: 26px;
+        width: 26px;
+        position: absolute;
+        top: 6px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+      }
+      a.small_playlist_title {
+        color: $white;
+        position: relative;
+      }
+    }
+
     font-size: 11px;
     width: 220px;
     margin-right: 26.66px;
@@ -76,6 +95,16 @@ ul.playlists {
         img {
           width: 100%;
         }
+      }
+    }
+  }
+}
+
+.user_playlists, .user_featured_playlists {
+  ul.playlists {
+    li.playlist {
+      a.small_playlist_title {
+        padding: 0 8px 8px 8px;
       }
     }
   }

@@ -11,15 +11,24 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: flex-start;
   .admin_column_left {
-    width: 15%;
+    margin-right: 36px;
+    background-color: #FFF;
+    overflow: hidden;
+    box-shadow: none;
+    h2 {
+      margin-bottom: 0;
+    }
+    
     ul.admin_nav {
       margin: 0;
       li {
         line-height: 34px;
         display: block;
 				&.current {
-					background-color: $gray;
+          background-color: $samo-orange;
+          color: $white;
 					padding: 0 15px;
 				}
         &:hover {
@@ -33,15 +42,10 @@
 					display: block;
 					box-sizing: border-box;
           &:hover {
+            background: $light_gray;
             text-decoration: none;
-            background: $samo-light-gray;
           }
         }
-      }
-      > div {
-				padding-left: 15px;
-				padding-right: 15px;
-        line-height: 34px;
       }
       > ul {
 				padding: 0 15px;
@@ -58,7 +62,7 @@
     }
   }
   .admin_column_right {
-    width: 80%;
+    flex: 1;
 		font-size: 13px;
 		min-width: 768px;
     .pagy-nav {

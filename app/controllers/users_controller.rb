@@ -144,7 +144,7 @@ class UsersController < ApplicationController
     @profile = @user.profile
     @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(user: :pic).limit(5)
-    @playlists = @user.playlists.only_public.includes(:user, :pic)
+    @playlists = @user.playlists.include_private.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
@@ -155,6 +155,7 @@ class UsersController < ApplicationController
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
       @listens = @listens.published
+      @playlists = @playlists.only_public
     end
   end
 

@@ -1,4 +1,4 @@
-<%= content_tag_for :li, playlist, class: 'small_playlists' do %>
+<%= content_tag_for :li, playlist, data: { 'id': playlist.id }, class: "small_playlists #{'private' if playlist.private?}" do %>
   <%= link_to user_playlist_path(playlist.user.login, playlist), title: "#{playlist.title}" do %>
     <%= playlist_cover(playlist, variant: :original) %>
 	<% end %>
@@ -6,4 +6,5 @@
   <div class="small_playlist_user">
   <%= link_to truncate(playlist.user.name, length: 26), user_home_path(playlist.user) unless @user %>
   </div>
+  <div class="private_playlist_padlock"></div>
 <% end %>
