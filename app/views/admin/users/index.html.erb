@@ -39,7 +39,7 @@
               <div>
                 <div><%= link_to user.login, user_path(user.login) %></div>
                 <div><%= user.email %></div>
-                <div><%= user.current_login_ip %><%= link_to "Mark Spam", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
+                <div><%= user.current_login_ip %> <%= link_to "Spam!", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
 </div>
               </div>
             </div>
