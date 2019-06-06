@@ -18,13 +18,13 @@
 <% if @assets.present? %>
   <% content_for :right do %>
     <h2>Tracks that match "<%= @query %>"</h2>
-    <div class="mini_paginator">
+    <div class="mini_paginator top_paginator">
       <%== pagy_nav @assets_pagy %>
     </div>
     <div class="tracks_search_results">
       <%= render partial: 'assets/asset', collection: @assets if @assets %>
     </div>
-    <div class="mini_paginator">
+    <div class="mini_paginator bottom_paginator˝">
       <%== pagy_nav @assets_pagy %>
     </div>
   <% end %>

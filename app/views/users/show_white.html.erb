@@ -17,13 +17,44 @@
     </div>
   </div>
 
-  <% if @user.has_public_playlists? %>
+  <% if @playlists.present? %>
     <div id="user_playlists_area">
-      <div class="user_playlists">
+      <div class="user_featured_playlists">
         <ul class="playlists">
-          <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist %>
+          <%= render partial: 'shared/playlist_white', collection: @playlists.limit(4), as: :playlist %>
         </ul>
       </div>
+      <% if current_user_is_mod_or_owner?(@user) and @user.playlists.include_private.count > 4 %>
+        <div class="below_box">
+          <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
+            <span>view &amp; sort playlists &nbsp;
+              <i class="icon_caret">
+                <%== render file: svg_path('svg/icon_caret.svg') %>
+              </i>
+            </span>
+          <% end %>
+        </div>
+      <% elsif current_user_is_mod_or_owner?(@user) %>
+        <div class="below_box sparse">
+          <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
+            <span>sort playlists &nbsp;
+              <i class="icon_caret">
+                <%== render file: svg_path('svg/icon_caret.svg') %>
+              </i>
+            </span>
+          <% end %>
+        </div>
+      <% elsif @playlists.count > 4  %>
+        <div class="below_box">
+          <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
+            <span>view all &nbsp;
+              <i class="icon_caret">
+                <%== render file: svg_path('svg/icon_caret.svg') %>
+              </i>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 
@@ -259,7 +290,7 @@
             Last seen
           </div>
           <div>
-            <%= local_time_ago(@user.last_login_at || @user.created_at)%></strong>
+            <%= local_time_ago(@user.last_request_at || @user.created_at)%></strong>
           </div>
         </div>
       </div>
