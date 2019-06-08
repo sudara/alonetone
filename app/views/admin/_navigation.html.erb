@@ -1,8 +1,9 @@
 <ul class="admin_nav">
   <%= navigation_item "Users", admin_users_path %>
   <ul>
-    <%= navigation_item 'Deleted', admin_users_path({deleted: true}) %>
+    <%= navigation_item 'Not Spam', admin_users_path({filter_by: :not_spam}) %>
     <%= navigation_item 'Spam', admin_users_path({filter_by: :is_spam}) %>
+    <%= navigation_item 'Deleted', admin_users_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'Tracks', admin_assets_path %>
   <ul>
