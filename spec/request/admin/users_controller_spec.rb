@@ -128,7 +128,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     context "if deleted: true flag is passed" do
       it "should return users with deleted" do
-        get admin_users_path(deleted: true)
+        get admin_users_path(filter_by: :deleted)
         expect(response.body).to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
@@ -144,14 +144,14 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     context "with filter_by" do
       it "should return spam users only if flag is passed" do
-        get admin_users_path({filter_by: { is_spam: true}})
+        get admin_users_path(filter_by: :is_spam)
         expect(response.body).to match(/aaron/)
         expect(response.body).not_to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
 
       it "should return only non spam users if is_spam is set to false" do
-        get admin_users_path({filter_by: { is_spam: false}})
+        get admin_users_path(filter_by: :not_spam)
         expect(response.body).not_to match(/aaron/)
         expect(response.body).to match(/arthur/)
         expect(response.body).to match(/ben/)
