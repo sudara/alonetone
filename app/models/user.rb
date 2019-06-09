@@ -7,7 +7,8 @@ class User < ApplicationRecord
   rakismet_attrs  author: proc { display_name },
                   author_email: proc { email },
                   user_ip: proc { current_login_ip },
-                  content: proc { profile&.bio }
+                  content: proc { profile&.bio },
+                  user_agent: proc { profile&.user_agent }
 
   require_dependency 'user/findability'
   require_dependency 'user/settings'

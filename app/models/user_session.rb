@@ -3,6 +3,7 @@ class UserSession < Authlogic::Session::Base
 
   # override authlogic's version of this to take into account @sudo
   def update_info
+    record.profile.user_agent = controller.request.user_agent
     if record.respond_to?(:current_login_at) && !controller.session[:sudo]
       record.last_login_at = record.current_login_at if record.respond_to?(:last_login_at)
       record.current_login_at = klass.default_timezone == :utc ? Time.now.utc : Time.now
