@@ -82,7 +82,7 @@ end
 ## Who loves tests! You do? You do!
 group :test do
   gem 'capybara'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false

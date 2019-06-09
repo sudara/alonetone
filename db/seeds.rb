@@ -119,7 +119,7 @@ playlist = marie.playlists.build(
   title: 'Before fungi were understood',
   year: Date.today.year - 1
 )
-playlist.description = <<~DESC
+playlist.credits = <<~DESC
   The variety named Camembert de Normandie was granted a protected designation of origin in 1992
   after the original AOC in 1983.
 DESC
@@ -150,7 +150,7 @@ playlist = marie.playlists.build(
   title: 'Raclette',
   year: Date.today.year
 )
-playlist.description = <<~DESC
+playlist.credits = <<~DESC
   Raclette /rəˈklɛt/ is a semi-hard cheese that is usually fashioned into a wheel of about
   6 kg (13 lb).
 DESC
@@ -198,7 +198,7 @@ edible_coating = carole.playlists.build(
   title: 'Edible Coating',
   year: Date.today.year
 )
-edible_coating.description = <<~DESC
+edible_coating.credits = <<~DESC
   Edible coating which is characteristically white in color and has an aroma of mushrooms.
 DESC
 edible_coating.save!
@@ -246,7 +246,7 @@ mrs_applebys_cheshire = petere.playlists.build(
   title: "Mrs Appleby's Cheshire",
   year: Date.today.year - 2
 )
-mrs_applebys_cheshire.description = <<~DESC
+mrs_applebys_cheshire.credits = <<~DESC
   Edible coating which is characteristically white in color and has an aroma of mushrooms.
 DESC
 mrs_applebys_cheshire.save!

@@ -15,7 +15,7 @@ require 'percy'
 # to its API.
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: 'percy.io'
+  allow: ['percy.io', 'chromedriver.storage.googleapis.com']
 )
 
 # Reloads schema.rb when database has pending migrations.
@@ -30,13 +30,12 @@ ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 # Magic incantation to make Capybara run the feature specs. Nobody knows
 # why this isn't a default in the gem.
 Capybara.register_driver(:headless_chrome) do |app|
-  Capybara::Selenium::Driver.new(
-    app,
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+  options.headless!
+
+  Capybara::Selenium::Driver.new app,
     browser: :chrome,
-    desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: { args: %w[headless disable-gpu no-sandbox] }
-    )
-  )
+    options: options
 end
 Capybara.javascript_driver = :headless_chrome
 # Configure the HTTP server to be silent. Note that Capybara would figure out
