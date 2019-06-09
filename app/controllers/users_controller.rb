@@ -43,6 +43,7 @@ class UsersController < ApplicationController
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
       redirect_to login_url(already_joined: true)
     elsif @user.valid? && @user.save_without_session_maintenance
+      @user.profile.update_attribute :user_agent, request.user_agent
       @user.reset_perishable_token!
       UserNotification.signup(@user).deliver_now
       flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
