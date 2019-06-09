@@ -8,7 +8,10 @@ class UserSession < Authlogic::Session::Base
       record.current_login_at = klass.default_timezone == :utc ? Time.now.utc : Time.now
       record.last_login_ip = record.current_login_ip
       record.current_login_ip = controller.request.ip
-      record.profile.user_agent = controller.request.user_agent
+      # update_info can be called before user and it's associated profile is created
+      if record.profile
+        record.profile.update_attribute :user_agent, controller.request.user_agent
+      end
     end
   end
 end
