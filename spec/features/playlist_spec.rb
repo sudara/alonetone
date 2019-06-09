@@ -15,13 +15,13 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # so let's specify one before we snap
       expect(page).to have_selector(".player")
 
-      sleep 1
-
       # Ideally we'd want to see the seekbar progress to prove playback worked.
       # However, the seekbar is a canvas element which we can't test.
       # Intsead, can use the svg animation to prove playback worked
       # However, the following selector is shown on both loading and pause
       expect(page).to have_selector('.largePlaySVG .pauseContainer', visible: true)
+
+      sleep 3
 
       # TODO: Make sure the animated loader is no longer showing
       # expect(page).to have_selector('.largePlaySVG .spinballGroup', visible: false)
