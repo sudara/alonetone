@@ -50,7 +50,7 @@ class Asset < ApplicationRecord
 
   has_one_attached :audio_file
 
-  before_save :ensure_unique_permalink, if: :permalink_changed?
+  before_save :ensure_unique_permalink, if: :title_changed?
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model

@@ -144,17 +144,18 @@ class UsersController < ApplicationController
     @profile = @user.profile
     @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(user: :pic).limit(5)
-    @playlists = @user.playlists.only_public.includes(:user, :pic)
+    @playlists = @user.playlists.include_private.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
     @comments = @user.comments.public_or_private(display_private_comments?)
                      .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
-    @other_users_with_same_ip = @user.current_login_ip.present? ? User.where(last_login_ip: @user.current_login_ip).pluck('login') : nil
+    @other_users_with_same_ip = @user.current_login_ip.present? ? User.where(current_login_ip: @user.current_login_ip).pluck('login') : nil
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
       @listens = @listens.published
+      @playlists = @playlists.only_public
     end
   end
 

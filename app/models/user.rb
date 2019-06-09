@@ -245,6 +245,12 @@ class User < ApplicationRecord
     deleted_at != nil
   end
 
+  def spam_and_mark_for_deletion!
+    spam! # makes an api request
+    update_column :is_spam, true
+    soft_delete_with_relations
+  end
+
   def soft_delete_with_relations
     soft_delete_relations
     enqueue_real_destroy_job
@@ -261,6 +267,21 @@ class User < ApplicationRecord
 
   def enqueue_real_destroy_job
     DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
+  end
+
+  def self.filter_by(filter)
+    case filter
+    when "deleted"
+      only_deleted.order('deleted_at DESC')
+    when "is_spam"
+      with_deleted.where(is_spam: true).recent
+    when "not_spam"
+      with_deleted.where(is_spam: false).recent
+    when String
+      where("email like '%#{filter}%' or login like '%#{filter}%'").recent
+    else
+      with_deleted.recent
+    end
   end
 
   protected

@@ -5,7 +5,7 @@ owp:
   title: obsessed with progression
   tracks_count: 3
   cover_quality: modern
-  description: sudara's album
+  credits: sudara's album
   created_at: <%= 1.day.ago.to_s :db %>
 
 empty:
@@ -13,7 +13,7 @@ empty:
   permalink: empty-playlist
   title: Empty Playlist
   cover_quality: modern
-  description: something coming
+  credits: something coming
   created_at: <%= 1.day.ago.to_s :db %>
 
 # Arthur's playlists.
@@ -22,7 +22,7 @@ arthurs_playlist:
   permalink: arthurs-playlist
   title: Arthur's Playlist
   cover_quality: modern
-  description: arthurs playlist
+  credits: arthurs playlist
   private: false
   updated_at: <%= 1.day.ago.to_s :db %>
   created_at: <%= 1.day.ago.to_s :db %>
@@ -34,7 +34,7 @@ mix:
   title: mix tape
   tracks_count: 3
   cover_quality: modern
-  description: "a mix tape, daring and wonderful"
+  credits: "a mix tape, daring and wonderful"
   created_at: <%= 1.day.ago.to_s :db %>
 
 arthurs_favorites:
@@ -43,7 +43,7 @@ arthurs_favorites:
   permalink: arthurs-favorites
   title: Arthur's favorites
   cover_quality: modern
-  description: arthur's favorites
+  credits: arthur's favorites
   tracks_count: 1
   user: arthur
   created_at: <%= 1.day.ago.to_s :db %>
@@ -57,7 +57,7 @@ will_studd_rockfort:
   cover_quality: modern
   private: false
   published_at: <%= 1.day.ago.to_s :db %>
-  description: >
+  credits: >
     Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
     is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
     interpretation of this fine cheese.
@@ -71,7 +71,7 @@ henri_willig_polderkaas:
   private: false
   published_at: <%= 1.day.ago.to_s :db %>
   cover_quality: modern
-  description: >
+  credits: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
     goodness as they cheese it was named after.
 
@@ -82,7 +82,7 @@ william_shatners_favorites:
   permalink: bills-favorites
   title: Bill's favorites
   cover_quality: ancient
-  description: What I like to listen to when I'm eating cheese in the captain's chair.
+  credits: What I like to listen to when I'm eating cheese in the captain's chair.
   tracks_count: 1
   user: william_shatner
 
@@ -93,6 +93,6 @@ jamie_kiesl_loves:
   permalink: jamie-loves
   title: Jamie Loves
   cover_quality: legacy
-  description: Did I mention that I'm really good at naming cheeses really quickly?
+  credits: Did I mention that I'm really good at naming cheeses really quickly?
   tracks_count: 1
   user: jamie_kiesl
