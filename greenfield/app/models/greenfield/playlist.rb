@@ -16,8 +16,6 @@ module Greenfield
       alonetone_playlist.greenfield_downloads
     end
 
-    private
-
     attr_reader :alonetone_playlist
   end
 end
