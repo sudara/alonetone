@@ -3,12 +3,9 @@ Hi!
 <%= @artist.name.capitalize %> just uploaded a track to alonetone! <%= @exclamation %>!
 
 You can listen to
-<% if @assets.empty? %>
-  all songs by <%= @artist.name.capitalize %> on alonetone: <%= @upload_user_url %>
-<% else %>
-  <% @assets.each do |track| %>
-    <%= track[:title] %> on alonetone: <%= track[:play_link] %>
-  <% end %>
+
+<% @assets.each do |track| %>
+  <%= track[:title] %> on alonetone: <%= track[:play_link] %>
 <% end %>
 
 ------------------------------

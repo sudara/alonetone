@@ -20,22 +20,22 @@
           <% end %>
       </div>
   <% end %>
-  
-  <div id="single_track" class="box<%= ' descriptionless' unless @asset.description.present? %>">
-    <%= render partial: 'assets/assets'%>  
+
+  <div id="single_track" class="box">
+    <%= render partial: 'assets/assets'%>
     <%= favorite_toggle(@asset) if logged_in? %>
     <% if @asset.description && !@asset.description.empty? %>
       <div id="track_details" class="static_content">
         <h1>About "<%= @asset.title %>"</h1>
         <p><%= markdown @asset.description %></p>
-        <% if playlist = @asset.first_playlist %>  
+        <% if playlist = @asset.first_playlist %>
           From the album / playlist <%= link_to (playlist.title), user_playlist_path(@asset.user,playlist) %>
           <div class="min_height_50">
             <div class="mini_cover">
               	<%= link_to(image_tag(playlist_cover_url(playlist, variant: :small), user_playlist_path(@asset.user,playlist), class: 'cover_50')) %>
             </div>
           </div>
-        <% end %>    
+        <% end %>
       </div>
     <% end %>
 
@@ -51,12 +51,12 @@
       </div>
     <% end %>
   </div>
-  
+
   <%= render partial: 'big_share'%>
   <%= render partial: 'stats' %>
-      
+
 <% end %>
-  
+
 <% content_for :right do %>
   <%= render partial: 'assets/favoriters' if @favoriters.present?%>
   <%= render partial: 'assets/recent_listeners'%>
