@@ -113,25 +113,13 @@ class AssetsController < ApplicationController
   end
 
   def edit
-    @descriptionless = @user.assets.not_current(@asset.id).descriptionless if @user.assets.not_current(@asset.id).descriptionless.count > 1
     @allow_reupload = true
     render 'edit_white' if white_theme_enabled?
   end
 
   def mass_edit
-    redirect_to_default && (return false) unless logged_in? && (current_user.id == @user.id) || admin?
-    # currently we redirect asset # publish to mass_edit with params["assets"]
-    if params["assets"]&.first && @user.assets.not_current(params["assets"]&.first).descriptionless.count > 0
-      @descriptionless = @user.assets.not_current(params["assets"].first).descriptionless
-    elsif @user.assets.descriptionless.count > 2
-      @descriptionless = @user.assets.descriptionless
-    end
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
-
-    @user.followers.select(&:wants_email?).each do |follower|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
-    end
 
     render 'mass_edit_white' if white_theme_enabled?
   end
@@ -160,6 +148,9 @@ class AssetsController < ApplicationController
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
     elsif @assets.present? && (@assets.collect(&:persisted?).any? == true)
+      @user.followers.select(&:wants_email?).each do |follower|
+        AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
+      end
       flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
       redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
     else
