@@ -148,6 +148,10 @@ class User < ApplicationRecord
     !active? ? clear_token! : false
   end
 
+  def self.with_same_ip_as(user)
+    User.where(current_login_ip: user.current_login_ip).where('id != ?', user.id)
+  end
+
   def self.find_by_login_or_email(login)
     User.find_by_login(login) || User.find_by_email(login)
   end
