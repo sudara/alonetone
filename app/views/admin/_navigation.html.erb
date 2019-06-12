@@ -2,8 +2,8 @@
   <%= navigation_item "All Users", admin_users_path %>
   <ul>
     <%= navigation_item 'Not Spam', admin_users_path({filter_by: :not_spam}) %>
-    <%= navigation_item 'Spam', admin_users_path({filter_by: :is_spam}) %>
-    <%= navigation_item 'Deleted', admin_users_path({filter_by: :deleted}) %>
+    <%= navigation_item 'Only Spam', admin_users_path({filter_by: :is_spam}) %>
+    <%= navigation_item 'Deleted (Not Spam)', admin_users_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'All Tracks', admin_assets_path %>
   <ul>
