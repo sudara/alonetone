@@ -111,13 +111,6 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect(users(:arthur).topics.count).to eq(0)
       expect(users(:arthur).comments.count).to eq(0)
     end
-
-    it "enqueues a job to really destroy the record" do
-      put delete_admin_user_path(users(:arthur))
-      expect(enqueued_jobs.size).to eq 1
-      expect(enqueued_jobs.first[:queue]).to eq "default"
-      expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
-    end
   end
 
   describe '#index' do
