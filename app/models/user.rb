@@ -8,7 +8,8 @@ class User < ApplicationRecord
                   author_email: proc { email },
                   user_ip: proc { current_login_ip },
                   content: proc { profile&.bio },
-                  user_agent: proc { profile&.user_agent }
+                  user_agent: proc { profile&.user_agent },
+                  comment_type: 'signup'
 
   require_dependency 'user/findability'
   require_dependency 'user/settings'
