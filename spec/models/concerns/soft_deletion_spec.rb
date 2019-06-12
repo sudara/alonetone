@@ -3,15 +3,15 @@ require "rails_helper"
 RSpec.describe SoftDeletion do
   describe "scope" do
     it "should provide scope to display deleted records" do
-      expect(User.only_deleted.count).to eq(1)
+      expect(User.only_deleted.count).to eq(2)
     end
 
     it "should provide scope to exclude deleted records" do
-      expect(User.with_deleted.count).to eq(User.count + 1)
+      expect(User.with_deleted.count).to eq(User.count + 2)
     end
 
     it "should exclude deleted records from default scope" do
-      expect(User.all.count).to eq(User.with_deleted.count - 1)
+      expect(User.all.count).to eq(User.with_deleted.count - 2)
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe SoftDeletion do
     it "changes scope" do
       expect do
         User.with_deleted.map(&:restore)
-      end.to change { User.count }.by(1)
+      end.to change { User.count }.by(2)
     end
   end
 end
