@@ -30,7 +30,7 @@ RSpec.describe SoftDeletion do
     end
 
     it "allows a check if record if soft deleted" do
-      expect(users(:unuser).deleted?).to eq(true)
+      expect(users(:deleted_yesterday).deleted?).to eq(true)
       expect(users(:arthur).deleted?).to eq(false)
     end
   end
