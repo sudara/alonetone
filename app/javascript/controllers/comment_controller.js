@@ -15,9 +15,7 @@ export default class extends Controller {
     this.textareaTarget.value = ''
     this.responseTarget.innerHTML = '<div class="ajax_success"><span>Submitted, thanks!</span></div>'
     this.responseTarget.classList.toggle('comment_success')
-
     this.spinnerTarget.style.display = 'none'
-
   }
 
   error() {

@@ -173,7 +173,7 @@ class AssetsController < ApplicationController
         redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"
-        render action: "edit"
+        render action: white_theme_enabled? ? "edit_white" : "edit"
       end
     end
   end
