@@ -285,7 +285,7 @@ class User < ApplicationRecord
   def self.filter_by(filter)
     case filter
     when "deleted"
-      only_deleted.order('deleted_at DESC')
+      only_deleted.where(is_spam: false).order('deleted_at DESC')
     when "is_spam"
       with_deleted.where(is_spam: true).recent
     when "not_spam"
