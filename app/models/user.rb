@@ -266,7 +266,6 @@ class User < ApplicationRecord
 
   def soft_delete_with_relations
     soft_delete_relations
-    enqueue_real_destroy_job
     soft_delete
   end
 
@@ -276,10 +275,6 @@ class User < ApplicationRecord
 
   def restore_relations
     efficiently_restore_relations
-  end
-
-  def enqueue_real_destroy_job
-    DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
   end
 
   def self.filter_by(filter)

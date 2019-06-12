@@ -309,13 +309,6 @@ RSpec.describe UsersController, type: :controller do
         expect(users(:arthur).topics.count).to eq(0)
         expect(users(:arthur).comments.count).to eq(0)
       end
-
-      it "enqueues the job to really destroy the record" do
-        delete :destroy, params: { id: 'arthur', login: 'arthur' }
-        expect(enqueued_jobs.size).to eq 1
-        expect(enqueued_jobs.first[:queue]).to eq "default"
-        expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
-      end
     end
 
     context "user" do
