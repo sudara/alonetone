@@ -71,6 +71,7 @@ class User < ApplicationRecord
   scope :recent,        -> { order('users.id DESC') }
   scope :recently_seen, -> { order('last_request_at DESC') }
   scope :with_location, -> { where(['users.country != ""']).recently_seen }
+  scope :destroyable,   -> { only_deleted.where('deleted_at < ?', 30.days.ago) }
 
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
@@ -147,6 +148,12 @@ class User < ApplicationRecord
 
   def activate!
     !active? ? clear_token! : false
+  end
+
+  def self.destroy_deleted_accounts_older_than_30_days
+    User.destroyable.find_each do |u|
+      u.destroy
+    end
   end
 
   def self.with_same_ip_as(user)
