@@ -64,8 +64,7 @@
       line-height: 32px;
     }
     h3 {
-      margin-top: -30px;
-      margin-bottom: 2px;
+      margin-top: -16px;
       color: $samo-gray;
     }
     p {
@@ -171,6 +170,13 @@
         width: 100%;
         padding: 10px;
         padding-bottom: 3px;
+      }
+      h3 {
+        margin-top: -30px;
+        margin-bottom: 10px;
+      }
+      .track-stats {
+        margin-bottom: 6px;
       }
     }
     textarea {
