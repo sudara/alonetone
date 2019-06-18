@@ -1,5 +1,4 @@
 <div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
-
   <%= render partial: 'big_player' %>
-  <%= render partial: 'edit_white' %>
+  <%= render partial: 'edit_white', locals: { asset: @asset } %>
 </div>
