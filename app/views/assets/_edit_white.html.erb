@@ -15,6 +15,9 @@
     <header>
       <h1><%= f.text_field :title, value: asset.name %></h1>
       <h3><%= asset.user.display_name %></h3>
+      <div class="track-stats">
+        <div class="created">Uploaded <%= local_time_ago(asset.created_at) %>.</div>
+      </div>
     </header>
 
     <%= f.text_area :description, placeholder: "Tell us a story..." %>
