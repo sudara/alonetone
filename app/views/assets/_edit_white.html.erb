@@ -1,5 +1,5 @@
 <%= form_for(asset, url: user_track_path(@user, asset),
-  remote: true, data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error' }) do |f| %>
+  remote: (true if @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error' }) do |f| %>
   <% if asset.errors.any? %>
     <div class="errors">
       There were some problems...
