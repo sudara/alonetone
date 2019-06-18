@@ -1,4 +1,4 @@
-<h1>Editing <%= pluralize @assets.count, 'track' %> </h1>
+<h1 class="track-content">Editing <%= pluralize @assets.count, 'track' %> </h1>
 <% @assets.each do |asset| %>
   <div class="track-content" data-controller="save">
     <%= render partial: 'edit_white', locals: { asset: asset } %>
