@@ -115,6 +115,11 @@
       }
       .date_column {
         width: 90px;
+        .deleted_at_date {
+          margin-top: 5px;
+          font-size: 12px;
+          color: $dark-gray;
+        }
       }
       .user_column {
         width: 220px;

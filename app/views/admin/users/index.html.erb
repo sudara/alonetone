@@ -29,7 +29,7 @@
           <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>" data-admin--user-spam="<%= user.is_spam? %>">
             <div class="date_column">
             <%= local_time_ago user.created_at %>
-            <div><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
+            <div class="deleted_at_date"><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
 
             </div>
             <div class="user_column">
