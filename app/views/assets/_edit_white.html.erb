@@ -42,7 +42,7 @@
       <div class="edit-save">
       <% unless asset.published? %>
         <div class="submit_wrapper static_content">
-          <div class="comment_waiting" >
+          <div class="comment_waiting ajax_waiting" >
             <div class="text"><!-- placeholder response text --></div>
           </div>
           <div class="small_spinner" style="display:none;"> </div>
@@ -50,7 +50,7 @@
         </div>
       <% end %>
       <div class="submit_wrapper static_content">
-        <div class="comment_waiting" data-target="save.response">
+        <div class="comment_waiting ajax_waiting" data-target="save.response">
           <div class="text"><!-- placeholder response text --></div>
         </div>
         <div class="small_spinner" data-target="save.spinner"> </div>
