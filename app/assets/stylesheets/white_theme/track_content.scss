@@ -218,6 +218,19 @@
         }
       }
     }
+    .submit_wrapper {
+      display: flex;
+      // flex-direction: row;
+      // clear: both;
+      // justify-content: flex-start;
+      // margin-left: 110px;
+      .ajax_waiting {
+        margin-right: 0;
+        margin-left: 12px;
+
+      }
+  }
+
   }
   > div.box {
     h2.box {
