@@ -46,10 +46,19 @@
     @media #{$two-column-narrow} {
        display: none;
     }
-
   }
   .comment_asset {
     background-color: transparent;
+    div.submit_wrapper {
+      position: relative;
+      top: -18px;
+      display: flex;
+      flex-direction: row;
+      clear: both;
+      justify-content: flex-end;
+      margin-left: 110px;
+    }
+
   }
 }
 
@@ -69,6 +78,15 @@
     }
     form div.submit_wrapper .comment_waiting {
       border-color: #efefef;
+    }
+    div.submit_wrapper {
+      position: relative;
+      top: -18px;
+      display: flex;
+      flex-direction: row;
+      clear: both;
+      justify-content: flex-end;
+      margin-left: 110px;
     }
   }
 }
