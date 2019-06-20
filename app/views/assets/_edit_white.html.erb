@@ -1,4 +1,4 @@
-<%= form_for(asset, url: user_track_path(@user, asset),
+<%= form_for(asset, url: "/#{@user.login}/tracks/#{asset.id}",
   remote: (true if @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error' }) do |f| %>
   <% if asset.errors.any? %>
     <div class="errors">
@@ -55,8 +55,6 @@
         <div class="comment_waiting ajax_waiting" data-target="save.response">
           <div class="text"><!-- placeholder response text --></div>
         </div>
-        
-        
       </div>
     </div>
   <% end %>
