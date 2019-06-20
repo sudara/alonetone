@@ -88,28 +88,33 @@ div.small_spinner {
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);
-  font-size: 10px;
-  padding-left: 16px;
-  padding-right: 32px;
+  font-size: 15px;
+  padding-left: 24px;
+  padding-right: 48px;
   border: 1px solid #67c906;
   border-radius: 2px;
   margin-left: auto;
   margin-right: auto;
   top: 55px;
-  height: 22px;
+  height: 33px;
   background-color: #FFFFFFEE;
   z-index: 1;
   font-weight: bold;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   div.ajax_success {
-    padding-top: 6.5px;
-    padding-right: 2px;
+    padding-top: 9.75px;
+    padding-right: 3px;
     color: #2b8800;
     &::after {
       position: absolute;
-      top: 7px;
-      right: 10px;
-      content: image-url("svg/icon_checkmark_green.svg");
+      top: 7.5px;
+      right: 15px;
+      content: "";
+      height:15px;
+      width: 15px;
+      background-size: 15px 15px;
+      background-image: image-url("svg/icon_checkmark_green.svg");
+      background-repeat: no-repeat;
     }
   }
 }
