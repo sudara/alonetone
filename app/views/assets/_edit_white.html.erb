@@ -1,5 +1,5 @@
 <%= form_with(model: asset, url: "/#{@user.login}/tracks/#{asset.id}",
-  local: (true unless @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error' }) do |f| %>
+  local: (true unless @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error ajax:complete->save#complete' }) do |f| %>
   <% if asset.errors.any? %>
     <div class="errors">
       There were some problems...
