@@ -160,7 +160,7 @@
     display: none;
   }
   .track-edit {
-    margin-bottom: $baseline * 2; 
+    margin-bottom: $baseline * 2;
     header {
       input {
         font-family: $black-font;
@@ -227,10 +227,12 @@
       // clear: both;
       // justify-content: flex-start;
       // margin-left: 110px;
+      input {
+        margin-right: 4px;
+      }
       .ajax_waiting {
         margin-right: 0;
-        margin-left: 12px;
-
+        margin-left: 8px;
       }
   }
 
