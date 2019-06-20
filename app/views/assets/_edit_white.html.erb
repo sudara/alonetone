@@ -1,5 +1,5 @@
-<%= form_for(asset, url: "/#{@user.login}/tracks/#{asset.id}",
-  remote: (true if @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error' }) do |f| %>
+<%= form_with(model: asset, url: "/#{@user.login}/tracks/#{asset.id}",
+  local: (true unless @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error' }) do |f| %>
   <% if asset.errors.any? %>
     <div class="errors">
       There were some problems...
@@ -13,14 +13,14 @@
 
   <div class="track-edit">
     <header>
-      <h1><%= f.text_field :title, value: asset.name %></h1>
+      <h1><%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %></h1>
       <h3><%= asset.user.display_name %></h3>
       <div class="track-stats">
         <div class="created">Uploaded <%= local_time_ago(asset.created_at) %>.</div>
       </div>
     </header>
 
-    <%= f.text_area :description, placeholder: "Tell us a story..." %>
+    <%= f.text_area :description, placeholder: "Tell us a story...", id: "description_#{asset.id}"  %>
     <%= f.text_area :credits, placeholder: "Credits for this track" %>
 
     <%= hidden_field_tag :asset_permalink, asset.permalink %>
@@ -46,11 +46,11 @@
             <div class="text"><!-- placeholder response text --></div>
           </div>
           <div class="small_spinner" style="display:none;"> </div>
-            <%= f.submit "Publish", class: 'comment_submit' %>
+            <%= f.submit "Publish" %>
         </div>
       <% end %>
       <div class="submit_wrapper">
-        <%= f.submit "Save", class: 'comment_submit' %>
+        <%= f.submit "Save" %>
         <div class="small_spinner" data-target="save.spinner"> </div>
         <div class="comment_waiting ajax_waiting" data-target="save.response">
           <div class="text"><!-- placeholder response text --></div>
