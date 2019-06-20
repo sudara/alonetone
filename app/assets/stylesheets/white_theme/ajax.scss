@@ -1,86 +1,78 @@
-
-
-div.small_spinner {
-    position: relative;
-    top: 3px;
-  }
-  .ajax_waiting {
-    font-size: 10px;
-    padding-left: 16px;
-    padding-right: 32px;
-    font-weight: normal;
-    color: #da6d25;
-    position: relative;
-    top: 1px;
-    border-radius: 2px;
-    margin-right: 12px;
-    height: 22px;
-    font-weight: bold;
-    border: 1px solid transparent;
-    &.ajax_fail {
-      border: 1px solid #ff1f75;
-      @media #{$mobile} {
-        border: 0;
-      }
-      @media #{$two-column-narrow} {
-        border: 0;
-      }
-      > div {
-        padding-right: 2px;
-        color: #b20035;
-        padding-top: 6.5px;
-        @media #{$mobile} {
-          span {
-            display: none;
-          }
-        }
-        @media #{$two-column-narrow} {
-          span {
-            display: none;
-          }
-        }
-        &::after {
-          position: absolute;
-          top: 7.5px;
-          right: 10px;
-          content: image-url("svg/icon_x_red.svg");
-        }
-      }
+.ajax_waiting {
+  font-size: 10px;
+  padding-left: 16px;
+  padding-right: 32px;
+  font-weight: normal;
+  color: #da6d25;
+  position: relative;
+  top: 1px;
+  border-radius: 2px;
+  margin-right: 12px;
+  height: 22px;
+  font-weight: bold;
+  border: 1px solid transparent;
+  &.ajax_fail {
+    border: 1px solid #ff1f75;
+    @media #{$mobile} {
+      border: 0;
     }
-    &.ajax_success {
-      border: 1px solid #67c906;
+    @media #{$two-column-narrow} {
+      border: 0;
+    }
+    > div {
+      padding-right: 2px;
+      color: #b20035;
+      padding-top: 6.5px;
       @media #{$mobile} {
-        border: 0;
+        span {
+          display: none;
+        }
       }
       @media #{$two-column-narrow} {
-        border: 0;
+        span {
+          display: none;
+        }
       }
-      > div {
-        padding-right: 2px;
-        color: #2b8800;
-        padding-top: 6.5px;
-        @media #{$mobile} {
-          span {
-            display: none;
-          }
-        }
-        @media #{$two-column-narrow} {
-          span {
-            display: none;
-          }
-        }
-        &::after {
-          position: absolute;
-          top: 7px;
-          right: 10px;
-          content: image-url("svg/icon_checkmark_green.svg");
-        }
+      &::after {
+        position: absolute;
+        top: 7.5px;
+        right: 10px;
+        content: image-url("svg/icon_x_red.svg");
       }
     }
   }
+  &.ajax_success {
+    border: 1px solid #67c906;
+    @media #{$mobile} {
+      border: 0;
+    }
+    @media #{$two-column-narrow} {
+      border: 0;
+    }
+    > div {
+      padding-right: 2px;
+      color: #2b8800;
+      padding-top: 6.5px;
+      @media #{$mobile} {
+        span {
+          display: none;
+        }
+      }
+      @media #{$two-column-narrow} {
+        span {
+          display: none;
+        }
+      }
+      &::after {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        content: image-url("svg/icon_checkmark_green.svg");
+      }
+    }
+  }
+}
 
-
-/* PROGRESS INDICATOR (COMMENT POSTING) */
 div.small_spinner {
   display: none;
   background: image-url("svg/icon_spinner.svg") no-repeat center center;
@@ -88,6 +80,7 @@ div.small_spinner {
   width: 20px;
   background-size: 100%;
   position: relative;
+  top: 3px;
 }
 
 .floating_feedback {
@@ -110,8 +103,6 @@ div.small_spinner {
   font-weight: bold;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   div.ajax_success {
-    padding-right: 2px;
-    color: #2b8800;
     padding-top: 6.5px;
     padding-right: 2px;
     color: #2b8800;
