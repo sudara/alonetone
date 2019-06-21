@@ -22,8 +22,7 @@ export default class extends PlaybackController {
       else this.bigPlay.animation.showLoading()
       this.highlightPlayingTrack()
     } else {
-      // fire the ajax request
-      Rails.fire(this.loadTrackTarget, 'click')
+      this.fireAjaxRequest()
     }
     this.registeredListen = false
     this.playTarget.classList.replace('play-button', 'pause-button')
@@ -40,7 +39,7 @@ export default class extends PlaybackController {
   popTrack(e) {
     const newLocation = document.location.pathname.split('/').pop()
     if (newLocation === this.permalink) {
-      Rails.fire(this.loadTrackTarget, 'click')
+      this.fireAjaxRequest()
     }
   }
 
@@ -94,5 +93,16 @@ export default class extends PlaybackController {
 
   setBigPlay() {
     this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track-content'), 'big-play')
+  }
+
+  // This workaround necessary until https://github.com/rails/rails/pull/36437 is merged
+  // At which point we can just use Rails.fire inline
+  fireAjaxRequest() {
+    const event = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      button: 0,
+    })
+    this.loadTrackTarget.dispatchEvent(event)
   }
 }

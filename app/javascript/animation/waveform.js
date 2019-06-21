@@ -80,7 +80,7 @@ class Waveform {
         } else {
           this.context.fillStyle = '#c7c6c3';
         }
-        this.context.fillRect(t * i, middle - (middle * d), t, middle * d * 2);
+        this.context.fillRect(t * i, middle - (middle * d), t, (middle * d * 2) + 1);
         result.push(i++);
       }
       return result;
