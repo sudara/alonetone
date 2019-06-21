@@ -131,7 +131,7 @@ class AssetsController < ApplicationController
     @playlists = playlists
 
     flashes = ""
-    good = false
+    at_least_one_upload = false
 
     @assets.each do |asset|
       if !asset.new_record?
