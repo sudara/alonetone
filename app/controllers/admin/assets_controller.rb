@@ -1,6 +1,6 @@
 module Admin
   class AssetsController < Admin::BaseController
-    before_action :find_asset, only: %i[spam unspam]
+    before_action :find_asset, only: %i[spam unspam delete]
 
     def index
       if permitted_params[:filter_by]
@@ -30,6 +30,11 @@ module Admin
 
       assets.map(&:spam!)
       assets.update_all(is_spam: true)
+      redirect_back(fallback_location: root_path)
+    end
+
+    def delete
+      @asset.soft_delete
       redirect_back(fallback_location: root_path)
     end
 

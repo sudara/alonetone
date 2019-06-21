@@ -38,8 +38,9 @@
             <div class="button_column">
               <%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#showUnspamButton'} %>
               <%= button_to "Mark As Ham", unspam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.unspamButton', action: 'click->admin--asset#showSpamButton'} %>
+              <%= button_to "Delete Track", delete_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.deleteButton' } %></td> %>
               <%#= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %>
-              <%= button_to "Delete User", delete_admin_user_path(asset.user&.login), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteUserButton' } %>
+              <%#= button_to "Delete User", delete_admin_user_path(asset.user&.login), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteUserButton' } %>
             </div>
           </div>
         <% end %>
