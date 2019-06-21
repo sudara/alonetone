@@ -1,6 +1,20 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+
+  context '.destroy_deleted_accounts_older_than_30_days' do
+    it 'should really destroy users deleted more than 30 days ago' do
+      expect { User.destroy_deleted_accounts_older_than_30_days }
+        .to change{ User.with_deleted.count }.by(-1)
+    end
+
+    it 'should not destroy a user deleted within last 30 days' do
+      expect(users(:deleted_yesterday)).to be_valid
+      User.destroy_deleted_accounts_older_than_30_days
+      expect(User.with_deleted.where(login: 'deleted_yesterday').first).to be_present
+    end
+  end
+
   context "validation" do
     it "should be valid with email, login and password" do
       expect(new_user).to be_valid
