@@ -17,6 +17,7 @@ RSpec.describe 'tracks', type: :feature, js: true do
       akismet_stub_response_ham
       first('input[name="commit"]').click
       first('.ajax_success')
+      sleep(1) # wait for the spinner to dissapear, it takes 500ms
       Percy.snapshot(page, name: 'Single Track Edit')
     end
   end
