@@ -6,7 +6,7 @@ class AssetNotification < ApplicationMailer
     @stop_following_link = stop_following_link
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
-    mail subject: "[alonetone] '#{@artist.name}' uploaded a new track!", to: follower_email
+    mail subject: "[alonetone] #{@artist.name} uploaded a new track!", to: follower_email
   end
 
   def upload_mass_notification(assets, follower_email, _sent_at = Time.now)
@@ -16,7 +16,7 @@ class AssetNotification < ApplicationMailer
     @unsubscribe_link = unsubscribe_link
     @exclamation = %w[Sweet Yes Oooooh Alright Booya Yum Celebrate OMG].sample
     @upload_user_url = user_link_for(assets.first)
-    mail subject: "[alonetone] '#{@artist.name}' uploaded new tracks!", to: follower_email
+    mail subject: "[alonetone] #{@artist.name} uploaded new tracks!", to: follower_email
   end
 
   protected
