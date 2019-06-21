@@ -1,10 +1,10 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['spamButton', 'unspamButton', 'deleteUserButton']
+  static targets = ['spamButton', 'unspamButton', 'deleteButton']
 
   initialize() {
-    this.showDeleteUserButton()
+    // this.showDeleteUserButton()
 
     if (this.data.get('spam') === 'false') {
       this.showSpamButton()
@@ -20,9 +20,9 @@ export default class extends Controller {
     this.unspamButtonTarget.style.display = 'none'
   }
 
-  showDeleteUserButton() {
-    this.deleteUserButtonTarget.style.display = 'block'
-  }
+  // showDeleteUserButton() {
+  //   this.deleteUserButtonTarget.style.display = 'block'
+  // }
 
   showUnspamButton() {
     this.data.set('spam', 'true')
