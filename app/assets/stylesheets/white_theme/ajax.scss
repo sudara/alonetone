@@ -1,0 +1,120 @@
+.ajax_waiting {
+  font-size: 10px;
+  padding-left: 16px;
+  padding-right: 32px;
+  color: #da6d25;
+  position: relative;
+  top: 1px;
+  border-radius: 2px;
+  margin-right: 12px;
+  height: 22px;
+  font-weight: bold;
+  border: 1px solid transparent;
+  &.ajax_fail {
+    border: 1px solid #ff1f75;
+    @media #{$mobile} {
+      border: 0;
+    }
+    @media #{$two-column-narrow} {
+      border: 0;
+    }
+    > div {
+      padding-right: 2px;
+      color: #b20035;
+      padding-top: 6.5px;
+      @media #{$mobile} {
+        span {
+          display: none;
+        }
+      }
+      @media #{$two-column-narrow} {
+        span {
+          display: none;
+        }
+      }
+      &::after {
+        position: absolute;
+        top: 7.5px;
+        right: 10px;
+        content: image-url("svg/icon_x_red.svg");
+      }
+    }
+  }
+  &.ajax_success {
+    border: 1px solid #67c906;
+    @media #{$mobile} {
+      border: 0;
+    }
+    @media #{$two-column-narrow} {
+      border: 0;
+    }
+    > div {
+      padding-right: 2px;
+      color: #2b8800;
+      padding-top: 6.5px;
+      @media #{$mobile} {
+        span {
+          display: none;
+        }
+      }
+      @media #{$two-column-narrow} {
+        span {
+          display: none;
+        }
+      }
+      &::after {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        content: image-url("svg/icon_checkmark_green.svg");
+      }
+    }
+  }
+}
+
+div.small_spinner {
+  display: none;
+  background: image-url("svg/icon_spinner.svg") no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+  position: relative;
+  top: 3px;
+}
+
+.floating_feedback {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 15px;
+  padding-left: 24px;
+  padding-right: 48px;
+  border: 1px solid #67c906;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 55px;
+  height: 33px;
+  background-color: #FFFFFFEE;
+  z-index: 1;
+  font-weight: bold;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  div.ajax_success {
+    padding-top: 9.75px;
+    padding-right: 3px;
+    color: #2b8800;
+    &::after {
+      position: absolute;
+      top: 7.5px;
+      right: 15px;
+      content: "";
+      height:15px;
+      width: 15px;
+      background-size: 15px 15px;
+      background-image: image-url("svg/icon_checkmark_green.svg");
+      background-repeat: no-repeat;
+    }
+  }
+}
