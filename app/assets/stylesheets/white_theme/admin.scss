@@ -5,7 +5,7 @@
 }
 
 #admin_columns {
-  max-width: 960px;
+  max-width: 1060px;
   margin-right: auto;
   margin-left: auto;
   display: flex;
@@ -20,7 +20,7 @@
     h2 {
       margin-bottom: 0;
     }
-    
+
     ul.admin_nav {
       margin: 0;
       li {
@@ -120,8 +120,8 @@
         width: 90px;
       }
       .user_column {
-        width: 164px;
-        min-width: 164px;
+        width: 220px;
+        min-width: 220px;
         margin-right: 12px;
         display: flex;
         div.avatar {
@@ -140,7 +140,7 @@
               overflow: hidden;
             }
           }
-          div:nth-child(2) {            
+          div:nth-child(2) {
             display: block;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -150,6 +150,9 @@
             color: $dark-gray;
             font-size: 13px;
             line-height: 1.1;
+            a {
+              text-decoration: underline;
+            }
           }
 
         }
