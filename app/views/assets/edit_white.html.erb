@@ -1,5 +1,12 @@
 <div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
-
   <%= render partial: 'big_player' %>
-  <%= render partial: 'edit_white' %>
+
+  <div class= "edit-links-and-favorite">
+    <div class="edit-links">
+      <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit-link',
+        data: { confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
+        title: 'delete this track permanently ' %>
+    </div>
+  </div>
+  <%= render partial: 'edit_white', locals: { asset: @asset } %>
 </div>
