@@ -1,8 +1,7 @@
-<div class="mass_edit_content">
-  <h1>Editing your tracks</h1>
-  <% @assets.each do |asset| %>
-    <% @asset = asset %>
-    <%= render partial: 'edit' %>
-  <% end %>
-  <%= render partial: 'descriptionless' %>
-</div>
+<h1 class="track-content">Editing <%= pluralize @assets.count, 'track' %> </h1>
+<% @assets.each do |asset| %>
+  <div class="track-content" data-controller="save">
+    <%= render partial: 'edit_white', locals: { asset: asset } %>
+  </div>
+<% end %>
+

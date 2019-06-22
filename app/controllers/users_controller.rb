@@ -35,7 +35,6 @@ class UsersController < ApplicationController
       if @user.spam? && @user.save_without_session_maintenance
         @user.is_spam = true
         @user.soft_delete
-
         flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
         redirect_to logout_path
       elsif is_a_bot?
@@ -151,7 +150,7 @@ class UsersController < ApplicationController
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
     @comments = @user.comments.public_or_private(display_private_comments?)
                      .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
-    @other_users_with_same_ip = @user.current_login_ip.present? ? User.where(last_login_ip: @user.current_login_ip).pluck('login') : nil
+    @other_users_with_same_ip = User.with_same_ip_as(@user).pluck(:login) if @user.current_login_ip.present?
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
