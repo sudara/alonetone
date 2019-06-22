@@ -14,6 +14,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
       expect(page).to have_selector(".player")
+
+      # TODO: Figure out a way to snapshot playback
       Percy.snapshot(page, name: 'Playlist Track')
     end
   end

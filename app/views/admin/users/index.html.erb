@@ -12,10 +12,14 @@
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
-
+    <div class="admin_search_field">
+    <%= form_for 'filter_by', method: :get do |f| %>
+      <%= text_field_tag 'filter_by',nil, placeholder: 'search by login/email' %>
+    <% end %>
+    </div>
     <div class="admin_column_right_inner box">
       <header class="admin_users_header">
-        <div class="date_column">Date</div>
+        <div class="date_column">Joined</div>
         <div class="user_column">User</div>
         <div class="bio_column">Bio</div>
       </header>
@@ -23,7 +27,11 @@
       <div class="admin_users_rows">
         <% @users.each do |user| %>
           <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>" data-admin--user-spam="<%= user.is_spam? %>">
-            <div class="date_column"><%= local_time_ago user.created_at %></div>
+            <div class="date_column">
+            <%= local_time_ago user.created_at %>
+            <div><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
+
+            </div>
             <div class="user_column">
               <div class="avatar">
                 <%= user_image(@user, variant: :original) %>
@@ -31,7 +39,11 @@
               <div>
                 <div><%= user.login %></div>
                 <div><%= user.email %></div>
-                <div><%= user.current_login_ip %></div>
+                <% unless user.soft_deleted? %>
+                <div><%= user.current_login_ip %>
+                  <%= link_to "Spam All #{User.where(current_login_ip: user.current_login_ip).count}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
+                </div>
+                <% end %>
               </div>
             </div>
             <div class="bio_column">
@@ -39,7 +51,6 @@
               <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0 %></div>
             </div>
             <div class="button_column">
-              <%#= button_to "Spam All 4/IP", mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: user.id }},  method: :put %>
               <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put, remote: true, data: { target: 'admin--user.unspamButton', action: 'click->admin--user#hideUnspamButton' } %>
               <%= button_to "Spam User", spam_admin_user_path(user), method: :put, remote: true, data: { target: 'admin--user.spamButton', action: 'click->admin--user#hideSpamAndShowRestoreButton' } %>
               <%= button_to "Delete User", delete_admin_user_path(user), method: :put, remote: true, data: { target: 'admin--user.deleteButton', action: 'admin--user#showRestoreButton' } %></td>

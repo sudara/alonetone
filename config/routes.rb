@@ -14,6 +14,7 @@ Alonetone::Application.routes.draw do
         put :restore
         put :unspam
         put :spam
+        put :mark_all_users_with_ip_as_spam
       end
     end
     resources :comments, path: 'comments/(:filter_by)', only: [:index] do
