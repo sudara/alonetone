@@ -48,7 +48,7 @@
 
     <ul class="external-links">
       <% [:link1, :link2, :link3].collect do |link| %>
-        <% if valid_link = @playlist.send(link).present? %>
+        <% if valid_link = @playlist.send(link) %>
           <li>
             <%= external_link_for(valid_link) %>
           </li>
