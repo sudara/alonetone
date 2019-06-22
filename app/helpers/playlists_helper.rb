@@ -96,6 +96,8 @@ module PlaylistsHelper
   end
 
   def external_link_for(link)
+    return unless link.present?
+
     text = case link
            when /spotify/i
             service = 'spotify'
