@@ -333,7 +333,7 @@
             <div>Other with the same IP:</div>
             <div>
               <% if @other_users_with_same_ip.present? %>
-              <%= @other_users_with_same_ip.collect{|u| link_to u, '/#{u}'}.join(', ').html_safe %>
+              <%= @other_users_with_same_ip.collect{|u| link_to u, "/#{u}"}.join(', ').html_safe %>
               <% end %>
             </div>
           </div>

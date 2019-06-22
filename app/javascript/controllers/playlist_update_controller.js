@@ -49,12 +49,14 @@ export default class extends Controller {
 
   errored() {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_fail">Dang, something went wrong!</div>'
+    this.playlistEdit.feedbackTarget.innerHTML = '<div>Dang, something went wrong!</div>'
+    this.playlistEdit.feedbackTarget.toggle('ajax_fail')
   }
 
   removed() {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_success">Removed</div>'
+    this.playlistEdit.feedbackTarget.innerHTML = '<div>Removed</div>'
+    this.playlistEdit.feedbackTarget.toggle('ajax_success')
     this.updatePlaylistSize()
     this.element.parentNode.removeChild(this.element)
   }
@@ -64,7 +66,8 @@ export default class extends Controller {
     this.element.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
     this.addTarget.style.display = 'none'
     this.removeTarget.style.display = 'flex'
-    this.playlistEdit.feedbackTarget.innerHTML = '<div class="ajax_success">Added!</div>'
+    this.playlistEdit.feedbackTarget.innerHTML = '<div>Added!</div>'
+    this.playlistEdit.feedbackTarget.toggle('ajax_success')
     this.playlistEdit.sortableTarget.appendChild(this.element)
     this.updatePlaylistSize()
   }

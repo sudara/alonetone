@@ -46,10 +46,19 @@
     @media #{$two-column-narrow} {
        display: none;
     }
-
   }
   .comment_asset {
     background-color: transparent;
+    div.submit_wrapper {
+      position: relative;
+      top: -18px;
+      display: flex;
+      flex-direction: row;
+      clear: both;
+      justify-content: flex-end;
+      margin-left: 110px;
+    }
+
   }
 }
 
@@ -67,8 +76,14 @@
     textarea {
       background-color: #fff;
     }
-    form div.submit_wrapper .comment_waiting {
-      border-color: #efefef;
+    div.submit_wrapper {
+      position: relative;
+      top: -18px;
+      display: flex;
+      flex-direction: row;
+      clear: both;
+      justify-content: flex-end;
+      margin-left: 110px;
     }
   }
 }
@@ -163,93 +178,6 @@
         .only_alonetone_mods {
           font-weight: bold;
           color: #fff;
-        }
-      }
-      div.submit_wrapper {
-        position: relative;
-        top: -18px;
-        display: flex;
-        flex-direction: row;
-        clear: both;
-        justify-content: flex-end;
-        margin-left: 110px;
-        div.small_spinner {
-          position: relative;
-          top: 3px;
-        }
-        .comment_waiting {
-          font-size: 10px;
-          padding-left: 16px;
-          padding-right: 32px;
-          font-weight: normal;
-          color: #da6d25;
-          position: relative;
-          top: 1px;
-          border-radius: 2px;
-          margin-right: 12px;
-          height: 22px;
-          font-weight: bold;
-          border: 1px solid #fff;
-          &.comment_fail {
-            border: 1px solid #ff1f75;
-            @media #{$mobile} {
-              border: 0;
-            }
-            @media #{$two-column-narrow} {
-              border: 0;
-            }
-          }
-          &.comment_success {
-            border: 1px solid #67c906;
-            @media #{$mobile} {
-              border: 0;
-            }
-            @media #{$two-column-narrow} {
-              border: 0;
-            }
-          }
-          div.ajax_success {
-            padding-right: 2px;
-            color: #2b8800;
-            padding-top: 6.5px;
-            @media #{$mobile} {
-              span {
-                display: none;
-              }
-            }
-            @media #{$two-column-narrow} {
-              span {
-                display: none;
-              }
-            }
-            &::after {
-              position: absolute;
-              top: 7px;
-              right: 10px;
-              content: image-url("svg/icon_checkmark_green.svg");
-            }
-          }
-          div.ajax_fail {
-            padding-right: 2px;
-            color: #b20035;
-            padding-top: 6.5px;
-            @media #{$mobile} {
-              span {
-                display: none;
-              }
-            }
-            @media #{$two-column-narrow} {
-              span {
-                display: none;
-              }
-            }
-            &::after {
-              position: absolute;
-              top: 7.5px;
-              right: 10px;
-              content: image-url("svg/icon_x_red.svg");
-            }
-          }
         }
       }
       input.comment_submit {
