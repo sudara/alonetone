@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/rails/coffee-rails.git
+  remote: git://github.com/rails/coffee-rails.git
   revision: 32a2939acc139564a0d5a4f1d740200ef57ac88c
   specs:
     coffee-rails (5.0.0)
