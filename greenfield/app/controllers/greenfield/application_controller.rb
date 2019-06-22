@@ -1,6 +1,7 @@
 module Greenfield
   class ApplicationController < ActionController::Base
     include AuthlogicHelpers
+    helper ::PlaylistsHelper
     helper_method :current_user
 
     def nothing

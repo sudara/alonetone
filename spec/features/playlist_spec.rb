@@ -4,27 +4,18 @@ RSpec.describe 'playlists', type: :feature, js: true do
   it 'renders track and cover pages' do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
-      first_track_play_button = find('ul.tracklist li:first-child a:first-child')
-      first_track_play_button.hover
+      first_track = find('ul.tracklist li:first-child')
+      first_track.hover
       Percy.snapshot(page, name: 'Playlist Cover')
 
-      first_track_play_button.click
+      first_track.click
       # The above click will be an ajax request
       # And in some cases our Snapshot will fire before the DOM is updated
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
       expect(page).to have_selector(".player")
 
-      sleep 1
-
-      # Ideally we'd want to see the seekbar progress to prove playback worked.
-      # However, the seekbar is a canvas element which we can't test.
-      # Intsead, can use the svg animation to prove playback worked
-      # However, the following selector is shown on both loading and pause
-      expect(page).to have_selector('.largePlaySVG .pauseContainer', visible: true)
-
-      # TODO: Make sure the animated loader is no longer showing
-      # expect(page).to have_selector('.largePlaySVG .spinballGroup', visible: false)
+      # TODO: Figure out a way to snapshot playback
       Percy.snapshot(page, name: 'Playlist Track')
     end
   end
