@@ -83,17 +83,17 @@ another_public_comment_on_asset_by_user:
 
 public_non_spam_comment_to_self:
   commentable: jamie_kiesl_the_duck (Asset)
-  body: "This is some great work."
+  body: "Public non-spam comment on user's own asset even though different ip"
   is_spam: false
   user: jamie_kiesl
   commenter: jamie_kiesl
-  remote_ip: 127.1.1.2
+  remote_ip: 127.1.1.9
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_non_spam_comment_to_another_user:
   commentable: jamie_kiesl_the_duck (Asset)
-  body: "This is too cheesy."
+  body: "Public non-spam comment to another user"
   is_spam: false
   user: jamie_kiesl
   commenter: will_studd
@@ -103,7 +103,7 @@ public_non_spam_comment_to_another_user:
 
 public_non_spam_comment_to_self_by_ip:
   commentable: jamie_kiesl_the_duck (Asset)
-  body: "Amazing. This is your best work."
+  body: "Public non-spam comment on the same user's own asset by ip"
   is_spam: false
   user: jamie_kiesl
   commenter: will_studd
