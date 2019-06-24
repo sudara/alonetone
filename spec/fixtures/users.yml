@@ -78,6 +78,7 @@ jamie_kiesl:
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
   playlists_count: 0
   assets_count: 0
+  current_login_ip: 127.1.1.2
   created_at: <%= 1.month.ago %>
   updated_at: <%= 1.month.ago %>
 
