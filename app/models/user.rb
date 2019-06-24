@@ -282,7 +282,7 @@ class User < ApplicationRecord
     when "deleted"
       only_deleted.where(is_spam: false).order('deleted_at DESC')
     when "is_spam"
-      with_deleted.where(is_spam: true).recent
+      with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
       with_deleted.where(is_spam: false).recent
     when String

@@ -75,8 +75,48 @@ another_public_comment_on_asset_by_user:
   commentable: valid_arthur_mp3 (Asset)
   body: "This is your best work."
   is_spam: false
+  user: sudara
+  commenter: arthur
+  remote_ip: 127.0.0.5
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+public_comment_soft_deletion_relations:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Public non-spam comment that tests soft_deletion of users' relations"
+  is_spam: false
   user: arthur
   commenter: sudara
-  remote_ip: 127.0.0.5
+  remote_ip: 127.0.0.8
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_to_self:
+  commentable: jamie_kiesl_the_duck (Asset)
+  body: "Public non-spam comment on user's own asset even though different ip"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: jamie_kiesl
+  remote_ip: 127.1.1.9
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_to_another_user:
+  commentable: jamie_kiesl_the_duck (Asset)
+  body: "Public non-spam comment to another user"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.6
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_to_self_by_ip:
+  commentable: jamie_kiesl_the_duck (Asset)
+  body: "Public non-spam comment on the same user's own asset by ip"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
