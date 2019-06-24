@@ -72,7 +72,7 @@ public_comment_on_asset_by_user:
   created_at: <%= 1.day.ago.to_s :db %>
 
 another_public_comment_on_asset_by_user:
-  commentable: valid_arthur_mp3 (Asset)
+  commentable: valid_mp3 (Asset)
   body: "This is your best work."
   is_spam: false
   user: sudara
