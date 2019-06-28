@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params_with_ip)
     if @user.valid?
       if @user.spam? && @user.save_without_session_maintenance
-        @user.is_spam = true
+        @user.update_attribute :is_spam, true
         @user.soft_delete
         flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
         redirect_to logout_path
