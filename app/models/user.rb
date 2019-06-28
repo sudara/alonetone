@@ -260,7 +260,7 @@ class User < ApplicationRecord
 
   def spam_and_mark_for_deletion!
     spam! # makes an api request
-    update_column :is_spam, true
+    update_attribute :is_spam, true
     soft_delete_with_relations
   end
 
