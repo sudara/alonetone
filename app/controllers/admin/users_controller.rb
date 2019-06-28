@@ -19,7 +19,7 @@ module Admin
 
     def unspam
       @user.ham!
-      @user.update_column :is_spam, false
+      @user.update_attribute :is_spam, false
       @user.restore
       @user.restore_relations
     end
