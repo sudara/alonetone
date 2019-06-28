@@ -37,7 +37,7 @@
                 <%= user_image(@user, variant: :original) %>
               </div>
               <div>
-                <div><%= link_to user.login, user_path(user.login) %></div>
+                <div><%= user.login %></div>
                 <div><%= user.email %></div>
                 <% unless user.soft_deleted? %>
                 <div><%= user.current_login_ip %>
