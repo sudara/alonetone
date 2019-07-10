@@ -1,5 +1,7 @@
 <% unless @users.present? or @assets.present? %>
-  <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
+  <div class="no_search_results">
+    <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
+  </div>
 <% end %>
 
 <% if @users.present? %>

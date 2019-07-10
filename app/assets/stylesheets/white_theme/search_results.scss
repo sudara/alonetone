@@ -3,6 +3,14 @@
 	@include samo-shadow-and-radius();
 }
 
+.no_search_results {
+	max-width: 1032px;
+	padding: 0 $baseline * 1.5;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #user_search_results {
 	display: flex;
 	margin-top: 60px;
