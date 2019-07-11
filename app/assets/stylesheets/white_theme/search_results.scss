@@ -14,19 +14,19 @@
 #user_search_results {
 	display: flex;
 	margin-top: 60px;
-	@include match-dynamic-site-width();
 	flex-wrap: wrap;
-	justify-content: space-between;
 	div.user {
 		position: relative;
-		width: 150px;
+		width: 136px;
 		margin-bottom: 30px;
+		margin-right: 18px;
 		text-align: center;
 		img.cover {
 			width: 125px;
 			height: 125px;
 		}
 		.name {
+			margin-top: 4px;
 			font-size: 13px;
 			display: block;
 			&:hover {
