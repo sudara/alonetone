@@ -11,10 +11,27 @@
 	margin-right: auto;
 }
 
+
+.user_search_results_heading {
+	@media #{$mobile} {
+		padding-left: 12px;
+	}
+}
+
+.tracks_search_results_heading {
+	@media #{$mobile} {
+		padding-left: 12px;
+	}
+}
+
 #user_search_results {
 	display: flex;
 	margin-top: 60px;
 	flex-wrap: wrap;
+	@media #{$mobile} {
+		padding-right: $baseline * 1.5;
+		padding-left: $baseline * 1.5;
+	}
 	div.user {
 		position: relative;
 		width: 136px;
