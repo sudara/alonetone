@@ -6,7 +6,7 @@ module SoftDeletion
 
     scope :only_deleted, -> { unscope(where: :deleted_at).where.not(deleted_at: nil) }
     scope :with_deleted, -> { unscope(where: :deleted_at) }
-    scope :destroyable,   -> { only_deleted.where('deleted_at < ?', 30.days.ago) }
+    scope :destroyable,  -> { only_deleted.where('deleted_at < ?', 30.days.ago) }
     # doesn't validate the record, calls callbacks and saves
     def soft_delete
       update_attribute(:deleted_at, Time.now)
