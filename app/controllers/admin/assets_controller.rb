@@ -1,6 +1,6 @@
 module Admin
   class AssetsController < Admin::BaseController
-    before_action :find_asset, only: %i[spam unspam]
+    before_action :find_asset, only: %i[spam unspam delete]
 
     def index
       if permitted_params[:filter_by]
@@ -33,8 +33,14 @@ module Admin
       redirect_back(fallback_location: root_path)
     end
 
+    def delete
+      Assets::SoftDeleteRelations.new(asset: @asset).call
+      @asset.soft_delete
+    end
+
     private
 
+    # find by id rather than permalink, since it's not unique
     def find_asset
       @asset = Asset.find(params[:id])
     end
