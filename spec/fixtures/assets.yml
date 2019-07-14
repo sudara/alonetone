@@ -133,3 +133,14 @@ jamie_kiesl_the_duck:
   mp3_file_size: <%= 2.3.megabytes %>
   length: 140
   created_at: 2019-01-01 13:00:03
+
+asset_with_relations_for_soft_delete:
+  mp3_file_name: DeleteMeSoftly.mp3
+  title: Asset to test soft deletion of relations
+  permalink: delete-me-softly
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  listens_count: 2
+  created_at: 2010-04-08 13:00:03
+  user: jamie_kiesl
+  length: 55
