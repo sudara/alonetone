@@ -30,10 +30,33 @@ $two-column-narrow: 'only screen and (min-width: 749px) and (max-width: 920px)';
 $one-column: 'only screen and (max-width: 748px)';
 
 // fonts
+@font-face {
+  font-family: 'Alright-v2-Normal';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Regular.woff2') format('woff2');
+  font-weight: normal;
+}
 
-$black-font: 'Alright Sans Black', sans-serif;
-$sans-font: 'Alright Sans', sans-serif; // "Alright Sans Bold" exists using font-weight: bold or <strong> on this fontface
-$medium-sans-font: 'Alright Sans Medium', sans-serif;
+@font-face {
+  font-family: 'Alright-v2-Normal';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Bold.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Alright-v2-Normal-Medium';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Medium.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Alright-v2-Normal-Black';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Black.woff2') format('woff2');
+  font-weight: normal;
+}
+
+$sans-font: 'Alright-v2-Normal', sans-serif; // "Alright Sans Bold" exists using font-weight: bold or <strong> on this fontface
+$medium-sans-font: 'Alright-v2-Normal-Medium', sans-serif;
+$black-font: 'Alright-v2-Normal-Black', sans-serif;
 
 // site colors
 
