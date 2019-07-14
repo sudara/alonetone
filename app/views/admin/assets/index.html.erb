@@ -18,7 +18,7 @@
       </header>
       <div class="admin_assets_rows">
         <% @assets.each do |asset| %>
-          <div>
+          <div data-controller="admin--asset" data-admin--asset-deleted="<%= asset.soft_deleted? %>" data-admin--asset-spam="<%= asset.is_spam? %>">
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div class="avatar">
@@ -26,7 +26,7 @@
               </div>
               <div>
                 <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
-                <div><%= asset.user.email %></div>
+                <div><%= asset.soft_deleted? %></div>
                 <div><%= asset.user.ip %></div>
               </div>
             </div>
@@ -36,8 +36,8 @@
               <div>N comments / N listens</div>
             </div>
             <div class="button_column">
-              <%= button_to "Mark As Spam", spam_admin_asset_path(asset), method: :put %>
-              <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put%>
+              <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#hideSpamButton' } %>
+              <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#hideDeleteButtonAndSpamButton' } %>
             </div>
           </div>
         <% end %>
