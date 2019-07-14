@@ -96,3 +96,14 @@ jamie_kiesl_loves:
   credits: Did I mention that I'm really good at naming cheeses really quickly?
   tracks_count: 1
   user: jamie_kiesl
+
+# Jamie added all her favorite tracks to a playlist.
+jamie_kiesl_playlist_with_soft_deleted_tracks:
+  is_mix: true
+  is_favorite: true
+  permalink: jamie-loves
+  title: Jamie Loves
+  cover_quality: legacy
+  credits: Playlist to test tracks_count change for when asset is soft deleted
+  tracks_count: 1
+  user: jamie_kiesl
