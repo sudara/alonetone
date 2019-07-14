@@ -117,7 +117,7 @@ RSpec.describe Admin::AssetsController, type: :request do
       }.to change(Listen, :count).by(-listens_count)
     end
 
-    skip "should update users' listens_count" do
+    it "should NOT touch users' listens_count unless we can prove that the listen was spammy" do
       user = asset.user
       user_listens_count = user.listens_count
 
@@ -125,7 +125,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
       put delete_admin_asset_path(asset.id)
       # 2 listens in listens.yml
-      expect(user.reload.listens_count).to eq(user_listens_count - 2)
+      expect(user.reload.listens_count).to eq(user_listens_count)
     end
   end
 end
