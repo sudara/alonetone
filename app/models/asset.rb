@@ -184,6 +184,12 @@ class Asset < ApplicationRecord
     end
   end
 
+  def self.destroy_deleted_accounts_older_than_30_days
+    Asset.destroyable.find_each do |asset|
+      Asset::DestroyWithRelations.new(asset: asset).call
+    end
+  end
+
   private
 
   include HasPermalink::InstanceMethods
