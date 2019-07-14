@@ -31,13 +31,13 @@ class Asset < ApplicationRecord
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
 
   belongs_to :user, counter_cache: true
-  has_one :audio_feature, dependent: :destroy
+  has_one :audio_feature
   accepts_nested_attributes_for :audio_feature
   has_one :greenfield_post, class_name: '::Greenfield::Post'
-  has_many :tracks,    dependent: :destroy
+  has_many :tracks
   has_many :playlists, through: :tracks
-  has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :listens,   -> { order('listens.created_at DESC') }
+  has_many :comments, as: :commentable
 
   has_many :listeners,
     -> { distinct.order('listens.created_at DESC') },
