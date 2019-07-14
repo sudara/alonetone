@@ -36,9 +36,8 @@
               <div>N comments / N listens</div>
             </div>
             <div class="button_column">
-              <%= button_to "Mark As Spam", spam_admin_asset_path(asset.id), method: :put %>
-              <%= button_to "Spam All for IP", mark_group_as_spam_admin_assets_path, method: :put, params: { mark_spam_by: { user_id: asset.user_id } } %>
-              <%= button_to "Delete User", admin_user_path(asset.user_id), data: { confirm: 'This will delete user forevAr. Are you sure?'}, method: :delete %>
+              <%= button_to "Mark As Spam", spam_admin_asset_path(asset), method: :put %>
+              <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put%>
             </div>
           </div>
         <% end %>
