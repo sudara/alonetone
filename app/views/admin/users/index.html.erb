@@ -34,15 +34,15 @@
             </div>
             <div class="user_column">
               <div class="avatar">
-                <%= user_image(@user, variant: :original) %>
+                <%= user_image(user, variant: :large) %>
               </div>
               <div>
-                <div><%= user.login %></div>
+                <div><%= user.soft_deleted? ? user.login : link_to(user.login, user_home_path(user.login)) %></div>
                 <div><%= user.email %></div>
                 <% unless user.soft_deleted? %>
                 <div><%= user.current_login_ip %>
-                  <% if user.current_login_ip.present? %>
-                  <%= link_to "Spam All #{User.where(current_login_ip: user.current_login_ip).count}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
+                  <% if user.current_login_ip.present? && (User.with_same_ip_as(user).count > 0)  %>
+                  <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
                   <% end %>
                  </div>
                 <% end %>
@@ -50,6 +50,7 @@
             </div>
             <div class="bio_column">
               <div><%= truncate(user&.profile&.bio, length: 200) %></div>
+              <div><%= user&.profile&.website %></div>
               <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0 %></div>
             </div>
             <div class="button_column">
