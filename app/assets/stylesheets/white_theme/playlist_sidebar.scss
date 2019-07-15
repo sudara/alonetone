@@ -163,24 +163,6 @@
             position: relative;
             top: -1px;
           }
-          // &.spotify {
-          //   i {
-          //     background-image: image-url("svg/icon_playlist_spotify.svg");
-          //     display: inline-block;
-          //     background-size: 100%;
-          //     width: 17px;
-          //     height: 17px;
-          //   }
-          // }
-          // &.itunes {
-          //   i {
-          //     background-image: image-url("svg/icon_playlist_itunes.svg");
-          //     display: inline-block;
-          //     background-size: 100%;
-          //     width: 17px;
-          //     height: 17px;
-          //   }
-          // }
           &.spotify i {
             background-image: image-url("svg/icon_playlist_spotify.svg");
           }
@@ -189,7 +171,6 @@
           }
           &.itunes i {
             background-image: image-url("svg/icon_playlist_itunes.svg");
-            padding-left: px;
           }
           &.apple i {
             background-image: image-url("svg/apple_music.svg");
