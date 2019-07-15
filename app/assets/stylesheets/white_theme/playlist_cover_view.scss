@@ -121,7 +121,6 @@ body.cover-view {
             }
             &.itunes {
               background-image: image-url("svg/icon_playlist_itunes.svg");
-              padding-left: px;
             }
             &.apple {
               background-image: image-url("svg/apple_music.svg");
@@ -130,7 +129,7 @@ body.cover-view {
               background-image: image-url("svg/icon_playlist_google_play.svg");
             }
             &.youtube {
-              background-image: image-url("svg/icon_playlist_link.svg");
+              background-image: image-url("svg/icon_playlist_youtube.svg");
             }
             .action-text {
               text-align: left;
