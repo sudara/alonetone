@@ -53,4 +53,29 @@ RSpec.describe Comment, type: :model do
       end.to change { Comment.count }.from(original_count).to(0)
     end
   end
+
+  describe "to_other_members scope" do
+    describe "included comments" do
+      before do
+        users(:jamie_kiesl).update_attribute("current_login_ip", "127.1.1.12")
+      end
+      it "should include comments by users to each other" do
+        expect(Comment.all.to_other_members).to include(comments(:public_non_spam_comment_to_another_user))
+      end
+    end
+
+    describe "not included comments" do
+      before do
+        users(:jamie_kiesl).update_attribute("current_login_ip", "127.1.1.2")
+      end
+
+      it "should not include comments made by user on its own track" do
+        expect(Comment.all.to_other_members).not_to include(comments(:public_non_spam_comment_to_self))
+      end
+
+      it "should not include a comment made by matching ip address" do
+        expect(Comment.all.to_other_members).not_to include(comments(:public_non_spam_comment_to_self_by_ip))
+      end
+    end
+  end
 end

@@ -196,6 +196,9 @@
       color: $dark-gray;
       border: 1px solid $samo-light-gray;
       background-color: transparent;
+      &:focus {
+        border-color: $new-samo-gray;
+      }
       @media #{$one-column} {
         font-size: 16px;
       }

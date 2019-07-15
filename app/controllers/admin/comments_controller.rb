@@ -12,7 +12,7 @@ module Admin
 
     def unspam
       @comment.ham!
-      @comment.update_column :is_spam, false
+      @comment.update_attribute :is_spam, false
       CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
 
       respond_to do |format|
@@ -23,7 +23,7 @@ module Admin
 
     def spam
       @comment.spam!
-      @comment.update_column :is_spam, true
+      @comment.update_attribute :is_spam, true
 
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
