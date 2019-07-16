@@ -105,6 +105,7 @@
         span.track-position {
           display: block;
           float: left;
+          font-variant-numeric: tabular-nums;
           margin-right: 4px;
           color: #868686;
           min-width: 21px;
@@ -121,6 +122,7 @@
         .time-text {
           font-size: 12px;
           margin-right: 12px;
+          font-variant-numeric: tabular-nums;
           color: $gray;
         }
       }
