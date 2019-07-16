@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="lsSUCXrSSVhC9F6XtvmDBlzt2jdjVX75vSIRzTpvrmQ" />
   <title><%= @page_title || 'alonetone' %></title>
+  <%= render partial: 'shared/preloads' %>
   <%= yield :head %>
   <%= stylesheet_link_tag ('white_theme') %>
   <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
