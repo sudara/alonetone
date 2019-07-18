@@ -15,13 +15,6 @@ export default class extends Controller {
     }
   }
 
-  connect() {
-    // console.log("Hello, Stimulus!", this.element)
-  }
-
-  //////////////////////////////////
-  // SPAM button
-  //////////////////////////////////
   showSpamButton() {
     this.spamButtonTarget.style.display = 'block'
   }
@@ -30,10 +23,6 @@ export default class extends Controller {
     this.element.classList.add('spam')
     this.spamButtonTarget.style.display = 'none'
   }
-
-  //////////////////////////////////
-  // DELETE button
-  //////////////////////////////////
 
   showDeleteButton() {
     this.data.set('deleted', 'false')
