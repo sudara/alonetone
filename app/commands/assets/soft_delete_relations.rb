@@ -7,11 +7,12 @@ module Assets
     end
 
     def call
-      asset.comments&.map(&:soft_delete)
+      time = Time.now
       # first update playlists
       asset.playlists.update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.empty?
-      asset.tracks&.map(&:soft_delete)
-      asset.listens&.map(&:soft_delete)
+      asset.comments.update_all(deleted_at: time)
+      asset.tracks.update_all(deleted_at: time)
+      asset.listens.update_all(deleted_at: time)
     end
   end
 end
