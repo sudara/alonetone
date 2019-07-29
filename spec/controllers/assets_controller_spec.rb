@@ -135,7 +135,7 @@ RSpec.describe AssetsController, type: :controller do
       get :index, params: { user_id: users(:sudara).login }
       expect(response.status).to eq(200)
       expect(response).to render_template(:index_white)
-      expect(response.content_type).to eq("text/html")
+      expect(response.content_type).to eq("text/html; charset=utf-8")
     end
 
     it "should display user's track if it is hot" do
