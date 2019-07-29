@@ -357,10 +357,10 @@
       <%= link_to edit_user_path(@user), class: "edit_profile #{ admin? ? 'admin' : ''}" do %>
         Edit Profile
       <% end %>
-        <% if moderator? %>
-    <%= link_to "Delete User", user_path(@user, login: @user.login), method: :delete, class: "edit_profile--delete admin",
-      data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."} %>
-  <% end %>
+      <% if moderator? %>
+        <%= link_to "Spam", spam_admin_user_path(@user), method: :put, class: 'edit_profile--delete'  %>
+        <%= link_to "Delete", delete_admin_user_path(@user), method: :put, class: 'edit_profile--delete' %>
+      <% end %>
 
     </div>
   <% end %>
