@@ -83,7 +83,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
     it "should redirect admin to root_path" do
       put delete_admin_user_path(users(:arthur))
-      expect(response).to redirect_to(admin_user_path(filter_by: :deleted))
+      expect(response).to redirect_to(admin_users_path(filter_by: :deleted))
     end
 
     it "sets deleted_at to true" do
