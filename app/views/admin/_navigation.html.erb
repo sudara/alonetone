@@ -3,6 +3,7 @@
   <ul>
     <%= navigation_item 'Not Spam', admin_users_path({filter_by: :not_spam}) %>
     <%= navigation_item 'Only Spam', admin_users_path({filter_by: :is_spam}) %>
+    <%= navigation_item 'Spammed Musicians', admin_users_path({filter_by: :spam_musicians}) %>
     <%= navigation_item 'Deleted (Not Spam)', admin_users_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'All Tracks', admin_assets_path %>
