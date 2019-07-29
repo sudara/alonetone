@@ -358,8 +358,8 @@
         Edit Profile
       <% end %>
       <% if moderator? %>
-        <%= link_to "Spam", spam_admin_user_path(@user), method: :put, class: 'edit_profile--delete'  %>
-        <%= link_to "Delete", delete_admin_user_path(@user), method: :put, class: 'edit_profile--delete' %>
+        <%= link_to "Spam User", spam_admin_user_path(@user), method: :put, class: 'edit_profile--delete'  %>
+        <%= link_to "Delete User", delete_admin_user_path(@user), method: :put, class: 'edit_profile--delete' %>
       <% end %>
 
     </div>
