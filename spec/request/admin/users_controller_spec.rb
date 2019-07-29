@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::AssetsController, type: :request do
+RSpec.describe Admin::UsersController, type: :request do
   before do
     create_user_session(users(:sudara))
   end
@@ -83,7 +83,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     it "should redirect admin to root_path" do
       put delete_admin_user_path(users(:arthur))
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(admin_users_path(filter_by: :deleted))
     end
 
     it "sets deleted_at to true" do
