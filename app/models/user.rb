@@ -260,7 +260,7 @@ class User < ApplicationRecord
 
   def spam_and_mark_for_deletion!
     spam! # makes an api request
-    update_column :is_spam, true
+    update_attribute :is_spam, true
     soft_delete_with_relations
   end
 
@@ -282,11 +282,13 @@ class User < ApplicationRecord
     when "deleted"
       only_deleted.where(is_spam: false).order('deleted_at DESC')
     when "is_spam"
-      with_deleted.where(is_spam: true).recent
+      with_deleted.where(is_spam: true).order('deleted_at DESC')
+    when "spam_musicians"
+      musicians.with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
       with_deleted.where(is_spam: false).recent
     when String
-      where("email like '%#{filter}%' or login like '%#{filter}%'").recent
+      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%'").recent
     else
       with_deleted.recent
     end
