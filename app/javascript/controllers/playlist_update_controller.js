@@ -58,7 +58,7 @@ export default class extends Controller {
     setTimeout(this.stopSpin.bind(this), 500)
     flashController.alertSaved('Removed')
     this.element.parentNode.removeChild(this.element)
-    this.updatePlaylistSize()
+    this.updatePlaylistMetadata()
   }
 
   added(response, status, xhr) {
@@ -68,10 +68,10 @@ export default class extends Controller {
     this.addTarget.style.display = 'none'
     this.removeTarget.style.display = 'flex'
     this.playlistSort.sortableTarget.appendChild(this.element)
-    this.updatePlaylistSize()
+    this.updatePlaylistMetadata()
   }
 
-  updatePlaylistSize() {
-    this.playlistSort.updatePlaylistSize()
+  updatePlaylistMetadata() {
+    this.playlistSort.updatePlaylistMetadata()
   }
 }
