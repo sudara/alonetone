@@ -1,5 +1,7 @@
 import Rails from 'rails-ujs'
 import { Controller } from 'stimulus'
+import PlaylistEditController from './playlist_edit_controller'
+import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['add', 'remove']
@@ -49,25 +51,22 @@ export default class extends Controller {
 
   errored() {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.playlistEdit.feedbackTarget.innerHTML = '<div>Dang, something went wrong!</div>'
-    this.playlistEdit.feedbackTarget.toggle('ajax_fail')
+    flashController.alertFailed()
   }
 
   removed() {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.playlistEdit.feedbackTarget.innerHTML = '<div>Removed</div>'
-    this.playlistEdit.feedbackTarget.toggle('ajax_success')
+    flashController.alertSaved('Removed')
     this.updatePlaylistSize()
     this.element.parentNode.removeChild(this.element)
   }
 
   added(response, status, xhr) {
     setTimeout(this.stopSpin.bind(this), 500)
+    flashController.alertSaved('Added!')
     this.element.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
     this.addTarget.style.display = 'none'
     this.removeTarget.style.display = 'flex'
-    this.playlistEdit.feedbackTarget.innerHTML = '<div>Added!</div>'
-    this.playlistEdit.feedbackTarget.toggle('ajax_success')
     this.playlistEdit.sortableTarget.appendChild(this.element)
     this.updatePlaylistSize()
   }
