@@ -131,21 +131,6 @@
               </a>
             </div>
           <% end %>
-          <% @assets.each do |asset| %>
-            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
-              <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
-              <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
-                <div class="add-inner">
-                  <%== render file: svg_path('svg/icon_+.svg') %>
-                </div>
-              </a>
-              <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
-                <div class="remove-inner">
-                    <%== render file: svg_path('svg/icon_x.svg') %>
-                </div>
-              </a>
-            </div>
-          <% end %>
         </div>
     </div>
   </div>
