@@ -101,7 +101,7 @@ div.small_spinner {
   z-index: 100;
   font-weight: bold;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.30);
-  div.ajax_success {
+  &.ajax_success > div  {
     padding-top: 9.75px;
     padding-right: 3px;
     color: #2b8800;
@@ -117,7 +117,7 @@ div.small_spinner {
       background-repeat: no-repeat;
     }
   }
-  div.ajax_fail {
+  &.ajax_fail > div {
     padding-top: 9.75px;
     padding-right: 3px;
     color: #b20035;
