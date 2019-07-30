@@ -219,7 +219,10 @@
       font-family: $medium-sans-font;
     }
     .small_spinner {
-      float: right;
+      position: absolute;
+      bottom: 14px;
+      top: unset;
+      right: 15px;
     }
   }
   #right {
