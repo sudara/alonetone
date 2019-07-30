@@ -88,6 +88,7 @@ export default class extends PlaybackController {
     this.seekBarContainerTarget.classList.add('show');
     this.seekBarLoadedTarget.style.width = '100%'
   }
+
   updateSeekBarPlayed() {
     const position = this.position / this.sound.duration()
     const maxwidth = this.seekBarLoadedTarget.offsetWidth
