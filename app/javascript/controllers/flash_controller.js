@@ -1,14 +1,13 @@
 import { Controller } from 'stimulus'
 import { TimelineMax, TweenLite, Elastic, Power4, CSSPlugin } from 'gsap/all'
 
+export let flashController
+
 export default class extends Controller {
   static targets = ['message']
 
   initialize() {
-    // check for rails static flash
-  }
-
-  disconnect() {
+    flashController = this
   }
 
   alert(message) {
@@ -17,6 +16,14 @@ export default class extends Controller {
       .to(this.element, 0, { autoAlpha: 0, y: 50 })
       .to(this.element, .5, { autoAlpha: 1, y: 0 })
       .to(this.element, 1, { autoAlpha: 0, y: 0 }, 3)
+  }
+
+  alertSaved(message = 'Saved!') {
+    this.alert(`<div class="ajax_success"><span>${message}</span></div>`)
+  }
+
+  alertFailed(message = "Sorry that didn't work") {
+    this.alert(`<div class="ajax_fail"><span>${message}</span></div>`)
   }
 
 }
