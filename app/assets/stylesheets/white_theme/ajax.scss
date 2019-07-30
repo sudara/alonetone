@@ -117,4 +117,20 @@ div.small_spinner {
       background-repeat: no-repeat;
     }
   }
+  div.ajax_fail {
+    padding-top: 9.75px;
+    padding-right: 3px;
+    color: #b20035;
+    &::after {
+      position: absolute;
+      top: 7.5px;
+      right: 15px;
+      content: "";
+      height:15px;
+      width: 15px;
+      background-size: 15px 15px;
+      background-image: image-url("svg/icon_x_red.svg");
+      background-repeat: no-repeat;
+    }
+  }
 }
