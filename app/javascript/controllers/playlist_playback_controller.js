@@ -57,7 +57,7 @@ export default class extends PlaybackController {
     this.showSmallCoverAndSidebarLinks()
 
     // replace track content with result from ajax
-    let temp = document.createElement('div')
+    const temp = document.createElement('div')
     temp.innerHTML = e.detail[2].responseText
     document.querySelector('.track-content').replaceWith(temp.firstChild)
     if (e.target.href !== document.location.href) {
