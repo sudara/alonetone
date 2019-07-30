@@ -19,10 +19,14 @@ export default class extends Controller {
   }
 
   alertSaved(message = 'Saved!') {
+    this.element.classList.add("ajax_success")
+    this.element.classList.remove("ajax_fail")
     this.alert(`<div class="ajax_success"><span>${message}</span></div>`)
   }
 
   alertFailed(message = "Sorry that didn't work") {
+    this.element.classList.add("ajax_fail")
+    this.element.classList.remove("ajax_success")
     this.alert(`<div class="ajax_fail"><span>${message}</span></div>`)
   }
 
