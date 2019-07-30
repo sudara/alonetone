@@ -79,7 +79,7 @@
       </div>
       <div class="sortable" data-target="playlist-sort.sortable">
         <% @playlist.tracks.each do |track| %>
-        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>">
+        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
           <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
           <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
             <div class="remove-inner">
@@ -89,11 +89,9 @@
         </div>
         <% end %>
       </div>
-      <% if @playlist.tracks.size > 0 %>
       <div class="playlist_size">
-          <%= "<span data-target='playlist-sort.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+        <%= "<span data-target='playlist-sort.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.user.display_name}".html_safe %>
       </div>
-      <% end %>
     <div class="small_spinner" data-target="playlist-sort.spinner"></div>
     </div>
   </div>
@@ -119,7 +117,7 @@
             <%== pagy_nav @assets_pagy %>
           </div>
           <% @assets.each do |asset| %>
-            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
+            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
               <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
               <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
                 <div class="add-inner">

@@ -42,16 +42,18 @@ export default class extends Controller {
     this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
   }
 
-  updatePlaylistSize() {
+  updatePlaylistMetadata() {
     const size = this.sortableTarget.childElementCount
     this.sizeTarget.innerHTML = `${size}`
     this.trackCountTarget.innerHTML = `${size} tracks`
+    this.totalTimeTarget.innerHTML = this.calculateTime()
   }
 
   calculateTime() {
-    const time = Math.floor(this.position)
-    const min = Math.floor(time / 60)
-    const sec = time % 60
-    this.time = min + ':' + (sec >= 10 ? sec : '0' + sec)
+    const tracks = Array.from(this.sortableTarget.children)
+    const sum = tracks.reduce((acc, el) => acc + Number(el.dataset.time), 0)
+    const min = Math.floor(sum / 60)
+    const sec = sum % 60
+    return `${min}:${sec >= 10 ? sec : '0' + sec}`
   }
 }
