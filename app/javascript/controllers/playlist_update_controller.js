@@ -1,6 +1,6 @@
 import Rails from 'rails-ujs'
 import { Controller } from 'stimulus'
-import PlaylistEditController from './playlist_edit_controller'
+import PlaylistSortController from './playlist_sort_controller'
 import { flashController } from './flash_controller'
 
 export default class extends Controller {
@@ -11,13 +11,13 @@ export default class extends Controller {
     this.removeUrl = document.querySelector('.remove_url').getAttribute('href')
   }
 
-  setPlaylistEdit() {
-    this.playlistEdit = this.application.getControllerForElementAndIdentifier(document.querySelector('#columns'), 'playlist-edit')
+  setPlaylistSort() {
+    this.playlistSort = this.application.getControllerForElementAndIdentifier(document.querySelector('#columns'), 'playlist-sort')
   }
 
   add(e) {
     e.preventDefault()
-    this.setPlaylistEdit()
+    this.setPlaylistSort()
     Rails.ajax({
       url: this.addUrl,
       type: 'POST',
@@ -30,7 +30,7 @@ export default class extends Controller {
 
   remove(e) {
     e.preventDefault()
-    this.setPlaylistEdit()
+    this.setPlaylistSort()
     Rails.ajax({
       url: this.removeUrl,
       type: 'GET',
@@ -42,11 +42,11 @@ export default class extends Controller {
   }
 
   spin() {
-    this.playlistEdit.spinnerTarget.style.display = 'block'
+    this.playlistSort.spinnerTarget.style.display = 'block'
   }
 
   stopSpin() {
-    this.playlistEdit.spinnerTarget.style.display = 'none'
+    this.playlistSort.spinnerTarget.style.display = 'none'
   }
 
   errored() {
@@ -57,8 +57,8 @@ export default class extends Controller {
   removed() {
     setTimeout(this.stopSpin.bind(this), 500)
     flashController.alertSaved('Removed')
-    this.updatePlaylistSize()
     this.element.parentNode.removeChild(this.element)
+    this.updatePlaylistSize()
   }
 
   added(response, status, xhr) {
@@ -67,11 +67,11 @@ export default class extends Controller {
     this.element.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
     this.addTarget.style.display = 'none'
     this.removeTarget.style.display = 'flex'
-    this.playlistEdit.sortableTarget.appendChild(this.element)
+    this.playlistSort.sortableTarget.appendChild(this.element)
     this.updatePlaylistSize()
   }
 
   updatePlaylistSize() {
-    this.playlistEdit.updatePlaylistSize()
+    this.playlistSort.updatePlaylistSize()
   }
 }

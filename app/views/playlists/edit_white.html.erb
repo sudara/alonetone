@@ -63,7 +63,7 @@
     </div>
     <% end %>
 </div>
-<div id="columns" class="edit_playlist_columns" data-controller="playlist-edit">
+<div id="columns" class="edit_playlist_columns" data-controller="playlist-sort">
   <div id="left">
     <p class="left_instructions">
       You can reorder your playlist by dragging your tracks. Remove them from the playlist with the <span class="remove-inner-inline"><%== render file: svg_path('svg/icon_x.svg') %></span>
@@ -73,11 +73,11 @@
       <div class="left_column_box_header">
         <h2><%= @playlist.title %> <span class="playlist_date">(2018)</span></h2>
         <div>
-           <span class="playlist_track_size" data-target="playlist-edit.trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
-           <span class="playlist_total_time" data-target="playlist-edit.totalTime"><%= @playlist.play_time %></span>
+           <span class="playlist_track_size" data-target="playlist-sort.trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
+           <span class="playlist_total_time" data-target="playlist-sort.totalTime"><%= @playlist.play_time %></span>
         </div>
       </div>
-      <div class="sortable" data-target="playlist-edit.sortable">
+      <div class="sortable" data-target="playlist-sort.sortable">
         <% @playlist.tracks.each do |track| %>
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>">
           <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
@@ -91,10 +91,10 @@
       </div>
       <% if @playlist.tracks.size > 0 %>
       <div class="playlist_size">
-          <%= "<span data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+          <%= "<span data-target='playlist-sort.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
       </div>
       <% end %>
-    <div class="small_spinner" data-target="playlist-edit.spinner"></div>
+    <div class="small_spinner" data-target="playlist-sort.spinner"></div>
     </div>
   </div>
 
@@ -110,7 +110,7 @@
           </div>
         </div>
         <div id="playlist_tabs">
-          <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
+          <ul id="playlist_source_options" class="tabs" data-target="playlist-sort.tabs">
             <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
           </ul>
         </div>
@@ -152,9 +152,9 @@
     </div>
   </div>
   <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-edit.addUrl' }, class: 'hidden add_url' %>
+    data: { target:'playlist-sort.addUrl' }, class: 'hidden add_url' %>
   <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-edit.removeUrl' }, class: 'hidden remove_url' %>
+    data: { target:'playlist-sort.removeUrl' }, class: 'hidden remove_url' %>
   <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-edit.sortUrl' }, class: 'hidden sort_url' %>
+    data: { target:'playlist-sort.sortUrl' }, class: 'hidden sort_url' %>
 </div>
