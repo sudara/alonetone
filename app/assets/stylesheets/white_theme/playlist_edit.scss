@@ -218,6 +218,9 @@
       margin: 130px 10px 10px 10px;
       font-family: $medium-sans-font;
     }
+    .small_spinner {
+      float: right;
+    }
   }
   #right {
     #playlist_sources {
@@ -236,13 +239,13 @@
           margin-right: 20px;
           color: $samo-gray;
           margin-left: auto;
-        }  
+        }
       }
       #playlist_tabs {
         display: flex;
         background-color: #e1e2e2;
         height: 36px;
-        box-sizing: border-box; 
+        box-sizing: border-box;
         #playlist_source_options {
           margin-left: $baseline / 2;
           display: flex;
@@ -265,7 +268,7 @@
             }
             a {
               @include default-button();
-              background-color: $white; 
+              background-color: $white;
               color: #888888;
               font-family: $medium-sans-font;
               font-weight: normal;
