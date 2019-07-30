@@ -43,8 +43,8 @@ export default class extends Controller {
   }
 
   updatePlaylistSize() {
-    const size = this.sortable.toArray().length
-    this.sizeTarget.innerHTML =`${size}`
+    const size = this.sortableTarget.childElementCount
+    this.sizeTarget.innerHTML = `${size}`
     this.trackCountTarget.innerHTML = `${size} tracks`
   }
 
