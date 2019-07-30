@@ -67,7 +67,7 @@ export default class extends Controller {
     this.element.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
     this.addTarget.style.display = 'none'
     this.removeTarget.style.display = 'flex'
-    this.playlistSort.sortableTarget.appendChild(this.element.cloneNode(true))
+    this.playlistSort.sortableTarget.appendChild(this.element)
     this.updatePlaylistMetadata()
   }
 
