@@ -1,5 +1,5 @@
-import PlaybackController from './playback_controller'
 import Rails from 'rails-ujs'
+import PlaybackController from './playback_controller'
 
 const smallCover = document.querySelector('a.small-cover')
 const sidebarLinks = document.querySelector('.sidebar-downloads')
@@ -8,7 +8,7 @@ export default class extends PlaybackController {
   static targets = ['loadTrack']
 
   preInitialize() {
-    this.url = this.playTarget.getAttribute('href') + '.mp3'
+    this.url = `${this.playTarget.getAttribute('href')}.mp3`
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
     this.preload = this.playTarget.parentElement.classList.contains('active')
   }
