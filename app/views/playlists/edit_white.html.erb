@@ -89,15 +89,13 @@
         </div>
         <% end %>
       </div>
-     <% if @playlist.tracks.size > 0 %>
+      <% if @playlist.tracks.size > 0 %>
       <div class="playlist_size">
-      <%= "<span data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+          <%= "<span data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
       </div>
+      <% end %>
+    <div class="small_spinner" data-target="playlist-edit.spinner"></div>
     </div>
-    <div class="playlist_feedback" data-target="playlist-edit.feedback">
-    </div>
-    <% end %>
-     <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
   </div>
 
   <div id="right">
@@ -114,8 +112,6 @@
         <div id="playlist_tabs">
           <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
             <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
-            <li><%= link_to "your listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
-            <li><%= link_to "favorites", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
           </ul>
         </div>
         <div id="your_uploads" class="playlist_source">
