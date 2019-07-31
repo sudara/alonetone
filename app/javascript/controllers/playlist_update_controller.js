@@ -64,7 +64,7 @@ export default class extends Controller {
   added(response, status, xhr) {
     setTimeout(this.stopSpin.bind(this), 500)
     flashController.alertSaved('Added!')
-    let clonedTrack = this.element.cloneNode(true)
+    const clonedTrack = this.element.cloneNode(true)
     clonedTrack.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
     this.playlistSort.sortableTarget.appendChild(clonedTrack)
     this.updatePlaylistMetadata()
