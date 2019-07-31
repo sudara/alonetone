@@ -224,6 +224,14 @@
       top: unset;
       right: 15px;
     }
+    .playlist_asset {
+      .add {
+        display: none;
+      }
+      .remove {
+        display: flex;
+      }
+    }
   }
   #right {
     #playlist_sources {
@@ -288,6 +296,15 @@
         border-bottom: 1px solid $light-gray;
       }
     }
+    .playlist_asset {
+      .add {
+        display: flex;
+      }
+      .remove {
+        display: none;
+      }
+    }
+    
   }
   .left_instructions,
   .right_instructions {
