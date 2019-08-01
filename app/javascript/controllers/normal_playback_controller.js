@@ -39,7 +39,7 @@ export default class extends PlaybackController {
   }
 
   toggleDetails(e) {
-    if (!e.target.classList.contains('artist') ) {
+    if (!e.target.classList.contains('artist')) {
       // if the link in the track top is the artist link, go to that URL,
       // otherwise open the track reveal section
       e.preventDefault()
@@ -88,6 +88,7 @@ export default class extends PlaybackController {
     this.seekBarContainerTarget.classList.add('show');
     this.seekBarLoadedTarget.style.width = '100%'
   }
+
   updateSeekBarPlayed() {
     const position = this.position / this.sound.duration()
     const maxwidth = this.seekBarLoadedTarget.offsetWidth
