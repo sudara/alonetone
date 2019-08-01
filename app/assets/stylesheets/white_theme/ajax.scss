@@ -105,6 +105,16 @@ div.small_spinner {
     padding-top: 9.75px;
     padding-right: 3px;
     color: #2b8800;
+    @media #{$mobile} {
+      span {
+        display: inline;
+      }
+    }
+    @media #{$two-column-narrow} {
+      span {
+        display: inline;
+      }
+    }
     &::after {
       position: absolute;
       top: 7.5px;
@@ -121,6 +131,16 @@ div.small_spinner {
     padding-top: 9.75px;
     padding-right: 3px;
     color: #b20035;
+    @media #{$mobile} {
+      span {
+        display: inline;
+      }
+    }
+    @media #{$two-column-narrow} {
+      span {
+        display: inline;
+      }
+    }
     &::after {
       position: absolute;
       top: 7.5px;
