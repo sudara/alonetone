@@ -112,7 +112,19 @@ body.cover-view {
             background-image: image-url("svg/icon_playlist_link.svg");
             background-size: 19px 19px;
             background-repeat: no-repeat;
-            background-position: 10px 15px;
+            background-position: 12px 15px;
+            span.service-name {
+              display: block;
+              margin-top: 2px;
+            }
+            span.action-text {
+              display: block;
+              text-align: left;
+              font-size: 10px;
+              display: block;
+              color: $gray;
+
+            }
             &.spotify {
               background-image: image-url("svg/icon_playlist_spotify.svg");
             }
@@ -130,12 +142,6 @@ body.cover-view {
             }
             &.youtube {
               background-image: image-url("svg/icon_playlist_youtube.svg");
-            }
-            .action-text {
-              text-align: left;
-              font-size: 10px;
-              display: block;
-              color: $gray;
             }
           }
         }
