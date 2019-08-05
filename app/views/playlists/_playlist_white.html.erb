@@ -62,8 +62,9 @@
     <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
       edit playlist
     <% end %>
-
-    <%= link_to "edit descriptions", mass_edit_user_tracks_path(@playlist.user, assets: @playlist.assets.collect(&:id)), class: 'edit_playlist' %>
+    <% if @playlist.has_tracks? %>
+      <%= link_to "edit descriptions", mass_edit_user_tracks_path(@playlist.user, assets: @playlist.assets.collect(&:id)), class: 'edit_playlist' %>
+    <% end %>
   </div>
   <% end %>
 

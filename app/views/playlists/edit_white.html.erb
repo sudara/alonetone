@@ -11,45 +11,50 @@
           <% end %>
           <%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
-            <%= submit_tag "Upload new Pic" %>
+            <%= submit_tag "Upload artwork" %>
           <% end %>
           <p>
-            Upload a square photo, 2000px by 2000px for best results.
+            Upload a square photo,<br> 2000px by 2000px for<br> best results.
           </p>
       </div>
       <%= form_with model: [@user, @playlist], html: { class: 'edit_playlist_info_right_column', id: 'edit_playlist' } do |f| %>
         <div class="edit_playlist_info_right_column_title_and_year">
           <div>
-            <label for="">Title</label>
+            <label for="playlist_title">Title</label>
             <%= f.text_field :title %>
           </div>
           <div>
-            <label for="">Year</label>
+            <label for="playlist_year">Year</label>
               <%= f.text_field :year, input_html: {maxlength: 4, size: 4} %>
           </div>
 
         </div>
         <div class="edit_playlist_info_right_column_links">
           <div>
-            <label for="">Link 1</label>
+            <label for="playlist_link1">Link 1</label>
             <%= f.text_field :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
           </div>
 
           <div>
-            <label for="">Link 2</label>
+            <label for="playlist_link2">Link 2</label>
             <%= f.text_field :link2, placeholder: 'another link' %>
           </div>
         </div>
 
         <div class="edit_playlist_info_right_column_credits">
           <div class="input">
-            <label for="">Credits</label>
+            <label for="playlist_credits">Credits</label>
             <%= f.text_area :credits %>
           </div>
         </div>
 
         <div class="edit_playlist_info_right_column_private_and_hidden">
-          <div class="input"><%= f.check_box :private %></div> <label for="">&nbsp;&nbsp;Private</label> &nbsp;&nbsp; <span>| (Playlists are always private until they have more than 2 tracks)</span>
+          <div class="input">
+            <%= f.check_box :private %>
+            <label for="playlist_private"><span>Private</span></label>
+          </div>
+          <span class="private_notice">| Playlists are hidden until they have more than 2 tracks</span>
+
         </div>
     </div>
     <div class="edit_playlist_info_bottom">
@@ -58,49 +63,37 @@
     </div>
     <% end %>
 </div>
-<%#= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
-<!--
-<div class="edit_playlist_pro_upload faq box">
-  <div class="pro_upload_left">
-    <h1>Professional Upload System&trade;</h1>
-    <p>
-      You can upload a ZIP file containing the playlist contents, and we'll populate the playlist for you.
-    </p>
-  </div>
-  <a class="upload_zip" href="">
-    Upload ZIP file
-  </a>
-</div>
--->
-<div id="columns" class="edit_playlist_columns" data-controller="playlist-edit">
+<div id="columns" class="edit_playlist_columns" data-controller="playlist-sort">
   <div id="left">
     <p class="left_instructions">
       You can reorder your playlist by dragging your tracks. Remove them from the playlist with the <span class="remove-inner-inline"><%== render file: svg_path('svg/icon_x.svg') %></span>
  icon.
     </p>
     <div class="box">
-    <h2><%= @playlist.title %></h2>
-    <div class="sortable" data-target="playlist-edit.sortable">
-      <% @playlist.tracks.each do |track| %>
-      <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%=track.id %>">
-        <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
-        <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
-          <div class="remove-inner">
-              <%== render file: svg_path('svg/icon_x.svg') %>
-          </div>
-        </a>
+      <div class="left_column_box_header">
+        <h2><%= @playlist.title %> <span class="playlist_date">(2018)</span></h2>
+        <div>
+           <span class="playlist_track_size" data-target="playlist-sort.trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
+           <span class="playlist_total_time" data-target="playlist-sort.totalTime"><%= @playlist.play_time %></span>
+        </div>
       </div>
-      <% end %>
-    </div>
-    </div>
-    <div class="playlist_feedback" data-target="playlist-edit.feedback">
-    </div>
-     <% if @playlist.tracks.size > 0 %>
+      <div class="sortable" data-target="playlist-sort.sortable">
+        <% @playlist.tracks.each do |track| %>
+        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
+          <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+          <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+            <div class="remove-inner">
+                <%== render file: svg_path('svg/icon_x.svg') %>
+            </div>
+          </a>
+        </div>
+        <% end %>
+      </div>
       <div class="playlist_size">
-      <%= "<span class='playlist_size' data-target='playlist-edit.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.tracks.first.asset.user.display_name}".html_safe %>
+        <%= "<span data-target='playlist-sort.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.user.display_name}".html_safe %>
       </div>
-    <% end %>
-     <div class="spinner" data-target="playlist-edit.spinner">spinning...</div>
+    <div class="small_spinner" data-target="playlist-sort.spinner"></div>
+    </div>
   </div>
 
   <div id="right">
@@ -108,42 +101,43 @@
        Click the <span class="add-inner-inline"><%== render file: svg_path('svg/icon_+.svg') %></span> icon on a track below to add it to the playlist selection.
     </p>
     <div id="playlist_sources" class="box draggable_wrapper">
-      <div class="draggable_tracks">
-        <h2>Available tracks</h2>
-        <div id="playlist_tabs">
-          <ul id="playlist_source_options" class="tabs" data-target="playlist-edit.tabs">
-            <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
-            <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
-            <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
-          </ul>
-          <div id="your_uploads" class="playlist_source">
-            <div class="mini_paginator">
-              <%== pagy_nav @assets_pagy %>
-            </div>
-            <% @assets.each do |asset| %>
-              <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>">
-                <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
-                <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
-                  <div class="add-inner">
-                    <%== render file: svg_path('svg/icon_+.svg') %>
-                  </div>
-                </a>
-                <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove" style="display:none">
-                  <div class="remove-inner">
-                      <%== render file: svg_path('svg/icon_x.svg') %>
-                  </div>
-                </a>
-              </div>
-            <% end %>
+        <div class="right_column_box_header">
+          <h2>Available tracks</h2>
+          <div class="available_tracks_total">
+            2,181 tracks total
           </div>
         </div>
-      </div>
+        <div id="playlist_tabs">
+          <ul id="playlist_source_options" class="tabs" data-target="playlist-sort.tabs">
+            <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
+          </ul>
+        </div>
+        <div id="your_uploads" class="playlist_source">
+          <div class="mini_paginator">
+            <%== pagy_nav @assets_pagy %>
+          </div>
+          <% @assets.each do |asset| %>
+            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
+              <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
+              <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
+                <div class="add-inner">
+                  <%== render file: svg_path('svg/icon_+.svg') %>
+                </div>
+              </a>
+              <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+                <div class="remove-inner">
+                    <%== render file: svg_path('svg/icon_x.svg') %>
+                </div>
+              </a>
+            </div>
+          <% end %>
+        </div>
     </div>
   </div>
   <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-edit.addUrl' }, class: 'hidden add_url' %>
+    data: { target:'playlist-sort.addUrl' }, class: 'hidden add_url' %>
   <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-edit.removeUrl' }, class: 'hidden remove_url' %>
+    data: { target:'playlist-sort.removeUrl' }, class: 'hidden remove_url' %>
   <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-edit.sortUrl' }, class: 'hidden sort_url' %>
+    data: { target:'playlist-sort.sortUrl' }, class: 'hidden sort_url' %>
 </div>
