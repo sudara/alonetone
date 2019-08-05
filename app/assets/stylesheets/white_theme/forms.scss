@@ -24,7 +24,7 @@ form {
     display: none;
   }
   label {
-    margin-bottom: 2px !important;
+    margin-bottom: 8px !important;
     font-family: $medium-sans-font;
     font-size: 12px;
     display: block;
@@ -54,9 +54,43 @@ form {
     font-family: $medium-sans-font;
   }
   textarea {
-    font-family: $sans-font;
+    font-family: $medium-sans-font;
     width: 100%;
-    padding: 8px;
+    padding: 9px 10px 6px 10px;
+  }
+}
+
+/* SIMPLE FORM */
+
+input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 9px 10px 6px 10px;
+  font-family: $medium-sans-font;
+  font-size: 14px;
+  &.string,
+  &.password {
+    width: 250px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: $samo-alternate-background-gray;
+    color: #4F4D4D;
+    &:focus {
+      border: 1px solid $new-samo-gray;
+    }
+  }
+  &.radio {
+    margin-right: 5px;
+    vertical-align: -3px;
+  }
+  &.check_boxes {
+    margin-left: 3px;
+    vertical-align: -3px;
+  }
+  &.btn {
+    font-size: 1.4em;
+    margin-right: 0;
+    padding: 10px;
   }
 }
 

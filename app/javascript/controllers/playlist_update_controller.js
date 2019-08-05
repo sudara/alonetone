@@ -1,5 +1,7 @@
 import Rails from 'rails-ujs'
 import { Controller } from 'stimulus'
+import PlaylistSortController from './playlist_sort_controller'
+import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['add', 'remove']
@@ -9,13 +11,13 @@ export default class extends Controller {
     this.removeUrl = document.querySelector('.remove_url').getAttribute('href')
   }
 
-  setPlaylistEdit() {
-    this.playlistEdit = this.application.getControllerForElementAndIdentifier(document.querySelector('#columns'), 'playlist-edit')
+  setPlaylistSort() {
+    this.playlistSort = this.application.getControllerForElementAndIdentifier(document.querySelector('#columns'), 'playlist-sort')
   }
 
   add(e) {
     e.preventDefault()
-    this.setPlaylistEdit()
+    this.setPlaylistSort()
     Rails.ajax({
       url: this.addUrl,
       type: 'POST',
@@ -28,7 +30,7 @@ export default class extends Controller {
 
   remove(e) {
     e.preventDefault()
-    this.setPlaylistEdit()
+    this.setPlaylistSort()
     Rails.ajax({
       url: this.removeUrl,
       type: 'GET',
@@ -40,40 +42,35 @@ export default class extends Controller {
   }
 
   spin() {
-    this.playlistEdit.spinnerTarget.style.display = 'block'
+    this.playlistSort.spinnerTarget.style.display = 'block'
   }
 
   stopSpin() {
-    this.playlistEdit.spinnerTarget.style.display = 'none'
+    this.playlistSort.spinnerTarget.style.display = 'none'
   }
 
   errored() {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.playlistEdit.feedbackTarget.innerHTML = '<div>Dang, something went wrong!</div>'
-    this.playlistEdit.feedbackTarget.toggle('ajax_fail')
+    flashController.alertFailed()
   }
 
   removed() {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.playlistEdit.feedbackTarget.innerHTML = '<div>Removed</div>'
-    this.playlistEdit.feedbackTarget.toggle('ajax_success')
-    this.updatePlaylistSize()
+    flashController.alertSaved('Removed')
     this.element.parentNode.removeChild(this.element)
+    this.updatePlaylistMetadata()
   }
 
   added(response, status, xhr) {
     setTimeout(this.stopSpin.bind(this), 500)
-    this.element.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
-    this.addTarget.style.display = 'none'
-    this.removeTarget.style.display = 'flex'
-    this.playlistEdit.feedbackTarget.innerHTML = '<div>Added!</div>'
-    this.playlistEdit.feedbackTarget.toggle('ajax_success')
-    this.playlistEdit.sortableTarget.appendChild(this.element)
-    this.updatePlaylistSize()
+    flashController.alertSaved('Added!')
+    const clonedTrack = this.element.cloneNode(true)
+    clonedTrack.setAttribute('data-id', `${response}`) // give it a track id before assigning it to the sortable
+    this.playlistSort.sortableTarget.appendChild(clonedTrack)
+    this.updatePlaylistMetadata()
   }
 
-  updatePlaylistSize() {
-    const size = this.playlistEdit.sortable.toArray.length
-    this.playlistEdit.sizeTarget.innerHTML = `${size}`
+  updatePlaylistMetadata() {
+    this.playlistSort.updatePlaylistMetadata()
   }
 }

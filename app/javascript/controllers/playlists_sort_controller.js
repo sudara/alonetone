@@ -1,6 +1,7 @@
 import Rails from 'rails-ujs'
 import Sortable from 'sortablejs'
 import { Controller } from 'stimulus'
+import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['sortable', 'feedback']
@@ -42,7 +43,6 @@ export default class extends Controller {
   }
 
   displaySuccess() {
-    const flashController = this.application.getControllerForElementAndIdentifier(document.getElementsByClassName('floating_feedback')[0], 'flash')
-    flashController.alert('<div class="ajax_success"><span>Saved!</span></div>')
+    flashController.alertSaved()
   }
 }
