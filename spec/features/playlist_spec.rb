@@ -29,7 +29,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector('.sortable .asset', count: 1)
 
       # add 2 new tracks
-      first_upload = find('#your_uploads .asset:first-child) .add')
+      first_upload = find('#your_uploads .asset:nth-child(1) .add')
       first_upload.click
       first_upload.click
       expect(page).to have_selector('.sortable .asset', count: 3)
