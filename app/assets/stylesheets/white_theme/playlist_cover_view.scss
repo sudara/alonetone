@@ -109,19 +109,27 @@ body.cover-view {
             padding-bottom: 0;
             text-decoration: none;
             color: $lightest-gray;
-            background-image: image-url("svg/icon_playlist_google_play.svg");
+            background-image: image-url("svg/icon_playlist_link.svg");
             background-size: 19px 19px;
             background-repeat: no-repeat;
             background-position: 10px 15px;
             &.spotify {
               background-image: image-url("svg/icon_playlist_spotify.svg");
             }
+            &.bandcamp {
+              background-image: image-url("svg/icon_playlist_bandcamp.svg");
+            }
             &.itunes {
               background-image: image-url("svg/icon_playlist_itunes.svg");
-              padding-left: px;
             }
             &.apple {
               background-image: image-url("svg/apple_music.svg");
+            }
+            &.google_play {
+              background-image: image-url("svg/icon_playlist_google_play.svg");
+            }
+            &.youtube {
+              background-image: image-url("svg/icon_playlist_youtube.svg");
             }
             .action-text {
               text-align: left;
