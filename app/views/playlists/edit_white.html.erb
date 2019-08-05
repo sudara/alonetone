@@ -112,10 +112,10 @@
             <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
           </ul>
         </div>
+        <div class="mini_paginator">
+          <%== pagy_nav @assets_pagy %>
+        </div>
         <div id="your_uploads" class="playlist_source">
-          <div class="mini_paginator">
-            <%== pagy_nav @assets_pagy %>
-          </div>
           <% @assets.each do |asset| %>
             <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
               <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
