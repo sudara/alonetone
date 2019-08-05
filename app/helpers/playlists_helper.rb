@@ -99,18 +99,25 @@ module PlaylistsHelper
     return unless link.present?
 
     text = case link
-           when /spotify/i
-            service = 'spotify'
-            '<i class="spotify"></i><span class="service-name">Spotify</span><span class="action-text">Stream</span>'
-           when /app\=music/i
-            service = 'apple'
-            '<i class="apple_music"></i><span class="service-name">Apple Music</span><span class="action-text">Stream</span>'
-           when /app\=itunes/i
-            service = 'itunes'
-            '<i class="itunes"></i><span class="service-name">iTunes</span><span class="action-text">Buy</span>'
-           when /play\.google/i
+    when /youtube/i
+      service = 'youtube'
+      '<i class="youtube"></i><span class="service-name">Youtube</span><span class="action-text">Watch</span>'
+    when /bandcamp/i
+      service = 'bandcamp'
+      '<i class="bandcamp"></i><span class="service-name">Bandcamp</span><span class="action-text">Buy</span>'
+    when /spotify/i
+      service = 'spotify'
+      '<i class="spotify"></i><span class="service-name">Spotify</span><span class="action-text">Stream</span>'
+    when /app\=music/i
+      service = 'apple'
+      '<i class="apple_music"></i><span class="service-name">Apple Music</span><span class="action-text">Stream</span>'
+    when /app\=itunes/i
+      service = 'itunes'
+      '<i class="itunes"></i><span class="service-name">iTunes</span><span class="action-text">Buy</span>'
+    when /play\.google/i
+      service = 'google_play'
       '<i class="fa fa-google"></i>Google<span class="action-text">Stream</span>'
-           else
+    else
       '<i class="fa fa-link"></i>Website<span class="action-text">Visit</span>'
     end.html_safe
     link_to(text, link, class: service).html_safe
