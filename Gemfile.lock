@@ -214,8 +214,6 @@ GEM
     inline_svg (1.5.2)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    invisible_captcha (0.12.1)
-      rails (>= 3.2.0)
     jaro_winkler (1.5.3)
     jmespath (1.4.0)
     jquery-fileupload-rails (0.4.7)
@@ -545,7 +543,6 @@ DEPENDENCIES
   has_permalink
   http-2
   image_processing
-  invisible_captcha
   jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
