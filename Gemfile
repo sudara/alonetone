@@ -49,7 +49,6 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
-gem 'invisible_captcha'
 gem 'webpacker', '>= 4.0.x'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
