@@ -6,7 +6,7 @@ module Assets
       @asset = asset
     end
 
-    def call
+    def execute
       time = Time.now
       # first update playlists
       asset.playlists.update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.empty?
