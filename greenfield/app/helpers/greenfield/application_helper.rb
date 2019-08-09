@@ -1,15 +1,5 @@
 module Greenfield
   module ApplicationHelper
-    def emojify(content)
-      content.gsub(/:([a-z0-9\+\-_]+):/) do |match|
-        if Emoji.find_by_alias(Regexp.last_match(1))
-          '<img alt="' + Regexp.last_match(1) + '" height="20" src="' + asset_path("images/emoji/#{Regexp.last_match(1)}.png") + '" style="vertical-align:middle" width="20" />'
-        else
-          match
-        end
-      end.html_safe
-    end
-
     def markdown(text, post: nil)
       return "" unless text
 
