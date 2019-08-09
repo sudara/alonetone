@@ -6,7 +6,7 @@ module Assets
       @asset = asset
     end
 
-    def call
+    def execute
       asset.comments&.with_deleted&.delete_all
       asset.tracks&.with_deleted&.delete_all
       asset.listens&.with_deleted&.delete_all
