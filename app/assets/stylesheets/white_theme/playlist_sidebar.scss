@@ -105,6 +105,7 @@
         span.track-position {
           display: block;
           float: left;
+          font-variant-numeric: tabular-nums;
           margin-right: 4px;
           color: #868686;
           min-width: 21px;
@@ -121,6 +122,7 @@
         .time-text {
           font-size: 12px;
           margin-right: 12px;
+          font-variant-numeric: tabular-nums;
           color: $gray;
         }
       }
@@ -151,26 +153,8 @@
           padding: 10px $baseline / 2;
           text-decoration: none;
           color: white;
-          &.spotify {
-            i {
-              background-image: image-url("svg/icon_playlist_spotify.svg");
-              display: inline-block;
-              background-size: 100%;
-              width: 17px;
-              height: 17px;
-            }
-          }
-          &.itunes {
-            i {
-              background-image: image-url("svg/icon_playlist_itunes.svg");
-              display: inline-block;
-              background-size: 100%;
-              width: 17px;
-              height: 17px;
-            }
-          }
           i {
-            background-image: image-url("svg/icon_playlist_google_play.svg");
+            background-image: image-url("svg/icon_playlist_link.svg");
             display: inline-block;
             background-size: 100%;
             width: 17px;
@@ -180,6 +164,24 @@
             vertical-align: middle;
             position: relative;
             top: -1px;
+          }
+          &.spotify i {
+            background-image: image-url("svg/icon_playlist_spotify.svg");
+          }
+          &.bandcamp i {
+            background-image: image-url("svg/icon_playlist_bandcamp.svg");
+          }
+          &.itunes i {
+            background-image: image-url("svg/icon_playlist_itunes.svg");
+          }
+          &.apple i {
+            background-image: image-url("svg/apple_music.svg");
+          }
+          &.google_play i {
+            background-image: image-url("svg/icon_playlist_google_play.svg");
+          }
+          &.youtube i {
+            background-image: image-url("svg/icon_playlist_youtube.svg");
           }
           .action-text {
             font-size: 10px;

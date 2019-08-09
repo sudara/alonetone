@@ -9,7 +9,6 @@ RSpec.describe PlaylistsController, type: :request do
       playlist = playlists(:william_shatners_favorites)
       get "/william-shatner/playlists/bills-favorites"
       expect(response).to be_successful
-      expect(response.body).to_not match_css('link[rel="preload"]')
     end
 
     it "sees a playlist with a cover image" do

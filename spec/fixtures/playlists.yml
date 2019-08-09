@@ -71,6 +71,9 @@ henri_willig_polderkaas:
   private: false
   published_at: <%= 1.day.ago.to_s :db %>
   cover_quality: modern
+  link1: https://open.spotify.com/playlist/37i9dQZF1DX7pykHKVxv6o?si=uP1xUZdlTeCBsMviYTBKGA
+  link2: bandcamp.com/some_band
+  link3: youtube.com/my_channel
   credits: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
     goodness as they cheese it was named after.
