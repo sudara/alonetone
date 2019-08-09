@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-site-verification" content="lsSUCXrSSVhC9F6XtvmDBlzt2jdjVX75vSIRzTpvrmQ" />
+  <meta name="abuseipdb-verification" content="3yplyU5E" />
   <title><%= @page_title || 'alonetone' %></title>
   <%= yield :head %>
   <%= stylesheet_link_tag ('white_theme') %>
   <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
 
-  <link href="//cloud.webtype.com/css/5303dc7a-1cec-4666-a21e-bd0a60169f3d.css" rel="stylesheet" type="text/css" />
   <meta content="index,follow" name="robots"/>
   <% if @asset&.persisted? or @playlist&.persisted? %>
     <meta property="og:type"        content="music.<%= @playlist ? 'album' : 'song' %>" />

@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-git_source(:github) { |name| "https://github.com/#{name}.git" }
-
 gem 'rails', '~> 6.0.0.rc1'
 gem 'mysql2'
 gem 'puma'
@@ -51,7 +49,6 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
-gem 'invisible_captcha'
 gem 'webpacker', '>= 4.0.x'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

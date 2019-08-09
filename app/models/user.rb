@@ -282,10 +282,12 @@ class User < ApplicationRecord
       only_deleted.where(is_spam: false).order('deleted_at DESC')
     when "is_spam"
       with_deleted.where(is_spam: true).order('deleted_at DESC')
+    when "spam_musicians"
+      musicians.with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
       with_deleted.where(is_spam: false).recent
     when String
-      where("email like '%#{filter}%' or login like '%#{filter}%'").recent
+      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%'").recent
     else
       with_deleted.recent
     end
