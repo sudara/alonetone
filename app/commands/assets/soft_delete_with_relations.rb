@@ -2,7 +2,7 @@ module Assets
   class SoftDeleteWithRelations
     attr_reader :asset
 
-    def initialize(asset:)
+    def initialize(asset)
       @asset = asset
     end
 
