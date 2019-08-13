@@ -6,15 +6,14 @@
   margin-bottom: 24px;
   background-color: $white;
   .play-button-container {
-    min-width: 80px;
-    height: 80px;
+    min-width: 77px;
+    height: 77px;
     .play-button, .pause-button {
       position: relative;
       top: 8px;
-      left: 14px;
+      left: 8px;
       width: 77px;
       height: 77px;
-      margin-right: -9px;
       cursor: pointer;
     }
   }
@@ -24,7 +23,7 @@
   .waveform {
     top: 0;
     right: 0;
-    padding-top: 10px;
+    padding-top: 9.5px;
     background-color: white;
     margin-right: $baseline / 2;
     flex-grow: 1;
@@ -52,9 +51,6 @@
     padding-top: 2.5px;
     height: 13px;
     width: 80px;
-    border-top-right-radius: 6px;
-    background-color: $lightest-gray;
-
     font-size: 10px;
     font-variant-numeric: tabular-nums;
     text-align: center;
