@@ -30,7 +30,7 @@ module Admin
     end
 
     def delete
-      Assets::SoftDeleteWithRelations.new(asset: @asset).execute
+      Assets::SoftDeleteWithRelations.new(@asset).execute
     end
 
     private
