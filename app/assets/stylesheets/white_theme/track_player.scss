@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: $baseline * 3;
+  height: 80px;
   margin-bottom: 24px;
   background-color: $white;
   .play-button-container {
@@ -12,8 +12,8 @@
       position: relative;
       top: 7.5px;
       left: 14px;
-      width: 76px;
-      height: 76px;   
+      width: 88px;
+      height: 88px;   
       cursor: pointer;
     }
   }
@@ -23,14 +23,14 @@
   .waveform {
     top: 0;
     right: 0;
-    padding-top: 12px;
+    padding-top: 21px;
     background-color: white;
     margin-right: $baseline / 2;
     flex-grow: 1;
     position: relative;
      > canvas {
       width: 100%!important;
-      height: 48px;
+      height: 42px;
     }
     .seekbar {
       position: absolute;
@@ -56,7 +56,6 @@
     border-left: .5px solid $light-gray;
     border-top-right-radius: 6px;
     border-bottom-left-radius: 6px;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
     background-color: $lightest-gray;
 
     font-size: 10px;
