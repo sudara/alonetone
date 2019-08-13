@@ -9,7 +9,7 @@ export default class extends PlaybackController {
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   preInitialize() {
-    animation = new PlayAnimation()
+    // animation = new PlayAnimation()
     this.preload = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
   }
@@ -34,7 +34,11 @@ export default class extends PlaybackController {
 
   pauseCallback() {
     animation.setPlay()
-    document.getElementById('play-svg-container').append(document.getElementById('playAnimationSVG'))
+
+    if (document.contains(document.getElementById("animating"))) {
+      document.getElementById('animating').remove()
+    }
+    
     this.playButtonTarget.style.display = 'block'
   }
 
@@ -72,7 +76,13 @@ export default class extends PlaybackController {
 
   showAnimation() {
     this.playButtonTarget.style.display = 'none'
-    this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
+    
+    const clone = document.getElementById('playAnimationSVG').cloneNode(true);
+    clone.id = "animating";
+    this.playTarget.firstElementChild.append( clone )
+
+    animation = new PlayAnimation()
+
   }
 
   animateLoading() {
