@@ -10,10 +10,10 @@
     height: 80px;
     .play-button, .pause-button {
       position: relative;
-      top: 6px;
-      left: 15px;
-      width: 66px;
-      height: 66px;   
+      top: 7.5px;
+      left: 14px;
+      width: 76px;
+      height: 76px;   
       cursor: pointer;
     }
   }
@@ -23,8 +23,7 @@
   .waveform {
     top: 0;
     right: 0;
-    height: $baseline* 2.5;
-    padding-top: $baseline / 2;
+    padding-top: 10px;
     background-color: white;
     margin-right: $baseline / 2;
     flex-grow: 1;
@@ -38,19 +37,21 @@
       width: 1px;
       height: 100%;
       background-color: #aaa;
+      display: none;
     }
     &:hover .seekbar {
       display: block;
     }
     &:not(:hover) .seekbar {
-      display: none;
+      // display: none;
     }
   }
   .time {
+    top: 4px;
+    right: -5px;
     font-size: 10px;
     font-variant-numeric: tabular-nums;
     position: absolute;
-    bottom: 4px;
     display: block;
     width: 80px;
     text-align: center;
