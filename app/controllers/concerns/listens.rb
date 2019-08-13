@@ -90,12 +90,12 @@ module Listens
     headers["Cache-Control"] = "public, must-revalidate, max-age=0"
     headers["Pragma"] = "no-cache"
     headers['Connection'] = 'close'
-    if !request.headers["Range"] || (request.headers["Range"] == "bytes=0-") # browser wants the whole file
+    headers['Content-Type'] = 'audio/mpeg'
+    if !request.headers["Range"] || (request.headers["Range"].start_with? "bytes=0-") # browser wants the whole file
       status = "200 OK"
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
-
-      send_file file_to_send, type: 'audio/mpeg', disposition: 'attachment;',
-                              url_based_filename: true, status: status, stream: true, buffer_size: 4096
+      send_file file_to_send, url_based_filename: true,
+        status: status, stream: true, buffer_size: 4096
     else
       status = "206 Partial Content" # browser wants part of the file
       match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
@@ -106,8 +106,8 @@ module Listens
       headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
       headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
       how_many_bytes = file_end.to_i - file_begin.to_i > 0 ? file_end.to_i - file_begin.to_i : 1
-      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), type: 'audio/mpeg', disposition: 'attachment;',
-                                                                          url_based_filename: true, status: status, stream: true, buffer_size: 4096
+      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), type: 'audio/mpeg',
+        url_based_filename: true, status: status, stream: true, buffer_size: 4096
     end
   end
 end
