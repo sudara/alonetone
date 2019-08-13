@@ -1,5 +1,5 @@
 module Assets
-  class SoftDeleteRelations
+  class SoftDeleteWithRelations
     attr_reader :asset
 
     def initialize(asset:)
@@ -13,6 +13,7 @@ module Assets
       asset.comments.update_all(deleted_at: time)
       asset.tracks.update_all(deleted_at: time)
       asset.listens.update_all(deleted_at: time)
+      asset.soft_delete
     end
   end
 end
