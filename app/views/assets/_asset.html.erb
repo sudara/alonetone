@@ -1,5 +1,5 @@
 <% if white_theme_enabled? %>
-  <div class="asset" data-controller="normal-playback">
+  <div class="asset" data-controller="normal-playback" data-normal-playback-id="<% asset.id %>">
     <%= render partial: 'assets/asset_white', locals: {asset: asset } %>
   </div>
 <% else %>
