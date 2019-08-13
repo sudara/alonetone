@@ -11,9 +11,10 @@
     .play-button, .pause-button {
       position: relative;
       top: 7.5px;
-      left: 14px;
+      left: 9px;
       width: 88px;
       height: 88px;   
+      margin-right: -9px;
       cursor: pointer;
     }
   }
