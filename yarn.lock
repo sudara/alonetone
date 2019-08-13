@@ -3719,6 +3719,11 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+frappe-charts@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/frappe-charts/-/frappe-charts-1.2.4.tgz#d9f4bf6eda5a3f270d0707682f6fa14014292326"
+  integrity sha512-aTTOwZ99PTNbBPbujyZnUFwnbcBUksDol8FKXEiUkY7CYKZdvHaRzVrXsw2r48B05xdn+HFMEKfOl5X2zqMYsg==
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"

@@ -20,9 +20,6 @@ export default class extends Controller {
     }
   }
 
-  //////////////////////////////////
-  // GROUP button logic
-  //////////////////////////////////
   hideAllButtons() {
     this.hideSpamButton()
     this.hideUnspamButton()
@@ -39,9 +36,7 @@ export default class extends Controller {
     this.showDeleteButton()
     this.showSpamButton()
   }
-  //////////////////////////////////
-  // UNSPAM button
-  //////////////////////////////////
+
   hideUnspamButton() {
     this.unspamButtonTarget.style.display = "none"
   }
@@ -49,9 +44,7 @@ export default class extends Controller {
   showUnspamButton() {
     this.unspamButtonTarget.style.display = "block"
   }
-  //////////////////////////////////
-  // SPAM button
-  //////////////////////////////////
+
   hideSpamButton() {
     this.spamButtonTarget.style.display = "none"
   }
@@ -60,9 +53,7 @@ export default class extends Controller {
     this.data.set('spam', 'false')
     this.spamButtonTarget.style.display = "block"
   }
-  //////////////////////////////////
-  // DELETE button
-  //////////////////////////////////
+
   hideDeleteButton() {
     this.deleteButtonTarget.style.display = 'none'
   }
@@ -73,9 +64,7 @@ export default class extends Controller {
     this.restoreButtonTarget.style.display = 'none'
     this.deleteButtonTarget.style.display = 'block'
   }
-  //////////////////////////////////
-  // RESTORE button
-  //////////////////////////////////
+
   hideRestoreButton() {
     this.restoreButtonTarget.style.display = 'none'
   }

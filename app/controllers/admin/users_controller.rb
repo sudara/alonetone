@@ -38,6 +38,12 @@ module Admin
       redirect_back fallback_location: { action: :index }, notice: "#{count} accounts by #{ip} being marked as spam..."
     end
 
+    def stats
+      labels, datasets = User.daily_signups
+      json = { labels: labels, datasets: datasets.collect { |name,values| { name: name, type: 'bar', values: values } } }
+      render json: json.to_json
+    end
+
     private
 
     def permitted_params

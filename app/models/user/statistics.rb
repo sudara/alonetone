@@ -3,6 +3,26 @@
 class User < ApplicationRecord
   module Statistics
     extend ActiveSupport::Concern
+
+    class_methods do
+      def daily_signups
+        date = 14.days.ago.at_midnight
+        all = User.where('created_at > ?', date).group('day(created_at)').count
+        spam = User.with_deleted.where(is_spam: true).where('created_at > ?', date).group('day(created_at)').count
+        musician = User.musicians.where('created_at > ?', date).group('day(created_at)').count
+        labels = []
+        counts = { all:[], spam:[], musician:[] }
+        14.times do |days|
+          day_of_month = (Date.today - (14 - (days + 1)).days).day
+          labels << day_of_month
+          counts[:all] << (all[day_of_month] || 0)
+          counts[:spam] << (spam[day_of_month] || 0)
+          counts[:musician] << (musician[day_of_month] || 0)
+        end
+        [labels, counts]
+      end
+    end
+
     # graphing
     def track_plays_graph
       created_within_30_days = ['listens.created_at > ?', 30.days.ago.at_midnight]
@@ -23,17 +43,6 @@ class User < ApplicationRecord
 
       track_play_history = track_plays.group(group_by).where(created_within_30_days).count
       track_play_history.collect { |tp| tp[1] }
-
-      # ::Gchart.line(
-      #   :size             => '420x150',
-      #   :title            => 'listens',
-      #   :data             => track_play_history,
-      #   :axis_with_labels => 'r,x',
-      #   :axis_labels      => [ GchartHelpers.zero_half_max(track_play_history.max), labels ],
-      #   :line_colors      => 'cc3300',
-      #   :background       => '313327',
-      #   :custom           => 'chm=B,3d4030,0,0,0&chls=3,1,0&chg=25,50,1,0'
-      # )
     end
 
     def listens_average
