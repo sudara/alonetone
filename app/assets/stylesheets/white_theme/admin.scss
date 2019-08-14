@@ -41,7 +41,6 @@
         }
       }
       > ul {
-				// padding: 0 15px;
 				padding-right: 30px;
 				li {
 					padding-left: 0;
@@ -61,7 +60,25 @@
   .admin_column_right {
     flex: 1;
 		font-size: 13px;
-		min-width: 768px;
+    min-width: 768px;
+    .admin_search_field {
+      input {
+        font-size: 12px;
+        width: 210px;
+        height: 32px;
+        line-height: 1.2em;
+        padding: 0;
+        padding-left: 8px;
+        padding-top: 3px;
+        box-sizing: border-box;
+        color: #222222;
+        border: 1px solid #DDDDDD;
+        border-radius: 5px;
+        margin-bottom: 12px;
+        background-color: #fff;
+      }
+    }
+    
     .pagy-nav {
       width: 100%;
       float: none;
