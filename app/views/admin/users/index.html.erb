@@ -8,14 +8,14 @@
   <div class="admin_column_right">
    <div class="admin_search_field">
     <%= form_for 'filter_by', method: :get do |f| %>
-      <%= text_field_tag 'filter_by',nil, placeholder: 'search by login/email' %>
+      <%= text_field_tag 'filter_by',nil, placeholder: 'Search by login or email' %>
     <% end %>
     </div>
-
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
     <div class="admin_column_right_inner box">
+      
       <header class="admin_users_header">
         <div class="date_column">Joined</div>
         <div class="user_column">User</div>
@@ -26,9 +26,8 @@
         <% @users.each do |user| %>
           <div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>" data-admin--user-spam="<%= user.is_spam? %>">
             <div class="date_column">
-            <%= local_time_ago user.created_at %>
-            <div class="deleted_at_date"><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
-
+              <%= local_time_ago user.created_at %>
+              <div class="deleted_at_date"><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
             </div>
             <div class="user_column">
               <div class="avatar">
