@@ -6,10 +6,9 @@ module Admin
       @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]))
     end
 
-    # should we rescue/display any error that occured to admin user
     def delete
       @user.soft_delete_with_relations
-      redirect_back(fallback_location: root_path)
+      redirect_to admin_users_path(filter_by: :deleted)
     end
 
     def restore
@@ -19,11 +18,17 @@ module Admin
 
     def unspam
       @user.ham!
-      @user.update_column :is_spam, false
+      @user.update_attribute :is_spam, false
+      @user.restore
+      @user.restore_relations
     end
 
     def spam
       @user.spam_and_mark_for_deletion!
+      respond_to do |format|
+        format.html { redirect_to admin_users_path(filter_by: :is_spam) }
+        format.js
+      end
     end
 
     def mark_all_users_with_ip_as_spam

@@ -201,14 +201,14 @@ RSpec.describe AssetsController, type: :request do
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       end.to change { Asset.count }.by(1)
 
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
 
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
       }.to change { Asset.count }.by(1)
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
 
     # Waveform job is enqueued in an after_create callback

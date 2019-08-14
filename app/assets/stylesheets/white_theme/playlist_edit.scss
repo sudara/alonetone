@@ -15,6 +15,8 @@
     height: 50px;
     line-height: 53px;
     font-family: $medium-sans-font;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   form p {
     font-size: 14px;
@@ -37,11 +39,6 @@
     .edit_playlist_info_left_column {
       min-width: 220px;
       width: 20%;
-      margin-right: 5%;
-      p {
-        font-size: 12px;
-        color: $new-samo-gray;
-      }
       .cover {
         display: block;
         border: 1px dashed $samo-light-gray;
@@ -49,6 +46,7 @@
         margin-top: 10px;
         text-align: center;
         max-width: 150px;
+        pointer-events: none;
         img {
           max-width: 150px;
           border-radius: 6px;
@@ -61,6 +59,20 @@
           }
         }
       }
+      form {
+        input {
+          margin-bottom: 8px;
+        }
+        input#pic_pic {
+          font-weight: normal;
+          font-family: $sans-font;
+        }
+      }
+      p {
+        font-size: 12px;
+        color: $new-samo-gray;
+        margin-top: 0;
+      }
     }
     .edit_playlist_info_right_column {
       flex: 1;
@@ -72,6 +84,7 @@
       }
       > .edit_playlist_info_right_column_title_and_year {
         display: flex;
+        flex-direction: row;
         width: 100%;
         > :nth-child(1) {
           flex: 1;
@@ -89,6 +102,7 @@
       }
       > .edit_playlist_info_right_column_links {
         display: flex;
+        flex-direction: row;
         width: 100%;
         > :nth-child(1) {
           flex: 1;
@@ -109,26 +123,28 @@
         width: 100%;
         textarea {
           width: 100%;
-          height: 6em;
+          height: 66px;
         }
       }
       > .edit_playlist_info_right_column_private_and_hidden {
         display: flex;
+        flex-direction: row;
         width: 100%;
         font-size: 12px;
+        position: relative;
+        height: 54px;
         div.input {
           width: auto;
         }
         label {
           text-transform: none;
+          color: #4F4D4D;
         }
-        span {
-          position: relative;
-          top: 2px;
-        }
-        [type="checkbox"]:not(:checked),
-        [type="checkbox"]:checked {
-          position: static;
+        span.private_notice {
+         color: $new-samo-gray;
+         font-family: $medium-sans-font;
+         margin-left: 4px;
+         margin-top: 5px;
         }
       }
     }
@@ -148,6 +164,8 @@
       color: $samo-orange;
       font-size: 14px;
       padding: 0;
+      font-family: $medium-sans-font;
+      font-weight: normal;
       &:hover {
         color: $samo-orange;
         text-decoration: underline;
@@ -157,32 +175,152 @@
   }
 }
 .edit_playlist_columns {
-  #right {
-    #playlist_source_options {
-      overflow: auto;
-      margin-left: $baseline / 2;
-      li {
-        float: left;
-        margin-right: 10px;
-        text-decoration: underline;
-        a {
-          @include default-button();
+  #left {
+    .left_column_box_header {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid $light-gray;
+      h2 {
+        border-bottom: 0;
+        width: auto;
+        span.playlist_date {
+          color: $samo-gray;
+        }
+        margin-right: auto;
+      }
+      div {
+        margin-top: 16px;
+        font-family: $medium-sans-font;
+        font-size: 13px;
+        margin-right: 20px;
+        span.playlist_track_size {
+          color: $samo-gray;
+        }
+        span.playlist_dash {
+          color: #e1e2e2;
+        }
+        span.playlist_total_time {
+          color: $samo-orange;
         }
       }
     }
+    .playlist_asset:last-child {
+      border-bottom: 1px solid $light-gray;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .playlist_size {
+      border-radius: 4px;
+      background-color: $samo-alternate-background-gray;
+      font-size: 13px;
+      color: $samo-gray;
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      margin: 130px 10px 10px 10px;
+      font-family: $medium-sans-font;
+    }
+    .small_spinner {
+      position: absolute;
+      bottom: 14px;
+      top: unset;
+      right: 15px;
+    }
+    .playlist_asset {
+      .add {
+        display: none;
+      }
+      .remove {
+        display: flex;
+      }
+    }
+  }
+  #right {
+    #playlist_sources {
+      .right_column_box_header {
+        display: flex;
+        flex-direction: row;
+        h2 {
+          margin-bottom: 0;
+          width: auto;
+          border-bottom: 0;
+        }
+        .available_tracks_total {
+          margin-top: 16px;
+          font-family: $medium-sans-font;
+          font-size: 13px;
+          margin-right: 20px;
+          color: $samo-gray;
+          margin-left: auto;
+        }
+      }
+      #playlist_tabs {
+        display: flex;
+        background-color: #e1e2e2;
+        height: 36px;
+        box-sizing: border-box;
+        #playlist_source_options {
+          margin-left: $baseline / 2;
+          display: flex;
+          flex-direction: row;
+          margin-top: 5px;
+          li {
+            margin-right: 10px;
+            text-decoration: underline;
+            &:first-child {
+              a {
+                background-color: $samo-orange;
+                border: 1px solid #DE6A00;
+                color: $white;
+                &:hover {
+                  background-color: $samo-orange;
+                  border: 1px solid #DE6A00;
+                  color: $white;
+                }
+              }
+            }
+            a {
+              @include default-button();
+              background-color: $white;
+              color: #888888;
+              font-family: $medium-sans-font;
+              font-weight: normal;
+              height: 26px;
+              &:hover {
+                background-color: #888888;
+                color: $white;
+              }
+            }
+          }
+        }
+      }
+      .mini_paginator {
+        border-bottom: 1px solid $light-gray;
+        border-radius: 0;
+      }
+    }
+    .playlist_asset {
+      .add {
+        display: flex;
+      }
+      .remove {
+        display: none;
+      }
+    }
+    
   }
   .left_instructions,
   .right_instructions {
     color: $samo-gray;
     padding: 0 10px;
-    line-height: 1.5;
-    min-height: 36px;
+    line-height: 1.5em;
+    min-height: 42px;
     .remove-inner-inline {
       display: inline-flex;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       position: relative;
-      top: -4px;
+      top: -3px;
       border-radius: 4px;
       background-color: #c4c4c4;
       align-items: center;
@@ -195,10 +333,10 @@
     }
     .add-inner-inline {
       display: inline-flex;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       position: relative;
-      top: -4px;
+      top: -3px;
       border-radius: 4px;
       background-color: #c4c4c4;
       align-items: center;
@@ -223,7 +361,7 @@
     .add,
     .remove {
       position: absolute;
-      z-index: 999999;
+      z-index: 5;
       top: 0;
       right: 0;
       display: flex;
@@ -273,7 +411,7 @@
         height: 29px;
         border-radius: 4px;
         background-color: #c4c4c4;
-  
+
         align-items: center;
         justify-content: center;
         svg {
