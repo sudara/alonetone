@@ -65,7 +65,6 @@
     }
     h3 {
       margin-top: -16px;
-      margin-bottom: $baseline;
       color: $samo-gray;
     }
     p {
@@ -161,7 +160,7 @@
     display: none;
   }
   .track-edit {
-    margin-bottom: $baseline * 2; 
+    margin-bottom: $baseline * 2;
     header {
       input {
         font-family: $black-font;
@@ -170,6 +169,17 @@
         box-sizing: border-box;
         width: 100%;
         padding: 10px;
+        padding-bottom: 3px;
+        padding-left: 11px;
+      }
+      h3 {
+        margin-top: -30px;
+        margin-bottom: 10px;
+        margin-left: 12px;
+      }
+      .track-stats {
+        margin-bottom: 6px;
+        margin-left: 12px;
       }
     }
     textarea {
@@ -186,6 +196,9 @@
       color: $dark-gray;
       border: 1px solid $samo-light-gray;
       background-color: transparent;
+      &:focus {
+        border-color: $new-samo-gray;
+      }
       @media #{$one-column} {
         font-size: 16px;
       }
@@ -211,6 +224,21 @@
         }
       }
     }
+    .submit_wrapper {
+      display: flex;
+      // flex-direction: row;
+      // clear: both;
+      // justify-content: flex-start;
+      // margin-left: 110px;
+      input {
+        margin-right: 4px;
+      }
+      .ajax_waiting {
+        margin-right: 0;
+        margin-left: 8px;
+      }
+  }
+
   }
   > div.box {
     h2.box {

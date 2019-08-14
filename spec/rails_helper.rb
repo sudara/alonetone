@@ -75,10 +75,6 @@ RSpec.configure do |config|
   config.include RSpec::Support::Logging
   config.include RSpec::Support::LoginHelpers
 
-  config.before(:suite) do
-    InvisibleCaptcha.timestamp_enabled = false
-  end
-
   config.before(:each) do
     clear_enqueued_jobs
     clear_performed_jobs

@@ -131,13 +131,13 @@ class AssetsController < ApplicationController
     @playlists = playlists
 
     flashes = ""
-    good = false
+    at_least_one_upload = false
 
     @assets.each do |asset|
       if !asset.new_record?
-        flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded!<br/>"
+        flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded successfully!<br/>"
         asset.update_attribute(:is_spam, asset.spam?) # makes an api call
-        good = true
+        at_least_one_upload = true
       else
         errors = asset.errors.full_messages.join('.')
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
@@ -147,12 +147,16 @@ class AssetsController < ApplicationController
     if @playlist
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
-    elsif @assets.present? && (@assets.collect(&:persisted?).any? == true)
+    elsif @assets.present? && at_least_one_upload
       @user.followers.select(&:wants_email?).each do |follower|
         AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower.id)
       end
-      flash[:ok] = (flashes + "<br/>Check the title and add description for your track(s)").html_safe
-      redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
+      if @assets.count == 1
+        redirect_to edit_user_track_path(current_user, @assets.first)
+      else
+        flash[:ok] = (flashes + "<br/>Check the title and add a description for your tracks").html_safe
+        redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
+      end
     else
       flash[:error] = "Oh noes! Either that file was not an mp3 or you didn't actually pick a file to upload."
       redirect_to new_user_track_path(current_user)

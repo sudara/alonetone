@@ -5,9 +5,6 @@
   <div class= "edit-links-and-favorite">
     <div class="edit-links">
       <% if authorized? %>
-        <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit-link',
-          data: { confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
-          title: 'delete this track permanently ' %>
         <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit-link") %>
       <% end %>
 
