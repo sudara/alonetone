@@ -6,16 +6,14 @@
   </div>
 
   <div class="admin_column_right">
-    <div class="admin_stats">
-      <%= User.count%> users.
-    </div>
-    <div class="mini_paginator top_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-    <div class="admin_search_field">
+   <div class="admin_search_field">
     <%= form_for 'filter_by', method: :get do |f| %>
       <%= text_field_tag 'filter_by',nil, placeholder: 'search by login/email' %>
     <% end %>
+    </div>
+
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @pagy %>
     </div>
     <div class="admin_column_right_inner box">
       <header class="admin_users_header">
