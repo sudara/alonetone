@@ -14,8 +14,8 @@ export default class extends Controller {
       this.showDeleteButton()
     } else {
       this.showSpamButton()
-      this.hideRestoreButton()
       this.showDeleteButton()
+      this.hideRestoreButton()
     }
   }
 
@@ -23,6 +23,7 @@ export default class extends Controller {
   markTrackAsSpam() {
     this.setSpamRecord()
     this.hideSpamButton()
+    this.hideRestoreButton()
   }
 
   setSpamRecord() {
@@ -46,7 +47,6 @@ export default class extends Controller {
   }
 
   showSpamButton() {
-    setUnspamRecord()
     this.spamButtonTarget.style.display = 'block'
   }
 
