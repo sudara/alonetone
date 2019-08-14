@@ -186,7 +186,7 @@ class Asset < ApplicationRecord
 
   def self.destroy_deleted_accounts_older_than_30_days
     Asset.destroyable.find_each do |asset|
-      Assets::DestroyWithRelations.new(asset).execute
+      AssetCommand.new(asset).destroy_with_relations
     end
   end
 

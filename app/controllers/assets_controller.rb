@@ -183,7 +183,7 @@ class AssetsController < ApplicationController
   end
 
   def destroy
-    Assets::SoftDeleteWithRelations.new(@asset).execute
+    AssetCommand.new(@asset).soft_delete_with_relations
 
     flash[:ok] = "We threw the puppy away. No one can listen to it again " \
                  "(unless you reupload it, of course ;)"
