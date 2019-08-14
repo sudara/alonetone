@@ -41,12 +41,16 @@
         }
       }
       > ul {
-				padding: 0 15px;
+				// padding: 0 15px;
 				padding-right: 30px;
 				li {
 					padding-left: 0;
-					width: 100%;
+          width: 100%;
+          &.current {
+            padding-left: 30px;
+          }
 					a {
+            padding-left: 30px;
 						padding-right: 15px;
 						box-sizing: content-box;
 					}
