@@ -111,6 +111,17 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).topics.count).to eq(0)
       expect(users(:arthur).comments.count).to eq(0)
     end
+
+    it "soft deletes from other user's playlist" do
+      # sudara's playlist
+      playlists(:owp)
+      # arthur's track on owp playlist
+      tracks(:track_on_soft_deleted_of_other_user)
+
+      put delete_admin_user_path(users(:arthur))
+
+      expect(tracks(:track_on_soft_deleted_of_other_user).reload.deleted_at).not_to be_nil
+    end
   end
 
   describe '#index' do
