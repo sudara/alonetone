@@ -3,8 +3,7 @@ import MorphSVGPlugin from './MorphSVGPlugin'
 
 const plugins = [CSSPlugin, AttrPlugin, MorphSVGPlugin, Linear, Elastic, Power1, Power2, Power3, Sine]
 
-export default function PlayAnimation() {
-  const mainSVG = document.getElementById('playAnimationSVG')
+export default function PlayAnimation(mainSVG) {
   const select = function (s) {
     return mainSVG.querySelector(s)
   }
