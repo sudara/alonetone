@@ -45,7 +45,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
   describe '#restore' do
     before :each do
-      users(:arthur).soft_delete_relations
+      UserCommand.new(users(:arthur)).soft_delete_with_relations
       users(:arthur).update(deleted_at: Time.now - 1.week)
     end
 
