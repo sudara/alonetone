@@ -2,21 +2,19 @@ import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
 let currentlyOpen
-let animation
 
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   preInitialize() {
-    animation = new PlayAnimation()
     this.preload = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
   }
 
   whilePlayingCallback() {
     if (!this.loaded) {
-      animation.showPause()
+      this.animation.showPause()
       this.loaded = true
     }
     this.updateSeekBarPlayed()
@@ -25,21 +23,17 @@ export default class extends PlaybackController {
 
   playCallback() {
     this.showAnimation()
-    if (!this.loaded) this.animateLoading()
-    else animation.setPause()
     this.openDetails()
     this.updateSeekBarLoaded()
     this.registeredListen = true
   }
 
   pauseCallback() {
-    animation.setPlay()
-    document.getElementById('play-svg-container').append(document.getElementById('playAnimationSVG'))
-    this.playButtonTarget.style.display = 'block'
+    this.animation.setPlay()
   }
 
   toggleDetails(e) {
-    if (!e.target.classList.contains('artist') ) {
+    if (!e.target.classList.contains('artist')) {
       // if the link in the track top is the artist link, go to that URL,
       // otherwise open the track reveal section
       e.preventDefault()
@@ -71,14 +65,29 @@ export default class extends PlaybackController {
   }
 
   showAnimation() {
-    this.playButtonTarget.style.display = 'none'
-    this.playTarget.firstElementChild.append(document.getElementById('playAnimationSVG'))
+    this.cloneAnimationIfNeeded()
+    if (!this.loaded) {
+      this.playButtonTarget.style.display = 'none' // hide the dummy play button
+      this.animateLoading()
+    } else this.animation.setPause()
+  }
+
+  // Print our own copy of #playAnimationSVG to animate freely as we like
+  // Until this point, the play button has been a placeholder icon SVG
+  // After this point, the play button is an animatable SVG
+  cloneAnimationIfNeeded() {
+    if (this.animation === undefined) {
+      const animationElement = document.getElementById('playAnimationSVG').cloneNode(true);
+      animationElement.id = this.data.get('id')
+      this.playTarget.firstElementChild.append(animationElement)
+      this.animation = new PlayAnimation(animationElement)
+    }
   }
 
   animateLoading() {
-    animation.init()
-    animation.setPlay()
-    animation.showLoading()
+    this.animation.init()
+    this.animation.setPlay()
+    this.animation.showLoading()
   }
 
   // With SoundManager we used to animate this width to display
@@ -88,6 +97,7 @@ export default class extends PlaybackController {
     this.seekBarContainerTarget.classList.add('show');
     this.seekBarLoadedTarget.style.width = '100%'
   }
+
   updateSeekBarPlayed() {
     const position = this.position / this.sound.duration()
     const maxwidth = this.seekBarLoadedTarget.offsetWidth

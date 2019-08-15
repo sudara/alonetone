@@ -8,6 +8,7 @@ RSpec.describe UsersController, type: :controller do
       get :show, params: { id: 'arthur' }
       expect(response).to be_successful
       expect(response.body).to include('Delete User')
+      expect(response.body).to include('Spam User')
     end
 
     it "should NOT show delete user button for muggles" do
@@ -16,6 +17,7 @@ RSpec.describe UsersController, type: :controller do
       get :show, params: { id: 'sudara' }
       expect(response).to be_successful
       expect(response.body).not_to include('Delete User')
+      expect(response.body).not_to include('Spam User')
     end
 
     it "should NOT show delete user button for own account" do
