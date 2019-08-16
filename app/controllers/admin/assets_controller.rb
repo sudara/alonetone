@@ -4,7 +4,8 @@ module Admin
 
     def index
       if permitted_params[:filter_by]
-        @pagy, @assets = pagy(Asset.where(permitted_params[:filter_by]).recent)
+        # including with_deleted because all spam assets are also soft_deleted
+        @pagy, @assets = pagy(Asset.with_deleted.where(permitted_params[:filter_by]).recent)
       else
         @pagy, @assets = pagy(Asset.recent)
       end
