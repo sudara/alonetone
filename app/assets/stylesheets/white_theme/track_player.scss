@@ -58,13 +58,35 @@
     color: $medium-gray;
   }
 
+  .time-progress {
+    position: absolute;
+    display: block;
+    bottom: -18px;
+    right: 300px;
+    width: 42px;
+    font-size: 11px;
+    height: 18px;
+    line-height: 18px;
+    background-color: $samo-orange;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: $white;
+    font-family: $medium-sans-font;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    z-index: -10;
+  }
+
   .time-total {
     position: absolute;
     display: block;
-    bottom: -15px;
+    bottom: -18px;
     right: 4px;
     width: 40px;
+    height: 18px;
+    line-height: 18px;
     font-size: 11px;
+    
     font-variant-numeric: tabular-nums;
     text-align: right;
     color: $samo-gray;
