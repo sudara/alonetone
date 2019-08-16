@@ -1,6 +1,6 @@
 module Admin
   class AssetsController < Admin::BaseController
-    before_action :find_asset, only: %i[spam unspam delete]
+    before_action :find_asset, only: %i[spam unspam delete restore]
 
     def index
       if permitted_params[:filter_by]
@@ -34,14 +34,15 @@ module Admin
     end
 
     def restore
-      AssetCommand.new(@asset).restore_with_relations
+      AssetCommand.new(@asset).restore_with_relations if @asset
     end
 
     private
 
     # find by id rather than permalink, since it's not unique
+    # include with_deleted to be able to restore
     def find_asset
-      @asset = Asset.find(params[:id])
+      @asset = Asset.with_deleted.find(params[:id])
     end
 
     def permitted_params

@@ -18,10 +18,10 @@ class AssetCommand
 
   def restore_with_relations
     asset.restore
-    asset.playlists.update_all(['tracks_count = tracks_count + 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.empty?
-    asset.comments.update_all(deleted_at: nil)
-    asset.tracks.update_all(deleted_at: nil)
-    asset.listens.update_all(deleted_at: nil)
+    asset.playlists.with_deleted.update_all(['tracks_count = tracks_count + 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.with_deleted.empty?
+    asset.comments.with_deleted.update_all(deleted_at: nil)
+    asset.tracks.with_deleted.update_all(deleted_at: nil)
+    asset.listens.with_deleted.update_all(deleted_at: nil)
   end
 
   def destroy_with_relations
