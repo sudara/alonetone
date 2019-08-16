@@ -58,6 +58,14 @@
     color: $medium-gray;
   }
 
+  .line-progress {
+    position: absolute;
+    width: 1px;
+    height: 80px;
+    background-color: $samo-orange;
+    right: 300px;
+  }
+
   .time-progress {
     position: absolute;
     display: block;
