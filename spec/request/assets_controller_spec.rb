@@ -15,6 +15,23 @@ RSpec.describe AssetsController, type: :request do
       get '/', params: { white: true }
       expect(response).to be_successful
     end
+
+    # testing popular part of latest page
+    # since it's easier to control than .latest
+    # that's ordered by id
+    it "should not display spammed assets" do
+      assets = Asset.published.order('hotness DESC').includes(user: :pic).limit(2)
+      get '/', params: { white: true }
+
+      expect(response.body).to include(assets.first.title)
+      expect(response.body).to include(assets.last.title)
+      # spam one and leave the other
+      akismet_stub_submit_spam
+      AssetCommand.new(assets.first).spam_and_soft_delete_with_relations
+      get '/', params: { white: true }
+      expect(response.body).not_to include(assets.first.title)
+      expect(response.body).to include(assets.last.title)
+    end
   end
 
   context '#new' do

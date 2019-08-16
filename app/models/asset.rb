@@ -17,8 +17,7 @@ class Asset < ApplicationRecord
   attribute :user_agent, :string
   serialize :waveform, Array
 
-  scope :published,       -> { where(private: false, is_spam: false) }
-  scope :not_spam,        -> { where(is_spam: false) }
+  scope :published,       -> { where(private: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
