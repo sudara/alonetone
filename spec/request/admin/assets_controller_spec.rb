@@ -128,4 +128,47 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect(user.reload.listens_count).to eq(user_listens_count)
     end
   end
+
+  describe "#restore" do
+    let(:asset) { assets(:asset_with_relations_for_soft_delete) }
+
+    before do
+      AssetCommand.new(asset).soft_delete_with_relations
+    end
+
+    it "should restore asset" do
+      expect {
+        put restore_admin_asset_path(asset.id)
+      }.to change(Asset, :count).by(1)
+    end
+
+    it "should restore asset's comments" do
+      expect {
+        put restore_admin_asset_path(asset.id)
+      }.to change(Comment, :count).by(2)
+    end
+
+    it "should restore tracks" do
+      expect {
+        put restore_admin_asset_path(asset.id)
+      }.to change(Track, :count).by(1)
+    end
+
+    it "should cleanup any existing playlists" do
+      put restore_admin_asset_path(asset.id)
+
+      playlist = asset.tracks.first.playlist
+      # confirm it now shows soft_deleted tracks
+      expect(playlist.reload.tracks.count).to eq(1)
+      # confirm it recalculated tracks_count
+      expect(playlist.reload.tracks_count).to eq(1)
+    end
+
+
+    it "should restore listens" do
+      expect {
+        put restore_admin_asset_path(asset.id)
+      }.to change(Listen, :count).by(2)
+    end
+  end
 end
