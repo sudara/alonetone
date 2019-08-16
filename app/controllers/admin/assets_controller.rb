@@ -24,15 +24,6 @@ module Admin
       AssetCommand.new(@asset).soft_delete_with_relations
     end
 
-    # not used at the moment
-    def mark_group_as_spam
-      scope = Asset.where(permitted_params[:mark_spam_by])
-      assets = scope.not_spam
-
-      assets.map(&:spam!)
-      assets.update_all(is_spam: true)
-    end
-
     def delete
       AssetCommand.new(@asset).soft_delete_with_relations
     end
