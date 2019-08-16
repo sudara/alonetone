@@ -93,6 +93,10 @@ RSpec.describe Admin::AssetsController, type: :request do
   describe "unspam individual assets" do
     let(:track) { assets(:spam_track) }
 
+    before do
+      AssetCommand.new(track).soft_delete_with_relations
+    end
+
     it "should unspam the track" do
       akismet_stub_submit_ham
       put unspam_admin_asset_path(track.id)
@@ -102,6 +106,13 @@ RSpec.describe Admin::AssetsController, type: :request do
     it "should update RAKISMET" do
       expect(Rakismet).to receive(:akismet_call)
       put unspam_admin_asset_path(track.id)
+    end
+
+    # not including further specs since it's the same as in #restore
+    it "should restore asset" do
+      expect {
+        put restore_admin_asset_path(track.id)
+      }.to change(Asset, :count).by(1)
     end
   end
 

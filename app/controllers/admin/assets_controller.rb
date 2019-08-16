@@ -12,6 +12,8 @@ module Admin
     end
 
     def unspam
+      AssetCommand.new(@asset).restore_with_relations if @asset.soft_deleted?
+
       @asset.ham!
       @asset.update_attribute :is_spam, false
     end
