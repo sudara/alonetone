@@ -19,9 +19,7 @@ module Admin
     end
 
     def spam
-      @asset.spam!
-      @asset.update_attribute :is_spam, true
-      AssetCommand.new(@asset).soft_delete_with_relations
+      AssetCommand.new(@asset).spam_and_soft_delete_with_relations
     end
 
     def delete
