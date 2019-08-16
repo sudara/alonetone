@@ -116,29 +116,6 @@ RSpec.describe Admin::AssetsController, type: :request do
     end
   end
 
-  describe "mass spam update" do
-    let(:track1) { assets(:valid_zip) }
-    let(:track2) { assets(:invalid_file) }
-    let(:track3) { assets(:spam_track) }
-
-    it "should mark all assets as spam" do
-      akismet_stub_submit_spam
-      put(
-        mark_group_as_spam_admin_assets_path,
-        params: { mark_spam_by: { user_id: users(:sudara).id } }
-      )
-
-      expect(track1.is_spam).to eq(true)
-      expect(track2.is_spam).to eq(true)
-      expect(track3.is_spam).to eq(true)
-    end
-
-    # it "should update RAKISMET only for spam tracks" do
-    #   expect(Rakismet).to receive(:akismet_call).twice
-    #   put mark_group_as_spam_admin_assets_path, params: { mark_spam_by: { user_id: 1 } }
-    # end
-  end
-
   describe "#delete" do
     let(:asset) { assets(:asset_with_relations_for_soft_delete) }
 
