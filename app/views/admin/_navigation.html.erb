@@ -8,7 +8,7 @@
   </ul>
   <%= navigation_item 'All Tracks', admin_assets_path %>
   <ul>
-    <%= navigation_item 'Spam', admin_assets_path({filter_by: {is_spam: true}}) %>
+    <%= navigation_item 'Spam Deleted', admin_assets_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'All Comments',  admin_comments_path %>
   <ul>
