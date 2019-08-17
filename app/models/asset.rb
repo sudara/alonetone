@@ -28,6 +28,7 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+  scope :with_user,       -> { joins(:user).where('users.id IS NOT NULL') }
 
   belongs_to :user, counter_cache: true
   has_one :audio_feature, dependent: :destroy
