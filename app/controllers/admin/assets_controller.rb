@@ -5,7 +5,7 @@ module Admin
     def index
       if permitted_params[:filter_by] == 'deleted'
         # including with_deleted because all spam assets are also soft_deleted
-        @pagy, @assets = pagy(Asset.only_deleted.with_user.recent)
+        @pagy, @assets = pagy(Asset.only_deleted.with_user.recently_updated)
       else
         @pagy, @assets = pagy(Asset.recent)
       end

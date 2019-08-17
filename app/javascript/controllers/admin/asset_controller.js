@@ -23,7 +23,8 @@ export default class extends Controller {
   markTrackAsSpam() {
     this.setSpamRecord()
     this.hideSpamButton()
-    this.hideRestoreButton()
+    this.hideDeleteButton()
+    this.showRestoreButton()
   }
 
   setSpamRecord() {
