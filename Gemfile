@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.0.0.rc1'
+gem 'rails'
 gem 'mysql2'
 gem 'puma'
 
@@ -49,7 +49,7 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
-gem 'webpacker', '>= 4.0.x'
+gem 'webpacker'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
