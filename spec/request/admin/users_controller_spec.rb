@@ -116,11 +116,11 @@ RSpec.describe Admin::UsersController, type: :request do
       # sudara's playlist
       playlists(:owp)
       # arthur's track on owp playlist
-      tracks(:track_on_soft_deleted_of_other_user)
+      tracks(:sudaras_track_with_asset_on_other_user)
 
       put delete_admin_user_path(users(:arthur))
 
-      expect(tracks(:track_on_soft_deleted_of_other_user).reload.deleted_at).not_to be_nil
+      expect(tracks(:sudaras_track_with_asset_on_other_user).reload.deleted_at).not_to be_nil
     end
   end
 
