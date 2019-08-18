@@ -52,8 +52,8 @@ gem 'jquery-fileupload-rails'
 gem 'webpacker'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'sass-rails'
-gem 'compass-rails', github: 'sudara/compass-rails'
+gem 'sass-rails', '< 5.1' # We cannot move to 6.0 before compass is removed
+gem 'compass-rails', '~> 3.1' # Dark theme relies on sprites from compass
 gem 'yui-compressor'
 gem 'uglifier'
 gem 'coffee-rails', github: 'rails/coffee-rails'
