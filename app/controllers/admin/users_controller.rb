@@ -16,16 +16,11 @@ module Admin
     end
 
     def unspam
-      @user.ham!
-      @user.update_attribute :is_spam, false
-      UserCommand.new(@user).restore_with_relations
+      UserCommand.new(@user).unspam_and_restore_with_relations
     end
 
     def spam
-      @user.spam!
-      @user.update_attribute :is_spam, true
-
-      UserCommand.new(@user).soft_delete_with_relations
+      UserCommand.new(@user).spam_soft_delete_with_relations
 
       respond_to do |format|
         format.html { redirect_to admin_users_path(filter_by: :is_spam) }

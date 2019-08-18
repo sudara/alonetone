@@ -18,6 +18,18 @@ class UserCommand
     efficiently_destroy_relations
   end
 
+  def spam_soft_delete_with_relations
+    user.spam!
+    user.update_attribute :is_spam, true
+    soft_delete_with_relations
+  end
+
+  def unspam_and_restore_with_relations
+    user.ham!
+    user.update_attribute :is_spam, false
+    restore_with_relations
+  end
+
   private
 
   def efficiently_delete_relations(time = Time.now)
