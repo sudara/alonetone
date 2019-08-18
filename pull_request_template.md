@@ -13,7 +13,7 @@
 
 ## "Ready For Review" checklist
 
-These checklists are to help the author ensure the code review basics are covered. Feel free to remove to reduce noise on the PR.
+These checklists are to help ensure the code review basics are covered. Consider removing to reduce noise.
 
 * [ ] PR title accurately summarizes changes
 * [ ] New tests were added for isolated methods or new endpoints
@@ -22,6 +22,7 @@ These checklists are to help the author ensure the code review basics are covere
 
 ## Before code review *and after additional commits* during review.
 
+* [ ] Update title and description to account for additional changes
 * [ ] All tests green
 * [ ] Booted up the branch locally, exercised any new code
 * [ ] Percy changes are purposeful or explained
