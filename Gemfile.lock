@@ -6,6 +6,15 @@ GIT
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
 
+GIT
+  remote: git://github.com/sudara/compass-rails.git
+  revision: 5b41900d9b853ba3a8b57b888ba8a81fe35439af
+  specs:
+    compass-rails (3.1.0)
+      compass (~> 1.0.0)
+      sass-rails
+      sprockets (< 4.0)
+
 PATH
   remote: greenfield
   specs:
@@ -148,8 +157,6 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (2.0.1)
-      compass (~> 1.0.0)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     countries (3.0.0)
@@ -525,7 +532,7 @@ DEPENDENCIES
   bugsnag
   capybara
   coffee-rails!
-  compass-rails
+  compass-rails!
   country_select
   dalli
   dynamic_form
