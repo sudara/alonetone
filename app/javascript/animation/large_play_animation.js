@@ -50,7 +50,7 @@ export default function LargePlayAnimation() {
       scaleY:0
     })
 
-    eyesTl = new TimelineMax({repeat:-1}).timeScale(1.8);
+    eyesTl = new TimelineMax({paused:true, repeat:-1}).timeScale(1.8);
     dottyRotationTl = new TimelineMax({}).timeScale(1.9);
     mainTl = new TimelineMax({paused:true}).timeScale(2.6);
 
@@ -189,6 +189,7 @@ export default function LargePlayAnimation() {
     TweenLite.set(".pauseContainer", { visibility: "visible" });
     TweenLite.set(".centerCircle", { visibility: "visible" });
     mainTl.play('showloading')
+    eyesTl.play();
   }
 
   this.showPause = function(){
