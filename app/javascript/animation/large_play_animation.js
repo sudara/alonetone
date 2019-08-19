@@ -37,7 +37,8 @@ export default function LargePlayAnimation() {
     })
 
     TweenLite.set(icon, {
-      transformOrigin:'35% 50%'
+      transformOrigin:'35% 50%',
+      scale:0.8,
     })
 
     TweenLite.set(outline, {
@@ -128,6 +129,7 @@ export default function LargePlayAnimation() {
     .to(outline, 1, {
       strokeWidth:30,
       scale:0.97,
+      stroke: '#000',
       ease:Power1.easeInOut
     },'-=1')
     .to(pauseContainer, 1, {
@@ -193,8 +195,8 @@ export default function LargePlayAnimation() {
     mainTl.play('showPause')
   }
 
- this.setPause = function(){
-   mainTl.pause('setPause')
+  this.setPause = function(){
+    mainTl.pause('setPause')
   }
 
 }
