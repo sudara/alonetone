@@ -17,6 +17,9 @@
     font-family: $medium-sans-font;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media #{$mobile} {
+      padding-left: 12px;
+    }
   }
   form p {
     font-size: 14px;
@@ -34,11 +37,15 @@
     @media #{$mobile} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
+      flex-direction: column-reverse;
     }
     flex-wrap: wrap;
     .edit_playlist_info_left_column {
       min-width: 220px;
       width: 20%;
+      @media #{$mobile} {
+        width: 100%;
+      }
       .cover {
         display: block;
         border: 1px dashed $samo-light-gray;
