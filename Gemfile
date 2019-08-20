@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.0.0.rc1'
+gem 'rails'
 gem 'mysql2'
 gem 'puma'
 
@@ -49,11 +49,11 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
-gem 'webpacker', '>= 4.0.x'
+gem 'webpacker'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'sass-rails'
-gem 'compass-rails'
+gem 'sass-rails', '< 5.1' # We cannot move to 6.0 before compass is removed
+gem 'compass-rails', '~> 3.1' # Dark theme relies on sprites from compass
 gem 'yui-compressor'
 gem 'uglifier'
 gem 'coffee-rails', github: 'rails/coffee-rails'
