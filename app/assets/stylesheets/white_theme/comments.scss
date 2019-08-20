@@ -22,6 +22,12 @@
   .comments_area {
     margin-bottom: 0;
   }
+  #left {
+    @media #{$one-column} {
+      margin-bottom: $baseline * 2;
+    }
+  }
+
 }
 
 /* ADDING COMMENTS */
