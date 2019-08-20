@@ -41,9 +41,10 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it "should soft delete users listens" do
+        # inclides records where user is both owner and just listener
         expect do
           put :update, params: { user_id: 'sudara', profile: { bio: 'very spammy bio' } }
-        end.to change(Listen, :count).by(-2)
+        end.to change(Listen, :count).by(-3)
       end
 
       it "should soft delete users playlists" do
@@ -53,23 +54,23 @@ RSpec.describe ProfilesController, type: :controller do
         end.to change(Playlist, :count).by(-playlist_count)
       end
 
-      it "should soft delete users playlists" do
+      it "should soft delete users tracks" do
         expect do
           put :update, params: { user_id: 'sudara', profile: { bio: 'very spammy bio' } }
         end.to change(Track, :count).by(-7)
       end
 
-      it "should soft delete users playlists" do
+      it "should soft delete users comments" do
         expect do
           put :update, params: { user_id: 'sudara', profile: { bio: 'very spammy bio' } }
         end.to change(Comment, :count).by(-10)
       end
 
-      it "should soft delete users playlists" do
-        topic = users(:sudara).topics.count
+      it "should soft delete users topics" do
+        topics_count = users(:sudara).topics.count
         expect do
           put :update, params: { user_id: 'sudara', profile: { bio: 'very spammy bio' } }
-        end.to change(Topic, :count).by(-topic)
+        end.to change(Topic, :count).by(-topics_count)
       end
     end
   end

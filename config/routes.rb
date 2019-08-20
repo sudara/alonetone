@@ -30,6 +30,8 @@ Alonetone::Application.routes.draw do
       member do
         put :unspam
         put :spam
+        put :delete
+        put :restore
       end
       collection do
         put :mark_group_as_spam

@@ -120,3 +120,23 @@ public_non_spam_comment_to_self_by_ip:
   remote_ip: 127.1.1.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
+
+public_non_spam_comment_for_soft_deleted_asset:
+  commentable: asset_with_relations_for_soft_delete (Asset)
+  body: "Public non-spam comment on asset that's going to be soft deleted"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>
+
+another_public_non_spam_comment_for_soft_deleted_asset:
+  commentable: asset_with_relations_for_soft_delete (Asset)
+  body: "Another public non-spam comment on asset that's going to be soft deleted"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: sudara
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_s :db %>

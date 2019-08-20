@@ -41,3 +41,6 @@ henri_willig_finest_cheese:
 henri_willig_the_goat:
   asset: henri_willig_the_goat
   waveform: <%= waveform %>
+asset_with_relations_for_soft_delete:
+  asset: asset_with_relations_for_soft_delete
+  waveform: <%= waveform %>
