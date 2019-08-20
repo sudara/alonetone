@@ -1,7 +1,10 @@
 .user_tracks {
-  #left{
+  #left {
     .box {
       margin-bottom: 0;
+    }
+    @media #{$mobile} {
+      margin-bottom: $baseline * 2;
     }
   }
   h2 {
