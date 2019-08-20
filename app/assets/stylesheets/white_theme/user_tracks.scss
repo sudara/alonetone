@@ -3,7 +3,7 @@
     .box {
       margin-bottom: 0;
     }
-    @media #{$mobile} {
+    @media #{$one-column} {
       margin-bottom: $baseline * 2;
     }
   }
