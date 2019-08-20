@@ -70,6 +70,12 @@ ul.playlists {
     a.small_playlist_user {
       color: $black;
       font-size: 10px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      hyphens: auto;
     }
     a:last-child {
       font-weight: normal;
