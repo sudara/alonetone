@@ -181,6 +181,10 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 20px;
+    @media #{$mobile} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
     input {
       float: right;
       @include default-button();
