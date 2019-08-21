@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'mysql2'
-gem 'puma'
+gem 'puma', '< 4.1' # experiencing some issues with config on 4.1
 
 gem 'thredded'
 
