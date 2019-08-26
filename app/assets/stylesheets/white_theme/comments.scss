@@ -64,10 +64,10 @@
       margin-left: 110px;
       @media #{$mobile} {
         display: block;
-        top: -20px;
         .ajax_waiting {
           margin-right: 0;
           float: right;
+          border: 0
           &.ajax_fail, &.ajax_success {
             margin-bottom: 12px;
           }
@@ -75,10 +75,10 @@
       }
       @media #{$two-column-narrow} {
         display: block;
-        top: -20px;
         .ajax_waiting {
           margin-right: 0;
           float: right;
+          border: 0
           &.ajax_fail, &.ajax_success {
             margin-bottom: 12px;
           }
