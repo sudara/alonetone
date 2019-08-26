@@ -17,6 +17,9 @@
     font-family: $medium-sans-font;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media #{$mobile} {
+      padding-left: 12px;
+    }
   }
   form p {
     font-size: 14px;
@@ -34,11 +37,16 @@
     @media #{$mobile} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
+      flex-direction: column-reverse;
     }
     flex-wrap: wrap;
     .edit_playlist_info_left_column {
       min-width: 220px;
       width: 20%;
+      @media #{$mobile} {
+        width: 100%;
+        margin-top: $baseline;
+      }
       .cover {
         display: block;
         border: 1px dashed $samo-light-gray;
@@ -79,6 +87,10 @@
       display: flex;
       flex-wrap: wrap;
       width: 75%;
+      @media #{$mobile} {
+        width: 100%;
+      }
+
       div.input {
         width: 100%;
       }
@@ -86,12 +98,18 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        @media #{$mobile} {
+          flex-direction: column;
+        }
         > :nth-child(1) {
           flex: 1;
           input {
             width: 100%;
           }
           margin-right: 30px;
+          @media #{$mobile} {
+            margin-right: 0;
+          }
         }
         > :nth-child(2) {
           width: 140px;
@@ -104,12 +122,18 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        @media #{$mobile} {
+          flex-direction: column;
+        }
         > :nth-child(1) {
           flex: 1;
           input {
             width: 100%;
           }
           margin-right: 30px;
+          @media #{$mobile} {
+            margin-right: 0px;
+          }
         }
         > :nth-child(2) {
           flex: 1;
@@ -133,6 +157,9 @@
         font-size: 12px;
         position: relative;
         height: 54px;
+        @media #{$mobile} {
+          flex-direction: column;
+        }
         div.input {
           width: auto;
         }
@@ -154,6 +181,10 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 20px;
+    @media #{$mobile} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
     input {
       float: right;
       @include default-button();
