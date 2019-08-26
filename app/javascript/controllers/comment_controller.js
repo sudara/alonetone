@@ -19,7 +19,7 @@ export default class extends Controller {
   }
 
   error() {
-    this.responseTarget.innerHTML = '<div><span>Sorry, that didn\'t work</span></div>'
+    this.responseTarget.innerHTML = '<div><span>That didn\'t work!</span></div>'
     this.responseTarget.classList.toggle('ajax_fail')
     this.spinnerTarget.style.display = 'none'
   }
