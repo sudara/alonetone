@@ -1,11 +1,11 @@
 <% cache ['admin', User.with_deleted.cache_key] do %>
 <ul class="admin_nav">
-  <%= navigation_item "All Users (#{User.with_deleted.count})", admin_users_path %>
+  <%= navigation_item "All Users <span>#{User.with_deleted.count}</span>", admin_users_path %>
   <ul>
-    <%= navigation_item "Not Spam (#{User.filter_by('not_spam').count})", admin_users_path({filter_by: :not_spam}) %>
-    <%= navigation_item "Only Spam (#{User.filter_by('is_spam').count})", admin_users_path({filter_by: :is_spam}) %>
-    <%= navigation_item "Spammed Musicians (#{User.filter_by('spam_musicians').count})", admin_users_path({filter_by: :spam_musicians}) %>
-    <%= navigation_item "Deleted (Not Spam) (#{User.filter_by('deleted').count})", admin_users_path({filter_by: :deleted}) %>
+    <%= navigation_item "Not Spam <span>#{User.filter_by('not_spam').count}</span>", admin_users_path({filter_by: :not_spam}) %>
+    <%= navigation_item "Only Spam <span>#{User.filter_by('is_spam').count}</span>", admin_users_path({filter_by: :is_spam}) %>
+    <%= navigation_item "Spammed Musicians <span>#{User.filter_by('spam_musicians').count}</span>", admin_users_path({filter_by: :spam_musicians}) %>
+    <%= navigation_item "Deleted (Not Spam) <span>#{User.filter_by('deleted').count}</span>", admin_users_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'All Tracks', admin_assets_path %>
   <ul>
