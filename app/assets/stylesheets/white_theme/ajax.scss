@@ -7,7 +7,6 @@
   top: 1px;
   border-radius: 2px;
   margin-right: 12px;
-  // height: 22px;
   font-weight: bold;
   border: 1px solid transparent;
   &.ajax_fail {
@@ -42,16 +41,6 @@
   }
 }
 
-div.small_spinner {
-  display: none;
-  background: image-url("svg/icon_spinner.svg") no-repeat center center;
-  height: 20px;
-  width: 20px;
-  background-size: 100%;
-  position: relative;
-  top: 3px;
-}
-
 .floating_feedback {
   opacity: 0;
   visibility: hidden;
@@ -76,7 +65,6 @@ div.small_spinner {
   &.ajax_fail {
     border: 1px solid #ff1f75!important;
   }
-
   &.ajax_success > div  {
     padding-top: 9.75px;
     padding-right: 3px;
@@ -107,4 +95,14 @@ div.small_spinner {
       background-repeat: no-repeat;
     }
   }
+}
+
+div.small_spinner {
+  display: none;
+  background: image-url("svg/icon_spinner.svg") no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+  position: relative;
+  top: 3px;
 }
