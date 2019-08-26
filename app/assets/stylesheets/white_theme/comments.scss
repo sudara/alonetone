@@ -64,7 +64,7 @@
       margin-left: 110px;
       @media #{$mobile} {
         display: block;
-        top: -2px;
+        top: -20px;
         .ajax_waiting {
           margin-right: 0;
           float: right;
@@ -75,7 +75,7 @@
       }
       @media #{$two-column-narrow} {
         display: block;
-        top: -2px;
+        top: -20px;
         .ajax_waiting {
           margin-right: 0;
           float: right;
