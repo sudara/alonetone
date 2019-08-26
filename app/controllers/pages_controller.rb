@@ -60,14 +60,6 @@ class PagesController < ApplicationController
     @posts_per_user = User.average('posts_count') || 0
   end
 
-  def answers
-    raise Hell
-  end
-
-  def not_yet
-    render layout: false
-  end
-
   def itunes
     @page_title = "How to get your music on iTunes (as a music podcast) with alonetone"
   end
