@@ -62,6 +62,28 @@
       clear: both;
       justify-content: flex-end;
       margin-left: 110px;
+      @media #{$mobile} {
+        display: block;
+        .ajax_waiting {
+          margin-right: 0;
+          float: right;
+          border: 0;
+          &.ajax_fail, &.ajax_success {
+            margin-bottom: 12px;
+          }
+        }
+      }
+      @media #{$two-column-narrow} {
+        display: block;
+        .ajax_waiting {
+          margin-right: 0;
+          float: right;
+          border: 0;
+          &.ajax_fail, &.ajax_success {
+            margin-bottom: 12px;
+          }
+        }
+      }
     }
   }
 }
@@ -88,6 +110,17 @@
       clear: both;
       justify-content: flex-end;
       margin-left: 110px;
+      @media #{$one-column} {
+        display: block;
+        .ajax_waiting {
+          margin-right: 0;
+          float: right;
+          border: 0;
+          &.ajax_fail, &.ajax_success {
+            margin-bottom: 12px;
+          }
+        }
+      }
     }
   }
 }
@@ -188,6 +221,7 @@
       input.comment_submit {
         margin-bottom: 0;
         float: right;
+        clear: right;
         @include default_button();
       }
     }
