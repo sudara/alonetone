@@ -52,12 +52,6 @@ class AssetsController < ApplicationController
           page.replace 'stash', partial: "assets"
         end
       end
-      format.json do
-        cached_json = cache("tracksby/#{@user.login}") do
-          '{ "records" : ' + @assets.to_json(methods: %i[name type length seconds], only: %i[id name listens_count description permalink hotness user_id created_at]) + '}'
-        end
-        render json: cached_json
-      end
     end
     render 'index_white' if white_theme_enabled?
   end
