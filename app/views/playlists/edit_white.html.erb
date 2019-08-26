@@ -71,7 +71,7 @@
     </p>
     <div class="box">
       <div class="left_column_box_header">
-        <h2><%= @playlist.title %> <span class="playlist_date">(<%= @playlist.year %>)</span></h2>
+        <h2><%= @playlist.title %></h2>
         <div>
            <span class="playlist_track_size" data-target="playlist-sort.trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
            <span class="playlist_total_time" data-target="playlist-sort.totalTime"><%= @playlist.play_time %></span>
