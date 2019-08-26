@@ -22,7 +22,10 @@
 				&.current {
           background-color: $samo-orange;
           color: $white;
-					padding: 0 15px;
+          padding-left: 12px;
+          span {
+            color: $white;
+          }
 				}
         &:hover {
           text-decoration: none;
@@ -30,7 +33,7 @@
         a {
           font-size: 14px;
           line-height: 34px;
-          padding: 0 15px;
+          padding-left: 12px;
           width: 100%;
 					display: block;
 					box-sizing: border-box;
@@ -38,6 +41,12 @@
             background: $light_gray;
             text-decoration: none;
           }
+        }
+        span {
+          float: right;
+          color: $new-samo-gray;
+          font-size: 12px;
+          padding-right: 12px;
         }
       }
       > ul {
@@ -50,7 +59,6 @@
           }
 					a {
             padding-left: 30px;
-						padding-right: 15px;
 						box-sizing: content-box;
 					}
 				}
