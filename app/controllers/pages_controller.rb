@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
   layout :old_or_white
 
-  class Hell < StandardError; end
-
   def twentyfour
     render layout: '24houralbum'
   end

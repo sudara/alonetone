@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="abuseipdb-verification" content="3yplyU5E" />
-  <title><%= @page_title || 'alonetone' %></title>
+  <title><%= @page_title ?  "#{@page_title} | alonetone " : 'alonetone' %></title>
   <%= yield :head %>
   <%= stylesheet_link_tag ('white_theme') %>
   <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
