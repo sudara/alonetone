@@ -1,18 +1,29 @@
+### [Bug] Step by step walkthrough of how to reproduce (console/UI/etc). When and how did the problem begin?
+
+
+### Iterate through the changes in this PR. Why did you implement them this way?
+
+
+### Was anything tried that didn't work? Anything that reviewers should pay attention to or difficult or tricky that should be explained?
+
+
+### Does anything special need to happen for deployment?
+
 
 
 ## "Ready For Review" checklist
 
+These checklists are to help ensure the code review basics are covered. Consider removing to reduce noise.
+
 * [ ] PR title accurately summarizes changes
-* [ ] PR description
-  * Does this fix any open issues?
-  * What changes are you making?
-  * Why did you implement it this way?
-  * Is there anything reviewers need to know or pay attention to?
-  * Does anything special need to happen for deployment?
-* [ ] Optional: Inline github PR comments explaining context of tricky / complicated / unexpected lines so reviewers can follow along.
-* [ ] If appropriate, new tests were added for isolated methods or new endpoints
-* [ ] All tests green
-* [ ] Percy changes are purposeful or explained
-* [ ] I booted up the branch locally, exercised any new code I wrote.
-* [ ] If css was touched, I verified changes are happy on mobile (via Percy is ok)
+* [ ] New tests were added for isolated methods or new endpoints
 * [ ] I opened an issue for any logical followups
+* [ ] If this fixes a bug, "Fixes #XXX" is either the very first or very last line of the description.
+
+## Before code review *and after additional commits* during review.
+
+* [ ] Update title and description to account for additional changes
+* [ ] All tests green
+* [ ] Booted up the branch locally, exercised any new code
+* [ ] Percy changes are purposeful or explained
+* [ ] Css changes are happy on mobile (via Percy is ok)
