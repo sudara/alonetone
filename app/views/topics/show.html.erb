@@ -48,7 +48,7 @@
   </div>
 <% end %>
 
-<% if @posts.total_pages > 1 %>
+<% if @posts.count > 1 %>
   <div class="forum_paginator">
     <%== pagy_nav @posts_pagy %>
   </div>
@@ -58,7 +58,7 @@
   <%= render @posts %>
 </table>
 
-<% if @posts.total_pages > 1 %>
+<% if @posts.count > 1 %>
 <div class="forum_paginator">
   <%== pagy_nav @posts_pagy %>
 </div>

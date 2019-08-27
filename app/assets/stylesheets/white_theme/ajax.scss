@@ -7,31 +7,16 @@
   top: 1px;
   border-radius: 2px;
   margin-right: 12px;
-  height: 22px;
   font-weight: bold;
   border: 1px solid transparent;
+  height: 0;
   &.ajax_fail {
+    height: 22px;
     border: 1px solid #ff1f75;
-    @media #{$mobile} {
-      border: 0;
-    }
-    @media #{$two-column-narrow} {
-      border: 0;
-    }
     > div {
       padding-right: 2px;
       color: #b20035;
       padding-top: 6.5px;
-      @media #{$mobile} {
-        span {
-          display: none;
-        }
-      }
-      @media #{$two-column-narrow} {
-        span {
-          display: none;
-        }
-      }
       &::after {
         position: absolute;
         top: 7.5px;
@@ -41,27 +26,12 @@
     }
   }
   &.ajax_success {
+    height: 22px;
     border: 1px solid #67c906;
-    @media #{$mobile} {
-      border: 0;
-    }
-    @media #{$two-column-narrow} {
-      border: 0;
-    }
     > div {
       padding-right: 2px;
       color: #2b8800;
       padding-top: 6.5px;
-      @media #{$mobile} {
-        span {
-          display: none;
-        }
-      }
-      @media #{$two-column-narrow} {
-        span {
-          display: none;
-        }
-      }
       &::after {
         position: absolute;
         top: 7px;
@@ -70,16 +40,6 @@
       }
     }
   }
-}
-
-div.small_spinner {
-  display: none;
-  background: image-url("svg/icon_spinner.svg") no-repeat center center;
-  height: 20px;
-  width: 20px;
-  background-size: 100%;
-  position: relative;
-  top: 3px;
 }
 
 .floating_feedback {
@@ -102,24 +62,15 @@ div.small_spinner {
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.30);
   &.ajax_success {
     border: 1px solid #67c906!important;
+    height: 33px;
   }
   &.ajax_fail {
     border: 1px solid #ff1f75!important;
+    height: 33px;
   }
-
   &.ajax_success > div  {
     padding-top: 9.75px;
     padding-right: 3px;
-    @media #{$mobile} {
-      span {
-        display: inline;
-      }
-    }
-    @media #{$two-column-narrow} {
-      span {
-        display: inline;
-      }
-    }
     &::after {
       position: absolute;
       top: 7.5px;
@@ -135,16 +86,6 @@ div.small_spinner {
   &.ajax_fail > div {
     padding-top: 9.75px;
     padding-right: 3px;
-    @media #{$mobile} {
-      span {
-        display: inline;
-      }
-    }
-    @media #{$two-column-narrow} {
-      span {
-        display: inline;
-      }
-    }
     &::after {
       position: absolute;
       top: 7.5px;
@@ -157,4 +98,14 @@ div.small_spinner {
       background-repeat: no-repeat;
     }
   }
+}
+
+div.small_spinner {
+  display: none;
+  background: image-url("svg/icon_spinner.svg") no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+  position: relative;
+  top: 3px;
 }

@@ -490,8 +490,14 @@ main {
 
       background-color: #efefef;
       @include samo-shadow-and-radius();
-      padding: 16px;
+      padding: 12px 16px 4px 16px;
       box-sizing: border-box;
+      
+      > a {
+        margin-top: 0px;
+        margin-bottom: 8px;
+        margin-right: 4px;
+      }
 
       a.edit_profile {
         @include default-button("admin");
