@@ -14,7 +14,7 @@ class AssetsController < ApplicationController
   # home page
   def latest
     if stale?(Asset.last_updated)
-      @page_title = @description = "Latest #{@limit} uploaded mp3s" if params[:latest]
+      @page_title = @description = "Latest Music"
       @tab = 'home'
       @assets = Asset.published.latest.includes(user: :pic).limit(5)
       set_related_lastest_variables
@@ -32,9 +32,9 @@ class AssetsController < ApplicationController
     @most_listened_to_tracks = all_user_tracks.most_listened.limit(10)
   end
 
-  # index serves assets for a specific user
+  # user's home page
   def index
-    @page_title = "All music by " + @user.name
+    @page_title = "#{@user.display_name}'s Music"
     set_related_user_variables
     if current_user_is_admin_or_owner?(@user)
       @assets = @user.assets
@@ -77,7 +77,7 @@ class AssetsController < ApplicationController
       flash[:error] = "Sorry. Page you've been looking for is not found."
       raise ActionController::RoutingError, 'Page Not Found'
     end
-    @page_title = "alonetone Radio: #{@channel}"
+    @page_title = "#{@channel} radio"
     @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
     render 'radio_white' if white_theme_enabled?
   end
@@ -104,6 +104,7 @@ class AssetsController < ApplicationController
     @user = current_user
     @tab = 'upload' if current_user == @user
     @asset = Asset.new
+    @page_title = "Upload New Track"
   end
 
   def edit
