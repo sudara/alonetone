@@ -66,6 +66,10 @@
     .progress-container-inner {
       position: absolute;
       height: 80px;
+      display: none;
+      &.visible {
+        display: block;
+      }
       .line-progress {
         position: absolute;
         width: 1px;
