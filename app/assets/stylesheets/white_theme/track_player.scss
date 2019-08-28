@@ -58,43 +58,52 @@
     color: $medium-gray;
   }
 
-  .line-progress {
+  .progress-container {
     position: absolute;
-    width: 1px;
-    height: 80px;
-    background-color: $samo-orange;
     left: 79px;
-  }
-
-  .time-progress {
-    position: absolute;
-    display: block;
-    bottom: -18px;
-    left: 38px;
-    width: 42px;
-    font-size: 11px;
-    height: 18px;
-    line-height: 18px;
-    background-color: $samo-orange;
-    font-variant-numeric: tabular-nums;
-    text-align: center;
-    color: $white;
-    font-family: $medium-sans-font;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    z-index: -10;
+    height: 80px;
+    width: calc(100% - 80px);
+    .progress-container-inner {
+      position: absolute;
+      height: 80px;
+      .line-progress {
+        position: absolute;
+        width: 1px;
+        height: 80px;
+        background-color: $samo-orange;
+        left: 0;
+      }
+      .time-progress {
+        position: absolute;
+        display: block;
+        bottom: -18px;
+        left: -41px;
+        width: 42px;
+        font-size: 11px;
+        height: 18px;
+        line-height: 18px;
+        background-color: $samo-orange;
+        font-variant-numeric: tabular-nums;
+        text-align: center;
+        color: $white;
+        font-family: $medium-sans-font;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        z-index: -10;
+      }
+    }
   }
 
   .time-total {
     position: absolute;
     display: block;
     bottom: -18px;
-    right: 4px;
+    right: 9px;
     width: 40px;
     height: 18px;
     line-height: 18px;
     font-size: 11px;
-    
+    z-index: -11;
     font-variant-numeric: tabular-nums;
     text-align: right;
     color: $samo-gray;

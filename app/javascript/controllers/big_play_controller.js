@@ -3,7 +3,7 @@ import LargePlayAnimation from '../animation/large_play_animation'
 import Waveform from '../animation/waveform'
 
 export default class extends Controller {
-  static targets = ['play', 'playButton', 'time', 'waveform', 'seekBar']
+  static targets = ['play', 'playButton', 'time', 'progressContainerInner', 'waveform', 'seekBar']
 
   initialize() {
     this.animation = new LargePlayAnimation()

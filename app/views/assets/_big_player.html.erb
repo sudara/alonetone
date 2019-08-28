@@ -34,12 +34,17 @@
     <div class="seekbar" data-target="big-play.seekBar"></div>
   </div>
 
-  <div class="line-progress">
+  <div class="progress-container">
+    <div class="progress-container-inner" data-target="big-play.progressContainerInner">
+      <div class="line-progress">
+      </div>
+      <div class="time-progress">
+        <span class="index" data-target="big-play.time">0:00</span>
+      </div>
+    </div>
   </div>
 
-  <div class="time-progress">
-    <span class="index" data-target="big-play.time">0:00</span>
-  </div>
+  
 
   <div class="time-total">
     <%= @asset.length %>
