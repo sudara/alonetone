@@ -238,7 +238,7 @@ main {
             }
             div.follow_button {
               @include default_button();
-              background-color: #fff;
+              background-color: $white;
               color: $samo-orange;
               margin-left: 24px;
               margin-right: 8px;
@@ -247,7 +247,7 @@ main {
               }
 
               &:hover {
-                background-color: #fff;
+                background-color: $white;
               }
             }
             svg {
@@ -456,7 +456,7 @@ main {
         }
         .user_agent {
           padding: 16px;
-          border-top: 2px solid #fff;
+          border-top: 2px solid $white;
           > div:first-child {
             color: #868686;
             font-size: 12px;
@@ -521,7 +521,7 @@ main {
         padding-left: 0;
         flex-wrap: wrap;
         background-color: #353535;
-        color: #fff;
+        color: $white;
         @include samo-shadow-and-radius();
         overflow: auto;
         li {

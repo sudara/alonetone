@@ -71,8 +71,8 @@
         padding: 4px 3px 5px 6px;
         color: #aaa;
         &:hover {
-          color: #fff;
-          border-color: #fff;
+          color: $white;
+          border-color: $white;
         }
       }
       a.play-button {

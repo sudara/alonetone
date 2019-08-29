@@ -100,7 +100,7 @@
   top: -6px;
   .comment_form {
     textarea {
-      background-color: #fff;
+      background-color: $white;
     }
     div.submit_wrapper {
       position: relative;
@@ -215,7 +215,7 @@
         .only_user_name,
         .only_alonetone_mods {
           font-weight: bold;
-          color: #fff;
+          color: $white;
         }
       }
       input.comment_submit {
@@ -252,7 +252,7 @@
     margin: 18px 10px 18px 50px;
     padding: 16px 16px 10px 16px;
     border-radius: 0 4px 4px 4px;
-    background-color: #fff;
+    background-color: $white;
     box-shadow: none;
     &::before {
       position: absolute;
