@@ -106,7 +106,7 @@ $waveform-playing: #302f2f;
   background-color: $new-samo-gray;
   box-shadow: none;
   &:hover {
-    background-color: #888;
+    background-color: $samo-gray;
   }
   &:active {
     background-color: #eb7b0c;
