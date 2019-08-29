@@ -8,7 +8,7 @@
   align-items: flex-start;
   .admin_column_left {
     margin-right: 36px;
-    background-color: #FFF;
+    background-color: $white;
     overflow: hidden;
     box-shadow: none;
     h2 {
@@ -83,7 +83,7 @@
         border: 1px solid #DDDDDD;
         border-radius: 5px;
         margin-bottom: 12px;
-        background-color: #fff;
+        background-color: $white;
       }
     }
     

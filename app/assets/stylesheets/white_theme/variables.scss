@@ -76,7 +76,7 @@ $samo-background-gray: #f1f2f2;
 $samo-background-orange: #bda8a0; // please change me
 $samo-alternate-background-gray: #f5f5f5;
 $lightest-gray: #f9f9f9;
-$white: #fff;
+$white: #ffffff;
 
 $red: #d3220c;
 $orange: #da6d25;
@@ -100,7 +100,7 @@ $waveform-playing: #302f2f;
   padding: 0 16px;
   text-align: center;
   text-decoration: none;
-  color: #fff;
+  color: $white;
   border: 0;
   border-radius: 4px;
   background-color: $new-samo-gray;
