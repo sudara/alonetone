@@ -441,7 +441,7 @@ main {
         display: block;
       }
       .area_content {
-        background-color: #efefef;
+        background-color: $light-gray;
         @include samo-shadow-and-radius();
 
         .user_ip {
@@ -488,7 +488,7 @@ main {
         margin-top: $baseline * 1.5;
       }
 
-      background-color: #efefef;
+      background-color: $light-gray;
       @include samo-shadow-and-radius();
       padding: 12px 16px 4px 16px;
       box-sizing: border-box;
