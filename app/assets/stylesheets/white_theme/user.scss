@@ -261,7 +261,7 @@ main {
         .user_header_avatar {
           overflow: hidden;
           @include samo-shadow-and-radius();
-          border: 1px solid #000;
+          border: 1px solid $black;
           width: 48px;
           height: 48px;
           @media #{$mobile} {
@@ -352,7 +352,7 @@ main {
       }
       h2.area_heading {
         font-size: 24px;
-        color: #000;
+        color: $black;
         display: block;
       }
       > div {
@@ -384,7 +384,7 @@ main {
 
       h2.area_heading {
         font-size: 24px;
-        color: #000;
+        color: $black;
         display: block;
       }
       .area_content {
