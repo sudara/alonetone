@@ -6,7 +6,7 @@
 		float: left;
 		height: 12px;
 		padding: 0;
-		color: #888;
+		color: $samo-gray;
 	}
 	.active {
 		font-weight: bold;
@@ -31,7 +31,7 @@
 		float: left;
 		height: 12px;
 		padding: 10px 10px;
-		color: #888;
+		color: $samo-gray;
 	}
 	em, a:hover, span.current {
 		text-decoration: none;
