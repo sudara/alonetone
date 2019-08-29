@@ -177,9 +177,9 @@ input {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid #888;
+  border: 1px solid $samo-gray;
   border-radius: 2.5px;
-  background-color: #888;
+  background-color: $samo-gray;
 }
 
 [type="checkbox"]:not(:checked) + label:after {

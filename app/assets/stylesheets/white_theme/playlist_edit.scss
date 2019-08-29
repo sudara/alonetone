@@ -317,7 +317,7 @@
               font-weight: normal;
               height: 26px;
               &:hover {
-                background-color: #888888;
+                background-color: $samo-gray;
                 color: $white;
               }
             }
@@ -403,7 +403,7 @@
     .add {
       &:hover {
         .add-inner {
-          background-color: #888;
+          background-color: $samo-gray;
         }
       }
       &:active {
@@ -427,7 +427,7 @@
     .remove {
       &:hover {
         .remove-inner {
-          background-color: #888;
+          background-color: $samo-gray;
         }
       }
       &:active {
