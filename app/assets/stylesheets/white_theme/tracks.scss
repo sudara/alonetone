@@ -37,7 +37,7 @@
     outline: none;
   }
   &.draggable-mirror {
-    border: 1px solid #EEE;
+    border: 1px solid $light-gray;
     border-radius: 0;
     box-shadow: 0 0px 5px 1px #CCCCCC7A;
     z-index: 9999999;
@@ -182,12 +182,12 @@
       }
       &.hover, &.open {
         div.button, div.title {
-          background-color: #EEE;
+          background-color: $light-gray;
         }
       }
       &.playing {
         div.button, div.title {
-          background-color: #EEE;
+          background-color: $light-gray;
         }
         div.button {
           a {
