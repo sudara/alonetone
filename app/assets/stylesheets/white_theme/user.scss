@@ -328,7 +328,7 @@ main {
           flex-grow: 1;
           font-size: 16px;
           line-height: 1.3;
-          color: #353535;
+          color: $dark-gray;
           padding: 36px;
           font-family: $medium-sans-font;
         }
@@ -404,7 +404,7 @@ main {
             }
             > div:last-child {
               font-size: 16px;
-              color: #353535;
+              color: $dark-gray;
             }
           }
         }
@@ -464,7 +464,7 @@ main {
           }
           > div:last-child {
             font-size: 16px;
-            color: #353535;
+            color: $dark-gray;
           }
         }
         > div {
@@ -476,7 +476,7 @@ main {
             }
             > div:last-child {
               font-size: 16px;
-              color: #353535;
+              color: $dark-gray;
             }
           }
         }
@@ -520,7 +520,7 @@ main {
         padding-bottom: 4px;
         padding-left: 0;
         flex-wrap: wrap;
-        background-color: #353535;
+        background-color: $dark-gray;
         color: $white;
         @include samo-shadow-and-radius();
         overflow: auto;
