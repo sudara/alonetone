@@ -21,7 +21,7 @@
       .edit-link + .edit-link {
         margin-left: 6px;
         text-transform: uppercase;
-        background-color: #fff;
+        background-color: $white;
         color: $samo-orange;
       }
     }
@@ -125,14 +125,14 @@
       margin: ($baseline * 1.5) auto;
       text-align: center;
       border: 0;
-      border-bottom: 1px solid #aaa;
+      border-bottom: 1px solid $samo-light-gray;
       &:after {
         position: absolute;
         top: -0.55em;
         left: 265px;
         display: block;
         content: "\f025"; // with headphone icon
-        color: #aaa;
+        color: $samo-light-gray;
         background-color: white; // interrupt hr
         -webkit-font-smoothing: antialiased;
       }

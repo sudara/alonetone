@@ -90,7 +90,6 @@
       @media #{$mobile} {
         width: 100%;
       }
-
       div.input {
         width: 100%;
       }
@@ -165,7 +164,7 @@
         }
         label {
           text-transform: none;
-          color: #4F4D4D;
+          color: $comment-text-gray;
         }
         span.private_notice {
          color: $new-samo-gray;
@@ -228,7 +227,7 @@
           color: $samo-gray;
         }
         span.playlist_dash {
-          color: #e1e2e2;
+          color: $light-gray;
         }
         span.playlist_total_time {
           color: $samo-orange;
@@ -287,7 +286,7 @@
       }
       #playlist_tabs {
         display: flex;
-        background-color: #e1e2e2;
+        background-color: $light-gray;
         height: 36px;
         box-sizing: border-box;
         #playlist_source_options {
@@ -313,12 +312,12 @@
             a {
               @include default-button();
               background-color: $white;
-              color: #888888;
+              color: $samo-gray;
               font-family: $medium-sans-font;
               font-weight: normal;
               height: 26px;
               &:hover {
-                background-color: #888888;
+                background-color: $samo-gray;
                 color: $white;
               }
             }
@@ -353,7 +352,7 @@
       position: relative;
       top: -3px;
       border-radius: 4px;
-      background-color: #c4c4c4;
+      background-color: $playlist-button-background-gray;
       align-items: center;
       justify-content: center;
       svg {
@@ -369,7 +368,7 @@
       position: relative;
       top: -3px;
       border-radius: 4px;
-      background-color: #c4c4c4;
+      background-color: $playlist-button-background-gray;
       align-items: center;
       justify-content: center;
       svg {
@@ -404,7 +403,7 @@
     .add {
       &:hover {
         .add-inner {
-          background-color: #888;
+          background-color: $samo-gray;
         }
       }
       &:active {
@@ -417,7 +416,7 @@
         width: 29px;
         height: 29px;
         border-radius: 4px;
-        background-color: #c4c4c4;
+        background-color: $playlist-button-background-gray;
         align-items: center;
         justify-content: center;
         svg {
@@ -428,7 +427,7 @@
     .remove {
       &:hover {
         .remove-inner {
-          background-color: #888;
+          background-color: $samo-gray;
         }
       }
       &:active {
@@ -441,7 +440,7 @@
         width: 29px;
         height: 29px;
         border-radius: 4px;
-        background-color: #c4c4c4;
+        background-color: $playlist-button-background-gray;
 
         align-items: center;
         justify-content: center;
@@ -455,7 +454,7 @@
 
 .draggable-mirror {
   z-index: 99999;
-  border: 1px solid #000;
+  border: 1px solid $black;
 }
 
 .edit_playlist_pro_upload {

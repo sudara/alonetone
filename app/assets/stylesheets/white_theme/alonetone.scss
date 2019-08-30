@@ -55,7 +55,7 @@ ul {
     font-size: 15px;
     font-weight: normal;
     font-family: $medium-sans-font;
-    color: #868686;
+    color: $samo-gray;
     border: 0;
     margin-right: 4px;
     display: inline-block;
@@ -66,7 +66,7 @@ ul {
     height: 32px;
     line-height: 33px;
     @include samo-shadow-and-radius();
-    background-color: #fff;
+    background-color: $white;
     box-shadow: none;
     span {
       vertical-align: top;
