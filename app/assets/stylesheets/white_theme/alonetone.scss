@@ -66,7 +66,6 @@ ul {
     @include samo-shadow-and-radius();
     background-color: $white;
     box-shadow: none;
-    text-align: right;
     font-size: 15px;
     font-family: $medium-sans-font;
     display: inline-block;
@@ -75,7 +74,6 @@ ul {
       vertical-align: top;
       display: inline;
       i.icon_caret {
-        margin-left: -2px;
         position: relative;
         top: 5px;
         svg {
