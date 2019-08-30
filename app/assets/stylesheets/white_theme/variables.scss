@@ -64,41 +64,39 @@ $body-background-color: #f4f4f4;
 
 // colors
 
-$black: #000;
-$footer-bottom-background-gray: #272727;
-$dark-gray: #353535;
-$comment-text-gray: #4f4d4d;
-$medium-gray: #666;
-$samo-gray: #868686;
-$gray: #999;
-$comment-label-gray: #969393;
-$new-samo-gray: #a6abab;
-$samo-light-gray: #d7dbdb;
-$playlist-button-background-gray: #c4c4c4;
-$light-gray: #eeeeee;
-$samo-background-gray: #f1f2f2;
-$samo-alternate-background-gray: #f5f5f5;
-$lightest-gray: #f9f9f9;
-$white: #ffffff;
+$black: #000; // 17 uses
+$footer-bottom-background-gray: #272727; // 2 uses
+$dark-gray: #353535; // 27 uses
+$comment-text-gray: #4f4d4d; // 9 uses
+$samo-gray: #868686; // 33 uses
+$gray: #999; // 6 uses
+$comment-label-gray: #969393; // 2 uses 
+$new-samo-gray: #a6abab; // 22 uses
+$samo-light-gray: #d7dbdb; // 13 uses
+$playlist-button-background-gray: #c4c4c4;  // 4 uses
+$light-gray: #eeeeee; // 21 uses
+$samo-background-gray: #f1f2f2; // 3 uses
+$samo-alternate-background-gray: #f5f5f5; // 11 uses
+$lightest-gray: #f9f9f9; // 5 uses
+$white: #ffffff; // 53 uses
 
-$private-red: #f04e1a;
-$red: #d3220c;
-$private-orange: #e02a02;
-$dark-orange: #8b370d;
-$footer-orange: #de6a00;
-$samo-background-orange: #bda8a0; // please change me
-$orange: #da6d25;
-$samo-orange: #eb7b0c;
-$light-orange: #ffd1b0;
-$samo-dark-orange: #f04e1a;
-$waveform-playing: #302f2f;
+$private-red: #f04e1a; // 1 use
+$red: #d3220c; // 2 uses
+$private-orange: #e02a02; // 2 uses
+$dark-orange: #8b370d; // 1 use
+$footer-orange: #de6a00; // 3 uses
+$samo-background-orange: #bda8a0; // 1 use
+$orange: #da6d25; // 3 uses
+$samo-orange: #eb7b0c; // 46 uses
+$light-orange: #ffd1b0; // 2 uses
+$samo-dark-orange: #f04e1a; // 2 uses
+$waveform-playing: #302f2f; // 1 use
 
-$ajax-fail-border-red: #ff1f75;
-$ajax-fail-text-red: #b20035;
+$ajax-fail-border-red: #ff1f75; // 1 use
+$ajax-fail-text-red: #b20035; // 1 use
 
-$ajax-success-border-green: #67c906;
-$ajax-success-text-green: #2b8800;
-
+$ajax-success-border-green: #67c906; // 1 use
+$ajax-success-text-green: #2b8800; // 1 use
 
 
 @mixin samo-shadow-and-radius() {
