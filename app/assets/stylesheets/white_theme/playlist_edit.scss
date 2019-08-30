@@ -164,7 +164,7 @@
         }
         label {
           text-transform: none;
-          color: #4F4D4D;
+          color: $comment-text-gray;
         }
         span.private_notice {
          color: $new-samo-gray;
@@ -227,7 +227,7 @@
           color: $samo-gray;
         }
         span.playlist_dash {
-          color: #e1e2e2;
+          color: $light-gray;
         }
         span.playlist_total_time {
           color: $samo-orange;
@@ -286,7 +286,7 @@
       }
       #playlist_tabs {
         display: flex;
-        background-color: #e1e2e2;
+        background-color: $light-gray;
         height: 36px;
         box-sizing: border-box;
         #playlist_source_options {
@@ -312,7 +312,7 @@
             a {
               @include default-button();
               background-color: $white;
-              color: #888888;
+              color: $samo-gray;
               font-family: $medium-sans-font;
               font-weight: normal;
               height: 26px;

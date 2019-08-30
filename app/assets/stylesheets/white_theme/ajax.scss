@@ -2,7 +2,6 @@
   font-size: 10px;
   padding-left: 16px;
   padding-right: 32px;
-  color: #da6d25;
   position: relative;
   top: 1px;
   border-radius: 2px;
@@ -12,10 +11,10 @@
   height: 0;
   &.ajax_fail {
     height: 22px;
-    border: 1px solid #ff1f75;
+    border: 1px solid $ajax-fail-border-red;
     > div {
       padding-right: 2px;
-      color: #b20035;
+      color: $ajax-fail-text-red;
       padding-top: 6.5px;
       &::after {
         position: absolute;
@@ -27,10 +26,10 @@
   }
   &.ajax_success {
     height: 22px;
-    border: 1px solid #67c906;
+    border: 1px solid $ajax-success-border-green;
     > div {
       padding-right: 2px;
-      color: #2b8800;
+      color: $ajax-success-text-green;
       padding-top: 6.5px;
       &::after {
         position: absolute;

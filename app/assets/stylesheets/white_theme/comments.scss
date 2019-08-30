@@ -204,9 +204,8 @@
         padding-left: 20px;
         padding-top: 8px;
         padding-bottom: 8px;
-        color: $white;
-        color: #ffd1b0;
-        border-color: #e02a02;
+        color: $light-orange;
+        border-color: $private-orange;
         border-radius: 0 0 6px 6px;
         background-color: $samo-dark-orange;
         &.hidden {
@@ -302,9 +301,9 @@
         height: 14px;
         text-align: center;
         text-transform: uppercase;
-        color: #f04e1a;
+        color: $private-red;
         border-radius: 2px;
-        background-color: #ffd1b0;
+        background-color: $light-orange;
         text-indent: 0;
       }
       @media only screen and (max-width: 375px) {
@@ -327,9 +326,8 @@
         }
         a:last-child {
           font-weight: bold;
-          color: #e02a02;
+          color: $private-orange;
         }
-        
       }
       h1,
       h2,
