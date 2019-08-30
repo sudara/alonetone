@@ -1,4 +1,3 @@
-<% cache ['admin', User.with_deleted.cache_key] do %>
 <ul class="admin_nav">
   <%= navigation_item "All Users <span>#{User.with_deleted.count}</span>", admin_users_path %>
   <ul>
@@ -22,4 +21,3 @@
   <li><%= link_to "Akismet Stats", "https://akismet.com/web/1.0/user-stats.php?blog=alonetone.com&api_key=#{Rails.configuration.alonetone.rakismet_key}"%></li>
   <li><%= link_to "Job Status", "/sidekiq" %></li>
 </ul>
-<% end %>

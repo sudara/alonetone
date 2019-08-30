@@ -37,7 +37,7 @@
     outline: none;
   }
   &.draggable-mirror {
-    border: 1px solid #EEE;
+    border: 1px solid $light-gray;
     border-radius: 0;
     box-shadow: 0 0px 5px 1px #CCCCCC7A;
     z-index: 9999999;
@@ -73,7 +73,7 @@
   .asset_top {
     position: relative;
     z-index: 1;
-    background-color: #FFF;
+    background-color: $white;
     .asset_top_row {
       display: flex;
       div.button {
@@ -139,7 +139,7 @@
             bottom: 7px;
             display: block;
             text-align: right;
-            color: #8C8C8C;
+            color: $samo-gray;
           }
         }
         a {
@@ -182,12 +182,12 @@
       }
       &.hover, &.open {
         div.button, div.title {
-          background-color: #EEE;
+          background-color: $light-gray;
         }
       }
       &.playing {
         div.button, div.title {
-          background-color: #EEE;
+          background-color: $light-gray;
         }
         div.button {
           a {
@@ -199,7 +199,7 @@
             opacity: .99;
           }
           div.time {
-            color: #FECDA6;
+            color: $samo-orange;
           }
         }
       }
@@ -284,7 +284,7 @@
         font-size: 14px;
         line-height: 17px;
         margin-right: 0;
-        color: #4F4D4D;
+        color: $comment-text-gray;
 
         flex: 1;
         .user_description {
@@ -330,7 +330,7 @@
         }
           .created {
             font-size: 12px;
-            color: #959595;
+            color: $gray;
             margin-bottom: 10px;
           }
           .below_description {

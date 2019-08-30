@@ -16,7 +16,7 @@ main {
       }
     }
     .sort_instructions {
-      color: #868686;
+      color: $samo-gray;
       margin: 8px 0;
       @media #{$mobile} {
         padding-left: 2.5%;
