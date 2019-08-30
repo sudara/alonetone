@@ -1,3 +1,4 @@
+<% cache "comment/#{comment.id}/authorised_for_comment/#{authorized_for_comment?}" %>
 <div id="comment_<%= asset.unique_id %>" class="comment_asset" data-controller="comment">
   <div class="comment_form">
     <%= form_for :comment, url: user_track_comments_path(asset.user, asset), id: "comment_form_#{asset.unique_id}" do |f| %>
@@ -26,8 +27,9 @@
           <div class="text"><!-- placeholder response text --></div>
         </div>
         <div class="small_spinner" style="display:none;"></div>
-        <%= f.submit "send comment to #{asset.user.name}".html_safe, class: 'comment_submit', id: "submit_#{asset.unique_id}"%> 
+        <%= f.submit "send comment to #{asset.user.name}".html_safe, class: 'comment_submit', id: "submit_#{asset.unique_id}"%>
       </div>
-    <% end %>  
+    <% end %>
   </div>
 </div>
+<% end %>

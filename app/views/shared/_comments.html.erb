@@ -1,8 +1,9 @@
 <% if white_theme_enabled? %>
 <h2>Latest Comments</h2>
 <div id="user_comments" class="box">
-  
-  <%= render partial: 'shared/comment', collection: @comments %>
+  <% cache @comments %>
+    <%= render partial: 'shared/comment', collection: @comments %>
+  <% end %>
 </div>
 <div class="below_box">
 	<%= link_to user_comments_path(@user.login), class: 'view_all' do %>
