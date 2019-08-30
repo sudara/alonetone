@@ -52,14 +52,9 @@ ul {
 .below_box {
   text-align: right;
   a.view_all {
-    font-size: 15px;
-    font-family: $medium-sans-font;
-    display: inline-block;
-    color: #868686;
     border: 0;
     margin-right: 4px;
     margin-top: 12px;
-    text-align: right;
     padding-left: 20px;
     padding-right: 6px;
     height: 32px;
@@ -67,6 +62,11 @@ ul {
     @include samo-shadow-and-radius();
     background-color: #fff;
     box-shadow: none;
+    text-align: right;
+    font-size: 15px;
+    font-family: $medium-sans-font;
+    display: inline-block;
+    color: #868686;
     span {
       vertical-align: top;
       display: inline;
