@@ -15,14 +15,17 @@ module Admin
 
     def spam
       AssetCommand.new(@asset).spam_and_soft_delete_with_relations
+      redirect_to admin_assets_path(filter_by: :is_spam)
     end
 
     def delete
       AssetCommand.new(@asset).soft_delete_with_relations
+      redirect_to admin_assets_path(filter_by: :deleted)
     end
 
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
+      redirect_to admin_assets_path(filter_by: :not_spam)
     end
 
     private
