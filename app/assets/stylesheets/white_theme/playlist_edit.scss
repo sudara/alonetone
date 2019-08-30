@@ -187,6 +187,7 @@
     input {
       float: right;
       @include default-button();
+      cursor: pointer;
     }
     a:first-child {
       @include default-button();
