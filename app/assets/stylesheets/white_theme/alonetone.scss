@@ -71,11 +71,10 @@ ul {
     display: inline-block;
     color: #868686;
     span {
-      vertical-align: top;
-      display: inline;
       i.icon_caret {
         position: relative;
         top: 5px;
+        margin-left: 6px;
         svg {
           height: 20px;
           .icon_caret_path {
