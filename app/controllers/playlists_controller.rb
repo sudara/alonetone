@@ -13,7 +13,7 @@ class PlaylistsController < ApplicationController
 
   # all user's playlists
   def index
-    @page_title = @description = "#{@user.name}'s albums and playlists: "
+    @page_title = @description = "#{@user.name}'s albums and playlists"
     set_playlists
     render 'index_white' if white_theme_enabled?
   end
@@ -41,7 +41,7 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       format.html do
         lazily_create_waveform_if_needed if @asset
-        @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
+        @page_title = @description = "#{@playlist.title} by #{@user.name}"
         if request.xhr?
           render '/shared/_asset_white', layout: false
         else
@@ -67,6 +67,7 @@ class PlaylistsController < ApplicationController
     set_assets
     @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_param: :listens_page, items: 10)
     @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page, items: 10) if @user.favorites.present?
+    @page_title = "Editing \"#{@playlist.title}\" by #{@user.name}"
     if request.xhr?
       render_desired_partial
     elsif white_theme_enabled?

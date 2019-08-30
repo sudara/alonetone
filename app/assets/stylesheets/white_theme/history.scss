@@ -36,6 +36,12 @@
         font-size: 10px;
         font-weight: bold;
       }
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
     }
   }
   #left {
