@@ -9,7 +9,7 @@
     <%= local_time_ago(track_play.created_at) %>
     by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) :
     "Guest #{track_play.ip.present? ? '('+track_play.ip+')': ''}" %> <br>
-    via <%= link_source(track_play.source) %>
+    <span>via <%= link_source(track_play.source) %></span>
   </div>
   <div class="listen_flag">
     <%= flag_for track_play.country %>
