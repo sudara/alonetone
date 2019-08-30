@@ -140,16 +140,16 @@
         font-size: 12px;
         line-height: 20px;
         overflow: auto;
-        color: #969393;
+        color: $comment-label-gray;;
         font-family: $medium-sans-font;
         margin-top: 9px;
         padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
-          color: #4f4d4d;
+          color: $comment-text-gray;
         }
         span.comment_as_user {
-          color: #4f4d4d;
+          color: $comment-text-gray;
         }
         a {
           color: $samo-orange;
@@ -170,7 +170,7 @@
         padding: $baseline / 4;
         margin-top: 8px;
         resize: none;
-        color: #4f4d4d;
+        color: $comment-text-gray;
         border: 1px solid $samo-light-gray;
         border-radius: 6px;
         background-color: $samo-alternate-background-gray;
@@ -189,7 +189,7 @@
         top: 1px;
         label {
           text-transform: lowercase;
-          color: #4f4d4d;
+          color: $comment-text-gray;
           margin-bottom: 2px!important;
         }
       }
@@ -267,14 +267,14 @@
     .comment_user_text {
       font-size: 11px;
       font-weight: normal;
-      color: #969393;
+      color: $comment-label-gray;;
       a,
       a:visited {
         font-weight: bold;
         text-decoration: none;
       }
       a {
-        color: #4f4d4d;
+        color: $comment-text-gray;
         &:hover {
           text-decoration: underline;
         }
@@ -290,7 +290,7 @@
         line-height: 18px;
         margin: 16px 0 0 0;
         margin-top: 13px;
-        color: #4f4d4d;
+        color: $comment-text-gray;
       }
       div.private_message {
         font-size: 9px;

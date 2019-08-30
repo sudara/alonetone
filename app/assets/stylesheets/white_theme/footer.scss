@@ -9,7 +9,7 @@ footer#site_footer {
   color: $dark-gray;
   background-color: #f4f4f4;
   h3 {
-    color: #de6a00;
+    color: $footer-orange;
     line-height: 1.2;
     font-size: 12px;
     font-family: $medium-sans-font;
@@ -51,7 +51,7 @@ footer#site_footer {
         margin-top: 6px;
         font-family: $sans-font;
         font-weight: bold;
-        color: #de6a00;
+        color: $footer-orange;
         display: block;
         float: right;
         font-size: 12px;
@@ -62,7 +62,7 @@ footer#site_footer {
             position: relative;
             top: 3px;
             .icon_caret_path {
-              stroke: #de6a00;
+              stroke: $footer-orange;
             }
           }
         }
