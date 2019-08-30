@@ -242,6 +242,21 @@ form.button_to > .thredded--post--dropdown--actions--item {
   }
 }
 
+.thredded--pagination {
+  float: none;
+  border-top: 0;
+  span {
+    font-size: 12px;
+    line-height: inherit;
+    display: block;
+    float: left;
+    height: auto;
+    padding: 0;
+    color: inherit;
+  }
+
+}
+
 .thredded--post-moderation-record--moderation-state-notice a, .thredded--post-moderation-record--content-changed-notice a, .thredded--link, .thredded--messageboard, .thredded--post--user a, .thredded--post--topic a, .thredded--post--user-and-topic a, .thredded--post--content a, .thredded--post--content--spoiler--summary, .thredded--topic-header--participants--participant > a, .thredded--topic-header--started-by a, .thredded--topic-header--edit-topic, .thredded--topic-header--follow-info form input[type=submit], .thredded--topic-header--follow-info form button, .thredded--topics--title a, .thredded--topics--updated-by a, .thredded--topics--messageboard a {
   transition: 0;
 }
