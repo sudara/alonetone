@@ -191,6 +191,19 @@ class Asset < ApplicationRecord
     end
   end
 
+  def self.filter_by(filter)
+    case filter
+    when "deleted"
+      only_deleted.with_user.where(is_spam: false).order('deleted_at DESC')
+    when "is_spam"
+      with_deleted.where(is_spam: true).order('deleted_at DESC')
+    when "not_spam"
+      where(is_spam: false).recent
+    else
+      with_deleted.recent
+    end
+  end
+
   private
 
   include HasPermalink::InstanceMethods

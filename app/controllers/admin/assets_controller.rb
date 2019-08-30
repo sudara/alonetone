@@ -3,12 +3,7 @@ module Admin
     before_action :find_asset, only: %i[spam unspam delete restore]
 
     def index
-      if permitted_params[:filter_by] == 'deleted'
-        # including with_deleted because all spam assets are also soft_deleted
-        @pagy, @assets = pagy(Asset.only_deleted.with_user.recently_updated)
-      else
-        @pagy, @assets = pagy(Asset.recent)
-      end
+      @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]))
     end
 
     def unspam
