@@ -65,32 +65,41 @@ $body-background-color: #f4f4f4;
 // colors
 
 $black: #000;
-
+$footer-bottom-background-gray: #272727;
 $dark-gray: #353535;
 $comment-text-gray: #4f4d4d;
-
 $medium-gray: #666;
 $samo-gray: #868686;
 $gray: #999;
 $comment-label-gray: #969393;
-
 $new-samo-gray: #a6abab;
 $samo-light-gray: #d7dbdb;
 $playlist-button-background-gray: #c4c4c4;
 $light-gray: #eeeeee;
 $samo-background-gray: #f1f2f2;
-$samo-background-orange: #bda8a0; // please change me
 $samo-alternate-background-gray: #f5f5f5;
 $lightest-gray: #f9f9f9;
 $white: #ffffff;
 
+$private-red: #f04e1a;
 $red: #d3220c;
+$private-orange: #e02a02;
 $dark-orange: #8b370d;
 $footer-orange: #de6a00;
+$samo-background-orange: #bda8a0; // please change me
 $orange: #da6d25;
 $samo-orange: #eb7b0c;
+$light-orange: #ffd1b0;
 $samo-dark-orange: #f04e1a;
 $waveform-playing: #302f2f;
+
+$ajax-fail-border-red: #ff1f75;
+$ajax-fail-text-red: #b20035;
+
+$ajax-success-border-green: #67c906;
+$ajax-success-text-green: #2b8800;
+
+
 
 @mixin samo-shadow-and-radius() {
   border-radius: 6px;

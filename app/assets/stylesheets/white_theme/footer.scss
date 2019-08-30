@@ -7,7 +7,7 @@ footer#site_footer {
   width: 100%;
   padding-top: 24px;
   color: $dark-gray;
-  background-color: #f4f4f4;
+  background-color: $samo-background-gray;
   h3 {
     color: $footer-orange;
     line-height: 1.2;
@@ -105,7 +105,7 @@ footer#site_footer {
     }
   }
   .footer_bottom {
-    background-color: #272727;
+    background-color: $footer-bottom-background-gray;
     .footer_columns {
       display: flex;
       margin-right: auto;

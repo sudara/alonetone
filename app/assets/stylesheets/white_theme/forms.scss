@@ -74,7 +74,7 @@ input {
     border: 1px solid $white;
     border-radius: 4px;
     background-color: $samo-alternate-background-gray;
-    color: #4F4D4D;
+    color: $dark-gray;
     &:focus {
       border: 1px solid $new-samo-gray;
     }
