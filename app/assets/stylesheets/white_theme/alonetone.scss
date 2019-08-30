@@ -52,6 +52,10 @@ ul {
 .below_box {
   text-align: right;
   a.view_all {
+    font-size: 15px;
+    font-weight: normal;
+    font-family: $medium-sans-font;
+    color: $samo-gray;
     border: 0;
     margin-right: 4px;
     margin-top: 12px;
@@ -60,7 +64,7 @@ ul {
     height: 32px;
     line-height: 33px;
     @include samo-shadow-and-radius();
-    background-color: #fff;
+    background-color: $white;
     box-shadow: none;
     text-align: right;
     font-size: 15px;
@@ -71,7 +75,7 @@ ul {
       vertical-align: top;
       display: inline;
       i.icon_caret {
-        margin-left: -3px;
+        margin-left: -2px;
         position: relative;
         top: 5px;
         svg {
