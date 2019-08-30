@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
   layout :old_or_white
 
-  class Hell < StandardError; end
-
   def twentyfour
     render layout: '24houralbum'
   end
@@ -58,14 +56,6 @@ class PagesController < ApplicationController
     @tracks_per_user = User.average('assets_count').try(:ceil) || 0
     @listens_per_week_per_track = Asset.average('listens_per_week').try(:ceil) || 0
     @posts_per_user = User.average('posts_count') || 0
-  end
-
-  def answers
-    raise Hell
-  end
-
-  def not_yet
-    render layout: false
   end
 
   def itunes

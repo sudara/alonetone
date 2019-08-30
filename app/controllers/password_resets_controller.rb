@@ -4,8 +4,7 @@ class PasswordResetsController < ApplicationController
   def edit; end
 
   def create
-    email = params[:email].present? ? params[:email].first : nil
-    @user = User.where(email: email).first
+    @user = User.find_by(email: params[:email])
     if @user.present?
       @user.reset_perishable_token!
       UserNotification.forgot_password(@user).deliver_now
