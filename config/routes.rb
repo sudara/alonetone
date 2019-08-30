@@ -149,7 +149,6 @@ Alonetone::Application.routes.draw do
         get :sudo
       end
       resource 'profile'
-      resources 'source_files' #:path_prefix => ':login'
       resources 'tracks', controller: :assets do
         member do
           get :share

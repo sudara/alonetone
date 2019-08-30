@@ -5,7 +5,7 @@
     <% end %>
 
     <div>
-      <%= cache([@user, moderator?]) do %>
+      <%= cache([@user, moderator?, @pagy.page]) do %>
       <% if @user.assets_count > 0 %>
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy %>

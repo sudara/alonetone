@@ -11,6 +11,7 @@ export default class extends Controller {
     this.animation.setUnfave()
     if (this.favorited) {
       this.animation.setFave()
+      this.faved()
     }
   }
 
@@ -19,9 +20,16 @@ export default class extends Controller {
     if (this.favorited) {
       this.animation.clickUnfave()
       this.favorited = false
+      this.unfaved()
     } else {
       this.animation.clickFave()
       this.favorited = true
+      this.faved()
     }
   }
+
+  // placeholders for child controllers
+  faved() {}
+
+  unfaved() {}
 }
