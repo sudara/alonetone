@@ -35,15 +35,14 @@
 @import 'white_theme/playlist_new';
 @import 'white_theme/playlist_edit';
 
-@import 'white_theme/playlist';
-@import 'white_theme/playlist_sidebar';
-@import 'white_theme/playlist_cover_view';
+@import 'white_theme/single_and_playlists_player/playlist';
+@import 'white_theme/single_and_playlists_player/playlist_sidebar';
+@import 'white_theme/single_and_playlists_player/playlist_cover_view';
+@import 'white_theme/single_and_playlists_player/track_content';
+@import 'white_theme/single_and_playlists_player/track_player';
+@import 'white_theme/single_and_playlists_player/track_social';
 
-@import 'white_theme/track_content';
-@import 'white_theme/track_player';
-@import 'white_theme/track_social';
-
-@import 'white_theme/secretz';
 @import 'white_theme/login_signup';
 
 @import 'white_theme/admin';
+@import 'white_theme/secretz';
