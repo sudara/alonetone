@@ -87,7 +87,7 @@ ul.playlists {
   @media #{$mobile} {
     display: flex;
     flex-direction: row;
-    width: $mobile-site-width-wide;
+    width: 96%;
     margin-bottom: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
