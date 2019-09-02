@@ -1,6 +1,11 @@
 .track-content {
+  margin-right: auto;
+  margin-left: auto;
   max-width: 700px;
-  @include match-dynamic-site-width("narrow");
+  width: 66%;
+  @media #{$one-column} {
+    width: 96%;
+  }
   > * {
     background-color: white;
     @include samo-shadow-and-radius();
