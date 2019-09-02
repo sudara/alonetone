@@ -1,0 +1,9 @@
+
+// The variables defined in this file are all semanticaly named.
+// They describe where they are used most prominently, such as $comment-text.
+// The values are also all variables whos values are defined in color_mapping.
+// This is so that the colors can be defined in 1 place but used in many places
+
+@import 'color_mapping'
+
+$comment-text: $gray100;
