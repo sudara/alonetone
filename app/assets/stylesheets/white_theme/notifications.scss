@@ -114,7 +114,12 @@ div.small_spinner {
   margin-bottom: 20px;
   padding: 20px 30px;
   background-color: $white;
-  @include match-dynamic-site-width("wide");
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  @media #{$mobile} {
+    width: 96%;
+  }
 }
 
 .errorExplanation p,
