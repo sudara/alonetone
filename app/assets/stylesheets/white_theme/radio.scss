@@ -2,7 +2,6 @@
   flex-wrap: wrap-reverse;
 }
 
-
 #radio_tracks {
   margin-bottom: 0;
 }
@@ -14,7 +13,7 @@ body main #columns {
     h2 {
       margin-bottom: 0;
     }
-  	#radio_controls {
+    #radio_controls {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -22,17 +21,17 @@ body main #columns {
       justify-content: space-between;
       overflow: hidden;
       box-shadow: none;
-			padding: 0;
-			ul {
+      padding: 0;
+      ul {
         margin-top: 0;
         margin-bottom: 0;
         li {
           font-size: 14px;
-					width: 100%;
+          width: 100%;
           line-height: 40px;
           height: 40px;
           text-indent: 15px;
-					display: block;
+          display: block;
           box-sizing: border-box;
           border-bottom: 1px solid $light-gray;
           color: $white;
@@ -45,9 +44,10 @@ body main #columns {
             text-decoration: none;
             &:hover {
               background-color: $light-gray;
-            }  
+            }
           }
-        }}
+        }
       }
-		}
+    }
+  }
 }
