@@ -58,9 +58,7 @@ ul {
     color: $samo-gray;
     border: 0;
     margin-right: 4px;
-    display: inline-block;
     margin-top: 12px;
-    text-align: right;
     padding-left: 20px;
     padding-right: 6px;
     height: 32px;
@@ -68,29 +66,26 @@ ul {
     @include samo-shadow-and-radius();
     background-color: $white;
     box-shadow: none;
+    font-size: 15px;
+    font-family: $medium-sans-font;
+    display: inline-block;
+    color: #868686;
     span {
-      vertical-align: top;
-      display: inline-flex;
-    }
-    i.icon_caret {
-      position: relative;
-      top: 5px;
-      svg {
-        height: 20px;
+      i.icon_caret {
+        position: relative;
+        top: 5px;
+        margin-left: -3.5px;
+        svg {
+          height: 20px;
+          .icon_caret_path {
+            stroke: $samo-orange;
+          }
+        }
       }
-    }
-    .icon_caret_path {
-      stroke: $samo-orange;
     }
     &:hover {
       text-decoration: none;
-      span {
-        color: $samo-orange;
-        text-decoration: none;
-        .icon_caret_path {
-          stroke: $samo-orange;
-        }
-      }
+      color: $samo-orange;
     }
   }
 }
