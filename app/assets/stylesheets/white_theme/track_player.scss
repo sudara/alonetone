@@ -60,6 +60,7 @@
 
   .progress-container {
     position: absolute;
+    pointer-events: none;
     left: 79px;
     height: 80px;
     width: calc(100% - 80px);
