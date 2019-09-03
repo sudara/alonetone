@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def redirect_to_new_forums_if_white_theme
-    #redirect_to('/discuss') if white_theme_enabled?
+    redirect_to('/discuss') if white_theme_enabled?
   end
 
   def lazily_create_waveform_if_needed
