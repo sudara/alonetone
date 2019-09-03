@@ -52,8 +52,6 @@
 .mini_paginator {
 	position: relative;
 	height: 32px;
-	// border-bottom: 1px solid #DADADA;
-	background-color: $white;
 	@include samo-shadow-and-radius();
 	background-color: $white;
 	box-shadow: none;
