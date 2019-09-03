@@ -1,5 +1,5 @@
 <div class="header_search" data-controller="header-search">
-  <%= form_tag search_path, id: 'search_form' do %>
+  <%= form_tag search_path, id: 'search_form', data: {target: "header-search.form"}  do %>
     <%= text_field_tag 'query', (@query || session[:last_query]), placeholder: 'Search for artist or song' %>
   <% end %>
   <%= link_to image_tag('icons/retina/search.png'), '#', id: 'search_button', data: {action: "click->header-search#submitForm" } %>
