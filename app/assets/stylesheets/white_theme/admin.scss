@@ -8,7 +8,6 @@
   align-items: flex-start;
   .admin_column_left {
     margin-right: 36px;
-    background-color: $white;
     overflow: hidden;
     box-shadow: none;
     h2 {
@@ -92,7 +91,6 @@
       float: none;
     }
     .admin_column_right_inner {
-      background-color: $white;
       padding: $baseline / 2 0;
       margin-bottom: 0;
       padding-bottom: 0px;
