@@ -298,20 +298,6 @@
           img {
             display: none;
           }
-          span.hint {
-            font-size: 14px;
-            display: block;
-            margin-bottom: $baseline / 2;
-            color: $black;
-            .hint {
-              font-size: 14px;
-              text-decoration: underline;
-              color: $black;
-              &:hover {
-                color: $orange;
-              }
-            }
-          }
           p {
             margin-bottom: 1em;
           }
