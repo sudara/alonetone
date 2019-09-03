@@ -80,7 +80,7 @@ main {
             margin-right: 0px;
           }
           li {
-            display: block!important;
+            display: block !important;
             width: 45%;
             margin: 0;
             margin-bottom: $baseline * 1.5;
@@ -95,19 +95,21 @@ main {
 
         @media #{$mobile} {
           width: 100%;
-          margin-bottom: -$baseline * .75;
+          margin-bottom: -$baseline * 0.75;
           justify-content: space-around;
           li {
-            display: block!important;
+            display: block !important;
             width: 45%;
             margin: 0;
-            margin-bottom: $baseline * .75;
+            margin-bottom: $baseline * 0.75;
           }
         }
 
         @media only screen and (max-width: 1038px) {
           li {
-            &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3) {
               display: block;
             }
             &:nth-child(3) {
@@ -120,10 +122,12 @@ main {
         }
         @media only screen and (max-width: 798px) {
           li {
-            &:nth-child(1), &:nth-child(2) {
+            &:nth-child(1),
+            &:nth-child(2) {
               display: block;
             }
-            &:nth-child(3), &:nth-child(4),  {
+            &:nth-child(3),
+            &:nth-child(4) {
               display: none;
             }
           }
@@ -245,7 +249,6 @@ main {
               @media #{$mobile} {
                 margin-left: 0;
               }
-
               &:hover {
                 background-color: $white;
               }
@@ -267,7 +270,6 @@ main {
           @media #{$mobile} {
             margin-right: 16px;
           }
-
           img {
             display: block;
             width: 48px;
@@ -381,7 +383,6 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-
       h2.area_heading {
         font-size: 24px;
         color: $black;
@@ -434,7 +435,6 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-
       h2.area_heading {
         font-size: 20px;
         color: $samo-light-gray;
@@ -443,7 +443,6 @@ main {
       .area_content {
         background-color: $light-gray;
         @include samo-shadow-and-radius();
-
         .user_ip {
           padding: 16px;
           display: flex;
@@ -487,22 +486,18 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-
       background-color: $light-gray;
       @include samo-shadow-and-radius();
       padding: 12px 16px 4px 16px;
       box-sizing: border-box;
-      
       > a {
         margin-top: 0px;
         margin-bottom: 8px;
         margin-right: 4px;
       }
-
       a.edit_profile {
         @include default-button("admin");
       }
-
       a.edit_profile--delete {
         @include default-button("admin");
         background-color: $red;
@@ -513,7 +508,6 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-
       ul {
         display: inline-flex;
         padding-top: 4px;
@@ -573,7 +567,6 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-
       .box > h2 {
         padding-left: $baseline / 2;
       }

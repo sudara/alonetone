@@ -1,26 +1,3 @@
-// layout
-
-$desktop-site-width-wide: 100%;
-$mobile-site-width-wide: 96%;
-
-$desktop-site-width-narrow: 66%;
-$mobile-site-width-narrow: 96%;
-
-@mixin match-dynamic-site-width($type: '') {
-  width: $desktop-site-width-wide;
-  margin-right: auto;
-  margin-left: auto;
-  @media #{$mobile} {
-    width: $mobile-site-width-wide;
-  }
-  @if $type == 'narrow' {
-    width: $desktop-site-width-narrow;
-    @media #{$mobile} {
-      width: $mobile-site-width-narrow;
-    }
-  }
-}
-
 $baseline: 24px; // used for various layout spacing
 
 // media tiers
@@ -65,7 +42,7 @@ $body-background-color: #f4f4f4;
 // colors
 
 $black: #000; // 17 uses
-$footer-bottom-background-gray: #272727; // 2 uses
+$footer-bottom-background-gray: #272727; // 1 use
 $dark-gray: #353535; // 27 uses
 $comment-text-gray: #4f4d4d; // 9 uses
 $samo-gray: #868686; // 33 uses
