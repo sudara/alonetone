@@ -1,12 +1,14 @@
-<script src="https://cdn.headwayapp.co/widget.js" data-turbolinks-eval='false'></script>
+<script defer src="https://cdn.headwayapp.co/widget.js"></script>
 <script>
-  document.addEventListener("turbolinks:before-cache", function() {
-    document.querySelector('.headway').innerHTML = '';
+  // scripts marked defer will execute after domInteractive fires
+  // After that, onload will fire and we'll excute the following code
+  window.addEventListener("turbolinks:load", function() {
+    // @see https://docs.headwayapp.co/widget for more configuration options.
+    const config = {
+      selector: ".headway", // CSS selector where to inject the badge
+      account:  "yEwwZ7"
+    }
+    Headway.init(config)
   })
-  // @see https://docs.headwayapp.co/widget for more configuration options.
-  var config = {
-    selector: ".headway", // CSS selector where to inject the badge
-    account:  "yEwwZ7"
-  }
-  Headway.init(config)
+
 </script>
