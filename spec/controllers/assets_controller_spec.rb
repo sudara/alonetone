@@ -40,7 +40,6 @@ RSpec.describe AssetsController, type: :controller do
     it "should cleanup any existing playlists" do
       playlist = asset.tracks.first.playlist
       playlist_tracks_count = playlist.tracks_count
-      # binding.pry
       # make sure there are more than 0 tracks in that playlist
       expect(playlist_tracks_count).to be >= 1
 
@@ -94,6 +93,7 @@ RSpec.describe AssetsController, type: :controller do
         akismet_stub_response_ham
         login(:jamie_kiesl)
       end
+
       let(:asset) { users(:jamie_kiesl).assets.last }
       subject {  put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } } }
 
@@ -213,17 +213,6 @@ RSpec.describe AssetsController, type: :controller do
       akismet_stub_response_spam
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }, xhr: true
       expect(assigns(:asset).is_spam?).to be_truthy
-    end
-
-    it 'should allow upload a new file' do
-      akismet_stub_response_ham
-      put :update, params: {
-                              id: users(:arthur).assets.first,
-                              user_id: users(:arthur).login,
-                              asset: {
-                                mp3: 'normal description'
-                              } },
-                              xhr: true
     end
   end
 
