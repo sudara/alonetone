@@ -88,14 +88,66 @@ RSpec.describe AssetsController, type: :controller do
     expect(assigns(:upload_disabled)).to be_present
   end
 
-  context "edit" do
-    it 'should allow user to upload new version of song' do
-      akismet_stub_response_ham
-      login(:sudara)
-      post :create, params: { user_id: users(:sudara).login, asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
-      expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
-      put :update, params: { id: users(:sudara).assets.first, user_id: users(:sudara).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
-      expect(users(:sudara).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
+  context "#update with new file" do
+    context "that's not spam" do
+      before :each do
+        akismet_stub_response_ham
+        login(:jamie_kiesl)
+      end
+      let(:asset) { users(:jamie_kiesl).assets.last }
+      subject {  put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } } }
+
+      it 'should allow user to upload new version of song' do
+        post :create, params: { user_id: users(:jamie_kiesl).login, asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
+        expect(users(:jamie_kiesl).assets.first.mp3_file_name).to eq('muppets.mp3')
+        put :update, params: { id: users(:jamie_kiesl).assets.first, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        expect(users(:jamie_kiesl).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
+      end
+
+      it 'should not change the number of listens' do
+        asset = users(:jamie_kiesl).assets.last
+        expect(asset.listens_count).to be > 0
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        expect(asset.reload.listens_count).to be > 0
+      end
+    end
+
+    context "redirect" do
+      let(:asset) { users(:jamie_kiesl).assets.last }
+      subject { put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } } }
+
+      it 'should redirect back to asset page' do
+        akismet_stub_response_ham
+        login(:jamie_kiesl)
+        expect(subject).to redirect_to('/Jamiek/tracks/mark-s-williams')
+      end
+
+      it 'should display an error if something is wrong' do
+        allow_any_instance_of(Asset).to receive(:update).and_return(false)
+        akismet_stub_response_ham
+        login(:jamie_kiesl)
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { foo: 'bar', mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        expect(response.body).to match(/There was an issue with updating that track/)
+      end
+    end
+
+    context "that's spam" do
+      before :each do
+        akismet_stub_response_spam
+        login(:jamie_kiesl)
+      end
+
+      let(:asset) { users(:jamie_kiesl).assets.last }
+
+      it "should still allow user to upload new track" do
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        expect(asset.reload.mp3_file_name).to eq('tag1.mp3')
+      end
+
+      it "should mark asset as spam" do
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { mp3: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        expect(asset.reload.is_spam).to eq(true)
+      end
     end
   end
 
@@ -161,6 +213,17 @@ RSpec.describe AssetsController, type: :controller do
       akismet_stub_response_spam
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }, xhr: true
       expect(assigns(:asset).is_spam?).to be_truthy
+    end
+
+    it 'should allow upload a new file' do
+      akismet_stub_response_ham
+      put :update, params: {
+                              id: users(:arthur).assets.first,
+                              user_id: users(:arthur).login,
+                              asset: {
+                                mp3: 'normal description'
+                              } },
+                              xhr: true
     end
   end
 
