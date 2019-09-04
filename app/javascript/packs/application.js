@@ -42,7 +42,7 @@ function handlers() {
     }
   })
 
-  document.querySelectorAll('.slide_open_href').forEach((link) => {
+  document.querySelectorAll('.slide_open_next').forEach((link) => {
     link.addEventListener('click', (event) => {
       const id = event.target.getAttribute('href')
       document.querySelector(id).style.display = 'block'
