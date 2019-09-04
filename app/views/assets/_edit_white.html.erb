@@ -28,7 +28,7 @@
     <% if @allow_reupload %>
 
     <div class="track-edit-bottom">
-      <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_next'%>
+      <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
       <div id="new_version_<%=asset.object_id%>" style="display:none;">
         <p>
           <%= f.file_field :mp3, class: 'asset_data' %>
