@@ -25,10 +25,7 @@ export default class extends PlaybackController {
       this.loaded = true
       this.bigPlay.progressContainerInnerTarget.classList.add('visible')
     }
-    this.bigPlay.percentPlayed = this.percentPlayed()
-    this.bigPlay.waveform.update()
-    this.bigPlay.timeTarget.innerHTML = this.time
-    this.bigPlay.progressContainerInnerTarget.style.left = 100 * this.percentPlayed() + "%"
+    this.bigPlay.update(this.percentPlayed())
   }
 
   setBigPlay() {

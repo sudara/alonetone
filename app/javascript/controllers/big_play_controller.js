@@ -49,6 +49,13 @@ export default class extends Controller {
     this.delegate.seek(newPosition)
   }
 
+  update(percentPlayed) {
+    this.percentPlayed = percentPlayed
+    this.waveform.update()
+    this.timeTarget.innerHTML = this.delegate.time
+    this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
+  }
+
   disconnect() {
     this.waveformTarget.querySelector('canvas').remove()
   }
