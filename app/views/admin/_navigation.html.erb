@@ -10,7 +10,7 @@
   <ul>
     <%= navigation_item "Not Spam <span>#{Asset.count}</span>", admin_assets_path({filter_by: :not_spam}) %>
     <%= navigation_item "Deleted Spam <span>#{Asset.with_deleted.where(is_spam: true).count}</span>", admin_assets_path({filter_by: :is_spam}) %>
-    <%= navigation_item "Deleted (Not Spam) <span>#{Asset.only_deleted.where(is_spam: false).count}</span>", admin_assets_path({filter_by: :deleted}) %>
+    <%= navigation_item "Deleted (Not Spam) <span>#{Asset.only_deleted.with_user.where(is_spam: false).count}</span>", admin_assets_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'All Comments',  admin_comments_path %>
   <ul>
