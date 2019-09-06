@@ -7,24 +7,21 @@ module Admin
     end
 
     def delete
-      @user.soft_delete_with_relations
+      UserCommand.new(@user).soft_delete_with_relations
       redirect_to admin_users_path(filter_by: :deleted)
     end
 
     def restore
-      @user.restore
-      @user.restore_relations
+      UserCommand.new(@user).restore_with_relations
     end
 
     def unspam
-      @user.ham!
-      @user.update_attribute :is_spam, false
-      @user.restore
-      @user.restore_relations
+      UserCommand.new(@user).unspam_and_restore_with_relations
     end
 
     def spam
-      @user.spam_and_mark_for_deletion!
+      UserCommand.new(@user).spam_soft_delete_with_relations
+
       respond_to do |format|
         format.html { redirect_to admin_users_path(filter_by: :is_spam) }
         format.js

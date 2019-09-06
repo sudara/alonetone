@@ -75,7 +75,7 @@ class User < ApplicationRecord
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
-  before_destroy :efficiently_destroy_relations
+  before_destroy :destroy_with_relations
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
@@ -257,23 +257,8 @@ class User < ApplicationRecord
     deleted_at != nil
   end
 
-  def spam_and_mark_for_deletion!
-    spam! # makes an api request
-    update_attribute :is_spam, true
-    soft_delete_with_relations
-  end
-
-  def soft_delete_with_relations
-    soft_delete_relations
-    soft_delete
-  end
-
-  def soft_delete_relations
-    efficiently_soft_delete_relations
-  end
-
-  def restore_relations
-    efficiently_restore_relations
+  def destroy_with_relations
+    UserCommand.new(self).destroy_with_relations
   end
 
   def self.filter_by(filter)
@@ -294,56 +279,6 @@ class User < ApplicationRecord
   end
 
   protected
-
-  def efficiently_restore_relations
-    Asset.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Listen.with_deleted.where(track_owner_id: id).update_all(deleted_at: nil)
-    Listen.with_deleted.where(listener_id: id).update_all(deleted_at: nil)
-    Playlist.with_deleted.joins(:assets).where(assets: { user_id: id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.with_deleted.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: nil)
-    Comment.with_deleted.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: nil)
-
-    Track.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Playlist.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Comment.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-  end
-
-  def efficiently_soft_delete_relations(time = Time.now)
-    Listen.where(track_owner_id: id).update_all(deleted_at: time)
-    Listen.where(listener_id: id).update_all(deleted_at: time)
-    Topic.where(user_id: id).where('posts_count < 2').destroy_all
-    Playlist.joins(:assets).where(assets: { user_id: id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', time])
-    Track.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: time)
-    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: time)
-
-    assets.update_all(deleted_at: time)
-
-    %w[tracks playlists comments].each do |user_relation|
-      send(user_relation).update_all(deleted_at: time)
-    end
-  end
-
-  def efficiently_destroy_relations
-    Listen.where(track_owner_id: id).delete_all
-    Listen.where(listener_id: id).delete_all
-    Playlist.joins(:assets).where(assets: { user_id: id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.joins(:asset).where(assets: { user_id: id }).delete_all
-
-    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
-
-    assets.destroy_all
-
-    %w[tracks playlists posts comments].each do |user_relation|
-      send(user_relation).delete_all
-    end
-    true
-  end
 
   def make_first_user_admin
     self.admin = true if User.count == 0
