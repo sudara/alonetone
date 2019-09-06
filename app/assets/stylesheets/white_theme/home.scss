@@ -54,7 +54,7 @@
     .latest-playlists-header {
       color: $samo-orange;
       @media #{$mobile} {
-        width: $mobile-site-width-wide;
+        width: 96%;
       }
     }
     ul.playlists {

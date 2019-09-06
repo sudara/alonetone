@@ -57,7 +57,7 @@ RSpec.describe ProfilesController, type: :controller do
       it "should soft delete users tracks" do
         expect do
           put :update, params: { user_id: 'sudara', profile: { bio: 'very spammy bio' } }
-        end.to change(Track, :count).by(-7)
+        end.to change(Track, :count).by(-8)
       end
 
       it "should soft delete users comments" do
