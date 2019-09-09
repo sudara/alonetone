@@ -22,6 +22,7 @@ export default class extends Controller {
     } else if (this.delegate && this.delegate.isPlaying) {
       this.animation.showLoading()
       this.animation.showPause()
+      this.progressContainerInnerTarget.classList.add('visible')
     } else {
       this.animation.setPlay()
     }
@@ -65,8 +66,7 @@ export default class extends Controller {
   }
 
   reset() {
-    this.animation.reset()
-    this.progressContainerInnerTarget.style.left = '0%'
+    this.animation.showPlay()
   }
 
   disconnect() {
