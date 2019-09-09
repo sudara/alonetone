@@ -179,7 +179,6 @@ export default function LargePlayAnimation() {
 
     TweenLite.set(icon, {
       transformOrigin: '35% 50%',
-      scale: 0.8,
     })
 
     TweenLite.set(outline, {
