@@ -18,6 +18,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
       expect(page).to have_selector(".player")
+      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Loading')
 
       # Navigating away and back, we should still be playing
@@ -26,6 +27,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       second_track.click
       first_track.click
       sleep 2
+      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Playing')
     end
   end
