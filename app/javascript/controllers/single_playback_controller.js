@@ -20,9 +20,8 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
-      this.bigPlay.animation.showPause()
       this.loaded = true
-      this.bigPlay.progressContainerInnerTarget.classList.add('visible')
+      this.play()
     }
     this.bigPlay.update(this.percentPlayed())
   }

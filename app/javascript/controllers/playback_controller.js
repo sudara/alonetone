@@ -92,8 +92,11 @@ export default class extends Controller {
   }
 
   stop() {
-    this.pause()
-    this.stop()
+    this.sound.stop()
+    player = null
+    this.isPlaying = false
+    this.pauseCallback() // set all the buttons to pause
+    this.stopCallback() // reset the audio
   }
 
   togglePlay(e) {
