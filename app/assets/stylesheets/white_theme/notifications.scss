@@ -1,14 +1,131 @@
-.notice, .errorExplanation {
-	margin-bottom: 20px;
-	padding: 20px 30px;
-	background-color: #FFF;
-
-	@include match-dynamic-site-width('wide');
+.ajax_waiting {
+  font-size: 10px;
+  padding-left: 16px;
+  padding-right: 32px;
+  position: relative;
+  top: 1px;
+  border-radius: 2px;
+  margin-right: 12px;
+  font-weight: bold;
+  border: 1px solid transparent;
+  height: 0;
+  &.ajax_fail {
+    height: 22px;
+    border: 1px solid $ajax-fail-border-red;
+    > div {
+      padding-right: 2px;
+      color: $ajax-fail-text-red;
+      padding-top: 6.5px;
+      &::after {
+        position: absolute;
+        top: 7.5px;
+        right: 10px;
+        content: image-url("svg/icon_x_red.svg");
+      }
+    }
+  }
+  &.ajax_success {
+    height: 22px;
+    border: 1px solid $ajax-success-border-green;
+    > div {
+      padding-right: 2px;
+      color: $ajax-success-text-green;
+      padding-top: 6.5px;
+      &::after {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        content: image-url("svg/icon_checkmark_green.svg");
+      }
+    }
+  }
 }
 
-.errorExplanation p, .notice h2 {
-	font-size: 20px;
-	font-weight: bold;
+.floating_feedback {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 15px;
+  padding-left: 24px;
+  padding-right: 48px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 55px;
+  height: 33px;
+  background-color: $white;
+  z-index: 100;
+  font-weight: bold;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  &.ajax_success {
+    border: 1px solid $ajax-success-border-green !important;
+    height: 33px;
+  }
+  &.ajax_fail {
+    border: 1px solid $ajax-fail-border-red !important;
+    height: 33px;
+  }
+  &.ajax_success > div {
+    padding-top: 9.75px;
+    padding-right: 3px;
+    &::after {
+      position: absolute;
+      top: 7.5px;
+      right: 15px;
+      content: "";
+      height: 15px;
+      width: 15px;
+      background-size: 15px 15px;
+      background-image: image-url("svg/icon_checkmark_green.svg");
+      background-repeat: no-repeat;
+    }
+  }
+  &.ajax_fail > div {
+    padding-top: 9.75px;
+    padding-right: 3px;
+    &::after {
+      position: absolute;
+      top: 7.5px;
+      right: 15px;
+      content: "";
+      height: 15px;
+      width: 15px;
+      background-size: 15px 15px;
+      background-image: image-url("svg/icon_x_red.svg");
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+div.small_spinner {
+  display: none;
+  background: image-url("svg/icon_spinner.svg") no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+  position: relative;
+  top: 3px;
+}
+
+.notice,
+.errorExplanation {
+  margin-bottom: 20px;
+  padding: 20px 30px;
+  background-color: $white;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  @media #{$mobile} {
+    width: 96%;
+  }
+}
+
+.errorExplanation p,
+.notice h2 {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .notice {
@@ -24,30 +141,30 @@
     margin-bottom: 5px;
   }
   ol {
-    margin-top: 8px!important;
+    margin-top: 8px !important;
   }
 }
 
 .flash {
-	font-size: 18px;
-	font-weight: bold;
-	line-height: 1.2;
-	position: relative;
-	z-index: 101;
-	padding: 15px 0;
-	text-align: center;
-	color: $white;
-	background-color: $samo-orange;
-	@media #{$mobile} {
-		padding: $baseline / 2;
-		font-size: 14px;
-		text-align: left;
-	}
-	.flash_stats {
-		font-size: 14px;
-		a {
-			text-decoration: underline;
-		}
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.2;
+  position: relative;
+  z-index: 101;
+  padding: 15px 0;
+  text-align: center;
+  color: $white;
+  background-color: $samo-orange;
+  @media #{$mobile} {
+    padding: $baseline / 2;
+    font-size: 14px;
+    text-align: left;
+  }
+  .flash_stats {
+    font-size: 14px;
+    a {
+      text-decoration: underline;
+    }
   }
   a {
     text-decoration: underline;

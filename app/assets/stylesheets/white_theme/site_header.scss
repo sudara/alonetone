@@ -49,6 +49,7 @@ header#site_header {
       position: relative;
       float: right;
       background-color: $light-gray;
+      color: $black;
       .profile_link {
         font-size: 14px;
         position: relative;
@@ -57,7 +58,6 @@ header#site_header {
         box-sizing: border-box;
         height: 40px;
         padding-top: 3px;
-        color: $black;
         background-color: $white;
         span {
           line-height: 34px;
@@ -91,7 +91,6 @@ header#site_header {
           height: 26px;
           padding-right: 15px;
           padding-left: 15px;
-          color: $black;
           background-color: $white;
           &:hover {
             background-color: $light-gray;
@@ -120,7 +119,7 @@ header#site_header {
         padding: 0;
         padding-left: 8px;
         box-sizing: content-box;
-        color: #222222;
+        color: $dark-gray;
         border: 1px solid #DDDDDD;
         border-radius: 5px;
         &:focus {

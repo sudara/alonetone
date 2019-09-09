@@ -69,10 +69,9 @@
         margin-right: 4px;
         margin-left: 0;
         padding: 4px 3px 5px 6px;
-        color: #aaa;
         &:hover {
-          color: #fff;
-          border-color: #fff;
+          color: $white;
+          border-color: $white;
         }
       }
       a.play-button {
@@ -107,7 +106,7 @@
           float: left;
           font-variant-numeric: tabular-nums;
           margin-right: 4px;
-          color: #868686;
+          color: $samo-gray;
           min-width: 21px;
         }
         span.track-name {

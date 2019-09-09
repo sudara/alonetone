@@ -10,7 +10,7 @@ RSpec.describe PasswordResetsController, type: :controller do
 
     it "should disallow logins after resetting" do
       activate_authlogic
-      post :create, params: { email: [users(:arthur).email] }
+      post :create, params: { email: users(:arthur).email }
       expect(flash[:error]).not_to be_present
       expect(User.where(login: 'arthur').first.perishable_token).not_to be_nil
       login(:arthur)
@@ -18,12 +18,12 @@ RSpec.describe PasswordResetsController, type: :controller do
     end
 
     it 'should send an email with link to reset pass' do
-      post :create, params: { email: [users(:arthur).email] }
+      post :create, params: { email: users(:arthur).email }
       expect(last_email.to).to eq([users(:arthur).email])
     end
 
     it 'should render form to reset password given a decent token' do
-      post :create, params: { email: [users(:arthur).email] }
+      post :create, params: { email: users(:arthur).email }
       get :edit, params: { id: User.where(login: 'arthur').first.perishable_token }
       expect(response).to be_successful
       expect(flash[:error]).not_to be_present
@@ -37,7 +37,7 @@ RSpec.describe PasswordResetsController, type: :controller do
 
     it 'should allow user to manually type in password and login user' do
       activate_authlogic
-      post :create, params: { email: [users(:arthur).email] }
+      post :create, params: { email: users(:arthur).email }
       put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
                              user: { password: '12345678', password_confirmation: '12345678' } }
       expect(response).to redirect_to('/arthur')
@@ -47,7 +47,7 @@ RSpec.describe PasswordResetsController, type: :controller do
 
     it 'should allow user to manually type in password and present edit again if passes do not match' do
       activate_authlogic
-      post :create, params: { email: [users(:arthur).email] }
+      post :create, params: { email: users(:arthur).email }
       put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
                              user: { password: '123456', password_confirmation: '1234567' } }
       expect(response).to redirect_to(edit_password_reset_path(User.where(login: 'arthur').first.perishable_token))

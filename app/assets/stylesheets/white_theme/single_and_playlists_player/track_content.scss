@@ -1,9 +1,39 @@
 .track-content {
+  margin-right: auto;
+  margin-left: auto;
   max-width: 700px;
-  @include match-dynamic-site-width("narrow");
+  width: 66%;
+  @media #{$one-column} {
+    width: 96%;
+  }
   > * {
     background-color: white;
     @include samo-shadow-and-radius();
+  }
+  > div.box {
+    h2.box {
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+      margin-top: 0;
+      box-shadow: none;
+      border-radius: 0;
+      box-sizing: border-box;
+    }
+    > .static_content {
+      padding: $baseline / 2 $baseline / 2;
+      box-sizing: border-box;
+      a {
+        text-decoration: underline;
+        &:hover {
+          color: $samo-orange;
+        }
+      }
+      ul {
+        li {
+          margin-bottom: 4px;
+        }
+      }
+    }
   }
   .edit-links-and-favorite {
     height: 38px;
@@ -21,7 +51,7 @@
       .edit-link + .edit-link {
         margin-left: 6px;
         text-transform: uppercase;
-        background-color: #fff;
+        background-color: $white;
         color: $samo-orange;
       }
     }
@@ -125,14 +155,14 @@
       margin: ($baseline * 1.5) auto;
       text-align: center;
       border: 0;
-      border-bottom: 1px solid #aaa;
+      border-bottom: 1px solid $samo-light-gray;
       &:after {
         position: absolute;
         top: -0.55em;
         left: 265px;
         display: block;
         content: "\f025"; // with headphone icon
-        color: #aaa;
+        color: $samo-light-gray;
         background-color: white; // interrupt hr
         -webkit-font-smoothing: antialiased;
       }
@@ -159,6 +189,7 @@
   div#user_comments + .below_box {
     display: none;
   }
+
   .track-edit {
     margin-bottom: $baseline * 2;
     header {
@@ -226,10 +257,6 @@
     }
     .submit_wrapper {
       display: flex;
-      // flex-direction: row;
-      // clear: both;
-      // justify-content: flex-start;
-      // margin-left: 110px;
       input {
         margin-right: 4px;
       }
@@ -237,32 +264,7 @@
         margin-right: 0;
         margin-left: 8px;
       }
+    }
   }
 
-  }
-  > div.box {
-    h2.box {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-      margin-top: 0;
-      box-shadow: none;
-      border-radius: 0;
-      box-sizing: border-box;
-    }
-    > .static_content {
-      padding: $baseline / 2 $baseline / 2;
-      box-sizing: border-box;
-      a {
-        text-decoration: underline;
-        &:hover {
-          color: $samo-orange;
-        }
-      }
-      ul {
-        li {
-          margin-bottom: 4px;
-        }
-      }
-    }
-  }
 }

@@ -6,10 +6,10 @@ footer#site_footer {
   line-height: 20px;
   width: 100%;
   padding-top: 24px;
-  color: #333;
-  background-color: #f4f4f4;
+  color: $dark-gray;
+  background-color: $samo-background-gray;
   h3 {
-    color: #de6a00;
+    color: $footer-orange;
     line-height: 1.2;
     font-size: 12px;
     font-family: $medium-sans-font;
@@ -30,7 +30,7 @@ footer#site_footer {
     div {
       margin-top: 6px;
       margin-bottom: 14px;
-      color: #868686;
+      color: $samo-gray;
       line-height: 1.2;
       font-size: 12px;
       font-family: $medium-sans-font;
@@ -51,7 +51,7 @@ footer#site_footer {
         margin-top: 6px;
         font-family: $sans-font;
         font-weight: bold;
-        color: #de6a00;
+        color: $footer-orange;
         display: block;
         float: right;
         font-size: 12px;
@@ -62,7 +62,7 @@ footer#site_footer {
             position: relative;
             top: 3px;
             .icon_caret_path {
-              stroke: #de6a00;
+              stroke: $footer-orange;
             }
           }
         }
@@ -83,13 +83,12 @@ footer#site_footer {
           width: 234px;
           height: 64px;
           border-radius: 3px;
-          background-color: #ffffff;
+          background-color: $white;
           box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.05);
           @media #{$footer-collapse} {
             width: 100%;
             margin-bottom: 8px;
           }
-
           .forum_topic {
             font-family: $medium-sans-font;
             line-height: 1.2;
@@ -97,7 +96,7 @@ footer#site_footer {
           }
           .forum_author {
             font-family: $sans-font;
-            color: #868686;
+            color: $samo-gray;
             font-size: 12px;
           }
         }
@@ -105,7 +104,7 @@ footer#site_footer {
     }
   }
   .footer_bottom {
-    background-color: #272727;
+    background-color: $footer-bottom-background-gray;
     .footer_columns {
       display: flex;
       margin-right: auto;
@@ -125,9 +124,9 @@ footer#site_footer {
         margin-right: 2px;
         width: 236px;
         min-width: 150px;
-        background-color: #353535;
+        background-color: $dark-gray;
         border-radius: 3px;
-        color: #ffffff;
+        color: $white;
         line-height: 20px;
         padding: 16px;
         box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 4px 8px rgba(0, 0, 0, 0.25);

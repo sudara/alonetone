@@ -3,7 +3,6 @@
   padding-right: 0;
   padding-bottom: 20px;
   padding-top: 0;
-  background-color: $white;
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
@@ -17,6 +16,9 @@
     font-family: $medium-sans-font;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media #{$mobile} {
+      padding-left: 12px;
+    }
   }
   form p {
     font-size: 14px;
@@ -34,11 +36,16 @@
     @media #{$mobile} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
+      flex-direction: column-reverse;
     }
     flex-wrap: wrap;
     .edit_playlist_info_left_column {
       min-width: 220px;
       width: 20%;
+      @media #{$mobile} {
+        width: 100%;
+        margin-top: $baseline;
+      }
       .cover {
         display: block;
         border: 1px dashed $samo-light-gray;
@@ -79,6 +86,9 @@
       display: flex;
       flex-wrap: wrap;
       width: 75%;
+      @media #{$mobile} {
+        width: 100%;
+      }
       div.input {
         width: 100%;
       }
@@ -86,12 +96,18 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        @media #{$mobile} {
+          flex-direction: column;
+        }
         > :nth-child(1) {
           flex: 1;
           input {
             width: 100%;
           }
           margin-right: 30px;
+          @media #{$mobile} {
+            margin-right: 0;
+          }
         }
         > :nth-child(2) {
           width: 140px;
@@ -104,12 +120,18 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        @media #{$mobile} {
+          flex-direction: column;
+        }
         > :nth-child(1) {
           flex: 1;
           input {
             width: 100%;
           }
           margin-right: 30px;
+          @media #{$mobile} {
+            margin-right: 0px;
+          }
         }
         > :nth-child(2) {
           flex: 1;
@@ -133,12 +155,15 @@
         font-size: 12px;
         position: relative;
         height: 54px;
+        @media #{$mobile} {
+          flex-direction: column;
+        }
         div.input {
           width: auto;
         }
         label {
           text-transform: none;
-          color: #4F4D4D;
+          color: $comment-text-gray;
         }
         span.private_notice {
          color: $new-samo-gray;
@@ -154,9 +179,14 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 20px;
+    @media #{$mobile} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
     input {
       float: right;
       @include default-button();
+      cursor: pointer;
     }
     a:first-child {
       @include default-button();
@@ -197,7 +227,7 @@
           color: $samo-gray;
         }
         span.playlist_dash {
-          color: #e1e2e2;
+          color: $light-gray;
         }
         span.playlist_total_time {
           color: $samo-orange;
@@ -256,7 +286,7 @@
       }
       #playlist_tabs {
         display: flex;
-        background-color: #e1e2e2;
+        background-color: $light-gray;
         height: 36px;
         box-sizing: border-box;
         #playlist_source_options {
@@ -282,12 +312,12 @@
             a {
               @include default-button();
               background-color: $white;
-              color: #888888;
+              color: $samo-gray;
               font-family: $medium-sans-font;
               font-weight: normal;
               height: 26px;
               &:hover {
-                background-color: #888888;
+                background-color: $samo-gray;
                 color: $white;
               }
             }
@@ -322,7 +352,7 @@
       position: relative;
       top: -3px;
       border-radius: 4px;
-      background-color: #c4c4c4;
+      background-color: $playlist-button-background-gray;
       align-items: center;
       justify-content: center;
       svg {
@@ -338,7 +368,7 @@
       position: relative;
       top: -3px;
       border-radius: 4px;
-      background-color: #c4c4c4;
+      background-color: $playlist-button-background-gray;
       align-items: center;
       justify-content: center;
       svg {
@@ -373,7 +403,7 @@
     .add {
       &:hover {
         .add-inner {
-          background-color: #888;
+          background-color: $samo-gray;
         }
       }
       &:active {
@@ -386,7 +416,7 @@
         width: 29px;
         height: 29px;
         border-radius: 4px;
-        background-color: #c4c4c4;
+        background-color: $playlist-button-background-gray;
         align-items: center;
         justify-content: center;
         svg {
@@ -397,7 +427,7 @@
     .remove {
       &:hover {
         .remove-inner {
-          background-color: #888;
+          background-color: $samo-gray;
         }
       }
       &:active {
@@ -410,7 +440,7 @@
         width: 29px;
         height: 29px;
         border-radius: 4px;
-        background-color: #c4c4c4;
+        background-color: $playlist-button-background-gray;
 
         align-items: center;
         justify-content: center;
@@ -424,7 +454,7 @@
 
 .draggable-mirror {
   z-index: 99999;
-  border: 1px solid #000;
+  border: 1px solid $black;
 }
 
 .edit_playlist_pro_upload {

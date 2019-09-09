@@ -9,10 +9,9 @@
     box-shadow: none;
     background: transparent;
     box-sizing: border-box;
-    margin-bottom: $baseline;
     h2 {
-      color: #8b370d;
-      box-shadow: none;  
+      color: $dark-orange;
+      box-shadow: none;
       border-radius: 0;
       line-height: 20px;
       height: auto;
@@ -22,7 +21,7 @@
         padding-left: 0;
         padding-right: 0;
         width: 100%;
-      }  
+      }
     }
     .static_content {
       padding: 0 12px;

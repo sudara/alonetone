@@ -30,6 +30,8 @@ Alonetone::Application.routes.draw do
       member do
         put :unspam
         put :spam
+        put :delete
+        put :restore
       end
       collection do
         put :mark_group_as_spam
@@ -147,7 +149,6 @@ Alonetone::Application.routes.draw do
         get :sudo
       end
       resource 'profile'
-      resources 'source_files' #:path_prefix => ':login'
       resources 'tracks', controller: :assets do
         member do
           get :share

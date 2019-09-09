@@ -57,7 +57,7 @@
     <% end %>
       <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
     <% if moderator? %>
-      <div><%= link_to "Admin", "/admin" %></div>
+      <div><%= link_to "Admin", "/admin/users" %></div>
     <% end %>
       </div>
 
@@ -66,7 +66,7 @@
       <div><%= link_to "About", "/about"%></div>
       <div><%= link_to "Stats", "/about/stats"%></div>
       <div data-turbolinks="false"><%= link_to "Forums", "/discuss"%></div>
-      <div><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %></div>
+      <div data-turbolinks="false"><%= link_to "Community Guidelines", '/discuss/all-about-alonetone/community-guidelines' %></div>
     </div>
 
   </div>

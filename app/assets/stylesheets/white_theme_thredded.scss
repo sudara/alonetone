@@ -97,7 +97,7 @@ aside.thredded--currently-online {
         }
       }
     }
-    
+
     margin-bottom: $baseline;
     padding-top: $baseline * 0.5;
     border-top: 1px solid $thredded-base-border-color;
@@ -140,6 +140,40 @@ aside.thredded--currently-online {
       }
       .thredded--post--content {
         font-size: 1rem;
+        line-height: 1.5rem;
+        font-size: 1rem;
+        h1,
+        h2,
+        h3 {
+          margin-bottom: 0;
+        }
+        h2 {
+          color: $dark-gray;
+          margin-top: 2rem;
+          margin-bottom: 0.25rem;
+          line-height: 1.5rem;
+        }
+        ul {
+          padding-left: 24px;
+          li {
+            list-style-type: disc;
+          }
+        }
+        ol {
+          counter-reset: listNumbering;
+          padding-left: 6px;
+          li {
+            list-style: none;
+            counter-increment: listNumbering;
+            &:before {
+              content: counter(listNumbering) ".";
+              font-variant-numeric: tabular-nums;
+              font-size: 14px;
+              color: $black;
+              margin-right: 6px;
+            }
+          }
+        }
       }
     }
     article.thredded--topics--topic {
@@ -158,21 +192,6 @@ aside.thredded--currently-online {
     }
     .thredded--post-form--wrapper {
       border-top: 0;
-    }
-  }
-  .thredded--post--content {
-    line-height: 1.5rem;
-    font-size: 1rem;
-    h1,
-    h2,
-    h3 {
-      margin-bottom: 0;
-    }
-    h2 {
-      color: $dark-gray;
-      margin-top: 2rem;
-      margin-bottom: 0.25rem;
-      line-height: 1.5rem;
     }
   }
   [type="checkbox"]:not(:checked),
@@ -242,6 +261,36 @@ form.button_to > .thredded--post--dropdown--actions--item {
   }
 }
 
-.thredded--post-moderation-record--moderation-state-notice a, .thredded--post-moderation-record--content-changed-notice a, .thredded--link, .thredded--messageboard, .thredded--post--user a, .thredded--post--topic a, .thredded--post--user-and-topic a, .thredded--post--content a, .thredded--post--content--spoiler--summary, .thredded--topic-header--participants--participant > a, .thredded--topic-header--started-by a, .thredded--topic-header--edit-topic, .thredded--topic-header--follow-info form input[type=submit], .thredded--topic-header--follow-info form button, .thredded--topics--title a, .thredded--topics--updated-by a, .thredded--topics--messageboard a {
+.thredded--pagination {
+  float: none;
+  border-top: 0;
+  span {
+    font-size: 12px;
+    line-height: inherit;
+    display: block;
+    float: left;
+    height: auto;
+    padding: 0;
+    color: inherit;
+  }
+}
+
+.thredded--post-moderation-record--moderation-state-notice a,
+.thredded--post-moderation-record--content-changed-notice a,
+.thredded--link,
+.thredded--messageboard,
+.thredded--post--user a,
+.thredded--post--topic a,
+.thredded--post--user-and-topic a,
+.thredded--post--content a,
+.thredded--post--content--spoiler--summary,
+.thredded--topic-header--participants--participant > a,
+.thredded--topic-header--started-by a,
+.thredded--topic-header--edit-topic,
+.thredded--topic-header--follow-info form input[type="submit"],
+.thredded--topic-header--follow-info form button,
+.thredded--topics--title a,
+.thredded--topics--updated-by a,
+.thredded--topics--messageboard a {
   transition: 0;
 }

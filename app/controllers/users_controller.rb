@@ -67,6 +67,7 @@ class UsersController < ApplicationController
 
   def edit
     @profile = @user.profile
+    @page_title = "Editing #{@user.display_name}"
   end
 
   def attach_pic
@@ -102,7 +103,7 @@ class UsersController < ApplicationController
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
 
-      @user.soft_delete_with_relations
+      UserCommand.new(@user).soft_delete_with_relations
 
       if moderator?
         redirect_to root_path
@@ -133,7 +134,7 @@ class UsersController < ApplicationController
   end
 
   def prepare_meta_tags
-    @page_title = @user.name
+    @page_title = "#{@user.name}'s Music"
     @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"
     @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
     @tab = 'your_stuff' if current_user == @user

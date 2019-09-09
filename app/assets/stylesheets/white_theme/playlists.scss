@@ -31,7 +31,6 @@ ul.playlists {
         position: relative;
       }
     }
-
     font-size: 11px;
     width: 220px;
     margin-right: 26.66px;
@@ -71,6 +70,12 @@ ul.playlists {
     a.small_playlist_user {
       color: $black;
       font-size: 10px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      hyphens: auto;
     }
     a:last-child {
       font-weight: normal;
@@ -82,7 +87,7 @@ ul.playlists {
   @media #{$mobile} {
     display: flex;
     flex-direction: row;
-    width: $mobile-site-width-wide;
+    width: 96%;
     margin-bottom: 20px;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -115,13 +120,24 @@ ul.playlists {
     color: $samo-orange;
     margin-top: 0;
     margin-bottom: 16px;
+    @media #{$mobile} {
+      padding-left: 2.5%;
+    }
   }
   max-width: 1032px;
   padding: 0 $baseline * 1.5;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;
+  }
   ul.playlists {
+    @media #{$mobile} {
+      width: 100%;
+      margin-right: 0;
+    }
     margin-right: -36px;
     li {
       margin-bottom: 30px;
