@@ -62,6 +62,7 @@ export default class extends Controller {
         this.nextTrackLoading = true
       }
       if (this.positionFromEnd(200)) {
+        this.stop()
         this.playNextTrack()
       } else {
         // we don't want to update this 60 times a second, at most 10
@@ -88,6 +89,11 @@ export default class extends Controller {
     player = null
     this.isPlaying = false
     this.pauseCallback()
+  }
+
+  stop() {
+    this.pause()
+    this.stop()
   }
 
   togglePlay(e) {
