@@ -4,6 +4,10 @@ module RSpec
   module Support
     module CapybaraHelpers
 
+      def pause_animations
+        page.execute_script("TweenMax.pauseAll()")
+      end
+
       def convert_canvas_to_image
         script = "
           function canvasToImage(selectorOrEl) {
