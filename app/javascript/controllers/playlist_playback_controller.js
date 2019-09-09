@@ -74,10 +74,9 @@ export default class extends PlaybackController {
     if (!this.loaded) {
       this.bigPlay.animation.showPause()
       this.loaded = true
+      this.bigPlay.progressContainerInnerTarget.classList.add('visible')
     }
-    this.bigPlay.percentPlayed = this.percentPlayed()
-    this.bigPlay.waveform.update()
-    this.bigPlay.timeTarget.innerHTML = this.time
+    this.bigPlay.update(this.percentPlayed())
   }
 
   hideSmallCoverAndSidebarLinks() {
