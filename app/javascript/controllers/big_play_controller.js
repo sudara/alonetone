@@ -11,6 +11,7 @@ export default class extends Controller {
     this.percentPlayed = 0.0
     this.setDelegate()
     this.animation.init()
+    this.animation.play()
     this.setAnimationState()
   }
 
@@ -19,6 +20,7 @@ export default class extends Controller {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       this.animation.showLoading()
     } else if (this.delegate && this.delegate.isPlaying) {
+      this.animation.showLoading()
       this.animation.showPause()
     } else {
       this.animation.setPlay()
