@@ -7,6 +7,7 @@ RSpec.describe 'tracks', type: :feature, js: true do
 
     # TODO: find a way to accomplish this without creating jank
     # play_button.click
+    convert_canvas_to_image
     Percy.snapshot(page, name: 'Single Track Play')
   end
 

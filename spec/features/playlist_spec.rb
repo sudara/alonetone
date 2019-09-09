@@ -16,6 +16,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector(".player")
 
       # TODO: Figure out a way to snapshot playback
+      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track')
     end
   end
