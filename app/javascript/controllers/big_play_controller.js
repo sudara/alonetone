@@ -12,11 +12,11 @@ export default class extends Controller {
     this.waveform = this.setupWaveform()
     this.percentPlayed = 0.0
     this.setDelegate()
-    this.checkIfLoading()
+    this.setAnimationState()
   }
 
   // if we were initailized *while* an mp3 is loading, connect to it
-  checkIfLoading() {
+  setAnimationState() {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       this.animation.showLoading()
     } else if (this.delegate && this.delegate.isPlaying) {

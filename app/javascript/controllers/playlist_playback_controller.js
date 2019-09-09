@@ -15,11 +15,10 @@ export default class extends PlaybackController {
 
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
-    if (this.playTarget.getAttribute('href') === document.location.pathname) {
+    if (this.isCurrentTrack()) {
       // the bigPlay controller isn't yet linked
       if (!this.bigPlay) this.setBigPlay()
-      if (this.loaded) this.bigPlay.animation.setPause()
-      else this.bigPlay.animation.showLoading()
+      this.bigPlay.setAnimationState()
       this.highlightPlayingTrack()
     } else {
       this.fireAjaxRequest()
@@ -92,6 +91,10 @@ export default class extends PlaybackController {
 
   setBigPlay() {
     this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track-content'), 'big-play')
+  }
+
+  isCurrentTrack() {
+    return this.playTarget.getAttribute('href') === document.location.pathname
   }
 
   // This workaround necessary until https://github.com/rails/rails/pull/36437 is merged

@@ -9,8 +9,7 @@ export default class extends PlaybackController {
 
   playCallback(e) {
     if (!this.bigPlay) this.setBigPlay()
-    if (this.loaded) this.bigPlay.animation.setPause()
-    else this.bigPlay.animation.showLoading()
+    this.bigPlay.setAnimationState()
     this.registeredListen = false
   }
 
