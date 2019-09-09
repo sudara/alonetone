@@ -3,13 +3,9 @@ import Rails from 'rails-ujs'
 import { Howl } from 'howler'
 import { bugsnagClient } from '../misc/bugsnag.js.erb'
 
-// Hack for Safari 12 https://github.com/goldfire/howler.js/pull/1047
-const safari = /safari/.test(Howler._navigator && Howler._navigator.userAgent.toLowerCase())
-// if (safari) Howler._canPlayEvent = 'loadedmetadata'
-
-
 let player
 
+// All variants of alonetone's javascript players extends this controller
 export default class extends Controller {
   static targets = ['play', 'title', 'seekBarContainer', 'seekBarLoaded']
 
@@ -18,7 +14,7 @@ export default class extends Controller {
     this.loaded = false
     this.isPlaying = false
     this.nextTrackLoading = false
-    this.time = "0:00"
+    this.time = '0:00'
     this.setupHowl()
   }
 
