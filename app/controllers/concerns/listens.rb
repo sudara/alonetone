@@ -35,7 +35,7 @@ module Listens
   def listen(asset, register: true)
     unless prevent_abuse(asset)
       register_listen(asset) if register
-      if Rails.application.play_dummy_audio?
+      if Rails.application.play_dummy_audio? || Rails.env.test?
         play_local_mp3
       elsif Rails.application.cloudfront_enabled?
         redirect_to Listens.cloudfront_url(asset.mp3.url)
