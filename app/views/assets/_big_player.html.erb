@@ -8,7 +8,7 @@
             <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>
         </clipPath>
         </defs>
-            <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="15.68"/>
+            <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#999" stroke-miterlimit="10" stroke-width="15.68"/>
 
             <g clip-path="url(#dottyMask)" >
               <circle visibility="hidden" class="dotty" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="butt" stroke-width="64" stroke-dasharray="68.99 187.58"/>
@@ -34,8 +34,20 @@
     <div class="seekbar" data-target="big-play.seekBar"></div>
   </div>
 
-  <div class="time">
-    <span class="index" data-target="big-play.time">0:00</span> of <%= @asset.length %>
+  <div class="progress-container">
+    <div class="progress-container-inner" data-target="big-play.progressContainerInner">
+      <div class="line-progress">
+      </div>
+      <div class="time-progress">
+        <span class="index" data-target="big-play.time">0:00</span>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="time-total">
+    <%= @asset.length %>
   </div>
 
 </div>
