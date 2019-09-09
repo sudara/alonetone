@@ -24,6 +24,7 @@ export default class extends PlaybackController {
       this.bigPlay.play()
     }
     this.bigPlay.update(this.percentPlayed())
+    console.log(this.sound.duration())
   }
 
   setBigPlay() {
