@@ -16,14 +16,18 @@ export default class extends Controller {
   }
 
   setAnimationState() {
-    // if we were initialized *while* an mp3 is still loading
+    // initialized *while* an mp3 is still loading
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       this.animation.showLoading()
-    } else if (this.delegate && this.delegate.isPlaying) {
+    } else if (this.delegate && this.delegate.isPlaying) { // while playing
       this.animation.showLoading()
       this.animation.showPause()
-      this.progressContainerInnerTarget.classList.add('visible')
-    } else {
+      this.showPlayhead()
+    } else if (this.delegate && this.delegate.positionFromStart(1)) { // after playing while paused
+      this.animation.setPlay()
+      this.update(this.delegate.percentPlayed())
+      this.showPlayhead()
+    } else { // loaded and not playing
       this.animation.setPlay()
     }
   }
@@ -39,7 +43,7 @@ export default class extends Controller {
 
   play() {
     this.animation.showPause()
-    this.progressContainerInnerTarget.classList.add('visible')
+    this.showPlayhead()
   }
 
   togglePlay(e) {
@@ -60,9 +64,9 @@ export default class extends Controller {
 
   update(percentPlayed) {
     this.percentPlayed = percentPlayed
+    this.updatePlayhead()
     this.waveform.update()
     this.timeTarget.innerHTML = this.delegate.time
-    this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
   }
 
   reset() {
@@ -71,6 +75,14 @@ export default class extends Controller {
 
   disconnect() {
     this.waveformTarget.querySelector('canvas').remove()
+  }
+
+  showPlayhead() {
+    this.progressContainerInnerTarget.classList.add('visible')
+  }
+
+  updatePlayhead() {
+    this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
   }
 
   setupWaveform() {
