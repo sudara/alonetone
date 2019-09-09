@@ -3,7 +3,7 @@ import LargePlayAnimation from '../animation/large_play_animation'
 import Waveform from '../animation/waveform'
 
 export default class extends Controller {
-  static targets = ['play', 'playButton', 'time', 'waveform', 'seekBar']
+  static targets = ['play', 'playButton', 'time', 'progressContainerInner', 'waveform', 'seekBar']
 
   initialize() {
     this.animation = new LargePlayAnimation()
@@ -47,6 +47,13 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
+  }
+
+  update(percentPlayed) {
+    this.percentPlayed = percentPlayed
+    this.waveform.update()
+    this.timeTarget.innerHTML = this.delegate.time
+    this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
   }
 
   disconnect() {
