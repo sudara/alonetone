@@ -1,6 +1,6 @@
 form#reset-password {
   input[type="text"] {
-    border: 1px solid #fff;
+    border: 1px solid $white;
     border-radius: 4px;
     background-color: $samo-alternate-background-gray;
     margin-right: 10px;
@@ -23,6 +23,7 @@ form#reset-password {
   }
   select {
     margin-top: 6px;
+    max-width: 100%;
   }
 }
 
@@ -34,6 +35,9 @@ form#reset-password {
     }
     input[type="text"] {
       width: 190px;
+    }
+    select {
+      max-width: 100%;
     }
   }
 }

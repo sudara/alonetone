@@ -14,9 +14,7 @@
     margin-top: 10px;
     padding-right: $baseline;
     padding-left: $baseline / 2;
-    background-color: $white;
     display: flex;
-    
     .listen_user {
       margin-right: $baseline / 2;
       img {
@@ -36,13 +34,24 @@
         font-size: 10px;
         font-weight: bold;
       }
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
+    }
+  }
+  #left {
+    @media #{$one-column} {
+      margin-bottom: $baseline * 2;
     }
   }
   #right {
     .box {
       overflow: hidden;
       margin-bottom: 0;
-      :last-child {
+      > :last-child {
         margin-bottom: 10px;
       }
     }

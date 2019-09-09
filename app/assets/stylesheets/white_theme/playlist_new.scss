@@ -6,7 +6,7 @@
   padding: $baseline / 2 $baseline;
   padding-left: 0;
   padding-right: 0;
-  background-color: #fff;
+  background-color: $white;
   max-width: 960px;
   @media #{$mobile} {
     width: 100%;

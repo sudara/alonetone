@@ -3,51 +3,44 @@
 
 @import 'white_theme/variables';
 @import 'white_theme/layout';
-@import 'white_theme/alonetone';
+@import 'white_theme/shared';
 @import 'white_theme/pagination';
 @import 'white_theme/notifications';
 @import 'white_theme/typography';
 @import 'white_theme/forms';
 
-@import 'white_theme/ajax';
+@import 'white_theme/comments';
+@import 'white_theme/tracks';
+@import 'white_theme/playlists';
 
 @import 'white_theme/site_header';
-@import 'white_theme/footer';
+@import 'white_theme/site_footer';
 @import 'white_theme/home';
-@import 'white_theme/user';
-@import 'white_theme/user_playlists';
-
-@import 'white_theme/history';
-@import 'white_theme/user_tracks';
-
-@import 'white_theme/about_stats'; 
-
-@import 'white_theme/edit_profile';
 
 @import 'white_theme/users_index';
 @import 'white_theme/search_results';
 @import 'white_theme/radio';
 
-@import 'white_theme/upload';
+@import 'white_theme/login_signup';
 
-@import 'white_theme/comments';
-@import 'white_theme/tracks';
-@import 'white_theme/playlists';
+@import 'white_theme/user';
+@import 'white_theme/about_stats'; 
+@import 'white_theme/edit_profile';
+@import 'white_theme/user_playlists';
+@import 'white_theme/history';
+@import 'white_theme/user_tracks';
+
+@import 'white_theme/upload';
 
 @import 'white_theme/playlist_new';
 @import 'white_theme/playlist_edit';
 
-@import 'white_theme/playlist';
-@import 'white_theme/playlist_sidebar';
-@import 'white_theme/playlist_cover_view';
-
-@import 'white_theme/track_content';
-@import 'white_theme/track_player';
-@import 'white_theme/track_social';
-
-@import 'white_theme/tracks_mass_edit';
-
-@import 'white_theme/secretz';
-@import 'white_theme/login_signup';
+@import 'white_theme/single_and_playlists_player/playlist';
+@import 'white_theme/single_and_playlists_player/playlist_sidebar';
+@import 'white_theme/single_and_playlists_player/playlist_cover_view';
+@import 'white_theme/single_and_playlists_player/track_content';
+@import 'white_theme/single_and_playlists_player/track_player';
+@import 'white_theme/single_and_playlists_player/track_social';
 
 @import 'white_theme/admin';
+@import 'white_theme/secretz';

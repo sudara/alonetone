@@ -81,6 +81,7 @@ jamie_kiesl:
   current_login_ip: 127.1.1.2
   created_at: <%= 1.month.ago %>
   updated_at: <%= 1.month.ago %>
+  listens_count: 2
 
 # Will Studd is an International cheese specialist. Studd has been working with artisan and
 # farmhouse cheeses for more than four decades, and has travelled extensively in his vocation.

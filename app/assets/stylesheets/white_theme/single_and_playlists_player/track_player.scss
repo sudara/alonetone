@@ -39,6 +39,7 @@
       height: 100%;
       background-color: #aaa;
       display: none;
+      background-color: $new-samo-gray;
     }
     &:hover .seekbar {
       display: block;

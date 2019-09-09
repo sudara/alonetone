@@ -4,7 +4,7 @@
 #user_comments_area,
 .comments_area {
   .asset {
-    border-top: 1px solid #eee;
+    border-top: 1px solid $light-gray;
     border-bottom: 0;
   }
 }
@@ -21,6 +21,11 @@
   }
   .comments_area {
     margin-bottom: 0;
+  }
+  #left {
+    @media #{$one-column} {
+      margin-bottom: $baseline * 2;
+    }
   }
 }
 
@@ -48,7 +53,6 @@
     }
   }
   .comment_asset {
-    background-color: transparent;
     div.submit_wrapper {
       position: relative;
       top: -18px;
@@ -57,8 +61,29 @@
       clear: both;
       justify-content: flex-end;
       margin-left: 110px;
+      @media #{$mobile} {
+        display: block;
+        .ajax_waiting {
+          margin-right: 0;
+          float: right;
+          border: 0;
+          &.ajax_fail, &.ajax_success {
+            margin-bottom: 12px;
+          }
+        }
+      }
+      @media #{$two-column-narrow} {
+        display: block;
+        .ajax_waiting {
+          margin-right: 0;
+          float: right;
+          border: 0;
+          &.ajax_fail, &.ajax_success {
+            margin-bottom: 12px;
+          }
+        }
+      }
     }
-
   }
 }
 
@@ -66,7 +91,7 @@
   padding-top: 20px;
   padding-right: 15px;
   padding-left: 15px;
-  background-color: #efefef;
+  background-color: $light-gray;
   box-shadow: none;
   border-radius: 0 0 6px 6px;
   position: relative;
@@ -74,7 +99,7 @@
   top: -6px;
   .comment_form {
     textarea {
-      background-color: #fff;
+      background-color: $white;
     }
     div.submit_wrapper {
       position: relative;
@@ -84,6 +109,17 @@
       clear: both;
       justify-content: flex-end;
       margin-left: 110px;
+      @media #{$one-column} {
+        display: block;
+        .ajax_waiting {
+          margin-right: 0;
+          float: right;
+          border: 0;
+          &.ajax_fail, &.ajax_success {
+            margin-bottom: 12px;
+          }
+        }
+      }
     }
   }
 }
@@ -103,16 +139,16 @@
         font-size: 12px;
         line-height: 20px;
         overflow: auto;
-        color: #969393;
+        color: $comment-label-gray;
         font-family: $medium-sans-font;
         margin-top: 9px;
         padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
-          color: #4f4d4d;
+          color: $comment-text-gray;
         }
         span.comment_as_user {
-          color: #4f4d4d;
+          color: $comment-text-gray;
         }
         a {
           color: $samo-orange;
@@ -133,7 +169,7 @@
         padding: $baseline / 4;
         margin-top: 8px;
         resize: none;
-        color: #4f4d4d;
+        color: $comment-text-gray;
         border: 1px solid $samo-light-gray;
         border-radius: 6px;
         background-color: $samo-alternate-background-gray;
@@ -152,7 +188,7 @@
         top: 1px;
         label {
           text-transform: lowercase;
-          color: #4f4d4d;
+          color: $comment-text-gray;
           margin-bottom: 2px!important;
         }
       }
@@ -167,9 +203,8 @@
         padding-left: 20px;
         padding-top: 8px;
         padding-bottom: 8px;
-        color: $white;
-        color: #ffd1b0;
-        border-color: #e02a02;
+        color: $light-orange;
+        border-color: $private-orange;
         border-radius: 0 0 6px 6px;
         background-color: $samo-dark-orange;
         &.hidden {
@@ -178,12 +213,13 @@
         .only_user_name,
         .only_alonetone_mods {
           font-weight: bold;
-          color: #fff;
+          color: $white;
         }
       }
       input.comment_submit {
         margin-bottom: 0;
         float: right;
+        clear: right;
         @include default_button();
       }
     }
@@ -214,7 +250,7 @@
     margin: 18px 10px 18px 50px;
     padding: 16px 16px 10px 16px;
     border-radius: 0 4px 4px 4px;
-    background-color: #fff;
+    background-color: $white;
     box-shadow: none;
     &::before {
       position: absolute;
@@ -229,14 +265,14 @@
     .comment_user_text {
       font-size: 11px;
       font-weight: normal;
-      color: #969393;
+      color: $comment-label-gray;
       a,
       a:visited {
         font-weight: bold;
         text-decoration: none;
       }
       a {
-        color: #4f4d4d;
+        color: $comment-text-gray;
         &:hover {
           text-decoration: underline;
         }
@@ -252,7 +288,7 @@
         line-height: 18px;
         margin: 16px 0 0 0;
         margin-top: 13px;
-        color: #4f4d4d;
+        color: $comment-text-gray;
       }
       div.private_message {
         font-size: 9px;
@@ -264,9 +300,9 @@
         height: 14px;
         text-align: center;
         text-transform: uppercase;
-        color: #f04e1a;
+        color: $private-red;
         border-radius: 2px;
-        background-color: #ffd1b0;
+        background-color: $light-orange;
         text-indent: 0;
       }
       @media only screen and (max-width: 375px) {
@@ -289,9 +325,8 @@
         }
         a:last-child {
           font-weight: bold;
-          color: #e02a02;
+          color: $private-orange;
         }
-        
       }
       h1,
       h2,
