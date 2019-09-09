@@ -21,7 +21,7 @@ export default class extends PlaybackController {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
       this.loaded = true
-      this.play()
+      this.bigPlay.play()
     }
     this.bigPlay.update(this.percentPlayed())
   }
