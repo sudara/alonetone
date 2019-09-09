@@ -188,7 +188,8 @@ export default function LargePlayAnimation() {
 
     TweenLite.set([pauseContainer, pauseGroup, pauseLoopGroup], {
       transformOrigin: '50% 50%',
-      scaleY: 0
+      scaleY: 0,
+      visibility: 'visible'
     })
     TweenLite.set(mainSVG, {
       visibility: 'visible'
