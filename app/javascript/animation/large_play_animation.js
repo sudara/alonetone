@@ -179,7 +179,6 @@ export default function LargePlayAnimation() {
 
     TweenLite.set(icon, {
       transformOrigin: '35% 50%',
-      scale: 0.8,
     })
 
     TweenLite.set(outline, {
@@ -188,7 +187,8 @@ export default function LargePlayAnimation() {
 
     TweenLite.set([pauseContainer, pauseGroup, pauseLoopGroup], {
       transformOrigin: '50% 50%',
-      scaleY: 0
+      scaleY: 0,
+      visibility: 'visible'
     })
     TweenLite.set(mainSVG, {
       visibility: 'visible'
