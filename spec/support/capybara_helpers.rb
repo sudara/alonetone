@@ -5,7 +5,11 @@ module RSpec
     module CapybaraHelpers
 
       def pause_animations
-        page.execute_script("TweenMax.pauseAll()")
+        page.execute_script("TweenMax.globalTimeScale(0)")
+      end
+
+      def resume_animations
+        page.execute_script("TweenMax.globalTimeScale(1)")
       end
 
       def convert_canvas_to_image
