@@ -35,7 +35,7 @@ export default class extends PlaybackController {
   }
 
   stopCallback() {
-    this.bigPlay.animation.reset()
+    this.bigPlay.reset()
   }
 
   // called by popstate@window so we don't interrupt playback with back/forward

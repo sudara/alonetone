@@ -62,8 +62,8 @@ export default class extends Controller {
         this.nextTrackLoading = true
       }
       if (this.positionFromEnd(200)) {
-        this.stop()
         this.playNextTrack()
+        this.stop()
       } else {
         // we don't want to update this 60 times a second, at most 10
         setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)
@@ -73,7 +73,7 @@ export default class extends Controller {
   }
 
   // called immedately by js
-  play() {
+  play(e) {
     this.sound.play()
     this.isPlaying = true
     if (player) {
@@ -81,7 +81,7 @@ export default class extends Controller {
     }
     player = this
     this.element.classList.add('playing')
-    this.playCallback()
+    this.playCallback(e)
   }
 
   pause() {
