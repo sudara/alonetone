@@ -34,6 +34,10 @@ export default class extends PlaybackController {
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
 
+  stopCallback() {
+    this.bigPlay.animation.reset()
+  }
+
   // called by popstate@window so we don't interrupt playback with back/forward
   popTrack(e) {
     const newLocation = document.location.pathname.split('/').pop()
@@ -71,9 +75,8 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
-      this.bigPlay.animation.showPause()
       this.loaded = true
-      this.bigPlay.progressContainerInnerTarget.classList.add('visible')
+      this.bigPlay.play()
     }
     this.bigPlay.update(this.percentPlayed())
   }

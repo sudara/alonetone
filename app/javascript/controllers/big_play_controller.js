@@ -7,20 +7,21 @@ export default class extends Controller {
 
   initialize() {
     this.animation = new LargePlayAnimation()
-    this.animation.init()
-    this.animation.play()
     this.waveform = this.setupWaveform()
     this.percentPlayed = 0.0
     this.setDelegate()
+    this.animation.init()
     this.setAnimationState()
   }
 
-  // if we were initailized *while* an mp3 is loading, connect to it
   setAnimationState() {
+    // if we were initialized *while* an mp3 is still loading
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       this.animation.showLoading()
     } else if (this.delegate && this.delegate.isPlaying) {
-      this.animation.setPause()
+      this.animation.showPause()
+    } else {
+      this.animation.setPlay()
     }
   }
 
@@ -31,6 +32,11 @@ export default class extends Controller {
     else {
       this.delegate = this.application.getControllerForElementAndIdentifier(this.element, 'single-playback')
     }
+  }
+
+  play() {
+    this.animation.showPause()
+    this.progressContainerInnerTarget.classList.add('visible')
   }
 
   togglePlay(e) {
@@ -54,6 +60,11 @@ export default class extends Controller {
     this.waveform.update()
     this.timeTarget.innerHTML = this.delegate.time
     this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
+  }
+
+  reset() {
+    this.animation.reset()
+    this.progressContainerInnerTarget.style.left = '0%'
   }
 
   disconnect() {
