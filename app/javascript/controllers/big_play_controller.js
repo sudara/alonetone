@@ -57,6 +57,7 @@ export default class extends Controller {
   }
 
   seek(e) {
+    if (!this.delegate) this.setDelegate()
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
