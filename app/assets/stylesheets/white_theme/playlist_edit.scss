@@ -16,6 +16,7 @@
     font-family: $medium-sans-font;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     @media #{$mobile} {
       padding-left: 12px;
     }
