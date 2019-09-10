@@ -10,7 +10,7 @@
             </mask>
         </defs>
         <g>
-            <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0" />
+            <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#999" stroke-miterlimit="10" stroke-width="0" />
             <g class="iconGroup" mask="url(#iconMask)">
                 <path class="icon" d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
             </g>
