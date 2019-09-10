@@ -6,8 +6,8 @@
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-  @media #{$mobile} {
-    width: 100%;
+  @media #{$one-column} {
+    width: 96%;
   }
   > h2 {
     padding-left: 59px;
@@ -17,7 +17,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @media #{$mobile} {
+    @media #{$one-column} {
       padding-left: 12px;
     }
   }
@@ -34,7 +34,7 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 25px;
-    @media #{$mobile} {
+    @media #{$one-column} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
       flex-direction: column-reverse;
@@ -43,7 +43,7 @@
     .edit_playlist_info_left_column {
       min-width: 220px;
       width: 20%;
-      @media #{$mobile} {
+      @media #{$one-column} {
         width: 100%;
         margin-top: $baseline;
       }
@@ -87,7 +87,7 @@
       display: flex;
       flex-wrap: wrap;
       width: 75%;
-      @media #{$mobile} {
+      @media #{$one-column} {
         width: 100%;
       }
       div.input {
@@ -97,7 +97,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        @media #{$mobile} {
+        @media #{$one-column} {
           flex-direction: column;
         }
         > :nth-child(1) {
@@ -106,7 +106,7 @@
             width: 100%;
           }
           margin-right: 30px;
-          @media #{$mobile} {
+          @media #{$one-column} {
             margin-right: 0;
           }
         }
@@ -121,7 +121,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        @media #{$mobile} {
+        @media #{$one-column} {
           flex-direction: column;
         }
         > :nth-child(1) {
@@ -130,7 +130,7 @@
             width: 100%;
           }
           margin-right: 30px;
-          @media #{$mobile} {
+          @media #{$one-column} {
             margin-right: 0px;
           }
         }
@@ -156,7 +156,7 @@
         font-size: 12px;
         position: relative;
         height: 54px;
-        @media #{$mobile} {
+        @media #{$one-column} {
           flex-direction: column;
         }
         div.input {
@@ -180,7 +180,7 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 20px;
-    @media #{$mobile} {
+    @media #{$one-column} {
       padding-left: 12px;
       padding-right: 12px;
     }
