@@ -144,6 +144,7 @@ asset_with_relations_for_soft_delete:
   created_at: 2010-04-08 13:00:03
   user: jamie_kiesl
   length: 55
+
 valid_asset_to_test_spam_on_latest:
   mp3_file_name: ValidAsset1.mp3
   title: Latest asset to test /latest
