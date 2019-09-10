@@ -213,10 +213,10 @@
       h2 {
         border-bottom: 0;
         width: auto;
-        span.playlist_date {
-          color: $samo-gray;
-        }
         margin-right: auto;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
       }
       div {
         margin-top: 16px;
