@@ -8,6 +8,11 @@
   margin-right: auto;
   flex-wrap: wrap;
   align-items: flex-start;
+  @media #{$one-column} {
+    width: 96%;
+    padding-left: 0;
+    padding-right: 0;
+  }
   .playlist-sidebar {
     @include samo-shadow-and-radius();
     position: relative;
