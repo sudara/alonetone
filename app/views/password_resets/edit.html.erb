@@ -1,9 +1,9 @@
-<div class="box">
-  <h2 class="box">Alright, pick a new password</h2>
-  <div id="login" class="static_content box">
+<div class="box password_reset">
+  <h2>Alright, pick a new password</h2>
+  <div id="login" class="static_content">
     <%= form_with model: @user, url: password_reset_path, method: :put do |f| %>
-      <%= f.password_field :password %><br/>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password, placeholder: "Enter New Password" %><br/>
+      <%= f.password_field :password_confirmation, placeholder: "Confirm New Password" %><br>
       <%= f.submit "Come on in..." %>
     <% end %>
   </div>
