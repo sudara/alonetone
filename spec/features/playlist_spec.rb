@@ -4,19 +4,31 @@ RSpec.describe 'playlists', type: :feature, js: true do
   it 'renders track and cover pages' do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
+
       first_track = find('ul.tracklist li:first-child')
       first_track.hover
       Percy.snapshot(page, name: 'Playlist Cover')
 
-      first_track.click
+      pause_animations
+      convert_canvas_to_image
+      first_track.find('a:first-child').click
+
       # The above click will be an ajax request
       # And in some cases our Snapshot will fire before the DOM is updated
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
       expect(page).to have_selector(".player")
+      convert_canvas_to_image
+      Percy.snapshot(page, name: 'Playlist Track Loading')
 
-      # TODO: Figure out a way to snapshot playback
-      Percy.snapshot(page, name: 'Playlist Track')
+      # Navigating away and back, we should still be playing
+      resume_animations
+      second_track = find('ul.tracklist li:last-child')
+      second_track.click
+      first_track.click
+      sleep 2
+      convert_canvas_to_image
+      Percy.snapshot(page, name: 'Playlist Track Playing')
     end
   end
 

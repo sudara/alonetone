@@ -79,15 +79,6 @@ RSpec.describe AssetsController, type: :request do
        }.not_to change(Listen, :count)
     end
 
-    it 'should accept a mp3 extension and redirect to the amazon url' do
-      agent = GOOD_USER_AGENTS.first
-      get user_track_path('sudara', 'song1', format: :mp3), headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
-
-      expect(response.status).to eq(302)
-      expect(response.location).to start_with('http')
-      expect(response.location).to end_with('original/Song1.mp3')
-    end
-
     GOOD_USER_AGENTS.each do |agent|
       it "should register a listen for #{agent}" do
         expect {
