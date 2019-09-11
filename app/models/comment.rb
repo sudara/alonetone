@@ -38,7 +38,7 @@ class Comment < ActiveRecord::Base
                   permalink: proc { commentable.try(:full_permalink) }
 
   def duplicate?
-    Comment.where(remote_ip: remote_ip, body: body).first.present?
+    Comment.where(remote_ip: remote_ip, body: body).where('created_at > ?', 1.hour.ago).first.present?
   end
 
   def disallow_dupes
