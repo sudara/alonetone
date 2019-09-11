@@ -102,16 +102,17 @@ module Listens
       status = "206 Partial Content" # browser wants part of the file
       match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
       if match
-        file_begin = match[1]
-        file_end = match[2] if match[2] && !match[2].empty?
+        file_begin = match[1].to_i
+        file_end = match[2].to_i if match[2] && !match[2].empty?
       end
-      headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
+      headers["Content-Range"] = "bytes #{file_begin}-#{file_end}/#{length}"
+
+      number_of_bytes = file_end - file_begin + 1
 
       # Safari expects to see 2 bytes when it asks for 0-1 as a range
-      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
-      how_many_bytes = file_end.to_i - file_begin.to_i > 1 ? file_end.to_i - file_begin.to_i : 2
+      headers["Content-Length"] = number_of_bytes
 
-      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), type: 'audio/mpeg',
+      send_data File.read(file_to_send, number_of_bytes, file_begin), type: 'audio/mpeg',
         url_based_filename: true, status: status, stream: true, buffer_size: 4096
     end
   end
