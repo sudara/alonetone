@@ -107,6 +107,11 @@ ul.playlists {
 
 .user_playlists, .user_featured_playlists {
   ul.playlists {
+    &:after {
+      height: 0;
+      width: 45%;
+      content: "";
+    }
     li.playlist {
       a.small_playlist_title {
         padding: 0 8px 8px 8px;
