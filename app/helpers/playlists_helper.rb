@@ -123,6 +123,15 @@ module PlaylistsHelper
     link_to(text, link, class: service).html_safe
   end
 
+  def first_active_track?(track, asset)
+    if asset.present? && (track.asset.id == asset.id) && !defined?(@active_set)
+      @active_set = true
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def downgrade_ancient_variant(variant:)
