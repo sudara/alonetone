@@ -214,6 +214,7 @@
       }
     }
     textarea {
+      font-family: $sans-font;
       font-size: 16px;
       line-height: 23px;
       position: relative;
@@ -238,6 +239,22 @@
       display: none;
     }
     .track-edit-bottom {
+      .new_version {
+        input[type="file"] {
+          font-family: $sans-font;
+          font-size: 12px;
+          padding-left: 0;
+          margin-top: 12px;
+          margin-bottom: 12px;
+        }
+        div.note {
+          margin-top: 0;
+          font-size: 12px;
+          line-height: 16px;
+          color: $new-samo-gray;
+          max-width: 400px;
+        }
+      }
       a {
         text-decoration: underline;
         &:hover {

@@ -28,15 +28,14 @@
     <% if @allow_reupload %>
 
     <div class="track-edit-bottom">
-      <%= link_to 'Upload a new version of this track',"new_version_#{asset.object_id}", class: 'slide_open_next'%>
-      <div id="new_version_<%=asset.object_id%>" style="display:none;">
-        <p>
-          <%= f.file_field :mp3, class: 'asset_data' %>
-        </p>
-        <span class="note">This will permanently delete the old version.
+      <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
+      <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
+        <%= f.file_field :mp3, class: 'asset_data' %>
+        <div class="note">This will permanently delete the old version.
           The replacement track will <strong>not</strong> be considered a new track. It will not
           show up on the home page under 'latest tracks'. But hey, you get to clean
-          up your act on the sly and fix that hasty mix from last week! Yay!</span>
+          up your act on the sly and fix that hasty mix from last week! Yay!
+        </div>
       </div>
       <% end %>
       <div class="edit-save">
