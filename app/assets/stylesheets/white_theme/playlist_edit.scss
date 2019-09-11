@@ -6,8 +6,8 @@
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-  @media #{$mobile} {
-    width: 100%;
+  @media #{$one-column} {
+    width: 96%;
   }
   > h2 {
     padding-left: 59px;
@@ -16,7 +16,8 @@
     font-family: $medium-sans-font;
     overflow: hidden;
     text-overflow: ellipsis;
-    @media #{$mobile} {
+    white-space: nowrap;
+    @media #{$one-column} {
       padding-left: 12px;
     }
   }
@@ -33,7 +34,7 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 25px;
-    @media #{$mobile} {
+    @media #{$one-column} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
       flex-direction: column-reverse;
@@ -42,7 +43,7 @@
     .edit_playlist_info_left_column {
       min-width: 220px;
       width: 20%;
-      @media #{$mobile} {
+      @media #{$one-column} {
         width: 100%;
         margin-top: $baseline;
       }
@@ -86,7 +87,7 @@
       display: flex;
       flex-wrap: wrap;
       width: 75%;
-      @media #{$mobile} {
+      @media #{$one-column} {
         width: 100%;
       }
       div.input {
@@ -96,7 +97,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        @media #{$mobile} {
+        @media #{$one-column} {
           flex-direction: column;
         }
         > :nth-child(1) {
@@ -105,7 +106,7 @@
             width: 100%;
           }
           margin-right: 30px;
-          @media #{$mobile} {
+          @media #{$one-column} {
             margin-right: 0;
           }
         }
@@ -120,7 +121,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        @media #{$mobile} {
+        @media #{$one-column} {
           flex-direction: column;
         }
         > :nth-child(1) {
@@ -129,7 +130,7 @@
             width: 100%;
           }
           margin-right: 30px;
-          @media #{$mobile} {
+          @media #{$one-column} {
             margin-right: 0px;
           }
         }
@@ -155,7 +156,7 @@
         font-size: 12px;
         position: relative;
         height: 54px;
-        @media #{$mobile} {
+        @media #{$one-column} {
           flex-direction: column;
         }
         div.input {
@@ -179,7 +180,7 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 20px;
-    @media #{$mobile} {
+    @media #{$one-column} {
       padding-left: 12px;
       padding-right: 12px;
     }
@@ -213,16 +214,17 @@
       h2 {
         border-bottom: 0;
         width: auto;
-        span.playlist_date {
-          color: $samo-gray;
-        }
         margin-right: auto;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
       }
       div {
         margin-top: 16px;
         font-family: $medium-sans-font;
         font-size: 13px;
         margin-right: 20px;
+        white-space: nowrap;
         span.playlist_track_size {
           color: $samo-gray;
         }

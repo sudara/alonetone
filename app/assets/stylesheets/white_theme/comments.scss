@@ -306,9 +306,23 @@
         text-indent: 0;
       }
       @media only screen and (max-width: 375px) {
+        .private_message {
+          margin-left: auto;
+        }
         .private_message + .comment_controls {
           float: none;
           margin-top: 40px;
+          text-align: right;
+        }
+      }
+      @media #{$two-column-narrow} {
+        .private_message {
+          margin-left: auto;
+        }
+        .private_message + .comment_controls {
+          float: none;
+          margin-top: 40px;
+          text-align: right;
         }
       }
       .comment_controls {
