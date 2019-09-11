@@ -71,7 +71,8 @@ export default class extends Controller {
   }
 
   reset() {
-    this.animation.showPlay()
+    this.animation.reset()
+    this.animation.setPlay()
   }
 
   disconnect() {

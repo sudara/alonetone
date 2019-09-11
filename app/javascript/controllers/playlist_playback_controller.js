@@ -1,4 +1,4 @@
-import Rails from 'rails-ujs'
+import Rails from '@rails/ujs'
 import PlaybackController from './playback_controller'
 
 const smallCover = document.querySelector('a.small-cover')
@@ -38,11 +38,16 @@ export default class extends PlaybackController {
     this.bigPlay.reset()
   }
 
-  // called by popstate@window so we don't interrupt playback with back/forward
+  // every instance of playlistPlayback listens for popstate@window
+  // so that when forward/back is pressed, this method is called on each
   popTrack(e) {
     const newLocation = document.location.pathname.split('/').pop()
+    // Only fire ajax for the track that actually matches the new location
+    // Remember, every track in the playlist will run this code on popstate
     if (newLocation === this.permalink) {
-      this.fireAjaxRequest()
+      console.log('should be ajax')
+      Rails.fire(this.loadTrackTarget, 'click')
+      e.stopImmediatePropagation()
     }
   }
 
