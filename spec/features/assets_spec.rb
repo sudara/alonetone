@@ -9,10 +9,8 @@ RSpec.describe 'tracks', type: :feature, js: true do
     Percy.snapshot(page, name: 'Single Track Page')
 
     # seek halfway
-    play_button.click
-    #find('.waveform').click
-    sleep 20
-    Percy.snapshot(page, name: 'Single Track Seeking')
+    # find('.waveform').click
+    # Percy.snapshot(page, name: 'Single Track Seeking')
   end
 
   it 'renders assets#edit' do
