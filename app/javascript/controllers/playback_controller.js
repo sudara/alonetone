@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-import Rails from 'rails-ujs'
+import Rails from '@rails/ujs'
 import { Howl } from 'howler'
 import { bugsnagClient } from '../misc/bugsnag.js.erb'
 
