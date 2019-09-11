@@ -26,29 +26,8 @@ export default function LargePlayAnimation() {
 
 
   this.init = function() {
-    
-    TweenLite.set(mainSVG, {
-      visibility: 'visible'
-    })
 
-    TweenLite.set([dotty, centerCircle], {
-      transformOrigin:'50% 50%',
-      strokeWidth: 0
-    })
-
-    TweenLite.set(icon, {
-      transformOrigin:'35% 50%',
-      scale:0.8,
-    })
-
-    TweenLite.set(outline, {
-      transformOrigin:'50% 50%'
-    })
-
-    TweenLite.set([pauseContainer, pauseGroup, pauseLoopGroup], {
-      transformOrigin:'50% 50%',
-      scaleY:0
-    })
+    this.reset()
 
     eyesTl = new TimelineMax({paused:true, repeat:-1}).timeScale(1.8);
     dottyRotationTl = new TimelineMax({}).timeScale(1.9);
@@ -163,7 +142,7 @@ export default function LargePlayAnimation() {
       }
     },0, '-=1')
     .addLabel('setPause')
-  
+
   }
 
   this.play = function(pos) {
@@ -190,6 +169,30 @@ export default function LargePlayAnimation() {
     TweenLite.set(".centerCircle", { visibility: "visible" });
     mainTl.play('showloading')
     eyesTl.play();
+  }
+
+  this.reset = function() {
+    TweenLite.set([dotty, centerCircle], {
+      transformOrigin: '50% 50%',
+      strokeWidth: 0
+    })
+
+    TweenLite.set(icon, {
+      transformOrigin: '35% 50%',
+    })
+
+    TweenLite.set(outline, {
+      transformOrigin: '50% 50%'
+    })
+
+    TweenLite.set([pauseContainer, pauseGroup, pauseLoopGroup], {
+      transformOrigin: '50% 50%',
+      scaleY: 0,
+      visibility: 'visible'
+    })
+    TweenLite.set(mainSVG, {
+      visibility: 'visible'
+    })
   }
 
   this.showPause = function(){

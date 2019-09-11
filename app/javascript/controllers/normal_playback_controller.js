@@ -32,6 +32,10 @@ export default class extends PlaybackController {
     this.animation.setPlay()
   }
 
+  stopCallback() {
+    this.animation.setPlay()
+  }
+
   toggleDetails(e) {
     if (!e.target.classList.contains('artist')) {
       // if the link in the track top is the artist link, go to that URL,

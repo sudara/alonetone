@@ -30,8 +30,8 @@ ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 # Magic incantation to make Capybara run the feature specs. Nobody knows
 # why this isn't a default in the gem.
 Capybara.register_driver(:headless_chrome) do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
-  options.headless!
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox disable-gpu])
+  options.headless! # comment out to view feature tests in active browser
 
   Capybara::Selenium::Driver.new app,
     browser: :chrome,
