@@ -21,7 +21,7 @@ export default class extends PlaybackController {
       this.bigPlay.setAnimationState()
       this.highlightPlayingTrack()
     } else {
-      this.fireAjaxRequest()
+      Rails.fire(this.loadTrackTarget, 'click')
     }
     this.registeredListen = false
     this.playTarget.classList.replace('play-button', 'pause-button')
@@ -103,16 +103,5 @@ export default class extends PlaybackController {
 
   isCurrentTrack() {
     return this.playTarget.getAttribute('href') === document.location.pathname
-  }
-
-  // This workaround necessary until https://github.com/rails/rails/pull/36437 is merged
-  // At which point we can just use Rails.fire inline
-  fireAjaxRequest() {
-    const event = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      button: 0,
-    })
-    this.loadTrackTarget.dispatchEvent(event)
   }
 }
