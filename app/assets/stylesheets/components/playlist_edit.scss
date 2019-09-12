@@ -192,13 +192,13 @@
     a:first-child {
       @include default-button();
       background-color: transparent;
-      color: $samo-orange;
+      color: $accent;
       font-size: 14px;
       padding: 0;
       font-family: $medium-sans-font;
       font-weight: normal;
       &:hover {
-        color: $samo-orange;
+        color: $accent;
         text-decoration: underline;
         background-color: transparent;
       }
@@ -232,7 +232,7 @@
           color: $light-gray;
         }
         span.playlist_total_time {
-          color: $samo-orange;
+          color: $accent;
         }
       }
     }
@@ -301,11 +301,11 @@
             text-decoration: underline;
             &:first-child {
               a {
-                background-color: $samo-orange;
+                background-color: $accent;
                 border: 1px solid #DE6A00;
                 color: $white;
                 &:hover {
-                  background-color: $samo-orange;
+                  background-color: $accent;
                   border: 1px solid #DE6A00;
                   color: $white;
                 }
@@ -410,7 +410,7 @@
       }
       &:active {
         .add-inner {
-          background-color: $samo-orange;
+          background-color: $accent;
         }
       }
       .add-inner {
@@ -434,7 +434,7 @@
       }
       &:active {
         .remove-inner {
-          background-color: $samo-orange;
+          background-color: $accent;
         }
       }
       .remove-inner {

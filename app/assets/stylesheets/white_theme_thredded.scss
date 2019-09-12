@@ -6,7 +6,7 @@
 $thredded-base-font-family: $sans-font;
 $thredded-heading-font-family: $sans-font;
 $thredded-grid-container-max-width: none;
-$thredded-brand: $samo-orange;
+$thredded-brand: $accent;
 $thredded-base-border-color: $light-gray;
 
 $thredded-font-size-small: 13px;
@@ -60,7 +60,7 @@ aside.thredded--currently-online {
             font-size: 18px;
             font-weight: bold;
             a {
-              color: $samo-orange;
+              color: $accent;
               &:hover {
                 text-decoration: underline;
               }
@@ -93,7 +93,7 @@ aside.thredded--currently-online {
         background-color: transparent;
         .thredded--messageboard--header {
           text-decoration: underline;
-          color: $samo-orange;
+          color: $accent;
         }
       }
     }

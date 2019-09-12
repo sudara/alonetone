@@ -122,7 +122,7 @@ ul.playlists {
 
 .playlists_container {
   h2 {
-    color: $samo-orange;
+    color: $accent;
     margin-top: 0;
     margin-bottom: 16px;
     @media #{$mobile} {
@@ -197,7 +197,7 @@ ul.playlists {
     position: relative;
     margin-bottom: 1px;
     padding: 10px 20px 10px 20px;
-    background-color: $samo-orange;
+    background-color: $accent;
     a {
       font-weight: bold;
       text-decoration: underline;

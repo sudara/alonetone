@@ -10,11 +10,11 @@
 	}
 	.active {
 		font-weight: bold;
-		color: $samo-orange;
+		color: $accent;
 	}
 	em, a:hover, span.current {
 		text-decoration: none;
-		color: $samo-orange;
+		color: $accent;
 	}
 }
 
@@ -35,7 +35,7 @@
 	}
 	em, a:hover, span.current {
 		text-decoration: none;
-		color: $samo-orange;
+		color: $accent;
 	}
 	em {
 		font-weight: bold;

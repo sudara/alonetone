@@ -8,14 +8,14 @@
   background-color: $white;
   &.hover {
     .playIconSymbol {
-      fill: $samo-orange;
+      fill: $accent;
     }
     .asset_top {
       .title_left_column_top {
-        color: $samo-orange;
+        color: $accent;
       }
       .time {
-        color: $samo-orange !important;
+        color: $accent !important;
       }
     }
   }
@@ -60,7 +60,7 @@
     }
     .played {
       height: 5px;
-      background-color: $samo-orange;
+      background-color: $accent;
     }
     &:not(.show) {
       display: none;
@@ -197,7 +197,7 @@
             opacity: 0.99;
           }
           div.time {
-            color: $samo-orange;
+            color: $accent;
           }
         }
       }
@@ -319,7 +319,7 @@
           a {
             font-size: 12px;
             display: block;
-            color: $samo-orange;
+            color: $accent;
             flex-grow: 1;
             font-weight: bold;
           }

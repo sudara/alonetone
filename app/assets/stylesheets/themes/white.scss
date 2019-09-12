@@ -18,8 +18,9 @@ $samo-alternate-background-gray: #f5f5f5; // 11 uses
 $lightest-gray: #f9f9f9; // 5 uses
 $white: #ffffff; // 53 uses
 
-$red: #d3220c; // 2 uses
-$samo-orange: #eb7b0c; // 46 uses
+$accent: $orangetone;
+
+$warning: $red600;
 
 $private-message-flag-background: $orange100;
 $private-message-flag-text: $orange800;
