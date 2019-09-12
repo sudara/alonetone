@@ -95,7 +95,7 @@
     }
     h3 {
       margin-top: -16px;
-      color: $samo-gray;
+      color: $font-color-four;
     }
     p {
       font-size: 16px;
@@ -115,7 +115,7 @@
       .created {
         font-size: 14px;
         display: block;
-        color: $new-samo-gray;
+        color: $font-color-five;
         flex-grow: 1;
         time {
           font-weight: bold;
@@ -127,7 +127,7 @@
         padding-right: 8px;
         padding-left: 8px;
         text-align: center;
-        color: $new-samo-gray;
+        color: $font-color-five;
         display: flex;
         justify-content: flex-start;
       }
@@ -136,7 +136,7 @@
         font-weight: bold;
         padding-left: 8px;
         text-align: center;
-        color: $new-samo-gray;
+        color: $font-color-five;
         display: flex;
         justify-content: flex-start;
       }
@@ -155,14 +155,14 @@
       margin: ($baseline * 1.5) auto;
       text-align: center;
       border: 0;
-      border-bottom: 1px solid $samo-light-gray;
+      border-bottom: 1px solid $border-color-two;
       &:after {
         position: absolute;
         top: -0.55em;
         left: 265px;
         display: block;
         content: "\f025"; // with headphone icon
-        color: $samo-light-gray;
+        color: $border-color-two;
         background-color: white; // interrupt hr
         -webkit-font-smoothing: antialiased;
       }
@@ -225,11 +225,11 @@
       margin-bottom: $baseline;
       padding: $baseline / 2;
       word-wrap: break-word;
-      color: $dark-gray;
-      border: 1px solid $samo-light-gray;
+      color: $font-color-two;
+      border: 1px solid $border-color-two;
       background-color: transparent;
       &:focus {
-        border-color: $new-samo-gray;
+        border: 1px solid $border-color-two;
       }
       @media #{$one-column} {
         font-size: 16px;
@@ -251,7 +251,7 @@
           margin-top: 0;
           font-size: 12px;
           line-height: 16px;
-          color: $new-samo-gray;
+          color: $font-color-five;
           max-width: 400px;
         }
       }

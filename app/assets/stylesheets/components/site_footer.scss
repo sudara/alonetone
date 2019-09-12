@@ -6,7 +6,7 @@ footer#site_footer {
   line-height: 20px;
   width: 100%;
   padding-top: 24px;
-  color: $dark-gray;
+  color: $font-color-two;
   background-color: $background-color-two;
   h3 {
     color: $footer-forum-topics-accent;
@@ -30,7 +30,7 @@ footer#site_footer {
     div {
       margin-top: 6px;
       margin-bottom: 14px;
-      color: $samo-gray;
+      color: $font-color-four;
       line-height: 1.2;
       font-size: 12px;
       font-family: $medium-sans-font;
@@ -96,7 +96,7 @@ footer#site_footer {
           }
           .forum_author {
             font-family: $sans-font;
-            color: $samo-gray;
+            color: $font-color-four;
             font-size: 12px;
           }
         }
@@ -126,7 +126,7 @@ footer#site_footer {
         min-width: 150px;
         background-color: $background-color-four;
         border-radius: 3px;
-        color: $white;
+        color: $font-color-seven;
         line-height: 20px;
         padding: 16px;
         box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 4px 8px rgba(0, 0, 0, 0.25);

@@ -8,16 +8,20 @@ $background-color-three: $grey100;
 $background-color-four: $grey1000;
 $background-color-five: $black;
 
-$white: $white; // mostly text
-$black: $black; // mostly fonts
-$dark-gray: $grey1000; // mostly fonts
-$comment-text-gray: $grey900; // mostly fonts
+$font-color-one: $black;
+$font-color-two: $grey1000;
+$font-color-three: $grey900;
+$font-color-four: $grey800;
+$font-color-five: $grey500;
+$font-color-six: $grey50;
+$font-color-seven: $white;
 
-$samo-gray: $grey800; // still borders and some fonts
-$new-samo-gray: $grey500; // still borders and some fonts
-$samo-light-gray: $grey200; // still borders and some fonts
-$light-gray: $grey100; // still borders and some fonts
-$samo-background-gray: $grey50; // still borders and some fonts
+$border-color-one: $black;
+$border-color-two: $grey500; 
+$border-color-three: $grey200; 
+$border-color-four: $grey100;
+$border-color-five: $grey50;
+$border-color-six: $white;
 
 $accent: $orangetone;
 
@@ -39,7 +43,6 @@ $ajax-success-text: $green600;
 $about-stats-heading-text: $red600;
 
 $admin-spam-row-background: $orange100;
-
 
 $footer-forum-topics-accent: $orange600;
 $footer-bottom-background: $grey1100;

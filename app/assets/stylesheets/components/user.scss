@@ -264,7 +264,7 @@ main {
         .user_header_avatar {
           overflow: hidden;
           @include samo-shadow-and-radius();
-          border: 1px solid $black;
+          border: 1px solid $border-color-one;
           width: 48px;
           height: 48px;
           @media #{$mobile} {
@@ -330,7 +330,7 @@ main {
           flex-grow: 1;
           font-size: 16px;
           line-height: 1.3;
-          color: $dark-gray;
+          color: $font-color-two;
           padding: 36px;
           font-family: $medium-sans-font;
         }
@@ -354,7 +354,7 @@ main {
       }
       h2.area_heading {
         font-size: 24px;
-        color: $black;
+        color: $font-color-one;
         display: block;
       }
       > div {
@@ -385,7 +385,7 @@ main {
       }
       h2.area_heading {
         font-size: 24px;
-        color: $black;
+        color: $font-color-one;
         display: block;
       }
       .area_content {
@@ -399,13 +399,13 @@ main {
           display: flex;
           > div {
             > div:first-child {
-              color: $samo-gray;
+              color: $font-color-four;
               font-size: 12px;
               margin-bottom: 8px;
             }
             > div:last-child {
               font-size: 16px;
-              color: $dark-gray;
+              color: $font-color-two;
             }
           }
         }
@@ -437,7 +437,7 @@ main {
       }
       h2.area_heading {
         font-size: 20px;
-        color: $samo-light-gray;
+        color: $font-color-five;
         display: block;
       }
       .area_content {
@@ -455,27 +455,27 @@ main {
         }
         .user_agent {
           padding: 16px;
-          border-top: 2px solid $white;
+          border-top: 2px solid $border-color-six;
           > div:first-child {
-            color: $samo-gray;
+            color: $font-color-four;
             font-size: 12px;
             margin-bottom: 8px;
           }
           > div:last-child {
             font-size: 16px;
-            color: $dark-gray;
+            color: $font-color-two;
           }
         }
         > div {
           > div {
             > div:first-child {
-              color: $samo-gray;
+              color: $font-color-four;
               font-size: 12px;
               margin-bottom: 8px;
             }
             > div:last-child {
               font-size: 16px;
-              color: $dark-gray;
+              color: $font-color-two;
             }
           }
         }
@@ -515,7 +515,7 @@ main {
         padding-left: 0;
         flex-wrap: wrap;
         background-color: $background-color-four;
-        color: $white;
+        color: $font-color-seven;
         @include samo-shadow-and-radius();
         overflow: auto;
         li {

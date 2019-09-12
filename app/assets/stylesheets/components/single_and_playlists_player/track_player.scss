@@ -56,7 +56,7 @@
     font-size: 10px;
     font-variant-numeric: tabular-nums;
     text-align: center;
-    color: $samo-gray;
+    color: $font-color-four;
   }
 
   .progress-container {
@@ -91,7 +91,7 @@
         background-color: $accent;
         font-variant-numeric: tabular-nums;
         text-align: center;
-        color: $white;
+        color: $font-color-seven;
         font-family: $medium-sans-font;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
@@ -112,7 +112,7 @@
     z-index: -11;
     font-variant-numeric: tabular-nums;
     text-align: right;
-    color: $samo-gray;
+    color: $font-color-four;
     font-family: $medium-sans-font;
   }
 
@@ -123,7 +123,7 @@
     bottom: -2px;
     a {
       text-decoration: none;
-      color: $samo-gray;
+      color: $font-color-four;
     }
   }
 }

@@ -40,7 +40,7 @@
           width: 100%;
           box-sizing: border-box;
           &:hover {
-            background: $light_gray;
+            background: $background-color-three;
             a {
               text-decoration: none;
             }
@@ -54,7 +54,7 @@
         li.current {
           padding: 0 15px;
           background: $accent;
-          color: $white;
+          color: $font-color-seven;
         }
       }
     }

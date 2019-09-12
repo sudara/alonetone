@@ -49,7 +49,7 @@ header#site_header {
       position: relative;
       float: right;
       background-color: $background-color-three;
-      color: $black;
+      color: $font-color-one;
       .profile_link {
         font-size: 14px;
         position: relative;
@@ -119,7 +119,7 @@ header#site_header {
         padding: 0;
         padding-left: 8px;
         box-sizing: content-box;
-        color: $dark-gray;
+        color: $font-color-two;
         border: 1px solid #DDDDDD;
         border-radius: 5px;
         &:focus {

@@ -31,7 +31,7 @@ form {
     margin: 2px 0;
     text-align: left;
     text-transform: uppercase;
-    color: $new-samo-gray;
+    color: $font-color-five;
     abbr {
       display: none;
     }
@@ -41,12 +41,12 @@ form {
   select {
     box-sizing: border-box;
     margin-bottom: $baseline;
-    border: 1px solid $white;
+    border: 1px solid $border-color-six;
     border-radius: 4px;
     background-color: $background-color-two;
     font-size: 14px;
     &:focus {
-      border: 1px solid $new-samo-gray;
+      border: 1px solid $border-color-two;
     }
   }
   input {
@@ -71,12 +71,12 @@ input {
   &.string,
   &.password {
     width: 250px;
-    border: 1px solid $white;
+    border: 1px solid $border-color-six;
     border-radius: 4px;
     background-color: $background-color-two;
-    color: $dark-gray;
+    color: $font-color-two;
     &:focus {
-      border: 1px solid $new-samo-gray;
+      border: 1px solid $border-color-two;
     }
   }
   &.radio {
@@ -106,19 +106,19 @@ input {
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: $samo-gray;
+  color: $font-color-four;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: $samo-gray;
+  color: $font-color-four;
 }
 :-ms-input-placeholder {
   /* IE 10+ */
-  color: $samo-gray;
+  color: $font-color-four;
 }
 :-moz-placeholder {
   /* Firefox 18- */
-  color: $samo-gray;
+  color: $font-color-four;
 }
 
 /* CUSTOM SVG CHECKBOX REPLACEMENT */
@@ -141,7 +141,7 @@ input {
 }
 
 [type="checkbox"]:not(:checked) + label:hover:before {
-  border: 1px solid $new-samo-gray !important;
+  border: 1px solid $border-color-two !important;
 }
 
 [type="checkbox"]:not(:checked) + label:active:before,
@@ -165,9 +165,9 @@ input {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $samo-light-gray;
+  border: 1px solid $border-color-two;
   border-radius: 2.5px;
-  background-color: $samo-background-gray !important;
+  background-color: $border-color-five !important;
 }
 
 [type="checkbox"]:checked + label:before {
@@ -177,9 +177,9 @@ input {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $samo-gray;
+  border: 1px solid $font-color-four;
   border-radius: 2.5px;
-  background-color: $samo-gray;
+  background-color: $font-color-four;
 }
 
 [type="checkbox"]:not(:checked) + label:after {

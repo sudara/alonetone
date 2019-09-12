@@ -33,13 +33,13 @@ body main #columns {
           text-indent: 15px;
           display: block;
           box-sizing: border-box;
-          border-bottom: 1px solid $light-gray;
-          color: $white;
+          border-bottom: 1px solid $border-color-four;
+          color: $font-color-seven;
           background-color: $accent;
           a {
             display: block;
             width: 100%;
-            color: $dark-gray;
+            color: $font-color-two;
             background-color: $background-color-one;
             text-decoration: none;
             &:hover {

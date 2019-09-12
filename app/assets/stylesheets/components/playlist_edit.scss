@@ -49,7 +49,7 @@
       }
       .cover {
         display: block;
-        border: 1px dashed $samo-light-gray;
+        border: 1px dashed $border-color-three;
         padding: 4px;
         margin-top: 10px;
         text-align: center;
@@ -78,7 +78,7 @@
       }
       p {
         font-size: 12px;
-        color: $new-samo-gray;
+        color: $font-color-five;
         margin-top: 0;
       }
     }
@@ -164,10 +164,10 @@
         }
         label {
           text-transform: none;
-          color: $comment-text-gray;
+          color: $font-color-three;
         }
         span.private_notice {
-         color: $new-samo-gray;
+         color: $font-color-five;
          font-family: $medium-sans-font;
          margin-left: 4px;
          margin-top: 5px;
@@ -176,7 +176,7 @@
     }
   }
   .edit_playlist_info_bottom {
-    border-top: 1px solid $samo-background-gray;
+    border-top: 1px solid $border-color-five;
     padding-left: 60px;
     padding-right: 60px;
     padding-top: 20px;
@@ -210,7 +210,7 @@
     .left_column_box_header {
       display: flex;
       flex-direction: row;
-      border-bottom: 1px solid $light-gray;
+      border-bottom: 1px solid $border-color-four;
       h2 {
         border-bottom: 0;
         width: auto;
@@ -226,18 +226,18 @@
         margin-right: 20px;
         white-space: nowrap;
         span.playlist_track_size {
-          color: $samo-gray;
+          color: $font-color-four;
         }
         span.playlist_dash {
-          color: $light-gray;
+          color: $border-color-four;
         }
         span.playlist_total_time {
-          color: $accent;;
+          color: $accent;
         }
       }
     }
     .playlist_asset:last-child {
-      border-bottom: 1px solid $light-gray;
+      border-bottom: 1px solid $border-color-four;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -245,7 +245,7 @@
       border-radius: 4px;
       background-color: $background-color-two;
       font-size: 13px;
-      color: $samo-gray;
+      color: $font-color-four;
       text-align: center;
       height: 30px;
       line-height: 30px;
@@ -282,7 +282,7 @@
           font-family: $medium-sans-font;
           font-size: 13px;
           margin-right: 20px;
-          color: $samo-gray;
+          color: $font-color-four;
           margin-left: auto;
         }
       }
@@ -303,31 +303,31 @@
               a {
                 background-color: $accent;;
                 border: 1px solid #DE6A00;
-                color: $white;
+                color: $font-color-seven;
                 &:hover {
                   background-color: $accent;;
                   border: 1px solid #DE6A00;
-                  color: $white;
+                  color: $font-color-seven;
                 }
               }
             }
             a {
               @include default-button();
               background-color: $background-color-one;
-              color: $samo-gray;
+              color: $font-color-four;
               font-family: $medium-sans-font;
               font-weight: normal;
               height: 26px;
               &:hover {
                 background-color: $edit-playlist-track-button-background-hover;
-                color: $white;
+                color: $font-color-seven;
               }
             }
           }
         }
       }
       .mini_paginator {
-        border-bottom: 1px solid $light-gray;
+        border-bottom: 1px solid $border-color-four;
         border-radius: 0;
       }
     }
@@ -343,7 +343,7 @@
   }
   .left_instructions,
   .right_instructions {
-    color: $samo-gray;
+    color: $font-color-four;
     padding: 0 10px;
     line-height: 1.5em;
     min-height: 42px;
@@ -456,7 +456,7 @@
 
 .draggable-mirror {
   z-index: 99999;
-  border: 1px solid $black;
+  border: 1px solid $border-color-one;
 }
 
 .edit_playlist_pro_upload {

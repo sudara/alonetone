@@ -32,7 +32,7 @@ ul {
     margin-bottom: 1px;
     padding: 0 0 0 $baseline / 2;
     color: $accent;
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid $border-color-four;
     background-color: transparent;
     &.static_content_heading {
       padding-left: $baseline / 2;
@@ -55,7 +55,7 @@ ul {
     font-size: 15px;
     font-weight: normal;
     font-family: $medium-sans-font;
-    color: $samo-gray;
+    color: $font-color-four;
     border: 0;
     margin-right: 4px;
     margin-top: 12px;

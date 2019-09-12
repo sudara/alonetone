@@ -4,7 +4,7 @@
   overflow: hidden;
   width: 100%;
   min-height: 57px;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $border-color-four;
   background-color: $background-color-one;
   &.hover {
     .playIconSymbol {
@@ -38,7 +38,7 @@
     outline: none;
   }
   &.draggable-mirror {
-    border: 1px solid $light-gray;
+    border: 1px solid $border-color-four;
     border-radius: 0;
     box-shadow: 0 0px 5px 1px #cccccc7a;
     z-index: 9999999;
@@ -140,7 +140,7 @@
             bottom: 7px;
             display: block;
             text-align: right;
-            color: $samo-gray;
+            color: $font-color-four;
           }
         }
         a {
@@ -163,7 +163,7 @@
         a.artist {
           font-size: 12px;
           font-weight: normal;
-          color: $samo-gray;
+          color: $font-color-four;
           &:hover {
             text-decoration: underline;
           }
@@ -224,7 +224,7 @@
         margin-left: 16px;
       }
       span.favorited_when {
-        color: $samo-gray;
+        color: $font-color-four;
       }
     }
   }
@@ -278,7 +278,7 @@
         font-size: 14px;
         line-height: 17px;
         margin-right: 0;
-        color: $comment-text-gray;
+        color: $font-color-three;
         flex: 1;
         .user_description {
           margin-bottom: 8px;
@@ -309,7 +309,7 @@
         }
         .created {
           font-size: 12px;
-          color: $samo-gray;
+          color: $font-color-four;
           margin-bottom: 10px;
         }
         .below_description {
@@ -329,7 +329,7 @@
             padding-right: 8px;
             padding-left: 8px;
             text-align: center;
-            color: $new-samo-gray;
+            color: $font-color-five;
             display: flex;
             justify-content: flex-start;
           }
@@ -338,7 +338,7 @@
             font-weight: bold;
             padding-left: 8px;
             text-align: center;
-            color: $new-samo-gray;
+            color: $font-color-five;
             display: flex;
             justify-content: flex-start;
           }
