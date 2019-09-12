@@ -84,14 +84,14 @@ body.cover-view {
           margin-bottom: 0;
           li {
             border-right: 0;
-            border-left: 1px solid $black;
+            border-left: 1px solid $border-color-one;
           }
         }
         li {
           display: block;
           float: left;
           height: 50px;
-          border-right: 1px solid $black;
+          border-right: 1px solid $border-color-one;
           background-color: $background-color-four;
           &:hover {
             background-color: $background-color-five;
@@ -108,7 +108,7 @@ body.cover-view {
             padding-top: 12px;
             padding-bottom: 0;
             text-decoration: none;
-            color: $samo-background-gray;
+            color: $font-color-six;
             background-image: image-url("svg/icon_playlist_link.svg");
             background-size: 19px 19px;
             background-repeat: no-repeat;
@@ -122,7 +122,7 @@ body.cover-view {
               text-align: left;
               font-size: 10px;
               display: block;
-              color: $samo-gray;
+              color: $font-color-four;
 
             }
             &.spotify {

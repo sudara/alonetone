@@ -28,7 +28,7 @@
     font-weight: normal;
     margin-top: -2px;
     text-align: center;
-    color: $dark-gray;
+    color: $font-color-two;
   }
   ul.tracklist {
     margin-top: $baseline / 2;
@@ -37,23 +37,23 @@
       clear: both;
       overflow: auto;
       min-height: 35px;
-      border-top: 1px solid $samo-background-gray;
+      border-top: 1px solid $border-color-five;
       &:last-child {
-        border-bottom: 1px solid $samo-background-gray;
+        border-bottom: 1px solid $border-color-five;
       }
       &:hover,
       &.active {
         background-color: $background-color-four;
         a.position-name-time {
-          color: $samo-background-gray;
+          color: $font-color-six;
           span.track-name {
-            color: $samo-background-gray;
+            color: $font-color-six;
           }
           span.track-position {
-            color: $new-samo-gray;
+            color: $font-color-five;
           }
           span.time-text {
-            color: $new-samo-gray;
+            color: $font-color-five;
           }
         }
       }
@@ -70,8 +70,7 @@
         margin-left: 0;
         padding: 4px 3px 5px 6px;
         &:hover {
-          color: $white;
-          border-color: $white;
+          color: $font-color-seven;
         }
       }
       a.play-button {
@@ -99,14 +98,14 @@
         padding-bottom: 8px;
         white-space: nowrap;
         text-decoration: none;
-        color: $dark-gray;
+        color: $font-color-two;
         flex-grow: 1;
         span.track-position {
           display: block;
           float: left;
           font-variant-numeric: tabular-nums;
           margin-right: 4px;
-          color: $samo-gray;
+          color: $font-color-four;
           min-width: 21px;
         }
         span.track-name {
@@ -122,7 +121,7 @@
           font-size: 12px;
           margin-right: 12px;
           font-variant-numeric: tabular-nums;
-          color: $samo-gray;
+          color: $font-color-four;
         }
       }
     }
@@ -185,7 +184,7 @@
           .action-text {
             font-size: 10px;
             float: right;
-            color: $samo-gray;
+            color: $font-color-four;
             position: relative;
             top: 3px;
           }

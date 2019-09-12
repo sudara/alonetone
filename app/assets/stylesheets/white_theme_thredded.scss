@@ -7,7 +7,7 @@ $thredded-base-font-family: $sans-font;
 $thredded-heading-font-family: $sans-font;
 $thredded-grid-container-max-width: none;
 $thredded-brand: $accent;
-$thredded-base-border-color: $light-gray;
+$thredded-base-border-color: $border-color-four;
 
 $thredded-font-size-small: 13px;
 
@@ -80,7 +80,7 @@ aside.thredded--currently-online {
       display: block;
       .thredded--messageboard {
         border: 0;
-        border-top: 1px solid $light-gray;
+        border-top: 1px solid $border-color-four;
         padding-left: 0;
       }
       .thredded--messageboard--header {
@@ -148,7 +148,7 @@ aside.thredded--currently-online {
           margin-bottom: 0;
         }
         h2 {
-          color: $dark-gray;
+          color: $font-color-two;
           margin-top: 2rem;
           margin-bottom: 0.25rem;
           line-height: 1.5rem;
@@ -169,7 +169,7 @@ aside.thredded--currently-online {
               content: counter(listNumbering) ".";
               font-variant-numeric: tabular-nums;
               font-size: 14px;
-              color: $black;
+              color: $font-color-one;
               margin-right: 6px;
             }
           }
@@ -177,7 +177,7 @@ aside.thredded--currently-online {
       }
     }
     article.thredded--topics--topic {
-      border-bottom: 1px solid $light-gray;
+      border-bottom: 1px solid $border-color-four;
       padding-bottom: 13px;
       margin-bottom: 13px;
       h1.thredded--topics--title {

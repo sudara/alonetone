@@ -4,7 +4,7 @@
 #user_comments_area,
 .comments_area {
   .asset {
-    border-top: 1px solid $light-gray;
+    border-top: 1px solid $border-color-four;
     border-bottom: 0;
   }
 }
@@ -139,16 +139,16 @@
         font-size: 12px;
         line-height: 20px;
         overflow: auto;
-        color: $samo-gray;
+        color: $font-color-four;
         font-family: $medium-sans-font;
         margin-top: 9px;
         padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
-          color: $comment-text-gray;
+          color: $font-color-three;
         }
         span.comment_as_user {
-          color: $comment-text-gray;
+          color: $font-color-three;
         }
         a {
           color: $accent;
@@ -169,15 +169,15 @@
         padding: $baseline / 4;
         margin-top: 8px;
         resize: none;
-        color: $comment-text-gray;
-        border: 1px solid $samo-light-gray;
+        color: $font-color-three;
+        border: 1px solid $border-color-three;
         border-radius: 6px;
         background-color: $background-color-two;
         @media #{$one-column} {
           font-size: 16px;
         }
         &:focus {
-          border-color: $new-samo-gray;
+          border: 1px solid $border-color-two;
         }
       }
       .private_check_box {
@@ -188,7 +188,7 @@
         top: 1px;
         label {
           text-transform: lowercase;
-          color: $comment-text-gray;
+          color: $font-color-three;
           margin-bottom: 2px!important;
         }
       }
@@ -213,7 +213,7 @@
         .only_user_name,
         .only_alonetone_mods {
           font-weight: bold;
-          color: $white;
+          color: $font-color-seven;
         }
       }
       input.comment_submit {
@@ -265,14 +265,14 @@
     .comment_user_text {
       font-size: 11px;
       font-weight: normal;
-      color: $samo-gray;
+      color: $font-color-four;
       a,
       a:visited {
         font-weight: bold;
         text-decoration: none;
       }
       a {
-        color: $comment-text-gray;
+        color: $font-color-three;
         &:hover {
           text-decoration: underline;
         }
@@ -288,7 +288,7 @@
         line-height: 18px;
         margin: 16px 0 0 0;
         margin-top: 13px;
-        color: $comment-text-gray;
+        color: $font-color-three;
       }
       div.private_message {
         font-size: 9px;

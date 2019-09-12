@@ -27,7 +27,7 @@ ul.playlists {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
       }
       a.small_playlist_title {
-        color: $white;
+        color: $font-color-seven;
         position: relative;
       }
     }
@@ -68,7 +68,7 @@ ul.playlists {
       text-align: center;
     }
     a.small_playlist_user {
-      color: $black;
+      color: $font-color-one;
       font-size: 10px;
       overflow-wrap: break-word;
       word-wrap: break-word;

@@ -1,22 +1,27 @@
 @import 'color_mapping';
 
-$body-background: #000;
-
-$black: #000;
+$body-background: $black;
 
 $background-color-one: $grey1100;
+$background-color-two: $grey1000;
+$background-color-three: $grey100;
+$background-color-four: $grey1000;
+$background-color-five: $black;
 
+$font-color-one: $black;
+$font-color-two: $grey1000;
+$font-color-three: $grey900;
+$font-color-four: $grey800;
+$font-color-five: $grey500;
+$font-color-six: $grey50;
+$font-color-seven: $white;
 
-
-$white-text: pink;
-
-$dark-gray: $grey1000;
-$comment-text-gray: $grey900;
-$samo-gray: $grey800;
-$new-samo-gray: $grey500;
-$samo-light-gray: $grey200;
-$light-gray: $grey100; 
-$samo-background-gray: $grey50;
+$border-color-one: $black;
+$border-color-two: $grey500; 
+$border-color-three: $grey200; 
+$border-color-four: $grey100;
+$border-color-five: $grey50;
+$border-color-six: $white;
 
 $accent: $orangetone;
 
@@ -39,10 +44,14 @@ $about-stats-heading-text: $red600;
 
 $admin-spam-row-background: $orange100;
 
-
 $footer-forum-topics-accent: $orange600;
 $footer-bottom-background: $grey1100;
 $footer-bottom-link-text: $white;
 
 $edit-playlist-track-button-background: $grey200;
-$edit-playlist-track-button-background-hover: $grey800
+$edit-playlist-track-button-background-hover: $grey800;
+
+$default-button-background: $grey500;
+$default-button-background-hover: $grey800;
+
+$big-player-seekbar-color: $grey200;

@@ -1,11 +1,11 @@
 form#reset-password {
   input[type="text"] {
-    border: 1px solid $white;
+    border: 1px solid $border-color-six;
     border-radius: 4px;
     background-color: $background-color-two;
     margin-right: 10px;
     &:focus {
-      border: 1px solid $new-samo-gray;
+      border: 1px solid $border-color-two;
     }
   }
 }
