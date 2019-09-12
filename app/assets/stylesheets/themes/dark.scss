@@ -1,6 +1,7 @@
 @import 'color_mapping';
 
 $body-background: $black;
+$body-font: $white;
 
 $background-color-one: $grey1100;
 $background-color-two: $grey1000;
@@ -8,13 +9,13 @@ $background-color-three: $grey100;
 $background-color-four: $grey1000;
 $background-color-five: $black;
 
-$font-color-one: $black;
-$font-color-two: $grey1000;
-$font-color-three: $grey900;
+$font-color-one: $white;
+$font-color-two: $grey50;
+$font-color-three: $grey500;
 $font-color-four: $grey800;
-$font-color-five: $grey500;
-$font-color-six: $grey50;
-$font-color-seven: $white;
+$font-color-five: $grey1000;
+$font-color-six: $grey1100;
+$font-color-seven: $black;
 
 $border-color-one: $black;
 $border-color-two: $grey500; 
