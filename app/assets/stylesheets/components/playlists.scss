@@ -12,7 +12,7 @@ ul.playlists {
       margin-right: 0;
     }
     &.private {
-      background-color: $dark-gray;
+      background-color: $background-color-four;
       position: relative;
       .private_playlist_padlock {
         display: block;
@@ -27,7 +27,7 @@ ul.playlists {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
       }
       a.small_playlist_title {
-        color: $white-text;
+        color: $white;
         position: relative;
       }
     }
@@ -149,58 +149,3 @@ ul.playlists {
     }
   }
 }
-
-// .playlist {
-//   div.box {
-//     margin-bottom: 1px;
-//     padding-top: 9px;
-//     padding-left: 25px;
-//     background-color: $light_gray;
-//     h2 {
-//       font-size: 20px;
-//       font-weight: normal;
-//       line-height: 20px;
-//       margin: 0;
-//       margin-bottom: 4px;
-//       padding-right: 40px;
-//     }
-//     h3 {
-//       font-size: 12px;
-//       font-weight: normal;
-//       margin: 0;
-//       padding-bottom: 8px;
-//     }
-//   }
-//   div.info {
-//     position: relative;
-//     display: block;
-//     padding: 15px 15px 15px 20px;
-//     background-color: $samo-gray;
-//     div.cover {
-//       position: relative;
-//       float: left;
-//       overflow: hidden;
-//       width: 148px;
-//       height: 136px;
-//     }
-//     p.description {
-//       float: left;
-//       font-size: 12px;
-//       width: 360px;
-//       margin-left: 20px;
-//     }
-//     .play_time {
-//       font-weight: bold;
-//     }
-//   }
-//   .empty {
-//     position: relative;
-//     margin-bottom: 1px;
-//     padding: 10px 20px 10px 20px;
-//     background-color: $accent;
-//     a {
-//       font-weight: bold;
-//       text-decoration: underline;
-//     }
-//   }
-// }

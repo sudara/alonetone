@@ -20,10 +20,10 @@
         display: block;
 				&.current {
           background-color: $accent;
-          color: $white-text;
+          color: $white;
           padding-left: 12px;
           span {
-            color: $white-text;
+            color: $white;
           }
 				}
         &:hover {

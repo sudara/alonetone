@@ -303,11 +303,11 @@
               a {
                 background-color: $accent;;
                 border: 1px solid #DE6A00;
-                color: $white-text;
+                color: $white;
                 &:hover {
                   background-color: $accent;;
                   border: 1px solid #DE6A00;
-                  color: $white-text;
+                  color: $white;
                 }
               }
             }
@@ -320,7 +320,7 @@
               height: 26px;
               &:hover {
                 background-color: $edit-playlist-track-button-background-hover;
-                color: $white-text;
+                color: $white;
               }
             }
           }
