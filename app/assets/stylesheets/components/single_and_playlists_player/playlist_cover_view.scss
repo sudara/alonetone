@@ -66,7 +66,7 @@ body.cover-view {
     .playlist-options {
       width: 100%;
       height: 50px;
-      background-color: $dark-gray;
+      background-color: $background-color-four;
       font-family: $sans-font;
       border-radius: 0px;
       ul {
@@ -92,9 +92,9 @@ body.cover-view {
           float: left;
           height: 50px;
           border-right: 1px solid $black;
-          background-color: $dark-gray;
+          background-color: $background-color-four;
           &:hover {
-            background-color: $black;
+            background-color: $background-color-five;
           }
           a {
             font-size: 12px;

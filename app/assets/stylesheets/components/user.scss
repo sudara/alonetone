@@ -514,8 +514,8 @@ main {
         padding-bottom: 4px;
         padding-left: 0;
         flex-wrap: wrap;
-        background-color: $dark-gray;
-        color: $white-text;
+        background-color: $background-color-four;
+        color: $white;
         @include samo-shadow-and-radius();
         overflow: auto;
         li {

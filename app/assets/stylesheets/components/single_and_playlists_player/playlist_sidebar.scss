@@ -43,7 +43,7 @@
       }
       &:hover,
       &.active {
-        background-color: $dark-gray;
+        background-color: $background-color-four;
         a.position-name-time {
           color: $samo-background-gray;
           span.track-name {
@@ -70,8 +70,8 @@
         margin-left: 0;
         padding: 4px 3px 5px 6px;
         &:hover {
-          color: $white-text;
-          border-color: $white-text;
+          color: $white;
+          border-color: $white;
         }
       }
       a.play-button {
@@ -136,11 +136,11 @@
       margin-top: 0;
       margin-bottom: 0;
       li {
-        background-color: $dark-gray;
+        background-color: $background-color-four;
         overflow: auto;
         border-bottom: 1px solid black;
         &:hover {
-          background-color: black;
+          background-color: $background-color-four;
         }
         a {
           font-family: $sans-font;
