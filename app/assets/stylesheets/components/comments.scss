@@ -203,10 +203,10 @@
         padding-left: 20px;
         padding-top: 8px;
         padding-bottom: 8px;
-        color: $light-orange;
-        border-color: $private-orange;
+        color: $private-message-warning-text;
+        border-color: $private-message-warning-border;
         border-radius: 0 0 6px 6px;
-        background-color: $samo-dark-orange;
+        background-color: $private-message-warning-background;
         &.hidden {
           display: none;
         }
@@ -300,9 +300,9 @@
         height: 14px;
         text-align: center;
         text-transform: uppercase;
-        color: $private-red;
+        color: $private-message-flag-text;
         border-radius: 2px;
-        background-color: $light-orange;
+        background-color: $private-message-flag-background;
         text-indent: 0;
       }
       @media only screen and (max-width: 375px) {
