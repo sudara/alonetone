@@ -55,7 +55,7 @@
   margin-right: auto;
   top: 55px;
   height: 33px;
-  background-color: $white;
+  background-color: $background-color-one;
   z-index: 100;
   font-weight: bold;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
@@ -113,7 +113,7 @@ div.small_spinner {
 .errorExplanation {
   margin-bottom: 20px;
   padding: 20px 30px;
-  background-color: $white;
+  background-color: $background-color-one;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -153,7 +153,7 @@ div.small_spinner {
   z-index: 101;
   padding: 15px 0;
   text-align: center;
-  color: $white;
+  color: $white-text;
   background-color: $accent;
   @media #{$mobile} {
     padding: $baseline / 2;

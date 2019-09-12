@@ -53,7 +53,7 @@
 	position: relative;
 	height: 32px;
 	@include samo-shadow-and-radius();
-	background-color: $white;
+	background-color: $background-color-one;
 	box-shadow: none;
 	.pagination {
 		display: flex;

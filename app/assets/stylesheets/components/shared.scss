@@ -16,7 +16,7 @@ ul {
   display: flex;
   flex-direction: column;
   margin-bottom: $baseline * 2;
-  background-color: $white;
+  background-color: $background-color-one;
   justify-content: space-between;
   @include samo-shadow-and-radius();
   h1,
@@ -64,7 +64,7 @@ ul {
     height: 32px;
     line-height: 33px;
     @include samo-shadow-and-radius();
-    background-color: $white;
+    background-color: $background-color-one;
     box-shadow: none;
     font-size: 15px;
     font-family: $medium-sans-font;

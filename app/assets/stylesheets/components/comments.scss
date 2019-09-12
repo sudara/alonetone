@@ -91,7 +91,7 @@
   padding-top: 20px;
   padding-right: 15px;
   padding-left: 15px;
-  background-color: $light-gray;
+  background-color: $background-color-three;
   box-shadow: none;
   border-radius: 0 0 6px 6px;
   position: relative;
@@ -99,7 +99,7 @@
   top: -6px;
   .comment_form {
     textarea {
-      background-color: $white;
+      background-color: $background-color-one;
     }
     div.submit_wrapper {
       position: relative;
@@ -172,7 +172,7 @@
         color: $comment-text-gray;
         border: 1px solid $samo-light-gray;
         border-radius: 6px;
-        background-color: $samo-background-gray;
+        background-color: $background-color-two;
         @media #{$one-column} {
           font-size: 16px;
         }
@@ -213,7 +213,7 @@
         .only_user_name,
         .only_alonetone_mods {
           font-weight: bold;
-          color: $white;
+          color: $white-text;
         }
       }
       input.comment_submit {
@@ -228,7 +228,7 @@
 
 .comment {
   position: relative;
-  background-color: $samo-background-gray;
+  background-color: $background-color-two;
   &:last-child {
     border-bottom: 0;
     border-radius: 0 0 6px 6px;
@@ -250,7 +250,7 @@
     margin: 18px 10px 18px 50px;
     padding: 16px 16px 10px 16px;
     border-radius: 0 4px 4px 4px;
-    background-color: $white;
+    background-color: $background-color-one;
     box-shadow: none;
     &::before {
       position: absolute;

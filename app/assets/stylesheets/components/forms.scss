@@ -43,7 +43,7 @@ form {
     margin-bottom: $baseline;
     border: 1px solid $white;
     border-radius: 4px;
-    background-color: $samo-background-gray;
+    background-color: $background-color-two;
     font-size: 14px;
     &:focus {
       border: 1px solid $new-samo-gray;
@@ -73,7 +73,7 @@ input {
     width: 250px;
     border: 1px solid $white;
     border-radius: 4px;
-    background-color: $samo-background-gray;
+    background-color: $background-color-two;
     color: $dark-gray;
     &:focus {
       border: 1px solid $new-samo-gray;

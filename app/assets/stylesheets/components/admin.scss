@@ -20,10 +20,10 @@
         display: block;
 				&.current {
           background-color: $accent;
-          color: $white;
+          color: $white-text;
           padding-left: 12px;
           span {
-            color: $white;
+            color: $white-text;
           }
 				}
         &:hover {
@@ -82,7 +82,7 @@
         border: 1px solid #DDDDDD;
         border-radius: 5px;
         margin-bottom: 12px;
-        background-color: $white;
+        background-color: $background-color-one;
       }
     }
     
@@ -124,7 +124,7 @@
             border-top: 0;
           }
           &.deleted {
-              background-color: $samo-background-gray;
+              background-color: $background-color-two;
               box-shadow: inset 0 0 3px $samo-light-gray;
               input[value='Restore User'] {
                 background-color: $accent;

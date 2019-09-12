@@ -1,5 +1,5 @@
 header#site_header {
-  background-color: $white;
+  background-color: $background-color-one;
   box-shadow: 0 3px 4px -2px #65666627;
   height: 40px;
   .header_inner {
@@ -48,7 +48,7 @@ header#site_header {
     .user_dropdown {
       position: relative;
       float: right;
-      background-color: $light-gray;
+      background-color: $background-color-three;
       color: $black;
       .profile_link {
         font-size: 14px;
@@ -58,7 +58,7 @@ header#site_header {
         box-sizing: border-box;
         height: 40px;
         padding-top: 3px;
-        background-color: $white;
+        background-color: $background-color-one;
         span {
           line-height: 34px;
           display: block;
@@ -91,9 +91,9 @@ header#site_header {
           height: 26px;
           padding-right: 15px;
           padding-left: 15px;
-          background-color: $white;
+          background-color: $background-color-one;
           &:hover {
-            background-color: $light-gray;
+            background-color: $background-color-three;
             text-decoration: none;
           }
         }

@@ -51,13 +51,13 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   padding: 0 16px;
   text-align: center;
   text-decoration: none;
-  color: $white;
+  color: $white-text;
   border: 0;
   border-radius: 4px;
-  background-color: $new-samo-gray;
+  background-color: $default-button-background;
   box-shadow: none;
   &:hover {
-    background-color: $samo-gray;
+    background-color: $default-button-background-hover;
   }
   &:active {
     background-color: #eb7b0c;
