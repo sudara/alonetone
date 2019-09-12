@@ -25,7 +25,7 @@
                 <%= user_image(@user, variant: :original) %>
               </div>
               <div>
-                <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
+                <div><%= link_to asset.user.name, admin_users_path({filter_by: asset.user.email}) %></div>
                 <div><%= asset.user.ip %></div>
               </div>
             </div>
