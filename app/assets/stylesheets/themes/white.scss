@@ -20,12 +20,10 @@ $white: #ffffff; // 53 uses
 
 $red: #d3220c; // 2 uses
 $private-orange: #e02a02; // 2 uses
-$dark-orange: #8b370d; // 1 use
 $footer-orange: #de6a00; // 3 uses
-$samo-background-orange: #bda8a0; // 1 use
+$samo-background-orange: #bda8a0; // Just used in admin
 $orange: #da6d25; // 3 uses
 $samo-orange: #eb7b0c; // 46 uses
-$light-orange: #ffd1b0; // 2 uses
 
 $private-message-flag-background: $orange100;
 $private-message-flag-text: $orange800;
@@ -39,3 +37,5 @@ $ajax-fail-text: $red800;
 
 $ajax-success-border: $green400;
 $ajax-success-text: $green600;
+
+$about-stats-heading-text: $red800;
