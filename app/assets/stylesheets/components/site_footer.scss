@@ -9,7 +9,7 @@ footer#site_footer {
   color: $dark-gray;
   background-color: $samo-background-gray;
   h3 {
-    color: $footer-orange;
+    color: $footer-forum-topics-accent;
     line-height: 1.2;
     font-size: 12px;
     font-family: $medium-sans-font;
@@ -51,7 +51,7 @@ footer#site_footer {
         margin-top: 6px;
         font-family: $sans-font;
         font-weight: bold;
-        color: $footer-orange;
+        color: $footer-forum-topics-accent;
         display: block;
         float: right;
         font-size: 12px;
@@ -62,7 +62,7 @@ footer#site_footer {
             position: relative;
             top: 3px;
             .icon_caret_path {
-              stroke: $footer-orange;
+              stroke: $footer-forum-topics-accent;
             }
           }
         }
