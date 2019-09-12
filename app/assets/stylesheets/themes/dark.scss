@@ -1,8 +1,6 @@
-// site colors
+@import 'color_mapping';
 
 $body-background-color: #000;
-
-// colors
 
 $black: #000; // 17 uses
 $footer-bottom-background-gray: #272727; // 1 use
@@ -32,8 +30,8 @@ $light-orange: #ffd1b0; // 2 uses
 $samo-dark-orange: #f04e1a; // 2 uses
 $waveform-playing: #302f2f; // 1 use
 
-$ajax-fail-border-red: #ff1f75; // 1 use
-$ajax-fail-text-red: #b20035; // 1 use
+$ajax-fail-border-red: $red600; 
+$ajax-fail-text-red: $red800;
 
-$ajax-success-border-green: #67c906; // 1 use
-$ajax-success-text-green: #2b8800; // 1 use
+$ajax-success-border-green: $green400;
+$ajax-success-text-green: $green600;
