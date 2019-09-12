@@ -5,7 +5,7 @@
   width: 100%;
   min-height: 57px;
   border-bottom: 1px solid $light-gray;
-  background-color: $white;
+  background-color: $background-color-one;
   &.hover {
     .playIconSymbol {
       fill: $accent;
@@ -56,7 +56,7 @@
       height: 5px;
       padding-top: 2px;
       padding-bottom: 2px;
-      background-color: $samo-background-gray;
+      background-color: $background-color-two;
     }
     .played {
       height: 5px;
@@ -74,7 +74,7 @@
   .asset_top {
     position: relative;
     z-index: 1;
-    background-color: $white;
+    background-color: $background-color-one;
     .asset_top_row {
       display: flex;
       div.button {
@@ -179,13 +179,13 @@
       &.open {
         div.button,
         div.title {
-          background-color: $light-gray;
+          background-color: $background-color-three;
         }
       }
       &.playing {
         div.button,
         div.title {
-          background-color: $light-gray;
+          background-color: $background-color-three;
         }
         div.button {
           a {
@@ -255,7 +255,7 @@
       padding-bottom: 0;
       padding-left: 16px;
       border-radius: 6px;
-      background-color: $samo-background-gray;
+      background-color: $background-color-two;
       .alonetoner {
         width: 50px;
         height: 50px;

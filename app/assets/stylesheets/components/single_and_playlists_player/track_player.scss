@@ -4,11 +4,11 @@
   width: 100%;
   height: 80px;
   margin-bottom: 24px;
-  background-color: $samo-background-gray;
+  background-color: $background-color-two;
   .play-button-container {
     min-width: 80px;
     height: 80px;
-    background-color: $white;
+    background-color: $background-color-one;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     .play-button, .pause-button {
@@ -38,9 +38,8 @@
       top: 0;
       width: 1px;
       height: 100%;
-      background-color: #aaa;
       display: none;
-      background-color: $new-samo-gray;
+      background-color: $big-player-seekbar-color;
     }
     &:hover .seekbar {
       display: block;
@@ -92,7 +91,7 @@
         background-color: $accent;
         font-variant-numeric: tabular-nums;
         text-align: center;
-        color: $white;
+        color: $white-text;
         font-family: $medium-sans-font;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;

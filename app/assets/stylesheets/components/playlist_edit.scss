@@ -243,7 +243,7 @@
     }
     .playlist_size {
       border-radius: 4px;
-      background-color: $samo-background-gray;
+      background-color: $background-color-two;
       font-size: 13px;
       color: $samo-gray;
       text-align: center;
@@ -288,7 +288,7 @@
       }
       #playlist_tabs {
         display: flex;
-        background-color: $light-gray;
+        background-color: $background-color-three;
         height: 36px;
         box-sizing: border-box;
         #playlist_source_options {
@@ -303,24 +303,24 @@
               a {
                 background-color: $accent;;
                 border: 1px solid #DE6A00;
-                color: $white;
+                color: $white-text;
                 &:hover {
                   background-color: $accent;;
                   border: 1px solid #DE6A00;
-                  color: $white;
+                  color: $white-text;
                 }
               }
             }
             a {
               @include default-button();
-              background-color: $white;
+              background-color: $background-color-one;
               color: $samo-gray;
               font-family: $medium-sans-font;
               font-weight: normal;
               height: 26px;
               &:hover {
                 background-color: $edit-playlist-track-button-background-hover;
-                color: $white;
+                color: $white-text;
               }
             }
           }

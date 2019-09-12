@@ -34,16 +34,16 @@ body main #columns {
           display: block;
           box-sizing: border-box;
           border-bottom: 1px solid $light-gray;
-          color: $white;
+          color: $white-text;
           background-color: $accent;
           a {
             display: block;
             width: 100%;
             color: $dark-gray;
-            background-color: $white;
+            background-color: $background-color-one;
             text-decoration: none;
             &:hover {
-              background-color: $light-gray;
+              background-color: $background-color-three;
             }
           }
         }

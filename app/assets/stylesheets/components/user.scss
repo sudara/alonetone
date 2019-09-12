@@ -242,7 +242,7 @@ main {
             }
             div.follow_button {
               @include default_button();
-              background-color: $white;
+              background-color: $background-color-one;
               color: $accent;
               margin-left: 24px;
               margin-right: 8px;
@@ -250,7 +250,7 @@ main {
                 margin-left: 0;
               }
               &:hover {
-                background-color: $white;
+                background-color: $background-color-one;
               }
             }
             svg {
@@ -294,7 +294,7 @@ main {
     #user_card_area {
       display: flex;
       flex-wrap: wrap;
-      background-color: $white;
+      background-color: $background-color-one;
       @include samo-shadow-and-radius();
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15),
         0px 6px 24px rgba(134, 134, 134, 0.75);
@@ -337,7 +337,7 @@ main {
         .user_card_content_divider {
           height: 1px;
           margin: 0 24px;
-          background-color: $light-gray;
+          background-color: $background-color-three;
         }
         .user_location {
           font-weight: bold;
@@ -358,7 +358,7 @@ main {
         display: block;
       }
       > div {
-        background-color: $white;
+        background-color: $background-color-one;
         @include samo-shadow-and-radius();
         flex: 1;
         padding: 16px;
@@ -392,7 +392,7 @@ main {
         display: flex;
         flex-wrap: wrap;
         > div {
-          background-color: $white;
+          background-color: $background-color-one;
           @include samo-shadow-and-radius();
           flex: 1;
           padding: 16px;
@@ -441,7 +441,7 @@ main {
         display: block;
       }
       .area_content {
-        background-color: $light-gray;
+        background-color: $background-color-three;
         @include samo-shadow-and-radius();
         .user_ip {
           padding: 16px;
@@ -486,7 +486,7 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-      background-color: $light-gray;
+      background-color: $background-color-three;
       @include samo-shadow-and-radius();
       padding: 12px 16px 4px 16px;
       box-sizing: border-box;
@@ -515,7 +515,7 @@ main {
         padding-left: 0;
         flex-wrap: wrap;
         background-color: $dark-gray;
-        color: $white;
+        color: $white-text;
         @include samo-shadow-and-radius();
         overflow: auto;
         li {
@@ -586,7 +586,7 @@ main {
           margin-top: 10px;
           padding-right: $baseline;
           padding-left: $baseline / 2;
-          background-color: $white;
+          background-color: $background-color-one;
           display: flex;
           .listen_user {
             margin-right: $baseline / 2;

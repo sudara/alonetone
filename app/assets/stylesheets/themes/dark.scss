@@ -1,11 +1,14 @@
 @import 'color_mapping';
 
 $body-background: #000;
-$body-background: pink;
 
-$white: #ffffff; // 53 uses
-$black: #000; // 17 uses
+$black: #000;
 
+$background-color-one: $grey1100;
+
+
+
+$white-text: pink;
 
 $dark-gray: $grey1000;
 $comment-text-gray: $grey900;
@@ -14,8 +17,6 @@ $new-samo-gray: $grey500;
 $samo-light-gray: $grey200;
 $light-gray: $grey100; 
 $samo-background-gray: $grey50;
-
-
 
 $accent: $orangetone;
 
@@ -38,8 +39,10 @@ $about-stats-heading-text: $red600;
 
 $admin-spam-row-background: $orange100;
 
-$footer-bottom-background: $grey1100;
+
 $footer-forum-topics-accent: $orange600;
+$footer-bottom-background: $grey1100;
+$footer-bottom-link-text: $white;
 
 $edit-playlist-track-button-background: $grey200;
 $edit-playlist-track-button-background-hover: $grey800
