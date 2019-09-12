@@ -98,7 +98,7 @@ input {
 
 .field_with_errors {
   input {
-    border: 1px dotted $red;
+    border: 1px dotted $warning;
   }
 }
 
@@ -147,7 +147,7 @@ input {
 [type="checkbox"]:not(:checked) + label:active:before,
 [type="checkbox"]:checked + label:active:before {
   border: 1px solid #d46a00 !important;
-  background-color: $samo-orange !important;
+  background-color: $accent !important;
 }
 
 [type="checkbox"]:not(:checked) + label:active:after {

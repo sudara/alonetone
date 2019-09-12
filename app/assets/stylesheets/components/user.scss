@@ -25,7 +25,7 @@ main {
       min-width: 320px;
     }
     h2 {
-      color: $samo-orange;
+      color: $accent;
       padding-left: 16px;
       margin-bottom: 16px;
       line-height: 1;
@@ -60,7 +60,7 @@ main {
       grid-area: playlists;
 
       h2 {
-        color: $samo-orange;
+        color: $accent;
       }
       ul {
         margin: 0;
@@ -243,7 +243,7 @@ main {
             div.follow_button {
               @include default_button();
               background-color: $white;
-              color: $samo-orange;
+              color: $accent;
               margin-left: 24px;
               margin-right: 8px;
               @media #{$mobile} {
@@ -341,7 +341,7 @@ main {
         }
         .user_location {
           font-weight: bold;
-          color: $samo-orange;
+          color: $accent;
           font-size: 14px;
           padding: 16px 36px;
         }
@@ -500,7 +500,7 @@ main {
       }
       a.edit_profile--delete {
         @include default-button("admin");
-        background-color: $red;
+        background-color: $warning;
       }
     }
 

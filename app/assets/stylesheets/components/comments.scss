@@ -14,7 +14,7 @@
 .comments_columns {
   h2 {
     padding-left: 16px;
-    color: $samo-orange;
+    color: $accent;
     margin-bottom: 16px;
     margin-top: 0px;
     line-height: 1;
@@ -151,7 +151,7 @@
           color: $comment-text-gray;
         }
         a {
-          color: $samo-orange;
+          color: $accent;
         }
         img {
           float: left;
@@ -335,7 +335,7 @@
         a:first-child {
           font-weight: bold;
           margin-right: 22px;
-          color: $samo-orange;
+          color: $accent;
         }
         a:last-child {
           font-weight: bold;

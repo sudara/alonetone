@@ -19,7 +19,7 @@
         line-height: 34px;
         display: block;
 				&.current {
-          background-color: $samo-orange;
+          background-color: $accent;
           color: $white;
           padding-left: 12px;
           span {
@@ -127,7 +127,7 @@
               background-color: $samo-background-gray;
               box-shadow: inset 0 0 3px $samo-light-gray;
               input[value='Restore User'] {
-                background-color: $samo-orange;
+                background-color: $accent;
                 opacity: 1;
               }
           }

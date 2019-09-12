@@ -25,7 +25,7 @@
       a {
         text-decoration: underline;
         &:hover {
-          color: $samo-orange;
+          color: $accent;
         }
       }
       ul {
@@ -52,7 +52,7 @@
         margin-left: 6px;
         text-transform: uppercase;
         background-color: $white;
-        color: $samo-orange;
+        color: $accent;
       }
     }
     .download-link {
@@ -258,7 +258,7 @@
       a {
         text-decoration: underline;
         &:hover {
-          color: $samo-orange;
+          color: $accent;
         }
       }
       .edit-save {

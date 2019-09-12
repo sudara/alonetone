@@ -23,7 +23,7 @@
       margin-right: 0;
     }
     h2 {
-      color: $samo-orange;
+      color: $accent;
       margin-bottom: 0;
     }
     @media #{$one-column} {
@@ -53,7 +53,7 @@
         }
         li.current {
           padding: 0 15px;
-          background: $samo-orange;
+          background: $accent;
           color: $white;
         }
       }

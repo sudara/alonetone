@@ -135,7 +135,7 @@ div.small_spinner {
     float: right;
     margin-top: -31px;
     margin-right: 0;
-    color: $samo-orange;
+    color: $accent;
   }
   li {
     margin-bottom: 5px;
@@ -154,7 +154,7 @@ div.small_spinner {
   padding: 15px 0;
   text-align: center;
   color: $white;
-  background-color: $samo-orange;
+  background-color: $accent;
   @media #{$mobile} {
     padding: $baseline / 2;
     font-size: 14px;

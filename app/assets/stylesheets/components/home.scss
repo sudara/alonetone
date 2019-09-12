@@ -31,7 +31,7 @@
 
   h2 {
     padding-left: 16px;
-    color: $samo-orange;
+    color: $accent;
     margin-bottom: 16px;
     margin-top: 0px;
     line-height: 1;
@@ -52,7 +52,7 @@
       margin-bottom: $baseline * 1.5;
     }
     .latest-playlists-header {
-      color: $samo-orange;
+      color: $accent;
       @media #{$mobile} {
         width: 96%;
       }

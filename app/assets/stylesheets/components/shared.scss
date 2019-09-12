@@ -31,7 +31,7 @@ ul {
     margin-top: 0;
     margin-bottom: 1px;
     padding: 0 0 0 $baseline / 2;
-    color: $samo-orange;
+    color: $accent;
     border-bottom: 1px solid $light-gray;
     background-color: transparent;
     &.static_content_heading {
@@ -78,14 +78,14 @@ ul {
         svg {
           height: 20px;
           .icon_caret_path {
-            stroke: $samo-orange;
+            stroke: $accent;
           }
         }
       }
     }
     &:hover {
       text-decoration: none;
-      color: $samo-orange;
+      color: $accent;
     }
   }
 }
