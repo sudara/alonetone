@@ -4,7 +4,7 @@
   width: 100%;
   height: 80px;
   margin-bottom: 24px;
-  background-color: $samo-alternate-background-gray;
+  background-color: $samo-background-gray;
   .play-button-container {
     min-width: 80px;
     height: 80px;
@@ -57,7 +57,7 @@
     font-size: 10px;
     font-variant-numeric: tabular-nums;
     text-align: center;
-    color: $gray;
+    color: $samo-gray;
   }
 
   .progress-container {
@@ -124,7 +124,7 @@
     bottom: -2px;
     a {
       text-decoration: none;
-      color: $gray;
+      color: $samo-gray;
     }
   }
 }

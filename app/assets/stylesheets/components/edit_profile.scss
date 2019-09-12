@@ -2,7 +2,7 @@ form#reset-password {
   input[type="text"] {
     border: 1px solid $white;
     border-radius: 4px;
-    background-color: $samo-alternate-background-gray;
+    background-color: $samo-background-gray;
     margin-right: 10px;
     &:focus {
       border: 1px solid $new-samo-gray;

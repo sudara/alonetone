@@ -43,7 +43,7 @@ form {
     margin-bottom: $baseline;
     border: 1px solid $white;
     border-radius: 4px;
-    background-color: $samo-alternate-background-gray;
+    background-color: $samo-background-gray;
     font-size: 14px;
     &:focus {
       border: 1px solid $new-samo-gray;
@@ -73,7 +73,7 @@ input {
     width: 250px;
     border: 1px solid $white;
     border-radius: 4px;
-    background-color: $samo-alternate-background-gray;
+    background-color: $samo-background-gray;
     color: $dark-gray;
     &:focus {
       border: 1px solid $new-samo-gray;
@@ -167,7 +167,7 @@ input {
   content: "";
   border: 1px solid $samo-light-gray;
   border-radius: 2.5px;
-  background-color: $samo-alternate-background-gray !important;
+  background-color: $samo-background-gray !important;
 }
 
 [type="checkbox"]:checked + label:before {

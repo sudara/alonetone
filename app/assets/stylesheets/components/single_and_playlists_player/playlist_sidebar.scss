@@ -37,17 +37,17 @@
       clear: both;
       overflow: auto;
       min-height: 35px;
-      border-top: 1px solid $lightest-gray;
+      border-top: 1px solid $samo-background-gray;
       &:last-child {
-        border-bottom: 1px solid $lightest-gray;
+        border-bottom: 1px solid $samo-background-gray;
       }
       &:hover,
       &.active {
         background-color: $dark-gray;
         a.position-name-time {
-          color: $lightest-gray;
+          color: $samo-background-gray;
           span.track-name {
-            color: $lightest-gray;
+            color: $samo-background-gray;
           }
           span.track-position {
             color: $new-samo-gray;
@@ -122,7 +122,7 @@
           font-size: 12px;
           margin-right: 12px;
           font-variant-numeric: tabular-nums;
-          color: $gray;
+          color: $samo-gray;
         }
       }
     }
@@ -185,7 +185,7 @@
           .action-text {
             font-size: 10px;
             float: right;
-            color: $gray;
+            color: $samo-gray;
             position: relative;
             top: 3px;
           }
