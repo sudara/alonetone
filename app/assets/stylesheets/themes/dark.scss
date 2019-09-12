@@ -18,7 +18,6 @@ $samo-alternate-background-gray: #f5f5f5; // 11 uses
 $lightest-gray: #f9f9f9; // 5 uses
 $white: #ffffff; // 53 uses
 
-$private-red: #f04e1a; // 1 use
 $red: #d3220c; // 2 uses
 $private-orange: #e02a02; // 2 uses
 $dark-orange: #8b370d; // 1 use
@@ -27,11 +26,16 @@ $samo-background-orange: #bda8a0; // 1 use
 $orange: #da6d25; // 3 uses
 $samo-orange: #eb7b0c; // 46 uses
 $light-orange: #ffd1b0; // 2 uses
-$samo-dark-orange: #f04e1a; // 2 uses
-$waveform-playing: #302f2f; // 1 use
 
-$ajax-fail-border-red: $red600; 
-$ajax-fail-text-red: $red800;
+$private-message-flag-background: $orange100;
+$private-message-flag-text: $orange800;
 
-$ajax-success-border-green: $green400;
-$ajax-success-text-green: $green600;
+$private-message-warning-background: $red500;
+$private-message-warning-border: $red600;
+$private-message-warning-text: $orange100;
+
+$ajax-fail-border: $red600; 
+$ajax-fail-text: $red800;
+
+$ajax-success-border: $green400;
+$ajax-success-text: $green600;

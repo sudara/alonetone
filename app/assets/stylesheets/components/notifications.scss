@@ -11,10 +11,10 @@
   height: 0;
   &.ajax_fail {
     height: 22px;
-    border: 1px solid $ajax-fail-border-red;
+    border: 1px solid $ajax-fail-border;
     > div {
       padding-right: 2px;
-      color: $ajax-fail-text-red;
+      color: $ajax-fail-text;
       padding-top: 6.5px;
       &::after {
         position: absolute;
@@ -26,10 +26,10 @@
   }
   &.ajax_success {
     height: 22px;
-    border: 1px solid $ajax-success-border-green;
+    border: 1px solid $ajax-success-border;
     > div {
       padding-right: 2px;
-      color: $ajax-success-text-green;
+      color: $ajax-success-text;
       padding-top: 6.5px;
       &::after {
         position: absolute;
@@ -60,11 +60,11 @@
   font-weight: bold;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   &.ajax_success {
-    border: 1px solid $ajax-success-border-green !important;
+    border: 1px solid $ajax-success-border !important;
     height: 33px;
   }
   &.ajax_fail {
-    border: 1px solid $ajax-fail-border-red !important;
+    border: 1px solid $ajax-fail-border !important;
     height: 33px;
   }
   &.ajax_success > div {
