@@ -108,7 +108,7 @@ body.cover-view {
             padding-top: 12px;
             padding-bottom: 0;
             text-decoration: none;
-            color: $lightest-gray;
+            color: $samo-background-gray;
             background-image: image-url("svg/icon_playlist_link.svg");
             background-size: 19px 19px;
             background-repeat: no-repeat;
@@ -122,7 +122,7 @@ body.cover-view {
               text-align: left;
               font-size: 10px;
               display: block;
-              color: $gray;
+              color: $samo-gray;
 
             }
             &.spotify {

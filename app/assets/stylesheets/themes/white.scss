@@ -1,21 +1,20 @@
 @import 'color_mapping';
 
-$body-background-color: #f4f4f4;
+$body-background: #f4f4f4;
 
 $black: #000; // 17 uses
-$footer-bottom-background-gray: #272727; // 1 use
 $dark-gray: #353535; // 27 uses
 $comment-text-gray: #4f4d4d; // 9 uses
 $samo-gray: #868686; // 33 uses
-$gray: #999; // 6 uses
-$comment-label-gray: #969393; // 2 uses 
+$samo-gray: #999; // 6 uses
+$samo-gray: #969393; // 2 uses 
 $new-samo-gray: #a6abab; // 22 uses
 $samo-light-gray: #d7dbdb; // 13 uses
-$playlist-button-background-gray: #c4c4c4;  // 4 uses
+
 $light-gray: #eeeeee; // 21 uses
 $samo-background-gray: #f1f2f2; // 3 uses
-$samo-alternate-background-gray: #f5f5f5; // 11 uses
-$lightest-gray: #f9f9f9; // 5 uses
+$samo-background-gray: #f5f5f5; // 11 uses
+$samo-background-gray: #f9f9f9; // 5 uses
 $white: #ffffff; // 53 uses
 
 $accent: $orangetone;
@@ -39,4 +38,8 @@ $about-stats-heading-text: $red600;
 
 $admin-spam-row-background: $orange100;
 
+$footer-bottom-background: $grey1100;
 $footer-forum-topics-accent: $orange600;
+
+$edit-playlist-track-button-background: $grey200;  // 4 uses
+$edit-playlist-track-button-background-hover: $grey800

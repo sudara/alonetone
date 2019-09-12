@@ -139,7 +139,7 @@
         font-size: 12px;
         line-height: 20px;
         overflow: auto;
-        color: $comment-label-gray;
+        color: $samo-gray;
         font-family: $medium-sans-font;
         margin-top: 9px;
         padding-left: 10px;
@@ -172,7 +172,7 @@
         color: $comment-text-gray;
         border: 1px solid $samo-light-gray;
         border-radius: 6px;
-        background-color: $samo-alternate-background-gray;
+        background-color: $samo-background-gray;
         @media #{$one-column} {
           font-size: 16px;
         }
@@ -228,7 +228,7 @@
 
 .comment {
   position: relative;
-  background-color: $samo-alternate-background-gray;
+  background-color: $samo-background-gray;
   &:last-child {
     border-bottom: 0;
     border-radius: 0 0 6px 6px;
@@ -265,7 +265,7 @@
     .comment_user_text {
       font-size: 11px;
       font-weight: normal;
-      color: $comment-label-gray;
+      color: $samo-gray;
       a,
       a:visited {
         font-weight: bold;
