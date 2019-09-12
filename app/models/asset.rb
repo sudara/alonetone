@@ -17,7 +17,9 @@ class Asset < ApplicationRecord
   attribute :user_agent, :string
   serialize :waveform, Array
 
-  scope :published,       -> { where(private: false) }
+  scope :published,       -> { with_user.where(private: false) }
+  scope :with_user,       -> { joins(:user).where('users.id IS NOT NULL AND users.deleted_at IS NULL') }
+
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
@@ -28,10 +30,9 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
-  scope :with_user,       -> { joins(:user).where('users.id IS NOT NULL') }
   scope :recently_updated, -> { order('assets.updated_at DESC') }
 
-  belongs_to :user, counter_cache: true
+  belongs_to :user, -> { with_deleted }, counter_cache: true
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
   has_one :greenfield_post, class_name: '::Greenfield::Post'
