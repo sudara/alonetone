@@ -1,4 +1,4 @@
-guard :rspec, cmd: 'bundle exec rspec', all_on_start: false, all_after_pass: false do
+guard :rspec, cmd: 'bundle exec rspec', failed_mode: :focus, ll_on_start: false, all_after_pass: false do
   directories %w(app config lib spec)
   watch('spec/spec_helper.rb')                        { "spec" }
   watch('spec/rails_helper.rb')                       { "spec" }
