@@ -17,9 +17,7 @@ class Asset < ApplicationRecord
   attribute :user_agent, :string
   serialize :waveform, Array
 
-  scope :published,       -> { with_user.where(private: false) }
-  scope :with_user,       -> { joins(:user).where('users.id IS NOT NULL AND users.deleted_at IS NULL') }
-
+  scope :published,       -> { where(private: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
@@ -32,7 +30,12 @@ class Asset < ApplicationRecord
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
   scope :recently_updated, -> { order('assets.updated_at DESC') }
 
-  belongs_to :user, -> { with_deleted }, counter_cache: true
+  belongs_to :user, counter_cache: true
+  belongs_to :user_object,
+    -> { with_deleted },
+    class_name: 'User',
+    foreign_key: 'user_id'
+
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
   has_one :greenfield_post, class_name: '::Greenfield::Post'
@@ -195,7 +198,7 @@ class Asset < ApplicationRecord
   def self.filter_by(filter)
     case filter
     when "deleted"
-      only_deleted.with_user.where(is_spam: false).order('deleted_at DESC')
+      only_deleted.where(is_spam: false).order('deleted_at DESC')
     when "is_spam"
       with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
