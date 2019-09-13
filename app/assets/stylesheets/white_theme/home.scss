@@ -61,16 +61,12 @@
       margin-bottom: 0;
       li {
         margin-bottom: 0;
+        width: calc( 25% - 20px);
       }
-      @media only screen and (max-width: 1038px) {
-      	li {
-          width: calc( 25% - 20px);
-      	}
-      }
+
       @media only screen and (max-width: 798px) {
       	li {
-          width: calc( 33% - 16.77px);
-
+          width: calc( 33.33333% - 17.77px);
       		&:nth-child(1), &:nth-child(2), &:nth-child(3) {
       			display: block;
           }
