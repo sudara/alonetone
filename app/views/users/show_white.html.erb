@@ -172,10 +172,12 @@
        <%= @user.name %> doesn't have anything to say, unfortunately...
        <% end %>
      </div>
-     <div class="user_card_content_divider"></div>
-     <div class="user_location">
-        <%= user_location(@profile) %>
-     </div>
+     <% if (user_location(@profile).length > 0) %>
+      <div class="user_card_content_divider"></div>
+      <div class="user_location">
+          <%= user_location(@profile) %>
+      </div>
+     <% end %>
     </div>
   </div>
   <% if @user.followees.present? %>
