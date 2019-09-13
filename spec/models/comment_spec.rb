@@ -32,7 +32,7 @@ RSpec.describe Comment, type: :model do
       expect(new_comment.user_id).to eq(assets(:valid_mp3).user_id)
     end
 
-    it "should not allow a dupe within same hour (same content/ip)" do
+    it "should not allow a dupe within an hour (same content/ip)" do
       body = comments(:valid_comment_on_asset_by_user).body
       ip = comments(:valid_comment_on_asset_by_user).remote_ip
       comment1 = asset.comments.create(body: body, remote_ip: ip)
@@ -50,7 +50,7 @@ RSpec.describe Comment, type: :model do
       end
     end
 
-    it "should not consider two different emoji duplicates" do
+    it "should not consider two different single emoji duplicates" do
       ip = comments(:valid_comment_on_asset_by_user).remote_ip
       comment1 = asset.comments.create(body: "🤑", remote_ip: ip)
       comment2 = asset.comments.new(body: "💀", remote_ip: ip)

@@ -37,7 +37,11 @@ class Comment < ActiveRecord::Base
                   user_role: proc { role },
                   permalink: proc { commentable.try(:full_permalink) }
 
+  # Poor man's anti-spam helper
   def duplicate?
+    # Allow single emojis to be posted multiple times
+    return false if body.length == 1
+
     Comment.where(remote_ip: remote_ip, body: body).where('created_at > ?', 1.hour.ago).first.present?
   end
 
