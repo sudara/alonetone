@@ -22,15 +22,15 @@
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div class="avatar">
-                <%= user_image(@user, variant: :original) %>
+                <%= user_image(asset.user_object, variant: :original) %>
               </div>
               <div>
-                <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
-                <div><%= asset.user.ip %></div>
+                <div><%= link_to asset.user_object.name, user_home_path(asset.user_object) %></div>
+                <div><%= asset.user_object.ip %></div>
               </div>
             </div>
             <div class="track_column">
-              <div><%= link_to asset.title, user_track_path(asset.user, asset.permalink) %></div>
+              <div><%= link_to asset.title, user_track_path(asset.user_object, asset.permalink) %></div>
               <div><%= truncate(asset.description, length: 80) %></div>
               <div>N comments / N listens</div>
             </div>
