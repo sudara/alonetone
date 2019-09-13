@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def update
     @user.profile.update(profile_params)
-    if @user.spam?
+    if false #@user.spam?
       @user.update_attribute :is_spam, true
       # delete all user's associations
       UserCommand.new(@user).soft_delete_with_relations
