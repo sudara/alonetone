@@ -332,6 +332,9 @@
       }
     }
     .playlist_asset {
+      a.track_link {
+        margin-right: 50px;
+      }
       .add {
         display: flex;
       }
