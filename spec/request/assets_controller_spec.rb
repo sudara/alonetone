@@ -35,18 +35,6 @@ RSpec.describe AssetsController, type: :request do
 
     # take the latest published (where(private: false)) asset to make sure it
     # should have been displayed on the page
-    it 'should not display an active asset whose user was accidentally deleted' do
-      asset = Asset.published.order('hotness DESC').includes(user: :pic).limit(2).last
-      get '/', params: { white: true }
-      expect(response.body).to include(asset.title)
-
-      asset.user.soft_delete
-      asset.reload
-      get '/', params: { white: true }
-      expect(asset.soft_deleted?).to eq(false)
-      expect(response.body).not_to include(asset.title)
-    end
-
     it 'should not display a deleted asset whose user was also deleted' do
       asset = Asset.published.order('hotness DESC').includes(user: :pic).limit(2).last
       get '/', params: { white: true }

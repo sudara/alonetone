@@ -15,12 +15,13 @@ RSpec.describe SearchController, type: :controller do
       expect(assigns(:assets)).not_to be_present
     end
 
-    it 'should not return results for asset with deleted soft_deleted user' do
+    it 'should not return results for soft_deleted.asset with deleted soft_deleted user' do
       asset = assets(:valid_asset_to_test_spam_on_latest)
       get :index, params: { query: "#{asset.title}" }
       expect(assigns(:assets)).to include(assets(:valid_asset_to_test_spam_on_latest))
 
-      asset.user.soft_delete
+      UserCommand.new(asset.user).soft_delete_with_relations
+
       get :index, params: { query: "#{asset.title}" }
       expect(assigns(:assets)).not_to be_present
     end
