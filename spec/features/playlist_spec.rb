@@ -9,8 +9,6 @@ RSpec.describe 'playlists', type: :feature, js: true do
       first_track.hover
       Percy.snapshot(page, name: 'Playlist Cover')
 
-      pause_animations
-      convert_canvas_to_image
       first_track.find('a:first-child').click
 
       # The above click will be an ajax request
@@ -19,6 +17,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # so let's specify one before we snap
       expect(page).to have_selector(".player")
       convert_canvas_to_image
+      pause_animations
       Percy.snapshot(page, name: 'Playlist Track Loading')
 
       # Navigating away and back, we should still be playing
@@ -26,9 +25,11 @@ RSpec.describe 'playlists', type: :feature, js: true do
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
-      sleep 2
+      sleep 1
+      find('.waveform').click(x: 200, y: 10)
+      find('.play-button-container a').click
       convert_canvas_to_image
-      Percy.snapshot(page, name: 'Playlist Track Playing')
+      Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
   end
 
