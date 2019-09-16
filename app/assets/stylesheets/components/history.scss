@@ -1,4 +1,9 @@
 .history {
+  .columns_header {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   h2 {
     padding-left: 16px;
     color: $accent;

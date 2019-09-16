@@ -3,7 +3,9 @@
   
   <div class="history">
 
-  <%= render partial: 'shared/back_to_artist' %>
+    <div class="columns_header">
+      <%= render partial: 'shared/back_to_artist' %>
+    </div>
 
   <% content_for :left do %>
     <h2><%= @user.name %>'s listening history</h2>
