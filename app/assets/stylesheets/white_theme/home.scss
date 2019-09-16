@@ -63,7 +63,6 @@
         margin-bottom: 0;
         width: calc( 25% - 20px);
       }
-
       @media only screen and (max-width: 798px) {
       	li {
           width: calc( 33.33333% - 17.77px);
@@ -78,7 +77,6 @@
       		}
       	}
       }
-
       @media #{$one-column} {
         justify-content: space-between;
         margin-bottom: -$baseline * 1.5;
@@ -95,7 +93,6 @@
           }
         }
       }
-
       @media #{$mobile} {
         width: 100%;
         margin-bottom: -$baseline * .75;
