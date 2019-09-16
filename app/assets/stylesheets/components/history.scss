@@ -1,0 +1,59 @@
+.history {
+  h2 {
+    padding-left: 16px;
+    color: $accent;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    line-height: 1;
+  }
+  .listen {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    padding-right: $baseline;
+    padding-left: $baseline / 2;
+    display: flex;
+    .listen_user {
+      margin-right: $baseline / 2;
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .listen_details {
+      font-size: 10px;
+      line-height: 11px;
+      overflow: hidden;
+      height: 40px;
+      min-height: 25px;
+      padding-top: 5px;
+      flex-grow: 1;
+      a {
+        font-size: 10px;
+        font-weight: bold;
+      }
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
+    }
+  }
+  #left {
+    @media #{$one-column} {
+      margin-bottom: $baseline * 2;
+    }
+  }
+  #right {
+    .box {
+      overflow: hidden;
+      margin-bottom: 0;
+      > :last-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+form#reset-password {
+  input[type="text"] {
+    border: 1px solid $border-color-six;
+    border-radius: 4px;
+    background-color: $background-color-two;
+    margin-right: 10px;
+    &:focus {
+      border: 1px solid $border-color-two;
+    }
+  }
+}
+
+.settings-box {
+  h2 {
+    margin-bottom: $baseline;
+  }
+  .static_content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    &:last-child {
+      padding-top: $baseline !important;
+    }
+  }
+  select {
+    margin-top: 6px;
+    max-width: 100%;
+  }
+}
+
+.edit-your-profile-box {
+  .static_content {
+    &:last-child {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    input[type="text"] {
+      width: 190px;
+    }
+    select {
+      max-width: 100%;
+    }
+  }
+}
+
+.change-your-picture-box {
+  br {
+    display: none;
+  }
+  form {
+    margin-top: $baseline;
+    input:last-child {
+      display: block;
+      margin-top: $baseline;
+    }
+  }
+}
+
+.your-account-box {
+  .static_content:last-child {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    .static_content {
+      padding: 0 !important;
+      padding-bottom: $baseline !important;
+      input:last-child {
+        margin-top: $baseline !important;
+      }
+    }
+  }
+}
