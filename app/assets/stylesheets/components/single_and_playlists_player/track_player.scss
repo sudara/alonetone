@@ -1,0 +1,147 @@
+.player {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 80px;
+  margin-bottom: 24px;
+  background-color: $background-color-two;
+  .play-button-container {
+    min-width: 80px;
+    height: 80px;
+    background-color: $background-color-one;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    .play-button, .pause-button {
+      position: relative;
+      top: 11px;
+      left: 9px;
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+    }
+  }
+  > i {
+    display: none !important;
+  }
+  .waveform {
+    top: 0;
+    right: 0;
+    padding-top: 14.2px;
+    flex-grow: 1;
+    user-select: none;
+    position: relative;
+     > canvas {
+      width: 100%!important;
+    }
+    .seekbar {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      display: none;
+      background-color: $big-player-seekbar-color;
+    }
+    &:hover .seekbar {
+      display: block;
+    }
+  }
+  .time {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 0px;
+    padding-top: 2.5px;
+    height: 13px;
+    width: 80px;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: $font-color-four;
+  }
+
+  .progress-container {
+    position: absolute;
+    pointer-events: none;
+    left: 79px;
+    height: 80px;
+    width: calc(100% - 79px);
+    .progress-container-inner {
+      position: absolute;
+      height: 80px;
+      display: none;
+      &.visible {
+        display: block;
+      }
+      .line-progress {
+        position: absolute;
+        width: 1px;
+        height: 80px;
+        background-color: $accent;
+        left: 0;
+      }
+      .time-progress {
+        position: absolute;
+        display: block;
+        bottom: -18px;
+        left: -41px;
+        width: 42px;
+        font-size: 11px;
+        height: 18px;
+        line-height: 18px;
+        background-color: $accent;
+        font-variant-numeric: tabular-nums;
+        text-align: center;
+        color: $font-color-seven;
+        font-family: $medium-sans-font;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        z-index: -10;
+      }
+    }
+  }
+
+  .time-total {
+    position: absolute;
+    display: block;
+    bottom: -18px;
+    right: 9px;
+    width: 40px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 11px;
+    z-index: -11;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: $font-color-four;
+    font-family: $medium-sans-font;
+  }
+
+  .download-button {
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    bottom: -2px;
+    a {
+      text-decoration: none;
+      color: $font-color-four;
+    }
+  }
+}
+
+.player.stuck {
+  position: fixed;
+  top: 0;
+  width: 650px;
+  height: $baseline * 2.5;
+  margin-top: 0;
+  padding-top: 4px;
+  border-top: 0;
+  .waveform {
+    height: 100%;
+  }
+  .play-button, .pause-button {
+    margin-top: 5px;
+    padding: 0;
+    border: none;
+  }
+}
