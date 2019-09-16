@@ -1,6 +1,9 @@
 <% if white_theme_enabled? %>
 
+  
   <div class="history">
+
+  <%= render partial: 'shared/back_to_artist' %>
 
   <% content_for :left do %>
     <h2><%= @user.name %>'s listening history</h2>
