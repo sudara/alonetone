@@ -26,9 +26,11 @@ RSpec.describe 'playlists', type: :feature, js: true do
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
-      sleep 2
+      sleep 1
+      find('.waveform').click(x: 200, y: 10)
+      find('.play-button-container a').click
       convert_canvas_to_image
-      Percy.snapshot(page, name: 'Playlist Track Playing')
+      Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
   end
 
