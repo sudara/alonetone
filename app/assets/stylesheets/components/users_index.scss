@@ -1,0 +1,103 @@
+#user_index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 1032px;
+  padding: 0 $baseline * 1.5;
+  margin-left: auto;
+  margin-right: auto;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .users_menu {
+    box-shadow: none;
+    width: 25%;
+    min-width: 185px;
+    margin-right: 5%;
+    padding-left: 0;
+    overflow: hidden;
+    @media #{$mobile} {
+      margin-right: 0;
+    }
+    h2 {
+      color: $accent;
+      margin-bottom: 0;
+    }
+    @media #{$one-column} {
+      width: 100%;
+    }
+    #links {
+      ul.links {
+        margin-top: 0;
+        margin-bottom: 0;
+        li {
+          line-height: 40px;
+          display: block;
+          height: 40px;
+          width: 100%;
+          box-sizing: border-box;
+          &:hover {
+            background: $background-color-three;
+            a {
+              text-decoration: none;
+            }
+          }
+          a {
+            font-size: 14px;
+            display: block;
+            padding: 0 15px;
+          }
+        }
+        li.current {
+          padding: 0 15px;
+          background: $accent;
+          color: $font-color-seven;
+        }
+      }
+    }
+  }
+  #large_users_grid {
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap;
+    margin-right: -18px;
+    @media #{$one-column} {
+      width: 100%;
+    }
+    @media #{$mobile} {
+      justify-content: space-around;
+    }
+
+    div.clear {
+      display: none;
+    }
+    div.user {
+      position: relative;
+      width: 150px;
+      margin-bottom: 30px;
+      text-align: center;
+      margin-right: 18px;
+      @media #{$mobile} {
+        display: block !important;
+        width: 45%;
+        margin: 0;
+        margin-bottom: 18px;
+      }
+      img.cover {
+        width: 125px;
+        height: 125px;
+      }
+      .name {
+        font-size: 13px;
+        display: block;
+        margin-top: 4px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
