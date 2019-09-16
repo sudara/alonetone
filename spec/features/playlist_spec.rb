@@ -28,7 +28,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       sleep 1
       find('.waveform').click(x: 200, y: 10)
       find('.play-button-container a').click
-      sleep .5
+      sleep 0.5
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
