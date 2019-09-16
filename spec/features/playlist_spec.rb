@@ -15,9 +15,9 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # And in some cases our Snapshot will fire before the DOM is updated
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
+      pause_animations
       expect(page).to have_selector(".player")
       convert_canvas_to_image
-      pause_animations
       Percy.snapshot(page, name: 'Playlist Track Loading')
 
       # Navigating away and back, we should still be playing
@@ -28,6 +28,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       sleep 1
       find('.waveform').click(x: 200, y: 10)
       find('.play-button-container a').click
+      sleep .5
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
