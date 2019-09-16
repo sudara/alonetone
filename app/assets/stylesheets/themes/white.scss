@@ -1,0 +1,58 @@
+@import 'color_mapping';
+
+$body-background: $grey50;
+$body-font: $black;
+
+$background-color-one: $white;
+$background-color-two: $grey50;
+$background-color-three: $grey100;
+$background-color-four: $grey1000;
+$background-color-five: $black;
+
+$font-color-one: $black;
+$font-color-two: $grey1000;
+$font-color-three: $grey900;
+$font-color-four: $grey800;
+$font-color-five: $grey500;
+$font-color-six: $grey50;
+$font-color-seven: $white;
+
+$border-color-one: $black;
+$border-color-two: $grey500; 
+$border-color-three: $grey200; 
+$border-color-four: $grey100;
+$border-color-five: $grey50;
+$border-color-six: $white;
+
+$accent: $orangetone;
+
+$warning: $red600;
+
+$private-message-flag-background: $orange100;
+$private-message-flag-text: $orange800;
+
+$private-message-warning-background: $red500;
+$private-message-warning-border: $red600;
+$private-message-warning-text: $orange100;
+
+$ajax-fail-border: $red600; 
+$ajax-fail-text: $red800;
+
+$ajax-success-border: $green400;
+$ajax-success-text: $green600;
+
+$about-stats-heading-text: $red600;
+
+$admin-spam-row-background: $orange100;
+
+$footer-forum-topics-accent: $orange600;
+$footer-bottom-background: $grey1100;
+$footer-bottom-link-text: $white;
+
+$edit-playlist-track-button-background: $grey200;
+$edit-playlist-track-button-background-hover: $grey800;
+
+$default-button-background: $grey500;
+$default-button-background-hover: $grey800;
+
+$big-player-seekbar-color: $grey200;

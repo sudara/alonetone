@@ -1,0 +1,75 @@
+.pagy-nav.pagination {
+	a, a:visited {
+		font-size: 12px;
+		line-height: 14px;
+		display: block;
+		float: left;
+		height: 12px;
+		padding: 0;
+		color: $font-color-four;
+	}
+	.active {
+		font-weight: bold;
+		color: $accent;
+	}
+	em, a:hover, span.current {
+		text-decoration: none;
+		color: $accent;
+	}
+}
+
+.pagination {
+	position: relative;
+	display: block;
+	float: right;
+	height: 32px;
+	text-align: right;
+	em, a, span, a:visited {
+		font-size: 12px;
+		line-height: 14px;
+		display: block;
+		float: left;
+		height: 12px;
+		padding: 10px 10px;
+		color: $font-color-four;
+	}
+	em, a:hover, span.current {
+		text-decoration: none;
+		color: $accent;
+	}
+	em {
+		font-weight: bold;
+		font-style: normal;
+	}
+	span.gap {
+		padding: 10px 0;
+	}
+	span.disabled {
+		opacity: .5;
+	}
+}
+
+.mini_paginator {
+	position: relative;
+	height: 32px;
+	@include samo-shadow-and-radius();
+	background-color: $background-color-one;
+	box-shadow: none;
+	.pagination {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		 > * {
+			display: block;
+		}
+	}
+}
+
+.mini_paginator.top_paginator {
+	margin-bottom: 12px;
+}
+
+.mini_paginator.bottom_paginator {
+	margin-top: 12px;
+}
+
