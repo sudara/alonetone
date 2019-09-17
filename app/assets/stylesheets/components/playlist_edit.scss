@@ -349,7 +349,10 @@
     color: $font-color-four;
     padding: 0 10px;
     line-height: 1.5em;
-    min-height: 64px;
+    min-height: 42px;
+    @media only screen and (min-width: 749px) and (max-width: 830px) {
+      min-height: 64px;
+    }
     .remove-inner-inline {
       display: inline-flex;
       width: 15px;
