@@ -1,4 +1,4 @@
-import Rails from 'rails-ujs'
+import Rails from '@rails/ujs'
 import Sortable from 'sortablejs'
 import { Controller } from 'stimulus'
 import { flashController } from './flash_controller'

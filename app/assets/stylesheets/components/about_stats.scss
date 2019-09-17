@@ -1,0 +1,36 @@
+.about-page, .stats-page {
+  .box {
+    @media #{$mobile} {
+      width: 90%;
+    }
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: none;
+    background: transparent;
+    box-sizing: border-box;
+    h2 {
+      color: $about-stats-heading-text;
+      box-shadow: none;
+      border-radius: 0;
+      line-height: 20px;
+      height: auto;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #80604026;
+      @media #{$mobile} {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+      }
+    }
+    .static_content {
+      padding: 0 12px;
+      line-height: 1.5;
+      font-size: 16px;
+      @media #{$mobile} {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

@@ -11,7 +11,10 @@
 
   <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
-    <li data-controller="playlist-playback" data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack" data-playlist-playback-id="<%= track.asset.id %>" class="<%= ' active' if track.asset == @asset %>">
+    <li data-controller="playlist-playback"
+      data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack"
+      data-playlist-playback-id="<%= track.asset.id %>"
+      class="<%= ' active' if first_active_track?(track, @asset) %>">
 
     <!-- Play button automagically plays AND changes to relevant track details  -->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
@@ -53,7 +56,7 @@
           <li>
             <%= external_link_for(valid_link) %>
           </li>
-          <% end %>  
+          <% end %>
         <% end %>
       <% end %>
     </ul>
