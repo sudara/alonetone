@@ -1,0 +1,621 @@
+main {
+  #user_home {
+    box-sizing: border-box;
+    display: grid;
+    max-width: 1032px;
+    padding: 0 $baseline * 1.5;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-column-gap: $baseline * 1.5;
+    grid-row-gap: $baseline * 1.5;
+    justify-content: space-around;
+    grid-template-areas:
+      "header header"
+      "playlists playlists"
+      "left right"
+      "card card"
+      "links links"
+      "follows follows"
+      "stats stats"
+      "mod_stats mod_stats"
+      "actions actions"
+      "plays popular";
+    > * {
+      min-width: 320px;
+    }
+    h2 {
+      color: $accent;
+      padding-left: 16px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .box {
+      margin-bottom: 0;
+      h2 {
+        padding-left: 50px;
+      }
+    }
+
+    @media #{$one-column} {
+      display: flex;
+      flex-direction: column;
+      grid-column-gap: 0;
+      grid-row-gap: 0;
+      > * {
+        width: 100%;
+      }
+    }
+
+    @media #{$mobile} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #user_header_area {
+      grid-area: header;
+    }
+
+    #user_playlists_area {
+      grid-area: playlists;
+
+      h2 {
+        color: $accent;
+      }
+      ul {
+        margin: 0;
+        margin-right: -36px;
+        @media #{$mobile} {
+          margin: 0 auto;
+        }
+        li:last-child {
+          margin-right: 36px;
+        }
+        @media #{$one-column} {
+          justify-content: space-between;
+          margin-bottom: -$baseline * 1.5;
+          margin-top: $baseline * 1.5;
+          margin-right: 0;
+          li:last-child {
+            margin-right: 0px;
+          }
+          li {
+            display: block !important;
+            width: 45%;
+            margin: 0;
+            margin-bottom: $baseline * 1.5;
+            img {
+              width: 100%;
+            }
+            svg {
+              width: 100%;
+            }
+          }
+        }
+
+        @media #{$mobile} {
+          width: 100%;
+          margin-bottom: -$baseline * 0.75;
+          justify-content: space-around;
+          li {
+            display: block !important;
+            width: 45%;
+            margin: 0;
+            margin-bottom: $baseline * 0.75;
+          }
+        }
+
+        @media only screen and (max-width: 1038px) {
+          li {
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3) {
+              display: block;
+            }
+            &:nth-child(3) {
+              margin-right: 0;
+            }
+            &:nth-child(4) {
+              display: none;
+            }
+          }
+        }
+        @media only screen and (max-width: 798px) {
+          li {
+            &:nth-child(1),
+            &:nth-child(2) {
+              display: block;
+            }
+            &:nth-child(3),
+            &:nth-child(4) {
+              display: none;
+            }
+          }
+        }
+      }
+      .below_box {
+        margin-top: -36px;
+        margin-bottom: 26px;
+        @media #{$mobile} {
+          margin-top: 0;
+        }
+        &.sparse {
+          text-align: left;
+        }
+      }
+    }
+
+    #user_left_column {
+      margin-top: -$baseline * 1.5;
+      grid-area: left;
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
+      > div {
+        margin-bottom: $baseline * 1.5;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    #user_right_column {
+      margin-top: -$baseline * 1.5;
+      grid-area: right;
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      > div {
+        margin-bottom: $baseline * 1.5;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    #user_card_area {
+      grid-area: card;
+      @media #{$mobile} {
+        order: 1;
+      }
+    }
+
+    #user_links_area {
+      grid-area: links;
+    }
+
+    #user_follows_area {
+      grid-area: follows;
+    }
+
+    #user_stats_area {
+      grid-area: stats;
+    }
+
+    #user_mod_stats_area {
+      grid-area: mod_stats;
+    }
+
+    #user_actions_area {
+      grid-area: actions;
+    }
+
+    #user_plays_area {
+      grid-area: plays;
+    }
+
+    #user_popular_area {
+      grid-area: popular;
+    }
+
+    #user_header_area {
+      #user_header {
+        justify-content: space-between;
+        display: flex;
+        flex-wrap: wrap;
+        .user_name_and_follow {
+          display: flex;
+          flex-wrap: wrap;
+          @media #{$mobile} {
+            flex: 1;
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+          h1.user_name {
+            font-size: 28px;
+            line-height: 1;
+            margin-top: 0;
+            margin-bottom: 0;
+            @media #{$mobile} {
+              width: 100%;
+              margin-bottom: 16px;
+            }
+          }
+          a.follow {
+            display: flex;
+            @media #{$mobile} {
+              width: 100%;
+            }
+            &:hover {
+              text-decoration: none;
+            }
+            div.follow_button {
+              @include default_button();
+              background-color: $background-color-one;
+              color: $accent;
+              margin-left: 24px;
+              margin-right: 8px;
+              @media #{$mobile} {
+                margin-left: 0;
+              }
+              &:hover {
+                background-color: $background-color-one;
+              }
+            }
+            svg {
+              width: 32px;
+              height: 32px;
+              position: relative;
+              top: -3px;
+            }
+          }
+        }
+        .user_header_avatar {
+          overflow: hidden;
+          @include samo-shadow-and-radius();
+          border: 1px solid $border-color-one;
+          width: 48px;
+          height: 48px;
+          @media #{$mobile} {
+            margin-right: 16px;
+          }
+          img {
+            display: block;
+            width: 48px;
+            height: 48px;
+          }
+        }
+      }
+    }
+
+    .user_playlists_buttons {
+      margin-bottom: $baseline;
+      #create_new_playlist {
+        @include default_button("admin");
+      }
+      #change_playlist_order {
+        @include default_button("admin");
+        img {
+          display: none;
+        }
+      }
+    }
+    #user_card_area {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: $background-color-one;
+      @include samo-shadow-and-radius();
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15),
+        0px 6px 24px rgba(134, 134, 134, 0.75);
+      overflow: hidden;
+      @media #{$one-column} {
+        flex-direction: column;
+        margin-top: $baseline * 1.5;
+      }
+      .user_card_avatar {
+        max-width: 50%;
+        flex-grow: 1;
+        @media #{$one-column} {
+          max-width: 100%;
+          width: 100%;
+        }
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .user_card_content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
+        box-sizing: border-box;
+        @media #{$one-column} {
+          max-width: 100%;
+          width: 100%;
+          margin-left: 0;
+        }
+        .user_card_bio {
+          flex-grow: 1;
+          font-size: 16px;
+          line-height: 1.3;
+          color: $font-color-two;
+          padding: 36px;
+          font-family: $medium-sans-font;
+        }
+        .user_card_content_divider {
+          height: 1px;
+          margin: 0 24px;
+          background-color: $background-color-three;
+        }
+        .user_location {
+          font-weight: bold;
+          color: $accent;
+          font-size: 14px;
+          padding: 16px 36px;
+        }
+      }
+    }
+
+    #user_follows_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      h2.area_heading {
+        font-size: 24px;
+        color: $font-color-one;
+        display: block;
+      }
+      > div {
+        background-color: $background-color-one;
+        @include samo-shadow-and-radius();
+        flex: 1;
+        padding: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 8px;
+        > .edge_to_edge_small {
+          margin-right: 8px;
+          height: 50px;
+          width: 50px;
+          border-radius: 4.29px;
+          margin-bottom: 8px;
+          overflow: hidden;
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+    #user_stats_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      h2.area_heading {
+        font-size: 24px;
+        color: $font-color-one;
+        display: block;
+      }
+      .area_content {
+        display: flex;
+        flex-wrap: wrap;
+        > div {
+          background-color: $background-color-one;
+          @include samo-shadow-and-radius();
+          flex: 1;
+          padding: 16px;
+          display: flex;
+          > div {
+            > div:first-child {
+              color: $font-color-four;
+              font-size: 12px;
+              margin-bottom: 8px;
+            }
+            > div:last-child {
+              font-size: 16px;
+              color: $font-color-two;
+            }
+          }
+        }
+        > div.time_and_date {
+          margin-right: 16px;
+          @media #{$one-column} {
+            width: 100%;
+            flex: auto;
+            margin-right: 0;
+            margin-bottom: 12px;
+          }
+          > div {
+            width: 240px;
+          }
+        }
+        > div.tracks_and_listens {
+          div:first-child {
+            width: 35%;
+          }
+          div:last-child {
+            flex: 1;
+          }
+        }
+      }
+    }
+    #user_mod_stats_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      h2.area_heading {
+        font-size: 20px;
+        color: $font-color-five;
+        display: block;
+      }
+      .area_content {
+        background-color: $background-color-three;
+        @include samo-shadow-and-radius();
+        .user_ip {
+          padding: 16px;
+          display: flex;
+          > div:first-child {
+            width: 240px;
+          }
+          > div:last-child {
+            flex: 1;
+          }
+        }
+        .user_agent {
+          padding: 16px;
+          border-top: 2px solid $border-color-six;
+          > div:first-child {
+            color: $font-color-four;
+            font-size: 12px;
+            margin-bottom: 8px;
+          }
+          > div:last-child {
+            font-size: 16px;
+            color: $font-color-two;
+          }
+        }
+        > div {
+          > div {
+            > div:first-child {
+              color: $font-color-four;
+              font-size: 12px;
+              margin-bottom: 8px;
+            }
+            > div:last-child {
+              font-size: 16px;
+              color: $font-color-two;
+            }
+          }
+        }
+      }
+    }
+
+    #user_actions_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      background-color: $background-color-three;
+      @include samo-shadow-and-radius();
+      padding: 12px 16px 4px 16px;
+      box-sizing: border-box;
+      > a {
+        margin-top: 0px;
+        margin-bottom: 8px;
+        margin-right: 4px;
+      }
+      a.edit_profile {
+        @include default-button("admin");
+      }
+      a.edit_profile--delete {
+        @include default-button("admin");
+        background-color: $warning;
+      }
+    }
+
+    #user_links_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      ul {
+        display: inline-flex;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 0;
+        flex-wrap: wrap;
+        background-color: $background-color-four;
+        color: $font-color-seven;
+        @include samo-shadow-and-radius();
+        overflow: auto;
+        li {
+          min-width: 160px;
+          border-right: 2px solid #999;
+          box-sizing: border-box;
+          &:last-child {
+            border-right: 0;
+          }
+          a {
+            height: 40px;
+            overflow: auto;
+            opacity: 0.5;
+            display: block;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 9px;
+            &:hover {
+              opacity: 1;
+            }
+            .link_left {
+              div:nth-child(1) {
+                font-family: $medium-sans-font;
+                margin-bottom: 0px;
+                margin-top: 5px;
+                opacity: 0.5;
+                font-size: 12px;
+              }
+              div:nth-child(2) {
+                font-weight: bold;
+                font-size: 14px;
+              }
+            }
+            .link_right {
+              float: right;
+              width: 24px;
+              height: 24px;
+              svg {
+                margin-top: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #user_plays_area {
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+      .box > h2 {
+        padding-left: $baseline / 2;
+      }
+      #user_track_plays {
+        padding-bottom: $baseline / 2;
+        .static_content {
+          font-size: 12px;
+          margin-left: $baseline / 2;
+          margin-top: $baseline / 2;
+          margin-bottom: $baseline / 2;
+        }
+        .listen {
+          position: relative;
+          box-sizing: border-box;
+          width: 100%;
+          height: 40px;
+          margin-top: 10px;
+          padding-right: $baseline;
+          padding-left: $baseline / 2;
+          background-color: $background-color-one;
+          display: flex;
+          .listen_user {
+            margin-right: $baseline / 2;
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+          .listen_details {
+            font-size: 10px;
+            line-height: 11px;
+            overflow: hidden;
+            height: 40px;
+            min-height: 25px;
+            padding-top: 5px;
+            flex-grow: 1;
+            a {
+              font-size: 10px;
+              font-weight: bold;
+            }
+            span {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
