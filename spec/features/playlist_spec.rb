@@ -7,32 +7,32 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
+      # Note: this only pauses GSAP animations
       pause_animations
 
       first_track = find('ul.tracklist li:first-child')
       first_track.hover
       Percy.snapshot(page, name: 'Playlist Cover')
 
-      first_track.find('a:first-child').click
-
-      # The above click will be an ajax request
+      # This click will be an ajax request
       # And in some cases our Snapshot will fire before the DOM is updated
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
+      first_track.find('a:first-child').click
       expect(page).to have_selector(".player")
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Loading')
-      sleep 5
+
       # Navigating away and back, we should still be playing
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
 
-      #resume_animations # we want to see the playhead move
       find('.waveform').click(x: 200, y: 10)
-      #pause_animations # cross your fingers for no percy glitch
+
+      # right here is some indeterminancy with the playhead
+
       find('.play-button-container a').click # pause
-      sleep 10
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
