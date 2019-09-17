@@ -3,14 +3,12 @@ import PlaybackController from './playback_controller'
 export default class extends PlaybackController {
   preInitialize() {
     this.url = this.playTarget.getAttribute('href')
-    this.permalink = this.playTarget.getAttribute('href').split('/').pop()
-    this.preload = this.playTarget.parentElement.classList.contains('active')
+    this.preload = true
   }
 
   playCallback(e) {
     if (!this.bigPlay) this.setBigPlay()
-    if (this.loaded) this.bigPlay.animation.setPause()
-    else this.bigPlay.animation.showLoading()
+    this.bigPlay.setAnimationState()
     this.registeredListen = false
   }
 
@@ -21,12 +19,11 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
-      this.bigPlay.animation.showPause()
       this.loaded = true
+      this.bigPlay.play()
     }
-    this.bigPlay.percentPlayed = this.percentPlayed()
-    this.bigPlay.waveform.update()
-    this.bigPlay.timeTarget.innerHTML = this.time
+    this.bigPlay.update(this.percentPlayed())
+    console.log(this.sound.duration())
   }
 
   setBigPlay() {

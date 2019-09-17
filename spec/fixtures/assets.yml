@@ -74,7 +74,7 @@ will_studd_rockfort_combalou:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.3.megabytes %>
   length: 156
-  created_at: <%= 3.months.ago %>
+  created_at: 2019-04-08 13:00:03
 will_studd_rockfort_white_wild_tangy:
   user: will_studd
   title: White, Wild, and Tangy
@@ -83,7 +83,7 @@ will_studd_rockfort_white_wild_tangy:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 2.8.megabytes %>
   length: 143
-  created_at: <%= 3.months.ago %>
+  created_at: 2019-04-08 13:00:03
 will_studd_magnificent_lacaune:
   user: will_studd
   title: Magnificent Lacuane
@@ -92,7 +92,7 @@ will_studd_magnificent_lacaune:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 4.5.megabytes %>
   length: 167
-  created_at: <%= 3.months.ago %>
+  created_at: 2019-01-08 13:00:03
 # Belongs to the Rockfort playlist, but is not added yet.
 will_studd_appellation_controlee:
   user: will_studd
@@ -102,7 +102,7 @@ will_studd_appellation_controlee:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 2.4.megabytes %>
   length: 123
-  created_at: <%= 2.months.ago %>
+  created_at: 2019-02-08 13:00:03
 
 # Following block of tracks are all included in Henry's Polderkaas playlist.
 henri_willig_finest_cheese:
@@ -113,7 +113,7 @@ henri_willig_finest_cheese:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 1.3.megabytes %>
   length: 50
-  created_at: <%= 1.month.ago %>
+  created_at: 2019-02-08 13:00:03
 henri_willig_the_goat:
   user: henri_willig
   title: Greatest Of All Times
@@ -122,4 +122,25 @@ henri_willig_the_goat:
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 2.3.megabytes %>
   length: 140
-  created_at: <%= 1.month.ago %>
+  created_at: 2019-02-08 13:00:03
+
+jamie_kiesl_the_duck:
+  user: jamie_kiesl
+  title: Tests comments to user's own assets
+  permalink: get-your-ducks-in-a-row
+  mp3_file_name: duck-duck-goose.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 2.3.megabytes %>
+  length: 140
+  created_at: 2019-01-01 13:00:03
+
+asset_with_relations_for_soft_delete:
+  mp3_file_name: DeleteMeSoftly.mp3
+  title: Asset to test soft deletion of relations
+  permalink: delete-me-softly
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  listens_count: 2
+  created_at: 2010-04-08 13:00:03
+  user: jamie_kiesl
+  length: 55

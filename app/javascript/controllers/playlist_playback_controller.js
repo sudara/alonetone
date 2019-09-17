@@ -1,5 +1,5 @@
+import Rails from '@rails/ujs'
 import PlaybackController from './playback_controller'
-import Rails from 'rails-ujs'
 
 const smallCover = document.querySelector('a.small-cover')
 const sidebarLinks = document.querySelector('.sidebar-downloads')
@@ -8,21 +8,19 @@ export default class extends PlaybackController {
   static targets = ['loadTrack']
 
   preInitialize() {
-    this.url = this.playTarget.getAttribute('href') + '.mp3'
+    this.url = `${this.playTarget.getAttribute('href')}.mp3`
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
     this.preload = this.playTarget.parentElement.classList.contains('active')
   }
 
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
-    if (this.playTarget.getAttribute('href') === document.location.pathname) {
+    if (this.isCurrentTrack()) {
       // the bigPlay controller isn't yet linked
       if (!this.bigPlay) this.setBigPlay()
-      if (this.loaded) this.bigPlay.animation.setPause()
-      else this.bigPlay.animation.showLoading()
+      this.bigPlay.setAnimationState()
       this.highlightPlayingTrack()
     } else {
-      // fire the ajax request
       Rails.fire(this.loadTrackTarget, 'click')
     }
     this.registeredListen = false
@@ -36,11 +34,20 @@ export default class extends PlaybackController {
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
 
-  // called by popstate@window so we don't interrupt playback with back/forward
+  stopCallback() {
+    this.bigPlay.reset()
+  }
+
+  // every instance of playlistPlayback listens for popstate@window
+  // so that when forward/back is pressed, this method is called on each
   popTrack(e) {
     const newLocation = document.location.pathname.split('/').pop()
+    // Only fire ajax for the track that actually matches the new location
+    // Remember, every track in the playlist will run this code on popstate
     if (newLocation === this.permalink) {
+      console.log('should be ajax')
       Rails.fire(this.loadTrackTarget, 'click')
+      e.stopImmediatePropagation()
     }
   }
 
@@ -58,7 +65,7 @@ export default class extends PlaybackController {
     this.showSmallCoverAndSidebarLinks()
 
     // replace track content with result from ajax
-    let temp = document.createElement('div')
+    const temp = document.createElement('div')
     temp.innerHTML = e.detail[2].responseText
     document.querySelector('.track-content').replaceWith(temp.firstChild)
     if (e.target.href !== document.location.href) {
@@ -73,12 +80,10 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
-      this.bigPlay.animation.showPause()
       this.loaded = true
+      this.bigPlay.play()
     }
-    this.bigPlay.percentPlayed = this.percentPlayed()
-    this.bigPlay.waveform.update()
-    this.bigPlay.timeTarget.innerHTML = this.time
+    this.bigPlay.update(this.percentPlayed())
   }
 
   hideSmallCoverAndSidebarLinks() {
@@ -94,5 +99,9 @@ export default class extends PlaybackController {
 
   setBigPlay() {
     this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track-content'), 'big-play')
+  }
+
+  isCurrentTrack() {
+    return this.playTarget.getAttribute('href') === document.location.pathname
   }
 }

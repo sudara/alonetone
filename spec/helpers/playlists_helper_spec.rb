@@ -66,10 +66,10 @@ RSpec.describe PlaylistsHelper, type: :helper do
 
   context 'playlist with a cover' do
     let(:playlist) { playlists(:will_studd_rockfort) }
-    let(:hostname) { 'alonetone.example.com' }
+    let(:base_url) { 'http://alonetone.example.com' }
 
     around do |example|
-      with_storage_current_host(hostname) do
+      with_storage_current_host(base_url) do
         example.call
       end
     end
@@ -93,7 +93,7 @@ RSpec.describe PlaylistsHelper, type: :helper do
     it 'formats an image element with the cover' do
       element = playlist_cover_image(playlist, variant: :greenfield)
       expect(element).to match_css('img[src][alt="Playlist cover"]')
-      expect(element).to include(hostname)
+      expect(element).to include(base_url)
     end
 
     it 'formats an image for the cover element' do

@@ -24,10 +24,10 @@ module RSpec
         end
       end
 
-      def with_storage_current_host(hostname)
+      def with_storage_current_host(base_url)
         before = ActiveStorage::Current.host
         begin
-          ActiveStorage::Current.host = hostname
+          ActiveStorage::Current.host = base_url
           yield
         ensure
           ActiveStorage::Current.host = before

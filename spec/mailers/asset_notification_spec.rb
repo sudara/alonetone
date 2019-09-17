@@ -5,7 +5,7 @@ RSpec.describe AssetNotification, type: :mailer do
     let(:mail) { AssetNotification.upload_notification(assets(:valid_mp3), users(:sudara).email) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("[alonetone] '#{assets(:valid_mp3).user.name}' uploaded a new track!")
+      expect(mail.subject).to eq("[alonetone] #{assets(:valid_mp3).user.name} uploaded a new track!")
       expect(mail.to).to eq(["#{users(:sudara).email}"])
       expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
     end
@@ -23,7 +23,7 @@ RSpec.describe AssetNotification, type: :mailer do
     let(:mail) { AssetNotification.upload_mass_notification([assets(:valid_mp3), assets(:valid_arthur_mp3)], users(:sudara).email) }
 
     it "should render the headers" do
-      expect(mail.subject).to eq("[alonetone] '#{assets(:valid_mp3).user.name}' uploaded new tracks!")
+      expect(mail.subject).to eq("[alonetone] #{assets(:valid_mp3).user.name} uploaded new tracks!")
       expect(mail.to).to eq(["#{users(:sudara).email}"])
       expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::AssetsController, type: :request do
+RSpec.describe Admin::UsersController, type: :request do
   before do
     create_user_session(users(:sudara))
   end
@@ -45,7 +45,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
   describe '#restore' do
     before :each do
-      users(:arthur).soft_delete_relations
+      UserCommand.new(users(:arthur)).soft_delete_with_relations
       users(:arthur).update(deleted_at: Time.now - 1.week)
     end
 
@@ -83,7 +83,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     it "should redirect admin to root_path" do
       put delete_admin_user_path(users(:arthur))
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(admin_users_path(filter_by: :deleted))
     end
 
     it "sets deleted_at to true" do
@@ -112,11 +112,15 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect(users(:arthur).comments.count).to eq(0)
     end
 
-    it "enqueues a job to really destroy the record" do
+    it "soft deletes from other user's playlist" do
+      # sudara's playlist
+      playlists(:owp)
+      # arthur's track on owp playlist
+      tracks(:sudaras_track_with_asset_on_other_user)
+
       put delete_admin_user_path(users(:arthur))
-      expect(enqueued_jobs.size).to eq 1
-      expect(enqueued_jobs.first[:queue]).to eq "default"
-      expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
+
+      expect(tracks(:sudaras_track_with_asset_on_other_user).reload.deleted_at).not_to be_nil
     end
   end
 
@@ -128,7 +132,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     context "if deleted: true flag is passed" do
       it "should return users with deleted" do
-        get admin_users_path(deleted: true)
+        get admin_users_path(filter_by: :deleted)
         expect(response.body).to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
@@ -144,14 +148,14 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     context "with filter_by" do
       it "should return spam users only if flag is passed" do
-        get admin_users_path({filter_by: { is_spam: true}})
+        get admin_users_path(filter_by: :is_spam)
         expect(response.body).to match(/aaron/)
         expect(response.body).not_to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
 
       it "should return only non spam users if is_spam is set to false" do
-        get admin_users_path({filter_by: { is_spam: false}})
+        get admin_users_path(filter_by: :not_spam)
         expect(response.body).not_to match(/aaron/)
         expect(response.body).to match(/arthur/)
         expect(response.body).to match(/ben/)

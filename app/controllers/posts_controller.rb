@@ -34,7 +34,7 @@ class PostsController < ApplicationController
 
   def unspam
     @post.ham!
-    @post.update_column :is_spam, false
+    @post.update_attribute :is_spam, false
     # unspam the topic too
     @post.topic.update_column :spam, false if @post.topic.posts.count == 1
     redirect_back(fallback_location: root_path)
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
 
   def spam
     @post.spam!
-    @post.update_column :is_spam, true
+    @post.update_attribute :is_spam, true
     # mark the topic as spam too if it's the only post
     @post.topic.update_column :spam, true if @post.topic.posts.count == 1
     redirect_back(fallback_location: root_path)

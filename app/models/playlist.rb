@@ -1,7 +1,7 @@
 class Playlist < ActiveRecord::Base
   include SoftDeletion
 
-  acts_as_list scope: :user_id, order: :position
+  acts_as_list scope: :user_id, order: :position, add_new_at: :top
 
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
@@ -28,7 +28,6 @@ class Playlist < ActiveRecord::Base
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
-  validates_length_of   :description, within: 0..2000, allow_blank: true
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
@@ -143,13 +142,13 @@ class Playlist < ActiveRecord::Base
   def set_mix_or_album
     # is this a favorites playlist?
     is_mix = true if is_favorite?
-    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user.id).count
+    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
     true
   end
 
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites_and_set_permalink
-    self.title = self.description = user.name + "'s favorite tracks" if is_favorite?
+    self.title = user.name + "'s favorite tracks" if is_favorite?
     generate_permalink!
   end
 
@@ -175,7 +174,6 @@ end
 #  cover_quality :integer          default("modern")
 #  credits       :text(4294967295)
 #  deleted_at    :datetime
-#  description   :text(4294967295)
 #  has_details   :boolean          default(FALSE)
 #  image         :string(255)
 #  is_favorite   :boolean          default(FALSE)

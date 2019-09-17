@@ -23,7 +23,7 @@ RSpec.describe Storage::CloudFrontLocation, type: :model do
   end
 
   it "coerces to string" do
-    with_active_storage_host('alonetone.example.com') do
+    with_storage_current_host('http://alonetone.example.com') do
       expect(
         Storage::Location.new(attachment, signed: false).to_s
       ).to start_with('http://')
@@ -106,33 +106,23 @@ RSpec.describe Storage::CloudFrontLocation, type: :model do
           amazon_cloud_front_key_pair_id: nil,
           amazon_cloud_front_private_key: nil
         ) do
-          with_active_storage_host(hostname) { example.call }
+          with_storage_current_host(base_url) { example.call }
         end
       end
     end
 
-    let(:hostname) { 'www.example.com' }
+    let(:base_url) { 'http://www.example.com' }
 
     it "generates a URL back to the application when signed" do
       location = Storage::Location.new(attachment, signed: true)
       url = location.url
-      expect(url).to include(hostname)
+      expect(url).to include(base_url)
     end
 
     it "generates a URL back to the application when unsigned" do
       location = Storage::Location.new(attachment, signed: false)
       url = location.url
-      expect(url).to include(hostname)
-    end
-  end
-
-  def with_active_storage_host(hostname)
-    before = ActiveStorage::Current.host = 'www.example.com'
-    begin
-      ActiveStorage::Current.host = hostname
-      yield
-    ensure
-      ActiveStorage::Current.host = before
+      expect(url).to include(base_url)
     end
   end
 end
