@@ -5,9 +5,12 @@ RSpec.describe 'tracks', type: :feature, js: true do
     visit '/sudara/tracks/song1'
     play_button = find(".play-button a")
 
-    # TODO: find a way to accomplish this without creating jank
-    # play_button.click
-    Percy.snapshot(page, name: 'Single Track Play')
+    convert_canvas_to_image
+    Percy.snapshot(page, name: 'Single Track Page')
+
+    # seek halfway
+    # find('.waveform').click
+    # Percy.snapshot(page, name: 'Single Track Seeking')
   end
 
   it 'renders assets#edit' do

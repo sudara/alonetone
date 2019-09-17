@@ -1,0 +1,17 @@
+.user_tracks {
+  #left {
+    .box {
+      margin-bottom: 0;
+    }
+    @media #{$one-column} {
+      margin-bottom: $baseline * 2;
+    }
+  }
+  h2 {
+    padding-left: 16px;
+    color: $accent;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    line-height: 1;
+  }
+}

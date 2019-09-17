@@ -7,7 +7,7 @@
 // src/application.js
 
 import LocalTime from 'local-time'
-import Rails from 'rails-ujs'
+import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
