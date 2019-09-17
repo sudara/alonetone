@@ -1,0 +1,39 @@
+main {
+  .user_playlists {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1032px;
+    padding: 0 $baseline * 1.5;
+    box-sizing: border-box;
+    @media #{$mobile} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    h1 {
+      @media #{$mobile} {
+        padding-left: 2.5%;
+      }
+    }
+    .sort_instructions {
+      color: $font-color-four;
+      margin: 8px 0;
+      @media #{$mobile} {
+        padding-left: 2.5%;
+      }
+
+    }
+    ul.playlists {
+      margin-right: -36px;
+      @media #{$mobile} {
+        width: 100%;
+        margin-right: 0;
+      }
+      li {
+        &.sortable-ghost {
+          opacity: .2;
+        }
+      }
+    }
+  }
+}

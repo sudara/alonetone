@@ -35,7 +35,7 @@ module Listens
   def listen(asset, register: true)
     unless prevent_abuse(asset)
       register_listen(asset) if register
-      if Rails.application.play_dummy_audio?
+      if Rails.application.play_dummy_audio? || Rails.env.test?
         play_local_mp3
       elsif Rails.application.cloudfront_enabled?
         redirect_to Listens.cloudfront_url(asset.mp3.url)
@@ -79,6 +79,7 @@ module Listens
   end
 
   def play_local_mp3
+    sleep(2) unless Rails.env.test? # simulate network loading, it'll be 2x with range requests
     file_to_send = File.join(Rails.root, 'spec/fixtures/files/muppets.mp3')
 
     length = File.size(file_to_send) # need to do this manually for header to be set correctly
@@ -87,26 +88,31 @@ module Listens
     file_begin = 0
     file_end = length - 1
     headers['Accept-Ranges'] = 'bytes'
-    headers["Cache-Control"] = "public, must-revalidate, max-age=0"
-    headers["Pragma"] = "no-cache"
+    headers["Cache-Control"] = "public, must-revalidate, max-age= "
+    headers["Pragma"] = "public"
     headers['Connection'] = 'close'
     headers['Content-Type'] = 'audio/mpeg'
-    if !request.headers["Range"] || (request.headers["Range"].start_with? "bytes=0-") # browser wants the whole file
+    headers["Content-Length"] = length.to_s
+
+    if !request.headers["Range"]
       status = "200 OK"
-      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
       send_file file_to_send, url_based_filename: true,
         status: status, stream: true, buffer_size: 4096
     else
       status = "206 Partial Content" # browser wants part of the file
       match = request.headers['Range'].match(/bytes=(\d+)-(\d*)/)
       if match
-        file_begin = match[1]
-        file_end = match[2] if match[2] && !match[2].empty?
+        file_begin = match[1].to_i
+        file_end = match[2].to_i if match[2] && !match[2].empty?
       end
-      headers["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + length.to_s
-      headers["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
-      how_many_bytes = file_end.to_i - file_begin.to_i > 0 ? file_end.to_i - file_begin.to_i : 1
-      send_data File.read(file_to_send, how_many_bytes, file_begin.to_i), type: 'audio/mpeg',
+      headers["Content-Range"] = "bytes #{file_begin}-#{file_end}/#{length}"
+
+      number_of_bytes = file_end - file_begin + 1
+
+      # Safari expects to see 2 bytes when it asks for 0-1 as a range
+      headers["Content-Length"] = number_of_bytes
+
+      send_data File.read(file_to_send, number_of_bytes, file_begin), type: 'audio/mpeg',
         url_based_filename: true, status: status, stream: true, buffer_size: 4096
     end
   end

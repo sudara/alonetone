@@ -1,4 +1,4 @@
-import Rails from 'rails-ujs'
+import Rails from '@rails/ujs'
 import PlaybackController from './playback_controller'
 
 const smallCover = document.querySelector('a.small-cover')
@@ -15,14 +15,13 @@ export default class extends PlaybackController {
 
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
-    if (this.playTarget.getAttribute('href') === document.location.pathname) {
+    if (this.isCurrentTrack()) {
       // the bigPlay controller isn't yet linked
       if (!this.bigPlay) this.setBigPlay()
-      if (this.loaded) this.bigPlay.animation.setPause()
-      else this.bigPlay.animation.showLoading()
+      this.bigPlay.setAnimationState()
       this.highlightPlayingTrack()
     } else {
-      this.fireAjaxRequest()
+      Rails.fire(this.loadTrackTarget, 'click')
     }
     this.registeredListen = false
     this.playTarget.classList.replace('play-button', 'pause-button')
@@ -35,11 +34,20 @@ export default class extends PlaybackController {
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
 
-  // called by popstate@window so we don't interrupt playback with back/forward
+  stopCallback() {
+    this.bigPlay.reset()
+  }
+
+  // every instance of playlistPlayback listens for popstate@window
+  // so that when forward/back is pressed, this method is called on each
   popTrack(e) {
     const newLocation = document.location.pathname.split('/').pop()
+    // Only fire ajax for the track that actually matches the new location
+    // Remember, every track in the playlist will run this code on popstate
     if (newLocation === this.permalink) {
-      this.fireAjaxRequest()
+      console.log('should be ajax')
+      Rails.fire(this.loadTrackTarget, 'click')
+      e.stopImmediatePropagation()
     }
   }
 
@@ -72,9 +80,8 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
-      this.bigPlay.animation.showPause()
       this.loaded = true
-      this.bigPlay.progressContainerInnerTarget.classList.add('visible')
+      this.bigPlay.play()
     }
     this.bigPlay.update(this.percentPlayed())
   }
@@ -94,14 +101,7 @@ export default class extends PlaybackController {
     this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track-content'), 'big-play')
   }
 
-  // This workaround necessary until https://github.com/rails/rails/pull/36437 is merged
-  // At which point we can just use Rails.fire inline
-  fireAjaxRequest() {
-    const event = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-      button: 0,
-    })
-    this.loadTrackTarget.dispatchEvent(event)
+  isCurrentTrack() {
+    return this.playTarget.getAttribute('href') === document.location.pathname
   }
 }
