@@ -1,4 +1,4 @@
-<%= render partial: 'shared/back_to_artist' %>
+<%= render partial: 'shared/back_to_artist' if @user.present? %>
 
 <div id="columns" class="comments_columns">
   <% if params[:login] %>
