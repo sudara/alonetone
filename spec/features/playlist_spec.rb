@@ -5,6 +5,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
 
+      # I hoped we could pause and resume animations as needed
+      # But we require absolutely 0 DOM variation to please Percy
+      pause_animations
+
       first_track = find('ul.tracklist li:first-child')
       first_track.hover
       Percy.snapshot(page, name: 'Playlist Cover')
@@ -15,20 +19,20 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # And in some cases our Snapshot will fire before the DOM is updated
       # Capybara is good at waiting if we specify an expectation
       # so let's specify one before we snap
-      pause_animations
       expect(page).to have_selector(".player")
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Loading')
 
       # Navigating away and back, we should still be playing
-      resume_animations
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
-      sleep 1
+
+      resume_animations # we want to see the playhead move
       find('.waveform').click(x: 200, y: 10)
-      find('.play-button-container a').click
-      sleep 0.5
+      pause_animations # cross your fingers for no percy glitch
+      find('.play-button-container a').click # pause
+      sleep 0.1
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
