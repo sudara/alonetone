@@ -1,3 +1,7 @@
+<div class="track-content-header">
+    <%= render partial: 'shared/back_to_artist' if @user.present? %>
+</div>
+
 <div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>"  data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
 
   <%= render partial: 'assets/big_player' %>

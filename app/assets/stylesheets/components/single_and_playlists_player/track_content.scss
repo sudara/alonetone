@@ -1,3 +1,12 @@
+.track-content-header {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 700px;
+  width: 66%;
+  @media #{$one-column} {
+    width: 96%;
+  }
+}
 .track-content {
   margin-right: auto;
   margin-left: auto;
