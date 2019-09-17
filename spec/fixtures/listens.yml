@@ -6,3 +6,11 @@ another_valid_listen:
   listener: arthur
   asset: valid_mp3
   track_owner: sudara
+listens_on_soft_deleted_asset:
+  listener: arthur
+  asset: asset_with_relations_for_soft_delete
+  track_owner: jamie_kiesl
+listens_on_soft_deleted_asset2:
+  listener: sudara
+  asset: asset_with_relations_for_soft_delete
+  track_owner: jamie_kiesl

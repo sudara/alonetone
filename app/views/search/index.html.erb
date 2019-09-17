@@ -1,10 +1,12 @@
 <% unless @users.present? or @assets.present? %>
-  <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
+  <div class="no_search_results">
+    <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
+  </div>
 <% end %>
 
 <% if @users.present? %>
   <% content_for :left do %>
-    <h2>Artists that match "<%= @query %>"</h2>
+    <h2 class="user_search_results_heading">Artists that match "<%= @query %>"</h2>
     <div id="user_search_results">
       <% if white_theme_enabled? %>
         <%= render partial: 'shared/user_white', collection: @users, as: :user %>
@@ -17,14 +19,14 @@
 
 <% if @assets.present? %>
   <% content_for :right do %>
-    <h2>Tracks that match "<%= @query %>"</h2>
-    <div class="mini_paginator">
+    <h2 class="tracks_search_results_heading">Tracks that match "<%= @query %>"</h2>
+    <div class="mini_paginator top_paginator">
       <%== pagy_nav @assets_pagy %>
     </div>
     <div class="tracks_search_results">
       <%= render partial: 'assets/asset', collection: @assets if @assets %>
     </div>
-    <div class="mini_paginator">
+    <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @assets_pagy %>
     </div>
   <% end %>

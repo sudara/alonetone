@@ -78,8 +78,10 @@ jamie_kiesl:
   crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
   playlists_count: 0
   assets_count: 0
+  current_login_ip: 127.1.1.2
   created_at: <%= 1.month.ago %>
   updated_at: <%= 1.month.ago %>
+  listens_count: 2
 
 # Will Studd is an International cheese specialist. Studd has been working with artisan and
 # farmhouse cheeses for more than four decades, and has travelled extensively in his vocation.
@@ -121,10 +123,10 @@ william_shatner:
   updated_at: <%= 1.month.ago %>
 
 # soft deleted user
-unuser:
-  login: unuser
-  display_name: Unuser
-  email: unuser@example.com
+deleted_yesterday:
+  login: deleted_yesterday
+  display_name: deleted_yesterday
+  email: deleted_yesterday@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
   playlists_count: 1
   assets_count: 1
@@ -133,3 +135,15 @@ unuser:
   created_at: <%= 1.day.ago %>
   updated_at: <%= 1.day.ago %>
   deleted_at: <%= 1.hour.ago %>
+
+deleted_30_days_ago:
+  login: deleted30
+  display_name: Deleted Long Ago
+  email: deleted30@example.com
+  salt: <%= salt = Authlogic::Random.hex_token %>
+  playlists_count: 0
+  assets_count: 0
+  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  created_at: <%= 41.days.ago %>
+  updated_at: <%= 41.days.ago %>
+  deleted_at: <%= 35.days.ago %>

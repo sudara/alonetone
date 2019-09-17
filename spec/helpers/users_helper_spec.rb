@@ -118,24 +118,24 @@ RSpec.describe UsersHelper, type: :helper do
 
   context "user with an avatar" do
     let(:user) { users(:henri_willig) }
-    let(:hostname) { 'alonetone.example.com' }
+    let(:base_url) { 'http://alonetone.example.com' }
 
     around do |example|
-      with_storage_current_host(hostname) do
+      with_storage_current_host(base_url) do
         example.call
       end
     end
 
     it "formats an avatar URL" do
       url = user_avatar_url(user, variant: :album)
-      expect(url).to include(hostname)
+      expect(url).to include(base_url)
       expect(url).to end_with('.jpg')
     end
 
     it "formats a dark avatar URL" do
       %i[album large].each do |variant|
         url = dark_user_avatar_url(user, variant: variant)
-        expect(url).to include(hostname)
+        expect(url).to include(base_url)
         expect(url).to end_with('.jpg')
       end
     end
@@ -144,26 +144,26 @@ RSpec.describe UsersHelper, type: :helper do
       element = user_image(user, variant: :large)
       expect(element).to match_css('img[src][alt="Henri Willig\'s avatar"]')
       expect(element).to match_css('img:not([class])')
-      expect(element).to include(hostname)
+      expect(element).to include(base_url)
     end
 
     it "formats an image element for the dark theme" do
       element = dark_user_image(user, variant: :large)
       expect(element).to match_css('img[src][alt="Henri Willig\'s avatar"]')
       expect(element).to match_css('img:not([class])')
-      expect(element).to include(hostname)
+      expect(element).to include(base_url)
     end
 
     it "formats a link with a user avatar" do
       element = white_theme_user_image_link(user, variant: :small)
       expect(element).to match_css('a > img[src]')
-      expect(element).to include(hostname)
+      expect(element).to include(base_url)
     end
 
     it "formats a link with a dark user avatar" do
       element = dark_theme_user_image_link(user, variant: :small)
       expect(element).to match_css('a > img[src]')
-      expect(element).to include(hostname)
+      expect(element).to include(base_url)
     end
   end
 

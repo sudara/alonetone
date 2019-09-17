@@ -1,0 +1,14 @@
+
+<div class="user_playlists" data-controller="playlists-sort" data-playlists-sort-enabled="<%= current_user_is_mod_or_owner?(@user) %>">
+  <h1><%= @user.name %>'s Playlists</h1>
+  <% if current_user_is_mod_or_owner?(@user) %>
+    <p class='sort_instructions'>
+      Drag to reorder.
+    </p>
+    <div class="playlists_feedback" data-target="playlists-sort.feedback">
+    </div>
+  <% end %>
+  <ul class="playlists sortable"  data-target="playlists-sort.sortable">
+    <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
+  </ul>
+</div>

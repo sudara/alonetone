@@ -5,7 +5,7 @@ owp:
   title: obsessed with progression
   tracks_count: 3
   cover_quality: modern
-  description: sudara's album
+  credits: sudara's album
   created_at: <%= 1.day.ago %>
 
 empty:
@@ -13,7 +13,7 @@ empty:
   permalink: empty-playlist
   title: Empty Playlist
   cover_quality: modern
-  description: something coming
+  credits: something coming
   created_at: <%= 1.day.ago %>
 
 # Arthur's playlists.
@@ -22,7 +22,7 @@ arthurs_playlist:
   permalink: arthurs-playlist
   title: Arthur's Playlist
   cover_quality: modern
-  description: arthurs playlist
+  credits: arthurs playlist
   private: false
   created_at: <%= 1.day.ago %>
 
@@ -33,7 +33,7 @@ mix:
   title: mix tape
   tracks_count: 3
   cover_quality: modern
-  description: "a mix tape, daring and wonderful"
+  credits: "a mix tape, daring and wonderful"
   created_at: <%= 1.day.ago %>
 
 arthurs_favorites:
@@ -42,7 +42,7 @@ arthurs_favorites:
   permalink: arthurs-favorites
   title: Arthur's favorites
   cover_quality: modern
-  description: arthur's favorites
+  credits: arthur's favorites
   tracks_count: 1
   user: arthur
   created_at: <%= 1.day.ago %>
@@ -58,7 +58,7 @@ will_studd_rockfort:
   tracks_count: 3
   cover_quality: modern
   private: false
-  description: >
+  credits: >
     Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
     is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
     interpretation of this fine cheese.
@@ -77,7 +77,10 @@ henri_willig_polderkaas:
   tracks_count: 2
   private: false
   cover_quality: modern
-  description: >
+  link1: https://open.spotify.com/playlist/37i9dQZF1DX7pykHKVxv6o?si=uP1xUZdlTeCBsMviYTBKGA
+  link2: bandcamp.com/some_band
+  link3: youtube.com/my_channel
+  credits: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
     goodness as they cheese it was named after.
   published_at: <%= 1.day.ago %>
@@ -92,7 +95,7 @@ william_shatners_favorites:
   permalink: bills-favorites
   title: Bill's favorites
   cover_quality: ancient
-  description: What I like to listen to when I'm eating cheese in the captain's chair.
+  credits: What I like to listen to when I'm eating cheese in the captain's chair.
   tracks_count: 1
   published_at: ~
   created_at: <%= 50.years.ago %>
@@ -106,7 +109,18 @@ jamie_kiesl_loves:
   permalink: jamie-loves
   title: Jamie Loves
   cover_quality: legacy
-  description: Did I mention that I'm really good at naming cheeses really quickly?
+  credits: Did I mention that I'm really good at naming cheeses really quickly?
+  tracks_count: 1
+  user: jamie_kiesl
+
+# Jamie added all her favorite tracks to a playlist.
+jamie_kiesl_playlist_with_soft_deleted_tracks:
+  is_mix: true
+  is_favorite: true
+  permalink: jamie-loves
+  title: Jamie Loves
+  cover_quality: legacy
+  credits: Playlist to test tracks_count change for when asset is soft deleted
   tracks_count: 1
   published_at: ~
   created_at: <%= 1.year.ago %>

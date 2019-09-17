@@ -1,12 +1,10 @@
 source 'https://rubygems.org'
 
-git_source(:github) { |name| "https://github.com/#{name}.git" }
-
-gem 'rails', '~> 6.0.0.rc1'
+gem 'rails'
 gem 'mysql2'
-gem 'puma'
+gem 'puma', '< 4.1' # experiencing some issues with config on 4.1
 
-gem 'thredded', github: 'sudara/thredded'
+gem 'thredded'
 
 # greenfield
 gem 'greenfield', path: 'greenfield'
@@ -50,12 +48,11 @@ gem 'font-awesome-sass'
 gem 'jquery-fileupload-rails'
 
 # frontend
-gem 'invisible_captcha'
-gem 'webpacker', '>= 4.0.x'
+gem 'webpacker'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'sass-rails'
-gem 'compass-rails'
+gem 'sass-rails', '< 5.1' # We cannot move to 6.0 before compass is removed
+gem 'compass-rails', '~> 3.1' # Dark theme relies on sprites from compass
 gem 'yui-compressor'
 gem 'uglifier'
 gem 'coffee-rails', github: 'rails/coffee-rails'
@@ -81,7 +78,7 @@ end
 ## Who loves tests! You do? You do!
 group :test do
   gem 'capybara'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false

@@ -83,10 +83,41 @@ RSpec.describe UsersController, type: :request do
         }.not_to change(User, :count)
       end
 
+      it "should set the user to spam before soft deleting" do
+        post "/users", params: params
+
+        expect(User.with_deleted.where(login: params[:user][:login]).first.is_spam).to eq(true)
+      end
+
       it "should mark that user request as soft_deleted" do
         post "/users", params: params
 
-        expect(User.with_deleted.where(login: params[:user][:login])).to be_present
+        expect(User.with_deleted.where(login: params[:user][:login]).first.deleted_at).not_to be_nil
+      end
+
+      context "invalid user" do
+        before do
+          params[:user].delete(:login)
+        end
+
+        it "should raise validation error if user's missing login before Akismet check" do
+          post "/users", params: { user: params }
+          expect(flash[:error]).to match(/that didn't quite work/)
+        end
+
+        it "should not create user if user is invalid" do
+          expect do
+            post "/users", params: { user: params }
+          end.not_to change(User, :count)
+        end
+      end
+
+      context "spam user" do
+        it "should should set user as spam if Akismet check fails" do
+          
+          post "/users", params: { user: params }
+          expect(flash[:error]).to match(/that didn't quite work/)
+        end
       end
     end
   end

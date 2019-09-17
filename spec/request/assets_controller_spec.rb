@@ -79,15 +79,6 @@ RSpec.describe AssetsController, type: :request do
        }.not_to change(Listen, :count)
     end
 
-    it 'should accept a mp3 extension and redirect to the amazon url' do
-      agent = GOOD_USER_AGENTS.first
-      get user_track_path('sudara', 'song1', format: :mp3), headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
-
-      expect(response.status).to eq(302)
-      expect(response.location).to start_with('http')
-      expect(response.location).to include('Song1.mp3')
-    end
-
     GOOD_USER_AGENTS.each do |agent|
       it "should register a listen for #{agent}" do
         expect {
@@ -201,38 +192,31 @@ RSpec.describe AssetsController, type: :request do
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
       end.to change { Asset.count }.by(1)
 
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
 
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
       }.to change { Asset.count }.by(1)
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
 
-    # this action is performed as an after_create callback
+    # Waveform job is enqueued in an after_create callback
     it "should generate waveform via queue" do
-      users(:sudara).add_or_remove_followee(users(:arthur).id)
-      post '/arthur/tracks', params: {
-        asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')]
-      }
-      waveform_job = enqueued_jobs.find { |args| args[:job] == WaveformExtractJob }
-      expect(waveform_job).to_not be_nil
-      expect(waveform_job[:queue]).to eq "default"
+      expect {
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+      }.to have_enqueued_job(WaveformExtractJob)
     end
 
-    # in order to test that job gets kicked off on mass_edit
-    # hit it directly
     it "should send an email to followers" do
       # add two followers
       # to test that ActionMailer sends multiple emails
       users(:sudara).add_or_remove_followee(users(:arthur).id)
       users(:aaron).add_or_remove_followee(users(:arthur).id)
-      get mass_edit_user_tracks_path(users(:arthur), assets: users(:arthur).assets.collect(&:id))
-      expect(enqueued_jobs.size).to eq 2
-      expect(enqueued_jobs.first[:queue]).to eq "mailers"
-      expect(enqueued_jobs.last[:job]).to eq AssetNotificationJob
+      expect {
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+      }.to have_enqueued_job(AssetNotificationJob).exactly(:twice).and have_enqueued_job(WaveformExtractJob)
     end
 
     it 'should successfully upload 2 mp3s' do

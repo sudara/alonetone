@@ -1,15 +1,11 @@
 import { Controller } from 'stimulus'
-import Rails from 'rails-ujs'
+import Rails from '@rails/ujs'
 import { Howl } from 'howler'
 import { bugsnagClient } from '../misc/bugsnag.js.erb'
 
-// Hack for Safari 12 https://github.com/goldfire/howler.js/pull/1047
-const safari = /safari/.test(Howler._navigator && Howler._navigator.userAgent.toLowerCase())
-// if (safari) Howler._canPlayEvent = 'loadedmetadata'
-
-
 let player
 
+// All variants of alonetone's javascript players extends this controller
 export default class extends Controller {
   static targets = ['play', 'title', 'seekBarContainer', 'seekBarLoaded']
 
@@ -18,7 +14,7 @@ export default class extends Controller {
     this.loaded = false
     this.isPlaying = false
     this.nextTrackLoading = false
-    this.time = "0:00"
+    this.time = '0:00'
     this.setupHowl()
   }
 
@@ -67,6 +63,7 @@ export default class extends Controller {
       }
       if (this.positionFromEnd(200)) {
         this.playNextTrack()
+        this.stop()
       } else {
         // we don't want to update this 60 times a second, at most 10
         setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)
@@ -76,7 +73,7 @@ export default class extends Controller {
   }
 
   // called immedately by js
-  play() {
+  play(e) {
     this.sound.play()
     this.isPlaying = true
     if (player) {
@@ -84,7 +81,7 @@ export default class extends Controller {
     }
     player = this
     this.element.classList.add('playing')
-    this.playCallback()
+    this.playCallback(e)
   }
 
   pause() {
@@ -92,6 +89,12 @@ export default class extends Controller {
     player = null
     this.isPlaying = false
     this.pauseCallback()
+  }
+
+  stop() {
+    this.sound.pause()
+    this.sound.stop()
+    this.stopCallback() // reset the audio
   }
 
   togglePlay(e) {

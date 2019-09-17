@@ -7,7 +7,9 @@ class User < ApplicationRecord
   rakismet_attrs  author: proc { display_name },
                   author_email: proc { email },
                   user_ip: proc { current_login_ip },
-                  content: proc { profile&.bio }
+                  content: proc { profile&.bio },
+                  user_agent: proc { profile&.user_agent },
+                  comment_type: 'signup'
 
   require_dependency 'user/findability'
   require_dependency 'user/settings'
@@ -73,7 +75,7 @@ class User < ApplicationRecord
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
   before_create :make_first_user_admin
-  before_destroy :efficiently_destroy_relations
+  before_destroy :destroy_with_relations
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
@@ -152,6 +154,16 @@ class User < ApplicationRecord
 
   def activate!
     !active? ? clear_token! : false
+  end
+
+  def self.destroy_deleted_accounts_older_than_30_days
+    User.destroyable.find_each do |u|
+      u.destroy
+    end
+  end
+
+  def self.with_same_ip_as(user)
+    User.where(current_login_ip: user.current_login_ip).where('id != ?', user.id)
   end
 
   def self.find_by_login_or_email(login)
@@ -256,75 +268,28 @@ class User < ApplicationRecord
     deleted_at != nil
   end
 
-  def soft_delete_with_relations
-    soft_delete_relations
-    enqueue_real_destroy_job
-    soft_delete
+  def destroy_with_relations
+    UserCommand.new(self).destroy_with_relations
   end
 
-  def soft_delete_relations
-    efficiently_soft_delete_relations
-  end
-
-  def restore_relations
-    efficiently_restore_relations
-  end
-
-  def enqueue_real_destroy_job
-    DeletedUserCleanupJob.set(wait: 30.days).perform_later(id)
+  def self.filter_by(filter)
+    case filter
+    when "deleted"
+      only_deleted.where(is_spam: false).order('deleted_at DESC')
+    when "is_spam"
+      with_deleted.where(is_spam: true).order('deleted_at DESC')
+    when "spam_musicians"
+      musicians.with_deleted.where(is_spam: true).order('deleted_at DESC')
+    when "not_spam"
+      with_deleted.where(is_spam: false).recent
+    when String
+      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%'").recent
+    else
+      with_deleted.recent
+    end
   end
 
   protected
-
-  def efficiently_restore_relations
-    Asset.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Listen.with_deleted.where(track_owner_id: id).update_all(deleted_at: nil)
-    Listen.with_deleted.where(listener_id: id).update_all(deleted_at: nil)
-    Playlist.with_deleted.joins(:assets).where(assets: { user_id: id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.with_deleted.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: nil)
-    Comment.with_deleted.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: nil)
-
-    Track.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Playlist.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-    Comment.with_deleted.where(user_id: id).update_all(deleted_at: nil)
-  end
-
-  def efficiently_soft_delete_relations(time = Time.now)
-    Listen.where(track_owner_id: id).update_all(deleted_at: time)
-    Listen.where(listener_id: id).update_all(deleted_at: time)
-    Topic.where(user_id: id).where('posts_count < 2').destroy_all
-    Playlist.joins(:assets).where(assets: { user_id: id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', time])
-    Track.joins(:asset).where(assets: { user_id: id }).update_all(deleted_at: time)
-    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).update_all(deleted_at: time)
-
-    assets.update_all(deleted_at: time)
-
-    %w[tracks playlists comments].each do |user_relation|
-      send(user_relation).update_all(deleted_at: time)
-    end
-  end
-
-  def efficiently_destroy_relations
-    Listen.where(track_owner_id: id).delete_all
-    Listen.where(listener_id: id).delete_all
-    Playlist.joins(:assets).where(assets: { user_id: id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
-    Track.joins(:asset).where(assets: { user_id: id }).delete_all
-
-    Comment.joins("INNER JOIN assets ON commentable_type = 'Asset' AND commentable_id = assets.id")
-           .joins('INNER JOIN users ON assets.user_id = users.id').where('users.id = ?', id).delete_all
-
-    assets.destroy_all
-
-    %w[tracks playlists posts comments].each do |user_relation|
-      send(user_relation).delete_all
-    end
-    true
-  end
 
   def process_variants
     return unless @process_variants

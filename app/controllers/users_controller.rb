@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
   before_action :require_login, except: %i[index show new create activate destroy]
-  invisible_captcha only: [:create, :update], honeypot: :name
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
@@ -31,22 +30,22 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params_with_ip)
+    if @user.valid?
+      if @user.spam? && @user.save_without_session_maintenance
+        @user.update_attribute :is_spam, true
+        @user.soft_delete
+        flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
+        redirect_to logout_path
+      elsif is_a_bot?
+        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+        redirect_to login_url(already_joined: true)
+      elsif @user.save_without_session_maintenance
+        @user.reset_perishable_token!
+        UserNotification.signup(@user).deliver_now
 
-    if @user.spam?
-      @user.is_spam = true
-      # since we don't have any relations at this point yet,
-      # only perform soft-deletion
-      @user.soft_delete
-      flash[:error] = "Hrm, robots marked you as spam. If this was done in error, please email support@alonetone.com and magic fairies will fix it right up."
-      redirect_to logout_path
-    elsif is_a_bot? && @user.valid?
-      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
-      redirect_to login_url(already_joined: true)
-    elsif @user.valid? && @user.save_without_session_maintenance
-      @user.reset_perishable_token!
-      UserNotification.signup(@user).deliver_now
-      flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
-      redirect_to login_url(already_joined: true)
+        flash[:ok] = "We just sent you an email to '#{CGI.escapeHTML @user.email}'.<br/><br/>Just click the link in the email, and the hard work is over! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
+        redirect_to login_url(already_joined: true)
+      end
     else
       flash[:error] = "Hrm, that didn't quite work, try again?"
       render action: :new
@@ -68,6 +67,7 @@ class UsersController < ApplicationController
 
   def edit
     @profile = @user.profile
+    @page_title = "Editing #{@user.display_name}"
   end
 
   def attach_pic
@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     if admin_or_owner_with_delete
       flash[:ok] = "The alonetone account #{@user.login} has been permanently deleted."
 
-      @user.soft_delete_with_relations
+      UserCommand.new(@user).soft_delete_with_relations
 
       if moderator?
         redirect_to root_path
@@ -135,7 +135,7 @@ class UsersController < ApplicationController
   end
 
   def prepare_meta_tags
-    @page_title = @user.name
+    @page_title = "#{@user.name}'s Music"
     @keywords = "#{@user.name}, latest, upload, music, tracks, mp3, mp3s, playlists, download, listen"
     @description = "Listen to all of #{@user.name}'s music and albums on alonetone. Download #{@user.name}'s mp3s free or stream their music from the page"
     @tab = 'your_stuff' if current_user == @user
@@ -145,17 +145,18 @@ class UsersController < ApplicationController
     @profile = @user.profile
     @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
     @assets = @user.assets.includes(user: :pic).limit(5)
-    @playlists = @user.playlists.only_public.includes(:user, :pic)
+    @playlists = @user.playlists.include_private.includes(:user, :pic)
     @listens = @user.listened_to_tracks.preload(:user).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
     @comments = @user.comments.public_or_private(display_private_comments?)
                      .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
-    @other_users_with_same_ip = @user.current_login_ip.present? ? User.where(last_login_ip: @user.current_login_ip).pluck('login') : nil
+    @other_users_with_same_ip = User.with_same_ip_as(@user).pluck(:login) if @user.current_login_ip.present?
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published
       @assets = @assets.published
       @listens = @listens.published
+      @playlists = @playlists.only_public
     end
   end
 

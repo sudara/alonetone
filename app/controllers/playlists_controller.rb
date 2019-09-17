@@ -13,15 +13,16 @@ class PlaylistsController < ApplicationController
 
   # all user's playlists
   def index
-    @page_title = @description = "#{@user.name}'s albums and playlists: "
-    set_all_playlists
+    @page_title = @description = "#{@user.name}'s albums and playlists"
+    set_playlists
+    render 'index_white' if white_theme_enabled?
   end
 
   def sort
     respond_to do |format|
       format.html { @playlists = @user.playlists.include_private }
       format.js do
-        params["playlist"].each_with_index do |id, position|
+        params[:playlist].each_with_index do |id, position|
           @user.playlists.find(id).update_column(:position, position + 1)
         end
         head :ok
@@ -40,7 +41,7 @@ class PlaylistsController < ApplicationController
     respond_to do |format|
       format.html do
         lazily_create_waveform_if_needed if @asset
-        @page_title = @description = "\"#{@playlist.title}\" by #{@user.name}"
+        @page_title = @description = "#{@playlist.title} by #{@user.name}"
         if request.xhr?
           render '/shared/_asset_white', layout: false
         else
@@ -66,6 +67,7 @@ class PlaylistsController < ApplicationController
     set_assets
     @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_param: :listens_page, items: 10)
     @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page, items: 10) if @user.favorites.present?
+    @page_title = "Editing \"#{@playlist.title}\" by #{@user.name}"
     if request.xhr?
       render_desired_partial
     elsif white_theme_enabled?
@@ -161,24 +163,22 @@ class PlaylistsController < ApplicationController
     @assets_pagy, @assets = pagy(@user.assets.recent, page_param: :uploads_page, items: 10)
   end
 
-  def set_all_playlists
-    @all_playlists =  current_user_is_admin_or_owner?(@user) ?
+  def set_playlists
+    @playlists =  current_user_is_admin_or_owner?(@user) ?
                       @user.playlists.include_private :
                       @user.playlists.only_public
 
-    set_right_and_left_playlists if @all_playlists.present?
+    set_right_and_left_playlists if @playlists.present?
   end
 
   def set_right_and_left_playlists
-    middle = (@all_playlists.size + 1) / 2
-    @playlists_left  = @all_playlists[0...middle]
-    @playlists_right = @all_playlists[middle..-1]
+    middle = (@playlists.size + 1) / 2
+    @playlists_left  = @playlists[0...middle]
+    @playlists_right = @playlists[middle..-1]
   end
 
   def authorized?
-    @playlist.nil? || current_user_is_admin_or_owner?(@user) ||
-      %w[ destroy admin edit update remove_track attach_pic sort_tracks
-          add_track set_playlist_description set_playlist_title ].include?(action_name) == false
+    current_user_is_mod_or_owner?(@user)
   end
 
   def find_playlists

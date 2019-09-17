@@ -14,6 +14,7 @@ Alonetone::Application.routes.draw do
         put :restore
         put :unspam
         put :spam
+        put :mark_all_users_with_ip_as_spam
       end
     end
     resources :comments, path: 'comments/(:filter_by)', only: [:index] do
@@ -29,6 +30,8 @@ Alonetone::Application.routes.draw do
       member do
         put :unspam
         put :spam
+        put :delete
+        put :restore
       end
       collection do
         put :mark_group_as_spam
@@ -146,7 +149,6 @@ Alonetone::Application.routes.draw do
         get :sudo
       end
       resource 'profile'
-      resources 'source_files' #:path_prefix => ':login'
       resources 'tracks', controller: :assets do
         member do
           get :share

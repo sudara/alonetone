@@ -11,7 +11,10 @@
 
   <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
-    <li data-controller="playlist-playback" data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack" data-playlist-playback-id="<%= track.asset.id %>" class="<%= ' active' if track.asset == @asset %>">
+    <li data-controller="playlist-playback"
+      data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack"
+      data-playlist-playback-id="<%= track.asset.id %>"
+      class="<%= ' active' if first_active_track?(track, @asset) %>">
 
     <!-- Play button automagically plays AND changes to relevant track details  -->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
@@ -20,7 +23,7 @@
     <% end %>
 
     <!-- Track title just switches track details-->
-    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset), 
+    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
       remote: true, class: 'position-name-time', data: { target: "playlist-playback.loadTrack" } do %>
       <span class="track-position">
         <%= "%02d" % track.position %>.
@@ -49,18 +52,23 @@
     <ul class="external-links">
       <% [:link1, :link2, :link3].collect do |link| %>
         <% if valid_link = @playlist.send(link) %>
+          <% if external_link_for(valid_link) %>
           <li>
             <%= external_link_for(valid_link) %>
           </li>
+          <% end %>
         <% end %>
       <% end %>
     </ul>
   </div>
 
-    <% if authorized? %>
+  <% if authorized? %>
   <div class="edit_playlist_container">
     <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
       edit playlist
+    <% end %>
+    <% if @playlist.has_tracks? %>
+      <%= link_to "edit descriptions", mass_edit_user_tracks_path(@playlist.user, assets: @playlist.assets.collect(&:id)), class: 'edit_playlist' %>
     <% end %>
   </div>
   <% end %>

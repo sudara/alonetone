@@ -4,27 +4,26 @@
       <%= link_to media_url(@asset), data: { target: 'single-playback.play' } do %>
       <svg data-target="big-play.playButton" class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
-        <clipPath id="dottyMask">
-            <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>
-        </clipPath>
+          <clipPath id="dottyMask">
+              <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>
+          </clipPath>
         </defs>
-            <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="15.68"/>
-
-            <g clip-path="url(#dottyMask)" >
-              <circle visibility="hidden" class="dotty" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="butt" stroke-width="64" stroke-dasharray="68.99 187.58"/>
-            </g>
-            <path class="icon" d="M205.26,457.84,205,142.18a.64.64,0,0,1,1-.56L331.53,214l147.93,85.25a.63.63,0,0,1,0,1.1L206.21,458.39A.63.63,0,0,1,205.26,457.84Z"/>
-            <circle visibility="hidden" class="centerCircle" cx="300" cy="300" r="123"/>
+        <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#999" stroke-miterlimit="10" stroke-width="15.68"/>
+        <g clip-path="url(#dottyMask)" >
+          <circle visibility="hidden" class="dotty" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="butt" stroke-width="64" stroke-dasharray="68.99 187.58"/>
+        </g>
+        <path class="icon new" d="M223.608 429.472 223.4 176.944C223.399 176.936 223.399 176.927 223.399 176.919 223.399 176.638 223.63 176.407 223.911 176.407 224.014 176.407 224.115 176.438 224.2 176.496L324.624 234.4 442.968 302.6C443.127 302.689 443.226 302.858 443.226 303.04 443.226 303.222 443.127 303.391 442.968 303.48L224.368 429.912C224.29 429.958 224.202 429.982 224.112 429.982 223.835 429.982 223.608 429.754 223.608 429.478 223.608 429.476 223.608 429.474 223.608 429.472Z" style="fill-rule:nonzero;"/>
+        <circle visibility="hidden" class="centerCircle" cx="300" cy="300" r="123"/>
         <g class="pauseContainer" visibility="hidden">
             <g class="pauseLoopGroup" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
               <line x1="245" y1="146" x2="245" y2="450" />
               <line x1="355" y1="146" x2="355" y2="450" />
             </g>
         </g>
-            <g class="pauseGroup" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
-              <line x1="245" y1="156" x2="245" y2="430" />
-              <line x1="355" y1="156" x2="355" y2="430" />
-            </g>
+        <g class="pauseGroup" visibility="hidden" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
+          <line x1="245" y1="156" x2="245" y2="430" />
+          <line x1="355" y1="156" x2="355" y2="430" />
+        </g>
       </svg>
       <% end %>
     </div>
@@ -34,8 +33,20 @@
     <div class="seekbar" data-target="big-play.seekBar"></div>
   </div>
 
-  <div class="time">
-    <span class="index" data-target="big-play.time">0:00</span> of <%= @asset.length %>
+  <div class="progress-container">
+    <div class="progress-container-inner" data-target="big-play.progressContainerInner">
+      <div class="line-progress">
+      </div>
+      <div class="time-progress">
+        <span class="index" data-target="big-play.time">0:00</span>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="time-total">
+    <%= @asset.length %>
   </div>
 
 </div>

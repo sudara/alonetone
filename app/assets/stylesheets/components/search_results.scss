@@ -1,0 +1,52 @@
+.tracks_search_results {
+	@include samo-shadow-and-radius();
+}
+
+.no_search_results {
+	max-width: 1032px;
+	padding: 0 $baseline * 1.5;
+	box-sizing: border-box;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.user_search_results_heading {
+	@media #{$mobile} {
+		padding-left: 12px;
+	}
+}
+
+.tracks_search_results_heading {
+	@media #{$mobile} {
+		padding-left: 12px;
+	}
+}
+
+#user_search_results {
+	display: flex;
+	margin-top: 60px;
+	flex-wrap: wrap;
+	@media #{$mobile} {
+		padding-right: $baseline * 1.5;
+		padding-left: $baseline * 1.5;
+	}
+	div.user {
+		position: relative;
+		width: 136px;
+		margin-bottom: 30px;
+		margin-right: 18px;
+		text-align: center;
+		img.cover {
+			width: 125px;
+			height: 125px;
+		}
+		.name {
+			margin-top: 4px;
+			font-size: 13px;
+			display: block;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

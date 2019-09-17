@@ -212,6 +212,12 @@ class Asset < ApplicationRecord
     Storage::Location.new(audio_file, signed: true)
   end
 
+  def self.destroy_deleted_accounts_older_than_30_days
+    Asset.destroyable.find_each do |asset|
+      AssetCommand.new(asset).destroy_with_relations
+    end
+  end
+
   private
 
   include HasPermalink::InstanceMethods

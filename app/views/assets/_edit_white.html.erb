@@ -1,9 +1,10 @@
-<%= form_for(@asset, url: user_track_path(@user, @asset)) do |f| %>
-  <% if @asset.errors.any? %>
+<%= form_with(model: asset, url: "/#{@user.login}/tracks/#{asset.id}",
+  local: (true unless @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error ajax:complete->save#complete' }) do |f| %>
+  <% if asset.errors.any? %>
     <div class="errors">
       There were some problems...
       <ul>
-        <% @asset.errors.full_messages.each do |message| %>
+        <% asset.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -12,45 +13,47 @@
 
   <div class="track-edit">
     <header>
-      <h1><%= f.text_field :title, value: @asset.name %></h1>
-      <h3><%= @asset.user.display_name %></h3>
+      <h1><%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %></h1>
+      <h3><%= asset.user.display_name %></h3>
+      <div class="track-stats">
+        <div class="created">Uploaded <%= local_time_ago(asset.created_at) %>.</div>
+      </div>
     </header>
 
-    <%= f.text_area :description, placeholder: "Tell us a story..." %>
+    <%= f.text_area :description, placeholder: "Tell us a story...", id: "description_#{asset.id}"  %>
     <%= f.text_area :credits, placeholder: "Credits for this track" %>
 
-    <%= hidden_field_tag :asset_permalink, @asset.permalink %>
+    <%= hidden_field_tag :asset_permalink, asset.permalink %>
 
     <% if @allow_reupload %>
 
     <div class="track-edit-bottom">
-      <%= link_to 'Upload a new version of this track',"new_version_#{@asset.object_id}", class: 'slide_open_next'%>
-      <div id="new_version_<%=@asset.object_id%>" style="display:none;">
-        <p>
-          <%= f.file_field :audio_file, class: 'asset_data' %>
-        </p>
-        <span class="note">This will permanently delete the old version.
+      <%= link_to 'Upload a new version of this track',"new_version_#{asset.object_id}", class: 'slide_open_href'%>
+      <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
+        <%= f.file_field :audio_file, class: 'asset_data' %>
+        <div class="note">This will permanently delete the old version.
           The replacement track will <strong>not</strong> be considered a new track. It will not
           show up on the home page under 'latest tracks'. But hey, you get to clean
-          up your act on the sly and fix that hasty mix from last week! Yay!</span>
+          up your act on the sly and fix that hasty mix from last week! Yay!
+        </div>
       </div>
       <% end %>
       <div class="edit-save">
-      <% unless @asset.published? %>
-        <div class="submit_wrapper static_content">
-          <div class="comment_waiting" >
+      <% unless asset.published? %>
+        <div class="submit_wrapper">
+          <div class="ajax_waiting" >
             <div class="text"><!-- placeholder response text --></div>
           </div>
           <div class="small_spinner" style="display:none;"> </div>
-            <%= f.submit "Publish", class: 'comment_submit' %>
+            <%= f.submit "Publish" %>
         </div>
       <% end %>
-      <div class="submit_wrapper static_content">
-        <div class="comment_waiting" >
+      <div class="submit_wrapper">
+        <%= f.submit "Save" %>
+        <div class="small_spinner" data-target="save.spinner"> </div>
+        <div class="ajax_waiting" data-target="save.response">
           <div class="text"><!-- placeholder response text --></div>
         </div>
-        <div class="small_spinner" style="display:none;"> </div>
-        <%= f.submit "Save", class: 'comment_submit' %>
       </div>
     </div>
   <% end %>

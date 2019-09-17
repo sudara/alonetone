@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
   scope :last_5_private,     -> { on_track.include_private.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
   scope :last_5_public,      -> { on_track.only_public.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
-  scope :to_other_members,   -> { joins(:commenter).where("users.current_login_ip != remote_ip").where("commenter_id != user_id") }
+  scope :to_other_members,   -> { joins(:user).where("users.current_login_ip != remote_ip").where("commenter_id != user_id") }
 
   has_many :replies, as: :commentable, class_name: 'Comment'
 
@@ -37,8 +37,12 @@ class Comment < ActiveRecord::Base
                   user_role: proc { role },
                   permalink: proc { commentable.try(:full_permalink) }
 
+  # Poor man's anti-spam helper
   def duplicate?
-    Comment.where(remote_ip: remote_ip, body: body).first.present?
+    # Allow single emojis to be posted multiple times
+    return false if body.length == 1
+
+    Comment.where(remote_ip: remote_ip, body: body).where('created_at > ?', 1.hour.ago).first.present?
   end
 
   def disallow_dupes

@@ -8,6 +8,7 @@ RSpec.describe UsersController, type: :controller do
       get :show, params: { id: 'arthur' }
       expect(response).to be_successful
       expect(response.body).to include('Delete User')
+      expect(response.body).to include('Spam User')
     end
 
     it "should NOT show delete user button for muggles" do
@@ -16,6 +17,7 @@ RSpec.describe UsersController, type: :controller do
       get :show, params: { id: 'sudara' }
       expect(response).to be_successful
       expect(response.body).not_to include('Delete User')
+      expect(response.body).not_to include('Spam User')
     end
 
     it "should NOT show delete user button for own account" do
@@ -314,13 +316,6 @@ RSpec.describe UsersController, type: :controller do
         expect(users(:arthur).playlists.count).to eq(0)
         expect(users(:arthur).topics.count).to eq(0)
         expect(users(:arthur).comments.count).to eq(0)
-      end
-
-      it "enqueues the job to really destroy the record" do
-        delete :destroy, params: { id: 'arthur', login: 'arthur' }
-        expect(enqueued_jobs.size).to eq 1
-        expect(enqueued_jobs.first[:queue]).to eq "default"
-        expect(enqueued_jobs.last[:job]).to eq DeletedUserCleanupJob
       end
     end
 
