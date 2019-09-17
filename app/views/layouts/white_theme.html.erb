@@ -22,8 +22,10 @@
   <% end %>
 
   <%= csrf_meta_tag %>
+  <%= render partial: 'shared/headway' if logged_in? %>
   <!-- render user specific variables and js helpers -->
   <%= render partial: 'shared/javascript_payload' %>
+  <%= render partial: 'shared/analytics' %>
 </head>
 
 <body class="<%= yield :body_class %>">
@@ -37,7 +39,7 @@
   <%= check_for_and_display_welcome_back %>
   <%= check_for_and_display_flashes %>
 
-  <header id="site_header" data-turbolinks-permanent>
+  <header id="site_header">
     <%= render partial: 'shared/header' %>
     <%= render partial: 'shared/search' %>
   </header>
@@ -70,9 +72,5 @@
   <div class="floating_feedback ajax_waiting" data-controller="flash">
     <div class="ajax_success"><span>Saved!</span></div>
   </div>
-
-
-  <%= render partial: 'layouts/greenfield/ga' %>
-  <%= render partial: 'shared/headway' if logged_in? %>
 </body>
 </html>
