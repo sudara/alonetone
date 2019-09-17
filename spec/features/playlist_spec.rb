@@ -22,17 +22,17 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector(".player")
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Loading')
-
+      sleep 5
       # Navigating away and back, we should still be playing
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
 
-      resume_animations # we want to see the playhead move
+      #resume_animations # we want to see the playhead move
       find('.waveform').click(x: 200, y: 10)
-      pause_animations # cross your fingers for no percy glitch
+      #pause_animations # cross your fingers for no percy glitch
       find('.play-button-container a').click # pause
-      sleep 0.1
+      sleep 10
       convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
