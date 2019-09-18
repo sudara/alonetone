@@ -42,12 +42,12 @@ RSpec.describe 'playlists', type: :feature, js: true do
     logged_in(:henri_willig) do
       visit 'henriwillig/playlists/polderkaas/edit'
 
-      # Ensure custom checkboxes are happy
-      find('#playlist_private').click
-
       # remove second track
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
+
+      # Ensure custom checkboxes are happy
+      find('.edit_playlist_info_right_column_private_and_hidden label').click
 
       # add 2 new tracks
       first_upload = find('#your_uploads .asset:nth-child(1) .add')
