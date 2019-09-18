@@ -33,6 +33,10 @@ module Alonetone
     config.active_storage.service = config.alonetone.storage_service
     config.active_storage.variant_processor = :vips
 
+    def fastly_enabled?
+      config.alonetone.fastly_base_url.present?
+    end
+
     def cloudfront_enabled?
       remote_storage? &&
         config.alonetone.amazon_cloud_front_domain_name.present? &&
