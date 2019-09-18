@@ -23,9 +23,6 @@ module Alonetone
 
     config.load_defaults 6.0
 
-    # Comments forms
-    config.action_view.form_with_generates_ids = false
-
     config.exceptions_app = routes
 
     config.assets.paths.concat(Compass::Frameworks::ALL.map(&:stylesheets_directory))
