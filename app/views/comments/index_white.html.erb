@@ -1,57 +1,65 @@
-<div id="columns" class="comments_columns">
-  <% if params[:login] %>
-    <div id="left">
-      <h2>Comments on <%= @user.name %>'s stuff</h2>
-      <div class="mini_paginator top_paginator">
-        <%== pagy_nav @pagy %>
-      </div>
-      <div class="comments_area box">
-      <%= render partial: 'shared/comment', collection: @comments %>
-      </div>
-      <div class="mini_paginator bottom_paginator">
-        <%== pagy_nav @pagy %>
-      </div>
-    </div>
+<div class="comments_columns">
 
-    <div id="right">
-      <h2>Comments made by <%= @user.name %> </h2>
-      <div class="mini_paginator top_paginator">
-        <%== pagy_nav @pagy_comments_made %>
-      </div>
-      <div class="comments_area box">
-        <%= render partial: 'shared/comment', collection: @comments_made %>
-      </div>
-      <div class="mini_paginator bottom_paginator">
-        <%== pagy_nav @pagy_comments_made %>
-      </div>
-    </div>
-  <% else %>
-    <div id="left">
-      <h2>Recent Comments</h2>
-      <div class="mini_paginator top_paginator">
-        <%== pagy_nav @pagy %>
-      </div>
-      <div class="comments_area box">
+  <div class="columns_header">
+      <%= render partial: 'shared/back_to_artist' if @user.present? %>
+  </div>
+
+  <div id="columns">
+    <% if params[:login] %>
+      <div id="left">
+        <h2>Comments on <%= @user.name %>'s stuff</h2>
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav @pagy %>
+        </div>
+        <div class="comments_area box">
         <%= render partial: 'shared/comment', collection: @comments %>
+        </div>
+        <div class="mini_paginator bottom_paginator">
+          <%== pagy_nav @pagy %>
+        </div>
       </div>
-      <div class="mini_paginator bottom_paginator">
-        <%== pagy_nav @pagy %>
-      </div>
-    </div>
 
-    <div id="right">
-    <% if moderator? or admin? %>
-      <h2>Recent SPAM</h2>
-      <div class="mini_paginator top_paginator">
-        <%== pagy_nav @pagy_spam %>
+      <div id="right">
+        <h2>Comments made by <%= @user.name %> </h2>
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav @pagy_comments_made %>
+        </div>
+        <div class="comments_area box">
+          <%= render partial: 'shared/comment', collection: @comments_made %>
+        </div>
+        <div class="mini_paginator bottom_paginator">
+          <%== pagy_nav @pagy_comments_made %>
+        </div>
       </div>
-      <div class="comments_area box">
-        <%= render partial: 'shared/comment', collection: @spam %>
+    <% else %>
+      <div id="left">
+        <h2>Recent Comments</h2>
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav @pagy %>
+        </div>
+        <div class="comments_area box">
+          <%= render partial: 'shared/comment', collection: @comments %>
+        </div>
+        <div class="mini_paginator bottom_paginator">
+          <%== pagy_nav @pagy %>
+        </div>
       </div>
-      <div class="mini_paginator bottom_paginator">
-        <%== pagy_nav @pagy_spam %>
+
+      <div id="right">
+      <% if moderator? or admin? %>
+        <h2>Recent SPAM</h2>
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav @pagy_spam %>
+        </div>
+        <div class="comments_area box">
+          <%= render partial: 'shared/comment', collection: @spam %>
+        </div>
+        <div class="mini_paginator bottom_paginator">
+          <%== pagy_nav @pagy_spam %>
+        </div>
+      <% end %>
       </div>
     <% end %>
-    </div>
-  <% end %>
+  </div>
+
 </div>
