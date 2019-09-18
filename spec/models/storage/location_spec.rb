@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Storage::CloudFrontLocation, type: :model do
+RSpec.describe Storage::Location, type: :model do
   let(:asset) do
     assets(:will_studd_rockfort_combalou)
   end
@@ -123,6 +123,21 @@ RSpec.describe Storage::CloudFrontLocation, type: :model do
       location = Storage::Location.new(attachment, signed: false)
       url = location.url
       expect(url).to include(base_url)
+    end
+
+    context "operating on an image" do
+      let(:user) { users(:william_shatner) }
+      let(:location) { user.avatar_image_location(variant: :small) }
+
+      before do
+        user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
+      end
+
+      it "generates a URL back to the application" do
+        url = location.url
+        expect(url).to include('rails/active_storage/disk')
+        expect(url).to include(base_url)
+      end
     end
   end
 end
