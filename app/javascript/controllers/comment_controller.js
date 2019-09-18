@@ -27,7 +27,7 @@ export default class extends Controller {
   }
 
   toggle() {
-    this.bannerTarget.classList.toggle('hidden')
-    this.divTarget.classList.toggle('private_banner_visible')
+   this.bannerTarget.classList.toggle('hidden')
+   this.divTarget.classList.toggle('private_banner_visible')
   }
 }
