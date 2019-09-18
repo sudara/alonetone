@@ -1,7 +1,7 @@
- <div id="comment_<%= asset.unique_id %>" class="comment_asset" data-controller="comment">
+ <div class="comment_asset" data-controller="comment">
   <div class="comment_form" data-target="comment.div">
-    <%= form_for :comment, url: user_track_comments_path(asset.user, asset), remote: true,
-    id: "comment_form_#{asset.unique_id}", data: { action: 'ajax:beforeSend->comment#spin ajax:success->comment#success ajax:error->comment#error' } do |f| %>
+    <%= form_with scope: :comment, url: user_track_comments_path(asset.user, asset),
+    data: { action: 'ajax:beforeSend->comment#spin ajax:success->comment#success ajax:error->comment#error' } do |f| %>
 
     <div class="comment_as" data-target="comment.personalization">
         <!-- will be replaced by js payload to allow caching -->
@@ -13,9 +13,8 @@
       Only <span class="only_user_name"><%= asset.user.name%></span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
     </span>
 
-    <div class="private_check_box">
-      <%= f.check_box :private, class: 'private',
-        data: { target: 'comment.checkbox', action: 'click->comment#toggle'}  %>
+    <div class="private_check_box" data-target='comment.checkbox' data-action='click->comment#toggle'>
+      <%= f.check_box :private, class: 'private'%>
         <label><span class="public">Make Private</span></label>
     </div>
 
