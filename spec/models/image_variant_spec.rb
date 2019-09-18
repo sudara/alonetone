@@ -4,8 +4,13 @@ require "rails_helper"
 
 RSpec.describe ImageVariant, type: :model do
   it "returns dimensions to use when resizing image variant" do
-    expect(ImageVariant.variant_options(:small)).to eq(ImageVariant::VARIANTS[:small])
-    expect(ImageVariant.variant_options(:greenfield)).to eq(ImageVariant::VARIANTS[:greenfield])
+    options = ImageVariant.variant_options(:small)
+    size = ImageVariant::VARIANTS[:small]
+    expect(options[:resize_to_fill]).to eq([size, size, crop: :centre])
+
+    options = ImageVariant.variant_options(:greenfield)
+    size = ImageVariant::VARIANTS[:greenfield]
+    expect(options[:resize_to_fill]).to eq([size, size, crop: :centre])
   end
 
   it "verifies known variants" do
@@ -35,7 +40,10 @@ RSpec.describe ImageVariant, type: :model do
       image_variant = ImageVariant.new(attachment, variant: :greenfield)
       expect(image_variant.attachment).to eq(attachment)
       expect(image_variant.variant_name).to eq(:greenfield)
-      expect(image_variant.variant_options).to eq(ImageVariant::VARIANTS[:greenfield])
+      expect(image_variant.variant_options).to eq(
+        resize_to_fill: [1500, 1500, crop: :centre],
+        saver: { optimize_coding: true, quality: 68, strip: true }
+      )
     end
 
     it "raises exception when trying to instantiate variant for nonexistent variant name" do
