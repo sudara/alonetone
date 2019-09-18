@@ -1,3 +1,9 @@
+<% unless @playlist.present? %>
+<div class="track-content-header">
+    <%= render partial: 'shared/back_to_artist' %>
+</div>
+<% end %>
+
 <div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>"  data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
 
   <%= render partial: 'assets/big_player' %>
@@ -33,7 +39,7 @@
   <div class="track-post">
     <h1><%= @asset.name %></h1>
     <% unless @playlist %>
-      <h3><%= link_to @asset.user.display_name, user_home_path(@asset.user) %></h3>
+      <h3><%= link_to @asset.user.name, user_home_path(@asset.user) %></h3>
     <% end %>
     <%= markdown_with_html(@asset.description) %>
 
