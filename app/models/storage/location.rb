@@ -30,6 +30,8 @@ module Storage
         CloudFrontLocation.new(attachment.key, signed: signed?).url
       elsif Rails.application.remote_storage?
         s3_url
+      elsif attachment.respond_to?(:processed)
+        attachment.processed.service_url
       else
         attachment.service_url
       end
