@@ -50,7 +50,7 @@
 
         <div class="edit_playlist_info_right_column_private_and_hidden">
           <div class="input">
-            <%= f.check_box :private %>
+            <%= f.check_box :private, id: 'playlist_private' %>
             <label for="playlist_private"><span>Private</span></label>
           </div>
           <span class="private_notice">| Playlists are hidden until they have more than 2 tracks</span>
