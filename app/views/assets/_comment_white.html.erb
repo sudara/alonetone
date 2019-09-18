@@ -15,7 +15,7 @@
 
     <div class="private_check_box">
       <%= f.check_box :private, class: 'private', data: { target: 'comment.actualCheckbox'} %>
-        <label for="private" data-target='comment.markAsPrivate' data-action='click->comment#toggle'><span class="public">Make Private</span></label>
+        <label for="comment[private]" data-target='comment.markAsPrivate' data-action='click->comment#toggle'><span class="public">Make Private</span></label>
     </div>
 
     <%= f.hidden_field :commentable_type, value: 'Asset', id: "comment_commentable_type_#{asset.unique_id}"%>

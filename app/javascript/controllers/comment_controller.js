@@ -30,6 +30,8 @@ export default class extends Controller {
   toggle() {
     this.bannerTarget.classList.toggle('hidden')
     this.divTarget.classList.toggle('private_banner_visible')
+
+    // The label was clicked, so we still need to check the box
     this.actualCheckboxTarget.checked = !this.actualCheckboxTarget.checked
   }
 }
