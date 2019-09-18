@@ -1,0 +1,165 @@
+#!/usr/bin/env ruby
+
+# Starts an HTTP server on port 6060 that implements just enough of the
+# Fastly Image Optimition APIs so it can be used with Alonetone. When you
+# are using Alonetone over HTTP you can set fastly_base_url in the
+# configuration to http://localhost:6060.
+
+require 'yaml'
+require 'rack'
+require 'webrick'
+require 'pathname'
+require 'open-uri'
+require 'digest/sha1'
+
+require 'aws-sdk-s3'
+require 'ruby-vips'
+
+require_relative '../lib/configurable'
+
+module Image
+  # Transforms a source image to an optimized JPEG and optionally downscales to
+  # a maximum width when the width is specified. It takes a few short-cuts
+  # because all Alonetone images are cropped to a square.
+  #
+  # For example:
+  #
+  #   Image::Transformation.new(image_data, width: 800).jpeg
+  class Transformation
+    attr_reader :image
+    attr_reader :transformations
+
+    def initialize(original, transformations)
+      @transformations = transformations
+      @image = Vips::Image.new_from_buffer(original, "")
+    end
+
+    def width
+      transformations['width']&.to_i
+    end
+
+    def quality
+      transformations.fetch('quality', 60).to_i
+    end
+
+    def jpeg
+      transform.jpegsave_buffer(
+        # The following are JPEG writer options: JPEG quality 65%, optimize
+        # JPEG to reduce file size, leave EXIF data out of the file.
+        Q: quality, optimize_coding: true, strip: true
+      )
+    end
+
+    private
+
+    def transform_options
+      { crop: :centre }
+    end
+
+    def transform
+      # Vips automatically applies EXIF rotation to images when the Image is
+      # initialized so we don't have to explicitly specify this operation.
+      if width
+        image.thumbnail_image(width, transform_options)
+      else
+        image
+      end
+    end
+  end
+end
+
+class Fastly
+  # WEBrick servlet that serves the images.
+  class Servlet < WEBrick::HTTPServlet::AbstractServlet
+    LSTRIP = %r{\A/}
+
+    def initialize(server, bucket, path_prefix)
+      super server
+      @bucket = bucket
+      @path_prefix = path_prefix
+    end
+
+    def service(http_request, http_response)
+      key = http_request.path.split(@path_prefix).last.gsub(LSTRIP, '')
+      object = @bucket.object(key)
+      params = Rack::Utils.parse_query(http_request.query_string)
+      etag = '"' + Digest::SHA1.hexdigest(http_request.request_uri.to_s) + '"'
+      http_response.status = 200
+      http_response['ETag'] = etag
+      http_response['Content-Type'] = 'image/jpeg'
+      http_response['Expires'] = (Time.now + 3600).httpdate
+      http_response['Cache-Control'] = 'max-age=3600'
+      http_response.body = Image::Transformation.new(
+        object.get.body.read, params
+      ).jpeg
+    rescue => e
+      http_response.status = 500
+      http_response.body = e.message + "\n" + http_request.path
+    end
+  end
+
+  def run
+    start_server
+  end
+
+  private
+
+  def port
+    ENV.fetch('PORT', 6060)
+  end
+
+  def server
+    @server ||= build_server
+  end
+
+  def build_server
+    server = WEBrick::HTTPServer.new(Port: port)
+    server.mount "/", Fastly::Servlet, bucket, path_prefix
+    server
+  end
+
+  def start_server
+    trap "INT" do
+      server.shutdown
+    end
+    server.start
+  end
+
+  def environment
+    'development'
+  end
+
+  def root
+    Pathname.new(File.expand_path('../..', __FILE__))
+  end
+
+  def config_filename
+    root.join('config/alonetone.yml')
+  end
+
+  def config_hash
+    YAML.load_file(config_filename)
+  end
+
+  def config
+    ::Configurable.new(environment, config_hash[environment])
+  end
+
+  def client
+    Aws::S3::Client.new(
+      region: config.amazon_s3_region,
+      access_key_id: config.amazon_access_key_id,
+      secret_access_key: config.amazon_secret_access_key
+    )
+  end
+
+  def bucket
+    Aws::S3::Bucket.new(config.amazon_s3_bucket_name, client: client)
+  end
+
+  def path_prefix
+    URI.parse(config.fastly_base_url).path
+  end
+end
+
+Fastly.new.run
