@@ -22,6 +22,10 @@ development: &defaults
   # of the S3 bucket.
   amazon_cloud_front_domain_name: ~
   amazon_cloud_front_key_pair_id: ~
+  # Configure a Fastly base URL where you have Image Optimizer enabled for
+  # the configured S3 bucket. For example: https://fastly.example.com/img.
+  # Leave this nil when you're not using Fastly.
+  fastly_base_url: ~
   # API token to use when accessing Askimet for spam filtering. You can
   # register at https://akismet.com.
   rakismet_key: ~
