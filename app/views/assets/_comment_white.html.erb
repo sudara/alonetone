@@ -7,24 +7,24 @@
         <!-- will be replaced by js payload to allow caching -->
     </div>
 
-    <%= f.text_area :body, rows:4, class: 'double_trouble', data: { target: 'comment.textarea' } , id: "comment_body_#{asset.unique_id}"  %>
+    <%= f.text_area :body, rows:4, class: 'double_trouble', id: nil, data: { target: 'comment.textarea' } , id: "comment_body_#{asset.unique_id}"  %>
 
     <span class="private hidden" data-target="comment.banner">
       Only <span class="only_user_name"><%= asset.user.name%></span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
     </span>
 
     <div class="private_check_box">
-      <%= f.check_box :private, class: 'private', data: { target: 'comment.actualCheckbox'} %>
+      <%= f.check_box :private, class: 'private', id: nil, data: { target: 'comment.actualCheckbox'} %>
         <label for="comment[private]" data-target='comment.markAsPrivate' data-action='click->comment#toggle'><span class="public">Make Private</span></label>
     </div>
 
-    <%= f.hidden_field :commentable_type, value: 'Asset', id: "comment_commentable_type_#{asset.unique_id}"%>
-    <%= f.hidden_field :commentable_id, value: asset.id, id: "comment_commentable_type_#{asset.unique_id}"%>
+    <%= f.hidden_field :commentable_type, value: 'Asset' %>
+    <%= f.hidden_field :commentable_id, value: asset.id %>
 
     <div class="submit_wrapper submit_wrapper_comment">
         <div class="ajax_waiting" data-target="comment.response"></div>
         <div class="small_spinner" data-target='comment.spinner' style="display:none;"></div>
-        <%= f.submit "Post Comment".html_safe, class: 'comment_submit',id: "submit_#{asset.unique_id}"%>
+        <%= f.submit "Post Comment".html_safe, class: 'comment_submit', id: nil%>
       </div>
     <% end %>
   </div>
