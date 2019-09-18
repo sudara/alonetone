@@ -54,13 +54,5 @@ RSpec.describe ImageVariant, type: :model do
         ImageVariant.variant(attachment, variant: :unknown)
       end.to raise_error(ArgumentError)
     end
-
-    it "processes all variants for an attachment" do
-      processed = ImageVariant.process(attachment)
-      expect(processed.size).to eq(ImageVariant::VARIANTS.size)
-      processed.each do |variant|
-        expect(variant).to be_kind_of(ActiveStorage::Variant)
-      end
-    end
   end
 end

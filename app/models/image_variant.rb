@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-# Helper class to translate variant names to Active Storage variants
-# and process them.
+# Helper class to translate variant names to Active Storage transformation.
 class ImageVariant
   include ActiveSupport::Benchmarkable
   delegate :logger, to: Rails
@@ -26,12 +25,6 @@ class ImageVariant
     @variant_name = variant
   end
 
-  def process
-    logger.tagged('ImageVariant') do
-      to_active_storage_variant.processed
-    end
-  end
-
   def variant_options
     ImageVariant.variant_options(variant_name)
   end
@@ -43,13 +36,6 @@ class ImageVariant
   # Returns an Active Storage variant for a named variant.
   def self.variant(attachment, variant:)
     new(attachment, variant: variant).to_active_storage_variant
-  end
-
-  # Processes all variants for an attachment.
-  def self.process(attachment)
-    VARIANTS.keys.map do |variant_name|
-      new(attachment, variant: variant_name).process
-    end
   end
 
   # Returns options to pass to VIPS to generate a variant of the original file.
