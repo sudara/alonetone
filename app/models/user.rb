@@ -79,11 +79,6 @@ class User < ApplicationRecord
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
-  # Active Storage normally does lazy processing for image variants but we
-  # want to process when the attachment changes.
-  before_save -> { @process_variants = attachment_changes.key?('avatar_image') }
-  after_commit :process_variants
-
   # Can create music
   has_one    :pic, as: :picable, dependent: :destroy
   has_one    :profile, dependent: :destroy
@@ -290,13 +285,6 @@ class User < ApplicationRecord
   end
 
   protected
-
-  def process_variants
-    return unless @process_variants
-    return unless avatar_image.attached?
-
-    ImageVariant.process(avatar_image)
-  end
 
   def make_first_user_admin
     self.admin = true if User.count == 0

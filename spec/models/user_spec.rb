@@ -115,7 +115,7 @@ RSpec.describe User, type: :model do
     context "without an avatar" do
       let(:user) { users(:william_shatner) }
 
-      it "creates the avatar and variants" do
+      it "creates the avatar" do
         user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
         expect(user.avatar_image).to be_attached
       end
@@ -124,7 +124,7 @@ RSpec.describe User, type: :model do
     context "with an avatar" do
       let(:user) { users(:henri_willig) }
 
-      it "replaces the avatar and variants" do
+      it "replaces the avatar" do
         user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
         expect(user.avatar_image).to be_attached
       end
