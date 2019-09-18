@@ -2,17 +2,14 @@
 
 # Helper class to translate variant names to Active Storage transformation.
 class ImageVariant
-  include ActiveSupport::Benchmarkable
-  delegate :logger, to: Rails
-
   VARIANTS = {
-    tiny: { resize_to_fit: [25, 25] },
-    small: { resize_to_fit: [50, 50] },
-    large: { resize_to_fit: [125, 125] },
-    album: { resize_to_fit: [200, 200] },
-    original: { resize_to_fit: [800, 800] },
-    greenfield: { resize_to_fit: [1500, 1500] },
-    hq: { resize_to_fit: [3000, 3000] }
+    tiny: 25,
+    small: 50,
+    large: 125,
+    album: 200,
+    original: 800,
+    greenfield: 1500,
+    hq: 3000
   }.freeze
 
   attr_reader :attachment
@@ -40,7 +37,11 @@ class ImageVariant
 
   # Returns options to pass to VIPS to generate a variant of the original file.
   def self.variant_options(variant_name)
-    VARIANTS[variant_name.to_sym]
+    size = VARIANTS[variant_name.to_sym]
+    {
+      resize_to_fill: [size, size, crop: :centre],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    }
   end
 
   # Raises ArgumentError with explanation when the variant name does not exist.
