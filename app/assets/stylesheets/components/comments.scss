@@ -203,6 +203,7 @@
         position: relative;
         top: 1px;
         label {
+          user-select:none;
           text-transform: lowercase;
           color: $font-color-three;
           margin-bottom: 2px!important;
