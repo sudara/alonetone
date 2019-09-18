@@ -34,11 +34,6 @@ class Playlist < ActiveRecord::Base
   before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
     :set_published_at, :notify_followers_if_publishing_album
 
-  # Active Storage normally does lazy processing for image variants but we
-  # want to process when the attachment changes.
-  before_save -> { @process_variants = attachment_changes.key?('cover_image') }
-  after_commit :process_variants
-
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :cover_image
@@ -154,15 +149,6 @@ class Playlist < ActiveRecord::Base
 
   def check_for_new_permalink
     generate_permalink! if title_changed?
-  end
-
-  protected
-
-  def process_variants
-    return unless @process_variants
-    return unless cover_image.attached?
-
-    ImageVariant.process(cover_image)
   end
 end
 

@@ -126,7 +126,7 @@ RSpec.describe Playlist, type: :model do
     context "without a cover" do
       let(:playlist) { playlists(:william_shatners_favorites) }
 
-      it "creates the cover and variants" do
+      it "creates the cover" do
         playlist.update!(cover_image: file_fixture_uploaded_file('blue_de_bresse.jpg'))
         expect(playlist.cover_image).to be_attached
       end
@@ -135,7 +135,7 @@ RSpec.describe Playlist, type: :model do
     context "with an cover" do
       let(:playlist) { playlists(:will_studd_rockfort) }
 
-      it "replaces the cover and variants" do
+      it "replaces the cover" do
         playlist.update!(cover_image: file_fixture_uploaded_file('blue_de_bresse.jpg'))
         expect(playlist.cover_image).to be_attached
       end
