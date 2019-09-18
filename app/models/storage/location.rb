@@ -24,7 +24,9 @@ module Storage
     end
 
     def url
-      if Rails.application.cloudfront_enabled?
+      if Rails.application.fastly_enabled?
+        FastlyLocation.new(attachment).url
+      elsif Rails.application.cloudfront_enabled?
         CloudFrontLocation.new(attachment.key, signed: signed?).url
       elsif Rails.application.remote_storage?
         s3_url
