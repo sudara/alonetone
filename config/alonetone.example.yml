@@ -1,4 +1,4 @@
-development: &defaults
+development:
   # Used by mailers and models as hostname to generate URLs to Alonetone.
   hostname: localhost:3000
   # Default FROM address when sending email.
@@ -38,13 +38,18 @@ development: &defaults
   # Greenfield.
   greenfield_hostname: localhost:3000
 
+# Some services in the application like Active Storage and Akismet have to be
+# configured when the Rails process boots. To ensure the proper settings in
+# the test suite these details have to be compied to config/alonetone.yml
+# verbatim.
 test:
-  <<: *defaults
   hostname: alonetone.example.com
+  email: support@example.com
   # Temporary storage writes to temp files on disk.
   storage_service: temporary
   # Amazon S3 configuration. We have to set these because ActiveStorage service
-  # configuration is read when starting the suite.
+  # configuration is read when starting the suite and switching to S3 during
+  # the suite would be impossible without this.
   amazon_access_key_id: XXXXXXXXXXXXXXXXXXXX
   amazon_secret_access_key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   amazon_s3_region: eu-central-1
