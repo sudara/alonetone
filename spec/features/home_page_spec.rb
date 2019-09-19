@@ -8,8 +8,8 @@ RSpec.describe 'home page', type: :feature, js: true do
 
     track_chunk = find(".asset", match: :first)
     track_chunk.click
-    track_chunk.find('.private_check_box label').click
     expect(track_chunk).not_to have_selector('.add_to_favorites')
+    track_chunk.find('.private_check_box label').click
     Percy.snapshot(page, name: 'Home as Guest')
   end
 
