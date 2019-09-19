@@ -1,8 +1,21 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :request do
+  let(:fastly_base_url) { 'https://fastly.example.com' }
+
   before do
     akismet_stub_response_ham
+  end
+
+  around do |example|
+    # Switch back to temporary storage for this particular controller because
+    # it actually needs to store and retrieve files. We also use Fastly
+    # locations so we don't need a file on disk to generate a URL.
+    with_storage_service(:temporary) do
+      with_alonetone_configuration(fastly_base_url: fastly_base_url) do
+        example.call
+      end
+    end
   end
 
   context "#latest" do
