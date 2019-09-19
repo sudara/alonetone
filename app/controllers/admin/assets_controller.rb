@@ -15,17 +15,17 @@ module Admin
 
     def spam
       AssetCommand.new(@asset).spam_and_soft_delete_with_relations
-      redirect_to admin_assets_path(filter_by: :is_spam) unless params[:redirect] == "false"
+      redirect_to admin_assets_path(filter_by: :is_spam) unless params[:no_redirect]
     end
 
     def delete
       AssetCommand.new(@asset).soft_delete_with_relations
-      redirect_to admin_assets_path(filter_by: :deleted)  unless params[:redirect] == "false"
+      redirect_to admin_assets_path(filter_by: :deleted) unless params[:no_redirect]
     end
 
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
-      redirect_to admin_assets_path(filter_by: :not_spam) unless params[:redirect] == "false"
+      redirect_to admin_assets_path(filter_by: :not_spam) unless params[:no_redirect]
     end
 
     private
@@ -38,7 +38,7 @@ module Admin
     end
 
     def permitted_params
-      params.permit(:filter_by, :redirect)
+      params.permit(:filter_by, :no_redirect)
     end
   end
 end
