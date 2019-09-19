@@ -122,6 +122,8 @@ RSpec.describe UsersHelper, type: :helper do
 
     around do |example|
       with_storage_current_host(base_url) do
+        # Updating the avatar is the easiest way to get a file on disk.
+        user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
         example.call
       end
     end
