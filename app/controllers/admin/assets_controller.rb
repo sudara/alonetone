@@ -38,7 +38,7 @@ module Admin
     end
 
     def permitted_params
-      params.permit(:filter_by, :redirect, mark_spam_by: :user_id)
+      params.permit(:filter_by, :redirect)
     end
   end
 end
