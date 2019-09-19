@@ -81,9 +81,9 @@
                   <div>N comments / N listens</div>
                 </div>
                 <div class="button_column">
-                  <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsDeleted' } %>
-                  <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#markTrackAsDeleted' } %>
-                  <%= button_to "Restore Asset", restore_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.restoreButton', action: 'admin--asset#markTrackAsRestored' } %>
+                  <%= button_to "Spam Asset", spam_admin_asset_path(id: asset.id, redirect: false), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsDeleted' } %>
+                  <%= button_to "Delete Asset", delete_admin_asset_path(id: asset.id, redirect: false), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#markTrackAsDeleted' } %>
+                  <%= button_to "Restore Asset", restore_admin_asset_path(id: asset.id, redirect: false), method: :put, remote: true, data: { target: 'admin--asset.restoreButton', action: 'admin--asset#markTrackAsRestored' } %>
                 </div>
               </div>
             <% end %>

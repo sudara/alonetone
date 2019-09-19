@@ -15,17 +15,17 @@ module Admin
 
     def spam
       AssetCommand.new(@asset).spam_and_soft_delete_with_relations
-      redirect_to admin_assets_path(filter_by: :is_spam)
+      redirect_to admin_assets_path(filter_by: :is_spam) unless params[:redirect] == "false"
     end
 
     def delete
       AssetCommand.new(@asset).soft_delete_with_relations
-      redirect_to admin_assets_path(filter_by: :deleted)
+      redirect_to admin_assets_path(filter_by: :deleted)  unless params[:redirect] == "false"
     end
 
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
-      redirect_to admin_assets_path(filter_by: :not_spam)
+      redirect_to admin_assets_path(filter_by: :not_spam) unless params[:redirect] == "false"
     end
 
     private
@@ -33,11 +33,12 @@ module Admin
     # find by id rather than permalink, since it's not unique
     # include with_deleted to be able to restore
     def find_asset
+      # binding.pry
       @asset = Asset.with_deleted.find(params[:id])
     end
 
     def permitted_params
-      params.permit(:filter_by, mark_spam_by: :user_id)
+      params.permit(:filter_by, :redirect, mark_spam_by: :user_id)
     end
   end
 end
