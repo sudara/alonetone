@@ -10,13 +10,6 @@ body {
     @media #{$mobile} {
         margin-top: $baseline;
     }
-    #static_header {
-      max-width: 1032px;
-      padding: 0 $baseline * 1.5;
-      box-sizing: border-box;
-      margin-left: auto;
-      margin-right: auto;
-    }
     #columns_header {
       max-width: 1032px;
       box-sizing: border-box;
