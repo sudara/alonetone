@@ -2,7 +2,7 @@ main {
   #user_home {
     box-sizing: border-box;
     display: grid;
-    max-width: 1032px;
+    max-width: $site_max_width;
     padding: 0 $baseline * 1.5;
     margin: 0 auto;
     grid-template-columns: repeat(2, 1fr);

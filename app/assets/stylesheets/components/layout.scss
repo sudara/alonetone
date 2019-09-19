@@ -11,7 +11,7 @@ body {
         margin-top: $baseline;
     }
     #columns_header {
-      max-width: 1032px;
+      max-width: $site_max_width;
       box-sizing: border-box;
       padding: 0 $baseline * 1.5;
       margin-left: auto;
@@ -20,7 +20,7 @@ body {
     }
     #columns {
       display: flex;
-      max-width: 1032px;
+      max-width: $site_max_width;
       box-sizing: border-box;
       padding: 0 $baseline * 1.5;
       margin-right: auto;
