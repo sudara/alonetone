@@ -23,9 +23,6 @@ Alonetone::Application.routes.draw do
         put :unspam
         put :spam
       end
-      collection do
-        put :mark_group_as_spam
-      end
     end
     resources :assets, path: 'assets/(:filter_by)', only: [:index] do
       member do
@@ -33,9 +30,6 @@ Alonetone::Application.routes.draw do
         put :spam
         put :delete
         put :restore
-      end
-      collection do
-        put :mark_group_as_spam
       end
     end
   end
