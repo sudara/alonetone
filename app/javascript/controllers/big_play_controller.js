@@ -13,6 +13,11 @@ export default class extends Controller {
     this.animation.init()
     this.animation.play()
     this.setAnimationState()
+    this.playheadAnimation = new TweenMax(this.progressContainerInnerTarget, 100, {
+      left: '100%',
+      paused: true,
+      ease: Linear.easeNone
+    })
   }
 
   setAnimationState() {
@@ -22,11 +27,11 @@ export default class extends Controller {
     } else if (this.delegate && this.delegate.isPlaying) { // while playing
       this.animation.showLoading()
       this.animation.showPause()
-      this.showPlayhead()
+      this.startPlayhead()
     } else if (this.delegate && this.delegate.positionFromStart(1)) { // after playing while paused
       this.animation.setPlay()
       this.update(this.delegate.percentPlayed())
-      this.showPlayhead()
+      this.startPlayhead()
     } else { // loaded and not playing
       this.animation.setPlay()
     }
@@ -41,9 +46,15 @@ export default class extends Controller {
     }
   }
 
+  //  called from whileLoading()
   play() {
     this.animation.showPause()
-    this.showPlayhead()
+    this.startPlayhead()
+  }
+
+  pause() {
+    this.playheadAnimation.pause()
+    this.animation.setPlay()
   }
 
   togglePlay(e) {
@@ -68,23 +79,31 @@ export default class extends Controller {
     this.updatePlayhead()
     this.waveform.update()
     this.timeTarget.innerHTML = this.delegate.time
+    if (Math.abs(this.delegate.position - this.playheadAnimation.duration()) > 1.0) {
+      console.log('playhead jogged')
+      this.playheadAnimation.progress(this.percentPlayed / 100)
+    }
   }
 
   reset() {
     this.animation.reset()
     this.animation.setPlay()
+    this.playheadAnimation.seek(0)
   }
 
   disconnect() {
     this.waveformTarget.querySelector('canvas').remove()
   }
 
-  showPlayhead() {
+  startPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
+    this.playheadAnimation.duration(this.delegate.duration)
+    this.playheadAnimation.play()
   }
 
   updatePlayhead() {
-    this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
+    console.log(this.delegate.position)
+    this.playheadAnimation.updateTo(this.delegate.position)
   }
 
   setupWaveform() {

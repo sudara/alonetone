@@ -29,7 +29,7 @@ export default class extends PlaybackController {
   }
 
   pauseCallback() {
-    this.bigPlay.animation.setPlay()
+    this.bigPlay.pause()
     this.playTarget.classList.replace('pause-button', 'play-button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
