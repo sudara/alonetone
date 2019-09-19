@@ -10,6 +10,7 @@ Alonetone::Application.routes.draw do
   namespace :admin do
     resources :users, path: 'users/(:filter_by)', only: [:index] do
       member do
+        get :show
         put :delete
         put :restore
         put :unspam

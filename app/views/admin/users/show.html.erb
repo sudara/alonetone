@@ -1,0 +1,139 @@
+<div id="admin_columns">
+
+  <div class="admin_column_left box">
+    <h2>Admin</h2>
+    <%= render partial: 'admin/navigation' %>
+  </div>
+
+  <div class="admin_column_right">
+    <div class="admin_column_right_inner box">
+      <h3 style="padding-left: 1em;">User</h3>
+      <div style="padding: 0 1em;">
+        <header class="admin_assets_header">
+          <div class="date_column">Date</div>
+          <div class="user_column">User</div>
+          <div class="track_column">Track</div>
+        </header>
+        <div class="admin_users_rows">
+          <div data-controller="admin--user" data-admin--user-deleted="<%= @user.soft_deleted? %>" data-admin--user-spam="<%= @user.is_spam? %>">
+            <div class="date_column">
+              <%= local_time_ago @user.created_at %>
+                <div class="deleted_at_date"><%== "Deleted #{local_time_ago @user.deleted_at}" if @user.deleted_at %></div>
+            </div>
+            <div class="user_column">
+              <div class="avatar">
+                <%= user_image(@user, variant: :large) %>
+              </div>
+              <div>
+                <div><%= @user.soft_deleted? ? @user.login : link_to(@user.login, user_home_path(@user.login)) %></div>
+                <div><%= @user.email %></div>
+                <% unless @user.soft_deleted? %>
+                <div><%= @user.current_login_ip %>
+                  <% if @user.current_login_ip.present? && (User.with_same_ip_as(@user).count > 0)  %>
+                  <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(@user), method: :put %>
+                  <% end %>
+                 </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="bio_column">
+              <div><%= truncate(@user&.profile&.bio, length: 200) %></div>
+              <div><%= @user&.profile&.website %></div>
+              <div><%= link_to "#{@user.assets.count} tracks", user_tracks_path(@user) if @user.assets.count > 0  && !@user.soft_deleted? %></div>
+            </div>
+            <div class="button_column">
+              <%= button_to "Unspam User", unspam_admin_user_path(@user), method: :put, remote: true, data: { target: 'admin--user.unspamButton', action: 'click->admin--user#hideUnspamButton' } %>
+              <%= button_to "Spam User", spam_admin_user_path(@user), method: :put, remote: true, data: { target: 'admin--user.spamButton', action: 'click->admin--user#hideSpamAndShowRestoreButton' } %>
+              <%= button_to "Delete User", delete_admin_user_path(@user), method: :put, remote: true, data: { target: 'admin--user.deleteButton', action: 'admin--user#showRestoreButton' } %></td>
+              <%= button_to "Restore User", restore_admin_user_path(@user), method: :put, remote: true, data: { target: 'admin--user.restoreButton', action: 'click->admin--user#showDeleteAndSpamButton' } %></td>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="padding-left: 1em;">Users Tracks</h3>
+      <div style="padding: 0 1em;">
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav @assets_pagy %>
+        </div>
+        <div class="admin_column_right_inner box">
+          <header class="admin_assets_header">
+            <div class="date_column">Date</div>
+            <div class="user_column">User</div>
+            <div class="track_column">Track</div>
+          </header>
+          <div class="admin_assets_rows">
+            <% @assets.each do |asset| %>
+              <div data-controller="admin--asset" data-admin--asset-deleted="<%= asset.soft_deleted? %>" data-admin--asset-spam="<%= asset.is_spam? %>">
+                <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
+                <div class="user_column">
+                  <div class="avatar">
+                    <%= user_image(asset.user_object, variant: :original) %>
+                  </div>
+                  <div>
+                    <div><%= link_to asset.user_object.login, admin_user_path(asset.user_object.login) %></div>
+                    <div><%= asset.user_object.ip %></div>
+                  </div>
+                </div>
+                <div class="track_column">
+                  <div><%= link_to asset.title, user_track_path(asset.user_object, asset.permalink) %></div>
+                  <div><%= truncate(asset.description, length: 80) %></div>
+                  <div>N comments / N listens</div>
+                </div>
+                <div class="button_column">
+                  <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsDeleted' } %>
+                  <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#markTrackAsDeleted' } %>
+                  <%= button_to "Restore Asset", restore_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.restoreButton', action: 'admin--asset#markTrackAsRestored' } %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="mini_paginator bottom_paginator">
+          <%== pagy_nav @assets_pagy %>
+        </div>
+      </div>
+
+      <h3 style="padding-left: 1em;">Users Comments</h3>
+      <div style="padding: 0 1em;">
+        <div class="mini_paginator top_paginator">
+          <%== pagy_nav @comment_pagy %>
+        </div>
+
+        <div class="admin_column_right_inner box">
+
+          <header class="admin_comments_header">
+            <div class="date_column">Date</div>
+            <div class="user_column">User</div>
+            <div class="text_column">Text</div>
+          </header>
+
+          <div class="admin_comment_rows">
+            <% @comments.each do |comment| %>
+                <div data-controller="admin--comment">
+                  <div class="date_column"><%= comment.created_at.strftime("%b %d") %></div>
+                  <div class="user_column">
+                    <div class="avatar">
+                      <%= user_image(@user, variant: :original) %>
+                    </div>
+                    <div>
+                      <div><%= link_to "#{comment&.commenter&.login}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
+                      <div><%= comment&.commenter&.email %></div>
+                      <div><%= link_to "#{comment.remote_ip}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
+                    </div>
+                  </div>
+                  <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
+                  <div class="button_column">
+                    <div data-target='admin--comment.spamvalue' style="display: none;"><%= comment.is_spam %></div>
+                    <div data-target='admin--comment.spam'><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { action: 'click->admin--comment#showSpamTarget' } %></div>
+                    <div data-target='admin--comment.unspam'><%= button_to "Unspam", unspam_admin_comment_path(comment), data: { confirm: 'This will make the comment public. Are you sure?', action: 'click->admin--comment#showUnspamTarget' }, method: :put, remote: true %></div>
+                    <div><%= button_to "Mark Spam for IP", mark_group_as_spam_admin_comments_path, method: :put, params: { mark_spam_by: { remote_ip: comment.remote_ip } } %></div>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
