@@ -76,12 +76,11 @@ export default class extends Controller {
 
   update(percentPlayed) {
     this.percentPlayed = percentPlayed
-    this.updatePlayhead()
     this.waveform.update()
     this.timeTarget.innerHTML = this.delegate.time
-    if (Math.abs(this.delegate.position - this.playheadAnimation.duration()) > 1.0) {
-      console.log('playhead jogged')
-      this.playheadAnimation.progress(this.percentPlayed / 100)
+    if (Math.abs(this.percentPlayed - this.playheadAnimation.progress()) > 0.05) {
+      console.log(`playhead jogged from ${this.playheadAnimation.progress()} to ${this.percentPlayed}`)
+      this.updatePlayhead()
     }
   }
 
@@ -102,8 +101,7 @@ export default class extends Controller {
   }
 
   updatePlayhead() {
-    console.log(this.delegate.position)
-    this.playheadAnimation.updateTo(this.delegate.position)
+    this.playheadAnimation.progress(this.percentPlayed)
   }
 
   setupWaveform() {
