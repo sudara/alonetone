@@ -24,16 +24,10 @@ module Storage
     end
 
     def url
-      if Rails.application.fastly_enabled?
-        FastlyLocation.new(attachment).url
-      elsif Rails.application.cloudfront_enabled?
-        CloudFrontLocation.new(attachment.key, signed: signed?).url
-      elsif Rails.application.remote_storage?
-        s3_url
-      elsif attachment.respond_to?(:processed)
-        attachment.processed.service_url
+      if attachment.respond_to?(:processed)
+        variant_url
       else
-        attachment.service_url
+        original_url
       end
     end
 
@@ -47,6 +41,27 @@ module Storage
 
     def s3_url
       signed? ? s3_object.presigned_url(:get) : s3_object.public_url
+    end
+
+    # Returns a URL to either the processed image or a service URL to a service that will process
+    # the image dynamicall.
+    def variant_url
+      if Rails.application.fastly_enabled?
+        FastlyLocation.new(attachment).url
+      else
+        attachment.processed.service_url
+      end
+    end
+
+    # Returns a URL to the unaltered original uploaded files.
+    def original_url
+      if Rails.application.cloudfront_enabled?
+        CloudFrontLocation.new(attachment.key, signed: signed?).url
+      elsif Rails.application.remote_storage?
+        s3_url
+      else
+        attachment.service_url
+      end
     end
   end
 end

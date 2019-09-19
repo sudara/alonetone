@@ -9,6 +9,19 @@ RSpec.describe Storage::Location, type: :model do
   let(:attachment) do
     asset.audio_file
   end
+  let(:uploaded_file) do
+    file_fixture_uploaded_file('marie.jpg')
+  end
+  # Henri has a Blob for their avatar.
+  let(:user) { users(:henri_willig) }
+  let(:image_attachment) do
+    user.update!(avatar_image: uploaded_file) if Rails.application.config.active_storage.service == "temporary"
+    user.avatar_image
+  end
+  let(:image_variant) do
+    ImageVariant.variant(image_attachment, variant: :small)
+  end
+  let(:fastly_base_url) { 'https://fastly.example.com/images' }
 
   it "does not initialize without signed argument" do
     expect do
@@ -43,7 +56,7 @@ RSpec.describe Storage::Location, type: :model do
       end
     end
 
-    it "generates a signed URL" do
+    it "generates a signed URL to CloudFront" do
       location = Storage::Location.new(attachment, signed: true)
       expect(location).to be_signed
       url = location.url
@@ -53,7 +66,7 @@ RSpec.describe Storage::Location, type: :model do
       expect(uri.query).to_not be_nil
     end
 
-    it "generates an unsiged URL" do
+    it "generates an unsiged URL to CloudFront" do
       location = Storage::Location.new(attachment, signed: false)
       expect(location).to_not be_signed
       url = location.url
@@ -61,6 +74,45 @@ RSpec.describe Storage::Location, type: :model do
       expect(url).to include(attachment.key)
       uri = URI.parse(url)
       expect(uri.query).to be_nil
+    end
+
+    it "generates a URL to an image variant when the variant exists on S3" do
+      stub_request(:head, %r{amazonaws.com})
+      location = Storage::Location.new(image_variant, signed: true)
+      expect(location).to be_signed
+      url = location.url
+      expect(url).to include('amazonaws.com')
+      expect(url).to include(image_variant.key)
+      uri = URI.parse(url)
+      expect(uri.query).to_not be_nil
+    end
+
+    context "with Fastly enabled" do
+      around do |example|
+        with_alonetone_configuration(fastly_base_url: fastly_base_url) do
+          example.call
+        end
+      end
+
+      it "generates a CloundFront URL to the original image" do
+        location = Storage::Location.new(attachment, signed: true)
+        expect(location).to be_signed
+        url = location.url
+        expect(url).to include('cloudfront.net')
+        expect(url).to include(attachment.key)
+        uri = URI.parse(url)
+        expect(uri.query).to_not be_nil
+      end
+
+      it "generates a Fastly Image Optimization URL to an image variant" do
+        location = Storage::Location.new(image_variant, signed: true)
+        expect(location).to be_signed
+        url = location.url
+        expect(url).to include(fastly_base_url)
+        expect(url).to include(image_attachment.key)
+        uri = URI.parse(url)
+        expect(uri.query).to_not be_nil
+      end
     end
   end
 
@@ -77,7 +129,7 @@ RSpec.describe Storage::Location, type: :model do
       end
     end
 
-    it "generates a signed URL" do
+    it "generates a signed URL to S3" do
       location = Storage::Location.new(attachment, signed: true)
       expect(location).to be_signed
       url = location.url
@@ -87,7 +139,7 @@ RSpec.describe Storage::Location, type: :model do
       expect(uri.query).to_not be_nil
     end
 
-    it "generates an unsiged URL" do
+    it "generates an unsiged URL to S3" do
       location = Storage::Location.new(attachment, signed: false)
       expect(location).to_not be_signed
       url = location.url
@@ -95,6 +147,34 @@ RSpec.describe Storage::Location, type: :model do
       expect(url).to include(attachment.key)
       uri = URI.parse(url)
       expect(uri.query).to be_nil
+    end
+
+    context "with Fastly enabled" do
+      around do |example|
+        with_alonetone_configuration(fastly_base_url: fastly_base_url) do
+          example.call
+        end
+      end
+
+      it "generates an S3 URL to the original image" do
+        location = Storage::Location.new(attachment, signed: true)
+        expect(location).to be_signed
+        url = location.url
+        expect(url).to include('amazonaws.com')
+        expect(url).to include(attachment.key)
+        uri = URI.parse(url)
+        expect(uri.query).to_not be_nil
+      end
+
+      it "generates a Fastly Image Optimization URL to an image variant" do
+        location = Storage::Location.new(image_variant, signed: true)
+        expect(location).to be_signed
+        url = location.url
+        expect(url).to include(fastly_base_url)
+        expect(url).to include(image_attachment.key)
+        uri = URI.parse(url)
+        expect(uri.query).to_not be_nil
+      end
     end
   end
 
@@ -117,26 +197,42 @@ RSpec.describe Storage::Location, type: :model do
       location = Storage::Location.new(attachment, signed: true)
       url = location.url
       expect(url).to include(base_url)
+      uri = URI.parse(url)
+      expect(uri.query).to_not be_nil
     end
 
     it "generates a URL back to the application when unsigned" do
       location = Storage::Location.new(attachment, signed: false)
       url = location.url
       expect(url).to include(base_url)
+      uri = URI.parse(url)
+      expect(uri.query).to_not be_nil
     end
 
-    context "operating on an image" do
-      let(:user) { users(:william_shatner) }
-      let(:location) { user.avatar_image_location(variant: :small) }
-
-      before do
-        user.update!(avatar_image: file_fixture_uploaded_file('marie.jpg'))
+    context "with Fastly enabled" do
+      around do |example|
+        with_alonetone_configuration(fastly_base_url: fastly_base_url) do
+          example.call
+        end
       end
 
-      it "generates a URL back to the application" do
+      it "generates URL back to the application for the original image" do
+        location = Storage::Location.new(attachment, signed: true)
+        expect(location).to be_signed
         url = location.url
-        expect(url).to include('rails/active_storage/disk')
         expect(url).to include(base_url)
+        uri = URI.parse(url)
+        expect(uri.query).to_not be_nil
+      end
+
+      it "generates a Fastly Image Optimization URL to an image variant" do
+        location = Storage::Location.new(image_variant, signed: true)
+        expect(location).to be_signed
+        url = location.url
+        expect(url).to include(fastly_base_url)
+        expect(url).to include(image_attachment.key)
+        uri = URI.parse(url)
+        expect(uri.query).to_not be_nil
       end
     end
   end
