@@ -83,7 +83,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
     it "should redirect admin to root_path" do
       put delete_admin_user_path(users(:arthur))
-      expect(response).to redirect_to(admin_users_path(filter_by: :deleted))
+      expect(response).to redirect_to(admin_users_path({ filter_by: :deleted }))
     end
 
     it "sets deleted_at to true" do
@@ -132,7 +132,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
     context "if deleted: true flag is passed" do
       it "should return users with deleted" do
-        get admin_users_path(filter_by: :deleted)
+        get admin_users_path({ filter_by: :deleted })
         expect(response.body).to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
@@ -148,14 +148,14 @@ RSpec.describe Admin::UsersController, type: :request do
 
     context "with filter_by" do
       it "should return spam users only if flag is passed" do
-        get admin_users_path(filter_by: :is_spam)
+        get admin_users_path({ filter_by: :is_spam })
         expect(response.body).to match(/aaron/)
         expect(response.body).not_to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
 
       it "should return only non spam users if is_spam is set to false" do
-        get admin_users_path(filter_by: :not_spam)
+        get admin_users_path({ filter_by: :not_spam })
         expect(response.body).not_to match(/aaron/)
         expect(response.body).to match(/arthur/)
         expect(response.body).to match(/ben/)
@@ -167,6 +167,24 @@ RSpec.describe Admin::UsersController, type: :request do
         get admin_users_path
         expect(response.status).to eq(200)
       end
+    end
+  end
+
+  describe '#show' do
+    before :each do
+      get admin_user_path(id: users(:sudara).login)
+    end
+
+    it 'should display user information' do
+      expect(response.body).to match(/sudara/)
+    end
+
+    it 'should display users assets' do
+      expect(response.body).to match(/Very good song/)
+    end
+
+    it 'should display users comments' do
+      expect(response.body).to match(/this is an awesome track, says a user/)
     end
   end
 end
