@@ -1,5 +1,10 @@
 $baseline: 24px; // used for various layout spacing
 
+$content_max_width: 960px; // max width that site content can expand
+
+$site_max_width: calc( #{$content_max_width} + #{$baseline} * 3); // left and right gutters are 1.5 * $baseline
+
+
 // media tiers
 
 $mobile: 'only screen and (max-width: 420px)';
