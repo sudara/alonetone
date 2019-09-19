@@ -1,206 +1,212 @@
-#edit_playlist_info {
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 20px;
-  padding-top: 0;
-  max-width: 960px;
+.edit_playlist_info_container {
+  max-width: 1032px;
+  padding: 0 $baseline * 1.5;
+  box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
-  @media #{$one-column} {
-    width: 96%;
-  }
-  > h2 {
-    padding-left: 59px;
-    height: 50px;
-    line-height: 53px;
-    font-family: $medium-sans-font;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    @media #{$one-column} {
-      padding-left: 12px;
-    }
-  }
-  form p {
-    font-size: 14px;
-  }
-  #pic_pic {
+  #edit_playlist_info {
     padding-left: 0;
-    font-size: 12px;
-    line-height: 14px;
-  }
-  .edit_playlist_info_columns {
-    display: flex;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 25px;
+    padding-right: 0;
+    padding-bottom: 20px;
+    padding-top: 0;
+    margin-left: auto;
+    margin-right: auto;
     @media #{$one-column} {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-      flex-direction: column-reverse;
+      width: 96%;
     }
-    flex-wrap: wrap;
-    .edit_playlist_info_left_column {
-      min-width: 220px;
-      width: 20%;
+    > h2 {
+      padding-left: 59px;
+      height: 50px;
+      line-height: 53px;
+      font-family: $medium-sans-font;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       @media #{$one-column} {
-        width: 100%;
-        margin-top: $baseline;
-      }
-      .cover {
-        display: block;
-        border: 1px dashed $border-color-three;
-        padding: 4px;
-        margin-top: 10px;
-        text-align: center;
-        max-width: 150px;
-        pointer-events: none;
-        img {
-          max-width: 150px;
-          border-radius: 6px;
-          display: inline-block;
-        }
-        div.no_pic {
-          svg {
-            border-radius: 6px;
-            display: block;
-          }
-        }
-      }
-      form {
-        input {
-          margin-bottom: 8px;
-        }
-        input#pic_pic {
-          font-weight: normal;
-          font-family: $sans-font;
-        }
-      }
-      p {
-        font-size: 12px;
-        color: $font-color-five;
-        margin-top: 0;
+        padding-left: 12px;
       }
     }
-    .edit_playlist_info_right_column {
-      flex: 1;
+    form p {
+      font-size: 14px;
+    }
+    #pic_pic {
+      padding-left: 0;
+      font-size: 12px;
+      line-height: 14px;
+    }
+    .edit_playlist_info_columns {
       display: flex;
-      flex-wrap: wrap;
-      width: 75%;
+      padding-left: 60px;
+      padding-right: 60px;
+      padding-top: 25px;
       @media #{$one-column} {
-        width: 100%;
+        padding-left: $baseline / 2;
+        padding-right: $baseline / 2;
+        flex-direction: column-reverse;
       }
-      div.input {
-        width: 100%;
-      }
-      > .edit_playlist_info_right_column_title_and_year {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
+      flex-wrap: wrap;
+      .edit_playlist_info_left_column {
+        min-width: 220px;
+        width: 20%;
         @media #{$one-column} {
-          flex-direction: column;
-        }
-        > :nth-child(1) {
-          flex: 1;
-          input {
-            width: 100%;
-          }
-          margin-right: 30px;
-          @media #{$one-column} {
-            margin-right: 0;
-          }
-        }
-        > :nth-child(2) {
-          width: 140px;
-          input {
-            width: 100%;
-          }
-        }
-      }
-      > .edit_playlist_info_right_column_links {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        @media #{$one-column} {
-          flex-direction: column;
-        }
-        > :nth-child(1) {
-          flex: 1;
-          input {
-            width: 100%;
-          }
-          margin-right: 30px;
-          @media #{$one-column} {
-            margin-right: 0px;
-          }
-        }
-        > :nth-child(2) {
-          flex: 1;
-          input {
-            width: 100%;
-          }
-        }
-      }
-      > .edit_playlist_info_right_column_credits {
-        display: flex;
-        width: 100%;
-        textarea {
           width: 100%;
-          height: 66px;
+          margin-top: $baseline;
+        }
+        .cover {
+          display: block;
+          border: 1px dashed $border-color-three;
+          padding: 4px;
+          margin-top: 10px;
+          text-align: center;
+          max-width: 150px;
+          pointer-events: none;
+          img {
+            max-width: 150px;
+            border-radius: 6px;
+            display: inline-block;
+          }
+          div.no_pic {
+            svg {
+              border-radius: 6px;
+              display: block;
+            }
+          }
+        }
+        form {
+          input {
+            margin-bottom: 8px;
+          }
+          input#pic_pic {
+            font-weight: normal;
+            font-family: $sans-font;
+          }
+        }
+        p {
+          font-size: 12px;
+          color: $font-color-five;
+          margin-top: 0;
         }
       }
-      > .edit_playlist_info_right_column_private_and_hidden {
+      .edit_playlist_info_right_column {
+        flex: 1;
         display: flex;
-        flex-direction: row;
-        width: 100%;
-        font-size: 12px;
-        position: relative;
-        height: 54px;
+        flex-wrap: wrap;
+        width: 75%;
         @media #{$one-column} {
-          flex-direction: column;
+          width: 100%;
         }
         div.input {
-          width: auto;
+          width: 100%;
         }
-        label {
-          text-transform: none;
-          color: $font-color-three;
+        > .edit_playlist_info_right_column_title_and_year {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          @media #{$one-column} {
+            flex-direction: column;
+          }
+          > :nth-child(1) {
+            flex: 1;
+            input {
+              width: 100%;
+            }
+            margin-right: 30px;
+            @media #{$one-column} {
+              margin-right: 0;
+            }
+          }
+          > :nth-child(2) {
+            width: 140px;
+            input {
+              width: 100%;
+            }
+          }
         }
-        span.private_notice {
-         color: $font-color-five;
-         font-family: $medium-sans-font;
-         margin-left: 4px;
-         margin-top: 5px;
+        > .edit_playlist_info_right_column_links {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          @media #{$one-column} {
+            flex-direction: column;
+          }
+          > :nth-child(1) {
+            flex: 1;
+            input {
+              width: 100%;
+            }
+            margin-right: 30px;
+            @media #{$one-column} {
+              margin-right: 0px;
+            }
+          }
+          > :nth-child(2) {
+            flex: 1;
+            input {
+              width: 100%;
+            }
+          }
+        }
+        > .edit_playlist_info_right_column_credits {
+          display: flex;
+          width: 100%;
+          textarea {
+            width: 100%;
+            height: 66px;
+          }
+        }
+        > .edit_playlist_info_right_column_private_and_hidden {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          font-size: 12px;
+          position: relative;
+          height: 54px;
+          @media #{$one-column} {
+            flex-direction: column;
+          }
+          div.input {
+            width: auto;
+          }
+          label {
+            text-transform: none;
+            color: $font-color-three;
+          }
+          span.private_notice {
+          color: $font-color-five;
+          font-family: $medium-sans-font;
+          margin-left: 4px;
+          margin-top: 5px;
+          }
         }
       }
     }
-  }
-  .edit_playlist_info_bottom {
-    border-top: 1px solid $border-color-five;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 20px;
-    @media #{$one-column} {
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-    input {
-      float: right;
-      @include default-button();
-      cursor: pointer;
-    }
-    a:first-child {
-      @include default-button();
-      background-color: transparent;
-      color: $accent;;
-      font-size: 14px;
-      padding: 0;
-      font-family: $medium-sans-font;
-      font-weight: normal;
-      &:hover {
-        color: $accent;;
-        text-decoration: underline;
+    .edit_playlist_info_bottom {
+      border-top: 1px solid $border-color-five;
+      padding-left: 60px;
+      padding-right: 60px;
+      padding-top: 20px;
+      @media #{$one-column} {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      input {
+        float: right;
+        @include default-button();
+        cursor: pointer;
+      }
+      a:first-child {
+        @include default-button();
         background-color: transparent;
+        color: $accent;;
+        font-size: 14px;
+        padding: 0;
+        font-family: $medium-sans-font;
+        font-weight: normal;
+        &:hover {
+          color: $accent;;
+          text-decoration: underline;
+          background-color: transparent;
+        }
       }
     }
   }
