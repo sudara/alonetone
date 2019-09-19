@@ -4,6 +4,11 @@
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
   #edit_playlist_info {
     padding-left: 0;
     padding-right: 0;
@@ -11,9 +16,6 @@
     padding-top: 0;
     margin-left: auto;
     margin-right: auto;
-    @media #{$one-column} {
-      width: 96%;
-    }
     > h2 {
       padding-left: 59px;
       height: 50px;
