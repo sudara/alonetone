@@ -7,9 +7,7 @@ RSpec.describe Storage::FastlyLocation, type: :model do
   let(:fastly_base_url) { 'https://fastly.example.com/images' }
 
   around do |example|
-    with_alonetone_configuration(
-      fastly_base_url: fastly_base_url
-    ) do
+    with_alonetone_configuration(fastly_base_url: fastly_base_url) do
       example.call
     end
   end
