@@ -25,12 +25,13 @@ module Storage
 
     def self.variation_params_for_operation(name, value)
       case name
-      when :resize_to_fit
+      when :resize_to_fill
         {
           crop: '1:1', # All images on Alonetone are square
-          width: value.first,
-          quality: 68
+          width: value.first
         }
+      when :saver
+        { quality: value[:quality] }.compact
       else
         {}
       end
