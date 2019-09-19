@@ -12,12 +12,12 @@ export default class extends Controller {
     this.setDelegate()
     this.animation.init()
     this.animation.play()
-    this.setAnimationState()
     this.playheadAnimation = new TweenMax(this.progressContainerInnerTarget, 100, {
       left: '100%',
       paused: true,
       ease: Linear.easeNone
     })
+    this.setAnimationState()
   }
 
   setAnimationState() {
@@ -30,8 +30,8 @@ export default class extends Controller {
       this.startPlayhead()
     } else if (this.delegate && this.delegate.positionFromStart(1)) { // after playing while paused
       this.animation.setPlay()
+      this.showPlayhead()
       this.update(this.delegate.percentPlayed())
-      this.startPlayhead()
     } else { // loaded and not playing
       this.animation.setPlay()
     }
@@ -72,6 +72,7 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
+    this.playheadAnimation.progress(newPosition)
   }
 
   update(percentPlayed) {
@@ -94,9 +95,14 @@ export default class extends Controller {
     this.waveformTarget.querySelector('canvas').remove()
   }
 
-  startPlayhead() {
+  showPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
     this.playheadAnimation.duration(this.delegate.duration)
+    this.playheadAnimation.seek(this.percentPlayed)
+  }
+
+  startPlayhead(){
+    this.showPlayhead()
     this.playheadAnimation.play()
   }
 
