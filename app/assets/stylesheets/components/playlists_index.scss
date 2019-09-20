@@ -1,0 +1,29 @@
+.playlists_container {
+  h2 {
+    color: $accent;
+    margin-top: 0;
+    margin-bottom: 16px;
+    @media #{$mobile} {
+      padding-left: 2.5%;
+    }
+  }
+  max-width: $site_max_width;
+  padding: 0 $baseline * 1.5;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  ul.playlists {
+    @media #{$mobile} {
+      width: 100%;
+      margin-right: 0;
+    }
+    margin-right: -36px;
+    li {
+      margin-bottom: 30px;
+    }
+  }
+}

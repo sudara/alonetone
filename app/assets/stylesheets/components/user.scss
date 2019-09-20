@@ -65,6 +65,11 @@ main {
       ul {
         margin: 0;
         margin-right: -36px;
+        &:after {
+          height: 0;
+          width: 45%;
+          content: "";
+        }
         @media #{$mobile} {
           margin: 0 auto;
         }

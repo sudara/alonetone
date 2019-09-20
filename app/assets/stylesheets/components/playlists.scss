@@ -1,10 +1,11 @@
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
-  &.three_or_less_playlists {
-    justify-content: flex-start;
+  &.no_artist_name_playlists {
     li.playlist {
-      margin-right: $baseline;
+      a.small_playlist_title {
+        padding: 0 8px 8px 8px;
+      }
     }
   }
   li.playlist {
@@ -100,51 +101,6 @@ ul.playlists {
           width: 100%;
         }
       }
-    }
-  }
-}
-
-.user_playlists, .user_featured_playlists {
-  ul.playlists {
-    &:after {
-      height: 0;
-      width: 45%;
-      content: "";
-    }
-    li.playlist {
-      a.small_playlist_title {
-        padding: 0 8px 8px 8px;
-      }
-    }
-  }
-}
-
-.playlists_container {
-  h2 {
-    color: $accent;
-    margin-top: 0;
-    margin-bottom: 16px;
-    @media #{$mobile} {
-      padding-left: 2.5%;
-    }
-  }
-  max-width: $site_max_width;
-  padding: 0 $baseline * 1.5;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  @media #{$mobile} {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  ul.playlists {
-    @media #{$mobile} {
-      width: 100%;
-      margin-right: 0;
-    }
-    margin-right: -36px;
-    li {
-      margin-bottom: 30px;
     }
   }
 }
