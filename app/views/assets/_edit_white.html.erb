@@ -14,7 +14,7 @@
   <div class="track-edit">
     <header>
       <h1><%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %></h1>
-      <h3><%= asset.user.display_name %></h3>
+      <h3><%= asset.user.name %></h3>
       <div class="track-stats">
         <div class="created">Uploaded <%= local_time_ago(asset.created_at) %>.</div>
       </div>

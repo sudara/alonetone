@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include SoftDeletion
   include Rakismet::Model
 
-  rakismet_attrs  author: proc { display_name },
+  rakismet_attrs  author: proc { name },
                   author_email: proc { email },
                   user_ip: proc { current_login_ip },
                   content: proc { profile&.bio },

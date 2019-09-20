@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   def edit
     @profile = @user.profile
-    @page_title = "Editing #{@user.display_name}"
+    @page_title = "Editing #{@user.name}"
   end
 
   def attach_pic

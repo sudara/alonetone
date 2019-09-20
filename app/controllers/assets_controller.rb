@@ -34,7 +34,7 @@ class AssetsController < ApplicationController
 
   # user's home page
   def index
-    @page_title = "#{@user.display_name}'s Music"
+    @page_title = "#{@user.name}'s Music"
     set_related_user_variables
     if current_user_is_admin_or_owner?(@user)
       @assets = @user.assets
