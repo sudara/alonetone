@@ -33,13 +33,19 @@ module RSpec
           file_fixture_matching_content_type(fixtures_directory, fixture['content_type'])
       end
 
+      def blob_exists?(blob)
+        current_filename = blob.service.send(:path_for, blob.key)
+        File.exist?(current_filename) &&
+          blob.checksum == Digest::MD5.file(current_filename).base64digest
+      end
+
       def ensure_blob_on_disk(fixtures_directory, fixture, blob)
-        return if blob.service.exist?(blob.key)
+        return if blob_exists?(blob)
 
         fixture_filename = file_fixture_matching_fixture(fixtures_directory, fixture)
         if fixture_filename
           File.open(fixture_filename, 'rb') { |file| blob.upload(file) }
-          blob.update_columns(
+          blob.update(
             checksum: Digest::MD5.file(fixture_filename).base64digest,
             byte_size: File.size(fixture_filename)
           )
