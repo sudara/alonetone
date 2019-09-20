@@ -273,6 +273,15 @@
       .edit-save {
         overflow: auto;
         margin-top: $baseline;
+        .ajax_waiting {
+          display: none;
+        }
+        .small_spinner {
+          display: none;
+        }
+        .submit_wrapper {
+          float: left;
+        }
         input {
           cursor: pointer;
           float: left;
