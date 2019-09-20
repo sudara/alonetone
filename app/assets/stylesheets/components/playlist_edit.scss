@@ -280,6 +280,7 @@
       .right_column_box_header {
         display: flex;
         flex-direction: row;
+        border-bottom: 1px solid $border-color-four;
         h2 {
           margin-bottom: 0;
           width: auto;
@@ -295,7 +296,7 @@
         }
       }
       #playlist_tabs {
-        display: flex;
+        display: none;
         background-color: $background-color-three;
         height: 36px;
         box-sizing: border-box;
