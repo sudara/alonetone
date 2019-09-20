@@ -31,7 +31,7 @@ class Asset < ApplicationRecord
   scope :recently_updated, -> { order('assets.updated_at DESC') }
 
   belongs_to :user, counter_cache: true
-  belongs_to :user_object,
+  belongs_to :possibly_deleted_user,
     -> { with_deleted },
     class_name: 'User',
     foreign_key: 'user_id'
