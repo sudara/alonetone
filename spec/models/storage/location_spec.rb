@@ -15,7 +15,6 @@ RSpec.describe Storage::Location, type: :model do
   # Henri has a Blob for their avatar.
   let(:user) { users(:henri_willig) }
   let(:image_attachment) do
-    user.update!(avatar_image: uploaded_file) if Rails.application.config.active_storage.service == "temporary"
     user.avatar_image
   end
   let(:image_variant) do
