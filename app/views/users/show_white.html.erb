@@ -20,7 +20,7 @@
   <% if @playlists.present? %>
     <div id="user_playlists_area">
       <div class="user_featured_playlists">
-        <ul class="playlists no_user_name_playlists">
+        <ul class="playlists no_artist_name_playlists">
           <%= render partial: 'shared/playlist_white', collection: @playlists.limit(4), as: :playlist %>
         </ul>
       </div>

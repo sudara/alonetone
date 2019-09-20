@@ -1,7 +1,7 @@
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
-  &.no_user_name_playlists {
+  &.no_artist_name_playlists {
     li.playlist {
       a.small_playlist_title {
         padding: 0 8px 8px 8px;
