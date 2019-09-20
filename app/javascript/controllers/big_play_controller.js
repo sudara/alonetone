@@ -15,7 +15,7 @@ export default class extends Controller {
     this.playheadAnimation = new TweenMax(this.progressContainerInnerTarget, 0, {
       left: '100%',
       paused: true,
-      ease: Linear.easeNone
+      ease: Linear.easeNone,
     })
     this.setAnimationState()
   }
@@ -75,17 +75,16 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
-    this.playheadAnimation.progress(newPosition)
+    this.updatePlayhead()
   }
 
   // called from the player
   update(percentPlayed) {
     this.percentPlayed = percentPlayed
-    console.log(this.percentPlayed)
     this.waveform.update()
     this.timeTarget.innerHTML = this.delegate.time
-    if (Math.abs(this.percentPlayed - this.playheadAnimation.progress()) > 0.05) {
-      // console.log(`playhead jogged from ${this.playheadAnimation.progress()} to ${this.percentPlayed}`)
+    if (Math.abs(this.percentPlayed - this.playheadAnimation.progress()) > 0.02) {
+      console.log(`playhead jogged from ${this.playheadAnimation.progress()} to ${this.percentPlayed}`)
       this.updatePlayhead()
     }
   }
@@ -105,12 +104,12 @@ export default class extends Controller {
     if (this.playheadAnimation.duration() === 0) {
       this.playheadAnimation.duration(this.delegate.duration)
     }
-    this.playheadAnimation.seek(this.percentPlayed)
   }
 
   startPlayhead() {
     this.showPlayhead()
     this.playheadAnimation.play()
+    this.updatePlayhead()
   }
 
   updatePlayhead() {
