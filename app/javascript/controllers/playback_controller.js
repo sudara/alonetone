@@ -53,6 +53,7 @@ export default class extends Controller {
   whilePlaying() {
     this.position = this.sound.seek()
     this.duration = this.sound.duration()
+
     if (this.sound.playing()) {
       this.whilePlayingCallback()
       if (!this.registeredListen && this.positionFromStart(5000)) {
