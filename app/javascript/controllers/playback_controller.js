@@ -68,8 +68,7 @@ export default class extends Controller {
         this.playNextTrack()
         this.stop()
       } else {
-        // we don't want to update this 60 times a second, at most 10
-        setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)
+        requestAnimationFrame(this.whilePlaying.bind(this))
       }
     }
     this.calculateTime()
