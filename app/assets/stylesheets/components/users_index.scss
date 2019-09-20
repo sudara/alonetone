@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
-  max-width: 1032px;
+  max-width: $site_max_width;
   padding: 0 $baseline * 1.5;
   margin-left: auto;
   margin-right: auto;

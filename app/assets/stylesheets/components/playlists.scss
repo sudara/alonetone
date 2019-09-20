@@ -128,7 +128,7 @@ ul.playlists {
       padding-left: 2.5%;
     }
   }
-  max-width: 1032px;
+  max-width: $site_max_width;
   padding: 0 $baseline * 1.5;
   box-sizing: border-box;
   margin-left: auto;
