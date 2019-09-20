@@ -4,6 +4,10 @@
   <% end %>
 <% end %>
 
+<div id="playlist-and-track-content-header">
+  <%= render partial: 'shared/back_to_artist' %>
+</div>
+
 <div id="playlist-and-track-content">
   <%= render 'playlist_white' %>
 
@@ -24,7 +28,7 @@
       </div>
       <% if defined?(@old_cover_alert) and authorized?  %>
         <div class="playlist-cover-alert">
-          Hey, <%= current_user.display_name %> this cover is from <strong><%= @playlist.pic.created_at.year %></strong> and is very blurry since we only saved a
+          Hey, <%= current_user.name %> this cover is from <strong><%= @playlist.pic.created_at.year %></strong> and is very blurry since we only saved a
           small 200x200px version of it.
           Go <%= link_to 'Upload a higher res one', edit_user_playlist_path(@playlist.user, @playlist),
             class: 'edit_playlist', :title => 'edit this playlist' %> if you can!</a>

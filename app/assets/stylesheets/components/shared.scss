@@ -89,3 +89,43 @@ ul {
     }
   }
 }
+
+.back_to_artist_link {
+  height: 26px;
+  border-radius: 3px;
+  background-color: $background-color-one;
+  color: $font-color-three;
+  display: inline-flex;
+  margin-bottom: $baseline;
+  .caret {
+    background-color: $accent;
+    display: block;
+    width: 26px;
+    height: 26px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    i.icon_caret {
+      position: relative;
+      top: 5px;
+      margin-left: 1px;
+      svg {
+        transform: rotate(180deg);
+        height: 16px;
+      }
+    }
+  }
+  .text {
+    font-family: $medium-sans-font;
+    padding: 6px 12px 0 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  span {
+    color: $accent;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
