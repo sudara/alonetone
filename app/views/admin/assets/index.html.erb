@@ -22,15 +22,15 @@
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div class="avatar">
-                <%= user_image(@user, variant: :original) %>
+                <%= user_image(asset.possibly_deleted_user, variant: :original) %>
               </div>
               <div>
-                <div><%= link_to asset.user.name, admin_users_path({filter_by: asset.user.email}) %></div>
-                <div><%= asset.user.ip %></div>
+                <div><%= link_to asset.possibly_deleted_user.login, admin_users_path({ filter_by: asset.possibly_deleted_user.email }) %></div>
+                <div><%= asset.possibly_deleted_user.ip %></div>
               </div>
             </div>
             <div class="track_column">
-              <div><%= link_to asset.title, user_track_path(asset.user, asset.permalink) %></div>
+              <div><%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink) %></div>
               <div><%= truncate(asset.description, length: 80) %></div>
               <div>N comments / N listens</div>
             </div>

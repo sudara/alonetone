@@ -28,10 +28,14 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
-  scope :with_user,       -> { joins(:user).where('users.id IS NOT NULL') }
   scope :recently_updated, -> { order('assets.updated_at DESC') }
 
   belongs_to :user, counter_cache: true
+  belongs_to :possibly_deleted_user,
+    -> { with_deleted },
+    class_name: 'User',
+    foreign_key: 'user_id'
+
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
   has_one :greenfield_post, class_name: '::Greenfield::Post'
@@ -194,7 +198,7 @@ class Asset < ApplicationRecord
   def self.filter_by(filter)
     case filter
     when "deleted"
-      only_deleted.with_user.where(is_spam: false).order('deleted_at DESC')
+      only_deleted.where(is_spam: false).order('deleted_at DESC')
     when "is_spam"
       with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
