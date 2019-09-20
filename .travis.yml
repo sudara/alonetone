@@ -40,6 +40,7 @@ before_install:
 before_script:
 - mysql -e 'create database alonetone_test';
 - cp config/database.example.yml config/database.yml
+- cp config/alonetone.example.yml config/alonetone.yml
 - bundle exec rake setup:copy_config setup:touch_js db:drop db:create db:schema:load
 - bundle exec rake db:seed
 script: npx percy exec -- bundle exec rake spec
