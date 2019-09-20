@@ -1,3 +1,8 @@
+# File fixture helpers will automatically create files in Active Storage based on this data. If the
+# `filename' matches a file fixture it will be used, otherwise a minimal file matching the
+# `content_type' will be used. Data like checksum and byte_size will change based on the selected
+# file. See spec/support/file_fixture_set.rb for more details.
+#
 # Blobs for all asset fixtures
 valid_mp3_original:
   # Blob points to object uploaded through Paperclip in the past so its key

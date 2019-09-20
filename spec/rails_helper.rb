@@ -88,12 +88,4 @@ RSpec.configure do |config|
   config.before(:example, type: :controller) do
     activate_authlogic
   end
-
-  # RSpec requires a proc when you want to match multiple example types.
-  use_s3_storage = -> (type) { %i[feature request].include?(type) }
-  config.around(:each, type: use_s3_storage) do |example|
-    with_storage_service(:s3) do
-      example.run
-    end
-  end
 end
