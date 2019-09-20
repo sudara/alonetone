@@ -1,0 +1,10 @@
+<%= link_to user_home_path(@user), class: 'back_to_artist_link' do %>
+  <div class="caret">
+    <i class="icon_caret">
+      <%== render file: svg_path('svg/icon_caret.svg') %>
+    </i>
+  </div>
+  <div class="text">
+    Back to <span><%= @user.name %></span>'s profile
+  </div>
+<% end %>

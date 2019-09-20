@@ -59,7 +59,7 @@ class Asset < ApplicationRecord
   after_commit :create_waveform, on: :create
 
   include Rakismet::Model
-  rakismet_attrs  author: proc { user.display_name },
+  rakismet_attrs  author: proc { user.name },
                   author_email: proc { user.email },
                   content: proc { description },
                   permalink: proc { full_permalink },
