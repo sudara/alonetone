@@ -12,7 +12,7 @@ export default class extends Controller {
     this.setDelegate()
     this.animation.init()
     this.animation.play()
-    this.playheadAnimation = new TweenMax(this.progressContainerInnerTarget, 100, {
+    this.playheadAnimation = new TweenMax(this.progressContainerInnerTarget, 0, {
       left: '100%',
       paused: true,
       ease: Linear.easeNone
@@ -21,23 +21,26 @@ export default class extends Controller {
   }
 
   setAnimationState() {
-    // initialized *while* an mp3 is still loading
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
+      // instantiated while an mp3 is still loading
       this.animation.showLoading()
-    } else if (this.delegate && this.delegate.isPlaying) { // while playing
+    } else if (this.delegate && this.delegate.isPlaying) {
+      // ...while in the middle of playing
       this.animation.showLoading()
       this.animation.showPause()
       this.startPlayhead()
-    } else if (this.delegate && this.delegate.positionFromStart(1)) { // after playing while paused
+    } else if (this.delegate && this.delegate.positionFromStart(1)) {
+      // ...after playing once but now paused
       this.animation.setPlay()
       this.showPlayhead()
       this.update(this.delegate.percentPlayed())
-    } else { // loaded and not playing
+    } else {
+      // ....loaded but not playing
       this.animation.setPlay()
     }
   }
 
-  // this is the controller that the big play button / waveform is linked to
+  // the single/playlist controller that we are linked to
   setDelegate() {
     const itemInPlaylist = document.querySelector('.tracklist li.active')
     if (itemInPlaylist) this.delegate = this.application.getControllerForElementAndIdentifier(itemInPlaylist, 'playlist-playback')
@@ -46,7 +49,7 @@ export default class extends Controller {
     }
   }
 
-  //  called from whileLoading()
+  // called from whileLoading()
   play() {
     this.animation.showPause()
     this.startPlayhead()
@@ -75,12 +78,14 @@ export default class extends Controller {
     this.playheadAnimation.progress(newPosition)
   }
 
+  // called from the player
   update(percentPlayed) {
     this.percentPlayed = percentPlayed
+    console.log(this.percentPlayed)
     this.waveform.update()
     this.timeTarget.innerHTML = this.delegate.time
     if (Math.abs(this.percentPlayed - this.playheadAnimation.progress()) > 0.05) {
-      console.log(`playhead jogged from ${this.playheadAnimation.progress()} to ${this.percentPlayed}`)
+      // console.log(`playhead jogged from ${this.playheadAnimation.progress()} to ${this.percentPlayed}`)
       this.updatePlayhead()
     }
   }
@@ -97,11 +102,13 @@ export default class extends Controller {
 
   showPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
-    this.playheadAnimation.duration(this.delegate.duration)
+    if (this.playheadAnimation.duration() === 0) {
+      this.playheadAnimation.duration(this.delegate.duration)
+    }
     this.playheadAnimation.seek(this.percentPlayed)
   }
 
-  startPlayhead(){
+  startPlayhead() {
     this.showPlayhead()
     this.playheadAnimation.play()
   }

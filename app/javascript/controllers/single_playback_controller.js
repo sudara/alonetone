@@ -13,7 +13,7 @@ export default class extends PlaybackController {
   }
 
   pauseCallback() {
-    this.bigPlay.animation.setPlay()
+    this.bigPlay.pause()
   }
 
   whilePlayingCallback() {
