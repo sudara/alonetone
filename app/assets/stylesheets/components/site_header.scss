@@ -84,23 +84,24 @@ header#site_header {
     }
     .user_dropdown {
       position: relative;
-      background-color: $background-color-three;
-      color: $font-color-one;
       .profile_link {
-        font-size: 14px;
         position: relative;
         z-index: 100;
         display: block;
         box-sizing: border-box;
-        height: 40px;
-        padding-top: 3px;
-        background-color: $background-color-one;
+        width: 56px;
+        margin-top: $baseline / 2;
+        height: 36px;
+        padding: 2px;
+        border-radius: 3px;
+        background-color: $background-color-three;
         img {
           width: 32px;
           height: 32px;
         }
       }
       .user_dropdown_menu {
+        display: none;
         position: absolute;
         top: -116px;
         margin-top: 40px;
