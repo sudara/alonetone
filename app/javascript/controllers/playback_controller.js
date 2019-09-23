@@ -68,8 +68,8 @@ export default class extends Controller {
         this.playNextTrack()
         this.stop()
       } else {
-        requestAnimationFrame(this.whilePlaying.bind(this))
-      }
+        // we don't need to update this 60 times a second, at most 10
+        setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)      }
     }
     this.calculateTime()
   }
@@ -96,7 +96,7 @@ export default class extends Controller {
   stop() {
     this.sound.pause()
     this.sound.stop()
-    this.stopCallback() // reset the audio
+    this.stopCallback()
   }
 
   togglePlay(e) {

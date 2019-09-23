@@ -16,6 +16,10 @@ export default class extends PlaybackController {
     this.bigPlay.pause()
   }
 
+  stopCallback() {
+    this.bigPlay.stop()
+  }
+
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
