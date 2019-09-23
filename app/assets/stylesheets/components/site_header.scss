@@ -95,21 +95,9 @@ header#site_header {
         height: 40px;
         padding-top: 3px;
         background-color: $background-color-one;
-        span {
-          line-height: 34px;
-          display: block;
-          min-width: 122px;
-          padding: 0 10px 0 15px;
-          text-align: right;
-          position: relative;
-          top: 1px;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
         img {
-          width: 34px;
-          height: 34px;
+          width: 32px;
+          height: 32px;
         }
       }
       .user_dropdown_menu {
