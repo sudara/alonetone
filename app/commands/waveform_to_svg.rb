@@ -8,7 +8,7 @@
 class WaveformToSvg
   attr_reader :array, :height, :width, :data
 
-  def initialize(data)
+  def initialize(data=[])
     # Our waveforms have 500 datapoints
     @width = Waveform::LENGTH
 

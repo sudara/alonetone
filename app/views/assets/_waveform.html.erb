@@ -3,7 +3,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 54" preserveAspectRatio="none">
   <defs>
     <polygon x="0" y="0" id="waveform"
-      points="<%= WaveformToSvg.new(@asset.audio_feature.waveform).points %>"/>
+      points="<%= WaveformToSvg.new(@asset&.audio_feature&.waveform).points %>"/>
   </defs>
 
   <clipPath id="waveform-clip">
