@@ -20,7 +20,6 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # so let's specify one before we snap
       first_track.find('a:first-child').click
       expect(page).to have_selector(".player")
-      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Loading')
 
       # Navigating away and back, we should still be playing
@@ -33,7 +32,6 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # right here is some indeterminancy with the playhead
 
       find('.play-button-container a').click # pause
-      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
   end
