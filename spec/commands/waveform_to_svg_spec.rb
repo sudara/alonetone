@@ -14,6 +14,6 @@ RSpec.describe WaveformToSvg do
 
   it "uses a default when no data is given" do
     waveform = WaveformToSvg.new([])
-    expect(waveform.data.length).to be > 10
+    expect(waveform.data.length).to be == 500
   end
 end

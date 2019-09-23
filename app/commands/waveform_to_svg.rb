@@ -8,14 +8,14 @@
 class WaveformToSvg
   attr_reader :array, :height, :width, :data
 
-  def initialize(data=[])
+  def initialize(data = [])
     # Our waveforms have 500 datapoints
     @width = Waveform::LENGTH
 
     # internal height of svg, used to scale up
     @height = 54
 
-    if data.length < 2
+    if data.blank?
       @data = default_waveform
     else
       @data = data
