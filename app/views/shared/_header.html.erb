@@ -5,24 +5,23 @@
     <a href="/" title="home" class="header_logo"></a>
     <div class="headway" id="headway_container"></div>
 
-
     <%= render partial: 'shared/search' %>
 
     <% if logged_in? %>
-    <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
-      <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
-        <span><%= truncate current_user.name, length: 24 %></span>
-        <%= user_image(current_user, variant: :small) %>
-      <% end %>
+      <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
+        <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
+          <%= user_image(current_user, variant: :small) %>
+        <% end %>
 
-      <div class="user_dropdown_menu" data-target="user-dropdown.menu">
-        <%= link_to 'upload new track', main_app.upload_path %>
-        <%= link_to 'create album or playlist', main_app.new_user_playlist_path(current_user) %>
-        <%= link_to 'edit profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
-        <%= link_to 'log out', main_app.logout_path, class: 'logout_button', data: { turbolinks: "false" } %>
+        <div class="user_dropdown_menu" data-target="user-dropdown.menu">
+          <span><%= truncate current_user.name, length: 24 %></span>
+          <%= link_to 'upload new track', main_app.upload_path %>
+          <%= link_to 'create album or playlist', main_app.new_user_playlist_path(current_user) %>
+          <%= link_to 'edit profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
+          <%= link_to 'log out', main_app.logout_path, class: 'logout_button', data: { turbolinks: "false" } %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 
   <% unless logged_in? %>
     <%= link_to 'Yo Login', main_app.login_path, class: 'login_button' %>
