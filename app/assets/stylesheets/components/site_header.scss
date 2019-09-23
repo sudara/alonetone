@@ -1,7 +1,7 @@
 header#site_header {
   background-color: $background-color-one;
   box-shadow: 0 3px 4px -2px #65666627;
-  height: 40px;
+  height: 60px;
   .header_inner {
     position: relative;
     margin-right: auto;
@@ -15,13 +15,12 @@ header#site_header {
     }
     .header_logo {
       position: absolute;
-      top: 4px;
+      top: 12px;
       display: block;
-      width: 45px;
-      height: 35px;
+      width: 51.59px;
+      height: 40px;
       background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
-      background-size: 80%;
-      background-position: 0 3px;
+      background-size: 100%;
     }
     .headway {
       position:absolute;
