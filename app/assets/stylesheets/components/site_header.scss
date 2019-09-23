@@ -59,8 +59,8 @@ header#site_header {
           background-color: $background-color-three;
           color: $font-color-two;
           border-radius: 3px;
-          &:focus {
-            border: 0;
+          &:hover {
+            border-width: 0px;
             width: 256px;
           }
         }
@@ -85,6 +85,9 @@ header#site_header {
     }
     .user_dropdown {
       position: relative;
+      @media #{$one-column} {
+        margin-left: auto;
+      }
       .profile_link {
         z-index: 100;
         display: block;
@@ -105,13 +108,14 @@ header#site_header {
       }
       .user_dropdown_menu {
         position: absolute;
-        
         right: 0;
         z-index: 99;
-        width: 350px;
+        width: 1000px;
+        max-width: 350px;
         background-color: white;
         box-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
         border-radius: 0px 0px 6px 6px;
+        color: $font-color-two;
         .user_dropdown_menu_header {
           height: 60px;
           display: flex;
