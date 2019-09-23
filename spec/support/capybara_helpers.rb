@@ -12,23 +12,6 @@ module RSpec
         page.execute_script("TweenMax.globalTimeScale(1)")
       end
 
-      def convert_canvas_to_image
-        script = "
-          function canvasToImage(selectorOrEl) {
-            let canvas = typeof selectorOrEl === 'object' ? selectorOrEl : document.querySelector(selector);
-            let image = document.createElement('img');
-            let canvasImageBase64 = canvas.toDataURL();
-            image.src = canvasImageBase64;
-            image.style = 'max-width: 100%';
-            canvas.setAttribute('data-percy-modified', true);
-            canvas.parentElement.appendChild(image);
-            canvas.style = 'display: none';
-          }
-          document.querySelectorAll('canvas').forEach(selector => canvasToImage(selector))"
-        page.execute_script(script)
-      end
-
-
       def logged_in(user=:arthur)
         visit new_user_session_path
 
