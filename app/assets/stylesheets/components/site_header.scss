@@ -105,7 +105,7 @@ header#site_header {
       }
       .user_dropdown_menu {
         position: absolute;
-        top: 0!important;
+        
         right: 0;
         z-index: 99;
         width: 350px;
@@ -159,14 +159,12 @@ header#site_header {
               background-color: $background-color-one;
               color: $accent;
             }
-
           }
           a.logout_item {
             @include default_button();
             height: 28px;
             line-height: 30px;
             width: 100px;
-          
           }
         }
       }

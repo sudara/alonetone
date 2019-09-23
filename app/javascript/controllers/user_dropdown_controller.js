@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ['menu']
 
   initialize() {
-    this.menuTarget.style.top = '-118px'
+    this.menuTarget.style.top = '-260px'
   }
 
   slideOpen() {
@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   slideClosed() {
-    this.menuTarget.style.top = '-118px'
+    this.menuTarget.style.top = '-260px'
   }
 
   touch(event) {
@@ -21,6 +21,5 @@ export default class extends Controller {
       this.slideOpen()
     }
   }
-
 
 }
