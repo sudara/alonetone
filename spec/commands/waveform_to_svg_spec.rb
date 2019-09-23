@@ -9,7 +9,7 @@ RSpec.describe WaveformToSvg do
   end
 
   it "spits out svg polygon points" do
-    expect(subject.points).to eq " 0,27.0 1,27.0 2,0.0 3,27.0 4,27.0 4,27.0 3,27.0 2,54.0 1,27.0 0,27.0"
+    expect(subject.points).to eq " 0,14.486497467156815 1,6.671755161776602 2,0.0 3,6.671755161776602 4,14.486497467156815 4,39.513502532843184 3,47.3282448382234 2,54.0 1,47.3282448382234 0,39.513502532843184"
   end
 
   it "uses a default when no data is given" do
