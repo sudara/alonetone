@@ -79,7 +79,7 @@ module Listens
   end
 
   def play_local_mp3
-    sleep(2) unless Rails.env.test? # simulate network loading, it'll be 2x with range requests
+    #sleep(2) unless Rails.env.test? # simulate network loading, it'll be 2x with range requests
     file_to_send = File.join(Rails.root, 'spec/fixtures/files/muppets.mp3')
 
     length = File.size(file_to_send) # need to do this manually for header to be set correctly

@@ -1,22 +1,16 @@
 import { Controller } from 'stimulus'
 import LargePlayAnimation from '../animation/large_play_animation'
-import Waveform from '../animation/waveform'
 
 export default class extends Controller {
   static targets = ['play', 'playButton', 'time', 'progressContainerInner', 'waveform', 'seekBar']
 
   initialize() {
     this.animation = new LargePlayAnimation()
-    this.waveform = this.setupWaveform()
     this.percentPlayed = 0.0
     this.setDelegate()
     this.animation.init()
     this.animation.play()
-    this.playheadAnimation = new TweenMax(this.progressContainerInnerTarget, 0, {
-      left: '100%',
-      paused: true,
-      ease: Linear.easeNone,
-    })
+    this.setupPlayhead()
     this.setAnimationState()
   }
 
@@ -56,7 +50,7 @@ export default class extends Controller {
   }
 
   pause() {
-    this.playheadAnimation.pause()
+    this.timeline.pause()
     this.animation.setPlay()
   }
 
@@ -75,57 +69,47 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
-    this.updatePlayhead()
+    this.update()
   }
 
   // called from the player
-  update(percentPlayed) {
-    this.percentPlayed = percentPlayed
-    this.waveform.update()
+  update() {
+    this.percentPlayed = this.delegate.percentPlayed()
     this.timeTarget.innerHTML = this.delegate.time
-    if (Math.abs(this.percentPlayed - this.playheadAnimation.progress()) > 0.02) {
-      console.log(`playhead jogged from ${this.playheadAnimation.progress()} to ${this.percentPlayed}`)
-      this.updatePlayhead()
+    if (Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02) {
+      console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+      this.timeline.progress(this.percentPlayed)
     }
   }
 
-  reset() {
+  stop() {
     this.animation.reset()
     this.animation.setPlay()
-    this.playheadAnimation.seek(0)
+    this.playheadAnimation.stop()
   }
 
-  disconnect() {
-    this.waveformTarget.querySelector('canvas').remove()
-  }
-
-  showPlayhead() {
-    this.progressContainerInnerTarget.classList.add('visible')
-    if (this.playheadAnimation.duration() === 0) {
-      this.playheadAnimation.duration(this.delegate.duration)
-    }
+  setupPlayhead() {
+    this.timeline = new TimelineMax({ paused: true, duration: 1 })
+    this.playheadAnimation = this.timeline.to(this.progressContainerInnerTarget, 1, {
+      left: '100%',
+      ease: Linear.easeNone,
+    }, 0)
+    this.waveformAnimation = this.timeline.to('#waveform-reveal', 1, {
+      attr: { x: '0' },
+      ease: Linear.easeNone,
+    }, 0)
   }
 
   startPlayhead() {
     this.showPlayhead()
-    this.playheadAnimation.play()
-    this.updatePlayhead()
+    this.update()
+    this.timeline.play()
   }
 
-  updatePlayhead() {
-    this.playheadAnimation.progress(this.percentPlayed)
-  }
-
-  setupWaveform() {
-    const controller = this
-    const data = this.data.get('waveform')
-    return new Waveform({
-      container: this.waveformTarget,
-      height: 54,
-      percentPlayed: function () {
-        return controller.percentPlayed
-      },
-      data,
-    })
+  showPlayhead() {
+    this.progressContainerInnerTarget.classList.add('visible')
+    if (this.timeline.duration() === 1) {
+      this.timeline.duration(this.delegate.duration)
+    }
   }
 }
