@@ -68,4 +68,8 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   &:active {
     background-color: #eb7b0c;
   }
+
+  @if $type == slim {
+  }
+
 }
