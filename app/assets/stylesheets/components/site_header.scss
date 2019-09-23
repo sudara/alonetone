@@ -102,37 +102,39 @@ header#site_header {
   .header_search {
     position: relative;
     float: right;
-    margin-right: 4%;
-    padding-top: 8px;
+    margin-right: $baseline;
+    display: flex;
+    height: $baseline * 1.5;
+    padding-top: $baseline / 2;
     @media #{$one-column} {
       display: none;
     }
     #search_form {
       display: block;
-      float: left;
+      height: 100%;
       #query {
-        font-size: 12px;
-        width: 180px;
-        height: 25px;
-        line-height: 1.2em;
+        margin-bottom: 0;
+        height: 100%;
+        font-size: 14px;
+        font-family: $medium-sans-font;
+        width: 160px;
         padding: 0;
         padding-left: 8px;
-        box-sizing: content-box;
         color: $font-color-two;
-        border: 1px solid #DDDDDD;
-        border-radius: 5px;
+        border-radius: 3px;
         &:focus {
-          border: 1px solid #AAAAAA;
+          border: 0;
+          width: 256px;
         }
       }
     }
     #search_button {
       display: block;
-      float: left;
       width: 18px;
       height: 18px;
-      margin-top: 3px;
-      margin-left: 8px;
+      position: relative;
+      left: -27px;
+      top: 9px;
       img {
         width: 18px;
         height: 18px;
