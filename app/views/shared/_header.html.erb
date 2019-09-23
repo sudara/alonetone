@@ -1,31 +1,8 @@
-<div class="header_inner">
+<% if white_theme_enabled? %>
+
+  <div class="header_inner">
   <a href="/" title="home" class="header_logo"></a>
   <div class="headway" id="headway_container"></div>
-  <div class="header_nav">
-    <ul id='nav'>
-      <li id='browse'>
-        <%= link_to 'Artists', main_app.users_path, title: 'artists', class: "tab#{' active' if @tab == 'browse' }" %>
-      </li>
-      <% if logged_in? %>
-      <li id='upload'>
-        <%= link_to 'Upload', main_app.new_user_track_path(current_user), title: "upload your music in mp3 format", class: "tab#{' active' if @tab == 'upload' }" %>
-      </li>
-      <li id='your_stuff'>
-        <%= link_to 'Your Stuff', main_app.user_home_path(current_user), title: 'your stuff', class: "tab#{' active' if @tab == 'your_stuff' }" %>
-      </li>
-      <% else %>
-      <li id='upload'>
-        <%= link_to 'Upload', main_app.signup_path(new: true), title: "sign up to upload your music in mp3 format", class: "tab#{' active' if @tab == 'upload' }" %>
-      </li>
-      <li id='your_stuff'>
-        <%= link_to 'Your Stuff', main_app.signup_path(new: true), title: "sign up to upload your music in mp3 format", class: "tab#{' active' if @tab == 'your_stuff' }" %>
-      </li>
-      <% end %>
-      <li id='forums'>
-        <%= link_to 'Forums', main_app.forums_path, title: 'forums', class: "tab#{' active' if @tab == 'forums' }" %>
-      </li>
-    </ul>
-  </div>
 
   <% if logged_in? %>
     <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
@@ -46,8 +23,68 @@
   <% unless logged_in? %>
     <div class="header_login">
       <li id="login">
-        <%= link_to 'Login', main_app.login_path, class: 'login_button' %>
+        <%= link_to 'Yo Login', main_app.login_path, class: 'login_button' %>
       </li>
     </div>
   <% end %>
 </div>
+
+
+<% else %>
+
+  <div class="header_inner">
+    <a href="/" title="home" class="header_logo"></a>
+    <div class="headway" id="headway_container"></div>
+    <div class="header_nav">
+      <ul id='nav'>
+        <li id='browse'>
+          <%= link_to 'Artists', main_app.users_path, title: 'artists', class: "tab#{' active' if @tab == 'browse' }" %>
+        </li>
+        <% if logged_in? %>
+        <li id='upload'>
+          <%= link_to 'Upload', main_app.new_user_track_path(current_user), title: "upload your music in mp3 format", class: "tab#{' active' if @tab == 'upload' }" %>
+        </li>
+        <li id='your_stuff'>
+          <%= link_to 'Your Stuff', main_app.user_home_path(current_user), title: 'your stuff', class: "tab#{' active' if @tab == 'your_stuff' }" %>
+        </li>
+        <% else %>
+        <li id='upload'>
+          <%= link_to 'Upload', main_app.signup_path(new: true), title: "sign up to upload your music in mp3 format", class: "tab#{' active' if @tab == 'upload' }" %>
+        </li>
+        <li id='your_stuff'>
+          <%= link_to 'Your Stuff', main_app.signup_path(new: true), title: "sign up to upload your music in mp3 format", class: "tab#{' active' if @tab == 'your_stuff' }" %>
+        </li>
+        <% end %>
+        <li id='forums'>
+          <%= link_to 'Forums', main_app.forums_path, title: 'forums', class: "tab#{' active' if @tab == 'forums' }" %>
+        </li>
+      </ul>
+    </div>
+
+    <% if logged_in? %>
+      <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
+        <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
+          <span><%= truncate current_user.name, length: 24 %></span>
+          <%= user_image(current_user, variant: :small) %>
+        <% end %>
+
+        <div class="user_dropdown_menu" data-target="user-dropdown.menu">
+          <%= link_to 'upload new track', main_app.upload_path %>
+          <%= link_to 'create album or playlist', main_app.new_user_playlist_path(current_user) %>
+          <%= link_to 'edit profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
+          <%= link_to 'log out', main_app.logout_path, class: 'logout_button', data: { turbolinks: "false" } %>
+        </div>
+      </div>
+    <% end %>
+
+    <% unless logged_in? %>
+      <div class="header_login">
+        <li id="login">
+          <%= link_to 'Login', main_app.login_path, class: 'login_button' %>
+        </li>
+      </div>
+    <% end %>
+  </div>
+
+
+<% end %>
