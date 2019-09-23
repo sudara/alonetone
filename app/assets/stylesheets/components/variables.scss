@@ -69,7 +69,14 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
     background-color: #eb7b0c;
   }
 
-  @if $type == slim {
+  @if $type == primary {
+    height: 32px;
+    line-height: 34px;
+    font-size: 14px;
+    background: $accent;
+    color: $white;
+    padding-left: $baseline * 1.5;
+    padding-right: $baseline * 1.5;
   }
 
 }

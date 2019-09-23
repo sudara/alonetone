@@ -58,6 +58,7 @@ header#site_header {
           padding-left: 8px;
           background-color: $background-color-three;
           color: $font-color-two;
+          border: 0;
           border-radius: 3px;
           &:hover {
             border-width: 0px;
@@ -79,8 +80,10 @@ header#site_header {
       }
     }
     .login_button {
-      @include default_button();
+      @include default_button(primary);
       height: 36px;
+      line-height: 38px;
+  
       margin-top: 12px;
     }
     .user_dropdown {
@@ -116,6 +119,9 @@ header#site_header {
         box-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
         border-radius: 0px 0px 6px 6px;
         color: $font-color-two;
+        @media #{$mobile} {
+          width: 300px;
+        }
         .user_dropdown_menu_header {
           height: 60px;
           display: flex;
