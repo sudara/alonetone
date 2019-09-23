@@ -2,6 +2,9 @@ header#site_header {
   background-color: $background-color-one;
   box-shadow: 0 3px 4px -2px #65666627;
   height: 60px;
+  > .header_search {
+    display: none !important; // Temporarily hide dark theme search that wasn't inside the #site_header
+  }
   .header_inner {
     position: relative;
     margin-right: auto;
@@ -9,44 +12,78 @@ header#site_header {
     max-width: $site_max_width;
     padding: 0 36px;
     box-sizing: border-box;
+    display: flex;
     @media #{$mobile} {
       width: 100%;
       padding: 0 8px;
     }
     .header_logo {
-      position: absolute;
-      top: 12px;
+      margin-top: 12px;
       display: block;
       width: 51.59px;
       height: 40px;
-      background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
+      background: transparent image-url("alonetone_big-notext-flat.png")
+        no-repeat;
       background-size: 100%;
     }
     .headway {
-      position:absolute;
+      position: absolute;
       top: 16px;
       left: 95px;
       width: 15px;
       height: 35px;
     }
-    .header_nav {
-      display: none;
-    }
-    .header_login {
-      float: right;
-      li {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        height: 40px;
-        a {
-          @include default_button();
+    > .header_search {
+      position: relative;
+      margin-left: auto;
+      margin-right: $baseline;
+      display: flex;
+      height: $baseline * 1.5;
+      margin-top: $baseline / 2;
+      margin-top: 12px;
+      box-sizing: border-box;
+      @media #{$one-column} {
+        display: none;
+      }
+      #search_form {
+        display: block;
+        height: 100%;
+        #query {
+          margin-bottom: 0;
+          height: 100%;
+          font-size: 14px;
+          font-family: $medium-sans-font;
+          width: 160px;
+          padding: 0;
+          padding-left: 8px;
+          color: $font-color-two;
+          border-radius: 3px;
+          &:focus {
+            border: 0;
+            width: 256px;
+          }
+        }
+      }
+      #search_button {
+        display: block;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        right: 12px;
+        top: 9px;
+        img {
+          width: 18px;
+          height: 18px;
         }
       }
     }
+    .login_button {
+      @include default_button();
+      height: 36px;
+      margin-top: 12px;
+    }
     .user_dropdown {
       position: relative;
-      float: right;
       background-color: $background-color-three;
       color: $font-color-one;
       .profile_link {
@@ -61,7 +98,6 @@ header#site_header {
         span {
           line-height: 34px;
           display: block;
-          float: left;
           min-width: 122px;
           padding: 0 10px 0 15px;
           text-align: right;
@@ -96,50 +132,6 @@ header#site_header {
             text-decoration: none;
           }
         }
-      }
-    }
-  }
-  .header_search {
-    position: relative;
-    float: right;
-    margin-right: $baseline;
-    display: flex;
-    height: $baseline * 1.5;
-    margin-top: $baseline / 2;
-    margin-top: 12px;
-    box-sizing: border-box;
-    @media #{$one-column} {
-      display: none;
-    }
-    #search_form {
-      display: block;
-      height: 100%;
-      #query {
-        margin-bottom: 0;
-        height: 100%;
-        font-size: 14px;
-        font-family: $medium-sans-font;
-        width: 160px;
-        padding: 0;
-        padding-left: 8px;
-        color: $font-color-two;
-        border-radius: 3px;
-        &:focus {
-          border: 0;
-          width: 256px;
-        }
-      }
-    }
-    #search_button {
-      display: block;
-      width: 18px;
-      height: 18px;
-      position: absolute;
-      right: 12px;
-      top: 9px;
-      img {
-        width: 18px;
-        height: 18px;
       }
     }
   }

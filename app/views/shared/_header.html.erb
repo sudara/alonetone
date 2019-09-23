@@ -1,10 +1,14 @@
 <% if white_theme_enabled? %>
 
   <div class="header_inner">
-  <a href="/" title="home" class="header_logo"></a>
-  <div class="headway" id="headway_container"></div>
+  
+    <a href="/" title="home" class="header_logo"></a>
+    <div class="headway" id="headway_container"></div>
 
-  <% if logged_in? %>
+
+    <%= render partial: 'shared/search' %>
+
+    <% if logged_in? %>
     <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
       <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
         <span><%= truncate current_user.name, length: 24 %></span>
@@ -21,13 +25,16 @@
   <% end %>
 
   <% unless logged_in? %>
-    <div class="header_login">
-      <li id="login">
-        <%= link_to 'Yo Login', main_app.login_path, class: 'login_button' %>
-      </li>
-    </div>
+    <%= link_to 'Yo Login', main_app.login_path, class: 'login_button' %>
   <% end %>
 </div>
+
+
+
+
+
+
+
 
 
 <% else %>
