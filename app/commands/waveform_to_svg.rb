@@ -42,7 +42,7 @@ class WaveformToSvg
 
   def scale_data!
     scale = [@data.max.abs, @data.min.abs].max.to_f
-    @data.collect! { |sample| (sample.abs.to_f / scale) ** 0.7 }
+    @data.collect! { |sample| (sample.abs.to_f / scale)**0.7 }
   end
 
   private
