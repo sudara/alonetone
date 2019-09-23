@@ -9,6 +9,7 @@
 
     <% if logged_in? %>
       <div class="user_dropdown" data-controller="user-dropdown" data-action="mouseleave->user-dropdown#slideClosed">
+        
         <%= link_to main_app.user_home_path(current_user), class: 'profile_link', data: {action: "mouseover->user-dropdown#slideOpen touchstart->user-dropdown#touch" } do %>
           <%= user_image(current_user, variant: :small) %>
         <% end %>
