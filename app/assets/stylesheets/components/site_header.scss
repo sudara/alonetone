@@ -105,7 +105,9 @@ header#site_header {
     margin-right: $baseline;
     display: flex;
     height: $baseline * 1.5;
-    padding-top: $baseline / 2;
+    margin-top: $baseline / 2;
+    margin-top: 12px;
+    box-sizing: border-box;
     @media #{$one-column} {
       display: none;
     }
@@ -132,8 +134,8 @@ header#site_header {
       display: block;
       width: 18px;
       height: 18px;
-      position: relative;
-      left: -27px;
+      position: absolute;
+      right: 12px;
       top: 9px;
       img {
         width: 18px;
