@@ -15,17 +15,29 @@
         <% end %>
 
         <div class="user_dropdown_menu" data-target="user-dropdown.menu">
-          <span><%= truncate current_user.name, length: 24 %></span>
-          <%= link_to 'upload new track', main_app.upload_path %>
-          <%= link_to 'create album or playlist', main_app.new_user_playlist_path(current_user) %>
-          <%= link_to 'edit profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
-          <%= link_to 'log out', main_app.logout_path, class: 'logout_button', data: { turbolinks: "false" } %>
+
+          <div class="user_dropdown_menu_header">
+            <%= truncate current_user.name, length: 24 %>
+            <%= user_image(current_user, variant: :small) %>
+          </div>
+
+          <div class="user_dropdown_menu_items">
+            <%= link_to 'Upload New Track', main_app.upload_path %>
+            <%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %>
+            <%= link_to 'Edit Profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
+          </div>
+
+          <div class="user_dropdown_menu_bottom_links">
+            <a href="#">Admin</a>
+            <%= link_to 'log out', main_app.logout_path, class: 'logout_button', data: { turbolinks: "false" } %>
+          </div>
+
         </div>
       </div>
     <% end %>
 
   <% unless logged_in? %>
-    <%= link_to 'Yo Login', main_app.login_path, class: 'login_button' %>
+    <%= link_to 'Login', main_app.login_path, class: 'login_button' %>
   <% end %>
 </div>
 

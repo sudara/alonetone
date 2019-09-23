@@ -56,6 +56,7 @@ header#site_header {
           width: 160px;
           padding: 0;
           padding-left: 8px;
+          background-color: $background-color-three;
           color: $font-color-two;
           border-radius: 3px;
           &:focus {
@@ -85,7 +86,6 @@ header#site_header {
     .user_dropdown {
       position: relative;
       .profile_link {
-        position: relative;
         z-index: 100;
         display: block;
         box-sizing: border-box;
@@ -95,30 +95,61 @@ header#site_header {
         padding: 2px;
         border-radius: 3px;
         background-color: $background-color-three;
+        background-image: image-url("svg/icon_profile_link_down_arrow.svg");
+        background-repeat: no-repeat;
+        background-position: right 6px center;
         img {
           width: 32px;
           height: 32px;
         }
       }
       .user_dropdown_menu {
-        display: none;
         position: absolute;
-        top: -116px;
-        margin-top: 40px;
-        width: 100%;
+        top: 0!important;
+        right: 0;
         z-index: 99;
-        a {
-          font-size: 14px;
-          font-weight: normal;
-          line-height: 26px;
-          display: block;
-          height: 26px;
-          padding-right: 15px;
-          padding-left: 15px;
-          background-color: $background-color-one;
-          &:hover {
-            background-color: $background-color-three;
-            text-decoration: none;
+        width: 350px;
+        height: 236px;
+        background-color: white;
+        box-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
+        border-radius: 0px 0px 6px 6px;
+        .user_dropdown_menu_header {
+          height: 60px;
+          display: flex;
+          padding-left: $baseline;
+          font-size: 16px;
+          line-height: 60px;
+          img {
+            display: block;
+            margin-left: auto;
+            margin-right: 16px;
+            margin-top: $baseline / 2;
+            height: 36px;
+            width: 36px;
+            border-radius: 2px;
+          }
+
+        }
+        .user_dropdown_menu_items {
+          padding-left: $baseline;
+          a {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 40px;
+            display: block;
+            height: 40px;
+            background-color: $background-color-one;
+          }
+        }
+        .user_dropdown_menu_bottom_links {
+          display: flex;
+          justify-content: space-between;
+          padding-left: 16px;
+          padding-right: 16px;
+          padding-top: $baseline;
+          a {
+            display: block;
           }
         }
       }
