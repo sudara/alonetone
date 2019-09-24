@@ -45,6 +45,8 @@ header#site_header {
       @media #{$one-column} {
         display: none;
       }
+
+
       #search_form {
         display: block;
         height: 100%;
@@ -60,7 +62,7 @@ header#site_header {
           color: $font-color-two;
           border: 0;
           border-radius: 3px;
-          &:hover {
+          &:focus {
             border-width: 0px;
             width: 256px;
             background-color: $background-color-one;
@@ -74,10 +76,10 @@ header#site_header {
         height: 20px;
         position: absolute;
         right: 12px;
-        top: 7px;
+        top: 6px;
         background-image: image-url("svg/icon_search_magnifying_glass.svg");
         &:hover {
-          // background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
+          background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
         }
         img {
           width: 18px;

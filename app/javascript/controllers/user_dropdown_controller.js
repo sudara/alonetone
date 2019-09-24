@@ -7,18 +7,19 @@ export default class extends Controller {
     this.menuTarget.style.top = '-310px'
   }
 
-  slideOpen() {
+  open(event) {
+    event.preventDefault()
     this.menuTarget.style.top = '0px'
   }
 
-  slideClosed() {
+  close() {
     this.menuTarget.style.top = '-310px'
   }
 
   touch(event) {
     if (this.menuTarget.style.top !== '0px') {
       event.preventDefault()
-      this.slideOpen()
+      this.open()
     }
   }
 
