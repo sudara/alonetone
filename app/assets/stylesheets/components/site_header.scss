@@ -63,6 +63,8 @@ header#site_header {
           &:hover {
             border-width: 0px;
             width: 256px;
+            background-color: $background-color-one;
+            border: 2px solid $accent;
           }
         }
       }
