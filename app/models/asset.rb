@@ -17,8 +17,7 @@ class Asset < ApplicationRecord
   attribute :user_agent, :string
   serialize :waveform, Array
 
-  scope :published,       -> { where(private: false, is_spam: false) }
-  scope :not_spam,        -> { where(is_spam: false) }
+  scope :published,       -> { where(private: false) }
   scope :recent,          -> { order('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { order('updated_at DESC').first }
   scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
@@ -29,8 +28,14 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
   scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+  scope :recently_updated, -> { order('assets.updated_at DESC') }
 
   belongs_to :user, counter_cache: true
+  belongs_to :possibly_deleted_user,
+    -> { with_deleted },
+    class_name: 'User',
+    foreign_key: 'user_id'
+
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
   has_one :greenfield_post, class_name: '::Greenfield::Post'
@@ -187,6 +192,19 @@ class Asset < ApplicationRecord
   def self.destroy_deleted_accounts_older_than_30_days
     Asset.destroyable.find_each do |asset|
       AssetCommand.new(asset).destroy_with_relations
+    end
+  end
+
+  def self.filter_by(filter)
+    case filter
+    when "deleted"
+      only_deleted.where(is_spam: false).order('deleted_at DESC')
+    when "is_spam"
+      with_deleted.where(is_spam: true).order('deleted_at DESC')
+    when "not_spam"
+      where(is_spam: false).recent
+    else
+      with_deleted.recent
     end
   end
 

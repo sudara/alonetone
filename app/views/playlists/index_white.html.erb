@@ -8,7 +8,7 @@
     <div class="playlists_feedback" data-target="playlists-sort.feedback">
     </div>
   <% end %>
-  <ul class="playlists sortable"  data-target="playlists-sort.sortable">
+  <ul class="playlists sortable no_artist_name_playlists"  data-target="playlists-sort.sortable">
     <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
   </ul>
 </div>

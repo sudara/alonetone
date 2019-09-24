@@ -31,4 +31,11 @@ class AssetCommand
     asset.audio_feature.delete
     asset.destroy
   end
+
+  def spam_and_soft_delete_with_relations
+    asset.spam!
+    asset.update_attribute :is_spam, true
+
+    soft_delete_with_relations
+  end
 end

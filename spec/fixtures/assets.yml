@@ -144,3 +144,39 @@ asset_with_relations_for_soft_delete:
   created_at: 2010-04-08 13:00:03
   user: jamie_kiesl
   length: 55
+
+valid_asset_to_test_on_latest:
+  mp3_file_name: ValidAsset1.mp3
+  title: The hottest asset to test latest
+  permalink: valid-non-spam-asset
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  listens_count: 2
+  created_at: 2019-09-08 13:00:03
+  user: jamie_kiesl
+  hotness: 111
+  length: 55
+
+another_valid_asset_to_test_on_latest:
+  mp3_file_name: ValidAsset2.mp3
+  title: Second hottest asset to test latest
+  permalink: valid-but-manually-spammed-asset
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  listens_count: 2
+  created_at: 2019-08-07 13:00:03
+  user: jamie_kiesl
+  hotness: 101
+  length: 55
+
+soft_deleted_asset_with_soft_deleted_user:
+  mp3_file_name: SoftDeletedAsset.mp3
+  title: Soft deleted asset with soft deleted user
+  permalink: soft-deleted-asset
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 3.megabytes %>
+  created_at: 2019-08-07 13:00:03
+  user: deleted_30_days_ago
+  created_at: <%= 41.days.ago %>
+  updated_at: <%= 41.days.ago %>
+  deleted_at: <%= 35.days.ago %>
