@@ -16,8 +16,8 @@ module RSpec
         visit new_user_session_path
 
         within '#login_form' do
-          fill_in 'user_session_login', with: users(user).login
-          fill_in 'user_session_password', with: 'test'
+          fill_in 'user_session[login]', with: users(user).login
+          fill_in 'user_session[password]', with: 'test'
           click_button 'Come on in...'
         end
         yield
