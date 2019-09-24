@@ -22,15 +22,17 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector(".player")
       Percy.snapshot(page, name: 'Playlist Track Loading')
 
+      resume_animations
+
       # Navigating away and back, we should still be playing
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
 
       find('.waveform').click(x: 200, y: 10)
-
-      # right here is some indeterminancy with the playhead
-
+      sleep(0.2) # let animations catch up
+      find('.waveform').click(x: 200, y: 10) # reduce glitch
+      pause_animations
       find('.play-button-container a').click # pause
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
