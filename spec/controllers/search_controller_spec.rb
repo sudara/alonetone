@@ -16,9 +16,9 @@ RSpec.describe SearchController, type: :controller do
     end
 
     it 'should not return results for soft_deleted.asset with deleted soft_deleted user' do
-      asset = assets(:valid_asset_to_test_spam_on_latest)
+      asset = assets(:another_valid_asset_to_test_on_latest)
       get :index, params: { query: "#{asset.title}" }
-      expect(assigns(:assets)).to include(assets(:valid_asset_to_test_spam_on_latest))
+      expect(assigns(:assets)).to include(assets(:another_valid_asset_to_test_on_latest))
 
       UserCommand.new(asset.user).soft_delete_with_relations
 
