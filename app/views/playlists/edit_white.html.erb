@@ -19,7 +19,7 @@
               Upload a square photo,<br> 2000px by 2000px for<br> best results.
             </p>
         </div>
-        <%= form_with model: [@user, @playlist], html: { class: 'edit_playlist_info_right_column', id: 'edit_playlist' } do |f| %>
+        <%= form_with model: [@user, @playlist], html: { class: 'edit_playlist_info_right_column', id: 'edit_playlist', autocomplete: 'off' } do |f| %>
           <div class="edit_playlist_info_right_column_title_and_year">
             <div>
               <label for="playlist_title">Title</label>
