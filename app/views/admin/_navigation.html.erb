@@ -6,9 +6,11 @@
     <%= navigation_item "Spammed Musicians <span>#{User.filter_by('spam_musicians').count}</span>", admin_users_path({filter_by: :spam_musicians}) %>
     <%= navigation_item "Deleted (Not Spam) <span>#{User.filter_by('deleted').count}</span>", admin_users_path({filter_by: :deleted}) %>
   </ul>
-  <%= navigation_item 'All Tracks', admin_assets_path %>
+  <%= navigation_item "All Tracks <span>#{Asset.with_deleted.count}</span>", admin_assets_path %>
   <ul>
-    <%= navigation_item 'Spam', admin_assets_path({filter_by: {is_spam: true}}) %>
+    <%= navigation_item "Not Spam <span>#{Asset.count}</span>", admin_assets_path({filter_by: :not_spam}) %>
+    <%= navigation_item "Deleted Spam <span>#{Asset.with_deleted.where(is_spam: true).count}</span>", admin_assets_path({filter_by: :is_spam}) %>
+    <%= navigation_item "Deleted (Not Spam) <span>#{Asset.only_deleted.where(is_spam: false).count}</span>", admin_assets_path({filter_by: :deleted}) %>
   </ul>
   <%= navigation_item 'All Comments',  admin_comments_path %>
   <ul>

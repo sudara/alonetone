@@ -15,7 +15,7 @@
       <%== pagy_nav @pagy %>
     </div>
     <div class="admin_column_right_inner box">
-      
+
       <header class="admin_users_header">
         <div class="date_column">Joined</div>
         <div class="user_column">User</div>
@@ -48,7 +48,7 @@
             <div class="bio_column">
               <div><%= truncate(user&.profile&.bio, length: 200) %></div>
               <div><%= user&.profile&.website %></div>
-              <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0 %></div>
+              <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0  && !user.soft_deleted? %></div>
             </div>
             <div class="button_column">
               <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put, remote: true, data: { target: 'admin--user.unspamButton', action: 'click->admin--user#hideUnspamButton' } %>

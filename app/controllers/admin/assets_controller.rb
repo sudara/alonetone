@@ -3,38 +3,29 @@ module Admin
     before_action :find_asset, only: %i[spam unspam delete restore]
 
     def index
-      if permitted_params[:filter_by]
-        @pagy, @assets = pagy(Asset.where(permitted_params[:filter_by]).recent)
-      else
-        @pagy, @assets = pagy(Asset.recent)
-      end
+      @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]))
     end
 
     def unspam
+      AssetCommand.new(@asset).restore_with_relations if @asset.soft_deleted?
+
       @asset.ham!
       @asset.update_attribute :is_spam, false
     end
 
     def spam
-      @asset.spam!
-      @asset.update_attribute :is_spam, true
-    end
-
-    # not used at the moment
-    def mark_group_as_spam
-      scope = Asset.where(permitted_params[:mark_spam_by])
-      assets = scope.not_spam
-
-      assets.map(&:spam!)
-      assets.update_all(is_spam: true)
+      AssetCommand.new(@asset).spam_and_soft_delete_with_relations
+      redirect_to admin_assets_path(filter_by: :is_spam)
     end
 
     def delete
       AssetCommand.new(@asset).soft_delete_with_relations
+      redirect_to admin_assets_path(filter_by: :deleted)
     end
 
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
+      redirect_to admin_assets_path(filter_by: :not_spam)
     end
 
     private
