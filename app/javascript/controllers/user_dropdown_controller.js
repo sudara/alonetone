@@ -19,7 +19,7 @@ export default class extends Controller {
   touch(event) {
     if (this.menuTarget.style.top !== '0px') {
       event.preventDefault()
-      this.open()
+      this.open(event)
     }
   }
 
