@@ -31,6 +31,20 @@ aside.thredded--currently-online {
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
+  @media #{$one-column} {
+    padding-left: 4%;
+    padding-right: 4%;
+    width: auto;
+    margin-left: $baseline / 2;
+    margin-right: $baseline / 2;
+  }
+  @media #{$mobile} {
+    padding-left: 4%;
+    padding-right: 4%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 #thredded--container {
@@ -40,18 +54,8 @@ aside.thredded--currently-online {
   @include samo-shadow-and-radius();
 
   @media #{$one-column} {
-    padding-left: 4%;
-    padding-right: 4%;
-    width: auto;
-    margin-left: 36px;
-    margin-right: 36px;
-  }
-  @media #{$mobile} {
-    padding-left: 4%;
-    padding-right: 4%;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+
+    padding: $baseline $baseline;
   }
 
   header {
