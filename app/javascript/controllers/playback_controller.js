@@ -14,6 +14,7 @@ export default class extends Controller {
     this.loaded = false
     this.isPlaying = false
     this.nextTrackLoading = false
+    this.duration = 0
     this.time = '0:00'
     this.setupHowl()
   }
@@ -51,6 +52,8 @@ export default class extends Controller {
   // and recurses to give us a way to update throughout playback
   whilePlaying() {
     this.position = this.sound.seek()
+    this.duration = this.sound.duration()
+
     if (this.sound.playing()) {
       this.whilePlayingCallback()
       if (!this.registeredListen && this.positionFromStart(5000)) {
@@ -65,7 +68,7 @@ export default class extends Controller {
         this.playNextTrack()
         this.stop()
       } else {
-        // we don't want to update this 60 times a second, at most 10
+        // we don't need to update this 60 times a second, at most 10
         setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)
       }
     }
@@ -94,7 +97,7 @@ export default class extends Controller {
   stop() {
     this.sound.pause()
     this.sound.stop()
-    this.stopCallback() // reset the audio
+    this.stopCallback()
   }
 
   togglePlay(e) {
@@ -132,11 +135,11 @@ export default class extends Controller {
 
   seek(newPosition) {
     if (!this.isPlaying) this.play()
-    this.sound.seek(this.sound.duration() * newPosition)
+    this.sound.seek(this.duration * newPosition)
   }
 
   positionFromEnd(ms) {
-    const positionFromEnd = (this.sound.duration() - this.position) * 1000
+    const positionFromEnd = (this.duration - this.position) * 1000
     return ms > positionFromEnd
   }
 
@@ -145,7 +148,7 @@ export default class extends Controller {
   }
 
   percentPlayed() {
-    return this.position / this.sound.duration()
+    return this.position / this.duration
   }
 
   calculateTime() {

@@ -1,5 +1,5 @@
 #playlist-and-track-content-header {
-  max-width: 1032px;
+  max-width: $site_max_width;
   padding: 0 36px;
   box-sizing: border-box;
   margin-left: auto;
@@ -14,7 +14,7 @@
 #playlist-and-track-content {
   display: flex;
   justify-content: center;
-  max-width: 1032px;
+  max-width: $site_max_width;
   padding: 0 36px;
   box-sizing: border-box;
   margin-left: auto;
@@ -54,5 +54,8 @@
       margin-left: auto!important;
       margin-right: auto;
     }
+  }
+  .player .waveform {
+    padding-top: 14px;
   }
 }
