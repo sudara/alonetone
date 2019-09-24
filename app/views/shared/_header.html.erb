@@ -29,7 +29,9 @@
           </div>
 
           <div class="user_dropdown_menu_bottom_links">
-            <a href="#" class="admin_item">Admin</a>
+            <% if moderator? %>
+              <%= link_to "Admin", "/admin/users", class: 'admin_item' %>
+            <% end %>
             <%= link_to 'Log Out', main_app.logout_path, class: 'logout_item', data: { turbolinks: "false" } %>
           </div>
 
