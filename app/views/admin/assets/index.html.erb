@@ -25,7 +25,9 @@
                 <%= user_image(asset.possibly_deleted_user, variant: :original) %>
               </div>
               <div>
-                <div><%= link_to asset.possibly_deleted_user.login, admin_user_path(asset.possibly_deleted_user.login) %></div>
+                <div><%= link_to asset.possibly_deleted_user.login, admin_user_path(asset.possibly_deleted_user.login) %>
+                  <div class="deleted_at_date"><%== "Deleted #{local_time_ago asset.possibly_deleted_user.deleted_at}" if asset.possibly_deleted_user.deleted_at %></div>
+                </div>
                 <div><%= asset.possibly_deleted_user.ip %></div>
               </div>
             </div>
