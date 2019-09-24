@@ -33,7 +33,6 @@ module Admin
     # find by id rather than permalink, since it's not unique
     # include with_deleted to be able to restore
     def find_asset
-      # binding.pry
       @asset = Asset.with_deleted.find(params[:id])
     end
 
