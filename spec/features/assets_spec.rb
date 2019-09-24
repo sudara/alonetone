@@ -5,7 +5,6 @@ RSpec.describe 'tracks', type: :feature, js: true do
     visit '/sudara/tracks/song1'
     play_button = find(".play-button a")
 
-    convert_canvas_to_image
     Percy.snapshot(page, name: 'Single Track Page')
 
     # seek halfway
