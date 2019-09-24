@@ -3,7 +3,7 @@
     <div class="asset_top_row">
       <div class="play-button button" data-target="normal-playback.play" data-action="click->normal-playback#togglePlay">
         <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
-          id: "play-#{asset.unique_id}", class: 'play_link', title: 'play' do %>
+          class: 'play_link', title: 'play' do %>
             <svg data-target="normal-playback.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
             <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
             </svg>
@@ -86,7 +86,7 @@
       </div>
     </div>
   	<% if logged_in? || asset.guest_can_comment? %>
-      <div id="comment_track_<%= asset.unique_id %>" class="comment_track">
+      <div class="comment_track">
         <%= render partial: 'assets/comment_white', locals: { asset: asset }%>
       </div>
   	<% end %>
