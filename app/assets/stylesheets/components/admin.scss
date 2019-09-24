@@ -126,7 +126,7 @@
           &.deleted {
               background-color: $background-color-two;
               box-shadow: inset 0 0 3px $border-color-two;
-              input[value='Restore User'] {
+              input[value~='Restore'] {
                 background-color: $accent;
                 opacity: 1;
               }
