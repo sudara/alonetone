@@ -238,13 +238,13 @@ RSpec.describe Asset, type: :model do
 
   # ensure that we still allow access to a user record
   # even if it's been soft_deleted
-  describe 'belongs_to user_object' do
+  describe 'belongs_to possibly_deleted_user' do
     let(:asset) { assets(:soft_deleted_asset_with_soft_deleted_user) }
 
     it 'allows access to soft_deleted user' do
       expect(asset.soft_deleted?).to eq(true)
       expect(asset.user).to be_nil
-      expect(asset.user_object).not_to be_nil
+      expect(asset.possibly_deleted_user).not_to be_nil
     end
   end
 end

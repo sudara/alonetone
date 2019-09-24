@@ -79,7 +79,7 @@ footer#site_footer {
         flex-wrap: wrap;
         li {
           box-sizing: border-box;
-          padding: 8px;
+          position: relative;
           width: 234px;
           height: 64px;
           border-radius: 3px;
@@ -89,15 +89,27 @@ footer#site_footer {
             width: 100%;
             margin-bottom: 8px;
           }
-          .forum_topic {
+          > a {
+            display: block;
+            padding: 8px;
             font-family: $medium-sans-font;
             line-height: 1.2;
-            height: 32px;
+            height: 64px;
+            box-sizing: border-box;
           }
-          .forum_author {
+          div {
+            position: absolute;
             font-family: $sans-font;
             color: $font-color-four;
             font-size: 12px;
+            display: inline-block;
+            pointer-events: none;
+            position: absolute;
+            bottom: 0px;
+            padding-left: 8px;
+            > a {
+              pointer-events: auto;
+            }
           }
         }
       }

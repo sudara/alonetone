@@ -20,7 +20,7 @@
   <% if @playlists.present? %>
     <div id="user_playlists_area">
       <div class="user_featured_playlists">
-        <ul class="playlists">
+        <ul class="playlists no_artist_name_playlists">
           <%= render partial: 'shared/playlist_white', collection: @playlists.limit(4), as: :playlist %>
         </ul>
       </div>
@@ -172,16 +172,18 @@
        <%= @user.name %> doesn't have anything to say, unfortunately...
        <% end %>
      </div>
-     <div class="user_card_content_divider"></div>
-     <div class="user_location">
-        <%= user_location(@profile) %>
-     </div>
+     <% if (user_location(@profile).length > 0) %>
+      <div class="user_card_content_divider"></div>
+      <div class="user_location">
+          <%= user_location(@profile) %>
+      </div>
+     <% end %>
     </div>
   </div>
   <% if @user.followees.present? %>
     <div id="user_follows_area">
       <h2 class="area_heading">
-        Who <%= @user.display_name %> follows
+        Who <%= @user.name %> follows
       </h2>
         <div class="area_content">
         <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>

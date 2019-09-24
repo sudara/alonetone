@@ -145,9 +145,9 @@ asset_with_relations_for_soft_delete:
   user: jamie_kiesl
   length: 55
 
-valid_asset_to_test_spam_on_latest:
+valid_asset_to_test_on_latest:
   mp3_file_name: ValidAsset1.mp3
-  title: Latest asset to test /latest
+  title: The hottest asset to test latest
   permalink: valid-non-spam-asset
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
@@ -156,10 +156,11 @@ valid_asset_to_test_spam_on_latest:
   user: jamie_kiesl
   hotness: 111
   length: 55
-another_valid_asset_to_test_spam_on_latest:
+
+another_valid_asset_to_test_on_latest:
   mp3_file_name: ValidAsset2.mp3
-  title: Latest spam asset to test /latest
-  permalink: valid-spam-asset
+  title: Second hottest asset to test latest
+  permalink: valid-but-manually-spammed-asset
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 3.megabytes %>
   listens_count: 2
