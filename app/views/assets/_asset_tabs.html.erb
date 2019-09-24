@@ -9,7 +9,7 @@
 
     <%= favorite_toggle(asset) %>
 		<% if logged_in? || asset.guest_can_comment? %>
-	    <div id="comment_track_<%= asset.unique_id %>">
+	    <div>
 	        <%= render partial: 'assets/comment', locals: {asset: asset} %>
 	    </div>
 		<% end %>
