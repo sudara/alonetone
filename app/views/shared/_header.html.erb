@@ -22,6 +22,7 @@
           </div>
 
           <div class="user_dropdown_menu_items">
+            <%= link_to 'Your Stuff', main_app.user_home_path(current_user) %>
             <%= link_to 'Upload New Track', main_app.upload_path %>
             <%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %>
             <%= link_to 'Edit Profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
