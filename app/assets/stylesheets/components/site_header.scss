@@ -87,7 +87,7 @@ header#site_header {
       @include default_button(primary);
       height: 36px;
       line-height: 38px;
-  
+
       margin-top: 12px;
     }
     .user_dropdown {
@@ -112,6 +112,7 @@ header#site_header {
       }
       .user_dropdown_menu {
         position: absolute;
+        top: 0;
         right: 0;
         z-index: 99;
         width: 1000px;
