@@ -42,11 +42,6 @@ header#site_header {
       margin-top: $baseline / 2;
       margin-top: 12px;
       box-sizing: border-box;
-      @media #{$one-column} {
-        display: none;
-      }
-
-
       #search_form {
         display: block;
         height: 100%;
@@ -97,9 +92,6 @@ header#site_header {
     }
     .user_dropdown {
       position: relative;
-      @media #{$one-column} {
-        margin-left: auto;
-      }
       .profile_link {
         z-index: 100;
         display: block;
