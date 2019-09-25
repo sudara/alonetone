@@ -9,7 +9,7 @@
 
     <% if logged_in? %>
       <div class="user_dropdown" data-controller="user-dropdown"
-        data-action="keydown@window->user-dropdown#close">
+        data-action="keydown@window->user-dropdown#handleEvent">
 
         <%= link_to '#', class: 'profile_link', data: {action: "user-dropdown#open" } do %>
           <%= user_image(current_user, variant: :large) %>
@@ -18,7 +18,7 @@
         <div class="user_dropdown_menu" style="display:none;"
           data-target="user-dropdown.menu">
 
-          <div class="user_dropdown_menu_header">
+          <div class="user_dropdown_menu_header" data-target="user-dropdown.header">
             <%= truncate current_user.name, length: 24 %>
             <%= user_image(current_user, variant: :large) %>
           </div>
