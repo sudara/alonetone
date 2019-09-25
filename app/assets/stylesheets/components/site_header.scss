@@ -62,6 +62,7 @@ header#site_header {
           color: $font-color-two;
           border: 0;
           border-radius: 3px;
+          transition: width .4s, background-color .4s, border-width .4s;
           &:focus {
             border-width: 0px;
             width: 256px;
