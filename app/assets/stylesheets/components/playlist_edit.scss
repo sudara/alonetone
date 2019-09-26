@@ -249,6 +249,9 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+    .playlist_asset {
+      pointer-events: none;
+    }
     .playlist_size {
       border-radius: 4px;
       background-color: $background-color-two;
