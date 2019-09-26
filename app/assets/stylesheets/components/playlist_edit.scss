@@ -251,6 +251,12 @@
     }
     .playlist_asset {
       pointer-events: none;
+      a.remove {
+        pointer-events: all;
+      }
+      div.play-button {
+        pointer-events: all;
+      }
     }
     .playlist_size {
       border-radius: 4px;
