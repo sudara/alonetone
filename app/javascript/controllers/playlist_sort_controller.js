@@ -1,6 +1,7 @@
 import Rails from '@rails/ujs'
 import Sortable from 'sortablejs'
 import { Controller } from 'stimulus'
+import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['sortable', 'sortUrl', 'addUrl', 'dropzone', 'sourceTracks',
@@ -34,12 +35,8 @@ export default class extends Controller {
       url: this.sortUrl,
       type: 'POST',
       data: this.currentParams,
-      success: this.displaySuccess.bind(this),
+      success: flashController.alertSaved('Saved!'),
     })
-  }
-
-  displaySuccess() {
-    this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
   }
 
   updatePlaylistMetadata() {
