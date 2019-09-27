@@ -417,11 +417,11 @@
     }
     .remove-inner-inline {
       display: inline-flex;
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       position: relative;
-      top: -3px;
-      border-radius: 4px;
+      top: -1px;
+      border-radius: 3px;
       background-color: $background-color-four;
       align-items: center;
       justify-content: center;
@@ -433,11 +433,11 @@
     }
     .add-inner-inline {
       display: inline-flex;
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       position: relative;
-      top: -3px;
-      border-radius: 4px;
+      top: -1px;
+      border-radius: 3px;
       background-color: $background-color-four;
       align-items: center;
       justify-content: center;
