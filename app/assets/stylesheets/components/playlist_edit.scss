@@ -406,7 +406,7 @@
       width: 15px;
       height: 15px;
       position: relative;
-      top: -3px;
+      top: 1px;
       align-items: center;
       justify-content: center;
       svg {
@@ -422,7 +422,7 @@
       position: relative;
       top: -3px;
       border-radius: 4px;
-      background-color: $edit-playlist-track-button-background;
+      background-color: $background-color-four;
       align-items: center;
       justify-content: center;
       svg {
@@ -438,12 +438,12 @@
       position: relative;
       top: -3px;
       border-radius: 4px;
-      background-color: $edit-playlist-track-button-background;
+      background-color: $background-color-four;
       align-items: center;
       justify-content: center;
       svg {
         position: relative;
-        width: 7px;
+        width: 8px;
         height: 7px;
       }
     }

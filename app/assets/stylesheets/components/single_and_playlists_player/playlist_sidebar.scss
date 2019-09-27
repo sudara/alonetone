@@ -43,7 +43,7 @@
       }
       &:hover,
       &.active {
-        background-color: $background-color-four;
+        background-color: $background-color-five;
         a.position-name-time {
           color: $font-color-six;
           span.track-name {
@@ -135,11 +135,11 @@
       margin-top: 0;
       margin-bottom: 0;
       li {
-        background-color: $background-color-four;
+        background-color: $background-color-five;
         overflow: auto;
         border-bottom: 1px solid black;
         &:hover {
-          background-color: $background-color-four;
+          background-color: $background-color-five;
         }
         a {
           font-family: $sans-font;
