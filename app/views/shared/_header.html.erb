@@ -27,12 +27,12 @@
             <%= link_to 'Your Stuff', main_app.user_home_path(current_user) %>
             <%= link_to 'Upload New Track', main_app.upload_path %>
             <%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %>
-            <%= link_to 'Edit Profile', main_app.edit_user_path(current_user), class: 'edit_button' %>
+            
           </div>
 
           <div class="user_dropdown_menu_bottom_links">
             <% if moderator? %>
-              <%= link_to "Admin", "/admin/users", class: 'admin_item' %>
+              <%= link_to 'Edit Profile', main_app.edit_user_path(current_user), class: 'edit_profile_item' %>
             <% end %>
             <%= link_to 'Log Out', main_app.logout_path, class: 'logout_item', data: { turbolinks: "false" } %>
           </div>

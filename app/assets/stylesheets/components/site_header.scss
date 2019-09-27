@@ -118,7 +118,7 @@ header#site_header {
         width: 1000px;
         max-width: 350px;
         background-color: $background-color-one;
-        box-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
+        box-shadow: $site-header-user-dropdown-shadow;
         border-radius: 0px 0px 6px 6px;
         color: $font-color-two;
         @media #{$mobile} {
@@ -161,7 +161,7 @@ header#site_header {
           padding-right: 16px;
           padding-top: 16px;
           margin-bottom: 10px;
-          a.admin_item {
+          a.edit_profile_item {
             @include default_button();
             height: 28px;
             line-height: 30px;
