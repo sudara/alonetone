@@ -35,7 +35,7 @@ export default class extends Controller {
       url: this.sortUrl,
       type: 'POST',
       data: this.currentParams,
-      success: flashController.alertSaved('Saved!'),
+      success: this.displaySuccess.bind(this),
     })
   }
 
@@ -52,5 +52,9 @@ export default class extends Controller {
     const min = Math.floor(sum / 60)
     const sec = sum % 60
     return `${min}:${sec >= 10 ? sec : '0' + sec}`
+  }
+
+  displaySuccess() {
+    flashController.alertSaved()
   }
 }
