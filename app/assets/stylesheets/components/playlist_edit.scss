@@ -8,7 +8,7 @@
     padding-left: 0;
     padding-right: 0;
   }
-  
+
   #edit_playlist_info {
     padding-left: 0;
     padding-right: 0;
@@ -250,9 +250,8 @@
       border-bottom-right-radius: 0;
     }
     .playlist_asset {
-      pointer-events: none;
       user-select: none;
-      
+
       a.remove {
         pointer-events: all;
       }
@@ -265,14 +264,13 @@
         user-select: none;
         div {
           user-select: none;
-          pointer-events: all;
-          cursor: pointer;
+          cursor: grab;
           width: 30px;
           height: 22px;
           background-image: image-url("svg/icon_drag_handle_idle.svg");
           background-size: 30px 22px;
           background-position: center;
-          background-repeat: no-repeat;        
+          background-repeat: no-repeat;
           border-radius: 7px;
           border: 1px solid $border-color-five;
           &:hover {
@@ -391,7 +389,7 @@
         display: none;
       }
     }
-    
+
   }
   .left_instructions,
   .right_instructions {
