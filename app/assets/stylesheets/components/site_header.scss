@@ -93,7 +93,7 @@ header#site_header {
         position: absolute;
         right: 10px;
         top: 6px;
-        background-image: image-url("svg/icon_search_magnifying_glass.svg");
+        background-image: $site-header-search-magnifying-glass-image;
         &:hover {
           background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
         }
@@ -122,7 +122,7 @@ header#site_header {
         padding: 2px;
         border-radius: 3px;
         background-color: $background-color-four;
-        background-image: image-url("svg/icon_profile_link_down_arrow.svg");
+        background-image: $profile-link-background-image;
         background-repeat: no-repeat;
         background-position: right 6px center;
         img {
