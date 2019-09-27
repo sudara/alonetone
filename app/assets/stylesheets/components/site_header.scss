@@ -21,6 +21,7 @@ header#site_header {
       margin-top: 12px;
       display: block;
       width: 51.59px;
+      flex-shrink: 0;
       height: 40px;
       background: transparent image-url("alonetone_big-notext-flat.png")
         no-repeat;
@@ -32,6 +33,9 @@ header#site_header {
       left: 95px;
       width: 15px;
       height: 35px;
+      @media #{$mobile} {
+        display: none;
+      }
     }
     > .header_search {
       position: relative;
@@ -42,6 +46,10 @@ header#site_header {
       margin-top: $baseline / 2;
       margin-top: 12px;
       box-sizing: border-box;
+      @media #{$mobile} {
+        margin-right: $baseline / 2;
+      }
+
       #search_form {
         display: block;
         height: 100%;
@@ -64,6 +72,18 @@ header#site_header {
             background-color: $background-color-one;
             border: 2px solid $accent;
           }
+          @media #{$mobile} {
+            width: 36px;
+            float: right;
+            &::placeholder {
+              color: transparent;
+            }
+            &:focus {
+              width: 100%;
+              float: right;
+            }
+          }
+
         }
       }
       #search_button {
@@ -71,7 +91,7 @@ header#site_header {
         width: 20px;
         height: 20px;
         position: absolute;
-        right: 12px;
+        right: 10px;
         top: 6px;
         background-image: image-url("svg/icon_search_magnifying_glass.svg");
         &:hover {
@@ -87,7 +107,7 @@ header#site_header {
       @include default_button(primary);
       height: 36px;
       line-height: 38px;
-
+      flex-shrink: 0;
       margin-top: 12px;
     }
     .user_dropdown {
