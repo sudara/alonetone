@@ -78,6 +78,7 @@ header#site_header {
             width: 36px;
             float: right;
             padding-right: 0;
+            display: none;
             &::placeholder {
               color: transparent;
             }
@@ -100,10 +101,20 @@ header#site_header {
         &:hover {
           background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
         }
-        img {
-          width: 18px;
-          height: 18px;
+        @media #{$mobile} {
+          display: none; 
         }
+        
+      }
+      #mobile_search_reveal_button {
+        display: block;
+        width: 36px;
+        height: 36px;
+        background-color: $background-color-four;
+        border-radius: 3px;
+        background-image: $site-header-search-magnifying-glass-image;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
     .login_button {
