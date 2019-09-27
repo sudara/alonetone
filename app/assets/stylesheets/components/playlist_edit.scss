@@ -8,7 +8,7 @@
     padding-left: 0;
     padding-right: 0;
   }
-  
+
   #edit_playlist_info {
     padding-left: 0;
     padding-right: 0;
@@ -249,6 +249,45 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+    .playlist_asset {
+      user-select: none;
+
+      a.remove {
+        pointer-events: all;
+      }
+      div.drag_handle {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        div {
+          user-select: none;
+          cursor: grab;
+          width: 30px;
+          height: 22px;
+          background-image: image-url("svg/icon_drag_handle_idle.svg");
+          background-size: 30px 22px;
+          background-position: center;
+          background-repeat: no-repeat;
+          border-radius: 7px;
+          border: 1px solid $border-color-five;
+          transition: border-color .4s, background-image .4s;
+          &:hover {
+            background-image: image-url("svg/icon_drag_handle_active.svg");
+            border: 1px solid $border-color-four;
+          }
+          &:active {
+            background-image: image-url("svg/icon_drag_handle_active.svg");
+            border: 1px solid $accent;
+          }
+        }
+      }
+      div.play-button {
+       display: none;
+      }
+    }
     .playlist_size {
       border-radius: 4px;
       background-color: $background-color-two;
@@ -351,7 +390,7 @@
         display: none;
       }
     }
-    
+
   }
   .left_instructions,
   .right_instructions {
@@ -362,30 +401,45 @@
     @media only screen and (min-width: 749px) and (max-width: 830px) {
       min-height: 64px;
     }
-    .remove-inner-inline {
+
+    .mini-handle {
       display: inline-flex;
       width: 15px;
       height: 15px;
       position: relative;
-      top: -3px;
-      border-radius: 4px;
-      background-color: $edit-playlist-track-button-background;
+      top: 1px;
       align-items: center;
       justify-content: center;
       svg {
         position: relative;
-        width: 7px;
+        width: 15px;
+        height: 13px;
+      }
+    }
+    .remove-inner-inline {
+      display: inline-flex;
+      width: 13px;
+      height: 13px;
+      position: relative;
+      top: -2px;
+      border-radius: 3px;
+      background-color: $background-color-four;
+      align-items: center;
+      justify-content: center;
+      svg {
+        position: relative;
+        width: 8px;
         height: 7px;
       }
     }
     .add-inner-inline {
       display: inline-flex;
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       position: relative;
-      top: -3px;
-      border-radius: 4px;
-      background-color: $edit-playlist-track-button-background;
+      top: -2px;
+      border-radius: 3px;
+      background-color: $background-color-four;
       align-items: center;
       justify-content: center;
       svg {

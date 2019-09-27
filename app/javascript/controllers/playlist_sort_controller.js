@@ -1,6 +1,7 @@
 import Rails from '@rails/ujs'
 import Sortable from 'sortablejs'
 import { Controller } from 'stimulus'
+import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['sortable', 'sortUrl', 'addUrl', 'dropzone', 'sourceTracks',
@@ -8,6 +9,7 @@ export default class extends Controller {
 
   initialize() {
     this.sortable = new Sortable(this.sortableTarget, {
+      handle: '.drag_handle',
       onEnd: () => this.maybePostToSort(),
     })
     this.sortUrl = this.sortUrlTarget.getAttribute('href')
@@ -38,10 +40,6 @@ export default class extends Controller {
     })
   }
 
-  displaySuccess() {
-    this.feedbackTarget.innerHTML = '<div class="ajax_success">Saved!</div>'
-  }
-
   updatePlaylistMetadata() {
     const size = this.sortableTarget.childElementCount
     this.sizeTarget.innerHTML = `${size}`
@@ -55,5 +53,9 @@ export default class extends Controller {
     const min = Math.floor(sum / 60)
     const sec = sum % 60
     return `${min}:${sec >= 10 ? sec : '0' + sec}`
+  }
+
+  displaySuccess() {
+    flashController.alertSaved()
   }
 }
