@@ -39,7 +39,7 @@
         <% end %>
       </h2>
       <div class="box">
-        <%= render partial: 'shared/comment', collection: @comments, cached: true %>
+        <%= render partial: 'shared/comment', collection: @comments %>
       </div>
       <div class="below_box">
         <%= link_to all_comments_path, class: 'view_all', title: 'view latest comments' do %>
