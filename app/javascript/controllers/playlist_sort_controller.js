@@ -9,6 +9,7 @@ export default class extends Controller {
 
   initialize() {
     this.sortable = new Sortable(this.sortableTarget, {
+      handle: '.drag_handle',
       onEnd: () => this.maybePostToSort(),
     })
     this.sortUrl = this.sortUrlTarget.getAttribute('href')
