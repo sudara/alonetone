@@ -400,6 +400,21 @@
     @media only screen and (min-width: 749px) and (max-width: 830px) {
       min-height: 64px;
     }
+
+    .mini-handle {
+      display: inline-flex;
+      width: 15px;
+      height: 15px;
+      position: relative;
+      top: -3px;
+      align-items: center;
+      justify-content: center;
+      svg {
+        position: relative;
+        width: 15px;
+        height: 13px;
+      }
+    }
     .remove-inner-inline {
       display: inline-flex;
       width: 15px;
