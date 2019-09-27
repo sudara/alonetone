@@ -88,21 +88,3 @@ RSpec.configure do |config|
     activate_authlogic
   end
 end
-
-# enable drag_by in capybara
-# https://stackoverflow.com/questions/10866960/how-do-i-drag-a-jquery-slider-handle-from-within-capybara-and-chromedriver
-
-module CapybaraExtension
-  def drag_by(right_by, down_by)
-    base.drag_by(right_by, down_by)
-  end
-end
-
-module CapybaraSeleniumExtension
-  def drag_by(right_by, down_by)
-    driver.browser.action.drag_and_drop_by(native, right_by, down_by).perform
-  end
-end
-
-::Capybara::Selenium::Node.send :include, CapybaraSeleniumExtension
-::Capybara::Node::Element.send :include, CapybaraExtension
