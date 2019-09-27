@@ -273,6 +273,7 @@
           background-repeat: no-repeat;
           border-radius: 7px;
           border: 1px solid $border-color-five;
+          transition: border-color .4s, background-image .4s;
           &:hover {
             background-image: image-url("svg/icon_drag_handle_active.svg");
             border: 1px solid $border-color-four;
