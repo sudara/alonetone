@@ -89,7 +89,14 @@ class User < ApplicationRecord
   has_many   :playlists, -> { order('playlists.position') },
     dependent: :destroy
 
+  # this only covers comments received by the user
+  # not comments made by the user
   has_many   :comments, -> { order('comments.id DESC') },
+    dependent: :destroy
+
+  has_many :given_comments, -> { order('comments.id DESC') },
+    foreign_key: 'commenter_id',
+    class_name: 'Comment',
     dependent: :destroy
 
   has_many   :tracks,
