@@ -122,6 +122,34 @@ RSpec.describe Admin::UsersController, type: :request do
 
       expect(tracks(:sudaras_track_with_asset_on_other_user).reload.deleted_at).not_to be_nil
     end
+
+    # `.commenter` is the giver of comments
+    it "soft deletes comments given to others" do
+      expect(Comment.where(commenter_id: users(:arthur).id).count).to eq(4)
+      expect(users(:arthur).given_comments.count).to eq(4)
+      put delete_admin_user_path(users(:arthur))
+      expect(users(:arthur).given_comments.count).to eq(0)
+    end
+
+    # `.user` is a receiver of a comment
+    it "soft deleted comments received by others" do
+      expect(Comment.where(user_id: users(:arthur).id).count).to eq(1)
+      expect(users(:arthur).comments.count).to eq(1)
+      put delete_admin_user_path(users(:arthur))
+      expect(users(:arthur).comments.count).to eq(0)
+    end
+
+    it "soft deletes comments on user's asset by others" do
+      # arthurs asset
+      asset = assets(:valid_arthur_mp3)
+      # comment made by sudara on arthur's comment
+      comment = comments(:public_comment_soft_deletion_relations)
+      expect(comment.user_id).to eq(users(:arthur).id)
+      expect(comment.commenter_id).to eq(users(:sudara).id)
+
+      put delete_admin_user_path(users(:arthur))
+      expect(comment.reload.deleted_at).not_to be_nil
+    end
   end
 
   describe '#index' do
@@ -173,7 +201,7 @@ RSpec.describe Admin::UsersController, type: :request do
   describe '#show' do
     context 'non deleted user' do
       before :each do
-        get admin_user_path(users(:sudara).login)
+        get admin_possibly_deleted_user_path(users(:sudara).login)
       end
 
       it 'should display user information' do
@@ -193,11 +221,11 @@ RSpec.describe Admin::UsersController, type: :request do
 
     context 'soft_deleted user' do
       before do
-        UserCommand.new(users(:sudara)).soft_delete_with_relations
+        UserCommand.new(users(:arthur)).soft_delete_with_relations
       end
 
       before :each do
-        get admin_user_path(users(:sudara).login)
+        get admin_possibly_deleted_user_path('arthur')
       end
 
       it 'should display deleted at date' do
@@ -205,17 +233,16 @@ RSpec.describe Admin::UsersController, type: :request do
       end
 
       it 'should display user information' do
-        expect(response.body).to match(/sudara/)
+        expect(response.body).to match(/arthur/)
       end
 
       it 'should display users assets' do
-        expect(response.body).to match(/User's Tracks/)
-        expect(response.body).to match(/Very good song/)
+        expect(response.body).to match(/song1/)
       end
 
       it 'should display users comments' do
-        expect(response.body).to match(/User's Comments/)
-        expect(response.body).to match(/this is an awesome track, says a user/)
+        expect(response.body).to match(/forget milk./)
+        expect(response.body).to match(/Well friend, this is your best work./)
       end
     end
   end
