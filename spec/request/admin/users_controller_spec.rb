@@ -171,20 +171,52 @@ RSpec.describe Admin::UsersController, type: :request do
   end
 
   describe '#show' do
-    before :each do
-      get admin_user_path(id: users(:sudara).login)
+    context 'non deleted user' do
+      before :each do
+        get admin_user_path(users(:sudara).login)
+      end
+
+      it 'should display user information' do
+        expect(response.body).to match(/sudara/)
+      end
+
+      it 'should display users assets' do
+        expect(response.body).to match(/User's Tracks/)
+        expect(response.body).to match(/Very good song/)
+      end
+
+      it 'should display users comments' do
+        expect(response.body).to match(/User's Comments/)
+        expect(response.body).to match(/this is an awesome track, says a user/)
+      end
     end
 
-    it 'should display user information' do
-      expect(response.body).to match(/sudara/)
-    end
+    context 'soft_deleted user' do
+      before do
+        UserCommand.new(users(:sudara)).soft_delete_with_relations
+      end
 
-    it 'should display users assets' do
-      expect(response.body).to match(/Very good song/)
-    end
+      before :each do
+        get admin_user_path(users(:sudara).login)
+      end
 
-    it 'should display users comments' do
-      expect(response.body).to match(/this is an awesome track, says a user/)
+      it 'should display deleted at date' do
+        expect(response.body).to match(/Deleted/)
+      end
+
+      it 'should display user information' do
+        expect(response.body).to match(/sudara/)
+      end
+
+      it 'should display users assets' do
+        expect(response.body).to match(/User's Tracks/)
+        expect(response.body).to match(/Very good song/)
+      end
+
+      it 'should display users comments' do
+        expect(response.body).to match(/User's Comments/)
+        expect(response.body).to match(/this is an awesome track, says a user/)
+      end
     end
   end
 end
