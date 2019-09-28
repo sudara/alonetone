@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <h3 style="padding-left: 1em;">Users Tracks</h3>
+      <h3 style="padding-left: 1em;">User's Tracks</h3>
       <div style="padding: 0 1em;">
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @assets_pagy %>
@@ -68,15 +68,15 @@
                 <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
                 <div class="user_column">
                   <div class="avatar">
-                    <%= user_image(asset.user_object, variant: :original) %>
+                    <%= user_image(asset.possibly_deleted_user, variant: :original) %>
                   </div>
                   <div>
-                    <div><%= link_to asset.user_object.login, admin_user_path(asset.user_object.login) %></div>
-                    <div><%= asset.user_object.ip %></div>
+                    <div><%= link_to asset.possibly_deleted_user.login, admin_user_path(asset.possibly_deleted_user.login) %></div>
+                    <div><%= asset.possibly_deleted_user.ip %></div>
                   </div>
                 </div>
                 <div class="track_column">
-                  <div><%= link_to asset.title, user_track_path(asset.user_object, asset.permalink) %></div>
+                  <div><%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink) %></div>
                   <div><%= truncate(asset.description, length: 80) %></div>
                   <div>N comments / N listens</div>
                 </div>
@@ -94,7 +94,7 @@
         </div>
       </div>
 
-      <h3 style="padding-left: 1em;">Users Comments</h3>
+      <h3 style="padding-left: 1em;">User's Comments</h3>
       <div style="padding: 0 1em;">
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @comment_pagy %>
