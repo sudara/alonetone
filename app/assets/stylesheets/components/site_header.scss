@@ -75,16 +75,13 @@ header#site_header {
             border: 2px solid $accent;
           }
           @media #{$mobile} {
-            width: 36px;
             float: right;
             padding-right: 0;
             display: none;
-            &::placeholder {
-              color: transparent;
-            }
+            width: 100%;
+            float: right;
             &:focus {
               width: 100%;
-              float: right;
             }
           }
 
