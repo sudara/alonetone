@@ -8,7 +8,9 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, path: 'users/(:filter_by)', only: [:index, :show] do
+    get 'users/:id', :to => 'users#show', as: 'user'
+
+    resources :users, path: 'users/(:filter_by)', only: [:index] do
       member do
         put :delete
         put :restore
