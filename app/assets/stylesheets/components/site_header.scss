@@ -50,7 +50,6 @@ header#site_header {
         margin-right: $baseline / 2;
         padding-left: $baseline / 2;
       }
-
       #search_form {
         display: block;
         height: 100%;
@@ -84,7 +83,6 @@ header#site_header {
               width: 100%;
             }
           }
-
         }
       }
       #search_button {
@@ -101,7 +99,6 @@ header#site_header {
         @media #{$mobile} {
           display: none; 
         }
-        
       }
       #mobile_search_reveal_button {
         display: none;
@@ -115,7 +112,6 @@ header#site_header {
         @media #{$mobile} {
           display: block; 
         }
-
       }
     }
     .login_button {
