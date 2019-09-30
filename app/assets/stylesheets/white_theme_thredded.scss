@@ -25,19 +25,18 @@ aside.thredded--currently-online {
   display: none;
 }
 
-#thredded--container {
+.thredded_container {
+  max-width: $site_max_width;
+  padding: 0 $baseline * 1.5;
   box-sizing: border-box;
-  padding: $baseline $baseline * 3;
-  background-color: #fff;
-  @include samo-shadow-and-radius();
-  max-width: 960px;
-
+  margin-left: auto;
+  margin-right: auto;
   @media #{$one-column} {
     padding-left: 4%;
     padding-right: 4%;
     width: auto;
-    margin-left: 36px;
-    margin-right: 36px;
+    margin-left: $baseline / 2;
+    margin-right: $baseline / 2;
   }
   @media #{$mobile} {
     padding-left: 4%;
@@ -45,6 +44,18 @@ aside.thredded--currently-online {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+  }
+}
+
+#thredded--container {
+  box-sizing: border-box;
+  padding: $baseline $baseline * 3;
+  background-color: #fff;
+  @include samo-shadow-and-radius();
+
+  @media #{$one-column} {
+
+    padding: $baseline $baseline;
   }
 
   header {

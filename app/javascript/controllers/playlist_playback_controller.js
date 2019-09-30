@@ -29,13 +29,13 @@ export default class extends PlaybackController {
   }
 
   pauseCallback() {
-    this.bigPlay.animation.setPlay()
+    this.bigPlay.pause()
     this.playTarget.classList.replace('pause-button', 'play-button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
 
   stopCallback() {
-    this.bigPlay.reset()
+    this.bigPlay.stop()
   }
 
   // every instance of playlistPlayback listens for popstate@window
@@ -83,7 +83,7 @@ export default class extends PlaybackController {
       this.loaded = true
       this.bigPlay.play()
     }
-    this.bigPlay.update(this.percentPlayed())
+    this.bigPlay.update()
   }
 
   hideSmallCoverAndSidebarLinks() {

@@ -22,20 +22,20 @@
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div class="avatar">
-                <%= user_image(@user, variant: :original) %>
+                <%= user_image(asset.possibly_deleted_user, variant: :original) %>
               </div>
               <div>
-                <div><%= link_to asset.user.name, user_home_path(asset.user) %></div>
-                <div><%= asset.user.ip %></div>
+                <div><%= link_to asset.possibly_deleted_user.login, admin_users_path({ filter_by: asset.possibly_deleted_user.email }) %></div>
+                <div><%= asset.possibly_deleted_user.ip %></div>
               </div>
             </div>
             <div class="track_column">
-              <div><%= link_to asset.title, user_track_path(asset.user, asset.permalink) %></div>
+              <div><%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink) %></div>
               <div><%= truncate(asset.description, length: 80) %></div>
               <div>N comments / N listens</div>
             </div>
             <div class="button_column">
-              <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsSpam' } %>
+              <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsDeleted' } %>
               <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#markTrackAsDeleted' } %>
               <%= button_to "Restore Asset", restore_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.restoreButton', action: 'admin--asset#markTrackAsRestored' } %>
             </div>

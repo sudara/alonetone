@@ -4,31 +4,20 @@ export default class extends Controller {
   static targets = ['spamButton', 'deleteButton', 'restoreButton']
 
   initialize() {
+    this.hideAllButtons()
+
     if (this.data.get('deleted') == "true" ) {
-      this.hideDeleteButton()
       this.showRestoreButton()
-      this.hideSpamButton()
-    } else if (this.data.get('spam') == "true") {
-      this.markTrackAsSpam()
-      this.hideRestoreButton()
-      this.showDeleteButton()
-    } else {
+    } else if (this.data.get('deleted') == 'false') {
       this.showSpamButton()
       this.showDeleteButton()
-      this.hideRestoreButton()
     }
   }
 
-  // SPAM TRACK
-  markTrackAsSpam() {
-    this.setSpamRecord()
+  hideAllButtons() {
     this.hideSpamButton()
+    this.hideDeleteButton()
     this.hideRestoreButton()
-  }
-
-  setSpamRecord() {
-    this.data.set('spam', 'true')
-    this.element.classList.add('spam')
   }
 
   hideSpamButton(){
@@ -50,11 +39,6 @@ export default class extends Controller {
     this.spamButtonTarget.style.display = 'block'
   }
 
-  setUnspamRecord() {
-    this.data.set('spam', 'false')
-    this.element.classList.remove('spam')
-  }
-
   showDeleteButton() {
     this.data.set('deleted', 'false')
     this.element.classList.remove('deleted')
@@ -63,18 +47,23 @@ export default class extends Controller {
 
   // DELETE TRACK
   markTrackAsDeleted() {
+    this.setDeleteRecord()
     this.hideDeleteButton()
     this.hideSpamButton()
     this.showRestoreButton()
   }
 
-  hideDeleteButton() {
+  setDeleteRecord() {
     this.data.set('deleted', 'true')
     this.element.classList.add('deleted')
+  }
+
+  hideDeleteButton() {
     this.deleteButtonTarget.style.display = 'none'
   }
 
   showRestoreButton() {
+    this.element.classList.add('deleted')
     this.restoreButtonTarget.style.display = 'block'
   }
 }

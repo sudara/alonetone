@@ -1,38 +1,40 @@
 import { Controller } from 'stimulus'
 import LargePlayAnimation from '../animation/large_play_animation'
-import Waveform from '../animation/waveform'
 
 export default class extends Controller {
   static targets = ['play', 'playButton', 'time', 'progressContainerInner', 'waveform', 'seekBar']
 
   initialize() {
     this.animation = new LargePlayAnimation()
-    this.waveform = this.setupWaveform()
     this.percentPlayed = 0.0
     this.setDelegate()
     this.animation.init()
     this.animation.play()
+    this.setupPlayhead()
     this.setAnimationState()
   }
 
   setAnimationState() {
-    // initialized *while* an mp3 is still loading
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
+      // instantiated while an mp3 is still loading
       this.animation.showLoading()
-    } else if (this.delegate && this.delegate.isPlaying) { // while playing
+    } else if (this.delegate && this.delegate.isPlaying) {
+      // ...while in the middle of playing
       this.animation.showLoading()
       this.animation.showPause()
-      this.showPlayhead()
-    } else if (this.delegate && this.delegate.positionFromStart(1)) { // after playing while paused
+      this.startPlayhead()
+    } else if (this.delegate && this.delegate.positionFromStart(1)) {
+      // ...after playing once but now paused
       this.animation.setPlay()
-      this.update(this.delegate.percentPlayed())
       this.showPlayhead()
-    } else { // loaded and not playing
+      this.update(this.delegate.percentPlayed())
+    } else {
+      // ....loaded but not playing
       this.animation.setPlay()
     }
   }
 
-  // this is the controller that the big play button / waveform is linked to
+  // the single/playlist controller that we are linked to
   setDelegate() {
     const itemInPlaylist = document.querySelector('.tracklist li.active')
     if (itemInPlaylist) this.delegate = this.application.getControllerForElementAndIdentifier(itemInPlaylist, 'playlist-playback')
@@ -41,9 +43,15 @@ export default class extends Controller {
     }
   }
 
+  // called from whileLoading()
   play() {
     this.animation.showPause()
-    this.showPlayhead()
+    this.startPlayhead()
+  }
+
+  pause() {
+    this.timeline.pause()
+    this.animation.setPlay()
   }
 
   togglePlay(e) {
@@ -61,42 +69,47 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
+    this.update()
   }
 
-  update(percentPlayed) {
-    this.percentPlayed = percentPlayed
-    this.updatePlayhead()
-    this.waveform.update()
+  // called from the player
+  update() {
+    this.percentPlayed = this.delegate.percentPlayed()
     this.timeTarget.innerHTML = this.delegate.time
+    if (Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02) {
+      console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+      this.timeline.progress(this.percentPlayed)
+    }
   }
 
-  reset() {
+  stop() {
     this.animation.reset()
     this.animation.setPlay()
+    this.playheadAnimation.stop()
   }
 
-  disconnect() {
-    this.waveformTarget.querySelector('canvas').remove()
+  setupPlayhead() {
+    this.timeline = new TimelineMax({ paused: true, duration: 1 })
+    this.playheadAnimation = this.timeline.to(this.progressContainerInnerTarget, 1, {
+      left: '100%',
+      ease: Linear.easeNone,
+    }, 0)
+    this.waveformAnimation = this.timeline.to('#waveform-reveal', 1, {
+      attr: { x: '0' },
+      ease: Linear.easeNone,
+    }, 0)
+  }
+
+  startPlayhead() {
+    this.showPlayhead()
+    this.update()
+    this.timeline.play()
   }
 
   showPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
-  }
-
-  updatePlayhead() {
-    this.progressContainerInnerTarget.style.left = 100 * this.percentPlayed + "%"
-  }
-
-  setupWaveform() {
-    const controller = this
-    const data = this.data.get('waveform')
-    return new Waveform({
-      container: this.waveformTarget,
-      height: 54,
-      percentPlayed: function () {
-        return controller.percentPlayed
-      },
-      data,
-    })
+    if (this.timeline.duration() === 1) {
+      this.timeline.duration(this.delegate.duration)
+    }
   }
 }

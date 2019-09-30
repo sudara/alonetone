@@ -13,7 +13,11 @@ export default class extends PlaybackController {
   }
 
   pauseCallback() {
-    this.bigPlay.animation.setPlay()
+    this.bigPlay.pause()
+  }
+
+  stopCallback() {
+    this.bigPlay.stop()
   }
 
   whilePlayingCallback() {
@@ -23,7 +27,6 @@ export default class extends PlaybackController {
       this.bigPlay.play()
     }
     this.bigPlay.update(this.percentPlayed())
-    console.log(this.sound.duration())
   }
 
   setBigPlay() {
