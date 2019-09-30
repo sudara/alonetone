@@ -10,9 +10,6 @@
         <li><%= link_to_unless_current 'From those you follow', radio_source_home_path('those_you_follow') %></li>
         <li><%= link_to_unless_current "Songs you haven't heard", radio_source_home_path('songs_you_have_not_heard') %></li>
         <% end %>
-        <% if moderator? %>
-        <li><%= link_to_unless_current "Spammy Spam", radio_source_home_path('spam') %></li>
-        <% end %>
       </ul>
   </div>
 </nav>
