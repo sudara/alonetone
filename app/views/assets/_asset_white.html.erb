@@ -1,6 +1,7 @@
 <%= cache([asset, asset.user, logged_in?, local_assigns[:favorite]]) do %>
   <div class="asset_top">
     <div class="asset_top_row">
+      <div class="drag_handle"><div class="inner"></div></div>
       <div class="play-button button" data-target="normal-playback.play" data-action="click->normal-playback#togglePlay">
         <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
           class: 'play_link', title: 'play' do %>

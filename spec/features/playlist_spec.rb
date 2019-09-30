@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe 'playlists', type: :feature, js: true do
+
   it 'renders track and cover pages' do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
@@ -56,11 +57,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector('.sortable .asset', count: 3)
 
       # Move "Manfacturer of the Finest Cheese" to be the last song
-      first_track = find('.sortable .asset:first-child')
+      first_track_handle = find('.sortable .asset:first-child .drag_handle')
       last_track = find('.sortable .asset:last-child')
-      first_track.drag_to(last_track)
-      #expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
-
+      first_track_handle.drag_to(last_track)
+      expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
       Percy.snapshot(page, name: 'Playlist Edit')
     end
   end
