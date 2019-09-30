@@ -1,3 +1,18 @@
+<nav class="sub_nav">
+  <div class="sub_nav_inner">
+       <ul>
+          <li><%= link_to_unless_current 'Latest Uploaded', radio_source_home_path('latest') %></li>
+          <li><%= link_to_unless_current 'Most Popular', radio_source_home_path('popular') %></li>
+          <li><%= link_to_unless_current 'Most Favorited', radio_source_home_path('most_favorited') %></li>
+          <li><%= link_to_unless_current 'Recently Favorited', radio_source_home_path('favorites') %></li>
+          <li><%= link_to_unless_current 'Mangoz Shuffle', radio_source_home_path('mangoz_shuffle') %></li>
+          <% if logged_in? %>
+          <li><%= link_to_unless_current 'From Those You Follow', radio_source_home_path('those_you_follow') %></li>
+          <% end %>
+        </ul>
+  </div>
+</nav>
+
 <div class="about-page">
   <div class="faq box">
     <h2 class="box static">
