@@ -104,7 +104,7 @@ header#site_header {
         
       }
       #mobile_search_reveal_button {
-        display: block;
+        display: none;
         width: 36px;
         height: 36px;
         background-color: $background-color-four;
@@ -112,6 +112,10 @@ header#site_header {
         background-image: $site-header-search-magnifying-glass-image;
         background-position: center;
         background-repeat: no-repeat;
+        @media #{$mobile} {
+          display: block; 
+        }
+
       }
     }
     .login_button {
