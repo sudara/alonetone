@@ -21,11 +21,15 @@
                 &:last-child {
                   margin-right: 0;
                 }
+                &.current {
+                    background-color: $accent;
+                    @include shadow-one-inner();
+                }
                 @include default_button(sub_nav); // is this right, or styles go here?
-                @include shadow-one-inner();
+                
                 @include shadow-one();
                 overflow: hidden;
-                // background-color: $accent;
+                
                 color: $white;
 
                 a {
