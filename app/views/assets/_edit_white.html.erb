@@ -39,15 +39,6 @@
       </div>
       <% end %>
       <div class="edit-save">
-      <% unless asset.published? %>
-        <div class="submit_wrapper">
-          <div class="ajax_waiting" >
-            <div class="text"><!-- placeholder response text --></div>
-          </div>
-          <div class="small_spinner" style="display:none;"> </div>
-            <%= f.submit "Publish" %>
-        </div>
-      <% end %>
       <div class="submit_wrapper">
         <%= f.submit "Save" %>
         <div class="small_spinner" data-target="save.spinner"> </div>
@@ -55,6 +46,16 @@
           <div class="text"><!-- placeholder response text --></div>
         </div>
       </div>
+      <% unless asset.published? %>
+        <div class="submit_wrapper">
+          <%= f.submit "Publish" %>
+          <div class="ajax_waiting" >
+            <div class="text"><!-- placeholder response text --></div>
+          </div>
+          <div class="small_spinner" style="display:none;"> </div>
+        </div>
+      <% end %>
+
     </div>
   <% end %>
   </div>

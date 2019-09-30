@@ -3,8 +3,8 @@
 module PlaylistsHelper
   def title_and_year_for(playlist)
     title = playlist.title.to_s
-    title += " (#{playlist.year})" if playlist.year.present?
-    title
+    title += " <span>(#{playlist.year})</span>" if playlist.year.present?
+    title.html_safe
   end
 
   def allow_greenfield_playlist_downloads?(user)

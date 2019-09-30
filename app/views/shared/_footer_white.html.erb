@@ -21,8 +21,9 @@
     <ul>
     <% latest_forum_topics.each do |topic|  %>
       <li>
-        <div class="forum_topic"><%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %> </div>
-        <div class="forum_author">by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
+        <%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %>
+        <div>by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
+        
       </li>
     <% end %>
     </ul>

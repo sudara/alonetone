@@ -1,0 +1,17 @@
+<%# Proof of concept: https://codepen.io/sudara/pen/wvwNadB %>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 54" preserveAspectRatio="none">
+  <defs>
+    <polygon x="0" y="0" id="waveform"
+      points="<%= WaveformToSvg.new(@asset&.audio_feature&.waveform).points %>"/>
+  </defs>
+
+  <clipPath id="waveform-clip">
+    <rect id="waveform-reveal" x="-500" y="0" width="500" height="54"/>
+  </clipPath>
+
+  <use id="waveform-unplayed" xlink:href="#waveform"/>
+  <g clip-path="url(#waveform-clip)">
+  <use id="waveform-played" xlink:href="#waveform"/>
+  </g>
+</svg>

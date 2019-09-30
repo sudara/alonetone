@@ -1,4 +1,4 @@
-<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>"  data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
+<div class="track-content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>">
 
   <%= render partial: 'assets/big_player' %>
 

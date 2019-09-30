@@ -9,6 +9,7 @@ export default class extends PlaybackController {
 
   preInitialize() {
     this.preload = false
+    this.alreadyPlayed = false
     this.url = this.playTarget.querySelector('a').getAttribute('href')
   }
 
@@ -26,6 +27,7 @@ export default class extends PlaybackController {
     this.openDetails()
     this.updateSeekBarLoaded()
     this.registeredListen = true
+    this.alreadyPlayed = true
   }
 
   pauseCallback() {
@@ -54,8 +56,11 @@ export default class extends PlaybackController {
   }
 
   closeDetails() {
+    // Height of the details could have changed (for example private banner showing)
+    // So let's recalculate the offset for animating
+    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
     this.element.classList.remove('open')
-    this.seekBarContainerTarget.classList.remove('show');
+    this.seekBarContainerTarget.classList.remove('show')
   }
 
   openDetails() {
@@ -66,6 +71,9 @@ export default class extends PlaybackController {
     this.detailsTarget.style.display = 'block'
     this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
     this.element.classList.add('open')
+    if (this.alreadyPlayed) {
+      this.seekBarContainerTarget.classList.add('show')
+    }
   }
 
   showAnimation() {

@@ -1,9 +1,9 @@
 .tracks_search_results {
-	@include samo-shadow-and-radius();
+	margin-bottom: 0;
 }
 
 .no_search_results {
-	max-width: 1032px;
+	max-width: $site_max_width;
 	padding: 0 $baseline * 1.5;
 	box-sizing: border-box;
 	margin-left: auto;

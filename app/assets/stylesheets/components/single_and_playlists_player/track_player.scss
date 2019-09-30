@@ -26,12 +26,28 @@
   .waveform {
     top: 0;
     right: 0;
-    padding-top: 14.2px;
+    padding-top: 10px;
     flex-grow: 1;
     user-select: none;
     position: relative;
-     > canvas {
-      width: 100%!important;
+    svg {
+      width: 100%;
+      height: 54px;
+      #waveform-reveal {
+        fill: #c7c6c3;
+      }
+      #waveform-unplayed {
+        stroke: #c7c6c3;
+        fill: #c7c6c3;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
+      #waveform-played {
+        stroke-width: 1px;
+        stroke-linejoin: round;
+        stroke: #353535;
+        fill: #353535;
+      }
     }
     .seekbar {
       position: absolute;
