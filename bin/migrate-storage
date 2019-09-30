@@ -13,90 +13,6 @@ module Storage
   class SkipRecord < StandardError
   end
 
-  class VariantMigration
-    attr_reader :blob
-    attr_reader :variant_name
-    attr_reader :paperclip_attachment
-    attr_reader :storage_attachment
-    attr_reader :options
-
-    def initialize(
-      blob,
-      variant_name:,
-      paperclip_attachment:,
-      storage_attachment:,
-      options:
-    )
-      @blob = blob
-      @variant_name = variant_name
-      @paperclip_attachment = paperclip_attachment
-      @storage_attachment = storage_attachment
-      @options = options
-    end
-
-    def storage_variant
-      storage_attachment.variant(resize_to_limit: resize_to_limit)
-    rescue ActiveStorage::InvariableError
-      raise(
-        Storage::SkipRecord,
-        "Can't process variant because original is not an image: `#{original_s3_object.key}'"
-      )
-    end
-
-    def original_s3_object
-      @original_s3_object ||= ActiveStorage::Blob.service.send(
-        :object_for, paperclip_attachment.path(variant_name)[1..]
-      )
-    end
-
-    def copy_s3_object
-      @copy_s3_object ||= ActiveStorage::Blob.service.send(
-        :object_for, storage_variant.key
-      )
-    end
-
-    def migrate
-      return if copy_s3_object.exists?
-
-      if original_s3_object.exists?
-        Storage.copy_object(
-          original_s3_object,
-          copy_s3_object,
-          content_type: blob.content_type,
-          options: options
-        )
-      else
-        process
-      end
-    end
-
-    private
-
-    def process
-      begin
-        storage_variant.processed unless options.dry_run
-        options.logger.info(
-          "Generated variant #{variant_name}"
-        )
-      rescue ActiveStorage::IntegrityError
-        options.logger.info(
-          "Failed to generate #{variant_name} because #{storage_variant.blob.key} " \
-          "has the wrong checksum."
-        )
-        raise
-      rescue ActiveStorage::FileNotFoundError
-        options.logger.info(
-          "Failed to generate #{variant_name} because #{storage_variant.blob.key} is " \
-          "missing."
-        )
-      end
-    end
-
-    def resize_to_limit
-      ImageVariant.resize_to_fit(variant_name)
-    end
-  end
-
   class RecordMigration
     attr_reader :record
     attr_reader :storage_attachment_names
@@ -242,13 +158,7 @@ module Storage
     end
 
     def migrate
-      unless storage_attachment.attached?
-        attach_blob
-      end
-      # Copy over all variants in case we are working on a Pic.
-      if paperclip_attachment_name == 'pic'
-        copy_variants
-      end
+      attach_blob unless storage_attachment.attached?
     rescue Storage::SkipRecord => error
       options.logger.info(error.message)
       return
@@ -293,18 +203,6 @@ module Storage
           # Create Blob and Attachment based on the copied object.
           storage_attachment.save!
         end
-      end
-    end
-
-    def copy_variants
-      variant_names.each do |variant_name|
-        Storage::VariantMigration.new(
-          blob,
-          variant_name: variant_name,
-          paperclip_attachment: paperclip_attachment,
-          storage_attachment: storage_attachment,
-          options: options
-        ).migrate
       end
     end
   end
