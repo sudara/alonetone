@@ -1,7 +1,7 @@
 valid_listen:
   listener: sudara
   asset: valid_mp3
-  track_owner: arthur
+  track_owner: sudara
 another_valid_listen:
   listener: arthur
   asset: valid_mp3
@@ -13,4 +13,8 @@ listens_on_soft_deleted_asset:
 listens_on_soft_deleted_asset2:
   listener: sudara
   asset: asset_with_relations_for_soft_delete
+  track_owner: jamie_kiesl
+listens_to_test_recently_listened:
+  listener: sudara
+  asset: another_valid_asset_to_test_on_latest
   track_owner: jamie_kiesl
