@@ -1,7 +1,10 @@
 header#site_header {
   background-color: $background-color-one;
   box-shadow: 0 3px 4px -2px #65666627;
-  height: 40px;
+  height: 60px;
+  > .header_search {
+    display: none !important; // Temporarily hide dark theme search that wasn't inside the #site_header
+  }
   .header_inner {
     position: relative;
     margin-right: auto;
@@ -9,134 +12,207 @@ header#site_header {
     max-width: $site_max_width;
     padding: 0 36px;
     box-sizing: border-box;
+    display: flex;
     @media #{$mobile} {
       width: 100%;
       padding: 0 8px;
     }
     .header_logo {
-      position: absolute;
-      top: 4px;
+      margin-top: 12px;
       display: block;
-      width: 45px;
-      height: 35px;
-      background: transparent image-url('alonetone_big-notext-flat.png') no-repeat;
-      background-size: 80%;
-      background-position: 0 3px;
+      width: 51.59px;
+      flex-shrink: 0;
+      height: 40px;
+      background: transparent image-url("alonetone_big-notext-flat.png")
+        no-repeat;
+      background-size: 100%;
     }
     .headway {
-      position:absolute;
-      top:4px;
-      left:75px;
+      position: absolute;
+      top: 16px;
+      left: 95px;
       width: 15px;
       height: 35px;
+      @media #{$mobile} {
+        display: none;
+      }
     }
-    .header_nav {
-      display: none;
-    }
-    .header_login {
-      float: right;
-      li {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        height: 40px;
-        a {
-          @include default_button();
+    > .header_search {
+      position: relative;
+      margin-left: auto;
+      margin-right: $baseline;
+      display: flex;
+      height: $baseline * 1.5;
+      margin-top: $baseline / 2;
+      margin-top: 12px;
+      box-sizing: border-box;
+      @media #{$mobile} {
+        margin-right: $baseline / 2;
+        padding-left: $baseline / 2;
+      }
+
+      #search_form {
+        display: block;
+        height: 100%;
+        #query {
+          margin-bottom: 0;
+          height: 100%;
+          font-size: 14px;
+          font-family: $medium-sans-font;
+          width: 160px;
+          padding: 0;
+          padding-left: 8px;
+          padding-right: 36px;
+          background-color: $background-color-four;
+          color: $font-color-two;
+          border: 0;
+          border-radius: 3px;
+          transition: width .4s, background-color .4s, border-width .4s;
+          &:focus {
+            border-width: 0px;
+            width: 256px;
+            background-color: $background-color-one;
+            border: 2px solid $accent;
+          }
+          @media #{$mobile} {
+            float: right;
+            padding-right: 0;
+            display: none;
+            width: 100%;
+            float: right;
+            &:focus {
+              width: 100%;
+            }
+          }
+
         }
       }
+      #search_button {
+        display: block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top: 6px;
+        background-image: $site-header-search-magnifying-glass-image;
+        &:hover {
+          background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
+        }
+        @media #{$mobile} {
+          display: none; 
+        }
+        
+      }
+      #mobile_search_reveal_button {
+        display: block;
+        width: 36px;
+        height: 36px;
+        background-color: $background-color-four;
+        border-radius: 3px;
+        background-image: $site-header-search-magnifying-glass-image;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+    .login_button {
+      @include default_button(primary);
+      height: 36px;
+      line-height: 38px;
+      flex-shrink: 0;
+      margin-top: 12px;
     }
     .user_dropdown {
       position: relative;
-      float: right;
-      background-color: $background-color-three;
-      color: $font-color-one;
       .profile_link {
-        font-size: 14px;
-        position: relative;
         z-index: 100;
         display: block;
         box-sizing: border-box;
-        height: 40px;
-        padding-top: 3px;
-        background-color: $background-color-one;
-        span {
-          line-height: 34px;
-          display: block;
-          float: left;
-          min-width: 122px;
-          padding: 0 10px 0 15px;
-          text-align: right;
-          position: relative;
-          top: 1px;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
+        width: 56px;
+        margin-top: $baseline / 2;
+        height: 36px;
+        padding: 2px;
+        border-radius: 3px;
+        background-color: $background-color-four;
+        background-image: $profile-link-background-image;
+        background-repeat: no-repeat;
+        background-position: right 6px center;
         img {
-          width: 34px;
-          height: 34px;
+          width: 32px;
+          height: 32px;
         }
       }
       .user_dropdown_menu {
         position: absolute;
-        top: -116px;
-        margin-top: 40px;
-        width: 100%;
+        top: 0;
+        right: 0;
         z-index: 99;
-        a {
-          font-size: 14px;
-          font-weight: normal;
-          line-height: 26px;
-          display: block;
-          height: 26px;
-          padding-right: 15px;
-          padding-left: 15px;
-          background-color: $background-color-one;
-          &:hover {
-            background-color: $background-color-three;
-            text-decoration: none;
+        width: 1000px;
+        max-width: 350px;
+        background-color: $background-color-one;
+        box-shadow: $site-header-user-dropdown-shadow;
+        border-radius: 0px 0px 6px 6px;
+        color: $font-color-two;
+        @media #{$mobile} {
+          width: 300px;
+        }
+        .user_dropdown_menu_header {
+          height: 60px;
+          display: flex;
+          padding-left: $baseline;
+          font-size: 16px;
+          line-height: 60px;
+          img {
+            display: block;
+            margin-left: auto;
+            margin-right: 20px;
+            margin-top: 12px;
+            height: 36px;
+            width: 36px;
+            border-radius: 2px;
           }
         }
-      }
-    }
-  }
-  .header_search {
-    position: relative;
-    float: right;
-    margin-right: 4%;
-    padding-top: 8px;
-    @media #{$one-column} {
-      display: none;
-    }
-    #search_form {
-      display: block;
-      float: left;
-      #query {
-        font-size: 12px;
-        width: 180px;
-        height: 25px;
-        line-height: 1.2em;
-        padding: 0;
-        padding-left: 8px;
-        box-sizing: content-box;
-        color: $font-color-two;
-        border: 1px solid #DDDDDD;
-        border-radius: 5px;
-        &:focus {
-          border: 1px solid #AAAAAA;
+        .user_dropdown_menu_items {
+          padding-left: $baseline;
+          padding-top: $baseline / 3;
+          padding-bottom: $baseline / 3;
+          background-color: $background-color-two;
+          a {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 40px;
+            display: block;
+            height: 40px;
+          }
         }
-      }
-    }
-    #search_button {
-      display: block;
-      float: left;
-      width: 18px;
-      height: 18px;
-      margin-top: 3px;
-      margin-left: 8px;
-      img {
-        width: 18px;
-        height: 18px;
+        .user_dropdown_menu_bottom_links {
+          display: flex;
+          justify-content: space-between;
+          padding-left: 16px;
+          padding-right: 16px;
+          padding-top: 16px;
+          margin-bottom: 10px;
+          a.edit_profile_item {
+            @include default_button();
+            height: 28px;
+            line-height: 30px;
+            background-color: $background-color-one;
+            border: 1px solid $accent;
+            color: $accent;
+            width: 100px;
+            &:hover {
+              background-color: $background-color-one;
+              color: $accent;
+            }
+          }
+          a.logout_item {
+            @include default_button();
+            height: 28px;
+            line-height: 30px;
+            width: 100px;
+            margin-left: auto;
+          }
+        }
       }
     }
   }
