@@ -45,12 +45,14 @@ form {
     border-radius: 4px;
     background-color: $background-color-three;
     font-size: 14px;
+    
     &:focus {
       border: 1px solid $border-color-two;
     }
   }
   input {
     padding: 9px 10px 6px 10px;
+    outline: none;
     font-family: $medium-sans-font;
   }
   textarea {
