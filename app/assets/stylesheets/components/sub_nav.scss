@@ -21,7 +21,6 @@
                   margin-right: 0;
                 }
                 @include default_button(sub_nav); // is this right, or styles go here?
-                @include shadow-one();
                 @include shadow-one-inner();
                 @include shadow-one();
                 overflow: hidden;
