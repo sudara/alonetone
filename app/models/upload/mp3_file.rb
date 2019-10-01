@@ -59,12 +59,14 @@ class Upload
     def combined_attributes
       asset_attributes
         .merge(metadata.attributes)
-        .merge({
+        .merge(
           user: user,
-          mp3: file,
-          mp3_file_name: filename,
-          mp3_content_type: content_type
-        }.compact)
+          audio_file: {
+            io: file,
+            filename: filename,
+            content_type: content_type
+          }.compact
+        )
     end
   end
 end

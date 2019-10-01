@@ -44,6 +44,55 @@ RSpec.describe Playlist, type: :model do
     expect(playlists(:owp).tracks[1].position).to eq(2)
   end
 
+  describe "visibility" do
+    let(:playlist) do
+      Playlist.new(
+        is_favorite: false,
+        private: false,
+        tracks_count: 2
+      )
+    end
+
+    it "can be public" do
+      expect(playlist).to be_public
+    end
+
+    it "is not public when contains favorites" do
+      playlist.is_favorite = true
+      expect(playlist).to_not be_public
+    end
+
+    it "is not public when marked as private" do
+      playlist.private = true
+      expect(playlist).to_not be_public
+    end
+
+    it "is not public when has no tracks" do
+      playlist.tracks_count = 0
+      expect(playlist).to_not be_public
+    end
+  end
+
+  describe "scopes" do
+    it "select playlists which shall be shown on the homepage" do
+      playlists = Playlist.for_home.to_a
+      # Note: this number may change as fixture are added.
+      expect(playlists.size).to eq(2)
+
+      last_time = Time.zone.now
+      playlists.each do |playlist|
+        expect(playlist.created_at).to be < last_time
+        expect(playlist).to be_public
+
+        last_time = playlist.created_at
+      end
+    end
+
+    it "preload associations to reduce the number of queries" do
+      expect(Playlist.with_preloads.count).to eq(Playlist.count)
+    end
+  end
+
   context "favorites" do
     it 'should create a new playlist for a user who does not have one' do
       expect(users(:sandbags).playlists.favorites).not_to be_present
@@ -73,6 +122,26 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe "assigning a new cover image" do
+    context "without a cover" do
+      let(:playlist) { playlists(:william_shatners_favorites) }
+
+      it "creates the cover" do
+        playlist.update!(cover_image: file_fixture_uploaded_file('blue_de_bresse.jpg'))
+        expect(playlist.cover_image).to be_attached
+      end
+    end
+
+    context "with an cover" do
+      let(:playlist) { playlists(:will_studd_rockfort) }
+
+      it "replaces the cover" do
+        playlist.update!(cover_image: file_fixture_uploaded_file('blue_de_bresse.jpg'))
+        expect(playlist.cover_image).to be_attached
+      end
+    end
+  end
+
   describe "generating URLs to their cover" do
     context "with a cover" do
       let(:playlist) { playlists(:will_studd_rockfort) }
@@ -81,22 +150,11 @@ RSpec.describe Playlist, type: :model do
         expect(playlist.cover_image_present?).to eq(true)
       end
 
-      it "returns a URL to a variant" do
-        url = playlist.cover_url(variant: :large)
-        expect(url).to start_with('/system/pics')
-        expect(url).to end_with('.jpg')
-      end
-    end
-
-    context "with an cover that has missing information" do
-      let(:playlist) { playlists(:henri_willig_polderkaas) }
-
-      it "knows the playlist does not have an cover" do
-        expect(playlist.cover_image_present?).to eq(false)
-      end
-
-      it "does not return a URL to a variant" do
-        expect(playlist.cover_url(variant: :large)).to be_nil
+      it "returns a location to a variant" do
+        location = playlist.cover_image_location(variant: :large)
+        expect(location).to_not be_signed
+        expect(location).to be_kind_of(Storage::Location)
+        expect(location.attachment).to be_kind_of(ActiveStorage::Variant)
       end
     end
 
@@ -108,7 +166,7 @@ RSpec.describe Playlist, type: :model do
       end
 
       it "does not return a URL to a variant" do
-        expect(playlist.cover_url(variant: :large)).to be_nil
+        expect(playlist.cover_image_location(variant: :large)).to be_nil
       end
     end
   end

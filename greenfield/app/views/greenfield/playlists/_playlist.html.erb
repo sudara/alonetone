@@ -1,5 +1,5 @@
 <div class="playlist">
-  <%= link_to image_tag(@playlist.cover_url(variant: :original)), user_playlist_path(@playlist.user, @playlist), remote: true, class: 'small-cover', style: ('display:none;' unless @post) %>
+  <%= link_to image_tag(@playlist.cover_image_location(variant: :original).to_s), user_playlist_path(@playlist.user, @playlist), remote: true, class: 'small-cover', style: ('display:none;' unless @post) %>
   <h1 class="<%= 'cover' unless @asset %>">
     <%= link_to @playlist.title, user_playlist_path(@playlist.user, @playlist) %>
   </h1>
