@@ -38,7 +38,8 @@ class Configurable
     :show_dummy_image,
     :storage_service,
     :typekit_embed_token,
-    :postmark_api_token
+    :postmark_api_token,
+    :fastly_base_url
   )
 
   attr_reader :environment

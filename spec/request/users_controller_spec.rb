@@ -24,6 +24,24 @@ RSpec.describe UsersController, type: :request do
         end
       end
     end
+
+    # it should display 5 unique titles for assets of latest listens
+    it "displays only unique listens on Recently Listened To" do
+      # create 5 of the same listen and one extra
+      # ensure it definitely shows the other listens
+      5.times do |t|
+        Listen.create(asset: assets(:valid_arthur_mp3), listener: users(:sudara), track_owner: users(:arthur))
+      end
+
+      get "/#{users(:sudara).login}"
+
+      # from assets(:valid_arthur_mp3)
+      expect(response.body).to match(/arthur\/tracks\/song1.mp3/)
+      # from listens(:another_valid_asset_to_test_on_latest)
+      expect(response.body).to match(/Second hottest asset to test latest/)
+      # from assets(:asset_with_relations_for_soft_delete)
+      expect(response.body).to match(/Asset to test soft deletion of relations/)
+    end
   end
 
   context "POST create" do

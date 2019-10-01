@@ -22,6 +22,7 @@ export default class extends Controller {
     // the menu has been opened, which makes my performance brain happy
     e.stopImmediatePropagation()
     window.addEventListener('click', this)
+    window.addEventListener('touchstart', this)
   }
 
   // This is a "special" method with secret implicit powers.
@@ -33,12 +34,12 @@ export default class extends Controller {
       this.menuTarget.style.display = 'none'
       this.currentlyOpen = false
       window.removeEventListener('click', this)
+      window.removeEventListener('touchstart', this)
     }
   }
 
   clickOutsideMenu(e) {
-    return (e.type === 'click') &&
-      (!this.menuTarget.contains(e.target) || // outside whole menu
-      this.headerTarget.contains(e.target))   // inside header
+    return (!this.menuTarget.contains(e.target) // outside whole menu
+      || this.headerTarget.contains(e.target)) // inside header
   }
 }

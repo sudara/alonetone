@@ -32,7 +32,7 @@ module PlaylistsHelper
   def playlist_cover_url(playlist, variant:)
     if playlist.cover_image_present?
       variant = downgrade_variant(playlist, variant: variant)
-      playlist.cover_url(variant: variant)
+      playlist.cover_image_location(variant: variant).to_s
     end
   end
 

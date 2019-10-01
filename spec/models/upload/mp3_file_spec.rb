@@ -97,7 +97,7 @@ RSpec.describe Upload::Mp3File, type: :model do
 
       asset = mp3_file.assets.first
       expect(asset.errors).to_not be_blank
-      expect(asset.errors.details.keys).to eq(%i[mp3_content_type mp3])
+      expect(asset.errors.details.keys).to eq(%i[audio_file])
       expect(asset.private).to eq(false)
     end
   end
@@ -111,7 +111,7 @@ RSpec.describe Upload::Mp3File, type: :model do
 
       asset = mp3_file.assets.first
       expect(asset.errors).to_not be_blank
-      expect(asset.errors.details.keys).to eq(%i[mp3_content_type mp3])
+      expect(asset.errors.details.keys).to eq(%i[audio_file])
       expect(asset.private).to eq(false)
     end
   end
