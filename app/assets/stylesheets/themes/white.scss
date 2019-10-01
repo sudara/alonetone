@@ -58,11 +58,12 @@ $default-button-background-hover: $grey800;
 
 $big-player-seekbar-color: $grey200;
 
-// HEADER
+// site_header.scss
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
 
-// SUBNAV
+// sub_nav.scss
 $sub-nav-background: $grey100;
 $sub-nav-text: $grey1000;
+$sub-nav-text-hover: $grey1000;
