@@ -11,6 +11,7 @@ $site_max_width: calc( #{$content_max_width} + #{$baseline} * 3); // left and ri
 $mobile: 'only screen and (max-width: 420px)';
 $two-column-narrow: 'only screen and (min-width: 749px) and (max-width: 952px)';
 $one-column: 'only screen and (max-width: 748px)';
+$responsive: 'only screen and (max-width: #{$site_max_width})';
 
 // fonts
 @font-face {
@@ -77,9 +78,6 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
     color: $white;
     padding-left: $baseline * 1.5;
     padding-right: $baseline * 1.5;
-  }
-
-  @if $type == slim {
   }
 
   @if $type == sub_nav {
