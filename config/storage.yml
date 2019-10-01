@@ -10,3 +10,8 @@ s3:
   secret_access_key: <%= Rails.configuration.alonetone.amazon_secret_access_key %>
   region: <%= Rails.configuration.alonetone.amazon_s3_region %>
   bucket: <%= Rails.configuration.alonetone.amazon_s3_bucket_name %>
+  # Keys in the `upload' section are forwarded to the Aws::S3::Object#put
+  # method when uploading all files. By default we require a signed URL
+  # to access files.
+  upload:
+    acl: authenticated-read

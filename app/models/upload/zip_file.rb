@@ -76,15 +76,14 @@ class Upload
       # And not resource forks or Linux hidden files.
       return if basename.start_with?('.')
 
-      Tempfile.open(encoding: 'binary') do |tempfile|
-        tempfile.write(zip.read(entry))
-        tempfile.rewind
-        mp3_file = Upload::Mp3File.new(
-          user: user, file: tempfile, filename: basename, asset_attributes: asset_attributes
-        )
-        mp3_file.process
-        @assets.concat(mp3_file.assets)
-      end
+      tempfile = Tempfile.open(encoding: 'binary')
+      tempfile.write(zip.read(entry))
+      tempfile.rewind
+      mp3_file = Upload::Mp3File.new(
+        user: user, file: tempfile, filename: basename, asset_attributes: asset_attributes
+      )
+      mp3_file.process
+      @assets.concat(mp3_file.assets)
     end
 
     def ordered_assets
