@@ -4,9 +4,9 @@ $body-background: $black;
 $body-font: $white;
 
 $background-color-one: $grey1100;
-$background-color-two: $grey1000;
-$background-color-three: $grey100;
-$background-color-four: $grey100;
+$background-color-two: $grey1100;
+$background-color-three: $grey1000;
+$background-color-four: $grey900;
 $background-color-five: $grey1000;
 $background-color-six: $black;
 
@@ -19,8 +19,8 @@ $font-color-six: $grey1100;
 $font-color-seven: $black;
 
 $border-color-one: $black;
-$border-color-two: $grey500; 
-$border-color-three: $grey200; 
+$border-color-two: $grey500;
+$border-color-three: $grey200;
 $border-color-four: $grey100;
 $border-color-five: $grey50;
 $border-color-six: $white;
@@ -36,7 +36,7 @@ $private-message-warning-background: $red500;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
 
-$ajax-fail-border: $red600; 
+$ajax-fail-border: $red600;
 $ajax-fail-text: $red800;
 
 $ajax-success-border: $green400;
@@ -57,3 +57,9 @@ $default-button-background: $grey500;
 $default-button-background-hover: $grey800;
 
 $big-player-seekbar-color: $grey200;
+
+
+// HEADER
+$site-header-user-dropdown-shadow: 0px 6px 24px rgba(0, 0, 0, 0.75);
+$profile-link-background-image: image-url("svg/icon_profile_link_down_arrow_dark.svg");
+$site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass_dark.svg");

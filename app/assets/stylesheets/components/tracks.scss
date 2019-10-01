@@ -56,7 +56,7 @@
       height: 5px;
       padding-top: 2px;
       padding-bottom: 2px;
-      background-color: $background-color-two;
+      background-color: $background-color-three;
     }
     .played {
       height: 5px;
@@ -179,13 +179,13 @@
       &.open {
         div.button,
         div.title {
-          background-color: $background-color-three;
+          background-color: $background-color-four;
         }
       }
       &.playing {
         div.button,
         div.title {
-          background-color: $background-color-three;
+          background-color: $background-color-four;
         }
         div.button {
           a {
@@ -255,7 +255,7 @@
       padding-bottom: 0;
       padding-left: 16px;
       border-radius: 6px;
-      background-color: $background-color-two;
+      background-color: $background-color-three;
       .alonetoner {
         width: 50px;
         height: 50px;
