@@ -2,7 +2,7 @@
   width: 100%;
   position: relative;
   top: -48px;
-  background-color: $background-color-four;
+  background-color: $sub-nav-background;
   height: $baseline * 1.5;
   @media #{$responsive} {
     height: auto;
@@ -31,8 +31,8 @@
         }
         &.current {
           @include default_button(sub_nav);
-          background-color: $accent;
           @include shadow-one-inner();
+          background-color: $accent;
           pointer-events: none;
           color: $white;
         }

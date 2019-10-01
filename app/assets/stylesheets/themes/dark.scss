@@ -1,6 +1,6 @@
 @import 'color_mapping';
 
-$body-background: $black;
+$body-background: $grey1000;
 $body-font: $white;
 
 $background-color-one: $grey1100;
@@ -63,3 +63,8 @@ $big-player-seekbar-color: $grey200;
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(0, 0, 0, 0.75);
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow_dark.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass_dark.svg");
+
+// sub_nav.scss
+$sub-nav-background: $black;
+$sub-nav-text: $grey400;
+ 
