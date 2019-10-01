@@ -67,7 +67,7 @@ header#site_header {
           border: 0;
           border-radius: 3px;
           transition: width .4s, background-color .4s, border-width .4s;
-          line-height: 1;
+          line-height: normal;
           &:focus {
             border-width: 0px;
             width: 256px;
