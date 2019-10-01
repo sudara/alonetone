@@ -69,8 +69,8 @@ module UsersHelper
     if user.nil? || Rails.application.show_dummy_image?
       UsersHelper.no_avatar_path
     else
-      user.avatar_url(variant: variant) || UsersHelper.no_avatar_path
-    end
+      user.avatar_image_location(variant: variant) || UsersHelper.no_avatar_path
+    end.to_s
   end
 
   # Returns the image path to use as a default avatar.
@@ -101,8 +101,8 @@ module UsersHelper
     if user.nil? || Rails.application.show_dummy_image?
       UsersHelper.no_dark_avatar_path(variant: variant)
     else
-      user.avatar_url(variant: variant) || UsersHelper.no_dark_avatar_path(variant: variant)
-    end
+      user.avatar_image_location(variant: variant) || UsersHelper.no_dark_avatar_path(variant: variant)
+    end.to_s
   end
 
   # @deprecated Used by the dark theme.
@@ -158,7 +158,7 @@ module UsersHelper
 
   def _user_image(user, url:)
     image_tag(
-      url,
+      url.to_s,
       class: user&.avatar_image_present? ? nil : 'no_border',
       alt: user ? "#{user.name}'s avatar" : nil
     )

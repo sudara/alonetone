@@ -1,20 +1,47 @@
 # frozen_string_literal: true
 
-# Helper class to translate between variant names and dimensions.
+# Helper class to translate variant names to Active Storage transformation.
 class ImageVariant
   VARIANTS = {
-    tiny: [25, 25],
-    small: [50, 50],
-    large: [125, 125],
-    album: [200, 200],
-    original: [800, 800],
-    greenfield: [1500, 1500],
-    hq: [3000, 3000]
+    tiny: 25,
+    small: 50,
+    large: 125,
+    album: 200,
+    original: 800,
+    greenfield: 1500,
+    hq: 3000
   }.freeze
 
-  # Fit a variant inside these dimensions (width x height) to generate the variant.
-  def self.resize_to_fit(variant_name)
-    VARIANTS[variant_name.to_sym]
+  attr_reader :attachment
+  attr_reader :variant_name
+
+  def initialize(attachment, variant:)
+    ImageVariant.verify(variant)
+
+    @attachment = attachment
+    @variant_name = variant
+  end
+
+  def variant_options
+    ImageVariant.variant_options(variant_name)
+  end
+
+  def to_active_storage_variant
+    attachment.variant(**variant_options)
+  end
+
+  # Returns an Active Storage variant for a named variant.
+  def self.variant(attachment, variant:)
+    new(attachment, variant: variant).to_active_storage_variant
+  end
+
+  # Returns options to pass to VIPS to generate a variant of the original file.
+  def self.variant_options(variant_name)
+    size = VARIANTS[variant_name.to_sym]
+    {
+      resize_to_fill: [size, size, crop: :centre],
+      saver: { quality: 68, optimize_coding: true, strip: true }
+    }
   end
 
   # Raises ArgumentError with explanation when the variant name does not exist.
