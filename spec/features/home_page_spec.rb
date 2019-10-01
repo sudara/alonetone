@@ -25,7 +25,8 @@ RSpec.describe 'home page', type: :feature, js: true do
       expect(page).to have_selector('.profile_link')
       track_chunk = find(".asset", match: :first)
       track_chunk.click
-      find('.profile_link').hover
+
+      find('.profile_link').click # open the user nav
       expect(track_chunk).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')
     end
