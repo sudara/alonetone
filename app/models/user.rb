@@ -94,7 +94,7 @@ class User < ApplicationRecord
   has_many   :comments, -> { order('comments.id DESC') },
     dependent: :destroy
 
-  has_many :given_comments, -> { order('comments.id DESC') },
+  has_many :comments_made, -> { order('comments.id DESC') },
     foreign_key: 'commenter_id',
     class_name: 'Comment',
     dependent: :destroy

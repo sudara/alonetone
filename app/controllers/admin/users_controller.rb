@@ -8,7 +8,7 @@ module Admin
 
     def show
       @assets_pagy, @assets = pagy(@user.assets.with_deleted, items: 5)
-      @comment_pagy, @comments = pagy(@user.given_comments.with_deleted, items: 5)
+      @comment_pagy, @comments = pagy(@user.comments_made.with_deleted, items: 5)
     end
 
     def delete
