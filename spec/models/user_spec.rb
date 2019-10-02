@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-
   context '.destroy_deleted_accounts_older_than_30_days' do
     it 'should really destroy users deleted more than 30 days ago' do
       expect { User.destroy_deleted_accounts_older_than_30_days }
@@ -12,6 +11,17 @@ RSpec.describe User, type: :model do
       expect(users(:deleted_yesterday)).to be_valid
       User.destroy_deleted_accounts_older_than_30_days
       expect(User.with_deleted.where(login: 'deleted_yesterday').first).to be_present
+    end
+  end
+
+  describe 'scopes' do
+    it 'include profile and avatar image to prevent n+1 queries' do
+      expect do
+        User.with_preloads.each do |user|
+          user.avatar_image
+          user.profile.bio
+        end
+      end.to perform_queries(count: 4)
     end
   end
 
