@@ -342,7 +342,7 @@ main {
         .user_card_content_divider {
           height: 1px;
           margin: 0 24px;
-          background-color: $background-color-three;
+          background-color: $background-color-four;
         }
         .user_location {
           font-weight: bold;
@@ -446,7 +446,7 @@ main {
         display: block;
       }
       .area_content {
-        background-color: $background-color-three;
+        background-color: $background-color-four;
         @include samo-shadow-and-radius();
         .user_ip {
           padding: 16px;
@@ -491,7 +491,7 @@ main {
       @media #{$one-column} {
         margin-top: $baseline * 1.5;
       }
-      background-color: $background-color-three;
+      background-color: $background-color-four;
       @include samo-shadow-and-radius();
       padding: 12px 16px 4px 16px;
       box-sizing: border-box;
@@ -519,7 +519,7 @@ main {
         padding-bottom: 4px;
         padding-left: 0;
         flex-wrap: wrap;
-        background-color: $background-color-four;
+        background-color: $background-color-five;
         color: $font-color-seven;
         @include samo-shadow-and-radius();
         overflow: auto;

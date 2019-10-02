@@ -107,11 +107,7 @@ RSpec.describe Upload, type: :model do
     end
     let(:uploaded_files) do
       uploaded_filenames.map do |uploaded_filename|
-        ActionDispatch::Http::UploadedFile.new(
-          tempfile: file_fixture_tempfile(uploaded_filename),
-          filename: uploaded_filename,
-          type: 'application/octet-stream'
-        )
+        file_fixture_uploaded_file(uploaded_filename)
       end
     end
     let(:upload) do

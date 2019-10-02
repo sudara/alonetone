@@ -6,7 +6,7 @@ owp:
   tracks_count: 3
   cover_quality: modern
   credits: sudara's album
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago %>
 
 empty:
   user: sudara
@@ -14,7 +14,7 @@ empty:
   title: Empty Playlist
   cover_quality: modern
   credits: something coming
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago %>
 
 # Arthur's playlists.
 arthurs_playlist:
@@ -24,8 +24,7 @@ arthurs_playlist:
   cover_quality: modern
   credits: arthurs playlist
   private: false
-  updated_at: <%= 1.day.ago.to_s :db %>
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago %>
 
 mix:
   is_mix: true
@@ -35,7 +34,7 @@ mix:
   tracks_count: 3
   cover_quality: modern
   credits: "a mix tape, daring and wonderful"
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago %>
 
 arthurs_favorites:
   is_mix: true
@@ -46,30 +45,37 @@ arthurs_favorites:
   credits: arthur's favorites
   tracks_count: 1
   user: arthur
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago %>
 
 # Rockfort is Will's experimental progrock album about blue cheese.
 will_studd_rockfort:
   user: will_studd
+  is_mix: false
+  is_favorite: false
+  private: false
   permalink: rockfort
   title: Rockfort
   tracks_count: 3
   cover_quality: modern
   private: false
-  published_at: <%= 1.day.ago.to_s :db %>
   credits: >
     Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
     is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
     interpretation of this fine cheese.
+  published_at: <%= 1.day.ago %>
+  published_at: <%= 14.days.ago %>
+  created_at: <%= 15.days.ago %>
 
 # Polderkaas is Henry's Polderrock album.
 henri_willig_polderkaas:
   user: henri_willig
+  is_mix: false
+  is_favorite: false
+  private: false
   permalink: polderkaas
   title: Polderkaas
   tracks_count: 2
   private: false
-  published_at: <%= 1.day.ago.to_s :db %>
   cover_quality: modern
   link1: https://open.spotify.com/playlist/37i9dQZF1DX7pykHKVxv6o?si=uP1xUZdlTeCBsMviYTBKGA
   link2: bandcamp.com/some_band
@@ -77,22 +83,29 @@ henri_willig_polderkaas:
   credits: >
     Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
     goodness as they cheese it was named after.
+  published_at: <%= 1.day.ago %>
+  created_at: <%= 1.day.ago %>
 
 # Bill added all his favorite tracks to a playlist.
 william_shatners_favorites:
+  user: william_shatner
   is_mix: true
   is_favorite: true
+  private: true
   permalink: bills-favorites
   title: Bill's favorites
   cover_quality: ancient
   credits: What I like to listen to when I'm eating cheese in the captain's chair.
   tracks_count: 1
-  user: william_shatner
+  published_at: ~
+  created_at: <%= 50.years.ago %>
 
 # Jamie added all her favorite tracks to a playlist.
 jamie_kiesl_loves:
+  user: jamie_kiesl
   is_mix: true
   is_favorite: true
+  private: true
   permalink: jamie-loves
   title: Jamie Loves
   cover_quality: legacy
@@ -109,4 +122,5 @@ jamie_kiesl_playlist_with_soft_deleted_tracks:
   cover_quality: legacy
   credits: Playlist to test tracks_count change for when asset is soft deleted
   tracks_count: 1
-  user: jamie_kiesl
+  published_at: ~
+  created_at: <%= 1.year.ago %>

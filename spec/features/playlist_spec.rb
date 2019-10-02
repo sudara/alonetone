@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe 'playlists', type: :feature, js: true do
+
   it 'renders track and cover pages' do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
@@ -20,8 +21,9 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # so let's specify one before we snap
       first_track.find('a:first-child').click
       expect(page).to have_selector(".player")
-      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Loading')
+
+      resume_animations
 
       # Navigating away and back, we should still be playing
       second_track = find('ul.tracklist li:last-child')
@@ -29,11 +31,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
       first_track.click
 
       find('.waveform').click(x: 200, y: 10)
-
-      # right here is some indeterminancy with the playhead
-
+      sleep(0.2) # let animations catch up
+      find('.waveform').click(x: 200, y: 10) # reduce glitch
+      pause_animations
       find('.play-button-container a').click # pause
-      convert_canvas_to_image
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
   end
@@ -46,6 +47,9 @@ RSpec.describe 'playlists', type: :feature, js: true do
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
 
+      # Ensure custom checkboxes are happy
+      find('.edit_playlist_info_right_column_private_and_hidden label').click
+
       # add 2 new tracks
       first_upload = find('#your_uploads .asset:nth-child(1) .add')
       first_upload.click
@@ -53,11 +57,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector('.sortable .asset', count: 3)
 
       # Move "Manfacturer of the Finest Cheese" to be the last song
-      first_track = find('.sortable .asset:first-child')
+      first_track_handle = find('.sortable .asset:first-child .drag_handle')
       last_track = find('.sortable .asset:last-child')
-      first_track.drag_to(last_track)
-      #expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
-
+      first_track_handle.drag_to(last_track)
+      expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
       Percy.snapshot(page, name: 'Playlist Edit')
     end
   end

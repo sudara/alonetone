@@ -31,6 +31,7 @@
 
   <div class="waveform" data-target='big-play.waveform' data-action='mousemove->big-play#skim click->big-play#seek'>
     <div class="seekbar" data-target="big-play.seekBar"></div>
+     <%= render partial: 'assets/waveform' %>
   </div>
 
   <div class="progress-container">
@@ -43,7 +44,7 @@
     </div>
   </div>
 
-  
+
 
   <div class="time-total">
     <%= @asset.length %>
