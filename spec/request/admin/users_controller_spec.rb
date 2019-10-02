@@ -126,9 +126,9 @@ RSpec.describe Admin::UsersController, type: :request do
     # `.commenter` is the giver of comments
     it "soft deletes comments given to others" do
       expect(Comment.where(commenter_id: users(:arthur).id).count).to eq(4)
-      expect(users(:arthur).given_comments.count).to eq(4)
+      expect(users(:arthur).comments_made.count).to eq(4)
       put delete_admin_user_path(users(:arthur))
-      expect(users(:arthur).given_comments.count).to eq(0)
+      expect(users(:arthur).comments_made.count).to eq(0)
     end
 
     # `.user` is a receiver of a comment
