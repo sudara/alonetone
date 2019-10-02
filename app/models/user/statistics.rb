@@ -51,7 +51,7 @@ class User < ApplicationRecord
     end
 
     def mostly_listens_to
-      User.where(id: most_listened_to_user_ids(10)).includes(:pic)
+      User.with_preloads.where(id: most_listened_to_user_ids(10))
     end
 
     def calculate_bandwidth_used
