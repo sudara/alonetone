@@ -1,0 +1,12 @@
+new_year_2018:
+  title: Welcome to 2018!
+  content: We're so happy to start a new year.
+  permalink: welcome-to-2018
+  created_at: 2018-01-01 13:27:21
+  updated_at: 2018-01-01 13:27:21
+new_year_2019:
+  title: Welcome to 2019!
+  content: We're so happy to start a new year again.
+  permalink: welcome-to-2019
+  created_at: 2019-01-01 02:04:55
+  updated_at: 2019-01-01 02:04:55
