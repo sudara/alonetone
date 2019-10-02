@@ -149,7 +149,7 @@ class UsersController < ApplicationController
     @listens = @user.listened_to_tracks.preload(:user).group(:asset_id).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
     @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
-    @comments = @user.comments.public_or_private(display_private_comments?)
+    @comments = @user.comments_received.public_or_private(display_private_comments?)
                      .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
     @other_users_with_same_ip = User.with_same_ip_as(@user).pluck(:login) if @user.current_login_ip.present?
     unless current_user_is_admin_or_owner?(@user)
