@@ -38,8 +38,19 @@ module Storage
     def verify_record(record)
       storage_attachment = record.send(attachment_name)
       if storage_attachment.attached?
-        unless storage_attachment.exist?
-          options.logger("Found attached without stored object: #{storage_attachment.path}")
+        if storage_attachment.service.exist?(storage_attachment.key)
+          # When the object is stored on S3
+          if storage_attachment.service.respond_to?(:object_for, _private = true)
+            object = storage_attachment.service.send(:object_for, storage_attachment.key)
+            public_readable = object.acl.grants.any? do |grant|
+              grant.grantee.uri == 'http://acs.amazonaws.com/groups/global/AllUsers'
+            end
+            if public_readable
+              options.logger.info("Found public readable object: #{storage_attachment.key}")
+            end
+          end
+        else
+          options.logger.info("Found attached without stored object: #{storage_attachment.key}")
         end
       end
     end
