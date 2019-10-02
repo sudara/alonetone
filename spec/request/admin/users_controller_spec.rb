@@ -70,7 +70,7 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).listens.count).to be > 0
       expect(users(:arthur).playlists.count).to be > 0
       expect(users(:arthur).topics.count).to eq(0)
-      expect(users(:arthur).comments.count).to be > 0
+      expect(users(:arthur).comments_received.count).to be > 0
     end
   end
 
@@ -109,7 +109,7 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).listens.count).to eq(0)
       expect(users(:arthur).playlists.count).to eq(0)
       expect(users(:arthur).topics.count).to eq(0)
-      expect(users(:arthur).comments.count).to eq(0)
+      expect(users(:arthur).comments_received.count).to eq(0)
     end
 
     it "soft deletes from other user's playlist" do
@@ -134,9 +134,9 @@ RSpec.describe Admin::UsersController, type: :request do
     # `.user` is a receiver of a comment
     it "soft deleted comments received by others" do
       expect(Comment.where(user_id: users(:arthur).id).count).to eq(1)
-      expect(users(:arthur).comments.count).to eq(1)
+      expect(users(:arthur).comments_received.count).to eq(1)
       put delete_admin_user_path(users(:arthur))
-      expect(users(:arthur).comments.count).to eq(0)
+      expect(users(:arthur).comments_received.count).to eq(0)
     end
 
     it "soft deletes comments on user's asset by others" do

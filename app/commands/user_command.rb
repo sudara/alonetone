@@ -44,7 +44,7 @@ class UserCommand
     # comments given
     user.comments_made.update_all(deleted_at: time)
     # comments received
-    %w[tracks playlists comments].each do |user_relation|
+    %w[tracks playlists comments_received comments_made].each do |user_relation|
       user.send(user_relation).update_all(deleted_at: time)
     end
     # comments by others on user's assets
@@ -73,8 +73,7 @@ class UserCommand
     Track.joins(:asset).where(assets: { user_id: user.id }).delete_all
     user.assets.destroy_all
 
-    user.comments_made.delete_all
-    %w[tracks playlists posts comments].each do |user_relation|
+    %w[tracks playlists posts comments_received comments_made].each do |user_relation|
       user.send(user_relation).delete_all
     end
     true

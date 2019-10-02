@@ -106,7 +106,7 @@ RSpec.describe User, type: :model do
         expect(user.tracks).not_to be_present
         expect(user.playlists).not_to be_present
         expect(user.topics).not_to be_present
-        expect(user.comments).not_to be_present
+        expect(user.comments_received).not_to be_present
       end
     end
   end
