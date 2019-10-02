@@ -4,6 +4,19 @@ RSpec.describe Comment, type: :model do
   let(:new_comment) { assets(:valid_mp3).comments.new(body: 'test') }
   let(:asset) { comments(:valid_comment_on_asset_by_user).commentable }
 
+  describe 'scopes' do
+    it 'include avatar image for comments and commenter to prevent n+1 queries' do
+      expect do
+        Comment.with_preloads.each do |comment|
+          comment.commenter&.avatar_image
+          if commentable = comment.commentable
+            commentable.user.avatar_image
+          end
+        end
+      end.to perform_queries(count: 7)
+    end
+  end
+
   context "validation" do
     it "should be valid when made by user" do
       expect(comments(:valid_comment_on_asset_by_user)).to be_valid

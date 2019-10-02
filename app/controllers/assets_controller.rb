@@ -16,7 +16,7 @@ class AssetsController < ApplicationController
     if stale?(Asset.last_updated)
       @page_title = @description = "Latest Music"
       @tab = 'home'
-      @assets = Asset.published.latest.includes(user: :pic).limit(5)
+      @assets = Asset.with_preloads.published.latest.limit(5)
       set_related_lastest_variables
       welcome_to_white_theme
       respond_to :html
@@ -296,7 +296,7 @@ class AssetsController < ApplicationController
 
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
-    @popular = Asset.published.order('hotness DESC').includes(user: :pic).limit(5)
+    @popular = Asset.with_preloads.published.order('hotness DESC').limit(5)
     @playlists = white_theme_enabled? ? Playlist.for_home.limit(4) : Playlist.for_home.limit(5)
     @comments = admin? ? Comment.last_5_private : Comment.to_other_members.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
