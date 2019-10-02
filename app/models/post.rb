@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   scope :recent, ->   { order("posts.created_at asc") }
   scope :not_spam, -> { where(is_spam: false) }
   scope :spam, ->  { where(is_spam: true) }
+  scope :with_preloads, -> { preload(user: { avatar_image_attachment: :blob }) }
 
   # author of post
   belongs_to :user, counter_cache: true
