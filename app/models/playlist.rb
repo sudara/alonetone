@@ -10,7 +10,7 @@ class Playlist < ActiveRecord::Base
   scope :mixes,            -> { where(is_mix: true) }
   scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
   scope :recent,           -> { order('playlists.created_at DESC') }
-  scope :with_preloads,    -> { preload(:cover_image_blob, :user) }
+  scope :with_preloads,    -> { preload(:cover_image_blob, user: { avatar_image_attachment: :blob }) }
 
   belongs_to :user, counter_cache: true
   has_many :tracks,
