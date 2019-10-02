@@ -141,6 +141,8 @@ class User < ApplicationRecord
   # will be removed along with /greenfield
   has_many :greenfield_posts, through: :assets
 
+  # We have to define attachments last to make the Active Record callbacks
+  # fire in the right order.
   has_one_attached :avatar_image
 
   # tokens and activation
@@ -250,14 +252,18 @@ class User < ApplicationRecord
 
   # Returns true when the user has a usable avatar.
   def avatar_image_present?
-    pic.present? && pic.image_present?
+    avatar_image.attached?
   end
 
-  # Generates a URL to user's avater with the requested variant. Returns nil when the user does
-  # not have a usable avatar.
-  def avatar_url(variant:)
-    ImageVariant.verify(variant)
-    pic&.url(variant: variant)
+  # Generates a location to user's avatar with the requested variant. Returns nil when the user
+  # does not have a usable avatar.
+  def avatar_image_location(variant:)
+    return unless avatar_image.attached?
+
+    Storage::Location.new(
+      ImageVariant.variant(avatar_image, variant: variant),
+      signed: false
+    )
   end
 
   def deleted?

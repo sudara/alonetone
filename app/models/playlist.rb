@@ -3,14 +3,14 @@ class Playlist < ActiveRecord::Base
 
   acts_as_list scope: :user_id, order: :position, add_new_at: :top
 
-  scope :mixes,            -> { where(is_mix: true) }
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
-  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
+  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_preloads }
   scope :include_private,  -> { where(is_favorite: false) }
-  scope :recent,           -> { order('playlists.created_at DESC')                                                }
-  scope :with_pic,         -> { preload(:pic)                                                                     }
-  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_pic.includes(:user) }
+  scope :mixes,            -> { where(is_mix: true) }
+  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
+  scope :recent,           -> { order('playlists.created_at DESC') }
+  scope :with_preloads,    -> { preload(:cover_image_blob, :user) }
 
   belongs_to :user, counter_cache: true
   has_one  :pic, as: :picable, dependent: :destroy
@@ -25,8 +25,6 @@ class Playlist < ActiveRecord::Base
   has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
   accepts_nested_attributes_for :greenfield_downloads
 
-  has_one_attached :cover_image
-
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
@@ -35,6 +33,10 @@ class Playlist < ActiveRecord::Base
   before_validation :name_favorites_and_set_permalink, on: :create
   before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
     :set_published_at, :notify_followers_if_publishing_album
+
+  # We have to define attachments last to make the Active Record callbacks
+  # fire in the right order.
+  has_one_attached :cover_image
 
   enum(
     cover_quality: {
@@ -55,6 +57,11 @@ class Playlist < ActiveRecord::Base
 
   def has_tracks?
     (tracks_count || 0) > 0
+  end
+
+  # Returns true when the playlist may be publicly viewed.
+  def public?
+    !private && !is_favorite && has_tracks?
   end
 
   def has_any_links?
@@ -101,16 +108,20 @@ class Playlist < ActiveRecord::Base
     Asset.formatted_time(total_track_length)
   end
 
-  # Returns true when the user has a usable avatar.
+  # Returns true when the playlist has a usable cover image.
   def cover_image_present?
-    pic.present? && pic.image_present?
+    cover_image.attached?
   end
 
-  # Generates a URL to playlist's cover with the requested variant. Returns nil when the playlist
-  # does not have a usable cover.
-  def cover_url(variant:)
-    ImageVariant.verify(variant)
-    pic&.url(variant: variant)
+  # Generates a location to playlist's cover with the requested variant. Returns nil when the
+  # playlist does not have a usable cover.
+  def cover_image_location(variant:)
+    return unless cover_image.attached?
+
+    Storage::Location.new(
+      ImageVariant.variant(cover_image, variant: variant),
+      signed: false
+    )
   end
 
   def self.latest(limit = 5)
@@ -126,7 +137,7 @@ class Playlist < ActiveRecord::Base
   def set_mix_or_album
     # is this a favorites playlist?
     is_mix = true if is_favorite?
-    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user.id).count
+    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
     true
   end
 

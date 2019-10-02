@@ -1,8 +1,21 @@
 require "rails_helper"
 
 RSpec.describe AssetsController, type: :request do
+  let(:fastly_base_url) { 'https://fastly.example.com' }
+
   before do
     akismet_stub_response_ham
+  end
+
+  around do |example|
+    # Switch back to temporary storage for this particular controller because
+    # it actually needs to store and retrieve files. We also use Fastly
+    # locations so we don't need a file on disk to generate a URL.
+    with_storage_service(:temporary) do
+      with_alonetone_configuration(fastly_base_url: fastly_base_url) do
+        example.call
+      end
+    end
   end
 
   context "#latest" do
@@ -251,8 +264,12 @@ RSpec.describe AssetsController, type: :request do
     end
 
     it 'should successfully upload 2 mp3s' do
-      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg'),
-                                                                      fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
+      post '/arthur/tracks', params: {
+        asset_data: [
+          fixture_file_upload('files/muppets.mp3', 'audio/mpeg'),
+          fixture_file_upload('files/muppets.mp3', 'audio/mpeg')
+        ]
+      }
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
     end
 
@@ -282,6 +299,43 @@ RSpec.describe AssetsController, type: :request do
       expect {
         post '/arthur/tracks', params: { asset_data: [zip_asset_url] }
       }.to change { Asset.count }.by(1)
+    end
+  end
+
+  context "a musician" do
+    let(:user) { users(:will_studd) }
+    let(:asset) { user.assets.first }
+
+    before do
+      create_user_session(user)
+    end
+
+    it "sees a form to update an asset" do
+      get "/#{user.login}/tracks/#{asset.to_param}/edit"
+      expect(response).to be_successful
+    end
+
+    it "updates the audio file for an asset" do
+      akismet_stub_response_ham
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: {
+          asset: { audio_file: fixture_file_upload('files/muppets.mp3', 'audio/mpeg') }
+        }
+      )
+      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacuane')
+    end
+
+    it "does not update the audio file for an asset when it's spam" do
+      akismet_stub_response_spam
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: {
+          asset: { audio_file: fixture_file_upload('files/muppets.mp3', 'audio/mpeg') }
+        }
+      )
+      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacuane')
+      expect(asset.reload).to be_is_spam
     end
   end
 end

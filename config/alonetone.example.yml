@@ -1,4 +1,4 @@
-development: &defaults
+development:
   # Used by mailers and models as hostname to generate URLs to Alonetone.
   hostname: localhost:3000
   # Default FROM address when sending email.
@@ -22,6 +22,10 @@ development: &defaults
   # of the S3 bucket.
   amazon_cloud_front_domain_name: ~
   amazon_cloud_front_key_pair_id: ~
+  # Configure a Fastly base URL where you have Image Optimizer enabled for
+  # the configured S3 bucket. For example: https://fastly.example.com/img.
+  # Leave this nil when you're not using Fastly.
+  fastly_base_url: ~
   # API token to use when accessing Askimet for spam filtering. You can
   # register at https://akismet.com.
   rakismet_key: ~
@@ -34,11 +38,22 @@ development: &defaults
   # Greenfield.
   greenfield_hostname: localhost:3000
 
+# Some services in the application like Active Storage and Akismet have to be
+# configured when the Rails process boots. To ensure the proper settings in
+# the test suite these details have to be compied to config/alonetone.yml
+# verbatim.
 test:
-  <<: *defaults
   hostname: alonetone.example.com
+  email: support@example.com
   # Temporary storage writes to temp files on disk.
   storage_service: temporary
+  # Amazon S3 configuration. We have to set these because ActiveStorage service
+  # configuration is read when starting the suite and switching to S3 during
+  # the suite would be impossible without this.
+  amazon_access_key_id: XXXXXXXXXXXXXXXXXXXX
+  amazon_secret_access_key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  amazon_s3_region: eu-central-1
+  amazon_s3_bucket_name: xxxxxxxxxxxxxxxxxxxx
   # Don't use dummies in the spec suite because we sometimes rely on
   # interaction with services in examples.
   play_dummy_audio: false

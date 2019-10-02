@@ -90,7 +90,7 @@ william_shatners_favorites_1:
 # Jamie's loves.
 jamie_kiesl_loves_1:
   playlist: jamie_kiesl_loves
-  user: jamie_kiesl
+  user: henri_willig
   asset: henri_willig_finest_cheese
   position: 1
   created_at: <%= 1.day.ago %>

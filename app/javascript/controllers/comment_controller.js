@@ -1,7 +1,8 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['banner', 'div', 'response', 'spinner', 'personalization', 'textarea']
+  static targets = ['banner', 'div', 'response', 'spinner',
+    'personalization', 'textarea', 'markAsPrivate', 'actualCheckbox']
 
   initialize() {
     this.personalizationTarget.innerHTML = window.userPersonalization
@@ -29,5 +30,8 @@ export default class extends Controller {
   toggle() {
     this.bannerTarget.classList.toggle('hidden')
     this.divTarget.classList.toggle('private_banner_visible')
+
+    // The label was clicked, so we still need to check the box
+    this.actualCheckboxTarget.checked = !this.actualCheckboxTarget.checked
   }
 }
