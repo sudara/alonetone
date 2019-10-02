@@ -33,7 +33,7 @@ RSpec.describe AssetsController, type: :request do
     # since it's easier to control than .latest
     # that's ordered by id
     it "should not display spammed assets" do
-      assets = Asset.published.order('hotness DESC').includes(user: :pic).limit(2)
+      assets = Asset.with_preloads.published.latest.limit(2)
       get '/', params: { white: true }
 
       expect(response.body).to include(assets.first.title)
@@ -49,7 +49,7 @@ RSpec.describe AssetsController, type: :request do
     # take the latest published (where(private: false)) asset to make sure it
     # should have been displayed on the page
     it 'should not display a deleted asset whose user was also deleted' do
-      asset = Asset.published.order('hotness DESC').includes(user: :pic).limit(2).last
+      asset = Asset.with_preloads.published.latest.first
       get '/', params: { white: true }
       expect(response.body).to include(asset.title)
 

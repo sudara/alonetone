@@ -88,8 +88,13 @@ RSpec.describe Playlist, type: :model do
       end
     end
 
-    it "preload associations to reduce the number of queries" do
-      expect(Playlist.with_preloads.count).to eq(Playlist.count)
+    it 'include user avatars and cover image to prevent n+1 queries' do
+      expect do
+        Playlist.with_preloads.each do |playlist|
+          playlist.cover_image
+          playlist.user.avatar_image
+        end
+      end.to perform_queries(count: 6)
     end
   end
 
