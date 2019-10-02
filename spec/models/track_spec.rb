@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Track, type: :model do
@@ -46,6 +48,16 @@ RSpec.describe Track, type: :model do
       expect do
         Track.all.map(&:soft_delete)
       end.to change { Track.count }.from(original_count).to(0)
+    end
+  end
+
+  describe 'scopes' do
+    it 'include assets and user avatars to prevent n+1 queries' do
+      expect do
+        Track.with_preloads.each do |track|
+          track.asset.user.avatar_image
+        end
+      end.to perform_queries(count: 5)
     end
   end
 end
