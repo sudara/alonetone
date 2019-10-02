@@ -80,7 +80,6 @@ class User < ApplicationRecord
   after_create :create_profile
 
   # Can create music
-  has_one    :pic, as: :picable, dependent: :destroy
   has_one    :profile, dependent: :destroy
   has_many   :assets,
     -> { order('assets.id DESC') },
