@@ -6,7 +6,7 @@ class UpdatesController < ApplicationController
   # GET /updates
   # GET /updates.xml
   def index
-    @updates_pagy, @updates = pagy(Update.recent.includes(comments: [commenter: :pic]), items: 5)
+    @updates_pagy, @updates = pagy(Update.with_preloads.recent, items: 5)
     respond_to do |format|
       format.html # index.html.erb
       format.xml
@@ -17,7 +17,7 @@ class UpdatesController < ApplicationController
   # GET /updates/1
   # GET /updates/1.xml
   def show
-    @update = Update.where(permalink: params[:id]).includes(comments: [commenter: :pic]).take!
+    @update = Update.with_preloads.where(permalink: params[:id]).take!
     @previous = Update.where('created_at < ?', @update.created_at).order('created_at DESC').first
     @next = Update.where('created_at > ?', @update.created_at).order('created_at ASC').first
     @page_title = @update.title
