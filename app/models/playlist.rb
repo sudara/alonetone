@@ -177,7 +177,6 @@ end
 #  year          :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
-#  pic_id        :integer
 #  user_id       :integer
 #
 # Indexes
