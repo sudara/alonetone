@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-    @users = User.includes(:pic, :profile).paginate_by_params(params)
+    @users = User.with_preloads.paginate_by_params(params)
     @sort = params[:sort]
     @user_count = User.count
     @active     = User.where("assets_count > 0").count
@@ -143,14 +143,13 @@ class UsersController < ApplicationController
 
   def gather_user_goodies
     @profile = @user.profile
-    @popular_tracks = @user.assets.includes(user: :pic).limit(5).reorder('assets.listens_count DESC')
-    @assets = @user.assets.includes(user: :pic).limit(5)
-    @playlists = @user.playlists.include_private.includes(:user, :pic)
+    @popular_tracks = @user.assets.with_preloads.limit(5).reorder(listens_count: :desc)
+    @assets = @user.assets.with_preloads.limit(5)
+    @playlists = @user.playlists.with_preloads.include_private
     @listens = @user.listened_to_tracks.preload(:user).group(:asset_id).limit(5)
     @track_plays = @user.track_plays.from_user.limit(10)
-    @favorites = @user.tracks.favorites.recent.includes(asset: { user: :pic }).limit(5).collect(&:asset)
-    @comments = @user.comments.public_or_private(display_private_comments?)
-                     .preload(commentable: { user: :pic }).preload(commenter: :pic).limit(5)
+    @favorites = @user.tracks.with_preloads.favorites.recent.limit(5).collect(&:asset)
+    @comments = @user.comments.with_preloads.public_or_private(display_private_comments?).limit(5)
     @other_users_with_same_ip = User.with_same_ip_as(@user).pluck(:login) if @user.current_login_ip.present?
     unless current_user_is_admin_or_owner?(@user)
       @popular_tracks = @popular_tracks.published

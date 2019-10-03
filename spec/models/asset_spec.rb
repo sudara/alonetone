@@ -17,6 +17,16 @@ RSpec.describe Asset, type: :model do
     end
   end
 
+  describe 'scopes' do
+    it 'include avatar image to prevent n+1 queries' do
+      expect do
+        Asset.with_preloads.each do |asset|
+          asset.user.avatar_image
+        end
+      end.to perform_queries(count: 4)
+    end
+  end
+
   context "validation" do
     let(:mp3_asset) do
       Asset.new(

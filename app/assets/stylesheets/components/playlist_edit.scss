@@ -402,50 +402,31 @@
       min-height: 64px;
     }
 
-    .mini-handle {
-      display: inline-flex;
-      width: 15px;
-      height: 15px;
+    .mini_handle_icon {
       position: relative;
       top: 1px;
-      align-items: center;
-      justify-content: center;
       svg {
         position: relative;
         width: 15px;
         height: 13px;
       }
     }
-    .remove-inner-inline {
-      display: inline-flex;
-      width: 13px;
-      height: 13px;
+    .mini_remove_icon {
       position: relative;
-      top: -2px;
-      border-radius: 3px;
-      background-color: $background-color-four;
-      align-items: center;
-      justify-content: center;
+      top: 1px;
       svg {
         position: relative;
-        width: 8px;
-        height: 7px;
+        width: 13px;
+        height: 13px;
       }
     }
-    .add-inner-inline {
-      display: inline-flex;
-      width: 13px;
-      height: 13px;
+    .mini_add_icon {
       position: relative;
-      top: -2px;
-      border-radius: 3px;
-      background-color: $background-color-four;
-      align-items: center;
-      justify-content: center;
+      top: 1px;
       svg {
         position: relative;
-        width: 7px;
-        height: 7px;
+        width: 13px;
+        height: 13px;
       }
     }
   }

@@ -19,7 +19,7 @@ class TopicsController < ApplicationController
     else
       @posts = @topic.posts.recent.not_spam
     end
-    @posts_pagy, @posts = pagy(@posts.preload(user: :pic))
+    @posts_pagy, @posts = pagy(@posts.with_preloads)
     @post = Post.new
   end
 
