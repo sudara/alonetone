@@ -13,7 +13,11 @@ module Admin
 
     def delete
       UserCommand.new(@user).soft_delete_with_relations
-      redirect_to admin_users_path(filter_by: :deleted)
+
+      respond_to do |format|
+        format.html { redirect_to admin_users_path(filter_by: :deleted) }
+        format.js
+      end
     end
 
     def restore
