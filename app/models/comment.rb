@@ -8,10 +8,17 @@ class Comment < ActiveRecord::Base
   scope :public_or_private,  ->(has_access) { has_access ? include_private : only_public }
   scope :spam,               -> { recent.where(is_spam: true) }
   scope :on_track,           -> { where(commentable_type: 'Asset') }
-  scope :last_5_private,     -> { on_track.include_private.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
-  scope :last_5_public,      -> { on_track.only_public.limit(5).preload(commenter: :pic, commentable: { user: :pic }) }
+  scope :last_5_private,     -> { on_track.with_preloads.include_private.limit(5) }
+  scope :last_5_public,      -> { on_track.with_preloads.only_public.limit(5) }
   scope :made_between,       ->(start, finish) { where('comments.created_at BETWEEN ? AND ?', start, finish) }
   scope :to_other_members,   -> { joins(:user).where("users.current_login_ip != remote_ip").where("commenter_id != user_id") }
+
+  def self.with_preloads
+    includes(
+      commenter: { avatar_image_attachment: :blob },
+      commentable: { user: { avatar_image_attachment: :blob } }
+    )
+  end
 
   has_many :replies, as: :commentable, class_name: 'Comment'
 

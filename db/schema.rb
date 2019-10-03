@@ -221,25 +221,12 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.datetime "updated_at"
   end
 
-  create_table "pics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "pic_file_size"
-    t.string "pic_content_type"
-    t.string "pic_file_name"
-    t.integer "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "picable_type"
-    t.integer "picable_id"
-    t.index ["picable_id", "picable_type"], name: "index_pics_on_picable_id_and_picable_type"
-  end
-
   create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.string "image"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "pic_id"
     t.string "permalink"
     t.integer "tracks_count", default: 0
     t.boolean "is_mix"

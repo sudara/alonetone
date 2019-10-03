@@ -113,8 +113,9 @@ jamie_kiesl_loves:
   tracks_count: 1
   user: jamie_kiesl
 
-# Jamie added all her favorite tracks to a playlist.
+# Contains a track that points to a deleted asset.
 jamie_kiesl_playlist_with_soft_deleted_tracks:
+  user: jamie_kiesl
   is_mix: true
   is_favorite: true
   permalink: jamie-loves

@@ -13,7 +13,7 @@ class SearchController < ApplicationController
   def deliver_results
     if params[:query]
       @query = session[:last_search] = params[:query]
-      @users = User.joins(:profile).conditions_by_like(@query).includes(:pic).limit(15)
+      @users = User.with_preloads.joins(:profile).conditions_by_like(@query).limit(15)
       # need to pass additional param query
       # for pagy to only paginate via matched query
       @assets_pagy, @assets = pagy(Asset.published.conditions_by_like(@query), items: 15, params: { query: @query })

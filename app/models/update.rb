@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class Update < ApplicationRecord
   has_permalink :title
   scope :recent, -> { order('created_at DESC') }
+  scope :with_preloads, -> { includes(comments: { commenter: { avatar_image_attachment: :blob } }) }
 
   has_many :comments, as: :commentable, dependent: :destroy
 
