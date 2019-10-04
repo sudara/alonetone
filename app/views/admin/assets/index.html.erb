@@ -18,7 +18,7 @@
       </header>
       <div class="admin_assets_rows">
         <% @assets.each do |asset| %>
-          <div data-controller="admin--asset" data-admin--asset-deleted="<%= asset.soft_deleted? %>" data-admin--asset-spam="<%= asset.is_spam? %>">
+          <div data-controller="admin--asset" data-admin--asset-deleted="<%= asset.soft_deleted? %>" data-admin--asset-spam="<%= asset.is_spam? %>" data-admin--asset-user-deleted="<%= asset.possibly_deleted_user.soft_deleted? %>" >
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div class="avatar">
