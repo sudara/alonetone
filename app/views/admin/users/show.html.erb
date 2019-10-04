@@ -110,20 +110,14 @@
 
           <div class="admin_comment_rows">
             <% @comments.each do |comment| %>
-              <div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment.user.soft_deleted? %>">
+              <div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment&.commenter&.soft_deleted? %>">
                 <div class="date_column"><%= comment.created_at.strftime("%b %d") %>, <%= comment.id %></div>
                 <div class="user_column">
                   <div class="avatar">
                     <%= user_image(@user, variant: :original) %>
                   </div>
                   <div>
-                    <div>
-                      <% if comment.commenter %>
-                        <%= link_to "Comment By: #{comment&.commenter&.login}", admin_possibly_deleted_user_path(comment.commenter.login), { filter_by: {commenter_id: comment.commenter_id } } %>
-                      <% else %>
-                        <%= "Comment By: #{comment&.commenter&.login}" %>
-                      <% end %>
-                    </div>
+                    <div><%= "Comment By: #{comment&.commenter&.login}" %></div>
                     <div><%= comment&.commenter&.email %></div>
                     <div><%= link_to "#{comment.remote_ip}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
                   </div>
