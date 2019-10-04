@@ -16,7 +16,7 @@ module Admin
 
       respond_to do |format|
         format.html { redirect_to admin_users_path(filter_by: :deleted) }
-        format.js
+        format.js { redirect_back(fallback_location: root_path) }
       end
     end
 
