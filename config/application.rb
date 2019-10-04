@@ -33,6 +33,10 @@ module Alonetone
     config.active_storage.service = config.alonetone.storage_service
     config.active_storage.variant_processor = :vips
 
+    # Turn off previewers and analysers because we don't use them.
+    config.active_storage.analyzers = []
+    config.active_storage.previewers = []
+
     def fastly_enabled?
       config.alonetone.fastly_base_url.present?
     end
