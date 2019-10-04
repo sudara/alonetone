@@ -29,6 +29,9 @@
     flex-grow: 1;
     user-select: none;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     svg {
       width: 100%;
       height: 54px;
