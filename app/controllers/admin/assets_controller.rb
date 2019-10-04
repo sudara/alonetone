@@ -46,7 +46,7 @@ module Admin
     end
 
     def permitted_params
-      params.permit(:filter_by, :no_redirect)
+      params.permit(:filter_by)
     end
   end
 end
