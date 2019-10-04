@@ -1,3 +1,5 @@
+<%= render partial: 'navigation' if white_theme_enabled? %>
+
 <div class="about-page">
   <div class="faq box">
     <h2 class="box static">
@@ -11,13 +13,33 @@
       </p>
     </div>
   </div>
+    <div class="faq box">
+    <h2 class="box static">
+      So, I can upload my music and share it for free?
+    </h2>
+    <div class="static_content">
+      <p>
+        Yeah, that's the most important bit!
+      </p>
+    </div>
+  </div>
   <div class="faq box">
     <h2 class="box static">
       Can I upload my podcast or radio show?
     </h2>
     <div class="static_content">
       <p>
-        We prefer that you don't. If you do, it might be removed without warning.
+        Nope! Alonetone is just for individual artists. If you do, it might be removed without warning.
+      </p>
+    </div>
+  </div>
+  <div class="faq box">
+    <h2 class="box static">
+      Can I upload songs for my blog?
+    </h2>
+    <div class="static_content">
+      <p>
+        Nope! Alonetone is just for individual artists. If you do, it might be removed without warning.
       </p>
     </div>
   </div>
@@ -79,22 +101,6 @@
       </p>
       <p>
         alonetone is for people who want to give our music away, share it freely. There are many places where you can try and sell your tunes (<a href='http://bandcamp.com'>Bandcamp</a>) if you want to take a crack at it.
-      </p>
-    </div>
-  </div>
-  <div class="faq box">
-    <h2 class="box static">
-      So, I can upload my music and give it away?
-    </h2>
-    <div class="static_content">
-      <p>
-        Yeah, that's the most important bit, but there is more.
-      </p>
-      <p>
-        Track who is listening to your music (and from where). Put your music on any website, and we handle all of the traffic. Upload it once here, use it wherever you want.
-      </p>
-      <p>
-        Anywho, nothing to lose, so stop reading, take 45 seconds and <%= link_to 'sign up.', signup_path %>
       </p>
     </div>
   </div>
