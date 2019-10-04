@@ -71,6 +71,7 @@ class User < ApplicationRecord
   scope :recent,        -> { order('users.id DESC') }
   scope :recently_seen, -> { order('last_request_at DESC') }
   scope :with_location, -> { where(['users.country != ""']).recently_seen }
+  scope :with_preloads, -> { includes(:profile, :avatar_image_blob) }
 
   # The before destroy has to be declared *before* has_manys
   # This ensures User#efficiently_destroy_relations executes first
@@ -80,7 +81,6 @@ class User < ApplicationRecord
   after_create :create_profile
 
   # Can create music
-  has_one    :pic, as: :picable, dependent: :destroy
   has_one    :profile, dependent: :destroy
   has_many   :assets,
     -> { order('assets.id DESC') },
