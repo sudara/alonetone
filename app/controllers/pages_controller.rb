@@ -12,11 +12,15 @@ class PagesController < ApplicationController
   end
 
   def about
-    @page_title = "About alonetone"
+    @page_title = "alonetone"
   end
 
   def privacy
-    @page_title = "Alonetone's Privacy Policy"
+    @page_title = "Privacy Policy"
+  end
+
+  def why
+    @page_title = "Why I Built alonetone"
   end
 
   def home; end
