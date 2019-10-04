@@ -38,12 +38,5 @@ RSpec.describe Admin::CommentsController, type: :request do
       expect(Rakismet).to receive(:akismet_call)
       put unspam_admin_comment_path(comment.id)
     end
-
-    it "should send notification" do
-      akismet_stub_submit_ham
-      expect do
-        put unspam_admin_comment_path(comment.id)
-      end.to change { ActionMailer::Base.deliveries.size }.by(1)
-    end
   end
 end
