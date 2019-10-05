@@ -28,17 +28,17 @@ Often the *want* is the same for each song — to be great — therefore the int
 
 ## Releases
 
-After a series of tantrums and customer shaming in the 2000s, the music industry managed to slowly catchup online — but it's still essentially a business based around official releases: Albums, EPs, Singles and more Singles. Sure, there are some subcultures that treasure The Demo and some artists sharing tidbits on social media.
+After a series of tantrums and customer shaming in the 2000s, the music industry managed to slowly catch up with what the internet existing — but it's still a business based around official releases: Albums, EPs, Singles and more Singles. Sure, there are subcultures that treasure The Demo and some artists love to share tidbits of works in progress on social media.
 
-The reason "official" releases even exist at this point is purely historical. Musicians had to book time in studio, record their music, find a label to shoulder costs, and release a physical product. That is all extremely high cost and involves dozens of people over months of time.
+The fact that "official" releases even exist at this point is only an artifact of history. Musicians historically had to book time in studio, record their music, find a label to shoulder costs, and release a physical product. That is all extremely high cost and involves dozens of people over months of time.
 
-But releases are still what "serious" musicians "should" make: A final product, mixed, mastered, perfected and signed off on. Personally, my favorite things to listen to are often the things my friends threw together, as a joke or experiment. I also know extremely talented music makers who have never officially released things and do not have any interest. I don't blame them, it's often high cost and low reward. So their interest is more of a pure one, anchored in exploration and experimentation.
+But releases are still what "serious" musicians "should" make: A final product, mixed, mastered, perfected and signed off on. Personally, my favorite things to listen to are often the things my musician friends threw together as a joke or experiment. I also know extremely talented music makers who have never officially released things and do not have any interest. I don't blame them, it's inherently high effort and often low reward. So their interest is more of a pure one, anchored in exploration and experimentation.
 
 ## Today
 
-Thankfully some newer services have come on the scene and helped musicians reduce the release friction. Bandcamp lets you DIY and start selling immediately. Distrokid lets you distribute to all official stores efficiently. You can be on YouTube instantly, Spotify in hours.
+Thankfully other services aim to help musicians reduce "release friction." Bandcamp lets you DIY and start selling immediately. Distrokid lets you distribute to all official stores efficiently. You can be on YouTube instantly, Spotify in hours.
 
-"Official" releases in 2019 still have their place, but it's a fact that it adds weeks or months of latency between "I made this" and "This is ready to listen to." It's high effort, high friction, and high stakes. A musician has to move from "I just made this, should I work on it more?" to "This is the best it's going to get, it's ready for the world" This makes us pause and depending on who you are, it can be a lengthly psychological transition.
+"Official" releases in 2019 still have their place, but there's no way around the fact that it probably adds weeks or months of latency between "I made this" and "This is ready to listen to." Musicians also to move from "I just made this, should I work on it more?" to "This is the best it's going to get, it's ready for the world" This makes us pause and depending on who you are, it can be a lengthly psychological transition.
 
 ## Does it Matter?
 
@@ -48,7 +48,7 @@ Do more polished works have inherently higher value over quick sketches?
 
 Are we discouraging creativity in general by placing so much emphasis on a final marketable product?
 
-One answer is to look to our tools to find the answer. Logic and Ableton both let you export to Soundcloud. Final Cut lets you upload to Youtube.
+One answer is to look to our current tools. Logic and Ableton both let you export to Soundcloud. Final Cut lets you upload to Youtube.
 
 ## Be official if you want
 
@@ -56,7 +56,7 @@ Alonetone originally aimed to frame "demos" or individual uploaded tracks as equ
 
 Is there a benefit to segregating formal releases from demos? Are there two different needs, one to share "this is what i'm working on" and another to say "here is what represents me, my final product"?
 
-It differs on an artist by artist basis. Personally, I want to present my albums without too much social context. The last thing I want is to share an album with someone I care about and have them be distracted by some argument in the comments or have trouble figuring out which tracks are mine vs. "promoted".
+It differs artist to artist. Personally, I want to present my Releases (with a capital R) without too much social context. The last thing I want is to share an album with someone I care about and have them be distracted by some argument in the comments or have trouble figuring out which tracks are mine vs. "promoted".
 
 One thing is clear: Releases should stand on their own and be free from too much clutter, especially to guest listeners. There should be a way to get back to more from the same artist, but that's about it.
 
