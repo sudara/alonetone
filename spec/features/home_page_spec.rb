@@ -8,7 +8,8 @@ RSpec.describe 'home page', type: :feature, js: true do
 
     track_chunk = find(".asset", match: :first)
     track_chunk.click
-    expect(page).to have_selector('.tracks_reveal')
+
+    expect(page).to have_selector('.private_check_box')
     expect(track_chunk).not_to have_selector('.add_to_favorites')
 
     track_chunk.find('.private_check_box label').click
@@ -26,6 +27,7 @@ RSpec.describe 'home page', type: :feature, js: true do
       track_chunk = find(".asset", match: :first)
       track_chunk.click
 
+      pause_animations
       find('.profile_link').click # open the user nav
       expect(track_chunk).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')
