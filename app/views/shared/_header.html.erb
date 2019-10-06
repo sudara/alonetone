@@ -12,7 +12,7 @@
         data-action="keydown@window->user-dropdown#handleEvent">
 
         <%= link_to '#', class: 'profile_link', data: {action: "user-dropdown#open" } do %>
-          <%= user_image(current_user, variant: :large) %>
+          <%= user_image(current_user, variant: :small_avatar) %>
         <% end %>
 
         <div class="user_dropdown_menu" style="display:none;"
@@ -20,7 +20,7 @@
 
           <div class="user_dropdown_menu_header" data-target="user-dropdown.header">
             <%= truncate current_user.name, length: 24 %>
-            <%= user_image(current_user, variant: :large) %>
+            <%= user_image(current_user, variant: :small_avatar) %>
           </div>
 
           <div class="user_dropdown_menu_items">
