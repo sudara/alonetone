@@ -32,8 +32,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       find('.waveform').click(x: 200, y: 10)
       sleep(0.2) # let animations catch up
-      find('.waveform').click(x: 200, y: 10) # reduce glitch
       pause_animations
+      find('.waveform').click(x: 200, y: 10) # reduce glitch
       find('.play-button-container a').click # pause
       Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
     end
