@@ -1,19 +1,18 @@
 import { Controller } from 'stimulus'
 
-var navItemsTotalWidth = 0;
+var subNavItemsTotalWidth = 0;
+const twoColumnCutoff = 520;
 
 export default class extends Controller {
 
-  initialize() {
-    
+  connect() {
+
     this.timer = null
-
+    
     const allItems = this.element.getElementsByTagName("li")
-    Array.prototype.forEach.call(allItems, a => {
-      
-      const thisMargin = window.getComputedStyle(a).getPropertyValue('margin-right')
-
-      navItemsTotalWidth += a.offsetWidth + parseInt( thisMargin );
+    Array.prototype.forEach.call(allItems, thisListItem => {
+      const thisItemMargin = window.getComputedStyle(thisListItem).getPropertyValue('margin-right')
+      subNavItemsTotalWidth += thisListItem.offsetWidth + parseInt( thisItemMargin );
     });
 
     this.actuallyResize()
@@ -28,23 +27,20 @@ export default class extends Controller {
   }
 
   actuallyResize() {
-
-    const maxWidthElement = document.getElementsByClassName("header_inner")[0]
-
-    const maxWidth = parseInt(  window.getComputedStyle(maxWidthElement).getPropertyValue('width'))  - parseInt(window.getComputedStyle(maxWidthElement).getPropertyValue('padding-right') ) - parseInt (window.getComputedStyle(maxWidthElement).getPropertyValue('padding-left') )
-
-    console.log ( maxWidth )
     
-    if ( navItemsTotalWidth > maxWidth ) {
-      this.element.classList.add("three-column")
-    } else {
-      this.element.classList.remove("three-column")
-    }
-    if ( 520 > maxWidth ) {
+    const headerInner = document.getElementsByClassName("header_inner")[0]
+    const sitePadding = 2 * parseInt(window.getComputedStyle(headerInner).getPropertyValue('padding-left'))
+    const maxSingleRowAvailableWidth = window.innerWidth - sitePadding;
+
+    if ( maxSingleRowAvailableWidth < twoColumnCutoff ) {
       this.element.classList.add("two-column")
       this.element.classList.remove("three-column")
+    } else if ( maxSingleRowAvailableWidth < subNavItemsTotalWidth ) {
+      this.element.classList.add("three-column")
+      this.element.classList.remove("two-column")
     } else {
       this.element.classList.remove("two-column")
+      this.element.classList.remove("three-column")
     }
   }
 }
