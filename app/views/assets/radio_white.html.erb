@@ -1,13 +1,13 @@
 <nav class="sub_nav">
   <div class="sub_nav_inner">
       <ul>
-        <li><%= link_to_unless_current 'Latest Uploaded', radio_source_home_path('latest') %></li>
-        <li><%= link_to_unless_current 'Most Popular', radio_source_home_path('popular') %></li>
-        <li><%= link_to_unless_current 'Most Favorited', radio_source_home_path('most_favorited') %></li>
-        <li><%= link_to_unless_current 'Recently Favorited', radio_source_home_path('favorites') %></li>
-        <li><%= link_to_unless_current 'Mangoz Shuffle', radio_source_home_path('mangoz_shuffle') %></li>
+        <%= navigation_item 'Latest Uploaded', radio_home_path %>
+        <%= navigation_item 'Most Popular', radio_source_home_path('popular') %>
+        <%= navigation_item 'Most Favorited', radio_source_home_path('most_favorited') %>
+        <%= navigation_item 'Recently Favorited', radio_source_home_path('favorites') %>
+        <%= navigation_item 'Mangoz Shuffle', radio_source_home_path('mangoz_shuffle') %>
         <% if logged_in? %>
-        <li><%= link_to_unless_current 'From Those You Follow', radio_source_home_path('those_you_follow') %></li>
+        <%= navigation_item 'From Those You Follow', radio_source_home_path('those_you_follow') %>
         <% end %>
       </ul>
   </div>
@@ -15,16 +15,18 @@
 
 <div id="columns">
   <div id="left">
-  </div>
-  <div id="right">
+    <h1>alonetone radio: <%= params[:source].humanize %> </h1>
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
     <div id="radio_tracks" class="box">
-        <%= render partial: 'assets/asset', collection: @assets  %>
+      <%= render partial: 'assets/asset', collection: @assets  %>
     </div>
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>
+  </div>
+  <div id="right">
+    <%== render file: svg_path('svg/icon_radio.svg') %>
   </div>
 </div>
