@@ -9,33 +9,30 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
       # Note: this only pauses GSAP animations
-      pause_animations
+      with_animations_paused do
+        first_track = find('ul.tracklist li:first-child')
+        first_track.hover
+        Percy.snapshot(page, name: 'Playlist Cover')
 
-      first_track = find('ul.tracklist li:first-child')
-      first_track.hover
-      Percy.snapshot(page, name: 'Playlist Cover')
-
-      # This click will be an ajax request
-      # And in some cases our Snapshot will fire before the DOM is updated
-      # Capybara is good at waiting if we specify an expectation
-      # so let's specify one before we snap
-      first_track.find('a:first-child').click
-      expect(page).to have_selector(".player")
-      Percy.snapshot(page, name: 'Playlist Track Loading')
-
-      resume_animations
+        # This click will be an ajax request
+        # And in some cases our Snapshot will fire before the DOM is updated
+        # Capybara is good at waiting if we specify an expectation
+        # so let's specify one before we snap
+        first_track.find('a:first-child').click
+        expect(page).to have_selector(".player")
+        Percy.snapshot(page, name: 'Playlist Track Loading')
+      end
 
       # Navigating away and back, we should still be playing
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
 
-      find('.waveform').click(x: 200, y: 10)
-      sleep(0.2) # let animations catch up
-      pause_animations
-      find('.waveform').click(x: 200, y: 10) # reduce glitch
-      find('.play-button-container a').click # pause
-      Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
+      with_animations_paused do
+        find('.waveform').click(x: 200, y: 10)
+        find('.play-button-container a').click # pause
+        Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
+      end
     end
   end
 
