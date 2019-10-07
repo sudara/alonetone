@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {
     this.timer = null
     this.marginWidth = 12
-    this.headerPadding = 72Change
+    this.headerPadding = 72
     this.twoColumnCutoff = 520
     this.subNavItemsTotalWidth = this.itemTargets.reduce((total, item) => {
       return total + item.offsetWidth + this.marginWidth
