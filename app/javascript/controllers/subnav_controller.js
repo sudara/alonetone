@@ -1,19 +1,18 @@
 import { Controller } from 'stimulus'
 
-var subNavItemsTotalWidth = 0;
-const twoColumnCutoff = 520;
-
 export default class extends Controller {
+  static targets = ['item']
 
   connect() {
     this.timer = null
-    
-    const allItems = this.element.getElementsByTagName("li")
-    Array.prototype.forEach.call(allItems, thisListItem => {
-      const thisItemMargin = window.getComputedStyle(thisListItem).getPropertyValue('margin-right')
-      subNavItemsTotalWidth += thisListItem.offsetWidth + parseInt( thisItemMargin );
-    });
-
+    this.marginWidth = 6
+    this.headerPadding = 72
+    this.twoColumnCutoff = 520
+    this.subNavItemsTotalWidth = this.itemTargets.reduce((total, item) => {
+      console.log(item.offsetWidth)
+      return total + item.offsetWidth + this.marginWidth
+    }, -this.marginWidth) // we want n-1 amount of padding
+    console.log(`subNavItemsTotalWidth is ${this.subNavItemsTotalWidth}`)
     this.actuallyResize()
   }
 
@@ -26,20 +25,18 @@ export default class extends Controller {
   }
 
   actuallyResize() {
-    
-    const headerInner = document.getElementsByClassName("header_inner")[0]
-    const sitePadding = 2 * parseInt(window.getComputedStyle(headerInner).getPropertyValue('padding-left'))
-    const maxSingleRowAvailableWidth = window.innerWidth - sitePadding;
+    const availableWidth = window.innerWidth - this.headerPadding
+    console.log(`resizing, padding: ${this.headerPadding} available width: ${availableWidth} subNavItemsTotalWidth: ${this.subNavItemsTotalWidth}`)
 
-    if ( maxSingleRowAvailableWidth < twoColumnCutoff ) {
-      this.element.classList.add("two-column")
-      this.element.classList.remove("three-column")
-    } else if ( maxSingleRowAvailableWidth < subNavItemsTotalWidth ) {
-      this.element.classList.add("three-column")
-      this.element.classList.remove("two-column")
-    } else {
-      this.element.classList.remove("two-column")
-      this.element.classList.remove("three-column")
+    if (availableWidth < this.twoColumnCutoff) { // 2 col
+      this.element.classList.add('two-column')
+      this.element.classList.remove('three-column')
+    } else if (availableWidth < this.subNavItemsTotalWidth) { // 3 col
+      this.element.classList.add('three-column')
+      this.element.classList.remove('two-column')
+    } else { // 1 col
+      this.element.classList.remove('two-column')
+      this.element.classList.remove('three-column')
     }
   }
 }
