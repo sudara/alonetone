@@ -16,6 +16,7 @@
 
 <div id="radio_content">
     <h1>alonetone radio: <%= params[:source].humanize %> </h1>
+    <h1 class="mobile_only"><%= params[:source].humanize %></h1>
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
