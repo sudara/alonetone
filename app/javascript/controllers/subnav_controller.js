@@ -6,7 +6,6 @@ const twoColumnCutoff = 520;
 export default class extends Controller {
 
   connect() {
-
     this.timer = null
     
     const allItems = this.element.getElementsByTagName("li")
