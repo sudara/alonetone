@@ -1,5 +1,5 @@
 <nav class="sub_nav">
-  <div class="sub_nav_inner">
+  <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
     <ul>
       <%= navigation_item "What is alonetone?", { action: 'about' } %>
       <%= navigation_item "FAQ", { action: 'index' } %>
