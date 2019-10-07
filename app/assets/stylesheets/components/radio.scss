@@ -1,7 +1,30 @@
-#radio_title + #columns {
-  flex-wrap: wrap-reverse;
-}
-
-#radio_tracks {
-  margin-bottom: 0;
+#radio_content {  
+  max-width: 500px;
+  padding-left: $baseline * 1.5;
+  padding-right: $baseline * 1.5;
+  margin-left: auto;
+  margin-right: auto;
+  @media #{$mobile} {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  h1 {
+    @media #{$mobile} {
+      display: none;
+    }
+    &.mobile_only {
+      display: none;
+      @media #{$mobile} {
+        display: block;
+        padding-left: $baseline;
+        font-size: 18px;
+        color: $accent;
+        font-family: $sans-font;
+        font-weight: bold;
+      }
+    }
+  }
+  #radio_tracks {
+    margin-bottom: 0;
+  }
 }
