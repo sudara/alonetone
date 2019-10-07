@@ -13,8 +13,8 @@
   </div>
 </nav>
 
-<div id="columns">
-  <div id="left">
+
+<div id="radio_content">
     <h1>alonetone radio: <%= params[:source].humanize %> </h1>
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
@@ -25,7 +25,4 @@
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>
-  </div>
-  <div id="right">
-  </div>
 </div>
