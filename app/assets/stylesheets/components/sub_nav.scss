@@ -23,6 +23,7 @@
       justify-content: center;
       @media #{$responsive} {
         flex-wrap: wrap;
+        justify-content: flex-start;
       }
       li {
         margin-right: $baseline / 2;
@@ -51,6 +52,30 @@
         }
         @media #{$responsive} {
           height: 32px;
+          width: calc( 33.3333% - 4 * #{$baseline} / 12);
+          margin-left: $baseline / 4;
+          margin-right: $baseline / 4;
+          margin-bottom: $baseline / 6;
+          &.current {
+            height: 32px;
+            padding-top: 11px;
+          }
+          &:nth-child(3n+2) {
+            margin-left: 0;
+          }
+          &:nth-child(3n) {
+            margin-left: 0;
+          }
+          &:last-child {
+            margin-right: $baseline / 4;
+            margin-bottom: $baseline / 4;;
+          }
+          a {
+            padding-top: 11px;
+          }
+        }
+        @media only screen and (max-width: 520px) {
+          height: 32px;
           width: calc( 50% - 3 * #{$baseline} / 8);
           margin-left: $baseline / 4;
           margin-right: $baseline / 4;
@@ -58,6 +83,12 @@
           &.current {
             height: 32px;
             padding-top: 11px;
+          }
+          &:nth-child(3n+2) {
+            margin-left: $baseline / 4;
+          }
+          &:nth-child(3n) {
+            margin-left: $baseline / 4;
           }
           &:nth-child(even) {
             margin-left: 0;
