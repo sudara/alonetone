@@ -5,12 +5,12 @@ RSpec.describe 'playlists', type: :feature, js: true do
   it 'renders track and cover pages' do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
+      first_track = find('ul.tracklist li:first-child')
 
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
       # Note: this only pauses GSAP animations
       with_animations_paused do
-        first_track = find('ul.tracklist li:first-child')
         first_track.hover
         Percy.snapshot(page, name: 'Playlist Cover')
 
