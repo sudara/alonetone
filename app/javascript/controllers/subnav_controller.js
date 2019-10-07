@@ -11,7 +11,7 @@ export default class extends Controller {
     this.subNavItemsTotalWidth = this.itemTargets.reduce((total, item) => {
       console.log(item.offsetWidth)
       return total + item.offsetWidth + this.marginWidth
-    }, -this.marginWidth) // we want n-1 amount of padding
+    }, -this.marginWidth) // we want n-1 margins
     console.log(`subNavItemsTotalWidth is ${this.subNavItemsTotalWidth}`)
     this.actuallyResize()
   }
