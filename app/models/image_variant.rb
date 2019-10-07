@@ -3,8 +3,8 @@
 # Helper class to translate variant names to Active Storage transformation.
 class ImageVariant
   VARIANTS = {
-    small_avatar: 160,
-    medium_avatar: 400,
+    small_avatar: 80,
+    medium_avatar: 96,
     large_avatar: 960,
     playlist_card: 440,
     playlist_cover: 1248,
