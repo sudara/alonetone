@@ -1,21 +1,79 @@
+<% if white_theme_enabled? %>
+
+  <div class="box">
+    <h2>Edit Profile</h2>
+
+    <div class="edit_profile_top">
+      <div class="edit_profile_top_left">
+          <%= user_image(@user, variant: :album) %>
+          Upload a new photo. (1000px by 1000px square for best results)
+          <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
+            <%= f.file_field :pic  %>
+            <%= submit_tag "Upload New Pic" %>
+          <% end %>
+
+      </div>
+    
+      <div class="edit_profile_top_right">
+
+          <h2 class="box">Edit Your Name</h2>
+            <%= form_with model: @user do |f| -%>
+            <div class="static_content">
+              <p>
+                <label for="display_name">The name you want displayed on alonetone</label><br/>
+                <%= f.text_field :display_name %>
+              </p>
+            </div>
+            <div class="static_content">
+              <%= f.submit "Save" %>
+            </div>
+            
+
+             <p>
+              <label for="user_bio">What city or town do you live in?</label><br/>
+              <%= f.text_field :city %>
+            </p>
+
+            <p>
+              <label for="user_country">What country?</label><br />
+              <%= f.country_select(:country, ['United States'], include_blank: true) %>
+            </p>
+
+            <% end %>
+
+
+
+
+
+
+
+      </div>
+    
+    </div>
+
+
+
+  
+  </div>
+  
+  
+  <div class="box"></div>
+
+
+
+
+
+
+
+
+<% else %>
+
 <%= error_messages_for :user %>
 
 <%= render partial: 'users/user' unless white_theme_enabled? %>
 
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
-    <h2 class="box">Edit Your Name</h2>
-    <%= form_with model: @user do |f| -%>
-	  <div class="static_content">
-      <p>
-        <label for="display_name">The name you want displayed on alonetone</label><br/>
-        <%= f.text_field :display_name %>
-      </p>
-    </div>
-    <div class="static_content">
-      <%= f.submit "Save" %>
-    </div>
-    <% end %>
   </div>
 
   <div class="box edit-your-profile-box">
@@ -185,3 +243,9 @@
   <% end %>
 </div>
 <% end %>
+
+
+<% end %>
+
+
+
