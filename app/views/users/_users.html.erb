@@ -1,7 +1,7 @@
 <% if white_theme_enabled? %>
 
 <nav class="sub_nav">
-  <div class="sub_nav_inner">
+  <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
        <ul>
         <%= navigation_item "Last Online", {action: 'index', sort: nil} %>
         <%= navigation_item "Last Uploaded", {action: 'index', sort: 'last_uploaded'} %>
@@ -20,10 +20,10 @@
 
   <% if white_theme_enabled? %>
 
-  
+
   <% else %>
     <div id="static_header">
-  
+
       <div class="title">
         <h1 class="static">Browse all alonetone artists</h1>
       </div>
@@ -38,9 +38,9 @@
         <%= navigation_item "dedicated listeners", {action: 'index', sort: 'dedicated_listeners'}%>
         </ul>
       </div>
-      
+
     </div>
-    
+
   <% end %>
 
   <div id="large_users_grid">
