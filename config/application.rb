@@ -7,6 +7,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 require_relative '../lib/configurable'
+require_relative '../lib/filtered_rack_logger'
 
 # * Configuration values go in configuration/alonetone.yml.
 # * Settings in config/environments/* override those specified here.
@@ -36,6 +37,15 @@ module Alonetone
     # Turn off previewers and analysers because we don't use them.
     config.active_storage.analyzers = []
     config.active_storage.previewers = []
+
+    if config.active_storage.service.to_s == 'filesystem'
+      # Silence logs when the request path start with Rails' active storage routes.
+      config.middleware.use(
+        FilteredRackLogger,
+        silenced: %w(/rails/active_storage)
+      )
+      config.middleware.delete(Rails::Rack::Logger)
+    end
 
     def fastly_enabled?
       config.alonetone.fastly_base_url.present?
