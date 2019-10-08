@@ -426,11 +426,11 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
-    sidekiq (6.0.1)
-      connection_pool (>= 2.2.2)
-      rack (>= 2.0.0)
-      rack-protection (>= 2.0.0)
-      redis (>= 4.1.0)
+    sidekiq (5.2.7)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     sixarm_ruby_unaccent (1.2.0)
     skylight (4.2.0.beta2)
       skylight-core (= 4.2.0.beta2)
@@ -561,7 +561,7 @@ DEPENDENCIES
   sass-rails (< 5.1)
   scrypt
   selenium-webdriver
-  sidekiq
+  sidekiq (< 6)
   skylight (>= 4.0.0.beta)
   sometimes
   soundmanager2-rails
