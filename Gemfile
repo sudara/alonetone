@@ -61,7 +61,7 @@ gem 'turbolinks'
 
 # monitoring & perf
 gem 'newrelic_rpm'
-gem 'skylight', '>= 4.0.0.beta'
+gem 'skylight', '< 4.2' # bug in 4.2.beta2
 gem 'sidekiq', '< 6'
 gem 'dalli'
 
