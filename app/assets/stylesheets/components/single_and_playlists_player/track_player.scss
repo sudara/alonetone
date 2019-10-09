@@ -26,10 +26,12 @@
   .waveform {
     top: 0;
     right: 0;
-    padding-top: 10px;
     flex-grow: 1;
     user-select: none;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     svg {
       width: 100%;
       height: 54px;
