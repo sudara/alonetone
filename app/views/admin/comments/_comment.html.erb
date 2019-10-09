@@ -1,0 +1,24 @@
+<div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment.user.soft_deleted? %>">
+  <div class="date_column"><%= comment.created_at.strftime("%b %d") %>, <%= comment.id %></div>
+  <div class="user_column">
+    <div class="avatar">
+      <%= user_image(@user, variant: :original) %>
+    </div>
+    <div>
+      <div>
+        <% if comment.commenter %>
+          <%= link_to "Comment By: #{comment&.commenter&.login}", admin_possibly_deleted_user_path(comment.commenter.login) %>
+        <% else %>
+          <%= "Comment By: #{comment&.commenter&.login}" %>
+        <% end %>
+      </div>
+      <div><%= comment&.commenter&.email %></div>
+      <div><%= comment.remote_ip %></div>
+    </div>
+  </div>
+  <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
+  <div class="button_column">
+    <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { target: 'admin--comment.spamButton', action: 'click->admin--comment#markAsSpam' } %></div>
+    <div><%= button_to "Restore", unspam_admin_comment_path(comment), data: { target: 'admin--comment.restoreButton', action: 'click->admin--comment#markAsRestored' }, method: :put, remote: true %></div>
+  </div>
+</div>
