@@ -30,6 +30,9 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       with_animations_paused do
         find('.waveform').click(x: 200, y: 10)
+        fast_forward_animations # allow playhead to animate
+        pause_animations
+        find('.waveform').click(x: 200, y: 10)
         find('.play-button-container a').click # pause
         Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
       end
