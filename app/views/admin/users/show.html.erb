@@ -63,30 +63,7 @@
             <div class="track_column">Track</div>
           </header>
           <div class="admin_assets_rows">
-            <% @assets.each do |asset| %>
-              <div data-controller="admin--asset" data-admin--asset-user-deleted="<%= @user.soft_deleted? %>" data-admin--asset-deleted="<%= asset.soft_deleted? %>" data-admin--asset-spam="<%= asset.is_spam? %>">
-                <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
-                <div class="user_column">
-                  <div class="avatar">
-                    <%= user_image(asset.possibly_deleted_user, variant: :original) %>
-                  </div>
-                  <div>
-                    <div><%= asset.possibly_deleted_user.login %></div>
-                    <div><%= asset.possibly_deleted_user.ip %></div>
-                  </div>
-                </div>
-                <div class="track_column">
-                  <div><%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink) %></div>
-                  <div><%= truncate(asset.description, length: 80) %></div>
-                  <div>N comments / N listens</div>
-                </div>
-                <div class="button_column">
-                  <%= button_to "Spam Asset", spam_admin_asset_path(id: asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsDeleted' } %>
-                  <%= button_to "Delete Asset", delete_admin_asset_path(id: asset.id), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#markTrackAsDeleted' } %>
-                  <%= button_to "Restore Asset", restore_admin_asset_path(id: asset.id), method: :put, remote: true, data: { target: 'admin--asset.restoreButton', action: 'admin--asset#markTrackAsRestored' } %>
-                </div>
-              </div>
-            <% end %>
+             <%= render partial: 'admin/assets/asset', collection: @assets %>
           </div>
         </div>
         <div class="mini_paginator bottom_paginator">
@@ -109,26 +86,7 @@
           </header>
 
           <div class="admin_comment_rows">
-            <% @comments.each do |comment| %>
-              <div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment&.commenter&.soft_deleted? %>">
-                <div class="date_column"><%= comment.created_at.strftime("%b %d") %>, <%= comment.id %></div>
-                <div class="user_column">
-                  <div class="avatar">
-                    <%= user_image(@user, variant: :original) %>
-                  </div>
-                  <div>
-                    <div><%= "Comment By: #{comment&.commenter&.login}" %></div>
-                    <div><%= comment&.commenter&.email %></div>
-                    <div><%= link_to "#{comment.remote_ip}", { filter_by: {commenter_id: comment.commenter_id } } %></div>
-                  </div>
-                </div>
-                <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
-                <div class="button_column">
-                  <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { target: 'admin--comment.spamButton', action: 'click->admin--comment#markAsSpam' } %></div>
-                  <div><%= button_to "Restore", unspam_admin_comment_path(comment), data: { target: 'admin--comment.restoreButton', action: 'click->admin--comment#markAsRestored' }, method: :put, remote: true %></div>
-                </div>
-              </div>
-            <% end %>
+            <%= render partial: 'admin/comments/comment', collection: @comments %>
           </div>
         </div>
       </div>
