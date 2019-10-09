@@ -22,6 +22,9 @@ module Admin
 
     def restore
       UserCommand.new(@user).restore_with_relations
+      respond_to do |format|
+        format.js { redirect_back(fallback_location: root_path) }
+      end
     end
 
     def unspam
