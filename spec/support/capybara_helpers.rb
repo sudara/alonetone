@@ -23,7 +23,7 @@ module RSpec
       def fast_forward_animations
         page.execute_script("TweenMax.globalTimeScale(10)")
         page.execute_script("whilePlayingCallbackFrequency = 100")
-        sleep(0.2)
+        sleep(0.1)
       end
 
       def logged_in(user=:arthur)
