@@ -15,9 +15,9 @@
     <meta property="og:title"       content="<%= @playlist.try(:title) || @asset.title %>" />
     <meta property="og:description" content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.name %>" />
     <% if @playlist %>
-    <meta property="og:image"       content="<%= playlist_cover_url(@playlist, variant: :greenfield) %>" />
+    <meta property="og:image"       content="<%= playlist_cover_url(@playlist, variant: :playlist_cover) %>" />
     <% else %>
-    <meta property="og:image"       content="<%= user_avatar_url(@user, variant: :greenfield) %>" />
+    <meta property="og:image"       content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
     <% end %>
   <% end %>
 
