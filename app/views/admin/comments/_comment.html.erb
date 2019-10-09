@@ -1,4 +1,4 @@
-<div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment.user.soft_deleted? %>">
+<div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment.commenter&.soft_deleted? %>">
   <div class="date_column"><%= comment.created_at.strftime("%b %d") %>, <%= comment.id %></div>
   <div class="user_column">
     <div class="avatar">

@@ -6,12 +6,16 @@ export default class extends Controller {
   initialize() {
     this.hideAllButtons()
 
-    if (this.data.get('spam') == "true") {
-      this.showRestoreButton()
-      this.setSpamRecord()
+    if (this.data.get('user-deleted') == "true") {
+      this.hideAllButtons()
     } else {
-      this.showSpamButton()
-      this.setRestoredRecord()
+      if (this.data.get('spam') == "true") {
+        this.showRestoreButton()
+        this.setSpamRecord()
+      } else {
+        this.showSpamButton()
+        this.setRestoredRecord()
+      }
     }
   }
 
