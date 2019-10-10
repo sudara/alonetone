@@ -22,7 +22,7 @@
             <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
             <div class="user_column">
               <div class="avatar">
-                <%= user_image(asset.possibly_deleted_user, variant: :original) %>
+                <%= user_image(asset.possibly_deleted_user, variant: :large_avatar) %>
               </div>
               <div>
                 <div><%= link_to asset.possibly_deleted_user.login, admin_users_path({ filter_by: asset.possibly_deleted_user.email }) %></div>
