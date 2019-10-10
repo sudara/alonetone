@@ -4,6 +4,7 @@ import { Howl } from 'howler'
 import { bugsnagClient } from '../misc/bugsnag.js.erb'
 
 let player
+let whilePlayingCallbackFrequency = 100
 
 // All variants of alonetone's javascript players extends this controller
 export default class extends Controller {
@@ -69,7 +70,8 @@ export default class extends Controller {
         this.stop()
       } else {
         // we don't need to update this 60 times a second, at most 10
-        setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)), 100)
+        setTimeout(() => requestAnimationFrame(this.whilePlaying.bind(this)),
+          whilePlayingCallbackFrequency)
       }
     }
     this.calculateTime()
