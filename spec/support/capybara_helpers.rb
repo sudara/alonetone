@@ -6,10 +6,24 @@ module RSpec
 
       def pause_animations
         page.execute_script("TweenMax.globalTimeScale(0)")
+        page.execute_script("whilePlayingCallbackFrequency = 2000")
       end
 
       def resume_animations
         page.execute_script("TweenMax.globalTimeScale(1)")
+        page.execute_script("whilePlayingCallbackFrequency = 100")
+      end
+
+      def with_animations_paused
+        pause_animations
+        yield
+        resume_animations
+      end
+
+      def fast_forward_animations
+        page.execute_script("TweenMax.globalTimeScale(2)")
+        page.execute_script("whilePlayingCallbackFrequency = 10")
+        sleep(0.1)
       end
 
       def logged_in(user=:arthur)
