@@ -432,9 +432,9 @@ GEM
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
     sixarm_ruby_unaccent (1.2.0)
-    skylight (4.2.0.beta2)
-      skylight-core (= 4.2.0.beta2)
-    skylight-core (4.2.0.beta2)
+    skylight (4.1.2)
+      skylight-core (= 4.1.2)
+    skylight-core (4.1.2)
       activesupport (>= 4.2.0)
     sometimes (0.0.3)
     sort_alphabetical (1.1.0)
@@ -503,7 +503,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yui-compressor (0.12.0)
-    zeitwerk (2.1.10)
+    zeitwerk (2.2.0)
 
 PLATFORMS
   ruby
@@ -562,7 +562,7 @@ DEPENDENCIES
   scrypt
   selenium-webdriver
   sidekiq (< 6)
-  skylight (>= 4.0.0.beta)
+  skylight (< 4.2)
   sometimes
   soundmanager2-rails
   thredded
