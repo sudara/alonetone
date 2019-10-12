@@ -34,7 +34,7 @@
                 <%= user_image(user, variant: :large) %>
               </div>
               <div>
-                <div><%= user.soft_deleted? ? user.login : link_to(user.login + " (#{user.display_name})", user_home_path(user.login)) %></div>
+                <div><%= user.soft_deleted? ? user.display_name : link_to(user.display_name, user_home_path(user.login)) %></div>
                 <div><%= user.email %></div>
                 <% unless user.soft_deleted? %>
                 <div><%= user.current_login_ip %>
