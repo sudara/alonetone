@@ -16,7 +16,7 @@ export default class extends Controller {
 
   resize() {
     const availableWidth = window.innerWidth - this.headerPadding
-    
+
     if (availableWidth < this.twoColumnCutoff) { // 2 col
       this.element.classList.add('two-column')
       this.element.classList.remove('three-column')
@@ -24,6 +24,7 @@ export default class extends Controller {
       this.element.classList.add('three-column')
       this.element.classList.remove('two-column')
     } else { // 1 col
+      this.element.classList.add('one-column')
       this.element.classList.remove('two-column')
       this.element.classList.remove('three-column')
     }
