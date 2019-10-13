@@ -5,8 +5,8 @@
         <%= navigation_item 'Most Popular', radio_source_home_path('popular') %>
         <%= navigation_item 'Most Favorited', radio_source_home_path('most_favorited') %>
         <%= navigation_item 'Recently Favorited', radio_source_home_path('favorites') %>
-        <%= navigation_item 'Mangoz Shuffle', radio_source_home_path('mangoz_shuffle') %>
         <% if logged_in? %>
+        <%= navigation_item 'Mangoz Shuffle', radio_source_home_path('mangoz_shuffle') %>
         <%= navigation_item 'From Those You Follow', radio_source_home_path('those_you_follow') %>
         <% end %>
       </ul>
