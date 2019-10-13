@@ -95,7 +95,7 @@ module ApplicationHelper
   def navigation_item(text, link, options = nil)
     content_tag(:li, link_to_unless_current(text.html_safe, link, options),
       class: current_page?(link) ? 'current' : '',
-      data: { target: 'subnav.item' } )
+      data: { target: 'subnav.item' })
   end
 
   def link_source(source)
