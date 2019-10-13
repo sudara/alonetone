@@ -61,9 +61,9 @@
   }
   #large_users_grid {
     display: flex;
-    width: 70%;
+    width: 100%;
     flex-wrap: wrap;
-    margin-right: -18px;
+    // margin-right: -18px;
     @media #{$one-column} {
       width: 100%;
     }

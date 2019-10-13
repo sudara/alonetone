@@ -34,3 +34,33 @@
     }
   }
 }
+
+.about-page-content {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    h2 {
+      color: #E02A02;
+      box-shadow: none;
+      border-radius: 0;
+      line-height: 20px;
+      height: auto;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #80604026;
+      font-family: $medium-sans-font;
+      font-weight: normal;
+      padding-left: $baseline / 2;
+      margin-top: 0;
+      padding-top: $baseline * 2;
+      &:first-child {
+        padding-top: 0px;
+      }
+    }
+    p {
+      line-height: 1.5;
+      font-size: 16px;
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+
+    }
+}
