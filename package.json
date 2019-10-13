@@ -15,12 +15,12 @@
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
     "seedrandom": "< 3",
-    "sortablejs": "^1.10.0",
+    "sortablejs": "^1.10.1",
     "stimulus": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "@percy/agent": "^0.16.1",
+    "@percy/agent": "^0.19.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
