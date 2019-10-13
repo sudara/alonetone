@@ -16,3 +16,7 @@ Nope.
 
 alonetone is for people who want to give our music away, share it freely. There are many places where you can try and sell your tunes ([Bandcamp](https://bandcamp.com)) if you want to take a crack at it.
 
+## Where can I find the community guidelines?
+
+[Right here in our forums](/discuss/all-about-alonetone/community-guidelines)
+
