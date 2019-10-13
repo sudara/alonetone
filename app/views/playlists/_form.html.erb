@@ -1,9 +1,72 @@
-<p>
-  <label>Title</label>
-  <%= f.text_field :title %>
-</p>
+<%= error_messages_for :playlist %>
 
-<p>
-  <label>Year released (e.g. 2019)</label>
-  <%= f.text_field :year, size: 4 %>
-</p>
+<div class="edit_playlist_info_container">
+  <div id="edit_playlist_info" class="box">
+    <% if @playlist.persisted? %>
+      <h2>Editing"<%= @playlist.title %>"</h2>
+    <% else %>
+      <h2>Create New Playlist</h2>
+    <% end %>
+    <%= form_with model: [@user, @playlist], html: { id: 'edit_playlist', autocomplete: 'off' } do |f| %>
+
+      <div class="edit_playlist_info_columns">
+        <div class="edit_playlist_info_left_column">
+          <label>ALBUM ARTWORK</label>
+          <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}", :class => "cover" do %>
+            <%= playlist_cover(@playlist, variant: :playlist_card) %>
+            <%= f.file_field :cover_image  %>
+          <% end %>
+          <p>
+            Upload a square photo,<br> 2000px by 2000px for<br> best results.
+          </p>
+        </div>
+
+        <div class="edit_playlist_info_right_column">
+          <div class="edit_playlist_info_right_column_title_and_year">
+            <div>
+              <label for="playlist_title">Title</label>
+              <%= f.text_field :title %>
+            </div>
+            <div>
+              <label for="playlist_year">Year</label>
+                <%= f.text_field :year, input_html: {maxlength: 4, size: 4} %>
+            </div>
+          </div>
+
+          <div class="edit_playlist_info_right_column_links">
+            <div>
+              <label for="playlist_link1">Link 1</label>
+              <%= f.text_field :link1, placeholder: 'link to spotify, itunes, google play, etc' %>
+            </div>
+
+            <div>
+              <label for="playlist_link2">Link 2</label>
+              <%= f.text_field :link2, placeholder: 'another link' %>
+            </div>
+          </div>
+
+          <div class="edit_playlist_info_right_column_credits">
+            <div class="input">
+              <label for="playlist_credits">Credits</label>
+              <%= f.text_area :credits %>
+            </div>
+          </div>
+
+          <% if @playlist.persisted? %>
+          <div class="edit_playlist_info_right_column_private_and_hidden">
+            <div class="input">
+              <%= f.check_box :private %>
+              <label for="playlist_private"><span>Private</span></label>
+            </div>
+            <span class="private_notice">| Playlists are hidden until they have more than 2 tracks</span>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="edit_playlist_info_bottom">
+        <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>
+        <%= submit_tag "save playlist", form: 'edit_playlist' %>
+      </div>
+    <% end %>
+  </div>
+</div>
