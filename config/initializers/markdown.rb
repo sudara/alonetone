@@ -1,6 +1,6 @@
-# https://www.lugolabs.com/articles/render-markdown-views-with-redcarpet-and-pygment-in-rails
+  # https://www.lugolabs.com/articles/render-markdown-views-with-redcarpet-and-pygment-in-rails
 class MarkdownHandler
-  def call(template)
+  def call(template, source)
     "#{render(template.source).inspect}.html_safe;"
   end
 
