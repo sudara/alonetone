@@ -8,7 +8,7 @@
   <div class="admin_column_right">
    <div class="admin_search_field">
     <%= form_for 'filter_by', method: :get do |f| %>
-      <%= text_field_tag 'filter_by',nil, placeholder: 'Search by login or email' %>
+      <%= text_field_tag 'filter_by', nil, placeholder: 'Search by login or email' %>
     <% end %>
     </div>
     <div class="mini_paginator top_paginator">
@@ -34,7 +34,7 @@
                 <%= user_image(user, variant: :large) %>
               </div>
               <div>
-                <div><%= user.soft_deleted? ? user.login : link_to(user.login, user_home_path(user.login)) %></div>
+                <div><%= user.soft_deleted? ? user.display_name : link_to(user.display_name, user_home_path(user.login)) %></div>
                 <div><%= user.email %></div>
                 <% unless user.soft_deleted? %>
                 <div><%= user.current_login_ip %>
