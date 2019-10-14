@@ -287,7 +287,7 @@ class User < ApplicationRecord
     when "not_spam"
       with_deleted.where(is_spam: false).recent
     when String
-      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%'").recent
+      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%' or display_name like '%#{filter}%'").recent
     else
       with_deleted.recent
     end
