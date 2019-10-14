@@ -197,7 +197,8 @@
       }
       a.delete_playlist {
         margin-top: $baseline;
-        @include default-button();
+        @include default-button('outline');
+        width: 160px;
         margin-left: 40px;
         padding: 0;
         &:hover {
@@ -208,8 +209,10 @@
       }
       input[type=submit] {
         margin-top: $baseline;
+        @include default-button('primary');
         float: right;
-        @include default-button();
+        padding: 0;
+        width: 160px;
         margin-right: 40px;
         cursor: pointer;
       }
@@ -254,7 +257,6 @@
     }
     .playlist_asset {
       user-select: none;
-
       a.remove {
         pointer-events: all;
       }
