@@ -10,10 +10,7 @@
   }
 
   #edit_playlist_info {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 20px;
-    padding-top: 0;
+    padding: 0;
     margin-left: auto;
     margin-right: auto;
     > h2 {
@@ -184,9 +181,6 @@
     }
     .edit_playlist_info_bottom {
       border-top: 1px solid $border-color-five;
-      // padding-left: 60px;
-      // padding-right: 60px;
-      // padding-top: 20px;
       .private_warning {
         text-align: center;
       }
@@ -201,11 +195,6 @@
         width: 160px;
         margin-left: 40px;
         padding: 0;
-        &:hover {
-          color: $accent;;
-          text-decoration: underline;
-          background-color: transparent;
-        }
       }
       input[type=submit] {
         margin-top: $baseline;
