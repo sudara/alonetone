@@ -184,31 +184,34 @@
     }
     .edit_playlist_info_bottom {
       border-top: 1px solid $border-color-five;
-      padding-left: 60px;
-      padding-right: 60px;
-      padding-top: 20px;
+      // padding-left: 60px;
+      // padding-right: 60px;
+      // padding-top: 20px;
+      .private_warning {
+        text-align: center;
+      }
+      
       @media #{$one-column} {
         padding-left: 12px;
         padding-right: 12px;
       }
-      input {
-        float: right;
+      a.delete_playlist {
+        margin-top: $baseline;
         @include default-button();
-        cursor: pointer;
-      }
-      a:first-child {
-        @include default-button();
-        background-color: transparent;
-        color: $accent;;
-        font-size: 14px;
+        margin-left: 40px;
         padding: 0;
-        font-family: $medium-sans-font;
-        font-weight: normal;
         &:hover {
           color: $accent;;
           text-decoration: underline;
           background-color: transparent;
         }
+      }
+      input[type=submit] {
+        margin-top: $baseline;
+        float: right;
+        @include default-button();
+        margin-right: 40px;
+        cursor: pointer;
       }
     }
   }
