@@ -12,11 +12,19 @@ class PagesController < ApplicationController
   end
 
   def about
-    @page_title = "About alonetone"
+    @page_title = "alonetone"
   end
 
   def privacy
-    @page_title = "Alonetone's Privacy Policy"
+    @page_title = "Privacy Policy"
+  end
+
+  def faq
+    @page_title = "Frequently Asked Questions"
+  end
+
+  def why
+    @page_title = "Why I Built alonetone"
   end
 
   def home; end
@@ -41,7 +49,7 @@ class PagesController < ApplicationController
   end
 
   def about
-    @page_title = "About alonetone, the kickass home for musicians"
+    @page_title = "About"
   end
 
   def press; end
@@ -79,7 +87,7 @@ class PagesController < ApplicationController
   protected
 
   def old_or_white
-    white_theme_enabled? ? 'white_theme' : 'pages'
+    white_theme_enabled? ? 'about' : 'pages'
   end
 
   def set_2009_albums

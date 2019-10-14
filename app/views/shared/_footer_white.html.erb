@@ -23,7 +23,7 @@
       <li>
         <%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %>
         <div>by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
-        
+
       </li>
     <% end %>
     </ul>
@@ -35,7 +35,7 @@
   <div class="footer_columns">
     <div class="footer_column">
       <h3 class="footer_column_header">alone<em>tone</em> radio</h3>
-      <a href="/radio/latest">
+      <a href="/radio/">
         <%== render file: svg_path('svg/icon_radio.svg') %>
       </a>
     </div>
@@ -44,7 +44,7 @@
       <h3 class="footer_column_header">Browse</h3>
       <div><%= link_to "All Artists", "/users"%></div>
       <div><%= link_to "Recent Playlists", "/playlists"%></div>
-      <div><%= link_to "Recent Tracks", "/radio/latest"%></div>
+      <div><%= link_to "Recent Tracks", "/radio"%></div>
       <div><%= link_to "Popular Tracks", "/radio/popular"%></div>
     </div>
 
