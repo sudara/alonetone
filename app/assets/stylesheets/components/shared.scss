@@ -132,7 +132,6 @@ ul {
 .private_warning {
     font-size: 12px !important;
     position: relative;
-    top: -15px;
     display: block;
     height: auto;
     line-height: 17px;
@@ -142,7 +141,6 @@ ul {
     padding-bottom: 8px;
     color: $private-message-warning-text;
     border-color: $private-message-warning-border;
-    border-radius: 0 0 6px 6px;
     background-color: $private-message-warning-background;
     &.hidden {
       display: none;

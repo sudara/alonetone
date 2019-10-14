@@ -69,11 +69,17 @@
         </div>
       </div>
       <div class="edit_playlist_info_bottom">
-        <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>
+
+        <div class="private_warning">
+          Only <span class="only_user_name">Mr. I Am Not Real Data</span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
+        </div>
+
+        <%= link_to 'Delete playlist', user_playlist_path(@user, @playlist.permalink), :class => "delete_playlist", method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>
+        
         <% if @playlist.persisted? %>
-          <%= submit_tag "save playlist" %>
+          <%= submit_tag "Save playlist" %>
         <% else %>
-          <%= submit_tag "create playlist" %>
+          <%= submit_tag "Create playlist" %>
         <% end %>
       </div>
     <% end %>
