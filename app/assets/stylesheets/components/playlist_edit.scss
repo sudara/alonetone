@@ -71,14 +71,16 @@
             }
           }
         }
+        input[type="file"] {
+          font-weight: normal;
+          font-family: $sans-font;
+          font-size: 12px;
+        }
         form {
           input {
             margin-bottom: 8px;
           }
-          input#pic_pic {
-            font-weight: normal;
-            font-family: $sans-font;
-          }
+          
         }
         p {
           font-size: 12px;
