@@ -64,12 +64,12 @@
     width: 100%;
     flex-wrap: wrap;
     // margin-right: -18px;
-    @media #{$one-column} {
-      width: 100%;
-    }
-    @media #{$mobile} {
-      justify-content: space-around;
-    }
+    // @media #{$one-column} {
+    //   width: 100%;
+    // }
+    // @media #{$mobile} {
+    //   justify-content: space-around;
+    // }
 
     div.clear {
       display: none;
@@ -78,8 +78,8 @@
       position: relative;
       text-align: center;
       font-size: 11px;
-      width: 125px;
-      margin-right: 26.66px;
+      // width: 125px;
+      // margin-right: 26.66px;
       margin-bottom: $baseline * 1.5;
       padding-bottom: $baseline / 4;
       text-align: center;
@@ -94,8 +94,8 @@
         margin-bottom: 18px;
       }
       img.cover {
-        width: 125px;
-        height: 125px;
+        // width: 125px;
+        // height: 125px;
       }
       .name {
         font-size: 13px;

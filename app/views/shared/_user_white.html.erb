@@ -1,4 +1,5 @@
-<%= div_for(user, class: 'user-index') do %>
+<li>
+<%= div_for(user, class: 'user_index') do %>
   <%= link_to(user_home_path(user), class: 'overlay', title: user_summary(user)) do %>
     <%= image_tag(user_avatar_url(user, variant: :small_avatar), class: 'cover') %>
   <% end %>
@@ -11,3 +12,4 @@
     <% end %>
   </span>
 <% end %>
+</li>
