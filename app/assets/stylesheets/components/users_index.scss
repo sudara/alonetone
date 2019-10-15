@@ -12,65 +12,10 @@
     padding-left: 0;
     padding-right: 0;
   }
-  .users_menu {
-    box-shadow: none;
-    width: 25%;
-    min-width: 185px;
-    margin-right: 5%;
-    padding-left: 0;
-    overflow: hidden;
-    @media #{$mobile} {
-      margin-right: 0;
-    }
-    h2 {
-      color: $accent;
-      margin-bottom: 0;
-    }
-    @media #{$one-column} {
-      width: 100%;
-    }
-    #links {
-      ul.links {
-        margin-top: 0;
-        margin-bottom: 0;
-        li {
-          line-height: 40px;
-          display: block;
-          height: 40px;
-          width: 100%;
-          box-sizing: border-box;
-          &:hover {
-            background: $background-color-four;
-            a {
-              text-decoration: none;
-            }
-          }
-          a {
-            font-size: 14px;
-            display: block;
-            padding: 0 15px;
-          }
-        }
-        li.current {
-          padding: 0 15px;
-          background: $accent;
-          color: $font-color-seven;
-        }
-      }
-    }
-  }
   #large_users_grid {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    // margin-right: -18px;
-    // @media #{$one-column} {
-    //   width: 100%;
-    // }
-    // @media #{$mobile} {
-    //   justify-content: space-around;
-    // }
-
     div.clear {
       display: none;
     }
