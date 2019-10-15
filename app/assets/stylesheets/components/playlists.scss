@@ -33,8 +33,8 @@ ul.playlists {
       }
     }
     font-size: 11px;
-    width: 220px;
-    margin-right: 26.66px;
+    // width: 220px;
+    // margin-right: 26.66px;
     margin-bottom: $baseline * 1.5;
     padding-bottom: $baseline / 4;
     text-align: center;
@@ -93,7 +93,7 @@ ul.playlists {
     justify-content: space-around;
     li.playlist {
       display: block !important;
-      width: 45%;
+      // width: 45%;
       margin: 0;
       margin-bottom: 18px;
       a {

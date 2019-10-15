@@ -1,31 +1,37 @@
 // for use on home playlists area
 
+
+$three-column-cutoff: 'only screen and (max-width: 800px)';
+$two-column-cutoff: 'only screen and (max-width: 650px)';
+
+
 ul.responsive_grid {
     margin-bottom: 0;
     li {
       margin-bottom: 0;
       width: calc( 25% - 20px);
+      margin-right: 26.66px;
       a {
         span {
           display: none;
         }
       }
     }
-    @media only screen and (max-width: 798px) {
+    @media #{$three-column-cutoff} {
         li {
-        width: calc( 33.33333% - 17.77px);
+            width: calc( 33.33333% - 17.77px);
             &:nth-child(1), &:nth-child(2), &:nth-child(3) {
                 display: block;
-        }
-        &:nth-child(3) {
-          margin-right: 0;
-        }
+            }
+            &:nth-child(3) {
+            margin-right: 0;
+            }
             &:nth-child(4),  {
                 display: none;
             }
         }
     }
-    @media #{$one-column} {
+    @media #{$two-column-cutoff} {
       justify-content: space-between;
       margin-bottom: -$baseline * 1.5;
       li {
