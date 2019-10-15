@@ -9,9 +9,6 @@ ul.playlists {
     }
   }
   li.playlist {
-    &:last-child {
-      margin-right: 0;
-    }
     &.private {
       background-color: $background-color-five;
       position: relative;
