@@ -6,7 +6,7 @@
       <%= link_to "Latest Playlists".html_safe, all_playlists_path, title: 'view latest playlists' %>
       </h2>
     </div>
-    <ul class="playlists">
+    <ul class="playlists responsive_grid">
       <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
     </ul>
   </div>

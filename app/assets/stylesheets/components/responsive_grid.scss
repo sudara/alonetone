@@ -1,0 +1,55 @@
+// for use on home playlists area
+
+ul.responsive_grid {
+    margin-bottom: 0;
+    li {
+      margin-bottom: 0;
+      width: calc( 25% - 20px);
+      a {
+        span {
+          display: none;
+        }
+      }
+    }
+    @media only screen and (max-width: 798px) {
+        li {
+        width: calc( 33.33333% - 17.77px);
+            &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+                display: block;
+        }
+        &:nth-child(3) {
+          margin-right: 0;
+        }
+            &:nth-child(4),  {
+                display: none;
+            }
+        }
+    }
+    @media #{$one-column} {
+      justify-content: space-between;
+      margin-bottom: -$baseline * 1.5;
+      li {
+        display: block!important;
+        width: 45%;
+        margin: 0;
+        margin-bottom: $baseline * 1.5;
+        img {
+          width: 100%;
+        }
+        svg {
+          width: 100%;
+        }
+      }
+    }
+    @media #{$mobile} {
+      width: 100%;
+      margin-bottom: -$baseline * .75;
+      justify-content: space-around;
+      li {
+        display: block!important;
+        width: 45%;
+        margin: 0;
+        margin-bottom: $baseline * .75;
+      }
+    }
+  }
