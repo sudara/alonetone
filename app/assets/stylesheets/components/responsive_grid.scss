@@ -10,7 +10,7 @@ ul.responsive_grid {
     margin-bottom: 0;
     width: calc(25% - 20px);
     margin-right: $gutter-width;
-    &:last-child {
+    &:nth-child(4n) {
       margin-right: 0;
     }
     a {
@@ -22,21 +22,20 @@ ul.responsive_grid {
   @media #{$three-column-cutoff} {
     li {
       width: calc(33.33333% - 17.77px);
-      &:nth-child(1),
-      &:nth-child(2),
-      &:nth-child(3) {
+      &:nth-child(1n),
+      &:nth-child(2n),
+      &:nth-child(3n) {
         display: block;
       }
-      &:nth-child(3) {
+      &:nth-child(3n) {
         margin-right: 0 !important;
       }
-      &:nth-child(4) {
-        display: none;
+      &:nth-child(4n) {
+        margin-right: $gutter-width;
       }
     }
   }
   @media #{$two-column-cutoff} {
-    margin-bottom: -$baseline * 1.5; // seems too specific, probably best for homepage!
     li {
       display: block !important;
       width: calc(50% - 13.33px);
@@ -60,7 +59,17 @@ ul.responsive_grid {
     width: calc(100% - 32px);
     margin-left: auto;
     margin-right: auto;
-    //   margin-bottom: -$baseline * .75;
-    //   justify-content: space-around;
+  }
+}
+
+// Home has the special case where the 4th of 4 featured
+// playlists should not show at all in 3 column view
+ul.responsive_grid_home {
+  @media #{$three-column-cutoff} {
+    li {
+      &:nth-child(4) {
+        display: none;
+      }
+    }
   }
 }
