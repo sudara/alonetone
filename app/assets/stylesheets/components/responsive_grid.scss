@@ -62,9 +62,9 @@ ul.responsive_grid {
   }
 }
 
-// Home has the special case where the 4th of 4 featured
+// Home and /User have a special case where the 4th of 4 featured
 // playlists should not show at all in 3 column view
-ul.responsive_grid_home {
+ul.responsive_grid_single_row {
   @media #{$three-column-cutoff} {
     li {
       &:nth-child(4) {

@@ -1,3 +1,5 @@
+// Layouts of ul.playlists are handled by responsive_grid.scss
+
 ul.playlists {
   display: flex;
   flex-wrap: wrap;
@@ -30,8 +32,6 @@ ul.playlists {
       }
     }
     font-size: 11px;
-    // width: 220px;
-    // margin-right: 26.66px;
     margin-bottom: $baseline * 1.5;
     padding-bottom: $baseline / 4;
     text-align: center;
@@ -81,23 +81,20 @@ ul.playlists {
       padding: 0 8px 8px 8px;
     }
   }
-  @media #{$mobile} {
-    display: flex;
-    flex-direction: row;
-    // width: 96%;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    // justify-content: space-around;
-    li.playlist {
-      display: block !important;
-      // width: 45%;
-      margin: 0;
-      margin-bottom: 18px;
-      a {
-        img {
-          width: 100%;
-        }
-      }
-    }
-  }
+  // @media #{$mobile} {
+  //   display: flex;
+  //   flex-direction: row;
+  //   margin-bottom: 20px;
+  //   flex-wrap: wrap;
+  //   li.playlist {
+  //     display: block !important;
+  //     margin: 0;
+  //     margin-bottom: 18px;
+  //     a {
+  //       img {
+  //         width: 100%;
+  //       }
+  //     }
+  //   }
+  // }
 }
