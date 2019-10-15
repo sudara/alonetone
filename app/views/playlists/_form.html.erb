@@ -6,7 +6,7 @@
     <%= render partial: 'shared/back_to_artist' %>
   <% end %>
 
-  <div id="edit_playlist_info" class="box">
+  <div id="edit_playlist_info" data-controller="playlist-edit" class="box">
     <% if @playlist.persisted? %>
       <h2>Editing "<%= @playlist.title %>"</h2>
     <% else %>
@@ -58,24 +58,27 @@
           </div>
 
           <% if @playlist.persisted? %>
-          <div class="edit_playlist_info_right_column_private_and_hidden">
+          <div class="edit_playlist_info_right_column_private_and_hidden" data-target="privateToggle" style="display:none">
             <div class="input">
-              <%= f.check_box :private %>
-              <label for="playlist_private"><span>Private</span></label>
+              <%= f.check_box :private, data: { target: 'actualCheckbox' } %>
+              <label for="playlist_private" data-target="markAsPrivate" data-action='click->playlist-edit#togglePrivate'><span>Private</span></label>
             </div>
-            <span class="private_notice">| Playlists are hidden until they have more than 2 tracks</span>
           </div>
           <% end %>
         </div>
       </div>
       <div class="edit_playlist_info_bottom">
 
-        <div class="private_warning">
-          Only <span class="only_user_name">Mr. I Am Not Real Data</span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
+        <div class="private_warning" data-target="privateBanner" style="display:none">
+          This playlist is private, visible only to <span class="only_user_name"><%= @user.display_name %></span> and <span class="only_alonetone_mods">alonetone mods</span>
+        </div>
+
+        <div class="private_warning" data-target="needsTracksBanner" style="display:none">
+          This playlist will be private until <span class="only_user_name">at least 2 tracks</span> are added
         </div>
 
         <%= link_to 'Delete', user_playlist_path(@user, @playlist.permalink), :class => "delete_playlist", method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>
-        
+
         <% if @playlist.persisted? %>
           <%= submit_tag "Save playlist" %>
         <% else %>
