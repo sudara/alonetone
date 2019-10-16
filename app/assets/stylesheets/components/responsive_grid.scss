@@ -46,7 +46,7 @@ ul.responsive_grid {
       width: calc(50% - 13.33px);
       margin-bottom: $gutter-width!important;
       margin-right: $gutter-width !important;
-      &:nth-child(3) {
+      &:nth-child(3n) {
         margin-right: $gutter-width !important;
       }
       &:nth-child(2n) {
