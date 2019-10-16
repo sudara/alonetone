@@ -40,8 +40,8 @@ main {
     @media #{$one-column} {
       display: flex;
       flex-direction: column;
-      grid-column-gap: 0;
-      grid-row-gap: 0;
+      column-gap: 0;
+      row-gap: 0;
       > * {
         width: 100%;
       }
@@ -58,19 +58,15 @@ main {
 
     #user_playlists_area {
       grid-area: playlists;
+      @media #{$one-column} {
+        margin-top: $baseline * 1.5;
+      }
+
       h2 {
         color: $accent;
       }
       ul {
         margin: 0;
-        &:after {
-          height: 0;
-          width: 45%;
-          content: "";
-        }
-        @media #{$mobile} {
-          margin: 0 auto;
-        }
       }
       .below_box {
         margin-bottom: 26px;
