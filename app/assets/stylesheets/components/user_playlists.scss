@@ -24,7 +24,6 @@ main {
 
     }
     ul.playlists {
-      margin-right: -36px;
       @media #{$mobile} {
         width: 100%;
         margin-right: 0;
