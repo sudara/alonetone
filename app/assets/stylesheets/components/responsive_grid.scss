@@ -12,7 +12,7 @@ $two-column-cutoff: "only screen and (max-width: 550px)";
 ul.responsive_grid {
   margin-bottom: 0;
   li {
-    margin-bottom: 0;
+    margin-bottom: $gutter-width;
     width: calc(25% - 20px);
     margin-right: $gutter-width;
     &:nth-child(4n) {
@@ -67,9 +67,12 @@ ul.responsive_grid {
   }
 }
 
-// Home and /User have a special case where the 4th of 4 featured
+// Home and /user have a special case where the 4th of 4 featured
 // playlists should not show at all in 3 column view
 ul.responsive_grid_single_row {
+  li {
+    margin-bottom: 0;
+  }
   @media #{$three-column-cutoff} {
     li {
       &:nth-child(4) {
