@@ -32,7 +32,6 @@ ul.playlists {
       }
     }
     font-size: 11px;
-    margin-bottom: $baseline * 1.5;
     padding-bottom: $baseline / 4;
     text-align: center;
     background-color: $background-color-one;
@@ -81,20 +80,4 @@ ul.playlists {
       padding: 0 8px 8px 8px;
     }
   }
-  // @media #{$mobile} {
-  //   display: flex;
-  //   flex-direction: row;
-  //   margin-bottom: 20px;
-  //   flex-wrap: wrap;
-  //   li.playlist {
-  //     display: block !important;
-  //     margin: 0;
-  //     margin-bottom: 18px;
-  //     a {
-  //       img {
-  //         width: 100%;
-  //       }
-  //     }
-  //   }
-  // }
 }
