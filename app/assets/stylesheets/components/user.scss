@@ -58,7 +58,6 @@ main {
 
     #user_playlists_area {
       grid-area: playlists;
-
       h2 {
         color: $accent;
       }
@@ -74,7 +73,6 @@ main {
         }
       }
       .below_box {
-        margin-top: -36px;
         margin-bottom: 26px;
         @media #{$mobile} {
           margin-top: 0;
