@@ -3,7 +3,7 @@ header#site_header {
   box-shadow: 0 3px 4px -2px #65666627;
   height: 60px;
   > .header_search {
-    display: none !important; // Temporarily hide dark theme search that wasn't inside the #site_header
+    display: none !important; // Temporarily hide legacy theme search that wasn't inside the #site_header
   }
   .header_inner {
     position: relative;
@@ -149,7 +149,7 @@ header#site_header {
         z-index: 99;
         width: 1000px;
         max-width: 350px;
-        background-color: $background-color-one;
+        background-color: $site-header-user-dropdown-background;
         box-shadow: $site-header-user-dropdown-shadow;
         border-radius: 0px 0px 6px 6px;
         color: $font-color-two;
@@ -172,18 +172,40 @@ header#site_header {
             border-radius: 2px;
           }
         }
-        .user_dropdown_menu_items {
-          padding-left: $baseline;
-          padding-top: $baseline / 3;
-          padding-bottom: $baseline / 3;
-          background-color: $background-color-two;
-          a {
+        ul.user_dropdown_menu_items {
+          padding-top: 0;
+          margin-top: 0;
+          margin-bottom: 0;
+          li {
+            background-color: $site-header-user-dropdown-list-item-background;
+            padding-left: $baseline;
             display: block;
             font-size: 14px;
             font-weight: normal;
             line-height: 40px;
             display: block;
             height: 40px;
+            margin-bottom: 2px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            &:first-child {
+              a:last-child {
+                float: right;
+                margin-right: $baseline / 2;
+                @include default_button();
+                height: 30px;
+                margin-top: 5px;
+                line-height: 1;
+                padding-top: 9px;
+                background: transparent;
+                color: $orange300;
+                border: 1px solid $grey900;
+                &:hover {
+                  border: 1px solid $accent;
+                }
+              }
+            }
           }
         }
         .user_dropdown_menu_bottom_links {
@@ -191,8 +213,8 @@ header#site_header {
           justify-content: space-between;
           padding-left: 16px;
           padding-right: 16px;
-          padding-top: 16px;
-          margin-bottom: 10px;
+          padding-top: $baseline / 2;
+          margin-bottom: $baseline / 2;
           a.edit_profile_item {
             @include default_button();
             height: 28px;
