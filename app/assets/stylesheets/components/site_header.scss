@@ -66,7 +66,7 @@ header#site_header {
           color: $font-color-two;
           border: 0;
           border-radius: 3px;
-          transition: width .4s, background-color .4s, border-width .4s;
+          transition: width 0.4s, background-color 0.4s, border-width 0.4s;
           line-height: normal;
           &:focus {
             border-width: 0px;
@@ -95,10 +95,12 @@ header#site_header {
         top: 6px;
         background-image: $site-header-search-magnifying-glass-image;
         &:hover {
-          background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
+          background-image: image-url(
+            "svg/icon_search_magnifying_glass_active.svg"
+          );
         }
         @media #{$mobile} {
-          display: none; 
+          display: none;
         }
       }
       #mobile_search_reveal_button {
@@ -111,7 +113,7 @@ header#site_header {
         background-position: center;
         background-repeat: no-repeat;
         @media #{$mobile} {
-          display: block; 
+          display: block;
         }
       }
     }
@@ -190,7 +192,7 @@ header#site_header {
             &:last-child {
               margin-bottom: 0;
             }
-            
+
             a.edit_profile_item {
               float: right;
               margin-right: $baseline / 2;
@@ -207,7 +209,7 @@ header#site_header {
                 background: transparent;
               }
             }
-        }
+          }
         }
         .user_dropdown_menu_bottom_links {
           display: flex;
@@ -221,7 +223,25 @@ header#site_header {
             height: 28px;
             background-color: $accent;
             border-radius: 4px;
+            position: relative;
+            .switcher-label {
+              color: $grey1200;
+              font-size: 11px;
+              font-weight: bold;
+              padding-top: 9px;
+              padding-left: 14px;
+            }
+            .switcher_inner {
+              background-color: #fff;
+              border-radius: 1.5px;
+              width: 56px;
+              height: 22px;
+              box-shadow: 0px 2px 8px rgba(53, 53, 53, 0.33), 0px 2px 2px rgba(53, 53, 53, 0.33);
+              position: absolute;
+              bottom: 3px;
+              right: 3px;
 
+            }
           }
           a.logout_item {
             @include default_button();
