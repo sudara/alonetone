@@ -23,15 +23,17 @@
             <%= user_image(current_user, variant: :small_avatar) %>
           </div>
 
-          <div class="user_dropdown_menu_items">
-            <%= link_to 'Your Stuff', main_app.user_home_path(current_user) %>
-            <%= link_to 'Upload New Track', main_app.upload_path %>
-            <%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %>
-
-          </div>
+          <ul class="user_dropdown_menu_items">
+            <li>
+                <%= link_to 'Your Profile', main_app.user_home_path(current_user) %>
+                <%= link_to 'Edit', main_app.edit_user_path(current_user), class: 'edit_profile_item' %>
+            </li>
+            <li><%= link_to 'Upload New Track', main_app.upload_path %></li>
+            <li><%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %></li>          
+          </ul>
 
           <div class="user_dropdown_menu_bottom_links">
-            <%= link_to 'Edit Profile', main_app.edit_user_path(current_user), class: 'edit_profile_item' %>
+            
             <%= link_to 'Log Out', main_app.logout_path, class: 'logout_item', data: { turbolinks: "false" } %>
           </div>
 
