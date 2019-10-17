@@ -159,9 +159,10 @@ header#site_header {
         .user_dropdown_menu_header {
           height: 60px;
           display: flex;
-          padding-left: $baseline;
-          font-size: 16px;
-          line-height: 60px;
+          padding-left: $baseline / 1.5;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 62px;
           img {
             display: block;
             margin-left: auto;
