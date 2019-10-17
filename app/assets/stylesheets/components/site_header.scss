@@ -216,6 +216,13 @@ header#site_header {
           padding-right: 16px;
           padding-top: $baseline / 2;
           margin-bottom: $baseline / 2;
+          a.switcher {
+            width: 120px;
+            height: 28px;
+            background-color: $accent;
+            border-radius: 4px;
+
+          }
           a.logout_item {
             @include default_button();
             background-color: $site-header-user-dropdown-list-item-background;
