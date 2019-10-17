@@ -152,7 +152,7 @@ header#site_header {
         background-color: $site-header-user-dropdown-background;
         box-shadow: $site-header-user-dropdown-shadow;
         border-radius: 0px 0px 6px 6px;
-        color: $font-color-two;
+        color: $site-header-user-dropdown-list-item-text;
         @media #{$mobile} {
           width: 300px;
         }
@@ -189,24 +189,24 @@ header#site_header {
             &:last-child {
               margin-bottom: 0;
             }
-            &:first-child {
-              a:last-child {
-                float: right;
-                margin-right: $baseline / 2;
-                @include default_button();
-                height: 30px;
-                margin-top: 5px;
-                line-height: 1;
-                padding-top: 9px;
+            
+            a.edit_profile_item {
+              float: right;
+              margin-right: $baseline / 2;
+              @include default_button();
+              height: 30px;
+              margin-top: 5px;
+              line-height: 1;
+              padding-top: 9px;
+              background: transparent;
+              color: $orange300;
+              border: 1px solid $grey900;
+              &:hover {
+                border: 1px solid $accent;
                 background: transparent;
-                color: $orange300;
-                border: 1px solid $grey900;
-                &:hover {
-                  border: 1px solid $accent;
-                }
               }
             }
-          }
+        }
         }
         .user_dropdown_menu_bottom_links {
           display: flex;
@@ -215,21 +215,10 @@ header#site_header {
           padding-right: 16px;
           padding-top: $baseline / 2;
           margin-bottom: $baseline / 2;
-          a.edit_profile_item {
-            @include default_button();
-            height: 28px;
-            line-height: 30px;
-            background-color: $background-color-one;
-            border: 1px solid $accent;
-            color: $accent;
-            width: 100px;
-            &:hover {
-              background-color: $background-color-one;
-              color: $accent;
-            }
-          }
           a.logout_item {
             @include default_button();
+            background-color: $site-header-user-dropdown-list-item-background;
+            color: $grey400;
             height: 28px;
             line-height: 30px;
             width: 100px;
