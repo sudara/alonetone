@@ -98,10 +98,10 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
     padding-left: $baseline * 1.5;
     padding-right: $baseline * 1.5;
     &:hover {
-      background-color: pink;
+      background-color: transparent;
     }
     &:active {
-      background-color: purple;
+      background-color: transparent;
     }
   
   }
