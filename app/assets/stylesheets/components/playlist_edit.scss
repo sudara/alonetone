@@ -91,6 +91,10 @@
           color: $font-color-five;
           margin-top: 12px;
         }
+        a.remove_artwork {
+          margin-bottom: $baseline;
+          display: block;
+        }
       }
       .edit_playlist_info_right_column {
         flex: 1;
