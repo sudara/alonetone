@@ -2,7 +2,7 @@ import { Controller } from 'stimulus'
 import { flashController } from './flash_controller'
 
 export default class extends Controller {
-  static targets = ['privateCheckbox', 'actualCheckbox', 'markAsPrivate',
+  static targets = ['checkbox', 'actualCheckbox', 'markAsPrivate',
     'needsTracksBanner', 'privateBanner']
 
   initialize() {
@@ -16,17 +16,19 @@ export default class extends Controller {
   }
 
   displayBanner() {
-    if(this.tracksCount < 2) {
-      this.actualCheckboxTarget.checked = 1
-      this.showNeedsTracksBanner()
-      this.privateCheckbox.style.display = 'none'
-
-    } elseif(this.actualCheckboxTarget.checked) {
+    if (this.tracksCount < 2) {
+      this.forcePrivate()
+    } else if (this.actualCheckboxTarget.checked) {
       this.showPrivateBanner()
-      this.privateCheckbox.style.display = 'block'
     } else {
-      this.privateCheckbox.style.display = 'block'
+      this.checkboxTarget.style.display = 'block'
     }
+  }
+
+  forcePrivate() {
+    this.actualCheckboxTarget.checked = 1
+    this.showNeedsTracksBanner()
+    this.checkboxTarget.style.display = 'none'
   }
 
   showNeedsTracksBanner() {
@@ -37,11 +39,18 @@ export default class extends Controller {
   showPrivateBanner() {
     this.needsTracksBannerTarget.style.display = 'none'
     this.privateBannerTarget.style.display = 'block'
+    this.checkboxTarget.style.display = 'block'
   }
 
-  togglePrivate() {
+  hidePrivateBanner() {
+    this.privateBannerTarget.style.display = 'none'
+  }
+
+  togglePrivate(e) {
+    e.preventDefault()
     // The label was clicked, so we still need to check the box
     this.actualCheckboxTarget.checked = !this.actualCheckboxTarget.checked
+    this.actualCheckboxTarget.checked ? this.showPrivateBanner() : this.hidePrivateBanner()
   }
 
 }
