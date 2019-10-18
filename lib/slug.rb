@@ -16,4 +16,14 @@ class Slug
       gsub(%r{([[:space:]]+)\Z}, '').
       gsub(%r{[[:space:]]+}, '-')
   end
+
+  DEDUPED_RE = %r{\A(.*)-(\d+)\Z}
+
+  def self.increment(slug)
+    if match = DEDUPED_RE.match(slug)
+      "#{match[1]}-#{match[2].to_i + 1}"
+    else
+      "#{slug}-2"
+    end
+  end
 end
