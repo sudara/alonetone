@@ -6,7 +6,7 @@
     <%= render partial: 'shared/back_to_artist' %>
   <% end %>
 
-  <div id="edit_playlist_info" data-controller="playlist-edit" class="box">
+  <div id="edit_playlist_info" data-controller="playlist-form" class="box">
     <% if @playlist.persisted? %>
       <h2>Editing "<%= @playlist.title %>"</h2>
     <% else %>
@@ -58,10 +58,10 @@
           </div>
 
           <% if @playlist.persisted? %>
-          <div class="edit_playlist_info_right_column_private_and_hidden" data-target="privateToggle" style="display:none">
+          <div class="edit_playlist_info_right_column_private_and_hidden" data-target="playlist-form.checkbox" style="display:none">
             <div class="input">
-              <%= f.check_box :private, data: { target: 'actualCheckbox' } %>
-              <label for="playlist_private" data-target="markAsPrivate" data-action='click->playlist-edit#togglePrivate'><span>Private</span></label>
+              <%= f.check_box :private, data: { target: 'playlist-form.actualCheckbox' }, id: 'playlist_private' %>
+              <label for="playlist_private" data-target="playlist-form.markAsPrivate" data-action='click->playlist-form#togglePrivate'><span>Private</span></label>
             </div>
           </div>
           <% end %>
@@ -69,11 +69,11 @@
       </div>
       <div class="edit_playlist_info_bottom">
 
-        <div class="private_warning" data-target="privateBanner" style="display:none">
+        <div class="private_warning" data-target="playlist-form.privateBanner" style="display:none">
           This playlist is private, visible only to <span class="only_user_name"><%= @user.display_name %></span> and <span class="only_alonetone_mods">alonetone mods</span>
         </div>
 
-        <div class="private_warning" data-target="needsTracksBanner" style="display:none">
+        <div class="private_warning" data-target="playlist-form.needsTracksBanner" style="display:none">
           This playlist will be private until <span class="only_user_name">at least 2 tracks</span> are added
         </div>
 
