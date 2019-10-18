@@ -10,6 +10,10 @@ RSpec.describe Slug do
     end.to raise_error(ArgumentError)
   end
 
+  it 'does not swallow user input when generating a slug' do
+    expect(Slug.generate('-')).to eq('-')
+  end
+
   it 'normalizes Unicode characters' do
     string = 'Càfé'
     expect(
@@ -71,6 +75,21 @@ RSpec.describe Slug do
     ].each do |example, expected|
       expect(Slug.generate(example)).to eq(expected)
     end
+  end
+
+  it 'increments the initial version of a slug' do
+    expect(Slug.increment('demo')).to eq('demo-2')
+  end
+
+  it 'increments a previously versioned slug' do
+    expect(Slug.increment('demo-2')).to eq('demo-3')
+    expect(Slug.increment('नमस्कार-2')).to eq('नमस्कार-3')
+    expect(Slug.increment('مرحبا-2')).to eq('مرحبا-3')
+    expect(Slug.increment('-2')).to eq('-3')
+  end
+
+  it 'does not swallow user input when incrementing a slug' do
+    expect(Slug.increment('-')).to eq('--2')
   end
 
   def unicode_whitespace
