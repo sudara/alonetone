@@ -78,14 +78,12 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
     color: $white;
     padding-left: $baseline * 1.5;
     padding-right: $baseline * 1.5;
-
     &:hover {
       background-color: $primary-button-background-hover;
     }
     &:active {
       background-color: $primary-button-background-active;
     }
-  
   }
 
   @if $type == outline {
@@ -103,9 +101,7 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
     &:active {
       background-color: transparent;
     }
-  
   }
-
 
   @if $type == sub_nav {
     height: 24px;
@@ -116,7 +112,6 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
     padding-left: $baseline / 2;
     padding-right: $baseline / 2;
     background-color: $white;
-
   }
 }
 
