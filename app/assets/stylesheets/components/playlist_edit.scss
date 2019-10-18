@@ -194,17 +194,20 @@
       .private_warning {
         text-align: center;
       }
-
-      @media #{$one-column} {
-        padding-left: 12px;
-        padding-right: 12px;
-      }
       a.delete_playlist {
         margin-top: $baseline;
         @include default-button("outline");
         width: 160px;
         margin-left: 40px;
         padding: 0;
+        
+        @media #{$one-column} {
+          margin-left: $baseline / 2;
+        }  
+        @media only screen and (max-width: 360px) {
+          width: auto;
+          padding: 0 16px;
+        }  
       }
       input[type="submit"] {
         margin-top: $baseline;
@@ -214,6 +217,13 @@
         width: 160px;
         margin-right: 40px;
         cursor: pointer;
+        @media #{$one-column} {
+          margin-right: $baseline / 2;
+        }
+        @media only screen and (max-width: 360px) {
+          width: auto;
+          padding: 0 16px;
+        }  
       }
     }
   }
