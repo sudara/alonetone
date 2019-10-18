@@ -17,10 +17,12 @@
       <div class="edit_playlist_info_columns">
         <div class="edit_playlist_info_left_column">
           <label>ALBUM ARTWORK</label>
-          <%= link_to '#needstotriggerclickforform', :title => "#{@playlist.title}", :class => "cover" do %>
+          <div class="cover" data-target='playlist-form.cover' data-action='click->playlist-form#openFile' title="<%= @playlist.title %>">
             <%= playlist_cover(@playlist, variant: :playlist_card) %>
-            <%= f.file_field :cover_image  %>
-          <% end %>
+          </div>
+          <%= f.file_field :cover_image, data: { target: 'playlist-form.fileField', action: 'change->playlist-form#fileChanged' }, style: 'display:none'  %>
+          <%= f.label :cover_image, 'Upload Artwork...', data: { target: 'playlist-form.fileLabel' } %>
+          <%= link_to 'Remove Artwork', '', data: { action:  'playlist-form#removePic' } %>
           <p>
             Upload a square photo,<br> 2000px by 2000px for<br> best results.
           </p>
@@ -74,7 +76,7 @@
         </div>
 
         <div class="private_warning" data-target="playlist-form.needsTracksBanner" style="display:none">
-          This playlist will be private until <span class="only_user_name">at least 2 tracks</span> are added
+          This playlist will be hidden until it has <span class="only_user_name">at least 2 tracks</span>
         </div>
 
         <%= link_to 'Delete', user_playlist_path(@user, @playlist.permalink), :class => "delete_playlist", method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>

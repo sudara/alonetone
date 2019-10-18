@@ -3,7 +3,7 @@ import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['checkbox', 'actualCheckbox', 'markAsPrivate',
-    'needsTracksBanner', 'privateBanner']
+    'needsTracksBanner', 'privateBanner', 'fileField', 'fileLabel', 'cover']
 
   initialize() {
     this.tracksCount = 0
@@ -51,6 +51,35 @@ export default class extends Controller {
     // The label was clicked, so we still need to check the box
     this.actualCheckboxTarget.checked = !this.actualCheckboxTarget.checked
     this.actualCheckboxTarget.checked ? this.showPrivateBanner() : this.hidePrivateBanner()
+  }
+
+  openFile(e) {
+    this.fileLabelTarget.click()
+  }
+
+  fileChanged(e) {
+    this.displayPreview(e.target)
+  }
+
+
+  removePic(e) {
+    e.preventDefault()
+    this.coverTarget.innerHTML = '<div class="no_pic"></div>'
+    this.fileFieldTarget.value = ''
+
+  }
+
+  displayPreview(input) {
+    const reader = new FileReader()
+    if (input.files && input.files[0]) {
+      reader.onload = (e) => {
+        const image = document.createElement('img')
+        image.src = e.target.result
+        this.coverTarget.innerHTML = ''
+        this.coverTarget.appendChild(image)
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 
 }
