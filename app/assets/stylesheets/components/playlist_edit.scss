@@ -78,16 +78,20 @@
           font-family: $sans-font;
           font-size: 12px;
         }
-        form {
-          input {
-            margin-bottom: 8px;
+        label.upload_artwork {
+          margin-top: 10px;
+          color: $accent;
+          cursor: pointer;
+          text-transform: none;
+          font-size: 14px;
+          &:hover {
+            text-decoration: underline;
           }
-
         }
-        p {
+        p.upload_instructions {
           font-size: 12px;
           color: $font-color-five;
-          margin-top: 0;
+          margin-top: 12px;
         }
       }
       .edit_playlist_info_right_column {
