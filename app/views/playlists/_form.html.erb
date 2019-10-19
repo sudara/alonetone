@@ -21,12 +21,12 @@
             <%= playlist_cover(@playlist, variant: :playlist_card) %>
           </div>
           <%= f.file_field :cover_image, data: { target: 'playlist-form.fileField', action: 'change->playlist-form#fileChanged' }, style: 'display:none'  %>
-          <%= f.label :cover_image, 'Upload Artwork...', class:"upload_artwork", data: { target: 'playlist-form.fileLabel' } %>
+          <%= f.label :cover_image, 'Upload New Artwork...', class:"upload_artwork", data: { target: 'playlist-form.fileLabel' } %>
           <p class="upload_instructions">
             Upload a square photo,<br> 2000px by 2000px for<br> best results.
           </p>
-          
-          <%= link_to 'Remove Artwork', '', class:"remove_artwork", data: { action:  'playlist-form#removePic' } %>
+
+          <%# link_to 'Remove Artwork', '', class:"remove_artwork", data: { action:  'playlist-form#removePic' } %>
         </div>
 
         <div class="edit_playlist_info_right_column">
