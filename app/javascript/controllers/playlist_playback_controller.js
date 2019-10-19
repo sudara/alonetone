@@ -45,7 +45,7 @@ export default class extends PlaybackController {
     // Only fire ajax for the track that actually matches the new location
     // Remember, every track in the playlist will run this code on popstate
     if (newLocation === this.permalink) {
-      console.log('should be ajax')
+      // console.log('should be ajax')
       Rails.fire(this.loadTrackTarget, 'click')
       e.stopImmediatePropagation()
     }
