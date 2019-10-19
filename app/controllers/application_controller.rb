@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
   end
 
   def white_theme_enabled?
-    session[:white]
+    true # session[:white]
   end
 
   def not_found
