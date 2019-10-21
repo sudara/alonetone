@@ -23,7 +23,7 @@
         &.current {
           @include default_button(sub_nav);
           @include shadow-one-inner();
-          background-color: $accent;
+          background-color: $sub-nav-current-background;
           pointer-events: none;
           color: $white;
           white-space: nowrap;
