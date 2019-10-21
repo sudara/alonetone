@@ -31,6 +31,14 @@
       border-radius: 6px;
       padding-bottom: $baseline;
       h2 {
+        &::before {
+          position: absolute;
+          left: -38px;
+          content: image-url("svg/icon_static_page_anchor_link.svg");
+          width: 24px;
+          height: 24px;
+        
+        }
         @include title24();
         color: $static-page-h2-text;
         box-shadow: none;
@@ -53,8 +61,10 @@
         color: $static-page-paragraph-text;
         padding-left: $baseline * 2;
         padding-right: $baseline * 2;
-        padding-left: $baseline;
-        padding-right: $baseline;
+        @media #{$mobile} {
+          padding-left: $baseline;
+          padding-right: $baseline;
+        }
         a {
           color: $static-page-h2-text;
           text-decoration: underline;
