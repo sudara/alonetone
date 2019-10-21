@@ -57,10 +57,6 @@ class PlaylistsController < ApplicationController
 
   def new
     @playlist = @user.playlists.build(private: true)
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render xml: @playlist }
-    end
   end
 
   def edit
