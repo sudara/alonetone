@@ -34,19 +34,19 @@
         border-radius: 0;
         line-height: 20px;
         padding-top: $baseline * (7/3);
-        padding-bottom: 12px;
+        padding-bottom: 10px;
         padding-left: $baseline * 2;
         padding-right: $baseline * 2;
-        margin-top: 0;
-        border-top: 1px solid $static-page-content-seperator;
+        margin-top: $baseline * 2;
+        border-top: 2px solid $static-page-content-seperator;
         &:first-child {
-          // padding-top: 0px;
+          border-top: 0;
+          margin-top: 0;
         }
       }
       p {
         @include paragraph18();
         color: $static-page-paragraph-text;
-        line-height: 1.5;
         padding-left: $baseline * 2;
         padding-right: $baseline * 2;
       }
