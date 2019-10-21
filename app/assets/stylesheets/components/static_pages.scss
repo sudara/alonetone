@@ -49,6 +49,10 @@
         color: $static-page-paragraph-text;
         padding-left: $baseline * 2;
         padding-right: $baseline * 2;
+        a {
+          color: $static-page-h2-text;
+          text-decoration: underline;
+        }
       }
     }
   }
