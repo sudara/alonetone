@@ -15,37 +15,41 @@
     background-color: $static-page-heading-background;
   }
   .static_page_content {
-    background-color: $static-page-content-background;
-    position: relative;
-    top: -$baseline * 1.5;
-    max-width: $content_max_width;
+    max-width: $site_max_width;
+    box-sizing: border-box;
+    padding: 0 $baseline * 1.5;
     margin-left: auto;
     margin-right: auto;
-    @include shadow2();
-    border-radius: 6px;
-    padding-bottom: $baseline;
-    h2 {
-      @include title24();
-      color: $static-page-h2-text;
-      box-shadow: none;
-      border-radius: 0;
-      line-height: 20px;
-      padding-top: $baseline * (7/3);
-      padding-bottom: 12px;
-      padding-left: $baseline * 2;
-      padding-right: $baseline * 2;
-      margin-top: 0;
-      border-top: 1px solid $static-page-content-seperator;
-      &:first-child {
-        // padding-top: 0px;
+    .static_page_content_inner {
+      background-color: $static-page-content-background;
+      position: relative;
+      top: -$baseline * 1.5;
+      @include shadow2();
+      border-radius: 6px;
+      padding-bottom: $baseline;
+      h2 {
+        @include title24();
+        color: $static-page-h2-text;
+        box-shadow: none;
+        border-radius: 0;
+        line-height: 20px;
+        padding-top: $baseline * (7/3);
+        padding-bottom: 12px;
+        padding-left: $baseline * 2;
+        padding-right: $baseline * 2;
+        margin-top: 0;
+        border-top: 1px solid $static-page-content-seperator;
+        &:first-child {
+          // padding-top: 0px;
+        }
       }
-    }
-    p {
-      @include paragraph18();
-      color: $static-page-paragraph-text;
-      line-height: 1.5;
-      padding-left: $baseline * 2;
-      padding-right: $baseline * 2;
+      p {
+        @include paragraph18();
+        color: $static-page-paragraph-text;
+        line-height: 1.5;
+        padding-left: $baseline * 2;
+        padding-right: $baseline * 2;
+      }
     }
   }
 }
