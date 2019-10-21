@@ -56,7 +56,7 @@
     <% else %>
       <div><%= link_to "Sign Up", "/login"%></div>
     <% end %>
-      <div><%= link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
+      <div><%# link_to "Toggle Theme", "/toggle_theme", data: { turbolinks: 'false' } %></div>
     <% if moderator? %>
       <div><%= link_to "Admin", "/admin/users" %></div>
     <% end %>
