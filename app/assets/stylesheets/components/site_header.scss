@@ -2,9 +2,6 @@ header#site_header {
   background-color: $background-color-one;
   box-shadow: 0 3px 4px -2px #65666627;
   height: 60px;
-  > .header_search {
-    display: none !important; // Temporarily hide legacy theme search that wasn't inside the #site_header
-  }
   .header_inner {
     position: relative;
     margin-right: auto;
@@ -192,7 +189,14 @@ header#site_header {
             &:last-child {
               margin-bottom: 0;
             }
-
+            &:first-child {
+              &:hover {
+                a.edit_profile_item {
+                  border: 1px solid $accent;
+                  background: transparent;
+                }
+              }
+            }
             a.edit_profile_item {
               float: right;
               margin-right: $baseline / 2;
@@ -202,12 +206,8 @@ header#site_header {
               line-height: 1;
               padding-top: 9px;
               background: transparent;
-              color: $orange300;
-              border: 1px solid $grey900;
-              &:hover {
-                border: 1px solid $accent;
-                background: transparent;
-              }
+              color: $site-header-user-dropdown-profile-edit-text;
+              border: 1px solid $site-header-user-dropdown-profile-edit-border;
             }
           }
         }
@@ -218,7 +218,7 @@ header#site_header {
           padding-right: 16px;
           padding-top: $baseline / 2;
           margin-bottom: $baseline / 2;
-          a.switcher {
+          a.switch_to_theme {
             width: 120px;
             height: 28px;
             background-color: $accent;
@@ -227,7 +227,7 @@ header#site_header {
             &:hover {
               text-decoration: none;
             }
-            .switcher-label {
+            .switcher_label {
               color: $grey1200;
               font-size: 11px;
               font-weight: bold;
@@ -244,11 +244,33 @@ header#site_header {
               bottom: 3px;
               right: 3px;
             }
+            &.switch_to_light {
+              background-color: $accent;
+              .switcher_label {
+                color: $grey1200;
+              }
+              .switcher_inner {
+                bottom: 3px;
+                right: 3px;
+              }
+            }
+            &.switch_to_dark {
+              background-color: $grey400;
+              .switcher_inner {
+                bottom: 3px;
+                left: 3px;
+              }
+              .switcher_label {
+                color: $white;
+                padding-right: 14px;
+                text-align: right;
+              }
+            }
           }
           a.logout_item {
             @include default_button();
-            background-color: $site-header-user-dropdown-list-item-background;
-            color: $grey400;
+            background-color: $site-header-user-dropdown-logout-background;
+            color: $site-header-user-dropdown-logout-text;
             height: 28px;
             line-height: 30px;
             width: 100px;
