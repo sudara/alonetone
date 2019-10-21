@@ -286,6 +286,10 @@ form.button_to > .thredded--post--dropdown--actions--item {
   }
 }
 
+.thredded--pagination-top {
+  display: none;
+}
+
 .thredded--post-moderation-record--moderation-state-notice a,
 .thredded--post-moderation-record--content-changed-notice a,
 .thredded--link,
