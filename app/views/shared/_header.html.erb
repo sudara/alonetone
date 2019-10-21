@@ -31,12 +31,13 @@
           </ul>
 
           <div class="user_dropdown_menu_bottom_links">
-            <a href="#" class="switcher">
-              <div class="switcher-label">
-                DARK
-              </div>
-              <div class="switcher_inner">
-              </div>
+            <a href="#" class="switch_to_theme switch_to_light">
+              <div class="switcher_label">DARK</div>
+              <div class="switcher_inner"></div>
+            </a>
+            <a href="#" class="switch_to_theme switch_to_dark" style="display: none;">
+              <div class="switcher_inner"></div>
+              <div class="switcher_label">LIGHT</div>
             </a>
             <%= link_to 'Log Out', main_app.logout_path, class: 'logout_item', data: { turbolinks: "false" } %>
           </div>
