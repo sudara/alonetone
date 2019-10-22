@@ -49,25 +49,26 @@
           <div class="edit_profile_socials_columns">
             <div class="edit_profile_socials_left_column">
                   <label for="user_website">Website</label>
-                https://<%= f.text_field :website %>
+                <%== render file: svg_path('svg/icon_socials_website.svg') %> https://<%= f.text_field :website %>
 
                 <label for "user_spotify">Spotify</label>
-                https://open.spotify.com/artist/<%= f.text_field :spotify %>
+                <%== render file: svg_path('svg/icon_socials_spotify.svg') %> https://open.spotify.com/artist/<%= f.text_field :spotify %>
 
                 <label for "user_apple">Apple Music</label>
-                https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
+                <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
+
 
             </div>
             <div class="edit_profile_socials_right_column">
 
                 <label for "user_spotify">Bandcamp</label>
-                https://<%= f.text_field :bandcamp %>.bandcamp.com
+                <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %> https://<%= f.text_field :bandcamp %>.bandcamp.com
 
                 <label for "user_twitter">Twitter</label>
-                https://twitter.com/<%= f.text_field :twitter %>
+                <%== render file: svg_path('svg/icon_socials_twitter.svg') %> https://twitter.com/<%= f.text_field :twitter %>
 
                 <label for "user_instagram">Instagram</label>
-                https://instagram.com/<%= f.text_field :instagram %>
+                <%== render file: svg_path('svg/icon_socials_instagram.svg') %> https://instagram.com/<%= f.text_field :instagram %>
 
             </div>
           </div>
