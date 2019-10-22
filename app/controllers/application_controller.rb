@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  layout :white_or_normal
 
   # Sets ActiveStorage::Current.host based on the current request so all Active
   # Storage models can generate URLs out of the view context. This is mostly
