@@ -43,8 +43,6 @@
 
       <h3>Update social media links</h3>
 
-
-
       <%= form_with model: @user do |f| -%>
 
           <div class="edit_profile_socials_columns">
@@ -57,7 +55,6 @@
 
                 <label for "user_apple">Apple Music</label>
                 <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
-
 
             </div>
             <div class="edit_profile_socials_right_column">
@@ -75,8 +72,6 @@
 
             </div>
           </div>
-
-         
 
       <% end %>
       
@@ -141,30 +136,21 @@
 
     <% end %>
 
-</div>
+  </div>
 
   <div class="edit_profile_delete_your_account box">
 
     <h2>Delete your account</h2>
-    This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone<br/><br/>
-    <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
+    <p>
+      This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone. There is NO undo, so make sure you are certain before clicking the button below.
+    </p>
 
     <%= link_to "Delete", user_path(login: @user.login), method: :delete,
     data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."},
     class: 'delete_green' %>
-
-
-
   </div>
 
-  </div>
-
-  
-  
-
-
-
-
+</div>
 
 
 
