@@ -50,6 +50,8 @@
 
     <div class="edit_profile_socials">
 
+      <h3>Update social media links</h3>
+
       <%= form_with model: @user do |f| -%>
         <p>
           <label for="user_website">Have a website?</label>
@@ -82,48 +84,45 @@
 
       <% end %>
       
-      </div>
+    </div>
 
       <div class="edit_profile_settings">
+
+        <h3>Settings</h3>
         <%= form_for @user do |f| -%>
 
 
-            <label>Display play counts blatantly on all tracks?</label> <br/>
+            <label>Display play counts blatantly on all tracks?</label>
             <%= select_tag('user[settings][display_listen_count]',
                 options_for_select([['no thanks','false'], ['yes','true']],
                 user_setting(:display_listen_count))) %>
 
-
-
-            <label>Accept comments from guests?</label><br/>
+            <label>Accept comments from guests?</label>
             <%= select_tag('user[settings][block_guest_comments]',
                 options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']],
                 user_setting(:block_guest_comments))) %>
 
-            <label>Display most popular tracks on your home page?</label><br/>
+            <label>Display most popular tracks on your home page?</label>
             <%= select_tag('user[settings][most_popular]',
                 options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']],
                 user_setting(:most_popular))) %>
 
-            <label>Increase size of ego by 4x?</label><br/>
+            <label>Increase size of ego by 4x?</label>
             <%= select_tag('user[settings][increase_ego]',
                 options_for_select([['uhm, no thanks','false'], ['hell yes!','true']],
                 user_setting(:increase_ego))) %>
 
-            <label>Should we email you new comments on your tracks?</label><br/>
+            <label>Should we email you new comments on your tracks?</label>
             <%= select_tag('user[settings][email_comments]',
                 options_for_select([['of course, silly!','true'], ['I do not like email','false']],
                 user_setting(:email_comments))) %>
 
 
-            <label>Email notifications when folks you follow upload tracks?</label><br/>
+            <label>Email notifications when folks you follow upload tracks?</label>
             <%= select_tag('user[settings][email_new_tracks]',
                 options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']],
                 user_setting(:email_new_tracks))) %>
 
-
-
-            <%= submit_tag "Save Your Alonetone Settings" %>
 
           <% end %>
 
@@ -134,15 +133,14 @@
   <div class="edit_profile_change_your_login box">
 
     <%= form_with model: [@user, @profile] do |f| %>
-    <b>Change your login</b> 
-    WARNING: Changing this will break any mp3 players
-    you or anyone else has put on the web, as well as any links anyone has passed around
-    to your music, as well as confuse google about where your music is for a few weeks.<br/><br/>
+    <h2>Change your login</h2>
+    <p>
+      Changing this will break any mp3 players you or anyone else has put on the web, as well as any links anyone has passed around to your music, as well as confuse google about where your music is for a few weeks. Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.
+    </p>
 
-    Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.<br/>
-    alonetone.com/<%= f.text_field :login %>
-
-    <%= submit_tag "Change Your login and account name" %>
+    <div>
+      <div>alonetone.com/</div><%= f.text_field :login %><%= submit_tag "Update login name" %>
+    </div>
 
     <% end %>
 
@@ -150,7 +148,7 @@
 
   <div class="edit_profile_delete_your_account box">
 
-      <b>WARNING</b><br/>
+    <h2>Delete your account</h2>
     This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone<br/><br/>
     <b>There is NO undo</b>, so make sure you are certain before clicking the button below:<br/><br/>
 
