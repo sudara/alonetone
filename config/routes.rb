@@ -79,9 +79,9 @@ Alonetone::Application.routes.draw do
     resources :updates, :password_resets
     resources :comments
 
-    get  'about/' => 'pages#about'
-
-    %w(about press stats ok index privacy).each do |action|
+    get 'about/' => 'pages#about'
+    get 'about/why-i-built-alonetone' => 'pages#why'
+    %w(about press stats ok index privacy faq).each do |action|
       get "about/#{action}", to: "pages##{action}"
     end
 

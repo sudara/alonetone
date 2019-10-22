@@ -41,13 +41,13 @@ form {
   select {
     box-sizing: border-box;
     margin-bottom: $baseline;
-    border: 1px solid $border-color-six;
+    border: 2px solid $border-color-six;
     border-radius: 4px;
     background-color: $background-color-three;
     font-size: 14px;
     
     &:focus {
-      border: 1px solid $border-color-two;
+      border: 2px solid $accent;
     }
   }
   input {

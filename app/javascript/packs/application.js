@@ -35,7 +35,7 @@ function handlers() {
     }
   })
 
-  document.querySelectorAll('a .no_pic').forEach((pic) => {
+  document.querySelectorAll('a .no_pic, .cover .no_pic').forEach((pic) => {
     const title = pic.parentNode.getAttribute('title')
     if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))

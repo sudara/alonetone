@@ -5,37 +5,43 @@ RSpec.describe 'playlists', type: :feature, js: true do
   it 'renders track and cover pages' do
     logged_in do
       visit 'henriwillig/playlists/polderkaas'
+      first_track = find('ul.tracklist li:first-child')
 
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
       # Note: this only pauses GSAP animations
-      pause_animations
+      with_animations_paused do
+        first_track.hover
+        Percy.snapshot(page, name: 'Playlist Cover')
 
-      first_track = find('ul.tracklist li:first-child')
-      first_track.hover
-      Percy.snapshot(page, name: 'Playlist Cover')
-
-      # This click will be an ajax request
-      # And in some cases our Snapshot will fire before the DOM is updated
-      # Capybara is good at waiting if we specify an expectation
-      # so let's specify one before we snap
-      first_track.find('a:first-child').click
-      expect(page).to have_selector(".player")
-      Percy.snapshot(page, name: 'Playlist Track Loading')
-
-      resume_animations
+        # This click will be an ajax request
+        # And in some cases our Snapshot will fire before the DOM is updated
+        # Capybara is good at waiting if we specify an expectation
+        # so let's specify one before we snap
+        first_track.find('a:first-child').click
+        expect(page).to have_selector(".player")
+        Percy.snapshot(page, name: 'Playlist Track Loading')
+      end
 
       # Navigating away and back, we should still be playing
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
 
-      find('.waveform').click(x: 200, y: 10)
-      sleep(0.2) # let animations catch up
-      find('.waveform').click(x: 200, y: 10) # reduce glitch
-      pause_animations
-      find('.play-button-container a').click # pause
-      Percy.snapshot(page, name: 'Playlist Track Play, Seek, Pause')
+      with_animations_paused do
+        find('.waveform').click(x: 200, y: 10)
+        fast_forward_animations # allow playhead to animate
+        pause_animations
+        find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
+        find('.play-button-container a').click # pause
+
+        # The time between seeking and pausing is variable
+        # So we manually adjust the playhead end state to the exact
+        # same position for the percy snap.
+        Percy.snapshot(page,
+          name: 'Playlist Track Play, Seek, Pause',
+          percy_css: '.progress-container-inner { left: 40%; }')
+      end
     end
   end
 
@@ -47,14 +53,17 @@ RSpec.describe 'playlists', type: :feature, js: true do
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
 
-      # Ensure custom checkboxes are happy
-      find('.edit_playlist_info_right_column_private_and_hidden label').click
+      pause_animations
 
       # add 2 new tracks
       first_upload = find('#your_uploads .asset:nth-child(1) .add')
       first_upload.click
+      expect(page).to have_selector('.sortable .asset', count: 2)
       first_upload.click
       expect(page).to have_selector('.sortable .asset', count: 3)
+
+      # Ensure custom checkboxes are happy
+      find('.edit_playlist_info_right_column_private_and_hidden label').click
 
       # Move "Manfacturer of the Finest Cheese" to be the last song
       first_track_handle = find('.sortable .asset:first-child .drag_handle')

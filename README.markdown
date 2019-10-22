@@ -1,5 +1,6 @@
 [![Build Status](https://api.travis-ci.com/sudara/alonetone.svg?branch=master)](http://travis-ci.com/sudara/alonetone)
 [![Code Climate](https://api.codeclimate.com/v1/badges/d1f4fb0a4b8690332e86/maintainability)](https://codeclimate.com/github/sudara/alonetone/maintainability)
+[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/alonetone/alonetone)
 
 [![View performance data on Skylight](https://badges.skylight.io/problem/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)
 [![View performance data on Skylight](https://badges.skylight.io/typical/QMmsxBDrac9Q.svg)](https://oss.skylight.io/app/applications/QMmsxBDrac9Q)

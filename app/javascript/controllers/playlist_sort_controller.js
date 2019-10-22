@@ -15,6 +15,12 @@ export default class extends Controller {
     this.sortUrl = this.sortUrlTarget.getAttribute('href')
     this.spinnerTarget.style.display = 'none'
     this.currentParams = this.paramsFromSortables()
+    this.playlistForm = this.application.getControllerForElementAndIdentifier(document.querySelector('#edit_playlist_info'), 'playlist-form')
+    this.playlistForm.updateCount(this.numberOfTracks)
+  }
+
+  get numberOfTracks() {
+    return this.sortableTarget.childElementCount
   }
 
   // track[]=146023&track[]=146024&track[]=146025
@@ -41,10 +47,11 @@ export default class extends Controller {
   }
 
   updatePlaylistMetadata() {
-    const size = this.sortableTarget.childElementCount
+    const size = this.numberOfTracks
     this.sizeTarget.innerHTML = `${size}`
     this.trackCountTarget.innerHTML = `${size} tracks`
     this.totalTimeTarget.innerHTML = this.calculateTime()
+    this.playlistForm.updateCount(size)
   }
 
   calculateTime() {
