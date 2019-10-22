@@ -18,117 +18,110 @@
       <div class="edit_profile_top_right">
             <%= form_with model: @user do |f| -%>
             
-              <p>
-                <label for="display_name">Name</label>
-                <%= f.text_field :display_name %>
-              </p>
+              <label for="display_name">Name</label>
+              <%= f.text_field :display_name %>
 
-             <p>
               <label for="user_bio">City</label>
               <%= f.text_field :city %>
-            </p>
 
-            <p>
-              <label for="user_country">Country</label><br />
+              <label for="user_country">Country</label>
               <%= f.country_select(:country, ['United States'], include_blank: true) %>
-            </p>
 
-            <p>
-              <label for="user_bio">Bio</label><br/>
+              <label for="user_bio">Bio</label>
               <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
-            </p>
-
 
             <% end %>
 
             <a href="#">Cancel</a>
             <a href="#">Save</a>
-            
-
       </div>
     </div>
+    <div class="edit_profile_separator"></div>
 
     <div class="edit_profile_socials">
 
       <h3>Update social media links</h3>
 
+
+
       <%= form_with model: @user do |f| -%>
-        <p>
-          <label for="user_website">Have a website?</label>
-          https://<%= f.text_field :website %>
-        </p>
 
-        <p>
-          <label for "user_spotify>Are you on Spotify?</label>
-          https://open.spotify.com/artist/<%= f.text_field :spotify %>
-        </p>
-        <p>
-          <label for "user_apple>Apple Music?</label>
-          https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
-        </p>
-        <p>
-          <label for "user_spotify>Are you on Bandcamp?</label>
-          https://<%= f.text_field :bandcamp %>.bandcamp.com
-        </p>
+          <div class="edit_profile_socials_columns">
+            <div class="edit_profile_socials_left_column">
+                  <label for="user_website">Website</label>
+                https://<%= f.text_field :website %>
 
-        <p>
-          <label for "user_twitter">Twitter?</label>
-          https://twitter.com/<%= f.text_field :twitter %>
-        </p>
+                <label for "user_spotify">Spotify</label>
+                https://open.spotify.com/artist/<%= f.text_field :spotify %>
 
-        <p>
-          <label for "user_instagram">Insta?</label>
-          https://instagram.com/<%= f.text_field :instagram %>
-        </p>
-      
+                <label for "user_apple">Apple Music</label>
+                https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
+
+            </div>
+            <div class="edit_profile_socials_right_column">
+
+                <label for "user_spotify">Bandcamp</label>
+                https://<%= f.text_field :bandcamp %>.bandcamp.com
+
+                <label for "user_twitter">Twitter</label>
+                https://twitter.com/<%= f.text_field :twitter %>
+
+                <label for "user_instagram">Instagram</label>
+                https://instagram.com/<%= f.text_field :instagram %>
+
+            </div>
+          </div>
+
+         
 
       <% end %>
       
     </div>
+    <div class="edit_profile_separator"></div>
 
       <div class="edit_profile_settings">
 
         <h3>Settings</h3>
         <%= form_for @user do |f| -%>
 
+          <div class="edit_profile_settings_columns">
+            <div class="edit_profile_settings_left_column">
+              <label>Display play counts blatantly on all tracks?</label>
+                <%= select_tag('user[settings][display_listen_count]',
+                    options_for_select([['no thanks','false'], ['yes','true']],
+                    user_setting(:display_listen_count))) %>
 
-            <label>Display play counts blatantly on all tracks?</label>
-            <%= select_tag('user[settings][display_listen_count]',
-                options_for_select([['no thanks','false'], ['yes','true']],
-                user_setting(:display_listen_count))) %>
+                <label>Accept comments from guests?</label>
+                <%= select_tag('user[settings][block_guest_comments]',
+                    options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']],
+                    user_setting(:block_guest_comments))) %>
 
-            <label>Accept comments from guests?</label>
-            <%= select_tag('user[settings][block_guest_comments]',
-                options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']],
-                user_setting(:block_guest_comments))) %>
+                <label>Display most popular tracks on your home page?</label>
+                <%= select_tag('user[settings][most_popular]',
+                    options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']],
+                    user_setting(:most_popular))) %>
+            </div>
+            <div class="edit_profile_settings_right_column">
+              <label>Increase size of ego by 4x?</label>
+              <%= select_tag('user[settings][increase_ego]',
+                  options_for_select([['uhm, no thanks','false'], ['hell yes!','true']],
+                  user_setting(:increase_ego))) %>
 
-            <label>Display most popular tracks on your home page?</label>
-            <%= select_tag('user[settings][most_popular]',
-                options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']],
-                user_setting(:most_popular))) %>
-
-            <label>Increase size of ego by 4x?</label>
-            <%= select_tag('user[settings][increase_ego]',
-                options_for_select([['uhm, no thanks','false'], ['hell yes!','true']],
-                user_setting(:increase_ego))) %>
-
-            <label>Should we email you new comments on your tracks?</label>
-            <%= select_tag('user[settings][email_comments]',
-                options_for_select([['of course, silly!','true'], ['I do not like email','false']],
-                user_setting(:email_comments))) %>
+              <label>Should we email you new comments on your tracks?</label>
+              <%= select_tag('user[settings][email_comments]',
+                  options_for_select([['of course, silly!','true'], ['I do not like email','false']],
+                  user_setting(:email_comments))) %>
 
 
-            <label>Email notifications when folks you follow upload tracks?</label>
-            <%= select_tag('user[settings][email_new_tracks]',
-                options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']],
-                user_setting(:email_new_tracks))) %>
-
+              <label>Email notifications when folks you follow upload tracks?</label>
+              <%= select_tag('user[settings][email_new_tracks]',
+                  options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']],
+                  user_setting(:email_new_tracks))) %>
+            </div>
+          </div>
 
           <% end %>
-
     </div>
-
-  
   </div>
   <div class="edit_profile_change_your_login box">
 

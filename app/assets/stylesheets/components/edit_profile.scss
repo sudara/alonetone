@@ -6,20 +6,32 @@
   margin-right: auto;
 
   .edit_profile_top {
+    display: flex;
     .edit_profile_top_left {
+      
       
     }
     .edit_profile_top_right {
 
     }
   }
+  .edit_profile_separator {
+    height: 1px;
+    background-color: $grey100;
+  }
 
   .edit_profile_socials {
+    .edit_profile_socials_columns {
+      display: flex;
+    }
 
   }
 
-  .edit_profile_settings {
+  .edit_profile_settings {  
 
+    .edit_profile_settings_columns {
+      display: flex;
+    }
   }
 
   .edit_profile_change_your_login {
@@ -27,7 +39,7 @@
   }
 
   .edit_profile_delete_your_account {
-    
+
   }
   
 }
