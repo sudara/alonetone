@@ -81,7 +81,7 @@ Alonetone::Application.routes.draw do
 
     get 'about/' => 'pages#about'
     get 'about/why-i-built-alonetone' => 'pages#why'
-    %w(about press stats ok index privacy faq).each do |action|
+    %w(about press stats ok help privacy faq).each do |action|
       get "about/#{action}", to: "pages##{action}"
     end
 
