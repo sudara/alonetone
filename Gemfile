@@ -32,7 +32,7 @@ gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 
 # view
-gem 'redcarpet'
+gem 'commonmarker'
 gem 'country_select'
 gem 'dynamic_form'
 gem 'local_time'
