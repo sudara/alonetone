@@ -53,16 +53,17 @@ RSpec.describe 'playlists', type: :feature, js: true do
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
 
-      # Ensure custom checkboxes are happy
-      find('.edit_playlist_info_right_column_private_and_hidden label').click
-
       pause_animations
 
       # add 2 new tracks
       first_upload = find('#your_uploads .asset:nth-child(1) .add')
       first_upload.click
+      expect(page).to have_selector('.sortable .asset', count: 2)
       first_upload.click
       expect(page).to have_selector('.sortable .asset', count: 3)
+
+      # Ensure custom checkboxes are happy
+      find('.edit_playlist_info_right_column_private_and_hidden label').click
 
       # Move "Manfacturer of the Finest Cheese" to be the last song
       first_track_handle = find('.sortable .asset:first-child .drag_handle')
