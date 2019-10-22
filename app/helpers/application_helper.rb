@@ -68,24 +68,18 @@ module ApplicationHelper
     text.html_safe
   end
 
+  # comments, credits
   def markdown(text)
     return "" unless text
 
-    @@renderer ||= begin
-                     html = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, link_attributes: { rel: "nofollow" })
-                     Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
-                   end
-    Redcarpet::Render::SmartyPants.render(@@renderer.render(text)).html_safe
+    CommonMarker.render_doc(text, :SMART).to_html([:NOBREAKS]).html_safe
   end
 
+  # full track description
   def markdown_with_html(text)
     return "" unless text
 
-    @@renderer_with_html ||= begin
-                     html = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { rel: "nofollow" })
-                     Redcarpet::Markdown.new(html, autolink: true, no_intraemphasis: true)
-                   end
-    Redcarpet::Render::SmartyPants.render(@@renderer_with_html.render(text)).html_safe
+    CommonMarker.render_doc(text, :SMART).to_html(:HARDBREAKS).html_safe
   end
 
   def link_to_play(asset, referer = nil)
