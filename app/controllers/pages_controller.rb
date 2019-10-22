@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout :old_or_white
+  layout 'pages', only: [:about, :faq, :why, :privacy]
 
   def twentyfour
     render layout: '24houralbum'
@@ -48,10 +48,6 @@ class PagesController < ApplicationController
     render(text: "O Hai. You can haz alonetone. kthxbai!")
   end
 
-  def about
-    @page_title = "About"
-  end
-
   def press; end
 
   def stats
@@ -85,10 +81,6 @@ class PagesController < ApplicationController
   end
 
   protected
-
-  def old_or_white
-    white_theme_enabled? ? 'about' : 'pages'
-  end
 
   def set_2009_albums
     ids_2009 = [986, 951, 945, 924, 912, 915, 916, 918, 921, 923,
