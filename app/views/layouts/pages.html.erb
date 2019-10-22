@@ -1,21 +1,18 @@
-<% content_for :pages do %>
-  <div id="static_header">
-    <div class="title">
-      <h1 class="static">All about alonetone</h1>
-    </div>
-      <div id="links">
-        <ul class="links">
-          <%= navigation_item "What is alonetone?", { controller: 'pages', action: 'index' }, title: 'about alonetone' %>
-          <%= navigation_item "Press", { controller: 'pages', action: 'press' }, title: 'press and promotional info' %>
-          <%= navigation_item "Stats", { controller: 'pages', action: 'stats'}, added_class: 'contact', title: 'alonetone statistics' %>
-          <%= navigation_item "Latest News", blog_home_path, added_class: 'contact', title: 'Blog' %>
-        </ul>
+<% content_for :static do %>
+
+  <div class="static_page">
+    <%= render partial: 'pages/navigation' %>
+
+    <h1 class="static_page_heading">
+      Static Page Title
+    </h1>
+
+    <div class="static_page_content">
+      <div class="static_page_content_inner">
+        <%= yield %>
       </div>
-      <%= yield :pagination %>
+    </div>
   </div>
-  <% content_for :static do %>
-    <%= yield %>
-  <% end %>
 <% end %>
 
-<%= render file: "layouts/application"%>
+<%= render template: 'layouts/application' %>
