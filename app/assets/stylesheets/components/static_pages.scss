@@ -22,7 +22,7 @@
     @media #{$mobile} {
       padding-left: 0;
       padding-right: 0;
-    }    
+    }
     .static_page_content_inner {
       background-color: $static-page-content-background;
       position: relative;
@@ -37,7 +37,7 @@
           content: image-url("svg/icon_static_page_anchor_link.svg");
           width: 24px;
           height: 24px;
-        
+
         }
         @include title24();
         color: $static-page-h2-text;
@@ -48,7 +48,7 @@
         @media #{$mobile} {
           padding-left: $baseline;
           padding-right: $baseline;
-        }    
+        }
         margin-top: $baseline * 2;
         border-top: 2px solid $static-page-content-seperator;
         &:first-child {
@@ -58,6 +58,8 @@
       }
       p {
         @include paragraph18();
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         color: $static-page-paragraph-text;
         padding-left: $baseline * 2;
         padding-right: $baseline * 2;

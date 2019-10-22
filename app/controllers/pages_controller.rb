@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout 'pages', only: [:about, :faq, :why, :privacy]
+  layout 'pages', only: %i[about faq help why privacy]
 
   def twentyfour
     render layout: '24houralbum'
@@ -13,6 +13,10 @@ class PagesController < ApplicationController
 
   def about
     @page_title = "About alonetone"
+  end
+
+  def help
+    @page_title = "Help!"
   end
 
   def privacy

@@ -36,5 +36,4 @@ The basic ability to upload and share music without ads or payment will exist as
 
 Yup! We are open-minded to contributions at [github](http://github.com/sudara/alonetone).
 
-Thanks to the nice people at [BrowserStack](https://browserstack.com) and [Skylight](https://skylight.io)
- for providing their services free for open source projects.
+Thanks to the nice people at [BrowserStack](https://browserstack.com) and [Skylight](https://skylight.io) for providing their services free for open source projects.
