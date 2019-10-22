@@ -47,8 +47,8 @@ end
 # Create admin account.
 admin_password = selected_password
 admin = User.create!(
-  login: 'admin',
-  email: 'admin@example.com',
+  login: 'owner',
+  email: 'owner@example.com',
   password: admin_password,
   password_confirmation: admin_password,
   admin: true,

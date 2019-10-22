@@ -9,7 +9,7 @@
 
     <%= f.text_area :body, rows:4, class: 'double_trouble', id: nil, data: { target: 'comment.textarea' } , id: "comment_body_#{asset.unique_id}"  %>
 
-    <span class="private hidden" data-target="comment.banner">
+    <span class="private private_warning hidden" data-target="comment.banner">
       Only <span class="only_user_name"><%= asset.user.name%></span> and <span class="only_alonetone_mods">alonetone mods</span> will see this
     </span>
 
