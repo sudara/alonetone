@@ -7,8 +7,9 @@
 
     <div class="edit_profile_top">
       <div class="edit_profile_top_left">
+          <label>Profile Picture</label>
           <%= user_image(@user, variant: :album) %>
-          Upload a new photo. (1000px by 1000px square for best results)
+          <p>Upload a new photo. (1000px by 1000px square for best results)</p>
           <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
             <%= submit_tag "Upload New Pic" %>
@@ -69,6 +70,8 @@
 
                 <label for "user_instagram">Instagram</label>
                 <%== render file: svg_path('svg/icon_socials_instagram.svg') %> https://instagram.com/<%= f.text_field :instagram %>
+
+                <a href="#">Update links</a>
 
             </div>
           </div>
