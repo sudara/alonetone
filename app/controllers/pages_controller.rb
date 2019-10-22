@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   end
 
   def about
-    @page_title = "alonetone"
+    @page_title = "About alonetone"
   end
 
   def privacy
