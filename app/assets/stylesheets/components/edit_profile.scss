@@ -93,10 +93,21 @@
       .edit_profile_socials_left_column {
         margin-right: 10px;
         flex: 1;
+        .row:last-child {
+          input {
+            margin-bottom: 0;
+          }
+        }
       }
       .edit_profile_socials_right_column {
         margin-left: 10px;
         flex: 1;
+        a {
+          @include default-button('primary');
+          width: 160px;
+          float: right;
+          margin-top: 23px;
+        }
       }
       label {
         padding-left: 40px;
@@ -107,6 +118,7 @@
           margin-right: 8px;
           border: 1px transparent;
           margin-top: 3px;
+          flex-shrink: 0;
         }
         div {
           background-color: $grey50;
@@ -132,6 +144,30 @@
           height: 32px;
           padding-left: 8px;
           padding-top: 9px;
+          width: 100%;
+        }
+        &.reversed {
+          div {
+            padding-left: 4px;
+            padding-right: 8px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            margin-left: 4px;
+          }
+          input {
+            margin-left: 0px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+        &.just_input {
+          input {
+            border-radius: 4px;
+          } 
         }
       }
     }

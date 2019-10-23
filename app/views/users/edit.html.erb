@@ -65,41 +65,41 @@
           <div class="edit_profile_socials_columns">
             <div class="edit_profile_socials_left_column">
                 <label for="user_website">Website</label>
-                <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_website.svg') %> <div>https://</div><%= f.text_field :website %>
+                <div class="row just_input">
+                  <%== render file: svg_path('svg/icon_socials_website.svg') %> <%= f.text_field :website %>
                 </div>
 
                 <label for "user_spotify">Spotify</label>
                 <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_spotify.svg') %> <div>https://open.spotify.com/artist/</div><%= f.text_field :spotify %>
+                  <%== render file: svg_path('svg/icon_socials_spotify.svg') %> <div>open.spotify.com/artist/</div><%= f.text_field :spotify %>
                 </div>
 
                 <label for "user_apple">Apple Music</label>
                 <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> <div>https://itunes.apple.com/us/artist/</div><%= f.text_field :apple %>
+                  <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> <div>itunes.apple.com/us/artist/</div><%= f.text_field :apple %>
                 </div>
 
                 <label for "user_youtube">YouTube</label>
                 <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_youtube.svg') %> <div>https://itunes.apple.com/us/artist/</div><%= f.text_field :apple %>
+                  <%== render file: svg_path('svg/icon_socials_youtube.svg') %> <div>youtube.com/</div><%= f.text_field :apple %>
                 </div>
 
             </div>
             <div class="edit_profile_socials_right_column">
 
                 <label for "user_spotify">Bandcamp</label>
-                <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %> <div>https://</div><%= f.text_field :bandcamp %>.bandcamp.com
+                <div class="row reversed">
+                  <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %> <%= f.text_field :bandcamp %><div>.bandcamp.com</div>
                 </div>
 
                 <label for "user_twitter">Twitter</label>
                 <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_twitter.svg') %> <div>https://twitter.com/</div><%= f.text_field :twitter %>
+                  <%== render file: svg_path('svg/icon_socials_twitter.svg') %> <div>twitter.com/</div><%= f.text_field :twitter %>
                 </div>
 
                 <label for "user_instagram">Instagram</label>
                 <div class="row">
-                  <%== render file: svg_path('svg/icon_socials_instagram.svg') %> <div>https://instagram.com/</div><%= f.text_field :instagram %>
+                  <%== render file: svg_path('svg/icon_socials_instagram.svg') %> <div>instagram.com/</div><%= f.text_field :instagram %>
                 </div>
 
                 <a href="#">Update links</a>
