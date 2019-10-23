@@ -5,13 +5,38 @@
   margin-left: auto;
   margin-right: auto;
 
+  h1 {
+    @include title24();
+    border-bottom: 0;
+    line-height: 1;
+    height: $baseline * (8/3);
+    padding-left: $baseline * (3/2);
+    padding-top: 24px;
+  }
+
   .edit_profile_top {
+    padding: $baseline * 1.5;
+
     display: flex;
     .edit_profile_top_left {
+      margin-right: 58px; 
+      .user_avatar {
+        border: 1px dashed $border-color-three;
+        padding: 4px;
+        display: inline-block;
+        img {
+          width: 240px;
+          display: block;
+        }
+
+      }
       
       
     }
     .edit_profile_top_right {
+      a {
+        @include default-button();
+      }
 
     }
   }

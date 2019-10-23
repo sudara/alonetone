@@ -23,19 +23,7 @@ form {
   br {
     display: none;
   }
-  label {
-    margin-bottom: 8px !important;
-    font-family: $medium-sans-font;
-    font-size: 12px;
-    display: block;
-    margin: 2px 0;
-    text-align: left;
-    text-transform: uppercase;
-    color: $font-color-five;
-    abbr {
-      display: none;
-    }
-  }
+
   input,
   textarea,
   select {
@@ -59,6 +47,20 @@ form {
     font-family: $medium-sans-font;
     width: 100%;
     padding: 9px 10px 6px 10px;
+  }
+}
+
+label {
+  margin-bottom: 8px !important;
+  font-family: $medium-sans-font;
+  font-size: 12px;
+  display: block;
+  margin: 2px 0;
+  text-align: left;
+  text-transform: uppercase;
+  color: $font-color-five;
+  abbr {
+    display: none;
   }
 }
 

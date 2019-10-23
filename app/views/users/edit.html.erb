@@ -3,13 +3,22 @@
   <div class="edit_profile">
 
   <div class="box">
-    <h2>Edit Profile</h2>
+    
+    <h1>Edit Profile</h1>
+
+    <div class="edit_profile_separator"></div>
 
     <div class="edit_profile_top">
       <div class="edit_profile_top_left">
           <label>Profile Picture</label>
-          <%= user_image(@user, variant: :album) %>
-          <p>Upload a new photo. (1000px by 1000px square for best results)</p>
+          <div class="user_avatar">
+            <%= user_image(@user, variant: :edit_profile_avatar) %>
+          </div>
+
+          <p>
+            Upload a square photo<br>
+            2000px by 2000px for the best results
+          </p>
           <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
             <%= f.file_field :pic  %>
             <%= submit_tag "Upload New Pic" %>
@@ -55,6 +64,9 @@
 
                 <label for "user_apple">Apple Music</label>
                 <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
+
+                <label for "user_youtube">YouTube</label>
+                <%== render file: svg_path('svg/icon_socials_youtube.svg') %> https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
 
             </div>
             <div class="edit_profile_socials_right_column">
