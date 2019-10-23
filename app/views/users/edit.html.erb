@@ -15,14 +15,13 @@
             <%= user_image(@user, variant: :edit_profile_avatar) %>
           </div>
 
-          <p>
+          <a href="#" class="upload_image">Upload profile image&hellip;</a>
+
+          <p class="instructions">
             Upload a square photo<br>
             2000px by 2000px for the best results
           </p>
-          <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
-            <%= f.file_field :pic  %>
-            <%= submit_tag "Upload New Pic" %>
-          <% end %>
+
       </div>
     
       <div class="edit_profile_top_right">
@@ -30,22 +29,31 @@
             
               <label for="display_name">Name</label>
               <%= f.text_field :display_name %>
+              
+              <div class="city_and_country">
 
-              <label for="user_bio">City</label>
-              <%= f.text_field :city %>
+                <div>
+                  <label for="user_bio">City</label>
+                  <%= f.text_field :city %>
+                </div>
 
-              <label for="user_country">Country</label>
-              <%= f.country_select(:country, ['United States'], include_blank: true) %>
+                <div>
+                  <label for="user_country">Country</label>
+                    <%= f.text_field :city %>
+                </div>
 
+              </div>
+              
               <label for="user_bio">Bio</label>
               <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
 
             <% end %>
 
+            <a href="#">Save profile</a>
             <a href="#">Cancel</a>
-            <a href="#">Save</a>
       </div>
     </div>
+
     <div class="edit_profile_separator"></div>
 
     <div class="edit_profile_socials">
@@ -56,29 +64,43 @@
 
           <div class="edit_profile_socials_columns">
             <div class="edit_profile_socials_left_column">
-                  <label for="user_website">Website</label>
-                <%== render file: svg_path('svg/icon_socials_website.svg') %> https://<%= f.text_field :website %>
+                <label for="user_website">Website</label>
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_website.svg') %> <div>https://</div><%= f.text_field :website %>
+                </div>
 
                 <label for "user_spotify">Spotify</label>
-                <%== render file: svg_path('svg/icon_socials_spotify.svg') %> https://open.spotify.com/artist/<%= f.text_field :spotify %>
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_spotify.svg') %> <div>https://open.spotify.com/artist/</div><%= f.text_field :spotify %>
+                </div>
 
                 <label for "user_apple">Apple Music</label>
-                <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_apple_music.svg') %> <div>https://itunes.apple.com/us/artist/</div><%= f.text_field :apple %>
+                </div>
 
                 <label for "user_youtube">YouTube</label>
-                <%== render file: svg_path('svg/icon_socials_youtube.svg') %> https://itunes.apple.com/us/artist/<%= f.text_field :apple %>
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_youtube.svg') %> <div>https://itunes.apple.com/us/artist/</div><%= f.text_field :apple %>
+                </div>
 
             </div>
             <div class="edit_profile_socials_right_column">
 
                 <label for "user_spotify">Bandcamp</label>
-                <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %> https://<%= f.text_field :bandcamp %>.bandcamp.com
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %> <div>https://</div><%= f.text_field :bandcamp %>.bandcamp.com
+                </div>
 
                 <label for "user_twitter">Twitter</label>
-                <%== render file: svg_path('svg/icon_socials_twitter.svg') %> https://twitter.com/<%= f.text_field :twitter %>
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_twitter.svg') %> <div>https://twitter.com/</div><%= f.text_field :twitter %>
+                </div>
 
                 <label for "user_instagram">Instagram</label>
-                <%== render file: svg_path('svg/icon_socials_instagram.svg') %> https://instagram.com/<%= f.text_field :instagram %>
+                <div class="row">
+                  <%== render file: svg_path('svg/icon_socials_instagram.svg') %> <div>https://instagram.com/</div><%= f.text_field :instagram %>
+                </div>
 
                 <a href="#">Update links</a>
 
