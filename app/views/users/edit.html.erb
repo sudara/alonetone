@@ -119,37 +119,62 @@
 
           <div class="edit_profile_settings_columns">
             <div class="edit_profile_settings_left_column">
-              <label>Display play counts blatantly on all tracks?</label>
-                <%= select_tag('user[settings][display_listen_count]',
-                    options_for_select([['no thanks','false'], ['yes','true']],
-                    user_setting(:display_listen_count))) %>
+              
 
+              <div class="setting">
+                <label>Display play counts blatantly on all tracks?</label>
+                <div class="toggle on_off_toggle">
+                  <div class="toggle_inner"></div>
+                </div>
+              </div>
+
+
+              <div class="edit_profile_separator"></div>
+
+              <div class="setting">
                 <label>Accept comments from guests?</label>
-                <%= select_tag('user[settings][block_guest_comments]',
-                    options_for_select([['yes, anyone can comment','false'], ['no, Alonetoners only please','true']],
-                    user_setting(:block_guest_comments))) %>
+                <div class="toggle on_off_toggle">
+                  <div class="toggle_inner"></div>
+                </div>
+              </div>
 
+              <div class="edit_profile_separator"></div>
+
+              <div class="setting">
                 <label>Display most popular tracks on your home page?</label>
-                <%= select_tag('user[settings][most_popular]',
-                    options_for_select([['nope, stick with just the latest','false'], ['oh, pretty please!','true']],
-                    user_setting(:most_popular))) %>
+                <div class="toggle on_off_toggle">
+                  <div class="toggle_inner"></div>
+                </div>
+              </div>              
+
             </div>
             <div class="edit_profile_settings_right_column">
-              <label>Increase size of ego by 4x?</label>
-              <%= select_tag('user[settings][increase_ego]',
-                  options_for_select([['uhm, no thanks','false'], ['hell yes!','true']],
-                  user_setting(:increase_ego))) %>
+              
+              <div class="setting">
+                <label>Increase size of ego by 4x?</label>
+                <div class="toggle on_off_toggle">
+                  <div class="toggle_inner"></div>
+                </div>
+              </div>
 
-              <label>Should we email you new comments on your tracks?</label>
-              <%= select_tag('user[settings][email_comments]',
-                  options_for_select([['of course, silly!','true'], ['I do not like email','false']],
-                  user_setting(:email_comments))) %>
+              <div class="edit_profile_separator"></div>
+              
+              <div class="setting">
+                <label>Should we email you new comments on your tracks?</label>
+                <div class="toggle on_off_toggle">
+                  <div class="toggle_inner"></div>
+                </div>
+              </div>
 
-
-              <label>Email notifications when folks you follow upload tracks?</label>
-              <%= select_tag('user[settings][email_new_tracks]',
-                  options_for_select([['please! it helps me keep track of the artists i love','true'], ['I told you already, I hate email','false']],
-                  user_setting(:email_new_tracks))) %>
+              <div class="edit_profile_separator"></div>
+              
+              <div class="setting">
+                <label>Email notifications when folks you follow upload tracks?</label>
+                <div class="toggle on_off_toggle">
+                  <div class="toggle_inner"></div>
+                </div>
+              </div>
+              
             </div>
           </div>
 

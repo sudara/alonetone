@@ -22,7 +22,7 @@
 
     display: flex;
     .edit_profile_top_left {
-      margin-right: 58px; 
+      margin-right: 58px;
       width: 250px;
       .user_avatar {
         border: 1px dashed $border-color-three;
@@ -73,7 +73,7 @@
         margin-bottom: $baseline * (8/3);
       }
       a {
-        @include default-button('primary');
+        @include default-button("primary");
         float: right;
         width: 160px;
         &:first-of-type {
@@ -103,7 +103,7 @@
         margin-left: 10px;
         flex: 1;
         a {
-          @include default-button('primary');
+          @include default-button("primary");
           width: 160px;
           float: right;
           margin-top: 23px;
@@ -167,31 +167,65 @@
         &.just_input {
           input {
             border-radius: 4px;
-          } 
+          }
         }
       }
     }
   }
 
-  .edit_profile_settings {  
-
+  .edit_profile_settings {
+    padding: $baseline * (3/2);
+    h3 {
+      @include title20();
+      margin-top: 0;
+      margin-bottom: 28px;
+    }
     .edit_profile_settings_columns {
       display: flex;
+      .setting {
+        display: flex;
+
+        label {
+          @include paragraph16();
+          color: $grey800;
+          text-transform: none;
+          flex: 1;
+          margin-bottom: 0;
+          line-height: 1.5;
+        }
+        .toggle {
+          width: 72px;
+          height: 32px;
+          background-color: #099;
+          border-radius: 4px;
+          margin-left: $baseline * (3/2);
+          flex-shrink: 0;
+          position: relative;
+          top: s-3px;
+        }
+      }
+      .edit_profile_separator {
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+
+      .edit_profile_settings_left_column {
+        margin-right: 25px;
+        flex: 1;
+      }
+      .edit_profile_settings_right_column {
+        margin-left: 25px;
+        flex: 1;
+      }
     }
   }
 
   .edit_profile_change_your_login {
-
   }
 
   .edit_profile_delete_your_account {
-
   }
-  
 }
-
-
-
 
 form#reset-password {
   input[type="text"] {
