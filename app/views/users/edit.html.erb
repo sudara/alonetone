@@ -181,6 +181,7 @@
           <% end %>
     </div>
   </div>
+  
   <div class="edit_profile_change_your_login box">
 
     <%= form_with model: [@user, @profile] do |f| %>
@@ -201,12 +202,26 @@
 
     <h2>Delete your account</h2>
     <p>
-      This will completely remove ALL tracks, comments, listens, posts, etc that you have made on alonetone. There is NO undo, so make sure you are certain before clicking the button below.
+      We don’t want you to leave, but it’s ok. If you love somebody, set them free, right?
     </p>
 
-    <%= link_to "Delete", user_path(login: @user.login), method: :delete,
-    data: { confirm: "Are you absolutely sure? This will delete the account of #{@user.login} PERMANENTLY, including all tracks, play history and comments."},
-    class: 'delete_green' %>
+    <div>
+
+      <div class="delete_column">
+        Delete Account?
+        <a href="#">Delete</a>
+      </div>
+      <div class="sure_column">
+        <div>Are you sure?</div>
+        <a href="#">Yes</a>
+        <a href="#">No</a>
+      </div>
+      <div class="ok_column">
+        OK
+      </div>
+    
+    </div>
+
   </div>
 
 </div>

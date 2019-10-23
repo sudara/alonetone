@@ -124,6 +124,19 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
 }
 
 
+@mixin paragraph14() {
+  font-family: $medium-sans-font;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+@mixin paragraph14bold() {
+  font-family: $sans-font;
+  font-weight: bold;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
 @mixin paragraph16() {
   font-family: $medium-sans-font;
   font-size: 16px;

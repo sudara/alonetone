@@ -87,6 +87,7 @@
     h3 {
       @include title20();
       margin-top: 0;
+      color: $grey900;
     }
     .edit_profile_socials_columns {
       display: flex;
@@ -179,6 +180,7 @@
       @include title20();
       margin-top: 0;
       margin-bottom: 28px;
+      color: $grey900;
     }
     .edit_profile_settings_columns {
       display: flex;
@@ -201,7 +203,7 @@
           margin-left: $baseline * (3/2);
           flex-shrink: 0;
           position: relative;
-          top: s-3px;
+          top: -3px;
         }
       }
       .edit_profile_separator {
@@ -221,11 +223,112 @@
   }
 
   .edit_profile_change_your_login {
+    padding: $baseline * (3/2);
+    h2 {
+      @include title24();
+      color: $grey900;
+      border-bottom: 0;
+      padding-left: 0;
+    }
+    p {
+      @include paragraph14();
+      color: $grey800;
+      max-width: 636px;
+    }
+    > form > div {
+      display: flex;
+      div {
+        background-color: $grey50;
+        color: $grey600;
+        font-family: $medium-sans-font;
+        height: 32px;
+        box-sizing: border-box;
+        padding-top: 5px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        padding-left: 8px;
+        padding-right: 4px;
+        padding-top: 9px;
+      }
+      input[type=text] {
+        background-color: $grey25;
+        border: 1px solid $grey300;
+        border-radius: 0;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        color: $grey1000;
+        margin-left: 4px;
+        height: 32px;
+        padding-left: 8px;
+        padding-top: 9px;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 0;
+      }
+      input[type=submit] {
+        @include default_button('primary');
+        margin-left: 20px;
+        margin-bottom: 12px;
+      }
+    }
   }
 
   .edit_profile_delete_your_account {
+    padding: $baseline * (3/2);
+    h2 {
+      @include title24();
+      color: $red1000;
+      border-bottom: 0;
+      padding-left: 0;
+    }
+    p {
+      @include paragraph14();
+      color: $grey800;
+      max-width: 636px;
+    }
+    > div {
+      margin-top: 6px;
+      display: flex;
+      @include paragraph14bold();
+      a {
+        @include default_button('primary');
+        margin-top: 16px;
+        margin-bottom: 12px;
+      }
+      .delete_column {
+        width: 160px;
+        margin-right: 36px;
+        color: $red800;
+        a {
+          width: 160px;
+        }
+      }
+      .sure_column {
+        color: $orange800;
+        width: 176px;
+        margin-right: 36px;
+        a {
+          float: left;
+          width: 80px;
+          padding-left: 0;
+          padding-right: 0;
+          &:last-child {
+            margin-left: 16px;
+          }
+        }
+      }
+      .ok_column {
+        color: $grey800;
+      }
+    }
   }
 }
+
+
+
+
+// LEGACY BELOW
+
 
 form#reset-password {
   input[type="text"] {
