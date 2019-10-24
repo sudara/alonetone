@@ -32,6 +32,7 @@ gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 
 # view
+gem 'nokogiri'
 gem 'commonmarker'
 gem 'country_select'
 gem 'dynamic_form'

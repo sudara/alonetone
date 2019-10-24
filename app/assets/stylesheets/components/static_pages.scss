@@ -31,7 +31,7 @@
       border-radius: 6px;
       padding-bottom: $baseline;
       h2 {
-        &::before {
+        a.anchor {
           position: absolute;
           left: -38px;
           content: image-url("svg/icon_static_page_anchor_link.svg");

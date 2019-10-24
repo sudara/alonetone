@@ -542,6 +542,7 @@ DEPENDENCIES
   mime-types
   mysql2
   newrelic_rpm
+  nokogiri
   pagy
   percy-capybara
   perf_check
