@@ -34,10 +34,27 @@
         a.anchor {
           position: absolute;
           left: -38px;
-          content: image-url("svg/icon_static_page_anchor_link.svg");
           width: 24px;
           height: 24px;
-
+          svg {
+            path {
+              fill: $static-page-anchor;
+            }
+          }
+          &:hover {
+            svg {
+              path {
+                fill: $static-page-anchor-hover;
+              }
+            }
+          }
+          &:visited {
+            svg {
+              path {
+                fill: $static-page-anchor-visited;
+              }
+            }
+          }
         }
         @include title24();
         color: $static-page-h2-text;
