@@ -80,6 +80,10 @@
         &:first-of-type {
           margin-left: 20px;
         }
+        &:last-of-type {
+          background-color: $grey100;
+          color: $grey800;
+        }
       }
     }
   }
@@ -106,6 +110,7 @@
         flex: 1;
         a {
           @include default-button("primary");
+          background-color: $grey400;
           width: 160px;
           float: right;
           margin-top: 23px;
@@ -269,6 +274,7 @@
       }
       input[type=submit] {
         @include default_button('primary');
+        background-color: $grey400;
         margin-left: 20px;
         margin-bottom: 12px;
       }
@@ -341,6 +347,7 @@
       }
       input[type=submit] {
         @include default_button('primary');
+        background-color: $grey400;
         margin-left: 20px;
         margin-bottom: 12px;
       }
@@ -398,6 +405,7 @@
         color: $red800;
         a {
           width: 160px;
+          background-color: $red600;
         }
       }
       .sure_column {
@@ -409,8 +417,11 @@
           width: 80px;
           padding-left: 0;
           padding-right: 0;
+          background-color: $accent;
           &:last-child {
             margin-left: 16px;
+            background-color: $grey100;
+            color: $grey800;
           }
         }
       }
