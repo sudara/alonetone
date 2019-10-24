@@ -83,8 +83,8 @@
   <div class="static_content">
   <div id="edit_password" class="static_content" style="display:none">
 		Enter your desired new password twice, please:<br/>
-		<%= f.password_field :password %><br/>
-		<%= f.password_field :password_confirmation %><br/>
+		<%= f.password_field :password, required: true %><br/>
+		<%= f.password_field :password_confirmation, required: true %><br/>
 		<%= submit_tag "Change Your Password" %>
 
   </div>
