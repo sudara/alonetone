@@ -22,6 +22,7 @@
   .edit_profile_top {
     padding: $baseline * 1.5;
     display: flex;
+    flex-wrap: wrap;
     .edit_profile_top_left {
       margin-right: 58px;
       width: 250px;
@@ -96,6 +97,7 @@
     }
     .edit_profile_socials_columns {
       display: flex;
+      flex-wrap: wrap;
       .edit_profile_socials_left_column {
         margin-right: 10px;
         flex: 1;
@@ -190,6 +192,7 @@
     }
     .edit_profile_settings_columns {
       display: flex;
+      flex-wrap: wrap;
       .setting {
         display: flex;
 
@@ -227,8 +230,6 @@
       }
     }
   }
-
-
 
   .edit_profile_change_your_password {
     padding: $baseline * (3/2);
