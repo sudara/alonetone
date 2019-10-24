@@ -41,17 +41,17 @@
               fill: $static-page-anchor;
             }
           }
-          &:hover {
-            svg {
-              path {
-                fill: $static-page-anchor-hover;
-              }
-            }
-          }
           &:visited {
             svg {
               path {
                 fill: $static-page-anchor-visited;
+              }
+            }
+          }
+          &:hover {
+            svg {
+              path {
+                fill: $static-page-anchor-hover;
               }
             }
           }
