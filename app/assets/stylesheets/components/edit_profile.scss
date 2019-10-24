@@ -195,7 +195,6 @@
       flex-wrap: wrap;
       .setting {
         display: flex;
-
         label {
           @include paragraph16();
           color: $grey800;
@@ -239,8 +238,6 @@
           }
           &.toggle_on {
             background-color: $accent;
-            .toggle_label {
-            }
             .toggle_inner {
               bottom: 3px;
               right: 3px;
