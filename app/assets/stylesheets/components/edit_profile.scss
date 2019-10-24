@@ -213,6 +213,50 @@
           flex-shrink: 0;
           position: relative;
           top: -3px;
+          background-color: $accent;
+          border-radius: 4px;
+          position: relative;
+          &:hover {
+            text-decoration: none;
+          }
+          .toggle_label {
+            color: $white;
+            font-size: 11px;
+            font-weight: bold;
+            padding-top: 11px;
+            padding-left: 10px;
+          }
+          .toggle_inner {
+            background-color: #fff;
+            border-radius: 1.5px;
+            width: 33px;
+            height: 26px;
+            box-shadow: 0px 2px 8px rgba(53, 53, 53, 0.33),
+              0px 2px 2px rgba(53, 53, 53, 0.33);
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+          }
+          &.toggle_on {
+            background-color: $accent;
+            .toggle_label {
+            }
+            .toggle_inner {
+              bottom: 3px;
+              right: 3px;
+            }
+          }
+          &.toggle_off {
+            background-color: $grey400;
+            .toggle_inner {
+              bottom: 3px;
+              left: 3px;
+            }
+            .toggle_label {
+              padding-right: 7px;
+              text-align: right;
+            }
+          }
         }
       }
       .edit_profile_separator {
@@ -259,7 +303,7 @@
         padding-right: 4px;
         padding-top: 9px;
       }
-      input[type=text] {
+      input[type="text"] {
         background-color: $grey25;
         border: 1px solid $grey300;
         border-radius: 0;
@@ -273,8 +317,8 @@
         max-width: 300px;
         margin-bottom: 0;
       }
-      input[type=submit] {
-        @include default_button('primary');
+      input[type="submit"] {
+        @include default_button("primary");
         background-color: $grey400;
         margin-left: 20px;
         margin-bottom: 12px;
@@ -331,7 +375,7 @@
         padding-right: 4px;
         padding-top: 9px;
       }
-      input[type=text] {
+      input[type="text"] {
         background-color: $grey25;
         border: 1px solid $grey300;
         border-radius: 0;
@@ -346,8 +390,8 @@
         max-width: 300px;
         margin-bottom: 0;
       }
-      input[type=submit] {
-        @include default_button('primary');
+      input[type="submit"] {
+        @include default_button("primary");
         background-color: $grey400;
         margin-left: 20px;
         margin-bottom: 12px;
@@ -396,7 +440,7 @@
       display: flex;
       @include paragraph14bold();
       a {
-        @include default_button('primary');
+        @include default_button("primary");
         margin-top: 16px;
         margin-bottom: 12px;
       }
@@ -433,11 +477,7 @@
   }
 }
 
-
-
-
 // LEGACY BELOW
-
 
 form#reset-password {
   input[type="text"] {
