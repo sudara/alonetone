@@ -6,9 +6,8 @@
   margin-right: auto;
   @media #{$mobile} {
     padding-left: 0;
-    padding-right: 0;´
+    padding-right: 0;
   }
-  
   .box {
     margin-bottom: 80px;
   }
@@ -30,6 +29,9 @@
     @media #{$one-column} {
       flex-wrap: wrap;
     }
+    @media #{$mobile} {
+      padding: $baseline;
+    }    
     .edit_profile_top_left {
       margin-right: 58px;
       width: 250px;
@@ -110,6 +112,9 @@
   }
   .edit_profile_socials {
     padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+    }
     h3 {
       @include title20();
       margin-top: 0;
@@ -219,6 +224,9 @@
 
   .edit_profile_settings {
     padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+    }
     h3 {
       @include title20();
       margin-top: 0;
@@ -328,6 +336,9 @@
 
   .edit_profile_change_your_password {
     padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+    }
     h2 {
       @include title24();
       color: $grey900;
@@ -382,6 +393,10 @@
     background-repeat: no-repeat;
     background-position: center 16px;
     padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+      padding-top: 58px;
+    }
     padding-top: 58px;
     .warning_tag {
       position: absolute;
@@ -474,6 +489,10 @@
       display: block;
     }
     padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+      padding-top: 58px;
+    }
     padding-top: 58px;
     h2 {
       @include title24();
