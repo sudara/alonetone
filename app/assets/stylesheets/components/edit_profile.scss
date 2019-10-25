@@ -4,6 +4,11 @@
   padding: 0 $baseline * 1.5;
   margin-left: auto;
   margin-right: auto;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;´
+  }
+  
   .box {
     margin-bottom: 80px;
   }

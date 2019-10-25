@@ -152,12 +152,11 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   font-family: $sans-font;
   font-weight: bold;
   font-size: 24px;
-@mixin shadow2() {
-  box-shadow: 0px 2px 4px rgba(53, 53, 53, 0.25);
 }
 
-
-
+  @mixin shadow2() {
+  box-shadow: 0px 2px 4px rgba(53, 53, 53, 0.25);
+}
 
 @mixin title36() {
   font-size: 36px;
