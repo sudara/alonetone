@@ -43,7 +43,7 @@
 
   <% end %>
 
-  <div id="large_users_grid">
+  <ul id="large_users_grid" class="responsive_grid">
     <% if @sort == 'dedicated_listeners'%>
       <% cache("dedicated/#{params[:page]}/#{theme_name}", expires_in: 4.hours) do %>
         <% if white_theme_enabled? %>
@@ -62,7 +62,7 @@
       <% end %>
     <% end %>
     <div class="clear"> </div>
-  </div>
+  </ul>
 
   <div style="float:none;clear:both;"> </div>
 </div>
