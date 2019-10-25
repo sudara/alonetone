@@ -61,14 +61,28 @@
       }
       .city_and_country {
         display: flex;
+        @media #{$one-column} {
+          flex-wrap: wrap;
+        }
+        
         div {
           &:first-child {
             flex: 1;
             margin-right: 20px;
+            @media #{$one-column} {
+              width: 100%;
+              flex: auto;
+              margin-right: 0;
+            }    
           }
           &:last-child {
             flex: 1;
             margin-left: 20px;
+            @media #{$one-column} {
+              width: 100%;
+              flex: auto;
+              margin-left: 0;
+            }
           }
         }
       }
