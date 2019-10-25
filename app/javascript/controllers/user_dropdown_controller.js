@@ -39,7 +39,8 @@ export default class extends Controller {
   }
 
   clickOutsideMenu(e) {
-    return (!this.menuTarget.contains(e.target) // outside whole menu
-      || this.headerTarget.contains(e.target)) // inside header
+    return (e.type !== 'keydown'
+      && (!this.menuTarget.contains(e.target) // outside whole menu
+      || this.headerTarget.contains(e.target))) // inside header
   }
 }
