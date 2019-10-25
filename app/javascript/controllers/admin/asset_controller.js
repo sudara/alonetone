@@ -5,12 +5,15 @@ export default class extends Controller {
 
   initialize() {
     this.hideAllButtons()
-
-    if (this.data.get('deleted') == "true" ) {
-      this.showRestoreButton()
-    } else if (this.data.get('deleted') == 'false') {
-      this.showSpamButton()
-      this.showDeleteButton()
+    if (this.data.get('user-deleted') == "true") {
+      this.hideAllButtons()
+    } else {
+      if (this.data.get('deleted') == "true" ) {
+        this.showRestoreButton()
+      } else if (this.data.get('deleted') == 'false') {
+        this.showSpamButton()
+        this.showDeleteButton()
+      }
     }
   }
 

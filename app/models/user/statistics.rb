@@ -70,7 +70,7 @@ class User < ApplicationRecord
     end
 
     def comments_since_last_session
-      comments.between(last_session_at, Time.now.utc).count
+      comments_received.between(last_session_at, Time.now.utc).count
     end
 
     def plays_by_month

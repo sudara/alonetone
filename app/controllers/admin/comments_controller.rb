@@ -13,7 +13,6 @@ module Admin
     def unspam
       @comment.ham!
       @comment.update_attribute :is_spam, false
-      CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
 
       respond_to do |format|
         format.html { redirect_back(fallback_location: root_path) }
@@ -31,20 +30,10 @@ module Admin
       end
     end
 
-    def mark_group_as_spam
-      # limit scope to non_spam comments
-      # and we should include private comments as well
-      scope = Comment.where(permitted_params[:mark_spam_by])
-      comments = scope.include_private
-      comments.map(&:spam!)
-      comments.update_all(is_spam: true)
-      redirect_back(fallback_location: root_path)
-    end
-
     private
 
     def permitted_params
-      params.permit(:filter_by, mark_spam_by: [:user_id, :remote_ip])
+      params.permit(:filter_by)
     end
 
     def set_comment
