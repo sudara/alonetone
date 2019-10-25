@@ -97,7 +97,7 @@ class PagesController < ApplicationController
             812, 810, 806, 805, 804, 802, 801, 800, 716, 799, 798,
             797, 787, 786, 767, 762,
             760, 753, 745, 742, 739, 724, 729, 809, 819, 830]
-    @albums_2009 = Playlist.where(id: ids_2009).order('created_at ASC').includes(%i[pic user])
+    @albums_2009 = Playlist.where(id: ids_2009).order('created_at ASC').with_preloads
   end
 
   def set_2010_albums
@@ -108,6 +108,6 @@ class PagesController < ApplicationController
                 2078, 2108, 2029, 2195, 2083, 2194, 2187, 2182, 2196,
                 2174, 2197, 2200, 2202, 2150, 2209, 2012, 2215, 2245,
                 2241, 2234]
-    @albums_2010 = Playlist.where(id: ids_2010).includes(%i[user pic])
+    @albums_2010 = Playlist.where(id: ids_2010).with_preloads
   end
 end
