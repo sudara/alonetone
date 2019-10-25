@@ -22,7 +22,9 @@
   .edit_profile_top {
     padding: $baseline * 1.5;
     display: flex;
-    flex-wrap: wrap;
+    @media #{$one-column} {
+      flex-wrap: wrap;
+    }
     .edit_profile_top_left {
       margin-right: 58px;
       width: 250px;
@@ -97,19 +99,30 @@
     }
     .edit_profile_socials_columns {
       display: flex;
-      flex-wrap: wrap;
+      @media #{$one-column} {
+        flex-wrap: wrap;
+      }
       .edit_profile_socials_left_column {
         margin-right: 10px;
+        @media #{$one-column} {
+          margin-right: 0;
+        }
         flex: 1;
         .row:last-child {
           input {
             margin-bottom: 0;
+            @media #{$one-column} {
+              margin-bottom: $baseline;
+            }
           }
         }
       }
       .edit_profile_socials_right_column {
         margin-left: 10px;
         flex: 1;
+        @media #{$one-column} {
+          margin-left: 0;
+        }
         a {
           @include default-button("primary");
           background-color: $grey400;
@@ -192,7 +205,9 @@
     }
     .edit_profile_settings_columns {
       display: flex;
-      flex-wrap: wrap;
+      @media #{$one-column} {
+        flex-wrap: wrap;
+      }
       .setting {
         display: flex;
         label {
@@ -264,10 +279,25 @@
       .edit_profile_settings_left_column {
         margin-right: 25px;
         flex: 1;
+        @media #{$one-column} {
+          flex-wrap: wrap;
+          margin-right: 0;
+        }
       }
       .edit_profile_settings_right_column {
         margin-left: 25px;
         flex: 1;
+        .edit_profile_settings_right_column:first-child {
+          display: none;
+          @media #{$one-column} {
+            display: block;
+          }
+        }
+        @media #{$one-column} {
+          flex-wrap: wrap;
+          margin-left: 0;
+        }
+
       }
     }
   }
