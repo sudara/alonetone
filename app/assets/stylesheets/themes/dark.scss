@@ -1,6 +1,6 @@
 @import 'color_mapping';
 
-$body-background: $grey1000;
+$body-background: $black;
 $body-font: $white;
 
 $background-color-one: $grey1100;
@@ -67,9 +67,21 @@ $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifyin
 $sub-nav-background: $black;
 $sub-nav-text: $grey400;
 $sub-nav-text-hover: $white;
-
+$sub-nav-current-background: $orangetone;
+ 
 // variables.scss
 $primary-button-background-hover: $orange600;
 $primary-button-background-active: $orange800;
+
+// static_pages.scss
+$static-page-heading-background: $grey1150;
+$static-page-heading-text: $grey100;
+$static-page-content-background: $grey1100;
+$static-page-h2-text: $orange300; 
+$static-page-paragraph-text: $grey400;
+$static-page-content-seperator: $grey1150;
+$static-page-anchor: $grey1000;
+$static-page-anchor-hover: $orange300;
+$static-page-anchor-visited: $grey400;
 
  

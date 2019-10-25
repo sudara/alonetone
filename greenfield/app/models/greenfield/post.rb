@@ -13,9 +13,6 @@ module Greenfield
 
     validates_presence_of :asset
     validate do |post|
-      Greenfield::Markdown.invalid_embeds(post).each do |i|
-        post.errors[:base] << "Reference to attachment number #{i} is invalid"
-      end
     end
   end
 end

@@ -4,11 +4,6 @@ module Greenfield
       return "" unless text
 
       text = emojify(text)
-      if post
-        Greenfield::Markdown.render_with_embeds(post, text)
-      else
-        Greenfield::Markdown.render(text)
-      end
     end
 
     def player(asset)
