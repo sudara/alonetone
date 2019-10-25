@@ -15,7 +15,7 @@ export default class extends Controller {
 
     // https://greensock.com/ease-visualizer/
     TweenMax.from('.user_dropdown_menu_header img', 1.2,
-      { width: '32px', height: '32px', ease: Elastic.easeOut })
+      { width: '32px', height: '32px', left: "-2px", top: "2px", ease: Elastic.easeOut })
 
     // a bit more manual than using click@window->user-dropdown#close
     // but this ensures the click handler only gets added when
