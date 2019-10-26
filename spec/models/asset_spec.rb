@@ -25,6 +25,33 @@ RSpec.describe Asset, type: :model do
         end
       end.to perform_queries(count: 4)
     end
+
+    context "user's assets" do
+      let(:user) { users(:jamie_kiesl) }
+
+      it "should order user's hottest tracks" do
+        track_111 = assets(:valid_asset_to_test_on_latest)
+        track_101 = assets(:another_valid_asset_to_test_on_latest)
+
+        assert_equal [track_111, track_101], user.assets.hottest
+      end
+
+      it "should order user's most listened to tracks" do
+        track_listen_5 = assets(:asset_with_relations_for_soft_delete)
+        track_listen_2 = assets(:valid_asset_to_test_on_latest)
+        track_listen_3 = assets(:another_valid_asset_to_test_on_latest)
+        # 0 listens is not included
+        track_listen_0 = assets(:jamie_kiesl_the_duck)
+
+        assert_equal [track_listen_5, track_listen_3, track_listen_2], user.assets.most_listened
+      end
+
+      it "should order user's most commented tracks" do
+        track_comment_4 = assets(:valid_asset_to_test_on_latest)
+        track_comment_6 = assets(:another_valid_asset_to_test_on_latest)
+        assert_equal [track_comment_6, track_comment_4], user.assets.most_commented
+      end
+    end
   end
 
   context "validation" do
