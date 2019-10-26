@@ -16,7 +16,6 @@ class Asset < ApplicationRecord
   serialize :waveform, Array
 
   scope :published,       -> { where(private: false) }
-  scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
   scope :recent,          -> { reorder('assets.id DESC').includes(:user) }
   scope :last_updated,    -> { reorder('updated_at DESC').first }
   scope :random_order,    -> { reorder(Arel.sql('RAND()')) }
