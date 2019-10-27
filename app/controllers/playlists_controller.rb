@@ -1,5 +1,4 @@
 class PlaylistsController < ApplicationController
-  include GreenfieldPlaylistDownloads
   include Listens
 
   before_action :find_user, except: :all

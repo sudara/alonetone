@@ -8,15 +8,7 @@ class ImageVariant
     large_avatar: 960,
     playlist_avatar: 440,
     playlist_card: 440,
-    playlist_cover: 1248,
-
-    # legacy
-    tiny: 25,
-    small: 50,
-    large: 125,
-    album: 200,
-    original: 800,
-    greenfield: 1500
+    playlist_cover: 1248
   }.freeze
 
   attr_reader :attachment

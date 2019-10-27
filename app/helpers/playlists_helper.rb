@@ -7,10 +7,6 @@ module PlaylistsHelper
     title.html_safe
   end
 
-  def allow_greenfield_playlist_downloads?(user)
-    user.greenfield_enabled? && Rails.application.remote_storage?
-  end
-
   # DIV element which is ‘filled’ by the JavaScript with a a generated pattern based on the
   # playlist title.
   def playlist_cover_div
@@ -53,26 +49,6 @@ module PlaylistsHelper
     else
       playlist_cover_image(playlist, variant: variant)
     end
-  end
-
-  def greenfield_upload_form(user, playlist)
-    # leave these hashrokets. breaking spec/request/assets_controller_spec.rb
-    # Will look into it later
-    data = {
-      'expected-content-type' => Greenfield::PlaylistDownload::CONTENT_TYPE.join(' '),
-      'max-file-size' => Greenfield::PlaylistDownload::MAX_SIZE,
-      'max-file-size-human' =>
-        number_to_human_size(Greenfield::PlaylistDownload::MAX_SIZE).downcase
-    }
-    options = {
-      id: "s3-uploader",
-      key_starts_with: "greenfield/",
-      acl: "authenticated-read",
-      callback_url: downloads_user_playlist_path(user, playlist),
-      max_file_size: Greenfield::PlaylistDownload::MAX_SIZE,
-      data: data
-    }
-    s3_uploader_form(options) { yield("") }
   end
 
   def external_link_for(link)

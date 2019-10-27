@@ -16,8 +16,6 @@ Rails.application.config.assets.precompile += %w[
   blog.css
   ipad.css
   rpm_challenge.css
-  soundmanager2.swf
-  soundmanager2_flash9.swf
   white_theme.css
   dark_theme.css
   white_theme.js
