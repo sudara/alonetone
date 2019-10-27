@@ -18,6 +18,16 @@ ul.responsive_grid {
     &:nth-child(4n) {
       margin-right: 0;
     }
+    > a:first-child {
+      padding-top: 100%;
+      box-sizing: border-box;
+      position: relative;
+      img, svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
     a {
       span {
         display: none;
