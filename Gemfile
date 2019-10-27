@@ -6,9 +6,6 @@ gem 'puma', '< 4.1' # experiencing some issues with config on 4.1
 
 gem 'thredded'
 
-# greenfield
-gem 'greenfield', path: 'greenfield'
-
 # ruby
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
