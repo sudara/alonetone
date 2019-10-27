@@ -15,7 +15,6 @@ class PlaylistsController < ApplicationController
   def index
     @page_title = @description = "#{@user.name}'s albums and playlists"
     set_playlists
-    render 'index_white' if white_theme_enabled?
   end
 
   def sort
@@ -43,9 +42,7 @@ class PlaylistsController < ApplicationController
         lazily_create_waveform_if_needed if @asset
         @page_title = @description = "#{@playlist.title} by #{@user.name}"
         if request.xhr?
-          render '/shared/_asset_white', layout: false
-        else
-          render 'show_white' if white_theme_enabled?
+          render('/shared/_asset', layout: false
         end
       end
       format.mp3 do
@@ -67,7 +64,7 @@ class PlaylistsController < ApplicationController
     if request.xhr?
       render_desired_partial
     elsif white_theme_enabled?
-      render 'edit_white'
+      render 'edit'
     end
   end
 

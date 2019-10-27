@@ -18,9 +18,7 @@ class AssetsController < ApplicationController
       @tab = 'home'
       @assets = Asset.with_preloads.published.latest.limit(5)
       set_related_lastest_variables
-      welcome_to_white_theme
       respond_to :html
-      render 'latest_white' if white_theme_enabled?
     end
   end
 
@@ -53,7 +51,6 @@ class AssetsController < ApplicationController
         end
       end
     end
-    render 'index_white' if white_theme_enabled?
   end
 
   def show
@@ -62,7 +59,6 @@ class AssetsController < ApplicationController
         lazily_create_waveform_if_needed
         @assets = [@asset]
         set_related_show_variables
-        render 'show_white' if white_theme_enabled?
       end
       format.mp3 do
         listen(@asset)
@@ -79,7 +75,6 @@ class AssetsController < ApplicationController
     end
     @page_title = "#{@channel} radio"
     @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
-    render 'radio_white' if white_theme_enabled?
   end
 
   def top
@@ -109,14 +104,11 @@ class AssetsController < ApplicationController
 
   def edit
     @allow_reupload = true
-    render 'edit_white' if white_theme_enabled?
   end
 
   def mass_edit
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
-
-    render 'mass_edit_white' if white_theme_enabled?
   end
 
   def mass_update; end

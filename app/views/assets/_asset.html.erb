@@ -88,7 +88,7 @@
     </div>
   	<% if logged_in? || asset.guest_can_comment? %>
       <div class="comment_track">
-        <%= render partial: 'assets/comment_white', locals: { asset: asset }%>
+        <%= render partial: 'assets/comment', locals: { asset: asset }%>
       </div>
   	<% end %>
     <div class="track_links">

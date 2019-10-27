@@ -17,7 +17,7 @@
       <div class="sortable" data-target="playlist-sort.sortable">
         <% @playlist.tracks.each do |track| %>
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
-          <%= render partial: 'assets/asset_white', locals: { asset: track.asset } %>
+          <%= render partial: 'assets/asset', locals: { asset: track.asset } %>
           <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
             <div class="remove-inner">
                 <%== render file: svg_path('svg/icon_x.svg') %>
@@ -55,7 +55,7 @@
         <div id="your_uploads" class="playlist_source">
           <% @assets.each do |asset| %>
             <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
-              <%= render partial: 'assets/asset_white', locals: { asset:asset } %>
+              <%= render partial: 'assets/asset', locals: { asset:asset } %>
               <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
                 <div class="add-inner">
                   <%== render file: svg_path('svg/icon_+.svg') %>
