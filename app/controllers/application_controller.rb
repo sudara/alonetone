@@ -10,12 +10,14 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_action :set_tab, :is_sudo
+  before_action :is_sudo
   before_action :set_theme
 
   rescue_from ActionController::RoutingError, with: :show_404
   rescue_from ActiveRecord::RecordNotFound, with: :show_404
   rescue_from AbstractController::ActionNotFound, with: :show_404
+
+  before_bugsnag_notify :add_user_info_to_bugsnag
 
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
     :current_user_is_mod_or_owner?, :current_user?,
@@ -129,10 +131,6 @@ class ApplicationController < ActionController::Base
     logged_in? && user.settings && user.settings[symbol_or_string.to_sym]
   end
 
-  def set_tab
-    @tab = ''
-  end
-
   def is_sudo
     @sudo = session[:sudo]
   end
@@ -163,6 +161,14 @@ class ApplicationController < ActionController::Base
 
   def latest_forum_topics
     Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).moderation_state_visible_to_user(current_user || Thredded::NullUser.new).limit(4)
+  end
+
+  def add_user_info_to_bugsnag(report)
+    report.user = {
+      email: current_user.email,
+      name: current_user.display_name,
+      id: current_user.id
+    }
   end
 
   delegate :greenfield_hostname, to: 'Rails.configuration.alonetone'
