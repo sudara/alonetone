@@ -55,26 +55,6 @@ module PlaylistsHelper
     end
   end
 
-  # @deprecated Returns default cover image URL for dark theme.
-  def dark_default_cover_url(variant:)
-    path = case variant
-           when :small then 'default/no-cover-50.jpg'
-           when :large then 'default/no-cover-125.jpg'
-           when :album then 'default/no-cover-200.jpg'
-           else 'default/no-cover-200.jpg'
-    end
-    image_url(path)
-  end
-
-  # @deprecated Returns a URL to the playlist's cover or a default image when there is no cover.
-  def dark_playlist_cover_url(playlist, variant:)
-    if Rails.application.show_dummy_image? || !playlist.cover_image_present?
-      dark_default_cover_url(variant: variant)
-    else
-      playlist_cover_url(playlist, variant: variant)
-    end
-  end
-
   def greenfield_upload_form(user, playlist)
     # leave these hashrokets. breaking spec/request/assets_controller_spec.rb
     # Will look into it later

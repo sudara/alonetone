@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
     :current_user_is_mod_or_owner?, :current_user?,
-    :current_page, :moderator?, :welcome_back?, :user_setting, :white_theme_enabled?, :latest_forum_topics
+    :current_page, :moderator?, :welcome_back?, :user_setting, :latest_forum_topics
 
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
@@ -33,10 +33,6 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-
-  def redirect_to_new_forums_if_white_theme
-    redirect_to('/discuss') if white_theme_enabled?
-  end
 
   def lazily_create_waveform_if_needed
     return if is_a_bot?
@@ -58,14 +54,6 @@ class ApplicationController < ActionController::Base
     else
       session[:white]
     end
-  end
-
-  def white_or_normal
-    white_theme_enabled? ? 'white_theme' : 'application'
-  end
-
-  def white_theme_enabled?
-    true # session[:white]
   end
 
   def not_found

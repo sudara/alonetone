@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
   before_action :require_login, except: %i[index show latest radio listen_feed]
   before_action :check_new_user_abuse, only: %i[new create]
 
-  etag { "#{white_theme_enabled?}/#{current_user&.id}" }
+  etag { "#{current_user&.id}" }
 
   # home page
   def latest
@@ -162,7 +162,7 @@ class AssetsController < ApplicationController
         redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"
-        render action: white_theme_enabled? ? "edit_white" : "edit"
+        render action: "edit"
       end
     end
   end
@@ -193,15 +193,6 @@ class AssetsController < ApplicationController
   end
 
   protected
-
-  def welcome_to_white_theme
-    return if !logged_in? || (session[:white_theme_notified] && session[:white_theme_notified] > 2)
-
-    session[:white_theme_notified] ||= 1
-    session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
-    flash.now[:ok] = "#{current_user.name}: missing something on white theme? Let us know " \
-                     "<a href='/discuss/white-theme'>on the forums</a>".html_safe
-  end
 
   def asset_params
     params.require(:asset).permit(
@@ -289,7 +280,7 @@ class AssetsController < ApplicationController
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
     @popular = Asset.with_preloads.published.order('hotness DESC').limit(5)
-    @playlists = white_theme_enabled? ? Playlist.for_home.limit(4) : Playlist.for_home.limit(5)
+    @playlists = Playlist.for_home.limit(4)
     @comments = admin? ? Comment.last_5_private : Comment.to_other_members.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
   end
