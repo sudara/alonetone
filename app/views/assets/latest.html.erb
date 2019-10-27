@@ -82,9 +82,7 @@
         </h2>
         <div class="box">
           <% @favorites.each do |favorite| %>
-          <div class="asset favorite" data-controller="normal-playback">
             <%= render partial: 'assets/asset', locals: { asset: favorite.asset, favorite: favorite } %>
-          </div>
           <% end %>
         </div>
         <div class="below_box">
