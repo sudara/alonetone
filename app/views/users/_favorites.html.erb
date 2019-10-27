@@ -1,10 +1,6 @@
 <div id="user_listens" class="box">
   <h2 class="box">Recent alonetone favorites</h2>
-  <% if white_theme_enabled? %>
     <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
-  <% else %>
-    <%= render partial: 'favorite', collection: @favorites, as: :asset %>
-  <% end %>
 </div>
 <div class="footer_box">
   <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
