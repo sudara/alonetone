@@ -21,7 +21,7 @@
     <div id="user_playlists_area">
       <div class="user_featured_playlists">
         <ul class="playlists no_artist_name_playlists responsive_grid responsive_grid_single_row">
-          <%= render partial: 'shared/playlist_white', collection: @playlists.limit(4), as: :playlist %>
+          <%= render partial: 'shared/playlist', collection: @playlists.limit(4), as: :playlist %>
         </ul>
       </div>
       <% if current_user_is_mod_or_owner?(@user) and @user.playlists.include_private.count > 4 %>

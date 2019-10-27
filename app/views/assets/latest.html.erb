@@ -7,7 +7,7 @@
       </h2>
     </div>
     <ul class="playlists responsive_grid responsive_grid_single_row">
-      <%= render partial: 'shared/playlist_white', collection: @playlists, as: :playlist, cached: true %>
+      <%= render partial: 'shared/playlist', collection: @playlists, as: :playlist, cached: true %>
     </ul>
   </div>
   <% end %>
@@ -83,7 +83,7 @@
         <div class="box">
           <% @favorites.each do |favorite| %>
           <div class="asset favorite" data-controller="normal-playback">
-            <%= render partial: 'assets/asset_white', locals: { asset: favorite.asset, favorite: favorite } %>
+            <%= render partial: 'assets/asset', locals: { asset: favorite.asset, favorite: favorite } %>
           </div>
           <% end %>
         </div>

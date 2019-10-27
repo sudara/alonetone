@@ -11,7 +11,7 @@
   <%= render 'playlist_white' %>
 
   <% if @asset %>
-    <%= render partial: 'shared/asset_white' %>
+    <%= render partial: 'shared/asset' %>
   <% else %>
     <%= content_for(:body_class, 'cover-view') %>
     <div class="track-content">
