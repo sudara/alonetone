@@ -65,16 +65,9 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_summary(user)).to eq(profile.strip)
   end
 
-  it "renders white theme image link when white theme was selected" do
-    @white_theme_enable = true
+  it "renders image link " do
     element = user_image_link(nil, variant: :large)
     expect(element).to include(UsersHelper.no_avatar_path)
-  end
-
-  it "renders dark theme image link when dark theme was selected" do
-    @white_theme_enable = false
-    element = user_image_link(nil, variant: :large)
-    expect(element).to include(UsersHelper.no_dark_avatar_path(variant: :large))
   end
 
   context "no user" do

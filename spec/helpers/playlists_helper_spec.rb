@@ -3,9 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe PlaylistsHelper, type: :helper do
-  def white_theme_enabled?
-    @white_theme_enable
-  end
 
   it 'generates a div which is filled by the JavaScript with generated cover' do
     element = playlist_cover_div
