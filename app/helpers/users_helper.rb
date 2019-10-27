@@ -36,11 +36,7 @@ module UsersHelper
   # Returns an <img> element with the avatar for a user. Automatically switches to the dark theme
   # when selected by the user.
   def user_image_link(user = nil, variant:)
-    if white_theme_enabled?
-      white_theme_user_image_link(user, variant: variant)
-    else
-      dark_theme_user_image_link(user, variant: variant)
-    end
+    white_theme_user_image_link(user, variant: variant)
   end
 
   # Returns an <a> element with the avatar for a user or an <img> element with the default
@@ -76,43 +72,6 @@ module UsersHelper
   # Returns the image path to use as a default avatar.
   def self.no_avatar_path
     'default/no-pic_white.svg'
-  end
-
-  # @deprecated Used by the dark theme.
-  def dark_theme_user_image_link(user = nil, variant:)
-    if user
-      link_to(
-        dark_user_image(user, variant: variant),
-        user_home_path(user),
-        title: user_summary(user)
-      )
-    else
-      dark_user_image(user, variant: variant)
-    end
-  end
-
-  # @deprecated Used by the dark theme.
-  def dark_user_image(user = nil, variant:)
-    _user_image(user, url: dark_user_avatar_url(user, variant: variant))
-  end
-
-  # @deprecated Used by the dark theme.
-  def dark_user_avatar_url(user = nil, variant:)
-    if user.nil? || Rails.application.show_dummy_image?
-      UsersHelper.no_dark_avatar_path(variant: variant)
-    else
-      user.avatar_image_location(variant: variant) || UsersHelper.no_dark_avatar_path(variant: variant)
-    end.to_s
-  end
-
-  # @deprecated Used by the dark theme.
-  def self.no_dark_avatar_path(variant:)
-    case variant
-    when :large, :small, :tiny
-      "default/no-pic_#{variant}.png"
-    else
-      'default/no-pic.png'
-    end
   end
 
   def notice_hidden?(notice)
