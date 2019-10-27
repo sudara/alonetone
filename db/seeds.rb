@@ -289,8 +289,3 @@ Greenfield::Post.first_or_create!(
 
 # Create playlist download
 playlist = Playlist.first
-playlist.greenfield_downloads.first_or_create!(
-  title: playlist.title,
-  s3_path: '/playlists/le_duc_vacherin.zip',
-  zip_file: upload('Le Duc Vacherin.zip')
-)

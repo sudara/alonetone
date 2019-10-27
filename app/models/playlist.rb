@@ -21,9 +21,6 @@ class Playlist < ActiveRecord::Base
     -> { where('assets.private = ?', false) },
     through: :tracks, source: :asset
 
-  has_many :greenfield_downloads, class_name: '::Greenfield::PlaylistDownload', dependent: :destroy
-  accepts_nested_attributes_for :greenfield_downloads
-
   validates_presence_of :title, :user_id
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
@@ -64,7 +61,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def has_any_links?
-    link1.present? || link2.present? || greenfield_downloads.present?
+    link1.present? || link2.present?
   end
 
   def is_album_with_only_private_tracks?
