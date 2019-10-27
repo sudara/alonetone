@@ -62,7 +62,7 @@ class PlaylistsController < ApplicationController
     @page_title = "Editing \"#{@playlist.title}\" by #{@user.name}"
     if request.xhr?
       render_desired_partial
-    elsif white_theme_enabled?
+    else
       render 'edit'
     end
   end

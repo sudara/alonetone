@@ -8,11 +8,7 @@
   <% content_for :left do %>
     <h2 class="user_search_results_heading">Artists that match "<%= @query %>"</h2>
     <div id="user_search_results">
-      <% if white_theme_enabled? %>
-        <%= render partial: 'shared/white', collection: @users, as: :user %>
-      <% else %>
-        <%= render partial: 'shared/user', collection: @users %>
-      <% end %>
+      <%= render partial: 'shared/white', collection: @users, as: :user %>
     </div>
   <% end %>
 <% end %>

@@ -3,9 +3,6 @@
 require "rails_helper"
 
 RSpec.describe UsersHelper, type: :helper do
-  def white_theme_enabled?
-    @white_theme_enable
-  end
 
   it "returns request path for a missing avatar image" do
     expect(UsersHelper.no_avatar_path).to eq('default/no-pic_white.svg')

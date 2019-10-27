@@ -33,7 +33,7 @@
   </main>
 
   <footer id="site_footer">
-    <%= cache("footer/#{theme_name}/#{moderator?}", expires_in: 3.minutes) do %>
+    <%= cache("footer/#{moderator?}", expires_in: 3.minutes) do %>
     <%= render partial: 'shared/footer' %>
     <% end %>
   </footer>
