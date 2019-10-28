@@ -84,7 +84,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def set_published_at
-    published_at = Time.now if publishing?
+    self.published_at = Time.now if publishing?
   end
 
   def notify_followers
@@ -136,8 +136,8 @@ class Playlist < ActiveRecord::Base
   # playlist is a mix if there is at least one track with a track from another user
   def set_mix_or_album
     # is this a favorites playlist?
-    is_mix = true if is_favorite?
-    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
+    self.is_mix = true if is_favorite?
+    self.is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
     true
   end
 

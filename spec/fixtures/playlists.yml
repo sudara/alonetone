@@ -103,7 +103,6 @@ william_shatners_favorites:
 # Jamie added all her favorite tracks to a playlist.
 jamie_kiesl_loves:
   user: jamie_kiesl
-  is_mix: true
   is_favorite: true
   private: true
   permalink: jamie-loves
