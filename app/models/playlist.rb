@@ -5,12 +5,13 @@ class Playlist < ActiveRecord::Base
 
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
-  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_preloads }
+  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recently_published.only_public.with_preloads }
   scope :include_private,  -> { where(is_favorite: false) }
   scope :mixes,            -> { where(is_mix: true) }
   scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
   scope :recent,           -> { order('playlists.created_at DESC') }
   scope :with_preloads,    -> { preload(:cover_image_blob, user: { avatar_image_attachment: :blob }) }
+  scope :recently_published, -> { reorder('playlists.published_at DESC') }
 
   belongs_to :user, counter_cache: true
   has_many :tracks,
