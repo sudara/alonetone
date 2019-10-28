@@ -2,9 +2,6 @@ header#site_header {
   background-color: $background-color-one;
   box-shadow: 0 3px 4px -2px #65666627;
   height: 60px;
-  > .header_search {
-    display: none !important; // Temporarily hide dark theme search that wasn't inside the #site_header
-  }
   .header_inner {
     position: relative;
     margin-right: auto;
@@ -66,7 +63,7 @@ header#site_header {
           color: $font-color-two;
           border: 0;
           border-radius: 3px;
-          transition: width .4s, background-color .4s, border-width .4s;
+          transition: width 0.4s, background-color 0.4s, border-width 0.4s;
           line-height: normal;
           &:focus {
             border-width: 0px;
@@ -95,10 +92,12 @@ header#site_header {
         top: 6px;
         background-image: $site-header-search-magnifying-glass-image;
         &:hover {
-          background-image: image-url("svg/icon_search_magnifying_glass_active.svg");
+          background-image: image-url(
+            "svg/icon_search_magnifying_glass_active.svg"
+          );
         }
         @media #{$mobile} {
-          display: none; 
+          display: none;
         }
       }
       #mobile_search_reveal_button {
@@ -111,7 +110,7 @@ header#site_header {
         background-position: center;
         background-repeat: no-repeat;
         @media #{$mobile} {
-          display: block; 
+          display: block;
         }
       }
     }
@@ -149,19 +148,20 @@ header#site_header {
         z-index: 99;
         width: 1000px;
         max-width: 350px;
-        background-color: $background-color-one;
+        background-color: $site-header-user-dropdown-background;
         box-shadow: $site-header-user-dropdown-shadow;
         border-radius: 0px 0px 6px 6px;
-        color: $font-color-two;
+        color: $site-header-user-dropdown-list-item-text;
         @media #{$mobile} {
           width: 300px;
         }
         .user_dropdown_menu_header {
           height: 60px;
           display: flex;
-          padding-left: $baseline;
-          font-size: 16px;
-          line-height: 60px;
+          padding-left: $baseline / 1.5;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 62px;
           img {
             display: block;
             margin-left: auto;
@@ -172,18 +172,43 @@ header#site_header {
             border-radius: 2px;
           }
         }
-        .user_dropdown_menu_items {
-          padding-left: $baseline;
-          padding-top: $baseline / 3;
-          padding-bottom: $baseline / 3;
-          background-color: $background-color-two;
-          a {
+        ul.user_dropdown_menu_items {
+          padding-top: 0;
+          margin-top: 0;
+          margin-bottom: 0;
+          li {
+            background-color: $site-header-user-dropdown-list-item-background;
+            padding-left: $baseline;
             display: block;
             font-size: 14px;
             font-weight: normal;
             line-height: 40px;
             display: block;
             height: 40px;
+            margin-bottom: 2px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            &:first-child {
+              &:hover {
+                a.edit_profile_item {
+                  border: 1px solid $accent;
+                  background: transparent;
+                }
+              }
+            }
+            a.edit_profile_item {
+              float: right;
+              margin-right: $baseline / 2;
+              @include default_button();
+              height: 30px;
+              margin-top: 5px;
+              line-height: 1;
+              padding-top: 9px;
+              background: transparent;
+              color: $site-header-user-dropdown-profile-edit-text;
+              border: 1px solid $site-header-user-dropdown-profile-edit-border;
+            }
           }
         }
         .user_dropdown_menu_bottom_links {
@@ -191,23 +216,61 @@ header#site_header {
           justify-content: space-between;
           padding-left: 16px;
           padding-right: 16px;
-          padding-top: 16px;
-          margin-bottom: 10px;
-          a.edit_profile_item {
-            @include default_button();
+          padding-top: $baseline / 2;
+          margin-bottom: $baseline / 2;
+          a.switch_to_theme {
+            width: 120px;
             height: 28px;
-            line-height: 30px;
-            background-color: $background-color-one;
-            border: 1px solid $accent;
-            color: $accent;
-            width: 100px;
+            background-color: $accent;
+            border-radius: 4px;
+            position: relative;
             &:hover {
-              background-color: $background-color-one;
-              color: $accent;
+              text-decoration: none;
+            }
+            .switcher_label {
+              color: $grey1200;
+              font-size: 11px;
+              font-weight: bold;
+              padding-top: 9px;
+              padding-left: 14px;
+            }
+            .switcher_inner {
+              background-color: #fff;
+              border-radius: 1.5px;
+              width: 56px;
+              height: 22px;
+              box-shadow: 0px 2px 8px rgba(53, 53, 53, 0.33), 0px 2px 2px rgba(53, 53, 53, 0.33);
+              position: absolute;
+              bottom: 3px;
+              right: 3px;
+            }
+            &.switch_to_light {
+              background-color: $accent;
+              .switcher_label {
+                color: $grey1200;
+              }
+              .switcher_inner {
+                bottom: 3px;
+                right: 3px;
+              }
+            }
+            &.switch_to_dark {
+              background-color: $grey400;
+              .switcher_inner {
+                bottom: 3px;
+                left: 3px;
+              }
+              .switcher_label {
+                color: $white;
+                padding-right: 14px;
+                text-align: right;
+              }
             }
           }
           a.logout_item {
             @include default_button();
+            background-color: $site-header-user-dropdown-logout-background;
+            color: $site-header-user-dropdown-logout-text;
             height: 28px;
             line-height: 30px;
             width: 100px;

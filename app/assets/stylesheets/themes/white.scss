@@ -63,12 +63,31 @@ $site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
 
+$site-header-user-dropdown-background: $white;
+$site-header-user-dropdown-profile-edit-text: $orange800;
+$site-header-user-dropdown-profile-edit-border: $grey300;
+$site-header-user-dropdown-logout-background: $grey400;
+$site-header-user-dropdown-logout-text: $white;
+$site-header-user-dropdown-list-item-background: $grey50;
+$site-header-user-dropdown-list-item-text: $grey1000;
+
 // sub_nav.scss
 $sub-nav-background: $grey100;
 $sub-nav-text: $grey1000;
 $sub-nav-text-hover: $grey1000;
+$sub-nav-current-background: $orange600;
 
 // variables.scss
 $primary-button-background-hover: $orange600;
 $primary-button-background-active: $orange800;
 
+// static_pages.scss
+$static-page-heading-background: $grey100-alpha50;
+$static-page-heading-text: $grey1000;
+$static-page-content-background: $white;
+$static-page-h2-text: $orange600;
+$static-page-paragraph-text: $grey1000;
+$static-page-content-seperator: $grey50;
+$static-page-anchor: $grey400;
+$static-page-anchor-hover: $orangetone;
+$static-page-anchor-visited: $orange1000;
