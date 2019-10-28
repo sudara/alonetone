@@ -108,3 +108,18 @@ sudaras_track_with_asset_on_other_user:
   asset: valid_arthur_mp3
   position: 5
   created_at: <%= 2.days.ago %>
+jamie_kiesl_mix_playlist:
+  playlist: jamie_kiesl_loves
+  user: jamie_kiesl
+  asset: jamie_kiesl_the_duck
+  created_at: <%= 2.days.ago %>
+jamie_kiesl_mix_playlist_two:
+  playlist: jamie_kiesl_loves
+  user: sudara
+  asset: valid_arthur_mp3
+  created_at: <%= 2.days.ago %>
+jamie_kiesl_mix_playlist_three:
+  playlist: jamie_kiesl_loves
+  user: sudara
+  asset: valid_arthur_mp3
+  created_at: <%= 2.days.ago %>
