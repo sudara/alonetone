@@ -23,7 +23,10 @@ class Comment < ActiveRecord::Base
   has_many :replies, as: :commentable, class_name: 'Comment'
 
   # optional user who made the comment
-  belongs_to :commenter, class_name: 'User', optional: true
+  belongs_to :commenter,
+  -> { with_deleted },
+    class_name: 'User',
+    optional: true
 
   # optional user who is *recieving* the comment
   # this helps simplify a user lookup of all comments across tracks/playlists/whatever

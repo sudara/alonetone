@@ -3,6 +3,7 @@
 
 @import 'components/variables';
 @import 'components/layout';
+@import 'components/responsive_grid';
 @import 'components/shared';
 @import 'components/pagination';
 @import 'components/notifications';
@@ -29,7 +30,7 @@
 @import 'components/password_reset';
 
 @import 'components/user';
-@import 'components/about_stats'; 
+@import 'components/static_pages'; 
 @import 'components/edit_profile';
 @import 'components/user_playlists';
 @import 'components/history';

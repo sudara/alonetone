@@ -315,7 +315,7 @@ RSpec.describe UsersController, type: :controller do
         expect(users(:arthur).listens.count).to eq(0)
         expect(users(:arthur).playlists.count).to eq(0)
         expect(users(:arthur).topics.count).to eq(0)
-        expect(users(:arthur).comments.count).to eq(0)
+        expect(users(:arthur).comments_received.count).to eq(0)
       end
     end
 

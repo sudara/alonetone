@@ -14,7 +14,7 @@ Music communities tend to be overly obsessed with genres and popularity and cont
 
 alonetone was started to provide a non-commercial alternative. Something useful, something different, something that the musicians can feel like they own.
 
-Beyond that, we want to do it right. Clean, only the essentials. Not too dorked-out. Easy to get around. [Read more here](/about/why).
+Beyond that, we want to do it right. Clean, only the essentials. Not too dorked-out. Easy to get around. [Read more here](/about/why-i-built-alonetone).
 
 
 ## Wow, no company! So who makes alonetone?
@@ -23,7 +23,7 @@ alonetone is conceived and built by [Sudara](/sudara).
 
 [montgomeru](/montgomeru) handles frontend coding.
 
-We get regular design love from [Samo](/smoofles).
+We get regular design love from Samo.
 
 After our initial launch in 2008 most features were inspired, recommended by, and build to please alonetoners who spoke up and helped by providing their valuable feedback in chat and the forums.
 
@@ -36,5 +36,4 @@ The basic ability to upload and share music without ads or payment will exist as
 
 Yup! We are open-minded to contributions at [github](http://github.com/sudara/alonetone).
 
-Thanks to the nice people at [BrowserStack](https://browserstack.com) and [Skylight](https://skylight.io)
- for providing their services free for open source projects.
+Thanks to the nice people at [BrowserStack](https://browserstack.com) and [Skylight](https://skylight.io) for providing their services free for open source projects.

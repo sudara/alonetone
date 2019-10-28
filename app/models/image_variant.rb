@@ -6,6 +6,7 @@ class ImageVariant
     small_avatar: 80,
     medium_avatar: 96,
     large_avatar: 960,
+    playlist_avatar: 440,
     playlist_card: 440,
     playlist_cover: 1248,
 

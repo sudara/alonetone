@@ -1,6 +1,6 @@
 @import 'color_mapping';
 
-$body-background: $grey1000;
+$body-background: $black;
 $body-font: $white;
 
 $background-color-one: $grey1100;
@@ -63,13 +63,33 @@ $site-header-user-dropdown-shadow: 0px 6px 24px rgba(0, 0, 0, 0.75);
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow_dark.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass_dark.svg");
 
+$site-header-user-dropdown-background: $grey1200;
+$site-header-user-dropdown-profile-edit-text: $orange300;
+$site-header-user-dropdown-profile-edit-border: $grey900;
+$site-header-user-dropdown-logout-background: $grey1000;
+$site-header-user-dropdown-logout-text: $grey400;
+$site-header-user-dropdown-list-item-background: $grey1100;
+$site-header-user-dropdown-list-item-text: $grey200;
+
 // sub_nav.scss
 $sub-nav-background: $black;
 $sub-nav-text: $grey400;
 $sub-nav-text-hover: $white;
-
+$sub-nav-current-background: $orangetone;
+ 
 // variables.scss
 $primary-button-background-hover: $orange600;
 $primary-button-background-active: $orange800;
+
+// static_pages.scss
+$static-page-heading-background: $grey1150;
+$static-page-heading-text: $grey100;
+$static-page-content-background: $grey1100;
+$static-page-h2-text: $orange300; 
+$static-page-paragraph-text: $grey400;
+$static-page-content-seperator: $grey1150;
+$static-page-anchor: $grey1000;
+$static-page-anchor-hover: $orange300;
+$static-page-anchor-visited: $grey400;
 
  
