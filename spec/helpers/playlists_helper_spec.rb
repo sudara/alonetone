@@ -9,58 +9,6 @@ RSpec.describe PlaylistsHelper, type: :helper do
     expect(element).to match_css('div[class]')
   end
 
-  it 'returns a default dark cover URL' do
-    %i[small large album greenfield].each do |variant|
-      url = dark_default_cover_url(variant: variant)
-      expect(url).to start_with('/images/default/no-cover')
-      expect(url).to end_with('.jpg')
-    end
-  end
-
-  context 'playlist with an ancient cover' do
-    let(:playlist) { playlists(:william_shatners_favorites) }
-
-    it 'downgrades greenfield variant to album' do
-      expect(
-        downgrade_variant(playlist, variant: :greenfield)
-      ).to eq(:album)
-    end
-
-    it 'downgrades original variant to album' do
-      expect(
-        downgrade_variant(playlist, variant: :original)
-      ).to eq(:album)
-    end
-
-    it 'does not downgrade album variant' do
-      expect(
-        downgrade_variant(playlist, variant: :album)
-      ).to eq(:album)
-    end
-  end
-
-  context 'playlist with a legacy cover' do
-    let(:playlist) { playlists(:jamie_kiesl_loves) }
-
-    it 'downgrades greenfield variant to original' do
-      expect(
-        downgrade_variant(playlist, variant: :greenfield)
-      ).to eq(:original)
-    end
-
-    it 'does not downgrade original variant' do
-      expect(
-        downgrade_variant(playlist, variant: :original)
-      ).to eq(:original)
-    end
-
-    it 'does not downgrade album variant' do
-      expect(
-        downgrade_variant(playlist, variant: :album)
-      ).to eq(:album)
-    end
-  end
-
   context 'playlist with a cover' do
     let(:playlist) { playlists(:will_studd_rockfort) }
     let(:base_url) { 'http://alonetone.example.com' }
@@ -97,14 +45,6 @@ RSpec.describe PlaylistsHelper, type: :helper do
       element = playlist_cover(playlist, variant: :greenfield)
       expect(element).to match_css('img')
     end
-
-    it 'formats a URL to the dark playlist cover' do
-      # Singed URLs to active storage disk controller intentionally doesn't
-      # expose any information about the URL we just built.
-      expect(
-        dark_playlist_cover_url(playlist, variant: :large)
-      ).to start_with('http://alonetone.example.com')
-    end
   end
 
   context 'playlist without a cover' do
@@ -125,12 +65,6 @@ RSpec.describe PlaylistsHelper, type: :helper do
     it 'formats a div for the cover element' do
       element = playlist_cover(playlist, variant: :greenfield)
       expect(element).to match_css('div')
-    end
-
-    it 'formats a URL to the dark playlist default cover' do
-      expect(
-        dark_playlist_cover_url(playlist, variant: :large)
-      ).to eq(dark_default_cover_url(variant: :large))
     end
   end
 end
