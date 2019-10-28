@@ -8,6 +8,8 @@ Alonetone::Application.routes.draw do
   end
 
   namespace :admin do
+    get 'possibly_deleted_user/:id', :to => 'users#show', as: 'possibly_deleted_user'
+
     resources :users, path: 'users/(:filter_by)', only: [:index] do
       member do
         put :delete
@@ -22,9 +24,6 @@ Alonetone::Application.routes.draw do
         put :unspam
         put :spam
       end
-      collection do
-        put :mark_group_as_spam
-      end
     end
     resources :assets, path: 'assets/(:filter_by)', only: [:index] do
       member do
@@ -32,9 +31,6 @@ Alonetone::Application.routes.draw do
         put :spam
         put :delete
         put :restore
-      end
-      collection do
-        put :mark_group_as_spam
       end
     end
   end
@@ -81,7 +77,7 @@ Alonetone::Application.routes.draw do
 
     get 'about/' => 'pages#about'
     get 'about/why-i-built-alonetone' => 'pages#why'
-    %w(about press stats ok index privacy faq).each do |action|
+    %w(about press stats ok help privacy faq).each do |action|
       get "about/#{action}", to: "pages##{action}"
     end
 

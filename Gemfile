@@ -32,7 +32,8 @@ gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 
 # view
-gem 'redcarpet'
+gem 'nokogiri'
+gem 'commonmarker'
 gem 'country_select'
 gem 'dynamic_form'
 gem 'local_time'
@@ -60,14 +61,11 @@ gem 'soundmanager2-rails'
 gem 'turbolinks'
 
 # monitoring & perf
+gem 'bugsnag'
 gem 'newrelic_rpm'
 gem 'skylight', '< 4.2' # bug in 4.2.beta2
 gem 'sidekiq', '< 6'
 gem 'dalli'
-
-group :production do
-  gem 'bugsnag'
-end
 
 group :development do
   gem 'perf_check'

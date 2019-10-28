@@ -1,38 +1,63 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['spam', 'unspam', 'spamvalue']
+  static targets = ['spamButton', 'restoreButton']
 
   initialize() {
-    console.log(this.spamvalueTarget.innerHTML == "true")
-    if (this.spamvalueTarget.innerHTML == "true") {
-      this.unspamTarget.style.display = 'block'
-      this.spamTarget.style.display = 'none'
+    this.hideAllButtons()
+
+    if (this.data.get('user-deleted') == "true") {
+      this.hideAllButtons()
     } else {
-      this.unspamTarget.style.display = 'none'
-      this.spamTarget.style.display = 'block'
+      if (this.data.get('spam') == "true") {
+        this.showRestoreButton()
+        this.setSpamRecord()
+      } else {
+        this.showSpamButton()
+        this.setRestoredRecord()
+      }
     }
   }
 
-  connect() {
-    // console.log("Hello, Stimulus!", this.element)
+  hideAllButtons() {
+    this.hideSpamButton()
+    this.hideRestoreButton()
   }
 
-  toggleDisplay(spam_true) {
-    if (spam_true) {
-      showSpamTarget()
-    } else {
-      showUnspamTarget()
-    }
+  hideSpamButton() {
+    this.spamButtonTarget.style.display = 'none'
   }
 
-  showSpamTarget() {
-    this.unspamTarget.style.display = 'block'
-    this.spamTarget.style.display = 'none'
+  markAsSpam() {
+    this.hideSpamButton()
+    this.showRestoreButton()
+    this.setSpamRecord()
   }
 
-  showUnspamTarget(){
-    this.unspamTarget.style.display = 'none'
-    this.spamTarget.style.display = 'block'
+  setSpamRecord() {
+    this.element.classList.add('deleted')
+    this.data.set('spam', 'true')
+  }
+
+  markAsRestored() {
+    this.hideRestoreButton()
+    this.showSpamButton()
+    this.setRestoredRecord()
+  }
+
+  setRestoredRecord() {
+    this.element.classList.remove('deleted')
+    this.data.set('spam', 'false')
+  }
+  showSpamButton() {
+    this.spamButtonTarget.style.display = 'block'
+  }
+
+  hideRestoreButton() {
+    this.restoreButtonTarget.style.display = 'none'
+  }
+
+  showRestoreButton() {
+    this.restoreButtonTarget.style.display = 'block'
   }
 }

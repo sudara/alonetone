@@ -23,9 +23,9 @@
 		</div>
 
 		<div class="comment_body">
-
-		<%= markdown(comment.body) %>
-
+    <p>
+	  	<%= strip_tags(markdown(comment.body)) %>
+    </p>
 		<% if comment.private && white_theme_enabled? %>
 			<div class="private_message">private message</div>
 		<% end %>

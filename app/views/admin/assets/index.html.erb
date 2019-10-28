@@ -17,30 +17,7 @@
         <div class="track_column">Track</div>
       </header>
       <div class="admin_assets_rows">
-        <% @assets.each do |asset| %>
-          <div data-controller="admin--asset" data-admin--asset-deleted="<%= asset.soft_deleted? %>" data-admin--asset-spam="<%= asset.is_spam? %>">
-            <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
-            <div class="user_column">
-              <div class="avatar">
-                <%= user_image(asset.possibly_deleted_user, variant: :large_avatar) %>
-              </div>
-              <div>
-                <div><%= link_to asset.possibly_deleted_user.login, admin_users_path({ filter_by: asset.possibly_deleted_user.email }) %></div>
-                <div><%= asset.possibly_deleted_user.ip %></div>
-              </div>
-            </div>
-            <div class="track_column">
-              <div><%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink) %></div>
-              <div><%= truncate(asset.description, length: 80) %></div>
-              <div>N comments / N listens</div>
-            </div>
-            <div class="button_column">
-              <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.spamButton', action: 'click->admin--asset#markTrackAsDeleted' } %>
-              <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), data: { confirm: 'Are you sure?'}, method: :put, remote: true, data: { target: 'admin--asset.deleteButton', action: 'admin--asset#markTrackAsDeleted' } %>
-              <%= button_to "Restore Asset", restore_admin_asset_path(asset.id), method: :put, remote: true, data: { target: 'admin--asset.restoreButton', action: 'admin--asset#markTrackAsRestored' } %>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: 'admin/assets/asset', collection: @assets %>
       </div>
 
     </div>

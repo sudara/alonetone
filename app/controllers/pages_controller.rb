@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout :old_or_white
+  layout 'pages', only: %i[about faq help why privacy]
 
   def twentyfour
     render layout: '24houralbum'
@@ -12,7 +12,11 @@ class PagesController < ApplicationController
   end
 
   def about
-    @page_title = "alonetone"
+    @page_title = "About alonetone"
+  end
+
+  def help
+    @page_title = "Help!"
   end
 
   def privacy
@@ -46,10 +50,6 @@ class PagesController < ApplicationController
     version    = ActiveRecord::Base.connection.select_value(query)
     time       = Time.now.to_formatted_s(:rfc822)
     render(text: "O Hai. You can haz alonetone. kthxbai!")
-  end
-
-  def about
-    @page_title = "About"
   end
 
   def press; end
@@ -86,10 +86,6 @@ class PagesController < ApplicationController
 
   protected
 
-  def old_or_white
-    white_theme_enabled? ? 'about' : 'pages'
-  end
-
   def set_2009_albums
     ids_2009 = [986, 951, 945, 924, 912, 915, 916, 918, 921, 923,
             926, 927, 928, 933, 935, 944, 910,
@@ -101,7 +97,7 @@ class PagesController < ApplicationController
             812, 810, 806, 805, 804, 802, 801, 800, 716, 799, 798,
             797, 787, 786, 767, 762,
             760, 753, 745, 742, 739, 724, 729, 809, 819, 830]
-    @albums_2009 = Playlist.where(id: ids_2009).order('created_at ASC').includes(%i[pic user])
+    @albums_2009 = Playlist.where(id: ids_2009).order('created_at ASC').with_preloads
   end
 
   def set_2010_albums
@@ -112,6 +108,6 @@ class PagesController < ApplicationController
                 2078, 2108, 2029, 2195, 2083, 2194, 2187, 2182, 2196,
                 2174, 2197, 2200, 2202, 2150, 2209, 2012, 2215, 2245,
                 2241, 2234]
-    @albums_2010 = Playlist.where(id: ids_2010).includes(%i[user pic])
+    @albums_2010 = Playlist.where(id: ids_2010).with_preloads
   end
 end

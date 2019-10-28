@@ -12,65 +12,10 @@
     padding-left: 0;
     padding-right: 0;
   }
-  .users_menu {
-    box-shadow: none;
-    width: 25%;
-    min-width: 185px;
-    margin-right: 5%;
-    padding-left: 0;
-    overflow: hidden;
-    @media #{$mobile} {
-      margin-right: 0;
-    }
-    h2 {
-      color: $accent;
-      margin-bottom: 0;
-    }
-    @media #{$one-column} {
-      width: 100%;
-    }
-    #links {
-      ul.links {
-        margin-top: 0;
-        margin-bottom: 0;
-        li {
-          line-height: 40px;
-          display: block;
-          height: 40px;
-          width: 100%;
-          box-sizing: border-box;
-          &:hover {
-            background: $background-color-four;
-            a {
-              text-decoration: none;
-            }
-          }
-          a {
-            font-size: 14px;
-            display: block;
-            padding: 0 15px;
-          }
-        }
-        li.current {
-          padding: 0 15px;
-          background: $accent;
-          color: $font-color-seven;
-        }
-      }
-    }
-  }
   #large_users_grid {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    // margin-right: -18px;
-    @media #{$one-column} {
-      width: 100%;
-    }
-    @media #{$mobile} {
-      justify-content: space-around;
-    }
-
     div.clear {
       display: none;
     }
@@ -78,24 +23,17 @@
       position: relative;
       text-align: center;
       font-size: 11px;
-      width: 125px;
-      margin-right: 26.66px;
-      margin-bottom: $baseline * 1.5;
       padding-bottom: $baseline / 4;
       text-align: center;
       background-color: $background-color-one;
       border-radius: 6px;
       box-shadow: 0px 1.5px 2.75px rgba(0, 0, 0, 0.15);
       overflow: hidden;
-      @media #{$mobile} {
-        display: block !important;
-        width: 45%;
-        margin: 0;
-        margin-bottom: 18px;
-      }
-      img.cover {
-        width: 125px;
-        height: 125px;
+      a.overlay {
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
       .name {
         font-size: 13px;
