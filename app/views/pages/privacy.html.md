@@ -1,6 +1,6 @@
-## Privacy Policy
+## Privacy is a big deal
 
-Privacy is a big deal, so below is a bit of information about how we collect and handle your data.
+Below is a bit of information about how we collect and handle your data.
 
 ## What information does alonetone collect?
 

@@ -226,4 +226,34 @@ RSpec.describe Admin::AssetsController, type: :request do
       }.to change(Listen, :count).by(2)
     end
   end
+
+  describe '#index' do
+    let(:soft_deleted_asset) { assets(:asset_with_relations_for_soft_delete) }
+    let(:spam_track) { assets(:spam_track) }
+
+    it 'returns list of all assets' do
+      get admin_assets_path
+      expect(response.body).to match(/Soft deleted asset/)
+      expect(response.body).to match(/song6/)
+    end
+
+    it 'should only return spam assets if flag is passed' do
+      get admin_assets_path(filter_by: :is_spam)
+      expect(response.body).not_to match(/Soft deleted asset/)
+      expect(response.body).to match(/song6/)
+    end
+
+    it 'should only return deleted assets if flag is passed' do
+      get admin_assets_path(filter_by: :deleted)
+      expect(response.body).to match(/Soft deleted asset/)
+      expect(response.body).not_to match(/song6/)
+    end
+
+    it 'should display users deleted_at date (if present)' do
+      UserCommand.new(users(:jamie_kiesl)).soft_delete_with_relations
+
+      get admin_assets_path(filter_by: :deleted)
+      expect(response.body).to match(/Deleted/)
+    end
+  end
 end

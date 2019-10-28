@@ -6,13 +6,27 @@ module Admin
       @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]))
     end
 
+    def show
+      @assets_pagy, @assets = pagy(@user.assets.with_deleted, items: 5)
+      @comment_pagy, @comments = pagy(@user.comments_made.with_deleted, items: 5)
+    end
+
     def delete
       UserCommand.new(@user).soft_delete_with_relations
-      redirect_to admin_users_path(filter_by: :deleted)
+
+      respond_to do |format|
+        format.html { redirect_to admin_users_path(filter_by: :deleted) }
+        format.js { redirect_back(fallback_location: root_path) }
+      end
     end
 
     def restore
       UserCommand.new(@user).restore_with_relations
+
+      respond_to do |format|
+        format.html { redirect_to admin_users_path }
+        format.js { redirect_back(fallback_location: root_path) }
+      end
     end
 
     def unspam

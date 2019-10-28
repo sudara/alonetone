@@ -1,0 +1,94 @@
+// used by:
+//            home playlists area
+//            /user playlists area
+//            /user/playlists page
+//            /users/
+//            /playlists/
+
+$gutter-width: 26.66px;
+$three-column-cutoff: "only screen and (max-width: 800px)";
+$two-column-cutoff: "only screen and (max-width: 550px)";
+
+ul.responsive_grid {
+  margin-bottom: 0;
+  li {
+    margin-bottom: $gutter-width;
+    width: calc(25% - 20px);
+    margin-right: $gutter-width;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+    > a:first-child {
+      padding-top: 100%;
+      box-sizing: border-box;
+      position: relative;
+      img, svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+    a {
+      span {
+        display: none;
+      }
+    }
+  }
+  @media #{$three-column-cutoff} {
+    li {
+      width: calc(33.33333% - 17.77px);
+      &:nth-child(1n),
+      &:nth-child(2n),
+      &:nth-child(3n) {
+        display: block;
+      }
+      &:nth-child(3n) {
+        margin-right: 0 !important;
+      }
+      &:nth-child(4n) {
+        margin-right: $gutter-width;
+      }
+    }
+  }
+  @media #{$two-column-cutoff} {
+    li {
+      display: block !important;
+      width: calc(50% - 13.33px);
+      margin-bottom: $gutter-width!important;
+      margin-right: $gutter-width !important;
+      &:nth-child(3n) {
+        margin-right: $gutter-width !important;
+      }
+      &:nth-child(2n) {
+        margin-right: 0 !important;
+      }
+      img {
+        width: 100%;
+      }
+      svg {
+        width: 100%;
+      }
+    }
+  }
+  @media #{$mobile} {
+    width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// Home and /user have a special case where the 4th of 4 featured
+// playlists should not show at all in 3 column view
+// also they have no bottom margin
+ul.responsive_grid_single_row {
+  li {
+    margin-bottom: 0;
+  }
+  @media #{$three-column-cutoff} {
+    li {
+      &:nth-child(4) {
+        display: none;
+      }
+    }
+  }
+}
