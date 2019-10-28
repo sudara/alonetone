@@ -13,21 +13,9 @@ module PlaylistsHelper
     content_tag(:div, '', class: 'no_pic')
   end
 
-  # Returns a different variant when the Pic with the supplied ID does not have the variant.
-  def downgrade_variant(playlist, variant:)
-    if playlist.ancient_cover_quality?
-      downgrade_ancient_variant(variant: variant)
-    elsif playlist.legacy_cover_quality?
-      downgrade_legacy_variant(variant: variant)
-    else
-      variant
-    end
-  end
-
   # Returns a URL to the playlist's cover or nil when there is no cover.
   def playlist_cover_url(playlist, variant:)
     if playlist.cover_image_present?
-      variant = downgrade_variant(playlist, variant: variant)
       playlist.cover_image_location(variant: variant).to_s
     end
   end
