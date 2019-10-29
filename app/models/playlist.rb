@@ -84,7 +84,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def set_published_at
-    self.published_at = Time.now if publishing?
+    self.published_at = Time.zone.now if publishing? && can_be_public?
   end
 
   def notify_followers
@@ -129,8 +129,14 @@ class Playlist < ActiveRecord::Base
   end
 
   def ensure_private_if_less_than_two_tracks
-    self.private = true if !is_favorite? && (tracks_count < 2)
+    self.private = true if !is_favorite? && !can_be_public?
     true
+  end
+
+  # list any required conditions before playlist
+  # can be made public
+  def can_be_public?
+    tracks_count >= 2
   end
 
   # playlist is a mix if there is at least one track with a track from another user
