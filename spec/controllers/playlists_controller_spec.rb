@@ -167,6 +167,19 @@ RSpec.describe PlaylistsController, type: :controller do
       expect(playlists(:jamie_kiesl_loves).reload.published_at).not_to be_nil
     end
 
+    it "should not publish if playlist has less than 2 tracks" do
+      expect(playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).tracks.count).to eq(1)
+
+      put :update, params: {
+        id: playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).id,
+        permalink: 'jamie-playlist-with-soft-delete',
+        user_id: user.login,
+        playlist: {
+          private: false
+        }}
+      expect(playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).reload.published_at).to be_nil
+    end
+
     it "should set is_mix to true if is_favorite?" do
       put :update, params: {
         id: playlists(:jamie_kiesl_loves).id,

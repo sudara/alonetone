@@ -109,7 +109,7 @@ jamie_kiesl_loves:
   title: Jamie Loves
   cover_quality: legacy
   credits: Did I mention that I'm really good at naming cheeses really quickly?
-  tracks_count: 1
+  tracks_count: 4
   user: jamie_kiesl
 
 # Contains a track that points to a deleted asset.
@@ -117,10 +117,11 @@ jamie_kiesl_playlist_with_soft_deleted_tracks:
   user: jamie_kiesl
   is_mix: true
   is_favorite: true
-  permalink: jamie-loves
+  permalink: jamie-playlist-with-soft-delete
   title: Jamie Loves
   cover_quality: legacy
   credits: Playlist to test tracks_count change for when asset is soft deleted
   tracks_count: 1
+  private: true
   published_at: ~
   created_at: <%= 1.year.ago %>
