@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
   before_action :require_login, except: %i[index show latest radio listen_feed]
   before_action :check_new_user_abuse, only: %i[new create]
 
-  etag { "#{current_user&.id}" }
+  etag { current_user&.id }
 
   # home page
   def latest
@@ -162,7 +162,7 @@ class AssetsController < ApplicationController
         redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"
-        render action: "edit"
+        render :edit
       end
     end
   end
