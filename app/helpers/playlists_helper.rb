@@ -15,9 +15,7 @@ module PlaylistsHelper
 
   # Returns a URL to the playlist's cover or nil when there is no cover.
   def playlist_cover_url(playlist, variant:)
-    if playlist.cover_image_present?
-      playlist.cover_image_location(variant: variant).to_s
-    end
+    playlist.cover_image_location(variant: variant).to_s if playlist.cover_image_present?
   end
 
   # Returns an <img> tag with the cover for the playlist. Breaks when the playlist does not have
