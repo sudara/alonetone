@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_202956) do
+ActiveRecord::Schema.define(version: 2019_10_31_225407) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -465,7 +465,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.integer "posts_count", default: 0
     t.integer "topics_count", default: 0
     t.datetime "last_seen_at"
-    t.integer "moderation_state", default: 0, null: false
+    t.integer "moderation_state", default: 1, null: false
     t.timestamp "moderation_state_changed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
