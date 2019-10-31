@@ -19,7 +19,7 @@
         <% end %>
       </h2>
       <div class="box">
-        <%= render partial: 'assets/asset', collection: @assets %>
+        <%= render partial: 'assets/asset', collection: @assets, layout: 'normal_playback' %>
       </div>
       <div class="below_box">
         <%= link_to radio_source_home_path('latest'), class: 'view_all', title: 'latest music on alonetone' do %>
@@ -61,7 +61,7 @@
         <% end %>
       </h2>
       <div class="box">
-      <%= render partial: 'assets/asset', collection: @popular %>
+      <%= render partial: 'assets/asset', collection: @popular, layout: 'normal_playback' %>
       </div>
       <div class="below_box">
         <%= link_to radio_source_home_path('popular'), class: "view_all", title: 'alonetone radio: currently kicking ass' do %>
@@ -82,7 +82,7 @@
         </h2>
         <div class="box">
           <% @favorites.each do |favorite| %>
-            <%= render partial: 'assets/asset', locals: { asset: favorite.asset, favorite: favorite } %>
+            <%= render partial: 'assets/asset', layout: 'normal_playback', locals: { asset: favorite.asset, favorite: favorite } %>
           <% end %>
         </div>
         <div class="below_box">
@@ -108,7 +108,7 @@
 
         <div class="box">
           <div>
-            <%= render partial: 'assets/asset', collection: @followee_tracks %>
+            <%= render partial: 'assets/asset', collection: @followee_tracks, layout: 'normal_playback' %>
           </div>
         </div>
 

@@ -63,7 +63,7 @@
       <div id="user_latest_area">
         <h2>Latest Music</h2>
         <div id="user_latest" class="box">
-          <%= render partial: 'assets/asset', collection: @assets %>
+          <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @assets %>
         </div>
         <div class="below_box">
           <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}"  do %>
@@ -82,7 +82,8 @@
         <h2>Recently Listened To</h2>
 
         <div class="box">
-          <%= render partial: 'assets/asset', collection: @listens, as: :asset %>
+          <%= render partial: 'assets/asset', layout: 'assets/normal_playback',
+            collection: @listens, as: :asset %>
         </div>
 
         <div class="below_box">
@@ -129,7 +130,8 @@
     <div id="user_favorites_area">
       <h2>Recent Favorites</h2>
       <div class="box">
-        <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
+        <%= render partial: 'assets/asset', layout: 'assets/normal_playback',
+          collection: @favorites, as: :asset %>
       </div>
       <div class="below_box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
@@ -150,7 +152,7 @@
         <div id="user_popular" class="box">
           <%= link_to " ", user_tracks_path(@user),
           class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
-          <%= render partial: 'assets/asset', collection: @popular_tracks %>
+          <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @popular_tracks %>
         </div>
       </div>
     <% end %>
