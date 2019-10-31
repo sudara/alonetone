@@ -62,7 +62,7 @@ RSpec.describe UsersHelper, type: :helper do
   end
 
   it "renders image link " do
-    element = user_image_link(nil, variant: :large)
+    element = user_image_link(nil, variant: :large_avatar)
     expect(element).to include(UsersHelper.no_avatar_path)
   end
 
@@ -72,7 +72,7 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     it "formats an image element" do
-      element = user_image(nil, variant: :large)
+      element = user_image(nil, variant: :large_avatar)
       expect(element).to match_css('img[class="no_border"][src]')
       expect(element).to include(UsersHelper.no_avatar_path)
     end
@@ -123,7 +123,7 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     it "formats an image element" do
-      element = user_image(user, variant: :large)
+      element = user_image(user, variant: :large_avatar)
       expect(element).to match_css('img[class="no_border"][src]')
       expect(element).to include(UsersHelper.no_avatar_path)
     end
