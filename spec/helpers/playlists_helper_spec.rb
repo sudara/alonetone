@@ -20,7 +20,7 @@ RSpec.describe PlaylistsHelper, type: :helper do
     end
 
     it 'formats a cover URL' do
-      %i[large album greenfield].each do |variant|
+      %i[playlist_card playlist_cover].each do |variant|
         url = playlist_cover_url(playlist, variant: variant)
         expect(url).to start_with('http://')
         expect(url).to end_with('.jpg')
