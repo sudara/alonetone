@@ -1,5 +1,4 @@
 Bugsnag.configure do |config|
-  config.logger.level = Logger::ERROR # Don't be noisy in dev/test
   config.notify_release_stages = ['production']
   config.api_key = Rails.configuration.alonetone.bugsnag_api_key
   config.auto_capture_sessions = true
