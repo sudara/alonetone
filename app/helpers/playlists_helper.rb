@@ -75,14 +75,4 @@ module PlaylistsHelper
       false
     end
   end
-
-  private
-
-  def downgrade_ancient_variant(variant:)
-    %i[greenfield original].include?(variant) ? :album : variant
-  end
-
-  def downgrade_legacy_variant(variant:)
-    variant == :greenfield ? :original : variant
-  end
 end

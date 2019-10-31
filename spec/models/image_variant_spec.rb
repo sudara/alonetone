@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe ImageVariant, type: :model do
   it "returns dimensions to use when resizing image variant" do
-    options = ImageVariant.variant_options(:small)
-    size = ImageVariant::VARIANTS[:small]
+    options = ImageVariant.variant_options(:small_avatar)
+    size = ImageVariant::VARIANTS[:small_avatar]
     expect(options[:resize_to_fill]).to eq([size, size, crop: :centre])
 
     options = ImageVariant.variant_options(:greenfield)
@@ -15,7 +15,7 @@ RSpec.describe ImageVariant, type: :model do
 
   it "verifies known variants" do
     expect do
-      ImageVariant.verify(:large)
+      ImageVariant.verify(:large_avatar)
     end.to_not raise_error
   end
 
