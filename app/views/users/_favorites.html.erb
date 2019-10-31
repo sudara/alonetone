@@ -1,9 +1,0 @@
-<div id="user_listens" class="box">
-  <h2 class="box">Recent alonetone favorites</h2>
-    <%= render partial: 'assets/asset', collection: @favorites, as: :asset %>
-</div>
-<div class="footer_box">
-  <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
-  <span> view all favorites </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
-	<% end if @user.favorites.tracks.size > 5%>
-</div>

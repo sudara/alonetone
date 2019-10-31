@@ -49,7 +49,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
     logged_in(:henri_willig) do
       visit 'henriwillig/playlists/polderkaas/edit'
 
-      # remove second track
+      # test that we can remove second track
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
 

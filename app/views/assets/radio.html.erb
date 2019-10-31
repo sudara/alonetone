@@ -21,7 +21,7 @@
       <%== pagy_nav @pagy %>
     </div>
     <div id="radio_tracks" class="box">
-      <%= render partial: 'assets/asset', collection: @assets  %>
+      <%= render partial: 'assets/asset', collection: @assets, layout: 'normal_playback'  %>
     </div>
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
