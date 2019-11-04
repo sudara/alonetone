@@ -15,7 +15,7 @@ Thredded.user_path = ->(user) { '/' + user.to_param }
 
 # Configure which URL to use for an avatar.
 Thredded.avatar_url = lambda do |user|
-  user.avatar_image_location(variant: :album).to_s.presence || UsersHelper.no_avatar_path
+  user.avatar_image_location(variant: :large_avatar).to_s.presence || UsersHelper.no_avatar_path
 end
 
 # The name of the moderator flag column on the users table.
