@@ -159,6 +159,4 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  delegate :greenfield_hostname, to: 'Rails.configuration.alonetone'
-  helper_method :greenfield_hostname
 end

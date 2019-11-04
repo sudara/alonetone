@@ -303,8 +303,6 @@ RSpec.describe UsersController, type: :controller do
         expect(users(:arthur).tracks.count).to be > 0
         expect(users(:arthur).listens.count).to be > 0
         expect(users(:arthur).playlists.count).to be > 0
-        expect(users(:arthur).topics.count).to be > 0
-        expect(users(:arthur).topics.count).to be > 0
 
         delete :destroy, params: { id: 'arthur', login: 'arthur' }
 
@@ -314,7 +312,6 @@ RSpec.describe UsersController, type: :controller do
         expect(users(:arthur).tracks.count).to eq(0)
         expect(users(:arthur).listens.count).to eq(0)
         expect(users(:arthur).playlists.count).to eq(0)
-        expect(users(:arthur).topics.count).to eq(0)
         expect(users(:arthur).comments_received.count).to eq(0)
       end
     end

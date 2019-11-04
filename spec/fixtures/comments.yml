@@ -140,22 +140,3 @@ another_public_non_spam_comment_for_soft_deleted_asset:
   remote_ip: 127.1.1.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
-
-william_bitching_about_2018:
-  commentable: new_year_2018 (Post)
-  body: I have New Years
-  is_spam: false
-  user: sudara
-  commenter: william_shatner
-  remote_ip: ::1
-  private: false
-  created_at: 2018-01-01 14:46:12
-william_bitching_about_2019:
-  commentable: new_year_2019 (Post)
-  body: I have New Years
-  is_spam: false
-  user: sudara
-  commenter: william_shatner
-  remote_ip: ::1
-  private: false
-  created_at: 2019-01-01 08:09:48
