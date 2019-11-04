@@ -18,7 +18,7 @@ RSpec.describe Storage::Location, type: :model do
     user.avatar_image
   end
   let(:image_variant) do
-    ImageVariant.variant(image_attachment, variant: :small)
+    ImageVariant.variant(image_attachment, variant: :small_avatar)
   end
   let(:fastly_base_url) { 'https://fastly.example.com/images' }
 

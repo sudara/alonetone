@@ -86,7 +86,6 @@ We get trouble with downloading bots, spambots. We have manually hardcoded IPs i
 * The `Asset` model refers to an mp3, `Track` is an entry in a `Playlist`
 * Playlists are either albums or mixes depending on a boolean, determined `after_update`
 * The home page is `assets#latest`
-* The new theme has views prefixed with `_white`
 * Too many views are in `shared/`
 * Some features are behind `greenfield_enabled?` flag on User
 * "Greenfield" is what we called the initial development of a new frontend (listenapp.com) that rode on top of alonetone. We've now pulled those features into alonetone itself. We still need to remove the engine and deal with the content on listenapp.com, such as migrating `Post` content to `Asset#description`. Luckily only 5-6 albums there.

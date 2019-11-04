@@ -1,5 +1,4 @@
 class PlaylistsController < ApplicationController
-  include GreenfieldPlaylistDownloads
   include Listens
 
   before_action :find_user, except: :all
@@ -15,7 +14,6 @@ class PlaylistsController < ApplicationController
   def index
     @page_title = @description = "#{@user.name}'s albums and playlists"
     set_playlists
-    render 'index_white' if white_theme_enabled?
   end
 
   def sort
@@ -42,11 +40,7 @@ class PlaylistsController < ApplicationController
       format.html do
         lazily_create_waveform_if_needed if @asset
         @page_title = @description = "#{@playlist.title} by #{@user.name}"
-        if request.xhr?
-          render '/shared/_asset_white', layout: false
-        else
-          render 'show_white' if white_theme_enabled?
-        end
+        render('/shared/_asset', layout: false) if request.xhr?
       end
       format.mp3 do
         listen(@asset, register: false)
@@ -66,8 +60,8 @@ class PlaylistsController < ApplicationController
     @page_title = "Editing \"#{@playlist.title}\" by #{@user.name}"
     if request.xhr?
       render_desired_partial
-    elsif white_theme_enabled?
-      render 'edit_white'
+    else
+      render 'edit'
     end
   end
 
@@ -77,7 +71,7 @@ class PlaylistsController < ApplicationController
     @track = @playlist.tracks.create(asset: asset, user: @user)
     respond_to do |format|
       format.js do
-        render plain: @track.id if white_theme_enabled?
+        render plain: @track.id
       end
     end
   end

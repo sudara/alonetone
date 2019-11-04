@@ -1,20 +1,14 @@
-<%= render(partial: 'users/user') %>
-<% if authorized? %>
-  <div class="additional_options_solo">
-    <div class="button_wrapper">
-      <%= link_to image_tag("icons/plus.png") + "create new playlist", new_user_playlist_path(@user), id: 'create_new_playlist', class: 'button' %>
-    </div>
-    <% if @user.playlists.only_public.size > 1 %>
-      <div class="button_wrapper">
-        <%= link_to image_tag("icons/arrows.png") + "change playlist order", sort_user_playlists_path(@user.login), id: 'change_playlist_order', class: 'button'  %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
-<% content_for :left do %>
-  <%= render partial: 'playlist', collection: @playlists_left if @playlists_left %>
-<% end %>
 
-<% content_for :right do %>
-  <%= render partial: 'playlist', collection: @playlists_right if @playlists_right %>
-<% end %>
+<div class="user_playlists" data-controller="playlists-sort" data-playlists-sort-enabled="<%= current_user_is_mod_or_owner?(@user) %>">
+  <h1><%= @user.name %>'s Playlists</h1>
+  <% if current_user_is_mod_or_owner?(@user) %>
+    <p class='sort_instructions'>
+      Drag to reorder.
+    </p>
+    <div class="playlists_feedback" data-target="playlists-sort.feedback">
+    </div>
+  <% end %>
+  <ul class="playlists sortable no_artist_name_playlists responsive_grid"  data-target="playlists-sort.sortable">
+    <%= render partial: 'shared/playlist', collection: @playlists, as: :playlist, cached: true %>
+  </ul>
+</div>

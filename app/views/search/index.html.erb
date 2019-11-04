@@ -8,11 +8,7 @@
   <% content_for :left do %>
     <h2 class="user_search_results_heading">Artists that match "<%= @query %>"</h2>
     <div id="user_search_results">
-      <% if white_theme_enabled? %>
-        <%= render partial: 'shared/user_white', collection: @users, as: :user %>
-      <% else %>
-        <%= render partial: 'shared/user', collection: @users %>
-      <% end %>
+      <%= render partial: 'shared/white', collection: @users, as: :user %>
     </div>
   <% end %>
 <% end %>
@@ -24,7 +20,7 @@
       <%== pagy_nav @assets_pagy %>
     </div>
     <div class="tracks_search_results box">
-      <%= render partial: 'assets/asset', collection: @assets if @assets %>
+      <%= render(partial: 'assets/asset', layout: 'assets/normal_playback', collection: @assets) if @assets %>
     </div>
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @assets_pagy %>
