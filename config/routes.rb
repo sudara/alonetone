@@ -32,8 +32,6 @@ Alonetone::Application.routes.draw do
     end
   end
 
-  resources :groups
-
   mount Thredded::Engine => '/discuss'
   get '/upload', :to => 'assets#new'
   post '/listens', :to => 'listens#create', as: 'register_listen'
@@ -41,14 +39,11 @@ Alonetone::Application.routes.draw do
   get '/favorites', :to => 'playlists#favorites'
   get '/login', :to => 'user_sessions#new', :as => 'login'
   get '/logout', :to => 'user_sessions#destroy', as: 'logout', via: [:get, :post]
-  resources :user_sessions
-
   get '/notifications/subscribe' => 'notifications#subscribe'
   get '/notifications/unsubscribe' => 'notifications#unsubscribe'
 
   get '/follow/:login' => 'following#follow', as: :follow
   get '/unfollow/:login' => 'following#unfollow', as: :unfollow
-  get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
   # admin stuff
   get 'admin' => 'admin#index'
@@ -63,13 +58,7 @@ Alonetone::Application.routes.draw do
   get 'rpmchallenge' => 'pages#rpm_challenge'
   get '24houralbum' =>  'pages#twentyfour'
 
-  resources :features
-
-  get 'blog' => 'updates#index', :as => "blog_home"
-
-  resources 'updates', :as => 'blog'
-  resources :updates, :password_resets
-  resources :comments
+  resources :password_resets, :comments, :user_sessions, :groups
 
   get 'about/' => 'pages#about'
   get 'about/why-i-built-alonetone' => 'pages#why'
@@ -81,13 +70,6 @@ Alonetone::Application.routes.draw do
   get 'settings', to: 'users#edit'
   get '/activate/:perishable_token', to: 'users#activate'
 
-  get '/latest.:format' => 'assets#latest'
-
-  # latest mp3s uploaded site-wide
-  get '/latest/:latest' => 'assets#latest', :as => 'latest'
-
-  get'/:login/listenfeed.:format' => 'assets#listen_feed', :as => 'listen_feed'
-
   get 'radio' =>'assets#radio', :as => 'radio_home'
   get 'radio/:source' => 'assets#radio', :as => 'radio_source_home'
   get 'radio/:source/:items' => 'assets#radio', :as => 'radio'
@@ -98,31 +80,8 @@ Alonetone::Application.routes.draw do
   get '/users/by/activity/:page' => 'users#index', :sort => 'active', :defaults => {:page => 1}, :as => 'users_default'
   get '/users/(by/:sort(/:page))' => 'users#index', :defaults => {:page => 1}, :as => 'sorted_users'
 
-  get ':login/history' => 'listens#index', :as => 'listens'
-
   get 'comments' => 'comments#index', :as => 'all_comments'
   get 'playlists' => 'playlists#all', :as => 'all_playlists'
-  get ':login/comments' => 'comments#index', :as => 'user_comments'
-  get ':login/stats.:format' => 'users#stats', :as => 'user_stats'
-
-  resources :forums do
-    resources :topics do
-      resources :posts do
-        member do
-          put :unspam
-          put :spam
-        end
-      end
-    end
-    resources :posts
-  end
-
-  resources :posts do
-    collection do
-      get :search
-    end
-  end
-
 
   get 'toggle_favorite' => 'users#toggle_favorite'
 
@@ -132,9 +91,12 @@ Alonetone::Application.routes.draw do
   root :to => 'assets#latest'
 
   resources :users
-  get ':login' => 'users#show', :as => "user_home"
-  get ':login.:format' => 'users#show', :as => "user_feeds"
 
+  get ':login/history' => 'listens#index', :as => 'listens'
+  get ':login/comments' => 'comments#index', :as => 'user_comments'
+  get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
+
+  get ':login' => 'users#show', :as => "user_home"
   resources :users, :path => "/" do
     member do
       post :attach_pic
@@ -173,12 +135,5 @@ Alonetone::Application.routes.draw do
       resources :comments
     end
     get '/playlists/:id/:asset_id', :to => 'playlists#show', as: 'show_track_in_playlist'
-  end
-
-  if Rails.env.test?
-    # Paperclip serves its files from the public directory, something that does't work well
-    # with mocked uploaded files in feature specs. The files controller serves these files
-    # so we don't have to muck around in the Rack middleware stack to solve this.
-    get '/system/*path', to: 'test/files#show'
   end
 end
