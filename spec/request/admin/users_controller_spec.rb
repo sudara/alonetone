@@ -69,7 +69,6 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).tracks.count).to be > 0
       expect(users(:arthur).listens.count).to be > 0
       expect(users(:arthur).playlists.count).to be > 0
-      expect(users(:arthur).topics.count).to eq(0)
       expect(users(:arthur).comments_received.count).to be > 0
     end
   end
@@ -97,8 +96,6 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).tracks.count).to be > 0
       expect(users(:arthur).listens.count).to be > 0
       expect(users(:arthur).playlists.count).to be > 0
-      expect(users(:arthur).topics.count).to be > 0
-      expect(users(:arthur).topics.count).to be > 0
 
       put delete_admin_user_path(users(:arthur))
 
@@ -108,7 +105,6 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).tracks.count).to eq(0)
       expect(users(:arthur).listens.count).to eq(0)
       expect(users(:arthur).playlists.count).to eq(0)
-      expect(users(:arthur).topics.count).to eq(0)
       expect(users(:arthur).comments_received.count).to eq(0)
     end
 
