@@ -136,10 +136,6 @@ class User < ApplicationRecord
   # musicians who this person follows
   has_many :followees, through: :follows, source: :user
 
-  # old forum
-  has_many :posts,  -> { order("#{Post.table_name}.created_at desc") }
-  has_many :topics, -> { order("topics.created_at desc") }
-
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :avatar_image

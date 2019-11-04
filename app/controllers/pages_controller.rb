@@ -63,7 +63,6 @@ class PagesController < ApplicationController
     @listens_per_user = User.average('listens_count').try(:ceil) || 0
     @tracks_per_user = User.average('assets_count').try(:ceil) || 0
     @listens_per_week_per_track = Asset.average('listens_per_week').try(:ceil) || 0
-    @posts_per_user = User.average('posts_count') || 0
   end
 
   def itunes
