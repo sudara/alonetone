@@ -35,7 +35,6 @@ class UserCommand
   def efficiently_delete_relations(time = Time.now)
     Listen.where(track_owner_id: user.id).update_all(deleted_at: time)
     Listen.where(listener_id: user.id).update_all(deleted_at: time)
-    Topic.where(user_id: user.id).where('posts_count < 2').destroy_all
     Playlist.joins(:assets).where(assets: { user_id: user.id })
             .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', time])
     Track.joins(:asset).where(assets: { user_id: user.id }).update_all(deleted_at: time)
@@ -73,7 +72,7 @@ class UserCommand
     Track.joins(:asset).where(assets: { user_id: user.id }).delete_all
     user.assets.destroy_all
 
-    %w[tracks playlists posts comments_received comments_made].each do |user_relation|
+    %w[tracks playlists comments_received comments_made].each do |user_relation|
       user.send(user_relation).delete_all
     end
     true
