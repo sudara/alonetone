@@ -25,8 +25,8 @@ RSpec.describe UserSessionsController, type: :controller do
   end
 
   it "should redirect to last page viewed after login" do
-    post :create, params: { user_session: { login: 'arthur', password: 'test' } }, session: { return_to: '/forums' }
-    expect(response).to redirect_to('http://test.host/forums')
+    post :create, params: { user_session: { login: 'arthur', password: 'test' } }, session: { return_to: '/playlists' }
+    expect(response).to redirect_to('http://test.host/playlists')
   end
 
   it "should not login a user with a bad password" do
