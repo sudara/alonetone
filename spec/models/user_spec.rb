@@ -101,7 +101,6 @@ RSpec.describe User, type: :model do
   context "deletion" do
     let(:user) { users(:sudara) }
     let!(:asset) { assets(:valid_mp3) }
-    let!(:topic) { topics(:topic1) }
     let!(:playlist) { playlists(:owp) }
     let!(:comment) { comments(:valid_comment_on_asset_by_user) }
     let!(:listen) { listens(:valid_listen) }
