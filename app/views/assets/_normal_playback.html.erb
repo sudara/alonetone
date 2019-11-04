@@ -1,4 +1,4 @@
-<%= cache([asset, asset.user, logged_in?, local_assigns[:favorite]], 'v2') do %>
+<%= cache([asset, asset.user, logged_in?, local_assigns[:favorite], 'v2']) do %>
   <div class="asset" data-controller="normal-playback" data-normal-playback-id="<% asset.id %>">
   <%= yield %>
   </div>
