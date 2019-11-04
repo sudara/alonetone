@@ -140,9 +140,6 @@ class User < ApplicationRecord
   has_many :posts,  -> { order("#{Post.table_name}.created_at desc") }
   has_many :topics, -> { order("topics.created_at desc") }
 
-  # will be removed along with /greenfield
-  has_many :greenfield_posts, through: :assets
-
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :avatar_image
