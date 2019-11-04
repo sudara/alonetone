@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_122915) do
+ActiveRecord::Schema.define(version: 2019_11_04_123633) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -533,7 +533,6 @@ ActiveRecord::Schema.define(version: 2019_11_04_122915) do
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
     t.text "settings", size: :long
-    t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
     t.integer "followers_count", default: 0
     t.integer "login_count", default: 0, null: false
