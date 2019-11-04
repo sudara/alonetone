@@ -125,7 +125,6 @@ Alonetone::Application.routes.draw do
       end
       member do
         post :attach_pic
-        post :downloads, to: 'playlists#create_greenfield_download'
         get  :remove_track
         post :set_playlist_title
         post :set_playlist_description
