@@ -1,14 +1,11 @@
 <% if should_display_track_with_comment? %>
-  <%= render partial: 'assets/asset', locals: { asset: comment.commentable } if comment.commentable && comment.commentable_type == "Asset" %>
+  <%= render(partial: 'assets/asset', layout: 'assets/normal_playback',
+    locals: { asset: comment.commentable }) if comment.commentable && comment.commentable_type == "Asset" %>
 <% end %>
 
 <%= div_for comment, class: (cycle('even', 'odd')) do %>
   <div class="comment_user">
-    <%= user_image_link(comment.commenter, variant: :small_avatar)%>
-    <% if comment.private && !white_theme_enabled? %>
-        <div class="private_comment">
-        </div>
-    <% end %>
+    <%= user_image_link(comment.commenter, variant: :small_avatar) %>
 	</div>
 
 	<div class="comment_right">
@@ -26,7 +23,7 @@
     <p>
 	  	<%= strip_tags(markdown(comment.body)) %>
     </p>
-		<% if comment.private && white_theme_enabled? %>
+		<% if comment.private %>
 			<div class="private_message">private message</div>
 		<% end %>
 

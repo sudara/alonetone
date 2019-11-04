@@ -10,9 +10,4 @@ RSpec.describe PagesController, type: :controller do
     get :stats
     expect(response).to be_successful
   end
-
-  it "should have a contact page that renders without errors" do
-    get :press
-    expect(response).to be_successful
-  end
 end

@@ -52,10 +52,6 @@ class ForumsController < ApplicationController
 
   protected
 
-  def forums_layout
-    white_theme_enabled? ? 'white_theme' : 'forums'
-  end
-
   def find_forum
     @forum = Forum.where(permalink: params[:id]).first || not_found
   end

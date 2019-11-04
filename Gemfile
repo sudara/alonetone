@@ -6,9 +6,6 @@ gem 'puma', '< 4.1' # experiencing some issues with config on 4.1
 
 gem 'thredded'
 
-# greenfield
-gem 'greenfield', path: 'greenfield'
-
 # ruby
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
@@ -52,8 +49,7 @@ gem 'jquery-fileupload-rails'
 gem 'webpacker'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'sass-rails', '< 5.1' # We cannot move to 6.0 before compass is removed
-gem 'compass-rails', '~> 3.1' # Dark theme relies on sprites from compass
+gem 'sass-rails'
 gem 'yui-compressor'
 gem 'uglifier'
 gem 'coffee-rails', github: 'rails/coffee-rails'
