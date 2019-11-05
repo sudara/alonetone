@@ -28,7 +28,7 @@ application.load(definitionsFromContext(context))
 
 
 function handlers() {
-  document.querySelectorAll('.large-cover .no_pic, .small-cover .no_pic').forEach((pic) => {
+  document.querySelectorAll('.large_cover .no_pic, .small_cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
     if (!pic.hasChildNodes()) {
       pic.append(makeSVGFromTitle(800, title))

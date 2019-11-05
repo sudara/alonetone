@@ -11,11 +11,11 @@
     </div>
   <% end %>
 
-  <div class="track-edit">
+  <div class="track_edit">
     <header>
       <h1><%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %></h1>
       <h3><%= asset.user.name %></h3>
-      <div class="track-stats">
+      <div class="track_stats">
         <div class="created">Uploaded <%= local_time_ago(asset.created_at) %>.</div>
       </div>
     </header>
@@ -27,7 +27,7 @@
 
     <% if @allow_reupload %>
 
-    <div class="track-edit-bottom">
+    <div class="track_edit_bottom">
       <%= link_to 'Upload a new version of this track',"new_version_#{asset.object_id}", class: 'slide_open_href'%>
       <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
         <%= f.file_field :audio_file, class: 'asset_data' %>
@@ -38,7 +38,7 @@
         </div>
       </div>
       <% end %>
-      <div class="edit-save">
+      <div class="edit_save">
       <div class="submit_wrapper">
         <%= f.submit "Save" %>
         <div class="small_spinner" data-target="save.spinner"> </div>

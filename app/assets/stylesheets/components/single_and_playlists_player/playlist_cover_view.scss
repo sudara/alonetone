@@ -1,15 +1,15 @@
-body.cover-view {
-  .playlist-sidebar {
+body.cover_view {
+  .playlist_sidebar {
     border-radius: 6px 0 0 6px;
     align-self: stretch;
   }
-  .track-content {
+  .track_content {
     margin-left: -$baseline !important;
     min-width: 400px;
     @media #{$one-column} {
       min-width: auto;
     }
-    .large-cover-and-credits {
+    .large_cover_and_credits {
       @include samo-shadow-and-radius();
       border-radius: 0 6px 6px 0;
       overflow: auto;
@@ -17,7 +17,7 @@ body.cover-view {
         border-radius: 6px 6px 0 0;
       }
     }
-    .playlist-credits {
+    .playlist_credits {
       font-size: 13px;
       line-height: 18px;
       padding: $baseline/2;
@@ -33,7 +33,7 @@ body.cover-view {
         position: static;
       }
     }
-    .large-cover {
+    .large_cover {
       width: 100%;
       max-width: 800px;
       height: 0;
@@ -54,7 +54,7 @@ body.cover-view {
       max-width: 100%;
       display: block;
     }
-    .playlist-cover-alert {
+    .playlist_cover_alert {
       font-size: 14px;
       line-height: 1.5;
       padding: 5px 40px;
@@ -63,14 +63,14 @@ body.cover-view {
         text-decoration: underline;
       }
     }
-    .playlist-options {
+    .playlist_options {
       width: 100%;
       height: 50px;
       background-color: $background-color-five;
       font-family: $sans-font;
       border-radius: 0px;
       ul {
-        &.downloads-links {
+        &.downloads_links {
           float: left;
           margin-top: 0;
           margin-bottom: 0;
@@ -78,7 +78,7 @@ body.cover-view {
             background-image: image-url("svg/icon_playlist_download.svg");
           }
         }
-        &.external-links {
+        &.external_links {
           float: right;
           margin-top: 0;
           margin-bottom: 0;
@@ -113,11 +113,11 @@ body.cover-view {
             background-size: 19px 19px;
             background-repeat: no-repeat;
             background-position: 12px 15px;
-            span.service-name {
+            span.service_name {
               display: block;
               margin-top: 2px;
             }
-            span.action-text {
+            span.action_text {
               display: block;
               text-align: left;
               font-size: 10px;
