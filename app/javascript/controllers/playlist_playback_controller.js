@@ -1,8 +1,8 @@
 import Rails from '@rails/ujs'
 import PlaybackController from './playback_controller'
 
-const smallCover = document.querySelector('a.small-cover')
-const sidebarLinks = document.querySelector('.sidebar-downloads')
+const smallCover = document.querySelector('a.small_cover')
+const sidebarLinks = document.querySelector('.sidebar_downloads')
 
 export default class extends PlaybackController {
   static targets = ['loadTrack']
@@ -24,13 +24,13 @@ export default class extends PlaybackController {
       Rails.fire(this.loadTrackTarget, 'click')
     }
     this.registeredListen = false
-    this.playTarget.classList.replace('play-button', 'pause-button')
+    this.playTarget.classList.replace('play_button', 'pause_button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'pause')
   }
 
   pauseCallback() {
     this.bigPlay.pause()
-    this.playTarget.classList.replace('pause-button', 'play-button')
+    this.playTarget.classList.replace('pause_button', 'play_button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
 
@@ -67,7 +67,7 @@ export default class extends PlaybackController {
     // replace track content with result from ajax
     const temp = document.createElement('div')
     temp.innerHTML = e.detail[2].responseText
-    document.querySelector('.track-content').replaceWith(temp.firstChild)
+    document.querySelector('.track_content').replaceWith(temp.firstChild)
     if (e.target.href !== document.location.href) {
       const title = this.loadTrackTarget.textContent
       history.pushState(title, '', e.target.href)
@@ -87,18 +87,18 @@ export default class extends PlaybackController {
   }
 
   hideSmallCoverAndSidebarLinks() {
-    document.querySelector('a.small-cover').style.display = 'none'
-    document.querySelector('.sidebar-downloads').style.display = 'none'
+    document.querySelector('a.small_cover').style.display = 'none'
+    document.querySelector('.sidebar_downloads').style.display = 'none'
   }
 
   showSmallCoverAndSidebarLinks() {
-    document.querySelector('a.small-cover').style.display = 'block'
-    document.querySelector('.sidebar-downloads').style.display = 'block'
-    document.body.classList.remove('cover-view')
+    document.querySelector('a.small_cover').style.display = 'block'
+    document.querySelector('.sidebar_downloads').style.display = 'block'
+    document.body.classList.remove('cover_view')
   }
 
   setBigPlay() {
-    this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track-content'), 'big-play')
+    this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track_content'), 'big-play')
   }
 
   isCurrentTrack() {

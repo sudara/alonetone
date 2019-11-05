@@ -1,5 +1,5 @@
-.track-content {
-  .track-social {
+.track_content {
+  .track_social {
     margin-top:2em;
     box-shadow: none;
     background-color: transparent;
@@ -12,7 +12,7 @@
       color: $font-color-five;
       margin-bottom:0px
     }
-    .recent-listeners, .favoriters {
+    .recent_listeners, .favoriters {
       display: inline-block;
       border-radius: 5px;
       overflow: hidden; // clip the images

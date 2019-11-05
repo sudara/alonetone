@@ -30,6 +30,6 @@ export default class extends PlaybackController {
   }
 
   setBigPlay() {
-    this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track-content'), 'big-play')
+    this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track_content'), 'big-play')
   }
 }
