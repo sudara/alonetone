@@ -15,7 +15,7 @@
             <%== pagy_nav @pagy %>
           </div>
           <div class="box">
-          <%= render partial: 'asset', collection: @assets, cached: true %>
+            <%= render partial: 'asset', collection: @assets, layout: 'normal_playback', cached: true %>
           </div>
           <div class="mini_paginator bottom_paginator">
             <%== pagy_nav @pagy %>
