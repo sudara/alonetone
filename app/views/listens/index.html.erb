@@ -9,7 +9,9 @@
   <div class="mini_paginator top_paginator">
     <%== pagy_nav @listens_pagy %>
   </div>
-  <%= render partial: 'users/listen', collection: @listens %>
+  <div class="box">
+    <%= render partial: 'users/listen', collection: @listens %>
+  </div>
   <div class="mini_paginator bottom_paginator">
     <%== pagy_nav @listens_pagy %>
   </div>
