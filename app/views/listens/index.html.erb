@@ -1,8 +1,8 @@
 <div class="history">
 
-<div class="columns_header">
-  <%= render partial: 'shared/back_to_artist' %>
-</div>
+  <div class="columns_header">
+    <%= render partial: 'shared/back_to_artist' %>
+  </div>
 
 <% content_for :left do %>
   <h2><%= @user.name %>'s listening history</h2>
@@ -26,6 +26,7 @@
   <div class="mini_paginator bottom_paginator">
     <%== pagy_nav @track_plays_pagy %>
   </div>
+
 </div>
 
 <% end if authorized? %>
