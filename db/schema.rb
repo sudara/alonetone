@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_020417) do
+ActiveRecord::Schema.define(version: 2019_11_03_235016) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(version: 2019_10_29_020417) do
     t.datetime "deleted_at"
     t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
+    t.index ["user_id", "position"], name: "index_playlists_on_user_id_and_position"
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
