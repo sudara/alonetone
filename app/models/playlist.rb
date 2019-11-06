@@ -31,7 +31,7 @@ class Playlist < ActiveRecord::Base
 
   has_permalink :title
   before_validation :name_favorites_and_set_permalink, on: :create
-  before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
+  before_update :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
     :set_published_at, :notify_followers_if_publishing_album
 
   # We have to define attachments last to make the Active Record callbacks
@@ -139,18 +139,16 @@ class Playlist < ActiveRecord::Base
     tracks_count >= 2
   end
 
-  # playlist is a mix if there is at least one track with a track from another user
-  def set_mix_or_album
-    # is this a favorites playlist?
-    self.is_mix = true if is_favorite?
-    self.is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
-    true
-  end
-
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites_and_set_permalink
-    self.title = user.name + "'s favorite tracks" if is_favorite?
+
+    if is_favorite?
+
+      self.title = user.name + "'s favorite tracks"
+      self.is_mix = true
+    end
     generate_permalink!
+
   end
 
   def check_for_new_permalink
