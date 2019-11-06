@@ -37,7 +37,6 @@ class CommentsController < ApplicationController
       @pagy, @comments = pagy(Comment.with_preloads.on_track.public_or_private(moderator?))
       set_spam_comments
     end
-    render 'index_white' if white_theme_enabled?
   end
 
   protected

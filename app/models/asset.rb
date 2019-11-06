@@ -35,7 +35,6 @@ class Asset < ApplicationRecord
 
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
-  has_one :greenfield_post, class_name: '::Greenfield::Post'
   has_many :tracks,    dependent: :destroy
   has_many :playlists, through: :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy

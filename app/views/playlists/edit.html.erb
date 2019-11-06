@@ -1,64 +1,80 @@
-<%= error_messages_for :playlist %>
-<%= render partial: 'inline_help'%>
-
-<% content_for :left do %>
-  <div id="edit_playlist">
-
-    <%= render layout: 'playlist_layout', locals: {playlist: @playlist} do %>
-      <div id="edit_playlist_info" class="static_content" style="display:none;">
-        <div id="pic_upload" class="static_content">
-          Upload a square photo, 400px by 400px for best results.<br>
-      		<%= form_for :pic, url: attach_pic_user_playlist_path(@user, @playlist), html: {multipart: true, method: :post} do |f| %>
-      			<%= f.file_field :pic  %>
-      			<%= submit_tag "Upload new Pic" %>
-      		<% end %>
+<%= render partial: 'form' %>
+<div id="columns" class="edit_playlist_columns" data-controller="playlist-sort">
+  <div id="left">
+    <p class="left_instructions">
+      Reorder tracks by dragging them by their handle <span class="mini_handle_icon"><%== render file: svg_path('svg/icon_mini_handle_for_instructions.svg') %></span> icon.<br>
+      Remove them with the <span class="mini_remove_icon"><%== render file: svg_path('svg/icon_mini_x_for_instructions.svg') %></span>
+ icon.
+    </p>
+    <div class="box">
+      <div class="left_column_box_header">
+        <h2><%= @playlist.title %></h2>
+        <div>
+           <span class="playlist_track_size" data-target="playlist-sort.trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
+           <span class="playlist_total_time" data-target="playlist-sort.totalTime"><%= @playlist.play_time %></span>
         </div>
-
-        <%= render 'add_greenfield_downloads' if allow_greenfield_playlist_downloads?(@user) %>
-
-        <%= form_for [@user, @playlist] do |f| %>
-          <%= f.text_field :title %>
-          <%= f.text_field :year, input_html: {maxlength: 4, size: 4} %>
-          <%= f.text_field  :description %>
-
-          <%= f.simple_fields_for :greenfield_downloads do |sf| %>
-            <%= sf.input :title, label: sf.object.attachment_file_name + ':' %>
-          <% end %>
-
-          <%= f.input :private %>
-          <div class="playlists_hidden_blurb">(Playlists are hidden until they have more than 2 tracks)</div>
-          <%= f.button :submit, "Save" %> or
-          <%= link_to 'delete this playlist', user_playlist_path(@user, @playlist.permalink), method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr!' } %>
+      </div>
+      <div class="sortable" data-target="playlist-sort.sortable">
+        <% @playlist.tracks.each do |track| %>
+        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
+          <%= render partial: 'assets/asset', locals: { asset: track.asset } %>
+          <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+            <div class="remove-inner">
+                <%== render file: svg_path('svg/icon_x.svg') %>
+            </div>
+          </a>
+        </div>
         <% end %>
       </div>
-
-      <div style="height: 12px; background-color: #c7c8c7;"></div>
-      <%= render partial: 'track', collection: @playlist.tracks %>
-      <div id="drop_here">
-        Drop Track here
+      <div class="playlist_size">
+        <%= "<span data-target='playlist-sort.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.user.name}".html_safe %>
       </div>
-    <% end %>
+    <div class="small_spinner" data-target="playlist-sort.spinner"></div>
+    </div>
   </div>
-<% end %>
-<%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink), id: 'add_track_url', class: 'hidden' %>
-<%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink), id: 'sort_tracks_url', class: 'hidden' %>
 
-<% content_for :right do %>
-  <div id="playlist_sources" class="draggable_wrapper">
-  	<div class="draggable_tracks">
-  		<h2 class="box">Available tracks</h2>
-  	  <div id="playlist_tabs">
-        <ul id="playlist_source_options" class="tabs">
-          <li><%= link_to 'Your Uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
-          <li><%= link_to "Your Listens", "#your_listens", class: 'playlist_option', id: 'open_your_listens' %></li>
-          <li><%= link_to "Favs", '#your_favorites', class: 'playlist_option', id: 'open_your_favorites' %></li>
-        </ul>
-
-         <%= render partial: 'your_stuff' %>
-  	     <%= render partial: 'your_listens' %>
-         <%= render partial: 'your_favorites' if @favorites%>
-       </div>
-  	</div>
+  <div id="right">
+    <p class="right_instructions">
+       Click the <span class="mini_add_icon"><%== render file: svg_path('svg/icon_mini_+_for_instructions.svg') %></span> icon on a track below to add it to the playlist selection.
+    </p>
+    <div id="playlist_sources" class="box draggable_wrapper">
+        <div class="right_column_box_header">
+          <h2>Available tracks</h2>
+          <div class="available_tracks_total">
+            <%= @user.assets_count %> tracks total
+          </div>
+        </div>
+        <div id="playlist_tabs">
+          <ul id="playlist_source_options" class="tabs" data-target="playlist-sort.tabs">
+            <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
+          </ul>
+        </div>
+        <div class="mini_paginator">
+          <%== pagy_nav @assets_pagy %>
+        </div>
+        <div id="your_uploads" class="playlist_source">
+          <% @assets.each do |asset| %>
+            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
+              <%= render partial: 'assets/asset', locals: { asset: asset } %>
+              <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
+                <div class="add-inner">
+                  <%== render file: svg_path('svg/icon_+.svg') %>
+                </div>
+              </a>
+              <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+                <div class="remove-inner">
+                    <%== render file: svg_path('svg/icon_x.svg') %>
+                </div>
+              </a>
+            </div>
+          <% end %>
+        </div>
+    </div>
   </div>
-<% end %>
-
+  <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),
+    data: { target:'playlist-sort.addUrl' }, class: 'hidden add_url' %>
+  <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink),
+    data: { target:'playlist-sort.removeUrl' }, class: 'hidden remove_url' %>
+  <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink),
+    data: { target:'playlist-sort.sortUrl' }, class: 'hidden sort_url' %>
+</div>

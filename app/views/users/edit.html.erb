@@ -1,7 +1,5 @@
 <%= error_messages_for :user %>
 
-<%= render partial: 'users/user' unless white_theme_enabled? %>
-
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
     <h2 class="box">Edit Your Name</h2>
@@ -121,7 +119,7 @@
   <div class="box change-your-picture-box">
   <h2 class="box">Change Your Picture</h2>
   <div class="static_content">
-      <p><%= user_image(@user, variant: :album) %></p>
+      <p><%= user_image(@user, variant: :large_avatar) %></p>
       Upload a new photo. (1000px by 1000px square for best results)<br/>
       <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
       	<%= f.file_field :pic  %>

@@ -1,13 +1,44 @@
-<%= render partial: 'users/user' %>
-
-<% content_for :left do %>
-  <div id="single_playlist">
-    <% cache([@playlist, authorized_for(@playlist),theme_name]) do %>
-      <%= render @playlist %>
-    <% end unless (@playlist.private? && authorized_for(@playlist)) # don't cache private playlists %>
-  </div>
+<%= content_for :head do %>
+  <% if @playlist.cover_image_present? %>
+    <%= tag(:link, rel: 'preload', href: playlist_cover_url(@playlist, variant: :greenfield), as: 'image')%>
+  <% end %>
 <% end %>
 
-<% content_for :right do %>
-  <%= render partial: 'share', locals: {playlist: @playlist} %>
-<% end %>
+<div id="playlist-and-track-content-header">
+  <%= render partial: 'shared/back_to_artist' %>
+</div>
+<div id="playlist-and-track-content">
+  <%= render 'playlist' %>
+
+  <% if @asset %>
+    <%= render partial: 'shared/asset' %>
+  <% else %>
+    <%= content_for(:body_class, 'cover-view') %>
+    <div class="track-content">
+      <div class="large-cover-and-credits">
+        <div class="large-cover">
+          <%= playlist_cover(@playlist, variant: :playlist_cover) %>
+        </div>
+        <% if @playlist.has_any_links? %>
+        <div class="playlist-options">
+          <%= render partial: 'links' %>
+        </div>
+        <% end %>
+      </div>
+      <% if defined?(@old_cover_alert) and authorized?  %>
+        <div class="playlist-cover-alert">
+          Hey, <%= current_user.name %> this cover is from <strong><%= @playlist.pic.created_at.year %></strong> and is very blurry since we only saved a
+          small 200x200px version of it.
+          Go <%= link_to 'Upload a higher res one', edit_user_playlist_path(@playlist.user, @playlist),
+            class: 'edit_playlist', :title => 'edit this playlist' %> if you can!</a>
+        </div>
+      <% end %>
+      <% if @playlist.credits.present? %>
+        <div class="playlist-credits">
+        <%= markdown(@playlist.credits) %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

@@ -2,10 +2,6 @@ module ApplicationHelper
   include ::Pagy::Frontend
   @@listen_sources = %w[itunes]
 
-  def theme_name
-    white_theme_enabled? ? 'white' : 'dark'
-  end
-
   def authorized_for(user_related_record)
     logged_in? && (current_user.admin? || (user_related_record.user == current_user))
   end

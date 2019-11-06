@@ -101,7 +101,6 @@ RSpec.describe User, type: :model do
   context "deletion" do
     let(:user) { users(:sudara) }
     let!(:asset) { assets(:valid_mp3) }
-    let!(:topic) { topics(:topic1) }
     let!(:playlist) { playlists(:owp) }
     let!(:comment) { comments(:valid_comment_on_asset_by_user) }
     let!(:listen) { listens(:valid_listen) }
@@ -115,7 +114,6 @@ RSpec.describe User, type: :model do
         expect(user.listens).not_to be_present
         expect(user.tracks).not_to be_present
         expect(user.playlists).not_to be_present
-        expect(user.topics).not_to be_present
         expect(user.comments_received).not_to be_present
       end
     end
@@ -150,7 +148,7 @@ RSpec.describe User, type: :model do
       end
 
       it "returns a storage location to a variant" do
-        location = user.avatar_image_location(variant: :large)
+        location = user.avatar_image_location(variant: :large_avatar)
         expect(location).to be_kind_of(Storage::Location)
         expect(location.attachment).to be_kind_of(ActiveStorage::Variant)
         expect(location).to_not be_signed
@@ -165,7 +163,7 @@ RSpec.describe User, type: :model do
       end
 
       it "does not return a URL to a variant" do
-        expect(user.avatar_image_location(variant: :large)).to be_nil
+        expect(user.avatar_image_location(variant: :large_avatar)).to be_nil
       end
     end
   end

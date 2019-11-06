@@ -15,7 +15,7 @@ Thredded.user_path = ->(user) { '/' + user.to_param }
 
 # Configure which URL to use for an avatar.
 Thredded.avatar_url = lambda do |user|
-  user.avatar_image_location(variant: :album).to_s.presence || UsersHelper.no_avatar_path
+  user.avatar_image_location(variant: :large_avatar).to_s.presence || UsersHelper.no_avatar_path
 end
 
 # The name of the moderator flag column on the users table.
@@ -25,7 +25,7 @@ Thredded.moderator_column = :moderator
 Thredded.admin_column = :admin
 
 # Whether posts and topics pending moderation are visible to regular users.
-Thredded.content_visible_while_pending_moderation = false
+Thredded.content_visible_while_pending_moderation = true
 
 # Whether users that are following a topic are listed on topic page.
 Thredded.show_topic_followers = true

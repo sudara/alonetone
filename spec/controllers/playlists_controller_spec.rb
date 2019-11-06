@@ -125,14 +125,6 @@ RSpec.describe PlaylistsController, type: :controller do
     end
   end
 
-  describe "sharing and exporting" do
-    it "should deliver us tasty xml for single playlist" do
-      request.env["HTTP_ACCEPT"] = "application/xml"
-      get :show, params: { id: playlists(:owp).id, user_id: 'sudara', permalink: 'owp' }
-      expect(response).to be_successful
-    end
-  end
-
   describe "someone using the old theme" do
     let(:user) { :william_shatner }
 
