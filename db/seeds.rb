@@ -79,7 +79,6 @@ musician = User.create!(
   email: 'musician@example.com',
   password: musician_password,
   password_confirmation: musician_password,
-  greenfield_enabled: true,
   current_login_ip: 'fc00:1:1::3'
 )
 put_user_credentials(musician.login, musician_password)
@@ -92,7 +91,6 @@ marie = User.create!(
   email: 'marie.harel@example.com',
   password: marie_password,
   password_confirmation: marie_password,
-  greenfield_enabled: true,
   current_login_ip: 'fc00:1:1::4',
   avatar_image: marie_avatar_upload
 )
@@ -160,7 +158,6 @@ carole = User.create!(
   email: 'carole.koshin@example.com',
   password: carole_password,
   password_confirmation: carole_password,
-  greenfield_enabled: true,
   current_login_ip: 'fc00:1:1::5'
 )
 put_user_credentials(carole.login, carole_password)
@@ -203,7 +200,6 @@ petere = User.create!(
   email: 'petere.appleby@example.com',
   password: petere_password,
   password_confirmation: petere_password,
-  greenfield_enabled: true,
   current_login_ip: 'fc00:1:1::6'
 )
 put_user_credentials(petere.login, petere_password)
@@ -276,21 +272,3 @@ end
   asset = Asset.where.not(user_id: user.id).random_order.first
   user.toggle_favorite(asset)
 end
-
-# --- Greenfield ---
-
-# Create a post with some attached assets
-Greenfield::Post.first_or_create!(
-  asset: Asset.first
-).attached_assets.first_or_create!(
-  audio_file: muppet_upload,
-  waveform: Waveform.extract(muppet_upload.path)
-)
-
-# Create playlist download
-playlist = Playlist.first
-playlist.greenfield_downloads.first_or_create!(
-  title: playlist.title,
-  s3_path: '/playlists/le_duc_vacherin.zip',
-  zip_file: upload('Le Duc Vacherin.zip')
-)

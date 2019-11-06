@@ -14,21 +14,12 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
       xml.priority 0.8
     end
   end
-  ['users','stats', 'radio', 'radio/latest', 'radio/favorites', 'radio/popular', 'radio/mangoz_shuffle','radio/most_favorited','forums', 'forums/posts'].each do |static|
+  ['users','stats', 'radio', 'radio/latest', 'radio/favorites', 'radio/popular', 'radio/mangoz_shuffle','radio/most_favorited'].each do |static|
     xml.url do
       xml.loc "http://alonetone.com/#{static}"
       xml.lastmod w3c_date(Time.now)
       xml.changefreq "daily"
       xml.priority 0.7
-    end
-  end
-
-  Forum.ordered.find_each do |forum|
-    xml.url do
-      xml.loc forum_url(forum.permalink)
-      xml.lastmod w3c_date(forum.posts.find(:last).created_at)
-      xml.changefreq  "daily"
-      xml.priority 0.6
     end
   end
 

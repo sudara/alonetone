@@ -1,34 +1,29 @@
-<h1 id="radio_title">alonetone Radio: <span id="channel_name" class="channel"><%= @channel %></span></h1>
-<% content_for :left do %>
-  <div class="mini_paginator">
-    <%== pagy_nav @pagy %>
+<nav class="sub_nav">
+  <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
+      <ul>
+        <%= navigation_item 'Latest Uploaded', radio_home_path %>
+        <%= navigation_item 'Most Popular', radio_source_home_path('popular') %>
+        <%= navigation_item 'Most Favorited', radio_source_home_path('most_favorited') %>
+        <%= navigation_item 'Recently Favorited', radio_source_home_path('favorites') %>
+        <% if logged_in? %>
+        <%= navigation_item 'Mangoz Shuffle', radio_source_home_path('mangoz_shuffle') %>
+        <%= navigation_item 'From Those You Follow', radio_source_home_path('those_you_follow') %>
+        <% end %>
+      </ul>
   </div>
-  <div id="radio_tracks" class="box">
-      <%= render partial: 'assets/asset', collection: @assets  %>
-  </div>
-  <div class="mini_paginator">
-    <%== pagy_nav @pagy %>
-  </div>
-<% end %>
-<% content_for :right do %>
-  <div id="radio" class="box">
-    <h2 class='box'>Choose a radio flavor, dear friend</h2>
-    <div id="radio_options" class='box'>
-      <div class="static_content" id="radio_controls">
-        <form id="radio_controls_form">
-          <ul>
-          <%= radio_option 'latest', 'Latest', true %>
-          <%= radio_option 'popular', 'Currently kicking ass' %>
-          <%= radio_option 'most_favorited', "Most favorited" %>
-          <%= radio_option 'favorites', "Recently favorited"  %>
-          <%= radio_option 'mangoz_shuffle', "The 'Mangoz' shuffle (random)" %>
-          <%= radio_option 'those_you_follow',  "Tracks from those you follow", false, true %>
-          <%= radio_option 'your_favorite_alonetoners', "Your favorite alonetoners", false, true %>
-          <%= radio_option 'songs_you_have_not_heard',  "Songs you haven't heard", false, true %>
-          <%= radio_option 'spam',  "Spam tracks", false, true %>
-        </ul>
-        </form>
-      </div>
+</nav>
+
+
+<div id="radio_content">
+    <h1>alonetone radio: <%= params[:source].humanize %> </h1>
+    <h1 class="mobile_only"><%= params[:source].humanize %></h1>
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @pagy %>
     </div>
-  </div>
-<% end %>
+    <div id="radio_tracks" class="box">
+      <%= render partial: 'assets/asset', collection: @assets, layout: 'normal_playback'  %>
+    </div>
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
+</div>

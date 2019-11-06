@@ -277,10 +277,10 @@ RSpec.describe AssetsController, type: :controller do
       login(:sudara)
     end
 
-    it "should render index_white template" do
+    it "should render index template" do
       get :index, params: { user_id: users(:sudara).login }
       expect(response.status).to eq(200)
-      expect(response).to render_template(:index_white)
+      expect(response).to render_template(:index)
       expect(response.content_type).to eq("text/html; charset=utf-8")
     end
 

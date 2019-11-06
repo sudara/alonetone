@@ -1,5 +1,3 @@
-<% if white_theme_enabled? %>
-
 <nav class="sub_nav">
   <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
        <ul>
@@ -13,52 +11,15 @@
   </div>
 </nav>
 
-<% end %>
-
 <div id="user_index">
-
-
-  <% if white_theme_enabled? %>
-
-
-  <% else %>
-    <div id="static_header">
-
-      <div class="title">
-        <h1 class="static">Browse all alonetone artists</h1>
-      </div>
-
-      <div id="links">
-        <ul class="links">
-        <%= navigation_item "last online", {action: 'index', sort: nil} %>
-        <%= navigation_item "last uploaded", {action: 'index', sort: 'last_uploaded'} %>
-        <%= navigation_item "most listened to", {action: 'index', sort: 'most_listened_to'} %>
-        <%= navigation_item "new artists", {action: 'index', sort: 'new_artists'} %>
-        <%= navigation_item "all time most uploaded", {action: 'index', sort: 'monster_uploaders'} %>
-        <%= navigation_item "dedicated listeners", {action: 'index', sort: 'dedicated_listeners'}%>
-        </ul>
-      </div>
-
-    </div>
-
-  <% end %>
-
   <ul id="large_users_grid" class="responsive_grid">
     <% if @sort == 'dedicated_listeners'%>
-      <% cache("dedicated/#{params[:page]}/#{theme_name}", expires_in: 4.hours) do %>
-        <% if white_theme_enabled? %>
-        <%= render partial: 'shared/user_white', collection: @users, as: :user %>
-        <% else %>
-        <%= render partial: 'shared/user', collection: @users %>
-        <% end %>
+      <% cache("dedicated/#{params[:page]}/", expires_in: 4.hours) do %>
+        <%= render partial: 'shared/user', collection: @users, as: :user %>
       <% end %>
     <% else %>
-      <% cache("#{digest_for_users}/#{params[:page]}/#{theme_name}") do %>
-        <% if white_theme_enabled? %>
-        <%= render partial: 'shared/user_white', collection: @users, as: :user %>
-        <% else %>
-        <%= render partial: 'shared/user', collection: @users %>
-        <% end %>
+      <% cache("#{digest_for_users}/#{params[:page]}") do %>
+        <%= render partial: 'shared/user', collection: @users, as: :user %>
       <% end %>
     <% end %>
     <div class="clear"> </div>

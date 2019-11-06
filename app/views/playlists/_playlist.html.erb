@@ -1,7 +1,70 @@
-<%= render layout: 'playlists/playlist_layout', locals: {playlist: playlist} do %>
-  <% if authorized_for(playlist) %>
-    <%= render partial: 'assets/asset', collection: playlist.assets %>
-  <% else %>
-    <%= render partial: 'assets/asset', collection: playlist.public_assets %>
+<div class="playlist-sidebar">
+
+  <%= link_to playlist_cover(@playlist, variant: :playlist_card), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
+  <h1 class="<%= 'cover' unless @asset %>">
+    <%= @playlist.title %>
+  </h1>
+  <h2>
+    <span class="by">by</span> <%= link_to @user.name, user_home_path(@user) %>
+
+  </h2>
+
+  <ul class="tracklist">
+  <% @playlist.tracks.each do |track| %>
+    <li data-controller="playlist-playback"
+      data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack"
+      data-playlist-playback-id="<%= track.asset.id %>"
+      class="<%= ' active' if first_active_track?(track, @asset) %>">
+
+    <!-- Play button automagically plays AND changes to relevant track details  -->
+    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
+      class: 'play-button', data: { target: "playlist-playback.play", action: "click->playlist-playback#togglePlay" }  do %>
+      <i class="icon_play"></i>
+    <% end %>
+
+    <!-- Track title just switches track details-->
+    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
+      remote: true, class: 'position-name-time', data: { target: "playlist-playback.loadTrack" } do %>
+      <span class="track-position">
+        <%= "%02d" % track.position %>.
+      </span>
+      <span class="track-name">
+        <%= track.name %>
+      </span>
+      <span class='time-text'><%= track.asset.length %></span>
+    <% end %>
+    </li>
   <% end %>
-<% end %>
+  </ul>
+
+  <div class="sidebar-downloads"
+    style="<%= 'display:none' unless @asset %>">
+    <ul class="downloads-links">
+    </ul>
+
+    <ul class="external-links">
+      <% [:link1, :link2, :link3].collect do |link| %>
+        <% if valid_link = @playlist.send(link) %>
+          <% if external_link_for(valid_link) %>
+          <li>
+            <%= external_link_for(valid_link) %>
+          </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <% if authorized? %>
+  <div class="edit_playlist_container">
+    <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
+      edit playlist
+    <% end %>
+    <% if @playlist.has_tracks? %>
+      <%= link_to "edit descriptions", mass_edit_user_tracks_path(@playlist.user, assets: @playlist.assets.collect(&:id)), class: 'edit_playlist' %>
+    <% end %>
+  </div>
+  <% end %>
+
+</div>
+

@@ -1,7 +1,6 @@
-<% if white_theme_enabled? %>
 <h2>Latest Comments</h2>
 <div id="user_comments" class="box">
-  
+
   <%= render partial: 'shared/comment', collection: @comments %>
 </div>
 <div class="below_box">
@@ -13,15 +12,3 @@
     </span>
 	<% end if @comments.size > 4 %>
 </div>
-
-<% else %>
-<div id="user_comments" class="box">
-  <h2 class="box">Latest Comments</h2>
-  <%= render partial: 'shared/comment', collection: @comments %>
-</div>
-<div class="footer_box">
-	<%= link_to user_comments_path(@user.login), class: 'view_all' do %>
-    <span>view all </span><span class="sprites-horizontal-arrow sprites-after-heading"></span>
-	<% end if @comments.size > 4 %>
-</div>
-<% end %>
