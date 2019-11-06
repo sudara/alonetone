@@ -3,7 +3,7 @@
   <div class="edit_profile">
 
   <div class="box">
-    
+
     <h1>Edit Profile</h1>
 
     <div class="edit_profile_separator"></div>
@@ -12,7 +12,7 @@
       <div class="edit_profile_top_left">
           <label>Profile Picture</label>
           <div class="user_avatar">
-            <%= user_image(@user, variant: :edit_profile_avatar) %>
+            <%= user_image(@user, variant: :card_avatar) %>
           </div>
 
           <a href="#" class="upload_image">Upload profile image&hellip;</a>
@@ -23,13 +23,13 @@
           </p>
 
       </div>
-    
+
       <div class="edit_profile_top_right">
             <%= form_with model: @user do |f| -%>
-            
+
               <label for="display_name">Name</label>
               <%= f.text_field :display_name %>
-              
+
               <div class="city_and_country">
 
                 <div>
@@ -43,7 +43,7 @@
                 </div>
 
               </div>
-              
+
               <label for="user_bio">Bio</label>
               <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
 
@@ -108,7 +108,7 @@
           </div>
 
       <% end %>
-      
+
     </div>
     <div class="edit_profile_separator"></div>
 
@@ -147,11 +147,11 @@
                   <div class="toggle_inner"></div>
                   <div class="toggle_label">OFF</div>
                 </div>
-              </div>              
+              </div>
 
             </div>
             <div class="edit_profile_settings_right_column">
-              
+
               <div class="edit_profile_separator"></div>
 
               <div class="setting">
@@ -163,7 +163,7 @@
               </div>
 
               <div class="edit_profile_separator"></div>
-              
+
               <div class="setting">
                 <label>Should we email you new comments on your tracks?</label>
                 <div class="toggle toggle_off">
@@ -173,7 +173,7 @@
               </div>
 
               <div class="edit_profile_separator"></div>
-              
+
               <div class="setting">
                 <label>Email notifications when folks you follow upload tracks?</label>
                 <div class="toggle toggle_off">
@@ -181,14 +181,14 @@
                   <div class="toggle_label">OFF</div>
                 </div>
               </div>
-              
+
             </div>
           </div>
 
           <% end %>
     </div>
   </div>
-  
+
   <div class="edit_profile_change_your_password box">
 
     <%= form_with model: [@user, @profile] do |f| %>
@@ -246,7 +246,7 @@
       <div class="ok_column">
         OK
       </div>
-    
+
     </div>
 
   </div>
@@ -259,8 +259,6 @@
 <% else %>
 
 <%= error_messages_for :user %>
-
-<%= render partial: 'users/user' unless white_theme_enabled? %>
 
 <%= content_for :left do %>
   <div class="box edit-your-profile-box">
@@ -369,7 +367,7 @@
   <div class="box change-your-picture-box">
   <h2 class="box">Change Your Picture</h2>
   <div class="static_content">
-      <p><%= user_image(@user, variant: :album) %></p>
+      <p><%= user_image(@user, variant: :large_avatar) %></p>
       Upload a new photo. (1000px by 1000px square for best results)<br/>
       <%= form_for :pic, url: attach_pic_user_path(@user), html: {multipart: true, method: :post} do |f| %>
       	<%= f.file_field :pic  %>

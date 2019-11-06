@@ -16,16 +16,15 @@ class Asset < ApplicationRecord
   serialize :waveform, Array
 
   scope :published,       -> { where(private: false) }
-  scope :recent,          -> { order('assets.id DESC').includes(:user) }
-  scope :last_updated,    -> { order('updated_at DESC').first }
-  scope :descriptionless, -> { where('description = "" OR description IS NULL').order('created_at DESC').limit(10) }
-  scope :random_order,    -> { order(Arel.sql('RAND()')) }
-  scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).order('tracks.id DESC') }
+  scope :recent,          -> { reorder('assets.id DESC').includes(:user) }
+  scope :last_updated,    -> { reorder('updated_at DESC').first }
+  scope :random_order,    -> { reorder(Arel.sql('RAND()')) }
+  scope :favorited,       -> { select('distinct assets.*').includes(:tracks).where('tracks.is_favorite = (?)', true).reorder('tracks.id DESC') }
   scope :not_current,     ->(id) { where('id != ?', id) }
   scope :for_user,        ->(user_id) { where(user_id: user_id) }
-  scope :hottest,         -> { where('hotness > 0').order('hotness DESC') }
-  scope :most_commented,  -> { where('comments_count > 0').order('comments_count DESC') }
-  scope :most_listened,   -> { where('listens_count > 0').order('listens_count DESC') }
+  scope :hottest,         -> { where('hotness > 0').reorder(hotness: :desc) }
+  scope :most_commented,  -> { where('comments_count > 0').reorder('comments_count DESC') }
+  scope :most_listened,   -> { where('listens_count > 0').reorder('listens_count DESC') }
   scope :with_preloads,   -> { includes(user: { avatar_image_attachment: :blob }) }
 
   belongs_to :user, counter_cache: true
@@ -36,7 +35,6 @@ class Asset < ApplicationRecord
 
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
-  has_one :greenfield_post, class_name: '::Greenfield::Post'
   has_many :tracks,    dependent: :destroy
   has_many :playlists, through: :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy

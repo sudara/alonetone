@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
   before_action :require_login, except: %i[index show latest radio listen_feed]
   before_action :check_new_user_abuse, only: %i[new create]
 
-  etag { "#{white_theme_enabled?}/#{current_user&.id}" }
+  etag { current_user&.id }
 
   # home page
   def latest
@@ -18,18 +18,16 @@ class AssetsController < ApplicationController
       @tab = 'home'
       @assets = Asset.with_preloads.published.latest.limit(5)
       set_related_lastest_variables
-      welcome_to_white_theme
       respond_to :html
-      render 'latest_white' if white_theme_enabled?
     end
   end
 
   def set_related_user_variables
     all_user_tracks = @user.assets
-    @hot_tracks_this_week = all_user_tracks.hottest.limit(10)
-    @most_fav_tracks = all_user_tracks.favorited.limit(10)
-    @most_commented_tracks = all_user_tracks.most_commented.limit(10)
-    @most_listened_to_tracks = all_user_tracks.most_listened.limit(10)
+    @hot_tracks_this_week = all_user_tracks.hottest.limit(5)
+    @most_fav_tracks = all_user_tracks.favorited.limit(5)
+    @most_commented_tracks = all_user_tracks.most_commented.limit(5)
+    @most_listened_to_tracks = all_user_tracks.most_listened.limit(5)
   end
 
   # user's home page
@@ -53,7 +51,6 @@ class AssetsController < ApplicationController
         end
       end
     end
-    render 'index_white' if white_theme_enabled?
   end
 
   def show
@@ -62,7 +59,6 @@ class AssetsController < ApplicationController
         lazily_create_waveform_if_needed
         @assets = [@asset]
         set_related_show_variables
-        render 'show_white' if white_theme_enabled?
       end
       format.mp3 do
         listen(@asset)
@@ -79,7 +75,6 @@ class AssetsController < ApplicationController
     end
     @page_title = "#{@channel} radio"
     @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
-    render 'radio_white' if white_theme_enabled?
   end
 
   def top
@@ -109,14 +104,11 @@ class AssetsController < ApplicationController
 
   def edit
     @allow_reupload = true
-    render 'edit_white' if white_theme_enabled?
   end
 
   def mass_edit
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
-
-    render 'mass_edit_white' if white_theme_enabled?
   end
 
   def mass_update; end
@@ -170,7 +162,7 @@ class AssetsController < ApplicationController
         redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"
-        render action: white_theme_enabled? ? "edit_white" : "edit"
+        render :edit
       end
     end
   end
@@ -201,15 +193,6 @@ class AssetsController < ApplicationController
   end
 
   protected
-
-  def welcome_to_white_theme
-    return if !logged_in? || (session[:white_theme_notified] && session[:white_theme_notified] > 2)
-
-    session[:white_theme_notified] ||= 1
-    session[:white_theme_notified] = Integer(session[:white_theme_notified]) + 1
-    flash.now[:ok] = "#{current_user.name}: missing something on white theme? Let us know " \
-                     "<a href='/discuss/white-theme'>on the forums</a>".html_safe
-  end
 
   def asset_params
     params.require(:asset).permit(
@@ -297,7 +280,7 @@ class AssetsController < ApplicationController
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
     @popular = Asset.with_preloads.published.order('hotness DESC').limit(5)
-    @playlists = white_theme_enabled? ? Playlist.for_home.limit(4) : Playlist.for_home.limit(5)
+    @playlists = Playlist.for_home.limit(4)
     @comments = admin? ? Comment.last_5_private : Comment.to_other_members.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
   end

@@ -24,7 +24,6 @@
 
   <header id="site_header">
     <%= render partial: 'shared/header' %>
-    <%= render partial: 'shared/search' %>
   </header>
 
   <main>
@@ -34,11 +33,11 @@
   </main>
 
   <footer id="site_footer">
-    <%= cache("footer/#{theme_name}/#{moderator?}", expires_in: 3.minutes) do %>
-    <%= render partial: 'shared/footer_white' %>
+    <%= cache("footer/#{moderator?}", expires_in: 3.minutes) do %>
+    <%= render partial: 'shared/footer' %>
     <% end %>
   </footer>
 
-  <%= render partial: 'layouts/greenfield/ga' %>
+  <%= render partial: 'shared/analytics' %>
 </body>
 </html>

@@ -26,7 +26,6 @@ module Alonetone
 
     config.exceptions_app = routes
 
-    config.assets.paths.concat(Compass::Frameworks::ALL.map(&:stylesheets_directory))
     config.assets.quiet = true
 
     config.action_mailer.default_url_options = { host: config.alonetone.hostname }

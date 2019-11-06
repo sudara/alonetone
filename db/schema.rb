@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_202956) do
+ActiveRecord::Schema.define(version: 2019_11_04_123633) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -130,20 +130,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.index ["user_id"], name: "index_followings_on_user_id"
   end
 
-  create_table "forums", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "site_id"
-    t.string "name"
-    t.string "description"
-    t.integer "topics_count", default: 0
-    t.integer "posts_count", default: 0
-    t.integer "position", default: 1
-    t.text "description_html", size: :medium
-    t.string "state", default: "public"
-    t.string "permalink"
-    t.index ["permalink"], name: "index_forums_on_permalink"
-    t.index ["position"], name: "index_forums_on_position"
-  end
-
   create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "slug", limit: 191, null: false
     t.integer "sluggable_id", null: false
@@ -154,36 +140,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
-  end
-
-  create_table "greenfield_attached_assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "post_id"
-    t.string "mp3_file_name"
-    t.string "mp3_content_type"
-    t.integer "mp3_file_size"
-    t.datetime "mp3_updated_at"
-    t.text "waveform", size: :long
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "length"
-  end
-
-  create_table "greenfield_playlist_downloads", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "title", null: false
-    t.integer "playlist_id", null: false
-    t.string "s3_path", null: false
-    t.string "attachment_file_name"
-    t.string "attachment_content_type"
-    t.integer "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.integer "serves", default: 0, null: false
-  end
-
-  create_table "greenfield_posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "asset_id"
-    t.text "body", size: :medium
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -246,20 +202,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.index ["permalink"], name: "index_playlists_on_permalink"
     t.index ["position"], name: "index_playlists_on_position"
     t.index ["user_id"], name: "index_playlists_on_user_id"
-  end
-
-  create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "topic_id"
-    t.text "body", size: :medium
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "forum_id"
-    t.text "body_html", size: :medium
-    t.boolean "is_spam", default: false
-    t.float "spaminess"
-    t.string "signature"
-    t.index ["is_spam"], name: "index_posts_on_is_spam"
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -465,7 +407,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.integer "posts_count", default: 0
     t.integer "topics_count", default: 0
     t.datetime "last_seen_at"
-    t.integer "moderation_state", default: 0, null: false
+    t.integer "moderation_state", default: 1, null: false
     t.timestamp "moderation_state_changed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -535,29 +477,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.index ["user_id"], name: "index_thredded_user_topic_read_states_on_user_id"
   end
 
-  create_table "topics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "forum_id"
-    t.integer "user_id"
-    t.string "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "hits", default: 0
-    t.integer "sticky", default: 0
-    t.integer "posts_count", default: 0
-    t.boolean "locked", default: false
-    t.integer "last_post_id"
-    t.datetime "last_updated_at"
-    t.integer "last_user_id"
-    t.integer "site_id"
-    t.string "permalink"
-    t.boolean "spam", default: false
-    t.float "spaminess"
-    t.string "signature"
-    t.index ["forum_id", "permalink"], name: "index_topics_on_forum_id_and_permalink"
-    t.index ["last_updated_at", "forum_id"], name: "index_topics_on_forum_id_and_last_updated_at"
-    t.index ["sticky", "last_updated_at", "forum_id"], name: "index_topics_on_sticky_and_last_updated_at"
-  end
-
   create_table "tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "playlist_id"
     t.integer "asset_id"
@@ -614,7 +533,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.integer "comments_count", default: 0
     t.string "last_login_ip"
     t.text "settings", size: :long
-    t.integer "posts_count", default: 0
     t.boolean "moderator", default: false
     t.integer "followers_count", default: 0
     t.integer "login_count", default: 0, null: false
@@ -624,7 +542,6 @@ ActiveRecord::Schema.define(version: 2019_08_17_202956) do
     t.string "perishable_token"
     t.datetime "last_request_at"
     t.integer "bandwidth_used", default: 0
-    t.boolean "greenfield_enabled", default: false
     t.boolean "use_old_theme", default: false
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"

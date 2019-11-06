@@ -20,11 +20,11 @@ RSpec.describe Storage::FastlyLocation, type: :model do
 
   context "when attachment is an image variant" do
     let(:avatar_image) { users(:henri_willig).avatar_image }
-    let(:attachment) { ImageVariant.variant(avatar_image, variant: :original) }
+    let(:attachment) { ImageVariant.variant(avatar_image, variant: :large_avatar) }
 
     it "generates a URL to the image with Image Optimization params" do
       expect(location.to_s).to eq(
-        "#{fastly_base_url}/#{attachment.blob.key}?crop=1%3A1&width=800" \
+        "#{fastly_base_url}/#{attachment.blob.key}?crop=1%3A1&width=960" \
         "&quality=68"
       )
     end

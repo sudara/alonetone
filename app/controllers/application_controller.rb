@@ -10,16 +10,18 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_action :set_tab, :is_sudo
+  before_action :is_sudo
   before_action :set_theme
 
   rescue_from ActionController::RoutingError, with: :show_404
   rescue_from ActiveRecord::RecordNotFound, with: :show_404
   rescue_from AbstractController::ActionNotFound, with: :show_404
 
+  before_bugsnag_notify :add_user_info_to_bugsnag
+
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
     :current_user_is_mod_or_owner?, :current_user?,
-    :current_page, :moderator?, :welcome_back?, :user_setting, :white_theme_enabled?, :latest_forum_topics
+    :current_page, :moderator?, :welcome_back?, :user_setting, :latest_forum_topics
 
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
@@ -31,10 +33,6 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-
-  def redirect_to_new_forums_if_white_theme
-    redirect_to('/discuss') if white_theme_enabled?
-  end
 
   def lazily_create_waveform_if_needed
     return if is_a_bot?
@@ -56,14 +54,6 @@ class ApplicationController < ActionController::Base
     else
       session[:white]
     end
-  end
-
-  def white_or_normal
-    white_theme_enabled? ? 'white_theme' : 'application'
-  end
-
-  def white_theme_enabled?
-    true # session[:white]
   end
 
   def not_found
@@ -129,10 +119,6 @@ class ApplicationController < ActionController::Base
     logged_in? && user.settings && user.settings[symbol_or_string.to_sym]
   end
 
-  def set_tab
-    @tab = ''
-  end
-
   def is_sudo
     @sudo = session[:sudo]
   end
@@ -165,6 +151,12 @@ class ApplicationController < ActionController::Base
     Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).moderation_state_visible_to_user(current_user || Thredded::NullUser.new).limit(4)
   end
 
-  delegate :greenfield_hostname, to: 'Rails.configuration.alonetone'
-  helper_method :greenfield_hostname
+  def add_user_info_to_bugsnag(report)
+    report.user = {
+      email: current_user.email,
+      name: current_user.display_name,
+      id: current_user.id
+    }
+  end
+
 end

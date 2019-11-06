@@ -34,9 +34,6 @@ development:
   google_analytics_tracking_id: ~
   # Configure Typekit token to start using Typekit for fonts.
   typekit_embed_token: ~
-  # Deprecated: used by Greenfield views as hostname for URLs linking to
-  # Greenfield.
-  greenfield_hostname: localhost:3000
 
 # Some services in the application like Active Storage and Akismet have to be
 # configured when the Rails process boots. To ensure the proper settings in

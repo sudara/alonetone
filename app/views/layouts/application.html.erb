@@ -6,7 +6,7 @@
   <meta name="abuseipdb-verification" content="3yplyU5E" />
   <title><%= @page_title ?  "#{@page_title} | alonetone " : 'alonetone' %></title>
   <%= yield :head %>
-  <%= stylesheet_link_tag ('white_theme') %>
+  <%= stylesheet_link_tag ('application') %>
   <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
 
   <meta content="index,follow" name="robots"/>
@@ -58,8 +58,8 @@
   </main>
 
   <footer id="site_footer" data-turbolinks-permanent>
-    <%= cache("footer2/#{theme_name}/#{logged_in?}/#{moderator?}", expires_in: 1.minute) do %>
-      <%= render partial: 'shared/footer_white' %>
+    <%= cache("footer2/#{logged_in?}/#{moderator?}", expires_in: 1.minute) do %>
+      <%= render partial: 'shared/footer' %>
     <% end %>
   </footer>
 
