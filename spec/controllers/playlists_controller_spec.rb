@@ -179,31 +179,6 @@ RSpec.describe PlaylistsController, type: :controller do
         }}
       expect(playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).reload.published_at).to be_nil
     end
-
-    it "should set is_mix to true if is_favorite?" do
-      put :update, params: {
-        id: playlists(:jamie_kiesl_loves).id,
-        permalink: 'jamie-loves',
-        user_id: user.login,
-        playlist: {
-          is_favorite: true
-        }}
-      expect(playlists(:jamie_kiesl_loves).reload.is_mix).to eq(true)
-    end
-
-    it "should set is_mix to true if there is a mix of tracks" do
-      expect(playlists(:jamie_kiesl_loves).tracks.count).to eq(4)
-      expect(playlists(:jamie_kiesl_loves).is_mix).to eq(nil)
-      put :update, params: {
-        id: playlists(:jamie_kiesl_loves).id,
-        permalink: 'jamie-loves',
-        user_id: user.login,
-        playlist: {
-          is_favorite: false
-        }
-      }
-      expect(playlists(:jamie_kiesl_loves).reload.is_mix).to eq(true)
-    end
   end
 
   def edit_sudaras_playlist
