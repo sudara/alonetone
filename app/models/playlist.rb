@@ -138,14 +138,11 @@ class Playlist < ActiveRecord::Base
 
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites_and_set_permalink
-
     if is_favorite?
-
       self.title = user.name + "'s favorite tracks"
       self.is_mix = true
     end
     generate_permalink!
-
   end
 
   def check_for_new_permalink
