@@ -151,6 +151,7 @@ class Playlist < ActiveRecord::Base
 
   def consider_a_mix?
     return true if is_favorite?
+
     tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
   end
 end
