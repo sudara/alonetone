@@ -138,15 +138,20 @@ class Playlist < ActiveRecord::Base
 
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites_and_set_permalink
-    if is_favorite?
-      self.title = user.name + "'s favorite tracks"
-      self.is_mix = true
-    end
+    self.title = user.name + "'s favorite tracks" if is_favorite?
+    # move me to new tracks_controller#create
+    self.is_mix = true if consider_a_mix?
+
     generate_permalink!
   end
 
   def check_for_new_permalink
     generate_permalink! if title_changed?
+  end
+
+  def consider_a_mix?
+    return true if is_favorite?
+    tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
   end
 end
 
