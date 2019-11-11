@@ -6,19 +6,6 @@
   min-height: 57px;
   background-color: $track-background;
   border-bottom: 1px solid $track-border-bottom;
-  &:hover {
-    .playIconSymbol {
-      fill: $accent;
-    }
-    .asset_top {
-      .title_left_column_top {
-        color: $accent;
-      }
-      .time {
-        color: $accent!important;
-      }
-    }
-  }
   &.open {
     position: relative;
     z-index: 2;

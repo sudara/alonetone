@@ -155,19 +155,19 @@
         font-size: 12px;
         line-height: 20px;
         overflow: auto;
-        color: $font-color-four;
+        color: $comment-as-text;
         font-family: $medium-sans-font;
         margin-top: 9px;
         padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
-          color: $font-color-three;
+          color: $comment-as-guest-text;
         }
         span.comment_as_user {
-          color: $font-color-three;
+          color: $comment-as-user-text;
         }
         a {
-          color: $accent;
+          color: $comment-as-user-text;
         }
         img {
           float: left;
@@ -185,7 +185,7 @@
         padding: $baseline / 4;
         margin-top: 8px;
         resize: none;
-        color: $font-color-three;
+        color: $comment-form-text;
         border: 1px solid $comment-form-border;
         border-radius: 6px;
         background-color: $comment-form-background;
@@ -204,8 +204,8 @@
         top: 1px;
         label {
           user-select:none;
-          text-transform: lowercase;
-          color: $font-color-three;
+          text-transform: unset;
+          color: $comment-make-private-text;
           margin-bottom: 2px!important;
         }
       }
@@ -226,6 +226,8 @@
         float: right;
         clear: right;
         @include default_button();
+        background-color: $comment-submit-background;
+        color: $comment-submit-text;
       }
     }
   }
