@@ -28,7 +28,7 @@
     <% if @allow_reupload %>
 
     <div class="track_edit_bottom">
-      <%= link_to 'Upload a new version of this track',"new_version_#{asset.object_id}", class: 'slide_open_href'%>
+      <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
       <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
         <%= f.file_field :audio_file, class: 'asset_data' %>
         <div class="note">This will permanently delete the old version.
