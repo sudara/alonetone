@@ -186,14 +186,14 @@
         margin-top: 8px;
         resize: none;
         color: $font-color-three;
-        border: 1px solid $border-color-three;
+        border: 1px solid $comment-form-border;
         border-radius: 6px;
-        background-color: $background-color-three;
+        background-color: $comment-form-background;
         @media #{$one-column} {
           font-size: 16px;
         }
         &:focus {
-          border: 1px solid $border-color-two;
+          border: 1px solid $comment-form-border-focus;
         }
       }
       .private_check_box {
