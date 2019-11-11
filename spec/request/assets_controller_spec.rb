@@ -323,7 +323,7 @@ RSpec.describe AssetsController, type: :request do
           asset: { audio_file: fixture_file_upload('files/muppets.mp3', 'audio/mpeg') }
         }
       )
-      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacuane')
+      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
     end
 
     it "does not update the audio file for an asset when it's spam" do
@@ -334,7 +334,7 @@ RSpec.describe AssetsController, type: :request do
           asset: { audio_file: fixture_file_upload('files/muppets.mp3', 'audio/mpeg') }
         }
       )
-      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacuane')
+      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
       expect(asset.reload).to be_is_spam
     end
   end
