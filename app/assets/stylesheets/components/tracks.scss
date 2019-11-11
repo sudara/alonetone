@@ -9,7 +9,7 @@
   &.open {
     position: relative;
     z-index: 2;
-    box-shadow: 0 11px 19px 4px #6566667a;
+    box-shadow: $track-open-box-shadow;
   }
   &:last-child {
     border-bottom: 0;
