@@ -11,10 +11,10 @@ class Slug
     ) if string.nil?
 
     string.unicode_normalize.downcase(:fold)
-      .gsub(CONTROL_CHARACTERS_RE, '')
-      .gsub(%r{\A([[:space:]]+)}, '')
-      .gsub(%r{([[:space:]]+)\Z}, '')
-      .gsub(%r{[[:space:]]+}, '-')
+          .gsub(CONTROL_CHARACTERS_RE, '')
+          .gsub(%r{\A([[:space:]]+)}, '')
+          .gsub(%r{([[:space:]]+)\Z}, '')
+          .gsub(%r{[[:space:]]+}, '-')
   end
 
   DEDUPED_RE = %r{\A(.*)-(\d+)\Z}
