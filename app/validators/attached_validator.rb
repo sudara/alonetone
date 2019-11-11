@@ -10,6 +10,7 @@
 class AttachedValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return if value.nil?
+    return unless value.attached?
 
     validate_content_type(record, attribute, value) if options.key?(:content_type)
     validate_byte_size(record, attribute, value) if options.key?(:byte_size)
