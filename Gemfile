@@ -60,7 +60,7 @@ gem 'turbolinks'
 gem 'bugsnag'
 gem 'newrelic_rpm'
 gem 'skylight', '< 4.2' # bug in 4.2.beta2
-gem 'sidekiq', '< 6'
+gem 'sidekiq'
 gem 'dalli'
 
 group :development do
