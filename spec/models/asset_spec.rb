@@ -133,14 +133,6 @@ RSpec.describe Asset, type: :model do
       expect(asset.mp3_file_name).to eq('japanese-characters.mp3')
     end
 
-    it "should handle empty name in mp3 tag" do
-      asset = file_fixture_asset('japanese-characters.mp3', content_type: 'audio/mpeg')
-      expect(asset.permalink).to eq("01-¶ôμäèë") # name is 01-\266Ե??\313"
-      asset.title = 'bee'
-      asset.save
-      expect(asset.permalink).to eq('bee')
-    end
-
     it "should cope with non-english filenames" do
       asset = file_fixture_asset('中文測試.mp3', content_type: 'audio/mpeg')
       expect(asset.save).to eq(true)
