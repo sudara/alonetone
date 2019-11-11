@@ -42,7 +42,8 @@ module Slugs
       define_method("#{from_attribute}=") do |value|
         result = super(value)
         if changes.key?(from_attribute.to_s)
-          send("#{column}=", Slug.generate(result).presence || default)
+          slug = Slug.generate(result).presence || default
+          send("#{column}=", slug)
         end
         result
       end
