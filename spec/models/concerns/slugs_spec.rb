@@ -30,6 +30,12 @@ RSpec.describe Slugs do
       record.save!
       expect(record.reload.permalink).to eq('microwave-2')
     end
+
+    it 'does not change an existing slug when the source attribute does not change' do
+      group = groups(:kliek)
+      group.update(name: group.name)
+      expect(group.permalink).to eq('dekliek')
+    end
   end
 
   context 'a slug with a scope and default value' do
