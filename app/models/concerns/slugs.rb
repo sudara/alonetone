@@ -18,7 +18,7 @@ module Slugs
 
   # Increments slugs when they changed and conflict with another slug.
   def make_slugs_unique
-    slugs.each do |column, (from_attribute, scope_column)|
+    slugs.each do |column, (_, scope_column)|
       next unless changes.key?(column.to_s)
 
       current_slug = send(column)
