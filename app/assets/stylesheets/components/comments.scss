@@ -3,16 +3,20 @@
 #home_comments_area,
 #user_comments_area,
 .comments_area {
-  .asset {
-    border-top: 1px solid $border-color-four;
-    border-bottom: 0;
+  .box {
+    .asset {
+      border-top: 1px solid $track-border-bottom;
+      border-bottom: 0;
+      &:first-child {
+        border-top: 0;
+      }
+    }
   }
 }
 
 /* RECENT COMMENTS PAGE */
 
 .comments_columns {
-
   .columns_header {
     max-width: $site_max_width;
     box-sizing: border-box;
@@ -56,12 +60,12 @@
     content: "\A";
     border-width: 0 9px 13px 9px;
     border-style: solid;
-    border-color: transparent transparent #d7dbdb transparent;
+    border-color: transparent transparent $grey200 transparent;
     @media #{$mobile} {
       display: none;
     }
     @media #{$two-column-narrow} {
-       display: none;
+      display: none;
     }
   }
   .comment_asset {
@@ -79,10 +83,10 @@
           margin-right: 0;
           float: right;
           border-width: 0;
-          &.ajax_fail, &.ajax_success {
+          &.ajax_fail,
+          &.ajax_success {
             margin-bottom: 12px;
             border-width: 1px;
-
           }
         }
       }
@@ -92,7 +96,8 @@
           margin-right: 0;
           float: right;
           border-width: 0;
-          &.ajax_fail, &.ajax_success {
+          &.ajax_fail,
+          &.ajax_success {
             margin-bottom: 12px;
             border-width: 1px;
           }
@@ -130,7 +135,8 @@
           margin-right: 0;
           float: right;
           border-width: 0;
-          &.ajax_fail, &.ajax_success {
+          &.ajax_fail,
+          &.ajax_success {
             margin-bottom: 12px;
             border-width: 1px;
           }
@@ -203,10 +209,10 @@
         position: relative;
         top: 1px;
         label {
-          user-select:none;
+          user-select: none;
           text-transform: unset;
           color: $comment-make-private-text;
-          margin-bottom: 2px!important;
+          margin-bottom: 2px !important;
         }
       }
       span.private {
