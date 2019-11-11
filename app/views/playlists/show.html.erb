@@ -4,29 +4,29 @@
   <% end %>
 <% end %>
 
-<div id="playlist-and-track-content-header">
+<div id="playlist_and_track_content_header">
   <%= render partial: 'shared/back_to_artist' %>
 </div>
-<div id="playlist-and-track-content">
+<div id="playlist_and_track_content">
   <%= render 'playlist' %>
 
   <% if @asset %>
     <%= render partial: 'shared/asset' %>
   <% else %>
-    <%= content_for(:body_class, 'cover-view') %>
-    <div class="track-content">
-      <div class="large-cover-and-credits">
-        <div class="large-cover">
+    <%= content_for(:body_class, 'cover_view') %>
+    <div class="track_content">
+      <div class="large_cover_and_credits">
+        <div class="large_cover">
           <%= playlist_cover(@playlist, variant: :playlist_cover) %>
         </div>
         <% if @playlist.has_any_links? %>
-        <div class="playlist-options">
+        <div class="playlist_options">
           <%= render partial: 'links' %>
         </div>
         <% end %>
       </div>
       <% if defined?(@old_cover_alert) and authorized?  %>
-        <div class="playlist-cover-alert">
+        <div class="playlist_cover_alert">
           Hey, <%= current_user.name %> this cover is from <strong><%= @playlist.pic.created_at.year %></strong> and is very blurry since we only saved a
           small 200x200px version of it.
           Go <%= link_to 'Upload a higher res one', edit_user_playlist_path(@playlist.user, @playlist),
@@ -34,7 +34,7 @@
         </div>
       <% end %>
       <% if @playlist.credits.present? %>
-        <div class="playlist-credits">
+        <div class="playlist_credits">
         <%= markdown(@playlist.credits) %>
       </div>
       <% end %>

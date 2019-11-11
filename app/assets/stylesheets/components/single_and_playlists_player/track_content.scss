@@ -1,4 +1,4 @@
-.track-content-header {
+.track_content-header {
   margin-right: auto;
   margin-left: auto;
   max-width: 700px;
@@ -7,7 +7,7 @@
     width: 96%;
   }
 }
-.track-content {
+.track_content {
   margin-right: auto;
   margin-left: auto;
   max-width: 700px;
@@ -44,27 +44,27 @@
       }
     }
   }
-  .edit-links-and-favorite {
+  .edit_links_and_favorite {
     height: 38px;
     overflow: auto;
     background-color: transparent;
     box-shadow: none;
-    .edit-links {
+    .edit_links {
       background-color: transparent;
       box-shadow: none;
       border-radius: 0;
       float: left;
-      .edit-link {
+      .edit_link {
         @include default-button("admin");
       }
-      .edit-link + .edit-link {
+      .edit_link + .edit_link {
         margin-left: 6px;
         text-transform: uppercase;
         background-color: $background-color-one;
         color: $accent;
       }
     }
-    .download-link {
+    .download_link {
       float: right;
       a {
         width: 32px;
@@ -75,15 +75,15 @@
         background-image: image-url("svg/icon_download.svg");
       }
     }
-    .track-favorite {
+    .track_favorite {
       width: 30px;
       margin-right: 10px;
       float: right;
       position: relative;
     }
   }
-  .track-post,
-  .track-edit {
+  .track_post,
+  .track_edit {
     position: relative;
     z-index: 3;
     padding-left: 40px;
@@ -115,7 +115,7 @@
         margin-top: $baseline;
       }
     }
-    div.track-stats {
+    div.track_stats {
       font-size: 12px;
       margin-bottom: 0;
       display: flex;
@@ -199,7 +199,7 @@
     display: none;
   }
 
-  .track-edit {
+  .track_edit {
     margin-bottom: $baseline * 2;
     header {
       input {
@@ -217,7 +217,7 @@
         margin-bottom: 10px;
         margin-left: 12px;
       }
-      .track-stats {
+      .track_stats {
         margin-bottom: 6px;
         margin-left: 12px;
       }
@@ -247,7 +247,7 @@
     textarea#asset_credits {
       display: none;
     }
-    .track-edit-bottom {
+    .track_edit_bottom {
       .new_version {
         input[type="file"] {
           font-family: $sans-font;
@@ -270,7 +270,7 @@
           color: $accent;
         }
       }
-      .edit-save {
+      .edit_save {
         overflow: auto;
         margin-top: $baseline;
         .ajax_waiting {
@@ -301,5 +301,4 @@
       }
     }
   }
-
 }

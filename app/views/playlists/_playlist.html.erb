@@ -1,6 +1,6 @@
-<div class="playlist-sidebar">
+<div class="playlist_sidebar">
 
-  <%= link_to playlist_cover(@playlist, variant: :playlist_card), user_playlist_path(@playlist.user, @playlist), class: 'small-cover', style: ('display:none;' unless @asset) %>
+  <%= link_to playlist_cover(@playlist, variant: :playlist_card), user_playlist_path(@playlist.user, @playlist), class: 'small_cover', style: ('display:none;' unless @asset) %>
   <h1 class="<%= 'cover' unless @asset %>">
     <%= @playlist.title %>
   </h1>
@@ -18,31 +18,31 @@
 
     <!-- Play button automagically plays AND changes to relevant track details  -->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-      class: 'play-button', data: { target: "playlist-playback.play", action: "click->playlist-playback#togglePlay" }  do %>
+      class: 'play_button', data: { target: "playlist-playback.play", action: "click->playlist-playback#togglePlay" }  do %>
       <i class="icon_play"></i>
     <% end %>
 
     <!-- Track title just switches track details-->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-      remote: true, class: 'position-name-time', data: { target: "playlist-playback.loadTrack" } do %>
-      <span class="track-position">
+      remote: true, class: 'position_name_time', data: { target: "playlist-playback.loadTrack" } do %>
+      <span class="track_position">
         <%= "%02d" % track.position %>.
       </span>
-      <span class="track-name">
+      <span class="track_name">
         <%= track.name %>
       </span>
-      <span class='time-text'><%= track.asset.length %></span>
+      <span class='time_text'><%= track.asset.length %></span>
     <% end %>
     </li>
   <% end %>
   </ul>
 
-  <div class="sidebar-downloads"
+  <div class="sidebar_downloads"
     style="<%= 'display:none' unless @asset %>">
-    <ul class="downloads-links">
+    <ul class="downloads_links">
     </ul>
 
-    <ul class="external-links">
+    <ul class="external_links">
       <% [:link1, :link2, :link3].collect do |link| %>
         <% if valid_link = @playlist.send(link) %>
           <% if external_link_for(valid_link) %>
