@@ -7,6 +7,12 @@ RSpec.describe Asset, type: :model do
     expect(Asset.new(title: '👍').title).to eq('👍')
   end
 
+  it 'should use its permalink as param' do
+    expect(assets(:will_studd_rockfort_combalou).permalink).to eq(
+      assets(:will_studd_rockfort_combalou).to_param
+    )
+  end
+
   context "asset with audio file" do
     let(:asset) { assets(:will_studd_rockfort_combalou) }
 
@@ -129,7 +135,7 @@ RSpec.describe Asset, type: :model do
 
     it "should handle empty name in mp3 tag" do
       asset = file_fixture_asset('japanese-characters.mp3', content_type: 'audio/mpeg')
-      expect(asset.permalink).to eq("01-oaee") # name is 01-\266Ե??\313"
+      expect(asset.permalink).to eq("01-¶ôμäèë") # name is 01-\266Ե??\313"
       asset.title = 'bee'
       asset.save
       expect(asset.permalink).to eq('bee')
@@ -177,7 +183,7 @@ RSpec.describe Asset, type: :model do
     it "should generate unique permalinks" do
       asset = file_fixture_asset('tag2.mp3', content_type: 'audio/mpeg')
       asset2 = file_fixture_asset('tag2.mp3', content_type: 'audio/mpeg')
-      expect(asset2.permalink).to eq('put-a-nickel-on-my-door-1')
+      expect(asset2.permalink).to eq('put-a-nickel-on-my-door-2')
     end
 
     it "should make sure to grab bitrate and length in seconds" do
@@ -276,6 +282,33 @@ RSpec.describe Asset, type: :model do
       expect(asset.soft_deleted?).to eq(true)
       expect(asset.user).to be_nil
       expect(asset.possibly_deleted_user).not_to be_nil
+    end
+  end
+
+  describe 'slug' do
+    let(:title) { 'Music for the Masses' }
+    let(:slug) { Slug.generate(title) }
+
+    it 'updates when the name changes' do
+      asset = Asset.new(title: title)
+      expect(asset.permalink).to eq(slug)
+    end
+
+    it 'saves the permalink after creation' do
+      asset = Asset.create!(user: users(:henri_willig), title: title)
+      expect(asset.reload.permalink).to eq(slug)
+    end
+
+    it 'updates after title update' do
+      asset = assets(:henri_willig_finest_cheese)
+      asset.update(title: title)
+      expect(asset.reload.permalink).to eq(slug)
+    end
+
+    it 'increments the slug in case of a collision' do
+      existing = assets(:henri_willig_finest_cheese)
+      asset = Asset.create!(user: users(:henri_willig), title: existing.title)
+      expect(asset.reload.permalink).to eq('manufacturer-of-the-finest-cheese-2')
     end
   end
 end
