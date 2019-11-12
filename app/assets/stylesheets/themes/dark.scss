@@ -46,10 +46,6 @@ $about-stats-heading-text: $red600;
 
 $admin-spam-row-background: $orange100;
 
-$footer-forum-topics-accent: $orange600;
-$footer-bottom-background: $grey1100;
-$footer-bottom-link-text: $white;
-
 $edit-playlist-track-button-background: $grey200;
 $edit-playlist-track-button-background-hover: $grey800;
 
@@ -70,6 +66,15 @@ $site-header-user-dropdown-logout-background: $grey1000;
 $site-header-user-dropdown-logout-text: $grey400;
 $site-header-user-dropdown-list-item-background: $grey1100;
 $site-header-user-dropdown-list-item-text: $grey200;
+
+// site_footer.scss
+$footer-forum-topics-accent: $orange600;
+$footer-forum-topics-background: $grey1200;
+$footer-forum-topics-link-background: $grey1100;
+$footer-forum-topics-link-text: $grey400;
+$footer-bottom-background: $grey1150;
+$footer-bottom-column-background: $grey1100;
+$footer-bottom-link-text: $white;
 
 // sub_nav.scss
 $sub-nav-background: $black;
