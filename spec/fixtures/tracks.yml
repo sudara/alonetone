@@ -96,6 +96,7 @@ jamie_kiesl_loves_1:
   created_at: <%= 1.day.ago %>
 
 # don't add any more tracks to this playlist
+# it is used in testing "more than 2 tracks" requirement on published playlist
 soft_deleted_track_on_asset:
   playlist: jamie_kiesl_playlist_with_soft_deleted_tracks
   user: jamie_kiesl
