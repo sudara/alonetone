@@ -16,7 +16,7 @@
     width: 96%;
   }
   > * {
-    background-color: white;
+    background-color: $track-content-child-background;
     @include samo-shadow-and-radius();
   }
   > div.box {
