@@ -53,7 +53,7 @@ class Upload
     private
 
     def title_from_filename
-      File.basename(filename, '.*').humanize
+      File.basename(filename, '.*').strip
     end
 
     def metadata
