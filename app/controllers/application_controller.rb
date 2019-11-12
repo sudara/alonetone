@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # used in development because in production we use CloudFront URLs.
   include ActiveStorage::SetCurrent
   include Authentication
+  include Authorization
   include Pagy::Backend
   include PreventAbuse
 
