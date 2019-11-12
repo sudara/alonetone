@@ -123,12 +123,14 @@ RSpec.describe Asset, type: :model do
 
     it "should still work even when tags are empty and the name is weird" do
       asset = file_fixture_asset('_ .mp3', content_type: 'audio/mpeg')
-      expect(asset.permalink).to eq('untitled')
-      expect(asset.name).to eq('untitled')
+      expect(asset.permalink).to eq('_')
+      expect(asset.title).to eq('_')
+      expect(asset.name).to eq('_')
     end
 
     it "should handle strange charsets / characters in title tags" do
       asset = file_fixture_asset('japanese-characters.mp3', content_type: 'audio/mpeg')
+      expect(asset.title).to eq('01-¶ÔμÄÈË') # name is still 01-\266Ե??\313"
       expect(asset.name).to eq('01-¶ÔμÄÈË') # name is still 01-\266Ե??\313"
       expect(asset.mp3_file_name).to eq('japanese-characters.mp3')
     end
@@ -165,7 +167,7 @@ RSpec.describe Asset, type: :model do
 
     it "should use the filename as name if no tags are present" do
       asset = file_fixture_asset('titleless.mp3', content_type: 'audio/mpeg')
-      expect(asset.name).to eq('Titleless')
+      expect(asset.name).to eq('titleless')
     end
 
     it "should generate a permalink from tags" do

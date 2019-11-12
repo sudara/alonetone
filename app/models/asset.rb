@@ -131,7 +131,7 @@ class Asset < ApplicationRecord
   def name
     return title.strip if title.present?
 
-    name = audio_file.attached? ? audio_file.filename.base.humanize : nil
+    name = audio_file.attached? ? audio_file.filename.base : nil
     name.presence || 'untitled'
   end
 
