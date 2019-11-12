@@ -1,5 +1,6 @@
-module AuthlogicHelpers
-  # from Authlogic readme
+# frozen_string_literal: true
+
+module Authentication
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -10,7 +11,6 @@ module AuthlogicHelpers
     @current_user = current_user_session&.user
   end
 
-  # basic questions asked at controller/view level
   def logged_in?
     !!current_user
   end
