@@ -45,7 +45,7 @@ form {
     border-radius: 4px;
     background-color: $background-color-three;
     font-size: 14px;
-    
+    color: $forms-input-text;
     &:focus {
       border: 2px solid $accent;
     }
