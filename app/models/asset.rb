@@ -49,7 +49,6 @@ class Asset < ApplicationRecord
     source: :user,
     through: :tracks
 
-  before_save :ensure_unique_permalink, if: :permalink_changed?
   after_commit :create_waveform, on: :create
 
   # We have to define attachments last to make the Active Record callbacks
@@ -70,6 +69,18 @@ class Asset < ApplicationRecord
     byte_size: { less_than: 60.megabytes }
   }
 
+  include Slugs
+  has_slug(
+    :permalink,
+    from_attribute: :title,
+    scope: :user_id,
+    default: 'untitled'
+  )
+
+  def to_param
+    permalink
+  end
+
   # @deprecated Please use asset.audio_file.filename.
   def mp3_file_name
     if filename = audio_file&.filename
@@ -85,16 +96,6 @@ class Asset < ApplicationRecord
   # @deprecated Please use asset.audio_file.content_type.
   def mp3_content_type
     audio_file.attached? ? audio_file.content_type : nil
-  end
-
-  def title=(title)
-    super
-    rename
-  end
-
-  def audio_file=(audio_file)
-    super
-    rename
   end
 
   def self.latest(limit = 10)
@@ -130,7 +131,7 @@ class Asset < ApplicationRecord
   def name
     return title.strip if title.present?
 
-    name = audio_file.attached? ? audio_file.filename.base.humanize : nil
+    name = audio_file.attached? ? audio_file.filename.base : nil
     name.presence || 'untitled'
   end
 
@@ -187,10 +188,6 @@ class Asset < ApplicationRecord
     "https://#{hostname}/#{user.login}/tracks/#{permalink}"
   end
 
-  def to_param
-    permalink
-  end
-
   def notify_followers
     user.followers.select(&:wants_email?).each do |user|
       AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user.id)
@@ -232,23 +229,6 @@ class Asset < ApplicationRecord
     else
       with_deleted.recent
     end
-  end
-
-  private
-
-  include HasPermalink::InstanceMethods
-
-  # Required when calling fix_duplication.
-  def auto_fix_duplication
-    true
-  end
-
-  def rename
-    self.permalink = normalize(name).presence || 'untitled'
-  end
-
-  def ensure_unique_permalink
-    self.permalink = fix_duplication(permalink)
   end
 end
 
