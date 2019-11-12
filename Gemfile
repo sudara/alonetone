@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  "https://github.com/#{repo_name}.git"
+end
+
 gem 'rails'
 gem 'mysql2'
 gem 'puma', '< 4.1' # experiencing some issues with config on 4.1
