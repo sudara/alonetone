@@ -41,7 +41,7 @@ class Upload
         ATTRIBUTE_TO_ID3_TAG_NAME.each_with_object({}) do |(name, tag_name), attributes|
           value = info.respond_to?(tag_name) ? info.public_send(tag_name) : info.tag[tag_name]
           attributes[name] = self.class.sanitize_encoding(value)
-        end.compact
+        end.reject { |_, value| value.blank? }
       end
     rescue Mp3InfoError
       {}
