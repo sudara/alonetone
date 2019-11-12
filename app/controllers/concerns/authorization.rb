@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Implements controller helper methods to deal with authorization.
 module Authorization
   def admin?
     logged_in? && current_user.admin?
