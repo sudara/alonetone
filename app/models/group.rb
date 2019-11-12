@@ -5,7 +5,8 @@ class Group < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :description
 
-  has_permalink :name
+  include Slugs
+  has_slug :permalink, from_attribute: :name
 
   def to_param
     permalink
