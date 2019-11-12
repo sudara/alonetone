@@ -33,6 +33,7 @@ RSpec.describe Upload::Mp3File, type: :model do
       asset = mp3_file.assets.first
       expect(asset.errors).to be_blank
       expect(asset.user).to eq(user)
+      expect(asset.title).to eq('Smallest')
       expect(asset.mp3_content_type).to eq('audio/mpeg')
       expect(asset.mp3_file_name).to eq(mp3_file_filename)
       expect(asset.mp3_file_size).to eq(72)
@@ -82,6 +83,7 @@ RSpec.describe Upload::Mp3File, type: :model do
       asset = mp3_file.assets.first
       expect(asset.errors).to be_blank
       expect(asset.user).to eq(user)
+      expect(asset.title).to eq('🐬')
       expect(asset.name).to eq('🐬')
       expect(asset.mp3_file_name).to eq('🐬.mp3')
       expect(asset.private).to eq(false)
