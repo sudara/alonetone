@@ -149,12 +149,13 @@ RSpec.describe Asset, type: :model do
       expect(asset.mp3_file_name).to eq(filename)
     end
 
-    it "should handle permalink with ???? as tags, default to untitled" do
+    it 'creates an asset with a Chinese title in the ID3 tags' do
       asset = file_fixture_asset('中文測試.mp3', content_type: 'audio/mpeg')
       expect(asset).to be_persisted
       expect(asset.name).to eq("中文測試")
+      expect(asset.title).to eq("中文測試")
       expect(asset.permalink).not_to be_blank
-      expect(asset.permalink).to eq("untitled")
+      expect(asset.permalink).to eq("中文測試")
     end
 
     it "should use the mp3 tag1 title as name if present" do
