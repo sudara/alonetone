@@ -52,12 +52,17 @@ class Upload
 
     private
 
+    def title_from_filename
+      File.basename(filename, '.*').humanize
+    end
+
     def metadata
       @metadata ||= Upload::Metadata.new(file)
     end
 
     def combined_attributes
       asset_attributes
+        .merge(title: title_from_filename)
         .merge(metadata.attributes)
         .merge(
           user: user,
