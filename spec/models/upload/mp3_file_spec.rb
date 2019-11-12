@@ -5,12 +5,15 @@ require 'rails_helper'
 RSpec.describe Upload::Mp3File, type: :model do
   let(:user) { users(:will_studd) }
   let(:asset_attributes) { nil }
-  let(:mp3_file_filename) { 'smallest.mp3' }
+  let(:fixture_filename) { 'smallest.mp3' }
+  let(:filename) {
+    'op1 virtual III the 2nd when Times are hard %live% (prod. THE MAN).mp3'
+  }
   let(:mp3_file) do
     Upload::Mp3File.new(
       user: user,
-      file: file_fixture_tempfile(mp3_file_filename),
-      filename: mp3_file_filename,
+      file: file_fixture_tempfile(fixture_filename),
+      filename: filename,
       asset_attributes: asset_attributes
     )
   end
@@ -19,8 +22,8 @@ RSpec.describe Upload::Mp3File, type: :model do
     expect(
       Upload::Mp3File.process(
         user: user,
-        file: file_fixture_tempfile(mp3_file_filename),
-        filename: mp3_file_filename
+        file: file_fixture_tempfile(fixture_filename),
+        filename: filename
       )
     ).to be_kind_of(Upload::Mp3File)
   end
@@ -33,16 +36,20 @@ RSpec.describe Upload::Mp3File, type: :model do
       asset = mp3_file.assets.first
       expect(asset.errors).to be_blank
       expect(asset.user).to eq(user)
-      expect(asset.title).to eq('Smallest')
+      expect(asset.title).to eq(
+        'op1 virtual III the 2nd when Times are hard %live% (prod. THE MAN)'
+      )
       expect(asset.mp3_content_type).to eq('audio/mpeg')
-      expect(asset.mp3_file_name).to eq(mp3_file_filename)
+      expect(asset.mp3_file_name).to eq(
+        'op1 virtual III the 2nd when Times are hard -live- (prod. THE MAN).mp3'
+      )
       expect(asset.mp3_file_size).to eq(72)
       expect(asset.private).to eq(false)
     end
   end
 
   context 'processing file with ID3 tags' do
-    let(:mp3_file_filename) { 'piano.mp3' }
+    let(:fixture_filename) { 'piano.mp3' }
 
     it 'builds a valid single asset' do
       expect(mp3_file.process).to eq(true)
@@ -60,21 +67,16 @@ RSpec.describe Upload::Mp3File, type: :model do
       expect(asset.id3_track_num).to eq(2)
       expect(asset.genre).to eq('Rock')
       expect(asset.mp3_content_type).to eq('audio/mpeg')
-      expect(asset.mp3_file_name).to eq(mp3_file_filename)
+      expect(asset.mp3_file_name).to eq(
+        'op1 virtual III the 2nd when Times are hard -live- (prod. THE MAN).mp3'
+      )
       expect(asset.mp3_file_size).to eq(37352)
       expect(asset.private).to eq(false)
     end
   end
 
   context 'processing file with emoji in the filename' do
-    let(:mp3_file_filename) { '🐬.mp3' }
-    let(:mp3_file) do
-      Upload::Mp3File.new(
-        user: user,
-        file: file_fixture_tempfile('smallest.mp3'),
-        filename: mp3_file_filename
-      )
-    end
+    let(:filename) { '🐬.mp3' }
 
     it 'builds a valid single asset' do
       expect(mp3_file.process).to eq(true)
@@ -91,9 +93,9 @@ RSpec.describe Upload::Mp3File, type: :model do
   end
 
   context 'processing an empty file' do
-    let(:mp3_file_filename) { 'empty.mp3' }
+    let(:fixture_filename) { 'empty.mp3' }
 
-    it 'builds an invalid single asset' do
+    it 'builds an asset' do
       expect(mp3_file.process).to eq(false)
       expect(mp3_file.assets.length).to eq(1)
 
@@ -105,7 +107,8 @@ RSpec.describe Upload::Mp3File, type: :model do
   end
 
   context 'processing an unsupported file' do
-    let(:mp3_file_filename) { 'smallest.zip' }
+    let(:filename) { 'smallest.zip' }
+    let(:fixture_filename) { 'smallest.zip' }
 
     it 'builds an invalid single asset' do
       expect(mp3_file.process).to eq(false)
@@ -144,8 +147,8 @@ RSpec.describe Upload::Mp3File, type: :model do
     let(:mp3_file) do
       Upload::Mp3File.new(
         user: user,
-        file: file_fixture_tempfile(mp3_file_filename),
-        filename: mp3_file_filename,
+        file: file_fixture_tempfile(fixture_filename),
+        filename: filename,
         content_type: content_type
       )
     end
@@ -164,8 +167,8 @@ RSpec.describe Upload::Mp3File, type: :model do
     let(:mp3_file) do
       Upload::Mp3File.new(
         user: user,
-        file: file_fixture_tempfile(mp3_file_filename),
-        filename: mp3_file_filename,
+        file: file_fixture_tempfile(fixture_filename),
+        filename: filename,
         content_type: nil
       )
     end
