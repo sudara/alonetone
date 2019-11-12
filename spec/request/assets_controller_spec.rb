@@ -239,6 +239,11 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
 
+    it 'uses the filename as the asset title when the title ID3 tag is empty' do
+      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/emptytags.mp3', 'audio/mpeg')] }
+      expect(response).to redirect_to('/arthur/tracks/emptytags/edit')
+    end
+
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
         post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
