@@ -48,6 +48,25 @@ RSpec.describe Upload::Mp3File, type: :model do
     end
   end
 
+  context 'processing file with some blank ID3 tags' do
+    let(:filename) { '_ .mp3' }
+    let(:fixture_filename) { filename }
+
+    it 'builds a valid single asset' do
+      expect(mp3_file.process).to eq(true)
+      expect(mp3_file.assets.length).to eq(1)
+
+      asset = mp3_file.assets.first
+      expect(asset.errors).to be_blank
+      expect(asset.user).to eq(user)
+      expect(asset.title).to eq('_')
+      expect(asset.mp3_content_type).to eq('audio/mpeg')
+      expect(asset.mp3_file_name).to eq(filename)
+      expect(asset.mp3_file_size).to eq(3415280)
+      expect(asset.private).to eq(false)
+    end
+  end
+
   context 'processing file with ID3 tags' do
     let(:fixture_filename) { 'piano.mp3' }
 
@@ -108,7 +127,7 @@ RSpec.describe Upload::Mp3File, type: :model do
 
   context 'processing an unsupported file' do
     let(:filename) { 'smallest.zip' }
-    let(:fixture_filename) { 'smallest.zip' }
+    let(:fixture_filename) { filename }
 
     it 'builds an invalid single asset' do
       expect(mp3_file.process).to eq(false)
