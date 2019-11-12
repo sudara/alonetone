@@ -4,7 +4,7 @@ sudara:
   email: sudara@modernthings.net
   salt: <%= salt = Authlogic::Random.hex_token %>
   persistence_token: <%= SecureRandom.hex(64) %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 5.days.ago.to_s :db %>
   updated_at: <%= 5.days.ago.to_s :db %>
   admin: true
@@ -15,7 +15,7 @@ arthur:
   login: arthur
   email: arthur@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
   last_request_at: <%= 1.days.ago.to_s :db %>
@@ -26,7 +26,7 @@ aaron:
   login: aaron
   email: aaron@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
 
@@ -35,7 +35,7 @@ not_activated:
   login: ben
   email: ben@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
   perishable_token: 8eou87daoeuhdtn
@@ -45,7 +45,7 @@ sandbags:
   login: sandbags
   email: sandbags@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
   moderator: true
@@ -55,7 +55,7 @@ joeblow:
   login: joeblow
   email: joe@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
 
@@ -64,7 +64,7 @@ brand_new_user:
   login: brandnewuser
   email: brandnewuser@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt("test" + salt) %>
+  crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 5.hours.ago.to_s :db %>
   updated_at: <%= 5.hours.ago.to_s :db %>
   assets_count: 25
@@ -75,7 +75,7 @@ jamie_kiesl:
   login: Jamiek
   email: jamie.kiesl@example.com
   salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  crypted_password: <%= scrypt('test' + salt) %>
   playlists_count: 0
   assets_count: 0
   current_login_ip: 127.1.1.2
@@ -91,7 +91,7 @@ will_studd:
   salt: <%= salt = Authlogic::Random.hex_token %>
   playlists_count: 1
   assets_count: 4
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  crypted_password: <%= scrypt('test' + salt) %>
   created_at: <%= 1.year.ago %>
   updated_at: <%= 1.year.ago %>
 
@@ -104,7 +104,7 @@ henri_willig:
   salt: <%= salt = Authlogic::Random.hex_token %>
   playlists_count: 1
   assets_count: 2
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  crypted_password: <%= scrypt('test' + salt) %>
   created_at: <%= 6.months.ago %>
   updated_at: <%= 6.months.ago %>
 
@@ -117,7 +117,7 @@ william_shatner:
   salt: <%= salt = Authlogic::Random.hex_token %>
   playlists_count: 0
   assets_count: 0
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  crypted_password: <%= scrypt('test' + salt) %>
   use_old_theme: true
   created_at: <%= 1.month.ago %>
   updated_at: <%= 1.month.ago %>
@@ -130,7 +130,7 @@ deleted_yesterday:
   salt: <%= salt = Authlogic::Random.hex_token %>
   playlists_count: 1
   assets_count: 1
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  crypted_password: <%= scrypt('test' + salt) %>
   use_old_theme: true
   created_at: <%= 1.day.ago %>
   updated_at: <%= 1.day.ago %>
@@ -143,7 +143,7 @@ deleted_30_days_ago:
   salt: <%= salt = Authlogic::Random.hex_token %>
   playlists_count: 0
   assets_count: 0
-  crypted_password: <%= Authlogic::CryptoProviders::SCrypt.encrypt('test' + salt) %>
+  crypted_password: <%= scrypt('test' + salt) %>
   created_at: <%= 41.days.ago %>
   updated_at: <%= 41.days.ago %>
   deleted_at: <%= 35.days.ago %>
