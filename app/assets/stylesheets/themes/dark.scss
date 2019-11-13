@@ -146,12 +146,12 @@ $edit-playlist-track-button-background-hover: $grey800;
 
 // playlists.scss
 $card-background: $grey1100;
-$card-title-text: $white; 
-$card-title-weight: normal;
 $card-title-font: 'Alright-v2-Normal-Medium', sans-serif;
-$card-artist-text: $orange300;
-$card-artist-weight: bold;
+$card-title-weight: normal;
+$card-title-text: $white; 
 $card-artist-font: 'Alright-v2-Normal', sans-serif;
-$card-by-text: $grey800; 
-$card-by-weight: bold;
+$card-artist-weight: bold;
+$card-artist-text: $orange300;
 $card-by-font: 'Alright-v2-Normal', sans-serif;
+$card-by-weight: bold;
+$card-by-text: $grey800; 
