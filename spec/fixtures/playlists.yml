@@ -23,7 +23,7 @@ arthurs_playlist:
   title: Arthur's Playlist
   cover_quality: modern
   credits: arthurs playlist
-  private: false
+  private: true
   created_at: <%= 1.day.ago %>
 
 mix:
