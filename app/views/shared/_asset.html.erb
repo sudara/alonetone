@@ -26,7 +26,7 @@
     <% end %>
 
     <div class="download_link">
-      <%= link_to '', media_url(@asset) %>
+      <a href="<%= media_url(@asset) %>" download="<%= @asset.audio_file.filename %>"></a>
     </div>
  </div>
 
