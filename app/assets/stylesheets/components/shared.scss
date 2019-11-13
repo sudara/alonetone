@@ -132,6 +132,7 @@ ul {
 
 .private_warning {
     font-size: 12px !important;
+    font-family: $medium-sans-font;
     position: relative;
     display: block;
     height: auto;
@@ -146,7 +147,6 @@ ul {
     }
     .only_user_name,
     .only_alonetone_mods {
-      font-weight: bold;
-      color: $font-color-seven;
+      color: $white;
     }
 }

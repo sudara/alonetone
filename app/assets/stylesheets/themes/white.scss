@@ -29,10 +29,6 @@ $accent: $orangetone;
 
 $warning: $red600;
 
-$private-message-warning-background: $red500;
-$private-message-warning-border: $red600;
-$private-message-warning-text: $orange100;
-
 $admin-spam-row-background: $orange100;
 
 $big-player-seekbar-color: $grey200;
@@ -42,6 +38,11 @@ $default-button-background: $grey500;
 $default-button-background-hover: $grey800;
 $primary-button-background-hover: $orange600;
 $primary-button-background-active: $orange800;
+
+// shared.scss
+$private-message-warning-background: $red500;
+$private-message-warning-border: $red600;
+$private-message-warning-text: $orange100;
 
 // notifications.scss
 $ajax-fail-border: $red600;
