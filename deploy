@@ -1,14 +1,14 @@
 #!/bin/bash
+
 echo "Deployanatoring teh codez!"
 echo
 
 # handle git and bundle install
 ssh alonetone '
+  cd /data/alonetone;
   source /etc/profile;
   source ~/.profile;
-  cd /data/alonetone;
-
-  if [[ $(git diff) > "" ]];
+  if [[ $(sudo -u deploy git diff) > "" ]];
     then
       echo "WARNING: local changes on server, exiting!";
       exit 0;
@@ -16,11 +16,11 @@ ssh alonetone '
 
   git fetch;
 
-  if [[ $(git diff origin/master db) > "" ]]; then
+  if [[ $(sudo -u deploy git diff origin/master db) > "" ]]; then
     RUN_MIGRATIONS=1;
   fi
 
-  if [[ $(git diff origin/master Gemfile.lock) > "" ]];
+  if [[ $(sudo -u deploy git diff origin/master Gemfile.lock) > "" ]];
     then
       echo "Gemfile changed, bundle installing...";
       git reset --hard origin/master; bundle install --deployment;
@@ -33,11 +33,11 @@ ssh alonetone '
 
   if [[ $RUN_MIGRATIONS ]]; then
     echo "Running migrations, hold tight...";
-    time RAILS_ENV=production bundle exec rake db:migrate;
+    time sudo -u deploy RAILS_ENV=production bundle exec rake db:migrate;
   fi
 
    echo "Compiling assets..."
-   RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile
+   time sudo -u deploy RAILS_ENV=production bundle exec rake assets:precompile
 
 
    echo "Run puma, run!"
