@@ -3,7 +3,7 @@
     locals: { asset: comment.commentable }) if comment.commentable && comment.commentable_type == "Asset" %>
 <% end %>
 
-<%= div_for comment, class: (cycle('even', 'odd')) do %>
+<%= div_for comment do %>
   <div class="comment_user">
     <%= user_image_link(comment.commenter, variant: :small_avatar) %>
 	</div>
