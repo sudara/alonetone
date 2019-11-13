@@ -1,6 +1,6 @@
 <div class="player">
-  <div class="play-button-container" data-target="big-play.play" data-action="click->big-play#togglePlay">
-    <div class='play-button play-control'>
+  <div class="play_button_container" data-target="big-play.play" data-action="click->big-play#togglePlay">
+    <div class='play_button play-control'>
       <%= link_to media_url(@asset), data: { target: 'single-playback.play' } do %>
       <svg data-target="big-play.playButton" class="largePlaySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -34,11 +34,11 @@
      <%= render partial: 'assets/waveform' %>
   </div>
 
-  <div class="progress-container">
-    <div class="progress-container-inner" data-target="big-play.progressContainerInner">
-      <div class="line-progress">
+  <div class="progress_container">
+    <div class="progress_container_inner" data-target="big-play.progressContainerInner">
+      <div class="line_progress">
       </div>
-      <div class="time-progress">
+      <div class="time_progress">
         <span class="index" data-target="big-play.time">0:00</span>
       </div>
     </div>
@@ -46,7 +46,7 @@
 
 
 
-  <div class="time-total">
+  <div class="time_total">
     <%= @asset.length %>
   </div>
 

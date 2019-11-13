@@ -3,7 +3,7 @@
   window.userIsAdmin = <%= moderator? ? true : false %>;
   window.userFavorites = <%= (logged_in? ? current_user.favorite_asset_ids : [] ).to_json %>;
   window.showPlayCounts = <%= logged_in? && current_user.settings && (current_user.settings[:display_listen_count] == "true") ? true : false %>;
-  window.userPersonalization = '<div class="comment_as">' +
+  window.userPersonalization = '<div>' +
      <% if logged_in? %>
         'Say something, <span class="comment_as_user"><%= escape_javascript(current_user.name)%></span>:'+
      <% else %>
