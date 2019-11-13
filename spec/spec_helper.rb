@@ -33,4 +33,7 @@ RSpec.configure do |config|
 
   # Limits the available syntax (e.g. forces expect(…).to)
   config.disable_monkey_patching!
+
+  # Useful in combination with fail-fast when refactoring specs.
+  config.register_ordering(:alphabet, &:sort)
 end
