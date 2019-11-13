@@ -62,40 +62,6 @@ form {
   }
 }
 
-/* SIMPLE FORM */
-
-input {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 9px 10px 6px 10px;
-  font-family: $medium-sans-font;
-  font-size: 14px;
-  &.string,
-  &.password {
-    width: 250px;
-    border: 1px solid $border-color-six;
-    border-radius: 4px;
-    background-color: $background-color-three;
-    color: $font-color-two;
-    &:focus {
-      border: 1px solid $border-color-two;
-    }
-  }
-  &.radio {
-    margin-right: 5px;
-    vertical-align: -3px;
-  }
-  &.check_boxes {
-    margin-left: 3px;
-    vertical-align: -3px;
-  }
-  &.btn {
-    font-size: 1.4em;
-    margin-right: 0;
-    padding: 10px;
-  }
-}
-
 /* VALIDATION FEEDBACK */
 
 .field_with_errors {

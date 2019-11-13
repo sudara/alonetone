@@ -36,15 +36,19 @@ class Upload
 
     private
 
-    def extract_attributes
+    def mp3info_attributes
       Mp3Info.open(file.path) do |info|
         ATTRIBUTE_TO_ID3_TAG_NAME.each_with_object({}) do |(name, tag_name), attributes|
           value = info.respond_to?(tag_name) ? info.public_send(tag_name) : info.tag[tag_name]
           attributes[name] = self.class.sanitize_encoding(value)
-        end.compact
+        end
       end
     rescue Mp3InfoError
       {}
+    end
+
+    def extract_attributes
+      mp3info_attributes.reject { |_, value| value.blank? }
     end
   end
 end

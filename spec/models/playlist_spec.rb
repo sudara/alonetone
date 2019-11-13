@@ -199,4 +199,31 @@ RSpec.describe Playlist, type: :model do
       end.to change { Playlist.count }.from(original_count).to(0)
     end
   end
+
+  describe 'slug' do
+    let(:title) { 'Music for the Masses' }
+    let(:slug) { Slug.generate(title) }
+
+    it 'updates when the name changes' do
+      playlist = Playlist.new(title: title)
+      expect(playlist.permalink).to eq(slug)
+    end
+
+    it 'saves the permalink after creation' do
+      playlist = Playlist.create!(user: users(:henri_willig), title: title)
+      expect(playlist.reload.permalink).to eq(slug)
+    end
+
+    it 'updates after title update' do
+      playlist = playlists(:jamie_kiesl_loves)
+      playlist.update(title: title)
+      expect(playlist.reload.permalink).to eq(slug)
+    end
+
+    it 'increments the slug in case of a collision' do
+      existing = playlists(:jamie_kiesl_loves)
+      playlist = Playlist.create!(user: users(:jamie_kiesl), title: existing.title)
+      expect(playlist.reload.permalink).to eq('jamie-loves-2')
+    end
+  end
 end
