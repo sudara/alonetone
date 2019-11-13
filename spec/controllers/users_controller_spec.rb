@@ -106,27 +106,27 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should activate with a for reals perishable token" do
-      set_good_request_headers && activate_authlogic && create_user
+      set_good_request_headers && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(new_user_track_path(User.last.login))
     end
 
     it 'should log in user on activation' do
-      set_good_request_headers && activate_authlogic && create_user
+      set_good_request_headers && create_user
       # expect(UserSession).to receive(:create)
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(controller.session["user_credentials"]).to eq(User.last.persistence_token)
     end
 
     it 'should send out email on activation' do
-      set_good_request_headers && activate_authlogic && create_user
+      set_good_request_headers && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(last_email.to).to eq(["quire@example.com"])
     end
 
     it "should not activate with bullshit perishable token" do
-      set_good_request_headers && activate_authlogic
+      set_good_request_headers
       get :activate, params: { perishable_token: "abunchofbullshit" }
       expect(flash[:error]).to be_present
       expect(response).to redirect_to(new_user_path)
