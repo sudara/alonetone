@@ -3,7 +3,7 @@ owp:
   user: sudara
   permalink: owp
   title: obsessed with progression
-  tracks_count: 3
+  tracks_count: 4
   cover_quality: modern
   credits: sudara's album
   created_at: <%= 1.day.ago %>
