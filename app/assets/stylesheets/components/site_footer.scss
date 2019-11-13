@@ -6,6 +6,7 @@ footer#site_footer {
   line-height: 20px;
   width: 100%;
   color: $font-color-two;
+  padding-top: $baseline;
   h3 {
     color: $footer-forum-topics-accent;
     line-height: 1.2;
@@ -37,7 +38,6 @@ footer#site_footer {
   }
   .footer_forum_topics {
     padding-bottom: $baseline;
-    margin-top: $baseline;
     background-color: $footer-forum-topics-background;
     .footer_forum_topics_inner {
       width: 952px;
