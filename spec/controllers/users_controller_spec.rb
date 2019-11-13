@@ -207,7 +207,6 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should not let a logged out user edit" do
-      logout
       post :edit, params: { user_id: 'arthur' }
       expect(response).not_to be_successful
     end
