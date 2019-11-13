@@ -56,7 +56,8 @@ ul.playlists {
     }
     a.small_playlist_title {
       color: $card-title-text;
-      font-family: $medium-sans-font;
+      font-family: $card-title-font;
+      font-weight: $card-title-weight;
       display: block;
       overflow: hidden;
       margin-top: 16px;
@@ -66,8 +67,7 @@ ul.playlists {
     }
     div.small_playlist_user {
       color: $card-artist-text;
-      font-size: 10px;
-      margin-top: px;
+      font-family: $medium-sans-font;
       overflow-wrap: break-word;
       word-wrap: break-word;
       -webkit-hyphens: auto;
@@ -75,10 +75,18 @@ ul.playlists {
       -moz-hyphens: auto;
       hyphens: auto;
       a {
-        font-weight: bold;
-        display: block;
+        display: inline-block;
+        font-family: $card-artist-font;
+        font-weight: $card-artist-weight;
         margin-top: 5px;
-        padding: 0 8px 7px 8px;
+        padding: 0 8px 7px 3px;
+        font-size: 9.6px;
+      }
+      span.by {
+        color: $card-by-text;
+        font-family: $card-by-font;
+        font-weight: $card-by-weight;
+        font-size: 9.6px;
       }
     }
   }
