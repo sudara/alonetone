@@ -39,12 +39,11 @@ ssh alonetone '
    echo "Compiling assets..."
    RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile
 
+
+   echo "Run puma, run!"
+   sudo monit restart puma_alonetone
+   sudo systemctl reload sidekiq
   '
-
-# handle restarts
-echo "Run puma, run!"
-
-ssh linode "monit restart puma_alonetone sidekiq"
 
 bundle exec newrelic deployments
 REVISION="$(git rev-parse --short HEAD)"
