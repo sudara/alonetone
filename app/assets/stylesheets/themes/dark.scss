@@ -38,10 +38,13 @@ $private-message-warning-text: $orange100;
 
 $admin-spam-row-background: $orange100;
 
+$big-player-seekbar-color: $grey200;
+
+// variables.scss
 $default-button-background: $grey500;
 $default-button-background-hover: $grey800;
-
-$big-player-seekbar-color: $grey200;
+$primary-button-background-hover: $orange600;
+$primary-button-background-active: $orange800;
 
 // notifications
 $ajax-fail-border: $red600;
@@ -84,10 +87,6 @@ $sub-nav-text: $grey400;
 $sub-nav-text-hover: $white;
 $sub-nav-current-background: $orangetone;
  
-// variables.scss
-$primary-button-background-hover: $orange600;
-$primary-button-background-active: $orange800;
-
 // static_pages.scss
 $static-page-heading-background: $grey1150;
 $static-page-heading-text: $grey100;
@@ -136,3 +135,8 @@ $user-card-shadow: none;
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
 $edit-playlist-track-button-background-hover: $grey800;
+
+// playlists.scss
+$card-background: $grey1100;
+$card-title-text: $white; 
+$card-artist-text: $orange300;
