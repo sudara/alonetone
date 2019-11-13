@@ -40,17 +40,20 @@ RSpec.describe AttachedValidator do
     expect(record).to be_valid
   end
 
-  it 'allows an unattached attachment' do
+  it 'allows empty attachment when configured to do so' do
+    record = AttachedValidatorModel.new(nil, double(byte_size: 0, attached?: true))
+    expect(record).to be_valid
+  end
+
+  it 'does not allow an unattached attachment' do
     record = AttachedValidatorModel.new(
       double(attached?: false),
       nil
     )
-    expect(record).to be_valid
-  end
-
-  it 'allows empty attachment when configured to do so' do
-    record = AttachedValidatorModel.new(nil, double(byte_size: 0, attached?: true))
-    expect(record).to be_valid
+    expect(record).to_not be_valid
+    expect(record.errors.details[:audio_file]).to eq(
+      [error: :not_attached]
+    )
   end
 
   it 'does not allow attachment with unsupported content-type' do
