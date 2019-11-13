@@ -324,7 +324,8 @@ RSpec.describe UsersController, type: :controller do
   context "last request at" do
     it "should touch last_request_at when logging in" do
       # Authlogic does this by default, which fucks things up
-      expect { login(:arthur) }.to change { users(:arthur).last_request_at }
+      user = users(:arthur)
+      expect { login(user) }.to change { user.reload.last_request_at }
     end
   end
 end
