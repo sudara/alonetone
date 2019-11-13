@@ -308,6 +308,9 @@
               width: 17px;
               position: relative;
               top: -4px;
+              path {
+                fill: $track-stats-icon-background;
+              }
             }
           }
         }
