@@ -33,6 +33,10 @@ module Alonetone
     config.active_storage.service = config.alonetone.storage_service
     config.active_storage.variant_processor = :vips
 
+    # Expiration for storage URLs should be at least as long as the maximum
+    # cache time for HTML pages. The default is 5 minutes.
+    config.active_storage.service_urls_expire_in = 6.hours
+
     # Turn off previewers and analysers because we don't use them.
     config.active_storage.analyzers = []
     config.active_storage.previewers = []
