@@ -5,12 +5,12 @@ class Playlist < ActiveRecord::Base
 
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
-  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recent.only_public.with_preloads }
+  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recently_published.only_public.with_preloads }
   scope :include_private,  -> { where(is_favorite: false) }
   scope :mixes,            -> { where(is_mix: true) }
-  scope :only_public,      -> { where(private: false).where(is_favorite: false).where("tracks_count > 1") }
-  scope :recent,           -> { order('playlists.created_at DESC') }
+  scope :only_public,      -> { where(private: false).where(is_favorite: false) }
   scope :with_preloads,    -> { preload(:cover_image_blob, user: { avatar_image_attachment: :blob }) }
+  scope :recently_published, -> { reorder('playlists.published_at DESC') }
 
   belongs_to :user, counter_cache: true
   has_many :tracks,
@@ -27,7 +27,6 @@ class Playlist < ActiveRecord::Base
 
   before_validation :name_favorites, on: :create
   before_update(
-    :set_mix_or_album,
     :ensure_private_if_less_than_two_tracks,
     :set_published_at,
     :notify_followers_if_publishing_album
@@ -91,7 +90,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def set_published_at
-    published_at = Time.now if publishing?
+    self.published_at = Time.zone.now if publishing? && can_be_public?
   end
 
   def notify_followers
@@ -136,21 +135,27 @@ class Playlist < ActiveRecord::Base
   end
 
   def ensure_private_if_less_than_two_tracks
-    self.private = true if !is_favorite? && (tracks_count < 2)
+    self.private = true if !is_favorite? && !can_be_public?
     true
   end
 
-  # playlist is a mix if there is at least one track with a track from another user
-  def set_mix_or_album
-    # is this a favorites playlist?
-    is_mix = true if is_favorite?
-    is_mix = true if tracks.present? && tracks.count > tracks.where('user_id != ?', user&.id).count
-    true
+  # list any required conditions before playlist
+  # can be made public
+  def can_be_public?
+    tracks_count >= 2
   end
 
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites
     self.title = user.name + "'s favorite tracks" if is_favorite?
+    # move me to new tracks_controller#create
+    self.is_mix = true if consider_a_mix?
+  end
+
+  def consider_a_mix?
+    return true if is_favorite?
+
+    tracks.present? && tracks.pluck(:user_id).uniq.count > 1
   end
 end
 
