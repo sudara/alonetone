@@ -133,6 +133,41 @@ RSpec.describe PlaylistsController, type: :controller do
     end
   end
 
+  describe "update" do
+    let(:user) { users(:jamie_kiesl) }
+
+    before do
+      login(user)
+    end
+
+    it "should update published_at" do
+      expect(playlists(:jamie_kiesl_loves).published_at).to be_nil
+      expect(playlists(:jamie_kiesl_loves).private).to be(true)
+
+      put :update, params: {
+        id: playlists(:jamie_kiesl_loves).id,
+        permalink: 'jamie-loves',
+        user_id: user.login,
+        playlist: {
+          private: false
+        }}
+      expect(playlists(:jamie_kiesl_loves).reload.published_at).not_to be_nil
+    end
+
+    it "should not publish if playlist has less than 2 tracks" do
+      expect(playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).tracks.count).to eq(1)
+
+      put :update, params: {
+        id: playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).id,
+        permalink: 'jamie-playlist-with-soft-delete',
+        user_id: user.login,
+        playlist: {
+          private: false
+        }}
+      expect(playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).reload.published_at).to be_nil
+    end
+  end
+
   def edit_sudaras_playlist
     # a little ghetto, rspec won't honor string ids
     get :edit, params: { id: playlists(:owp).id, permalink: 'owp', user_id: 'sudara' }

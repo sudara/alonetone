@@ -103,7 +103,16 @@ RSpec.describe Playlist, type: :model do
       expect(users(:sandbags).playlists.favorites).not_to be_present
       users(:sandbags).toggle_favorite(assets(:valid_mp3))
       expect(users(:sandbags).playlists.favorites.first).to be_present
+    end
+
+    it "should set a permalink for playlist" do
+      users(:sandbags).toggle_favorite(assets(:valid_mp3))
       expect(users(:sandbags).playlists.favorites.first.permalink).not_to be_nil
+    end
+
+    it "should set is_mix true" do
+      users(:sandbags).toggle_favorite(assets(:valid_mp3))
+      expect(users(:sandbags).playlists.favorites.first.is_mix).to eq(true)
     end
   end
 
