@@ -39,7 +39,12 @@ RSpec.describe Slugs do
   end
 
   context 'a slug with a scope and default value' do
-    let(:record) { Asset.new }
+    let(:audio_file) do
+      file_fixture_uploaded_file(
+        'smallest.mp3', filename: 'smallest.mp3', content_type: 'audio/mpeg'
+      )
+    end
+    let(:record) { Asset.new(audio_file: audio_file) }
 
     it 'returns all the configured slugs for the class' do
       expect(record.class.slugs).to eq(
