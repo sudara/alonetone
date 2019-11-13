@@ -15,10 +15,6 @@ module RSpec
         allow(controller).to receive(:current_user).and_return(login_as)
       end
 
-      def logout
-        UserSession.find.destroy if UserSession.find
-      end
-
       def create_user_session(user)
         post(
           '/user_sessions',
