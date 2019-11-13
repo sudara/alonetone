@@ -208,6 +208,14 @@ RSpec.describe Asset, type: :model do
         )
       end.to have_enqueued_job(WaveformExtractJob)
     end
+
+    it "does not create with an empty MP3" do
+      asset = user.assets.create(
+        title: 'Empty',
+        audio_file: fixture_file_upload('files/empty.mp3', 'audio/mpeg')
+      )
+      expect(asset.errors).to_not be_empty
+    end
   end
 
   context "on update" do
