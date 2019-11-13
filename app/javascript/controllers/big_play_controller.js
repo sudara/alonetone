@@ -94,7 +94,7 @@ export default class extends Controller {
       left: '100%',
       ease: Linear.easeNone,
     }, 0)
-    this.waveformAnimation = this.timeline.to('#waveform-reveal', 1, {
+    this.waveformAnimation = this.timeline.to('#waveform_reveal', 1, {
       attr: { x: '0' },
       ease: Linear.easeNone,
     }, 0)

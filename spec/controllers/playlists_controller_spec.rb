@@ -49,11 +49,6 @@ RSpec.describe PlaylistsController, type: :controller do
   end
 
   context "sorting" do
-    it 'should display albums to sort' do
-      login(:sudara)
-      get :sort, params: { user_id: 'sudara' }
-      expect(response).to be_successful
-    end
 
     it 'should allow sorting of playlists' do
       login(:sudara)

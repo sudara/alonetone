@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/rails/coffee-rails.git
+  remote: https://github.com/rails/coffee-rails.git
   revision: 8160511a6f5ea201880c68a28b834a8cdf166ced
   specs:
     coffee-rails (5.0.0)
@@ -408,11 +408,11 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
-    sidekiq (5.2.7)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
+    sidekiq (6.0.3)
+      connection_pool (>= 2.2.2)
+      rack (>= 2.0.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     sixarm_ruby_unaccent (1.2.0)
     skylight (4.1.2)
       skylight-core (= 4.1.2)
@@ -542,7 +542,7 @@ DEPENDENCIES
   sass-rails
   scrypt
   selenium-webdriver
-  sidekiq (< 6)
+  sidekiq
   skylight (< 4.2)
   sometimes
   soundmanager2-rails
