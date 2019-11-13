@@ -13,8 +13,10 @@ RSpec.describe PasswordResetsController, type: :controller do
       post :create, params: { email: users(:arthur).email }
       expect(flash[:error]).not_to be_present
       expect(User.where(login: 'arthur').first.perishable_token).not_to be_nil
-      login(:arthur)
-      expect(controller.session["user_credentials"]).to eq(nil) # can't login
+
+      expect do
+        login(:arthur)
+      end.to raise_error(Authlogic::Session::Existence::SessionInvalidError)
     end
 
     it 'should send an email with link to reset pass' do
