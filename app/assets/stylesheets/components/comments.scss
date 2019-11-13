@@ -241,7 +241,7 @@
 
 .comment {
   position: relative;
-  background-color: $background-color-three;
+  background-color: $comment-background;
   &:last-child {
     border-bottom: 0;
     border-radius: 0 0 6px 6px;
@@ -263,7 +263,7 @@
     margin: 18px 10px 18px 50px;
     padding: 16px 16px 10px 16px;
     border-radius: 0 4px 4px 4px;
-    background-color: $background-color-one;
+    background-color: $comment-right-background;
     box-shadow: none;
     &::before {
       position: absolute;
@@ -273,22 +273,20 @@
       content: "\A";
       border-width: 0 9px 13px 9px;
       border-style: solid;
-      border-color: transparent transparent #fff transparent;
+      border-color: transparent transparent $comment-right-background transparent;
     }
     .comment_user_text {
       font-size: 11px;
-      font-weight: normal;
-      color: $font-color-four;
-      a,
-      a:visited {
-        font-weight: bold;
-        text-decoration: none;
-      }
+      font-family: $medium-sans-font;
+      color: $comment-user-text;
       a {
-        color: $font-color-three;
+        text-decoration: none;
         &:hover {
           text-decoration: underline;
         }
+      }
+      span {
+        color: $comment-ip-text;
       }
     }
     .comment_body {
@@ -301,7 +299,8 @@
         line-height: 18px;
         margin: 16px 0 0 0;
         margin-top: 13px;
-        color: $font-color-three;
+        color: $comment-body-text;
+        font-family: $medium-sans-font;
       }
       div.private_message {
         font-size: 9px;
@@ -348,11 +347,11 @@
         a:first-child {
           font-weight: bold;
           margin-right: 22px;
-          color: $accent;
+          color: $comment-spam-text
         }
         a:last-child {
           font-weight: bold;
-          color: $warning;
+          color: $comment-delete-text;
         }
       }
       h1,

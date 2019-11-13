@@ -29,9 +29,6 @@ $accent: $orangetone;
 
 $warning: $red600;
 
-$private-message-flag-background: $orange100;
-$private-message-flag-text: $orange800;
-
 $private-message-warning-background: $red500;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
@@ -122,6 +119,16 @@ $comment-form-text: $white;
 $comment-make-private-text: $grey800;
 $comment-submit-background: $grey900;
 $comment-submit-text: $white;
+$comment-background: $grey1000;
+$comment-right-background: $grey1100;
+$comment-user-text: $grey500;
+$comment-ip-text: $grey800;
+$comment-body-text: $grey100;
+$private-message-flag-background: $red800;
+$private-message-flag-text: $orange100;
+$comment-spam-text: $orange300;
+$comment-delete-text: $red400;
+
 
 // playlist.scss
 $playlist-sidebar-background: $grey1150;

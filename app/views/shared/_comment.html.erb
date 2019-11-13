@@ -20,13 +20,13 @@
 		</div>
 
 		<div class="comment_body">
-    <p>
-	  	<%= strip_tags(markdown(comment.body)) %>
-    </p>
+			<p>
+				<%= strip_tags(markdown(comment.body)) %>
+			</p>
 		<% if comment.private %>
 			<div class="private_message">private message</div>
 		<% end %>
-
+	
 		<% if authorized_for_comment(comment) -%>
 			<div class="comment_controls">
 					<% if comment.is_spam? %>
@@ -38,8 +38,7 @@
 			</div>
 			<% end %>
 		</div>
-
-</div>
+	</div>
 
 	<div class="clear">
 	</div>
