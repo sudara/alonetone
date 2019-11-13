@@ -25,10 +25,13 @@ class Playlist < ActiveRecord::Base
   validates_length_of   :title, within: 3..100
   validates_length_of   :year, within: 2..4, allow_blank: true
 
-  has_permalink :title
-  before_validation :name_favorites_and_set_permalink, on: :create
-  before_update :set_mix_or_album, :check_for_new_permalink, :ensure_private_if_less_than_two_tracks,
-    :set_published_at, :notify_followers_if_publishing_album
+  before_validation :name_favorites, on: :create
+  before_update(
+    :set_mix_or_album,
+    :ensure_private_if_less_than_two_tracks,
+    :set_published_at,
+    :notify_followers_if_publishing_album
+  )
 
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
@@ -43,8 +46,16 @@ class Playlist < ActiveRecord::Base
     _suffix: true
   )
 
+  include Slugs
+  has_slug(
+    :permalink,
+    from_attribute: :title,
+    scope: :user_id,
+    default: 'untitled'
+  )
+
   def to_param
-    permalink.to_s
+    permalink
   end
 
   def type
@@ -138,13 +149,8 @@ class Playlist < ActiveRecord::Base
   end
 
   # if this is a "favorites" playlist, give it a name/description to match
-  def name_favorites_and_set_permalink
+  def name_favorites
     self.title = user.name + "'s favorite tracks" if is_favorite?
-    generate_permalink!
-  end
-
-  def check_for_new_permalink
-    generate_permalink! if title_changed?
   end
 end
 

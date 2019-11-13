@@ -23,6 +23,20 @@ RSpec.describe Upload, type: :model do
     )
   end
 
+  it 'determines the content-type' do
+    content_type = Upload.resolve_content_type(
+      uploaded_file, uploaded_file.path => 'nonsense/content-type'
+    )
+    expect(content_type).to eq('application/zip')
+  end
+
+  it 'prefers the detected over the reported content-type' do
+    content_type = Upload.resolve_content_type(
+      uploaded_file, uploaded_file.path => 'audio/mp3'
+    )
+    expect(content_type).to eq('audio/mp3')
+  end
+
   it 'processes' do
     expect(
       Upload.process(
