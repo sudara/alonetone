@@ -283,6 +283,11 @@ RSpec.describe Asset, type: :model do
   describe 'slug' do
     let(:title) { 'Music for the Masses' }
     let(:slug) { Slug.generate(title) }
+    let(:audio_file) do
+      file_fixture_uploaded_file(
+        'smallest.mp3', filename: 'smallest.mp3', content_type: 'audio/mpeg'
+      )
+    end
 
     it 'updates when the name changes' do
       asset = Asset.new(title: title)
@@ -290,7 +295,7 @@ RSpec.describe Asset, type: :model do
     end
 
     it 'saves the permalink after creation' do
-      asset = Asset.create!(user: users(:henri_willig), title: title)
+      asset = Asset.create!(user: users(:henri_willig), title: title, audio_file: audio_file)
       expect(asset.reload.permalink).to eq(slug)
     end
 
@@ -302,7 +307,9 @@ RSpec.describe Asset, type: :model do
 
     it 'increments the slug in case of a collision' do
       existing = assets(:henri_willig_finest_cheese)
-      asset = Asset.create!(user: users(:henri_willig), title: existing.title)
+      asset = Asset.create!(
+        user: users(:henri_willig), title: existing.title, audio_file: audio_file
+      )
       expect(asset.reload.permalink).to eq('manufacturer-of-the-finest-cheese-2')
     end
   end
