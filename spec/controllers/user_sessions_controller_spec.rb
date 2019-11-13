@@ -48,10 +48,11 @@ RSpec.describe UserSessionsController, type: :controller do
 
   # this is in authlogic, needs testing since we modify it (see users_controller_spec)
   it "should update IP and last_request_at" do
+    user = users(:arthur)
     travel_to (1.hour.ago) do
       request.env['REMOTE_ADDR'] = '10.1.1.1'
-      login(:arthur)
-      expect(controller.session["user_credentials"]).to eq(users(:arthur).persistence_token)
+      login(user)
+      expect(controller.session["user_credentials"]).to eq(user.reload.persistence_token)
       expect(users(:arthur).current_login_ip).to eq('10.1.1.1')
       expect(users(:arthur).last_request_at).to be_within(1.minute).of(DateTime.now)
     end
