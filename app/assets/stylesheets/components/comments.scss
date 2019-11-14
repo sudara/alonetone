@@ -3,16 +3,20 @@
 #home_comments_area,
 #user_comments_area,
 .comments_area {
-  .asset {
-    border-top: 1px solid $border-color-four;
-    border-bottom: 0;
+  .box {
+    .asset {
+      border-top: 1px solid $track-border-bottom;
+      border-bottom: 0;
+      &:first-child {
+        border-top: 0;
+      }
+    }
   }
 }
 
 /* RECENT COMMENTS PAGE */
 
 .comments_columns {
-
   .columns_header {
     max-width: $site_max_width;
     box-sizing: border-box;
@@ -56,12 +60,12 @@
     content: "\A";
     border-width: 0 9px 13px 9px;
     border-style: solid;
-    border-color: transparent transparent #d7dbdb transparent;
+    border-color: transparent transparent $grey200 transparent;
     @media #{$mobile} {
       display: none;
     }
     @media #{$two-column-narrow} {
-       display: none;
+      display: none;
     }
   }
   .comment_asset {
@@ -79,10 +83,10 @@
           margin-right: 0;
           float: right;
           border-width: 0;
-          &.ajax_fail, &.ajax_success {
+          &.ajax_fail,
+          &.ajax_success {
             margin-bottom: 12px;
             border-width: 1px;
-
           }
         }
       }
@@ -92,7 +96,8 @@
           margin-right: 0;
           float: right;
           border-width: 0;
-          &.ajax_fail, &.ajax_success {
+          &.ajax_fail,
+          &.ajax_success {
             margin-bottom: 12px;
             border-width: 1px;
           }
@@ -130,7 +135,8 @@
           margin-right: 0;
           float: right;
           border-width: 0;
-          &.ajax_fail, &.ajax_success {
+          &.ajax_fail,
+          &.ajax_success {
             margin-bottom: 12px;
             border-width: 1px;
           }
@@ -155,19 +161,19 @@
         font-size: 12px;
         line-height: 20px;
         overflow: auto;
-        color: $font-color-four;
+        color: $comment-as-text;
         font-family: $medium-sans-font;
         margin-top: 9px;
         padding-left: 10px;
         span.comment_as_guest {
           text-transform: capitalize;
-          color: $font-color-three;
+          color: $comment-as-guest-text;
         }
         span.comment_as_user {
-          color: $font-color-three;
+          color: $comment-as-user-text;
         }
         a {
-          color: $accent;
+          color: $comment-as-user-text;
         }
         img {
           float: left;
@@ -185,15 +191,15 @@
         padding: $baseline / 4;
         margin-top: 8px;
         resize: none;
-        color: $font-color-three;
-        border: 1px solid $border-color-three;
+        color: $comment-form-text;
+        border: 1px solid $comment-form-border;
         border-radius: 6px;
-        background-color: $background-color-three;
+        background-color: $comment-form-background;
         @media #{$one-column} {
           font-size: 16px;
         }
         &:focus {
-          border: 1px solid $border-color-two;
+          border: 1px solid $comment-form-border-focus;
         }
       }
       .private_check_box {
@@ -203,10 +209,10 @@
         position: relative;
         top: 1px;
         label {
-          user-select:none;
-          text-transform: lowercase;
-          color: $font-color-three;
-          margin-bottom: 2px!important;
+          user-select: none;
+          text-transform: unset;
+          color: $comment-make-private-text;
+          margin-bottom: 2px !important;
         }
       }
       span.private {
@@ -226,6 +232,8 @@
         float: right;
         clear: right;
         @include default_button();
+        background-color: $comment-submit-background;
+        color: $comment-submit-text;
       }
     }
   }
@@ -233,7 +241,7 @@
 
 .comment {
   position: relative;
-  background-color: $background-color-three;
+  background-color: $comment-background;
   &:last-child {
     border-bottom: 0;
     border-radius: 0 0 6px 6px;
@@ -255,7 +263,7 @@
     margin: 18px 10px 18px 50px;
     padding: 16px 16px 10px 16px;
     border-radius: 0 4px 4px 4px;
-    background-color: $background-color-one;
+    background-color: $comment-right-background;
     box-shadow: none;
     &::before {
       position: absolute;
@@ -265,22 +273,20 @@
       content: "\A";
       border-width: 0 9px 13px 9px;
       border-style: solid;
-      border-color: transparent transparent #fff transparent;
+      border-color: transparent transparent $comment-right-background transparent;
     }
     .comment_user_text {
       font-size: 11px;
-      font-weight: normal;
-      color: $font-color-four;
-      a,
-      a:visited {
-        font-weight: bold;
-        text-decoration: none;
-      }
+      font-family: $medium-sans-font;
+      color: $comment-user-text;
       a {
-        color: $font-color-three;
+        text-decoration: none;
         &:hover {
           text-decoration: underline;
         }
+      }
+      span {
+        color: $comment-ip-text;
       }
     }
     .comment_body {
@@ -293,7 +299,7 @@
         line-height: 18px;
         margin: 16px 0 0 0;
         margin-top: 13px;
-        color: $font-color-three;
+        color: $comment-body-text;
       }
       div.private_message {
         font-size: 9px;
@@ -340,11 +346,11 @@
         a:first-child {
           font-weight: bold;
           margin-right: 22px;
-          color: $accent;
+          color: $comment-spam-text
         }
         a:last-child {
           font-weight: bold;
-          color: $warning;
+          color: $comment-delete-text;
         }
       }
       h1,
