@@ -1,6 +1,5 @@
 FLASH_PLAYER = 'http://alonetone.com/flash/alonetone_player.swf'
 
-require 'authlogic_helpers'
 require 'sometimes'
 
 # These defaults are used in Geokit::Mappable.distance_to and in acts_as_mappable
