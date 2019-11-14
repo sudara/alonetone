@@ -31,7 +31,7 @@ form {
     margin: 2px 0;
     text-align: left;
     text-transform: uppercase;
-    color: $font-color-five;
+    color: $forms-label-text;
     abbr {
       display: none;
     }
@@ -41,11 +41,11 @@ form {
   select {
     box-sizing: border-box;
     margin-bottom: $baseline;
-    border: 2px solid $border-color-six;
+    border: 2px solid $forms-border;
     border-radius: 4px;
     background-color: $background-color-three;
     font-size: 14px;
-    
+    color: $forms-input-text;
     &:focus {
       border: 2px solid $accent;
     }
