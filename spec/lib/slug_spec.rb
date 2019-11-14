@@ -55,6 +55,11 @@ RSpec.describe Slug do
     expect(Slug.generate("Tubular  Bells")).to eq('tubular-bells')
   end
 
+  it 'replaces ASCII dot characters with a single dash' do
+    expect(Slug.generate("Tubular . Bells")).to eq('tubular-bells')
+    expect(Slug.generate("Tubular.Bells")).to eq('tubular-bells')
+  end
+
   it 'replaces Unicode space characters with a single dash' do
     expect(
       Slug.generate("Tubular#{unicode_whitespace}Bells")
