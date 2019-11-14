@@ -11,7 +11,7 @@ class Slug
           .gsub(CONTROL_CHARACTERS_RE, '')
           .gsub(%r{\A([[:space:]]+)}, '')
           .gsub(%r{([[:space:]]+)\Z}, '')
-          .gsub(%r{\.}, ' ')
+          .tr('.', ' ')
           .gsub(%r{[[:space:]]+}, '-')
   end
 
