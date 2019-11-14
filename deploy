@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# This script requires `PermitUserEnvironment yes`
+# to be set on the remote hosts /etc/ssh/sshd_config
+
+BUNDLE_PATH='/home/deploy/.rbenv/shims/bundle'
+BUNDLE_COMMAND="sudo -u deploy RAILS_ENV=production ${BUNDLE_PATH}"
 
 echo "Deployanatoring teh codez!"
 echo
@@ -6,8 +12,7 @@ echo
 # handle git and bundle install
 ssh alonetone '
   cd /data/alonetone;
-  source /etc/profile;
-  source ~/.profile;
+
   if [[ $(sudo -u deploy git diff) > "" ]];
     then
       echo "WARNING: local changes on server, exiting!";
@@ -23,21 +28,22 @@ ssh alonetone '
   if [[ $(sudo -u deploy git diff origin/master Gemfile.lock) > "" ]];
     then
       echo "Gemfile changed, bundle installing...";
-      git reset --hard origin/master; bundle install --deployment;
+      sudo -u deploy git reset --hard origin/master;
+      ${BUNDLE_COMMAND} install --deployment;
       echo
     else
       echo "skipping bundle install, gemfile has not changed since last time.";
-      git reset --hard origin/master;
+      sudo -u deploy git reset --hard origin/master;
       echo
   fi
 
   if [[ $RUN_MIGRATIONS ]]; then
     echo "Running migrations, hold tight...";
-    time sudo -u deploy RAILS_ENV=production bundle exec rake db:migrate;
+    time ${BUNDLE_COMMAND} exec rake db:migrate;
   fi
 
    echo "Compiling assets..."
-   time sudo -u deploy RAILS_ENV=production bundle exec rake assets:precompile
+   time ${BUNDLE_COMMAND} exec rake assets:precompile
 
 
    echo "Run puma, run!"
