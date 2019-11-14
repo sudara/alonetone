@@ -3,6 +3,8 @@ sudo: required
 language: ruby
 rvm:
   2.6.4
+node_js:
+  13.1.0
 addons:
   chrome: stable
   apt:
