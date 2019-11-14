@@ -7,9 +7,9 @@
 <% if @users.present? %>
   <% content_for :left do %>
     <h2 class="user_search_results_heading">Artists that match "<%= @query %>"</h2>
-    <div id="user_search_results">
+    <ul id="user_search_results">
       <%= render partial: 'shared/user', collection: @users, as: :user %>
-    </div>
+    </ul>
   <% end %>
 <% end %>
 
