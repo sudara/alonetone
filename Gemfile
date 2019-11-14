@@ -6,7 +6,7 @@ end
 
 gem 'rails'
 gem 'mysql2'
-gem 'puma', '< 4.1' # experiencing some issues with config on 4.1
+gem 'puma'
 
 gem 'thredded'
 
@@ -63,7 +63,7 @@ gem 'turbolinks'
 # monitoring & perf
 gem 'bugsnag'
 gem 'newrelic_rpm'
-gem 'skylight', '< 4.2' # bug in 4.2.beta2
+gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
