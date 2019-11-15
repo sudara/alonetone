@@ -52,10 +52,6 @@ module PreventAbuse
   # Blacklist of all disallowed user-agents.
   @@bots = %w[bot spider baidu mp3bot]
 
-  def is_from_a_bad_ip?
-    @@bad_ip_ranges.any? { |cloaked_ip| request.ip.match /^#{cloaked_ip}/ } # check bad ips
-  end
-
   def is_a_bot?
     # gotta have a user agent
     return true unless request.user_agent.present?
@@ -63,8 +59,12 @@ module PreventAbuse
     # can't be a blacklisted ip
     return true if is_from_a_bad_ip?
 
-    # check user agent agaisnt both white and black lists
+    # check user agent against both white and black lists
     !browser? || @@bots.any? { |bot_agent| user_agent.include? bot_agent }
+  end
+
+  def is_from_a_bad_ip?
+    @@bad_ip_ranges.any? { |cloaked_ip| request.ip.match /^#{cloaked_ip}/ } # check bad ips
   end
 
   def browser?
