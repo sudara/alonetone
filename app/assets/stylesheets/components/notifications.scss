@@ -1,4 +1,4 @@
-div.small_spinner {
+.small_spinner {
   display: none;
   background: image-url("svg/icon_spinner.svg") no-repeat center center;
   height: 20px;
@@ -147,7 +147,8 @@ div.small_spinner {
   padding-left: $baseline * 1.5;
   padding-right: $baseline * 1.5;
   padding-top: $baseline * 0.75;
-  padding-bottom: $baseline * 0.75;
+  padding-bottom: 6px;
+  box-shadow: inset 0px 1px 0px $error-message-shadow;
   @media #{$mobile} {
     width: 96%;
   }
@@ -158,19 +159,15 @@ div.small_spinner {
   }
   ul {
     li {
-      margin-bottom: $baseline / 4;
+      font-size: 14px;
+      font-family: $medium-sans-font;
+      color: $error-message-list-items-text;
+      margin-bottom: $baseline / 2;
     }
   }
-}
-
-.field_with_errors {
-  input {
-    background: $input-rejected-background;
-    border: 1px solid $input-rejected-border;
+  ol {
+    margin-top: 8px !important;
   }
-}
-
-.notice {
   a.hide_notice {
     font-size: 12px;
     font-weight: bold;
@@ -179,10 +176,11 @@ div.small_spinner {
     margin-right: 0;
     color: $accent;
   }
-  li {
-    margin-bottom: 5px;
-  }
-  ol {
-    margin-top: 8px !important;
+}
+
+.field_with_errors {
+  input {
+    background: $input-rejected-background;
+    border: 1px solid $input-rejected-border;
   }
 }

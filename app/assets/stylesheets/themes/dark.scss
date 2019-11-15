@@ -50,8 +50,10 @@ $ajax-fail-text: $red800;
 $ajax-success-border: $green400;
 $ajax-success-text: $green600;
 
-$error_message_background: $red1100;
+$error_message-background: $red1100;
+$error_message-shadow: $red1000;
 $error-message-heading-text: $white;
+$error-message-list-items-text: $red200;
 
 $input-rejected-background: $red1100;
 $input-rejected-border: $red1000;
