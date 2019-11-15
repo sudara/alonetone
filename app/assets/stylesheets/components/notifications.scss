@@ -8,6 +8,32 @@ div.small_spinner {
   top: 3px;
 }
 
+.flash {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.2;
+  position: relative;
+  z-index: 101;
+  padding: 15px 0;
+  text-align: center;
+  color: $font-color-seven;
+  background-color: $accent;
+  @media #{$mobile} {
+    padding: $baseline / 2;
+    font-size: 14px;
+    text-align: left;
+  }
+  .flash_stats {
+    font-size: 14px;
+    a {
+      text-decoration: underline;
+    }
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
 .ajax_waiting {
   font-size: 10px;
   padding-left: 16px;
@@ -117,18 +143,18 @@ div.small_spinner {
   margin-right: auto;
   margin-left: auto;
   margin-bottom: $baseline;
-  padding: 20px 30px;
   background-color: $error-message-background;
-  
-  width: 100%;
-  padding-top: $baseline * 2;
-  padding-bottom: $baseline * 2;
-  h2 {
-    @include title18();
-    color: $error-message-heading-text;
-  }
+  padding-left: $baseline * 1.5;
+  padding-right: $baseline * 1.5;
+  padding-top: $baseline * 0.75;
+  padding-bottom: $baseline * 0.75;
   @media #{$mobile} {
     width: 96%;
+  }
+  h2 {
+    @include title18();
+    margin-top: 0;
+    color: $error-message-heading-text;
   }
   ul {
     li {
@@ -137,7 +163,12 @@ div.small_spinner {
   }
 }
 
-.notice 
+.field_with_errors {
+  input {
+    background: $input-rejected-background;
+    border: 1px solid $input-rejected-border;
+  }
+}
 
 .notice {
   a.hide_notice {
@@ -153,31 +184,5 @@ div.small_spinner {
   }
   ol {
     margin-top: 8px !important;
-  }
-}
-
-.flash {
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 1.2;
-  position: relative;
-  z-index: 101;
-  padding: 15px 0;
-  text-align: center;
-  color: $font-color-seven;
-  background-color: $accent;
-  @media #{$mobile} {
-    padding: $baseline / 2;
-    font-size: 14px;
-    text-align: left;
-  }
-  .flash_stats {
-    font-size: 14px;
-    a {
-      text-decoration: underline;
-    }
-  }
-  a {
-    text-decoration: underline;
   }
 }
