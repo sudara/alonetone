@@ -437,7 +437,7 @@ main {
       }
       a.edit_profile--delete {
         @include default-button("admin");
-        background-color: $warning;
+        background-color: $red600;
       }
     }
 

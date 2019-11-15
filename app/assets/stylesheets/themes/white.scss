@@ -1,37 +1,7 @@
 @import 'color_mapping';
 
-$body-background: $grey50;
-$body-font: $black;
-
-$background-color-one: $white;
-$background-color-two: $grey25;
-$background-color-three: $grey50;
-$background-color-four: $grey100;
-$background-color-five: $grey1000;
-$background-color-six: $black;
-
-$font-color-one: $black;
-$font-color-two: $grey1000;
-$font-color-three: $grey900;
-$font-color-four: $grey800;
-$font-color-five: $grey500;
-$font-color-six: $grey50;
-$font-color-seven: $white;
-
-$border-color-one: $black;
-$border-color-two: $grey500;
-$border-color-three: $grey200;
-$border-color-four: $grey100;
-$border-color-five: $grey50;
-$border-color-six: $white;
-
+// sitewide
 $accent: $orangetone;
-
-$warning: $red600;
-
-$admin-spam-row-background: $orange100;
-
-$big-player-seekbar-color: $grey200;
 
 // variables.scss
 $default-button-background: $grey500;
@@ -40,9 +10,16 @@ $primary-button-background-hover: $orange600;
 $primary-button-background-active: $orange800;
 
 // shared.scss
+$body-background: $grey50;
+
+$box-h2-bottom-border: $grey800;
+
 $private-message-warning-background: $red500;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
+
+// typography.scss
+$body-font: $black;
 
 // notifications.scss
 $ajax-fail-border: $red600;
@@ -67,6 +44,8 @@ $forms-input-text: $black;
 $forms-border: $grey50;
 
 // site_header.scss
+$site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
+
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
@@ -80,8 +59,6 @@ $site-header-user-dropdown-list-item-background: $grey50;
 $site-header-user-dropdown-list-item-text: $grey1000;
 
 // site_footer.scss
-$site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
-
 $footer-forum-topics-accent: $orange600;
 $footer-forum-topics-background: $grey25;
 $footer-forum-topics-link-background: $white;
@@ -145,6 +122,9 @@ $comment-delete-text: $red600;
 // playlist.scss
 $playlist-sidebar-background: $white;
 
+// track_player.scss
+$big-player-seekbar-color: $grey200;
+
 // track_content.scss
 $track-content-child-background: $white;
 
@@ -166,3 +146,28 @@ $card-by-text: $grey800;
 $card-artist-font: 'Alright-v2-Normal-Medium', sans-serif;
 $card-artist-weight: normal;
 $card-artist-text: $orange600;
+
+// admin.scss
+$admin-spam-row-background: $orange100;
+
+// legacy colors
+$background-color-one: $white;
+$background-color-three: $grey50;
+$background-color-four: $grey100;
+$background-color-five: $grey1000;
+$background-color-six: $black;
+
+$font-color-one: $black;
+$font-color-two: $grey1000;
+$font-color-three: $grey900;
+$font-color-four: $grey800;
+$font-color-five: $grey500;
+$font-color-six: $grey50;
+$font-color-seven: $white;
+
+$border-color-one: $black;
+$border-color-two: $grey500;
+$border-color-three: $grey200;
+$border-color-four: $grey100;
+$border-color-five: $grey50;
+$border-color-six: $white;
