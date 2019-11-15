@@ -1,3 +1,13 @@
+div.small_spinner {
+  display: none;
+  background: image-url("svg/icon_spinner.svg") no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+  position: relative;
+  top: 3px;
+}
+
 .ajax_waiting {
   font-size: 10px;
   padding-left: 16px;
@@ -99,49 +109,35 @@
   }
 }
 
-div.small_spinner {
-  display: none;
-  background: image-url("svg/icon_spinner.svg") no-repeat center center;
-  height: 20px;
-  width: 20px;
-  background-size: 100%;
-  position: relative;
-  top: 3px;
-}
-
 .notice,
 .errorExplanation {
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  background-color: $background-color-one;
-  width: 100%;
   max-width: 960px;
   padding: 0 $baseline * 1.5;
   box-sizing: border-box;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: $baseline;
+  padding: 20px 30px;
+  background-color: $error-message-background;
+  
+  width: 100%;
   padding-top: $baseline * 2;
   padding-bottom: $baseline * 2;
-  @include samo-shadow-and-radius();
+  h2 {
+    @include title18();
+    color: $error-message-heading-text;
+  }
   @media #{$mobile} {
     width: 96%;
-  }
-  h2 {
-    color: $accent;
   }
   ul {
     li {
       margin-bottom: $baseline / 4;
     }
   }
-  
-  
 }
 
-.notice h2 {
-  font-size: 20px;
-  font-weight: bold;
-}
+.notice 
 
 .notice {
   a.hide_notice {
