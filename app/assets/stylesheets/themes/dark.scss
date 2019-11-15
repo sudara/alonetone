@@ -1,37 +1,7 @@
 @import 'color_mapping';
 
-$body-background: $black;
-$body-font: $white;
-
-$background-color-one: $grey1100;
-$background-color-two: $grey1100;
-$background-color-three: $grey1000;
-$background-color-four: $grey900;
-$background-color-five: $grey1000;
-$background-color-six: $black;
-
-$font-color-one: $white;
-$font-color-two: $grey50;
-$font-color-three: $grey500;
-$font-color-four: $grey800;
-$font-color-five: $grey1000;
-$font-color-six: $grey1100;
-$font-color-seven: $black;
-
-$border-color-one: $black;
-$border-color-two: $grey500;
-$border-color-three: $grey200;
-$border-color-four: $grey100;
-$border-color-five: $grey50;
-$border-color-six: $white;
-
+// sitewide
 $accent: $orangetone;
-
-$warning: $red600;
-
-$admin-spam-row-background: $orange100;
-
-$big-player-seekbar-color: $grey200;
 
 // variables.scss
 $default-button-background: $grey500;
@@ -40,9 +10,16 @@ $primary-button-background-hover: $orange600;
 $primary-button-background-active: $orange800;
 
 // shared.scss
+$body-background: $black;
+
+$box-h2-bottom-border: $grey100;
+
 $private-message-warning-background: $red800;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
+
+//typography.scss
+$body-font: $white;
 
 // notifications.scss
 $ajax-fail-border: $red600;
@@ -145,6 +122,9 @@ $comment-delete-text: $red400;
 // playlist.scss
 $playlist-sidebar-background: $grey1150;
 
+// track_player.scss
+$big-player-seekbar-color: $grey200;
+
 // track_content.scss
 $track-content-child-background: $grey1100;
 
@@ -166,3 +146,28 @@ $card-artist-text: $orange300;
 $card-by-font: 'Alright-v2-Normal', sans-serif;
 $card-by-weight: bold;
 $card-by-text: $grey800; 
+
+// admin.scss
+$admin-spam-row-background: $orange100;
+
+// legacy colors
+$background-color-one: $grey1100;
+$background-color-three: $grey1000;
+$background-color-four: $grey900;
+$background-color-five: $grey1000;
+$background-color-six: $black;
+
+$font-color-one: $white;
+$font-color-two: $grey50;
+$font-color-three: $grey500;
+$font-color-four: $grey800;
+$font-color-five: $grey1000;
+$font-color-six: $grey1100;
+$font-color-seven: $black;
+
+$border-color-one: $black;
+$border-color-two: $grey500;
+$border-color-three: $grey200;
+$border-color-four: $grey100;
+$border-color-five: $grey50;
+$border-color-six: $white;
