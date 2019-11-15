@@ -88,14 +88,15 @@ ul {
   }
 }
 
-.back_to_artist_link, .back_to_playlist_link {
+.back_to_artist_link,
+.back_to_playlist_link {
   height: 26px;
   border-radius: 3px;
   background-color: $background-color-one;
   color: $font-color-three;
   display: inline-flex;
   margin-bottom: $baseline;
-  @include shadow-one();
+  @include shadow1();
   .caret {
     background-color: $accent;
     display: block;
@@ -128,22 +129,22 @@ ul {
 }
 
 .private_warning {
-    font-size: 12px !important;
-    font-family: $medium-sans-font;
-    position: relative;
-    display: block;
-    height: auto;
-    line-height: 17px;
-    margin-top: 0;
-    padding: 8px 20px;
-    color: $private-message-warning-text;
-    border-color: $private-message-warning-border;
-    background-color: $private-message-warning-background;
-    &.hidden {
-      display: none;
-    }
-    .only_user_name,
-    .only_alonetone_mods {
-      color: $white;
-    }
+  font-size: 12px !important;
+  font-family: $medium-sans-font;
+  position: relative;
+  display: block;
+  height: auto;
+  line-height: 17px;
+  margin-top: 0;
+  padding: 8px 20px;
+  color: $private-message-warning-text;
+  border-color: $private-message-warning-border;
+  background-color: $private-message-warning-background;
+  &.hidden {
+    display: none;
+  }
+  .only_user_name,
+  .only_alonetone_mods {
+    color: $white;
+  }
 }
