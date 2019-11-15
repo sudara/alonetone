@@ -92,9 +92,9 @@ body.cover_view {
           float: left;
           height: 50px;
           border-right: 1px solid $border-color-one;
-          background-color: $background-color-five;
+          background-color: $playlist-options-link-background;
           &:hover {
-            background-color: $background-color-six;
+            background-color: $playlist-options-link-background-hover;
           }
           a {
             font-size: 12px;
