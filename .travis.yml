@@ -37,6 +37,8 @@ cache:
   directories:
   - $HOME/vips
 before_install:
+- nvm install node
+- node -v
 - bash script/install-vips.sh
 - yarn install
 before_script:
