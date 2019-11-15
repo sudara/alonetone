@@ -109,7 +109,5 @@ Storage.verify(
   ARGV,
   User => 'avatar_image',
   Playlist => 'cover_image',
-  Asset => 'audio_file',
-  Greenfield::AttachedAsset => 'audio_file',
-  Greenfield::PlaylistDownload => 'zip_file'
+  Asset => 'audio_file'
 )
