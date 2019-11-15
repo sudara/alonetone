@@ -14,6 +14,8 @@ $body-background: $grey50;
 
 $box-h2-bottom-border: $grey800;
 
+$back-to-text: $grey900;
+
 $private-message-warning-background: $red500;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
@@ -129,6 +131,8 @@ $big-player-seekbar-color: $grey200;
 $track-content-child-background: $white;
 
 // playlist_cover_view.scss
+$playlist-options-link-background: $grey1000; 
+$playlist-options-link-background-hover: $black;
 $playlist-options-link-text: $grey50; 
 
 // playlist_sidebar.scss
@@ -140,6 +144,9 @@ $user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
 $edit-playlist-track-button-background-hover: $grey800;
+
+$edit-playlist-cover-border: $grey200;
+$edit-playlist-private-label-checkbox: $grey900;
 
 // playlists.scss
 $card-background: $white;
@@ -161,17 +168,14 @@ $background-color-one: $white;
 $background-color-three: $grey50;
 $background-color-four: $grey100;
 $background-color-five: $grey1000;
-$background-color-six: $black;
 
 $font-color-two: $grey1000;
-$font-color-three: $grey900;
 $font-color-four: $grey800;
 $font-color-five: $grey500;
 $font-color-seven: $white;
 
 $border-color-one: $black;
 $border-color-two: $grey500;
-$border-color-three: $grey200;
 $border-color-four: $grey100;
 $border-color-five: $grey50;
 $border-color-six: $white;

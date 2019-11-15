@@ -52,7 +52,7 @@
           margin-top: 0;
         }
         .cover {
-          border: 1px dashed $border-color-three;
+          border: 1px dashed $edit-playlist-cover-border;
           padding: 4px;
           max-width:150px;
           img {
@@ -179,7 +179,7 @@
           }
           label {
             text-transform: none;
-            color: $font-color-three;
+            color: $edit-playlist-private-label-checkbox;
           }
           span.private_notice {
             color: $font-color-five;
