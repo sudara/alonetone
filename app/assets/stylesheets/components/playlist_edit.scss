@@ -367,7 +367,6 @@
             }
             a {
               @include default-button();
-              background-color: $background-color-one;
               color: $font-color-four;
               font-family: $medium-sans-font;
               font-weight: normal;

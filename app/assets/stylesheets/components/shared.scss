@@ -16,7 +16,7 @@ ul {
   display: flex;
   flex-direction: column;
   margin-bottom: $baseline * 2;
-  background-color: $background-color-one;
+  background-color: $box-background;
   justify-content: space-between;
   @include samo-shadow-and-radius();
   h1,
@@ -62,7 +62,7 @@ ul {
     height: 32px;
     line-height: 33px;
     @include samo-shadow-and-radius();
-    background-color: $background-color-one;
+    background-color: $view-all-background;
     box-shadow: none;
     font-size: 15px;
     font-family: $medium-sans-font;
@@ -92,7 +92,7 @@ ul {
 .back_to_playlist_link {
   height: 26px;
   border-radius: 3px;
-  background-color: $background-color-one;
+  background-color: $back-to-background;
   color: $back-to-text;
   display: inline-flex;
   margin-bottom: $baseline;

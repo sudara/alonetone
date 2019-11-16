@@ -13,15 +13,21 @@ $primary-button-background-active: $orange800;
 // shared.scss
 $body-background: $black;
 
+$box-background: $grey1100;
+
 $box-h2-bottom-border: $grey100;
 
 $back-to-text: $grey500;
+
+$back-to-background: $grey500;
+
+$view-all-background: $grey1100;
 
 $private-message-warning-background: $red800;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
 
-//typography.scss
+// typography.scss
 $body-text: $white;
 
 // notifications.scss
@@ -32,8 +38,10 @@ $ajax-fail-text: $red800;
 $ajax-success-border: $green400;
 $ajax-success-text: $green600;
 
-$error_message-background: $red1100;
-$error_message-shadow: $red1000;
+$floating-feedback-background: $grey1100;
+
+$error-message-background: $red1100;
+$error-message-shadow: $red1000;
 $error-message-heading-text: $white;
 $error-message-list-items-text: $red200;
 
@@ -53,6 +61,8 @@ $checkbox-checked-background: $grey1000;
 $checkbox-not-checked-border: $grey500;
 
 // site_header.scss
+$site-header-background: $grey1100;
+
 $site-icon-background: transparent image-url("alonetone_logo_dark.svg") no-repeat;
 
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(0, 0, 0, 0.75);
@@ -89,6 +99,7 @@ $sub-nav-background: $black;
 $sub-nav-text: $grey400;
 $sub-nav-text-hover: $white;
 $sub-nav-current-background: $orangetone;
+$sub-nav-link-background: $grey1100;
  
 // static_pages.scss
 $static-page-heading-background: $grey1150;
@@ -139,6 +150,7 @@ $comment-spam-text: $orange300;
 $comment-delete-text: $red400;
 
 $track-content-comment-background: $grey900;
+$track-content-comment-textarea-background: $grey1100;
 
 // playlist.scss
 $playlist-sidebar-background: $grey1150;
@@ -146,6 +158,7 @@ $playlist-sidebar-background: $grey1150;
 // track_player.scss
 $big-player-seekbar-color: $grey200;
 $track-player-background: $grey1000;
+$track-player-play-button-background: $grey1100;
 $big-player-time-text: $black;
 
 // track_content.scss
@@ -157,6 +170,9 @@ $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
 $track-edit-new-version-note-text: $grey1000;
+
+$track-content-spam-background: $white;
+$track-content-spam-text: $accent;
 
 // track_social.scss
 $track-social-heading-text: $grey1000;
@@ -181,9 +197,14 @@ $sidebar-link-background-hover: $grey1000;
 
 // user.scss
 $user-header-avatar-border: $black;
+$user-follow-background: $grey1100;
+$user-follow-background-hover: $grey1100;
+$user-card-background: $grey1100;
 $user-card-shadow: none;
 $user-card-bio-text: $grey50;
 $user-card-content-divider-background: $grey900;
+$user-follows-background: $grey1100;
+$user-stats-background: $grey1100;
 $user-links-text: $black;
 $user-links-background: $grey1000;
 $user-stats-data-text: $grey50;
@@ -229,6 +250,7 @@ $card-by-text: $grey800;
 
 // admin.scss
 $admin-search-text: $grey50;
+$admin-search-background: $grey1100;
 $admin-column-heading-text: $grey50;
 
 $admin-nav-item-background-hover: $grey900;
@@ -244,11 +266,17 @@ $admin-deleted-at-text: $grey50;
 $admin-user-ip-text: $grey50;
 
 // secretz.scss
+$secretz-row-background: $grey1100;
 $secretz-odd-row-background: $grey1000;
 
 // upload.scss
 $upload-asset-background: $grey1000;
 
+// users_index.scss
+$user-card-background: $grey1100;
+
+// pagination.scss
+$mini-paginator-background: $grey1100;
+
 // legacy colors
-$background-color-one: $grey1100;
 $font-color-four: $grey800;
