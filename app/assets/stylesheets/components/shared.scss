@@ -52,7 +52,6 @@ ul {
     font-size: 15px;
     font-weight: normal;
     font-family: $medium-sans-font;
-    color: $font-color-four;
     border: 0;
     margin-right: 4px;
     margin-left: 4px;
@@ -67,7 +66,7 @@ ul {
     font-size: 15px;
     font-family: $medium-sans-font;
     display: inline-block;
-    color: #868686;
+    color: $view-all-text;
     span {
       i.icon_caret {
         position: relative;

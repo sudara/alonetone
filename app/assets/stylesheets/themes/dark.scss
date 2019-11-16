@@ -22,6 +22,7 @@ $back-to-text: $grey500;
 $back-to-background: $grey500;
 
 $view-all-background: $grey1100;
+$view-all-text: $grey800;
 
 $private-message-warning-background: $red800;
 $private-message-warning-border: $red600;
@@ -86,10 +87,12 @@ $site-header-user-dropdown-list-item-background: $grey1100;
 $site-header-user-dropdown-list-item-text: $grey200;
 
 // site_footer.scss
+$footer-alonetoners-text: $grey800;
 $footer-forum-topics-accent: $orange600;
 $footer-forum-topics-background: $grey1200;
 $footer-forum-topics-link-background: $grey1100;
 $footer-forum-topics-link-text: $grey400;
+$footer-forum-topics-artist-text: $grey800;
 $footer-bottom-background: $grey1150;
 $footer-bottom-column-background: $grey1100;
 $footer-bottom-link-text: $white;
@@ -174,6 +177,8 @@ $track-edit-new-version-note-text: $grey1000;
 $track-content-spam-background: $white;
 $track-content-spam-text: $accent;
 
+$track-content-artist-text: $grey800;
+
 // track_social.scss
 $track-social-heading-text: $grey1000;
 
@@ -183,6 +188,7 @@ $playlist-options-link-background: $grey1000;
 $playlist-options-link-background-hover: $black; 
 $playlist-options-link-border: $black;
 $playlist-options-link-text: $grey1100; 
+$playlist-options-link-action-text: $grey800;
 
 // playlist_sidebar.scss
 $playlist-sidebar-artist-text: $grey50;
@@ -212,6 +218,9 @@ $user-mod-stats-heading-text: $grey1000;
 $user-mod-stats-background: $grey900;
 $user-mod-stats-agent-border: $white;
 $user-actions-area-background: $grey900;
+
+// user_playlists.scss
+$user-playlists-sort-instructions: $grey800;
 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
@@ -277,6 +286,8 @@ $user-card-background: $grey1100;
 
 // pagination.scss
 $mini-paginator-background: $grey1100;
+$pagy-link-text: $grey800;
+$pagy-link-text-active: $accent;
 
 // legacy colors
 $font-color-four: $grey800;
