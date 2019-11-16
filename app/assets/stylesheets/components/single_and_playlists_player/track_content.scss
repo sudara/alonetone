@@ -167,14 +167,14 @@
       margin: ($baseline * 1.5) auto;
       text-align: center;
       border: 0;
-      border-bottom: 1px solid $border-color-two;
+      border-bottom: 1px solid $track-content-hr-background;
       &:after {
         position: absolute;
         top: -0.55em;
         left: 265px;
         display: block;
         content: "\f025"; // with headphone icon
-        color: $border-color-two;
+        color: $track-content-hr-background;
         background-color: white; // interrupt hr
         -webkit-font-smoothing: antialiased;
       }
@@ -238,10 +238,10 @@
       padding: $baseline / 2;
       word-wrap: break-word;
       color: $font-color-two;
-      border: 1px solid $border-color-two;
+      border: 1px solid $track-edit-border;
       background-color: transparent;
       &:focus {
-        border: 1px solid $border-color-two;
+        border: 1px solid $track-edit-border-focus;
       }
       @media #{$one-column} {
         font-size: 16px;

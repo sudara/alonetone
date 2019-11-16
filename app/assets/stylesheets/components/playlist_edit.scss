@@ -234,7 +234,7 @@
     .left_column_box_header {
       display: flex;
       flex-direction: row;
-      border-bottom: 1px solid $border-color-four;
+      border-bottom: 1px solid $edit-playlist-column-header-border;
       h2 {
         border-bottom: 0;
         width: auto;
@@ -253,7 +253,7 @@
           color: $font-color-four;
         }
         span.playlist_dash {
-          color: $border-color-four;
+          color: $edit-playlist-left-column-dash-text;
         }
         span.playlist_total_time {
           color: $accent;
@@ -261,7 +261,7 @@
       }
     }
     .playlist_asset:last-child {
-      border-bottom: 1px solid $border-color-four;
+      border-bottom: 1px solid $edit-playlist-column-header-border;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -334,7 +334,7 @@
       .right_column_box_header {
         display: flex;
         flex-direction: row;
-        border-bottom: 1px solid $border-color-four;
+        border-bottom: 1px solid $edit-playlist-column-header-border;
         h2 {
           margin-bottom: 0;
           width: auto;
@@ -389,7 +389,7 @@
         }
       }
       .mini_paginator {
-        border-bottom: 1px solid $border-color-four;
+        border-bottom: 1px solid $edit-playlist-column-header-border;
         border-radius: 0;
       }
     }

@@ -47,6 +47,7 @@ $forms-background: $grey50;
 $forms-border: $grey50;
 
 $checkbox-checked-background: $grey50;
+$checkbox-not-checked-border: $grey500;
 
 // site_header.scss
 $site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
@@ -142,6 +143,10 @@ $track-player-background: $grey50;
 
 // track_content.scss
 $track-content-child-background: $white;
+$track-content-hr-background: $grey500;
+
+$track-edit-border: $grey500;
+$track-edit-border-focus: $grey500;
 
 // playlist_cover_view.scss
 $playlist-options-background: $grey1000;
@@ -175,6 +180,9 @@ $edit-playlist-private-label-checkbox: $grey900;
 
 $edit-playlist-info-bottom-border: $grey50;
 
+$edit-playlist-column-header-border: $grey100;
+$edit-playlist-left-column-dash-text: $grey100;
+
 $edit-playlist-draggable-mirror-border: $black;
 
 $edit-playlist-drag-handle-border: $grey50;
@@ -198,6 +206,8 @@ $card-artist-text: $orange600;
 
 // admin.scss
 $admin-nav-item-background-hover: $grey100;
+$admin-header-border: $grey500;
+$admin-row-border: $grey100;
 $admin-spam-row-background: $orange100;
 $admin-deleted-row-background: $grey50;
 
@@ -214,6 +224,3 @@ $font-color-two: $grey1000;
 $font-color-four: $grey800;
 $font-color-five: $grey500;
 $font-color-seven: $white;
-
-$border-color-two: $grey500;
-$border-color-four: $grey100;
