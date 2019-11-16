@@ -43,7 +43,7 @@ form {
     margin-bottom: $baseline;
     border: 2px solid $forms-border;
     border-radius: 4px;
-    background-color: $background-color-three;
+    background-color: $forms-background;
     font-size: 14px;
     color: $forms-input-text;
     &:focus {
@@ -61,7 +61,6 @@ form {
     padding: 9px 10px 6px 10px;
   }
 }
-
 
 
 /* PLACEHOLDER TEXT COLOR */
@@ -129,7 +128,7 @@ form {
   content: "";
   border: 1px solid $border-color-two;
   border-radius: 2.5px;
-  background-color: $background-color-three !important;
+  background-color: $checkbox-checked-background !important;
 }
 
 [type="checkbox"]:checked + label:before {

@@ -43,7 +43,10 @@ $input-accepted-border: $green600;
 // forms.scss
 $forms-label-text: $grey500;
 $forms-input-text: $black;
+$forms-background: $grey50;
 $forms-border: $grey50;
+
+$checkbox-checked-background: $grey50;
 
 // site_header.scss
 $site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
@@ -95,6 +98,7 @@ $static-page-anchor-visited: $orange1000;
 // tracks.scss
 $track-open-box-shadow: 0 11px 19px 4px #6566667a;
 $track-background: $white;
+$track-seekbar-loaded-background: $grey50;
 $track-border-bottom: $grey100;
 $track-time-text: $grey800;
 $track-artist-text: $grey800;
@@ -134,6 +138,7 @@ $playlist-sidebar-background: $white;
 
 // track_player.scss
 $big-player-seekbar-color: $grey200;
+$track-player-background: $grey50;
 
 // track_content.scss
 $track-content-child-background: $white;
@@ -176,6 +181,8 @@ $edit-playlist-drag-handle-border: $grey50;
 $edit-playlist-drag-handle-border-hover: $grey800;
 $edit-playlist-drag-handle-border-accent: $accent;
 
+$edit-playlist-playlist-size-background: $grey50;
+
 // playlists.scss
 $card-background: $white;
 $card-private-background: $grey1000;
@@ -192,10 +199,16 @@ $card-artist-text: $orange600;
 // admin.scss
 $admin-nav-item-background-hover: $grey100;
 $admin-spam-row-background: $orange100;
+$admin-deleted-row-background: $grey50;
+
+// secretz.scss
+$secretz-odd-row-background: $grey50;
+
+// upload.scss
+$upload-asset-background: $grey50;
 
 // legacy colors
 $background-color-one: $white;
-$background-color-three: $grey50;
 
 $font-color-two: $grey1000;
 $font-color-four: $grey800;
