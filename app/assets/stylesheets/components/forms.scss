@@ -129,7 +129,7 @@ form {
   content: "";
   border: 1px solid $border-color-two;
   border-radius: 2.5px;
-  background-color: $border-color-five !important;
+  background-color: $background-color-three !important;
 }
 
 [type="checkbox"]:checked + label:before {

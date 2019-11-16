@@ -191,7 +191,7 @@
       }
     }
     .edit_playlist_info_bottom {
-      border-top: 1px solid $border-color-five;
+      border-top: 1px solid $edit-playlist-info-bottom-border;
       .private_warning {
         text-align: center;
       }
@@ -287,15 +287,15 @@
           background-position: center;
           background-repeat: no-repeat;
           border-radius: 7px;
-          border: 1px solid $border-color-five;
+          border: 1px solid $edit-playlist-drag-handle-border;
           transition: border-color 0.4s, background-image 0.4s;
           &:hover {
             background-image: image-url("svg/icon_drag_handle_active.svg");
-            border: 1px solid $border-color-four;
+            border: 1px solid $edit-playlist-drag-handle-border-hover;
           }
           &:active {
             background-image: image-url("svg/icon_drag_handle_active.svg");
-            border: 1px solid $accent;
+            border: 1px solid $edit-playlist-drag-handle-border-active;
           }
         }
       }
@@ -523,7 +523,7 @@
 
 .draggable-mirror {
   z-index: 99999;
-  border: 1px solid $border-color-one;
+  border: 1px solid $edit-playlist-draggable-mirror-border;
 }
 
 .edit_playlist_pro_upload {

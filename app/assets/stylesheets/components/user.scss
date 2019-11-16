@@ -199,7 +199,7 @@ main {
         .user_header_avatar {
           overflow: hidden;
           @include samo-shadow-and-radius();
-          border: 1px solid $border-color-one;
+          border: 1px solid $user-header-avatar-border;
           width: 48px;
           height: 48px;
           @media #{$mobile} {
@@ -392,7 +392,7 @@ main {
         }
         .user_agent {
           padding: 16px;
-          border-top: 2px solid $border-color-six;
+          border-top: 2px solid $user-mod-stats-agent-border;
           > div:first-child {
             color: $font-color-four;
             font-size: 12px;

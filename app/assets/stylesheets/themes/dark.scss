@@ -133,13 +133,17 @@ $track-content-child-background: $grey1100;
 // playlist_cover_view.scss
 $playlist-options-link-background: $grey1000; 
 $playlist-options-link-background-hover: $black; 
+$playlist-options-link-border: $black;
 $playlist-options-link-text: $grey1100; 
 
 // playlist_sidebar.scss
 $tracklist-track-text: $grey1100;
+$tracklist-track-border: $grey50;
 
 // user.scss
+$user-header-avatar-border: $black;
 $user-card-shadow: none;
+$user-mod-stats-agent-border: $white;
 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
@@ -147,6 +151,14 @@ $edit-playlist-track-button-background-hover: $grey800;
 
 $edit-playlist-cover-border: $grey200;
 $edit-playlist-private-label-checkbox: $grey500;
+
+$edit-playlist-info-bottom-border: $grey50;
+
+$edit-playlist-draggable-mirror-border: $black;
+
+$edit-playlist-drag-handle-border: $grey50;
+$edit-playlist-drag-handle-border-hover: $grey800;
+$edit-playlist-drag-handle-border-active: $accent;
 
 // playlists.scss
 $card-background: $grey1100;
@@ -174,8 +186,5 @@ $font-color-four: $grey800;
 $font-color-five: $grey1000;
 $font-color-seven: $black;
 
-$border-color-one: $black;
 $border-color-two: $grey500;
 $border-color-four: $grey100;
-$border-color-five: $grey50;
-$border-color-six: $white;
