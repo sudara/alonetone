@@ -107,6 +107,7 @@ $track-reveal-top-background: $grey1000;
 $track-description-text: $grey100;
 $track-created-text: $grey800;
 $track-view-more-text: $orange300;
+$track-stats-created-text: $grey1000;
 $track-stats-text: $grey500;
 $track-stats-icon-background: $grey800;
 $track-favorited-when-text: $grey500;
@@ -148,6 +149,11 @@ $track-content-hr-background: $grey500;
 $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
+$track-edit-new-version-note-text: $grey1000;
+
+// track_social.scss
+$track-social-heading-text: $grey1000;
+
 // playlist_cover_view.scss
 $playlist-options-background: $grey1000;
 $playlist-options-link-background: $grey1000; 
@@ -157,6 +163,8 @@ $playlist-options-link-text: $grey1100;
 
 // playlist_sidebar.scss
 $tracklist-track-text: $grey1100;
+$tracklist-position-text: $grey1000;
+$tracklist-time-text: $grey1000;
 $tracklist-track-border: $grey50;
 $tracklist-track-background-active: $grey1000;
 $sidebar-link-background: $grey1000;
@@ -167,6 +175,7 @@ $user-header-avatar-border: $black;
 $user-card-shadow: none;
 $user-card-content-divider-background: $grey900;
 $user-links-background: $grey1000;
+$user-mod-stats-heading-text: $grey1000;
 $user-mod-stats-background: $grey900;
 $user-mod-stats-agent-border: $white;
 $user-actions-area-background: $grey900;
@@ -206,6 +215,7 @@ $card-by-text: $grey800;
 
 // admin.scss
 $admin-nav-item-background-hover: $grey900;
+$admin-nav-item-total-text: $grey1000;
 $admin-header-border: $grey500;
 $admin-row-border: $grey100;
 $admin-spam-row-background: $orange100;
@@ -222,5 +232,4 @@ $background-color-one: $grey1100;
 
 $font-color-two: $grey50;
 $font-color-four: $grey800;
-$font-color-five: $grey1000;
 $font-color-seven: $black;

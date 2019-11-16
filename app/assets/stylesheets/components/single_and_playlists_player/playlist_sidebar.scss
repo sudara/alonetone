@@ -47,13 +47,13 @@
         a.position_name_time {
           color: $tracklist-track-text;
           span.track_name {
-            color: $tracklist-track-text
+            color: $tracklist-track-text;
           }
           span.track_position {
-            color: $font-color-five;
+            color: $tracklist-position-text;
           }
           span.time_text {
-            color: $font-color-five;
+            color: $tracklist-time-text;
           }
         }
       }
