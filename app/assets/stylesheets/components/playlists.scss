@@ -12,7 +12,7 @@ ul.playlists {
   }
   li.playlist {
     &.private {
-      background-color: $background-color-five;
+      background-color: $card-private-background;
       position: relative;
       .private_playlist_padlock {
         display: block;
