@@ -359,11 +359,9 @@
               a {
                 background-color: $accent;
                 border: 1px solid #de6a00;
-                color: $font-color-seven;
                 &:hover {
                   background-color: $accent;
                   border: 1px solid #de6a00;
-                  color: $font-color-seven;
                 }
               }
             }
@@ -376,7 +374,6 @@
               height: 26px;
               &:hover {
                 background-color: $edit-playlist-track-button-background-hover;
-                color: $font-color-seven;
               }
             }
           }
