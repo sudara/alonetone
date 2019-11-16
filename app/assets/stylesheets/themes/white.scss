@@ -17,11 +17,12 @@ $box-background: $white;
 
 $box-h2-bottom-border: $grey800;
 
-$view-all-background: $white;
+$back-to-text: $grey900;
 
 $back-to-background: $white;
 
-$back-to-text: $grey900;
+$view-all-background: $white;
+$view-all-text: $grey800;
 
 $private-message-warning-background: $red500;
 $private-message-warning-border: $red600;
@@ -86,10 +87,12 @@ $site-header-user-dropdown-list-item-background: $grey50;
 $site-header-user-dropdown-list-item-text: $grey1000;
 
 // site_footer.scss
+$footer-alonetoners-text: $grey800;
 $footer-forum-topics-accent: $orange600;
 $footer-forum-topics-background: $grey25;
 $footer-forum-topics-link-background: $white;
 $footer-forum-topics-link-text: $black;
+$footer-forum-topics-artist-text: $grey800;
 $footer-bottom-background: $grey1100;
 $footer-bottom-column-background: $grey1000;
 $footer-bottom-link-text: $white;
@@ -174,6 +177,8 @@ $track-edit-new-version-note-text: $grey500;
 $track-content-spam-background: $white;
 $track-content-spam-text: $accent;
 
+$track-content-artist-text: $grey800;
+
 // track_social.scss
 $track-social-heading-text: $grey500;
 
@@ -183,6 +188,7 @@ $playlist-options-link-background: $grey1000;
 $playlist-options-link-background-hover: $black;
 $playlist-options-link-border: $black;
 $playlist-options-link-text: $grey50; 
+$playlist-options-link-action-text: $grey800;
 
 // playlist_sidebar.scss
 $playlist-sidebar-artist-text: $grey1000;
@@ -198,7 +204,7 @@ $sidebar-link-background-hover: $grey1000;
 // user.scss
 $user-header-avatar-border: $black;
 $user-follow-background: $white;
-$user-follow-background-hover: $white
+$user-follow-background-hover: $white;
 $user-card-background: $white;
 $user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
 $user-card-bio-text: $grey1000;
@@ -212,6 +218,9 @@ $user-mod-stats-heading-text: $grey500;
 $user-mod-stats-background: $grey100;
 $user-mod-stats-agent-border: $white;
 $user-actions-area-background: $grey100;
+
+// user_playlists.scss
+$user-playlists-sort-instructions: $grey800;
 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
@@ -277,6 +286,8 @@ $user-card-background: $white;
 
 // pagination.scss
 $mini-paginator-background: $white;
+$pagy-link-text: $grey800;
+$pagy-link-text-active: $accent;
 
 // legacy colors
 $font-color-four: $grey800;
