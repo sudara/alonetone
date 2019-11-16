@@ -102,7 +102,7 @@
           float: left;
           font-variant-numeric: tabular-nums;
           margin-right: 4px;
-          color: $font-color-four;
+          color: $tracklist-position-text;
           min-width: 21px;
         }
         span.track_name {
@@ -119,7 +119,7 @@
           font-size: 12px;
           margin-right: 12px;
           font-variant-numeric: tabular-nums;
-          color: $font-color-four;
+          color: $tracklist-time-text;
         }
       }
     }
@@ -148,7 +148,7 @@
           width: 100%;
           padding: 10px $baseline / 2;
           text-decoration: none;
-          color: white;
+          color: $sidebar-link-text;
           i {
             background-image: image-url("svg/icon_playlist_link.svg");
             display: inline-block;
@@ -182,7 +182,7 @@
           .action_text {
             font-size: 10px;
             float: right;
-            color: $font-color-four;
+            color: $sidebar-link-action-text;
             position: relative;
             top: 3px;
           }

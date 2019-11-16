@@ -244,13 +244,13 @@
         margin-right: 20px;
         white-space: nowrap;
         span.playlist_track_size {
-          color: $font-color-four;
+          color: $edit-playlist-left-column-size-text;
         }
         span.playlist_dash {
           color: $edit-playlist-left-column-dash-text;
         }
         span.playlist_total_time {
-          color: $accent;
+          color: $edit-playlist-left-column-time-text;
         }
       }
     }
@@ -301,7 +301,7 @@
       border-radius: 4px;
       background-color: $edit-playlist-playlist-size-background;
       font-size: 13px;
-      color: $font-color-four;
+      color: $edit-playlist-playlist-size-text;
       text-align: center;
       height: 30px;
       line-height: 30px;
@@ -339,7 +339,7 @@
           font-family: $medium-sans-font;
           font-size: 13px;
           margin-right: 20px;
-          color: $font-color-four;
+          color: $edit-playlist-column-header-text;
           margin-left: auto;
         }
       }
@@ -367,7 +367,6 @@
             }
             a {
               @include default-button();
-              color: $font-color-four;
               font-family: $medium-sans-font;
               font-weight: normal;
               height: 26px;
@@ -397,7 +396,7 @@
   }
   .left_instructions,
   .right_instructions {
-    color: $font-color-four;
+    color: $edit-playlist-instructions-text;
     padding: 0 10px;
     line-height: 1.5em;
     min-height: 42px;

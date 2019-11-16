@@ -336,7 +336,7 @@ main {
           display: flex;
           > div {
             > div:first-child {
-              color: $font-color-four;
+              color: $user-stats-label-text;
               font-size: 12px;
               margin-bottom: 8px;
             }
@@ -394,7 +394,7 @@ main {
           padding: 16px;
           border-top: 2px solid $user-mod-stats-agent-border;
           > div:first-child {
-            color: $font-color-four;
+            color: $user-stats-label-text;
             font-size: 12px;
             margin-bottom: 8px;
           }
@@ -406,7 +406,7 @@ main {
         > div {
           > div {
             > div:first-child {
-              color: $font-color-four;
+              color: $user-stats-label-text;
               font-size: 12px;
               margin-bottom: 8px;
             }
