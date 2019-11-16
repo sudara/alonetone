@@ -31,7 +31,7 @@
         a {
           @include default_button(sub_nav);
           @include shadow1();
-          background-color: $background-color-one;
+          background-color: $sub-nav-link-background;
           display: block;
           width: 100%;
           height: 100%;

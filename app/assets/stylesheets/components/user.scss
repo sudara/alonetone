@@ -177,7 +177,7 @@ main {
             }
             div.follow_button {
               @include default_button();
-              background-color: $background-color-one;
+              background-color: $user-follow-background;
               color: $accent;
               margin-left: 24px;
               margin-right: 8px;
@@ -185,7 +185,7 @@ main {
                 margin-left: 0;
               }
               &:hover {
-                background-color: $background-color-one;
+                background-color: $user-follow-background-hover;
               }
             }
             svg {
@@ -229,7 +229,7 @@ main {
     #user_card_area {
       display: flex;
       flex-wrap: wrap;
-      background-color: $background-color-one;
+      background-color: $user-card-background;
       @include samo-shadow-and-radius();
       box-shadow: $user-card-shadow;
       overflow: hidden;
@@ -295,7 +295,7 @@ main {
         display: block;
       }
       > div {
-        background-color: $background-color-one;
+        background-color: $user-follows-background;
         @include samo-shadow-and-radius();
         flex: 1;
         padding: 16px;
@@ -329,7 +329,7 @@ main {
         display: flex;
         flex-wrap: wrap;
         > div {
-          background-color: $background-color-one;
+          background-color: $user-stats-background;
           @include samo-shadow-and-radius();
           flex: 1;
           padding: 16px;

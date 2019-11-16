@@ -13,7 +13,13 @@ $primary-button-background-active: $orange800;
 // shared.scss
 $body-background: $grey50;
 
+$box-background: $white;
+
 $box-h2-bottom-border: $grey800;
+
+$view-all-background: $white;
+
+$back-to-background: $white;
 
 $back-to-text: $grey900;
 
@@ -31,6 +37,8 @@ $ajax-fail-border: $red600;
 $ajax-fail-text: $red800;
 $ajax-success-border: $green400;
 $ajax-success-text: $green600;
+
+$floating-feedback-background: $white;
 
 $error-message-background: $red100;
 $error-message-shadow: $red200;
@@ -53,6 +61,8 @@ $checkbox-checked-background: $grey50;
 $checkbox-not-checked-border: $grey500;
 
 // site_header.scss
+$site-header-background: $white;
+
 $site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
 
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
@@ -89,6 +99,7 @@ $sub-nav-background: $grey100;
 $sub-nav-text: $grey1000;
 $sub-nav-text-hover: $grey1000;
 $sub-nav-current-background: $orange600;
+$sub-nav-link-background: $white;
 
 // static_pages.scss
 $static-page-heading-background: $grey100-alpha50;
@@ -139,6 +150,7 @@ $comment-spam-text: $orangetone;
 $comment-delete-text: $red600;
 
 $track-content-comment-background: $grey100;
+$track-content-comment-textarea-background: $white;
 
 // playlist.scss
 $playlist-sidebar-background: $white;
@@ -146,6 +158,7 @@ $playlist-sidebar-background: $white;
 // track_player.scss
 $big-player-seekbar-color: $grey200;
 $track-player-background: $grey50;
+$track-player-play-button-background: $white;
 $big-player-time-text: $white;
 
 // track_content.scss
@@ -157,6 +170,9 @@ $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
 $track-edit-new-version-note-text: $grey500;
+
+$track-content-spam-background: $white;
+$track-content-spam-text: $accent;
 
 // track_social.scss
 $track-social-heading-text: $grey500;
@@ -181,9 +197,14 @@ $sidebar-link-background-hover: $grey1000;
 
 // user.scss
 $user-header-avatar-border: $black;
+$user-follow-background: $white;
+$user-follow-background-hover: $white
+$user-card-background: $white;
 $user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
 $user-card-bio-text: $grey1000;
 $user-card-content-divider-background: $grey100;
+$user-follows-background: $white;
+$user-stats-background: $white;
 $user-links-text: $white;
 $user-links-background: $grey1000;
 $user-stats-data-text: $grey1000;
@@ -209,7 +230,7 @@ $edit-playlist-draggable-mirror-border: $black;
 
 $edit-playlist-drag-handle-border: $grey50;
 $edit-playlist-drag-handle-border-hover: $grey800;
-$edit-playlist-drag-handle-border-accent: $accent;
+$edit-playlist-drag-handle-border-active: $accent;
 
 $edit-playlist-playlist-size-background: $grey50;
 
@@ -229,6 +250,7 @@ $card-artist-text: $orange600;
 
 // admin.scss
 $admin-search-text: $grey1000;
+$admin-search-background: $white;
 $admin-column-heading-text: $grey1000;
 
 $admin-nav-item-background-hover: $grey100;
@@ -244,11 +266,17 @@ $admin-deleted-at-text: $grey1000;
 $admin-user-ip-text: $grey1000;
 
 // secretz.scss
+$secretz-row-background: $white;
 $secretz-odd-row-background: $grey50;
 
 // upload.scss
 $upload-asset-background: $grey50;
 
+// users_index.scss
+$user-card-background: $white;
+
+// pagination.scss
+$mini-paginator-background: $white;
+
 // legacy colors
-$background-color-one: $white;
 $font-color-four: $grey800;

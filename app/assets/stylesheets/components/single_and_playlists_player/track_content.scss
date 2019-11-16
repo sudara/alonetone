@@ -60,8 +60,8 @@
       .edit_link + .edit_link {
         margin-left: 6px;
         text-transform: uppercase;
-        background-color: $background-color-one;
-        color: $accent;
+        background-color: $track-content-spam-background;
+        color: $track-content-spam-text;
       }
     }
     .download_link {
