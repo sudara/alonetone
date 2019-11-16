@@ -43,7 +43,10 @@ $input-accepted-border: $green1000;
 // forms.scss
 $forms-label-text: $grey200;
 $forms-input-text: $white;
+$forms-background: $grey1100;
 $forms-border: $grey1100;
+
+$checkbox-checked-background: $grey1000;
 
 // site_header.scss
 $site-icon-background: transparent image-url("alonetone_logo_dark.svg") no-repeat;
@@ -53,7 +56,7 @@ $profile-link-background: $grey900;
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow_dark.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass_dark.svg");
 
-$site-header-input-background: $grey100;
+$site-header-input-background: $grey900;
 $site-header-input-background-focus: $grey1100;
 
 $site-header-mobile-search-reveal-button-background: $grey900;
@@ -95,6 +98,7 @@ $static-page-anchor-visited: $grey400;
  // tracks.scss
 $track-open-box-shadow: none;
 $track-background: $grey1100;
+$track-seekbar-loaded-background: $grey1000;
 $track-border-bottom: $grey1200;
 $track-time-text: $grey500;
 $track-artist-text: $grey800;
@@ -134,6 +138,7 @@ $playlist-sidebar-background: $grey1150;
 
 // track_player.scss
 $big-player-seekbar-color: $grey200;
+$track-player-background: $grey1000;
 
 // track_content.scss
 $track-content-child-background: $grey1100;
@@ -176,6 +181,8 @@ $edit-playlist-drag-handle-border: $grey50;
 $edit-playlist-drag-handle-border-hover: $grey800;
 $edit-playlist-drag-handle-border-active: $accent;
 
+$edit-playlist-playlist-size-background: $grey1000;
+
 // playlists.scss
 $card-background: $grey1100;
 $card-private-background: $grey300;
@@ -192,10 +199,17 @@ $card-by-text: $grey800;
 // admin.scss
 $admin-nav-item-background-hover: $grey900;
 $admin-spam-row-background: $orange100;
+$admin-deleted-row-background: $grey1000;
+
+// secretz.scss
+$secretz-odd-row-background: $grey1000;
+
+// upload.scss
+$upload-asset-background: $grey1000;
 
 // legacy colors
 $background-color-one: $grey1100;
-$background-color-three: $grey1000;
+
 
 $font-color-two: $grey50;
 $font-color-four: $grey800;

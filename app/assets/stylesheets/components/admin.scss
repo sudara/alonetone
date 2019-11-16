@@ -124,7 +124,7 @@
             border-top: 0;
           }
           &.deleted {
-              background-color: $background-color-three;
+              background-color: $admin-deleted-row-background;
               box-shadow: inset 0 0 3px $border-color-two;
               input[value~='Restore'] {
                 background-color: $accent;
