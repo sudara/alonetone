@@ -67,19 +67,19 @@ form {
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 :-ms-input-placeholder {
   /* IE 10+ */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 :-moz-placeholder {
   /* Firefox 18- */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 
 /* CUSTOM SVG CHECKBOX REPLACEMENT */
@@ -128,7 +128,7 @@ form {
   content: "";
   border: 1px solid $checkbox-not-checked-border;
   border-radius: 2.5px;
-  background-color: $checkbox-checked-background !important;
+  background-color: $checkbox-not-checked-background !important;
 }
 
 [type="checkbox"]:checked + label:before {
@@ -138,9 +138,9 @@ form {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $font-color-four;
+  border: 1px solid $checkbox-checked-border;
   border-radius: 2.5px;
-  background-color: $font-color-four;
+  background-color: $checkbox-checked-background;
 }
 
 [type="checkbox"]:not(:checked) + label:after {

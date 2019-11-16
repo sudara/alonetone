@@ -18,7 +18,6 @@ $box-background: $white;
 $box-h2-bottom-border: $grey800;
 
 $back-to-text: $grey900;
-
 $back-to-background: $white;
 
 $view-all-background: $white;
@@ -58,7 +57,12 @@ $forms-input-text: $black;
 $forms-background: $grey50;
 $forms-border: $grey50;
 
-$checkbox-checked-background: $grey50;
+$forms-placeholder-text: $grey800;
+
+$checkbox-checked-background: $grey800;
+$checkbox-checked-border: $grey800;
+
+$checkbox-not-checked-background: $grey50;
 $checkbox-not-checked-border: $grey500;
 
 // site_header.scss
@@ -159,10 +163,11 @@ $track-content-comment-textarea-background: $white;
 $playlist-sidebar-background: $white;
 
 // track_player.scss
-$big-player-seekbar-color: $grey200;
+$big-player-seekbar-background: $grey200;
 $track-player-background: $grey50;
 $track-player-play-button-background: $white;
 $big-player-time-text: $white;
+$big-player-time-total-text: $grey800;
 
 // track_content.scss
 $track-content-child-background: $white;
@@ -201,6 +206,9 @@ $tracklist-track-background-active: $grey1000;
 $sidebar-link-background: $grey1000;
 $sidebar-link-background-hover: $grey1000;
 
+$sidebar-link-text: $grey800;
+$sidebar-link-action-text: $grey800;
+
 // user.scss
 $user-header-avatar-border: $black;
 $user-follow-background: $white;
@@ -213,6 +221,7 @@ $user-follows-background: $white;
 $user-stats-background: $white;
 $user-links-text: $white;
 $user-links-background: $grey1000;
+$user-stats-label-text: $grey800;
 $user-stats-data-text: $grey1000;
 $user-mod-stats-heading-text: $grey500;
 $user-mod-stats-background: $grey100;
@@ -232,8 +241,13 @@ $edit-playlist-private-label-checkbox: $grey900;
 
 $edit-playlist-info-bottom-border: $grey50;
 
+$edit-playlist-instructions-text: $grey800;
+
 $edit-playlist-column-header-border: $grey100;
+$edit-playlist-column-header-text: $grey800;
 $edit-playlist-left-column-dash-text: $grey100;
+$edit-playlist-left-column-size-text: $grey800;
+$edit-playlist-left-column-time-text: $grey800;
 
 $edit-playlist-draggable-mirror-border: $black;
 
@@ -242,6 +256,7 @@ $edit-playlist-drag-handle-border-hover: $grey800;
 $edit-playlist-drag-handle-border-active: $accent;
 
 $edit-playlist-playlist-size-background: $grey50;
+$edit-playlist-playlist-size-text: $grey800;
 
 // playlists.scss
 $card-background: $white;
@@ -288,6 +303,3 @@ $user-card-background: $white;
 $mini-paginator-background: $white;
 $pagy-link-text: $grey800;
 $pagy-link-text-active: $accent;
-
-// legacy colors
-$font-color-four: $grey800;
