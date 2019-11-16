@@ -124,7 +124,7 @@
       .created {
         font-size: 14px;
         display: block;
-        color: $font-color-five;
+        color: $track-stats-created-text;
         flex-grow: 1;
         time {
           font-weight: bold;
@@ -263,7 +263,7 @@
           margin-top: 0;
           font-size: 12px;
           line-height: 16px;
-          color: $font-color-five;
+          color: $track-edit-new-version-note-text;
           max-width: 400px;
         }
       }

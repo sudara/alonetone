@@ -88,7 +88,7 @@
         }
         p.upload_instructions {
           font-size: 12px;
-          color: $font-color-five;
+          color: $edit-playlist-instructions-text;
           margin-top: 12px;
           max-width: 150px;
         }
@@ -180,12 +180,6 @@
           label {
             text-transform: none;
             color: $edit-playlist-private-label-checkbox;
-          }
-          span.private_notice {
-            color: $font-color-five;
-            font-family: $medium-sans-font;
-            margin-left: 4px;
-            margin-top: 5px;
           }
         }
       }
