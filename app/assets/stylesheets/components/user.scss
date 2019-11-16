@@ -451,7 +451,7 @@ main {
         padding-bottom: 4px;
         padding-left: 0;
         flex-wrap: wrap;
-        background-color: $background-color-five;
+        background-color: $user-links-background;
         color: $font-color-seven;
         @include samo-shadow-and-radius();
         overflow: auto;

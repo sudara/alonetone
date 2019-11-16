@@ -131,6 +131,7 @@ $big-player-seekbar-color: $grey200;
 $track-content-child-background: $white;
 
 // playlist_cover_view.scss
+$playlist-options-background: $grey1000;
 $playlist-options-link-background: $grey1000; 
 $playlist-options-link-background-hover: $black;
 $playlist-options-link-border: $black;
@@ -139,10 +140,15 @@ $playlist-options-link-text: $grey50;
 // playlist_sidebar.scss
 $tracklist-track-text: $grey50;
 $tracklist-track-border: $grey50;
+$tracklist-track-background-active: $grey1000;
+$sidebar-link-background: $grey1000;
+$sidebar-link-background-hover: $grey1000;
+
 
 // user.scss
 $user-header-avatar-border: $black;
 $user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
+$user-links-background: $grey1000;
 $user-mod-stats-agent-border: $white;
 
 // playlist_edit.scss
@@ -162,6 +168,7 @@ $edit-playlist-drag-handle-border-accent: $accent;
 
 // playlists.scss
 $card-background: $white;
+$card-private-background: $grey1000;
 $card-title-font: 'Alright-v2-Normal', sans-serif;
 $card-title-weight: bold; 
 $card-title-text: $black; 
@@ -179,7 +186,6 @@ $admin-spam-row-background: $orange100;
 $background-color-one: $white;
 $background-color-three: $grey50;
 $background-color-four: $grey100;
-$background-color-five: $grey1000;
 
 $font-color-two: $grey1000;
 $font-color-four: $grey800;
