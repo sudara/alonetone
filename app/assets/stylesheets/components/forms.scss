@@ -102,7 +102,7 @@ form {
 }
 
 [type="checkbox"]:not(:checked) + label:hover:before {
-  border: 1px solid $border-color-two !important;
+  border: 1px solid $checkbox-not-checked-border !important;
 }
 
 [type="checkbox"]:not(:checked) + label:active:before,
@@ -126,7 +126,7 @@ form {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $border-color-two;
+  border: 1px solid $checkbox-not-checked-border;
   border-radius: 2.5px;
   background-color: $checkbox-checked-background !important;
 }

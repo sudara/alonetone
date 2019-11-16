@@ -101,7 +101,7 @@
       header.admin_users_header,
       header.admin_assets_header {
         display: flex;
-        border-bottom: 1px solid $border-color-two;
+        border-bottom: 1px solid $admin-header-border;
         padding-left: $baseline / 2;
         padding-right: $baseline / 2;
         div {
@@ -116,7 +116,7 @@
       .admin_assets_rows {
         > div {
           display: flex;
-          border-top: 1px solid $border-color-four;
+          border-top: 1px solid $admin-row-border;
           padding: $baseline / 2 0;
           padding-left: $baseline / 2;
           padding-right: $baseline / 2;
@@ -125,7 +125,7 @@
           }
           &.deleted {
               background-color: $admin-deleted-row-background;
-              box-shadow: inset 0 0 3px $border-color-two;
+              box-shadow: inset 0 0 3px $admin-header-border;
               input[value~='Restore'] {
                 background-color: $accent;
                 opacity: 1;
@@ -133,7 +133,7 @@
           }
           &.spam {
             background-color: $admin-spam-row-background;
-            box-shadow: inset 0 0 3px $border-color-two;
+            box-shadow: inset 0 0 3px $admin-header-border;
           }
         }
       }

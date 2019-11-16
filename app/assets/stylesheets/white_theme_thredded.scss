@@ -7,7 +7,7 @@ $thredded-base-font-family: $sans-font;
 $thredded-heading-font-family: $sans-font;
 $thredded-grid-container-max-width: none;
 $thredded-brand: $accent;
-$thredded-base-border-color: $border-color-four;
+$thredded-base-border-color: $grey100;
 
 $thredded-font-size-small: 13px;
 
@@ -91,7 +91,7 @@ aside.thredded--currently-online {
       display: block;
       .thredded--messageboard {
         border: 0;
-        border-top: 1px solid $border-color-four;
+        border-top: 1px solid $grey100;
         padding-left: 0;
       }
       .thredded--messageboard--header {
@@ -188,7 +188,7 @@ aside.thredded--currently-online {
       }
     }
     article.thredded--topics--topic {
-      border-bottom: 1px solid $border-color-four;
+      border-bottom: 1px solid $grey100;
       padding-bottom: 13px;
       margin-bottom: 13px;
       h1.thredded--topics--title {
