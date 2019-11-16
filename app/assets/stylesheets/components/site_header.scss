@@ -64,7 +64,7 @@ header#site_header {
           padding: 0;
           padding-left: 8px;
           padding-right: 36px;
-          background-color: $background-color-four;
+          background-color: $site-header-input-background;
           color: $font-color-two;
           border: 0;
           border-radius: 3px;
@@ -73,7 +73,7 @@ header#site_header {
           &:focus {
             border-width: 0px;
             width: 256px;
-            background-color: $background-color-one;
+            background-color: $site-header-input-background-focus;
             border: 2px solid $accent;
           }
           @media #{$mobile} {
@@ -109,7 +109,7 @@ header#site_header {
         display: none;
         width: 36px;
         height: 36px;
-        background-color: $background-color-four;
+        background-color: $site-header-mobile-search-reveal-button-background;
         border-radius: 3px;
         background-image: $site-header-search-magnifying-glass-image;
         background-position: center;
@@ -137,7 +137,7 @@ header#site_header {
         height: 36px;
         padding: 2px;
         border-radius: 3px;
-        background-color: $background-color-four;
+        background-color: $profile-link-background;
         background-image: $profile-link-background-image;
         background-repeat: no-repeat;
         background-position: right 6px center;

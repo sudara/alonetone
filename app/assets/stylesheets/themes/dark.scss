@@ -49,8 +49,14 @@ $forms-border: $grey1100;
 $site-icon-background: transparent image-url("alonetone_logo_dark.svg") no-repeat;
 
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(0, 0, 0, 0.75);
+$profile-link-background: $grey900;
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow_dark.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass_dark.svg");
+
+$site-header-input-background: $grey100;
+$site-header-input-background-focus: $grey1100;
+
+$site-header-mobile-search-reveal-button-background: $grey900;
 
 $site-header-user-dropdown-background: $grey1200;
 $site-header-user-dropdown-profile-edit-text: $orange300;
@@ -121,6 +127,8 @@ $private-message-flag-text: $orange100;
 $comment-spam-text: $orange300;
 $comment-delete-text: $red400;
 
+$track-content-comment-background: $grey900;
+
 // playlist.scss
 $playlist-sidebar-background: $grey1150;
 
@@ -147,8 +155,11 @@ $sidebar-link-background-hover: $grey1000;
 // user.scss
 $user-header-avatar-border: $black;
 $user-card-shadow: none;
+$user-card-content-divider-background: $grey900;
 $user-links-background: $grey1000;
+$user-mod-stats-background: $grey900;
 $user-mod-stats-agent-border: $white;
+$user-actions-area-background: $grey900;
 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
@@ -179,12 +190,12 @@ $card-by-weight: bold;
 $card-by-text: $grey800;
 
 // admin.scss
+$admin-nav-item-background-hover: $grey900;
 $admin-spam-row-background: $orange100;
 
 // legacy colors
 $background-color-one: $grey1100;
 $background-color-three: $grey1000;
-$background-color-four: $grey900;
 
 $font-color-two: $grey50;
 $font-color-four: $grey800;
