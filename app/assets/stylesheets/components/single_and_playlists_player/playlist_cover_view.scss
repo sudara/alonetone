@@ -84,14 +84,14 @@ body.cover_view {
           margin-bottom: 0;
           li {
             border-right: 0;
-            border-left: 1px solid $border-color-one;
+            border-left: 1px solid $playlist-options-link-border;
           }
         }
         li {
           display: block;
           float: left;
           height: 50px;
-          border-right: 1px solid $border-color-one;
+          border-right: 1px solid $playlist-options-link-border;
           background-color: $playlist-options-link-background;
           &:hover {
             background-color: $playlist-options-link-background-hover;
