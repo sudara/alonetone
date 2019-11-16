@@ -63,6 +63,8 @@ $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifyin
 $site-header-input-background: $grey900;
 $site-header-input-background-focus: $white;
 
+$site-header-input-text: $grey1000;
+
 $site-header-mobile-search-reveal-button-background: $grey100;
 
 $site-header-user-dropdown-background: $white;
@@ -150,6 +152,7 @@ $big-player-time-text: $white;
 $track-content-child-background: $white;
 $track-content-hr-background: $grey500;
 
+$track-edit-text: $grey1000;
 $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
@@ -166,6 +169,8 @@ $playlist-options-link-border: $black;
 $playlist-options-link-text: $grey50; 
 
 // playlist_sidebar.scss
+$playlist-sidebar-artist-text: $grey1000;
+
 $tracklist-track-text: $grey50;
 $tracklist-position-text: $grey500;
 $tracklist-time-text: $grey500;
@@ -177,9 +182,11 @@ $sidebar-link-background-hover: $grey1000;
 // user.scss
 $user-header-avatar-border: $black;
 $user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
+$user-card-bio-text: $grey1000;
 $user-card-content-divider-background: $grey100;
 $user-links-text: $white;
 $user-links-background: $grey1000;
+$user-stats-data-text: $grey1000;
 $user-mod-stats-heading-text: $grey500;
 $user-mod-stats-background: $grey100;
 $user-mod-stats-agent-border: $white;
@@ -221,6 +228,9 @@ $card-artist-weight: normal;
 $card-artist-text: $orange600;
 
 // admin.scss
+$admin-search-text: $grey1000;
+$admin-column-heading-text: $grey1000;
+
 $admin-nav-item-background-hover: $grey100;
 $admin-nav-item-total-text: $grey500;
 $admin-nav-item-current-text: $white;
@@ -228,6 +238,10 @@ $admin-header-border: $grey500;
 $admin-row-border: $grey100;
 $admin-spam-row-background: $orange100;
 $admin-deleted-row-background: $grey50;
+
+$admin-default-data-text: $grey1000;
+$admin-deleted-at-text: $grey1000;
+$admin-user-ip-text: $grey1000;
 
 // secretz.scss
 $secretz-odd-row-background: $grey50;
@@ -237,7 +251,4 @@ $upload-asset-background: $grey50;
 
 // legacy colors
 $background-color-one: $white;
-
-$font-color-two: $grey1000;
 $font-color-four: $grey800;
-$font-color-seven: $white;
