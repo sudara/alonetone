@@ -452,7 +452,7 @@ main {
         padding-left: 0;
         flex-wrap: wrap;
         background-color: $user-links-background;
-        color: $font-color-seven;
+        color: $user-links-text;
         @include samo-shadow-and-radius();
         overflow: auto;
         li {

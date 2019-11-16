@@ -4,6 +4,7 @@
 $accent: $orangetone;
 
 // variables.scss
+$default-button-text: $black;
 $default-button-background: $grey500;
 $default-button-background-hover: $grey800;
 $primary-button-background-hover: $orange600;
@@ -24,6 +25,8 @@ $private-message-warning-text: $orange100;
 $body-text: $white;
 
 // notifications.scss
+$flash-text: $black;
+
 $ajax-fail-border: $red600;
 $ajax-fail-text: $red800;
 $ajax-success-border: $green400;
@@ -141,6 +144,7 @@ $playlist-sidebar-background: $grey1150;
 // track_player.scss
 $big-player-seekbar-color: $grey200;
 $track-player-background: $grey1000;
+$big-player-time-text: $black;
 
 // track_content.scss
 $track-content-child-background: $grey1100;
@@ -174,6 +178,7 @@ $sidebar-link-background-hover: $grey1000;
 $user-header-avatar-border: $black;
 $user-card-shadow: none;
 $user-card-content-divider-background: $grey900;
+$user-links-text: $black;
 $user-links-background: $grey1000;
 $user-mod-stats-heading-text: $grey1000;
 $user-mod-stats-background: $grey900;
@@ -185,6 +190,7 @@ $edit-playlist-track-button-background: $grey200;
 $edit-playlist-track-button-background-hover: $grey800;
 
 $edit-playlist-cover-border: $grey200;
+$edit-playlist-instructions-text: $grey1000;
 $edit-playlist-private-label-checkbox: $grey500;
 
 $edit-playlist-info-bottom-border: $grey50;
@@ -203,6 +209,7 @@ $edit-playlist-playlist-size-background: $grey1000;
 // playlists.scss
 $card-background: $grey1100;
 $card-private-background: $grey300;
+$card-private-text: $black;
 $card-title-font: 'Alright-v2-Normal-Medium', sans-serif;
 $card-title-weight: normal;
 $card-title-text: $white; 
@@ -216,6 +223,7 @@ $card-by-text: $grey800;
 // admin.scss
 $admin-nav-item-background-hover: $grey900;
 $admin-nav-item-total-text: $grey1000;
+$admin-nav-item-current-text: $black;
 $admin-header-border: $grey500;
 $admin-row-border: $grey100;
 $admin-spam-row-background: $orange100;
