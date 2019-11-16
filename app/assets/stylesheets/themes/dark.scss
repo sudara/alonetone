@@ -63,6 +63,8 @@ $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifyin
 $site-header-input-background: $grey900;
 $site-header-input-background-focus: $grey1100;
 
+$site-header-input-text: $grey50;
+
 $site-header-mobile-search-reveal-button-background: $grey900;
 
 $site-header-user-dropdown-background: $grey1200;
@@ -150,6 +152,7 @@ $big-player-time-text: $black;
 $track-content-child-background: $grey1100;
 $track-content-hr-background: $grey500;
 
+$track-edit-text: $grey50;
 $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
@@ -166,6 +169,8 @@ $playlist-options-link-border: $black;
 $playlist-options-link-text: $grey1100; 
 
 // playlist_sidebar.scss
+$playlist-sidebar-artist-text: $grey50;
+
 $tracklist-track-text: $grey1100;
 $tracklist-position-text: $grey1000;
 $tracklist-time-text: $grey1000;
@@ -177,9 +182,11 @@ $sidebar-link-background-hover: $grey1000;
 // user.scss
 $user-header-avatar-border: $black;
 $user-card-shadow: none;
+$user-card-bio-text: $grey50;
 $user-card-content-divider-background: $grey900;
 $user-links-text: $black;
 $user-links-background: $grey1000;
+$user-stats-data-text: $grey50;
 $user-mod-stats-heading-text: $grey1000;
 $user-mod-stats-background: $grey900;
 $user-mod-stats-agent-border: $white;
@@ -221,6 +228,9 @@ $card-by-weight: bold;
 $card-by-text: $grey800;
 
 // admin.scss
+$admin-search-text: $grey50;
+$admin-column-heading-text: $grey50;
+
 $admin-nav-item-background-hover: $grey900;
 $admin-nav-item-total-text: $grey1000;
 $admin-nav-item-current-text: $black;
@@ -228,6 +238,10 @@ $admin-header-border: $grey500;
 $admin-row-border: $grey100;
 $admin-spam-row-background: $orange100;
 $admin-deleted-row-background: $grey1000;
+
+$admin-default-data-text: $grey50;
+$admin-deleted-at-text: $grey50;
+$admin-user-ip-text: $grey50;
 
 // secretz.scss
 $secretz-odd-row-background: $grey1000;
@@ -237,7 +251,4 @@ $upload-asset-background: $grey1000;
 
 // legacy colors
 $background-color-one: $grey1100;
-
-$font-color-two: $grey50;
 $font-color-four: $grey800;
-$font-color-seven: $black;
