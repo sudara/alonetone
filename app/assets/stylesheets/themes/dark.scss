@@ -27,8 +27,10 @@ $private-message-warning-background: $red800;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
 
-// typography.scss
-$body-text: $white;
+// pagination.scss
+$mini-paginator-background: $grey1100;
+$pagy-link-text: $grey800;
+$pagy-link-text-active: $accent;
 
 // notifications.scss
 $flash-text: $black;
@@ -51,6 +53,9 @@ $input-rejected-border: $red1000;
 $input-accepted-background: $grey1100;
 $input-accepted-border: $green1000;
 
+// typography.scss
+$body-text: $white;
+
 // forms.scss
 $forms-label-text: $grey200;
 $forms-input-text: $white;
@@ -65,6 +70,60 @@ $checkbox-checked-border: $grey800;
 $checkbox-not-checked-background: $grey1000;
 $checkbox-not-checked-border: $grey500;
 
+// comments.scss
+$comment-as-text: $grey800;
+$comment-as-guest-text: $grey200;
+$comment-as-user-text: $orange300;
+$comment-form-background: $grey1000;
+$comment-form-border: $grey800;
+$comment-form-border-focus: $grey200;
+$comment-form-text: $white;
+$comment-make-private-text: $grey800;
+$comment-submit-background: $grey900;
+$comment-submit-text: $white;
+$comment-background: $grey1000;
+$comment-right-background: $grey1100;
+$comment-user-text: $grey500;
+$comment-ip-text: $grey800;
+$comment-body-text: $grey100;
+$private-message-flag-background: $red800;
+$private-message-flag-text: $orange100;
+$comment-spam-text: $orange300;
+$comment-delete-text: $red400;
+
+$track-content-comment-background: $grey900;
+$track-content-comment-textarea-background: $grey1100;
+
+// tracks.scss
+$track-open-box-shadow: none;
+$track-background: $grey1100;
+$track-seekbar-loaded-background: $grey1000;
+$track-border-bottom: $grey1200;
+$track-time-text: $grey500;
+$track-artist-text: $grey800;
+$track-reveal-top-background: $grey1000; 
+$track-description-text: $grey100;
+$track-created-text: $grey800;
+$track-view-more-text: $orange300;
+$track-stats-created-text: $grey1000;
+$track-stats-text: $grey500;
+$track-stats-icon-background: $grey800;
+$track-favorited-when-text: $grey500;
+
+// playlists.scss
+$card-background: $grey1100;
+$card-private-background: $grey300;
+$card-private-text: $black;
+$card-title-font: 'Alright-v2-Normal-Medium', sans-serif;
+$card-title-weight: normal;
+$card-title-text: $white; 
+$card-artist-font: 'Alright-v2-Normal', sans-serif;
+$card-artist-weight: bold;
+$card-artist-text: $orange300;
+$card-by-font: 'Alright-v2-Normal', sans-serif;
+$card-by-weight: bold;
+$card-by-text: $grey800;
+ 
 // site_header.scss
 $site-header-background: $grey1100;
 
@@ -107,107 +166,9 @@ $sub-nav-text: $grey400;
 $sub-nav-text-hover: $white;
 $sub-nav-current-background: $orangetone;
 $sub-nav-link-background: $grey1100;
- 
-// static_pages.scss
-$static-page-heading-background: $grey1150;
-$static-page-heading-text: $grey100;
-$static-page-content-background: $grey1100;
-$static-page-h2-text: $orange300; 
-$static-page-paragraph-text: $grey400;
-$static-page-content-seperator: $grey1150;
-$static-page-anchor: $grey1000;
-$static-page-anchor-hover: $orange300;
-$static-page-anchor-visited: $grey400;
 
- // tracks.scss
-$track-open-box-shadow: none;
-$track-background: $grey1100;
-$track-seekbar-loaded-background: $grey1000;
-$track-border-bottom: $grey1200;
-$track-time-text: $grey500;
-$track-artist-text: $grey800;
-$track-reveal-top-background: $grey1000; 
-$track-description-text: $grey100;
-$track-created-text: $grey800;
-$track-view-more-text: $orange300;
-$track-stats-created-text: $grey1000;
-$track-stats-text: $grey500;
-$track-stats-icon-background: $grey800;
-$track-favorited-when-text: $grey500;
-
-// comments.scss
-$comment-as-text: $grey800;
-$comment-as-guest-text: $grey200;
-$comment-as-user-text: $orange300;
-$comment-form-background: $grey1000;
-$comment-form-border: $grey800;
-$comment-form-border-focus: $grey200;
-$comment-form-text: $white;
-$comment-make-private-text: $grey800;
-$comment-submit-background: $grey900;
-$comment-submit-text: $white;
-$comment-background: $grey1000;
-$comment-right-background: $grey1100;
-$comment-user-text: $grey500;
-$comment-ip-text: $grey800;
-$comment-body-text: $grey100;
-$private-message-flag-background: $red800;
-$private-message-flag-text: $orange100;
-$comment-spam-text: $orange300;
-$comment-delete-text: $red400;
-
-$track-content-comment-background: $grey900;
-$track-content-comment-textarea-background: $grey1100;
-
-// playlist.scss
-$playlist-sidebar-background: $grey1150;
-
-// track_player.scss
-$big-player-seekbar-background: $grey200;
-$track-player-background: $grey1000;
-$track-player-play-button-background: $grey1100;
-$big-player-time-text: $black;
-$big-player-time-total-text: $grey800;
-
-// track_content.scss
-$track-content-child-background: $grey1100;
-$track-content-hr-background: $grey500;
-
-$track-edit-text: $grey50;
-$track-edit-border: $grey500;
-$track-edit-border-focus: $grey500;
-
-$track-edit-new-version-note-text: $grey1000;
-
-$track-content-spam-background: $white;
-$track-content-spam-text: $accent;
-
-$track-content-artist-text: $grey800;
-
-// track_social.scss
-$track-social-heading-text: $grey1000;
-
-// playlist_cover_view.scss
-$playlist-options-background: $grey1000;
-$playlist-options-link-background: $grey1000; 
-$playlist-options-link-background-hover: $black; 
-$playlist-options-link-border: $black;
-$playlist-options-link-text: $grey1100; 
-$playlist-options-link-action-text: $grey800;
-
-// playlist_sidebar.scss
-$playlist-sidebar-artist-text: $grey50;
-
-$tracklist-track-text: $grey1100;
-$tracklist-position-text: $grey1000;
-$tracklist-time-text: $grey1000;
-$tracklist-track-border: $grey50;
-$tracklist-track-background-active: $grey1000;
-$sidebar-link-background: $grey1000;
-$sidebar-link-background-hover: $grey1000;
-
-$sidebar-link-text: $grey800;
-$sidebar-link-action-text: $grey800;
+// users_index.scss
+$user-card-background: $grey1100;
 
 // user.scss
 $user-header-avatar-border: $black;
@@ -227,9 +188,23 @@ $user-mod-stats-heading-text: $grey1000;
 $user-mod-stats-background: $grey900;
 $user-mod-stats-agent-border: $white;
 $user-actions-area-background: $grey900;
+ 
+// static_pages.scss
+$static-page-heading-background: $grey1150;
+$static-page-heading-text: $grey100;
+$static-page-content-background: $grey1100;
+$static-page-h2-text: $orange300; 
+$static-page-paragraph-text: $grey400;
+$static-page-content-seperator: $grey1150;
+$static-page-anchor: $grey1000;
+$static-page-anchor-hover: $orange300;
+$static-page-anchor-visited: $grey400;
 
 // user_playlists.scss
 $user-playlists-sort-instructions: $grey800;
+
+// upload.scss
+$upload-asset-background: $grey1000;
 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
@@ -258,19 +233,55 @@ $edit-playlist-drag-handle-border-active: $accent;
 $edit-playlist-playlist-size-background: $grey1000;
 $edit-playlist-playlist-size-text: $grey800;
 
-// playlists.scss
-$card-background: $grey1100;
-$card-private-background: $grey300;
-$card-private-text: $black;
-$card-title-font: 'Alright-v2-Normal-Medium', sans-serif;
-$card-title-weight: normal;
-$card-title-text: $white; 
-$card-artist-font: 'Alright-v2-Normal', sans-serif;
-$card-artist-weight: bold;
-$card-artist-text: $orange300;
-$card-by-font: 'Alright-v2-Normal', sans-serif;
-$card-by-weight: bold;
-$card-by-text: $grey800;
+// playlist.scss
+$playlist-sidebar-background: $grey1150;
+
+// playlist_sidebar.scss
+$playlist-sidebar-artist-text: $grey50;
+
+$tracklist-track-text: $grey1100;
+$tracklist-position-text: $grey1000;
+$tracklist-time-text: $grey1000;
+$tracklist-track-border: $grey50;
+$tracklist-track-background-active: $grey1000;
+$sidebar-link-background: $grey1000;
+$sidebar-link-background-hover: $grey1000;
+
+$sidebar-link-text: $grey800;
+$sidebar-link-action-text: $grey800;
+
+// playlist_cover_view.scss
+$playlist-options-background: $grey1000;
+$playlist-options-link-background: $grey1000; 
+$playlist-options-link-background-hover: $black; 
+$playlist-options-link-border: $black;
+$playlist-options-link-text: $grey1100; 
+$playlist-options-link-action-text: $grey800;
+
+// track_content.scss
+$track-content-child-background: $grey1100;
+$track-content-hr-background: $grey500;
+
+$track-edit-text: $grey50;
+$track-edit-border: $grey500;
+$track-edit-border-focus: $grey500;
+
+$track-edit-new-version-note-text: $grey1000;
+
+$track-content-spam-background: $white;
+$track-content-spam-text: $accent;
+
+$track-content-artist-text: $grey800;
+
+// track_player.scss
+$big-player-seekbar-background: $grey200;
+$track-player-background: $grey1000;
+$track-player-play-button-background: $grey1100;
+$big-player-time-text: $black;
+$big-player-time-total-text: $grey800;
+
+// track_social.scss
+$track-social-heading-text: $grey1000;
 
 // admin.scss
 $admin-search-text: $grey50;
@@ -292,14 +303,3 @@ $admin-user-ip-text: $grey50;
 // secretz.scss
 $secretz-row-background: $grey1100;
 $secretz-odd-row-background: $grey1000;
-
-// upload.scss
-$upload-asset-background: $grey1000;
-
-// users_index.scss
-$user-card-background: $grey1100;
-
-// pagination.scss
-$mini-paginator-background: $grey1100;
-$pagy-link-text: $grey800;
-$pagy-link-text-active: $accent;
