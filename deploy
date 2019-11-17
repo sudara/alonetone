@@ -12,7 +12,9 @@ echo
 # handle git and bundle install
 ssh alonetone '
   cd /data/alonetone;
-
+  source /etc/profile;
+  source ~/.profile;
+  
   if [[ $(sudo -u deploy git diff) > "" ]];
     then
       echo "WARNING: local changes on server, exiting!";
