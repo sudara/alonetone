@@ -5,9 +5,8 @@ footer#site_footer {
   font-weight: normal;
   line-height: 20px;
   width: 100%;
-  padding-top: 24px;
   color: $font-color-two;
-  background-color: $background-color-three;
+  padding-top: $baseline;
   h3 {
     color: $footer-forum-topics-accent;
     line-height: 1.2;
@@ -38,8 +37,8 @@ footer#site_footer {
     }
   }
   .footer_forum_topics {
-    background-color: rgba(255, 255, 255, 0.5);
-    padding-bottom: 24px;
+    padding-bottom: $baseline;
+    background-color: $footer-forum-topics-background;
     .footer_forum_topics_inner {
       width: 952px;
       margin-right: auto;
@@ -83,7 +82,7 @@ footer#site_footer {
           width: 234px;
           height: 64px;
           border-radius: 3px;
-          background-color: $background-color-one;
+          background-color: $footer-forum-topics-link-background;
           box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.05);
           @media #{$footer-collapse} {
             width: 100%;
@@ -96,6 +95,7 @@ footer#site_footer {
             line-height: 1.2;
             height: 64px;
             box-sizing: border-box;
+            color: $footer-forum-topics-link-text;
           }
           div {
             position: absolute;
@@ -136,9 +136,9 @@ footer#site_footer {
         margin-right: 2px;
         width: 236px;
         min-width: 150px;
-        background-color: $background-color-five;
+        background-color: $footer-bottom-column-background;
         border-radius: 3px;
-        color: $font-color-seven;
+        color: $footer-bottom-link-text;
         line-height: 20px;
         padding: 16px;
         box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.05), 0px 4px 8px rgba(0, 0, 0, 0.25);
