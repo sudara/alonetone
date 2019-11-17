@@ -174,5 +174,18 @@ module ApplicationHelper
   def svg_path(svg)
     File.join(Rails.root, 'app', 'assets', 'images', svg)
   end
+
+  def theme_name
+    session[:theme] || 'light'
+  end
+
+  def light_theme?
+    theme_name == 'light'
+  end
+
+  def dark_theme?
+    theme_name == 'dark'
+  end
+
   protected
 end
