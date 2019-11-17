@@ -35,13 +35,12 @@ RSpec.describe 'playlists', type: :feature, js: true do
         find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
         find('.play_button_container a').click # pause
 
-        sleep 50
         # The time between seeking and pausing is variable
         # So we manually adjust the playhead end state to the exact
         # same position for the percy snap.
         Percy.snapshot(page,
           name: 'Playlist Track Play, Seek, Pause',
-          percy_css: '.progress_container_inner { left: 40% !important; }')
+          percy_css: '.progress_container_inner { left: 35% !important; }')
       end
     end
   end
