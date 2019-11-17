@@ -1,11 +1,14 @@
 import { Controller } from 'stimulus'
 import { TweenMax } from 'gsap/all'
+import Rails from '@rails/ujs'
 
 export default class extends Controller {
-  static targets = ['menu', 'header']
+  static targets = ['menu', 'header', 'switchToLight', 'switchToDark']
 
   initialize() {
     this.currentlyOpen = false
+    this.lightStyles = document.querySelectorAll('link')[0]
+    this.darkStyles = document.querySelectorAll('link')[1]
   }
 
   open(e) {
@@ -41,5 +44,27 @@ export default class extends Controller {
   clickOutsideMenu(e) {
     return (!this.menuTarget.contains(e.target) // outside whole menu
       || this.headerTarget.contains(e.target)) // inside header
+  }
+
+  switchToLight(e) {
+    this.toggleTheme(e)
+    this.switchToLightTarget.style.display = 'none'
+    this.switchToDarkTarget.style.display = 'block'
+  }
+
+  switchToDark(e) {
+    this.toggleTheme(e)
+    this.switchToLightTarget.style.display = 'block'
+    this.switchToDarkTarget.style.display = 'none'
+  }
+
+  toggleTheme(e) {
+    e.stopImmediatePropagation()
+    Rails.ajax({
+      url: "/toggle_theme",
+      type: "PUT"
+    })
+    this.lightStyles.disabled = !this.lightStyles.disabled
+    this.darkStyles.disabled = !this.lightStyles.disabled
   }
 }
