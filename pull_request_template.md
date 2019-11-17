@@ -24,6 +24,7 @@ These checklists are to help ensure the code review basics are covered. Consider
 
 * [ ] Update title and description to account for additional changes
 * [ ] All tests green
+* [ ] Migrations were tested locally and do the right thing
 * [ ] Booted up the branch locally, exercised any new code
 * [ ] Percy changes are purposeful or explained
 * [ ] Css changes are happy on mobile (via Percy is ok)

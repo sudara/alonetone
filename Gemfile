@@ -27,7 +27,6 @@ gem 's3_direct_upload'
 
 # active record
 gem 'acts_as_list'
-gem 'has_permalink'
 gem 'authlogic'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic

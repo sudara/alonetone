@@ -231,8 +231,7 @@ main {
       flex-wrap: wrap;
       background-color: $background-color-one;
       @include samo-shadow-and-radius();
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15),
-        0px 6px 24px rgba(134, 134, 134, 0.75);
+      box-shadow: $user-card-shadow;
       overflow: hidden;
       @media #{$one-column} {
         flex-direction: column;

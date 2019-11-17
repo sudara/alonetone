@@ -29,7 +29,7 @@
   .playlist_sidebar {
     @include samo-shadow-and-radius();
     position: relative;
-    background-color: white;
+    background-color: $playlist-sidebar-background;
     min-width: 300px;
     max-width: 450px;
     width: 35%;

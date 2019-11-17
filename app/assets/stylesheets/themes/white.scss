@@ -29,34 +29,31 @@ $accent: $orangetone;
 
 $warning: $red600;
 
-$private-message-flag-background: $orange100;
-$private-message-flag-text: $orange800;
+$admin-spam-row-background: $orange100;
 
+$big-player-seekbar-color: $grey200;
+
+// variables.scss
+$default-button-background: $grey500;
+$default-button-background-hover: $grey800;
+$primary-button-background-hover: $orange600;
+$primary-button-background-active: $orange800;
+
+// shared.scss
 $private-message-warning-background: $red500;
 $private-message-warning-border: $red600;
 $private-message-warning-text: $orange100;
 
+// notifications.scss
 $ajax-fail-border: $red600;
 $ajax-fail-text: $red800;
-
 $ajax-success-border: $green400;
 $ajax-success-text: $green600;
 
-$about-stats-heading-text: $red600;
-
-$admin-spam-row-background: $orange100;
-
-$footer-forum-topics-accent: $orange600;
-$footer-bottom-background: $grey1100;
-$footer-bottom-link-text: $white;
-
-$edit-playlist-track-button-background: $grey200;
-$edit-playlist-track-button-background-hover: $grey800;
-
-$default-button-background: $grey500;
-$default-button-background-hover: $grey800;
-
-$big-player-seekbar-color: $grey200;
+// forms.scss
+$forms-label-text: $grey500;
+$forms-input-text: $black;
+$forms-border: $grey50;
 
 // site_header.scss
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
@@ -71,15 +68,22 @@ $site-header-user-dropdown-logout-text: $white;
 $site-header-user-dropdown-list-item-background: $grey50;
 $site-header-user-dropdown-list-item-text: $grey1000;
 
+// site_footer.scss
+$site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
+
+$footer-forum-topics-accent: $orange600;
+$footer-forum-topics-background: $grey25;
+$footer-forum-topics-link-background: $white;
+$footer-forum-topics-link-text: $black;
+$footer-bottom-background: $grey1100;
+$footer-bottom-column-background: $grey1000;
+$footer-bottom-link-text: $white;
+
 // sub_nav.scss
 $sub-nav-background: $grey100;
 $sub-nav-text: $grey1000;
 $sub-nav-text-hover: $grey1000;
 $sub-nav-current-background: $orange600;
-
-// variables.scss
-$primary-button-background-hover: $orange600;
-$primary-button-background-active: $orange800;
 
 // static_pages.scss
 $static-page-heading-background: $grey100-alpha50;
@@ -91,3 +95,63 @@ $static-page-content-seperator: $grey50;
 $static-page-anchor: $grey400;
 $static-page-anchor-hover: $orangetone;
 $static-page-anchor-visited: $orange1000;
+
+// tracks.scss
+$track-open-box-shadow: 0 11px 19px 4px #6566667a;
+$track-background: $white;
+$track-border-bottom: $grey100;
+$track-time-text: $grey800;
+$track-artist-text: $grey800;
+$track-reveal-top-background: $grey50; 
+$track-description-text: $grey900;
+$track-created-text: $grey500;
+$track-view-more-text: $orange600;
+$track-stats-text: $grey800;
+$track-stats-icon-background: $grey500;
+$track-favorited-when-text: $grey800;
+
+// comments.scss
+$comment-as-text: $grey600;
+$comment-as-guest-text: $grey900;
+$comment-as-user-text: $orange600;
+$comment-form-background: $grey50;
+$comment-form-border: $grey200;
+$comment-form-border-focus: $grey400;
+$comment-form-text: $black;
+$comment-make-private-text: $grey800;
+$comment-submit-background: $orangetone;
+$comment-submit-text: $white;
+$comment-background: $grey50;
+$comment-right-background: $white;
+$comment-user-text: $grey900;
+$comment-ip-text: $grey800;
+$comment-body-text: $grey1000;
+$private-message-flag-background: $orange100;
+$private-message-flag-text: $orange800;
+$comment-spam-text: $orangetone;
+$comment-delete-text: $red600;
+
+// playlist.scss
+$playlist-sidebar-background: $white;
+
+// track_content.scss
+$track-content-child-background: $white;
+
+// user.scss
+$user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
+
+// playlist_edit.scss
+$edit-playlist-track-button-background: $grey200;
+$edit-playlist-track-button-background-hover: $grey800;
+
+// playlists.scss
+$card-background: $white;
+$card-title-font: 'Alright-v2-Normal', sans-serif;
+$card-title-weight: bold; 
+$card-title-text: $black; 
+$card-by-font: 'Alright-v2-Normal', sans-serif;
+$card-by-weight: normal;
+$card-by-text: $grey800;
+$card-artist-font: 'Alright-v2-Normal-Medium', sans-serif;
+$card-artist-weight: normal;
+$card-artist-text: $orange600;

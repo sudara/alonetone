@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   # Storage models can generate URLs out of the view context. This is mostly
   # used in development because in production we use CloudFront URLs.
   include ActiveStorage::SetCurrent
-  include AuthlogicHelpers
+  include Authentication
+  include Authorization
   include Pagy::Backend
   include PreventAbuse
 
