@@ -15,7 +15,7 @@ $body-background: $grey50;
 
 $box-background: $white;
 
-$box-h2-bottom-border: $grey800;
+$box-h2-bottom-border: $grey100;
 
 $back-to-text: $grey900;
 $back-to-background: $white;
@@ -134,7 +134,7 @@ $profile-link-background: $grey100;
 $profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
 $site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
 
-$site-header-input-background: $grey900;
+$site-header-input-background: $grey100;
 $site-header-input-background-focus: $white;
 
 $site-header-input-text: $grey1000;
@@ -216,8 +216,6 @@ $edit-playlist-private-label-checkbox: $grey900;
 
 $edit-playlist-info-bottom-border: $grey50;
 
-$edit-playlist-instructions-text: $grey800;
-
 $edit-playlist-column-header-border: $grey100;
 $edit-playlist-column-header-text: $grey800;
 $edit-playlist-left-column-dash-text: $grey100;
@@ -239,7 +237,8 @@ $playlist-sidebar-background: $white;
 // playlist_sidebar.scss
 $playlist-sidebar-artist-text: $grey1000;
 
-$tracklist-track-text: $grey50;
+$tracklist-track-text: $grey1000;
+$tracklist-track-text-active: $grey50;
 $tracklist-position-text: $grey500;
 $tracklist-time-text: $grey500;
 $tracklist-track-border: $grey50;

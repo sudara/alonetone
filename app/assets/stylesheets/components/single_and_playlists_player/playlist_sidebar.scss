@@ -45,9 +45,9 @@
       &.active {
         background-color: $tracklist-track-background-active;
         a.position_name_time {
-          color: $tracklist-track-text;
+          color: $tracklist-track-text-active;
           span.track_name {
-            color: $tracklist-track-text;
+            color: $tracklist-track-text-active;
           }
           span.track_position {
             color: $tracklist-position-text;
