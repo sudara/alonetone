@@ -3,6 +3,7 @@ class Track < ActiveRecord::Base
 
   belongs_to :playlist, counter_cache: true, touch: true
   belongs_to :asset
+  belongs_to :asset, counter_cache: :favorites_count
   belongs_to :user
 
   scope :recent, -> { order('tracks.created_at DESC') }
