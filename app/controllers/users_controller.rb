@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
+  before_action :find_user, except: %i[new create index activate sudo]
   before_action :require_login, except: %i[index show new create activate destroy]
 
   def index
@@ -88,14 +88,6 @@ class UsersController < ApplicationController
       @profile = @user.profile
       render action: :edit
     end
-  end
-
-  def toggle_favorite
-    asset = Asset.published.find(params[:asset_id])
-    return false unless logged_in? && asset # no bullshit
-
-    current_user.toggle_favorite(asset)
-    head :ok
   end
 
   def destroy

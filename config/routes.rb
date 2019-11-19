@@ -83,8 +83,6 @@ Alonetone::Application.routes.draw do
   get 'comments' => 'comments#index', :as => 'all_comments'
   get 'playlists' => 'playlists#all', :as => 'all_playlists'
 
-  get 'toggle_favorite' => 'users#toggle_favorite'
-
   match 'search' => 'search#index', via: [:get, :post]
   match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
 

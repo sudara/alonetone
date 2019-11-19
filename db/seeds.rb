@@ -270,5 +270,5 @@ end
 20.times do
   user = User.random_order.first
   asset = Asset.where.not(user_id: user.id).random_order.first
-  user.toggle_favorite(asset)
+  user.tracks.favorites.create(asset_id: asset.id)
 end
