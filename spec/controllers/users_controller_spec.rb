@@ -212,31 +212,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  context "favoriting" do
-    let(:asset) { assets(:valid_mp3_2) }
-    subject { get :toggle_favorite, params: { asset_id: asset.id }, xhr: true }
-
-    it 'should not let a guest favorite a track' do
-      expect { subject }.to change { Track.count }.by(0)
-      expect(response).not_to be_successful
-    end
-
-    it 'should let a user favorite a track' do
-      login(:arthur)
-      expect { subject }.to change { Track.count }.by(1)
-      expect(users(:arthur).tracks.favorites.collect(&:asset)).to include(asset)
-      expect(response).to be_successful
-    end
-
-    it 'should let a user unfavorite a track' do
-      login(:arthur)
-      expect { subject }.to change { Track.count }.by(1)
-      get :toggle_favorite, params: { asset_id: asset.id }, xhr: true # toggle again
-      expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(asset)
-      expect(response).to be_successful
-    end
-  end
-
   context "sudo" do
     it "should not let a normal user sudo" do
       controller.session[:return_to] = '/users'

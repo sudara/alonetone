@@ -231,16 +231,6 @@ class User < ApplicationRecord
       last_login_ip, current_login_ip, last_login_ip, current_login_ip).pluck(:id)
   end
 
-  def toggle_favorite(asset)
-    existing_track = tracks.favorites.where(asset_id: asset.id).first
-    if existing_track
-      existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
-    else
-      tracks.favorites.create(asset_id: asset.id)
-      Asset.increment_counter(:favorites_count, asset.id, touch: true)
-    end
-  end
-
   def brand_new?
     created_at > 24.hours.ago
   end
