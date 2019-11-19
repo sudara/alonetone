@@ -79,7 +79,7 @@ module UsersHelper
   end
 
   def favorite_toggle(asset)
-    link_to('add to favorites', toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites')
+    link_to('add to favorites', user_favorite_path(user_id: current_user.id, asset_id: asset.id), class: 'add_to_favorites')
   end
 
   def follow_toggle(user)
