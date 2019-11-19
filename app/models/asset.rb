@@ -36,6 +36,11 @@ class Asset < ApplicationRecord
   has_one :audio_feature, dependent: :destroy
   accepts_nested_attributes_for :audio_feature
   has_many :tracks,    dependent: :destroy
+  # needed for counter cache
+  has_many :favorites,
+    -> { where('tracks.is_favorite' => true) },
+    class_name: 'Track'
+
   has_many :playlists, through: :tracks
   has_many :listens,   -> { order('listens.created_at DESC') }, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
