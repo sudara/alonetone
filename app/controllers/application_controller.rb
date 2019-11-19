@@ -77,6 +77,11 @@ class ApplicationController < ActionController::Base
     track_not_found unless @asset.published? || current_user_is_admin_or_owner?(@asset.user)
   end
 
+  def track_not_found
+    flash[:error] = "Hmm, we didn't find that track!"
+    raise ActionController::RoutingError, 'Track Not Found'
+  end
+
   def find_playlists
     @playlist = @user.playlists.find(permalink: (params[:permalink] || params[:id]), include: [tracks: :asset]).first
     @playlist = @user.playlists.find(params[:id], include: [tracks: :asset]) if !@playlist && params[:id]
