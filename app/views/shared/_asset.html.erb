@@ -18,7 +18,7 @@
     </div>
     <% if logged_in? %>
       <div class="track_favorite">
-      <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
+      <%= link_to user_favorite_path(user_id: current_user.login, asset_id: @asset.id), remote: true, class: 'add_to_favorites',
           data: {controller: 'favorite', action: 'favorite#toggle' } do %>
           <%== render file: svg_path('svg/animation_heart.svg') %>
       <% end %>
