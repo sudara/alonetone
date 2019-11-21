@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus'
 import { TweenMax } from 'gsap/all'
+import Turbolinks from 'turbolinks'
 import Rails from '@rails/ujs'
 
 export default class extends Controller {
@@ -66,5 +67,6 @@ export default class extends Controller {
     })
     this.lightStyles.disabled = !this.lightStyles.disabled
     this.darkStyles.disabled = !this.lightStyles.disabled
+    Turbolinks.clearCache()
   }
 }
