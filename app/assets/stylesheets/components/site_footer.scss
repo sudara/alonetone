@@ -5,7 +5,6 @@ footer#site_footer {
   font-weight: normal;
   line-height: 20px;
   width: 100%;
-  color: $font-color-two;
   padding-top: $baseline;
   h3 {
     color: $footer-forum-topics-accent;
@@ -29,7 +28,7 @@ footer#site_footer {
     div {
       margin-top: 6px;
       margin-bottom: 14px;
-      color: $font-color-four;
+      color: $footer-alonetoners-text;
       line-height: 1.2;
       font-size: 12px;
       font-family: $medium-sans-font;
@@ -100,7 +99,7 @@ footer#site_footer {
           div {
             position: absolute;
             font-family: $sans-font;
-            color: $font-color-four;
+            color: $footer-forum-topics-artist-text;
             font-size: 12px;
             display: inline-block;
             pointer-events: none;
