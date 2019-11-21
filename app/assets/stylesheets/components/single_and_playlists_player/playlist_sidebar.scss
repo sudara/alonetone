@@ -19,6 +19,7 @@
     margin-top: $baseline;
     margin-bottom: 0;
     text-align: center;
+    font-size: 16px;
     font-family: $sans-font;
     font-weight: bold;
   }
@@ -29,6 +30,9 @@
     margin-top: -2px;
     text-align: center;
     color: $playlist-sidebar-artist-text;
+    by {
+
+    }
   }
   ul.tracklist {
     margin-top: $baseline / 2;
@@ -38,6 +42,9 @@
       overflow: auto;
       min-height: 35px;
       border-top: 1px solid $tracklist-track-border;
+      &:first-child {
+        border-top: 0;
+      }
       &:last-child {
         border-bottom: 1px solid $tracklist-track-border;
       }
