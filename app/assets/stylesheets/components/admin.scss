@@ -20,10 +20,10 @@
         display: block;
 				&.current {
           background-color: $accent;
-          color: $font-color-seven;
+          color: $admin-nav-item-current-text;
           padding-left: 12px;
           span {
-            color: $font-color-seven;
+            color: $admin-nav-item-current-text;
           }
 				}
         &:hover {
@@ -37,13 +37,13 @@
 					display: block;
 					box-sizing: border-box;
           &:hover {
-            background: $background-color-four;
+            background: $admin-nav-item-background-hover;
             text-decoration: none;
           }
         }
         span {
           float: right;
-          color: $font-color-five;
+          color: $admin-nav-item-total-text;
           font-size: 12px;
           padding-right: 12px;
         }
@@ -78,11 +78,11 @@
         padding-left: 8px;
         padding-top: 3px;
         box-sizing: border-box;
-        color: $font-color-two;
+        color: $admin-search-text;
         border: 1px solid #DDDDDD;
         border-radius: 5px;
         margin-bottom: 12px;
-        background-color: $background-color-one;
+        background-color: $admin-search-background;
       }
     }
     
@@ -101,13 +101,13 @@
       header.admin_users_header,
       header.admin_assets_header {
         display: flex;
-        border-bottom: 1px solid $border-color-two;
+        border-bottom: 1px solid $admin-header-border;
         padding-left: $baseline / 2;
         padding-right: $baseline / 2;
         div {
           font-family: $medium-sans-font;
           padding-bottom: $baseline / 2;
-          color: $font-color-two;
+          color: $admin-column-heading-text;
         }
       }
 
@@ -116,7 +116,7 @@
       .admin_assets_rows {
         > div {
           display: flex;
-          border-top: 1px solid $border-color-four;
+          border-top: 1px solid $admin-row-border;
           padding: $baseline / 2 0;
           padding-left: $baseline / 2;
           padding-right: $baseline / 2;
@@ -124,8 +124,8 @@
             border-top: 0;
           }
           &.deleted {
-              background-color: $background-color-three;
-              box-shadow: inset 0 0 3px $border-color-two;
+              background-color: $admin-deleted-row-background;
+              box-shadow: inset 0 0 3px $admin-header-border;
               input[value~='Restore'] {
                 background-color: $accent;
                 opacity: 1;
@@ -133,7 +133,7 @@
           }
           &.spam {
             background-color: $admin-spam-row-background;
-            box-shadow: inset 0 0 3px $border-color-two;
+            box-shadow: inset 0 0 3px $admin-header-border;
           }
         }
       }
@@ -142,7 +142,7 @@
         .deleted_at_date {
           margin-top: 5px;
           font-size: 12px;
-          color: $font-color-two;
+          color: $admin-deleted-at-text;
         }
       }
       .user_column {
@@ -177,7 +177,7 @@
             margin-bottom: 5px;
           }
           div:last-child {
-            color: $font-color-two;
+            color: $admin-user-ip-text;
             font-size: 13px;
             line-height: 1.1;
             a {
@@ -199,19 +199,18 @@
           word-break: break-all;
         }
         div:nth-child(2) {
-          color: $font-color-two;
+          color: $admin-default-data-text;
           font-size: 13px;
           line-height: 1.1;
           word-break: break-all;
           margin-bottom: 5px;
         }
         div:nth-child(3) {
-          color: $font-color-two;
+          color: $admin-default-data-text;
           font-size: 11px;
           line-height: 1.1;
           word-break: break-all;
           font-style: italic;
-
         }
       }
       .bio_column,

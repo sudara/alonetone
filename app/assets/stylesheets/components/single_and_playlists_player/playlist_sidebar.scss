@@ -28,7 +28,7 @@
     font-weight: normal;
     margin-top: -2px;
     text-align: center;
-    color: $font-color-two;
+    color: $playlist-sidebar-artist-text;
   }
   ul.tracklist {
     margin-top: $baseline / 2;
@@ -37,23 +37,23 @@
       clear: both;
       overflow: auto;
       min-height: 35px;
-      border-top: 1px solid $border-color-five;
+      border-top: 1px solid $tracklist-track-border;
       &:last-child {
-        border-bottom: 1px solid $border-color-five;
+        border-bottom: 1px solid $tracklist-track-border;
       }
       &:hover,
       &.active {
-        background-color: $background-color-five;
+        background-color: $tracklist-track-background-active;
         a.position_name_time {
-          color: $font-color-six;
+          color: $tracklist-track-text-active;
           span.track_name {
-            color: $font-color-six;
+            color: $tracklist-track-text-active;
           }
           span.track_position {
-            color: $font-color-five;
+            color: $tracklist-position-text-active;
           }
           span.time_text {
-            color: $font-color-five;
+            color: $tracklist-time-text-active;
           }
         }
       }
@@ -69,9 +69,6 @@
         margin-right: 4px;
         margin-left: 0;
         padding: 4px 3px 5px 6px;
-        &:hover {
-          color: $font-color-seven;
-        }
       }
       a.play_button {
         i {
@@ -98,17 +95,18 @@
         padding-bottom: 8px;
         white-space: nowrap;
         text-decoration: none;
-        color: $font-color-two;
+        
         flex-grow: 1;
         span.track_position {
           display: block;
           float: left;
           font-variant-numeric: tabular-nums;
           margin-right: 4px;
-          color: $font-color-four;
+          color: $tracklist-position-text;
           min-width: 21px;
         }
         span.track_name {
+          color: $tracklist-track-text;
           font-family: $medium-sans-font;
           display: block;
           overflow: hidden;
@@ -121,7 +119,7 @@
           font-size: 12px;
           margin-right: 12px;
           font-variant-numeric: tabular-nums;
-          color: $font-color-four;
+          color: $tracklist-time-text;
         }
       }
     }
@@ -135,11 +133,11 @@
       margin-top: 0;
       margin-bottom: 0;
       li {
-        background-color: $background-color-five;
+        background-color: $sidebar-link-background;
         overflow: auto;
         border-bottom: 1px solid black;
         &:hover {
-          background-color: $background-color-five;
+          background-color: $sidebar-link-background-hover;
         }
         a {
           font-family: $sans-font;
@@ -150,7 +148,7 @@
           width: 100%;
           padding: 10px $baseline / 2;
           text-decoration: none;
-          color: white;
+          color: $sidebar-link-text;
           i {
             background-image: image-url("svg/icon_playlist_link.svg");
             display: inline-block;
@@ -184,7 +182,7 @@
           .action_text {
             font-size: 10px;
             float: right;
-            color: $font-color-four;
+            color: $sidebar-link-action-text;
             position: relative;
             top: 3px;
           }

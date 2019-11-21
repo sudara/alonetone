@@ -60,8 +60,8 @@
       .edit_link + .edit_link {
         margin-left: 6px;
         text-transform: uppercase;
-        background-color: $background-color-one;
-        color: $accent;
+        background-color: $track-content-spam-background;
+        color: $track-content-spam-text;
       }
     }
     .download_link {
@@ -104,7 +104,7 @@
     }
     h3 {
       margin-top: -16px;
-      color: $font-color-four;
+      color: $track-content-artist-text;
     }
     p {
       font-size: 16px;
@@ -124,7 +124,7 @@
       .created {
         font-size: 14px;
         display: block;
-        color: $font-color-five;
+        color: $track-stats-created-text;
         flex-grow: 1;
         time {
           font-weight: bold;
@@ -167,14 +167,14 @@
       margin: ($baseline * 1.5) auto;
       text-align: center;
       border: 0;
-      border-bottom: 1px solid $border-color-two;
+      border-bottom: 1px solid $track-content-hr-background;
       &:after {
         position: absolute;
         top: -0.55em;
         left: 265px;
         display: block;
         content: "\f025"; // with headphone icon
-        color: $border-color-two;
+        color: $track-content-hr-background;
         background-color: white; // interrupt hr
         -webkit-font-smoothing: antialiased;
       }
@@ -237,11 +237,11 @@
       margin-bottom: $baseline;
       padding: $baseline / 2;
       word-wrap: break-word;
-      color: $font-color-two;
-      border: 1px solid $border-color-two;
+      color: $track-edit-text;
+      border: 1px solid $track-edit-border;
       background-color: transparent;
       &:focus {
-        border: 1px solid $border-color-two;
+        border: 1px solid $track-edit-border-focus;
       }
       @media #{$one-column} {
         font-size: 16px;
@@ -263,7 +263,7 @@
           margin-top: 0;
           font-size: 12px;
           line-height: 16px;
-          color: $font-color-five;
+          color: $track-edit-new-version-note-text;
           max-width: 400px;
         }
       }
