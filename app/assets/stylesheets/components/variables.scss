@@ -139,6 +139,12 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   font-weight: bold;
 }
 
+@mixin title28() {
+  font-size: 28px;
+  font-family: $sans-font;
+  font-weight: bold;
+}
+
 @mixin title18() {
   font-size: 18px;
   font-family: $sans-font;

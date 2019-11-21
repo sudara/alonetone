@@ -98,9 +98,11 @@
       max-width: 100%;
     }
     h1 {
-      font-size: $baseline;
       margin-top: 0;
       line-height: 32px;
+      @include title28();
+      color: $track-content-track-text;
+
     }
     h3 {
       margin-top: -16px;
