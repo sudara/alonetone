@@ -47,6 +47,18 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15)
 }
 
+@mixin shadow1() {
+  box-shadow: 0px 1px 2px rgba(53, 53, 53, 0.15);
+}
+
+@mixin shadow1inner() {
+  box-shadow: inset 0px .5px 1.5px rgba(0, 0, 0, 0.33);
+}
+
+@mixin shadow2() {
+  box-shadow: 0px 2px 4px rgba(53, 53, 53, 0.25);
+}
+
 @mixin default-button($type: '') {
   font-family: $sans-font;
   font-size: 12px;
@@ -58,7 +70,7 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   padding: 0 16px;
   text-align: center;
   text-decoration: none;
-  color: $font-color-seven;
+  color: $default-button-text;
   border: 0;
   border-radius: 4px;
   background-color: $default-button-background;
@@ -115,22 +127,6 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   }
 }
 
-@mixin shadow-one() {
-  box-shadow: 0px 1px 2px rgba(53, 53, 53, 0.15);
-}
-
-@mixin shadow-one-inner() {
-  box-shadow: inset 0px .5px 1.5px rgba(0, 0, 0, 0.33);
-}
-
-
-@mixin shadow2() {
-  box-shadow: 0px 2px 4px rgba(53, 53, 53, 0.25);
-}
-
-
-
-
 @mixin title36() {
   font-size: 36px;
   font-family: $sans-font;
@@ -139,6 +135,12 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
 
 @mixin title24() {
   font-size: 24px;
+  font-family: $sans-font;
+  font-weight: bold;
+}
+
+@mixin title18() {
+  font-size: 18px;
   font-family: $sans-font;
   font-weight: bold;
 }

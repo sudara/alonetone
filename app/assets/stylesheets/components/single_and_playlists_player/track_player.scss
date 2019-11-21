@@ -4,11 +4,11 @@
   width: 100%;
   height: 80px;
   margin-bottom: 24px;
-  background-color: $background-color-three;
+  background-color: $track-player-background;
   .play_button_container {
     min-width: 80px;
     height: 80px;
-    background-color: $background-color-one;
+    background-color: $track-player-play-button-background;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     .play_button, .pause_button {
@@ -57,26 +57,12 @@
       width: 1px;
       height: 100%;
       display: none;
-      background-color: $big-player-seekbar-color;
+      background-color: $big-player-seekbar-background;
     }
     &:hover .seekbar {
       display: block;
     }
   }
-  .time {
-    position: absolute;
-    display: block;
-    top: 0px;
-    right: 0px;
-    padding-top: 2.5px;
-    height: 13px;
-    width: 80px;
-    font-size: 10px;
-    font-variant-numeric: tabular-nums;
-    text-align: center;
-    color: $font-color-four;
-  }
-
   .progress_container {
     position: absolute;
     pointer-events: none;
@@ -109,7 +95,7 @@
         background-color: $accent;
         font-variant-numeric: tabular-nums;
         text-align: center;
-        color: $font-color-seven;
+        color: $big-player-time-text;
         font-family: $medium-sans-font;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
@@ -117,7 +103,6 @@
       }
     }
   }
-
   .time_total {
     position: absolute;
     display: block;
@@ -130,19 +115,8 @@
     z-index: -11;
     font-variant-numeric: tabular-nums;
     text-align: right;
-    color: $font-color-four;
+    color: $big-player-time-total-text;
     font-family: $medium-sans-font;
-  }
-
-  .download_button {
-    font-size: 20px;
-    position: absolute;
-    right: 0;
-    bottom: -2px;
-    a {
-      text-decoration: none;
-      color: $font-color-four;
-    }
   }
 }
 

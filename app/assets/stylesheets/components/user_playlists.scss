@@ -16,7 +16,7 @@ main {
       }
     }
     .sort_instructions {
-      color: $font-color-four;
+      color: $user-playlists-sort-instructions;
       margin: 8px 0;
       @media #{$mobile} {
         padding-left: 2.5%;
