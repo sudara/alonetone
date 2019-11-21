@@ -30,8 +30,8 @@
     margin-top: -2px;
     text-align: center;
     color: $playlist-sidebar-artist-text;
-    by {
-
+    .by {
+      color: $playlist-sidebar-artist-by-text;
     }
   }
   ul.tracklist {
