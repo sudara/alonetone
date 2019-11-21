@@ -35,8 +35,6 @@
     <% unless @playlist %>
       <h3><%= link_to @asset.user.name, user_home_path(@asset.user) %></h3>
     <% end %>
-    <%= markdown_with_html(@asset.description) %>
-
     <div class="track_stats">
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
       <div class="plays"><%= @asset.listens_count %>
@@ -50,6 +48,8 @@
         </i>
       </div>
     </div>
+
+    <%= markdown_with_html(@asset.description) %>
 
     <div>
       <%= markdown(@asset.credits) if @asset.credits.present? %>
