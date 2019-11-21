@@ -48,12 +48,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_theme
-    if logged_in? && current_user.dark_theme? # db is source of user truth
+    if logged_in? && current_user.dark_theme? # db is source of user truth, force set session
       session[:theme] = 'dark'
-    elsif session[:theme].nil? # if no theme is set
-      session[:theme] = 'light'
-    else # otherwise, respect the session
-      session[:theme]
+    else
+      session[:theme] ||= 'light' # roll with light as the default, or whatever is in session
     end
   end
 
