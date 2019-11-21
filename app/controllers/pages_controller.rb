@@ -83,6 +83,17 @@ class PagesController < ApplicationController
     end
   end
 
+  def toggle_theme
+    respond_to :js
+    if logged_in?
+      current_user.toggle! :dark_theme
+      session[:theme] = current_user.dark_theme? ? 'dark' : 'light'
+    else
+      session[:theme] = 'dark' if session[:theme] == 'light'
+      session[:theme] ||= 'light'
+    end
+  end
+
   protected
 
   def set_2009_albums

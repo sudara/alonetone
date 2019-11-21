@@ -118,7 +118,7 @@ william_shatner:
   playlists_count: 0
   assets_count: 0
   crypted_password: <%= scrypt('test' + salt) %>
-  use_old_theme: true
+  dark_theme: true
   created_at: <%= 1.month.ago %>
   updated_at: <%= 1.month.ago %>
 
@@ -131,7 +131,7 @@ deleted_yesterday:
   playlists_count: 1
   assets_count: 1
   crypted_password: <%= scrypt('test' + salt) %>
-  use_old_theme: true
+  dark_theme: true
   created_at: <%= 1.day.ago %>
   updated_at: <%= 1.day.ago %>
   deleted_at: <%= 1.hour.ago %>

@@ -48,7 +48,7 @@ Alonetone::Application.routes.draw do
   # admin stuff
   get 'admin' => 'admin#index'
   get 'secretz' => 'admin#secretz'
-  get 'toggle_theme' => 'admin#toggle_theme'
+  put 'toggle_theme' => 'pages#toggle_theme'
 
   get '404', to: "pages#four_oh_four"
   get '500', to: "pages#error"
