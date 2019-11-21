@@ -1,4 +1,4 @@
-#playlist-and-track-content-header {
+#playlist_and_track_content_header {
   max-width: $site_max_width;
   padding: 0 36px;
   box-sizing: border-box;
@@ -11,7 +11,7 @@
   }
 }
 
-#playlist-and-track-content {
+#playlist_and_track_content {
   display: flex;
   justify-content: center;
   max-width: $site_max_width;
@@ -26,10 +26,10 @@
     padding-left: 0;
     padding-right: 0;
   }
-  .playlist-sidebar {
+  .playlist_sidebar {
     @include samo-shadow-and-radius();
     position: relative;
-    background-color: white;
+    background-color: $playlist-sidebar-background;
     min-width: 300px;
     max-width: 450px;
     width: 35%;
@@ -44,7 +44,7 @@
       border-top-right-radius: 0px;
     }
   }
-  .track-content {
+  .track_content {
     flex: 1;
     min-width: 300px;
     @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column

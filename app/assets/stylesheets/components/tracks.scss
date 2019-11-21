@@ -4,25 +4,12 @@
   overflow: hidden;
   width: 100%;
   min-height: 57px;
-  border-bottom: 1px solid $border-color-four;
-  background-color: $background-color-one;
-  &.hover {
-    .playIconSymbol {
-      fill: $accent;
-    }
-    .asset_top {
-      .title_left_column_top {
-        color: $accent;
-      }
-      .time {
-        color: $accent !important;
-      }
-    }
-  }
+  background-color: $track-background;
+  border-bottom: 1px solid $track-border-bottom;
   &.open {
     position: relative;
     z-index: 2;
-    box-shadow: 0 11px 19px 4px #6566667a;
+    box-shadow: $track-open-box-shadow;
   }
   &:last-child {
     border-bottom: 0;
@@ -38,7 +25,6 @@
     outline: none;
   }
   &.draggable-mirror {
-    border: 1px solid $border-color-four;
     border-radius: 0;
     box-shadow: 0 0px 5px 1px #cccccc7a;
     z-index: 9999999;
@@ -56,7 +42,7 @@
       height: 5px;
       padding-top: 2px;
       padding-bottom: 2px;
-      background-color: $background-color-three;
+      background-color: $track-seekbar-loaded-background;
     }
     .played {
       height: 5px;
@@ -74,7 +60,7 @@
   .asset_top {
     position: relative;
     z-index: 1;
-    background-color: $background-color-one;
+    background-color: $track-background;
     .asset_top_row {
       display: flex;
       div.button {
@@ -100,7 +86,6 @@
         width: auto;
         height: 50px;
         padding-top: 13px;
-
         flex-grow: 1;
         .title_left_column {
           flex-grow: 1;
@@ -140,14 +125,13 @@
             bottom: 7px;
             display: block;
             text-align: right;
-            color: $font-color-four;
+            color: $track-time-text;
           }
         }
         a {
           font-size: 15px;
           font-weight: bold;
           text-decoration: none;
-
           -webkit-font-smoothing: antialiased;
         }
         .title_left_column_bottom {
@@ -163,7 +147,7 @@
         a.artist {
           font-size: 12px;
           font-weight: normal;
-          color: $font-color-four;
+          color: $track-artist-text;
           &:hover {
             text-decoration: underline;
           }
@@ -173,32 +157,6 @@
         span.popular {
           font-size: 12px;
           margin-left: 20px;
-        }
-      }
-      &.hover,
-      &.open {
-        div.button,
-        div.title {
-          background-color: $background-color-four;
-        }
-      }
-      &.playing {
-        div.button,
-        div.title {
-          background-color: $background-color-four;
-        }
-        div.button {
-          a {
-            background-position: -100px 0;
-          }
-        }
-        div.title {
-          div.counter {
-            opacity: 0.99;
-          }
-          div.time {
-            color: $accent;
-          }
         }
       }
     }
@@ -224,7 +182,7 @@
         margin-left: 16px;
       }
       span.favorited_when {
-        color: $font-color-four;
+        color: $track-favorited-when-text;
       }
     }
   }
@@ -255,7 +213,7 @@
       padding-bottom: 0;
       padding-left: 16px;
       border-radius: 6px;
-      background-color: $background-color-three;
+      background-color: $track-reveal-top-background;
       .alonetoner {
         width: 50px;
         height: 50px;
@@ -278,9 +236,9 @@
         font-size: 14px;
         line-height: 17px;
         margin-right: 0;
-        color: $font-color-three;
         flex: 1;
         .user_description {
+          color: $track-description-text;
           margin-bottom: 8px;
           margin-right: 26px;
           word-wrap: break-word;
@@ -309,7 +267,7 @@
         }
         .created {
           font-size: 12px;
-          color: $font-color-four;
+          color: $track-created-text;
           margin-bottom: 10px;
         }
         .below_description {
@@ -319,9 +277,10 @@
           a {
             font-size: 12px;
             display: block;
-            color: $accent;
+            color: $track-view-more-text;
             flex-grow: 1;
             font-weight: bold;
+
           }
           .plays {
             font-size: 12px;
@@ -329,7 +288,7 @@
             padding-right: 8px;
             padding-left: 8px;
             text-align: center;
-            color: $font-color-five;
+            color: $track-stats-text;
             display: flex;
             justify-content: flex-start;
           }
@@ -338,7 +297,7 @@
             font-weight: bold;
             padding-left: 8px;
             text-align: center;
-            color: $font-color-five;
+            color: $track-stats-text;
             display: flex;
             justify-content: flex-start;
           }
@@ -348,6 +307,9 @@
               width: 17px;
               position: relative;
               top: -4px;
+              path {
+                fill: $track-stats-icon-background;
+              }
             }
           }
         }

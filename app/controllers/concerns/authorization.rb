@@ -1,20 +1,7 @@
-module AuthlogicHelpers
-  # from Authlogic readme
-  def current_user_session
-    return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
-  end
+# frozen_string_literal: true
 
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session&.user
-  end
-
-  # basic questions asked at controller/view level
-  def logged_in?
-    !!current_user
-  end
-
+# Implements controller helper methods to deal with authorization.
+module Authorization
   def admin?
     logged_in? && current_user.admin?
   end
@@ -35,7 +22,6 @@ module AuthlogicHelpers
     force_mod_login unless moderator?
   end
 
-  # force logins at various access levels
   def force_login
     store_location
     redirect_to login_path, alert: "Whups, you need to login for that!"

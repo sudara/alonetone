@@ -7,6 +7,12 @@ RSpec.describe Asset, type: :model do
     expect(Asset.new(title: '👍').title).to eq('👍')
   end
 
+  it 'should use its permalink as param' do
+    expect(assets(:will_studd_rockfort_combalou).permalink).to eq(
+      assets(:will_studd_rockfort_combalou).to_param
+    )
+  end
+
   context "asset with audio file" do
     let(:asset) { assets(:will_studd_rockfort_combalou) }
 
@@ -117,22 +123,16 @@ RSpec.describe Asset, type: :model do
 
     it "should still work even when tags are empty and the name is weird" do
       asset = file_fixture_asset('_ .mp3', content_type: 'audio/mpeg')
-      expect(asset.permalink).to eq('untitled')
-      expect(asset.name).to eq('untitled')
+      expect(asset.permalink).to eq('_')
+      expect(asset.title).to eq('_')
+      expect(asset.name).to eq('_')
     end
 
     it "should handle strange charsets / characters in title tags" do
       asset = file_fixture_asset('japanese-characters.mp3', content_type: 'audio/mpeg')
+      expect(asset.title).to eq('01-¶ÔμÄÈË') # name is still 01-\266Ե??\313"
       expect(asset.name).to eq('01-¶ÔμÄÈË') # name is still 01-\266Ե??\313"
       expect(asset.mp3_file_name).to eq('japanese-characters.mp3')
-    end
-
-    it "should handle empty name in mp3 tag" do
-      asset = file_fixture_asset('japanese-characters.mp3', content_type: 'audio/mpeg')
-      expect(asset.permalink).to eq("01-oaee") # name is 01-\266Ե??\313"
-      asset.title = 'bee'
-      asset.save
-      expect(asset.permalink).to eq('bee')
     end
 
     it "should cope with non-english filenames" do
@@ -151,12 +151,13 @@ RSpec.describe Asset, type: :model do
       expect(asset.mp3_file_name).to eq(filename)
     end
 
-    it "should handle permalink with ???? as tags, default to untitled" do
+    it 'creates an asset with a Chinese title in the ID3 tags' do
       asset = file_fixture_asset('中文測試.mp3', content_type: 'audio/mpeg')
       expect(asset).to be_persisted
       expect(asset.name).to eq("中文測試")
+      expect(asset.title).to eq("中文測試")
       expect(asset.permalink).not_to be_blank
-      expect(asset.permalink).to eq("untitled")
+      expect(asset.permalink).to eq("中文測試")
     end
 
     it "should use the mp3 tag1 title as name if present" do
@@ -166,7 +167,7 @@ RSpec.describe Asset, type: :model do
 
     it "should use the filename as name if no tags are present" do
       asset = file_fixture_asset('titleless.mp3', content_type: 'audio/mpeg')
-      expect(asset.name).to eq('Titleless')
+      expect(asset.name).to eq('titleless')
     end
 
     it "should generate a permalink from tags" do
@@ -177,7 +178,7 @@ RSpec.describe Asset, type: :model do
     it "should generate unique permalinks" do
       asset = file_fixture_asset('tag2.mp3', content_type: 'audio/mpeg')
       asset2 = file_fixture_asset('tag2.mp3', content_type: 'audio/mpeg')
-      expect(asset2.permalink).to eq('put-a-nickel-on-my-door-1')
+      expect(asset2.permalink).to eq('put-a-nickel-on-my-door-2')
     end
 
     it "should make sure to grab bitrate and length in seconds" do
@@ -206,6 +207,14 @@ RSpec.describe Asset, type: :model do
           audio_file: fixture_file_upload('files/smallest.mp3', 'audio/mpeg')
         )
       end.to have_enqueued_job(WaveformExtractJob)
+    end
+
+    it "does not create with an empty MP3" do
+      asset = user.assets.create(
+        title: 'Empty',
+        audio_file: fixture_file_upload('files/empty.mp3', 'audio/mpeg')
+      )
+      expect(asset.errors).to_not be_empty
     end
   end
 
@@ -276,6 +285,40 @@ RSpec.describe Asset, type: :model do
       expect(asset.soft_deleted?).to eq(true)
       expect(asset.user).to be_nil
       expect(asset.possibly_deleted_user).not_to be_nil
+    end
+  end
+
+  describe 'slug' do
+    let(:title) { 'Music for the Masses' }
+    let(:slug) { Slug.generate(title) }
+    let(:audio_file) do
+      file_fixture_uploaded_file(
+        'smallest.mp3', filename: 'smallest.mp3', content_type: 'audio/mpeg'
+      )
+    end
+
+    it 'updates when the name changes' do
+      asset = Asset.new(title: title)
+      expect(asset.permalink).to eq(slug)
+    end
+
+    it 'saves the permalink after creation' do
+      asset = Asset.create!(user: users(:henri_willig), title: title, audio_file: audio_file)
+      expect(asset.reload.permalink).to eq(slug)
+    end
+
+    it 'updates after title update' do
+      asset = assets(:henri_willig_finest_cheese)
+      asset.update(title: title)
+      expect(asset.reload.permalink).to eq(slug)
+    end
+
+    it 'increments the slug in case of a collision' do
+      existing = assets(:henri_willig_finest_cheese)
+      asset = Asset.create!(
+        user: users(:henri_willig), title: existing.title, audio_file: audio_file
+      )
+      expect(asset.reload.permalink).to eq('manufacturer-of-the-finest-cheese-2')
     end
   end
 end

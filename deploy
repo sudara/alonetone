@@ -1,59 +1,71 @@
 #!/bin/bash
+#
+# This script requires `PermitUserEnvironment yes`
+# to be set on the remote hosts /etc/ssh/sshd_config
+
 echo "Deployanatoring teh codez!"
 echo
 
 # handle git and bundle install
 ssh alonetone '
-  source /etc/profile;
-  source ~/.profile;
-  cd /data/alonetone;
+  cd /data/alonetone
 
-  if [[ $(git diff) > "" ]];
+  BUNDLE_CACHE_PATH="/home/deploy"
+  HOME="/home/deploy"
+  BUNDLE_PATH="/home/deploy/.rbenv/shims/bundle"
+  BUNDLE_COMMAND="sudo -u deploy RAILS_ENV=production ${BUNDLE_PATH}"
+  GIT_COMMAND="sudo -u deploy git"
+
+  echo "Telling sidekiq to chill on new jobs..."
+  sudo systemctl restart sidekiq
+
+  if [ ! "$($GIT_COMMAND diff)" == "" ]
     then
-      echo "WARNING: local changes on server, exiting!";
-      exit 0;
-  fi;
-
-  git fetch;
-
-  if [[ $(git diff origin/master db) > "" ]]; then
-    RUN_MIGRATIONS=1;
+      echo "WARNING: local changes on server, exiting!"
+      exit 0
   fi
 
-  if [[ $(git diff origin/master Gemfile.lock) > "" ]];
+  $GIT_COMMAND fetch
+
+  if [ ! "$($GIT_COMMAND diff origin/master db)" == "" ]; then
+    RUN_MIGRATIONS=1
+  fi
+
+  if [ ! "$($GIT_COMMAND diff origin/master Gemfile.lock)" == "" ]
     then
-      echo "Gemfile changed, bundle installing...";
-      git reset --hard origin/master; bundle install --deployment;
+      echo "Gemfile changed, bundle installing..."
+      $GIT_COMMAND reset --hard origin/master
+      $BUNDLE_COMMAND install --deployment
       echo
     else
-      echo "skipping bundle install, gemfile has not changed since last time.";
-      git reset --hard origin/master;
+      echo "skipping bundle install, gemfile has not changed since last time."
+      $GIT_COMMAND reset --hard origin/master
       echo
   fi
 
   if [[ $RUN_MIGRATIONS ]]; then
-    echo "Running migrations, hold tight...";
-    time RAILS_ENV=production bundle exec rake db:migrate;
+    echo "Running migrations, hold tight..."
+    time $BUNDLE_COMMAND exec rake db:migrate
   fi
 
    echo "Compiling assets..."
-   RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile
+   time $BUNDLE_COMMAND exec rake assets:precompile
 
+   echo "Run puma, run!"
+   sudo monit restart puma_alonetone
+
+   # Actually cycle sidekiq
+   sudo systemctl restart sidekiq
   '
-
-# handle restarts
-echo "Run puma, run!"
-
-ssh linode "monit restart puma_alonetone sidekiq"
 
 bundle exec newrelic deployments
 REVISION="$(git rev-parse --short HEAD)"
-echo "Notifying bugsnag of revision release ${REVISION}"
+echo "Notifying bugsnag of revision release $REVISION"
 curl https://build.bugsnag.com/ \
   --header "Content-Type: application/json" \
   --data '{
-    "apiKey": "'"${BUGSNAG_KEY}"'",
-    "appVersion": "'"${REVISION}"'",
+    "apiKey": "'"$BUGSNAG_KEY"'",
+    "appVersion": "'"$REVISION"'",
     "releaseStage": "production",
     "sourceControl": {
       "provider": "github",

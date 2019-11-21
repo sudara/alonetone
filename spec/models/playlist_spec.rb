@@ -103,7 +103,16 @@ RSpec.describe Playlist, type: :model do
       expect(users(:sandbags).playlists.favorites).not_to be_present
       users(:sandbags).toggle_favorite(assets(:valid_mp3))
       expect(users(:sandbags).playlists.favorites.first).to be_present
+    end
+
+    it "should set a permalink for playlist" do
+      users(:sandbags).toggle_favorite(assets(:valid_mp3))
       expect(users(:sandbags).playlists.favorites.first.permalink).not_to be_nil
+    end
+
+    it "should set is_mix true" do
+      users(:sandbags).toggle_favorite(assets(:valid_mp3))
+      expect(users(:sandbags).playlists.favorites.first.is_mix).to eq(true)
     end
   end
 
@@ -188,6 +197,33 @@ RSpec.describe Playlist, type: :model do
       expect do
         Playlist.all.map(&:soft_delete)
       end.to change { Playlist.count }.from(original_count).to(0)
+    end
+  end
+
+  describe 'slug' do
+    let(:title) { 'Music for the Masses' }
+    let(:slug) { Slug.generate(title) }
+
+    it 'updates when the name changes' do
+      playlist = Playlist.new(title: title)
+      expect(playlist.permalink).to eq(slug)
+    end
+
+    it 'saves the permalink after creation' do
+      playlist = Playlist.create!(user: users(:henri_willig), title: title)
+      expect(playlist.reload.permalink).to eq(slug)
+    end
+
+    it 'updates after title update' do
+      playlist = playlists(:jamie_kiesl_loves)
+      playlist.update(title: title)
+      expect(playlist.reload.permalink).to eq(slug)
+    end
+
+    it 'increments the slug in case of a collision' do
+      existing = playlists(:jamie_kiesl_loves)
+      playlist = Playlist.create!(user: users(:jamie_kiesl), title: existing.title)
+      expect(playlist.reload.permalink).to eq('jamie-loves-2')
     end
   end
 end

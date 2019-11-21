@@ -7,11 +7,12 @@ RSpec.describe Upload, type: :model do
   let(:asset_attributes) { nil }
   let(:playlist_attributes) { nil }
   let(:uploaded_filename) { 'smallest.zip' }
+  let(:content_type) { 'application/zip' }
   let(:uploaded_file) do
     ActionDispatch::Http::UploadedFile.new(
       tempfile: file_fixture_tempfile(uploaded_filename),
       filename: uploaded_filename,
-      type: 'application/zip'
+      type: content_type
     )
   end
   let(:upload) do
@@ -21,6 +22,20 @@ RSpec.describe Upload, type: :model do
       asset_attributes: asset_attributes,
       playlist_attributes: playlist_attributes
     )
+  end
+
+  it 'determines the content-type' do
+    content_type = Upload.resolve_content_type(
+      uploaded_file, uploaded_file.path => 'nonsense/content-type'
+    )
+    expect(content_type).to eq('application/zip')
+  end
+
+  it 'prefers the detected over the reported content-type' do
+    content_type = Upload.resolve_content_type(
+      uploaded_file, uploaded_file.path => 'audio/mp3'
+    )
+    expect(content_type).to eq('audio/mp3')
   end
 
   it 'processes' do
@@ -40,6 +55,39 @@ RSpec.describe Upload, type: :model do
       expect(upload.errors.details).to eq(
         files: [{ error: :blank }],
         user: [{ error: :blank }]
+      )
+    end
+  end
+
+  context 'with unsupported file' do
+    let(:uploaded_filename) { 'readme.txt' }
+    let(:content_type) { 'text/plain' }
+
+    it 'processes but does not create any assets not playlists' do
+      expect do
+        expect(upload.process).to eq(true)
+      end.to_not change { Asset.count + Playlist.count }
+
+      expect(upload.playlists).to be_empty
+      expect(upload.assets).to be_empty
+    end
+  end
+
+  context 'with empty uploaded MP3 file' do
+    let(:uploaded_filename) { 'empty.mp3' }
+    let(:content_type) { 'audio/mpeg' }
+
+    it 'processes but does not create any assets not playlists' do
+      expect do
+        expect(upload.process).to eq(true)
+      end.to_not change { Asset.count + Playlist.count }
+
+      expect(upload.playlists).to be_empty
+      expect(upload.assets.length).to eq(1)
+
+      asset = upload.assets.first
+      expect(asset.errors.details).to eq(
+        audio_file: [error: :blank, value: 0]
       )
     end
   end

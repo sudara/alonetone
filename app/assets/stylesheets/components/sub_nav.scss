@@ -22,7 +22,7 @@
         }
         &.current {
           @include default_button(sub_nav);
-          @include shadow-one-inner();
+          @include shadow1inner();
           background-color: $sub-nav-current-background;
           pointer-events: none;
           color: $white;
@@ -30,8 +30,8 @@
         }
         a {
           @include default_button(sub_nav);
-          @include shadow-one();
-          background-color: $background-color-one;
+          @include shadow1();
+          background-color: $sub-nav-link-background;
           display: block;
           width: 100%;
           height: 100%;

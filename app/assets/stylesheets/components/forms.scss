@@ -23,17 +23,29 @@ form {
   br {
     display: none;
   }
-
+  label {
+    margin-bottom: 8px !important;
+    font-family: $medium-sans-font;
+    font-size: 12px;
+    display: block;
+    margin: 2px 0;
+    text-align: left;
+    text-transform: uppercase;
+    color: $forms-label-text;
+    abbr {
+      display: none;
+    }
+  }
   input,
   textarea,
   select {
     box-sizing: border-box;
     margin-bottom: $baseline;
-    border: 2px solid $border-color-six;
+    border: 2px solid $forms-border;
     border-radius: 4px;
-    background-color: $background-color-three;
+    background-color: $forms-background;
     font-size: 14px;
-    
+    color: $forms-input-text;
     &:focus {
       border: 2px solid $accent;
     }
@@ -50,79 +62,24 @@ form {
   }
 }
 
-label {
-  margin-bottom: 8px !important;
-  font-family: $medium-sans-font;
-  font-size: 12px;
-  display: block;
-  margin: 2px 0;
-  text-align: left;
-  text-transform: uppercase;
-  color: $font-color-five;
-  abbr {
-    display: none;
-  }
-}
-
-/* SIMPLE FORM */
-
-input {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 9px 10px 6px 10px;
-  font-family: $medium-sans-font;
-  font-size: 14px;
-  &.string,
-  &.password {
-    width: 250px;
-    border: 1px solid $border-color-six;
-    border-radius: 4px;
-    background-color: $background-color-three;
-    color: $font-color-two;
-    &:focus {
-      border: 1px solid $border-color-two;
-    }
-  }
-  &.radio {
-    margin-right: 5px;
-    vertical-align: -3px;
-  }
-  &.check_boxes {
-    margin-left: 3px;
-    vertical-align: -3px;
-  }
-  &.btn {
-    font-size: 1.4em;
-    margin-right: 0;
-    padding: 10px;
-  }
-}
-
-/* VALIDATION FEEDBACK */
-
-.field_with_errors {
-  input {
-    border: 1px dotted $warning;
-  }
-}
 
 /* PLACEHOLDER TEXT COLOR */
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 :-ms-input-placeholder {
   /* IE 10+ */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 :-moz-placeholder {
   /* Firefox 18- */
-  color: $font-color-four;
+  color: $forms-placeholder-text;
 }
 
 /* CUSTOM SVG CHECKBOX REPLACEMENT */
@@ -145,7 +102,7 @@ input {
 }
 
 [type="checkbox"]:not(:checked) + label:hover:before {
-  border: 1px solid $border-color-two !important;
+  border: 1px solid $checkbox-not-checked-border !important;
 }
 
 [type="checkbox"]:not(:checked) + label:active:before,
@@ -169,9 +126,9 @@ input {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $border-color-two;
+  border: 1px solid $checkbox-not-checked-border;
   border-radius: 2.5px;
-  background-color: $border-color-five !important;
+  background-color: $checkbox-not-checked-background !important;
 }
 
 [type="checkbox"]:checked + label:before {
@@ -181,9 +138,9 @@ input {
   width: 14px;
   height: 14px;
   content: "";
-  border: 1px solid $font-color-four;
+  border: 1px solid $checkbox-checked-border;
   border-radius: 2.5px;
-  background-color: $font-color-four;
+  background-color: $checkbox-checked-background;
 }
 
 [type="checkbox"]:not(:checked) + label:after {

@@ -1,0 +1,10 @@
+microwave:
+  name: Microwave
+  permalink: microwave
+  description: Microwave is the leading vaporwave label in the world.
+kliek:
+  name: Spaarndammerbuurtkliek
+  # The permalink deliberately doesn't match the name so we can construct a test case that ensures
+  # it's not overwritten.
+  permalink: dekliek
+  description: De kliek, de kliek!

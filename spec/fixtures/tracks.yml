@@ -95,6 +95,8 @@ jamie_kiesl_loves_1:
   position: 1
   created_at: <%= 1.day.ago %>
 
+# don't add any more tracks to this playlist
+# it is used in testing "more than 2 tracks" requirement on published playlist
 soft_deleted_track_on_asset:
   playlist: jamie_kiesl_playlist_with_soft_deleted_tracks
   user: jamie_kiesl
@@ -108,3 +110,19 @@ sudaras_track_with_asset_on_other_user:
   asset: valid_arthur_mp3
   position: 5
   created_at: <%= 2.days.ago %>
+jamie_kiesl_mix_playlist:
+  playlist: jamie_kiesl_loves
+  user: jamie_kiesl
+  asset: jamie_kiesl_the_duck
+  created_at: <%= 2.days.ago %>
+jamie_kiesl_mix_playlist_two:
+  playlist: jamie_kiesl_loves
+  user: sudara
+  asset: valid_arthur_mp3
+  created_at: <%= 2.days.ago %>
+jamie_kiesl_mix_playlist_three:
+  playlist: jamie_kiesl_loves
+  user: sudara
+  asset: valid_arthur_mp3
+  created_at: <%= 2.days.ago %>
+# when adding new tracks, make sure to increse tracks_count on playlist

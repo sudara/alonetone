@@ -28,11 +28,12 @@ RSpec.describe AttachedValidator do
     expect(record).to be_valid
   end
 
-  it 'allows valid attachement' do
+  it 'allows valid attachment' do
     record = AttachedValidatorModel.new(
       double(
         content_type: 'audio/mpeg',
-        byte_size: 30.kilobytes.to_i
+        byte_size: 30.kilobytes.to_i,
+        attached?: true
       ),
       nil
     )
@@ -40,15 +41,27 @@ RSpec.describe AttachedValidator do
   end
 
   it 'allows empty attachment when configured to do so' do
-    record = AttachedValidatorModel.new(nil, double(byte_size: 0))
+    record = AttachedValidatorModel.new(nil, double(byte_size: 0, attached?: true))
     expect(record).to be_valid
+  end
+
+  it 'does not allow an unattached attachment' do
+    record = AttachedValidatorModel.new(
+      double(attached?: false),
+      nil
+    )
+    expect(record).to_not be_valid
+    expect(record.errors.details[:audio_file]).to eq(
+      [error: :not_attached]
+    )
   end
 
   it 'does not allow attachment with unsupported content-type' do
     record = AttachedValidatorModel.new(
       double(
         content_type: 'application/octet-stream',
-        byte_size: 30.kilobytes.to_i
+        byte_size: 30.kilobytes.to_i,
+        attached?: true
       ),
       nil
     )
@@ -67,7 +80,8 @@ RSpec.describe AttachedValidator do
     record = AttachedValidatorModel.new(
       double(
         content_type: 'audio/mpeg',
-        byte_size: 0
+        byte_size: 0,
+        attached?: true
       ),
       nil
     )
@@ -80,7 +94,7 @@ RSpec.describe AttachedValidator do
   it 'does not allow attachment that is too small' do
     record = AttachedValidatorModel.new(
       nil,
-      double(byte_size: 30.kilobytes)
+      double(byte_size: 30.kilobytes, attached?: true)
     )
     expect(record).to_not be_valid
     expect(record.errors.details[:video_file]).to eq(
@@ -97,7 +111,8 @@ RSpec.describe AttachedValidator do
     record = AttachedValidatorModel.new(
       double(
         content_type: 'audio/mpeg',
-        byte_size: 2.gigabytes.to_i
+        byte_size: 2.gigabytes.to_i,
+        attached?: true
       ),
       nil
     )

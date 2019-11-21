@@ -1,5 +1,5 @@
 header#site_header {
-  background-color: $background-color-one;
+  background-color: $site-header-background;
   box-shadow: 0 3px 4px -2px #65666627;
   height: 60px;
   .header_inner {
@@ -15,15 +15,20 @@ header#site_header {
       padding: 0 8px;
     }
     .header_logo {
+    //   width: 51.59px;
+    //   height: 40px;
+     
+      background: $site-icon-background;
       margin-top: 12px;
       display: block;
-      width: 51.59px;
+      width: 48px;
+      height: 36px;
       flex-shrink: 0;
-      height: 40px;
-      background: transparent image-url("alonetone_big-notext-flat.png")
-        no-repeat;
+      height: 36px;
+      
       background-size: 100%;
     }
+
     .headway {
       position: absolute;
       top: 16px;
@@ -59,8 +64,8 @@ header#site_header {
           padding: 0;
           padding-left: 8px;
           padding-right: 36px;
-          background-color: $background-color-four;
-          color: $font-color-two;
+          background-color: $site-header-input-background;
+          color: $site-header-input-text;
           border: 0;
           border-radius: 3px;
           transition: width 0.4s, background-color 0.4s, border-width 0.4s;
@@ -68,7 +73,7 @@ header#site_header {
           &:focus {
             border-width: 0px;
             width: 256px;
-            background-color: $background-color-one;
+            background-color: $site-header-input-background-focus;
             border: 2px solid $accent;
           }
           @media #{$mobile} {
@@ -104,7 +109,7 @@ header#site_header {
         display: none;
         width: 36px;
         height: 36px;
-        background-color: $background-color-four;
+        background-color: $site-header-mobile-search-reveal-button-background;
         border-radius: 3px;
         background-image: $site-header-search-magnifying-glass-image;
         background-position: center;
@@ -132,7 +137,7 @@ header#site_header {
         height: 36px;
         padding: 2px;
         border-radius: 3px;
-        background-color: $background-color-four;
+        background-color: $profile-link-background;
         background-image: $profile-link-background-image;
         background-repeat: no-repeat;
         background-position: right 6px center;

@@ -4,14 +4,14 @@
   width: 100%;
   height: 80px;
   margin-bottom: 24px;
-  background-color: $background-color-three;
-  .play-button-container {
+  background-color: $track-player-background;
+  .play_button_container {
     min-width: 80px;
     height: 80px;
-    background-color: $background-color-one;
+    background-color: $track-player-play-button-background;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    .play-button, .pause-button {
+    .play_button, .pause_button {
       position: relative;
       top: 11px;
       left: 9px;
@@ -35,16 +35,16 @@
     svg {
       width: 100%;
       height: 54px;
-      #waveform-reveal {
+      #waveform_reveal {
         fill: #c7c6c3;
       }
-      #waveform-unplayed {
+      #waveform_unplayed {
         stroke: #c7c6c3;
         fill: #c7c6c3;
         stroke-width: 1px;
         stroke-linejoin: round;
       }
-      #waveform-played {
+      #waveform_played {
         stroke-width: 1px;
         stroke-linejoin: round;
         stroke: #353535;
@@ -57,47 +57,33 @@
       width: 1px;
       height: 100%;
       display: none;
-      background-color: $big-player-seekbar-color;
+      background-color: $big-player-seekbar-background;
     }
     &:hover .seekbar {
       display: block;
     }
   }
-  .time {
-    position: absolute;
-    display: block;
-    top: 0px;
-    right: 0px;
-    padding-top: 2.5px;
-    height: 13px;
-    width: 80px;
-    font-size: 10px;
-    font-variant-numeric: tabular-nums;
-    text-align: center;
-    color: $font-color-four;
-  }
-
-  .progress-container {
+  .progress_container {
     position: absolute;
     pointer-events: none;
     left: 79px;
     height: 80px;
     width: calc(100% - 79px);
-    .progress-container-inner {
+    .progress_container_inner {
       position: absolute;
       height: 80px;
       display: none;
       &.visible {
         display: block;
       }
-      .line-progress {
+      .line_progress {
         position: absolute;
         width: 1px;
         height: 80px;
         background-color: $accent;
         left: 0;
       }
-      .time-progress {
+      .time_progress {
         position: absolute;
         display: block;
         bottom: -18px;
@@ -109,7 +95,7 @@
         background-color: $accent;
         font-variant-numeric: tabular-nums;
         text-align: center;
-        color: $font-color-seven;
+        color: $big-player-time-text;
         font-family: $medium-sans-font;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
@@ -117,8 +103,7 @@
       }
     }
   }
-
-  .time-total {
+  .time_total {
     position: absolute;
     display: block;
     bottom: -18px;
@@ -130,19 +115,8 @@
     z-index: -11;
     font-variant-numeric: tabular-nums;
     text-align: right;
-    color: $font-color-four;
+    color: $big-player-time-total-text;
     font-family: $medium-sans-font;
-  }
-
-  .download-button {
-    font-size: 20px;
-    position: absolute;
-    right: 0;
-    bottom: -2px;
-    a {
-      text-decoration: none;
-      color: $font-color-four;
-    }
   }
 }
 
@@ -157,7 +131,7 @@
   .waveform {
     height: 100%;
   }
-  .play-button, .pause-button {
+  .play_button, .pause_button {
     margin-top: 5px;
     padding: 0;
     border: none;

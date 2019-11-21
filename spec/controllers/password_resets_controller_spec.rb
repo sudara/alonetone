@@ -9,12 +9,13 @@ RSpec.describe PasswordResetsController, type: :controller do
     end
 
     it "should disallow logins after resetting" do
-      activate_authlogic
       post :create, params: { email: users(:arthur).email }
       expect(flash[:error]).not_to be_present
       expect(User.where(login: 'arthur').first.perishable_token).not_to be_nil
-      login(:arthur)
-      expect(controller.session["user_credentials"]).to eq(nil) # can't login
+
+      expect do
+        login(:arthur)
+      end.to raise_error(Authlogic::Session::Existence::SessionInvalidError)
     end
 
     it 'should send an email with link to reset pass' do
@@ -36,7 +37,6 @@ RSpec.describe PasswordResetsController, type: :controller do
     end
 
     it 'should allow user to manually type in password and login user' do
-      activate_authlogic
       post :create, params: { email: users(:arthur).email }
       put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
                              user: { password: '12345678', password_confirmation: '12345678' } }
@@ -46,7 +46,6 @@ RSpec.describe PasswordResetsController, type: :controller do
     end
 
     it 'should allow user to manually type in password and present edit again if passes do not match' do
-      activate_authlogic
       post :create, params: { email: users(:arthur).email }
       put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
                              user: { password: '123456', password_confirmation: '1234567' } }

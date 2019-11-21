@@ -25,6 +25,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Include helpers into the fixture context to generate data which is hard
 # to write by hand.
+ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
 # Magic incantation to make Capybara run the feature specs. Nobody knows

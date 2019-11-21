@@ -7,7 +7,7 @@ class PlaylistsController < ApplicationController
   before_action :find_tracks, only: %i[show edit all]
 
   def all
-    @playlist_pagy, @playlists = pagy(Playlist.recent.only_public.with_preloads, items: 30)
+    @playlist_pagy, @playlists = pagy(Playlist.recently_published.only_public.with_preloads, items: 30)
   end
 
   # all user's playlists
@@ -18,7 +18,6 @@ class PlaylistsController < ApplicationController
 
   def sort
     respond_to do |format|
-      format.html { @playlists = @user.playlists.include_private }
       format.js do
         params[:playlist].each_with_index do |id, position|
           @user.playlists.find(id).update_column(:position, position + 1)

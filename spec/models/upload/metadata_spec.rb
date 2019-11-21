@@ -24,6 +24,18 @@ RSpec.describe Upload::Metadata, type: :model do
     end
   end
 
+  context 'valid MP3 with a blank title and author in the ID3 tags' do
+    let(:filename) { '_ .mp3' }
+
+    it 'returns all non-blank attributes' do
+      expect(metadata.attributes).to eq(
+        bitrate: 128,
+        length: 213.4525,
+        samplerate: 44100
+      )
+    end
+  end
+
   context 'valid MP3 with ID3 tags with completely broken character encoding' do
     let(:filename) { 'japanese-characters.mp3' }
 

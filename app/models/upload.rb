@@ -3,6 +3,11 @@
 # Upload is a service class to deal with incoming uploads. It builds Assets
 # and Playlists based on the uploaded files.
 class Upload
+  SUPPORTED_CONTENT_TYPES = [
+    %r{/zip\Z},
+    %r{\Aaudio/}
+  ].freeze
+
   include ActiveModel::Model
   include ActiveModel::Validations
 
@@ -44,11 +49,9 @@ class Upload
   def process_files(mime_types)
     reset
     uploaded_files.each do |uploaded_file|
-      content_type = mime_types[uploaded_file.path]
-      # When the `file` command thinks the file is raw data we'll try to process using the
-      # content-type reported by the client.
-      content_type = uploaded_file.content_type if content_type == 'application/octet-stream'
-      process_file(uploaded_file, content_type: content_type)
+      process_file(
+        uploaded_file, content_type: self.class.resolve_content_type(uploaded_file, mime_types)
+      )
     end
   end
 
@@ -96,6 +99,19 @@ class Upload
         line.split(': ', 2).map(&:strip)
       end
     ]
+  end
+
+  def self.supported_content_type?(content_type)
+    SUPPORTED_CONTENT_TYPES.any? { |regexp| regexp.match(content_type) }
+  end
+
+  def self.resolve_content_type(uploaded_file, mime_types)
+    [
+      mime_types[uploaded_file.path],
+      uploaded_file.try(:content_type)
+    ].compact.find do |content_type|
+      supported_content_type?(content_type)
+    end
   end
 
   def self.process(attributes)
