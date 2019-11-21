@@ -1,3 +1,39 @@
+.small_spinner {
+  display: none;
+  background: image-url("svg/icon_spinner.svg") no-repeat center center;
+  height: 20px;
+  width: 20px;
+  background-size: 100%;
+  position: relative;
+  top: 3px;
+}
+
+.flash {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.2;
+  position: relative;
+  z-index: 101;
+  padding: 15px 0;
+  text-align: center;
+  color: $flash-text;
+  background-color: $accent;
+  @media #{$mobile} {
+    padding: $baseline / 2;
+    font-size: 14px;
+    text-align: left;
+  }
+  .flash_stats {
+    font-size: 14px;
+    a {
+      text-decoration: underline;
+    }
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
 .ajax_waiting {
   font-size: 10px;
   padding-left: 16px;
@@ -55,7 +91,7 @@
   margin-right: auto;
   top: 55px;
   height: 33px;
-  background-color: $background-color-one;
+  background-color: $floating-feedback-background;
   z-index: 100;
   font-weight: bold;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
@@ -99,51 +135,39 @@
   }
 }
 
-div.small_spinner {
-  display: none;
-  background: image-url("svg/icon_spinner.svg") no-repeat center center;
-  height: 20px;
-  width: 20px;
-  background-size: 100%;
-  position: relative;
-  top: 3px;
-}
-
 .notice,
 .errorExplanation {
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  background-color: $background-color-one;
-  width: 100%;
   max-width: 960px;
   padding: 0 $baseline * 1.5;
   box-sizing: border-box;
   margin-right: auto;
   margin-left: auto;
-  padding-top: $baseline * 2;
-  padding-bottom: $baseline * 2;
-  @include samo-shadow-and-radius();
+  margin-bottom: $baseline;
+  background-color: $error-message-background;
+  padding-left: $baseline * 1.5;
+  padding-right: $baseline * 1.5;
+  padding-top: $baseline * 0.75;
+  padding-bottom: 6px;
+  box-shadow: inset 0px 1px 0px $error-message-shadow;
   @media #{$mobile} {
     width: 96%;
   }
   h2 {
-    color: $accent;
+    @include title18();
+    margin-top: 0;
+    color: $error-message-heading-text;
   }
   ul {
     li {
-      margin-bottom: $baseline / 4;
+      font-size: 14px;
+      font-family: $medium-sans-font;
+      color: $error-message-list-items-text;
+      margin-bottom: $baseline / 2;
     }
   }
-  
-  
-}
-
-.notice h2 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.notice {
+  ol {
+    margin-top: 8px !important;
+  }
   a.hide_notice {
     font-size: 12px;
     font-weight: bold;
@@ -152,36 +176,11 @@ div.small_spinner {
     margin-right: 0;
     color: $accent;
   }
-  li {
-    margin-bottom: 5px;
-  }
-  ol {
-    margin-top: 8px !important;
-  }
 }
 
-.flash {
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 1.2;
-  position: relative;
-  z-index: 101;
-  padding: 15px 0;
-  text-align: center;
-  color: $font-color-seven;
-  background-color: $accent;
-  @media #{$mobile} {
-    padding: $baseline / 2;
-    font-size: 14px;
-    text-align: left;
-  }
-  .flash_stats {
-    font-size: 14px;
-    a {
-      text-decoration: underline;
-    }
-  }
-  a {
-    text-decoration: underline;
+.field_with_errors {
+  input {
+    background: $input-rejected-background;
+    border: 1px solid $input-rejected-border;
   }
 }

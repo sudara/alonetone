@@ -30,11 +30,7 @@ dl.group {
 }
 
 input#asset_data_ {
-  border: 1px solid $border-color-six;
   border-radius: 4px;
-  background-color: $background-color-three;
+  background-color: $upload-asset-background;
   margin-right: 10px;
-  &:focus {
-    border: 1px solid $border-color-three;
-  }
 }
