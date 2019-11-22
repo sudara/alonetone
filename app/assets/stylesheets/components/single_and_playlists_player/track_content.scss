@@ -27,7 +27,7 @@
   .track_edit {
     position: relative;
     z-index: 3;
-    padding-top: $baseline * 1.5;
+    padding-top: 42px;
     padding-right: 40px;
     padding-bottom: $baseline;
     padding-left: 40px;
@@ -136,7 +136,6 @@
       }
     }
     .edit_links_and_favorite {
-      height: 38px;
       overflow: auto;
       box-shadow: none;
       .edit_links {
