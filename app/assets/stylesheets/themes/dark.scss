@@ -17,8 +17,8 @@ $box-background: $grey1100;
 
 $box-h2-bottom-border: $grey100;
 
-$back-to-text: $grey500;
-$back-to-background: $grey500;
+$back-to-text: $grey600;
+$back-to-background: $grey1100;
 
 $view-all-background: $grey1100;
 $view-all-text: $grey800;
@@ -272,8 +272,14 @@ $track-edit-border-focus: $grey500;
 
 $track-edit-new-version-note-text: $grey1000;
 
-$track-content-spam-background: $white;
-$track-content-spam-text: $accent;
+$track-content-spam-background: $red800;
+$track-content-spam-text: $white;
+
+$track-content-edit-background: $orange600;
+$track-content-edit-text: $white;
+
+$track-content-link-background: $grey1150;
+$track-content-link-text: $grey200;
 
 $track-content-track-text: $grey50;
 $track-content-artist-text: $grey800;
@@ -281,7 +287,7 @@ $track-content-description-text: $grey400;
 
 // track_player.scss
 $big-player-seekbar-background: $grey200;
-$track-player-background: $grey1000;
+$track-player-background: $grey1150;
 $track-player-play-button-background: $grey1100;
 $big-player-time-text: $black;
 $big-player-time-total-text: $grey800;

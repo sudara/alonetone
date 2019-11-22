@@ -53,9 +53,11 @@
       background-color: transparent;
       box-shadow: none;
       border-radius: 0;
-      float: left;
+      float: right;
       .edit_link {
         @include default-button("admin");
+        background-color: $track-content-edit-background;
+        color: $track-content-edit-text;
       }
       .edit_link + .edit_link {
         margin-left: 6px;
@@ -64,22 +66,46 @@
         color: $track-content-spam-text;
       }
     }
-    .download_link {
-      float: right;
+    .track_favorite {
       a {
-        width: 32px;
-        height: 32px;
-        display: block;
-        background-size: 29px 29px;
-        margin-right: 8px;
-        background-image: image-url("svg/icon_download.svg");
+        padding-left: 12px;
+        font-size: 12px;
+        height: 26px;
+        width: 94px;
+        margin-right: 10px;
+        float: left;
+        position: relative;
+        display: flex;
+        background-color: $track-content-link-background;
+        color: $track-content-link-text;
+        border-radius: 4px;
+        font-weight: bold;
+        line-height: 26px;
+        svg {
+          height: 24px;
+          margin-left: 18px;
+        }
       }
     }
-    .track_favorite {
-      width: 30px;
-      margin-right: 10px;
-      float: right;
-      position: relative;
+    .download_link {
+      float: left;
+      a {
+        padding-left: 12px;
+        font-size: 12px;
+        height: 26px;
+        width: 106px;
+        display: flex;
+        margin-right: 8px;
+        background-color: $track-content-link-background;
+        color: $track-content-link-text;
+        border-radius: 4px;
+        font-weight: bold;
+        line-height: 26px;
+        svg {
+          height: 24px;
+          margin-left: 17px;
+        }
+      }
     }
   }
   .track_post,
@@ -102,7 +128,6 @@
       line-height: 32px;
       @include title28();
       color: $track-content-track-text;
-
     }
     h3 {
       margin-top: -16px;
