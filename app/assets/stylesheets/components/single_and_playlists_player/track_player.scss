@@ -18,6 +18,11 @@
       width: 80px;
       height: 80px;
       cursor: pointer;
+      .largePlaySVG {
+        path.icon.new {
+          fill: $track-player-play-button-triangle-background;
+        }
+      }
     }
   }
   > i {
