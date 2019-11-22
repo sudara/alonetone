@@ -310,6 +310,19 @@
   
   .comment_asset {
     .comment_form {
+    }
+  }
+
+  .comment_asset {
+    padding-top: 10px;
+    padding-right: 0;
+    padding-left: 0;
+    margin-top: $baseline;
+    background-color: $track-content-comment-background;
+    box-shadow: none;
+    border-radius: 6px;
+    position: relative;
+    .comment_form {
       form {
         > .comment_as {
           margin-top: 0;
@@ -320,6 +333,36 @@
         }
         input.comment_submit {
           margin-right: 16px;
+        }
+      }
+      textarea {
+        background-color: $track-content-comment-textarea-background;
+        color: $track-content-comment-textarea-text;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+      div.submit_wrapper {
+        position: relative;
+        top: -18px;
+        display: flex;
+        flex-direction: row;
+        clear: both;
+        justify-content: flex-end;
+        margin-left: 110px;
+        @media #{$one-column} {
+          display: block;
+          .ajax_waiting {
+            margin-right: 0;
+            float: right;
+            border-width: 0;
+            &.ajax_fail,
+            &.ajax_success {
+              margin-bottom: 12px;
+              border-width: 1px;
+            }
+          }
         }
       }
     }
