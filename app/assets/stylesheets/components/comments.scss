@@ -111,12 +111,11 @@
   padding-top: 20px;
   padding-right: 15px;
   padding-left: 15px;
+  margin-top: $baseline;
   background-color: $track-content-comment-background;
   box-shadow: none;
-  border-radius: 0 0 6px 6px;
+  border-radius: 6px;
   position: relative;
-  z-index: 2;
-  top: -6px;
   .comment_form {
     textarea {
       background-color: $track-content-comment-textarea-background;

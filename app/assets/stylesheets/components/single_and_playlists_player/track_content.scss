@@ -1,4 +1,4 @@
-// Used in mass edit, single track view, playlist player view, 
+// Used by single track view, playlist player view, mass edit
 
 .track_content {
   margin-right: auto;
@@ -22,70 +22,7 @@
       box-sizing: border-box;
     }
   }
-  .edit_links_and_favorite {
-    height: 38px;
-    overflow: auto;
-    background-color: transparent;
-    box-shadow: none;
-    .edit_links {
-      background-color: transparent;
-      box-shadow: none;
-      border-radius: 0;
-      float: right;
-      .edit_link {
-        @include default-button("admin");
-        background-color: $track-content-edit-background;
-        color: $track-content-edit-text;
-      }
-      .edit_link + .edit_link {
-        margin-left: 6px;
-        text-transform: uppercase;
-        background-color: $track-content-spam-background;
-        color: $track-content-spam-text;
-      }
-    }
-    .track_favorite {
-      a {
-        padding-left: 12px;
-        font-size: 12px;
-        height: 26px;
-        width: 94px;
-        margin-right: 10px;
-        float: left;
-        position: relative;
-        display: flex;
-        background-color: $track-content-link-background;
-        color: $track-content-link-text;
-        border-radius: 4px;
-        font-weight: bold;
-        line-height: 26px;
-        svg {
-          height: 24px;
-          margin-left: 18px;
-        }
-      }
-    }
-    .download_link {
-      float: left;
-      a {
-        padding-left: 12px;
-        font-size: 12px;
-        height: 26px;
-        width: 106px;
-        display: flex;
-        margin-right: 8px;
-        background-color: $track-content-link-background;
-        color: $track-content-link-text;
-        border-radius: 4px;
-        font-weight: bold;
-        line-height: 26px;
-        svg {
-          height: 24px;
-          margin-left: 17px;
-        }
-      }
-    }
-  }
+ 
   .track_post,
   .track_edit {
     position: relative;
@@ -94,6 +31,52 @@
     padding-right: 40px;
     padding-top: 50px;
     padding-bottom: 20px;
+    div.track_stats {
+      font-size: 12px;
+      margin-bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      margin-top: -4px;
+      .created {
+        font-size: 14px;
+        display: block;
+        color: $track-stats-created-text;
+        flex-grow: 1;
+        time {
+          font-weight: bold;
+        }
+      }
+      .favorite_total {
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 8px;
+        padding-right: 8px;
+        text-align: center;
+        color: $track-stats-text;
+        display: flex;
+        justify-content: flex-start;
+      }
+      .plays {
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 8px;
+        text-align: center;
+        color: $track-stats-text;
+        display: flex;
+        justify-content: flex-start;
+      }
+      i {
+        margin-right: 8px;
+        svg {
+          width: 17px;
+          position: relative;
+          top: -5px;
+          path {
+            fill: $track-stats-icon-background;
+          }
+        }
+      }
+    }
     @media #{$one-column} {
       padding: $baseline / 2;
     }
@@ -121,52 +104,7 @@
         margin-top: $baseline;
       }
     }
-    div.track_stats {
-      font-size: 12px;
-      margin-bottom: 0;
-      display: flex;
-      justify-content: space-between;
-      margin-top: -4px;
-      .created {
-        font-size: 14px;
-        display: block;
-        color: $track-stats-created-text;
-        flex-grow: 1;
-        time {
-          font-weight: bold;
-        }
-      }
-      .plays {
-        font-size: 12px;
-        font-weight: bold;
-        padding-right: 8px;
-        padding-left: 8px;
-        text-align: center;
-        color: $track-stats-text;
-        display: flex;
-        justify-content: flex-start;
-      }
-      .favorite_total {
-        font-size: 12px;
-        font-weight: bold;
-        padding-left: 8px;
-        text-align: center;
-        color: $track-stats-text;
-        display: flex;
-        justify-content: flex-start;
-      }
-      i {
-        margin-left: 8px;
-        svg {
-          width: 17px;
-          position: relative;
-          top: -5px;
-          path {
-            fill: $track-stats-icon-background;
-          }
-        }
-      }
-    }
+
     hr {
       position: relative; // needed for icon
       width: 550px;
@@ -183,6 +121,68 @@
         color: $track-content-hr-background;
         background-color: white; // interrupt hr
         -webkit-font-smoothing: antialiased;
+      }
+    }
+    .edit_links_and_favorite {
+      height: 38px;
+      overflow: auto;
+      box-shadow: none;
+      .edit_links {
+        box-shadow: none;
+        border-radius: 0;
+        float: right;
+        .edit_link {
+          @include default-button("admin");
+          background-color: $track-content-edit-background;
+          color: $track-content-edit-text;
+        }
+        .edit_link + .edit_link {
+          margin-left: 6px;
+          text-transform: uppercase;
+          background-color: $track-content-spam-background;
+          color: $track-content-spam-text;
+        }
+      }
+      .track_favorite {
+        a {
+          padding-left: 12px;
+          font-size: 12px;
+          height: 26px;
+          width: 94px;
+          margin-right: 10px;
+          float: left;
+          position: relative;
+          display: flex;
+          background-color: $track-content-link-background;
+          color: $track-content-link-text;
+          border-radius: 4px;
+          font-weight: bold;
+          line-height: 26px;
+          svg {
+            height: 24px;
+            margin-left: 18px;
+          }
+        }
+      }
+      .download_link {
+        float: left;
+        a {
+          padding-left: 12px;
+          font-size: 12px;
+          height: 26px;
+          width: 106px;
+          display: flex;
+          margin-right: 8px;
+          background-color: $track-content-link-background;
+          color: $track-content-link-text;
+          border-radius: 4px;
+          font-weight: bold;
+          line-height: 26px;
+          svg {
+            height: 24px;
+            margin-left: 17px;
+          }
+        }
       }
     }
   }
@@ -290,11 +290,11 @@
     }
   }
 
-  div.comment_asset + h2 {
+  .comment_asset + h2 {
     display: none;
   }
   
-  div.comment_asset {
+  .comment_asset {
     .comment_form {
       form {
         > .comment_as {
@@ -305,12 +305,10 @@
     }
   }
   
-  div#user_comments {
+  #user_comments {
+    margin-top: $baseline;
     background-color: none;
     box-shadow: none;
-  }
-  
-  div#user_comments + .below_box {
-    display: none;
+    overflow: hidden;
   }
 }
