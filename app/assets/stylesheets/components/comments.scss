@@ -119,6 +119,11 @@
   .comment_form {
     textarea {
       background-color: $track-content-comment-textarea-background;
+      color: $track-content-comment-textarea-text;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 8px;
+      padding-bottom: 8px;
     }
     div.submit_wrapper {
       position: relative;
