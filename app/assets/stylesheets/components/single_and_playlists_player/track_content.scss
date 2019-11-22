@@ -144,9 +144,12 @@
         border-radius: 0;
         float: right;
         .edit_link {
-          @include default-button("admin");
+          @include default-button();
           background-color: $track-content-edit-background;
           color: $track-content-edit-text;
+          &:hover {
+            background-color: $track-content-edit-background;
+          }
         }
         .edit_link + .edit_link {
           margin-left: 6px;
@@ -304,11 +307,10 @@
     }
   }
 
-  .comment_asset + h2 {
-    display: none;
-  }
-  
   .comment_asset {
+    & + h2 {
+      display: none;
+    }
     padding-top: 10px;
     padding-right: 0;
     padding-left: 0;

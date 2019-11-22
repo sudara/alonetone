@@ -209,15 +209,16 @@
   }
   .comment_user {
     position: absolute;
-    top: 18px;
-    left: 10px;
+    top: 6px;
+    left: 6px;
     img {
       float: left;
       width: 40px;
       height: 40px;
-      border-radius: 5px 0 0 5px;
+      border-radius: 2px;
     }
   }
+
   .comment_right {
     @include samo-shadow-and-radius();
     position: relative;
@@ -226,16 +227,6 @@
     border-radius: 0 4px 4px 4px;
     background-color: $comment-right-background;
     box-shadow: none;
-    &::before {
-      position: absolute;
-      z-index: 1;
-      top: -13px;
-      left: 47%;
-      content: "\A";
-      border-width: 0 9px 13px 9px;
-      border-style: solid;
-      border-color: transparent transparent $comment-right-background transparent;
-    }
     .comment_user_text {
       font-size: 11px;
       font-family: $medium-sans-font;
