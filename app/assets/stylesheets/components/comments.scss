@@ -181,6 +181,9 @@
         @include default_button();
         background-color: $comment-submit-background;
         color: $comment-submit-text;
+        &:hover {
+          background-color: $comment-submit-background;
+        }
       }
     }
   }
