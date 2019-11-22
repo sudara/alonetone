@@ -4,7 +4,7 @@ body.cover_view {
     align-self: stretch;
   }
   .track_content {
-    margin-left: -$baseline !important;
+    margin-left: -40px !important;
     min-width: 400px;
     @media #{$one-column} {
       min-width: auto;
