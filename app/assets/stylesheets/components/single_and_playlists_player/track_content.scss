@@ -55,6 +55,17 @@
         color: $track-stats-text;
         display: flex;
         justify-content: flex-start;
+        i {
+          margin-right: 8px;
+          svg {
+            width: 17px;
+            position: relative;
+            top: -5px;
+            path {
+              fill: $track-stats-icon-favorites-background;
+            }
+          }
+        }
       }
       .plays {
         font-size: 12px;
@@ -64,17 +75,18 @@
         color: $track-stats-text;
         display: flex;
         justify-content: flex-start;
-      }
-      i {
-        margin-right: 8px;
-        svg {
-          width: 17px;
-          position: relative;
-          top: -5px;
-          path {
-            fill: $track-stats-icon-background;
+        i {
+          margin-right: 8px;
+          svg {
+            width: 17px;
+            position: relative;
+            top: -5px;
+            path {
+              fill: $track-stats-icon-background;
+            }
           }
         }
+  
       }
     }
     @media #{$one-column} {
