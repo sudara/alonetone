@@ -68,6 +68,11 @@
             background-image: $playlist-sidebar-play-active-background;
           }
         }
+        a.pause_button {
+          i {
+            background-image: $playlist-sidebar-pause-active-background;
+          }
+        }
   
       }
       a.play_button,
@@ -96,7 +101,7 @@
           display: inline-block;
           width: 24px;
           height: 24px;
-          background-image: image-url("svg/icon_pause_circled.svg");
+          background-image: $playlist-sidebar-pause-background;
         }
       }
       a.position_name_time {
