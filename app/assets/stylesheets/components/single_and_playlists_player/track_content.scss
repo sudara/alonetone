@@ -157,7 +157,7 @@
           color: $track-content-spam-text;
         }
       }
-      .track_favorite {
+      .track_favorite, .download_link {
         a {
           padding-left: 12px;
           font-size: 12px;
@@ -171,32 +171,23 @@
           color: $track-content-link-text;
           border-radius: 4px;
           font-weight: bold;
-          line-height: 26px;
+          line-height: 28px;
           text-decoration: none;
+          box-sizing: border-box;
           svg {
             height: 24px;
-            margin-left: 18px;
+            margin-left: 8px;
           }
         }
       }
       .download_link {
         float: left;
         a {
-          padding-left: 12px;
-          font-size: 12px;
-          height: 26px;
           width: 106px;
-          display: flex;
           margin-right: 8px;
-          background-color: $track-content-link-background;
-          color: $track-content-link-text;
-          border-radius: 4px;
-          font-weight: bold;
-          line-height: 26px;
-          text-decoration: none;
           svg {
             height: 24px;
-            margin-left: 17px;
+            margin-left: 6px;
           }
         }
       }
