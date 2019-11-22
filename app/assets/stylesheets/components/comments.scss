@@ -53,21 +53,6 @@
   margin-top: 0;
   margin-right: 10px;
   margin-left: 10px;
-  &::before {
-    position: absolute;
-    top: 24px;
-    left: 49%;
-    content: "\A";
-    border-width: 0 9px 13px 9px;
-    border-style: solid;
-    border-color: transparent transparent $grey200 transparent;
-    @media #{$mobile} {
-      display: none;
-    }
-    @media #{$two-column-narrow} {
-      display: none;
-    }
-  }
   .comment_asset {
     div.submit_wrapper {
       position: relative;
