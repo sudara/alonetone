@@ -27,10 +27,10 @@
   .track_edit {
     position: relative;
     z-index: 3;
-    padding-left: 40px;
+    padding-top: $baseline * 1.5;
     padding-right: 40px;
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: $baseline;
+    padding-left: 40px;
     div.track_stats {
       font-size: 12px;
       margin-bottom: 0;
@@ -46,7 +46,7 @@
           font-weight: bold;
         }
       }
-      .favorite_total {
+      .favorites {
         font-size: 12px;
         font-weight: bold;
         padding-left: 8px;
@@ -170,6 +170,7 @@
           border-radius: 4px;
           font-weight: bold;
           line-height: 26px;
+          text-decoration: none;
           svg {
             height: 24px;
             margin-left: 18px;
@@ -190,6 +191,7 @@
           border-radius: 4px;
           font-weight: bold;
           line-height: 26px;
+          text-decoration: none;
           svg {
             height: 24px;
             margin-left: 17px;
@@ -311,7 +313,13 @@
       form {
         > .comment_as {
           margin-top: 0;
-          padding-left: 24px;
+          padding-left: 16px;
+        }
+        .private_check_box {
+          margin-left: 16px;
+        }
+        input.comment_submit {
+          margin-right: 16px;
         }
       }
     }

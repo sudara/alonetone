@@ -94,7 +94,7 @@ ul {
   background-color: $back-to-background;
   color: $back-to-text;
   display: inline-flex;
-  margin-bottom: $baseline;
+  margin-bottom: 32px;
   @include shadow1();
   .caret {
     background-color: $accent;
