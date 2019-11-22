@@ -28,21 +28,6 @@
       border-radius: 0;
       box-sizing: border-box;
     }
-    > .static_content {
-      padding: $baseline / 2 $baseline / 2;
-      box-sizing: border-box;
-      a {
-        text-decoration: underline;
-        &:hover {
-          color: $accent;
-        }
-      }
-      ul {
-        li {
-          margin-bottom: 4px;
-        }
-      }
-    }
   }
   .edit_links_and_favorite {
     height: 38px;
