@@ -367,8 +367,14 @@
   
   #user_comments {
     margin-top: $baseline;
-    background-color: none;
+    padding-top: 16px;
+    background-color: $comment-background;
     box-shadow: none;
     overflow: hidden;
+    .comment {
+      .comment_right {
+        border-radius: 6px;
+      }
+    }
   }
 }
