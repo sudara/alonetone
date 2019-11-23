@@ -31,8 +31,6 @@
       background-color: $track-content-edit-background;
     }
   }
-
- 
   .track_post,
   .track_edit {
     position: relative;
@@ -107,7 +105,6 @@
             }
           }
         }
-  
       }
     }
     @media #{$one-column} {
@@ -127,7 +124,6 @@
         margin-top: $baseline;
       }
     }
-
     hr {
       position: relative; // needed for icon
       width: 550px;
@@ -168,7 +164,8 @@
           color: $track-content-spam-text;
         }
       }
-      .track_favorite, .download_link {
+      .track_favorite,
+      .download_link {
         a {
           padding-left: 12px;
           font-size: 12px;
@@ -308,7 +305,6 @@
       }
     }
   }
-
   .comment_asset {
     & + h2 {
       display: none;
@@ -366,7 +362,7 @@
       }
     }
   }
-  
+
   #user_comments {
     margin-top: $baseline;
     padding-top: 16px;
