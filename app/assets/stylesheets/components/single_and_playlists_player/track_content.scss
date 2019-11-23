@@ -152,7 +152,7 @@
           }
         }
         .edit_link + .edit_link {
-          margin-left: 6px;
+          margin-left: 8px;
           text-transform: uppercase;
           background-color: $track-content-spam-background;
           color: $track-content-spam-text;
@@ -189,6 +189,7 @@
           svg {
             height: 24px;
             margin-left: 6px;
+            margin-top: 1px;
           }
         }
       }
