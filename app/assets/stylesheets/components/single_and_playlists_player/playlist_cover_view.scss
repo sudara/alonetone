@@ -60,11 +60,8 @@ body.cover_view {
       }
     }
     .playlist_options {
-      width: 100%;
       height: 50px;
       background-color: $playlist-options-background;
-      font-family: $sans-font;
-      border-radius: 0px;
       ul {
         &.downloads_links {
           float: left;
