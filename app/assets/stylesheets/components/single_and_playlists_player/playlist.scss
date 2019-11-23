@@ -31,7 +31,7 @@
     position: relative;
     background-color: $playlist-sidebar-background;
     min-width: 300px;
-    max-width: 450px;
+    max-width: 320px;
     width: 35%;
     margin-right: 40px;
     @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
