@@ -38,7 +38,6 @@
     }
     .edit_playlist {
       color: $playlist-sidebar-artist-edit-link-text;
-
     }
   }
   ul.tracklist {
@@ -80,7 +79,6 @@
             background-image: $playlist-sidebar-pause-active-background;
           }
         }
-  
       }
       a.play_button,
       a.pause_button {
@@ -120,7 +118,6 @@
         padding-bottom: 8px;
         white-space: nowrap;
         text-decoration: none;
-        
         flex-grow: 1;
         span.track_position {
           display: block;
