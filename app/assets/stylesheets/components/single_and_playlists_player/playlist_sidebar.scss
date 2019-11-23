@@ -27,11 +27,18 @@
     font-size: 14px;
     line-height: $baseline;
     font-weight: normal;
-    margin-top: -5px;
+    margin-top: -3px;
     text-align: center;
     color: $playlist-sidebar-artist-text;
     .by {
       color: $playlist-sidebar-artist-by-text;
+    }
+    .parentheses {
+      color: $playlist-sidebar-artist-parantheses-text;
+    }
+    .edit_playlist {
+      color: $playlist-sidebar-artist-edit-link-text;
+
     }
   }
   ul.tracklist {

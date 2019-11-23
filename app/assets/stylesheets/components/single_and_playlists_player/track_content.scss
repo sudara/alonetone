@@ -22,6 +22,16 @@
       box-sizing: border-box;
     }
   }
+
+  .edit_link {
+    @include default-button();
+    background-color: $track-content-edit-background;
+    color: $track-content-edit-text;
+    &:hover {
+      background-color: $track-content-edit-background;
+    }
+  }
+
  
   .track_post,
   .track_edit {

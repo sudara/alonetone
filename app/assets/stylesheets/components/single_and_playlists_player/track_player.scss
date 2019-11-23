@@ -124,21 +124,3 @@
     font-family: $medium-sans-font;
   }
 }
-
-.player.stuck {
-  position: fixed;
-  top: 0;
-  width: 650px;
-  height: $baseline * 2.5;
-  margin-top: 0;
-  padding-top: 4px;
-  border-top: 0;
-  .waveform {
-    height: 100%;
-  }
-  .play_button, .pause_button {
-    margin-top: 5px;
-    padding: 0;
-    border: none;
-  }
-}
