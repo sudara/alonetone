@@ -364,6 +364,9 @@
   }
 
   #user_comments {
+    + .below_box {
+      display: none;
+    }
     margin-top: $baseline;
     padding-top: 16px;
     background-color: $comment-background;
