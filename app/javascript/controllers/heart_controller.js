@@ -12,6 +12,7 @@ export default class extends Controller {
     if (this.favorited) {
       this.animation.setFave()
       this.faved()
+      this.element.dataset.method = 'put'
     }
   }
 
@@ -20,10 +21,12 @@ export default class extends Controller {
     if (this.favorited) {
       this.animation.clickUnfave()
       this.favorited = false
+      this.element.dataset.method = 'delete'
       this.unfaved()
     } else {
       this.animation.clickFave()
       this.favorited = true
+      this.element.dataset.method = 'put'
       this.faved()
     }
   }
