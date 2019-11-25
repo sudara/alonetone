@@ -85,7 +85,7 @@ RSpec.describe AssetsController, type: :request do
     end
 
     it 'shows an assets without an attachment' do
-      get user_track_path('henriwillig', 'lost-boys')
+      get user_track_path('henriwillig', 'this-track-has-no-mp3')
       expect(response).to be_successful
     end
   end
