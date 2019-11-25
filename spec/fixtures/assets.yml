@@ -127,13 +127,13 @@ henri_willig_the_goat:
 # is no record in active_storage_attachments.
 henri_willig_lost_boy:
   user: henri_willig
-  title: Lost Boys
-  permalink: lost-boys
+  title: This track has no mp3
+  permalink: this-track-has-no-mp3
   mp3_file_name: track-4.mp3
   mp3_content_type: audio/mpeg
   mp3_file_size: <%= 6.5.megabytes %>
   length: 3566
-  created_at: 2019-02-08 13:00:03
+  created_at: 2019-01-08 13:00:03
 
 jamie_kiesl_the_duck:
   user: jamie_kiesl
