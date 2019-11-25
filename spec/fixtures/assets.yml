@@ -17,6 +17,7 @@ valid_zip:
   user: sudara
 invalid_file:
   mp3_file_name: Somefile.png
+  title: song1
   permalink: song1
   mp3_content_type: image/png
   mp3_file_size: <%= 1.megabyte %>
