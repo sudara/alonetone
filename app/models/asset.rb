@@ -99,7 +99,7 @@ class Asset < ApplicationRecord
   end
 
   def self.latest(limit = 10)
-    with_preloads.limit(limit).order('assets.id DESC')
+    with_preloads.limit(limit).order('assets.created_at DESC')
   end
 
   def self.id_not_in(asset_ids)
