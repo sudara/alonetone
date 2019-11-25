@@ -8,7 +8,7 @@ class FavoritesController < ApplicationController
   before_action :require_login
   before_action :find_favorite_track, only: :destroy
 
-  def create
+  def update
     raise ArgumentError unless @asset
 
     @user.tracks.favorites.create(asset_id: @asset.id)
@@ -23,7 +23,7 @@ class FavoritesController < ApplicationController
   private
 
   def find_favorite_track
-    @favorite_track = Track.find_by_id(params[:id])
+    @favorite_track = @user.tracks.favorites.where(asset_id: @asset.id).first
   end
 
   def find_asset
