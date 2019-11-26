@@ -4,9 +4,12 @@
 <%= thredded_page do %>
   <%= define_svg_icons('thredded/follow.svg', 'thredded/lock.svg') %>
   <%= view_hooks.messageboards_index.container.render self, groups: @groups do %>
-    Here we go!
-    <section class="thredded--main-section thredded--messageboards">
-      
+    <section class="thredded--main-section thredded--messageboards">      
+      <%
+=begin%>
+ <%= yield :thredded_breadcrumbs %> 
+<%
+=end%>
       <%= view_hooks.messageboards_index.list.render self, groups: @groups do %>
         <% @groups.each do |group| %>
           <% if group.name.present? %>
@@ -27,6 +30,8 @@
         <% end %>
       <% end %>
 
+    </section>
+    <section>
       <div class="thredded--messageboards--actions">
         <% if policy(Thredded::Messageboard.new).create? %>
           <a class="thredded--button" href="<%= new_messageboard_path %>" rel="nofollow">
@@ -40,5 +45,6 @@
         <% end %>
       </div>
     </section>
+
   <% end %>
 <% end %>

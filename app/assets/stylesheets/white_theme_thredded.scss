@@ -47,14 +47,21 @@ aside.thredded--currently-online {
   }
 }
 
+.thredded--navigation--search {
+  position: static;
+  input[type="search"] {
+    background: #fff;
+    box-shadow: none;
+    margin-right: 0;
+    margin-left: 0;
+    min-width: 16rem;
+    text-align: left;
+  }
+
+}
+
 #thredded--container {
-  box-sizing: border-box;
-  padding: $baseline $baseline * 3;
-  background-color: #fff;
-  @include samo-shadow-and-radius();
-
   @media #{$one-column} {
-
     padding: $baseline $baseline;
   }
 
@@ -64,6 +71,10 @@ aside.thredded--currently-online {
         .thredded--nav-text {
           font-family: $medium-sans-font;
         }
+      }
+      .thredded--navigation-top {
+        display: flex;
+        justify-content: space-between;
       }
       .thredded--main-navigation {
         .thredded--navigation-breadcrumbs {
@@ -83,21 +94,30 @@ aside.thredded--currently-online {
   }
 
   section.thredded--main-section {
+    box-sizing: border-box;
+    background-color: #fff;
+    margin-bottom: $baseline;
+    @include samo-shadow-and-radius();
     .thredded--messageboards-group--title {
-      font-size: 24px;
+      @include title24();
+      margin-left: 48px;
+      padding-top: 48px;
       margin-bottom: 0;
+      .thredded--link {
+        color: #000;
+      }
     }
     .thredded--messageboards-group {
       display: block;
       .thredded--messageboard {
         border: 0;
-        border-top: 1px solid $grey100;
         padding-left: 0;
-      }
-      .thredded--messageboard--header {
-        margin-bottom: $baseline / 2;
-        .thredded--messageboard--title {
-          font-size: 18px;
+        background-color: $grey25;
+        .thredded--messageboard--header {
+          margin-bottom: $baseline / 2;
+          .thredded--messageboard--title {
+            font-size: 18px;
+          }
         }
       }
       .thredded--messageboard:hover {
@@ -108,10 +128,6 @@ aside.thredded--currently-online {
         }
       }
     }
-
-    margin-bottom: $baseline;
-    padding-top: $baseline * 0.5;
-    border-top: 1px solid $thredded-base-border-color;
     .thredded--messageboard--meta--counts {
       font-size: 12px;
       line-height: 15px;
