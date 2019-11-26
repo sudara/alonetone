@@ -6,10 +6,14 @@
     <div class="thumbnail">
       
     </div>
-    <div>
+    <div class="right">
       <%= render 'thredded/messageboards/messageboard/header', messageboard: messageboard %>
       <%= render 'thredded/messageboards/messageboard/description', messageboard: messageboard %>
-      <%= render 'thredded/messageboards/messageboard/last_updated', messageboard: messageboard %>
+      <div class="bottom">
+        <%= render 'thredded/messageboards/messageboard/last_updated', messageboard: messageboard %>
+        <%= render 'thredded/messageboards/messageboard/meta', messageboard: messageboard %>
+
+      </div>
     </div>
   <% end %>
 <% end %>

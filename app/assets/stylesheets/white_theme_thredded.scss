@@ -94,7 +94,7 @@ aside.thredded--currently-online {
   .thredded--messageboards--actions {
     margin-top: 0px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     a {
       margin-top: 0;
       @include default-button();
@@ -131,19 +131,11 @@ aside.thredded--currently-online {
       .thredded--messageboard {
         border: 0;
         padding-left: 0;
+        padding-bottom: 60px;
         background-color: $grey25;
         display: flex;
         flex-direction: row;
         padding-top: $baseline / 2;
-
-        &:hover {
-          background-color: transparent;
-          .thredded--messageboard--header {
-            text-decoration: underline;
-            color: $accent;
-          }
-        }
-
         .thumbnail {
           width: 96px;
           height: 96px;
@@ -151,12 +143,40 @@ aside.thredded--currently-online {
           margin-left: $baseline;
           margin-right: $baseline;
         }
-        
-        .thredded--messageboard--header {
-          margin-bottom: $baseline / 2;
-          .thredded--messageboard--title {
-            font-size: 18px;
+        .right {
+          padding-top: 22px;
+          .thredded--messageboard--header {
+            color: $orange600;
+            margin-bottom: 10px;
+            .thredded--messageboard--title {
+              font-size: 18px;
+              margin-bottom: 0;
+            }
+
           }
+          .thredded--messageboard--description,
+          .thredded--messageboard--meta {
+            font-size: 14px;
+            color: $grey900;
+            font-family: $medium-sans-font;
+            line-height: 18px;
+          }
+
+          .bottom {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            
+            .thredded--messageboard--byline {
+              font-size: 12px;
+              line-height: 15px;
+              margin-top: 4px;
+            }
+          }
+
+          
+      
+
         }
       }
     }
@@ -166,17 +186,7 @@ aside.thredded--currently-online {
       line-height: 15px;
       font-family: $medium-sans-font;
     }
-    .thredded--messageboard--description,
-    .thredded--messageboard--meta {
-      font-size: 14px;
-      line-height: 18px;
-    }
-
-    .thredded--messageboard--byline {
-      font-size: 12px;
-      line-height: 15px;
-      margin-top: 4px;
-    }
+    
 
     header.thredded--topic-header {
       padding-bottom: $baseline;
