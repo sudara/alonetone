@@ -145,6 +145,9 @@
     .edit_links_and_favorite {
       overflow: auto;
       box-shadow: none;
+      :first-child {
+        margin-left: 0!important;
+      }
       .edit_links {
         box-shadow: none;
         border-radius: 0;
