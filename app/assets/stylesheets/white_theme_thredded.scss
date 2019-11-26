@@ -47,17 +47,7 @@ aside.thredded--currently-online {
   }
 }
 
-.thredded--navigation--search {
-  position: static;
-  input[type="search"] {
-    background: #fff;
-    box-shadow: none;
-    margin-right: 0;
-    margin-left: 0;
-    min-width: 16rem;
-    text-align: left;
-  }
-}
+
 
 #thredded--container {
   @media #{$one-column} {
@@ -66,6 +56,22 @@ aside.thredded--currently-online {
   header {
     nav {
       .thredded--user-navigation {
+        border-bottom: 0;
+        a {
+          @include default-button();
+          height: 32px;
+          line-height: 34px;
+          font-size: 12px;
+          color: $grey900;
+          background-color: $white;
+          &:hover {
+            background-color: $grey200;
+          }
+          &:active {
+            background-color: $grey500;
+          }
+    
+        }
         .thredded--nav-text {
           font-family: $medium-sans-font;
         }
@@ -73,6 +79,22 @@ aside.thredded--currently-online {
       .thredded--navigation-top {
         display: flex;
         justify-content: space-between;
+        .thredded--navigation--search {
+          position: static;
+          input[type="search"] {
+            background: #fff;
+            box-shadow: none;
+            margin-right: 0;
+            margin-left: 0;
+            min-width: 16rem;
+            text-align: left;
+            height: 32px;
+            &:hover, &:focus {
+              cursor: text;
+              color: black!important;
+            }
+          }
+        }
       }
       .thredded--main-navigation {
         .thredded--navigation-breadcrumbs {
@@ -86,6 +108,9 @@ aside.thredded--currently-online {
               }
             }
           }
+        }
+        .thredded--scoped-navigation {
+          display: none;
         }
       }
     }
@@ -152,40 +177,42 @@ aside.thredded--currently-online {
               font-size: 18px;
               margin-bottom: 0;
             }
-
           }
-          .thredded--messageboard--description,
-          .thredded--messageboard--meta {
-            font-size: 14px;
+          .thredded--messageboard--description {
             color: $grey900;
             font-family: $medium-sans-font;
             line-height: 18px;
           }
-
           .bottom {
             position: absolute;
             bottom: 30px;
             display: flex;
-            
+            font-size: 12px;
+            line-height: 15px;
+            font-weight: normal;
+            font-family: $sans-font;
             .thredded--messageboard--byline {
+              margin-top: 0;
+              margin-right: 40px;
               font-size: 12px;
               line-height: 15px;
-              margin-top: 4px;
+              font-weight: normal;
+              font-family: $sans-font;
+              cite {
+                font-style: normal;
+              }
+            }
+            .thredded--messageboard--meta {
+              .thredded--messageboard--meta--counts {
+                font-size: 12px;
+                line-height: 15px;
+              }
             }
           }
-
-          
-      
-
         }
       }
     }
     
-    .thredded--messageboard--meta--counts {
-      font-size: 12px;
-      line-height: 15px;
-      font-family: $medium-sans-font;
-    }
     
 
     header.thredded--topic-header {
