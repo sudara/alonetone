@@ -25,6 +25,23 @@ aside.thredded--currently-online {
   display: none;
 }
 
+.thredded--new-topic-form {
+  .title {
+    input {
+      @include default-button;
+      width: auto;
+    }
+  }
+  .thredded--form-list {
+    background: $grey50;
+    padding-left: 48px;
+    label {
+      font-size: 12px;
+    }
+  }
+}
+
+
 .thredded_container {
   max-width: $site_max_width;
   padding: 0 $baseline * 1.5;
@@ -141,12 +158,14 @@ aside.thredded--currently-online {
     box-sizing: border-box;
     background-color: #fff;
     margin-bottom: 16px;
+    margin-top: 12px;
     @include samo-shadow-and-radius();
     .thredded--messageboards-group--title {
       @include title24();
       margin-left: 48px;
       padding-top: 48px;
       margin-bottom: 0;
+      margin-top: 0;
       .thredded--link {
         color: #000;
       }
@@ -270,12 +289,20 @@ aside.thredded--currently-online {
         }
       }
     }
+ 
+
     article.thredded--topics--topic {
-      border-bottom: 1px solid $grey100;
-      padding-bottom: 13px;
-      margin-bottom: 13px;
+      padding-bottom: 0;
+      padding-top: 12px;
+      margin-bottom: 0;
+      background-color: $grey25;
+      height: 72px;
+      .thredded--topics--posts-count {
+        display: none;
+      }
       h1.thredded--topics--title {
         a {
+          margin-left: $baseline * 2;
           font-size: 18px;
           font-weight: bold;
         }
@@ -287,6 +314,10 @@ aside.thredded--currently-online {
     .thredded--post-form--wrapper {
       border-top: 0;
     }
+
+
+
+
   }
   [type="checkbox"]:not(:checked),
   [type="checkbox"] {
