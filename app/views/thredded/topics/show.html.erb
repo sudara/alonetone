@@ -8,6 +8,8 @@
                   id: dom_id(topic),
                   class: ['thredded--main-section', 'thredded--topic', *topic_css_classes(topic)] do %>
 
+    <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
+
     <%= render 'thredded/topics/header', topic: topic %>
     <%= view_hooks.posts_common.pagination_top.render(self, posts: @posts) do %>
       <footer class="thredded--pagination-top"><%= paginate @posts %></footer>
@@ -43,7 +45,7 @@
                   class: 'thredded--button',
                   'data-confirm' => t('thredded.topics.delete_confirm') %>
   </div>
-    <% end %>
+  <% end %>
 
 <% end %>
 

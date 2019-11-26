@@ -21,8 +21,23 @@ li.thredded--user-preferences--notifications-for-private-topics {
   display: none;
 }
 
+.thredded--preferences--form {
+  padding: 48px;
+}
+
 aside.thredded--currently-online {
   display: none;
+}
+
+.thredded--topic-delete--wrapper {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+
+.thredded--form label {
+  font-size: 12px;
 }
 
 .thredded--new-topic-form {
