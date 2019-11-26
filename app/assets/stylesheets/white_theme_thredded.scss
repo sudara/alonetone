@@ -81,7 +81,6 @@ $thredded-font-size-small: 13px;
         color: inherit;
       }
     }
-
     .thredded--post-moderation-record--moderation-state-notice a,
     .thredded--post-moderation-record--content-changed-notice a,
     .thredded--link,
@@ -101,7 +100,6 @@ $thredded-font-size-small: 13px;
     .thredded--topics--messageboard a {
       transition: 0;
     }
-
     .thredded--form [type="color"]:focus,
     .thredded--form [type="date"]:focus,
     .thredded--form [type="datetime"]:focus,
@@ -121,12 +119,6 @@ $thredded-font-size-small: 13px;
     .thredded--form select[multiple="multiple"]:focus {
       border: 1px solid #e1e1e1;
       box-shadow: none;
-    }
-    li.thredded--user-navigation--private-topics {
-      display: none;
-    }
-    li.thredded--user-preferences--notifications-for-private-topics {
-      display: none;
     }
     .thredded--preferences--form {
       padding: 48px;
@@ -206,23 +198,28 @@ $thredded-font-size-small: 13px;
           }
           .thredded--user-navigation {
             border-bottom: 0;
-            a {
-              @include default-button();
-              height: 32px;
-              line-height: 34px;
-              font-size: 12px;
-              color: $grey900;
-              background-color: $white;
-              font-weight: normal;
-              &:hover {
-                background-color: $grey200;
+            li {
+              &.thredded--user-navigation--private-topics, &.thredded--user-preferences--notifications-for-private-topics {
+                display: none;
               }
-              &:active {
-                background-color: $grey500;
+              a {
+                @include default-button();
+                height: 32px;
+                line-height: 34px;
+                background-color: $white;
+                &:hover {
+                  background-color: $grey200;
+                }
+                &:active {
+                  background-color: $grey500;
+                }
+                .thredded--nav-text {
+                  font-family: $medium-sans-font;
+                  font-size: 12px;
+                  font-weight: normal;
+                  color: $grey900;
+                }
               }
-            }
-            .thredded--nav-text {
-              font-family: $medium-sans-font;
             }
           }
         }
@@ -233,46 +230,26 @@ $thredded-font-size-small: 13px;
         }
       }
     }
-    .thredded--messageboards--actions {
-      margin-top: 0px;
-      display: flex;
-      justify-content: flex-end;
-      a {
-        margin-top: 0;
-        @include default-button();
-        height: 32px;
-        line-height: 34px;
-        font-size: 14px;
-        color: $grey900;
-        background-color: $grey100;
-        &:hover {
-          background-color: $grey200;
-        }
-        &:active {
-          background-color: $grey500;
-        }
-      }
-    }
-    .thredded--topics {
-      > h2 {
-        margin-top: 0px;
-        font-size: 24px;
-        font-weight: bold;
-        color: $grey1000;
-        padding-left: 48px;
-      }
-      > p {
-        color: $grey900;
-        font-size: 14px;
-        padding-left: 48px;
-      }
-    }
     section.thredded--main-section {
       box-sizing: border-box;
       background-color: #fff;
       margin-bottom: 16px;
       margin-top: 12px;
       @include samo-shadow-and-radius();
+      &.thredded--topics {
+        > h2 {
+          margin-top: 0px;
+          font-size: 24px;
+          font-weight: bold;
+          color: $grey1000;
+          padding-left: 48px;
+        }
+        > p {
+          color: $grey900;
+          font-size: 14px;
+          padding-left: 48px;
+        }
+      }
       .thredded--messageboards-group--title {
         @include title24();
         margin-left: 48px;
@@ -431,6 +408,26 @@ $thredded-font-size-small: 13px;
         border-top: 0;
         padding-left: 48px;
         padding-right: 48px;
+      }
+    }
+    .thredded--messageboards--actions {
+      margin-top: 0px;
+      display: flex;
+      justify-content: flex-end;
+      a {
+        margin-top: 0;
+        @include default-button();
+        height: 32px;
+        line-height: 34px;
+        font-size: 14px;
+        color: $grey900;
+        background-color: $grey100;
+        &:hover {
+          background-color: $grey200;
+        }
+        &:active {
+          background-color: $grey500;
+        }
       }
     }
     [type="checkbox"]:not(:checked),
