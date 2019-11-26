@@ -57,14 +57,12 @@ aside.thredded--currently-online {
     min-width: 16rem;
     text-align: left;
   }
-
 }
 
 #thredded--container {
   @media #{$one-column} {
     padding: $baseline $baseline;
   }
-
   header {
     nav {
       .thredded--user-navigation {
@@ -93,6 +91,13 @@ aside.thredded--currently-online {
     }
   }
 
+  .thredded--messageboards--actions {
+    margin-top: $baseline;
+    display: flex;
+    justify-content: space-between;
+  }
+
+
   section.thredded--main-section {
     box-sizing: border-box;
     background-color: #fff;
@@ -113,12 +118,26 @@ aside.thredded--currently-online {
         border: 0;
         padding-left: 0;
         background-color: $grey25;
+        display: flex;
+        flex-direction: row;
+        padding-top: $baseline / 2;
+
+        .thumbnail {
+          width: 96px;
+          height: 96px;
+          background-color: red;
+          margin-left: $baseline;
+          margin-right: $baseline;
+        }
+        
         .thredded--messageboard--header {
           margin-bottom: $baseline / 2;
           .thredded--messageboard--title {
             font-size: 18px;
           }
         }
+
+        
       }
       .thredded--messageboard:hover {
         background-color: transparent;
@@ -145,9 +164,6 @@ aside.thredded--currently-online {
       margin-top: 4px;
     }
 
-    .thredded--messageboards--actions {
-      margin-top: $baseline;
-    }
     header.thredded--topic-header {
       padding-bottom: $baseline;
       margin-bottom: 1rem;
