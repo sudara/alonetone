@@ -297,6 +297,9 @@ aside.thredded--currently-online {
       margin-bottom: 0;
       background-color: $grey25;
       height: 72px;
+      .thredded--topics--follow-info {
+        display: none;
+      }
       .thredded--topics--posts-count {
         display: none;
       }
