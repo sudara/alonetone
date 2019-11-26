@@ -35,6 +35,21 @@ aside.thredded--currently-online {
   padding-top: 0;
 }
 
+.thredded--navigation-breadcrumbs {
+  margin-left: 48px;
+  padding-top: 22px;
+  li {
+    font-size: 14px;
+    font-weight: bold;
+    a {
+      color: $orange600;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
 
 .thredded--form label {
   font-size: 12px;
@@ -50,6 +65,7 @@ aside.thredded--currently-online {
   .thredded--form-list {
     background: $grey50;
     padding-left: 48px;
+    padding-top: 16px;
     label {
       font-size: 12px;
     }
@@ -140,18 +156,6 @@ aside.thredded--currently-online {
         }
       }
       .thredded--main-navigation {
-        .thredded--navigation-breadcrumbs {
-          li {
-            font-size: 18px;
-            font-weight: bold;
-            a {
-              color: $accent;
-              &:hover {
-                text-decoration: underline;
-              }
-            }
-          }
-        }
         .thredded--scoped-navigation {
           display: none;
         }
@@ -177,6 +181,22 @@ aside.thredded--currently-online {
       &:active {
         background-color: $grey500;
       }
+    }
+  }
+
+  .thredded--topics {
+    > h2 {
+      margin-top: 0px;
+      font-size: 24px;
+      font-weight: bold;
+      color: $grey1000;
+      padding-left: 48px;
+    }
+
+    > p {
+      color: $grey900;
+      font-size: 14px;
+      padding-left: 48px;
     }
   }
 
@@ -257,7 +277,8 @@ aside.thredded--currently-online {
         }
       }
     }
-    
+  
+
     
 
     header.thredded--topic-header {

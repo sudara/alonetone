@@ -1,5 +1,5 @@
 <% content_for :thredded_page_title, messageboard.name %>
-<% content_for :thredded_page_title, messageboard.description %>
+<% content_for :thredded_page_description, messageboard.description %>
 <% content_for :thredded_page_id, 'thredded--topics-index' %>
 <% content_for :thredded_breadcrumbs, render('thredded/shared/breadcrumbs') %>
 
@@ -14,8 +14,14 @@
                   'data-thredded-topics' => true,
                   'data-thredded-topic-posts-per-page' => Thredded.posts_per_page do %>
   
-    <%begin%> <%= yield :thredded_breadcrumbs %> <%end%>
-    <%begin%> <%= yield :thredded_page_title %> <%end%>
+        <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
+    
+        <h2>
+          <% begin %> <%= yield :thredded_page_title %> <%end%>
+        </h2>
+        <p>
+          <% begin %> <%= yield :thredded_page_description %> <%end%>
+        </p>
 
     <%= render 'thredded/topics/form',
                topic: @new_topic,
