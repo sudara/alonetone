@@ -17,7 +17,8 @@ valid_zip:
   user: sudara
 invalid_file:
   mp3_file_name: Somefile.png
-  permalink: song1
+  title: Somefile
+  permalink: somefile
   mp3_content_type: image/png
   mp3_file_size: <%= 1.megabyte %>
   created_at: <%= 1.day.ago.to_s :db %>
@@ -123,6 +124,17 @@ henri_willig_the_goat:
   mp3_file_size: <%= 2.3.megabytes %>
   length: 140
   created_at: 2019-02-08 13:00:03
+# This track does not have an asset because we lost it! That means there
+# is no record in active_storage_attachments.
+henri_willig_lost_boy:
+  user: henri_willig
+  title: This track has no mp3
+  permalink: this-track-has-no-mp3
+  mp3_file_name: track-4.mp3
+  mp3_content_type: audio/mpeg
+  mp3_file_size: <%= 6.5.megabytes %>
+  length: 3566
+  created_at: 2018-01-08 13:00:03
 
 jamie_kiesl_the_duck:
   user: jamie_kiesl
