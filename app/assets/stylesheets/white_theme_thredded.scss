@@ -112,7 +112,6 @@ aside.thredded--currently-online {
     }
   }
 
-
   section.thredded--main-section {
     box-sizing: border-box;
     background-color: #fff;
@@ -137,6 +136,14 @@ aside.thredded--currently-online {
         flex-direction: row;
         padding-top: $baseline / 2;
 
+        &:hover {
+          background-color: transparent;
+          .thredded--messageboard--header {
+            text-decoration: underline;
+            color: $accent;
+          }
+        }
+
         .thumbnail {
           width: 96px;
           height: 96px;
@@ -151,17 +158,9 @@ aside.thredded--currently-online {
             font-size: 18px;
           }
         }
-
-        
-      }
-      .thredded--messageboard:hover {
-        background-color: transparent;
-        .thredded--messageboard--header {
-          text-decoration: underline;
-          color: $accent;
-        }
       }
     }
+    
     .thredded--messageboard--meta--counts {
       font-size: 12px;
       line-height: 15px;
