@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_185637) do
+ActiveRecord::Schema.define(version: 2019_11_17_201831) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -542,7 +542,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_185637) do
     t.string "perishable_token"
     t.datetime "last_request_at"
     t.integer "bandwidth_used", default: 0
-    t.boolean "use_old_theme", default: false
+    t.boolean "dark_theme", default: false
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
     t.index ["updated_at"], name: "index_users_on_updated_at"

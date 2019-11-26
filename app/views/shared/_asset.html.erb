@@ -25,9 +25,11 @@
       </div>
     <% end %>
 
-    <div class="download_link">
-      <a href="<%= media_url(@asset) %>" download="<%= @asset.audio_file.filename %>"></a>
-    </div>
+    <% if @asset.audio_file.attached? %>
+      <div class="download_link">
+        <a href="<%= media_url(@asset) %>" download="<%= @asset.audio_file.filename %>"></a>
+      </div>
+    <% end %>
  </div>
 
   <div class="track_post">

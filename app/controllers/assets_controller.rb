@@ -56,6 +56,7 @@ class AssetsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
+        check_for_missing_attachment
         lazily_create_waveform_if_needed
         @assets = [@asset]
         set_related_show_variables
@@ -103,6 +104,7 @@ class AssetsController < ApplicationController
   end
 
   def edit
+    check_for_missing_attachment
     @allow_reupload = true
   end
 
@@ -205,6 +207,13 @@ class AssetsController < ApplicationController
       :user_id,
       :youtube_embed
     )
+  end
+
+  def check_for_missing_attachment
+    unless @asset.audio_file.attached?
+      flash.now[:error] = "Uh oh, there's no longer an mp3 attached to this track.<br/>
+        Please edit it and click 'upload a new version' to add the mp3"
+    end
   end
 
   def track_not_found

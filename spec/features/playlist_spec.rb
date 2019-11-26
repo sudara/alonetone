@@ -39,8 +39,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # So we manually adjust the playhead end state to the exact
         # same position for the percy snap.
         Percy.snapshot(page,
-          name: 'Playlist Track Play, Seek, Pause')
-          # percy_css: '.progress_container_inner { left: 35% !important; }')
+          name: 'Playlist Track Play, Seek, Pause',
+            percy_css: '.progress_container_inner { left: 33% !important; }')
       end
     end
   end

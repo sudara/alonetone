@@ -27,18 +27,27 @@
                 <%= link_to 'Edit', main_app.edit_user_path(current_user), class: 'edit_profile_item' %>
             </li>
             <li><%= link_to 'Upload New Track', main_app.upload_path %></li>
-            <li><%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %></li>          
+            <li><%= link_to 'Create Album or Playlist', main_app.new_user_playlist_path(current_user) %></li>
           </ul>
 
           <div class="user_dropdown_menu_bottom_links">
-            <a href="#" class="switch_to_theme switch_to_light" style="display: none;">
+            <% if moderator? %>
+            <a href="#" class="switch_to_theme switch_to_light"
+              data-target="user-dropdown.switchToLight"
+              data-action="click->user-dropdown#switchToLight"
+              style="display: <%= 'none' if light_theme? %>" >
               <div class="switcher_label">DARK</div>
               <div class="switcher_inner"></div>
             </a>
-            <a href="#" class="switch_to_theme switch_to_dark" style="display: none;">
+            <a href="#" class="switch_to_theme switch_to_dark"
+              data-target="user-dropdown.switchToDark"
+              data-action="click->user-dropdown#switchToDark"
+              style="display: <%= 'none' if dark_theme? %>" >
               <div class="switcher_inner"></div>
               <div class="switcher_label">LIGHT</div>
             </a>
+            <% end %>
+
             <%= link_to 'Log Out', main_app.logout_path, class: 'logout_item', data: { turbolinks: "false" } %>
           </div>
 
