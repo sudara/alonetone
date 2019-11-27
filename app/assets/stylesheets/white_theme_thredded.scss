@@ -82,6 +82,12 @@ $thredded-post-content-text: $grey400;
 $thredded-post-form-title-text: $grey900;
 $thredded-post-form-title-text: $grey400;
 
+$thredded-form-list-textarea-background: $white;
+$thredded-form-list-textarea-background: $grey1000;
+
+$thredded-form-list-textarea-text: $black;
+$thredded-form-list-textarea-text: $grey200;
+
 @import "thredded";
 
 .thredded_container {
@@ -579,6 +585,11 @@ $thredded-post-form-title-text: $grey400;
         .thredded--preview-area--title {
           color: $thredded-post-form-title-text;
         }
+        textarea {
+          background-color: $thredded-form-list-textarea-background;
+          color: $thredded-form-list-textarea-text;
+        }
+
       }
     }
     .thredded--messageboards--actions {
