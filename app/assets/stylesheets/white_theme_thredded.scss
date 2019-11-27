@@ -41,6 +41,12 @@ $thredded--messageboard--description-text: $grey400;
 $thredded-messageboard-meta-text: $grey600;
 $thredded-messageboard-meta-text: $grey800;
 
+$thredded-topics-heading-text: $grey1000;
+$thredded-topics-heading-text: $grey400;
+
+$thredded-topics-description-text: $grey900;
+$thredded-topics-description-text: $grey400;
+
 
 
 
@@ -303,7 +309,7 @@ $thredded-messageboard-meta-text: $grey800;
                   font-family: $medium-sans-font;
                   font-size: 12px;
                   font-weight: normal;
-                  color: $grey900;
+                  color: $thredded-user-navigation-link-text;
                 }
               }
             }
@@ -327,11 +333,11 @@ $thredded-messageboard-meta-text: $grey800;
           margin-top: 0px;
           font-size: 24px;
           font-weight: bold;
-          color: $grey1000;
+          color: $thredded-topics-heading-text;
           padding-left: 48px;
         }
         > p {
-          color: $grey900;
+          color: $thredded-topics-description-text;
           font-size: 14px;
           padding-left: 48px;
         }
