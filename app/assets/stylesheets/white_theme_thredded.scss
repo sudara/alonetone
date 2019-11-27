@@ -11,7 +11,6 @@ $thredded-base-border-color: $grey100;
 
 $thredded-font-size-small: 13px;
 
-
 // Privisional theming variables
 
 $thredded-user-navigation-link-background: $white;
@@ -41,14 +40,47 @@ $thredded--messageboard--description-text: $grey400;
 $thredded-messageboard-meta-text: $grey600;
 $thredded-messageboard-meta-text: $grey800;
 
+$threddded-message-board-actions-link-background: $grey100;
+$threddded-message-board-actions-link-background: $grey100;
+
+$threddded-message-board-actions-link-text: $grey900;
+$threddded-message-board-actions-link-text: $grey900;
+
 $thredded-topics-heading-text: $grey1000;
 $thredded-topics-heading-text: $grey400;
+
+$thredded-started-by-text: $grey900;
+$thredded-started-by-text: $grey400;
+
+$thredded-followers-text: $grey900;
+$thredded-followers-text: $grey400;
 
 $thredded-topics-description-text: $grey900;
 $thredded-topics-description-text: $grey400;
 
+$thredded-topics-background: $grey25;
+$thredded-topics-background: $grey1150;
 
+$thredded-topics-alt-background: $white;
+$thredded-topics-alt-background: $grey1100;
 
+$thredded-topics-title-text: $grey1200;
+$thredded-topics-title-text: $grey100;
+
+$thredded-topics-updated-text: $grey600;
+$thredded-topics-updated-text: $grey600;
+
+$thredded-post-user-text: $grey900;
+$thredded-post-user-text: $grey400;
+
+$thredded-post-created-at-text: $grey900;
+$thredded-post-created-at-text: $grey400;
+
+$thredded-post-content-text: $grey900;
+$thredded-post-content-text: $grey400;
+
+$thredded-post-form-title-text: $grey900;
+$thredded-post-form-title-text: $grey400;
 
 @import "thredded";
 
@@ -73,7 +105,11 @@ $thredded-topics-description-text: $grey400;
     margin-right: 0;
   }
   #thredded--container {
-    &.thredded--edit-topic, &.thredded--edit-post, &.thredded--messageboards-new, &.thredded--messageboard-groups-new {
+    &.thredded--edit-topic,
+    &.thredded--edit-post,
+    &.thredded--messageboards-new,
+    &.thredded--messageboard-edit,
+    &.thredded--messageboard-groups-new {
       .thredded--main-section {
         padding: 48px;
         padding-bottom: 10px;
@@ -270,14 +306,14 @@ $thredded-topics-description-text: $grey400;
               }
               &::placeholder {
                 color: $grey800;
-                
+
                 height: inherit;
                 line-height: inherit;
                 // Firefox applies default opacity of 0.54, while all the other browsers use 1.
                 // See https://bugzilla.mozilla.org/show_bug.cgi?id=556145
                 opacity: 1;
               }
-        
+
               &:hover:not(:focus) {
                 &:placeholder-shown {
                   // cursor: pointer;
@@ -291,7 +327,8 @@ $thredded-topics-description-text: $grey400;
           .thredded--user-navigation {
             border-bottom: 0;
             li {
-              &.thredded--user-navigation--private-topics, &.thredded--user-preferences--notifications-for-private-topics {
+              &.thredded--user-navigation--private-topics,
+              &.thredded--user-preferences--notifications-for-private-topics {
                 display: none;
               }
               a {
@@ -378,7 +415,6 @@ $thredded-topics-description-text: $grey400;
           .right {
             padding-top: 22px;
             .thredded--messageboard--header {
-              
               margin-bottom: 10px;
               .thredded--messageboard--title {
                 color: $thredded-messageboard-title-color;
@@ -426,38 +462,86 @@ $thredded-topics-description-text: $grey400;
           }
         }
       }
+      article.thredded--topics--topic {
+        padding-bottom: 0;
+        padding-top: 12px;
+        margin-bottom: 0;
+        background-color: $thredded-topics-background;
+        height: 72px;
+        &:nth-of-type(even) {
+          background-color: $thredded-topics-alt-background;
+        }
+        .thredded--topics--follow-info {
+          display: none;
+        }
+        .thredded--topics--posts-count {
+          display: none;
+        }
+        h1.thredded--topics--title {
+          a {
+            margin-left: $baseline * 2;
+            font-size: 18px;
+            font-weight: bold;
+            color: $thredded-topics-title-text;
+          }
+        }
+        .thredded--topics--updated-by {
+          font-family: $medium-sans-font;
+          font-size: 14px;
+          display: block;
+          padding-left: 48px;
+          color: $thredded-topics-updated-text;
+          a {
+            color: $orange600;
+          }
+        }
+      }
       header.thredded--topic-header {
-        padding-bottom: $baseline;
-        margin-bottom: 1rem;
-        border-bottom: 1px solid $thredded-base-border-color;
+        padding-bottom: $baseline / 2;
         padding-left: 48px;
         padding-right: 48px;
         h1.thredded--topic-header--title {
-          font-size: 27px;
+          font-size: 24px;
           font-weight: bold;
-          color: #000;
+          color: $thredded-topics-heading-text;
+        }
+        .thredded--topic-header--started-by {
+          color: $thredded-started-by-text;
+        }
+        .thredded--topic-header--follow-info {
+          color: $thredded-followers-text;
+        }
+        .thredded--topic-followers {
+          color: $thredded-followers-text;
         }
       }
       article.thredded--post {
+        padding-top: 12px;
         padding-bottom: 27px;
-        margin-bottom: 16px;
-        border-bottom: 1px solid $thredded-base-border-color;
+        margin-bottom: 4px;
+        background: $thredded-topics-background;
         padding-left: 48px;
         padding-right: 48px;
         .thredded--post--user {
-          font-size: 1rem;
+          a {
+            color: $thredded-post-user-text;
+          }
+        }
+        .thredded--post--created-at {
+          color: $thredded-post-created-at-text;
         }
         .thredded--post--content {
           font-size: 1rem;
           line-height: 1.5rem;
           font-size: 1rem;
+          color: $thredded-post-content-text;
           h1,
           h2,
           h3 {
             margin-bottom: 0;
           }
           h2 {
-            color: $grey1000;
+            // color: $grey1000;
             margin-top: 2rem;
             margin-bottom: 0.25rem;
             line-height: 1.5rem;
@@ -485,42 +569,16 @@ $thredded-topics-description-text: $grey400;
           }
         }
       }
-      article.thredded--topics--topic {
-        padding-bottom: 0;
-        padding-top: 12px;
-        margin-bottom: 0;
-        background-color: $white;
-        height: 72px;
-        &:nth-of-type(even) {
-          background-color: $grey25;
-        }
-        .thredded--topics--follow-info {
-          display: none;
-        }
-        .thredded--topics--posts-count {
-          display: none;
-        }
-        h1.thredded--topics--title {
-          a {
-            margin-left: $baseline * 2;
-            font-size: 18px;
-            font-weight: bold;
-          }
-        }
-        .thredded--topics--updated-by {
-          font-family: $medium-sans-font;
-          font-size: 14px;
-          display: block;
-          padding-left: 48px;
-          a {
-            color: $orange600;
-          }
-        }
-      }
       .thredded--post-form--wrapper {
         border-top: 0;
         padding-left: 48px;
         padding-right: 48px;
+        .thredded--post-form--title {
+          color: $thredded-post-form-title-text;
+        }
+        .thredded--preview-area--title {
+          color: $thredded-post-form-title-text;
+        }
       }
     }
     .thredded--messageboards--actions {
@@ -533,8 +591,8 @@ $thredded-topics-description-text: $grey400;
         height: 32px;
         line-height: 34px;
         font-size: 14px;
-        color: $grey900;
-        background-color: $grey100;
+        color: $threddded-message-board-actions-link-text;
+        background-color: $threddded-message-board-actions-link-background;
         &:hover {
           background-color: $grey200;
         }
