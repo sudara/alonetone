@@ -149,18 +149,35 @@ $thredded-font-size-small: 13px;
       font-size: 12px;
     }
     .thredded--new-topic-form {
-      .title {
-        input {
-          @include default-button;
-          width: auto;
-        }
+      label {
+        height: auto;
+        margin-bottom: $thredded-small-spacing / 2;
+        opacity: 1;
+        visibility: visible;
+      }
+      .private_users,
+      .content,
+      .submit {
+        height: auto;
       }
       .thredded--form-list {
         background: $grey50;
         padding-left: 48px;
+        padding-right: 48px;
         padding-top: 16px;
         label {
           font-size: 12px;
+        }
+        li {
+          height: auto;
+          visibility: visible;
+          opacity: 1;
+          margin: 0;
+          &.title {
+            input {
+              margin-bottom: 24px;
+            }
+          }
         }
       }
       &.thredded--is-expanded {
