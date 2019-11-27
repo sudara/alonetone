@@ -3,9 +3,7 @@
 <% content_for :thredded_page_id, 'thredded--topics-index' %>
 <% content_for :thredded_breadcrumbs, render('thredded/shared/breadcrumbs') %>
 
-
 <%= thredded_page do %>
-
 
   <%= define_svg_icons('thredded/follow.svg', 'thredded/unfollow.svg') %>
 
@@ -14,14 +12,19 @@
                   'data-thredded-topics' => true,
                   'data-thredded-topic-posts-per-page' => Thredded.posts_per_page do %>
   
-        <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
+
+    <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
+
+    <h2>
+      <% begin %> <%= yield :thredded_page_title %> <%end%>
+    </h2>
+    <p>
+      <% begin %> <%= yield :thredded_page_description %> <%end%>
+    </p>
+
+    <a href="#" class="start_new_topic">Start New Topic</a>
+
     
-        <h2>
-          <% begin %> <%= yield :thredded_page_title %> <%end%>
-        </h2>
-        <p>
-          <% begin %> <%= yield :thredded_page_description %> <%end%>
-        </p>
 
     <%= render 'thredded/topics/form',
                topic: @new_topic,

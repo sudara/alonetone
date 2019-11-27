@@ -34,11 +34,22 @@ $thredded-font-size-small: 13px;
     margin-right: 0;
   }
   #thredded--container {
-    &.thredded--edit-topic, &.thredded--edit-post {
+    &.thredded--edit-topic, &.thredded--edit-post, &.thredded--messageboards-new, &.thredded--messageboard-groups-new {
       .thredded--main-section {
         padding: 48px;
+        padding-bottom: 10px;
       }
     }
+    &.thredded--topic-show {
+      .thredded--main-section {
+        padding-bottom: 48px;
+      }
+    }
+
+    .thredded--topic-delete-form {
+      text-align: right;
+    }
+
     .thredded--button,
     .thredded--form--submit {
       @include default-button();
@@ -206,15 +217,35 @@ $thredded-font-size-small: 13px;
             input[type="search"] {
               background: #fff;
               box-shadow: none;
+              font-size: 12px;
+              font-family: $medium-sans-font;
               margin-right: 0;
               margin-left: 0;
-              min-width: 16rem;
+              min-width: 160px;
               text-align: left;
               height: 32px;
               &:hover,
               &:focus {
                 cursor: text;
                 color: black !important;
+              }
+              &::placeholder {
+                color: $grey800;
+                
+                height: inherit;
+                line-height: inherit;
+                // Firefox applies default opacity of 0.54, while all the other browsers use 1.
+                // See https://bugzilla.mozilla.org/show_bug.cgi?id=556145
+                opacity: 1;
+              }
+        
+              &:hover:not(:focus) {
+                &:placeholder-shown {
+                  // cursor: pointer;
+                }
+                &::placeholder {
+                  color: $grey800;
+                }
               }
             }
           }
@@ -271,6 +302,11 @@ $thredded-font-size-small: 13px;
           font-size: 14px;
           padding-left: 48px;
         }
+        a.start_new_topic {
+          @include default-button();
+          margin-left: 48px;
+          margin-bottom: 12px;
+        }
       }
       .thredded--messageboards-group--title {
         @include title24();
@@ -292,6 +328,7 @@ $thredded-font-size-small: 13px;
           display: flex;
           flex-direction: row;
           padding-top: $baseline / 2;
+          margin-bottom: 4px;
           .thumbnail {
             width: 96px;
             height: 96px;
@@ -322,10 +359,14 @@ $thredded-font-size-small: 13px;
               line-height: 15px;
               font-weight: normal;
               font-family: $sans-font;
+              .dash {
+                color: $orangetone;
+                margin-right: 12px;
+              }
               .thredded--messageboard--byline {
                 margin-top: 0;
-                margin-right: 40px;
                 font-size: 12px;
+                margin-right: 12px;
                 line-height: 15px;
                 font-weight: normal;
                 font-family: $sans-font;
@@ -334,6 +375,7 @@ $thredded-font-size-small: 13px;
                 }
               }
               .thredded--messageboard--meta {
+                
                 .thredded--messageboard--meta--counts {
                   font-size: 12px;
                   line-height: 15px;
@@ -349,7 +391,6 @@ $thredded-font-size-small: 13px;
         border-bottom: 1px solid $thredded-base-border-color;
         padding-left: 48px;
         padding-right: 48px;
-        padding-top: 48px;
         h1.thredded--topic-header--title {
           font-size: 27px;
           font-weight: bold;
