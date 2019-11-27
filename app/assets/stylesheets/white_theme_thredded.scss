@@ -11,6 +11,39 @@ $thredded-base-border-color: $grey100;
 
 $thredded-font-size-small: 13px;
 
+
+// Privisional theming variables
+
+$thredded-user-navigation-link-background: $white;
+$thredded-user-navigation-link-background: $grey1000;
+
+$thredded-user-navigation-link-text: $grey800;
+$thredded-user-navigation-link-text: $grey400;
+
+$thredded-breadcrumbs-text: $orange600;
+$thredded-breadcrumbs-text: $orangetone;
+
+$thredded-main-section-background: $white;
+$thredded-main-section-background: $grey1100;
+
+$thredded-messageboards-group-messageboard-background: $grey25;
+$thredded-messageboards-group-messageboard-background: $grey1150;
+
+$thredded-messsageboards-group-title-text: $black;
+$thredded-messsageboards-group-title-text: $grey400;
+
+$thredded-messageboard-title-color: $orange600;
+$thredded-messageboard-title-color: $orange300;
+
+$thredded--messageboard--description-text: $grey900;
+$thredded--messageboard--description-text: $grey400;
+
+$thredded-messageboard-meta-text: $grey600;
+$thredded-messageboard-meta-text: $grey800;
+
+
+
+
 @import "thredded";
 
 .thredded_container {
@@ -154,7 +187,7 @@ $thredded-font-size-small: 13px;
         font-size: 14px;
         font-weight: bold;
         a {
-          color: $orange600;
+          color: $thredded-breadcrumbs-text;
           &:hover {
             text-decoration: underline;
           }
@@ -259,7 +292,7 @@ $thredded-font-size-small: 13px;
                 @include default-button();
                 height: 32px;
                 line-height: 34px;
-                background-color: $white;
+                background-color: $thredded-user-navigation-link-background;
                 &:hover {
                   background-color: $grey200;
                 }
@@ -285,7 +318,7 @@ $thredded-font-size-small: 13px;
     }
     section.thredded--main-section {
       box-sizing: border-box;
-      background-color: #fff;
+      background-color: $thredded-main-section-background;
       margin-bottom: 16px;
       margin-top: 12px;
       @include samo-shadow-and-radius();
@@ -315,7 +348,7 @@ $thredded-font-size-small: 13px;
         margin-bottom: 0;
         margin-top: 0;
         .thredded--link {
-          color: #000;
+          color: $thredded-messsageboards-group-title-text;
         }
       }
       .thredded--messageboards-group {
@@ -324,7 +357,7 @@ $thredded-font-size-small: 13px;
           border: 0;
           padding-left: 0;
           padding-bottom: 60px;
-          background-color: $grey25;
+          background-color: $thredded-messageboards-group-messageboard-background;
           display: flex;
           flex-direction: row;
           padding-top: $baseline / 2;
@@ -339,15 +372,16 @@ $thredded-font-size-small: 13px;
           .right {
             padding-top: 22px;
             .thredded--messageboard--header {
-              color: $orange600;
+              
               margin-bottom: 10px;
               .thredded--messageboard--title {
+                color: $thredded-messageboard-title-color;
                 font-size: 18px;
                 margin-bottom: 0;
               }
             }
             .thredded--messageboard--description {
-              color: $grey900;
+              color: $thredded--messageboard--description-text;
               font-family: $medium-sans-font;
               line-height: 18px;
             }
@@ -364,6 +398,7 @@ $thredded-font-size-small: 13px;
                 margin-right: 12px;
               }
               .thredded--messageboard--byline {
+                color: $thredded-messageboard-meta-text;
                 margin-top: 0;
                 font-size: 12px;
                 margin-right: 12px;
@@ -375,8 +410,8 @@ $thredded-font-size-small: 13px;
                 }
               }
               .thredded--messageboard--meta {
-                
                 .thredded--messageboard--meta--counts {
+                  color: $thredded-messageboard-meta-text;
                   font-size: 12px;
                   line-height: 15px;
                 }
