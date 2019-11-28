@@ -4,7 +4,6 @@
                       *('thredded--messageboard--has-unread-topics' if messageboard.unread_topics?),
                       *('thredded--messageboard--has-unread-followed-topics' if messageboard.unread_followed_topics?)] do %>
     <div class="thumbnail">
-      
     </div>
     <div class="right">
       <%= render 'thredded/messageboards/messageboard/header', messageboard: messageboard %>

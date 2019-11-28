@@ -139,9 +139,10 @@ $thredded-new-topic-background: $grey100;
     .thredded--form--submit {
       @include default-button();
       height: auto;
-      margin-bottom: 12px;
       opacity: 1;
       visibility: visible;
+      margin-top: 12px;
+      margin-bottom: 24px;
     }
     .thredded--form {
       .thredded--button,
@@ -261,7 +262,6 @@ $thredded-new-topic-background: $grey100;
       visibility: visible;
     }
     .thredded--new-topic-form {
-
       label {
         height: auto;
         margin-bottom: $thredded-small-spacing / 2;
@@ -287,6 +287,7 @@ $thredded-new-topic-background: $grey100;
           visibility: visible;
           opacity: 1;
           margin: 0;
+          text-align: right;
           &.title {
             input {
               margin-bottom: 24px;
@@ -389,22 +390,36 @@ $thredded-new-topic-background: $grey100;
       margin-top: 12px;
       @include samo-shadow-and-radius();
       &.thredded--topics {
-        > h2 {
-          margin-top: 0px;
-          font-size: 24px;
-          font-weight: bold;
-          color: $thredded-topics-heading-text;
-          padding-left: 48px;
-        }
-        > p {
-          color: $thredded-topics-description-text;
-          font-size: 14px;
-          padding-left: 48px;
-        }
-        a.start_new_topic {
-          @include default-button();
-          margin-left: 48px;
-          margin-bottom: 12px;
+
+        .top {
+          display: flex;
+          justify-content: space-between;
+          .left {
+            > h2 {
+              margin-top: 0px;
+              font-size: 24px;
+              font-weight: bold;
+              color: $thredded-topics-heading-text;
+              padding-left: 48px;
+            }
+            > p {
+              color: $thredded-topics-description-text;
+              font-size: 14px;
+              padding-left: 48px;
+            }
+            a.start_new_topic {
+              @include default-button();
+              margin-left: 48px;
+              margin-bottom: 12px;
+            }
+          }
+          .thumbnail {
+            width: 96px;
+            height: 96px;
+            background-color: red;
+            margin-right: $baseline;
+            margin-top: $baseline / 2;
+          }
         }
       }
       .thredded--messageboards-group--title {

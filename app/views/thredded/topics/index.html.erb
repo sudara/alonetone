@@ -12,17 +12,24 @@
                   'data-thredded-topics' => true,
                   'data-thredded-topic-posts-per-page' => Thredded.posts_per_page do %>
   
+    <div class="top">
+      <div class="left">
+        <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
 
-    <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
+        <h2>
+          <% begin %> <%= yield :thredded_page_title %> <%end%>
+        </h2>
+        <p>
+          <% begin %> <%= yield :thredded_page_description %> <%end%>
+        </p>
 
-    <h2>
-      <% begin %> <%= yield :thredded_page_title %> <%end%>
-    </h2>
-    <p>
-      <% begin %> <%= yield :thredded_page_description %> <%end%>
-    </p>
+        <a href="#" class="start_new_topic">Start New Topic</a>
+      </div>
 
-    <a href="#" class="start_new_topic">Start New Topic</a>
+      <div class="thumbnail">
+      </div>
+    </div>
+
 
     
 
