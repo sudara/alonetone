@@ -1,67 +1,80 @@
-form {
-  input[type="search"],
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  textarea {
-    outline: 0;
-    -webkit-appearance: none;
-  }
-  input[type="search"],
-  input[type="text"],
-  input[type="password"],
-  input[type="email"] {
-    width: 280px;
-  }
-  input[type="submit"] {
-    cursor: pointer;
-    @include default-button();
-  }
-  input[type="file"] {
-    background-color: transparent;
-  }
-  br {
+input[type="search"],
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  outline: 0;
+  -webkit-appearance: none;
+}
+input[type="search"],
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 280px;
+}
+input[type="submit"] {
+  cursor: pointer;
+  @include default-button();
+}
+input[type="file"] {
+  background-color: transparent;
+}
+br {
+  display: none;
+}
+label {
+  margin-bottom: 8px !important;
+  font-family: $medium-sans-font;
+  font-size: 12px;
+  display: block;
+  margin: 2px 0;
+  text-align: left;
+  // text-transform: uppercase;
+  color: $forms-label-text;
+  abbr {
     display: none;
   }
-  label {
-    margin-bottom: 8px !important;
-    font-family: $medium-sans-font;
-    font-size: 12px;
-    display: block;
-    margin: 2px 0;
-    text-align: left;
-    text-transform: uppercase;
-    color: $forms-label-text;
-    abbr {
-      display: none;
-    }
-  }
-  input,
-  textarea,
-  select {
-    box-sizing: border-box;
-    margin-bottom: $baseline;
-    border: 2px solid $forms-border;
-    border-radius: 4px;
-    background-color: $forms-background;
-    font-size: 14px;
-    color: $forms-input-text;
-    &:focus {
-      border: 2px solid $accent;
-    }
-  }
-  input {
-    padding: 9px 10px 6px 10px;
-    outline: none;
-    font-family: $medium-sans-font;
-  }
-  textarea {
-    font-family: $medium-sans-font;
-    width: 100%;
-    padding: 9px 10px 6px 10px;
+}
+input,
+textarea,
+select {
+  box-sizing: border-box;
+  margin-bottom: $baseline;
+  border: 1px solid $forms-border;
+  border-radius: 4px;
+  background-color: $forms-background;
+  font-size: 14px;
+  color: $forms-input-text;
+  &:focus {
+    border: 1px solid $accent;
   }
 }
 
+// This is to override default form styles in the thredded appp
+// seems silly to being rewriting same properties as the style above
+form.thredded--form input[type="text"], form.thredded--form textarea {
+  background-color: $forms-background!important;
+  border: 1px solid $forms-border!important;
+  color: $forms-input-text;
+  font-family: $medium-sans-font;
+  padding: 9px 10px 6px 10px;
+  font-size: 14px;
+  box-shadow: none;
+  &:focus {
+    border: 1px solid $accent!important;
+  }
+}
+
+input {
+  padding: 9px 10px 6px 10px;
+  outline: none;
+  font-family: $medium-sans-font;
+}
+textarea {
+  font-family: $medium-sans-font;
+  width: 100%;
+  padding: 9px 10px 6px 10px;
+}
 
 /* PLACEHOLDER TEXT COLOR */
 
