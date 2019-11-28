@@ -49,6 +49,7 @@ $threddded-message-board-actions-link-text: $grey900;
 $thredded-topics-heading-text: $grey1000;
 // $thredded-topics-heading-text: $grey400;
 
+
 $thredded-started-by-text: $grey900;
 // $thredded-started-by-text: $grey400;
 
@@ -60,6 +61,7 @@ $thredded-topics-description-text: $grey900;
 
 $thredded-topics-background: $grey25;
 // $thredded-topics-background: $grey1150;
+
 
 $thredded-topics-alt-background: $white;
 // $thredded-topics-alt-background: $grey1100;
@@ -87,6 +89,8 @@ $thredded-form-list-textarea-background: $white;
 
 $thredded-form-list-textarea-text: $black;
 // $thredded-form-list-textarea-text: $grey200;
+
+$thredded-new-topic-background: $grey100;
 
 @import "thredded";
 
@@ -134,6 +138,10 @@ $thredded-form-list-textarea-text: $black;
     .thredded--button,
     .thredded--form--submit {
       @include default-button();
+      height: auto;
+      margin-bottom: 12px;
+      opacity: 1;
+      visibility: visible;
     }
     .thredded--form {
       .thredded--button,
@@ -247,8 +255,13 @@ $thredded-form-list-textarea-text: $black;
     }
     .thredded--form label {
       font-size: 12px;
+      height: auto!important;
+      margin: 8px;
+      opacity: 1;
+      visibility: visible;
     }
     .thredded--new-topic-form {
+
       label {
         height: auto;
         margin-bottom: $thredded-small-spacing / 2;
@@ -261,10 +274,11 @@ $thredded-form-list-textarea-text: $black;
         height: auto;
       }
       .thredded--form-list {
-        background: $grey50;
+        background: $thredded-new-topic-background;
         padding-left: 48px;
         padding-right: 48px;
         padding-top: 16px;
+        margin-bottom: 0;
         label {
           font-size: 12px;
         }
@@ -619,6 +633,7 @@ $thredded-form-list-textarea-text: $black;
     [type="checkbox"] {
       left: 0;
       position: static;
+      margin-bottom: 0;
     }
   }
 }
