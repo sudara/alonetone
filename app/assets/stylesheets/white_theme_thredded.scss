@@ -564,7 +564,6 @@ $thredded-new-topic-background: $grey100;
                   color: $thredded-messageboard-meta-text;
                   margin-top: 0;
                   font-size: 12px;
-                  
                   line-height: 15px;
                   font-weight: normal;
                   font-family: $sans-font;
@@ -591,6 +590,15 @@ $thredded-new-topic-background: $grey100;
         margin-bottom: 0;
         margin-right: 0;
         background-color: $thredded-topics-background;
+        &.thredded--topic-unread {
+          position: relative;
+          &::before {
+            content: image-url("svg/icon_thredded_unread.svg");
+            position: absolute;
+            right: 16px;
+          }
+          
+        }
         &:nth-of-type(even) {
           background-color: $thredded-topics-alt-background;
         }
