@@ -366,6 +366,10 @@ $thredded-new-topic-background: $grey100;
           }
           .thredded--user-navigation {
             border-bottom: 0;
+            @media #{$mobile} {
+              top: -30px;
+            }
+            
             li {
               &.thredded--user-navigation--private-topics,
               &.thredded--user-preferences--notifications-for-private-topics {
@@ -700,6 +704,7 @@ $thredded-new-topic-background: $grey100;
       margin-top: 0px;
       display: flex;
       justify-content: flex-end;
+      flex-wrap: wrap;
       a {
         margin-top: 0;
         @include default-button();
