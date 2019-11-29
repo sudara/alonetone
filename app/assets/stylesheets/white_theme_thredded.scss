@@ -243,6 +243,10 @@ $thredded-new-topic-background: $grey100;
     .thredded--navigation-breadcrumbs {
       margin-left: 48px;
       padding-top: 22px;
+      @media #{$mobile} {
+        margin-left: 12px;
+      }
+      
       li {
         font-size: 14px;
         font-weight: bold;
@@ -279,6 +283,10 @@ $thredded-new-topic-background: $grey100;
         padding-right: 48px;
         padding-top: 16px;
         margin-bottom: 0;
+        @media #{$mobile} {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
         label {
           font-size: 12px;
         }
@@ -400,16 +408,25 @@ $thredded-new-topic-background: $grey100;
               font-weight: bold;
               color: $thredded-topics-heading-text;
               padding-left: 48px;
+              @media #{$mobile} {
+                padding-left: 12px;
+              }
             }
             > p {
               color: $thredded-topics-description-text;
               font-size: 14px;
               padding-left: 48px;
+              @media #{$mobile} {
+                padding-left: 12px;
+              }
             }
             a.start_new_topic {
               @include default-button();
               margin-left: 48px;
               margin-bottom: 12px;
+              @media #{$mobile} {
+                margin-left: 12px;
+              }
             }
           }
           .thumbnail {
@@ -418,6 +435,9 @@ $thredded-new-topic-background: $grey100;
             background-color: red;
             margin-right: $baseline;
             margin-top: $baseline / 2;
+            @media #{$mobile} {
+              display: none;
+            }
           }
         }
       }
@@ -448,6 +468,9 @@ $thredded-new-topic-background: $grey100;
             flex-direction: row;
             padding-top: $baseline / 2;
             margin-bottom: 4px;
+            @media #{$mobile} {
+              padding-bottom: 24px;
+            }
             .thumbnail {
               @media #{$mobile} {
                 display: none;
@@ -463,7 +486,6 @@ $thredded-new-topic-background: $grey100;
               @media #{$mobile} {
                 margin-left: 12px;
               }
-              
               .thredded--messageboard--header {
                 margin-bottom: 10px;
                 .thredded--messageboard--title {
@@ -486,6 +508,9 @@ $thredded-new-topic-background: $grey100;
                 font-weight: normal;
                 font-family: $sans-font;
                 flex-wrap: wrap;
+                @media #{$mobile} {
+                  position: static;
+                }
                 .dash {
                   color: $orangetone;
                   margin-right: 12px;
@@ -514,13 +539,12 @@ $thredded-new-topic-background: $grey100;
           }
         }
       }
-
       article.thredded--topics--topic {
         padding-bottom: 0;
         padding-top: 12px;
         margin-bottom: 0;
+        margin-right: 0;
         background-color: $thredded-topics-background;
-        height: 72px;
         &:nth-of-type(even) {
           background-color: $thredded-topics-alt-background;
         }
@@ -531,8 +555,12 @@ $thredded-new-topic-background: $grey100;
           display: none;
         }
         h1.thredded--topics--title {
+          display: block;
+          margin-left: $baseline * 2;
+          @media #{$mobile} {
+            margin-left: 12px;
+          }
           a {
-            margin-left: $baseline * 2;
             font-size: 18px;
             font-weight: bold;
             color: $thredded-topics-title-text;
@@ -544,6 +572,9 @@ $thredded-new-topic-background: $grey100;
           display: block;
           padding-left: 48px;
           color: $thredded-topics-updated-text;
+          @media #{$mobile} {
+            padding-left: 12px;
+          }
           a {
             color: $orange600;
           }
