@@ -123,6 +123,10 @@ $thredded-new-topic-background: $grey100;
       .thredded--main-section {
         padding: 48px;
         padding-bottom: 10px;
+        @media #{$mobile} {
+          padding: 12px;
+        }
+        
       }
     }
     &.thredded--topic-show {
@@ -231,6 +235,10 @@ $thredded-new-topic-background: $grey100;
     }
     .thredded--preferences--form {
       padding: 48px;
+      @media #{$mobile} {
+        padding: 12px;
+      }
+      
     }
     aside.thredded--currently-online {
       display: none;
@@ -584,6 +592,10 @@ $thredded-new-topic-background: $grey100;
         padding-bottom: $baseline / 2;
         padding-left: 48px;
         padding-right: 48px;
+        @media #{$mobile} {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
         h1.thredded--topic-header--title {
           font-size: 24px;
           font-weight: bold;
@@ -606,6 +618,11 @@ $thredded-new-topic-background: $grey100;
         background: $thredded-topics-background;
         padding-left: 48px;
         padding-right: 48px;
+        @media #{$mobile} {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        
         .thredded--post--user {
           a {
             color: $thredded-post-user-text;
@@ -657,6 +674,11 @@ $thredded-new-topic-background: $grey100;
         border-top: 0;
         padding-left: 48px;
         padding-right: 48px;
+        @media #{$mobile} {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        
         .thredded--post-form--title {
           color: $thredded-post-form-title-text;
         }
