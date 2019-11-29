@@ -16,11 +16,23 @@ $thredded-font-size-small: 13px;
 $thredded-user-navigation-link-background: $white;
 $thredded-user-navigation-link-background: $grey1000;
 
+$thredded-search-background: $white;
+$thredded-search-background: $grey1000;
+
+$thredded-search-color: $grey800;
+$thredded-search-color: $grey400;
+
 $thredded-user-navigation-link-text: $grey800;
 $thredded-user-navigation-link-text: $grey400;
 
 $thredded-breadcrumbs-text: $orange600;
 $thredded-breadcrumbs-text: $orangetone;
+
+$thredded-preferences-title-text: $black;
+$thredded-preferences-title-text: $grey400;
+
+$thredded-form-list-hint-text: $black;
+$thredded-form-list-hint-text: $grey400;
 
 $thredded-main-section-background: $white;
 $thredded-main-section-background: $grey1100;
@@ -241,6 +253,14 @@ $thredded-new-topic-background: $grey100;
         padding: 12px;
       }
     }
+    .thredded--preferences--title {
+      color: $thredded-preferences-title-text;
+    }
+    .thredded--form-list--hint {
+      color: $thredded-form-list-hint-text;
+    }
+
+
     aside.thredded--currently-online {
       display: none;
     }
@@ -331,7 +351,8 @@ $thredded-new-topic-background: $grey100;
           .thredded--navigation--search {
             position: static;
             input[type="search"] {
-              background: #fff;
+              background: $thredded-search-background;
+              color: $thredded-search-color;
               box-shadow: none;
               font-size: 12px;
               font-family: $medium-sans-font;
@@ -343,10 +364,10 @@ $thredded-new-topic-background: $grey100;
               &:hover,
               &:focus {
                 cursor: text;
-                color: black !important;
+                color: $thredded-search-color!important;
               }
               &::placeholder {
-                color: $grey800;
+                color: $thredded-search-color;
 
                 height: inherit;
                 line-height: inherit;
@@ -360,7 +381,7 @@ $thredded-new-topic-background: $grey100;
                   // cursor: pointer;
                 }
                 &::placeholder {
-                  color: $grey800;
+                  color: $thredded-search-color;
                 }
               }
             }
