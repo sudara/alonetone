@@ -78,6 +78,9 @@ $thredded-post-user-text: $grey400;
 $thredded-post-created-at-text: $grey900;
 $thredded-post-created-at-text: $grey400;
 
+$thredded-post-dropdown-background: $white;
+$thredded-post-dropdown-background: $grey800;
+
 $thredded-post-content-text: $grey900;
 $thredded-post-content-text: $grey400;
 
@@ -644,6 +647,10 @@ $thredded-new-topic-background: $grey100;
         }
         .thredded--post--created-at {
           color: $thredded-post-created-at-text;
+        }
+        .thredded--post--dropdown--actions {
+          background-color: $thredded-post-dropdown-background;
+          
         }
         .thredded--post--content {
           font-size: 1rem;
