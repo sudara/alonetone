@@ -564,7 +564,7 @@ $thredded-new-topic-background: $grey100;
                   color: $thredded-messageboard-meta-text;
                   margin-top: 0;
                   font-size: 12px;
-                  margin-right: 12px;
+                  
                   line-height: 15px;
                   font-weight: normal;
                   font-family: $sans-font;
@@ -573,6 +573,7 @@ $thredded-new-topic-background: $grey100;
                   }
                 }
                 .thredded--messageboard--meta {
+                  margin-right: 12px;
                   .thredded--messageboard--meta--counts {
                     color: $thredded-messageboard-meta-text;
                     font-size: 12px;
