@@ -135,11 +135,9 @@ $thredded-new-topic-background: $grey100;
         padding-bottom: 48px;
       }
     }
-
     .thredded--topic-delete-form {
       text-align: right;
     }
-
     .thredded--button,
     .thredded--form--submit {
       @include default-button();
@@ -239,7 +237,6 @@ $thredded-new-topic-background: $grey100;
       @media #{$mobile} {
         padding: 12px;
       }
-      
     }
     aside.thredded--currently-online {
       display: none;
@@ -410,6 +407,7 @@ $thredded-new-topic-background: $grey100;
       margin-bottom: 16px;
       margin-top: 12px;
       @include samo-shadow-and-radius();
+      overflow: hidden;
       &.thredded--topics {
         .top {
           display: flex;
@@ -658,7 +656,6 @@ $thredded-new-topic-background: $grey100;
             margin-bottom: 0;
           }
           h2 {
-            // color: $grey1000;
             margin-top: 2rem;
             margin-bottom: 0.25rem;
             line-height: 1.5rem;
@@ -694,7 +691,6 @@ $thredded-new-topic-background: $grey100;
           padding-left: 12px;
           padding-right: 12px;
         }
-        
         .thredded--post-form--title {
           color: $thredded-post-form-title-text;
         }
