@@ -278,6 +278,13 @@ $thredded-new-topic-background: $grey100;
       li {
         font-size: 14px;
         font-weight: bold;
+        &::after {
+          background: none;
+          content: "→";
+          color: $grey600;
+          position: relative;
+          left: -3px;
+        }
         a {
           color: $thredded-breadcrumbs-text;
           &:hover {
