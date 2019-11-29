@@ -459,7 +459,7 @@ $thredded-new-topic-background: $grey100;
           @include title24();
           margin-left: 48px;
           padding-top: 48px;
-          margin-bottom: 0;
+          margin-bottom: 20px;
           margin-top: 0;
           @media #{$mobile} {
             margin-left: 12px;
@@ -470,7 +470,16 @@ $thredded-new-topic-background: $grey100;
           }
         }
         .thredded--messageboards-group {
+          .thredded--grid-sizer {
+            display: none!important;
+          }
           display: block;
+          &::before {
+            display: none!important;
+          }
+          &::after {
+            display: none!important;
+          }
           &:last-child {
             padding-bottom: 42px;
           }
