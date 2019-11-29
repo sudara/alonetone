@@ -247,19 +247,18 @@ $thredded-new-topic-background: $grey100;
       border: 1px solid #e1e1e1;
       box-shadow: none;
     }
-    .thredded--preferences--form {
+    .thredded--preferences--form, .thredded--preferences--messageboards-nav {
       padding: 48px;
       @media #{$mobile} {
         padding: 12px;
       }
     }
-    .thredded--preferences--title {
+    .thredded--preferences--title, .thredded--messageboards-group--title {
       color: $thredded-preferences-title-text;
     }
     .thredded--form-list--hint {
       color: $thredded-form-list-hint-text;
     }
-
 
     aside.thredded--currently-online {
       display: none;
