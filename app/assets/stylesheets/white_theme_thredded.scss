@@ -597,7 +597,15 @@ $thredded-new-topic-background: $grey100;
             position: absolute;
             right: 16px;
           }
-          
+        }
+        &.thredded--topic-sticky {
+          position: relative;
+          &::after {
+            content: image-url("svg/icon_thredded_sticky_topic.svg");
+            position: absolute;
+            left: 16px;
+            top: 14px;
+          }
         }
         &:nth-of-type(even) {
           background-color: $thredded-topics-alt-background;
