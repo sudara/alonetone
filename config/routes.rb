@@ -114,8 +114,11 @@ Alonetone::Application.routes.draw do
       resources :comments,  only: [:create, :destroy]
     end
 
-    resources :favorites, only: [:update, :destroy]
-
+    resources :favorites, only: [:create] do
+      collection do
+        put :delete
+      end
+    end
     resources :playlists do
       collection do
         get :latest
