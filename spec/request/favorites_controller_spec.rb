@@ -15,13 +15,13 @@ RSpec.describe FavoritesController, type: :request do
 
     it "should destroy track" do
       expect do
-        delete "/#{user.login}/favorites/#{Track.last.id}"
+        put "/#{user.login}/favorites/delete", params: { asset_id: asset.id }
       end.to change { Track.count }.by(-1)
     end
 
     it "should decrement favorites_count" do
       expect {
-        delete "/#{user.login}/favorites/#{Track.last.id}"
+        put "/#{user.login}/favorites/delete", params: { asset_id: asset.id }
       }.to change{ asset.reload.favorites_count }.by(-1)
     end
   end
