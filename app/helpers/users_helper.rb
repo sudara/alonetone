@@ -78,10 +78,6 @@ module UsersHelper
     logged_in? && current_user.has_setting?('hide_notice') && current_user.settings['hide_notice'][notice].present?
   end
 
-  def favorite_toggle(asset)
-    link_to('add to favorites', user_favorite_path(user_id: current_user.id, asset_id: asset.id), class: 'add_to_favorites')
-  end
-
   def follow_toggle(user)
     return unless logged_in? && (user.id != current_user.id)
 
