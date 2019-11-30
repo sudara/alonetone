@@ -367,6 +367,8 @@ $thredded-new-topic-background: $grey100;
               min-width: 160px;
               text-align: left;
               height: 32px;
+              padding: 0 0 0 8px!important;
+              line-height: 32px!important;
               &:hover,
               &:focus {
                 cursor: text;
