@@ -6,16 +6,16 @@ class FavoritesController < ApplicationController
   before_action :find_user
   before_action :find_asset
   before_action :require_login
-  before_action :find_favorite_track, only: :destroy
+  before_action :find_favorite_track, only: :delete
 
-  def update
+  def create
     raise ArgumentError unless @asset
 
     @user.tracks.favorites.create(asset_id: @asset.id)
     head :ok
   end
 
-  def destroy
+  def delete
     @favorite_track.destroy
     head :ok
   end
