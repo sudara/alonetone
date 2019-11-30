@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus'
 import FaveAnimation from '../animation/fave_animation'
+import Rails from '@rails/ujs'
 
 export default class extends Controller {
   static targets = ['svg']
@@ -12,7 +13,6 @@ export default class extends Controller {
     if (this.favorited) {
       this.animation.setFave()
       this.faved()
-      this.element.dataset.method = 'put'
     }
   }
 
@@ -21,14 +21,29 @@ export default class extends Controller {
     if (this.favorited) {
       this.animation.clickUnfave()
       this.favorited = false
-      this.element.dataset.method = 'delete'
       this.unfaved()
+      this.unfavore()
     } else {
       this.animation.clickFave()
       this.favorited = true
-      this.element.dataset.method = 'put'
       this.faved()
+      this.favore()
     }
+  }
+  unfavore() {
+    Rails.ajax({
+      url: `/${this.data.get('current-user')}/favorites/delete`,
+      type: 'PUT',
+      data: `asset_id=${this.data.get('asset-id')}`
+    })
+  }
+
+  favore() {
+    Rails.ajax({
+      url: `/${this.data.get('current-user')}/favorites`,
+      type: 'POST',
+      data: `asset_id=${this.data.get('asset-id')}`
+    })
   }
 
   // placeholders for child controllers
