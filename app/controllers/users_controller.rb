@@ -84,7 +84,7 @@ class UsersController < ApplicationController
       flush_asset_cache_if_necessary
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
-      flash[:error] = "Not so fast, young one"
+      flash.now[:error] = "Not so fast, young one"
       @profile = @user.profile
       render action: :edit
     end

@@ -1,4 +1,5 @@
-<%= error_messages_for :user %>
+<%= error_messages_for @user %>
+
 <div class="edit_profile">
   <div class="box">
     <h1>Edit Profile</h1>
@@ -28,14 +29,14 @@
             </div>
             <div>
               <label for="user_country">Country</label>
-              <%= f.text_field :city %>
+              <%= f.country_select :country %>
             </div>
           </div>
           <label for="user_bio">Bio</label>
           <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
+        <%= f.submit "Save Bio" %>
+        <%= link_to "Cancel", user_home_path(@user) %>
         <% end %>
-        <a href="#">Save profile</a>
-        <a href="#">Cancel</a>
       </div>
     </div>
 
@@ -43,7 +44,7 @@
 
     <div class="edit_profile_socials">
       <h3>Update social media links</h3>
-      <%= form_with model: @user do |f| %>
+      <%= form_with model: [@user, @profile] do |f| %>
         <div class="edit_profile_socials_columns">
           <div class="edit_profile_socials_left_column">
             <label for="user_website">Website</label>
@@ -96,21 +97,30 @@
     </div>
   </div>
   <div class="edit_profile_change_your_password box">
-    <%= form_with model: [@user, @profile] do |f| %>
-      <h2>Change your password</h2>
-      <p>
-        This is not real!
-      </p>
-      <div>
-        <%= f.text_field :login %>
-        <%= submit_tag "Change password" %>
-      </div>
-    <% end %>
+    <div class="warning_tag">Warning</div>
+    <div class="row">
+      <%= form_with model: @user do |f| %>
+        <h2>Change your password</h2>
+        <p>
+          This is not real!
+        </p>
+        <div>
+          <%= f.text_field :password, required: true %>
+        </div>
+        <div>
+          <%= f.text_field :password_confirmation, required: true %>
+        </div>
+        <div>
+          <%= f.submit "Change password" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="edit_profile_change_your_login box">
     <div class="warning_tag">Warning</div>
-    <%= form_with model: [@user, @profile] do |f| %>
+    <%= error_messages_for @user %>
+    <%= form_with model: @user do |f| %>
       <h2>Change your login</h2>
       <p>
         Changing this will break any mp3 players you or anyone else has put on the web, as well as any links anyone has passed around to your music, as well as confuse google about where your music is for a few weeks. Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.
@@ -119,7 +129,7 @@
       <div>
         <div>alonetone.com/</div>
         <%= f.text_field :login %>
-        <%= submit_tag "Update login name" %>
+        <%= f.submit "Update login name" %>
       </div>
     <% end %>
   </div>

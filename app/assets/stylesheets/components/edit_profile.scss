@@ -31,7 +31,7 @@
     }
     @media #{$mobile} {
       padding: $baseline;
-    }    
+    }
     .edit_profile_top_left {
       margin-right: 58px;
       width: 250px;
@@ -79,7 +79,7 @@
               width: 100%;
               flex: auto;
               margin-right: 0;
-            }    
+            }
           }
           &:last-child {
             flex: 1;
@@ -96,7 +96,7 @@
         height: 128px;
         margin-bottom: $baseline * (8/3);
       }
-      a {
+      input[type=submit], a {
         @include default-button("primary");
         float: right;
         width: 160px;
@@ -387,7 +387,7 @@
     }
   }
 
-  .edit_profile_change_your_login {
+  .edit_profile_change_your_login, .edit_profile_change_your_password {
     background-image: image-url("svg/background_danger_tape.svg");
     background-repeat: no-repeat;
     background-position: center 16px;

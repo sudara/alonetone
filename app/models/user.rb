@@ -80,8 +80,9 @@ class User < ApplicationRecord
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
-  # Can create music
-  has_one    :profile, dependent: :destroy
+  has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile, update_only: true
+
   has_many   :assets,
     -> { order('assets.id DESC') },
     dependent: :destroy
