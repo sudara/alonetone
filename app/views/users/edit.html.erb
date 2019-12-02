@@ -22,6 +22,7 @@
         <%= form_with model: @user do |f| %>
           <label for="display_name">Name</label>
           <%= f.text_field :display_name %>
+          <%= f.fields_for :profile do |f| %>
           <div class="city_and_country">
             <div>
               <label for="user_bio">City</label>
@@ -29,11 +30,12 @@
             </div>
             <div>
               <label for="user_country">Country</label>
-              <%= f.country_select :country %>
+              <%= f.country_select :country, include_blank: true %>
             </div>
           </div>
           <label for="user_bio">Bio</label>
           <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
+          <% end %>
         <%= f.submit "Save Bio" %>
         <%= link_to "Cancel", user_home_path(@user) %>
         <% end %>
@@ -44,7 +46,7 @@
 
     <div class="edit_profile_socials">
       <h3>Update social media links</h3>
-      <%= form_with model: [@user, @profile] do |f| %>
+      <%= form_with model: [@user, @profile], local: true do |f| %>
         <div class="edit_profile_socials_columns">
           <div class="edit_profile_socials_left_column">
             <label for="user_website">Website</label>
@@ -90,9 +92,9 @@
               <div>instagram.com/</div>
               <%= f.text_field :instagram %>
             </div>
-            <a href="#">Update links</a>
           </div>
         </div>
+        <%= f.submit "Update links" %>
       <% end %>
     </div>
   </div>
