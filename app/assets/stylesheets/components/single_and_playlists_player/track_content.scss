@@ -12,6 +12,10 @@
     background-color: $track-content-child-background;
     @include samo-shadow-and-radius();
   }
+  > .edit_links_and_favorite {
+    background: none;
+    margin-bottom: 12px;
+  }
   > div.box {
     h2.box {
       padding-left: $baseline / 2;
