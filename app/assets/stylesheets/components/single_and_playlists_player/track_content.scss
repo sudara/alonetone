@@ -185,12 +185,17 @@
           color: $track-content-link-text;
           border-radius: 4px;
           font-weight: bold;
-          line-height: 27px;
+          line-height: 28px;
           text-decoration: none;
           box-sizing: border-box;
           svg {
-            height: 24px;
+            height: 20px;
             margin-left: 8px;
+            position: relative;
+            top: 2.5px;
+            path.outline {
+              stroke: rgb(246, 70, 62);
+            }
           }
         }
       }
@@ -204,6 +209,7 @@
             height: 24px;
             margin-left: 6px;
             margin-top: 1px;
+            top: 0;
           }
         }
       }
