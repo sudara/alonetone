@@ -1,5 +1,5 @@
 <div class="track_content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>">
-  <%= render partial: 'shared/back_to_artist' %>
+  <%= render partial: 'shared/back_to_artist' unless @playlist %>
   <%= render partial: 'assets/big_player' %>
 
   <div class="track_post">
