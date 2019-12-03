@@ -387,6 +387,17 @@
     overflow: hidden;
     .comment {
       .comment_right {
+        margin-top: 12px;
+        &::before {
+          position: absolute;
+          z-index: 1;
+          top: -13px;
+          left: 47%;
+          content: "\A";
+          border-width: 0 9px 13px 9px;
+          border-style: solid;
+          border-color: transparent transparent $comment-right-background transparent;
+        }
         border-radius: 6px;
       }
     }

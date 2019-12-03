@@ -182,7 +182,10 @@
         background-color: $comment-submit-background;
         color: $comment-submit-text;
         &:hover {
-          background-color: $comment-submit-background;
+          background-color: $comment-submit-background-hover;
+        }
+        &:active {
+          background-color: $comment-submit-background-active;
         }
       }
     }
