@@ -32,7 +32,7 @@ export default class extends Controller {
   }
   unfavore() {
     Rails.ajax({
-      url: `/${this.data.get('current-user')}/favorites/delete`,
+      url: `/favorites/delete`,
       type: 'PUT',
       data: `asset_id=${this.data.get('asset-id')}`
     })
@@ -40,7 +40,7 @@ export default class extends Controller {
 
   favore() {
     Rails.ajax({
-      url: `/${this.data.get('current-user')}/favorites`,
+      url: `/favorites`,
       type: 'POST',
       data: `asset_id=${this.data.get('asset-id')}`
     })

@@ -95,6 +95,12 @@ Alonetone::Application.routes.draw do
   get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
   get ':login' => 'users#show', :as => "user_home"
+
+  resources :favorites, only: [:create] do
+    collection do
+      put :delete
+    end
+  end
   resources :users, :path => "/" do
     member do
       post :attach_pic
@@ -114,11 +120,6 @@ Alonetone::Application.routes.draw do
       resources :comments,  only: [:create, :destroy]
     end
 
-    resources :favorites, only: [:create] do
-      collection do
-        put :delete
-      end
-    end
     resources :playlists do
       collection do
         get :latest
