@@ -1,5 +1,5 @@
 <div class="track_content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>">
-
+  <%= render partial: 'shared/back_to_artist' %>
   <%= render partial: 'assets/big_player' %>
 
   <div class="track_post">
@@ -36,7 +36,7 @@
         <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
             data: {controller: 'favorite', action: 'favorite#toggle' } do %>
             Favorite <%== render file: svg_path('svg/animation_heart.svg') %>
-             
+
 
         <% end %>
         </div>
