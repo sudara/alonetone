@@ -51,6 +51,12 @@
       textarea {
         max-width: 434px;
       }
+      .inline_form_error {
+        color: $red800;
+        position: relative;
+        top: -14px;
+        max-width: 434px;
+      }
     }
   }
 }
