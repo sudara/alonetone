@@ -150,6 +150,7 @@
     .edit_links_and_favorite {
       overflow: auto;
       box-shadow: none;
+      margin-top: $baseline;
       > :first-child {
         margin-left: 0!important;
       }
