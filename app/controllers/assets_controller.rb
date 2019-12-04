@@ -152,7 +152,8 @@ class AssetsController < ApplicationController
 
   def update
     result = @asset.update(asset_params)
-    @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
+    # Spam detection temporarily disabled as of Dec 2019
+    # @asset.update_attribute(:is_spam, @asset.spam?)
     @asset.publish! if params[:commit] == 'Publish'
 
     if request.xhr?
