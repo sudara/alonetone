@@ -8,63 +8,91 @@
   </div>
 
   <div class="box">
+    
     <h2>Get an Account</h2>
+
 
     <% if @account_request.errors.any? %>
       <div id="error_explanation">
-        <h2>
+        <h3>
         <% if @account_request.errors.size == 1 %>
           One minor thing looks off:
         <% else %>
           Just a couple things to tweak:
         <% end %>
-        </h2>
-        <ul>
+        </h3>
+        <ol>
         <% @account_request.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
-        </ul>
+        </ol>
       </div>
     <% end %>
 
     <%= form_with(model: @account_request, local: true) do |f| %>
 
-      <div>
-        <%= f.label :email, "Email" %>
-        <%= f.text_field :email %>
-        <%= inline_form_error(@account_request.errors[:email]) %>
+      <div class="form_heading">
+        We need two pieces of information to set things up for you:
+      </div>
+
+      <div class="form_row">
+        <div>
+          <%= f.label :email, "Email" %>
+          <%= f.text_field :email %>
+          <%= inline_form_error(@account_request.errors[:email]) %>
+        </div>
+
+        <div>
+          <%= f.label :login, "Desired Login / alonetone URL" %>
+          <%= f.text_field :login %>
+          <%= inline_form_error(@account_request.errors[:login]) %>
+        </div>
       </div>
 
       <div>
-        <%= f.label :login, "Desired Login / alonetone URL" %>
-        <%= f.text_field :login %>
-        <%= inline_form_error(@account_request.errors[:login]) %>
-      </div>
 
+        <div class="form_heading">
+          What’s your gig?
+        </div>
 
-      <div>
-        <%= f.radio_button(:entity_type, "band") %>
-        <%= f.label(:entity_type_band, "Band") %>
+        <div class="form_radio_pair">
+          <%= f.radio_button(:entity_type, "band") %>
+          <%= f.label(:entity_type_band, "Band") %>
+        </div>
 
-        <%= f.radio_button(:entity_type, "musician") %>
-        <%= f.label(:entity_type_musician, "Musician") %>
+        <div class="form_radio_pair">
+          <%= f.radio_button(:entity_type, "musician") %>
+          <%= f.label(:entity_type_musician, "Musician") %>
+        </div>
 
-        <%= f.radio_button(:entity_type, "label") %>
-        <%= f.label(:entity_type_label, "Indie Label") %>
+        <div class="form_radio_pair">
+          <%= f.radio_button(:entity_type, "label") %>
+          <%= f.label(:entity_type_label, "Indie Label") %>
+        </div>
+        
+        <div class="form_radio_pair">
+          <%= f.radio_button(:entity_type, "blogger") %>
+          <%= f.label(:entity_type_blogger, "Blogger") %>
+        </div>
 
-        <%= f.radio_button(:entity_type, "blogger") %>
-        <%= f.label(:entity_type_blogger, "Blogger") %>
-
-        <%= f.radio_button(:entity_type, "podcaster") %>
-        <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
+        <div class="form_radio_pair">
+          <%= f.radio_button(:entity_type, "podcaster") %>
+          <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
+        </div>
 
         <%= inline_form_error(@account_request.errors[:entity_type]) %>
       </div>
 
       <div>
+
+        <div class="form_heading">
+          Have music on bandcamp or soundcloud?
+        </div>
+
         <%= f.label :details, "Give us a link. Or let us know what sort of thing you do. Don't worry, we don't care about genre, etc." %>
         <%= f.text_area :details %>
         <%= inline_form_error(@account_request.errors[:details]) %>
+      
       </div>
 
       <div>

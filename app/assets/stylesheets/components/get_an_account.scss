@@ -4,4 +4,53 @@
   padding: 0 36px;
   margin-left: auto;
   margin-right: auto;
+  .box {
+    h2 {
+      border-bottom: 0;
+      height: 64px;
+      @include title24();
+      line-height: 1;
+      padding-left: $baseline * 1.5;
+      padding-top: 26px;
+    }
+    #error_explanation {
+      background-color: #FFEADF;
+      padding-left: $baseline * 1.5;
+      padding-right: $baseline * 1.5;
+      h3 {
+        @include title18();
+        color: $red1000;
+        margin-top: $baseline;
+      }
+    }
+    form {
+      padding-left: $baseline * 1.5;
+      padding-right: $baseline * 1.5;
+      padding-top: 60px;
+      // Move these to form.scss if they are indeed universal
+      .form_heading {
+        @include title18();
+        margin-bottom: $baseline;
+      }
+      .form_row {
+        display: flex;
+        > div:first-child {
+          width: 50%;
+        }
+      }
+      input[type='radio'] {
+        margin-bottom: 16px;
+      }
+      input[type='radio'] + label {
+        display: inline;
+        margin-left: 12px;
+      }
+      label {
+        max-width: 434px;
+      }
+      textarea {
+        max-width: 434px;
+      }
+    }
+  }
 }
