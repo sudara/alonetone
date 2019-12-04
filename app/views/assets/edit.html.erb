@@ -1,4 +1,14 @@
 <div class="track_content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
+  <%= link_to user_track_path(@user, @asset), class: 'back_to_track_link' do %>
+    <div class="caret">
+      <i class="icon_caret">
+        <%== render file: svg_path('svg/icon_caret.svg') %>
+      </i>
+    </div>
+    <div class="text">
+      Back to <span><%= @asset.title %></span>
+    </div>
+  <% end if @single_track_page %>
   <%= render partial: 'big_player' %>
   <%= render partial: 'edit', locals: { asset: @asset } %>
 </div>

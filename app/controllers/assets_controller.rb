@@ -105,15 +105,13 @@ class AssetsController < ApplicationController
 
   def edit
     check_for_missing_attachment
-    @allow_reupload = true
+    @single_track_page = true
   end
 
   def mass_edit
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
   end
-
-  def mass_update; end
 
   def create
     @assets = assets
