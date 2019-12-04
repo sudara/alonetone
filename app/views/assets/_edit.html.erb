@@ -39,7 +39,7 @@
       </div>
       <% end %>
       <div class="edit_save">
-        <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit_link',
+        <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'delete_link',
         data: { confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
         title: 'delete this track permanently ' %>
 

@@ -290,6 +290,9 @@
       .edit_save {
         overflow: auto;
         margin-top: $baseline;
+        .delete_link {
+          @include default-button('primary_danger');
+        }
         .ajax_waiting {
           display: none;
         }
@@ -302,7 +305,6 @@
         input {
           cursor: pointer;
           float: left;
-          margin-right: $baseline / 2;
           @include default-button('primary');
         }
       }
