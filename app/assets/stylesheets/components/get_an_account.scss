@@ -4,4 +4,87 @@
   padding: 0 36px;
   margin-left: auto;
   margin-right: auto;
+  .box {
+    h2 {
+      border-bottom: 0;
+      height: 64px;
+      @include title24();
+      line-height: 1;
+      padding-left: $baseline * 1.5;
+      padding-top: 26px;
+    }
+    #error_explanation {
+      background-color: #FFEADF;
+      padding-left: $baseline * 1.5;
+      padding-right: $baseline * 1.5;
+      h3 {
+        @include title18();
+        color: $red1000;
+        margin-top: $baseline;
+      }
+      ol {
+        counter-reset: listNumbering;
+        padding-left: 0px;
+        li {
+          list-style: none;
+          counter-increment: listNumbering;
+          color: $red1100;
+          margin-bottom: 12px;
+          &:before {
+            content: counter(listNumbering);
+            font-variant-numeric: tabular-nums;
+            font-size: 14px;
+            font-weight: bold;
+            color: $white;
+            margin-right: 12px;
+            width: 22px;
+            height: 22px;
+            background-color: $red600;
+            border-radius: 3px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            top: -1px;
+            line-height: 22px;
+          }
+        }
+      }
+
+    }
+    form {
+      padding-left: $baseline * 1.5;
+      padding-right: $baseline * 1.5;
+      padding-top: 60px;
+      // Move these to form.scss if they are indeed universal
+      .form_heading {
+        @include title18();
+        margin-bottom: $baseline;
+      }
+      .form_row {
+        display: flex;
+        > div:first-child {
+          width: 50%;
+        }
+      }
+      input[type='radio'] {
+        margin-bottom: 16px;
+      }
+      input[type='radio'] + label {
+        display: inline;
+        margin-left: 12px;
+      }
+      label {
+        max-width: 434px;
+      }
+      textarea {
+        max-width: 434px;
+      }
+      .inline_form_error {
+        color: $red800;
+        position: relative;
+        top: -14px;
+        max-width: 434px;
+      }
+    }
+  }
 }
