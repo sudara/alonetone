@@ -1,5 +1,4 @@
 class AccountRequestsController < ApplicationController
-
   def new
     @account_request = AccountRequest.new
   end
@@ -14,9 +13,7 @@ class AccountRequestsController < ApplicationController
     end
   end
 
-  def show
-
-  end
+  def show; end
 
   private
 
