@@ -39,17 +39,17 @@
       </div>
       <% end %>
       <div class="edit_save">
-            <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit_link',
+        <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'edit_link',
         data: { confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
         title: 'delete this track permanently ' %>
 
-      <div class="submit_wrapper">
-        <%= f.submit "Save" %>
-        <div class="small_spinner" data-target="save.spinner"> </div>
-        <div class="ajax_waiting" data-target="save.response">
-          <div class="text"><!-- placeholder response text --></div>
+        <div class="submit_wrapper">
+          <%= f.submit "Save" %>
+          <div class="small_spinner" data-target="save.spinner"> </div>
+          <div class="ajax_waiting" data-target="save.response">
+            <div class="text"><!-- placeholder response text --></div>
+          </div>
         </div>
-      </div>
       <% unless asset.published? %>
         <div class="submit_wrapper">
           <%= f.submit "Publish" %>

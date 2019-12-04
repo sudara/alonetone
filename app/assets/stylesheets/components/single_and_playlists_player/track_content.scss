@@ -297,13 +297,13 @@
           display: none;
         }
         .submit_wrapper {
-          float: left;
+          float: right;
         }
         input {
           cursor: pointer;
           float: left;
           margin-right: $baseline / 2;
-          @include default-button("admin");
+          @include default-button('primary');
         }
       }
     }
