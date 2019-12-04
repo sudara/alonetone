@@ -1,4 +1,9 @@
 en:
+  activerecord:
+    attributes:
+      account_request:
+        entity_type: "What you do:"
+
   errors:
     messages:
       not_attached: must be attached

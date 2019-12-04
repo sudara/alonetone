@@ -1,0 +1,75 @@
+<div class="get_an_account_container">
+  <div class="blank_slate">
+    <div class="blank_slate_illustration">
+    </div>
+
+    <div class="blank_slate_text">
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Get an Account</h2>
+
+    <% if @account_request.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+        <% if @account_request.errors.size == 1 %>
+          One minor thing looks off:
+        <% else %>
+          Just a couple things to tweak:
+        <% end %>
+        </h2>
+        <ul>
+        <% @account_request.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with(model: @account_request, local: true) do |f| %>
+
+      <div>
+        <%= f.label :email, "Email" %>
+        <%= f.text_field :email %>
+        <%= inline_form_error(@account_request.errors[:email]) %>
+      </div>
+
+      <div>
+        <%= f.label :login, "Desired Login / alonetone URL" %>
+        <%= f.text_field :login %>
+        <%= inline_form_error(@account_request.errors[:login]) %>
+      </div>
+
+
+      <div>
+        <%= f.radio_button(:entity_type, "band") %>
+        <%= f.label(:entity_type_band, "Band") %>
+
+        <%= f.radio_button(:entity_type, "musician") %>
+        <%= f.label(:entity_type_musician, "Musician") %>
+
+        <%= f.radio_button(:entity_type, "label") %>
+        <%= f.label(:entity_type_label, "Indie Label") %>
+
+        <%= f.radio_button(:entity_type, "blogger") %>
+        <%= f.label(:entity_type_blogger, "Blogger") %>
+
+        <%= f.radio_button(:entity_type, "podcaster") %>
+        <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
+
+        <%= inline_form_error(@account_request.errors[:entity_type]) %>
+      </div>
+
+      <div>
+        <%= f.label :details, "Give us a link. Or let us know what sort of thing you do. Don't worry, we don't care about genre, etc." %>
+        <%= f.text_area :details %>
+        <%= inline_form_error(@account_request.errors[:details]) %>
+      </div>
+
+      <div>
+        <%= f.submit "Get On The List" %>
+      </div>
+    <% end %>
+  </div>
+</div>

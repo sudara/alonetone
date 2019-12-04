@@ -33,6 +33,11 @@ Alonetone::Application.routes.draw do
   end
 
   mount Thredded::Engine => '/discuss'
+
+  get '/get_an_account', :to => 'account_requests#new'
+  resources 'account_requests', only: [:create, :show]
+
+  post '/get_an_account', :to => 'account_requests#create'
   get '/upload', :to => 'assets#new'
   post '/listens', :to => 'listens#create', as: 'register_listen'
   get '/new_album', :to => 'playlists#new'
