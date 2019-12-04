@@ -43,11 +43,13 @@
           title: 'delete this track permanently ' %>
         <% end %>
         <div class="submit_wrapper">
+          <% if !@single_track_page %>
+            <div class="ajax_waiting" data-target="save.response">
+              <div class="text"><!-- placeholder response text --></div>
+            </div>
+            <div class="small_spinner" data-target="save.spinner"> </div>
+          <% end %>
           <%= f.submit "Save" %>
-          <div class="small_spinner" data-target="save.spinner"> </div>
-          <div class="ajax_waiting" data-target="save.response">
-            <div class="text"><!-- placeholder response text --></div>
-          </div>
         </div>
       <% unless asset.published? %>
         <div class="submit_wrapper">

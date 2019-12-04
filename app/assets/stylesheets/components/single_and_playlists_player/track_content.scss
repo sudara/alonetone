@@ -296,7 +296,7 @@
           @include default-button('primary_danger');
         }
         .ajax_waiting {
-          display: none;
+          // display: none;
         }
         .small_spinner {
           display: none;
@@ -314,11 +314,11 @@
     .submit_wrapper {
       display: flex;
       input {
-        margin-right: 4px;
+        margin-left: 4px;
       }
       .ajax_waiting {
-        margin-right: 0;
-        margin-left: 8px;
+        margin-right: 8px;
+        margin-left: 0px;
       }
     }
   }
