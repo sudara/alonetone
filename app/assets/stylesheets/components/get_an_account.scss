@@ -22,6 +22,34 @@
         color: $red1000;
         margin-top: $baseline;
       }
+      ol {
+        counter-reset: listNumbering;
+        padding-left: 0px;
+        li {
+          list-style: none;
+          counter-increment: listNumbering;
+          color: $red1100;
+          margin-bottom: 12px;
+          &:before {
+            content: counter(listNumbering);
+            font-variant-numeric: tabular-nums;
+            font-size: 14px;
+            font-weight: bold;
+            color: $white;
+            margin-right: 12px;
+            width: 22px;
+            height: 22px;
+            background-color: $red600;
+            border-radius: 3px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            top: -1px;
+            line-height: 22px;
+          }
+        }
+      }
+
     }
     form {
       padding-left: $baseline * 1.5;
