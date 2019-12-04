@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AccountRequest < ApplicationRecord
-
   enum(
     entity_type: {
       band: 0,
