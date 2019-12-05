@@ -295,9 +295,6 @@
         .delete_link {
           @include default-button('primary_danger');
         }
-        .ajax_waiting {
-          // display: none;
-        }
         .small_spinner {
           display: none;
         }
