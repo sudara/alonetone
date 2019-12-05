@@ -28,9 +28,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       second_track.click
       first_track.click
 
-      # switch to dark theme
-      page.click_on class: 'profile_link'
-      page.click_on class: 'switch_to_dark'
+      switch_themes
 
       # seek
       find('.waveform').click(x: 200, y: 10)
