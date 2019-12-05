@@ -1,4 +1,20 @@
 .get_an_account_container {
+  background-image: image-url("illustrations/backgrounds/contributor.png");
+  background-size: 100%;
+  .blank_slate {
+    height: 300px;
+    display: flex;
+    .blank_slate_illustration {
+      background-image: image-url("illustrations/contributors/originals/ben-intro.png");
+      background-size: cover;
+      width: 230px;
+    }
+    .blank_slate_text {
+      padding-top: 120px;
+      color: #000;
+    }
+  }
+
   max-width: $site_max_width;
   box-sizing: border-box;
   padding: 0 36px;
@@ -49,7 +65,6 @@
           }
         }
       }
-
     }
     form {
       padding-left: $baseline * 1.5;
