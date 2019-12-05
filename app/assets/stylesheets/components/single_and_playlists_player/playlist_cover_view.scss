@@ -4,7 +4,7 @@ body.cover_view {
     align-self: stretch;
   }
   .track_content {
-    margin-left: -$baseline !important;
+    margin-left: -40px !important;
     min-width: 400px;
     @media #{$one-column} {
       min-width: auto;
@@ -50,10 +50,6 @@ body.cover_view {
         width: 100%;
       }
     }
-    img {
-      max-width: 100%;
-      display: block;
-    }
     .playlist_cover_alert {
       font-size: 14px;
       line-height: 1.5;
@@ -64,11 +60,8 @@ body.cover_view {
       }
     }
     .playlist_options {
-      width: 100%;
       height: 50px;
       background-color: $playlist-options-background;
-      font-family: $sans-font;
-      border-radius: 0px;
       ul {
         &.downloads_links {
           float: left;

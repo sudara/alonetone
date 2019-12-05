@@ -88,16 +88,20 @@ ul {
 }
 
 .back_to_artist_link,
+.back_to_track_link,
 .back_to_playlist_link {
   height: 26px;
   border-radius: 3px;
   background-color: $back-to-background;
   color: $back-to-text;
   display: inline-flex;
-  margin-bottom: $baseline;
+  margin-bottom: 32px;
   @include shadow1();
+  &:hover {
+    text-decoration: none;
+  }
   .caret {
-    background-color: $accent;
+    background-color: $back-to-caret-background;
     display: block;
     width: 26px;
     height: 26px;
@@ -118,12 +122,9 @@ ul {
     padding: 8px 12px 0 12px;
     font-size: 12px;
     line-height: 1;
-  }
-  span {
-    color: $accent;
-  }
-  &:hover {
-    text-decoration: none;
+    span {
+      color: $back-to-span-text;
+    }
   }
 }
 
