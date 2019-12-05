@@ -29,8 +29,11 @@ RSpec.describe 'home page', type: :feature, js: true do
       track_chunk = find(".asset", match: :first)
       track_chunk.click
 
+      # let's snap the dark theem nav while we are at it
+      switch_themes
+      find('.profile_link').click
+
       pause_animations
-      find('.profile_link').click # open the user nav
       expect(track_chunk).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')
     end
