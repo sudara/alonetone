@@ -22,7 +22,7 @@
         font-style: italic;
         color: $orange600;
       }
-      .contributor_title{
+      .contributor_title {
         font-style: italic;
         font-size: 12px;
         color: $grey900;
@@ -92,6 +92,7 @@
       }
       .form_row {
         display: flex;
+        flex-wrap: wrap;
         > div:first-child {
           width: 50%;
         }
@@ -115,7 +116,6 @@
         top: -14px;
         max-width: 434px;
       }
-
       input[type="submit"] {
         @include default_button("primary");
       }
