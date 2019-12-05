@@ -80,28 +80,30 @@ class User < ApplicationRecord
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
-  # Can create music
-  has_one    :profile, dependent: :destroy
-  has_many   :assets,
+  has_one :profile, dependent: :destroy
+  has_one :account_request
+  belongs_to :invited_by, class_name: 'User'
+  has_many :invitees, foreign_key: 'invited_by_id'
+  has_many :assets,
     -> { order('assets.id DESC') },
     dependent: :destroy
 
-  has_many   :playlists, -> { order('playlists.position') },
+  has_many :playlists, -> { order('playlists.position') },
     dependent: :destroy
 
   # this only covers comments received by the user
   # not comments made by the user
-  has_many   :comments_received, -> { order('comments.id DESC') },
+  has_many :comments_received, -> { order('comments.id DESC') },
     foreign_key: 'user_id',
     class_name: 'Comment',
     dependent: :destroy
 
-  has_many   :comments_made, -> { order('comments.id DESC') },
+  has_many :comments_made, -> { order('comments.id DESC') },
     foreign_key: 'commenter_id',
     class_name: 'Comment',
     dependent: :destroy
 
-  has_many   :tracks,
+  has_many :tracks,
     dependent: :destroy
 
   # alonetone plus
@@ -147,6 +149,10 @@ class User < ApplicationRecord
 
   def active?
     perishable_token.nil?
+  end
+
+  def moderator?
+    self[:moderator] || self[:admin]
   end
 
   def activate!

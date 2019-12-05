@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class AccountRequest < ApplicationRecord
+  belongs_to :user, optional: true
+  belongs_to :moderated_by, optional: true, class_name: 'User'
+
   enum(
     entity_type: {
       band: 0,
@@ -15,7 +18,8 @@ class AccountRequest < ApplicationRecord
     status: {
       waiting: 0,
       approved: 1,
-      denied: 2
+      denied: 2,
+      accepted: 3
     }
   )
 
@@ -53,5 +57,15 @@ class AccountRequest < ApplicationRecord
     if User.where(login: login).exists?
       errors.add(:login, "Sorry, login is taken. Be creative!")
     end
+  end
+
+  def approve!(approved_by)
+    return unless approved_by.moderator?
+
+    update(moderated_by: approved_by)
+    user = User.new(login: login, email: email, invited_by: approved_by)
+    user.reset_password
+    user.reset_perishable_token
+    user.save
   end
 end

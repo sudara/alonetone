@@ -1,0 +1,23 @@
+<div data-controller="admin--request">
+  <div class="date_column">
+    <%= local_time_ago account_request.created_at %>
+  </div>
+  <div class="user_column">
+    <div>
+      <div><%= account_request.login %></div>
+      <div><%= account_request.email %></div>
+    </div>
+  </div>
+  <div class="type_column">
+    <%= account_request.entity_type.upcase %>
+  </div>
+  <div class="bio_column">
+    <div><%= account_request.details %></div>
+  </div>
+  <div class="button_column">
+    <%= button_to "Approve & Email", approve_admin_account_request_path(account_request),
+      method: :put, remote: true, data: { target: 'admin--user.approveButton', action: 'click->admin--request#approve' } %>
+    <%= button_to "Deny", deny_admin_account_request_path(account_request),
+      method: :put, remote: true, data: { target: 'admin--user.denyButton', action: 'click->admin--request#deny' } %>
+  </div>
+</div>

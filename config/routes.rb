@@ -7,6 +7,12 @@ Alonetone::Application.routes.draw do
   namespace :admin do
     get 'possibly_deleted_user/:id', :to => 'users#show', as: 'possibly_deleted_user'
 
+    resources :account_requests, path: 'account_requests/(:filter_by)' do
+      member do
+        put :approve
+        put :deny
+      end
+    end
     resources :users, path: 'users/(:filter_by)', only: [:index] do
       member do
         put :delete
@@ -35,7 +41,7 @@ Alonetone::Application.routes.draw do
   mount Thredded::Engine => '/discuss'
 
   get '/get_an_account', :to => 'account_requests#new'
-  resources 'account_requests', only: [:create, :show]
+  resources 'account_requests', only: :create
 
   post '/get_an_account', :to => 'account_requests#create'
   get '/upload', :to => 'assets#new'

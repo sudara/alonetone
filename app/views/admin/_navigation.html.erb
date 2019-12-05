@@ -1,4 +1,13 @@
 <ul class="admin_nav">
+
+  <%= navigation_item "Account Requests <span>#{AccountRequest.count}</span>", admin_account_requests_path %>
+  <ul>
+    <%= navigation_item "Waiting <span>#{AccountRequest.waiting.count }</span>", admin_account_requests_path({filter_by: :waiting}) %>
+    <%= navigation_item "Approved <span>#{AccountRequest.approved.count }</span>", admin_account_requests_path({filter_by: :approved}) %>
+    <%= navigation_item "Denied <span>#{AccountRequest.denied.count }</span>", admin_account_requests_path({filter_by: :denied}) %>
+    <%= navigation_item "Accepted <span>#{AccountRequest.accepted.count }</span>", admin_account_requests_path({filter_by: :accepted}) %>
+  </ul>
+
   <%= navigation_item "All Users <span>#{User.with_deleted.count}</span>", admin_users_path %>
   <ul>
     <%= navigation_item "Not Spam <span>#{User.filter_by('not_spam').count}</span>", admin_users_path({filter_by: :not_spam}) %>
