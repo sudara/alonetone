@@ -31,6 +31,7 @@ RSpec.describe 'home page', type: :feature, js: true do
 
       # let's snap the dark theem nav while we are at it
       switch_themes
+      expect(page).to have_selector('.profile_link')
       find('.profile_link').click
 
       pause_animations
