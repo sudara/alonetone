@@ -336,7 +336,7 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
     end
 
-    it "does not update the audio file for an asset when it's spam" do
+    xit "does not update the audio file for an asset when it's spam" do
       akismet_stub_response_spam
       patch(
         "/#{user.login}/tracks/#{asset.to_param}",
