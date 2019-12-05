@@ -23,7 +23,7 @@ RSpec.describe 'home page', type: :feature, js: true do
   end
 
   it 'renders logged in' do
-    logged_in do
+    logged_in(:sudara) do
       visit '/'
       expect(page).to have_selector('.profile_link')
       track_chunk = find(".asset", match: :first)

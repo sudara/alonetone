@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe 'playlists', type: :feature, js: true do
 
   it 'renders track and cover pages' do
-    logged_in do
+    logged_in(:sudara) do
       visit 'henriwillig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
@@ -27,6 +27,10 @@ RSpec.describe 'playlists', type: :feature, js: true do
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
+
+      # switch to dark theme
+      page.click_on class: 'profile_link'
+      page.click_on class: 'switch_to_dark'
 
       # seek
       find('.waveform').click(x: 200, y: 10)
