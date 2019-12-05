@@ -7,13 +7,12 @@ module Admin
     end
 
     def approve
-      @account_request.approve!
-      respond_to :js
+      @user = @account_request.approve!(current_user)
+      InviteNotification.approved_request(@user).deliver_now
     end
 
     def deny
       @account_request.deny
-      respond_to :js
     end
 
     private

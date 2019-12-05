@@ -41,6 +41,12 @@ RSpec.describe AccountRequest, type: :model do
   end
 
   context "on approval" do
+    it "should be approved" do
+      expect(valid_account_request).to be_waiting
+      valid_account_request.approve!(users(:sudara))
+      expect(valid_account_request).to be_approved
+    end
+
     it "should not be approvable by a non-moderator" do
       expect { valid_account_request.approve!(users(:jamie_kiesl)) }.not_to change { User.count }
     end

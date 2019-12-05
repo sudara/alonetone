@@ -29,6 +29,7 @@ class AccountRequest < ApplicationRecord
   }
 
   validates :email,
+    on: :create,
     format: {
       with: URI::MailTo::EMAIL_REGEXP,
       message: "should look like an email address."
@@ -36,6 +37,7 @@ class AccountRequest < ApplicationRecord
   validate :email_is_unique
 
   validates :login,
+    on: :create,
     format: {
       with: /\A\w+\z/,
       message: "should use only letters and numbers."
@@ -62,10 +64,14 @@ class AccountRequest < ApplicationRecord
   def approve!(approved_by)
     return unless approved_by.moderator?
 
-    update(moderated_by: approved_by)
-    user = User.new(login: login, email: email, invited_by: approved_by)
-    user.reset_password
-    user.reset_perishable_token
-    user.save
+    approved! && update(moderated_by: approved_by)
+    create_user_account!(approved_by)
+  end
+
+  def create_user_account!(invited_by)
+    User.create(login: login, email: email, invited_by: invited_by) do |u|
+      u.reset_password
+      u.reset_perishable_token
+    end
   end
 end
