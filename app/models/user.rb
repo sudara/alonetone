@@ -82,7 +82,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
   has_one :account_request
-  belongs_to :invited_by, class_name: 'User'
+  belongs_to :invited_by, :optional: true, class_name: 'User'
   has_many :invitees, foreign_key: 'invited_by_id'
   has_many :assets,
     -> { order('assets.id DESC') },
