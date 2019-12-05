@@ -15,9 +15,6 @@ header#site_header {
       padding: 0 8px;
     }
     .header_logo {
-    //   width: 51.59px;
-    //   height: 40px;
-     
       background: $site-icon-background;
       margin-top: 12px;
       display: block;
@@ -25,10 +22,8 @@ header#site_header {
       height: 36px;
       flex-shrink: 0;
       height: 36px;
-      
       background-size: 100%;
     }
-
     .headway {
       position: absolute;
       top: 16px;

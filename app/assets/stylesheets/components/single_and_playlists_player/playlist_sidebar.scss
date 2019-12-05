@@ -19,6 +19,7 @@
     margin-top: $baseline;
     margin-bottom: 0;
     text-align: center;
+    font-size: 16px;
     font-family: $sans-font;
     font-weight: bold;
   }
@@ -26,9 +27,18 @@
     font-size: 14px;
     line-height: $baseline;
     font-weight: normal;
-    margin-top: -2px;
+    margin-top: -3px;
     text-align: center;
     color: $playlist-sidebar-artist-text;
+    .by {
+      color: $playlist-sidebar-artist-by-text;
+    }
+    .parentheses {
+      color: $playlist-sidebar-artist-parantheses-text;
+    }
+    .edit_playlist {
+      color: $playlist-sidebar-artist-edit-link-text;
+    }
   }
   ul.tracklist {
     margin-top: $baseline / 2;
@@ -38,6 +48,9 @@
       overflow: auto;
       min-height: 35px;
       border-top: 1px solid $tracklist-track-border;
+      &:first-child {
+        border-top: 0;
+      }
       &:last-child {
         border-bottom: 1px solid $tracklist-track-border;
       }
@@ -54,6 +67,16 @@
           }
           span.time_text {
             color: $tracklist-time-text-active;
+          }
+        }
+        a.play_button {
+          i {
+            background-image: $playlist-sidebar-play-active-background;
+          }
+        }
+        a.pause_button {
+          i {
+            background-image: $playlist-sidebar-pause-active-background;
           }
         }
       }
@@ -75,7 +98,7 @@
           display: inline-block;
           width: 24px;
           height: 24px;
-          background-image: image-url("svg/icon_play_circled.svg");
+          background-image: $playlist-sidebar-play-background;
         }
       }
       a.pause_button {
@@ -83,7 +106,7 @@
           display: inline-block;
           width: 24px;
           height: 24px;
-          background-image: image-url("svg/icon_pause_circled.svg");
+          background-image: $playlist-sidebar-pause-background;
         }
       }
       a.position_name_time {
@@ -95,7 +118,6 @@
         padding-bottom: 8px;
         white-space: nowrap;
         text-decoration: none;
-        
         flex-grow: 1;
         span.track_position {
           display: block;
