@@ -97,8 +97,7 @@ RSpec.describe UsersHelper, type: :helper do
 
     it "formats an avatar URL" do
       url = user_avatar_url(user, variant: :large_avatar)
-      expect(url).to include(base_url)
-      expect(url).to end_with('.jpg')
+      expect(url).to start_with(base_url)
     end
 
     it "formats an image element" do
