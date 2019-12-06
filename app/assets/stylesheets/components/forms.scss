@@ -3,6 +3,7 @@ form {
   .form_heading {
     @include title18();
     margin-bottom: $baseline;
+    color: $forms-heading-text;
   }
 
   .form_row {

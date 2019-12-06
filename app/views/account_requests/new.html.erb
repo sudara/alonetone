@@ -95,10 +95,11 @@
             <%= f.radio_button(:entity_type, "podcaster") %>
             <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
           </div>
-          
-          <%= inline_form_error(@account_request.errors[:entity_type]) %>
 
         </div>
+
+        <%= inline_form_error(@account_request.errors[:entity_type]) %>
+
       </div>
 
       <div>
