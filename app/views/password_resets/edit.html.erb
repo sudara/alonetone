@@ -1,5 +1,9 @@
 <div class="box password_reset">
-  <h2>Alright, pick a new password</h2>
+  <% if @newly_invited_user %>
+  <h2>Pick a password and you're in!</h2>
+  <% else %>
+  <h2>Almost back in, just pick a new password</h2>
+  <% end %>
   <div id="login" class="static_content">
     <%= form_with model: @user, url: password_reset_path, method: :put do |f| %>
       <%= f.password_field :password, placeholder: "Enter New Password" %><br/>
