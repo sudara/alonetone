@@ -259,6 +259,7 @@ class User < ApplicationRecord
       ImageVariant.variant(avatar_image, variant: variant),
       signed: false
     )
+  rescue ActiveStorage::InvariableError
   end
 
   def deleted?

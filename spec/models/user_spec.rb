@@ -155,6 +155,19 @@ RSpec.describe User, type: :model do
       end
     end
 
+
+    context "with an avatar in unusable format" do
+      let(:user) { users(:murray_leroy) }
+
+      it "knows the user has an avatar" do
+        expect(user.avatar_image_present?).to eq(true)
+      end
+
+      it "does not return a location to a variant" do
+        expect(user.avatar_image_location(variant: :large_avatar)).to be_nil
+      end
+    end
+
     context "without an avatar" do
       let(:user) { users(:william_shatner) }
 
