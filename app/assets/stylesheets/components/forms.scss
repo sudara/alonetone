@@ -184,4 +184,13 @@ form {
     margin-left: 12px;
   }
 
+  .field_with_errors {
+    display: inline;
+  }
+
+  .field_with_errors + label {
+    display: inline;
+    margin-left: 12px;
+  }
+
 }
