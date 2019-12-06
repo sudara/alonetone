@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Storage
-  # Generates a public or signed URL to an S3 object through CloudFront. Note
-  # that it behaves like a promise so we can choose to delay evaluation until
-  # the URL should actually be used in the view.
+  # Generates an image URL to the Fastly service or Alonetone itself (useful for development).
   class FastlyLocation
     attr_reader :attachment
 
@@ -41,8 +39,16 @@ module Storage
 
     delegate :transformations, to: "attachment.variation"
 
+    def base_url_without_request_path
+      if Rails.application.fastly_enabled?
+        Rails.application.config.alonetone.fastly_base_url
+      else
+        'http://' + Rails.application.config.alonetone.hostname + '/thumbnails'
+      end
+    end
+
     def base_url
-      Rails.application.config.alonetone.fastly_base_url + request_path
+      base_url_without_request_path + request_path
     end
 
     def request_path
