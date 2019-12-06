@@ -55,25 +55,6 @@
       padding-left: $baseline * 1.5;
       padding-right: $baseline * 1.5;
       padding-top: 60px;
-      // Move these to form.scss if they are indeed universal
-      .form_heading {
-        @include title18();
-        margin-bottom: $baseline;
-      }
-      .form_row {
-        display: flex;
-        flex-wrap: wrap;
-        > div:first-child {
-          width: 50%;
-        }
-      }
-      input[type='radio'] {
-        margin-bottom: 16px;
-      }
-      input[type='radio'] + label {
-        display: inline;
-        margin-left: 12px;
-      }
       label {
         max-width: 434px;
       }
