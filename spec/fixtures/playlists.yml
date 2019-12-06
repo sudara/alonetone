@@ -110,7 +110,17 @@ jamie_kiesl_loves:
   cover_quality: legacy
   credits: Did I mention that I'm really good at naming cheeses really quickly?
   tracks_count: 4
+
+# Jamie added all the tracks she hates to a playlist and uploaded an MPEG file as its cover.
+jamie_kiesl_hates:
   user: jamie_kiesl
+  is_favorite: true
+  private: true
+  permalink: jamie-hates
+  title: Jamie Hates
+  cover_quality: modern
+  credits: 🤮
+  tracks_count: 1
 
 # Contains a track that points to a deleted asset.
 jamie_kiesl_playlist_with_soft_deleted_tracks:
