@@ -46,11 +46,7 @@ module Storage
     # Returns a URL to either the processed image or a service URL to a service that will process
     # the image dynamicall.
     def variant_url
-      if Rails.application.fastly_enabled?
-        FastlyLocation.new(attachment).url
-      else
-        attachment.processed.service_url
-      end
+      FastlyLocation.new(attachment).url
     end
 
     # Returns a URL to the unaltered original uploaded files.

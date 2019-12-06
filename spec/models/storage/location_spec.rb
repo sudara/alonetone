@@ -80,8 +80,8 @@ RSpec.describe Storage::Location, type: :model do
       location = Storage::Location.new(image_variant, signed: true)
       expect(location).to be_signed
       url = location.url
-      expect(url).to include('amazonaws.com')
-      expect(url).to include(image_variant.key)
+      expect(url).to include('alonetone.example.com')
+      expect(url).to include(image_variant.blob.key)
       uri = URI.parse(url)
       expect(uri.query).to_not be_nil
     end
