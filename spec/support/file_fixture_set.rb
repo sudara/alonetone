@@ -20,6 +20,8 @@ module RSpec
           'smallest.png'
         when 'application/zip'
           'smallest.zip'
+        when 'video/mp4'
+          'smallest.mp4'
         end
       end
 
