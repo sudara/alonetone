@@ -128,6 +128,7 @@ class Playlist < ActiveRecord::Base
       ImageVariant.variant(cover_image, variant: variant),
       signed: false
     )
+  rescue ActiveStorage::InvariableError
   end
 
   def self.latest(limit = 5)

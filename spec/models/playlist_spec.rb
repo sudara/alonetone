@@ -172,6 +172,18 @@ RSpec.describe Playlist, type: :model do
       end
     end
 
+    context "with a cover in unusable format" do
+      let(:playlist) { playlists(:jamie_kiesl_hates) }
+
+      it "knows the playlist has an cover" do
+        expect(playlist.cover_image_present?).to eq(true)
+      end
+
+      it "does not return a location to a variant" do
+        expect(playlist.cover_image_location(variant: :large_avatar)).to be_nil
+      end
+    end
+
     context "without an cover" do
       let(:playlist) { playlists(:william_shatners_favorites) }
 
