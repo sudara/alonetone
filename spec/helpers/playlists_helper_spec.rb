@@ -22,17 +22,14 @@ RSpec.describe PlaylistsHelper, type: :helper do
     it 'formats a cover URL' do
       %i[playlist_card playlist_cover].each do |variant|
         url = playlist_cover_url(playlist, variant: variant)
-        expect(url).to start_with('http://')
-        expect(url).to end_with('.jpg')
+        expect(url).to start_with(base_url)
       end
     end
 
     it 'downgrades the cover URL for ancient covers' do
       playlist.cover_quality = :ancient
-
       url = playlist_cover_url(playlist, variant: :greenfield)
-      expect(url).to start_with('http://alonetone.example.com')
-      expect(url).to end_with('.jpg')
+      expect(url).to start_with(base_url)
     end
 
     it 'formats an image element with the cover' do
