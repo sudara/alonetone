@@ -122,6 +122,20 @@ william_shatner:
   created_at: <%= 1.month.ago %>
   updated_at: <%= 1.month.ago %>
 
+# Murray Leroy organizes cheese workshops and it generally bad at uploading user avatars. They
+# have a video as their avatar!
+murray_leroy:
+  login: murray
+  display_name: Murray Leroy
+  email: mleroy@example.com
+  salt: <%= salt = SecureRandom.hex(64) %>
+  playlists_count: 0
+  assets_count: 0
+  crypted_password: <%= scrypt('test' + salt) %>
+  dark_theme: false
+  created_at: <%= 1.month.ago %>
+  updated_at: <%= 1.month.ago %>
+
 # soft deleted user
 deleted_yesterday:
   login: deleted_yesterday

@@ -90,3 +90,8 @@ henri_willig_avatar:
   record: henri_willig (User)
   blob: henri_willig_avatar
   created_at: <%= 2.months.ago %>
+murray_leroy_avatar:
+  name: avatar_image
+  record: murray_leroy (User)
+  blob: murray_leroy_avatar
+  created_at: <%= 2.months.ago %>

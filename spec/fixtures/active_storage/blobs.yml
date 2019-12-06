@@ -148,3 +148,11 @@ henri_willig_avatar:
   byte_size: <%= 60.kilobytes %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
   created_at: <%= 2.months.ago %>
+murray_leroy_avatar:
+  key: <%= ActiveStorage::Blob.generate_unique_secure_token %>
+  filename: avatar.mp4
+  content_type: video/mp4
+  metadata: "{}"
+  byte_size: <%= 154.kilobytes %>
+  checksum: <%= Digest::MD5.base64digest('OK!') %>
+  created_at: <%= 2.months.ago %>
