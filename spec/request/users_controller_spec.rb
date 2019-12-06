@@ -5,6 +5,14 @@ RSpec.describe UsersController, type: :request do
     create_user_session(users(:sudara))
   end
 
+  context "a visitor" do
+    it "sees a user page for a user with an unusable avatar image" do
+      user = users(:murray_leroy)
+      get "/#{user.login}"
+      expect(response).to be_successful
+    end
+  end
+
   context "GET show" do
     it "displays user info route v1" do
       get "/users/#{users(:sudara).login}"
