@@ -1,7 +1,9 @@
 class PasswordResetsController < ApplicationController
   before_action :load_user_using_perishable_token, only: %i[edit update]
 
-  def edit; end
+  def edit
+    @newly_invited_user = !@user.last_login_at?
+  end
 
   def create
     @user = User.find_by(email: params[:email])

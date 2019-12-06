@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class AccountRequest < ApplicationRecord
+
+  scope :recent, -> { order('created_at DESC') }
+
   belongs_to :user, optional: true
   belongs_to :moderated_by, optional: true, class_name: 'User'
 
@@ -72,6 +75,14 @@ class AccountRequest < ApplicationRecord
     User.create(login: login, email: email, invited_by: invited_by) do |u|
       u.reset_password
       u.reset_perishable_token
+    end
+  end
+
+  def self.filter_by(status)
+    if status.present?
+      recent.where(status: status)
+    else
+      recent
     end
   end
 end
