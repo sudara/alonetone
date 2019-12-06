@@ -58,7 +58,7 @@
 
         <div>
           <%= f.label :login, "Desired Login / alonetone URL" %>
-          <%= f.text_field :login %>
+          <span>alonetone.com/</span><%= f.text_field :login %>
           <%= inline_form_error(@account_request.errors[:login]) %>
         </div>
       </div>
@@ -69,32 +69,36 @@
           What’s your gig?
         </div>
 
-        <div class="form_radio_pair">
-          <%= f.radio_button(:entity_type, "band") %>
-          <%= f.label(:entity_type_band, "Band") %>
-        </div>
+        <div class="form_radio_group">
 
-        <div class="form_radio_pair">
-          <%= f.radio_button(:entity_type, "musician") %>
-          <%= f.label(:entity_type_musician, "Musician") %>
-        </div>
+          <div class="form_radio_pair">
+            <%= f.radio_button(:entity_type, "band") %>
+            <%= f.label(:entity_type_band, "Band") %>
+          </div>
 
-        <div class="form_radio_pair">
-          <%= f.radio_button(:entity_type, "label") %>
-          <%= f.label(:entity_type_label, "Indie Label") %>
-        </div>
-        
-        <div class="form_radio_pair">
-          <%= f.radio_button(:entity_type, "blogger") %>
-          <%= f.label(:entity_type_blogger, "Blogger") %>
-        </div>
+          <div class="form_radio_pair">
+            <%= f.radio_button(:entity_type, "musician") %>
+            <%= f.label(:entity_type_musician, "Musician") %>
+          </div>
 
-        <div class="form_radio_pair">
-          <%= f.radio_button(:entity_type, "podcaster") %>
-          <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
-        </div>
+          <div class="form_radio_pair">
+            <%= f.radio_button(:entity_type, "label") %>
+            <%= f.label(:entity_type_label, "Indie Label") %>
+          </div>
+          
+          <div class="form_radio_pair">
+            <%= f.radio_button(:entity_type, "blogger") %>
+            <%= f.label(:entity_type_blogger, "Blogger") %>
+          </div>
 
-        <%= inline_form_error(@account_request.errors[:entity_type]) %>
+          <div class="form_radio_pair">
+            <%= f.radio_button(:entity_type, "podcaster") %>
+            <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
+          </div>
+          
+          <%= inline_form_error(@account_request.errors[:entity_type]) %>
+
+        </div>
       </div>
 
       <div>

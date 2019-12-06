@@ -172,10 +172,16 @@ form {
   display: block;
 }
 
-input[type='radio'] {
-  margin-bottom: 16px;
-}
-input[type='radio'] + label {
-  display: inline;
-  margin-left: 12px;
+.form_radio_group {
+
+  margin-bottom: 12px;
+
+  input[type='radio'] {
+    margin-bottom: 16px;
+  }
+  input[type='radio'] + label {
+    display: inline;
+    margin-left: 12px;
+  }
+
 }
