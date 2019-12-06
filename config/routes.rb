@@ -134,4 +134,8 @@ Alonetone::Application.routes.draw do
     end
     get '/playlists/:id/:asset_id', :to => 'playlists#show', as: 'show_track_in_playlist'
   end
+
+  if %w[development test].include?(Rails.env)
+    resources :thumbnails, param: :key, only: :show
+  end
 end
