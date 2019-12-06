@@ -61,6 +61,7 @@ class User < ApplicationRecord
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
+    c.ignore_blank_passwords = false
   end
 
   scope :activated,     -> { where(perishable_token: nil).recent }
