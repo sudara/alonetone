@@ -25,12 +25,6 @@
         max-width: 434px;
         min-height: 80px;
       }
-      .inline_form_error {
-        color: $red800;
-        position: relative;
-        top: -14px;
-        max-width: 434px;
-      }
       input[type="submit"] {
         @include default_button("primary");
       }

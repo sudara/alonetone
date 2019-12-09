@@ -195,6 +195,13 @@ form {
   }
 }
 
+.inline_form_error {
+  color: $inline-form-error-text;
+  position: relative;
+  top: -14px;
+  max-width: 434px;
+}
+
 #error_explanation {
   background-color: #FFEADF;
   padding-left: $baseline * 1.5;
