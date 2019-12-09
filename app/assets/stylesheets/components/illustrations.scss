@@ -5,9 +5,7 @@
   padding-left: 100px;
   padding-top: 50px;
   .blank_slate_illustration {
-    background-image: image-url("illustrations/contributors/originals/ben-intro.png");
     background-size: cover;
-    width: 300px;
     background-repeat: no-repeat;
   }
   .blank_slate_text {
@@ -27,12 +25,15 @@
   }
 }
 
-
 .get_an_account_container {
   background-image: image-url("illustrations/backgrounds/contributor.png");
   background-repeat: no-repeat;
   background-size: 100%;
   position: relative;
   top: -48px;  
+  .blank_slate_illustration {
+    background-image: image-url("illustrations/contributors/originals/ben-intro.png");
+    width: 300px;
+  }
 
 }

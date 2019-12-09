@@ -2,6 +2,7 @@ form {
 
   .form_heading {
     @include title18();
+    line-height: 1.2;
     margin-bottom: $baseline;
     color: $forms-heading-text;
   }
@@ -74,6 +75,15 @@ form {
     font-family: $medium-sans-font;
     width: 100%;
     padding: 9px 10px 6px 10px;
+  }
+}
+
+
+.field_with_hint_before {
+  input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 4px;
   }
 }
 
