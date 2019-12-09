@@ -223,13 +223,22 @@ form {
     display: inline;
     margin-left: 12px;
   }
+
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+    > div {
+      width: 50%;
+    }
+    margin-bottom: 12px;
+  }
+
 }
 
 .inline_form_error {
   color: $inline-form-error-text;
   position: relative;
   top: -14px;
-  max-width: 434px;
   margin-bottom: 30px;
 }
 
@@ -262,7 +271,8 @@ form {
         background-color: $red600;
         border-radius: 3px;
         display: inline-block;
-        text-align: center;
+        padding-left: 7px;
+        box-sizing: border-box;
         position: relative;
         top: -1px;
         line-height: 22px;

@@ -20,7 +20,7 @@
       padding-left: $baseline * 1.5;
       padding-right: $baseline * 1.5;
       padding-top: 60px;
-      label {
+      label, .inline_form_error {
         max-width: 434px;
       }
       textarea {
@@ -29,6 +29,13 @@
       }
       input[type="submit"] {
         @include default_button("primary");
+      }
+      .form_radio_group {
+        .columns {
+          div {
+            max-width: 200px;
+          }
+        }
       }
     }
   }

@@ -71,21 +71,30 @@
 
         <div class="form_radio_group">
 
-          <div class="form_radio_pair">
-            <%= f.radio_button(:entity_type, "band") %>
-            <%= f.label(:entity_type_band, "Band") %>
-          </div>
+          <div class="columns">
 
-          <div class="form_radio_pair">
-            <%= f.radio_button(:entity_type, "musician") %>
-            <%= f.label(:entity_type_musician, "Musician") %>
-          </div>
-
-          <div class="form_radio_pair">
-            <%= f.radio_button(:entity_type, "label") %>
-            <%= f.label(:entity_type_label, "Indie Label") %>
-          </div>
+            <div class="left">
           
+              <div class="form_radio_pair">
+                <%= f.radio_button(:entity_type, "band") %>
+                <%= f.label(:entity_type_band, "Band") %>
+              </div>
+
+              <div class="form_radio_pair">
+                <%= f.radio_button(:entity_type, "musician") %>
+                <%= f.label(:entity_type_musician, "Musician") %>
+              </div>
+
+              <div class="form_radio_pair">
+                <%= f.radio_button(:entity_type, "label") %>
+                <%= f.label(:entity_type_label, "Indie Label") %>
+              </div>
+            
+            </div>
+            
+            <div class="right">
+
+
           <div class="form_radio_pair">
             <%= f.radio_button(:entity_type, "blogger") %>
             <%= f.label(:entity_type_blogger, "Blogger") %>
@@ -94,6 +103,9 @@
           <div class="form_radio_pair">
             <%= f.radio_button(:entity_type, "podcaster") %>
             <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
+          </div>
+
+          
           </div>
 
         </div>
