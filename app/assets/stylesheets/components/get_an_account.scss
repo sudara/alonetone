@@ -7,12 +7,14 @@
   .box {
     @include shadow6();
     h2 {
+      @include title24();
       border-bottom: 0;
       height: 64px;
-      @include title24();
       line-height: 1;
-      padding-left: $baseline * 1.5;
       padding-top: 26px;
+      padding-right: $baseline * 1.5;
+      padding-bottom: 0;
+      padding-left: $baseline * 1.5;
     }
     form {
       padding-left: $baseline * 1.5;
