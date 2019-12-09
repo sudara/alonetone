@@ -3,10 +3,11 @@
   display: flex;
   padding-right: 100px;
   padding-left: 100px;
+  padding-top: 50px;
   .blank_slate_illustration {
     background-image: image-url("illustrations/contributors/originals/ben-intro.png");
     background-size: cover;
-    width: 230px;
+    width: 300px;
     background-repeat: no-repeat;
   }
   .blank_slate_text {
@@ -31,4 +32,7 @@
   background-image: image-url("illustrations/backgrounds/contributor.png");
   background-repeat: no-repeat;
   background-size: 100%;
+  position: relative;
+  top: -48px;  
+
 }
