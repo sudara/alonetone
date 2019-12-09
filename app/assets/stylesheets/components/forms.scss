@@ -41,12 +41,13 @@ form {
     display: none;
   }
   label {
-    margin-bottom: 8px !important;
+    margin-bottom: 6px !important;
     font-family: $medium-sans-font;
     font-size: 14px;
     display: block;
     margin: 2px 0;
     text-align: left;
+    line-height: 1.2;
     color: $forms-label-text;
     abbr {
       display: none;
