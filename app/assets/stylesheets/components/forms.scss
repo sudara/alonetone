@@ -80,6 +80,21 @@ form {
 
 
 .field_with_hint_before {
+  span {
+    background: $forms-hint-background;
+    color: $forms-hint-text;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+    padding-top: 12px;
+    box-sizing: border-box;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family: $medium-sans-font;
+  }
   input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
