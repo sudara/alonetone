@@ -11,6 +11,7 @@
     @media only screen and (max-width: 540px) {
       width: 40%!important; 
       padding-bottom: 20px;
+      align-self: center;
     }
     .blank_slate_illustration {
       background-size: 100%;
@@ -70,14 +71,10 @@
 .get_an_account_container {
   background-image: image-url("illustrations/backgrounds/contributor.png");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: $site_max_width;
+  background-position-x: 50%;
   position: relative;
   top: -48px;  
-  @media #{$responsive} {
-    background-size: $site_max_width;
-    background-position-y: 0%;
-    background-position-x: 50%;
-  }
   .left {
     .blank_slate_illustration {
       background-image: image-url("illustrations/contributors/alec-talking.png");
