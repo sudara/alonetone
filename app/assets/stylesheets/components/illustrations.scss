@@ -4,16 +4,26 @@
   padding-right: 100px;
   padding-left: 100px;
   padding-top: 50px;
-  @media #{$mobile} {
+  @media #{$one-column} {
     padding-left: $baseline / 2;
     padding-right: $baseline / 2;
   }
-  .blank_slate_illustration {
-    background-size: 100%;
-    background-repeat: no-repeat;
-    @media #{$mobile} {
-      width: 40%!important; 
+  .left {
+    .contributor_name, .contributor_name {
+      display: none;
+    }
 
+    @media #{$one-column} {
+      width: 40%!important; 
+      .contributor_name, .contributor_title {
+        display: block;
+        padding-left: $baseline;
+      }
+    }
+    .blank_slate_illustration {
+      background-size: 100%;
+      background-repeat: no-repeat;
+      height: 100%;
     }
   }
   .blank_slate_text {
@@ -21,21 +31,24 @@
     @include paragraph18();
     padding-top: 70px;
     color: #000;
-    @media #{$mobile} {
+    @media #{$one-column} {
       padding-top: $baseline;
       width: 60%;
       margin-left: 20px;
       font-size: 14px;
+      .contributor_name, .contributor_title {
+        display: none;
+      }
     }
-    .contributor_name {
-      font-style: italic;
-      color: $orange600;
-    }
-    .contributor_title {
-      font-style: italic;
-      font-size: 12px;
-      color: $grey900;
-    }
+  }
+  .contributor_name {
+    font-style: italic;
+    color: $orange600;
+  }
+  .contributor_title {
+    font-style: italic;
+    font-size: 12px;
+    color: $grey900;
   }
 }
 
@@ -45,9 +58,20 @@
   background-size: 100%;
   position: relative;
   top: -48px;  
-  .blank_slate_illustration {
-    background-image: image-url("illustrations/contributors/originals/alec-talking.png");
-    width: 300px;
+  @media #{$one-column} {
+    background-size: auto;
+    background-position-y: 0%;
+    background-position-x: 50%;
   }
-
+  .left {
+    .blank_slate_illustration {
+      background-image: image-url("illustrations/contributors/originals/alec-talking.png");
+      min-width: 231px;
+      @media #{$one-column} {
+        min-width: auto;
+        height: 0;
+        padding-bottom: 144%;
+      }
+    }
+  }
 }
