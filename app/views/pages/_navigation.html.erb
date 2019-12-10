@@ -1,11 +1,11 @@
 <nav class="sub_nav">
   <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
     <ul>
-      <%= navigation_item "What is alonetone?", { action: 'about' } %>
-      <%= navigation_item "FAQ", { action: 'faq' } %>
-      <%= navigation_item "Help!", { action: 'help' } %>
-      <%= navigation_item "Privacy", { action: 'privacy' } %>
-      <%= navigation_item "Why I built alonetone", { action: 'why' } %>
+      <%= navigation_item "What is alonetone?", '/about' %>
+      <%= navigation_item "FAQ", about_faq_path %>
+      <%= navigation_item "Help!", about_help_path %>
+      <%= navigation_item "Privacy", about_privacy_path %>
+      <%= navigation_item "Why I built alonetone", about_why_i_built_alonetone_path %>
     </ul>
   </div>
 </nav>

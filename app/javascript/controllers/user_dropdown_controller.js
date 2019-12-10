@@ -49,8 +49,8 @@ export default class extends Controller {
 
   switchToLight(e) {
     this.toggleTheme(e)
-    this.switchToLightTarget.style.display = 'none'
     this.switchToDarkTarget.style.display = 'block'
+    this.switchToLightTarget.style.display = 'none'
   }
 
   switchToDark(e) {

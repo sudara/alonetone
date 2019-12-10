@@ -62,6 +62,10 @@ RSpec.describe User, type: :model do
       expect(users(:sandbags)).to be_moderator
     end
 
+    it "should treat an admin as a mod too" do
+      expect(users(:sudara)).to be_moderator
+    end
+
     it "should not require a profile on update" do
       @user = new_user
       @user.save
