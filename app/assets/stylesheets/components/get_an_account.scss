@@ -20,11 +20,10 @@
       padding-left: $baseline * 1.5;
       padding-right: $baseline * 1.5;
       padding-top: 60px;
-      label, .inline_form_error {
+      textarea, label, .inline_form_error {
         max-width: 434px;
       }
       textarea {
-        max-width: 434px;
         min-height: 80px;
       }
       input[type="submit"] {
