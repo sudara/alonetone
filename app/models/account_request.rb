@@ -85,3 +85,18 @@ class AccountRequest < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: account_requests
+#
+#  id              :bigint(8)        not null, primary key
+#  details         :text(65535)
+#  email           :string(255)
+#  entity_type     :integer
+#  login           :string(255)
+#  status          :integer          default("waiting")
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  moderated_by_id :integer
+#
