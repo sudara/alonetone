@@ -1,7 +1,7 @@
 .blank_slate {
   display: flex;
-  padding-right: 100px;
-  padding-left: 100px;
+  padding-right: 10%;
+  padding-left: 10%;
   padding-top: 50px;
   @media #{$one-column} {
     padding-left: $baseline / 2;
@@ -11,9 +11,9 @@
     .contributor_name, .contributor_name {
       display: none;
     }
-
     @media #{$one-column} {
       width: 40%!important; 
+      padding-bottom: 20px;
       .contributor_name, .contributor_title {
         display: block;
         padding-left: $baseline;
@@ -26,12 +26,14 @@
     }
   }
   .blank_slate_text {
-    margin-left: 66px;
     @include paragraph18();
+    margin-left: 9%;
+    padding-bottom: 50px;
     padding-top: 70px;
     color: #000;
     @media #{$one-column} {
-      padding-top: $baseline;
+      padding-top: $baseline * 1.5;
+      padding-bottom: $baseline * 1.5;
       width: 60%;
       margin-left: 20px;
       font-size: 14px;
@@ -50,14 +52,13 @@
     color: $grey900;
   }
 }
-
 .get_an_account_container {
   background-image: image-url("illustrations/backgrounds/contributor.png");
   background-repeat: no-repeat;
   background-size: 100%;
   position: relative;
   top: -48px;  
-  @media #{$one-column} {
+  @media #{$responsive} {
     background-size: auto;
     background-position-y: 0%;
     background-position-x: 50%;
