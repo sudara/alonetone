@@ -241,6 +241,10 @@ form {
   background-color: #ffeadf;
   padding-left: $baseline * 1.5;
   padding-right: $baseline * 1.5;
+  @media #{$mobile} {
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+  }
   h3 {
     @include title18();
     color: $red1000;
@@ -254,7 +258,9 @@ form {
       counter-increment: listNumbering;
       color: $red1100;
       margin-bottom: 12px;
+      display: flex;
       &:before {
+        flex-shrink: 0;
         content: counter(listNumbering);
         font-variant-numeric: tabular-nums;
         font-size: 14px;
@@ -269,7 +275,7 @@ form {
         padding-left: 7px;
         box-sizing: border-box;
         position: relative;
-        top: -1px;
+        top: -5px;
         line-height: 22px;
       }
     }
