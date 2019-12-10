@@ -1,5 +1,4 @@
 form {
-
   .form_heading {
     @include title18();
     line-height: 1.2;
@@ -14,7 +13,45 @@ form {
       width: 50%;
     }
   }
-
+  
+  .form_radio_group {
+    margin-bottom: 12px;
+  
+    input[type="radio"] {
+      margin-bottom: 16px;
+    }
+    input[type="radio"] + label {
+      display: inline;
+      margin-left: 12px;
+    }
+  
+    .field_with_errors {
+      display: inline;
+    }
+  
+    .field_with_errors + label {
+      display: inline;
+      margin-left: 12px;
+    }
+  
+    .columns {
+      display: flex;
+      flex-wrap: wrap;
+      > div {
+        width: 50%;
+      }
+      margin-bottom: 12px;
+    }
+  }
+  
+  .inline_form_error {
+    color: $inline-form-error-text;
+    position: relative;
+    top: -14px;
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+  
   input[type="search"],
   input[type="text"],
   input[type="password"],
@@ -32,7 +69,6 @@ form {
   input[type="submit"] {
     cursor: pointer;
     @include default-button();
-    
   }
   input[type="file"] {
     background-color: transparent;
@@ -79,7 +115,6 @@ form {
   }
 }
 
-
 .field_with_hint_before {
   span {
     background: $forms-hint-background;
@@ -105,7 +140,6 @@ form {
     display: inline;
   }
 }
-
 
 /* PLACEHOLDER TEXT COLOR */
 
@@ -203,48 +237,8 @@ form {
   display: block;
 }
 
-.form_radio_group {
-
-  margin-bottom: 12px;
-
-  input[type='radio'] {
-    margin-bottom: 16px;
-  }
-  input[type='radio'] + label {
-    display: inline;
-    margin-left: 12px;
-  }
-
-  .field_with_errors {
-    display: inline;
-  }
-
-  .field_with_errors + label {
-    display: inline;
-    margin-left: 12px;
-  }
-
-  .columns {
-    display: flex;
-    flex-wrap: wrap;
-    > div {
-      width: 50%;
-    }
-    margin-bottom: 12px;
-  }
-
-}
-
-.inline_form_error {
-  color: $inline-form-error-text;
-  position: relative;
-  top: -14px;
-  margin-bottom: 30px;
-  line-height: 1.2;
-}
-
 #error_explanation {
-  background-color: #FFEADF;
+  background-color: #ffeadf;
   padding-left: $baseline * 1.5;
   padding-right: $baseline * 1.5;
   h3 {
