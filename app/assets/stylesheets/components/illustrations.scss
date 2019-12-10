@@ -8,21 +8,21 @@
     padding-right: $baseline / 2;
   }
   .left {
-    .contributor_name, .contributor_name {
-      display: none;
-    }
     @media #{$one-column} {
       width: 40%!important; 
       padding-bottom: 20px;
-      .contributor_name, .contributor_title {
-        display: block;
-        padding-left: $baseline;
-      }
     }
     .blank_slate_illustration {
       background-size: 100%;
       background-repeat: no-repeat;
       height: 100%;
+    }
+    .contributor_name.mobile_only, .contributor_title.mobile_only {
+      display: none;
+      @media #{$one-column} {
+        display: block;
+        padding-left: $baseline;
+      }
     }
   }
   .blank_slate_text {
@@ -52,6 +52,9 @@
     color: $grey900;
   }
 }
+
+
+// I might re-think the use of this div for the background.
 .get_an_account_container {
   background-image: image-url("illustrations/backgrounds/contributor.png");
   background-repeat: no-repeat;
@@ -59,7 +62,7 @@
   position: relative;
   top: -48px;  
   @media #{$responsive} {
-    background-size: auto;
+    background-size: $site_max_width;
     background-position-y: 0%;
     background-position-x: 50%;
   }
