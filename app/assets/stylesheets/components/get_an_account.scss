@@ -41,6 +41,13 @@
       input[type="submit"] {
         @include default_button("primary");
       }
+      .field_with_hint_before {
+        span + input {
+          @media #{$one-column} {
+            width: 155px;
+          }
+        }
+      }
       .form_radio_group {
         .columns {
           div {
