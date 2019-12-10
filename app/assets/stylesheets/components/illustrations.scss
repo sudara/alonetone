@@ -8,7 +8,7 @@
     padding-right: $baseline / 2;
   }
   .left {
-    @media #{$one-column} {
+    @media only screen and (max-width: 540px) {
       width: 40%!important; 
       padding-bottom: 20px;
     }
@@ -16,26 +16,37 @@
       background-size: 100%;
       background-repeat: no-repeat;
       height: 100%;
+      min-width: 230px;
+      @media only screen and (max-width: 540px) {
+        min-width: auto;
+        height: 0;
+        padding-bottom: 144%;
+      }
     }
     .contributor_name.mobile_only, .contributor_title.mobile_only {
       display: none;
-      @media #{$one-column} {
+      @media only screen and (max-width: 540px) {
         display: block;
         padding-left: $baseline;
       }
     }
   }
   .blank_slate_text {
-    @include paragraph18();
     margin-left: 9%;
     padding-bottom: 50px;
     padding-top: 70px;
+    @include paragraph18();
     color: #000;
+    @media only screen and (max-width: 850px) {
+      font-size: 16px;
+    }
     @media #{$one-column} {
       padding-top: $baseline * 1.5;
       padding-bottom: $baseline * 1.5;
       width: 60%;
       margin-left: 20px;
+    }
+    @media only screen and (max-width: 540px) {
       font-size: 14px;
       .contributor_name, .contributor_title {
         display: none;
@@ -54,7 +65,8 @@
 }
 
 
-// I might re-think the use of this div for the background.
+// I might re-think the use of this div for the background
+// Or maybe this becomes general class for container_with_illustration
 .get_an_account_container {
   background-image: image-url("illustrations/backgrounds/contributor.png");
   background-repeat: no-repeat;
@@ -69,12 +81,6 @@
   .left {
     .blank_slate_illustration {
       background-image: image-url("illustrations/contributors/originals/alec-talking.png");
-      min-width: 231px;
-      @media #{$one-column} {
-        min-width: auto;
-        height: 0;
-        padding-bottom: 144%;
-      }
     }
   }
 }
