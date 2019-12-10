@@ -37,7 +37,7 @@
     padding-bottom: 50px;
     padding-top: 70px;
     @include paragraph18();
-    color: #000;
+    color: $grey900;
     @media only screen and (max-width: 850px) {
       font-size: 16px;
     }
@@ -55,6 +55,7 @@
     }
   }
   .contributor_name {
+    line-height: 1.2;
     font-style: italic;
     color: $orange600;
   }
