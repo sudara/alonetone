@@ -7,7 +7,7 @@ footer#site_footer {
   width: 100%;
   padding-top: $baseline;
   h3 {
-    color: $footer-forum-topics-accent;
+    color: $box-h2-text;
     line-height: 1.2;
     font-size: 12px;
     font-family: $medium-sans-font;
@@ -148,7 +148,7 @@ footer#site_footer {
           margin-bottom: 16px;
         }
         .footer_column_header {
-          color: $accent;
+          color: $box-h2-text;
           font-size: 14px;
           line-height: 1.2;
           margin-bottom: 10px;
