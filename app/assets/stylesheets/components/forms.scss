@@ -2,7 +2,8 @@ form {
   .form_heading {
     @include title18();
     line-height: 1.2;
-    margin-bottom: $baseline;
+    margin-bottom: 18px;
+    margin-top: 0;
     color: $forms-heading-text;
   }
 

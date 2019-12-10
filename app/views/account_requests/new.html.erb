@@ -12,7 +12,7 @@
     </div>
     <div class="blank_slate_text">
       <p>
-        “Alonetone is open to everyone making music.  However, we are invite-only to keep spammers out.
+        “Alonetone is open to everyone making music. However, we are invite-only to keep spammers out.
       </p>
       <p>
         Get on the list below! It might take us a day or two to approve your account, but it’s worth it, promise.”
@@ -46,9 +46,9 @@
     <% end %>
 
     <%= form_with(model: @account_request, local: true) do |f| %>
-      <div class="form_heading">
+      <h3 class="form_heading">
         Give us an email and pick your username:
-      </div>
+      </h3>
       <div class="form_row">
         <div>
           <%= f.label :email, "Email" %>
@@ -62,9 +62,9 @@
         </div>
       </div>
       <div>
-        <div class="form_heading">
+        <h3 class="form_heading">
           Which best describes what you will host on alonetone:
-        </div>
+        </h3>
         <div class="form_radio_group">
           <div class="columns">
             <div class="left">
@@ -95,9 +95,9 @@
           <%= inline_form_error(@account_request.errors[:entity_type]) %>
         </div>
       <div>
-        <div class="form_heading">
+        <h3 class="form_heading">
           Do you have music elsewhere (Bandcamp, Spotify, Soundcloud)?
-        </div>
+        </h3>
         <%= f.label :details, "Give us a link. Or let us know what kind of thing you do. Don't worry, we don't care about genre, etc." %>
         <%= f.text_area :details %>
         <%= inline_form_error(@account_request.errors[:details]) %>
