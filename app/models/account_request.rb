@@ -48,7 +48,7 @@ class AccountRequest < ApplicationRecord
 
   validates :details, length: {
     minimum: 5,
-    too_short: "Please link to your music/website or add some detail about what you make!"
+    too_short: "should link to your music/website or add some detail about what you make!"
   }
 
   def email_is_unique
