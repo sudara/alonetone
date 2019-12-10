@@ -51,12 +51,12 @@
       </div>
       <div class="form_row">
         <div>
-          <%= f.label :email, "Email." %>
+          <%= f.label :email, "Email" %>
           <%= f.text_field :email %>
           <%= inline_form_error(@account_request.errors[:email]) %>
         </div>
         <div class="field_with_hint_before">
-          <%= f.label :login, "Username. No spaces allowed." %>
+          <%= f.label :login, "Pick a username (no spaces allowed)" %>
           <span>alonetone.com/</span><%= f.text_field :login %>
           <%= inline_form_error(@account_request.errors[:login]) %>
         </div>
