@@ -3,10 +3,9 @@ form {
     @include title18();
     line-height: 1.2;
     margin-bottom: 18px;
-    margin-top: 0;
+    margin-top: 40px;
     color: $forms-heading-text;
   }
-
   .form_row {
     display: flex;
     flex-wrap: wrap;
@@ -14,10 +13,8 @@ form {
       width: 50%;
     }
   }
-  
   .form_radio_group {
-    margin-bottom: 12px;
-  
+    margin-bottom: 24px;
     input[type="radio"] {
       margin-bottom: 16px;
     }
@@ -25,16 +22,13 @@ form {
       display: inline;
       margin-left: 12px;
     }
-  
     .field_with_errors {
       display: inline;
     }
-  
     .field_with_errors + label {
       display: inline;
       margin-left: 12px;
     }
-  
     .columns {
       display: flex;
       flex-wrap: wrap;
@@ -49,7 +43,6 @@ form {
     color: $inline-form-error-text;
     position: relative;
     top: -14px;
-    margin-bottom: 30px;
     line-height: 1.2;
   }
   
