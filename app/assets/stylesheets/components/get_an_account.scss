@@ -10,6 +10,7 @@
   }
   .box {
     @include shadow6();
+    margin-bottom: 0;
     h2 {
       @include title24();
       height: 64px;
@@ -18,6 +19,7 @@
       padding-right: $baseline * 1.5;
       padding-bottom: 0;
       padding-left: $baseline * 1.5;
+      margin-bottom: 0;
       @media #{$mobile} {
         padding-left: $baseline / 2;
         padding-right: $baseline / 2;
@@ -26,7 +28,8 @@
     form {
       padding-left: $baseline * 1.5;
       padding-right: $baseline * 1.5;
-      padding-top: 60px;
+      padding-top: 30px;
+      padding-bottom: 8px;
       @media #{$mobile} {
         padding-left: $baseline / 2;
         padding-right: $baseline / 2;
@@ -39,6 +42,13 @@
       }
       input[type="submit"] {
         @include default_button("primary");
+      }
+      .field_with_hint_before {
+        span + input {
+          @media #{$one-column} {
+            width: 155px;
+          }
+        }
       }
       .form_radio_group {
         .columns {

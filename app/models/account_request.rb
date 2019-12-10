@@ -48,7 +48,7 @@ class AccountRequest < ApplicationRecord
 
   validates :details, length: {
     minimum: 5,
-    too_short: "Please link to your music/website or add some detail about what you make!"
+    too_short: "should link to your music/website or add some detail about what you make!"
   }
 
   def email_is_unique
@@ -85,3 +85,18 @@ class AccountRequest < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: account_requests
+#
+#  id              :bigint(8)        not null, primary key
+#  details         :text(65535)
+#  email           :string(255)
+#  entity_type     :integer
+#  login           :string(255)
+#  status          :integer          default("waiting")
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  moderated_by_id :integer
+#
