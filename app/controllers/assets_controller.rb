@@ -105,15 +105,13 @@ class AssetsController < ApplicationController
 
   def edit
     check_for_missing_attachment
-    @allow_reupload = true
+    @single_track_page = true
   end
 
   def mass_edit
     @assets = [@user.assets.where(id: params[:assets])].flatten if params[:assets] # expects comma seperated list of ids
     @assets = @user.assets unless @assets.present?
   end
-
-  def mass_update; end
 
   def create
     @assets = assets
@@ -154,7 +152,8 @@ class AssetsController < ApplicationController
 
   def update
     result = @asset.update(asset_params)
-    @asset.update_attribute(:is_spam, @asset.spam?) # makes an api call
+    # Spam detection temporarily disabled as of Dec 2019
+    # @asset.update_attribute(:is_spam, @asset.spam?)
     @asset.publish! if params[:commit] == 'Publish'
 
     if request.xhr?

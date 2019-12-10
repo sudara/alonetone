@@ -3,6 +3,10 @@
 module RSpec
   module Support
     module CapybaraHelpers
+      def switch_themes
+        page.click_on class: 'profile_link'
+        page.click_on class: 'switch_to_theme'
+      end
 
       def pause_animations
         page.execute_script("TweenMax.globalTimeScale(0)")

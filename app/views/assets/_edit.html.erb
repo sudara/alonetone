@@ -23,39 +23,42 @@
     <%= f.text_area :description, placeholder: "Tell us a story...", id: "description_#{asset.id}"  %>
     <%= f.text_area :credits, placeholder: "Credits for this track" %>
 
-    <%= hidden_field_tag :asset_permalink, asset.permalink %>
-
-    <% if @allow_reupload %>
-
     <div class="track_edit_bottom">
-      <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
-      <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
-        <%= f.file_field :audio_file, class: 'asset_data' %>
-        <div class="note">This will permanently delete the old version.
-          The replacement track will <strong>not</strong> be considered a new track. It will not
-          show up on the home page under 'latest tracks'. But hey, you get to clean
-          up your act on the sly and fix that hasty mix from last week! Yay!
+      <% if @single_track_page %>
+        <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
+        <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
+          <%= f.file_field :audio_file, class: 'asset_data' %>
+          <div class="note">This will permanently delete the old version.
+            The replacement track will <strong>not</strong> be considered a new track. It will not
+            show up on the home page under 'latest tracks'. But hey, you get to clean
+            up your act on the sly and fix that hasty mix from last week! Yay!
+          </div>
         </div>
-      </div>
       <% end %>
       <div class="edit_save">
-      <div class="submit_wrapper">
-        <%= f.submit "Save" %>
-        <div class="small_spinner" data-target="save.spinner"> </div>
-        <div class="ajax_waiting" data-target="save.response">
-          <div class="text"><!-- placeholder response text --></div>
+          <% if @single_track_page %>
+          <%= link_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'delete_link',
+          data: { confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
+          title: 'delete this track permanently ' %>
+        <% end %>
+        <div class="submit_wrapper">
+          <% if !@single_track_page %>
+            <div class="ajax_waiting" data-target="save.response">
+              <div class="text"><!-- placeholder response text --></div>
+            </div>
+            <div class="small_spinner" data-target="save.spinner"> </div>
+          <% end %>
+          <%= f.submit "Save" %>
         </div>
-      </div>
       <% unless asset.published? %>
         <div class="submit_wrapper">
           <%= f.submit "Publish" %>
-          <div class="ajax_waiting" >
+          <div class="ajax_waiting">
             <div class="text"><!-- placeholder response text --></div>
           </div>
           <div class="small_spinner" style="display:none;"> </div>
         </div>
       <% end %>
-
     </div>
   <% end %>
   </div>

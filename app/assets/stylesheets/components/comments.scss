@@ -6,7 +6,7 @@
   .box {
     .asset {
       border-top: 1px solid $track-border-bottom;
-      border-bottom: 0;
+      border-bottom: 1px solid $track-border-bottom;
       &:first-child {
         border-top: 0;
       }
@@ -53,21 +53,6 @@
   margin-top: 0;
   margin-right: 10px;
   margin-left: 10px;
-  &::before {
-    position: absolute;
-    top: 24px;
-    left: 49%;
-    content: "\A";
-    border-width: 0 9px 13px 9px;
-    border-style: solid;
-    border-color: transparent transparent $grey200 transparent;
-    @media #{$mobile} {
-      display: none;
-    }
-    @media #{$two-column-narrow} {
-      display: none;
-    }
-  }
   .comment_asset {
     div.submit_wrapper {
       position: relative;
@@ -91,45 +76,6 @@
         }
       }
       @media #{$two-column-narrow} {
-        display: block;
-        .ajax_waiting {
-          margin-right: 0;
-          float: right;
-          border-width: 0;
-          &.ajax_fail,
-          &.ajax_success {
-            margin-bottom: 12px;
-            border-width: 1px;
-          }
-        }
-      }
-    }
-  }
-}
-
-.track_content .comment_asset {
-  padding-top: 20px;
-  padding-right: 15px;
-  padding-left: 15px;
-  background-color: $track-content-comment-background;
-  box-shadow: none;
-  border-radius: 0 0 6px 6px;
-  position: relative;
-  z-index: 2;
-  top: -6px;
-  .comment_form {
-    textarea {
-      background-color: $track-content-comment-textarea-background;
-    }
-    div.submit_wrapper {
-      position: relative;
-      top: -18px;
-      display: flex;
-      flex-direction: row;
-      clear: both;
-      justify-content: flex-end;
-      margin-left: 110px;
-      @media #{$one-column} {
         display: block;
         .ajax_waiting {
           margin-right: 0;
@@ -211,6 +157,7 @@
         label {
           user-select: none;
           text-transform: unset;
+          font-size: 14px;
           color: $comment-make-private-text;
           margin-bottom: 2px !important;
         }
@@ -234,6 +181,12 @@
         @include default_button();
         background-color: $comment-submit-background;
         color: $comment-submit-text;
+        &:hover {
+          background-color: $comment-submit-background-hover;
+        }
+        &:active {
+          background-color: $comment-submit-background-active;
+        }
       }
     }
   }
@@ -248,33 +201,25 @@
   }
   .comment_user {
     position: absolute;
-    top: 18px;
-    left: 10px;
+    z-index: 2;
+    top: 6px;
+    left: 6px;
     img {
       float: left;
-      width: 40px;
-      height: 40px;
-      border-radius: 5px 0 0 5px;
+      width: 32px;
+      height: 32px;
+      border-radius: 2px;
     }
   }
+
   .comment_right {
     @include samo-shadow-and-radius();
     position: relative;
-    margin: 18px 10px 18px 50px;
-    padding: 16px 16px 10px 16px;
-    border-radius: 0 4px 4px 4px;
+    margin: 0px 20px 16px 20px;
+    padding: 16px 24px 10px 28px;
+    border-radius: 0px 0px 6px 6px;
     background-color: $comment-right-background;
     box-shadow: none;
-    &::before {
-      position: absolute;
-      z-index: 1;
-      top: -13px;
-      left: 47%;
-      content: "\A";
-      border-width: 0 9px 13px 9px;
-      border-style: solid;
-      border-color: transparent transparent $comment-right-background transparent;
-    }
     .comment_user_text {
       font-size: 11px;
       font-family: $medium-sans-font;

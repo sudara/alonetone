@@ -41,13 +41,13 @@ form {
   select {
     box-sizing: border-box;
     margin-bottom: $baseline;
-    border: 2px solid $forms-border;
+    border: 1px solid $forms-border;
     border-radius: 4px;
     background-color: $forms-background;
-    font-size: 14px;
+    font-size: 16px;
     color: $forms-input-text;
     &:focus {
-      border: 2px solid $accent;
+      border: 1px solid $accent;
     }
   }
   input {
@@ -114,7 +114,7 @@ form {
 [type="checkbox"]:not(:checked) + label:active:after {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: 4.5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }
@@ -123,8 +123,8 @@ form {
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   content: "";
   border: 1px solid $checkbox-not-checked-border;
   border-radius: 2.5px;
@@ -135,8 +135,8 @@ form {
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   content: "";
   border: 1px solid $checkbox-checked-border;
   border-radius: 2.5px;
@@ -146,7 +146,7 @@ form {
 [type="checkbox"]:not(:checked) + label:after {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: 4.5px;
   content: image-url("svg/icon_checkmark.svg");
   display: none;
 }
@@ -154,7 +154,7 @@ form {
 [type="checkbox"]:checked + label:after {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: 4.5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }

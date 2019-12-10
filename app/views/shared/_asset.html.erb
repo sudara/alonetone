@@ -1,61 +1,69 @@
 <div class="track_content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>">
-
+  <%= render partial: 'shared/back_to_artist' unless @playlist %>
   <%= render partial: 'assets/big_player' %>
-
-  <div class= "edit_links_and_favorite">
-    <div class="edit_links">
-      <% if authorized? %>
-        <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit_link") %>
-      <% end %>
-
-      <% if moderator? %>
-        <% if @asset.is_spam? %>
-          <%= link_to "Unspam", unspam_admin_asset_path(@asset.id), method: :put, class: "edit_link" %>
-        <% else %>
-          <%= link_to "Spam", spam_admin_asset_path(@asset.id), method: :put, class: "edit_link" %>
-        <% end %>
-      <% end %>
-    </div>
-    <% if logged_in? %>
-      <div class="track_favorite">
-      <a href="#" data-remote="true", class='add_to_favorites'
-          data-controller="favorite" data-action="favorite#toggle" data-favorite-current-user="<%= current_user.login %>" data-favorite-asset-id="<%= @asset.id %>">
-          <%== render file: svg_path('svg/animation_heart.svg') %>
-      </a>
-      </div>
-    <% end %>
-
-    <% if @asset.audio_file.attached? %>
-      <div class="download_link">
-        <a href="<%= media_url(@asset) %>" download="<%= @asset.audio_file.filename %>"></a>
-      </div>
-    <% end %>
- </div>
 
   <div class="track_post">
     <h1><%= @asset.name %></h1>
     <% unless @playlist %>
       <h3><%= link_to @asset.user.name, user_home_path(@asset.user) %></h3>
     <% end %>
-    <%= markdown_with_html(@asset.description) %>
-
     <div class="track_stats">
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
-      <div class="plays"><%= @asset.listens_count %>
-        <i class="icon_plays">
-          <%== render file: svg_path('svg/icon_play_inverted.svg') %>
-        </i>
-      </div>
-      <div class="favorite_total"><%= @asset.favorites_count %>
+      <div class="favorites">
         <i class="icon_favs">
           <%== render file: svg_path('svg/icon_favorite_inverted.svg') %>
         </i>
+        <%= @asset.favorites_count %>
       </div>
+      <div class="plays">
+        <i class="icon_plays">
+          <%== render file: svg_path('svg/icon_play_inverted.svg') %>
+        </i>
+        <%= @asset.listens_count %>
+      </div>
+
     </div>
+
+    <%= markdown_with_html(@asset.description) %>
 
     <div>
       <%= markdown(@asset.credits) if @asset.credits.present? %>
     </div>
+
+    <div class= "edit_links_and_favorite">
+      <% if logged_in? %>
+        <div class="track_favorite">
+          <a href="#" data-remote="true", class='add_to_favorites'
+              data-controller="favorite" data-action="favorite#toggle" data-favorite-current-user="<%= current_user.login %>" data-favorite-asset-id="<%= @asset.id %>">
+              <%== render file: svg_path('svg/animation_heart.svg') %>
+          </a>
+        </div>
+      <% end %>
+
+      <% if @asset.audio_file.attached? %>
+      <div class="download_link">
+        <a href="<%= media_url(@asset) %>" download="<%= @asset.audio_file.filename %>">
+          Download <%== render file: svg_path('svg/song_download.svg') %>
+        </a>
+      </div>
+      <% end %>
+
+      <div class="edit_links">
+        <% if authorized? %>
+          <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit_link") %>
+        <% end %>
+
+        <% if moderator? %>
+          <% if @asset.is_spam? %>
+            <%= link_to "Unspam", unspam_admin_asset_path(@asset.id), method: :put, class: "edit_link" %>
+          <% else %>
+            <%= link_to "Spam", spam_admin_asset_path(@asset.id), method: :put, class: "edit_link" %>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+
   </div>
 
   <%= render partial: 'assets/comment', locals: { asset: @asset }%>
