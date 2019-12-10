@@ -4,15 +4,29 @@
   padding-right: 100px;
   padding-left: 100px;
   padding-top: 50px;
+  @media #{$mobile} {
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+  }
   .blank_slate_illustration {
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
+    @media #{$mobile} {
+      width: 40%!important; 
+
+    }
   }
   .blank_slate_text {
     margin-left: 66px;
     @include paragraph18();
     padding-top: 70px;
     color: #000;
+    @media #{$mobile} {
+      padding-top: $baseline;
+      width: 60%;
+      margin-left: 20px;
+      font-size: 14px;
+    }
     .contributor_name {
       font-style: italic;
       color: $orange600;
@@ -32,7 +46,7 @@
   position: relative;
   top: -48px;  
   .blank_slate_illustration {
-    background-image: image-url("illustrations/contributors/originals/ben-intro.png");
+    background-image: image-url("illustrations/contributors/originals/alec-talking.png");
     width: 300px;
   }
 
