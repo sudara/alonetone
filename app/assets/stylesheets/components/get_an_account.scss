@@ -18,6 +18,7 @@
       padding-right: $baseline * 1.5;
       padding-bottom: 0;
       padding-left: $baseline * 1.5;
+      margin-bottom: 0;
       @media #{$mobile} {
         padding-left: $baseline / 2;
         padding-right: $baseline / 2;
