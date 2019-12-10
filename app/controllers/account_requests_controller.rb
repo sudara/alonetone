@@ -1,6 +1,7 @@
 class AccountRequestsController < ApplicationController
   def new
     @account_request = AccountRequest.new
+    @page_title = "Get An Account"
   end
 
   def create

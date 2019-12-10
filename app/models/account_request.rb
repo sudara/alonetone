@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AccountRequest < ApplicationRecord
-
   scope :recent, -> { order('created_at DESC') }
 
   belongs_to :user, optional: true
@@ -37,7 +36,7 @@ class AccountRequest < ApplicationRecord
       with: URI::MailTo::EMAIL_REGEXP,
       message: "should look like an email address."
     }
-  validate :email_is_unique
+  validate :email_is_unique, on: :create
 
   validates :login,
     on: :create,
@@ -45,7 +44,7 @@ class AccountRequest < ApplicationRecord
       with: /\A\w+\z/,
       message: "should use only letters and numbers."
     }
-  validate :login_is_unique
+  validate :login_is_unique, on: :create
 
   validates :details, length: {
     minimum: 5,
@@ -72,7 +71,7 @@ class AccountRequest < ApplicationRecord
   end
 
   def create_user_account!(invited_by)
-    User.create(login: login, email: email, invited_by: invited_by) do |u|
+    User.create!(login: login, email: email, invited_by: invited_by) do |u|
       u.reset_password
       u.reset_perishable_token
     end

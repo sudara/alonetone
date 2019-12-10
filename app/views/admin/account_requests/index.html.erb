@@ -10,23 +10,18 @@
     </div>
 
     <div class="admin_column_right_inner box">
-
       <header class="admin_requests">
         <div class="date_column">Submitted</div>
         <div class="user_column">User</div>
-        <div class="user_column">Type</div>
         <div class="text_column">Text</div>
       </header>
-
       <div class="admin_requests_rows">
          <%= render partial: 'account_request', collection: @account_requests %>
       </div>
-
     </div>
 
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>
-
   </div>
 </div>

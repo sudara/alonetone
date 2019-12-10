@@ -9,10 +9,12 @@ module Admin
     def approve
       @user = @account_request.approve!(current_user)
       InviteNotification.approved_request(@user).deliver_now
+      render plain: 'approved'
     end
 
     def deny
-      @account_request.deny
+      @account_request.denied!
+      render plain: 'denied'
     end
 
     private
