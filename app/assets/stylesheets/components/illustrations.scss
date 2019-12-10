@@ -74,6 +74,7 @@
   background-repeat: no-repeat;
   background-size: $site_max_width;
   background-position-x: 50%;
+  background-position-y: $background_position-y;
   position: relative;
   top: -48px;  
   .left {
