@@ -1,8 +1,6 @@
 <div class="get_an_account_container">
   <div class="blank_slate">
-<<<<<<< HEAD
     <div class="left">
-
       <div class="blank_slate_illustration">
       </div>
       <div class="contributor_name mobile_only">
@@ -11,13 +9,7 @@
       <div class="contributor_title mobile_only">
         illustrator
       </div>
-
     </div>
-    
-=======
-    <div class="blank_slate_illustration">
-    </div>
->>>>>>> Remove excess whitespace in account_request/new
     <div class="blank_slate_text">
       <p>
         “Alonetone is open to everyone making music.  However, we are invite-only to keep spammers out.
@@ -55,32 +47,27 @@
 
     <%= form_with(model: @account_request, local: true) do |f| %>
       <div class="form_heading">
-        We need two pieces of information to set things up for you:
+        Give us an email and pick your username:
       </div>
       <div class="form_row">
         <div>
-          <%= f.label :email, "Email" %>
+          <%= f.label :email, "Email." %>
           <%= f.text_field :email %>
           <%= inline_form_error(@account_request.errors[:email]) %>
         </div>
         <div class="field_with_hint_before">
-          <%= f.label :login, "Desired Login / alonetone URL" %>
+          <%= f.label :login, "Username. No spaces allowed." %>
           <span>alonetone.com/</span><%= f.text_field :login %>
           <%= inline_form_error(@account_request.errors[:login]) %>
         </div>
       </div>
       <div>
         <div class="form_heading">
-          What’s your gig?
+          Which best describes what you will host on alonetone:
         </div>
         <div class="form_radio_group">
           <div class="columns">
-<<<<<<< HEAD
-
-            <div class="left">          
-=======
             <div class="left">
->>>>>>> Remove excess whitespace in account_request/new
               <div class="form_radio_pair">
                 <%= f.radio_button(:entity_type, "band") %>
                 <%= f.label(:entity_type_band, "Band") %>
@@ -91,38 +78,27 @@
               </div>
               <div class="form_radio_pair">
                 <%= f.radio_button(:entity_type, "label") %>
-                <%= f.label(:entity_type_label, "Indie Label") %>
-<<<<<<< HEAD
-              </div>            
-=======
+                <%= f.label(:entity_type_label, "Label") %>
               </div>
->>>>>>> Remove excess whitespace in account_request/new
             </div>
             <div class="right">
               <div class="form_radio_pair">
                 <%= f.radio_button(:entity_type, "blogger") %>
-                <%= f.label(:entity_type_blogger, "Blogger") %>
+                <%= f.label(:entity_type_blogger, "Blogger / Website") %>
               </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> Remove excess whitespace in account_request/new
               <div class="form_radio_pair">
                 <%= f.radio_button(:entity_type, "podcaster") %>
                 <%= f.label(:entity_type_podcaster, "Podcaster / Spoken Word") %>
               </div>
-<<<<<<< HEAD
-=======
             </div>
->>>>>>> Remove excess whitespace in account_request/new
           </div>
           <%= inline_form_error(@account_request.errors[:entity_type]) %>
         </div>
       <div>
         <div class="form_heading">
-          Have music on bandcamp or soundcloud?
+          Do you have music elsewhere (Bandcamp, Spotify, Soundcloud)?
         </div>
-        <%= f.label :details, "Give us a link. Or let us know what sort of thing you do. Don't worry, we don't care about genre, etc." %>
+        <%= f.label :details, "Give us a link. Or let us know what kind of thing you do. Don't worry, we don't care about genre, etc." %>
         <%= f.text_area :details %>
         <%= inline_form_error(@account_request.errors[:details]) %>
       </div>
