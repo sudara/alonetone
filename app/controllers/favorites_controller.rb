@@ -22,6 +22,10 @@ class FavoritesController < ApplicationController
 
   private
 
+  def find_user
+    @user = current_user
+  end
+
   def find_favorite_track
     @favorite_track = @user.tracks.favorites.where(asset_id: @asset.id).first
   end
