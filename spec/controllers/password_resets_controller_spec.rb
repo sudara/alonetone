@@ -49,7 +49,7 @@ RSpec.describe PasswordResetsController, type: :controller do
       post :create, params: { email: users(:arthur).email }
       put :update, params: { id: User.where(login: 'arthur').first.perishable_token,
                              user: { password: '123456', password_confirmation: '1234567' } }
-      expect(response).to redirect_to(edit_password_reset_path(User.where(login: 'arthur').first.perishable_token))
+      expect(response).to render_template('edit')
       expect(controller.session["user_credentials"]).to eq(nil)
     end
   end

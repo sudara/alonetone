@@ -15,7 +15,8 @@ $body-background: $black;
 
 $box-background: $grey1100;
 
-$box-h2-bottom-border: $grey100;
+$box-h2-text: $orange300;
+$box-h2-bottom-border: $grey1000;
 
 $back-to-text: $grey600;
 $back-to-background: $grey1100;
@@ -60,10 +61,17 @@ $input-accepted-border: $green1000;
 $body-text: $white;
 
 // forms.scss
-$forms-label-text: $grey200;
-$forms-input-text: $white;
+$forms-heading-text: $grey400;
+
+$forms-label-text: $grey800;
+$forms-input-text: $grey200;
 $forms-background: $grey1100;
 $forms-border: $grey800;
+
+$forms-hint-background: $grey1000;
+$forms-hint-text: $grey200;
+
+$inline-form-error-text: $red500;
 
 $forms-placeholder-text: $grey800;
 
@@ -334,3 +342,6 @@ $admin-user-ip-text: $grey50;
 // secretz.scss
 $secretz-row-background: $grey1100;
 $secretz-odd-row-background: $grey1000;
+
+// illustrations.scss
+$background_position-y: 0;
