@@ -34,7 +34,7 @@ export default class extends Controller {
   // This is the  method that will be implicitly called
   // https://medium.com/@photokandy/til-you-can-pass-an-object-instead-of-a-function-to-addeventlistener-7838a3c4ec62
   handleEvent(e) {
-    if (this.open && ((e.keyCode === 27) || this.clickOutsideMenu(e))) {
+    if (this.open && (this.escKeyPressed(e) || this.clickOutsideMenu(e))) {
       this.menuTarget.style.display = 'none'
       this.currentlyOpen = false
       window.removeEventListener('click', this)
@@ -42,8 +42,13 @@ export default class extends Controller {
     }
   }
 
+  escKeyPressed(e) {
+    return (e.type === 'keydown') && (e.keyCode === 27)
+  }
+
   clickOutsideMenu(e) {
-    return (!this.menuTarget.contains(e.target) // outside whole menu
+    return (e.type !== 'keydown')
+      && (!this.menuTarget.contains(e.target) // outside whole menu
       || this.headerTarget.contains(e.target)) // inside header
   }
 
