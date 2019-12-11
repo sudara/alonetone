@@ -34,8 +34,8 @@
       <% if logged_in? %>
         <div class="track_favorite">
           <a href="#" data-remote="true", class='add_to_favorites'
-              data-controller="favorite" data-action="favorite#toggle" data-favorite-current-user="<%= current_user.login %>" data-favorite-asset-id="<%= @asset.id %>">
-              <%== render file: svg_path('svg/animation_heart.svg') %>
+              data-controller="favorite" data-action="favorite#toggle" data-favorite-asset-id="<%= @asset.id %>">
+              Favorite <%== render file: svg_path('svg/animation_heart.svg') %>
           </a>
         </div>
       <% end %>
