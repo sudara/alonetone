@@ -51,12 +51,29 @@ export default class extends Controller {
     this.toggleTheme(e)
     this.switchToDarkTarget.style.display = 'block'
     this.switchToLightTarget.style.display = 'none'
+    this.lightStyles.disabled = false
+
+    // Buy the browser a bit of time to load the new styles
+    // Ideally, while loading, we ask if the stylesheet is still 'disabled'
+    // But that instantly returns false on toggling
+    // So we are choosing a perceptual threshold that "just works"
+    setTimeout(() => this.disableDark(), 100)
   }
 
   switchToDark(e) {
     this.toggleTheme(e)
     this.switchToLightTarget.style.display = 'block'
     this.switchToDarkTarget.style.display = 'none'
+    this.darkStyles.disabled = false
+    setTimeout(() => this.disableLight(), 100)
+  }
+
+  disableLight() {
+    this.lightStyles.disabled = true
+  }
+
+  disableDark() {
+    this.darkStyles.disabled = true
   }
 
   toggleTheme(e) {
@@ -65,8 +82,6 @@ export default class extends Controller {
       url: "/toggle_theme",
       type: "PUT"
     })
-    this.lightStyles.disabled = !this.lightStyles.disabled
-    this.darkStyles.disabled = !this.lightStyles.disabled
     Turbolinks.clearCache()
   }
 }
