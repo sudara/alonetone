@@ -1,13 +1,12 @@
-<% content_for :left do %>
-  <div class="box">
-    <h2>Uh oh! Alonetone slipped and fell.</h2>
-    <div class="static_content">
-      <p>
-        <strong>What can YOU do to help?</strong>
-      </p>
-      <p>
-        We've been notified, but feel free to bring this up in the forums if it keeps happening to you day after day!
-      </p>
-    </div>
-  </div>
-<% end %>
+<%= content_for :body_class, 'error' %>
+<%= render partial: 'pages/navigation' %>
+
+<div class="gift error">
+  <h1 class="gift_heading">
+    <%= 'Something Broke!' %>
+  </h1>
+  <h2>
+    Don't worry though, we've been notified.
+  </h2>
+  <%= image_tag 'illustrations/500.png' %>
+</div>
