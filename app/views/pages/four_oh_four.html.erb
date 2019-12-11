@@ -1,8 +1,9 @@
-<div class="about-page">
-  <div class="faq box">
-    <h2 class="box static">404 Not Found</h1>
+<%= content_for :body_class, 'not_found' %>
+<%= render partial: 'pages/navigation' %>
 
-    <div class="static_content">
-      We couldn't find that, sorry!
-    </div>
+<div class="gift 404">
+  <h1 class="gift_heading">
+    <%= @message.present? ? @message : '404 Not Found' %>
+  </h1>
+  <%= image_tag 'illustrations/404.png' %>
 </div>
