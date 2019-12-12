@@ -1,7 +1,27 @@
 <div class="box password_reset">
-  <h2>Alright, pick a new password</h2>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+      <% if @user.errors.size == 1 %>
+        One minor thing looks off:
+      <% else %>
+        Just a couple things to tweak:
+      <% end %>
+      </h3>
+      <ol>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ol>
+    </div>
+  <% end %>
+  <% if @newly_invited_user %>
+  <h2>Pick a password and you can start uploading!</h2>
+  <% else %>
+  <h2>Almost back in, just pick a new password</h2>
+  <% end %>
   <div id="login" class="static_content">
-    <%= form_with model: @user, url: password_reset_path, method: :put do |f| %>
+    <%= form_with model: @user, url: password_reset_path, method: :put, local: true do |f| %>
       <%= f.password_field :password, placeholder: "Enter New Password" %><br/>
       <%= f.password_field :password_confirmation, placeholder: "Confirm New Password" %><br>
       <%= f.submit "Come on in..." %>

@@ -1,0 +1,33 @@
+<div data-controller="admin--request" class="<%= account_request.status %>">
+  <div class="date_column">
+    <%= local_time_ago account_request.created_at %>
+    <div>
+      <%= account_request.status %>
+    </div>
+    <div>
+      <% if account_request.moderated_by %>
+      by <%= account_request.moderated_by.login %>
+      <% end %>
+    </div>
+  </div>
+  <div class="user_column">
+    <div>
+      <div><%= account_request.approved? ? link_to(account_request.login, user_home_path(account_request.login)) : account_request.login %></div>
+      <div><%= account_request.email %></div>
+    </div>
+  </div>
+  <div class="bio_column">
+    <div><%= account_request.entity_type.upcase %></div>
+    <div><%= account_request.details %></div>
+  </div>
+  <div class="button_column">
+    <%= link_to "Approve & Email", approve_admin_account_request_path(account_request),
+      class: 'approve_button', method: :put, remote: true,
+      data: { target: 'admin--request.approveButton',
+      action: 'click->admin--request#moderated ajax:success->admin--request#approve ajax:error->admin--request#error' } %>
+    <%= link_to "Deny", deny_admin_account_request_path(account_request),
+      class: 'deny_button', method: :put, remote: true,
+      data: { target: 'admin--request.denyButton',
+      action: 'click->admin--request#moderated ajax:success->admin--request#denie ajax:error->admin--request#error' } %>
+  </div>
+</div>

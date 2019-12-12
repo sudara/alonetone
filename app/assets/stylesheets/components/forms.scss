@@ -1,52 +1,106 @@
-input[type="search"],
-input[type="text"],
-input[type="password"],
-input[type="email"],
-textarea {
-  outline: 0;
-  -webkit-appearance: none;
-}
-input[type="search"],
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  width: 280px;
-}
-input[type="submit"] {
-  cursor: pointer;
-  @include default-button();
-}
-input[type="file"] {
-  background-color: transparent;
-}
-br {
-  display: none;
-}
-label {
-  margin-bottom: 8px !important;
-  font-family: $medium-sans-font;
-  font-size: 12px;
-  display: block;
-  margin: 2px 0;
-  text-align: left;
-  // text-transform: uppercase;
-  color: $forms-label-text;
-  abbr {
+form {
+  .form_heading {
+    @include title18();
+    line-height: 1.2;
+    margin-bottom: 18px;
+    margin-top: 40px;
+    color: $forms-heading-text;
+  }
+  .form_row {
+    display: flex;
+    flex-wrap: wrap;
+    > div:first-child {
+      width: 50%;
+    }
+  }
+  .form_radio_group {
+    margin-bottom: 24px;
+    input[type="radio"] {
+      margin-bottom: 16px;
+    }
+    input[type="radio"] + label {
+      display: inline;
+      margin-left: 12px;
+    }
+    .field_with_errors {
+      display: inline;
+    }
+    .field_with_errors + label {
+      display: inline;
+      margin-left: 12px;
+    }
+    .columns {
+      display: flex;
+      flex-wrap: wrap;
+      > div {
+        width: 50%;
+      }
+      margin-bottom: 12px;
+    }
+  }
+  
+  .inline_form_error {
+    color: $inline-form-error-text;
+    position: relative;
+    top: -14px;
+    line-height: 1.2;
+  }
+  
+  input[type="search"],
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea {
+    outline: 0;
+    -webkit-appearance: none;
+  }
+  input[type="search"],
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: 280px;
+  }
+  input[type="submit"] {
+    cursor: pointer;
+    @include default-button();
+  }
+  input[type="file"] {
+    background-color: transparent;
+  }
+  br {
     display: none;
   }
-}
-input,
-textarea,
-select {
-  box-sizing: border-box;
-  margin-bottom: $baseline;
-  border: 1px solid $forms-border;
-  border-radius: 4px;
-  background-color: $forms-background;
-  font-size: 14px;
-  color: $forms-input-text;
-  &:focus {
-    border: 1px solid $accent;
+  label {
+    margin-bottom: 6px !important;
+    font-family: $medium-sans-font;
+    font-size: 14px;
+    display: block;
+    margin: 2px 0;
+    text-align: left;
+    line-height: 1.2;
+    color: $forms-label-text;
+    abbr {
+      display: none;
+    }
+  }
+  input,
+  textarea,
+  select {
+    box-sizing: border-box;
+    margin-bottom: $baseline;
+    border: 1px solid $forms-border;
+    border-radius: 4px;
+    background-color: $forms-background;
+    font-size: 14px;
+    color: $forms-input-text;
+    &:focus {
+      border: 1px solid $accent;
+    }
+  }
+  input {
+    padding: 9px 10px 6px 10px;
+    outline: none;
+    font-family: $medium-sans-font;
   }
 }
 
@@ -65,15 +119,30 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   }
 }
 
-input {
-  padding: 9px 10px 6px 10px;
-  outline: none;
-  font-family: $medium-sans-font;
-}
-textarea {
-  font-family: $medium-sans-font;
-  width: 100%;
-  padding: 9px 10px 6px 10px;
+.field_with_hint_before {
+  span {
+    background: $forms-hint-background;
+    color: $forms-hint-text;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+    padding-top: 12px;
+    box-sizing: border-box;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family: $medium-sans-font;
+  }
+  input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 4px;
+  }
+  .field_with_errors {
+    display: inline;
+  }
 }
 
 /* PLACEHOLDER TEXT COLOR */
@@ -127,7 +196,7 @@ textarea {
 [type="checkbox"]:not(:checked) + label:active:after {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: 4.5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }
@@ -136,8 +205,8 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   content: "";
   border: 1px solid $checkbox-not-checked-border;
   border-radius: 2.5px;
@@ -148,8 +217,8 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   content: "";
   border: 1px solid $checkbox-checked-border;
   border-radius: 2.5px;
@@ -159,7 +228,7 @@ textarea {
 [type="checkbox"]:not(:checked) + label:after {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: 4.5px;
   content: image-url("svg/icon_checkmark.svg");
   display: none;
 }
@@ -167,7 +236,54 @@ textarea {
 [type="checkbox"]:checked + label:after {
   position: absolute;
   top: 3px;
-  left: 3px;
+  left: 4.5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
+}
+
+#error_explanation {
+  background-color: #ffeadf;
+  padding-left: $baseline * 1.5;
+  padding-right: $baseline * 1.5;
+  position: relative;
+  top: -1px;
+  @media #{$mobile} {
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+  }
+  h3 {
+    @include title18();
+    color: $red1000;
+    margin-top: $baseline;
+  }
+  ol {
+    counter-reset: listNumbering;
+    padding-left: 0px;
+    li {
+      list-style: none;
+      counter-increment: listNumbering;
+      color: $red1100;
+      margin-bottom: 12px;
+      display: flex;
+      &:before {
+        flex-shrink: 0;
+        content: counter(listNumbering);
+        font-variant-numeric: tabular-nums;
+        font-size: 14px;
+        font-weight: bold;
+        color: $white;
+        margin-right: 12px;
+        width: 22px;
+        height: 22px;
+        background-color: $red600;
+        border-radius: 3px;
+        display: inline-block;
+        padding-left: 7px;
+        box-sizing: border-box;
+        position: relative;
+        top: -5px;
+        line-height: 22px;
+      }
+    }
+  }
 }

@@ -61,6 +61,7 @@ class User < ApplicationRecord
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
+    c.ignore_blank_passwords = false
   end
 
   scope :activated,     -> { where(perishable_token: nil).recent }
@@ -80,28 +81,30 @@ class User < ApplicationRecord
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
   after_create :create_profile
 
-  # Can create music
-  has_one    :profile, dependent: :destroy
-  has_many   :assets,
+  has_one :profile, dependent: :destroy
+  has_one :account_request
+  belongs_to :invited_by, optional: true, class_name: 'User'
+  has_many :invitees, foreign_key: 'invited_by_id'
+  has_many :assets,
     -> { order('assets.id DESC') },
     dependent: :destroy
 
-  has_many   :playlists, -> { order('playlists.position') },
+  has_many :playlists, -> { order('playlists.position') },
     dependent: :destroy
 
   # this only covers comments received by the user
   # not comments made by the user
-  has_many   :comments_received, -> { order('comments.id DESC') },
+  has_many :comments_received, -> { order('comments.id DESC') },
     foreign_key: 'user_id',
     class_name: 'Comment',
     dependent: :destroy
 
-  has_many   :comments_made, -> { order('comments.id DESC') },
+  has_many :comments_made, -> { order('comments.id DESC') },
     foreign_key: 'commenter_id',
     class_name: 'Comment',
     dependent: :destroy
 
-  has_many   :tracks,
+  has_many :tracks,
     dependent: :destroy
 
   # alonetone plus
@@ -147,6 +150,10 @@ class User < ApplicationRecord
 
   def active?
     perishable_token.nil?
+  end
+
+  def moderator?
+    self[:moderator] || self[:admin]
   end
 
   def activate!
@@ -297,37 +304,36 @@ end
 #
 # Table name: users
 #
-#  id                 :integer          not null, primary key
-#  admin              :boolean          default(FALSE)
-#  assets_count       :integer          default(0), not null
-#  bandwidth_used     :integer          default(0)
-#  comments_count     :integer          default(0)
-#  crypted_password   :string(128)      default(""), not null
-#  current_login_at   :datetime
-#  current_login_ip   :string(255)
-#  deleted_at         :datetime
-#  display_name       :string(255)
-#  email              :string(100)
-#  followers_count    :integer          default(0)
-#  greenfield_enabled :boolean          default(FALSE)
-#  is_spam            :boolean          default(FALSE)
-#  itunes             :string(255)
-#  last_login_at      :datetime
-#  last_login_ip      :string(255)
-#  last_request_at    :datetime
-#  listens_count      :integer          default(0)
-#  login              :string(40)
-#  login_count        :integer          default(0), not null
-#  moderator          :boolean          default(FALSE)
-#  perishable_token   :string(255)
-#  persistence_token  :string(255)
-#  playlists_count    :integer          default(0), not null
-#  posts_count        :integer          default(0)
-#  salt               :string(128)      default(""), not null
-#  settings           :text(4294967295)
-#  use_old_theme      :boolean          default(FALSE)
-#  created_at         :datetime
-#  updated_at         :datetime
+#  id                :integer          not null, primary key
+#  admin             :boolean          default(FALSE)
+#  assets_count      :integer          default(0), not null
+#  bandwidth_used    :integer          default(0)
+#  comments_count    :integer          default(0)
+#  crypted_password  :string(128)      default(""), not null
+#  current_login_at  :datetime
+#  current_login_ip  :string(255)
+#  dark_theme        :boolean          default(FALSE)
+#  deleted_at        :datetime
+#  display_name      :string(255)
+#  email             :string(100)
+#  followers_count   :integer          default(0)
+#  is_spam           :boolean          default(FALSE)
+#  itunes            :string(255)
+#  last_login_at     :datetime
+#  last_login_ip     :string(255)
+#  last_request_at   :datetime
+#  listens_count     :integer          default(0)
+#  login             :string(40)
+#  login_count       :integer          default(0), not null
+#  moderator         :boolean          default(FALSE)
+#  perishable_token  :string(255)
+#  persistence_token :string(255)
+#  playlists_count   :integer          default(0), not null
+#  salt              :string(128)      default(""), not null
+#  settings          :text(4294967295)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  invited_by_id     :integer
 #
 # Indexes
 #
