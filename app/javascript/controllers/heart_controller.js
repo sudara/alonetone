@@ -22,32 +22,23 @@ export default class extends Controller {
       this.animation.clickUnfave()
       this.favorited = false
       this.unfaved()
-      this.unfavore()
+      this.unfavorite()
     } else {
       this.animation.clickFave()
       this.favorited = true
       this.faved()
-      this.favore()
+      this.favorite()
     }
-  }
-  unfavore() {
-    Rails.ajax({
-      url: `/favorites/delete`,
-      type: 'PUT',
-      data: `asset_id=${this.data.get('asset-id')}`
-    })
-  }
-
-  favore() {
-    Rails.ajax({
-      url: `/favorites`,
-      type: 'POST',
-      data: `asset_id=${this.data.get('asset-id')}`
-    })
   }
 
   // placeholders for child controllers
+  // any html actions
   faved() {}
 
   unfaved() {}
+
+  // any Rails ajax actions
+  favorite() {}
+
+  unfavorite() {}
 }
