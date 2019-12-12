@@ -1,4 +1,5 @@
 import HeartController from './heart_controller'
+import Rails from '@rails/ujs'
 
 export default class extends HeartController {
   isFavorited() {
