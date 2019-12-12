@@ -50,7 +50,8 @@ form {
   input[type="text"],
   input[type="password"],
   input[type="email"],
-  textarea {
+  textarea,
+  select {
     outline: 0;
     -webkit-appearance: none;
   }
@@ -96,6 +97,11 @@ form {
     &:focus {
       border: 1px solid $accent;
     }
+  }
+  select {
+    height: 35px;
+    padding: 9px 10px 6px 10px;
+    font-family: $medium-sans-font;
   }
   input {
     padding: 9px 10px 6px 10px;
