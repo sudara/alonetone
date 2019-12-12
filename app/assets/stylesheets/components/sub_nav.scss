@@ -34,7 +34,6 @@
           background-color: $sub-nav-link-background;
           display: block;
           width: 100%;
-          height: 100%;
           color: $sub-nav-text;
           white-space: nowrap;
           &:hover {
@@ -73,6 +72,7 @@
           }
           a {
             padding-top: 11px;
+            height: 100%;
           }
         }
       }
@@ -108,6 +108,7 @@
           }
           a {
             padding-top: 11px;
+            height: 100%;
           }
         }
       }

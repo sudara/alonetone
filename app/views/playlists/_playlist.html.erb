@@ -5,8 +5,11 @@
     <%= @playlist.title %>
   </h1>
   <h2>
-    <span class="by">by</span> <%= link_to @user.name, user_home_path(@user) %>
-
+    <span class="by">by</span> <%= link_to @user.name, user_home_path(@user) %>   <% if authorized? %>
+    <span class="parentheses">(</span> <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
+      edit
+    <% end %> <span class="parentheses">)</span>
+  <% end %>
   </h2>
 
   <ul class="tracklist">
@@ -54,17 +57,6 @@
       <% end %>
     </ul>
   </div>
-
-  <% if authorized? %>
-  <div class="edit_playlist_container">
-    <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
-      edit playlist
-    <% end %>
-    <% if @playlist.has_tracks? %>
-      <%= link_to "edit descriptions", mass_edit_user_tracks_path(@playlist.user, assets: @playlist.assets.collect(&:id)), class: 'edit_playlist' %>
-    <% end %>
-  </div>
-  <% end %>
 
 </div>
 

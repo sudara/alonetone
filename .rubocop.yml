@@ -102,6 +102,9 @@ Style/DoubleNegation:
 Style/IfInsideElse:
   Enabled: false
 
+Style/IfUnlessModifier:
+  Enabled: false
+
 Style/MultilineTernaryOperator:
   Enabled: false
 

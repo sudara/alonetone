@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+waiting:
+  login: newband
+  email: mybandemail@domain.com
+  entity_type: musician
+  details: I can't wait to get in, here's my link

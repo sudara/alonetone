@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_17_201831) do
+ActiveRecord::Schema.define(version: 2019_12_05_171852) do
+
+  create_table "account_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "email"
+    t.string "login"
+    t.integer "entity_type"
+    t.integer "status", default: 0
+    t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "moderated_by_id"
+  end
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -545,6 +556,7 @@ ActiveRecord::Schema.define(version: 2019_11_17_201831) do
     t.boolean "dark_theme", default: false
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
+    t.integer "invited_by_id"
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 

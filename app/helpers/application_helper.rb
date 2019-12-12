@@ -187,5 +187,11 @@ module ApplicationHelper
     theme_name == 'dark'
   end
 
+  def inline_form_error(error)
+    if error.present?
+      content_tag :div, error.first.humanize, class: 'inline_form_error'
+    end
+  end
+
   protected
 end
