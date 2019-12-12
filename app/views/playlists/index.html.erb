@@ -9,6 +9,6 @@
     </div>
   <% end %>
   <ul class="playlists sortable no_artist_name_playlists responsive_grid"  data-target="playlists-sort.sortable">
-    <%= render partial: 'shared/playlist', collection: @playlists, as: :playlist, cached: true %>
+    <%= render partial: 'shared/playlist', collection: @playlists, as: :playlist %>
   </ul>
 </div>
