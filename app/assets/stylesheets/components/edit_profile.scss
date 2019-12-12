@@ -35,6 +35,16 @@
     .edit_profile_top_left {
       margin-right: 58px;
       width: 250px;
+      label {
+        margin-bottom: 6px !important;
+        font-family: $medium-sans-font;
+        font-size: 14px;
+        display: block;
+        margin: 2px 0;
+        text-align: left;
+        line-height: 1.2;
+        color: #949797;
+      }
       .user_avatar {
         border: 1px dashed $grey300;
         padding: 5px;
@@ -96,17 +106,18 @@
         height: 128px;
         margin-bottom: $baseline * (8/3);
       }
-      input[type=submit], a {
+      input[type="submit"],
+      a {
         @include default-button("primary");
         float: right;
         width: 160px;
         &:first-of-type {
           margin-left: 20px;
         }
-        &:last-of-type {
-          background-color: $grey100;
-          color: $grey800;
-        }
+      }
+      input[type="submit"] {
+        margin-left: 20px;
+        margin-bottom: 0;
       }
     }
   }
@@ -128,11 +139,11 @@
       .edit_profile_socials_left_column {
         margin-right: 10px;
         flex: 1;
-          @media #{$one-column} {
-            margin-right: 0;
-            width: 100%;
-            flex: auto;
-          }
+        @media #{$one-column} {
+          margin-right: 0;
+          width: 100%;
+          flex: auto;
+        }
         .row:last-child {
           input {
             margin-bottom: 0;
@@ -216,6 +227,11 @@
           }
         }
       }
+    }
+    input[type="submit"] {
+      float: right;
+      @include default-button("primary");
+      margin-bottom: 0;
     }
   }
 
@@ -326,7 +342,6 @@
           flex: auto;
           width: 100%;
         }
-
       }
     }
   }
@@ -384,7 +399,8 @@
     }
   }
 
-  .edit_profile_change_your_login, .edit_profile_change_your_password {
+  .edit_profile_change_your_login,
+  .edit_profile_change_your_password {
     background-image: image-url("svg/background_danger_tape.svg");
     background-repeat: no-repeat;
     background-position: center 16px;
