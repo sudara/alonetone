@@ -9,9 +9,6 @@ $thredded-base-border-color: $grey100;
 
 $thredded-font-size-small: 13px;
 
-// Provisional theming variables
-
-
 @import "thredded";
 
 .thredded_container {
@@ -46,7 +43,6 @@ $thredded-font-size-small: 13px;
         @media #{$mobile} {
           padding: 12px;
         }
-
       }
     }
     &.thredded--topic-show {
@@ -178,7 +174,6 @@ $thredded-font-size-small: 13px;
       @media #{$mobile} {
         margin-left: 12px;
       }
-
       li {
         font-size: 14px;
         font-weight: bold;
@@ -287,7 +282,6 @@ $thredded-font-size-small: 13px;
                 // See https://bugzilla.mozilla.org/show_bug.cgi?id=556145
                 opacity: 1;
               }
-
               &:hover:not(:focus) {
                 &:placeholder-shown {
                   // cursor: pointer;
