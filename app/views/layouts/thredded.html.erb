@@ -4,7 +4,8 @@
     <title>alonetone | <%= yield :thredded_page_title %></title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="turbolinks-root" content="/discuss">
-    <%= stylesheet_link_tag('white_theme_thredded') %>
+    <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
+    <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
     <%= csrf_meta_tag %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
     <%= javascript_include_tag 'thredded',

@@ -1,5 +1,3 @@
-@import "application";
-
 // check out variables and override pre-import
 // https://github.com/thredded/thredded/blob/master/app/assets/stylesheets/thredded/base/_variables.scss
 
@@ -142,7 +140,7 @@ $thredded-new-topic-background: $grey100;
         @media #{$mobile} {
           padding: 12px;
         }
-        
+
       }
     }
     &.thredded--topic-show {
@@ -274,7 +272,7 @@ $thredded-new-topic-background: $grey100;
       @media #{$mobile} {
         margin-left: 12px;
       }
-      
+
       li {
         font-size: 14px;
         font-weight: bold;
@@ -399,7 +397,7 @@ $thredded-new-topic-background: $grey100;
             @media #{$mobile} {
               top: -30px;
             }
-            
+
             li {
               &.thredded--user-navigation--private-topics,
               &.thredded--user-preferences--notifications-for-private-topics {
@@ -693,7 +691,7 @@ $thredded-new-topic-background: $grey100;
           padding-left: 12px;
           padding-right: 12px;
         }
-        
+
         .thredded--post--user {
           a {
             color: $thredded-post-user-text;
@@ -704,7 +702,7 @@ $thredded-new-topic-background: $grey100;
         }
         .thredded--post--dropdown--actions {
           background-color: $thredded-post-dropdown-background;
-          
+
         }
         .thredded--post--content {
           font-size: 1rem;

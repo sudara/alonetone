@@ -1,2 +1,7 @@
-@import 'themes/dark';
-@import 'components';
+@import 'themes/white';
+
+@import 'normalize';
+@import 'variables';
+@import 'layout';
+
+@import 'components/**/*';
