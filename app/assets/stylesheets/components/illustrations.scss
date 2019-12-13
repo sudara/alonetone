@@ -66,6 +66,10 @@ body.no_results {
     background-color: #fed1b0;
     h1.gift_heading {
       color: $black;
+      font-size: 24px;
+      @media #{$mobile} {
+        font-size: 24px;
+      }
     }
     .gift_image {
       background-image: image-url("illustrations/no-results.jpg");
