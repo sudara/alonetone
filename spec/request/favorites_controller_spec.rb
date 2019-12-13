@@ -10,7 +10,7 @@ RSpec.describe FavoritesController, type: :request do
 
   describe '#destroy' do
     before :each do
-      user.tracks.favorites.scoping { Track.create(asset_id: asset.id) }
+      user.tracks.create(asset_id: asset.id, is_favorite: true)
     end
 
     it "should destroy track" do

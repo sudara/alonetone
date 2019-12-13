@@ -101,17 +101,17 @@ RSpec.describe Playlist, type: :model do
   context "favorites" do
     it 'should create a new playlist for a user who does not have one' do
       expect(users(:sandbags).playlists.favorites).not_to be_present
-      users(:sandbags).tracks.favorites.scoping { Track.create(asset_id: assets(:valid_mp3).id) }
+      users(:sandbags).tracks.create(asset_id: assets(:valid_mp3).id, is_favorite: true)
       expect(users(:sandbags).playlists.favorites.first).to be_present
     end
 
     it "should set a permalink for playlist" do
-      users(:sandbags).tracks.favorites.scoping { Track.create(asset_id: assets(:valid_mp3).id) }
+      users(:sandbags).tracks.create(asset_id: assets(:valid_mp3).id, is_favorite: true)
       expect(users(:sandbags).playlists.favorites.first.permalink).not_to be_nil
     end
 
     it "should set is_mix true" do
-      users(:sandbags).tracks.favorites.scoping { Track.create(asset_id: assets(:valid_mp3).id) }
+      users(:sandbags).tracks.create(asset_id: assets(:valid_mp3).id, is_favorite: true)
       expect(users(:sandbags).playlists.favorites.first.is_mix).to eq(true)
     end
   end

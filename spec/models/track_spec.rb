@@ -21,7 +21,7 @@ RSpec.describe Track, type: :model do
     it "should create a favorite playlist if its the first fav" do
       expect(user.playlists.favorites.count).to eq(0)
       expect do
-        user.tracks.favorites.scoping { Track.create(asset: assets(:henri_willig_finest_cheese)) }
+        user.tracks.create(asset: assets(:henri_willig_finest_cheese), is_favorite: true)
       end.to change(Track, :count).by(+1)
       expect(user.playlists.favorites.count).to eq(1)
     end
@@ -29,8 +29,8 @@ RSpec.describe Track, type: :model do
     it 'should use an existing favorites playlist' do
       expect(user.playlists.favorites.count).to eq(0)
       expect do
-        user.tracks.favorites.scoping { Track.create(asset: assets(:henri_willig_finest_cheese)) }
-        user.tracks.favorites.scoping { Track.create(asset: assets(:henri_willig_the_goat)) }
+        user.tracks.create(asset: assets(:henri_willig_finest_cheese), is_favorite: true)
+        user.tracks.create(asset: assets(:henri_willig_the_goat), is_favorite: true)
       end.to change(Track, :count).by(+2)
       expect(user.playlists.favorites.count).to eq(1)
     end

@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
   def create
     raise ArgumentError unless @asset
 
-    @user.tracks.favorites.scoping { Track.create(asset_id: @asset.id) }
+    @user.tracks.create(asset_id: @asset.id, is_favorite: true)
     head :ok
   end
 
