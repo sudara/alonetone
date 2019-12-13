@@ -74,6 +74,43 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "password" do
+    it "matches the correct value" do
+      expect(users(:jamie_kiesl)).to be_password('test')
+    end
+
+    it "does not match the incorrect value" do
+      [
+        'incorrect',
+        ' test ',
+        '🛑'
+      ].each do |input|
+        expect(users(:jamie_kiesl)).to_not be_password(input)
+      end
+    end
+
+    it "does not match a blank password" do
+      [nil, ''].each do |blank_value|
+        user = User.new(password: blank_value, salt: SecureRandom.hex(64))
+        expect(user).to_not be_password(blank_value)
+      end
+    end
+
+    it "does not match the password when the crypted password is blank" do
+      [nil, ''].each do |blank_value|
+        user = User.new(crypted_password: blank_value, salt: SecureRandom.hex(64))
+        expect(user).to_not be_password(blank_value)
+      end
+    end
+
+    it "does not match the password when the salt is blank" do
+      [nil, ''].each do |blank_value|
+        user = User.new(crypted_password: 'flipper10', salt: blank_value)
+        expect(user).to_not be_password('flipper10')
+      end
+    end
+  end
+
   context "activation" do
     it "is considered active when persishble token doesn't exist" do
       expect(users(:arthur)).to be_active

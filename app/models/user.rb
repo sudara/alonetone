@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'scrypt'
+
 class User < ApplicationRecord
   include SoftDeletion
   include Rakismet::Model
@@ -142,6 +144,12 @@ class User < ApplicationRecord
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :avatar_image
+
+  def password?(password)
+    return false if [crypted_password, password, salt].any?(&:blank?)
+
+    SCrypt::Password.new(crypted_password) == password + salt
+  end
 
   # tokens and activation
   def clear_token!
