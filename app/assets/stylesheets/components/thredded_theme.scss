@@ -11,100 +11,6 @@ $thredded-font-size-small: 13px;
 
 // Provisional theming variables
 
-$thredded-user-navigation-link-background: $white;
-$thredded-user-navigation-link-background: $grey1000;
-
-$thredded-search-background: $white;
-$thredded-search-background: $grey1000;
-
-$thredded-search-color: $grey800;
-$thredded-search-color: $grey400;
-
-$thredded-user-navigation-link-text: $grey800;
-$thredded-user-navigation-link-text: $grey400;
-
-$thredded-breadcrumbs-text: $orange600;
-$thredded-breadcrumbs-text: $orangetone;
-
-$thredded-preferences-title-text: $black;
-$thredded-preferences-title-text: $grey400;
-
-$thredded-form-list-hint-text: $black;
-$thredded-form-list-hint-text: $grey400;
-
-$thredded-main-section-background: $white;
-$thredded-main-section-background: $grey1100;
-
-$thredded-messageboards-group-messageboard-background: $grey25;
-$thredded-messageboards-group-messageboard-background: $grey1150;
-
-$thredded-messsageboards-group-title-text: $black;
-$thredded-messsageboards-group-title-text: $grey400;
-
-$thredded-messageboard-title-color: $orange600;
-$thredded-messageboard-title-color: $orange300;
-
-$thredded--messageboard--description-text: $grey900;
-$thredded--messageboard--description-text: $grey400;
-
-$thredded-messageboard-meta-text: $grey600;
-$thredded-messageboard-meta-text: $grey800;
-
-$threddded-message-board-actions-link-background: $grey100;
-$threddded-message-board-actions-link-background: $grey100;
-
-$threddded-message-board-actions-link-text: $grey900;
-$threddded-message-board-actions-link-text: $grey900;
-
-$thredded-topics-heading-text: $grey1000;
-$thredded-topics-heading-text: $grey400;
-
-
-$thredded-started-by-text: $grey900;
-$thredded-started-by-text: $grey400;
-
-$thredded-followers-text: $grey900;
-$thredded-followers-text: $grey400;
-
-$thredded-topics-description-text: $grey900;
-$thredded-topics-description-text: $grey400;
-
-$thredded-topics-background: $grey25;
-$thredded-topics-background: $grey1150;
-
-
-$thredded-topics-alt-background: $white;
-$thredded-topics-alt-background: $grey1100;
-
-$thredded-topics-title-text: $grey1200;
-$thredded-topics-title-text: $grey100;
-
-$thredded-topics-updated-text: $grey600;
-$thredded-topics-updated-text: $grey600;
-
-$thredded-post-user-text: $grey900;
-$thredded-post-user-text: $grey400;
-
-$thredded-post-created-at-text: $grey900;
-$thredded-post-created-at-text: $grey400;
-
-$thredded-post-dropdown-background: $white;
-$thredded-post-dropdown-background: $grey800;
-
-$thredded-post-content-text: $grey900;
-$thredded-post-content-text: $grey400;
-
-$thredded-post-form-title-text: $grey900;
-$thredded-post-form-title-text: $grey400;
-
-$thredded-form-list-textarea-background: $white;
-$thredded-form-list-textarea-background: $grey1000;
-
-$thredded-form-list-textarea-text: $black;
-$thredded-form-list-textarea-text: $grey200;
-
-$thredded-new-topic-background: $grey100;
-$thredded-new-topic-background: $grey100;
 
 @import "thredded";
 
@@ -778,8 +684,8 @@ $thredded-new-topic-background: $grey100;
         height: 32px;
         line-height: 34px;
         font-size: 14px;
-        color: $threddded-message-board-actions-link-text;
-        background-color: $threddded-message-board-actions-link-background;
+        color: $thredded-message-board-actions-link-text;
+        background-color: $thredded-message-board-actions-link-background;
         &:hover {
           background-color: $grey200;
         }
