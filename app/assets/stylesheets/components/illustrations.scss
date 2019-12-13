@@ -17,13 +17,16 @@
     max-width: 960px;
     display: block;
   }
+  .gift_image {
+    background-size: contain;
+    width: 100%;
+  }
 }
 
 body.not_found,
 body.error,
 body.no_results {
   main {
-    background-color: #f04e1a;
     padding-bottom: 0px;
   }
   footer#site_footer {
@@ -36,15 +39,27 @@ body.error {
     background-color: #e02a02;
     .gift_image {
       background-image: image-url("illustrations/500.png");
-      width: 100%;
       padding-bottom: 58.4%;
-      background-size: contain;
     }
   }
 }
 
-body.no_results{
+body.no_results {
   main {
     background-color: #fed1b0;
+    .gift_image {
+      background-image: image-url("illustrations/no-results.jpg");
+      padding-bottom: 60.573%;
+    }
+  }
+}
+
+body.not_found {
+  main {
+    background-color: #f04e1a;
+    .gift_image {
+      background-image: image-url("illustrations/404.png");
+      padding-bottom: 71.733%;
+    }
   }
 }
