@@ -11,7 +11,6 @@ RSpec.describe SearchController, type: :controller do
     it 'should not return results when search term is empty' do
       get :index
       expect(response).to be_successful
-      expect(flash[:error]).to be_present
       expect(assigns(:assets)).not_to be_present
     end
 

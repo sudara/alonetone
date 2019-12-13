@@ -35,13 +35,11 @@ class PagesController < ApplicationController
 
   def error
     @page_title = "Whups, alonetone slipped and fell!"
-    flash[:error] = "We have a problem. But, it is not you...it's me."
-    render status: 500
+    render layout: 'application', status: 500
   end
 
   def four_oh_four
-    @page_title = "Not found"
-    flash[:error] = "Hmm, couldn't find that..."
+    @page_title = "404 Not found"
     render status: 404
   end
 
