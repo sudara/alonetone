@@ -31,10 +31,9 @@
       <nav class="sub_nav">
       <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
           <ul>
-            <li><a href="#">Messageboard Link?</a></li>
-            <li class="current">Messageboard Link?</li>
-            <li><a href="#">Messageboard Link?</a></li>
-            <li><a href="#">Messageboard Link?</a></li>
+            <% Thredded::Messageboard.ordered_by_position.each do |m| %>
+              <%= navigation_item m.name, "/discuss/#{m.slug}" %>
+            <% end %>
           </ul>
       </div>
     </nav>
