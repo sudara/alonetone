@@ -193,5 +193,15 @@ module ApplicationHelper
     end
   end
 
+  def forum_image(slug)
+    themed_illustration_image("forums/#{slug.gsub('/discuss/','')}.png")
+  end
+
+  def themed_illustration_image(path)
+    name = path.split('.')[0]
+    extension = path.split('.')[1]
+    tag.img src: "illustrations/#{name}-#{theme_name}.#{extension}"
+  end
+
   protected
 end

@@ -11,7 +11,7 @@
                   class: 'thredded--main-section thredded--topics',
                   'data-thredded-topics' => true,
                   'data-thredded-topic-posts-per-page' => Thredded.posts_per_page do %>
-  
+
     <div class="top">
       <div class="left">
         <% begin %> <%= yield :thredded_breadcrumbs %> <% end %>
@@ -27,11 +27,12 @@
       </div>
 
       <div class="thumbnail">
+        <%= forum_image(messageboard.slug) %>
       </div>
     </div>
 
 
-    
+
 
     <%= render 'thredded/topics/form',
                topic: @new_topic,
