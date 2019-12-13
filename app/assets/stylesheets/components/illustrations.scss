@@ -4,7 +4,6 @@
   padding-top: 36px;
   h1 {
     @include title36();
-    // color: $static-page-heading-text;
     color: $white;
     text-align: center;
     padding: 0px 12px;;
@@ -15,6 +14,7 @@
   }
   h2 {
     @include title18();
+    margin-top: 6px;
     padding: 0px 12px;;
     text-align: center;
     @media #{$mobile} {
@@ -54,7 +54,6 @@ body.error {
       @media #{$responsive} {
         left: 0%;
       }
-
     }
   }
 }
