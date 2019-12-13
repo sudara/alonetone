@@ -34,6 +34,12 @@ body.no_results {
 body.error {
   main {
     background-color: #e02a02;
+    .gift_image {
+      background-image: image-url("illustrations/500.png");
+      width: 100%;
+      padding-bottom: 58.4%;
+      background-size: contain;
+    }
   }
 }
 
