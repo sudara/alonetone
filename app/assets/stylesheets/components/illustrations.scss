@@ -20,7 +20,8 @@
 }
 
 body.not_found,
-body.error {
+body.error,
+body.no_results {
   main {
     background-color: #f04e1a;
     padding-bottom: 0px;
@@ -33,5 +34,11 @@ body.error {
 body.error {
   main {
     background-color: #e02a02;
+  }
+}
+
+body.no_results{
+  main {
+    background-color: #fed1b0;
   }
 }

@@ -1,6 +1,11 @@
 <% unless @users.present? or @assets.present? %>
-  <div class="no_search_results">
-    <h2>Hm, didn't find any users or tracks named "<%= @query %>"</h2>
+  <%= content_for :body_class, 'no_results' %>
+
+  <div class="gift no_results">
+    <h1 class="gift_heading">
+      Hm, didn't find any users or tracks named "<%= @query %>"
+    </h1>
+    <%= image_tag 'illustrations/no-results.jpg' %>
   </div>
 <% end %>
 
