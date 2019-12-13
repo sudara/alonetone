@@ -70,6 +70,7 @@ Alonetone::Application.routes.draw do
   get 'rpmchallenge' => 'pages#rpm_challenge'
   get '24houralbum' =>  'pages#twentyfour'
 
+  resource :authenticated_session, only: %i[new create destroy]
   resources :password_resets, :comments, :user_sessions, :groups
 
   get 'about/' => 'pages#about'
