@@ -63,6 +63,7 @@ export default class extends Controller {
     // But that instantly returns false on toggling
     // So we are choosing a perceptual threshold that "just works"
     setTimeout(() => this.disableDark(), 100)
+    this.toggleThemableImages('dark', 'light')
   }
 
   switchToDark(e) {
@@ -71,6 +72,7 @@ export default class extends Controller {
     this.switchToDarkTarget.style.display = 'none'
     this.darkStyles.disabled = false
     setTimeout(() => this.disableLight(), 100)
+    this.toggleThemableImages('light', 'dark')
   }
 
   disableLight() {
@@ -88,5 +90,11 @@ export default class extends Controller {
       type: "PUT"
     })
     Turbolinks.clearCache()
+  }
+
+  toggleThemableImages(oldTheme, newTheme){
+    document.querySelectorAll('img.themeable').forEach((image) => {
+      image.src = image.src.replace(oldTheme, newTheme)
+    })
   }
 }

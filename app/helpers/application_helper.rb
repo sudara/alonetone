@@ -200,7 +200,7 @@ module ApplicationHelper
   def themed_illustration_image(path)
     name = path.split('.')[0]
     extension = path.split('.')[1]
-    tag.img src: "illustrations/#{name}-#{theme_name}.#{extension}"
+    tag.img src: "/illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
   end
 
   protected
