@@ -194,13 +194,15 @@ module ApplicationHelper
   end
 
   def forum_image(slug)
-    themed_illustration_image("forums/#{slug.gsub('/discuss/','')}.png")
+    themed_illustration_image("forum/#{slug.gsub('/discuss/','')}.png")
   end
 
   def themed_illustration_image(path)
     name = path.split('.')[0]
     extension = path.split('.')[1]
-    tag.img src: "/illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
+    image_tag "illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
+  rescue Sprockets::Rails::Helper::AssetNotFound
+    tag.img src: "images/illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
   end
 
   protected
