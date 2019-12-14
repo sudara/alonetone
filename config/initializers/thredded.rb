@@ -5,7 +5,7 @@ Thredded.user_class = 'User'
 
 # Use User#login for the @mention syntax and to present the name of the user. Note that this column
 # must be unique.
-Thredded.user_name_column = :login
+Thredded.user_name_column = :display_name
 
 # Configure the method name to fetch the current user.
 Thredded.current_user_method = :current_user
