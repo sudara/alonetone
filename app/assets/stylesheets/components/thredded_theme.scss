@@ -373,9 +373,11 @@ $thredded-font-size-small: 13px;
           .thumbnail {
             width: 120px;
             height: 120px;
-            background-color: red;
             margin-right: $baseline;
             margin-top: $baseline / 2;
+            img {
+              width: 100%;
+            }
             @media #{$mobile} {
               display: none;
             }
@@ -429,9 +431,11 @@ $thredded-font-size-small: 13px;
               }
               width: 96px;
               height: 96px;
-              background-color: red;
               margin-left: $baseline;
               margin-right: $baseline;
+              img {
+                width: 100%;
+              }
             }
             .right {
               padding-top: 22px;
