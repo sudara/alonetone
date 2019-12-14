@@ -171,6 +171,12 @@ $thredded-font-size-small: 13px;
     .thredded--navigation-breadcrumbs {
       margin-left: 48px;
       padding-top: 22px;
+      li:last-child:not(:first-child) a::before, .thredded--navigation-breadcrumbs li:last-child:not(:first-child).thredded--navigation-breadcrumbs--item-no-link::before {
+        display: none;
+      }
+      li:last-child {
+        display: none;
+      }
       @media #{$mobile} {
         margin-left: 12px;
       }
@@ -183,6 +189,10 @@ $thredded-font-size-small: 13px;
           color: $grey600;
           position: relative;
           left: -3px;
+          @media #{$one-column} {
+            display: none;
+          }
+          
         }
         a {
           color: $thredded-breadcrumbs-text;
@@ -310,6 +320,7 @@ $thredded-font-size-small: 13px;
                 background-color: $thredded-user-navigation-link-background;
                 &:hover {
                   background-color: $grey200;
+                  ;
                 }
                 &:active {
                   background-color: $grey500;
