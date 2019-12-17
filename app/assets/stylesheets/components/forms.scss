@@ -97,7 +97,7 @@ form {
       border: 1px solid $accent;
     }
   }
-  input {
+  input, textarea {
     padding: 9px 10px 6px 10px;
     outline: none;
     font-family: $medium-sans-font;
