@@ -382,6 +382,9 @@ $thredded-font-size-small: 13px;
         .start_new_topic_container {
           margin-top: 12px;
           border-top: 1px solid $static-page-content-seperator;
+          &.start_new_topic_container_bottom {
+            margin-top: 0;
+          }
           a.start_new_topic {
             @include default-button();
             color: $white;
@@ -566,6 +569,9 @@ $thredded-font-size-small: 13px;
             font-size: 18px;
             font-weight: bold;
             color: $thredded-topics-title-text;
+            &:hover {
+              color: $accent;
+            }
           }
         }
         .thredded--topics--updated-by {
