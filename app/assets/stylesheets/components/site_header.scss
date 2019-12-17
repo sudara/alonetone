@@ -1,6 +1,6 @@
 header#site_header {
   background-color: $site-header-background;
-  box-shadow: 0 3px 4px -2px #65666627;
+  box-shadow: $site-header-box-shadow;
   height: 60px;
   .header_inner {
     position: relative;
