@@ -92,6 +92,9 @@ $thredded-font-size-small: 13px;
         display: none;
       }
     }
+    .thredded--post--avatar {
+      border-radius: 0%;
+    }
     .thredded--pagination {
       float: none;
       border-top: 0;
