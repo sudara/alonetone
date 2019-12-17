@@ -29,9 +29,12 @@
       </div>
     </div>
 
+    <% if logged_in? %>
     <div class="start_new_topic_container">
       <%= link_to "Start New Thread", new_messageboard_topic_path(messageboard), class: "start_new_topic" %>
     </div>
+    <% end if %>
+
 
     <%= render partial: 'thredded/topics/topic',
                collection: @topics,
@@ -40,9 +43,12 @@
                    topics: @topics
                } %>
 
+    <% if logged_in? %>
     <div class="start_new_topic_container start_new_topic_container_bottom">
       <%= link_to "Start New Thread", new_messageboard_topic_path(messageboard), class: "start_new_topic" %>
     </div>
+     <% end if %>
+
   <% end %>
 
 
