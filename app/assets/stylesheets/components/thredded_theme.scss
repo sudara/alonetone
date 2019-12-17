@@ -261,6 +261,9 @@ $thredded-font-size-small: 13px;
           .thredded--navigation--search {
             position: static;
             input[type="search"] {
+              @media screen and (max-width: 48rem) {
+                margin-top: 48px;
+              }
               background: $thredded-search-background;
               color: $thredded-search-color;
               box-shadow: none;
