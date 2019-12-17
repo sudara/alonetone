@@ -40,7 +40,7 @@ class PagesController < ApplicationController
 
   def four_oh_four
     @page_title = "404 Not found"
-    render status: 404
+    render layout: 'application', status: 404
   end
 
   def help_an_app_support_brutha_out
