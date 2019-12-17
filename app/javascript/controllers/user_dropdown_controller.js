@@ -88,9 +88,7 @@ export default class extends Controller {
     Turbolinks.clearCache()
   }
 
-  toggleThemableImages(oldTheme, newTheme){
-    document.querySelectorAll('img.themeable').forEach((image) => {
-      image.src = image.src.replace(oldTheme, newTheme)
-    })
+  toggleThemableImages(oldTheme, newTheme) {
+    document.querySelectorAll('img.themeable').forEach((image) => image.classList.toggle('hidden'))
   }
 }
