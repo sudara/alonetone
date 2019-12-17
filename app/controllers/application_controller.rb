@@ -64,7 +64,11 @@ class ApplicationController < ActionController::Base
 
   def track_not_found_message
     if Asset.with_deleted.where(permalink: params[:id]).exists?
-      "Looks like #{@user.display_name} deleted that track"
+      if @user.present?
+        "Looks like #{@user.display_name} recently deleted that track"
+      else
+        "That track was recently deleted"
+      end
     else
       "Track Not Found"
     end
