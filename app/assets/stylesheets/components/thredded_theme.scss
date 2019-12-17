@@ -158,6 +158,8 @@ $thredded-font-size-small: 13px;
     }
     .thredded--form-list--hint {
       color: $thredded-form-list-hint-text;
+      margin-top: 12px;
+      font-style: italic;
     }
 
     aside.thredded--currently-online {
@@ -315,6 +317,10 @@ $thredded-font-size-small: 13px;
                 height: 32px;
                 line-height: 34px;
                 background-color: $thredded-user-navigation-link-background;
+                @media screen and (max-width: 48rem) {
+                  background-color: $grey200;
+                }
+
                 &:hover {
                   background-color: $grey200;
                 }
