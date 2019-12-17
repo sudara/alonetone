@@ -17,10 +17,6 @@ export default class extends Controller {
     this.menuTarget.style.display = 'block'
     this.currentlyOpen = true
 
-    // https://greensock.com/ease-visualizer/
-    TweenMax.from('.user_dropdown_menu_header img', 1.2,
-      { width: '32px', height: '32px', ease: Elastic.easeOut })
-
     // a bit more manual than using click@window->user-dropdown#close
     // but this ensures the click handler only gets added when
     // the menu has been opened, which makes my performance brain happy
