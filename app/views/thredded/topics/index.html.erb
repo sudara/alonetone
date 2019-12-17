@@ -22,12 +22,15 @@
         <p>
           <% begin %> <%= yield :thredded_page_description %> <%end%>
         </p>
-        <%= link_to "Start New Thread", new_messageboard_topic_path(messageboard), class: "start_new_topic" %>
       </div>
 
       <div class="thumbnail">
         <%= forum_image(messageboard.slug) %>
       </div>
+    </div>
+
+    <div class="start_new_topic_container">
+      <%= link_to "Start New Thread", new_messageboard_topic_path(messageboard), class: "start_new_topic" %>
     </div>
 
     <%= render partial: 'thredded/topics/topic',
@@ -36,7 +39,12 @@
                    sticky_topics_divider: true,
                    topics: @topics
                } %>
+
+    <div class="start_new_topic_container">
+      <%= link_to "Start New Thread", new_messageboard_topic_path(messageboard), class: "start_new_topic" %>
+    </div>
   <% end %>
+
 
   <footer class="thredded--pagination-bottom">
     <%= paginate @topics %>
