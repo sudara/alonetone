@@ -39,6 +39,7 @@
       }
       textarea {
         min-height: 80px;
+        width: 100%;
       }
       input[type="submit"] {
         @include default_button("primary");

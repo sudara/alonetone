@@ -18,5 +18,5 @@ alonetone is for people who want to give our music away, share it freely. There 
 
 ## Where can I find the community guidelines?
 
-[Right here in our forums](/discuss/all-about-alonetone/community-guidelines)
+[Right here in our forums](/forums/ideas-features-praise/community-guidelines)
 
