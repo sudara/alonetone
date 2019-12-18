@@ -39,7 +39,6 @@ module RSpec
           click_button 'Come on in...'
         end
         yield
-        visit '/logout'
       end
     end
   end
