@@ -269,7 +269,7 @@ class User < ApplicationRecord
   end
 
   def forum_name
-    "@#{login} - #{display_name}"
+    "#{display_name} (@#{login})"
   end
 
   def deleted?
