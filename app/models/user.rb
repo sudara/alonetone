@@ -243,7 +243,7 @@ class User < ApplicationRecord
     if existing_track
       existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
     else
-      tracks.favorites.create(asset_id: asset.id)
+      tracks.create(asset: asset, is_favorite: true)
       Asset.increment_counter(:favorites_count, asset.id, touch: true)
     end
   end
