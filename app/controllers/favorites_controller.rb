@@ -1,7 +1,3 @@
-# responsible for creating and deleting user's favorite tracks
-# depends on asset_id
-# user must be logged_in
-# when favorite track is created it triggers favorites_count counter cache on asset
 class FavoritesController < ApplicationController
   before_action :find_user
   before_action :find_asset
