@@ -82,29 +82,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def not_found
-    raise ActionController::RoutingError, 'User Not Found'
-  end
-
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
     @user = User.where(login: login).first || (current_user if %w[new favorites].include? action_name)
-    not_found unless @user
+    user_not_found_message unless @user
   end
 
   def find_asset
     @asset = @user.assets.where(permalink: (params[:permalink] || params[:track_id] || params[:id])).first
-    @asset ||= @user.assets.where(id: params[:id]).first || track_not_found
+    @asset ||= @user.assets.where(id: params[:id]).first || track_not_found_message
   end
 
   def find_published_asset
     find_asset
-    track_not_found unless @asset.published? || current_user_is_admin_or_owner?(@asset.user)
-  end
-
-  def track_not_found
-    flash[:error] = "Hmm, we didn't find that track!"
-    raise ActionController::RoutingError, 'Track Not Found'
+    track_not_found_message unless @asset.published? || current_user_is_admin_or_owner?(@asset.user)
   end
 
   def find_playlists
