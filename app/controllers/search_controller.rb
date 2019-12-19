@@ -20,7 +20,6 @@ class SearchController < ApplicationController
       @page_title = "#{@query} songs and #{@query} artists"
     else
       @page_title = "Search artists and uploads"
-      flash[:error] = 'Please enter an artist name, a song name, or something to search for'
     end
   rescue StandardError
   end

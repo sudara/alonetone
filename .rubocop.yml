@@ -50,6 +50,9 @@ Lint/ShadowingOuterLocalVariable:
 Lint/ParenthesesAsGroupedExpression:
   Enabled: false
 
+Layout/AlignArguments:
+  EnforcedStyle: with_fixed_indentation
+
 Layout/EndAlignment:
   Enabled: false
 

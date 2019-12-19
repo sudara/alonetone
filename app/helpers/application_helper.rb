@@ -179,6 +179,10 @@ module ApplicationHelper
     session[:theme] || 'light'
   end
 
+  def other_theme_name
+    light_theme? ? 'dark' : 'light'
+  end
+
   def light_theme?
     theme_name == 'light'
   end
@@ -191,6 +195,19 @@ module ApplicationHelper
     if error.present?
       content_tag :div, error.first.humanize, class: 'inline_form_error'
     end
+  end
+
+  def forum_image(slug)
+    themed_illustration_image("forums/#{slug}.png")
+  end
+
+  def themed_illustration_image(path)
+    name = path.split('.')[0]
+    extension = path.split('.')[1]
+    image_tag("illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable') +
+      image_tag("illustrations/#{name}-#{other_theme_name}.#{extension}", class: 'themeable hidden')
+  rescue Sprockets::Rails::Helper::AssetNotFound
+    tag.img "illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
   end
 
   protected

@@ -1,2 +1,7 @@
 @import 'themes/white';
-@import 'components';
+
+@import 'normalize';
+@import 'variables';
+@import 'layout';
+
+@import 'components/**/*';
