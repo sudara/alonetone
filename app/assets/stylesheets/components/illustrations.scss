@@ -1,85 +1,99 @@
-.blank_slate {
-  display: flex;
-  padding-right: 10%;
-  padding-left: 10%;
-  padding-top: 50px;
-  @media #{$one-column} {
-    padding-left: $baseline / 2;
-    padding-right: $baseline / 2;
-  }
-  .left {
-    @media only screen and (max-width: 540px) {
-      width: 40%!important; 
-      padding-bottom: 20px;
-      align-self: center;
-    }
-    .blank_slate_illustration {
-      background-size: 100%;
-      background-repeat: no-repeat;
-      height: 100%;
-      min-width: 238px;
-      @media only screen and (max-width: 540px) {
-        min-width: auto;
-        height: 0;
-        padding-bottom: 144%;
-      }
-    }
-    .contributor_name.mobile_only, .contributor_title.mobile_only {
-      display: none;
-      @media only screen and (max-width: 540px) {
-        display: block;
-        padding-left: $baseline;
-      }
-    }
-  }
-  .blank_slate_text {
-    margin-left: 9%;
-    padding-bottom: 50px;
-    padding-top: 70px;
-    @include paragraph18();
-    color: $grey900;
-    @media only screen and (max-width: 850px) {
-      font-size: 16px;
-    }
-    @media #{$one-column} {
-      padding-top: $baseline * 1.5;
-      padding-bottom: $baseline * 1.5;
-      width: 54%;
-      margin-left: 20px;
-    }
-    @media only screen and (max-width: 540px) {
-      font-size: 14px;
-      .contributor_name, .contributor_title {
-        display: none;
-      }
-    }
-  }
-  .contributor_name {
-    line-height: 1.2;
-    font-style: italic;
-    color: $orange600;
-  }
-  .contributor_title {
-    font-style: italic;
-    font-size: 12px;
-    color: $grey900;
+img.themeable{
+  display: block;
+  &.hidden {
+    display:none;
   }
 }
 
+.gift {
+  margin: 0 auto 0 auto;
+  max-width: 960px;
+  padding-top: 36px;
+  h1 {
+    @include title36();
+    color: $white;
+    text-align: center;
+    padding: 0px 12px;;
+    margin: 0;
+    @media #{$mobile} {
+      font-size: 24px;
+    }
+  }
+  h2 {
+    @include title18();
+    margin-top: 6px;
+    padding: 0px 12px;;
+    text-align: center;
+    @media #{$mobile} {
+      font-size: 14px;
+    }
+  }
+  .gift_image {
+    margin-top: $baseline;
+    background-size: contain;
+    width: 100%;
+  }
+}
 
-// I might re-think the use of this div for the background
-// Or maybe this becomes general class for container_with_illustration
-.get_an_account_container {
-  background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
-  background-repeat: no-repeat;
-  background-size: $site_max_width;
-  background-position-x: 50%;
-  background-position-y: $background_position-y;
-  position: relative;
-  top: -48px;  
-  .left {
-    .blank_slate_illustration {
-      background-image: image-url("illustrations/contributors/alec-talking.png");
+body.not_found,
+body.error,
+body.no_results {
+  main {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  footer#site_footer {
+    padding-top:0;
+  }
+}
+
+body.error {
+  main {
+    background-color: #e02a02;
+    .sub_nav {
+      top: 0;
+    }
+    .gift_image {
+      background-image: image-url("illustrations/500.png");
+      padding-bottom: 58.4%;
+      position: relative;
+      left: -2%;
+      @media #{$responsive} {
+        left: 0%;
+      }
+    }
+  }
+}
+
+body.no_results {
+  main {
+    .sub_nav {
+      display: none;
+    }
+    background-color: #fed1b0;
+    h1.gift_heading {
+      color: $black;
+      font-size: 24px;
+      @media #{$mobile} {
+        font-size: 24px;
+      }
+    }
+    .gift_image {
+      background-image: image-url("illustrations/no-results.jpg");
+      padding-bottom: 60.57%;
+    }
+  }
+}
+
+body.not_found {
+  main {
+    .sub_nav {
+      display: none;
+    }
+    background-color: #f04e1a;
+    .gift_image {
+      background-image: image-url("illustrations/404.png");
+      padding-bottom: 71.73%;
     }
   }
 }

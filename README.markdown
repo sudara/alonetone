@@ -18,7 +18,7 @@ Cross-browser testing donated by
 
 alonetone launched in January 2008 (around the same time as soundcloud).
 
-As of 2018, we host 70,000 tracks from 5500 musicians. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
+As of 2020, we host 80,000 tracks from 6500 musicians in production. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
 
 ### Bug reporting
 
@@ -41,11 +41,14 @@ New Features must prove themselves and obey the above principles — not just be
 
 For more info on alonetone, visit [the alonetone faq](https://alonetone.com/about)
 
-### Current tech
+### Current stack
 
-* Rails 6
+* Rails 6.0.2
+* Sidekiq for jobs
+* Active Storage for file storage on s3
+* Fastly for CDN and image thumbnailing
 * [Stimulus js](http://stimulusjs.org)
-* [Howler js](http://howlerjs.com)
+* [Howler js](http://howlerjs.com) for Audio playback
 
 ### Current feature set
 
@@ -53,38 +56,16 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 * Creation of playlists / albums
 * MP3 streaming and download (powered by amazon s3)
 * Artist browsing
-* Track browsing by popularity, who you are following, most favorited, etc.
-* Tracking of listens and providing useful feedback and statistics to artists
-* One-way commenting system (No inline relpies. No threaded comments. No "pms")
-* Feeds for iTunes podcasts and offsite flash players
-
-## Features wanted
-
-### On the fly zip downloads of playlists via nginx mod\_zip
-This is very easy. Already implemented on Ramen Music. Essentially just is a having a controller generate a text file of filenames that nginx interrupts and uses to construct a zip that's sent back to the client.
-
-### Better discovery though tags
-It's high time. We're small fries perhaps (40k tracks) but we lack any categorization outside of playlists and users. The community has decided NO GENRES and after a bunch of discussion, we've decided going with tags (chosen by the uploader) is likely best. However, problems ensue, including:
-  1) If it's a free for all, won't it just be like genres, but messy?
-  2) Should the tags  be moderated and exclude genres?
-  3) What to do about tagging all the old music, should moderators be able to adjust and add tags for the lazy users/old tracks?
-  4) Should there be a maximum enforced for UI purposes?
-
-This is more than just programming, it's ultimately a UI issue. We can look to Ramen's tag implementation (4-5 maximum, taking up 1-2 lines) for inspiration, but it's very easy to do this wrong.
-
-### Better overall alonetone stats page.
-We need to expose a bit more info to the admins/mods. We want to see how signups/assets/comments are trending to help us catch anything strange or cool. But we also just want to know some useful stuff.
-
-### User stats page
-Partial implementation/proof of concept was working on rails 2 branch. Basically, a track-by-track table-view of listens, downloads, sources, etc, along with a graph over time for each track.
-
-### A way to manage blacklisted IPs in the backend.
-We get trouble with downloading bots, spambots. We have manually hardcoded IPs in the source, specefically to prevent downloading mp3 and wasting our bandwidth. We need to create a UI so this can be managed by a non-techie moderator. Also, we need to provide logged in users with a "report" action on their listens if they notice sketchy behavior, so it can go upstream to the mods.
+* Track browsing
+* Tracking of listens
+* One-way commenting system (No inline replies. No threaded comments. No DMs.)
 
 ## Nomenclature and Historical Baggage That Can And Should Change
 
-* The `Asset` model refers to an mp3, `Track` is an entry in a `Playlist`
-* Playlists are either albums or mixes depending on a boolean, determined `after_update`
+* The `Asset` model refers to an mp3
+* `Track` is an entry in a `Playlist`
+* Playlists are either albums or mixes, depending on what's inside them
+* A user has one favorites playlist, which gets added to when you "heart" things
 * The home page is `assets#latest`
 * Too many views are in `shared/`
 
@@ -98,7 +79,7 @@ It won't work unless:
 
 We get a LOT of requests from people asking if we can help them setup this "script" because they want an alonetone for a certain region of the world, or in another language.
 
-Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting a copy in production, it's going to take lots of work (40+ hours).
+Please understand that alonetone is open-source as an educational tool, to encourage collaboration, and for transparency. It is not intended as a white-label solution. If you are serious about getting your own copy in production, it's going to take lots of work (100+ hours).
 
 **If you still decide to try, keep in mind we are unable to provide ANY support**
 
@@ -110,7 +91,7 @@ First, [sign up for an account](https://alonetone.com) and start digging in.
 
 Second, hop into our [Slack chat room](https://join.slack.com/t/alonetone/shared_invite/enQtNDE4ODIzMzExNjIyLWFmOWZiZGZlMWRiODZjN2FjNWVlM2E3YWY0ODM0ODlhNjUzMzA3ODFjYzI0NDNmNWIxOWM4MDIxZWFmNWZhNTI) or email us at support@alonetone.com
 
-Thirdly, fork away on github.
+Thirdly, fork away on Github.
 
 ### Setup alonetone locally on macOS
 
@@ -168,4 +149,4 @@ After login, click on the "Upload" button to upload your first mp3.
 
 The alonetone source code is released under the MIT license.
 
-"alonetone", "alonetone.com" and the alonetone logo are copyright Sudara Williams 2008-2019 and may not be used without permission.
+"alonetone", "alonetone.com" and the alonetone logos are copyright Sudara Williams 2008-2020 and may not be used without permission.

@@ -17,10 +17,6 @@ export default class extends Controller {
     this.menuTarget.style.display = 'block'
     this.currentlyOpen = true
 
-    // https://greensock.com/ease-visualizer/
-    TweenMax.from('.user_dropdown_menu_header img', 1.2,
-      { width: '32px', height: '32px', ease: Elastic.easeOut })
-
     // a bit more manual than using click@window->user-dropdown#close
     // but this ensures the click handler only gets added when
     // the menu has been opened, which makes my performance brain happy
@@ -63,6 +59,7 @@ export default class extends Controller {
     // But that instantly returns false on toggling
     // So we are choosing a perceptual threshold that "just works"
     setTimeout(() => this.disableDark(), 100)
+    this.toggleThemableImages('dark', 'light')
   }
 
   switchToDark(e) {
@@ -71,6 +68,7 @@ export default class extends Controller {
     this.switchToDarkTarget.style.display = 'none'
     this.darkStyles.disabled = false
     setTimeout(() => this.disableLight(), 100)
+    this.toggleThemableImages('light', 'dark')
   }
 
   disableLight() {
@@ -88,5 +86,9 @@ export default class extends Controller {
       type: "PUT"
     })
     Turbolinks.clearCache()
+  }
+
+  toggleThemableImages(oldTheme, newTheme) {
+    document.querySelectorAll('img.themeable').forEach((image) => image.classList.toggle('hidden'))
   }
 }

@@ -38,7 +38,7 @@ Alonetone::Application.routes.draw do
     end
   end
 
-  mount Thredded::Engine => '/discuss'
+  mount Thredded::Engine => '/forums'
 
   get '/get_an_account', :to => 'account_requests#new'
   resources 'account_requests', only: :create
@@ -63,6 +63,7 @@ Alonetone::Application.routes.draw do
 
   get '404', to: "pages#four_oh_four"
   get '500', to: "pages#error"
+  get 'error', to: "pages#error"
   get 'ok', to: "pages#ok"
 
   # one-off pages

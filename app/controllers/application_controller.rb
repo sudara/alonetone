@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   # Sets ActiveStorage::Current.host based on the current request so all Active
   # Storage models can generate URLs out of the view context. This is mostly
   # used in development because in production we use CloudFront URLs.
@@ -44,7 +43,35 @@ class ApplicationController < ActionController::Base
   end
 
   def show_404
+    @message = helpful_404_message
     render 'pages/four_oh_four', status: 404
+  end
+
+  def helpful_404_message
+    case controller_name
+    when 'users' then user_not_found_message
+    when 'assets' then track_not_found_message
+    end
+  end
+
+  def user_not_found_message
+    if User.with_deleted.where(login: params[:login]).exists?
+      "User Was Deleted"
+    else
+      "User Not Found"
+    end
+  end
+
+  def track_not_found_message
+    if Asset.with_deleted.where(permalink: params[:id]).exists?
+      if @user.present?
+        "Aww, #{@user.display_name} recently deleted that track"
+      else
+        "That track was recently deleted"
+      end
+    else
+      "Track Not Found"
+    end
   end
 
   def set_theme
@@ -56,7 +83,6 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    flash[:error] = "Hmm, we didn't find that..."
     raise ActionController::RoutingError, 'User Not Found'
   end
 
@@ -162,5 +188,4 @@ class ApplicationController < ActionController::Base
       id: current_user.id
     }
   end
-
 end
