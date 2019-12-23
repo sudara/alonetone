@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe 'playlists', type: :feature, js: true do
 
   it 'renders track and cover pages' do
-    logged_in(:sudara) do
+    logged_in(:arthur) do
       visit 'henriwillig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
@@ -42,7 +42,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # same position for the percy snap.
         Percy.snapshot(page,
           name: 'Playlist Track Play, Seek, Pause',
-            percy_css: '.progress_container_inner { left: 33% !important; }')
+          percy_css: '.progress_container_inner { left: 33% !important; }')
       end
     end
   end
