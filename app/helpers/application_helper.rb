@@ -176,7 +176,7 @@ module ApplicationHelper
   end
 
   def theme_name
-    session[:theme] || 'light'
+    session[:theme]
   end
 
   def other_theme_name
