@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   # Sets ActiveStorage::Current.host based on the current request so all Active
   # Storage models can generate URLs out of the view context. This is mostly
   # used in development because in production we use CloudFront URLs.
@@ -24,6 +23,10 @@ class ApplicationController < ActionController::Base
     :current_user_is_mod_or_owner?, :current_user?,
     :current_page, :moderator?, :welcome_back?, :user_setting, :latest_forum_topics
 
+  etag do
+    [current_user&.id, current_user&.dark_theme].join('/')
+  end
+
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
 
@@ -44,19 +47,47 @@ class ApplicationController < ActionController::Base
   end
 
   def show_404
+    @message = helpful_404_message
     render 'pages/four_oh_four', status: 404
   end
 
-  def set_theme
-    if moderator? && current_user.dark_theme? # db is source of user truth, force set session
-      session[:theme] = 'dark'
-    else
-      session[:theme] = 'light' # roll with light as the default, or whatever is in session
+  def helpful_404_message
+    case controller_name
+    when 'users' then user_not_found_message
+    when 'assets' then track_not_found_message
     end
   end
 
+  def user_not_found_message
+    if User.with_deleted.where(login: params[:login]).exists?
+      "User Was Deleted"
+    else
+      "User Not Found"
+    end
+  end
+
+  def track_not_found_message
+    if Asset.with_deleted.where(permalink: params[:id]).exists?
+      if @user.present?
+        "Aww, #{@user.display_name} recently deleted that track"
+      else
+        "That track was recently deleted"
+      end
+    else
+      "Track Not Found"
+    end
+  end
+
+  def set_theme
+    session[:theme] =
+      if current_user&.dark_theme? # db is source of user truth, force set session
+        'dark'
+      else
+        'light'
+      end
+  end
+
   def not_found
-    flash[:error] = "Hmm, we didn't find that..."
     raise ActionController::RoutingError, 'User Not Found'
   end
 
@@ -157,5 +188,4 @@ class ApplicationController < ActionController::Base
       id: current_user.id
     }
   end
-
 end

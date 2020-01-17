@@ -1,0 +1,10 @@
+<header class="thredded--messageboard--header">
+  <h2 class="thredded--messageboard--title"><%= messageboard.name %></h2>
+  <%
+=begin%>
+ <%= render 'thredded/messageboards/messageboard/unread_followed_topics_badge', messageboard: messageboard %> 
+<%
+=end%>
+  <span class="thredded--flex-spacer"></span>
+  
+</header>

@@ -1,6 +1,6 @@
 <% if should_display_track_with_comment? %>
   <%= render(partial: 'assets/asset', layout: 'assets/normal_playback',
-    locals: { asset: comment.commentable }) if comment.commentable && comment.commentable_type == "Asset" %>
+    locals: { asset: comment.commentable }) if comment.commentable_type == "Asset" %>
 <% end %>
 
 <%= div_for comment do %>
@@ -26,7 +26,7 @@
 		<% if comment.private %>
 			<div class="private_message">private message</div>
 		<% end %>
-	
+
 		<% if authorized_for_comment(comment) -%>
 			<div class="comment_controls">
 					<% if comment.is_spam? %>

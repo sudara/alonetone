@@ -9,8 +9,6 @@ class AssetsController < ApplicationController
   before_action :require_login, except: %i[index show latest radio listen_feed]
   before_action :check_new_user_abuse, only: %i[new create]
 
-  etag { current_user&.id }
-
   # home page
   def latest
     if stale?(Asset.last_updated)
@@ -216,7 +214,6 @@ class AssetsController < ApplicationController
   end
 
   def track_not_found
-    flash[:error] = "Hmm, we didn't find that track!"
     raise ActionController::RoutingError, 'Track Not Found'
   end
 

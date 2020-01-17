@@ -111,6 +111,7 @@ $track-content-comment-textarea-text: $grey1000;
 // tracks.scss
 $track-open-box-shadow: 0 11px 19px 4px #6566667a;
 $track-background: $white;
+$track-play-button-background: $black;
 $track-seekbar-loaded-background: $grey50;
 $track-border-bottom: $grey50;
 $track-time-text: $grey800;
@@ -141,6 +142,7 @@ $card-by-text: $grey800;
 
 // site_header.scss
 $site-header-background: $white;
+$site-header-box-shadow: 0 3px 4px -2px #65666627;
 
 $site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
 
@@ -345,3 +347,36 @@ $secretz-odd-row-background: $grey50;
 
 // illustrations.scss
 $background_position-y: -5000px;
+
+// thredded_theme.scss
+$thredded-user-navigation-link-background: $white;
+$thredded-search-background: $white;
+$thredded-search-color: $grey800;
+$thredded-user-navigation-link-text: $grey800;
+$thredded-breadcrumbs-text: $orange600;
+$thredded-preferences-title-text: $black;
+$thredded-form-list-hint-text: $black;
+$thredded-main-section-background: $white;
+$thredded-messageboards-group-messageboard-background: $grey25;
+$thredded-messsageboards-group-title-text: $black;
+$thredded-messageboard-title-color: $orange600;
+$thredded--messageboard--description-text: $grey900;
+$thredded-messageboard-meta-text: $grey600;
+$thredded-message-board-actions-link-background: $grey100;
+$thredded-message-board-actions-link-text: $grey900;
+$thredded-topics-heading-text: $grey1000;
+$thredded-started-by-text: $grey900;
+$thredded-followers-text: $grey900;
+$thredded-topics-description-text: $grey900;
+$thredded-topics-background: $grey25;
+$thredded-topics-alt-background: $white;
+$thredded-topics-title-text: $grey1200;
+$thredded-topics-updated-text: $grey600;
+$thredded-post-user-text: $grey900;
+$thredded-post-created-at-text: $grey900;
+$thredded-post-dropdown-background: $white;
+$thredded-post-content-text: $grey900;
+$thredded-post-form-title-text: $grey900;
+$thredded-form-list-textarea-background: $white;
+$thredded-form-list-textarea-text: $black;
+$thredded-new-topic-background: $grey100;
