@@ -81,7 +81,7 @@ module ApplicationHelper
 
   # https://en.wikipedia.org/wiki/Nofollow#rel="ugc"
   def nofollowize(markdown)
-    markdown.gsub('<a href','<a rel="nofollow ugc" href')
+    markdown.gsub('<a href', '<a rel="nofollow ugc" href')
   end
 
   def link_to_play(asset, referer = nil)
