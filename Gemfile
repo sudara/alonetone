@@ -8,7 +8,7 @@ gem 'rails'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded'
+gem 'thredded', github: 'thredded/thredded'
 
 # ruby
 gem 'sometimes'
