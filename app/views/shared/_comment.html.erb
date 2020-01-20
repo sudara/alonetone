@@ -21,7 +21,7 @@
 
 		<div class="comment_body">
 			<p>
-				<%= strip_tags(comment.body) %>
+				<%= strip_tags(markdown(comment.body)) %>
 			</p>
 		<% if comment.private %>
 			<div class="private_message">private message</div>
