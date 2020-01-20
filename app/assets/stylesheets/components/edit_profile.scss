@@ -10,18 +10,18 @@
   }
   .box {
     margin-bottom: 80px;
-  }
-  h1 {
-    @include title24();
-    border-bottom: 0;
-    line-height: 1;
-    height: $baseline * (8/3);
-    padding-left: $baseline * (3/2);
-    padding-top: 24px;
+    h1 {
+      @include title24();
+      border-bottom: 0;
+      line-height: 1;
+      height: $baseline * (8/3);
+      padding-left: $baseline * (3/2);
+      padding-top: 24px;
+    }
   }
   .edit_profile_separator {
     height: 1px;
-    background-color: $grey100;
+    background-color: $edit_profile_separat0r_background;
   }
   .edit_profile_top {
     padding: $baseline * 1.5;
