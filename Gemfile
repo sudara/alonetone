@@ -8,7 +8,7 @@ gem 'rails'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'thredded/thredded', branch: 'collection-cache'
+gem 'thredded'
 
 # ruby
 gem 'sometimes'
