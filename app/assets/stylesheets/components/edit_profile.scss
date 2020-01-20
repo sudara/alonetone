@@ -182,8 +182,8 @@
           flex-shrink: 0;
         }
         div {
-          background-color: $grey50;
-          color: $grey600;
+          background-color: $edit-profile-hint-background;
+          color: $edit-profile-hint-text;
           font-family: $medium-sans-font;
           height: 32px;
           box-sizing: border-box;
@@ -366,8 +366,8 @@
     > form > div {
       display: flex;
       div {
-        background-color: $grey50;
-        color: $grey600;
+        background-color: $edit-profile-hint-background;
+        color: $edit-profile-hint-text;
         font-family: $medium-sans-font;
         height: 32px;
         box-sizing: border-box;
@@ -442,8 +442,8 @@
     > form > div {
       display: flex;
       div {
-        background-color: $grey50;
-        color: $grey600;
+        background-color: $edit-profile-hint-background;
+        color: $edit-profile-hint-text;
         font-family: $medium-sans-font;
         height: 32px;
         box-sizing: border-box;
