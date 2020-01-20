@@ -21,7 +21,7 @@
   }
   .edit_profile_separator {
     height: 1px;
-    background-color: $edit_profile_separat0r_background;
+    background-color: $edit_profile_separator_background;
   }
   .edit_profile_top {
     padding: $baseline * 1.5;
@@ -130,7 +130,7 @@
     h3 {
       @include title20();
       margin-top: 0;
-      color: $grey900;
+      color: $edit-profile-heading-text;
     }
     .edit_profile_socials_columns {
       display: flex;
@@ -245,7 +245,7 @@
       @include title20();
       margin-top: 0;
       margin-bottom: 28px;
-      color: $grey900;
+      color: $edit-profile-heading-text;
     }
     .edit_profile_settings_columns {
       display: flex;
@@ -354,7 +354,7 @@
     }
     h2 {
       @include title24();
-      color: $grey900;
+      color: $edit-profile-heading-text;
       border-bottom: 0;
       padding-left: 0;
     }
@@ -430,7 +430,7 @@
     }
     h2 {
       @include title24();
-      color: $grey900;
+      color: $edit-profile-heading-text;
       border-bottom: 0;
       padding-left: 0;
     }
