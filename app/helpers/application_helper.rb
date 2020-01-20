@@ -76,7 +76,7 @@ module ApplicationHelper
   def format_track_description(text)
     return "" unless text
 
-    nofollowize(CommonMarker.render_doc(text, :SMART, [:autolink]).to_html(:HARDBREAKS))
+    nofollowize(CommonMarker.render_doc(text, :SMART, [:autolink]).to_html(:HARDBREAKS)).html_safe
   end
 
   # https://en.wikipedia.org/wiki/Nofollow#rel="ugc"
