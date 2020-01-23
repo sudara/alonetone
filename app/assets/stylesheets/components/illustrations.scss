@@ -54,7 +54,7 @@ body.error {
       top: 0;
     }
     .gift_image {
-      background-image: image-url("illustrations/500.png");
+      background: center / cover no-repeat image-url("illustrations/500-extended.png");
       padding-bottom: 58.4%;
       position: relative;
       left: -2%;
