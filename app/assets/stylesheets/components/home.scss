@@ -1,3 +1,10 @@
+.hero {
+  background-color: $hero-background;
+  img {
+    width:400px;
+  }
+}
+
 #home_grid {
   display: grid;
   margin: 0 auto;
