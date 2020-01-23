@@ -8,25 +8,60 @@
   <title>alonetone is down for maintenance</title>
 
   <style type="text/css">
-    body{
-      background-color: #353535;
+    @font-face {
+      font-family: 'Alright-v2-Normal';
+      src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Regular-latin1-tnum.woff2') format('woff2');
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: 'Alright-v2-Normal';
+      src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Bold-latin1-tnum.woff2') format('woff2');
+      font-weight: bold;
+    }
+
+    body {
+      background-color: #151414;
       margin:0;
       padding:0;
     }
-    div.image {
-      position: absolute;
-      width: 100%;
-      height:100%;
-      background: transparent top center / contain no-repeat url(/images/502.png);
+
+    div.col {
+      margin: 0 auto;
+      height: 100%;
+      max-width: 960px;
+      background: #353535;
     }
 
+    div.image {
+      max-width:960px;
+      height:800px;
+      display:block;
+      background: #353535 top center / cover no-repeat url(/images/502.png);
+    }
+
+    h1,h2 {
+      text-align:center;
+      font-family: "Alright-v2-Normal";
+    }
+    h1 {
+      color: #E6E8E8;
+      margin-top: 1em;
+      margin-bottom: 0;
+    }
+    h2 {
+      margin-top: 0;
+      color: #949797;
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="image">
-
+  <div class="col">
+    <div class="image"> </div>
+    <h1>alonetone is down for maintenance</h1>
+    <h2>We probably took the site down on purpose! It should be back up shortly...</h2>
   </div>
 
 </body>
