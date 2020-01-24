@@ -9,9 +9,14 @@
     padding-top: 80px;
     padding-bottom: 30px;
     .hero-content {
-      
+      margin-right: 25px;
       h1 {
         @include title36();
+        color: $hero-heading-text;
+      }
+      p {
+        @include paragraph18();
+        color: $hero-paragraph-text;
       }
     }
     img {
