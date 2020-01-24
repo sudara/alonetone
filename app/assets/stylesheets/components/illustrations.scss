@@ -53,11 +53,16 @@ body.error {
     .sub_nav {
       top: 0;
     }
+    .gift {
+      width: 100%;
+      max-width: none;
+
+    }
     .gift_image {
       background: center / cover no-repeat image-url("illustrations/500-extended.png");
       padding-bottom: 58.4%;
-      position: relative;
-      left: -2%;
+      // position: relative;
+      // left: -2%;
       @media #{$responsive} {
         left: 0%;
       }
