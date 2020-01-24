@@ -20,10 +20,15 @@
       font-weight: bold;
     }
 
+    html {
+      height: 100%;
+    }
+
     body {
       background-color: #151414;
       margin:0;
       padding:0;
+      height: 100%;
     }
 
     div.col {
@@ -34,21 +39,24 @@
     }
 
     div.image {
-      max-width:960px;
-      height:800px;
-      display:block;
-      background: #353535 top center / cover no-repeat url(/images/502.png);
+      max-width: 960px;
+      display: block;
+      background: #353535 top center / contain no-repeat url(/images/502.png);
+      padding-bottom: 92%;
     }
 
     h1,h2 {
       text-align:center;
       font-family: "Alright-v2-Normal";
+      padding: 0 6%;
     }
+
     h1 {
       color: #E6E8E8;
-      margin-top: 1em;
+      margin-top: 0;
       margin-bottom: 0;
     }
+
     h2 {
       margin-top: 0;
       color: #949797;
