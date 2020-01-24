@@ -1,4 +1,6 @@
 .hero {
+  margin-top: -48px;
+  margin-bottom: 48px;
   background-color: $hero-background;
   .hero-inner {
     margin: 0 auto;
@@ -12,6 +14,7 @@
       margin-right: 25px;
       h1 {
         @include title36();
+        margin-top: 0;
         color: $hero-heading-text;
       }
       p {
