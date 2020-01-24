@@ -56,15 +56,25 @@ body.error {
     .gift {
       width: 100%;
       max-width: none;
-
+      @media #{$responsive} {
+        max-height: 993px;
+        overflow-y: hidden;
+      }
     }
     .gift_image {
       background: center / cover no-repeat image-url("illustrations/500-extended.png");
-      padding-bottom: 58.4%;
-      // position: relative;
-      // left: -2%;
+      padding-bottom: 38.4%;
+      position: relative;
+      margin-top: 40px;
+      margin-bottom: 20px;
       @media #{$responsive} {
-        left: 0%;
+        // background: top center no-repeat image-url("illustrations/500-extended.png");
+        // width: 1032px;
+        
+        background-position-y: top;
+        background-size: auto;
+        height: 900px;
+        // padding-bottom: 140%;
       }
     }
   }
