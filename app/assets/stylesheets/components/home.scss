@@ -6,25 +6,46 @@
     margin: 0 auto;
     max-width: $site_max_width;
     padding: 0 $baseline * 1.5;
-    box-sizing: border-box;  
-    display: flex;
     padding-top: 80px;
     padding-bottom: 30px;
+    box-sizing: border-box;  
+    display: flex;
+    @media #{$one-column} {
+      padding-top: 30px;
+      flex-direction: column-reverse;
+    }
     .hero-content {
       margin-right: 25px;
+      @media #{$one-column} {
+        margin-right: 0;
+      }
       h1 {
         @include title36();
         margin-top: 0;
         color: $hero-heading-text;
+        @media #{$one-column} {
+          margin-top: 30px;
+        }
+        @media #{$mobile} {
+          @include title24();
+        }
       }
       p {
         @include paragraph18();
         color: $hero-paragraph-text;
+        @media #{$mobile} {
+          @include paragraph16();
+        }
       }
     }
     img {
       width: 400px;
       height: 100%;
+      flex-shrink: 0;
+      @media #{$one-column} {
+        width: 90%;
+        margin: 0 auto;
+      }
     }
   }
 }
