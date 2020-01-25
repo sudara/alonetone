@@ -37,6 +37,45 @@
           @include paragraph16();
         }
       }
+      .hero-links {
+        margin-top: 80px;
+        display: flex;
+        flex-wrap: wrap;
+        div {
+          margin-bottom: $baseline/2;
+          a {
+            @include default-button('primary');
+            height: 40px;
+            margin-bottom: 10px;
+            padding-top: 4px;
+            font-size: 16px;
+            padding-left: 0;
+            padding-right: 9px;
+          }
+          div {
+            font-family: $medium-sans-font;
+            color: $orangetone;
+          }
+          &:first-child {
+            margin-right: $baseline;
+            a {
+              width: 190px;
+            }
+          }
+          &:last-child {
+            a {
+              width: 180px;
+              background-color: transparent;
+              color: $grey600;
+              border: 2px solid $grey500;
+              padding-top: 2px;
+            }
+            div {
+              color: $grey600;
+            }
+          }
+        }
+      }
     }
     img {
       width: 400px;
