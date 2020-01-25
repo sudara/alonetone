@@ -68,13 +68,9 @@ body.error {
       margin-top: 40px;
       margin-bottom: 20px;
       @media #{$responsive} {
-        // background: top center no-repeat image-url("illustrations/500-extended.png");
-        // width: 1032px;
-        
         background-position-y: top;
         background-size: auto;
         height: 900px;
-        // padding-bottom: 140%;
       }
     }
   }
