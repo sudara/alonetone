@@ -269,7 +269,7 @@ class User < ApplicationRecord
   end
 
   def forum_name
-    "#{display_name.capitalize} (@#{login})"
+    "#{display_name} (@#{login})"
   end
 
   def deleted?
