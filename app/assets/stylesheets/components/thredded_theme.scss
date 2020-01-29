@@ -32,6 +32,7 @@ $thredded-font-size-small: 13px;
     margin-right: 0;
   }
   #thredded--container {
+    padding: 0!important;
     &.thredded--edit-topic,
     &.thredded--edit-post,
     &.thredded--messageboards-new,
@@ -468,6 +469,7 @@ $thredded-font-size-small: 13px;
               height: 96px;
               margin-left: $baseline;
               margin-right: $baseline;
+              flex-shrink: 0;
               img {
                 width: 100%;
               }
