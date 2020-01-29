@@ -64,18 +64,24 @@ module ApplicationHelper
     text.html_safe
   end
 
-  # comments, credits
+  # Comments are plaintext and don't use this helper
+  # credits/profile/playlist currently are markdowned without line breaks
   def markdown(text)
     return "" unless text
 
     CommonMarker.render_doc(text, :SMART).to_html([:NOBREAKS]).html_safe
   end
 
-  # full track description
-  def markdown_with_html(text)
+  # full track descriptions should have hard line breaks
+  def format_track_description(text)
     return "" unless text
 
-    CommonMarker.render_doc(text, :SMART).to_html(:HARDBREAKS).html_safe
+    nofollowize(CommonMarker.render_doc(text, :SMART, [:autolink]).to_html(:HARDBREAKS)).html_safe
+  end
+
+  # https://en.wikipedia.org/wiki/Nofollow#rel="ugc"
+  def nofollowize(markdown)
+    markdown.gsub('<a href', '<a rel="nofollow ugc" href')
   end
 
   def link_to_play(asset, referer = nil)
@@ -176,7 +182,7 @@ module ApplicationHelper
   end
 
   def theme_name
-    session[:theme] || 'light'
+    session[:theme]
   end
 
   def other_theme_name

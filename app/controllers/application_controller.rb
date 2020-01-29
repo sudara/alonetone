@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     :current_user_is_mod_or_owner?, :current_user?,
     :current_page, :moderator?, :welcome_back?, :user_setting, :latest_forum_topics
 
+  etag do
+    [current_user&.id, current_user&.dark_theme].join('/')
+  end
+
   # ability to tack these flash types on redirects/renders, access via flash.error
   add_flash_types(:error, :ok)
 
@@ -75,11 +79,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_theme
-    if moderator? && current_user.dark_theme? # db is source of user truth, force set session
-      session[:theme] = 'dark'
-    else
-      session[:theme] = 'light' # roll with light as the default, or whatever is in session
-    end
+    session[:theme] =
+      if current_user&.dark_theme? # db is source of user truth, force set session
+        'dark'
+      else
+        'light'
+      end
   end
 
   def find_user
