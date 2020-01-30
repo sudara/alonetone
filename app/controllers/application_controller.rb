@@ -87,10 +87,14 @@ class ApplicationController < ActionController::Base
       end
   end
 
+  def not_found
+    raise ActionController::RoutingError, 'User Not Found'
+  end
+
   def find_user
     login = params[:login] || params[:user_id] || params[:id]
     @user = User.where(login: login).first || (current_user if %w[new favorites].include? action_name)
-    user_not_found_message unless @user
+    not_found unless @user
   end
 
   def find_asset
