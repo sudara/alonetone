@@ -62,16 +62,13 @@ body.error {
       }
     }
     .gift_image {
-      background: center / cover no-repeat image-url("illustrations/500-extended.png");
-      padding-bottom: 38.4%;
+      height: 460px;
+      background: no-repeat image-url("illustrations/500-extended.png");
+      background-position: center center;
+      background-size: 2000px 460px;
       position: relative;
       margin-top: 40px;
       margin-bottom: 20px;
-      @media #{$responsive} {
-        background-position-y: top;
-        background-size: auto;
-        height: 900px;
-      }
     }
   }
 }
