@@ -10,20 +10,24 @@
     padding-bottom: 30px;
     box-sizing: border-box;  
     display: flex;
-    @media #{$one-column} {
+    @media only screen and (max-width: 890px) {
       padding-top: 30px;
       flex-direction: column-reverse;
     }
+    @media #{$mobile} {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
     .hero-content {
       margin-right: 25px;
-      @media #{$one-column} {
+      @media only screen and (max-width: 890px) {
         margin-right: 0;
       }
       h1 {
         @include title36();
         margin-top: 0;
         color: $hero-heading-text;
-        @media #{$one-column} {
+        @media only screen and (max-width: 890px) {
           margin-top: 30px;
         }
         @media #{$mobile} {
@@ -41,6 +45,9 @@
         margin-top: 80px;
         display: flex;
         flex-wrap: wrap;
+        @media #{$mobile} {
+          margin-top: 30px;
+        }
         div {
           margin-bottom: $baseline/2;
           a {
@@ -55,6 +62,9 @@
           div {
             font-family: $medium-sans-font;
             color: $orangetone;
+            @media #{$mobile} {
+              display: none;
+            }
           }
           &:first-child {
             margin-right: $baseline;
@@ -69,6 +79,11 @@
               color: $grey600;
               border: 2px solid $grey500;
               padding-top: 2px;
+              @media #{$mobile} {
+                width: auto;
+                padding-left: 10px;
+                padding-right: 10px;
+              }
             }
             div {
               color: $grey600;
@@ -82,7 +97,7 @@
       width: 400px;
       height: 100%;
       flex-shrink: 0;
-      @media #{$one-column} {
+      @media only screen and (max-width: 890px) {
         width: 90%;
         margin: 0 auto;
       }
