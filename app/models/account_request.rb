@@ -27,7 +27,7 @@ class AccountRequest < ApplicationRecord
 
   validates :entity_type, inclusion: {
     in: entity_types,
-    message: "We'd like to know what sort of thing you want to upload!"
+    message: "We need to know what sort of thing you want to upload!"
   }
 
   validates :email,
@@ -47,7 +47,7 @@ class AccountRequest < ApplicationRecord
   validate :login_is_unique, on: :create
 
   validates :details, length: {
-    minimum: 5,
+    minimum: 20,
     too_short: "should link to your music/website or add some detail about what you make!"
   }
 
