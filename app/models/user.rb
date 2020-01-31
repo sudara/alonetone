@@ -268,10 +268,6 @@ class User < ApplicationRecord
     )
   end
 
-  def forum_name
-    "#{display_name} (@#{login})"
-  end
-
   def deleted?
     deleted_at != nil
   end

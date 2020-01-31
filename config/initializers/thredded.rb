@@ -5,11 +5,12 @@ Thredded.user_class = 'User'
 
 # Use User#login for the @mention syntax and to present the name of the user. Note that this column
 # must be unique.
-Thredded.user_name_column = :login
+Thredded.user_name_column = :display_name
 
 # User display name method, by default thredded uses the user_name_column defined above
 # You may want to use :to_s or some more elaborate method
-Thredded.user_display_name_method = :forum_name
+# define this method in user.rb
+# Thredded.user_display_name_method = :forum_name
 
 # Configure the method name to fetch the current user.
 Thredded.current_user_method = :current_user
