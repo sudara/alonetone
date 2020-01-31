@@ -74,6 +74,12 @@ RSpec.describe AccountRequest, type: :model do
       valid_account_request.approve!(users(:sudara))
       expect(valid_account_request.moderated_by.login).to eql(users(:sudara).login)
     end
+
+    it "should not have set last_login_at" do
+      login = valid_account_request.login
+      valid_account_request.approve!(users(:sudara))
+      expect(User.find_by_login(login).last_login_at).to be_nil
+    end
   end
 
   context "on denial" do
@@ -83,7 +89,7 @@ RSpec.describe AccountRequest, type: :model do
   end
 
   context "status" do
-    it "should change to accepted when user sets password" do
+    it "should change to claimed when user sets password" do
 
     end
   end

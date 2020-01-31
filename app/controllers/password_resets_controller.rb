@@ -19,11 +19,12 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    @newly_invited_user = !@user.last_login_at?
+    @newly_invited_user = @user.never_activated?
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
       @user.clear_token!
+      @user.update_account_request!
       UserSession.create(@user, true)
       flash[:notice] = "Phew, we were worried about you. Welcome back." unless @newly_invited_user
       redirect_to @newly_invited_user ? upload_path : user_home_path(@user.login)

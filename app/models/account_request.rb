@@ -2,6 +2,8 @@
 
 class AccountRequest < ApplicationRecord
   scope :recent, -> { order('created_at DESC') }
+  scope :candidates, -> { recent.waiting.where(entity_type: [0, 1]) }
+  scope :spammers, -> { recent.waiting.where(entity_type: [2, 3, 4]) }
 
   belongs_to :user, optional: true
   belongs_to :moderated_by, optional: true, class_name: 'User'
@@ -21,7 +23,7 @@ class AccountRequest < ApplicationRecord
       waiting: 0,
       approved: 1,
       denied: 2,
-      accepted: 3
+      claimed: 3
     }
   )
 
@@ -63,6 +65,10 @@ class AccountRequest < ApplicationRecord
     end
   end
 
+  def submission_count
+    AccountRequest.where(email: email).count
+  end
+
   def approve!(approved_by)
     return unless approved_by.moderator?
 
@@ -77,9 +83,14 @@ class AccountRequest < ApplicationRecord
     end
   end
 
-  def self.filter_by(status)
-    if status.present?
-      recent.where(status: status)
+  def self.filter_by(filter)
+    case filter
+    when "candidates"
+      candidates
+    when "spammers"
+      spammers
+    when String
+      recent.where(status: filter)
     else
       recent
     end
