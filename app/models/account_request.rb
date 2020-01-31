@@ -47,8 +47,8 @@ class AccountRequest < ApplicationRecord
   validate :login_is_unique, on: :create
 
   validates :details, length: {
-    minimum: 20,
-    too_short: "should link to your music/website or add some detail about what you make!"
+    minimum: 40,
+    too_short: "must be at least 40 characters: Please link to your music/website or add more info!"
   }
 
   def email_is_unique

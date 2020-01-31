@@ -63,7 +63,7 @@
       </div>
       <div>
         <h3 class="form_heading">
-          Which best describes what you will host on alonetone:
+          Which best describes you?:
         </h3>
         <div class="form_radio_group">
           <div class="columns">
@@ -84,7 +84,7 @@
             <div class="right">
               <div class="form_radio_pair">
                 <%= f.radio_button(:entity_type, "blogger") %>
-                <%= f.label(:entity_type_blogger, "Blogger / Website") %>
+                <%= f.label(:entity_type_blogger, "Blogger / Website owner") %>
               </div>
               <div class="form_radio_pair">
                 <%= f.radio_button(:entity_type, "podcaster") %>
@@ -96,9 +96,9 @@
         </div>
       <div>
         <h3 class="form_heading">
-          Do you have music elsewhere (Bandcamp, Spotify, Soundcloud)?
+          Tell us something about your music — or better, link to it:
         </h3>
-        <%= f.label :details, "Give us a link. Or let us know what kind of thing you do. Don't worry, we don't care about genre, etc." %>
+        <%= f.label :details, "Don't worry, we don't care about genre or recording quality, etc. We just care that you are a music maker, not a spammer :)" %>
         <%= f.text_area :details %>
         <%= inline_form_error(@account_request.errors[:details]) %>
       </div>
