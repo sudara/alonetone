@@ -97,6 +97,65 @@
         <%= f.submit "Update links" %>
       <% end %>
     </div>
+    <div class="edit_profile_separator"></div>
+    <div class="edit_profile_settings">
+      <h3>Settings</h3>
+      <%= form_for @user do |f| -%>
+        <div class="edit_profile_settings_columns">
+          <div class="edit_profile_settings_left_column">
+            <div class="setting">
+              <label>Display play counts blatantly on all tracks?</label>
+              <div class="toggle toggle_off">
+                <div class="toggle_inner"></div>
+                <div class="toggle_label">OFF</div>
+              </div>
+            </div>
+            <div class="edit_profile_separator"></div>
+            <div class="setting">
+              <label>Accept comments from guests?</label>
+              <div class="toggle toggle_on">
+                <div class="toggle_inner"></div>
+                <div class="toggle_label">ON</div>
+              </div>
+            </div>
+            <div class="edit_profile_separator"></div>
+            <div class="setting">
+              <label>Display most popular tracks on your home page?</label>
+              <div class="toggle toggle_off">
+                <div class="toggle_inner"></div>
+                <div class="toggle_label">OFF</div>
+              </div>
+            </div>
+          </div>
+          <div class="edit_profile_settings_right_column">
+            <div class="edit_profile_separator"></div>
+            <div class="setting">
+              <label>Increase size of ego by 4x?</label>
+              <div class="toggle toggle_off">
+                <div class="toggle_inner"></div>
+                <div class="toggle_label">OFF</div>
+              </div>
+            </div>
+            <div class="edit_profile_separator"></div>
+            <div class="setting">
+              <label>Should we email you new comments on your tracks?</label>
+              <div class="toggle toggle_off">
+                <div class="toggle_inner"></div>
+                <div class="toggle_label">OFF</div>
+              </div>
+            </div>
+            <div class="edit_profile_separator"></div>
+            <div class="setting">
+              <label>Email notifications when folks you follow upload tracks?</label>
+              <div class="toggle toggle_off">
+                <div class="toggle_inner"></div>
+                <div class="toggle_label">OFF</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
   </div>
   <div class="edit_profile_change_your_password box">
     <div class="warning_tag">Warning</div>
