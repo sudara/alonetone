@@ -71,5 +71,9 @@ h2 {
     margin-bottom: $baseline;
     max-width: 100%;
   }
+  a {
+    color: $accent;
+    text-decoration: underline;
+  }
 }
 
