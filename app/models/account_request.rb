@@ -77,7 +77,7 @@ class AccountRequest < ApplicationRecord
   end
 
   def create_user_account!(invited_by)
-    User.create!(login: login, email: email, invited_by: invited_by) do |u|
+    create_user!(login: login, email: email, invited_by: invited_by) do |u|
       u.reset_password
       u.reset_perishable_token
     end
