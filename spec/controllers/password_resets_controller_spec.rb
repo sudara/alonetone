@@ -53,4 +53,12 @@ RSpec.describe PasswordResetsController, type: :controller do
       expect(controller.session["user_credentials"]).to eq(nil)
     end
   end
+
+  context "newly invited user" do
+    it "should redirect to upload_path after choosing a password" do
+      put :update, params: { id: users(:newly_approved).perishable_token,
+        user: { password: '12345678', password_confirmation: '12345678' }}
+      expect(response).to redirect_to('/upload')
+    end
+  end
 end

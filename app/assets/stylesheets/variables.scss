@@ -219,3 +219,9 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   font-family: $medium-sans-font;
   line-height: 1.5;
 }
+
+@mixin paragraph16() {
+  font-size: 16px;
+  font-family: $medium-sans-font;
+  line-height: 1.5;
+}

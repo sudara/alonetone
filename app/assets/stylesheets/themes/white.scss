@@ -116,7 +116,7 @@ $track-seekbar-loaded-background: $grey50;
 $track-border-bottom: $grey50;
 $track-time-text: $grey800;
 $track-artist-text: $grey800;
-$track-reveal-top-background: $grey50; 
+$track-reveal-top-background: $grey50;
 $track-description-text: $grey900;
 $track-created-text: $grey500;
 $track-view-more-text: $orange600;
@@ -131,8 +131,8 @@ $card-background: $white;
 $card-private-background: $grey1000;
 $card-private-text: $white;
 $card-title-font: 'Alright-v2-Normal', sans-serif;
-$card-title-weight: bold; 
-$card-title-text: $black; 
+$card-title-weight: bold;
+$card-title-text: $black;
 $card-artist-font: 'Alright-v2-Normal-Medium', sans-serif;
 $card-artist-weight: normal;
 $card-artist-text: $orange600;
@@ -263,7 +263,7 @@ $playlist-sidebar-background: $white;
 $playlist-sidebar-artist-text: $orangetone;
 $playlist-sidebar-artist-by-text: $black;
 
-$playlist-sidebar-artist-parantheses-text: $grey800;  
+$playlist-sidebar-artist-parantheses-text: $grey800;
 $playlist-sidebar-artist-edit-link-text: $orangetone;
 
 $playlist-sidebar-play-background: image-url("svg/icon_play_circled.svg");
@@ -288,10 +288,10 @@ $sidebar-link-action-text: $grey800;
 
 // playlist_cover_view.scss
 $playlist-options-background: $grey1000;
-$playlist-options-link-background: $grey1000; 
+$playlist-options-link-background: $grey1000;
 $playlist-options-link-background-hover: $black;
 $playlist-options-link-border: $black;
-$playlist-options-link-text: $grey50; 
+$playlist-options-link-text: $grey50;
 $playlist-options-link-action-text: $grey800;
 
 // track_content.scss
@@ -386,3 +386,8 @@ $thredded-post-form-title-text: $grey900;
 $thredded-form-list-textarea-background: $white;
 $thredded-form-list-textarea-text: $black;
 $thredded-new-topic-background: $grey100;
+
+// home.scss
+$hero-background: $grey100;
+$hero-heading-text: $orangetone;
+$hero-paragraph-text: $grey1000;
