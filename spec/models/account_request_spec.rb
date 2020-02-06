@@ -87,8 +87,16 @@ RSpec.describe AccountRequest, type: :model do
   end
 
   context "on denial" do
-    it "should do nothing when denied" do
+    it "should populate moderated_by" do
+      valid_account_request.deny!(users(:sudara))
+      expect(valid_account_request.moderated_by.login).to eql(users(:sudara).login)
+    end
 
+    it "should soft delete any created user if the record was previously approved" do
+      expect {
+        valid_account_request.approve!(users(:sudara))
+        valid_account_request.deny!(users(:sudara))
+      }.not_to change { User.count }
     end
   end
 

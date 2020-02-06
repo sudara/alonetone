@@ -76,6 +76,14 @@ class AccountRequest < ApplicationRecord
     create_user_account!(approved_by)
   end
 
+  def deny!(denied_by)
+    return unless denied_by.moderator?
+
+    user&.soft_delete if approved?
+
+    denied! && update(moderated_by: denied_by)
+  end
+
   def create_user_account!(invited_by)
     create_user!(login: login, email: email, invited_by: invited_by) do |u|
       u.reset_password
