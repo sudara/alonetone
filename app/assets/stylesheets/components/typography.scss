@@ -46,7 +46,7 @@ h2 {
         content: counter(listNumbering) ".";
         font-variant-numeric: tabular-nums;
         font-size: 14px;
-        color: $body-text;
+        color: inherit;
         margin-right: 6px;
       }
     }

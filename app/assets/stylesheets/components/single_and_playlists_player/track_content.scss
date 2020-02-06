@@ -119,14 +119,20 @@
       margin-bottom: $baseline;
       max-width: 100%;
     }
-    p {
-      font-size: 16px;
-      line-height: 23px;
-      margin-bottom: $baseline;
+    .markdown {
       color: $track-content-description-text;
-      img {
-        max-width: 100%;
-        margin-top: $baseline;
+      > * {
+        color: inherit;
+      }
+      p {
+        font-size: 16px;
+        line-height: 23px;
+        margin-bottom: $baseline;
+        color: $track-content-description-text;
+        img {
+          max-width: 100%;
+          margin-top: $baseline;
+        }
       }
     }
     .edit_links_and_favorite {
