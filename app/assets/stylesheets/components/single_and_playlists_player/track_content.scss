@@ -129,24 +129,6 @@
         margin-top: $baseline;
       }
     }
-    hr {
-      position: relative; // needed for icon
-      width: 550px;
-      margin: ($baseline * 1.5) auto;
-      text-align: center;
-      border: 0;
-      border-bottom: 1px solid $track-content-hr-background;
-      &:after {
-        position: absolute;
-        top: -0.55em;
-        left: 265px;
-        display: block;
-        content: "\f025"; // with headphone icon
-        color: $track-content-hr-background;
-        background-color: white; // interrupt hr
-        -webkit-font-smoothing: antialiased;
-      }
-    }
     .edit_links_and_favorite {
       overflow: auto;
       box-shadow: none;

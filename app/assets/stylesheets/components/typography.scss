@@ -27,3 +27,37 @@ h2 {
     border-radius: 0;
   }
 }
+
+
+.markdown {
+  ul {
+    padding-left: 24px;
+    li {
+      list-style-type: disc;
+    }
+  }
+  ol {
+    counter-reset: listNumbering;
+    padding-left: 6px;
+    li {
+      list-style: none;
+      counter-increment: listNumbering;
+      &:before {
+        content: counter(listNumbering) ".";
+        font-variant-numeric: tabular-nums;
+        font-size: 14px;
+        color: $body-text;
+        margin-right: 6px;
+      }
+    }
+  }
+  hr {
+    position: relative; // needed for icon
+    width: 550px;
+    margin: ($baseline * 1.5) auto;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid $track-content-hr-background;
+  }
+}
+
