@@ -3,9 +3,9 @@
   <%= render partial: 'assets/big_player' %>
 
   <div class="track_post">
-    <h1><%= @asset.name %></h1>
+    <h1 class="track_title"><%= @asset.name %></h1>
     <% unless @playlist %>
-      <h3><%= link_to @asset.user.name, user_home_path(@asset.user) %></h3>
+      <h3 class="track_artist"><%= link_to @asset.user.name, user_home_path(@asset.user) %></h3>
     <% end %>
     <div class="track_stats">
       <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>

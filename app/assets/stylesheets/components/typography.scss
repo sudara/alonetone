@@ -51,8 +51,16 @@ h2 {
       }
     }
   }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
   hr {
-    position: relative;
     width: 90%;
     margin: ($baseline * 1.5) auto;
     text-align: center;

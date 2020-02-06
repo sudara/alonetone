@@ -43,14 +43,14 @@
     padding-right: $baseline * 1.5;
     padding-bottom: $baseline;
     padding-left: $baseline * 1.5;
-    h1 {
+    h1.track_title {
       margin-top: 0;
       margin-bottom: 23px;
       line-height: 36px;
       @include title28();
       color: $track-content-track-text;
     }
-    h3 {
+    h3.track_artist {
       margin-top: -20px;
       margin-bottom: 32px;
       color: $track-content-artist-text;
