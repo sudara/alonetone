@@ -49,6 +49,7 @@ class AccountRequest < ApplicationRecord
   validate :login_is_unique, on: :create
 
   validates :details, length: {
+    on: :create,
     minimum: 40,
     too_short: "must be at least 40 characters: Please link to your music/website or add more info!"
   }
