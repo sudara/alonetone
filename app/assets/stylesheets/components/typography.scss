@@ -67,5 +67,9 @@ h2 {
     border: 0;
     border-bottom: 1px solid $track-content-hr-background;
   }
+  iframe {
+    margin-bottom: $baseline;
+    max-width: 100%;
+  }
 }
 

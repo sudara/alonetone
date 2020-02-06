@@ -115,18 +115,14 @@
     @media #{$one-column} {
       padding: $baseline / 2;
     }
-    iframe {
-      margin-bottom: $baseline;
-      max-width: 100%;
-    }
     .markdown {
       color: $track-content-description-text;
       > * {
         color: inherit;
       }
+      font-size: 16px;
+      line-height: 23px;
       p {
-        font-size: 16px;
-        line-height: 23px;
         margin-bottom: $baseline;
         color: $track-content-description-text;
         img {
