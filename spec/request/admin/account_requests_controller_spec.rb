@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::AssetsController, type: :request do
+RSpec.describe Admin::AccountRequestsController, type: :request do
   before do
     create_user_session(users(:sudara))
   end

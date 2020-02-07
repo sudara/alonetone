@@ -14,7 +14,7 @@ RSpec.describe 'Get An Account', type: :feature, js: true do
     visit '/get_an_account'
     page.fill_in 'Email', with: "someband@hotmail.com"
     page.fill_in 'account_request_login', with: 'someband456'
-    page.fill_in 'account_request_details', with: "This is a story of a very cool band"
+    page.fill_in 'account_request_details', with: "This is a story of a very cool band with 40 characters of story to tell"
     page.choose 'Musician'
     page.click_on 'Get On The List'
 
