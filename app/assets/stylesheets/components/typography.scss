@@ -74,6 +74,10 @@ h2 {
   a {
     color: $accent;
     text-decoration: underline;
+    &:hover {
+      color: $accent;
+      text-decoration: underline;
+    }
   }
 }
 
