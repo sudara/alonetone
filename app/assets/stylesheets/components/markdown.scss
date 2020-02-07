@@ -1,4 +1,30 @@
 .markdown, .thredded--post--content {
+  > * {
+    color: inherit;
+  }
+  p {
+    margin-bottom: $baseline;
+    img {
+      max-width: 100%;
+    }
+  }
+  a {
+    color: $accent;
+    text-decoration: underline!important;
+    &:hover {
+      color: $accent!important;
+      text-decoration: underline!important;
+    }
+  }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
   ul {
     padding-left: 24px;
     li {
@@ -20,32 +46,15 @@
       }
     }
   }
-  h1 {
-    font-size: 28px;
-  }
-  h2 {
-    font-size: 22px;
-  }
-  h3 {
-    font-size: 18px;
-  }
+
   hr {
-    width: 90%;
-    margin: ($baseline * 1.5) auto;
-    text-align: center;
-    border: 0;
-    border-bottom: 1px solid $track-content-hr-background;
+    width: 90%!important;
+    margin: ($baseline * 1.5) auto!important;
+    border: 0!important;
+    border-bottom: 1px solid $track-content-hr-background!important;
   }
   iframe {
     margin-bottom: $baseline;
     max-width: 100%;
-  }
-  a {
-    color: $accent;
-    text-decoration: underline;
-    &:hover {
-      color: $accent;
-      text-decoration: underline;
-    }
   }
 }
