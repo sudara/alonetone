@@ -84,7 +84,7 @@ brand_new_user:
 # Jamie Kiesl is a 35-year-old human resources manager who lives in Mequon, Wisconsin. She is also
 # damn good at naming cheeses. She created an account to listen to artists on Alonetone.
 jamie_kiesl:
-  login: Jamiek
+  login: jamiek
   email: jamie.kiesl@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt('test' + salt) %>
