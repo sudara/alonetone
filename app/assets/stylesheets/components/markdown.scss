@@ -1,0 +1,51 @@
+.markdown, .thredded--post--content {
+  ul {
+    padding-left: 24px;
+    li {
+      list-style-type: disc;
+    }
+  }
+  ol {
+    counter-reset: listNumbering;
+    padding-left: 6px;
+    li {
+      list-style: none;
+      counter-increment: listNumbering;
+      &:before {
+        content: counter(listNumbering) ".";
+        font-variant-numeric: tabular-nums;
+        font-size: 14px;
+        color: inherit;
+        margin-right: 6px;
+      }
+    }
+  }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  hr {
+    width: 90%;
+    margin: ($baseline * 1.5) auto;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid $track-content-hr-background;
+  }
+  iframe {
+    margin-bottom: $baseline;
+    max-width: 100%;
+  }
+  a {
+    color: $accent;
+    text-decoration: underline;
+    &:hover {
+      color: $accent;
+      text-decoration: underline;
+    }
+  }
+}
