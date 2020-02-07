@@ -654,37 +654,6 @@ $thredded-font-size-small: 13px;
           line-height: 1.5rem;
           font-size: 1rem;
           color: $thredded-post-content-text;
-          h1,
-          h2,
-          h3 {
-            margin-bottom: 0;
-          }
-          h2 {
-            margin-top: 2rem;
-            margin-bottom: 0.25rem;
-            line-height: 1.5rem;
-          }
-          ul {
-            padding-left: 24px;
-            li {
-              list-style-type: disc;
-            }
-          }
-          ol {
-            counter-reset: listNumbering;
-            padding-left: 6px;
-            li {
-              list-style: none;
-              counter-increment: listNumbering;
-              &:before {
-                content: counter(listNumbering) ".";
-                font-variant-numeric: tabular-nums;
-                font-size: 14px;
-                color: $body-text;
-                margin-right: 6px;
-              }
-            }
-          }
         }
       }
       .thredded--post-form--wrapper {
