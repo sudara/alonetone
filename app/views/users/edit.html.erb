@@ -5,13 +5,15 @@
     <h1>Edit Profile</h1>
     <div class="edit_profile_separator"></div>
 
+    <%= form_with model: @user do |f| %>
     <div class="edit_profile_top">
       <div class="edit_profile_top_left">
-        <label>Profile Picture</label>
+        <label>PROFILE PICTURE</label>
         <div class="user_avatar">
           <%= user_image(@user, variant: :card_avatar) %>
         </div>
-        <a href="#" class="upload_image">Upload profile image&hellip;</a>
+          <%= f.file_field :cover_image, data: { target: 'playlist-form.fileField', action: 'change->playlist-form#fileChanged' }, style: 'display:none'  %>
+          <%= f.label :cover_image, 'Choose new profile image...', class:"upload_image", data: { target: 'playlist-form.fileLabel' } %>
         <p class="instructions">
           Upload a square photo<br>
           2000px by 2000px for the best results
@@ -19,10 +21,9 @@
       </div>
 
       <div class="edit_profile_top_right">
-        <%= form_with model: @user do |f| %>
-          <label for="display_name">Name</label>
-          <%= f.text_field :display_name %>
-          <%= f.fields_for :profile do |f| %>
+        <label for="display_name">Name</label>
+        <%= f.text_field :display_name %>
+        <%= f.fields_for :profile do |f| %>
           <div class="city_and_country">
             <div>
               <label for="user_bio">City</label>
@@ -35,12 +36,12 @@
           </div>
           <label for="user_bio">Bio</label>
           <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
-          <% end %>
+        <% end %>
         <%= f.submit "Save Bio" %>
         <%= link_to "Cancel", user_home_path(@user) %>
-        <% end %>
       </div>
     </div>
+    <% end %>
 
     <div class="edit_profile_separator"></div>
 
