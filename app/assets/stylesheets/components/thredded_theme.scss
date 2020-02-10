@@ -298,9 +298,6 @@ $thredded-font-size-small: 13px;
                 line-height: 32px;
               }
               &:hover:not(:focus) {
-                &:placeholder-shown {
-                  // cursor: pointer;
-                }
                 &::placeholder {
                   color: $thredded-search-color;
                 }
