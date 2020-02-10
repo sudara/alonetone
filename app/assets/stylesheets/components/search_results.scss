@@ -32,9 +32,6 @@
 	}
 	div.user {
 		position: relative;
-		width: 136px;
-		margin-bottom: 30px;
-		margin-right: 18px;
     text-align: center;
     font-size: 11px;
     padding-bottom: $baseline / 4;
@@ -44,11 +41,11 @@
     box-shadow: 0px 1.5px 2.75px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 		img.cover {
-			width: 125px;
-			height: 125px;
+			width: 100%;
+			// height: 125px;
 		}
 		.name {
-			margin-top: 4px;
+			margin-top: 8px;
 			font-size: 13px;
 			display: block;
 			&:hover {
@@ -56,4 +53,72 @@
 			}
 		}
 	}
+}
+
+
+$results-gutter-width: 18px;
+$results-three-column-cutoff: "only screen and (max-width: 2032px)";
+$results-two-column-cutoff: "only screen and (max-width: 550px)";
+
+ul.results_responsive_grid {
+  margin-bottom: 0;
+  li {
+    margin-bottom: $results-gutter-width;
+    width: calc(25% - 20px);
+    margin-right: $results-gutter-width;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+    > a:first-child {
+      padding-top: 100%;
+      box-sizing: border-box;
+      position: relative;
+      img, svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  @media #{$results-three-column-cutoff} {
+    li {
+      width: calc(33.33333% - 17.77px);
+      &:nth-child(1n),
+      &:nth-child(2n),
+      &:nth-child(3n) {
+        display: block;
+      }
+      &:nth-child(3n) {
+        margin-right: 0 !important;
+      }
+      &:nth-child(4n) {
+        margin-right: $results-gutter-width;
+      }
+    }
+  }
+  @media #{$results-two-column-cutoff} {
+    li {
+      display: block !important;
+      width: calc(50% - 13.33px);
+      margin-bottom: $results-gutter-width!important;
+      margin-right: $results-gutter-width !important;
+      &:nth-child(3n) {
+        margin-right: $results-gutter-width !important;
+      }
+      &:nth-child(2n) {
+        margin-right: 0 !important;
+      }
+      img {
+        width: 100%;
+      }
+      svg {
+        width: 100%;
+      }
+    }
+  }
+  @media #{$mobile} {
+    width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
