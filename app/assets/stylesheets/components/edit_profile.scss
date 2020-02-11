@@ -38,12 +38,12 @@
       label {
         margin-bottom: 6px !important;
         font-family: $medium-sans-font;
-        font-size: 14px;
+        font-size: 12px;
         display: block;
-        margin: 2px 0;
+        margin-top: 4px;
         text-align: left;
         line-height: 1.2;
-        color: #949797;
+        color: $grey500;
       }
       .user_avatar {
         border: 1px dashed $grey300;
