@@ -108,16 +108,23 @@
         margin-bottom: $baseline * (8/3);
         width: 100%;
       }
-      input[type="submit"],
       a {
-        @include default-button("primary");
         float: right;
         width: 160px;
-        &:first-of-type {
-          margin-left: 20px;
+        @include default-button("primary");
+        background-color: $grey100;
+        color: $grey900;
+        &:hover {
+          background-color: $grey200;
+        }
+        &:active {
+          background-color: $grey500;
         }
       }
       input[type="submit"] {
+        @include default-button("primary");
+        float: right;
+        width: 160px;
         margin-left: 20px;
         margin-bottom: 0;
       }
