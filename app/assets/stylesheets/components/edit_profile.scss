@@ -321,6 +321,12 @@
               bottom: 3px;
               right: 3px;
             }
+            .toggle_label_on {
+              display: block;
+            }
+            .toggle_label_off {
+              display: none;
+            }
           }
           &.toggle_off {
             background-color: $grey400;
@@ -331,6 +337,12 @@
             .toggle_label {
               padding-right: 7px;
               text-align: right;
+            }
+            .toggle_label_on {
+              display: none;
+            }
+            .toggle_label_off {
+              display: block;
             }
           }
         }
