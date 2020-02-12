@@ -7,7 +7,7 @@ footer#site_footer {
   width: 100%;
   padding-top: $baseline;
   h3 {
-    color: $box-h2-text;
+    color: $theme-accent;
     line-height: 1.2;
     font-size: 12px;
     font-family: $medium-sans-font;
@@ -49,7 +49,7 @@ footer#site_footer {
         margin-top: 6px;
         font-family: $sans-font;
         font-weight: bold;
-        color: $box-h2-text;
+        color: $theme-accent;
         display: block;
         float: right;
         font-size: 12px;
@@ -148,7 +148,7 @@ footer#site_footer {
           margin-bottom: 16px;
         }
         .footer_column_header {
-          color: $box-h2-text;
+          color: $theme-accent;
           font-size: 14px;
           line-height: 1.2;
           margin-bottom: 10px;
