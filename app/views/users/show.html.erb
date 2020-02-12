@@ -44,7 +44,7 @@
             </span>
           <% end %>
         </div>
-      <% elsif @playlists.count > 4  %>
+      <% elsif @playlists.count > 4 %>
         <div class="below_box">
           <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
             <span>view all &nbsp;
@@ -54,6 +54,8 @@
             </span>
           <% end %>
         </div>
+      <% else  %>
+        <div class="below_box"></div>
       <% end %>
     </div>
   <% end %>
