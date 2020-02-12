@@ -281,7 +281,7 @@ $thredded-font-size-small: 13px;
               text-align: left;
               height: 32px;
               padding: 0 0 0 8px!important;
-              line-height: 32px!important;
+              line-height: normal!important;
               &:hover,
               &:focus {
                 cursor: text;
@@ -289,17 +289,15 @@ $thredded-font-size-small: 13px;
               }
               &::placeholder {
                 color: $thredded-search-color;
-
                 height: inherit;
                 line-height: inherit;
-                // Firefox applies default opacity of 0.54, while all the other browsers use 1.
-                // See https://bugzilla.mozilla.org/show_bug.cgi?id=556145
                 opacity: 1;
               }
+              &::-moz-placeholder {
+                height: 32px;
+                line-height: 32px;
+              }
               &:hover:not(:focus) {
-                &:placeholder-shown {
-                  // cursor: pointer;
-                }
                 &::placeholder {
                   color: $thredded-search-color;
                 }
