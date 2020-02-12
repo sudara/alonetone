@@ -26,8 +26,9 @@
   .edit_profile_top {
     padding: $baseline * 1.5;
     display: flex;
+    box-sizing: border-box;
     @media only screen and (max-width: 850px) {
-      flex-wrap: wrap;
+      display: block;
     }
     @media #{$mobile} {
       padding: $baseline;
@@ -96,6 +97,9 @@
           &:last-child {
             flex: 1;
             margin-left: 20px;
+            select {
+              width: 100%;
+            }
             @media #{$one-column} {
               width: 100%;
               flex: auto;
@@ -115,6 +119,9 @@
         @include default-button("primary");
         background-color: $grey100;
         color: $grey900;
+        @media #{$one-column} {
+          width: auto;
+        }
         &:hover {
           background-color: $grey200;
         }
@@ -128,6 +135,9 @@
         width: 160px;
         margin-left: 20px;
         margin-bottom: 0;
+        @media #{$one-column} {
+          width: auto;
+        }
       }
     }
   }
