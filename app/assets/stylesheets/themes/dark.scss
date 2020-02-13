@@ -2,6 +2,7 @@
 
 // sitewide
 $accent: $orangetone;
+$theme-accent: $orange300;
 
 // variables.scss
 $default-button-text: $black;
@@ -15,7 +16,6 @@ $body-background: $grey1200;
 
 $box-background: $grey1100;
 
-$box-h2-text: $orange300;
 $box-h2-bottom-border: $grey1000;
 
 $back-to-text: $grey600;
@@ -239,7 +239,7 @@ $edit-playlist-private-label-checkbox: $grey500;
 
 $edit-playlist-column-instructions-text: $grey900;
 
-$edit-playlist-info-bottom-border: $grey50;
+$edit-playlist-info-bottom-border: $grey1000;
 
 $edit-playlist-column-header-border: $grey100;
 $edit-playlist-column-header-text: $grey800;
