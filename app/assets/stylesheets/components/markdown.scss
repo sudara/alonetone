@@ -25,6 +25,13 @@
   h3 {
     font-size: 18px;
   }
+  pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding-left: 4%;
+    padding-right: 4%;
+  }
   ul {
     padding-left: 24px;
     li {
