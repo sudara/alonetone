@@ -32,6 +32,11 @@
     padding-left: 4%;
     padding-right: 4%;
   }
+  blockquote {
+    border-left: 4px solid $accent;
+    margin:0 10px;
+    padding: 0 10px;
+  }
   ul {
     padding-left: 24px;
     li {
