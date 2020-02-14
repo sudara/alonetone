@@ -55,8 +55,14 @@ export default function PlayAnimation(mainSVG) {
       scaleY: 0,
     })
 
-    spinballTl = new TimelineMax({}).timeScale(1);
     mainTl = new TimelineMax({ paused: true }).timeScale(2.2);
+    
+    spinballTl = new TimelineMax({}).timeScale(1);
+    spinballTl.to(spinballGroup, 2, {
+      rotation: '+=360',
+      ease: Linear.easeNone,
+      repeat: -1,
+    })
 
     dottyRotationTl = new TimelineMax({}).timeScale(1);
     dottyRotationTl.to(dotty, 4, {
@@ -101,11 +107,6 @@ export default function PlayAnimation(mainSVG) {
         ease: Elastic.easeOut.config(0.3, 0.9),
       }, '-=2')
       .addLabel('setPause')
-    spinballTl.to(spinballGroup, 2, {
-      rotation: '+=360',
-      ease: Linear.easeNone,
-      repeat: -1,
-    })
   }
 
   this.setPlay = function () {
