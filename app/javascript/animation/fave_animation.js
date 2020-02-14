@@ -1,7 +1,7 @@
-import { TweenLite, AttrPlugin, Linear, Elastic, Power1, Power2, Power3, Sine, CSSPlugin, TimelineMax } from 'gsap/all'
-import MorphSVGPlugin from './MorphSVGPlugin'
+import { gsap } from 'gsap'
+import { MorphSVGPlugin } from './MorphSVGPlugin'
 
-const plugins = [CSSPlugin, AttrPlugin, MorphSVGPlugin, Linear, Elastic, Power1, Power2, Power3, Sine]
+gsap.registerPlugin(MorphSVGPlugin)
 
 export default function FaveAnimation(myDiv) {
     var mainTl;
@@ -26,31 +26,31 @@ export default function FaveAnimation(myDiv) {
 
     this.init = function() {
 
-        TweenLite.set([outline, heart], {
+        gsap.set([outline, heart], {
             // transformOrigin: '50% 50%',
             svgOrigin: "300 300"
         })
 
-        allPopTl = new TimelineMax().timeScale(1);
+        allPopTl = gsap.timeline().timeScale(1);
 
-        redPop2Tl = new TimelineMax({}).timeScale(1);
-        redPop3Tl = new TimelineMax({}).timeScale(1);
-        bluePopTl = new TimelineMax({}).timeScale(1);
-        yellowPopTl = new TimelineMax({}).timeScale(1);
-        greenPopTl = new TimelineMax({}).timeScale(1);
-        purplePopTl = new TimelineMax({}).timeScale(1);
-        redPopTl = new TimelineMax({}).timeScale(1);
-        heartTl = new TimelineMax({}).timeScale(1);
-        mainTl = new TimelineMax({ paused: true }).timeScale(1.6);
+        redPop2Tl = gsap.timeline({}).timeScale(1);
+        redPop3Tl = gsap.timeline({}).timeScale(1);
+        bluePopTl = gsap.timeline({}).timeScale(1);
+        yellowPopTl = gsap.timeline({}).timeScale(1);
+        greenPopTl = gsap.timeline({}).timeScale(1);
+        purplePopTl = gsap.timeline({}).timeScale(1);
+        redPopTl = gsap.timeline({}).timeScale(1);
+        heartTl = gsap.timeline({}).timeScale(1);
+        mainTl = gsap.timeline({ paused: true }).timeScale(1.6);
 
         mainTl.addLabel('clickFave')
             .to(outline, 0.2, {
                 scale: 0.9,
-                ease: Linear.easeNone
+                ease:  'none'
             })
             .to(outline, 0.2, {
                 scale: 1,
-                ease: Linear.easeNone
+                ease:  'none'
             })
             .set(outline, {
                 autoAlpha: 0,
@@ -59,7 +59,7 @@ export default function FaveAnimation(myDiv) {
             .from(heart, 1, {
                 scale: 0,
                 fill: '#f638a8',
-                ease: Elastic.easeOut.config(1.5, 0.7)
+                ease: 'elastic(1.5, 0.7)',
             }, '-=0.34')
 
             .addLabel('setFave')
@@ -77,7 +77,7 @@ export default function FaveAnimation(myDiv) {
             }, '-=0.4')
             .to(outline, 1, {
                 scale: 1,
-                ease: Elastic.easeOut.config(1.5, 0.7)
+                ease: 'elastic(1.5, 0.7)',
             }, '-=0.3')
             .addLabel('setUnfave')
 
@@ -90,17 +90,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(purplePop, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(purplePop, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ')
 
         redPopTl.fromTo(redPop, 0.4, {
@@ -111,17 +111,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(redPop, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(redPop, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ')
 
 
@@ -133,17 +133,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(greenPop, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(greenPop, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ')
 
         yellowPopTl.fromTo(yellowPop, 0.4, {
@@ -154,17 +154,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(yellowPop, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(yellowPop, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ')
 
         bluePopTl.fromTo(bluePop, 0.4, {
@@ -175,17 +175,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(bluePop, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(bluePop, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ')
 
         redPop2Tl.fromTo(redPop2, 0.4, {
@@ -196,17 +196,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(redPop2, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(redPop2, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ')
 
         redPop3Tl.fromTo(redPop3, 0.4, {
@@ -217,17 +217,17 @@ export default function FaveAnimation(myDiv) {
                 attr: {
                     r: 100
                 },
-                ease: Power1.easeOut
+                ease:  'power1.out'
             })
             .from(redPop3, 0.6, {
                 strokeWidth: 23,
-                ease: Power3.easeInOut
+                ease:  'power3.inOut'
             }, '-=0.4')
             .to(redPop3, 0.2, {
                 attr: {
                     r: 110
                 },
-                ease: Power3.easeOut
+                ease:  'power3.out'
             }, '-=0.2 ');
 
         allPopTl.add(redPopTl)

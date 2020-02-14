@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus'
+import { gsap } from 'gsap'
 import LargePlayAnimation from '../animation/large_play_animation'
 
 export default class extends Controller {
@@ -11,25 +12,30 @@ export default class extends Controller {
     this.animation.init()
     this.animation.play()
     this.setupPlayhead()
-    this.setAnimationState()
+    console.log('initializing....')
   }
 
   setAnimationState() {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       // instantiated while an mp3 is still loading
       this.animation.showLoading()
+      console.log('still loading')
     } else if (this.delegate && this.delegate.isPlaying) {
       // ...while in the middle of playing
+      console.log('in the middle of playing yo')
       this.animation.showLoading()
       this.animation.showPause()
       this.startPlayhead()
-    } else if (this.delegate && this.delegate.positionFromStart(1)) {
+    } else if (this.delegate && this.delegate.positionFromStart(0.1)) {
       // ...after playing once but now paused
+      console.log("yes, this is the problem")
       this.animation.setPlay()
       this.showPlayhead()
       this.update(this.delegate.percentPlayed())
     } else {
       // ....loaded but not playing
+      console.log('this is the else state')
+      console.log(this.delegate, this.delegate.positionFromStart(0.1))
       this.animation.setPlay()
     }
   }
@@ -89,14 +95,14 @@ export default class extends Controller {
   }
 
   setupPlayhead() {
-    this.timeline = new TimelineMax({ paused: true, duration: 1 })
+    this.timeline = gsap.timeline({ paused: true, duration: 1 })
     this.playheadAnimation = this.timeline.to(this.progressContainerInnerTarget, 1, {
       left: '100%',
-      ease: Linear.easeNone,
+      ease:  'none',
     }, 0)
     this.waveformAnimation = this.timeline.to('#waveform_reveal', 1, {
       attr: { x: '0' },
-      ease: Linear.easeNone,
+      ease:  'none',
     }, 0)
   }
 

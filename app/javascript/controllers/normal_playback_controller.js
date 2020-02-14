@@ -15,7 +15,7 @@ export default class extends PlaybackController {
 
   whilePlayingCallback() {
     if (!this.loaded) {
-      this.animation.showPause()
+      this.animation.pauseAnimation()
       this.loaded = true
     }
     this.updateSeekBarPlayed()
@@ -31,11 +31,11 @@ export default class extends PlaybackController {
   }
 
   pauseCallback() {
-    this.animation.setPlay()
+    this.animation.showPlayButton()
   }
 
   stopCallback() {
-    this.animation.setPlay()
+    this.animation.showPlayButton()
   }
 
   toggleDetails(e) {
@@ -81,7 +81,7 @@ export default class extends PlaybackController {
     if (!this.loaded) {
       this.playButtonTarget.style.display = 'none' // hide the dummy play button
       this.animateLoading()
-    } else this.animation.setPause()
+    } else this.animation.showPauseButton()
   }
 
   // Print our own copy of #playAnimationSVG to animate freely as we like
@@ -98,8 +98,7 @@ export default class extends PlaybackController {
 
   animateLoading() {
     this.animation.init()
-    this.animation.setPlay()
-    this.animation.showLoading()
+    this.animation.loadingAnimation()
   }
 
   // With SoundManager we used to animate this width to display
