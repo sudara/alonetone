@@ -23,7 +23,7 @@ export default class extends PlaybackController {
   }
 
   playCallback() {
-    this.showAnimation()
+    this.showLoadingAnimationOrPauseButton()
     this.openDetails()
     this.updateSeekBarLoaded()
     this.registeredListen = true
@@ -76,11 +76,11 @@ export default class extends PlaybackController {
     }
   }
 
-  showAnimation() {
+  showLoadingAnimationOrPauseButton() {
     this.cloneAnimationIfNeeded()
     if (!this.loaded) {
       this.playButtonTarget.style.display = 'none' // hide the dummy play button
-      this.animateLoading()
+      this.animation.loadingAnimation()
     } else this.animation.showPauseButton()
   }
 
@@ -88,17 +88,15 @@ export default class extends PlaybackController {
   // Until this point, the play button has been a placeholder icon SVG
   // After this point, the play button is an animatable SVG
   cloneAnimationIfNeeded() {
+    console.log(this.animation)
     if (this.animation === undefined) {
       const animationElement = document.getElementById('playAnimationSVG').cloneNode(true);
-      animationElement.id = this.data.get('id')
+      animationElement.id = ''
+      animationElement.classList.add('playAnimationSVG')
       this.playTarget.firstElementChild.append(animationElement)
       this.animation = new PlayAnimation(animationElement)
+      this.animation.init()
     }
-  }
-
-  animateLoading() {
-    this.animation.init()
-    this.animation.loadingAnimation()
   }
 
   // With SoundManager we used to animate this width to display
@@ -130,6 +128,11 @@ export default class extends PlaybackController {
   disconnect() {
     if (this.sound.playing()) {
       this.sound.pause()
+    }
+    if (this.animation !== undefined) {
+      this.playTarget.getElementsByClassName('playAnimationSVG')[0].remove()
+      this.playButtonTarget.style.display = 'block' // hide the dummy play button
+
     }
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')

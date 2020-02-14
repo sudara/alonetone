@@ -39,18 +39,6 @@ export default class PlayAnimation {
       scaleY: 0,
     })
 
-    this.spinballTl.to(this.spinballGroup, 2, {
-      rotation: '+=360',
-      ease: 'none',
-      repeat: -1,
-    })
-
-    this.dottyRotationTl.to(this.dotty, 4, {
-      rotation: '-=360',
-      repeat: -1,
-      ease: 'none',
-    })
-
     this.tl.addLabel('playButton')
       .addLabel('loadingAnimation')
       .to(this.icon, 1, {
@@ -98,6 +86,16 @@ export default class PlayAnimation {
   }
 
   loadingAnimation() {
+    this.spinballTl.to(this.spinballGroup, 2, {
+      rotation: '+=360',
+      ease: 'none',
+      repeat: -1,
+    })
+    this.dottyRotationTl.to(this.dotty, 4, {
+      rotation: '-=360',
+      repeat: -1,
+      ease: 'none',
+    })
     this.tl.play('loadingAnimation')
   }
 
