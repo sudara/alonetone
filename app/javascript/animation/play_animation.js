@@ -99,12 +99,12 @@ export default class PlayAnimation {
 
   loadingAnimation() {
     this.tl.play('loadingAnimation')
-    this.dottyRotationTl.play()
   }
 
   pauseAnimation() {
     this.tl.play('pauseAnimation')
     this.dottyRotationTl.pause()
+    this.spinballTl.pause()
   }
 
   showPlayButton() {
