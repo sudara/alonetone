@@ -24,7 +24,6 @@ export default function LargePlayAnimation() {
     icon = select('.icon'),
     allPauseLines = selectAll('.pauseGroup line')
 
-
   this.init = function() {
 
     this.reset()
@@ -39,7 +38,7 @@ export default function LargePlayAnimation() {
       ease:Linear.easeNone
     })
 
-    // eyes timline
+    // eyes timeline
 
     eyesTl.to(pauseLoopGroup, 0.4, {
       scaleY:0.12,
@@ -69,7 +68,6 @@ export default function LargePlayAnimation() {
       scaleY:0.01,
       repeat:1,
       yoyo:true,
-      //repeatDelay:0.41,
       ease:Sine.easeIn,
       delay:2
     })
@@ -77,71 +75,69 @@ export default function LargePlayAnimation() {
       scaleY:0.01,
       repeat:3,
       yoyo:true,
-      //repeatDelay:0.41,
       ease:Sine.easeIn,
       delay:4
     })
     .to(pauseLoopGroup, 0.16, {
       scaleY:0,
-      //repeatDelay:0.41,
       ease:Sine.easeIn,
       delay:1
     })
 
-   // main timeline
+    // main timeline
 
-    mainTl.addLabel('setPlay')
+    mainTl
+      .addLabel('setPlay')
       .addLabel('showLoading')
       .to(dotty, 1, {
-      strokeWidth:128,
-      scale:1,
+        strokeWidth:128,
+        scale:1,
+        ease:Power1.easeInOut
+      })
+      .to(icon, 1, {
+        scale:0.4,
+        ease:Power1.easeInOut
+      },'-=1')
+      .from(centerCircle, 1, {
+        scale:0.01,
+        ease:Power1.easeInOut
+      },'-=1')
+      .to(outline, 1, {
+        strokeWidth:30,
+        scale:0.97,
+        stroke: '#000',
+        ease:Power1.easeInOut
+      },'-=1')
+      .to(pauseContainer, 1, {
+        scaleY:1,
+        ease:Power1.easeInOut
+      })
+      .addPause()
+      .addLabel('showPause')
+      .to(pauseContainer, 0.5, {
+        scaleY:0
+      })
+      .to(centerCircle, 1, {
+        attr:{
+          r:245
+        },
       ease:Power1.easeInOut
-    })
-    .to(icon, 1, {
-      scale:0.4,
-      ease:Power1.easeInOut
-    },'-=1')
-    .from(centerCircle, 1, {
-      scale:0.01,
-      ease:Power1.easeInOut
-    },'-=1')
-    .to(outline, 1, {
-      strokeWidth:30,
-      scale:0.97,
-      stroke: '#000',
-      ease:Power1.easeInOut
-    },'-=1')
-    .to(pauseContainer, 1, {
-      scaleY:1,
-      ease:Power1.easeInOut
-    })
-    .addPause()
-    .addLabel('showPause')
-    .to(pauseContainer, 0.5, {
-      scaleY:0
-    })
-    .to(centerCircle, 1, {
-      attr:{
-        r:245
-      },
-    ease:Power1.easeInOut
-    },'-=0.5')
-    .to(dotty, 1.2, {
-      strokeWidth:0,
-      scale:1,
-      ease:Power1.easeInOut
-    },'-=1')
-    .to(pauseGroup, 1, {
-      scaleY:1,
-      ease:Power1.easeInOut
-      //ease:Elastic.easeOut.config(0.95,0.3)
-    },'-=1.2')
-    .staggerTo(allPauseLines, 1, {
-      cycle:{
-        attr:[{x1:235, x2:235}, {x1:365, x2:365}]
-      }
-    },0, '-=1')
-    .addLabel('setPause')
+      },'-=0.5')
+      .to(dotty, 1.2, {
+        strokeWidth:0,
+        scale:1,
+        ease:Power1.easeInOut
+      },'-=1')
+      .to(pauseGroup, 1, {
+        scaleY:1,
+        ease:Power1.easeInOut
+      },'-=1.2')
+      .staggerTo(allPauseLines, 1, {
+        cycle:{
+          attr:[{x1:235, x2:235}, {x1:365, x2:365}]
+        }
+      },0, '-=1')
+      .addLabel('setPause')
 
   }
 
