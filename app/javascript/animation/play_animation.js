@@ -35,7 +35,6 @@ export default function PlayAnimation(mainSVG) {
 
     outlinePath = 'M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z';
 
-
     TweenLite.set(mainSVG, {
       visibility: 'visible'
     })
@@ -96,7 +95,7 @@ export default function PlayAnimation(mainSVG) {
         ease: Elastic.easeOut.config(0.3, 0.9),
       })
       .to(spinballGroup, 0.2, {
-        // autoAlpha:0
+        autoAlpha:0
       }, '-=1')
       .to(pauseGroup, 2, {
         scaleY: 0.7,
