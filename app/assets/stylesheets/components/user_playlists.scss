@@ -1,8 +1,4 @@
 .user_playlists {
-  @media #{$mobile} {
-    padding-left: 0;
-    padding-right: 0;
-  }
   h1 {
     @media #{$mobile} {
       padding-left: 2.5%;

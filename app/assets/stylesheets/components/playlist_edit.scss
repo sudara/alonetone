@@ -1,8 +1,4 @@
-.page_container.edit_playlist_info_container {
-  @media #{$mobile} {
-    padding-left: 0;
-    padding-right: 0;
-  }
+.edit_playlist_info_container {
   #edit_playlist_info {
     padding: 0;
     margin-left: auto;

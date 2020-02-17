@@ -3,10 +3,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  @media #{$mobile} {
-    padding-left: 0;
-    padding-right: 0;
-  }
   #large_users_grid {
     display: flex;
     flex-wrap: wrap;
