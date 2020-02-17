@@ -10,29 +10,24 @@ export default class extends Controller {
     this.percentPlayed = 0.0
     this.setDelegate()
     this.setupPlayhead()
-    console.log('initializing....')
+    this.setAnimationState()
   }
 
   setAnimationState() {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       // instantiated while an mp3 is still loading
       this.animation.loadingAnimation()
-      console.log('still loading')
     } else if (this.delegate && this.delegate.isPlaying) {
       // ...while in the middle of playing
-      console.log('in the middle of playing yo')
       this.animation.pausingAnimation()
       this.startPlayhead()
     } else if (this.delegate && this.delegate.positionFromStart(0.1)) {
       // ...after playing once but now paused
-      console.log("yes, this is the problem")
       this.animation.showPlayButton()
       this.showPlayhead()
       this.update(this.delegate.percentPlayed())
     } else {
       // ....loaded but not playing
-      console.log('this is the else state')
-      console.log(this.delegate, this.delegate.positionFromStart(0.1))
       this.animation.showPlayButton()
     }
   }
@@ -80,7 +75,7 @@ export default class extends Controller {
     this.percentPlayed = this.delegate.percentPlayed()
     this.timeTarget.innerHTML = this.delegate.time
     if (Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02) {
-      console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+      // console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
       this.timeline.progress(this.percentPlayed)
     }
   }

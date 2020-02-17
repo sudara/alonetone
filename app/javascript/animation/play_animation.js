@@ -2,9 +2,11 @@
 
 There are 3 things that make this svg/animation tricky to implement.
 
-1. We want the resting state of the svg to be a play button but they way it's built requires init() to set scale properly (css doesn't work).
-2. init() is not idempotent, it can only be called once
-3. More than one copy of the svg cannot occur on the page at one time without changing the mask id.
+1. We want the resting state of the svg to be a play button, but certain elements have to be hidden for it not to be a cluttered ball of junk. On this small play button, we actually only swap in the animation svg once play is pressed. On the large play button we hide the problematic svg elements until the animation is initialized in js.
+
+2. Attaching these animations to an svg element is not idempotent, as everything is scaled as it is first attached. This becomes problematic because if we navigate away from a page and then come back via turbolinks, the svg has been modified in the DOM, but the animation then modifies and scales it up again.
+
+3. More than one copy of the svg cannot occur on the page at one time without changing the mask ids. This seems to be a general limitation of masking with svg.
 
 */
 
