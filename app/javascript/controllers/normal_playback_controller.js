@@ -15,7 +15,7 @@ export default class extends PlaybackController {
 
   whilePlayingCallback() {
     if (!this.loaded) {
-      this.animation.pauseAnimation()
+      this.animation.pausingAnimation()
       this.loaded = true
     }
     this.updateSeekBarPlayed()
@@ -80,7 +80,7 @@ export default class extends PlaybackController {
     this.setupAnimation()
     if (!this.loaded) {
       this.animation.loadingAnimation()
-    } else this.animation.pauseAnimation()
+    } else this.animation.pausingAnimation()
   }
 
   // We have one single #playAnimationSVG element to move around and animate

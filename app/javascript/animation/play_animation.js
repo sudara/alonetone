@@ -88,7 +88,7 @@ export default class PlayAnimation {
         ease: 'power1.inOut',
       }, '-=1')
       .addPause()
-      .addLabel('pauseAnimation')
+      .addLabel('pausingAnimation')
       .to(this.spinballGroup, 1, {
         scale: 0,
         ease: 'elastic(0.3, 0.9)',
@@ -129,8 +129,8 @@ export default class PlayAnimation {
     this.tl.play('loadingAnimation')
   }
 
-  pauseAnimation() {
-    this.tl.play('pauseAnimation')
+  pausingAnimation() {
+    this.tl.play('pausingAnimation')
     this.dottyRotationTl.pause()
     this.spinballTl.pause()
   }

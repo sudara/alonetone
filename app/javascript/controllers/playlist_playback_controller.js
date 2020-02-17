@@ -80,6 +80,7 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
+      // Trigger the transition from loading to playing
       this.loaded = true
       this.bigPlay.play()
     }

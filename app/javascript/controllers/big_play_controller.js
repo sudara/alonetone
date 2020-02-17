@@ -9,8 +9,6 @@ export default class extends Controller {
     this.animation = new LargePlayAnimation()
     this.percentPlayed = 0.0
     this.setDelegate()
-    this.animation.init()
-    this.animation.play()
     this.setupPlayhead()
     console.log('initializing....')
   }
@@ -18,25 +16,24 @@ export default class extends Controller {
   setAnimationState() {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       // instantiated while an mp3 is still loading
-      this.animation.showLoading()
+      this.animation.loadingAnimation()
       console.log('still loading')
     } else if (this.delegate && this.delegate.isPlaying) {
       // ...while in the middle of playing
       console.log('in the middle of playing yo')
-      this.animation.showLoading()
-      this.animation.showPause()
+      this.animation.pausingAnimation()
       this.startPlayhead()
     } else if (this.delegate && this.delegate.positionFromStart(0.1)) {
       // ...after playing once but now paused
       console.log("yes, this is the problem")
-      this.animation.setPlay()
+      this.animation.showPlayButton()
       this.showPlayhead()
       this.update(this.delegate.percentPlayed())
     } else {
       // ....loaded but not playing
       console.log('this is the else state')
       console.log(this.delegate, this.delegate.positionFromStart(0.1))
-      this.animation.setPlay()
+      this.animation.showPlayButton()
     }
   }
 
@@ -51,13 +48,13 @@ export default class extends Controller {
 
   // called from whileLoading()
   play() {
-    this.animation.showPause()
+    this.animation.showPauseButton()
     this.startPlayhead()
   }
 
   pause() {
     this.timeline.pause()
-    this.animation.setPlay()
+    this.animation.showPlayButton()
   }
 
   togglePlay(e) {
@@ -89,8 +86,7 @@ export default class extends Controller {
   }
 
   stop() {
-    this.animation.reset()
-    this.animation.setPlay()
+    this.animation.showPlayButton()
     this.playheadAnimation.stop()
   }
 
@@ -117,5 +113,9 @@ export default class extends Controller {
     if (this.timeline.duration() === 1) {
       this.timeline.duration(this.delegate.duration)
     }
+  }
+
+  disconnect() {
+    this.animation.reset()
   }
 }
