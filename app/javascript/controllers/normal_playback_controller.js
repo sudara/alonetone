@@ -77,25 +77,22 @@ export default class extends PlaybackController {
   }
 
   showLoadingAnimationOrPauseButton() {
-    this.cloneAnimationIfNeeded()
+    this.setupAnimation()
     if (!this.loaded) {
-      this.playButtonTarget.style.display = 'none' // hide the dummy play button
       this.animation.loadingAnimation()
-    } else this.animation.showPauseButton()
+    } else this.animation.pauseAnimation()
   }
 
-  // Print our own copy of #playAnimationSVG to animate freely as we like
-  // Until this point, the play button has been a placeholder icon SVG
-  // After this point, the play button is an animatable SVG
-  cloneAnimationIfNeeded() {
-    console.log(this.animation)
-    if (this.animation === undefined) {
-      const animationElement = document.getElementById('playAnimationSVG').cloneNode(true);
-      animationElement.id = ''
-      animationElement.classList.add('playAnimationSVG')
-      this.playTarget.firstElementChild.append(animationElement)
-      this.animation = new PlayAnimation(animationElement)
-      this.animation.init()
+  // We have one single #playAnimationSVG element to move around and animate
+  // Until this point, our play button has been a placeholder icon SVG
+  // After this point, our play button is an animatable SVG
+  // (Until play is pressed elsewhere)
+  //
+  // Note: Because our svg has a mask with an id, we can't have multiple copies of it in the DOM
+  // Without refactoring how the svg and animation work
+  setupAnimation() {
+    if (!this.animation) {
+      this.animation = new PlayAnimation(this.playButtonTarget)
     }
   }
 
@@ -124,15 +121,11 @@ export default class extends PlaybackController {
     this.seekBarLoadedTarget.style.left = `${offx}px`
   }
 
-  // turbolinks will cache this page, so here's our chance to reset things to normal
+  // turbolinks caches pages, so let's make sure things are sane when we return
   disconnect() {
-    if (this.sound.playing()) {
-      this.sound.pause()
-    }
-    if (this.animation !== undefined) {
-      this.playTarget.getElementsByClassName('playAnimationSVG')[0].remove()
-      this.playButtonTarget.style.display = 'block' // hide the dummy play button
-
+    super.disconnect()
+    if (this.animation) {
+      this.animation.reset()
     }
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')

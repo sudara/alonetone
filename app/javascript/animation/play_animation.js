@@ -1,11 +1,22 @@
+/*
+
+There are 3 things that make this svg/animation tricky to implement.
+
+1. We want the resting state of the svg to be a play button but they way it's built requires init() to set scale properly (css doesn't work).
+2. init() is not idempotent, it can only be called once
+3. More than one copy of the svg cannot occur on the page at one time without changing the mask id.
+
+*/
+
 import { gsap } from 'gsap'
 import { MorphSVGPlugin } from './MorphSVGPlugin'
 
 gsap.registerPlugin(MorphSVGPlugin)
 
 export default class PlayAnimation {
-  constructor(mainSVG) {
-    this.mainSVG = mainSVG
+  constructor(elementToReplace) {
+    this.cloneSVGFrom(document.querySelector('#playAnimationSVG'))
+    this.replaceElementWithClonedSVG(elementToReplace)
 
     this.pauseGroup = this.select('.pauseGroup')
     this.spinballGroup = this.select('.spinballGroup')
@@ -14,32 +25,51 @@ export default class PlayAnimation {
     this.icon = this.select('.icon')
     this.outlinePath = 'M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z';
 
+
+    this.setupTimelines()
+  }
+
+  // The svg used in this animation contains a mask.
+  // Masks have to be referenced by id.
+  // This makes it impossible to have multiple of these svgs
+  // on one page without explicitly changing the id.
+  // This forces us to "just in time" clone the svg before animating it
+  cloneSVGFrom(mainSVG) {
+    this.svg = mainSVG.cloneNode(true)
+    this.svg.id = ''
+    const mask = this.svg.querySelector('mask')
+    mask.id = Math.random().toString(36).substr(2, 9)
+    const iconGroup = this.svg.querySelector('.iconGroup')
+    iconGroup.setAttribute('mask', `url(#${mask.id})`)
+  }
+
+  replaceElementWithClonedSVG(elementToReplace) {
+    this.oldElement = elementToReplace.cloneNode(true)
+    elementToReplace.parentNode.replaceChild(this.svg, elementToReplace)
+  }
+
+  replaceClonedSVGWithOldElement() {
+    this.svg.parentNode.replaceChild(this.oldElement, this.svg)
+  }
+
+  setupTimelines() {
     this.tl = gsap.timeline({ paused: true }).timeScale(2.2);
     this.spinballTl = gsap.timeline().timeScale(1);
     this.dottyRotationTl = gsap.timeline().timeScale(1);
-  }
-
-  init() {
-    gsap.set(this.mainSVG, {
-      visibility: 'visible',
-    })
-
-    gsap.set(this.dotty, {
-      transformOrigin: '50% 50%',
-      scale: 1.3,
-    })
-
-    gsap.set(this.spinballGroup, {
-      transformOrigin: '50% 50%',
-      scale: 0,
-    })
-
-    gsap.set(this.pauseGroup, {
-      transformOrigin: '50% 50%',
-      scaleY: 0,
-    })
-
-    this.tl.addLabel('playButton')
+    this.tl
+      .set(this.dotty, {
+        transformOrigin: 'center center',
+        scale: 1.3,
+      })
+      .set(this.spinballGroup, {
+        transformOrigin: 'center center',
+        scale: 0,
+      })
+      .set(this.pauseGroup, {
+        transformOrigin: 'center center',
+        scaleY: 0,
+      })
+      .addLabel('playButton') // starting state
       .addLabel('loadingAnimation')
       .to(this.icon, 1, {
         morphSVG: { shape: this.outlinePath, shapeIndex: 'auto' },
@@ -78,11 +108,11 @@ export default class PlayAnimation {
   }
 
   select(s) {
-    return this.mainSVG.querySelector(s)
+    return this.svg.querySelector(s)
   }
 
   selectAll(s) {
-    return this.mainSVG.querySelectorAll(s)
+    return this.svg.querySelectorAll(s)
   }
 
   loadingAnimation() {
@@ -111,5 +141,12 @@ export default class PlayAnimation {
 
   showPauseButton() {
     this.tl.pause('pauseButton')
+  }
+
+  // Because we navigate back and forth via turbolinks
+  // We might connect with an svg that was already partially animated
+  // This is called on stimulus disconnect to reset the animation's state
+  reset() {
+    this.replaceClonedSVGWithOldElement()
   }
 }

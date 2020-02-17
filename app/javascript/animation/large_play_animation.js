@@ -131,7 +131,7 @@ export default function LargePlayAnimation() {
       .to(pauseGroup, 1, {
         scaleY:1,
         ease: 'power1.inOut',
-      },'-=1.2')
+      }, '-=1.2')
       .to(allPauseLines, { duration: 1, attr: gsap.utils.wrap([{ x1: 235, x2: 235 }, { x1: 365, x2: 365 }]) }, '-=1')
       .addLabel('setPause')
   }

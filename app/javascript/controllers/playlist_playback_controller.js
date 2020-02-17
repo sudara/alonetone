@@ -104,4 +104,8 @@ export default class extends PlaybackController {
   isCurrentTrack() {
     return this.playTarget.getAttribute('href') === document.location.pathname
   }
+
+  disconnect() {
+    super.disconnect()
+  }
 }
