@@ -1,8 +1,4 @@
 .page_container.get_an_account_container {
-  @media #{$mobile} {
-    padding-left: 0;
-    padding-right: 0;
-  }
   .box {
     @include shadow6();
     margin-bottom: 0;
