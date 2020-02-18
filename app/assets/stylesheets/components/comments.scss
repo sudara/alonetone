@@ -18,11 +18,6 @@
 
 .comments_columns {
   .columns_header {
-    max-width: $site_max_width;
-    box-sizing: border-box;
-    padding: 0 36px;
-    margin-left: auto;
-    margin-right: auto;
     @media #{$mobile} {
       padding-left: 0;
     }
