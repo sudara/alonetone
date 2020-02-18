@@ -2,6 +2,8 @@
 
 class AccountRequest < ApplicationRecord
   scope :recent, -> { order('created_at DESC') }
+  scope :candidates, -> { recent.waiting.where(entity_type: [0, 1]) }
+  scope :spammers, -> { recent.waiting.where(entity_type: [2, 3, 4]) }
 
   belongs_to :user, optional: true
   belongs_to :moderated_by, optional: true, class_name: 'User'
@@ -21,13 +23,13 @@ class AccountRequest < ApplicationRecord
       waiting: 0,
       approved: 1,
       denied: 2,
-      accepted: 3
+      claimed: 3
     }
   )
 
   validates :entity_type, inclusion: {
     in: entity_types,
-    message: "We'd like to know what sort of thing you want to upload!"
+    message: "We need to know what sort of thing you want to upload!"
   }
 
   validates :email,
@@ -47,8 +49,9 @@ class AccountRequest < ApplicationRecord
   validate :login_is_unique, on: :create
 
   validates :details, length: {
-    minimum: 5,
-    too_short: "should link to your music/website or add some detail about what you make!"
+    on: :create,
+    minimum: 40,
+    too_short: "must be at least 40 characters: Please link to your music/website or add more info!"
   }
 
   def email_is_unique
@@ -63,6 +66,10 @@ class AccountRequest < ApplicationRecord
     end
   end
 
+  def submission_count
+    AccountRequest.where(email: email).count
+  end
+
   def approve!(approved_by)
     return unless approved_by.moderator?
 
@@ -70,16 +77,29 @@ class AccountRequest < ApplicationRecord
     create_user_account!(approved_by)
   end
 
+  def deny!(denied_by)
+    return unless denied_by.moderator?
+
+    user&.soft_delete if approved?
+
+    denied! && update(moderated_by: denied_by)
+  end
+
   def create_user_account!(invited_by)
-    User.create!(login: login, email: email, invited_by: invited_by) do |u|
+    create_user!(login: login, email: email, invited_by: invited_by) do |u|
       u.reset_password
       u.reset_perishable_token
     end
   end
 
-  def self.filter_by(status)
-    if status.present?
-      recent.where(status: status)
+  def self.filter_by(filter)
+    case filter
+    when "candidates"
+      candidates
+    when "spammers"
+      spammers
+    when String
+      recent.where(status: filter)
     else
       recent
     end

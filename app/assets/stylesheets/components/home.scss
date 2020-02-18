@@ -3,12 +3,8 @@
   margin-bottom: 48px;
   background-color: $hero-background;
   .hero-inner {
-    margin: 0 auto;
-    max-width: $site_max_width;
-    padding: 0 $baseline * 1.5;
     padding-top: 80px;
     padding-bottom: 30px;
-    box-sizing: border-box;  
     display: flex;
     align-items: flex-start; 
     @media only screen and (max-width: 890px) {
@@ -107,10 +103,6 @@
 
 #home_grid {
   display: grid;
-  margin: 0 auto;
-  max-width: $site_max_width;
-  padding: 0 $baseline * 1.5;
-  box-sizing: border-box;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-column-gap: $baseline * 1.5;
@@ -138,7 +130,7 @@
 
   h2 {
     padding-left: 16px;
-    color: $box-h2-text;
+    color: $theme-accent;
     margin-bottom: 16px;
     margin-top: 0px;
     line-height: 1;
