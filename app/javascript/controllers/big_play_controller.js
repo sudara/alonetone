@@ -43,7 +43,7 @@ export default class extends Controller {
 
   // called from whileLoading()
   play() {
-    this.animation.showPauseButton()
+    this.animation.pausingAnimation()
     this.startPlayhead()
   }
 
