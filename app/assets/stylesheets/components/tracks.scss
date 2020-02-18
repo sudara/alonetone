@@ -77,18 +77,17 @@
             margin-left: 8px;
             pointer-events: none;
             fill: $track-play-button-background;
-          }
-          .outline {
-            stroke: $track-play-button-background;
-          }
-          .icon {
-            fill: $track-play-button-background;
-          }
-          .pauseGroup {
-            line {
-              stroke: $track-pause-button-stroke;
-              
+            .outline {
+              stroke: $track-play-button-background;
             }
+            .icon {
+              fill: $track-play-button-background;
+            }
+            .pauseGroup {
+              line {
+                stroke: $track-pause-button-stroke;
+              }
+            }  
           }
         }
       }
