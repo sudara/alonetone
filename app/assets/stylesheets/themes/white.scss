@@ -317,7 +317,11 @@ $waveform-played-background: $grey1000;
 $big-player-seekbar-background: $grey200;
 $track-player-background: $grey100;
 $track-player-play-button-background: $white;
-$track-player-play-button-triangle-background: $black;
+$track-player-play-button-triangle-fill: $black;
+$track-player-play-button-outline-stroke: $black;
+$track-player-dotty-stroke: $black;
+$track-player-pause-button-stroke: $white;
+$track-player-pause-button-fill: $black;
 $big-player-time-text: $white;
 $big-player-time-total-text: $grey800;
 

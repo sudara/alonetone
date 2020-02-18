@@ -116,7 +116,7 @@ export default class LargePlayAnimation {
       .to(this.outline, 1, {
         strokeWidth: 30,
         scale: 0.97,
-        stroke: '#000',
+        opacity: '1',
         ease: 'power1.inOut',
       }, '-=1')
       .to(this.pauseContainer, 1, {
