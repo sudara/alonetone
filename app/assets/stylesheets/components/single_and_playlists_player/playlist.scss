@@ -1,9 +1,4 @@
 #playlist_and_track_content_header {
-  max-width: $site_max_width;
-  padding: 0 36px;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: -18px;
   @media #{$one-column} {
     width: 96%;
@@ -15,11 +10,6 @@
 #playlist_and_track_content {
   display: flex;
   justify-content: center;
-  max-width: $site_max_width;
-  padding: 0 36px;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
   flex-wrap: wrap;
   align-items: flex-start;
   @media #{$one-column} {

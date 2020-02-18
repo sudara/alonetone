@@ -4,10 +4,6 @@
   top: -48px;
   background-color: $sub-nav-background;
   .sub_nav_inner {
-    box-sizing: border-box;
-    max-width: $site_max_width;
-    padding: 0 $baseline * 1.5;
-    margin: 0 auto;
     height: $baseline * 1.5;
     ul {
       display: flex;

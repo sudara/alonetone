@@ -12,11 +12,6 @@ $thredded-font-size-small: 13px;
 @import "thredded";
 
 .thredded_container {
-  max-width: $site_max_width;
-  padding: 0 $baseline * 1.5;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
   @media #{$one-column} {
     padding-left: 4%;
     padding-right: 4%;

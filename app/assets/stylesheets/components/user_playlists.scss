@@ -1,36 +1,24 @@
-main {
-  .user_playlists {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: $site_max_width;
-    padding: 0 $baseline * 1.5;
-    box-sizing: border-box;
+.user_playlists {
+  h1 {
     @media #{$mobile} {
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: 2.5%;
     }
-    h1 {
-      @media #{$mobile} {
-        padding-left: 2.5%;
-      }
+  }
+  .sort_instructions {
+    color: $user-playlists-sort-instructions;
+    margin: 8px 0;
+    @media #{$mobile} {
+      padding-left: 2.5%;
     }
-    .sort_instructions {
-      color: $user-playlists-sort-instructions;
-      margin: 8px 0;
-      @media #{$mobile} {
-        padding-left: 2.5%;
-      }
+  }
+  ul.playlists {
+    @media #{$mobile} {
+      width: 100%;
+      margin-right: 0;
     }
-    ul.playlists {
-      @media #{$mobile} {
-        width: 100%;
-        margin-right: 0;
-      }
-      li {
-        &.sortable-ghost {
-          opacity: .2;
-        }
+    li {
+      &.sortable-ghost {
+        opacity: .2;
       }
     }
   }
