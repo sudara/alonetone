@@ -1,5 +1,4 @@
 import { Controller } from 'stimulus'
-import { TweenMax } from 'gsap/all'
 import Turbolinks from 'turbolinks'
 import Rails from '@rails/ujs'
 

@@ -323,7 +323,11 @@ $waveform-played-background: $grey100;
 $big-player-seekbar-background: $grey200;
 $track-player-background: $grey1150;
 $track-player-play-button-background: $grey1100;
-$track-player-play-button-triangle-background: $white;
+$track-player-play-button-triangle-fill: $white;
+$track-player-play-button-outline-stroke: $white;
+$track-player-dotty-stroke: $white;
+$track-player-pause-button-stroke: $black;
+$track-player-pause-button-fill: $white;
 $big-player-time-text: $black;
 $big-player-time-total-text: $grey800;
 
@@ -333,7 +337,8 @@ $track-social-heading-text: $grey1000;
 // tracks.scss
 $track-open-box-shadow: none;
 $track-background: $grey1100;
-$track-play-button-background: $accent;
+$track-play-button-background: $white;
+$track-pause-button-stroke: $black;
 $track-seekbar-loaded-background: $grey1000;
 $track-border-bottom: $grey1000;
 $track-time-text: $grey500;
