@@ -15,7 +15,6 @@ import gsap from 'gsap' // needed for tests to run
 import { bugsnagClient } from '../misc/bugsnag.js.erb'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
 
-
 Rails.start()
 Turbolinks.start()
 

@@ -1,7 +1,7 @@
 import { gsap } from 'gsap'
 import { MorphSVGPlugin } from './MorphSVGPlugin'
 
-gsap.registerPlugin(MorphSVGPlugin)
+if (MorphSVGPlugin) gsap.registerPlugin(MorphSVGPlugin)
 
 export default class LargePlayAnimation {
   constructor(elementToReplace) {

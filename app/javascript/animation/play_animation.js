@@ -13,7 +13,8 @@ There are 3 things that make this svg/animation tricky to implement.
 import { gsap } from 'gsap'
 import { MorphSVGPlugin } from './MorphSVGPlugin'
 
-gsap.registerPlugin(MorphSVGPlugin)
+// In test mode, this file is empty, as we can't legally have it in public git
+if (MorphSVGPlugin) gsap.registerPlugin(MorphSVGPlugin)
 
 export default class PlayAnimation {
   constructor(elementToReplace) {
