@@ -30,9 +30,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       switch_themes
 
-      find('.waveform').click(x: 200, y: 10) # seek
-      sleep 0.5 # Wait out the loading animation
       with_animations_paused do
+        find('.waveform').click(x: 200, y: 10) # seek
         find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
         find('.play_button_container a').click # pause
 
