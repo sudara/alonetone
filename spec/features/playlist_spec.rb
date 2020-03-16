@@ -51,11 +51,11 @@ RSpec.describe 'playlists', type: :feature, js: true do
     logged_in(:henri_willig) do
       visit 'henriwillig/playlists/polderkaas/edit'
 
+      pause_animations
+
       # test that we can remove second track
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
-
-      pause_animations
 
       # add 2 new tracks
       first_upload = find('#your_uploads .asset:nth-child(1) .add')
@@ -72,6 +72,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       last_track = find('.sortable .asset:last-child')
       first_track_handle.drag_to(last_track)
       expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
+      sleep(30)
       Percy.snapshot(page, name: 'Playlist Edit')
     end
   end
