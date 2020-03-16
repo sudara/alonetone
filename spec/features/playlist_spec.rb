@@ -32,7 +32,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       # seek
       find('.waveform').click(x: 200, y: 10)
-      sleep 0.1
+      sleep 0.5
       with_animations_paused do
         find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
         find('.play_button_container a').click # pause
