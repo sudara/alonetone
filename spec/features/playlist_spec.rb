@@ -30,9 +30,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       switch_themes
 
-      # seek
-      find('.waveform').click(x: 200, y: 10)
-      sleep 0.5
+      find('.waveform').click(x: 200, y: 10) # seek
+      sleep 0.5 # Wait out the loading animation
       with_animations_paused do
         find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
         find('.play_button_container a').click # pause
@@ -42,7 +41,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # same position for the percy snap.
         Percy.snapshot(page,
           name: 'Playlist Track Play, Seek, Pause',
-          percy_css: '.progress_container_inner { left: 33% !important; }')
+          percy_css: '.progress_container_inner { left: 33% !important; } #waveform_reveal { left: -335px !important; }')
       end
     end
   end
