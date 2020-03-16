@@ -3,18 +3,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  box-sizing: border-box;
-  max-width: $site_max_width;
-  padding: 0 $baseline * 1.5;
-  margin-left: auto;
-  margin-right: auto;
-  @media #{$mobile} {
-    padding-left: 0;
-    padding-right: 0;
-  }
   #large_users_grid {
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
     div.user {
       position: relative;

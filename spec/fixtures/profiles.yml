@@ -6,6 +6,7 @@
   not_activated
   sandbags
   joeblow
+  newly_approved
   brand_new_user
 ).each do |user| %>
 <%= user %>:

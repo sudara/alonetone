@@ -19,11 +19,6 @@
     }
   }
   .static_page_content {
-    max-width: $site_max_width;
-    box-sizing: border-box;
-    padding: 0 $baseline * 1.5;
-    margin-left: auto;
-    margin-right: auto;
     @media #{$mobile} {
       padding-left: 0;
       padding-right: 0;

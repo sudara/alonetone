@@ -55,6 +55,10 @@ RSpec.describe AccountRequest, type: :model do
       expect { valid_account_request.approve!(users(:sudara)) }.to change { User.count }.by(1)
     end
 
+    it "should store a reference to the created user account" do
+      expect { valid_account_request.approve!(users(:sudara)) }.to change { valid_account_request.user_id }
+    end
+
     it "should reset the perishable token and password for the user account" do
       login = valid_account_request.login
       valid_account_request.approve!(users(:sudara))
@@ -74,16 +78,30 @@ RSpec.describe AccountRequest, type: :model do
       valid_account_request.approve!(users(:sudara))
       expect(valid_account_request.moderated_by.login).to eql(users(:sudara).login)
     end
+
+    it "should not have set last_login_at" do
+      login = valid_account_request.login
+      valid_account_request.approve!(users(:sudara))
+      expect(User.find_by_login(login).last_login_at).to be_nil
+    end
   end
 
   context "on denial" do
-    it "should do nothing when denied" do
+    it "should populate moderated_by" do
+      valid_account_request.deny!(users(:sudara))
+      expect(valid_account_request.moderated_by.login).to eql(users(:sudara).login)
+    end
 
+    it "should soft delete any created user if the record was previously approved" do
+      expect {
+        valid_account_request.approve!(users(:sudara))
+        valid_account_request.deny!(users(:sudara))
+      }.not_to change { User.count }
     end
   end
 
   context "status" do
-    it "should change to accepted when user sets password" do
+    it "should change to claimed when user sets password" do
 
     end
   end

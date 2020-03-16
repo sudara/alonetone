@@ -1,6 +1,6 @@
 <% unless logged_in? %>
 <section class="hero">
-  <div class="hero-inner">
+  <div class="page_container hero-inner">
     <div class="hero-content">
       <h1>Welcome to alonetone</h1>
       <p>
@@ -26,7 +26,7 @@
 </section>
 <% end %>
 
-<div id="home_grid">
+<div class="page_container" id="home_grid">
   <% if @playlists.present? %>
   <div id="home_playlists_area">
     <div class="latest-playlists-header">
