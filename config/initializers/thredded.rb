@@ -7,6 +7,13 @@ Thredded.user_class = 'User'
 # must be unique.
 Thredded.user_name_column = :login
 
+Thredded.user_display_name_method = :display_name
+
+# User display name method, by default thredded uses the user_name_column defined above
+# You may want to use :to_s or some more elaborate method
+# define this method in user.rb
+# Thredded.user_display_name_method = :forum_name
+
 # Configure the method name to fetch the current user.
 Thredded.current_user_method = :current_user
 
