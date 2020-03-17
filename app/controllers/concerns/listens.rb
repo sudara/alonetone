@@ -15,6 +15,7 @@ module Listens
       if Rails.application.play_dummy_audio? || Rails.env.test?
         play_local_mp3
       else
+        sleep(2) if Rails.env.development? # simulate network loading, it'll be 2x with range requests
         redirect_to asset.download_location.to_s
       end
     end

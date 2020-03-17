@@ -1,5 +1,5 @@
 <nav class="sub_nav">
-  <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
+  <div class="page_container sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
        <ul>
         <%= navigation_item "Last Online", {action: 'index', sort: nil} %>
         <%= navigation_item "Last Uploaded", {action: 'index', sort: 'last_uploaded'} %>
@@ -11,7 +11,7 @@
   </div>
 </nav>
 
-<div id="user_index">
+<div class="page_container" id="user_index">
   <ul id="large_users_grid" class="responsive_grid">
     <% if @sort == 'dedicated_listeners'%>
       <% cache("dedicated/#{params[:page]}/", expires_in: 4.hours) do %>

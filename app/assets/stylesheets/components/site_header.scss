@@ -4,11 +4,6 @@ header#site_header {
   height: 60px;
   .header_inner {
     position: relative;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: $site_max_width;
-    padding: 0 36px;
-    box-sizing: border-box;
     display: flex;
     @media #{$mobile} {
       width: 100%;

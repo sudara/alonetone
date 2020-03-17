@@ -66,7 +66,6 @@ export default class extends Controller {
     e.preventDefault()
     this.coverTarget.innerHTML = '<div class="no_pic"></div>'
     this.fileFieldTarget.value = ''
-    console.log(this.fileFieldTarget)
 
   }
 

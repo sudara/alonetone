@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus'
+import { gsap } from 'gsap'
 import LargePlayAnimation from '../animation/large_play_animation'
 
 export default class extends Controller {
@@ -8,8 +9,6 @@ export default class extends Controller {
     this.animation = new LargePlayAnimation()
     this.percentPlayed = 0.0
     this.setDelegate()
-    this.animation.init()
-    this.animation.play()
     this.setupPlayhead()
     this.setAnimationState()
   }
@@ -17,20 +16,19 @@ export default class extends Controller {
   setAnimationState() {
     if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
       // instantiated while an mp3 is still loading
-      this.animation.showLoading()
+      this.animation.loadingAnimation()
     } else if (this.delegate && this.delegate.isPlaying) {
       // ...while in the middle of playing
-      this.animation.showLoading()
-      this.animation.showPause()
+      this.animation.pausingAnimation()
       this.startPlayhead()
-    } else if (this.delegate && this.delegate.positionFromStart(1)) {
+    } else if (this.delegate && this.delegate.positionFromStart(0.1)) {
       // ...after playing once but now paused
-      this.animation.setPlay()
+      this.animation.showPlayButton()
       this.showPlayhead()
       this.update(this.delegate.percentPlayed())
     } else {
       // ....loaded but not playing
-      this.animation.setPlay()
+      this.animation.showPlayButton()
     }
   }
 
@@ -45,13 +43,13 @@ export default class extends Controller {
 
   // called from whileLoading()
   play() {
-    this.animation.showPause()
+    this.animation.pausingAnimation()
     this.startPlayhead()
   }
 
   pause() {
     this.timeline.pause()
-    this.animation.setPlay()
+    this.animation.showPlayButton()
   }
 
   togglePlay(e) {
@@ -77,26 +75,27 @@ export default class extends Controller {
     this.percentPlayed = this.delegate.percentPlayed()
     this.timeTarget.innerHTML = this.delegate.time
     if (Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02) {
-      console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+      // console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
       this.timeline.progress(this.percentPlayed)
     }
   }
 
   stop() {
-    this.animation.reset()
-    this.animation.setPlay()
+    this.animation.showPlayButton()
     this.playheadAnimation.stop()
   }
 
   setupPlayhead() {
-    this.timeline = new TimelineMax({ paused: true, duration: 1 })
-    this.playheadAnimation = this.timeline.to(this.progressContainerInnerTarget, 1, {
+    this.timeline = gsap.timeline({ paused: true, duration: 1 })
+    this.playheadAnimation = this.timeline.to(this.progressContainerInnerTarget, {
+      duration: 1,
       left: '100%',
-      ease: Linear.easeNone,
+      ease: 'none',
     }, 0)
-    this.waveformAnimation = this.timeline.to('#waveform_reveal', 1, {
+    this.waveformAnimation = this.timeline.to('#waveform_reveal', {
+      duration: 1,
       attr: { x: '0' },
-      ease: Linear.easeNone,
+      ease: 'none',
     }, 0)
   }
 
@@ -109,7 +108,11 @@ export default class extends Controller {
   showPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
     if (this.timeline.duration() === 1) {
-      this.timeline.duration(this.delegate.duration)
+      this.timeline.timeScale(1.0 / this.delegate.duration) // gsap 3.2.4 broke duration getter
     }
+  }
+
+  disconnect() {
+    this.animation.reset()
   }
 }

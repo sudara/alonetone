@@ -80,6 +80,7 @@ export default class extends PlaybackController {
   whilePlayingCallback() {
     if (!this.bigPlay) this.setBigPlay()
     if (!this.loaded) {
+      // Trigger the transition from loading to playing
       this.loaded = true
       this.bigPlay.play()
     }
@@ -103,5 +104,9 @@ export default class extends PlaybackController {
 
   isCurrentTrack() {
     return this.playTarget.getAttribute('href') === document.location.pathname
+  }
+
+  disconnect() {
+    super.disconnect()
   }
 }
