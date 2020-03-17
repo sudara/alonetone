@@ -5,7 +5,9 @@ Thredded.user_class = 'User'
 
 # Use User#login for the @mention syntax and to present the name of the user. Note that this column
 # must be unique.
-Thredded.user_name_column = :display_name
+Thredded.user_name_column = :login
+
+Thredded.user_display_name_method = :display_name
 
 # User display name method, by default thredded uses the user_name_column defined above
 # You may want to use :to_s or some more elaborate method
