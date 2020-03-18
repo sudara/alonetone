@@ -29,7 +29,7 @@
 
   <main>
       <nav class="sub_nav">
-      <div class="sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
+      <div class="page_container sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
           <ul>
             <% Thredded::Messageboard.ordered_by_position.each do |m| %>
               <%= navigation_item m.name, "/forums/#{m.slug}" %>
@@ -37,7 +37,7 @@
           </ul>
       </div>
     </nav>
-    <div class="thredded_container">
+    <div class="page_container thredded_container">
       <%= yield %>
     </div>
   </main>

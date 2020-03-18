@@ -301,6 +301,7 @@ boards.collect do |board|
       p.content = 'Here is the body of a post on #{board.name}... Good stuff!'
       p.moderation_state = 'approved'
       p.messageboard = board
+      p.created_at = p.updated_at = 75.minutes.ago # prevent percy glitch
     end
     t.save
   end

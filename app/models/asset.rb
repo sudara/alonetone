@@ -129,7 +129,7 @@ class Asset < ApplicationRecord
   # needed for views in case we've got multiple assets on the same page
   # TODO: this is a view concern, move to helper, or better yet, deal w/it in .js
   def unique_id
-    object_id
+    object_id.to_s
   end
 
   # make sure the title is there, and if not, the filename is used...

@@ -8,7 +8,7 @@ gem 'rails'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'thredded/thredded'
+gem 'thredded'
 
 # ruby
 gem 'sometimes'
@@ -41,22 +41,12 @@ gem 'pagy'
 
 # external services
 gem 'rakismet'
-gem 'geokit'
 gem 'postmark-rails'
-
-# greenfield
-gem 'font-awesome-sass'
-gem 'jquery-fileupload-rails'
 
 # frontend
 gem 'webpacker'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'sass-rails'
 gem 'yui-compressor'
-gem 'uglifier'
-gem 'coffee-rails', github: 'rails/coffee-rails'
-gem 'soundmanager2-rails'
 gem 'turbolinks'
 
 # monitoring & perf

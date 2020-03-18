@@ -3,4 +3,12 @@ waiting:
   login: newband
   email: mybandemail@domain.com
   entity_type: musician
-  details: I can't wait to get in, here's my link
+  details: I can't wait to get in, here's my link with some amount of detail
+
+approved:
+  login: newmusician
+  email: newmusician@domain.com
+  entity_type: musician
+  details: I had something to say but I can't quite remember. Something something music.
+  moderated_by: sudara
+  user: newly_approved

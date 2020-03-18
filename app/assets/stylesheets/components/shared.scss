@@ -2,13 +2,16 @@ body {
   background-color: $body-background;
 }
 
-ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-.hidden {
-  display: none;
+.page_container {
+  max-width: $site_max_width;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 $baseline * 1.5;
+  box-sizing: border-box;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .box {
@@ -31,7 +34,7 @@ ul {
     margin-top: 0;
     margin-bottom: 1px;
     padding: 0 0 0 $baseline / 2;
-    color: $box-h2-text;
+    color: $theme-accent;
     border-bottom: 1px solid $box-h2-bottom-border;
     background-color: transparent;
   }
@@ -147,4 +150,13 @@ ul {
   .only_alonetone_mods {
     color: $white;
   }
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.hidden {
+  display: none;
 }

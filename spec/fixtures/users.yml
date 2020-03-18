@@ -1,3 +1,5 @@
+# Heads up: All users need a profile in profiles.yml
+
 # admin
 sudara:
   login: sudara
@@ -32,10 +34,18 @@ aaron:
   created_at: <%= 1.days.ago.to_s :db %>
   updated_at: <%= 1.days.ago.to_s :db %>
 
-# not activated
 not_activated:
   login: ben
   email: ben@example.com
+  salt: <%= salt = SecureRandom.hex(64) %>
+  crypted_password: <%= scrypt("test" + salt) %>
+  created_at: <%= 1.days.ago.to_s :db %>
+  updated_at: <%= 1.days.ago.to_s :db %>
+  perishable_token: 8eou87daoeuhdtn
+
+newly_approved:
+  login: newmusician
+  email: newmusician@domain.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
   created_at: <%= 1.days.ago.to_s :db %>

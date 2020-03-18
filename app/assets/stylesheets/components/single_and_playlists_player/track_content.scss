@@ -217,7 +217,6 @@
       }
     }
   }
-
   .track_edit {
     margin-bottom: $baseline * 2;
     header {
@@ -376,7 +375,6 @@
       }
     }
   }
-
   #user_comments {
     + .below_box {
       display: none;
@@ -403,4 +401,11 @@
       }
     }
   }
+}
+
+main > .track_content {
+  @media only screen and (max-width: 770px) {
+    width: 96%;
+    max-width: none;
+  }  
 }

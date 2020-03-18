@@ -152,6 +152,14 @@ class User < ApplicationRecord
     perishable_token.nil?
   end
 
+  def never_activated?
+    last_login_at.nil? && perishable_token.present?
+  end
+
+  def update_account_request!
+    account_request&.claimed!
+  end
+
   def moderator?
     self[:moderator] || self[:admin]
   end
@@ -199,7 +207,7 @@ class User < ApplicationRecord
   end
 
   def hasnt_been_here_in(hours)
-    ast_login_at &&
+    last_login_at &&
       last_login_at < hours.ago.utc
   end
 

@@ -13,7 +13,7 @@ module Admin
     end
 
     def deny
-      @account_request.denied!
+      @account_request.deny!(current_user)
       render plain: 'denied'
     end
 

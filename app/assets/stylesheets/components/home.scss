@@ -1,9 +1,108 @@
+.hero {
+  margin-top: -48px;
+  margin-bottom: 48px;
+  background-color: $hero-background;
+  .hero-inner {
+    padding-top: 80px;
+    padding-bottom: 30px;
+    display: flex;
+    align-items: flex-start; 
+    @media only screen and (max-width: 890px) {
+      padding-top: 30px;
+      flex-direction: column-reverse;
+    }
+    @media #{$mobile} {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .hero-content {
+      margin-right: 25px;
+      @media only screen and (max-width: 890px) {
+        margin-right: 0;
+      }
+      h1 {
+        @include title36();
+        margin-top: 0;
+        color: $hero-heading-text;
+        @media only screen and (max-width: 890px) {
+          margin-top: 30px;
+        }
+        @media #{$mobile} {
+          @include title24();
+        }
+      }
+      p {
+        @include paragraph18();
+        color: $hero-paragraph-text;
+        @media #{$mobile} {
+          @include paragraph16();
+        }
+      }
+      .hero-links {
+        margin-top: 80px;
+        display: flex;
+        flex-wrap: wrap;
+        @media #{$mobile} {
+          margin-top: 30px;
+        }
+        div {
+          margin-bottom: $baseline/2;
+          a {
+            @include default-button('primary');
+            height: 40px;
+            margin-bottom: 10px;
+            padding-top: 4px;
+            font-size: 16px;
+            padding-left: 0;
+            padding-right: 9px;
+          }
+          div {
+            font-family: $medium-sans-font;
+            color: $orangetone;
+            @media #{$mobile} {
+              display: none;
+            }
+          }
+          &:first-child {
+            margin-right: $baseline;
+            a {
+              width: 190px;
+            }
+          }
+          &:last-child {
+            a {
+              width: 180px;
+              background-color: transparent;
+              color: $grey600;
+              border: 2px solid $grey500;
+              padding-top: 2px;
+              @media #{$mobile} {
+                width: auto;
+                padding-left: 10px;
+                padding-right: 10px;
+              }
+            }
+            div {
+              color: $grey600;
+            }
+          }
+        }
+      }
+    }
+    img {
+      max-width: 400px;
+      width: 100%;
+      flex-shrink: 0;
+      @media only screen and (max-width: 890px) {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
 #home_grid {
   display: grid;
-  margin: 0 auto;
-  max-width: $site_max_width;
-  padding: 0 $baseline * 1.5;
-  box-sizing: border-box;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-column-gap: $baseline * 1.5;
@@ -31,7 +130,7 @@
 
   h2 {
     padding-left: 16px;
-    color: $box-h2-text;
+    color: $theme-accent;
     margin-bottom: 16px;
     margin-top: 0px;
     line-height: 1;
@@ -60,9 +159,10 @@
     ul.playlists {
       margin-bottom: 0;
       li {
-		&:nth-child(3), &:nth-child(4){
-		margin-bottom: 0!important;
-		}
+        &:nth-child(3),
+        &:nth-child(4) {
+          margin-bottom: 0 !important;
+        }
       }
     }
   }

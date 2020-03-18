@@ -1,4 +1,32 @@
-<div id="home_grid">
+<% unless logged_in? %>
+<section class="hero">
+  <div class="page_container hero-inner">
+    <div class="hero-content">
+      <h1>Welcome to alonetone</h1>
+      <p>
+        Alonetone gives music makers a home for their tracks and albums. Forget release dates and social media strategies and upload what you are working on.
+      </p>
+      <div class="hero-links">
+        <div>
+          <a href="/get_an_account">Get Invited</a>
+          <div>
+            It's been free since 2008.
+          </div>
+        </div>
+        <div>
+          <a href="/about">FAQ</a>
+          <div>
+            We're not a startup...
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= themed_illustration_image('island-uke.jpg') %>
+  </div>
+</section>
+<% end %>
+
+<div class="page_container" id="home_grid">
   <% if @playlists.present? %>
   <div id="home_playlists_area">
     <div class="latest-playlists-header">

@@ -12,8 +12,9 @@
   </div>
   <div class="user_column">
     <div>
-      <div><%= account_request.approved? ? link_to(account_request.login, user_home_path(account_request.login)) : account_request.login %></div>
+      <div><%= account_request.claimed? ? link_to(account_request.login, user_home_path(account_request.login)) : account_request.login %></div>
       <div><%= account_request.email %></div>
+      <div><%= "#{account_request.submission_count} submissions!!" if account_request.submission_count > 1 %></div>
     </div>
   </div>
   <div class="bio_column">

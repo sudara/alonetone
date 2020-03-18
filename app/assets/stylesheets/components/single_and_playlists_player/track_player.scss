@@ -20,7 +20,20 @@
       cursor: pointer;
       .largePlaySVG {
         path.icon.new {
-          fill: $track-player-play-button-triangle-background;
+          fill: $track-player-play-button-triangle-fill;
+        }
+        .outline {
+          opacity: .8;
+          stroke: $track-player-play-button-outline-stroke;
+        }
+        .dotty {
+          stroke: $track-player-dotty-stroke;
+        }
+        .pauseLoopGroup, .pauseGroup {
+          stroke: $track-player-pause-button-stroke;
+        }
+        .centerCircle {
+          fill: $track-player-pause-button-fill;
         }
       }
     }
