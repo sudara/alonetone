@@ -213,6 +213,10 @@ class AssetsController < ApplicationController
     end
   end
 
+  def track_not_found
+    raise ActionController::RoutingError, 'Track Not Found'
+  end
+
   def user_has_tracks_from_followees?
     logged_in? && current_user.has_followees?
   end

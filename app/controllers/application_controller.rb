@@ -99,12 +99,12 @@ class ApplicationController < ActionController::Base
 
   def find_asset
     @asset = @user.assets.where(permalink: (params[:permalink] || params[:track_id] || params[:id])).first
-    @asset ||= @user.assets.where(id: params[:id]).first || track_not_found_message
+    @asset ||= @user.assets.where(id: params[:id]).first || track_not_found
   end
 
   def find_published_asset
     find_asset
-    track_not_found_message unless @asset.published? || current_user_is_admin_or_owner?(@asset.user)
+    track_not_found unless @asset.published? || current_user_is_admin_or_owner?(@asset.user)
   end
 
   def find_playlists
