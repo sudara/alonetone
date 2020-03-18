@@ -8,14 +8,14 @@ class Playlist < ActiveRecord::Base
   scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recently_published.only_public.with_preloads }
   scope :include_private,  -> { where(is_favorite: false) }
   scope :mixes,            -> { where(is_mix: true) }
-  scope :only_public,      -> { where(private: false).where(is_favorite: false) }
+  scope :only_public,      -> { where(published: true).where(is_favorite: false) }
   scope :with_preloads,    -> { preload(:cover_image_blob, user: { avatar_image_attachment: :blob }) }
   scope :recently_published, -> { reorder('playlists.published_at DESC') }
 
   belongs_to :user, counter_cache: true
   has_many :tracks,
-     -> { order(:position).includes(asset: :user) },
-     dependent: :destroy
+    -> { order(:position).includes(asset: :user) },
+    dependent: :destroy
   has_many :assets, through: :tracks
   has_many :public_assets,
     -> { where('assets.private = ?', false) },
@@ -27,8 +27,7 @@ class Playlist < ActiveRecord::Base
 
   before_validation :name_favorites, on: :create
   before_update(
-    :ensure_private_if_less_than_two_tracks,
-    :set_published_at,
+    :check_visibility,
     :notify_followers_if_publishing_album
   )
 
@@ -65,9 +64,35 @@ class Playlist < ActiveRecord::Base
     (tracks_count || 0) > 0
   end
 
-  # Returns true when the playlist may be publicly viewed.
-  def public?
-    !private && !is_favorite && has_tracks?
+  def publishing?
+    # it's not publishing if someone marked it private and then public again
+    published_changed? && (published_was == false) && published_at_was.nil?
+  end
+
+  def publishable?
+    tracks_count >= 2
+  end
+
+  # This will be read by the UI
+  def is_private?
+    !published?
+  end
+
+  def is_private=(value)
+    return if value.nil?
+
+    self.published = value # cast to boolean
+    self.published = !published # store the opposite value as .published?
+    save
+  end
+
+  def check_visibility
+    if publishing? && publishable?
+      self.published_at = Time.zone.now
+      self.published = true
+    elsif publishing? && !publishable?
+      self.published = false
+    end
   end
 
   def has_any_links?
@@ -82,15 +107,6 @@ class Playlist < ActiveRecord::Base
   def quietly_publish_assets!
     # bypasses the after_create on assets that sends out email
     assets.update_all(private: false)
-  end
-
-  def publishing?
-    # it's not publishing if someone marked it private and then public again
-    private_changed? && (private_was == true) && published_at_was.nil?
-  end
-
-  def set_published_at
-    self.published_at = Time.zone.now if publishing? && can_be_public?
   end
 
   def notify_followers
@@ -132,17 +148,6 @@ class Playlist < ActiveRecord::Base
 
   def self.latest(limit = 5)
     where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
-  end
-
-  def ensure_private_if_less_than_two_tracks
-    self.private = true if !is_favorite? && !can_be_public?
-    true
-  end
-
-  # list any required conditions before playlist
-  # can be made public
-  def can_be_public?
-    tracks_count >= 2
   end
 
   # if this is a "favorites" playlist, give it a name/description to match

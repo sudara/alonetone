@@ -48,9 +48,15 @@ export default class extends Controller {
 
   togglePrivate(e) {
     e.preventDefault()
-    // The label was clicked, so we still need to check the box
-    this.actualCheckboxTarget.checked = !this.actualCheckboxTarget.checked
-    this.actualCheckboxTarget.checked ? this.showPrivateBanner() : this.hidePrivateBanner()
+    if (this.actualCheckboxTarget.checked) {
+      this.actualCheckboxTarget.checked = false
+      this.actualCheckboxTarget.value = 0
+      this.hidePrivateBanner()
+    } else {
+      this.actualCheckboxTarget.checked = true
+      this.actualCheckboxTarget.value = 1
+      this.showPrivateBanner()
+    }
   }
 
   openFile(e) {
