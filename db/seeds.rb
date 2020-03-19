@@ -155,7 +155,7 @@ DESC
 playlist.save!
 playlist.tracks.create!(user: marie, asset: baguette_laonnaise)
 playlist.tracks.create!(user: marie, asset: appellation_description)
-playlist.update(private: false)
+playlist.publish!
 
 # --- Carole ---
 
@@ -196,7 +196,7 @@ DESC
 edible_coating.save!
 edible_coating.tracks.create!(user: carole, asset: creamy_interior)
 edible_coating.tracks.create!(user: carole, asset: cylindrical_rounds)
-edible_coating.update(private: false)
+edible_coating.publish!
 
 # --- Petere ---
 
@@ -237,7 +237,7 @@ DESC
 mrs_applebys_cheshire.save!
 mrs_applebys_cheshire.tracks.create!(user: petere, asset: keep_tradition_alive)
 mrs_applebys_cheshire.tracks.create!(user: petere, asset: much_like_cheddar)
-mrs_applebys_cheshire.update(private: false)
+mrs_applebys_cheshire.publish!
 
 # Some random listens.
 10.times do
