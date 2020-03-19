@@ -79,6 +79,19 @@ henri_willig_polderkaas_2:
   position: 2
   created_at: <%= 3.months.ago %>
 
+# All assets for Henry's unpublished playlist.
+henri_willig_unpublished_1:
+  playlist: henri_willig_unpublished
+  user: henri_willig
+  asset: henri_willig_finest_cheese
+  position: 1
+  created_at: <%= 3.months.ago %>
+henri_willig_unpublished_2:
+  playlist: henri_willig_unpublished
+  user: henri_willig
+  asset: henri_willig_the_goat
+  position: 2
+  created_at: <%= 3.months.ago %>
 
 # Bill's favorites.
 william_shatners_favorites_1:

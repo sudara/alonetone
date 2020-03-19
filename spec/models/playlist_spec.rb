@@ -44,32 +44,59 @@ RSpec.describe Playlist, type: :model do
     expect(playlists(:owp).tracks[1].position).to eq(2)
   end
 
-  describe "visibility" do
+  describe "publishable" do
     let(:playlist) do
       Playlist.new(
         is_favorite: false,
-        private: false,
+        published: false,
         tracks_count: 2
       )
     end
 
-    it "can be public" do
-      expect(playlist).to be_public
-    end
-
-    it "is not public when contains favorites" do
-      playlist.is_favorite = true
-      expect(playlist).to_not be_public
-    end
-
-    it "is not public when marked as private" do
-      playlist.private = true
-      expect(playlist).to_not be_public
+    it "can be published" do
+      expect(playlist).to be_publishable
     end
 
     it "is not public when has no tracks" do
       playlist.tracks_count = 0
-      expect(playlist).to_not be_public
+      expect(playlist).to_not be_publishable
+    end
+  end
+
+  describe "publishing" do
+    it "shouldn't allow publish unless playlist has 2 tracks" do
+      playlist = playlists(:henri_willig_unpublished)
+      playlist.tracks.first.destroy
+      playlist.reload # tracks_count needs to be reloaded
+      expect(playlist.tracks_count).to eql(1)
+      playlist.published = true
+      playlist.save
+      expect(playlist.published_at).to be_nil
+      expect(playlist.published?).to be_falsey
+    end
+
+    it "should set published_at" do
+      playlist = playlists(:henri_willig_unpublished)
+      playlist.published = true
+      expect(playlist.publishing?).to be_truthy
+      playlist.save
+      playlist.reload
+      expect(playlist.published_at).to be_present
+      expect(playlist.published?).to be_truthy
+    end
+
+    it "shouldn't update published_at when unpublishing and publishing again" do
+      playlist = playlists(:henri_willig_unpublished)
+      playlist.published = true
+      playlist.save
+      expect(playlist.published_at).to be_present
+      first_published_at = playlist.published_at
+      playlist.published = false
+      playlist.save
+      playlist.published = true
+      playlist.save
+      playlist.reload
+      expect(playlist.published_at).to eql(first_published_at)
     end
   end
 
@@ -82,7 +109,7 @@ RSpec.describe Playlist, type: :model do
       last_time = Time.zone.now
       playlists.each do |playlist|
         expect(playlist.created_at).to be < last_time
-        expect(playlist).to be_public
+        expect(playlist).to be_published
 
         last_time = playlist.created_at
       end

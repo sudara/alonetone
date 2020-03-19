@@ -23,7 +23,7 @@ arthurs_playlist:
   title: Arthur's Playlist
   cover_quality: modern
   credits: arthurs playlist
-  private: true
+  published: false
   created_at: <%= 1.day.ago %>
 
 mix:
@@ -52,12 +52,11 @@ will_studd_rockfort:
   user: will_studd
   is_mix: false
   is_favorite: false
-  private: false
   permalink: rockfort
   title: Rockfort
   tracks_count: 3
   cover_quality: modern
-  private: false
+  published: true
   credits: >
     Roquefort (US: /ˈroʊkfərt/ or UK: /rɒkˈfɔːr/; French: [ʁɔkfɔʁ]; Occitan: ròcafòrt [ˌrɔkɔˈfɔɾt])
     is a sheep milk cheese from the south of France. Rockfort is Will's award winning musical
@@ -71,11 +70,10 @@ henri_willig_polderkaas:
   user: henri_willig
   is_mix: false
   is_favorite: false
-  private: false
+  published: true
   permalink: polderkaas
   title: Polderkaas
   tracks_count: 2
-  private: false
   cover_quality: modern
   link1: https://open.spotify.com/playlist/37i9dQZF1DX7pykHKVxv6o?si=uP1xUZdlTeCBsMviYTBKGA
   link2: bandcamp.com/some_band
@@ -86,12 +84,31 @@ henri_willig_polderkaas:
   published_at: <%= 1.day.ago %>
   created_at: <%= 1.day.ago %>
 
+# Polderkaas v2
+henri_willig_unpublished:
+  user: henri_willig
+  is_mix: false
+  is_favorite: false
+  published: false
+  permalink: unpublished
+  title: Unpublished
+  tracks_count: 2
+  cover_quality: modern
+  link1: https://open.spotify.com/playlist/37i9dQZF1DX7pykHKVxv6o?si=uP1xUZdlTeCBsMviYTBKGA
+  link2: bandcamp.com/some_band
+  link3: youtube.com/my_channel
+  credits: >
+    Polderkaas is a distinctive cheese brand by Henri Willig. The album has the same creamy
+    goodness as they cheese it was named after.
+  created_at: <%= 1.day.ago %>
+
+
 # Bill added all his favorite tracks to a playlist.
 william_shatners_favorites:
   user: william_shatner
   is_mix: true
   is_favorite: true
-  private: true
+  published: true
   permalink: bills-favorites
   title: Bill's favorites
   cover_quality: ancient
@@ -104,7 +121,7 @@ william_shatners_favorites:
 jamie_kiesl_loves:
   user: jamie_kiesl
   is_favorite: true
-  private: true
+  published: true
   permalink: jamie-loves
   title: Jamie Loves
   cover_quality: legacy
@@ -122,6 +139,6 @@ jamie_kiesl_playlist_with_soft_deleted_tracks:
   cover_quality: legacy
   credits: Playlist to test tracks_count change for when asset is soft deleted
   tracks_count: 1
-  private: true
+  published: false
   published_at: ~
   created_at: <%= 1.year.ago %>

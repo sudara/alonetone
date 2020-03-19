@@ -160,7 +160,7 @@
           width: 100%;
           font-size: 12px;
           position: relative;
-          height: 54px;
+          height: 46px;
           @media #{$one-column} {
             flex-direction: column;
           }
@@ -178,6 +178,8 @@
       border-top: 1px solid $edit-playlist-info-bottom-border;
       .private_warning {
         text-align: center;
+        height: 17px;
+        line-height: 19px;
       }
       a.delete_playlist {
         margin-top: $baseline;

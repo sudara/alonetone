@@ -49,7 +49,7 @@ class PlaylistsController < ApplicationController
   end
 
   def new
-    @playlist = @user.playlists.build(private: true)
+    @playlist = @user.playlists.build
   end
 
   def edit
@@ -119,7 +119,9 @@ class PlaylistsController < ApplicationController
   end
 
   def update
+    is_private = params[:playlist].delete(:is_private)
     if @playlist.update(playlist_params)
+      @playlist.is_private = is_private
       redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.'
     else
       render action: "edit"
@@ -139,7 +141,7 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_params
-    params.require(:playlist).permit!
+    params.require(:playlist).permit(:title, :year, :is_private, :link1, :link2, :link3, :credits)
   end
 
   def render_desired_partial

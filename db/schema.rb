@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_02_202230) do
+ActiveRecord::Schema.define(version: 2020_03_17_165252) do
 
   create_table "account_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_202230) do
     t.string "permalink"
     t.integer "tracks_count", default: 0
     t.boolean "is_mix"
-    t.boolean "private"
+    t.boolean "published", default: false
     t.boolean "is_favorite", default: false
     t.string "year"
     t.integer "position", default: 1
