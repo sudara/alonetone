@@ -64,13 +64,13 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       # Ensure custom checkboxes are happy
       find('.edit_playlist_info_right_column_private_and_hidden label').click
+      find('.edit_playlist_info_right_column_private_and_hidden label').click
 
       # Move "Manfacturer of the Finest Cheese" to be the last song
       first_track_handle = find('.sortable .asset:first-child .drag_handle')
       last_track = find('.sortable .asset:last-child')
       first_track_handle.drag_to(last_track)
       expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
-      sleep(30)
       Percy.snapshot(page, name: 'Playlist Edit')
     end
   end
