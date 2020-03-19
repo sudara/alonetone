@@ -131,7 +131,7 @@ DESC
 playlist.save!
 playlist.tracks.create!(user: marie, asset: commonly_blue_green)
 playlist.tracks.create!(user: marie, asset: aqueous_suspension)
-playlist.update(private: false)
+playlist.publish!
 
 baguette_laonnaise = marie.assets.create!(extract_metadata(
   audio_file: piano_upload,
