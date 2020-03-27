@@ -141,7 +141,7 @@ class PlaylistsController < ApplicationController
   end
 
   def playlist_params
-    params.require(:playlist).permit(:title, :year, :is_private, :link1, :link2, :link3, :credits)
+    params.require(:playlist).permit(:cover_image, :title, :year, :is_private, :link1, :link2, :link3, :credits)
   end
 
   def render_desired_partial
