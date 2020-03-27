@@ -49,6 +49,11 @@ RSpec.describe 'playlists', type: :feature, js: true do
     logged_in(:henri_willig) do
       visit 'henriwillig/playlists/polderkaas/edit'
 
+      # add a playlist image
+      attach_file('playlist_cover_image', 'spec/fixtures/files/cheshire_cheese.jpg', make_visible: true)
+      find('input[name="commit"]').click
+      expect(find(".cover img")['src']).to have_content('cheshire_cheese.jpg')
+
       pause_animations
 
       # test that we can remove second track
