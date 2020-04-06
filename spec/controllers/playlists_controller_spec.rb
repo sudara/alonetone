@@ -49,7 +49,6 @@ RSpec.describe PlaylistsController, type: :controller do
   end
 
   context "sorting" do
-
     it 'should allow sorting of playlists' do
       login(:sudara)
       order = playlists(:empty, :owp).map { |playlist| playlist.id.to_s }
@@ -134,24 +133,20 @@ RSpec.describe PlaylistsController, type: :controller do
   end
 
   describe "update" do
-    let(:user) { users(:jamie_kiesl) }
-
-    before do
-      login(user)
-    end
-
     it "should update published_at" do
-      expect(playlists(:jamie_kiesl_loves).published_at).to be_nil
-      expect(playlists(:jamie_kiesl_loves).private).to be(true)
-
+      expect(playlists(:henri_willig_unpublished).published_at).to be_nil
+      expect(playlists(:henri_willig_unpublished).published).to be(false)
+      login(:henri_willig)
       put :update, params: {
-        id: playlists(:jamie_kiesl_loves).id,
-        permalink: 'jamie-loves',
-        user_id: user.login,
+        id: 'unpublished',
+        user_id: 'henriwillig',
         playlist: {
-          private: false
-        }}
-      expect(playlists(:jamie_kiesl_loves).reload.published_at).not_to be_nil
+          title: 'unpublished',
+          is_private: false
+        }
+      }
+      expect(playlists(:henri_willig_unpublished).reload.published).to be_truthy
+      expect(playlists(:henri_willig_unpublished).published_at).not_to be_nil
     end
 
     it "should not publish if playlist has less than 2 tracks" do
@@ -160,10 +155,11 @@ RSpec.describe PlaylistsController, type: :controller do
       put :update, params: {
         id: playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).id,
         permalink: 'jamie-playlist-with-soft-delete',
-        user_id: user.login,
+        user_id: 'Jamiek',
         playlist: {
-          private: false
-        }}
+          is_private: false
+        }
+      }
       expect(playlists(:jamie_kiesl_playlist_with_soft_deleted_tracks).reload.published_at).to be_nil
     end
   end
