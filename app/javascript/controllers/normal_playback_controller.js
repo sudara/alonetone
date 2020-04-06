@@ -15,7 +15,7 @@ export default class extends PlaybackController {
 
   whilePlayingCallback() {
     if (!this.loaded) {
-      this.animation.showPause()
+      this.animation.pausingAnimation()
       this.loaded = true
     }
     this.updateSeekBarPlayed()
@@ -23,7 +23,7 @@ export default class extends PlaybackController {
   }
 
   playCallback() {
-    this.showAnimation()
+    this.showLoadingAnimationOrPauseButton()
     this.openDetails()
     this.updateSeekBarLoaded()
     this.registeredListen = true
@@ -31,11 +31,11 @@ export default class extends PlaybackController {
   }
 
   pauseCallback() {
-    this.animation.setPlay()
+    this.animation.showPlayButton()
   }
 
   stopCallback() {
-    this.animation.setPlay()
+    this.animation.showPlayButton()
   }
 
   toggleDetails(e) {
@@ -76,30 +76,24 @@ export default class extends PlaybackController {
     }
   }
 
-  showAnimation() {
-    this.cloneAnimationIfNeeded()
+  showLoadingAnimationOrPauseButton() {
+    this.setupAnimation()
     if (!this.loaded) {
-      this.playButtonTarget.style.display = 'none' // hide the dummy play button
-      this.animateLoading()
-    } else this.animation.setPause()
+      this.animation.loadingAnimation()
+    } else this.animation.pausingAnimation()
   }
 
-  // Print our own copy of #playAnimationSVG to animate freely as we like
-  // Until this point, the play button has been a placeholder icon SVG
-  // After this point, the play button is an animatable SVG
-  cloneAnimationIfNeeded() {
-    if (this.animation === undefined) {
-      const animationElement = document.getElementById('playAnimationSVG').cloneNode(true);
-      animationElement.id = this.data.get('id')
-      this.playTarget.firstElementChild.append(animationElement)
-      this.animation = new PlayAnimation(animationElement)
+  // We have one single #playAnimationSVG element to move around and animate
+  // Until this point, our play button has been a placeholder icon SVG
+  // After this point, our play button is an animatable SVG
+  // (Until play is pressed elsewhere)
+  //
+  // Note: Because our svg has a mask with an id, we can't have multiple copies of it in the DOM
+  // Without refactoring how the svg and animation work
+  setupAnimation() {
+    if (!this.animation) {
+      this.animation = new PlayAnimation(this.playButtonTarget)
     }
-  }
-
-  animateLoading() {
-    this.animation.init()
-    this.animation.setPlay()
-    this.animation.showLoading()
   }
 
   // With SoundManager we used to animate this width to display
@@ -127,10 +121,11 @@ export default class extends PlaybackController {
     this.seekBarLoadedTarget.style.left = `${offx}px`
   }
 
-  // turbolinks will cache this page, so here's our chance to reset things to normal
+  // turbolinks caches pages, so let's make sure things are sane when we return
   disconnect() {
-    if (this.sound.playing()) {
-      this.sound.pause()
+    super.disconnect()
+    if (this.animation) {
+      this.animation.reset()
     }
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')

@@ -21,9 +21,9 @@ export default class extends Controller {
   }
 
   disconnect() {
-    if (this.sound.playing()) {
-      this.sound.pause()
-    }
+    this.sound.pause()
+    player = null
+    this.isPlaying = false
   }
 
   setupHowl() {

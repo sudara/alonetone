@@ -4,82 +4,22 @@
 $accent: $orangetone;
 $theme-accent: $orangetone;
 
-// variables.scss
-$default-button-text: $white;
-$default-button-background: $grey500;
-$default-button-background-hover: $grey800;
-$primary-button-background-hover: $orange600;
-$primary-button-background-active: $orange800;
+// admin.scss
+$admin-search-text: $grey1000;
+$admin-search-background: $white;
+$admin-column-heading-text: $grey1000;
 
-// shared.scss
-$body-background: $grey50;
+$admin-nav-item-background-hover: $grey100;
+$admin-nav-item-total-text: $grey500;
+$admin-nav-item-current-text: $white;
+$admin-header-border: $grey500;
+$admin-row-border: $grey100;
+$admin-spam-row-background: $orange100;
+$admin-deleted-row-background: $grey50;
 
-$box-background: $white;
-
-$box-h2-bottom-border: $grey100;
-
-$back-to-text: $grey900;
-$back-to-background: $white;
-
-$back-to-caret-background: $orangetone;
-$back-to-span-text: $orange600;
-
-$view-all-background: $white;
-$view-all-text: $grey800;
-
-$private-message-warning-background: $red500;
-$private-message-warning-border: $red600;
-$private-message-warning-text: $orange100;
-
-// pagination.scss
-$mini-paginator-background: $white;
-$pagy-link-text: $grey800;
-$pagy-link-text-active: $accent;
-
-// notifications.scss
-$flash-text: $white;
-
-$ajax-fail-border: $red600;
-$ajax-fail-text: $red800;
-$ajax-success-border: $green400;
-$ajax-success-text: $green600;
-
-$floating-feedback-background: $white;
-
-$error-message-background: $red100;
-$error-message-shadow: $red200;
-$error-message-heading-text: $red1100;
-$error-message-list-items-text: $red1100;
-
-$input-rejected-background: $red100;
-$input-rejected-border: $red600;
-
-$input-accepted-background: $grey25;
-$input-accepted-border: $green600;
-
-// typography.scss
-$body-text: $black;
-
-// forms.scss
-$forms-heading-text: $grey1000;
-
-$forms-label-text: $grey600;
-$forms-input-text: $grey1000;
-$forms-background: $white;
-$forms-border: $grey200;
-
-$forms-hint-background: $grey50;
-$forms-hint-text: $grey1000;
-
-$inline-form-error-text: $red800;
-
-$forms-placeholder-text: $grey800;
-
-$checkbox-checked-background: $grey800;
-$checkbox-checked-border: $grey800;
-
-$checkbox-not-checked-background: $grey50;
-$checkbox-not-checked-border: $grey500;
+$admin-default-data-text: $grey1000;
+$admin-deleted-at-text: $grey1000;
+$admin-user-ip-text: $grey1000;
 
 // comments.scss
 $comment-as-text: $grey600;
@@ -108,120 +48,71 @@ $track-content-comment-background: $grey100-alpha50;
 $track-content-comment-textarea-background: $white;
 $track-content-comment-textarea-text: $grey1000;
 
-// tracks.scss
-$track-open-box-shadow: 0 11px 19px 4px #6566667a;
-$track-background: $white;
-$track-play-button-background: $black;
-$track-seekbar-loaded-background: $grey50;
-$track-border-bottom: $grey50;
-$track-time-text: $grey800;
-$track-artist-text: $grey800;
-$track-reveal-top-background: $grey50;
-$track-description-text: $grey900;
-$track-created-text: $grey500;
-$track-view-more-text: $orange600;
-$track-stats-created-text: $grey600;
-$track-stats-text: $grey400;
-$track-stats-icon-background: $grey600;
-$track-stats-icon-favorites-background: $red800;
-$track-favorited-when-text: $grey800;
+// forms.scss
+$forms-heading-text: $grey1000;
 
-// playlists.scss
-$card-background: $white;
-$card-private-background: $grey1000;
-$card-private-text: $white;
-$card-title-font: 'Alright-v2-Normal', sans-serif;
-$card-title-weight: bold;
-$card-title-text: $black;
-$card-artist-font: 'Alright-v2-Normal-Medium', sans-serif;
-$card-artist-weight: normal;
-$card-artist-text: $orange600;
-$card-by-font: 'Alright-v2-Normal', sans-serif;
-$card-by-weight: normal;
-$card-by-text: $grey800;
+$forms-label-text: $grey600;
+$forms-input-text: $grey1000;
+$forms-background: $white;
+$forms-border: $grey200;
 
-// site_header.scss
-$site-header-background: $white;
-$site-header-box-shadow: 0 3px 4px -2px #65666627;
+$forms-hint-background: $grey50;
+$forms-hint-text: $grey1000;
 
-$site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
+$inline-form-error-text: $red800;
 
-$site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
-$profile-link-background: $grey100;
-$profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
-$site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
+$forms-placeholder-text: $grey800;
 
-$site-header-input-background: $grey100;
-$site-header-input-background-focus: $white;
+$checkbox-checked-background: $grey800;
+$checkbox-checked-border: $grey800;
 
-$site-header-input-text: $grey1000;
+$checkbox-not-checked-background: $grey50;
+$checkbox-not-checked-border: $grey500;
 
-$site-header-mobile-search-reveal-button-background: $grey100;
+// home.scss
+$hero-background: $grey100;
+$hero-heading-text: $orangetone;
+$hero-paragraph-text: $grey1000;
 
-$site-header-user-dropdown-background: $white;
-$site-header-user-dropdown-profile-edit-text: $orange800;
-$site-header-user-dropdown-profile-edit-border: $grey300;
-$site-header-user-dropdown-logout-background: $grey400;
-$site-header-user-dropdown-logout-text: $white;
-$site-header-user-dropdown-list-item-background: $grey50;
-$site-header-user-dropdown-list-item-text: $grey1000;
+// illustrations.scss
+$background_position-y: -5000px;
 
-// site_footer.scss
-$footer-alonetoners-text: $grey800;
-$footer-forum-topics-accent: $orange600;
-$footer-forum-topics-background: $grey25;
-$footer-forum-topics-link-background: $white;
-$footer-forum-topics-link-text: $black;
-$footer-forum-topics-artist-text: $grey800;
-$footer-bottom-background: $grey1100;
-$footer-bottom-column-background: $grey1000;
-$footer-bottom-link-text: $white;
+// notifications.scss
+$flash-text: $white;
 
-// sub_nav.scss
-$sub-nav-background: $grey100;
-$sub-nav-text: $grey1000;
-$sub-nav-text-hover: $grey1000;
-$sub-nav-current-background: $orange600;
-$sub-nav-link-background: $white;
+$ajax-fail-border: $red600;
+$ajax-fail-text: $red800;
+$ajax-success-border: $green400;
+$ajax-success-text: $green600;
 
-// users_index.scss
-$user-card-background: $white;
+$floating-feedback-background: $white;
 
-// user.scss
-$user-header-avatar-border: $black;
-$user-follow-background: $white;
-$user-follow-background-hover: $white;
-$user-card-background: $white;
-$user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
-$user-card-bio-text: $grey1000;
-$user-card-content-divider-background: $grey100;
-$user-follows-background: $white;
-$user-stats-background: $white;
-$user-links-text: $white;
-$user-links-background: $grey1000;
-$user-stats-label-text: $grey800;
-$user-stats-data-text: $grey1000;
-$user-mod-stats-heading-text: $grey500;
-$user-mod-stats-background: $grey100;
-$user-mod-stats-agent-border: $white;
-$user-actions-area-background: $grey100;
+$error-message-background: $red100;
+$error-message-shadow: $red200;
+$error-message-heading-text: $red1100;
+$error-message-list-items-text: $red1100;
 
-// static_pages.scss
-$static-page-heading-background: $grey100-alpha50;
-$static-page-heading-text: $grey1000;
-$static-page-content-background: $white;
-$static-page-h2-text: $orange600;
-$static-page-paragraph-text: $grey1000;
-$static-page-content-seperator: $grey50;
-$static-page-anchor: $grey400;
-$static-page-anchor-hover: $orangetone;
-$static-page-anchor-visited: $orange1000;
+$input-rejected-background: $red100;
+$input-rejected-border: $red600;
 
-// user_playlists.scss
-$user-playlists-sort-instructions: $grey800;
+$input-accepted-background: $grey25;
+$input-accepted-border: $green600;
 
-// upload.scss
-$upload-asset-background: $grey50;
+// pagination.scss
+$mini-paginator-background: $white;
+$pagy-link-text: $grey800;
+$pagy-link-text-active: $accent;
+
+// playlist.scss
+$playlist-sidebar-background: $white;
+
+// playlist_cover_view.scss
+$playlist-options-background: $grey1000;
+$playlist-options-link-background: $grey1000;
+$playlist-options-link-background-hover: $black;
+$playlist-options-link-border: $black;
+$playlist-options-link-text: $grey50;
+$playlist-options-link-action-text: $grey800;
 
 // playlist_edit.scss
 $edit-playlist-track-button-background: $grey200;
@@ -250,9 +141,6 @@ $edit-playlist-drag-handle-border-active: $accent;
 $edit-playlist-playlist-size-background: $grey50;
 $edit-playlist-playlist-size-text: $grey800;
 
-// playlist.scss
-$playlist-sidebar-background: $white;
-
 // playlist_sidebar.scss
 $playlist-sidebar-artist-text: $orangetone;
 $playlist-sidebar-artist-by-text: $black;
@@ -280,73 +168,98 @@ $sidebar-link-background-hover: $grey1000;
 $sidebar-link-text: $white;
 $sidebar-link-action-text: $grey800;
 
-// playlist_cover_view.scss
-$playlist-options-background: $grey1000;
-$playlist-options-link-background: $grey1000;
-$playlist-options-link-background-hover: $black;
-$playlist-options-link-border: $black;
-$playlist-options-link-text: $grey50;
-$playlist-options-link-action-text: $grey800;
-
-// track_content.scss
-$track-content-child-background: $white;
-$track-content-hr-background: $grey500;
-
-$track-edit-text: $grey1000;
-$track-edit-border: $grey500;
-$track-edit-border-focus: $grey500;
-
-$track-edit-new-version-note-text: $grey500;
-
-$track-content-spam-background: $red800;
-$track-content-spam-text: $white;
-
-$track-content-edit-background: $orange600;
-$track-content-edit-text: $white;
-
-$track-content-link-background: $grey50;
-$track-content-link-text: $grey900;
-
-$track-content-track-text: $grey1000;
-$track-content-artist-text: $black;
-$track-content-description-text: $grey900;
-
-// track_player.scss
-$waveform-unplayed-background: $grey400;
-$waveform-played-background: $grey1000;
-$big-player-seekbar-background: $grey200;
-$track-player-background: $grey100;
-$track-player-play-button-background: $white;
-$track-player-play-button-triangle-background: $black;
-$big-player-time-text: $white;
-$big-player-time-total-text: $grey800;
-
-// track_social.scss
-$track-social-heading-text: $grey500;
-
-// admin.scss
-$admin-search-text: $grey1000;
-$admin-search-background: $white;
-$admin-column-heading-text: $grey1000;
-
-$admin-nav-item-background-hover: $grey100;
-$admin-nav-item-total-text: $grey500;
-$admin-nav-item-current-text: $white;
-$admin-header-border: $grey500;
-$admin-row-border: $grey100;
-$admin-spam-row-background: $orange100;
-$admin-deleted-row-background: $grey50;
-
-$admin-default-data-text: $grey1000;
-$admin-deleted-at-text: $grey1000;
-$admin-user-ip-text: $grey1000;
+// playlists.scss
+$card-background: $white;
+$card-private-background: $grey1000;
+$card-private-text: $white;
+$card-title-font: 'Alright-v2-Normal', sans-serif;
+$card-title-weight: bold;
+$card-title-text: $black;
+$card-artist-font: 'Alright-v2-Normal-Medium', sans-serif;
+$card-artist-weight: normal;
+$card-artist-text: $orange600;
+$card-by-font: 'Alright-v2-Normal', sans-serif;
+$card-by-weight: normal;
+$card-by-text: $grey800;
 
 // secretz.scss
 $secretz-row-background: $white;
 $secretz-odd-row-background: $grey50;
 
-// illustrations.scss
-$background_position-y: -5000px;
+// shared.scss
+$body-background: $grey50;
+
+$box-background: $white;
+
+$box-h2-bottom-border: $grey100;
+
+$back-to-text: $grey900;
+$back-to-background: $white;
+
+$back-to-caret-background: $orangetone;
+$back-to-span-text: $orange600;
+
+$view-all-background: $white;
+$view-all-text: $grey800;
+
+$private-message-warning-background: $red500;
+$private-message-warning-border: $red600;
+$private-message-warning-text: $orange100;
+
+// site_footer.scss
+$footer-alonetoners-text: $grey800;
+$footer-forum-topics-accent: $orange600;
+$footer-forum-topics-background: $grey25;
+$footer-forum-topics-link-background: $white;
+$footer-forum-topics-link-text: $black;
+$footer-forum-topics-artist-text: $grey800;
+$footer-bottom-background: $grey1100;
+$footer-bottom-column-background: $grey1000;
+$footer-bottom-link-text: $white;
+
+// site_header.scss
+$site-header-background: $white;
+$site-header-box-shadow: 0 3px 4px -2px #65666627;
+
+$site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
+
+$site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
+$profile-link-background: $grey100;
+$profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
+$site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
+
+$site-header-input-background: $grey100;
+$site-header-input-background-focus: $white;
+
+$site-header-input-text: $grey1000;
+
+$site-header-mobile-search-reveal-button-background: $grey100;
+
+$site-header-user-dropdown-background: $white;
+$site-header-user-dropdown-profile-edit-text: $orange800;
+$site-header-user-dropdown-profile-edit-border: $grey300;
+$site-header-user-dropdown-logout-background: $grey400;
+$site-header-user-dropdown-logout-text: $white;
+$site-header-user-dropdown-list-item-background: $grey50;
+$site-header-user-dropdown-list-item-text: $grey1000;
+
+// static_pages.scss
+$static-page-heading-background: $grey100-alpha50;
+$static-page-heading-text: $grey1000;
+$static-page-content-background: $white;
+$static-page-h2-text: $orange600;
+$static-page-paragraph-text: $grey1000;
+$static-page-content-seperator: $grey50;
+$static-page-anchor: $grey400;
+$static-page-anchor-hover: $orangetone;
+$static-page-anchor-visited: $orange1000;
+
+// sub_nav.scss
+$sub-nav-background: $grey100;
+$sub-nav-text: $grey1000;
+$sub-nav-text-hover: $grey1000;
+$sub-nav-current-background: $orange600;
+$sub-nav-link-background: $white;
 
 // thredded_theme.scss
 $thredded-user-navigation-link-background: $white;
@@ -381,7 +294,99 @@ $thredded-form-list-textarea-background: $white;
 $thredded-form-list-textarea-text: $black;
 $thredded-new-topic-background: $grey100;
 
-// home.scss
-$hero-background: $grey100;
-$hero-heading-text: $orangetone;
-$hero-paragraph-text: $grey1000;
+// track_content.scss
+$track-content-child-background: $white;
+$track-content-hr-background: $grey500;
+
+$track-edit-text: $grey1000;
+$track-edit-border: $grey500;
+$track-edit-border-focus: $grey500;
+
+$track-edit-new-version-note-text: $grey500;
+
+$track-content-spam-background: $red800;
+$track-content-spam-text: $white;
+
+$track-content-edit-background: $orange600;
+$track-content-edit-text: $white;
+
+$track-content-link-background: $grey50;
+$track-content-link-text: $grey900;
+
+$track-content-track-text: $grey1000;
+$track-content-artist-text: $black;
+$track-content-description-text: $grey900;
+
+// track_player.scss
+$waveform-unplayed-background: $grey400;
+$waveform-played-background: $grey1000;
+$big-player-seekbar-background: $grey200;
+$track-player-background: $grey100;
+$track-player-play-button-background: $white;
+$track-player-play-button-triangle-fill: $black;
+$track-player-play-button-outline-stroke: $black;
+$track-player-dotty-stroke: $black;
+$track-player-pause-button-stroke: $white;
+$track-player-pause-button-fill: $black;
+$big-player-time-text: $white;
+$big-player-time-total-text: $grey800;
+
+// track_social.scss
+$track-social-heading-text: $grey500;
+
+// tracks.scss
+$track-open-box-shadow: 0 11px 19px 4px #6566667a;
+$track-background: $white;
+$track-play-button-background: $black;
+$track-pause-button-stroke: $white;
+$track-seekbar-loaded-background: $grey50;
+$track-border-bottom: $grey50;
+$track-time-text: $grey800;
+$track-artist-text: $grey800;
+$track-reveal-top-background: $grey50;
+$track-description-text: $grey900;
+$track-created-text: $grey500;
+$track-view-more-text: $orange600;
+$track-stats-created-text: $grey600;
+$track-stats-text: $grey400;
+$track-stats-icon-background: $grey600;
+$track-stats-icon-favorites-background: $red800;
+$track-favorited-when-text: $grey800;
+
+// typography.scss
+$body-text: $black;
+
+// upload.scss
+$upload-asset-background: $grey50;
+
+// user.scss
+$user-header-avatar-border: $black;
+$user-follow-background: $white;
+$user-follow-background-hover: $white;
+$user-card-background: $white;
+$user-card-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15), 0px 6px 24px rgba(134, 134, 134, 0.75);
+$user-card-bio-text: $grey1000;
+$user-card-content-divider-background: $grey100;
+$user-follows-background: $white;
+$user-stats-background: $white;
+$user-links-text: $white;
+$user-links-background: $grey1000;
+$user-stats-label-text: $grey800;
+$user-stats-data-text: $grey1000;
+$user-mod-stats-heading-text: $grey500;
+$user-mod-stats-background: $grey100;
+$user-mod-stats-agent-border: $white;
+$user-actions-area-background: $grey100;
+
+// user_playlists.scss
+$user-playlists-sort-instructions: $grey800;
+
+// users_index.scss
+$user-card-background: $white;
+
+// variables.scss
+$default-button-text: $white;
+$default-button-background: $grey500;
+$default-button-background-hover: $grey800;
+$primary-button-background-hover: $orange600;
+$primary-button-background-active: $orange800;

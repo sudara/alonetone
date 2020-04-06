@@ -30,10 +30,8 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       switch_themes
 
-      # seek
-      find('.waveform').click(x: 200, y: 10)
-      sleep 0.1
       with_animations_paused do
+        find('.waveform').click(x: 200, y: 10) # seek
         find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
         find('.play_button_container a').click # pause
 
@@ -42,7 +40,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # same position for the percy snap.
         Percy.snapshot(page,
           name: 'Playlist Track Play, Seek, Pause',
-          percy_css: '.progress_container_inner { left: 33% !important; }')
+          percy_css: '.progress_container_inner { left: 33% !important; } #waveform_reveal { left: -335px !important; }')
       end
     end
   end
@@ -51,11 +49,16 @@ RSpec.describe 'playlists', type: :feature, js: true do
     logged_in(:henri_willig) do
       visit 'henriwillig/playlists/polderkaas/edit'
 
+      # add a playlist image
+      attach_file('playlist_cover_image', 'spec/fixtures/files/cheshire_cheese.jpg', make_visible: true)
+      find('input[name="commit"]').click
+      expect(find(".cover img")['src']).to have_content('cheshire_cheese.jpg')
+
+      pause_animations
+
       # test that we can remove second track
       find('.sortable .asset:last-child .remove').click
       expect(page).to have_selector('.sortable .asset', count: 1)
-
-      pause_animations
 
       # add 2 new tracks
       first_upload = find('#your_uploads .asset:nth-child(1) .add')
@@ -65,6 +68,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       expect(page).to have_selector('.sortable .asset', count: 3)
 
       # Ensure custom checkboxes are happy
+      find('.edit_playlist_info_right_column_private_and_hidden label').click
       find('.edit_playlist_info_right_column_private_and_hidden label').click
 
       # Move "Manfacturer of the Finest Cheese" to be the last song

@@ -50,7 +50,7 @@ RSpec.describe Upload::ZipFile, type: :model do
       playlist = zip_file.playlists.first
       expect(playlist.user).to eq(user)
       expect(playlist.title).to eq('Le Duc Vacherin')
-      expect(playlist.private).to be_nil
+      expect(playlist.published).to eq(false)
 
       expect(zip_file.assets.length).to eq(3)
       zip_file.assets.each do |asset|
@@ -124,7 +124,7 @@ RSpec.describe Upload::ZipFile, type: :model do
     end
     let(:playlist_attributes) do
       {
-        private: true,
+        published: false,
         year: '2019'
       }
     end
@@ -135,7 +135,7 @@ RSpec.describe Upload::ZipFile, type: :model do
 
       expect(zip_file.playlists.length).to eq(1)
       zip_file.playlists.each do |playlist|
-        expect(playlist.private).to eq(true)
+        expect(playlist.published).to eq(false)
         expect(playlist.year).to eq('2019')
       end
     end

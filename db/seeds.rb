@@ -131,7 +131,7 @@ DESC
 playlist.save!
 playlist.tracks.create!(user: marie, asset: commonly_blue_green)
 playlist.tracks.create!(user: marie, asset: aqueous_suspension)
-playlist.update(private: false)
+playlist.publish!
 
 baguette_laonnaise = marie.assets.create!(extract_metadata(
   audio_file: piano_upload,
@@ -155,7 +155,7 @@ DESC
 playlist.save!
 playlist.tracks.create!(user: marie, asset: baguette_laonnaise)
 playlist.tracks.create!(user: marie, asset: appellation_description)
-playlist.update(private: false)
+playlist.publish!
 
 # --- Carole ---
 
@@ -196,7 +196,7 @@ DESC
 edible_coating.save!
 edible_coating.tracks.create!(user: carole, asset: creamy_interior)
 edible_coating.tracks.create!(user: carole, asset: cylindrical_rounds)
-edible_coating.update(private: false)
+edible_coating.publish!
 
 # --- Petere ---
 
@@ -237,7 +237,7 @@ DESC
 mrs_applebys_cheshire.save!
 mrs_applebys_cheshire.tracks.create!(user: petere, asset: keep_tradition_alive)
 mrs_applebys_cheshire.tracks.create!(user: petere, asset: much_like_cheddar)
-mrs_applebys_cheshire.update(private: false)
+mrs_applebys_cheshire.publish!
 
 # Some random listens.
 10.times do
@@ -301,6 +301,7 @@ boards.collect do |board|
       p.content = 'Here is the body of a post on #{board.name}... Good stuff!'
       p.moderation_state = 'approved'
       p.messageboard = board
+      p.created_at = p.updated_at = 75.minutes.ago # prevent percy glitch
     end
     t.save
   end

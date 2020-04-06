@@ -2,14 +2,6 @@
 	margin-bottom: 0;
 }
 
-.no_search_results {
-	max-width: $site_max_width;
-	padding: 0 $baseline * 1.5;
-	box-sizing: border-box;
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .user_search_results_heading {
 	@media #{$mobile} {
 		padding-left: 12px;

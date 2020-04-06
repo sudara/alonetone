@@ -1,5 +1,5 @@
 <%= error_messages_for :playlist %>
-<div class="edit_playlist_info_container">
+<div class="page_container edit_playlist_info_container">
   <% if @playlist.persisted? %>
     <%= render partial: 'back_to_playlist' %>
   <% else %>
@@ -63,8 +63,8 @@
           <% if @playlist.persisted? %>
           <div class="edit_playlist_info_right_column_private_and_hidden" data-target="playlist-form.checkbox" style="display:none">
             <div class="input">
-              <%= f.check_box :private, data: { target: 'playlist-form.actualCheckbox' }, id: 'playlist_private' %>
-              <label for="playlist_private" data-target="playlist-form.markAsPrivate" data-action='click->playlist-form#togglePrivate'><span>Private</span></label>
+              <%= f.check_box :is_private?, { data: { target: 'playlist-form.actualCheckbox' }, id: 'playlist_private'}  %>
+              <label for="playlist_is_private" data-target="playlist-form.markAsPrivate" data-action='click->playlist-form#togglePrivate'><span>Private</span></label>
             </div>
           </div>
           <% end %>

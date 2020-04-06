@@ -7,26 +7,32 @@ export default class extends Controller {
 
   initialize() {
     this.tracksCount = 0
+    this.updateBanner()
   }
 
   // called by playlistSort on initialize/add/remove
   updateCount(newCount) {
     this.tracksCount = newCount
-    this.displayBanner()
-  }
-
-  displayBanner() {
     if (this.tracksCount < 2) {
       this.forcePrivate()
-    } else if (this.actualCheckboxTarget.checked) {
+    } else {
+      this.updateBanner()
+    }
+  }
+
+  updateBanner() {
+    if (this.actualCheckboxTarget.checked) {
+      this.actualCheckboxTarget.checked = true // redundant, but sometimes this attribute isn't present
       this.showPrivateBanner()
     } else {
+      this.actualCheckboxTarget.checked = false // redundant, but sometimes this attribute isn't present
       this.checkboxTarget.style.display = 'block'
+      this.hidePrivateBanner()
     }
   }
 
   forcePrivate() {
-    this.actualCheckboxTarget.checked = 1
+    this.actualCheckboxTarget.checked = true
     this.showNeedsTracksBanner()
     this.checkboxTarget.style.display = 'none'
   }
@@ -48,9 +54,13 @@ export default class extends Controller {
 
   togglePrivate(e) {
     e.preventDefault()
-    // The label was clicked, so we still need to check the box
-    this.actualCheckboxTarget.checked = !this.actualCheckboxTarget.checked
-    this.actualCheckboxTarget.checked ? this.showPrivateBanner() : this.hidePrivateBanner()
+    if (this.actualCheckboxTarget.checked) {
+      this.actualCheckboxTarget.checked = false
+      this.hidePrivateBanner()
+    } else {
+      this.actualCheckboxTarget.checked = true
+      this.showPrivateBanner()
+    }
   }
 
   openFile(e) {
@@ -66,7 +76,6 @@ export default class extends Controller {
     e.preventDefault()
     this.coverTarget.innerHTML = '<div class="no_pic"></div>'
     this.fileFieldTarget.value = ''
-    console.log(this.fileFieldTarget)
 
   }
 

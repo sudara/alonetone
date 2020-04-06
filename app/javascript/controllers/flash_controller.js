@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-import { TimelineMax, TweenLite, Elastic, Power4, CSSPlugin } from 'gsap/all'
+import { gsap } from 'gsap'
 
 export let flashController
 
@@ -12,10 +12,10 @@ export default class extends Controller {
 
   alert(message) {
     this.element.innerHTML = message
-    new TimelineMax({})
-      .to(this.element, 0, { autoAlpha: 0, y: 50 })
-      .to(this.element, 0.5, { autoAlpha: 1, y: 0 })
-      .to(this.element, 1, { autoAlpha: 0, y: 0 }, 3)
+    gsap.timeline({})
+      .to(this.element, { autoAlpha: 0, y: 50 })
+      .to(this.element, { duration: 0.5, autoAlpha: 1, y: 0 })
+      .to(this.element, { duration: 1.0, autoAlpha: 0, y: 0 }, 3)
   }
 
   alertSaved(message = 'Saved!') {

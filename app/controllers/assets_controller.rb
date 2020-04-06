@@ -248,7 +248,7 @@ class AssetsController < ApplicationController
 
   def playlist_attributes
     {
-      private: dont_publish_param?
+      published: !dont_publish_param?
     }
   end
 
