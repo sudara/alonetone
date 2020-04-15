@@ -291,7 +291,7 @@
           flex-shrink: 0;
           position: relative;
           top: -3px;
-          background-color: $accent;
+          background-color: $grey400;
           border-radius: 4px;
           position: relative;
           &:hover {
@@ -303,6 +303,8 @@
             font-weight: bold;
             padding-top: 11px;
             padding-left: 10px;
+            padding-right: 7px;
+            text-align: right;
           }
           .toggle_inner {
             background-color: #fff;
@@ -313,36 +315,30 @@
               0px 2px 2px rgba(53, 53, 53, 0.33);
             position: absolute;
             bottom: 3px;
-            right: 3px;
+            left: 3px;
+            right: auto;
           }
-          &.toggle_on {
+          .toggle_label_on {
+            display: none;
+          }
+          .toggle_label_off {
+            display: block;
+          }
+          &.on {
             background-color: $accent;
             .toggle_inner {
               bottom: 3px;
+              left: auto;
               right: 3px;
             }
-            .toggle_label_on {
-              display: block;
-            }
-            .toggle_label_off {
-              display: none;
-            }
-          }
-          &.toggle_off {
-            background-color: $grey400;
-            .toggle_inner {
-              bottom: 3px;
-              left: 3px;
-            }
             .toggle_label {
-              padding-right: 7px;
-              text-align: right;
+              text-align: left;
             }
             .toggle_label_on {
-              display: none;
+              display: block;
             }
             .toggle_label_off {
-              display: block;
+              display: none;
             }
           }
         }

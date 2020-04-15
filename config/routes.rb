@@ -79,7 +79,6 @@ Alonetone::Application.routes.draw do
   end
 
   get 'signup', to: 'users#new'
-  get 'settings', to: 'users#edit'
   get '/activate/:perishable_token', to: 'users#activate'
 
   get 'radio' =>'assets#radio', :as => 'radio_home'
@@ -113,6 +112,7 @@ Alonetone::Application.routes.draw do
     member do
       post :attach_pic
       get :sudo
+      put :toggle_setting
     end
     resource 'profile'
     resources 'tracks', controller: :assets do

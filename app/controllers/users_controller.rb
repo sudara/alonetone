@@ -98,6 +98,11 @@ class UsersController < ApplicationController
     head :ok
   end
 
+  def toggle_setting
+    result = BooleanSettings.new(@user).toggle_boolean(param[:setting])
+    result ? head(:ok) : head(:bad_request)
+  end
+
   def destroy
     redirect_to(root_path) && (return false) if params[:user_id] || !params[:login] # bug of doom
     if admin_or_owner_with_delete

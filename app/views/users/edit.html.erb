@@ -106,10 +106,16 @@
           <div class="edit_profile_settings_left_column">
             <div class="setting">
               <label>Display play counts blatantly on all tracks?</label>
-              <div class="toggle toggle_off">
+              <div class="toggle">
                 <div class="toggle_inner"></div>
-                <div class="toggle_label toggle_label_on">ON</div>
-                <div class="toggle_label toggle_label_off">OFF</div>
+                <%= link_to "ON", toggle_setting_user_path('ego'),
+                  method: :put,
+                  class: 'toggle_label toggle_label_on',
+                  data: { target: 'toggle-setting.toggle' , action: 'toggle-setting#toggle' } %>
+                <%= link_to "OFF", toggle_setting_user_path('ego'),
+                  method: :put,
+                  class: 'toggle_label toggle_label_off',
+                  data: { target: 'toggle-setting.toggle' , action: 'toggle-setting#toggle' } %>
               </div>
             </div>
             <div class="edit_profile_separator"></div>
@@ -133,13 +139,14 @@
           </div>
           <div class="edit_profile_settings_right_column">
             <div class="edit_profile_separator"></div>
-            <div class="setting">
-              <label>Increase size of ego by 4x?</label>
-              <div class="toggle toggle_off">
+            <div class="setting" data-controller="toggle-setting" data-toggle-setting-key="increase_ego">
+              <label data-target="toggle-setting.description">Increase size of ego by 4x?</label>
+              <%= link_to toggle_setting_user_path(current_user), method: :put,
+                data: { target: 'toggle-setting.toggle', action: 'toggle-setting#toggle' }, class: "toggle #{'on' if current_user.has_setting?('increase_ego')}" do %>
                 <div class="toggle_inner"></div>
                 <div class="toggle_label toggle_label_on">ON</div>
                 <div class="toggle_label toggle_label_off">OFF</div>
-              </div>
+              <% end %>
             </div>
             <div class="edit_profile_separator"></div>
             <div class="setting">
