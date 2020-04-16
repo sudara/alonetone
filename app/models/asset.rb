@@ -189,8 +189,8 @@ class Asset < ApplicationRecord
   end
 
   def notify_followers
-    user.followers.select(&:wants_email?).each do |user|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user.id)
+    user.followers.include(:settings).where(email_new_tracks: true).pluck(:id).each do |user_id|
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user_id)
     end
   end
 

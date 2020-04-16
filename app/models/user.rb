@@ -16,7 +16,6 @@ class User < ApplicationRecord
   require_dependency 'user/statistics'
 
   include User::Findability
-  include User::Settings
   include User::Statistics
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
@@ -56,8 +55,7 @@ class User < ApplicationRecord
       if: :require_password?
     }
 
-  store :settings
-  has_one :new_settings, class_name: 'NewSettings'
+  has_one :settings, class_name: 'Settings'
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
@@ -80,15 +78,12 @@ class User < ApplicationRecord
   before_create :make_first_user_admin
   before_destroy :destroy_with_relations
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
-  after_create :create_profile, :create_new_settings
+  after_create :create_profile, :create_settings
 
   has_one :profile, dependent: :destroy
-<<<<<<< HEAD
   accepts_nested_attributes_for :profile
 
-=======
-  has_one :new_settings, dependent: :destroy
->>>>>>> master
+  has_one :settings, dependent: :destroy
   has_one :account_request
   belongs_to :invited_by, optional: true, class_name: 'User'
   has_many :invitees, foreign_key: 'invited_by_id'
@@ -306,6 +301,30 @@ class User < ApplicationRecord
     else
       with_deleted.recent
     end
+  end
+
+  def has_public_playlists?
+    playlists.only_public.count >= 1
+  end
+
+  def has_tracks?
+    assets_count > 0
+  end
+
+  def has_as_favorite?(asset)
+    favorite_asset_ids.include?(asset.id)
+  end
+
+  def favorite_asset_ids
+    Track.where(playlist_id: favorites).pluck(:asset_id)
+  end
+
+  def favorites
+    playlists.favorites.first
+  end
+
+  def name
+    self[:display_name] || login
   end
 
   protected

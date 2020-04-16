@@ -114,7 +114,7 @@ class Playlist < ActiveRecord::Base
   end
 
   def notify_followers
-    user.followers.select(&:wants_email?).each do |user|
+    user.followers.include(:settings).where(email_new_tracks: true).each do |user|
       AlbumNotificationJob.perform_later(id, user.id)
     end
   end

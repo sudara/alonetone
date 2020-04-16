@@ -147,7 +147,7 @@
     </div>
     <% end %>
 
-    <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
+    <% if @popular_tracks.present? && @user.most_popular? %>
       <div id="user_popular_area">
         <h2>Most Listened To Tracks</h2>
 

@@ -142,7 +142,7 @@
             <div class="setting" data-controller="toggle-setting" data-toggle-setting-key="increase_ego">
               <label data-target="toggle-setting.description">Increase size of ego by 4x?</label>
               <%= link_to toggle_setting_user_path(current_user), method: :put,
-                data: { target: 'toggle-setting.toggle', action: 'toggle-setting#toggle' }, class: "toggle #{'on' if current_user.has_setting?('increase_ego')}" do %>
+                data: { target: 'toggle-setting.toggle', action: 'toggle-setting#toggle' }, class: "toggle #{'on' if current_user.increase_ego?}" do %>
                 <div class="toggle_inner"></div>
                 <div class="toggle_label toggle_label_on">ON</div>
                 <div class="toggle_label toggle_label_off">OFF</div>

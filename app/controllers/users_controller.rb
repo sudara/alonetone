@@ -201,17 +201,6 @@ class UsersController < ApplicationController
     @sudo = session[:sudo] = nil
   end
 
-  def flush_asset_cache_if_necessary
-    # If the user changes the :block_guest_comments setting then it requires
-    # that the cache for all their tracks be invalidated
-    flush_asset_caches = false
-    if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
-      flush_asset_caches = params[:user][:settings][:block_guest_comments] == (currently_blocking_guest_comments ? "false" : "true")
-    end
-    Asset.where(user_id: @user.id).update_all(updated_at: Time.now) if flush_asset_caches
-  end
-
   def display_user_home_or_index
     if params[:login] && User.find_by_login(params[:login])
       redirect_to user_home_url(params[:user])
