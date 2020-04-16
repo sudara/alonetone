@@ -57,6 +57,7 @@ class User < ApplicationRecord
     }
 
   store :settings
+  has_one :new_settings, class_name: 'NewSettings'
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
@@ -79,11 +80,15 @@ class User < ApplicationRecord
   before_create :make_first_user_admin
   before_destroy :destroy_with_relations
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
-  after_create :create_profile
+  after_create :create_profile, :create_new_settings
 
   has_one :profile, dependent: :destroy
+<<<<<<< HEAD
   accepts_nested_attributes_for :profile
 
+=======
+  has_one :new_settings, dependent: :destroy
+>>>>>>> master
   has_one :account_request
   belongs_to :invited_by, optional: true, class_name: 'User'
   has_many :invitees, foreign_key: 'invited_by_id'
