@@ -34,6 +34,10 @@ class Playlist < ActiveRecord::Base
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :cover_image
+  validates :cover_image, attached: {
+    content_type: %w[image/png image/jpeg image/jpg image/gif],
+    byte_size: { less_than: 20.megabytes }
+  }, if: :cover_image_present?
 
   enum(
     cover_quality: {
