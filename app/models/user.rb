@@ -52,6 +52,8 @@ class User < ApplicationRecord
     }
 
   has_one :settings, class_name: 'Settings'
+  delegate :display_listen_count?, :block_guest_comments?, :most_popular?,
+    :increase_ego?, :email_comments?, :email_new_tracks?, to: :settings
 
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
