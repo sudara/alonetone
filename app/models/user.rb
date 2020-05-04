@@ -11,10 +11,6 @@ class User < ApplicationRecord
                   user_agent: proc { profile&.user_agent },
                   comment_type: 'signup'
 
-  require_dependency 'user/findability'
-  require_dependency 'user/settings'
-  require_dependency 'user/statistics'
-
   include User::Findability
   include User::Statistics
 
