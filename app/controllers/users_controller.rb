@@ -72,6 +72,7 @@ class UsersController < ApplicationController
   def attach_pic
     avatar_image = params.dig(:pic, :pic)
     if avatar_image && @user.update(avatar_image: avatar_image)
+      flush_asset_cache
       flash[:ok] = 'Picture updated!'
     else
       flash[:error] = 'Whups, picture not updated! Try again.'
@@ -81,7 +82,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flush_asset_cache_if_necessary
+      flush_asset_cache if user_params.include?(:login)
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
       flash.now[:error] = "Not so fast, young one"
@@ -207,5 +208,9 @@ class UsersController < ApplicationController
     else
       redirect_to users_url
     end
+  end
+
+  def flush_asset_cache
+    Asset.where(user_id: @user.id).touch_all
   end
 end

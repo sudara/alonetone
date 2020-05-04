@@ -195,10 +195,12 @@
   <div class="edit_profile_change_your_login box">
     <div class="warning_tag">Warning</div>
     <%= error_messages_for @user %>
-    <%= form_with model: @user do |f| %>
+    <%= form_with model: @user, local: true do |f| %>
       <h2>Change your login</h2>
       <p>
-        Changing this will break any mp3 players you or anyone else has put on the web, as well as any links anyone has passed around to your music, as well as confuse google about where your music is for a few weeks. Basically, don't do this unless you have to, it makes life hard for folks finding your tunes.
+        Changing this will break any links you or anyone else has put to your music on the web,
+        email, etc. It will also confuse google about where your music is for a few weeks.
+        Basically, don't do this unless you have to, it makes it hard to find your tunes.
       </p>
 
       <div>
