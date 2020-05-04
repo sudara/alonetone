@@ -100,7 +100,9 @@ class UsersController < ApplicationController
   end
 
   def toggle_setting
-    result = BooleanSettings.new(@user).toggle_boolean(param[:setting])
+    if Settings::AVAILABLE.include? "#{params[:setting]}?".to_sym
+     result = @user.settings.toggle!(params[:setting])
+    end
     result ? head(:ok) : head(:bad_request)
   end
 
