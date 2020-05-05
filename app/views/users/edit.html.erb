@@ -104,69 +104,17 @@
       <%= form_for @user do |f| -%>
         <div class="edit_profile_settings_columns">
           <div class="edit_profile_settings_left_column">
-            <div class="setting">
-              <label>Display play counts blatantly on all tracks?</label>
-              <div class="toggle">
-                <div class="toggle_inner"></div>
-                <%= link_to "ON", toggle_setting_user_path('ego'),
-                  method: :put,
-                  class: 'toggle_label toggle_label_on',
-                  data: { target: 'toggle-setting.toggle' , action: 'toggle-setting#toggle' } %>
-                <%= link_to "OFF", toggle_setting_user_path('ego'),
-                  method: :put,
-                  class: 'toggle_label toggle_label_off',
-                  data: { target: 'toggle-setting.toggle' , action: 'toggle-setting#toggle' } %>
-              </div>
-            </div>
+            <%= render partial: 'setting', locals: { key: 'email_comments', label: 'Email you comments on your tracks?' } %>
             <div class="edit_profile_separator"></div>
-            <div class="setting">
-              <label>Accept comments from guests?</label>
-              <div class="toggle toggle_on">
-                <div class="toggle_inner"></div>
-                <div class="toggle_label toggle_label_on">ON</div>
-                <div class="toggle_label toggle_label_off">OFF</div>
-              </div>
-            </div>
+            <%= render partial: 'setting', locals: { key: 'email_new_tracks', label: 'Email you when someone you follow uploads a track?' } %>
             <div class="edit_profile_separator"></div>
-            <div class="setting">
-              <label>Display most popular tracks on your home page?</label>
-              <div class="toggle toggle_off">
-                <div class="toggle_inner"></div>
-                <div class="toggle_label toggle_label_on">ON</div>
-                <div class="toggle_label toggle_label_off">OFF</div>
-              </div>
-            </div>
+            <%= render partial: 'setting', locals: { key: 'block_guest_comments', label: 'Block guests from commenting on your tracks?' } %>
           </div>
           <div class="edit_profile_settings_right_column">
+            <%= render partial: 'setting', locals: { key: 'most_popular', label: 'Show most popular tracks on your home page?' } %>
             <div class="edit_profile_separator"></div>
-            <div class="setting" data-controller="toggle-setting" data-toggle-setting-key="increase_ego">
-              <label data-target="toggle-setting.description">Increase size of ego by 4x?</label>
-              <%= link_to toggle_setting_user_path(current_user), method: :put,
-                data: { target: 'toggle-setting.toggle', action: 'toggle-setting#toggle' }, class: "toggle #{'on' if current_user.increase_ego?}" do %>
-                <div class="toggle_inner"></div>
-                <div class="toggle_label toggle_label_on">ON</div>
-                <div class="toggle_label toggle_label_off">OFF</div>
-              <% end %>
-            </div>
-            <div class="edit_profile_separator"></div>
-            <div class="setting">
-              <label>Should we email you new comments on your tracks?</label>
-              <div class="toggle toggle_off">
-                <div class="toggle_inner"></div>
-                <div class="toggle_label toggle_label_on">ON</div>
-                <div class="toggle_label toggle_label_off">OFF</div>
-              </div>
-            </div>
-            <div class="edit_profile_separator"></div>
-            <div class="setting">
-              <label>Email notifications when folks you follow upload tracks?</label>
-              <div class="toggle toggle_off">
-                <div class="toggle_inner"></div>
-                <div class="toggle_label toggle_label_on">ON</div>
-                <div class="toggle_label toggle_label_off">OFF</div>
-              </div>
-            </div>
-          </div>
+            <%= render partial: 'setting', locals: { key: 'increase_ego', label: 'Increase size of ego by 4x?' } %>
+       </div>
         </div>
         <% end %>
       </div>

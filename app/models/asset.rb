@@ -167,14 +167,6 @@ class Asset < ApplicationRecord
     self[:length] # a bit backwards, ain't it?
   end
 
-  def guest_can_comment?
-    if user.settings.present? && user.settings['block_guest_comments'].present?
-      user.settings['block_guest_comments'] == "false"
-    else
-      true
-    end
-  end
-
   def published?
     !private?
   end

@@ -13,4 +13,8 @@ module AssetsHelper
       user_track_path(asset.user, asset, format: :mp3)
     end
   end
+
+  def can_comment_on?(asset)
+    logged_in? || !asset.user.block_guest_comments?
+  end
 end
