@@ -51,9 +51,6 @@ class User < ApplicationRecord
       if: :require_password?
     }
 
-  has_one :settings, class_name: 'Settings'
-  delegate *Settings::AVAILABLE, to: :settings
-
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
@@ -80,7 +77,9 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
-  has_one :settings, dependent: :destroy
+  has_one :settings, dependent: :destroy, class_name: 'Settings'
+  delegate(*Settings::AVAILABLE, to: :settings)
+
   has_one :account_request
   belongs_to :invited_by, optional: true, class_name: 'User'
   has_many :invitees, foreign_key: 'invited_by_id'

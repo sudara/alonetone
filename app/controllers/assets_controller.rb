@@ -133,7 +133,7 @@ class AssetsController < ApplicationController
       flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
     elsif @assets.present? && at_least_one_upload
-      @user.followers.include(:settings).where(email_new_tracks: true).pluck(:id).each do |follower_id|
+      @user.followers.includes(:settings).where('settings.email_new_tracks = ?', true).pluck(:id).each do |follower_id|
         AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: @assets.map(&:id), user_id: follower_id)
       end
       if @assets.count == 1
