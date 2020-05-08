@@ -391,9 +391,9 @@
       color: $grey800;
       max-width: 636px;
     }
-    > form > div {
+    form > div {
       display: flex;
-      div {
+      div:not(.field_with_errors) {
         background-color: $edit-profile-hint-background;
         color: $edit-profile-hint-text;
         font-family: $medium-sans-font;
@@ -421,9 +421,9 @@
       }
       input[type="submit"] {
         @include default_button("primary");
-        background-color: $grey400;
-        margin-left: 20px;
-        margin-bottom: 12px;
+        // background-color: $grey400;
+        // margin-left: 20px;
+        // margin-bottom: 12px;
       }
     }
   }
