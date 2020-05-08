@@ -7,13 +7,13 @@
 
     <%= form_with model: @user do |f| %>
     <div class="edit_profile_top">
-      <div class="edit_profile_top_left">
+      <div class="edit_profile_top_left" data-controller="image-upload">
         <label>PROFILE PICTURE</label>
-        <div class="user_avatar">
+        <div class="user_avatar" data-target='image-upload.image' data-action='click->image-upload#openFile'>
           <%= user_image(@user, variant: :card_avatar) %>
         </div>
-          <%= f.file_field :cover_image, data: { target: 'playlist-form.fileField', action: 'change->playlist-form#fileChanged' }, style: 'display:none'  %>
-          <%= f.label :cover_image, 'Choose new profile image...', class:"upload_image", data: { target: 'playlist-form.fileLabel' } %>
+          <%= f.file_field :cover_image, data: { target: 'image-upload.fileField', action: 'change->image-upload#fileChanged' }, style: 'display:none'  %>
+          <%= f.label :cover_image, 'Choose new profile image...', class:"upload_image", data: { target: 'image-upload.fileLabel' } %>
         <p class="instructions">
           Upload a square photo<br>
           2000px by 2000px for the best results
