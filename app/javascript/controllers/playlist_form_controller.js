@@ -1,9 +1,8 @@
 import { Controller } from 'stimulus'
-import { flashController } from './flash_controller'
 
 export default class extends Controller {
   static targets = ['checkbox', 'actualCheckbox', 'markAsPrivate',
-    'needsTracksBanner', 'privateBanner', 'fileField', 'fileLabel', 'cover']
+    'needsTracksBanner', 'privateBanner']
 
   initialize() {
     this.tracksCount = 0
@@ -22,10 +21,11 @@ export default class extends Controller {
 
   updateBanner() {
     if (this.actualCheckboxTarget.checked) {
-      this.actualCheckboxTarget.checked = true // redundant, but sometimes this attribute isn't present
+      // redundant, but sometimes this attribute isn't present
+      this.actualCheckboxTarget.checked = true
       this.showPrivateBanner()
     } else {
-      this.actualCheckboxTarget.checked = false // redundant, but sometimes this attribute isn't present
+      this.actualCheckboxTarget.checked = false
       this.checkboxTarget.style.display = 'block'
       this.hidePrivateBanner()
     }
@@ -62,34 +62,4 @@ export default class extends Controller {
       this.showPrivateBanner()
     }
   }
-
-  openFile(e) {
-    this.fileLabelTarget.click()
-  }
-
-  fileChanged(e) {
-    this.displayPreview(e.target)
-  }
-
-
-  removePic(e) {
-    e.preventDefault()
-    this.coverTarget.innerHTML = '<div class="no_pic"></div>'
-    this.fileFieldTarget.value = ''
-
-  }
-
-  displayPreview(input) {
-    const reader = new FileReader()
-    if (input.files && input.files[0]) {
-      reader.onload = (e) => {
-        const image = document.createElement('img')
-        image.src = e.target.result
-        this.coverTarget.innerHTML = ''
-        this.coverTarget.appendChild(image)
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
 }

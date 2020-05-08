@@ -43,9 +43,9 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 
 ### Current stack
 
-* Rails 6.0.2
+* Rails 6.0.3
 * Sidekiq for jobs
-* Active Storage for file storage on s3
+* Active Storage & s3
 * Fastly for CDN and image thumbnailing
 * [Stimulus js](http://stimulusjs.org)
 * [Howler js](http://howlerjs.com) for Audio playback
