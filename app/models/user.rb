@@ -144,6 +144,10 @@ class User < ApplicationRecord
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :avatar_image
+  validates :avatar_image, attached: {
+    content_type: %w[image/png image/jpeg image/jpg image/gif],
+    byte_size: { less_than: 20.megabytes }
+  }, if: :avatar_image_present?
 
   # tokens and activation
   def clear_token!
@@ -269,8 +273,12 @@ class User < ApplicationRecord
 
   # Generates a location to user's avatar with the requested variant. Returns nil when the user
   # does not have a usable avatar.
+  #
+  # As of Rails 6.0 attachables aren't persisted to storage until save
+  # https://github.com/rails/rails/pull/33303
+  # Which means we don't want to try and display variants from unpersisted records with invalid attachments
   def avatar_image_location(variant:)
-    return unless avatar_image.attached?
+    return unless avatar_image.attached? && avatar_image.persisted?
 
     Storage::Location.new(
       ImageVariant.variant(avatar_image, variant: variant),

@@ -34,6 +34,10 @@ class Playlist < ActiveRecord::Base
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :cover_image
+  validates :cover_image, attached: {
+    content_type: %w[image/png image/jpeg image/jpg image/gif],
+    byte_size: { less_than: 20.megabytes }
+  }, if: :cover_image_present?
 
   enum(
     cover_quality: {
@@ -141,8 +145,12 @@ class Playlist < ActiveRecord::Base
 
   # Generates a location to playlist's cover with the requested variant. Returns nil when the
   # playlist does not have a usable cover.
+  #
+  # As of Rails 6.0 attachables aren't persisted to storage until save
+  # https://github.com/rails/rails/pull/33303
+  # Which means we don't want to try and display variants from unpersisted records with invalid attachments
   def cover_image_location(variant:)
-    return unless cover_image.attached?
+    return unless cover_image.attached? && cover_image.persisted?
 
     Storage::Location.new(
       ImageVariant.variant(cover_image, variant: variant),
