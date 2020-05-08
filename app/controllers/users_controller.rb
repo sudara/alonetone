@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flush_asset_cache if user_params.include?(:login) || user_params.include(:avatar_image)
+      flush_asset_cache if user_params.include?(:login) || user_params.include?(:avatar_image)
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
       flash.now[:error] = "Not so fast, young one"

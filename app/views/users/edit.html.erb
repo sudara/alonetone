@@ -141,8 +141,8 @@
   </div>
 
   <div class="edit_profile_change_your_login box">
-    <div class="warning_tag">Warning</div>
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('login') %>
+    <div class="warning_tag">Warning</div>
     <%= form_with model: @user, local: true do |f| %>
       <h2>Change your login</h2>
       <p>
