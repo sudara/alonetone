@@ -122,16 +122,17 @@
   <div class="edit_profile_change_your_password box">
     <div class="warning_tag">Warning</div>
     <div class="row">
-      <%= form_with model: @user do |f| %>
+      <%= error_messages_for @user %>
+      <%= form_with model: @user, local: true do |f| %>
         <h2>Change your password</h2>
         <p>
-          This is not real!
+
         </p>
         <div>
-          <%= f.text_field :password, required: true %>
+          <%= f.password_field :password, placeholder: "New Password", autocomplete: 'new-password'  %>
         </div>
         <div>
-          <%= f.text_field :password_confirmation, required: true %>
+          <%= f.password_field :password_confirmation, placeholder: "Confirm New Password", autocomplete: 'new-password' %>
         </div>
         <div>
           <%= f.submit "Change password" %>
