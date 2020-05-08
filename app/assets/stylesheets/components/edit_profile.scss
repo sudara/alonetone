@@ -469,7 +469,7 @@
     }
     > form > div {
       display: flex;
-      div {
+      div.prefix_alonetone {
         background-color: $edit-profile-hint-background;
         color: $edit-profile-hint-text;
         font-family: $medium-sans-font;
