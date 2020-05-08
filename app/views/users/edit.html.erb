@@ -1,9 +1,9 @@
 <div class="edit_profile">
-  <% unless @user.errors.any? # the main form can't really have errors %>
+  <% if @user.errors.empty? || @user.errors.keys.include?(:avatar_image) # the main form can't really have errors %>
   <div class="box">
     <h1>Edit Profile</h1>
     <div class="edit_profile_separator"></div>
-    <%= form_with model: @user do |f| %>
+    <%= form_with model: @user, local: true do |f| %>
     <div class="edit_profile_top">
       <div class="edit_profile_top_left" data-controller="image-upload">
         <label>PROFILE PICTURE</label>

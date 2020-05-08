@@ -69,25 +69,14 @@ class UsersController < ApplicationController
     @page_title = "Editing #{@user.name}"
   end
 
-  def attach_pic
-    avatar_image = params.dig(:pic, :pic)
-    if avatar_image && @user.update(avatar_image: avatar_image)
-      flush_asset_cache
-      flash[:ok] = 'Picture updated!'
-    else
-      flash[:error] = 'Whups, picture not updated! Try again.'
-    end
-    redirect_to edit_user_path(@user)
-  end
-
   def update
     if @user.update(user_params)
-      flush_asset_cache if user_params.include?(:login)
+      flush_asset_cache if user_params.include?(:login) || user_params.include(:avatar_image)
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
       flash.now[:error] = "Not so fast, young one"
       @profile = @user.profile
-      render action: :edit
+      render 'edit'
     end
   end
 
@@ -173,7 +162,7 @@ class UsersController < ApplicationController
   end
 
   def dangerous_action?
-    %w[destroy update edit create attach_pic].include? action_name
+    %w[destroy update edit create].include? action_name
   end
 
   def change_user_to(user)
