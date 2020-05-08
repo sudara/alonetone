@@ -1,5 +1,5 @@
 <div class="edit_profile">
-  <% if @user.errors.empty? || @user.errors.keys.include?(:avatar_image) # the main form can't really have errors %>
+  <% if @user.errors.empty? || @user.errors.key?(:avatar_image) # the main form can't really have errors %>
   <div class="box">
     <h1>Edit Profile</h1>
     <div class="edit_profile_separator"></div>
@@ -69,7 +69,7 @@
             <div class="row">
               <%== render file: svg_path('svg/icon_socials_youtube.svg') %>
               <div>youtube.com/</div>
-              <%= f.text_field :apple %>
+              <%= f.text_field :youtube %>
             </div>
           </div>
           <div class="edit_profile_socials_right_column">
@@ -118,6 +118,7 @@
       </div>
   </div>
   <% end %>
+  <% if @user.errors.empty? || !@user.errors.key?(:login) %>
   <div class="edit_profile_change_your_password box">
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } if !@user.errors.key?('login') %>
 
@@ -139,6 +140,7 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
   <div class="edit_profile_change_your_login box">
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('login') %>

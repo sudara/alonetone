@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_162437) do
+ActiveRecord::Schema.define(version: 2020_05_08_205412) do
 
   create_table "account_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
@@ -230,6 +230,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_162437) do
     t.string "website"
     t.string "user_agent"
     t.datetime "updated_at"
+    t.string "youtube"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

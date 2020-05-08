@@ -17,6 +17,6 @@ class ProfilesController < ApplicationController
   protected
 
   def profile_params
-    params[:profile].permit(:bio, :website, :twitter, :instagram, :bandcamp, :spotify, :city, :country)
+    params[:profile].permit(:bio, :website, :twitter, :instagram, :bandcamp, :spotify, :apple, :youtube, :city, :country)
   end
 end
