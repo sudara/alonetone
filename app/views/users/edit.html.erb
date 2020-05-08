@@ -1,9 +1,8 @@
 <div class="edit_profile">
+  <% unless @user.errors.any? # the main form can't really have errors %>
   <div class="box">
     <h1>Edit Profile</h1>
     <div class="edit_profile_separator"></div>
-    <%= render partial: 'shared/errors', locals: { errors: @user.errors } %>
-
     <%= form_with model: @user do |f| %>
     <div class="edit_profile_top">
       <div class="edit_profile_top_left" data-controller="image-upload">
@@ -118,14 +117,15 @@
         <% end %>
       </div>
   </div>
+  <% end %>
   <div class="edit_profile_change_your_password box">
+    <%= render partial: 'shared/errors', locals: { errors: @user.errors } if !@user.errors.key?('login') %>
+
     <div class="warning_tag">Warning</div>
     <div class="row">
-      <%= error_messages_for @user %>
       <%= form_with model: @user, local: true do |f| %>
         <h2>Change your password</h2>
         <p>
-
         </p>
         <div>
           <%= f.password_field :password, placeholder: "New Password", autocomplete: 'new-password'  %>
@@ -142,7 +142,7 @@
 
   <div class="edit_profile_change_your_login box">
     <div class="warning_tag">Warning</div>
-    <%= error_messages_for @user %>
+    <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('login') %>
     <%= form_with model: @user, local: true do |f| %>
       <h2>Change your login</h2>
       <p>
