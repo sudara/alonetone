@@ -3,10 +3,15 @@ Hi!
 <%= @artist.name.capitalize %> just uploaded a track to alonetone! <%= @exclamation %>!
 
 Listen to "<%= @track.title %>" on alonetone:
+
 <%= @play_link %>
 
 ------------------------------
 
-You are getting this email because you follow <%= @artist.name.capitalize %> on alonetone. You can change your mind by clicking here: <%= @stop_following_link %>
+You are getting this email because you follow <%= @artist.name.capitalize %> on alonetone.
 
-You can also turn off all emails by unsubscribing here: <%= @unsubscribe_link %>.
+You can unfollow <%= @artist.name.capitalize %> to not get notified when they upload in the future:
+<%= @stop_following_link %>
+
+Or unsubscribe completely to stop getting emails on track uploads:
+<%= @unsubscribe_link %>.
