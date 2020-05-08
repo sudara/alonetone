@@ -274,6 +274,7 @@
       }
       .setting {
         display: flex;
+        min-height: 56px;
         label {
           @include paragraph16();
           color: $grey800;
