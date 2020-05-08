@@ -421,9 +421,6 @@
       }
       input[type="submit"] {
         @include default_button("primary");
-        // background-color: $grey400;
-        // margin-left: 20px;
-        // margin-bottom: 12px;
       }
     }
   }
@@ -496,7 +493,7 @@
       }
       input[type="submit"] {
         @include default_button("primary");
-        background-color: $grey400;
+        // background-color: $grey400;
         margin-left: 20px;
         margin-bottom: 12px;
       }
