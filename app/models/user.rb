@@ -273,8 +273,12 @@ class User < ApplicationRecord
 
   # Generates a location to user's avatar with the requested variant. Returns nil when the user
   # does not have a usable avatar.
+  #
+  # As of Rails 6.0 attachables aren't persisted to storage until save
+  # https://github.com/rails/rails/pull/33303
+  # Which means we don't want to try and display variants from unpersisted records with invalid attachments
   def avatar_image_location(variant:)
-    return unless avatar_image.attached?
+    return unless avatar_image.attached? && avatar_image.persisted?
 
     Storage::Location.new(
       ImageVariant.variant(avatar_image, variant: variant),
