@@ -74,10 +74,6 @@ module UsersHelper
     'default/no-pic_white.svg'
   end
 
-  def notice_hidden?(notice)
-    logged_in? && current_user.has_setting?('hide_notice') && current_user.settings['hide_notice'][notice].present?
-  end
-
   def favorite_toggle(asset)
     link_to('add to favorites', toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites')
   end

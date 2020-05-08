@@ -2,9 +2,17 @@ class Profile < ApplicationRecord
   belongs_to :user
   validates :user, presence: true
 
+  before_save :sanitize_website
+
   def has_links?
     bio.present? || website.present? || spotify.present? ||
       twitter.present? || apple.present? || instagram.present?
+  end
+
+  private
+
+  def sanitize_website
+    website.sub!(/^https?\:\/\//, '') if website_changed?
   end
 end
 

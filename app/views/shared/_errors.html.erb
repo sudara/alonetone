@@ -1,0 +1,16 @@
+<% if errors.any? %>
+  <div id="error_explanation">
+    <h3>
+    <% if errors.size == 1 %>
+      One minor thing looks off:
+    <% else %>
+      Please fix the following:
+    <% end %>
+    </h3>
+    <ol>
+    <% errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ol>
+  </div>
+<% end %>

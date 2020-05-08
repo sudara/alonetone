@@ -1,3 +1,592 @@
+.edit_profile {
+  box-sizing: border-box;
+  max-width: 1012px;
+  padding: 0 $baseline * 1.5;
+  margin-left: auto;
+  margin-right: auto;
+  @media #{$mobile} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .box {
+    margin-bottom: 80px;
+    h1 {
+      @include title24();
+      border-bottom: 0;
+      line-height: 1;
+      height: $baseline * (8/3);
+      padding-left: $baseline * (3/2);
+      padding-top: 24px;
+    }
+  }
+  .edit_profile_separator {
+    height: 1px;
+    background-color: $edit_profile_separator_background;
+  }
+  .edit_profile_top {
+    padding: $baseline * 1.5;
+    display: flex;
+    box-sizing: border-box;
+    @media only screen and (max-width: 850px) {
+      display: block;
+      overflow: auto;
+    }
+    @media #{$mobile} {
+      padding: $baseline;
+    }
+    .edit_profile_top_left {
+      margin-right: 58px;
+      width: 250px;
+      label {
+        margin-bottom: 6px !important;
+        font-family: $medium-sans-font;
+        font-size: 12px;
+        display: block;
+        margin-top: 4px;
+        text-align: left;
+        line-height: 1.2;
+        color: $grey500;
+      }
+      .user_avatar {
+        border: 1px dashed $grey300;
+        padding: 5px;
+        display: inline-block;
+        img {
+          width: 240px;
+          display: block;
+          border-radius: 4px;
+        }
+      }
+      .upload_image {
+        font-family: $medium_sans_font;
+        font-size: 14px;
+        color: $accent;
+        margin-top: $baseline;
+        display: block;
+        margin-left: 5px;
+      }
+      p.instructions {
+        font-family: $medium_sans_font;
+        color: $grey600;
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 1.3;
+        margin-left: 5px;
+      }
+    }
+    .edit_profile_top_right {
+      flex: 1;
+      input {
+        width: 100%;
+      }
+      .city_and_country {
+        display: flex;
+        @media #{$one-column} {
+          flex-wrap: wrap;
+        }
+        div {
+          &:first-child {
+            flex: 1;
+            margin-right: 20px;
+            min-width: 180px;
+            @media #{$one-column} {
+              width: 100%;
+              flex: auto;
+              margin-right: 0;
+            }
+          }
+          &:last-child {
+            flex: 1;
+            margin-left: 20px;
+            select {
+              width: 100%;
+            }
+            @media #{$one-column} {
+              width: 100%;
+              flex: auto;
+              margin-left: 0;
+            }
+          }
+        }
+      }
+      textarea {
+        height: 128px;
+        margin-bottom: $baseline * (8/3);
+        width: 100%;
+      }
+      a {
+        float: right;
+        width: 160px;
+        @include default-button("primary");
+        background-color: $grey100;
+        color: $grey900;
+        @media #{$one-column} {
+          width: auto;
+        }
+        &:hover {
+          background-color: $grey200;
+        }
+        &:active {
+          background-color: $grey500;
+        }
+      }
+      input[type="submit"] {
+        @include default-button("primary");
+        float: right;
+        width: 160px;
+        margin-left: 20px;
+        margin-bottom: 0;
+        @media #{$one-column} {
+          width: auto;
+        }
+      }
+    }
+  }
+  .edit_profile_socials {
+    padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+    }
+    h3 {
+      @include title20();
+      margin-top: 0;
+      color: $edit-profile-heading-text;
+    }
+    .edit_profile_socials_columns {
+      display: flex;
+      @media #{$one-column} {
+        flex-wrap: wrap;
+      }
+      .edit_profile_socials_left_column {
+        margin-right: 10px;
+        flex: 1;
+        @media #{$one-column} {
+          margin-right: 0;
+          width: 100%;
+          flex: auto;
+        }
+        .row:last-child {
+          input {
+            margin-bottom: 0;
+            @media #{$one-column} {
+              margin-bottom: $baseline;
+            }
+          }
+        }
+      }
+      .edit_profile_socials_right_column {
+        margin-left: 10px;
+        flex: 1;
+        @media #{$one-column} {
+          margin-left: 0;
+          flex: auto;
+          width: 100%;
+        }
+        a {
+          @include default-button("primary");
+          background-color: $grey400;
+          width: 160px;
+          float: right;
+          margin-top: 23px;
+        }
+      }
+      label {
+        padding-left: 40px;
+      }
+      .row {
+        display: flex;
+        svg {
+          margin-right: 8px;
+          border: 1px transparent;
+          margin-top: 3px;
+          flex-shrink: 0;
+        }
+        div {
+          background-color: $edit-profile-hint-background;
+          color: $edit-profile-hint-text;
+          font-family: $medium-sans-font;
+          height: 32px;
+          box-sizing: border-box;
+          padding-top: 5px;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          padding-left: 8px;
+          padding-right: 4px;
+          padding-top: 9px;
+        }
+        input {
+          border-radius: 0;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+          margin-left: 4px;
+          height: 32px;
+          padding-left: 8px;
+          padding-top: 9px;
+          width: 100%;
+        }
+        &.reversed {
+          div {
+            padding-left: 4px;
+            padding-right: 8px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            margin-left: 4px;
+          }
+          input {
+            margin-left: 0px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+        &.just_input {
+          input {
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+    input[type="submit"] {
+      float: right;
+      @include default-button("primary");
+      margin-bottom: 0;
+    }
+  }
+
+  .edit_profile_settings {
+    padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+    }
+    h3 {
+      @include title20();
+      margin-top: 0;
+      margin-bottom: 28px;
+      color: $edit-profile-heading-text;
+    }
+    .edit_profile_settings_columns {
+      display: flex;
+      @media #{$one-column} {
+        flex-wrap: wrap;
+      }
+      .setting {
+        display: flex;
+        label {
+          @include paragraph16();
+          color: $grey800;
+          text-transform: none;
+          flex: 1;
+          margin-bottom: 0;
+          line-height: 1.5;
+        }
+        .toggle {
+          width: 72px;
+          height: 32px;
+          background-color: #099;
+          border-radius: 4px;
+          margin-left: $baseline * (3/2);
+          flex-shrink: 0;
+          position: relative;
+          top: -3px;
+          background-color: $grey400;
+          border-radius: 4px;
+          position: relative;
+          &:hover {
+            text-decoration: none;
+          }
+          .toggle_label {
+            color: $white;
+            font-size: 11px;
+            font-weight: bold;
+            padding-top: 11px;
+            padding-left: 10px;
+            padding-right: 7px;
+            text-align: right;
+          }
+          .toggle_inner {
+            background-color: #fff;
+            border-radius: 1.5px;
+            width: 33px;
+            height: 26px;
+            box-shadow: 0px 2px 8px rgba(53, 53, 53, 0.33),
+              0px 2px 2px rgba(53, 53, 53, 0.33);
+            position: absolute;
+            bottom: 3px;
+            left: 3px;
+            right: auto;
+          }
+          .toggle_label_on {
+            display: none;
+          }
+          .toggle_label_off {
+            display: block;
+          }
+          &.on {
+            background-color: $accent;
+            .toggle_inner {
+              bottom: 3px;
+              left: auto;
+              right: 3px;
+            }
+            .toggle_label {
+              text-align: left;
+            }
+            .toggle_label_on {
+              display: block;
+            }
+            .toggle_label_off {
+              display: none;
+            }
+          }
+        }
+      }
+      .edit_profile_separator {
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+
+      .edit_profile_settings_left_column {
+        margin-right: 25px;
+        flex: 1;
+        @media #{$one-column} {
+          margin-right: 0;
+          flex: auto;
+          width: 100%;
+        }
+      }
+      .edit_profile_settings_right_column {
+        margin-left: 25px;
+        flex: 1;
+        .edit_profile_separator:first-child {
+          display: none;
+          @media #{$one-column} {
+            display: block;
+          }
+        }
+        @media #{$one-column} {
+          margin-left: 0;
+          flex: auto;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .edit_profile_change_your_password {
+    padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+    }
+    h2 {
+      @include title24();
+      color: $edit-profile-heading-text;
+      border-bottom: 0;
+      padding-left: 0;
+    }
+    p {
+      @include paragraph14();
+      color: $grey800;
+      max-width: 636px;
+    }
+    > form > div {
+      display: flex;
+      div {
+        background-color: $edit-profile-hint-background;
+        color: $edit-profile-hint-text;
+        font-family: $medium-sans-font;
+        height: 32px;
+        box-sizing: border-box;
+        padding-top: 5px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        padding-left: 8px;
+        padding-right: 4px;
+        padding-top: 9px;
+      }
+      input[type="text"] {
+        background-color: $grey25;
+        border: 1px solid $grey300;
+        border-radius: 0;
+        border-radius: 4px;
+        color: $grey1000;
+        height: 32px;
+        padding-left: 8px;
+        padding-top: 9px;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 0;
+      }
+      input[type="submit"] {
+        @include default_button("primary");
+        background-color: $grey400;
+        margin-left: 20px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  .edit_profile_change_your_login,
+  .edit_profile_change_your_password {
+    background-image: image-url("svg/background_danger_tape.svg");
+    background-repeat: no-repeat;
+    background-position: center 16px;
+    padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+      padding-top: 58px;
+    }
+    padding-top: 58px;
+    .warning_tag {
+      position: absolute;
+      right: 0;
+      bottom: 16px;
+      background-color: $yellow500;
+      font-size: 11px;
+      font-weight: bold;
+      color: $grey1000;
+      width: 80px;
+      height: 16px;
+      text-align: center;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      text-transform: uppercase;
+      box-sizing: border-box;
+      padding-top: 3px;
+    }
+    h2 {
+      @include title24();
+      color: $edit-profile-heading-text;
+      border-bottom: 0;
+      padding-left: 0;
+    }
+    p {
+      @include paragraph14();
+      color: $grey800;
+      max-width: 636px;
+    }
+    > form > div {
+      display: flex;
+      div {
+        background-color: $edit-profile-hint-background;
+        color: $edit-profile-hint-text;
+        font-family: $medium-sans-font;
+        height: 32px;
+        box-sizing: border-box;
+        padding-top: 5px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        padding-left: 8px;
+        padding-right: 4px;
+        padding-top: 9px;
+      }
+      input[type="text"] {
+        border-radius: 0;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        margin-left: 4px;
+        height: 32px;
+        padding-left: 8px;
+        padding-top: 9px;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 0;
+      }
+      input[type="submit"] {
+        @include default_button("primary");
+        background-color: $grey400;
+        margin-left: 20px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  .edit_profile_delete_your_account {
+    background-image: image-url("svg/background_high_voltage_tape.svg");
+    background-repeat: no-repeat;
+    background-position: center 16px;
+    .danger_tag {
+      position: absolute;
+      right: 0;
+      bottom: 16px;
+      background-color: $red600;
+      font-size: 11px;
+      font-weight: bold;
+      color: $white;
+      width: 128px;
+      height: 16px;
+      text-align: center;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      text-transform: uppercase;
+      box-sizing: border-box;
+      padding-top: 3px;
+      line-height: 1;
+      display: block;
+    }
+    padding: $baseline * (3/2);
+    @media #{$mobile} {
+      padding: $baseline;
+      padding-top: 58px;
+    }
+    padding-top: 58px;
+    h2 {
+      @include title24();
+      color: $red1000;
+      border-bottom: 0;
+      padding-left: 0;
+    }
+    p {
+      @include paragraph14();
+      color: $grey800;
+      max-width: 636px;
+    }
+    > div {
+      margin-top: 6px;
+      display: flex;
+      @include paragraph14bold();
+      a {
+        @include default_button("primary");
+        margin-top: 16px;
+        margin-bottom: 12px;
+      }
+      .delete_column {
+        width: 160px;
+        margin-right: 36px;
+        color: $red800;
+        a {
+          width: 160px;
+          background-color: $red600;
+        }
+      }
+      .sure_column {
+        color: $orange800;
+        width: 176px;
+        margin-right: 36px;
+        a {
+          float: left;
+          width: 80px;
+          padding-left: 0;
+          padding-right: 0;
+          background-color: $accent;
+          &:last-child {
+            margin-left: 16px;
+            background-color: $grey100;
+            color: $grey800;
+          }
+        }
+      }
+      .ok_column {
+        color: $grey800;
+      }
+    }
+  }
+}
+
+// LEGACY BELOW
+
 form#reset-password {
   input[type="text"] {
     border-radius: 4px;

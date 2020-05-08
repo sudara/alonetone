@@ -167,14 +167,6 @@ class Asset < ApplicationRecord
     self[:length] # a bit backwards, ain't it?
   end
 
-  def guest_can_comment?
-    if user.settings.present? && user.settings['block_guest_comments'].present?
-      user.settings['block_guest_comments'] == "false"
-    else
-      true
-    end
-  end
-
   def published?
     !private?
   end
@@ -189,8 +181,8 @@ class Asset < ApplicationRecord
   end
 
   def notify_followers
-    user.followers.select(&:wants_email?).each do |user|
-      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user.id)
+    user.followers.includes(:settings).where('settings.email_new_tracks = ?', true).pluck(:id).each do |user_id|
+      AssetNotificationJob.set(wait: 10.minutes).perform_later(asset_ids: id, user_id: user_id)
     end
   end
 

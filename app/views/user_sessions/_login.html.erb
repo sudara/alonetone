@@ -3,7 +3,7 @@
   <%= f.text_field :login %>
 
   <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password, required: true, autocomplete: 'current-password'  %>
 
   <div>
     <%= f.submit "Come on in...", data: { turbolinks: "false" } %>

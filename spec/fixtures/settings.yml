@@ -1,0 +1,18 @@
+# All users MUST have settings.
+<% %w(
+  sudara
+  arthur
+  aaron
+  not_activated
+  sandbags
+  joeblow
+  newly_approved
+  brand_new_user
+  jamie_kiesl
+  will_studd
+  henri_willig
+  william_shatner
+).each do |user| %>
+<%= user %>:
+  user: <%= user %>
+<% end %>

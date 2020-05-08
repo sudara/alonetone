@@ -22,8 +22,11 @@
   <% end %>
   <div id="login" class="static_content">
     <%= form_with model: @user, url: password_reset_path, method: :put, local: true do |f| %>
-      <%= f.password_field :password, placeholder: "Enter New Password" %><br/>
-      <%= f.password_field :password_confirmation, placeholder: "Confirm New Password" %><br>
+      <%= f.label :password, 'Pick a new password'%>
+      <%= f.password_field :password, autocomplete: "new-password" %><br/>
+
+      <%= f.label :password_confirmation, 'Type it one more time...'%>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %><br>
       <%= f.submit "Come on in..." %>
     <% end %>
   </div>

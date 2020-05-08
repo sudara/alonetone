@@ -26,7 +26,7 @@ RSpec.describe PlaylistsController, type: :request do
 
     it "creates a new playlist" do
       post(
-        "/Jamiek/playlists",
+        "/jamiek/playlists",
         params: {
           playlist: {
             title: '🧀 THE FUNK 🧀',
@@ -36,7 +36,7 @@ RSpec.describe PlaylistsController, type: :request do
       )
       expect(response).to be_redirect
       uri = URI.parse(response.headers['Location'])
-      expect(uri.path).to start_with('/Jamiek/playlists')
+      expect(uri.path).to start_with('/jamiek/playlists')
       expect(uri.path).to end_with('/edit')
     end
   end

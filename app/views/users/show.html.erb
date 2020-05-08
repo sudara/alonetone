@@ -128,6 +128,19 @@
   </div>
 
   <div id="user_right_column">
+
+    <% if @popular_tracks.present? && @user.most_popular? %>
+      <div id="user_popular_area">
+        <h2>Most Popular</h2>
+
+        <div id="user_popular" class="box">
+          <%= link_to " ", user_tracks_path(@user),
+          class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
+          <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @popular_tracks %>
+        </div>
+      </div>
+    <% end %>
+
     <% if @favorites.present? %>
     <div id="user_favorites_area">
       <h2>Recent Favorites</h2>
@@ -145,18 +158,6 @@
         <% end if @user.favorites.tracks.size > 5 %>
       </div>
     </div>
-    <% end %>
-
-    <% if @popular_tracks.present? && @user.has_setting?('most_popular', 'true') %>
-      <div id="user_popular_area">
-        <h2>Most Listened To Tracks</h2>
-
-        <div id="user_popular" class="box">
-          <%= link_to " ", user_tracks_path(@user),
-          class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
-          <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @popular_tracks %>
-        </div>
-      </div>
     <% end %>
 
     <div id="user_comments_area">

@@ -38,19 +38,20 @@ form {
       margin-bottom: 12px;
     }
   }
-  
+
   .inline_form_error {
     color: $inline-form-error-text;
     position: relative;
     top: -14px;
     line-height: 1.2;
   }
-  
+
   input[type="search"],
   input[type="text"],
   input[type="password"],
   input[type="email"],
-  textarea {
+  textarea,
+  select {
     outline: 0;
     -webkit-appearance: none;
   }
@@ -96,6 +97,11 @@ form {
     &:focus {
       border: 1px solid $accent;
     }
+  }
+  select {
+    height: 35px;
+    padding: 9px 10px 6px 10px;
+    font-family: $medium-sans-font;
   }
   input, textarea {
     padding: 9px 10px 6px 10px;

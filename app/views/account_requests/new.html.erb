@@ -28,22 +28,7 @@
 
   <div class="box">
     <h2>Get an Account</h2>
-    <% if @account_request.errors.any? %>
-      <div id="error_explanation">
-        <h3>
-        <% if @account_request.errors.size == 1 %>
-          One minor thing looks off:
-        <% else %>
-          Please fix the following:
-        <% end %>
-        </h3>
-        <ol>
-        <% @account_request.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ol>
-      </div>
-    <% end %>
+    <%= render partial: 'shared/errors', locals: { errors: @account_request.errors } %>
 
     <%= form_with(model: @account_request, local: true) do |f| %>
       <h3 class="form_heading">

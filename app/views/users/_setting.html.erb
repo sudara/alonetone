@@ -1,0 +1,9 @@
+<div class="setting" data-controller="toggle-setting" data-toggle-setting-key="<%= key %>">
+  <label data-target="toggle-setting.description"><%= label%></label>
+  <%= link_to toggle_setting_user_path(current_user), method: :put,
+    data: { target: 'toggle-setting.toggle', action: 'toggle-setting#toggle' }, class: "toggle #{'on' if current_user.send("#{key}?") }" do %>
+    <div class="toggle_inner"></div>
+    <div class="toggle_label toggle_label_on">ON</div>
+    <div class="toggle_label toggle_label_off">OFF</div>
+  <% end %>
+</div>

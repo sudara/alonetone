@@ -68,7 +68,7 @@
 
   </div>
 
-  <%= render partial: 'assets/comment', locals: { asset: @asset }%>
+  <%= render partial: 'assets/comment', locals: { asset: @asset } if can_comment_on?(@asset) %>
   <%= render partial: 'shared/comments' if @comments.present? %>
 
   <% if @listeners.present? %>

@@ -72,6 +72,7 @@ class UsersController < ApplicationController
   def attach_pic
     avatar_image = params.dig(:pic, :pic)
     if avatar_image && @user.update(avatar_image: avatar_image)
+      flush_asset_cache
       flash[:ok] = 'Picture updated!'
     else
       flash[:error] = 'Whups, picture not updated! Try again.'
@@ -81,10 +82,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flush_asset_cache_if_necessary
+      flush_asset_cache if user_params.include?(:login)
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
-      flash[:error] = "Not so fast, young one"
+      flash.now[:error] = "Not so fast, young one"
       @profile = @user.profile
       render action: :edit
     end
@@ -96,6 +97,13 @@ class UsersController < ApplicationController
 
     current_user.toggle_favorite(asset)
     head :ok
+  end
+
+  def toggle_setting
+    if Settings::AVAILABLE.include? "#{params[:setting]}?".to_sym
+     result = @user.settings.toggle!(params[:setting])
+    end
+    result ? head(:ok) : head(:bad_request)
   end
 
   def destroy
@@ -126,7 +134,9 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
+    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
+      :display_name, :avatar_image, settings: {}, profile_attributes:
+      [:bio, :city, :country, :website, :instagram, :spotify])
   end
 
   def user_params_with_ip
@@ -194,22 +204,15 @@ class UsersController < ApplicationController
     @sudo = session[:sudo] = nil
   end
 
-  def flush_asset_cache_if_necessary
-    # If the user changes the :block_guest_comments setting then it requires
-    # that the cache for all their tracks be invalidated
-    flush_asset_caches = false
-    if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
-      flush_asset_caches = params[:user][:settings][:block_guest_comments] == (currently_blocking_guest_comments ? "false" : "true")
-    end
-    Asset.where(user_id: @user.id).update_all(updated_at: Time.now) if flush_asset_caches
-  end
-
   def display_user_home_or_index
     if params[:login] && User.find_by_login(params[:login])
       redirect_to user_home_url(params[:user])
     else
       redirect_to users_url
     end
+  end
+
+  def flush_asset_cache
+    Asset.where(user_id: @user.id).touch_all
   end
 end
