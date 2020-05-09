@@ -107,7 +107,7 @@ Alonetone::Application.routes.draw do
   get ':login/comments' => 'comments#index', :as => 'user_comments'
   get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
-  get ':login' => 'users#show', :as => "user_home"
+  get ':id' => 'users#show', :as => "user_home" # DEPRECATED (duplicate)
   resources :users, :path => "/" do
     member do
       post :attach_pic
