@@ -160,20 +160,26 @@ RSpec.describe UsersController, type: :controller do
 
     it "should let a user upload a new photo" do
       login(:arthur)
-      post :attach_pic, params: {
-        id: users(:arthur).login,
-        pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
-      }
+      put :update, params: { id: users(:arthur).login, user: {
+        avatar_image: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg')
+      }}
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(edit_user_path(users(:arthur)))
     end
 
+    it "should validate images and not allow webp photos to be uploaded" do
+      login(:arthur)
+      put :update, params: { id: users(:arthur).login, user: {
+        avatar_image: fixture_file_upload('files/alonetone.webp', 'image/webp')
+      }}
+      expect(flash[:error]).to be_present
+    end
+
     it "should not let a user upload a new photo for another user" do
       login(:arthur)
-      post :attach_pic, params: {
-        id: users(:sudara).login,
-        pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
-      }
+      put :update, params: { id: users(:sudara).login, user: {
+        avatar_image: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg')
+      }}
       expect(response).to redirect_to('/login')
     end
 
@@ -207,7 +213,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "should not let a logged out user edit" do
-      post :edit, params: { user_id: 'arthur' }
+      post :edit, params: { id: 'arthur' }
       expect(response).not_to be_successful
     end
   end
