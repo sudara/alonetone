@@ -105,7 +105,7 @@ RSpec.describe UsersController, type: :controller do
       akismet_stub_response_ham
     end
 
-    it "should activate with a for reals perishable token" do
+    it "should activate with a perishable token" do
       set_good_request_headers && create_user
       get :activate, params: { perishable_token: User.last.perishable_token }
       expect(flash[:ok]).to be_present
@@ -191,21 +191,22 @@ RSpec.describe UsersController, type: :controller do
       expect(User.where(login: 'arthursaurus').count).to eq(1)
     end
 
-    it 'should not let a user change login to login that exists' do
+    it 'should not let a user change login to login that already exists' do
       login(:arthur)
       put :update, params: { id: 'arthur', user: { login: 'sudara' } }
       expect(flash[:error]).to be_present
-      expect(User.where(login: 'sudara').count).to eq(1)
+      expect(response).not_to be_redirect
+      expect(assigns(:user).login).to eq('arthur')
     end
 
-    it "should not let any old user edit" do
+    it "should not let users edit each other's profile" do
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
       post :edit, params: { id: 'sudara' }
       expect(response).not_to be_successful
     end
 
-    it "should not let any old user update" do
+    it "should not allow users to update other profiles" do
       login(:arthur)
       allow(controller).to receive(:current_user).and_return(users(:arthur))
       put :update, params: { id: 'sudara', user: { bio: 'a little more about me' } }
