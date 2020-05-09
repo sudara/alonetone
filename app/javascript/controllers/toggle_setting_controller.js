@@ -19,7 +19,7 @@ export default class extends Controller {
       url: this.href,
       data: `setting=${this.data.get('key')}`,
       type: 'PUT',
-      success: () => { flashController.alertSaved(`${this.description} updated.`) },
+      success: () => { flashController.alertSaved(`Setting saved.`) },
       error: () => {
         flashController.alertFailed("That didn't work...Try again?")
         this.toggleTarget.classList.toggle('on')
