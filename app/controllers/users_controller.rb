@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
-  before_action :require_login, except: %i[index show new create activate destroy]
+  before_action :find_user, only: %i[show edit update toggle_setting destroy]
+  before_action :require_login, except: %i[index show new create activate]
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
@@ -15,10 +15,6 @@ class UsersController < ApplicationController
     prepare_meta_tags
     gather_user_goodies
     respond_to :html
-  end
-
-  def stats
-    @tracks = @user.assets.published
   end
 
   def new
@@ -74,7 +70,8 @@ class UsersController < ApplicationController
       flush_asset_cache if user_params.include?(:login) || user_params.include?(:avatar_image)
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
-      flash.now[:error] = "Not so fast, young one"
+      @user.reload if @user.errors.key?(:login)
+      flash.now[:error] = "Ruh roh, that didn't work"
       @profile = @user.profile
       render 'edit'
     end
@@ -121,6 +118,13 @@ class UsersController < ApplicationController
   end
 
   private
+
+  # This overrides application controller's version of find_user
+  # which is too flexible, full of edge cases and deprecated.
+  def find_user
+    @user = User.find_by_login(params[:id])
+    not_found unless @user
+  end
 
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
