@@ -22,7 +22,6 @@
   <% end %>
 
   <%= csrf_meta_tag %>
-  <%= render partial: 'shared/headway' if logged_in? %>
   <!-- render user specific variables and js helpers -->
   <%= render partial: 'shared/javascript_payload' %>
   <%= render partial: 'shared/analytics' %>
