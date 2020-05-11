@@ -7,7 +7,7 @@ class Profile < ApplicationRecord
   LINKS = %i[website twitter instagram bandcamp spotify apple youtube].freeze
 
   def has_links?
-    LINKS.detect(&:present?)
+    LINKS.any?{ |l| send(l).present? }
   end
 
   private
