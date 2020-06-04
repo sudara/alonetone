@@ -75,7 +75,7 @@ class User < ApplicationRecord
   after_create :create_profile, :create_settings
 
   has_one :profile, dependent: :destroy
-  accepts_nested_attributes_for :profile
+  accepts_nested_attributes_for :profile, update_only: true # we don't want user to be printing new profiles
 
   has_one :settings, dependent: :destroy, class_name: 'Settings'
   delegate(*Settings::AVAILABLE, to: :settings)
