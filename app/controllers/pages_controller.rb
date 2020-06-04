@@ -34,8 +34,7 @@ class PagesController < ApplicationController
   def home; end
 
   def error
-    @page_title = "Whups, alonetone slipped and fell!"
-    render layout: 'application', status: 500
+    raise("A Purposeful Error Occurred")
   end
 
   def four_oh_four

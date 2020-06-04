@@ -1,5 +1,5 @@
 <div class="header_search" data-controller="header-search">
-  <%= form_tag search_path, id: 'search_form', data: {target:'header-search.form'}  do %>
+  <%= form_tag main_app.search_path, id: 'search_form', data: {target:'header-search.form'}  do %>
     <%= text_field_tag 'query', (@query || session[:last_query]), placeholder: 'Search', data: {target:'header-search.query'} %>
   <% end %>
   <%= link_to '', '#', id: 'search_button', data: {action: "click->header-search#submitForm", target:'header-search.button' } %>
