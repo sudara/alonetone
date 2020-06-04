@@ -21,7 +21,7 @@
     <ul>
     <% latest_forum_topics.each do |topic|  %>
       <li>
-        <%= link_to topic.title, Thredded::UrlsHelper.topic_path(topic) %>
+        <%= link_to topic.title.truncate(65, separator: ' '), Thredded::UrlsHelper.topic_path(topic) %>
         <div>by <%= link_to topic.last_user.login, user_path(topic.last_user.login) %></div>
 
       </li>
