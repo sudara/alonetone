@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 import Rails from '@rails/ujs'
 import { Howl } from 'howler'
-import { bugsnagClient } from '../misc/bugsnag.js.erb'
+import Bugsnag from '@bugsnag/js'
 
 let player
 let whilePlayingCallbackFrequency = 100
@@ -34,7 +34,7 @@ export default class extends Controller {
       preload: this.preload,
       // onend: controller.playNextTrack.bind(controller),
       onloaderror(id, e) {
-        bugsnagClient.notify(`Failed to load mp3. Message: ${e}`)
+        Bugsnag.notify(`Failed to load mp3. Message: ${e}`)
       },
       onplay() {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
@@ -43,7 +43,7 @@ export default class extends Controller {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
       onplayerror(id, e) {
-        bugsnagClient.notify(e)
+        Bugsnag.notify(e)
         controller.pause()
       },
     })

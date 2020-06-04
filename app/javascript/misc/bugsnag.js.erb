@@ -1,9 +1,0 @@
-import bugsnag from '@bugsnag/js'
-
-export const bugsnagClient = bugsnag({
-  apiKey: '<%= Rails.configuration.alonetone.bugsnag_api_key || "nokey" %>',
-  appType: 'js',
-  user: {
-    name: window.username
-  }
-})

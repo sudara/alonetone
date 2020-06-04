@@ -12,8 +12,16 @@ import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
-import { bugsnagClient } from '../misc/bugsnag.js.erb'
+import Bugsnag from '@bugsnag/js'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
+
+Bugsnag.start({
+  apiKey: '<%= Rails.configuration.alonetone.bugsnag_api_key || "nokey" %>',
+  appType: 'js',
+  user: {
+    name: window.username
+  },
+})
 
 Rails.start()
 Turbolinks.start()
