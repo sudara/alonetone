@@ -117,8 +117,8 @@ henri_willig:
   playlists_count: 1
   assets_count: 2
   crypted_password: <%= scrypt('test' + salt) %>
-  created_at: <%= Time.parse('Feb 2, 2020') %>
-  updated_at: <%= Time.parse('Feb 2, 2020') %>
+  created_at: 2010-04-08 13:00:03
+  updated_at: 2020-04-08 13:00:03
 
 # William Shatner is a cheese enthousiast. He's also the last person in the world to use the old
 # theme.
