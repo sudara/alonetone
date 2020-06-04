@@ -87,7 +87,7 @@
               line {
                 stroke: $track-pause-button-stroke;
               }
-            }  
+            }
           }
         }
       }
@@ -251,8 +251,8 @@
         flex: 1;
         .user_description {
           color: $track-description-text;
-          margin-bottom: 8px;
           margin-right: 26px;
+          min-height:16px;
           word-wrap: break-word;
           -webkit-hyphens: auto;
           -moz-hyphens: auto;
@@ -292,7 +292,7 @@
             color: $track-view-more-text;
             flex-grow: 1;
             font-weight: bold;
-
+            text-decoration: underline;
           }
           .plays {
             font-size: 12px;
