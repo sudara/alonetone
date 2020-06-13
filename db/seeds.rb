@@ -295,7 +295,7 @@ boards.collect do |board|
   topic = board.topics.new do |t|
     user = User.all.sample
     t.user = user
-    t.title = "New thread on #{board.name}"
+    t.title = "New thread on #{board.name} that is a bit too long for previewing"
     t.posts.new do |p|
       p.user = user
       p.content = 'Here is the body of a post on #{board.name}... Good stuff!'

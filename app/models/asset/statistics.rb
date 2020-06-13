@@ -74,23 +74,6 @@ class Asset < ApplicationRecord
     end
 
     module ClassMethods
-      def most_popular(limit = 10, time_period = 5.days.ago)
-        popular = Listen.count(:all,
-          include: :asset,
-          group: 'listens.asset_id',
-          limit: limit,
-          order: 'count_all DESC',
-          conditions: [
-            "listens.created_at > ? AND " \
-            "(listens.listener_id IS NULL OR " \
-            "listens.listener_id != listens.track_owner_id)",
-            time_period
-          ])
-        find(popular.collect(&:first), include: :user)
-        # In the last week, people have been listening to the following
-        # find(:all, :include => :user, :limit => limit, :order => 'assets.listens_count DESC')
-      end
-
       def days
         (Asset.sum(:length).to_f / 60 / 60 / 24).to_i.to_s
       end
