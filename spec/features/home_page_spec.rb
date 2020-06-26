@@ -26,14 +26,15 @@ RSpec.describe 'home page', type: :feature, js: true do
     logged_in(:arthur) do
       visit '/'
       expect(page).to have_selector('.profile_link')
-      track_chunk = find(".asset", match: :first)
-      track_chunk.click
-
       # let's snap the dark theem nav while we are at it
       switch_themes
       expect(page).to have_selector('.profile_link')
 
-      pause_animations
+      track = find(".asset", match: :first)
+      track.find(".play_link").click
+
+      track.find(".seekbar").click # click in the middle of the seekbar
+      track.find(".play_link").click # pause the track
       expect(track_chunk).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')
     end
