@@ -1,0 +1,11 @@
+import Bugsnag from '@bugsnag/js'
+
+Bugsnag.start({
+  apiKey: '<%= Rails.configuration.alonetone.bugsnag_api_key || "A"*32 %>',
+  appType: 'js',
+  <%= "logger: null," if Rails.env.development? %>
+  enabledReleaseStages: ['production'],
+  user: {
+    name: window.username,
+  },
+})
