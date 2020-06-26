@@ -56,23 +56,13 @@ export default class PlayAnimation {
   }
 
   setupTimelines() {
-    this.tl = gsap.timeline({ paused: true }).timeScale(2.2);
-    this.spinballTl = gsap.timeline().timeScale(1);
-    this.dottyRotationTl = gsap.timeline().timeScale(1);
+    this.tl = gsap.timeline().timeScale(2.2)
+    this.spinballTl = gsap.timeline().timeScale(1)
+    this.dottyRotationTl = gsap.timeline().timeScale(1)
+    this.setProps()
     this.tl
-      .set(this.dotty, {
-        transformOrigin: 'center center',
-        scale: 1.3,
-      })
-      .set(this.spinballGroup, {
-        transformOrigin: 'center center',
-        scale: 0,
-      })
-      .set(this.pauseGroup, {
-        transformOrigin: 'center center',
-        scaleY: 0,
-      })
       .addLabel('playButton') // starting state
+      .addPause()
       .addLabel('loadingAnimation')
       .to(this.icon, 1, {
         morphSVG: { shape: this.outlinePath, shapeIndex: 'auto' },
@@ -118,6 +108,21 @@ export default class PlayAnimation {
     return this.svg.querySelectorAll(s)
   }
 
+  setProps() {
+    gsap.set(this.dotty, {
+      transformOrigin: 'center center',
+      scale: 1.3,
+    })
+    gsap.set(this.spinballGroup, {
+      transformOrigin: 'center center',
+      scale: 0,
+    })
+    gsap.set(this.pauseGroup, {
+      transformOrigin: 'center center',
+      scaleY: 0,
+    })
+  }
+
   loadingAnimation() {
     this.spinballTl.to(this.spinballGroup, 2, {
       rotation: '+=360',
@@ -139,7 +144,8 @@ export default class PlayAnimation {
   }
 
   showPlayButton() {
-    this.tl.pause('playButton')
+    this.tl.restart().pause('playButton')
+    this.setProps()
   }
 
   showPauseButton() {

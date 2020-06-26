@@ -10,7 +10,7 @@
     "@rails/webpacker": "^5.1.1",
     "babel-loader": "^8.1.0",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.3.0",
+    "gsap": "^3.3.4",
     "howler": "https://github.com/goldfire/howler.js.git",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
