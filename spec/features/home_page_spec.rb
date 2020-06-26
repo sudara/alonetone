@@ -35,7 +35,7 @@ RSpec.describe 'home page', type: :feature, js: true do
 
       track.find(".seekbar").click # click in the middle of the seekbar
       track.find(".play_link").click # pause the track
-      expect(track_chunk).to have_selector('.add_to_favorites')
+      expect(track).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')
     end
   end
