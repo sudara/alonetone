@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @pagy, @comments = pagy(@user.comments_received.with_preloads.on_track.only_public)
+      @pagy, @comments = pagy(@user.comments_received.with_preloads.on_track.public_or_private(display_private_comments?))
       set_comments_made
     else
       @page_title = "Recent Comments"
