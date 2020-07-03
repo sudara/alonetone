@@ -33,50 +33,58 @@ comment_with_no_body:
   commentable: valid_mp3 (Asset)
   created_at: <%= 1.day.ago.to_s :db %>
 
+comment_on_asset_by_guest:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Your old friend from 2009 here, this is great."
+  is_spam: false
+  user: arthur
+  private: true
+  created_at: <%= 2.day.ago.to_s :db %>
+
 private_comment_on_asset_by_guest:
-  commentable: valid_mp3 (Asset)
+  commentable: valid_arthur_mp3 (Asset)
   body: "Well, this is an awesome track, I say in secret"
   is_spam: false
-  user: sudara
+  user: arthur
   private: true
   created_at: <%= 1.day.ago.to_s :db %>
 
 private_comment_on_asset_by_user:
-  commentable: valid_mp3 (Asset)
+  commentable: valid_arthur_mp3 (Asset)
   body: "Well friend, this is an awesome track."
   is_spam: false
-  user: sudara
-  commenter: arthur
+  user: arthur
+  commenter: sudara
   remote_ip: 127.0.0.2
   private: true
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_spam_comment_on_asset_by_user:
-  commentable: valid_mp3 (Asset)
-  body: "Sudara, don't forget milk."
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Sudara, don't forget spam."
   is_spam: true
-  user: sudara
-  commenter: arthur
+  user: arthur
+  commenter: william_shatner
   remote_ip: 127.0.0.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
 
 public_comment_on_asset_by_user:
-  commentable: valid_mp3 (Asset)
+  commentable: valid_arthur_mp3 (Asset)
   body: "Well friend, this is your best work."
   is_spam: false
-  user: sudara
-  commenter: arthur
+  user: arthur
+  commenter: henri_willig
   remote_ip: 127.0.0.2
   private: false
   created_at: <%= 1.day.ago.to_s :db %>
 
 another_public_comment_on_asset_by_user:
-  commentable: valid_mp3 (Asset)
+  commentable: valid_arthur_mp3 (Asset)
   body: "This is your best work."
   is_spam: false
-  user: sudara
-  commenter: arthur
+  user: arthur
+  commenter: sudara
   remote_ip: 127.0.0.5
   private: false
   created_at: <%= 1.day.ago.to_s :db %>

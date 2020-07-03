@@ -96,6 +96,12 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   context "private comments on index" do
+    it "should be visible to track owner" do
+      login :arthur
+      get :index
+      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
+    end
+
     it "should be visible to admin" do
       login(:sudara)
       get :index
@@ -113,8 +119,8 @@ RSpec.describe CommentsController, type: :controller do
       expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
     end
 
-    it "should not be visible to normal user" do
-      login(:arthur)
+    it "should not be visible to other user" do
+      login(:henri_willig)
       get :index
       expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
     end
