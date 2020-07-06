@@ -54,7 +54,7 @@ private_comment_on_asset_by_user:
   body: "Well friend, this is an awesome track."
   is_spam: false
   user: arthur
-  commenter: sudara
+  commenter: henri_willig
   remote_ip: 127.0.0.2
   private: true
   created_at: <%= 1.day.ago.to_s :db %>

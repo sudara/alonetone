@@ -139,7 +139,7 @@ RSpec.describe PlaylistsController, type: :controller do
       login(:henri_willig)
       put :update, params: {
         id: 'unpublished',
-        user_id: 'henriwillig',
+        user_id: 'henri_willig',
         playlist: {
           title: 'unpublished',
           is_private: false

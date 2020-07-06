@@ -110,7 +110,7 @@ will_studd:
 # Henri Willig has been producing traditional cheeses in its own cheese dairies in Katwoude and
 # Heerenveen in the Netherlands.
 henri_willig:
-  login: henriwillig
+  login: henri_willig
   display_name: Henri Willig
   email: henriwillig@example.com
   salt: <%= salt = SecureRandom.hex(64) %>

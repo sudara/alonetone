@@ -9,7 +9,7 @@ RSpec.describe 'users', type: :feature, js: true do
   end
 
   it 'renders user home' do
-    visit '/henriwillig'
+    visit '/henri_willig'
     Percy.snapshot(page, name: 'Profile')
   end
 end
