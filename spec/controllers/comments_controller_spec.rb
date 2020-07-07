@@ -131,7 +131,7 @@ RSpec.describe CommentsController, type: :controller do
     it "should not be visible to receiver of the private comment" do
       login :arthur
       get :index
-      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_user))
+      expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should be visible to admin" do
