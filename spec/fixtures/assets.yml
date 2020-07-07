@@ -23,6 +23,7 @@ invalid_file:
   mp3_file_size: <%= 1.megabyte %>
   created_at: <%= 1.day.ago.to_s :db %>
   user: sudara
+  length: 45
 valid_arthur_mp3:
   permalink: song1
   mp3_file_name: Song5.mp3
