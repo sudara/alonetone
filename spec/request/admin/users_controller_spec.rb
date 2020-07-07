@@ -121,16 +121,14 @@ RSpec.describe Admin::UsersController, type: :request do
 
     # `.commenter` is the giver of comments
     it "soft deletes comments given to others" do
-      expect(Comment.where(commenter_id: users(:arthur).id).count).to eq(4)
-      expect(users(:arthur).comments_made.count).to eq(4)
-      put delete_admin_user_path(users(:arthur))
-      expect(users(:arthur).comments_made.count).to eq(0)
+      expect(users(:henri_willig).comments_made.count).to eq(2)
+      put delete_admin_user_path(users(:henri_willig))
+      expect(users(:henri_willig).comments_made.count).to eq(0)
     end
 
     # `.user` is a receiver of a comment
     it "soft deleted comments received by others" do
-      expect(Comment.where(user_id: users(:arthur).id).count).to eq(1)
-      expect(users(:arthur).comments_received.count).to eq(1)
+      expect(users(:arthur).comments_received.count).to eq(7)
       put delete_admin_user_path(users(:arthur))
       expect(users(:arthur).comments_received.count).to eq(0)
     end
@@ -234,11 +232,6 @@ RSpec.describe Admin::UsersController, type: :request do
 
       it 'should display users assets' do
         expect(response.body).to match(/song1/)
-      end
-
-      it 'should display users comments' do
-        expect(response.body).to match(/forget milk./)
-        expect(response.body).to match(/Well friend, this is your best work./)
       end
     end
   end

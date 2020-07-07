@@ -13,7 +13,7 @@ RSpec.describe Comment, type: :model do
             commentable.user.avatar_image
           end
         end
-      end.to perform_queries(count: 6)
+      end.to perform_queries(count: 7)
     end
   end
 

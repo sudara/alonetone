@@ -4,7 +4,7 @@ module RSpec
   module Support
     module QueryMatchers
       class QueryCounter
-        SHOW_MAX = 5
+        SHOW_MAX = 10
 
         def initialize(count:)
           @count = count
