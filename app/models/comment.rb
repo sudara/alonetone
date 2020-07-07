@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
 
   # optional user who made the comment
   belongs_to :commenter,
-  -> { with_deleted },
+    -> { with_deleted },
     class_name: 'User',
     optional: true
 
