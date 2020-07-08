@@ -62,6 +62,7 @@ Alonetone::Application.routes.draw do
   put 'toggle_theme' => 'pages#toggle_theme'
 
   get '404', to: "pages#four_oh_four"
+  get 'raise_error', to: 'pages#raise_error'
   get '500', to: "pages#error"
   get 'error', to: "pages#error"
   get 'ok', to: "pages#ok"
