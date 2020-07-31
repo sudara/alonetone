@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
-    "@babel/plugin-transform-runtime": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
-    "@bugsnag/js": "^7.1.1",
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@bugsnag/js": "^7.2.1",
     "@rails/ujs": "^6.0.3-1",
     "@rails/webpacker": "^5.1.1",
     "babel-loader": "^8.1.0",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.3.4",
+    "gsap": "^3.4.2",
     "howler": "https://github.com/goldfire/howler.js.git",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
@@ -19,13 +19,13 @@
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "@percy/agent": "^0.26.9",
+    "@percy/agent": "^0.27.2",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.1.0",
+    "eslint": "^7.5.0",
     "eslint-config-airbnb": "^18.1.0",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react": "^7.20.5",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-dev-server": "^3.11.0"
   }
