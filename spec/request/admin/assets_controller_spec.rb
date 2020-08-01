@@ -219,7 +219,6 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect(playlist.reload.tracks_count).to eq(1)
     end
 
-
     it "should restore listens" do
       expect {
         put restore_admin_asset_path(asset.id)
