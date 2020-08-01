@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   context '.destroy_deleted_accounts_older_than_30_days' do
     it 'should really destroy users deleted more than 30 days ago' do
       expect { User.destroy_deleted_accounts_older_than_30_days }
-        .to change{ User.with_deleted.count }.by(-1)
+        .to change { User.with_deleted.count }.by(-1)
     end
 
     it 'should not destroy a user deleted within last 30 days' do

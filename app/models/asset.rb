@@ -27,7 +27,9 @@ class Asset < ApplicationRecord
   scope :most_listened,   -> { where('listens_count > 0').reorder('listens_count DESC') }
   scope :with_preloads,   -> { includes(user: { avatar_image_attachment: :blob }) }
 
-  belongs_to :user, counter_cache: true
+  belongs_to :user
+  after_commit :update_user_assets_count, on: :create
+
   belongs_to :possibly_deleted_user,
     -> { with_deleted },
     class_name: 'User',
@@ -221,6 +223,10 @@ class Asset < ApplicationRecord
     else
       with_deleted.recent
     end
+  end
+
+  def update_user_assets_count
+    user.increment!(:assets_count, touch: true)
   end
 end
 

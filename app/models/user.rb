@@ -171,9 +171,7 @@ class User < ApplicationRecord
   end
 
   def self.destroy_deleted_accounts_older_than_30_days
-    User.destroyable.find_each do |u|
-      u.destroy
-    end
+    User.destroyable.find_each(&:destroy)
   end
 
   def self.with_same_ip_as(user)
