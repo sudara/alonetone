@@ -179,7 +179,6 @@ GEM
     inline_svg (1.7.1)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    jaro_winkler (1.5.4)
     jmespath (1.4.0)
     jquery-fileupload-rails (0.4.7)
       actionpack (>= 3.1)
@@ -337,13 +336,17 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
-    rubocop (0.76.0)
-      jaro_winkler (~> 1.5.1)
+    rubocop (0.87.0)
       parallel (~> 1.10)
-      parser (>= 2.6)
+      parser (>= 2.7.1.1)
       rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.7)
+      rexml
+      rubocop-ast (>= 0.1.0, < 1.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 1.7)
+      unicode-display_width (>= 1.4.0, < 2.0)
+    rubocop-ast (0.2.0)
+      parser (>= 2.7.0.1)
     ruby-audio (1.6.1)
     ruby-enum (0.8.0)
       i18n
@@ -437,7 +440,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.1)
+    unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
     webdrivers (4.4.1)
       nokogiri (~> 1.6)
@@ -500,7 +503,7 @@ DEPENDENCIES
   request_store
   rspec-mocks
   rspec-rails
-  rubocop (= 0.76.0)
+  rubocop (= 0.87.0)
   ruby-audio
   ruby-mp3info
   rubyzip
