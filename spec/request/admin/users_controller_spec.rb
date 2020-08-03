@@ -82,7 +82,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
     it "should redirect admin to root_path" do
       put delete_admin_user_path(users(:arthur))
-      expect(response).to redirect_to(admin_users_path({ filter_by: :deleted }))
+      expect(response).to redirect_to(admin_users_path(filter_by: :deleted))
     end
 
     it "sets deleted_at to true" do
@@ -121,16 +121,14 @@ RSpec.describe Admin::UsersController, type: :request do
 
     # `.commenter` is the giver of comments
     it "soft deletes comments given to others" do
-      expect(Comment.where(commenter_id: users(:arthur).id).count).to eq(4)
-      expect(users(:arthur).comments_made.count).to eq(4)
-      put delete_admin_user_path(users(:arthur))
-      expect(users(:arthur).comments_made.count).to eq(0)
+      expect(users(:henri_willig).comments_made.count).to eq(2)
+      put delete_admin_user_path(users(:henri_willig))
+      expect(users(:henri_willig).comments_made.count).to eq(0)
     end
 
     # `.user` is a receiver of a comment
     it "soft deleted comments received by others" do
-      expect(Comment.where(user_id: users(:arthur).id).count).to eq(1)
-      expect(users(:arthur).comments_received.count).to eq(1)
+      expect(users(:arthur).comments_received.count).to eq(7)
       put delete_admin_user_path(users(:arthur))
       expect(users(:arthur).comments_received.count).to eq(0)
     end
@@ -156,7 +154,7 @@ RSpec.describe Admin::UsersController, type: :request do
 
     context "if deleted: true flag is passed" do
       it "should return users with deleted" do
-        get admin_users_path({ filter_by: :deleted })
+        get admin_users_path(filter_by: :deleted)
         expect(response.body).to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
@@ -172,14 +170,14 @@ RSpec.describe Admin::UsersController, type: :request do
 
     context "with filter_by" do
       it "should return spam users only if flag is passed" do
-        get admin_users_path({ filter_by: :is_spam })
+        get admin_users_path(filter_by: :is_spam)
         expect(response.body).to match(/aaron/)
         expect(response.body).not_to match(/arthur/)
         expect(response.body).not_to match(/ben/)
       end
 
       it "should return only non spam users if is_spam is set to false" do
-        get admin_users_path({ filter_by: :not_spam })
+        get admin_users_path(filter_by: :not_spam)
         expect(response.body).not_to match(/aaron/)
         expect(response.body).to match(/arthur/)
         expect(response.body).to match(/ben/)
@@ -234,11 +232,6 @@ RSpec.describe Admin::UsersController, type: :request do
 
       it 'should display users assets' do
         expect(response.body).to match(/song1/)
-      end
-
-      it 'should display users comments' do
-        expect(response.body).to match(/forget milk./)
-        expect(response.body).to match(/Well friend, this is your best work./)
       end
     end
   end

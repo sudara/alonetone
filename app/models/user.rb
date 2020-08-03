@@ -11,12 +11,7 @@ class User < ApplicationRecord
                   user_agent: proc { profile&.user_agent },
                   comment_type: 'signup'
 
-  require_dependency 'user/findability'
-  require_dependency 'user/settings'
-  require_dependency 'user/statistics'
-
   include User::Findability
-  include User::Settings
   include User::Statistics
 
   validates_length_of :display_name, within: 3..50, allow_blank: true
@@ -56,8 +51,6 @@ class User < ApplicationRecord
       if: :require_password?
     }
 
-  store :settings
-
   acts_as_authentic do |c|
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
@@ -79,9 +72,14 @@ class User < ApplicationRecord
   before_create :make_first_user_admin
   before_destroy :destroy_with_relations
   before_save { |u| u.display_name = u.login if u.display_name.blank? }
-  after_create :create_profile
+  after_create :create_profile, :create_settings
 
   has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile, update_only: true # we don't want user to be printing new profiles
+
+  has_one :settings, dependent: :destroy, class_name: 'Settings'
+  delegate(*Settings::AVAILABLE, to: :settings)
+
   has_one :account_request
   belongs_to :invited_by, optional: true, class_name: 'User'
   has_many :invitees, foreign_key: 'invited_by_id'
@@ -142,6 +140,10 @@ class User < ApplicationRecord
   # We have to define attachments last to make the Active Record callbacks
   # fire in the right order.
   has_one_attached :avatar_image
+  validates :avatar_image, attached: {
+    content_type: %w[image/png image/jpeg image/jpg image/gif],
+    byte_size: { less_than: 20.megabytes }
+  }, if: :avatar_image_present?
 
   # tokens and activation
   def clear_token!
@@ -169,9 +171,7 @@ class User < ApplicationRecord
   end
 
   def self.destroy_deleted_accounts_older_than_30_days
-    User.destroyable.find_each do |u|
-      u.destroy
-    end
+    User.destroyable.find_each(&:destroy)
   end
 
   def self.with_same_ip_as(user)
@@ -267,8 +267,12 @@ class User < ApplicationRecord
 
   # Generates a location to user's avatar with the requested variant. Returns nil when the user
   # does not have a usable avatar.
+  #
+  # As of Rails 6.0 attachables aren't persisted to storage until save
+  # https://github.com/rails/rails/pull/33303
+  # Which means we don't want to try and display variants from unpersisted records with invalid attachments
   def avatar_image_location(variant:)
-    return unless avatar_image.attached?
+    return unless avatar_image.attached? && avatar_image.persisted?
 
     Storage::Location.new(
       ImageVariant.variant(avatar_image, variant: variant),
@@ -299,6 +303,30 @@ class User < ApplicationRecord
     else
       with_deleted.recent
     end
+  end
+
+  def has_public_playlists?
+    playlists.only_public.count >= 1
+  end
+
+  def has_tracks?
+    assets_count > 0
+  end
+
+  def has_as_favorite?(asset)
+    favorite_asset_ids.include?(asset.id)
+  end
+
+  def favorite_asset_ids
+    Track.where(playlist_id: favorites).pluck(:asset_id)
+  end
+
+  def favorites
+    playlists.favorites.first
+  end
+
+  def name
+    self[:display_name] || login
   end
 
   protected

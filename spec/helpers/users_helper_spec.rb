@@ -26,7 +26,7 @@ RSpec.describe UsersHelper, type: :helper do
     user = users(:jamie_kiesl)
     date = user.created_at.to_date.to_s(:long)
     profile = <<~PROFILE
-      Jamiek
+      jamiek
       Joined alonetone #{date}
       from Wilwaukee, US
     PROFILE

@@ -58,12 +58,6 @@ module ApplicationHelper
     result.html_safe
   end
 
-  def awesome_truncate_with_read_more(asset, length = 30)
-    text = awesome_truncate(strip_tags(asset.description), length)
-    text << link_to('read more', user_track_path(asset.user, asset.permalink)) if asset.description && asset.description.length > 300
-    text.html_safe
-  end
-
   # Comments are plaintext and don't use this helper
   # credits/profile/playlist currently are markdowned without line breaks
   def markdown(text)
@@ -118,23 +112,6 @@ module ApplicationHelper
 
   def authorized?
     admin? || @user === current_user
-  end
-
-  def notice_for(notice, h1_text, &block)
-    unless notice_hidden?(notice)
-      content_tag(:div, ((content_tag :h1, h1_text, class: 'notice') +
-        hide_notice_link(notice) +
-        capture(&block)), class: 'notice') +
-        block.binding
-    end
-  end
-
-  def hide_notice_link(notice)
-    if logged_in?
-      link_to ['Ok, hide this notice', 'Yup! all good, thanks'].sample,
-        user_path(current_user, user: { settings: { hide_notice: { notice => true } } }, method: :put),
-        class: 'hide_notice'
-    end
   end
 
   def login_link

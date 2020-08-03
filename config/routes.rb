@@ -62,6 +62,7 @@ Alonetone::Application.routes.draw do
   put 'toggle_theme' => 'pages#toggle_theme'
 
   get '404', to: "pages#four_oh_four"
+  get 'raise_error', to: 'pages#raise_error'
   get '500', to: "pages#error"
   get 'error', to: "pages#error"
   get 'ok', to: "pages#ok"
@@ -79,7 +80,6 @@ Alonetone::Application.routes.draw do
   end
 
   get 'signup', to: 'users#new'
-  get 'settings', to: 'users#edit'
   get '/activate/:perishable_token', to: 'users#activate'
 
   get 'radio' =>'assets#radio', :as => 'radio_home'
@@ -108,11 +108,12 @@ Alonetone::Application.routes.draw do
   get ':login/comments' => 'comments#index', :as => 'user_comments'
   get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
 
-  get ':login' => 'users#show', :as => "user_home"
+  get ':id' => 'users#show', :as => "user_home" # DEPRECATED (duplicate)
   resources :users, :path => "/" do
     member do
       post :attach_pic
       get :sudo
+      put :toggle_setting
     end
     resource 'profile'
     resources 'tracks', controller: :assets do

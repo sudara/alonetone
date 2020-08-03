@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: %i[new create index activate sudo toggle_favorite]
-  before_action :require_login, except: %i[index show new create activate destroy]
+  before_action :find_user, only: %i[show edit update toggle_setting destroy]
+  before_action :require_login, except: %i[index show new create activate]
 
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
@@ -15,10 +15,6 @@ class UsersController < ApplicationController
     prepare_meta_tags
     gather_user_goodies
     respond_to :html
-  end
-
-  def stats
-    @tracks = @user.assets.published
   end
 
   def new
@@ -69,24 +65,15 @@ class UsersController < ApplicationController
     @page_title = "Editing #{@user.name}"
   end
 
-  def attach_pic
-    avatar_image = params.dig(:pic, :pic)
-    if avatar_image && @user.update(avatar_image: avatar_image)
-      flash[:ok] = 'Picture updated!'
-    else
-      flash[:error] = 'Whups, picture not updated! Try again.'
-    end
-    redirect_to edit_user_path(@user)
-  end
-
   def update
     if @user.update(user_params)
-      flush_asset_cache_if_necessary
+      flush_asset_cache if user_params.include?(:login) || user_params.include?(:avatar_image)
       redirect_to edit_user_path(@user), ok: "Sweet, updated"
     else
-      flash[:error] = "Not so fast, young one"
+      @user.reload if @user.errors.key?(:login)
+      flash.now[:error] = "Ruh roh, that didn't work"
       @profile = @user.profile
-      render action: :edit
+      render 'edit'
     end
   end
 
@@ -96,6 +83,13 @@ class UsersController < ApplicationController
 
     current_user.toggle_favorite(asset)
     head :ok
+  end
+
+  def toggle_setting
+    if Settings::AVAILABLE.include? "#{params[:setting]}?".to_sym
+     result = @user.settings.toggle!(params[:setting])
+    end
+    result ? head(:ok) : head(:bad_request)
   end
 
   def destroy
@@ -125,8 +119,17 @@ class UsersController < ApplicationController
 
   private
 
+  # This overrides application controller's version of find_user
+  # which is too flexible, full of edge cases and deprecated.
+  def find_user
+    @user = User.find_by_login(params[:id])
+    not_found unless @user
+  end
+
   def user_params
-    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation, :display_name, settings: {})
+    params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
+      :display_name, :avatar_image, settings: {}, profile_attributes:
+      [:id, :bio, :city, :country, :website, :instagram, :spotify, :apple, :youtube])
   end
 
   def user_params_with_ip
@@ -163,7 +166,7 @@ class UsersController < ApplicationController
   end
 
   def dangerous_action?
-    %w[destroy update edit create attach_pic].include? action_name
+    %w[destroy update edit create].include? action_name
   end
 
   def change_user_to(user)
@@ -194,22 +197,15 @@ class UsersController < ApplicationController
     @sudo = session[:sudo] = nil
   end
 
-  def flush_asset_cache_if_necessary
-    # If the user changes the :block_guest_comments setting then it requires
-    # that the cache for all their tracks be invalidated
-    flush_asset_caches = false
-    if params[:user][:settings].present? && params[:user][:settings][:block_guest_comments]
-      currently_blocking_guest_comments = @user.has_setting?('block_guest_comments', 'true')
-      flush_asset_caches = params[:user][:settings][:block_guest_comments] == (currently_blocking_guest_comments ? "false" : "true")
-    end
-    Asset.where(user_id: @user.id).update_all(updated_at: Time.now) if flush_asset_caches
-  end
-
   def display_user_home_or_index
     if params[:login] && User.find_by_login(params[:login])
       redirect_to user_home_url(params[:user])
     else
       redirect_to users_url
     end
+  end
+
+  def flush_asset_cache
+    Asset.where(user_id: @user.id).touch_all
   end
 end

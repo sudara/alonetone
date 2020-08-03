@@ -4,7 +4,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
   it 'renders track and cover pages' do
     logged_in(:arthur) do
-      visit 'henriwillig/playlists/polderkaas'
+      visit 'henri_willig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
       # I hoped we could pause and resume animations as needed
@@ -40,14 +40,15 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # same position for the percy snap.
         Percy.snapshot(page,
           name: 'Playlist Track Play, Seek, Pause',
-          percy_css: '.progress_container_inner { left: 33% !important; } #waveform_reveal { left: -335px !important; }')
+          percy_css: "#waveform_reveal { left: -335px !important; }
+            .progress_container_inner { left: 33% !important; }")
       end
     end
   end
 
   it 'renders playlist editing' do
     logged_in(:henri_willig) do
-      visit 'henriwillig/playlists/polderkaas/edit'
+      visit 'henri_willig/playlists/polderkaas/edit'
 
       # add a playlist image
       attach_file('playlist_cover_image', 'spec/fixtures/files/cheshire_cheese.jpg', make_visible: true)

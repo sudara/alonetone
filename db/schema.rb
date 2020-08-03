@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_165252) do
+ActiveRecord::Schema.define(version: 2020_08_01_120933) do
 
   create_table "account_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
@@ -230,7 +230,21 @@ ActiveRecord::Schema.define(version: 2020_03_17_165252) do
     t.string "website"
     t.string "user_agent"
     t.datetime "updated_at"
+    t.string "youtube"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.boolean "display_listen_count", default: true
+    t.boolean "block_guest_comments", default: false
+    t.boolean "most_popular", default: true
+    t.boolean "increase_ego", default: false
+    t.boolean "email_comments", default: true
+    t.boolean "email_new_tracks", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
   create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

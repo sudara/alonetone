@@ -1,9 +1,11 @@
-import bugsnag from '@bugsnag/js'
+import Bugsnag from '@bugsnag/js'
 
-export const bugsnagClient = bugsnag({
-  apiKey: '<%= Rails.configuration.alonetone.bugsnag_api_key || "nokey" %>',
+Bugsnag.start({
+  apiKey: '<%= Rails.configuration.alonetone.bugsnag_api_key || "A"*32 %>',
   appType: 'js',
+  <%= "logger: null," if Rails.env.development? %>
+  enabledReleaseStages: ['production'],
   user: {
-    name: window.username
-  }
+    name: window.username,
+  },
 })

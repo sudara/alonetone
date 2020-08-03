@@ -12,8 +12,8 @@ import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
-import { bugsnagClient } from '../misc/bugsnag.js.erb'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
+import { } from '../misc/bugsnag.js.erb'
 
 Rails.start()
 Turbolinks.start()

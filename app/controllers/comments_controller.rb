@@ -30,8 +30,8 @@ class CommentsController < ApplicationController
     if params[:login].present?
       find_user
       @page_title = "#{@user.name} Comments"
-      @pagy, @comments = pagy(@user.comments_received.with_preloads.on_track.only_public)
-      set_comments_made
+      @pagy, @comments = pagy(@user.comments_received.with_preloads.on_track.public_or_private(display_private_comments?))
+      @pagy_comments_made, @comments_made = pagy(@user.comments_made.with_preloads.on_track.public_or_private(display_private_comments?), page_param: :page_made)
     else
       @page_title = "Recent Comments"
       @pagy, @comments = pagy(Comment.with_preloads.on_track.public_or_private(moderator?))
@@ -43,15 +43,11 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :commentable_type, :commentable_id, :private,
-    :commenter, :commentable)
+      :commenter, :commentable)
   end
 
   def find_comment
     @comment = Comment.where(id: params[:id]).first
-  end
-
-  def set_comments_made
-    @pagy_comments_made, @comments_made = pagy(Comment.where(commenter_id: @user.id).public_or_private(display_private_comments?), page_param: :page_made)
   end
 
   def set_spam_comments

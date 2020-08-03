@@ -124,6 +124,7 @@ class PlaylistsController < ApplicationController
       @playlist.is_private = is_private
       redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.'
     else
+      set_assets
       render action: "edit"
     end
   end

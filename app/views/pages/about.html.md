@@ -5,8 +5,7 @@ alonetone is a place for small label, DIY, bedroom and other musicians and bands
 If you make music (and own the rights to it) then this site is built for you.
 
 
-
-## I don't get it. Why alonetone instead of <cool service XYZ>?
+## Why alonetone instead of cool service XYZ?
 
 Most of the 'free' services where you can host your music run ads, are funded by investors or flat out owned by media conglomerates. In general, they are hoping to make money off of your "content"...erm...music.
 
@@ -30,7 +29,7 @@ After our initial launch in 2008 most features were inspired, recommended by, an
 
 ## How long will it be free?
 
-The basic ability to upload and share music without ads or payment will exist as long as alonetone exists.
+The ability to upload and share music without ads or payment will exist as long as alonetone exists.
 
 ## Is alonetone open source?
 

@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
 
   # optional user who made the comment
   belongs_to :commenter,
-  -> { with_deleted },
+    -> { with_deleted },
     class_name: 'User',
     optional: true
 
@@ -101,7 +101,7 @@ class Comment < ActiveRecord::Base
 
   def is_deliverable?
     !is_spam? && (commentable.class == Asset) &&
-      user.wants_email? && (user != commenter)
+      user.email_comments? && (user != commenter)
   end
 
   def truncate_user_agent

@@ -5,7 +5,7 @@ class MarkAllUsersWithIpAsSpam < ApplicationJob
     return unless ip.present? # older acocunts have ip as nil
 
     User.where(current_login_ip: ip).each do |user|
-      user.spam_and_mark_for_deletion!
+      UserCommand.new(user).spam_soft_delete_with_relations
     end
   end
 end

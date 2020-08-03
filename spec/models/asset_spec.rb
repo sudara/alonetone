@@ -216,6 +216,15 @@ RSpec.describe Asset, type: :model do
       )
       expect(asset.errors).to_not be_empty
     end
+
+    it "increments the user's counter" do
+      expect {
+        user.assets.create(
+          title: 'Smallest',
+          audio_file: fixture_file_upload('files/smallest.mp3', 'audio/mpeg')
+        )
+      }.to change { user.reload.assets_count }.by(1)
+    end
   end
 
   context "on update" do
@@ -262,17 +271,43 @@ RSpec.describe Asset, type: :model do
   end
 
   describe "soft deletion" do
-    it "soft deletes" do
-      expect do
+    it "soft deletes and leaves the record in the database" do
+      expect {
         Asset.all.map(&:soft_delete)
-      end.not_to change { Asset.unscoped.count }
+      }.not_to change { Asset.unscoped.count }
     end
 
-    it "changes scope" do
+    it "renders the record unavailable in the default scope" do
       original_count = Asset.count
-      expect do
+      expect {
         Asset.all.map(&:soft_delete)
-      end.to change { Asset.count }.from(original_count).to(0)
+      }.to change { Asset.count }.from(original_count).to(0)
+    end
+
+    it "decrements the user counter cache on soft delete" do
+      user = users(:arthur)
+      expect {
+        AssetCommand.new(assets(:valid_arthur_mp3)).soft_delete_with_relations
+      }.to change { user.reload.assets_count }.by(-1)
+    end
+
+    it "increments the user counter cache on restore" do
+      user = users(:arthur)
+      AssetCommand.new(assets(:valid_arthur_mp3)).soft_delete_with_relations
+      expect {
+        AssetCommand.new(assets(:valid_arthur_mp3)).restore_with_relations
+      }.to change { user.reload.assets_count }.by(1)
+    end
+  end
+
+  describe "hard deletion" do
+    it "doesn't decrement the user counter cache on hard delete, as its already decremented" do
+      user = users(:arthur)
+      AssetCommand.new(assets(:valid_arthur_mp3)).soft_delete_with_relations
+      user.reload
+      expect {
+        assets(:valid_arthur_mp3).destroy
+      }.not_to change { user.reload.assets_count }
     end
   end
 

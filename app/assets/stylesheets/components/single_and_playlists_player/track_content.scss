@@ -295,9 +295,6 @@
     }
   }
   .comment_asset {
-    & + h2 {
-      display: none;
-    }
     padding-top: 10px;
     padding-right: 0;
     padding-left: 0;
@@ -383,5 +380,5 @@ main > .track_content {
   @media only screen and (max-width: 770px) {
     width: 96%;
     max-width: none;
-  }  
+  }
 }

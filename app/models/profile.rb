@@ -2,9 +2,18 @@ class Profile < ApplicationRecord
   belongs_to :user
   validates :user, presence: true
 
+  before_save :sanitize_website
+
+  LINKS = %i[website twitter instagram bandcamp spotify apple youtube].freeze
+
   def has_links?
-    bio.present? || website.present? || spotify.present? ||
-      twitter.present? || apple.present? || instagram.present?
+    LINKS.any?{ |l| send(l).present? }
+  end
+
+  private
+
+  def sanitize_website
+    website.sub!(/^https?\:\/\//, '') if website_changed?
   end
 end
 

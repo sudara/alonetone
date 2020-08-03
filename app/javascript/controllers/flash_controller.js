@@ -8,14 +8,15 @@ export default class extends Controller {
 
   initialize() {
     flashController = this
+    this.timeline = gsap.timeline({ paused: true })
+      .set(this.element, { autoAlpha: 0, y: 50 })
+      .to(this.element, { duration: 0.5, autoAlpha: 1, y: 0 })
+      .to(this.element, { duration: 1.0, autoAlpha: 0, y: 0 }, 3)
   }
 
   alert(message) {
     this.element.innerHTML = message
-    gsap.timeline({})
-      .to(this.element, { autoAlpha: 0, y: 50 })
-      .to(this.element, { duration: 0.5, autoAlpha: 1, y: 0 })
-      .to(this.element, { duration: 1.0, autoAlpha: 0, y: 0 }, 3)
+    this.timeline.restart()
   }
 
   alertSaved(message = 'Saved!') {

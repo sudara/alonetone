@@ -2,9 +2,9 @@ dist: xenial
 sudo: required
 language: ruby
 rvm:
-  2.6.4
+  2.7.1
 node_js:
-  13.1.0
+  14.2.0
 addons:
   chrome: stable
   apt:

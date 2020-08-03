@@ -241,34 +241,60 @@ RSpec.describe AssetsController, type: :controller do
   context "#show" do
     before :each do
       allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
-      login(:sudara)
     end
 
-    it "should enqueue a CreateAudioFeature job if an asset does not have audio feature" do
+    it "should enqueue a CreateAudioFeature job if an asset does not have audio feature (waveform)" do
+      login(:sudara)
       asset = assets(:valid_mp3_2)
       asset.audio_feature.delete
-
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
-
       assert_enqueued_jobs(1)
     end
 
-    it "should NOT enqueue anything if feature is present" do
+    it "should NOT enqueue anything if audio feature (waveform) is present" do
+      login(:sudara)
       asset = assets(:valid_mp3)
-
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
-
       assert_enqueued_jobs(0)
     end
 
     it "should NOT enqueue anything if is_a_bot?" do
       allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(true)
-
       asset = assets(:valid_mp3)
-
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
-
       assert_enqueued_jobs(0)
+    end
+
+    context "private comments" do
+      it "should be visible to track owner" do
+        login :arthur
+        get :show, params: { id: assets(:valid_arthur_mp3).id, user_id: users(:arthur).login }
+        expect(assigns(:user)).to eql(users(:arthur))
+        expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
+      end
+
+      it "should be visible to admin" do
+        login(:sudara)
+        get :show, params: { id: assets(:valid_arthur_mp3).id, user_id: users(:arthur).login }
+        expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
+      end
+
+      it "should be visible to mod" do
+        login(:sandbags)
+        get :show, params: { id: assets(:valid_arthur_mp3).id, user_id: users(:arthur).login }
+        expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
+      end
+
+      it "should not be visible to guest" do
+        get :show, params: { id: assets(:valid_arthur_mp3).id, user_id: users(:arthur).login }
+        expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
+      end
+
+      it "should not be visible to other user" do
+        login(:henri_willig)
+        get :show, params: { id: assets(:valid_arthur_mp3).id, user_id: users(:arthur).login }
+        expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
+      end
     end
   end
 

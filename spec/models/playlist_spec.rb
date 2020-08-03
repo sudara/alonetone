@@ -183,6 +183,36 @@ RSpec.describe Playlist, type: :model do
     end
   end
 
+  describe "cover validation" do
+    it "can be a jpg" do
+      jpg_cover = Playlist.new(user: users(:will_studd), title: "jpg jump",
+        cover_image: file_fixture_uploaded_file(
+          'jeffdoessudara.jpg', filename: 'jeffdoessudara.jpg', content_type: 'image/jpeg'
+        )
+      )
+      expect(jpg_cover).to be_valid
+    end
+
+    it "can a png file" do
+      png_cover = Playlist.new(user: users(:will_studd), title: "jpg jump",
+        cover_image: file_fixture_uploaded_file(
+          'alonetone.png', filename: 'alonetone.png', content_type: 'image/png'
+        )
+      )
+      expect(png_cover).to be_valid
+    end
+
+    it "cannot be a webp file" do
+      webp_cover = Playlist.new(user: users(:will_studd), title: "jpg jump",
+        cover_image: file_fixture_uploaded_file(
+          'alonetone.webp', filename: 'alonetone.webp', content_type: 'image/webp'
+        )
+      )
+      expect(webp_cover).not_to be_valid
+      expect(webp_cover.errors[:cover_image]).to_not be_empty
+    end
+  end
+
   describe "generating URLs to their cover" do
     context "with a cover" do
       let(:playlist) { playlists(:will_studd_rockfort) }

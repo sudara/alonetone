@@ -24,6 +24,7 @@ arthur:
   last_request_at: <%= 1.days.ago.to_s :db %>
   last_login_at: <%= 1.days.ago.to_s :db %>
   current_login_ip: 9.9.9.9
+  assets_count: 3
 
 # deleted
 aaron:
@@ -84,7 +85,7 @@ brand_new_user:
 # Jamie Kiesl is a 35-year-old human resources manager who lives in Mequon, Wisconsin. She is also
 # damn good at naming cheeses. She created an account to listen to artists on Alonetone.
 jamie_kiesl:
-  login: Jamiek
+  login: jamiek
   email: jamie.kiesl@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt('test' + salt) %>
@@ -110,15 +111,15 @@ will_studd:
 # Henri Willig has been producing traditional cheeses in its own cheese dairies in Katwoude and
 # Heerenveen in the Netherlands.
 henri_willig:
-  login: henriwillig
+  login: henri_willig
   display_name: Henri Willig
   email: henriwillig@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   playlists_count: 1
   assets_count: 2
   crypted_password: <%= scrypt('test' + salt) %>
-  created_at: <%= 6.months.ago %>
-  updated_at: <%= 6.months.ago %>
+  created_at: 2010-04-08 13:00:03
+  updated_at: 2020-04-08 13:00:03
 
 # William Shatner is a cheese enthousiast. He's also the last person in the world to use the old
 # theme.

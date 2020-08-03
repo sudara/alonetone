@@ -60,7 +60,7 @@
     <div class='alonetoner'><%= user_image_link(asset.user, variant: :small_avatar) %></div>
     <div class="description">
         <div class='user_description'>
-          <%= awesome_truncate_with_read_more(asset, 250) %>
+          <%= awesome_truncate(strip_tags(asset.description), 250) %>
         </div>
 
         <div class="created">Uploaded <%= local_time_ago(asset.created_at) %></div>
@@ -68,7 +68,7 @@
         <div class="below_description">
 
           <%= link_to user_track_path(asset.user, asset.permalink), title: "#{asset.name} by #{asset.user.name}" do %>
-            <span>View more&hellip;</span>
+            <span>View Track Detail Page&hellip;</span>
           <% end unless @single_track %>
 
 
@@ -85,7 +85,7 @@
         </div>
     </div>
   </div>
-  <% if logged_in? || asset.guest_can_comment? %>
+  <% if can_comment_on?(asset) %>
     <div class="comment_track">
       <%= render partial: 'assets/comment', locals: { asset: asset }%>
     </div>

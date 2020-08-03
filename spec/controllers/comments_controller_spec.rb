@@ -36,7 +36,7 @@ RSpec.describe CommentsController, type: :controller do
     it 'should send email to track owner if comment wasnt spam' do
       login(:sudara)
       params = { :comment => { "body" => "Comment yo!", "commentable_type" => "Asset", "commentable_id" => assets(:valid_arthur_mp3).id }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
-      expect { post :create, params: params, xhr: true}.to change { ActionMailer::Base.deliveries.size }.by(1)
+      expect { post :create, params: params, xhr: true }.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
 
     it 'should not email track owner if comment is spam' do
@@ -65,58 +65,96 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   context "private comments made by user" do
-    it "should be visible to private user viewing their own shit" do
-      login(:arthur)
-      get :index, params: { login: 'arthur' }
+    it "should be visible to user who made the comment on their comment page" do
+      login(:henri_willig)
+      get :index, params: { login: 'henri_willig' }
       expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should be visible to admin" do
       login(:sudara)
-      get :index, params: { login: 'arthur' }
+      get :index, params: { login: 'henri_willig' }
       expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should be visible to mod" do
       login(:sandbags)
-      get :index, params: { login: 'arthur' }
+      get :index, params: { login: 'henri_willig' }
       expect(assigns(:comments_made)).to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should not be visible to guest" do
-      get :index, params: { login: 'arthur' }
+      get :index, params: { login: 'henri_willig' }
       expect(assigns(:comments_made)).not_to include(comments(:private_comment_on_asset_by_user))
     end
 
     it "should not be visible to normal user" do
       login(:joeblow)
-      get :index, params: { login: 'arthur' }
+      get :index, params: { login: 'henri_willig' }
       expect(assigns(:comments_made)).not_to include(comments(:private_comment_on_asset_by_user))
     end
   end
 
-  context "private comments on index" do
+  context "private comments recieved by user" do
+    it "should be visible to track owner" do
+      login :arthur
+      get :index, params: { login: 'arthur' }
+      expect(assigns(:user)).to eql(users(:arthur))
+      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
+    end
+
     it "should be visible to admin" do
       login(:sudara)
-      get :index
+      get :index, params: { login: 'arthur' }
       expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
     end
 
     it "should be visible to mod" do
       login(:sandbags)
-      get :index
+      get :index, params: { login: 'arthur' }
       expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_guest))
     end
 
     it "should not be visible to guest" do
-      get :index
+      get :index, params: { login: 'arthur' }
       expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
     end
 
-    it "should not be visible to normal user" do
-      login(:arthur)
-      get :index
+    it "should not be visible to other user" do
+      login(:henri_willig)
+      get :index, params: { login: 'arthur' }
       expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_guest))
+    end
+  end
+
+  context "private comments on overall index" do
+    it "should not be visible to receiver of the private comment" do
+      login :arthur
+      get :index
+      expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_user))
+    end
+
+    it "should be visible to admin" do
+      login(:sudara)
+      get :index
+      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_user))
+    end
+
+    it "should be visible to mod" do
+      login(:sandbags)
+      get :index
+      expect(assigns(:comments)).to include(comments(:private_comment_on_asset_by_user))
+    end
+
+    it "should not be visible to guest" do
+      get :index
+      expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_user))
+    end
+
+    it "should not be visible to other user" do
+      login(:henri_willig)
+      get :index
+      expect(assigns(:comments)).not_to include(comments(:private_comment_on_asset_by_user))
     end
   end
 end
