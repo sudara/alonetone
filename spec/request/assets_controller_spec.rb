@@ -173,7 +173,7 @@ RSpec.describe AssetsController, type: :request do
       referer = "https://alonetone.com/blah/blah"
       expect {
         get user_track_path('sudara', 'song1', format: :mp3),
-        headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent, 'HTTP_REFERER' => referer }
+          headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent, 'HTTP_REFERER' => referer }
        }.to change(Listen, :count)
       expect(Listen.last.source).to eq(referer)
     end
@@ -183,7 +183,7 @@ RSpec.describe AssetsController, type: :request do
       referer = "https://alonetone.com/blah/blah"
       expect {
         get user_track_path('sudara', 'song1', format: :mp3, referer: "itunes"),
-        headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent, 'HTTP_REFERER' => referer }
+          headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent, 'HTTP_REFERER' => referer }
       }.to change(Listen, :count)
       expect(Listen.last.source).to eq('itunes')
     end
@@ -192,7 +192,7 @@ RSpec.describe AssetsController, type: :request do
       agent = GOOD_USER_AGENTS.first
       expect {
         get user_track_path('sudara', 'song1', format: :mp3),
-        headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
+          headers: { 'HTTP_ACCEPT' => "audio/mpeg", 'HTTP_USER_AGENT' => agent }
       }.to change(Listen, :count)
       expect(Listen.last.source).to eq("direct hit")
     end
