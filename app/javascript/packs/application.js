@@ -14,6 +14,9 @@ import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
 import { } from '../misc/bugsnag.js.erb'
+/* eslint-disable-next-line import/extensions */
+import 'trix/dist/trix.js';
+import '@rails/actiontext';
 
 Rails.start()
 Turbolinks.start()
@@ -25,7 +28,6 @@ LocalTime.start()
 const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(context))
-
 
 function handlers() {
   document.querySelectorAll('.large_cover .no_pic, .small_cover .no_pic').forEach((pic) => {
@@ -53,5 +55,5 @@ function handlers() {
 document.addEventListener('turbolinks:load', handlers)
 
 export {
-  gsap
+  gsap,
 }

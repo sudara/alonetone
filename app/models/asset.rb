@@ -12,6 +12,8 @@ class Asset < ApplicationRecord
   include Asset::Statistics
   include Asset::Waveform
 
+  has_rich_text :post
+
   attribute :user_agent, :string
   serialize :waveform, Array
 
@@ -25,7 +27,7 @@ class Asset < ApplicationRecord
   scope :hottest,         -> { where('hotness > 0').reorder(hotness: :desc) }
   scope :most_commented,  -> { where('comments_count > 0').reorder('comments_count DESC') }
   scope :most_listened,   -> { where('listens_count > 0').reorder('listens_count DESC') }
-  scope :with_preloads,   -> { includes(user: { avatar_image_attachment: :blob }) }
+  scope :with_preloads,   -> { with_rich_text_post_and_embeds.includes(user: { avatar_image_attachment: :blob }) }
 
   belongs_to :user
   after_commit :update_user_assets_count, on: :create

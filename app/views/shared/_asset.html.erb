@@ -24,7 +24,7 @@
 
     </div>
 
-    <%= format_track_description(@asset.description) %>
+    <%= @asset.post %>
 
     <div>
       <%= markdown(@asset.credits) if @asset.credits.present? %>

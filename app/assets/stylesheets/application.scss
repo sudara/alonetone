@@ -3,5 +3,7 @@
 @import 'normalize';
 @import 'variables';
 @import 'layout';
+@import "trix/dist/trix";
+@import 'actiontext';
 
 @import 'components/**/*';
