@@ -15,8 +15,8 @@ import gsap from 'gsap' // needed for tests to run
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
 import { } from '../misc/bugsnag.js.erb'
 /* eslint-disable-next-line import/extensions */
-import 'trix/dist/trix.js';
-import '@rails/actiontext';
+require('trix/dist/trix.js')
+require('@rails/actiontext')
 
 Rails.start()
 Turbolinks.start()
