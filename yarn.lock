@@ -1141,17 +1141,17 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@bugsnag/browser@^7.3.3":
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-7.3.3.tgz#aa839512a60811fe76ba5f02e16b2cb6646838c7"
-  integrity sha512-P3oQU/abDsDqSuuxVFDBp3XNIYeGLsbtGWwCM+iEg1ZGAUk/yP7NfRLqotMheZ0uC8a+4PSIS+U3+slZF7LCJw==
+"@bugsnag/browser@^7.3.5":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@bugsnag/browser/-/browser-7.3.5.tgz#31a10983247804b58894bd1dc5a998b89195c780"
+  integrity sha512-Zs54UH7rXJTQbcuKDr6a4Qn2SDHr7cq7XLd5EHuLCJ6OMBktBlM8vZSf1sOiCBE2EE2g/kC2rk6VJktsRIaUEA==
   dependencies:
-    "@bugsnag/core" "^7.3.3"
+    "@bugsnag/core" "^7.3.5"
 
-"@bugsnag/core@^7.3.3":
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.3.3.tgz#9d231e5a603a60b74b864cd59c1ebe6fdc2ff70f"
-  integrity sha512-DjAwzxQtyKgQxPGLmM+cZZZVkVsecUDowliguvcGojHHmdeIEDIBpu5LrZBQtLNk83SjM1RIyAEPdzaiHGWbzg==
+"@bugsnag/core@^7.3.5":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-7.3.5.tgz#688841abc8091dfcb6fda021b7fbc5519f23196e"
+  integrity sha512-7zKFLcA6m9aaQ1p1AQx2iRaT3gE/MJqy0vGa/RhlKNdgMdMKYRGECWxJE66firvJT5ZwL7Bu11IkK6sLWHCBaw==
   dependencies:
     "@bugsnag/cuid" "^3.0.0"
     "@bugsnag/safe-json-stringify" "^6.0.0"
@@ -1164,20 +1164,20 @@
   resolved "https://registry.yarnpkg.com/@bugsnag/cuid/-/cuid-3.0.0.tgz#2ee7642a30aee6dc86f5e7f824653741e42e5c35"
   integrity sha512-LOt8aaBI+KvOQGneBtpuCz3YqzyEAehd1f3nC5yr9TIYW1+IzYKa2xWS4EiMz5pPOnRPHkyyS5t/wmSmN51Gjg==
 
-"@bugsnag/js@^7.3.3":
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-7.3.3.tgz#de18b841049b84fca94eb71835c7ba49423fd6dc"
-  integrity sha512-4++QE1cebYVI87smjc9IsyIJWtNjL5WG4jp7htd+HEtT0QkhbokIbRH2b4MpN6+l4Y7GzyzMBNDOr1qDdBluBw==
+"@bugsnag/js@^7.3.5":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@bugsnag/js/-/js-7.3.5.tgz#edf663aa8b025aedc5aaf35611bed4b5242d648e"
+  integrity sha512-5KCeFEM7ntww2UbxbgW94TEwLHKzVLepDd8TNZeae2rdInt+fTc4o9oS0QxgubdLZHdLo9LNt8GTghl6F/9NwQ==
   dependencies:
-    "@bugsnag/browser" "^7.3.3"
-    "@bugsnag/node" "^7.3.3"
+    "@bugsnag/browser" "^7.3.5"
+    "@bugsnag/node" "^7.3.5"
 
-"@bugsnag/node@^7.3.3":
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-7.3.3.tgz#666917687a587e2a797359f74f03aff624f8dae3"
-  integrity sha512-quyJXiqcMDVMdDqO0kW1277K3osdI/XgHKtY0K/4EcN2u4Qlg0crBNw5dQo+DCL4yllDQcWRfeuFv718QW4xlQ==
+"@bugsnag/node@^7.3.5":
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/@bugsnag/node/-/node-7.3.5.tgz#6400520cb3a61fb531ee2ba04d0b5407618818b4"
+  integrity sha512-eN06NgphKYikBq/AXpiLO9tNx1H7cz8C78oQnR5fj2POulj+Zm9njr9dM6DEzGIvBDt952SwwcOA73jAiOmztQ==
   dependencies:
-    "@bugsnag/core" "^7.3.3"
+    "@bugsnag/core" "^7.3.5"
     byline "^5.0.0"
     error-stack-parser "^2.0.2"
     iserror "^0.0.2"
@@ -1324,10 +1324,10 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
 
-"@percy/agent@^0.28.1":
-  version "0.28.1"
-  resolved "https://registry.yarnpkg.com/@percy/agent/-/agent-0.28.1.tgz#e4cb7f4477bd6889fd4bdf96da3111390907c619"
-  integrity sha512-urS0Vep2wakU08+44tjQz9KnR5cIq8ogRfkS8xipEdR9/SYOBLxj0BaVQ/6wQh9n24jKJSGiema5QZmvQQRl7g==
+"@percy/agent@^0.28.2":
+  version "0.28.2"
+  resolved "https://registry.yarnpkg.com/@percy/agent/-/agent-0.28.2.tgz#319c366176b9f7376402435b93d9464d5ecdab4c"
+  integrity sha512-Nw1DDn+r8LW/zz8Cdq1Xi3XT2O7jWEzMHk7r1CugysdNrZQfRTI71yUfnC1nAnTIMf+9UhcKVCl1QvSXLedjkQ==
   dependencies:
     "@oclif/command" "1.5.19"
     "@oclif/config" "^1"
@@ -1352,10 +1352,10 @@
     which "^2.0.1"
     winston "^3.0.0"
 
-"@rails/ujs@^6.0.3-1":
-  version "6.0.3-2"
-  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-6.0.3-2.tgz#e14c1f29086858215ce7ccd9ad6d8888c458b4a3"
-  integrity sha512-WcpIEftNCfGDEgk6KerOugiet75Mir5q/HT1yt3dDhpBI91BaZ15lfSQIsZwMw2nyeDz9A9QBz8dAFAd4gXIzg==
+"@rails/ujs@^6.0.3-3":
+  version "6.0.3-3"
+  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-6.0.3-3.tgz#5cf1e99c6fa1beaf73d4bcac6ab9b05702e92713"
+  integrity sha512-bXCbtpSwCtqhBXxxoD5FGiyeqJU1smf4DS15SCXRzzSaoee2Kk+lVV5q2dEIBdj0NBDiK/G1ShoM2wlPy7Tu5w==
 
 "@rails/webpacker@^5.2.1":
   version "5.2.1"
@@ -4044,10 +4044,10 @@ eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
 
-eslint@^7.8.1:
-  version "7.8.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.8.1.tgz#e59de3573fb6a5be8ff526c791571646d124a8fa"
-  integrity sha512-/2rX2pfhyUG0y+A123d0ccXtMm7DV7sH1m3lk9nk2DZ2LReq39FXHueR9xZwshE5MdfSf0xunSaMWRqyIA6M1w==
+eslint@^7.9.0:
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.9.0.tgz#522aeccc5c3a19017cf0cb46ebfd660a79acf337"
+  integrity sha512-V6QyhX21+uXp4T+3nrNfI3hQNBDa/P8ga7LoQOenwrlEFXrEnUEE+ok1dMtaS3b6rmLXhT1TkTIsG75HMLbknA==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@eslint/eslintrc" "^0.1.3"
@@ -9690,10 +9690,10 @@ webpack-assets-manifest@^3.1.1:
     tapable "^1.0.0"
     webpack-sources "^1.0.0"
 
-webpack-bundle-analyzer@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-3.8.0.tgz#ce6b3f908daf069fd1f7266f692cbb3bded9ba16"
-  integrity sha512-PODQhAYVEourCcOuU+NiYI7WdR8QyELZGgPvB1y2tjbUpbmcQOt5Q7jEK+ttd5se0KSBKD9SXHCEozS++Wllmw==
+webpack-bundle-analyzer@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-3.9.0.tgz#f6f94db108fb574e415ad313de41a2707d33ef3c"
+  integrity sha512-Ob8amZfCm3rMB1ScjQVlbYYUEJyEjdEtQ92jqiFUYt5VkEeO2v5UMbv49P/gnmCZm3A6yaFQzCBvpZqN4MUsdA==
   dependencies:
     acorn "^7.1.1"
     acorn-walk "^7.1.1"
@@ -9704,7 +9704,7 @@ webpack-bundle-analyzer@^3.8.0:
     express "^4.16.3"
     filesize "^3.6.1"
     gzip-size "^5.0.0"
-    lodash "^4.17.15"
+    lodash "^4.17.19"
     mkdirp "^0.5.1"
     opener "^1.5.1"
     ws "^6.0.0"

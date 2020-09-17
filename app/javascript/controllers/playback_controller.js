@@ -34,6 +34,7 @@ export default class extends Controller {
       preload: this.preload,
       // onend: controller.playNextTrack.bind(controller),
       onloaderror(id, e) {
+        console.log('Playback error: onloaderror', id, e)
         Bugsnag.notify(`Failed to load mp3. Message: ${e}`)
       },
       onplay() {
@@ -43,6 +44,7 @@ export default class extends Controller {
         requestAnimationFrame(controller.whilePlaying.bind(controller))
       },
       onplayerror(id, e) {
+        console.log('Playback error: onplayerror', id, e)
         Bugsnag.notify(e)
         controller.pause()
       },
