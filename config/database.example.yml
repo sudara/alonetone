@@ -5,7 +5,7 @@ development:
   pool: 5
   host: localhost
   variables:
-    sql_mode: TRADITIONAL
+    sql_mode: traditional
 test:
   adapter: mysql2
   encoding: utf8mb4
@@ -13,4 +13,4 @@ test:
   pool: 5
   host: localhost
   variables:
-    sql_mode: TRADITIONAL
+    sql_mode: traditional

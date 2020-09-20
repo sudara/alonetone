@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_155607) do
+ActiveRecord::Schema.define(version: 2020_09_20_172437) do
 
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_155607) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
-    t.string "service_name", null: false
+    t.string "service_name", default: "filesystem", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
