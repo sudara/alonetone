@@ -72,8 +72,12 @@ group :test do
   gem 'percy-capybara'
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
-  gem 'rspec-mocks', require: false
-  gem 'rspec-rails', require: false
+  gem 'rspec', require: false, github: 'rspec/rspec'
+  gem 'rspec-core', require: false, github: 'rspec/rspec-core'
+  gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations'
+  gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks'
+  gem 'rspec-support', require: false, github: 'rspec/rspec-support'
+  gem 'rspec-rails', require: false, github: 'sudara/rspec-rails', branch: 'patch-1'
   gem 'selenium-webdriver'
   gem 'webmock', require: false
 end
