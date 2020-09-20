@@ -60,7 +60,7 @@ module Storage
       elsif Rails.application.remote_storage?
         s3_url
       else
-        attachment.service_url
+        attachment.url
       end
     end
   end
