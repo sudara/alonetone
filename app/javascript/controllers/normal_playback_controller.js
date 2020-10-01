@@ -10,7 +10,6 @@ export default class extends PlaybackController {
   preInitialize() {
     this.preload = false
     this.alreadyPlayed = false
-    this.url = this.playTarget.querySelector('a').getAttribute('href')
   }
 
   whilePlayingCallback() {
@@ -102,23 +101,6 @@ export default class extends PlaybackController {
   updateSeekBarLoaded() {
     this.seekBarContainerTarget.classList.add('show');
     this.seekBarLoadedTarget.style.width = '100%'
-  }
-
-  updateSeekBarPlayed() {
-    const position = this.position / this.sound.duration()
-    const maxwidth = this.seekBarLoadedTarget.offsetWidth
-    this.seekBarPlayedTarget.style.width = `${position * maxwidth}px`
-  }
-
-  seek(e) {
-    const offset = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
-    const newPosition = offset / this.seekBarContainerTarget.offsetWidth
-    super.seek(newPosition)
-  }
-
-  skim(e) {
-    const offx = e.clientX - this.seekBarContainerTarget.getBoundingClientRect().left
-    this.seekBarLoadedTarget.style.left = `${offx}px`
   }
 
   // turbolinks caches pages, so let's make sure things are sane when we return

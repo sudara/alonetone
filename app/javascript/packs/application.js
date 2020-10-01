@@ -10,10 +10,12 @@ import LocalTime from 'local-time'
 import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
+import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
-import { } from '../misc/bugsnag.js.erb'
+import '../misc/bugsnag.js.erb'
+import Playlist from '../../../../stitches/src/playlist'
 
 Rails.start()
 Turbolinks.start()
@@ -28,6 +30,22 @@ application.load(definitionsFromContext(context))
 
 
 function handlers() {
+
+  const normalPlaylist = new Playlist({
+    tracksSelector: '.asset',
+    timeSelector: 'time',
+    playButtonSelector: 'a.play_link',
+    progressSelector: '.seekbar .played',
+    seekSelector: '.seekbar',
+    logToConsole: true,
+    whilePlaying: (data) => {
+    },
+    onError: (data) => {
+      Bugsnag.notify(`MP3 Failure. Message: ${data.error.name} ${data.error.message}`)
+    },
+  })
+
+
   document.querySelectorAll('.large_cover .no_pic, .small_cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
     if (!pic.hasChildNodes()) {
@@ -52,6 +70,8 @@ function handlers() {
 }
 document.addEventListener('turbolinks:load', handlers)
 
+// Expose on the console as Alonetone.gsap, etc
 export {
-  gsap
+  gsap,
+  application
 }
