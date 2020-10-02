@@ -44,11 +44,11 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 ### Current stack
 
 * Rails 6.0.3
+* [Stitches](http://github.com/sudara/stitches) for audio playback
 * Sidekiq for jobs
 * Active Storage & s3
-* Fastly for CDN and image thumbnailing
+* Fastly for CDN image delivery and thumbnailing
 * [Stimulus js](http://stimulusjs.org)
-* [Howler js](http://howlerjs.com) for Audio playback
 
 ### Current feature set
 

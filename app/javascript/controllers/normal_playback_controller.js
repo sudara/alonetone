@@ -100,7 +100,7 @@ export default class extends PlaybackController {
   // but it's no longer possible with Howl
   updateSeekBarLoaded() {
     this.seekBarContainerTarget.classList.add('show');
-    this.seekBarLoadedTarget.style.width = '100%'
+//    this.seekBarLoadedTarget.style.width = '100%'
   }
 
   // turbolinks caches pages, so let's make sure things are sane when we return

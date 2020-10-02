@@ -35,7 +35,8 @@ function handlers() {
     tracksSelector: '.asset',
     timeSelector: 'time',
     playButtonSelector: 'a.play_link',
-    progressSelector: '.seekbar .played',
+    loadingProgressSelector: '.seekbar .loaded',
+    playProgressSelector: '.seekbar .played',
     seekSelector: '.seekbar',
     logToConsole: true,
     whilePlaying: (data) => {
