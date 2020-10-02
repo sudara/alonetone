@@ -12,19 +12,15 @@ export default class extends PlaybackController {
     this.alreadyPlayed = false
   }
 
-  whilePlayingCallback() {
-    if (!this.loaded) {
-      this.animation.pausingAnimation()
-      this.loaded = true
-    }
-    this.updateSeekBarPlayed()
-    this.timeTarget.innerHTML = this.time
+  playing() {
+    this.animation.pausingAnimation()
+    this.loaded = true
   }
 
   playCallback() {
     this.showLoadingAnimationOrPauseButton()
     this.openDetails()
-    this.updateSeekBarLoaded()
+    this.showSeekBar()
     this.registeredListen = true
     this.alreadyPlayed = true
   }
@@ -95,12 +91,8 @@ export default class extends PlaybackController {
     }
   }
 
-  // With SoundManager we used to animate this width to display
-  // how much of the track is downloaded
-  // but it's no longer possible with Howl
-  updateSeekBarLoaded() {
+  showSeekBar() {
     this.seekBarContainerTarget.classList.add('show');
-//    this.seekBarLoadedTarget.style.width = '100%'
   }
 
   // turbolinks caches pages, so let's make sure things are sane when we return
