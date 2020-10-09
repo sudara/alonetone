@@ -7,27 +7,43 @@ export default class extends Controller {
 
   initialize() {
     this.animation = new LargePlayAnimation()
+    this.duration = 0.0
     this.percentPlayed = 0.0
     this.setDelegate()
     this.setupPlayhead()
-    this.setAnimationState()
   }
 
-  setAnimationState() {
-    if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
-      // instantiated while an mp3 is still loading
+  // called from playlist-player after load
+  // as well as whilePlaying
+  update(duration, currentTime, percentPlayed) {
+    this.timeTarget.innerHTML = currentTime
+    this.duration = duration
+    this.percentPlayed = percentPlayed
+    if (Math.abs(percentPlayed - this.timeline.progress()) > 0.02) {
+      // console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+      this.timeline.progress(percentPlayed)
+    }
+  }
+
+  // update should be called before this
+  setAnimationState(isPlaying) {
+    if (isPlaying && (this.percentPlayed === 0.0)) {
+      // play was clicked, mp3 is still loading
+      console.log('play was clicked, mp3 is still loading')
       this.animation.loadingAnimation()
-    } else if (this.delegate && this.delegate.isPlaying) {
-      // ...while in the middle of playing
+    } else if (isPlaying) {
+      // in the middle of playing
+      console.log('in the middle of playing')
       this.animation.pausingAnimation()
       this.startPlayhead()
-    } else if (this.delegate && this.delegate.positionFromStart(0.1)) {
-      // ...after playing once but now paused
+    } else if (this.percentPlayed > 0.0) {
+      // was playing once but now paused
+      console.log('was playing once but now paused')
       this.animation.showPlayButton()
       this.showPlayhead()
-      this.update(this.delegate.percentPlayed())
     } else {
       // ....loaded but not playing
+      console.log('loaded but not playing')
       this.animation.showPlayButton()
     }
   }
@@ -41,7 +57,7 @@ export default class extends Controller {
     }
   }
 
-  // called from whileLoading()
+  // called from the delegate's playing()
   play() {
     this.animation.pausingAnimation()
     this.startPlayhead()
@@ -54,7 +70,8 @@ export default class extends Controller {
 
   togglePlay(e) {
     this.setDelegate()
-    this.delegate.togglePlay(e)
+    this.delegate.fireClick()
+    e.preventDefault()
   }
 
   skim(e) {
@@ -70,19 +87,9 @@ export default class extends Controller {
     this.update()
   }
 
-  // called from the player
-  update() {
-    this.percentPlayed = this.delegate.percentPlayed()
-    this.timeTarget.innerHTML = this.delegate.time
-    if (Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02) {
-      // console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
-      this.timeline.progress(this.percentPlayed)
-    }
-  }
-
   stop() {
     this.animation.showPlayButton()
-    this.playheadAnimation.stop()
+    this.playheadAnimation.pause()
   }
 
   setupPlayhead() {
@@ -101,14 +108,13 @@ export default class extends Controller {
 
   startPlayhead() {
     this.showPlayhead()
-    this.update()
     this.timeline.play()
   }
 
   showPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
     if (this.timeline.duration() === 1) {
-      this.timeline.timeScale(1.0 / this.delegate.duration) // gsap 3.2.4 broke duration getter
+      this.timeline.duration(this.duration) // gsap 3.2.4 broke duration getter, working again
     }
   }
 

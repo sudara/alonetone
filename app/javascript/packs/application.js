@@ -28,21 +28,21 @@ const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(context))
 
+const playlist = new Playlist()
 
 function handlers() {
-
-  const normalPlaylist = new Playlist({
-    tracksSelector: '.asset',
+  playlist.setup({
+    tracksSelector: '.stitches_track',
     timeSelector: 'time',
-    playButtonSelector: 'a.play_link',
+    playButtonSelector: '.stitches_play',
     loadingProgressSelector: '.seekbar .loaded',
     playProgressSelector: '.seekbar .played',
     seekSelector: '.seekbar',
-    logToConsole: true,
+    enableConsoleLogging: true,
     whilePlaying: (data) => {
     },
-    onError: (data) => {
-      Bugsnag.notify(`MP3 Failure. Message: ${data.error.name} ${data.error.message}`)
+    onError: (error) => {
+      Bugsnag.notify(`MP3 Failure. Message: ${error.name} ${error.message}`)
     },
   })
 

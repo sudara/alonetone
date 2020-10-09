@@ -1,5 +1,15 @@
-<div class="track_content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-single-playback-id="<%= @asset.id %>">
-  <%= render partial: 'shared/back_to_artist' unless @playlist %>
+<% if @playlist %>
+<div class="track_content" data-controller="big-play">
+<% else %>
+<div class="track_content stitches_track"
+  data-controller="big-play single-playback"
+  data-action="track:playing->single-playback#playing track:ended->single-playback#stop
+    track:pause->single-playback#pause
+    track:whilePlaying->single-playback#whilePlaying"
+  data-single-playback-id="<%= @asset.id %>">
+  <%= render partial: 'shared/back_to_artist' %>
+<% end %>
+
   <%= render partial: 'assets/big_player' %>
 
   <div class="track_post">
@@ -88,5 +98,4 @@
     </div>
   </div>
   <% end %>
-
 </div>

@@ -5,14 +5,6 @@ import Rails from '@rails/ujs'
 export default class extends Controller {
   static targets = ['title', 'seekBarContainer', 'seekBarLoaded']
 
-  initialize() {
-    this.preInitialize()
-  }
-
-  disconnect() {
-    //this.sound.pause()
-  }
-
   play(e) {
     this.isPlaying = true
     this.element.classList.add('playing')
@@ -38,4 +30,7 @@ export default class extends Controller {
     })
   }
 
+  seek(position) {
+    Rails.fire(this.element, 'track:seek', { position })
+  }
 }
