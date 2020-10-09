@@ -8,6 +8,7 @@ export default class extends PlaybackController {
   static targets = ['play', 'loadTrack']
 
   initialize() {
+    this.permalink = this.playTarget.getAttribute('href').split('/').pop()
     this.duration = 0.0
     this.currentTime = 0.0
     this.percentPlayed = 0
