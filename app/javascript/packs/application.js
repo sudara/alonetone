@@ -13,9 +13,12 @@ import { Application } from 'stimulus'
 import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
+import Playlist from '@alonetone/stitches/src/playlist'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
 import '../misc/bugsnag.js.erb'
-import Playlist from '../../../../stitches/src/playlist'
+
+// local stitches dev:
+// import Playlist from '../../../../stitches/src/playlist'
 
 Rails.start()
 Turbolinks.start()
