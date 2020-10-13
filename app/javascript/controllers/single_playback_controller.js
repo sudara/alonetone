@@ -8,11 +8,12 @@ export default class extends PlaybackController {
 
   fireClick() {} // only relevant in playlist player
 
-  playCallback(e) {}
+  playCallback() {
+    this.bigPlay.setAnimationState(true)
+  }
 
   playing(event) {
     this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
-    this.bigPlay.setAnimationState(this.isPlaying)
     this.bigPlay.play()
   }
 

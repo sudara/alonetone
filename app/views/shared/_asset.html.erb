@@ -3,8 +3,10 @@
 <% else %>
 <div class="track_content stitches_track"
   data-controller="big-play single-playback"
-  data-action="track:playing->single-playback#playing track:ended->single-playback#stop
+  data-action="track:playing->single-playback#playing
+    track:play->single-playback#play
     track:pause->single-playback#pause
+    track:ended->single-playback#stop
     track:whilePlaying->single-playback#whilePlaying"
   data-single-playback-id="<%= @asset.id %>">
   <%= render partial: 'shared/back_to_artist' %>
