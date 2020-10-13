@@ -36,7 +36,7 @@ const playlist = new Playlist()
 function handlers() {
   playlist.setup({
     tracksSelector: '.stitches_track',
-    timeSelector: 'time',
+    timeSelector: '.stitches_time',
     playButtonSelector: '.stitches_play',
     loadingProgressSelector: '.seekbar .loaded',
     playProgressSelector: '.seekbar .played',
@@ -77,5 +77,6 @@ document.addEventListener('turbolinks:load', handlers)
 // Expose on the console as Alonetone.gsap, etc
 export {
   gsap,
-  application
+  playlist,
+  application,
 }

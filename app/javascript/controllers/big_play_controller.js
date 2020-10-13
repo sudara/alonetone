@@ -13,8 +13,7 @@ export default class extends Controller {
     this.setupPlayhead()
   }
 
-  // called from playlist-player after load
-  // as well as whilePlaying
+  // called from the player on playing() & whilePlaying()
   update(duration, currentTime, percentPlayed) {
     this.timeTarget.innerHTML = currentTime
     this.duration = duration
