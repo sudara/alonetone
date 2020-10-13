@@ -13,11 +13,11 @@ import { Application } from 'stimulus'
 import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
-import Playlist from '@alonetone/stitches/src/playlist'
+import Playlist from '@alonetone/stitches'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
 import '../misc/bugsnag.js.erb'
 
-// local stitches dev:
+// uncomment for local stitches dev:
 // import Playlist from '../../../../stitches/src/playlist'
 
 Rails.start()
