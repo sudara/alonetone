@@ -4,7 +4,6 @@ export default class extends PlaybackController {
 
   initialize() {
     this.setBigPlay()
-    this.firstPlay = true
   }
 
   // this method is called by bigPlay
@@ -13,14 +12,11 @@ export default class extends PlaybackController {
   fireClick() {}
 
   playCallback() {
-    if (!this.firstPlay) return
-
-    this.bigPlay.setAnimationState(true)
-    this.firstPlay = false
+    this.bigPlay.animation.loadingAnimation()
   }
 
   playing(event) {
-    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
+    console.log("FURST CALL BACK ___ PLAYING")
     this.bigPlay.play()
   }
 
@@ -30,6 +26,10 @@ export default class extends PlaybackController {
 
   stopCallback() {
     this.bigPlay.stop()
+  }
+
+  whileLoading(event) {
+    this.bigPlay.load(event.detail.duration)
   }
 
   whilePlaying(event) {

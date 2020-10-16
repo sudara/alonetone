@@ -43,6 +43,10 @@ export default class extends PlaybackController {
     this.bigPlay.stop()
   }
 
+  whileLoading(event) {
+    this.bigPlay.load(event.detail.duration)
+  }
+
   // this is essentially the first "whilePlaying" call
   playing(event) {
     this.duration = event.detail.duration

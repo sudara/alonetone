@@ -18,8 +18,11 @@
   <% @playlist.tracks.each do |track| %>
     <li data-controller="playlist-playback"
       data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack
-      track:play->playlist-playback#play track:pause->playlist-playback#pause
-      track:playing->playlist-playback#playing track:ended->playlist-playback#stop
+      track:play->playlist-playback#play
+      track:pause->playlist-playback#pause
+      track:playing->playlist-playback#playing
+      track:ended->playlist-playback#stop
+      track:whileLoading->playlist-playback#whileLoading
       track:whilePlaying->playlist-playback#whilePlaying"
       data-playlist-playback-id="<%= track.asset.id %>"
       class="stitches_track <%= ' active' if first_active_track?(track, @asset) %>">

@@ -13,16 +13,21 @@ export default class extends Controller {
     this.setupPlayhead()
   }
 
+  // called from whileLoading()
+  load(duration) {
+    this.duration = duration
+  }
+
   // called from the player on playing() & whilePlaying()
   update(duration, currentTime, percentPlayed) {
-    this.timeTarget.innerHTML = currentTime
     this.duration = duration
+    this.timeTarget.innerHTML = currentTime
     this.percentPlayed = percentPlayed
     console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
 
     // This check performs 2 functions
     // 1. It's repsonsible for catching the playhead on seek
-    // 2. It prevents too much drift
+    // 2. It prevents the gsap-powered playhead from drifting
     if (Math.abs(percentPlayed - this.timeline.progress()) > 0.03) {
       console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
       this.timeline.progress(percentPlayed)
@@ -33,21 +38,16 @@ export default class extends Controller {
   setAnimationState(isPlaying) {
     if (isPlaying && (this.percentPlayed === 0.0)) {
       // play was clicked, mp3 is still loading
-      console.log('play was clicked, mp3 is still loading')
       this.animation.loadingAnimation()
     } else if (isPlaying) {
       // in the middle of playing
-      console.log('in the middle of playing')
-      this.animation.pausingAnimation()
       this.startPlayhead()
     } else if (this.percentPlayed > 0.0) {
       // was playing once but now paused
-      console.log('was playing once but now paused')
       this.animation.showPlayButton()
       this.showPlayhead()
     } else {
       // ....loaded but not playing
-      console.log('loaded but not playing')
       this.animation.showPlayButton()
     }
   }
@@ -110,6 +110,7 @@ export default class extends Controller {
   }
 
   startPlayhead() {
+    console.log("PLAYHEAD FIRING NOW")
     this.showPlayhead()
     this.timeline.play()
   }
