@@ -16,7 +16,7 @@ export default class extends PlaybackController {
   }
 
   playing(event) {
-    console.log("FURST CALL BACK ___ PLAYING")
+    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
     this.bigPlay.play()
   }
 
