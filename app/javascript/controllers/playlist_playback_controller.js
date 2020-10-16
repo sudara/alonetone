@@ -43,6 +43,7 @@ export default class extends PlaybackController {
     this.bigPlay.stop()
   }
 
+  // this is essentially the first "whilePlaying" call
   playing(event) {
     this.duration = event.detail.duration
     this.currentTime = event.detail.currentTime

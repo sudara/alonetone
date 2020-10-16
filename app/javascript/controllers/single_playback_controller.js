@@ -4,12 +4,19 @@ export default class extends PlaybackController {
 
   initialize() {
     this.setBigPlay()
+    this.firstPlay = true
   }
 
-  fireClick() {} // only relevant in playlist player
+  // this method is called by bigPlay
+  // but are only relevant in playlist player
+  // they are no-ops here since we can rely on stitches
+  fireClick() {}
 
   playCallback() {
+    if (!this.firstPlay) return
+
     this.bigPlay.setAnimationState(true)
+    this.firstPlay = false
   }
 
   playing(event) {

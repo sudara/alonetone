@@ -38,9 +38,9 @@ function handlers() {
     tracksSelector: '.stitches_track',
     timeSelector: '.stitches_time',
     playButtonSelector: '.stitches_play',
-    loadingProgressSelector: '.seekbar .loaded',
-    playProgressSelector: '.seekbar .played',
-    seekSelector: '.seekbar',
+    loadingProgressSelector: '.stitches_seek .loaded',
+    playProgressSelector: '.stitches_seek .played',
+    seekSelector: '.stitches_seek',
     enableConsoleLogging: true,
     whilePlaying: (data) => {
     },

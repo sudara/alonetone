@@ -18,8 +18,13 @@ export default class extends Controller {
     this.timeTarget.innerHTML = currentTime
     this.duration = duration
     this.percentPlayed = percentPlayed
-    if (Math.abs(percentPlayed - this.timeline.progress()) > 0.02) {
-      // console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+    console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+
+    // This check performs 2 functions
+    // 1. It's repsonsible for catching the playhead on seek
+    // 2. It prevents too much drift
+    if (Math.abs(percentPlayed - this.timeline.progress()) > 0.03) {
+      console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
       this.timeline.progress(percentPlayed)
     }
   }
@@ -83,7 +88,6 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
-    this.update()
   }
 
   stop() {
