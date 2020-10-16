@@ -10,8 +10,9 @@ export default class extends PlaybackController {
   initialize() {
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
     this.duration = 0.0
-    this.currentTime = 0.0
-    this.percentPlayed = 0
+    this.currentTime = '0:00'
+    this.percentPlayed = 0.0
+    this.bigPlay = null
   }
 
   fireClick() {
@@ -44,15 +45,19 @@ export default class extends PlaybackController {
   }
 
   whileLoading(event) {
-    this.bigPlay.load(event.detail.duration)
+    this.duration = event.detail.duration
+    if (this.bigPlayLoaded) {
+      this.bigPlay.load(this.duration)
+    }
   }
 
   // this is essentially the first "whilePlaying" call
-  playing(event) {
-    this.duration = event.detail.duration
-    this.currentTime = event.detail.currentTime
-    this.percentPlayed = event.detail.percentPlayed
-    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
+  async playing(event) {
+    while (this.bigPlay === null) {
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((resolve) => setTimeout(resolve, 20))
+    }
+    this.bigPlay.load(event.detail.duration)
     this.bigPlay.play()
   }
 

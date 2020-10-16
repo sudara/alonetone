@@ -109,7 +109,6 @@ export default class extends Controller {
   }
 
   startPlayhead() {
-    console.log("PLAYHEAD FIRING NOW")
     this.showPlayhead()
     this.timeline.play()
   }

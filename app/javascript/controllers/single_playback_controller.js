@@ -16,7 +16,6 @@ export default class extends PlaybackController {
   }
 
   playing(event) {
-    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
     this.bigPlay.play()
   }
 
