@@ -35,7 +35,7 @@ const playlist = new Playlist()
 
 function handlers() {
   playlist.setup({
-    preloadIndex: 0,
+    preloadIndex: -1,
     tracksSelector: '.stitches_track',
     timeSelector: '.stitches_time',
     playButtonSelector: '.stitches_play',
