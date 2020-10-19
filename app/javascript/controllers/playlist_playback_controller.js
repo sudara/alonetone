@@ -5,22 +5,32 @@ const smallCover = document.querySelector('a.small_cover')
 const sidebarLinks = document.querySelector('.sidebar_downloads')
 
 export default class extends PlaybackController {
-  static targets = ['loadTrack']
+  static targets = ['play', 'loadTrack']
 
-  preInitialize() {
-    this.url = `${this.playTarget.getAttribute('href')}.mp3`
+  initialize() {
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
-    this.preload = this.playTarget.parentElement.classList.contains('active')
+    this.duration = 0.0
+    this.currentTime = '0:00'
+    this.percentPlayed = 0.0
+    this.bigPlay = null
+  }
+
+  // called from bigPlay
+  fireClick() {
+    Rails.fire(this.playTarget, 'click')
+  }
+
+  // calls to bigPlay
+  seeked() {
+    this.bigPlay.seeked()
   }
 
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
     if (this.isCurrentTrack()) {
-      // the bigPlay controller isn't yet linked
-      if (!this.bigPlay) this.setBigPlay()
-      this.bigPlay.setAnimationState()
-      this.highlightPlayingTrack()
+      this.setBigPlay()
     } else {
+      this.bigPlayLoaded = false
       Rails.fire(this.loadTrackTarget, 'click')
     }
     this.registeredListen = false
@@ -35,9 +45,36 @@ export default class extends PlaybackController {
   }
 
   stopCallback() {
+    this.playTarget.classList.replace('pause_button', 'play_button')
+    this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
     this.bigPlay.stop()
   }
 
+  whileLoading(event) {
+    this.duration = event.detail.duration
+    if (this.bigPlayLoaded) {
+      this.bigPlay.load(this.duration)
+    }
+  }
+
+  // this is essentially the first "whilePlaying" call
+  async playing(event) {
+    while (this.bigPlay === null) {
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((resolve) => setTimeout(resolve, 20))
+    }
+    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
+    this.bigPlay.play()
+  }
+
+  whilePlaying(event) {
+    this.duration = event.detail.duration
+    this.currentTime = event.detail.currentTime
+    this.percentPlayed = event.detail.percentPlayed
+    if (this.bigPlayLoaded) {
+      this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
+    }
+  }
   // every instance of playlistPlayback listens for popstate@window
   // so that when forward/back is pressed, this method is called on each
   popTrack(e) {
@@ -72,19 +109,8 @@ export default class extends PlaybackController {
       const title = this.loadTrackTarget.textContent
       history.pushState(title, '', e.target.href)
     }
-
     // link this controller to the new big play button controller
     this.setBigPlay()
-  }
-
-  whilePlayingCallback() {
-    if (!this.bigPlay) this.setBigPlay()
-    if (!this.loaded) {
-      // Trigger the transition from loading to playing
-      this.loaded = true
-      this.bigPlay.play()
-    }
-    this.bigPlay.update()
   }
 
   hideSmallCoverAndSidebarLinks() {
@@ -98,12 +124,22 @@ export default class extends PlaybackController {
     document.body.classList.remove('cover_view')
   }
 
-  setBigPlay() {
-    this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track_content'), 'big-play')
+  async setBigPlay() {
+    this.bigPlay = null // reset
+    while (this.bigPlay === null) {
+      this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track_content'), 'big-play')
+
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((resolve) => setTimeout(resolve, 20))
+    }
+    this.bigPlayLoaded = true
+    this.bigPlay.update(this.duration, this.currentTime, this.percentPlayed)
+    this.bigPlay.setAnimationState(this.isPlaying)
   }
 
+  // hacky way to determine if we need to load in a new track or not
   isCurrentTrack() {
-    return this.playTarget.getAttribute('href') === document.location.pathname
+    return this.playTarget.getAttribute('href').replace('.mp3', '') === document.location.pathname
   }
 
   disconnect() {

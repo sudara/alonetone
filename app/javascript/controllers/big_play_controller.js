@@ -7,25 +7,51 @@ export default class extends Controller {
 
   initialize() {
     this.animation = new LargePlayAnimation()
+    this.duration = 0.0
     this.percentPlayed = 0.0
     this.setDelegate()
     this.setupPlayhead()
-    this.setAnimationState()
   }
 
-  setAnimationState() {
-    if (this.delegate && this.delegate.isPlaying && !this.delegate.loaded) {
-      // instantiated while an mp3 is still loading
+  // called from whileLoading()
+  load(duration) {
+    this.duration = duration
+  }
+
+  // this is listened for by single-playback
+  // but also called from playlist-playback
+  seeked() {
+    this.timeline.play()
+  }
+
+  // called from the player on playing() & whilePlaying()
+  update(duration, currentTime, percentPlayed) {
+    this.duration = duration
+    this.timeTarget.innerHTML = currentTime
+    this.percentPlayed = percentPlayed
+    //console.log(`playhead: ${this.timeline.progress()} percentPlayed: ${this.percentPlayed}`)
+
+    // This check performs 2 functions
+    // 1. It's repsonsible for catching the playhead on seek
+    // 2. It prevents the gsap-powered playhead from drifting
+    if ((Math.abs(percentPlayed - this.timeline.progress()) > 0.02)) {
+      //console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+      this.timeline.progress(percentPlayed)
+    }
+  }
+
+  // update should be called before this
+  setAnimationState(isPlaying) {
+    if (isPlaying && (this.percentPlayed === 0.0)) {
+      // play was clicked, mp3 is still loading
       this.animation.loadingAnimation()
-    } else if (this.delegate && this.delegate.isPlaying) {
-      // ...while in the middle of playing
-      this.animation.pausingAnimation()
+    } else if (isPlaying) {
+      // in the middle of playing
       this.startPlayhead()
-    } else if (this.delegate && this.delegate.positionFromStart(0.1)) {
-      // ...after playing once but now paused
+    } else if (this.percentPlayed > 0.0) {
+      // was playing once but now paused
       this.animation.showPlayButton()
       this.showPlayhead()
-      this.update(this.delegate.percentPlayed())
     } else {
       // ....loaded but not playing
       this.animation.showPlayButton()
@@ -41,7 +67,7 @@ export default class extends Controller {
     }
   }
 
-  // called from whileLoading()
+  // called from the delegate's playing()
   play() {
     this.animation.pausingAnimation()
     this.startPlayhead()
@@ -54,7 +80,8 @@ export default class extends Controller {
 
   togglePlay(e) {
     this.setDelegate()
-    this.delegate.togglePlay(e)
+    this.delegate.fireClick()
+    e.preventDefault()
   }
 
   skim(e) {
@@ -67,22 +94,13 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
-    this.update()
-  }
-
-  // called from the player
-  update() {
-    this.percentPlayed = this.delegate.percentPlayed()
-    this.timeTarget.innerHTML = this.delegate.time
-    if (Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02) {
-      // console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
-      this.timeline.progress(this.percentPlayed)
-    }
+    this.timeline.pause()
+    this.timeline.seek(newPosition)
   }
 
   stop() {
     this.animation.showPlayButton()
-    this.playheadAnimation.stop()
+    this.timeline.pause()
   }
 
   setupPlayhead() {
@@ -101,14 +119,13 @@ export default class extends Controller {
 
   startPlayhead() {
     this.showPlayhead()
-    this.update()
     this.timeline.play()
   }
 
   showPlayhead() {
     this.progressContainerInnerTarget.classList.add('visible')
     if (this.timeline.duration() === 1) {
-      this.timeline.timeScale(1.0 / this.delegate.duration) // gsap 3.2.4 broke duration getter
+      this.timeline.duration(this.duration) // gsap 3.2.4 broke duration getter, working again
     }
   }
 
