@@ -21,14 +21,14 @@ export default class extends Controller {
   }
 
   registerListen() {
-    console.log("REGIIIISTERRRRRRRING")
-    Rails.ajax({
-      url: '/listens',
-      type: 'POST',
-      data: `id=${this.data.get('id')}`,
-      success() {
-      },
-    })
+    // console.log("REGIIIISTERRRRRRRING")
+    // Rails.ajax({
+    //   url: '/listens',
+    //   type: 'POST',
+    //   data: `id=${this.data.get('id')}`,
+    //   success() {
+    //   },
+    // })
   }
 
   seek(position) {

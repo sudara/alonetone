@@ -54,7 +54,7 @@ class AssetsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        check_for_missing_attachment
+        check_for_méissing_attachment
         lazily_create_waveform_if_needed
         @assets = [@asset]
         set_related_show_variables
