@@ -18,7 +18,8 @@ export default class extends Controller {
     this.duration = duration
   }
 
-  // this controller listens for this event
+  // this is listened for by single-playback
+  // but also called from playlist-playback
   seeked() {
     this.timeline.play()
   }

@@ -15,8 +15,14 @@ export default class extends PlaybackController {
     this.bigPlay = null
   }
 
+  // called from bigPlay
   fireClick() {
     Rails.fire(this.playTarget, 'click')
+  }
+
+  // calls to bigPlay
+  seeked() {
+    this.bigPlay.seeked()
   }
 
   // After PlaybackController#play is called, this stuff fires
