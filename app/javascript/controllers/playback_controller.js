@@ -21,6 +21,7 @@ export default class extends Controller {
   }
 
   registerListen() {
+    console.log("REGIIIISTERRRRRRRING")
     Rails.ajax({
       url: '/listens',
       type: 'POST',

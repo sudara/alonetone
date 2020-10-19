@@ -1,5 +1,6 @@
 <% if @playlist %>
-<div class="track_content" data-controller="big-play">
+<div class="track_content" data-controller="big-play"
+  data-action="track:seeked->big-play#seeked">
 <% else %>
 <div class="track_content stitches_track"
   data-controller="big-play single-playback"
@@ -8,7 +9,9 @@
     track:pause->single-playback#pause
     track:ended->single-playback#stop
     track:whileLoading->single-playback#whileLoading
-    track:whilePlaying->single-playback#whilePlaying"
+    track:whilePlaying->single-playback#whilePlaying
+    track:registerListen->single-playback#registerListen
+    track:seeked->big-play#seeked"
   data-single-playback-id="<%= @asset.id %>">
   <%= render partial: 'shared/back_to_artist' %>
 <% end %>

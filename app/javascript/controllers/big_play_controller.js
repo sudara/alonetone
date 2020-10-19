@@ -18,17 +18,23 @@ export default class extends Controller {
     this.duration = duration
   }
 
+  // this controller listens for this event
+  seeked() {
+    this.timeline.play()
+  }
+
   // called from the player on playing() & whilePlaying()
   update(duration, currentTime, percentPlayed) {
     this.duration = duration
     this.timeTarget.innerHTML = currentTime
     this.percentPlayed = percentPlayed
+    //console.log(`playhead: ${this.timeline.progress()} percentPlayed: ${this.percentPlayed}`)
 
     // This check performs 2 functions
     // 1. It's repsonsible for catching the playhead on seek
     // 2. It prevents the gsap-powered playhead from drifting
-    if ((Math.abs(percentPlayed - this.timeline.progress()) > 0.03)) {
-      console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
+    if ((Math.abs(percentPlayed - this.timeline.progress()) > 0.02)) {
+      //console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
       this.timeline.progress(percentPlayed)
     }
   }
@@ -87,11 +93,13 @@ export default class extends Controller {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
+    this.timeline.pause()
+    this.timeline.seek(newPosition)
   }
 
   stop() {
     this.animation.showPlayButton()
-    this.playheadAnimation.pause()
+    this.timeline.pause()
   }
 
   setupPlayhead() {

@@ -57,7 +57,7 @@ export default class extends PlaybackController {
       // eslint-disable-next-line no-await-in-loop
       await new Promise((resolve) => setTimeout(resolve, 20))
     }
-    this.bigPlay.load(event.detail.duration)
+    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
     this.bigPlay.play()
   }
 

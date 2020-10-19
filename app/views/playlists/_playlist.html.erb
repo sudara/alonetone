@@ -23,7 +23,8 @@
       track:playing->playlist-playback#playing
       track:ended->playlist-playback#stop
       track:whileLoading->playlist-playback#whileLoading
-      track:whilePlaying->playlist-playback#whilePlaying"
+      track:whilePlaying->playlist-playback#whilePlaying
+      track:registerListen->playlist-playback#registerListen"
       data-playlist-playback-id="<%= track.asset.id %>"
       class="stitches_track <%= ' active' if first_active_track?(track, @asset) %>">
 

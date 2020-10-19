@@ -1,6 +1,7 @@
 <%= cache([asset, asset.user, logged_in?, local_assigns[:favorite], 'v2']) do %>
   <div class="asset stitches_track" data-controller="normal-playback" data-action="track:play->normal-playback#play
-    track:pause->normal-playback#pause track:playing->normal-playback#playing track:ended->normal-playback#stop" >
+    track:pause->normal-playback#pause track:playing->normal-playback#playing
+    track:ended->normal-playback#stop">
   <%= yield %>
   </div>
 <% end %>

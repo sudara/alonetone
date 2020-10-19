@@ -35,6 +35,7 @@ const playlist = new Playlist()
 
 function handlers() {
   playlist.setup({
+    preloadIndex: 0,
     tracksSelector: '.stitches_track',
     timeSelector: '.stitches_time',
     playButtonSelector: '.stitches_play',
@@ -44,8 +45,8 @@ function handlers() {
     enableConsoleLogging: true,
     whilePlaying: (data) => {
     },
-    onError: (error) => {
-      Bugsnag.notify(`MP3 Failure. Message: ${error.name} ${error.message}`)
+    onError: (data) => {
+      Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)
     },
   })
 
