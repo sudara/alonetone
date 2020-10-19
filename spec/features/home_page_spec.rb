@@ -32,8 +32,10 @@ RSpec.describe 'home page', type: :feature, js: true do
 
       track = find(".asset", match: :first)
       track.find(".play_link").click
-
-      track.find(".seekbar").click # click in the middle of the seekbar
+      expect(track).to have_selector('.add_to_favorites')
+      expect(track).to have_selector('.stitches_seek')
+      expect(track).to have_selector('.stitches_seek .loaded') # only shows up on playback
+      track.find(".stitches_seek").click # click in the middle of the seekbar
       track.find(".play_link").click # pause the track
       expect(track).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')

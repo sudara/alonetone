@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@alonetone/stitches": "^2.0.12",
+    "@alonetone/stitches": "^2.0.13",
     "@babel/core": "^7.11.0",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.11.0",
