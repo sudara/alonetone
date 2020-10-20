@@ -1,3 +1,10 @@
+/*
+1. Create a unqiue color variable for each selector
+2. Give it a descriptive name. Suffix with text, background, border, etc.
+3. Always add the variable to both dark.scss and white.scss
+4. Place the variable in the right filename group
+*/
+
 @import 'color_mapping';
 
 // sitewide

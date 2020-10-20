@@ -1,9 +1,9 @@
 <div class="asset_top">
   <div class="asset_top_row">
     <div class="drag_handle"><div class="inner"></div></div>
-    <div class="play_button button" data-target="normal-playback.play" data-action="click->normal-playback#togglePlay">
+    <div class="play_button button" data-target="normal-playback.play">
       <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
-        class: 'play_link', title: 'play' do %>
+        class: 'play_link stitches_play', title: 'play' do %>
           <svg data-target="normal-playback.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
           <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
           </svg>
@@ -24,7 +24,7 @@
 
       <div class="title_right_column">
         <div class='counter'></div>
-        <div class='time' data-target="normal-playback.time playlist-update.time"><%= asset.length %></div>
+        <time class="stitches_time" data-target="normal-playback.time playlist-update.time"><%= asset.length %></time>
       </div>
     </div>
 
@@ -43,10 +43,10 @@
   <% end %>
 </div>
 
-<div data-target="normal-playback.seekBarContainer" class="seekbar">
-  <div data-target="normal-playback.seekBarLoaded" data-action="click->normal-playback#seek" class="loaded" style="width: 0%">
-    <div data-target="normal-playback.seekBarPlayed" class="played" style="width: 0%"></div>
+<div data-target="normal-playback.seekBarContainer" class="stitches_seek seekbar">
+  <div data-target="normal-playback.seekBarLoaded" class="loaded" style="width: 0%">
   </div>
+  <div data-target="normal-playback.seekBarPlayed" class="played" style="width: 0%"></div>
 </div>
 
 <div class="tracks_reveal" data-target="normal-playback.details">

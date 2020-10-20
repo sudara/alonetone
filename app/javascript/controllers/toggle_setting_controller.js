@@ -8,7 +8,7 @@ export default class extends Controller {
   initialize() {
     this.href = this.toggleTarget.href
     this.description = this.descriptionTarget.innerText
-    console.log(this.toggleTarget)
+    //console.log(this.toggleTarget)
   }
 
   toggle(e) {

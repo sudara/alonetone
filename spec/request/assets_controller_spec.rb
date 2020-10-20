@@ -11,7 +11,7 @@ RSpec.describe AssetsController, type: :request do
     # Switch back to temporary storage for this particular controller because
     # it actually needs to store and retrieve files. We also use Fastly
     # locations so we don't need a file on disk to generate a URL.
-    with_storage_service(:temporary) do
+    with_storage_service(:filesystem) do
       with_alonetone_configuration(fastly_base_url: fastly_base_url) do
         example.call
       end

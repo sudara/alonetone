@@ -179,7 +179,7 @@ RSpec.describe Storage::Location, type: :model do
 
   context "using local storage" do
     around do |example|
-      with_storage_service('temporary') do
+      with_storage_service('filesystem') do
         with_alonetone_configuration(
           amazon_cloud_front_domain_name: nil,
           amazon_cloud_front_key_pair_id: nil,
