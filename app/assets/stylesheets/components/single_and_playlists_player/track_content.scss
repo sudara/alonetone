@@ -26,7 +26,6 @@
       box-sizing: border-box;
     }
   }
-
   .edit_link {
     @include default-button();
     background-color: $track-content-edit-background;
@@ -148,16 +147,17 @@
       }
     }
     .edit_links_and_favorite {
-      overflow: auto;
+      // overflow: auto;
       box-shadow: none;
       margin-top: $baseline;
+      display: flex;
       > :first-child {
         margin-left: 0!important;
       }
       .edit_links {
         box-shadow: none;
         border-radius: 0;
-        float: right;
+        margin-left: auto;
         .edit_link {
           @include default-button();
           background-color: $track-content-edit-background;
@@ -180,9 +180,9 @@
           font-size: 12px;
           height: 26px;
           width: 94px;
-          float: left;
+          // float: left;
           position: relative;
-          display: flex;
+          display: inline-flex;
           background-color: $track-content-link-background;
           color: $track-content-link-text;
           border-radius: 4px;
@@ -202,7 +202,7 @@
         }
       }
       .download_link {
-        float: left;
+        // float: left;
         margin-left: 12px;
         a {
           width: 106px;
