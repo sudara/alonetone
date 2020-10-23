@@ -14,7 +14,11 @@
       @media #{$mobile} {
         padding-left: $baseline / 2;
         padding-right: $baseline / 2;
-      }    
+      }
+    }
+    h3 a{
+      text-decoration: underline;
+      color: $accent;
     }
     form {
       padding-left: $baseline * 1.5;
@@ -43,6 +47,9 @@
         }
       }
       .form_radio_group {
+        .single_col {
+          max-width: none;
+        }
         .columns {
           div {
             max-width: 200px;

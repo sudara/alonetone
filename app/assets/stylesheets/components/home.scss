@@ -6,7 +6,7 @@
     padding-top: 80px;
     padding-bottom: 30px;
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start;
     @media only screen and (max-width: 890px) {
       padding-top: 30px;
       flex-direction: column-reverse;
@@ -45,9 +45,9 @@
         @media #{$mobile} {
           margin-top: 30px;
         }
-        div {
+        >div{
           margin-bottom: $baseline/2;
-          a {
+          >a {
             @include default-button('primary');
             height: 40px;
             margin-bottom: 10px;
@@ -63,14 +63,14 @@
               display: none;
             }
           }
-          &:first-child {
+          &.primary-button {
             margin-right: $baseline;
-            a {
+            >a {
               width: 190px;
             }
           }
-          &:last-child {
-            a {
+          &.secondary-button {
+            >a {
               width: 180px;
               background-color: transparent;
               color: $grey600;
@@ -84,6 +84,9 @@
             }
             div {
               color: $grey600;
+              a {
+                text-decoration: underline;
+              }
             }
           }
         }
