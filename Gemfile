@@ -77,7 +77,7 @@ group :test do
   gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations'
   gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks'
   gem 'rspec-support', require: false, github: 'rspec/rspec-support'
-  gem 'rspec-rails', require: false, github: 'sudara/rspec-rails', branch: 'patch-1'
+  gem 'rspec-rails', require: false, github: 'rspec/rspec-rails', branch: 'rails-6-1-dev'
   gem 'selenium-webdriver'
   gem 'webmock', require: false
 end
