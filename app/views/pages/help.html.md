@@ -6,7 +6,9 @@ Since it's just us chickens (not some big company) and we've experienced those i
 
 ## How can I post my music to Facebook, Twitter, etc?
 
-Nice and easy: First go to the page that has the song or the track you want to share. Then copy the link from your web browser and paste it into the place you want to share it. Your album art and name should show up nicely on whatever service you use.
+Nice and easy:
+
+Go to the alonetone page that has the playlist or single track you want to share. Copy the link from your web browser and paste it into the place you want to share it. Your album art and name should show up nicely on whatever service you use.
 
 ## I forgot my password!
 

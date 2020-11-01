@@ -48,7 +48,7 @@
       </div>
       <div>
         <h3 class="form_heading">
-          Which best describes you?:
+          Which best describes you?
         </h3>
         <div class="form_radio_group">
           <div class="columns">
@@ -79,6 +79,29 @@
           </div>
           <%= inline_form_error(@account_request.errors[:entity_type]) %>
         </div>
+      </div>
+
+      <div>
+        <h3 class="form_heading">
+          Do you currently support us on <a href="https://patreon.com/alonetone">Patreon</a>?
+        </h3>
+        <div class="form_radio_group">
+          <div class="single_col">
+            <div class="form_radio_pair">
+              <%= f.radio_button(:patreon, "maybe") %>
+              <%= f.label(:patreon_no, "Oooh, not yet but maybe someday!") %>
+            </div>
+            <div class="form_radio_pair">
+              <%= f.radio_button(:patreon, "yes") %>
+              <%= f.label(:patreon, "Yes!") %>
+            </div>
+            <div class="form_radio_pair">
+              <%= f.radio_button(:patreon, "no") %>
+              <%= f.label(:patreon_no, "Not interested right now.") %>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         <h3 class="form_heading">
           Tell us something about your music — or better, link to it:
