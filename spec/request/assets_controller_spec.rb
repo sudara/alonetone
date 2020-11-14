@@ -204,7 +204,7 @@ RSpec.describe AssetsController, type: :request do
     end
 
     it 'should prevent uploads from new users with >= 25 tracks' do
-      post '/brandnewuser/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
+      post '/brandnewuser/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')] }
       follow_redirect!
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
     end
@@ -238,20 +238,20 @@ RSpec.describe AssetsController, type: :request do
 
     it 'should successfully upload an mp3' do
       expect do
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')] }
       end.to change { Asset.count }.by(1)
 
       expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
 
     it 'uses the filename as the asset title when the title ID3 tag is empty' do
-      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/emptytags.mp3', 'audio/mpeg')] }
+      post '/arthur/tracks', params: { asset_data: [fixture_file_upload('emptytags.mp3', 'audio/mpeg')] }
       expect(response).to redirect_to('/arthur/tracks/emptytags/edit')
     end
 
     it 'should accept an uploaded mp3 from chrome with audio/mp3 content type' do
       expect {
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mp3')] }
       }.to change { Asset.count }.by(1)
       expect(response).to redirect_to('/arthur/tracks/old-muppet-men-booing/edit')
     end
@@ -259,7 +259,7 @@ RSpec.describe AssetsController, type: :request do
     # Waveform job is enqueued in an after_create callback
     it "should generate waveform via queue" do
       expect {
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mp3')] }
       }.to have_enqueued_job(WaveformExtractJob)
     end
 
@@ -269,15 +269,15 @@ RSpec.describe AssetsController, type: :request do
       users(:sudara).add_or_remove_followee(users(:arthur).id)
       users(:aaron).add_or_remove_followee(users(:arthur).id)
       expect {
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mp3')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mp3')] }
       }.to have_enqueued_job(AssetNotificationJob).exactly(:twice).and have_enqueued_job(WaveformExtractJob)
     end
 
     it 'should successfully upload 2 mp3s' do
       post '/arthur/tracks', params: {
         asset_data: [
-          fixture_file_upload('files/muppets.mp3', 'audio/mpeg'),
-          fixture_file_upload('files/muppets.mp3', 'audio/mpeg')
+          fixture_file_upload('muppets.mp3', 'audio/mpeg'),
+          fixture_file_upload('muppets.mp3', 'audio/mpeg')
         ]
       }
       expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
@@ -287,7 +287,7 @@ RSpec.describe AssetsController, type: :request do
       expect do
         expect do
           post '/arthur/tracks', params: {
-            asset_data: [fixture_file_upload('files/Le Duc Vacherin.zip', 'application/zip')]
+            asset_data: [fixture_file_upload('Le Duc Vacherin.zip', 'application/zip')]
           }
         end.to change { user.assets.count }.by(+3)
       end.to change { user.playlists.count }.by(+1)
@@ -295,7 +295,7 @@ RSpec.describe AssetsController, type: :request do
 
     it "should successfully extract mp3s from a zip" do
        expect {
-        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('files/1valid-1invalid.zip', 'application/zip')] }
+        post '/arthur/tracks', params: { asset_data: [fixture_file_upload('1valid-1invalid.zip', 'application/zip')] }
       }.to change { Asset.count }.by(1)
     end
 
@@ -330,7 +330,7 @@ RSpec.describe AssetsController, type: :request do
       patch(
         "/#{user.login}/tracks/#{asset.to_param}",
         params: {
-          asset: { audio_file: fixture_file_upload('files/muppets.mp3', 'audio/mpeg') }
+          asset: { audio_file: fixture_file_upload('muppets.mp3', 'audio/mpeg') }
         }
       )
       expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
@@ -341,7 +341,7 @@ RSpec.describe AssetsController, type: :request do
       patch(
         "/#{user.login}/tracks/#{asset.to_param}",
         params: {
-          asset: { audio_file: fixture_file_upload('files/muppets.mp3', 'audio/mpeg') }
+          asset: { audio_file: fixture_file_upload('muppets.mp3', 'audio/mpeg') }
         }
       )
       expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')

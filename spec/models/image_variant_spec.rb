@@ -54,7 +54,7 @@ RSpec.describe ImageVariant, type: :model do
 
     it "returns a single active storage variant" do
       variant = ImageVariant.variant(attachment, variant: :greenfield)
-      expect(variant).to be_kind_of(ActiveStorage::Variant)
+      expect(variant).to be_kind_of(ActiveStorage::VariantWithRecord)
     end
 
     it "raises exception when trying to get storage variant for nonexistent variant name" do

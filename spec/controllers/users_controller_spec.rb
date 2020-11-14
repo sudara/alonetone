@@ -161,7 +161,7 @@ RSpec.describe UsersController, type: :controller do
     it "should let a user upload a new photo" do
       login(:arthur)
       put :update, params: { id: users(:arthur).login, user: {
-        avatar_image: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg')
+        avatar_image: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg')
       }}
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(edit_user_path(users(:arthur)))
@@ -170,7 +170,7 @@ RSpec.describe UsersController, type: :controller do
     it "should validate images and not allow webp photos to be uploaded" do
       login(:arthur)
       put :update, params: { id: users(:arthur).login, user: {
-        avatar_image: fixture_file_upload('files/alonetone.webp', 'image/webp')
+        avatar_image: fixture_file_upload('alonetone.webp', 'image/webp')
       }}
       expect(flash[:error]).to be_present
     end
@@ -178,7 +178,7 @@ RSpec.describe UsersController, type: :controller do
     it "should not let a user upload a new photo for another user" do
       login(:arthur)
       put :update, params: { id: users(:sudara).login, user: {
-        avatar_image: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg')
+        avatar_image: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg')
       }}
       expect(response).to redirect_to('/login')
     end

@@ -90,7 +90,7 @@ RSpec.describe PlaylistsController, type: :controller do
       post :attach_pic, params: {
         id: 'arthurs-playlist',
         user_id: 'arthur',
-        pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
+        pic: { pic: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg') }
       }
       expect(flash[:notice]).to be_present
       expect(response).to redirect_to(edit_user_playlist_path(users(:arthur), 'arthurs-playlist'))
@@ -101,7 +101,7 @@ RSpec.describe PlaylistsController, type: :controller do
       post :attach_pic, params: {
         id: 'owp',
         user_id: 'sudara',
-        pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
+        pic: { pic: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg') }
       }
       expect(response).to redirect_to('/login')
     end
@@ -113,7 +113,7 @@ RSpec.describe PlaylistsController, type: :controller do
        post :attach_pic, params: {
          id: 'arthurs-playlist',
          user_id: 'arthur',
-         pic: { pic: fixture_file_upload('files/jeffdoessudara.jpg', 'image/jpeg') }
+         pic: { pic: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg') }
       }
       end.to change { playlist.reload.updated_at }
     end
