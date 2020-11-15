@@ -200,16 +200,12 @@ RSpec.describe Storage::Location, type: :model do
       location = Storage::Location.new(attachment, signed: true)
       url = location.url
       expect(url).to include(base_url)
-      uri = URI.parse(url)
-      expect(uri.query).to_not be_nil
     end
 
     it "generates a URL back to the application when unsigned" do
       location = Storage::Location.new(attachment, signed: false)
       url = location.url
       expect(url).to include(base_url)
-      uri = URI.parse(url)
-      expect(uri.query).to_not be_nil
     end
 
     context "with Fastly enabled" do

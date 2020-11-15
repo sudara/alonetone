@@ -31,9 +31,11 @@ RSpec.describe 'playlists', type: :feature, js: true do
       switch_themes
 
       with_animations_paused do
-        find('.waveform').click(x: 200, y: 10) # seek
-        find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
-        find('.play_button_container a').click # pause
+        expect do
+          find('.waveform').click(x: 200, y: 10) # seek
+          find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
+          find('.play_button_container a').click # pause
+        end.to change { Listen.count }.by(1)
 
         # The time between seeking and pausing is variable
         # So we manually adjust the playhead end state to the exact
