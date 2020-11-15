@@ -44,6 +44,7 @@ RSpec.describe Storage::Location, type: :model do
 
   context "using remote storage with CloudFront enabled" do
     around do |example|
+      attachment.blob.service_name = :s3
       with_storage_service('s3') do
         with_alonetone_configuration(
           amazon_cloud_front_domain_name: 'xxxxxxxxxxxxxx.cloudfront.net',
@@ -117,6 +118,7 @@ RSpec.describe Storage::Location, type: :model do
 
   context "using remote storage" do
     around do |example|
+      attachment.blob.service_name = :s3
       with_storage_service('s3') do
         with_alonetone_configuration(
           amazon_cloud_front_domain_name: nil,
@@ -150,6 +152,7 @@ RSpec.describe Storage::Location, type: :model do
 
     context "with Fastly enabled" do
       around do |example|
+      attachment.blob.service_name = :s3
         with_alonetone_configuration(fastly_base_url: fastly_base_url) do
           example.call
         end
@@ -179,6 +182,7 @@ RSpec.describe Storage::Location, type: :model do
 
   context "using local storage" do
     around do |example|
+      attachment.blob.service_name = :filesystem
       with_storage_service('filesystem') do
         with_alonetone_configuration(
           amazon_cloud_front_domain_name: nil,
