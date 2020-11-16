@@ -22,7 +22,7 @@ module Alonetone
       config.alonetone = ::Configurable.new(Rails.env.to_s, {})
     end
 
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     config.exceptions_app = routes
 

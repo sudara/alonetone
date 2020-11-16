@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails'
+gem 'rails', '6.1.0.rc1'
 gem 'mysql2'
 gem 'puma'
 
@@ -52,7 +52,7 @@ gem 'turbolinks'
 # monitoring & perf
 gem 'bugsnag'
 gem 'newrelic_rpm'
-gem 'skylight'
+gem 'skylight', '~>5.0.0.beta'
 gem 'sidekiq'
 gem 'dalli'
 
@@ -72,8 +72,12 @@ group :test do
   gem 'percy-capybara'
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
-  gem 'rspec-mocks', require: false
-  gem 'rspec-rails', require: false
+  gem 'rspec', require: false, github: 'rspec/rspec'
+  gem 'rspec-core', require: false, github: 'rspec/rspec-core'
+  gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations'
+  gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks'
+  gem 'rspec-support', require: false, github: 'rspec/rspec-support'
+  gem 'rspec-rails', require: false, github: 'rspec/rspec-rails', branch: 'rails-6-1-dev'
   gem 'selenium-webdriver'
   gem 'webmock', require: false
 end

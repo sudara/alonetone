@@ -9,8 +9,6 @@ Rails.application.reloader.reload! unless User.new.respond_to?(:password)
 # any API requests from the seeds.
 Rails.application.config.rakismet.test = true
 
-include ActionDispatch::TestProcess
-
 selected_password = ENV.fetch('PASSWORD', 'testing123')
 
 comments = [
@@ -29,7 +27,7 @@ def upload(path)
     __dir__
   )
   content_type = Marcel::MimeType.for(filename)
-  fixture_file_upload(filename, content_type)
+  Rack::Test::UploadedFile.new(filename, content_type)
 end
 
 def extract_metadata(attributes)
