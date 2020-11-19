@@ -8,7 +8,7 @@ gem 'rails', '6.1.0.rc1'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded'
+gem 'thredded', github: 'sudara/thredded'
 
 # ruby
 gem 'sometimes'
