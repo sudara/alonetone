@@ -268,19 +268,20 @@
           cursor: grab;
           width: 30px;
           height: 22px;
-          background-image: image-url("svg/icon_drag_handle_idle.svg");
+          background-image: $edit-playlist-drag-handle-idle-background;
+          background-color: #FFF;
           background-size: 30px 22px;
           background-position: center;
           background-repeat: no-repeat;
           border-radius: 7px;
           border: 1px solid $edit-playlist-drag-handle-border;
-          transition: border-color 0.4s, background-image 0.4s;
+          // transition: border-color 0.4s, background-image 0.4s;
           &:hover {
-            background-image: image-url("svg/icon_drag_handle_active.svg");
+            background-image: $edit-playlist-drag-handle-active-background;
             border: 1px solid $edit-playlist-drag-handle-border-hover;
           }
           &:active {
-            background-image: image-url("svg/icon_drag_handle_active.svg");
+            background-image: $edit-playlist-drag-handle-active-background;
             border: 1px solid $edit-playlist-drag-handle-border-active;
           }
         }
