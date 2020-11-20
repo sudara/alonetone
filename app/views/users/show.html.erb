@@ -27,7 +27,7 @@
       <% if current_user_is_mod_or_owner?(@user) and @user.playlists.include_private.count > 4 %>
         <div class="below_box">
           <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
-            <span>view all, edit &amp; sort playlists &nbsp;
+            <span>view all, edit &amp; sort playlists&nbsp;&nbsp;
               <i class="icon_caret">
                 <%== render file: svg_path('svg/icon_caret.svg') %>
               </i>
@@ -37,7 +37,7 @@
       <% elsif current_user_is_mod_or_owner?(@user) %>
         <div class="below_box sparse">
           <%= link_to user_playlists_path(@user), class: 'view_all', title: "albums by #{@user.name}"  do %>
-            <span>sort &amp; edit playlists &nbsp;
+            <span>sort &amp; edit playlists&nbsp;&nbsp;
               <i class="icon_caret">
                 <%== render file: svg_path('svg/icon_caret.svg') %>
               </i>
