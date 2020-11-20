@@ -299,6 +299,17 @@
             flex-grow: 1;
             font-weight: bold;
             text-decoration: underline;
+            span {
+              &.narrow-column-alt {
+                display: none;
+              }
+              @media only screen and (min-width: 748px) and (max-width: 860px) {
+                display: none;
+                &.narrow-column-alt {
+                  display: inline;
+                }
+              }
+            }
           }
           .plays {
             font-size: 12px;
