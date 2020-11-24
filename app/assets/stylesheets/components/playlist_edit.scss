@@ -264,25 +264,31 @@
         justify-content: center;
         user-select: none;
         div {
+          position: relative;
+          &:before {
+            content: $edit-playlist-drag-handle-active-background;
+            position: absolute;
+            left: -9999px;
+          }
           user-select: none;
           cursor: grab;
           width: 30px;
-          height: 22px;
+          height: 24px;
           background-image: $edit-playlist-drag-handle-idle-background;
           background-color: #FFF;
-          background-size: 30px 22px;
-          background-position: center;
-          background-repeat: no-repeat;
+          background-size: cover;
           border-radius: 7px;
           border: 1px solid $edit-playlist-drag-handle-border;
-          // transition: border-color 0.4s, background-image 0.4s;
+          // transition: border-color 0.4s, background-image 1.4s;
           &:hover {
-            background-image: $edit-playlist-drag-handle-active-background;
             border: 1px solid $edit-playlist-drag-handle-border-hover;
+            background-image: $edit-playlist-drag-handle-active-background;
+            background-size: cover;
           }
           &:active {
+            border: 1px solid $edit-playlist-drag-handle-border-active;  
             background-image: $edit-playlist-drag-handle-active-background;
-            border: 1px solid $edit-playlist-drag-handle-border-active;
+            background-size: cover;
           }
         }
       }
