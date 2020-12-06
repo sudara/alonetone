@@ -35,7 +35,7 @@ ssh alonetone '
     then
       echo "Gemfile changed, bundle installing..."
       $GIT_COMMAND reset --hard origin/master
-      $BUNDLE_COMMAND install --deployment
+      $BUNDLE_COMMAND install
       echo
     else
       echo "skipping bundle install, gemfile has not changed since last time."
