@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_09_20_172437) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
@@ -241,7 +241,7 @@ ActiveRecord::Schema.define(version: 2020_09_20_172437) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "settings", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "settings", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "display_listen_count", default: true
     t.boolean "block_guest_comments", default: false
