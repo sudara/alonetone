@@ -78,7 +78,7 @@ GIT
 
 GIT
   remote: https://github.com/wjessop/oas_agent.git
-  revision: f0f944ccd0e0c9e38aef95b4b9605a2c46ef4995
+  revision: cd5cee6c90fedb7f51fd45b3078eb1718bba5207
   specs:
     oas_agent (0.0.1)
 
