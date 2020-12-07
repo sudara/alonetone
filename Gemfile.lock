@@ -76,6 +76,12 @@ GIT
       sprockets-es6
       timeago_js
 
+GIT
+  remote: https://github.com/wjessop/oas_agent.git
+  revision: f0f944ccd0e0c9e38aef95b4b9605a2c46ef4995
+  specs:
+    oas_agent (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -524,6 +530,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nokogiri
+  oas_agent!
   pagy
   percy-capybara
   perf_check
