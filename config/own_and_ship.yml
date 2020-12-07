@@ -1,0 +1,20 @@
+common: &default_settings
+  enabled: <%= !!Rails.configuration.alonetone.own_and_ship %>
+
+  # Can be set using the OAS_AGENT_KEY environment variable
+  agent_key: <%= Rails.configuration.alonetone.own_and_ship %>
+
+  # The application name for logging purposes
+  app_name: alonetone - (<%= Rails.env.capitalize %>)
+
+development:
+  <<: *default_settings
+
+test:
+  <<: *default_settings
+  reporter:
+    send_immediately: true
+    max_reports_to_batch: 1
+
+production:
+  <<: *default_settings

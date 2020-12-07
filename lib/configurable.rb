@@ -37,7 +37,8 @@ class Configurable
     :storage_service,
     :typekit_embed_token,
     :postmark_api_token,
-    :fastly_base_url
+    :fastly_base_url,
+    :own_and_ship
   )
 
   attr_reader :environment

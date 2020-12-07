@@ -51,6 +51,7 @@ gem 'turbolinks'
 
 # monitoring & perf
 gem 'bugsnag'
+gem 'oas_agent', github: 'wjessop/oas_agent'
 gem 'newrelic_rpm'
 gem 'skylight', '~>5.0.0.beta'
 gem 'sidekiq'
