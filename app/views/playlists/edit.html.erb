@@ -72,9 +72,9 @@
     </div>
   </div>
   <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-sort.addUrl' }, class: 'hidden add_url' %>
+    data: { 'playlist-sort-target': 'addUrl' }, class: 'hidden add_url' %>
   <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-sort.removeUrl' }, class: 'hidden remove_url' %>
+    data: { 'playlist-sort-target': 'removeUrl' }, class: 'hidden remove_url' %>
   <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-sort.sortUrl' }, class: 'hidden sort_url' %>
+    data: { 'playlist-sort-target': 'sortUrl' }, class: 'hidden sort_url' %>
 </div>
