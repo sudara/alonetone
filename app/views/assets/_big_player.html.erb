@@ -1,8 +1,8 @@
 <div class="player">
-  <div class="play_button_container" data-target="big-play.play" data-action="click->big-play#togglePlay">
+  <div class="play_button_container" data-big-play-target="play" data-action="click->big-play#togglePlay">
     <div class='play_button play-control'>
-      <%= link_to media_url(@asset), class: 'stitches_play', data: { target: 'single-playback.play' } do %>
-      <svg data-target="big-play.playButton" class="largePlaySVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <%= link_to media_url(@asset), class: 'stitches_play', data: { 'single-playback-target': 'play' } do %>
+      <svg data-big-play-target="playButton" class="largePlaySVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <clipPath id="dottyMask">
               <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>
@@ -29,17 +29,17 @@
     </div>
   </div>
 
-  <div class="waveform" data-target='big-play.waveform' data-action='mousemove->big-play#skim click->big-play#seek'>
-    <div class="seekbar" data-target="big-play.seekBar"></div>
+  <div class="waveform" data-big-play-target='waveform' data-action='mousemove->big-play#skim click->big-play#seek'>
+    <div class="seekbar" data-big-play-target="seekBar"></div>
      <%= render partial: 'assets/waveform' %>
   </div>
 
   <div class="progress_container">
-    <div class="progress_container_inner" data-target="big-play.progressContainerInner">
+    <div class="progress_container_inner" data-big-play-target="progressContainerInner">
       <div class="line_progress">
       </div>
       <div class="time_progress">
-        <span class="index" data-target="big-play.time">0:00</span>
+        <span class="index" data-big-play-target="time">0:00</span>
       </div>
     </div>
   </div>

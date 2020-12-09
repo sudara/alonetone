@@ -5,10 +5,10 @@
     <p class='sort_instructions'>
       Drag to reorder. Click to view and Edit.
     </p>
-    <div class="playlists_feedback" data-target="playlists-sort.feedback">
+    <div class="playlists_feedback" data-playlists-sort-target="feedback">
     </div>
   <% end %>
-  <ul class="playlists sortable no_artist_name_playlists responsive_grid"  data-target="playlists-sort.sortable">
+  <ul class="playlists sortable no_artist_name_playlists responsive_grid"  data-playlists-sort-target="sortable">
     <%= render partial: 'shared/playlist', collection: @playlists, as: :playlist %>
   </ul>
 </div>

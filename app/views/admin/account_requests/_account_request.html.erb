@@ -24,11 +24,11 @@
   <div class="button_column">
     <%= link_to "Approve & Email", approve_admin_account_request_path(account_request),
       class: 'approve_button', method: :put, remote: true,
-      data: { target: 'admin--request.approveButton',
+      data: { 'admin--request-target': 'approveButton',
       action: 'click->admin--request#moderated ajax:success->admin--request#approve ajax:error->admin--request#error' } %>
     <%= link_to "Deny", deny_admin_account_request_path(account_request),
       class: 'deny_button', method: :put, remote: true,
-      data: { target: 'admin--request.denyButton',
+      data: { 'admin--request-target': 'denyButton',
       action: 'click->admin--request#moderated ajax:success->admin--request#denie ajax:error->admin--request#error' } %>
   </div>
 </div>

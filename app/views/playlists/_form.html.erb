@@ -17,11 +17,11 @@
       <div class="edit_playlist_info_columns">
         <div class="edit_playlist_info_left_column" data-controller="image-upload">
           <label>Album Artwork</label>
-          <div class="cover" data-target='image-upload.image' data-action='click->image-upload#openFile' title="<%= @playlist.title %>">
+          <div class="cover" data-image-upload-target='image' data-action='click->image-upload#openFile' title="<%= @playlist.title %>">
             <%= playlist_cover(@playlist, variant: :playlist_card) %>
           </div>
-          <%= f.file_field :cover_image, data: { target: 'image-upload.fileField', action: 'change->image-upload#fileChanged' }, style: 'display:none'  %>
-          <%= f.label :cover_image, 'Choose New Artwork...', class:"upload_artwork", data: { target: 'image-upload.fileLabel' } %>
+          <%= f.file_field :cover_image, data: { 'image-upload-target': 'fileField', action: 'change->image-upload#fileChanged' }, style: 'display:none'  %>
+          <%= f.label :cover_image, 'Choose New Artwork...', class:"upload_artwork", data: { 'image-upload-target': 'fileLabel' } %>
           <p class="upload_instructions">
             Upload a square photo,<br> 2000px by 2000px for<br> best results.
           </p>
@@ -61,10 +61,10 @@
           </div>
 
           <% if @playlist.persisted? %>
-          <div class="edit_playlist_info_right_column_private_and_hidden" data-target="playlist-form.checkbox" style="display:none">
+          <div class="edit_playlist_info_right_column_private_and_hidden" data-playlist-form-target="checkbox" style="display:none">
             <div class="input">
-              <%= f.check_box :is_private?, { data: { target: 'playlist-form.actualCheckbox' }, id: 'playlist_private'}  %>
-              <label for="playlist_is_private" data-target="playlist-form.markAsPrivate" data-action='click->playlist-form#togglePrivate'><span>Private</span></label>
+              <%= f.check_box :is_private?, { data: { 'playlist-form-target': 'actualCheckbox' }, id: 'playlist_private'}  %>
+              <label for="playlist_is_private" data-playlist-form-target="markAsPrivate" data-action='click->playlist-form#togglePrivate'><span>Private</span></label>
             </div>
           </div>
           <% end %>
@@ -72,11 +72,11 @@
       </div>
       <div class="edit_playlist_info_bottom">
 
-        <div class="private_warning" data-target="playlist-form.privateBanner" style="display:none">
+        <div class="private_warning" data-playlist-form-target="privateBanner" style="display:none">
           This playlist is private, visible only to <span class="only_user_name"><%= @user.display_name %></span> and <span class="only_alonetone_mods">alonetone mods</span>
         </div>
 
-        <div class="private_warning" data-target="playlist-form.needsTracksBanner" style="display:none">
+        <div class="private_warning" data-playlist-form-target="needsTracksBanner" style="display:none">
           This playlist will be hidden until it has <span class="only_user_name">at least 2 tracks</span>
         </div>
 
