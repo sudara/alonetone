@@ -20,7 +20,7 @@ export default class extends Controller {
   }
 
   updateBanner() {
-    if (!this.hasActualCheckBoxTarget) return;
+    if (!this.hasActualCheckboxTarget) return;
     if (this.actualCheckboxTarget.checked) {
       // redundant, but sometimes this attribute isn't present
       this.actualCheckboxTarget.checked = true
