@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '6.1.0.rc2'
+gem 'rails', '6.1.0'
 gem 'mysql2'
 gem 'puma'
 
@@ -27,7 +27,7 @@ gem 's3_direct_upload'
 
 # active record
 gem 'acts_as_list'
-gem 'authlogic'
+gem 'authlogic', github: 'sudara/authlogic', branch: 'rails6-1'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 
