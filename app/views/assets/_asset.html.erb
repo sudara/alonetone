@@ -1,16 +1,16 @@
 <div class="asset_top">
   <div class="asset_top_row">
     <div class="drag_handle"><div class="inner"></div></div>
-    <div class="play_button button" data-target="normal-playback.play">
+    <div class="play_button button" data-normal-playback-target="play">
       <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
         class: 'play_link stitches_play', title: 'play' do %>
-          <svg data-target="normal-playback.playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+          <svg data-normal-playback-target="playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
           <path d="M187,489.21l-.31-378.41a.77.77,0,0,1,1.15-.67l150.53,86.75L515.71,299.08a.76.76,0,0,1,0,1.31L188.14,489.87A.76.76,0,0,1,187,489.21Z" />
           </svg>
       <% end %>
     </div>
 
-    <div class="title" data-target="normal-playback.title" data-action="click->normal-playback#toggleDetails">
+    <div class="title" data-normal-playback-target="title" data-action="click->normal-playback#toggleDetails">
       <div class="title_left_column">
         <div class="title_left_column_top">
           <a href="<%= user_track_path(asset.user, asset.permalink) %>" class="track_link" title="<%= asset.name %>">
@@ -24,7 +24,7 @@
 
       <div class="title_right_column">
         <div class='counter'></div>
-        <time class="stitches_time" data-target="normal-playback.time playlist-update.time"><%= asset.length %></time>
+        <time class="stitches_time" data-normal-playback-target="time" data-playlist-update-target="time"><%= asset.length %></time>
       </div>
     </div>
 
@@ -43,13 +43,13 @@
   <% end %>
 </div>
 
-<div data-target="normal-playback.seekBarContainer" class="stitches_seek seekbar">
-  <div data-target="normal-playback.seekBarLoaded" class="loaded" style="width: 0%">
+<div data-normal-playback-target="seekBarContainer" class="stitches_seek seekbar">
+  <div data-normal-playback-target="seekBarLoaded" class="loaded" style="width: 0%">
   </div>
-  <div data-target="normal-playback.seekBarPlayed" class="played" style="width: 0%"></div>
+  <div data-normal-playback-target="seekBarPlayed" class="played" style="width: 0%"></div>
 </div>
 
-<div class="tracks_reveal" data-target="normal-playback.details">
+<div class="tracks_reveal" data-normal-playback-target="details">
   <% if logged_in? %>
     <%= link_to toggle_favorite_path(asset_id: asset.id), remote: true, class: 'add_to_favorites',
       data: {controller: 'favorite', action: 'favorite#toggle' } do %>
