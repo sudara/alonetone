@@ -18,7 +18,7 @@ jobs:
                 MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
     - name: Installing apt dependencies
-      run: sudo apt-get install libsndfile-dev lame libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio3-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
+      run: sudo apt-get install libsndfile-dev lame libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
     
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
