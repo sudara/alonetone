@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '6.1.0.rc1'
+gem 'rails', '6.1.0.rc2'
 gem 'mysql2'
 gem 'puma'
 
@@ -73,12 +73,12 @@ group :test do
   gem 'percy-capybara'
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
-  gem 'rspec', require: false, github: 'rspec/rspec'
-  gem 'rspec-core', require: false, github: 'rspec/rspec-core'
-  gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations'
-  gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks'
-  gem 'rspec-support', require: false, github: 'rspec/rspec-support'
-  gem 'rspec-rails', require: false, github: 'rspec/rspec-rails', branch: 'rails-6-1-dev'
+  gem 'rspec', require: false, github: 'rspec/rspec', branch: 'main'
+  gem 'rspec-core', require: false, github: 'rspec/rspec-core',  branch: 'main'
+  gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations', branch: 'main'
+  gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks', branch: 'main'
+  gem 'rspec-support', require: false, github: 'rspec/rspec-support', branch: 'main'
+  gem 'rspec-rails', require: false, github: 'rspec/rspec-rails', branch: 'rails-6.1.0.rc2-dev'
   gem 'selenium-webdriver'
   gem 'webmock', require: false
 end

@@ -1,54 +1,59 @@
 GIT
   remote: https://github.com/rspec/rspec-core.git
-  revision: e7c5d030966a7e8dad3e0a67c61920c4f2437c15
+  revision: 31f057342d182c88d389ec1ef890a3029a2d180d
+  branch: main
   specs:
-    rspec-core (3.10.0.pre)
-      rspec-support (= 3.10.0.pre)
+    rspec-core (3.11.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-expectations.git
-  revision: e63ff4765e1cd2798b02ddddad259f1104ef87a5
+  revision: b95ae1d4da42fac39e54fba3fbe31b9a837658b4
+  branch: main
   specs:
-    rspec-expectations (3.10.0.pre)
+    rspec-expectations (3.11.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.10.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-mocks.git
-  revision: 0a52e0a86b126b4bab94d277b2ad99a7492dc37d
+  revision: 3e7d0c0e044598b701697f2ac5d62d47142b5897
+  branch: main
   specs:
-    rspec-mocks (3.10.0.pre)
+    rspec-mocks (3.11.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (= 3.10.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-rails.git
-  revision: 62b835038a3cda02e890db8abce13b4077206dad
-  branch: rails-6-1-dev
+  revision: 7c23e9c73bba447d3c5902ffd455c78f9aa7935f
+  branch: rails-6.1.0.rc2-dev
   specs:
     rspec-rails (4.1.0.pre)
       actionpack (>= 4.2)
       activesupport (>= 4.2)
       railties (>= 4.2)
-      rspec-core (= 3.10.0.pre)
-      rspec-expectations (= 3.10.0.pre)
-      rspec-mocks (= 3.10.0.pre)
-      rspec-support (= 3.10.0.pre)
+      rspec-core (= 3.11.0.pre)
+      rspec-expectations (= 3.11.0.pre)
+      rspec-mocks (= 3.11.0.pre)
+      rspec-support (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec-support.git
-  revision: 6447b0c2c9d1cd3e1504784fb85675ca9ae7b7c3
+  revision: b756ed8880628c806890a8348e143f595278934c
+  branch: main
   specs:
-    rspec-support (3.10.0.pre)
+    rspec-support (3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec.git
-  revision: 28443b6392c976f40ab323c11574cf5f00faa68c
+  revision: 58ce1daf083add0aef88f874b5a049a3146eb909
+  branch: main
   specs:
-    rspec (3.10.0.pre)
-      rspec-core (= 3.10.0.pre)
-      rspec-expectations (= 3.10.0.pre)
-      rspec-mocks (= 3.10.0.pre)
+    rspec (3.11.0.pre)
+      rspec-core (= 3.11.0.pre)
+      rspec-expectations (= 3.11.0.pre)
+      rspec-mocks (= 3.11.0.pre)
 
 GIT
   remote: https://github.com/sudara/thredded.git
@@ -85,62 +90,62 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    actioncable (6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      activejob (= 6.1.0.rc1)
-      activerecord (= 6.1.0.rc1)
-      activestorage (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    actionmailbox (6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      activejob (= 6.1.0.rc2)
+      activerecord (= 6.1.0.rc2)
+      activestorage (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       mail (>= 2.7.1)
-    actionmailer (6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      actionview (= 6.1.0.rc1)
-      activejob (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    actionmailer (6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      actionview (= 6.1.0.rc2)
+      activejob (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.1.0.rc1)
-      actionview (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    actionpack (6.1.0.rc2)
+      actionview (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      activerecord (= 6.1.0.rc1)
-      activestorage (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    actiontext (6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      activerecord (= 6.1.0.rc2)
+      activestorage (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       nokogiri (>= 1.8.5)
-    actionview (6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    actionview (6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     active_record_union (1.3.0)
       activerecord (>= 4.0)
-    activejob (6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    activejob (6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       globalid (>= 0.3.6)
-    activemodel (6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
-    activerecord (6.1.0.rc1)
-      activemodel (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
-    activestorage (6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      activejob (= 6.1.0.rc1)
-      activerecord (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    activemodel (6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
+    activerecord (6.1.0.rc2)
+      activemodel (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
+    activestorage (6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      activejob (= 6.1.0.rc2)
+      activerecord (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       marcel (~> 0.3.1)
       mimemagic (~> 0.3.2)
-    activesupport (6.1.0.rc1)
+    activesupport (6.1.0.rc2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -159,15 +164,15 @@ GEM
       activerecord (>= 5.2, < 6.1)
       activesupport (>= 5.2, < 6.1)
       request_store (~> 1.0)
-    autoprefixer-rails (10.0.2.0)
+    autoprefixer-rails (10.1.0.0)
       execjs
     awesome_print (1.8.0)
     aws-eventstream (1.1.0)
-    aws-partitions (1.393.0)
+    aws-partitions (1.405.0)
     aws-sdk-cloudfront (1.46.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.109.2)
+    aws-sdk-core (3.110.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -175,7 +180,7 @@ GEM
     aws-sdk-kms (1.39.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.84.1)
+    aws-sdk-s3 (1.86.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -189,7 +194,7 @@ GEM
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    capybara (3.33.0)
+    capybara (3.34.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -263,7 +268,7 @@ GEM
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    inline_svg (1.7.1)
+    inline_svg (1.7.2)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
     jmespath (1.4.0)
@@ -288,11 +293,11 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    listen (3.3.1)
+    listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     local_time (2.1.0)
-    loofah (2.7.0)
+    loofah (2.8.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.2.8)
@@ -313,11 +318,11 @@ GEM
     mustache (1.1.1)
     mysql2 (0.5.3)
     nenv (0.3.0)
-    newrelic_rpm (6.13.1)
+    newrelic_rpm (6.14.0)
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    nokogumbo (2.0.2)
+    nokogumbo (2.0.4)
       nokogiri (~> 1.8, >= 1.8.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -329,8 +334,8 @@ GEM
       mustache
       nokogiri (~> 1.7)
       sanitize
-    pagy (3.9.0)
-    parallel (1.20.0)
+    pagy (3.10.0)
+    parallel (1.20.1)
     parser (2.7.2.0)
       ast (~> 2.4.1)
     percy-capybara (4.3.3)
@@ -338,7 +343,7 @@ GEM
       colorize
       diffy
       rake
-    postmark (1.21.2)
+    postmark (1.21.3)
       json
     postmark-rails (0.20.0)
       actionmailer (>= 3.0.0)
@@ -350,7 +355,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.13.0)
     public_suffix (4.0.6)
-    puma (5.0.4)
+    puma (5.1.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -359,20 +364,20 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (6.1.0.rc1)
-      actioncable (= 6.1.0.rc1)
-      actionmailbox (= 6.1.0.rc1)
-      actionmailer (= 6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      actiontext (= 6.1.0.rc1)
-      actionview (= 6.1.0.rc1)
-      activejob (= 6.1.0.rc1)
-      activemodel (= 6.1.0.rc1)
-      activerecord (= 6.1.0.rc1)
-      activestorage (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    rails (6.1.0.rc2)
+      actioncable (= 6.1.0.rc2)
+      actionmailbox (= 6.1.0.rc2)
+      actionmailer (= 6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      actiontext (= 6.1.0.rc2)
+      actionview (= 6.1.0.rc2)
+      activejob (= 6.1.0.rc2)
+      activemodel (= 6.1.0.rc2)
+      activerecord (= 6.1.0.rc2)
+      activestorage (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       bundler (>= 1.15.0)
-      railties (= 6.1.0.rc1)
+      railties (= 6.1.0.rc2)
       sprockets-rails (>= 2.0.0)
     rails-controller-testing (1.0.5)
       actionpack (>= 5.0.1.rc1)
@@ -383,9 +388,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
-    railties (6.1.0.rc1)
-      actionpack (= 6.1.0.rc1)
-      activesupport (= 6.1.0.rc1)
+    railties (6.1.0.rc2)
+      actionpack (= 6.1.0.rc2)
+      activesupport (= 6.1.0.rc2)
       method_source
       rake (>= 0.8.7)
       thor (~> 1.0)
@@ -396,7 +401,7 @@ GEM
     rb-gravatar (1.0.6)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.2.2)
+    redis (4.2.5)
     regexp_parser (1.8.2)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -450,14 +455,14 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    semantic_range (2.3.0)
+    semantic_range (2.3.1)
     shellany (0.0.1)
     sidekiq (6.1.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
     sixarm_ruby_unaccent (1.2.0)
-    skylight (5.0.0.beta2)
+    skylight (5.0.0.beta4)
       activesupport (>= 5.2.0)
     sometimes (0.0.3)
     sort_alphabetical (1.1.0)
@@ -502,7 +507,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yui-compressor (0.12.0)
-    zeitwerk (2.4.1)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
@@ -538,7 +543,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma
-  rails (= 6.1.0.rc1)
+  rails (= 6.1.0.rc2)
   rails-controller-testing
   rakismet
   rb-fsevent
