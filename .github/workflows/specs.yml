@@ -41,7 +41,7 @@ jobs:
         bundler-cache: true 
     
     - name: Set up Node
-    - uses: actions/setup-node@v2-beta
+      uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
     
