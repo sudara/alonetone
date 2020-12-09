@@ -292,6 +292,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
       color: $red1100;
       margin-bottom: 12px;
       display: flex;
+      line-height: 1.3;
       &:before {
         flex-shrink: 0;
         content: counter(listNumbering);
@@ -308,7 +309,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
         padding-left: 7px;
         box-sizing: border-box;
         position: relative;
-        top: -5px;
+        top: -3px;
         line-height: 22px;
       }
     }
