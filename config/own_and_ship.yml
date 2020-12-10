@@ -1,5 +1,5 @@
 common: &default_settings
-  enabled: <%= !!Rails.configuration.alonetone.own_and_ship %>
+  enabled: <%= ENV['OAS_AGENT_KEY'] || !!Rails.configuration.alonetone.own_and_ship %>
 
   # Can be set using the OAS_AGENT_KEY environment variable
   agent_key: <%= Rails.configuration.alonetone.own_and_ship %>
