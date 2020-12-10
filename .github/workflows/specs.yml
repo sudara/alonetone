@@ -5,11 +5,11 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  
+
 jobs:
   test:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
         mysql:
@@ -18,12 +18,14 @@ jobs:
                 MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
     - name: Installing apt dependencies
-      run: sudo apt-get install libsndfile-dev lame libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
-    
+      run: |
+        sudo apt-get install libsndfile-dev lame libvips libvips-dev # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
+        vips --version
+
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-    
+
     - uses: actions/cache@v2
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
@@ -31,31 +33,28 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
-          
+
     - uses: actions/checkout@v2
-    
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.2
-        bundler-cache: true 
-    
+        bundler-cache: true
+
     - name: Set up Node
       uses: actions/setup-node@v2-beta
       with:
-        node-version: '12'
-    
-    - name: Install VIPS
-      run: bash script/install-vips.sh
-    
+        node-version: '15'
+
     - name: Bundle install
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
-    
+
     - name: Yarn install
       run: yarn install
-    
+
     - name: Copy config and setup db
       run: |
         mysql -e 'create database alonetone_test';
@@ -63,6 +62,6 @@ jobs:
         cp config/alonetone.example.yml config/alonetone.yml
         bundle exec rake setup:copy_config setup:touch_js db:drop db:create db:schema:load
         bundle exec rake db:seed
-    
+
     - name: Run tests & percy
       run: npx percy exec -- bundle exec rake spec
