@@ -6,9 +6,11 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  RAILS_ENV: test
+
 jobs:
   test:
-
     runs-on: ubuntu-20.04
 
     steps:
