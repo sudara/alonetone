@@ -8,8 +8,9 @@ on:
 
 env:
   RAILS_ENV: test
-  RUBYOPT: -w # get own and ship ruby deprecation notices
+  # RUBYOPT: -w # get own and ship ruby deprecation notices
   OAS_AGENT_KEY: ${{ secrets.OAS_AGENT_KEY }}
+  PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
 jobs:
   test:
@@ -29,7 +30,7 @@ jobs:
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
 
