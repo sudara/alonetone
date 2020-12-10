@@ -44,7 +44,7 @@ jobs:
 
     - name: Yarn install
       run: yarn install
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      #if: steps.yarn-cache.outputs.cache-hit != 'true'
 
     - name: Copy config and setup db
       run: |
