@@ -13,15 +13,17 @@ env:
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
 jobs:
-  strategy:
-    matrix:
-      include:
-        - name: Normal Specs
-          command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
-        - name: Feature Specs & Percy
-          command: npx percy exec -- bundle exec rspec "spec/features/**/*_spec.rb"
+
   test:
     runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        include:
+          - name: Normal Specs
+            command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+          - name: Feature Specs & Percy
+            command: npx percy exec -- bundle exec rspec "spec/features/**/*_spec.rb"
 
     steps:
     - name: Installing apt dependencies
