@@ -54,8 +54,7 @@ jobs:
         mysql -u root -proot -e 'create database alonetone_test';
         cp config/database.example.yml config/database.yml
         cp config/alonetone.example.yml config/alonetone.yml
-        bundle exec rake setup:copy_config setup:touch_js db:drop db:create db:schema:load
-        bundle exec rake db:seed
+        bin/rails setup
 
     - name: Run tests & percy
       run: npx percy exec -- bundle exec rake spec
