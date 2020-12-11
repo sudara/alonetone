@@ -51,7 +51,7 @@ jobs:
     - name: Copy config and setup db
       run: |
         sudo systemctl start mysql.service
-        bin/rails setup
+        bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load db:seed
 
     - name: Run tests & percy
       run: npx percy exec -- bundle exec rake spec
