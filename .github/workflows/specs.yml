@@ -18,12 +18,13 @@ jobs:
     runs-on: ubuntu-20.04
 
     strategy:
+      fail-fast: false # let both suites run to completion
       matrix:
         include:
           - name: Normal Specs
             command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
           - name: Feature Specs & Percy
-            command: npx percy exec -- bundle exec rspec "spec/features/**/*_spec.rb"
+            command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
 
     steps:
     - name: Installing apt dependencies
@@ -63,5 +64,5 @@ jobs:
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
         bin/rails db:seed
 
-    - name: ${{ matrix.decription }}
+    - name: ${{ matrix.description }}
       run: ${{ matrix.command }}
