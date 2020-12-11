@@ -13,6 +13,13 @@ env:
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
 jobs:
+  strategy:
+    matrix:
+      include:
+        - name: Normal Specs
+          command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+        - name: Feature Specs & Percy
+          command: npx percy exec -- bundle exec rspec "spec/features/**/*_spec.rb"
   test:
     runs-on: ubuntu-20.04
 
@@ -54,5 +61,5 @@ jobs:
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
         bin/rails db:seed
 
-    - name: Run tests & percy
-      run: npx percy exec -- bundle exec rake spec
+    - name: ${{ matrix.decription }}
+      run: ${{ matrix.command }}
