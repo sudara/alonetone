@@ -51,9 +51,6 @@ jobs:
     - name: Copy config and setup db
       run: |
         sudo systemctl start mysql.service
-        mysql -u root -proot -e 'create database alonetone_test';
-        cp config/database.example.yml config/database.yml
-        cp config/alonetone.example.yml config/alonetone.yml
         bin/rails setup
 
     - name: Run tests & percy
