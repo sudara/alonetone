@@ -9,6 +9,8 @@
 
   <title>alonetone is down for maintenance</title>
 
+
+
   <style type="text/css">
     @font-face {
       font-family: 'Alright-v2-Normal';
@@ -34,18 +36,44 @@
     }
 
     div.col {
-      margin: 0 auto;
-      padding-bottom: 20px;
-      height: 100%;
-      max-width: 960px;
-      background: #353535;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    div.image {
-      max-width: 960px;
+    div#image {
+      width: 100%;
+      height: calc(100vh - 200px);
+    }
+
+    div#image.narrow {
+      height: auto;
+    }
+
+    img#png {
+      height: 100%;
       display: block;
-      background: #353535 top center / contain no-repeat url(/images/502.png);
-      padding-bottom: 92%;
+      margin: 0 auto;
+      max-width: 960px;
+    }
+
+    img#png.narrow {
+      height: auto;
+      width: 100%;
+    }
+
+    div#message {
+      width: 100%;
+      height: 200px;  
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    div#message.narrow {
+      height: auto;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
 
     h1,h2 {
@@ -71,10 +99,44 @@
 <body>
 
   <div class="col">
-    <div class="image"> </div>
-    <h1>alonetone is down for maintenance</h1>
-    <h2>We probably took the site down on purpose! It should be back up shortly...</h2>
+    <div id="image">
+      <img id="png" src="/images/502.png" alt="">
+    </div>
+    <div id="message">
+      <h1>alonetone is down for maintenance</h1>
+      <h2>We probably took the site down on purpose! It should be back up shortly...</h2>
+    </div>
   </div>
+
+<script>
+
+  var viewportResize = function () {
+
+    var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    var image = document.getElementById("image");
+    var png = document.getElementById("png");
+    var message = document.getElementById("message");
+
+    if ( ( viewportHeight / viewportWidth ) > 1.3)  {
+      image.classList.add('narrow')
+      png.classList.add('narrow')
+      message.classList.add('narrow')
+    } else {
+      image.classList.remove('narrow')
+      png.classList.remove('narrow')
+      message.classList.remove('narrow')
+    }
+  }
+
+  viewportResize();
+
+  window.addEventListener('resize', function () {
+    viewportResize();
+  }, false);
+
+</script>
 
 </body>
 </html>
