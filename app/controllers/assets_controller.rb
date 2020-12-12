@@ -202,7 +202,8 @@ class AssetsController < ApplicationController
       :title,
       :user,
       :user_id,
-      :youtube_embed
+      :youtube_embed,
+      :post
     )
   end
 

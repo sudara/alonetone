@@ -16,6 +16,9 @@ import gsap from 'gsap' // needed for tests to run
 import Playlist from '@alonetone/stitches'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
 import '../misc/bugsnag.js.erb'
+/* eslint-disable-next-line import/extensions */
+require('trix/dist/trix.js')
+require('@rails/actiontext')
 
 // uncomment for local stitches dev:
 // import Playlist from '../../../../stitches/src/playlist'
