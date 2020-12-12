@@ -584,18 +584,6 @@
 
 // LEGACY BELOW
 
-form#reset-password {
-  input[type="text"] {
-    border-radius: 4px;
-    background-color: #666;
-    margin-right: 10px;
-    color: #FFF;
-    &:focus {
-      border: 1px solid #999;
-    }
-  }
-}
-
 .settings-box {
   h2 {
     margin-bottom: $baseline;
