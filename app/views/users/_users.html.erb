@@ -12,6 +12,9 @@
 </nav>
 
 <div class="page_container" id="user_index">
+  <div class="mini_paginator bottom_paginator">
+    <%== pagy_nav @users_pagy %>
+  </div>
   <ul id="large_users_grid" class="responsive_grid">
     <% if @sort == 'dedicated_listeners'%>
       <% cache("dedicated/#{params[:page]}/", expires_in: 4.hours) do %>
@@ -26,4 +29,7 @@
   </ul>
 
   <div style="float:none;clear:both;"> </div>
+  <div class="mini_paginator bottom_paginator">
+    <%== pagy_nav @users_pagy %>
+  </div>
 </div>

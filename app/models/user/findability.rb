@@ -37,33 +37,31 @@ class User < ApplicationRecord
 
       # needed to map incoming params to scopes
       def last_seen
-        recently_seen.limit(30)
+        recently_seen
       end
 
       def recently_joined
-        activated.limit(30)
+        activated
       end
 
       def new_artists
-        musicians.reorder('users.created_at DESC').limit(30)
+        musicians.reorder('users.created_at DESC')
       end
 
       def most_listened_to
-        result = Listen.since(1.month.ago).group(:track_owner).order('count_all DESC').limit(30).count
-        result.collect(&:first)
+        left_joins(:track_plays).group('users.id').order('COUNT(listens.id) DESC').where('listens.created_at > ?',1.month.ago)
       end
 
       def monster_uploaders
-        musicians.reorder('users.assets_count DESC').limit(30)
+        musicians.reorder('users.assets_count DESC')
       end
 
       def last_uploaded
-        includes(:assets).order('assets.created_at DESC').limit(30)
+        joins(:assets).order('assets.created_at DESC')
       end
 
       def dedicated_listeners
-        result = Listen.since(1.month.ago).where('listener_id is not null').group(:listener).order('count_all DESC').limit(30).count
-        result.collect(&:first)
+        left_joins(:listens).group('users.id').order('COUNT(listens.id) DESC').where('listens.created_at > ?',1.month.ago)
       end
     end
   end
