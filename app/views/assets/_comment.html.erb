@@ -1,6 +1,6 @@
  <div class="comment_asset" data-controller="comment">
   <div class="comment_form" data-comment-target="div">
-    <%= form_with scope: :comment, url: user_track_comments_path(asset.user, asset),
+    <%= form_with scope: :comment, url: user_track_comments_path(asset.user, asset), local: false,
     data: { action: 'ajax:beforeSend->comment#spin ajax:success->comment#success ajax:error->comment#error' } do |f| %>
 
     <div class="comment_as" data-comment-target="personalization">
@@ -24,7 +24,7 @@
     <div class="submit_wrapper submit_wrapper_comment">
         <div class="ajax_waiting" data-comment-target="response"></div>
         <div class="small_spinner" data-comment-target='spinner' style="display:none;"></div>
-        <%= f.submit "post comment".html_safe, class: 'comment_submit', id: nil%>
+        <%= f.submit "post comment".html_safe, class: 'comment_submit', id: " "%>
       </div>
     <% end %>
   </div>
