@@ -13,7 +13,6 @@ env:
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
 jobs:
-
   test:
     runs-on: ubuntu-20.04
 
@@ -64,5 +63,13 @@ jobs:
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
         bin/rails db:seed
 
-    - name: ${{ matrix.description }}
+    - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
+  # deploy:
+  #   runs-on: ubuntu-20.04
+  #   needs: test
+  #   if: github.ref == 'refs/heads/master'
+  #   steps
+  #     - uses: actions/checkout@v2
+  #     - name: Deploy
+
