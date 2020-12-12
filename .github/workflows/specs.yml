@@ -1,0 +1,75 @@
+name: Specs and Percy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  RAILS_ENV: test
+  # RUBYOPT: -w # get own and ship ruby deprecation notices
+  OAS_AGENT_KEY: ${{ secrets.OAS_AGENT_KEY }}
+  PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: false # let both suites run to completion
+      matrix:
+        include:
+          - name: Normal Specs
+            command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+          - name: Feature Specs & Percy
+            command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
+
+    steps:
+    - name: Installing apt dependencies
+      run: |
+        sudo apt-get install libsndfile-dev lame libvips libvips-dev # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
+        vips --version
+
+    - uses: actions/checkout@v2
+
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - uses: actions/cache@v2
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: |
+          ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          **/packs-test
+        key: ${{ runner.os }}-yarnwebpack-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarnwebpack-
+
+    - name: Set up Ruby and Bundle Install
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+
+    - name: Yarn install
+      run: yarn install
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+
+    - name: Copy config and setup db
+      run: |
+        sudo systemctl start mysql.service
+        bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
+        bin/rails db:seed
+
+    - name: ${{ matrix.name }}
+      run: ${{ matrix.command }}
+  # deploy:
+  #   runs-on: ubuntu-20.04
+  #   needs: test
+  #   if: github.ref == 'refs/heads/master'
+  #   steps
+  #     - uses: actions/checkout@v2
+  #     - name: Deploy
+

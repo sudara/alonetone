@@ -37,16 +37,22 @@
     clear: both;
     height: 9px;
     margin-bottom: 8px;
+    position: relative;
     .loaded {
+      position: absolute;
       overflow: hidden;
       height: 5px;
       padding-top: 2px;
       padding-bottom: 2px;
       background-color: $track-seekbar-loaded-background;
+      transition: width 0.25s linear;
     }
     .played {
+      position: absolute;
+      top: 2px;
       height: 5px;
       background-color: $accent;
+      transition: width 0.25s linear;
     }
     &:not(.show) {
       display: none;
@@ -129,7 +135,7 @@
             bottom: 20px;
             text-align: right;
           }
-          div.time {
+          time {
             font-variant-numeric: tabular-nums;
             font-size: 12px;
             position: absolute;
@@ -220,6 +226,7 @@
       display: flex;
       margin-right: 10px;
       margin-left: 10px;
+      margin-bottom: 9px;
       padding-top: 16px;
       padding-right: 16px;
       padding-bottom: 0;
@@ -293,6 +300,17 @@
             flex-grow: 1;
             font-weight: bold;
             text-decoration: underline;
+            span {
+              &.narrow-column-alt {
+                display: none;
+              }
+              @media only screen and (min-width: 748px) and (max-width: 860px) {
+                display: none;
+                &.narrow-column-alt {
+                  display: inline;
+                }
+              }
+            }
           }
           .plays {
             font-size: 12px;

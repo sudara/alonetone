@@ -49,7 +49,7 @@ module Storage
       if Rails.application.fastly_enabled?
         FastlyLocation.new(attachment).url
       else
-        attachment.processed.service_url
+        attachment.processed.url
       end
     end
 
@@ -60,7 +60,7 @@ module Storage
       elsif Rails.application.remote_storage?
         s3_url
       else
-        attachment.service_url
+        attachment.url
       end
     end
   end

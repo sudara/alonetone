@@ -154,7 +154,7 @@ RSpec.describe User, type: :model do
       it "returns a storage location to a variant" do
         location = user.avatar_image_location(variant: :large_avatar)
         expect(location).to be_kind_of(Storage::Location)
-        expect(location.attachment).to be_kind_of(ActiveStorage::Variant)
+        expect(location.attachment).to be_kind_of(ActiveStorage::VariantWithRecord)
         expect(location).to_not be_signed
       end
     end

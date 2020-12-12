@@ -42,7 +42,7 @@ class PlaylistsController < ApplicationController
         render('/shared/_asset', layout: false) if request.xhr?
       end
       format.mp3 do
-        listen(@asset, register: false)
+        listen(@asset, register: true)
       end
       format.xml
     end

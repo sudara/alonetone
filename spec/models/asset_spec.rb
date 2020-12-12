@@ -204,7 +204,7 @@ RSpec.describe Asset, type: :model do
       expect do
         user.assets.create!(
           title: 'Smallest',
-          audio_file: fixture_file_upload('files/smallest.mp3', 'audio/mpeg')
+          audio_file: fixture_file_upload('smallest.mp3', 'audio/mpeg')
         )
       end.to have_enqueued_job(WaveformExtractJob)
     end
@@ -212,7 +212,7 @@ RSpec.describe Asset, type: :model do
     it "does not create with an empty MP3" do
       asset = user.assets.create(
         title: 'Empty',
-        audio_file: fixture_file_upload('files/empty.mp3', 'audio/mpeg')
+        audio_file: fixture_file_upload('empty.mp3', 'audio/mpeg')
       )
       expect(asset.errors).to_not be_empty
     end
@@ -221,7 +221,7 @@ RSpec.describe Asset, type: :model do
       expect {
         user.assets.create(
           title: 'Smallest',
-          audio_file: fixture_file_upload('files/smallest.mp3', 'audio/mpeg')
+          audio_file: fixture_file_upload('smallest.mp3', 'audio/mpeg')
         )
       }.to change { user.reload.assets_count }.by(1)
     end

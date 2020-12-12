@@ -92,15 +92,19 @@ class Playlist < ActiveRecord::Base
 
   def check_visibility
     if publishing? && publishable?
-      publish!
+      publish
     elsif publishing? && !publishable?
       self.published = false
     end
   end
 
-  def publish!
+  def publish
     self.published_at = Time.zone.now
     self.published = true
+  end
+
+  def publish!
+    publish && save!
   end
 
   def has_any_links?

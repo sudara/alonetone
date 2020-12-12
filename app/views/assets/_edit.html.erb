@@ -44,10 +44,10 @@
         <% end %>
         <div class="submit_wrapper">
           <% if !@single_track_page %>
-            <div class="ajax_waiting" data-target="save.response">
+            <div class="ajax_waiting" data-save-target="response">
               <div class="text"><!-- placeholder response text --></div>
             </div>
-            <div class="small_spinner" data-target="save.spinner"> </div>
+            <div class="small_spinner" data-save-target="spinner"> </div>
           <% end %>
           <%= f.submit "Save" %>
         </div>

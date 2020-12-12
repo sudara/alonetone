@@ -39,4 +39,16 @@ RSpec.describe PreventAbuse do
     controller = base.new(request)
     expect(controller.browser?).to be_falsey
   end
+
+  it "sees Yandex as a bot" do
+    request = OpenStruct.new(ip: '127.0.0.1', user_agent: "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106")
+    controller = base.new(request)
+    expect(controller.is_a_bot?).to be_truthy
+  end
+
+  it "sees Baidu as a bot" do
+    request = OpenStruct.new(ip: '127.0.0.1', user_agent: "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)")
+    controller = base.new(request)
+    expect(controller.is_a_bot?).to be_truthy
+  end
 end

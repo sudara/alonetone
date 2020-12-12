@@ -9,8 +9,6 @@ Rails.application.reloader.reload! unless User.new.respond_to?(:password)
 # any API requests from the seeds.
 Rails.application.config.rakismet.test = true
 
-include ActionDispatch::TestProcess
-
 selected_password = ENV.fetch('PASSWORD', 'testing123')
 
 comments = [
@@ -29,7 +27,7 @@ def upload(path)
     __dir__
   )
   content_type = Marcel::MimeType.for(filename)
-  fixture_file_upload(filename, content_type)
+  Rack::Test::UploadedFile.new(filename, content_type)
 end
 
 def extract_metadata(attributes)
@@ -39,6 +37,7 @@ end
 
 muppet_upload = upload('muppets.mp3')
 piano_upload = upload('piano.mp3')
+andy_upload = upload('titleless.mp3')
 
 sudara_avatar_upload = upload('jeffdoessudara.jpg')
 marie_avatar_upload = upload('marie.jpg')
@@ -109,7 +108,7 @@ marie.profile.update(
 )
 
 commonly_blue_green = marie.assets.create!(extract_metadata(
-  audio_file: muppet_upload,
+  audio_file: piano_upload,
   title: 'Commonly Blue-grey',
   description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.'
 ))
@@ -134,7 +133,7 @@ playlist.tracks.create!(user: marie, asset: aqueous_suspension)
 playlist.publish!
 
 baguette_laonnaise = marie.assets.create!(extract_metadata(
-  audio_file: piano_upload,
+  audio_file: andy_upload,
   title: 'Baguette Laonnaise',
   description: 'The cheese is typically loaf-shaped and has a supple interior as well as a sticky orange-brown rind.'
 ))

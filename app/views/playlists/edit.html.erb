@@ -10,15 +10,15 @@
       <div class="left_column_box_header">
         <h2><%= @playlist.title %></h2>
         <div>
-           <span class="playlist_track_size" data-target="playlist-sort.trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
-           <span class="playlist_total_time" data-target="playlist-sort.totalTime"><%= @playlist.play_time %></span>
+           <span class="playlist_track_size" data-playlist-sort-target="trackCount"><%= pluralize @playlist.tracks_count, 'track' %></span> <span class="playlist_dash">&mdash;</span>
+           <span class="playlist_total_time" data-playlist-sort-target="totalTime"><%= @playlist.play_time %></span>
         </div>
       </div>
-      <div class="sortable" data-target="playlist-sort.sortable">
+      <div class="sortable" data-playlist-sort-target="sortable">
         <% @playlist.tracks.each do |track| %>
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
           <%= render partial: 'assets/asset', locals: { asset: track.asset } %>
-          <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+          <a href="#" class='remove' data-playlist-update-target="remove" data-action="playlist-update#remove">
             <div class="remove-inner">
                 <%== render file: svg_path('svg/icon_x.svg') %>
             </div>
@@ -27,9 +27,9 @@
         <% end %>
       </div>
       <div class="playlist_size">
-        <%= "<span data-target='playlist-sort.size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.user.name}".html_safe %>
+        <%= "<span data-playlist-sort-target='size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.user.name}".html_safe %>
       </div>
-    <div class="small_spinner" data-target="playlist-sort.spinner"></div>
+    <div class="small_spinner" data-playlist-sort-target="spinner"></div>
     </div>
   </div>
 
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div id="playlist_tabs">
-          <ul id="playlist_source_options" class="tabs" data-target="playlist-sort.tabs">
+          <ul id="playlist_source_options" class="tabs" data-playlist-sort-target="tabs">
             <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
           </ul>
         </div>
@@ -56,12 +56,12 @@
           <% @assets.each do |asset| %>
             <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
               <%= render partial: 'assets/asset', locals: { asset: asset } %>
-              <a href="#" class='add' data-target="playlist-update.add" data-action="playlist-update#add">
+              <a href="#" class='add' data-playlist-update-target="add" data-action="playlist-update#add">
                 <div class="add-inner">
                   <%== render file: svg_path('svg/icon_+.svg') %>
                 </div>
               </a>
-              <a href="#" class='remove' data-target="playlist-update.remove" data-action="playlist-update#remove">
+              <a href="#" class='remove' data-playlist-update-target="remove" data-action="playlist-update#remove">
                 <div class="remove-inner">
                     <%== render file: svg_path('svg/icon_x.svg') %>
                 </div>
@@ -72,9 +72,9 @@
     </div>
   </div>
   <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-sort.addUrl' }, class: 'hidden add_url' %>
+    data: { 'playlist-sort-target': 'addUrl' }, class: 'hidden add_url' %>
   <%= link_to 'remove_track_url', remove_track_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-sort.removeUrl' }, class: 'hidden remove_url' %>
+    data: { 'playlist-sort-target': 'removeUrl' }, class: 'hidden remove_url' %>
   <%= link_to "sort tracks url", sort_tracks_user_playlist_path(@user, @playlist.permalink),
-    data: { target:'playlist-sort.sortUrl' }, class: 'hidden sort_url' %>
+    data: { 'playlist-sort-target': 'sortUrl' }, class: 'hidden sort_url' %>
 </div>

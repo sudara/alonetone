@@ -4,11 +4,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails'
+gem 'rails', '6.1.0'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded'
+gem 'thredded', github: 'sudara/thredded'
 
 # ruby
 gem 'sometimes'
@@ -27,7 +27,7 @@ gem 's3_direct_upload'
 
 # active record
 gem 'acts_as_list'
-gem 'authlogic'
+gem 'authlogic', github: 'sudara/authlogic', branch: 'rails6-1'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 
@@ -51,8 +51,9 @@ gem 'turbolinks'
 
 # monitoring & perf
 gem 'bugsnag'
+gem 'oas_agent', github: 'wjessop/oas_agent'
 gem 'newrelic_rpm'
-gem 'skylight'
+gem 'skylight', '~>5.0.0.beta'
 gem 'sidekiq'
 gem 'dalli'
 
@@ -72,8 +73,12 @@ group :test do
   gem 'percy-capybara'
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
-  gem 'rspec-mocks', require: false
-  gem 'rspec-rails', require: false
+  gem 'rspec', require: false, github: 'rspec/rspec', branch: 'main'
+  gem 'rspec-core', require: false, github: 'rspec/rspec-core',  branch: 'main'
+  gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations', branch: 'main'
+  gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks', branch: 'main'
+  gem 'rspec-support', require: false, github: 'rspec/rspec-support', branch: 'main'
+  gem 'rspec-rails', require: false, github: 'rspec/rspec-rails', branch: 'rails-6.1.0.rc2-dev'
   gem 'selenium-webdriver'
   gem 'webmock', require: false
 end

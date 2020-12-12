@@ -43,12 +43,12 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 
 ### Current stack
 
-* Rails 6.0.3
+* Rails 6.1
+* [Stitches](http://github.com/sudara/stitches) for audio playback
 * Sidekiq for jobs
 * Active Storage & s3
-* Fastly for CDN and image thumbnailing
-* [Stimulus js](http://stimulusjs.org)
-* [Howler js](http://howlerjs.com) for Audio playback
+* Fastly for CDN image delivery and thumbnailing
+* [Stimulus js](http://stimulusjs.org) 2.0
 
 ### Current feature set
 
@@ -59,15 +59,6 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 * Track browsing
 * Tracking of listens
 * One-way commenting system (No inline replies. No threaded comments. No DMs.)
-
-## Nomenclature and Historical Baggage That Can And Should Change
-
-* The `Asset` model refers to an mp3
-* `Track` is an entry in a `Playlist`
-* Playlists are either albums or mixes, depending on what's inside them
-* A user has one favorites playlist, which gets added to when you "heart" things
-* The home page is `assets#latest`
-* Too many views are in `shared/`
 
 ## Want to deploy alonetone on your own server?
 
@@ -89,61 +80,7 @@ Sweet, now we are talkin'!
 
 First, [sign up for an account](https://alonetone.com) and start digging in.
 
-Second, hop into our [Slack chat room](https://join.slack.com/t/alonetone/shared_invite/enQtNDE4ODIzMzExNjIyLWFmOWZiZGZlMWRiODZjN2FjNWVlM2E3YWY0ODM0ODlhNjUzMzA3ODFjYzI0NDNmNWIxOWM4MDIxZWFmNWZhNTI) or email us at support@alonetone.com
-
-Thirdly, fork away on Github.
-
-### Setup alonetone locally on macOS
-
-- Clone this repo
-`git clone REPO_GIT`
-
-- `brew install libsndfile lame` (required for id3 tags and waveforms)
-- `brew install vips` (required for processing images)
-- `brew install yarn` (required for building assets)
-- Install gems
-`bundle install`
-- Install front-end dependencies
-`yarn install --check-files`
-
-- To create needed config, database, and load db/seeds*:
-`rake setup`
-- Create and seed database
-`rake db:setup`
-- `rails s`
-
-*Note: alonetone uses 3 config files that are created by 'rake setup
-
-> alonetone.yml (contains the application "secret" and app-specific settings)
->
-> database.yml
->
-> newrelic.yml (for performance tracking)
-
-#### Issues and workaround:
-
-- No sound on development? Set `play_dummy_audio: true` in alonetone.yml
-- Seeing the following yarn error?
-```
-  Your Yarn packages are out of date!
-  Please run `yarn install` to update.
-```
-
-Make sure you have the latest version of `npm` and `node`.
-```
-brew install yarn
-yarn install
-```
-
-#### Optional installs
-
-The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascripts/animation/` to use the plugin.
-
-#### Logging in
-
-After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
-
-After login, click on the "Upload" button to upload your first mp3.
+Second, check out [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 

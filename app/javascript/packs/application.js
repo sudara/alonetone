@@ -10,13 +10,18 @@ import LocalTime from 'local-time'
 import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import { Application } from 'stimulus'
+import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
+import Playlist from '@alonetone/stitches'
 import { makeSVGFromTitle } from '../animation/default_playlist_images'
-import { } from '../misc/bugsnag.js.erb'
+import '../misc/bugsnag.js.erb'
 /* eslint-disable-next-line import/extensions */
 require('trix/dist/trix.js')
 require('@rails/actiontext')
+
+// uncomment for local stitches dev:
+// import Playlist from '../../../../stitches/src/playlist'
 
 Rails.start()
 Turbolinks.start()
@@ -29,7 +34,26 @@ const application = Application.start()
 const context = require.context('../controllers', true, /\.js$/)
 application.load(definitionsFromContext(context))
 
+const playlist = new Playlist()
+
 function handlers() {
+  playlist.setup({
+    preloadIndex: -1,
+    tracksSelector: '.stitches_track',
+    timeSelector: '.stitches_time',
+    playButtonSelector: '.stitches_play',
+    loadingProgressSelector: '.stitches_seek .loaded',
+    playProgressSelector: '.stitches_seek .played',
+    seekSelector: '.stitches_seek',
+    enableConsoleLogging: true,
+    whilePlaying: (data) => {
+    },
+    onError: (data) => {
+      Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)
+    },
+  })
+
+
   document.querySelectorAll('.large_cover .no_pic, .small_cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
     if (!pic.hasChildNodes()) {
@@ -54,6 +78,9 @@ function handlers() {
 }
 document.addEventListener('turbolinks:load', handlers)
 
+// Expose on the console as Alonetone.gsap, etc
 export {
   gsap,
+  playlist,
+  application,
 }

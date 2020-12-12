@@ -1,12 +1,14 @@
 <div class="playlist_sidebar">
 
-  <%= link_to playlist_cover(@playlist, variant: :playlist_card), user_playlist_path(@playlist.user, @playlist), class: 'small_cover', style: ('display:none;' unless @asset) %>
+  <%= link_to playlist_cover(@playlist, variant: :playlist_card),
+    user_playlist_path(@playlist.user, @playlist), class: 'small_cover', style: ('display:none;' unless @asset) %>
   <h1 class="<%= 'cover' unless @asset %>">
     <%= @playlist.title %>
   </h1>
   <h2>
     <span class="by">by</span> <%= link_to @user.name, user_home_path(@user) %>   <% if authorized? %>
-    <span class="parentheses">(</span> <%= link_to edit_user_playlist_path(@playlist.user, @playlist), class: 'edit_playlist', :title => 'edit this playlist' do %>
+    <span class="parentheses">(</span> <%= link_to edit_user_playlist_path(@playlist.user, @playlist),
+      class: 'edit_playlist', :title => 'edit this playlist' do %>
       edit
     <% end %> <span class="parentheses">)</span>
   <% end %>
@@ -15,19 +17,27 @@
   <ul class="tracklist">
   <% @playlist.tracks.each do |track| %>
     <li data-controller="playlist-playback"
-      data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack"
+      data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack
+      track:play->playlist-playback#play
+      track:pause->playlist-playback#pause
+      track:playing->playlist-playback#playing
+      track:ended->playlist-playback#stop
+      track:whileLoading->playlist-playback#whileLoading
+      track:whilePlaying->playlist-playback#whilePlaying
+      track:registerListen->playlist-playback#registerListen
+      track:seeked->playlist-playback#seeked"
       data-playlist-playback-id="<%= track.asset.id %>"
-      class="<%= ' active' if first_active_track?(track, @asset) %>">
+      class="stitches_track <%= ' active' if first_active_track?(track, @asset) %>">
 
     <!-- Play button automagically plays AND changes to relevant track details  -->
-    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-      class: 'play_button', data: { target: "playlist-playback.play", action: "click->playlist-playback#togglePlay" }  do %>
+    <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset, format: :mp3),
+      class: 'play_button stitches_play', data: { "playlist-playback-target": "play" } do %>
       <i class="icon_play"></i>
     <% end %>
 
     <!-- Track title just switches track details-->
     <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-      remote: true, class: 'position_name_time', data: { target: "playlist-playback.loadTrack" } do %>
+      remote: true, class: 'position_name_time', data: { 'playlist-playback-target': "loadTrack" } do %>
       <span class="track_position">
         <%= "%02d" % track.position %>.
       </span>

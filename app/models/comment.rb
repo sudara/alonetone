@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   include SoftDeletion
 
-  scope :recent,             -> { order('id DESC') }
+  scope :recent,             -> { order('comments.id DESC') }
   scope :only_public,        -> { recent.where(is_spam: false).where(private: false) }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
   scope :include_private,    -> { recent.where(is_spam: false) }

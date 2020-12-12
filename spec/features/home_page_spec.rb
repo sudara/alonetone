@@ -17,9 +17,15 @@ RSpec.describe 'home page', type: :feature, js: true do
     track_chunk.find('.private_check_box label').click
     expect(page).to have_selector('span.only_user_name')
 
-    # checkbox is offscreen, but we still want to confirm it's checked
+    track_chunk.find('textarea').set("Hey this is a comment from a guest")
+
+    # private checkbox is technically offscreen, but we still want to confirm it's checked
     expect(track_chunk.find('.private_check_box .private', visible: false)).to be_checked
     Percy.snapshot(page, name: 'Home as Guest')
+
+    akismet_stub_response_ham
+    track_chunk.find('input[type=submit]').click()
+    expect(track_chunk.find('.ajax_waiting')).to have_text('Submitted, thanks!')
   end
 
   it 'renders logged in' do
@@ -32,8 +38,13 @@ RSpec.describe 'home page', type: :feature, js: true do
 
       track = find(".asset", match: :first)
       track.find(".play_link").click
+      expect(track).to have_selector('.add_to_favorites')
+      expect(track).to have_selector('.stitches_seek')
 
-      track.find(".seekbar").click # click in the middle of the seekbar
+      # This currently fails, because playback actually fails
+      # TODO: look into the fixtures and confirm playback on this particular track is happy
+      # expect(track).to have_selector('.stitches_seek .loaded')
+      track.find(".stitches_seek").click # click in the middle of the seekbar
       track.find(".play_link").click # pause the track
       expect(track).to have_selector('.add_to_favorites')
       Percy.snapshot(page, name: 'Home as User')

@@ -225,7 +225,7 @@ RSpec.describe Playlist, type: :model do
         location = playlist.cover_image_location(variant: :large_avatar)
         expect(location).to_not be_signed
         expect(location).to be_kind_of(Storage::Location)
-        expect(location.attachment).to be_kind_of(ActiveStorage::Variant)
+        expect(location.attachment).to be_kind_of(ActiveStorage::VariantWithRecord)
       end
     end
 

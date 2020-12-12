@@ -93,13 +93,13 @@ RSpec.describe AssetsController, type: :controller do
       login(:sudara)
       post :create, params: {
         user_id: users(:sudara).login,
-        asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')]
+        asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')]
       }
       expect(users(:sudara).assets.first.mp3_file_name).to eq('muppets.mp3')
       put :update, params: {
         id: users(:sudara).assets.first,
         user_id: users(:sudara).login,
-        asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') }
+        asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') }
       }
       expect(users(:sudara).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
     end
@@ -113,26 +113,26 @@ RSpec.describe AssetsController, type: :controller do
       end
 
       let(:asset) { users(:jamie_kiesl).assets.last }
-      subject {  put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } } }
+      subject {  put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } } }
 
       it 'should allow user to upload new version of song' do
-        post :create, params: { user_id: users(:jamie_kiesl).login, asset_data: [fixture_file_upload('files/muppets.mp3', 'audio/mpeg')] }
+        post :create, params: { user_id: users(:jamie_kiesl).login, asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')] }
         expect(users(:jamie_kiesl).assets.first.mp3_file_name).to eq('muppets.mp3')
-        put :update, params: { id: users(:jamie_kiesl).assets.first, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        put :update, params: { id: users(:jamie_kiesl).assets.first, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } }
         expect(users(:jamie_kiesl).assets.reload.first.mp3_file_name).to eq('tag1.mp3')
       end
 
       it 'should not change the number of listens' do
         asset = users(:jamie_kiesl).assets.last
         expect(asset.listens_count).to be > 0
-        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } }
         expect(asset.reload.listens_count).to be > 0
       end
     end
 
     context "redirect" do
       let(:asset) { users(:jamie_kiesl).assets.last }
-      subject { put :update, params: { id: asset.id, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } } }
+      subject { put :update, params: { id: asset.id, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } } }
 
       it 'should redirect back to asset page' do
         akismet_stub_response_ham
@@ -148,7 +148,7 @@ RSpec.describe AssetsController, type: :controller do
         allow_any_instance_of(Asset).to receive(:update).and_return(false)
         akismet_stub_response_ham
         login(:jamie_kiesl)
-        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { foo: 'bar', audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { foo: 'bar', audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } }
         expect(response.body).to match(/There was an issue with updating that track/)
       end
     end
@@ -162,12 +162,12 @@ RSpec.describe AssetsController, type: :controller do
       let(:asset) { users(:jamie_kiesl).assets.last }
 
       it "should still allow user to upload new track" do
-        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } }
         expect(asset.reload.mp3_file_name).to eq('tag1.mp3')
       end
 
       xit "should mark asset as spam" do
-        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('files/tag1.mp3', 'audio/mpeg') } }
+        put :update, params: { id: asset, user_id: users(:jamie_kiesl).login, asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') } }
         expect(asset.reload.is_spam).to eq(true)
       end
     end

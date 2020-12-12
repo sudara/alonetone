@@ -67,6 +67,7 @@ Rails.application.configure do
 
   # Do not raise email delivery errors
   # This needs to be false unless we decide to custom handle Postmark errors
+  config.action_mailer.default_url_options[:protocol] = 'https'
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :postmark

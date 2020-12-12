@@ -1,4 +1,20 @@
-<div class="track_content" data-controller="big-play <%= "single-playback" unless @playlist %> " data-big-play-waveform="<%= @asset.audio_feature&.waveform&.join(', ') %>">
+
+<% if @playlist %>
+<div class="track_content" data-controller="big-play">
+<% else %>
+<div class="track_content stitches_track"
+  data-controller="big-play single-playback"
+  data-action="track:playing->single-playback#playing
+    track:play->single-playback#play
+    track:pause->single-playback#pause
+    track:ended->single-playback#stop
+    track:whileLoading->single-playback#whileLoading
+    track:whilePlaying->single-playback#whilePlaying
+    track:registerListen->single-playback#registerListen
+    track:seeked->big-play#seeked"
+  data-single-playback-id="<%= @asset.id %>">
+<% end %>
+
   <%= link_to user_track_path(@user, @asset), class: 'back_to_track_link' do %>
     <div class="caret">
       <i class="icon_caret">

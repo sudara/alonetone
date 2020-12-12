@@ -43,7 +43,7 @@ test:
   hostname: alonetone.example.com
   email: support@example.com
   # Temporary storage writes to temp files on disk.
-  storage_service: temporary
+  storage_service: filesystem
   # Amazon S3 configuration. We have to set these because ActiveStorage service
   # configuration is read when starting the suite and switching to S3 during
   # the suite would be impossible without this.

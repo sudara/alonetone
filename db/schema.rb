@@ -2,17 +2,17 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_120933) do
+ActiveRecord::Schema.define(version: 2020_09_20_172437) do
 
-  create_table "account_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
     t.integer "entity_type"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_account_requests_on_user_id"
   end
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -43,10 +43,17 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name", default: "filesystem", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "assets", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "mp3_content_type"
     t.string "mp3_file_name"
     t.integer "mp3_file_size"
@@ -83,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
-  create_table "audio_features", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "audio_features", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "asset_id"
     t.text "waveform", size: :long
     t.datetime "created_at", null: false
@@ -91,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["asset_id"], name: "index_audio_features_on_asset_id"
   end
 
-  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "commentable_type"
     t.integer "commentable_id"
     t.text "body", size: :medium
@@ -112,7 +119,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private"
   end
 
-  create_table "featured_tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "featured_tracks", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "position", default: 1
     t.integer "feature_id"
     t.integer "asset_id"
@@ -120,7 +127,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.datetime "updated_at"
   end
 
-  create_table "features", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "features", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "featured_user_id"
     t.integer "writer_id"
     t.integer "views_count", default: 0
@@ -134,7 +141,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.datetime "updated_at"
   end
 
-  create_table "followings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "followings", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "follower_id"
     t.datetime "created_at"
@@ -143,7 +150,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_followings_on_user_id"
   end
 
-  create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "friendly_id_slugs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "slug", limit: 191, null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -155,7 +162,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "groups", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.text "description", size: :medium
     t.datetime "created_at"
@@ -163,7 +170,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.string "permalink"
   end
 
-  create_table "listens", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "listens", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "asset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -182,7 +189,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "memberships", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "memberships", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "group_id"
     t.integer "user_id"
     t.boolean "admin"
@@ -190,7 +197,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.datetime "updated_at"
   end
 
-  create_table "playlists", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "playlists", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.string "image"
     t.integer "user_id"
@@ -217,7 +224,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
-  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.text "bio", size: :medium
     t.string "city"
@@ -234,7 +241,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "settings", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "display_listen_count", default: true
     t.boolean "block_guest_comments", default: false
@@ -247,7 +254,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
-  create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_categories", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "messageboard_id", null: false
     t.text "name", size: :medium, null: false
     t.text "description", size: :medium
@@ -259,14 +266,14 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["name"], name: "thredded_categories_name_ci", length: 191
   end
 
-  create_table "thredded_messageboard_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_messageboard_groups", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "thredded_messageboard_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_messageboard_notifications_for_followed_topics", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "messageboard_id", null: false
     t.string "notifier_key", limit: 90, null: false
@@ -274,7 +281,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id", "messageboard_id", "notifier_key"], name: "thredded_messageboard_notifications_for_followed_topics_unique", unique: true
   end
 
-  create_table "thredded_messageboard_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_messageboard_users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "thredded_user_detail_id", null: false
     t.bigint "thredded_messageboard_id", null: false
     t.datetime "last_seen_at", null: false
@@ -284,7 +291,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["thredded_user_detail_id"], name: "index_thredded_messageboard_users_on_thredded_user_detail_id"
   end
 
-  create_table "thredded_messageboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_messageboards", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "name", size: :medium, null: false
     t.text "slug", size: :medium
     t.text "description", size: :medium
@@ -301,21 +308,21 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["slug"], name: "index_thredded_messageboards_on_slug", unique: true, length: 191
   end
 
-  create_table "thredded_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_notifications_for_followed_topics", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "notifier_key", limit: 90, null: false
     t.boolean "enabled", default: true, null: false
     t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_followed_topics_unique", unique: true
   end
 
-  create_table "thredded_notifications_for_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_notifications_for_private_topics", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "notifier_key", limit: 90, null: false
     t.boolean "enabled", default: true, null: false
     t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_private_topics_unique", unique: true
   end
 
-  create_table "thredded_post_moderation_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_post_moderation_records", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "post_id"
     t.bigint "messageboard_id"
     t.text "post_content", size: :medium
@@ -332,7 +339,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["post_user_id"], name: "index_thredded_post_moderation_records_on_post_user_id"
   end
 
-  create_table "thredded_post_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_post_notifications", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", limit: 191, null: false
     t.bigint "post_id", null: false
     t.datetime "created_at", null: false
@@ -342,7 +349,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["post_id"], name: "index_thredded_post_notifications_on_post_id"
   end
 
-  create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_posts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.text "content", size: :medium
     t.string "source", limit: 191, default: "web"
@@ -359,7 +366,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_posts_on_user_id"
   end
 
-  create_table "thredded_private_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_private_posts", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.text "content", size: :medium
     t.bigint "postable_id", null: false
@@ -370,7 +377,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_private_posts_on_user_id"
   end
 
-  create_table "thredded_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_private_topics", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
     t.text "title", size: :medium, null: false
@@ -387,7 +394,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_private_topics_on_user_id"
   end
 
-  create_table "thredded_private_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_private_users", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "private_topic_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -396,14 +403,14 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_private_users_on_user_id"
   end
 
-  create_table "thredded_topic_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_topic_categories", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "topic_id", null: false
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_thredded_topic_categories_on_category_id"
     t.index ["topic_id"], name: "index_thredded_topic_categories_on_topic_id"
   end
 
-  create_table "thredded_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_topics", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
     t.text "title", size: :medium, null: false
@@ -428,7 +435,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_topics_on_user_id"
   end
 
-  create_table "thredded_user_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_details", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "latest_activity_at"
     t.integer "posts_count", default: 0
@@ -443,7 +450,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_user_details_on_user_id"
   end
 
-  create_table "thredded_user_messageboard_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_messageboard_preferences", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "messageboard_id", null: false
     t.boolean "follow_topics_on_mention", default: true, null: false
@@ -455,7 +462,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_user_messageboard_preferences_on_user_id"
   end
 
-  create_table "thredded_user_post_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_post_notifications", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "notified_at", null: false
@@ -463,7 +470,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id", "post_id"], name: "index_thredded_user_post_notifications_on_user_id_and_post_id", unique: true
   end
 
-  create_table "thredded_user_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_preferences", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.boolean "follow_topics_on_mention", default: true, null: false
     t.boolean "auto_follow_topics", default: false, null: false
@@ -472,7 +479,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_user_preferences_on_user_id"
   end
 
-  create_table "thredded_user_private_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_private_topic_read_states", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -482,7 +489,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_user_private_topic_read_states_on_user_id"
   end
 
-  create_table "thredded_user_topic_follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_topic_follows", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "topic_id", null: false
     t.datetime "created_at", null: false
@@ -491,7 +498,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_user_topic_follows_on_user_id"
   end
 
-  create_table "thredded_user_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "thredded_user_topic_read_states", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "postable_id", null: false
     t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -504,7 +511,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_thredded_user_topic_read_states_on_user_id"
   end
 
-  create_table "tracks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "tracks", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "playlist_id"
     t.integer "asset_id"
     t.integer "position", default: 1
@@ -519,7 +526,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
-  create_table "updates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "updates", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title"
     t.text "content", size: :medium
     t.datetime "created_at"
@@ -529,7 +536,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.string "permalink"
   end
 
-  create_table "user_reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "user_reports", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "user_id"
     t.string "category"
     t.text "description", size: :medium
@@ -543,7 +550,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
     t.text "description_html", size: :medium
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "login", limit: 40
     t.string "email", limit: 100
     t.string "salt", limit: 128, default: "", null: false
@@ -577,6 +584,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_120933) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "thredded_messageboard_users", "thredded_messageboards"
   add_foreign_key "thredded_messageboard_users", "thredded_user_details"

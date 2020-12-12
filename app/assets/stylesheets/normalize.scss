@@ -444,3 +444,8 @@ template {
 [hidden] {
   display: none;
 }
+
+// custom additions
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}

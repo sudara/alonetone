@@ -73,7 +73,7 @@ In addition to completely new css, a new theme and the new UI, almost everything
 | Storage           | Paperclip        | [ActiveStorage](#572) in Sept 2019|
 | Image Thumbnailing | ImageMagick     | [Fastly](#572) in Sept 2019 (vips locally) |
 | Image CDN         | Cloudfront       | [Fastly](#572) in Sept 2019 |
-| Audio Playback    | Soundmanager     | [Howler](1b70d22af282ef8cee80aeff35a6b044e5004cc9) in 2018, [Stitches](http://github.com/sudara/stitches) in TBD 2020 |
+| Audio Playback    | Soundmanager     | [Howler](1b70d22af282ef8cee80aeff35a6b044e5004cc9) in 2018, [Stitches](http://github.com/sudara/stitches) in 2020 |
 
 
 ## Challenges

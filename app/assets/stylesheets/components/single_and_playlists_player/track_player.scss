@@ -13,11 +13,17 @@
     border-bottom-left-radius: 6px;
     .play_button, .pause_button {
       position: relative;
-      top: 11px;
-      left: 9px;
       width: 80px;
       height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
+      a {
+        display: block;
+        width: 60px;
+        height: 60px;
+      }
       .largePlaySVG {
         path.icon.new {
           fill: $track-player-play-button-triangle-fill;

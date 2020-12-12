@@ -1,3 +1,10 @@
+/*
+1. Create a unqiue color variable for each selector
+2. Give it a descriptive name. Suffix with text, background, border, etc.
+3. Always add the variable to both dark.scss and white.scss
+4. Place the variable in the right filename group
+*/
+
 @import 'color_mapping';
 
 // sitewide
@@ -150,8 +157,11 @@ $edit-playlist-left-column-time-text: $orangetone;
 
 $edit-playlist-draggable-mirror-border: $black;
 
+$edit-playlist-drag-handle-idle-background: image-url("svg/icon_drag_handle_idle.svg");
+$edit-playlist-drag-handle-active-background: image-url("svg/icon_drag_handle_active.svg");
+
 $edit-playlist-drag-handle-border: $grey50;
-$edit-playlist-drag-handle-border-hover: $grey800;
+$edit-playlist-drag-handle-border-hover: $grey100;
 $edit-playlist-drag-handle-border-active: $accent;
 
 $edit-playlist-playlist-size-background: $grey50;

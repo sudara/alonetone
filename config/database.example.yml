@@ -5,12 +5,14 @@ development:
   pool: 5
   host: localhost
   variables:
-    sql_mode: TRADITIONAL
+    sql_mode: traditional
 test:
   adapter: mysql2
   encoding: utf8mb4
   database: alonetone_test
   pool: 5
   host: localhost
+  user: root
+  password: root # github actions superuser password
   variables:
-    sql_mode: TRADITIONAL
+    sql_mode: traditional

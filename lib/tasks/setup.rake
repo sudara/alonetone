@@ -1,5 +1,3 @@
-require 'rake'
-
 desc "Setup Alonetone: copy configuration examples, create JS stubs, and setup database."
 task setup: %w[setup:copy_config setup:touch_js db:setup]
 
@@ -21,7 +19,7 @@ namespace :setup do
   end
 
   desc "Touch JavaScript stubs to make Webpacker run without errors"
-  task touch_js: :environment do
+  task :touch_js do
     FileUtils.touch(Rails.root.join("app", "javascript", "animation", "MorphSVGPlugin.js"))
   end
 end
