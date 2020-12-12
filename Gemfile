@@ -60,7 +60,9 @@ gem 'dalli'
 group :development do
   gem 'perf_check'
   gem 'annotate'
-  gem 'rubocop', '0.87.0', require: false # synced to .codeclimate.yml
+  # Available "channels" of rubocop for code climate:
+  # https://github.com/codeclimate/codeclimate-rubocop/branches/all?utf8=✓&query=channel%2Frubocop
+  gem 'rubocop', '1.4.1', require: false # synced to .codeclimate.yml
 end
 
 ## Who loves tests! You do? You do!
