@@ -103,16 +103,13 @@
   </div>
 <script>
 
-  var viewportResized = function () {
-
-    var viewportWidth = window.innerWidth
-    var viewportHeight = window.innerHeight
+  const viewportResized = function () {
     
-    var image_container = document.getElementById("image_container")
-    var image = document.getElementById("image")
-    var message = document.getElementById("message")
+    let image_container = document.getElementById("image_container")
+    let image = document.getElementById("image")
+    let message = document.getElementById("message")
 
-    if ( ( viewportHeight / viewportWidth ) > 1.2)  {
+    if ( ( window.innerHeight / window.innerWidth ) > 1.2)  {
       image_container.classList.add('narrow')
       image.classList.add('narrow')
       message.classList.add('narrow')
