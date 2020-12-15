@@ -56,18 +56,22 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #353535;
     }
 
     div#message.narrow {
-      height: auto;
+      height: 100%;
       padding-top: 30px;
       padding-bottom: 30px;
+      justify-content: flex-start;;
     }
 
     h1, h2 {
       text-align:center;
       font-family: "Alright-v2-Normal";
-      padding: 0 6%;
+      padding: 0 3%;
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -77,7 +81,7 @@
     }
 
     h2 {
-      font-size: 22px;
+      font-size: 21px;
       margin-top: 4px;
       color: #949797;
     }
@@ -118,6 +122,13 @@
       image.classList.remove('narrow')
       message.classList.remove('narrow')
     }
+
+    console.log ( image_container.clientHeight );
+
+    message.setAttribute("style","width:" + image_container.clientHeight * (1917/1624) + "px");
+
+    
+
   }
 
   viewportResized()
