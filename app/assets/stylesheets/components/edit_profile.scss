@@ -489,13 +489,12 @@
         padding-left: 8px;
         padding-top: 9px;
         width: 100%;
-        max-width: 300px;
+        max-width: 230px;
         margin-bottom: 0;
       }
       input[type="submit"] {
         @include default_button("primary");
-        // background-color: $grey400;
-        margin-left: 20px;
+        margin-left: 20px¡;
         margin-bottom: 12px;
       }
     }
@@ -578,81 +577,6 @@
       }
       .ok_column {
         color: $grey800;
-      }
-    }
-  }
-}
-
-// LEGACY BELOW
-
-form#reset-password {
-  input[type="text"] {
-    border-radius: 4px;
-    background-color: #666;
-    margin-right: 10px;
-    &:focus {
-      border: 1px solid #999;
-    }
-  }
-}
-
-.settings-box {
-  h2 {
-    margin-bottom: $baseline;
-  }
-  .static_content {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    &:last-child {
-      padding-top: $baseline !important;
-    }
-  }
-  select {
-    margin-top: 6px;
-    max-width: 100%;
-  }
-}
-
-.edit-your-profile-box {
-  .static_content {
-    &:last-child {
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-    }
-    input[type="text"] {
-      width: 190px;
-    }
-    select {
-      max-width: 100%;
-    }
-  }
-}
-
-.change-your-picture-box {
-  br {
-    display: none;
-  }
-  form {
-    margin-top: $baseline;
-    input:last-child {
-      display: block;
-      margin-top: $baseline;
-    }
-  }
-  img {
-    width: 100%;
-  }
-}
-
-.your-account-box {
-  .static_content:last-child {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    .static_content {
-      padding: 0 !important;
-      padding-bottom: $baseline !important;
-      input:last-child {
-        margin-top: $baseline !important;
       }
     }
   }

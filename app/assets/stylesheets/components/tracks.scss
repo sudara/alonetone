@@ -310,6 +310,12 @@
                   display: inline;
                 }
               }
+              @media only screen and (max-width: 435px) {
+                display: none;
+                &.narrow-column-alt {
+                  display: inline;
+                }
+              }
             }
           }
           .plays {

@@ -51,7 +51,7 @@ It differs artist to artist. Personally, I want to present my Releases (with a c
 
 One thing feels clear: Releases should stand on their own and be free from too much clutter, especially to guest listeners. There should be a way to get back to more from the same artist, but that's about it.
 
-Meanwhile, I also want to upload stuff I'm working tonight, so my friends can hear it tonight. And I want to keep up with what my friends on Alonetone are posting. So, when I'm logged in, there's a richer social context and more ability to explore from artist to artist.
+Meanwhile, I also want to upload stuff I'm working on tonight, so my friends can hear it tonight. And I want to keep up with what my friends on Alonetone are posting. So, when I'm logged in, there's a richer social context and more ability to explore from artist to artist.
 
 
 

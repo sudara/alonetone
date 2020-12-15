@@ -1,6 +1,6 @@
 <div class="edit_profile">
   <% if @user.errors.any? %>
-    <%= render partial: 'shared/back_to_button', locals: { url: edit_user_path(@user), label: "Editing Your Profile" } %>
+    <%= render partial: 'shared/back_to_button', locals: { url: edit_user_path(@user), label: "Edit Profile" } %>
   <% end %>
 
   <% if @user.errors.empty? || @user.errors.key?(:avatar_image) # the main form only validates the image %>
