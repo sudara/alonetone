@@ -38,14 +38,12 @@ form {
       margin-bottom: 12px;
     }
   }
-
   .inline_form_error {
     color: $inline-form-error-text;
     position: relative;
     top: -14px;
     line-height: 1.2;
   }
-
   input[type="search"],
   input[type="text"],
   input[type="password"],
@@ -151,44 +149,16 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   }
 }
 
+/*PLACEHOLDER TEXT COLOR */
 
-
-/* PLACEHOLDER TEXT COLOR */
-
-::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: $forms-placeholder-text;
-}
-::-moz-placeholder {
-  /* Firefox 19+ */
-  color: $forms-placeholder-text;
-}
-:-ms-input-placeholder {
-  /* IE 10+ */
-  color: $forms-placeholder-text;
-}
-:-moz-placeholder {
-  /* Firefox 18- */
+::placeholder {
   color: $forms-placeholder-text;
 }
 
 .field_with_errors input {
- &::-webkit-input-placeholder {
-   /* Chrome/Opera/Safari */
+ &::placeholder {
    color: $forms-with-error-placeholder-text;
  }
- &::-moz-placeholder {
-   /* Firefox 19+ */
-   color: $forms-with-error-placeholder-text;
- }
- &:-ms-input-placeholder {
-   /* IE 10+ */
-   color: $forms-with-error-placeholder-text;
- }
- &:-moz-placeholder {
-   /* Firefox 18- */
-   color: $forms-with-error-placeholder-text;
- } 
 }
 
 /* CUSTOM SVG CHECKBOX REPLACEMENT */
