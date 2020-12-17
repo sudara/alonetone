@@ -42,3 +42,41 @@
   <% end %>
 </div>
 
+<script>
+
+  const playlistCredits = document.getElementsByClassName("playlist_credits")[0]
+  const playlistSidebar = document.getElementsByClassName("playlist_sidebar")[0]
+  const trackContent = document.getElementsByClassName("track_content")[0]
+  const playlistAndTrackContent = document.getElementById("playlist_and_track_content")
+
+  const mainElement = document.getElementsByTagName("main")[0]
+  
+  const mainPaddingBottom = parseInt( window.getComputedStyle(mainElement).getPropertyValue('padding-bottom'), 10 )
+
+  const viewportResized = function () {
+
+    let heightDifference = playlistSidebar.clientHeight - trackContent.clientHeight
+    let offset = playlistCredits.clientHeight - heightDifference - mainPaddingBottom
+    
+    if ( window.getComputedStyle(playlistCredits).getPropertyValue('position') == "absolute") {
+      playlistAndTrackContent.setAttribute("style","padding-bottom:" + offset + "px")
+      playlistCredits.setAttribute("style", "width:" + trackContent.clientWidth + "px")
+    } else {
+      playlistAndTrackContent.setAttribute("style","padding-bottom: 0px")
+      playlistCredits.setAttribute("style", "width: 100%")
+    }
+
+    if ( heightDifference > 0 ) {
+      playlistSidebar.setAttribute("style","border-bottom-right-radius: 6px")
+    } else {
+      playlistSidebar.setAttribute("style","border-bottom-right-radius: 0px")
+    }
+  }
+
+  viewportResized()
+
+  window.addEventListener('resize', function () {
+    viewportResized()
+  }, false)
+
+</script>
