@@ -1,15 +1,46 @@
 <nav class="sub_nav">
   <div class="page_container sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
-       <ul>
-        <%= navigation_item "Last Online", {action: 'index', sort: nil} %>
-        <%= navigation_item "Last Uploaded", {action: 'index', sort: 'last_uploaded'} %>
-        <%= navigation_item "Most Listened To", {action: 'index', sort: 'most_listened_to'} %>
-        <%= navigation_item "New Artists", {action: 'index', sort: 'new_artists'} %>
-        <%= navigation_item "All Time Top Uploaders", {action: 'index', sort: 'monster_uploaders'} %>
-        <%= navigation_item "Dedicated Listeners", {action: 'index', sort: 'dedicated_listeners'}%>
-        </ul>
+    <ul>
+        <%= navigation_item "Last Online", { action: 'index', sort: nil }%>
+        <%= navigation_item "Patrons", { action: 'index', sort: 'patrons' }%>
+        <%= navigation_item "Last Uploaded", { action: 'index', sort: 'last_uploaded'}%>
+        <%= navigation_item "Most Listened To", { action: 'index', sort: 'most_listened_to' }%>
+        <%= navigation_item "New Artists", { action: 'index', sort: 'new_artists' }%>
+        <%= navigation_item "All Time Top Uploaders", { action: 'index', sort: 'monster_uploaders' }%>
+        <%= navigation_item "Dedicated Listeners", { action: 'index', sort: 'dedicated_listeners' }%>
+    </ul>
   </div>
 </nav>
+
+<% if params[:sort] == 'patrons' %>
+<div class="page_container get_an_account_container">
+  <div class="blank_slate">
+    <div class="left">
+      <div class="blank_slate_illustration">
+      </div>
+      <div class="contributor_name mobile_only">
+        sudara
+      </div>
+      <div class="contributor_title mobile_only">
+        illustrator
+      </div>
+    </div>
+    <div class="blank_slate_text">
+      <p>
+        “Alonetone is open to everyone making music. However, we are invite-only to keep spammers out.
+      </p>
+      <p>
+        Get on the list below! It might take us a day or two to approve your account, but it’s worth it, promise.”
+      </p>
+      <div class="contributor_name">
+        sudara
+      </div>
+      <div class="contributor_title">
+        illustrator
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div class="page_container" id="user_index">
   <div class="mini_paginator bottom_paginator">
