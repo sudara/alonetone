@@ -4,8 +4,7 @@ export default class extends Controller {
   static targets = ['credits', 'sidebar', 'content', 'cover']
 
   initialize() {
-    this.creditsTarget.style.width = "10px"
-    //this.resize()
+    this.resize()
   }
 
   resize() {
