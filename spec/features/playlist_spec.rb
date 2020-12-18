@@ -12,7 +12,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # Note: this only pauses GSAP animations
       with_animations_paused do
         first_track.hover
-        expect(first_track).to have_css('.active')
+        expect(first_track).to have_css(':hover')
         Percy.snapshot(page, name: 'Playlist Cover')
 
         # This click will be an ajax request
