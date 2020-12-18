@@ -31,9 +31,7 @@ export default class extends Controller {
   }
 
   isTwoColumn() {
-    // return window.getComputedStyle( this.creditsTarget ).getPropertyValue('position') == 'absolute'
-    console.log( this.creditsTarget.style.position )
-    return this.creditsTarget.style.position == 'absolute'
+    return window.getComputedStyle(this.creditsTarget).getPropertyValue('position') == 'absolute'
   }
 
   heightDifference() {
