@@ -3,6 +3,9 @@ body.cover_view {
     .playlist_sidebar {
       border-radius: 6px 0 0 6px;
       align-self: stretch;
+      &.rounded_bottom_right_corner {
+        border-bottom-right-radius: 6px;
+      }
     }
   }
   .track_content {

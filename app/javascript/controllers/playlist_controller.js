@@ -26,9 +26,9 @@ export default class extends Controller {
 
   roundBottomRightCorner() {
     if ( this.heightDifference() > 0 ) {
-      this.sidebarTarget.style = "border-bottom-right-radius: 6px"
-    } else {
-      this.sidebarTarget.style = "border-bottom-right-radius: 0px"
+      this.sidebarTarget.classList.add('rounded_bottom_right_corner')
+     } else {
+        this.sidebarTarget.classList.remove('rounded_bottom_right_corner')
     }
   }
 
