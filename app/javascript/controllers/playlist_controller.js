@@ -8,8 +8,10 @@ export default class extends Controller {
   }
 
   resize() {
-    if (this.isCoverView() ) {
-      this.alignCredits()
+    if (this.isCoverView()) {
+      if (this.hasCredits()) {
+        this.alignCredits()
+      }
       this.roundBottomRightCorner()
     }
   }
@@ -30,6 +32,10 @@ export default class extends Controller {
      } else {
         this.sidebarTarget.classList.remove('rounded_bottom_right_corner')
     }
+  }
+  
+  hasCredits() {
+    return this.hasCreditsTarget
   }
 
   isCoverView() {
