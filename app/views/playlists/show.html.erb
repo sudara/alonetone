@@ -16,7 +16,7 @@
   <% else %>
     <%= content_for(:body_class, 'cover_view') %>
     <div class="track_content" data-playlist-target="content">
-      <div class="large_cover_and_credits">
+      <div class="large_cover_and_credits" data-playlist-target="cover">
         <div class="large_cover">
           <%= playlist_cover(@playlist, variant: :playlist_cover) %>
         </div>

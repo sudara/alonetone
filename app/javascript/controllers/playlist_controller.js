@@ -1,15 +1,15 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['credits', 'sidebar', 'content']
+  static targets = ['credits', 'sidebar', 'content', 'cover']
 
   initialize() {
     this.resize()
   }
 
   resize() {
-    if (this.isCoverView()) {
-      if (this.hasCredits()) {
+    if (this.hasCoverTarget) {
+      if (this.hasCreditsTarget) {
         this.alignCredits()
       }
       this.roundBottomRightCorner()
@@ -32,14 +32,6 @@ export default class extends Controller {
      } else {
         this.sidebarTarget.classList.remove('rounded_bottom_right_corner')
     }
-  }
-  
-  hasCredits() {
-    return this.hasCreditsTarget
-  }
-
-  isCoverView() {
-    return document.body.classList.contains('cover_view')
   }
 
   isTwoColumn() {
