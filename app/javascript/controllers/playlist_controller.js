@@ -8,8 +8,10 @@ export default class extends Controller {
   }
 
   resize() {
-    this.alignCredits()
-    this.roundBottomRightCorner()
+    if (this.isCoverView() ) {
+      this.alignCredits()
+      this.roundBottomRightCorner()
+    }
   }
 
   alignCredits() {
@@ -28,6 +30,10 @@ export default class extends Controller {
     } else {
       this.sidebarTarget.style = "border-bottom-right-radius: 0px"
     }
+  }
+
+  isCoverView() {
+    return document.body.classList.contains('cover_view')
   }
 
   isTwoColumn() {
