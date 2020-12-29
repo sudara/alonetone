@@ -7,7 +7,7 @@
   <%= yield :head %>
   <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
   <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
-  <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
+  <%= javascript_pack_tag "application", 'data-turbo-track': 'reload', defer: true  %>
 
   <meta content="index,follow" name="robots"/>
   <% if @asset&.persisted? or @playlist&.persisted? %>
@@ -56,13 +56,13 @@
     </div>
   </main>
 
-  <footer id="site_footer" data-turbolinks-permanent>
+  <footer id="site_footer" data-turbo-permanent>
     <%= cache("footer2/#{logged_in?}/#{moderator?}", expires_in: 1.minute) do %>
       <%= render partial: 'shared/footer' %>
     <% end %>
   </footer>
 
-  <div id='play-svg-container' style='display:none' data-turbolinks-permanent>
+  <div id='play-svg-container' style='display:none' data-turbo-permanent>
     <%== render file: svg_path('svg/animation_play.svg') %>
   </div>
 

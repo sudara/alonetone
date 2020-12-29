@@ -6,7 +6,7 @@
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@bugsnag/js": "^7.5.3",
-    "@rails/ujs": "^6.1.0",
+    "@hotwired/turbo-rails": "^7.0.0-beta.2",
     "@rails/webpacker": "^5.2.1",
     "babel-loader": "^8.2.2",
     "babel-preset-minify": "^0.5.1",

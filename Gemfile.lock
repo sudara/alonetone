@@ -487,9 +487,8 @@ GEM
     thor (1.0.1)
     tilt (2.0.10)
     timeago_js (3.0.2.2)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (0.5.1)
+      rails (>= 6.0.0)
     tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
@@ -572,7 +571,7 @@ DEPENDENCIES
   skylight (~> 5.0.0.beta)
   sometimes
   thredded!
-  turbolinks
+  turbo-rails
   webdrivers
   webmock
   webpacker

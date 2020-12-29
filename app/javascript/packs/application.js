@@ -7,8 +7,7 @@
 // src/application.js
 
 import LocalTime from 'local-time'
-import Rails from '@rails/ujs'
-import Turbolinks from 'turbolinks'
+import { Turbo, cable } from "@hotwired/turbo-rails"
 import { Application } from 'stimulus'
 import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
@@ -73,7 +72,7 @@ function handlers() {
     })
   })
 }
-document.addEventListener('turbolinks:load', handlers)
+document.addEventListener('turbo:load', handlers)
 
 // Expose on the console as Alonetone.gsap, etc
 export {

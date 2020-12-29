@@ -47,7 +47,7 @@ gem 'postmark-rails'
 gem 'webpacker'
 gem 'sass-rails'
 gem 'yui-compressor'
-gem 'turbolinks'
+gem 'turbo-rails'
 
 # monitoring & perf
 gem 'bugsnag'
