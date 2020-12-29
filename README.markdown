@@ -48,7 +48,7 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 * Sidekiq for jobs
 * Active Storage & s3
 * Fastly for CDN image delivery and thumbnailing
-* [Stimulus js](http://stimulusjs.org) 2.0
+* [Hotwire Turbo](https://turbo.hotwire.dev/) and [Stimulus js](http://stimulusjs.org) 2.0
 
 ### Current feature set
 

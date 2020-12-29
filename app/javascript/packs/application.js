@@ -19,9 +19,6 @@ import '../misc/bugsnag.js.erb'
 // uncomment for local stitches dev:
 // import Playlist from '../../../../stitches/src/playlist'
 
-Rails.start()
-Turbolinks.start()
-
 LocalTime.config.i18n.en.datetime.at = '{date}' // drop the time from the date
 LocalTime.config.i18n.en.date.on = '{date}' // no "on Sunday", just "Sunday"
 LocalTime.start()

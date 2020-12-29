@@ -1,4 +1,3 @@
-import Rails from '@rails/ujs'
 import PlaybackController from './playback_controller'
 
 const smallCover = document.querySelector('a.small_cover')
@@ -17,7 +16,7 @@ export default class extends PlaybackController {
 
   // called from bigPlay
   fireClick() {
-    Rails.fire(this.playTarget, 'click')
+    this.playTarget.click()
   }
 
   // calls to bigPlay
@@ -31,7 +30,7 @@ export default class extends PlaybackController {
       this.setBigPlay()
     } else {
       this.bigPlayLoaded = false
-      Rails.fire(this.loadTrackTarget, 'click')
+      this.loadTrackTarget.click()
     }
     this.registeredListen = false
     this.playTarget.classList.replace('play_button', 'pause_button')
@@ -83,7 +82,7 @@ export default class extends PlaybackController {
     // Remember, every track in the playlist will run this code on popstate
     if (newLocation === this.permalink) {
       // console.log('should be ajax')
-      Rails.fire(this.loadTrackTarget, 'click')
+      this.loadTrackTarget.click()
       e.stopImmediatePropagation()
     }
   }

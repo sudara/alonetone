@@ -1,5 +1,4 @@
 import { Controller } from 'stimulus'
-import Rails from '@rails/ujs'
 
 // All variants of alonetone's javascript players extends this controller
 export default class extends Controller {
@@ -32,6 +31,7 @@ export default class extends Controller {
   }
 
   seek(position) {
-    Rails.fire(this.element, 'track:seek', { position })
+    const event = new CustomEvent('track:seek', { detail: { position } })
+    this.element.dispatchEvent(event)
   }
 }

@@ -1,6 +1,5 @@
 import { Controller } from 'stimulus'
-import Turbolinks from 'turbolinks'
-import Rails from '@rails/ujs'
+import { Turbo } from '@hotwired/turbo-rails'
 
 export default class extends Controller {
   static targets = ['menu', 'header', 'switchToLight', 'switchToDark']
