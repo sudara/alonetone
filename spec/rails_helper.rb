@@ -15,7 +15,7 @@ require 'percy'
 # to its API.
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: ['percy.io', 'chromedriver.storage.googleapis.com']
+  allow: ['percy.io', 'chromedriver.storage.googleapis.com', 'ownandship.io']
 )
 
 # Reloads schema.rb when database has pending migrations.
