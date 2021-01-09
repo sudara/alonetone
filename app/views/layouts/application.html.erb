@@ -7,7 +7,7 @@
   <%= yield :head %>
   <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
   <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
-  <%= javascript_pack_tag "application", 'data-turbo-track': 'reload', defer: true  %>
+  <%= javascript_packs_with_chunks_tag "application", 'data-turbo-track': 'reload', defer: true  %>
 
   <meta content="index,follow" name="robots"/>
   <% if @asset&.persisted? or @playlist&.persisted? %>
