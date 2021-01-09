@@ -7,6 +7,7 @@
     "@babel/preset-env": "^7.12.11",
     "@bugsnag/js": "^7.5.4",
     "@hotwired/turbo-rails": "^7.0.0-beta.3",
+    "@rails/ujs": "^6.1.1",
     "@rails/webpacker": "^6.0.0-beta.2",
     "babel-loader": "^8.2.2",
     "babel-preset-minify": "^0.5.1",
@@ -33,7 +34,9 @@
     "webpack-dev-server": "^3.11.1"
   },
   "babel": {
-    "presets": ["./node_modules/@rails/webpacker/package/babel/preset.js"]
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
   },
   "browserslist": [
     "defaults"
