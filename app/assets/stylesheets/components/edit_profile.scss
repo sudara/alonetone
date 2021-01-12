@@ -348,7 +348,6 @@
         margin-top: 16px;
         margin-bottom: 16px;
       }
-
       .edit_profile_settings_left_column {
         margin-right: 25px;
         flex: 1;
@@ -356,6 +355,12 @@
           margin-right: 0;
           flex: auto;
           width: 100%;
+        }
+        .edit_profile_separator:last-child {
+          display: none;
+          @media #{$one-column} {
+            display: block;
+          }
         }
       }
       .edit_profile_settings_right_column {
