@@ -219,7 +219,7 @@
           display: flex;
           @media #{$one-column} {
             width: 100%;
-          }  
+          }
           div {
             background-color: $edit-profile-hint-background;
             color: $edit-profile-hint-text;
@@ -239,7 +239,7 @@
           display: flex;
           @media #{$one-column} {
             width: 100%;
-          }  
+          }
           input {
             border-radius: 0;
             border-top-right-radius: 4px;
@@ -249,7 +249,7 @@
             padding-left: 8px;
             padding-top: 9px;
             width: 100%;
-          }          
+          }
         }
         &.reversed {
           .row_prefix {
@@ -531,6 +531,22 @@
         @include default_button("primary");
         margin-left: 20px;
         margin-bottom: 12px;
+      }
+    }
+  }
+  .edit_profile_change_your_login {
+    @media #{$one-column} {
+      > form > div {
+        flex-wrap: wrap;
+        input[type="text"] {
+          margin-bottom: 24px;
+        }
+        div:last-child {
+          width: 100%;
+          input[type="submit"] {
+            margin-left: 0;
+          }
+        }
       }
     }
   }
