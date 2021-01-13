@@ -465,7 +465,7 @@
   .edit_profile_change_your_password {
     background-image: image-url("svg/background_danger_tape.svg");
     background-repeat: no-repeat;
-    background-position: center 16px;
+    background-position: left 16px;
     padding: $baseline * (3/2);
     @media #{$mobile} {
       padding: $baseline;
@@ -537,7 +537,6 @@
   .edit_profile_delete_your_account {
     background-image: image-url("svg/background_high_voltage_tape.svg");
     background-repeat: no-repeat;
-    background-position: center 16px;
     .danger_tag {
       position: absolute;
       right: 0;
