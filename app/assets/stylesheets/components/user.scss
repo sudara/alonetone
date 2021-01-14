@@ -146,8 +146,8 @@ main {
         display: flex;
         // flex-wrap: wrap;
         .user_name_and_follow {
-          // display: flex;
-          // flex-wrap: wrap;
+          display: flex;
+          flex-wrap: wrap;
           @media #{$mobile} {
             flex: 1;
             padding-left: 16px;
@@ -158,10 +158,11 @@ main {
             line-height: 1;
             margin-top: 0;
             margin-bottom: 0;
-            @media #{$mobile} {
-              width: 100%;
+            margin-right: 24px;
+            // @media #{$mobile} {
+              // width: 100%;
               margin-bottom: 16px;
-            }
+            // }
           }
           a.follow {
             display: flex;
@@ -175,7 +176,6 @@ main {
               @include default_button();
               background-color: $user-follow-background;
               color: $accent;
-              margin-left: 24px;
               margin-right: 8px;
               @media #{$mobile} {
                 margin-left: 0;
