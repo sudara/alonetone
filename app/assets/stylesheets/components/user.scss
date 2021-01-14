@@ -157,18 +157,12 @@ main {
             font-size: 28px;
             line-height: 1;
             margin-top: 0;
-            margin-bottom: 0;
             margin-right: 24px;
-            // @media #{$mobile} {
-              // width: 100%;
-              margin-bottom: 16px;
-            // }
+            margin-bottom: 16px;
           }
           a.follow {
             display: flex;
-            @media #{$mobile} {
-              width: 100%;
-            }
+            margin-right: 24px;
             &:hover {
               text-decoration: none;
             }
