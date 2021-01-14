@@ -142,12 +142,12 @@ main {
 
     #user_header_area {
       #user_header {
-        justify-content: space-between;
+        // justify-content: space-between;
         display: flex;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         .user_name_and_follow {
-          display: flex;
-          flex-wrap: wrap;
+          // display: flex;
+          // flex-wrap: wrap;
           @media #{$mobile} {
             flex: 1;
             padding-left: 16px;
@@ -192,20 +192,22 @@ main {
             }
           }
         }
-        .user_header_avatar {
-          overflow: hidden;
-          @include samo-shadow-and-radius();
-          border: 1px solid $user-header-avatar-border;
+      }
+      .user_header_avatar {
+        margin-left: auto;
+        overflow: hidden;
+        @include samo-shadow-and-radius();
+        border: 1px solid $user-header-avatar-border;
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        @media #{$mobile} {
+          margin-right: 16px;
+        }
+        img {
+          display: block;
           width: 48px;
           height: 48px;
-          @media #{$mobile} {
-            margin-right: 16px;
-          }
-          img {
-            display: block;
-            width: 48px;
-            height: 48px;
-          }
         }
       }
     }
