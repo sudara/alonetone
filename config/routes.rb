@@ -41,7 +41,7 @@ Alonetone::Application.routes.draw do
   mount Thredded::Engine => '/forums'
 
   get '/get_an_account', :to => 'account_requests#new'
-  resources 'account_requests', only: :create
+  resources 'account_requests', only: [:create, :show]
 
   post '/get_an_account', :to => 'account_requests#create'
   get '/upload', :to => 'assets#new'

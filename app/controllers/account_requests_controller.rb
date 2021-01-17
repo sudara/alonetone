@@ -4,15 +4,19 @@ class AccountRequestsController < ApplicationController
     @page_title = "Get An Account"
   end
 
+  def show
+    render layout: 'pages'
+  end
+
   def create
     @account_request = AccountRequest.new(account_request_params)
 
     if @account_request.save
       @page_title = "Thank you, #{@account_request.login}"
       @email = @account_request.email
-      render 'thank_you', layout: 'pages'
+      redirect_to @account_request
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 

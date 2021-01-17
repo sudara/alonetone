@@ -13,6 +13,7 @@ export default class extends Controller {
     this.setupPlayhead()
   }
 
+
   // called from whileLoading()
   load(duration) {
     this.duration = duration

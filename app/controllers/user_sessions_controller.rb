@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
         flash.now[:error] = "There was a problem logging you in! Please check your login and password."
       end
       @user = User.new
-      render action: :new
+      render 'new', status: :unprocessable_entity
     end
   end
 

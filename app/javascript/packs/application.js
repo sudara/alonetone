@@ -7,7 +7,7 @@
 // src/application.js
 
 import LocalTime from 'local-time'
-import { Turbo, cable } from "@hotwired/turbo-rails"
+import { Turbo } from '@hotwired/turbo-rails'
 import { Application } from 'stimulus'
 import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
@@ -46,7 +46,6 @@ function handlers() {
     },
   })
 
-
   document.querySelectorAll('.large_cover .no_pic, .small_cover .no_pic').forEach((pic) => {
     const title = document.querySelector('h1').textContent.trim()
     if (!pic.hasChildNodes()) {
@@ -69,7 +68,21 @@ function handlers() {
     })
   })
 }
+
 document.addEventListener('turbo:load', handlers)
+
+document.addEventListener('turbo:submit-start', () => {
+  Turbo.setProgressBarDelay(10)
+  Turbo.navigator.delegate.adapter.showProgressBar();
+});
+
+document.addEventListener('turbo:submit-end', (e) => {
+  console.log(e)
+  e.target.previousSibling.scrollIntoView(true) // scroll to top of form
+  Turbo.setProgressBarDelay(300)
+  Turbo.navigator.delegate.adapter.hideProgressBar();
+});
+
 
 // Expose on the console as Alonetone.gsap, etc
 export {
