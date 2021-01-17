@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@percy/agent": "^0.28.6",
-    "@webpack-cli/serve": "^1.2.1",
+    "@webpack-cli/serve": "1.2.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.17.0",
     "eslint-config-airbnb": "^18.2.1",
