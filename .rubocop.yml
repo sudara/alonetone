@@ -13,9 +13,6 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Max: 500
 
-Metrics/LineLength:
-  Max: 300
-
 Metrics/ClassLength:
   Max: 500
 
@@ -28,7 +25,7 @@ Metrics/CyclomaticComplexity:
 Metrics/ModuleLength:
   Max: 500
 
-### Lint
+# Lint
 Lint/AmbiguousBlockAssociation:
   Enabled: false
 
@@ -50,13 +47,7 @@ Lint/ShadowingOuterLocalVariable:
 Lint/ParenthesesAsGroupedExpression:
   Enabled: false
 
-Layout/AlignArguments:
-  EnforcedStyle: with_fixed_indentation
-
-Layout/EndAlignment:
-  Enabled: false
-
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: false
 
 Lint/DuplicateMethods:
@@ -68,7 +59,7 @@ Lint/AssignmentInCondition:
 Lint/UriEscapeUnescape:
   Enabled: false
 
-### STYLE
+# Style
 Style/NumericLiterals:
   Enabled: false
 
@@ -123,28 +114,38 @@ Style/MixinUsage:
 Style/BlockDelimiters:
   Enabled: false
 
-Layout/AlignParameters:
-  Enabled: false
-
 Style/HashSyntax:
   Enabled: true
 
-Layout/AlignArray:
-  Enabled: false
-
-Layout/BlockAlignment:
-  Enabled: false
-
 Style/ConditionalAssignment:
-  Enabled: false
-
-Layout/IndentationWidth:
   Enabled: false
 
 Style/For:
   Enabled: false
 
-# naming
+# Layout
+Layout/LineLength:
+  Max: 300
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/ParameterAlignment:
+  Enabled: false
+
+Layout/ArrayAlignment:
+  Enabled: false
+
+Layout/BlockAlignment:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+# Naming
 Naming/PredicateName:
   Enabled: false
 
@@ -157,6 +158,7 @@ Naming/MemoizedInstanceVariableName:
   Enabled: false
 AllCops:
   TargetRubyVersion: 2.6
+  NewCops: disable
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'
