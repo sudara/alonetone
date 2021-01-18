@@ -442,95 +442,89 @@ main {
         padding-left: 0;
         flex-wrap: wrap;
         overflow: auto;
+        @media #{$mobile} {
+          background-color: $user-links-background;
+          border-radius: 6px;
+        }
         li {
           margin-bottom: 2px;
           padding-top: 4px;
           padding-bottom: 4px;
           background-color: $user-links-background;
           color: $user-links-text;
-          border-right: 2px solid #999;
           box-sizing: border-box;
-
           width: calc(100% / 6);
           &:nth-child(6n) {
             border-top-right-radius: 6px;
             border-bottom-right-radius: 6px;
-            border-right: 0;
+            a {
+              border-right: 0;
+            }
           }
           &:nth-child(6n + 1) {
             border-top-left-radius: 6px;
             border-bottom-left-radius: 6px;
           }
-
           @media #{$two-column-narrow} {
             width: calc(100% / 5);
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+            border-radius: 0;
             &:nth-child(6n) {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-right: 2px solid #999;
+              border-radius: 0;
+              a {
+                border-right: 2px solid #999;
               }
+            }
             &:nth-child(6n + 1) {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-right: 2px solid #999;
+              border-radius: 0;
+              a {
+                border-right: 2px solid #999;
+              }
             }
             &:nth-child(5n) {
               border-top-right-radius: 6px;
               border-bottom-right-radius: 6px;
-              border-right: 0;
+              a {
+                border-right: 0;
+              }
             }
             &:nth-child(5n + 1) {
               border-top-left-radius: 6px;
               border-bottom-left-radius: 6px;
             }
           }
-          
           @media #{$one-column} {
             width: calc(100% / 3);
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+            border-radius: 0;
             &:nth-child(6n) {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-right: 2px solid #999;
+              border-radius: 0;
+              a {
+                border-right: 2px solid #999;
               }
+            }
             &:nth-child(6n + 1) {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-right: 2px solid #999;
+              border-radius: 0;
+              a {
+                border-right: 2px solid #999;
+              }
             }            
             &:nth-child(4n) {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-right: 2px solid #999;
+              border-radius: 0;
+              a {
+                border-right: 2px solid #999;
+              }
             }
             &:nth-child(4n + 1) {
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-right: 2px solid #999;
+              border-radius: 0;
+              a {
+                border-right: 2px solid #999;
+              }
             }
             &:nth-child(3n) {
               border-top-right-radius: 6px;
               border-bottom-right-radius: 6px;
-              border-right: 0;
+              a {
+                border-right: 0;
+              }
             }
             &:nth-child(3n + 1) {
               border-top-left-radius: 6px;
@@ -538,9 +532,72 @@ main {
             }
           }
           &:last-child {
-            border-right: 0;
             border-top-right-radius: 6px;
             border-bottom-right-radius: 6px;
+            a {
+              border-right: 0;
+            }
+          }
+          @media #{$mobile} {
+            width: calc(100% / 2);
+            border-radius: 0!important;
+            margin-bottom: 0px;
+            border-bottom: 1px solid #000;
+            a {
+              opacity: 1!important;
+            }
+            &:nth-child(6n) {
+              border-radius: 0;
+              a {
+                border-right: 2px solid #000;
+              }
+            }
+            &:nth-child(6n + 1) {
+              border-radius: 0;
+              a {
+                border-right: 2px solid #000;
+              }
+            }            
+            &:nth-child(4n) {
+              border-radius: 0;
+              a {
+                border-right: 2px solid #000;
+              }
+            }
+            &:nth-child(4n + 1) {
+              border-radius: 0;
+              a {
+                border-right: 2px solid #000;
+              }
+            }
+            &:nth-child(3n) {
+              border-radius: 0;
+              a {
+                border-right: 2px solid #000;
+              }
+            }
+            &:nth-child(3n + 1) {
+              border-radius: 0;
+              a {
+                border-right: 2px solid #000;
+              }
+            }
+            &:nth-child(2n) {
+              border-top-right-radius: 6px;
+              border-bottom-right-radius: 6px;
+              a {
+                border-right: 0;
+              }
+            }
+            &:nth-child(2n + 1) {
+              border-top-left-radius: 6px;
+              border-bottom-left-radius: 6px;
+            }
+            &:last-child {
+              a {
+                border-right: 2px solid #000;
+              }
+            }
           }
           a {
             height: 40px;
@@ -551,6 +608,7 @@ main {
             display: flex;
             justify-content: space-between;
             padding: 0 9px;
+            border-right: 2px solid #999;
             &:hover {
               opacity: 1;
             }
