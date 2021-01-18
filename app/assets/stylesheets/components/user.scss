@@ -439,15 +439,14 @@ main {
       }
       ul {
         display: inline-flex;
-        padding-top: 4px;
-        padding-bottom: 4px;
         padding-left: 0;
         flex-wrap: wrap;
-        background-color: $user-links-background;
-        color: $user-links-text;
-        @include samo-shadow-and-radius();
         overflow: auto;
         li {
+          padding-top: 4px;
+          padding-bottom: 4px;
+          background-color: $user-links-background;
+          color: $user-links-text;
           min-width: 160px;
           border-right: 2px solid #999;
           box-sizing: border-box;
