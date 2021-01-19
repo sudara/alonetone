@@ -8,26 +8,21 @@ export default class extends Controller {
 
   resize() {
 
-    let itemsInRow = Math.round ( this.element.clientWidth / 58 )
-
     let containerWidth = this.element.clientWidth - 24
-
-    let totalMargin = 8 * (itemsInRow)
-
-    let totalImageWidth = containerWidth - totalMargin
-    
-    let newWidth = totalImageWidth / itemsInRow
-
+    let itemsPerRow = Math.round ( this.element.clientWidth / 58 )
+    let totalMarginWidth = 8 * (itemsPerRow)
+    let totalImageWidth = containerWidth - totalMarginWidth
+    let newImageWidth = totalImageWidth / itemsPerRow
     let totalFollowees = this.element.childElementCount
 
-    if ( totalFollowees >= ( itemsInRow -1 ) ) {
+    if ( totalFollowees >= ( itemsPerRow -1 ) ) {
+
       let children = this.element.children
+      let childrenArray = [ ...children ]
 
-      let array = [ ...children ]
-
-      array.forEach(function(item) {
-          item.style.width = newWidth + "px"
-          item.style.height = newWidth + "px"
+      childrenArray.forEach(function(item) {
+          item.style.width = newImageWidth + "px"
+          item.style.height = newImageWidth + "px"
       });
     }
   }
