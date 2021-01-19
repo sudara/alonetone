@@ -291,19 +291,22 @@ main {
         @include samo-shadow-and-radius();
         flex: 1;
         padding: 16px;
+        padding-right: 12px;
+        padding-left: 12px;
         display: flex;
         flex-wrap: wrap;
         padding-bottom: 8px;
         > .user_small_avatar {
-          margin-right: 8px;
+          margin-left: 4px;
+          margin-right: 4px;
           height: 50px;
           width: 50px;
           border-radius: 4.29px;
           margin-bottom: 8px;
           overflow: hidden;
           img {
-            width: 50px;
-            height: 50px;
+            width: 100%;
+            height: 100%;
           }
         }
       }
