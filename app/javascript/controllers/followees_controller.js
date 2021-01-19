@@ -1,17 +1,16 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['container']
-
+  
   connect() {
     this.resize()
   }
 
   resize() {
 
-    let itemsInRow = Math.round ( this.containerTarget.clientWidth / 58 )
+    let itemsInRow = Math.round ( this.element.clientWidth / 58 )
 
-    let containerWidth = this.containerTarget.clientWidth - 24
+    let containerWidth = this.element.clientWidth - 24
 
     let totalMargin = 8 * (itemsInRow)
 
@@ -19,10 +18,10 @@ export default class extends Controller {
     
     let newWidth = totalImageWidth / itemsInRow
 
-    let totalFollowees = this.containerTarget.childElementCount
+    let totalFollowees = this.element.childElementCount
 
     if ( totalFollowees >= ( itemsInRow -1 ) ) {
-      let children = this.containerTarget.children
+      let children = this.element.children
 
       let array = [ ...children ]
 
