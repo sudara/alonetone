@@ -24,9 +24,8 @@ export default class extends Controller {
     if (this.totalFollowees >= avatarsPerRow) {
       const childrenArray = [...this.element.children]
       childrenArray.forEach((avatar) => {
-        const thisAvatar = avatar
-        thisAvatar.style.width = `${calculatedAvatarWidth}px`
-        thisAvatar.style.height = `${calculatedAvatarWidth}px`
+        avatar.style.width = `${calculatedAvatarWidth}px`
+        avatar.style.height = `${calculatedAvatarWidth}px`
       })
     }
   }
