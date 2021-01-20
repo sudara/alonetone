@@ -9,8 +9,10 @@ $site_max_width: calc( #{$content_max_width} + #{$baseline} * 3); // left and ri
 // media tiers
 
 $mobile: 'only screen and (max-width: 420px)';
-$two-column-narrow: 'only screen and (min-width: 749px) and (max-width: 952px)';
+$mobile-to-one-column: 'only screen and (min-width: 421px) and (max-width: 748px)';
 $one-column: 'only screen and (max-width: 748px)';
+$two-column-narrow: 'only screen and (min-width: 749px) and (max-width: 952px)';
+$two-column-narrow-to-full: 'only screen and (min-width: 953px)';
 $responsive: 'only screen and (max-width: #{$site_max_width})';
 
 // fonts
