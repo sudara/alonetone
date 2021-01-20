@@ -6,27 +6,27 @@ export default class extends Controller {
     const containerPaddingRight = parseInt(window.getComputedStyle(this.element).getPropertyValue('padding-right'), 10)
     this.containerPadding = containerPaddingLeft + containerPaddingRight
     const firstAvatar = document.getElementsByClassName('user_small_avatar')[0]
-    this.avatarWidth = parseInt(window.getComputedStyle(firstAvatar).getPropertyValue('width'), 10)
+    this.avatarWidthFromCSS = parseInt(window.getComputedStyle(firstAvatar).getPropertyValue('width'), 10)
     this.avatarMargin = parseInt(window.getComputedStyle(firstAvatar).getPropertyValue('margin-bottom'), 10)
-    this.avatarWidthPlusMargin = this.avatarWidth + this.avatarMargin
+    this.avatarWidthFromCSSPlusMargin = this.avatarWidthFromCSS + this.avatarMargin
 
     this.resize()
   }
 
   resize() {
     const containerWidth = this.element.clientWidth - this.containerPadding
-    const avatarsPerRow = Math.round(containerWidth / this.avatarWidthPlusMargin)
+    const avatarsPerRow = Math.round(containerWidth / this.avatarWidthFromCSSPlusMargin)
     const totalMarginWidth = this.avatarMargin * (avatarsPerRow)
-    const totalImageWidth = containerWidth - totalMarginWidth
-    const newImageWidth = totalImageWidth / avatarsPerRow
+    const totalAvailableWidth = containerWidth - totalMarginWidth
+    const calculatedAvatarWidth = totalAvailableWidth / avatarsPerRow
     const totalFollowees = this.element.childElementCount
 
     if (totalFollowees >= avatarsPerRow) {
       const childrenArray = [...this.element.children]
       childrenArray.forEach((avatar) => {
         const thisAvatar = avatar
-        thisAvatar.style.width = `${newImageWidth}px`
-        thisAvatar.style.height = `${newImageWidth}px`
+        thisAvatar.style.width = `${calculatedAvatarWidth}px`
+        thisAvatar.style.height = `${calculatedAvatarWidth}px`
       })
     }
   }
