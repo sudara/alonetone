@@ -68,22 +68,20 @@ function handlers() {
     })
   })
 }
-
 document.addEventListener('turbo:load', handlers)
 
 document.addEventListener('turbo:submit-start', () => {
   Turbo.setProgressBarDelay(10)
   Turbo.navigator.delegate.adapter.showProgressBar();
-});
+})
 
 document.addEventListener('turbo:submit-end', (e) => {
-  console.log(e)
-  e.target.previousSibling.scrollIntoView(true) // scroll to top of form
   Turbo.setProgressBarDelay(300)
-  Turbo.navigator.delegate.adapter.hideProgressBar();
-});
-
-
+  Turbo.navigator.delegate.adapter.progressBar.hide();
+  if (e.detail.success === false) {
+    e.target.previousElementSibling.scrollIntoView(true) // scroll to top of form
+  }
+})
 // Expose on the console as Alonetone.gsap, etc
 export {
   gsap,

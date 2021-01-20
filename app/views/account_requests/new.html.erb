@@ -30,7 +30,7 @@
     <h2>Get an Account</h2>
     <%= render partial: 'shared/errors', locals: { errors: @account_request.errors } %>
 
-    <%= form_with(model: @account_request, local: true) do |f| %>
+    <%= form_with(model: @account_request, data: { turbo: false } ) do |f| %>
       <h3 class="form_heading">
         Give us an email and pick your username:
       </h3>
