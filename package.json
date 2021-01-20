@@ -10,7 +10,7 @@
     "@rails/webpacker": "^5.2.1",
     "babel-loader": "^8.2.2",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.5.1",
+    "gsap": "^3.6.0",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
     "seedrandom": "^3.0.5",
