@@ -190,19 +190,8 @@
       <h2 class="area_heading">
         Who <%= @user.name %> follows
       </h2>
-        <div class="area_content" data-controller="followees" data-action="resize@window->followees#resize">
-
-        <% 
-          $i = 0
-          while $i < 14 do
-        %>
-        
-          <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>
-
-        <%
-          $i +=1
-          end
-        %>
+      <div class="area_content" data-controller="followees" data-action="resize@window->followees#resize">
+        <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>
       </div>
     </div>
   <% end %>
