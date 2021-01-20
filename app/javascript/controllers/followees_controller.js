@@ -15,15 +15,14 @@ export default class extends Controller {
 
   resize() {
     const containerWidth = this.element.clientWidth - this.containerPadding
-    const avatarsPerRow = Math.round(this.element.clientWidth / this.avatarWidthPlusMargin )
+    const avatarsPerRow = Math.round(containerWidth / this.avatarWidthPlusMargin)
     const totalMarginWidth = this.avatarMargin * (avatarsPerRow)
     const totalImageWidth = containerWidth - totalMarginWidth
     const newImageWidth = totalImageWidth / avatarsPerRow
     const totalFollowees = this.element.childElementCount
 
-    if (totalFollowees >= (avatarsPerRow - 1)) {
+    if (totalFollowees >= avatarsPerRow) {
       const childrenArray = [...this.element.children]
-
       childrenArray.forEach((avatar) => {
         const thisAvatar = avatar
         thisAvatar.style.width = `${newImageWidth}px`
