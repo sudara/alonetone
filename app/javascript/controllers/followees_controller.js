@@ -2,6 +2,7 @@ import { Controller } from 'stimulus'
 
 export default class extends Controller {
   connect() {
+    this.totalFollowees = this.element.childElementCount
     const containerPaddingLeft = parseInt(window.getComputedStyle(this.element).getPropertyValue('padding-left'), 10)
     const containerPaddingRight = parseInt(window.getComputedStyle(this.element).getPropertyValue('padding-right'), 10)
     this.containerPadding = containerPaddingLeft + containerPaddingRight
@@ -19,9 +20,8 @@ export default class extends Controller {
     const totalMarginWidth = this.avatarMargin * (avatarsPerRow)
     const totalAvailableWidth = containerWidth - totalMarginWidth
     const calculatedAvatarWidth = totalAvailableWidth / avatarsPerRow
-    const totalFollowees = this.element.childElementCount
 
-    if (totalFollowees >= avatarsPerRow) {
+    if (this.totalFollowees >= avatarsPerRow) {
       const childrenArray = [...this.element.children]
       childrenArray.forEach((avatar) => {
         const thisAvatar = avatar
