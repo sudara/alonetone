@@ -189,8 +189,10 @@
       </p>
 
       <div>
-        <div class="prefix_alonetone">alonetone.com/</div>
-        <%= f.text_field :login %>
+        <div class="prefix_and_input">
+          <div class="prefix_alonetone">alonetone.com/</div>
+          <%= f.text_field :login %>
+        </div>
         <div>
           <%= f.submit "Update login name" %>
         </div>
