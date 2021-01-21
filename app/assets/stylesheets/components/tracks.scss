@@ -154,7 +154,6 @@
         }
         .title_left_column_bottom {
           clear: both;
-          padding-top: 3px;
           display: flex;
           a {
             -webkit-font-smoothing: subpixel-antialiased;
@@ -164,6 +163,7 @@
           font-size: 11px;
         }
         a.artist {
+          padding-top: 3px;
           font-size: 12px;
           font-weight: normal;
           color: $track-artist-text;
