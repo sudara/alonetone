@@ -192,13 +192,13 @@
       }
       label {
         padding-left: 40px;
-        @media only screen and (max-width: 369px) {
+        @media only screen and (max-width: 359px) {
           padding-left: 0;
         }
       }
       .row {
         display: flex;
-        @media only screen and (max-width: 369px) {
+        @media only screen and (max-width: 359px) {
           flex-wrap: wrap;
           > div:last-child {
             margin-top: 8px;
@@ -212,7 +212,7 @@
         }
         .row_prefix {
           display: flex;
-          @media only screen and (max-width: 369px) {
+          @media only screen and (max-width: 359px) {
             width: 100%;
           }
           div {
@@ -232,7 +232,7 @@
         .row_input {
           flex: 1;
           display: flex;
-          @media only screen and (max-width: 369px) {
+          @media only screen and (max-width: 359px) {
             width: 100%;
           }
           input {
