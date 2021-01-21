@@ -539,6 +539,10 @@
           justify-content: space-between;
           padding: 0 9px;
           border-right: 2px solid #999;
+          @media #{$mobile} {
+            border-right: 2px solid #000;
+          }
+          
           &:hover {
             opacity: 1;
           }
