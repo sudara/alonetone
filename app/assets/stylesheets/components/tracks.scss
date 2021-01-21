@@ -167,10 +167,10 @@
           font-size: 12px;
           font-weight: normal;
           color: $track-artist-text;
-          overflow: hidden;
+          width: 50px;
+          overflow-x: hidden;
           white-space: nowrap;
           flex-grow: 1;
-          width: 50px;
           text-overflow: ellipsis;
           &:hover {
             text-decoration: underline;
