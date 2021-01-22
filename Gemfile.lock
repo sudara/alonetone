@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rspec/rspec-core.git
-  revision: 6543181b4ae91e2ecc7e1a7385532b4aca716bcb
+  revision: bea9f5e4871073e1e4f99e0a2dbf708b660f1a6e
   branch: main
   specs:
     rspec-core (3.11.0.pre)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-expectations.git
-  revision: 3f880716f41e4af722d82ee636c48c7ac9a696db
+  revision: bd10f0cf3970932781efcd09b5e427877d16a6c2
   branch: main
   specs:
     rspec-expectations (3.11.0.pre)
@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-mocks.git
-  revision: 65e97d11872dcb9deb853979e7e696981d9e5ab8
+  revision: 9ed1fdb45ec568af79985d256b9831bab7b21981
   branch: main
   specs:
     rspec-mocks (3.11.0.pre)
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-support.git
-  revision: 5f043d299ee75fb98c1718ecb8f73c2b6a8691d0
+  revision: cb494ebc9ce9bd20f75aa5586ab3734988d70b87
   branch: main
   specs:
     rspec-support (3.11.0.pre)
@@ -174,11 +174,11 @@ GEM
       execjs
     awesome_print (1.8.0)
     aws-eventstream (1.1.0)
-    aws-partitions (1.416.0)
+    aws-partitions (1.418.0)
     aws-sdk-cloudfront (1.47.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.111.1)
+    aws-sdk-core (3.111.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -218,9 +218,9 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colorize (0.8.1)
-    commonmarker (0.21.0)
+    commonmarker (0.21.1)
       ruby-enum (~> 0.5)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     connection_pool (2.2.3)
     countries (3.0.1)
       i18n_data (~> 0.10.0)
@@ -325,7 +325,7 @@ GEM
     mustache (1.1.1)
     mysql2 (0.5.3)
     nenv (0.3.0)
-    newrelic_rpm (6.14.0)
+    newrelic_rpm (6.15.0)
     nio4r (2.5.4)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
@@ -466,7 +466,7 @@ GEM
       rubyzip (>= 1.2.2)
     semantic_range (2.3.1)
     shellany (0.0.1)
-    sidekiq (6.1.2)
+    sidekiq (6.1.3)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -487,7 +487,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thor (1.0.1)
+    thor (1.1.0)
     tilt (2.0.10)
     timeago_js (3.0.2.2)
     turbo-rails (0.5.7)
@@ -496,7 +496,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
-    webdrivers (4.4.2)
+    webdrivers (4.5.0)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
