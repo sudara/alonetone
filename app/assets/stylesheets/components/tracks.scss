@@ -154,7 +154,7 @@
         }
         .title_left_column_bottom {
           clear: both;
-          margin-top: 1px;
+          display: flex;
           a {
             -webkit-font-smoothing: subpixel-antialiased;
           }
@@ -163,9 +163,15 @@
           font-size: 11px;
         }
         a.artist {
+          padding-top: 3px;
           font-size: 12px;
           font-weight: normal;
           color: $track-artist-text;
+          width: 50px;
+          overflow-x: hidden;
+          white-space: nowrap;
+          flex-grow: 1;
+          text-overflow: ellipsis;
           &:hover {
             text-decoration: underline;
           }

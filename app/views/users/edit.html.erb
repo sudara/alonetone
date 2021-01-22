@@ -54,46 +54,74 @@
           <div class="edit_profile_socials_left_column">
             <label for="user_website">Website</label>
             <div class="row just_input">
-              <%== render file: svg_path('svg/icon_socials_website.svg') %>
-              <%= f.text_field :website %>
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_website.svg') %>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :website %>
+              </div>
             </div>
             <label for "user_spotify">Spotify</label>
             <div class="row">
-              <%== render file: svg_path('svg/icon_socials_spotify.svg') %>
-              <div>open.spotify.com/artist/</div>
-              <%= f.text_field :spotify %>
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_spotify.svg') %>
+                <div>open.spotify.com/artist/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :spotify %>
+              </div>
             </div>
             <label for "user_apple">Apple Music</label>
             <div class="row">
-              <%== render file: svg_path('svg/icon_socials_apple_music.svg') %>
-              <div>itunes.apple.com/us/artist/</div>
-              <%= f.text_field :apple %>
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_apple_music.svg') %>
+                <div>itunes.apple.com/us/artist/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :apple %>
+              </div>
             </div>
             <label for "user_youtube">YouTube</label>
             <div class="row">
-              <%== render file: svg_path('svg/icon_socials_youtube.svg') %>
-              <div>youtube.com/</div>
-              <%= f.text_field :youtube %>
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_youtube.svg') %>
+                <div>youtube.com/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :youtube %>
+              </div>
             </div>
           </div>
           <div class="edit_profile_socials_right_column">
-            <label for "user_spotify">Bandcamp</label>
+            <label for "user_bandcamp">Bandcamp</label>
             <div class="row reversed">
-              <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %>
-              <%= f.text_field :bandcamp %>
-              <div>.bandcamp.com</div>
+              <div class="row_input">
+                <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %>
+                <%= f.text_field :bandcamp %>
+              </div>
+              <div class="row_prefix">
+                <div>.bandcamp.com</div>
+              </div>
             </div>
             <label for "user_twitter">Twitter</label>
             <div class="row">
-              <%== render file: svg_path('svg/icon_socials_twitter.svg') %>
-              <div>twitter.com/</div>
-              <%= f.text_field :twitter %>
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_twitter.svg') %>
+                <div>twitter.com/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :twitter %>
+              </div>
             </div>
             <label for "user_instagram">Instagram</label>
             <div class="row">
-              <%== render file: svg_path('svg/icon_socials_instagram.svg') %>
-              <div>instagram.com/</div>
-              <%= f.text_field :instagram %>
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_instagram.svg') %>
+                <div>instagram.com/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :instagram %>
+              </div>
             </div>
           </div>
         </div>
@@ -111,6 +139,7 @@
             <%= render partial: 'setting', locals: { key: 'email_new_tracks', label: 'Email you when someone you follow uploads a track?' } %>
             <div class="edit_profile_separator"></div>
             <%= render partial: 'setting', locals: { key: 'block_guest_comments', label: 'Block guests from commenting on your tracks?' } %>
+            <div class="edit_profile_separator"></div>
           </div>
           <div class="edit_profile_settings_right_column">
             <%= render partial: 'setting', locals: { key: 'most_popular', label: 'Show most popular tracks on your home page?' } %>
@@ -160,9 +189,13 @@
       </p>
 
       <div>
-        <div class="prefix_alonetone">alonetone.com/</div>
-        <%= f.text_field :login %>
-        <%= f.submit "Update login name" %>
+        <div class="prefix_and_input">
+          <div class="prefix_alonetone">alonetone.com/</div>
+          <%= f.text_field :login %>
+        </div>
+        <div>
+          <%= f.submit "Update login name" %>
+        </div>
       </div>
     <% end %>
   </div>
