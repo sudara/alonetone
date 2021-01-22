@@ -102,7 +102,7 @@
 
     <% if authorized? && @user.listens_count > 0 %>
       <div id="user_plays_area">
-        <% cache([@track_plays]) do %>
+        <% cache([@user, @track_plays]) do %>
           <h2>Latest Listens To Your Music</h2>
           <div id="user_track_plays" class="box">
 
