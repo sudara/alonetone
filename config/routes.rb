@@ -36,7 +36,7 @@ Alonetone::Application.routes.draw do
         put :restore
       end
     end
-    resources :mass_invites
+    resources :mass_invites, param: :token
   end
 
   mount Thredded::Engine => '/forums'

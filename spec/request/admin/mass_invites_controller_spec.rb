@@ -41,7 +41,7 @@ RSpec.describe Admin::MassInvitesController, type: :request do
           }
         )
       end.to change(MassInvite, :count).by(+1)
-      expect(response.status).to redirect_to(admin_mass_invites_url)
+      expect(response.status).to redirect_to(admin_mass_invites_url(filter_by: 'active'))
     end
 
     it 'sees validation errors when a mass invite creation fails' do
@@ -53,6 +53,25 @@ RSpec.describe Admin::MassInvitesController, type: :request do
       expect(response).to render_template(:new)
       expect(response.body).to match_css('div.field.invalid')
     end
+
+    it 'archives a mass invite' do
+      mass_invite = mass_invites(:cheese_eating_challenge)
+      patch(
+        "/admin/mass_invites/#{mass_invite.token}",
+        params: { mass_invite: { archived: true } }
+      )
+      expect(response.status).to redirect_to(admin_mass_invites_url(filter_by: 'active'))
+      expect(mass_invite.reload).to be_archived
+    end
+
+    it 'activates a mass invite' do
+      mass_invite = mass_invites(:williams_friends)
+      patch(
+        "/admin/mass_invites/#{mass_invite.token}",
+        params: { mass_invite: { archived: false } }
+      )
+      expect(response.status).to redirect_to(admin_mass_invites_url(filter_by: 'active'))
+      expect(mass_invite.reload).to_not be_archived
     end
   end
 
