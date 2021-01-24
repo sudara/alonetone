@@ -1,6 +1,7 @@
 <tr>
   <td><%= mass_invite.name %></div>
-  <td><%= l(mass_invite.created_at, format: :long) %></div>
+  <td><%= l(mass_invite.created_at, format: :short) %></div>
+  <td><%= mass_invite.users_count %></td>
   <td><%= link_to(new_mass_invite_users_path(mass_invite), new_mass_invite_users_url(mass_invite)) %>
   <td>
     <% if mass_invite.archived? %>
