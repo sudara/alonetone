@@ -8,8 +8,8 @@
     <% end %>
     </h3>
     <ol>
-    <% errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <% errors.each do |error| %>
+      <li><%= error.full_message %></li>
     <% end %>
     </ol>
   </div>
