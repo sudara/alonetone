@@ -11,6 +11,10 @@
     </div>
 
     <div class="box">
+      <h2>
+        <%= params[:filter_by] == 'archived' ? 'Archived' : 'Active' %>
+        mass invites
+      </h2>
       <table>
         <thead>
           <tr>

@@ -3,7 +3,7 @@
 module Admin
   class MassInvitesController < Admin::BaseController
     def index
-      @pagy, @mass_invites = pagy(MassInvite.recent)
+      @pagy, @mass_invites = pagy(filtered_mass_invites)
     end
 
     def new
@@ -23,6 +23,10 @@ module Admin
 
     def mass_invite_params
       params.require(:mass_invite).permit(:name, :token)
+    end
+
+    def filtered_mass_invites
+      MassInvite.recent.where(archived: params[:filter_by] == 'archived')
     end
   end
 end
