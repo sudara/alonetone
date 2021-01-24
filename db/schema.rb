@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_191751) do
+ActiveRecord::Schema.define(version: 2021_01_24_191355) do
 
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
@@ -187,6 +187,13 @@ ActiveRecord::Schema.define(version: 2021_01_18_191751) do
     t.index ["listener_id"], name: "index_listens_on_listener_id"
     t.index ["track_owner_id", "created_at"], name: "index_listens_on_track_owner_id_and_created_at"
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
+  end
+
+  create_table "mass_invite_signups", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "mass_invite_id"
+    t.index ["mass_invite_id"], name: "index_mass_invite_signups_on_mass_invite_id"
+    t.index ["user_id"], name: "index_mass_invite_signups_on_user_id"
   end
 
   create_table "mass_invites", charset: "utf8mb4", force: :cascade do |t|
