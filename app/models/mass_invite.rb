@@ -5,6 +5,9 @@ class MassInvite < ApplicationRecord
 
   after_initialize :set_token, if: :new_record?
 
+  has_many :mass_invite_signups
+  has_many :users, through: :mass_invite_signups
+
   validates :name, :token, presence: true
 
   def to_param

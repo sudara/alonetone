@@ -12,6 +12,20 @@ RSpec.describe MassInvite, type: :model do
     expect(mass_invite.to_param).to eq(mass_invite.token)
   end
 
+  context 'user count' do
+    it 'increases when creating a user' do
+      mass_invite = mass_invites(:cheese_eating_challenge)
+      expect do
+        mass_invite.users.create!(
+          login: 'Anisha',
+          email: 'anisha@example.com',
+          password: 'wonttell87$',
+          password_confirmation: 'wonttell87$'
+        )
+      end.to change(mass_invite, :users_count).by(+1)
+    end
+  end
+
   context 'scopes' do
     it 'orders mass invites by creation order' do
       last = Time.zone.now
