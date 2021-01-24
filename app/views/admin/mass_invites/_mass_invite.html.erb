@@ -1,0 +1,6 @@
+<tr>
+  <td><%= mass_invite.name %></div>
+  <td><%= l(mass_invite.created_at, format: :long) %></div>
+  <td><%= link_to(new_mass_invite_users_path(mass_invite), new_mass_invite_users_url(mass_invite)) %>
+  <td><%= button_to('Archive', admin_mass_invite_path(mass_invite), method: :delete) %>
+</tr
