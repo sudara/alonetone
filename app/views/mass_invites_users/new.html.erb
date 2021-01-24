@@ -1,0 +1,58 @@
+<div class="page_container get_an_account_container">
+  <div class="blank_slate">
+    <div class="left">
+      <div class="blank_slate_illustration">
+      </div>
+      <div class="contributor_name mobile_only">
+        alec
+      </div>
+      <div class="contributor_title mobile_only">
+        illustrator
+      </div>
+    </div>
+    <div class="blank_slate_text">
+      <p><%= @mass_invite.name %></p>
+      <div class="contributor_name">
+        alec
+      </div>
+      <div class="contributor_title">
+        illustrator
+      </div>
+    </div>
+  </div>
+  
+  <div class="box">
+    <h2>Create an Account</h2>
+    <%= render partial: 'shared/errors', locals: { errors: @user.errors } %>
+
+    <%= form_with(model: @user, url: mass_invite_users_path(@mass_invite), local: true) do |f| %>
+      <div class="form_row">
+        <div>
+          <%= f.label :email, "Email" %>
+          <%= f.text_field :email %>
+          <%= inline_form_error(@user.errors[:email]) %>
+        </div>
+        <div class="field_with_hint_before">
+          <%= f.label :login, "Pick a username (no spaces allowed)" %>
+          <span>alonetone.com/</span><%= f.text_field :login %>
+          <%= inline_form_error(@user.errors[:login]) %>
+        </div>
+      </div>
+      <div class="form_row">
+        <div>
+          <%= f.label :password, "Password" %>
+          <%= f.password_field :password, autocomplete: "new-password" %>
+          <%= inline_form_error(@user.errors[:password]) %>
+        </div>
+        <div>
+          <%= f.label :password_comfirmation, "Repeat password" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <%= inline_form_error(@user.errors[:password_confirmation]) %>
+        </div>
+      </div>
+      <div>
+        <%= f.submit "Create Account" %>
+      </div>
+    <% end %>
+  </div>
+</div>

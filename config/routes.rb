@@ -105,7 +105,7 @@ Alonetone::Application.routes.draw do
 
   resources :users
   resources :mass_invites, param: :token, only: [] do
-    resource :users, only: %i[index new create], controller: :mass_invites_users
+    resource :users, only: %i[new create show], controller: :mass_invites_users
   end
 
   get ':login/history' => 'listens#index', :as => 'listens'
