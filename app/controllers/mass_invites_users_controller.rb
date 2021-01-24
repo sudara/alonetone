@@ -13,7 +13,7 @@ class MassInvitesUsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = @mass_invite.users.new(user_params)
     respond_with_user(@user)
   end
 

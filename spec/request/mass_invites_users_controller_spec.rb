@@ -14,22 +14,24 @@ RSpec.describe MassInvitesUsersController, type: :request do
     it 'creates a new user' do
       akismet_stub_response_ham
       expect do
-        post(
-          "/mass_invites/#{mass_invite.token}/users",
-          params: {
-            user: {
-              email: 'jeremy@example.com',
-              login: 'Jeremy',
-              password: 'secret123-',
-              password_confirmation: 'secret123-'
+        expect do
+          post(
+            "/mass_invites/#{mass_invite.token}/users",
+            params: {
+              user: {
+                email: 'jeremy@example.com',
+                login: 'Jeremy',
+                password: 'secret123-',
+                password_confirmation: 'secret123-'
+              }
+            },
+            headers: {
+              'x-forwarded-for' => '62.251.41.177',
+              'user-agent' => 'webkit'
             }
-          },
-          headers: {
-            'x-forwarded-for' => '62.251.41.177',
-            'user-agent' => 'webkit'
-          }
-        )
-      end.to change(User, :count).by(+1)
+          )
+        end.to change(User, :count).by(+1)
+      end.to change { mass_invite.reload.users_count }.by(+1)
       expect(response).to redirect_to(login_url(already_joined: true))
     end
 
