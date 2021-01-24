@@ -1,0 +1,28 @@
+williams_friends:
+  name: Bill's Friends
+  token: 5xNZ5M292hQSlGaH
+  archived: true
+  users_count: 0
+  created_at: <%= 1.year.ago %>
+  updated_at: <%= 1.year.ago %>
+cheese_eating_challenge:
+  name: Henri's Cheese Eating Challenge
+  token: OK22YhRGVbm6Vk4e
+  archived: false
+  users_count: 0
+  created_at: <%= 2.weeks.ago %>
+  updated_at: <%= 2.weeks.ago %>
+one_song:
+  name: One Song Per Hour Challenge
+  token: YOQPIYvl0aBGnX2g
+  archived: false
+  users_count: 12
+  created_at: <%= 1.week.ago %>
+  updated_at: <%= 1.week.ago %>
+november_invite:
+  name: Alonetone November User Extravaganza
+  token: KNw7OJjaMoVoQ6gp
+  archived: false
+  users_count: 5
+  created_at: <%= 1.minute.ago %>
+  updated_at: <%= 1.minute.ago %>
