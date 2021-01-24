@@ -104,6 +104,9 @@ Alonetone::Application.routes.draw do
   root :to => 'assets#latest'
 
   resources :users
+  resources :mass_invites, param: :token, only: [] do
+    resource :users, only: %i[index new create], controller: :mass_invites_users
+  end
 
   get ':login/history' => 'listens#index', :as => 'listens'
   get ':login/comments' => 'comments#index', :as => 'user_comments'
