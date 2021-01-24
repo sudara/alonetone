@@ -145,6 +145,9 @@ class User < ApplicationRecord
     byte_size: { less_than: 20.megabytes }
   }, if: :avatar_image_present?
 
+  has_one :mass_invite_signup
+  has_one :mass_invite, through: :mass_invite_signup
+
   # tokens and activation
   def clear_token!
     update_attribute(:perishable_token, nil)
