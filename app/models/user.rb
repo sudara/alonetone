@@ -178,8 +178,8 @@ class User < ApplicationRecord
     User.where(current_login_ip: user.current_login_ip).where('id != ?', user.id)
   end
 
-  def self.find_by_login_or_email(login)
-    User.find_by_login(login) || User.find_by_email(login)
+  def self.find_by_login_or_email(login_or_email)
+    User.where(login: login_or_email).or(User.where(email: login_or_email)).first
   end
 
   def listened_to_today_ids
