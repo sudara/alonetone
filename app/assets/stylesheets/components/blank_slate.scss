@@ -23,6 +23,12 @@
         height: 0;
         padding-bottom: 144%;
       }
+      &.alec {
+        background-image: image-url("illustrations/contributors/alec-talking.png");
+      }
+      &.jenya {
+        background-image: image-url("illustrations/contributors/jenya-talking.png");
+      }
     }
     .contributor_name.mobile_only, .contributor_title.mobile_only {
       display: none;
@@ -77,9 +83,4 @@
   background-position-y: $background_position-y;
   position: relative;
   top: -48px;
-  .left {
-    .blank_slate_illustration {
-      background-image: image-url("illustrations/contributors/alec-talking.png");
-    }
-  }
 }

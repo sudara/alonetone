@@ -1,28 +1,17 @@
 <div class="page_container get_an_account_container">
-  <div class="blank_slate">
-    <div class="left">
-      <div class="blank_slate_illustration">
-      </div>
-      <div class="contributor_name mobile_only">
-        alec
-      </div>
-      <div class="contributor_title mobile_only">
-        illustrator
-      </div>
-    </div>
-    <div class="blank_slate_text">
-      <p><%= @mass_invite.name %></p>
-      <div class="contributor_name">
-        alec
-      </div>
-      <div class="contributor_title">
-        illustrator
-      </div>
-    </div>
-  </div>
-  
+  <%= render layout: 'shared/blank_slate', locals: { name: 'jenya', role: 'developer' } do %>
+    <p>
+      “Oh wonderful <%= @mass_invite.name %>,
+    </p>
+    <p>
+      Alonetone is an invite-only place to host your music and you are invited!
+
+      You can share this link with others, but please don't post it publically.”
+    </p>
+  <% end %>
+
   <div class="box">
-    <h2>Create an Account</h2>
+    <h2>Create your alonetone account</h2>
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } %>
 
     <%= form_with(model: @user, url: mass_invite_users_path(@mass_invite), local: true) do |f| %>
@@ -43,8 +32,7 @@
           <%= f.label :password, "Password" %>
           <%= f.password_field :password, autocomplete: "new-password" %>
           <%= inline_form_error(@user.errors[:password]) %>
-        </div>
-        <div>
+
           <%= f.label :password_comfirmation, "Repeat password" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           <%= inline_form_error(@user.errors[:password_confirmation]) %>
