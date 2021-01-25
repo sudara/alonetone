@@ -1,20 +1,5 @@
 <div class="box password_reset">
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h3>
-      <% if @user.errors.size == 1 %>
-        One minor thing looks off:
-      <% else %>
-        Just a couple things to tweak:
-      <% end %>
-      </h3>
-      <ol>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ol>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/errors', locals: { errors: @user.errors } %>
   <% if @newly_invited_user %>
   <h2>Pick a password and you can start uploading!</h2>
   <% else %>
