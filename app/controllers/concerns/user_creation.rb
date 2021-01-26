@@ -28,6 +28,7 @@ module UserCreation
       # Sets the perishable token used for email confirmation and saves the record.
       user.reset_perishable_token!
       UserNotification.signup(user).deliver_now
+      flash[:ok] = "We just sent you an email at '#{user.email}'.<br/><br/>Click the link in the email, and you'll be in! <br/> Note: check your junk/spam inbox if you don't see a new email right away.".html_safe
     end
     redirect_to login_url(already_joined: true)
   end
