@@ -10,7 +10,7 @@ class NotificationsController < ApplicationController
   def unsubscribe
     current_user.settings.update(email_new_tracks: false)
     current_user.save!
-    flash[:ok] = "You will no longer be emailed when someone you follow uploads!.
+    flash[:ok] = "You will no longer be emailed when someone you follow uploads!
                    #{view_context.link_to 'Undo', '/notifications/subscribe'}"
     redirect_to root_path
   end
