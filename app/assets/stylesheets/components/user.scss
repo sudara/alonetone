@@ -532,7 +532,6 @@
         a {
           height: 40px;
           overflow: auto;
-          opacity: 0.5;
           display: block;
           text-decoration: none;
           display: flex;
@@ -542,11 +541,13 @@
           @media #{$mobile} {
             border-right: 2px solid #000;
           }
-          
           &:hover {
-            opacity: 1;
+            .link_left, .link_right {
+              opacity: 1;
+            }
           }
           .link_left {
+            opacity: 0.5;
             div:nth-child(1) {
               font-family: $medium-sans-font;
               margin-bottom: 0px;
@@ -560,6 +561,7 @@
             }
           }
           .link_right {
+            opacity: 0.5;
             float: right;
             width: 24px;
             height: 24px;
