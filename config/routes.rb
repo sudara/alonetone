@@ -104,6 +104,8 @@ Alonetone::Application.routes.draw do
   root :to => 'assets#latest'
 
   resources :users
+
+  get '/invite/:mass_invite_token', to: 'mass_invites_users#new', as: 'mass_invite'
   resources :mass_invites, param: :token, only: [] do
     resource :users, only: %i[new create show], controller: :mass_invites_users
   end
