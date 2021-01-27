@@ -162,11 +162,8 @@
         span.by {
           font-size: 11px;
         }
-        a.artist {
+        .artist_container {
           padding-top: 3px;
-          font-size: 12px;
-          font-weight: normal;
-          color: $track-artist-text;
           width: 50px;
           overflow-x: hidden;
           white-space: nowrap;
@@ -174,6 +171,11 @@
           text-overflow: ellipsis;
           &:hover {
             text-decoration: underline;
+          }
+          a.artist {
+            color: $track-artist-text;
+            font-size: 12px;
+            font-weight: normal;
           }
         }
         span.track_play,

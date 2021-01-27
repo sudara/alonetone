@@ -18,7 +18,9 @@
           </a>
         </div>
         <div class="title_left_column_bottom">
-          <%= link_to asset.user.name, user_home_path(asset.user), class: 'artist', title: "#{asset.user.name} on alonetone " %>
+          <span class="artist_container">
+            <%= link_to asset.user.name, user_home_path(asset.user), class: 'artist', title: "#{asset.user.name} on alonetone " %>
+          </span>
         </div>
       </div>
 
