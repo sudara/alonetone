@@ -64,6 +64,10 @@
         margin-top: $baseline;
         display: block;
         margin-left: 5px;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       p.instructions {
         font-family: $medium_sans_font;
