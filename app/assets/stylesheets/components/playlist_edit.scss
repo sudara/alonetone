@@ -279,7 +279,6 @@
           background-size: cover;
           border-radius: 7px;
           border: 1px solid $edit-playlist-drag-handle-border;
-          // transition: border-color 0.4s, background-image 1.4s;
           &:hover {
             border: 1px solid $edit-playlist-drag-handle-border-hover;
             background-image: $edit-playlist-drag-handle-active-background;
@@ -402,7 +401,6 @@
     @media only screen and (min-width: 749px) and (max-width: 830px) {
       min-height: 64px;
     }
-
     .mini_handle_icon {
       position: relative;
       top: 1px;
