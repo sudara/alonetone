@@ -458,16 +458,16 @@
     }
     .add {
       &:hover {
-        .add-inner {
+        .add_inner {
           background-color: $edit-playlist-track-button-background-hover;
         }
       }
       &:active {
-        .add-inner {
+        .add_inner {
           background-color: $accent;
         }
       }
-      .add-inner {
+      .add_inner {
         display: flex;
         width: 29px;
         height: 29px;
@@ -482,16 +482,16 @@
     }
     .remove {
       &:hover {
-        .remove-inner {
+        .remove_inner {
           background-color: $edit-playlist-track-button-background-hover;
         }
       }
       &:active {
-        .remove-inner {
+        .remove_inner {
           background-color: $accent;
         }
       }
-      .remove-inner {
+      .remove_inner {
         display: flex;
         width: 29px;
         height: 29px;
