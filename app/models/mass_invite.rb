@@ -19,7 +19,7 @@ class MassInvite < ApplicationRecord
   private
 
   def set_token
-    self.token ||= SecureRandom.alphanumeric(16)
+    self.token ||= SecureRandom.alphanumeric(8)
   end
 end
 
