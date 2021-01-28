@@ -5,7 +5,9 @@ class MassInvitesUsersController < ApplicationController
 
   before_action lambda {
     @mass_invite = MassInvite.find_by!(token: params[:mass_invite_token])
-    render :archived if @mass_invite.archived?
+    if @mass_invite.archived?
+      redirect_to '/get_an_account', flash: { notice: "That invite no longer exists!" }
+    end
   }
 
   def new

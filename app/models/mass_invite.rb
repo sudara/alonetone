@@ -9,6 +9,7 @@ class MassInvite < ApplicationRecord
   has_many :users, through: :mass_invite_signups
 
   scope :active, -> { where(archived: false) }
+  scope :archived, -> { where(archived: true) }
 
   validates :name, :token, presence: true
 

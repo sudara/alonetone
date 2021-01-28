@@ -70,9 +70,7 @@ RSpec.describe MassInvitesUsersController, type: :request do
 
     it 'shows a message that the mass invite is closed' do
       get "/mass_invites/#{mass_invite.token}/users/new"
-      expect(response).to have_http_status(:ok)
-      expect(response).to render_template(:archived)
-      expect(response.body).to match_css('h1')
+      expect(response).to redirect_to('/get_an_account')
     end
   end
 end
