@@ -10,6 +10,7 @@ class MassInvitesUsersController < ApplicationController
 
   def new
     @user = User.new
+    @page_title = "You're invited!"
   end
 
   def create

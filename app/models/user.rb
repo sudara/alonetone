@@ -158,7 +158,7 @@ class User < ApplicationRecord
   end
 
   def never_activated?
-    last_login_at.nil? && perishable_token.present?
+    last_request_at.nil? && perishable_token.present?
   end
 
   def update_account_request!
@@ -301,6 +301,8 @@ class User < ApplicationRecord
       musicians.with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
       with_deleted.where(is_spam: false).recent
+    when "invited"
+      joins(:mass_invite_signup)
     when String
       with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%' or display_name like '%#{filter}%'").recent
     else
