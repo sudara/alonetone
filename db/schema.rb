@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_20_172437) do
+ActiveRecord::Schema.define(version: 2021_01_25_191748) do
 
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 2020_09_20_172437) do
     t.index ["asset_id"], name: "index_audio_features_on_asset_id"
   end
 
+  create_table "authentication_tokens", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "token", null: false
+    t.integer "purpose", limit: 1, null: false
+    t.datetime "valid_until", precision: 6, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.index ["token"], name: "index_authentication_tokens_on_token", unique: true
+    t.index ["user_id"], name: "index_authentication_tokens_on_user_id"
+  end
+
   create_table "comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "commentable_type"
     t.integer "commentable_id"
@@ -168,6 +178,15 @@ ActiveRecord::Schema.define(version: 2020_09_20_172437) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "permalink"
+  end
+
+  create_table "invites", charset: "utf8mb4", force: :cascade do |t|
+    t.string "token", null: false
+    t.text "email", null: false
+    t.bigint "invited_by_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["token"], name: "index_invites_on_token", unique: true
   end
 
   create_table "listens", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

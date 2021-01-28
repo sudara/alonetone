@@ -145,6 +145,9 @@ class User < ApplicationRecord
     byte_size: { less_than: 20.megabytes }
   }, if: :avatar_image_present?
 
+  # Gives access to the user account for a limited time, for example for password resets.
+  has_many :authentication_tokens
+
   # tokens and activation
   def clear_token!
     update_attribute(:perishable_token, nil)

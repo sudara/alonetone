@@ -1,7 +1,7 @@
 class UserNotification < ApplicationMailer
-  def forgot_password(user)
+  def forgot_password(user, token)
     @user = user
-    @url = edit_password_reset_url(@user.perishable_token)
+    @url = edit_password_reset_url(token)
     mail to: user.email, subject: "[#{hostname}] Change your password"
   end
 

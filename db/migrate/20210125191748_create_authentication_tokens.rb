@@ -3,6 +3,7 @@ class CreateAuthenticationTokens < ActiveRecord::Migration[6.1]
     create_table :authentication_tokens do |t|
       t.references :user
       t.string :token, null: false
+      t.integer :purpose, null: false, limit: 1
       t.datetime :valid_until, precision: 6, null: false
       t.datetime :created_at, precision: 6, null: false
     end
