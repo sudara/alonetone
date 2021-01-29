@@ -60,6 +60,10 @@
         display: none;
       }
     }
+    a {
+      text-decoration: underline;
+      color: $orange600;  
+    }
   }
   .contributor_name {
     line-height: 1.2;
