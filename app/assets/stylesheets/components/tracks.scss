@@ -169,11 +169,11 @@
           white-space: nowrap;
           flex-grow: 1;
           text-overflow: ellipsis;
+          color: $track-artist-text;
           &:hover {
             text-decoration: underline;
           }
           a.artist {
-            color: $track-artist-text;
             font-size: 12px;
             font-weight: normal;
           }
