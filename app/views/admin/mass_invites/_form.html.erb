@@ -1,0 +1,14 @@
+<%= form_for([:admin, @mass_invite], builder: AdminFormBuilder) do |form| %>
+  <%= form.field :name do %>
+    <%= form.label_with_error :name %>
+    <%= form.text_field :name %>
+  <% end %>
+  <%= form.field :token do %>
+    <%= form.label_with_error :token %>
+    <%= form.text_field :token %>
+  <% end %>
+  <ul class="actions submit">
+    <li><%= form.submit 'Create mass invite' %></li>
+    <li><%= link_to 'Cancel', admin_mass_invites_path %></li>
+  </ul>
+<% end %>

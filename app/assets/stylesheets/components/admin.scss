@@ -262,4 +262,24 @@
       }
     }
   }
+  table {
+    border-collapse: collapse;
+    th {
+      font-weight: bold;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.375em 0.5em;
+    }
+  }
+  form {
+    padding: 0 1em;
+    ul.actions {
+      list-style-type: none;
+      li {
+        display: inline-block;
+      }
+    }
+  }
 }
