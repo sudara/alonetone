@@ -1,3 +1,10 @@
+<%= content_for :open_graph do %>
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="<%= @user.name %>" />
+  <meta property="og:description" content="<%= @user.name %>'s music on alonetone" />
+  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
+<% end %>
+
 <div class="page_container" id="user_home">
   <div id="user_header_area">
     <div id="user_header">
