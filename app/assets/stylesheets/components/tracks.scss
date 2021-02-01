@@ -169,13 +169,13 @@
           white-space: nowrap;
           flex-grow: 1;
           text-overflow: ellipsis;
-          &:hover {
-            text-decoration: underline;
-          }
           a.artist {
             color: $track-artist-text;
             font-size: 12px;
             font-weight: normal;
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
         span.track_play,
