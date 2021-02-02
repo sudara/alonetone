@@ -63,9 +63,8 @@ export default class extends PlaybackController {
     // So let's recalculate the offset for animating
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
-    // this.openTimeline.pause()
     this.closeTimeline
-      .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'none' })
+      .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
       .to(this.detailsTarget, { display: 'none' })
     this.closeTimeline.restart()
   }
@@ -74,9 +73,8 @@ export default class extends PlaybackController {
     currentlyOpen = this
     this.element.classList.add('open')
     this.detailsTarget.style.display = 'block';
-    // this.closeTimeline.pause()
     this.openTimeline
-      .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight, ease: 'none' })
+      .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
       .to(this.detailsTarget, { duration: 0.25, marginTop: 0 })
     this.openTimeline.restart()
     if (this.alreadyPlayed) {
