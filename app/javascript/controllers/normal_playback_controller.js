@@ -35,6 +35,17 @@ export default class extends PlaybackController {
       // otherwise open the track reveal section
       e.preventDefault()
 
+      if (this.openTimeline) {
+        this.openTimeline.kill()
+      }
+
+      if (this.closeTimeline) {
+        this.closeTimeline.kill()
+      }
+
+      this.closeTimeline = gsap.timeline({ paused: true })
+      this.openTimeline = gsap.timeline({ paused: true })
+
       const wasOpen = this.element.classList.contains('open')
       // if another track details is open, close it
       if (currentlyOpen) {
@@ -52,7 +63,8 @@ export default class extends PlaybackController {
     // So let's recalculate the offset for animating
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
-    this.closeTimeline = gsap.timeline({ paused: true })
+    // this.openTimeline.pause()
+    this.closeTimeline
       .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'none' })
       .to(this.detailsTarget, { display: 'none' })
     this.closeTimeline.restart()
@@ -62,7 +74,8 @@ export default class extends PlaybackController {
     currentlyOpen = this
     this.element.classList.add('open')
     this.detailsTarget.style.display = 'block';
-    this.openTimeline = gsap.timeline({ paused: true })
+    // this.closeTimeline.pause()
+    this.openTimeline
       .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight, ease: 'none' })
       .to(this.detailsTarget, { duration: 0.25, marginTop: 0 })
     this.openTimeline.restart()
