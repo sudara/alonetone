@@ -10,24 +10,27 @@
       <%== pagy_nav @pagy %>
     </div>
 
-    <div class="box">
-      <h2>
+
+    <div class="admin_column_right_inner box">
+      <%
+=begin%>
+ <h2>
         <%= params[:filter_by] == 'archived' ? 'Archived' : 'Active' %>
         mass invites
-      </h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Created</th>
-            <th>Users count</th>
-            <th>Link to invite url</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render @mass_invites %>
-        </tbody>
-      </table>
+      </h2> 
+<%
+=end%>
+      <header class="admin_header">
+        <div class="name_column">Name</div>
+        <div class="created_column">Created</div>
+        <div class="count_column">Users count</div>
+        <div class="link_column">Link to invite url</div>
+      </header>
+
+      <div class="admin_invites_rows">
+        <%= render @mass_invites %>
+      </div>
+
     </div>
 
     <div class="mini_paginator bottom_paginator">

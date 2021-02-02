@@ -97,10 +97,7 @@
       padding-left: 0;
       padding-right: 0;
 
-      header.admin_comments_header,
-      header.admin_users_header,
-      header.admin_requests,
-      header.admin_assets_header {
+      .admin_header {
         display: flex;
         border-bottom: 1px solid $admin-header-border;
         padding-left: $baseline / 2;
@@ -115,6 +112,7 @@
       .admin_comments_rows,
       .admin_users_rows,
       .admin_requests_rows,
+      .admin_invites_rows,
       .admin_assets_rows {
         > div {
           display: flex;
@@ -262,6 +260,33 @@
       }
     }
   }
+
+  .name_column {
+    width: 100px;
+    min-width: 100px;
+    margin-right: 12px;
+  }
+
+  .count_column {
+    width: 100px;
+    min-width: 100px;
+    margin-right: 12px;
+  }
+
+  .link_column {
+    width: 220px;
+    min-width: 220px;
+    margin-right: 12px;
+  }
+  .created_column {
+    width: 110px;
+    min-width: 110px;
+    margin-right: 12px;
+
+
+  }
+
+
   table {
     border-collapse: collapse;
     th {
