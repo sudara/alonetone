@@ -1,3 +1,4 @@
+import { gsap } from 'gsap'
 import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
@@ -48,19 +49,28 @@ export default class extends PlaybackController {
   closeDetails() {
     // Height of the details could have changed (for example private banner showing)
     // So let's recalculate the offset for animating
+
+    // After this animation is done in, in JS this time, hide the detailsTarget
     this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
-    this.element.classList.remove('open')
+    this.element.classList.remove('open') // instead of removing the class, do the animation
     this.seekBarContainerTarget.classList.remove('show')
   }
 
   openDetails() {
     if (currentlyOpen) {
-      currentlyOpen.element.classList.remove('open')
+      currentlyOpen.element.classList.remove('open') // maybe make an animation class
     }
     currentlyOpen = this
     this.detailsTarget.style.display = 'block'
     this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
-    this.element.classList.add('open')
+    // this.element.classList.add('open') // instead of adding the class, do the animation
+    console.log( this.detailsTarget)
+    this.timeline = gsap.timeline({ paused: true })
+      .set(this.detailsTarget, { autoAlpha: 0, marginTop: 300 })
+      .to(this.detailsTarget, { duration: 0.5, autoAlpha: 1, y: 0 })
+      .to(this.detailsTarget, { duration: 1.0, autoAlpha: 0, y: 0 }, 3)
+    this.timeline.restart()
+
     if (this.alreadyPlayed) {
       this.seekBarContainerTarget.classList.add('show')
     }
