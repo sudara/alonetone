@@ -8,6 +8,11 @@ export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
+  initialize() {
+    console.log("hit")
+    this.revealTimeline = gsap.timeline()
+  }
+
   playing() {
     this.animation.pausingAnimation()
     this.loaded = true
@@ -35,17 +40,6 @@ export default class extends PlaybackController {
       // otherwise open the track reveal section
       e.preventDefault()
 
-      if (this.openTimeline) {
-        this.openTimeline.kill()
-      }
-
-      if (this.closeTimeline) {
-        this.closeTimeline.kill()
-      }
-
-      this.closeTimeline = gsap.timeline({ paused: true })
-      this.openTimeline = gsap.timeline({ paused: true })
-
       const wasOpen = this.element.classList.contains('open')
       // if another track details is open, close it
       if (currentlyOpen) {
@@ -63,20 +57,19 @@ export default class extends PlaybackController {
     // So let's recalculate the offset for animating
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
-    this.closeTimeline
+    this.revealTimeline
+      .clear()
       .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-      .to(this.detailsTarget, { display: 'none' })
-    this.closeTimeline.restart()
+      .to(this.detailsTarget, { marginTop: -5000 })
   }
 
   openDetails() {
     currentlyOpen = this
     this.element.classList.add('open')
-    this.detailsTarget.style.display = 'block';
-    this.openTimeline
-      .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-      .to(this.detailsTarget, { duration: 0.25, marginTop: 0 })
-    this.openTimeline.restart()
+    this.revealTimeline
+      .clear()
+      .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
+      .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
     if (this.alreadyPlayed) {
       this.seekBarContainerTarget.classList.add('show')
     }

@@ -4,8 +4,12 @@
   overflow: hidden;
   width: 100%;
   min-height: 57px;
+  height: auto;
   background-color: $track-background;
   border-bottom: 1px solid $track-border-bottom;
+  &.favorited_track {
+    min-height: 81px; 
+  }
   &.open {
     position: relative;
     z-index: 2;
@@ -215,8 +219,7 @@
   .tracks_reveal {
     position: relative;
     z-index: 0;
-    display: none;
-    margin-top: -361px; // good default, js will tweak
+    margin-top: -5000px; // good default, js will tweak
     overflow: auto;
     box-sizing: border-box;
     a.add_to_favorites,
