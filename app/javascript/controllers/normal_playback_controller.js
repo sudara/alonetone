@@ -9,7 +9,6 @@ export default class extends PlaybackController {
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   initialize() {
-    console.log("hit")
     this.revealTimeline = gsap.timeline()
   }
 
@@ -60,7 +59,7 @@ export default class extends PlaybackController {
     this.revealTimeline
       .clear()
       .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-      .to(this.detailsTarget, { marginTop: -5000 })
+      .set(this.detailsTarget, { marginTop: -5000 })
   }
 
   openDetails() {
