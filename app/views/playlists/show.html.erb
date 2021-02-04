@@ -1,7 +1,14 @@
 <%= content_for :head do %>
-  <% if @playlist.cover_image_present? %>
-    <%= tag(:link, rel: 'preload', href: playlist_cover_url(@playlist, variant: :greenfield), as: 'image')%>
-  <% end %>
+  <%= tag(:link, rel: 'preload', href: playlist_cover_url(@playlist, variant: :greenfield), as: 'image')%>
+<% end if @playlist.cover_image_present? %>
+
+<%= content_for :open_graph do %>
+  <meta property="og:url" content="<%= request.url %>" />
+  <meta property="og:type" content="music.album" />
+  <meta property="og:title" content="<%= @playlist.title %>" />
+  <meta property="og:description" content="An album by <%= @user.name %>" />
+  <meta property="music.musician" content="<%= user_home_url(@user) %>">
+  <meta property="og:image" content="<%= playlist_cover_url(@playlist, variant: :playlist_cover) %>" />
 <% end %>
 
 <div class="page_container" id="playlist_and_track_content_header">

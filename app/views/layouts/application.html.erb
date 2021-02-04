@@ -3,26 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="index,follow" name="robots"/>
   <title><%= @page_title ?  "#{@page_title} | alonetone " : 'alonetone' %></title>
-  <%= yield :head %>
+  <%= yield(:head) %>
+  <%= yield(:open_graph).presence || render(partial: 'shared/open_graph') %>
   <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
   <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
   <%= javascript_packs_with_chunks_tag "application", 'data-turbo-track': 'reload', defer: true  %>
-
-  <meta content="index,follow" name="robots"/>
-  <% if @asset&.persisted? or @playlist&.persisted? %>
-    <meta property="og:type"        content="music.<%= @playlist ? 'album' : 'song' %>" />
-    <meta property="og:title"       content="<%= @playlist.try(:title) || @asset.title %>" />
-    <meta property="og:description" content="A<%= @playlist ? 'n album' : ' song'  %> by <%= @user.name %>" />
-    <% if @playlist %>
-    <meta property="og:image"       content="<%= playlist_cover_url(@playlist, variant: :playlist_cover) %>" />
-    <% else %>
-    <meta property="og:image"       content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
-    <% end %>
-  <% end %>
-
   <%= csrf_meta_tag %>
-  <!-- render user specific variables and js helpers -->
   <%= render partial: 'shared/javascript_payload' %>
   <%= render partial: 'shared/analytics' %>
 </head>

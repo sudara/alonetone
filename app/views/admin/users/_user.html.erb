@@ -11,9 +11,14 @@
       <div><%= link_to(user.display_name, admin_possibly_deleted_user_path(user.login)) %></div>
       <div><%= user.email %></div>
       <% unless user.soft_deleted? %>
-      <div><%= user.current_login_ip %>
-        <% if user.current_login_ip.present? && (User.with_same_ip_as(user).count > 0)  %>
-        <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
+      <div>
+        <% if user.never_activated? %>
+          [ unactivated ]
+        <% else %>
+          <%= user.current_login_ip %>
+          <% if User.with_same_ip_as(user).count > 0 %>
+            <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
+          <% end %>
         <% end %>
        </div>
       <% end %>

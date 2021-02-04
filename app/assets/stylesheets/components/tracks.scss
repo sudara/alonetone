@@ -154,7 +154,7 @@
         }
         .title_left_column_bottom {
           clear: both;
-          margin-top: 1px;
+          display: flex;
           a {
             -webkit-font-smoothing: subpixel-antialiased;
           }
@@ -162,12 +162,20 @@
         span.by {
           font-size: 11px;
         }
-        a.artist {
-          font-size: 12px;
-          font-weight: normal;
-          color: $track-artist-text;
+        .artist_container {
+          padding-top: 1px;
+          width: 50px;
+          overflow-x: hidden;
+          white-space: nowrap;
+          flex-grow: 1;
+          text-overflow: ellipsis;
           &:hover {
             text-decoration: underline;
+          }
+          a.artist {
+            color: $track-artist-text;
+            font-size: 12px;
+            font-weight: normal;
           }
         }
         span.track_play,

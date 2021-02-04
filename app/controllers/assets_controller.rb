@@ -124,7 +124,6 @@ class AssetsController < ApplicationController
         asset.update_attribute(:is_spam, asset.spam?) # makes an api call
         at_least_one_upload = true
       else
-        errors = asset.errors.full_messages.join('.')
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
       end
     end

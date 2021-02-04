@@ -14,6 +14,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'record selection method' do
+    it 'finds a user by login' do
+      user = users(:henri_willig)
+      expect(User.find_by_login_or_email(user.login)).to eq(user)
+    end
+
+    it 'finds a user by email' do
+      user = users(:henri_willig)
+      expect(User.find_by_login_or_email(user.email)).to eq(user)
+    end
+  end
+
   describe 'scopes' do
     it 'include profile and avatar image to prevent n+1 queries' do
       expect do

@@ -139,30 +139,31 @@ $playlist-options-link-text: $white;
 $playlist-options-link-action-text: $grey800;
 
 // playlist_edit.scss
-$edit-playlist-track-button-background: $grey200;
+$edit-playlist-track-button-background: $grey600;
 $edit-playlist-track-button-background-hover: $grey800;
 
 $edit-playlist-cover-border: $grey200;
-$edit-playlist-instructions-text: $grey1000;
+$edit-playlist-instructions-text: $grey800;
 $edit-playlist-private-label-checkbox: $grey500;
 
 $edit-playlist-column-instructions-text: $grey900;
 
 $edit-playlist-info-bottom-border: $grey1000;
 
-$edit-playlist-column-header-border: $grey100;
+$edit-playlist-column-header-border: $grey1000;
 $edit-playlist-column-header-text: $grey800;
-$edit-playlist-left-column-dash-text: $grey100;
+$edit-playlist-left-column-dash-text: $grey1000;
 $edit-playlist-left-column-size-text: $grey800;
 $edit-playlist-left-column-time-text: $grey800;
 
+$edit-playlist-sortable-ghost-background: $blue500;
 $edit-playlist-draggable-mirror-border: $black;
 
 $edit-playlist-drag-handle-idle-background: image-url("svg/icon_drag_handle_idle_dark.svg");
 $edit-playlist-drag-handle-active-background: image-url("svg/icon_drag_handle_active_dark.svg");
 
-$edit-playlist-drag-handle-border: $grey50;
-$edit-playlist-drag-handle-border-hover: $grey100;
+$edit-playlist-drag-handle-border: $grey1000;
+$edit-playlist-drag-handle-border-hover: $grey400;
 $edit-playlist-drag-handle-border-active: $accent;
 
 $edit-playlist-playlist-size-background: $grey1000;
@@ -329,7 +330,7 @@ $track-edit-text: $grey50;
 $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
-$track-edit-new-version-note-text: $grey1000;
+$track-edit-new-version-note-text: $grey800;
 
 $track-content-spam-background: $red800;
 $track-content-spam-text: $white;
@@ -396,7 +397,7 @@ $user-card-bio-text: $grey50;
 $user-card-content-divider-background: $grey900;
 $user-follows-background: $grey1100;
 $user-stats-background: $grey1100;
-$user-links-text: $black;
+$user-links-text: $white;
 $user-links-background: $grey1000;
 $user-stats-label-text: $grey800;
 $user-stats-data-text: $grey50;

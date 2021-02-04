@@ -19,7 +19,7 @@
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
           <%= render partial: 'assets/asset', locals: { asset: track.asset } %>
           <a href="#" class='remove' data-playlist-update-target="remove" data-action="playlist-update#remove">
-            <div class="remove-inner">
+            <div class="remove_inner">
                 <%== render file: svg_path('svg/icon_x.svg') %>
             </div>
           </a>
@@ -57,12 +57,12 @@
             <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
               <%= render partial: 'assets/asset', locals: { asset: asset } %>
               <a href="#" class='add' data-playlist-update-target="add" data-action="playlist-update#add">
-                <div class="add-inner">
+                <div class="add_inner">
                   <%== render file: svg_path('svg/icon_+.svg') %>
                 </div>
               </a>
               <a href="#" class='remove' data-playlist-update-target="remove" data-action="playlist-update#remove">
-                <div class="remove-inner">
+                <div class="remove_inner">
                     <%== render file: svg_path('svg/icon_x.svg') %>
                 </div>
               </a>

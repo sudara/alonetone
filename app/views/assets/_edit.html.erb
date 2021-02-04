@@ -1,15 +1,6 @@
 <%= form_with(model: asset, url: "/#{@user.login}/tracks/#{asset.id}",
   local: (true unless @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error ajax:complete->save#complete' }) do |f| %>
-  <% if asset.errors.any? %>
-    <div class="errors">
-      There were some problems...
-      <ul>
-        <% asset.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/errors', locals: { errors: asset.errors } %>
 
   <div class="track_edit">
     <header>

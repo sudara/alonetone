@@ -6,10 +6,16 @@
     <div>
       <strong><%= link_to h(truncate(track_play.asset.name, length: 48)), user_track_path(track_play.asset.user, track_play.asset) %></strong><br>
     </div>
-    <%= local_time_ago(track_play.created_at) %>
-    by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) :
-    "Guest #{track_play.ip.present? ? '('+track_play.ip+')': ''}" %> <br>
-    <span>via <%= link_source(track_play.source) %></span>
+    <div class="listen_details_second_line">
+      <%= local_time_ago(track_play.created_at) %> 
+      by <%= track_play.listener ? (link_to (h track_play.listener.name), user_home_path(track_play.listener)) :
+      "Guest #{track_play.ip.present? ? '('+track_play.ip+')': ''}" %>
+    </div>
+    
+    <div class="listen_details_third_line">
+      via <%= link_source(track_play.source) %>
+    </div>
+    
   </div>
   <div class="listen_flag">
     <%= flag_for track_play.country %>

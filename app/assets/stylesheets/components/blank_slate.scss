@@ -16,12 +16,19 @@
     .blank_slate_illustration {
       background-size: 100%;
       background-repeat: no-repeat;
+      background-position-y: bottom;
       height: 100%;
       min-width: 238px;
       @media only screen and (max-width: 540px) {
         min-width: auto;
         height: 0;
         padding-bottom: 144%;
+      }
+      &.alec {
+        background-image: image-url("illustrations/contributors/alec-talking.png");
+      }
+      &.jenya {
+        background-image: image-url("illustrations/contributors/jenya-talking.png");
       }
     }
     .contributor_name.mobile_only, .contributor_title.mobile_only {
@@ -53,6 +60,10 @@
         display: none;
       }
     }
+    a {
+      text-decoration: underline;
+      color: $orange600;  
+    }
   }
   .contributor_name {
     line-height: 1.2;
@@ -77,9 +88,4 @@
   background-position-y: $background_position-y;
   position: relative;
   top: -48px;
-  .left {
-    .blank_slate_illustration {
-      background-image: image-url("illustrations/contributors/alec-talking.png");
-    }
-  }
 }
