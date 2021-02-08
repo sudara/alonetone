@@ -169,13 +169,13 @@
           white-space: nowrap;
           flex-grow: 1;
           text-overflow: ellipsis;
-          &:hover {
-            text-decoration: underline;
-          }
+          color: $track-artist-text;
           a.artist {
-            color: $track-artist-text;
             font-size: 12px;
             font-weight: normal;
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
         span.track_play,
@@ -220,7 +220,6 @@
     overflow: auto;
     box-sizing: border-box;
     transition: margin 250ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-    box-shadow: inset 0 1px 3px #f2f2f2;
     a.add_to_favorites,
     a.favorited {
       position: absolute;

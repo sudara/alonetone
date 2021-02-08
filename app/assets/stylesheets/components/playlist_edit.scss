@@ -433,6 +433,10 @@
     display: none;
   }
   .playlist_asset {
+    &:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
     a.track_link {
       margin-right: 50px;
     }
