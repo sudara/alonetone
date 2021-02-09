@@ -20,7 +20,7 @@ class AccountRequestsController < ApplicationController
 
     if @account_request.save
       session[:email] = @account_request.email
-      redirect_to @account_request
+      redirect_to @account_request, status: 303
     else
       render 'new', status: :unprocessable_entity
     end

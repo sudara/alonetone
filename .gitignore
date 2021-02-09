@@ -5,7 +5,7 @@
 .bundle
 .ruby-version
 .yarn-integrity
-/app/javascript/animation/MorphSVGPlugin.js
+MorphSVGPlugin.js
 /config/alonetone.yml
 /config/certs
 /config/config.yml
