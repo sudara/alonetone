@@ -20,6 +20,6 @@ namespace :setup do
 
   desc "Touch JavaScript stubs to make Webpacker run without errors"
   task :touch_js do
-    FileUtils.touch(Rails.root.join("app", "javascript", "animation", "MorphSVGPlugin.js"))
+    FileUtils.touch(Rails.root.join("app", "packs", "animation", "MorphSVGPlugin.js"))
   end
 end
