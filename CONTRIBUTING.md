@@ -25,7 +25,7 @@
 >
 > newrelic.yml (for performance tracking)
 
-## Issues and workaround:
+### Issues and workaround:
 
 - Seeing the following yarn error?
 ```
@@ -41,11 +41,11 @@ yarn install
 
 In the worst case `rm -rf node_modules` and `yarn install` again.
 
-## Optional installs
+### Optional installs
 
 The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascripts/animation/` to use the plugin.
 
-## Logging in
+### Logging in
 
 After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
 
@@ -61,7 +61,38 @@ After login, click on the "Upload" button to upload your first mp3.
 * The home page is `assets#latest`
 * Too many views are in `shared/`
 
+
+## Running specs
+
+You can run guard, which will run the appropriate spec file after it or the file it's testing changes:
+
+```
+bundle exec guard start
+```
+
+Feature specs are run in headless chrome. If you want to watch the browser be automated (to debug, etc) you can comment out `options.headless!` in `rails_helper.rb`.
+
+Then you can run individual feature specs like so:
+
+```
+bundle exec rspec spec/features/home_page_spec.rb
+```
+
+You can insert `sleep 100` to have the browser wait 100 seconds if you want to do things like inspect the browser state. Just remember not to commit sleep statements...
+
 ## CSS Conventions
+
+### General
+
+CSS files are split into "components" which are either unique pages (e.g. playlist_edit), page types with shared behavior (e.g. static_pages) or actual components used across pages (e.g. blank_slate).
+
+Selectors are kept as specific and local as possible, to reduce complex cascading dependencies which lead high cognitive overhead and unwanted interaction. Individual selectors are not meant to be reusable outside of their file's context and are often scoped by a specific top-level class for that reason (e.g. `.hero`). If identical styles need to be used for another page or something is being extracted into a common component, selectors should be extracted to a shared location and renamed appropriately.
+
+Style location is also based on readability and maintainability (read: making sure files don't get too long and complex). For example, when creating new styles for a new page, a new css file is created and named after that page. When adding a playlist edit feature, styles are added to playlist edit.
+
+All colors must be in variables due to themes.
+
+### Themes
 
 We have two themes, dark and white. Every piece of UI has to be made for both themes.
 
