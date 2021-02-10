@@ -1,0 +1,13 @@
+<tr>
+  <td><%= mass_invite.name %></div>
+  <td><%= l(mass_invite.created_at, format: :short) %></div>
+  <td><%= mass_invite.users_count %></td>
+  <td><%= link_to(mass_invite.token, mass_invite_url(mass_invite)) %>
+  <td>
+    <% if mass_invite.archived? %>
+      <%= button_to('Activate', admin_mass_invite_path(mass_invite, mass_invite: { archived: 0 }), method: :patch) %>
+    <% else %>
+      <%= button_to('Archive', admin_mass_invite_path(mass_invite, mass_invite: { archived: 1 }), method: :patch) %>
+    <% end %>
+  </td>
+</tr

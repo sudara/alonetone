@@ -279,7 +279,6 @@
           background-size: cover;
           border-radius: 7px;
           border: 1px solid $edit-playlist-drag-handle-border;
-          // transition: border-color 0.4s, background-image 1.4s;
           &:hover {
             border: 1px solid $edit-playlist-drag-handle-border-hover;
             background-image: $edit-playlist-drag-handle-active-background;
@@ -402,7 +401,6 @@
     @media only screen and (min-width: 749px) and (max-width: 830px) {
       min-height: 64px;
     }
-
     .mini_handle_icon {
       position: relative;
       top: 1px;
@@ -435,13 +433,17 @@
     display: none;
   }
   .playlist_asset {
+    &:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
     a.track_link {
       margin-right: 50px;
     }
     &.sortable-ghost {
-      background-color: rgb(205, 237, 255);
+      background-color: $edit-playlist-sortable-ghost-background;
       .asset_top {
-        background-color: rgb(205, 237, 255);
+        background-color: $edit-playlist-sortable-ghost-background;
       }
     }
     .add,
@@ -458,16 +460,16 @@
     }
     .add {
       &:hover {
-        .add-inner {
+        .add_inner {
           background-color: $edit-playlist-track-button-background-hover;
         }
       }
       &:active {
-        .add-inner {
+        .add_inner {
           background-color: $accent;
         }
       }
-      .add-inner {
+      .add_inner {
         display: flex;
         width: 29px;
         height: 29px;
@@ -482,16 +484,16 @@
     }
     .remove {
       &:hover {
-        .remove-inner {
+        .remove_inner {
           background-color: $edit-playlist-track-button-background-hover;
         }
       }
       &:active {
-        .remove-inner {
+        .remove_inner {
           background-color: $accent;
         }
       }
-      .remove-inner {
+      .remove_inner {
         display: flex;
         width: 29px;
         height: 29px;

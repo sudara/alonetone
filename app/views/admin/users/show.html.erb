@@ -58,6 +58,17 @@
           </div>
         </div>
       </div>
+
+      <div style="padding-left: 1em">
+        <h3>User's Origin Story</h3>
+        <% if mass_invite = @user.mass_invite %>
+          <p>Created through the mass invite ‘<%= mass_invite.name %>’.
+        <% elsif invited_by = @user.invited_by %>
+          <p>Invited by <%= "#{invited_by.login} (#{invited_by.email})" %>.
+        <% else %>
+          <p>Out of darkness, fretted something in its sleeping</p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

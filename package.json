@@ -10,11 +10,11 @@
     "@rails/webpacker": "^5.2.1",
     "babel-loader": "^8.2.2",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.5.1",
+    "gsap": "^3.6.0",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
     "seedrandom": "^3.0.5",
-    "sortablejs": "^1.12.0",
+    "sortablejs": "^1.13.0",
     "stimulus": "^2.0.0",
     "turbolinks": "^5.2.0"
   },

@@ -7,12 +7,14 @@ RSpec.describe 'playlists', type: :feature, js: true do
       visit 'henri_willig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
+      first_track.hover
+      expect(first_track).to have_css(':hover')
+      Percy.snapshot(page, name: 'Playlist Cover')
+
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
       # Note: this only pauses GSAP animations
       with_animations_paused do
-        first_track.hover
-        Percy.snapshot(page, name: 'Playlist Cover')
 
         # This click will be an ajax request
         # And in some cases our Snapshot will fire before the DOM is updated

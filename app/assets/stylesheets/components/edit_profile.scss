@@ -64,6 +64,10 @@
         margin-top: $baseline;
         display: block;
         margin-left: 5px;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       p.instructions {
         font-family: $medium_sans_font;
@@ -192,54 +196,82 @@
       }
       label {
         padding-left: 40px;
+        @media only screen and (max-width: 359px) {
+          padding-left: 0;
+        }
       }
       .row {
         display: flex;
+        @media only screen and (max-width: 359px) {
+          flex-wrap: wrap;
+          > div:last-child {
+            margin-top: 8px;
+          }
+        }
         svg {
           margin-right: 8px;
           border: 1px transparent;
           margin-top: 3px;
           flex-shrink: 0;
         }
-        div {
-          background-color: $edit-profile-hint-background;
-          color: $edit-profile-hint-text;
-          font-family: $medium-sans-font;
-          height: 32px;
-          box-sizing: border-box;
-          padding-top: 5px;
-          border-top-left-radius: 4px;
-          border-bottom-left-radius: 4px;
-          padding-left: 8px;
-          padding-right: 4px;
-          padding-top: 9px;
-        }
-        input {
-          border-radius: 0;
-          border-top-right-radius: 4px;
-          border-bottom-right-radius: 4px;
-          margin-left: 4px;
-          height: 32px;
-          padding-left: 8px;
-          padding-top: 9px;
-          width: 100%;
-        }
-        &.reversed {
+        .row_prefix {
+          display: flex;
+          @media only screen and (max-width: 359px) {
+            width: 100%;
+          }
           div {
-            padding-left: 4px;
-            padding-right: 8px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
+            background-color: $edit-profile-hint-background;
+            color: $edit-profile-hint-text;
+            font-family: $medium-sans-font;
+            height: 32px;
+            box-sizing: border-box;
+            padding-top: 5px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            padding-left: 8px;
+            padding-right: 4px;
+            padding-top: 9px;
+          }
+        }
+        .row_input {
+          flex: 1;
+          display: flex;
+          @media only screen and (max-width: 359px) {
+            width: 100%;
+          }
+          input {
+            border-radius: 0;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
             margin-left: 4px;
+            height: 32px;
+            padding-left: 8px;
+            padding-top: 9px;
+            width: 100%;
           }
-          input {
-            margin-left: 0px;
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+        }
+        &.reversed {
+          .row_prefix {
+            div {
+              padding-left: 4px;
+              padding-right: 8px;
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+              margin-left: 4px;
+              margin-bottom: 24px;
+            }
+          }
+          .row_input {
+            input {
+              margin-left: 0px;
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+              margin-bottom: 0;
+            }
           }
         }
         &.just_input {
@@ -255,7 +287,6 @@
       margin-bottom: 0;
     }
   }
-
   .edit_profile_settings {
     padding: $baseline * (3/2);
     @media #{$mobile} {
@@ -348,7 +379,6 @@
         margin-top: 16px;
         margin-bottom: 16px;
       }
-
       .edit_profile_settings_left_column {
         margin-right: 25px;
         flex: 1;
@@ -356,6 +386,12 @@
           margin-right: 0;
           flex: auto;
           width: 100%;
+        }
+        .edit_profile_separator:last-child {
+          display: none;
+          @media #{$one-column} {
+            display: block;
+          }
         }
       }
       .edit_profile_settings_right_column {
@@ -375,7 +411,6 @@
       }
     }
   }
-
   .edit_profile_change_your_password {
     padding: $baseline * (3/2);
     @media #{$mobile} {
@@ -425,12 +460,11 @@
       }
     }
   }
-
   .edit_profile_change_your_login,
   .edit_profile_change_your_password {
     background-image: image-url("svg/background_danger_tape.svg");
     background-repeat: no-repeat;
-    background-position: center 16px;
+    background-position: left 16px;
     padding: $baseline * (3/2);
     @media #{$mobile} {
       padding: $baseline;
@@ -467,44 +501,60 @@
     }
     > form > div {
       display: flex;
-      div.prefix_alonetone {
-        background-color: $edit-profile-hint-background;
-        color: $edit-profile-hint-text;
-        font-family: $medium-sans-font;
-        height: 32px;
-        box-sizing: border-box;
-        padding-top: 5px;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        padding-left: 8px;
-        padding-right: 4px;
-        padding-top: 9px;
-      }
-      input[type="text"] {
-        border-radius: 0;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-        margin-left: 4px;
-        height: 32px;
-        padding-left: 8px;
-        padding-top: 9px;
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 0;
+      div.prefix_and_input {
+        display: flex;
+        div.prefix_alonetone {
+          background-color: $edit-profile-hint-background;
+          color: $edit-profile-hint-text;
+          font-family: $medium-sans-font;
+          height: 32px;
+          box-sizing: border-box;
+          padding-top: 5px;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          padding-left: 8px;
+          padding-right: 4px;
+          padding-top: 9px;
+        }
+        input[type="text"] {
+          border-radius: 0;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+          margin-left: 4px;
+          height: 32px;
+          padding-left: 8px;
+          padding-top: 9px;
+          width: 100%;
+          max-width: 230px;
+          margin-bottom: 0;
+        }
       }
       input[type="submit"] {
         @include default_button("primary");
-        // background-color: $grey400;
         margin-left: 20px;
         margin-bottom: 12px;
       }
     }
   }
-
+  .edit_profile_change_your_login {
+    @media #{$one-column} {
+      > form > div {
+        flex-wrap: wrap;
+        input[type="text"] {
+          margin-bottom: 24px!important;
+        }
+        div:last-child {
+          width: 100%;
+          input[type="submit"] {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
   .edit_profile_delete_your_account {
     background-image: image-url("svg/background_high_voltage_tape.svg");
     background-repeat: no-repeat;
-    background-position: center 16px;
     .danger_tag {
       position: absolute;
       right: 0;
@@ -578,81 +628,6 @@
       }
       .ok_column {
         color: $grey800;
-      }
-    }
-  }
-}
-
-// LEGACY BELOW
-
-form#reset-password {
-  input[type="text"] {
-    border-radius: 4px;
-    background-color: #666;
-    margin-right: 10px;
-    &:focus {
-      border: 1px solid #999;
-    }
-  }
-}
-
-.settings-box {
-  h2 {
-    margin-bottom: $baseline;
-  }
-  .static_content {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    &:last-child {
-      padding-top: $baseline !important;
-    }
-  }
-  select {
-    margin-top: 6px;
-    max-width: 100%;
-  }
-}
-
-.edit-your-profile-box {
-  .static_content {
-    &:last-child {
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-    }
-    input[type="text"] {
-      width: 190px;
-    }
-    select {
-      max-width: 100%;
-    }
-  }
-}
-
-.change-your-picture-box {
-  br {
-    display: none;
-  }
-  form {
-    margin-top: $baseline;
-    input:last-child {
-      display: block;
-      margin-top: $baseline;
-    }
-  }
-  img {
-    width: 100%;
-  }
-}
-
-.your-account-box {
-  .static_content:last-child {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    .static_content {
-      padding: 0 !important;
-      padding-bottom: $baseline !important;
-      input:last-child {
-        margin-top: $baseline !important;
       }
     }
   }

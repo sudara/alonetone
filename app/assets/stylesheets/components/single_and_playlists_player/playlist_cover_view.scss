@@ -1,7 +1,15 @@
 body.cover_view {
-  .playlist_sidebar {
-    border-radius: 6px 0 0 6px;
-    align-self: stretch;
+  #playlist_and_track_content {
+    .playlist_sidebar {
+      border-radius: 6px 0 0 6px;
+      align-self: stretch;
+      &.rounded_bottom_right_corner {
+        border-bottom-right-radius: 6px;
+      }
+      @media only screen and (max-width: 850px) { // where playlist drops to one column
+        border-radius: 0px 0px 6px 6px ;
+      }
+    }
   }
   .track_content {
     margin-left: -40px !important;
@@ -13,11 +21,12 @@ body.cover_view {
       @include samo-shadow-and-radius();
       border-radius: 0 6px 6px 0;
       overflow: auto;
-      @media only screen and (max-width: 850px) {
-        border-radius: 6px 6px 0 0;
+      @media only screen and (max-width: 850px) { // where playlist drops to one column
+        border-radius: 6px 6px 0px 0px;
       }
     }
     .playlist_credits {
+      max-width: 640px;
       font-size: 13px;
       line-height: 18px;
       padding: $baseline/2;
@@ -26,11 +35,11 @@ body.cover_view {
       text-align: left;
       border-radius: 0;
       box-shadow: none;
-      max-width: 624px;
       background-color: transparent;
       position: absolute;
       @media only screen and (max-width: 850px) {
         position: static;
+        max-width: none;
       }
     }
     .large_cover {
@@ -116,7 +125,6 @@ body.cover_view {
               font-size: 10px;
               display: block;
               color: $playlist-options-link-action-text;
-
             }
             &.spotify {
               background-image: image-url("svg/icon_playlist_spotify.svg");

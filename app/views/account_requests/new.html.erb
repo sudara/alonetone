@@ -1,30 +1,12 @@
 <div class="page_container get_an_account_container">
-  <div class="blank_slate">
-    <div class="left">
-      <div class="blank_slate_illustration">
-      </div>
-      <div class="contributor_name mobile_only">
-        alec
-      </div>
-      <div class="contributor_title mobile_only">
-        illustrator
-      </div>
-    </div>
-    <div class="blank_slate_text">
+  <%= render layout: 'shared/blank_slate', locals: { name: 'alec', role: 'illustrator' } do %>
       <p>
         “Alonetone is open to everyone making music. However, we are invite-only to keep spammers out.
       </p>
       <p>
         Get on the list below! It might take us a day or two to approve your account, but it’s worth it, promise.”
       </p>
-      <div class="contributor_name">
-        alec
-      </div>
-      <div class="contributor_title">
-        illustrator
-      </div>
-    </div>
-  </div>
+  <% end %>
 
   <div class="box">
     <h2>Get an Account</h2>
@@ -89,11 +71,11 @@
           <div class="single_col">
             <div class="form_radio_pair">
               <%= f.radio_button(:patreon, "maybe") %>
-              <%= f.label(:patreon_no, "Oooh, not yet but maybe someday!") %>
+              <%= f.label(:patreon_maybe, "Oooh, not yet but maybe someday!") %>
             </div>
             <div class="form_radio_pair">
               <%= f.radio_button(:patreon, "yes") %>
-              <%= f.label(:patreon, "Yes!") %>
+              <%= f.label(:patreon_yes, "Yes!") %>
             </div>
             <div class="form_radio_pair">
               <%= f.radio_button(:patreon, "no") %>

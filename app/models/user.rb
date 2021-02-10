@@ -145,6 +145,9 @@ class User < ApplicationRecord
     byte_size: { less_than: 20.megabytes }
   }, if: :avatar_image_present?
 
+  has_one :mass_invite_signup
+  has_one :mass_invite, through: :mass_invite_signup
+
   # tokens and activation
   def clear_token!
     update_attribute(:perishable_token, nil)
@@ -155,7 +158,7 @@ class User < ApplicationRecord
   end
 
   def never_activated?
-    last_login_at.nil? && perishable_token.present?
+    last_request_at.nil? && perishable_token.present?
   end
 
   def update_account_request!
@@ -178,8 +181,8 @@ class User < ApplicationRecord
     User.where(current_login_ip: user.current_login_ip).where('id != ?', user.id)
   end
 
-  def self.find_by_login_or_email(login)
-    User.find_by_login(login) || User.find_by_email(login)
+  def self.find_by_login_or_email(login_or_email)
+    User.where(login: login_or_email).or(User.where(email: login_or_email)).first
   end
 
   def listened_to_today_ids
@@ -298,6 +301,8 @@ class User < ApplicationRecord
       musicians.with_deleted.where(is_spam: true).order('deleted_at DESC')
     when "not_spam"
       with_deleted.where(is_spam: false).recent
+    when "invited"
+      joins(:mass_invite_signup)
     when String
       with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%' or display_name like '%#{filter}%'").recent
     else

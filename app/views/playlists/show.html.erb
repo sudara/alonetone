@@ -1,21 +1,29 @@
 <%= content_for :head do %>
-  <% if @playlist.cover_image_present? %>
-    <%= tag(:link, rel: 'preload', href: playlist_cover_url(@playlist, variant: :greenfield), as: 'image')%>
-  <% end %>
+  <%= tag(:link, rel: 'preload', href: playlist_cover_url(@playlist, variant: :greenfield), as: 'image')%>
+<% end if @playlist.cover_image_present? %>
+
+<%= content_for :open_graph do %>
+  <meta property="og:url" content="<%= request.url %>" />
+  <meta property="og:type" content="music.album" />
+  <meta property="og:title" content="<%= @playlist.title %>" />
+  <meta property="og:description" content="An album by <%= @user.name %>" />
+  <meta property="music.musician" content="<%= user_home_url(@user) %>">
+  <meta property="og:image" content="<%= playlist_cover_url(@playlist, variant: :playlist_cover) %>" />
 <% end %>
 
 <div class="page_container" id="playlist_and_track_content_header">
   <%= render partial: 'shared/back_to_artist' %>
 </div>
-<div class="page_container" id="playlist_and_track_content">
-  <%= render 'playlist' %>
-
+<div class="page_container" id="playlist_and_track_content" data-controller="playlist" data-action="resize@window->playlist#resize">
+  <div class="playlist_sidebar" data-playlist-target="sidebar">
+    <%= render 'playlist' %>
+  </div>
   <% if @asset %>
     <%= render partial: 'shared/asset' %>
   <% else %>
     <%= content_for(:body_class, 'cover_view') %>
-    <div class="track_content">
-      <div class="large_cover_and_credits">
+    <div class="track_content" data-playlist-target="content">
+      <div class="large_cover_and_credits" data-playlist-target="cover">
         <div class="large_cover">
           <%= playlist_cover(@playlist, variant: :playlist_cover) %>
         </div>
@@ -34,11 +42,10 @@
         </div>
       <% end %>
       <% if @playlist.credits.present? %>
-        <div class="playlist_credits">
+        <div class="playlist_credits" data-playlist-target="credits">
         <%= markdown(@playlist.credits) %>
       </div>
       <% end %>
     </div>
   <% end %>
 </div>
-

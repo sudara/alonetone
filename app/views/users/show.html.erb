@@ -1,3 +1,10 @@
+<%= content_for :open_graph do %>
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="<%= @user.name %>" />
+  <meta property="og:description" content="<%= @user.name %>'s music on alonetone" />
+  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
+<% end %>
+
 <div class="page_container" id="user_home">
   <div id="user_header_area">
     <div id="user_header">
@@ -102,7 +109,7 @@
 
     <% if authorized? && @user.listens_count > 0 %>
       <div id="user_plays_area">
-        <% cache([@track_plays]) do %>
+        <% cache([@user, @track_plays]) do %>
           <h2>Latest Listens To Your Music</h2>
           <div id="user_track_plays" class="box">
 
@@ -190,7 +197,7 @@
       <h2 class="area_heading">
         Who <%= @user.name %> follows
       </h2>
-        <div class="area_content">
+      <div class="area_content" data-controller="followees" data-action="resize@window->followees#resize">
         <%= render partial: 'shared/users_to_edge', locals: { users: @user.followees } %>
       </div>
     </div>

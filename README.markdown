@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.com/sudara/alonetone.svg?branch=master)](http://travis-ci.com/sudara/alonetone)
+[![Build Status](https://github.com/sudara/alonetone/workflows/Specs%20and%20Percy/badge.svg)](https://github.com/sudara/alonetone/actions)
 [![Code Climate](https://api.codeclimate.com/v1/badges/d1f4fb0a4b8690332e86/maintainability)](https://codeclimate.com/github/sudara/alonetone/maintainability)
 [![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/alonetone/alonetone)
 
