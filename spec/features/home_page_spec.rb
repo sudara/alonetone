@@ -41,6 +41,9 @@ RSpec.describe 'home page', type: :feature, js: true do
       track = find(".asset", match: :first)
       track.find(".play_link").click
 
+      # capybara should be waiting here but isn't
+      sleep 0.2
+
       expect(track).to have_selector('.add_to_favorites')
       expect(track).to have_selector('.stitches_seek')
 
