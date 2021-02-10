@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '6.1.0'
+gem 'rails', '6.1.2'
 gem 'mysql2'
 gem 'puma'
 
@@ -44,7 +44,7 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-gem 'webpacker', '>= 6.0.0.pre.2'
+gem 'webpacker', '6.0.0.beta.5'
 gem 'sass-rails'
 gem 'yui-compressor'
 gem 'turbo-rails'
