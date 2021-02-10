@@ -84,7 +84,9 @@ Then you can run individual feature specs like so:
 bundle exec rspec spec/features/home_page_spec.rb
 ```
 
-This lets you do things like insert `sleep 20` to have the browser wait 20 seconds if you want to do things like inspect the browser state in tests. Just remember not to commit sleep statements...
+This lets you do things like insert `sleep 20` to have the browser wait 20 seconds if you want to do things like inspect the browser state in tests.
+
+Just remember not to commit sleep statements or the change to the non-headless chrome :)
 
 ## CSS Conventions
 

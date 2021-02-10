@@ -30,7 +30,7 @@ ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
 # Choose whether or not we want to run in selenium_chrome or selenium_chrome_headless
-Capybara.default_driver = :selenium_chrome # :selenium_chrome_headless
+Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome
 
 # We want to run all feature specs in chrome
 Capybara.javascript_driver = Capybara.default_driver
