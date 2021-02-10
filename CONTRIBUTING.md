@@ -70,7 +70,13 @@ You can run guard, which will run the appropriate spec file after it or the file
 bundle exec guard start
 ```
 
-Feature specs are run in headless chrome. If you want to watch the browser be automated (to debug, etc) you can comment out `options.headless!` in `rails_helper.rb`.
+### Feature specs and Percy
+
+Feature specs are run in headless chrome. If you want to watch the browser be automated (to debug, etc) you can change the "driver" being used in `rails_helper.rb` from headless to normal chrome.
+
+```
+Capybara.default_driver = :selenium_chrome # :selenium_chrome_headless
+```
 
 Then you can run individual feature specs like so:
 
@@ -78,7 +84,7 @@ Then you can run individual feature specs like so:
 bundle exec rspec spec/features/home_page_spec.rb
 ```
 
-You can insert `sleep 100` to have the browser wait 100 seconds if you want to do things like inspect the browser state. Just remember not to commit sleep statements...
+This lets you do things like insert `sleep 20` to have the browser wait 20 seconds if you want to do things like inspect the browser state in tests. Just remember not to commit sleep statements...
 
 ## CSS Conventions
 

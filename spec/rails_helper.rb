@@ -10,12 +10,13 @@ require 'capybara/rspec'
 require 'selenium/webdriver'
 require 'percy'
 
-# The suite needs to be able to connect to localhost for feature specs. Percy
-# sends its build response out of the test process so it also needs to connect
+# The suite needs to be able to connect to localhost for feature specs.
+# Percy sends its build response out of the test process so it also needs to connect
 # to its API.
+# Capybara/Webdrivers needs to ping for / download latest chrome
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: ['percy.io', 'chromedriver.storage.googleapis.com', 'ownandship.io']
+  allow: ['percy.io', 'ownandship.io', 'chromedriver.storage.googleapis.com']
 )
 
 # Reloads schema.rb when database has pending migrations.
@@ -28,17 +29,12 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
-# Magic incantation to make Capybara run the feature specs. Nobody knows
-# why this isn't a default in the gem.
-Capybara.register_driver(:headless_chrome) do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox disable-gpu])
-  options.headless! # comment out to view feature tests in active browser
+# Choose whether or not we want to run in selenium_chrome or selenium_chrome_headless
+Capybara.default_driver = :selenium_chrome # :selenium_chrome_headless
 
-  Capybara::Selenium::Driver.new app,
-    browser: :chrome,
-    options: options
-end
-Capybara.javascript_driver = :headless_chrome
+# We want to run all feature specs in chrome
+Capybara.javascript_driver = Capybara.default_driver
+
 # Configure the HTTP server to be silent. Note that Capybara would figure out
 # to use Puma on its own if we remove this line.
 Capybara.server = :puma, { Silent: true }
