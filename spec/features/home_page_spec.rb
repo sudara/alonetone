@@ -12,19 +12,18 @@ RSpec.describe 'home page', type: :feature, js: true do
     expect(page).to have_selector('.private_check_box label')
     expect(track_chunk).not_to have_selector('.add_to_favorites')
 
-    # capybara should be waiting here but isn't
-    sleep 0.2
-    track_chunk.find('.private_check_box label').click
-    expect(page).to have_selector('span.only_user_name')
+    # These might be below the fold, hence visible: :all
+    track_chunk.find('.private_check_box label', visible: :all).click
+    expect(page).to have_selector('span.only_user_name', visible: :all)
 
     track_chunk.find('textarea').set("Hey this is a comment from a guest")
 
     # private checkbox is technically offscreen, but we still want to confirm it's checked
-    expect(track_chunk.find('.private_check_box .private', visible: false)).to be_checked
+    expect(track_chunk.find('.private_check_box .private', visible: :all)).to be_checked
     Percy.snapshot(page, name: 'Home as Guest')
 
     akismet_stub_response_ham
-    track_chunk.find('input[type=submit]').click()
+    track_chunk.find('input[type=submit]').click
     expect(track_chunk.find('.ajax_waiting')).to have_text('Submitted, thanks!')
   end
 
