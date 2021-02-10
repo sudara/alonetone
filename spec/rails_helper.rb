@@ -91,4 +91,9 @@ RSpec.configure do |config|
   config.before(:example, type: :controller) do
     activate_authlogic
   end
+
+  # load seeds only on the feature specs
+  config.before(:suite, js: true) do
+    Rails.application.load_seed
+  end
 end
