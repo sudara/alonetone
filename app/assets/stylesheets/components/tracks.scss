@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height: 57px;
+  min-height: 58px;
   height: auto;
   background-color: $track-background;
   border-bottom: 1px solid $track-border-bottom;
@@ -75,11 +75,11 @@
       display: flex;
       div.button {
         width: 50px;
-        height: 50px;
+        height: 58px;
         a {
           display: block;
           width: 50px;
-          height: 50px;
+          height: 58px;
           svg {
             width: 28px;
             height: 28px;
@@ -106,7 +106,8 @@
         overflow: hidden;
         box-sizing: border-box;
         width: auto;
-        height: 50px;
+        height: 58px;
+        cursor: pointer;
         padding-top: 13px;
         flex-grow: 1;
         .title_left_column {
