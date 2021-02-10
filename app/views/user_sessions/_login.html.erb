@@ -1,9 +1,20 @@
 <%= form_with model: @user_session, data: { turbo: false }, id: 'login_form' do |f| %>
-  <%= f.label :login %>
-  <%= f.text_field :login %>
+  <%= render partial: 'shared/errors', locals: { errors: @user_session.errors } %>
+  <h3 class="form_heading">
+    Don't be shy, come on in!
+  </h3>
 
-  <%= f.label :password %>
-  <%= f.password_field :password, required: true, autocomplete: 'current-password'  %>
+  <div class="field_with_hint_before">
+    <%= f.label :login %>
+    <%= f.text_field :login %>
+    <%= inline_form_error(@user_session.errors[:login]) %>
+  </div>
+
+  <div class="field_with_hint_before">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: 'current-password'  %>
+    <%= inline_form_error(@user_session.errors[:password]) %>
+  </div>
 
   <div>
     <%= f.submit "Come on in...", data: { turbolinks: "false" } %>
@@ -14,7 +25,8 @@
   <%= link_to "Forgot Your Password?", "#reset-password", class: "slide_open_href" %>
 </p>
 
-<%= form_with url: password_resets_path, data: { turbo: false }, id: 'reset-password', style: 'display:none' do |f| %>
+<%= form_with url: password_resets_path, data: { turbo: false }, id: 'reset-password' do |f| %>
+
   <label for="email">Enter the email address you signed up with</label>
 
   <%= f.text_field 'email' %>
