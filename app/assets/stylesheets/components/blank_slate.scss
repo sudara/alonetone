@@ -30,6 +30,9 @@
       &.jenya {
         background-image: image-url("illustrations/contributors/jenya-talking.png");
       }
+      &.sudara {
+        background-image: image-url("illustrations/contributors/sudara-talking.png");
+      }
     }
     .contributor_name.mobile_only, .contributor_title.mobile_only {
       display: none;
@@ -62,7 +65,7 @@
     }
     a {
       text-decoration: underline;
-      color: $orange600;  
+      color: $orange600;
     }
   }
   .contributor_name {

@@ -12,42 +12,32 @@
   </div>
 </nav>
 
-<% if params[:sort] == 'patrons' %>
-<div class="page_container get_an_account_container">
-  <div class="blank_slate">
-    <div class="left">
-      <div class="blank_slate_illustration">
-      </div>
-      <div class="contributor_name mobile_only">
-        sudara
-      </div>
-      <div class="contributor_title mobile_only">
-        illustrator
-      </div>
-    </div>
-    <div class="blank_slate_text">
+<div class="page_container">
+
+<% if @sort == 'patrons' %>
+  <%= render layout: 'shared/blank_slate', locals: { name: 'sudara', role: 'creator' } do %>
       <p>
-        “Alonetone is open to everyone making music. However, we are invite-only to keep spammers out.
+        This is the Wall-o-Thanks!!!
       </p>
+
       <p>
-        Get on the list below! It might take us a day or two to approve your account, but it’s worth it, promise.”
+        The alonetoners listed below contribute to keep the servers running and ensure we can keep provide a free home to musicians everywhere. Thank you!
       </p>
-      <div class="contributor_name">
-        sudara
-      </div>
-      <div class="contributor_title">
-        illustrator
-      </div>
-    </div>
-  </div>
+
+      <p>
+       Want to join in? <%= link_to "Support alonetone on patreon.", "https://patreon.com/alonetone" %>
+      </p>
+
+  <% end %>
 <% end %>
+</div>
 
 <div class="page_container" id="user_index">
   <div class="mini_paginator bottom_paginator">
     <%== pagy_nav @users_pagy %>
   </div>
   <ul id="large_users_grid" class="responsive_grid">
-    <% if @sort == 'dedicated_listeners'%>
+    <% if @sort == 'dedicated_listeners' %>
       <% cache("dedicated/#{params[:page]}/", expires_in: 4.hours) do %>
         <%= render partial: 'shared/user', collection: @users, as: :user %>
       <% end %>
