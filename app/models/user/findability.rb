@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
       # feeds the users/index subnav
       def paginate_by_params(params)
-        available_sortings = %w[last_uploaded most_listened_to new_artists monster_uploaders dedicated_listeners]
+        available_sortings = %w[last_uploaded patrons most_listened_to new_artists monster_uploaders dedicated_listeners]
         params[:sort] = 'last_seen' if !params[:sort].present? || !available_sortings.include?(params[:sort])
         User.send(params[:sort])
       end
@@ -38,6 +38,10 @@ class User < ApplicationRecord
       # needed to map incoming params to scopes
       def last_seen
         recently_seen
+      end
+
+      def patrons
+        joins(:patron).preload(:patron)
       end
 
       def recently_joined
