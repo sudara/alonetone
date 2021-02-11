@@ -239,6 +239,8 @@ GEM
     dynamic_form (1.1.4)
     erubi (1.10.0)
     execjs (2.7.0)
+    faker (2.16.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -531,6 +533,7 @@ DEPENDENCIES
   country_select
   dalli
   dynamic_form
+  faker
   guard
   guard-rspec
   http-2
