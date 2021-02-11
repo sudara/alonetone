@@ -1,7 +1,9 @@
-## Setting up alonetone locally on macOS
+## Setting up alonetone locally
 
 - Clone this repo
 `git clone REPO_GIT`
+
+### MacOS
 
 - `brew install libsndfile lame` (required for id3 tags and waveforms)
 - `brew install vips` (required for processing images)
@@ -25,9 +27,32 @@
 >
 > newrelic.yml (for performance tracking)
 
-## Issues and workaround:
 
-- Seeing the following yarn error?
+## Optional installs
+
+The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascripts/animation/` to use the plugin.
+
+## Logging in
+
+After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
+
+After login, click on the "Upload" button to upload your first mp3.
+
+## Running alonetone
+
+### Seeds
+
+Instead of using a production dump or unique data locally, we use seed data that is generated programmatically. The code lives in `db/seeds.rb`.
+
+To reset the seeds:
+
+```
+bundle exec rake db:reset
+```
+
+### Issues and workaround:
+
+Seeing the following yarn error?
 ```
   Your Yarn packages are out of date!
   Please run `yarn install` to update.
@@ -40,17 +65,6 @@ yarn install
 ```
 
 In the worst case `rm -rf node_modules` and `yarn install` again.
-
-## Optional installs
-
-The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascripts/animation/` to use the plugin.
-
-## Logging in
-
-After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
-
-After login, click on the "Upload" button to upload your first mp3.
-
 
 ## Nomenclature and Historical Baggage That Can And Should Change
 
