@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
@@ -189,14 +189,14 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "mass_invite_signups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "mass_invite_signups", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "mass_invite_id"
     t.index ["mass_invite_id"], name: "index_mass_invite_signups_on_mass_invite_id"
     t.index ["user_id"], name: "index_mass_invite_signups_on_user_id"
   end
 
-  create_table "mass_invites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "mass_invites", charset: "utf8mb4", force: :cascade do |t|
     t.text "name", null: false
     t.string "token", null: false
     t.boolean "archived", default: false, null: false
@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.datetime "updated_at"
   end
 
-  create_table "patrons", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "patrons", charset: "utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at"
     t.index ["user_id"], name: "index_patrons_on_user_id"
@@ -264,7 +264,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "settings", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "display_listen_count", default: true
     t.boolean "block_guest_comments", default: false
