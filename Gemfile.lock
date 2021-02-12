@@ -472,7 +472,7 @@ GEM
     sixarm_ruby_unaccent (1.2.0)
     skylight (5.0.0.beta4)
       activesupport (>= 5.2.0)
-    sometimes (0.0.3)
+    sometimes (1.1.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
     sprockets (4.0.2)

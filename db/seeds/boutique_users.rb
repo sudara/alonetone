@@ -1,4 +1,4 @@
-selected_password = ENV.fetch('PASSWORD', 'testing123')
+SEEDS_PASSWORD = ENV.fetch('PASSWORD', 'testing123')
 
 muppet_upload = upload('muppets.mp3')
 piano_upload = upload('piano.mp3')
@@ -11,58 +11,52 @@ manfred_cover_upload = upload('manfreddoescover.jpg')
 blue_de_bresse_upload = upload('blue_de_bresse.jpg')
 cheshire_cheese_upload = upload('cheshire_cheese.jpg')
 
-
 # Create admin account.
-admin_password = selected_password
 admin = User.create!(
   login: 'owner',
   email: 'owner@example.com',
-  password: admin_password,
-  password_confirmation: admin_password,
+  password: SEEDS_PASSWORD,
+  password_confirmation: SEEDS_PASSWORD,
   admin: true,
   current_login_ip: 'fc00:1:1::1'
 )
-put_user_credentials(admin.login, admin_password)
+put_user_credentials(admin.login, SEEDS_PASSWORD)
 
 # Create moderator account.
-moderator_password = selected_password
 moderator = User.create!(
   login: 'moderator',
   email: 'moderator@example.com',
-  password: moderator_password,
-  password_confirmation: moderator_password,
+  password: SEEDS_PASSWORD,
+  password_confirmation: SEEDS_PASSWORD,
   moderator: true,
   current_login_ip: 'fc00:1:1::2',
   avatar_image: sudara_avatar_upload
 )
-put_user_credentials(moderator.login, moderator_password)
+put_user_credentials(moderator.login, SEEDS_PASSWORD)
 moderator.profile.update(
   country: 'Austria'
 )
 
 # Create regular musician account.
-musician_password = selected_password
 musician = User.create!(
   login: 'musician',
   email: 'musician@example.com',
-  password: musician_password,
-  password_confirmation: musician_password,
+  password: SEEDS_PASSWORD,
+  password_confirmation: SEEDS_PASSWORD,
   current_login_ip: 'fc00:1:1::3'
 )
-put_user_credentials(musician.login, musician_password)
+put_user_credentials(musician.login, SEEDS_PASSWORD)
 
 # --- Marieh ---
-
-marie_password = selected_password
 marie = User.create!(
   login: 'marieh',
   email: 'marie.harel@example.com',
-  password: marie_password,
-  password_confirmation: marie_password,
+  password: SEEDS_PASSWORD,
+  password_confirmation: SEEDS_PASSWORD,
   current_login_ip: 'fc00:1:1::4',
   avatar_image: marie_avatar_upload
 )
-put_user_credentials(marie.login, marie_password)
+put_user_credentials(marie.login, SEEDS_PASSWORD)
 marie.profile.update(
   bio: 'The phrase is not commonly used to describe the colour of a cheese, though there are some cheeses with a greenish tint, usually from mold or added herbs.',
   country: 'Spain',
@@ -119,16 +113,14 @@ playlist.tracks.create!(user: marie, asset: appellation_description)
 playlist.publish!
 
 # --- Carole ---
-
-carole_password = selected_password
 carole = User.create!(
   login: 'carole',
   email: 'carole.koshin@example.com',
-  password: carole_password,
-  password_confirmation: carole_password,
+  password: SEEDS_PASSWORD,
+  password_confirmation: SEEDS_PASSWORD,
   current_login_ip: 'fc00:1:1::5'
 )
-put_user_credentials(carole.login, carole_password)
+put_user_credentials(carole.login, SEEDS_PASSWORD)
 carole.profile.update(
   bio: 'Though it was started primarily by Switzerland, France, and Italy, who also happen to dominate its awards, there are typically over 100 entries, from all over the world, including Japan, Mexico, and Ethiopia.',
   country: 'United States',
@@ -160,17 +152,15 @@ edible_coating.tracks.create!(user: carole, asset: cylindrical_rounds)
 edible_coating.publish!
 
 # --- Petere ---
-
-petere_password = selected_password
 petere = User.create!(
   login: 'petere',
   display_name: 'Petere 🐺',
   email: 'petere.appleby@example.com',
-  password: petere_password,
-  password_confirmation: petere_password,
+  password: SEEDS_PASSWORD,
+  password_confirmation: SEEDS_PASSWORD,
   current_login_ip: 'fc00:1:1::6'
 )
-put_user_credentials(petere.login, petere_password)
+put_user_credentials(petere.login, SEEDS_PASSWORD)
 petere.profile.update(
   country: 'Norway',
   city: 'Medjå'

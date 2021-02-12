@@ -9,4 +9,7 @@ Rails.application.config.rakismet.test = true
 
 # In the test environment we do things like screenshot comparison, etc
 # We don't want our data changing screenshot to screenshot
-Faker::Config.random = Random.new(42) if Rails.env.test?
+if Rails.env.test?
+  Faker::Config.random = Random.new(42)
+  Kernal.srand(42)
+end
