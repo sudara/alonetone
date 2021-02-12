@@ -4,11 +4,11 @@
     margin-bottom: 0;
     h2 {
       @include title24();
-      height: 64px;
-      line-height: 1;
-      padding-top: 26px;
+      height: auto;
+      line-height: 1.2;
+      padding-top: 24px;
       padding-right: $baseline * 1.5;
-      padding-bottom: 0;
+      padding-bottom: 11px;
       padding-left: $baseline * 1.5;
       margin-bottom: 0;
       @media #{$mobile} {
@@ -51,6 +51,17 @@
           max-width: none;
         }
         .columns {
+          .form_radio_pair {
+            display: flex;
+            label {
+              margin-left: 15.5px;
+              position: relative;
+              top: -1px;
+            }
+            input {
+              flex-shrink: 0;
+            }
+          }
           div {
             max-width: 200px;
             @media #{$mobile} {
