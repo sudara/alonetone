@@ -19,6 +19,10 @@ export default class extends PlaybackController {
 
   playCallback() {
     this.showLoadingAnimationOrPauseButton()
+    if (currentlyOpen) {
+      currentlyOpen.closeDetails()
+      currentlyOpen = undefined
+    }
     this.openDetails()
     this.showSeekBar()
     this.registeredListen = true
