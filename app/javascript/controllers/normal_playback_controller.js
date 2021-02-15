@@ -19,7 +19,7 @@ export default class extends PlaybackController {
 
   playCallback() {
     this.showLoadingAnimationOrPauseButton()
-    if (currentlyOpen) {
+    if (currentlyOpen && (currentlyOpen !== this)) {
       currentlyOpen.closeDetails()
       currentlyOpen = undefined
     }
@@ -67,15 +67,17 @@ export default class extends PlaybackController {
   }
 
   openDetails() {
-    currentlyOpen = this
-    this.element.classList.add('open')
-    this.revealTimeline
-      .clear()
-      .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
-      .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
-    if (this.alreadyPlayed) {
-      this.seekBarContainerTarget.classList.add('show')
+    if (currentlyOpen !== this) {
+      this.element.classList.add('open')
+      this.revealTimeline
+        .clear()
+        .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
+        .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
+      if (this.alreadyPlayed) {
+        this.seekBarContainerTarget.classList.add('show')
+      }
     }
+    currentlyOpen = this
   }
 
   showLoadingAnimationOrPauseButton() {
