@@ -14,7 +14,7 @@
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
-    <div class="admin_column_right_inner box">
+    <div class="admin_column_right_inner admin_users box">
 
       <header class="admin_header">
         <div class="date_column">Joined</div>
@@ -22,7 +22,7 @@
         <div class="bio_column">Bio</div>
       </header>
 
-      <div class="admin_users_rows">
+      <div class="admin_rows">
          <%= render partial: 'admin/users/user', collection: @users %>
       </div>
     </div>
