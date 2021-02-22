@@ -14,9 +14,6 @@ RSpec.describe 'home page', type: :feature, js: true do
     expect(track_chunk).not_to have_selector('.add_to_favorites')
 
     track_chunk.find('.private_check_box label').click
-
-    # capybara should be waiting here but isn't
-    sleep 0.3
     expect(page).to have_selector('span.only_user_name')
 
     track_chunk.find('textarea').set("Hey this is a comment from a guest")
@@ -40,9 +37,6 @@ RSpec.describe 'home page', type: :feature, js: true do
 
       track = find(".asset", match: :first)
       track.find(".play_link").click
-
-      # capybara should be waiting here but isn't
-      sleep 0.3
 
       expect(track).to have_selector('.add_to_favorites')
       expect(track).to have_selector('.stitches_seek')

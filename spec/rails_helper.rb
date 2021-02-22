@@ -13,10 +13,10 @@ require 'percy'
 # The suite needs to be able to connect to localhost for feature specs.
 # Percy sends its build response out of the test process so it also needs to connect
 # to its API.
-# Capybara/Webdrivers needs to ping for / download latest chrome
+# Capybara/Webdrivers needs to ping for / download latest chrome/geckodriver
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: ['percy.io', 'ownandship.io', 'chromedriver.storage.googleapis.com']
+  allow: ['percy.io', 'ownandship.io', 'chromedriver.storage.googleapis.com', 'github.com']
 )
 
 # Reloads schema.rb when database has pending migrations.
@@ -30,7 +30,7 @@ ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
 # Choose whether or not we want to run in selenium_chrome or selenium_chrome_headless
-Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome
+Capybara.default_driver = :selenium_headless # :selenium
 
 # We want to run all feature specs in chrome
 Capybara.javascript_driver = Capybara.default_driver
