@@ -69,8 +69,9 @@ export default class extends PlaybackController {
 
   openDetails() {
     if (currentlyOpen !== this) {
-      this.element.classList.add('open')
+      this.detailsTarget.style.display = 'block'
       this.detailsTarget.style.marginTop = '0'
+      this.element.classList.add('open')
       // this.revealTimeline
       //   .clear()
       //   .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
