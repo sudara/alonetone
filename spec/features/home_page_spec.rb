@@ -7,22 +7,22 @@ RSpec.describe 'home page', type: :feature, js: true do
     expect(page).not_to have_selector('.profile_link')
 
     track_chunk = find(".asset", match: :first)
-    track_chunk.click
+    track_chunk.find(".play_link").click
+
     page.scroll_to(track_chunk)
+    expect(track_chunk).to have_selector('.private_check_box label', visible: true)
+    expect(track_chunk).to have_no_selector('.add_to_favorites')
 
-    expect(page).to have_selector('.private_check_box label')
-    expect(track_chunk).not_to have_selector('.add_to_favorites')
-
-    # capybara should be waiting here but isn't
-    sleep 0.2
+    fast_forward_animations
+    Percy.snapshot(page, name: 'Home as Guest before private check box click')
     track_chunk.find('.private_check_box label').click
-    expect(page).to have_selector('span.only_user_name')
 
-    track_chunk.find('textarea').set("Hey this is a comment from a guest")
+    expect(track_chunk).to have_selector('span.only_user_name', visible: true)
+
+    track_chunk.find('textarea').fill_in with: "Hey this is a comment from a guest"
 
     # private checkbox is technically offscreen, but we still want to confirm it's checked
     expect(track_chunk.find('.private_check_box .private', visible: :all)).to be_checked
-    page.scroll_to(0, 0)
     Percy.snapshot(page, name: 'Home as Guest')
 
     akismet_stub_response_ham
@@ -41,9 +41,7 @@ RSpec.describe 'home page', type: :feature, js: true do
       track = find(".asset", match: :first)
       track.find(".play_link").click
 
-      # capybara should be waiting here but isn't
-      sleep 0.2
-
+      page.scroll_to(track)
       expect(track).to have_selector('.add_to_favorites')
       expect(track).to have_selector('.stitches_seek')
 

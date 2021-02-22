@@ -47,7 +47,6 @@ export default class extends PlaybackController {
       // if another track details is open, close it
       if (currentlyOpen) {
         currentlyOpen.closeDetails()
-        currentlyOpen = undefined
       }
       if (!wasOpen && !this.data.get('openable')) {
         this.openDetails()
@@ -56,13 +55,15 @@ export default class extends PlaybackController {
   }
 
   closeDetails() {
-    // Height of the details could have changed (for example private banner showing)
-    // So let's recalculate the offset for animating
+    currentlyOpen = undefined
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
+
+    // Height of the details could have changed (for example private banner showing)
+    // So the margin offset for animating needs to be recalculated here
     this.revealTimeline
       .clear()
-      .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
+      .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
       .set(this.detailsTarget, { marginTop: -5000 })
   }
 
