@@ -222,8 +222,8 @@
   .tracks_reveal {
     position: relative;
     z-index: 0;
-    display: none;
-    margin-top: -1000px; // good default, js will tweak
+    display: block;
+    // margin-top: -1000px; // good default, js will tweak
     overflow: auto;
     box-sizing: border-box;
     a.add_to_favorites,
