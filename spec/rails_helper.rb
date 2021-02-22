@@ -88,8 +88,4 @@ RSpec.configure do |config|
   config.before(:example, type: :controller) do
     activate_authlogic
   end
-
-  config.before(:each, js: true) do
-    Capybara.page.driver.browser.manage.window.maximize
-  end
 end
