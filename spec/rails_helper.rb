@@ -16,7 +16,8 @@ require 'percy'
 # Capybara/Webdrivers needs to ping for / download latest chrome/geckodriver
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: ['percy.io', 'ownandship.io', 'chromedriver.storage.googleapis.com', 'github.com']
+  allow: ['percy.io', 'ownandship.io', 'chromedriver.storage.googleapis.com',
+    'github.com', 'github-releases.githubusercontent.com']
 )
 
 # Reloads schema.rb when database has pending migrations.
