@@ -29,11 +29,22 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
-# Choose whether or not we want to run in selenium_chrome or selenium_chrome_headless
-Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome
+# We are fixing the window size to help guarantee same results on CI/locally
+Capybara.register_driver :alonetone do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    args: %w[disable-gpu no-sandbox window-size=1024,1500])
 
-# We want to run all feature specs in chrome
-Capybara.javascript_driver = Capybara.default_driver
+  # comment out to run with the browser visible:
+  options.headless!
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    options: options
+  )
+end
+Capybara.default_driver = :alonetone
+Capybara.javascript_driver = :alonetone
 
 # Configure the HTTP server to be silent. Note that Capybara would figure out
 # to use Puma on its own if we remove this line.
