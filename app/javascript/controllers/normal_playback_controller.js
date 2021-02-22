@@ -62,7 +62,7 @@ export default class extends PlaybackController {
     this.seekBarContainerTarget.classList.remove('show')
     this.revealTimeline
       .clear()
-      .to(this.detailsTarget, { duration: 0.25, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
+      .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
       .set(this.detailsTarget, { marginTop: -5000 })
   }
 
@@ -72,7 +72,7 @@ export default class extends PlaybackController {
       this.revealTimeline
         .clear()
         .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
-        .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
+        .to(this.detailsTarget, { duration: 0.20, marginTop: 0, ease: 'power4.inOut' })
       if (this.alreadyPlayed) {
         this.seekBarContainerTarget.classList.add('show')
       }
