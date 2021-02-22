@@ -85,7 +85,6 @@
         background-color: $admin-search-background;
       }
     }
-
     .pagy-nav {
       width: 100%;
       float: none;
@@ -151,6 +150,7 @@
     a {
       @include default-button();
     }
+    
     input[type="submit"],
     a {
       margin-bottom: 0;
@@ -164,8 +164,6 @@
       min-width: 104px;
     }
   }
-
-
 
   form {
     padding: 0 1em;
