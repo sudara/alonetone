@@ -13,7 +13,7 @@
   &.open {
     position: relative;
     z-index: 2;
-    box-shadow: $track-open-box-shadow;
+    // box-shadow: $track-open-box-shadow;
   }
   &:last-child {
     border-bottom: 0;
