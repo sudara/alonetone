@@ -61,16 +61,16 @@ export default class extends PlaybackController {
 
     // Height of the details could have changed (for example private banner showing)
     // So the margin offset for animating needs to be recalculated here
-    this.revealTimeline
-      .clear()
-      .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-      .set(this.detailsTarget, { marginTop: -5000 })
+    // this.revealTimeline
+    //   .clear()
+    //   .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
+    //   .set(this.detailsTarget, { marginTop: -5000 })
   }
 
   openDetails() {
     if (currentlyOpen !== this) {
       this.element.classList.add('open')
-      this.detailsTarget.style.marginTop = '0'
+      // this.detailsTarget.style.marginTop = '0'
       this.revealTimeline
         .clear()
         .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
