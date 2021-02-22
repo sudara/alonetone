@@ -69,10 +69,11 @@ export default class extends PlaybackController {
   openDetails() {
     if (currentlyOpen !== this) {
       this.element.classList.add('open')
-      this.revealTimeline
-        .clear()
-        .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
-        .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
+      this.detailsTarget.style.marginTop = '0'
+      // this.revealTimeline
+      //   .clear()
+      //   .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
+      //   .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
       if (this.alreadyPlayed) {
         this.seekBarContainerTarget.classList.add('show')
       }
