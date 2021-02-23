@@ -8,9 +8,9 @@ export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
-  initialize() {
+  // initialize() {
     // this.revealTimeline = gsap.timeline()
-  }
+  // }
 
   playing() {
     this.animation.pausingAnimation()
