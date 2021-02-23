@@ -18,9 +18,10 @@ jobs:
         include:
           - name: Normal Specs
             command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+            morph: false
           - name: Feature Specs & Percy
             command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
-
+            morph: true
     steps:
     - name: Installing apt dependencies
       run: |
@@ -53,11 +54,14 @@ jobs:
       run: yarn install
       if: steps.yarn-cache.outputs.cache-hit != 'true'
 
+    - name: Put MorphSVGPlugin.js in place for feature specs
+      run: echo ${{ secrets.MORPHSVG }} > "app/javascript/animation/MorphSVGPlugin.js"
+      if: ${{ matrix.morph }}
+
     - name: Copy config and setup db
       run: |
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
-        bin/rails db:seed
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
