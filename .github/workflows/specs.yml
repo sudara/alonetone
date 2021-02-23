@@ -38,10 +38,9 @@ jobs:
       with:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          **/packs-test
-        key: ${{ runner.os }}-yarnwebpack-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn2-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarnwebpack-
+          ${{ runner.os }}-yarn2-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
@@ -58,11 +57,6 @@ jobs:
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
         bin/rails db:seed
-
-    - name: Delete anything in public/packs-test
-      run: |
-        cat public/packs-test/manifest.json
-        rm -rf public/packs-test
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
