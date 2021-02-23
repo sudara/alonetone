@@ -4,7 +4,6 @@ on: [push, pull_request] # push OR PR
 
 env:
   RAILS_ENV: test
-  NODE_ENV: test
   # RUBYOPT: -w # get own and ship ruby deprecation notices
   OAS_AGENT_KEY: ${{ secrets.OAS_AGENT_KEY }}
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
