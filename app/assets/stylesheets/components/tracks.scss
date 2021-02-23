@@ -13,7 +13,7 @@
   &.open {
     position: relative;
     z-index: 2;
-    // box-shadow: $track-open-box-shadow;
+    box-shadow: $track-open-box-shadow;
   }
   &:last-child {
     border-bottom: 0;
@@ -222,7 +222,8 @@
   .tracks_reveal {
     position: relative;
     z-index: 0;
-    display: block;
+    display: block!important;
+    margin-top: 0!important;
     // margin-top: -1000px; // good default, js will tweak
     overflow: auto;
     box-sizing: border-box;
