@@ -54,7 +54,6 @@ export default class extends PlaybackController {
     currentlyOpen = undefined
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
-
     // Height of the details could have changed (for example private banner showing)
     // So the margin offset for animating needs to be recalculated here
     gsap
@@ -69,6 +68,9 @@ export default class extends PlaybackController {
   openDetails() {
     if (currentlyOpen !== this) {
       this.element.classList.add('open')
+
+      gsap.to(this.element, { backgroundColor: 'red' })
+      gsap.to(this.playButtonTarget, { backgroundColor: 'red' })
 
       // can't animate "display" attribute as offsetHeight depends on it
       this.detailsTarget.style.display = 'block'
