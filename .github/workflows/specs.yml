@@ -38,9 +38,10 @@ jobs:
       with:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn2-${{ hashFiles('**/yarn.lock') }}
+          **/packs-test
+        key: ${{ runner.os }}-yarn3-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarn2-
+          ${{ runner.os }}-yarn3-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
