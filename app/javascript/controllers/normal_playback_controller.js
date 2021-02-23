@@ -1,4 +1,3 @@
-// import { gsap } from 'gsap'
 import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
@@ -8,10 +7,6 @@ export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
-  // initialize() {
-    // this.revealTimeline = gsap.timeline()
-  // }
-
   playing() {
     this.animation.pausingAnimation()
     this.loaded = true
@@ -19,10 +14,6 @@ export default class extends PlaybackController {
 
   playCallback() {
     this.showLoadingAnimationOrPauseButton()
-    if (currentlyOpen && (currentlyOpen !== this)) {
-      currentlyOpen.closeDetails()
-      currentlyOpen = undefined
-    }
     this.openDetails()
     this.showSeekBar()
     this.registeredListen = true
@@ -55,31 +46,24 @@ export default class extends PlaybackController {
   }
 
   closeDetails() {
-    currentlyOpen = undefined
+    // Height of the details could have changed (for example private banner showing)
+    // So let's recalculate the offset for animating
+    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
-
-    // Height of the details could have changed (for example private banner showing)
-    // So the margin offset for animating needs to be recalculated here
-    // this.revealTimeline
-    //   .clear()
-    //   .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-    //   .set(this.detailsTarget, { marginTop: -5000 })
   }
 
   openDetails() {
-    if (currentlyOpen !== this) {
-      this.element.classList.add('open')
-      this.detailsTarget.style.marginTop = '0'
-      //  this.revealTimeline
-      //    .clear()
-      //    .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
-      //    .to(this.detailsTarget, { duration: 0.25, marginTop: 0, ease: 'power4.inOut' })
-      if (this.alreadyPlayed) {
-        this.seekBarContainerTarget.classList.add('show')
-      }
+    if (currentlyOpen) {
+      currentlyOpen.element.classList.remove('open')
     }
     currentlyOpen = this
+    this.detailsTarget.style.display = 'block'
+    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
+    this.element.classList.add('open')
+    if (this.alreadyPlayed) {
+      this.seekBarContainerTarget.classList.add('show')
+    }
   }
 
   showLoadingAnimationOrPauseButton() {
