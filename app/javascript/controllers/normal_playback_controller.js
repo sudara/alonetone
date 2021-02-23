@@ -8,6 +8,10 @@ export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
+  initialize() {
+    this.playButtonTarget.style.backgroundColor = "green"
+  }
+
   playing() {
     this.animation.pausingAnimation()
     this.loaded = true
