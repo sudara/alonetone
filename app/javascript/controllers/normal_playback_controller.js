@@ -8,10 +8,6 @@ export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
-  initialize() {
-    this.revealTimeline = gsap.timeline()
-  }
-
   playing() {
     this.animation.pausingAnimation()
     this.loaded = true
@@ -61,21 +57,27 @@ export default class extends PlaybackController {
 
     // Height of the details could have changed (for example private banner showing)
     // So the margin offset for animating needs to be recalculated here
-    // this.revealTimeline
-    //   .clear()
-    //   .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-    //   .set(this.detailsTarget, { marginTop: -5000 })
+    gsap
+      .to(this.detailsTarget, {
+        duration: 0.25,
+        marginTop: -this.detailsTarget.offsetHeight,
+        ease: 'power4.inOut',
+        display: 'none',
+      })
   }
 
   openDetails() {
     if (currentlyOpen !== this) {
       this.element.classList.add('open')
-      this.detailsTarget.style.marginTop = 0;
 
-      // this.revealTimeline
-      //   .clear()
-      //   .set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
-      //   .to(this.detailsTarget, { duration: 0.20, marginTop: 0, ease: 'power4.inOut' })
+      // can't animate "display" attribute as offsetHeight depends on it
+      this.detailsTarget.style.display = 'block'
+      gsap.set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
+      gsap.to(this.detailsTarget, {
+        duration: 0.25,
+        marginTop: 0,
+        ease: 'power4.inOut',
+      })
       if (this.alreadyPlayed) {
         this.seekBarContainerTarget.classList.add('show')
       }
