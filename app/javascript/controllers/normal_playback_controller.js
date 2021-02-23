@@ -1,4 +1,4 @@
-import { gsap } from 'gsap'
+// import { gsap } from 'gsap'
 import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
@@ -9,7 +9,7 @@ export default class extends PlaybackController {
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
   initialize() {
-    this.revealTimeline = gsap.timeline()
+    // this.revealTimeline = gsap.timeline()
   }
 
   playing() {
@@ -61,10 +61,10 @@ export default class extends PlaybackController {
 
     // Height of the details could have changed (for example private banner showing)
     // So the margin offset for animating needs to be recalculated here
-    this.revealTimeline
-      .clear()
-      .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
-      .set(this.detailsTarget, { marginTop: -5000 })
+    // this.revealTimeline
+    //   .clear()
+    //   .to(this.detailsTarget, { duration: 0.2, marginTop: -this.detailsTarget.offsetHeight, ease: 'power4.inOut' })
+    //   .set(this.detailsTarget, { marginTop: -5000 })
   }
 
   openDetails() {
