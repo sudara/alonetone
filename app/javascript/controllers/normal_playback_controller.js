@@ -69,6 +69,8 @@ export default class extends PlaybackController {
     if (currentlyOpen !== this) {
       this.element.classList.add('open')
 
+      this.element.style.backgroundColor = "blue"
+      this.playButtonTarget.style.backgroundColor = "blue"
       gsap.to(this.element, { backgroundColor: 'red' })
       gsap.to(this.playButtonTarget, { backgroundColor: 'red' })
 
