@@ -56,7 +56,9 @@ jobs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
 
     - name: Put MorphSVGPlugin.js in place for feature specs
-      run: printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
+      run: |
+        printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
+        cat app/javascript/animation/MorphSVGPlugin.js
       if: ${{ matrix.morph }}
 
     - name: Copy config and setup db
