@@ -19,9 +19,6 @@ import '../misc/bugsnag.js.erb'
 
 // uncomment for local stitches dev:
 // import Playlist from '../../../../stitches/src/playlist'
-window.onload = function () {
-  document.querySelector('body').style.backgroundColor = 'orange'
-};
 
 Rails.start()
 Turbolinks.start()

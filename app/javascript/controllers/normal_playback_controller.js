@@ -8,10 +8,6 @@ export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
 
-  initialize() {
-    this.playButtonTarget.style.backgroundColor = "green"
-  }
-
   playing() {
     this.animation.pausingAnimation()
     this.loaded = true
@@ -73,14 +69,9 @@ export default class extends PlaybackController {
     if (currentlyOpen !== this) {
       this.element.classList.add('open')
 
-      this.element.style.backgroundColor = "blue"
-      this.playButtonTarget.style.backgroundColor = "blue"
-      gsap.to(this.element, { backgroundColor: 'red' })
-      gsap.to(this.playButtonTarget, { backgroundColor: 'red' })
-
       // can't animate "display" attribute as offsetHeight depends on it
       this.detailsTarget.style.display = 'block'
-      gsap.set(this.detailsTarget, { marginTop: -361 })
+      gsap.set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
       gsap.to(this.detailsTarget, {
         duration: 0.25,
         marginTop: 0,
