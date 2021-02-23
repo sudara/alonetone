@@ -72,7 +72,7 @@ export default class extends PlaybackController {
 
       // can't animate "display" attribute as offsetHeight depends on it
       this.detailsTarget.style.display = 'block'
-      gsap.set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
+      gsap.set(this.detailsTarget, { marginTop: -361 })
       gsap.to(this.detailsTarget, {
         duration: 0.25,
         marginTop: 0,
