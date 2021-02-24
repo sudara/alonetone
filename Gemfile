@@ -66,7 +66,6 @@ end
 ## Who loves tests! You do? You do!
 group :test do
   gem 'capybara'
-  gem 'capybara-screenshot'
   gem 'webdrivers'
   gem 'guard', require: false
   gem 'guard-rspec', require: false

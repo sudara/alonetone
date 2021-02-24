@@ -17,8 +17,12 @@ require 'percy'
 # Capybara/Webdrivers needs to ping for / download latest chrome
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: ['percy.io', 'ownandship.io', 'chromedriver.storage.googleapis.com',
-    'github.com', 'github-releases.githubusercontent.com'])
+  allow: ['percy.io',
+    'ownandship.io',
+    'cdn.alonetone.com', # fonts
+    'chromedriver.storage.googleapis.com',
+    'github.com',
+    'github-releases.githubusercontent.com'])
 
 # Reloads schema.rb when database has pending migrations.
 ActiveRecord::Migration.maintain_test_schema!
@@ -98,5 +102,22 @@ RSpec.configure do |config|
 
   config.before(:example, type: :controller) do
     activate_authlogic
+  end
+
+  config.after(:each, type: :feature, js: true) do |test|
+    if !test.metadata[:allow_js_errors]
+      errors = page.driver.browser.manage.logs.get(:browser)
+      aggregate_failures 'javascript errors' do
+        errors.each do |error|
+          # we really don't care about CORS stuff
+          next if error.message.include?('font')
+
+          expect(error.level).not_to eq('SEVERE'), error.message
+          next unless error.level == 'WARNING'
+          STDERR.puts 'WARN: javascript warning'
+          STDERR.puts error.message
+        end
+      end
+    end
   end
 end
