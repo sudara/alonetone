@@ -7,7 +7,6 @@ require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
 require 'selenium/webdriver'
 require 'percy'
 
