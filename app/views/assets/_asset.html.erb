@@ -32,7 +32,7 @@
 
   </div>
   <% if defined? favorite %>
-  <div class="asset_favorited">
+  <div class="asset_favorited" data-action="click->normal-playback#toggleDetails">
 
     <i class="icon_favorite">
       <%== render file: svg_path('svg/icon_favorite.svg') %>

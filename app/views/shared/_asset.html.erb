@@ -9,7 +9,8 @@
   <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
   <meta property="music.musician" content="<%= user_home_path(@user) %>">
 <% end %>
-<div class="track_content stitches_track"
+
+<div class="track_content stitches_track "
   data-controller="big-play single-playback"
   data-action="track:playing->single-playback#playing
     track:play->single-playback#play
