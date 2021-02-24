@@ -36,7 +36,10 @@ ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 # We are fixing the window size to help guarantee same results on CI/locally
 Capybara.register_driver :alonetone do |app|
   options = Selenium::WebDriver::Chrome::Options.new(
-    args: %w[disable-gpu no-sandbox window-size=1024,1500])
+    # specifying window size caused a playlist test failure
+    # find('.play_button_container a').click # pause
+    # window-size=1024,1500
+    args: %w[disable-gpu no-sandbox])
 
   # comment out to run with the browser visible:
   options.headless!
