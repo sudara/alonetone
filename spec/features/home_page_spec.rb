@@ -12,7 +12,6 @@ RSpec.describe 'home page', type: :feature, js: true do
     expect(track_chunk).to have_selector('.private_check_box label', visible: true)
     expect(track_chunk).to have_no_selector('.add_to_favorites')
 
-    Percy.snapshot(page, name: 'Home as Guest before private check box click')
     track_chunk.find('.private_check_box label').click
 
     expect(track_chunk).to have_selector('span.only_user_name', visible: true)
