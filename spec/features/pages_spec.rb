@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe 'home page', type: :feature, js: true do
+RSpec.describe 'about page', type: :feature, js: true do
   it 'renders' do
     visit '/about'
 

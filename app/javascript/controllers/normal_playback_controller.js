@@ -1,3 +1,4 @@
+import { gsap } from 'gsap'
 import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
@@ -14,6 +15,10 @@ export default class extends PlaybackController {
 
   playCallback() {
     this.showLoadingAnimationOrPauseButton()
+    if (currentlyOpen && (currentlyOpen !== this)) {
+      currentlyOpen.closeDetails()
+      currentlyOpen = undefined
+    }
     this.openDetails()
     this.showSeekBar()
     this.registeredListen = true
@@ -46,24 +51,37 @@ export default class extends PlaybackController {
   }
 
   closeDetails() {
-    // Height of the details could have changed (for example private banner showing)
-    // So let's recalculate the offset for animating
-    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
+    currentlyOpen = undefined
     this.element.classList.remove('open')
     this.seekBarContainerTarget.classList.remove('show')
+    // Height of the details could have changed (for example private banner showing)
+    // So the margin offset for animating needs to be recalculated here
+    gsap
+      .to(this.detailsTarget, {
+        duration: 0.25,
+        marginTop: -this.detailsTarget.offsetHeight,
+        ease: 'power4.inOut',
+        display: 'none',
+      })
   }
 
   openDetails() {
-    if (currentlyOpen) {
-      currentlyOpen.element.classList.remove('open')
+    if (currentlyOpen !== this) {
+      this.element.classList.add('open')
+
+      // can't animate "display" attribute as offsetHeight depends on it
+      this.detailsTarget.style.display = 'block'
+      gsap.set(this.detailsTarget, { marginTop: -this.detailsTarget.offsetHeight })
+      gsap.to(this.detailsTarget, {
+        duration: 0.25,
+        marginTop: 0,
+        ease: 'power4.inOut',
+      })
+      if (this.alreadyPlayed) {
+        this.seekBarContainerTarget.classList.add('show')
+      }
     }
     currentlyOpen = this
-    this.detailsTarget.style.display = 'block'
-    this.detailsTarget.style.marginTop = `-${this.detailsTarget.offsetHeight}px`
-    this.element.classList.add('open')
-    if (this.alreadyPlayed) {
-      this.seekBarContainerTarget.classList.add('show')
-    }
   }
 
   showLoadingAnimationOrPauseButton() {
