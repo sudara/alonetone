@@ -1,9 +1,6 @@
 name: Specs and Percy
 
-on:
-  push:
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request] # push OR PR
 
 env:
   RAILS_ENV: test
@@ -41,9 +38,10 @@ jobs:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           **/packs-test
-        key: ${{ runner.os }}-yarnwebpack-${{ hashFiles('**/yarn.lock') }}
+          tmp/cache/webpacker
+        key: ${{ runner.os }}-yarn3-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarnwebpack-
+          ${{ runner.os }}-yarn3-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1

@@ -3,9 +3,13 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height: 57px;
+  min-height: 58px;
+  height: auto;
   background-color: $track-background;
   border-bottom: 1px solid $track-border-bottom;
+  &.favorited_track {
+    min-height: 81px;
+  }
   &.open {
     position: relative;
     z-index: 2;
@@ -71,15 +75,15 @@
       display: flex;
       div.button {
         width: 50px;
-        height: 50px;
+        height: 58px;
         a {
           display: block;
           width: 50px;
-          height: 50px;
+          height: 58px;
           svg {
             width: 28px;
             height: 28px;
-            margin-top: 14px;
+            margin-top: 15px;
             margin-left: 8px;
             pointer-events: none;
             fill: $track-play-button-background;
@@ -102,7 +106,8 @@
         overflow: hidden;
         box-sizing: border-box;
         width: auto;
-        height: 50px;
+        height: 58px;
+        cursor: pointer;
         padding-top: 13px;
         flex-grow: 1;
         .title_left_column {
@@ -132,7 +137,7 @@
             font-weight: bold;
             position: absolute;
             right: 14px;
-            bottom: 20px;
+            bottom: 27px;
             text-align: right;
           }
           time {
@@ -140,7 +145,7 @@
             font-size: 12px;
             position: absolute;
             right: 15px;
-            bottom: 7px;
+            bottom: 14px;
             display: block;
             text-align: right;
             color: $track-time-text;
@@ -169,13 +174,13 @@
           white-space: nowrap;
           flex-grow: 1;
           text-overflow: ellipsis;
-          &:hover {
-            text-decoration: underline;
-          }
+          color: $track-artist-text;
           a.artist {
-            color: $track-artist-text;
             font-size: 12px;
             font-weight: normal;
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
         span.track_play,
@@ -193,6 +198,8 @@
       padding-left: 50px;
       height: 30px;
       line-height: 26px;
+      cursor: pointer;
+      margin-top: -6px;
       i.icon_favorite {
         position: absolute;
         top: 0px;
@@ -214,13 +221,10 @@
   }
   .tracks_reveal {
     position: relative;
-    z-index: 0;
-    display: none;
     margin-top: -361px; // good default, js will tweak
     overflow: auto;
     box-sizing: border-box;
-    transition: margin 250ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-    box-shadow: inset 0 1px 3px #f2f2f2;
+    display: none;
     a.add_to_favorites,
     a.favorited {
       position: absolute;
@@ -359,7 +363,6 @@
         }
       }
     }
-
     .track_links {
       display: none;
       float: right;
@@ -375,10 +378,5 @@
         }
       }
     }
-  }
-  &.open .tracks_reveal {
-    display: block;
-    margin-top: 0 !important;
-    box-shadow: none;
   }
 }

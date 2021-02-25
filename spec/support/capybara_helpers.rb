@@ -23,7 +23,7 @@ module RSpec
       end
 
       def fast_forward_animations
-        page.execute_script("Alonetone.gsap.globalTimeline.timeScale(2)")
+        page.execute_script("Alonetone.gsap.globalTimeline.timeScale(10)")
         sleep(0.1)
       end
 
