@@ -20,7 +20,6 @@ jobs:
             command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
           - name: Feature Specs & Percy
             command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
-
     steps:
     - name: Installing apt dependencies
       run: |
@@ -58,7 +57,6 @@ jobs:
       run: |
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
-        bin/rails db:seed
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}

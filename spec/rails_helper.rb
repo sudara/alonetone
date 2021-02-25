@@ -106,6 +106,11 @@ RSpec.configure do |config|
     activate_authlogic
   end
 
+  # load seeds only on the feature specs
+  config.before(:suite, js: true) do
+    Rails.application.load_seed
+  end
+  
   config.after(:each, type: :feature, js: true) do |test|
     if !test.metadata[:allow_js_errors]
       errors = page.driver.browser.manage.logs.get(:browser)
