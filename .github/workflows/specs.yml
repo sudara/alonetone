@@ -1,9 +1,6 @@
 name: Specs and Percy
 
-on:
-  push:
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request] # push OR PR
 
 env:
   RAILS_ENV: test
@@ -23,7 +20,6 @@ jobs:
             command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
           - name: Feature Specs & Percy
             command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
-
     steps:
     - name: Installing apt dependencies
       run: |
@@ -42,9 +38,10 @@ jobs:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           **/packs-test
-        key: ${{ runner.os }}-yarnwebpack-${{ hashFiles('**/yarn.lock') }}
+          tmp/cache/webpacker
+        key: ${{ runner.os }}-yarn3-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarnwebpack-
+          ${{ runner.os }}-yarn3-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
@@ -60,7 +57,6 @@ jobs:
       run: |
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
-        bin/rails db:seed
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
