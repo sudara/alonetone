@@ -76,6 +76,7 @@ export default class extends PlaybackController {
         duration: 0.25,
         marginTop: 0,
         ease: 'power4.inOut',
+        display: 'block',
       })
       if (this.alreadyPlayed) {
         this.seekBarContainerTarget.classList.add('show')
