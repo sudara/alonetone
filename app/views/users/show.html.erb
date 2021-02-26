@@ -21,6 +21,18 @@
       </p>
   <% end %>
 </div>
+<% elsif authorized? && !@user.avatar_image_present? && @user.profile.bio.empty? %>
+<div class="page_container page_container_with_blank_slate">
+  <%= render layout: 'shared/blank_slate', locals: { name: 'samo', role: 'designer' } do %>
+      <p>
+        Mmmmm, it looks like you haven't uploaded a profile pic or written a bio yet...
+      </p>
+
+      <p>
+        Click that avatar icon in the top right of the page and then click "Edit" and you'll be on your way!
+      </p>
+  <% end %>
+</div>
 <% end %>
 
 <div class="page_container" id="user_home">
