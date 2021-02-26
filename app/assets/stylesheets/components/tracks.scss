@@ -220,11 +220,12 @@
     }
   }
   .tracks_reveal {
+    display: none;
     position: relative;
     margin-top: -361px; // good default, js will tweak
     overflow: auto;
     box-sizing: border-box;
-    display: none;
+    z-index: 0;
     a.add_to_favorites,
     a.favorited {
       position: absolute;
