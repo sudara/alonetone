@@ -5,6 +5,24 @@
   <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
 <% end %>
 
+<% if authorized? && @user.brand_new? %>
+<div class="page_container page_container_with_blank_slate">
+  <%= render layout: 'shared/blank_slate', locals: { name: 'jenya', role: 'backend dev' } do %>
+      <p>
+        Welcome to the farm — er, I mean your profile.
+      </p>
+
+      <p>
+        Your playlists and tracks and activity will show up here once you start doing stuff!
+      </p>
+
+      <p>
+        You can also send people to this page with this address: <%= link_to request.original_url, request.original_url %>
+      </p>
+  <% end %>
+</div>
+<% end %>
+
 <div class="page_container" id="user_home">
   <div id="user_header_area">
     <div id="user_header">
