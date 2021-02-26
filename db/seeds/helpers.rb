@@ -15,3 +15,19 @@ end
 def put_user_credentials(username, password)
   puts "You can now sign in with: #{username} - #{password}"
 end
+
+def audio_file
+  @muppet_upload ||= upload('muppets.mp3')
+  @piano_upload ||= upload('piano.mp3')
+  @andy_upload ||= upload('titleless.mp3')
+
+  [@muppet_upload, @piano_upload, @andy_upload].sample
+end
+
+def create_track(user)
+  user.assets.create!(extract_metadata(
+    audio_file: audio_file,
+    title: Faker::Music::RockBand.song,
+    description: Faker::Lorem.words(number: rand(5..400))
+  ))
+end

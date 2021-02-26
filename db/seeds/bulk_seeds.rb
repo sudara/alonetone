@@ -3,8 +3,9 @@ include ActiveSupport::Testing::TimeHelpers
 
 travel_to(1.week.ago)
 
-puts "Populating another 50 users...."
+puts "Populating another 50 users, 50% musicians with a track or two"
 50.times do
+  print('.')
   name = sometimes ? Faker::TvShows::TwinPeaks.unique.character : Faker::TvShows::StarTrek.unique.character
   user = User.create!(
     login: Faker::Internet.username(specifier: name, separators: [""]),
@@ -14,12 +15,16 @@ puts "Populating another 50 users...."
     password_confirmation: SEEDS_PASSWORD,
     current_login_ip: Faker::Internet.ip_v4_address
   )
-  sometimes do
+  25.percent_of_the_time do
     user.create_patron
   end
 
   sometimes do
-
+    (1..3).times do
+      travel_to(rand(7..30).days.ago)
+      create_track(user)
+      travel_back
+    end
   end
 end
 
@@ -37,8 +42,8 @@ Asset.find_each do |asset|
 end
 
 
-puts "And 50 comments..."
-1.upto(50) do |i|
+puts "And 100 comments..."
+1.upto(100) do |i|
   travel_to(rand(7..30).days.ago)
   commentable = Asset.random_order.first
   recipient = commentable.user
@@ -65,3 +70,9 @@ puts "And 100 favorites"
 end
 
 # following
+puts "Making it very social (0-100 follows per account)"
+User.find_each do |user|
+  sometimes(rand(10..100), otherwise: rand(0..10)).times do
+    user.add_or_remove_followee(User.random_order.first)
+  end
+end

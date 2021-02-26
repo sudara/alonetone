@@ -1,9 +1,5 @@
 SEEDS_PASSWORD = ENV.fetch('PASSWORD', 'testing123')
 
-muppet_upload = upload('muppets.mp3')
-piano_upload = upload('piano.mp3')
-andy_upload = upload('titleless.mp3')
-
 sudara_avatar_upload = upload('jeffdoessudara.jpg')
 marie_avatar_upload = upload('marie.jpg')
 
@@ -64,12 +60,12 @@ marie.profile.update(
 )
 
 commonly_blue_green = marie.assets.create!(extract_metadata(
-  audio_file: piano_upload,
+  audio_file: audio_file,
   title: 'Commonly Blue-grey',
   description: 'The color of camembert rind was a matter of chance, most commonly blue-grey, with brown spots.'
 ))
 aqueous_suspension = marie.assets.create!(extract_metadata(
-  audio_file: muppet_upload,
+  audio_file: audio_file,
   title: 'Aqueous Suspension',
   description: 'The surface of each cheese is then sprayed with an aqueous suspension of the mold Penicillium camemberti.'
 ))
@@ -89,12 +85,12 @@ playlist.tracks.create!(user: marie, asset: aqueous_suspension)
 playlist.publish!
 
 baguette_laonnaise = marie.assets.create!(extract_metadata(
-  audio_file: andy_upload,
+  audio_file: audio_file,
   title: 'Baguette Laonnaise',
   description: 'The cheese is typically loaf-shaped and has a supple interior as well as a sticky orange-brown rind.'
 ))
 appellation_description = marie.assets.create!(extract_metadata(
-  audio_file: piano_upload,
+  audio_file: audio_file,
   title: 'Appellation description d’origine protégée',
   description: 'In Switzerland, the appellation d’origine protégée (AOP, protected designation of origin) is a geographical indication protecting the origin and the quality of traditional food products'
 ))
@@ -128,12 +124,12 @@ carole.profile.update(
 )
 
 creamy_interior = carole.assets.create!(extract_metadata(
-  audio_file: muppet_upload,
+  audio_file: audio_file,
   title: 'Creamy Interior',
   description: 'Contains patches of blue mold'
 ))
 cylindrical_rounds = carole.assets.create!(extract_metadata(
-  audio_file: muppet_upload,
+  audio_file: audio_file,
   title: 'Cylindrical Rounds',
   description: 'It is shaped into cylindrical rounds weighing from 125 to 500 grams.'
 ))
@@ -167,12 +163,12 @@ petere.profile.update(
 )
 
 keep_tradition_alive = petere.assets.create!(extract_metadata(
-  audio_file: muppet_upload,
+  audio_file: audio_file,
   title: 'Keep Tradition Alive',
   description: 'Cloth-bound Cheshire cheeses from their own unpasteurised milk'
 ))
 much_like_cheddar = petere.assets.create!(extract_metadata(
-  audio_file: muppet_upload,
+  audio_file: audio_file,
   title: 'Much Like Cheddar',
   description: 'Cheshire cheese is made much like cheddar (now the name of a process, rather than a geographical designation) or Lancashire'
 ))
