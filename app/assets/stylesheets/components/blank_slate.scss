@@ -47,6 +47,9 @@
         &.samo {
           background-image: image-url("illustrations/contributors/samo-talking.png");
         }
+        &.manfred {
+          background-image: image-url("illustrations/contributors/manfred-talking.png");
+        }
       }
       .contributor_name.mobile_only, .contributor_title.mobile_only {
         display: none;

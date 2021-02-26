@@ -1,1 +1,14 @@
+<% if @user.playlists_count == 0 %>
+<div class="page_container page_container_with_blank_slate">
+  <%= render layout: 'shared/blank_slate', locals: { name: 'manfred', role: 'backend dev' } do %>
+      <p>
+      On alonetone, a "playlist" is just what we call a group of tracks.</p>
+
+      <p>
+        This is the best way to collect demos you are working on, publish your album, or even to create a mix from various alonetone artists.
+      </p>
+  <% end %>
+</div>
+<% end %>
+
 <%= render partial: 'form' %>

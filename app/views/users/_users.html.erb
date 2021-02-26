@@ -13,7 +13,6 @@
 </nav>
 
 <div class="page_container page_container_with_blank_slate">
-
 <% if @sort == 'patrons' %>
   <%= render layout: 'shared/blank_slate', locals: { name: 'sudara', role: 'creator' } do %>
       <p>
@@ -27,7 +26,6 @@
       <p>
        Want to join in? <%= link_to "Support alonetone on patreon.", "https://patreon.com/alonetone" %>
       </p>
-
   <% end %>
 <% end %>
 </div>
