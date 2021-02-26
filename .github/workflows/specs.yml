@@ -7,6 +7,7 @@ env:
   # RUBYOPT: -w # get own and ship ruby deprecation notices
   OAS_AGENT_KEY: ${{ secrets.OAS_AGENT_KEY }}
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+  MORPHSVG: ${{ secrets.MORPHSVG }}
 
 jobs:
   test:
@@ -18,8 +19,10 @@ jobs:
         include:
           - name: Normal Specs
             command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
+            morph: false
           - name: Feature Specs & Percy
             command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
+            morph: true
     steps:
     - name: Installing apt dependencies
       run: |
@@ -52,6 +55,12 @@ jobs:
     - name: Yarn install
       run: yarn install
       if: steps.yarn-cache.outputs.cache-hit != 'true'
+
+    - name: Put MorphSVGPlugin.js in place for feature specs
+      run: |
+        printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
+        cat app/javascript/animation/MorphSVGPlugin.js
+      if: ${{ matrix.morph }}
 
     - name: Copy config and setup db
       run: |
