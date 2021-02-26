@@ -68,12 +68,12 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flush_asset_cache if user_params.include?(:login) || user_params.include?(:avatar_image)
-      redirect_to edit_user_path(@user), ok: "Sweet, updated"
+      redirect_to edit_user_path(@user), ok: "Sweet, updated", status: 303
     else
       @user.reload if @user.errors.key?(:login)
       flash.now[:error] = "Ruh roh, that didn't work"
       @profile = @user.profile
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 

@@ -1,0 +1,153 @@
+  <div class="box">
+    <h1>Edit Profile</h1>
+    <div class="edit_profile_separator"></div>
+    <turbo-frame id="bio">
+    <%= render partial: 'shared/errors', locals: { errors: @user.errors } %>
+
+    <%= form_with model: @user do |f| %>
+    <div class="edit_profile_top">
+      <div class="edit_profile_top_left" data-controller="image-upload">
+        <label>PROFILE PICTURE</label>
+        <div class="user_avatar" data-image-upload-target='image' data-action='click->image-upload#openFile'>
+          <%= user_image(@user, variant: :card_avatar) %>
+        </div>
+          <%= f.file_field :avatar_image, data: { 'image-upload-target': 'fileField', action: 'change->image-upload#fileChanged' }, style: 'display:none'  %>
+          <%= f.label :avatar_image, 'Choose new profile image...', class:"upload_image", data: { 'image-upload-target': 'fileLabel' } %>
+        <p class="instructions">
+          Upload a square photo<br>
+          2000px by 2000px for the best results
+        </p>
+      </div>
+
+      <div class="edit_profile_top_right">
+        <label for="display_name">Name</label>
+        <%= f.text_field :display_name %>
+        <%= f.fields_for :profile do |f| %>
+          <div class="city_and_country">
+            <div>
+              <label for="user_bio">City</label>
+              <%= f.text_field :city %>
+            </div>
+            <div>
+              <label for="user_country">Country</label>
+              <%= f.country_select :country, include_blank: true %>
+            </div>
+          </div>
+          <label for="user_bio">Bio</label>
+          <%= f.text_area :bio, class: 'double_trouble', cols: 50, rows: 15 %>
+        <% end %>
+        <%= f.submit "Save Bio" %>
+        <%= link_to "Cancel", user_home_path(@user) %>
+      </div>
+    </div>
+    <% end %>
+    </turbo-frame>
+
+    <div class="edit_profile_separator"></div>
+
+    <turbo-frame id="socials">
+    <div class="edit_profile_socials">
+      <h3>Update social media links</h3>
+      <%= form_with model: [@user, @profile] do |f| %>
+        <div class="edit_profile_socials_columns">
+          <div class="edit_profile_socials_left_column">
+            <label for="user_website">Website</label>
+            <div class="row just_input">
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_website.svg') %>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :website %>
+              </div>
+            </div>
+            <label for "user_spotify">Spotify</label>
+            <div class="row">
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_spotify.svg') %>
+                <div>open.spotify.com/artist/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :spotify %>
+              </div>
+            </div>
+            <label for "user_apple">Apple Music</label>
+            <div class="row">
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_apple_music.svg') %>
+                <div>itunes.apple.com/us/artist/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :apple %>
+              </div>
+            </div>
+            <label for "user_youtube">YouTube</label>
+            <div class="row">
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_youtube.svg') %>
+                <div>youtube.com/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :youtube %>
+              </div>
+            </div>
+          </div>
+          <div class="edit_profile_socials_right_column">
+            <label for "user_bandcamp">Bandcamp</label>
+            <div class="row reversed">
+              <div class="row_input">
+                <%== render file: svg_path('svg/icon_socials_bandcamp.svg') %>
+                <%= f.text_field :bandcamp %>
+              </div>
+              <div class="row_prefix">
+                <div>.bandcamp.com</div>
+              </div>
+            </div>
+            <label for "user_twitter">Twitter</label>
+            <div class="row">
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_twitter.svg') %>
+                <div>twitter.com/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :twitter %>
+              </div>
+            </div>
+            <label for "user_instagram">Instagram</label>
+            <div class="row">
+              <div class="row_prefix">
+                <%== render file: svg_path('svg/icon_socials_instagram.svg') %>
+                <div>instagram.com/</div>
+              </div>
+              <div class="row_input">
+                <%= f.text_field :instagram %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%= f.submit "Update links" %>
+      <% end %>
+    </div>
+    </turbo-frame>
+
+    <div class="edit_profile_separator"></div>
+    <div class="edit_profile_settings">
+      <h3>Settings</h3>
+      <%= form_for @user do |f| -%>
+        <div class="edit_profile_settings_columns">
+          <div class="edit_profile_settings_left_column">
+            <%= render partial: 'setting', locals: { key: 'email_comments', label: 'Email you comments on your tracks?' } %>
+            <div class="edit_profile_separator"></div>
+            <%= render partial: 'setting', locals: { key: 'email_new_tracks', label: 'Email you when someone you follow uploads a track?' } %>
+            <div class="edit_profile_separator"></div>
+            <%= render partial: 'setting', locals: { key: 'block_guest_comments', label: 'Block guests from commenting on your tracks?' } %>
+            <div class="edit_profile_separator"></div>
+          </div>
+          <div class="edit_profile_settings_right_column">
+            <%= render partial: 'setting', locals: { key: 'most_popular', label: 'Show most popular tracks on your home page?' } %>
+            <div class="edit_profile_separator"></div>
+            <%= render partial: 'setting', locals: { key: 'increase_ego', label: 'Increase size of ego by 4x?' } %>
+       </div>
+        </div>
+        <% end %>
+      </div>
+  </div>
