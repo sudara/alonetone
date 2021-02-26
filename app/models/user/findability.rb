@@ -53,7 +53,9 @@ class User < ApplicationRecord
       end
 
       def most_listened_to
-        left_joins(:track_plays).group('users.id').order('COUNT(listens.id) DESC').where('listens.created_at > ?',1.month.ago)
+        left_joins(:track_plays).group('users.id')
+          .order('COUNT(listens.id) DESC')
+          .where('listens.created_at > ?', 1.month.ago)
       end
 
       def monster_uploaders
@@ -65,7 +67,9 @@ class User < ApplicationRecord
       end
 
       def dedicated_listeners
-        left_joins(:listens).group('users.id').order('COUNT(listens.id) DESC').where('listens.created_at > ?',1.month.ago)
+        left_joins(:listens).group('users.id')
+        .order('COUNT(listens.id) DESC')
+        .where('listens.created_at > ?', 1.month.ago)
       end
     end
   end

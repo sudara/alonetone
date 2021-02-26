@@ -1,3 +1,22 @@
+<%= if @user.assets_count == 0 %>
+<div class="page_container page_container_with_blank_slate">
+  <%= render layout: 'shared/blank_slate', locals: { name: 'ben', role: 'frontend dev' } do %>
+      <p>
+        Here is where you can upload your first mp3.
+      </p>
+
+      <p>
+        It can be something in progress, a demo, or a even a zip file full of mp3s of your latest album.
+      </p>
+
+      <p>
+        It will be public right away, but you can always adjust the title and description before sharing it.
+      </p>
+  <% end %>
+</div>
+<% end %>
+
+
 <% content_for :left do %>
   <div class="upload box">
     <h2 class="box">Upload, upload, upload</h2>

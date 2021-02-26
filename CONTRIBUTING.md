@@ -1,9 +1,12 @@
 ## Setting up alonetone locally
 
-- Clone this repo
-`git clone REPO_GIT`
+### Requirements
+
+Ruby 2.7.x
 
 ### MacOS
+
+You will need to first install [Homebrew](https://brew.sh).
 
 - `brew install libsndfile lame` (required for id3 tags and waveforms)
 - `brew install vips` (required for processing images)
