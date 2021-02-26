@@ -1,7 +1,7 @@
 <nav class="sub_nav">
   <div class="page_container sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
     <ul>
-        <%= navigation_item "Last Online", { action: 'index', sort: nil }%>
+        <%= navigation_item "Last Online", { action: 'index', sort: 'last_seen' }%>
         <%= navigation_item "Patrons", { action: 'index', sort: 'patrons' }%>
         <%= navigation_item "Last Uploaded", { action: 'index', sort: 'last_uploaded'}%>
         <%= navigation_item "Most Listened To", { action: 'index', sort: 'most_listened_to' }%>
@@ -32,7 +32,7 @@
 
 <div class="page_container" id="user_index">
   <div class="mini_paginator bottom_paginator">
-    <%== pagy_nav @users_pagy %>
+    <%== pagy_nav @pagy %>
   </div>
   <ul id="large_users_grid" class="responsive_grid">
     <% if @sort == 'dedicated_listeners' %>
@@ -49,6 +49,6 @@
 
   <div style="float:none;clear:both;"> </div>
   <div class="mini_paginator bottom_paginator">
-    <%== pagy_nav @users_pagy %>
+    <%== pagy_nav @pagy %>
   </div>
 </div>

@@ -90,9 +90,6 @@ Alonetone::Application.routes.draw do
   # top 40
   get  '/top/:top' => 'assets#top', :as => 'top'
 
-  get '/users/by/activity/:page' => 'users#index', :sort => 'active', :defaults => {:page => 1}, :as => 'users_default'
-  get '/users/(by/:sort(/:page))' => 'users#index', :defaults => {:page => 1}, :as => 'sorted_users'
-
   get 'comments' => 'comments#index', :as => 'all_comments'
   get 'playlists' => 'playlists#all', :as => 'all_playlists'
 
@@ -103,6 +100,8 @@ Alonetone::Application.routes.draw do
 
   root :to => 'assets#latest'
 
+  get '/users', to: redirect('/users/last_seen')
+  get '/users/:sort/(:page)' => 'users#index', :as => 'sorted_users'
   resources :users
 
   get '/invite/:mass_invite_token', to: 'mass_invites_users#new', as: 'mass_invite'

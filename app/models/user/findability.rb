@@ -30,7 +30,7 @@ class User < ApplicationRecord
       def paginate_by_params(params)
         available_sortings = %w[last_uploaded patrons most_listened_to new_artists monster_uploaders dedicated_listeners]
         params[:sort] = 'last_seen' if !params[:sort].present? || !available_sortings.include?(params[:sort])
-        User.send(params[:sort])
+        send(params[:sort])
       end
 
       protected

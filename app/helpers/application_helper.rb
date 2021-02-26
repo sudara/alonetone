@@ -14,6 +14,11 @@ module ApplicationHelper
     (moderator? || admin?) || (logged_in? && (comment.commenter == current_user || comment.user == current_user))
   end
 
+  def pagy_url_for(page, pagy)
+    params = request.query_parameters.merge(:only_path => true, pagy.vars[:page_param] => page )
+    url_for(params)
+  end
+
   def edit_or_show(_user, playlist)
     if authorized_for(playlist)
       edit_user_playlist_path(@user.login, playlist)
