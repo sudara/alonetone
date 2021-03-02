@@ -44,10 +44,7 @@
         <%= render partial: 'shared/user', collection: @users, as: :user %>
       <% end %>
     <% end %>
-    <div class="clear"> </div>
   </ul>
-
-  <div style="float:none;clear:both;"> </div>
   <div class="mini_paginator bottom_paginator">
     <%== pagy_nav @pagy %>
   </div>
