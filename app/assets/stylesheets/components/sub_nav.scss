@@ -25,19 +25,24 @@
           white-space: nowrap;
           a {
             pointer-events: all;
+            &:hover {
+              text-decoration: none;
+            }
           }
         }
-        a {
-          @include default_button(sub_nav);
-          @include shadow1();
-          background-color: $sub-nav-link-background;
-          display: block;
-          width: 100%;
-          color: $sub-nav-text;
-          white-space: nowrap;
-          &:hover {
-            text-decoration: none;
-            color: $white;
+        &:not(.current) {
+          a {
+            @include default_button(sub_nav);
+            @include shadow1();
+            background-color: $sub-nav-link-background;
+            display: block;
+            width: 100%;
+            color: $sub-nav-text;
+            white-space: nowrap;
+            &:hover {
+              text-decoration: none;
+              color: $white;
+            }
           }
         }
       }
