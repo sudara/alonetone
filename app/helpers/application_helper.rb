@@ -88,7 +88,7 @@ module ApplicationHelper
   end
 
   def navigation_item(text, link, options = nil)
-    current = current_page?(link) || current_page?(link.merge(page: params[:page] || 1))
+    current = current_page?(link) || (link.respond_to?(:merge) && current_page?(link.merge(page: params[:page] || 1)))
     content_tag(:li, link_to_unless_current(text.html_safe, link, options),
       class: current ? 'current' : '',
       data: { 'subnav-target': 'item' })
