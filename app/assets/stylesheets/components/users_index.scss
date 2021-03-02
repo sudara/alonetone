@@ -1,4 +1,10 @@
 #user_index {
+  .mini_paginator {
+    display: inline-block;
+    &.bottom_paginator {
+      float: right;
+    }
+  }
   #large_users_grid {
     display: flex;
     flex-wrap: wrap;
