@@ -63,7 +63,7 @@ class User < ApplicationRecord
       end
 
       def last_uploaded
-        joins(:assets).order('assets.created_at DESC')
+        joins(:assets).order('assets.created_at DESC').distinct
       end
 
       def dedicated_listeners
