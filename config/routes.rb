@@ -69,8 +69,8 @@ Alonetone::Application.routes.draw do
   get 'ok', to: "pages#ok"
 
   # one-off pages
-  get 'rpmchallenge' => 'pages#rpm_challenge'
-  get '24houralbum' =>  'pages#twentyfour'
+  get 'events/rpmchallenge' => 'pages#rpm_challenge'
+  get 'events/24houralbum' =>  'pages#twentyfour'
 
   resources :password_resets, :comments, :user_sessions, :groups
 
