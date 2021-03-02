@@ -23,6 +23,9 @@
           pointer-events: none;
           color: $white;
           white-space: nowrap;
+          a {
+            pointer-events: all;
+          }
         }
         a {
           @include default_button(sub_nav);
