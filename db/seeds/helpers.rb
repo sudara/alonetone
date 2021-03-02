@@ -28,6 +28,6 @@ def create_track(user)
   user.assets.create!(extract_metadata(
     audio_file: audio_file,
     title: Faker::Music::RockBand.song,
-    description: Faker::Lorem.words(number: rand(5..400))
+    description: Faker::Quote.famous_last_words
   ))
 end
