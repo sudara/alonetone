@@ -102,7 +102,9 @@ Alonetone::Application.routes.draw do
 
   resources :users
   get '/users', to: redirect('/users/last_seen')
-  get '/users/:sort/(:page)' => 'users#index', :as => 'sorted_users'
+
+  # unless we have the /by/ in the route, we end up in conflict with the resource route
+  get '/users/by/:sort/(:page)' => 'users#index', :as => 'sorted_users'
 
   get '/invite/:mass_invite_token', to: 'mass_invites_users#new', as: 'mass_invite'
   resources :mass_invites, param: :token, only: [] do
