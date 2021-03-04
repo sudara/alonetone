@@ -11,5 +11,5 @@ Rails.application.config.rakismet.test = true
 # We don't want our data changing screenshot to screenshot
 if Rails.env.test?
   Faker::Config.random = Random.new(42)
-  Kernal.srand(42)
+  Kernel.srand(42)
 end
