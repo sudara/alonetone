@@ -21,7 +21,7 @@
       </p>
   <% end %>
 </div>
-<% elsif authorized? && !@user.avatar_image_present? && @user.profile.bio.empty? %>
+<% elsif authorized? && !@user.avatar_image_present? && !@user.profile.bio.present? %>
 <div class="page_container page_container_with_blank_slate">
   <%= render layout: 'shared/blank_slate', locals: { name: 'samo', role: 'designer' } do %>
       <p>
