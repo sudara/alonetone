@@ -100,9 +100,9 @@ Alonetone::Application.routes.draw do
 
   root :to => 'assets#latest'
 
+  resources :users
   get '/users', to: redirect('/users/last_seen')
   get '/users/:sort/(:page)' => 'users#index', :as => 'sorted_users'
-  resources :users
 
   get '/invite/:mass_invite_token', to: 'mass_invites_users#new', as: 'mass_invite'
   resources :mass_invites, param: :token, only: [] do
