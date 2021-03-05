@@ -2,10 +2,12 @@ require 'active_support/testing/time_helpers'
 include ActiveSupport::Testing::TimeHelpers
 
 
-puts "Populating another 50 users, 50% musicians with a track or two"
-50.times do
+puts "Populating another 100 users, 35% of them with a track or two"
+100.times do
   print('.')
-  name = sometimes ? Faker::TvShows::TwinPeaks.unique.character : Faker::TvShows::StarTrek.unique.character
+  name = Faker::TvShows::TwinPeaks.unique.character rescue
+    Faker::TvShows::StarTrek.unique.character rescue
+    Faker::TvShows::TheExpanse.unique.character
   travel_to(1.week.ago) do
     user = User.create!(
       login: Faker::Internet.username(specifier: name, separators: [""]),
@@ -19,7 +21,7 @@ puts "Populating another 50 users, 50% musicians with a track or two"
       user.create_patron
     end
 
-    sometimes do
+    35.percent_of_the_time do
       (1..3).times do
         create_track(user)
       end
@@ -27,6 +29,7 @@ puts "Populating another 50 users, 50% musicians with a track or two"
   end
 end
 
+puts ""
 puts "Adding 1-10 listens per track"
 Asset.find_each do |asset|
   (1..10).times do
