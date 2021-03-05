@@ -100,8 +100,8 @@ Alonetone::Application.routes.draw do
 
   root :to => 'assets#latest'
 
+  get '/users', to: redirect('/users/by/last_seen/1')
   resources :users
-  get '/users', to: redirect('/users/last_seen')
 
   # unless we have the /by/ in the route, we end up in conflict with the resource route
   get '/users/by/:sort/(:page)' => 'users#index', :as => 'sorted_users'
