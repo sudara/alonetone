@@ -115,7 +115,6 @@
     display: flex;
     padding-right: 10%;
     padding-left: 10%;
-    padding-top: 50px;
     box-sizing: border-box;
     min-height: 480px;
     @media #{$one-column} {
@@ -168,13 +167,14 @@
     }
     .right {
       margin-left: 9%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       @media #{$one-column} {
         width: 54%;
         margin-left: 20px;
       }
       .blank_slate_text {
-        padding-bottom: 50px;
-        padding-top: 70px;
         @include paragraph18();
         color: $grey900;
         @media only screen and (max-width: 850px) {
