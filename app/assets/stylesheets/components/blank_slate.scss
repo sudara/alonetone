@@ -122,6 +122,9 @@
       padding-right: $baseline / 2;
     }
     .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       @media only screen and (max-width: 540px) {
         width: 40%!important;
         padding-bottom: 20px;
@@ -133,6 +136,7 @@
         background-position-y: bottom;
         height: 100%;
         min-width: 238px;
+
         @media only screen and (max-width: 540px) {
           min-width: auto;
           height: 0;
@@ -146,6 +150,7 @@
         }
         &.sudara {
           background-image: image-url("illustrations/contributors/sudara-talking.png");
+          height: calc( .796 * 238px);
         }
         &.ben {
           background-image: image-url("illustrations/contributors/ben-talking.png");
