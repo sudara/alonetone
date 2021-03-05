@@ -6,13 +6,6 @@
   background-position-y: $background_position-y;
   position: relative;
   top: -48px;
-  &.page_container_with_blank_slate_full_cloud {
-    .blank_slate {
-      min-height: 480px;
-      box-sizing: border-box;
-    }
-  }  
-
   .blank_slate {
     display: flex;
     padding-right: 10%;
@@ -47,7 +40,6 @@
         }
         &.sudara {
           background-image: image-url("illustrations/contributors/sudara-talking.png");
-          background-position: 50%;
         }
         &.ben {
           background-image: image-url("illustrations/contributors/ben-talking.png");
@@ -67,8 +59,14 @@
         }
       }
     }
-    .blank_slate_text {
+    .right {
       margin-left: 9%;
+      @media #{$one-column} {
+        width: 54%;
+        margin-left: 20px;
+      }
+    }
+    .blank_slate_text {
       padding-bottom: 50px;
       padding-top: 70px;
       @include paragraph18();
@@ -79,8 +77,6 @@
       @media #{$one-column} {
         padding-top: $baseline * 1.5;
         padding-bottom: $baseline * 1.5;
-        width: 54%;
-        margin-left: 20px;
       }
       @media only screen and (max-width: 540px) {
         font-size: 14px;
@@ -91,6 +87,111 @@
       a {
         text-decoration: underline;
         color: $orange600;
+      }
+    }
+    .contributor_name {
+      line-height: 1.2;
+      font-style: italic;
+      color: $orange600;
+    }
+    .contributor_title {
+      font-style: italic;
+      font-size: 12px;
+      color: $grey900;
+    }
+  }
+}
+
+
+.page_container_with_blank_slate_full_cloud {
+  background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
+  background-repeat: no-repeat;
+  background-size: $site_max_width;
+  background-position-x: 50%;
+  background-position-y: $background_position-y;
+  position: relative;
+  top: -48px;
+  .blank_slate {
+    display: flex;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-top: 50px;
+    @media #{$one-column} {
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+    }
+    .left {
+      @media only screen and (max-width: 540px) {
+        width: 40%!important;
+        padding-bottom: 20px;
+        align-self: center;
+      }
+      .blank_slate_illustration {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        height: 100%;
+        min-width: 238px;
+        @media only screen and (max-width: 540px) {
+          min-width: auto;
+          height: 0;
+          padding-bottom: 144%;
+        }
+        &.alec {
+          background-image: image-url("illustrations/contributors/alec-talking.png");
+        }
+        &.jenya {
+          background-image: image-url("illustrations/contributors/jenya-talking.png");
+        }
+        &.sudara {
+          background-image: image-url("illustrations/contributors/sudara-talking.png");
+        }
+        &.ben {
+          background-image: image-url("illustrations/contributors/ben-talking.png");
+        }
+        &.samo {
+          background-image: image-url("illustrations/contributors/samo-talking.png");
+        }
+        &.manfred {
+          background-image: image-url("illustrations/contributors/manfred-talking.png");
+        }
+      }
+      .contributor_name.mobile_only, .contributor_title.mobile_only {
+        display: none;
+        @media only screen and (max-width: 540px) {
+          display: block;
+          padding-left: $baseline;
+        }
+      }
+    }
+    .right {
+      margin-left: 9%;
+      @media #{$one-column} {
+        width: 54%;
+        margin-left: 20px;
+      }
+      .blank_slate_text {
+        padding-bottom: 50px;
+        padding-top: 70px;
+        @include paragraph18();
+        color: $grey900;
+        @media only screen and (max-width: 850px) {
+          font-size: 16px;
+        }
+        @media #{$one-column} {
+          padding-top: $baseline * 1.5;
+          padding-bottom: $baseline * 1.5;
+        }
+        @media only screen and (max-width: 540px) {
+          font-size: 14px;
+          .contributor_name, .contributor_title {
+            display: none;
+          }
+        }
+        a {
+          text-decoration: underline;
+          color: $orange600;
+        }
       }
     }
     .contributor_name {
