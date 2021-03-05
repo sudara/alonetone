@@ -6,6 +6,13 @@
   background-position-y: $background_position-y;
   position: relative;
   top: -48px;
+  &.page_container_with_blank_slate_full_cloud {
+    .blank_slate {
+      min-height: 480px;
+      box-sizing: border-box;
+    }
+  }  
+
   .blank_slate {
     display: flex;
     padding-right: 10%;
@@ -40,6 +47,7 @@
         }
         &.sudara {
           background-image: image-url("illustrations/contributors/sudara-talking.png");
+          background-position: 50%;
         }
         &.ben {
           background-image: image-url("illustrations/contributors/ben-talking.png");
