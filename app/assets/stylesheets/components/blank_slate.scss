@@ -116,6 +116,8 @@
     padding-right: 10%;
     padding-left: 10%;
     padding-top: 50px;
+    box-sizing: border-box;
+    min-height: 480px;
     @media #{$one-column} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
