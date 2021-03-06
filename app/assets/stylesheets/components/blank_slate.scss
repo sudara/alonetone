@@ -111,12 +111,13 @@
   background-position-y: $background_position-y;
   position: relative;
   top: -48px;
+  margin-bottom: -28px;
   .blank_slate {
     display: flex;
     padding-right: 10%;
     padding-left: 10%;
     box-sizing: border-box;
-    min-height: 480px;
+    min-height: $blank-slate-cloud-min-height;
     @media #{$one-column} {
       padding-left: $baseline / 2;
       padding-right: $baseline / 2;
