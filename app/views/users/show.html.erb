@@ -6,7 +6,7 @@
 <% end %>
 
 <% if authorized? && @user.brand_new? %>
-<div class="page_container page_container_with_blank_slate">
+<div class="page_container page_container_with_blank_slate_full_cloud">
   <%= render layout: 'shared/blank_slate', locals: { name: 'jenya', role: 'backend dev' } do %>
       <p>
         Welcome to the farm — er, I mean your profile.
@@ -22,7 +22,7 @@
   <% end %>
 </div>
 <% elsif authorized? && !@user.avatar_image_present? && !@user.profile.bio.present? %>
-<div class="page_container page_container_with_blank_slate">
+<div class="page_container page_container_with_blank_slate_full_cloud">
   <%= render layout: 'shared/blank_slate', locals: { name: 'samo', role: 'designer' } do %>
       <p>
         Mmmmm, it looks like you haven't uploaded a profile pic or written a bio yet...

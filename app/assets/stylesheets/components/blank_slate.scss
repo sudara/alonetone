@@ -125,10 +125,10 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      @media only screen and (max-width: 540px) {
+      @media only screen and (max-width: 570px) {
         width: 40%!important;
-        padding-bottom: 20px;
         align-self: center;
+        min-width: 180px;
       }
       .blank_slate_illustration {
         background-size: 100%;
@@ -136,27 +136,38 @@
         background-position-y: bottom;
         height: 100%;
         min-width: 238px;
-
-        @media only screen and (max-width: 540px) {
+        @media only screen and (max-width: 570px) {
           min-width: auto;
-          height: 0;
-          padding-bottom: 144%;
+          width: 180px;
         }
         &.alec {
           background-image: image-url("illustrations/contributors/alec-talking.png");
         }
         &.jenya {
           background-image: image-url("illustrations/contributors/jenya-talking.png");
+          height: calc( 1.294 * 238px);
+          @media only screen and (max-width: 570px) {
+            height: calc( 1.294 * 180px);
+          }
+
         }
         &.sudara {
           background-image: image-url("illustrations/contributors/sudara-talking.png");
           height: calc( .796 * 238px);
+          @media only screen and (max-width: 570px) {
+            height: calc( .796 * 180px);
+          }
         }
         &.ben {
           background-image: image-url("illustrations/contributors/ben-talking.png");
         }
         &.samo {
           background-image: image-url("illustrations/contributors/samo-talking.png");
+          height: calc( 1.007 * 238px);
+          @media only screen and (max-width: 570px) {
+            height: calc( 1.007 * 180px);
+          }
+
         }
         &.manfred {
           background-image: image-url("illustrations/contributors/manfred-talking.png");
