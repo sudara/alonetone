@@ -1,104 +1,10 @@
-.page_container_with_blank_slate {
-  background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
-  background-repeat: no-repeat;
-  background-size: $site_max_width;
-  background-position-x: 50%;
-  background-position-y: $noise-background-position-y;
-  position: relative;
-  top: -48px;
-  .blank_slate {
-    display: flex;
-    padding-right: 10%;
-    padding-left: 10%;
-    padding-top: 50px;
-    @media #{$one-column} {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-    }
-    .left {
-      @media only screen and (max-width: 540px) {
-        width: 40%!important;
-        padding-bottom: 20px;
-        align-self: center;
-      }
-      .blank_slate_illustration {
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: bottom;
-        height: 100%;
-        min-width: 238px;
-        @media only screen and (max-width: 540px) {
-          min-width: auto;
-          height: 0;
-          padding-bottom: 144%;
-        }
-        &.alec {
-          background-image: image-url("illustrations/contributors/alec-talking.png");
-        }
-        &.jenya {
-          background-image: image-url("illustrations/contributors/jenya-talking.png");
-        }
-        &.sudara {
-          background-image: image-url("illustrations/contributors/sudara-talking.png");
-        }
-        &.ben {
-          background-image: image-url("illustrations/contributors/ben-talking.png");
-        }
-        &.samo {
-          background-image: image-url("illustrations/contributors/samo-talking.png");
-        }
-        &.manfred {
-          background-image: image-url("illustrations/contributors/manfred-talking.png");
-        }
-      }
-      .contributor_name.mobile_only, .contributor_title.mobile_only {
-        display: none;
-        @media only screen and (max-width: 540px) {
-          display: block;
-          padding-left: $baseline;
-        }
-      }
-    }
-    .right {
-      margin-left: 9%;
-      @media #{$one-column} {
-        width: 54%;
-        margin-left: 20px;
-      }
-    }
-    .blank_slate_text {
-      padding-bottom: 50px;
-      padding-top: 70px;
-      @include paragraph18();
-      color: $grey900;
-      @media only screen and (max-width: 850px) {
-        font-size: 16px;
-      }
-      @media #{$one-column} {
-        padding-top: $baseline * 1.5;
-        padding-bottom: $baseline * 1.5;
-      }
-      @media only screen and (max-width: 540px) {
-        font-size: 14px;
-        .contributor_name, .contributor_title {
-          display: none;
-        }
-      }
-      a {
-        text-decoration: underline;
-        color: $orange600;
-      }
-    }
-    .contributor_name {
-      line-height: 1.2;
-      font-style: italic;
-      color: $orange600;
-    }
-    .contributor_title {
-      font-style: italic;
-      font-size: 12px;
-      color: $grey900;
-    }
+@mixin getHeightsFromRatio($ratio) {
+  height: calc( #{$ratio} * #{$large-image-width});
+  @media #{$zone-medium-image-switched-credits} {
+    height: calc( #{$ratio} * #{$medium-image-width});
+  }
+  @media #{$zone-mobile-one-column} {
+    height: calc( #{$ratio} * #{$small-image-width});
   }
 }
 
@@ -109,6 +15,32 @@ $zone-mobile-one-column: 'only screen and (max-width: 439px)';
 $large-image-width: 238px;
 $medium-image-width: 160px;
 $small-image-width: 100px;
+
+// Shared by both styles
+.blank_slate_illustration {
+  &.alec {
+    background-image: image-url("illustrations/contributors/alec-talking.png");
+    @include getHeightsFromRatio(1.3189);
+  }
+  &.jenya {
+    background-image: image-url("illustrations/contributors/jenya-talking.png");
+    @include getHeightsFromRatio(1.294);
+  }
+  &.sudara {
+    background-image: image-url("illustrations/contributors/sudara-talking.png");
+    @include getHeightsFromRatio(.796);
+  }
+  &.ben {
+    background-image: image-url("illustrations/contributors/ben-talking.png");
+  }
+  &.samo {
+    background-image: image-url("illustrations/contributors/samo-talking.png");
+    @include getHeightsFromRatio(.796);
+  }
+  &.manfred {
+    background-image: image-url("illustrations/contributors/manfred-talking.png");
+  }
+}
 
 .page_container_with_blank_slate_full_cloud {
   background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
@@ -210,47 +142,97 @@ $small-image-width: 100px;
       @media #{$zone-mobile-one-column} {
         width: $small-image-width;
       }
-      &.alec {
-        background-image: image-url("illustrations/contributors/alec-talking.png");
+    }
+    .contributor_name {
+      line-height: 1.2;
+      font-style: italic;
+      color: $orange600;
+    }
+    .contributor_title {
+      font-style: italic;
+      font-size: 12px;
+      color: $grey900;
+    }
+  }
+}
+
+.page_container_with_blank_slate {
+  background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
+  background-repeat: no-repeat;
+  background-size: $site_max_width;
+  background-position-x: 50%;
+  background-position-y: $noise-background-position-y;
+  position: relative;
+  top: -48px;
+  .blank_slate {
+    display: flex;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-top: 50px;
+    @media #{$one-column} {
+      padding-left: $baseline / 2;
+      padding-right: $baseline / 2;
+    }
+    .left {
+      @media only screen and (max-width: 540px) {
+        width: 40%!important;
+        padding-bottom: 20px;
+        align-self: center;
       }
-      &.jenya {
-        background-image: image-url("illustrations/contributors/jenya-talking.png");
-        $jenya_image_ratio: 1.294;
-        height: calc( #{$jenya_image_ratio} * #{$large-image-width});
-        @media #{$zone-medium-image-switched-credits} {
-          height: calc( #{$jenya_image_ratio} * #{$medium-image-width});
-        }
-        @media #{$zone-mobile-one-column} {
-          height: calc( #{$jenya_image_ratio} * #{$small-image-width});
-        }
-      }
-      &.sudara {
-        background-image: image-url("illustrations/contributors/sudara-talking.png");
-        $sudara_image_ratio: .796;
-        height: calc( #{$sudara_image_ratio} * #{$large-image-width});
-        @media #{$zone-medium-image-switched-credits} {
-          height: calc( #{$sudara_image_ratio} * #{$medium-image-width});
-        }
-        @media #{$zone-mobile-one-column} {
-          height: calc( #{$sudara_image_ratio} * #{$small-image-width});
+      .blank_slate_illustration {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        height: 100%;
+        min-width: 238px;
+        @media only screen and (max-width: 540px) {
+          min-width: auto;
+          height: 0;
+          padding-bottom: 144%;
         }
       }
-      &.ben {
-        background-image: image-url("illustrations/contributors/ben-talking.png");
-      }
-      &.samo {
-        background-image: image-url("illustrations/contributors/samo-talking.png");
-        $samo_image_ratio: .9915;
-        height: calc( #{$samo_image_ratio} * #{$large-image-width});
-        @media #{$zone-medium-image-switched-credits} {
-          height: calc( #{$samo_image_ratio} * #{$medium-image-width});
-        }
-        @media #{$zone-mobile-one-column} {
-          height: calc( #{$samo_image_ratio} * #{$small-image-width});
+      .contributor_name.mobile_only, .contributor_title.mobile_only {
+        display: none;
+        @media only screen and (max-width: 540px) {
+          display: block;
+          padding-left: $baseline;
         }
       }
-      &.manfred {
-        background-image: image-url("illustrations/contributors/manfred-talking.png");
+    }
+    .right {
+      margin-left: 9%;
+      @media #{$one-column} {
+        width: 54%;
+        margin-left: 20px;
+      }
+    }
+    .blank_slate_text {
+      padding-bottom: 50px;
+      padding-top: 70px;
+      @include paragraph18();
+      color: $grey900;
+      #spacer {
+        display: none;          
+      }
+      #floater {
+        display: none;
+      }
+      @media only screen and (max-width: 850px) {
+        font-size: 16px;
+      }
+      @media #{$one-column} {
+        padding-top: $baseline * 1.5;
+        padding-bottom: $baseline * 1.5;
+      }
+      @media only screen and (max-width: 540px) {
+        font-size: 14px;
+        .contributor_name, .contributor_title {
+          display: none;
+        }
+      }
+      a {
+        text-decoration: underline;
+        color: $orange600;
       }
     }
     .contributor_name {
