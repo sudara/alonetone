@@ -32,13 +32,16 @@ $small-image-width: 100px;
   }
   &.ben {
     background-image: image-url("illustrations/contributors/ben-talking.png");
+    @include getHeightsFromRatio(1.2585);
+    
   }
   &.samo {
     background-image: image-url("illustrations/contributors/samo-talking.png");
-    @include getHeightsFromRatio(.796);
+    @include getHeightsFromRatio(1.007);
   }
   &.manfred {
     background-image: image-url("illustrations/contributors/manfred-talking.png");
+    @include getHeightsFromRatio(1.6369);
   }
 }
 
