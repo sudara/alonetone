@@ -102,9 +102,13 @@
   }
 }
 
+$zone-smaller-font: 'only screen and (min-width: 630px) and (max-width: 849px)';
+$zone-medium-image-switched-credits: 'only screen and (min-width: 440px) and (max-width: 629px)';
+$zone-mobile-one-column: 'only screen and (max-width: 439px)';
+
 $large_image_width: 238px;
-$medium_image_width: 180px;
-$small_image_width: 80px;
+$medium_image_width: 160px;
+$small_image_width: 100px;
 
 .page_container_with_blank_slate_full_cloud {
   background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
@@ -121,106 +125,55 @@ $small_image_width: 80px;
     padding-left: 10%;
     box-sizing: border-box;
     min-height: $blank-slate-cloud-min-height;
-    @media #{$one-column} {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
+    @media only screen and (max-width: 960px) {
+      padding-left: 0;
+      padding-right: 0;
     }
     .left {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      @media only screen and (max-width: 570px) {
-        align-self: center;
-        width: $medium_image_width;
-      }
-      @media only screen and (max-width: 440px) {
-        width: $small_image_width;
-        align-self: center;
+      align-self: center;
+      @media #{$zone-mobile-one-column} {
         display: none;
       }
-
-      .blank_slate_illustration {
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: bottom;
-        height: 100%;
-        min-width: $large_image_width;
-        @media only screen and (max-width: 570px) {
-          min-width: auto;
-          width: $medium_image_width;
-        }
-        @media only screen and (max-width: 440px) {
-          min-width: auto;
-          width: $small_image_width;
-        }
-        &.alec {
-          background-image: image-url("illustrations/contributors/alec-talking.png");
-        }
-        &.jenya {
-          background-image: image-url("illustrations/contributors/jenya-talking.png");
-          $jenya_image_ratio: 1.294;
-          height: calc( #{$jenya_image_ratio} * #{$large_image_width});
-          @media only screen and (max-width: 570px) {
-            height: calc( #{$jenya_image_ratio} * #{$medium_image_width});
-          }
-        }
-        &.sudara {
-          background-image: image-url("illustrations/contributors/sudara-talking.png");
-          $sudara_image_ratio: .796;
-          height: calc( #{$sudara_image_ratio} * #{$large_image_width});
-          @media only screen and (max-width: 570px) {
-            height: calc( #{$sudara_image_ratio} * #{$medium_image_width});
-          }
-          @media only screen and (max-width: 440px) {
-            height: calc( #{$sudara_image_ratio} * #{$small_image_width});
-          }
-        }
-        &.ben {
-          background-image: image-url("illustrations/contributors/ben-talking.png");
-        }
-        &.samo {
-          background-image: image-url("illustrations/contributors/samo-talking.png");
-          height: calc( 1.007 * 238px);
-          @media only screen and (max-width: 570px) {
-            height: calc( 1.007 * 180px);
-          }
-
-        }
-        &.manfred {
-          background-image: image-url("illustrations/contributors/manfred-talking.png");
-        }
-      }
-      .contributor_name.mobile_only, .contributor_title.mobile_only {
+      .contributor_name, .contributor_title {
         display: none;
-        @media only screen and (max-width: 540px) {
+        @media #{$zone-medium-image-switched-credits} {
           display: block;
           padding-left: $baseline;
         }
-        @media only screen and (max-width: 440px) {
-          display: block;
-          padding-left: 0;
-        }
       }
+  
     }
     .right {
-      margin-left: 9%;
+      margin-left: 7%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      @media #{$one-column} {
-        width: 54%;
-        margin-left: 20px;
-      }
-      @media only screen and (max-width: 440px) {
+      @media #{$zone-mobile-one-column} {
         width: 100%;
+        margin-left: 0;
+        padding-left: $baseline / 2;
+        padding-right: $baseline / 2;
       }
       .blank_slate_text {
         @include paragraph18();
         color: $grey900;
-        @media only screen and (max-width: 850px) {
+        a {
+          text-decoration: underline;
+          color: $orange600;
+        }
+        @media #{$zone-smaller-font} {
           font-size: 16px;
         }
-        @media only screen and (max-width: 540px) {
+        @media #{$zone-medium-image-switched-credits} {
+          font-size: 14px;
+          .contributor_name, .contributor_title {
+            display: none;
+          }
+        }
+        @media #{$zone-mobile-one-column} {
           font-size: 14px;
           .contributor_name, .contributor_title {
             display: none;
@@ -236,7 +189,7 @@ $small_image_width: 80px;
           float: right;
           clear: right;
           display: none;
-          @media only screen and (max-width: 440px) {
+          @media #{$zone-mobile-one-column} {
             display: block;
           }
           .contributor_name, .contributor_title {
@@ -245,10 +198,60 @@ $small_image_width: 80px;
             text-align: center;
           }
         }
-        a {
-          text-decoration: underline;
-          color: $orange600;
+      }
+    }
+    .blank_slate_illustration {
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position-y: bottom;
+      width: $large_image_width;
+      @media #{$zone-medium-image-switched-credits} {
+        width: $medium_image_width;
+      }
+      @media #{$zone-mobile-one-column} {
+        width: $small_image_width;
+      }
+      &.alec {
+        background-image: image-url("illustrations/contributors/alec-talking.png");
+      }
+      &.jenya {
+        background-image: image-url("illustrations/contributors/jenya-talking.png");
+        $jenya_image_ratio: 1.294;
+        height: calc( #{$jenya_image_ratio} * #{$large_image_width});
+        @media #{$zone-medium-image-switched-credits} {
+          height: calc( #{$jenya_image_ratio} * #{$medium_image_width});
         }
+        @media #{$zone-mobile-one-column} {
+          height: calc( #{$jenya_image_ratio} * #{$small_image_width});
+        }
+      }
+      &.sudara {
+        background-image: image-url("illustrations/contributors/sudara-talking.png");
+        $sudara_image_ratio: .796;
+        height: calc( #{$sudara_image_ratio} * #{$large_image_width});
+        @media #{$zone-medium-image-switched-credits} {
+          height: calc( #{$sudara_image_ratio} * #{$medium_image_width});
+        }
+        @media #{$zone-mobile-one-column} {
+          height: calc( #{$sudara_image_ratio} * #{$small_image_width});
+        }
+      }
+      &.ben {
+        background-image: image-url("illustrations/contributors/ben-talking.png");
+      }
+      &.samo {
+        background-image: image-url("illustrations/contributors/samo-talking.png");
+        $samo_image_ratio: .9915;
+        height: calc( #{$samo_image_ratio} * #{$large_image_width});
+        @media #{$zone-medium-image-switched-credits} {
+          height: calc( #{$samo_image_ratio} * #{$medium_image_width});
+        }
+        @media #{$zone-mobile-one-column} {
+          height: calc( #{$samo_image_ratio} * #{$small_image_width});
+        }
+      }
+      &.manfred {
+        background-image: image-url("illustrations/contributors/manfred-talking.png");
       }
     }
     .contributor_name {
@@ -261,69 +264,5 @@ $small_image_width: 80px;
       font-size: 12px;
       color: $grey900;
     }
-  }
-}
-
-
-.blank_slate_illustration {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position-y: bottom;
-  height: 100%;
-  min-width: $large_image_width;
-  @media only screen and (max-width: 570px) {
-    min-width: auto;
-    width: $medium_image_width;
-  }
-  @media only screen and (max-width: 440px) {
-    min-width: auto;
-    width: $small_image_width;
-  }
-  &.alec {
-    background-image: image-url("illustrations/contributors/alec-talking.png");
-  }
-  &.jenya {
-    background-image: image-url("illustrations/contributors/jenya-talking.png");
-    $jenya_image_ratio: 1.294;
-    height: calc( #{$jenya_image_ratio} * #{$large_image_width});
-    @media only screen and (max-width: 570px) {
-      height: calc( #{$jenya_image_ratio} * #{$medium_image_width});
-    }
-  }
-  &.sudara {
-    background-image: image-url("illustrations/contributors/sudara-talking.png");
-    $sudara_image_ratio: .796;
-    height: calc( #{$sudara_image_ratio} * #{$large_image_width});
-    @media only screen and (max-width: 570px) {
-      height: calc( #{$sudara_image_ratio} * #{$medium_image_width});
-    }
-    @media only screen and (max-width: 440px) {
-      height: calc( #{$sudara_image_ratio} * #{$small_image_width});
-    }
-  }
-  &.ben {
-    background-image: image-url("illustrations/contributors/ben-talking.png");
-  }
-  &.samo {
-    background-image: image-url("illustrations/contributors/samo-talking.png");
-    height: calc( 1.007 * 238px);
-    @media only screen and (max-width: 570px) {
-      height: calc( 1.007 * 180px);
-    }
-
-  }
-  &.manfred {
-    background-image: image-url("illustrations/contributors/manfred-talking.png");
-  }
-}
-.contributor_name.mobile_only, .contributor_title.mobile_only {
-  display: none;
-  @media only screen and (max-width: 540px) {
-    display: block;
-    padding-left: $baseline;
-  }
-  @media only screen and (max-width: 440px) {
-    display: block;
-    padding-left: 0;
   }
 }
