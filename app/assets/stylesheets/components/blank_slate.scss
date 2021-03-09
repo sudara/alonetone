@@ -144,7 +144,6 @@ $small_image_width: 100px;
           padding-left: $baseline;
         }
       }
-  
     }
     .right {
       margin-left: 7%;
@@ -184,7 +183,7 @@ $small_image_width: 100px;
           float: right;
         }
         #floater {
-          width: 80px;
+          width: $small_image_width;
           box-sizing: border-box;
           float: right;
           clear: right;
