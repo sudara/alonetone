@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: $site_max_width;
   background-position-x: 50%;
-  background-position-y: $background_position-y;
+  background-position-y: $noise-background-position-y;
   position: relative;
   top: -48px;
   .blank_slate {
@@ -106,16 +106,16 @@ $zone-smaller-font: 'only screen and (min-width: 630px) and (max-width: 849px)';
 $zone-medium-image-switched-credits: 'only screen and (min-width: 440px) and (max-width: 629px)';
 $zone-mobile-one-column: 'only screen and (max-width: 439px)';
 
-$large_image_width: 238px;
-$medium_image_width: 160px;
-$small_image_width: 100px;
+$large-image-width: 238px;
+$medium-image-width: 160px;
+$small-image-width: 100px;
 
 .page_container_with_blank_slate_full_cloud {
   background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
   background-repeat: no-repeat;
   background-size: $site_max_width;
   background-position-x: 50%;
-  background-position-y: $background_position-y;
+  background-position-y: $noise-background-position-y;
   position: relative;
   top: -48px;
   margin-bottom: -28px;
@@ -183,7 +183,7 @@ $small_image_width: 100px;
           float: right;
         }
         #floater {
-          width: $small_image_width;
+          width: $small-image-width;
           box-sizing: border-box;
           float: right;
           clear: right;
@@ -203,12 +203,12 @@ $small_image_width: 100px;
       background-size: 100%;
       background-repeat: no-repeat;
       background-position-y: bottom;
-      width: $large_image_width;
+      width: $large-image-width;
       @media #{$zone-medium-image-switched-credits} {
-        width: $medium_image_width;
+        width: $medium-image-width;
       }
       @media #{$zone-mobile-one-column} {
-        width: $small_image_width;
+        width: $small-image-width;
       }
       &.alec {
         background-image: image-url("illustrations/contributors/alec-talking.png");
@@ -216,23 +216,23 @@ $small_image_width: 100px;
       &.jenya {
         background-image: image-url("illustrations/contributors/jenya-talking.png");
         $jenya_image_ratio: 1.294;
-        height: calc( #{$jenya_image_ratio} * #{$large_image_width});
+        height: calc( #{$jenya_image_ratio} * #{$large-image-width});
         @media #{$zone-medium-image-switched-credits} {
-          height: calc( #{$jenya_image_ratio} * #{$medium_image_width});
+          height: calc( #{$jenya_image_ratio} * #{$medium-image-width});
         }
         @media #{$zone-mobile-one-column} {
-          height: calc( #{$jenya_image_ratio} * #{$small_image_width});
+          height: calc( #{$jenya_image_ratio} * #{$small-image-width});
         }
       }
       &.sudara {
         background-image: image-url("illustrations/contributors/sudara-talking.png");
         $sudara_image_ratio: .796;
-        height: calc( #{$sudara_image_ratio} * #{$large_image_width});
+        height: calc( #{$sudara_image_ratio} * #{$large-image-width});
         @media #{$zone-medium-image-switched-credits} {
-          height: calc( #{$sudara_image_ratio} * #{$medium_image_width});
+          height: calc( #{$sudara_image_ratio} * #{$medium-image-width});
         }
         @media #{$zone-mobile-one-column} {
-          height: calc( #{$sudara_image_ratio} * #{$small_image_width});
+          height: calc( #{$sudara_image_ratio} * #{$small-image-width});
         }
       }
       &.ben {
@@ -241,12 +241,12 @@ $small_image_width: 100px;
       &.samo {
         background-image: image-url("illustrations/contributors/samo-talking.png");
         $samo_image_ratio: .9915;
-        height: calc( #{$samo_image_ratio} * #{$large_image_width});
+        height: calc( #{$samo_image_ratio} * #{$large-image-width});
         @media #{$zone-medium-image-switched-credits} {
-          height: calc( #{$samo_image_ratio} * #{$medium_image_width});
+          height: calc( #{$samo_image_ratio} * #{$medium-image-width});
         }
         @media #{$zone-mobile-one-column} {
-          height: calc( #{$samo_image_ratio} * #{$small_image_width});
+          height: calc( #{$samo_image_ratio} * #{$small-image-width});
         }
       }
       &.manfred {

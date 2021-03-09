@@ -29,8 +29,8 @@ $admin-deleted-at-text: $grey50;
 $admin-user-ip-text: $grey50;
 
 // blank_slate.scss
+$noise-background-position-y: 0;
 $blank-slate-cloud-min-height: 480px;
-
 
 // comments.scss
 $comment-as-text: $grey800;
@@ -85,9 +85,6 @@ $checkbox-not-checked-border: $grey500;
 $hero-background: $grey1150;
 $hero-heading-text: $orangetone;
 $hero-paragraph-text: $grey50;
-
-// illustrations.scss
-$background_position-y: 0;
 
 // notifications.scss
 $flash-text: $black;
