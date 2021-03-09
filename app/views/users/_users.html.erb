@@ -15,6 +15,8 @@
 <div class="page_container page_container_with_blank_slate_full_cloud">
 <% if @sort == 'patrons' %>
   <%= render layout: 'shared/blank_slate', locals: { name: 'sudara', role: 'creator' } do %>
+      <div id="spacer"></div>
+      <img src="" alt="">
       <p>
         This is the Wall-o-Thanks!!!
       </p>
@@ -29,6 +31,24 @@
   <% end %>
 <% end %>
 </div>
+
+<style>
+img {
+  height: 100px;
+  width: 80px;
+  background-color: white;
+  border: 10px double steelblue;
+  box-sizing: border-box;
+  float: right;
+  clear: right;
+}
+#spacer {
+  width: 0px;
+  float: right;
+}
+
+</style>
+
 
 <div class="page_container" id="user_index">
   <div class="mini_paginator top_paginator">
