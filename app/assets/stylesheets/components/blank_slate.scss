@@ -136,6 +136,7 @@ $small_image_width: 80px;
       @media only screen and (max-width: 380px) {
         width: $small_image_width;
         align-self: center;
+        display: none;
       }
 
       .blank_slate_illustration {
@@ -148,7 +149,7 @@ $small_image_width: 80px;
           min-width: auto;
           width: $medium_image_width;
         }
-        @media only screen and (max-width: 380px) {
+        @media only screen and (max-width: 440px) {
           min-width: auto;
           width: $small_image_width;
         }
@@ -170,7 +171,7 @@ $small_image_width: 80px;
           @media only screen and (max-width: 570px) {
             height: calc( #{$sudara_image_ratio} * #{$medium_image_width});
           }
-          @media only screen and (max-width: 380px) {
+          @media only screen and (max-width: 440px) {
             height: calc( #{$sudara_image_ratio} * #{$small_image_width});
           }
         }
@@ -210,20 +211,38 @@ $small_image_width: 80px;
         width: 54%;
         margin-left: 20px;
       }
+      @media only screen and (max-width: 440px) {
+        width: 100%;
+      }
       .blank_slate_text {
         @include paragraph18();
         color: $grey900;
         @media only screen and (max-width: 850px) {
           font-size: 16px;
         }
-        @media #{$one-column} {
-          // padding-top: $baseline * 1.5;
-          // padding-bottom: $baseline * 1.5;
-        }
         @media only screen and (max-width: 540px) {
           font-size: 14px;
           .contributor_name, .contributor_title {
             display: none;
+          }
+        }
+        #spacer {
+          width: 0px;
+          float: right;
+        }
+        #floater {
+          width: 80px;
+          box-sizing: border-box;
+          float: right;
+          clear: right;
+          display: none;
+          @media only screen and (max-width: 440px) {
+            display: block;
+          }
+          .contributor_name, .contributor_title {
+            display: block;
+            font-size: 11px;
+            text-align: center;
           }
         }
         a {
@@ -244,6 +263,7 @@ $small_image_width: 80px;
     }
   }
 }
+
 
 .blank_slate_illustration {
   background-size: 100%;

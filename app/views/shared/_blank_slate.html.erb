@@ -10,7 +10,18 @@
     </div>
   </div>
   <div class="right">
-    <div class="blank_slate_text">
+    <div class="blank_slate_text" data-blank-slate-target="container">
+      <div id="spacer" data-blank-slate-target="spacer"></div>
+      <div id="floater" data-blank-slate-target="floater">
+        <div class="blank_slate_illustration <%= name %>">
+        </div>
+        <div class="contributor_name floater">
+          <%= name %>
+        </div>
+        <div class="contributor_title floater">
+          <%= role %>
+        </div>
+      </div>
       <%= yield %>
       <div class="contributor_name">
         <%= name %>
@@ -18,6 +29,7 @@
       <div class="contributor_title">
         <%= role %>
       </div>
+
     </div>
   </div>
 </div>
