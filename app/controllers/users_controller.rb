@@ -5,8 +5,9 @@ class UsersController < ApplicationController
   def index
     @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
     @tab = 'browse'
-    @pagy, @users = pagy(User.with_preloads.paginate_by_params(params), items: 20)
     @sort = params[:sort]
+    @pagy, @users = pagy(User.with_preloads.paginate_by_params(params),
+      items: @sort == 'patrons' ? 100 : 20)
     @user_count = User.count
     @active     = User.where("assets_count > 0").count
   end

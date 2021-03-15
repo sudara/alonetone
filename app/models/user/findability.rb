@@ -41,7 +41,7 @@ class User < ApplicationRecord
       end
 
       def patrons
-        joins(:patron).preload(:patron)
+        joins(:patron).preload(:patron).reorder('patrons.created_at DESC')
       end
 
       def recently_joined
