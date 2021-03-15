@@ -1,8 +1,8 @@
 ## Why Can't I Just Sign Up?
 
-Unfortunately public signups result in huge quantities of spam, trolls, and misuse. Even the largest networks like Facebook, SoundCloud and Twitter are buried in millions of these types of accounts.
+Unfortunately, public signups these days result in huge quantities of spam, trolls, and misuse. Even the largest networks like Facebook, SoundCloud and Twitter are buried in millions of these types of fake and spammy accounts.
 
-Since it's just us chickens (not some big company) and we've experienced those issues first-hand, we thought people who really did want an account wouldn't mind shooting us an email at support@alonetone.com in exchange for a safe music-only space.
+Since it's just us chickens (not some big company) and we've experienced those issues first-hand (we fought the spam wars and lost), we thought people who really did want an account wouldn't mind [hopping on a waitlist](/get_an_account).
 
 ## How can I post my music to Facebook, Twitter, etc?
 
