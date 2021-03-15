@@ -28,42 +28,48 @@ class User < ApplicationRecord
 
       # feeds the users/index subnav
       def paginate_by_params(params)
-        available_sortings = %w[last_uploaded most_listened_to new_artists monster_uploaders dedicated_listeners]
+        available_sortings = %w[last_uploaded patrons most_listened_to new_artists monster_uploaders dedicated_listeners]
         params[:sort] = 'last_seen' if !params[:sort].present? || !available_sortings.include?(params[:sort])
-        User.send(params[:sort])
+        send(params[:sort])
       end
 
       protected
 
       # needed to map incoming params to scopes
       def last_seen
-        recently_seen.limit(30)
+        recently_seen
+      end
+
+      def patrons
+        joins(:patron).preload(:patron)
       end
 
       def recently_joined
-        activated.limit(30)
+        activated
       end
 
       def new_artists
-        musicians.reorder('users.created_at DESC').limit(30)
+        musicians.reorder('users.created_at DESC')
       end
 
       def most_listened_to
-        result = Listen.since(1.month.ago).group(:track_owner).order('count_all DESC').limit(30).count
-        result.collect(&:first)
+        left_joins(:track_plays).group('users.id')
+          .order('COUNT(listens.id) DESC')
+          .where('listens.created_at > ?', 1.month.ago)
       end
 
       def monster_uploaders
-        musicians.reorder('users.assets_count DESC').limit(30)
+        musicians.reorder('users.assets_count DESC')
       end
 
       def last_uploaded
-        includes(:assets).order('assets.created_at DESC').limit(30)
+        joins(:assets).order('assets.created_at DESC').distinct
       end
 
       def dedicated_listeners
-        result = Listen.since(1.month.ago).where('listener_id is not null').group(:listener).order('count_all DESC').limit(30).count
-        result.collect(&:first)
+        left_joins(:listens).group('users.id')
+        .order('COUNT(listens.id) DESC')
+        .where('listens.created_at > ?', 1.month.ago)
       end
     end
   end

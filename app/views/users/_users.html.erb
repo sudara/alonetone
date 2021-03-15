@@ -1,19 +1,41 @@
 <nav class="sub_nav">
   <div class="page_container sub_nav_inner" data-controller="subnav" data-action="resize@window->subnav#resize">
-       <ul>
-        <%= navigation_item "Last Online", {action: 'index', sort: nil} %>
-        <%= navigation_item "Last Uploaded", {action: 'index', sort: 'last_uploaded'} %>
-        <%= navigation_item "Most Listened To", {action: 'index', sort: 'most_listened_to'} %>
-        <%= navigation_item "New Artists", {action: 'index', sort: 'new_artists'} %>
-        <%= navigation_item "All Time Top Uploaders", {action: 'index', sort: 'monster_uploaders'} %>
-        <%= navigation_item "Dedicated Listeners", {action: 'index', sort: 'dedicated_listeners'}%>
-        </ul>
+    <ul>
+        <%= navigation_item "Last Online", { action: 'index', sort: 'last_seen' }%>
+        <%= navigation_item "Patrons", { action: 'index', sort: 'patrons' }%>
+        <%= navigation_item "Last Uploaded", { action: 'index', sort: 'last_uploaded'}%>
+        <%= navigation_item "Most Listened To", { action: 'index', sort: 'most_listened_to' }%>
+        <%= navigation_item "New Artists", { action: 'index', sort: 'new_artists' }%>
+        <%= navigation_item "All Time Top Uploaders", { action: 'index', sort: 'monster_uploaders' }%>
+        <%= navigation_item "Dedicated Listeners", { action: 'index', sort: 'dedicated_listeners' }%>
+    </ul>
   </div>
 </nav>
 
+<div class="page_container page_container_with_blank_slate_full_cloud">
+<% if @sort == 'patrons' %>
+  <%= render layout: 'shared/blank_slate', locals: { name: 'sudara', role: 'creator' } do %>
+      <p>
+        This is the Wall-o-Thanks!!!
+      </p>
+
+      <p>
+        The alonetoners listed below contribute to keep the servers running and ensure we can keep providing a free home to musicians everywhere. Thank you!
+      </p>
+
+      <p>
+       Want to join in? <%= link_to "Support alonetone on patreon.", "https://patreon.com/alonetone" %>
+      </p>
+  <% end %>
+<% end %>
+</div>
+
 <div class="page_container" id="user_index">
+  <div class="mini_paginator top_paginator">
+    <%== pagy_nav @pagy %>
+  </div>
   <ul id="large_users_grid" class="responsive_grid">
-    <% if @sort == 'dedicated_listeners'%>
+    <% if @sort == 'dedicated_listeners' %>
       <% cache("dedicated/#{params[:page]}/", expires_in: 4.hours) do %>
         <%= render partial: 'shared/user', collection: @users, as: :user %>
       <% end %>
@@ -22,8 +44,8 @@
         <%= render partial: 'shared/user', collection: @users, as: :user %>
       <% end %>
     <% end %>
-    <div class="clear"> </div>
   </ul>
-
-  <div style="float:none;clear:both;"> </div>
+  <div class="mini_paginator bottom_paginator">
+    <%== pagy_nav @pagy %>
+  </div>
 </div>

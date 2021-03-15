@@ -1,4 +1,4 @@
-.get_an_account_container {
+.big_form {
   .box {
     @include shadow6();
     margin-bottom: 0;
@@ -16,7 +16,7 @@
         padding-right: $baseline / 2;
       }
     }
-    h3 a{
+    h3 a {
       text-decoration: underline;
       color: $accent;
     }

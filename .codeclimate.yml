@@ -21,7 +21,7 @@ checks:
 plugins:
   rubocop:
     enabled: true
-    channel: rubocop-0-87
+    channel: rubocop-1-4-1
   eslint:
     enabled: true
     channel: "eslint-7"
