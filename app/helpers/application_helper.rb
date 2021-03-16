@@ -14,6 +14,11 @@ module ApplicationHelper
     (moderator? || admin?) || (logged_in? && (comment.commenter == current_user || comment.user == current_user))
   end
 
+  def pagy_url_for(page, pagy)
+    params = request.query_parameters.merge(:only_path => true, pagy.vars[:page_param] => page )
+    url_for(params)
+  end
+
   def edit_or_show(_user, playlist)
     if authorized_for(playlist)
       edit_user_playlist_path(@user.login, playlist)
@@ -83,8 +88,9 @@ module ApplicationHelper
   end
 
   def navigation_item(text, link, options = nil)
+    current = current_page?(link) || (link.respond_to?(:merge) && current_page?(link.merge(page: params[:page] || 1)))
     content_tag(:li, link_to_unless_current(text.html_safe, link, options),
-      class: current_page?(link) ? 'current' : '',
+      class: current ? 'current' : '',
       data: { 'subnav-target': 'item' })
   end
 

@@ -1,21 +1,35 @@
-<div class="blank_slate">
+<div class="blank_slate" data-controller="blank-slate" data-action="resize@window->blank-slate#resize">
   <div class="left">
     <div class="blank_slate_illustration <%= name %>">
     </div>
-    <div class="contributor_name mobile_only">
-      <%= name %>
-    </div>
-    <div class="contributor_title mobile_only">
-      <%= role %>
-    </div>
-  </div>
-  <div class="blank_slate_text">
-    <%= yield %>
     <div class="contributor_name">
       <%= name %>
     </div>
     <div class="contributor_title">
       <%= role %>
+    </div>
+  </div>
+  <div class="right">
+    <div class="blank_slate_text" data-blank-slate-target="container">
+      <div id="spacer" data-blank-slate-target="spacer"></div>
+      <div id="floater" data-blank-slate-target="floater">
+        <div class="blank_slate_illustration <%= name %>">
+        </div>
+        <div class="contributor_name floater">
+          <%= name %>
+        </div>
+        <div class="contributor_title floater">
+          <%= role %>
+        </div>
+      </div>
+      <%= yield %>
+      <div class="contributor_name">
+        <%= name %>
+      </div>
+      <div class="contributor_title">
+        <%= role %>
+      </div>
+
     </div>
   </div>
 </div>

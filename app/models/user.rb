@@ -148,6 +148,8 @@ class User < ApplicationRecord
   has_one :mass_invite_signup
   has_one :mass_invite, through: :mass_invite_signup
 
+  has_one :patron
+
   # tokens and activation
   def clear_token!
     update_attribute(:perishable_token, nil)

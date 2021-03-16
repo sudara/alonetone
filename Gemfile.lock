@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rspec/rspec-core.git
-  revision: bea9f5e4871073e1e4f99e0a2dbf708b660f1a6e
+  revision: 31f057342d182c88d389ec1ef890a3029a2d180d
   branch: main
   specs:
     rspec-core (3.11.0.pre)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-expectations.git
-  revision: bd10f0cf3970932781efcd09b5e427877d16a6c2
+  revision: b95ae1d4da42fac39e54fba3fbe31b9a837658b4
   branch: main
   specs:
     rspec-expectations (3.11.0.pre)
@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-mocks.git
-  revision: 9ed1fdb45ec568af79985d256b9831bab7b21981
+  revision: 3e7d0c0e044598b701697f2ac5d62d47142b5897
   branch: main
   specs:
     rspec-mocks (3.11.0.pre)
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-rails.git
-  revision: 46f8e89443a393e5227bf1f0a13f4fc7170f7e4d
+  revision: 7c23e9c73bba447d3c5902ffd455c78f9aa7935f
   branch: rails-6.1.0.rc2-dev
   specs:
     rspec-rails (4.1.0.pre)
@@ -40,14 +40,14 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-support.git
-  revision: cb494ebc9ce9bd20f75aa5586ab3734988d70b87
+  revision: b756ed8880628c806890a8348e143f595278934c
   branch: main
   specs:
     rspec-support (3.11.0.pre)
 
 GIT
   remote: https://github.com/rspec/rspec.git
-  revision: 9fb905ef4a6c4b7303c7eeee654128126d73c42b
+  revision: 58ce1daf083add0aef88f874b5a049a3146eb909
   branch: main
   specs:
     rspec (3.11.0.pre)
@@ -57,13 +57,13 @@ GIT
 
 GIT
   remote: https://github.com/sudara/authlogic.git
-  revision: 564bcc0b113024844d159e7e6e96b7a9f3b15b9d
+  revision: 0d9c59271b2ff42ed39c1b9feed3af0fb589d270
   branch: rails6-1
   specs:
     authlogic (6.2.0)
-      activemodel (>= 5.2, < 6.2)
-      activerecord (>= 5.2, < 6.2)
-      activesupport (>= 5.2, < 6.2)
+      activemodel (>= 5.2)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
       request_store (~> 1.0)
 
 GIT
@@ -162,7 +162,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    acts_as_list (1.0.3)
+    acts_as_list (1.0.2)
       activerecord (>= 4.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
@@ -170,23 +170,23 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.1)
-    autoprefixer-rails (10.2.0.0)
+    autoprefixer-rails (10.1.0.0)
       execjs
     awesome_print (1.8.0)
     aws-eventstream (1.1.0)
-    aws-partitions (1.418.0)
-    aws-sdk-cloudfront (1.47.0)
+    aws-partitions (1.405.0)
+    aws-sdk-cloudfront (1.46.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.111.2)
+    aws-sdk-core (3.110.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.41.0)
+    aws-sdk-kms (1.39.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.87.0)
+    aws-sdk-s3 (1.86.0)
       aws-sdk-core (~> 3, >= 3.109.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -196,17 +196,17 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bugsnag (6.19.0)
+    bugsnag (6.18.0)
       concurrent-ruby (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    capybara (3.34.0)
+    capybara (3.35.3)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-      regexp_parser (~> 1.5)
+      regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (3.0.0)
     coderay (1.1.3)
@@ -218,7 +218,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colorize (0.8.1)
-    commonmarker (0.21.1)
+    commonmarker (0.21.0)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.8)
     connection_pool (2.2.3)
@@ -229,8 +229,7 @@ GEM
     country_select (4.0.0)
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
-    crack (0.4.5)
-      rexml
+    crack (0.4.4)
     crass (1.0.6)
     dalli (2.7.11)
     db_text_search (0.3.1)
@@ -240,12 +239,14 @@ GEM
     dynamic_form (1.1.4)
     erubi (1.10.0)
     execjs (2.7.0)
-    ffi (1.14.2)
+    faker (2.16.0)
+      i18n (>= 1.6, < 2)
+    ffi (1.13.1)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
     formatador (0.2.5)
-    friendly_id (5.4.2)
+    friendly_id (5.4.1)
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -268,7 +269,7 @@ GEM
       activesupport (>= 2)
       nokogiri (>= 1.4)
     htmlentities (4.3.4)
-    http-2 (0.11.0)
+    http-2 (0.10.2)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
@@ -283,7 +284,7 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       sass (>= 3.2)
-    json (2.5.1)
+    json (2.3.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -300,7 +301,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    listen (3.4.1)
+    listen (3.3.3)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     local_time (2.1.0)
@@ -320,14 +321,14 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
-    minitest (5.14.3)
+    minitest (5.14.4)
     multi_json (1.15.0)
     mustache (1.1.1)
     mysql2 (0.5.3)
     nenv (0.3.0)
-    newrelic_rpm (6.15.0)
-    nio4r (2.5.5)
-    nokogiri (1.11.1)
+    newrelic_rpm (6.14.0)
+    nio4r (2.5.7)
+    nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     nokogumbo (2.0.4)
@@ -344,7 +345,7 @@ GEM
       sanitize
     pagy (3.10.0)
     parallel (1.20.1)
-    parser (3.0.0.0)
+    parser (2.7.2.0)
       ast (~> 2.4.1)
     percy-capybara (4.3.3)
     perf_check (0.10.5)
@@ -363,7 +364,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.13.0)
     public_suffix (4.0.6)
-    puma (5.1.1)
+    puma (5.1.0)
       nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
@@ -411,27 +412,27 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.2.5)
-    regexp_parser (1.8.2)
+    regexp_parser (2.0.3)
     request_store (1.5.0)
       rack (>= 1.4)
     rexml (3.2.4)
     rinku (2.0.6)
-    rubocop (0.87.0)
+    rubocop (1.4.1)
       parallel (~> 1.10)
-      parser (>= 2.7.1.1)
+      parser (>= 2.7.1.5)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.7)
+      regexp_parser (>= 1.8)
       rexml
-      rubocop-ast (>= 0.1.0, < 1.0)
+      rubocop-ast (>= 1.1.1)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (0.8.0)
+    rubocop-ast (1.3.0)
       parser (>= 2.7.1.5)
     ruby-audio (1.6.1)
     ruby-enum (0.8.0)
       i18n
     ruby-mp3info (0.8.10)
-    ruby-progressbar (1.11.0)
+    ruby-progressbar (1.10.1)
     ruby-vips (2.0.17)
       ffi (~> 1.9)
     rubyzip (2.3.0)
@@ -440,7 +441,7 @@ GEM
       jquery-fileupload-rails (~> 0.4.1)
       rails (>= 3.1)
       sass-rails (>= 3.1)
-    sanitize (5.2.3)
+    sanitize (5.2.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
       nokogumbo (~> 2.0)
@@ -464,16 +465,16 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    semantic_range (2.3.1)
+    semantic_range (3.0.0)
     shellany (0.0.1)
-    sidekiq (6.1.3)
+    sidekiq (6.1.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
     sixarm_ruby_unaccent (1.2.0)
     skylight (5.0.0.beta4)
       activesupport (>= 5.2.0)
-    sometimes (0.0.3)
+    sometimes (1.1.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
     sprockets (4.0.2)
@@ -500,7 +501,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (>= 3.0, < 4.0)
-    webmock (3.11.1)
+    webmock (3.10.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -533,6 +534,7 @@ DEPENDENCIES
   country_select
   dalli
   dynamic_form
+  faker
   guard
   guard-rspec
   http-2
@@ -562,7 +564,7 @@ DEPENDENCIES
   rspec-mocks!
   rspec-rails!
   rspec-support!
-  rubocop (= 0.87.0)
+  rubocop (= 1.4.1)
   ruby-audio
   ruby-mp3info
   rubyzip
