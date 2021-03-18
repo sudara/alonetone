@@ -1,16 +1,13 @@
+<%= render partial: 'shared/errors', locals: { errors: @user_session.errors } %>
 <%= form_with model: @user_session, data: { turbo: false }, id: 'login_form' do |f| %>
-  <%= render partial: 'shared/errors', locals: { errors: @user_session.errors } %>
-  <h3 class="form_heading">
-    Don't be shy, come on in!
-  </h3>
-
-  <div class="field_with_hint_before">
+  
+  <div>
     <%= f.label :login %>
     <%= f.text_field :login %>
     <%= inline_form_error(@user_session.errors[:login]) %>
   </div>
 
-  <div class="field_with_hint_before">
+  <div>
     <%= f.label :password %>
     <%= f.password_field :password, autocomplete: 'current-password'  %>
     <%= inline_form_error(@user_session.errors[:password]) %>
@@ -21,9 +18,9 @@
   </div>
 <% end %>
 
-<p>
+<div class="forgot_password">
   <%= link_to "Forgot Your Password?", "#reset-password", class: "slide_open_href" %>
-</p>
+</div>
 
 <%= form_with url: password_resets_path, data: { turbo: false }, id: 'reset-password' do |f| %>
 

@@ -24,7 +24,6 @@
   display: none;
 }
 
-
 body main #columns {
   #login.box,
   #signup.box,
@@ -38,6 +37,36 @@ body main #columns {
     }
     a {
       text-decoration: underline;
+    }
+  }
+
+  // This should be end up more universal?
+  // existing shared error styles are designed for the big form format
+  #login {
+    #error_explanation {
+      padding: 12px;
+      padding-bottom: 0.1px;
+      h3 {
+        margin-top: 0;
+      }
+      ol {
+        margin-bottom: 0;
+      }
+    }
+
+    .forgot_password {
+      margin-top: -12px;
+      margin-bottom: 24px;
+      a.slide_open_href {
+        text-decoration: underline;
+        margin-left: 12px;
+      }
+    }
+
+    form {
+      line-height: 1.3;
+      padding: 24px 12px;
+      font-size: 13px;
     }
   }
 }
