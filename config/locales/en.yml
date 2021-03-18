@@ -13,4 +13,4 @@ en:
   authlogic:
     error_messages:
       no_authentication_details: Login and password need to be filled out
-      login_not_found: Hmm, want to double check your login?
+      login_not_found: not found (It should be the same as your profile url)
