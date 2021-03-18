@@ -8,9 +8,8 @@
 
   <%= render partial: 'bio' %>
 
-  <% if @user.errors.empty? || @user.errors.key?(:password) %>
   <div class="edit_profile_change_your_password box">
-    <%= render partial: 'shared/errors', locals: { errors: @user.errors } if !@user.errors.key?('login') %>
+    <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('password') %>
 
     <div class="warning_tag">Warning</div>
     <div class="row">
@@ -30,9 +29,7 @@
       <% end %>
     </div>
   </div>
-  <% end %>
 
-  <% if @user.errors.empty? || @user.errors.key?(:password) %>
   <div class="edit_profile_change_your_login box">
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('login') %>
     <div class="warning_tag">Warning</div>
@@ -57,8 +54,8 @@
       </div>
     <% end %>
   </div>
-  <% end %>
 
+  <% if false %>
   <div class="edit_profile_delete_your_account box">
     <div class="danger_tag">DANGER! DANGER!</div>
       <h2>Delete your account</h2>
@@ -80,4 +77,5 @@
       </div>
     </div>
   </div>
+  <% end %>
 </div>

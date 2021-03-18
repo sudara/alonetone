@@ -119,7 +119,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_back_or_default(default = '/')
     session[:return_to] = nil
-    redirect_to(session[:return_to] || default), status: 303
+    redirect_to session[:return_to] || default, status: 303
   end
 
   def admin_or_owner(record = current_user)

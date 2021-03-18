@@ -1,10 +1,9 @@
   <div class="box">
     <h1>Edit Profile</h1>
     <div class="edit_profile_separator"></div>
-    <turbo-frame id="bio">
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } %>
 
-    <%= form_with model: @user do |f| %>
+    <%= form_with model: @user, data: { turbo: false } do |f| %>
     <div class="edit_profile_top">
       <div class="edit_profile_top_left" data-controller="image-upload">
         <label>PROFILE PICTURE</label>
@@ -41,7 +40,6 @@
       </div>
     </div>
     <% end %>
-    </turbo-frame>
 
     <div class="edit_profile_separator"></div>
 
