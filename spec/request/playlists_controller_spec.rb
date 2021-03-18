@@ -40,4 +40,20 @@ RSpec.describe PlaylistsController, type: :request do
       expect(uri.path).to end_with('/edit')
     end
   end
+
+  context "editing" do
+
+    it "redirects to new permalink" do
+      create_user_session(users(:arthur))
+      put(
+        "/arthur/playlists/mix-tape",
+        params: {
+          playlist: {
+            title: 'Totally New Mix'
+          }
+        }
+      )
+      expect(response).to redirect_to('/arthur/playlists/totally-new-mix/edit')
+    end
+  end
 end
