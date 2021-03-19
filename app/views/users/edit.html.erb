@@ -1,19 +1,14 @@
 <div class="edit_profile">
 
-  <% if @user.errors.any? %>
-    <%= render partial: 'shared/back_to_button', locals: { url: edit_user_path(@user), label: "Edit Profile" } %>
-  <% else %>
-    <%= render partial: 'shared/back_to_artist' %>
-  <% end %>
 
+<%= render partial: 'shared/back_to_artist' %>
   <%= render partial: 'bio' %>
-
   <div class="edit_profile_change_your_password box">
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('password') %>
 
     <div class="warning_tag">Warning</div>
     <div class="row">
-      <%= form_with model: @user, local: true do |f| %>
+      <%= form_with model: @user do |f| %>
         <h2>Change your password</h2>
         <p>
         </p>
@@ -33,7 +28,7 @@
   <div class="edit_profile_change_your_login box">
     <%= render partial: 'shared/errors', locals: { errors: @user.errors } if @user.errors.key?('login') %>
     <div class="warning_tag">Warning</div>
-    <%= form_with model: @user, local: true do |f| %>
+    <%= form_with model: @user do |f| %>
       <h2>Change your login</h2>
       <p>
         Changing this will break any links you've ever shared over facebook, email, etc.

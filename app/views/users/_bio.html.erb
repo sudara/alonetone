@@ -43,10 +43,9 @@
 
     <div class="edit_profile_separator"></div>
 
-    <turbo-frame id="socials">
     <div class="edit_profile_socials">
       <h3>Update social media links</h3>
-      <%= form_with model: [@user, @profile] do |f| %>
+      <%= form_with model: [@user, @profile], data: { turbo: false } do |f| %>
         <div class="edit_profile_socials_columns">
           <div class="edit_profile_socials_left_column">
             <label for="user_website">Website</label>
@@ -125,7 +124,6 @@
         <%= f.submit "Update links" %>
       <% end %>
     </div>
-    </turbo-frame>
 
     <div class="edit_profile_separator"></div>
     <div class="edit_profile_settings">
