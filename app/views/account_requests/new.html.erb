@@ -8,12 +8,11 @@
       </p>
   <% end %>
 
-  <turbo-frame id="account-form">
   <div class="box">
     <h2>Get an Account</h2>
     <%= render partial: 'shared/errors', locals: { errors: @account_request.errors } %>
 
-    <%= form_with(model: @account_request) do |f| %>
+    <%= form_with model: @account_request, data: { turbo: false }  do |f| %>
       <h3 class="form_heading">
         Give us an email and pick your username:
       </h3>
@@ -98,5 +97,4 @@
       </div>
     <% end %>
   </div>
-  </turbo-frame>
 </div>

@@ -29,6 +29,6 @@
     <%= link_to "Deny", deny_admin_account_request_path(account_request),
       class: 'deny_button', method: :put, remote: true,
       data: { 'admin--request-target': 'denyButton',
-      action: 'click->admin--request#moderated ajax:success->admin--request#denie ajax:error->admin--request#error' } %>
+      action: 'click->admin--request#moderated ajax:success->admin--request#deny ajax:error->admin--request#error' } %>
   </div>
 </div>
