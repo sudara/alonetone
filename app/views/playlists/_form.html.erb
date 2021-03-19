@@ -1,4 +1,3 @@
-<%= error_messages_for :playlist %>
 <div class="page_container edit_playlist_info_container">
   <% if @playlist.persisted? %>
     <%= render partial: 'back_to_playlist' %>
@@ -12,6 +11,7 @@
     <% else %>
       <h2>Create New Playlist</h2>
     <% end %>
+    <%= render partial: 'shared/errors', locals: { errors: @playlist.errors } %>
     <%= form_with model: [@user, @playlist],
       data: { turbo: false },
       html: { id: 'edit_playlist', autocomplete: 'off' } do |f| %>

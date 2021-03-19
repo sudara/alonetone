@@ -236,7 +236,6 @@ GEM
       activerecord (>= 4.1.15, < 7.0)
     diff-lcs (1.4.4)
     diffy (3.4.0)
-    dynamic_form (1.1.4)
     erubi (1.10.0)
     execjs (2.7.0)
     faker (2.16.0)
@@ -533,7 +532,6 @@ DEPENDENCIES
   commonmarker
   country_select
   dalli
-  dynamic_form
   faker
   guard
   guard-rspec
