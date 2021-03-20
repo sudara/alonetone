@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '6.1.0'
+gem 'rails', '6.1.3'
 gem 'mysql2'
 gem 'puma'
 
@@ -44,10 +44,10 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-gem 'webpacker'
+gem 'webpacker', '6.0.0.beta.5'
 gem 'sass-rails'
 gem 'yui-compressor'
-gem 'turbolinks'
+gem 'turbo-rails'
 
 # monitoring & perf
 gem 'bugsnag'
@@ -58,12 +58,9 @@ gem 'sidekiq'
 gem 'dalli'
 
 group :development do
-  gem 'perf_check', require: false
-  gem 'annotate', require: false
-  gem 'faker', require: false
-  # Available "channels" of rubocop for code climate:
-  # https://github.com/codeclimate/codeclimate-rubocop/branches/all?utf8=✓&query=channel%2Frubocop
-  gem 'rubocop', '1.4.1', require: false # synced to .codeclimate.yml
+  gem 'perf_check'
+  gem 'annotate'
+  gem 'rubocop', '0.87.0', require: false # synced to .codeclimate.yml
 end
 
 ## Who loves tests! You do? You do!
