@@ -6,7 +6,7 @@
   <h2>Almost back in, just pick a new password</h2>
   <% end %>
   <div id="login" class="static_content">
-    <%= form_with model: @user, url: password_reset_path, method: :put  do |f| %>
+    <%= form_with model: @user, url: password_reset_path, method: :put, data: { turbo: false } do |f| %>
       <%= f.label :password, 'Pick a new password'%>
       <%= f.password_field :password, autocomplete: "new-password" %><br/>
 
