@@ -10,9 +10,9 @@ class AccountRequestsController < ApplicationController
     if @account_request.save
       @page_title = "Thank you, #{@account_request.login}"
       @email = @account_request.email
-      render 'thank_you', layout: 'pages'
+      render 'thank_you', layout: 'pages', status: 303
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
