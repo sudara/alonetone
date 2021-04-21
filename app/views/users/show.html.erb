@@ -41,8 +41,8 @@
       <div class="user_name_and_follow">
           <h1 class="user_name"><%= @user.name %></h1>
           <% if logged_in? && current_user != @user %>
-          <%= link_to toggle_follow_path(login: @user.login), remote: true, class: 'follow',
-          data: {controller: 'follow', action: 'follow#toggle', :'follow-following' => current_user.is_following?(@user).present? } do %>
+          <%= button_to put_toggle_follow_path(login: @user.login), method: :put, class: 'follow',
+          data: {controller: 'follow', action: 'follow#toggle', 'follow-following-value': current_user.is_following?(@user).present? } do %>
             <div class="follow_button" data-follow-target="label">Follow</div>
             <%== render file: svg_path('svg/animation_heart.svg') %>
           <% end %>

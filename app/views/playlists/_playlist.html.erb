@@ -35,7 +35,7 @@
 
   <!-- Track title just switches track details-->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-    remote: true, class: 'position_name_time', data: { 'playlist-playback-target': "loadTrack" } do %>
+     class: 'position_name_time', data: { 'playlist-playback-target': "loadTrack" } do %>
     <span class="track_position">
       <%= "%02d" % track.position %>.
     </span>

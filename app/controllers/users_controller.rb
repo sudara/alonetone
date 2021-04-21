@@ -83,7 +83,9 @@ class UsersController < ApplicationController
     return false unless logged_in? && asset # no bullshit
 
     current_user.toggle_favorite(asset)
-    head :ok
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: '' }
+    end
   end
 
   def toggle_setting

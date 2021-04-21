@@ -57,11 +57,9 @@
     <div class= "edit_links_and_favorite">
       <% if logged_in? %>
         <div class="track_favorite">
-        <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
-            data: {controller: 'favorite', action: 'favorite#toggle' } do %>
+        <%= button_to toggle_favorite_path(asset_id: @asset.id), class: 'add_to_favorites',
+            method: :put, data: {controller: 'favorite', action: 'favorite#toggle', 'favorite-id-value': @asset.id} do %>
             Favorite <%== render file: svg_path('svg/animation_heart.svg') %>
-
-
         <% end %>
         </div>
       <% end %>

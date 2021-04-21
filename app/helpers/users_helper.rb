@@ -110,7 +110,6 @@ module UsersHelper
   end
 
   private
-
   def _user_image(user, url:)
     image_tag(
       url.to_s,

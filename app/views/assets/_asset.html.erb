@@ -53,8 +53,12 @@
 
 <div class="tracks_reveal" data-normal-playback-target="details">
   <% if logged_in? %>
-    <%= link_to toggle_favorite_path(asset_id: asset.id), remote: true, class: 'add_to_favorites',
-      data: {controller: 'favorite', action: 'favorite#toggle' } do %>
+    <%= button_to toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites',
+      method: :put, data: {
+        controller: 'favorite',
+        action: 'favorite#toggle',
+        'favorite-id-value': asset.id
+      } do %>
       <%== render file: svg_path('svg/animation_heart.svg') %>
     <% end %>
   <% end %>
