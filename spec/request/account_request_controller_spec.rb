@@ -24,7 +24,7 @@ RSpec.describe AccountRequestsController, type: :request do
           }
         )
       end.to change(AccountRequest, :count).by(+1)
-      expect(response).to redirect_to(assigns(:account_request))
+      expect(response).to render_template('thank_you')
       expect(response).to have_http_status(303)
     end
 
