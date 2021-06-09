@@ -100,14 +100,14 @@ export default class extends PlaybackController {
     this.highlightPlayingTrack()
     this.showSmallCoverAndSidebarLinks()
 
-    // replace track content with result from ajax
-    const temp = document.createElement('div')
-    temp.innerHTML = e.detail[2].responseText
-    document.querySelector('.track_content').replaceWith(temp.firstChild)
-    if (e.target.href !== document.location.href) {
-      const title = this.loadTrackTarget.textContent
-      history.pushState(title, '', e.target.href)
-    }
+    // // replace track content with result from ajax
+    // const temp = document.createElement('div')
+    // temp.innerHTML = e.detail[2].responseText
+    // document.querySelector('.track_content').replaceWith(temp.firstChild)
+    // if (e.target.href !== document.location.href) {
+    //   const title = this.loadTrackTarget.textContent
+    //   history.pushState(title, '', e.target.href)
+    // }
     // link this controller to the new big play button controller
     this.setBigPlay()
   }

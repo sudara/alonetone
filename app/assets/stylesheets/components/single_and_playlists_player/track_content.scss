@@ -397,7 +397,7 @@
   }
 }
 
-main > .track_content {
+main .track_content {
   @media only screen and (max-width: 770px) {
     width: 96%;
     max-width: none;

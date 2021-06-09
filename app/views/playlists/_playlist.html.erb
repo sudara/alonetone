@@ -29,7 +29,7 @@
 
   <!-- Play button automagically plays AND changes to relevant track details  -->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset, format: :mp3),
-    class: 'play_button stitches_play', data: { "playlist-playback-target": "play" } do %>
+    class: 'play_button stitches_play', data: { "playlist-playback-target": "play", "turbo-frame": "playlist" } do %>
     <i class="icon_play"></i>
   <% end %>
 
