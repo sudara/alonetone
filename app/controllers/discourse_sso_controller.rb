@@ -1,4 +1,5 @@
 # This is one of the few things in alonetone that is production-only
+require 'single_sign_on'
 
 class DiscourseSsoController < ApplicationController
   before_action :require_login
