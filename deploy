@@ -29,21 +29,21 @@ ssh alonetone '
 
   $GIT_COMMAND fetch
 
-  if [ ! "$($GIT_COMMAND diff origin/master db)" == "" ]; then
+  if [ ! "$($GIT_COMMAND diff origin/main db)" == "" ]; then
     RUN_MIGRATIONS=1
   fi
 
-  puma_version_changed=$($GIT_COMMAND diff origin/master Gemfile.lock | grep puma | wc -l)
+  puma_version_changed=$($GIT_COMMAND diff origin/main Gemfile.lock | grep puma | wc -l)
 
-  if [ ! "$($GIT_COMMAND diff origin/master Gemfile.lock)" == "" ]
+  if [ ! "$($GIT_COMMAND diff origin/main Gemfile.lock)" == "" ]
     then
       echo "Gemfile changed, bundle installing..."
-      $GIT_COMMAND reset --hard origin/master
+      $GIT_COMMAND reset --hard origin/main
       $BUNDLE_COMMAND install
       echo
     else
       echo "skipping bundle install, gemfile has not changed since last time."
-      $GIT_COMMAND reset --hard origin/master
+      $GIT_COMMAND reset --hard origin/main
       echo
   fi
 
