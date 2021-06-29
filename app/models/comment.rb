@@ -107,6 +107,14 @@ class Comment < ActiveRecord::Base
   def truncate_user_agent
     self.user_agent = user_agent.try(:slice, 0, 255)
   end
+
+  def self.over_rate_limit_for_ip?(remote_ip)
+    Comment.where(remote_ip: remote_ip).where('created_at > ?', 24.hours.ago).count >= 5
+  end
+
+  def abuse_from_guest?
+    !commenter.present? && Comment.over_rate_limit_for_ip?(remote_ip)
+  end
 end
 
 # == Schema Information

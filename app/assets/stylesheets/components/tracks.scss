@@ -237,6 +237,7 @@
     }
     .tracks_reveal_top {
       display: flex;
+      min-height: 67px;
       margin-right: 10px;
       margin-left: 10px;
       margin-bottom: 9px;
@@ -269,10 +270,11 @@
         line-height: 17px;
         margin-right: 0;
         flex: 1;
+        display: flex;
+        flex-direction: column;
         .user_description {
           color: $track-description-text;
           margin-right: 26px;
-          min-height:16px;
           word-wrap: break-word;
           -webkit-hyphens: auto;
           -moz-hyphens: auto;
@@ -305,7 +307,8 @@
         .below_description {
           display: flex;
           justify-content: space-between;
-          height: 24px;
+          height: 28px;
+          margin-top: auto;
           a {
             font-size: 12px;
             display: block;

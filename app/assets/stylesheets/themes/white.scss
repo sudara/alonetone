@@ -28,6 +28,10 @@ $admin-default-data-text: $grey1000;
 $admin-deleted-at-text: $grey1000;
 $admin-user-ip-text: $grey1000;
 
+// blank_slate.scss
+$noise-background-position-y: -5000px;
+$blank-slate-cloud-min-height: 360px;
+
 // comments.scss
 $comment-as-text: $grey600;
 $comment-as-guest-text: $grey900;
@@ -81,9 +85,6 @@ $checkbox-not-checked-border: $grey500;
 $hero-background: $grey100;
 $hero-heading-text: $orangetone;
 $hero-paragraph-text: $grey1000;
-
-// illustrations.scss
-$background_position-y: -5000px;
 
 // notifications.scss
 $flash-text: $white;
