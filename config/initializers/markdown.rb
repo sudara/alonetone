@@ -1,28 +1,34 @@
 # https://www.lugolabs.com/articles/render-markdown-views-with-redcarpet-and-pygment-in-rails
 class MarkdownHandler
   def call(template, source)
-    "#{render(source).inspect}.html_safe;"
+    compiled_template = erb.call(template, source)
+    "MarkdownHandler.markdown(begin;#{compiled_template};end)"
   end
 
-  def render(text)
+  def self.markdown(text)
     key = cache_key(text)
     Rails.cache.fetch key do
-      add_anchors(markdown(text)).html_safe
+      add_anchors(render(text))
     end
   end
 
   private
-  def cache_key(text)
-    Digest::MD5.hexdigest("#{text}v2")
+
+  def erb
+    @erb ||= ActionView::Template.registered_template_handler(:erb)
   end
 
-  def markdown(text)
-    CommonMarker.render_doc(text, :SMART).to_html(:HARDBREAKS, [:autolink, :strikethrough])
+  def self.cache_key(text)
+    Digest::MD5.hexdigest("#{text}v4")
+  end
+
+  def self.render(text)
+    CommonMarker.render_doc(text, :UNSAFE).to_html(:UNSAFE)
   end
 
   # Rather than add a pipeline / library just for header anchors, we steal from html-pipeline
   # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb
-  def add_anchors(html)
+  def self.add_anchors(html)
     doc = Nokogiri::HTML.fragment(html)
     doc.css('h1, h2, h3, h4, h5, h6').each do |node|
       text = node.text
