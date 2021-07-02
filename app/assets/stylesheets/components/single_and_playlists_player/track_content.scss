@@ -172,9 +172,12 @@
           color: $track-content-spam-text;
         }
       }
+      .track_favorite button{
+        @include image_button();
+      }
       .track_favorite,
       .download_link {
-        a {
+        a, button {
           padding-left: 12px;
           font-size: 12px;
           height: 26px;
@@ -394,7 +397,7 @@
   }
 }
 
-main > .track_content {
+main .track_content {
   @media only screen and (max-width: 770px) {
     width: 96%;
     max-width: none;

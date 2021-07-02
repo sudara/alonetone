@@ -8,8 +8,13 @@ export default class extends Controller {
     this.personalizationTarget.innerHTML = window.userPersonalization
   }
 
-  spin() {
+  startSpinner() {
     this.spinnerTarget.style.display = 'block'
+  }
+
+  displayResult(e) {
+    if (e.detail.formSubmission.result.success) this.success();
+    else this.error();
   }
 
   success() {

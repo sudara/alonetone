@@ -7,11 +7,11 @@
     <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
     <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
     <%= csrf_meta_tag %>
-    <%= javascript_pack_tag "application", 'data-turbolinks-track': 'reload', defer: true  %>
+    <%= javascript_pack_tag "application", 'data-turbo-track': 'reload', defer: true  %>
     <%= javascript_include_tag 'thredded',
                                async: !Rails.application.config.assets.debug,
                                defer: true,
-                               'data-turbolinks-track': 'reload'%>
+                               'data-turbo-track': 'reload'%>
   </head>
 <body>
   <% if @sudo %>

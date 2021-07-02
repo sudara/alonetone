@@ -1,4 +1,4 @@
-<% if @user.playlists_count == 0 %>
+<% if @user.playlists_count == 0 && !@playlist.errors.present? %>
 <div class="page_container page_container_with_blank_slate_full_cloud">
   <%= render layout: 'shared/blank_slate', locals: { name: 'manfred', role: 'backend dev' } do %>
       <p>

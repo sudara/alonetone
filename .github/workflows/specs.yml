@@ -49,7 +49,7 @@ jobs:
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.2
+        ruby-version: 2.7.3
         bundler-cache: true
 
     - name: Yarn install
@@ -58,8 +58,8 @@ jobs:
 
     - name: Put MorphSVGPlugin.js in place for feature specs
       run: |
-        printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
-        cat app/javascript/animation/MorphSVGPlugin.js
+        printf "%s" "$MORPHSVG" > "app/packs/animation/MorphSVGPlugin.js"
+        cat app/packs/animation/MorphSVGPlugin.js
       if: ${{ matrix.morph }}
 
     - name: Copy config and setup db

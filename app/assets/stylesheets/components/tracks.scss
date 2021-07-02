@@ -226,8 +226,9 @@
     overflow: auto;
     box-sizing: border-box;
     z-index: 0;
-    a.add_to_favorites,
-    a.favorited {
+    button.add_to_favorites,
+    button.favorited {
+      @include image_button();
       position: absolute;
       z-index: 2;
       top: 6px;

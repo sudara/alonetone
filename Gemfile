@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '6.1.0'
+gem 'rails', '> 6.1'
 gem 'mysql2'
 gem 'puma'
 
@@ -35,7 +35,6 @@ gem 'request_store' # for authlogic
 gem 'nokogiri'
 gem 'commonmarker'
 gem 'country_select'
-gem 'dynamic_form'
 gem 'local_time'
 gem 'pagy'
 
@@ -44,16 +43,16 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-gem 'webpacker'
+gem 'webpacker', '6.0.0.beta.6'
 gem 'sass-rails'
 gem 'yui-compressor'
-gem 'turbolinks'
+gem 'turbo-rails'
 
 # monitoring & perf
 gem 'bugsnag'
 gem 'oas_agent', github: 'wjessop/oas_agent'
 gem 'newrelic_rpm'
-gem 'skylight', '~>5.0.0.beta'
+gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
