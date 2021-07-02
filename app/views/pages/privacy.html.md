@@ -1,3 +1,4 @@
+
 ## Privacy is a big deal
 
 Below is a bit of information about how we collect and handle your data.

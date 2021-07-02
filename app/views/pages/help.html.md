@@ -1,3 +1,4 @@
+
 ## Why Can't I Just Sign Up?
 
 Unfortunately, public signups these days result in huge quantities of spam, trolls, and misuse. Even the largest networks like Facebook, SoundCloud and Twitter are buried in millions of these types of fake and spammy accounts.

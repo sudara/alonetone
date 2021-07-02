@@ -1,3 +1,4 @@
+
 ## What the heck is alonetone?
 
 alonetone is a place for small label, DIY, bedroom and other musicians and bands to upload and share their mp3s for free.
@@ -5,6 +6,8 @@ alonetone is a place for small label, DIY, bedroom and other musicians and bands
 We've been around since 2008.
 
 If you make music (and own the rights to it) then this site is built for you.
+
+<%= themed_illustration_image('about/intro.png') %>
 
 
 ## So, it's free?
@@ -34,6 +37,7 @@ Nope!
 
 alonetone is for people who want to give our music away and share it freely. There are many places where you can try and sell your tunes (see: [Bandcamp](https://bandcamp.com)).
 
+<%= themed_illustration_image('about/always-free.png') %>
 
 ## Who makes alonetone?
 
@@ -51,6 +55,9 @@ Sudara has historically paid for all hosting, storage, design and development co
 
 In late 2020, we started a [patreon](http://patreon.com/alonetone) so these costs could be shared by the community. As of early 2021, server and storage costs are almost covered by other alonetoners.
 
+<%= themed_illustration_image('about/startup.png') %>
+
+
 ## How long will it be free?
 
 We strongly believe there should be more free, non-commercial places to share music online. Therefore, the ability to upload and share music without ads or payment will exist as long as alonetone exists.
@@ -62,3 +69,5 @@ You can help us realize this vision over on [patreon](http://patreon.com/aloneto
 Yup! We are open-minded to contributions at [github](http://github.com/sudara/alonetone).
 
 Thanks to the nice people at [BrowserStack](https://browserstack.com) and [Skylight](https://skylight.io) for providing their services free for open source projects.
+
+<%= themed_illustration_image('about/open-source.png') %>
