@@ -108,14 +108,14 @@
         width: auto;
         height: 58px;
         cursor: pointer;
-        padding-top: 13px;
+        padding-top: 11px;
         flex-grow: 1;
         .title_left_column {
           flex-grow: 1;
           .title_left_column_top {
             display: flex;
             a.track_link {
-              line-height: 1.1;
+              line-height: 1.4;
               font-size: 16px;
               font-weight: normal;
               font-family: $medium-sans-font;
@@ -160,6 +160,8 @@
         .title_left_column_bottom {
           clear: both;
           display: flex;
+          position: relative;
+          top: -3px;
           a {
             -webkit-font-smoothing: subpixel-antialiased;
           }
