@@ -127,13 +127,16 @@ body {
     padding: 8px 12px 0 12px;
     font-size: 12px;
     line-height: 1;
-    display: fl ex;
+    display: flex;
     max-width: calc(100% - 48px);
     .name {
       color: $back-to-span-text;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      line-height: 1.5;
+      position: relative;
+      top: -2px;
     }
   }
 }
