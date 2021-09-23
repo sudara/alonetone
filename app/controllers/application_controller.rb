@@ -174,10 +174,6 @@ class ApplicationController < ActionController::Base
     logged_in?
   end
 
-  def latest_forum_topics
-    Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).moderation_state_visible_to_user(current_user || Thredded::NullUser.new).limit(4)
-  end
-
   def add_user_info_to_bugsnag(report)
     report.user = {
       email: current_user.email,
