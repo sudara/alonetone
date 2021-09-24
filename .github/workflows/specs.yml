@@ -1,6 +1,6 @@
 name: Specs and Percy
 
-on: [push, pull_request] # push OR PR
+on: [push] # push OR PR
 
 env:
   RAILS_ENV: test

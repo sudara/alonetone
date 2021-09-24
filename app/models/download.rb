@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Be able to open uris
+require 'open-uri'
+
 # Download is a service class to fetch a file from a public URL and then treat it as any other
 # Upload.
 class Download

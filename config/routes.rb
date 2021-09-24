@@ -39,8 +39,6 @@ Alonetone::Application.routes.draw do
     resources :mass_invites, param: :token
   end
 
-  mount Thredded::Engine => '/forums'
-
   get '/get_an_account', :to => 'account_requests#new'
   resources 'account_requests', only: :create
 

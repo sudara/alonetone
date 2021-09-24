@@ -8,8 +8,6 @@ gem 'rails', '6.1.0'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'sudara/thredded'
-
 # ruby
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
