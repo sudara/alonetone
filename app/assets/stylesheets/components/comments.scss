@@ -29,6 +29,12 @@
     margin-bottom: 16px;
     margin-top: 0px;
     line-height: 1;
+    display: flex;
+    .name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
   .comments_area {
     margin-bottom: 0;
