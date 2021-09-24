@@ -9,7 +9,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
 
       first_track.hover
       expect(first_track).to have_css(':hover')
-      page.percy_snapshot(name: 'Playlist Cover')
+      page.percy_snapshot('Playlist Cover')
 
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
@@ -22,7 +22,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # so let's specify one before we snap
         first_track.find('a:first-child').click
         expect(page).to have_selector(".player")
-        page.percy_snapshot(name: 'Playlist Track Loading')
+        page.percy_snapshot('Playlist Track Loading')
       end
 
       # Navigating away and back, we should still be playing
@@ -42,7 +42,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # The time between seeking and pausing is variable
         # So we manually adjust the playhead end state to the exact
         # same position for the percy snap.
-        page.percy_snapshot(name: 'Playlist Track Play, Seek, Pause',
+        page.percy_snapshot('Playlist Track Play, Seek, Pause',
           percy_css: "#waveform_reveal { left: -335px !important; }
             .progress_container_inner { left: 33% !important; }")
       end
@@ -80,7 +80,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       last_track = find('.sortable .asset:last-child')
       first_track_handle.drag_to(last_track)
       expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
-      page.percy_snapshot(name: 'Playlist Edit')
+      page.percy_snapshot('Playlist Edit')
     end
   end
 end

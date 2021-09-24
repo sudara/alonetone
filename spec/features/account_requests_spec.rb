@@ -7,7 +7,7 @@ RSpec.describe 'Get An Account', type: :feature, js: true do
     submit.click
     expect(page).to have_selector('#error_explanation', visible: true)
 
-    page.percy_snapshot(name: 'Sign up')
+    page.percy_snapshot('Sign up')
   end
 
   it 'submits the form and succeeds' do
