@@ -427,7 +427,7 @@ DEPENDENCIES
   nokogiri
   oas_agent!
   pagy
-  percy-capybara
+  percy-capybara (~> 5.0.0)
   perf_check
   postmark-rails
   pry

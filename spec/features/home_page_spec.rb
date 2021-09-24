@@ -20,7 +20,7 @@ RSpec.describe 'home page', type: :feature, js: true do
 
     # private checkbox is technically offscreen, but we still want to confirm it's checked
     expect(track_chunk.find('.private_check_box .private', visible: :all)).to be_checked
-    Percy.snapshot(page, name: 'Home as Guest')
+    page.percy_snapshot(name: 'Home as Guest')
 
     akismet_stub_response_ham
     track_chunk.find('input[type=submit]').click
@@ -48,7 +48,7 @@ RSpec.describe 'home page', type: :feature, js: true do
       track.find(".stitches_seek").click # click in the middle of the seekbar
       track.find(".play_link").click # pause the track
       expect(track).to have_selector('.add_to_favorites')
-      Percy.snapshot(page, name: 'Home as User')
+      page.percy_snapshot(name: 'Home as User')
     end
   end
 
