@@ -85,7 +85,7 @@ class Download
     @file ||= begin
       file = Tempfile.open
       # rubocop:disable Security/Open
-      IO.copy_stream(open(rewritten_url), file)
+      IO.copy_stream(URI.open(rewritten_url), file)
       # rubocop:enable Security/Open
       file.rewind
       file
