@@ -124,3 +124,33 @@ Each hex color value used across the site is defined by exactly one variable in 
 When a selector needs a color, a *new* unique variable name should be used for the color that describes where the color is being used, if it's for background/text, etc: `$view-all-background`
 
 That variable should then be defined in *both* `white.scss` and `dark.scss`. Map that variable to the actual color name. Note that variables are grouped by the filename they are used in. Be sure to put your new variable in the right filename group.
+
+## Pull Requests
+
+We used to have this as a pull request template, but it got noisy and is less relevant once contributors become familiar with the project.
+
+However, as a new contributor, we appreciate if the following is answered in the body of the pull request:
+
+* For bugs: A step by step walkthrough of how to reproduce (console/UI/etc). When and how did the problem begin?
+* Iterate through the changes in this PR. Why did you implement them this way?
+* Was anything tried that didn't work? Anything that reviewers should pay attention to or difficult or tricky that should be explained?
+* Does anything special need to happen for deployment?
+
+
+## "Ready For Review" checklist
+
+You can explicitly use these checklists in PRs to help make sure the basics are covered:
+
+* [ ] PR title accurately summarizes changes
+* [ ] New tests were added for isolated methods or new endpoints
+* [ ] I opened an issue for any logical followups
+* [ ] If this fixes a bug, "Fixes #XXX" is either the very first or very last line of the description.
+
+## Before code review *and after additional commits* during review.
+
+* [ ] Update title and description to account for additional changes
+* [ ] All tests green
+* [ ] Migrations were tested locally and do the right thing
+* [ ] Booted up the branch locally, exercised any new code
+* [ ] Percy changes are purposeful or explained
+* [ ] Css changes are happy on mobile (via Percy is ok)

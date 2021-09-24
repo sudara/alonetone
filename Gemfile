@@ -8,8 +8,6 @@ gem 'rails', '6.1.0'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'sudara/thredded'
-
 # ruby
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
@@ -73,7 +71,7 @@ group :test do
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false
-  gem 'percy-capybara'
+  gem "percy-capybara", "~> 5.0.0"
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
   gem 'rspec', require: false
