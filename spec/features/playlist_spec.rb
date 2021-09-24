@@ -42,8 +42,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # The time between seeking and pausing is variable
         # So we manually adjust the playhead end state to the exact
         # same position for the percy snap.
-        Percy.snapshot(page,
-          name: 'Playlist Track Play, Seek, Pause',
+        page.percy_snapshot(name: 'Playlist Track Play, Seek, Pause',
           percy_css: "#waveform_reveal { left: -335px !important; }
             .progress_container_inner { left: 33% !important; }")
       end
