@@ -9,12 +9,6 @@ GIT
       activesupport (>= 5.2, < 6.2)
       request_store (~> 1.0)
 
-GIT
-  remote: https://github.com/wjessop/oas_agent.git
-  revision: cd5cee6c90fedb7f51fd45b3078eb1718bba5207
-  specs:
-    oas_agent (0.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -425,7 +419,6 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nokogiri
-  oas_agent!
   pagy
   percy-capybara (~> 5.0.0)
   perf_check
