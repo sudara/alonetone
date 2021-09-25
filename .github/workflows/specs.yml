@@ -1,6 +1,6 @@
 name: Specs and Percy
 
-on: [push, pull_request] # push OR PR
+on: [push] # push OR PR
 
 env:
   RAILS_ENV: test
@@ -11,7 +11,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false # let both suites run to completion
@@ -42,14 +42,18 @@ jobs:
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           **/packs-test
           tmp/cache/webpacker
-        key: ${{ runner.os }}-yarn3-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn4-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarn3-
+          ${{ runner.os }}-yarn4-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
       with:
+<<<<<<< HEAD
         ruby-version: 2.7.3
+=======
+        ruby-version: 3.0.2
+>>>>>>> main
         bundler-cache: true
 
     - name: Yarn install

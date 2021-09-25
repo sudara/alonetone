@@ -8,7 +8,7 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
-require 'percy'
+require 'percy/capybara'
 
 # The suite needs to be able to connect to localhost for feature specs.
 # Percy sends its build response out of the test process so it also needs to connect

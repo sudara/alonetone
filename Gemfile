@@ -8,8 +8,6 @@ gem 'rails', '> 6.1'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'sudara/thredded'
-
 # ruby
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
@@ -50,7 +48,6 @@ gem 'turbo-rails'
 
 # monitoring & perf
 gem 'bugsnag'
-gem 'oas_agent', github: 'wjessop/oas_agent'
 gem 'newrelic_rpm'
 gem 'skylight'
 gem 'sidekiq'
@@ -72,7 +69,7 @@ group :test do
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false
-  gem 'percy-capybara'
+  gem "percy-capybara", "~> 5.0.0"
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
   gem 'rspec', require: false
@@ -87,5 +84,4 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'pry-byebug'
 end

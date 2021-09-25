@@ -6,6 +6,6 @@ RSpec.describe 'about page', type: :feature, js: true do
 
     # Wait for js to append a column class
     expect(page).to have_selector('.sub_nav_inner', class: /column/)
-    Percy.snapshot(page, name: 'About Page', enable_javascript: true)
+    page.percy_snapshot('About Page', enable_javascript: true)
   end
 end

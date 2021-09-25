@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Be able to open uris
+require 'open-uri'
+
 # Download is a service class to fetch a file from a public URL and then treat it as any other
 # Upload.
 class Download
@@ -82,7 +85,7 @@ class Download
     @file ||= begin
       file = Tempfile.open
       # rubocop:disable Security/Open
-      IO.copy_stream(open(rewritten_url), file)
+      IO.copy_stream(URI.open(rewritten_url), file)
       # rubocop:enable Security/Open
       file.rewind
       file
