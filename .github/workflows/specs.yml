@@ -49,11 +49,7 @@ jobs:
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
       with:
-<<<<<<< HEAD
-        ruby-version: 2.7.3
-=======
         ruby-version: 3.0.2
->>>>>>> main
         bundler-cache: true
 
     - name: Yarn install
