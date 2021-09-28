@@ -38,7 +38,9 @@ class Configurable
     :typekit_embed_token,
     :postmark_api_token,
     :fastly_base_url,
-    :own_and_ship
+    :own_and_ship,
+    :discourse_secret,
+    :discourse_url
   )
 
   attr_reader :environment

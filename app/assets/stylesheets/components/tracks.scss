@@ -3,9 +3,13 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  min-height: 57px;
+  min-height: 58px;
+  height: auto;
   background-color: $track-background;
   border-bottom: 1px solid $track-border-bottom;
+  &.favorited_track {
+    min-height: 81px;
+  }
   &.open {
     position: relative;
     z-index: 2;
@@ -71,15 +75,15 @@
       display: flex;
       div.button {
         width: 50px;
-        height: 50px;
+        height: 58px;
         a {
           display: block;
           width: 50px;
-          height: 50px;
+          height: 58px;
           svg {
             width: 28px;
             height: 28px;
-            margin-top: 14px;
+            margin-top: 15px;
             margin-left: 8px;
             pointer-events: none;
             fill: $track-play-button-background;
@@ -102,7 +106,8 @@
         overflow: hidden;
         box-sizing: border-box;
         width: auto;
-        height: 50px;
+        height: 58px;
+        cursor: pointer;
         padding-top: 13px;
         flex-grow: 1;
         .title_left_column {
@@ -132,7 +137,7 @@
             font-weight: bold;
             position: absolute;
             right: 14px;
-            bottom: 20px;
+            bottom: 27px;
             text-align: right;
           }
           time {
@@ -140,7 +145,7 @@
             font-size: 12px;
             position: absolute;
             right: 15px;
-            bottom: 7px;
+            bottom: 14px;
             display: block;
             text-align: right;
             color: $track-time-text;
@@ -193,6 +198,8 @@
       padding-left: 50px;
       height: 30px;
       line-height: 26px;
+      cursor: pointer;
+      margin-top: -6px;
       i.icon_favorite {
         position: absolute;
         top: 0px;
@@ -213,13 +220,12 @@
     }
   }
   .tracks_reveal {
-    position: relative;
-    z-index: 0;
     display: none;
+    position: relative;
     margin-top: -361px; // good default, js will tweak
     overflow: auto;
     box-sizing: border-box;
-    transition: margin 250ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+    z-index: 0;
     a.add_to_favorites,
     a.favorited {
       position: absolute;
@@ -231,6 +237,7 @@
     }
     .tracks_reveal_top {
       display: flex;
+      min-height: 67px;
       margin-right: 10px;
       margin-left: 10px;
       margin-bottom: 9px;
@@ -263,10 +270,11 @@
         line-height: 17px;
         margin-right: 0;
         flex: 1;
+        display: flex;
+        flex-direction: column;
         .user_description {
           color: $track-description-text;
           margin-right: 26px;
-          min-height:16px;
           word-wrap: break-word;
           -webkit-hyphens: auto;
           -moz-hyphens: auto;
@@ -299,7 +307,8 @@
         .below_description {
           display: flex;
           justify-content: space-between;
-          height: 24px;
+          height: 28px;
+          margin-top: auto;
           a {
             font-size: 12px;
             display: block;
@@ -358,7 +367,6 @@
         }
       }
     }
-
     .track_links {
       display: none;
       float: right;
@@ -374,10 +382,5 @@
         }
       }
     }
-  }
-  &.open .tracks_reveal {
-    display: block;
-    margin-top: 0 !important;
-    box-shadow: none;
   }
 }

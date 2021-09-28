@@ -8,15 +8,20 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
-require 'percy'
+require 'percy/capybara'
 
-# The suite needs to be able to connect to localhost for feature specs. Percy
-# sends its build response out of the test process so it also needs to connect
+# The suite needs to be able to connect to localhost for feature specs.
+# Percy sends its build response out of the test process so it also needs to connect
 # to its API.
+# Capybara/Webdrivers needs to ping for / download latest chrome
 WebMock.disable_net_connect!(
   allow_localhost: true,
-  allow: ['percy.io', 'chromedriver.storage.googleapis.com', 'ownandship.io']
-)
+  allow: ['percy.io',
+    'ownandship.io',
+    'cdn.alonetone.com', # fonts
+    'chromedriver.storage.googleapis.com',
+    'github.com',
+    'github-releases.githubusercontent.com'])
 
 # Reloads schema.rb when database has pending migrations.
 ActiveRecord::Migration.maintain_test_schema!
@@ -28,17 +33,26 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
-# Magic incantation to make Capybara run the feature specs. Nobody knows
-# why this isn't a default in the gem.
-Capybara.register_driver(:headless_chrome) do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox disable-gpu])
-  options.headless! # comment out to view feature tests in active browser
+# We are fixing the window size to help guarantee same results on CI/locally
+Capybara.register_driver :alonetone do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    # specifying window size caused a playlist test failure
+    # find('.play_button_container a').click # pause
+    # window-size=1024,1500
+    args: %w[disable-gpu no-sandbox])
 
-  Capybara::Selenium::Driver.new app,
+  # comment out to run with the browser visible:
+  options.headless!
+
+  Capybara::Selenium::Driver.new(
+    app,
     browser: :chrome,
     options: options
+  )
 end
-Capybara.javascript_driver = :headless_chrome
+Capybara.default_driver = :alonetone
+Capybara.javascript_driver = :alonetone
+
 # Configure the HTTP server to be silent. Note that Capybara would figure out
 # to use Puma on its own if we remove this line.
 Capybara.server = :puma, { Silent: true }
@@ -90,5 +104,22 @@ RSpec.configure do |config|
 
   config.before(:example, type: :controller) do
     activate_authlogic
+  end
+
+  config.after(:each, type: :feature, js: true) do |test|
+    if !test.metadata[:allow_js_errors]
+      errors = page.driver.browser.manage.logs.get(:browser)
+      aggregate_failures 'javascript errors' do
+        errors.each do |error|
+          # we really don't care about CORS stuff
+          next if error.message.include?('font')
+
+          expect(error.level).not_to eq('SEVERE'), error.message
+          next unless error.level == 'WARNING'
+          STDERR.puts 'WARN: javascript warning'
+          STDERR.puts error.message
+        end
+      end
+    end
   end
 end

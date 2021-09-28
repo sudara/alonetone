@@ -28,6 +28,10 @@ $admin-default-data-text: $grey50;
 $admin-deleted-at-text: $grey50;
 $admin-user-ip-text: $grey50;
 
+// blank_slate.scss
+$noise-background-position-y: 0;
+$blank-slate-cloud-min-height: 480px;
+
 // comments.scss
 $comment-as-text: $grey800;
 $comment-as-guest-text: $grey200;
@@ -81,9 +85,6 @@ $checkbox-not-checked-border: $grey500;
 $hero-background: $grey1150;
 $hero-heading-text: $orangetone;
 $hero-paragraph-text: $grey50;
-
-// illustrations.scss
-$background_position-y: 0;
 
 // notifications.scss
 $flash-text: $black;
@@ -288,39 +289,6 @@ $sub-nav-text: $grey400;
 $sub-nav-text-hover: $white;
 $sub-nav-current-background: $orangetone;
 $sub-nav-link-background: $grey1100;
-
-// thredded_theme.scss
-$thredded-user-navigation-link-background: $grey1000;
-$thredded-search-background: $grey1000;
-$thredded-search-color: $grey400;
-$thredded-user-navigation-link-text: $grey400;
-$thredded-breadcrumbs-text: $orangetone;
-$thredded-preferences-title-text: $grey400;
-$thredded-form-list-hint-text: $grey400;
-$thredded-main-section-background: $grey1100;
-$thredded-messageboards-group-messageboard-background: $grey1150;
-$thredded-messsageboards-group-title-text: $grey400;
-$thredded-messageboard-title-color: $orange300;
-$thredded--messageboard--description-text: $grey400;
-$thredded-messageboard-meta-text: $grey800;
-$thredded-message-board-actions-link-background: $grey100;
-$thredded-message-board-actions-link-text: $grey900;
-$thredded-topics-heading-text: $grey400;
-$thredded-started-by-text: $grey400;
-$thredded-followers-text: $grey400;
-$thredded-topics-description-text: $grey400;
-$thredded-topics-background: $grey1150;
-$thredded-topics-alt-background: $grey1100;
-$thredded-topics-title-text: $grey100;
-$thredded-topics-updated-text: $grey600;
-$thredded-post-user-text: $grey400;
-$thredded-post-created-at-text: $grey400;
-$thredded-post-dropdown-background: $grey800;
-$thredded-post-content-text: $grey400;
-$thredded-post-form-title-text: $grey400;
-$thredded-form-list-textarea-background: $grey1000;
-$thredded-form-list-textarea-text: $grey200;
-$thredded-new-topic-background: $grey1150;
 
 // track_content.scss
 $track-content-child-background: $grey1100;

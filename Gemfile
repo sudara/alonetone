@@ -8,8 +8,6 @@ gem 'rails', '6.1.0'
 gem 'mysql2'
 gem 'puma'
 
-gem 'thredded', github: 'sudara/thredded'
-
 # ruby
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
@@ -51,16 +49,18 @@ gem 'turbolinks'
 
 # monitoring & perf
 gem 'bugsnag'
-gem 'oas_agent', github: 'wjessop/oas_agent'
 gem 'newrelic_rpm'
 gem 'skylight', '~>5.0.0.beta'
 gem 'sidekiq'
 gem 'dalli'
 
 group :development do
-  gem 'perf_check'
-  gem 'annotate'
-  gem 'rubocop', '0.87.0', require: false # synced to .codeclimate.yml
+  gem 'perf_check', require: false
+  gem 'annotate', require: false
+  gem 'faker', require: false
+  # Available "channels" of rubocop for code climate:
+  # https://github.com/codeclimate/codeclimate-rubocop/branches/all?utf8=✓&query=channel%2Frubocop
+  gem 'rubocop', '1.4.1', require: false # synced to .codeclimate.yml
 end
 
 ## Who loves tests! You do? You do!
@@ -70,15 +70,15 @@ group :test do
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false
-  gem 'percy-capybara'
+  gem "percy-capybara", "~> 5.0.0"
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
-  gem 'rspec', require: false, github: 'rspec/rspec', branch: 'main'
-  gem 'rspec-core', require: false, github: 'rspec/rspec-core',  branch: 'main'
-  gem 'rspec-expectations', require: false, github: 'rspec/rspec-expectations', branch: 'main'
-  gem 'rspec-mocks', require: false, github: 'rspec/rspec-mocks', branch: 'main'
-  gem 'rspec-support', require: false, github: 'rspec/rspec-support', branch: 'main'
-  gem 'rspec-rails', require: false, github: 'rspec/rspec-rails', branch: 'rails-6.1.0.rc2-dev'
+  gem 'rspec', require: false
+  gem 'rspec-core', require: false
+  gem 'rspec-expectations', require: false
+  gem 'rspec-mocks', require: false
+  gem 'rspec-support', require: false
+  gem 'rspec-rails', require: false
   gem 'selenium-webdriver'
   gem 'webmock', require: false
 end

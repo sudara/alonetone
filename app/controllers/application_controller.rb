@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_user_session, :logged_in?, :admin?, :last_active,
     :current_user_is_mod_or_owner?, :current_user?,
-    :current_page, :moderator?, :welcome_back?, :user_setting, :latest_forum_topics
+    :moderator?, :welcome_back?, :user_setting, :latest_forum_topics
 
   etag do
     [current_user&.id, current_user&.dark_theme].join('/')
@@ -32,9 +32,6 @@ class ApplicationController < ActionController::Base
 
   before_action :store_location, only: %i[index show]
 
-  def current_page
-    @page ||= params[:page].blank? ? 1 : params[:page].to_i
-  end
 
   protected
 
@@ -175,10 +172,6 @@ class ApplicationController < ActionController::Base
 
   def authorized?
     logged_in?
-  end
-
-  def latest_forum_topics
-    Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).moderation_state_visible_to_user(current_user || Thredded::NullUser.new).limit(4)
   end
 
   def add_user_info_to_bugsnag(report)
