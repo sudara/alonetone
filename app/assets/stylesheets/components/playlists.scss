@@ -74,12 +74,13 @@ ul.playlists {
       -ms-hyphens: auto;
       -moz-hyphens: auto;
       hyphens: auto;
+      padding: 0 6px;
       a {
         display: inline-block;
         font-family: $card-artist-font;
         font-weight: $card-artist-weight;
         margin-top: 5px;
-        padding: 0 8px 9px 3px;
+        padding: 0 0 9px 3px;
         font-size: 9.6px;
       }
       span.by {
