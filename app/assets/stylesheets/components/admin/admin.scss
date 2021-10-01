@@ -116,6 +116,10 @@
           &:first-child {
             border-top: 0;
           }
+          > div {
+            padding-right: 12px;
+            box-sizing: border-box;
+          }
         }
       }
     }
