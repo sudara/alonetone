@@ -50,24 +50,23 @@
   .track_column {
     flex: 1;
     padding-right: 6px;
-    word-break: break-all;
     div:first-child {
       margin-bottom: 5px;
       font-family: $medium-sans-font;
-      word-break: break-all;
+
     }
     div:nth-child(2) {
       color: $admin-default-data-text;
       font-size: 13px;
       line-height: 1.1;
-      word-break: break-all;
+
       margin-bottom: 5px;
     }
     div:nth-child(3) {
       color: $admin-default-data-text;
       font-size: 11px;
       line-height: 1.1;
-      word-break: break-all;
+
       font-style: italic;
     }
   }
