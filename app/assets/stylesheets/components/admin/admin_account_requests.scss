@@ -13,28 +13,19 @@
 
   .user_column {
     min-width: 190px;
-    div:first-child {
+    > div {
       margin-bottom: 4px;
+    }
+    div:first-child {
       font-family: $medium-sans-font;
-      a {
-        display: block;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
     }
     div:nth-child(2) {
-      display: block;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin-bottom: 5px;
     }
     div:last-child {
-      color: $admin-user-ip-text;
-      font-size: 13px;
-      line-height: 1.1;
-      a {
-        text-decoration: underline;
-      }
+      font-style: italic;
+      font-size: 11px;
     }
   }
 
@@ -46,8 +37,7 @@
     }
     div:nth-child(2) {
       color: $admin-default-data-text;
-      font-size: 13px;
-      line-height: 1.3;
+      line-height: 1.4;
       margin-bottom: 4px;
     }
   }
