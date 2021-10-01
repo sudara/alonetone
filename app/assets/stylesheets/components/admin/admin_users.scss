@@ -2,63 +2,56 @@
 
   .date_column {
     min-width: 100px;
-    margin-right: 12px;
   }
 
   .user_column {
     min-width: 220px;
-    margin-right: 12px;
-  }
-
-  .bio_column {
-    min-width: 220px;
-    margin-right: 12px;
-  }
-
-  .admin_rows {
-    .user_column {
-      width: 220px;
-      min-width: 220px;
-      margin-right: 12px;
-      display: flex;
-      div.avatar {
+    display: flex;
+    div.avatar {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+      img {
         width: 40px;
         height: 40px;
-        margin-right: 8px;
-        img {
-          width: 40px;
-          height: 40px;
-        }
       }
-      div {
-        overflow: hidden;
-        div:first-child {
-          margin-bottom: 5px;
-          font-family: $medium-sans-font;
-          a {
-            display: block;
-            text-overflow: ellipsis;
-            overflow: hidden;
-          }
-        }
-        div:nth-child(2) {
+    }
+    div {
+      overflow: hidden;
+      div:first-child {
+        margin-bottom: 5px;
+        font-family: $medium-sans-font;
+        a {
           display: block;
           text-overflow: ellipsis;
           overflow: hidden;
-          margin-bottom: 5px;
         }
-        div:last-child {
-          color: $admin-user-ip-text;
-          font-size: 13px;
-          line-height: 1.1;
-          a {
-            text-decoration: underline;
-          }
-        }
-
       }
+      div:nth-child(2) {
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-bottom: 5px;
+      }
+      div:last-child {
+        color: $admin-user-ip-text;
+        font-size: 13px;
+        line-height: 1.1;
+        a {
+          text-decoration: underline;
+        }
+      }
+
     }
-    
   }
-  
+
+  .text_column {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .actions_column {
+    min-width: 220px;
+  }
+
 }
