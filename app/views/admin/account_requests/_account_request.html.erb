@@ -21,7 +21,7 @@
     <div><%= account_request.entity_type.upcase %></div>
     <div><%= account_request.details %></div>
   </div>
-  <div class="button_column">
+  <div class="actions_column">
     <%= link_to "Approve & Email", approve_admin_account_request_path(account_request),
       class: 'approve_button', method: :put, remote: true,
       data: { 'admin--request-target': 'approveButton',

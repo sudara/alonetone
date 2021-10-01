@@ -13,12 +13,12 @@
   }
 
   .actions_column {
-    flex: 1;
+    min-width: 220px;
   }
 
   .admin_rows {
     .date_column {
-      width: 90px;
+      // width: 90px;
       .deleted_at_date {
         margin-top: 5px;
         font-size: 12px;
@@ -26,8 +26,8 @@
       }
     }
     .user_column {
-      width: 220px;
-      min-width: 220px;
+      // width: 220px;
+      // min-width: 220px;
       display: flex;
       div.avatar {
         width: 40px;
@@ -67,7 +67,7 @@
     }
     .text_column {
       flex: 1;
-      padding-right: 6px;
+      // padding-right: 6px;
       word-break: break-all;
       div:first-child {
         margin-bottom: 5px;
@@ -87,24 +87,6 @@
         line-height: 1.1;
         word-break: break-all;
         font-style: italic;
-      }
-    }
-    .actions_column {
-      display: flex;
-      a {
-        @include default-button();
-      }
-      input[type="submit"],
-      a {
-        margin-bottom: 0;
-        padding: 7px 6px 5px 6px;
-        height: 32px;
-        font-size: 11px;
-        white-space: normal;
-        margin-left: 6px;
-        margin-top: 3px;
-        line-height: 1.7;
-        min-width: 104px;
       }
     }
   }

@@ -166,6 +166,9 @@
       margin-top: 3px;
       line-height: 1.7;
       min-width: 104px;
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 
