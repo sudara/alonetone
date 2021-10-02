@@ -1,11 +1,12 @@
 .admin_assets {
 
   .date_column {
-    min-width: 100px;
+    width: 80px;
   }
 
   .user_column {
-    min-width: 220px;
+    width: 180px;
+    display: flex;
     div.avatar {
       width: 40px;
       height: 40px;
@@ -15,57 +16,49 @@
         height: 40px;
       }
     }
-    div:first-child {
-      margin-bottom: 5px;
-      font-family: $medium-sans-font;
-      a {
-        display: block;
-        text-overflow: ellipsis;
-        overflow: hidden;
+    > div:last-child {
+      div:first-child {
+        margin-bottom: 5px;
+        font-family: $medium-sans-font;
+        a {
+          display: block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
       }
-    }
-    div:nth-child(2) {
-      display: block;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      margin-bottom: 5px;
-    }
-    div:last-child {
-      color: $admin-user-ip-text;
-      font-size: 13px;
-      line-height: 1.1;
-      a {
-        text-decoration: underline;
+      div:last-child {
+        color: $admin-user-ip-text;
+        font-size: 13px;
+        line-height: 1.1;
+        a {
+          text-decoration: underline;
+        }
       }
     }
   }
 
   .track_column {
     flex: 1;
-    padding-right: 6px;
     div:first-child {
       margin-bottom: 5px;
       font-family: $medium-sans-font;
-
     }
     div:nth-child(2) {
       color: $admin-default-data-text;
       font-size: 13px;
       line-height: 1.1;
-
       margin-bottom: 5px;
     }
     div:nth-child(3) {
       color: $admin-default-data-text;
       font-size: 11px;
       line-height: 1.1;
-
       font-style: italic;
     }
   }
 
   .actions_column {
-    min-width: 220px;
+    width: 220px;
   }
 
 }

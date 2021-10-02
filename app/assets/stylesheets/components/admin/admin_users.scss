@@ -5,7 +5,7 @@
   }
 
   .user_column {
-    width: 220px;
+    width: 180px;
     display: flex;
     div.avatar {
       width: 40px;
@@ -29,6 +29,7 @@
         }
       }
       div:nth-child(2) {
+        font-family: $medium-sans-font;
         text-overflow: ellipsis;
         overflow: hidden;
       }
@@ -51,7 +52,6 @@
     > div:first-child {
       line-height: 1.4;
     }
-
   }
 
   .actions_column {
