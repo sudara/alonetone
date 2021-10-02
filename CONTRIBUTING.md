@@ -12,6 +12,14 @@ You will need to first install [Homebrew](https://brew.sh).
 - `brew install vips` (required for processing images)
 - `brew install yarn` (required for building assets)
 - `brew install mysql` (required for local database)
+  - before running rake to generate the data, you'll also need to start the mysql server, as well as have the root user with password 'root' and a currently logged in user with no password.
+  - you can find currently logged in user by doing: `stat -f '%Su' /dev/console` will refer to this as currentUser
+  - `mysql.server start`
+  - `mysql -u root -h localhost` to open root mysql prompt.  In the prompt type the following lines, replacing currentUser with what you figured it out to be above
+  - `SET PASSWORD FOR root@localhost='root';`
+  - `CREATE USER 'currentUser'@'localhost' IDENTIFIED BY '';`
+  - `GRANT ALL PRIVILEGES ON * . * TO 'currentUser'@'localhost';`
+
 - Install gems
 `bundle install`
 - Install front-end dependencies
