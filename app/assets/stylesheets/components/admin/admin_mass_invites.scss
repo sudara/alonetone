@@ -1,27 +1,23 @@
 .admin_mass_invites {
 
   .name_column {
-    min-width: 100px;
-    margin-right: 12px;
+    width: 100px;
   }
 
   .created_column {
-    min-width: 110px;
-    margin-right: 12px;
+    width: 110px;
   }
+  
   .count_column {
-    min-width: 100px;
-    margin-right: 12px;
+    width: 100px;
   }
 
   .link_column {
     flex: 1;
-    min-width: 220px;
-    margin-right: 12px;
   }
 
   .actions_column {
-    min-width: 220px;
+    width: 220px;
   }
   
 }
