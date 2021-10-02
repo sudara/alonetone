@@ -11,6 +11,7 @@ You will need to first install [Homebrew](https://brew.sh).
 - `brew install libsndfile lame` (required for id3 tags and waveforms)
 - `brew install vips` (required for processing images)
 - `brew install yarn` (required for building assets)
+- `brew install mysql` (required for local database)
 - Install gems
 `bundle install`
 - Install front-end dependencies
