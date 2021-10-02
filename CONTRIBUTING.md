@@ -45,7 +45,7 @@ The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG anim
 
 ## Logging in
 
-After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
+After the bootstrap data is loaded, you can login using the test account. Username is "owner" and password is "testing123"
 
 After login, click on the "Upload" button to upload your first mp3.
 
