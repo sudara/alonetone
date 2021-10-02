@@ -17,8 +17,7 @@ You will need to first install [Homebrew](https://brew.sh).
   - `mysql.server start`
   - `mysql -u root -h localhost` to open root mysql prompt.  In the prompt type the following lines, replacing currentUser with what you figured it out to be above
   - `SET PASSWORD FOR root@localhost='root';`
-  - `CREATE USER 'currentUser'@'localhost' IDENTIFIED BY '';`
-  - `GRANT ALL PRIVILEGES ON * . * TO 'currentUser'@'localhost';`
+  - `exit` which will remove you from the mysql prompt and you can continue with the other commands.
 
 - Install gems
 `bundle install`
@@ -27,8 +26,6 @@ You will need to first install [Homebrew](https://brew.sh).
 
 - To create needed config, database, and load db/seeds*:
 `rake setup`
-- Create and seed database
-`rake db:setup`
 - `rails s`
 
 *Note: alonetone uses 3 config files that are created by 'rake setup
@@ -45,7 +42,7 @@ The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG anim
 
 ## Logging in
 
-After the bootstrap data is loaded, you can login using the test account. Username is "owner" and password is "testing123"
+After the bootstrap data is loaded, you can login using the test account. Username is "owner" and password is "testing123".  You can also use this password to login with the other seed-created users with various permissions and content (including 'moderator', 'musician', 'marieh', 'carole', and 'petere')
 
 After login, click on the "Upload" button to upload your first mp3.
 
