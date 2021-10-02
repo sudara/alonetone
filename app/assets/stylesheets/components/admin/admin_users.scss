@@ -1,11 +1,11 @@
 .admin_users {
 
   .date_column {
-    min-width: 100px;
+    min-width: 70px;
   }
 
   .user_column {
-    min-width: 220px;
+    width: 220px;
     display: flex;
     div.avatar {
       width: 40px;
@@ -16,38 +16,42 @@
         height: 40px;
       }
     }
-    div {
+    > div:last-child {
       overflow: hidden;
+      > div {
+        margin-bottom: 4px;
+      }
       div:first-child {
-        margin-bottom: 5px;
         font-family: $medium-sans-font;
         a {
-          display: block;
           text-overflow: ellipsis;
           overflow: hidden;
         }
       }
       div:nth-child(2) {
-        display: block;
         text-overflow: ellipsis;
         overflow: hidden;
-        margin-bottom: 5px;
       }
       div:last-child {
         color: $admin-user-ip-text;
         font-size: 13px;
-        line-height: 1.1;
+        line-height: 1.4;
         a {
           text-decoration: underline;
         }
       }
-
     }
   }
 
   .text_column {
     flex: 1;
-    min-width: 220px;
+    > div {
+      margin-bottom: 4px;
+    }
+    > div:first-child {
+      line-height: 1.4;
+    }
+
   }
 
   .actions_column {
