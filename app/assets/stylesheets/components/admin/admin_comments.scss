@@ -1,12 +1,11 @@
 .admin_comments {
   
   .date_column {
-    min-width: 100px;
+    width: 100px;
   }
 
   .user_column {
-    min-width: 220px;
-    margin-right: 12px;
+    width: 220px;
     display: flex;
     div.avatar {
       width: 40px;
@@ -17,7 +16,7 @@
         height: 40px;
       }
     }
-    div {
+    div:last-child {
       overflow: hidden;
       div:first-child {
         margin-bottom: 5px;
@@ -69,6 +68,6 @@
   }
 
   .actions_column {
-    min-width: 220px;
+    width: 220px;
   }
 }
