@@ -3,7 +3,7 @@
 ### Requirements
 
 Ruby 2.7.x
-
+Node 12.22.x
 ### MacOS
 
 You will need to first install [Homebrew](https://brew.sh).
