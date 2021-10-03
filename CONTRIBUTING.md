@@ -8,7 +8,7 @@ Ruby 2.7.x
 
 You will need to first install [Homebrew](https://brew.sh).
 
-- `brew install libsndfile lame` (required for id3 tags and waveforms)
+- `brew install audiowaveform` (generates waveform data)
 - `brew install vips` (required for processing images)
 - `brew install yarn` (required for building assets)
 - Install gems
@@ -17,12 +17,12 @@ You will need to first install [Homebrew](https://brew.sh).
 `yarn install --check-files`
 
 - To create needed config, database, and load db/seeds*:
-`rake setup`
+`rails setup`
 - Create and seed database
-`rake db:setup`
+`rails db:setup`
 - `rails s`
 
-*Note: alonetone uses 3 config files that are created by 'rake setup
+*Note: alonetone uses 3 config files that are created by 'rails setup
 
 > alonetone.yml (contains the application "secret" and app-specific settings)
 >
@@ -49,7 +49,7 @@ Instead of using a production dump or unique data locally, we use seed data that
 To reset the seeds:
 
 ```
-bundle exec rake db:reset
+bundle exec rails db:reset
 ```
 
 ### Issues and workaround:
