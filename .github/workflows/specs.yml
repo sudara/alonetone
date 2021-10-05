@@ -8,6 +8,7 @@ env:
   OAS_AGENT_KEY: ${{ secrets.OAS_AGENT_KEY }}
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
   MORPHSVG: ${{ secrets.MORPHSVG }}
+  MYSQL_ALLOW_EMPTY_PASSWORD: true # https://hub.docker.com/_/mysql
 
 jobs:
   test:
