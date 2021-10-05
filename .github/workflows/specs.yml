@@ -9,6 +9,7 @@ env:
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
   MORPHSVG: ${{ secrets.MORPHSVG }}
   MYSQL_ALLOW_EMPTY_PASSWORD: true # https://hub.docker.com/_/mysql
+  MYSQL_ROOT_PASSWORD:
 
 jobs:
   test:
