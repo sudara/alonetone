@@ -13,5 +13,6 @@ test:
   pool: 5
   host: localhost
   user: root
+  password: root # github actions superuser password
   variables:
     sql_mode: traditional
