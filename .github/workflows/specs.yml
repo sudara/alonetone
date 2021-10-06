@@ -28,6 +28,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: true # https://hub.docker.com/_/mysql
+          MYSQL_ROOT_PASSWORD:
         volumes:
           - mysql:/var/lib/mysql
         ports:
