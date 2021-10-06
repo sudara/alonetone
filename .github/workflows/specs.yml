@@ -73,8 +73,9 @@ jobs:
         cat app/javascript/animation/MorphSVGPlugin.js
       if: ${{ matrix.morph }}
 
-    - name: Copy config and setup db
+    - name: Start db, copy config, setup db
       run: |
+        sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
 
     - name: ${{ matrix.name }}
