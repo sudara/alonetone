@@ -11,6 +11,13 @@ You will need to first install [Homebrew](https://brew.sh).
 - `brew install libsndfile lame` (required for id3 tags and waveforms)
 - `brew install vips` (required for processing images)
 - `brew install yarn` (required for building assets)
+- `brew install mysql` (required for local database)
+- before running rake to generate the data, you'll also need to start the mysql server, as well as have the root user with password 'root':
+  - `mysql.server start`
+  - `mysql -u root -h localhost` to open root mysql prompt.  In the prompt type the following lines:
+  - `SET PASSWORD FOR root@localhost='root';`
+  - `exit` which will remove you from the mysql prompt and you can continue with the other commands.
+
 - Install gems
 `bundle install`
 - Install front-end dependencies
@@ -18,8 +25,6 @@ You will need to first install [Homebrew](https://brew.sh).
 
 - To create needed config, database, and load db/seeds*:
 `rake setup`
-- Create and seed database
-`rake db:setup`
 - `rails s`
 
 *Note: alonetone uses 3 config files that are created by 'rake setup
@@ -36,7 +41,7 @@ The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG anim
 
 ## Logging in
 
-After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
+After the bootstrap data is loaded, you can login using the test account. Username is "owner" and password is "testing123".  You can also use this password to login with the other seed-created users with various permissions and content (including 'moderator', 'musician', 'marieh', 'carole', and 'petere')
 
 After login, click on the "Upload" button to upload your first mp3.
 
