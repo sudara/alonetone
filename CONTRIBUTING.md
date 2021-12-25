@@ -2,33 +2,46 @@
 
 ### Requirements
 
-Ruby 2.7.x
+We are currently running Ruby 3.0.x.
 
 ### MacOS
 
-You will need to first install [Homebrew](https://brew.sh).
+Denpendencies on MacOS are best managed with [Homebrew](https://brew.sh).
 
-- `brew install libsndfile lame` (required for id3 tags and waveforms)
+- `brew tap bbc/audiowaveform` (adds the waveform repo to brew)
+- `brew install audiowaveform` (generates waveform data)
 - `brew install vips` (required for processing images)
 - `brew install yarn` (required for building assets)
-- Install gems
-`bundle install`
-- Install front-end dependencies
-`yarn install --check-files`
+- `brew install mysql` (required for local database)
 
-- To create needed config, database, and load db/seeds*:
-`rake setup`
-- Create and seed database
-`rake db:setup`
+Before generating seed data, start the mysql server and do a bit of setup. The rails app expects that you have a root user with password 'root' (this can be changed in database.yml if you prefer that route).
+
+- `mysql.server start`
+- `mysql -u root -h localhost` to open root mysql prompt.  In the prompt type the following lines:
+- `SET PASSWORD FOR root@localhost='root';`
+- `exit` which will remove you from the mysql prompt and you can continue with the other commands.
+
+Install gems
+
+- `bundle install`
+
+Install front-end dependencies
+
+- `yarn install --check-files`
+
+Create needed config, database, and load db/seeds*:
+
+- `rails setup`
+
+This also creates 3 config files:
+
+- alonetone.yml (contains the application "secret" and app-specific settings)
+- database.yml
+- newrelic.yml (for performance tracking)
+
+Start the server 
+
 - `rails s`
-
-*Note: alonetone uses 3 config files that are created by 'rake setup
-
-> alonetone.yml (contains the application "secret" and app-specific settings)
->
-> database.yml
->
-> newrelic.yml (for performance tracking)
 
 ## Optional installs
 
@@ -36,7 +49,7 @@ The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG anim
 
 ## Logging in
 
-After the bootstrap data is loaded, you can login using the test account. Username is "admin" and password is "testing123"
+After the bootstrap data is loaded, you can login using the test account. Username is "owner" and password is "testing123".  You can also use this password to login with the other seed-created users with various permissions and content (including 'moderator', 'musician', 'marieh', 'carole', and 'petere')
 
 After login, click on the "Upload" button to upload your first mp3.
 
@@ -49,7 +62,7 @@ Instead of using a production dump or unique data locally, we use seed data that
 To reset the seeds:
 
 ```
-bundle exec rake db:reset
+bundle exec rails db:reset
 ```
 
 ### Issues and workaround:

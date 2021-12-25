@@ -430,7 +430,6 @@ DEPENDENCIES
   rspec-rails
   rspec-support
   rubocop (= 1.4.1)
-  ruby-audio
   ruby-mp3info
   rubyzip
   s3_direct_upload
