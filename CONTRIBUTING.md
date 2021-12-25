@@ -8,6 +8,7 @@ Ruby 2.7.x
 
 You will need to first install [Homebrew](https://brew.sh).
 
+- `brew tap bbc/audiowaveform` (adds the waveform repo to brew)
 - `brew install audiowaveform` (generates waveform data)
 - `brew install vips` (required for processing images)
 - `brew install yarn` (required for building assets)
