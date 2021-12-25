@@ -1,8 +1,8 @@
 require 'sidekiq/web'
 require 'moderator_constraint'
 
-Alonetone::Application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq', :constraints => ModeratorConstraint.new
+Rails.application.routes.draw do
+  # mount Sidekiq::Web => '/sidekiq', :constraints => ModeratorConstraint.new
 
   namespace :admin do
     get 'possibly_deleted_user/:id', :to => 'users#show', as: 'possibly_deleted_user'
