@@ -1,20 +1,20 @@
 {
   "dependencies": {
     "@alonetone/stitches": "^2.0.14",
-    "@babel/core": "^7.15.5",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "@babel/preset-env": "^7.15.6",
-    "@bugsnag/js": "^7.11.0",
+    "@babel/core": "^7.16.7",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@bugsnag/js": "^7.14.1",
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
-    "@hotwired/turbo-rails": "^7.0.1",
-    "@rails/ujs": "^6.1.1",
+    "@hotwired/turbo-rails": "^7.1.0",
+    "@rails/ujs": "^7.0.0",
     "@rails/webpacker": "^6.0.0-rc.6",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.2.3",
     "babel-plugin-macros": "^3.1.0",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.7.1",
+    "gsap": "^3.9.1",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
     "seedrandom": "^3.0.5",
@@ -24,15 +24,14 @@
     "webpack-cli": "^4.8.0"
   },
   "devDependencies": {
-    "@percy/cli": "^1.0.0-beta.68",
-    "@webpack-cli/serve": "^1.6.0",
+    "@percy/cli": "^1.0.0-beta.71",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.24.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.23.2",
-    "webpack-bundle-analyzer": "^4.4.1",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-dev-server": "^4.7.2"
   },
   "babel": {
@@ -41,6 +40,7 @@
     ]
   },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "not IE 11"
   ]
 }

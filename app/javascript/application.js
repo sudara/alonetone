@@ -23,9 +23,9 @@ LocalTime.config.i18n.en.datetime.at = '{date}' // drop the time from the date
 LocalTime.config.i18n.en.date.on = '{date}' // no "on Sunday", just "Sunday"
 LocalTime.start()
 
-const application = Application.start()
-const context = require.context('../controllers', true, /\.js$/)
-application.load(definitionsFromContext(context))
+window.Stimulus = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+Stimulus.load(definitionsFromContext(context))
 
 const playlist = new Playlist()
 
@@ -86,5 +86,4 @@ document.addEventListener('turbo:load', handlers)
 export {
   gsap,
   playlist,
-  application,
 }

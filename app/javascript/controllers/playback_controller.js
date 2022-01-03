@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus"
 
 // All variants of alonetone's javascript players extends this controller
 export default class extends Controller {
