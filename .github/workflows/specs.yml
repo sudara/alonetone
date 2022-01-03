@@ -60,8 +60,7 @@ jobs:
 
     - name: Put MorphSVGPlugin.js in place for feature specs
       run: |
-        printf "%s" "$MORPHSVG" > "app/packs/animation/MorphSVGPlugin.js"
-        cat app/packs/animation/MorphSVGPlugin.js
+        printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
       if: ${{ matrix.morph }}
 
     - name: Start db, copy config, setup db
