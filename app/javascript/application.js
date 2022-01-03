@@ -8,13 +8,13 @@
 
 import LocalTime from 'local-time'
 import { Turbo } from '@hotwired/turbo-rails'
-import { Application } from 'stimulus'
+import { Application } from '@hotwired/stimulus'
 import Bugsnag from '@bugsnag/js'
-import { definitionsFromContext } from 'stimulus/webpack-helpers'
+import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
 import Playlist from '@alonetone/stitches'
-import { makeSVGFromTitle } from '../animation/default_playlist_images'
-import '../misc/bugsnag.js.erb'
+import { makeSVGFromTitle } from 'animation/default_playlist_images'
+import 'misc/bugsnag.js.erb'
 
 // uncomment for local stitches dev:
 // import Playlist from '../../../../stitches/src/playlist'
