@@ -3,6 +3,7 @@ import PlaybackController from './playback_controller'
 const smallCover = document.querySelector('a.small_cover')
 const sidebarLinks = document.querySelector('.sidebar_downloads')
 
+// This is a controller for ONE mp3, one <li>
 export default class extends PlaybackController {
   static targets = ['play', 'loadTrack']
 
@@ -16,6 +17,7 @@ export default class extends PlaybackController {
 
   // called from bigPlay
   fireClick() {
+	  console.log('fireClick called from bigplay');
     this.playTarget.click()
   }
 
@@ -26,12 +28,6 @@ export default class extends PlaybackController {
 
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
-    if (this.isCurrentTrack()) {
-      this.setBigPlay()
-    } else {
-      this.bigPlayLoaded = false
-      this.loadTrackTarget.click()
-    }
     this.registeredListen = false
     this.playTarget.classList.replace('play_button', 'pause_button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'pause')
@@ -51,9 +47,9 @@ export default class extends PlaybackController {
 
   whileLoading(event) {
     this.duration = event.detail.duration
-    if (this.bigPlayLoaded) {
-      this.bigPlay.load(this.duration)
-    }
+		if (this.bigPlayLoaded) {
+    	this.bigPlay.load(this.duration)
+		}
   }
 
   // this is essentially the first "whilePlaying" call
@@ -70,13 +66,16 @@ export default class extends PlaybackController {
     this.duration = event.detail.duration
     this.currentTime = event.detail.currentTime
     this.percentPlayed = event.detail.percentPlayed
-    if (this.bigPlayLoaded) {
-      this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
-    }
+    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
   }
-  // every instance of playlistPlayback listens for popstate@window
+  
+	// every instance of playlistPlayback listens for popstate@window
   // so that when forward/back is pressed, this method is called on each
+	// the only thing this is used for 
+	// is making sure the correct track in the playlist is highlighted
   popTrack(e) {
+		console.log(newLocation)
+		console.log(this.permalink)
     const newLocation = document.location.pathname.split('/').pop()
     // Only fire ajax for the track that actually matches the new location
     // Remember, every track in the playlist will run this code on popstate
@@ -87,29 +86,19 @@ export default class extends PlaybackController {
     }
   }
 
-  highlightPlayingTrack() {
+  highlightTrackInPlaylist() {
     // handle the "active" classes
     if (document.querySelector('.tracklist li.active')) {
       document.querySelector('.tracklist li.active').classList.remove('active')
     }
     this.element.classList.add('active')
   }
-
-  // fires on ajax:success
-  loadTrack(e) {
-    this.highlightPlayingTrack()
+	
+  // calls in parallel with the frame updating
+  selectTrack(e) {
+		console.log('track selected')
+    this.highlightTrackInPlaylist()
     this.showSmallCoverAndSidebarLinks()
-
-    // // replace track content with result from ajax
-    // const temp = document.createElement('div')
-    // temp.innerHTML = e.detail[2].responseText
-    // document.querySelector('.track_content').replaceWith(temp.firstChild)
-    // if (e.target.href !== document.location.href) {
-    //   const title = this.loadTrackTarget.textContent
-    //   history.pushState(title, '', e.target.href)
-    // }
-    // link this controller to the new big play button controller
-    this.setBigPlay()
   }
 
   hideSmallCoverAndSidebarLinks() {
@@ -123,22 +112,12 @@ export default class extends PlaybackController {
     document.body.classList.remove('cover_view')
   }
 
-  async setBigPlay() {
-    this.bigPlay = null // reset
-    while (this.bigPlay === null) {
-      this.bigPlay = this.application.getControllerForElementAndIdentifier(document.querySelector('.track_content'), 'big-play')
-
-      // eslint-disable-next-line no-await-in-loop
-      await new Promise((resolve) => setTimeout(resolve, 20))
-    }
+  async setBigPlay(controller) {
+	  console.log('big play set')
+		this.bigPlay = controller
     this.bigPlayLoaded = true
     this.bigPlay.update(this.duration, this.currentTime, this.percentPlayed)
     this.bigPlay.setAnimationState(this.isPlaying)
-  }
-
-  // hacky way to determine if we need to load in a new track or not
-  isCurrentTrack() {
-    return this.playTarget.getAttribute('href').replace('.mp3', '') === document.location.pathname
   }
 
   disconnect() {

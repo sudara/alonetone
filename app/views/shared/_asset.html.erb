@@ -1,14 +1,14 @@
 <% if @playlist %>
-<div class="track_content" data-controller="big-play">
+<turbo-frame id="playlist-track" class="track_content" data-controller="big-play" data-turbo-action="advance">
 <% else %>
-<% content_for :open_graph do %>
-  <meta property="og:url" content="<%= request.url %>" />
-  <meta property="og:type" content="music.song" />
-  <meta property="og:title" content="<%= @asset.title %>" />
-  <meta property="og:description" content="A track by <%= @user.name %>" />
-  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
-  <meta property="music.musician" content="<%= user_home_path(@user) %>">
-<% end %>
+	<% content_for :open_graph do %>
+	  <meta property="og:url" content="<%= request.url %>" />
+	  <meta property="og:type" content="music.song" />
+	  <meta property="og:title" content="<%= @asset.title %>" />
+	  <meta property="og:description" content="A track by <%= @user.name %>" />
+	  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
+	  <meta property="music.musician" content="<%= user_home_path(@user) %>">
+	<% end %>
 
 <div class="track_content stitches_track "
   data-controller="big-play single-playback"
@@ -110,4 +110,4 @@
     </div>
   </div>
   <% end %>
-</div>
+</turbo-frame>

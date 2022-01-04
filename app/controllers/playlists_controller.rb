@@ -39,7 +39,7 @@ class PlaylistsController < ApplicationController
       format.html do
         lazily_create_waveform_if_needed if @asset
         @page_title = @description = "#{@playlist.title} by #{@user.name}"
-        #render('/shared/_asset', layout: false) if request.xhr?
+        render partial: '/shared/asset' if turbo_frame_request?
       end
       format.mp3 do
         listen(@asset, register: true)

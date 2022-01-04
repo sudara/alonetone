@@ -18,7 +18,6 @@
   <div class="playlist_sidebar" data-playlist-target="sidebar">
     <%= render 'playlist' %>
   </div>
-  <turbo-frame id="playlist" class="track_content">
   <% if @asset %>
     <%= render partial: 'shared/asset' %>
   <% else %>
@@ -49,5 +48,4 @@
       <% end %>
     </div>
   <% end %>
-  </turbo-frame>
 </div>

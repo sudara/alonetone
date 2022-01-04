@@ -15,7 +15,7 @@
 <ul class="tracklist">
 <% @playlist.tracks.each do |track| %>
   <li data-controller="playlist-playback"
-    data-action="popstate@window->playlist-playback#popTrack ajax:success->playlist-playback#loadTrack
+    data-action="popstate@window->playlist-playback#popTrack 
     track:play->playlist-playback#play
     track:pause->playlist-playback#pause
     track:playing->playlist-playback#playing
@@ -29,13 +29,13 @@
 
   <!-- Play button automagically plays AND changes to relevant track details  -->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset, format: :mp3),
-    class: 'play_button stitches_play', data: { "playlist-playback-target": "play", "turbo-frame": "playlist" } do %>
+    class: 'play_button stitches_play', data: { "playlist-playback-target": "play", "action": "playlist-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
     <i class="icon_play"></i>
   <% end %>
 
   <!-- Track title just switches track details-->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-     class: 'position_name_time', data: { 'playlist-playback-target': "loadTrack" } do %>
+     class: 'position_name_time', data: { 'playlist-playback-target': "loadTrack", "action": "playlist-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
     <span class="track_position">
       <%= "%02d" % track.position %>.
     </span>

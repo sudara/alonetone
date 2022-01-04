@@ -9,11 +9,15 @@ export default class extends Controller {
     this.animation = new LargePlayAnimation()
     this.duration = 0.0
     this.percentPlayed = 0.0
-    this.setDelegate()
     this.setupPlayhead()
+    this.setDelegate()
   }
 
-
+	// reach out to the playlist and connect to the active playing track
+ 	connect() {
+    this.setDelegate()
+	}
+	
   // called from whileLoading()
   load(duration) {
     this.duration = duration
@@ -61,11 +65,15 @@ export default class extends Controller {
 
   // the single/playlist controller that we are linked to
   setDelegate() {
+		
+		// how do we know which track we are delegating to?
+		// the source of authority has to be the active track in the sidebar
     const itemInPlaylist = document.querySelector('.tracklist li.active')
     if (itemInPlaylist) this.delegate = this.application.getControllerForElementAndIdentifier(itemInPlaylist, 'playlist-playback')
     else {
       this.delegate = this.application.getControllerForElementAndIdentifier(this.element, 'single-playback')
     }
+		this.delegate.setBigPlay(this)
   }
 
   // called from the delegate's playing()
@@ -80,7 +88,6 @@ export default class extends Controller {
   }
 
   togglePlay(e) {
-    this.setDelegate()
     this.delegate.fireClick()
     e.preventDefault()
   }
@@ -91,7 +98,6 @@ export default class extends Controller {
   }
 
   seek(e) {
-    if (!this.delegate) this.setDelegate()
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
     this.delegate.seek(newPosition)
