@@ -69,17 +69,19 @@ export default class extends PlaybackController {
     this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
   }
   
+	// we can't "promote" our frame loads to visits
+	// via data-turbo-action="advance"
+	// because we reset the player on turbo:load
+	// this is just a hack to get history working 
 	// every instance of playlistPlayback listens for popstate@window
   // so that when forward/back is pressed, this method is called on each
 	// the only thing this is used for 
 	// is making sure the correct track in the playlist is highlighted
   popTrack(e) {
-		console.log(newLocation)
-		console.log(this.permalink)
     const newLocation = document.location.pathname.split('/').pop()
     // Only fire ajax for the track that actually matches the new location
     // Remember, every track in the playlist will run this code on popstate
-    if (newLocation === this.permalink) {
+    if (newLocation === this.permalink.split('.').shift()) {
       // console.log('should be ajax')
       this.loadTrackTarget.click()
       e.stopImmediatePropagation()
@@ -97,6 +99,15 @@ export default class extends PlaybackController {
   // calls in parallel with the frame updating
   selectTrack(e) {
 		console.log('track selected')
+		
+		// we can't "promote" our frame loads to visits
+		// via data-turbo-action="advance"
+		// because we reset the player on turbo:load
+		// this is just a hack to get history working 
+		if (e.target.closest('a').href !== document.location.href) {
+			const title = this.loadTrackTarget.textContent
+			history.pushState(title, '', e.target.closest('a').href)
+		}
     this.highlightTrackInPlaylist()
     this.showSmallCoverAndSidebarLinks()
   }

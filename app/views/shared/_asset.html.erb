@@ -1,5 +1,6 @@
 <% if @playlist %>
-<turbo-frame id="playlist-track" class="track_content" data-controller="big-play" data-turbo-action="advance">
+<turbo-frame id="playlist-track">
+<div class="track_content" data-controller="big-play">
 <% else %>
 	<% content_for :open_graph do %>
 	  <meta property="og:url" content="<%= request.url %>" />
@@ -110,4 +111,5 @@
     </div>
   </div>
   <% end %>
+</div>
 </turbo-frame>

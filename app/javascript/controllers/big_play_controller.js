@@ -6,15 +6,17 @@ export default class extends Controller {
   static targets = ['play', 'playButton', 'time', 'progressContainerInner', 'waveform', 'seekBar']
 
   initialize() {
+		console.log('initted...')
     this.animation = new LargePlayAnimation()
     this.duration = 0.0
     this.percentPlayed = 0.0
     this.setupPlayhead()
-    this.setDelegate()
   }
 
 	// reach out to the playlist and connect to the active playing track
+	// called every time the controller's element is added to the dom
  	connect() {
+		console.log('connecting...')
     this.setDelegate()
 	}
 	
