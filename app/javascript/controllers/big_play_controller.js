@@ -44,6 +44,7 @@ export default class extends Controller {
 	// reach out to the playlist and connect to the active playing track
 	// called every time the controller's element is added to the dom
  	connect() {
+    this.setupPlayhead()
 		this.dispatch("connected", { detail: { trackId: this.trackIdValue } })
 	}
 	
@@ -62,7 +63,9 @@ export default class extends Controller {
   }
 	
   whileLoading(event) {
+		console.log('whilest load')
 		if(event.detail.trackId != this.trackIdValue) return;
+		this.animation.loadingAnimation()
     this.duration = event.detail.duration
   }
 	
@@ -84,18 +87,23 @@ export default class extends Controller {
 
 	// dispatched event from playlist_track_playback
   updateState(event) {
-		
+
 		// we only care about the state from the right trackId
-		if(event.detail.trackId != this.trackIdValue) return;
+		if (event.detail.trackId != this.trackIdValue) return;
+		
+		this.duration = event.detail.duration
 		
     if (event.detail.isPlaying && (event.detail.percentPlayed === 0.0)) {
       // play was clicked, mp3 is still loading
       this.animation.loadingAnimation()
     } else if (event.detail.isPlaying) {
       // in the middle of playing
+			this.animation.pausingAnimation()
+    	this.timeline.progress(event.detail.percentPlayed)
       this.startPlayhead()
     } else if (event.detail.percentPlayed > 0.0) {
       // was playing once but now paused
+    	this.timeline.progress(event.detail.percentPlayed)
       this.animation.showPlayButton()
       this.showPlayhead()
     } else {
@@ -121,6 +129,8 @@ export default class extends Controller {
 	}
 
   togglePlay(e) {
+		if (this.percentPlayed == 0)
+			this.animation.loadingAnimation()
 		this.dispatch("togglePlay", { detail: { trackId: this.trackIdValue } })
     e.preventDefault()
   }
@@ -133,7 +143,7 @@ export default class extends Controller {
   seek(e) {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
-		this.dispatch("togglePlay", { detail: { trackId: this.trackIdValue, position: newPosition } })
+		this.dispatch("seek", { detail: { trackId: this.trackIdValue, position: newPosition } })
     this.timeline.pause()
     this.timeline.seek(newPosition)
   }

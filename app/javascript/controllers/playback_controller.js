@@ -29,9 +29,4 @@ export default class extends Controller {
     //   },
     // })
   }
-
-  seek(position) {
-    const event = new CustomEvent('track:seek', { 'detail': { position } , 'bubbles': true })
-    this.element.dispatchEvent(event)
-  }
 }

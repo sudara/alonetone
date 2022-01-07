@@ -13,18 +13,14 @@ export default class extends PlaybackController {
 	 
   initialize() {
 		this.percentPlayed = 0
+		this.duration = 0
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
   }
 
   // bigPlay calls this when it's play button is clicked
-  fireClick() {
-	  console.log('fireClick called from bigplay');
-    this.playTarget.click()
-  }
-
-  // calls out to bigPlay
-  seeked() {
-    this.bigPlay.seeked()
+  togglePlay() {
+		if (event.detail.trackId == this.trackIdValue)
+			this.playTarget.click()
   }
 
   // After PlaybackController#play is called, this stuff fires
@@ -40,6 +36,7 @@ export default class extends PlaybackController {
 	
 	// we only need this to track state for when big play dissapears
   whilePlaying(event) {
+		this.duration = event.detail.duration
     this.percentPlayed = event.detail.percentPlayed
 	}
 
@@ -59,7 +56,7 @@ export default class extends PlaybackController {
 	connectBigPlay(event) {
 		if (event.detail.trackId == this.trackIdValue)
 		{
-			this.dispatch("updateState", { detail: { trackId: this.trackIdValue, isPlaying: this.isPlaying, percentPlayed: this.percentPlayed } })	
+			this.dispatch("updateState", { detail: { trackId: this.trackIdValue, isPlaying: this.isPlaying, duration: this.duration, percentPlayed: this.percentPlayed } })	
 		}		
 	}
   
@@ -121,6 +118,13 @@ export default class extends PlaybackController {
   isCurrentTrack() {
      return this.playTarget.getAttribute('href').replace('.mp3', '') === document.location.pathname
    }
+	 
+  seek(event) {
+		if (event.detail.trackId != this.trackIdValue) return
+			
+    const stitchesEvent = new CustomEvent('track:seek', { 'detail': event.detail.position , 'bubbles': true })
+    this.element.dispatchEvent(stitchesEvent)
+  }
 
   disconnect() {
     super.disconnect()
