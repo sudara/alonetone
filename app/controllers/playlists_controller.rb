@@ -33,7 +33,7 @@ class PlaylistsController < ApplicationController
   end
 
   def show
-    @asset = find_asset_in_playlist
+    find_track_and_asset_in_playlist
     @comments = @asset.comments.public_or_private(display_private_comments?) if @asset
     respond_to do |format|
       format.html do
@@ -137,8 +137,13 @@ class PlaylistsController < ApplicationController
 
   protected
 
-  def find_asset_in_playlist
-    Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take! if params[:asset_id].present?
+  def find_track_and_asset_in_playlist
+    return if !params[:asset_id].present?
+    
+    @asset = Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take! 
+    
+    # there may be many of the same asset in the playlist, but we're only ever going to refer to the first
+    @track = @playlist.tracks.where(asset_id: @asset.id).take!
   end
 
   def playlist_params

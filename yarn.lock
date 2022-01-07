@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@alonetone/stitches@^2.0.14":
-  version "2.0.14"
-  resolved "https://registry.yarnpkg.com/@alonetone/stitches/-/stitches-2.0.14.tgz#1fa6898e8fa06ffc70a1bfef312a3a431c65050d"
-  integrity sha512-IDDfPNAO3rXBBHyXzZTq3cLq0kpTaXRhNfdZ8nYmX9DydjWmWmxu564EhNbKUauxWIOj73zzWmGamUQ9ZM1wDA==
+"@alonetone/stitches@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@alonetone/stitches/-/stitches-2.1.0.tgz#c38f95b53ba305adc759860574f281abc5ab2ac3"
+  integrity sha512-2leCjYg6yknw0Z0t01jy+otFan/tgaM6/qbi2t2LAtzLDhOW5yRDoLFxdZgrPB6EWCpk7ys9ZM7tk/h7s9lqwA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.14.5":
   version "7.14.5"

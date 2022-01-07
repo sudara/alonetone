@@ -2,11 +2,39 @@ import { Controller } from "@hotwired/stimulus"
 import { gsap } from 'gsap'
 import LargePlayAnimation from '../animation/large_play_animation'
 
+/*
+
+Mental model for playlist-track-playback and big-play can be confusing.
+
+> big player
+
+> track one
+> track two
+
+When a playlist-track's play button is pressed, it's first handled by stitches.
+
+The playlist-track listens to the stitches event
+    track:play->playlist-track-playback#play
+
+
+Animations:
+    this.animation.loadingAnimation()
+    this.animation.pausingAnimation()
+    this.animation.showPlayButton()
+
+	
+
+*/
+
 export default class extends Controller {
   static targets = ['play', 'playButton', 'time', 'progressContainerInner', 'waveform', 'seekBar']
 
+  static values = {
+     trackId: Number,
+   }
+	 
   initialize() {
-		console.log('initted...')
+		// we don't have access to the playlist's true state
     this.animation = new LargePlayAnimation()
     this.duration = 0.0
     this.percentPlayed = 0.0
@@ -16,46 +44,57 @@ export default class extends Controller {
 	// reach out to the playlist and connect to the active playing track
 	// called every time the controller's element is added to the dom
  	connect() {
-		console.log('connecting...')
-    this.setDelegate()
+		this.dispatch("connected", { detail: { trackId: this.trackIdValue } })
 	}
 	
-  // called from whileLoading()
-  load(duration) {
-    this.duration = duration
-  }
-
   // this is listened for by single-playback
-  // but also called from playlist-playback
+  // but also called from playlist-track-playback
   seeked() {
     this.timeline.play()
   }
+	
+  // this is the first "whilePlaying" call
+  playing(event) {
+		if(event.detail.trackId != this.trackIdValue) return;
 
-  // called from the player on playing() & whilePlaying()
-  update(duration, currentTime, percentPlayed) {
-    this.duration = duration
-    this.timeTarget.innerHTML = currentTime
-    this.percentPlayed = percentPlayed
+    this.whilePlaying(event)
+    this.play()
+  }
+	
+  whileLoading(event) {
+		if(event.detail.trackId != this.trackIdValue) return;
+    this.duration = event.detail.duration
+  }
+	
+  whilePlaying(event) {		
+		if(event.detail.trackId != this.trackIdValue) return;
+    this.duration = event.detail.duration
+    this.timeTarget.innerHTML = event.detail.currentTime
+    this.percentPlayed = event.detail.percentPlayed
     //console.log(`playhead: ${this.timeline.progress()} percentPlayed: ${this.percentPlayed}`)
 
     // This check performs 2 functions
     // 1. It's repsonsible for catching the playhead on seek
     // 2. It prevents the gsap-powered playhead from drifting
-    if ((Math.abs(percentPlayed - this.timeline.progress()) > 0.02)) {
+    if ((Math.abs(this.percentPlayed - this.timeline.progress()) > 0.02)) {
       //console.log(`playhead jogged from ${this.timeline.progress()} to ${this.percentPlayed}`)
-      this.timeline.progress(percentPlayed)
+      this.timeline.progress(this.percentPlayed)
     }
   }
 
-  // update should be called before this
-  setAnimationState(isPlaying) {
-    if (isPlaying && (this.percentPlayed === 0.0)) {
+	// dispatched event from playlist_track_playback
+  updateState(event) {
+		
+		// we only care about the state from the right trackId
+		if(event.detail.trackId != this.trackIdValue) return;
+		
+    if (event.detail.isPlaying && (event.detail.percentPlayed === 0.0)) {
       // play was clicked, mp3 is still loading
       this.animation.loadingAnimation()
-    } else if (isPlaying) {
+    } else if (event.detail.isPlaying) {
       // in the middle of playing
       this.startPlayhead()
-    } else if (this.percentPlayed > 0.0) {
+    } else if (event.detail.percentPlayed > 0.0) {
       // was playing once but now paused
       this.animation.showPlayButton()
       this.showPlayhead()
@@ -65,32 +104,24 @@ export default class extends Controller {
     }
   }
 
-  // the single/playlist controller that we are linked to
-  setDelegate() {
-		
-		// how do we know which track we are delegating to?
-		// the source of authority has to be the active track in the sidebar
-    const itemInPlaylist = document.querySelector('.tracklist li.active')
-    if (itemInPlaylist) this.delegate = this.application.getControllerForElementAndIdentifier(itemInPlaylist, 'playlist-playback')
-    else {
-      this.delegate = this.application.getControllerForElementAndIdentifier(this.element, 'single-playback')
-    }
-		this.delegate.setBigPlay(this)
-  }
-
-  // called from the delegate's playing()
-  play() {
+  playing() {
     this.animation.pausingAnimation()
     this.startPlayhead()
+		this.isPlaying = true
   }
 
   pause() {
     this.timeline.pause()
     this.animation.showPlayButton()
+		this.isPlaying = false
   }
+	
+	stop() {
+		this.isPlaying = false
+	}
 
   togglePlay(e) {
-    this.delegate.fireClick()
+		this.dispatch("togglePlay", { detail: { trackId: this.trackIdValue } })
     e.preventDefault()
   }
 
@@ -102,7 +133,7 @@ export default class extends Controller {
   seek(e) {
     const offset = e.clientX - this.waveformTarget.getBoundingClientRect().left
     const newPosition = offset / this.waveformTarget.offsetWidth
-    this.delegate.seek(newPosition)
+		this.dispatch("togglePlay", { detail: { trackId: this.trackIdValue, position: newPosition } })
     this.timeline.pause()
     this.timeline.seek(newPosition)
   }

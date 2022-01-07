@@ -1,6 +1,14 @@
 <% if @playlist %>
 <turbo-frame id="playlist-track" target="_top">
-<div class="track_content" data-controller="big-play">
+<div class="track_content" data-controller="big-play" data-action="    	
+   track:whileLoading@document->big-play#whileLoading
+   track:pause@document->big-play#pause
+   track:playing@document->big-play#playing
+   track:stop@document->big-play#stop
+	 playlist-track-playback:updateState@window->big-play#updateState
+   track:whilePlaying@document->big-play#whilePlaying" 
+	 data-big-play-track-id-value="<%= @track.id %>">
+		
 <% else %>
 	<% content_for :open_graph do %>
 	  <meta property="og:url" content="<%= request.url %>" />

@@ -7,34 +7,43 @@ const sidebarLinks = document.querySelector('.sidebar_downloads')
 export default class extends PlaybackController {
   static targets = ['play', 'loadTrack']
 
+  static values = {
+     trackId: Number,
+   }
+	 
   initialize() {
+		this.percentPlayed = 0
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
-    this.duration = 0.0
-    this.currentTime = '0:00'
-    this.percentPlayed = 0.0
-    this.bigPlay = null
   }
 
-  // called from bigPlay
+  // bigPlay calls this when it's play button is clicked
   fireClick() {
 	  console.log('fireClick called from bigplay');
     this.playTarget.click()
   }
 
-  // calls to bigPlay
+  // calls out to bigPlay
   seeked() {
     this.bigPlay.seeked()
   }
 
   // After PlaybackController#play is called, this stuff fires
   playCallback(e) {
+    if (!this.isCurrentTrack()) {			 
+			 // Load in the track and call selectTrack
+       this.loadTrackTarget.click()
+     }
     this.registeredListen = false
     this.playTarget.classList.replace('play_button', 'pause_button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'pause')
   }
+	
+	// we only need this to track state for when big play dissapears
+  whilePlaying(event) {
+    this.percentPlayed = event.detail.percentPlayed
+	}
 
   pauseCallback() {
-    this.bigPlay.pause()
     this.playTarget.classList.replace('pause_button', 'play_button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
   }
@@ -42,32 +51,17 @@ export default class extends PlaybackController {
   stopCallback() {
     this.playTarget.classList.replace('pause_button', 'play_button')
     this.playTarget.firstElementChild.setAttribute('data-icon', 'play')
-    this.bigPlay.stop()
   }
-
-  whileLoading(event) {
-    this.duration = event.detail.duration
-		if (this.bigPlayLoaded) {
-    	this.bigPlay.load(this.duration)
-		}
-  }
-
-  // this is essentially the first "whilePlaying" call
-  async playing(event) {
-    while (this.bigPlay === null) {
-      // eslint-disable-next-line no-await-in-loop
-      await new Promise((resolve) => setTimeout(resolve, 20))
-    }
-    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
-    this.bigPlay.play()
-  }
-
-  whilePlaying(event) {
-    this.duration = event.detail.duration
-    this.currentTime = event.detail.currentTime
-    this.percentPlayed = event.detail.percentPlayed
-    this.bigPlay.update(event.detail.duration, event.detail.currentTime, event.detail.percentPlayed)
-  }
+	
+	// dispatched from big_play#connect
+	// lets us know which track was just loaded
+	// and we send back the play state  
+	connectBigPlay(event) {
+		if (event.detail.trackId == this.trackIdValue)
+		{
+			this.dispatch("updateState", { detail: { trackId: this.trackIdValue, isPlaying: this.isPlaying, percentPlayed: this.percentPlayed } })	
+		}		
+	}
   
 	// we can't "promote" our frame loads to visits
 	// via data-turbo-action="advance"
@@ -96,17 +90,18 @@ export default class extends PlaybackController {
     this.element.classList.add('active')
   }
 	
-  // calls in parallel with the frame updating
+  // calls in parallel with the ajax load into the frame
   selectTrack(e) {
-		console.log('track selected')
 		
 		// we can't "promote" our frame loads to visits
 		// via data-turbo-action="advance"
 		// because we reset the player on turbo:load
 		// this is just a hack to get history working 
-		if (e.target.closest('a').href !== document.location.href) {
+		// we gsub the mp3 out in case it's a play link
+		const href = e.target.closest('a').href.replace('.mp3','')
+		if (href !== document.location.href) {
 			const title = this.loadTrackTarget.textContent
-			history.pushState(title, '', e.target.closest('a').href)
+			history.pushState(title, '', href)
 		}
     this.highlightTrackInPlaylist()
     this.showSmallCoverAndSidebarLinks()
@@ -123,13 +118,9 @@ export default class extends PlaybackController {
     document.body.classList.remove('cover_view')
   }
 
-  async setBigPlay(controller) {
-	  console.log('big play set')
-		this.bigPlay = controller
-    this.bigPlayLoaded = true
-    this.bigPlay.update(this.duration, this.currentTime, this.percentPlayed)
-    this.bigPlay.setAnimationState(this.isPlaying)
-  }
+  isCurrentTrack() {
+     return this.playTarget.getAttribute('href').replace('.mp3', '') === document.location.pathname
+   }
 
   disconnect() {
     super.disconnect()

@@ -14,28 +14,28 @@
 
 <ul class="tracklist">
 <% @playlist.tracks.each do |track| %>
-  <li data-controller="playlist-playback"
-    data-action="popstate@window->playlist-playback#popTrack 
-    track:play->playlist-playback#play
-    track:pause->playlist-playback#pause
-    track:playing->playlist-playback#playing
-    track:ended->playlist-playback#stop
-    track:whileLoading->playlist-playback#whileLoading
-    track:whilePlaying->playlist-playback#whilePlaying
-    track:registerListen->playlist-playback#registerListen
-    track:seeked->playlist-playback#seeked"
-    data-playlist-playback-id="<%= track.asset.id %>"
+  <li data-controller="playlist-track-playback"
+    data-action="popstate@window->playlist-track-playback#popTrack 
+		big-play:connected@window->playlist-track-playback#connectBigPlay
+    track:play->playlist-track-playback#play
+    track:whilePlaying->playlist-track-playback#whilePlaying
+    track:pause->playlist-track-playback#pause
+    track:ended->playlist-track-playback#stop
+    track:registerListen->playlist-track-playback#registerListen
+    track:seeked->playlist-track-playback#seeked"
+    data-playlist-track-playback-track-id-value="<%= track.id %>",
+		data-stitches-track-id="<%= track.id %>"
     class="stitches_track <%= ' active' if first_active_track?(track, @asset) %>">
 
   <!-- Play button automagically plays AND changes to relevant track details  -->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset, format: :mp3),
-    class: 'play_button stitches_play', data: { "playlist-playback-target": "play", "action": "playlist-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
+    class: 'play_button stitches_play', data: { "playlist-track-playback-target": "play", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
     <i class="icon_play"></i>
   <% end %>
 
   <!-- Track title just switches track details-->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-     class: 'position_name_time', data: { 'playlist-playback-target': "loadTrack", "action": "playlist-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
+     class: 'position_name_time', data: { 'playlist-track-playback-target': "loadTrack", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
     <span class="track_position">
       <%= "%02d" % track.position %>.
     </span>

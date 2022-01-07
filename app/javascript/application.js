@@ -30,6 +30,8 @@ Stimulus.load(definitionsFromContext(context))
 const playlist = new Playlist()
 
 function handlers() {
+	
+	// only do this if the playlist isn't the same as before
   playlist.setup({
     preloadIndex: -1,
     tracksSelector: '.stitches_track',
