@@ -22,7 +22,7 @@ Animations:
     this.animation.pausingAnimation()
     this.animation.showPlayButton()
 
-	
+
 
 */
 
@@ -32,7 +32,7 @@ export default class extends Controller {
   static values = {
      trackId: Number,
    }
-	 
+
   initialize() {
 		// we don't have access to the playlist's true state
     this.animation = new LargePlayAnimation()
@@ -47,18 +47,18 @@ export default class extends Controller {
     this.setupPlayhead()
 		this.dispatch("connected", { detail: { trackId: this.trackIdValue } })
 	}
-	
+
   // this is listened for by single-playback
   // but also called from playlist-track-playback
   seeked() {
     this.timeline.play()
   }
-	
+
   // responding to the stitches track:play event
   play(event) {
 		this.animation.loadingAnimation()
   }
-  
+
   // this is the first "whilePlaying" call
   playing(event) {
 		if(event.detail.trackId != this.trackIdValue) return;
@@ -67,14 +67,14 @@ export default class extends Controller {
     this.startPlayhead()
   	this.isPlaying = true
   }
-	
+
   whileLoading(event) {
 		if(event.detail.trackId != this.trackIdValue) return;
 		console.log('whilest load', event.detail)
     this.duration = event.detail.duration
   }
-	
-  whilePlaying(event) {		
+
+  whilePlaying(event) {
 		if(event.detail.trackId != this.trackIdValue) return;
     this.duration = event.detail.duration
     this.timeTarget.innerHTML = event.detail.currentTime
@@ -94,10 +94,10 @@ export default class extends Controller {
   updateState(event) {
 		// we only care about the state from the right trackId
 		if (event.detail.trackId != this.trackIdValue) return;
-		
+
     // set current time / duration / percent played
 		this.whilePlaying(event)
-		
+
     if (event.detail.isPlaying && (event.detail.percentPlayed === 0.0)) {
       // play was clicked, mp3 is still loading
       this.animation.loadingAnimation()
@@ -122,7 +122,7 @@ export default class extends Controller {
     this.animation.showPlayButton()
 		this.isPlaying = false
   }
-	
+
 	stop() {
 		this.isPlaying = false
 	}
