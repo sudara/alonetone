@@ -3,9 +3,9 @@
 
 
 "@alonetone/stitches@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@alonetone/stitches/-/stitches-2.1.0.tgz#c38f95b53ba305adc759860574f281abc5ab2ac3"
-  integrity sha512-2leCjYg6yknw0Z0t01jy+otFan/tgaM6/qbi2t2LAtzLDhOW5yRDoLFxdZgrPB6EWCpk7ys9ZM7tk/h7s9lqwA==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@alonetone/stitches/-/stitches-2.1.1.tgz#bebf9444387fec4001955fa0936314e8855ccf00"
+  integrity sha512-J6JG4li8CUPUbtjOkBV7zUztSTar3MefSCr7ffWS5nHtWgMuNdrmFlqopEnmCoD+W7lzgRsq5WahGshPcd9gwA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.14.5":
   version "7.14.5"
@@ -2331,9 +2331,9 @@
   integrity sha512-0LmSKJTuo2dL6BQ+9xxLnS9lbkyfz2mBGeBnQ2J7o9Bn0l0q+ZC6VuoZMZZXPvABI4QT7Nfknv5WhfKYL+boew==
 
 "@rails/ujs@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-7.0.0.tgz#5331285372956be4d3f2d858cef9904c11ce4b93"
-  integrity sha512-VU/tKKEj0+4QvhxkWBUwINCimtxYjy702ecvUpNUtDukilAsv4fmc/vTH5b/gSNuT5wVRf3h7o27W+JssTu4nQ==
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-7.0.1.tgz#cb515d52c85be107908dd00822042f04e52cdea7"
+  integrity sha512-ZUkgsbz5KFLfBwjIQ2D/kvyq+2w5BuNnkUJf3940VVJxov9GECu6n2BSXUTmyNAx+R6JQdibzXBuR7nz3crZYw==
 
 "@rails/webpacker@^6.0.0-rc.6":
   version "6.0.0-rc.6"
