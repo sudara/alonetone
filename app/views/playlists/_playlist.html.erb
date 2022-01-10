@@ -16,16 +16,16 @@
 <% @playlist.tracks.each do |track| %>
   <li data-controller="playlist-track-playback"
     data-action="popstate@window->playlist-track-playback#popTrack 
-		big-play:connected@window->playlist-track-playback#connectBigPlay
-		big-play:togglePlay@window->playlist-track-playback#togglePlay
-		big-play:seek@window->playlist-track-playback#seek
-    track:play->playlist-track-playback#play
-    track:whilePlaying->playlist-track-playback#whilePlaying
-    track:pause->playlist-track-playback#pause
-    track:ended->playlist-track-playback#stop
-    track:registerListen->playlist-track-playback#registerListen
-    data-playlist-track-playback-track-id-value="<%= track.id %>",
+  		big-play:connected@window->playlist-track-playback#connectBigPlay
+  		big-play:togglePlay@window->playlist-track-playback#togglePlay
+  		big-play:seek@window->playlist-track-playback#seek
+      track:play->playlist-track-playback#play
+      track:whilePlaying->playlist-track-playback#whilePlaying
+      track:pause->playlist-track-playback#pause
+      track:ended->playlist-track-playback#stop
+      track:registerListen->playlist-track-playback#registerListen"
 		data-stitches-track-id="<%= track.id %>"
+    data-playlist-track-playback-track-id-value="<%= track.id %>"
     class="stitches_track <%= ' active' if first_active_track?(track, @asset) %>">
 
   <!-- Play button automagically plays AND changes to relevant track details  -->

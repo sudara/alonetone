@@ -54,18 +54,23 @@ export default class extends Controller {
     this.timeline.play()
   }
 	
+  // responding to the stitches track:play event
+  play(event) {
+		this.animation.loadingAnimation()
+  }
+  
   // this is the first "whilePlaying" call
   playing(event) {
 		if(event.detail.trackId != this.trackIdValue) return;
-
     this.whilePlaying(event)
-    this.play()
+    this.animation.pausingAnimation()
+    this.startPlayhead()
+  	this.isPlaying = true
   }
 	
   whileLoading(event) {
-		console.log('whilest load')
 		if(event.detail.trackId != this.trackIdValue) return;
-		this.animation.loadingAnimation()
+		console.log('whilest load', event.detail)
     this.duration = event.detail.duration
   }
 	
@@ -87,11 +92,11 @@ export default class extends Controller {
 
 	// dispatched event from playlist_track_playback
   updateState(event) {
-
 		// we only care about the state from the right trackId
 		if (event.detail.trackId != this.trackIdValue) return;
 		
-		this.duration = event.detail.duration
+    // set current time / duration / percent played
+		this.whilePlaying(event)
 		
     if (event.detail.isPlaying && (event.detail.percentPlayed === 0.0)) {
       // play was clicked, mp3 is still loading
@@ -112,12 +117,6 @@ export default class extends Controller {
     }
   }
 
-  playing() {
-    this.animation.pausingAnimation()
-    this.startPlayhead()
-		this.isPlaying = true
-  }
-
   pause() {
     this.timeline.pause()
     this.animation.showPlayButton()
@@ -129,6 +128,7 @@ export default class extends Controller {
 	}
 
   togglePlay(e) {
+    console.log('toggle play called')
 		if (this.percentPlayed == 0)
 			this.animation.loadingAnimation()
 		this.dispatch("togglePlay", { detail: { trackId: this.trackIdValue } })

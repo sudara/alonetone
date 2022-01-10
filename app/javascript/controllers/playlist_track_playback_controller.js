@@ -14,13 +14,16 @@ export default class extends PlaybackController {
   initialize() {
 		this.percentPlayed = 0
 		this.duration = 0
+    this.currentTime = ""
     this.permalink = this.playTarget.getAttribute('href').split('/').pop()
   }
 
-  // bigPlay calls this when it's play button is clicked
-  togglePlay() {
+  // bigPlay issues this event when its play button is clicked
+  togglePlay(event) {
 		if (event.detail.trackId == this.trackIdValue)
+    {      
 			this.playTarget.click()
+    }
   }
 
   // After PlaybackController#play is called, this stuff fires
@@ -38,6 +41,7 @@ export default class extends PlaybackController {
   whilePlaying(event) {
 		this.duration = event.detail.duration
     this.percentPlayed = event.detail.percentPlayed
+    this.currentTime = event.detail.currentTime
 	}
 
   pauseCallback() {
@@ -56,7 +60,7 @@ export default class extends PlaybackController {
 	connectBigPlay(event) {
 		if (event.detail.trackId == this.trackIdValue)
 		{
-			this.dispatch("updateState", { detail: { trackId: this.trackIdValue, isPlaying: this.isPlaying, duration: this.duration, percentPlayed: this.percentPlayed } })	
+			this.dispatch("updateState", { detail: { trackId: this.trackIdValue, isPlaying: this.isPlaying, duration: this.duration, currentTime: this.currentTime, percentPlayed: this.percentPlayed } })	
 		}		
 	}
   
@@ -87,9 +91,9 @@ export default class extends PlaybackController {
     this.element.classList.add('active')
   }
 	
-  // calls in parallel with the ajax load into the frame
+  // called before the ajax load into the frame
   selectTrack(e) {
-		
+		console.log('track selected')
 		// we can't "promote" our frame loads to visits
 		// via data-turbo-action="advance"
 		// because we reset the player on turbo:load
@@ -99,9 +103,12 @@ export default class extends PlaybackController {
 		if (href !== document.location.href) {
 			const title = this.loadTrackTarget.textContent
 			history.pushState(title, '', href)
+      this.highlightTrackInPlaylist()
+      this.showSmallCoverAndSidebarLinks()
 		}
-    this.highlightTrackInPlaylist()
-    this.showSmallCoverAndSidebarLinks()
+    else {
+      e.preventDefault() // don't fire the ajax call if same page
+    }
   }
 
   hideSmallCoverAndSidebarLinks() {
