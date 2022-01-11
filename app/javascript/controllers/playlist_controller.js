@@ -1,10 +1,25 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['credits', 'sidebar', 'content', 'cover']
+  static targets = ['credits', 'sidebar', 'content', 'cover', 'sidebarDownloads', 'smallCover']
 
   initialize() {
     this.resize()
+  }
+
+  hideCover() {
+    this.sidebarDownloadsTarget.style.display = 'block'
+    this.smallCoverTarget.style.display = 'block'
+    document.body.classList.remove('cover_view')
+    this.resize()
+  }
+
+  showCover() {
+    this.sidebarDownloadsTarget.style.display = 'none'
+    this.smallCoverTarget.style.display = 'none'
+    history.pushState(this.smallCoverTarget.textContent, '', this.smallCoverTarget.href)
+    document.body.classList.add('cover_view')
+    this.resize();
   }
 
   resize() {

@@ -104,22 +104,11 @@ export default class extends PlaybackController {
 			const title = this.loadTrackTarget.textContent
 			history.pushState(title, '', href)
       this.highlightTrackInPlaylist()
-      this.showSmallCoverAndSidebarLinks()
+      this.dispatch("hideCover") // listened to by playlist_controller.js
 		}
     else {
       e.preventDefault() // don't fire the ajax call if same page
     }
-  }
-
-  hideSmallCoverAndSidebarLinks() {
-    document.querySelector('a.small_cover').style.display = 'none'
-    document.querySelector('.sidebar_downloads').style.display = 'none'
-  }
-
-  showSmallCoverAndSidebarLinks() {
-    document.querySelector('a.small_cover').style.display = 'block'
-    document.querySelector('.sidebar_downloads').style.display = 'block'
-    document.body.classList.remove('cover_view')
   }
 
   isCurrentTrack() {

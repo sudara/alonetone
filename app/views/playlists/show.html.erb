@@ -14,7 +14,8 @@
 <div class="page_container" id="playlist_and_track_content_header">
   <%= render partial: 'shared/back_to_artist' %>
 </div>
-<div class="page_container" id="playlist_and_track_content" data-controller="playlist" data-action="resize@window->playlist#resize">
+<div class="page_container" id="playlist_and_track_content" data-controller="playlist"
+  data-action="resize@window->playlist#resize playlist-track-playback:hideCover->playlist#hideCover">
   <div class="playlist_sidebar" data-playlist-target="sidebar">
     <%= render 'playlist' %>
   </div>
