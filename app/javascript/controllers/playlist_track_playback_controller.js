@@ -104,7 +104,6 @@ export default class extends PlaybackController {
 			const title = this.loadTrackTarget.textContent
 			history.pushState(title, '', href)
       this.highlightTrackInPlaylist()
-      this.dispatch("hideCover") // listened to by playlist_controller.js
 		}
     else {
       e.preventDefault() // don't fire the ajax call if same page

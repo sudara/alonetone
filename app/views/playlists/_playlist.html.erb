@@ -1,5 +1,5 @@
 <%= link_to playlist_cover(@playlist, variant: :playlist_card),
-  user_playlist_path(@playlist.user, @playlist), class: 'small_cover', data: { "playlist-target": "smallCover", "turbo-frame": "playlist-track", "action": "playlist#showCover" }, style: ('display:none;' unless @asset) %>
+  user_playlist_path(@playlist.user, @playlist), class: 'small_cover', data: { "playlist-target": "smallCover", "turbo-frame": "playlist-track" }, style: ('display:none;' unless @asset) %>
 <h1 class="<%= 'cover' unless @asset %>">
   <%= @playlist.title %>
 </h1>
