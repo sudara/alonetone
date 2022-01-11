@@ -39,7 +39,7 @@ class PlaylistsController < ApplicationController
       format.html do
         lazily_create_waveform_if_needed if @asset
         @page_title = @description = "#{@playlist.title} by #{@user.name}"
-        render partial: '/shared/asset' if turbo_frame_request?
+        render partial: '/shared/asset' if turbo_frame_request? && @asset
       end
       format.mp3 do
         listen(@asset, register: true)
@@ -139,9 +139,9 @@ class PlaylistsController < ApplicationController
 
   def find_track_and_asset_in_playlist
     return if !params[:asset_id].present?
-    
-    @asset = Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take! 
-    
+
+    @asset = Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
+
     # there may be many of the same asset in the playlist, but we're only ever going to refer to the first
     @track = @playlist.tracks.where(asset_id: @asset.id).take!
   end

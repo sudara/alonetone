@@ -21,6 +21,7 @@
   <% if @asset %>
     <%= render partial: 'shared/asset' %>
   <% else %>
+    <turbo-frame id="playlist-track" target="_top">
     <%= content_for(:body_class, 'cover_view') %>
     <div class="track_content" data-playlist-target="content">
       <div class="large_cover_and_credits" data-playlist-target="cover">
@@ -47,5 +48,6 @@
       </div>
       <% end %>
     </div>
+    </turbo-frame>
   <% end %>
 </div>
