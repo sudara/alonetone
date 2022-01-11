@@ -1,10 +1,10 @@
 import PlaybackController from './playback_controller'
 
 export default class extends PlaybackController {
-  // this method is called by bigPlay
-  // but are only relevant in playlist player
-  // they are no-ops here since we can rely on stitches
-
+  /* TODO: this single playback class should probably be thrown away
+    seek can be moved into playback_controller
+    and the rest can just be handled by big-play's stitches callbacks
+  */
   playCallback() {
   }
 

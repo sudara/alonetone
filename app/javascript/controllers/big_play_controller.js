@@ -177,7 +177,7 @@ export default class extends Controller {
   // but this will gatekeep any sloppiness
   // this.trackIdValue won't exist for single players
   shouldProcessEventForTrack(id) {
-    return (this.trackIdValue === 0) || (this.trackIdValue === id)
+    return (this.trackIdValue === 0) || (this.trackIdValue === parseInt(id))
   }
 
   disconnect() {
