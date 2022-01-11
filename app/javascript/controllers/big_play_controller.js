@@ -58,7 +58,7 @@ export default class extends Controller {
 
   // this is the first "whilePlaying" call
   playing(event) {
-    if (event.detail.trackId !== this.trackIdValue) return;
+    if (!this.shouldProcessEventForTrack(event.detail.trackId)) return;
     this.whilePlaying(event)
     this.animation.pausingAnimation()
     this.startPlayhead()
@@ -66,13 +66,13 @@ export default class extends Controller {
   }
 
   whileLoading(event) {
-    if (event.detail.trackId !== this.trackIdValue) return;
+    if (!this.shouldProcessEventForTrack(event.detail.trackId)) return;
     console.log('whilest load', event.detail)
     this.duration = event.detail.duration
   }
 
   whilePlaying(event) {
-    if (event.detail.trackId !== this.trackIdValue) return;
+    if (!this.shouldProcessEventForTrack(event.detail.trackId)) return;
     this.duration = event.detail.duration
     this.timeTarget.innerHTML = event.detail.currentTime
     this.percentPlayed = event.detail.percentPlayed
@@ -88,9 +88,10 @@ export default class extends Controller {
   }
 
   // dispatched event from playlist_track_playback
+  // this is mainly to "catch" the current state of a playing track
   updateState(event) {
     // we only care about the state from the right trackId
-    if (event.detail.trackId !== this.trackIdValue) return;
+    if (!this.shouldProcessEventForTrack(event.detail.trackId)) return;
 
     // set current time / duration / percent played
     this.whilePlaying(event)
@@ -172,6 +173,13 @@ export default class extends Controller {
     if (this.timeline.duration() === 1) {
       this.timeline.duration(this.duration) // gsap 3.2.4 broke duration getter, working again
     }
+  }
+
+  // a bit redundant, since there will only ever be 1 big-play
+  // but this will gatekeep any sloppiness
+  // this.trackIdValue won't exist for single players
+  shouldProcessEventForTrack(id) {
+    return (this.trackIdValue === 0) || id === this.trackIdValue
   }
 
   disconnect() {
