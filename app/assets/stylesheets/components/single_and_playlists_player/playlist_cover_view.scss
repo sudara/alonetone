@@ -11,9 +11,11 @@ body.cover_view {
       }
     }
   }
-  .track_content {
+  #playlist-track {
     margin-left: -40px !important;
     min-width: 400px;
+  }
+  .track_content {
     @media #{$one-column} {
       min-width: auto;
     }
