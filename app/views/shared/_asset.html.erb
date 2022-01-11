@@ -23,12 +23,13 @@
 
 <div class="track_content stitches_track "
   data-controller="big-play single-playback"
-  data-action="track:playing->single-playback#playing
-    track:play->single-playback#play
-    track:pause->single-playback#pause
-    track:ended->single-playback#stop
-    track:whileLoading->single-playback#whileLoading
-    track:whilePlaying->single-playback#whilePlaying
+  data-action="
+    track:play->big-play#play
+    track:playing->big-play#playing
+    track:pause->big-play#pause
+    track:ended->big-play#stop
+    track:whileLoading->big-play#whileLoading
+    track:whilePlaying->big-play#whilePlaying
     track:registerListen->single-playback#registerListen
     track:seeked->big-play#seeked"
   data-single-playback-id="<%= @asset.id %>">

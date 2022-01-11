@@ -40,7 +40,7 @@ function handlers() {
     loadingProgressSelector: '.stitches_seek .loaded',
     playProgressSelector: '.stitches_seek .played',
     seekSelector: '.stitches_seek',
-    enableConsoleLogging: false,
+    enableConsoleLogging: true,
     whilePlaying: (data) => {
     },
     onError: (data) => {

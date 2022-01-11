@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['credits', 'sidebar', 'content', 'cover', 'track', 'sidebarDownloads', 'smallCover']
@@ -10,6 +10,7 @@ export default class extends Controller {
   coverTargetConnected() {
     this.sidebarDownloadsTarget.style.display = 'none'
     this.smallCoverTarget.style.display = 'none'
+    // eslint-disable-next-line no-restricted-globals
     history.pushState(this.smallCoverTarget.textContent, '', this.smallCoverTarget.href)
     document.body.classList.add('cover_view')
     this.resize();
@@ -59,8 +60,7 @@ export default class extends Controller {
 
   offset() {
     const mainElement = document.getElementsByTagName('main')[0]
-    const mainPaddingBottom = parseInt(window.getComputedStyle(mainElement).getPropertyValue('padding-bottom'), 10 )
+    const mainPaddingBottom = parseInt(window.getComputedStyle(mainElement).getPropertyValue('padding-bottom'), 10)
     return this.creditsTarget.clientHeight - this.heightDifference() - mainPaddingBottom
   }
-
 }
