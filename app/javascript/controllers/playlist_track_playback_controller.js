@@ -96,7 +96,6 @@ export default class extends PlaybackController {
 
   // called before the ajax load into the frame
   selectTrack(e) {
-    console.log('track selected')
     // we can't "promote" our frame loads to visits
     // via data-turbo-action="advance"
     // because we reset the player on turbo:load

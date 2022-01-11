@@ -31,7 +31,8 @@
     track:whileLoading->big-play#whileLoading
     track:whilePlaying->big-play#whilePlaying
     track:registerListen->single-playback#registerListen
-    track:seeked->big-play#seeked"
+    track:seeked->big-play#seeked
+    big-play:seek->single-playback#seek"
   data-single-playback-id="<%= @asset.id %>">
   <%= render partial: 'shared/back_to_artist' %>
 <% end %>

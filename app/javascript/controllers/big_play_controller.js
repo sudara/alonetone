@@ -67,7 +67,6 @@ export default class extends Controller {
 
   whileLoading(event) {
     if (!this.shouldProcessEventForTrack(event.detail.trackId)) return;
-    console.log('whilest load', event.detail)
     this.duration = event.detail.duration
   }
 
@@ -122,7 +121,6 @@ export default class extends Controller {
   }
 
   togglePlay(e) {
-    console.log('toggle play called')
     if (this.percentPlayed === 0) {
       this.animation.loadingAnimation()
     }
@@ -179,7 +177,7 @@ export default class extends Controller {
   // but this will gatekeep any sloppiness
   // this.trackIdValue won't exist for single players
   shouldProcessEventForTrack(id) {
-    return (this.trackIdValue === 0) || id === this.trackIdValue
+    return (this.trackIdValue === 0) || (this.trackIdValue === id)
   }
 
   disconnect() {

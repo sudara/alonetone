@@ -109,11 +109,6 @@ export default class extends PlaybackController {
     this.seekBarContainerTarget.classList.add('show');
   }
 
-  seek(position) {
-    const event = new CustomEvent('track:seek', { 'detail': { position } , 'bubbles': true })
-    this.element.dispatchEvent(event)
-  }
-  
   // turbolinks caches pages, so let's make sure things are sane when we return
   disconnect() {
     super.disconnect()

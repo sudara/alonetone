@@ -13,8 +13,8 @@ import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
 import Playlist from '@alonetone/stitches'
-import { makeSVGFromTitle } from 'animation/default_playlist_images'
-import 'misc/bugsnag.js.erb'
+import { makeSVGFromTitle } from './animation/default_playlist_images'
+import './misc/bugsnag.js.erb'
 
 // uncomment for local stitches dev:
 // import Playlist from '../../../../stitches/src/playlist'
@@ -24,14 +24,13 @@ LocalTime.config.i18n.en.date.on = '{date}' // no "on Sunday", just "Sunday"
 LocalTime.start()
 
 window.Stimulus = Application.start()
-const context = require.context("./controllers", true, /\.js$/)
+const context = require.context('./controllers', true, /\.js$/)
 Stimulus.load(definitionsFromContext(context))
 
 const playlist = new Playlist()
 
 function handlers() {
-
-	// only do this if the playlist isn't the same as before
+  // only do this if the playlist isn't the same as before
   playlist.setup({
     preloadIndex: -1,
     tracksSelector: '.stitches_track',
@@ -40,8 +39,8 @@ function handlers() {
     loadingProgressSelector: '.stitches_seek .loaded',
     playProgressSelector: '.stitches_seek .played',
     seekSelector: '.stitches_seek',
-    enableConsoleLogging: true,
-    whilePlaying: (data) => {
+    enableConsoleLogging: false,
+    whilePlaying: () => {
     },
     onError: (data) => {
       Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)

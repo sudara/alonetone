@@ -1,14 +1,9 @@
 import PlaybackController from './playback_controller'
 
 export default class extends PlaybackController {
-  initialize() {
-    this.setBigPlay()
-  }
-
   // this method is called by bigPlay
   // but are only relevant in playlist player
   // they are no-ops here since we can rely on stitches
-  fireClick() {}
 
   playCallback() {
   }
@@ -25,6 +20,8 @@ export default class extends PlaybackController {
   whilePlaying(event) {
   }
 
-  setBigPlay() {
+  seek(event) {
+    const stitchesEvent = new CustomEvent('track:seek', { detail: { position: event.detail.position }, bubbles: true })
+    this.element.dispatchEvent(stitchesEvent)
   }
 }
