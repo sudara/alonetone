@@ -96,18 +96,7 @@ export default class extends PlaybackController {
 
   // called before the ajax load into the frame
   selectTrack(e) {
-    // we can't "promote" our frame loads to visits
-    // via data-turbo-action="advance"
-    // because we reset the player on turbo:load
-    // this is just a hack to get history working
-    // we gsub the mp3 out in case it's a play link
-    const href = e.target.closest('a').href.replace('.mp3', '')
-    if (href !== document.location.href) {
-      const title = this.loadTrackTarget.textContent
-      this.highlightTrackInPlaylist()
-    } else {
-      e.preventDefault() // don't fire the ajax call if same page
-    }
+    this.highlightTrackInPlaylist()
   }
 
   isCurrentTrack() {
