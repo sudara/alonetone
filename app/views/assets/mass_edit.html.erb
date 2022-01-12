@@ -1,7 +1,9 @@
 <h1 class="track_content">Editing <%= pluralize @assets.count, 'track' %> </h1>
 <% @assets.each do |asset| %>
-  <div class="track_content" data-controller="save">
-    <%= render partial: 'edit', locals: { asset: asset } %>
-  </div>
+  <%= turbo_frame_tag asset do %>
+    <div class="track_content" data-controller="save">
+      <%= render partial: 'edit', locals: { asset: asset } %>
+    </div>
+  <% end %>
 <% end %>
 

@@ -1,6 +1,6 @@
 import Sortable from 'sortablejs'
 import Rails from '@rails/ujs'
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 import { flashController } from './flash_controller'
 
 export default class extends Controller {
