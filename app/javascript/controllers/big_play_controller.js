@@ -100,7 +100,7 @@ export default class extends Controller {
       this.animation.loadingAnimation()
     } else if (event.detail.isPlaying) {
       // in the middle of playing
-      this.animation.pausingAnimation()
+      this.animation.showPauseButton()
       this.timeline.progress(event.detail.percentPlayed)
       this.startPlayhead()
     } else if (event.detail.percentPlayed > 0.0) {
