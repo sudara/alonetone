@@ -1,7 +1,7 @@
  <div class="comment_asset" data-controller="comment">
   <div class="comment_form" data-comment-target="div">
-    <%= form_with scope: :comment, url: user_track_comments_path(asset.user, asset), local: false,
-    data: { action: 'ajax:beforeSend->comment#spin ajax:success->comment#success ajax:error->comment#error' } do |f| %>
+    <%= form_with scope: :comment, url: user_track_comments_path(asset.user, asset),
+      data: { action: 'comment#startSpinner turbo:submit-end->comment#displayResult' } do |f| %>
 
     <div class="comment_as" data-comment-target="personalization">
         <!-- will be replaced by js payload to allow caching -->

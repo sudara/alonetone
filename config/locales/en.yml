@@ -10,3 +10,7 @@ en:
       byte_size_too_small: must be greater than %{greater_than_human_size}
       byte_size_too_large: must be less than %{less_than_human_size}
       invalid_content_type: does not look the right file type
+  authlogic:
+    error_messages:
+      no_authentication_details: Login and password need to be filled out
+      login_not_found: not found (It should be the same as your profile url)

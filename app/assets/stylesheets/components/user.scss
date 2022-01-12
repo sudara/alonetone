@@ -157,7 +157,8 @@
           margin-right: 24px;
           margin-bottom: 16px;
         }
-        a.follow {
+        button.follow {
+          @include image_button();
           display: flex;
           margin-right: 24px;
           &:hover {
@@ -589,7 +590,7 @@
         margin-top: $baseline / 2;
         margin-bottom: $baseline / 2;
       }
-      
+
     }
   }
 }

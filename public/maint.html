@@ -52,7 +52,7 @@
 
     div#message {
       width: 100%;
-      height: 130px;  
+      height: 130px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -97,7 +97,7 @@
   </style>
 </head>
 
-<body>  
+<body>
   <div id="image_container">
     <img id="image" src="/images/502.png" alt="">
   </div>
@@ -108,12 +108,11 @@
 <script>
 
   const viewportResized = function () {
-    
     let image_container = document.getElementById("image_container")
     let image = document.getElementById("image")
     let message = document.getElementById("message")
 
-    if ( ( window.innerHeight / window.innerWidth ) > 1.2)  {
+    if ((window.innerHeight / window.innerWidth) > 1.2) {
       image_container.classList.add('narrow')
       image.classList.add('narrow')
       message.classList.add('narrow')
@@ -122,13 +121,7 @@
       image.classList.remove('narrow')
       message.classList.remove('narrow')
     }
-
-    console.log ( image_container.clientHeight );
-
     message.setAttribute("style","width:" + image_container.clientHeight * (1917/1624) + "px");
-
-    
-
   }
 
   viewportResized()
@@ -136,7 +129,6 @@
   window.addEventListener('resize', function () {
     viewportResized()
   }, false)
-
 </script>
 
 </body>

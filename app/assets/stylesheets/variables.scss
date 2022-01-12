@@ -65,6 +65,13 @@ $black-font: 'Alright-v2-Normal-Black', sans-serif;
   box-shadow: 0px 6px 18px rgba(51, 44, 28, 0.19);
 }
 
+@mixin image-button() {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
 @mixin default-button($type: '') {
   font-family: $sans-font;
   font-size: 12px;

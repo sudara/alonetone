@@ -153,8 +153,8 @@ class AssetsController < ApplicationController
     # @asset.update_attribute(:is_spam, @asset.spam?)
     @asset.publish! if params[:commit] == 'Publish'
 
-    if request.xhr?
-      result ? head(:ok) : head(:bad_request)
+    if turbo_frame_request?
+      result ? head(:ok) : render('edit', status: :unprocessable_entity)
     else
       if result
         redirect_to user_track_url(@asset.user.login, @asset.permalink)

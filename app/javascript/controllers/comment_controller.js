@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ['banner', 'div', 'response', 'spinner',
@@ -8,8 +8,13 @@ export default class extends Controller {
     this.personalizationTarget.innerHTML = window.userPersonalization
   }
 
-  spin() {
+  startSpinner() {
     this.spinnerTarget.style.display = 'block'
+  }
+
+  displayResult(e) {
+    if (e.detail.formSubmission.result.success) this.success();
+    else this.error();
   }
 
   success() {

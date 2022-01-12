@@ -219,21 +219,21 @@ RSpec.describe AssetsController, type: :controller do
       login(:arthur)
     end
 
-    it 'should allow user to update track title and description' do
+    it 'should allow user to update track title and description and redirect to show' do
       akismet_stub_response_ham
-      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'normal description' } }, xhr: true
-      expect(response).to be_successful
+      post :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'normal description' } }
+      expect(response).to redirect_to user_track_path(users(:arthur), users(:arthur).assets.first)
     end
 
     it 'should call out to rakismet on update' do
       akismet_stub_response_spam
-      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'normal description' } }, xhr: true
+      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'normal description' } }
       expect(users(:arthur).assets.first.private).to be_falsey
     end
 
     xit 'should record track as spammy if it is spam' do
       akismet_stub_response_spam
-      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }, xhr: true
+      put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }
       expect(assigns(:asset).is_spam?).to be_truthy
     end
   end

@@ -1,32 +1,45 @@
 {
   "dependencies": {
-    "@alonetone/stitches": "^2.0.14",
-    "@babel/core": "^7.12.9",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.12.7",
-    "@bugsnag/js": "^7.5.3",
-    "@rails/ujs": "^6.1.0",
-    "@rails/webpacker": "^5.2.1",
-    "babel-loader": "^8.2.2",
+    "@alonetone/stitches": "^2.1.2",
+    "@babel/core": "^7.16.7",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@bugsnag/js": "^7.14.1",
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
+    "@hotwired/turbo-rails": "^7.1.0",
+    "@rails/ujs": "^7.0.0",
+    "@rails/webpacker": "^6.0.0-rc.6",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-macros": "^3.1.0",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.6.0",
+    "gsap": "^3.9.1",
     "local-time": "^2.1.0",
     "rails-erb-loader": "^5.5.2",
     "seedrandom": "^3.0.5",
-    "sortablejs": "^1.13.0",
-    "stimulus": "^2.0.0",
-    "turbolinks": "^5.2.0"
+    "sortablejs": "^1.14.0",
+    "turbolinks": "^5.2.0",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
   },
   "devDependencies": {
-    "@percy/cli": "^1.0.0-beta.68",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.15.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "webpack-bundle-analyzer": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "@babel/eslint-parser": "^7.16.5",
+    "@percy/cli": "^1.0.0-beta.72",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "babel": {
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
 }

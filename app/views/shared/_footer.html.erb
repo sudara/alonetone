@@ -10,7 +10,7 @@
 <% end %>
 
 <% if logged_in? %>
-<div class="footer_forum_topics" data-turbolinks="false">
+<div class="footer_forum_topics" data-turbo="false">
   <div class="footer_forum_topics_inner">
     <a href="https://forum.alonetone.com/" class="forum_view_all">
         Check out the new forums... &nbsp;<i class="icon_caret">
@@ -60,8 +60,8 @@
     <div class="footer_column">
       <h3 class="footer_column_header">More</h3>
       <div><%= link_to "About", "/about"%></div>
-      <div data-turbolinks="false"><%= link_to "Forum (new!)", "https://forum.alonetone.com" %></div>
-      <div data-turbolinks="false"><%= link_to "Community Guidelines", '/forums/ideas-features-praise/community-guidelines' %></div>
+      <div data-turbo="false"><%= link_to "Forum (new!)", "https://forum.alonetone.com" %></div>
+      <div data-turbo="false"><%= link_to "Community Guidelines", '/forums/ideas-features-praise/community-guidelines' %></div>
       <div><%= link_to "✨Support alonetone on Patreon", 'https://patreon.com/alonetone' %></div>
     </div>
 

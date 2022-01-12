@@ -1,25 +1,38 @@
 <% if @playlist %>
-<div class="track_content" data-controller="big-play">
+<turbo-frame id="playlist-track" target="_top" data-turbo-action="advance">
+<div class="track_content" data-controller="big-play" data-playlist-target="track" data-action="
+   track:whileLoading@document->big-play#whileLoading
+   track:pause@document->big-play#pause
+   track:play@document->big-play#play
+   track:playing@document->big-play#playing
+   track:ended@document->big-play#stop
+   track:seeked@document->big-play#seeked
+	 playlist-track-playback:updateState@window->big-play#updateState
+   track:whilePlaying@document->big-play#whilePlaying"
+	 data-big-play-track-id-value="<%= @track.id %>">
+
 <% else %>
-<% content_for :open_graph do %>
-  <meta property="og:url" content="<%= request.url %>" />
-  <meta property="og:type" content="music.song" />
-  <meta property="og:title" content="<%= @asset.title %>" />
-  <meta property="og:description" content="A track by <%= @user.name %>" />
-  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
-  <meta property="music.musician" content="<%= user_home_path(@user) %>">
-<% end %>
+	<% content_for :open_graph do %>
+	  <meta property="og:url" content="<%= request.url %>" />
+	  <meta property="og:type" content="music.song" />
+	  <meta property="og:title" content="<%= @asset.title %>" />
+	  <meta property="og:description" content="A track by <%= @user.name %>" />
+	  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
+	  <meta property="music.musician" content="<%= user_home_path(@user) %>">
+	<% end %>
 
 <div class="track_content stitches_track "
   data-controller="big-play single-playback"
-  data-action="track:playing->single-playback#playing
-    track:play->single-playback#play
-    track:pause->single-playback#pause
-    track:ended->single-playback#stop
-    track:whileLoading->single-playback#whileLoading
-    track:whilePlaying->single-playback#whilePlaying
+  data-action="
+    track:play->big-play#play
+    track:playing->big-play#playing
+    track:pause->big-play#pause
+    track:ended->big-play#stop
+    track:whileLoading->big-play#whileLoading
+    track:whilePlaying->big-play#whilePlaying
     track:registerListen->single-playback#registerListen
-    track:seeked->big-play#seeked"
+    track:seeked->big-play#seeked
+    big-play:seek->single-playback#seek"
   data-single-playback-id="<%= @asset.id %>">
   <%= render partial: 'shared/back_to_artist' %>
 <% end %>
@@ -57,11 +70,9 @@
     <div class= "edit_links_and_favorite">
       <% if logged_in? %>
         <div class="track_favorite">
-        <%= link_to toggle_favorite_path(asset_id: @asset.id), remote: true, class: 'add_to_favorites',
-            data: {controller: 'favorite', action: 'favorite#toggle' } do %>
+        <%= button_to toggle_favorite_path(asset_id: @asset.id), class: 'add_to_favorites',
+            method: :put, data: {controller: 'favorite', action: 'favorite#toggle', 'favorite-id-value': @asset.id} do %>
             Favorite <%== render file: svg_path('svg/animation_heart.svg') %>
-
-
         <% end %>
         </div>
       <% end %>
@@ -113,3 +124,4 @@
   </div>
   <% end %>
 </div>
+</turbo-frame>

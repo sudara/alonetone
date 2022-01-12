@@ -4,7 +4,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '6.1.0'
+gem 'rails'
 gem 'mysql2'
 gem 'puma'
 
@@ -24,7 +24,7 @@ gem 's3_direct_upload'
 
 # active record
 gem 'acts_as_list'
-gem 'authlogic', github: 'sudara/authlogic', branch: 'rails6-1'
+gem 'authlogic'
 gem 'scrypt' # for authlogic
 gem 'request_store' # for authlogic
 
@@ -32,7 +32,6 @@ gem 'request_store' # for authlogic
 gem 'nokogiri'
 gem 'commonmarker'
 gem 'country_select'
-gem 'dynamic_form'
 gem 'local_time'
 gem 'pagy'
 
@@ -41,15 +40,15 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-gem 'webpacker'
+gem 'webpacker', '6.0.0.rc.6'
 gem 'sass-rails'
 gem 'yui-compressor'
-gem 'turbolinks'
+gem 'turbo-rails'
 
 # monitoring & perf
 gem 'bugsnag'
 gem 'newrelic_rpm'
-gem 'skylight', '~>5.0.0.beta'
+gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
 
@@ -69,7 +68,7 @@ group :test do
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false
-  gem "percy-capybara", "~> 5.0.0"
+  gem "percy-capybara"
   gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
   gem 'rspec', require: false
@@ -84,5 +83,4 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'pry-byebug'
 end

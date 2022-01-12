@@ -1,7 +1,7 @@
 // spam cannot restore
 // Deleted user can only be restored
 // Spammed user can be deleted, or unspammed
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ['deleteButton', 'restoreButton', 'unspamButton', 'spamButton']

@@ -1,6 +1,7 @@
-import { Controller } from 'stimulus'
-import Turbolinks from 'turbolinks'
 import Rails from '@rails/ujs'
+import { Controller } from "@hotwired/stimulus"
+import { Turbo } from '@hotwired/turbo-rails'
+
 
 export default class extends Controller {
   static targets = ['menu', 'header', 'switchToLight', 'switchToDark']
@@ -84,7 +85,7 @@ export default class extends Controller {
       url: "/toggle_theme",
       type: "PUT"
     })
-    Turbolinks.clearCache()
+    Turbo.clearCache()
   }
 
   toggleThemableImages(oldTheme, newTheme) {

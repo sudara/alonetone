@@ -1,5 +1,4 @@
-import { Controller } from 'stimulus'
-import Rails from '@rails/ujs'
+import { Controller } from "@hotwired/stimulus"
 
 // All variants of alonetone's javascript players extends this controller
 export default class extends Controller {
@@ -29,9 +28,5 @@ export default class extends Controller {
     //   success() {
     //   },
     // })
-  }
-
-  seek(position) {
-    Rails.fire(this.element, 'track:seek', { position })
   }
 }
