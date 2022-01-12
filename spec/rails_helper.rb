@@ -119,6 +119,9 @@ RSpec.configure do |config|
           # we really don't care about CORS stuff
           next if error.message.include?('font')
 
+          # we also expect some requests to 422
+          next if error.message.include?('422')
+
           expect(error.level).not_to eq('SEVERE'), error.message
           next unless error.level == 'WARNING'
           STDERR.puts 'WARN: javascript warning'
