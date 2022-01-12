@@ -13,7 +13,6 @@ import Bugsnag from '@bugsnag/js'
 import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers'
 import gsap from 'gsap' // needed for tests to run
 import Playlist from '@alonetone/stitches'
-import { makeSVGFromTitle } from './animation/default_playlist_images'
 import './misc/bugsnag.js.erb'
 
 // uncomment for local stitches dev:
@@ -45,20 +44,6 @@ function handlers() {
     onError: (data) => {
       Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)
     },
-  })
-
-  document.querySelectorAll('.large_cover .no_pic, .small_cover .no_pic').forEach((pic) => {
-    const title = document.querySelector('h1').textContent.trim()
-    if (!pic.hasChildNodes()) {
-      pic.append(makeSVGFromTitle(800, title))
-    }
-  })
-
-  document.querySelectorAll('a .no_pic, .cover .no_pic').forEach((pic) => {
-    const title = pic.parentNode.getAttribute('title')
-    if (!pic.hasChildNodes()) {
-      pic.append(makeSVGFromTitle(800, title))
-    }
   })
 
   document.querySelectorAll('.slide_open_href').forEach((link) => {
