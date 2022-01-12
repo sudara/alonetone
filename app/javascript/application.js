@@ -29,22 +29,38 @@ Stimulus.load(definitionsFromContext(context))
 const playlist = new Playlist()
 
 function handlers() {
-  // only do this if the playlist isn't the same as before
-  playlist.setup({
-    preloadIndex: -1,
-    tracksSelector: '.stitches_track',
-    timeSelector: '.stitches_time',
-    playButtonSelector: '.stitches_play',
-    loadingProgressSelector: '.stitches_seek .loaded',
-    playProgressSelector: '.stitches_seek .played',
-    seekSelector: '.stitches_seek',
-    enableConsoleLogging: false,
-    whilePlaying: () => {
-    },
-    onError: (data) => {
-      Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)
-    },
-  })
+  /*
+    We want to "promote" turbo frame loads to full turbo:loads
+    But this would break continuous playback
+    because stitches would be reloaded on every frame load.
+
+    There's a whole other can of worms: it would be trivial
+    to *allow* playback to continue across turbo visits
+    and therefore to allow people to listen to tunes while they browse all of alonetone.
+    However, this means we'd need a global player (like back in the old days!).
+
+    So for now, (re)-load stitches on every pageload *unless* we are on a playlist page.
+    And we load stitches via playlist_controller controller on initialize.
+    Perhaps ideally each group of tracks on alonetone would be its own stitches playlist too...
+  */
+
+  if (document.getElementById('playlist_and_track_content') == null) {
+    playlist.setup({
+      preloadIndex: -1,
+      tracksSelector: '.stitches_track',
+      timeSelector: '.stitches_time',
+      playButtonSelector: '.stitches_play',
+      loadingProgressSelector: '.stitches_seek .loaded',
+      playProgressSelector: '.stitches_seek .played',
+      seekSelector: '.stitches_seek',
+      enableConsoleLogging: false,
+      whilePlaying: () => {
+      },
+      onError: (data) => {
+        Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)
+      },
+    })
+  }
 
   document.querySelectorAll('.slide_open_href').forEach((link) => {
     link.addEventListener('click', (event) => {

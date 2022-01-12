@@ -104,8 +104,6 @@ export default class extends PlaybackController {
     const href = e.target.closest('a').href.replace('.mp3', '')
     if (href !== document.location.href) {
       const title = this.loadTrackTarget.textContent
-      // eslint-disable-next-line no-restricted-globals
-      history.pushState(title, '', href)
       this.highlightTrackInPlaylist()
     } else {
       e.preventDefault() // don't fire the ajax call if same page

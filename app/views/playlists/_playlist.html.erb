@@ -30,13 +30,13 @@
 
   <!-- Play button automagically plays AND changes to relevant track details  -->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset, format: :mp3),
-    class: 'play_button stitches_play', data: { "playlist-track-playback-target": "play", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
+    class: 'play_button stitches_play', data: { "playlist-track-playback-target": "play", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track", "turbo-action": "advance" } do %>
     <i class="icon_play"></i>
   <% end %>
 
   <!-- Track title just switches track details-->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset),
-     class: 'position_name_time', data: { 'playlist-track-playback-target': "loadTrack", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track" } do %>
+     class: 'position_name_time', data: { 'playlist-track-playback-target': "loadTrack", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track", "turbo-action": "advance" } do %>
     <span class="track_position">
       <%= "%02d" % track.position %>.
     </span>

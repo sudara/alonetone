@@ -1,5 +1,5 @@
 <% if @playlist %>
-<turbo-frame id="playlist-track" target="_top">
+<turbo-frame id="playlist-track" target="_top" data-turbo-action="advance">
 <div class="track_content" data-controller="big-play" data-playlist-target="track" data-action="
    track:whileLoading@document->big-play#whileLoading
    track:pause@document->big-play#pause
