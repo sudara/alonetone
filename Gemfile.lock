@@ -433,7 +433,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   pagy
-  percy-capybara (~> 5.0.0)
+  percy-capybara
   perf_check
   postmark-rails
   pry
