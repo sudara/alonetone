@@ -44,9 +44,10 @@ jobs:
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           **/packs-test
           tmp/webpacker
-        key: ${{ runner.os }}-yarn5-${{ hashFiles('**/yarn.lock') }}
+          ./node_modules/
+        key: ${{ runner.os }}-yarn6-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarn5-
+          ${{ runner.os }}-yarn6-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
