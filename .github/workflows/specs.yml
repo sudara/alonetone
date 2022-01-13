@@ -21,7 +21,7 @@ jobs:
             command: bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"
             morph: false
           - name: Feature Specs & Percy
-            command: yarn percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
+            command: npx percy exec -- bundle exec rspec --pattern "spec/features/**/*_spec.rb"
             morph: true
     steps:
     - name: Installing apt dependencies
@@ -43,7 +43,7 @@ jobs:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           **/packs-test
-          tmp/cache/webpacker
+          tmp/webpacker
         key: ${{ runner.os }}-yarn5-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn5-
