@@ -13,7 +13,7 @@ module Listens
     unless prevent_abuse(asset)
       register_listen(asset) if register
       sleep(1) if Rails.env.development? # simulate network loading, it'll be 2x with range requests
-      redirect_to asset.download_location.to_s
+      redirect_to asset.download_location.to_s, allow_other_host: true
     end
   end
 
