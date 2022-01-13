@@ -53,14 +53,26 @@ export default class extends Controller {
 
   // responding to the stitches track:play event
   play() {
-    this.animation.loadingAnimation()
+    if (this.percentPlayed > 0.0) {
+      console.log('showing')
+      this.animation.showPauseButton()
+    }
+    else
+    {
+      this.animation.loadingAnimation()
+    }
   }
 
   // this is the first "whilePlaying" call
   playing(event) {
     if (!this.shouldProcessEventForTrack(event.detail.trackId)) return;
+    if (this.percentPlayed > 0.0){
+      this.animation.showPauseButton()
+    }
+    else {
+      this.animation.pausingAnimation() // animate from loading
+    }
     this.whilePlaying(event)
-    this.animation.pausingAnimation()
     this.startPlayhead()
     this.isPlaying = true
   }
