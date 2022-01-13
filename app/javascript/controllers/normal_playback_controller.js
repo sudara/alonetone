@@ -7,6 +7,9 @@ let currentlyOpen
 export default class extends PlaybackController {
   // these are added to the targets defined in PlaybackController
   static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
+  static values = {
+    unopenable: Boolean
+  }
 
   playing() {
     if (!this.loaded) {
@@ -24,7 +27,9 @@ export default class extends PlaybackController {
       currentlyOpen.closeDetails()
       currentlyOpen = undefined
     }
-    this.openDetails()
+    if (!this.hasUnopenableValue) {
+      this.openDetails()
+    }
     this.showSeekBar()
     this.registeredListen = true
     this.alreadyPlayed = true
@@ -44,12 +49,12 @@ export default class extends PlaybackController {
       // otherwise open the track reveal section
       e.preventDefault()
 
-      const wasOpen = this.element.classList.contains('open')
+      const isAlreadyOpen = this.element.classList.contains('open')
       // if another track details is open, close it
       if (currentlyOpen) {
         currentlyOpen.closeDetails()
       }
-      if (!wasOpen && !this.data.get('openable')) {
+      if (!this.hasUnopenableValue && !isAlreadyOpen ) {
         this.openDetails()
       }
     }

@@ -16,7 +16,8 @@
       </div>
       <div class="sortable" data-playlist-sort-target="sortable">
         <% @playlist.tracks.each do |track| %>
-        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
+        <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-unopenable-value="true"
+           data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
           <%= render partial: 'assets/asset', locals: { asset: track.asset } %>
           <a href="#" class='remove' data-playlist-update-target="remove" data-action="playlist-update#remove">
             <div class="remove_inner">
@@ -54,7 +55,10 @@
         </div>
         <div id="your_uploads" class="playlist_source">
           <% @assets.each do |asset| %>
-            <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-openable="false" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>">
+            <div class="asset playlist_asset stitches_track" data-controller="normal-playback playlist-update"
+            data-normal-playback-unopenable-value="true" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>"
+            data-action="track:play->normal-playback#play track:pause->normal-playback#pause track:playing->normal-playback#playing
+            track:ended->normal-playback#stop">
               <%= render partial: 'assets/asset', locals: { asset: asset } %>
               <a href="#" class='add' data-playlist-update-target="add" data-action="playlist-update#add">
                 <div class="add_inner">
