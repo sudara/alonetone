@@ -17,6 +17,6 @@ class DiscourseSsoController < ApplicationController
     sso.admin = current_user.admin?
     sso.avatar_url = current_user.avatar_image_location(variant: :large_avatar).to_s
 
-    redirect_to sso.to_url(Rails.configuration.alonetone.discourse_url)
+    redirect_to sso.to_url(Rails.configuration.alonetone.discourse_url), allow_other_host: true
   end
 end
