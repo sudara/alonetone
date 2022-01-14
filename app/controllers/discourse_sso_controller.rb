@@ -1,4 +1,4 @@
-# This is one of the few things in alonetone that is production-only
+# For details: https://meta.discourse.org/t/discourseconnect-official-single-sign-on-for-discourse-sso/13045
 require 'single_sign_on'
 
 class DiscourseSsoController < ApplicationController

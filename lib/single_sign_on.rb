@@ -65,7 +65,7 @@ class SingleSignOn
 
   def self.parse(payload, sso_secret = nil, **init_kwargs)
     sso = new(**init_kwargs)
-    sso.sso_secret = sso_secret if sso_secret
+    sso.sso_secret = sso_secret
 
     parsed = Rack::Utils.parse_query(payload)
     decoded = Base64.decode64(parsed["sso"])
@@ -90,6 +90,8 @@ class SingleSignOn
     end
 
     decoded_hash.each do |k, v|
+      puts k
+      puts v
       if field = k[/^custom\.(.+)$/, 1]
         sso.custom_fields[field] = v
       end
@@ -115,12 +117,12 @@ class SingleSignOn
   end
 
   def sign(payload, secret = nil)
-    secret = secret || sso_secret
+    secret ||= sso_secret
     OpenSSL::HMAC.hexdigest("sha256", secret, payload)
   end
 
   def to_json
-    self.to_h.to_json
+    to_h.to_json
   end
 
   def to_url(base_url = nil)
@@ -130,7 +132,7 @@ class SingleSignOn
 
   def payload(secret = nil)
     payload = Base64.strict_encode64(unsigned_payload)
-    "sso=#{CGI::escape(payload)}&sig=#{sign(payload, secret)}"
+    "sso=#{CGI.escape(payload)}&sig=#{sign(payload, secret)}"
   end
 
   def unsigned_payload
