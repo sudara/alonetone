@@ -13,7 +13,7 @@ invalid_file_original:
   name: audio_file
   record: invalid_file (Asset)
   blob: invalid_file_original
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 valid_arthur_mp3_original:
   name: audio_file
   record: valid_arthur_mp3 (Asset)
