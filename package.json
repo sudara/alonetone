@@ -40,6 +40,6 @@
   },
   "browserslist": [
     "defaults",
-    "Firefox ESR"
+    "not IE 11"
   ]
 }
