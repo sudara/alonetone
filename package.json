@@ -36,10 +36,14 @@
   "babel": {
     "presets": [
       "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-private-methods"
     ]
   },
   "browserslist": [
     "defaults",
-    "not IE 11"
+    "Firefox ESR"
   ]
 }
