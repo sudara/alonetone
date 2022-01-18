@@ -31,7 +31,8 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-dev-server": "^4.7.3"
+    "webpack-dev-server": "^4.7.3",
+    "whybundled": "^2.0.0"
   },
   "babel": {
     "presets": [
