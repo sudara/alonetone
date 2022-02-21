@@ -1,32 +1,57 @@
 {
   "dependencies": {
-    "@alonetone/stitches": "^2.0.14",
-    "@babel/core": "^7.12.9",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.12.7",
-    "@bugsnag/js": "^7.5.3",
-    "@rails/ujs": "^6.1.0",
-    "@rails/webpacker": "^5.2.1",
-    "babel-loader": "^8.2.2",
+    "@alonetone/stitches": "^2.1.2",
+    "@babel/core": "7",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "7",
+    "@babel/preset-env": "7",
+    "@babel/runtime": "7",
+    "@bugsnag/js": "^7.16.1",
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
+    "@hotwired/turbo-rails": "^7.1.1",
+    "@rails/ujs": "^7.0.2-2",
+    "babel-loader": "8",
+    "babel-plugin-macros": "^3.1.0",
     "babel-preset-minify": "^0.5.1",
-    "gsap": "^3.6.0",
+    "compression-webpack-plugin": "9",
+    "gsap": "^3.9.1",
     "local-time": "^2.1.0",
+    "pnp-webpack-plugin": "^1.7.0",
     "rails-erb-loader": "^5.5.2",
     "seedrandom": "^3.0.5",
-    "sortablejs": "^1.13.0",
-    "stimulus": "^2.0.0",
-    "turbolinks": "^5.2.0"
+    "shakapacker": "6.1.1",
+    "sortablejs": "^1.14.0",
+    "terser-webpack-plugin": "5",
+    "turbolinks": "^5.2.0",
+    "webpack": "5",
+    "webpack-assets-manifest": "5",
+    "webpack-cli": "4",
+    "webpack-merge": "5",
+    "webpack-sources": "^3.2.3"
   },
   "devDependencies": {
-    "@percy/agent": "^0.28.5",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.15.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "webpack-bundle-analyzer": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "@babel/eslint-parser": "^7.17.0",
+    "@percy/cli": "^1.0.0-beta.75",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-dev-server": "^4.7.4",
+    "whybundled": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "./node_modules/shakapacker/package/babel/preset.js"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-private-methods"
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "Firefox ESR"
+  ]
 }

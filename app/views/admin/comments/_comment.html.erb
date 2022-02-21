@@ -18,7 +18,7 @@
   </div>
   <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
   <div class="button_column">
-    <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, remote: true, data: { 'admin-comment-target': 'spamButton', action: 'click->admin--comment#markAsSpam' } %></div>
-    <div><%= button_to "Restore", unspam_admin_comment_path(comment), data: { 'admin--comment-target': 'restoreButton', action: 'click->admin--comment#markAsRestored' }, method: :put, remote: true %></div>
+    <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, data: { 'admin-comment-target': 'spamButton', action: 'click->admin--comment#markAsSpam' } %></div>
+    <div><%= button_to "Restore", unspam_admin_comment_path(comment), data: { 'admin--comment-target': 'restoreButton', action: 'click->admin--comment#markAsRestored' }, method: :put %></div>
   </div>
 </div>

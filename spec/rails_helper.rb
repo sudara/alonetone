@@ -8,7 +8,7 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
-require 'percy'
+require 'percy/capybara'
 
 # The suite needs to be able to connect to localhost for feature specs.
 # Percy sends its build response out of the test process so it also needs to connect
@@ -106,6 +106,11 @@ RSpec.configure do |config|
     activate_authlogic
   end
 
+  # # load seeds only on the feature specs
+  # config.before(:suite, js: true) do
+  #   Rails.application.load_seed
+  # end
+
   config.after(:each, type: :feature, js: true) do |test|
     if !test.metadata[:allow_js_errors]
       errors = page.driver.browser.manage.logs.get(:browser)
@@ -113,6 +118,9 @@ RSpec.configure do |config|
         errors.each do |error|
           # we really don't care about CORS stuff
           next if error.message.include?('font')
+
+          # we also expect some requests to 422
+          next if error.message.include?('422')
 
           expect(error.level).not_to eq('SEVERE'), error.message
           next unless error.level == 'WARNING'

@@ -9,8 +9,8 @@ module PlaylistsHelper
 
   # DIV element which is ‘filled’ by the JavaScript with a a generated pattern based on the
   # playlist title.
-  def playlist_cover_div
-    content_tag(:div, '', class: 'no_pic')
+  def playlist_cover_div(playlist)
+    content_tag(:div, '', class: 'generated_svg_cover', title: playlist.title, data: { "controller": "svg-cover" })
   end
 
   # Returns a URL to the playlist's cover or nil when there is no cover.
@@ -31,7 +31,7 @@ module PlaylistsHelper
   # playlist has no cover or show_dummy_image is enabled.
   def playlist_cover(playlist, variant:)
     if Rails.application.show_dummy_image? || !playlist.cover_image_present?
-      playlist_cover_div
+      playlist_cover_div(playlist)
     else
       playlist_cover_image(playlist, variant: variant)
     end

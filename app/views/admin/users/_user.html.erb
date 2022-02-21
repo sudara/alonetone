@@ -30,9 +30,9 @@
     <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0  && !user.soft_deleted? %></div>
   </div>
   <div class="button_column">
-    <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put, remote: true, data: { 'admin--user-target': 'unspamButton', action: 'click->admin--user#hideUnspamButton' } %>
-    <%= button_to "Spam User", spam_admin_user_path(user), method: :put, remote: true, data: { 'admin--user-target': 'spamButton', action: 'click->admin--user#hideSpamAndShowRestoreButton' } %>
-    <%= button_to "Delete User", delete_admin_user_path(user), method: :put, remote: true, data: { 'admin--user-target': 'deleteButton', action: 'admin--user#showRestoreButton' } %></td>
-    <%= button_to "Restore User", restore_admin_user_path(user), method: :put, remote: true, data: { 'admin--user-target': 'restoreButton', action: 'click->admin--user#showDeleteAndSpamButton' } %></td>
+    <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put, data: { 'admin--user-target': 'unspamButton', action: 'click->admin--user#hideUnspamButton' } %>
+    <%= button_to "Spam User", spam_admin_user_path(user), method: :put, data: { 'admin--user-target': 'spamButton', action: 'click->admin--user#hideSpamAndShowRestoreButton' } %>
+    <%= button_to "Delete User", delete_admin_user_path(user), method: :put, data: { 'admin--user-target': 'deleteButton', action: 'admin--user#showRestoreButton' } %></td>
+    <%= button_to "Restore User", restore_admin_user_path(user), method: :put, data: { 'admin--user-target': 'restoreButton', action: 'click->admin--user#showDeleteAndSpamButton' } %></td>
   </div>
 </div>

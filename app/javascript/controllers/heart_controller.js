@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus"
 import FaveAnimation from '../animation/fave_animation'
 
 export default class extends Controller {

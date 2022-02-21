@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
@@ -22,8 +22,8 @@ export default class extends Controller {
     const calculatedAvatarWidth = totalAvailableWidth / avatarsPerRow
 
     if (this.totalFollowees >= avatarsPerRow) {
-      const childrenArray = [...this.element.children]
-      childrenArray.forEach((avatar) => {
+      const avatars = this.element.getElementsByClassName('user')
+      Array.from(avatars).forEach((avatar) => {
         avatar.style.width = `${calculatedAvatarWidth}px`
         avatar.style.height = `${calculatedAvatarWidth}px`
       })

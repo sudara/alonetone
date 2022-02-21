@@ -35,7 +35,8 @@
       border-top-right-radius: 0px;
     }
   }
-  .track_content {
+
+  #playlist-track {
     flex: 1;
     min-width: 300px;
     @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
@@ -45,5 +46,10 @@
       margin-left: auto!important;
       margin-right: auto;
     }
+  } 
+
+  .track_content {
+    width: 100%;
+    flex: 1;
   }
 }

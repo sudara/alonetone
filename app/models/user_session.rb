@@ -3,15 +3,14 @@ class UserSession < Authlogic::Session::Base
 
   # override authlogic's version of this to take into account @sudo
   def update_info
-    if !controller.session[:sudo]
+    unless controller.session[:sudo]
       record.last_login_at = record.current_login_at
-      record.current_login_at = klass.default_timezone == :utc ? Time.now.utc : Time.now
+      record.current_login_at = ActiveRecord.default_timezone == :utc ? Time.now.utc : Time.now
       record.last_login_ip = record.current_login_ip
       record.current_login_ip = controller.request.ip
-      # update_info can be called before user and it's associated profile is created
-      if record.profile
-        record.profile.update_attribute :user_agent, controller.request.user_agent
-      end
+
+      # update_info can be called before user and its associated profile is created
+      record.profile&.update_attribute :user_agent, controller.request.user_agent
     end
   end
 end

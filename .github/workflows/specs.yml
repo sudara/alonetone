@@ -1,6 +1,6 @@
 name: Specs and Percy
 
-on: [push, pull_request] # push OR PR
+on: [push] # push OR PR
 
 env:
   RAILS_ENV: test
@@ -11,7 +11,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false # let both suites run to completion
@@ -26,7 +26,9 @@ jobs:
     steps:
     - name: Installing apt dependencies
       run: |
-        sudo apt-get install libsndfile-dev lame libvips libvips-dev # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
+        sudo add-apt-repository ppa:chris-needham/ppa
+        sudo apt-get update
+        sudo apt-get install libvips libvips-dev audiowaveform # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
         vips --version
 
     - uses: actions/checkout@v2
@@ -41,15 +43,16 @@ jobs:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
           **/packs-test
-          tmp/cache/webpacker
-        key: ${{ runner.os }}-yarn3-${{ hashFiles('**/yarn.lock') }}
+          tmp/webpacker
+          ./node_modules/
+        key: ${{ runner.os }}-yarn6-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-yarn3-
+          ${{ runner.os }}-yarn6-
 
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.2
+        ruby-version: 3.0.2
         bundler-cache: true
 
     - name: Yarn install
@@ -59,10 +62,9 @@ jobs:
     - name: Put MorphSVGPlugin.js in place for feature specs
       run: |
         printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
-        cat app/javascript/animation/MorphSVGPlugin.js
       if: ${{ matrix.morph }}
 
-    - name: Copy config and setup db
+    - name: Start db, copy config, setup db
       run: |
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load

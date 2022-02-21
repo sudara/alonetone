@@ -7,8 +7,8 @@ sudara:
   salt: <%= salt = SecureRandom.hex(64) %>
   persistence_token: <%= SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 5.days.ago.to_s :db %>
-  updated_at: <%= 5.days.ago.to_s :db %>
+  created_at: <%= 5.days.ago.to_formatted_s :db %>
+  updated_at: <%= 5.days.ago.to_formatted_s :db %>
   admin: true
   dark_theme: true
   assets_count: 3
@@ -19,10 +19,10 @@ arthur:
   email: arthur@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 1.days.ago.to_s :db %>
-  updated_at: <%= 1.days.ago.to_s :db %>
-  last_request_at: <%= 1.days.ago.to_s :db %>
-  last_login_at: <%= 1.days.ago.to_s :db %>
+  created_at: <%= 1.days.ago.to_formatted_s :db %>
+  updated_at: <%= 1.days.ago.to_formatted_s :db %>
+  last_request_at: <%= 1.days.ago.to_formatted_s :db %>
+  last_login_at: <%= 1.days.ago.to_formatted_s :db %>
   current_login_ip: 9.9.9.9
   assets_count: 3
 
@@ -32,16 +32,16 @@ aaron:
   email: aaron@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 1.days.ago.to_s :db %>
-  updated_at: <%= 1.days.ago.to_s :db %>
+  created_at: <%= 1.days.ago.to_formatted_s :db %>
+  updated_at: <%= 1.days.ago.to_formatted_s :db %>
 
 not_activated:
   login: ben
   email: ben@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 1.days.ago.to_s :db %>
-  updated_at: <%= 1.days.ago.to_s :db %>
+  created_at: <%= 1.days.ago.to_formatted_s :db %>
+  updated_at: <%= 1.days.ago.to_formatted_s :db %>
   perishable_token: 8eou87daoeuhdtn
 
 newly_approved:
@@ -49,8 +49,8 @@ newly_approved:
   email: newmusician@domain.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 1.days.ago.to_s :db %>
-  updated_at: <%= 1.days.ago.to_s :db %>
+  created_at: <%= 1.days.ago.to_formatted_s :db %>
+  updated_at: <%= 1.days.ago.to_formatted_s :db %>
   perishable_token: 8eou87daoeuhdtn
 
 # moderator
@@ -59,8 +59,8 @@ sandbags:
   email: sandbags@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 1.days.ago.to_s :db %>
-  updated_at: <%= 1.days.ago.to_s :db %>
+  created_at: <%= 1.days.ago.to_formatted_s :db %>
+  updated_at: <%= 1.days.ago.to_formatted_s :db %>
   moderator: true
 
 # another joe blow
@@ -69,8 +69,8 @@ joeblow:
   email: joe@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 1.days.ago.to_s :db %>
-  updated_at: <%= 1.days.ago.to_s :db %>
+  created_at: <%= 1.days.ago.to_formatted_s :db %>
+  updated_at: <%= 1.days.ago.to_formatted_s :db %>
 
 # Brand new user with 25 tracks
 brand_new_user:
@@ -78,8 +78,8 @@ brand_new_user:
   email: brandnewuser@example.com
   salt: <%= salt = SecureRandom.hex(64) %>
   crypted_password: <%= scrypt("test" + salt) %>
-  created_at: <%= 5.hours.ago.to_s :db %>
-  updated_at: <%= 5.hours.ago.to_s :db %>
+  created_at: <%= 5.hours.ago.to_formatted_s :db %>
+  updated_at: <%= 5.hours.ago.to_formatted_s :db %>
   assets_count: 25
 
 # Jamie Kiesl is a 35-year-old human resources manager who lives in Mequon, Wisconsin. She is also

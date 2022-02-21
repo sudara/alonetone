@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_back_or_default(default = '/')
-    redirect_to(session[:return_to] || default)
+    redirect_to session[:return_to] || default, status: 303
     session[:return_to] = nil
   end
 
@@ -172,10 +172,6 @@ class ApplicationController < ActionController::Base
 
   def authorized?
     logged_in?
-  end
-
-  def latest_forum_topics
-    Thredded::Topic.all.order_recently_posted_first.joins(:last_user).includes(:last_user).moderation_state_visible_to_user(current_user || Thredded::NullUser.new).limit(4)
   end
 
   def add_user_info_to_bugsnag(report)

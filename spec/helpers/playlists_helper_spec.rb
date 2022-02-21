@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe PlaylistsHelper, type: :helper do
 
   it 'generates a div which is filled by the JavaScript with generated cover' do
-    element = playlist_cover_div
+    element = playlist_cover_div(playlists(:will_studd_rockfort))
     expect(element).to match_css('div[class]')
   end
 

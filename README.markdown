@@ -43,12 +43,12 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 
 ### Current stack
 
-* Rails 6.1
+* Rails 7
 * [Stitches](http://github.com/sudara/stitches) for audio playback
 * Sidekiq for jobs
 * Active Storage & s3
 * Fastly for CDN image delivery and thumbnailing
-* [Stimulus js](http://stimulusjs.org) 2.0
+* [Hotwire Turbo](https://turbo.hotwire.dev/) and [Stimulus js](http://stimulusjs.org) 3.0
 
 ### Current feature set
 

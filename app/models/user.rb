@@ -304,7 +304,7 @@ class User < ApplicationRecord
     when "not_spam"
       with_deleted.where(is_spam: false).recent
     when "invited"
-      joins(:mass_invite_signup)
+      joins(:mass_invite_signup).order('created_at DESC')
     when String
       with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%' or display_name like '%#{filter}%'").recent
     else

@@ -1,4 +1,4 @@
-# This is one of the few things in alonetone that is production-only
+# For details: https://meta.discourse.org/t/discourseconnect-official-single-sign-on-for-discourse-sso/13045
 require 'single_sign_on'
 
 class DiscourseSsoController < ApplicationController
@@ -17,6 +17,6 @@ class DiscourseSsoController < ApplicationController
     sso.admin = current_user.admin?
     sso.avatar_url = current_user.avatar_image_location(variant: :large_avatar).to_s
 
-    redirect_to sso.to_url(Rails.configuration.alonetone.discourse_url)
+    redirect_to sso.to_url(Rails.configuration.alonetone.discourse_url), allow_other_host: true
   end
 end

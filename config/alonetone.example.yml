@@ -34,6 +34,8 @@ development:
   google_analytics_tracking_id: ~
   # Configure Typekit token to start using Typekit for fonts.
   typekit_embed_token: ~
+  discourse_secret: usedbysso
+  discourse_url: https://someforum.test
 
 # Some services in the application like Active Storage and Akismet have to be
 # configured when the Rails process boots. To ensure the proper settings in
@@ -58,3 +60,5 @@ test:
   # Use a fake rakismet key to allow requests to happen in the test
   # environment.
   rakismet_key: unusable
+  discourse_secret: usedbysso
+  discourse_url: https://someforum.test

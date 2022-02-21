@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['fileField', 'fileLabel', 'image']
@@ -13,7 +13,7 @@ export default class extends Controller {
 
   removePic(e) {
     e.preventDefault()
-    this.imageTarget.innerHTML = '<div class="no_pic"></div>'
+    this.imageTarget.innerHTML = '<div class="generated_svg_cover" data-controller="svg-cover"></div>'
     this.fileFieldTarget.value = ''
   }
 

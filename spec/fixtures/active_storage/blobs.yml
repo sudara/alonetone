@@ -31,7 +31,7 @@ invalid_file_original:
   metadata: "{}"
   byte_size: <%= 1.megabyte %>
   checksum: <%= Digest::MD5.base64digest('OK!') %>
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
   service_name: filesystem
 valid_arthur_mp3_original:
   key: mp3/4/Song5.mp3

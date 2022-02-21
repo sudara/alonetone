@@ -1,5 +1,4 @@
-<%= form_with(model: asset, url: "/#{@user.login}/tracks/#{asset.id}",
-  local: (true unless @assets), data: { action: 'ajax:beforeSend->save#spin ajax:success->save#success ajax:error->save#error ajax:complete->save#complete' }) do |f| %>
+<%= form_with(model: asset, url: "/#{@user.login}/tracks/#{asset.id}", data: { action: 'save#spin turbo:submit-end->save#success turbo:submit-end->save#complete' }) do |f| %>
   <%= render partial: 'shared/errors', locals: { errors: asset.errors } %>
 
   <div class="track_edit">

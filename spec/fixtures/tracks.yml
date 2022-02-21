@@ -3,33 +3,33 @@ owp1:
   asset: valid_mp3
   position: 1
   user: sudara
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 owp2:
   playlist: owp
   asset: valid_mp3
   position: 2
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 owp3:
   playlist: owp
   asset: valid_mp3
   position: 3
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 
 mix1:
   playlist: mix
   asset: valid_mp3
   position: 1
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 mix2:
   playlist: mix
   asset: valid_mp3
   position: 2
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 mix3:
   playlist: mix
   asset: valid_arthur_mp3
   position: 3
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 
 fav1:
   playlist: arthurs_favorites
@@ -37,13 +37,13 @@ fav1:
   user: arthur
   position: 1
   is_favorite: true
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 
 no_playlist_id:
   asset: valid_mp3
   user: sudara
   position: 1
-  created_at: <%= 1.day.ago.to_s :db %>
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
 
 # Three of the four assets meant for Will's Rockfort playlist.
 will_studd_rockfort_1:

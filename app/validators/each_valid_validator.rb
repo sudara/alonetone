@@ -13,7 +13,7 @@ class EachValidValidator < ActiveModel::EachValidator
       record.errors.add(
         attribute,
         :invalid,
-        options.merge(invalid_count: invalid_count)
+        **options.merge(invalid_count: invalid_count)
       )
     end
   end

@@ -1,5 +1,5 @@
+import { Controller } from '@hotwired/stimulus'
 import Rails from '@rails/ujs'
-import { Controller } from 'stimulus'
 import PlaylistSortController from './playlist_sort_controller'
 import { flashController } from './flash_controller'
 

@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 import { gsap } from 'gsap'
 
 export default class extends Controller {
@@ -13,7 +13,7 @@ export default class extends Controller {
   }
 
   complete() {
-    gsap.to(this.spinnerTarget, .25, { autoAlpha: 0 }).delay(.25)
+    gsap.to(this.spinnerTarget, 0.25, { autoAlpha: 0 }).delay(0.25)
     gsap.to(this.responseTarget, 1, { autoAlpha: 0 }).delay(4)
   }
 

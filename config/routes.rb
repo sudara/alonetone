@@ -1,8 +1,8 @@
 require 'sidekiq/web'
 require 'moderator_constraint'
 
-Alonetone::Application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq', :constraints => ModeratorConstraint.new
+Rails.application.routes.draw do
+  # mount Sidekiq::Web => '/sidekiq', :constraints => ModeratorConstraint.new
 
   namespace :admin do
     get 'possibly_deleted_user/:id', :to => 'users#show', as: 'possibly_deleted_user'
@@ -38,8 +38,6 @@ Alonetone::Application.routes.draw do
     end
     resources :mass_invites, param: :token
   end
-
-  mount Thredded::Engine => '/forums'
 
   get '/get_an_account', :to => 'account_requests#new'
   resources 'account_requests', only: :create
@@ -94,7 +92,7 @@ Alonetone::Application.routes.draw do
   get 'comments' => 'comments#index', :as => 'all_comments'
   get 'playlists' => 'playlists#all', :as => 'all_playlists'
 
-  get 'toggle_favorite' => 'users#toggle_favorite'
+  put 'toggle_favorite' => 'users#toggle_favorite'
 
   match 'search' => 'search#index', via: [:get, :post]
   match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
@@ -115,6 +113,7 @@ Alonetone::Application.routes.draw do
   get ':login/history' => 'listens#index', :as => 'listens'
   get ':login/comments' => 'comments#index', :as => 'user_comments'
   get '/:login/toggle-follow' => 'following#toggle_follow', as: :toggle_follow
+  put '/:login/toggle-follow' => 'following#toggle_follow', as: :put_toggle_follow
 
   get ':id' => 'users#show', :as => "user_home" # DEPRECATED (duplicate)
   resources :users, :path => "/" do

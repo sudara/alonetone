@@ -12,11 +12,9 @@ class UserSessionsController < ApplicationController
     else
       if params[:user_session][:login] && (user = User.find_by_login(params[:user_session][:login])) && !user.active?
         flash.now[:error] = "It looks like your account is not active. <br/> Do you have an email from us with activation details?".html_safe
-      else
-        flash.now[:error] = "There was a problem logging you in! Please check your login and password."
       end
       @user = User.new
-      render action: :new
+      render 'new', status: :unprocessable_entity
     end
   end
 
