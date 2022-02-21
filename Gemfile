@@ -40,7 +40,7 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-gem 'webpacker', '6.0.0.rc.6'
+gem 'shakapacker'
 gem 'sass-rails'
 gem 'yui-compressor'
 gem 'turbo-rails'
