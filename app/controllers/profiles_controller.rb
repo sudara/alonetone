@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def update
     @user.profile.update(profile_params)
-    redirect_to edit_user_path(@user), ok: "Update your links", status: 303
+    redirect_to edit_user_path(@user), ok: "Saved your links!", status: 303
   end
 
   protected
