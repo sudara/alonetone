@@ -26,6 +26,11 @@
         </div>
       <% end %>
       <div class="edit_save">
+        <% if @single_track_page %>
+        <%= link_to "Delete", user_track_path(@asset.user, @asset), class: 'delete_link', data: { turbo_method: 'delete', turbo_confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
+        title: 'delete this track permanently ' %>
+        <% end %>
+
         <div class="submit_wrapper">
           <% if !@single_track_page %>
             <div class="ajax_waiting" data-save-target="response">
@@ -48,8 +53,3 @@
   </div>
 </div>
 <% end %>
-
-    <% if @single_track_page %>
-    <%= button_to "Delete", user_track_path(@asset.user, @asset), method: 'delete', class: 'delete_link', form: { data: { turbo_confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'}},
-    title: 'delete this track permanently ' %>
-  <% end %>
