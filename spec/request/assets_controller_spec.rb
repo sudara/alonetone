@@ -339,7 +339,7 @@ RSpec.describe AssetsController, type: :request do
     it "can delete their track" do
       delete "/#{user.login}/tracks/#{asset.to_param}"
       expect(response).to redirect_to(user_tracks_path(user))
-      expect(response.code).to eql(303)
+      expect(response.code).to eql("303")
     end
 
     xit "does not update the audio file for an asset when it's spam" do
