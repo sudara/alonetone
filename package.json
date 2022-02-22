@@ -2,7 +2,6 @@
   "dependencies": {
     "@alonetone/stitches": "^2.1.2",
     "@babel/core": "7",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-transform-runtime": "7",
     "@babel/preset-env": "7",
     "@babel/runtime": "7",
@@ -43,11 +42,7 @@
   },
   "babel": {
     "presets": [
-      "./node_modules/shakapacker/package/babel/preset.js"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-private-methods"
+      "./config/webpack/preset.js"
     ]
   },
   "browserslist": [

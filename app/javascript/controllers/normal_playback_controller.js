@@ -115,6 +115,7 @@ export default class extends PlaybackController {
   // turbolinks caches pages, so let's make sure things are sane when we return
   disconnect() {
     super.disconnect()
+
     if (this.animation) {
       this.animation.reset()
     }

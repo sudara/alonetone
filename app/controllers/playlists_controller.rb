@@ -132,7 +132,7 @@ class PlaylistsController < ApplicationController
   def destroy
     @playlist.destroy
     flash[:notice] = "That playlist is toast."
-    redirect_to(user_playlists_url(@user))
+    redirect_to(user_home_url(@user), status: :see_other)
   end
 
   protected

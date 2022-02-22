@@ -41,8 +41,16 @@ RSpec.describe PlaylistsController, type: :request do
     end
   end
 
-  context "editing" do
+  context "deleting" do
+    it "redirects to user home" do
+      create_user_session(users(:arthur))
+      delete("/arthur/playlists/mix-tape")
+      expect(response).to redirect_to('/arthur')
+      expect(response.code).to eql("303")
+    end
+  end
 
+  context "editing" do
     it "redirects to new permalink" do
       create_user_session(users(:arthur))
       put(

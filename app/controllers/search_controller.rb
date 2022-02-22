@@ -2,9 +2,15 @@ class SearchController < ApplicationController
   before_action :deliver_results
 
   def index
-    respond_to do |wants|
-      wants.html
-      wants.js
+    if request.post? && params[:query].present?
+      redirect_to search_query_path(params[:query])
+    elsif params[:query].present?
+      @query = session[:last_search] = params[:query]
+      @users = User.with_preloads.joins(:profile).conditions_by_like(@query).limit(15)
+      # need to pass additional param query
+      # for pagy to only paginate via matched query
+      @assets_pagy, @assets = pagy(Asset.published.conditions_by_like(@query), items: 15, params: { query: @query })
+      @page_title = "#{@query} songs and #{@query} artists"
     end
   end
 

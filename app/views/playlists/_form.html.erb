@@ -82,7 +82,7 @@
           This playlist will be hidden until it has <span class="only_user_name">at least 2 tracks</span>
         </div>
 
-        <%= link_to 'Delete', user_playlist_path(@user, @playlist.permalink), :class => "delete_playlist", method: :delete, data: { confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>
+        <%= link_to 'Delete', user_playlist_path(@user, @playlist.permalink), :class => "delete_playlist", data: { turbo: 'true', turbo_method: 'delete', turbo_confirm: 'Are you sure, it will be gone forrrrreevrrrrrrr? Note: the actual tracks will remain, just the playlist will be deleted.' } if @playlist.persisted? %>
 
         <% if @playlist.persisted? %>
           <%= submit_tag "Save playlist" %>

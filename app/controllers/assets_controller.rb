@@ -171,10 +171,7 @@ class AssetsController < ApplicationController
     flash[:ok] = "We threw the puppy away. No one can listen to it again " \
                  "(unless you reupload it, of course ;)"
 
-    respond_to do |format|
-      format.html { redirect_to user_tracks_url(current_user) }
-      format.xml  { head :ok }
-    end
+    redirect_to user_tracks_url(current_user), status: :see_other
   end
 
   def stats

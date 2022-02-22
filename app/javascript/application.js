@@ -60,6 +60,9 @@ function handlers() {
         Bugsnag.notify(`MP3 Playback Error: ${data.code} ${data.message} ${data.filename}`)
       },
     })
+  } else {
+    // transitioning to a playlist player, we'll need to pause
+    playlist && playlist.reset()
   }
 
   document.querySelectorAll('.slide_open_href').forEach((link) => {
