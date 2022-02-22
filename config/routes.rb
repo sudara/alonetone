@@ -94,7 +94,7 @@ Rails.application.routes.draw do
 
   put 'toggle_favorite' => 'users#toggle_favorite'
 
-  match 'search' => 'search#index', via: [:get, :post]
+  match 'search' => 'search#index', via: [:post]
   match 'search/:query' => 'search#index', :as => 'search_query', via: [:get, :post]
 
   root :to => 'assets#latest'

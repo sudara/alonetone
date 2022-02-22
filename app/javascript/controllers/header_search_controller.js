@@ -2,9 +2,18 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ['form', 'query', 'button', 'reveal']
-  
-  submitForm() {
-    this.formTarget.submit()
+
+  submitForm(event) {
+    event.preventDefault();
+    if (this.queryTarget.value != "") {
+      this.formTarget.submit()
+    }
+  }
+
+  submitFormOnEnter(event) {
+    if (event.keyCode == 13){
+      this.submitForm(event)
+    }
   }
 
   revealQuery(event) {
