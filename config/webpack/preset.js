@@ -1,3 +1,17 @@
+/*
+
+This file should go away. 
+
+However, we want to support older broswer such as FF ESR.
+
+The problem is that stimulus now requires ES6+ features and doesn't
+target ES5 anymore. So we need to tell babel to do that for us.
+
+See:
+https://github.com/rails/webpacker/pull/3189#issuecomment-994959987
+
+
+*/
 const { moduleExists } = require('shakapacker')
 
 module.exports = function config(api) {
