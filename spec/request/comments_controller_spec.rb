@@ -54,4 +54,20 @@ RSpec.describe CommentsController, type: :request do
       expect(response).not_to be_successful
     end
   end
+
+  context "deleting" do
+
+    it "is not possible by a guest" do
+      comment = comments(:public_comment_on_asset_by_user)
+      delete(comment_path(comment))
+      expect(response).to redirect_to('/login')
+    end
+
+    it "by the comment recepient" do
+      create_user_session(users(:arthur))
+      comment = comments(:public_comment_on_asset_by_user)
+      delete(comment_path(comment))
+      expect(response).to have_http_status(303)
+    end
+  end
 end

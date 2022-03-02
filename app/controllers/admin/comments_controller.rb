@@ -15,7 +15,7 @@ module Admin
       @comment.update_attribute :is_spam, false
 
       respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path, status: :see_other) }
         format.js
       end
     end
@@ -25,7 +25,7 @@ module Admin
       @comment.update_attribute :is_spam, true
 
       respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path) }
+        format.html { redirect_back(fallback_location: root_path, status: :see_other) }
         format.js
       end
     end

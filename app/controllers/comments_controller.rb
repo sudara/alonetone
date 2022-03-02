@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
       @comment.destroy
       flash[:ok] = 'We threw away that comment'
     end
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, status: :see_other)
   end
 
   def index
