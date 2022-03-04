@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   layout 'pages', only: %i[about faq help why privacy]
+  layout 'application', only: %i[error four_oh_four]
 
   def twentyfour
     render layout: '24houralbum'
@@ -38,13 +39,13 @@ class PagesController < ApplicationController
   end
 
   def error
-    @page_title = "Something Broke"
-    render layout: 'application', status: 500
+    @page_title = "Something Broke!"
+    render status: 500
   end
 
   def four_oh_four
     @page_title = "404 Not found"
-    render layout: 'application', status: 404
+    render status: 404
   end
 
   def help_an_app_support_brutha_out
