@@ -1,14 +1,13 @@
 
 ## What the heck is alonetone?
 
+<%= themed_illustration_image('about/intro.png') %>
+
 alonetone is a place for small label, DIY, bedroom and other musicians and bands to upload and share their mp3s for free.
 
 We've been around since 2008.
 
 If you make music (and own the rights to it) then this site is built for you.
-
-<%= themed_illustration_image('about/intro.png') %>
-
 
 ## So, it's free?
 
@@ -33,11 +32,12 @@ Beyond that, we want to do it right. Clean, only the essentials. Not too dorked-
 
 ## Can I sell my music here?
 
+<%= themed_illustration_image('about/always-free.png') %>
+
 Nope!
 
 alonetone is for people who want to give our music away and share it freely. There are many places where you can try and sell your tunes (see: [Bandcamp](https://bandcamp.com)).
 
-<%= themed_illustration_image('about/always-free.png') %>
 
 ## Who makes alonetone?
 
@@ -51,11 +51,11 @@ After our initial launch in 2008, most features were inspired, recommended by, a
 
 ## Who pays for all of this? Are you a startup?
 
+<%= themed_illustration_image('about/startup.png') %>
+
 Sudara has historically paid for all hosting, storage, design and development costs.
 
 In late 2020, we started a [patreon](http://patreon.com/alonetone) so these costs could be shared by the community. As of early 2021, server and storage costs are almost covered by other alonetoners.
-
-<%= themed_illustration_image('about/startup.png') %>
 
 
 ## How long will it be free?
@@ -66,8 +66,9 @@ You can help us realize this vision over on [patreon](http://patreon.com/aloneto
 
 ## Is alonetone open source?
 
+<%= themed_illustration_image('about/open-source.png') %>
+
 Yup! We are open-minded to contributions at [github](http://github.com/sudara/alonetone).
 
 Thanks to the nice people at [BrowserStack](https://browserstack.com) and [Skylight](https://skylight.io) for providing their services free for open source projects.
 
-<%= themed_illustration_image('about/open-source.png') %>
