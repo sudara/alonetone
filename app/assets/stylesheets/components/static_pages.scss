@@ -31,6 +31,7 @@
       @include shadow2();
       border-radius: 6px;
       padding-bottom: $baseline;
+      overflow: auto;
       h2 {
         a.anchor {
           position: absolute;
@@ -62,6 +63,7 @@
             }
           }
         }
+        clear: both;
         @include title24();
         color: $static-page-h2-text;
         box-shadow: none;
@@ -102,7 +104,18 @@
       img:not(.hidden) {
         max-height: 300px;
         display: block;
-        margin-left: auto;
+        margin-left: 20px;
+        float: right;
+        margin-bottom: 48px;
+        @media #{$two-column-narrow} {
+          max-width: 55%;
+        }        
+        @media #{$one-column} {
+          float: none;
+          max-width: 100%;
+          margin-bottom: 24px;
+        }
+    
       }
     }
   }
