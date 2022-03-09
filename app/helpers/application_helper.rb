@@ -82,6 +82,11 @@ module ApplicationHelper
     link_to ' ', user_track_path(asset.user.login, asset.permalink, format: :mp3, referer: referer), id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play the mp3'
   end
 
+  def pagy_url_for(pagy, page, absolute: false, html_escaped: false)
+    params = request.query_parameters.merge(pagy.vars[:page_param] => page, only_path: !absolute)
+    html_escaped ? url_for(params).gsub('&', '&amp;') : url_for(params)
+  end
+
   def navigation_item(text, link, options = nil)
     current = current_page?(link) || (link.respond_to?(:merge) && current_page?(link.merge(page: params[:page] || 1)))
     content_tag(:li, link_to_unless_current(text.html_safe, link, options),

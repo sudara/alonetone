@@ -95,21 +95,8 @@ module UsersHelper
     thing && (logged_in? && current_user.last_request_at) && (current_user.last_login_at < thing.created_at.utc)
   end
 
-  def cache_key_for_follows(follows)
-    count          = follows.count
-    max_updated_at = follows.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "follows/all-#{count}/#{max_updated_at}"
-  end
-
-  def digest_for_users
-    if (@sort == "last_seen") || @sort.nil?
-      @users.first.last_request_at
-    else
-      cache_digest(@users)
-    end
-  end
-
   private
+
   def _user_image(user, url:)
     image_tag(
       url.to_s,
