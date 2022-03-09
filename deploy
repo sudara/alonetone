@@ -78,12 +78,17 @@ ssh alonetone '
   echo "Processes during restart"
   cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
 
-  sleep 3
+  sleep 5
 
   echo ""
   echo "Processes end of restart"
   cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+  
+  sleep 5
 
+  echo ""
+  echo "Processes end of restart"
+  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
   '
 
 bundle exec newrelic deployments
