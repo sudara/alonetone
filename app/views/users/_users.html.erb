@@ -38,13 +38,9 @@
   <% end %>
   <ul id="large_users_grid" class="responsive_grid">
     <% if @sort == 'dedicated_listeners' %>
-      <% cache("dedicated/#{params[:page]}/", expires_in: 4.hours) do %>
-        <%= render partial: 'shared/user', collection: @users, as: :user %>
-      <% end %>
+      <%= render partial: 'shared/user', collection: @users, as: :user, cached: true %>
     <% else %>
-      <% cache("#{digest_for_users}/#{params[:page]}") do %>
-        <%= render partial: 'shared/user', collection: @users, as: :user %>
-      <% end %>
+      <%= render partial: 'shared/user', collection: @users, as: :user, cached: true %>
     <% end %>
   </ul>
   <div class="mini_paginator bottom_paginator">
