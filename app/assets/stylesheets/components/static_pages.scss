@@ -4,7 +4,7 @@
     position: static;
     background-color: $static-page-heading-background;
     @media #{$mobile} {
-      background-color: transparent;  
+      background-color: transparent;
     }
   }
   h1.static_page_heading {
@@ -102,20 +102,22 @@
         }
       }
       img:not(.hidden) {
-        max-height: 300px;
+        position: relative;
+        top: -24px;
+        max-height: 200px;
         display: block;
         margin-left: 20px;
         float: right;
-        margin-bottom: 48px;
+        margin-bottom: 24px;
         @media #{$two-column-narrow} {
           max-width: 55%;
-        }        
+        }
         @media #{$one-column} {
           float: none;
           max-width: 100%;
           margin-bottom: 24px;
         }
-    
+
       }
     }
   }
