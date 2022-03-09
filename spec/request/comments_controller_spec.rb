@@ -56,7 +56,6 @@ RSpec.describe CommentsController, type: :request do
   end
 
   context "deleting" do
-
     it "is not possible by a guest" do
       comment = comments(:public_comment_on_asset_by_user)
       delete(comment_path(comment))
