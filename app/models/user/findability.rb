@@ -64,7 +64,7 @@ class User < ApplicationRecord
 
       def last_uploaded
         subquery = select('users.*, max(assets.created_at) as last_uploaded_at')
-          .left_joins(:assets) # could be left_joins if we needed users with no assets
+          .joins(:assets) # could be left_joins if we needed users with no assets
           .group('users.id')
         from(subquery, :users).order('last_uploaded_at desc')
       end
