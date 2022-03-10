@@ -145,6 +145,9 @@ Layout/BlockAlignment:
 Layout/IndentationWidth:
   Enabled: false
 
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
 # Naming
 Naming/PredicateName:
   Enabled: false

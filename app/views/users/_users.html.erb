@@ -37,11 +37,7 @@
   </div>
   <% end %>
   <ul id="large_users_grid" class="responsive_grid">
-    <% if @sort == 'dedicated_listeners' %>
-      <%= render partial: 'shared/user', collection: @users, as: :user, cached: true %>
-    <% else %>
-      <%= render partial: 'shared/user', collection: @users, as: :user, cached: true %>
-    <% end %>
+    <%= render partial: 'shared/user', collection: @users, as: :user, cached: true %>
   </ul>
   <div class="mini_paginator bottom_paginator">
     <%== pagy_nav @pagy %>
