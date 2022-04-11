@@ -356,4 +356,28 @@ RSpec.describe Asset, type: :model do
       expect(asset.reload.permalink).to eq('manufacturer-of-the-finest-cheese-2')
     end
   end
+
+  describe 'license' do
+    let(:asset) { assets(:will_studd_rockfort_combalou) }
+
+    it 'returns a license instance' do
+      expect(asset.license).to be_kind_of(License)
+    end
+
+    it 'defaults to all-rights-reserved' do
+      expect(Asset.new.license_code).to eq('all-rights-reserved')
+      expect(Asset.new.license.name_with_version).to eq('all-rights-reserved')
+    end
+
+    it 'can be changed to other licenses' do
+      asset.update(license_code: License.others.first.name_with_version)
+      expect(asset.license.name_with_version).to eq('by/4.0')
+    end
+
+    it 'cannot be changed to unsupported licenses' do
+      asset.update(license_code: 'unknown')
+      expect(asset.errors[:license_code]).to_not be_empty
+      pp asset.errors.full_messages
+    end
+  end
 end
