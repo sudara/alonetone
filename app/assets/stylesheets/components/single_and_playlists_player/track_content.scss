@@ -215,6 +215,22 @@
           }
         }
       }
+      .license {
+        a {
+          width: 106px;
+          margin-right: 8px;
+          svg {
+            height: 24px;
+            margin-left: 6px;
+            margin-top: 1px;
+            top: 0;
+            fill: $track-content-license-text;
+            circle {
+              fill: none;
+            }
+          }
+        }
+      }
     }
   }
   .track_edit {
@@ -264,6 +280,48 @@
     }
     textarea#asset_credits {
       display: none;
+    }
+    .collapsed {
+      > a {
+        display: inline-block;
+        margin-top: 6px;
+      }
+      .option {
+        &.selected { display: block; }
+        display: none;
+      }
+    }
+    .expanded {
+      > a {
+        display: none;
+      }
+      .option {
+        display: block;
+      }
+    }
+    .options {
+      margin-bottom: 24px;
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div + div {
+        margin-top: 6px;
+      }
+      label {
+        color: $forms-heading-text;
+        margin-bottom: 0 !important;
+      }
+      p.help {
+        color: $forms-hint-text;
+        font-size: 90%;
+        a {
+          color: $forms-hint-background;
+        }
+        a:hover {
+          color: $forms-hint-text;
+        }
+      }
     }
     .track_edit_bottom {
       .new_version {
