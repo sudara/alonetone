@@ -86,7 +86,7 @@
       <% end %>
 
       <div class="license">
-        <%= tag.a(href: @asset.license.url) do %>
+        <%= tag.a(href: @asset.license.url, title: @asset.license.to_s) do %>
           <%= @asset.license.icons %>
         <% end %>
       </div>
