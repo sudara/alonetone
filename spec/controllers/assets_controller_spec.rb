@@ -236,6 +236,14 @@ RSpec.describe AssetsController, type: :controller do
       put :update, params: { id: users(:arthur).assets.first, user_id: users(:arthur).login, asset: { description: 'spammy description' } }
       expect(assigns(:asset).is_spam?).to be_truthy
     end
+
+    it 'changes the license' do
+      akismet_stub_response_ham
+      asset = users(:arthur).assets.first
+      put :update, params: { id: asset, user_id: users(:arthur).login, asset: { license_code: 'by/4.0' } }
+      expect(response).to have_http_status(:redirect)
+      expect(asset.reload.license_code).to eq('by/4.0')
+    end
   end
 
   context "#show" do

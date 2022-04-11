@@ -13,6 +13,22 @@
     <%= f.text_area :description, placeholder: "Tell us a story...", id: "description_#{asset.id}"  %>
     <%= f.text_area :credits, placeholder: "Credits for this track" %>
 
+    <div class="options collapsed" data-controller="license">
+      <% License.all.each_with_index do |license, index| %>
+        <%= tag.div(value: license.name_with_version, class: (f.object.license_code == license.name_with_version) ? 'option selected' : 'option') do %>
+          <%= f.label :license_code do %>
+            <%= f.radio_button :license_code, license.name_with_version %>
+            <%= license.label %>
+          <% end %>
+          <p class="help">
+            <%= license.help %>
+            <%= link_to 'Details', license.url, target: '_blank' if license.url.present? %>
+          </p>
+        <% end %>
+      <% end %>
+      <%= tag.a('Choose another license…', data: { 'action' => 'license#expand'}) %>
+    </div>
+
     <div class="track_edit_bottom">
       <% if @single_track_page %>
         <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
