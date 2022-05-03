@@ -12,10 +12,10 @@
     background-color: $track-content-child-background;
     @include samo-shadow-and-radius();
   }
-  > .edit_links_and_favorite {
-    background: none;
-    margin-bottom: 12px;
-  }
+  // > .edit_links_and_favorite {
+  //   background: none;
+  //   margin-bottom: 12px;
+  // }
   > div.box {
     h2.box {
       padding-left: $baseline / 2;
@@ -34,6 +34,41 @@
       background-color: $track-content-edit-background;
     }
   }
+  .track_favorite,
+  .download_link {
+    a, button {
+        @include image_button();
+      padding-left: 12px;
+      font-size: 12px;
+      height: 26px;
+      width: 94px;
+      position: relative;
+      display: inline-flex;
+      background-color: $track-content-link-background;
+      color: $track-content-link-text;
+      border-radius: 4px;
+      font-weight: bold;
+      line-height: 30px;
+      text-decoration: none;
+      box-sizing: border-box;
+      svg {
+        height: 20px;
+        margin-left: 8px;
+        position: relative;
+        top: 2.5px;
+        path.outline {
+          stroke: rgb(246, 70, 62);
+        }
+      }
+    }
+  }
+
+  .back_favorite_edit_links {
+    display: flex;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
   .track_post,
   .track_edit {
     position: relative;
@@ -42,6 +77,9 @@
     padding-right: $baseline * 1.5;
     padding-bottom: $baseline;
     padding-left: $baseline * 1.5;
+    @media #{$one-column} {
+      padding: $baseline / 2;
+    }
     h1 {
       margin-top: 0;
       margin-bottom: 23px;
@@ -50,70 +88,16 @@
       color: $track-content-track-text;
     }
     h3 {
+      span {
+        font-family: $medium-sans-font;
+        font-weight: normal;
+        color: $track-content-by-text;
+      }
       margin-top: -20px;
       margin-bottom: 32px;
       color: $track-content-artist-text;
     }
-    div.track_stats {
-      font-size: 12px;
-      margin-bottom: 0;
-      display: flex;
-      justify-content: space-between;
-      margin-top: -4px;
-      .created {
-        font-size: 14px;
-        display: block;
-        color: $track-stats-created-text;
-        flex-grow: 1;
-        time {
-          font-weight: bold;
-        }
-      }
-      .favorites {
-        font-size: 12px;
-        font-weight: bold;
-        padding-left: 8px;
-        padding-right: 8px;
-        text-align: center;
-        color: $track-stats-text;
-        display: flex;
-        justify-content: flex-start;
-        i {
-          margin-right: 8px;
-          svg {
-            width: 17px;
-            position: relative;
-            top: -5px;
-            path {
-              fill: $track-stats-icon-favorites-background;
-            }
-          }
-        }
-      }
-      .plays {
-        font-size: 12px;
-        font-weight: bold;
-        padding-left: 8px;
-        text-align: center;
-        color: $track-stats-text;
-        display: flex;
-        justify-content: flex-start;
-        i {
-          margin-right: 8px;
-          svg {
-            width: 17px;
-            position: relative;
-            top: -5px;
-            path {
-              fill: $track-stats-icon-background;
-            }
-          }
-        }
-      }
-    }
-    @media #{$one-column} {
-      padding: $baseline / 2;
-    }
+
     iframe {
       margin-bottom: $baseline;
       max-width: 100%;
@@ -146,7 +130,7 @@
         -webkit-font-smoothing: antialiased;
       }
     }
-    .edit_links_and_favorite {
+    .license_and_download_link {
       box-shadow: none;
       margin-top: $baseline;
       display: flex;
@@ -172,36 +156,9 @@
           color: $track-content-spam-text;
         }
       }
-      .track_favorite button{
-        @include image_button();
-      }
-      .track_favorite,
-      .download_link {
-        a, button {
-          padding-left: 12px;
-          font-size: 12px;
-          height: 26px;
-          width: 94px;
-          position: relative;
-          display: inline-flex;
-          background-color: $track-content-link-background;
-          color: $track-content-link-text;
-          border-radius: 4px;
-          font-weight: bold;
-          line-height: 30px;
-          text-decoration: none;
-          box-sizing: border-box;
-          svg {
-            height: 20px;
-            margin-left: 8px;
-            position: relative;
-            top: 2.5px;
-            path.outline {
-              stroke: rgb(246, 70, 62);
-            }
-          }
-        }
-      }
+      // .track_favorite button{
+      //   @include image_button();
+      // }
       .download_link {
         margin-left: 12px;
         a {
@@ -373,6 +330,67 @@
       }
     }
   }
+
+.track_stats {
+  background-color: transparent;
+  box-shadow: none;
+  font-size: 12px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  .created {
+    font-size: 14px;
+    display: block;
+    color: $track-stats-created-text;
+    flex-grow: 1;
+    time {
+      font-weight: bold;
+    }
+  }
+  .favorites {
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+    color: $track-stats-text;
+    display: flex;
+    justify-content: flex-start;
+    i {
+      margin-right: 8px;
+      svg {
+        width: 17px;
+        position: relative;
+        top: -5px;
+        path {
+          fill: $track-stats-icon-favorites-background;
+        }
+      }
+    }
+  }
+  .plays {
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 8px;
+    text-align: center;
+    color: $track-stats-text;
+    display: flex;
+    justify-content: flex-start;
+    i {
+      margin-right: 8px;
+      svg {
+        width: 17px;
+        position: relative;
+        top: -5px;
+        path {
+          fill: $track-stats-icon-background;
+        }
+      }
+    }
+  }
+}
+
   .comment_asset {
     padding-top: 10px;
     padding-right: 0;
