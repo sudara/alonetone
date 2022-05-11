@@ -12,10 +12,6 @@
     background-color: $track-content-child-background;
     @include samo-shadow-and-radius();
   }
-  // > .edit_links_and_favorite {
-  //   background: none;
-  //   margin-bottom: 12px;
-  // }
   > div.box {
     h2.box {
       padding-left: $baseline / 2;
@@ -26,18 +22,11 @@
       box-sizing: border-box;
     }
   }
-  .edit_link {
-    @include default-button();
-    background-color: $track-content-edit-background;
-    color: $track-content-edit-text;
-    &:hover {
-      background-color: $track-content-edit-background;
-    }
-  }
   .track_favorite,
   .download_link {
-    a, button {
-        @include image_button();
+    a,
+    button {
+      @include image_button();
       padding-left: 12px;
       font-size: 12px;
       height: 26px;
@@ -48,7 +37,7 @@
       color: $track-content-link-text;
       border-radius: 4px;
       font-weight: bold;
-      line-height: 30px;
+      line-height: 26px;
       text-decoration: none;
       box-sizing: border-box;
       svg {
@@ -61,12 +50,38 @@
         }
       }
     }
+    &.track_favorite button {
+      background-color: $back-to-background;
+      svg {
+        height: 24px;
+        margin-left: 6px;
+        top: 0.5px;
+      }
+    }
   }
-
   .back_favorite_edit_links {
     display: flex;
     background-color: transparent;
     box-shadow: none;
+    justify-content: space-between;
+    .back_to_button,
+    .back_to_artist_link,
+    .back_to_track_link,
+    .back_to_playlist_link {
+      margin-bottom: 16px;
+    }
+    .favorite_and_edit {
+      display: flex;
+      .edit_link {
+        margin-left: 12px;
+        @include default-button();
+        background-color: $track-content-edit-background;
+        color: $track-content-edit-text;
+        &:hover {
+          background-color: $track-content-edit-background;
+        }
+      }
+    }
   }
 
   .track_post,
@@ -93,7 +108,7 @@
         font-weight: normal;
         color: $track-content-by-text;
       }
-      margin-top: -20px;
+      margin-top: -13px;
       margin-bottom: 32px;
       color: $track-content-artist-text;
     }
@@ -134,31 +149,10 @@
       box-shadow: none;
       margin-top: $baseline;
       display: flex;
+      justify-content: space-between;
       > :first-child {
-        margin-left: 0!important;
+        margin-left: 0 !important;
       }
-      .edit_links {
-        box-shadow: none;
-        border-radius: 0;
-        margin-left: auto;
-        .edit_link {
-          @include default-button();
-          background-color: $track-content-edit-background;
-          color: $track-content-edit-text;
-          &:hover {
-            background-color: $track-content-edit-background;
-          }
-        }
-        .edit_link + .edit_link {
-          margin-left: 8px;
-          text-transform: uppercase;
-          background-color: $track-content-spam-background;
-          color: $track-content-spam-text;
-        }
-      }
-      // .track_favorite button{
-      //   @include image_button();
-      // }
       .download_link {
         margin-left: 12px;
         a {
@@ -173,9 +167,12 @@
         }
       }
       .license {
+        span {
+          font-family: $medium-sans-font;
+          font-weight: normal;
+          color: $track-content-by-text;
+        }
         a {
-          width: 106px;
-          margin-right: 8px;
           svg {
             height: 24px;
             margin-left: 6px;
@@ -244,7 +241,9 @@
         margin-top: 6px;
       }
       .option {
-        &.selected { display: block; }
+        &.selected {
+          display: block;
+        }
         display: none;
       }
     }
@@ -304,7 +303,7 @@
         overflow: auto;
         margin-top: $baseline;
         .delete_link {
-          @include default-button('primary_danger');
+          @include default-button("primary_danger");
         }
         .small_spinner {
           display: none;
@@ -315,7 +314,7 @@
         input {
           cursor: pointer;
           float: left;
-          @include default-button('primary');
+          @include default-button("primary");
         }
       }
     }
@@ -331,71 +330,73 @@
     }
   }
 
-.track_stats {
-  background-color: transparent;
-  box-shadow: none;
-  font-size: 12px;
-  margin-bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 24px;
-  .created {
-    font-size: 14px;
-    display: block;
-    color: $track-stats-created-text;
-    flex-grow: 1;
-    time {
+  .track_stats {
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 12px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    .created {
+      font-size: 14px;
+      display: block;
+      color: $track-stats-created-text;
+      flex-grow: 1;
+      time {
+        font-weight: bold;
+      }
+    }
+    .favorites {
+      font-size: 12px;
       font-weight: bold;
+      padding-left: 8px;
+      padding-right: 8px;
+      text-align: center;
+      color: $track-stats-text;
+      display: flex;
+      justify-content: flex-start;
+      i {
+        margin-right: 8px;
+        svg {
+          width: 17px;
+          position: relative;
+          top: -5px;
+          path {
+            fill: $track-stats-icon-favorites-background;
+          }
+        }
+      }
     }
-  }
-  .favorites {
-    font-size: 12px;
-    font-weight: bold;
-    padding-left: 8px;
-    padding-right: 8px;
-    text-align: center;
-    color: $track-stats-text;
-    display: flex;
-    justify-content: flex-start;
-    i {
-      margin-right: 8px;
-      svg {
-        width: 17px;
-        position: relative;
-        top: -5px;
-        path {
-          fill: $track-stats-icon-favorites-background;
+    .plays {
+      font-size: 12px;
+      font-weight: bold;
+      padding-left: 8px;
+      text-align: center;
+      color: $track-stats-text;
+      display: flex;
+      justify-content: flex-start;
+      i {
+        margin-right: 8px;
+        svg {
+          width: 17px;
+          position: relative;
+          top: -5px;
+          path {
+            fill: $track-stats-icon-background;
+          }
         }
       }
     }
   }
-  .plays {
-    font-size: 12px;
-    font-weight: bold;
-    padding-left: 8px;
-    text-align: center;
-    color: $track-stats-text;
-    display: flex;
-    justify-content: flex-start;
-    i {
-      margin-right: 8px;
-      svg {
-        width: 17px;
-        position: relative;
-        top: -5px;
-        path {
-          fill: $track-stats-icon-background;
-        }
-      }
-    }
-  }
-}
 
   .comment_asset {
     padding-top: 10px;
     padding-right: 0;
     padding-left: 0;
-    margin-top: $baseline;
+    margin-top: 4px;
     background-color: $track-content-comment-background;
     box-shadow: none;
     border-radius: 6px;
@@ -412,14 +413,22 @@
         input.comment_submit {
           margin-right: 16px;
         }
+        span.private {
+          margin-left: 16px;
+          margin-right: 16px;
+        }
       }
-      textarea {
-        background-color: $track-content-comment-textarea-background;
-        color: $track-content-comment-textarea-text;
-        padding-left: 12px;
-        padding-right: 12px;
-        padding-top: 8px;
-        padding-bottom: 8px;
+      .textarea {
+        padding-left: 16px;
+        padding-right: 16px;        
+        textarea {
+          background-color: $track-content-comment-textarea-background;
+          color: $track-content-comment-textarea-text;
+          padding-left: 12px;
+          padding-right: 12px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
       }
       div.submit_wrapper {
         position: relative;
@@ -465,7 +474,8 @@
           content: "\A";
           border-width: 0 9px 13px 9px;
           border-style: solid;
-          border-color: transparent transparent $comment-right-background transparent;
+          border-color: transparent transparent $comment-right-background
+            transparent;
         }
         border-radius: 6px;
       }

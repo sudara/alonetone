@@ -3,7 +3,7 @@
   display: flex;
   width: 100%;
   height: 80px;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   background-color: $track-player-background;
   .play_button_container {
     min-width: 80px;
@@ -127,7 +127,7 @@
   .time_total {
     position: absolute;
     display: block;
-    bottom: -18px;
+    bottom: -22px;
     right: 9px;
     width: 40px;
     height: 18px;

@@ -100,7 +100,7 @@ body {
   color: $back-to-text;
   display: inline-flex;
   margin-bottom: 32px;
-  @include shadow1();
+  // @include shadow1();
   &:hover {
     text-decoration: none;
   }

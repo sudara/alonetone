@@ -19,13 +19,13 @@ en:
   licenses:
     help:
       all-rights-reserved: You reserve all rights provided by copyright law.
-      by: Anyone is free to share and adapt your video.
-      by-nc: Anyone is free to share and adapt your video, but not for commercial purposes.
-      by-nc-nd: Your video can be shared freely, but not for commercial purposes.
-      by-nc-sa: Anyone is free to share and adapt your video, but not for commercial purposes, and only under the same license.
-      by-nd: Your video can be shared freely.
-      by-sa: Anyone is free to share and adapt your video, but only under the same license.
-      defined-in-content: For when the license information shown in the video is different from the licenses listed above.
+      by: Anyone is free to share and adapt your track.
+      by-nc: Anyone is free to share and adapt your track, but not for commercial purposes.
+      by-nc-nd: Your track can be shared freely, but not for commercial purposes.
+      by-nc-sa: Anyone is free to share and adapt your track, but not for commercial purposes, and only under the same license.
+      by-nd: Your track can be shared freely.
+      by-sa: Anyone is free to share and adapt your track, but only under the same license.
+      defined-in-content: For when the license information shown in the track is different from the licenses listed above.
     jurisdiction:
       international: International
     label:
