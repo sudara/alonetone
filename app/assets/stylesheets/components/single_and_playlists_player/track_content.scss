@@ -189,7 +189,7 @@
   }
   .track_edit {
     margin-bottom: $baseline * 2;
-    header {
+
       input {
         font-family: $sans-font;
         font-weight: bold;
@@ -209,7 +209,7 @@
         margin-bottom: 6px;
         margin-left: 12px;
       }
-    }
+
     textarea {
       font-family: $sans-font;
       font-size: 16px;
@@ -278,28 +278,11 @@
           color: $forms-hint-text;
         }
       }
-    }
-    .track_edit_bottom {
-      .new_version {
-        input[type="file"] {
-          margin-top: 12px;
-          margin-bottom: 12px;
-        }
-        div.note {
-          margin-top: 0;
-          font-size: 12px;
-          line-height: 16px;
-          color: $track-edit-new-version-note-text;
-          max-width: 400px;
-        }
-      }
       a {
-        text-decoration: underline;
-        &:hover {
-          color: $accent;
-        }
+        @include default-button();
       }
-      .edit_save {
+    }
+    .edit_save {
         overflow: auto;
         margin-top: $baseline;
         .delete_link {
@@ -328,6 +311,28 @@
         margin-left: 0px;
       }
     }
+
+    .track_edit_bottom {
+      .new_version {
+        input[type="file"] {
+          margin-top: 12px;
+          margin-bottom: 12px;
+        }
+        div.note {
+          margin-top: 0;
+          font-size: 12px;
+          line-height: 16px;
+          color: $track-edit-new-version-note-text;
+          max-width: 400px;
+        }
+      }
+      a {
+        text-decoration: underline;
+        @include default-button();
+        &:hover {
+          color: $accent;
+        }
+      }
   }
 
   .track_stats {

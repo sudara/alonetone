@@ -2,16 +2,15 @@
   <%= render partial: 'shared/errors', locals: { errors: asset.errors } %>
 
   <div class="track_edit">
-    <header>
-      <h1><%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %></h1>
-      <h3><%= asset.user.name %></h3>
-      <div class="track_stats">
-        <div class="created">Uploaded <%= local_time_ago(asset.created_at) %>.</div>
-      </div>
-    </header>
 
+    <label>Title</label>
+    <%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %>
+
+    <label>About</label>
     <%= f.text_area :description, placeholder: "Tell us a story...", id: "description_#{asset.id}"  %>
     <%= f.text_area :credits, placeholder: "Credits for this track" %>
+
+    <label>License</label>
 
     <div class="options collapsed" data-controller="license">
       <% License.all.each_with_index do |license, index| %>
@@ -29,19 +28,7 @@
       <%= tag.a('Choose another license…', data: { 'action' => 'license#expand'}) %>
     </div>
 
-    <div class="track_edit_bottom">
-      <% if @single_track_page %>
-        <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
-        <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
-          <%= f.file_field :audio_file, class: 'asset_data' %>
-          <div class="note">This will permanently delete the old version.
-            The replacement track will <strong>not</strong> be considered a new track. It will not
-            show up on the home page under 'latest tracks'. But hey, you get to clean
-            up your act on the sly and fix that hasty mix from last week! Yay!
-          </div>
-        </div>
-      <% end %>
-      <div class="edit_save">
+    <div class="edit_save">
         <% if @single_track_page %>
         <%= link_to "Delete", user_track_path(@asset.user, @asset), class: 'delete_link', data: { turbo_method: 'delete', turbo_confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
         title: 'delete this track permanently ' %>
@@ -54,7 +41,7 @@
             </div>
             <div class="small_spinner" data-save-target="spinner"> </div>
           <% end %>
-          <%= f.submit "Save" %>
+          <%= f.submit "Save Track Details" %>
         </div>
       <% unless asset.published? %>
         <div class="submit_wrapper">
@@ -66,6 +53,22 @@
         </div>
       <% end %>
     </div>
+
+
+    <div class="track_edit_bottom">
+
+      <h3>Upload New Version</h3>
+      <% if @single_track_page %>
+        <div class="note">This will permanently delete the old version.
+          The replacement track will <strong>not</strong> be considered a new track. It will not
+          show up on the home page under 'latest tracks'. But hey, you get to clean
+          up your act on the sly and fix that hasty mix from last week! Yay!
+        </div>
+        <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
+        <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
+          <%= f.file_field :audio_file, class: 'asset_data' %>
+        </div>
+      <% end %>
   </div>
 </div>
 <% end %>
