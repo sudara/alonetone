@@ -64,12 +64,6 @@
     background-color: transparent;
     box-shadow: none;
     justify-content: space-between;
-    .back_to_button,
-    .back_to_artist_link,
-    .back_to_track_link,
-    .back_to_playlist_link {
-      margin-bottom: 16px;
-    }
     .favorite_and_edit {
       display: flex;
       .edit_link {
@@ -81,6 +75,15 @@
           background-color: $track-content-edit-background;
         }
       }
+    }
+  }
+  .back_to_button,
+  .back_to_artist_link,
+  .back_to_track_link,
+  .back_to_playlist_link {
+    margin-bottom: 16px;
+    &.back_to_track_link {
+      box-shadow: none;
     }
   }
 
@@ -189,36 +192,27 @@
   }
   .track_edit {
     margin-bottom: $baseline * 2;
-
-      input {
-        font-family: $sans-font;
-        font-weight: bold;
-        font-size: 24px;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 10px;
-        padding-bottom: 3px;
-        padding-left: 11px;
-      }
-      h3 {
-        margin-top: -30px;
-        margin-bottom: 10px;
-        margin-left: 12px;
-      }
-      .track_stats {
-        margin-bottom: 6px;
-        margin-left: 12px;
-      }
-
+    input {
+      // font-family: $sans-font;
+      // font-weight: bold;
+      @include paragraph14();
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      padding-bottom: 3px;
+      padding-left: 11px;
+    }
+    h3 {
+      margin-top: 0;
+    }
     textarea {
       font-family: $sans-font;
-      font-size: 16px;
+      @include paragraph14();
       line-height: 23px;
       position: relative;
       box-sizing: border-box;
       width: 100%;
       height: 300px;
-      margin-top: $baseline;
       margin-bottom: $baseline;
       padding: $baseline / 2;
       word-wrap: break-word;
@@ -240,23 +234,67 @@
         display: inline-block;
         margin-top: 6px;
       }
+      .options-list {
+        margin-right: 12px;
+        label {
+          height: 32px;
+          line-height: 32px;
+        }
+      }
       .option {
+        margin-top: 0;
+
         &.selected {
           display: block;
         }
+        display: none;
+        input[type="radio"] {
+          display: none;
+        }
+      }
+      .help {
         display: none;
       }
     }
     .expanded {
       > a {
-        display: none;
+        display: none !important;
       }
       .option {
+        display: block;
+        input[type="radio"] {
+          display: block;
+          width: 40px;
+        }
+        label {
+          @include title18();
+          color: $black;
+          display: flex;
+        }
+        border-bottom: 1px solid $grey100;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        padding-right: 24px;
+      }
+      .help {
+        @include paragraph14();
         display: block;
       }
     }
     .options {
-      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      > a {
+        @include default-button();
+      }
+      .options-list {
+        background: $grey50;
+        flex: 1;
+        border-radius: 4px;
+        .option {
+          padding-left: 12px;
+        }
+      }
       * {
         margin: 0;
         padding: 0;
@@ -265,74 +303,73 @@
         margin-top: 6px;
       }
       label {
-        color: $forms-heading-text;
-        margin-bottom: 0 !important;
+        
+        margin-bottom: 0 !important;  
       }
       p.help {
-        color: $forms-hint-text;
-        font-size: 90%;
+        
         a {
-          color: $forms-hint-background;
+          // color: $forms-hint-background;
+          color: $black;
         }
         a:hover {
-          color: $forms-hint-text;
+          // color: $forms-hint-text;
+          color: $black;
         }
-      }
-      a {
-        @include default-button();
-      }
-    }
-    .edit_save {
-        overflow: auto;
-        margin-top: $baseline;
-        .delete_link {
-          @include default-button("primary_danger");
-        }
-        .small_spinner {
-          display: none;
-        }
-        .submit_wrapper {
-          float: right;
-        }
-        input {
-          cursor: pointer;
-          float: left;
-          @include default-button("primary");
-        }
-      }
-    }
-    .submit_wrapper {
-      display: flex;
-      input {
-        margin-left: 4px;
-      }
-      .ajax_waiting {
-        margin-right: 8px;
-        margin-left: 0px;
       }
     }
 
-    .track_edit_bottom {
-      .new_version {
-        input[type="file"] {
-          margin-top: 12px;
-          margin-bottom: 12px;
-        }
-        div.note {
-          margin-top: 0;
-          font-size: 12px;
-          line-height: 16px;
-          color: $track-edit-new-version-note-text;
-          max-width: 400px;
-        }
+    .edit_save {
+      overflow: auto;
+      margin-top: $baseline;
+      .delete_link {
+        @include default-button("primary_danger");
+        display: none;
       }
-      a {
-        text-decoration: underline;
-        @include default-button();
-        &:hover {
-          color: $accent;
-        }
+      .small_spinner {
+        // ???
+        display: none;
       }
+      input {
+        cursor: pointer;
+        // float: left;
+        @include default-button("primary");
+      }
+    }
+  }
+
+  .submit_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    input {
+      margin-left: 4px;
+      width: 200px;
+    }
+    .ajax_waiting {
+      margin-right: 8px;
+      margin-left: 0px;
+    }
+  }
+
+  .track_edit_bottom {
+    border-top: 1px solid $grey100;
+
+    input[type="file"] {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .note {
+      @include paragraph14();
+      margin-top: 0;
+      color: $track-edit-new-version-note-text;
+    }
+    a {
+      text-decoration: underline;
+      @include default-button("primary");
+      &:hover {
+        color: $accent;
+      }
+    }
   }
 
   .track_stats {
@@ -425,7 +462,7 @@
       }
       .textarea {
         padding-left: 16px;
-        padding-right: 16px;        
+        padding-right: 16px;
         textarea {
           background-color: $track-content-comment-textarea-background;
           color: $track-content-comment-textarea-text;

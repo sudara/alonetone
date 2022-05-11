@@ -3,6 +3,8 @@
 
   <div class="track_edit">
 
+    <h2>Edit track details</h2>
+
     <label>Title</label>
     <%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %>
 
@@ -13,19 +15,24 @@
     <label>License</label>
 
     <div class="options collapsed" data-controller="license">
+      <div class="options-list">
       <% License.all.each_with_index do |license, index| %>
         <%= tag.div(value: license.name_with_version, class: (f.object.license_code == license.name_with_version) ? 'option selected' : 'option') do %>
           <%= f.label :license_code do %>
             <%= f.radio_button :license_code, license.name_with_version %>
+            <div class="label-and-help">
             <%= license.label %>
+            <p class="help">
+              <%= license.help %>
+              <%= link_to 'Details', license.url, target: '_blank' if license.url.present? %>
+            </p>
+            </div>
+
           <% end %>
-          <p class="help">
-            <%= license.help %>
-            <%= link_to 'Details', license.url, target: '_blank' if license.url.present? %>
-          </p>
         <% end %>
       <% end %>
-      <%= tag.a('Choose another license…', data: { 'action' => 'license#expand'}) %>
+      </div>
+      <%= tag.a('Change License', data: { 'action' => 'license#expand'}) %>
     </div>
 
     <div class="edit_save">
@@ -57,14 +64,14 @@
 
     <div class="track_edit_bottom">
 
-      <h3>Upload New Version</h3>
+      <h2>Upload New Version</h2>
       <% if @single_track_page %>
         <div class="note">This will permanently delete the old version.
           The replacement track will <strong>not</strong> be considered a new track. It will not
           show up on the home page under 'latest tracks'. But hey, you get to clean
           up your act on the sly and fix that hasty mix from last week! Yay!
         </div>
-        <%= link_to 'Upload a new version of this track',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
+        <%= link_to 'Upload new version',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
         <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
           <%= f.file_field :audio_file, class: 'asset_data' %>
         </div>
