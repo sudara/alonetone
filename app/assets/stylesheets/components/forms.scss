@@ -106,20 +106,8 @@ form {
     outline: none;
     font-family: $medium-sans-font;
   }
-}
-
-// This is to override default form styles in the thredded appp
-// seems silly to being rewriting same properties as the style above
-form.thredded--form input[type="text"], form.thredded--form textarea {
-  background-color: $forms-background!important;
-  border: 1px solid $forms-border!important;
-  color: $forms-input-text;
-  font-family: $medium-sans-font;
-  padding: 9px 10px 6px 10px;
-  font-size: 14px;
-  box-shadow: none;
-  &:focus {
-    border: 1px solid $accent!important;
+  textarea {
+    line-height: 1.5; 
   }
 }
 
@@ -279,8 +267,8 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   content: "";
   border: 1px solid $checkbox-not-checked-border;
   border-radius: 2.5px;
@@ -291,8 +279,8 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   content: "";
   border: 1px solid $checkbox-checked-border;
   border-radius: 2.5px;

@@ -22,17 +22,22 @@
       <% License.all.each_with_index do |license, index| %>
         <%= tag.div(value: license.name_with_version, class: (f.object.license_code == license.name_with_version) ? 'option selected' : 'option') do %>
             <%= f.radio_button :license_code, license.name_with_version %>
-            <label for="asset_license_code_by-nc-sa4_0"></label>
-            <%= f.label :license_code do %>
-            <% end %>
+            <label for="asset_license_code_by-nc-sa4_0">
+            <%
+=begin%>
+ <%= f.label :license_code do %>
+            <% end %> 
+<%
+=end%>
 
-            <div class="label-and-help">
+            
             <%= license.label %>
             <p class="help">
               <%= license.help %>
               <%= link_to 'Details', license.url, target: '_blank' if license.url.present? %>
             </p>
-            </div>
+            
+            </label>
 
         <% end %>
       <% end %>
@@ -53,7 +58,7 @@
               </div>
               <div class="small_spinner" data-save-target="spinner"> </div>
             <% end %>
-            <%= f.submit "Save Track Details" %>
+            <%= f.submit "Update track details" %>
           </div>
         <% unless asset.published? %>
           <div class="submit_wrapper">
@@ -82,7 +87,7 @@
           show up on the home page under 'latest tracks'. But hey, you get to clean
           up your act on the sly and fix that hasty mix from last week! Yay!
         </div>
-        <div class="new_version_upload_link">
+        <div class="upload_new_version">
           <%= link_to 'Upload new version',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
         </div>
         <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
