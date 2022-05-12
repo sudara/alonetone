@@ -192,6 +192,10 @@
   }
   .track_edit {
     margin-bottom: $baseline * 2;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 36px;
     input {
       // font-family: $sans-font;
       // font-weight: bold;
@@ -205,6 +209,36 @@
     h3 {
       margin-top: 0;
     }
+    h1 {
+        font-family: $medium-sans-font;
+        font-weight: normal;
+        line-height: 42px;
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        height: 42px;
+        margin-top: 0;
+        margin-bottom: 1px;
+        padding: 0 0 0 $baseline / 2;
+        color: $theme-accent;  
+        @include title24();
+        border-bottom: 0;
+        line-height: 1;
+        height: $baseline * (8/3);
+        padding-left: $baseline * (3/2);
+        padding-top: 24px;
+    }
+    .edit_profile_separator {
+      height: 1px;
+      background-color: $edit_profile_separator_background;
+    }
+    .track_edit_inner {
+      padding-left: 36px;
+      padding-right: 36px;
+      padding-top: 24px;
+      
+    }
+    
     textarea {
       font-family: $sans-font;
       @include paragraph14();
@@ -232,10 +266,12 @@
     .collapsed {
       > a {
         display: inline-block;
-        margin-top: 6px;
+        color: $grey900!important;
+        cursor: pointer;
       }
       .options-list {
         margin-right: 12px;
+        height: 32px;
         label {
           height: 32px;
           line-height: 32px;
@@ -266,19 +302,25 @@
           display: block;
           width: 40px;
         }
-        label {
+        .label-and-help {
           @include title18();
           color: $black;
-          display: flex;
+          // display: flex;
+          padding-left: 36px;
         }
         border-bottom: 1px solid $grey100;
         padding-top: 16px;
         padding-bottom: 16px;
         padding-right: 24px;
+        &:last-child {
+          border-bottom: 0;
+        }
       }
       .help {
         @include paragraph14();
         display: block;
+        font-family: $sans-font;
+        font-weight: normal;
       }
     }
     .options {
@@ -286,6 +328,8 @@
       justify-content: space-between;
       > a {
         @include default-button();
+        height: 32px;
+        line-height: 32px;
       }
       .options-list {
         background: $grey50;
@@ -307,18 +351,14 @@
         margin-bottom: 0 !important;  
       }
       p.help {
-        
         a {
-          // color: $forms-hint-background;
           color: $black;
         }
         a:hover {
-          // color: $forms-hint-text;
           color: $black;
         }
       }
     }
-
     .edit_save {
       overflow: auto;
       margin-top: $baseline;
@@ -334,6 +374,7 @@
         cursor: pointer;
         // float: left;
         @include default-button("primary");
+        margin-bottom: 36px;
       }
     }
   }
@@ -353,15 +394,27 @@
 
   .track_edit_bottom {
     border-top: 1px solid $grey100;
+    h2 {
+      @include title20();
+      color: $grey900;
+      margin-top: 0;
+    }
 
     input[type="file"] {
       margin-top: 12px;
       margin-bottom: 12px;
+      width: 224px;
+      padding-bottom: 10px;
     }
     .note {
       @include paragraph14();
       margin-top: 0;
       color: $track-edit-new-version-note-text;
+      margin-bottom: 36px;
+    }
+    .new_version_upload_link {
+      display: flex;
+      justify-content: flex-end;
     }
     a {
       text-decoration: underline;

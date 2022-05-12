@@ -3,7 +3,10 @@
 
   <div class="track_edit">
 
-    <h2>Edit track details</h2>
+    <h1>Edit track details</h1>
+    <div class="edit_profile_separator"></div>
+
+    <div class="track_edit_inner">
 
     <label>Title</label>
     <%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %>
@@ -18,8 +21,11 @@
       <div class="options-list">
       <% License.all.each_with_index do |license, index| %>
         <%= tag.div(value: license.name_with_version, class: (f.object.license_code == license.name_with_version) ? 'option selected' : 'option') do %>
-          <%= f.label :license_code do %>
             <%= f.radio_button :license_code, license.name_with_version %>
+            <label for="asset_license_code_by-nc-sa4_0"></label>
+            <%= f.label :license_code do %>
+            <% end %>
+
             <div class="label-and-help">
             <%= license.label %>
             <p class="help">
@@ -28,41 +34,46 @@
             </p>
             </div>
 
-          <% end %>
         <% end %>
       <% end %>
       </div>
       <%= tag.a('Change License', data: { 'action' => 'license#expand'}) %>
     </div>
 
-    <div class="edit_save">
-        <% if @single_track_page %>
-        <%= link_to "Delete", user_track_path(@asset.user, @asset), class: 'delete_link', data: { turbo_method: 'delete', turbo_confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
-        title: 'delete this track permanently ' %>
-        <% end %>
+      <div class="edit_save">
+          <% if @single_track_page %>
+          <%= link_to "Delete", user_track_path(@asset.user, @asset), class: 'delete_link', data: { turbo_method: 'delete', turbo_confirm: 'Are you sure? This will delete the song permanently, including all play history and comments.'},
+          title: 'delete this track permanently ' %>
+          <% end %>
 
-        <div class="submit_wrapper">
-          <% if !@single_track_page %>
-            <div class="ajax_waiting" data-save-target="response">
+          <div class="submit_wrapper">
+            <% if !@single_track_page %>
+              <div class="ajax_waiting" data-save-target="response">
+                <div class="text"><!-- placeholder response text --></div>
+              </div>
+              <div class="small_spinner" data-save-target="spinner"> </div>
+            <% end %>
+            <%= f.submit "Save Track Details" %>
+          </div>
+        <% unless asset.published? %>
+          <div class="submit_wrapper">
+            <%= f.submit "Publish" %>
+            <div class="ajax_waiting">
               <div class="text"><!-- placeholder response text --></div>
             </div>
-            <div class="small_spinner" data-save-target="spinner"> </div>
-          <% end %>
-          <%= f.submit "Save Track Details" %>
-        </div>
-      <% unless asset.published? %>
-        <div class="submit_wrapper">
-          <%= f.submit "Publish" %>
-          <div class="ajax_waiting">
-            <div class="text"><!-- placeholder response text --></div>
+            <div class="small_spinner" style="display:none;"> </div>
           </div>
-          <div class="small_spinner" style="display:none;"> </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+
     </div>
 
 
+
     <div class="track_edit_bottom">
+
+      <div class="track_edit_inner">
+
 
       <h2>Upload New Version</h2>
       <% if @single_track_page %>
@@ -71,11 +82,14 @@
           show up on the home page under 'latest tracks'. But hey, you get to clean
           up your act on the sly and fix that hasty mix from last week! Yay!
         </div>
-        <%= link_to 'Upload new version',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
+        <div class="new_version_upload_link">
+          <%= link_to 'Upload new version',"#new_version_#{asset.object_id}", class: 'slide_open_href'%>
+        </div>
         <div id="new_version_<%=asset.object_id%>" class="new_version" style="display:none;">
           <%= f.file_field :audio_file, class: 'asset_data' %>
         </div>
       <% end %>
+      </h2>
   </div>
 </div>
 <% end %>

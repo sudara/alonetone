@@ -149,7 +149,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   }
 }
 
-/*PLACEHOLDER TEXT COLOR */
+/* PLACEHOLDER TEXT COLOR */
 
 ::placeholder {
   color: $forms-placeholder-text;
@@ -231,6 +231,83 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
 }
 
 [type="checkbox"]:checked + label:after {
+  position: absolute;
+  top: 3px;
+  left: 4.5px;
+  content: image-url("svg/icon_checkmark.svg");
+  display: block;
+}
+
+/* CUSTOM SVG RADIO REPLACEMENT */
+
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
+  position: relative;
+  padding-left: 1.95em;
+  cursor: pointer;
+  > span {
+    position: relative;
+    top: 3px;
+  }
+}
+
+[type="radio"]:not(:checked) + label:hover:before {
+  border: 1px solid $checkbox-not-checked-border !important;
+}
+
+[type="radio"]:not(:checked) + label:active:before,
+[type="radio"]:checked + label:active:before {
+  border: 1px solid #d46a00 !important;
+  background-color: $accent !important;
+}
+
+[type="radio"]:not(:checked) + label:active:after {
+  position: absolute;
+  top: 3px;
+  left: 4.5px;
+  content: image-url("svg/icon_checkmark.svg");
+  display: block;
+}
+
+[type="radio"]:not(:checked) + label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border: 1px solid $checkbox-not-checked-border;
+  border-radius: 2.5px;
+  background-color: $checkbox-not-checked-background !important;
+}
+
+[type="radio"]:checked + label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  content: "";
+  border: 1px solid $checkbox-checked-border;
+  border-radius: 2.5px;
+  background-color: $checkbox-checked-background;
+}
+
+[type="radio"]:not(:checked) + label:after {
+  position: absolute;
+  top: 3px;
+  left: 4.5px;
+  content: image-url("svg/icon_checkmark.svg");
+  display: none;
+}
+
+[type="radio"]:checked + label:after {
   position: absolute;
   top: 3px;
   left: 4.5px;
