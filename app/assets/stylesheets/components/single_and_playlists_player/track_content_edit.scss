@@ -55,14 +55,16 @@
     display: flex;
     justify-content: space-between;
     > a {
-      @include default-button();
+      @include default-button("primary");
       height: 32px;
       line-height: 32px;
       display: inline-block;
       color: $grey900 !important;
+      background-color: $grey100;
+      line-height: 36px;
       cursor: pointer;
     }
-    .options-list {
+    .options_list {
       flex: 1;
       border-radius: 4px;
       .option {
@@ -87,6 +89,9 @@
             height: 32px;
             line-height: 32px;
             color: $grey800;
+            font-family: $sans-font;
+            font-weight: normal;
+
             &::before,
             &::after {
               display: none;
@@ -116,17 +121,20 @@
           color: $black;
           padding-left: 36px;
           padding-top: 3px;
+          margin-top: 0;
+          margin-bottom: 0;
           .help {
             @include paragraph14();
             display: block;
             font-family: $sans-font;
             font-weight: normal;
             margin-top: 4px;
+            margin-bottom: 0;
           }
         }
         border-bottom: 1px solid $grey100;
         padding-top: 16px;
-        padding-bottom: 16px;
+        padding-bottom: 10px;
         padding-right: 24px;
         &:last-child {
           border-bottom: 0;
@@ -137,7 +145,7 @@
 
   .edit_save {
     overflow: auto;
-    margin-top: $baseline;
+    margin-top: 36px;
     .delete_link {
       @include default-button("primary_danger");
       display: none;
