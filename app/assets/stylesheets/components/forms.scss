@@ -257,8 +257,8 @@ form {
 
 [type="radio"]:not(:checked) + label:active:after {
   position: absolute;
-  top: 3px;
-  left: 4.5px;
+  top: 1px;
+  left: 5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }
@@ -289,16 +289,16 @@ form {
 
 [type="radio"]:not(:checked) + label:after {
   position: absolute;
-  top: 3px;
-  left: 4.5px;
+  top: 1px;
+  left: 5px;
   content: image-url("svg/icon_checkmark.svg");
   display: none;
 }
 
 [type="radio"]:checked + label:after {
   position: absolute;
-  top: 3px;
-  left: 4.5px;
+  top: 1px;
+  left: 5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }

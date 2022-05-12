@@ -71,7 +71,7 @@
     }
   }
   .collapsed {
-    .options-list {
+    .options_list {
       margin-right: 12px;
       height: 32px;
       background: $grey50;
@@ -103,7 +103,7 @@
     > a {
       display: none !important;
     }
-    .options-list {
+    .options_list {
       background: $grey25;
       .option {
         display: block;

@@ -5,9 +5,6 @@
   margin-left: auto;
   max-width: 700px;
   width: 66%;
-  @media #{$one-column} {
-    width: 96%;
-  }
   @media only screen and (max-width: 770px) {
     width: 96%;
     max-width: none;
@@ -16,14 +13,22 @@
     background-color: $track-content-child-background;
     @include samo-shadow-and-radius();
   }
-  > div.box {
-    h2.box {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-      margin-top: 0;
-      box-shadow: none;
-      border-radius: 0;
-      box-sizing: border-box;
+  .back_favorite_edit_links {
+    display: flex;
+    background-color: transparent;
+    box-shadow: none;
+    justify-content: space-between;
+    .favorite_and_edit {
+      display: flex;
+      .edit_link {
+        margin-left: 12px;
+        @include default-button();
+        background-color: $track-content-edit-background;
+        color: $track-content-edit-text;
+        &:hover {
+          background-color: $track-content-edit-background;
+        }
+      }
     }
   }
  
@@ -75,25 +80,5 @@
     }
   }
 
-  .back_favorite_edit_links {
-    display: flex;
-    background-color: transparent;
-    box-shadow: none;
-    justify-content: space-between;
-    .favorite_and_edit {
-      display: flex;
-      .edit_link {
-        margin-left: 12px;
-        @include default-button();
-        background-color: $track-content-edit-background;
-        color: $track-content-edit-text;
-        &:hover {
-          background-color: $track-content-edit-background;
-        }
-      }
-    }
-  }
 
-  
 }
-

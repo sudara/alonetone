@@ -18,7 +18,7 @@
     <label>License</label>
 
     <div class="options collapsed" data-controller="license">
-      <div class="options-list">
+      <div class="options_list">
       <% License.all.each_with_index do |license, index| %>
         <%= tag.div(value: license.name_with_version, class: (f.object.license_code == license.name_with_version) ? 'option selected' : 'option') do %>
             <%= f.radio_button :license_code, license.name_with_version %>
