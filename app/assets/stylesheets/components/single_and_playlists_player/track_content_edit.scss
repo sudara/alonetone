@@ -1,9 +1,6 @@
 .track_edit {
   position: relative;
   z-index: 3;
-  @media #{$one-column} {
-    padding: $baseline / 2;
-  }
   margin-bottom: $baseline * 2;
   padding-top: 0;
   padding-left: 0;
@@ -28,6 +25,10 @@
     padding-left: $baseline * (3/2);
     padding-top: 24px;
     border-bottom: 1px solid $track_edit_separator_background;
+    @media #{$one-column} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
   }
   h3 {
     margin-top: 0;
@@ -36,6 +37,11 @@
     padding-left: 36px;
     padding-right: 36px;
     padding-top: 24px;
+    @media #{$one-column} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    
   }
   input[type="text"] {
     width: 100%;
@@ -51,6 +57,10 @@
   .options {
     display: flex;
     justify-content: space-between;
+    @media #{$one-column} {
+      display: block;
+    }
+
     > a {
       @include default-button("primary");
       height: 32px;
@@ -60,7 +70,10 @@
       background-color: $grey100!important;
       line-height: 36px;
       cursor: pointer;
-
+      @media #{$one-column} {
+        margin-top: 12px;
+      }
+  
     }
     .options_list {
       flex: 1;
@@ -90,6 +103,7 @@
             font-family: $sans-font;
             font-weight: normal;
             display: flex;
+            overflow: hidden;
             .collapsed_only {
               margin-left: auto;
               text-transform: uppercase;
