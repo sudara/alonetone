@@ -27,13 +27,10 @@
     height: $baseline * (8/3);
     padding-left: $baseline * (3/2);
     padding-top: 24px;
+    border-bottom: 1px solid $track_edit_separator_background;
   }
   h3 {
     margin-top: 0;
-  }
-  .edit_profile_separator {
-    height: 1px;
-    background-color: $edit_profile_separator_background;
   }
   .track_edit_inner {
     padding-left: 36px;
@@ -60,9 +57,10 @@
       line-height: 32px;
       display: inline-block;
       color: $grey900 !important;
-      background-color: $grey100;
+      background-color: $grey100!important;
       line-height: 36px;
       cursor: pointer;
+
     }
     .options_list {
       flex: 1;
@@ -91,7 +89,6 @@
             color: $grey800;
             font-family: $sans-font;
             font-weight: normal;
-
             &::before,
             &::after {
               display: none;
@@ -109,7 +106,7 @@
       display: none !important;
     }
     .options_list {
-      background: $grey25;
+      background: $options-list-background;
       .option {
         display: block;
         input[type="radio"] {
@@ -118,7 +115,7 @@
         }
         label {
           @include title18();
-          color: $black;
+          color: $option-label-text;
           padding-left: 36px;
           padding-top: 3px;
           margin-top: 0;
@@ -132,7 +129,7 @@
             margin-bottom: 0;
           }
         }
-        border-bottom: 1px solid $grey100;
+        border-bottom: 1px solid $option-border;
         padding-top: 16px;
         padding-bottom: 10px;
         padding-right: 24px;
@@ -175,10 +172,10 @@
 }
 
 .track_edit_bottom {
-  border-top: 1px solid $grey100;
+  border-top: 1px solid $track_edit_separator_background;
   h2 {
     @include title20();
-    color: $grey900;
+    color: $track-edit-heading-text;
     margin-top: 0;
   }
   .note {

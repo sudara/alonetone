@@ -298,11 +298,6 @@ $track-edit-text: $grey50;
 $track-edit-border: $grey500;
 $track-edit-border-focus: $grey500;
 
-$track-edit-new-version-note-text: $grey800;
-
-$track-content-spam-background: $red800;
-$track-content-spam-text: $white;
-
 $track-content-edit-background: $orange600;
 $track-content-edit-text: $white;
 
@@ -315,6 +310,14 @@ $track-content-artist-text: $white;
 $track-content-description-text: $grey400;
 
 $track-content-license-text: $grey1000;
+
+// track_content_edit.scss
+$track_edit_separator_background: $grey1000;
+$options-list-background: $grey1200;
+$option-label-text: $white;
+$option-border: $grey900;
+$track-edit-heading-text: $grey50;
+$track-edit-new-version-note-text: $grey600;
 
 // track_player.scss
 $waveform-unplayed-background: $grey900;
