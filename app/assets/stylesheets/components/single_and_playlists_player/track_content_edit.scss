@@ -89,6 +89,13 @@
             color: $grey800;
             font-family: $sans-font;
             font-weight: normal;
+            display: flex;
+            .collapsed_only {
+              margin-left: auto;
+              text-transform: uppercase;
+              color: $accent;
+              margin-right: 12px;
+            }
             &::before,
             &::after {
               display: none;
@@ -120,6 +127,9 @@
           padding-top: 3px;
           margin-top: 0;
           margin-bottom: 0;
+          .collapsed_only {
+            display: none;
+          }
           .help {
             @include paragraph14();
             display: block;
@@ -127,6 +137,11 @@
             font-weight: normal;
             margin-top: 4px;
             margin-bottom: 0;
+            a {
+              text-transform: uppercase;
+              color: $accent;
+              margin-left: 2px;
+            }
           }
         }
         border-bottom: 1px solid $option-border;

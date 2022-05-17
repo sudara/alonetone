@@ -23,18 +23,13 @@
         <%= tag.div(value: license.name_with_version, class: (f.object.license_code == license.name_with_version) ? 'option selected' : 'option') do %>
             <%= f.radio_button :license_code, license.name_with_version %>
             <label for="asset_license_code_by-nc-sa4_0">
-            <%
-=begin%>
- <%= f.label :license_code do %>
-            <% end %> 
-<%
-=end%>
-
-            
             <%= license.label %>
+            <div class="collapsed_only">
+              <%= link_to license.name %>
+            </div>
             <p class="help">
               <%= license.help %>
-              <%= link_to 'Details', license.url, target: '_blank' if license.url.present? %>
+              <%= link_to license.name, license.url, target: '_blank' if license.url.present? %>
             </p>
             
             </label>

@@ -66,6 +66,8 @@
     justify-content: space-between;
     > :first-child {
       margin-left: 0 !important;
+      position: relative;
+      top: 6px;
     }
     .download_link {
       margin-left: 12px;
@@ -87,16 +89,9 @@
         color: $track-content-by-text;
       }
       a {
-        svg {
-          height: 24px;
-          margin-left: 6px;
-          margin-top: 1px;
-          top: 0;
-          fill: $track-content-license-text;
-          circle {
-            fill: none;
-          }
-        }
+        color: $track-content-license-text;
+        font-weight: bold;
+        text-transform: uppercase;
       }
     }
   }
