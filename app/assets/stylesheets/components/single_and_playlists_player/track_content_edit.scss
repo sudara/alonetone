@@ -70,7 +70,8 @@
       background-color: $grey100!important;
       line-height: 36px;
       cursor: pointer;
-      @media #{$one-column} {
+      flex-shrink: 0;
+      @media #{$one-column} {˝˝
         margin-top: 12px;
       }
   
@@ -104,11 +105,22 @@
             font-weight: normal;
             display: flex;
             overflow: hidden;
+            > div:first-child {
+              // display: inline;
+              // @media #{$one-column} {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+  
+              // }
+          
+            }
             .collapsed_only {
               margin-left: auto;
               text-transform: uppercase;
               color: $accent;
               margin-right: 12px;
+              flex-shrink: 0;
             }
             &::before,
             &::after {
