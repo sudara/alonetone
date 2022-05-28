@@ -3,14 +3,37 @@ en:
     attributes:
       account_request:
         entity_type: "What you do:"
-
   errors:
     messages:
       not_attached: must be attached
       byte_size_too_small: must be greater than %{greater_than_human_size}
       byte_size_too_large: must be less than %{less_than_human_size}
       invalid_content_type: does not look the right file type
+    attributes:
+      license_code:
+        invalid_license_code: must be supported
   authlogic:
     error_messages:
       no_authentication_details: Login and password need to be filled out
       login_not_found: not found (It should be the same as your profile url)
+  licenses:
+    help:
+      all-rights-reserved: You reserve all rights provided by copyright law.
+      by: Anyone is free to share and adapt your track.
+      by-nc: Anyone is free to share and adapt your track, but not for commercial purposes.
+      by-nc-nd: Your track can be shared freely, but not for commercial purposes.
+      by-nc-sa: Anyone is free to share and adapt your track, but not for commercial purposes, and only under the same license.
+      by-nd: Your track can be shared freely.
+      by-sa: Anyone is free to share and adapt your track, but only under the same license.
+      defined-in-content: For when the license information shown in the track is different from the licenses listed above.
+    jurisdiction:
+      international: International
+    label:
+      all-rights-reserved: All rights reserved
+      by: Attribution %{version} %{jurisdiction}
+      by-nc: Attribution-Noncommercial %{version} %{jurisdiction}
+      by-nc-nd: Attribution-Noncommercial-No Derivative Works %{version} %{jurisdiction}
+      by-nc-sa: Attribution-Noncommercial-Share Alike %{version} %{jurisdiction}
+      by-nd: Attribution-No Derivative Works %{version} %{jurisdiction}
+      by-sa: Attribution-Share Alike %{version} %{jurisdiction}
+      defined-in-content: As defined in content

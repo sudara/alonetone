@@ -106,20 +106,8 @@ form {
     outline: none;
     font-family: $medium-sans-font;
   }
-}
-
-// This is to override default form styles in the thredded appp
-// seems silly to being rewriting same properties as the style above
-form.thredded--form input[type="text"], form.thredded--form textarea {
-  background-color: $forms-background!important;
-  border: 1px solid $forms-border!important;
-  color: $forms-input-text;
-  font-family: $medium-sans-font;
-  padding: 9px 10px 6px 10px;
-  font-size: 14px;
-  box-shadow: none;
-  &:focus {
-    border: 1px solid $accent!important;
+  textarea {
+    line-height: 1.5; 
   }
 }
 
@@ -149,7 +137,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   }
 }
 
-/*PLACEHOLDER TEXT COLOR */
+/* PLACEHOLDER TEXT COLOR */
 
 ::placeholder {
   color: $forms-placeholder-text;
@@ -234,6 +222,83 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   position: absolute;
   top: 3px;
   left: 4.5px;
+  content: image-url("svg/icon_checkmark.svg");
+  display: block;
+}
+
+/* CUSTOM SVG RADIO REPLACEMENT */
+
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
+  position: relative;
+  padding-left: 1.95em;
+  cursor: pointer;
+  > span {
+    position: relative;
+    top: 3px;
+  }
+}
+
+[type="radio"]:not(:checked) + label:hover:before {
+  border: 1px solid $checkbox-not-checked-border !important;
+}
+
+[type="radio"]:not(:checked) + label:active:before,
+[type="radio"]:checked + label:active:before {
+  border: 1px solid #d46a00 !important;
+  background-color: $accent !important;
+}
+
+[type="radio"]:not(:checked) + label:active:after {
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  content: image-url("svg/icon_checkmark.svg");
+  display: block;
+}
+
+[type="radio"]:not(:checked) + label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  content: "";
+  border: 1px solid $checkbox-not-checked-border;
+  border-radius: 2.5px;
+  background-color: $checkbox-not-checked-background !important;
+}
+
+[type="radio"]:checked + label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  content: "";
+  border: 1px solid $checkbox-checked-border;
+  border-radius: 2.5px;
+  background-color: $checkbox-checked-background;
+}
+
+[type="radio"]:not(:checked) + label:after {
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  content: image-url("svg/icon_checkmark.svg");
+  display: none;
+}
+
+[type="radio"]:checked + label:after {
+  position: absolute;
+  top: 1px;
+  left: 5px;
   content: image-url("svg/icon_checkmark.svg");
   display: block;
 }

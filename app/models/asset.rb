@@ -70,6 +70,7 @@ class Asset < ApplicationRecord
     content_type: %w[audio/mpeg audio/mp3 audio/x-mp3],
     byte_size: { less_than: 60.megabytes }
   }
+  validates :license_code, license_code: true
 
   include Slugs
   has_slug(
@@ -204,6 +205,12 @@ class Asset < ApplicationRecord
     return nil unless audio_file.attached?
 
     Storage::Location.new(audio_file, signed: true)
+  end
+
+  def license
+    return nil unless License.supported?(license_code)
+
+    License.new(license_code)
   end
 
   def self.destroy_deleted_accounts_older_than_30_days

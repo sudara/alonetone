@@ -196,6 +196,7 @@ class AssetsController < ApplicationController
       :description,
       :name,
       :title,
+      :license_code,
       :user,
       :user_id,
       :youtube_embed

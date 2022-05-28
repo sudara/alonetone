@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_124907) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_04_11_170613) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
     t.integer "entity_type"
     t.integer "status", default: 0
     t.text "details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "moderated_by_id"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_account_requests_on_user_id"
@@ -83,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.integer "id3_track_num", default: 1
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
+    t.string "license_code", default: "all-rights-reserved"
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
@@ -201,8 +201,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.string "token", null: false
     t.boolean "archived", default: false, null: false
     t.integer "users_count", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["token"], name: "index_mass_invites_on_token", unique: true
   end
 
@@ -272,8 +272,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.boolean "increase_ego", default: false
     t.boolean "email_comments", default: true
     t.boolean "email_new_tracks", default: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_settings_on_user_id"
   end
 

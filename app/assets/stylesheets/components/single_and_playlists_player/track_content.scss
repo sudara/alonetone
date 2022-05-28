@@ -5,401 +5,80 @@
   margin-left: auto;
   max-width: 700px;
   width: 66%;
-  @media #{$one-column} {
+  @media only screen and (max-width: 770px) {
     width: 96%;
+    max-width: none;
   }
   > * {
     background-color: $track-content-child-background;
     @include samo-shadow-and-radius();
   }
-  > .edit_links_and_favorite {
-    background: none;
-    margin-bottom: 12px;
-  }
-  > div.box {
-    h2.box {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
-      margin-top: 0;
-      box-shadow: none;
-      border-radius: 0;
-      box-sizing: border-box;
-    }
-  }
-  .edit_link {
-    @include default-button();
-    background-color: $track-content-edit-background;
-    color: $track-content-edit-text;
-    &:hover {
-      background-color: $track-content-edit-background;
-    }
-  }
-  .track_post,
-  .track_edit {
-    position: relative;
-    z-index: 3;
-    padding-top: 29px;
-    padding-right: $baseline * 1.5;
-    padding-bottom: $baseline;
-    padding-left: $baseline * 1.5;
-    h1 {
-      margin-top: 0;
-      margin-bottom: 23px;
-      line-height: 36px;
-      @include title28();
-      color: $track-content-track-text;
-    }
-    h3 {
-      margin-top: -20px;
-      margin-bottom: 32px;
-      color: $track-content-artist-text;
-    }
-    div.track_stats {
-      font-size: 12px;
-      margin-bottom: 0;
+  .back_favorite_edit_links {
+    display: flex;
+    background-color: transparent;
+    box-shadow: none;
+    justify-content: space-between;
+    .favorite_and_edit {
       display: flex;
-      justify-content: space-between;
-      margin-top: -4px;
-      .created {
-        font-size: 14px;
-        display: block;
-        color: $track-stats-created-text;
-        flex-grow: 1;
-        time {
-          font-weight: bold;
-        }
-      }
-      .favorites {
-        font-size: 12px;
-        font-weight: bold;
-        padding-left: 8px;
-        padding-right: 8px;
-        text-align: center;
-        color: $track-stats-text;
-        display: flex;
-        justify-content: flex-start;
-        i {
-          margin-right: 8px;
-          svg {
-            width: 17px;
-            position: relative;
-            top: -5px;
-            path {
-              fill: $track-stats-icon-favorites-background;
-            }
-          }
-        }
-      }
-      .plays {
-        font-size: 12px;
-        font-weight: bold;
-        padding-left: 8px;
-        text-align: center;
-        color: $track-stats-text;
-        display: flex;
-        justify-content: flex-start;
-        i {
-          margin-right: 8px;
-          svg {
-            width: 17px;
-            position: relative;
-            top: -5px;
-            path {
-              fill: $track-stats-icon-background;
-            }
-          }
-        }
-      }
-    }
-    @media #{$one-column} {
-      padding: $baseline / 2;
-    }
-    iframe {
-      margin-bottom: $baseline;
-      max-width: 100%;
-    }
-    p {
-      font-size: 16px;
-      line-height: 23px;
-      margin-bottom: $baseline;
-      color: $track-content-description-text;
-      img {
-        max-width: 100%;
-        margin-top: $baseline;
-      }
-    }
-    hr {
-      position: relative; // needed for icon
-      width: 550px;
-      margin: ($baseline * 1.5) auto;
-      text-align: center;
-      border: 0;
-      border-bottom: 1px solid $track-content-hr-background;
-      &:after {
-        position: absolute;
-        top: -0.55em;
-        left: 265px;
-        display: block;
-        content: "\f025"; // with headphone icon
-        color: $track-content-hr-background;
-        background-color: white; // interrupt hr
-        -webkit-font-smoothing: antialiased;
-      }
-    }
-    .edit_links_and_favorite {
-      box-shadow: none;
-      margin-top: $baseline;
-      display: flex;
-      > :first-child {
-        margin-left: 0!important;
-      }
-      .edit_links {
-        box-shadow: none;
-        border-radius: 0;
-        margin-left: auto;
-        .edit_link {
-          @include default-button();
-          background-color: $track-content-edit-background;
-          color: $track-content-edit-text;
-          &:hover {
-            background-color: $track-content-edit-background;
-          }
-        }
-        .edit_link + .edit_link {
-          margin-left: 8px;
-          text-transform: uppercase;
-          background-color: $track-content-spam-background;
-          color: $track-content-spam-text;
-        }
-      }
-      .track_favorite button{
-        @include image_button();
-      }
-      .track_favorite,
-      .download_link {
-        a, button {
-          padding-left: 12px;
-          font-size: 12px;
-          height: 26px;
-          width: 94px;
-          position: relative;
-          display: inline-flex;
-          background-color: $track-content-link-background;
-          color: $track-content-link-text;
-          border-radius: 4px;
-          font-weight: bold;
-          line-height: 30px;
-          text-decoration: none;
-          box-sizing: border-box;
-          svg {
-            height: 20px;
-            margin-left: 8px;
-            position: relative;
-            top: 2.5px;
-            path.outline {
-              stroke: rgb(246, 70, 62);
-            }
-          }
-        }
-      }
-      .download_link {
+      .edit_link {
         margin-left: 12px;
-        a {
-          width: 106px;
-          margin-right: 8px;
-          svg {
-            height: 24px;
-            margin-left: 6px;
-            margin-top: 1px;
-            top: 0;
-          }
-        }
-      }
-    }
-  }
-  .track_edit {
-    margin-bottom: $baseline * 2;
-    header {
-      input {
-        font-family: $sans-font;
-        font-weight: bold;
-        font-size: 24px;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 10px;
-        padding-bottom: 3px;
-        padding-left: 11px;
-      }
-      h3 {
-        margin-top: -30px;
-        margin-bottom: 10px;
-        margin-left: 12px;
-      }
-      .track_stats {
-        margin-bottom: 6px;
-        margin-left: 12px;
-      }
-    }
-    textarea {
-      font-family: $sans-font;
-      font-size: 16px;
-      line-height: 23px;
-      position: relative;
-      box-sizing: border-box;
-      width: 100%;
-      height: 300px;
-      margin-top: $baseline;
-      margin-bottom: $baseline;
-      padding: $baseline / 2;
-      word-wrap: break-word;
-      color: $track-edit-text;
-      border: 1px solid $track-edit-border;
-      background-color: transparent;
-      &:focus {
-        border: 1px solid $track-edit-border-focus;
-      }
-      @media #{$one-column} {
-        font-size: 16px;
-      }
-    }
-    textarea#asset_credits {
-      display: none;
-    }
-    .track_edit_bottom {
-      .new_version {
-        input[type="file"] {
-          margin-top: 12px;
-          margin-bottom: 12px;
-        }
-        div.note {
-          margin-top: 0;
-          font-size: 12px;
-          line-height: 16px;
-          color: $track-edit-new-version-note-text;
-          max-width: 400px;
-        }
-      }
-      a {
-        text-decoration: underline;
+        @include default-button();
+        background-color: $track-content-edit-background;
+        color: $track-content-edit-text;
         &:hover {
-          color: $accent;
-        }
-      }
-      .edit_save {
-        overflow: auto;
-        margin-top: $baseline;
-        .delete_link {
-          @include default-button('primary_danger');
-        }
-        .small_spinner {
-          display: none;
-        }
-        .submit_wrapper {
-          float: right;
-        }
-        input {
-          cursor: pointer;
-          float: left;
-          @include default-button('primary');
-        }
-      }
-    }
-    .submit_wrapper {
-      display: flex;
-      input {
-        margin-left: 4px;
-      }
-      .ajax_waiting {
-        margin-right: 8px;
-        margin-left: 0px;
-      }
-    }
-  }
-  .comment_asset {
-    padding-top: 10px;
-    padding-right: 0;
-    padding-left: 0;
-    margin-top: $baseline;
-    background-color: $track-content-comment-background;
-    box-shadow: none;
-    border-radius: 6px;
-    position: relative;
-    .comment_form {
-      form {
-        > .comment_as {
-          margin-top: 0;
-          padding-left: 16px;
-        }
-        .private_check_box {
-          margin-left: 16px;
-        }
-        input.comment_submit {
-          margin-right: 16px;
-        }
-      }
-      textarea {
-        background-color: $track-content-comment-textarea-background;
-        color: $track-content-comment-textarea-text;
-        padding-left: 12px;
-        padding-right: 12px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-      div.submit_wrapper {
-        position: relative;
-        top: -18px;
-        display: flex;
-        flex-direction: row;
-        clear: both;
-        justify-content: flex-end;
-        margin-left: 110px;
-        @media #{$one-column} {
-          display: block;
-          .ajax_waiting {
-            margin-right: 0;
-            float: right;
-            border-width: 0;
-            &.ajax_fail,
-            &.ajax_success {
-              margin-bottom: 12px;
-              border-width: 1px;
-            }
-          }
+          background-color: $track-content-edit-background;
         }
       }
     }
   }
-  #user_comments {
-    + .below_box {
-      display: none;
-    }
-    margin-top: $baseline;
-    padding-top: 16px;
-    background-color: $comment-background;
-    box-shadow: none;
-    overflow: hidden;
-    .comment {
-      .comment_right {
-        margin-top: 12px;
-        &::before {
-          position: absolute;
-          z-index: 1;
-          top: -13px;
-          left: 47%;
-          content: "\A";
-          border-width: 0 9px 13px 9px;
-          border-style: solid;
-          border-color: transparent transparent $comment-right-background transparent;
-        }
-        border-radius: 6px;
-      }
+ 
+  .back_to_button,
+  .back_to_artist_link,
+  .back_to_track_link,
+  .back_to_playlist_link {
+    margin-bottom: 16px;
+    &.back_to_track_link {
+      box-shadow: none;
     }
   }
-}
 
-main .track_content {
-  @media only screen and (max-width: 770px) {
-    width: 96%;
-    max-width: none;
+  .track_favorite,
+  .download_link {
+    a,
+    button {
+      @include image_button();
+      padding-left: 12px;
+      font-size: 12px;
+      height: 26px;
+      width: 94px;
+      position: relative;
+      display: inline-flex;
+      background-color: $track-content-link-background;
+      color: $track-content-link-text;
+      border-radius: 4px;
+      font-weight: bold;
+      line-height: 26px;
+      text-decoration: none;
+      box-sizing: border-box;
+      svg {
+        height: 20px;
+        margin-left: 8px;
+        position: relative;
+        top: 2.5px;
+        path.outline {
+          stroke: rgb(246, 70, 62);
+        }
+      }
+    }
+    &.track_favorite button {
+      background-color: $back-to-background;
+      svg {
+        height: 24px;
+        margin-left: 6px;
+        top: 0.5px;
+      }
+    }
   }
+
+
 }
