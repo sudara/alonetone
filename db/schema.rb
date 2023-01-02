@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_124907) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_01_02_171732) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
     t.integer "entity_type"
     t.integer "status", default: 0
     t.text "details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "moderated_by_id"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_account_requests_on_user_id"
@@ -41,13 +40,13 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.string "content_type"
     t.text "metadata", size: :medium
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
     t.string "service_name", default: "filesystem", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
@@ -189,20 +188,20 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"
   end
 
-  create_table "mass_invite_signups", charset: "utf8mb4", force: :cascade do |t|
+  create_table "mass_invite_signups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "mass_invite_id"
     t.index ["mass_invite_id"], name: "index_mass_invite_signups_on_mass_invite_id"
     t.index ["user_id"], name: "index_mass_invite_signups_on_user_id"
   end
 
-  create_table "mass_invites", charset: "utf8mb4", force: :cascade do |t|
+  create_table "mass_invites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "name", null: false
     t.string "token", null: false
     t.boolean "archived", default: false, null: false
     t.integer "users_count", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["token"], name: "index_mass_invites_on_token", unique: true
   end
 
@@ -214,7 +213,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.datetime "updated_at"
   end
 
-  create_table "patrons", charset: "utf8mb4", force: :cascade do |t|
+  create_table "patrons", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at"
     t.index ["user_id"], name: "index_patrons_on_user_id"
@@ -264,7 +263,7 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "settings", charset: "utf8mb4", force: :cascade do |t|
+  create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "display_listen_count", default: true
     t.boolean "block_guest_comments", default: false
@@ -272,8 +271,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_124907) do
     t.boolean "increase_ego", default: false
     t.boolean "email_comments", default: true
     t.boolean "email_new_tracks", default: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_settings_on_user_id"
   end
 
