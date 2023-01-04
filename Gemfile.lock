@@ -132,7 +132,6 @@ GEM
     crass (1.0.6)
     dalli (3.2.3)
     date (3.3.3)
-    debug (1.7.1)
     diff-lcs (1.5.0)
     diffy (3.4.2)
     erubi (1.12.0)
@@ -413,7 +412,6 @@ DEPENDENCIES
   commonmarker
   country_select
   dalli
-  debug
   faker
   guard
   guard-rspec
