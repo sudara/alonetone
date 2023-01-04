@@ -85,7 +85,7 @@ export default class extends Controller {
       url: "/toggle_theme",
       type: "PUT"
     })
-    Turbo.clearCache()
+    Turbo.cache.clear()
   }
 
   toggleThemableImages(oldTheme, newTheme) {
