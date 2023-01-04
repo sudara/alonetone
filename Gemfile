@@ -81,6 +81,8 @@ group :test do
   gem 'webmock', require: false
 end
 
-group :development, :test do
+# todo, reenable test after this bug resolved:
+# https://github.com/ruby/debug/issues/852
+group :development do
   gem 'debug'
 end
