@@ -55,7 +55,7 @@ RSpec.describe 'home page', type: :feature, js: true do
   it 'properly runs javascript and reports console errors', :allow_js_errors do
     visit '/'
     page.execute_script("console.error('hello from capybara')")
-    warnings = page.driver.browser.manage.logs.get(:browser)
+    warnings = page.driver.browser.logs.get(:browser)
 
     # Ignore font complaints
     # SEVERE 2021-02-24 17:55:00 +0100: https://cdn.alonetone.com/fonts/Alright-v2-Normal-Bold-latin1-tnum.woff2 - Failed to load resource: net::ERR_FAILED

@@ -113,7 +113,7 @@ RSpec.configure do |config|
 
   config.after(:each, type: :feature, js: true) do |test|
     if !test.metadata[:allow_js_errors]
-      errors = page.driver.browser.manage.logs.get(:browser)
+      errors = page.driver.browser.logs.get(:browser)
       aggregate_failures 'javascript errors' do
         errors.each do |error|
           # we really don't care about CORS stuff
