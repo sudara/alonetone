@@ -2,11 +2,11 @@
 
 ### Requirements
 
-We are currently running Ruby 3.0.x.
+We are currently running Ruby 3.2.x.
 
 ### MacOS
 
-Denpendencies on MacOS are best managed with [Homebrew](https://brew.sh).
+Dependencies on MacOS are best managed with [Homebrew](https://brew.sh).
 
 - `brew tap bbc/audiowaveform` (adds the waveform repo to brew)
 - `brew install audiowaveform` (generates waveform data)
@@ -39,7 +39,7 @@ This also creates 3 config files:
 - database.yml
 - newrelic.yml (for performance tracking)
 
-Start the server 
+Start the server
 
 - `rails s`
 

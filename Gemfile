@@ -58,7 +58,7 @@ group :development do
   gem 'faker', require: false
   # Available "channels" of rubocop for code climate:
   # https://github.com/codeclimate/codeclimate-rubocop/branches/all?utf8=✓&query=channel%2Frubocop
-  gem 'rubocop', '1.4.1', require: false # synced to .codeclimate.yml
+  gem 'rubocop', require: false # synced to .codeclimate.yml
 end
 
 ## Who loves tests! You do? You do!
