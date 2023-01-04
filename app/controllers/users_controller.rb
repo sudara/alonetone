@@ -132,7 +132,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:login, :name, :email, :password, :password_confirmation,
       :display_name, :avatar_image, settings: {}, profile_attributes:
-      [:id, :bio, :city, :country, :website, :instagram, :spotify, :apple, :youtube])
+      %i[id bio city country website instagram spotify apple youtube])
   end
 
   def user_params_with_ip
