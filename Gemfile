@@ -83,6 +83,6 @@ end
 
 # todo, reenable test after this bug resolved:
 # https://github.com/ruby/debug/issues/852
-group :development do
-  gem 'debug'
-end
+# group :development, :test do
+#   gem 'debug'
+# end
