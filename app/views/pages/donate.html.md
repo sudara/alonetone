@@ -11,17 +11,17 @@ I thought: Why not build a free service to do just that? For myself, my friends,
 
 ## Why should sharing our music be... business?
 
-Other sites launched around the same time we did. However they were clearly businesses, looking to make it BIG! Offering free service at the start, but then setting upload limits, running ads, slowly squeezing artists for money, yikes...
+Other sites launched around the same time we did. However they were clearly businesses, looking to make it BIG! They offered free service at the start, but started setting upload limits, running ads, squeezing artists for money, yikes...
 
-I wasn't a huuuuuge fan of that idea. Why should sharing one's music with friends and fans have to be a business, or worse, a startup? It costs next to nothing to distribute some mp3 files, why should musicians pay?
+I wasn't a huuuuuge fan of that idea from the start. Why should sharing one's music with friends and fans have to be a business, or worse, a startup? It costs next to nothing to distribute some mp3 files, why should musicians pay?
 
 Anyway, that's the simple premise alonetone was built on. I've kept it running as the primary developer the last 15 years. The site has served 6 million streams of 90,000 tracks from 6500 artists.
 
-That's a tiny blip on the global internet scale (welcome to the true long tail of the internet) but hey — I'm one person working in my *part time* and able to deliver this service with 15 year uptime (and hey, maybe we'll outlive SoundCloud?!)
+That's a blip on the global internet scale (welcome to the true long tail of the internet) but hey — I'm one person working in my *part time* delivering this service with a 15 year uptime (and hey, maybe we'll outlive SoundCloud?!).
 
 ## alonetone was actually built with a *lot* of help.
 
-Ok, ok, it wasn't *only* 1 person in their part time building alonetone.
+Well ok, it wasn't *only* 1 person in their part time building alonetone.
 
 I have a close friend Samo, who I collaborate on design with. And a [talented frontend dev](https://alonetone.com/montgomeru) who also handles some community aspects. I've paid many other contributors over the years, including frontend devs, backend devs, illustrators, and so on. Not to mention the **many** motivated passionate users who contributed so much time and effort to help shape it into a home.
 
@@ -37,11 +37,11 @@ I restricted my consulting to part time and invested hundreds and hundreds of ho
 
 ## What we dream the internet *could* be
 
-I made this investment because the internet *needs* projects like alonetone.
+I've made this investment over and over again because the internet *needs* projects like alonetone.
 
-We deserve high quality non-commercial venues for art, music, and connection to others in those global communities.
+We deserve high quality non-commercial venues for art and music. We need connection to others in our global communities.
 
-We shouldn't leave these services to startups and companies looking to profit as middlemen. Their priorities are... strange at best, and hostile at worst.  Gamifying platforms to maximize engagement quickly devolves into a lowest common denominator popularity contest. (TikTok has its merits, but unless you are doing entertaining meme music, it's a terrible place to share a song you poured your heart and soul into).
+We shouldn't leave these services to startups and companies looking to profit off of those connections as middlemen. Their priorities are... strange at best, and hostile at worst.  Gamifying platforms to maximize engagement quickly devolves into a lowest common denominator popularity contest. (Hey, TikTok has its merits, but unless you are doing entertaining meme music, it's a terrible place to share a song you poured your heart and soul into).
 
 On top of that, open source should serve more than business needs, it should serve  *community* needs. (Yes, alonetone is [open source](https://github.com/sudara/alonetone)).
 
