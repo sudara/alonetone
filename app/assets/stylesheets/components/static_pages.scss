@@ -69,13 +69,12 @@
         box-shadow: none;
         border-radius: 0;
         line-height: 1.3;
-        padding: $baseline * (7/3) $baseline * 2 0 $baseline * 2;
+        padding: $baseline * 1.5 $baseline 0 $baseline * 2;
         @media #{$mobile} {
           padding-left: $baseline * (3/2);
           padding-right: $baseline * (3/2);
         }
-        margin-top: $baseline * 2;
-        border-top: 2px solid $static-page-content-seperator;
+        margin-top: $baseline;
         &:first-child {
           border-top: 0;
           margin-top: 0;

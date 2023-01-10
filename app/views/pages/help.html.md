@@ -1,9 +1,11 @@
 
 ## Why Can't I Just Sign Up?
 
-Unfortunately, public signups these days result in huge quantities of spam, trolls, and misuse. Even the largest networks like Facebook, SoundCloud and Twitter are buried in millions of these types of fake and spammy accounts.
+Unfortunately, public signups resulted in huge quantities of spam, trolls, and misuse.
 
-Since it's just us chickens (not some big company) and we've experienced those issues first-hand (we fought the spam wars and lost), we thought people who really did want an account wouldn't mind [hopping on a waitlist](/get_an_account).
+Even the largest networks like Facebook, SoundCloud and Twitter are buried in millions of these types of fake and spammy accounts.
+
+Since it's just us chickens (not some big company) and we've had these issues first-hand (we fought the spam wars and lost) — we thought people who really did want an account wouldn't mind [hopping on a waitlist](/get_an_account).
 
 ## How can I post my music to Facebook, Twitter, etc?
 
@@ -23,6 +25,6 @@ Sure, you can do that by editing your profile. Click your profile picture top ri
 
 No prob. Email us at support@alonetone.com **from your old email account** and tell us what your new email should be.
 
-## I forgot the email address I used to sign up!
+## I forgot the email address / don't have access to the email I used to sign up!
 
-Hit us up at support@alonetone.com with some guesses of which email it might be and your login name.
+Hit us up at support@alonetone.com with some guesses of which email it might be, your login name, and as much context as you can provide.

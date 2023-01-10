@@ -1,4 +1,18 @@
 
+## Can I upload my podcast or radio show?
+
+Sorry, no!
+
+Alonetone is for people making music. If you upload other audio content (podcasts, radio shows, sermons, audio books) it will probably be removed without warning.
+
+## Can I upload songs for my music blog?
+
+No. Alonetone is for individual artists uploading their own music.
+
+If you upload various artists or copyrighted content, it will be removed.
+
+Your account will be deleted if it happens more than once.
+
 ## What formats can I upload?
 
 MP3 only. We serve the exact file you upload. We don't do any transcoding, so quality is in your hands!

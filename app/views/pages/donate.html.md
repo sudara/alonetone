@@ -1,29 +1,103 @@
-## alonetone is now a nonprofit
 
-I started alonetone 15 years ago. I ran a few similar things before, but in 2005 it was very clear that the internet had rendered music distribution essentially free. Why not build a free service (as in gratis and libre) for myself, my friends, and anyone else who wanted to join.
+(Just looking to make a donation? [Jump ahead](#support-alonetone))
 
-Other sites (like soundcloud) launched around the same time we did. However they were clearly a business. I felt strongly that the internet was finally reaching a place where there was simply no need for business to be involved. Musicians should be able to share their music freely among friends and fans. They just needed some infrastructure to accomplish this.
+👋 Hi! Sudara here.
 
-I've kept alonetone running as the primary developer for 15 years. The site has served over almost 6 million streams of 90,000 tracks from 6500 artists. That might be peanuts on the global internet scale, but it's also amazing that one person can deliver this in their part time, with 15 year uptime (will we outlast SoundCloud?!)
+I started alonetone more than 15 years ago!
 
-And course alonetone was built with a lot of help. A close designer friend. A talented frontend dev who also handles some of the community aspects. And dozens and dozens of motivated early users who contributed time and effort to help shape it into a home. The number of friendships evolved, connections made and lives changed by the site have been unexpected and humbling.
+In 2007, it became clear to me that the internet made music distribution essentially free. I thought: Why not build a free service, for myself, my friends, and anyone else who wanted to join.
 
-But things weren't always smooth. There were many times where alonetone didn't get the attention it deserves, socially or technically. There are many features that we *still* haven't had the bandwidth to build (like comment replies!). I got busy or didn't have enough money to hire the help the site deserves or features fell into disrepair.
+## Why should sharing our music be... business?
 
-Other times were great! In 2017-2019, my consulting business was going well. I decided to do a big mobile-first modernization of alonetone. I contracted a few talented people (who graciously discounted their rates) and we overhauled almost every aspect of the app. I restricted my consulting to part time and invested hundreds and hundreds of hours on the refresh. In addition to my time, I personally spent over 100k on dev/designer time during these 3 years.
+Other sites launched around the same time we did. However they were clearly businesses, looking to make it BIG! Offering free service at the start, but then setting upload limits, running ads, slowly squeezing artists for money, yikes...
 
-I made this investment and the others before it because the internet *needs* projects like this. We *need* high quality free and non-commercial options. We shouldn't just leave these services to startups and companies looking to profit as middlemen. Open source should serve more than just business needs, it should serve community needs.
+I wasn't a huuuuuge fan of that idea. Why should sharing one's music with friends and fans have to be a business? It costs next to nothing to distribute some mp3 files, why should musicians pay?
 
-There used to be so many more indie sites like alonetone on the internet! A lot of them running modified forums or custom built software. Some even open source. But almost all have shut down. Maintaining and developing a web application is *not* trivial, especially as time passes and technology changes. And it's far from free. It's a risk for a community venue depends completely on one person's financial situation...
+That's the premise that alonetone was built on. I've kept it running as the primary developer the last 15 years. The site has served 6 million streams of 90,000 tracks from 6500 artists.
 
-Recognizing this, I setup a Patreon in 2019 and asked the community if they could cover the server and related costs — they happily did! However, hard costs are 1-2k/year and pale in comparison with the human time. Properly maintaining the site requires regular effort from a backend dev, a frontend dev and sometimes a designer.
+That's a tiny blip on the global internet scale (welcome to the true long tail of the internet) but hey — I'm one person working in my *part time* and able to deliver this service with 15 year uptime. (and hey, maybe we'll outlive SoundCloud?!)
 
-What does that mean, realistically? With my years of experience running the project, I can confidently say it takes a minimum of $20-40k/year to properly maintain the site (with myself working for free). It takes at least $50-100k/year to move the site forward measurably, to build new features, to support community growth, to allow me to prioritize the project over my paid projects.
+## alonetone was built with a *lot* of help.
 
-I still believe 100% in alonetone's original premise: the internet has rendered music distribution essentially free. That's had an amazing impact on my generation and all the generations following! I know others believe strongly in this too, because they tell it to my face and write me emails about it.
+Ok, ok, it wasn't *only* 1 person in their part time building alonetone.
 
-So, I'm proud to say we've finally made the leap. alonetone is now officially backed and built by ModernThings, a 501(c)(3) nonprofit. It was started by myself, alonetone's longtime frontend dev and one of the original believers in the project. We are now accepting tax deductible donations in the US and donations worldwide.
+I have a close friend Samo, who I collaborate on design with. And a [talented frontend dev](https://alonetone.com/montgomeru) who also handles some community aspects. And many **many** motivated passionate users who contributed so much time and effort to help shape it into a home.
 
-If you believe in our mission and want alonetone to remain a shining example of what a community focused internet can be, invest in us. Help us continue to build a bright future for musicians worldwide.
+The number of friendships, connections made and lives changed by the site has been truly unexpected and humbling.
 
-<script src="https://donorbox.org/widget.js" paypalExpress="false"></script><iframe src="https://donorbox.org/embed/support-alonetone?default_interval=o&enable_auto_scroll=false" name="donorbox" allowpaymentrequest="allowpaymentrequest" seamless="seamless" frameborder="0" scrolling="no" height="900px" width="100%" style="max-width: 500px; min-width: 250px; max-height:none!important"></iframe>
+## It wasn't always a smooth ride
+
+There were many times where alonetone didn't get the love and attention it deserves — both socially and technically. There are many features that we *still* haven't had the bandwidth to build (like comment replies!). I got busy or didn't have enough money to hire the help the site deserves or features fell into disrepair.
+
+Other times have been great! In 2017-2019, my consulting business was going especially well. I decided to do a big mobile-first modernization of alonetone. I contracted a few talented friends and we overhauled almost every aspect of the app.
+
+I restricted my consulting to part time and invested hundreds and hundreds of hours on the refresh. In addition to my time, I spent over **$100k** to pay others, just for this one refresh cycle.
+
+## What we dream the internet *could* be
+
+I made this investment because the internet *needs* projects like alonetone.
+
+We deserve high quality non-commercial venues for art, music, and global community.
+
+We shouldn't leave these services to startups and companies looking to profit as middlemen. Their priorities are... strange at best, and hostile at worst.  Gamifying platforms to maximize engagement quickly devolves into a lowest common denominator popularity contest. (Hey, TikTok has its merits, but unless you are doing memes, it's a terrible place to share a song you poured your heart and soul into)
+
+On top of that, open source should serve more than business needs, it should serve  *community* needs. (Yes, alonetone is [open source](https://github.com/sudara/alonetone)).
+
+## Ensuring a healthy future
+
+There used to be *so many more* indie sites like alonetone on the internet!
+
+A lot of them ran modified forums or custom built software. Some were open source. But almost *all* have shut down over the years.
+
+If you want to share tunes with fam and friends, you can do it with file-sharing sites (yikes), cloud services (functional, but antisocial), or commodification via official distribution to music streaming sites (I do this, but only with a small slice of my music).
+
+I totally understand why most of the other sites shut down. Maintaining and developing a web application is *not* trivial, especially as time passes and technology changes. It's far from cost-free.
+
+
+## Reducing risk
+
+A big "aha" moment came for me was when I internalized alonetone as a venue really depends completely on my personal financial and work situation... it's 100% coupled to how much free time and extra money I have. For many many years I was idealistic and stubborn and  **wanted** to shoulder the burden on my own — but it wasn't always ideal.
+
+Acknowledging this, I setup a Patreon in 2020 and asked the community if they could cover the server and related costs — they happily did!
+
+Those hard costs are around 2k/year. Unfortunately, they pale in comparison with the human time. A **lot** of human time is needed per-year — even just to keep things running as-is, status quo, with no apparent changes to anyone else. Proper maintenance requires regular effort from a backend dev, a frontend dev, sometimes a designer (not to mention the social/community aspects).
+
+## What does it actually cost, realistically?
+
+I went back and looked through my financials and hours over the years. In *addition* to my own time, it costs at minimum $20-40k/year of human time (at under-market "friend rates") to maintain the site, to keep things moving.
+
+However, I'm not always in a position to divert huge chunks of work hours for the project. To allow me to prioritize alonetone over my other paid work or to pay someone else to take some of my duties, it takes more like $50-100k/year.
+
+$100k is a ****ton of money (especially to most musicians!). However, it's 2023. The reality is $100k/year isn't really enough to even hire **one** talented person full time in tech. However, I have a network of great people who love to help and a history of working well together — the impact would be huge.
+
+So $100k a year is my current high bar goal. I know we can move mountains and keep alonetone happy and sustainable for years to come with that level of real support.
+
+I'm on a mission to make that happen.
+
+## Final form? A non-profit
+
+Oh right, so I buried the lede a bit. All of this is to say: we've taken the next step to ensure alonetone's longevity.
+
+We founded ModernThings, a 501(c)(3) nonprofit, to formally provide for alonetone's future. It was started by myself, alonetone's longtime frontend dev and and another of the original believer and friend of the project.
+
+We are now accepting tax deductible donations in the US (and normal donations worldwide!) 100% of donations to the non-profit go directly to maintaining and improving alonetone.
+
+## Onwards, upwards
+
+I still believe 100% in alonetone's original premise: the internet has rendered music distribution essentially free.
+
+This fact has had an amazing impact on my generation and the generations following. I know others believe strongly in this too: they tell it to my face and write me long emails about it.
+
+## Support alonetone
+
+If you believe in our mission and want alonetone to remain a shining example of what a community focused internet can look like, invest in us.
+
+Just to be clear: We're looking for donations from the tech community and others who are financially stable.
+
+In other words, if you are an artist struggling to make it month to month — **keep your money!** — you've done enough by joining us here, sharing your music and believing in us. There are others out there who share our dream of what internet can be and have the means to help us make that possible. Let's give them an opportunity to join us in building the future we all want to be a part of.
+
+Thank you.
+
+Sudara, January 2023
+
+<script src="https://donorbox.org/widget.js" paypalExpress="false"></script><iframe src="https://donorbox.org/embed/support-alonetone" name="donorbox" allowpaymentrequest="allowpaymentrequest" seamless="seamless" frameborder="0" scrolling="no" height="900px" width="100%" style="display:block; margin:auto; max-width: 500px; min-width: 250px; max-height:none!important"></iframe>
