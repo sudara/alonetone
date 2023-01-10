@@ -5,9 +5,9 @@
 
 I started alonetone more than 15 years ago!
 
-In 2007, it became clear to me that the internet made music distribution essentially free.
+In 2007, it was very clear to me that the internet had made music distribution essentially free.
 
-I thought: Why not build a free service. For myself, my friends, and anyone else who wanted to join.
+I thought: Why not build a free service so we can share our music? For myself, my friends, and anyone else who wanted to join.
 
 ## Why should sharing our music be... business?
 
