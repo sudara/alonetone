@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_02_171732) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_164131) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
@@ -605,7 +605,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_02_171732) do
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "patrons", "users"
   add_foreign_key "profiles", "users"
