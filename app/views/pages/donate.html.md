@@ -33,7 +33,7 @@ However, there were also times where alonetone didn't get the love and attention
 
 Other times have been great! In 2017-2019, my consulting business was going especially well. I decided to do a big mobile-first modernization of alonetone. I contracted a few talented friends and we overhauled almost every aspect of the app.
 
-I restricted my consulting to part time and invested hundreds and hundreds of hours on the refresh. In addition to my time, I spent over **$100k** to pay others, just for this one refresh cycle.
+I restricted my normal consulting to part time and invested hundreds and hundreds of hours on the alonetone refresh. In addition to my time, I spent over **$100k** to pay others, just for this one refresh cycle.
 
 ## What we dream the internet *could* be
 
@@ -41,7 +41,9 @@ I've made this investment over and over again because the internet *needs* proje
 
 We deserve high quality non-commercial venues for art and music. We need connection to others in our global communities.
 
-We shouldn't leave these services to startups and companies looking to profit off of those connections as middlemen. Their priorities are... strange at best, and hostile at worst.  Gamifying platforms to maximize engagement quickly devolves into a lowest common denominator popularity contest. (Hey, TikTok has its merits, but unless you are doing entertaining meme music, it's a terrible place to share a song you poured your heart and soul into).
+We shouldn't leave these services to startups and companies looking to profit off of those connections as middlemen. Their priorities are... strange at best, and hostile at worst.
+
+Gamifying platforms to maximize engagement quickly devolves into a lowest common denominator popularity contest. (Hey, TikTok has its merits, but unless you are doing entertaining meme music, it's a terrible place to share a song you poured your heart and soul into).
 
 On top of that, open source should serve more than business needs, it should serve  *community* needs. (Yes, alonetone is [open source](https://github.com/sudara/alonetone)).
 
@@ -53,14 +55,13 @@ A lot of them ran modified forums or custom built software. Some were open sourc
 
 I totally understand why most of the other sites shut down. Maintaining and developing a web application is *not* trivial, especially as time passes and technology changes. It's far from cost-free.
 
-
 ## Reducing risk
 
-A big "aha" moment came for me was when I finally internalized that alonetone as a venue depends completely on my personal situation... it's 100% coupled to how much free time and extra money I have. For many many years I was idealistic and stubborn about this. I  **wanted** to shoulder the burden on my own — but it wasn't always ideal.
+A big "aha" moment came for me was when I finally internalized that alonetone as a venue depends completely on my personal situation... it's 100% coupled to how much free time and extra money I have. For many many years I was idealistic and stubborn about this. I **wanted** to shoulder the burden on my own to prove a point. But it wasn't always ideal.
 
-I setup a Patreon in 2020 and asked the community if they could cover the server and related costs — they happily did!
+I finally setup a Patreon in 2020 and asked the community if they could cover the server and related costs — they happily did!
 
-Our hard costs are around 2k/year. Unfortunately, they pale in comparison with the human time. A **lot** of human time is needed per-year — even just to keep things running as-is, status quo, with no apparent changes to anyone else. Proper maintenance requires regular effort from a backend dev, a frontend dev, sometimes a designer (not to mention the social/community aspects).
+Our hard costs are around 2k/year. Unfortunately, they pale in comparison with the human time. A **lot** of human time is needed per-year — even just to keep things running as-is, status quo, with no apparent changes to anyone else. Proper maintenance requires regular effort from a backend dev, a frontend dev, and sometimes a designer (not to mention the social/community aspects, support, etc).
 
 ## What does it actually cost, realistically?
 
