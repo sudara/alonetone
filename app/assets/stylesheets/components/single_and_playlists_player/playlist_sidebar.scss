@@ -29,9 +29,11 @@
     font-size: 14px;
     line-height: $baseline;
     font-weight: normal;
-    margin-top: -3px;
     text-align: center;
     color: $playlist-sidebar-artist-text;
+    margin-top: -3px;
+    padding-left: 6px;
+    padding-right: 6px;
     .by {
       color: $playlist-sidebar-artist-by-text;
     }
