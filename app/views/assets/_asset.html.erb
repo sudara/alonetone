@@ -84,10 +84,13 @@
           </i>
           </div>
 
-          <div class="favorites"><%= asset.favorites_count %>
-              <i class="icon_favs">
+          <div class="favorites">
+            <div class="<%= "faved-#{asset.id}"%>">
+              <%= asset.favorites_count %>
+            </div>
+            <i class="icon_favs">
               <%== render file: svg_path('svg/icon_favorite_inverted.svg') %>
-              </i>
+            </i>
           </div>
         </div>
     </div>
