@@ -50,7 +50,9 @@
         <i class="icon_favs">
           <%== render file: svg_path('svg/icon_favorite_inverted.svg') %>
         </i>
-        <%= @asset.favorites_count %>
+        <div class="<%= "faved-#{@asset.id}"%>">
+          <%= @asset.favorites_count %>
+        </div>
       </div>
       <div class="plays">
         <i class="icon_plays">
