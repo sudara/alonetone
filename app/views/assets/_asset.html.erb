@@ -56,7 +56,7 @@
     <%= button_to toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites',
       method: :put, data: {
         controller: 'favorite',
-        action: 'favorite#toggle',
+        action: 'favorite#broadcast favorite:broadcasted@window->favorite#toggle',
         'favorite-id-value': asset.id
       } do %>
       <%== render file: svg_path('svg/animation_heart.svg') %>
