@@ -56,8 +56,9 @@
     <%= button_to toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites',
       method: :put, data: {
         controller: 'favorite',
-        action: 'favorite#toggle',
-        'favorite-id-value': asset.id
+        action: 'favorite#broadcast',
+        'favorite-id-value': asset.id,
+        'favorite-favorite-outlet': ".add_to_favorites"
       } do %>
       <%== render file: svg_path('svg/animation_heart.svg') %>
     <% end %>
@@ -84,10 +85,13 @@
           </i>
           </div>
 
-          <div class="favorites"><%= asset.favorites_count %>
-              <i class="icon_favs">
+          <div class="favorites">
+            <div class="<%= "faved-#{asset.id}"%>">
+              <%= asset.favorites_count %>
+            </div>
+            <i class="icon_favs">
               <%== render file: svg_path('svg/icon_favorite_inverted.svg') %>
-              </i>
+            </i>
           </div>
         </div>
     </div>

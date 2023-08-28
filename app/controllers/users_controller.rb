@@ -84,7 +84,9 @@ class UsersController < ApplicationController
 
     current_user.toggle_favorite(asset)
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: '' }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update_all(".faved-#{asset.id}", asset.reload.favorites_count)
+      end
     end
   end
 
