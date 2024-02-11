@@ -36,6 +36,11 @@ Rails.application.routes.draw do
         put :restore
       end
     end
+    resources :reserved_words do
+      member do
+        put :delete
+      end
+    end
     resources :mass_invites, param: :token
   end
 

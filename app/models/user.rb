@@ -33,11 +33,10 @@ class User < ApplicationRecord
       message: "should use only letters and numbers."
     },
     length: { within: 3..100 },
-    uniqueness: {
-      case_sensitive: false,
+    login_is_allowed: {
       if: :will_save_change_to_login?
     }
-
+  
   validates :password,
     confirmation: { if: :require_password? },
     length: {

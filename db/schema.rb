@@ -265,6 +265,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_26_191520) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "reserved_words", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_reserved_words_on_name", unique: true
+  end
+
   create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "display_listen_count", default: true

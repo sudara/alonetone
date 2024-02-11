@@ -1,0 +1,5 @@
+<tr>
+  <td><%= reserved_word.name %></div>
+  <td><%= l(reserved_word.created_at, format: :short) %></td>
+  <td><%= button_to "Delete Reserved Word", delete_admin_reserved_word_path(reserved_word), method: :put %></td>
+  </tr>
