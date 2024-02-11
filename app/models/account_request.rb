@@ -29,40 +29,34 @@ class AccountRequest < ApplicationRecord
 
   validates :entity_type, inclusion: {
     in: entity_types,
-    message: "We need to know what sort of thing you want to upload!"
+    message: :unselected_entity_type
   }
 
   validates :email,
     on: :create,
     format: {
       with: URI::MailTo::EMAIL_REGEXP,
-      message: "should look like an email address."
+      message: :invalid_regex
     }
   validate :email_is_unique, on: :create
 
   validates :login,
     on: :create,
+    login_is_allowed: true,
     format: {
       with: /\A\w+\z/,
-      message: "should use only letters and numbers."
+      message: :must_be_alphanumeric
     }
-  validate :login_is_unique, on: :create
 
   validates :details, length: {
     on: :create,
     minimum: 40,
-    too_short: "must be at least 40 characters: Please link to your music/website or add more info!"
+    too_short: :details_too_short
   }
 
   def email_is_unique
     if User.where(email: email).exists?
-      errors.add(:email, "You already have an account on alonetone!")
-    end
-  end
-
-  def login_is_unique
-    if User.where(login: login).exists?
-      errors.add(:login, "Sorry, login is taken. Be creative!")
+      errors.add(:email, :duplicate_account)
     end
   end
 

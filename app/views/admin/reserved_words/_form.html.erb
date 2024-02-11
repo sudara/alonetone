@@ -1,0 +1,14 @@
+<%= form_for([:admin, @reserved_word], builder: AdminFormBuilder) do |form| %>
+  <%= form.field :name do %>
+    <%= form.label_with_error :name %>
+    <%= form.text_field :name %>
+  <% end %>
+  <%= form.field :details do %>
+    <%= form.label_with_error :details %>
+    <%= form.text_field :details %>
+  <% end %>
+  <ul class="actions submit">
+    <li><%= form.submit 'Create reserved word' %></li>
+    <li><%= link_to 'Cancel', admin_reserved_words_path %></li>
+  </ul>
+<% end %>
