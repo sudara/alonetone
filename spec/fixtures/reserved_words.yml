@@ -1,0 +1,9 @@
+petaq:
+  name: petaQ
+  created_at: 2010-04-08 13:00:03
+  updated_at: 2020-04-08 13:00:03
+
+trader:
+  name: "trader$"
+  created_at: 2010-04-08 13:00:03
+  updated_at: 2020-04-08 13:00:03

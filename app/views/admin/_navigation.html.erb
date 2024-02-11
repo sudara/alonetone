@@ -36,6 +36,7 @@
     <%= navigation_item 'Not Spam', admin_comments_path({filter_by: {is_spam: false}}) %>
   </ul>
 
+  <li><%= navigation_item "Reserved Words <span>#{ReservedWord.count}</span>", admin_reserved_words_path %></li>
   <li><%= link_to "Secretz", "/secretz" %></li>
   <li><%= link_to "Akismet Stats", "https://akismet.com/web/1.0/user-stats.php?blog=alonetone.com&api_key=#{Rails.configuration.alonetone.rakismet_key}"%></li>
   <li><%= link_to "Postmark Stats", "https://account.postmarkapp.com/servers/2804035/streams" %></li>
