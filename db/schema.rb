@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_164131) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_21_160656) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
@@ -261,6 +261,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_164131) do
     t.datetime "updated_at"
     t.string "youtube"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "reserved_words", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_reserved_words_on_name", unique: true
   end
 
   create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

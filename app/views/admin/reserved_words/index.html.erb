@@ -1,0 +1,35 @@
+<div id="admin_columns">
+  <div class="admin_column_left box">
+    <h2>Admin</h2>
+    <%= render partial: 'admin/navigation' %>
+  </div>
+  <div class="admin_column_right">
+    <%= button_to 'New reserved word', new_admin_reserved_word_path, method: :get %>
+
+    <div class="mini_paginator top_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
+
+    <div class="box">
+      <h2>
+        Reserved words
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Created</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @reserved_words %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mini_paginator bottom_paginator">
+      <%== pagy_nav @pagy %>
+    </div>
+  </div>
+</div>

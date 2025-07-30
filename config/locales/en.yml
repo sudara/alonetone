@@ -3,6 +3,26 @@ en:
     attributes:
       account_request:
         entity_type: "What you do:"
+    errors:
+      models:
+        account_request:
+          attributes:
+            login:
+              login_not_allowed: Sorry, login is taken. be creative!
+              login_not_unique: Sorry, login is taken. be creative!
+              must_be_alphanumeric: should use only letters and numbers.
+            details:
+              details_too_short: "must be at least 40 characters: Please link to your music/website or add more info!"
+            email:
+              duplicate_account: You already have an account on alonetone!
+              invalid_regex: should look like an email address.
+            entity_type:
+              unselected_entity_type: We need to know what sort of thing you want to upload!
+        user:
+          attributes:
+            login:
+              login_not_allowed: not allowed.
+              login_not_unique: is already taken.
 
   errors:
     messages:
