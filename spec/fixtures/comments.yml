@@ -79,6 +79,14 @@ public_comment_on_asset_by_user:
   private: false
   created_at: <%= 1.day.ago.to_formatted_s :db %>
 
+public_comment_on_asset_by_guest:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Well friend, this is your best work."
+  is_spam: false
+  remote_ip: 127.0.0.2
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
 another_public_comment_on_asset_by_user:
   commentable: valid_arthur_mp3 (Asset)
   body: "This is your best work."

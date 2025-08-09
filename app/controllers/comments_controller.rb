@@ -16,8 +16,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if params[:spam] == true
+    if params[:spam].present?
       @comment.spam!
+      @comment.update_column(:is_spam, true)
       flash[:ok] = 'We marked that comment as spam'
     else
       @comment.destroy
@@ -55,7 +56,15 @@ class CommentsController < ApplicationController
   end
 
   def authorized?
-    moderator? || (@comment.user.id == @comment.commentable.user.id)
+    moderator? || user_made_comment? || user_owns_commentable?
+  end
+
+  def user_made_comment?
+    @comment.user && @comment.user.id == current_user.id
+  end
+
+  def user_owns_commentable?
+    @comment.commentable.user.id == current_user.id
   end
 
   def massaged_params

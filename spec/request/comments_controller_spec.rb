@@ -69,4 +69,34 @@ RSpec.describe CommentsController, type: :request do
       expect(response).to have_http_status(303)
     end
   end
+
+  context "marking a comment as spam" do
+    it "is not possible by a guest" do
+      comment = comments(:public_comment_on_asset_by_user)
+      delete(comment_path(comment), params: { spam: true })
+      expect(response).to redirect_to('/login')
+      expect(Comment.find(comment.id).is_spam).to be false
+    end
+
+    it "is possible by the comment recepient if it's a user comment" do
+      akismet_stub_submit_spam
+      create_user_session(users(:arthur))
+      comment = comments(:public_comment_on_asset_by_user)
+      delete(comment_path(comment), params: { spam: true })
+      expect(response).to have_http_status(303)
+      expect(Comment.find(comment.id).is_spam).to be true
+      expect(flash[:ok]).to eq('We marked that comment as spam')
+    end
+
+    it "is possible by the comment recepient if it's a guest comment" do
+      akismet_stub_submit_spam
+      create_user_session(users(:arthur))
+      comment = comments(:public_comment_on_asset_by_guest)
+      expect(comment.valid?).to be true
+      delete(comment_path(comment), params: { spam: true })
+      expect(response).to have_http_status(303)
+      expect(Comment.with_deleted.find(comment.id).is_spam).to be true
+      expect(flash[:ok]).to eq('We marked that comment as spam')
+    end
+  end
 end
