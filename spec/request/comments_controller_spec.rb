@@ -72,8 +72,10 @@ RSpec.describe CommentsController, type: :request do
 
   context "marking a comment as spam" do
     it "is not possible by a guest" do
+      akismet_stub_submit_spam
       comment = comments(:public_comment_on_asset_by_user)
-      delete(comment_path(comment), params: { spam: true })
+      put spam_user_track_comment_path(users(:arthur), comment.commentable, comment)
+
       expect(response).to redirect_to('/login')
       expect(Comment.find(comment.id).is_spam).to be false
     end
@@ -82,7 +84,7 @@ RSpec.describe CommentsController, type: :request do
       akismet_stub_submit_spam
       create_user_session(users(:arthur))
       comment = comments(:public_comment_on_asset_by_user)
-      delete(comment_path(comment), params: { spam: true })
+      put spam_user_track_comment_path(users(:arthur), comment.commentable, comment)
       expect(response).to have_http_status(303)
       expect(Comment.find(comment.id).is_spam).to be true
       expect(flash[:ok]).to eq('We marked that comment as spam')
@@ -93,10 +95,47 @@ RSpec.describe CommentsController, type: :request do
       create_user_session(users(:arthur))
       comment = comments(:public_comment_on_asset_by_guest)
       expect(comment.valid?).to be true
-      delete(comment_path(comment), params: { spam: true })
+      put spam_user_track_comment_path(users(:arthur), comment.commentable, comment)
       expect(response).to have_http_status(303)
       expect(Comment.with_deleted.find(comment.id).is_spam).to be true
       expect(flash[:ok]).to eq('We marked that comment as spam')
+    end
+  end
+
+  context "unspamming a comment" do
+    it "is not possible by a guest" do
+      akismet_stub_submit_ham
+      comment = comments(:public_comment_on_asset_by_user)
+      put unspam_user_track_comment_path(users(:arthur), comment.commentable, comment)
+
+      expect(response).to redirect_to('/login')
+      expect(Comment.find(comment.id).is_spam).to be false
+    end
+
+    it "is possible by the comment recepient if it's a user comment" do
+      akismet_stub_submit_ham
+      akismet_stub_submit_spam
+      create_user_session(users(:arthur))
+      comment = comments(:public_comment_on_asset_by_user)
+      comment.spam! # make it spam first
+      comment.is_spam = true
+      put unspam_user_track_comment_path(users(:arthur), comment.commentable, comment)
+      expect(response).to have_http_status(303)
+      expect(Comment.find(comment.id).is_spam).to be false
+      expect(flash[:ok]).to eq('We un-spammed and made that comment public')
+    end
+
+    it "is possible by the comment recepient if it's a guest comment" do
+      akismet_stub_submit_ham
+      akismet_stub_submit_spam
+      create_user_session(users(:arthur))
+      comment = comments(:public_comment_on_asset_by_guest)
+      comment.spam! # make it spam first
+      comment.is_spam = true
+      put unspam_user_track_comment_path(users(:arthur), comment.commentable, comment)
+      expect(response).to have_http_status(303)
+      expect(Comment.with_deleted.find(comment.id).is_spam).to be false
+      expect(flash[:ok]).to eq('We un-spammed and made that comment public')
     end
   end
 end

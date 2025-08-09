@@ -133,7 +133,12 @@ Rails.application.routes.draw do
         post :search
         get  :mass_edit
       end
-      resources :comments,  only: [:create, :destroy]
+      resources :comments,  only: [:create, :destroy] do
+        member do
+          put :unspam
+          put :spam
+        end
+      end
     end
     resources :favorites
     resources :playlists do

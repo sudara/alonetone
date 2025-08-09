@@ -46,7 +46,6 @@ class Comment < ActiveRecord::Base
                   content: proc { body },
                   user_role: proc { role },
                   permalink: proc { commentable.try(:full_permalink) }
-
   # Poor man's anti-spam helper
   def duplicate?
     # Allow single emojis to be posted multiple times

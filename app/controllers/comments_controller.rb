@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :find_user, except: %i[index create destroy]
-  before_action :find_comment, only: %i[destroy]
-  before_action :require_login, only: %i[destroy]
+  before_action :find_comment, only: %i[destroy unspam spam]
+  before_action :require_login, only: %i[destroy unspam spam]
 
   def create
     head :bad_request unless request.xhr?
@@ -16,15 +16,31 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if params[:spam].present?
-      @comment.spam!
-      @comment.update_column(:is_spam, true)
-      flash[:ok] = 'We marked that comment as spam'
-    else
-      @comment.destroy
-      flash[:ok] = 'We threw away that comment'
-    end
+    @comment.destroy
+    flash[:ok] = 'We threw away that comment'
     redirect_back(fallback_location: root_path, status: :see_other)
+  end
+
+  def unspam
+    @comment.ham!
+    @comment.update_attribute :is_spam, false
+    flash[:ok] = 'We un-spammed and made that comment public'
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
+      format.js
+    end
+  end
+
+  def spam
+    @comment.spam!
+    @comment.update_attribute :is_spam, true
+    flash[:ok] = 'We marked that comment as spam'
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
+      format.js
+    end
   end
 
   def index
@@ -60,7 +76,7 @@ class CommentsController < ApplicationController
   end
 
   def user_made_comment?
-    @comment.user && @comment.user.id == current_user.id
+    @comment&.user && @comment.user.id == current_user.id
   end
 
   def user_owns_commentable?
