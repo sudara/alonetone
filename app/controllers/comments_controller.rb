@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     head :bad_request unless request.xhr?
     @comment = Comment.new(massaged_params)
     @comment.is_spam = @comment.spam? # makes api request
+    @comment.spam_if_banned_words! # immediate flag based on terms
     if !@comment.abuse_from_guest? && @comment.save
       CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
       head :created, location: @comment

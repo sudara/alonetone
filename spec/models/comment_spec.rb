@@ -39,6 +39,32 @@ RSpec.describe Comment, type: :model do
     end
   end
 
+
+  context "spam_if_banned_words!" do
+    it "inspects the body for banned words and marks as spam" do
+      akismet_stub_response_ham # it fails to detect
+      akismet_stub_submit_spam
+      new_comment.body = "This is a comment with a banned word: sex https"
+      new_comment.spam_if_banned_words!
+      expect(new_comment).to be_spam
+    end
+
+    it "does not mark as spam with just one banned word" do
+      akismet_stub_response_ham
+      akismet_stub_submit_spam
+      new_comment.body = "This is a comment with a banned word: https"
+      new_comment.spam_if_banned_words!
+      expect(new_comment).not_to be_spam
+    end
+
+    it "does not mark as spam with no banned words" do
+      akismet_stub_response_ham
+      new_comment.body = "This is a comment with no banned words"
+      new_comment.spam_if_banned_words!
+      expect(new_comment).not_to be_spam
+    end
+  end
+
   context "saving" do
     it "should store user_id when commenting on an asset" do
       expect(new_comment.save).to be_truthy

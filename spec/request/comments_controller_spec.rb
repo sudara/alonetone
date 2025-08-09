@@ -5,6 +5,46 @@ RSpec.describe CommentsController, type: :request do
     akismet_stub_response_ham
   end
 
+  context "spamming" do
+    let!(:asset) { assets(:valid_mp3) }
+
+    it "should mark as spam if body contains multiple banned words" do
+      akismet_stub_submit_ham
+      akismet_stub_submit_spam
+      params = { :comment => { "body" => "https sex", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
+      expect do
+        post(
+          "/comments",
+          params: params,
+          headers: {
+            'x-forwarded-for' => '8.8.8.8',
+            'user-agent' => 'webkit'
+          }
+        )
+      end.to change(Comment, :count)
+      puts Comment.last.inspect
+      expect(Comment.last.is_spam).to be true
+    end
+
+    it "should allow one banned word" do
+      akismet_stub_response_ham
+      akismet_stub_submit_spam
+      params = { :comment => { "body" => "https", "private" => "0", "commentable_type" => "Asset", "commentable_id" => asset.id }, "user_id" => users(:sudara).login, "track_id" => assets(:valid_mp3).permalink }
+      expect do
+        post(
+          "/comments",
+          params: params,
+          headers: {
+            'x-forwarded-for' => '8.8.8.8',
+            'user-agent' => 'webkit'
+          }
+        )
+      end.to change(Comment, :count)
+      puts Comment.last.inspect
+      expect(Comment.last.is_spam).to be false
+    end
+  end
+
   context "guest rate limiting" do
     let!(:asset) { assets(:valid_mp3) }
 

@@ -1,6 +1,11 @@
 class Comment < ActiveRecord::Base
   include SoftDeletion
 
+  BANNED_WORDS = %w[
+    pussy porn onlyfans terpene movies http erotic gay girls adult chicks tits asian milf sex casino
+    softcore hardcore credit repayment anal masturbate slut fetish nude viagra blowjob bondage
+  ].freeze
+
   scope :recent,             -> { order('comments.id DESC') }
   scope :only_public,        -> { recent.where(is_spam: false).where(private: false) }
   scope :by_member,          -> { recent.where('commenter_id IS NOT NULL') }
@@ -113,6 +118,22 @@ class Comment < ActiveRecord::Base
 
   def abuse_from_guest?
     !commenter.present? && Comment.over_rate_limit_for_ip?(remote_ip)
+  end
+
+  def banned_word_hits_count
+    text = body.to_s.downcase
+    BANNED_WORDS.count { |w| text.include?(w) }
+  end
+
+  def contains_multiple_banned_words?
+    banned_word_hits_count > 1
+  end
+
+  def spam_if_banned_words!
+    return unless contains_multiple_banned_words?
+
+    self.is_spam = true
+    spam!
   end
 end
 
