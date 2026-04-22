@@ -4,11 +4,15 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '7.0.8.5'
+gem 'rails', '~> 7.1.0'
 gem 'mysql2', '0.5.6'
 gem 'puma'
 
 # ruby
+# Ruby stdlib gems retired in 3.4/4.0 that some of our deps still load
+# directly (not via Rails). Can drop as individual deps drop their use.
+gem 'ostruct' # pulled in by json 2.x
+
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
 
@@ -41,7 +45,8 @@ gem 'postmark-rails'
 
 # frontend
 gem 'shakapacker'
-gem 'sass-rails'
+gem 'sprockets-rails'
+gem 'dartsass-rails'
 gem 'yui-compressor'
 gem 'turbo-rails'
 
@@ -64,7 +69,6 @@ end
 ## Who loves tests! You do? You do!
 group :test do
   gem 'capybara'
-  gem 'webdrivers'
   gem 'guard', require: false
   gem 'guard-rspec', require: false
   gem 'listen', require: false
