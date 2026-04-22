@@ -341,7 +341,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.6)
-    rack-proxy (0.7.4)
+    rack-proxy (0.7.7)
       rack
     rack-session (2.1.2)
       base64 (>= 0.1.0)
@@ -590,6 +590,7 @@ DEPENDENCIES
   perf_check
   postmark-rails
   puma
+  rack-proxy (~> 0.7.7)
   rails (~> 7.1.0)
   rails-controller-testing
   rakismet

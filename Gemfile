@@ -64,6 +64,10 @@ gem 'dalli'
 # Rails 7.1.x's MemCacheStore.build_mem_cache still passes positionally.
 # Revisit when we upgrade Rails to a version that uses ConnectionPool.new(**opts).
 gem 'connection_pool', '< 3'
+# Pinned to ~> 0.7.7: 0.7.5 dropped the Rack::Utils::HeaderHash reference
+# that Rack 3 removed. Shakapacker's DevServerProxy middleware pulls in
+# rack-proxy transitively; without this pin /packs/* requests 500 in dev.
+gem 'rack-proxy', '~> 0.7.7'
 
 group :development do
   gem 'perf_check', require: false
