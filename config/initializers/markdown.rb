@@ -23,7 +23,10 @@ class MarkdownHandler
   end
 
   def self.render(text)
-    CommonMarker.render_doc(text, :UNSAFE).to_html(:UNSAFE)
+    # `text` arrives as an ActionView::OutputBuffer from the ERB handler. In
+    # Rails 7.1 OutputBuffer no longer inherits from String, and Commonmarker
+    # 2.x rejects non-String input with a TypeError — so coerce first.
+    Commonmarker.to_html(text.to_s, options: { render: { unsafe: true } })
   end
 
   # Rather than add a pipeline / library just for header anchors, we steal from html-pipeline

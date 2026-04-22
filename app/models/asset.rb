@@ -13,7 +13,7 @@ class Asset < ApplicationRecord
   include Asset::Waveform
 
   attribute :user_agent, :string
-  serialize :waveform, Array
+  serialize :waveform, type: Array, coder: YAML
 
   scope :published,       -> { where(private: false) }
   scope :recent,          -> { reorder('assets.id DESC').includes(:user) }
