@@ -73,9 +73,18 @@ module ApplicationHelper
   def format_track_description(text)
     return "" unless text
 
-    # autolink + hardbreaks are on by default in Commonmarker 2.x.
+    # hardbreaks + autolink happen to be on by default in Commonmarker 2.x,
+    # but set them explicitly: both were named options in the CommonMarker 1.x
+    # call this replaced, and helper specs pin both behaviors.
     nofollowize(
-      Commonmarker.to_html(text, options: { parse: { smart: true } })
+      Commonmarker.to_html(
+        text,
+        options: {
+          parse: { smart: true },
+          render: { hardbreaks: true },
+          extension: { autolink: true }
+        }
+      )
     ).html_safe
   end
 

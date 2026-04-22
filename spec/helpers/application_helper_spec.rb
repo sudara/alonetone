@@ -19,4 +19,11 @@ RSpec.describe ApplicationHelper, type: :helper do
   it "renders hard breaks in track descriptions" do
     expect(format_track_description("this\nis\npoetry")).to eql("<p>this<br />\nis<br />\npoetry</p>\n")
   end
+
+  it "combines smart punctuation, autolinks, and hard breaks in track descriptions" do
+    input = "check out \"this\"\nhttps://alonetone.com"
+    expect(format_track_description(input)).to eql(
+      "<p>check out “this”<br />\n<a rel=\"nofollow ugc\" href=\"https://alonetone.com\">https://alonetone.com</a></p>\n"
+    )
+  end
 end
