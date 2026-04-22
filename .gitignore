@@ -18,6 +18,7 @@ MorphSVGPlugin.js
 /config/scout_apm.yml
 /config/skylight.yml
 /log
+/public/assets
 /public/mp3
 /public/packs
 /public/packs-test
