@@ -13,13 +13,11 @@ require 'percy/capybara'
 # The suite needs to be able to connect to localhost for feature specs.
 # Percy sends its build response out of the test process so it also needs to connect
 # to its API.
-# Capybara/Webdrivers needs to ping for / download latest chrome
 WebMock.disable_net_connect!(
   allow_localhost: true,
   allow: ['percy.io',
     'ownandship.io',
     'cdn.alonetone.com', # fonts
-    'chromedriver.storage.googleapis.com',
     'github.com',
     'github-releases.githubusercontent.com'])
 
@@ -42,7 +40,7 @@ Capybara.register_driver :alonetone do |app|
     args: %w[disable-gpu no-sandbox])
 
   # comment out to run with the browser visible:
-  options.headless!
+  options.add_argument('--headless=new')
 
   Capybara::Selenium::Driver.new(
     app,
