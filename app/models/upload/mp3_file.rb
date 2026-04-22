@@ -15,9 +15,6 @@ class Upload
     # file.
     attr_accessor :filename
 
-    # Content-type of the posted data if known.
-    attr_accessor :content_type
-
     # The user who originate the upload.
     attr_accessor :user
 
@@ -61,16 +58,15 @@ class Upload
     end
 
     def combined_attributes
+      # Content-type is identified by Active Storage (via Marcel) from the
+      # file bytes on attach, so we intentionally don't forward a declared
+      # content-type here — Asset's whitelist validates Marcel's result.
       asset_attributes
         .merge(title: title_from_filename)
         .merge(metadata.attributes)
         .merge(
           user: user,
-          audio_file: {
-            io: file,
-            filename: filename,
-            content_type: content_type
-          }.compact
+          audio_file: { io: file, filename: filename }
         )
     end
   end
