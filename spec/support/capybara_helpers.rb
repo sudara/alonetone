@@ -35,6 +35,11 @@ module RSpec
           fill_in 'user_session[password]', with: 'test'
           click_button 'Come on in...'
         end
+        # click_button can return before Selenium actually dispatches the POST and
+        # follows the redirect. Wait for a logged-in-only element before yielding,
+        # otherwise a subsequent `visit` can race ahead and hit the unauthenticated
+        # state (redirecting to /login and silently failing the test setup).
+        expect(page).to have_css('.user_dropdown')
         yield
       end
     end
