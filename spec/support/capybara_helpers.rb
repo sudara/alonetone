@@ -4,7 +4,15 @@ module RSpec
   module Support
     module CapybaraHelpers
       def switch_themes
+        # On slow CI runners the first profile_link click can land before the
+        # user-dropdown Stimulus controller has connected, so the menu never
+        # opens and the subsequent switch_to_theme click finds nothing visible.
+        # Re-click until the menu is actually visible.
         page.click_on class: 'profile_link'
+        unless page.has_css?('.user_dropdown_menu', visible: true, wait: 2)
+          page.click_on class: 'profile_link'
+          page.assert_selector('.user_dropdown_menu', visible: true)
+        end
         page.click_on class: 'switch_to_theme'
       end
 
