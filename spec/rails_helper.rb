@@ -57,7 +57,7 @@ Capybara.server = :puma, { Silent: true }
 
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
-  config.fixture_path = Rails.root.join('spec', 'fixtures')
+  config.fixture_paths = [Rails.root.join('spec', 'fixtures')]
   config.file_fixture_path = Rails.root.join('spec', 'fixtures', 'files')
 
   # All of the fixtures all of the time.

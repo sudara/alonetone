@@ -24,7 +24,7 @@ RSpec.describe UsersHelper, type: :helper do
 
   it "format summary for a user" do
     user = users(:jamie_kiesl)
-    date = user.created_at.to_date.to_s(:long)
+    date = user.created_at.to_date.to_fs(:long)
     profile = <<~PROFILE
       jamiek
       Joined alonetone #{date}
@@ -33,7 +33,7 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_summary(user)).to eq(profile.strip)
 
     user = users(:will_studd)
-    date = user.created_at.to_date.to_s(:long)
+    date = user.created_at.to_date.to_fs(:long)
     profile = <<~PROFILE
       willstudd
       4 uploaded tracks
@@ -43,7 +43,7 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_summary(user)).to eq(profile.strip)
 
     user = users(:henri_willig)
-    date = user.created_at.to_date.to_s(:long)
+    date = user.created_at.to_date.to_fs(:long)
     profile = <<~PROFILE
       Henri Willig
       2 uploaded tracks
@@ -53,7 +53,7 @@ RSpec.describe UsersHelper, type: :helper do
     expect(user_summary(user)).to eq(profile.strip)
 
     user = users(:william_shatner)
-    date = user.created_at.to_date.to_s(:long)
+    date = user.created_at.to_date.to_fs(:long)
     profile = <<~PROFILE
       Captain Bill
       Joined alonetone #{date}
