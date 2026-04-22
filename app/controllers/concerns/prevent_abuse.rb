@@ -29,6 +29,11 @@ module PreventAbuse
 
   # Whitelist of all allowed user-agents. Safari uses `cfnetwork' as user-agent when downloading
   # a file on macOS 10.4+.
+  #
+  # Do not add bare "facebook" here: it matches the developers.facebook.com URL that
+  # meta-externalagent advertises in its UA string, which whitelisted Meta's AI scraper
+  # during the April 2026 CloudFront incident. facebookexternalhit (link previews) is
+  # the only legitimate Facebook listener and is already listed explicitly.
   @@valid_listeners = %w[
     msie
     webkit
@@ -45,12 +50,27 @@ module PreventAbuse
     ipad
     iphone
     apple
-    facebook
     stagefright
   ].freeze
 
-  # Blacklist of all disallowed user-agents.
-  @@bots = %w[bot spider baidu mp3bot]
+  # Blacklist of disallowed user-agents. Matched as substrings against the downcased UA.
+  # meta-externalagent is called out because it deliberately omits "bot" from its name —
+  # the only bot in April 2026 that slipped past the generic "bot"/"spider" filters.
+  # Deliberately not matching the bare word "crawler": meta-externalagent advertises
+  # a URL containing it, but so do some legitimate preview agents' self-doc URLs, so
+  # a substring match there is too risky.
+  @@bots = %w[
+    bot
+    spider
+    baidu
+    mp3bot
+    meta-externalagent
+    scrapy
+    claude-web
+    anthropic-ai
+    ai2bot
+    dataforseo
+  ].freeze
 
   def is_a_bot?
     # gotta have a user agent

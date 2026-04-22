@@ -51,4 +51,22 @@ RSpec.describe PreventAbuse do
     controller = base.new(request)
     expect(controller.is_a_bot?).to be_truthy
   end
+
+  it "sees Meta's AI crawler as a bot" do
+    request = OpenStruct.new(
+      ip: '57.141.20.10',
+      user_agent: "meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler)"
+    )
+    controller = base.new(request)
+    expect(controller.is_a_bot?).to be_truthy
+  end
+
+  it "still allows facebookexternalhit link previews" do
+    request = OpenStruct.new(
+      ip: '57.141.20.10',
+      user_agent: "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+    )
+    controller = base.new(request)
+    expect(controller.is_a_bot?).to be_falsey
+  end
 end

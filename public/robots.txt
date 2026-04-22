@@ -1,3 +1,111 @@
+# AI training / LLM crawlers — blocked entirely.
+# On April 1-2 2026 Meta-ExternalAgent pulled ~477k MP3s (1.5 TB CloudFront
+# egress) in 48 hours. Every bot listed below is either (a) an AI training
+# scraper or (b) a commercial SEO crawler that doesn't send us traffic.
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: LinkupBot
+Disallow: /
+
+# Commercial SEO/backlink crawlers — no user traffic benefit, heavy load.
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SERankingBacklinksBot
+Disallow: /
+
+User-agent: AwarioBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Thinkbot
+Disallow: /
+
+# Everything else: Googlebot, Bingbot, DuckDuckBot, legit traffic — OK,
+# but don't let anyone crawl the mp3s themselves. The app serves 302s to
+# signed CloudFront URLs; crawlers that follow those redirects burn real
+# bandwidth for no indexing value.
+
 User-agent: *
 Disallow: /*.mp3$
 Disallow: /*.MP3$
