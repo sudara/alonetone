@@ -4,13 +4,19 @@ module RSpec
   module Support
     module CapybaraHelpers
       def switch_themes
-        # Wait for the user-dropdown Stimulus controller to connect before
-        # clicking; otherwise on slow CI the click lands before the action
-        # handler is wired up and the menu never opens. The controller adds
-        # the `connected` class from its connect() callback.
-        page.assert_selector('.user_dropdown.connected')
+        # Wait for Stimulus to wire up the page before clicking; otherwise on
+        # slow CI the first click lands before the user-dropdown action handler
+        # is attached and the menu never opens.
+        wait_for_stimulus
         page.click_on class: 'profile_link'
         page.click_on class: 'switch_to_theme'
+      end
+
+      # Signal emitted from application.js on turbo:load, by which point
+      # Stimulus has processed the initial DOM and every data-controller on
+      # the page is connected.
+      def wait_for_stimulus
+        page.assert_selector('body[data-stimulus-ready]')
       end
 
       def pause_animations

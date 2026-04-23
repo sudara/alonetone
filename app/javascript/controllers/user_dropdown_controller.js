@@ -12,13 +12,6 @@ export default class extends Controller {
     this.darkStyles = document.querySelectorAll('link')[1]
   }
 
-  // Tests wait on this class to avoid clicking before Stimulus has wired up
-  // the data-action handler. Stimulus has no public "controller connected"
-  // signal so we emit our own.
-  connect() {
-    this.element.classList.add('connected')
-  }
-
   open(e) {
     e.preventDefault()
     this.menuTarget.style.display = 'block'

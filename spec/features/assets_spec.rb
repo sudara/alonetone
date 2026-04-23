@@ -15,6 +15,9 @@ RSpec.describe 'tracks', type: :feature, js: true do
   it 'renders assets#edit' do
     logged_in do
       visit 'arthur/tracks/mass_edit'
+      # Wait for Stimulus to wire up the page so the save controller actually
+      # hears turbo:submit-end when we click commit.
+      wait_for_stimulus
       first("input[type='text']").set("New Title")
       akismet_stub_response_ham
       first('input[name="commit"]').click
