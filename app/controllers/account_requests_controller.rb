@@ -12,7 +12,7 @@ class AccountRequestsController < ApplicationController
       @email = @account_request.email
       render 'thank_you', layout: 'pages', status: 303
     else
-      render 'new', status: :unprocessable_entity
+      render 'new', status: :unprocessable_content
     end
   end
 
