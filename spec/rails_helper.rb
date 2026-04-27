@@ -96,6 +96,15 @@ RSpec.configure do |config|
     clear_performed_jobs
   end
 
+  # Feature specs run multiple plays of the same track from 127.0.0.1 within
+  # one example. The `ip_just_registered_this_listen?` guard would suppress
+  # every play after the first and make `Listen.count` assertions unreliable.
+  # The guard's behavior is covered by request specs in assets_controller_spec,
+  # so disable it just for feature specs.
+  config.before(:each, type: :feature) do
+    allow_any_instance_of(Listens).to receive(:ip_just_registered_this_listen?).and_return(false)
+  end
+
   config.before(:example, type: :request) do
     activate_authlogic
   end
