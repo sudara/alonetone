@@ -3,11 +3,17 @@
 module RSpec
   module Support
     module CapybaraHelpers
+      # Auto-wait for Stimulus on every navigation in js feature specs.
+      # Since the Shakapacker 7 / Webpack 5 upgrade, the application bundle
+      # loads async chunks, so DOMContentLoaded no longer implies controllers
+      # are connected. Without this, any click/hover that targets a
+      # Stimulus-wired element races the MutationObserver and flakes.
+      def visit(*args, **kwargs)
+        super
+        wait_for_stimulus if Capybara.current_driver == :alonetone
+      end
+
       def switch_themes
-        # Wait for Stimulus to wire up the page before clicking; otherwise on
-        # slow CI the first click lands before the user-dropdown action handler
-        # is attached and the menu never opens.
-        wait_for_stimulus
         page.click_on class: 'profile_link'
         page.click_on class: 'switch_to_theme'
       end
