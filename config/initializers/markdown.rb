@@ -19,7 +19,12 @@ class MarkdownHandler
   end
 
   def self.cache_key(text)
-    Digest::MD5.hexdigest("#{text}v4")
+    # Bump the version suffix whenever the rendering pipeline changes — the
+    # production cache (:mem_cache_store) has no expires_in, so static .md
+    # pages would otherwise keep serving HTML from the previous renderer
+    # until LRU eviction. v5 = Commonmarker 2.x (comrak); v4 was CommonMarker
+    # 1.x (cmark).
+    Digest::MD5.hexdigest("#{text}v5")
   end
 
   def self.render(text)
