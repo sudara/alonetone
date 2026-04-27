@@ -7,6 +7,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       visit 'henri_willig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
+      wait_for_stimulus
       first_track.hover
       expect(first_track).to have_css(':hover')
       page.percy_snapshot('Playlist Cover')
