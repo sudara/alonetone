@@ -19,34 +19,34 @@ $small-image-width: 100px;
 // Shared by both styles
 .blank_slate_illustration {
   &.alec {
-    background-image: image-url("illustrations/contributors/alec-talking.png");
+    background-image: url("illustrations/contributors/alec-talking.png");
     @include getHeightsFromRatio(1.3189);
   }
   &.jenya {
-    background-image: image-url("illustrations/contributors/jenya-talking.png");
+    background-image: url("illustrations/contributors/jenya-talking.png");
     @include getHeightsFromRatio(1.294);
   }
   &.sudara {
-    background-image: image-url("illustrations/contributors/sudara-talking.png");
+    background-image: url("illustrations/contributors/sudara-talking.png");
     @include getHeightsFromRatio(.796);
   }
   &.ben {
-    background-image: image-url("illustrations/contributors/ben-talking.png");
+    background-image: url("illustrations/contributors/ben-talking.png");
     @include getHeightsFromRatio(1.2585);
     
   }
   &.samo {
-    background-image: image-url("illustrations/contributors/samo-talking.png");
+    background-image: url("illustrations/contributors/samo-talking.png");
     @include getHeightsFromRatio(1.007);
   }
   &.manfred {
-    background-image: image-url("illustrations/contributors/manfred-talking.png");
+    background-image: url("illustrations/contributors/manfred-talking.png");
     @include getHeightsFromRatio(1.6369);
   }
 }
 
 .page_container_with_blank_slate_full_cloud {
-  background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
+  background-image: url("illustrations/backgrounds/contributor-less-noise.jpg");
   background-repeat: no-repeat;
   background-size: $site_max_width;
   background-position-x: 50%;
@@ -160,7 +160,7 @@ $small-image-width: 100px;
 }
 
 .page_container_with_blank_slate_overlapping_content {
-  background-image: image-url("illustrations/backgrounds/contributor-less-noise.jpg");
+  background-image: url("illustrations/backgrounds/contributor-less-noise.jpg");
   background-repeat: no-repeat;
   background-size: $site_max_width;
   background-position-x: 50%;

@@ -63,7 +63,7 @@ body.error {
     }
     .gift_image {
       height: 460px;
-      background: no-repeat image-url("illustrations/500-extended.png");
+      background: no-repeat url("illustrations/500-extended.png");
       background-position: center center;
       background-size: 2000px 460px;
       position: relative;
@@ -87,7 +87,7 @@ body.no_results {
       }
     }
     .gift_image {
-      background-image: image-url("illustrations/no-results.jpg");
+      background-image: url("illustrations/no-results.jpg");
       padding-bottom: 60.57%;
     }
   }
@@ -100,7 +100,7 @@ body.not_found {
     }
     background-color: #f04e1a;
     .gift_image {
-      background-image: image-url("illustrations/404.png");
+      background-image: url("illustrations/404.png");
       padding-bottom: 71.73%;
     }
   }

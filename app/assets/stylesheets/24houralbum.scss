@@ -24,7 +24,7 @@ body {
   line-height: 1;
   font-family: Helvetica, Arial, Geneva, sans-serif;
   background-color: #1e1918;
-  background: image-url('24hour/background-right.jpg') repeat-x top left;
+  background: url('24hour/background-right.jpg') repeat-x top left;
   color: #e9e2d3;
 }
 
@@ -43,7 +43,7 @@ a, a:hover, a:visited{
 
 #content{
   width: 100%;
-  background: #1e1918 image-url('24hour/24-hour-album-background.jpg') no-repeat center top;
+  background: #1e1918 url('24hour/24-hour-album-background.jpg') no-repeat center top;
   float: left;
   text-align: center;
   margin: auto;
@@ -83,7 +83,7 @@ div.album{
   margin-right: 25px;
   margin-bottom: 21px;
   text-align: left;
-  background: image-url('24hour/album-background-large-over.png') no-repeat right top;
+  background: url('24hour/album-background-large-over.png') no-repeat right top;
   float: left;
   position:relative;
 }
@@ -101,13 +101,13 @@ div.date{
 }
 
 div#dec6{
-  background: image-url('24hour/december6th.png') no-repeat;
+  background: url('24hour/december6th.png') no-repeat;
 }
 div#dec13{
-  background: image-url('24hour/december13th.png') no-repeat;  
+  background: url('24hour/december13th.png') no-repeat;  
 }
 div#betterlate{
-  background: image-url('24hour/betterlatethannever.png') no-repeat;  
+  background: url('24hour/betterlatethannever.png') no-repeat;  
 }
 .album-photo{
   height: 50px;

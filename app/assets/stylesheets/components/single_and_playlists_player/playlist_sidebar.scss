@@ -174,7 +174,7 @@
           text-decoration: none;
           color: $sidebar-link-text;
           i {
-            background-image: image-url("svg/icon_playlist_link.svg");
+            background-image: url("svg/icon_playlist_link.svg");
             display: inline-block;
             background-size: 100%;
             width: 17px;
@@ -186,22 +186,22 @@
             top: -1px;
           }
           &.spotify i {
-            background-image: image-url("svg/icon_playlist_spotify.svg");
+            background-image: url("svg/icon_playlist_spotify.svg");
           }
           &.bandcamp i {
-            background-image: image-url("svg/icon_playlist_bandcamp.svg");
+            background-image: url("svg/icon_playlist_bandcamp.svg");
           }
           &.itunes i {
-            background-image: image-url("svg/icon_playlist_itunes.svg");
+            background-image: url("svg/icon_playlist_itunes.svg");
           }
           &.apple i {
-            background-image: image-url("svg/apple_music.svg");
+            background-image: url("svg/apple_music.svg");
           }
           &.google_play i {
-            background-image: image-url("svg/icon_playlist_google_play.svg");
+            background-image: url("svg/icon_playlist_google_play.svg");
           }
           &.youtube i {
-            background-image: image-url("svg/icon_playlist_youtube.svg");
+            background-image: url("svg/icon_playlist_youtube.svg");
           }
           .action_text {
             font-size: 10px;
@@ -214,7 +214,7 @@
       }
     }
     ul.downloads_links li a i {
-      background-image: image-url("svg/icon_playlist_download.svg");
+      background-image: url("svg/icon_playlist_download.svg");
     }
   }
   .edit_playlist_container {

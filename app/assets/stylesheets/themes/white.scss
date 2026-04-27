@@ -160,8 +160,8 @@ $edit-playlist-left-column-time-text: $orangetone;
 $edit-playlist-sortable-ghost-background: $blue100;
 $edit-playlist-draggable-mirror-border: $black;
 
-$edit-playlist-drag-handle-idle-background: image-url("svg/icon_drag_handle_idle.svg");
-$edit-playlist-drag-handle-active-background: image-url("svg/icon_drag_handle_active.svg");
+$edit-playlist-drag-handle-idle-background: url("svg/icon_drag_handle_idle.svg");
+$edit-playlist-drag-handle-active-background: url("svg/icon_drag_handle_active.svg");
 
 $edit-playlist-drag-handle-border: $grey50;
 $edit-playlist-drag-handle-border-hover: $grey100;
@@ -177,11 +177,11 @@ $playlist-sidebar-artist-by-text: $black;
 $playlist-sidebar-artist-parantheses-text: $grey800;
 $playlist-sidebar-artist-edit-link-text: $orangetone;
 
-$playlist-sidebar-play-background: image-url("svg/icon_play_circled.svg");
-$playlist-sidebar-play-active-background: image-url("svg/icon_play_circled.svg");
+$playlist-sidebar-play-background: url("svg/icon_play_circled.svg");
+$playlist-sidebar-play-active-background: url("svg/icon_play_circled.svg");
 
-$playlist-sidebar-pause-background: image-url("svg/icon_pause_circled.svg");
-$playlist-sidebar-pause-active-background: image-url("svg/icon_pause_circled.svg");
+$playlist-sidebar-pause-background: url("svg/icon_pause_circled.svg");
+$playlist-sidebar-pause-active-background: url("svg/icon_pause_circled.svg");
 
 $tracklist-track-text: $black;
 $tracklist-track-text-active: $white;
@@ -250,12 +250,12 @@ $footer-bottom-link-text: $white;
 $site-header-background: $white;
 $site-header-box-shadow: 0 3px 4px -2px #65666627;
 
-$site-icon-background: transparent image-url("alonetone_big-notext-flat.png") no-repeat;
+$site-icon-background: transparent url("alonetone_big-notext-flat.png") no-repeat;
 
 $site-header-user-dropdown-shadow: 0px 6px 24px rgba(134, 134, 134, 0.75);
 $profile-link-background: $grey100;
-$profile-link-background-image: image-url("svg/icon_profile_link_down_arrow.svg");
-$site-header-search-magnifying-glass-image: image-url("svg/icon_search_magnifying_glass.svg");
+$profile-link-background-image: url("svg/icon_profile_link_down_arrow.svg");
+$site-header-search-magnifying-glass-image: url("svg/icon_search_magnifying_glass.svg");
 
 $site-header-input-background: $grey100;
 $site-header-input-background-focus: $white;

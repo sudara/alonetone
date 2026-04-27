@@ -194,7 +194,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   position: absolute;
   top: 3px;
   left: 4.5px;
-  content: image-url("svg/icon_checkmark.svg");
+  content: url("svg/icon_checkmark.svg");
   display: block;
 }
 
@@ -226,7 +226,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   position: absolute;
   top: 3px;
   left: 4.5px;
-  content: image-url("svg/icon_checkmark.svg");
+  content: url("svg/icon_checkmark.svg");
   display: none;
 }
 
@@ -234,7 +234,7 @@ form.thredded--form input[type="text"], form.thredded--form textarea {
   position: absolute;
   top: 3px;
   left: 4.5px;
-  content: image-url("svg/icon_checkmark.svg");
+  content: url("svg/icon_checkmark.svg");
   display: block;
 }
 
