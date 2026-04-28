@@ -20,7 +20,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # And in some cases our Snapshot will fire before the DOM is updated
         # Capybara is good at waiting if we specify an expectation
         # so let's specify one before we snap
-        first_track.find('a:first-child').click
+        first_track.find('a.play_button').click
         expect(page).to have_selector(".player")
         page.percy_snapshot('Playlist Track Loading')
       end
