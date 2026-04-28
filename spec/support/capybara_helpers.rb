@@ -14,7 +14,10 @@ module RSpec
       end
 
       def switch_themes
-        page.click_on class: 'profile_link'
+        # Native click on profile_link is intermittently lost in --headless=new
+        # Chrome (the dropdown doesn't open). JS-click guarantees dispatch.
+        page.execute_script('arguments[0].click()', find('.user_dropdown .profile_link'))
+        find('.user_dropdown_menu', visible: true)
         page.click_on class: 'switch_to_theme'
       end
 
