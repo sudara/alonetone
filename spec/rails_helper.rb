@@ -129,6 +129,17 @@ RSpec.configure do |config|
           # we also expect some requests to 422
           next if error.message.include?('422')
 
+          # Selenium with --headless=new opens about:blank before the test
+          # navigates, and Chrome 120+ flags the favicon fetch from the null
+          # origin as a Private Network Access CORS violation. Harmless.
+          next if error.message.include?('favicon.ico')
+
+          # Playlist specs intentionally switch tracks while Chrome can still
+          # have an in-flight media request. The cancelled audio request is
+          # reported SEVERE even though playback reaches the expected UI.
+          next if error.message.include?('node_modules_alonetone_stitches') &&
+                  error.message.include?('AbortError: The user aborted a request.')
+
           expect(error.level).not_to eq('SEVERE'), error.message
           next unless error.level == 'WARNING'
           STDERR.puts 'WARN: javascript warning'
