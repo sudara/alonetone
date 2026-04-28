@@ -21,11 +21,25 @@ module RSpec
         page.click_on class: 'switch_to_theme'
       end
 
-      # Signal emitted from application.js on turbo:load, by which point
-      # Stimulus has processed the initial DOM and every data-controller on
-      # the page is connected.
+      # turbo:load (which sets body[data-stimulus-ready]) can fire before
+      # Stimulus finishes registering controllers when Webpack 5 splits the
+      # bundle into async chunks. Belt-and-suspenders: also assert every
+      # [data-controller] on the page has actually connected.
       def wait_for_stimulus
         page.assert_selector('body[data-stimulus-ready]')
+        page.document.synchronize(Capybara.default_max_wait_time) do
+          connected = page.evaluate_script(<<~JS)
+            (() => {
+              if (!window.Stimulus) return false
+              return Array.from(document.querySelectorAll('[data-controller]')).every((element) => {
+                return element.getAttribute('data-controller').trim().split(/\\s+/).every((identifier) => {
+                  return window.Stimulus.getControllerForElementAndIdentifier(element, identifier)
+                })
+              })
+            })()
+          JS
+          raise Capybara::ElementNotFound, 'Stimulus controllers have not connected' unless connected
+        end
       end
 
       def pause_animations
