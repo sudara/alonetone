@@ -56,7 +56,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # add a playlist image
       attach_file('playlist_cover_image', 'spec/fixtures/files/cheshire_cheese.jpg', make_visible: true)
       find('input[name="commit"]').click
-      expect(find(".cover img")['src']).to have_content('cheshire_cheese.jpg')
+      expect(page).to have_css('.cover img[src*="cheshire_cheese.jpg"]')
 
       pause_animations
 
