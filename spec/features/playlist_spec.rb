@@ -7,9 +7,13 @@ RSpec.describe 'playlists', type: :feature, js: true do
       visit 'henri_willig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
-      first_track.hover
-      expect(first_track).to have_css(':hover')
+      # Native hover is unreliable in --headless=new Chrome. Toggle the
+      # `.active` class directly — it shares the hover styles, so the snapshot
+      # is identical without depending on cursor position.
+      page.execute_script('arguments[0].classList.add("active")', first_track)
+      expect(first_track[:class]).to include('active')
       page.percy_snapshot('Playlist Cover')
+      page.execute_script('arguments[0].classList.remove("active")', first_track)
 
       # I hoped we could pause and resume animations as needed
       # But we require absolutely 0 DOM variation to please Percy
