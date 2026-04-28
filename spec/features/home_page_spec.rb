@@ -36,9 +36,12 @@ RSpec.describe 'home page', type: :feature, js: true do
       expect(page).to have_selector('.profile_link')
 
       track = find(".asset", match: :first)
-      track.find(".play_link").click
-
+      # --headless=new Chrome intermittently drops native clicks on the play
+      # link (likely a hover/visibility race). Scroll into view + JS-dispatch
+      # to make playback start deterministically.
       page.scroll_to(track)
+      page.execute_script('arguments[0].click()', track.find(".play_link"))
+
       expect(track).to have_selector('.add_to_favorites')
       expect(track).to have_selector('.stitches_seek')
 
