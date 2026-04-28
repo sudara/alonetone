@@ -1,11 +1,14 @@
-# Note: You must restart bin/webpacker-dev-server for changes to take effect
+# Note: You must restart bin/shakapacker-dev-server for changes to take effect
 
 default: &default
   source_path: app/javascript
   source_entry_path: /
+  # Shakapacker 7+ rejects source_entry_path: '/' combined with nested_entries.
+  # We only have a single entry (application.js) at the source root, so disable.
+  nested_entries: false
   public_root_path: public
   public_output_path: packs
-  cache_path: tmp/webpacker
+  cache_path: tmp/shakapacker
   webpack_compile_output: true
 
   # Additional paths webpack should look up modules
@@ -24,7 +27,7 @@ development:
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
-    https: false
+    # 'https' key was deprecated in shakapacker 7; default is http, so omit entirely.
     host: localhost
     port: 3035
     # Hot Module Replacement updates modules while the application is running without a full reload

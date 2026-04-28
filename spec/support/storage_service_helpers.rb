@@ -24,13 +24,21 @@ module RSpec
         end
       end
 
+      # Rails 7.1 replaced ActiveStorage::Current.host with url_options. The
+      # disk service builds URLs from these options, so we have to pass the
+      # parsed pieces (protocol/host/port) rather than the raw base URL.
       def with_storage_current_host(base_url)
-        before = ActiveStorage::Current.host
+        uri = URI.parse(base_url)
+        before = ActiveStorage::Current.url_options
         begin
-          ActiveStorage::Current.host = base_url
+          ActiveStorage::Current.url_options = {
+            protocol: "#{uri.scheme}://",
+            host: uri.host,
+            port: uri.port
+          }
           yield
         ensure
-          ActiveStorage::Current.host = before
+          ActiveStorage::Current.url_options = before
         end
       end
     end

@@ -75,6 +75,14 @@ function handlers() {
 }
 document.addEventListener('turbo:load', handlers)
 
+// Feature specs need a sync point before clicking Stimulus-wired elements;
+// by turbo:load DOMContentLoaded has fired, deferred scripts have run, and
+// Stimulus' MutationObserver has processed the initial DOM, so every
+// data-controller on the page is connected.
+document.addEventListener('turbo:load', () => {
+  document.body.dataset.stimulusReady = 'true'
+})
+
 // document.addEventListener('turbo:submit-start', () => {
 //   Turbo.setProgressBarDelay(10)
 //   Turbo.navigator.delegate.adapter.showProgressBar();

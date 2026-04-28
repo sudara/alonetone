@@ -74,7 +74,7 @@ class UsersController < ApplicationController
       @user.reload if @user.errors.key?(:login)
       flash.now[:error] = "Ruh roh, that didn't work"
       @profile = @user.profile
-      render 'edit', status: :unprocessable_entity
+      render 'edit', status: :unprocessable_content
     end
   end
 

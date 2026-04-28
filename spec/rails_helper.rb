@@ -13,13 +13,11 @@ require 'percy/capybara'
 # The suite needs to be able to connect to localhost for feature specs.
 # Percy sends its build response out of the test process so it also needs to connect
 # to its API.
-# Capybara/Webdrivers needs to ping for / download latest chrome
 WebMock.disable_net_connect!(
   allow_localhost: true,
   allow: ['percy.io',
     'ownandship.io',
     'cdn.alonetone.com', # fonts
-    'chromedriver.storage.googleapis.com',
     'github.com',
     'github-releases.githubusercontent.com'])
 
@@ -42,7 +40,7 @@ Capybara.register_driver :alonetone do |app|
     args: %w[disable-gpu no-sandbox])
 
   # comment out to run with the browser visible:
-  options.headless!
+  options.add_argument('--headless=new')
 
   Capybara::Selenium::Driver.new(
     app,
@@ -59,7 +57,7 @@ Capybara.server = :puma, { Silent: true }
 
 RSpec.configure do |config|
   # Use Active Record fixture path relative to spec/ directory.
-  config.fixture_path = Rails.root.join('spec', 'fixtures')
+  config.fixture_paths = [Rails.root.join('spec', 'fixtures')]
   config.file_fixture_path = Rails.root.join('spec', 'fixtures', 'files')
 
   # All of the fixtures all of the time.
@@ -98,6 +96,15 @@ RSpec.configure do |config|
     clear_performed_jobs
   end
 
+  # Feature specs run multiple plays of the same track from 127.0.0.1 within
+  # one example. The `ip_just_registered_this_listen?` guard would suppress
+  # every play after the first and make `Listen.count` assertions unreliable.
+  # The guard's behavior is covered by request specs in assets_controller_spec,
+  # so disable it just for feature specs.
+  config.before(:each, type: :feature) do
+    allow_any_instance_of(Listens).to receive(:ip_just_registered_this_listen?).and_return(false)
+  end
+
   config.before(:example, type: :request) do
     activate_authlogic
   end
@@ -121,6 +128,17 @@ RSpec.configure do |config|
 
           # we also expect some requests to 422
           next if error.message.include?('422')
+
+          # Selenium with --headless=new opens about:blank before the test
+          # navigates, and Chrome 120+ flags the favicon fetch from the null
+          # origin as a Private Network Access CORS violation. Harmless.
+          next if error.message.include?('favicon.ico')
+
+          # Playlist specs intentionally switch tracks while Chrome can still
+          # have an in-flight media request. The cancelled audio request is
+          # reported SEVERE even though playback reaches the expected UI.
+          next if error.message.include?('node_modules_alonetone_stitches') &&
+                  error.message.include?('AbortError: The user aborted a request.')
 
           expect(error.level).not_to eq('SEVERE'), error.message
           next unless error.level == 'WARNING'

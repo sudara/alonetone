@@ -60,7 +60,7 @@ class Upload
     when %r{zip}
       process_zip_file(uploaded_file)
     when %r{audio}
-      process_mp3_file(uploaded_file, content_type: content_type)
+      process_mp3_file(uploaded_file)
     end
   end
 
@@ -75,13 +75,12 @@ class Upload
     @playlists.concat(zip_file.playlists)
   end
 
-  def process_mp3_file(uploaded_file, content_type:)
+  def process_mp3_file(uploaded_file)
     mp3_file = Upload::Mp3File.process(
       user: user,
       file: uploaded_file.tempfile,
       filename: uploaded_file.original_filename,
-      asset_attributes: asset_attributes,
-      content_type: content_type
+      asset_attributes: asset_attributes
     )
     @assets.concat(mp3_file.assets)
   end

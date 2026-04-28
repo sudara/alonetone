@@ -1,5 +1,5 @@
 class AudioFeature < ActiveRecord::Base
-  serialize :waveform, Array
+  serialize :waveform, type: Array, coder: YAML
 
   belongs_to :asset
 end

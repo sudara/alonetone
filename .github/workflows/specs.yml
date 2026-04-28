@@ -51,7 +51,7 @@ jobs:
     - name: Set up Ruby and Bundle Install
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.2.0
+        ruby-version: 4.0.3
         bundler-cache: true
 
     - name: Yarn install
@@ -67,6 +67,12 @@ jobs:
       run: |
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
+
+    # Sprockets' manifest.js uses `link_tree ../builds`, so app/assets/builds/*.css
+    # must exist before specs boot. Locally bin/dev runs dartsass:watch; CI has no
+    # equivalent, so we build once here.
+    - name: Build dartsass CSS
+      run: bin/rails dartsass:build
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}

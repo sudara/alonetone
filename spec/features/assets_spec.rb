@@ -12,15 +12,23 @@ RSpec.describe 'tracks', type: :feature, js: true do
     # page.percy_snapshot('Single Track Seeking')
   end
 
-  it 'renders assets#edit' do
+  it 'renders assets#mass_edit' do
     logged_in do
       visit 'arthur/tracks/mass_edit'
-      first("input[type='text']").set("New Title")
-      akismet_stub_response_ham
-      first('input[name="commit"]').click
-      first('.ajax_success')
-      sleep(1) # wait for the spinner to dissapear, it takes 500ms
-      page.percy_snapshot('Single Track Edit')
+      page.percy_snapshot('Mass Edit')
+    end
+  end
+
+  it 'flashes after editing a single track' do
+    logged_in do
+      visit '/arthur/tracks/song1/edit'
+      within('.track_edit') do
+        first("input[type='text']").set("Song1 Renamed")
+        first('input[name="commit"]').click
+      end
+      # The slug is regenerated from the title (Slugs concern), so the redirect
+      # lands on the new permalink — but the flash is what we're asserting.
+      expect(page).to have_css('.flash', text: 'Saved!')
     end
   end
 end

@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
       CommentNotification.new_comment(@comment, @comment.commentable).deliver_now if @comment.is_deliverable?
       head :created, location: @comment
     else
-      head :unprocessable_entity
+      head :unprocessable_content
     end
   end
 

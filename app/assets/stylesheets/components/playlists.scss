@@ -17,7 +17,7 @@ ul.playlists {
       .private_playlist_padlock {
         display: block;
         content: '';
-        background-image: image-url("svg/icon_lock.svg");
+        background-image: url("svg/icon_lock.svg");
         background-size: 30px 30px;
         margin-left: 4px;
         height: 26px;

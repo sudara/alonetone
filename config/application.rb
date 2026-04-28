@@ -22,7 +22,12 @@ module Alonetone
       config.alonetone = ::Configurable.new(Rails.env.to_s, {})
     end
 
-    config.load_defaults 7.0
+    # `Rails.application.secrets` is deprecated in 7.1 and removed in 7.2.
+    # Source the production secret_key_base from alonetone.yml directly; in
+    # dev/test, Rails falls back to tmp/local_secret.txt when unset.
+    config.secret_key_base = config.alonetone.secret if config.alonetone.secret.present?
+
+    config.load_defaults 7.1
 
     config.exceptions_app = routes
 

@@ -161,43 +161,19 @@ RSpec.describe Upload::Mp3File, type: :model do
     end
   end
 
-  context 'processing with explicit content-type' do
-    let(:content_type) { 'audio/x-flac' }
-    let(:mp3_file) do
-      Upload::Mp3File.new(
-        user: user,
-        file: file_fixture_tempfile(fixture_filename),
-        filename: filename,
-        content_type: content_type
-      )
-    end
+  # Active Storage identifies the blob's content-type from the file bytes
+  # (via Marcel) when the attachment is built, so the Asset whitelist always
+  # validates Marcel's result, not the caller's claim. This guards the
+  # safety-net: if a non-audio file reaches Upload::Mp3File (bypassing the
+  # zip-vs-audio routing in Upload), validation still rejects it.
+  context 'processing a non-audio file' do
+    let(:fixture_filename) { 'readme.txt' }
+    let(:filename) { 'readme.txt' }
 
-    it 'forwards content-type to audio file' do
-      # It doesn't process because the content-type is not supported.
+    it 'rejects the upload' do
       expect(mp3_file.process).to eq(false)
-      expect(mp3_file.assets.length).to eq(1)
-
       asset = mp3_file.assets.first
-      expect(asset.mp3_content_type).to eq(content_type)
-    end
-  end
-
-  context 'processing with nil content-type' do
-    let(:mp3_file) do
-      Upload::Mp3File.new(
-        user: user,
-        file: file_fixture_tempfile(fixture_filename),
-        filename: filename,
-        content_type: nil
-      )
-    end
-
-    it 'detects the content-type' do
-      expect(mp3_file.process).to eq(true)
-      expect(mp3_file.assets.length).to eq(1)
-
-      asset = mp3_file.assets.first
-      expect(asset.mp3_content_type).to eq('audio/mpeg')
+      expect(asset.errors[:audio_file]).to be_present
     end
   end
 end

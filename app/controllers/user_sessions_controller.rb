@@ -14,7 +14,7 @@ class UserSessionsController < ApplicationController
         flash.now[:error] = "It looks like your account is not active. <br/> Do you have an email from us with activation details?".html_safe
       end
       @user = User.new
-      render 'new', status: :unprocessable_entity
+      render 'new', status: :unprocessable_content
     end
   end
 

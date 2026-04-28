@@ -1,4 +1,4 @@
-const { webpackConfig, merge } = require('shakapacker')
+const { generateWebpackConfig, merge } = require('shakapacker')
 
 const customConfig = {
   output: {
@@ -6,4 +6,4 @@ const customConfig = {
     libraryTarget: 'var',
   },
 }
-module.exports = merge(webpackConfig, customConfig)
+module.exports = merge(generateWebpackConfig(), customConfig)

@@ -18,12 +18,15 @@ MorphSVGPlugin.js
 /config/scout_apm.yml
 /config/skylight.yml
 /log
+/public/assets
 /public/mp3
 /public/packs
 /public/packs-test
 /public/pics
 /public/sitemap.xml
 /public/system
+/app/assets/builds/*
+!/app/assets/builds/.keep
 /stats.json
 /storage
 /vendor/bundle

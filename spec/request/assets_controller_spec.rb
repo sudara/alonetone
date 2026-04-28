@@ -336,6 +336,25 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
     end
 
+    it "sets a Saved! flash on a successful non-turbo-frame update" do
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: { asset: { title: 'Renamed' } }
+      )
+      expect(response).to have_http_status(:redirect)
+      expect(flash[:ok]).to eq('Saved!')
+    end
+
+    it "does not set the flash for a turbo-frame update" do
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: { asset: { title: 'Renamed' } },
+        headers: { 'Turbo-Frame' => "asset_#{asset.id}" }
+      )
+      expect(response).to have_http_status(:ok)
+      expect(flash[:ok]).to be_nil
+    end
+
     it "can delete their track" do
       delete "/#{user.login}/tracks/#{asset.to_param}"
       expect(response).to redirect_to(user_tracks_path(user))

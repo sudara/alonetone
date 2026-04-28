@@ -3,7 +3,8 @@ development:
   hostname: localhost:3000
   # Default FROM address when sending email.
   email: support@example.com
-  # Secret key base used by Rails (normally configured in config/secrets.yml)
+  # Secret key base used by Rails; required in production. In dev/test, when
+  # left blank Rails auto-generates one into tmp/local_secret.txt.
   secret: ~
   # Type of storage provider to use, see config/storage.yml for options.
   storage_service: filesystem

@@ -154,9 +154,10 @@ class AssetsController < ApplicationController
     @asset.publish! if params[:commit] == 'Publish'
 
     if turbo_frame_request?
-      result ? head(:ok) : render('edit', status: :unprocessable_entity)
+      result ? head(:ok) : render('edit', status: :unprocessable_content)
     else
       if result
+        flash[:ok] = 'Saved!'
         redirect_to user_track_url(@asset.user.login, @asset.permalink)
       else
         flash[:error] = "There was an issue with updating that track"

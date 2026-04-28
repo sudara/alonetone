@@ -63,14 +63,29 @@ module ApplicationHelper
   def markdown(text)
     return "" unless text
 
-    CommonMarker.render_doc(text, :SMART).to_html([:NOBREAKS]).html_safe
+    Commonmarker.to_html(
+      text,
+      options: { parse: { smart: true }, render: { hardbreaks: false } }
+    ).html_safe
   end
 
   # full track descriptions should have hard line breaks
   def format_track_description(text)
     return "" unless text
 
-    nofollowize(CommonMarker.render_doc(text, :SMART, [:autolink]).to_html(:HARDBREAKS)).html_safe
+    # hardbreaks + autolink happen to be on by default in Commonmarker 2.x,
+    # but set them explicitly: both were named options in the CommonMarker 1.x
+    # call this replaced, and helper specs pin both behaviors.
+    nofollowize(
+      Commonmarker.to_html(
+        text,
+        options: {
+          parse: { smart: true },
+          render: { hardbreaks: true },
+          extension: { autolink: true }
+        }
+      )
+    ).html_safe
   end
 
   # https://en.wikipedia.org/wiki/Nofollow#rel="ugc"
@@ -135,7 +150,7 @@ module ApplicationHelper
     if time > 2.weeks.ago
       time_ago_in_words(time) + ' ago'
     else
-      time.to_date.to_s(:long)
+      time.to_date.to_fs(:long)
     end
   end
 

@@ -77,7 +77,7 @@ header#site_header {
         top: 6px;
         background-image: $site-header-search-magnifying-glass-image;
         &:hover {
-          background-image: image-url(
+          background-image: url(
             "svg/icon_search_magnifying_glass_active.svg"
           );
         }
