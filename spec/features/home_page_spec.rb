@@ -36,11 +36,7 @@ RSpec.describe 'home page', type: :feature, js: true do
       expect(page).to have_selector('.profile_link')
 
       track = find(".asset", match: :first)
-      # --headless=new Chrome intermittently drops native clicks on the play
-      # link (likely a hover/visibility race). Scroll into view + JS-dispatch
-      # to make playback start deterministically.
-      page.scroll_to(track)
-      page.execute_script('arguments[0].click()', track.find(".play_link"))
+      track.find(".play_link").click
 
       expect(track).to have_selector('.add_to_favorites')
       expect(track).to have_selector('.stitches_seek')
@@ -58,14 +54,8 @@ RSpec.describe 'home page', type: :feature, js: true do
   it 'properly runs javascript and reports console errors', :allow_js_errors do
     visit '/'
     page.execute_script("console.error('hello from capybara')")
-    warnings = page.driver.browser.logs.get(:browser)
-
-    # The point of this test is "we can capture console errors", so just
-    # check the deliberate error is present — don't assert the count, since
-    # Chrome emits unrelated SEVEREs (favicon CORS, font load failures, etc.)
-    # that come and go between runs.
-    expect(warnings).to include(
-      have_attributes(level: 'SEVERE', message: a_string_including('hello from capybara'))
+    expect(@browser_console_messages).to include(
+      a_hash_including(level: 'error', message: a_string_including('hello from capybara'))
     )
   end
 end

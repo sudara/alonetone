@@ -95,7 +95,7 @@ group :test do
   gem 'rspec-mocks', '>= 3.13', require: false
   gem 'rspec-support', require: false
   gem 'rspec-rails', require: false
-  gem 'selenium-webdriver'
+  gem 'capybara-playwright-driver'
   gem 'webmock', require: false
 end
 

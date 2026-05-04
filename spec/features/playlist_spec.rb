@@ -7,23 +7,12 @@ RSpec.describe 'playlists', type: :feature, js: true do
       visit 'henri_willig/playlists/polderkaas'
       first_track = find('ul.tracklist li:first-child')
 
-      # Native hover is unreliable in --headless=new Chrome. Toggle the
-      # `.active` class directly — it shares the hover styles, so the snapshot
-      # is identical without depending on cursor position.
-      page.execute_script('arguments[0].classList.add("active")', first_track)
-      expect(first_track[:class]).to include('active')
+      first_track.hover
+      expect(first_track).to have_css(':hover')
       page.percy_snapshot('Playlist Cover')
-      page.execute_script('arguments[0].classList.remove("active")', first_track)
 
-      # I hoped we could pause and resume animations as needed
-      # But we require absolutely 0 DOM variation to please Percy
-      # Note: this only pauses GSAP animations
+      # Percy needs zero DOM variation between captures, so freeze GSAP animations.
       with_animations_paused do
-
-        # This click will be an ajax request
-        # And in some cases our Snapshot will fire before the DOM is updated
-        # Capybara is good at waiting if we specify an expectation
-        # so let's specify one before we snap
         first_track.find('a.play_button').click
         expect(page).to have_selector(".player")
         page.percy_snapshot('Playlist Track Loading')
@@ -37,11 +26,9 @@ RSpec.describe 'playlists', type: :feature, js: true do
       switch_themes
 
       with_animations_paused do
-        find('.waveform').click(x: 200, y: 10) # seek
-        find('.waveform').click(x: 200, y: 10) # set predictable-ish pausing spot
-        # JS-dispatch — native click on the pause button is intermittently
-        # lost in --headless=new Chrome.
-        page.execute_script('arguments[0].click()', find('.play_button_container'))
+        click_at('.waveform', x: 200, y: 10) # seek
+        click_at('.waveform', x: 200, y: 10) # set predictable-ish pausing spot
+        find('.play_button_container').click
         # Listen-counting through this seek/pause flow is racy in headless
         # mode; the count assertion lives in assets_controller_spec instead.
         expect(page).to have_css('ul.tracklist li:first-child.stitches-paused')
@@ -85,7 +72,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # Move "Manfacturer of the Finest Cheese" to be the last song
       first_track_handle = find('.sortable .asset:first-child .drag_handle')
       last_track = find('.sortable .asset:last-child')
-      first_track_handle.drag_to(last_track)
+      first_track_handle.drag_to(last_track, delay: 0.1)
       expect(find('.sortable .asset:last-child .track_link').text).to eql('Manufacturer of the Finest Cheese')
       page.percy_snapshot('Playlist Edit')
     end

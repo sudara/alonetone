@@ -157,9 +157,7 @@ class AssetsController < ApplicationController
       result ? head(:ok) : render('edit', status: :unprocessable_content)
     else
       if result
-        # status: :see_other is the Turbo Drive contract for redirects after a
-        # non-GET form submission — without it Turbo's behavior on the 302 is
-        # not guaranteed and the post-redirect flash can race the assertion.
+        # Turbo Drive's redirect-follow contract requires :see_other after non-GET form submissions.
         redirect_to user_track_url(@asset.user.login, @asset.permalink),
                     ok: 'Saved!', status: :see_other
       else
