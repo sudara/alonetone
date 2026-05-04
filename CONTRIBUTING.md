@@ -2,7 +2,7 @@
 
 ### Requirements
 
-We are currently running Ruby 3.2.x.
+We are currently running Rails 7.1.x on Ruby 4.0.x.
 
 ### MacOS
 
@@ -41,11 +41,13 @@ This also creates 3 config files:
 
 Start the server
 
-- `rails s`
+- `bin/dev`
+
+This boots Rails, the Shakapacker dev server, and the dart-sass watcher together via foreman (see `Procfile.dev`). Foreman gets installed on first run if it's not already present.
 
 ## Optional installs
 
-The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascripts/animation/` to use the plugin.
+The frontend code can take advantage of `MorphSVGPlugin` for more fluid SVG animations. If you have access to the plugin you can replace the stub file in `app/javascript/animation/` to use the plugin.
 
 ## Logging in
 
@@ -100,13 +102,9 @@ bundle exec guard start
 
 ### Feature specs and Percy
 
-Feature specs are run in headless chrome. If you want to watch the browser be automated (to debug, etc) you can change the "driver" being used in `rails_helper.rb` from headless to normal chrome.
+Feature specs are run in headless chrome via the `:alonetone` Capybara driver registered in `spec/rails_helper.rb`. If you want to watch the browser be automated (to debug, etc) comment out the `--headless=new` argument in that driver block.
 
-```
-Capybara.default_driver = :selenium_chrome # :selenium_chrome_headless
-```
-
-Then you can run individual feature specs like so:
+You can run individual feature specs like so:
 
 ```
 bundle exec rspec spec/features/home_page_spec.rb

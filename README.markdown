@@ -16,9 +16,11 @@ Cross-browser testing donated by
 
 [alonetone](https://alonetone.com) is an independent music platform, allowing musicians to host and distribute their music in a non-commercial, easy-to-use environment.
 
-alonetone launched in January 2008 (around the same time as soundcloud).
+alonetone launched in January 2008 (around the same time as soundcloud) and has been running in
+production ever since!
 
-As of 2020, we host 80,000 tracks from 6500 musicians in production. We have delivered over 5 million mp3s to real listeners (not google and spambots, we are strict about excluding em!)
+We host over 100,000 tracks from thousands of musicians. We have delivered over 7 million listens to
+real listeners (we are strict about excluding bots!)
 
 ### Bug reporting
 
@@ -43,7 +45,7 @@ For more info on alonetone, visit [the alonetone faq](https://alonetone.com/abou
 
 ### Current stack
 
-* Rails 7
+* Rails 7.1 on Ruby 4.0
 * [Stitches](http://github.com/sudara/stitches) for audio playback
 * Sidekiq for jobs
 * Active Storage & s3
@@ -86,4 +88,4 @@ Second, check out [CONTRIBUTING.md](CONTRIBUTING.md)
 
 The alonetone source code is released under the MIT license.
 
-"alonetone", "alonetone.com" and the alonetone logos are copyright Sudara Williams 2008-2020 and may not be used without permission.
+"alonetone", "alonetone.com" and the alonetone logos are copyright Sudara Williams 2008-2026 and may not be used without permission.
