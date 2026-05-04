@@ -26,9 +26,9 @@ RSpec.describe 'playlists', type: :feature, js: true do
       switch_themes
 
       with_animations_paused do
-        click_at('.waveform', x: 200, y: 10) # seek
-        click_at('.waveform', x: 200, y: 10) # set predictable-ish pausing spot
-        find('.play_button_container').click
+        pw_click('.waveform', x: 200, y: 10) # seek
+        pw_click('.waveform', x: 200, y: 10) # set predictable-ish pausing spot
+        pw_click('.play_button_container')
         # Listen-counting through this seek/pause flow is racy in headless
         # mode; the count assertion lives in assets_controller_spec instead.
         expect(page).to have_css('ul.tracklist li:first-child.stitches-paused')

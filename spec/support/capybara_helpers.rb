@@ -9,11 +9,13 @@ module RSpec
         page.click_on class: 'switch_to_theme'
       end
 
-      # Capybara node handles go stale between find and click when the element re-renders; locators re-resolve.
+      # Capybara's find-then-click holds an eager ElementHandle that goes stale when the region re-renders;
+      # this routes through a Playwright Locator (lazy query, re-resolves at action time).
       # The selector is resolved against the full document, so this ignores any enclosing `within(...)`.
-      def click_at(selector, x:, y:)
+      def pw_click(selector, x: nil, y: nil)
         page.driver.with_playwright_page do |pw_page|
-          pw_page.locator(selector).first.click(position: { x: x, y: y })
+          options = (x && y) ? { position: { x: x, y: y } } : {}
+          pw_page.locator(selector).first.click(**options)
         end
       end
 
