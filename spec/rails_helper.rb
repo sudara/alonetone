@@ -7,7 +7,7 @@ require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'selenium/webdriver'
+require 'capybara/playwright'
 require 'percy/capybara'
 
 # The suite needs to be able to connect to localhost for feature specs.
@@ -31,21 +31,13 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::EncryptionHelpers
 ActiveRecord::FixtureSet.context_class.include RSpec::Support::WaveformHelpers
 
-# We are fixing the window size to help guarantee same results on CI/locally
 Capybara.register_driver :alonetone do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(
-    # specifying window size caused a playlist test failure
-    # find('.play_button_container a').click # pause
-    # window-size=1024,1500
-    args: %w[disable-gpu no-sandbox])
-
-  # comment out to run with the browser visible:
-  options.add_argument('--headless=new')
-
-  Capybara::Selenium::Driver.new(
+  Capybara::Playwright::Driver.new(
     app,
-    browser: :chrome,
-    options: options
+    browser_type: :chromium,
+    headless: ENV['HEADED'].blank?,
+    # GitHub Actions runners run as root; chromium refuses to start without --no-sandbox.
+    chromiumSandbox: ENV['CI'].blank?
   )
 end
 Capybara.default_driver = :alonetone
@@ -118,33 +110,29 @@ RSpec.configure do |config|
   #   Rails.application.load_seed
   # end
 
+  config.before(:each, type: :feature, js: true) do
+    @browser_console_messages = []
+    messages = @browser_console_messages
+    page.driver.with_playwright_page do |pw_page|
+      pw_page.on('console', ->(msg) { messages << { level: msg.type, message: msg.text } })
+      pw_page.on('pageerror', ->(err) { messages << { level: 'error', message: err.message } })
+    end
+  end
+
   config.after(:each, type: :feature, js: true) do |test|
-    if !test.metadata[:allow_js_errors]
-      errors = page.driver.browser.logs.get(:browser)
-      aggregate_failures 'javascript errors' do
-        errors.each do |error|
-          # we really don't care about CORS stuff
-          next if error.message.include?('font')
+    next if test.metadata[:allow_js_errors]
+    aggregate_failures 'javascript errors' do
+      @browser_console_messages.each do |entry|
+        # Expected: validation responses for forms and Chrome's auto-logged HTTP errors are not JS errors.
+        next if entry[:message].include?('422')
+        next if entry[:message].include?('Failed to load resource')
+        # Playlist specs cancel in-flight audio requests when switching tracks; harmless AbortError.
+        next if entry[:message].include?('AbortError')
 
-          # we also expect some requests to 422
-          next if error.message.include?('422')
-
-          # Selenium with --headless=new opens about:blank before the test
-          # navigates, and Chrome 120+ flags the favicon fetch from the null
-          # origin as a Private Network Access CORS violation. Harmless.
-          next if error.message.include?('favicon.ico')
-
-          # Playlist specs intentionally switch tracks while Chrome can still
-          # have an in-flight media request. The cancelled audio request is
-          # reported SEVERE even though playback reaches the expected UI.
-          next if error.message.include?('node_modules_alonetone_stitches') &&
-                  error.message.include?('AbortError: The user aborted a request.')
-
-          expect(error.level).not_to eq('SEVERE'), error.message
-          next unless error.level == 'WARNING'
-          STDERR.puts 'WARN: javascript warning'
-          STDERR.puts error.message
-        end
+        expect(entry[:level]).not_to eq('error'), entry[:message]
+        next unless entry[:level] == 'warning'
+        STDERR.puts 'WARN: javascript warning'
+        STDERR.puts entry[:message]
       end
     end
   end

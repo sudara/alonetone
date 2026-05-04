@@ -3,42 +3,19 @@
 module RSpec
   module Support
     module CapybaraHelpers
-      # Auto-wait for Stimulus on every navigation in js feature specs.
-      # Since the Shakapacker 7 / Webpack 5 upgrade, the application bundle
-      # loads async chunks, so DOMContentLoaded no longer implies controllers
-      # are connected. Without this, any click/hover that targets a
-      # Stimulus-wired element races the MutationObserver and flakes.
-      def visit(*args, **kwargs)
-        super
-        wait_for_stimulus if Capybara.current_driver == :alonetone
-      end
-
       def switch_themes
-        # Native click on profile_link is intermittently lost in --headless=new
-        # Chrome (the dropdown doesn't open). JS-click guarantees dispatch.
-        page.execute_script('arguments[0].click()', find('.user_dropdown .profile_link'))
+        find('.user_dropdown .profile_link').click
         find('.user_dropdown_menu', visible: true)
         page.click_on class: 'switch_to_theme'
       end
 
-      # turbo:load (which sets body[data-stimulus-ready]) can fire before
-      # Stimulus finishes registering controllers when Webpack 5 splits the
-      # bundle into async chunks. Belt-and-suspenders: also assert every
-      # [data-controller] on the page has actually connected.
-      def wait_for_stimulus
-        page.assert_selector('body[data-stimulus-ready]')
-        page.document.synchronize(Capybara.default_max_wait_time) do
-          connected = page.evaluate_script(<<~JS)
-            (() => {
-              if (!window.Stimulus) return false
-              return Array.from(document.querySelectorAll('[data-controller]')).every((element) => {
-                return element.getAttribute('data-controller').trim().split(/\\s+/).every((identifier) => {
-                  return window.Stimulus.getControllerForElementAndIdentifier(element, identifier)
-                })
-              })
-            })()
-          JS
-          raise Capybara::ElementNotFound, 'Stimulus controllers have not connected' unless connected
+      # Capybara's find-then-click holds an eager ElementHandle that goes stale when the region re-renders;
+      # this routes through a Playwright Locator (lazy query, re-resolves at action time).
+      # The selector is resolved against the full document, so this ignores any enclosing `within(...)`.
+      def pw_click(selector, x: nil, y: nil)
+        page.driver.with_playwright_page do |pw_page|
+          options = (x && y) ? { position: { x: x, y: y } } : {}
+          pw_page.locator(selector).first.click(**options)
         end
       end
 
@@ -69,10 +46,6 @@ module RSpec
           fill_in 'user_session[password]', with: 'test'
           click_button 'Come on in...'
         end
-        # click_button can return before Selenium actually dispatches the POST and
-        # follows the redirect. Wait for a logged-in-only element before yielding,
-        # otherwise a subsequent `visit` can race ahead and hit the unauthenticated
-        # state (redirecting to /login and silently failing the test setup).
         expect(page).to have_css('.user_dropdown')
         yield
       end

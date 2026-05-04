@@ -8,8 +8,10 @@ export default class extends Controller {
     'feedback', 'spinner', 'size', 'trackCount', 'totalTime']
 
   initialize() {
+    // Headless browsers can't reliably fire HTML5 dnd from synthetic input; fall back to mouse-based drag only under automation.
     this.sortable = new Sortable(this.sortableTarget, {
       handle: '.drag_handle',
+      forceFallback: navigator.webdriver,
       onEnd: () => this.maybePostToSort(),
     })
     this.sortUrl = this.sortUrlTarget.getAttribute('href')

@@ -58,6 +58,17 @@ jobs:
       run: yarn install
       if: steps.yarn-cache.outputs.cache-hit != 'true'
 
+    - uses: actions/cache@v3
+      id: playwright-cache
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
+      if: ${{ matrix.morph }}
+
+    - name: Install Playwright chromium
+      run: npx playwright install chromium
+      if: ${{ matrix.morph && steps.playwright-cache.outputs.cache-hit != 'true' }}
+
     - name: Put MorphSVGPlugin.js in place for feature specs
       run: |
         printf "%s" "$MORPHSVG" > "app/javascript/animation/MorphSVGPlugin.js"
