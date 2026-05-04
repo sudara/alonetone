@@ -28,7 +28,9 @@ RSpec.describe 'tracks', type: :feature, js: true do
       end
       # The slug is regenerated from the title (Slugs concern), so the redirect
       # lands on the new permalink — but the flash is what we're asserting.
-      expect(page).to have_css('.flash', text: 'Saved!')
+      # wait: 10 because form-submit → 303 → GET new permalink → Stimulus
+      # reconnect on the swapped document can exceed Capybara's 2s default on CI.
+      expect(page).to have_css('.flash', text: 'Saved!', wait: 10)
     end
   end
 end
