@@ -3,7 +3,6 @@
 *.sqlite3
 .DS_Store
 .bundle
-.ruby-version
 .yarn-integrity
 MorphSVGPlugin.js
 /config/alonetone.yml
