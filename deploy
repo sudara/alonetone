@@ -1,71 +1,198 @@
 #!/bin/bash
+set -eo pipefail
 #
 # This script requires `PermitUserEnvironment yes`
 # to be set on the remote hosts /etc/ssh/sshd_config
+#
+# IMPORTANT: keep the SSH payload below as a single-quoted heredoc. Single
+# quotes and double quotes are safe inside that heredoc body. Do not turn it
+# back into `ssh host '...'`: then any apostrophe inside the remote script,
+# even in a comment, closes the local quote and can make `git diff` execute as
+# plain `diff` or `git reset` execute as terminal `reset`.
+
+usage() {
+  echo "Usage: ./deploy [--force-bundle|--bundle]"
+  echo
+  echo "Options:"
+  echo "  --force-bundle  Run bundle install even when Gemfile inputs are unchanged,"
+  echo "                  and use a full Puma restart. Useful after changing ignored"
+  echo "                  Ruby/runtime files on the server."
+  echo "                  Alias: --bundle."
+  echo "  -h, --help      Show this help."
+}
+
+FORCE_BUNDLE=0
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --force-bundle|--bundle)
+      FORCE_BUNDLE=1
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown deploy argument: $1"
+      echo
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
 
 echo "Deployanatoring teh codez!"
+if [ "$FORCE_BUNDLE" -eq 1 ]; then
+  echo "Forcing bundle install and full Puma restart."
+fi
 echo
 
 # handle git and bundle install
-ssh alonetone '
+ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" <<'REMOTE_SCRIPT'
+  set -eo pipefail
+
+  FORCE_BUNDLE="$1"
+
   cd /data/alonetone
 
-  BUNDLE_CACHE_PATH="/home/deploy"
-  HOME="/home/deploy"
+  export BUNDLE_CACHE_PATH="/home/deploy"
+  export HOME="/home/deploy"
   BUNDLE_PATH="/home/deploy/.rbenv/shims/bundle"
-  BUNDLE_COMMAND="sudo -u deploy RAILS_ENV=production ${BUNDLE_PATH}"
-  GIT_COMMAND="sudo -u deploy git"
+  BUNDLE_COMMAND=(sudo -u deploy RAILS_ENV=production "$BUNDLE_PATH")
+  GIT_COMMAND=(sudo -u deploy git)
   PUMA_PID_FILE=tmp/puma.pid
-  PUMA_SOCKET=tmp/puma.sock
+
+  show_puma_processes() {
+    if [ ! -f "$PUMA_PID_FILE" ]; then
+      echo "No Puma PID file at $PUMA_PID_FILE"
+      return
+    fi
+
+    local puma_master_pid
+    puma_master_pid="$(cat "$PUMA_PID_FILE")"
+    if [ -z "$puma_master_pid" ]; then
+      echo "Puma PID file is empty"
+      return
+    fi
+
+    local child_pids
+    child_pids="$(pgrep -P "$puma_master_pid" || true)"
+    if [ -z "$child_pids" ]; then
+      echo "No Puma child processes found for master $puma_master_pid"
+      return
+    fi
+
+    ps -o pid,start,cmd -p $child_pids
+  }
 
   echo "Telling sidekiq to chill on new jobs..."
   sudo systemctl restart sidekiq
 
-  if [ ! "$($GIT_COMMAND diff)" == "" ]
-    then
-      echo "WARNING: local changes on server, exiting!"
-      exit 0
+  # Catches unstaged changes, staged changes, AND untracked files.
+  git_status="$("${GIT_COMMAND[@]}" status --porcelain)"
+  if [ -n "$git_status" ]; then
+    echo "ERROR: local changes on server, exiting!"
+    "${GIT_COMMAND[@]}" status --short
+    exit 1
   fi
 
-  $GIT_COMMAND fetch
+  "${GIT_COMMAND[@]}" fetch origin
 
-  if [ ! "$($GIT_COMMAND diff origin/main db)" == "" ]; then
+  OLD_REV="$("${GIT_COMMAND[@]}" rev-parse HEAD)"
+  NEW_REV="$("${GIT_COMMAND[@]}" rev-parse origin/main)"
+
+  RUN_MIGRATIONS=0
+  bundle_inputs_changed=0
+  ruby_version_changed=0
+  yarn_inputs_changed=0
+
+  if ! "${GIT_COMMAND[@]}" diff --quiet "$OLD_REV" "$NEW_REV" -- db; then
     RUN_MIGRATIONS=1
   fi
 
-  puma_version_changed=$($GIT_COMMAND diff origin/main Gemfile.lock | grep puma | wc -l)
-
-  if [ ! "$($GIT_COMMAND diff origin/main Gemfile.lock)" == "" ]
-    then
-      echo "Gemfile changed, bundle installing..."
-      $GIT_COMMAND reset --hard origin/main
-      $BUNDLE_COMMAND install
-      echo
-    else
-      echo "skipping bundle install, gemfile has not changed since last time."
-      $GIT_COMMAND reset --hard origin/main
-      echo
+  if ! "${GIT_COMMAND[@]}" diff --quiet "$OLD_REV" "$NEW_REV" -- Gemfile Gemfile.lock; then
+    bundle_inputs_changed=1
   fi
 
-  if [[ $RUN_MIGRATIONS ]]; then
+  # Anchor on the leading +/- and a literal "puma " token so we only match
+  # Puma gem version changes, not puma_worker_killer, puma-status, etc.
+  puma_version_changed="$("${GIT_COMMAND[@]}" diff "$OLD_REV" "$NEW_REV" -- Gemfile.lock | awk '/^[+-][[:space:]]+puma[[:space:]]/ { count++ } END { print count + 0 }')"
+
+  if ! "${GIT_COMMAND[@]}" diff --quiet "$OLD_REV" "$NEW_REV" -- .ruby-version; then
+    ruby_version_changed=1
+  fi
+
+  if ! "${GIT_COMMAND[@]}" diff --quiet "$OLD_REV" "$NEW_REV" -- package.json yarn.lock; then
+    yarn_inputs_changed=1
+  fi
+
+  # Force back onto main and discard any detached-HEAD / wrong-branch state.
+  # A previous outage recovery left this repo on a random commit because the
+  # old `git diff` check was happy with detached HEAD.
+  if "${GIT_COMMAND[@]}" show-ref --verify --quiet refs/heads/main; then
+    "${GIT_COMMAND[@]}" checkout main
+  else
+    "${GIT_COMMAND[@]}" checkout -b main --track origin/main
+  fi
+  "${GIT_COMMAND[@]}" reset --hard "$NEW_REV"
+
+  # Sanity check: working copy is now exactly at origin/main.
+  DEPLOYED_REV="$("${GIT_COMMAND[@]}" rev-parse HEAD)"
+  if [ "$DEPLOYED_REV" != "$NEW_REV" ]; then
+    echo "ERROR: HEAD did not land on origin/main after reset, exiting!"
+    exit 1
+  fi
+  echo "Deploying $("${GIT_COMMAND[@]}" rev-parse --short HEAD) ($("${GIT_COMMAND[@]}" log -1 --pretty=%s))"
+
+  if [ "$bundle_inputs_changed" -eq 1 ] || [ "$FORCE_BUNDLE" -eq 1 ]; then
+    if [ "$bundle_inputs_changed" -eq 1 ]; then
+      echo "Gemfile or Gemfile.lock changed, bundle installing..."
+    else
+      echo "Bundle install was forced by deploy argument."
+    fi
+    "${BUNDLE_COMMAND[@]}" install
+    echo
+  else
+    echo "skipping bundle install, Gemfile and Gemfile.lock have not changed since last time."
+    echo
+  fi
+
+  # Shakapacker 7+ no longer auto-runs yarn install during assets:precompile,
+  # so we need to install JS deps explicitly before webpack compiles.
+  if [ "$yarn_inputs_changed" -eq 1 ]; then
+    echo "package.json or yarn.lock changed, yarn installing..."
+    sudo -u deploy yarn install --frozen-lockfile || { echo "yarn install failed, aborting deploy"; exit 1; }
+  else
+    echo "skipping yarn install, package.json and yarn.lock have not changed since last time."
+  fi
+
+  if [ "$RUN_MIGRATIONS" -eq 1 ]; then
     echo "Running migrations, hold tight..."
-    time $BUNDLE_COMMAND exec rake db:migrate
+    time "${BUNDLE_COMMAND[@]}" exec rake db:migrate
   fi
 
   echo "Compiling assets..."
-  time $BUNDLE_COMMAND exec rake assets:precompile
+  time "${BUNDLE_COMMAND[@]}" exec rake assets:precompile || { echo "assets:precompile failed, aborting deploy"; exit 1; }
 
   echo ""
   echo "Processes before restart"
-  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+  show_puma_processes
 
-  if [ $puma_version_changed -gt 1 ]
-    then
-      echo "Puma version changed, hot restarting puma"
-      $BUNDLE_COMMAND exec pumactl restart
+  # Phased restart re-execs workers off the existing master, so it picks up
+  # app/gem changes (we use prune_bundler) but NOT a new Puma binary or a new
+  # Ruby. Those are bound to the master process, so force a full restart in
+  # those cases.
+  if [ "$puma_version_changed" -gt 0 ] || [ "$ruby_version_changed" -gt 0 ] || [ "$FORCE_BUNDLE" -eq 1 ]; then
+    if [ "$puma_version_changed" -gt 0 ] || [ "$ruby_version_changed" -gt 0 ]; then
+      echo "Puma or Ruby version changed, full restart"
     else
-      echo "Run puma, run! (phased restart)"
-      $BUNDLE_COMMAND exec pumactl phased-restart
+      echo "Full restart was forced by deploy argument."
+    fi
+    "${BUNDLE_COMMAND[@]}" exec pumactl restart
+  else
+    echo "Run puma, run! (phased restart)"
+    "${BUNDLE_COMMAND[@]}" exec pumactl phased-restart
   fi
 
   # Actually cycle sidekiq
@@ -76,23 +203,23 @@ ssh alonetone '
 
   echo ""
   echo "Processes during restart"
-  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+  show_puma_processes
 
   sleep 5
 
   echo ""
   echo "Processes end of restart"
-  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
-  
+  show_puma_processes
+
   sleep 5
 
   echo ""
   echo "Processes end of restart"
-  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
-  '
+  show_puma_processes
+REMOTE_SCRIPT
 
-bundle exec newrelic deployments
-REVISION="$(git rev-parse --short HEAD)"
+REVISION="$(ssh alonetone 'cd /data/alonetone && sudo -u deploy git rev-parse --short HEAD')"
+bundle exec newrelic deployments -e production -r "$REVISION"
 echo "Notifying bugsnag of revision release $REVISION"
 curl https://build.bugsnag.com/ \
   --header "Content-Type: application/json" \
