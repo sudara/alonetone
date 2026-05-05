@@ -4,6 +4,7 @@
 .DS_Store
 .bundle
 .yarn-integrity
+.claude
 MorphSVGPlugin.js
 /config/alonetone.yml
 /config/certs

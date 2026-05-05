@@ -237,7 +237,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
-    json (2.6.3)
+    json (2.19.5)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -277,7 +277,8 @@ GEM
       timeout
     net-smtp (0.5.1)
       net-protocol
-    newrelic_rpm (8.14.0)
+    newrelic_rpm (10.4.0)
+      logger
     nio4r (2.7.5)
     nokogiri (1.19.2)
       mini_portile2 (~> 2.8.2)
@@ -395,7 +396,7 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
-    redis-client (0.11.2)
+    redis-client (0.28.0)
       connection_pool
     regexp_parser (2.12.0)
     reline (0.6.3)
@@ -471,11 +472,12 @@ GEM
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
     shellany (0.0.1)
-    sidekiq (7.0.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.11.0)
+    sidekiq (8.0.10)
+      connection_pool (>= 2.5.0)
+      json (>= 2.9.0)
+      logger (>= 1.6.2)
+      rack (>= 3.1.0)
+      redis-client (>= 0.23.2)
     skylight (5.3.4)
       activesupport (>= 5.2.0)
     sometimes (1.1.0)
