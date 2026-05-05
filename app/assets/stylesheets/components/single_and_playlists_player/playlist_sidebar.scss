@@ -43,7 +43,7 @@
     }
   }
   ul.tracklist {
-    margin-top: $baseline / 2;
+    margin-top: calc($baseline / 2);
     li {
       display: flex;
       clear: both;
@@ -170,7 +170,7 @@
           display: block;
           box-sizing: border-box;
           width: 100%;
-          padding: 10px $baseline / 2;
+          padding: 10px calc($baseline / 2);
           text-decoration: none;
           color: $sidebar-link-text;
           i {

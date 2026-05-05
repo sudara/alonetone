@@ -20,7 +20,7 @@
   color: $flash-text;
   background-color: $accent;
   @media #{$mobile} {
-    padding: $baseline / 2;
+    padding: calc($baseline / 2);
     font-size: 14px;
     text-align: left;
   }
@@ -163,7 +163,7 @@
       font-size: 14px;
       font-family: $medium-sans-font;
       color: $error-message-list-items-text;
-      margin-bottom: $baseline / 2;
+      margin-bottom: calc($baseline / 2);
     }
   }
   ol {

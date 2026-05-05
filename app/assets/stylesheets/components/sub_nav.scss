@@ -9,10 +9,10 @@
       display: flex;
       margin-top: 0;
       margin-bottom: 0;
-      padding-top: $baseline / 4;
+      padding-top: calc($baseline / 4);
       justify-content: center;
       li {
-        margin-right: $baseline / 2;
+        margin-right: calc($baseline / 2);
         &:last-child {
           margin-right: 0;
         }
@@ -57,9 +57,9 @@
         li {
           height: 32px;
           width: calc(33.3333% - 4 * #{$baseline} / 12);
-          margin-left: $baseline / 4;
-          margin-right: $baseline / 4;
-          margin-bottom: $baseline / 6;
+          margin-left: calc($baseline / 4);
+          margin-right: calc($baseline / 4);
+          margin-bottom: calc($baseline / 6);
           &.current {
             height: 32px;
             padding-top: 11px;
@@ -71,8 +71,8 @@
             margin-left: 0;
           }
           &:last-child {
-            margin-right: $baseline / 4;
-            margin-bottom: $baseline / 4;
+            margin-right: calc($baseline / 4);
+            margin-bottom: calc($baseline / 4);
           }
           a {
             padding-top: 11px;
@@ -90,25 +90,25 @@
         li {
           height: 32px;
           width: calc(50% - 3 * #{$baseline} / 8);
-          margin-left: $baseline / 4;
-          margin-right: $baseline / 4;
-          margin-bottom: $baseline / 6;
+          margin-left: calc($baseline / 4);
+          margin-right: calc($baseline / 4);
+          margin-bottom: calc($baseline / 6);
           &.current {
             height: 32px;
             padding-top: 11px;
           }
           &:nth-child(3n + 2) {
-            margin-left: $baseline / 4;
+            margin-left: calc($baseline / 4);
           }
           &:nth-child(3n) {
-            margin-left: $baseline / 4;
+            margin-left: calc($baseline / 4);
           }
           &:nth-child(even) {
             margin-left: 0;
           }
           &:last-child {
-            margin-right: $baseline / 4;
-            margin-bottom: $baseline / 4;
+            margin-right: calc($baseline / 4);
+            margin-bottom: calc($baseline / 4);
           }
           a {
             padding-top: 11px;

@@ -5,10 +5,10 @@
     height: 40px;
     margin-top: 10px;
     padding-right: $baseline;
-    padding-left: $baseline / 2;
+    padding-left: calc($baseline / 2);
     display: flex;
     .listen_user {
-      margin-right: $baseline / 2;
+      margin-right: calc($baseline / 2);
       img {
         width: 40px;
         height: 40px;

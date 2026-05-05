@@ -18,8 +18,8 @@
   }
   > div.box {
     h2.box {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
+      padding-left: calc($baseline / 2);
+      padding-right: calc($baseline / 2);
       margin-top: 0;
       box-shadow: none;
       border-radius: 0;
@@ -112,7 +112,7 @@
       }
     }
     @media #{$one-column} {
-      padding: $baseline / 2;
+      padding: calc($baseline / 2);
     }
     iframe {
       margin-bottom: $baseline;
@@ -250,7 +250,7 @@
       height: 300px;
       margin-top: $baseline;
       margin-bottom: $baseline;
-      padding: $baseline / 2;
+      padding: calc($baseline / 2);
       word-wrap: break-word;
       color: $track-edit-text;
       border: 1px solid $track-edit-border;

@@ -14,8 +14,8 @@ body main #columns {
   #signup-questions.box {
     margin-bottom: 0;
     box-shadow: none;
-    padding-top: $baseline / 2;
-    padding-bottom: $baseline / 2;
+    padding-top: calc($baseline / 2);
+    padding-bottom: calc($baseline / 2);
     label {
       margin-bottom: 2px !important;
     }

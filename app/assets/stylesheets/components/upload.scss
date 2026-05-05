@@ -3,7 +3,7 @@
     .filefields {
       li {
         list-style: none;
-        margin-bottom: $baseline / 4;
+        margin-bottom: calc($baseline / 4);
       }
     }
   }
@@ -24,8 +24,8 @@ dl.group {
 
 #fineprint.box {
   .static_content {
-    padding-top: $baseline / 2;
-    padding-bottom: $baseline / 2;
+    padding-top: calc($baseline / 2);
+    padding-bottom: calc($baseline / 2);
   }
 }
 

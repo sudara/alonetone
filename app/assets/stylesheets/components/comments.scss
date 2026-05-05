@@ -128,7 +128,7 @@
         box-sizing: border-box;
         width: 100%;
         margin-bottom: 15px;
-        padding: $baseline / 4;
+        padding: calc($baseline / 4);
         margin-top: 8px;
         resize: none;
         color: $comment-form-text;

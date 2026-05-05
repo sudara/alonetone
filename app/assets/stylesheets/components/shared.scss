@@ -33,14 +33,14 @@ body {
     height: 42px;
     margin-top: 0;
     margin-bottom: 1px;
-    padding: 0 0 0 $baseline / 2;
+    padding: 0 0 0 calc($baseline / 2);
     color: $theme-accent;
     border-bottom: 1px solid $box-h2-bottom-border;
     background-color: transparent;
   }
   .static_content {
     line-height: 1.3;
-    padding: $baseline $baseline / 2;
+    padding: $baseline calc($baseline / 2);
     font-size: 13px;
     label {
       display: block;

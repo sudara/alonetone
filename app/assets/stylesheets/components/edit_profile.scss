@@ -14,8 +14,8 @@
       @include title24();
       border-bottom: 0;
       line-height: 1;
-      height: $baseline * (8/3);
-      padding-left: $baseline * (3/2);
+      height: calc($baseline * 8 / 3);
+      padding-left: calc($baseline * 3 / 2);
       padding-top: 24px;
     }
   }
@@ -115,7 +115,7 @@
       }
       textarea {
         height: 128px;
-        margin-bottom: $baseline * (8/3);
+        margin-bottom: calc($baseline * 8 / 3);
         width: 100%;
       }
       a {
@@ -147,7 +147,7 @@
     }
   }
   .edit_profile_socials {
-    padding: $baseline * (3/2);
+    padding: calc($baseline * 3 / 2);
     @media #{$mobile} {
       padding: $baseline;
     }
@@ -288,7 +288,7 @@
     }
   }
   .edit_profile_settings {
-    padding: $baseline * (3/2);
+    padding: calc($baseline * 3 / 2);
     @media #{$mobile} {
       padding: $baseline;
     }
@@ -319,7 +319,7 @@
           height: 32px;
           background-color: #099;
           border-radius: 4px;
-          margin-left: $baseline * (3/2);
+          margin-left: calc($baseline * 3 / 2);
           flex-shrink: 0;
           position: relative;
           top: -3px;
@@ -412,7 +412,7 @@
     }
   }
   .edit_profile_change_your_password {
-    padding: $baseline * (3/2);
+    padding: calc($baseline * 3 / 2);
     @media #{$mobile} {
       padding: $baseline;
     }
@@ -465,7 +465,7 @@
     background-image: url("svg/background_danger_tape.svg");
     background-repeat: no-repeat;
     background-position: left 16px;
-    padding: $baseline * (3/2);
+    padding: calc($baseline * 3 / 2);
     @media #{$mobile} {
       padding: $baseline;
       padding-top: 58px;
@@ -574,7 +574,7 @@
       line-height: 1;
       display: block;
     }
-    padding: $baseline * (3/2);
+    padding: calc($baseline * 3 / 2);
     @media #{$mobile} {
       padding: $baseline;
       padding-top: 58px;

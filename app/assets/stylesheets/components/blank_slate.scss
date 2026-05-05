@@ -88,8 +88,8 @@ $small-image-width: 100px;
       @media #{$zone-mobile-one-column} {
         width: 100%;
         margin-left: 0;
-        padding-left: $baseline / 2;
-        padding-right: $baseline / 2;
+        padding-left: calc($baseline / 2);
+        padding-right: calc($baseline / 2);
       }
       .blank_slate_text {
         @include paragraph18();
@@ -173,8 +173,8 @@ $small-image-width: 100px;
     padding-left: 10%;
     padding-top: 50px;
     @media #{$one-column} {
-      padding-left: $baseline / 2;
-      padding-right: $baseline / 2;
+      padding-left: calc($baseline / 2);
+      padding-right: calc($baseline / 2);
     }
     .left {
       @media only screen and (max-width: 540px) {

@@ -29,8 +29,8 @@
       padding-right: 60px;
       padding-top: 25px;
       @media #{$one-column} {
-        padding-left: $baseline / 2;
-        padding-right: $baseline / 2;
+        padding-left: calc($baseline / 2);
+        padding-right: calc($baseline / 2);
         flex-direction: column;
       }
       flex-wrap: wrap;
@@ -189,7 +189,7 @@
         padding: 0;
 
         @media #{$one-column} {
-          margin-left: $baseline / 2;
+          margin-left: calc($baseline / 2);
         }
         @media only screen and (max-width: 360px) {
           width: auto;
@@ -205,7 +205,7 @@
         margin-right: 40px;
         cursor: pointer;
         @media #{$one-column} {
-          margin-right: $baseline / 2;
+          margin-right: calc($baseline / 2);
         }
         @media only screen and (max-width: 360px) {
           width: auto;
@@ -346,7 +346,7 @@
         height: 36px;
         box-sizing: border-box;
         #playlist_source_options {
-          margin-left: $baseline / 2;
+          margin-left: calc($baseline / 2);
           display: flex;
           flex-direction: row;
           margin-top: 5px;

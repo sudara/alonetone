@@ -46,7 +46,7 @@
           margin-top: 30px;
         }
         >div{
-          margin-bottom: $baseline/2;
+          margin-bottom: calc($baseline / 2);
           >a {
             @include default-button('primary');
             height: 40px;

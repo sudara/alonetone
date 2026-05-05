@@ -12,7 +12,7 @@
       position: relative;
       text-align: center;
       font-size: 11px;
-      padding-bottom: $baseline / 4;
+      padding-bottom: calc($baseline / 4);
       text-align: center;
       background-color: $user-card-background;
       border-radius: 6px;

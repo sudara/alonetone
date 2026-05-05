@@ -31,7 +31,7 @@ body.cover_view {
       max-width: 640px;
       font-size: 13px;
       line-height: 18px;
-      padding: $baseline/2;
+      padding: calc($baseline / 2);
       box-sizing: border-box;
       color: rgb(153, 153, 153);
       text-align: left;
