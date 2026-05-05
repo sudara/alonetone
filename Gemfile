@@ -24,7 +24,6 @@ gem 'image_processing'
 gem 'mime-types'
 gem 'ruby-mp3info', require: 'mp3info'
 gem 'rubyzip'
-gem 's3_direct_upload'
 
 # active record
 gem 'acts_as_list'
