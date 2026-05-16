@@ -248,6 +248,7 @@ RSpec.describe Asset, type: :model do
     context 'asset without audio feature' do
       before do
         asset.audio_feature.delete
+        asset.association(:audio_feature).reset
       end
 
       it 'creates a new audio feature with a waveform' do

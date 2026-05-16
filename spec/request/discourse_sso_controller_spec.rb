@@ -8,12 +8,12 @@ RSpec.describe DiscourseSsoController, type: :request do
 
   it 'expects an sso and sig query param' do
     create_user_session(users(:brand_new_user))
-    expect { get '/login/sso' }.to raise_exception
+    expect { get '/login/sso' }.to raise_exception(NoMethodError)
   end
 
   it 'expects a valid sso and sig query param' do
     create_user_session(users(:brand_new_user))
-    expect { get '/login/sso?sso=1234&sig=5678' }.to raise_exception
+    expect { get '/login/sso?sso=1234&sig=5678' }.to raise_exception(SingleSignOn::ParseError)
   end
 
   it 'expects a valid sso and sig query param' do
