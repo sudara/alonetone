@@ -46,6 +46,34 @@ RSpec.describe AssetsController, type: :request do
       expect(response.body).to include(assets.last.title)
     end
 
+    it 'caps a single user to 2 tracks in the latest list' do
+      spammer = users(:arthur)
+      6.times do |i|
+        asset = spammer.assets.build(title: "spam-track-#{i}", permalink: "spam-track-#{i}", private: false)
+        asset.save(validate: false)
+        asset.update_column(:created_at, Time.current + i.seconds)
+      end
+
+      get '/', params: { white: true }
+
+      from_spammer = assigns(:assets).count { |a| a.user_id == spammer.id }
+      expect(from_spammer).to eq(2)
+    end
+
+    it 'caps a single user to 2 playlists in the recent playlists list' do
+      spammer = users(:arthur)
+      6.times do |i|
+        playlist = spammer.playlists.build(title: "spam-playlist-#{i}", published: true, is_mix: true)
+        playlist.save(validate: false)
+        playlist.update_columns(published_at: Time.current + i.seconds)
+      end
+
+      get '/', params: { white: true }
+
+      from_spammer = assigns(:playlists).count { |p| p.user_id == spammer.id }
+      expect(from_spammer).to eq(2)
+    end
+
     # take the latest published (where(private: false)) asset to make sure it
     # should have been displayed on the page
     it 'should not display a deleted asset whose user was also deleted' do

@@ -14,7 +14,7 @@ class AssetsController < ApplicationController
     if stale?(Asset.last_updated)
       @page_title = @description = "Latest Music"
       @tab = 'home'
-      @assets = Asset.with_preloads.published.latest.limit(5)
+      @assets = throttle_per_user(Asset.published.latest(30), per_user: 2, total: 5)
       set_related_lastest_variables
       respond_to :html
     end
@@ -280,10 +280,15 @@ class AssetsController < ApplicationController
       downloads.inject([]) { |accumulator, download| accumulator + download.playlists }
   end
 
+  def throttle_per_user(records, per_user:, total:)
+    counts = Hash.new(0)
+    records.select { |record| (counts[record.user_id] += 1) <= per_user }.first(total)
+  end
+
   def set_related_lastest_variables
     @favorites = Track.favorites_for_home
     @popular = Asset.with_preloads.published.order('hotness DESC').limit(5)
-    @playlists = Playlist.for_home.limit(4)
+    @playlists = throttle_per_user(Playlist.for_home.limit(20), per_user: 2, total: 4)
     @comments = admin? ? Comment.last_5_private : Comment.to_other_members.last_5_public
     @followee_tracks = current_user.new_tracks_from_followees(5) if user_has_tracks_from_followees?
   end

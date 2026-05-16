@@ -5,7 +5,7 @@ class Playlist < ActiveRecord::Base
 
   scope :albums,           -> { where(is_mix: false).where(is_favorite: false) }
   scope :favorites,        -> { where(is_favorite: true) }
-  scope :for_home,         -> { select('distinct playlists.user_id, playlists.*').recently_published.only_public.with_preloads }
+  scope :for_home,         -> { recently_published.only_public.with_preloads }
   scope :include_private,  -> { where(is_favorite: false) }
   scope :mixes,            -> { where(is_mix: true) }
   scope :only_public,      -> { where(published: true).where(is_favorite: false) }
