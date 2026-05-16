@@ -7,6 +7,7 @@ end
 gem 'rails', '~> 7.1.0'
 gem 'mysql2', '0.5.6'
 gem 'puma'
+gem 'puma_worker_killer'
 
 # ruby
 # Ruby stdlib gems retired in 3.4/4.0 that some of our deps still load

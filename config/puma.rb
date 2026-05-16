@@ -9,6 +9,18 @@ if env == "production"
   bind "unix://#{APP_ROOT}/tmp/puma.sock"
   state_path "#{APP_ROOT}/tmp/puma.state"
   stdout_redirect "#{APP_ROOT}/log/puma.log", "#{APP_ROOT}/log/puma.log", true
+
+  before_fork do
+    require 'puma_worker_killer'
+    PumaWorkerKiller.config do |config|
+      config.ram                       = 4500
+      config.frequency                 = 20
+      config.percent_usage             = 0.90
+      config.rolling_restart_frequency = 8 * 3600
+      config.reaper_status_logs        = true
+    end
+    PumaWorkerKiller.start
+  end
 end
 
 threads 1, 4
