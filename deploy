@@ -219,7 +219,6 @@ ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" <<'REMOTE_SCRIPT'
 REMOTE_SCRIPT
 
 REVISION="$(ssh alonetone 'cd /data/alonetone && sudo -u deploy git rev-parse --short HEAD')"
-bundle exec newrelic deployments -e production -r "$REVISION"
 echo "Notifying bugsnag of revision release $REVISION"
 curl https://build.bugsnag.com/ \
   --header "Content-Type: application/json" \
