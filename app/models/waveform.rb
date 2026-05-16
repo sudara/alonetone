@@ -21,7 +21,8 @@ class Waveform
     end
     return nil if rms.empty?
 
-    rms.map { |sample| Math.sqrt(sample).round }
+    # Short audio with fewer than LENGTH samples leaves nil holes in rms; nil.to_f → 0 fills the gaps.
+    rms.map { |sample| Math.sqrt(sample.to_f).round }
   end
 
   def self.extract(path)

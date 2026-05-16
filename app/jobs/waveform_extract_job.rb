@@ -1,4 +1,4 @@
-class WaveformExtractJob < ActiveJob::Base
+class WaveformExtractJob < ApplicationJob
   queue_as :default
 
   def perform(alonetone_asset_id)

@@ -1,4 +1,4 @@
-class AlbumNotificationJob < ActiveJob::Base
+class AlbumNotificationJob < ApplicationJob
   queue_as :mailers
 
   def perform(playlist_id, follower_id)

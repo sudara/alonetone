@@ -35,4 +35,21 @@ RSpec.describe Waveform do
       expect(Waveform.extract(path)).to be_nil
     end
   end
+
+  context 'when audiowaveform returns fewer samples than LENGTH' do
+    # 80 samples → slice_size = 0.16, buckets jump by ~6 leaving nil holes — used to crash Math.sqrt.
+    let(:short_json) { { 'data' => (1..80).to_a }.to_json }
+    let(:status) { instance_double(Process::Status, exitstatus: 0) }
+
+    before do
+      allow(Open3).to receive(:capture2).and_return([short_json, status])
+    end
+
+    it 'returns a numeric waveform without raising' do
+      data = nil
+      expect { data = Waveform.extract('any/path.mp3') }.not_to raise_error
+      expect(data).to be_an(Array)
+      data.each { |sample| expect(sample).to be_kind_of(Numeric) }
+    end
+  end
 end

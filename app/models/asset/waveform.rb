@@ -4,9 +4,8 @@ class Asset < ApplicationRecord
   module Waveform
     def import_waveform
       audio_file.open do |file|
-        update!(
-          audio_feature_attributes: { waveform: ::Waveform.extract(file.path) }
-        )
+        feature = audio_feature || build_audio_feature
+        feature.update!(waveform: ::Waveform.extract(file.path))
       end
     end
   end
