@@ -1,5 +1,5 @@
 <li>
-<%= div_for(user, class: 'user_index') do %>
+<%= tag.div id: dom_id(user), class: ["user", "user_index"] do %>
   <%= link_to(user_home_path(user), class: 'overlay', title: user_summary(user)) do %>
     <%= image_tag(user_avatar_url(user, variant: :card_avatar), class: 'cover') %>
   <% end %>
