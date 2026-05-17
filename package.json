@@ -5,7 +5,7 @@
     "@babel/plugin-transform-runtime": "7.19.6",
     "@babel/preset-env": "7.20.2",
     "@babel/runtime": "7.20.7",
-    "@bugsnag/js": "^7.18.0",
+    "@bugsnag/js": "^8.9.0",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^8.0.23",
