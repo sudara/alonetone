@@ -10,10 +10,6 @@ gem 'puma'
 gem 'puma_worker_killer'
 
 # ruby
-# Ruby stdlib gems retired in 3.4/4.0 that some of our deps still load
-# directly (not via Rails). Can drop as individual deps drop their use.
-gem 'ostruct' # pulled in by json 2.x
-
 gem 'sometimes'
 gem 'awesome_print', require: 'ap'
 

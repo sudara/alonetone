@@ -298,7 +298,6 @@ GEM
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    ostruct (0.6.3)
     package_json (0.2.0)
     pagy (43.5.4)
       json
@@ -560,7 +559,6 @@ DEPENDENCIES
   mysql2 (= 0.5.6)
   newrelic_rpm
   nokogiri
-  ostruct
   pagy (~> 43.5)
   percy-capybara
   perf_check
