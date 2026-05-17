@@ -10,7 +10,7 @@ class Playlist < ActiveRecord::Base
   scope :mixes,            -> { where(is_mix: true) }
   scope :only_public,      -> { where(published: true).where(is_favorite: false) }
   scope :with_preloads,    -> { preload(:cover_image_blob, user: { avatar_image_attachment: :blob }) }
-  scope :recently_published, -> { reorder('playlists.published_at DESC') }
+  scope :recently_published, -> { reorder('playlists.published_at DESC, playlists.id DESC') }
 
   belongs_to :user, counter_cache: true
   has_many :tracks,
@@ -160,10 +160,6 @@ class Playlist < ActiveRecord::Base
       ImageVariant.variant(cover_image, variant: variant),
       signed: false
     )
-  end
-
-  def self.latest(limit = 5)
-    where('playlists.tracks_count > 0').includes(:user).limit(limit).order('playlists.created_at DESC')
   end
 
   # if this is a "favorites" playlist, give it a name/description to match
