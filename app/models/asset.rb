@@ -154,8 +154,8 @@ class Asset < ApplicationRecord
       min_and_sec = time.divmod(60)
       minutes = min_and_sec[0].to_i.to_s
       seconds = min_and_sec[1].to_i.to_s
-      seconds = "0" + seconds if seconds.length == 1
-      minutes + ':' + seconds
+      seconds = "0#{seconds}" if seconds.length == 1
+      "#{minutes}:#{seconds}"
     else
       "?:??"
     end

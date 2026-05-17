@@ -104,7 +104,7 @@ class Comment < ActiveRecord::Base
   end
 
   def is_deliverable?
-    !is_spam? && (commentable.class == Asset) &&
+    !is_spam? && commentable.instance_of?(Asset) &&
       user.email_comments? && (user != commenter)
   end
 

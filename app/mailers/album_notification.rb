@@ -15,18 +15,18 @@ class AlbumNotification < ApplicationMailer
   protected
 
   def user_link
-    'https://' + hostname + '/' + @user.login
+    "https://#{hostname}/#{@user.login}"
   end
 
   def play_link_for(playlist)
-    user_link + '/playlists/' + playlist.to_param
+    "#{user_link}/playlists/#{playlist.to_param}"
   end
 
   def stop_following_link
-    'https://' + hostname + '/unfollow/' + @user.login
+    "https://#{hostname}/unfollow/#{@user.login}"
   end
 
   def unsubscribe_link
-    'https://' + hostname + '/notifications/unsubscribe'
+    "https://#{hostname}/notifications/unsubscribe"
   end
 end

@@ -2,15 +2,15 @@
 
 module UsersHelper
   def website_for(user)
-    "#{user.name}'s website " + (link_to user.website.to_s, ('http://' + h(user.website)))
+    "#{user.name}'s website " + (link_to user.website.to_s, "http://#{h(user.website)}")
   end
 
   def website_for_simple(user)
-    (link_to user.website.to_s, ('http://' + h(user.website)))
+    (link_to user.website.to_s, "http://#{h(user.website)}")
   end
 
   def itunes_link_for(user)
-    link_to "Open #{user.name}'s music in iTunes", 'http://' + h(user.itunes)
+    link_to "Open #{user.name}'s music in iTunes", "http://#{h(user.itunes)}"
   end
 
   # Returns the user's location, e.g. from Vienna, AT.
@@ -18,7 +18,7 @@ module UsersHelper
     return '' unless profile
 
     locality = [profile.city.presence, profile.country.presence].compact.map(&:strip).join(', ')
-    locality.present? ? 'from ' + locality : ''
+    locality.present? ? "from #{locality}" : ''
   end
 
   # Returns a summary of the user's history on Alonetone.

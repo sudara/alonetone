@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_login, except: %i[index show new create activate]
 
   def index
-    @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
+    @page_title = "#{params[:sort] ? "#{params[:sort].titleize} - " : ''} Musicians and Listeners"
     @tab = 'browse'
     @sort = params[:sort]
     @pagy, @users = pagy(User.with_preloads.paginate_by_params(params),
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @user = User.where(perishable_token: params[:perishable_token]).first
     if logged_in?
       redirect_to new_user_track_path(current_user), error: "You are already activated and logged in! Rejoice and upload!"
-    elsif !is_from_a_bad_ip? && @user && @user.activate!
+    elsif !is_from_a_bad_ip? && @user&.activate!
       UserSession.create(@user, true) # Log user in manually
       UserNotification.activation(@user).deliver_now
       redirect_to new_user_track_path(@user.login), ok: "Whew! All done, your account is activated. Go ahead and upload your first track."

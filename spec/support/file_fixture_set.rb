@@ -10,17 +10,15 @@ module RSpec
         fixture_filename if File.exist?(fixture_filename)
       end
 
+      FIXTURE_FILENAMES_BY_CONTENT_TYPE = {
+        'audio/mpeg' => 'muppets.mp3',
+        'image/jpeg' => 'cheshire_cheese.jpg',
+        'image/png' => 'smallest.png',
+        'application/zip' => 'smallest.zip'
+      }.freeze
+
       def file_fixture_filename_matching_content_type(content_type)
-        case content_type
-        when 'audio/mpeg'
-          'muppets.mp3'
-        when 'image/jpeg'
-          'cheshire_cheese.jpg'
-        when 'image/png'
-          'smallest.png'
-        when 'application/zip'
-          'smallest.zip'
-        end
+        FIXTURE_FILENAMES_BY_CONTENT_TYPE[content_type]
       end
 
       def file_fixture_matching_content_type(fixtures_directory, content_type)
@@ -59,7 +57,7 @@ module RSpec
 
       def ensure_blobs_on_disk(fixtures_directory, blobs)
         fixtures_directory = File.join(fixtures_directory, 'files')
-        blobs.fixtures.each do |_name, fixture|
+        blobs.fixtures.each_value do |fixture|
           ensure_blob_on_disk(fixtures_directory, fixture, blobs.model_class.find(fixture['id']))
         end
       end

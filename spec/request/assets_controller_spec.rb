@@ -308,7 +308,7 @@ RSpec.describe AssetsController, type: :request do
           fixture_file_upload('muppets.mp3', 'audio/mpeg')
         ]
       }
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to("/arthur/tracks/mass_edit?assets%5B%5D=#{Asset.last(2).first.id}&assets%5B%5D=#{Asset.last.id}")
     end
 
     it 'creates an album from a ZIP' do

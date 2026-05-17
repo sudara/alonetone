@@ -44,6 +44,6 @@ class Waveform
       '--output-format', 'json',
       '--quiet'
     )
-    JSON.load(json) if status.exitstatus == 0
+    JSON.parse(json) if status.exitstatus == 0
   end
 end

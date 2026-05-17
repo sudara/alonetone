@@ -15,19 +15,21 @@ module RSpec
         end
 
         def failure_message
-          if matched_elements.empty?
-            "expected `#{truncated_target}' to match #{language} `#{query}'"
-          else
-            "expected `#{truncated_target}' to match #{language} `#{query}' #{properties_explanation}"
-          end + "\nmatched:\n\n" + matched_elements.to_s
+          header = if matched_elements.empty?
+                     "expected `#{truncated_target}' to match #{language} `#{query}'"
+                   else
+                     "expected `#{truncated_target}' to match #{language} `#{query}' #{properties_explanation}"
+                   end
+          "#{header}\nmatched:\n\n#{matched_elements}"
         end
 
         def failure_message_when_negated
-          if matched_elements.empty?
-            "expected `#{truncated_target}' to NOT match #{language} `#{query}' #{properties_explanation}"
-          else
-            "expected: `#{truncated_target}' to NOT match #{language} `#{query}'"
-          end + "\nmatched:\n\n" + matched_elements.to_s
+          header = if matched_elements.empty?
+                     "expected `#{truncated_target}' to NOT match #{language} `#{query}' #{properties_explanation}"
+                   else
+                     "expected: `#{truncated_target}' to NOT match #{language} `#{query}'"
+                   end
+          "#{header}\nmatched:\n\n#{matched_elements}"
         end
 
         def matches?(target)
@@ -50,14 +52,14 @@ module RSpec
         def truncated_target
           target = @target.to_s
           if target.length > TRUNCATE_AT
-            target[0..TRUNCATE_AT].strip + '…'
+            "#{target[0..TRUNCATE_AT].strip}…"
           else
             target
           end
         end
 
         def pluralize_times(count)
-          count.to_s + ' ' + (count == 1 ? 'time' : 'times')
+          "#{count} #{count == 1 ? 'time' : 'times'}"
         end
 
         def properties_explanation

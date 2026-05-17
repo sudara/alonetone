@@ -29,9 +29,9 @@ class SingleSignOn
     username
     website
     location
-  ]
+  ].freeze
 
-  FIXNUMS = []
+  FIXNUMS = [].freeze
 
   BOOLS = %i[
     admin
@@ -41,7 +41,7 @@ class SingleSignOn
     moderator
     require_activation
     suppress_welcome_message
-  ]
+  ].freeze
 
   def self.nonce_expiry_time
     @nonce_expiry_time ||= 10.minutes
@@ -125,7 +125,7 @@ class SingleSignOn
   end
 
   def to_url(base_url = nil)
-    base = "#{base_url || sso_url}"
+    base = (base_url || sso_url).to_s
     "#{base}#{base.include?('?') ? '&' : '?'}#{payload}"
   end
 

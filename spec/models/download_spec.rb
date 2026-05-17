@@ -151,7 +151,7 @@ RSpec.describe Download, type: :model do
 
   context 'any old URL to an MP3 with tags' do
     let(:url) do
-      'http://example.com/download/' + stubbed_filename
+      "http://example.com/download/#{stubbed_filename}"
     end
     let(:stubbed_filename) { 'piano.mp3' }
 

@@ -19,10 +19,10 @@ class CommentNotification < ApplicationMailer
   end
 
   def unsubscribe_link
-    'https://' + hostname + '/notifications/unsubscribe'
+    "https://#{hostname}/notifications/unsubscribe"
   end
 
   def settings_link(user)
-    'https://' + hostname + '/' + user + '/edit'
+    "https://#{hostname}/#{user}/edit"
   end
 end

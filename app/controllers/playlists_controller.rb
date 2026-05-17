@@ -158,7 +158,7 @@ class PlaylistsController < ApplicationController
   def set_right_and_left_playlists
     middle = (@playlists.size + 1) / 2
     @playlists_left  = @playlists[0...middle]
-    @playlists_right = @playlists[middle..-1]
+    @playlists_right = @playlists[middle..]
   end
 
   def authorized?

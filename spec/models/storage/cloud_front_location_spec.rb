@@ -14,10 +14,7 @@ RSpec.describe Storage::CloudFrontLocation, type: :model do
   end
 
   let(:base_url) do
-    'https://' +
-      amazon_cloud_front_domain_name +
-      '/' +
-      key
+    "https://#{amazon_cloud_front_domain_name}/#{key}"
   end
 
   around do |example|

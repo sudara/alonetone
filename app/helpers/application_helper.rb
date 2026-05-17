@@ -136,7 +136,7 @@ module ApplicationHelper
   end
 
   def login_link
-    logged_in? ? '' : '(' + (link_to 'login', login_path) + ')'
+    logged_in? ? '' : "(#{link_to 'login', login_path})"
   end
 
   def feed_icon_tag(title, url)
@@ -148,7 +148,7 @@ module ApplicationHelper
     return "Unknown" unless time.present?
 
     if time > 2.weeks.ago
-      time_ago_in_words(time) + ' ago'
+      "#{time_ago_in_words(time)} ago"
     else
       time.to_date.to_fs(:long)
     end
@@ -161,7 +161,7 @@ module ApplicationHelper
   end
 
   # Mephisto said it best...
-  def sanitize_feed_content(html, sanitize_tables = false)
+  def sanitize_feed_content(html, sanitize_tables: false)
     options = sanitize_tables ? {} : { tags: %w[table thead tfoot tbody td tr th] }
     html.strip do |html|
       html.gsub! /&amp;(#\d+);/ do |_s|

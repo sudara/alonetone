@@ -164,7 +164,7 @@ class Playlist < ActiveRecord::Base
 
   # if this is a "favorites" playlist, give it a name/description to match
   def name_favorites
-    self.title = user.name + "'s favorite tracks" if is_favorite?
+    self.title = "#{user.name}'s favorite tracks" if is_favorite?
     # move me to new tracks_controller#create
     self.is_mix = true if consider_a_mix?
   end
