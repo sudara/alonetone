@@ -56,6 +56,16 @@ CI runs two jobs in parallel: "Normal Specs" (everything except `spec/features`)
 
 **Frontend.** Stimulus controllers under `app/javascript/controllers/` (e.g., `playback_controller.js`, `playlist_sort_controller.js`) are wired up automatically. `app/javascript/animation/MorphSVGPlugin.js` is a stub file that `rails setup:touch_js` creates; CI injects a real license via the `MORPHSVG` secret. Turbo handles navigation; avoid full-page reloads where a Turbo Frame/Stream will do.
 
+## Performance
+
+alonetone is 15 years old and has survived 7 major Rails upgrades. Some tables (assets, listens, comments) have grown for over a decade. Performance is not a "nice to have" here — it's load-bearing. Pay closer attention than you would on a fresh app:
+
+- **N+1s.** Use eager loading (`includes`, `preload`, `eager_load`) deliberately. The big models have curated preload scopes (e.g., `Asset.with_preloads`, `Playlist.with_preloads`) — prefer those over inventing fresh `includes` calls. When adding a view that iterates records, tail `log/development.log` and grep for repeated queries on the same table before shipping. Consider adding the `bullet` gem if working on a known-hot path.
+- **Indexes.** New scopes, `where` clauses, or `order` columns on hot tables should map to an existing index. Check `db/schema.rb` before writing the query. If no index covers it, add a migration — composite indexes need to match column order in the `WHERE` + `ORDER BY` to be used. Don't add an index speculatively, but don't ship an unindexed query on `assets` / `listens` / `comments` either.
+- **Counter caches over `COUNT(*)`.** Many `_count` columns already exist (`tracks_count`, `listens_count`, `assets_count`, etc.) — use them. Adding `belongs_to :foo, counter_cache: true` requires a backfill migration; don't forget the backfill.
+- **Pagination is mandatory** on any list of user-generated content. We use `pagy` — see `Pagy::Backend` in `ApplicationController`. Don't `.all` or `.limit(big_number)` on hot tables.
+- **Watch for the soft-deletion default scope** — it adds a `deleted_at IS NULL` predicate to every query on `Asset`/`User`/`Playlist`. Index plans should include `deleted_at` when relevant.
+
 ## CSS conventions (see CONTRIBUTING.md for the full version)
 
 - Split by **component/page** — new page gets a new file; reusable extractions only when actually shared.
@@ -70,6 +80,12 @@ CI runs two jobs in parallel: "Normal Specs" (everything except `spec/features`)
 - `secretz` route (`admin#secretz`) and `sudo` action on `users` exist for admin debugging — they're not typos.
 - **Gemfile comments exist for one reason only: explaining a version pin.** If a gem is locked to a specific version (`= x.y.z`, `~> x.y.z`, or a tight range), there MUST be a comment on the line above explaining *why* the pin exists (upstream bug, incompatibility, waiting on a PR, etc.). Conversely, do not add commentary to non-pinned gem lines — no rationale for adding a gem, no migration notes, no "what this is for." Keep the Gemfile lean.
 
+
+## Commit and comment style
+
+**Commits.** One-line subject describing what changed, imperative voice (e.g. "Fix race in home page track ordering", "Cap a single user to 2 tracks/playlists on the home page"). Add at most 1-2 lines of body when the *why* isn't obvious from the diff. No multi-paragraph bodies. No `Co-Authored-By` trailer.
+
+**Comments.** Default to none — the best comment is no comment. When you do write one: one line, explaining *why* (a hidden constraint, a workaround, a surprise), not *what*. Multi-line comments are a code smell. Do NOT touch existing multi-line comments that are still accurate — they were written deliberately; rewording them is just churn. Only modify a comment if the code it describes has changed.
 
 ## Deployment context
 
