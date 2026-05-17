@@ -3,8 +3,8 @@ module ApplicationHelper
 
   # Pagy 43 moved nav rendering onto the Pagy instance. Shim so existing
   # `<%== pagy_nav @foo %>` templates keep working.
-  def pagy_nav(pagy, **opts)
-    pagy.series_nav(**opts).html_safe
+  def pagy_nav(pagy)
+    pagy.series_nav.html_safe
   end
 
   def authorized_for(user_related_record)
