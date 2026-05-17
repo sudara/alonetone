@@ -73,7 +73,7 @@ class AssetsController < ApplicationController
       raise ActionController::RoutingError, 'Page Not Found'
     end
     @page_title = "#{@channel} radio"
-    @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
+    @pagy, @assets = pagy(Asset.radio(params[:source], current_user), limit: params[:items])
   end
 
   def top

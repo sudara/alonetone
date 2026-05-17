@@ -9,7 +9,7 @@ class SearchController < ApplicationController
       @users = User.with_preloads.joins(:profile).conditions_by_like(@query).limit(15)
       # need to pass additional param query
       # for pagy to only paginate via matched query
-      @assets_pagy, @assets = pagy(Asset.published.conditions_by_like(@query), items: 15, params: { query: @query })
+      @assets_pagy, @assets = pagy(Asset.published.conditions_by_like(@query), limit: 15, params: { query: @query })
       @page_title = "#{@query} songs and #{@query} artists"
     end
   end
@@ -22,7 +22,7 @@ class SearchController < ApplicationController
       @users = User.with_preloads.joins(:profile).conditions_by_like(@query).limit(15)
       # need to pass additional param query
       # for pagy to only paginate via matched query
-      @assets_pagy, @assets = pagy(Asset.published.conditions_by_like(@query), items: 15, params: { query: @query })
+      @assets_pagy, @assets = pagy(Asset.published.conditions_by_like(@query), limit: 15, params: { query: @query })
       @page_title = "#{@query} songs and #{@query} artists"
     else
       @page_title = "Search artists and uploads"

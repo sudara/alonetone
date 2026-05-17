@@ -97,9 +97,13 @@ module ApplicationHelper
     link_to ' ', user_track_path(asset.user.login, asset.permalink, format: :mp3, referer: referer), id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play the mp3'
   end
 
-  def pagy_url_for(pagy, page, absolute: false, html_escaped: false)
-    params = request.query_parameters.merge(pagy.vars[:page_param] => page, only_path: !absolute)
-    html_escaped ? url_for(params).gsub('&', '&amp;') : url_for(params)
+  def pagy_url_for(pagy, page, absolute: false, fragment: nil, **_)
+    extra = pagy.vars[:params]
+    params = request.query_parameters
+    params = params.merge(extra.transform_keys(&:to_s)) if extra.is_a?(Hash)
+    params = params.merge(pagy.vars[:page_param] => page, only_path: !absolute)
+    params = extra.call(params) if extra.is_a?(Proc)
+    "#{url_for(params)}#{fragment}"
   end
 
   def navigation_item(text, link, options = nil)

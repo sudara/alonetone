@@ -37,7 +37,8 @@ gem 'nokogiri'
 gem 'commonmarker'
 gem 'country_select'
 gem 'local_time'
-gem 'pagy'
+# Last pre-rewrite release; v43 is a full rewrite (renamed helpers, dropped extras, OPTIONS instead of DEFAULT)
+gem 'pagy', '~> 9.4'
 
 # external services
 gem 'rakismet'
