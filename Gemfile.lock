@@ -139,7 +139,7 @@ GEM
     commonmarker (2.8.1-x86_64-linux)
     commonmarker (2.8.1-x86_64-linux-musl)
     concurrent-ruby (1.3.6)
-    connection_pool (2.5.5)
+    connection_pool (3.0.2)
     countries (8.1.0)
       unaccent (~> 0.3)
     country_select (11.0.0)
@@ -541,8 +541,8 @@ DEPENDENCIES
   capybara
   capybara-playwright-driver
   commonmarker
-  connection_pool (< 3)
-  country_select (>= 9.0)
+  connection_pool
+  country_select
   dalli
   dartsass-rails
   faker
@@ -572,7 +572,7 @@ DEPENDENCIES
   rspec
   rspec-core
   rspec-expectations
-  rspec-mocks (>= 3.13)
+  rspec-mocks
   rspec-rails
   rspec-support
   rubocop

@@ -35,9 +35,7 @@ gem 'request_store' # for authlogic
 # view
 gem 'nokogiri'
 gem 'commonmarker'
-# 9.0+ needed for Rails 7.1: earlier versions relied on `options_for_select`
-# being implicitly available inside `Tags::CountrySelect`, which Rails 7.1 broke.
-gem 'country_select', '>= 9.0'
+gem 'country_select'
 gem 'local_time'
 gem 'pagy'
 
@@ -60,10 +58,7 @@ gem 'newrelic_rpm'
 gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
-# Pinned to < 3: connection_pool 3.0 made #initialize keyword-only, but
-# Rails 7.1.x's MemCacheStore.build_mem_cache still passes positionally.
-# Revisit when we upgrade Rails to a version that uses ConnectionPool.new(**opts).
-gem 'connection_pool', '< 3'
+gem 'connection_pool'
 # Pinned to ~> 0.7.7: 0.7.5 dropped the Rack::Utils::HeaderHash reference
 # that Rack 3 removed. Shakapacker's DevServerProxy middleware pulls in
 # rack-proxy transitively; without this pin /packs/* requests 500 in dev.
@@ -90,9 +85,7 @@ group :test do
   gem 'rspec', require: false
   gem 'rspec-core', require: false
   gem 'rspec-expectations', require: false
-  # 3.13+ needed for Rails 7.1: Rails added `Object#with`, which shadowed
-  # RSpec's `receive(...).with(...)` in earlier versions.
-  gem 'rspec-mocks', '>= 3.13', require: false
+  gem 'rspec-mocks', require: false
   gem 'rspec-support', require: false
   gem 'rspec-rails', require: false
   gem 'capybara-playwright-driver'
