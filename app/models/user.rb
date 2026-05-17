@@ -255,7 +255,7 @@ class User < ApplicationRecord
   def toggle_favorite(asset)
     existing_track = tracks.favorites.where(asset_id: asset.id).first
     if existing_track
-      existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
+      existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id, touch: true)
     else
       tracks.favorites.create(asset_id: asset.id)
       Asset.increment_counter(:favorites_count, asset.id, touch: true)

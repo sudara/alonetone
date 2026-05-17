@@ -80,11 +80,15 @@ class UsersController < ApplicationController
 
   def toggle_favorite
     asset = Asset.published.find(params[:asset_id])
-    return false unless logged_in? && asset # no bullshit
+    return head :forbidden unless logged_in? && asset
 
     current_user.toggle_favorite(asset)
+    asset.reload
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: '' }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update("favorites_count_#{asset.id}", asset.favorites_count)
+      end
+      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
     end
   end
 

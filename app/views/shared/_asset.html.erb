@@ -50,7 +50,7 @@
         <i class="icon_favs">
           <%== render file: svg_path('svg/icon_favorite_inverted.svg') %>
         </i>
-        <%= @asset.favorites_count %>
+        <span id="favorites_count_<%= @asset.id %>"><%= @asset.favorites_count %></span>
       </div>
       <div class="plays">
         <i class="icon_plays">
@@ -71,7 +71,7 @@
       <% if logged_in? %>
         <div class="track_favorite">
         <%= button_to toggle_favorite_path(asset_id: @asset.id), class: 'add_to_favorites',
-            method: :put, data: {controller: 'favorite', action: 'favorite#toggle', 'favorite-id-value': @asset.id} do %>
+            method: :put, data: {controller: 'heart', action: 'heart#toggle', 'heart-favorited-value': current_user.has_as_favorite?(@asset)} do %>
             Favorite <%== render file: svg_path('svg/animation_heart.svg') %>
         <% end %>
         </div>

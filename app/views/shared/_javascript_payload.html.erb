@@ -1,7 +1,6 @@
 <%= javascript_tag do %>
   window.username = '<%= logged_in? ? current_user.login : "Guest" %>';
   window.userIsAdmin = <%= moderator? ? true : false %>;
-  window.userFavorites = <%= (logged_in? ? current_user.favorite_asset_ids : [] ).to_json %>;
   window.showPlayCounts = <%= logged_in? && current_user.settings && (current_user.settings[:display_listen_count] == "true") ? true : false %>;
   window.userPersonalization = '<div>' +
      <% if logged_in? %>

@@ -4,10 +4,18 @@ import FaveAnimation from '../animation/fave_animation'
 export default class extends Controller {
   static targets = ['svg']
 
+  static values = {
+    favorited: Boolean,
+  }
+
   initialize() {
-    this.favorited = this.isFavorited()
     this.animation = new FaveAnimation(this.element)
     this.animation.init()
+  }
+
+  // Runs after outlets/values are wired, so subclasses can use them in isFavorited().
+  connect() {
+    this.favorited = this.isFavorited()
     this.animation.setUnfave()
     if (this.favorited) {
       this.animation.setFave()
@@ -26,6 +34,10 @@ export default class extends Controller {
       this.favorited = true
       this.faved()
     }
+  }
+
+  isFavorited() {
+    return this.favoritedValue
   }
 
   // placeholders for child controllers
