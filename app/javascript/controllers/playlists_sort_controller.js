@@ -1,7 +1,7 @@
 import Sortable from 'sortablejs'
-import Rails from '@rails/ujs'
 import { Controller } from "@hotwired/stimulus"
 import { flashController } from './flash_controller'
+import csrfFetch from '../misc/csrf_fetch'
 
 export default class extends Controller {
   static targets = ['sortable', 'feedback']
@@ -34,12 +34,15 @@ export default class extends Controller {
   }
 
   sort() {
-    Rails.ajax({
-      url: `${window.location}/sort.js`,
-      type: 'POST',
-      data: this.currentParams,
-      success: this.displaySuccess.bind(this),
+    csrfFetch(`${window.location}/sort.js`, {
+      method: 'POST',
+      body: new URLSearchParams(this.currentParams),
     })
+      .then((r) => {
+        if (!r.ok) throw new Error('sort failed')
+        this.displaySuccess()
+      })
+      .catch(() => flashController.alertFailed())
   }
 
   displaySuccess() {

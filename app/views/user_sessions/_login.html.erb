@@ -14,7 +14,7 @@
   </div>
 
   <div>
-    <%= f.submit "Come on in...", data: { turbolinks: "false" } %>
+    <%= f.submit "Come on in..." %>
   </div>
 <% end %>
 
@@ -22,7 +22,7 @@
   <%= link_to "Forgot Your Password?", "#reset-password", class: "slide_open_href" %>
 </div>
 
-<%= form_with url: password_resets_path, data: { turbo: false }, id: 'reset-password' do |f| %>
+<%= form_with url: password_resets_path, id: 'reset-password' do |f| %>
 
   <label for="email">Enter the email address you signed up with</label>
 

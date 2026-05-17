@@ -36,6 +36,16 @@ RSpec.describe "Theme", type: :request do
     expect(session[:theme]).to eql('light')
   end
 
+  it "toggles via the production csrfFetch path (no .js, X-Requested-With)" do
+    create_user_session(users(:arthur))
+    get '/'
+    expect(session[:theme]).to eql('light')
+    put '/toggle_theme', headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+    expect(response).to have_http_status(:success)
+    get '/users'
+    expect(session[:theme]).to eql('dark')
+  end
+
   context "with conditional GET caching" do
      before do
       create_user_session(users(:sudara))
