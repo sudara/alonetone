@@ -30,7 +30,7 @@
 
   <!-- Play button automagically plays AND changes to relevant track details  -->
   <%= link_to user_show_track_in_playlist_path(@user, @playlist, track.asset, format: :mp3),
-    class: 'play_button stitches_play', data: { "playlist-track-playback-target": "play", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track", "turbo-action": "advance" } do %>
+    class: 'play_button stitches_play', data: { "playlist-track-playback-target": "play", "action": "playlist-track-playback#selectTrack", "turbo-frame": "playlist-track", "turbo-action": "advance", percy_ignore: true } do %>
     <i class="icon_play"></i>
   <% end %>
 
