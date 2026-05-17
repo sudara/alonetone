@@ -41,6 +41,14 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(Rakismet).to receive(:akismet_call)
       put spam_admin_user_path(user.login)
     end
+
+    it "should render a turbo_stream replacing the user row" do
+      akismet_stub_submit_spam
+      put spam_admin_user_path(user.login), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="user_#{user.id}"))
+    end
   end
 
   describe '#restore' do
@@ -70,6 +78,13 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(users(:arthur).listens.count).to be > 0
       expect(users(:arthur).playlists.count).to be > 0
       expect(users(:arthur).comments_received.count).to be > 0
+    end
+
+    it "should render a turbo_stream replacing the user row" do
+      put restore_admin_user_path(users(:arthur).login), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="user_#{users(:arthur).id}"))
     end
   end
 

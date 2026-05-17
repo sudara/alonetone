@@ -1,4 +1,4 @@
-<div data-controller="admin--user" data-admin--user-deleted="<%= user.soft_deleted? %>" data-admin--user-spam="<%= user.is_spam? %>">
+<%= tag.div id: dom_id(user), class: ('deleted' if user.soft_deleted?) do %>
   <div class="date_column">
     <%= local_time_ago user.created_at %>
     <div class="deleted_at_date"><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
@@ -30,9 +30,14 @@
     <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0  && !user.soft_deleted? %></div>
   </div>
   <div class="button_column">
-    <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put, data: { 'admin--user-target': 'unspamButton', action: 'click->admin--user#hideUnspamButton' } %>
-    <%= button_to "Spam User", spam_admin_user_path(user), method: :put, data: { 'admin--user-target': 'spamButton', action: 'click->admin--user#hideSpamAndShowRestoreButton' } %>
-    <%= button_to "Delete User", delete_admin_user_path(user), method: :put, data: { 'admin--user-target': 'deleteButton', action: 'admin--user#showRestoreButton' } %></td>
-    <%= button_to "Restore User", restore_admin_user_path(user), method: :put, data: { 'admin--user-target': 'restoreButton', action: 'click->admin--user#showDeleteAndSpamButton' } %></td>
+    <% if user.soft_deleted? %>
+      <%= button_to "Restore User", restore_admin_user_path(user), method: :put %>
+    <% elsif user.is_spam? %>
+      <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put %>
+      <%= button_to "Delete User", delete_admin_user_path(user), method: :put %>
+    <% else %>
+      <%= button_to "Spam User", spam_admin_user_path(user), method: :put %>
+      <%= button_to "Delete User", delete_admin_user_path(user), method: :put %>
+    <% end %>
   </div>
-</div>
+<% end %>

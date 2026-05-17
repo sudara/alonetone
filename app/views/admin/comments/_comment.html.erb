@@ -1,4 +1,4 @@
-<div data-controller="admin--comment" data-admin--comment-spam="<%= comment.is_spam? %>" data-admin--comment-deleted="<%= comment.soft_deleted? %>" data-admin--comment-user-deleted="<%= comment.commenter&.soft_deleted? %>">
+<%= tag.div id: dom_id(comment), class: ('deleted' if comment.is_spam?) do %>
   <div class="date_column"><%= comment.created_at.strftime("%b %d") %>, <%= comment.id %></div>
   <div class="user_column">
     <div class="avatar">
@@ -18,7 +18,12 @@
   </div>
   <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
   <div class="button_column">
-    <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put, data: { 'admin-comment-target': 'spamButton', action: 'click->admin--comment#markAsSpam' } %></div>
-    <div><%= button_to "Restore", unspam_admin_comment_path(comment), data: { 'admin--comment-target': 'restoreButton', action: 'click->admin--comment#markAsRestored' }, method: :put %></div>
+    <% unless comment.commenter&.soft_deleted? %>
+      <% if comment.is_spam? %>
+        <div><%= button_to "Restore", unspam_admin_comment_path(comment), method: :put %></div>
+      <% else %>
+        <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></div>
+      <% end %>
+    <% end %>
   </div>
-</div>
+<% end %>

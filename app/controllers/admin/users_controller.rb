@@ -13,33 +13,22 @@ module Admin
 
     def delete
       UserCommand.new(@user).soft_delete_with_relations
-
-      respond_to do |format|
-        format.html { redirect_to admin_users_path(filter_by: :deleted) }
-        format.js { redirect_back(fallback_location: root_path) }
-      end
+      respond_with_user_row(fallback_filter: :deleted)
     end
 
     def restore
       UserCommand.new(@user).restore_with_relations
-
-      respond_to do |format|
-        format.html { redirect_to admin_users_path }
-        format.js { redirect_back(fallback_location: root_path) }
-      end
+      respond_with_user_row(fallback_filter: nil)
     end
 
     def unspam
       UserCommand.new(@user).unspam_and_restore_with_relations
+      respond_with_user_row(fallback_filter: nil)
     end
 
     def spam
       UserCommand.new(@user).spam_soft_delete_with_relations
-
-      respond_to do |format|
-        format.html { redirect_to admin_users_path(filter_by: :is_spam) }
-        format.js
-      end
+      respond_with_user_row(fallback_filter: :is_spam)
     end
 
     def mark_all_users_with_ip_as_spam
@@ -50,6 +39,15 @@ module Admin
     end
 
     private
+
+    def respond_with_user_row(fallback_filter:)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(@user, partial: 'admin/users/user', locals: { user: @user })
+        end
+        format.html { redirect_to admin_users_path(filter_by: fallback_filter) }
+      end
+    end
 
     def permitted_params
       params.permit(:filter_by)

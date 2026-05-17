@@ -24,6 +24,13 @@ RSpec.describe Admin::AssetsController, type: :request do
       put spam_admin_asset_path(asset.id)
     end
 
+    it "should render a turbo_stream replacing the asset row" do
+      put spam_admin_asset_path(asset.id), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="asset_#{asset.id}"))
+    end
+
     it "should soft_delete asset" do
       akismet_stub_submit_spam
       expect {
@@ -113,6 +120,14 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect {
         put restore_admin_asset_path(track.id)
       }.to change(Asset, :count).by(1)
+    end
+
+    it "should render a turbo_stream replacing the asset row" do
+      akismet_stub_submit_ham
+      put unspam_admin_asset_path(track.id), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="asset_#{track.id}"))
     end
   end
 
