@@ -1,4 +1,4 @@
-<div data-controller="admin--request" class="<%= account_request.status %>">
+<%= tag.div id: dom_id(account_request), class: account_request.status do %>
   <div class="date_column">
     <%= local_time_ago account_request.created_at %>
     <div>
@@ -22,15 +22,9 @@
     <div><%= account_request.details %></div>
   </div>
   <div class="button_column">
-    <%= button_to "Approve & Email", approve_admin_account_request_path(account_request),
-      class: 'approve_button', method: :put,
-      form: { data: { action: 'turbo:submit-end->admin--request#approveSubmitted' } },
-      data: { 'admin--request-target': 'approveButton',
-              action: 'click->admin--request#moderated' } %>
-    <%= button_to "Deny", deny_admin_account_request_path(account_request),
-      class: 'deny_button', method: :put,
-      form: { data: { action: 'turbo:submit-end->admin--request#denySubmitted' } },
-      data: { 'admin--request-target': 'denyButton',
-              action: 'click->admin--request#moderated' } %>
+    <% if account_request.waiting? %>
+      <%= button_to "Approve & Email", approve_admin_account_request_path(account_request), class: 'approve_button', method: :put %>
+      <%= button_to "Deny", deny_admin_account_request_path(account_request), class: 'deny_button', method: :put %>
+    <% end %>
   </div>
-</div>
+<% end %>

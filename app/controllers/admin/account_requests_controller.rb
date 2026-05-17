@@ -9,15 +9,24 @@ module Admin
     def approve
       @user = @account_request.approve!(current_user)
       InviteNotification.approved_request(@user).deliver_now
-      render plain: 'approved'
+      respond_with_account_request_row
     end
 
     def deny
       @account_request.deny!(current_user)
-      render plain: 'denied'
+      respond_with_account_request_row
     end
 
     private
+
+    def respond_with_account_request_row
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(@account_request, partial: 'admin/account_requests/account_request', locals: { account_request: @account_request })
+        end
+        format.html { redirect_back(fallback_location: admin_account_requests_path, status: :see_other) }
+      end
+    end
 
     def set_account_request
       @account_request = AccountRequest.find(params[:id])
