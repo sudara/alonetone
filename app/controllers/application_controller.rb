@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include ActiveStorage::SetCurrent
   include Authentication
   include Authorization
-  include Pagy::Backend
+  include Pagy::Method
   include PreventAbuse
 
   protect_from_forgery

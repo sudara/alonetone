@@ -300,7 +300,10 @@ GEM
       shellany (~> 0.0)
     ostruct (0.6.3)
     package_json (0.2.0)
-    pagy (9.4.0)
+    pagy (43.5.4)
+      json
+      uri
+      yaml
     parallel (1.22.1)
     parser (3.2.0.0)
       ast (~> 2.4.1)
@@ -499,6 +502,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unaccent (0.4.0)
     unicode-display_width (2.4.2)
+    uri (1.1.1)
     useragent (0.16.11)
     webmock (3.18.1)
       addressable (>= 2.8.0)
@@ -510,6 +514,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yaml (0.4.0)
     yui-compressor (0.12.0)
     zeitwerk (2.7.5)
 
@@ -556,7 +561,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   ostruct
-  pagy (~> 9.4)
+  pagy (~> 43.5)
   percy-capybara
   perf_check
   postmark-rails
