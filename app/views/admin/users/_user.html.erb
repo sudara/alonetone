@@ -17,7 +17,7 @@
         <% else %>
           <%= user.current_login_ip %>
           <% if User.with_same_ip_as(user).count > 0 %>
-            <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put %>
+            <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), data: { turbo_method: :put } %>
           <% end %>
         <% end %>
        </div>
