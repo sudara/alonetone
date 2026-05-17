@@ -292,12 +292,36 @@ RSpec.describe Asset, type: :model do
       }.to change { user.reload.assets_count }.by(-1)
     end
 
+    it "touches the user on soft delete to expire user-level track caches" do
+      user = users(:arthur)
+      original_updated_at = user.updated_at
+
+      travel_to(1.second.from_now) do
+        AssetCommand.new(assets(:valid_arthur_mp3)).soft_delete_with_relations
+      end
+
+      expect(user.reload.updated_at).to be > original_updated_at
+    end
+
     it "increments the user counter cache on restore" do
       user = users(:arthur)
       AssetCommand.new(assets(:valid_arthur_mp3)).soft_delete_with_relations
       expect {
         AssetCommand.new(assets(:valid_arthur_mp3)).restore_with_relations
       }.to change { user.reload.assets_count }.by(1)
+    end
+
+    it "touches the user on restore to expire user-level track caches" do
+      user = users(:arthur)
+      AssetCommand.new(assets(:valid_arthur_mp3)).soft_delete_with_relations
+      user.reload
+      original_updated_at = user.updated_at
+
+      travel_to(1.second.from_now) do
+        AssetCommand.new(assets(:valid_arthur_mp3)).restore_with_relations
+      end
+
+      expect(user.reload.updated_at).to be > original_updated_at
     end
   end
 
