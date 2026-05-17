@@ -112,9 +112,9 @@ class PlaylistsController < ApplicationController
     @playlist = @user.playlists.build(playlist_params)
     if @playlist.save
       flash[:notice] = 'Great, go ahead and add some tracks'
-      redirect_to edit_user_playlist_path(@user, @playlist)
+      redirect_to edit_user_playlist_path(@user, @playlist), status: :see_other
     else
-       render action: "new"
+      render action: "new", status: :unprocessable_content
     end
   end
 
@@ -122,10 +122,10 @@ class PlaylistsController < ApplicationController
     is_private = params[:playlist].delete(:is_private)
     if @playlist.update(playlist_params)
       @playlist.is_private = is_private
-      redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.'
+      redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.', status: :see_other
     else
       set_assets
-      render action: "edit"
+      render action: "edit", status: :unprocessable_content
     end
   end
 

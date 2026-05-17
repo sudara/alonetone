@@ -13,7 +13,6 @@
     <% end %>
     <%= render partial: 'shared/errors', locals: { errors: @playlist.errors } %>
     <%= form_with model: [@user, @playlist],
-      data: { turbo: false },
       html: { id: 'edit_playlist', autocomplete: 'off' } do |f| %>
 
       <div class="edit_playlist_info_columns">
