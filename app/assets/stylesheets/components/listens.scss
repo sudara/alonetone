@@ -20,7 +20,7 @@
       overflow: hidden;
       height: 40px;
       min-height: 25px;
-      padding-top: 5px;
+      padding-top: 3px;
       flex-grow: 1;
       > div {
         white-space: nowrap;
@@ -31,6 +31,7 @@
       a {
         font-size: 10px;
         font-weight: bold;
+        line-height: 1.4;
       }
       span {
         white-space: nowrap;

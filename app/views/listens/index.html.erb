@@ -5,7 +5,7 @@
   </div>
 
 <% content_for :left do %>
-  <h2><%= @user.name %>'s listening history</h2>
+  <h2><div class="name"><%= @user.name %></div><div>&nbsp;'s&nbsp;listening&nbsp;history</div></h2>
   <div class="mini_paginator top_paginator">
     <%== pagy_nav @listens_pagy %>
   </div>

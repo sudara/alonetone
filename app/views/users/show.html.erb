@@ -171,10 +171,18 @@
         <h2>Most Popular</h2>
 
         <div id="user_popular" class="box">
-          <%= link_to " ", user_tracks_path(@user),
-          class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
           <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @popular_tracks %>
         </div>
+        <div class="below_box">
+          <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}" do %>
+            <span>view all &nbsp;
+              <i class="icon_caret">
+                <%== render file: svg_path('svg/icon_caret.svg') %>
+              </i>
+            </span>
+          <% end if @user.assets_count > 5 %>
+        </div>
+
       </div>
     <% end %>
 
