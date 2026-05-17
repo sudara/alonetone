@@ -80,12 +80,6 @@ class PagesController < ApplicationController
     render plain: ok
   end
 
-  def sitemap
-    respond_to do |wants|
-      wants.xml
-    end
-  end
-
   def toggle_theme
     respond_to :js
     if logged_in?
