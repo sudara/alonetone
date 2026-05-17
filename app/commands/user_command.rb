@@ -10,6 +10,8 @@ class UserCommand
   end
 
   def restore_with_relations
+    return unspam_and_restore_with_relations if user.is_spam?
+
     efficiently_restore_relations
     user.restore
   end

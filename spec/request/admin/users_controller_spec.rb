@@ -116,6 +116,23 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(response.body).to include(%(action="replace"))
       expect(response.body).to include(%(target="user_#{users(:arthur).id}"))
     end
+
+    context "when the user was marked as spam" do
+      before do
+        users(:arthur).update_column(:is_spam, true)
+      end
+
+      it "also clears the spam flag" do
+        akismet_stub_submit_ham
+        put restore_admin_user_path(users(:arthur))
+        expect(users(:arthur).reload.is_spam).to eq(false)
+      end
+
+      it "notifies Akismet that the user is ham" do
+        expect(Rakismet).to receive(:akismet_call)
+        put restore_admin_user_path(users(:arthur))
+      end
+    end
   end
 
   describe '#delete' do
