@@ -1,6 +1,6 @@
 <div class="player">
   <div class="play_button_container" data-big-play-target="play" data-action="click->big-play#togglePlay">
-    <div class='play_button play-control'>
+    <div class='play_button play-control' data-percy-ignore>
       <%= link_to media_url(@asset), class: 'stitches_play', data: { 'single-playback-target': 'play' } do %>
       <svg data-big-play-target="playButton" class="largePlaySVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
         <defs>

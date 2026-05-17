@@ -5,5 +5,7 @@ snapshot:
     - 390
     - 768
     - 1280
+  percy-css: |
+    [data-percy-ignore] { visibility: hidden !important; }
 discovery:
   disable-cache: true

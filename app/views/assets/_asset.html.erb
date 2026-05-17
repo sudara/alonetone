@@ -1,7 +1,7 @@
 <div class="asset_top">
   <div class="asset_top_row">
     <div class="drag_handle"><div class="inner"></div></div>
-    <div class="play_button button" data-normal-playback-target="play">
+    <div class="play_button button" data-normal-playback-target="play" data-percy-ignore>
       <%= link_to user_track_path(asset.user.login, asset.permalink, format: :mp3),
         class: 'play_link stitches_play', title: 'play' do %>
           <svg data-normal-playback-target="playButton" class="playIconSymbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
