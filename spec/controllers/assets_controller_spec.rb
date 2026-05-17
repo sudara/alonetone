@@ -50,7 +50,6 @@ RSpec.describe AssetsController, type: :controller do
       expect(playlist.reload.tracks_count).to eq(playlist_tracks_count - 1)
     end
 
-
     it "should soft_delete listens" do
       listens_count = asset.listens.count
       # make sure there are more than 0 listens for that asset
@@ -174,7 +173,7 @@ RSpec.describe AssetsController, type: :controller do
   end
 
   context "#radio" do
-    ['those_you_follow', 'songs_you_have_not_heard', 'mangoz_shuffle'].each do |source|
+    %w[those_you_follow songs_you_have_not_heard mangoz_shuffle].each do |source|
       it "should raise an error if trying to access #{source} with no current user" do
         get :radio, params: { source: source }
         expect(response.status).to eq(404)

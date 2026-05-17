@@ -57,19 +57,19 @@ RSpec.describe "Theme", type: :request do
       @last_modified = response.headers['Last-Modified']
     end
 
-    it "should return 304 not modified when theme doesn't change" do
-      get "/", headers: { 'HTTP_IF_NONE_MATCH': @etag, 'HTTP_IF_MODIFIED_SINCE': @last_modified }
-      expect(session[:theme]).to eql('dark')
-      expect(response).to have_http_status(304)
-    end
+     it "should return 304 not modified when theme doesn't change" do
+       get "/", headers: { 'HTTP_IF_NONE_MATCH': @etag, 'HTTP_IF_MODIFIED_SINCE': @last_modified }
+       expect(session[:theme]).to eql('dark')
+       expect(response).to have_http_status(304)
+     end
 
-    it "should not return 304 when theme changes because the etag will change" do
-      expect(session[:theme]).to eql('dark')
-      put '/toggle_theme.js'
-      get "/", headers: { 'HTTP_IF_NONE_MATCH': @etag, 'HTTP_IF_MODIFIED_SINCE': @last_modified }
-      expect(session[:theme]).to eql('light')
-      expect(response.headers['ETag']).to_not eql(@etag)
-      expect(response).to have_http_status(200)
-    end
+     it "should not return 304 when theme changes because the etag will change" do
+       expect(session[:theme]).to eql('dark')
+       put '/toggle_theme.js'
+       get "/", headers: { 'HTTP_IF_NONE_MATCH': @etag, 'HTTP_IF_MODIFIED_SINCE': @last_modified }
+       expect(session[:theme]).to eql('light')
+       expect(response.headers['ETag']).to_not eql(@etag)
+       expect(response).to have_http_status(200)
+     end
   end
 end

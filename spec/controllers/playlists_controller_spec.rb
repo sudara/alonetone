@@ -124,7 +124,7 @@ RSpec.describe PlaylistsController, type: :controller do
          id: 'arthurs-playlist',
          user_id: 'arthur',
          pic: { pic: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg') }
-      }
+       }
       end.to change { playlist.reload.updated_at }
     end
   end

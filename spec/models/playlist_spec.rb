@@ -103,7 +103,7 @@ RSpec.describe Playlist, type: :model do
   describe "scopes" do
     it "select playlists which shall be shown on the homepage" do
       playlists = Playlist.for_home.to_a
-      # Note: this number may change as fixture are added.
+      # NOTE: this number may change as fixture are added.
       expect(playlists.size).to eq(2)
 
       last_time = Time.zone.now
@@ -188,8 +188,7 @@ RSpec.describe Playlist, type: :model do
       jpg_cover = Playlist.new(user: users(:will_studd), title: "jpg jump",
         cover_image: file_fixture_uploaded_file(
           'jeffdoessudara.jpg', filename: 'jeffdoessudara.jpg', content_type: 'image/jpeg'
-        )
-      )
+        ))
       expect(jpg_cover).to be_valid
     end
 
@@ -197,8 +196,7 @@ RSpec.describe Playlist, type: :model do
       png_cover = Playlist.new(user: users(:will_studd), title: "jpg jump",
         cover_image: file_fixture_uploaded_file(
           'alonetone.png', filename: 'alonetone.png', content_type: 'image/png'
-        )
-      )
+        ))
       expect(png_cover).to be_valid
     end
 
@@ -206,8 +204,7 @@ RSpec.describe Playlist, type: :model do
       webp_cover = Playlist.new(user: users(:will_studd), title: "jpg jump",
         cover_image: file_fixture_uploaded_file(
           'alonetone.webp', filename: 'alonetone.webp', content_type: 'image/webp'
-        )
-      )
+        ))
       expect(webp_cover).not_to be_valid
       expect(webp_cover.errors[:cover_image]).to_not be_empty
     end

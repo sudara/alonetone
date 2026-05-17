@@ -87,7 +87,7 @@ RSpec.describe Upload, type: :model do
 
       asset = upload.assets.first
       expect(asset.errors.details).to eq(
-        audio_file: [error: :blank, value: 0]
+        audio_file: [{ error: :blank, value: 0 }]
       )
     end
   end

@@ -14,7 +14,7 @@ module RSpec
       # The selector is resolved against the full document, so this ignores any enclosing `within(...)`.
       def pw_click(selector, x: nil, y: nil)
         page.driver.with_playwright_page do |pw_page|
-          options = (x && y) ? { position: { x: x, y: y } } : {}
+          options = x && y ? { position: { x: x, y: y } } : {}
           pw_page.locator(selector).first.click(**options)
         end
       end
@@ -38,7 +38,7 @@ module RSpec
         sleep(0.1)
       end
 
-      def logged_in(user=:arthur)
+      def logged_in(user = :arthur)
         visit new_user_session_path
 
         within '#login_form' do

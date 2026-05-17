@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe 'playlists', type: :feature, js: true do
-
   it 'renders track and cover pages' do
     logged_in(:arthur) do
       visit 'henri_willig/playlists/polderkaas'

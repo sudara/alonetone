@@ -59,7 +59,7 @@ module RSpec
 
       def ensure_blobs_on_disk(fixtures_directory, blobs)
         fixtures_directory = File.join(fixtures_directory, 'files')
-        blobs.fixtures.each do |name, fixture|
+        blobs.fixtures.each do |_name, fixture|
           ensure_blob_on_disk(fixtures_directory, fixture, blobs.model_class.find(fixture['id']))
         end
       end

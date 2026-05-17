@@ -8,9 +8,10 @@ module RSpec
 
         attr_reader :language, :query, :properties
 
-        def initialize(options={})
-          @language, @query, @properties =
-            options[:language], options[:query], options[:properties]
+        def initialize(options = {})
+          @language = options[:language]
+          @query = options[:query]
+          @properties = options[:properties]
         end
 
         def failure_message
@@ -22,10 +23,10 @@ module RSpec
         end
 
         def failure_message_when_negated
-          unless matched_elements.empty?
-            "expected: `#{truncated_target}' to NOT match #{language} `#{query}'"
-          else
+          if matched_elements.empty?
             "expected `#{truncated_target}' to NOT match #{language} `#{query}' #{properties_explanation}"
+          else
+            "expected: `#{truncated_target}' to NOT match #{language} `#{query}'"
           end + "\nmatched:\n\n" + matched_elements.to_s
         end
 
@@ -71,27 +72,24 @@ module RSpec
           if defined?(:Nokogiri)
             @document ||= Nokogiri::HTML.parse(@target.to_s)
           else
-            raise RuntimeError, "Please add Nokogiri to your Gemfile to use the CSS or Xpath matchers"
+            raise "Please add Nokogiri to your Gemfile to use the CSS or Xpath matchers"
           end
         end
 
         def matched_elements
-          @matched_elements ||= begin
-            case language
-            when :css
+          @matched_elements ||= case language
+                                when :css
               document.css(query)
-            when :xpath
+                                when :xpath
               document.xpath(query)
             end
-          end
         end
 
         def matches_properties?
-          if properties[:times]
-            if matched_elements.length != properties[:times]
+          if properties[:times] && (matched_elements.length != properties[:times])
               return false
             end
-          end
+
           true
         end
 
@@ -106,7 +104,7 @@ module RSpec
       #
       #     expect('<html></html>').to match_xpath('/html')
       #     expect('<html><b></b><b></b></root>').to match_xpath('/html/b').times(2)
-      def match_xpath(query, properties={})
+      def match_xpath(query, properties = {})
         MarkupMatcher.new(language: :xpath, query: query, properties: properties)
       end
 
@@ -116,7 +114,7 @@ module RSpec
       #
       #     expect('<html></html>').to match_css('html')
       #     expect('<html><b></b><b></b></root>').to match_css('html b').times(2)
-      def match_css(query, properties={})
+      def match_css(query, properties = {})
         MarkupMatcher.new(language: :css, query: query, properties: properties)
       end
     end

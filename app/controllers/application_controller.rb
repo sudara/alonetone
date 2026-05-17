@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
 
   before_action :store_location, only: %i[index show]
 
-
   protected
 
   def lazily_create_waveform_if_needed
@@ -95,7 +94,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_asset
-    @asset = @user.assets.where(permalink: (params[:permalink] || params[:track_id] || params[:id])).first
+    @asset = @user.assets.where(permalink: params[:permalink] || params[:track_id] || params[:id]).first
     @asset ||= @user.assets.where(id: params[:id]).first || track_not_found
   end
 
@@ -105,8 +104,8 @@ class ApplicationController < ActionController::Base
   end
 
   def find_playlists
-    @playlist = @user.playlists.find(permalink: (params[:permalink] || params[:id]), include: [tracks: :asset]).first
-    @playlist = @user.playlists.find(params[:id], include: [tracks: :asset]) if !@playlist && params[:id]
+    @playlist = @user.playlists.find(permalink: params[:permalink] || params[:id], include: [{ tracks: :asset }]).first
+    @playlist = @user.playlists.find(params[:id], include: [{ tracks: :asset }]) if !@playlist && params[:id]
   end
 
   def display_private_comments?

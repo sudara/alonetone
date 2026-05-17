@@ -63,7 +63,7 @@ class AssetsController < ApplicationController
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
-    if !logged_in? && %w(those_you_follow songs_you_have_not_heard mangoz_shuffle).include?(params[:source])
+    if !logged_in? && %w[those_you_follow songs_you_have_not_heard mangoz_shuffle].include?(params[:source])
       flash[:error] = "Sorry. Page you've been looking for is not found."
       raise ActionController::RoutingError, 'Page Not Found'
     end
@@ -83,8 +83,8 @@ class AssetsController < ApplicationController
 
   def search
     @assets = Asset.published.where("assets.filename LIKE ? OR assets.title LIKE ?",
-                                 "%#{params[:search]}%", "%#{params[:search]}%")
-                   .limit(10)
+      "%#{params[:search]}%", "%#{params[:search]}%")
+      .limit(10)
     render partial: 'results', layout: false
   end
 
@@ -154,7 +154,7 @@ class AssetsController < ApplicationController
       if result
         # Turbo Drive's redirect-follow contract requires :see_other after non-GET form submissions.
         redirect_to user_track_url(@asset.user.login, @asset.permalink),
-                    ok: 'Saved!', status: :see_other
+          ok: 'Saved!', status: :see_other
       else
         flash[:error] = "There was an issue with updating that track"
         render :edit

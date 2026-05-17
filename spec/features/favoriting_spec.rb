@@ -7,6 +7,7 @@ RSpec.describe 'favoriting tracks', type: :feature, js: true do
       result = block.call
       return result if result
       raise "timeout waiting for condition" if Time.now > deadline
+
       sleep 0.05
     end
   end

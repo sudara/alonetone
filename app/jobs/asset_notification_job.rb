@@ -7,6 +7,7 @@ class AssetNotificationJob < ApplicationJob
 
     return unless follower&.email && assets.present?
     return AssetNotification.upload_notification(assets.first, follower.email).deliver_now if assets.count == 1
+
     AssetNotification.upload_mass_notification(assets, follower.email).deliver_now
   end
 end

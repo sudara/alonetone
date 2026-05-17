@@ -14,8 +14,7 @@ class ImageVariant
     greenfield: 1500
   }.freeze
 
-  attr_reader :attachment
-  attr_reader :variant_name
+  attr_reader :attachment, :variant_name
 
   def initialize(attachment, variant:)
     ImageVariant.verify(variant)
@@ -41,7 +40,7 @@ class ImageVariant
   def self.variant_options(variant_name)
     size = VARIANTS[variant_name.to_sym]
     {
-      resize_to_fill: [size, size, crop: :centre],
+      resize_to_fill: [size, size, { crop: :centre }],
       saver: { quality: 68, optimize_coding: true, strip: true }
     }
   end

@@ -11,8 +11,7 @@ class Download
   class DownloadedFile
     include ActiveModel::Model
 
-    attr_accessor :tempfile
-    attr_accessor :original_filename
+    attr_accessor :tempfile, :original_filename
 
     delegate :path, to: :tempfile
   end

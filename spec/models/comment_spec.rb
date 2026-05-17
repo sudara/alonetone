@@ -39,7 +39,6 @@ RSpec.describe Comment, type: :model do
     end
   end
 
-
   context "spam_if_banned_words!" do
     it "inspects the body for banned words and marks as spam" do
       akismet_stub_response_ham # it fails to detect

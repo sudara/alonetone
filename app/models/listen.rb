@@ -29,20 +29,20 @@ class Listen < ActiveRecord::Base
 
   def self.most_active_ips(limit = 25)
     Listen.where('created_at > ?', 30.days.ago)
-          .order('count_all DESC')
-          .group(:ip).limit(limit).count
+      .order('count_all DESC')
+      .group(:ip).limit(limit).count
   end
 
   def self.most_active_tracks(limit = 25)
     Listen.from('listens IGNORE INDEX(index_listens_on_asset_id)')
-          .where('created_at > ?', 30.days.ago).order('count_all DESC')
-          .group(:asset).limit(limit).count
+      .where('created_at > ?', 30.days.ago).order('count_all DESC')
+      .group(:asset).limit(limit).count
   end
 
   def self.monthly_listen_count_for(date = Time.now)
     # returns [count, year_month_label]
     [Listen.where('created_at > ? AND created_at < ?',
-       date.beginning_of_month, date.end_of_month).count,
+      date.beginning_of_month, date.end_of_month).count,
       date.strftime('%b %y').to_s]
   end
 

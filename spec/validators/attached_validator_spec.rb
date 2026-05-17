@@ -6,8 +6,7 @@ RSpec.describe AttachedValidator do
   class AttachedValidatorModel
     include ActiveModel::Validations
 
-    attr_reader :audio_file
-    attr_reader :video_file
+    attr_reader :audio_file, :video_file
 
     def initialize(audio_file, video_file)
       @audio_file = audio_file
@@ -52,7 +51,7 @@ RSpec.describe AttachedValidator do
     )
     expect(record).to_not be_valid
     expect(record.errors.details[:audio_file]).to eq(
-      [error: :not_attached]
+      [{ error: :not_attached }]
     )
   end
 
@@ -68,10 +67,12 @@ RSpec.describe AttachedValidator do
     expect(record).to_not be_valid
     expect(record.errors.details[:audio_file]).to eq(
       [
-        error: :invalid_content_type,
-        accepted: %w[audio/mpeg audio/mp3 audio/x-mp3],
-        accepted_sentence: 'audio/mpeg, audio/mp3, and audio/x-mp3',
-        value: 'application/octet-stream'
+        {
+          error: :invalid_content_type,
+          accepted: %w[audio/mpeg audio/mp3 audio/x-mp3],
+          accepted_sentence: 'audio/mpeg, audio/mp3, and audio/x-mp3',
+          value: 'application/octet-stream'
+        }
       ]
     )
   end
@@ -87,7 +88,7 @@ RSpec.describe AttachedValidator do
     )
     expect(record).to_not be_valid
     expect(record.errors.details[:audio_file]).to eq(
-      [error: :blank, value: 0]
+      [{ error: :blank, value: 0 }]
     )
   end
 
@@ -99,10 +100,12 @@ RSpec.describe AttachedValidator do
     expect(record).to_not be_valid
     expect(record.errors.details[:video_file]).to eq(
       [
-        error: :byte_size_too_small,
-        greater_than: 10485760,
-        greater_than_human_size: '10 MB',
-        value: 30720
+        {
+          error: :byte_size_too_small,
+          greater_than: 10485760,
+          greater_than_human_size: '10 MB',
+          value: 30720
+        }
       ]
     )
   end
@@ -119,10 +122,12 @@ RSpec.describe AttachedValidator do
     expect(record).to_not be_valid
     expect(record.errors.details[:audio_file]).to eq(
       [
-        error: :byte_size_too_large,
-        value: 2.gigabytes.to_i,
-        less_than: 60.megabytes,
-        less_than_human_size: '60 MB'
+        {
+          error: :byte_size_too_large,
+          value: 2.gigabytes.to_i,
+          less_than: 60.megabytes,
+          less_than_human_size: '60 MB'
+        }
       ]
     )
   end

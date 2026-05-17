@@ -153,9 +153,9 @@ RSpec.describe Storage::Location, type: :model do
     context "with Fastly enabled" do
       around do |example|
       attachment.blob.service_name = :s3
-        with_alonetone_configuration(fastly_base_url: fastly_base_url) do
-          example.call
-        end
+      with_alonetone_configuration(fastly_base_url: fastly_base_url) do
+        example.call
+      end
       end
 
       it "generates an S3 URL to the original image" do

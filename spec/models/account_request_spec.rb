@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe AccountRequest, type: :model do
-
   let(:valid_account_request) do
     AccountRequest.new(
       login: "brandnewband",
@@ -102,7 +101,6 @@ RSpec.describe AccountRequest, type: :model do
 
   context "status" do
     it "should change to claimed when user sets password" do
-
     end
   end
 end

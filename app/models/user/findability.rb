@@ -71,8 +71,8 @@ class User < ApplicationRecord
 
       def dedicated_listeners
         left_joins(:listens).group('users.id')
-        .order('COUNT(listens.id) DESC')
-        .where('listens.created_at > ?', 1.month.ago)
+          .order('COUNT(listens.id) DESC')
+          .where('listens.created_at > ?', 1.month.ago)
       end
     end
   end

@@ -125,7 +125,7 @@ class PlaylistsController < ApplicationController
   protected
 
   def find_track_and_asset_in_playlist
-    return if !params[:asset_id].present?
+    return unless params[:asset_id].present?
 
     @asset = Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
 

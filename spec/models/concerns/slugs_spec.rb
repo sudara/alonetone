@@ -48,7 +48,7 @@ RSpec.describe Slugs do
 
     it 'returns all the configured slugs for the class' do
       expect(record.class.slugs).to eq(
-        permalink: [:title, :user_id]
+        permalink: %i[title user_id]
       )
     end
 

@@ -29,7 +29,7 @@ RSpec.describe UsersController, type: :request do
     it "displays only unique listens on Recently Listened To" do
       # create 5 of the same listen and one extra
       # ensure it definitely shows the other listens
-      5.times do |t|
+      5.times do |_t|
         Listen.create(asset: assets(:valid_arthur_mp3), listener: users(:sudara), track_owner: users(:arthur))
       end
 
@@ -132,7 +132,6 @@ RSpec.describe UsersController, type: :request do
 
       context "spam user" do
         it "should should set user as spam if Akismet check fails" do
-
           post "/users", params: { user: params }
           expect(flash[:error]).to match(/that didn't quite work/)
         end

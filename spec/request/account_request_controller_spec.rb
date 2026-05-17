@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe AccountRequestsController, type: :request do
   context 'active mass invite' do
-
     it 'shows a form to create a new user' do
       get "/get_an_account"
       expect(response).to have_http_status(:ok)
@@ -39,7 +38,7 @@ RSpec.describe AccountRequestsController, type: :request do
               password: '',
               password_confirmation: ''
             }
-          },
+          }
         )
       end.to_not change(User, :count)
       expect(response).to have_http_status(422)

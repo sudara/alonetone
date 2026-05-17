@@ -4,7 +4,7 @@ RSpec.describe CommentNotification, type: :mailer do
   describe "new_comment by user" do
     let(:asset) { assets(:valid_mp3) }
     let(:comment) { comments(:valid_comment_on_asset_by_user) }
-    let(:mail) { CommentNotification.new_comment(comment, asset)}
+    let(:mail) { CommentNotification.new_comment(comment, asset) }
 
     it "renders the headers" do
       expect(mail.to).to eq(["sudara@modernthings.net"])
@@ -26,7 +26,7 @@ RSpec.describe CommentNotification, type: :mailer do
   describe "new_comment by guest" do
     let(:asset) { assets(:valid_mp3) }
     let(:comment) { comments(:valid_comment_on_asset_by_guest) }
-    let(:mail) { CommentNotification.new_comment(comment, asset)}
+    let(:mail) { CommentNotification.new_comment(comment, asset) }
 
     it "renders the headers" do
       expect(mail.to).to eq(["sudara@modernthings.net"])

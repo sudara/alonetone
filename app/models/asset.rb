@@ -59,11 +59,11 @@ class Asset < ApplicationRecord
 
   include Rakismet::Model
   rakismet_attrs  author: proc { user.name },
-                  author_email: proc { user.email },
-                  content: proc { description },
-                  permalink: proc { full_permalink },
-                  user_role: proc { role },
-                  comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
+    author_email: proc { user.email },
+    content: proc { description },
+    permalink: proc { full_permalink },
+    user_role: proc { role },
+    comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
   validates :user, presence: true
   validates :audio_file, attached: {

@@ -95,7 +95,7 @@ class Upload
     end
 
     def expected_assets_track_numbers
-      Set.new((1..assets.size))
+      Set.new(1..assets.size)
     end
 
     def album?

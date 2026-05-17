@@ -7,13 +7,13 @@ class Profile < ApplicationRecord
   LINKS = %i[website twitter instagram bandcamp spotify apple youtube].freeze
 
   def has_links?
-    LINKS.any?{ |l| send(l).present? }
+    LINKS.any? { |l| send(l).present? }
   end
 
   private
 
   def sanitize_website
-    website.sub!(/^https?\:\/\//, '') if website_changed?
+    website.sub!(/^https?:\/\//, '') if website_changed?
   end
 end
 

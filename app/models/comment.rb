@@ -47,10 +47,10 @@ class Comment < ActiveRecord::Base
 
   include Rakismet::Model
   rakismet_attrs  author: proc { author_name },
-                  author_email: proc { commenter&.email },
-                  content: proc { body },
-                  user_role: proc { role },
-                  permalink: proc { commentable.try(:full_permalink) }
+    author_email: proc { commenter&.email },
+    content: proc { body },
+    user_role: proc { role },
+    permalink: proc { commentable.try(:full_permalink) }
   # Poor man's anti-spam helper
   def duplicate?
     # Allow single emojis to be posted multiple times

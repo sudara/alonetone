@@ -162,7 +162,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       put :update, params: { id: users(:arthur).login, user: {
         avatar_image: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg')
-      }}
+      } }
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(edit_user_path(users(:arthur)))
     end
@@ -171,7 +171,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       put :update, params: { id: users(:arthur).login, user: {
         avatar_image: fixture_file_upload('alonetone.webp', 'image/webp')
-      }}
+      } }
       expect(flash[:error]).to be_present
     end
 
@@ -179,7 +179,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       put :update, params: { id: users(:sudara).login, user: {
         avatar_image: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg')
-      }}
+      } }
       expect(response).to redirect_to('/login')
     end
 

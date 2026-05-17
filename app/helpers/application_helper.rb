@@ -59,7 +59,7 @@ module ApplicationHelper
     return "" if text.blank?
 
     l = length - truncate_string.mb_chars.length
-    result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] || '') + truncate_string : text
+    result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*;?/m][/.*[\w;]/m] || '') + truncate_string : text
     result.html_safe
   end
 
@@ -163,12 +163,11 @@ module ApplicationHelper
   # Mephisto said it best...
   def sanitize_feed_content(html, sanitize_tables = false)
     options = sanitize_tables ? {} : { tags: %w[table thead tfoot tbody td tr th] }
-    sanitized = html.strip do |html|
+    html.strip do |html|
       html.gsub! /&amp;(#\d+);/ do |_s|
         "&#{Regexp.last_match(1)};"
       end
     end
-    sanitized
   end
 
   def should_display_track_with_comment?
