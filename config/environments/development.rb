@@ -37,6 +37,9 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :async
 
+  # Stale tabs would otherwise 404 image variants — prod serves these via Fastly so it never bites there.
+  config.active_storage.urls_expire_in = 1.day
+
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
