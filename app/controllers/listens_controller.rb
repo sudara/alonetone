@@ -15,7 +15,7 @@ class ListensController < ApplicationController
   protected
 
   def find_listen_history
-    @listens_pagy, @listens = pagy(@user.listens, page_param: :listens_page, limit: 10)
-    @track_plays_pagy, @track_plays = pagy(@user.track_plays, page_param: :track_plays_page, limit: 10)
+    @listens_pagy, @listens = pagy(@user.listens, page_key: 'listens_page', limit: 10)
+    @track_plays_pagy, @track_plays = pagy(@user.track_plays, page_key: 'track_plays_page', limit: 10)
   end
 end

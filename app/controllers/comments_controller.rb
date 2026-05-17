@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
       find_user
       @page_title = "#{@user.name} Comments"
       @pagy, @comments = pagy(@user.comments_received.with_preloads.on_track.public_or_private(display_private_comments?))
-      @pagy_comments_made, @comments_made = pagy(@user.comments_made.with_preloads.on_track.public_or_private(display_private_comments?), page_param: :page_made)
+      @pagy_comments_made, @comments_made = pagy(@user.comments_made.with_preloads.on_track.public_or_private(display_private_comments?), page_key: 'page_made')
     else
       @page_title = "Recent Comments"
       @pagy, @comments = pagy(Comment.with_preloads.on_track.public_or_private(moderator?))
@@ -69,7 +69,7 @@ class CommentsController < ApplicationController
   end
 
   def set_spam_comments
-    @pagy_spam, @spam = pagy(Comment.spam, page_param: :page_spam) if moderator?
+    @pagy_spam, @spam = pagy(Comment.spam, page_key: 'page_spam') if moderator?
   end
 
   def authorized?
