@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 7.2.0'
-gem 'mysql2', '0.5.6'
+gem 'mysql2'
 gem 'puma'
 gem 'puma_worker_killer'
 
