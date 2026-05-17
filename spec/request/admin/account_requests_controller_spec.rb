@@ -15,4 +15,10 @@ RSpec.describe Admin::AccountRequestsController, type: :request do
       put approve_admin_account_request_path(account_requests(:waiting))
     }.to change { ActionMailer::Base.deliveries.size }.by(1)
   end
+
+  it "should allow moderators to deny a request" do
+    put deny_admin_account_request_path(account_requests(:waiting))
+    expect(response).to be_successful
+    expect(account_requests(:waiting).reload.status).to eq('denied')
+  end
 end

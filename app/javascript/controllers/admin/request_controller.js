@@ -4,12 +4,14 @@ import { flashController } from '../flash_controller'
 export default class extends Controller {
   static targets = ['approveButton', 'denyButton']
 
-  approve() {
+  approveSubmitted(event) {
+    if (!event.detail.success) return this.error()
     this.element.classList.add('approved')
     flashController.alertSaved('Email sent!')
   }
 
-  deny() {
+  denySubmitted(event) {
+    if (!event.detail.success) return this.error()
     this.element.classList.add('denied')
   }
 

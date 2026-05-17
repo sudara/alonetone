@@ -132,11 +132,27 @@ RSpec.describe UsersController, type: :request do
 
       context "spam user" do
         it "should should set user as spam if Akismet check fails" do
-          
+
           post "/users", params: { user: params }
           expect(flash[:error]).to match(/that didn't quite work/)
         end
       end
+    end
+  end
+
+  context "PUT toggle_setting" do
+    let(:user) { users(:sudara) }
+
+    it "toggles a recognized setting and returns 200" do
+      expect {
+        put toggle_setting_user_path(user), params: { setting: 'block_guest_comments' }
+      }.to change { user.settings.reload.block_guest_comments? }
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "returns 400 for an unknown setting" do
+      put toggle_setting_user_path(user), params: { setting: 'not_a_real_setting' }
+      expect(response).to have_http_status(:bad_request)
     end
   end
 end
