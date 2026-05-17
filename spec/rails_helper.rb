@@ -128,6 +128,7 @@ RSpec.configure do |config|
         next if entry[:message].include?('Failed to load resource')
         # Playlist specs cancel in-flight audio requests when switching tracks; harmless AbortError.
         next if entry[:message].include?('AbortError')
+        next if entry[:message].include?('The user aborted a request')
 
         expect(entry[:level]).not_to eq('error'), entry[:message]
         next unless entry[:level] == 'warning'
