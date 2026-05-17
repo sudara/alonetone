@@ -248,7 +248,7 @@ RSpec.describe UsersController, type: :controller do
       subject
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include(%(action="update"))
-      expect(response.body).to include(%(target="favorites_count_#{asset.id}"))
+      expect(response.body).to include(%(targets=".favorites_count_#{asset.id}"))
       expect(response.body).to include(asset.reload.favorites_count.to_s)
     end
   end

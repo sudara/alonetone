@@ -86,7 +86,7 @@ class UsersController < ApplicationController
     asset.reload
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update("favorites_count_#{asset.id}", asset.favorites_count)
+        render turbo_stream: turbo_stream.update_all(".favorites_count_#{asset.id}", asset.favorites_count)
       end
       format.html { redirect_back(fallback_location: root_path, status: :see_other) }
     end
