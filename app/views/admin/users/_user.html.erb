@@ -31,13 +31,13 @@
   </div>
   <div class="button_column">
     <% if user.soft_deleted? %>
-      <%= button_to "Restore User", restore_admin_user_path(user), method: :put %>
+      <%= button_to "Restore User", restore_admin_user_path(id: user.login, row: true), method: :put %>
     <% elsif user.is_spam? %>
-      <%= button_to "Unspam User", unspam_admin_user_path(user), method: :put %>
-      <%= button_to "Delete User", delete_admin_user_path(user), method: :put %>
+      <%= button_to "Unspam User", unspam_admin_user_path(id: user.login, row: true), method: :put %>
+      <%= button_to "Delete User", delete_admin_user_path(id: user.login, row: true), method: :put %>
     <% else %>
-      <%= button_to "Spam User", spam_admin_user_path(user), method: :put %>
-      <%= button_to "Delete User", delete_admin_user_path(user), method: :put %>
+      <%= button_to "Spam User", spam_admin_user_path(id: user.login, row: true), method: :put %>
+      <%= button_to "Delete User", delete_admin_user_path(id: user.login, row: true), method: :put %>
     <% end %>
   </div>
 <% end %>

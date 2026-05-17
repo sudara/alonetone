@@ -25,10 +25,23 @@ RSpec.describe Admin::AssetsController, type: :request do
     end
 
     it "should render a turbo_stream replacing the asset row" do
-      put spam_admin_asset_path(asset.id), as: :turbo_stream
+      put spam_admin_asset_path(id: asset.id, row: true), as: :turbo_stream
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include(%(action="replace"))
       expect(response.body).to include(%(target="asset_#{asset.id}"))
+    end
+
+    it "redirects to the asset owner's page when the asset is soft-deleted from its public page" do
+      referer = user_track_url(asset.user.login, asset.permalink)
+      put spam_admin_asset_path(asset.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(user_home_path(asset.user))
+      expect(response).to have_http_status(:see_other)
+    end
+
+    it "redirects row-context non-stream requests to the admin index" do
+      put spam_admin_asset_path(id: asset.id, row: true)
+      expect(response).to redirect_to(admin_assets_path(filter_by: :is_spam))
+      expect(response).to have_http_status(:see_other)
     end
 
     it "should soft_delete asset" do
@@ -124,10 +137,18 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     it "should render a turbo_stream replacing the asset row" do
       akismet_stub_submit_ham
-      put unspam_admin_asset_path(track.id), as: :turbo_stream
+      put unspam_admin_asset_path(id: track.id, row: true), as: :turbo_stream
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include(%(action="replace"))
       expect(response.body).to include(%(target="asset_#{track.id}"))
+    end
+
+    it "redirects back to the referring page when the asset is restored" do
+      akismet_stub_submit_ham
+      referer = user_track_url(track.user.login, track.permalink)
+      put unspam_admin_asset_path(track.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(referer)
+      expect(response).to have_http_status(:see_other)
     end
   end
 
@@ -197,6 +218,13 @@ RSpec.describe Admin::AssetsController, type: :request do
       # 2 listens in listens.yml
       expect(user.reload.listens_count).to eq(user_listens_count)
     end
+
+    it "redirects to the asset owner's page when the asset is deleted from its public page" do
+      referer = user_track_url(asset.user.login, asset.permalink)
+      put delete_admin_asset_path(asset.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(user_home_path(asset.user))
+      expect(response).to have_http_status(:see_other)
+    end
   end
 
   describe "#restore" do
@@ -249,6 +277,7 @@ RSpec.describe Admin::AssetsController, type: :request do
       get admin_assets_path
       expect(response.body).to match(/Soft deleted asset/)
       expect(response.body).to match(/song6/)
+      expect(response.body).to include('row=true')
     end
 
     it 'should only return spam assets if flag is passed' do

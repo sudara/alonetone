@@ -44,10 +44,40 @@ RSpec.describe Admin::UsersController, type: :request do
 
     it "should render a turbo_stream replacing the user row" do
       akismet_stub_submit_spam
-      put spam_admin_user_path(user.login), as: :turbo_stream
+      put spam_admin_user_path(id: user.login, row: true), as: :turbo_stream
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include(%(action="replace"))
       expect(response.body).to include(%(target="user_#{user.id}"))
+    end
+
+    it "redirects to the home page when the user is soft-deleted from their public page" do
+      akismet_stub_submit_spam
+      referer = user_home_url(user.login)
+      put spam_admin_user_path(user.login), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(root_path)
+      expect(response).to have_http_status(:see_other)
+    end
+
+    it "redirects row-context non-stream requests to the admin index" do
+      akismet_stub_submit_spam
+      put spam_admin_user_path(id: user.login, row: true)
+      expect(response).to redirect_to(admin_users_path(filter_by: :is_spam))
+      expect(response).to have_http_status(:see_other)
+    end
+  end
+
+  describe '#unspam redirect' do
+    before :each do
+      users(:arthur).update(is_spam: true)
+      UserCommand.new(users(:arthur)).soft_delete_with_relations
+    end
+
+    it "redirects back to the referring page when the user is restored" do
+      akismet_stub_submit_ham
+      referer = admin_possibly_deleted_user_url(users(:arthur).login)
+      put unspam_admin_user_path(users(:arthur).login), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(referer)
+      expect(response).to have_http_status(:see_other)
     end
   end
 
@@ -81,7 +111,7 @@ RSpec.describe Admin::UsersController, type: :request do
     end
 
     it "should render a turbo_stream replacing the user row" do
-      put restore_admin_user_path(users(:arthur).login), as: :turbo_stream
+      put restore_admin_user_path(id: users(:arthur).login, row: true), as: :turbo_stream
       expect(response.media_type).to eq Mime[:turbo_stream]
       expect(response.body).to include(%(action="replace"))
       expect(response.body).to include(%(target="user_#{users(:arthur).id}"))
@@ -159,6 +189,13 @@ RSpec.describe Admin::UsersController, type: :request do
       put delete_admin_user_path(users(:arthur))
       expect(comment.reload.deleted_at).not_to be_nil
     end
+
+    it "redirects to the home page when the user is deleted from their public page" do
+      referer = user_home_url(users(:arthur).login)
+      put delete_admin_user_path(users(:arthur).login), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(root_path)
+      expect(response).to have_http_status(:see_other)
+    end
   end
 
   describe '#index' do
@@ -203,6 +240,7 @@ RSpec.describe Admin::UsersController, type: :request do
       it "should not break if no filter_by is passed" do
         get admin_users_path
         expect(response.status).to eq(200)
+        expect(response.body).to include('row=true')
       end
     end
   end

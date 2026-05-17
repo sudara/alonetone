@@ -31,11 +31,12 @@ module Admin
     private
 
     def respond_with_asset_row(fallback_filter:)
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(@asset, partial: 'admin/assets/asset', locals: { asset: @asset })
-        end
-        format.html { redirect_to admin_assets_path(filter_by: fallback_filter) }
+      if turbo_stream_row_request?
+        render turbo_stream: turbo_stream.replace(@asset, partial: 'admin/assets/asset', locals: { asset: @asset })
+      elsif @asset.soft_deleted?
+        redirect_to asset_soft_deleted_location(fallback_filter), status: :see_other
+      else
+        redirect_back(fallback_location: admin_assets_path(filter_by: fallback_filter), status: :see_other)
       end
     end
 
@@ -43,6 +44,14 @@ module Admin
     # include with_deleted to be able to restore
     def find_asset
       @asset = Asset.with_deleted.find(params[:id])
+    end
+
+    def asset_soft_deleted_location(fallback_filter)
+      return admin_assets_path(filter_by: fallback_filter) if admin_row_request?
+      return admin_assets_path(filter_by: fallback_filter) if request.referer.blank?
+      return admin_assets_path(filter_by: fallback_filter) if @asset.possibly_deleted_user.soft_deleted?
+
+      user_home_path(@asset.possibly_deleted_user)
     end
 
     def permitted_params

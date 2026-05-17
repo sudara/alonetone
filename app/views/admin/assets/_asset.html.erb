@@ -19,10 +19,10 @@
   <div class="button_column">
     <% unless asset.possibly_deleted_user.soft_deleted? %>
       <% if asset.soft_deleted? %>
-        <%= button_to "Restore Asset", restore_admin_asset_path(asset.id), method: :put %>
+        <%= button_to "Restore Asset", restore_admin_asset_path(id: asset.id, row: true), method: :put %>
       <% else %>
-        <%= button_to "Spam Asset", spam_admin_asset_path(asset.id), method: :put %>
-        <%= button_to "Delete Asset", delete_admin_asset_path(asset.id), method: :put, data: { turbo_confirm: 'Are you sure?' } %>
+        <%= button_to "Spam Asset", spam_admin_asset_path(id: asset.id, row: true), method: :put %>
+        <%= button_to "Delete Asset", delete_admin_asset_path(id: asset.id, row: true), method: :put, data: { turbo_confirm: 'Are you sure?' } %>
       <% end %>
     <% end %>
   </div>

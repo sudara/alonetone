@@ -41,16 +41,25 @@ module Admin
     private
 
     def respond_with_user_row(fallback_filter:)
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(@user, partial: 'admin/users/user', locals: { user: @user })
-        end
-        format.html { redirect_to admin_users_path(filter_by: fallback_filter) }
+      if turbo_stream_row_request?
+        render turbo_stream: turbo_stream.replace(@user, partial: 'admin/users/user', locals: { user: @user })
+      elsif @user.soft_deleted?
+        redirect_to user_soft_deleted_location(fallback_filter), status: :see_other
+      else
+        redirect_back(fallback_location: admin_users_path(filter_by: fallback_filter), status: :see_other)
       end
     end
 
     def permitted_params
       params.permit(:filter_by)
+    end
+
+    def user_soft_deleted_location(fallback_filter)
+      if admin_row_request? || request.referer.blank?
+        admin_users_path(filter_by: fallback_filter)
+      else
+        root_path
+      end
     end
 
     def set_user
