@@ -26,22 +26,14 @@ class CommentsController < ApplicationController
     @comment.ham!
     @comment.update_attribute :is_spam, false
     flash[:ok] = 'We un-spammed and made that comment public'
-
-    respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
-      format.js
-    end
+    redirect_back(fallback_location: root_path, status: :see_other)
   end
 
   def spam
     @comment.spam!
     @comment.update_attribute :is_spam, true
     flash[:ok] = 'We marked that comment as spam'
-
-    respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
-      format.js
-    end
+    redirect_back(fallback_location: root_path, status: :see_other)
   end
 
   def index

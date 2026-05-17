@@ -17,14 +17,10 @@ class PlaylistsController < ApplicationController
   end
 
   def sort
-    respond_to do |format|
-      format.js do
-        params[:playlist].each_with_index do |id, position|
-          @user.playlists.find(id).update_column(:position, position + 1)
-        end
-        head :ok
-      end
+    params[:playlist].each_with_index do |id, position|
+      @user.playlists.find(id).update_column(:position, position + 1)
     end
+    head :ok
   end
 
   def favorites
@@ -68,11 +64,7 @@ class PlaylistsController < ApplicationController
     id = params[:asset_id].split("_")[1]
     asset = Asset.find(id)
     @track = @playlist.tracks.create(asset: asset, user: @user)
-    respond_to do |format|
-      format.js do
-        render plain: @track.id
-      end
-    end
+    render plain: @track.id
   end
 
   def attach_pic
@@ -87,13 +79,8 @@ class PlaylistsController < ApplicationController
 
   def remove_track
     @track = @playlist.tracks.find(params[:track_id])
-    if @track&.destroy
-      respond_to do |format|
-        format.js { head(:ok) }
-      end
-    else
-      head :ok
-    end
+    @track&.destroy
+    head :ok
   rescue ActiveRecord::RecordNotFound
     head(:bad_request)
   end

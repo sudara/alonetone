@@ -34,7 +34,7 @@ export default class extends Controller {
   }
 
   sort() {
-    csrfFetch(`${window.location}/sort.js`, {
+    csrfFetch(`${window.location}/sort`, {
       method: 'POST',
       body: new URLSearchParams(this.currentParams),
     })

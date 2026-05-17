@@ -43,11 +43,6 @@ class AssetsController < ApplicationController
       format.html # index.rhtml
       format.xml  { render xml: @assets.to_xml }
       format.rss  { render xml: @assets.to_xml }
-      format.js do
-        render :update do |page|
-          page.replace 'stash', partial: "assets"
-        end
-      end
     end
   end
 
