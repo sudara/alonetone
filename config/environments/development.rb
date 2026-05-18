@@ -56,7 +56,7 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  config.rakismet.test = true # the real API flags every localhost submission as spam
+  config.rakismet.test = false # actually send query to akismet
 
   config.action_view.annotate_rendered_view_with_filenames = true
 
