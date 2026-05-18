@@ -6,8 +6,8 @@ RSpec.describe AlbumNotification, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq("[alonetone] '#{users(:sudara).name}' released a new album!")
-      expect(mail.to).to eq(["#{users(:sudara).email}"])
-      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
+      expect(mail.to).to eq([users(:sudara).email.to_s])
+      expect(mail.from).to eq([Rails.configuration.alonetone.email.to_s])
     end
 
     it "includes the unfollow link" do

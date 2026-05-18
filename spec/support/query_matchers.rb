@@ -19,7 +19,7 @@ module RSpec
 
         def failure_message
           message = +"expected to execute #{count} queries, found: #{actual_count}"
-          queries.first(SHOW_MAX).each { |query| message << "\n* #{query}"}
+          queries.first(SHOW_MAX).each { |query| message << "\n* #{query}" }
           if unshown_query_count > 0
             message << unshown_query_count_message
           end
@@ -32,8 +32,7 @@ module RSpec
 
         private
 
-        attr_reader :count
-        attr_reader :queries
+        attr_reader :count, :queries
 
         def actual_count
           @queries.length

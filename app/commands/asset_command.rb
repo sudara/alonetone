@@ -9,7 +9,7 @@ class AssetCommand
   def soft_delete_with_relations
     time = Time.now
     # first update playlists
-    asset.user.decrement!(:assets_count)
+    asset.user.decrement!(:assets_count, touch: true)
     asset.playlists.update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.empty?
     asset.comments.update_all(deleted_at: time)
     asset.tracks.update_all(deleted_at: time)
@@ -18,8 +18,10 @@ class AssetCommand
   end
 
   def restore_with_relations
+    return unspam_and_restore_with_relations if asset.is_spam?
+
     asset.restore
-    asset.user.increment!(:assets_count)
+    asset.user.increment!(:assets_count, touch: true)
     asset.playlists.with_deleted.update_all(['tracks_count = tracks_count + 1, playlists.updated_at = ?', Time.now]) unless asset.playlists.with_deleted.empty?
     asset.comments.with_deleted.update_all(deleted_at: nil)
     asset.tracks.with_deleted.update_all(deleted_at: nil)
@@ -36,8 +38,17 @@ class AssetCommand
 
   def spam_and_soft_delete_with_relations
     asset.spam!
-    asset.update_attribute :is_spam, true
+    mark_spam_and_soft_delete
+  end
 
+  def mark_spam_and_soft_delete
+    asset.update_attribute :is_spam, true
     soft_delete_with_relations
+  end
+
+  def unspam_and_restore_with_relations
+    asset.ham!
+    asset.update_attribute :is_spam, false
+    restore_with_relations
   end
 end

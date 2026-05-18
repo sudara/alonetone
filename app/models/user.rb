@@ -5,11 +5,11 @@ class User < ApplicationRecord
   include Rakismet::Model
 
   rakismet_attrs  author: proc { name },
-                  author_email: proc { email },
-                  user_ip: proc { current_login_ip },
-                  content: proc { profile&.bio },
-                  user_agent: proc { profile&.user_agent },
-                  comment_type: 'signup'
+    author_email: proc { email },
+    user_ip: proc { current_login_ip },
+    content: proc { profile&.bio },
+    user_agent: proc { profile&.user_agent },
+    comment_type: 'signup'
 
   include User::Findability
   include User::Statistics
@@ -255,7 +255,7 @@ class User < ApplicationRecord
   def toggle_favorite(asset)
     existing_track = tracks.favorites.where(asset_id: asset.id).first
     if existing_track
-      existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id)
+      existing_track.destroy && Asset.decrement_counter(:favorites_count, asset.id, touch: true)
     else
       tracks.favorites.create(asset_id: asset.id)
       Asset.increment_counter(:favorites_count, asset.id, touch: true)

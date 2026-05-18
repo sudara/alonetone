@@ -18,7 +18,7 @@ module Storage
     end
 
     def url
-      params ? base_url + '?' + Rack::Utils.build_query(params) : base_url
+      params ? "#{base_url}?#{Rack::Utils.build_query(params)}" : base_url
     end
 
     alias to_s url
@@ -46,7 +46,7 @@ module Storage
     end
 
     def request_path
-      '/' + attachment.blob.key
+      "/#{attachment.blob.key}"
     end
 
     def params

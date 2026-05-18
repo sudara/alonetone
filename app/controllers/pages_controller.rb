@@ -72,22 +72,20 @@ class PagesController < ApplicationController
     @page_title = "How to get your music on iTunes (as a music podcast) with alonetone"
   end
 
-  def ok
-    ActiveRecord::Base.connection.execute("SELECT 1")
-    ok = "OK"
-    ok += '_QUEUE_UNDER_200' if Sidekiq::Stats.new.enqueued < 200
-    ok += '_AND_WORKERS_UP' unless Sidekiq::ProcessSet.new.size > 0
-    render plain: ok
-  end
+  def health
+    results = [
+      check("db")              { check_db },
+      check("sidekiq workers") { check_sidekiq_workers },
+      check("sidekiq queue")   { check_sidekiq_queue },
+      check("puma")            { check_puma }
+    ]
 
-  def sitemap
-    respond_to do |wants|
-      wants.xml
-    end
+    body = results.map(&:first).join("\n")
+    status = results.all?(&:last) ? :ok : :service_unavailable
+    render plain: body, status: status
   end
 
   def toggle_theme
-    respond_to :js
     if logged_in?
       current_user.toggle! :dark_theme
       session[:theme] = current_user.dark_theme? ? 'dark' : 'light'
@@ -95,9 +93,45 @@ class PagesController < ApplicationController
       session[:theme] = 'dark' if session[:theme] == 'light'
       session[:theme] ||= 'light'
     end
+    head :no_content
   end
 
   protected
+
+  def check(label)
+    ["OK  #{label}: #{yield}", true]
+  rescue StandardError => e
+    ["FAIL #{label}: #{e.message}", false]
+  end
+
+  def check_db
+    ActiveRecord::Base.connection.execute("SELECT 1")
+    "connected"
+  end
+
+  def check_sidekiq_workers
+    count = Sidekiq::ProcessSet.new.size
+    raise "none running" if count.zero?
+
+    "#{count} up"
+  end
+
+  def check_sidekiq_queue
+    enqueued = Sidekiq::Stats.new.enqueued
+    raise "#{enqueued} (> 50)" if enqueued > 50
+
+    enqueued.to_s
+  end
+
+  def check_puma
+    workers = JSON.parse(Puma.stats)["worker_status"]&.map { _1["last_status"] } || []
+    capacity = workers.sum { _1["pool_capacity"].to_i }
+    backlog  = workers.sum { _1["backlog"].to_i }
+    raise "all threads busy (backlog=#{backlog})" if workers.any? && capacity.zero?
+    raise "backlog=#{backlog}" if backlog.positive?
+
+    "#{workers.size} workers, capacity=#{capacity}"
+  end
 
   def set_2009_albums
     ids_2009 = [986, 951, 945, 924, 912, 915, 916, 918, 921, 923,

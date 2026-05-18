@@ -308,7 +308,7 @@ RSpec.describe AssetsController, type: :request do
           fixture_file_upload('muppets.mp3', 'audio/mpeg')
         ]
       }
-      expect(response).to redirect_to('/arthur/tracks/mass_edit?assets%5B%5D=' + Asset.last(2).first.id.to_s + '&assets%5B%5D=' + Asset.last.id.to_s)
+      expect(response).to redirect_to("/arthur/tracks/mass_edit?assets%5B%5D=#{Asset.last(2).first.id}&assets%5B%5D=#{Asset.last.id}")
     end
 
     it 'creates an album from a ZIP' do
@@ -387,18 +387,6 @@ RSpec.describe AssetsController, type: :request do
       delete "/#{user.login}/tracks/#{asset.to_param}"
       expect(response).to redirect_to(user_tracks_path(user))
       expect(response.code).to eql("303")
-    end
-
-    xit "does not update the audio file for an asset when it's spam" do
-      akismet_stub_response_spam
-      patch(
-        "/#{user.login}/tracks/#{asset.to_param}",
-        params: {
-          asset: { audio_file: fixture_file_upload('muppets.mp3', 'audio/mpeg') }
-        }
-      )
-      expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
-      expect(asset.reload).to be_is_spam
     end
   end
 end

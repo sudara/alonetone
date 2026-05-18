@@ -10,7 +10,7 @@
 	@include samo-shadow-and-radius();
 	background-color: $mini-paginator-background;
 	box-shadow: none;
-	.pagination {
+	.pagy.series-nav {
 		display: flex;
 		flex-direction: row;
 		width: 100%;
@@ -22,38 +22,25 @@
 		float: right;
 		height: 32px;
 		text-align: right;
-		em, span {
+		a {
 			float: left;
 			padding: 10px 10px;
 			line-height: 14px;
 			font-size: 12px;
 			color: $pagy-link-text;
 		}
-		em {
-			font-weight: bold;
-			font-style: normal;
-		}
-		em, a:hover, span.current {
+		a:hover, a[aria-current="page"] {
 			text-decoration: none;
 			color: $pagy-link-text-active;
+			font-weight: bold;
 		}
-		span.gap {
+		a[role="separator"] {
 			padding: 10px 0;
 		}
-		span.disabled {
+		// edge prev/next chevrons render as aria-disabled anchors with no href;
+		// the current-page anchor is also aria-disabled, so scope to non-current
+		a[aria-disabled="true"]:not([aria-current="page"]):not([role="separator"]) {
 			opacity: .5;
-		}
-		a, a:visited {
-			font-size: 12px;
-			line-height: 14px;
-			display: block;
-			float: left;
-			height: 12px;
-			color: $pagy-link-text;
-		}
-		.active {
-			font-weight: bold;
-			color: $pagy-link-text-active;
 		}
 	}
 }

@@ -39,7 +39,7 @@ class Asset < ApplicationRecord
 
       # random radio, without playing the same track twice in a 24 hour period
       def mangoz(user)
-        ids = user&.listened_more_than?(10) && user&.listened_to_today_ids
+        ids = user&.listened_more_than?(10) && user.listened_to_today_ids
         random_order.id_not_in(ids)
       end
 

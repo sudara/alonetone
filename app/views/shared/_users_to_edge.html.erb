@@ -1,5 +1,5 @@
 <% users.each do |user| %>
-  <%= div_for(user, class: 'user_small_avatar') do %>
+  <%= tag.div id: dom_id(user), class: ["user", "user_small_avatar"] do %>
     <%= user_image_link(user, variant: :small_avatar)%>
   <% end %>
 <% end %>

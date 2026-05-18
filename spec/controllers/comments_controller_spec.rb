@@ -65,6 +65,12 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   context "private comments made by user" do
+    it "uses a separate page key for comments made pagination" do
+      login(:sudara)
+      get :index, params: { login: 'henri_willig' }
+      expect(assigns(:pagy_comments_made).options[:page_key]).to eq('page_made')
+    end
+
     it "should be visible to user who made the comment on their comment page" do
       login(:henri_willig)
       get :index, params: { login: 'henri_willig' }
@@ -128,6 +134,12 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   context "private comments on overall index" do
+    it "uses a separate page key for spam pagination" do
+      login(:sudara)
+      get :index
+      expect(assigns(:pagy_spam).options[:page_key]).to eq('page_spam')
+    end
+
     it "should not be visible to receiver of the private comment" do
       login :arthur
       get :index

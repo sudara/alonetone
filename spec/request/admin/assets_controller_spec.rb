@@ -24,6 +24,27 @@ RSpec.describe Admin::AssetsController, type: :request do
       put spam_admin_asset_path(asset.id)
     end
 
+    it "should render a turbo_stream replacing the asset row" do
+      put spam_admin_asset_path(id: asset.id, row: true), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="asset_#{asset.id}"))
+    end
+
+    it "redirects to the asset owner's page when the asset is soft-deleted from its public page" do
+      referer = user_track_url(asset.user.login, asset.permalink)
+      put spam_admin_asset_path(asset.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(user_home_path(asset.user))
+      expect(response).to have_http_status(:see_other)
+      expect(flash[:ok]).to be_present
+    end
+
+    it "redirects row-context non-stream requests to the admin index" do
+      put spam_admin_asset_path(id: asset.id, row: true)
+      expect(response).to redirect_to(admin_assets_path(filter_by: :is_spam))
+      expect(response).to have_http_status(:see_other)
+    end
+
     it "should soft_delete asset" do
       akismet_stub_submit_spam
       expect {
@@ -93,10 +114,6 @@ RSpec.describe Admin::AssetsController, type: :request do
   describe "unspam individual assets" do
     let(:track) { assets(:spam_track) }
 
-    before do
-      AssetCommand.new(track).soft_delete_with_relations
-    end
-
     it "should unspam the track" do
       akismet_stub_submit_ham
       put unspam_admin_asset_path(track.id)
@@ -110,9 +127,26 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     # not including further specs since it's the same as in #restore
     it "should restore asset" do
+      akismet_stub_submit_ham
       expect {
         put restore_admin_asset_path(track.id)
       }.to change(Asset, :count).by(1)
+    end
+
+    it "should render a turbo_stream replacing the asset row" do
+      akismet_stub_submit_ham
+      put unspam_admin_asset_path(id: track.id, row: true), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="asset_#{track.id}"))
+    end
+
+    it "redirects back to the referring page when the asset is restored" do
+      akismet_stub_submit_ham
+      referer = user_track_url(track.user.login, track.permalink)
+      put unspam_admin_asset_path(track.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(referer)
+      expect(response).to have_http_status(:see_other)
     end
   end
 
@@ -182,6 +216,13 @@ RSpec.describe Admin::AssetsController, type: :request do
       # 2 listens in listens.yml
       expect(user.reload.listens_count).to eq(user_listens_count)
     end
+
+    it "redirects to the asset owner's page when the asset is deleted from its public page" do
+      referer = user_track_url(asset.user.login, asset.permalink)
+      put delete_admin_asset_path(asset.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
+      expect(response).to redirect_to(user_home_path(asset.user))
+      expect(response).to have_http_status(:see_other)
+    end
   end
 
   describe "#restore" do
@@ -224,6 +265,23 @@ RSpec.describe Admin::AssetsController, type: :request do
         put restore_admin_asset_path(asset.id)
       }.to change(Listen, :count).by(2)
     end
+
+    context "when the asset was marked as spam" do
+      before do
+        asset.update_column(:is_spam, true)
+      end
+
+      it "also clears the spam flag" do
+        akismet_stub_submit_ham
+        put restore_admin_asset_path(asset.id)
+        expect(asset.reload.is_spam).to eq(false)
+      end
+
+      it "notifies Akismet that the asset is ham" do
+        expect(Rakismet).to receive(:akismet_call)
+        put restore_admin_asset_path(asset.id)
+      end
+    end
   end
 
   describe '#index' do
@@ -234,6 +292,7 @@ RSpec.describe Admin::AssetsController, type: :request do
       get admin_assets_path
       expect(response.body).to match(/Soft deleted asset/)
       expect(response.body).to match(/song6/)
+      expect(response.body).to include('row=true')
     end
 
     it 'should only return spam assets if flag is passed' do

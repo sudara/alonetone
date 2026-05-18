@@ -13,24 +13,25 @@ module Admin
     def unspam
       @comment.ham!
       @comment.update_attribute :is_spam, false
-
-      respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path, status: :see_other) }
-        format.js
-      end
+      respond_with_comment_row
     end
 
     def spam
       @comment.spam!
       @comment.update_attribute :is_spam, true
-
-      respond_to do |format|
-        format.html { redirect_back(fallback_location: root_path, status: :see_other) }
-        format.js
-      end
+      respond_with_comment_row
     end
 
     private
+
+    def respond_with_comment_row
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(@comment, partial: 'admin/comments/comment', locals: { comment: @comment })
+        end
+        format.html { redirect_back(fallback_location: root_path, status: :see_other) }
+      end
+    end
 
     def permitted_params
       params.permit(:filter_by)

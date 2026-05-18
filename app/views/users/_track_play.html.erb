@@ -1,4 +1,4 @@
-<%= div_for track_play, class: (cycle('even', 'odd')) do %>
+<%= tag.div id: dom_id(track_play), class: ["listen", cycle('even', 'odd')] do %>
   <div class="listen_user">
     <%= user_image_link(track_play.listener, variant: :medium_avatar) %>
   </div>

@@ -32,18 +32,18 @@ class AssetNotification < ApplicationMailer
   end
 
   def user_link_for(asset)
-    'https://' + hostname + '/' + asset.user.login
+    "https://#{hostname}/#{asset.user.login}"
   end
 
   def play_link_for(asset)
-    user_link_for(asset) + '/tracks/' + asset.id.to_s
+    "#{user_link_for(asset)}/tracks/#{asset.id}"
   end
 
   def stop_following_link
-    'https://' + hostname + '/unfollow/' + @artist.login
+    "https://#{hostname}/unfollow/#{@artist.login}"
   end
 
   def unsubscribe_link
-    'https://' + hostname + '/notifications/unsubscribe'
+    "https://#{hostname}/notifications/unsubscribe"
   end
 end

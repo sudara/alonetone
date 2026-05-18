@@ -11,6 +11,16 @@ RSpec.describe UsersController, type: :request do
       expect(response).to be_successful
     end
 
+    it "guards moderator Delete/Spam links on a user profile with a turbo-confirm" do
+      get "/#{users(:arthur).login}"
+      expect(response.body).to include('Delete User')
+      expect(response.body).to include('Spam User')
+      delete_link = response.body[/<a [^>]*>Delete User<\/a>/]
+      spam_link = response.body[/<a [^>]*>Spam User<\/a>/]
+      expect(delete_link).to include('data-turbo-confirm=')
+      expect(spam_link).to include('data-turbo-confirm=')
+    end
+
     it "displays user info route v2" do
       get "/#{users(:sudara).login}"
       expect(response).to be_successful
@@ -29,7 +39,7 @@ RSpec.describe UsersController, type: :request do
     it "displays only unique listens on Recently Listened To" do
       # create 5 of the same listen and one extra
       # ensure it definitely shows the other listens
-      5.times do |t|
+      5.times do |_t|
         Listen.create(asset: assets(:valid_arthur_mp3), listener: users(:sudara), track_owner: users(:arthur))
       end
 
@@ -132,11 +142,26 @@ RSpec.describe UsersController, type: :request do
 
       context "spam user" do
         it "should should set user as spam if Akismet check fails" do
-          
           post "/users", params: { user: params }
           expect(flash[:error]).to match(/that didn't quite work/)
         end
       end
+    end
+  end
+
+  context "PUT toggle_setting" do
+    let(:user) { users(:sudara) }
+
+    it "toggles a recognized setting and returns 200" do
+      expect {
+        put toggle_setting_user_path(user), params: { setting: 'block_guest_comments' }
+      }.to change { user.settings.reload.block_guest_comments? }
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "returns 400 for an unknown setting" do
+      put toggle_setting_user_path(user), params: { setting: 'not_a_real_setting' }
+      expect(response).to have_http_status(:bad_request)
     end
   end
 end

@@ -59,11 +59,11 @@ class Asset < ApplicationRecord
 
   include Rakismet::Model
   rakismet_attrs  author: proc { user.name },
-                  author_email: proc { user.email },
-                  content: proc { description },
-                  permalink: proc { full_permalink },
-                  user_role: proc { role },
-                  comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
+    author_email: proc { user.email },
+    content: proc { description },
+    permalink: proc { full_permalink },
+    user_role: proc { role },
+    comment_type: 'mp3-post' # this can't be "mp3", it calls paperclip
 
   validates :user, presence: true
   validates :audio_file, attached: {
@@ -154,8 +154,8 @@ class Asset < ApplicationRecord
       min_and_sec = time.divmod(60)
       minutes = min_and_sec[0].to_i.to_s
       seconds = min_and_sec[1].to_i.to_s
-      seconds = "0" + seconds if seconds.length == 1
-      minutes + ':' + seconds
+      seconds = "0#{seconds}" if seconds.length == 1
+      "#{minutes}:#{seconds}"
     else
       "?:??"
     end

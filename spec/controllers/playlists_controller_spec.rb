@@ -61,6 +61,16 @@ RSpec.describe PlaylistsController, type: :controller do
     end
   end
 
+  context "pagination" do
+    it "uses separate page keys on the edit page lists" do
+      login(:arthur)
+      edit_arthurs_playlist
+      expect(assigns(:assets_pagy).options[:page_key]).to eq('uploads_page')
+      expect(assigns(:listens_pagy).options[:page_key]).to eq('listens_page')
+      expect(assigns(:favorites_pagy).options[:page_key]).to eq('favorites_page')
+    end
+  end
+
   context "deletion" do
     it "should not let a non-logged in person delete a playlist" do
       post :destroy, params: { id: playlists(:owp).id, permalink: 'owp', user_id: 'sudara' }
@@ -114,7 +124,7 @@ RSpec.describe PlaylistsController, type: :controller do
          id: 'arthurs-playlist',
          user_id: 'arthur',
          pic: { pic: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg') }
-      }
+       }
       end.to change { playlist.reload.updated_at }
     end
   end

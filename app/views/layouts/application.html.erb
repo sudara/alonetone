@@ -15,7 +15,9 @@
   <%= render partial: 'shared/analytics' %>
 </head>
 
-<body class="<%= yield :body_class %>">
+<body class="<%= yield :body_class %>"
+      data-controller="user-favorites"
+      data-user-favorites-ids-value="<%= Array(current_user&.favorite_asset_ids).to_json %>">
 
   <% if @sudo %>
   <div class="sudo_bar">

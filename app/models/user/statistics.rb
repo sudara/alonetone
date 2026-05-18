@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
     def total_bandwidth_cost
       # s3 is 12 cents a gig
-      ActionController::Base.helpers.number_to_currency((bandwidth_used * 0.12), unit: '$')
+      ActionController::Base.helpers.number_to_currency(bandwidth_used * 0.12, unit: '$')
     end
 
     def most_listened_to_user_ids(limit = 10)

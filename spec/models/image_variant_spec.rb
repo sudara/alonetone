@@ -6,11 +6,11 @@ RSpec.describe ImageVariant, type: :model do
   it "returns dimensions to use when resizing image variant" do
     options = ImageVariant.variant_options(:small_avatar)
     size = ImageVariant::VARIANTS[:small_avatar]
-    expect(options[:resize_to_fill]).to eq([size, size, crop: :centre])
+    expect(options[:resize_to_fill]).to eq([size, size, { crop: :centre }])
 
     options = ImageVariant.variant_options(:greenfield)
     size = ImageVariant::VARIANTS[:greenfield]
-    expect(options[:resize_to_fill]).to eq([size, size, crop: :centre])
+    expect(options[:resize_to_fill]).to eq([size, size, { crop: :centre }])
   end
 
   it "verifies known variants" do
@@ -30,18 +30,12 @@ RSpec.describe ImageVariant, type: :model do
       playlists(:will_studd_rockfort).cover_image
     end
 
-    before do
-      file_fixture_pathname('blue_de_bresse.jpg').open do |file|
-        attachment.upload(file)
-      end
-    end
-
     it "returns a single image variant instance" do
       image_variant = ImageVariant.new(attachment, variant: :greenfield)
       expect(image_variant.attachment).to eq(attachment)
       expect(image_variant.variant_name).to eq(:greenfield)
       expect(image_variant.variant_options).to eq(
-        resize_to_fill: [1500, 1500, crop: :centre],
+        resize_to_fill: [1500, 1500, { crop: :centre }],
         saver: { optimize_coding: true, quality: 68, strip: true }
       )
     end

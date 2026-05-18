@@ -2,15 +2,15 @@
 
 module UsersHelper
   def website_for(user)
-    "#{user.name}'s website " + (link_to user.website.to_s, ('http://' + h(user.website)))
+    "#{user.name}'s website " + (link_to user.website.to_s, "http://#{h(user.website)}")
   end
 
   def website_for_simple(user)
-    (link_to user.website.to_s, ('http://' + h(user.website)))
+    (link_to user.website.to_s, "http://#{h(user.website)}")
   end
 
   def itunes_link_for(user)
-    link_to "Open #{user.name}'s music in iTunes", 'http://' + h(user.itunes)
+    link_to "Open #{user.name}'s music in iTunes", "http://#{h(user.itunes)}"
   end
 
   # Returns the user's location, e.g. from Vienna, AT.
@@ -18,7 +18,7 @@ module UsersHelper
     return '' unless profile
 
     locality = [profile.city.presence, profile.country.presence].compact.map(&:strip).join(', ')
-    locality.present? ? 'from ' + locality : ''
+    locality.present? ? "from #{locality}" : ''
   end
 
   # Returns a summary of the user's history on Alonetone.
@@ -74,25 +74,8 @@ module UsersHelper
     'default/no-pic_white.svg'
   end
 
-  def favorite_toggle(asset)
-    link_to('add to favorites', toggle_favorite_path(asset_id: asset.id), class: 'add_to_favorites')
-  end
-
-  def follow_toggle(user)
-    return unless logged_in? && (user.id != current_user.id)
-
-    already_following = current_user.is_following?(user)
-    if already_following
-      link_to('<div class="sprites-heart-broken"></div> un-follow'.html_safe, toggle_follow_path(login: user.login),
-        class: 'follow following')
-    else
-      link_to('<div class="sprites-heart-with-plus"></div> follow'.html_safe, toggle_follow_path(login: user.login),
-        class: 'follow')
-    end
-  end
-
   def new_to_user?(thing)
-    thing && (logged_in? && current_user.last_request_at) && (current_user.last_login_at < thing.created_at.utc)
+    thing && logged_in? && current_user.last_request_at && (current_user.last_login_at < thing.created_at.utc)
   end
 
   private

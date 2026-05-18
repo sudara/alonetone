@@ -43,9 +43,7 @@ class Configurable
     :discourse_url
   )
 
-  attr_reader :environment
-  attr_reader :upgraded
-  attr_reader :deprecated
+  attr_reader :environment, :upgraded, :deprecated
 
   def initialize(environment, attributes)
     @environment = environment

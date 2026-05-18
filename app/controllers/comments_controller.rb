@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
   before_action :require_login, only: %i[destroy unspam spam]
 
   def create
-    head :bad_request unless request.xhr?
     @comment = Comment.new(massaged_params)
     @comment.is_spam = @comment.spam? # makes api request
     @comment.spam_if_banned_words! # immediate flag based on terms
@@ -26,22 +25,14 @@ class CommentsController < ApplicationController
     @comment.ham!
     @comment.update_attribute :is_spam, false
     flash[:ok] = 'We un-spammed and made that comment public'
-
-    respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
-      format.js
-    end
+    redirect_back(fallback_location: root_path, status: :see_other)
   end
 
   def spam
     @comment.spam!
     @comment.update_attribute :is_spam, true
     flash[:ok] = 'We marked that comment as spam'
-
-    respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
-      format.js
-    end
+    redirect_back(fallback_location: root_path, status: :see_other)
   end
 
   def index
@@ -49,7 +40,7 @@ class CommentsController < ApplicationController
       find_user
       @page_title = "#{@user.name} Comments"
       @pagy, @comments = pagy(@user.comments_received.with_preloads.on_track.public_or_private(display_private_comments?))
-      @pagy_comments_made, @comments_made = pagy(@user.comments_made.with_preloads.on_track.public_or_private(display_private_comments?), page_param: :page_made)
+      @pagy_comments_made, @comments_made = pagy(@user.comments_made.with_preloads.on_track.public_or_private(display_private_comments?), page_key: 'page_made')
     else
       @page_title = "Recent Comments"
       @pagy, @comments = pagy(Comment.with_preloads.on_track.public_or_private(moderator?))
@@ -69,7 +60,7 @@ class CommentsController < ApplicationController
   end
 
   def set_spam_comments
-    @pagy_spam, @spam = pagy(Comment.spam, page_param: :page_spam) if moderator?
+    @pagy_spam, @spam = pagy(Comment.spam, page_key: 'page_spam') if moderator?
   end
 
   def authorized?

@@ -1,5 +1,6 @@
 class UserCommand
   attr_reader :user
+
   def initialize(user)
     @user = user
   end
@@ -10,6 +11,8 @@ class UserCommand
   end
 
   def restore_with_relations
+    return unspam_and_restore_with_relations if user.is_spam?
+
     efficiently_restore_relations
     user.restore
   end
@@ -36,7 +39,7 @@ class UserCommand
     Listen.where(track_owner_id: user.id).update_all(deleted_at: time)
     Listen.where(listener_id: user.id).update_all(deleted_at: time)
     Playlist.joins(:assets).where(assets: { user_id: user.id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', time])
+      .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', time])
     Track.joins(:asset).where(assets: { user_id: user.id }).update_all(deleted_at: time)
     user.assets.update_all(deleted_at: time)
 
@@ -55,7 +58,7 @@ class UserCommand
     Listen.with_deleted.where(track_owner_id: user.id).update_all(deleted_at: nil)
     Listen.with_deleted.where(listener_id: user.id).update_all(deleted_at: nil)
     Playlist.with_deleted.joins(:assets).where(assets: { user_id: user.id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+      .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
     Track.with_deleted.joins(:asset).where(assets: { user_id: user.id }).update_all(deleted_at: nil)
     Track.with_deleted.where(user_id: user.id).update_all(deleted_at: nil)
     Playlist.with_deleted.where(user_id: user.id).update_all(deleted_at: nil)
@@ -68,7 +71,7 @@ class UserCommand
     Listen.where(track_owner_id: user.id).delete_all
     Listen.where(listener_id: user.id).delete_all
     Playlist.joins(:assets).where(assets: { user_id: user.id })
-            .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
+      .update_all(['tracks_count = tracks_count - 1, playlists.updated_at = ?', Time.now])
     Track.joins(:asset).where(assets: { user_id: user.id }).delete_all
     user.assets.destroy_all
 

@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
-import Rails from '@rails/ujs'
 import PlaylistSortController from './playlist_sort_controller'
 import { flashController } from './flash_controller'
+import csrfFetch from '../misc/csrf_fetch'
 
 export default class extends Controller {
   static targets = ['add', 'remove']
@@ -18,27 +18,30 @@ export default class extends Controller {
   add(e) {
     e.preventDefault()
     this.setPlaylistSort()
-    Rails.ajax({
-      url: this.addUrl,
-      type: 'POST',
-      data: `asset_id=${this.element.id}`,
-      before: this.spin.bind(this),
-      success: (response, status, xhr) => this.added(response, status, xhr),
-      error: this.errored.bind(this),
+    this.spin()
+    csrfFetch(this.addUrl, {
+      method: 'POST',
+      body: new URLSearchParams({ asset_id: this.element.id }),
     })
+      .then((r) => {
+        if (!r.ok) throw new Error('add failed')
+        return r.text()
+      })
+      .then((text) => this.added(text))
+      .catch(() => this.errored())
   }
 
   remove(e) {
     e.preventDefault()
     this.setPlaylistSort()
-    Rails.ajax({
-      url: this.removeUrl,
-      type: 'GET',
-      data: `track_id=${this.element.getAttribute('data-id')}`,
-      before: this.spin.bind(this),
-      success: this.removed.bind(this),
-      error: this.errored.bind(this),
-    })
+    this.spin()
+    const url = `${this.removeUrl}?track_id=${encodeURIComponent(this.element.getAttribute('data-id'))}`
+    csrfFetch(url, { method: 'GET' })
+      .then((r) => {
+        if (!r.ok) throw new Error('remove failed')
+        this.removed()
+      })
+      .catch(() => this.errored())
   }
 
   spin() {
@@ -61,7 +64,7 @@ export default class extends Controller {
     this.updatePlaylistMetadata()
   }
 
-  added(response, status, xhr) {
+  added(response) {
     setTimeout(this.stopSpin.bind(this), 500)
     flashController.alertSaved('Added!')
     const clonedTrack = this.element.cloneNode(true)

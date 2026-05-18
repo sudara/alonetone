@@ -1,6 +1,6 @@
-import Rails from '@rails/ujs'
 import { Controller } from "@hotwired/stimulus"
 import { Turbo } from '@hotwired/turbo-rails'
+import csrfFetch from '../misc/csrf_fetch'
 
 
 export default class extends Controller {
@@ -81,11 +81,8 @@ export default class extends Controller {
 
   toggleTheme(e) {
     e.stopImmediatePropagation()
-    Rails.ajax({
-      url: "/toggle_theme",
-      type: "PUT"
-    })
-    Turbo.cache.clear()
+    csrfFetch("/toggle_theme", { method: "PUT" }).catch(() => {})
+    Turbo.session.clearCache()
   }
 
   toggleThemableImages(oldTheme, newTheme) {

@@ -1,6 +1,11 @@
 module ApplicationHelper
-  include ::Pagy::Frontend
   @@listen_sources = %w[itunes]
+
+  # Pagy 43 moved nav rendering onto the Pagy instance. Shim so existing
+  # `<%== pagy_nav @foo %>` templates keep working.
+  def pagy_nav(pagy)
+    pagy.series_nav.html_safe
+  end
 
   def authorized_for(user_related_record)
     logged_in? && (current_user.admin? || (user_related_record.user == current_user))
@@ -54,7 +59,7 @@ module ApplicationHelper
     return "" if text.blank?
 
     l = length - truncate_string.mb_chars.length
-    result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*\;?/m][/.*[\w\;]/m] || '') + truncate_string : text
+    result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*;?/m][/.*[\w;]/m] || '') + truncate_string : text
     result.html_safe
   end
 
@@ -97,11 +102,6 @@ module ApplicationHelper
     link_to ' ', user_track_path(asset.user.login, asset.permalink, format: :mp3, referer: referer), id: "play-#{asset.unique_id}", class: 'play_link', title: 'click to play the mp3'
   end
 
-  def pagy_url_for(pagy, page, absolute: false, html_escaped: false)
-    params = request.query_parameters.merge(pagy.vars[:page_param] => page, only_path: !absolute)
-    html_escaped ? url_for(params).gsub('&', '&amp;') : url_for(params)
-  end
-
   def navigation_item(text, link, options = nil)
     current = current_page?(link) || (link.respond_to?(:merge) && current_page?(link.merge(page: params[:page] || 1)))
     content_tag(:li, link_to_unless_current(text.html_safe, link, options),
@@ -136,7 +136,7 @@ module ApplicationHelper
   end
 
   def login_link
-    logged_in? ? '' : '(' + (link_to 'login', login_path) + ')'
+    logged_in? ? '' : "(#{link_to 'login', login_path})"
   end
 
   def feed_icon_tag(title, url)
@@ -148,7 +148,7 @@ module ApplicationHelper
     return "Unknown" unless time.present?
 
     if time > 2.weeks.ago
-      time_ago_in_words(time) + ' ago'
+      "#{time_ago_in_words(time)} ago"
     else
       time.to_date.to_fs(:long)
     end
@@ -161,14 +161,13 @@ module ApplicationHelper
   end
 
   # Mephisto said it best...
-  def sanitize_feed_content(html, sanitize_tables = false)
+  def sanitize_feed_content(html, sanitize_tables: false)
     options = sanitize_tables ? {} : { tags: %w[table thead tfoot tbody td tr th] }
-    sanitized = html.strip do |html|
+    html.strip do |html|
       html.gsub! /&amp;(#\d+);/ do |_s|
         "&#{Regexp.last_match(1)};"
       end
     end
-    sanitized
   end
 
   def should_display_track_with_comment?

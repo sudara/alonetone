@@ -27,9 +27,9 @@ class PasswordResetsController < ApplicationController
       @user.update_account_request! if @newly_invited_user
       UserSession.create(@user, true)
       flash[:notice] = "Phew, we were worried about you. Welcome back." unless @newly_invited_user
-      redirect_to @newly_invited_user ? upload_path : user_home_path(@user.login)
+      redirect_to(@newly_invited_user ? upload_path : user_home_path(@user.login), status: :see_other)
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_content
     end
   end
 

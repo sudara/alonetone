@@ -56,10 +56,7 @@ module Storage
     end
 
     def public_url
-      'https://' +
-        Rails.configuration.alonetone.amazon_cloud_front_domain_name +
-        '/' +
-        key
+      "https://#{Rails.configuration.alonetone.amazon_cloud_front_domain_name}/#{key}"
     end
   end
 end

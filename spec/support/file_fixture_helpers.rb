@@ -30,10 +30,12 @@ module RSpec
         asset = process_file_fixture_uploaded_file(
           path, filename: filename, content_type: content_type, user: user
         )
-        raise(
-          ArgumentError,
-          "Can't process file fixture at `#{file_fixture_pathname(path).to_s}'"
-        ) if asset.nil?
+        if asset.nil?
+          raise(
+            ArgumentError,
+            "Can't process file fixture at `#{file_fixture_pathname(path)}'"
+          )
+        end
         asset
       end
 

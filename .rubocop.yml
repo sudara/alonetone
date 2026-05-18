@@ -47,6 +47,10 @@ Lint/ShadowingOuterLocalVariable:
 Lint/ParenthesesAsGroupedExpression:
   Enabled: false
 
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - spec/**/*.rb
+
 Lint/SuppressedException:
   Enabled: false
 
@@ -149,8 +153,15 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 # Naming
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Enabled: false
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - n
+    - x
+    - y
+    - ip
 
 Naming/AccessorMethodName:
   Enabled: false

@@ -43,11 +43,6 @@ class AssetsController < ApplicationController
       format.html # index.rhtml
       format.xml  { render xml: @assets.to_xml }
       format.rss  { render xml: @assets.to_xml }
-      format.js do
-        render :update do |page|
-          page.replace 'stash', partial: "assets"
-        end
-      end
     end
   end
 
@@ -68,12 +63,12 @@ class AssetsController < ApplicationController
   def radio
     params[:source] = (params[:source] || cookies[:radio] || 'latest')
     @channel = params[:source].humanize
-    if !logged_in? && %w(those_you_follow songs_you_have_not_heard mangoz_shuffle).include?(params[:source])
+    if !logged_in? && %w[those_you_follow songs_you_have_not_heard mangoz_shuffle].include?(params[:source])
       flash[:error] = "Sorry. Page you've been looking for is not found."
       raise ActionController::RoutingError, 'Page Not Found'
     end
     @page_title = "#{@channel} radio"
-    @pagy, @assets = pagy(Asset.radio(params[:source], current_user), items: params[:items])
+    @pagy, @assets = pagy(Asset.radio(params[:source], current_user), limit: params[:items])
   end
 
   def top
@@ -88,8 +83,8 @@ class AssetsController < ApplicationController
 
   def search
     @assets = Asset.published.where("assets.filename LIKE ? OR assets.title LIKE ?",
-                                 "%#{params[:search]}%", "%#{params[:search]}%")
-                   .limit(10)
+      "%#{params[:search]}%", "%#{params[:search]}%")
+      .limit(10)
     render partial: 'results', layout: false
   end
 
@@ -121,7 +116,7 @@ class AssetsController < ApplicationController
     @assets.each do |asset|
       if !asset.new_record?
         flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded successfully!<br/>"
-        asset.update_attribute(:is_spam, asset.spam?) # makes an api call
+        AssetCommand.new(asset).mark_spam_and_soft_delete if asset.spam? # makes an api call
         at_least_one_upload = true
       else
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"
@@ -129,7 +124,7 @@ class AssetsController < ApplicationController
     end
 
     if @playlist
-      flash[:ok] = (flashes + "<br/>You had ID3 tags in place so we created an album for you").html_safe
+      flash[:ok] = "#{flashes}<br/>You had ID3 tags in place so we created an album for you".html_safe
       redirect_to edit_user_playlist_path(@user, @playlist)
     elsif @assets.present? && at_least_one_upload
       @user.followers.includes(:settings).where('settings.email_new_tracks = ?', true).pluck(:id).each do |follower_id|
@@ -138,7 +133,7 @@ class AssetsController < ApplicationController
       if @assets.count == 1
         redirect_to edit_user_track_path(current_user, @assets.first)
       else
-        flash[:ok] = (flashes + "<br/>Check the title and add a description for your tracks").html_safe
+        flash[:ok] = "#{flashes}<br/>Check the title and add a description for your tracks".html_safe
         redirect_to mass_edit_user_tracks_path(current_user, assets: @assets.collect(&:id))
       end
     else
@@ -159,7 +154,7 @@ class AssetsController < ApplicationController
       if result
         # Turbo Drive's redirect-follow contract requires :see_other after non-GET form submissions.
         redirect_to user_track_url(@asset.user.login, @asset.permalink),
-                    ok: 'Saved!', status: :see_other
+          ok: 'Saved!', status: :see_other
       else
         flash[:error] = "There was an issue with updating that track"
         render :edit
@@ -177,16 +172,12 @@ class AssetsController < ApplicationController
   end
 
   def stats
-    respond_to do |format|
-      format.xml
-    end
+    respond_to(&:xml)
   end
 
   def listen_feed
     @tracks = @user.new_tracks_from_followees(15)
-    respond_to do |format|
-      format.rss
-    end
+    respond_to(&:rss)
   end
 
   protected

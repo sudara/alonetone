@@ -45,6 +45,37 @@ RSpec.describe CommentsController, type: :request do
     end
   end
 
+  context "when Akismet flags a comment" do
+    let!(:asset) { assets(:valid_mp3) }
+
+    it "still saves it but marks is_spam (so it's hidden from public views)" do
+      akismet_stub_response_spam
+      akismet_stub_submit_spam
+      params = { comment: { body: "anything", private: "0", commentable_type: "Asset", commentable_id: asset.id } }
+      expect do
+        post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.8.8', 'user-agent' => 'webkit' }
+      end.to change(Comment, :count).by(1)
+      expect(response).to have_http_status(201)
+      expect(Comment.last.is_spam).to be true
+    end
+  end
+
+  context "when Rakismet is not configured (no key, e.g. dev with key commented out)" do
+    let!(:asset) { assets(:valid_mp3) }
+
+    before { allow(Rakismet).to receive(:key).and_return(nil) }
+
+    it "saves the comment as ham without calling Akismet" do
+      params = { comment: { body: "hi", private: "0", commentable_type: "Asset", commentable_id: asset.id } }
+      expect do
+        post "/comments", params: params, headers: { 'x-forwarded-for' => '8.8.8.8', 'user-agent' => 'webkit' }
+      end.to change(Comment, :count).by(1)
+      expect(response).to have_http_status(201)
+      expect(Comment.last.is_spam).to be false
+      expect(a_request(:post, /akismet/i)).not_to have_been_made
+    end
+  end
+
   context "guest rate limiting" do
     let!(:asset) { assets(:valid_mp3) }
 

@@ -1,7 +1,7 @@
 class CommentNotification < ApplicationMailer
   def new_comment(comment, asset)
     @comment = comment[:body]
-    @name = comment&.user.name || 'Guest'
+    @name = comment&.user&.name || 'Guest'
     @commenter = person_who_made(comment)
     @song = asset.name
     @number_of_comments = asset.comments_count
@@ -19,10 +19,10 @@ class CommentNotification < ApplicationMailer
   end
 
   def unsubscribe_link
-    'https://' + hostname + '/notifications/unsubscribe'
+    "https://#{hostname}/notifications/unsubscribe"
   end
 
   def settings_link(user)
-    'https://' + hostname + '/' + user + '/edit'
+    "https://#{hostname}/#{user}/edit"
   end
 end

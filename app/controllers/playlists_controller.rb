@@ -7,7 +7,7 @@ class PlaylistsController < ApplicationController
   before_action :find_tracks, only: %i[show edit all]
 
   def all
-    @playlist_pagy, @playlists = pagy(Playlist.recently_published.only_public.with_preloads, items: 30)
+    @playlist_pagy, @playlists = pagy(Playlist.recently_published.only_public.with_preloads, limit: 30)
   end
 
   # all user's playlists
@@ -17,14 +17,10 @@ class PlaylistsController < ApplicationController
   end
 
   def sort
-    respond_to do |format|
-      format.js do
-        params[:playlist].each_with_index do |id, position|
-          @user.playlists.find(id).update_column(:position, position + 1)
-        end
-        head :ok
-      end
+    params[:playlist].each_with_index do |id, position|
+      @user.playlists.find(id).update_column(:position, position + 1)
     end
+    head :ok
   end
 
   def favorites
@@ -54,8 +50,8 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_param: :listens_page, items: 10)
-    @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_param: :favorites_page, items: 10) if @user.favorites.present?
+    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_key: 'listens_page', limit: 10)
+    @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_key: 'favorites_page', limit: 10) if @user.favorites.present?
     @page_title = "Editing \"#{@playlist.title}\" by #{@user.name}"
     if request.xhr?
       render_desired_partial
@@ -68,11 +64,7 @@ class PlaylistsController < ApplicationController
     id = params[:asset_id].split("_")[1]
     asset = Asset.find(id)
     @track = @playlist.tracks.create(asset: asset, user: @user)
-    respond_to do |format|
-      format.js do
-        render plain: @track.id
-      end
-    end
+    render plain: @track.id
   end
 
   def attach_pic
@@ -87,13 +79,8 @@ class PlaylistsController < ApplicationController
 
   def remove_track
     @track = @playlist.tracks.find(params[:track_id])
-    if @track&.destroy
-      respond_to do |format|
-        format.js { head(:ok) }
-      end
-    else
-      head :ok
-    end
+    @track&.destroy
+    head :ok
   rescue ActiveRecord::RecordNotFound
     head(:bad_request)
   end
@@ -112,9 +99,9 @@ class PlaylistsController < ApplicationController
     @playlist = @user.playlists.build(playlist_params)
     if @playlist.save
       flash[:notice] = 'Great, go ahead and add some tracks'
-      redirect_to edit_user_playlist_path(@user, @playlist)
+      redirect_to edit_user_playlist_path(@user, @playlist), status: :see_other
     else
-       render action: "new"
+      render action: "new", status: :unprocessable_content
     end
   end
 
@@ -122,10 +109,10 @@ class PlaylistsController < ApplicationController
     is_private = params[:playlist].delete(:is_private)
     if @playlist.update(playlist_params)
       @playlist.is_private = is_private
-      redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.'
+      redirect_to edit_user_playlist_path(@user, @playlist), notice: 'Playlist was successfully updated.', status: :see_other
     else
       set_assets
-      render action: "edit"
+      render action: "edit", status: :unprocessable_content
     end
   end
 
@@ -138,7 +125,7 @@ class PlaylistsController < ApplicationController
   protected
 
   def find_track_and_asset_in_playlist
-    return if !params[:asset_id].present?
+    return unless params[:asset_id].present?
 
     @asset = Asset.where(id: @playlist.tracks.pluck(:asset_id), permalink: params[:asset_id]).take!
 
@@ -157,7 +144,7 @@ class PlaylistsController < ApplicationController
   end
 
   def set_assets
-    @assets_pagy, @assets = pagy(@user.assets.recent, page_param: :uploads_page, items: 10)
+    @assets_pagy, @assets = pagy(@user.assets.recent, page_key: 'uploads_page', limit: 10)
   end
 
   def set_playlists
@@ -171,7 +158,7 @@ class PlaylistsController < ApplicationController
   def set_right_and_left_playlists
     middle = (@playlists.size + 1) / 2
     @playlists_left  = @playlists[0...middle]
-    @playlists_right = @playlists[middle..-1]
+    @playlists_right = @playlists[middle..]
   end
 
   def authorized?

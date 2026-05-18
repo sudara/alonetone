@@ -6,8 +6,8 @@ RSpec.describe AssetNotification, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq("[alonetone] #{assets(:valid_mp3).user.name} uploaded a new track!")
-      expect(mail.to).to eq(["#{users(:sudara).email}"])
-      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
+      expect(mail.to).to eq([users(:sudara).email.to_s])
+      expect(mail.from).to eq([Rails.configuration.alonetone.email.to_s])
     end
 
     it "includes the unfollow link" do
@@ -24,8 +24,8 @@ RSpec.describe AssetNotification, type: :mailer do
 
     it "should render the headers" do
       expect(mail.subject).to eq("[alonetone] #{assets(:valid_mp3).user.name} uploaded new tracks!")
-      expect(mail.to).to eq(["#{users(:sudara).email}"])
-      expect(mail.from).to eq(["#{Rails.configuration.alonetone.email}"])
+      expect(mail.to).to eq([users(:sudara).email.to_s])
+      expect(mail.from).to eq([Rails.configuration.alonetone.email.to_s])
     end
 
     it "includes all titles of songs" do

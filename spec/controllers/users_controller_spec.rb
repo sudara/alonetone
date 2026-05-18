@@ -162,7 +162,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       put :update, params: { id: users(:arthur).login, user: {
         avatar_image: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg')
-      }}
+      } }
       expect(flash[:ok]).to be_present
       expect(response).to redirect_to(edit_user_path(users(:arthur)))
     end
@@ -171,7 +171,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       put :update, params: { id: users(:arthur).login, user: {
         avatar_image: fixture_file_upload('alonetone.webp', 'image/webp')
-      }}
+      } }
       expect(flash[:error]).to be_present
     end
 
@@ -179,7 +179,7 @@ RSpec.describe UsersController, type: :controller do
       login(:arthur)
       put :update, params: { id: users(:sudara).login, user: {
         avatar_image: fixture_file_upload('jeffdoessudara.jpg', 'image/jpeg')
-      }}
+      } }
       expect(response).to redirect_to('/login')
     end
 
@@ -221,7 +221,7 @@ RSpec.describe UsersController, type: :controller do
 
   context "favoriting" do
     let(:asset) { assets(:valid_mp3_2) }
-    subject { get :toggle_favorite, params: { asset_id: asset.id }, xhr: true }
+    subject { put :toggle_favorite, params: { asset_id: asset.id }, format: :turbo_stream }
 
     it 'should not let a guest favorite a track' do
       expect { subject }.to change { Track.count }.by(0)
@@ -238,9 +238,18 @@ RSpec.describe UsersController, type: :controller do
     it 'should let a user unfavorite a track' do
       login(:arthur)
       expect { subject }.to change { Track.count }.by(1)
-      get :toggle_favorite, params: { asset_id: asset.id }, xhr: true # toggle again
+      put :toggle_favorite, params: { asset_id: asset.id }, format: :turbo_stream # toggle again
       expect(users(:arthur).tracks.favorites.collect(&:asset)).not_to include(asset)
       expect(response).to be_successful
+    end
+
+    it 'streams the updated favorites_count' do
+      login(:arthur)
+      subject
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="update"))
+      expect(response.body).to include(%(targets=".favorites_count_#{asset.id}"))
+      expect(response.body).to include(asset.reload.favorites_count.to_s)
     end
   end
 

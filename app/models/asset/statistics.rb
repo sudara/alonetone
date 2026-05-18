@@ -14,7 +14,7 @@ class Asset < ApplicationRecord
     # after about 20 listens, it "compresses" the value of guest listens
     def guest_play_count(from = 30.days.ago)
       num = listens.where("listens.created_at > (?) AND listens.listener_id is null", from).count
-      -7 + (0.19 * num.to_f) + Math.log((num.to_f + 5), 1.25)
+      -7 + (0.19 * num.to_f) + Math.log(num.to_f + 5, 1.25)
     end
 
     def listens_per_week

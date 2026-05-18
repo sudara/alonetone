@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe WaveformToSvg do
-
   subject { WaveformToSvg.new([1, 2, 3, 2, 1]) }
 
   it "takes an array and scales it down" do

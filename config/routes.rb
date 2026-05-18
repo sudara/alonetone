@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   get 'raise_error', to: 'pages#raise_error'
   get '500', to: "pages#error"
   get 'error', to: "pages#error"
-  get 'ok', to: "pages#ok"
+  get 'ok', to: "pages#health"
 
   # one-off pages
   get 'events/rpmchallenge' => 'pages#rpm_challenge'

@@ -3,11 +3,11 @@ class UsersController < ApplicationController
   before_action :require_login, except: %i[index show new create activate]
 
   def index
-    @page_title = "#{params[:sort] ? params[:sort].titleize + ' - ' : ''} Musicians and Listeners"
+    @page_title = "#{params[:sort] ? "#{params[:sort].titleize} - " : ''} Musicians and Listeners"
     @tab = 'browse'
     @sort = params[:sort]
     @pagy, @users = pagy(User.with_preloads.paginate_by_params(params),
-      items: @sort == 'patrons' ? 100 : 20)
+      limit: @sort == 'patrons' ? 100 : 20)
     @user_count = User.count
     @active     = User.where("assets_count > 0").count
   end
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @user = User.where(perishable_token: params[:perishable_token]).first
     if logged_in?
       redirect_to new_user_track_path(current_user), error: "You are already activated and logged in! Rejoice and upload!"
-    elsif !is_from_a_bad_ip? && @user && @user.activate!
+    elsif !is_from_a_bad_ip? && @user&.activate!
       UserSession.create(@user, true) # Log user in manually
       UserNotification.activation(@user).deliver_now
       redirect_to new_user_track_path(@user.login), ok: "Whew! All done, your account is activated. Go ahead and upload your first track."
@@ -80,11 +80,15 @@ class UsersController < ApplicationController
 
   def toggle_favorite
     asset = Asset.published.find(params[:asset_id])
-    return false unless logged_in? && asset # no bullshit
+    return head :forbidden unless logged_in? && asset
 
     current_user.toggle_favorite(asset)
+    asset.reload
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: '' }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update_all(".favorites_count_#{asset.id}", asset.favorites_count)
+      end
+      format.html { redirect_back(fallback_location: root_path, status: :see_other) }
     end
   end
 

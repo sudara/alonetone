@@ -3,10 +3,9 @@
 # https://github.com/discourse/discourse/blob/master/lib/single_sign_on.rb
 # Too bad we can't add a single file in a git repo as a submodule...
 class SingleSignOn
-
   class ParseError < RuntimeError; end
 
-  ACCESSORS = %i{
+  ACCESSORS = %i[
     add_groups
     admin moderator
     avatar_force_update
@@ -30,11 +29,11 @@ class SingleSignOn
     username
     website
     location
-  }
+  ].freeze
 
-  FIXNUMS = []
+  FIXNUMS = [].freeze
 
-  BOOLS = %i{
+  BOOLS = %i[
     admin
     avatar_force_update
     locale_force_update
@@ -42,25 +41,25 @@ class SingleSignOn
     moderator
     require_activation
     suppress_welcome_message
-  }
+  ].freeze
 
   def self.nonce_expiry_time
     @nonce_expiry_time ||= 10.minutes
   end
 
-  def self.nonce_expiry_time=(v)
-    @nonce_expiry_time = v
+  class << self
+    attr_writer :nonce_expiry_time
   end
 
   attr_accessor(*ACCESSORS)
   attr_writer :sso_secret, :sso_url
 
   def self.sso_secret
-    raise RuntimeError, "sso_secret not implemented on class, be sure to set it on instance"
+    raise "sso_secret not implemented on class, be sure to set it on instance"
   end
 
   def self.sso_url
-    raise RuntimeError, "sso_url not implemented on class, be sure to set it on instance"
+    raise "sso_url not implemented on class, be sure to set it on instance"
   end
 
   def self.parse(payload, sso_secret = nil, **init_kwargs)
@@ -72,7 +71,7 @@ class SingleSignOn
     decoded_hash = Rack::Utils.parse_query(decoded)
 
     if sso.sign(parsed["sso"]) != parsed["sig"]
-      diags = "\n\nsso: #{parsed["sso"]}\n\nsig: #{parsed["sig"]}\n\nexpected sig: #{sso.sign(parsed["sso"])}"
+      diags = "\n\nsso: #{parsed['sso']}\n\nsig: #{parsed['sig']}\n\nexpected sig: #{sso.sign(parsed['sso'])}"
       if parsed["sso"] =~ /[^a-zA-Z0-9=\r\n\/+]/m
         raise ParseError, "The SSO field should be Base64 encoded, using only A-Z, a-z, 0-9, +, /, and = characters. Your input contains characters we don't understand as Base64, see http://en.wikipedia.org/wiki/Base64 #{diags}"
       else
@@ -84,7 +83,7 @@ class SingleSignOn
       val = decoded_hash[k.to_s]
       val = val.to_i if FIXNUMS.include? k
       if BOOLS.include? k
-        val = ["true", "false"].include?(val) ? val == "true" : nil
+        val = %w[true false].include?(val) ? val == "true" : nil
       end
       sso.public_send("#{k}=", val)
     end
@@ -121,12 +120,12 @@ class SingleSignOn
     OpenSSL::HMAC.hexdigest("sha256", secret, payload)
   end
 
-  def to_json
+  def to_json(*_args)
     to_h.to_json
   end
 
   def to_url(base_url = nil)
-    base = "#{base_url || sso_url}"
+    base = (base_url || sso_url).to_s
     "#{base}#{base.include?('?') ? '&' : '?'}#{payload}"
   end
 
@@ -136,14 +135,15 @@ class SingleSignOn
   end
 
   def unsigned_payload
-    Rack::Utils.build_query(self.to_h)
+    Rack::Utils.build_query(to_h)
   end
 
   def to_h
     payload = {}
 
     ACCESSORS.each do |k|
-      next if (val = public_send(k)) == nil
+      next if (val = public_send(k)).nil?
+
       payload[k] = val
     end
 

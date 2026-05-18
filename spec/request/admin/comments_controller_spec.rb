@@ -20,6 +20,14 @@ RSpec.describe Admin::CommentsController, type: :request do
       expect(Rakismet).to receive(:akismet_call)
       put spam_admin_comment_path(comment.id)
     end
+
+    it "should render a turbo_stream replacing the comment row" do
+      akismet_stub_submit_spam
+      put spam_admin_comment_path(comment.id), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="comment_#{comment.id}"))
+    end
   end
 
   describe "unspam individual comments" do
@@ -37,6 +45,14 @@ RSpec.describe Admin::CommentsController, type: :request do
     it "should update RAKISMET" do
       expect(Rakismet).to receive(:akismet_call)
       put unspam_admin_comment_path(comment.id)
+    end
+
+    it "should render a turbo_stream replacing the comment row" do
+      akismet_stub_submit_ham
+      put unspam_admin_comment_path(comment.id), as: :turbo_stream
+      expect(response.media_type).to eq Mime[:turbo_stream]
+      expect(response.body).to include(%(action="replace"))
+      expect(response.body).to include(%(target="comment_#{comment.id}"))
     end
   end
 end
