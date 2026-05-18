@@ -102,6 +102,8 @@ Lead with the direct answer to what was asked — a single sentence or number, n
 
 This repo runs one site (alonetone.com) — it is open-source as an educational example, **not** a white-label solution. Don't add generalization or configurability for hypothetical reuse.
 
+**How deploys actually happen.** There is no Capistrano / Kamal / `deploy.rb`. The deploy is a bash script at the repo root: `./deploy` (with `--force-bundle` to force `bundle install` + a full Puma restart). It ssh's to the `alonetone` host, fast-forwards to `origin/main` under `/data/alonetone`, conditionally runs `bundle install` / `yarn install` / `db:migrate` / `assets:precompile` based on what changed, phased-restarts Puma (full restart if Puma or Ruby version moved), bounces Sidekiq, and pings Bugsnag's build endpoint with the new revision. Post-deploy hooks (release markers for Bugsnag/New Relic/etc.) live in the local `curl` block at the bottom of the script — mirror the Bugsnag block when adding another.
+
 ## Database tuning (Percona 8.0 on prod)
 
 Production runs Percona Server 8.0 on Ubuntu with a custom tuning file at `/etc/mysql/mysql.conf.d/zz-tuning.cnf` (loads last so its values win). It overrides the otherwise-stock defaults with: `innodb_buffer_pool_size = 2G`, `innodb_redo_log_capacity = 512M`, slow query log on at `long_query_time = 1.0` writing to `/var/log/mysql/slow.log`, and `tmp_table_size = max_heap_table_size = 64M`. Budget ~4 GB RSS for mysqld with these settings.

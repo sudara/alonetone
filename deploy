@@ -232,3 +232,22 @@ curl https://build.bugsnag.com/ \
       "revision": "'"${REVISION}"'"
     }
   }'
+
+# Skip silently when keys aren't in the local env (e.g. deploying from laptop).
+if [ -n "$NEW_RELIC_USER_KEY" ] && [ -n "$NEW_RELIC_ENTITY_GUID" ]; then
+  echo "Notifying New Relic of revision release $REVISION"
+  curl -sS https://api.newrelic.com/graphql \
+    --header "Content-Type: application/json" \
+    --header "API-Key: $NEW_RELIC_USER_KEY" \
+    --data '{
+      "query": "mutation($guid: EntityGuid!, $version: String!, $commit: String) { changeTrackingCreateDeployment(deployment: { entityGuid: $guid, version: $version, commit: $commit }) { deploymentId } }",
+      "variables": {
+        "guid": "'"$NEW_RELIC_ENTITY_GUID"'",
+        "version": "'"$REVISION"'",
+        "commit": "'"$REVISION"'"
+      }
+    }'
+  echo
+else
+  echo "Skipping New Relic deploy marker (NEW_RELIC_USER_KEY / NEW_RELIC_ENTITY_GUID not set)"
+fi
