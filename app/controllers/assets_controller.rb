@@ -116,7 +116,7 @@ class AssetsController < ApplicationController
     @assets.each do |asset|
       if !asset.new_record?
         flashes += "#{CGI.escapeHTML asset.mp3_file_name} uploaded successfully!<br/>"
-        asset.update_attribute(:is_spam, asset.spam?) # makes an api call
+        AssetCommand.new(asset).mark_spam_and_soft_delete if asset.spam? # makes an api call
         at_least_one_upload = true
       else
         flashes += "'#{CGI.escapeHTML asset.mp3_file_name}' failed to upload. Please double check that it's an Mp3.<br/>"

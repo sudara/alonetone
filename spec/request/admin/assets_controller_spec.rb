@@ -114,10 +114,6 @@ RSpec.describe Admin::AssetsController, type: :request do
   describe "unspam individual assets" do
     let(:track) { assets(:spam_track) }
 
-    before do
-      AssetCommand.new(track).soft_delete_with_relations
-    end
-
     it "should unspam the track" do
       akismet_stub_submit_ham
       put unspam_admin_asset_path(track.id)
