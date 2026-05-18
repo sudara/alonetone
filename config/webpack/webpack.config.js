@@ -5,5 +5,9 @@ const customConfig = {
     library: 'Alonetone',
     libraryTarget: 'var',
   },
+  performance: {
+    maxAssetSize: 400_000,
+    maxEntrypointSize: 500_000,
+  },
 }
 module.exports = merge(generateWebpackConfig(), customConfig)
