@@ -110,7 +110,8 @@ class PagesController < ApplicationController
   end
 
   def check_sidekiq_workers
-    raise "none running" if Sidekiq::ProcessSet.new.empty?
+    count = Sidekiq::ProcessSet.new.size
+    raise "none running" if count.zero?
 
     "up"
   end
