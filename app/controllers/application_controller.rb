@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_location
-    session[:return_to] = request.url unless request.xhr? || request.format.mp3?
+    session[:return_to] = request.url unless request.format.mp3?
   end
 
   def redirect_back_or_default(default = '/')
