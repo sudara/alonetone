@@ -36,6 +36,7 @@ RSpec.describe Admin::AssetsController, type: :request do
       put spam_admin_asset_path(asset.id), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
       expect(response).to redirect_to(user_home_path(asset.user))
       expect(response).to have_http_status(:see_other)
+      expect(flash[:ok]).to be_present
     end
 
     it "redirects row-context non-stream requests to the admin index" do

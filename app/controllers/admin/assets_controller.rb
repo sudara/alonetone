@@ -10,27 +10,28 @@ module Admin
       AssetCommand.new(@asset).restore_with_relations if @asset.soft_deleted?
       @asset.ham!
       @asset.update_attribute :is_spam, false
-      respond_with_asset_row(fallback_filter: :not_spam)
+      respond_with_asset_row(fallback_filter: :not_spam, notice: "\"#{@asset.title}\" has been unspammed and restored.")
     end
 
     def spam
       AssetCommand.new(@asset).spam_and_soft_delete_with_relations
-      respond_with_asset_row(fallback_filter: :is_spam)
+      respond_with_asset_row(fallback_filter: :is_spam, notice: "\"#{@asset.title}\" has been marked as spam and hidden.")
     end
 
     def delete
       AssetCommand.new(@asset).soft_delete_with_relations
-      respond_with_asset_row(fallback_filter: :deleted)
+      respond_with_asset_row(fallback_filter: :deleted, notice: "\"#{@asset.title}\" has been deleted.")
     end
 
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
-      respond_with_asset_row(fallback_filter: :not_spam)
+      respond_with_asset_row(fallback_filter: :not_spam, notice: "\"#{@asset.title}\" has been restored.")
     end
 
     private
 
-    def respond_with_asset_row(fallback_filter:)
+    def respond_with_asset_row(fallback_filter:, notice:)
+      flash[:ok] = notice
       if turbo_stream_row_request?
         render turbo_stream: turbo_stream.replace(@asset, partial: 'admin/assets/asset', locals: { asset: @asset })
       elsif @asset.soft_deleted?
