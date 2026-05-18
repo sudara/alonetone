@@ -11,6 +11,16 @@ RSpec.describe UsersController, type: :request do
       expect(response).to be_successful
     end
 
+    it "guards moderator Delete/Spam links on a user profile with a turbo-confirm" do
+      get "/#{users(:arthur).login}"
+      expect(response.body).to include('Delete User')
+      expect(response.body).to include('Spam User')
+      delete_link = response.body[/<a [^>]*>Delete User<\/a>/]
+      spam_link = response.body[/<a [^>]*>Spam User<\/a>/]
+      expect(delete_link).to include('data-turbo-confirm=')
+      expect(spam_link).to include('data-turbo-confirm=')
+    end
+
     it "displays user info route v2" do
       get "/#{users(:sudara).login}"
       expect(response).to be_successful

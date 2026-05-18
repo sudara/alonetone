@@ -22,6 +22,12 @@ RSpec.describe Admin::UsersController, type: :request do
       expect(Rakismet).to receive(:akismet_call)
       put unspam_admin_user_path(user.login)
     end
+
+    it "sets a flash confirming the unspam" do
+      akismet_stub_submit_ham
+      put unspam_admin_user_path(user.login)
+      expect(flash[:ok]).to be_present
+    end
   end
 
   describe '#spam' do
@@ -56,6 +62,7 @@ RSpec.describe Admin::UsersController, type: :request do
       put spam_admin_user_path(user.login), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
       expect(response).to redirect_to(root_path)
       expect(response).to have_http_status(:see_other)
+      expect(flash[:ok]).to be_present
     end
 
     it "redirects row-context non-stream requests to the admin index" do
@@ -212,6 +219,7 @@ RSpec.describe Admin::UsersController, type: :request do
       put delete_admin_user_path(users(:arthur).login), headers: { 'HTTP_REFERER' => referer }, as: :turbo_stream
       expect(response).to redirect_to(root_path)
       expect(response).to have_http_status(:see_other)
+      expect(flash[:ok]).to be_present
     end
   end
 

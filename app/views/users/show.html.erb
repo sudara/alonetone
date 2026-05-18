@@ -415,8 +415,8 @@
         Edit Profile
       <% end %>
       <% if moderator? %>
-        <%= link_to "Spam User", spam_admin_user_path(@user), data: { turbo_method: :put }, class: 'edit_profile--delete'  %>
-        <%= link_to "Delete User", delete_admin_user_path(@user), data: { turbo_method: :put }, class: 'edit_profile--delete' %>
+        <%= link_to "Spam User", spam_admin_user_path(@user), data: { turbo_method: :put, turbo_confirm: "Mark #{@user.name} as spam? This soft-deletes their #{pluralize(@user.assets_count, 'track')} and #{pluralize(@user.playlists_count, 'playlist')} and reports the account to Akismet." }, class: 'edit_profile--delete' %>
+        <%= link_to "Delete User", delete_admin_user_path(@user), data: { turbo_method: :put, turbo_confirm: "Delete #{@user.name}? This soft-deletes their #{pluralize(@user.assets_count, 'track')} and #{pluralize(@user.playlists_count, 'playlist')}." }, class: 'edit_profile--delete' %>
       <% end %>
 
     </div>

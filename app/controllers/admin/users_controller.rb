@@ -13,22 +13,22 @@ module Admin
 
     def delete
       UserCommand.new(@user).soft_delete_with_relations
-      respond_with_user_row(fallback_filter: :deleted)
+      respond_with_user_row(fallback_filter: :deleted, notice: "#{@user.name} and all their tracks, playlists, and comments have been deleted.")
     end
 
     def restore
       UserCommand.new(@user).restore_with_relations
-      respond_with_user_row(fallback_filter: nil)
+      respond_with_user_row(fallback_filter: nil, notice: "#{@user.name} and their tracks, playlists, and comments have been restored.")
     end
 
     def unspam
       UserCommand.new(@user).unspam_and_restore_with_relations
-      respond_with_user_row(fallback_filter: nil)
+      respond_with_user_row(fallback_filter: nil, notice: "#{@user.name} has been unspammed and their content restored.")
     end
 
     def spam
       UserCommand.new(@user).spam_soft_delete_with_relations
-      respond_with_user_row(fallback_filter: :is_spam)
+      respond_with_user_row(fallback_filter: :is_spam, notice: "#{@user.name} has been marked as spam and their content hidden.")
     end
 
     def mark_all_users_with_ip_as_spam
@@ -40,7 +40,8 @@ module Admin
 
     private
 
-    def respond_with_user_row(fallback_filter:)
+    def respond_with_user_row(fallback_filter:, notice:)
+      flash[:ok] = notice
       if turbo_stream_row_request?
         render turbo_stream: turbo_stream.replace(@user, partial: 'admin/users/user', locals: { user: @user })
       elsif @user.soft_deleted?
