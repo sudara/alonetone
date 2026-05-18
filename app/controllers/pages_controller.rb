@@ -110,10 +110,9 @@ class PagesController < ApplicationController
   end
 
   def check_sidekiq_workers
-    count = Sidekiq::ProcessSet.new.size
-    raise "none running" if count.zero?
+    raise "none running" if Sidekiq::ProcessSet.new.empty?
 
-    "#{count} up"
+    "up"
   end
 
   def check_sidekiq_queue
@@ -124,7 +123,12 @@ class PagesController < ApplicationController
   end
 
   def check_puma
-    workers = JSON.parse(Puma.stats)["worker_status"]&.map { _1["last_status"] } || []
+    stats = JSON.parse(Puma.stats)
+
+    # worker_status is master-only; from inside a worker we can only confirm we're serving.
+    return "up" unless stats["worker_status"]
+
+    workers  = stats["worker_status"].map { _1["last_status"] }
     capacity = workers.sum { _1["pool_capacity"].to_i }
     backlog  = workers.sum { _1["backlog"].to_i }
     raise "all threads busy (backlog=#{backlog})" if workers.any? && capacity.zero?

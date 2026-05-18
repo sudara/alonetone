@@ -13,7 +13,7 @@ RSpec.describe PagesController, type: :controller do
 
   describe "GET health (mounted at /ok)" do
     before do
-      allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 1))
+      allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, empty?: false))
       allow(Sidekiq::Stats).to receive(:new).and_return(instance_double(Sidekiq::Stats, enqueued: 0))
       allow(Puma).to receive(:stats).and_return(JSON.dump("worker_status" => []))
     end
@@ -25,7 +25,7 @@ RSpec.describe PagesController, type: :controller do
     end
 
     it "returns 503 with FAIL line when sidekiq has no workers, while still reporting other subsystems" do
-      allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, size: 0))
+      allow(Sidekiq::ProcessSet).to receive(:new).and_return(instance_double(Sidekiq::ProcessSet, empty?: true))
 
       get :health
       expect(response).to have_http_status(:service_unavailable)
@@ -39,6 +39,14 @@ RSpec.describe PagesController, type: :controller do
       get :health
       expect(response).to have_http_status(:service_unavailable)
       expect(response.body).to include("FAIL sidekiq queue: 51 (> 50)")
+    end
+
+    it "reports puma 'up' when Puma.stats returns the worker-local view (no worker_status key)" do
+      allow(Puma).to receive(:stats).and_return(JSON.dump("pool_capacity" => 5, "backlog" => 0))
+
+      get :health
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("OK  puma: up")
     end
   end
 end
