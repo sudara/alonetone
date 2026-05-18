@@ -131,6 +131,7 @@ RSpec.describe Admin::AssetsController, type: :request do
 
     # not including further specs since it's the same as in #restore
     it "should restore asset" do
+      akismet_stub_submit_ham
       expect {
         put restore_admin_asset_path(track.id)
       }.to change(Asset, :count).by(1)
@@ -267,6 +268,23 @@ RSpec.describe Admin::AssetsController, type: :request do
       expect {
         put restore_admin_asset_path(asset.id)
       }.to change(Listen, :count).by(2)
+    end
+
+    context "when the asset was marked as spam" do
+      before do
+        asset.update_column(:is_spam, true)
+      end
+
+      it "also clears the spam flag" do
+        akismet_stub_submit_ham
+        put restore_admin_asset_path(asset.id)
+        expect(asset.reload.is_spam).to eq(false)
+      end
+
+      it "notifies Akismet that the asset is ham" do
+        expect(Rakismet).to receive(:akismet_call)
+        put restore_admin_asset_path(asset.id)
+      end
     end
   end
 
