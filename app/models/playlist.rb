@@ -39,14 +39,11 @@ class Playlist < ActiveRecord::Base
     byte_size: { less_than: 20.megabytes }
   }, if: :cover_image_present?
 
-  enum(
-    cover_quality: {
-      ancient: 0,
-      legacy: 1,
-      modern: 2
-    },
-    _suffix: true
-  )
+  enum :cover_quality, {
+    ancient: 0,
+    legacy: 1,
+    modern: 2
+  }, suffix: true
 
   include Slugs
   has_slug(
