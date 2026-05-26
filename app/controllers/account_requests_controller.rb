@@ -14,7 +14,6 @@ class AccountRequestsController < ApplicationController
           status: :denied,
           review_reason: "Rakismet marked as spam"
         )
-        WeeklyDeniedDigestJob.schedule_next
       else
         ReviewAccountRequestJob.perform_later(@account_request.id)
       end

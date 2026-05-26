@@ -52,11 +52,6 @@ RSpec.describe ReviewAccountRequestJob, type: :job do
       expect(account_request.review_reason).to eq("Anthropic: Spam business")
     end
 
-    it "schedules the weekly denied digest" do
-      expect(WeeklyDeniedDigestJob).to receive(:schedule_next)
-      described_class.perform_now(account_request.id)
-    end
-
     it "does not create a user" do
       expect { described_class.perform_now(account_request.id) }
         .not_to change(User, :count)

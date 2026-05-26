@@ -14,7 +14,6 @@ class ReviewAccountRequestJob < ApplicationJob
       auto_approve(account_request)
     when "deny"
       account_request.denied!
-      WeeklyDeniedDigestJob.schedule_next
     when "flag"
       InviteNotification.flagged_mod_notification(account_request).deliver_now
     end
