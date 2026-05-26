@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class AccountRequest < ApplicationRecord
+  include Rakismet::Model
+
+  rakismet_attrs  author: proc { login },
+    author_email: proc { email },
+    content: proc { details },
+    comment_type: 'signup'
+
   scope :recent, -> { order('created_at DESC') }
   scope :candidates, -> { recent.waiting.where(entity_type: [0, 1]) }
   scope :spammers, -> { recent.waiting.where(entity_type: [2, 3, 4]) }
