@@ -40,7 +40,10 @@ class Configurable
     :fastly_base_url,
     :own_and_ship,
     :discourse_secret,
-    :discourse_url
+    :discourse_url,
+    :anthropic_api_key,
+    :account_review_prompt,
+    :account_review_model
   )
 
   attr_reader :environment, :upgraded, :deprecated
