@@ -6,9 +6,18 @@ class AccountRequestsController < ApplicationController
 
   def create
     @account_request = AccountRequest.new(account_request_params)
+    @account_request.remote_ip = request.remote_ip
 
     if @account_request.save
-      @account_request.denied! if spam_detected?
+      if spam_detected?
+        @account_request.update!(
+          status: :denied,
+          review_reason: "Rakismet marked as spam"
+        )
+        WeeklyDeniedDigestJob.schedule_next
+      else
+        ReviewAccountRequestJob.perform_later(@account_request.id)
+      end
       @page_title = "Thank you, #{@account_request.login}"
       @email = @account_request.email
       render 'thank_you', layout: 'pages', status: 303

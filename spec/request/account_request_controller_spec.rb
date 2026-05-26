@@ -43,10 +43,11 @@ RSpec.describe AccountRequestsController, type: :request do
             }
           }
         )
-      end.to change(AccountRequest, :count).by(+1)
+      end.to change(AccountRequest, :count).by(+1).and have_enqueued_job(WeeklyDeniedDigestJob)
       expect(response).to render_template('thank_you')
       expect(response).to have_http_status(303)
       expect(AccountRequest.last).to be_denied
+      expect(AccountRequest.last.review_reason).to eq("Rakismet marked as spam")
     end
 
     it 'still saves the request when akismet is unreachable' do
