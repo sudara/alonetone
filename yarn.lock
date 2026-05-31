@@ -2,10 +2,9 @@
 # yarn lockfile v1
 
 
-"@alonetone/stitches@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@alonetone/stitches/-/stitches-2.1.2.tgz#dbac8bb8b92ab09b21a44071a7bdac1a66474c8d"
-  integrity sha512-IJxxtEtVmra5/tNNscDf/QoVC5bN1UyWUBfznKKmTsL7D758oEFEa7xYlbjVUV4owTG29yGMe7y78qn5Fhf6RA==
+"@alonetone/stitches@sudara/stitches#2.0-modernization":
+  version "3.0.0"
+  resolved "https://codeload.github.com/sudara/stitches/tar.gz/d0984f32997120e318c7a2ae34c64634fb01c7f8"
 
 "@ampproject/remapping@^2.1.0":
   version "2.1.2"

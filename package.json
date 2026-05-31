@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@alonetone/stitches": "^2.1.2",
+    "@alonetone/stitches": "sudara/stitches#2.0-modernization",
     "@babel/core": "7.20.7",
     "@babel/plugin-transform-runtime": "7.19.6",
     "@babel/preset-env": "7.20.2",
