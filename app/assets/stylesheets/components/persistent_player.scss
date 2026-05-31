@@ -1,0 +1,152 @@
+#player {
+  position: fixed;
+  z-index: 100;
+  inset: auto 0 0 0;
+  background-color: $track-player-background;
+
+  &[hidden] {
+    display: none;
+  }
+
+  .player_bar {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    height: 72px;
+    padding: 0 12px;
+  }
+
+  .player_image {
+    display: block;
+    width: 56px;
+    height: 56px;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+
+  .player_center {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .player_meta {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    min-width: 0;
+    white-space: nowrap;
+    a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player_title {
+      font-family: $medium-sans-font;
+    }
+    .player_artist {
+      opacity: 0.8;
+    }
+  }
+
+  .player_waveform {
+    position: relative;
+    height: 40px;
+    cursor: pointer;
+    user-select: none;
+    .player_waveform_svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      .player_waveform_unplayed {
+        fill: $waveform-unplayed-background;
+        stroke: $waveform-unplayed-background;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
+      .player_waveform_played {
+        fill: $waveform-played-background;
+        stroke: $waveform-played-background;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
+    }
+    .player_progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background-color: $accent;
+    }
+    .player_seekbar {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      display: none;
+      background-color: $big-player-seekbar-background;
+    }
+    &:hover .player_seekbar {
+      display: block;
+    }
+  }
+
+  .player_play {
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    .largePlaySVG {
+      width: 100%;
+      height: 100%;
+      path.icon.new {
+        fill: $track-player-play-button-triangle-fill;
+      }
+      .outline {
+        opacity: 0.8;
+        stroke: $track-player-play-button-outline-stroke;
+      }
+      .dotty {
+        stroke: $track-player-dotty-stroke;
+      }
+      .pauseLoopGroup,
+      .pauseGroup {
+        stroke: $track-player-pause-button-stroke;
+      }
+      .centerCircle {
+        fill: $track-player-pause-button-fill;
+      }
+    }
+  }
+
+  .player_time {
+    min-width: 36px;
+    font-size: 11px;
+    font-family: $medium-sans-font;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: $big-player-time-total-text;
+  }
+
+  @media (min-width: 768px) {
+    inset: auto 0 0 0;
+    width: min(900px, 100% - 3rem);
+    margin: 0 auto 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// keep the fixed bar from covering the last row of content, only once it's shown
+body:has(#player.visible) main {
+  padding-bottom: 96px;
+  @media (min-width: 768px) {
+    padding-bottom: 110px;
+  }
+}

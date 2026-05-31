@@ -1,15 +1,6 @@
 <% if @playlist %>
 <turbo-frame id="playlist-track" target="_top" data-turbo-action="advance">
-<div class="track_content" data-controller="big-play" data-playlist-target="track" data-action="
-   track:whileLoading@document->big-play#whileLoading
-   track:pause@document->big-play#pause
-   track:play@document->big-play#play
-   track:playing@document->big-play#playing
-   track:ended@document->big-play#stop
-   track:seeked@document->big-play#seeked
-	 playlist-track-playback:updateState@window->big-play#updateState
-   track:whilePlaying@document->big-play#whilePlaying"
-	 data-big-play-track-id-value="<%= @track.id %>">
+<div class="track_content" data-playlist-target="track">
 
 <% else %>
 	<% content_for :open_graph do %>
@@ -21,23 +12,17 @@
 	  <meta property="music.musician" content="<%= user_home_path(@user) %>">
 	<% end %>
 
-<div class="track_content stitches_track "
-  data-controller="big-play single-playback"
-  data-action="
-    track:play->big-play#play
-    track:playing->big-play#playing
-    track:pause->big-play#pause
-    track:ended->big-play#stop
-    track:whileLoading->big-play#whileLoading
-    track:whilePlaying->big-play#whilePlaying
-    track:registerListen->single-playback#registerListen
-    track:seeked->big-play#seeked
-    big-play:seek->single-playback#seek"
-  data-single-playback-id="<%= @asset.id %>">
+<div class="track_content" data-controller="tracklist">
   <%= render partial: 'shared/back_to_artist' %>
 <% end %>
 
-  <%= render partial: 'assets/big_player' %>
+  <% if @playlist %>
+    <%= render partial: 'assets/big_player' %>
+  <% else %>
+    <div data-tracklist-target="track" <%= tag.attributes(data: track_descriptor_data(@asset)) %>>
+      <%= render partial: 'assets/big_player' %>
+    </div>
+  <% end %>
 
   <div class="track_post">
     <h1><%= @asset.name %></h1>
@@ -124,4 +109,4 @@
   </div>
   <% end %>
 </div>
-</turbo-frame>
+<% if @playlist %></turbo-frame><% end %>

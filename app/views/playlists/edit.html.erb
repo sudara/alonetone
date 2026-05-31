@@ -14,10 +14,12 @@
            <span class="playlist_total_time" data-playlist-sort-target="totalTime"><%= @playlist.play_time %></span>
         </div>
       </div>
-      <div class="sortable" data-playlist-sort-target="sortable">
+      <div class="sortable" data-playlist-sort-target="sortable" data-controller="tracklist">
         <% @playlist.tracks.each do |track| %>
         <div class="asset playlist_asset" data-controller="normal-playback playlist-update" data-normal-playback-unopenable-value="true"
-           data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>">
+           data-id="<%= track.id %>" data-time="<%= track.asset.seconds %>"
+           data-tracklist-target="track"
+           <%= tag.attributes(data: track_descriptor_data(track.asset)) %>>
           <%= render partial: 'assets/asset', locals: { asset: track.asset } %>
           <a href="#" class='remove' data-playlist-update-target="remove" data-action="playlist-update#remove">
             <div class="remove_inner">
@@ -50,15 +52,16 @@
             <li><%= link_to 'your uploads', '#your_uploads', class: 'playlist_option', id: 'open_your_stuff' if @user.has_tracks? %></li>
           </ul>
         </div>
+        <%= turbo_frame_tag "your_uploads" do %>
         <div class="mini_paginator">
           <%== pagy_nav @assets_pagy %>
         </div>
-        <div id="your_uploads" class="playlist_source">
+        <div class="playlist_source" data-controller="tracklist">
           <% @assets.each do |asset| %>
-            <div class="asset playlist_asset stitches_track" data-controller="normal-playback playlist-update"
-            data-normal-playback-unopenable-value="true" id="asset_<%= asset.id %>"  data-time="<%= asset.seconds %>"
-            data-action="track:play->normal-playback#play track:pause->normal-playback#pause track:playing->normal-playback#playing
-            track:ended->normal-playback#stop">
+            <div class="asset playlist_asset" data-controller="normal-playback playlist-update"
+            data-normal-playback-unopenable-value="true" id="asset_<%= asset.id %>" data-time="<%= asset.seconds %>"
+            data-tracklist-target="track"
+            <%= tag.attributes(data: track_descriptor_data(asset)) %>>
               <%= render partial: 'assets/asset', locals: { asset: asset } %>
               <a href="#" class='add' data-playlist-update-target="add" data-action="playlist-update#add">
                 <div class="add_inner">
@@ -73,6 +76,7 @@
             </div>
           <% end %>
         </div>
+        <% end %>
     </div>
   </div>
   <%= link_to 'add_track_url', add_track_user_playlist_path(@user, @playlist.permalink),

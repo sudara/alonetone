@@ -20,9 +20,7 @@
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @pagy %>
     </div>
-    <div id="radio_tracks" class="box">
-      <%= render partial: 'assets/asset', collection: @assets, layout: 'normal_playback'  %>
-    </div>
+    <%= render 'shared/tracklist', assets: @assets, box_id: 'radio_tracks' %>
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @pagy %>
     </div>

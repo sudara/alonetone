@@ -29,6 +29,12 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to be_successful
     end
 
+    it "wires track rows to the persistent player" do
+      get '/'
+      expect(response.body).to include('data-controller="tracklist"')
+      expect(response.body).to include('data-tracklist-target="track"')
+    end
+
     # testing popular part of latest page
     # since it's easier to control than .latest
     # that's ordered by id
@@ -115,6 +121,30 @@ RSpec.describe AssetsController, type: :request do
     it 'shows an assets without an attachment' do
       get user_track_path('henri_willig', 'this-track-has-no-mp3')
       expect(response).to be_successful
+    end
+  end
+
+  context "#waveform" do
+    let(:default_points) { WaveformToSvg.new(nil).points }
+
+    it "returns the track's real waveform points as json without requiring login" do
+      get waveform_user_track_path('sudara', 'song1')
+      expect(response).to be_successful
+      expect(response.media_type).to eq('application/json')
+      points = JSON.parse(response.body)['points']
+      expect(points).to be_present
+      expect(points).not_to eq(default_points)
+    end
+
+    it "falls back to the placeholder waveform when none has been generated yet" do
+      get waveform_user_track_path('henri_willig', 'manufacturer-of-the-finest-cheese')
+      expect(response).to be_successful
+      expect(JSON.parse(response.body)['points']).to eq(default_points)
+    end
+
+    it "404s for a track that does not exist" do
+      get waveform_user_track_path('sudara', 'no-such-track')
+      expect(response).to have_http_status(:not_found)
     end
   end
 
@@ -351,6 +381,12 @@ RSpec.describe AssetsController, type: :request do
     it "sees a form to update an asset" do
       get "/#{user.login}/tracks/#{asset.to_param}/edit"
       expect(response).to be_successful
+    end
+
+    it "wires the edit page big player to the persistent player" do
+      get "/#{user.login}/tracks/#{asset.to_param}/edit"
+      expect(response.body).to include('data-controller="tracklist"')
+      expect(response.body).to include('data-tracklist-target="track"')
     end
 
     it "updates the audio file for an asset" do

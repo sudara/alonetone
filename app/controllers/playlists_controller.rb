@@ -50,14 +50,7 @@ class PlaylistsController < ApplicationController
 
   def edit
     set_assets
-    @listens_pagy, @listens = pagy(@user.listened_to_tracks.preload(:user).distinct, page_key: 'listens_page', limit: 10)
-    @favorites_pagy, @favorites = pagy(@user.favorites.tracks, page_key: 'favorites_page', limit: 10) if @user.favorites.present?
     @page_title = "Editing \"#{@playlist.title}\" by #{@user.name}"
-    if request.xhr?
-      render_desired_partial
-    else
-      render 'edit'
-    end
   end
 
   def add_track
@@ -135,12 +128,6 @@ class PlaylistsController < ApplicationController
 
   def playlist_params
     params.require(:playlist).permit(:cover_image, :title, :year, :is_private, :link1, :link2, :link3, :credits)
-  end
-
-  def render_desired_partial
-    render partial: 'your_stuff.html.erb'     if params[:uploads_page]
-    render partial: 'your_listens.html.erb'   if params[:listens_page]
-    render partial: 'your_favorites.html.erb' if params[:favorites_page]
   end
 
   def set_assets

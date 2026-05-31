@@ -62,12 +62,10 @@ RSpec.describe PlaylistsController, type: :controller do
   end
 
   context "pagination" do
-    it "uses separate page keys on the edit page lists" do
+    it "paginates the available uploads on the edit page" do
       login(:arthur)
       edit_arthurs_playlist
       expect(assigns(:assets_pagy).options[:page_key]).to eq('uploads_page')
-      expect(assigns(:listens_pagy).options[:page_key]).to eq('listens_page')
-      expect(assigns(:favorites_pagy).options[:page_key]).to eq('favorites_page')
     end
   end
 

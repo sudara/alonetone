@@ -101,9 +101,7 @@
     <% if @assets.size > 0 %>
       <div id="user_latest_area">
         <h2>Latest Music</h2>
-        <div id="user_latest" class="box">
-          <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @assets %>
-        </div>
+        <%= render 'shared/tracklist', assets: @assets, box_id: 'user_latest' %>
         <div class="below_box">
           <%= link_to user_tracks_path(@user), class: 'view_all', title: "uploaded mp3s by #{@user.name}"  do %>
           <span>view all &nbsp;
@@ -120,10 +118,7 @@
       <div id="user_listens_area">
         <h2>Recently Listened To</h2>
 
-        <div class="box">
-          <%= render partial: 'assets/asset', layout: 'assets/normal_playback',
-            collection: @listens, as: :asset %>
-        </div>
+        <%= render 'shared/tracklist', assets: @listens %>
 
         <div class="below_box">
             <%= link_to listens_path(@user.login), class: 'view_all' do %>
@@ -170,7 +165,7 @@
       <div id="user_popular_area">
         <h2>Most Popular</h2>
 
-        <div id="user_popular" class="box">
+        <div id="user_popular" class="box" data-controller="tracklist">
           <%= link_to " ", user_tracks_path(@user),
           class: 'view_more_tracks', title: "uploaded mp3s by #{@user.name}" if @user.assets_count > 5%>
           <%= render partial: 'assets/asset', layout: 'assets/normal_playback', collection: @popular_tracks %>
@@ -181,10 +176,7 @@
     <% if @favorites.present? %>
     <div id="user_favorites_area">
       <h2>Recent Favorites</h2>
-      <div class="box">
-        <%= render partial: 'assets/asset', layout: 'assets/normal_playback',
-          collection: @favorites, as: :asset %>
-      </div>
+      <%= render 'shared/tracklist', assets: @favorites %>
       <div class="below_box">
         <%= link_to user_playlist_path(@user, @user.favorites), class: "view_all" do %>
           <span>view all &nbsp;

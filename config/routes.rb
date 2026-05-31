@@ -127,6 +127,7 @@ Rails.application.routes.draw do
       member do
         get :share
         get :stats
+        get :waveform
       end
       collection do
         get  :latest

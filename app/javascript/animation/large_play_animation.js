@@ -4,8 +4,8 @@ import { MorphSVGPlugin } from './MorphSVGPlugin'
 if (MorphSVGPlugin) gsap.registerPlugin(MorphSVGPlugin)
 
 export default class LargePlayAnimation {
-  constructor(elementToReplace) {
-    this.mainSVG = document.querySelector('.largePlaySVG')
+  constructor(svg) {
+    this.mainSVG = svg || document.querySelector('.largePlaySVG')
     this.setupTimelines()
   }
 

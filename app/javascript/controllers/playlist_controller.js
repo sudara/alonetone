@@ -1,24 +1,13 @@
 import { Controller } from '@hotwired/stimulus'
-import Playlist from '@alonetone/stitches'
 
-const playlist = new Playlist()
-
+// Owns the playlist page's responsive layout (sidebar/credits sizing, cover vs
+// track view). Playback lives in the persistent #player; this no longer touches
+// the audio engine.
 export default class extends Controller {
   static targets = ['credits', 'sidebar', 'content', 'cover', 'track', 'sidebarDownloads', 'smallCover']
 
   initialize() {
     this.resize()
-
-    playlist.setup({
-      preloadIndex: -1,
-      tracksSelector: '.stitches_track',
-      timeSelector: '.stitches_time',
-      playButtonSelector: '.stitches_play',
-      loadingProgressSelector: '.stitches_seek .loaded',
-      playProgressSelector: '.stitches_seek .played',
-      seekSelector: '.stitches_seek',
-      enableConsoleLogging: false,
-    })
   }
 
   coverTargetConnected() {
@@ -74,9 +63,5 @@ export default class extends Controller {
     const mainElement = document.getElementsByTagName('main')[0]
     const mainPaddingBottom = parseInt(window.getComputedStyle(mainElement).getPropertyValue('padding-bottom'), 10)
     return this.creditsTarget.clientHeight - this.heightDifference() - mainPaddingBottom
-  }
-
-  disconnect() {
-    playlist.reset()
   }
 }

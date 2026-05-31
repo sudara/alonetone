@@ -1,46 +1,27 @@
+import { Controller } from '@hotwired/stimulus'
 import { gsap } from 'gsap'
-import PlaybackController from './playback_controller'
-import PlayAnimation from '../animation/play_animation'
 
 let currentlyOpen
 
-export default class extends PlaybackController {
-  // these are added to the targets defined in PlaybackController
-  static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
+// Owns the per-row "details reveal" on track lists. Playback moved to the
+// persistent player (tracklist + player controllers); this only animates the
+// expandable panel open/closed.
+export default class extends Controller {
+  static targets = ['details']
   static values = {
     unopenable: Boolean
   }
 
-  playing() {
-    if (!this.loaded) {
-      this.animation.pausingAnimation()
-    } else this.animation.showPauseButton()
-    this.loaded = true
-  }
-
-  playCallback() {
-    this.setupAnimation()
-    if (!this.loaded) {
-      this.animation.loadingAnimation()
-    } else this.animation.showPauseButton()
-    if (currentlyOpen && (currentlyOpen !== this)) {
+  // Pressing the row's play button queues audio via tracklist#play; reveal the
+  // detail panel too so favorite/comment/private controls show, like before.
+  openFromPlay() {
+    if (currentlyOpen && currentlyOpen !== this) {
       currentlyOpen.closeDetails()
       currentlyOpen = undefined
     }
     if (!this.hasUnopenableValue) {
       this.openDetails()
     }
-    this.showSeekBar()
-    this.registeredListen = true
-    this.alreadyPlayed = true
-  }
-
-  pauseCallback() {
-    this.animation.showPlayButton()
-  }
-
-  stopCallback() {
-    this.animation.showPlayButton()
   }
 
   toggleDetails(e) {
@@ -63,7 +44,6 @@ export default class extends PlaybackController {
   closeDetails() {
     currentlyOpen = undefined
     this.element.classList.remove('open')
-    this.seekBarContainerTarget.classList.remove('show')
     // Height of the details could have changed (for example private banner showing)
     // So the margin offset for animating needs to be recalculated here
     gsap
@@ -88,37 +68,11 @@ export default class extends PlaybackController {
         ease: 'power4.inOut',
         display: 'block',
       })
-      if (this.alreadyPlayed) {
-        this.seekBarContainerTarget.classList.add('show')
-      }
     }
     currentlyOpen = this
   }
 
-  // We have one single #playAnimationSVG element to move around and animate
-  // Until this point, our play button has been a placeholder icon SVG
-  // After this point, our play button is an animatable SVG
-  // (Until play is pressed elsewhere)
-  //
-  // Note: Because our svg has a mask with an id, we can't have multiple copies of it in the DOM
-  // Without refactoring how the svg and animation work
-  setupAnimation() {
-    if (!this.animation) {
-      this.animation = new PlayAnimation(this.playButtonTarget)
-    }
-  }
-
-  showSeekBar() {
-    this.seekBarContainerTarget.classList.add('show');
-  }
-
-  // turbolinks caches pages, so let's make sure things are sane when we return
   disconnect() {
-    super.disconnect()
-
-    if (this.animation) {
-      this.animation.reset()
-    }
     if (this.element.classList.contains('open')) {
       this.element.classList.remove('open')
     }

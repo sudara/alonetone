@@ -24,9 +24,7 @@
     <div class="mini_paginator top_paginator">
       <%== pagy_nav @assets_pagy %>
     </div>
-    <div class="tracks_search_results box">
-      <%= render(partial: 'assets/asset', layout: 'assets/normal_playback', collection: @assets) if @assets %>
-    </div>
+    <%= render 'shared/tracklist', assets: @assets, box_class: 'tracks_search_results' %>
     <div class="mini_paginator bottom_paginator">
       <%== pagy_nav @assets_pagy %>
     </div>

@@ -4,7 +4,7 @@ module Listens
 
   def create_listen
     register_listen(find_asset)
-    render nothing: true
+    head :ok
   end
 
   private

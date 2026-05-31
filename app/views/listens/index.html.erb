@@ -9,7 +9,7 @@
   <div class="mini_paginator top_paginator">
     <%== pagy_nav @listens_pagy %>
   </div>
-  <div class="box">
+  <div class="box" data-controller="tracklist">
     <%= render partial: 'users/listen', collection: @listens %>
   </div>
   <div class="mini_paginator bottom_paginator">

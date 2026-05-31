@@ -1,0 +1,4 @@
+<%# Owns the data-controller="tracklist" wrapper so collection callers can't forget it. %>
+<%= tag.div class: ['box', local_assigns[:box_class]], id: local_assigns[:box_id], data: { controller: 'tracklist' } do %>
+  <%= render partial: 'assets/asset', collection: assets, layout: 'assets/normal_playback', cached: local_assigns[:cached] %>
+<% end %>
