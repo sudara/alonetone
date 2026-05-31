@@ -39,7 +39,7 @@ RSpec.describe 'playlists', type: :feature, js: true do
         # to an exact position for a deterministic Percy capture.
         page.percy_snapshot('Playlist Track Play, Seek, Pause',
           percy_css: ".player_progress { left: 33% !important; }
-            .player_waveform_reveal { x: -170 !important; }")
+            .player_waveform_reveal { x: -170px !important; }")
       end
     end
   end
