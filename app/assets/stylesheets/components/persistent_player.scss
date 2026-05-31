@@ -2,25 +2,62 @@
   position: fixed;
   z-index: 100;
   inset: auto 0 0 0;
-  background-color: $track-player-background;
 
   &[hidden] {
     display: none;
   }
 
-  .player_bar {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
+  .player_titlebar {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding: 8px 12px 12px;
+    font-family: $medium-sans-font;
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    background-color: $player-title-background;
+    backdrop-filter: blur(6px);
+    box-shadow: $player-title-inset-shadow;
+
+    a {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player_title,
+    .player_artist {
+      color: $player-track-text;
+    }
+    .player_title {
+      flex-shrink: 1;
+    }
+    .player_sep {
+      color: $player-separator-text;
+    }
+    .player_by {
+      color: $player-by-text;
+    }
+  }
+
+  .player_widget {
+    position: relative;
+    z-index: 1;
+    display: flex;
     align-items: center;
-    gap: 12px;
-    height: 72px;
-    padding: 0 12px;
+    gap: 4px;
+    margin-top: -4px;
+    padding: 8px;
+    background-color: $player-widget-background;
+    backdrop-filter: blur(6.5px);
+    box-shadow: $player-shadow;
   }
 
   .player_image {
+    flex-shrink: 0;
     display: block;
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
     img {
       display: block;
       width: 100%;
@@ -30,49 +67,30 @@
     }
   }
 
-  .player_center {
-    position: relative;
-    display: grid;
-    min-width: 0;
-    gap: 6px;
-  }
-
-  .player_meta {
-    display: flex;
-    gap: 8px;
-    align-items: baseline;
-    min-width: 0;
-    white-space: nowrap;
-    a {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .player_title {
-      font-family: $medium-sans-font;
-    }
-    .player_artist {
-      opacity: 0.8;
-    }
-  }
-
   .player_waveform {
     position: relative;
-    height: 40px;
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    border-radius: 4px;
+    overflow: hidden;
     cursor: pointer;
     user-select: none;
+    background-color: $player-waveform-track-background;
+
     .player_waveform_svg {
       display: block;
       width: 100%;
       height: 100%;
       .player_waveform_unplayed {
-        fill: $waveform-unplayed-background;
-        stroke: $waveform-unplayed-background;
+        fill: $player-waveform-unplayed;
+        stroke: $player-waveform-unplayed;
         stroke-width: 1px;
         stroke-linejoin: round;
       }
       .player_waveform_played {
-        fill: $waveform-played-background;
-        stroke: $waveform-played-background;
+        fill: $player-waveform-played;
+        stroke: $player-waveform-played;
         stroke-width: 1px;
         stroke-linejoin: round;
       }
@@ -81,9 +99,9 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 1px;
+      width: 2px;
       height: 100%;
-      background-color: $accent;
+      background-color: $player-playhead-background;
     }
     .player_seekbar {
       position: absolute;
@@ -96,11 +114,23 @@
     &:hover .player_seekbar {
       display: block;
     }
+    .player_time {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      font-size: 10px;
+      font-family: $medium-sans-font;
+      font-variant-numeric: tabular-nums;
+      color: $player-time-text;
+      opacity: 0.66;
+      pointer-events: none;
+    }
   }
 
   .player_play {
-    width: 56px;
-    height: 56px;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     .largePlaySVG {
       width: 100%;
@@ -125,28 +155,48 @@
     }
   }
 
-  .player_time {
-    min-width: 36px;
-    font-size: 11px;
-    font-family: $medium-sans-font;
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-    color: $big-player-time-total-text;
-  }
-
   @media (min-width: 768px) {
-    inset: auto 0 0 0;
-    width: min(900px, 100% - 3rem);
+    width: min(600px, 100% - 3rem);
     margin: 0 auto 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+
+    .player_titlebar {
+      padding: 8px 12px 14px;
+      font-size: 14px;
+      line-height: 14px;
+      border-radius: 6px 6px 0 0;
+    }
+    .player_widget {
+      padding: 4px;
+      border-radius: 6px;
+    }
+    .player_image {
+      width: 54px;
+      height: 54px;
+      img {
+        border-radius: 6px 3px 3px 6px;
+      }
+    }
+    .player_waveform {
+      height: 54px;
+      border-radius: 3px;
+      .player_time {
+        right: 8px;
+        bottom: 6px;
+        font-size: 12px;
+      }
+    }
+    .player_play {
+      width: 54px;
+      height: 54px;
+    }
   }
 }
 
-// keep the fixed bar from covering the last row of content, only once it's shown
-body:has(#player.visible) main {
-  padding-bottom: 96px;
+// keep the fixed bar from covering the footer, padding the bar that carries the
+// footer background so its color fills the gap behind the player
+body:has(#player.visible) #site_footer .footer_bottom {
+  padding-bottom: 104px;
   @media (min-width: 768px) {
-    padding-bottom: 110px;
+    padding-bottom: 130px;
   }
 }
