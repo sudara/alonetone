@@ -85,6 +85,29 @@ RSpec.describe AccountRequest, type: :model do
     end
   end
 
+  context "on auto approval" do
+    it "should create a user account" do
+      valid_account_request.save!
+      expect { valid_account_request.auto_approve! }.to change { User.count }.by(1)
+      expect(valid_account_request).to be_approved
+      expect(valid_account_request.user).to be_present
+    end
+
+    it "should leave the request waiting when user creation fails" do
+      valid_account_request.save!
+      User.create!(
+        login: valid_account_request.login,
+        email: "existing-auto-approval@example.com",
+        password: "testing123",
+        password_confirmation: "testing123"
+      )
+
+      expect { valid_account_request.auto_approve! }.to raise_error(ActiveRecord::RecordInvalid)
+      expect(valid_account_request.reload).to be_waiting
+      expect(valid_account_request.user).to be_nil
+    end
+  end
+
   context "on denial" do
     it "should populate moderated_by" do
       valid_account_request.deny!(users(:sudara))
