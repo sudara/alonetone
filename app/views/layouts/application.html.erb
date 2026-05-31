@@ -46,7 +46,7 @@
     </div>
   </main>
 
-  <footer id="site_footer" data-turbo-permanent>
+  <footer id="site_footer">
     <%= cache("footer2/#{logged_in?}/#{moderator?}", expires_in: 1.minute) do %>
       <%= render partial: 'shared/footer' %>
     <% end %>

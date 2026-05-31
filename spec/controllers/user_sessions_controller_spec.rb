@@ -24,6 +24,18 @@ RSpec.describe UserSessionsController, type: :controller do
     expect(response).to redirect_to('http://test.host/arthur')
   end
 
+  # Turbo drives the login form, so it follows a 303 on success and re-renders a
+  # 422 on failure; a 200/302 would silently no-op and break persistence.
+  it "redirects with See Other so Turbo follows the login" do
+    post :create, params: { user_session: { login: 'arthur', password: 'test' } }
+    expect(response).to have_http_status(:see_other)
+  end
+
+  it "re-renders with Unprocessable Content on a failed login" do
+    post :create, params: { user_session: { login: 'arthur', password: 'bad password' } }
+    expect(response).to have_http_status(:unprocessable_content)
+  end
+
   it "should redirect to last page viewed after login" do
     post :create, params: { user_session: { login: 'arthur', password: 'test' } }, session: { return_to: '/playlists' }
     expect(response).to redirect_to('http://test.host/playlists')
