@@ -1,4 +1,4 @@
-<%= cache([asset, asset.user, logged_in?, local_assigns[:favorite], 'v6']) do %>
+<%= cache([asset, asset.user, logged_in?, local_assigns[:favorite], 'v7']) do %>
   <div class="asset <%= "favorited_track" if defined?(favorite) %>"
     data-controller="normal-playback"
     data-tracklist-target="track"

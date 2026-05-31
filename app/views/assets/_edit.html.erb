@@ -2,6 +2,13 @@
   <%= render partial: 'shared/errors', locals: { errors: asset.errors } %>
 
   <div class="track_edit">
+    <% if @single_track_page %>
+      <div class="track_post_play play-control" data-percy-ignore
+        <%= tag.attributes(data: track_descriptor_data(asset).merge(tracklist_target: 'track')) %>
+        data-action="click->tracklist#play">
+        <%= render partial: 'shared/large_play_svg' %>
+      </div>
+    <% end %>
     <header>
       <h1><%= f.text_field :title, value: asset.name, id: "title_#{asset.id}" %></h1>
       <h3><%= asset.user.name %></h3>

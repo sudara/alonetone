@@ -10,9 +10,5 @@
     </div>
   <% end if @single_track_page %>
 
-  <div data-tracklist-target="track" <%= tag.attributes(data: track_descriptor_data(@asset)) %>>
-    <%= render partial: 'big_player' %>
-  </div>
-
   <%= render partial: 'edit', locals: { asset: @asset } %>
 </div>
