@@ -23,6 +23,15 @@ RSpec.describe Admin::AccountRequestsController, type: :request do
     expect(account_requests(:waiting).reload.status).to eq('denied')
   end
 
+  it "shows the stored review reason" do
+    account_requests(:waiting).update!(
+      status: :denied,
+      review_reason: "Rakismet marked as spam"
+    )
+    get admin_account_requests_path
+    expect(response.body).to include("Reason: Rakismet marked as spam")
+  end
+
   it "renders a turbo_stream replacing the request row on approve" do
     put approve_admin_account_request_path(account_requests(:waiting)), as: :turbo_stream
     expect(response.media_type).to eq Mime[:turbo_stream]

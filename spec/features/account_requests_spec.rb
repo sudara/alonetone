@@ -11,6 +11,7 @@ RSpec.describe 'Get An Account', type: :feature, js: true do
   end
 
   it 'submits the form and succeeds' do
+    akismet_stub_response_ham
     visit '/get_an_account'
     page.fill_in 'Email', with: "someband@hotmail.com"
     page.fill_in 'account_request_login', with: 'someband456'

@@ -19,6 +19,9 @@
   </div>
   <div class="bio_column">
     <div><%= account_request.entity_type.upcase %></div>
+    <% if account_request.review_reason.present? %>
+      <div>Reason: <%= account_request.review_reason %></div>
+    <% end %>
     <div><%= account_request.details %></div>
   </div>
   <div class="button_column">

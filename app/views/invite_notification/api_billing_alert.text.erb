@@ -1,0 +1,11 @@
+The Anthropic API returned HTTP <%= @status_code %> while reviewing a signup.
+
+<% if @status_code == "429" %>
+This usually means the account is out of credits or rate-limited.
+Please top up API credits at https://console.anthropic.com
+<% else %>
+This usually means the API key is invalid or expired.
+Please check the anthropic_api_key in the server config.
+<% end %>
+
+Until this is resolved, new signups will be flagged for manual review.

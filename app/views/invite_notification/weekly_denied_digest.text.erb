@@ -1,0 +1,10 @@
+<%= @denied_requests.size %> account requests were auto-denied this week.
+
+<% @denied_requests.each do |req| %>
+---
+<%= req.login %> (<%= req.email %>) — <%= req.entity_type %>
+Reason: <%= req.review_reason %>
+Details: <%= req.details.truncate(200) %>
+
+<% end %>
+Review all in admin: <%= @admin_url %>

@@ -37,6 +37,9 @@ development:
   typekit_embed_token: ~
   discourse_secret: usedbysso
   discourse_url: https://someforum.test
+  anthropic_api_key: ~
+  account_review_model: ~
+  account_review_prompt: ~
 
 # Some services in the application like Active Storage and Akismet have to be
 # configured when the Rails process boots. To ensure the proper settings in
@@ -63,3 +66,6 @@ test:
   rakismet_key: unusable
   discourse_secret: usedbysso
   discourse_url: https://someforum.test
+  anthropic_api_key: ~
+  account_review_model: ~
+  account_review_prompt: ~

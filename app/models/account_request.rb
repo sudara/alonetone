@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 class AccountRequest < ApplicationRecord
+  include Rakismet::Model
+
+  rakismet_attrs  author: proc { login },
+    author_email: proc { email },
+    content: proc { details },
+    user_ip: proc { remote_ip },
+    comment_type: 'signup'
+
   scope :recent, -> { order('created_at DESC') }
   scope :candidates, -> { recent.waiting.where(entity_type: [0, 1]) }
   scope :spammers, -> { recent.waiting.where(entity_type: [2, 3, 4]) }
@@ -8,24 +16,20 @@ class AccountRequest < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :moderated_by, optional: true, class_name: 'User'
 
-  enum(
-    entity_type: {
-      band: 0,
-      musician: 1,
-      label: 2,
-      blogger: 3,
-      podcaster: 4
-    }
-  )
+  enum :entity_type, {
+    band: 0,
+    musician: 1,
+    label: 2,
+    blogger: 3,
+    podcaster: 4
+  }
 
-  enum(
-    status: {
-      waiting: 0,
-      approved: 1,
-      denied: 2,
-      claimed: 3
-    }
-  )
+  enum :status, {
+    waiting: 0,
+    approved: 1,
+    denied: 2,
+    claimed: 3
+  }
 
   validates :entity_type, inclusion: {
     in: entity_types,
@@ -77,6 +81,16 @@ class AccountRequest < ApplicationRecord
     create_user_account!(approved_by)
   end
 
+  def auto_approve!
+    with_lock do
+      create_user!(login: login, email: email) do |u|
+        u.reset_password
+        u.reset_perishable_token
+      end
+      approved!
+    end
+  end
+
   def deny!(denied_by)
     return unless denied_by.moderator?
 
@@ -115,8 +129,15 @@ end
 #  email           :string(255)
 #  entity_type     :integer
 #  login           :string(255)
+#  remote_ip       :string(255)
+#  review_reason   :text(65535)
 #  status          :integer          default("waiting")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  moderated_by_id :integer
+#  user_id         :bigint(8)
+#
+# Indexes
+#
+#  index_account_requests_on_user_id  (user_id)
 #
