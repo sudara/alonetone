@@ -88,7 +88,10 @@ footer#site_footer {
             margin-bottom: 8px;
           }
           > a {
-            display: block;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
             padding: 8px;
             font-family: $medium-sans-font;
             line-height: 1.2;
