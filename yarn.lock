@@ -4,7 +4,7 @@
 
 "@alonetone/stitches@sudara/stitches#2.0-modernization":
   version "3.0.0"
-  resolved "https://codeload.github.com/sudara/stitches/tar.gz/d0984f32997120e318c7a2ae34c64634fb01c7f8"
+  resolved "https://codeload.github.com/sudara/stitches/tar.gz/2e219617afbdd2252f0bb4cef0e3227c697c7aa3"
 
 "@ampproject/remapping@^2.1.0":
   version "2.1.2"
