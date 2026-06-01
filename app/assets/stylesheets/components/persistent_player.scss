@@ -82,11 +82,20 @@
       display: block;
       width: 100%;
       height: 100%;
+      .player_waveform_unloaded {
+        fill: $player-waveform-unloaded;
+        stroke: $player-waveform-unloaded;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
       .player_waveform_unplayed {
         fill: $player-waveform-unplayed;
         stroke: $player-waveform-unplayed;
         stroke-width: 1px;
         stroke-linejoin: round;
+      }
+      .player_waveform_loaded_reveal {
+        transition: width 0.25s linear;
       }
       .player_waveform_played {
         fill: $player-waveform-played;

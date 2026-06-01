@@ -5,6 +5,7 @@
        tracklist:toggle@window->player#toggle
        player:trackchanged@document->player#trackChanged
        player:loading@document->player#loading
+       player:whileloading@document->player#whileLoading
        player:playing@document->player#playing
        player:timeupdate@document->player#timeUpdate
        player:paused@document->player#paused
@@ -32,10 +33,16 @@
         <defs>
           <polygon id="player_waveform_points" data-player-target="waveformPoints" points=""/>
         </defs>
+        <clipPath id="player_waveform_loaded_clip">
+          <rect class="player_waveform_loaded_reveal" data-player-target="loadedReveal" x="0" y="0" width="0" height="54"/>
+        </clipPath>
         <clipPath id="player_waveform_clip">
           <rect class="player_waveform_reveal" data-player-target="waveformReveal" x="-500" y="0" width="500" height="54"/>
         </clipPath>
-        <use class="player_waveform_unplayed" href="#player_waveform_points"/>
+        <use class="player_waveform_unloaded" href="#player_waveform_points"/>
+        <g clip-path="url(#player_waveform_loaded_clip)">
+          <use class="player_waveform_unplayed" href="#player_waveform_points"/>
+        </g>
         <g clip-path="url(#player_waveform_clip)">
           <use class="player_waveform_played" href="#player_waveform_points"/>
         </g>

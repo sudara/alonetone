@@ -16,12 +16,20 @@ RSpec.describe TracklistHelper, type: :helper do
         track_title: asset.name,
         track_artist: asset.user.name,
         track_artist_url: helper.user_home_path(asset.user),
-        track_duration: asset.length
+        track_duration: asset.seconds
       )
       expect(data[:track_url]).to include(asset.permalink, '.mp3')
       expect(data[:track_page_url]).to include(asset.permalink)
       expect(data[:track_image]).to be_present
       expect(data[:track_waveform]).to include(asset.permalink, 'waveform')
+    end
+
+    it 'emits duration as raw seconds, not the formatted m:ss string the player cannot parse' do
+      data = helper.track_descriptor_data(asset)
+
+      expect(data[:track_duration]).to be_a(Integer)
+      expect(data[:track_duration]).to eq(asset.seconds)
+      expect(data[:track_duration]).not_to eq(asset.length)
     end
 
     it 'lets callers override url, page_url, image, and title' do

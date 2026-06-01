@@ -15,7 +15,7 @@ module TracklistHelper
       track_page_url: page_url || user_track_path(asset.user, asset.permalink),
       track_image: image || image_path(user_avatar_url(asset.user, variant: :small_avatar)),
       track_waveform: waveform_user_track_path(asset.user.login, asset.permalink),
-      track_duration: asset.length
+      track_duration: asset.seconds
     }
   end
 end
