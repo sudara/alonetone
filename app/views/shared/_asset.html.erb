@@ -19,11 +19,13 @@
   <div class="track_post">
     <% if @playlist %>
       <div class="track_post_play play-control" data-percy-ignore
+        data-controller="big-play" data-big-play-track-id-value="<%= @asset.id %>"
         data-tracklist-target="bigPlay" data-action="click->tracklist#playActive">
         <%= render partial: 'shared/large_play_svg' %>
       </div>
     <% else %>
       <div class="track_post_play play-control" data-percy-ignore
+        data-controller="big-play" data-big-play-track-id-value="<%= @asset.id %>"
         <%= tag.attributes(data: track_descriptor_data(@asset).merge(tracklist_target: 'track')) %>
         data-action="click->tracklist#play">
         <%= render partial: 'shared/large_play_svg' %>

@@ -56,6 +56,11 @@
         h1, h3 { padding-right: 74px; }
       }
     }
+    // playlist headers have no artist line under the title, so the stats row
+    // rises into the play button - drop the title to push the stats clear of it
+    &:has(.track_post_play):not(:has(h3)) h1 {
+      margin-bottom: 56px;
+    }
     .track_post_play {
       position: absolute;
       top: 24px;
@@ -71,16 +76,12 @@
           stroke: $track-player-play-button-outline-stroke;
         }
         .icon.new { fill: $track-player-play-button-triangle-fill; }
-        .pauseGroup { stroke: $track-player-play-button-triangle-fill; }
+        .dotty { stroke: $track-player-dotty-stroke; }
+        .pauseLoopGroup,
+        .pauseGroup { stroke: $track-player-pause-button-stroke; }
+        .centerCircle { fill: $track-player-pause-button-fill; }
       }
       &:hover .largePlaySVG .outline { opacity: 1; }
-      &.is-playing .largePlaySVG {
-        .icon { visibility: hidden; }
-        .pauseGroup { visibility: visible; }
-      }
-      &.is-loading {
-        animation: track_play_pulse 1.1s ease-in-out infinite;
-      }
       // on mobile, match the card's reduced gutter and shrink ~20%
       @media #{$one-column} {
         top: calc($baseline / 2);
