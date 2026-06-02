@@ -62,6 +62,24 @@ RSpec.describe PreventAbuse do
     expect(controller.is_a_bot?).to be_truthy
   end
 
+  it "sees Alibaba Cloud range as a bad IP even with a spoofed Chrome UA" do
+    request = fake_request.new(
+      ip: '47.82.10.35',
+      user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+    )
+    controller = base.new(request)
+    expect(controller.is_a_bot?).to be_truthy
+  end
+
+  it "sees HeadlessChrome as a bot" do
+    request = fake_request.new(
+      ip: '127.0.0.1',
+      user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/147.0.7727.15 Safari/537.36"
+    )
+    controller = base.new(request)
+    expect(controller.is_a_bot?).to be_truthy
+  end
+
   it "still allows facebookexternalhit link previews" do
     request = fake_request.new(
       ip: '57.141.20.10',

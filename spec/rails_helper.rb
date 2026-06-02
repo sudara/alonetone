@@ -37,7 +37,9 @@ Capybara.register_driver :alonetone do |app|
     browser_type: :chromium,
     headless: ENV['HEADED'].blank?,
     # GitHub Actions runners run as root; chromium refuses to start without --no-sandbox.
-    chromiumSandbox: ENV['CI'].blank?
+    chromiumSandbox: ENV['CI'].blank?,
+    # Default headless UA contains "HeadlessChrome", which PreventAbuse blocks as a bot.
+    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
   )
 end
 Capybara.default_driver = :alonetone

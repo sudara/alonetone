@@ -25,6 +25,7 @@ module PreventAbuse
     5.188.210.13
     103.43.33
     103.54.103
+    47.82
   ].freeze
 
   # Whitelist of all allowed user-agents. Safari uses `cfnetwork' as user-agent when downloading
@@ -70,6 +71,7 @@ module PreventAbuse
     anthropic-ai
     ai2bot
     dataforseo
+    headless
   ].freeze
 
   def is_a_bot?
