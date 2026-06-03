@@ -27,16 +27,19 @@
     }
     .player_title,
     .player_artist {
+      flex-shrink: 1;
       color: $player-track-text;
     }
-    .player_title {
-      flex-shrink: 1;
-    }
-    .player_sep {
-      color: $player-separator-text;
-    }
     .player_by {
+      flex-shrink: 0;
       color: $player-by-text;
+    }
+    .player_time {
+      flex-shrink: 0;
+      margin-left: auto;
+      padding-left: 8px;
+      font-variant-numeric: tabular-nums;
+      color: $player-time-text;
     }
   }
 
@@ -123,17 +126,6 @@
     &:hover .player_seekbar {
       display: block;
     }
-    .player_time {
-      position: absolute;
-      right: 4px;
-      bottom: 4px;
-      font-size: 10px;
-      font-family: $medium-sans-font;
-      font-variant-numeric: tabular-nums;
-      color: $player-time-text;
-      opacity: 0.66;
-      pointer-events: none;
-    }
   }
 
   .player_play {
@@ -188,11 +180,6 @@
     .player_waveform {
       height: 54px;
       border-radius: 3px;
-      .player_time {
-        right: 8px;
-        bottom: 6px;
-        font-size: 12px;
-      }
     }
     .player_play {
       width: 54px;

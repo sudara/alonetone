@@ -332,7 +332,6 @@ $player-shadow: 0 6px 9px $red500, 0 10px 28px rgba($brown900, 0.55);
 $player-title-background: rgba($orangetone, 0.9);
 $player-title-inset-shadow: inset 0 2px 16px $orange400;
 $player-track-text: $white;
-$player-separator-text: $orange300;
 $player-by-text: $orange100;
 $player-widget-background: $orangetone;
 $player-waveform-track-background: $orange1000;
@@ -340,7 +339,7 @@ $player-waveform-played: $orange100;
 $player-waveform-unplayed: rgba($orange100, 0.45);
 $player-waveform-unloaded: rgba($orange100, 0.15);
 $player-playhead-background: $white;
-$player-time-text: $orange300;
+$player-time-text: $orange100;
 
 // track_social.scss
 $track-social-heading-text: $grey1000;
