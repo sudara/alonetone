@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe 'tracks', type: :feature, js: true do
   it 'renders assets#show' do
     visit '/sudara/tracks/song1'
-    play_button = find(".play_button a")
+    expect(page).to have_css('.track_post_play .largePlaySVG')
 
     page.percy_snapshot('Single Track Page')
 

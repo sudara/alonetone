@@ -12,17 +12,29 @@
 <% if logged_in? %>
 <div class="footer_forum_topics" data-turbo="false">
   <div class="footer_forum_topics_inner">
-    <a href="https://forum.alonetone.com/" class="forum_view_all">
+    <a href="https://forum.alonetone.com/" class="forum_view_all" target="_blank" rel="noopener">
         Check out the new forums... &nbsp;<i class="icon_caret">
         <%== render file: svg_path('svg/icon_caret.svg') %>
         </i>
     </a>
     <h3>Latest forum topics</h3>
     <ul>
-      <li>
-        <%= link_to "Welcome to the new forums", "https://forum.alonetone.com/t/welcome-to-the-new-alonetone-forum" %>
-        <div>by <%= link_to "sudara", "https://forum.alonetone.com/t/welcome-to-the-new-alonetone-forum" %></div>
-      </li>
+      <% topics = ForumTopics.latest %>
+      <% if topics.any? %>
+        <% topics.each do |topic| %>
+          <li>
+            <%= link_to topic.title, topic.url, target: "_blank", rel: "noopener" %>
+            <% if topic.author %>
+              <div>by <%= link_to topic.author, topic.author_url, target: "_blank", rel: "noopener" %></div>
+            <% end %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>
+          <%= link_to "Welcome to the new forums", "https://forum.alonetone.com/t/welcome-to-the-new-alonetone-forum", target: "_blank", rel: "noopener" %>
+          <div>by <%= link_to "sudara", "https://forum.alonetone.com/t/welcome-to-the-new-alonetone-forum", target: "_blank", rel: "noopener" %></div>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
@@ -60,8 +72,8 @@
     <div class="footer_column">
       <h3 class="footer_column_header">More</h3>
       <div><%= link_to "About", "/about"%></div>
-      <div data-turbo="false"><%= link_to "Forum (back up in 2026!)", "https://forum.alonetone.com" %></div>
-      <div data-turbo="false"><%= link_to "Community Guidelines", '/forums/ideas-features-praise/community-guidelines' %></div>
+      <div data-turbo="false"><%= link_to "Forum (back up in 2026!)", "https://forum.alonetone.com", target: "_blank", rel: "noopener" %></div>
+      <div data-turbo="false"><%= link_to "Community Guidelines", 'https://forum.alonetone.com/guidelines', target: "_blank", rel: "noopener" %></div>
       <div><%= link_to "✨Support alonetone on Patreon", 'https://patreon.com/alonetone' %></div>
     </div>
 

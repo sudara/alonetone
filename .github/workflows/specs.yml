@@ -58,6 +58,10 @@ jobs:
       run: yarn install
       if: steps.yarn-cache.outputs.cache-hit != 'true'
 
+    - name: JS specs (jest)
+      run: yarn jest
+      if: ${{ !matrix.morph }}
+
     - uses: actions/cache@v3
       id: playwright-cache
       with:

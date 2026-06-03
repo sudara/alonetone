@@ -14,9 +14,7 @@
           <div class="mini_paginator top_paginator">
             <%== pagy_nav @pagy %>
           </div>
-          <div class="box">
-            <%= render partial: 'asset', collection: @assets, layout: 'normal_playback', cached: true %>
-          </div>
+          <%= render 'shared/tracklist', assets: @assets, cached: true %>
           <div class="mini_paginator bottom_paginator">
             <%== pagy_nav @pagy %>
           </div>
@@ -32,39 +30,19 @@
       <% if authorized? && @user.assets_count > 2 %>
         <% if @hot_tracks_this_week.present? %>
           <h2>Hot Tracks this week</h2>
-          <div class="box">
-            <div>
-              <%= render partial: 'asset', layout: 'normal_playback', collection: @hot_tracks_this_week %>
-              <%# image_tag @user.most_popular_chart %>
-            </div>
-          </div>
+          <%= render 'shared/tracklist', assets: @hot_tracks_this_week %>
         <% end %>
         <% if @most_fav_tracks.present? %>
           <h2>Most Favorited Tracks</h2>
-          <div class="box">
-            <div>
-              <%= render partial: 'asset', layout: 'normal_playback', collection: @most_fav_tracks %>
-              <%# image_tag @user.most_favorited_chart %>
-            </div>
-          </div>
+          <%= render 'shared/tracklist', assets: @most_fav_tracks %>
         <% end %>
         <% if @most_commented_tracks.present? %>
           <h2>Most Commented On Tracks</h2>
-          <div class="box">
-            <div>
-              <%= render partial: 'asset', layout: 'normal_playback', collection: @most_commented_tracks %>
-              <%# image_tag @user.most_commented_on_chart %>
-            </div>
-          </div>
+          <%= render 'shared/tracklist', assets: @most_commented_tracks %>
         <% end %>
         <% if @most_listened_to_tracks.present? %>
           <h2>Most Listened To Tracks (ever)</h2>
-          <div class="box">
-            <div>
-              <%= render partial: 'asset', layout: 'normal_playback', collection: @most_listened_to_tracks %>
-              <%# image_tag @user.most_listened_to_ever_chart %>
-            </div>
-          </div>
+          <%= render 'shared/tracklist', assets: @most_listened_to_tracks %>
         <% end %>
       <% end %>
     </div>

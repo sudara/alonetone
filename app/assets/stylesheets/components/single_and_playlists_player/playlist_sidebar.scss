@@ -57,7 +57,8 @@
         border-bottom: 1px solid $tracklist-track-border;
       }
       &:hover,
-      &.active {
+      &.active,
+      &.is-current {
         background-color: $tracklist-track-background-active;
         a.position_name_time {
           color: $tracklist-track-text-active;
@@ -110,6 +111,17 @@
           height: 24px;
           background-image: $playlist-sidebar-pause-background;
         }
+      }
+      // the persistent player drives these: is-current highlights the row, the
+      // playing row swaps to a pause icon, a loading row pulses
+      &.is-current a.play_button i {
+        background-image: $playlist-sidebar-play-active-background;
+      }
+      &.is-playing a.play_button i {
+        background-image: $playlist-sidebar-pause-active-background;
+      }
+      &.is-loading a.play_button i {
+        animation: track_play_pulse 1.1s ease-in-out infinite;
       }
       a.position_name_time {
         font-size: 14px;

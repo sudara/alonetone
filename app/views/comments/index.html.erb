@@ -11,7 +11,7 @@
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy %>
         </div>
-        <div class="comments_area box">
+        <div class="comments_area box" data-controller="tracklist">
         <%= render partial: 'shared/comment', collection: @comments %>
         </div>
         <div class="mini_paginator bottom_paginator">
@@ -24,7 +24,7 @@
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy_comments_made %>
         </div>
-        <div class="comments_area box">
+        <div class="comments_area box" data-controller="tracklist">
           <%= render partial: 'shared/comment', collection: @comments_made %>
         </div>
         <div class="mini_paginator bottom_paginator">
@@ -37,7 +37,7 @@
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy %>
         </div>
-        <div class="comments_area box">
+        <div class="comments_area box" data-controller="tracklist">
           <%= render partial: 'shared/comment', collection: @comments %>
         </div>
         <div class="mini_paginator bottom_paginator">
@@ -51,7 +51,7 @@
         <div class="mini_paginator top_paginator">
           <%== pagy_nav @pagy_spam %>
         </div>
-        <div class="comments_area box">
+        <div class="comments_area box" data-controller="tracklist">
           <%= render partial: 'shared/comment', collection: @spam %>
         </div>
         <div class="mini_paginator bottom_paginator">

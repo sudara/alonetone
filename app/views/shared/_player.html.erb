@@ -1,0 +1,80 @@
+<div id="player" hidden data-turbo-permanent
+     data-controller="player"
+     data-action="
+       tracklist:play@window->player#load
+       tracklist:toggle@window->player#toggle
+       player:trackchanged@document->player#trackChanged
+       player:loading@document->player#loading
+       player:whileloading@document->player#whileLoading
+       player:playing@document->player#playing
+       player:timeupdate@document->player#timeUpdate
+       player:paused@document->player#paused
+       player:ended@document->player#ended
+       player:queueended@document->player#queueEnded
+       player:registerlisten@document->player#registerListen
+       player:seeked@document->player#seeked
+       player:error@document->player#error">
+
+  <div class="player_titlebar">
+    <a class="player_title track_link" href="#" data-player-target="title"></a>
+    <span class="player_by">by</span>
+    <a class="player_artist artist" href="#" data-player-target="artist"></a>
+    <span class="player_time" data-player-target="time">0:00</span>
+  </div>
+
+  <div class="player_widget">
+    <a class="player_image" href="#" data-player-target="imageLink" title="artist">
+      <img data-player-target="image" src="" alt="" width="54" height="54">
+    </a>
+
+    <div class="player_waveform" data-player-target="waveform"
+         data-action="mousemove->player#skim click->player#seek">
+      <svg class="player_waveform_svg" viewBox="0 0 500 54" preserveAspectRatio="none">
+        <defs>
+          <polygon id="player_waveform_points" data-player-target="waveformPoints" points=""/>
+        </defs>
+        <clipPath id="player_waveform_loaded_clip">
+          <rect class="player_waveform_loaded_reveal" data-player-target="loadedReveal" x="0" y="0" width="0" height="54"/>
+        </clipPath>
+        <clipPath id="player_waveform_clip">
+          <rect class="player_waveform_reveal" data-player-target="waveformReveal" x="-500" y="0" width="500" height="54"/>
+        </clipPath>
+        <use class="player_waveform_unloaded" href="#player_waveform_points"/>
+        <g clip-path="url(#player_waveform_loaded_clip)">
+          <use class="player_waveform_unplayed" href="#player_waveform_points"/>
+        </g>
+        <g clip-path="url(#player_waveform_clip)">
+          <use class="player_waveform_played" href="#player_waveform_points"/>
+        </g>
+      </svg>
+      <div class="player_seekbar" data-player-target="seekBar"></div>
+      <div class="player_progress" data-player-target="progress"></div>
+    </div>
+
+    <div class="player_play play-control" data-action="click->player#toggle">
+      <svg class="largePlaySVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="dottyMask_player">
+            <path class="dottyMask" d="M300,545C164.69,545,55,435.31,55,300S164.69,55,300,55,545,164.69,545,300,435.31,545,300,545Z" fill="red" stroke="#000" stroke-miterlimit="10" stroke-width="0"/>
+          </clipPath>
+        </defs>
+        <circle class="outline" cx="300" cy="300" r="245" fill="none" stroke="#999" stroke-miterlimit="10" stroke-width="15.68"/>
+        <g clip-path="url(#dottyMask_player)">
+          <circle visibility="hidden" class="dotty" cx="300" cy="300" r="245" fill="none" stroke="#000" stroke-miterlimit="10" stroke-linecap="butt" stroke-width="64" stroke-dasharray="68.99 187.58"/>
+        </g>
+        <path class="icon new" d="M223.608 429.472 223.4 176.944C223.399 176.936 223.399 176.927 223.399 176.919 223.399 176.638 223.63 176.407 223.911 176.407 224.014 176.407 224.115 176.438 224.2 176.496L324.624 234.4 442.968 302.6C443.127 302.689 443.226 302.858 443.226 303.04 443.226 303.222 443.127 303.391 442.968 303.48L224.368 429.912C224.29 429.958 224.202 429.982 224.112 429.982 223.835 429.982 223.608 429.754 223.608 429.478 223.608 429.476 223.608 429.474 223.608 429.472Z" style="fill-rule:nonzero;"/>
+        <circle visibility="hidden" class="centerCircle" cx="300" cy="300" r="123"/>
+        <g class="pauseContainer" visibility="hidden">
+          <g class="pauseLoopGroup" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
+            <line x1="245" y1="146" x2="245" y2="450"/>
+            <line x1="355" y1="146" x2="355" y2="450"/>
+          </g>
+        </g>
+        <g class="pauseGroup" visibility="hidden" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="64">
+          <line x1="245" y1="156" x2="245" y2="430"/>
+          <line x1="355" y1="156" x2="355" y2="430"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>

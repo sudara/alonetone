@@ -45,6 +45,6 @@ We'd love that! Head on over to the [patreon](https://patreon.com/alonetone).
 
 ## Where can I find the community guidelines?
 
-[Right here in our forums](/forums/ideas-features-praise/community-guidelines)
+<a href="https://forum.alonetone.com/guidelines" target="_blank" rel="noopener">Right here in our forums</a>
 
 

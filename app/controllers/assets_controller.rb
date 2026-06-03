@@ -3,10 +3,10 @@ class AssetsController < ApplicationController
 
   before_action :find_user, except: %i[radio latest new]
   before_action :find_asset, only: %i[edit update destroy stats spam unspam]
-  before_action :find_published_asset, only: %i[show stats]
+  before_action :find_published_asset, only: %i[show stats waveform]
 
   # we check to see if the current_user is authorized based on the asset.user
-  before_action :require_login, except: %i[index show latest radio listen_feed]
+  before_action :require_login, except: %i[index show latest radio listen_feed waveform]
   before_action :check_new_user_abuse, only: %i[new create]
 
   # home page
@@ -58,6 +58,11 @@ class AssetsController < ApplicationController
         listen(@asset)
       end
     end
+  end
+
+  def waveform
+    lazily_create_waveform_if_needed
+    render json: { points: WaveformToSvg.new(@asset.audio_feature&.waveform).points }
   end
 
   def radio

@@ -46,9 +46,7 @@
         Latest Uploaded
         <% end %>
       </h2>
-      <div class="box">
-        <%= render partial: 'assets/asset', collection: @assets, layout: 'normal_playback' %>
-      </div>
+      <%= render 'shared/tracklist', assets: @assets %>
       <div class="below_box">
         <%= link_to radio_source_home_path('latest'), class: 'view_all', title: 'latest music on alonetone' do %>
         <span>view all &nbsp;
@@ -66,7 +64,7 @@
         Latest Comments
         <% end %>
       </h2>
-      <div class="box">
+      <div class="box" data-controller="tracklist">
         <%= render partial: 'shared/comment', collection: @comments %>
       </div>
       <div class="below_box">
@@ -88,9 +86,7 @@
         Currently Kicking Ass
         <% end %>
       </h2>
-      <div class="box">
-      <%= render partial: 'assets/asset', collection: @popular, layout: 'normal_playback' %>
-      </div>
+      <%= render 'shared/tracklist', assets: @popular %>
       <div class="below_box">
         <%= link_to radio_source_home_path('popular'), class: "view_all", title: 'alonetone radio: currently kicking ass' do %>
         <span>view all &nbsp;
@@ -108,9 +104,10 @@
           Recently Favorited
           <% end %>
         </h2>
-        <div class="box">
+        <%# Can't use shared/tracklist: each row needs a per-favorite local for the "favorited by" line. %>
+        <div class="box" data-controller="tracklist">
           <% @favorites.each do |favorite| %>
-            <%= render partial: 'assets/asset', layout: 'normal_playback', locals: { asset: favorite.asset, favorite: favorite } %>
+            <%= render partial: 'assets/asset', layout: 'assets/normal_playback', locals: { asset: favorite.asset, favorite: favorite } %>
           <% end %>
         </div>
         <div class="below_box">
@@ -134,11 +131,7 @@
           <% end %>
         </h2>
 
-        <div class="box">
-          <div>
-            <%= render partial: 'assets/asset', collection: @followee_tracks, layout: 'normal_playback' %>
-          </div>
-        </div>
+        <%= render 'shared/tracklist', assets: @followee_tracks %>
 
         <div class="below_box">
           <%= link_to radio_source_home_path('those_you_follow'), class: 'view_all', title: 'alonetone radio: those you follow' do %>

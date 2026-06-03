@@ -1,6 +1,9 @@
 {
+  "scripts": {
+    "test:js": "jest"
+  },
   "dependencies": {
-    "@alonetone/stitches": "^2.1.2",
+    "@alonetone/stitches": "sudara/stitches#2.0-modernization",
     "@babel/core": "7.20.7",
     "@babel/plugin-transform-runtime": "7.19.6",
     "@babel/preset-env": "7.20.2",
@@ -29,10 +32,14 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@percy/cli": "^1.31.12",
+    "@swc/core": "^1.15.40",
+    "@swc/jest": "^0.2.39",
     "eslint": "^8.31.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "jest": "^29",
+    "jest-environment-jsdom": "^29",
     "playwright": "1.59",
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-dev-server": "^4.11.1",

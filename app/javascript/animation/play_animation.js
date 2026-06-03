@@ -52,7 +52,11 @@ export default class PlayAnimation {
   }
 
   replaceClonedSVGWithOldElement() {
-    this.svg.parentNode.replaceChild(this.oldElement, this.svg)
+    // Turbo may detach the row before Stimulus disconnect runs reset(), leaving
+    // the clone parentless; nothing to restore in that case.
+    if (this.svg.parentNode) {
+      this.svg.parentNode.replaceChild(this.oldElement, this.svg)
+    }
   }
 
   setupTimelines() {

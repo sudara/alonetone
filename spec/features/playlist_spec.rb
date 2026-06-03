@@ -13,31 +13,33 @@ RSpec.describe 'playlists', type: :feature, js: true do
       # Percy needs zero DOM variation between captures, so freeze GSAP animations.
       with_animations_paused do
         first_track.find('a.play_button').click
-        expect(page).to have_selector(".player")
+        # Play swaps the cover view for the track detail and reveals the
+        # persistent player at the bottom of the page.
+        expect(page).to have_css('#player.visible')
+        expect(page).to have_css('.track_content .track_post')
         page.percy_snapshot('Playlist Track Loading')
       end
 
-      # Navigating away and back, we should still be playing
+      # Navigating away and back, the persistent player keeps playing
       second_track = find('ul.tracklist li:last-child')
       second_track.click
       first_track.click
+      expect(page).to have_css('#player.visible')
 
       switch_themes
 
       with_animations_paused do
-        pw_click('.waveform', x: 200, y: 10) # seek
-        pw_click('.waveform', x: 200, y: 10) # set predictable-ish pausing spot
-        pw_click('.play_button_container')
+        pw_click('#player .player_waveform', x: 200, y: 10) # seek
+        pw_click('#player .player_play')                    # pause
         # Listen-counting through this seek/pause flow is racy in headless
         # mode; the count assertion lives in assets_controller_spec instead.
-        expect(page).to have_css('ul.tracklist li:first-child.stitches-paused')
+        expect(page).to have_css('ul.tracklist li.is-current:not(.is-playing)')
 
-        # The time between seeking and pausing is variable
-        # So we manually adjust the playhead end state to the exact
-        # same position for the percy snap.
+        # The time between seeking and pausing is variable, so pin the playhead
+        # to an exact position for a deterministic Percy capture.
         page.percy_snapshot('Playlist Track Play, Seek, Pause',
-          percy_css: "#waveform_reveal { left: -335px !important; }
-            .progress_container_inner { left: 33% !important; }")
+          percy_css: ".player_progress { left: 33% !important; }
+            .player_waveform_reveal { x: -170px !important; }")
       end
     end
   end

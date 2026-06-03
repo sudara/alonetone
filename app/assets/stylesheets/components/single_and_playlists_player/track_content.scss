@@ -49,6 +49,47 @@
       @include title28();
       color: $track-content-track-text;
     }
+    // the play control overlaps the header's top-right corner, so reserve room
+    &:has(.track_post_play) {
+      h1, h3 { padding-right: 112px; }
+      @media #{$one-column} {
+        h1, h3 { padding-right: 74px; }
+      }
+    }
+    // playlist headers have no artist line under the title, so the stats row
+    // rises into the play button - drop the title to push the stats clear of it
+    &:has(.track_post_play):not(:has(h3)) h1 {
+      margin-bottom: 56px;
+    }
+    .track_post_play {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 78px;
+      height: 78px;
+      cursor: pointer;
+      .largePlaySVG {
+        width: 100%;
+        height: 100%;
+        .outline {
+          opacity: 0.8;
+          stroke: $track-player-play-button-outline-stroke;
+        }
+        .icon.new { fill: $track-player-play-button-triangle-fill; }
+        .dotty { stroke: $track-player-dotty-stroke; }
+        .pauseLoopGroup,
+        .pauseGroup { stroke: $track-player-pause-button-stroke; }
+        .centerCircle { fill: $track-player-pause-button-fill; }
+      }
+      &:hover .largePlaySVG .outline { opacity: 1; }
+      // on mobile, match the card's reduced gutter and shrink ~20%
+      @media #{$one-column} {
+        top: calc($baseline / 2);
+        right: calc($baseline / 2);
+        width: 62px;
+        height: 62px;
+      }
+    }
     h3 {
       margin-top: -20px;
       margin-bottom: 32px;

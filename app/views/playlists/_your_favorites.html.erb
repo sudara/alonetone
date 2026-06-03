@@ -1,8 +1,0 @@
-<div id="your_favorites" class="playlist_source">
-  <div class="mini_paginator">
-    <%== pagy_nav @favorites_pagy %>
-  </div>
-	<div class="scriptaculous">
-	  <%= render partial: 'playlists/asset', collection: @favorites.collect(&:asset) %>
-	</div>
-</div>

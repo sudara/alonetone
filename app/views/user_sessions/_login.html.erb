@@ -1,5 +1,5 @@
 <%= render partial: 'shared/errors', locals: { errors: @user_session.errors } %>
-<%= form_with model: @user_session, data: { turbo: false }, id: 'login_form' do |f| %>
+<%= form_with model: @user_session, id: 'login_form' do |f| %>
   
   <div>
     <%= f.label :login %>

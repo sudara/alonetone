@@ -43,3 +43,6 @@ update
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Playwright MCP scratch output (snapshots, screenshots, console logs)
+.playwright-mcp/

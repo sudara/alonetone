@@ -1,46 +1,94 @@
+import { Controller } from '@hotwired/stimulus'
 import { gsap } from 'gsap'
-import PlaybackController from './playback_controller'
 import PlayAnimation from '../animation/play_animation'
 
 let currentlyOpen
 
-export default class extends PlaybackController {
-  // these are added to the targets defined in PlaybackController
-  static targets = ['playButton', 'details', 'time', 'seekBarPlayed', 'title']
+const PLAYER_EVENTS = ['player:trackchanged', 'player:loading', 'player:playing', 'player:paused', 'player:queueended']
+
+// Owns a track row's "details reveal" plus its morphing play/pause button. The
+// button animation is the same one as on main, now driven off the persistent
+// player's events (filtered to this row's track) rather than a per-row engine.
+export default class extends Controller {
+  static targets = ['details']
   static values = {
     unopenable: Boolean
   }
 
-  playing() {
-    if (!this.loaded) {
-      this.animation.pausingAnimation()
-    } else this.animation.showPauseButton()
-    this.loaded = true
+  connect() {
+    this.trackId = parseInt(this.element.dataset.trackId, 10)
+    this.onPlayerEvent = (e) => this.syncPlayButton(e)
+    PLAYER_EVENTS.forEach((type) => document.addEventListener(type, this.onPlayerEvent))
   }
 
-  playCallback() {
-    this.setupAnimation()
-    if (!this.loaded) {
+  disconnect() {
+    PLAYER_EVENTS.forEach((type) => document.removeEventListener(type, this.onPlayerEvent))
+    this.resetAnimation()
+    if (this.element.classList.contains('open')) {
+      this.element.classList.remove('open')
+    }
+  }
+
+  // Only react to events about this row's track; the queue ending or any event
+  // for a different track returns the row to its resting play icon.
+  syncPlayButton(event) {
+    if (event.type === 'player:queueended') {
+      this.resetAnimation()
+      return
+    }
+    const id = event.detail && event.detail.track && event.detail.track.id
+    if (id !== this.trackId) {
+      this.resetAnimation()
+      return
+    }
+    if (event.type === 'player:playing') this.toAnimState('playing')
+    else if (event.type === 'player:paused') this.toAnimState('paused')
+    else this.toAnimState('loading')
+  }
+
+  toAnimState(state) {
+    if (this.animState === state) return
+    this.ensureAnimation()
+    if (!this.animation) return
+    this.animState = state
+    if (state === 'loading') {
       this.animation.loadingAnimation()
-    } else this.animation.showPauseButton()
-    if (currentlyOpen && (currentlyOpen !== this)) {
+    } else if (state === 'playing') {
+      // first play morphs play->pause; later resumes just snap to the pause icon
+      if (this.animPlayed) this.animation.showPauseButton()
+      else { this.animation.pausingAnimation(); this.animPlayed = true }
+    } else {
+      this.animation.showPlayButton()
+    }
+  }
+
+  // Swap this row's static play icon for a clone of the shared animatable SVG.
+  ensureAnimation() {
+    if (this.animation) return
+    const mount = this.element.querySelector('.playIconSymbol')
+    if (mount && document.querySelector('#playAnimationSVG')) {
+      this.animation = new PlayAnimation(mount)
+    }
+  }
+
+  resetAnimation() {
+    if (!this.animation) return
+    this.animation.reset()
+    this.animation = null
+    this.animState = null
+    this.animPlayed = false
+  }
+
+  // Pressing the row's play button queues audio via tracklist#play; reveal the
+  // detail panel too so favorite/comment/private controls show, like before.
+  openFromPlay() {
+    if (currentlyOpen && currentlyOpen !== this) {
       currentlyOpen.closeDetails()
       currentlyOpen = undefined
     }
     if (!this.hasUnopenableValue) {
       this.openDetails()
     }
-    this.showSeekBar()
-    this.registeredListen = true
-    this.alreadyPlayed = true
-  }
-
-  pauseCallback() {
-    this.animation.showPlayButton()
-  }
-
-  stopCallback() {
-    this.animation.showPlayButton()
   }
 
   toggleDetails(e) {
@@ -63,7 +111,6 @@ export default class extends PlaybackController {
   closeDetails() {
     currentlyOpen = undefined
     this.element.classList.remove('open')
-    this.seekBarContainerTarget.classList.remove('show')
     // Height of the details could have changed (for example private banner showing)
     // So the margin offset for animating needs to be recalculated here
     gsap
@@ -88,39 +135,7 @@ export default class extends PlaybackController {
         ease: 'power4.inOut',
         display: 'block',
       })
-      if (this.alreadyPlayed) {
-        this.seekBarContainerTarget.classList.add('show')
-      }
     }
     currentlyOpen = this
-  }
-
-  // We have one single #playAnimationSVG element to move around and animate
-  // Until this point, our play button has been a placeholder icon SVG
-  // After this point, our play button is an animatable SVG
-  // (Until play is pressed elsewhere)
-  //
-  // Note: Because our svg has a mask with an id, we can't have multiple copies of it in the DOM
-  // Without refactoring how the svg and animation work
-  setupAnimation() {
-    if (!this.animation) {
-      this.animation = new PlayAnimation(this.playButtonTarget)
-    }
-  }
-
-  showSeekBar() {
-    this.seekBarContainerTarget.classList.add('show');
-  }
-
-  // turbolinks caches pages, so let's make sure things are sane when we return
-  disconnect() {
-    super.disconnect()
-
-    if (this.animation) {
-      this.animation.reset()
-    }
-    if (this.element.classList.contains('open')) {
-      this.element.classList.remove('open')
-    }
   }
 }

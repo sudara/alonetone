@@ -1,0 +1,198 @@
+#player {
+  position: fixed;
+  z-index: 100;
+  inset: auto 0 0 0;
+
+  &[hidden] {
+    display: none;
+  }
+
+  .player_titlebar {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding: 8px 12px 12px;
+    font-family: $medium-sans-font;
+    font-size: 12px;
+    line-height: 16px;
+    white-space: nowrap;
+    background-color: $player-title-background;
+    backdrop-filter: blur(6px);
+    box-shadow: $player-title-inset-shadow;
+
+    a {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player_title,
+    .player_artist {
+      flex-shrink: 1;
+      color: $player-track-text;
+    }
+    .player_by {
+      flex-shrink: 0;
+      color: $player-by-text;
+    }
+    .player_time {
+      flex-shrink: 0;
+      margin-left: auto;
+      padding-left: 8px;
+      font-variant-numeric: tabular-nums;
+      color: $player-time-text;
+    }
+  }
+
+  .player_widget {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: -4px;
+    padding: 8px;
+    background-color: $player-widget-background;
+    backdrop-filter: blur(6.5px);
+    box-shadow: $player-shadow;
+  }
+
+  .player_image {
+    flex-shrink: 0;
+    display: block;
+    width: 44px;
+    height: 44px;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+
+  .player_waveform {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    background-color: $player-waveform-track-background;
+
+    .player_waveform_svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      .player_waveform_unloaded {
+        fill: $player-waveform-unloaded;
+        stroke: $player-waveform-unloaded;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
+      .player_waveform_unplayed {
+        fill: $player-waveform-unplayed;
+        stroke: $player-waveform-unplayed;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
+      .player_waveform_loaded_reveal {
+        transition: width 0.25s linear;
+      }
+      .player_waveform_played {
+        fill: $player-waveform-played;
+        stroke: $player-waveform-played;
+        stroke-width: 1px;
+        stroke-linejoin: round;
+      }
+    }
+    .player_progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background-color: $player-playhead-background;
+    }
+    .player_seekbar {
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      display: none;
+      background-color: $big-player-seekbar-background;
+    }
+    &:hover .player_seekbar {
+      display: block;
+    }
+  }
+
+  .player_play {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    .largePlaySVG {
+      width: 100%;
+      height: 100%;
+      path.icon.new {
+        fill: $track-player-play-button-triangle-fill;
+      }
+      .outline {
+        opacity: 0.8;
+        stroke: $track-player-play-button-outline-stroke;
+      }
+      .dotty {
+        stroke: $track-player-dotty-stroke;
+      }
+      .pauseLoopGroup,
+      .pauseGroup {
+        stroke: $track-player-pause-button-stroke;
+      }
+      .centerCircle {
+        fill: $track-player-pause-button-fill;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: min(600px, 100% - 3rem);
+    margin: 0 auto 1.5rem;
+
+    .player_titlebar {
+      padding: 8px 12px 14px;
+      font-size: 14px;
+      line-height: 14px;
+      border-radius: 6px 6px 0 0;
+    }
+    .player_widget {
+      padding: 4px;
+      border-radius: 6px;
+    }
+    .player_image {
+      width: 54px;
+      height: 54px;
+      img {
+        border-radius: 6px 3px 3px 6px;
+      }
+    }
+    .player_waveform {
+      height: 54px;
+      border-radius: 3px;
+    }
+    .player_play {
+      width: 54px;
+      height: 54px;
+    }
+  }
+}
+
+// keep the fixed bar from covering the footer, padding the bar that carries the
+// footer background so its color fills the gap behind the player
+body:has(#player.visible) #site_footer .footer_bottom {
+  padding-bottom: 104px;
+  @media (min-width: 768px) {
+    padding-bottom: 130px;
+  }
+}

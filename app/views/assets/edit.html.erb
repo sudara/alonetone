@@ -1,23 +1,4 @@
-
-<% if @playlist %>
-<div class="track_content" data-controller="big-play">
-<% else %>
-
-<div class="track_content stitches_track "
-  data-controller="big-play single-playback"
-  data-action="
-    track:play->big-play#play
-    track:playing->big-play#playing
-    track:pause->big-play#pause
-    track:ended->big-play#stop
-    track:whileLoading->big-play#whileLoading
-    track:whilePlaying->big-play#whilePlaying
-    track:registerListen->single-playback#registerListen
-    track:seeked->big-play#seeked
-    big-play:seek->single-playback#seek"
-  data-single-playback-id="<%= @asset.id %>">
-<% end %>
-
+<div class="track_content" data-controller="tracklist">
   <%= link_to user_track_path(@user, @asset), class: 'back_to_track_link' do %>
     <div class="caret">
       <i class="icon_caret">
@@ -28,6 +9,6 @@
       Back to <span><%= @asset.title %></span>
     </div>
   <% end if @single_track_page %>
-  <%= render partial: 'big_player' %>
+
   <%= render partial: 'edit', locals: { asset: @asset } %>
 </div>
