@@ -57,8 +57,7 @@
         border-bottom: 1px solid $tracklist-track-border;
       }
       &:hover,
-      &.active,
-      &.is-current {
+      &.active {
         background-color: $tracklist-track-background-active;
         a.position_name_time {
           color: $tracklist-track-text-active;
@@ -112,8 +111,8 @@
           background-image: $playlist-sidebar-pause-background;
         }
       }
-      // the persistent player drives these: is-current highlights the row, the
-      // playing row swaps to a pause icon, a loading row pulses
+      // the persistent player drives the icon: a current track gets the active
+      // play icon, the playing row swaps to a pause icon, a loading row pulses
       &.is-current a.play_button i {
         background-image: $playlist-sidebar-play-active-background;
       }
