@@ -269,3 +269,40 @@ describe('player#whileLoading', () => {
     expect(loadedWidth()).toBe(0)
   })
 })
+
+describe('player#timeUpdate', () => {
+  const timeText = () =>
+    document.querySelector('[data-player-target="time"]').textContent
+  const changeTrack = (duration) => announce('player:trackchanged', { track: { duration } })
+
+  it('shows the total track length while a freshly changed track is loading', async () => {
+    await start()
+    changeTrack('225')
+    await tick()
+    expect(timeText()).toBe('3:45')
+  })
+
+  it('holds the total length through timeupdates until playback actually starts', async () => {
+    await start()
+    changeTrack('225')
+    announceTimeUpdate(225) // a loading timeupdate before play
+    await tick()
+    expect(timeText()).toBe('3:45')
+  })
+
+  it('counts up from the current time once playing', async () => {
+    await start()
+    changeTrack('225')
+    announce('player:playing')
+    announceTimeUpdate(225)
+    await tick()
+    expect(timeText()).toBe('0:01')
+  })
+
+  it('falls back to 0:00 when a changed track has no known length', async () => {
+    await start()
+    changeTrack('')
+    await tick()
+    expect(timeText()).toBe('0:00')
+  })
+})

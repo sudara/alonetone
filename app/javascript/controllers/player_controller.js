@@ -62,6 +62,13 @@ export default class extends Controller {
     this.loadWaveform(t.waveformUrl)
     this.resetPlayhead()
     this.seedDuration(t.duration)
+    this.isPlaying = false
+    this.timeTarget.textContent = this.trackDuration > 0 ? this.formatTime(this.trackDuration) : '0:00'
+  }
+
+  formatTime(totalSeconds) {
+    const whole = Math.floor(totalSeconds)
+    return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
   }
 
   // The DB-known length lets the playhead start immediately and at the right
@@ -113,7 +120,7 @@ export default class extends Controller {
 
   timeUpdate(event) {
     const { percent, currentTimeFormatted, duration } = event.detail
-    this.timeTarget.textContent = currentTimeFormatted
+    if (this.isPlaying) this.timeTarget.textContent = currentTimeFormatted
     if (duration) {
       if (this.timeline.duration() !== duration) this.timeline.duration(duration)
       if (!this.durationKnown) {
