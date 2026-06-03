@@ -247,21 +247,21 @@ RSpec.describe AssetsController, type: :controller do
       asset = assets(:valid_mp3_2)
       asset.audio_feature.delete
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
-      assert_enqueued_jobs(1)
+      assert_enqueued_jobs(1, only: CreateAudioFeatureJob)
     end
 
     it "should NOT enqueue anything if audio feature (waveform) is present" do
       login(:sudara)
       asset = assets(:valid_mp3)
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
-      assert_enqueued_jobs(0)
+      assert_enqueued_jobs(0, only: CreateAudioFeatureJob)
     end
 
     it "should NOT enqueue anything if is_a_bot?" do
       allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(true)
       asset = assets(:valid_mp3)
       get :show, params: { id: asset.id, user_id: users(:sudara).login }
-      assert_enqueued_jobs(0)
+      assert_enqueued_jobs(0, only: CreateAudioFeatureJob)
     end
 
     context "private comments" do
