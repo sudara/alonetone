@@ -39,12 +39,9 @@ RSpec.describe 'home page', type: :feature, js: true do
       track.find(".play_link").click
 
       expect(track).to have_selector('.add_to_favorites')
-      expect(track).to have_selector('.stitches_seek')
+      expect(page).to have_css('#player.visible')
 
-      # This currently fails, because playback actually fails
-      # TODO: look into the fixtures and confirm playback on this particular track is happy
-      # expect(track).to have_selector('.stitches_seek .loaded')
-      track.find(".stitches_seek").click # click in the middle of the seekbar
+      find('#player .player_waveform').click # seek in the persistent player
       track.find(".play_link").click # pause the track
       expect(track).to have_selector('.add_to_favorites')
       page.percy_snapshot('Home as User')
