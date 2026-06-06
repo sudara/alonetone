@@ -40,8 +40,6 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-# Pinned to 7.x: 8.x defaults to SWC/esbuild and deprioritizes Babel, which
-# we still need for @babel/preset-env + core-js to support FF ESR.
 gem 'shakapacker', '~> 7.2'
 gem 'sprockets-rails'
 gem 'dartsass-rails'

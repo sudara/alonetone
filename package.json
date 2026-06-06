@@ -51,7 +51,6 @@
     ]
   },
   "browserslist": [
-    "defaults",
-    "Firefox ESR"
+    "defaults"
   ]
 }
