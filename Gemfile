@@ -42,7 +42,7 @@ gem 'postmark-rails'
 
 # frontend
 gem 'jsbundling-rails'
-gem 'sprockets-rails'
+gem 'propshaft'
 gem 'dartsass-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'

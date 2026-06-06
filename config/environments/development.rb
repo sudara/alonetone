@@ -46,15 +46,7 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
-  config.assets.debug = true
-
   config.hosts.clear # thanks manfred
-
-  # Suppress logger output for asset requests.
-  config.assets.quiet = true
 
   config.rakismet.test = false # actually send query to akismet
 

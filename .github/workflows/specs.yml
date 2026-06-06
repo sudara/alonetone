@@ -89,7 +89,6 @@ jobs:
 
     - name: Build esbuild JS
       run: yarn build
-      if: ${{ matrix.morph }}
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
