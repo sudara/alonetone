@@ -76,9 +76,9 @@ GEM
       activerecord (>= 4.2)
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
-    annotate (2.6.5)
-      activerecord (>= 2.3.0)
-      rake (>= 0.8.7)
+    annotaterb (4.22.0)
+      activerecord (>= 6.0.0)
+      activesupport (>= 6.0.0)
     ast (2.4.3)
     authlogic (6.6.0)
       activemodel (>= 7.2, < 8.2)
@@ -544,7 +544,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  annotate
+  annotaterb
   authlogic
   awesome_print
   aws-sdk-cloudfront

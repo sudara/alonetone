@@ -58,7 +58,7 @@ gem 'connection_pool', '< 3'
 
 group :development do
   gem 'perf_check', require: false
-  gem 'annotate', require: false
+  gem 'annotaterb', require: false
   gem 'faker', require: false
   gem 'brakeman', require: false
   # Available "channels" of rubocop for code climate:
