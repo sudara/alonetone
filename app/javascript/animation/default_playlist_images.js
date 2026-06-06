@@ -204,22 +204,6 @@ Triangulr.prototype.generateGray = function (path) {
   return '#'+code+code+code;
 };
 
-// Exports
-if (typeof define === 'function' && define.amd) {
-  // AMD. Register as an anonymous module.
-  define([], function() {
-    return Triangulr;
-  });
-} else if (typeof exports === 'object') {
-  // Node. Does not work with strict CommonJS, but
-  // only CommonJS-like environments that support module.exports,
-  // like Node.
-  module.exports = Triangulr;
-} else {
-  // Browser globals
-  window.Triangulr = Triangulr;
-}
-
 function randomBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }

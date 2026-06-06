@@ -40,10 +40,9 @@ gem 'rakismet'
 gem 'postmark-rails'
 
 # frontend
-gem 'shakapacker', '~> 7.2'
+gem 'jsbundling-rails'
 gem 'sprockets-rails'
 gem 'dartsass-rails'
-gem 'yui-compressor'
 gem 'turbo-rails'
 
 # monitoring & perf
@@ -54,10 +53,6 @@ gem 'sidekiq'
 gem 'dalli'
 # Pinned to < 3: Rails 7.2.x's MemCacheStore still passes a positional Hash to ConnectionPool.new, which 3.0 made kwargs-only.
 gem 'connection_pool', '< 3'
-# Pinned to ~> 0.7.7: 0.7.5 dropped the Rack::Utils::HeaderHash reference
-# that Rack 3 removed. Shakapacker's DevServerProxy middleware pulls in
-# rack-proxy transitively; without this pin /packs/* requests 500 in dev.
-gem 'rack-proxy', '~> 0.7.7'
 
 group :development do
   gem 'perf_check', require: false

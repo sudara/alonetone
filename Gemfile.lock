@@ -235,6 +235,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
+    jsbundling-rails (1.3.1)
+      railties (>= 6.0.0)
     json (2.19.5)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
@@ -304,7 +306,6 @@ GEM
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    package_json (0.2.0)
     pagy (43.5.4)
       json
       uri
@@ -347,8 +348,6 @@ GEM
       puma (>= 2.7)
     racc (1.8.1)
     rack (3.2.6)
-    rack-proxy (0.7.7)
-      rack
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -475,13 +474,6 @@ GEM
     scrypt (3.0.7)
       ffi-compiler (>= 1.0, < 2.0)
     securerandom (0.4.1)
-    semantic_range (3.0.0)
-    shakapacker (7.2.3)
-      activesupport (>= 5.2)
-      package_json
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     shellany (0.0.1)
     sidekiq (8.0.10)
       connection_pool (>= 2.5.0)
@@ -525,7 +517,6 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yaml (0.4.0)
-    yui-compressor (0.12.0)
     zeitwerk (2.8.2)
 
 PLATFORMS
@@ -564,6 +555,7 @@ DEPENDENCIES
   guard-rspec
   http-2
   image_processing
+  jsbundling-rails
   listen
   local_time
   mime-types
@@ -576,7 +568,6 @@ DEPENDENCIES
   postmark-rails
   puma
   puma_worker_killer
-  rack-proxy (~> 0.7.7)
   rails (~> 8.0.0)
   rails-controller-testing
   rakismet
@@ -592,14 +583,12 @@ DEPENDENCIES
   ruby-mp3info
   rubyzip
   scrypt
-  shakapacker (~> 7.2)
   sidekiq
   skylight
   sometimes
   sprockets-rails
   turbo-rails
   webmock
-  yui-compressor
 
 BUNDLED WITH
   4.0.6

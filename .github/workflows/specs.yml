@@ -41,8 +41,6 @@ jobs:
       with:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          **/packs-test
-          tmp/webpacker
           ./node_modules/
         key: ${{ runner.os }}-yarn6-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |

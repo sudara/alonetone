@@ -9,7 +9,10 @@
   <%= yield(:open_graph).presence || render(partial: 'shared/open_graph') %>
   <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
   <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
-  <%= javascript_pack_tag "application", 'data-turbo-track': 'reload', defer: true  %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <% if (key = Rails.configuration.alonetone.bugsnag_api_key).present? %>
+    <meta name="bugsnag-api-key" content="<%= key %>">
+  <% end %>
   <%= csrf_meta_tag %>
   <%= render partial: 'shared/javascript_payload' %>
   <%= render partial: 'shared/analytics' %>

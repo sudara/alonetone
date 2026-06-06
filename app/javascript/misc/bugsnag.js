@@ -1,9 +1,11 @@
 import Bugsnag from '@bugsnag/js'
 
+const apiKeyMeta = document.querySelector('meta[name="bugsnag-api-key"]')
+const apiKey = apiKeyMeta?.content || 'A'.repeat(32)
+
 Bugsnag.start({
-  apiKey: '<%= Rails.configuration.alonetone.bugsnag_api_key || "A"*32 %>',
+  apiKey,
   appType: 'js',
-  <%= "logger: null," if Rails.env.development? %>
   enabledReleaseStages: ['production'],
   user: {
     name: window.username,
