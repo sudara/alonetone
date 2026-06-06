@@ -1,13 +1,12 @@
 import Bugsnag from '@bugsnag/js'
 
-const apiKeyMeta = document.querySelector('meta[name="bugsnag-api-key"]')
-const apiKey = apiKeyMeta?.content || 'A'.repeat(32)
+const apiKey = document.querySelector('meta[name="bugsnag-api-key"]')?.content
 
-Bugsnag.start({
-  apiKey,
-  appType: 'js',
-  enabledReleaseStages: ['production'],
-  user: {
-    name: window.username,
-  },
-})
+if (apiKey) {
+  Bugsnag.start({
+    apiKey,
+    appType: 'js',
+    enabledReleaseStages: ['production'],
+    user: { name: window.username },
+  })
+}
