@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "01b0a47ba693a951a53277839bf5c4c74e11427f0226c61ca98266a8d85ae24b",
+      "note": "Pre-existing weak-confidence XSS on internal moderator-only edit view; baselined when brakeman was first wired up."
+    },
+    {
+      "fingerprint": "44a36497aa632f3942e7748889f884259dcec145fd83d473a79d167f4bf823af",
+      "note": "Pre-existing weak-confidence XSS on admin-only asset partial; baselined when brakeman was first wired up."
+    },
+    {
+      "fingerprint": "b2f9cbcf3d1086506bba6cea934c8ace3c6c2779e53dbe87ef206aedf7282476",
+      "note": "Pre-existing weak-confidence XSS in shared/_footer 'currently online' list; baselined when brakeman was first wired up."
+    },
+    {
+      "fingerprint": "d9fc90598b30924c5c7a84af1483c0721abb8f0485271859371305ea1ff06f6c",
+      "note": "Pre-existing weak-confidence XSS on admin user partial; baselined when brakeman was first wired up."
+    },
+    {
+      "fingerprint": "f10b8ee818563a2f4147582cb084f3aed0d659e9b71e919996c71a8b740846ab",
+      "note": "Pre-existing weak-confidence XSS on admin/secretz debug view; baselined when brakeman was first wired up."
+    }
+  ],
+  "updated": "2026-05-21",
+  "brakeman_version": "8.0.4"
+}

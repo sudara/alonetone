@@ -93,6 +93,19 @@ jobs:
 
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
+
+  scan_ruby:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 4.0.3
+        bundler-cache: true
+    - name: Brakeman
+      run: bin/brakeman --no-pager -i config/brakeman.ignore
+
   # deploy:
   #   runs-on: ubuntu-20.04
   #   needs: test
