@@ -2,9 +2,7 @@
 <div class="footer_alonetoners_online">
   <h3>Alonetoners online</h3>
     <div>
-        <%= User.currently_online.collect do |user| %>
-          <% link_to user.name, main_app.user_home_path(user.login) %>
-        <% end.join(', ').html_safe %>
+      <%= safe_join(User.currently_online.map { |user| link_to user.name, main_app.user_home_path(user.login) }, ', ') %>
     </div>
 </div>
 <% end %>

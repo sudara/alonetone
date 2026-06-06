@@ -30,7 +30,7 @@
         <% end %>
       </div>
       <div class="playlist_size">
-        <%= "<span data-playlist-sort-target='size'>#{@playlist.tracks.size}</span> tracks by #{@playlist.is_mix? ? "various artists" : @playlist.user.name}".html_safe %>
+        <%= tag.span(@playlist.tracks.size, data: { playlist_sort_target: 'size' }) %> tracks by <%= @playlist.is_mix? ? 'various artists' : @playlist.user.name %>
       </div>
     <div class="small_spinner" data-playlist-sort-target="spinner"></div>
     </div>
