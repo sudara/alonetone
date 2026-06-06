@@ -53,8 +53,6 @@ gem 'newrelic_rpm'
 gem 'skylight'
 gem 'sidekiq'
 gem 'dalli'
-# Pinned to < 3: Rails 7.2.x's MemCacheStore still passes a positional Hash to ConnectionPool.new, which 3.0 made kwargs-only.
-gem 'connection_pool', '< 3'
 
 group :development do
   gem 'perf_check', require: false
