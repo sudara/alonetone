@@ -8,6 +8,7 @@ gem 'rails', '~> 8.0.0'
 gem 'mysql2'
 gem 'puma'
 gem 'puma_worker_killer'
+gem 'bootsnap', require: false
 
 # ruby
 gem 'sometimes'
@@ -43,6 +44,7 @@ gem 'postmark-rails'
 gem 'jsbundling-rails'
 gem 'sprockets-rails'
 gem 'dartsass-rails'
+gem 'stimulus-rails'
 gem 'turbo-rails'
 
 # monitoring & perf
@@ -58,9 +60,14 @@ group :development do
   gem 'perf_check', require: false
   gem 'annotate', require: false
   gem 'faker', require: false
+  gem 'brakeman', require: false
   # Available "channels" of rubocop for code climate:
   # https://github.com/codeclimate/codeclimate-rubocop/branches/all?utf8=✓&query=channel%2Frubocop
   gem 'rubocop', require: false # synced to .codeclimate.yml
+end
+
+group :development, :test do
+  gem 'debug', require: false
 end
 
 ## Who loves tests! You do? You do!
@@ -82,8 +89,3 @@ group :test do
   gem 'webmock', require: false
 end
 
-# todo, reenable test after this bug resolved:
-# https://github.com/ruby/debug/issues/852
-# group :development, :test do
-#   gem 'debug'
-# end
