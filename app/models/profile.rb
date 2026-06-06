@@ -32,6 +32,7 @@ end
 #  twitter    :string(255)
 #  user_agent :string(255)
 #  website    :string(255)
+#  youtube    :string(255)
 #  updated_at :datetime
 #  user_id    :integer
 #
