@@ -58,8 +58,8 @@ module ApplicationHelper
   def awesome_truncate(text, length = 30, truncate_string = "&hellip;")
     return "" if text.blank?
 
-    l = length - truncate_string.mb_chars.length
-    result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*;?/m][/.*[\w;]/m] || '') + truncate_string : text
+    l = length - truncate_string.length
+    result = text.length > length ? (text[/\A.{#{l}}\w*;?/m][/.*[\w;]/m] || '') + truncate_string : text
     result.html_safe
   end
 

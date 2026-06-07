@@ -30,6 +30,16 @@ RSpec.describe ApplicationHelper, type: :helper do
     )
   end
 
+  describe "#awesome_truncate" do
+    it "truncates multibyte text without cutting through characters" do
+      expect(awesome_truncate("Café périferôl", 8)).to eql("Caf&hellip;")
+    end
+
+    it "does not truncate text that already fits" do
+      expect(awesome_truncate("short", 8)).to eql("short")
+    end
+  end
+
   describe "Pagy URL generation" do
     # These URLs are public and indexed by search engines. Our initializer overrides
     # Pagy::Linkable#compose_url to alphabetize query params — matching the byte-stable
