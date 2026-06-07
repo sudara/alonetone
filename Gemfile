@@ -86,4 +86,3 @@ group :test do
   gem 'capybara-playwright-driver'
   gem 'webmock', require: false
 end
-
