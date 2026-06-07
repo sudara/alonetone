@@ -6,13 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Stack
 
-Rails 7.1 on Ruby 4.0, MySQL, Sidekiq, Active Storage (S3 in prod, local in dev), Hotwire Turbo + Stimulus 3, Shakapacker (webpack), SCSS with a dark/light theme system. Audio playback uses the custom `@alonetone/stitches` library. Auth is Authlogic (with scrypt); spam detection is Rakismet (Akismet).
+Rails 8.1 on Ruby 4.0, MySQL, Sidekiq, Active Storage (S3 in prod, local in dev), Hotwire Turbo + Stimulus 3, Propshaft + jsbundling-rails (esbuild) for assets, dartsass-rails for SCSS with a dark/light theme system. Audio playback uses the custom `@alonetone/stitches` library. Auth is Authlogic (with scrypt); spam detection is Rakismet (Akismet).
 
 ## Development commands
 
 ```bash
 rails setup              # copies *.example.yml configs, touches JS stubs, runs db:setup
-bin/dev                  # boot server (Rails + Shakapacker + dart-sass via foreman)
+bin/dev                  # boot server (Rails + esbuild watch + dart-sass via foreman)
 bundle exec guard start  # watch-mode RSpec — runs the matching spec when a file changes
 bundle exec rspec spec/features/home_page_spec.rb  # run a single spec
 bundle exec rspec --exclude-pattern "spec/features/**/*_spec.rb"  # fast, non-browser suite

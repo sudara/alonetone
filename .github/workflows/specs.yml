@@ -81,7 +81,7 @@ jobs:
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
 
-    # Sprockets' manifest.js uses `link_tree ../builds`, so app/assets/builds/*.css
+    # Propshaft serves prebuilt assets from app/assets/builds, so the CSS and JS
     # must exist before specs boot. Locally bin/dev runs dartsass:watch and
     # yarn build:watch; CI has no equivalent, so we build once here.
     - name: Build dartsass CSS
