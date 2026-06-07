@@ -9,7 +9,7 @@ RSpec.describe Admin::MassInvitesController, type: :request do
     it 'sees an overview of all active mass invites' do
       get '/admin/mass_invites'
       expect(response).to have_http_status(:ok)
-      expect(response).to render_template(:index)
+      expect(response.body).to include('Active')
       expect(response.body).to match_css('table')
       expect(response.body).to match_css('tr', count: MassInvite.where(archived: false).count)
     end
@@ -17,7 +17,7 @@ RSpec.describe Admin::MassInvitesController, type: :request do
     it 'sees an overview of all archived mass invites' do
       get '/admin/mass_invites?filter_by=archived'
       expect(response).to have_http_status(:ok)
-      expect(response).to render_template(:index)
+      expect(response.body).to include('Archived')
       expect(response.body).to match_css('table')
       expect(response.body).to match_css('tr', count: MassInvite.where(archived: true).count)
     end
@@ -25,7 +25,7 @@ RSpec.describe Admin::MassInvitesController, type: :request do
     it 'sees a form to create a new mass invite' do
       get '/admin/mass_invites/new'
       expect(response).to have_http_status(:ok)
-      expect(response).to render_template(:new)
+      expect(response.body).to include('Create a new mass invite')
       expect(response.body).to match_css('form')
     end
 
@@ -50,7 +50,7 @@ RSpec.describe Admin::MassInvitesController, type: :request do
         params: { mass_invite: { name: '', token: '' } }
       )
       expect(response).to have_http_status(:ok)
-      expect(response).to render_template(:new)
+      expect(response.body).to include('Create a new mass invite')
       expect(response.body).to match_css('div.field.invalid')
     end
 

@@ -66,12 +66,8 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
 
-  # Render views in controller specs by default.
-  config.render_views
-
   config.include ActiveJob::TestHelper
   config.include ActiveSupport::Testing::TimeHelpers
-  config.include Authlogic::TestCase, type: :controller
   config.include Authlogic::TestCase, type: :request
   config.include RSpec::Support::AkismetHelpers
   config.include RSpec::Support::CapybaraHelpers, type: :feature
@@ -100,10 +96,6 @@ RSpec.configure do |config|
   end
 
   config.before(:example, type: :request) do
-    activate_authlogic
-  end
-
-  config.before(:example, type: :controller) do
     activate_authlogic
   end
 

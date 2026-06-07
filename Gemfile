@@ -75,7 +75,6 @@ group :test do
   gem 'guard-rspec', require: false
   gem 'listen', require: false
   gem "percy-capybara"
-  gem 'rails-controller-testing'
   gem 'rb-fsevent', require: false
   gem 'rspec', require: false
   gem 'rspec-core', require: false
