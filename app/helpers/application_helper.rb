@@ -209,7 +209,7 @@ module ApplicationHelper
     extension = path.split('.')[1]
     image_tag("illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable') +
       image_tag("illustrations/#{name}-#{other_theme_name}.#{extension}", class: 'themeable hidden')
-  rescue Sprockets::Rails::Helper::AssetNotFound
+  rescue Propshaft::MissingAssetError
     tag.img "illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
   end
 
