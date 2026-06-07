@@ -30,13 +30,13 @@ jobs:
         sudo apt-get install libvips libvips-dev audiowaveform rustc # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
         vips --version
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v5
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: |
@@ -60,7 +60,7 @@ jobs:
       run: yarn jest
       if: ${{ !matrix.morph }}
 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v5
       id: playwright-cache
       with:
         path: ~/.cache/ms-playwright
@@ -96,7 +96,7 @@ jobs:
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -110,6 +110,5 @@ jobs:
   #   needs: test
   #   if: github.ref == 'refs/heads/master'
   #   steps
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v6
   #     - name: Deploy
-
