@@ -231,7 +231,6 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hashdiff (1.0.1)
-    http-2 (0.11.0)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -564,7 +563,6 @@ DEPENDENCIES
   faker
   guard
   guard-rspec
-  http-2
   image_processing
   jsbundling-rails
   listen

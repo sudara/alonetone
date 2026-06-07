@@ -15,7 +15,6 @@ gem 'sometimes'
 gem 'awesome_print', require: 'ap'
 
 # uploading
-gem 'http-2' # used by AWS SDK but not in dependencies
 gem 'aws-sdk-cloudfront'
 gem 'aws-sdk-s3'
 gem 'image_processing'
