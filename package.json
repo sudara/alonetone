@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "esbuild app/javascript/application.js --bundle --outdir=app/assets/builds --global-name=Alonetone --sourcemap --minify --target=es2022 --loader:.svg=text",
-    "build:watch": "yarn build --watch",
+    "build": "esbuild app/javascript/application.js --bundle --outdir=app/assets/builds --global-name=Alonetone --minify --target=es2022 --loader:.svg=text",
+    "build:watch": "yarn build --sourcemap=inline --watch",
     "test:js": "jest"
   },
   "dependencies": {
