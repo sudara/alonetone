@@ -90,6 +90,9 @@ jobs:
     - name: Build esbuild JS
       run: yarn build
 
+    - name: Build admin Tailwind CSS
+      run: yarn build:admin-css
+
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
 

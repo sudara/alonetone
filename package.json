@@ -2,6 +2,8 @@
   "scripts": {
     "build": "esbuild app/javascript/application.js --bundle --outdir=app/assets/builds --global-name=Alonetone --minify --target=es2022 --loader:.svg=text",
     "build:watch": "yarn build --sourcemap=inline --watch",
+    "build:admin-css": "tailwindcss -i app/assets/stylesheets/admin.tailwind.css -o app/assets/builds/admin.css --minify",
+    "build:admin-css:watch": "tailwindcss -i app/assets/stylesheets/admin.tailwind.css -o app/assets/builds/admin.css --watch",
     "test:js": "jest"
   },
   "dependencies": {
@@ -21,13 +23,15 @@
     "@percy/cli": "^1.31.12",
     "@swc/core": "^1.15.40",
     "@swc/jest": "^0.2.39",
+    "@tailwindcss/cli": "^4.3.0",
     "eslint": "^8.31.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "jest": "^29",
     "jest-environment-jsdom": "^29",
-    "playwright": "1.59"
+    "playwright": "1.59",
+    "tailwindcss": "^4.3.0"
   },
   "browserslist": [
     "defaults"

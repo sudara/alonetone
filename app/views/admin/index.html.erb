@@ -1,6 +1,14 @@
-<div id="admin_columns">
-  <div class="admin_column_left box">
-    <h2>Admin</h2>
-    <%= render partial: 'admin/navigation' %>
+<div class="space-y-6">
+  <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <% [["New users", "—"], ["New tracks", "—"], ["New comments", "—"], ["Listens", "—"]].each do |label, value| %>
+      <div class="rounded-xl border border-border bg-surface-raised p-4">
+        <p class="text-sm text-fg-muted"><%= label %></p>
+        <p class="mt-1 text-2xl font-semibold"><%= value %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="rounded-xl border border-border bg-surface-raised p-6">
+    <p class="text-sm text-fg-muted">Trend charts (new users / tracks / comments) land in Phase 1.</p>
   </div>
 </div>

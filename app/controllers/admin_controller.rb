@@ -1,7 +1,13 @@
 class AdminController < ApplicationController
+  include Admin::Range
+
+  layout 'admin'
   before_action :moderator_only
 
-  def index; end
+  def index
+    @admin_title = 'Dashboard'
+    @admin_range_enabled = true
+  end
 
   def secretz
     @ip_listens = Listen.most_active_ips

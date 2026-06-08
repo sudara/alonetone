@@ -37,6 +37,8 @@ Rails.application.routes.draw do
       end
     end
     resources :mass_invites, param: :token
+    resources :listens, only: [:index]
+    get 'devops', to: 'devops#index', as: :devops
   end
 
   get '/get_an_account', :to => 'account_requests#new'

@@ -1,0 +1,10 @@
+<div class="inline-flex rounded-lg border border-border bg-surface-raised p-0.5 text-sm">
+  <% admin_range_options.each do |key, opt| %>
+    <%= link_to opt[:label], url_for(request.query_parameters.merge(range: key)),
+          class: class_names(
+            "rounded-md px-2.5 py-1 font-medium transition-colors",
+            "bg-accent text-accent-fg" => key == admin_range_key,
+            "text-fg-muted hover:text-fg" => key != admin_range_key
+          ) %>
+  <% end %>
+</div>

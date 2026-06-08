@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source "../../views/admin";
+@source "../../javascript/controllers";
+
+@theme {
+  --color-surface: #151414;
+  --color-surface-raised: #1d1b1b;
+  --color-surface-overlay: #232120;
+  --color-border: #353535;
+  --color-border-strong: #4f4d4d;
+
+  --color-fg: #e6e8e8;
+  --color-fg-muted: #a6abab;
+  --color-fg-faint: #6e6d6d;
+
+  --color-accent: #eb7b0c;
+  --color-accent-hover: #ffa31a;
+  --color-accent-fg: #151414;
+
+  --color-success: #2b8800;
+  --color-success-hover: #67c906;
+  --color-danger: #e02a02;
+  --color-danger-hover: #f04e1a;
+  --color-warning: #ffa31a;
+}
