@@ -23,6 +23,10 @@ en:
             login:
               login_not_allowed: not allowed.
               login_not_unique: is already taken.
+        reserved_word:
+          attributes:
+            name:
+              invalid_regexp: is not a valid regular expression.
 
   errors:
     messages:
