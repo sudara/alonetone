@@ -36,11 +36,7 @@ Rails.application.routes.draw do
         put :restore
       end
     end
-    resources :reserved_words do
-      member do
-        put :delete
-      end
-    end
+    resources :reserved_words, only: %i[index new create destroy]
     resources :mass_invites, param: :token
   end
 
