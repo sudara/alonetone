@@ -71,7 +71,6 @@ Rails.application.routes.draw do
 
   # admin stuff
   get 'admin' => 'admin#index'
-  get 'secretz' => 'admin#secretz'
   put 'toggle_theme' => 'pages#toggle_theme'
 
   get '404', to: "pages#four_oh_four"

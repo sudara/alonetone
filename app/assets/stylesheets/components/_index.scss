@@ -1,6 +1,5 @@
 // Barrel file for all component stylesheets. Dart Sass does not support
 // glob imports, so new components must be added here explicitly.
-@import 'admin';
 @import 'big_form';
 @import 'blank_slate';
 @import 'comments';
@@ -22,7 +21,6 @@
 @import 'radio';
 @import 'responsive_grid';
 @import 'search_results';
-@import 'secretz';
 @import 'shared';
 @import 'single_and_playlists_player/playlist_cover_view';
 @import 'single_and_playlists_player/playlist_sidebar';
