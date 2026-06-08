@@ -8,8 +8,8 @@ en:
         account_request:
           attributes:
             login:
-              login_not_allowed: Sorry, login is taken. be creative!
-              login_not_unique: Sorry, login is taken. be creative!
+              login_not_allowed: Sorry, that login isn't allowed. Be creative!
+              login_not_unique: Sorry, login is taken. Be creative!
               must_be_alphanumeric: should use only letters and numbers.
             details:
               details_too_short: "must be at least 40 characters: Please link to your music/website or add more info!"

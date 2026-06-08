@@ -36,7 +36,7 @@ class User < ApplicationRecord
     login_is_allowed: {
       if: :will_save_change_to_login?
     }
-  
+
   validates :password,
     confirmation: { if: :require_password? },
     length: {

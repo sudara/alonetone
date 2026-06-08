@@ -7,11 +7,11 @@ RSpec.describe LoginIsAllowedValidator do
         include ActiveModel::Validations
 
         attr_reader :login
-    
+
         def initialize(login)
           @login = login
         end
-    
+
         validates :login, login_is_allowed: true
     end
 
@@ -34,7 +34,7 @@ RSpec.describe LoginIsAllowedValidator do
             error: :login_not_unique
           }
         ]
-    )
+      )
     end
 
     it 'disallows duplicate account request (waiting) logins' do
@@ -46,7 +46,7 @@ RSpec.describe LoginIsAllowedValidator do
             error: :login_not_unique
           }
         ]
-    )
+      )
     end
 
     it 'disallows reserved words' do
@@ -58,11 +58,11 @@ RSpec.describe LoginIsAllowedValidator do
             error: :login_not_allowed
           }
         ]
-    )
+      )
     end
 
     it 'disallows names used by application routes' do
-      ['admin', 'format', 'user_id', 'rails'].each do |login|
+      %w[admin format user_id rails].each do |login|
         record = LoginIsAllowedValidatorModel.new(login)
         expect(record).to_not be_valid
         expect(record.errors.details).to eq(

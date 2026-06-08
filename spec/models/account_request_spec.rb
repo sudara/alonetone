@@ -37,6 +37,20 @@ RSpec.describe AccountRequest, type: :model do
       expect(account_request).not_to be_valid
       expect(account_request.errors[:login]).to_not be_empty
     end
+
+    it "should not allow a login already reserved by another waiting request" do
+      account_request = valid_account_request
+      account_request.login = account_requests(:waiting).login
+      expect(account_request).not_to be_valid
+      expect(account_request.errors[:login]).to_not be_empty
+    end
+
+    it "should reject a login that collides with an application route" do
+      account_request = valid_account_request
+      account_request.login = "playlists"
+      expect(account_request).not_to be_valid
+      expect(account_request.errors[:login]).to_not be_empty
+    end
   end
 
   context "on approval" do
