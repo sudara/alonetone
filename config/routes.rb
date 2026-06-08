@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'possibly_deleted_user/:id', :to => 'users#show', as: 'possibly_deleted_user'
 
+    get 'shared_ips', to: 'users#shared_ips'
+    get 'bandwidth', to: 'users#bandwidth'
+    get 'most_played', to: 'assets#most_played'
+    get 'all_time', to: 'assets#all_time'
+
     resources :account_requests, path: 'account_requests/(:filter_by)' do
       member do
         put :approve

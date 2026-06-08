@@ -8,6 +8,8 @@
    ] %>
 
 <div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_user_view_tabs(:list) %>
+
   <%= form_with url: admin_users_path, method: :get, class: "flex gap-2" do |form| %>
     <%= form.search_field :filter_by,
           value: (params[:filter_by] unless predefined.include?(params[:filter_by])),

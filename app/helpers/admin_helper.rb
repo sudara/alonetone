@@ -73,6 +73,22 @@ module AdminHelper
 
   def admin_btn(kind) = ADMIN_BTN.fetch(kind)
 
+  def admin_user_view_tabs(current)
+    [
+      { label: 'List', url: admin_users_path, active: current == :list },
+      { label: 'Shared IPs', url: admin_shared_ips_path, active: current == :shared_ips },
+      { label: 'Bandwidth', url: admin_bandwidth_path, active: current == :bandwidth }
+    ]
+  end
+
+  def admin_track_view_tabs(current)
+    [
+      { label: 'List', url: admin_assets_path, active: current == :list },
+      { label: 'Most Played', url: admin_most_played_path, active: current == :most_played },
+      { label: 'All-Time', url: admin_all_time_path, active: current == :all_time }
+    ]
+  end
+
   def admin_status_badge(status)
     style = STATUS_BADGE_STYLES.fetch(status.to_s, "bg-surface-overlay text-fg-muted")
     content_tag :span, status.to_s.titleize,

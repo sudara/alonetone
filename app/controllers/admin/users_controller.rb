@@ -2,12 +2,22 @@ module Admin
   class UsersController < Admin::BaseController
     layout 'admin'
 
-    before_action :set_user, except: %i[index]
+    before_action :set_user, except: %i[index shared_ips bandwidth]
     before_action :admin_only, only: %i[purge]
 
     def index
       @admin_title = 'Users'
       @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]).includes(:profile, :avatar_image_blob))
+    end
+
+    def shared_ips
+      @admin_title = 'Shared IPs'
+      @shared_ips = User.with_same_ip
+    end
+
+    def bandwidth
+      @admin_title = 'Bandwidth'
+      @users = User.where('bandwidth_used > 0').order(bandwidth_used: :desc).limit(25)
     end
 
     def show

@@ -10,6 +10,21 @@ module Admin
       @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]).includes(possibly_deleted_user: %i[profile avatar_image_blob]))
     end
 
+    def most_played
+      @admin_title = 'Most Played'
+      @admin_range_enabled = true
+      scope = admin_range ? Listen.where(created_at: admin_range) : Listen
+      @play_counts = scope.group(:asset_id).order('count_all DESC').limit(25).count
+      @assets_by_id = Asset.with_deleted.where(id: @play_counts.keys)
+        .includes(possibly_deleted_user: %i[profile avatar_image_blob]).index_by(&:id)
+    end
+
+    def all_time
+      @admin_title = 'All-Time Plays'
+      @assets = Asset.order(listens_count: :desc).limit(25)
+        .includes(possibly_deleted_user: %i[profile avatar_image_blob])
+    end
+
     def unspam
       AssetCommand.new(@asset).unspam_and_restore_with_relations
       respond_with_asset_row(fallback_filter: :not_spam, notice: "\"#{@asset.title}\" has been unspammed and restored.")
