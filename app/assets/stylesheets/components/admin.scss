@@ -273,7 +273,9 @@
       padding: 0.375em 0.5em;
     }
   }
-  form.new_mass_invite {
-    padding: 0 1em;
+  form {
+    &.new_mass_invite, &.new_reserved_word {
+      padding: 0 1em;
+    }
   }
 }

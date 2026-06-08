@@ -53,6 +53,24 @@ RSpec.describe User, type: :model do
       expect(new_user(login: "aa")).not_to be_valid
     end
 
+    it "rejects a login that collides with an application route" do
+      expect(new_user(login: "playlists")).not_to be_valid
+    end
+
+    it "rejects a login already taken by another user" do
+      expect(new_user(login: users(:jamie_kiesl).login)).not_to be_valid
+    end
+
+    it "allows a login matching a waiting account request (the approval flow creates such users)" do
+      expect(new_user(login: account_requests(:waiting).login)).to be_valid
+    end
+
+    it "does not re-check login uniqueness when the login is unchanged" do
+      user = users(:sudara)
+      user.display_name = "A New Display Name"
+      expect(user).to be_valid
+    end
+
     # https://www.wikiwand.com/en/Email_address#/Examples
     it "should validate email" do
       expect(new_user(email: "userEmail1&@gmail.com")).to be_valid
