@@ -58,8 +58,8 @@ module ApplicationHelper
   def awesome_truncate(text, length = 30, truncate_string = "&hellip;")
     return "" if text.blank?
 
-    l = length - truncate_string.mb_chars.length
-    result = text.mb_chars.length > length ? (text[/\A.{#{l}}\w*;?/m][/.*[\w;]/m] || '') + truncate_string : text
+    l = length - truncate_string.length
+    result = text.length > length ? (text[/\A.{#{l}}\w*;?/m][/.*[\w;]/m] || '') + truncate_string : text
     result.html_safe
   end
 
@@ -209,7 +209,7 @@ module ApplicationHelper
     extension = path.split('.')[1]
     image_tag("illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable') +
       image_tag("illustrations/#{name}-#{other_theme_name}.#{extension}", class: 'themeable hidden')
-  rescue Sprockets::Rails::Helper::AssetNotFound
+  rescue Propshaft::MissingAssetError
     tag.img "illustrations/#{name}-#{theme_name}.#{extension}", class: 'themeable'
   end
 

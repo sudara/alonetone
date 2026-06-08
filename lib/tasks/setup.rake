@@ -18,7 +18,7 @@ namespace :setup do
     end
   end
 
-  desc "Touch JavaScript stubs to make Webpacker run without errors"
+  desc "Touch JavaScript stubs so esbuild can resolve gitignored license files"
   task :touch_js do
     FileUtils.touch(Rails.root.join("app", "javascript", "animation", "MorphSVGPlugin.js"))
   end

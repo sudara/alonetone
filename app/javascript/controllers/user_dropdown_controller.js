@@ -8,8 +8,8 @@ export default class extends Controller {
 
   initialize() {
     this.currentlyOpen = false
-    this.lightStyles = document.querySelectorAll('link')[0]
-    this.darkStyles = document.querySelectorAll('link')[1]
+    this.lightStyles = document.querySelector('link[data-theme="light"]')
+    this.darkStyles = document.querySelector('link[data-theme="dark"]')
   }
 
   open(e) {

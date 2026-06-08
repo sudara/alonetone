@@ -1,0 +1,14 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "44a36497aa632f3942e7748889f884259dcec145fd83d473a79d167f4bf823af",
+      "note": "False positive: <%== %> wraps 'Deleted ' + local_time_ago(timestamp). No user input flows into the interpolation."
+    },
+    {
+      "fingerprint": "d9fc90598b30924c5c7a84af1483c0721abb8f0485271859371305ea1ff06f6c",
+      "note": "False positive: <%== %> wraps 'Deleted ' + local_time_ago(timestamp). No user input flows into the interpolation."
+    }
+  ],
+  "updated": "2026-05-21",
+  "brakeman_version": "8.0.4"
+}

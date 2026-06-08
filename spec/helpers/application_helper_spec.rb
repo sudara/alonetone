@@ -2,6 +2,10 @@
 
 require "rails_helper"
 
+# Pagy autoloads Pagy::Request lazily on first real paginated request; load it
+# explicitly so these specs pass in isolation, not just after the full suite warms it.
+require "pagy/classes/request"
+
 RSpec.describe ApplicationHelper, type: :helper do
   it "makes sure links are nofollow/ugc" do
     expect(nofollowize('<a href="hey">')).to eql('<a rel="nofollow ugc" href="hey">')
@@ -26,11 +30,21 @@ RSpec.describe ApplicationHelper, type: :helper do
     )
   end
 
+  describe "#awesome_truncate" do
+    it "truncates multibyte text without cutting through characters" do
+      expect(awesome_truncate("Café périferôl", 8)).to eql("Caf&hellip;")
+    end
+
+    it "does not truncate text that already fits" do
+      expect(awesome_truncate("short", 8)).to eql("short")
+    end
+  end
+
   describe "Pagy URL generation" do
     # These URLs are public and indexed by search engines. Our initializer overrides
     # Pagy::Linkable#compose_url to alphabetize query params — matching the byte-stable
     # output Rails url_for produced under pagy 6/9. Changing these expectations means
-    # changing canonical URLs. # trigger autoload of Pagy::Request
+    # changing canonical URLs.
 
     def make_pagy(path:, query: "", page: 1, **opts)
       params  = Rack::Utils.parse_nested_query(query)

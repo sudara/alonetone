@@ -5,7 +5,7 @@ RSpec.describe AccountRequestsController, type: :request do
     it 'shows a form to create a new user' do
       get "/get_an_account"
       expect(response).to have_http_status(:ok)
-      expect(response).to render_template(:new)
+      expect(response.body).to include('Get an Account')
       expect(response.body).to match_css('form')
     end
 
@@ -24,8 +24,8 @@ RSpec.describe AccountRequestsController, type: :request do
           }
         )
       end.to change(AccountRequest, :count).by(+1)
-      expect(response).to render_template('thank_you')
       expect(response).to have_http_status(303)
+      expect(response.body).to include('Expect an email!')
       expect(AccountRequest.last).to be_waiting
     end
 
@@ -44,8 +44,8 @@ RSpec.describe AccountRequestsController, type: :request do
           }
         )
       end.to change(AccountRequest, :count).by(+1)
-      expect(response).to render_template('thank_you')
       expect(response).to have_http_status(303)
+      expect(response.body).to include('Expect an email!')
       expect(AccountRequest.last).to be_denied
       expect(AccountRequest.last.review_reason).to eq("Rakismet marked as spam")
     end
@@ -65,7 +65,7 @@ RSpec.describe AccountRequestsController, type: :request do
           }
         )
       end.to change(AccountRequest, :count).by(+1)
-      expect(response).to render_template('thank_you')
+      expect(response.body).to include('Expect an email!')
       expect(AccountRequest.last).to be_waiting
     end
 
@@ -84,7 +84,7 @@ RSpec.describe AccountRequestsController, type: :request do
         )
       end.to_not change(User, :count)
       expect(response).to have_http_status(422)
-      expect(response).to render_template(:new)
+      expect(response.body).to include('Get an Account')
       expect(response.body).to match_css('div.inline_form_error')
     end
   end

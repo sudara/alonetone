@@ -6,7 +6,7 @@ RSpec.describe FollowingController, type: :request do
   end
 
   it "should successfully follow someone" do
-    get "/follow/sudara"
+    expect { get "/follow/sudara" }.to change { users(:brand_new_user).follows.count }.by(1)
     follow_redirect!
     expect(response).to be_successful
   end
@@ -25,12 +25,16 @@ RSpec.describe FollowingController, type: :request do
     follow_redirect!
 
     get "/follow/sudara"
+    expect(response).to redirect_to(root_path)
+    expect(flash[:error]).to be_present
     follow_redirect!
     expect(response).to be_successful
   end
 
   it "should not unfollow someone you are not already following" do
-    get "/follow/arthur"
+    get "/unfollow/sudara"
+    expect(response).to redirect_to(root_path)
+    expect(flash[:error]).to be_present
     follow_redirect!
     expect(response).to be_successful
   end

@@ -135,7 +135,7 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     it "actually has the default avatar on disk" do
-      expect(Rails.application.assets.find_asset(UsersHelper.no_avatar_path)).to_not be_nil
+      expect(Rails.application.assets.load_path.find(UsersHelper.no_avatar_path)).to_not be_nil
     end
   end
 end

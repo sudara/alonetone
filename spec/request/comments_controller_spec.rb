@@ -22,7 +22,6 @@ RSpec.describe CommentsController, type: :request do
           }
         )
       end.to change(Comment, :count)
-      puts Comment.last.inspect
       expect(Comment.last.is_spam).to be true
     end
 
@@ -40,7 +39,6 @@ RSpec.describe CommentsController, type: :request do
           }
         )
       end.to change(Comment, :count)
-      puts Comment.last.inspect
       expect(Comment.last.is_spam).to be false
     end
   end
@@ -123,6 +121,278 @@ RSpec.describe CommentsController, type: :request do
         )
       end.not_to change(Comment, :count)
       expect(response).not_to be_successful
+    end
+  end
+
+  context "basics" do
+    let(:asset) { assets(:valid_mp3) }
+    let(:params) do
+      {
+        comment: {
+          body: "Comment",
+          private: "0",
+          commentable_type: "Asset",
+          commentable_id: asset.id
+        },
+        user_id: users(:sudara).login,
+        track_id: asset.permalink
+      }
+    end
+
+    it "allows anyone to view the comments index" do
+      get "/comments"
+
+      expect(response).to be_successful
+      expect(response.body).to include("Recent Comments")
+    end
+
+    it "allows a guest to comment on a track" do
+      expect do
+        post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+      end.to change { Comment.count }.by(1)
+      expect(response).to be_successful
+    end
+
+    it "allows a user to comment on a track" do
+      create_user_session(users(:arthur))
+
+      post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+
+      expect(response).to be_successful
+    end
+
+    it "allows a private comment on a track" do
+      create_user_session(users(:arthur))
+
+      post "/comments",
+        params: params.deep_merge(comment: { private: "1" }),
+        headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+
+      expect(response).to be_successful
+      expect(Comment.last).to be_private
+    end
+  end
+
+  context "spam handling" do
+    it "sends email to track owner if comment was not spam" do
+      create_user_session(users(:sudara))
+      params = {
+        comment: {
+          body: "Comment yo!",
+          commentable_type: "Asset",
+          commentable_id: assets(:valid_arthur_mp3).id
+        },
+        user_id: users(:sudara).login,
+        track_id: assets(:valid_mp3).permalink
+      }
+
+      expect do
+        post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+      end.to change { ActionMailer::Base.deliveries.size }.by(1)
+    end
+
+    it "does not email track owner if comment is spam" do
+      create_user_session(users(:arthur))
+      akismet_stub_response_spam
+      params = {
+        comment: {
+          body: "viagra-test-123",
+          private: "1",
+          commentable_type: "Asset",
+          commentable_id: assets(:valid_arthur_mp3).id
+        },
+        user_id: users(:sudara).login,
+        track_id: assets(:valid_mp3).permalink
+      }
+
+      expect do
+        post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+      end.not_to change { ActionMailer::Base.deliveries.size }
+    end
+
+    it "increments comment_count if comment was not spam" do
+      asset = assets(:valid_mp3)
+      params = {
+        comment: {
+          body: "Comment",
+          private: "0",
+          commentable_type: "Asset",
+          commentable_id: asset.id
+        },
+        user_id: users(:sudara).login,
+        track_id: asset.permalink
+      }
+
+      expect do
+        post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+      end.to change { asset.reload.comments_count }.by(1)
+    end
+
+    it "does not increment comment_count if comment is spam" do
+      asset = assets(:valid_arthur_mp3)
+      akismet_stub_response_spam
+      params = {
+        comment: {
+          body: "viagra-test-123",
+          private: "1",
+          commentable_type: "Asset",
+          commentable_id: asset.id
+        },
+        user_id: users(:sudara).login,
+        track_id: assets(:valid_mp3).permalink
+      }
+
+      post "/comments", params: params, headers: { 'X-Requested-With' => 'XMLHttpRequest' }
+
+      expect(asset.reload.comments_count).to eq(0)
+    end
+  end
+
+  context "private comments made by user" do
+    let(:comment) { comments(:private_comment_on_asset_by_user) }
+
+    it "uses a separate page key for comments made pagination" do
+      create_user_session(users(:sudara))
+      21.times do |i|
+        Comment.create!(
+          commentable: assets(:valid_arthur_mp3),
+          user: users(:arthur),
+          commenter: users(:henri_willig),
+          body: "private made pagination #{i}",
+          private: true
+        )
+      end
+
+      get user_comments_path('henri_willig')
+
+      expect(response.body).to include("page_made=2")
+    end
+
+    it "is visible to user who made the comment on their comment page" do
+      create_user_session(users(:henri_willig))
+      get user_comments_path('henri_willig')
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is visible to admin" do
+      create_user_session(users(:sudara))
+      get user_comments_path('henri_willig')
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is visible to mod" do
+      create_user_session(users(:sandbags))
+      get user_comments_path('henri_willig')
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is not visible to guest" do
+      get user_comments_path('henri_willig')
+
+      expect(response.body).not_to include(comment.body)
+    end
+
+    it "is not visible to normal user" do
+      create_user_session(users(:joeblow))
+      get user_comments_path('henri_willig')
+
+      expect(response.body).not_to include(comment.body)
+    end
+  end
+
+  context "private comments received by user" do
+    let(:comment) { comments(:private_comment_on_asset_by_guest) }
+
+    it "is visible to track owner" do
+      create_user_session(users(:arthur))
+      get user_comments_path('arthur')
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is visible to admin" do
+      create_user_session(users(:sudara))
+      get user_comments_path('arthur')
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is visible to mod" do
+      create_user_session(users(:sandbags))
+      get user_comments_path('arthur')
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is not visible to guest" do
+      get user_comments_path('arthur')
+
+      expect(response.body).not_to include(comment.body)
+    end
+
+    it "is not visible to other user" do
+      create_user_session(users(:henri_willig))
+      get user_comments_path('arthur')
+
+      expect(response.body).not_to include(comment.body)
+    end
+  end
+
+  context "private comments on overall index" do
+    let(:comment) { comments(:private_comment_on_asset_by_user) }
+
+    it "uses a separate page key for spam pagination" do
+      create_user_session(users(:sudara))
+      21.times do |i|
+        Comment.create!(
+          commentable: assets(:valid_arthur_mp3),
+          user: users(:arthur),
+          commenter: users(:henri_willig),
+          body: "spam pagination #{i}",
+          is_spam: true
+        )
+      end
+
+      get "/comments"
+
+      expect(response.body).to include("page_spam=2")
+    end
+
+    it "is not visible to receiver of the private comment" do
+      create_user_session(users(:arthur))
+      get "/comments"
+
+      expect(response.body).not_to include(comment.body)
+    end
+
+    it "is visible to admin" do
+      create_user_session(users(:sudara))
+      get "/comments"
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is visible to mod" do
+      create_user_session(users(:sandbags))
+      get "/comments"
+
+      expect(response.body).to include(comment.body)
+    end
+
+    it "is not visible to guest" do
+      get "/comments"
+
+      expect(response.body).not_to include(comment.body)
+    end
+
+    it "is not visible to other user" do
+      create_user_session(users(:henri_willig))
+      get "/comments"
+
+      expect(response.body).not_to include(comment.body)
     end
   end
 

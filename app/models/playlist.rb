@@ -190,7 +190,7 @@ end
 #  link3         :string(255)
 #  permalink     :string(255)
 #  position      :integer          default(1)
-#  private       :boolean
+#  published     :boolean          default(FALSE)
 #  published_at  :datetime
 #  theme         :string(255)
 #  title         :string(255)

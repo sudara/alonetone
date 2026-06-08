@@ -30,19 +30,17 @@ jobs:
         sudo apt-get install libvips libvips-dev audiowaveform rustc # libexpat1-dev gettext libglib2.0-dev liborc-0.4-dev libfftw3-dev liblcms2-dev libmagickwand-dev libopenexr-dev libcfitsio-dev libgif-dev libgsf-1-dev libmatio-dev libopenslide-dev libpango1.0-dev libpoppler-glib-dev librsvg2-dev libwebp-dev
         vips --version
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v5
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: |
           ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          **/packs-test
-          tmp/webpacker
           ./node_modules/
         key: ${{ runner.os }}-yarn6-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
@@ -62,7 +60,7 @@ jobs:
       run: yarn jest
       if: ${{ !matrix.morph }}
 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v5
       id: playwright-cache
       with:
         path: ~/.cache/ms-playwright
@@ -83,19 +81,34 @@ jobs:
         sudo systemctl start mysql.service
         bin/rails setup:copy_config setup:touch_js db:drop db:create db:schema:load
 
-    # Sprockets' manifest.js uses `link_tree ../builds`, so app/assets/builds/*.css
-    # must exist before specs boot. Locally bin/dev runs dartsass:watch; CI has no
-    # equivalent, so we build once here.
+    # Propshaft serves prebuilt assets from app/assets/builds, so the CSS and JS
+    # must exist before specs boot. Locally bin/dev runs dartsass:watch and
+    # yarn build:watch; CI has no equivalent, so we build once here.
     - name: Build dartsass CSS
       run: bin/rails dartsass:build
 
+    - name: Build esbuild JS
+      run: yarn build
+
     - name: ${{ matrix.name }}
       run: ${{ matrix.command }}
+
+  scan_ruby:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 4.0.3
+        bundler-cache: true
+    - name: Brakeman
+      run: bin/brakeman --no-pager -i config/brakeman.ignore
+
   # deploy:
   #   runs-on: ubuntu-20.04
   #   needs: test
   #   if: github.ref == 'refs/heads/master'
   #   steps
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v6
   #     - name: Deploy
-

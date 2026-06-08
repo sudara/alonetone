@@ -158,8 +158,8 @@ ssh alonetone 'bash -s' -- "$FORCE_BUNDLE" <<'REMOTE_SCRIPT'
     echo
   fi
 
-  # Shakapacker 7+ no longer auto-runs yarn install during assets:precompile,
-  # so we need to install JS deps explicitly before webpack compiles.
+  # jsbundling-rails hooks `yarn build` into assets:precompile but does not run
+  # `yarn install`, so we install JS deps explicitly first when they change.
   if [ "$yarn_inputs_changed" -eq 1 ]; then
     echo "package.json or yarn.lock changed, yarn installing..."
     sudo -u deploy yarn install --frozen-lockfile || { echo "yarn install failed, aborting deploy"; exit 1; }

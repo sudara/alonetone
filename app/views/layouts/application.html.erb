@@ -4,12 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta content="index,follow" name="robots"/>
+  <%= render partial: 'shared/preloads' %>
   <title><%= @page_title ?  "#{@page_title} | alonetone " : 'alonetone' %></title>
   <%= yield(:head) %>
   <%= yield(:open_graph).presence || render(partial: 'shared/open_graph') %>
-  <%= stylesheet_link_tag 'application', disabled: dark_theme? %>
-  <%= stylesheet_link_tag 'dark_theme', disabled: light_theme? %>
-  <%= javascript_pack_tag "application", 'data-turbo-track': 'reload', defer: true  %>
+  <%= stylesheet_link_tag 'application', disabled: dark_theme?, data: { theme: 'light' } %>
+  <%= stylesheet_link_tag 'dark_theme', disabled: light_theme?, data: { theme: 'dark' } %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <% if (key = Rails.configuration.alonetone.bugsnag_api_key).present? %>
+    <meta name="bugsnag-api-key" content="<%= key %>">
+  <% end %>
   <%= csrf_meta_tag %>
   <%= render partial: 'shared/javascript_payload' %>
   <%= render partial: 'shared/analytics' %>

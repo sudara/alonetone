@@ -62,8 +62,10 @@ RSpec.describe AssetsController, type: :request do
 
       get '/', params: { white: true }
 
-      from_spammer = assigns(:assets).count { |a| a.user_id == spammer.id }
-      expect(from_spammer).to eq(2)
+      latest_area = Nokogiri::HTML(response.body).at_css('#home_latest_area').to_html
+      expect(latest_area).to include('spam-track-5')
+      expect(latest_area).to include('spam-track-4')
+      expect(latest_area).not_to include('spam-track-3')
     end
 
     it 'caps a single user to 2 playlists in the recent playlists list' do
@@ -76,8 +78,10 @@ RSpec.describe AssetsController, type: :request do
 
       get '/', params: { white: true }
 
-      from_spammer = assigns(:playlists).count { |p| p.user_id == spammer.id }
-      expect(from_spammer).to eq(2)
+      playlists_area = Nokogiri::HTML(response.body).at_css('#home_playlists_area').to_html
+      expect(playlists_area).to include('spam-playlist-5')
+      expect(playlists_area).to include('spam-playlist-4')
+      expect(playlists_area).not_to include('spam-playlist-3')
     end
 
     # take the latest published (where(private: false)) asset to make sure it
@@ -105,9 +109,18 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to be_successful
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
     end
+
+    it 'disables the form for new users with >= 25 tracks' do
+      get '/upload'
+      expect(response.body).to include('disabled="disabled"')
+    end
   end
 
   context "show" do
+    before do
+      allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(false)
+    end
+
     it "should render without errors" do
       get user_track_path('sudara', 'song1')
       expect(response).to be_successful
@@ -121,6 +134,91 @@ RSpec.describe AssetsController, type: :request do
     it 'shows an assets without an attachment' do
       get user_track_path('henri_willig', 'this-track-has-no-mp3')
       expect(response).to be_successful
+    end
+
+    it "enqueues a CreateAudioFeature job if an asset does not have a waveform" do
+      asset = assets(:valid_mp3_2)
+      asset.audio_feature.delete
+
+      expect {
+        get user_track_path(asset.user.login, asset.id)
+      }.to have_enqueued_job(CreateAudioFeatureJob)
+    end
+
+    it "does not enqueue a CreateAudioFeature job if a waveform is present" do
+      asset = assets(:valid_mp3)
+
+      expect {
+        get user_track_path(asset.user.login, asset.id)
+      }.not_to have_enqueued_job(CreateAudioFeatureJob)
+    end
+
+    it "does not enqueue a CreateAudioFeature job for bots" do
+      allow_any_instance_of(PreventAbuse).to receive(:is_a_bot?).and_return(true)
+      asset = assets(:valid_mp3)
+
+      expect {
+        get user_track_path(asset.user.login, asset.id)
+      }.not_to have_enqueued_job(CreateAudioFeatureJob)
+    end
+
+    context "private comments" do
+      let(:asset) { assets(:valid_arthur_mp3) }
+      let(:private_comment) { comments(:private_comment_on_asset_by_guest) }
+
+      it "shows private comments to the track owner" do
+        create_user_session(users(:arthur))
+        get user_track_path(asset.user.login, asset.id)
+        expect(response.body).to include(private_comment.body)
+      end
+
+      it "shows private comments to admins" do
+        create_user_session(users(:sudara))
+        get user_track_path(asset.user.login, asset.id)
+        expect(response.body).to include(private_comment.body)
+      end
+
+      it "shows private comments to moderators" do
+        create_user_session(users(:sandbags))
+        get user_track_path(asset.user.login, asset.id)
+        expect(response.body).to include(private_comment.body)
+      end
+
+      it "hides private comments from guests" do
+        get user_track_path(asset.user.login, asset.id)
+        expect(response.body).not_to include(private_comment.body)
+      end
+
+      it "hides private comments from other users" do
+        create_user_session(users(:henri_willig))
+        get user_track_path(asset.user.login, asset.id)
+        expect(response.body).not_to include(private_comment.body)
+      end
+    end
+  end
+
+  context "index" do
+    it "renders the track index" do
+      create_user_session(users(:sudara))
+      get user_tracks_path('sudara')
+
+      expect(response).to be_successful
+      expect(response.media_type).to eq('text/html')
+    end
+
+    it "displays a user's track if it is hot" do
+      create_user_session(users(:sudara))
+      assets(:valid_mp3).update(hotness: 2)
+
+      get user_tracks_path('sudara')
+
+      expect(response.body).to include('Hot Tracks this week')
+      expect(response.body).to include('Very good song')
+    end
+
+    it "displays a custom message if a user has no tracks yet" do
+      get user_tracks_path('joeblow')
+      expect(response.body).to include("Looks like joeblow hasn't uploaded anything yet!")
     end
   end
 
@@ -145,6 +243,15 @@ RSpec.describe AssetsController, type: :request do
     it "404s for a track that does not exist" do
       get waveform_user_track_path('sudara', 'no-such-track')
       expect(response).to have_http_status(:not_found)
+    end
+  end
+
+  context "#radio" do
+    %w[those_you_follow songs_you_have_not_heard mangoz_shuffle].each do |source|
+      it "404s when a guest requests #{source}" do
+        get radio_source_home_path(source)
+        expect(response).to have_http_status(:not_found)
+      end
     end
   end
 
@@ -265,6 +372,50 @@ RSpec.describe AssetsController, type: :request do
       post '/brandnewuser/tracks', params: { asset_data: [fixture_file_upload('muppets.mp3', 'audio/mpeg')] }
       follow_redirect!
       expect(response.body).to include('To prevent abuse, new users are limited to 25 uploads in their first day. Come back tomorrow!')
+    end
+  end
+
+  context "#mass_edit" do
+    it "allows a user to edit one track" do
+      asset = assets(:valid_arthur_mp3)
+      create_user_session(users(:arthur))
+
+      get mass_edit_user_tracks_path('arthur'), params: { assets: [asset.id] }
+
+      expect(response).to be_successful
+      expect(response.body).to include(asset.name)
+    end
+
+    it "allows a user to edit two tracks at once" do
+      user = users(:sudara)
+      two_assets = [user.assets.first, user.assets.last]
+      create_user_session(user)
+
+      get mass_edit_user_tracks_path(user.login), params: { assets: two_assets.map(&:id) }
+
+      expect(response).to be_successful
+      expect(response.body).to include(two_assets.first.name)
+      expect(response.body).to include(two_assets.last.name)
+    end
+
+    it "does not allow users to edit other people's tracks" do
+      other_asset = assets(:valid_mp3)
+      own_asset = assets(:valid_arthur_mp3)
+      create_user_session(users(:arthur))
+
+      get mass_edit_user_tracks_path('arthur'), params: { assets: [other_asset.id] }
+
+      expect(response).to be_successful
+      expect(response.body).not_to include(other_asset.name)
+      expect(response.body).to include(own_asset.name)
+    end
+
+    it "does not error without selected assets" do
+      create_user_session(users(:arthur))
+
+      get mass_edit_user_tracks_path('arthur')
+
+      expect(response).to be_successful
     end
   end
 
@@ -400,6 +551,45 @@ RSpec.describe AssetsController, type: :request do
       expect(response).to redirect_to('/willstudd/tracks/magnificent-lacaune')
     end
 
+    it "does not change the listen count when updating the audio file" do
+      listens_count = asset.listens_count
+
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: {
+          asset: { audio_file: fixture_file_upload('muppets.mp3', 'audio/mpeg') }
+        }
+      )
+
+      expect(asset.reload.listens_count).to eq(listens_count)
+    end
+
+    it "renders an error when the asset update fails" do
+      allow_any_instance_of(Asset).to receive(:update).and_return(false)
+
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: {
+          asset: { audio_file: fixture_file_upload('muppets.mp3', 'audio/mpeg') }
+        }
+      )
+
+      expect(response.body).to include('There was an issue with updating that track')
+    end
+
+    it "still allows a new audio file when Akismet marks the request as spam" do
+      akismet_stub_response_spam
+
+      patch(
+        "/#{user.login}/tracks/#{asset.to_param}",
+        params: {
+          asset: { audio_file: fixture_file_upload('tag1.mp3', 'audio/mpeg') }
+        }
+      )
+
+      expect(asset.reload.mp3_file_name).to eq('tag1.mp3')
+    end
+
     it "sets a Saved! flash on a successful non-turbo-frame update" do
       patch(
         "/#{user.login}/tracks/#{asset.to_param}",
@@ -423,6 +613,47 @@ RSpec.describe AssetsController, type: :request do
       delete "/#{user.login}/tracks/#{asset.to_param}"
       expect(response).to redirect_to(user_tracks_path(user))
       expect(response.code).to eql("303")
+    end
+  end
+
+  context "#destroy" do
+    let(:asset) { assets(:asset_with_relations_for_soft_delete) }
+
+    before do
+      create_user_session(users(:sudara))
+    end
+
+    it "soft deletes the asset and its dependent visible relations" do
+      comments_count = asset.comments.count
+      listens_count = asset.listens.count
+      tracks_count = asset.tracks.count
+      audio_feature_count = AudioFeature.count
+      playlist = asset.tracks.first.playlist
+      playlist_tracks_count = playlist.tracks_count
+      user = asset.user
+      user_listens_count = user.listens_count
+
+      expect(comments_count).to be > 0
+      expect(listens_count).to be > 0
+      expect(tracks_count).to be > 0
+      expect(asset.audio_feature).to be_present
+      expect(playlist_tracks_count).to be >= 1
+      expect(user_listens_count).to be > 0
+
+      expect {
+        expect {
+          expect {
+            expect {
+              delete user_track_path(asset.user.login, asset.id)
+            }.to change(Asset, :count).by(-1)
+          }.to change(Comment, :count).by(-comments_count)
+        }.to change(Track, :count).by(-tracks_count)
+      }.to change(Listen, :count).by(-listens_count)
+
+      expect(AudioFeature.count).to eq(audio_feature_count)
+      expect(playlist.reload.tracks.count).to eq(playlist_tracks_count - 1)
+      expect(playlist.tracks_count).to eq(playlist_tracks_count - 1)
+      expect(user.reload.listens_count).to eq(user_listens_count)
     end
   end
 end
