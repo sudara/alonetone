@@ -14,6 +14,22 @@ RSpec.describe 'Admin shell', type: :request do
       expect(response.body).to include('admin-nav-toggle')
     end
 
+    it 'renders the dashboard charts and moderation badges' do
+      get admin_path
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('chartkick')
+      expect(response.body).to include('LineChart')
+      expect(response.body).to include('waiting requests')
+      expect(response.body).to include('purgeable')
+    end
+
+    it 'links moderation badges to filters the section controllers actually honor' do
+      get admin_path
+      expect(response.body).to include(admin_assets_path(filter_by: 'is_spam'))
+      expect(response.body).to include(admin_users_path(filter_by: 'is_spam'))
+      expect(response.body).not_to include(admin_assets_path(filter_by: 'spam'))
+    end
+
     it 'renders the Listens section stub' do
       get admin_listens_path
       expect(response).to have_http_status(:ok)

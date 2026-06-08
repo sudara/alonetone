@@ -4,6 +4,8 @@
     "build:watch": "yarn build --sourcemap=inline --watch",
     "build:admin-css": "tailwindcss -i app/assets/stylesheets/admin.tailwind.css -o app/assets/builds/admin.css --minify",
     "build:admin-css:watch": "tailwindcss -i app/assets/stylesheets/admin.tailwind.css -o app/assets/builds/admin.css --watch",
+    "build:admin-js": "esbuild app/javascript/admin.js --bundle --outdir=app/assets/builds --minify --target=es2022",
+    "build:admin-js:watch": "yarn build:admin-js --sourcemap=inline --watch",
     "test:js": "jest"
   },
   "dependencies": {
@@ -11,6 +13,8 @@
     "@bugsnag/js": "^8.9.0",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^8.0.23",
+    "chart.js": "^4.5.1",
+    "chartkick": "^5.0.1",
     "esbuild": "^0.25.0",
     "gsap": "^3.11.4",
     "local-time": "^2.1.0",

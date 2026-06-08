@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_26_191520) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_08_212338) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_26_191520) do
     t.integer "id3_track_num", default: 1
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
+    t.index ["deleted_at", "created_at"], name: "index_assets_on_deleted_at_and_created_at"
     t.index ["hotness"], name: "index_assets_on_hotness"
     t.index ["permalink"], name: "index_assets_on_permalink"
     t.index ["updated_at"], name: "index_assets_on_updated_at"
@@ -117,6 +118,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_26_191520) do
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["commentable_type", "is_spam", "private"], name: "index_comments_on_commentable_type_and_is_spam_and_private"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
+    t.index ["deleted_at", "created_at"], name: "index_comments_on_deleted_at_and_created_at"
     t.index ["user_id", "commentable_type", "is_spam", "private"], name: "by_user_id_type_spam_private"
   end
 
@@ -604,6 +606,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_26_191520) do
     t.boolean "is_spam", default: false
     t.datetime "deleted_at"
     t.integer "invited_by_id"
+    t.index ["deleted_at", "created_at"], name: "index_users_on_deleted_at_and_created_at"
     t.index ["updated_at"], name: "index_users_on_updated_at"
   end
 

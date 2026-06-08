@@ -267,6 +267,7 @@ end
 #
 # Indexes
 #
+#  index_assets_on_deleted_at_and_created_at    (deleted_at,created_at)
 #  index_assets_on_hotness                      (hotness)
 #  index_assets_on_permalink                    (permalink)
 #  index_assets_on_updated_at                   (updated_at)

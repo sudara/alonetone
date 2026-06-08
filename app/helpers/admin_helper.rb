@@ -43,6 +43,21 @@ module AdminHelper
   }.freeze
   # rubocop:enable Layout/LineLength
 
+  def admin_chart_options
+    {
+      colors: ["#eb7b0c"],
+      points: false,
+      library: {
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#a6abab", maxRotation: 0, autoSkipPadding: 16 } },
+          y: { beginAtZero: true, grid: { color: "#353535" }, ticks: { color: "#a6abab", precision: 0 } }
+        }
+      }
+    }
+  end
+
   def admin_icon(name, css: "size-5")
     path = ICON_PATHS.fetch(name)
     content_tag(:svg, content_tag(:path, nil, "stroke-linecap": "round", "stroke-linejoin": "round", d: path),

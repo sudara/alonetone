@@ -134,6 +134,7 @@ GEM
       addressable
       capybara
       playwright-ruby-client (>= 1.16.0)
+    chartkick (5.2.1)
     coderay (1.1.3)
     colorize (0.8.1)
     commonmarker (2.8.2)
@@ -219,6 +220,8 @@ GEM
     google-protobuf (4.34.1-x86_64-linux-musl)
       bigdecimal
       rake (~> 13.3)
+    groupdate (6.8.0)
+      activesupport (>= 7.2)
     guard (2.20.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -553,12 +556,14 @@ DEPENDENCIES
   bugsnag
   capybara
   capybara-playwright-driver
+  chartkick
   commonmarker
   country_select
   dalli
   dartsass-rails
   debug
   faker
+  groupdate
   guard
   guard-rspec
   image_processing

@@ -381,5 +381,6 @@ end
 #
 # Indexes
 #
-#  index_users_on_updated_at  (updated_at)
+#  index_users_on_deleted_at_and_created_at  (deleted_at,created_at)
+#  index_users_on_updated_at                 (updated_at)
 #
