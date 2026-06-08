@@ -1,9 +1,12 @@
 module Admin
   class AccountRequestsController < Admin::BaseController
+    layout 'admin'
+
     before_action :set_account_request, except: %i[index]
 
     def index
-      @pagy, @account_requests = pagy(AccountRequest.filter_by(params[:filter_by]))
+      @admin_title = 'Account Requests'
+      @pagy, @account_requests = pagy(AccountRequest.filter_by(params[:filter_by]).includes(:moderated_by))
     end
 
     def approve

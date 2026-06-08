@@ -58,6 +58,19 @@ module AdminHelper
     }
   end
 
+  STATUS_BADGE_STYLES = {
+    "waiting" => "bg-warning/15 text-warning",
+    "approved" => "bg-success/20 text-success-hover",
+    "claimed" => "bg-success/20 text-success-hover",
+    "denied" => "bg-danger/15 text-danger-hover"
+  }.freeze
+
+  def admin_status_badge(status)
+    style = STATUS_BADGE_STYLES.fetch(status.to_s, "bg-surface-overlay text-fg-muted")
+    content_tag :span, status.to_s.titleize,
+      class: "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium #{style}"
+  end
+
   def admin_icon(name, css: "size-5")
     path = ICON_PATHS.fetch(name)
     content_tag(:svg, content_tag(:path, nil, "stroke-linecap": "round", "stroke-linejoin": "round", d: path),

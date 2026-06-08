@@ -1,37 +1,20 @@
-<div id="admin_columns">
-  <div class="admin_column_left box">
-    <h2>Admin</h2>
-    <%= render partial: 'admin/navigation' %>
+<% pills = [
+  { label: 'Active', url: admin_mass_invites_path, active: params[:filter_by] != 'archived' },
+  { label: 'Archived', url: admin_mass_invites_path(filter_by: 'archived'), active: params[:filter_by] == 'archived' }
+] %>
+
+<div class="space-y-4">
+  <div class="flex items-center justify-between gap-3">
+    <%= render 'admin/shared/filter_pills', pills: pills %>
+    <%= link_to 'New invite', new_admin_mass_invite_path,
+          class: "shrink-0 rounded-lg bg-accent px-3 py-1.5 text-sm font-semibold text-accent-fg hover:bg-accent-hover" %>
   </div>
-  <div class="admin_column_right">
-    <%= button_to 'New mass invite', new_admin_mass_invite_path, method: :get %>
 
-    <div class="mini_paginator top_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
+  <% if @mass_invites.any? %>
+    <div class="space-y-3"><%= render @mass_invites %></div>
+  <% else %>
+    <p class="rounded-xl border border-border bg-surface-raised p-6 text-sm text-fg-muted">No mass invites here.</p>
+  <% end %>
 
-    <div class="box">
-      <h2>
-        <%= params[:filter_by] == 'archived' ? 'Archived' : 'Active' %>
-        mass invites
-      </h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Created</th>
-            <th>Users count</th>
-            <th>Link to invite url</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render @mass_invites %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="mini_paginator bottom_paginator">
-      <%== pagy_nav @pagy %>
-    </div>
-  </div>
+  <%= render 'admin/shared/pagination' %>
 </div>

@@ -45,4 +45,24 @@ RSpec.describe Admin::AccountRequestsController, type: :request do
     expect(response.body).to include(%(action="replace"))
     expect(response.body).to include(%(target="account_request_#{account_requests(:waiting).id}"))
   end
+
+  it "renders the restyled index with filter pills, action buttons, and card ids" do
+    get admin_account_requests_path
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include('Waiting')
+    expect(response.body).to include('Spammers')
+    expect(response.body).to include('Approve')
+    expect(response.body).to include('Deny')
+    expect(response.body).to include(%(id="account_request_#{account_requests(:waiting).id}"))
+  end
+
+  it "narrows the rendered cards to the requested filter" do
+    get admin_account_requests_path
+    expect(response.body).to match_css('[id^="account_request_"]', count: AccountRequest.count)
+
+    get admin_account_requests_path(filter_by: 'spammers')
+    expect(AccountRequest.spammers.count).to eq(0)
+    expect(response.body).not_to match_css('[id^="account_request_"]')
+    expect(response.body).to include('No account requests here.')
+  end
 end

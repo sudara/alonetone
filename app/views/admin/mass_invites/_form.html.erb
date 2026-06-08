@@ -1,14 +1,22 @@
-<%= form_for([:admin, @mass_invite], builder: AdminFormBuilder) do |form| %>
-  <%= form.field :name do %>
-    <%= form.label_with_error :name %>
-    <%= form.text_field :name %>
+<%= form_with model: [:admin, @mass_invite], class: "space-y-4" do |form| %>
+  <% if @mass_invite.errors.any? %>
+    <div data-form-errors class="rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-danger-hover">
+      <%= @mass_invite.errors.full_messages.to_sentence.presence || 'Please correct the errors below.' %>
+    </div>
   <% end %>
-  <%= form.field :token do %>
-    <%= form.label_with_error :token %>
-    <%= form.text_field :token %>
-  <% end %>
-  <ul class="actions submit">
-    <li><%= form.submit 'Create mass invite' %></li>
-    <li><%= link_to 'Cancel', admin_mass_invites_path %></li>
-  </ul>
+
+  <div>
+    <%= form.label :name, class: "mb-1 block text-sm font-medium text-fg-muted" %>
+    <%= form.text_field :name, class: "w-full rounded-lg border border-border bg-surface px-3 py-2 text-fg focus:border-accent focus:outline-none" %>
+  </div>
+
+  <div>
+    <%= form.label :token, class: "mb-1 block text-sm font-medium text-fg-muted" %>
+    <%= form.text_field :token, class: "w-full rounded-lg border border-border bg-surface px-3 py-2 text-fg focus:border-accent focus:outline-none" %>
+  </div>
+
+  <div class="flex gap-2">
+    <%= form.submit 'Create mass invite', class: "cursor-pointer rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-fg hover:bg-accent-hover" %>
+    <%= link_to 'Cancel', admin_mass_invites_path, class: "rounded-lg border border-border px-4 py-2 text-sm text-fg-muted hover:text-fg" %>
+  </div>
 <% end %>
