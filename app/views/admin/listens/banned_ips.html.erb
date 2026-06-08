@@ -1,0 +1,23 @@
+<div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_listen_view_tabs(:banned) %>
+
+  <% if @banned_ips.any? %>
+    <div class="space-y-2">
+      <% @banned_ips.each do |banned| %>
+        <div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-raised p-4">
+          <div class="min-w-0">
+            <p class="font-mono text-sm"><%= banned.ip %></p>
+            <p class="text-xs text-fg-faint">
+              banned <%= local_time_ago banned.created_at %><% if banned.banned_by %> by <%= banned.banned_by.login %><% end %>
+            </p>
+          </div>
+          <% if admin? %>
+            <%= button_to "Unban", admin_banned_ip_path(banned), method: :delete, class: admin_btn(:neutral) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="rounded-xl border border-border bg-surface-raised p-6 text-sm text-fg-muted">No banned IPs yet. Ban one from Listening IPs.</p>
+  <% end %>
+</div>

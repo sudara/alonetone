@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     end
     resources :mass_invites, param: :token
     resources :listens, only: [:index]
+    get 'listens/banned', to: 'listens#banned_ips', as: :banned_ips
+    post 'listens/ban', to: 'listens#ban', as: :ban_ip
+    delete 'listens/banned/:id', to: 'listens#unban', as: :banned_ip
     get 'devops', to: 'devops#index', as: :devops
   end
 

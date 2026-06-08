@@ -81,6 +81,13 @@ module AdminHelper
     ]
   end
 
+  def admin_listen_view_tabs(current)
+    [
+      { label: 'Listening IPs', url: admin_listens_path, active: current == :listening },
+      { label: 'Banned IPs', url: admin_banned_ips_path, active: current == :banned }
+    ]
+  end
+
   def admin_track_view_tabs(current)
     [
       { label: 'List', url: admin_assets_path, active: current == :list },

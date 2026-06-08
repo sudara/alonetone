@@ -32,6 +32,8 @@ module Listens
   end
 
   def register_listen(asset)
+    return if BannedIp.banned?(request.remote_ip)
+
     unless is_a_bot? || ip_just_registered_this_listen?(asset)
       asset.listens.create(
         listener: current_user || nil,

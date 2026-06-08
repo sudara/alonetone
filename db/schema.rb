@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_08_231843) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_08_233425) do
   create_table "account_requests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email"
     t.string "login"
@@ -100,6 +100,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_08_231843) do
     t.index ["asset_id"], name: "index_audio_features_on_asset_id"
   end
 
+  create_table "banned_ips", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "ip", null: false
+    t.bigint "banned_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip"], name: "index_banned_ips_on_ip", unique: true
+  end
+
   create_table "comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "commentable_type"
     t.integer "commentable_id"
@@ -187,6 +195,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_08_231843) do
     t.datetime "deleted_at"
     t.index ["asset_id"], name: "index_listens_on_asset_id"
     t.index ["created_at"], name: "index_listens_on_created_at"
+    t.index ["ip"], name: "index_listens_on_ip"
     t.index ["listener_id"], name: "index_listens_on_listener_id"
     t.index ["track_owner_id", "created_at"], name: "index_listens_on_track_owner_id_and_created_at"
     t.index ["track_owner_id"], name: "index_listens_on_track_owner_id"

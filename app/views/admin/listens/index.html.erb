@@ -1,3 +1,27 @@
-<div class="rounded-xl border border-border bg-surface-raised p-6">
-  <p class="text-sm text-fg-muted">Listening IPs and Banned IPs land in Phase 4.</p>
+<div class="space-y-4">
+  <%= render 'admin/shared/view_tabs', tabs: admin_listen_view_tabs(:listening) %>
+  <p class="text-sm text-fg-muted">Most active IPs by listen volume. Ban a bot IP to block future listens and purge its history.</p>
+
+  <% if @ip_counts.any? %>
+    <div class="space-y-2">
+      <% @ip_counts.each do |ip, count| %>
+        <div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-raised p-4">
+          <div class="min-w-0">
+            <%= link_to ip, "https://www.botsvsbrowsers.com/ip/#{ip}", target: "_blank", rel: "noopener", class: "font-mono text-sm text-accent hover:underline" %>
+            <p class="text-xs text-fg-faint"><%= number_with_delimiter(count) %> listens</p>
+          </div>
+          <div class="shrink-0">
+            <% if @banned_set.include?(ip) %>
+              <span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">banned</span>
+            <% elsif admin? %>
+              <%= button_to "Ban & purge", admin_ban_ip_path(ip: ip), method: :post, class: admin_btn(:danger),
+                    data: { turbo_confirm: "Ban #{ip} and permanently delete all of its listens? This cannot be undone." } %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="rounded-xl border border-border bg-surface-raised p-6 text-sm text-fg-muted">No listens in this range.</p>
+  <% end %>
 </div>
