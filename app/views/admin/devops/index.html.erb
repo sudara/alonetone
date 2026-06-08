@@ -1,3 +1,38 @@
-<div class="rounded-xl border border-border bg-surface-raised p-6">
-  <p class="text-sm text-fg-muted">External links, reserved words, and the perma-delete sweep land in Phase 5.</p>
+<div class="space-y-6">
+  <div>
+    <h2 class="mb-2 text-sm font-semibold uppercase tracking-wider text-fg-faint">Tools</h2>
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <% akismet_url = "https://akismet.com/web/1.0/user-stats.php?blog=alonetone.com&api_key=#{Rails.configuration.alonetone.rakismet_key}" %>
+      <% tools = [
+           ["Job status", "/sidekiq", "Sidekiq queues and workers"],
+           ["Akismet stats", akismet_url, "Spam filtering dashboard"],
+           ["Postmark stats", "https://account.postmarkapp.com/servers/2804035/streams", "Transactional email delivery"]
+         ] %>
+      <% tools.each do |label, url, description| %>
+        <%= link_to url, target: "_blank", rel: "noopener",
+              class: "group flex items-start justify-between gap-2 rounded-xl border border-border bg-surface-raised p-4 hover:border-border-strong" do %>
+          <span class="min-w-0">
+            <span class="block font-medium text-fg"><%= label %></span>
+            <span class="block text-xs text-fg-muted"><%= description %></span>
+          </span>
+          <span class="shrink-0 text-fg-faint group-hover:text-accent">↗</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="mb-2 text-sm font-semibold uppercase tracking-wider text-fg-faint">Perma-delete sweep</h2>
+    <div class="space-y-3 rounded-xl border border-border bg-surface-raised p-4">
+      <p class="text-sm text-fg">
+        <span class="font-semibold"><%= @destroyable_users %></span> accounts and
+        <span class="font-semibold"><%= @destroyable_assets %></span> tracks soft-deleted more than 30 days ago are eligible for permanent deletion.
+      </p>
+      <p class="text-xs text-fg-faint">The automatic 30-day sweep runs via system cron; this triggers it on demand.</p>
+      <% if admin? && (@destroyable_users.positive? || @destroyable_assets.positive?) %>
+        <%= button_to "Purge eligible now", admin_devops_purge_path, method: :post, class: admin_btn(:danger),
+              data: { turbo_confirm: "Permanently delete every record soft-deleted more than 30 days ago? This cannot be undone." } %>
+      <% end %>
+    </div>
+  </div>
 </div>
