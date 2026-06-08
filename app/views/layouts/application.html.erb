@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta content="index,follow" name="robots"/>
+  <%= render partial: 'shared/preloads' %>
   <title><%= @page_title ?  "#{@page_title} | alonetone " : 'alonetone' %></title>
   <%= yield(:head) %>
   <%= yield(:open_graph).presence || render(partial: 'shared/open_graph') %>
