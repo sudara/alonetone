@@ -7,6 +7,10 @@ module RSpec
         find('.user_dropdown .profile_link').click
         find('.user_dropdown_menu', visible: true)
         page.click_on class: 'switch_to_theme'
+        # The swap is client-side, so a passing snapshot can still be the wrong theme;
+        # assert the dark sheet activated and the light one deactivated (see user_dropdown_controller).
+        expect(page).to have_css('link[data-theme="dark"]:not([disabled])', visible: :all, wait: 2)
+        expect(page).to have_css('link[data-theme="light"][disabled]', visible: :all, wait: 2)
       end
 
       # Capybara's find-then-click holds an eager ElementHandle that goes stale when the region re-renders;
