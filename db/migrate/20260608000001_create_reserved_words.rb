@@ -1,4 +1,4 @@
-class CreateReservedWords < ActiveRecord::Migration[7.0]
+class CreateReservedWords < ActiveRecord::Migration[8.1]
   def change
     create_table :reserved_words do |t|
       t.string :name, null: false
