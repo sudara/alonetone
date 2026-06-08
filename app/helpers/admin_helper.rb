@@ -65,6 +65,14 @@ module AdminHelper
     "denied" => "bg-danger/15 text-danger-hover"
   }.freeze
 
+  ADMIN_BTN = {
+    neutral: "rounded-lg border border-border bg-surface-overlay px-3 py-1.5 text-sm font-medium text-fg-muted hover:text-fg",
+    success: "rounded-lg bg-success px-3 py-1.5 text-sm font-semibold text-white hover:brightness-90",
+    danger: "rounded-lg bg-danger px-3 py-1.5 text-sm font-semibold text-white hover:brightness-90"
+  }.freeze
+
+  def admin_btn(kind) = ADMIN_BTN.fetch(kind)
+
   def admin_status_badge(status)
     style = STATUS_BADGE_STYLES.fetch(status.to_s, "bg-surface-overlay text-fg-muted")
     content_tag :span, status.to_s.titleize,

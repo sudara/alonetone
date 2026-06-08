@@ -1,12 +1,17 @@
 module Admin
   class UsersController < Admin::BaseController
+    layout 'admin'
+
     before_action :set_user, except: %i[index]
+    before_action :admin_only, only: %i[purge]
 
     def index
-      @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]))
+      @admin_title = 'Users'
+      @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]).includes(:profile, :avatar_image_blob))
     end
 
     def show
+      @admin_title = @user.name
       @assets_pagy, @assets = pagy(@user.assets.with_deleted, limit: 5)
       @comment_pagy, @comments = pagy(@user.comments_made.with_deleted, limit: 5)
     end
@@ -29,6 +34,17 @@ module Admin
     def spam
       UserCommand.new(@user).spam_soft_delete_with_relations
       respond_with_user_row(fallback_filter: :is_spam, notice: "#{@user.name} has been marked as spam and their content hidden.")
+    end
+
+    def purge
+      if @user.perma_deletable?
+        name = @user.name
+        @user.destroy
+        flash[:ok] = "#{name} has been permanently deleted."
+      else
+        flash[:alert] = 'Only accounts soft-deleted more than 30 days ago can be permanently deleted.'
+      end
+      redirect_to admin_users_path(filter_by: :deleted), status: :see_other
     end
 
     def mark_all_users_with_ip_as_spam

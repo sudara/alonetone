@@ -307,7 +307,8 @@ class User < ApplicationRecord
     when "invited"
       joins(:mass_invite_signup).order('created_at DESC')
     when String
-      with_deleted.where("email like '%#{filter}%' or login like '%#{filter}%' or display_name like '%#{filter}%'").recent
+      term = "%#{sanitize_sql_like(filter)}%"
+      with_deleted.where('email LIKE :q OR login LIKE :q OR display_name LIKE :q', q: term).recent
     else
       with_deleted.recent
     end
@@ -381,6 +382,7 @@ end
 #
 # Indexes
 #
-#  index_users_on_deleted_at_and_created_at  (deleted_at,created_at)
-#  index_users_on_updated_at                 (updated_at)
+#  index_users_on_current_login_ip_and_deleted_at  (current_login_ip,deleted_at)
+#  index_users_on_deleted_at_and_created_at        (deleted_at,created_at)
+#  index_users_on_updated_at                       (updated_at)
 #

@@ -1,74 +1,34 @@
-<div id="admin_columns">
+<div class="space-y-6">
+  <%= render partial: 'user', locals: { user: @user } %>
 
-  <div class="admin_column_left box">
-    <h2>Admin</h2>
-    <%= render partial: 'admin/navigation' %>
+  <div>
+    <h2 class="mb-2 text-sm font-semibold uppercase tracking-wider text-fg-faint">Tracks</h2>
+    <% if @assets.any? %>
+      <div class="space-y-3"><%= render partial: 'admin/assets/asset', collection: @assets %></div>
+    <% else %>
+      <p class="text-sm text-fg-muted">No tracks.</p>
+    <% end %>
   </div>
 
-  <div class="admin_column_right">
-    <div class="admin_column_right_inner box">
-      <h3 style="padding-left: 1em;">User</h3>
-      <div style="padding: 0 1em;">
-        <header class="admin_assets_header">
-          <div class="date_column">Date</div>
-          <div class="user_column">User</div>
-          <div class="track_column">Track</div>
-        </header>
-        <div class="admin_users_rows">
-          <%= render partial: 'admin/users/user', locals: { user: @user } %>
-        </div>
-      </div>
+  <div>
+    <h2 class="mb-2 text-sm font-semibold uppercase tracking-wider text-fg-faint">Comments</h2>
+    <% if @comments.any? %>
+      <div class="space-y-3"><%= render partial: 'admin/comments/comment', collection: @comments %></div>
+    <% else %>
+      <p class="text-sm text-fg-muted">No comments.</p>
+    <% end %>
+  </div>
 
-      <h3 style="padding-left: 1em;">User's Tracks</h3>
-      <div style="padding: 0 1em;">
-        <div class="mini_paginator top_paginator">
-          <%== pagy_nav @assets_pagy %>
-        </div>
-        <div class="admin_column_right_inner box">
-          <header class="admin_assets_header">
-            <div class="date_column">Date</div>
-            <div class="user_column">User</div>
-            <div class="track_column">Track</div>
-          </header>
-          <div class="admin_assets_rows">
-             <%= render partial: 'admin/assets/asset', collection: @assets %>
-          </div>
-        </div>
-        <div class="mini_paginator bottom_paginator">
-          <%== pagy_nav @assets_pagy %>
-        </div>
-      </div>
-
-      <h3 style="padding-left: 1em;">User's Comments</h3>
-      <div style="padding: 0 1em;">
-        <div class="mini_paginator top_paginator">
-          <%== pagy_nav @comment_pagy %>
-        </div>
-
-        <div class="admin_column_right_inner box">
-
-          <header class="admin_comments_header">
-            <div class="date_column">Date</div>
-            <div class="user_column">User</div>
-            <div class="text_column">Text</div>
-          </header>
-
-          <div class="admin_comments_rows">
-            <%= render partial: 'admin/comments/comment', collection: @comments %>
-          </div>
-        </div>
-      </div>
-
-      <div style="padding-left: 1em">
-        <h3>User's Origin Story</h3>
-        <% if mass_invite = @user.mass_invite %>
-          <p>Created through the mass invite ‘<%= mass_invite.name %>’.
-        <% elsif invited_by = @user.invited_by %>
-          <p>Invited by <%= "#{invited_by.login} (#{invited_by.email})" %>.
-        <% else %>
-          <p>Out of darkness, fretted something in its sleeping</p>
-        <% end %>
-      </div>
-    </div>
+  <div class="rounded-xl border border-border bg-surface-raised p-4">
+    <h2 class="mb-1 text-sm font-semibold uppercase tracking-wider text-fg-faint">Origin story</h2>
+    <p class="text-sm text-fg-muted">
+      <% if (mass_invite = @user.mass_invite) %>
+        Created through the mass invite '<%= mass_invite.name %>'.
+      <% elsif (invited_by = @user.invited_by) %>
+        Invited by <%= "#{invited_by.login} (#{invited_by.email})" %>.
+      <% else %>
+        Out of darkness, fretted something in its sleeping.
+      <% end %>
+    </p>
   </div>
 </div>

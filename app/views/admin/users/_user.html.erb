@@ -1,43 +1,52 @@
-<%= tag.div id: dom_id(user), class: ('deleted' if user.soft_deleted?) do %>
-  <div class="date_column">
-    <%= local_time_ago user.created_at %>
-    <div class="deleted_at_date"><%== "Deleted #{local_time_ago user.deleted_at}" if user.deleted_at %></div>
-  </div>
-  <div class="user_column">
-    <div class="avatar">
-      <%= user_image(user, variant: :large_avatar) %>
+<%= tag.div id: dom_id(user), class: class_names(
+      "rounded-xl border bg-surface-raised p-4",
+      "border-danger/40" => user.is_spam?,
+      "border-border" => !user.is_spam?
+    ) do %>
+  <div class="flex items-start justify-between gap-3">
+    <div class="flex min-w-0 gap-3">
+      <div class="size-10 shrink-0 overflow-hidden rounded-full bg-surface-overlay"><%= user_image(user, variant: :large_avatar) %></div>
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-2">
+          <%= link_to user.display_name, admin_possibly_deleted_user_path(user.login), class: "truncate font-semibold text-accent hover:underline" %>
+          <% if user.is_spam? %><span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">spam</span><% end %>
+          <% if user.soft_deleted? %><span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs text-fg-muted">deleted</span><% end %>
+        </div>
+        <p class="truncate text-sm text-fg-muted"><%= user.email %></p>
+        <p class="text-xs text-fg-faint">
+          joined <%= local_time_ago user.created_at %><% if user.deleted_at %> · deleted <%= local_time_ago user.deleted_at %><% end %>
+          <% if user.assets_count.to_i.positive? && !user.soft_deleted? %> · <%= link_to "#{user.assets_count} tracks", user_tracks_path(user), class: "hover:text-fg-muted" %><% end %>
+        </p>
+      </div>
     </div>
-    <div>
-      <div><%= link_to(user.display_name, admin_possibly_deleted_user_path(user.login)) %></div>
-      <div><%= user.email %></div>
-      <% unless user.soft_deleted? %>
-      <div>
-        <% if user.never_activated? %>
-          [ unactivated ]
-        <% else %>
-          <%= user.current_login_ip %>
-          <% if User.with_same_ip_as(user).count > 0 %>
-            <%= link_to "Spam All #{User.with_same_ip_as(user).count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), data: { turbo_method: :put } %>
-          <% end %>
-        <% end %>
-       </div>
-      <% end %>
-    </div>
+    <% unless user.soft_deleted? %>
+      <div class="shrink-0 text-right text-xs text-fg-faint">
+        <%= user.never_activated? ? "[unactivated]" : user.current_login_ip %>
+      </div>
+    <% end %>
   </div>
-  <div class="bio_column">
-    <div><%= truncate(user&.profile&.bio, length: 200) %></div>
-    <div><%= user&.profile&.website %></div>
-    <div><%= link_to "#{user.assets.count} tracks", user_tracks_path(user) if user.assets.count > 0  && !user.soft_deleted? %></div>
-  </div>
-  <div class="button_column">
+
+  <% if (bio = user.profile&.bio).present? %>
+    <p class="mt-2 line-clamp-2 text-sm text-fg-muted"><%= truncate(bio, length: 160) %></p>
+  <% end %>
+
+  <div class="mt-3 flex flex-wrap gap-2">
     <% if user.soft_deleted? %>
-      <%= button_to "Restore User", restore_admin_user_path(id: user.login, row: true), method: :put %>
+      <%= button_to "Restore", restore_admin_user_path(id: user.login, row: true), method: :put, class: admin_btn(:neutral) %>
+      <% if user.perma_deletable? %>
+        <%= button_to "Permanently delete", purge_admin_user_path(user.login), method: :delete, class: admin_btn(:danger),
+              data: { turbo_confirm: "Permanently delete #{user.name} and all their content? This cannot be undone." } %>
+      <% end %>
     <% elsif user.is_spam? %>
-      <%= button_to "Unspam User", unspam_admin_user_path(id: user.login, row: true), method: :put %>
-      <%= button_to "Delete User", delete_admin_user_path(id: user.login, row: true), method: :put %>
+      <%= button_to "Unspam", unspam_admin_user_path(id: user.login, row: true), method: :put, class: admin_btn(:success) %>
+      <%= button_to "Delete", delete_admin_user_path(id: user.login, row: true), method: :put, class: admin_btn(:neutral) %>
     <% else %>
-      <%= button_to "Spam User", spam_admin_user_path(id: user.login, row: true), method: :put %>
-      <%= button_to "Delete User", delete_admin_user_path(id: user.login, row: true), method: :put %>
+      <%= button_to "Spam", spam_admin_user_path(id: user.login, row: true), method: :put, class: admin_btn(:neutral) %>
+      <%= button_to "Delete", delete_admin_user_path(id: user.login, row: true), method: :put, class: admin_btn(:neutral) %>
+      <% same_ip_count = User.with_same_ip_as(user).count %>
+      <% if same_ip_count.positive? %>
+        <%= button_to "Spam all #{same_ip_count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put, class: admin_btn(:neutral) %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

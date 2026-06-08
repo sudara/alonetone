@@ -1,13 +1,16 @@
 module Admin
   class CommentsController < Admin::BaseController
+    layout 'admin'
+
     before_action :set_comment, only: %i[unspam spam]
 
     def index
-      if permitted_params[:filter_by]
-        @pagy, @comments = pagy(Comment.where(permitted_params[:filter_by]).recent)
-      else
-        @pagy, @comments = pagy(Comment.recent)
-      end
+      @admin_title = 'Comments'
+      @pagy, @comments = if permitted_params[:filter_by]
+                           pagy(Comment.where(permitted_params[:filter_by]).recent)
+                         else
+                           pagy(Comment.recent)
+                         end
     end
 
     def unspam

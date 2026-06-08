@@ -1,29 +1,43 @@
-<%= tag.div id: dom_id(asset), class: ('deleted' if asset.soft_deleted?) do %>
-  <div class="date_column"><%= asset.created_at.strftime("%b %d") %></div>
-  <div class="user_column">
-    <div class="avatar">
-      <%= user_image(asset.possibly_deleted_user, variant: :large_avatar) %>
-    </div>
-    <div>
-      <div><%= link_to asset.possibly_deleted_user.login, admin_possibly_deleted_user_path(asset.possibly_deleted_user.login) %>
-        <div class="deleted_at_date"><%== "Deleted #{local_time_ago asset.possibly_deleted_user.deleted_at}" if asset.possibly_deleted_user.deleted_at %></div>
+<%= tag.div id: dom_id(asset), class: class_names(
+      "rounded-xl border bg-surface-raised p-4",
+      "border-danger/40" => asset.is_spam?,
+      "border-border" => !asset.is_spam?
+    ) do %>
+  <div class="flex min-w-0 gap-3">
+    <div class="size-10 shrink-0 overflow-hidden rounded-full bg-surface-overlay"><%= user_image(asset.possibly_deleted_user, variant: :large_avatar) %></div>
+    <div class="min-w-0 flex-1">
+      <div class="flex flex-wrap items-center gap-2">
+        <%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink), class: "truncate font-semibold text-accent hover:underline" %>
+        <% if asset.is_spam? %><span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">spam</span><% end %>
+        <% if asset.soft_deleted? %><span class="rounded-full bg-surface-overlay px-2 py-0.5 text-xs text-fg-muted">deleted</span><% end %>
       </div>
-      <div><%= asset.possibly_deleted_user.ip %></div>
+      <p class="truncate text-sm text-fg-muted">
+        by <%= link_to asset.possibly_deleted_user.login, admin_possibly_deleted_user_path(asset.possibly_deleted_user.login), class: "hover:text-fg" %>
+      </p>
+      <p class="text-xs text-fg-faint">
+        <%= asset.created_at.strftime("%b %d, %Y") %> · <%= asset.listens_count %> listens · <%= asset.comments_count %> comments
+        <% if asset.deleted_at %> · deleted <%= local_time_ago asset.deleted_at %><% end %>
+      </p>
     </div>
   </div>
-  <div class="track_column">
-    <div><%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink) %></div>
-    <div><%= truncate(asset.description, length: 80) %></div>
-    <div>N comments / N listens</div>
-  </div>
-  <div class="button_column">
-    <% unless asset.possibly_deleted_user.soft_deleted? %>
+
+  <% if asset.description.present? %>
+    <p class="mt-2 line-clamp-2 text-sm text-fg-muted"><%= truncate(asset.description, length: 120) %></p>
+  <% end %>
+
+  <% unless asset.possibly_deleted_user.soft_deleted? %>
+    <div class="mt-3 flex flex-wrap gap-2">
       <% if asset.soft_deleted? %>
-        <%= button_to "Restore Asset", restore_admin_asset_path(id: asset.id, row: true), method: :put %>
+        <%= button_to "Restore", restore_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral) %>
+        <% if asset.perma_deletable? %>
+          <%= button_to "Permanently delete", purge_admin_asset_path(asset.id), method: :delete, class: admin_btn(:danger),
+                data: { turbo_confirm: "Permanently delete \"#{asset.title}\"? This cannot be undone." } %>
+        <% end %>
       <% else %>
-        <%= button_to "Spam Asset", spam_admin_asset_path(id: asset.id, row: true), method: :put %>
-        <%= button_to "Delete Asset", delete_admin_asset_path(id: asset.id, row: true), method: :put, data: { turbo_confirm: 'Are you sure?' } %>
+        <%= button_to "Spam", spam_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral) %>
+        <%= button_to "Delete", delete_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral),
+              data: { turbo_confirm: 'Are you sure?' } %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>

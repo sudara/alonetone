@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         put :unspam
         put :spam
         put :mark_all_users_with_ip_as_spam
+        delete :purge
       end
     end
     resources :comments, path: 'comments/(:filter_by)', only: [:index] do
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
         put :spam
         put :delete
         put :restore
+        delete :purge
       end
     end
     resources :mass_invites, param: :token

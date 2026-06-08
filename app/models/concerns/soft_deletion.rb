@@ -17,6 +17,11 @@ module SoftDeletion
       deleted_at != nil
     end
 
+    # eligible for permanent destruction once it's been soft-deleted for 30 days
+    def perma_deletable?
+      soft_deleted? && deleted_at < 30.days.ago
+    end
+
     # would like to be able to skip any validation
     def restore
       update_attribute(:deleted_at, nil)

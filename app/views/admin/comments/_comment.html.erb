@@ -1,29 +1,29 @@
-<%= tag.div id: dom_id(comment), class: ('deleted' if comment.is_spam?) do %>
-  <div class="date_column"><%= comment.created_at.strftime("%b %d") %>, <%= comment.id %></div>
-  <div class="user_column">
-    <div class="avatar">
-      <%= user_image(@user, variant: :card_avatar) %>
-    </div>
-    <div>
-      <div>
-        <% if comment.commenter %>
-          <%= link_to "Comment By: #{comment&.commenter&.login}", admin_possibly_deleted_user_path(comment.commenter.login) %>
-        <% else %>
-          <%= "Comment By: #{comment&.commenter&.login}" %>
-        <% end %>
-      </div>
-      <div><%= comment&.commenter&.email %></div>
-      <div><%= comment.remote_ip %></div>
-    </div>
-  </div>
-  <div class="text_column"><%= truncate(comment.body, length: 80) %></div>
-  <div class="button_column">
-    <% unless comment.commenter&.soft_deleted? %>
-      <% if comment.is_spam? %>
-        <div><%= button_to "Restore", unspam_admin_comment_path(comment), method: :put %></div>
-      <% else %>
-        <div><%= button_to "Mark As Spam", spam_admin_comment_path(comment), method: :put %></div>
-      <% end %>
+<%= tag.div id: dom_id(comment), class: class_names(
+      "rounded-xl border bg-surface-raised p-4",
+      "border-danger/40" => comment.is_spam?,
+      "border-border" => !comment.is_spam?
+    ) do %>
+  <div class="flex flex-wrap items-center gap-2">
+    <% if comment.commenter %>
+      <%= link_to "@#{comment.commenter.login}", admin_possibly_deleted_user_path(comment.commenter.login), class: "font-semibold text-accent hover:underline" %>
+    <% else %>
+      <span class="font-semibold text-fg-muted">guest</span>
     <% end %>
+    <% if comment.is_spam? %><span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">spam</span><% end %>
   </div>
+  <p class="text-xs text-fg-faint">
+    <%= comment.created_at.strftime("%b %d, %Y") %><% if comment.commenter&.email %> · <%= comment.commenter.email %><% end %><% if comment.remote_ip %> · <%= comment.remote_ip %><% end %>
+  </p>
+
+  <p class="mt-2 text-sm text-fg"><%= truncate(comment.body, length: 200) %></p>
+
+  <% unless comment.commenter&.soft_deleted? %>
+    <div class="mt-3">
+      <% if comment.is_spam? %>
+        <%= button_to "Restore", unspam_admin_comment_path(comment), method: :put, class: admin_btn(:success) %>
+      <% else %>
+        <%= button_to "Mark as spam", spam_admin_comment_path(comment), method: :put, class: admin_btn(:neutral) %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

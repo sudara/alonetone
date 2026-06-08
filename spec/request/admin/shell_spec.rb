@@ -58,11 +58,11 @@ RSpec.describe 'Admin shell', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'leaves not-yet-migrated sections on the legacy layout' do
+    it 'renders migrated sections in the new admin shell' do
       get admin_users_path
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('admin_columns')
-      expect(response.body).not_to include('admin-nav-toggle')
+      expect(response.body).to include('admin-nav-toggle')
+      expect(response.body).not_to include('admin_columns')
     end
   end
 

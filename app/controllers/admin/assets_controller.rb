@@ -1,9 +1,13 @@
 module Admin
   class AssetsController < Admin::BaseController
-    before_action :find_asset, only: %i[spam unspam delete restore]
+    layout 'admin'
+
+    before_action :find_asset, only: %i[spam unspam delete restore purge]
+    before_action :admin_only, only: %i[purge]
 
     def index
-      @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]))
+      @admin_title = 'Tracks'
+      @pagy, @assets = pagy(Asset.filter_by(permitted_params[:filter_by]).includes(possibly_deleted_user: %i[profile avatar_image_blob]))
     end
 
     def unspam
@@ -24,6 +28,17 @@ module Admin
     def restore
       AssetCommand.new(@asset).restore_with_relations if @asset
       respond_with_asset_row(fallback_filter: :not_spam, notice: "\"#{@asset.title}\" has been restored.")
+    end
+
+    def purge
+      if @asset.perma_deletable?
+        title = @asset.title
+        AssetCommand.new(@asset).destroy_with_relations
+        flash[:ok] = "\"#{title}\" has been permanently deleted."
+      else
+        flash[:alert] = 'Only tracks soft-deleted more than 30 days ago can be permanently deleted.'
+      end
+      redirect_to admin_assets_path(filter_by: :deleted), status: :see_other
     end
 
     private
