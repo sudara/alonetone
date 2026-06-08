@@ -9,3 +9,9 @@ snapshot:
     [data-percy-ignore] { visibility: hidden !important; }
 discovery:
   disable-cache: true
+  # Font CDN's WAF blocks requests not refererred from alonetone.com (license hotlink
+  # protection); Percy renders off-origin, so spoof the Referer or fonts 403.
+  allowed-hostnames:
+    - cdn.alonetone.com
+  request-headers:
+    Referer: https://alonetone.com/
