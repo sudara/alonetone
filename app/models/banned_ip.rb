@@ -48,3 +48,18 @@ class BannedIp < ApplicationRecord
     self.class.clear_cache
   end
 end
+
+# == Schema Information
+#
+# Table name: banned_ips
+#
+#  id           :bigint(8)        not null, primary key
+#  ip           :string(255)      not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  banned_by_id :bigint(8)
+#
+# Indexes
+#
+#  index_banned_ips_on_ip  (ip) UNIQUE
+#
