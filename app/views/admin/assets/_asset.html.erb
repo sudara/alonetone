@@ -34,9 +34,10 @@
                 data: { turbo_confirm: "Permanently delete \"#{asset.title}\"? This cannot be undone." } %>
         <% end %>
       <% else %>
-        <%= button_to "Spam", spam_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral) %>
+        <%= button_to "Spam", spam_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral),
+              data: { turbo_confirm: "Mark \"#{asset.title}\" as spam? This also hides it from the site." } %>
         <%= button_to "Delete", delete_admin_asset_path(id: asset.id, row: true), method: :put, class: admin_btn(:neutral),
-              data: { turbo_confirm: 'Are you sure?' } %>
+              data: { turbo_confirm: "Delete \"#{asset.title}\"? It can be restored for 30 days." } %>
       <% end %>
     </div>
   <% end %>
