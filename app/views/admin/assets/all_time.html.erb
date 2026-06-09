@@ -3,13 +3,7 @@
 
   <div class="space-y-2">
     <% @assets.each do |asset| %>
-      <div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-raised p-4">
-        <div class="min-w-0">
-          <%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink), class: "block truncate font-semibold text-accent hover:underline" %>
-          <p class="text-sm text-fg-muted">by <%= asset.possibly_deleted_user.login %></p>
-        </div>
-        <span class="shrink-0 font-semibold"><%= number_with_delimiter(asset.listens_count) %> plays</span>
-      </div>
+      <%= render 'admin/assets/play_count_row', asset: asset, plays: asset.listens_count %>
     <% end %>
   </div>
 </div>

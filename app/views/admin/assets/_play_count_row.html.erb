@@ -1,0 +1,12 @@
+<div class="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-raised p-4">
+  <div class="min-w-0">
+    <% if asset.possibly_deleted_user %>
+      <%= link_to asset.title, user_track_path(asset.possibly_deleted_user, asset.permalink), class: "block truncate font-semibold text-accent hover:underline" %>
+      <p class="text-sm text-fg-muted">by <%= asset.possibly_deleted_user.login %></p>
+    <% else %>
+      <span class="block truncate font-semibold"><%= asset.title %></span>
+      <p class="text-sm text-fg-muted">by a permanently deleted account</p>
+    <% end %>
+  </div>
+  <span class="shrink-0 font-semibold"><%= number_with_delimiter(plays) %> plays</span>
+</div>

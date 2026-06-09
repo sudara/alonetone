@@ -65,6 +65,17 @@ RSpec.describe 'Admin stat views', type: :request do
     expect(response.body).to include('All-Time')
   end
 
+  it 'survives assets whose owner row no longer exists' do
+    asset = assets(:valid_mp3)
+    asset.update_columns(user_id: User.with_deleted.maximum(:id) + 1, listens_count: 9_999_999)
+    asset.listens.update_all(created_at: 1.day.ago)
+    get admin_all_time_path
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include(asset.title)
+    get admin_most_played_path, params: { range: '7d' }
+    expect(response).to have_http_status(:ok)
+  end
+
   it 'requires a moderator' do
     create_user_session(users(:arthur))
     get admin_shared_ips_path

@@ -76,7 +76,7 @@ module Admin
     def asset_soft_deleted_location(fallback_filter)
       return admin_assets_path(filter_by: fallback_filter) if admin_row_request?
       return admin_assets_path(filter_by: fallback_filter) if request.referer.blank?
-      return admin_assets_path(filter_by: fallback_filter) if @asset.possibly_deleted_user.soft_deleted?
+      return admin_assets_path(filter_by: fallback_filter) if @asset.possibly_deleted_user.nil? || @asset.possibly_deleted_user.soft_deleted?
 
       user_home_path(@asset.possibly_deleted_user)
     end
