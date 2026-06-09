@@ -2,10 +2,15 @@ module Admin
   class DevopsController < BaseController
     before_action :admin_only, only: %i[purge]
 
+    LISTED_DESTROYABLE = 50
+
     def index
       @admin_title = 'Devops'
-      @destroyable_users = User.destroyable.count
-      @destroyable_assets = Asset.destroyable.count
+      @destroyable_users_count = User.destroyable.count
+      @destroyable_assets_count = Asset.destroyable.count
+      @destroyable_users = User.destroyable.order(deleted_at: :asc).limit(LISTED_DESTROYABLE)
+      @destroyable_assets = Asset.destroyable.order(deleted_at: :asc).limit(LISTED_DESTROYABLE)
+        .includes(:possibly_deleted_user)
     end
 
     def purge

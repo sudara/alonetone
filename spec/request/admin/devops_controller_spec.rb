@@ -11,6 +11,14 @@ RSpec.describe Admin::DevopsController, type: :request do
       expect(response.body).to include('Job status')
     end
 
+    it 'lists the records eligible for permanent deletion' do
+      users(:arthur).update_columns(deleted_at: 40.days.ago)
+      assets(:valid_mp3).update_columns(deleted_at: 40.days.ago)
+      get admin_devops_path
+      expect(response.body).to include(users(:arthur).login)
+      expect(response.body).to include(assets(:valid_mp3).title)
+    end
+
     it 'queues the purge sweep' do
       expect { post admin_devops_purge_path }.to have_enqueued_job(PurgeEligibleRecordsJob)
     end
