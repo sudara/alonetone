@@ -18,14 +18,14 @@
       <% end %>
       <% group[:items].each do |item| %>
         <% current = admin_nav_current?(item) %>
-        <%= link_to public_send(item.path_helper),
+        <%= link_to public_send(item[:path_helper]),
               class: class_names(
                 "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                 "bg-accent/15 text-accent" => current,
                 "text-fg-muted hover:bg-surface-overlay hover:text-fg" => !current
               ) do %>
-          <%= admin_icon item.icon %>
-          <span><%= item.label %></span>
+          <%= admin_icon item[:icon] %>
+          <span><%= item[:label] %></span>
         <% end %>
       <% end %>
     </div>
