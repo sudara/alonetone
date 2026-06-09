@@ -1,5 +1,5 @@
 module Admin
-  class DevopsController < BaseController
+  class DevopsController < Admin::BaseController
     before_action :admin_only, only: %i[purge]
 
     LISTED_DESTROYABLE = 50

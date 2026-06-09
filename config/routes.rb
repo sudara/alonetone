@@ -70,7 +70,7 @@ Rails.application.routes.draw do
   get '/unfollow/:login' => 'following#unfollow', as: :unfollow
 
   # admin stuff
-  get 'admin' => 'admin#index'
+  get 'admin' => 'admin/dashboard#index'
   put 'toggle_theme' => 'pages#toggle_theme'
 
   get '404', to: "pages#four_oh_four"
