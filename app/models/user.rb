@@ -148,7 +148,7 @@ class User < ApplicationRecord
   has_one :mass_invite_signup
   has_one :mass_invite, through: :mass_invite_signup
 
-  has_one :patron
+  has_one :patron, dependent: :destroy
 
   # tokens and activation
   def clear_token!

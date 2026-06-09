@@ -30,6 +30,24 @@ RSpec.describe 'Admin perma-delete', type: :request do
       delete purge_admin_user_path(user.login)
       expect(Asset.with_deleted.exists?(asset_id)).to be(false)
     end
+
+    it 'removes relations that were already soft-deleted along with the user' do
+      asset = assets(:valid_arthur_mp3)
+      listen = asset.listens.create!(track_owner: user)
+      UserCommand.new(user).soft_delete_with_relations
+      user.update_columns(deleted_at: 40.days.ago)
+      delete purge_admin_user_path(user.login)
+      expect(User.with_deleted.exists?(user.id)).to be(false)
+      expect(Asset.with_deleted.exists?(asset.id)).to be(false)
+      expect(Listen.with_deleted.where(id: listen.id)).to be_empty
+    end
+
+    it 'purges a user who has a patron record' do
+      Patron.create!(user: user)
+      user.update_columns(deleted_at: 40.days.ago)
+      delete purge_admin_user_path(user.login)
+      expect(User.with_deleted.exists?(user.id)).to be(false)
+    end
   end
 
   describe 'purging an asset' do
