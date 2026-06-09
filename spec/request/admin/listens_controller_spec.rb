@@ -44,6 +44,12 @@ RSpec.describe Admin::ListensController, type: :request do
       post admin_ban_ip_path(ip: '203.0.113.30')
       expect(BannedIp.banned?('203.0.113.30')).to be(false)
     end
+
+    it 'cannot unban an ip (unban is admin-only)' do
+      banned = BannedIp.create!(ip: '203.0.113.31')
+      delete admin_banned_ip_path(banned)
+      expect(BannedIp.exists?(banned.id)).to be(true)
+    end
   end
 
   describe 'listen enforcement' do

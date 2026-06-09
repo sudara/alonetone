@@ -1,6 +1,6 @@
 module Admin
-  class ListensController < BaseController
-    before_action :admin_only, only: %i[ban]
+  class ListensController < Admin::BaseController
+    before_action :admin_only, only: %i[ban unban]
 
     def index
       @admin_title = 'Listening IPs'
