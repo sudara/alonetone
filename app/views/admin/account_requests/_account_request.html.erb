@@ -33,11 +33,11 @@
   <% if account_request.waiting? %>
     <div class="flex gap-2 pt-1">
       <%= button_to "Approve & Email", approve_admin_account_request_path(account_request), method: :put,
-            form_class: "flex-1",
-            class: "w-full rounded-lg bg-success px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90" %>
+            form_class: "flex-1 sm:flex-none",
+            class: "w-full rounded-lg bg-success px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90 sm:w-auto sm:px-6" %>
       <%= button_to "Deny", deny_admin_account_request_path(account_request), method: :put,
-            form_class: "flex-1",
-            class: "w-full rounded-lg bg-danger px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90" %>
+            form_class: "flex-1 sm:flex-none",
+            class: "w-full rounded-lg bg-danger px-4 py-2.5 text-sm font-semibold text-white hover:brightness-90 sm:w-auto sm:px-6" %>
     </div>
   <% end %>
 <% end %>

@@ -22,21 +22,24 @@
   </aside>
 
   <div class="flex min-w-0 flex-1 flex-col">
-    <header class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur">
-      <label for="admin-nav-toggle"
-             class="-ml-1 cursor-pointer rounded-md p-1.5 text-fg-muted hover:bg-surface-overlay hover:text-fg lg:hidden">
-        <%= admin_icon :menu, css: "size-6" %>
-        <span class="sr-only">Open menu</span>
-      </label>
+    <header class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur sm:px-6">
+      <%= link_to root_path, class: "shrink-0 font-semibold tracking-tight text-accent lg:hidden" do %>alonetone<% end %>
 
-      <h1 class="text-base font-semibold"><%= @admin_title || controller_name.titleize %></h1>
+      <h1 class="min-w-0 truncate text-base font-semibold lg:text-2xl"><%= @admin_title || controller_name.titleize %></h1>
 
-      <% if @admin_range_enabled %>
-        <div class="ml-auto"><%= render 'admin/shared/range_selector' %></div>
-      <% end %>
+      <div class="ml-auto flex shrink-0 items-center gap-2">
+        <% if @admin_range_enabled %>
+          <%= render 'admin/shared/range_selector' %>
+        <% end %>
+        <label for="admin-nav-toggle"
+               class="-mr-1 cursor-pointer rounded-md p-1.5 text-fg-muted hover:bg-surface-overlay hover:text-fg lg:hidden">
+          <%= admin_icon :menu, css: "size-6" %>
+          <span class="sr-only">Open menu</span>
+        </label>
+      </div>
     </header>
 
-    <main class="flex-1 p-4 sm:p-6"><%= yield %></main>
+    <main class="flex-1 p-4 sm:p-6"><div class="w-full max-w-5xl"><%= yield %></div></main>
   </div>
 </body>
 </html>
