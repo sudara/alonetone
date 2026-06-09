@@ -1,7 +1,5 @@
 module Admin
   class ListensController < BaseController
-    layout 'admin'
-
     before_action :admin_only, only: %i[ban]
 
     def index

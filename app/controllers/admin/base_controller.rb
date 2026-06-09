@@ -2,6 +2,7 @@ module Admin
   class BaseController < ApplicationController
     include Admin::Range
 
+    layout 'admin'
     before_action :moderator_only
 
     private

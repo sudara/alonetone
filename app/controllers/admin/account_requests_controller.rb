@@ -1,7 +1,5 @@
 module Admin
   class AccountRequestsController < Admin::BaseController
-    layout 'admin'
-
     before_action :set_account_request, except: %i[index]
 
     def index

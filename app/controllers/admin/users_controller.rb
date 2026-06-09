@@ -1,7 +1,5 @@
 module Admin
   class UsersController < Admin::BaseController
-    layout 'admin'
-
     before_action :set_user, except: %i[index shared_ips bandwidth]
     before_action :admin_only, only: %i[purge]
 

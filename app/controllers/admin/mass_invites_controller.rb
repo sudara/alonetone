@@ -2,8 +2,6 @@
 
 module Admin
   class MassInvitesController < Admin::BaseController
-    layout 'admin'
-
     def index
       @admin_title = 'Mass Invites'
       @pagy, @mass_invites = pagy(filtered_mass_invites)

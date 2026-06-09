@@ -1,7 +1,5 @@
 module Admin
   class CommentsController < Admin::BaseController
-    layout 'admin'
-
     before_action :set_comment, only: %i[unspam spam]
 
     def index

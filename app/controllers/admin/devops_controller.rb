@@ -1,7 +1,5 @@
 module Admin
   class DevopsController < BaseController
-    layout 'admin'
-
     before_action :admin_only, only: %i[purge]
 
     def index

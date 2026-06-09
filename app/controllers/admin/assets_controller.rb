@@ -1,7 +1,5 @@
 module Admin
   class AssetsController < Admin::BaseController
-    layout 'admin'
-
     before_action :find_asset, only: %i[spam unspam delete restore purge]
     before_action :admin_only, only: %i[purge]
 
