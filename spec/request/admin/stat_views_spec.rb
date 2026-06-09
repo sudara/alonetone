@@ -9,6 +9,13 @@ RSpec.describe 'Admin stat views', type: :request do
     expect(response.body).to include('Shared IPs')
   end
 
+  it 'groups Shared IPs by current login IP, matching the spam-all action' do
+    User.where(login: %w[arthur aaron]).update_all(current_login_ip: '203.0.113.7')
+    get admin_shared_ips_path
+    expect(response.body).to include('203.0.113.7')
+    expect(response.body).to include(users(:arthur).name)
+  end
+
   it 'renders Bandwidth' do
     get admin_bandwidth_path
     expect(response).to have_http_status(:ok)

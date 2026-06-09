@@ -85,7 +85,8 @@ class User < ApplicationRecord
       end
 
       def with_same_ip
-        User.order('count_all DESC').group(:last_login_ip).where('last_login_ip is not NULL').limit(25).count
+        User.order('count_all DESC').group(:current_login_ip).where.not(current_login_ip: nil)
+          .having('COUNT(*) > 1').limit(25).count
       end
     end
   end

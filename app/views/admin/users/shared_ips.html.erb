@@ -1,6 +1,6 @@
 <div class="space-y-4">
   <%= render 'admin/shared/view_tabs', tabs: admin_user_view_tabs(:shared_ips) %>
-  <p class="text-sm text-fg-muted">IPs used by multiple accounts (by last login IP) — possible shared or duplicate logins.</p>
+  <p class="text-sm text-fg-muted">IPs used by multiple accounts (by current login IP) — possible shared or duplicate logins.</p>
 
   <div class="space-y-2">
     <% @shared_ips.each do |ip, count| %>
@@ -11,7 +11,7 @@
           <span class="shrink-0 rounded-full bg-surface-overlay px-2 py-0.5 text-xs font-medium text-fg-muted"><%= count %> accounts</span>
         </div>
         <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
-          <% User.where(last_login_ip: ip).limit(6).each do |user| %>
+          <% User.where(current_login_ip: ip).limit(6).each do |user| %>
             <%= link_to user.name, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
           <% end %>
         </p>
