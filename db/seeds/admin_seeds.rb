@@ -100,24 +100,26 @@ end
 
 moddable_users = User.where(admin: false, moderator: false)
 
+# Use the real command objects so soft-deletion cascades to tracks/comments/listens
+# exactly like the app does — otherwise the public site hits nil owners/commentables.
 puts "\nSpam users / tracks / comments (pages worth, some soft-deleted)..."
 moddable_users.random_order.limit(40).each_with_index do |user, i|
   user.update_column(:is_spam, true)
-  user.soft_delete if i.even?
+  UserCommand.new(user).soft_delete_with_relations if i.even?
 end
 Asset.random_order.limit(45).each_with_index do |asset, i|
   asset.update_column(:is_spam, true)
-  asset.soft_delete if i.even?
+  AssetCommand.new(asset).soft_delete_with_relations if i.even?
 end
 Comment.order(Arel.sql('RAND()')).limit(50).each { |comment| comment.update_column(:is_spam, true) }
 
 puts "Soft-deleted records (a chunk older than 30 days, so they're perma-deletable)..."
 moddable_users.where(is_spam: false).random_order.limit(40).each_with_index do |user, i|
-  user.soft_delete
+  UserCommand.new(user).soft_delete_with_relations
   user.update_column(:deleted_at, rand(35..120).days.ago) if i < 15
 end
 Asset.where(is_spam: false).random_order.limit(40).each_with_index do |asset, i|
-  asset.soft_delete
+  AssetCommand.new(asset).soft_delete_with_relations
   asset.update_column(:deleted_at, rand(35..120).days.ago) if i < 15
 end
 
