@@ -1,8 +1,9 @@
 module Admin
   class DashboardStats
-    def initialize(range:, bucket:)
+    def initialize(range:, bucket:, range_key:)
       @range = range
       @bucket = bucket
+      @range_key = range_key
     end
 
     def new_users = scoped(User).count
@@ -18,6 +19,11 @@ module Admin
     def new_tracks_series = series(Asset)
     def new_comments_series = series(Comment)
 
+    # Bounded ranges only — an all-time GROUP BY would filesort the entire listens table.
+    def listens_series
+      series(Listen) if @range
+    end
+
     def waiting_account_requests = AccountRequest.waiting.count
     def spam_users = User.with_deleted.where(is_spam: true).count
     def spam_tracks = Asset.with_deleted.where(is_spam: true).count
@@ -30,8 +36,11 @@ module Admin
       @range ? model.where(created_at: @range) : model
     end
 
+    # Grouping by a date function always filesorts, so series are served from a short cache.
     def series(model)
-      model.public_send("group_by_#{@bucket}", :created_at, range: @range).count
+      Rails.cache.fetch("admin/dashboard-series/#{model.name}/#{@range_key}", expires_in: 10.minutes) do
+        model.public_send("group_by_#{@bucket}", :created_at, range: @range).count
+      end
     end
   end
 end

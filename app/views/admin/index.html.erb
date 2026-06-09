@@ -22,14 +22,15 @@
     <%= link_to admin_comments_path(filter_by: 'is_spam'), class: "inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm text-fg-muted hover:text-fg" do %>
       <span class="font-semibold text-fg"><%= @stats.spam_comments %></span> spam comments
     <% end %>
-    <span class="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm text-fg-muted">
+    <%= link_to admin_devops_path, class: "inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm text-fg-muted hover:text-fg" do %>
       <span class="font-semibold text-fg"><%= @stats.perma_deletable %></span> purgeable (30d+)
-    </span>
+    <% end %>
   </div>
 
-  <div class="grid gap-4 lg:grid-cols-3">
+  <div class="grid gap-4 sm:grid-cols-2">
     <% [["New users", @stats.new_users_series], ["New tracks", @stats.new_tracks_series],
-        ["New comments", @stats.new_comments_series]].each do |title, data| %>
+        ["New comments", @stats.new_comments_series], ["Listens", @stats.listens_series]].each do |title, data| %>
+      <% next if data.nil? %>
       <div class="rounded-xl border border-border bg-surface-raised p-4">
         <p class="mb-3 text-sm font-medium text-fg-muted"><%= title %></p>
         <%= line_chart data, **admin_chart_options, height: "220px" %>
