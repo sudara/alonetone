@@ -46,7 +46,8 @@
             data: { turbo_confirm: "Mark #{user.name} as spam? This also hides their account and content from the site." } %>
       <%= button_to "Delete", delete_admin_user_path(id: user.login, row: true), method: :put, class: admin_btn(:neutral),
             data: { turbo_confirm: "Delete #{user.name} and all their tracks, playlists, and comments? They can be restored for 30 days." } %>
-      <% same_ip_count = User.with_same_ip_as(user).count %>
+      <%# the index precomputes one grouped count for the page; lone-row renders fall back to a query %>
+      <% same_ip_count = @same_ip_counts ? @same_ip_counts.fetch(user.current_login_ip, 1) - 1 : User.with_same_ip_as(user).count %>
       <% if same_ip_count.positive? %>
         <%= button_to "Spam all #{same_ip_count + 1}", mark_all_users_with_ip_as_spam_admin_user_path(user), method: :put, class: admin_btn(:neutral),
               data: { turbo_confirm: "Mark all #{same_ip_count + 1} accounts logging in from #{user.current_login_ip} as spam?" } %>

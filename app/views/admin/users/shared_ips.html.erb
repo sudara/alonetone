@@ -11,7 +11,7 @@
           <span class="shrink-0 rounded-full bg-surface-overlay px-2 py-0.5 text-xs font-medium text-fg-muted"><%= count %> accounts</span>
         </div>
         <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
-          <% User.where(current_login_ip: ip).limit(6).each do |user| %>
+          <% @users_by_ip.fetch(ip, []).each do |user| %>
             <%= link_to user.name, admin_possibly_deleted_user_path(user.login), class: "text-accent hover:underline" %>
           <% end %>
         </p>

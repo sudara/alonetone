@@ -4,11 +4,9 @@ module Admin
 
     def index
       @admin_title = 'Comments'
-      @pagy, @comments = if permitted_params[:filter_by]
-                           pagy(Comment.where(permitted_params[:filter_by]).recent)
-                         else
-                           pagy(Comment.recent)
-                         end
+      scope = Comment.includes(:commenter).recent
+      scope = scope.where(permitted_params[:filter_by]) if permitted_params[:filter_by]
+      @pagy, @comments = pagy(scope)
     end
 
     def unspam

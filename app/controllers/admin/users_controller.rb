@@ -6,11 +6,15 @@ module Admin
     def index
       @admin_title = 'Users'
       @pagy, @users = pagy(User.filter_by(permitted_params[:filter_by]).includes(:profile, :avatar_image_blob))
+      @same_ip_counts = User.where(current_login_ip: @users.map(&:current_login_ip).compact).group(:current_login_ip).count
     end
 
     def shared_ips
       @admin_title = 'Shared IPs'
       @shared_ips = User.with_same_ip
+      ranked = User.select('users.*', 'ROW_NUMBER() OVER (PARTITION BY current_login_ip ORDER BY id) AS ip_rank')
+        .where(current_login_ip: @shared_ips.keys)
+      @users_by_ip = User.from(ranked, :users).where('ip_rank <= 6').group_by(&:current_login_ip)
     end
 
     def bandwidth
