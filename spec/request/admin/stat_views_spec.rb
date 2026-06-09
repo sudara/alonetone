@@ -22,6 +22,36 @@ RSpec.describe 'Admin stat views', type: :request do
     expect(response.body).to include('Bandwidth')
   end
 
+  it 'computes ranged bandwidth from listens for a bounded range' do
+    get admin_bandwidth_path, params: { range: '7d' }
+    expect(response).to have_http_status(:ok)
+    expect(session[:admin_range]).to eq('7d')
+    expect(response.body).to include(users(:sudara).name)
+  end
+
+  it 'prices ranged bandwidth as in-range listens times audio file size' do
+    asset = assets(:valid_mp3)
+    200.times { asset.listens.create!(track_owner: asset.user) }
+    in_range = Listen.where(asset_id: asset.id, created_at: 7.days.ago..Time.current).count
+    gb = in_range * asset.audio_file.byte_size.to_f / 1.gigabyte
+    expect(gb).to be > 0.05
+    get admin_bandwidth_path, params: { range: '7d' }
+    expect(response.body).to include("#{gb.round(1)} GB")
+  end
+
+  it 'uses the cached all-time bandwidth for the all range' do
+    users(:sudara).update_columns(bandwidth_used: 42)
+    get admin_bandwidth_path, params: { range: 'all' }
+    expect(response.body).to include('42 GB')
+  end
+
+  it 'includes soft-deleted users in the bandwidth list' do
+    users(:arthur).update_columns(bandwidth_used: 37, deleted_at: 10.days.ago)
+    get admin_bandwidth_path, params: { range: 'all' }
+    expect(response.body).to include(users(:arthur).name)
+    expect(response.body).to include('37 GB')
+  end
+
   it 'renders Most Played with a range selector and respects the range' do
     get admin_most_played_path, params: { range: '7d' }
     expect(response).to have_http_status(:ok)

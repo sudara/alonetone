@@ -15,7 +15,13 @@ module Admin
 
     def bandwidth
       @admin_title = 'Bandwidth'
-      @users = User.where('bandwidth_used > 0').order(bandwidth_used: :desc).limit(25)
+      @admin_range_enabled = true
+      @rows = if admin_range
+                ranged_bandwidth_rows
+              else
+                User.with_deleted.where('bandwidth_used > 0').order(bandwidth_used: :desc).limit(25)
+                  .includes(:avatar_image_blob).map { |user| [user, user.bandwidth_used.to_f] }
+              end
     end
 
     def show
@@ -63,6 +69,22 @@ module Admin
     end
 
     private
+
+    # Sums per-listen mp3 sizes over the range; cached because it scans every listen in the range.
+    def ranged_bandwidth_rows
+      top = Rails.cache.fetch("admin/bandwidth/#{admin_range_key}", expires_in: 10.minutes) do
+        plays_by_asset = Listen.where(created_at: admin_range).group(:asset_id).count
+        bytes_by_user = Hash.new(0)
+        # the assets.mp3_file_size column is stale legacy data; the blob byte_size is canonical
+        Asset.with_deleted.where(id: plays_by_asset.keys).joins(:audio_file_blob)
+          .pluck(:id, :user_id, 'active_storage_blobs.byte_size').each do |id, user_id, size|
+            bytes_by_user[user_id] += plays_by_asset[id] * size.to_i
+          end
+        bytes_by_user.sort_by { |_id, bytes| -bytes }.first(25)
+      end
+      users = User.with_deleted.where(id: top.map(&:first)).includes(:avatar_image_blob).index_by(&:id)
+      top.filter_map { |id, bytes| users[id] && [users[id], bytes.to_f / 1.gigabyte] }
+    end
 
     def respond_with_user_row(fallback_filter:, notice:)
       flash[:ok] = notice
