@@ -26,4 +26,14 @@ RSpec.describe PurgeListensByIpJob do
   it 'is a no-op for a blank ip' do
     expect { described_class.new.perform('') }.not_to change(Listen, :count)
   end
+
+  it 'recounts soft-deleted assets and owners without raising' do
+    asset = assets(:valid_mp3)
+    3.times { asset.listens.create!(track_owner: asset.user, ip: '198.51.100.11') }
+    asset.soft_delete
+    asset.user.soft_delete
+
+    expect { described_class.new.perform('198.51.100.11') }.not_to raise_error
+    expect(Listen.with_deleted.where(ip: '198.51.100.11')).to be_empty
+  end
 end

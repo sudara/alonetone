@@ -12,7 +12,8 @@ class PurgeListensByIpJob < ApplicationJob
 
     scope.in_batches(of: 5000).delete_all
 
-    asset_ids.each { |id| Asset.reset_counters(id, :listens) }
-    owner_ids.each { |id| User.reset_counters(id, :track_plays) }
+    # reset_counters with an id slice runs one grouped COUNT per slice, not one per record
+    asset_ids.each_slice(5000) { |slice| Asset.reset_counters(slice, :listens) }
+    owner_ids.each_slice(5000) { |slice| User.reset_counters(slice, :track_plays) }
   end
 end
