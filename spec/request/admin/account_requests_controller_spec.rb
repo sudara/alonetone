@@ -56,6 +56,17 @@ RSpec.describe Admin::AccountRequestsController, type: :request do
     expect(response.body).to include(%(id="account_request_#{account_requests(:waiting).id}"))
   end
 
+  it "renders pagination controls when there is more than one page" do
+    25.times do |i|
+      AccountRequest.create!(login: "pager#{i}", email: "pager#{i}@example.com",
+        entity_type: :musician, details: 'a' * 60, status: :waiting)
+    end
+    get admin_account_requests_path
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include('Page 1 of')
+    expect(response.body).to include('Next')
+  end
+
   it "narrows the rendered cards to the requested filter" do
     get admin_account_requests_path
     expect(response.body).to match_css('[id^="account_request_"]', count: AccountRequest.count)
