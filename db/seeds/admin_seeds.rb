@@ -144,4 +144,15 @@ ActiveRecord::Base.no_touching do
   end
 end
 
+puts "Shared login IPs (account clusters for the Shared IPs view)..."
+clusterable = moddable_users.where(is_spam: false).random_order.limit(30).to_a
+Array.new(6) { Faker::Internet.ip_v4_address }.each do |ip|
+  clusterable.shift(rand(2..6)).each { |user| user.update_columns(last_login_ip: ip, current_login_ip: ip) }
+end
+
+puts "Bandwidth usage (top consumers for the Bandwidth view)..."
+User.where('assets_count > 0').random_order.limit(25).each do |user|
+  user.update_column(:bandwidth_used, [rand(1..15), rand(15..80), rand(100..500)].sample)
+end
+
 puts "\nAdmin seed data done."
