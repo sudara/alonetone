@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     get 'listens/banned', to: 'listens#banned_ips', as: :banned_ips
     post 'listens/ban', to: 'listens#ban', as: :ban_ip
     delete 'listens/banned/:id', to: 'listens#unban', as: :banned_ip
+    post 'listens/banned/:id/purge', to: 'listens#purge_listens', as: :purge_banned_ip
     get 'devops', to: 'devops#index', as: :devops
     post 'devops/purge', to: 'devops#purge', as: :devops_purge
   end

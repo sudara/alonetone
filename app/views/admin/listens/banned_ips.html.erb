@@ -12,7 +12,11 @@
             </p>
           </div>
           <% if admin? %>
-            <%= button_to "Unban", admin_banned_ip_path(banned), method: :delete, class: admin_btn(:neutral) %>
+            <div class="flex shrink-0 gap-2">
+              <%= button_to "Purge listens", admin_purge_banned_ip_path(banned), method: :post, class: admin_btn(:danger),
+                    data: { turbo_confirm: "Permanently delete every listen ever recorded from #{banned.ip}? Artist play counts will drop. This cannot be undone." } %>
+              <%= button_to "Unban", admin_banned_ip_path(banned), method: :delete, class: admin_btn(:neutral) %>
+            </div>
           <% end %>
         </div>
       <% end %>

@@ -28,6 +28,8 @@ module Listens
     if is_a_bot?
       Rails.logger.error "BOT LISTEN ATTEMPT FAIL: #{asset.mp3_file_name} #{user_agent} #{request.remote_ip} #{listen_referer} User:#{current_user || 0}"
       render plain: "Denied due to abuse", status: 403
+    elsif BannedIp.banned?(request.remote_ip)
+      render plain: "Denied due to abuse", status: 403
     end
   end
 

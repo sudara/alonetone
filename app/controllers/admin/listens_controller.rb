@@ -1,6 +1,6 @@
 module Admin
   class ListensController < Admin::BaseController
-    before_action :admin_only, only: %i[ban unban]
+    before_action :admin_only, only: %i[ban unban purge_listens]
 
     def index
       @admin_title = 'Listening IPs'
@@ -19,8 +19,7 @@ module Admin
       ip = params[:ip].to_s.strip
       banned = BannedIp.find_or_create_by(ip: ip) { |b| b.banned_by = current_user }
       if banned.persisted?
-        PurgeListensByIpJob.perform_later(ip)
-        flash[:ok] = "Banned #{ip} and queued a purge of its listens."
+        flash[:ok] = "Banned #{ip}. You can purge its listen history from the Banned tab."
       else
         flash[:alert] = "Couldn't ban that IP: #{banned.errors.full_messages.to_sentence}"
       end
@@ -30,6 +29,13 @@ module Admin
     def unban
       BannedIp.find(params[:id]).destroy
       flash[:ok] = 'IP unbanned.'
+      redirect_to admin_banned_ips_path, status: :see_other
+    end
+
+    def purge_listens
+      banned = BannedIp.find(params[:id])
+      PurgeListensByIpJob.perform_later(banned.ip)
+      flash[:ok] = "Purging all listens from #{banned.ip}..."
       redirect_to admin_banned_ips_path, status: :see_other
     end
   end
