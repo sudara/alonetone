@@ -11,6 +11,38 @@ RSpec.describe BannedIp do
     expect(described_class.banned?(nil)).to be(false)
   end
 
+  it 'matches ips covered by a CIDR range ban' do
+    described_class.create!(ip: '47.82.0.0/16')
+    described_class.clear_cache
+    expect(described_class.banned?('47.82.10.35')).to be(true)
+    expect(described_class.banned?('47.83.0.1')).to be(false)
+  end
+
+  it 'matches ipv6 ips covered by a range ban' do
+    described_class.create!(ip: '2001:db8::/32')
+    described_class.clear_cache
+    expect(described_class.banned?('2001:db8::beef')).to be(true)
+    expect(described_class.banned?('2001:db9::1')).to be(false)
+  end
+
+  it 'normalizes a range to its masked network address' do
+    expect(described_class.create!(ip: '47.82.9.9/16').ip).to eq('47.82.0.0/16')
+  end
+
+  it 'collapses a full-length prefix to an exact ip' do
+    expect(described_class.create!(ip: '203.0.113.7/32').ip).to eq('203.0.113.7')
+  end
+
+  it 'rejects an invalid prefix length' do
+    expect(described_class.new(ip: '47.82.0.0/99')).not_to be_valid
+  end
+
+  it 'is not banned for a garbage lookup value' do
+    described_class.create!(ip: '47.82.0.0/16')
+    described_class.clear_cache
+    expect(described_class.banned?('not-an-ip')).to be(false)
+  end
+
   it 'requires a unique ip' do
     described_class.create!(ip: '203.0.113.10')
     expect(described_class.new(ip: '203.0.113.10')).not_to be_valid

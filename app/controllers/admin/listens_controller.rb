@@ -7,7 +7,7 @@ module Admin
       @admin_range_enabled = true
       scope = admin_range ? Listen.where(created_at: admin_range) : Listen
       @ip_counts = scope.where.not(ip: nil).group(:ip).order('count_all DESC').limit(25).count
-      @banned_set = BannedIp.pluck(:ip).to_set
+      @ban_matcher = BannedIp::Matcher.new(BannedIp.pluck(:ip))
     end
 
     def banned_ips
@@ -34,8 +34,12 @@ module Admin
 
     def purge_listens
       banned = BannedIp.find(params[:id])
-      PurgeListensByIpJob.perform_later(banned.ip)
-      flash[:ok] = "Purging all listens from #{banned.ip}..."
+      if banned.purgeable_listens?
+        PurgeListensByIpJob.perform_later(banned.ip)
+        flash[:ok] = "Purging all listens from #{banned.ip}..."
+      else
+        flash[:alert] = 'Purging is supported for exact IPs and IPv4 ranges only.'
+      end
       redirect_to admin_banned_ips_path, status: :see_other
     end
   end

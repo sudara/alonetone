@@ -35,6 +35,27 @@ RSpec.describe Admin::ListensController, type: :request do
       expect(response).to have_http_status(:not_found)
     end
 
+    it 'bans a CIDR range' do
+      post admin_ban_ip_path(ip: '47.82.0.0/16')
+      expect(BannedIp.banned?('47.82.10.35')).to be(true)
+    end
+
+    it 'refuses to purge an ipv6 range' do
+      banned = BannedIp.create!(ip: '2001:db8::/32')
+      expect do
+        post admin_purge_banned_ip_path(banned)
+      end.not_to have_enqueued_job(PurgeListensByIpJob)
+    end
+
+    it 'marks listening ips covered by a range ban as banned' do
+      BannedIp.create!(ip: '198.51.0.0/16')
+      asset = assets(:valid_mp3)
+      asset.listens.create!(track_owner: asset.user, ip: '198.51.100.77')
+      get admin_listens_path, params: { range: '7d' }
+      expect(response.body).to include('198.51.100.77')
+      expect(response.body).to include('>banned<')
+    end
+
     it 'unbans an ip' do
       banned = BannedIp.create!(ip: '203.0.113.21')
       delete admin_banned_ip_path(banned)
@@ -87,6 +108,15 @@ RSpec.describe Admin::ListensController, type: :request do
       BannedIp.clear_cache
       get user_track_path('sudara', 'song1', format: :mp3),
         headers: { 'REMOTE_ADDR' => '203.0.113.41', 'HTTP_ACCEPT' => 'audio/mpeg',
+                   'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/XX (KHTML, like Gecko) Safari/YY' }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it 'denies the mp3 redirect to an ip covered by a range ban' do
+      BannedIp.create!(ip: '203.0.0.0/16')
+      BannedIp.clear_cache
+      get user_track_path('sudara', 'song1', format: :mp3),
+        headers: { 'REMOTE_ADDR' => '203.0.113.43', 'HTTP_ACCEPT' => 'audio/mpeg',
                    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/XX (KHTML, like Gecko) Safari/YY' }
       expect(response).to have_http_status(:forbidden)
     end

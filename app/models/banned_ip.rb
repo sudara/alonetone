@@ -6,14 +6,52 @@ class BannedIp < ApplicationRecord
   validates :ip, presence: true, uniqueness: true
   validate :ip_is_a_valid_address
 
+  before_validation :normalize_ip
+
   scope :recent, -> { order(created_at: :desc) }
 
   after_commit :clear_cache
 
   CACHE_KEY = 'banned_ips'.freeze
 
+  # Matches exact bans by set lookup and CIDR bans ("47.82.0.0/16") by range inclusion.
+  class Matcher
+    def initialize(ips)
+      exact, ranges = ips.partition { |ip| ip.exclude?('/') }
+      @exact = exact.to_set
+      @ranges = ranges.filter_map do |range|
+        IPAddr.new(range)
+      rescue IPAddr::InvalidAddressError
+        nil
+      end
+    end
+
+    def banned?(ip)
+      return false if ip.blank?
+      return true if @exact.include?(ip)
+
+      addr = IPAddr.new(ip)
+      @ranges.any? { |range| range.include?(addr) }
+    rescue IPAddr::InvalidAddressError
+      false
+    end
+  end
+
   def self.banned?(ip)
-    ip.present? && cached_ips.include?(ip)
+    matcher.banned?(ip)
+  end
+
+  def self.matcher
+    Matcher.new(cached_ips)
+  end
+
+  def range?
+    ip.to_s.include?('/')
+  end
+
+  # Listen rows store exact IPs, so range purges expand v4 ranges; v6 ranges aren't expandable.
+  def purgeable_listens?
+    !range? || IPAddr.new(ip).ipv4?
   end
 
   # cached so the listen-recording hot path does one memory hit, not a query per play.
@@ -41,7 +79,22 @@ class BannedIp < ApplicationRecord
 
     IPAddr.new(ip)
   rescue IPAddr::InvalidAddressError
-    errors.add(:ip, 'is not a valid IP address')
+    errors.add(:ip, 'is not a valid IP address or CIDR range')
+  end
+
+  def normalize_ip
+    value = ip.to_s.strip
+    return if value.blank?
+
+    addr = IPAddr.new(value)
+    full_prefix = addr.ipv4? ? 32 : 128
+    self.ip = if value.include?('/') && addr.prefix < full_prefix
+                "#{addr}/#{addr.prefix}"
+              else
+                addr.to_s
+              end
+  rescue IPAddr::InvalidAddressError
+    self.ip = value
   end
 
   def clear_cache

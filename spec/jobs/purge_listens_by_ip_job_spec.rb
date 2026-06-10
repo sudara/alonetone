@@ -51,6 +51,25 @@ RSpec.describe PurgeListensByIpJob do
     expect(Listen.with_deleted.where(ip: '198.51.100.17')).to be_empty
   end
 
+  it 'purges every ip covered by an IPv4 range, leaving the rest alone' do
+    asset = assets(:valid_mp3)
+    asset.listens.create!(track_owner: asset.user, ip: '47.82.10.35')
+    asset.listens.create!(track_owner: asset.user, ip: '47.82.200.1')
+    asset.listens.create!(track_owner: asset.user, ip: '47.83.0.1')
+
+    expect { described_class.new.perform('47.82.0.0/16') }
+      .to change { asset.reload.listens_count }.by(-2)
+    expect(Listen.with_deleted.where(ip: ['47.82.10.35', '47.82.200.1'])).to be_empty
+    expect(Listen.where(ip: '47.83.0.1').count).to eq(1)
+  end
+
+  it 'is a no-op for an ipv6 range' do
+    asset = assets(:valid_mp3)
+    asset.listens.create!(track_owner: asset.user, ip: '2001:db8::beef')
+
+    expect { described_class.new.perform('2001:db8::/32') }.not_to change(Listen, :count)
+  end
+
   it 'is a no-op for a blank ip' do
     expect { described_class.new.perform('') }.not_to change(Listen, :count)
   end

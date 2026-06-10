@@ -11,7 +11,7 @@
             <p class="text-xs text-fg-faint"><%= number_with_delimiter(count) %> listens</p>
           </div>
           <div class="shrink-0">
-            <% if @banned_set.include?(ip) %>
+            <% if @ban_matcher.banned?(ip) %>
               <span class="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-medium text-danger-hover">banned</span>
             <% elsif admin? %>
               <%= button_to "Ban", admin_ban_ip_path(ip: ip), method: :post, class: admin_btn(:danger),
