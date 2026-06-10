@@ -24,6 +24,10 @@ module Admin
       series(Listen) if @range
     end
 
+    # users.comments_count counts comments *received*, so commenters group even all-time.
+    def top_commenters = top_users(Comment, :commenter_id)
+    def top_uploaders = @range ? top_users(Asset, :user_id) : top_uploaders_all_time
+
     def waiting_account_requests = AccountRequest.waiting.count
     def spam_users = User.with_deleted.where(is_spam: true).count
     def spam_tracks = Asset.with_deleted.where(is_spam: true).count
@@ -34,6 +38,29 @@ module Admin
 
     def scoped(model)
       @range ? model.where(created_at: @range) : model
+    end
+
+    # GROUP BY filesorts like the series do, so top lists share the short cache.
+    def top_users(model, column)
+      counts = Rails.cache.fetch("admin/dashboard-top/#{model.name}/#{@range_key}", expires_in: 10.minutes) do
+        scoped(model).where(is_spam: false).where.not(column => nil)
+          .group(column).order(Arel.sql('COUNT(*) DESC'), column).limit(5).count
+      end
+      to_user_rows(counts)
+    end
+
+    def top_uploaders_all_time
+      counts = Rails.cache.fetch("admin/dashboard-top/Asset/#{@range_key}", expires_in: 10.minutes) do
+        User.where(is_spam: false, assets_count: 1..)
+          .order(assets_count: :desc, id: :asc).limit(5).pluck(:id, :assets_count).to_h
+      end
+      to_user_rows(counts)
+    end
+
+    # Soft-deleted users drop out here, so a card can show fewer than 5 rows.
+    def to_user_rows(counts)
+      users = User.where(id: counts.keys).index_by(&:id)
+      counts.filter_map { |id, count| [users[id], count] if users[id] }
     end
 
     # Grouping by a date function always filesorts, so series are served from a short cache.

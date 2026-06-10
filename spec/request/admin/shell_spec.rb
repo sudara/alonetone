@@ -23,6 +23,13 @@ RSpec.describe 'Admin shell', type: :request do
       expect(response.body).to include('purgeable')
     end
 
+    it 'renders top commenters and uploaders with linked user rows' do
+      get admin_path
+      expect(response.body).to include('Top commenters')
+      expect(response.body).to include('Top uploaders')
+      expect(response.body).to include("possibly_deleted_user/#{users(:sudara).login}")
+    end
+
     it 'links moderation badges to filters the section controllers actually honor' do
       get admin_path
       expect(response.body).to include(admin_assets_path(filter_by: 'is_spam'))

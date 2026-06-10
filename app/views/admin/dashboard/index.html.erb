@@ -28,6 +28,26 @@
   </div>
 
   <div class="grid gap-4 sm:grid-cols-2">
+    <% [["Top commenters", @stats.top_commenters], ["Top uploaders", @stats.top_uploaders]].each do |title, rows| %>
+      <div class="rounded-xl border border-border bg-surface-raised p-4">
+        <p class="mb-3 text-sm font-medium text-fg-muted"><%= title %></p>
+        <% if rows.any? %>
+          <ol class="space-y-2">
+            <% rows.each do |user, count| %>
+              <li class="flex items-center justify-between gap-2 text-sm">
+                <%= link_to user.name, admin_possibly_deleted_user_path(user.login), class: "truncate font-semibold text-accent hover:underline" %>
+                <span class="text-fg-muted"><%= number_with_delimiter(count) %></span>
+              </li>
+            <% end %>
+          </ol>
+        <% else %>
+          <p class="text-sm text-fg-muted">Nothing yet</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
     <% [["New users", @stats.new_users_series], ["New tracks", @stats.new_tracks_series],
         ["New comments", @stats.new_comments_series], ["Listens", @stats.listens_series]].each do |title, data| %>
       <% next if data.nil? %>
