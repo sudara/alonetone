@@ -55,6 +55,7 @@ class User < ApplicationRecord
     c.crypto_provider = Authlogic::CryptoProviders::SCrypt
     c.disable_perishable_token_maintenance = true # we will handle tokens
     c.ignore_blank_passwords = false
+    c.raise_on_model_setup_error = true # else a DB blip at load time silently strips every Authlogic method for the process lifetime
   end
 
   scope :activated,     -> { where(perishable_token: nil).recent }
