@@ -23,7 +23,7 @@
 
   <div class="flex min-w-0 flex-1 flex-col">
     <header class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur sm:px-6">
-      <%= link_to root_path, class: "shrink-0 font-semibold tracking-tight text-accent lg:hidden" do %>alonetone<% end %>
+      <%= link_to root_path, class: "shrink-0 lg:hidden" do %><%= image_tag "alonetone_logo_dark.svg", alt: "alonetone", class: "h-8 w-auto" %><% end %>
 
       <h1 class="min-w-0 truncate text-base font-semibold lg:text-2xl"><%= @admin_title || controller_name.titleize %></h1>
 
